@@ -14,14 +14,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Outputs
     [OutputType]
     public sealed class JobLoadLoadSpecRequestsPerSecond
     {
+        /// <summary>
+        /// Pressure time.
+        /// </summary>
         public readonly int? DurationSeconds;
+        /// <summary>
+        /// Elegant shutdown waiting time.
+        /// </summary>
         public readonly int? GracefulStopSeconds;
         /// <summary>
         /// Maximum requests per second.
         /// </summary>
         public readonly int? MaxRequestsPerSecond;
+        /// <summary>
+        /// Number of resources.
+        /// </summary>
         public readonly int? Resources;
+        /// <summary>
+        /// Initial RPS.
+        /// </summary>
         public readonly int? StartRequestsPerSecond;
+        /// <summary>
+        /// Target RPS, invalid input parameter.
+        /// </summary>
         public readonly int? TargetRequestsPerSecond;
 
         [OutputConstructor]

@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Ssm.RotateProductSecret("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Ssm.RotateProductSecret("example", new Tencentcloud.Ssm.RotateProductSecretArgs
-    ///         {
-    ///             SecretName = "tf_example",
-    ///         });
-    ///     }
+    ///         SecretName = "tf_example",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssm/rotateProductSecret:RotateProductSecret")]
-    public partial class RotateProductSecret : Pulumi.CustomResource
+    public partial class RotateProductSecret : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Secret name.
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         }
     }
 
-    public sealed class RotateProductSecretArgs : Pulumi.ResourceArgs
+    public sealed class RotateProductSecretArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Secret name.
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public RotateProductSecretArgs()
         {
         }
+        public static new RotateProductSecretArgs Empty => new RotateProductSecretArgs();
     }
 
-    public sealed class RotateProductSecretState : Pulumi.ResourceArgs
+    public sealed class RotateProductSecretState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Secret name.
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public RotateProductSecretState()
         {
         }
+        public static new RotateProductSecretState Empty => new RotateProductSecretState();
     }
 }

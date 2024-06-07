@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// <summary>
         /// Use this data source to query detailed information of TCR VPC attachment.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var id = Tencentcloud.Tcr.GetVpcAttachments.Invoke(new()
         ///     {
-        ///         var id = Output.Create(Tencentcloud.Tcr.GetVpcAttachments.InvokeAsync(new Tencentcloud.Tcr.GetVpcAttachmentsArgs
-        ///         {
-        ///             InstanceId = "cls-satg5125",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cls-satg5125",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetVpcAttachmentsResult> InvokeAsync(GetVpcAttachmentsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetVpcAttachmentsResult>("tencentcloud:Tcr/getVpcAttachments:getVpcAttachments", args ?? new GetVpcAttachmentsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetVpcAttachmentsResult>("tencentcloud:Tcr/getVpcAttachments:getVpcAttachments", args ?? new GetVpcAttachmentsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of TCR VPC attachment.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var id = Tencentcloud.Tcr.GetVpcAttachments.Invoke(new()
         ///     {
-        ///         var id = Output.Create(Tencentcloud.Tcr.GetVpcAttachments.InvokeAsync(new Tencentcloud.Tcr.GetVpcAttachmentsArgs
-        ///         {
-        ///             InstanceId = "cls-satg5125",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cls-satg5125",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetVpcAttachmentsResult> Invoke(GetVpcAttachmentsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetVpcAttachmentsResult>("tencentcloud:Tcr/getVpcAttachments:getVpcAttachments", args ?? new GetVpcAttachmentsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetVpcAttachmentsResult>("tencentcloud:Tcr/getVpcAttachments:getVpcAttachments", args ?? new GetVpcAttachmentsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetVpcAttachmentsArgs : Pulumi.InvokeArgs
+    public sealed class GetVpcAttachmentsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the instance to query.
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetVpcAttachmentsArgs()
         {
         }
+        public static new GetVpcAttachmentsArgs Empty => new GetVpcAttachmentsArgs();
     }
 
-    public sealed class GetVpcAttachmentsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetVpcAttachmentsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the instance to query.
@@ -132,6 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetVpcAttachmentsInvokeArgs()
         {
         }
+        public static new GetVpcAttachmentsInvokeArgs Empty => new GetVpcAttachmentsInvokeArgs();
     }
 
 

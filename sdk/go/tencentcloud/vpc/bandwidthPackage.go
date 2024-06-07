@@ -8,102 +8,120 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a vpc bandwidthPackage
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewBandwidthPackage(ctx, "example", &Vpc.BandwidthPackageArgs{
-// 			BandwidthPackageName: pulumi.String("tf-example"),
-// 			ChargeType:           pulumi.String("TOP5_POSTPAID_BY_MONTH"),
-// 			NetworkType:          pulumi.String("BGP"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.NewBandwidthPackage(ctx, "example", &Vpc.BandwidthPackageArgs{
+//				BandwidthPackageName: pulumi.String("tf-example"),
+//				ChargeType:           pulumi.String("TOP5_POSTPAID_BY_MONTH"),
+//				NetworkType:          pulumi.String("BGP"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### PrePaid Bandwidth Package
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewBandwidthPackage(ctx, "bandwidthPackage", &Vpc.BandwidthPackageArgs{
-// 			BandwidthPackageName: pulumi.String("test-001"),
-// 			ChargeType:           pulumi.String("FIXED_PREPAID_BY_MONTH"),
-// 			InternetMaxBandwidth: pulumi.Int(100),
-// 			NetworkType:          pulumi.String("BGP"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 			TimeSpan: pulumi.Int(3),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.NewBandwidthPackage(ctx, "bandwidthPackage", &Vpc.BandwidthPackageArgs{
+//				BandwidthPackageName: pulumi.String("test-001"),
+//				ChargeType:           pulumi.String("FIXED_PREPAID_BY_MONTH"),
+//				InternetMaxBandwidth: pulumi.Int(100),
+//				NetworkType:          pulumi.String("BGP"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//				TimeSpan: pulumi.Int(3),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Bandwidth Package With Egress
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewBandwidthPackage(ctx, "example", &Vpc.BandwidthPackageArgs{
-// 			BandwidthPackageName: pulumi.String("tf-example"),
-// 			ChargeType:           pulumi.String("ENHANCED95_POSTPAID_BY_MONTH"),
-// 			Egress:               pulumi.String("center_egress2"),
-// 			InternetMaxBandwidth: pulumi.Int(400),
-// 			NetworkType:          pulumi.String("SINGLEISP_CMCC"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.NewBandwidthPackage(ctx, "example", &Vpc.BandwidthPackageArgs{
+//				BandwidthPackageName: pulumi.String("tf-example"),
+//				ChargeType:           pulumi.String("ENHANCED95_POSTPAID_BY_MONTH"),
+//				Egress:               pulumi.String("center_egress2"),
+//				InternetMaxBandwidth: pulumi.Int(400),
+//				NetworkType:          pulumi.String("SINGLEISP_CMCC"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // vpc bandwidth_package can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/bandwidthPackage:BandwidthPackage bandwidth_package bandwidthPackage_id
+// $ pulumi import tencentcloud:Vpc/bandwidthPackage:BandwidthPackage bandwidth_package bandwidthPackage_id
 // ```
 type BandwidthPackage struct {
 	pulumi.CustomResourceState
@@ -131,7 +149,7 @@ func NewBandwidthPackage(ctx *pulumi.Context,
 		args = &BandwidthPackageArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BandwidthPackage
 	err := ctx.RegisterResource("tencentcloud:Vpc/bandwidthPackage:BandwidthPackage", name, args, &resource, opts...)
 	if err != nil {
@@ -252,7 +270,7 @@ func (i *BandwidthPackage) ToBandwidthPackageOutputWithContext(ctx context.Conte
 // BandwidthPackageArrayInput is an input type that accepts BandwidthPackageArray and BandwidthPackageArrayOutput values.
 // You can construct a concrete instance of `BandwidthPackageArrayInput` via:
 //
-//          BandwidthPackageArray{ BandwidthPackageArgs{...} }
+//	BandwidthPackageArray{ BandwidthPackageArgs{...} }
 type BandwidthPackageArrayInput interface {
 	pulumi.Input
 
@@ -277,7 +295,7 @@ func (i BandwidthPackageArray) ToBandwidthPackageArrayOutputWithContext(ctx cont
 // BandwidthPackageMapInput is an input type that accepts BandwidthPackageMap and BandwidthPackageMapOutput values.
 // You can construct a concrete instance of `BandwidthPackageMapInput` via:
 //
-//          BandwidthPackageMap{ "key": BandwidthPackageArgs{...} }
+//	BandwidthPackageMap{ "key": BandwidthPackageArgs{...} }
 type BandwidthPackageMapInput interface {
 	pulumi.Input
 

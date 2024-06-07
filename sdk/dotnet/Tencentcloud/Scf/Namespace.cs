@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Scf.Namespace("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Scf.Namespace("foo", new Tencentcloud.Scf.NamespaceArgs
-    ///         {
-    ///             Namespace = "ci-test-scf",
-    ///         });
-    ///     }
+    ///         ScfNamespace = "ci-test-scf",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// SCF namespace can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Scf/namespace:Namespace test default
+    /// $ pulumi import tencentcloud:Scf/namespace:Namespace test default
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/namespace:Namespace")]
-    public partial class Namespace : Pulumi.CustomResource
+    public partial class Namespace : global::Pulumi.CustomResource
     {
         /// <summary>
         /// SCF namespace creation time.
@@ -118,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         }
     }
 
-    public sealed class NamespaceArgs : Pulumi.ResourceArgs
+    public sealed class NamespaceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of the SCF namespace.
@@ -135,9 +136,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public NamespaceArgs()
         {
         }
+        public static new NamespaceArgs Empty => new NamespaceArgs();
     }
 
-    public sealed class NamespaceState : Pulumi.ResourceArgs
+    public sealed class NamespaceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// SCF namespace creation time.
@@ -172,5 +174,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public NamespaceState()
         {
         }
+        public static new NamespaceState Empty => new NamespaceState();
     }
 }

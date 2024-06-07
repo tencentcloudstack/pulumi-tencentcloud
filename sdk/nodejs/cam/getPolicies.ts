@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -22,14 +24,12 @@ import * as utilities from "../utilities";
  *     name: "tf-auto-test",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPolicies(args?: GetPoliciesArgs, opts?: pulumi.InvokeOptions): Promise<GetPoliciesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cam/getPolicies:getPolicies", {
         "createMode": args.createMode,
         "description": args.description,
@@ -104,9 +104,28 @@ export interface GetPoliciesResult {
      */
     readonly type?: number;
 }
-
+/**
+ * Use this data source to query detailed information of CAM policies
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Cam.getPolicies({
+ *     policyId: tencentcloud_cam_policy.foo.id,
+ * });
+ * const bar = tencentcloud.Cam.getPolicies({
+ *     policyId: tencentcloud_cam_policy.foo.id,
+ *     name: "tf-auto-test",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPoliciesOutput(args?: GetPoliciesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPoliciesResult> {
-    return pulumi.output(args).apply(a => getPolicies(a, opts))
+    return pulumi.output(args).apply((a: any) => getPolicies(a, opts))
 }
 
 /**

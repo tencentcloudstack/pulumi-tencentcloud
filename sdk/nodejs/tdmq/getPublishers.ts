@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const publishers = pulumi.output(tencentcloud.Tdmq.getPublishers({
+ * const publishers = tencentcloud.Tdmq.getPublishers({
  *     clusterId: "pulsar-9n95ax58b9vn",
  *     filters: [{
  *         name: "ProducerName",
@@ -26,15 +28,13 @@ import * as utilities from "../utilities";
  *         order: "DESC",
  *     },
  *     topic: "keep-topic",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPublishers(args: GetPublishersArgs, opts?: pulumi.InvokeOptions): Promise<GetPublishersResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tdmq/getPublishers:getPublishers", {
         "clusterId": args.clusterId,
         "filters": args.filters,
@@ -94,9 +94,34 @@ export interface GetPublishersResult {
     readonly sort?: outputs.Tdmq.GetPublishersSort;
     readonly topic: string;
 }
-
+/**
+ * Use this data source to query detailed information of tdmq publishers
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const publishers = tencentcloud.Tdmq.getPublishers({
+ *     clusterId: "pulsar-9n95ax58b9vn",
+ *     filters: [{
+ *         name: "ProducerName",
+ *         values: ["test"],
+ *     }],
+ *     namespace: "keep-ns",
+ *     sort: {
+ *         name: "ProducerName",
+ *         order: "DESC",
+ *     },
+ *     topic: "keep-topic",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPublishersOutput(args: GetPublishersOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPublishersResult> {
-    return pulumi.output(args).apply(a => getPublishers(a, opts))
+    return pulumi.output(args).apply((a: any) => getPublishers(a, opts))
 }
 
 /**

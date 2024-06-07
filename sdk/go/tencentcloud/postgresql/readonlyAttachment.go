@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this resource to create postgresql readonly attachment.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewReadonlyAttachment(ctx, "attach", &Postgresql.ReadonlyAttachmentArgs{
-// 			DbInstanceId:    pulumi.Any(tencentcloud_postgresql_readonly_instance.Foo.Id),
-// 			ReadOnlyGroupId: pulumi.Any(tencentcloud_postgresql_readonly_group.Group.Id),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewReadonlyAttachment(ctx, "attach", &Postgresql.ReadonlyAttachmentArgs{
+//				DbInstanceId:    pulumi.Any(tencentcloud_postgresql_readonly_instance.Foo.Id),
+//				ReadOnlyGroupId: pulumi.Any(tencentcloud_postgresql_readonly_group.Group.Id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ReadonlyAttachment struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewReadonlyAttachment(ctx *pulumi.Context,
 	if args.ReadOnlyGroupId == nil {
 		return nil, errors.New("invalid value for required argument 'ReadOnlyGroupId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ReadonlyAttachment
 	err := ctx.RegisterResource("tencentcloud:Postgresql/readonlyAttachment:ReadonlyAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *ReadonlyAttachment) ToReadonlyAttachmentOutputWithContext(ctx context.C
 // ReadonlyAttachmentArrayInput is an input type that accepts ReadonlyAttachmentArray and ReadonlyAttachmentArrayOutput values.
 // You can construct a concrete instance of `ReadonlyAttachmentArrayInput` via:
 //
-//          ReadonlyAttachmentArray{ ReadonlyAttachmentArgs{...} }
+//	ReadonlyAttachmentArray{ ReadonlyAttachmentArgs{...} }
 type ReadonlyAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i ReadonlyAttachmentArray) ToReadonlyAttachmentArrayOutputWithContext(ctx 
 // ReadonlyAttachmentMapInput is an input type that accepts ReadonlyAttachmentMap and ReadonlyAttachmentMapOutput values.
 // You can construct a concrete instance of `ReadonlyAttachmentMapInput` via:
 //
-//          ReadonlyAttachmentMap{ "key": ReadonlyAttachmentArgs{...} }
+//	ReadonlyAttachmentMap{ "key": ReadonlyAttachmentArgs{...} }
 type ReadonlyAttachmentMapInput interface {
 	pulumi.Input
 

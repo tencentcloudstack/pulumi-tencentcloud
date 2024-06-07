@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
 {
 
-    public sealed class AccountPrivilegesDatabasePrivilegeArgs : Pulumi.ResourceArgs
+    public sealed class AccountPrivilegesDatabasePrivilegeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Database.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
         public AccountPrivilegesDatabasePrivilegeArgs()
         {
         }
+        public static new AccountPrivilegesDatabasePrivilegeArgs Empty => new AccountPrivilegesDatabasePrivilegeArgs();
     }
 }

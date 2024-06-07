@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var cluster = new Tencentcloud.Tsf.Cluster("cluster", new()
     ///     {
-    ///         var cluster = new Tencentcloud.Tsf.Cluster("cluster", new Tencentcloud.Tsf.ClusterArgs
+    ///         ClusterCidr = "9.165.120.0/24",
+    ///         ClusterDesc = "test",
+    ///         ClusterName = "terraform-test",
+    ///         ClusterType = "C",
+    ///         ClusterVersion = "1.18.4",
+    ///         MaxClusterServiceNum = 128,
+    ///         MaxNodePodNum = 32,
+    ///         Tags = 
     ///         {
-    ///             ClusterCidr = "9.165.120.0/24",
-    ///             ClusterDesc = "test",
-    ///             ClusterName = "terraform-test",
-    ///             ClusterType = "C",
-    ///             ClusterVersion = "1.18.4",
-    ///             MaxClusterServiceNum = 128,
-    ///             MaxNodePodNum = 32,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///             TsfRegionId = "ap-guangzhou",
-    ///             VpcId = "vpc-xxxxxx",
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///         TsfRegionId = "ap-guangzhou",
+    ///         VpcId = "vpc-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/cluster:Cluster")]
-    public partial class Cluster : Pulumi.CustomResource
+    public partial class Cluster : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Abnormal number of deployment groups.
@@ -338,7 +339,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class ClusterArgs : Pulumi.ResourceArgs
+    public sealed class ClusterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CIDR assigned to cluster containers and service IP.
@@ -463,9 +464,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ClusterArgs()
         {
         }
+        public static new ClusterArgs Empty => new ClusterArgs();
     }
 
-    public sealed class ClusterState : Pulumi.ResourceArgs
+    public sealed class ClusterState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Abnormal number of deployment groups.
@@ -734,5 +736,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ClusterState()
         {
         }
+        public static new ClusterState Empty => new ClusterState();
     }
 }

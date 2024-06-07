@@ -7,82 +7,87 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cls scheduledSql
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		logset, err := Cls.NewLogset(ctx, "logset", &Cls.LogsetArgs{
-// 			LogsetName: pulumi.String("tf-example-logset"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		topic, err := Cls.NewTopic(ctx, "topic", &Cls.TopicArgs{
-// 			TopicName:          pulumi.String("tf-example-topic"),
-// 			LogsetId:           logset.ID(),
-// 			AutoSplit:          pulumi.Bool(false),
-// 			MaxSplitPartitions: pulumi.Int(20),
-// 			PartitionCount:     pulumi.Int(1),
-// 			Period:             pulumi.Int(10),
-// 			StorageType:        pulumi.String("hot"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cls.NewScheduledSql(ctx, "scheduledSql", &Cls.ScheduledSqlArgs{
-// 			SrcTopicId: topic.ID(),
-// 			EnableFlag: pulumi.Int(1),
-// 			DstResource: &cls.ScheduledSqlDstResourceArgs{
-// 				TopicId:    topic.ID(),
-// 				Region:     pulumi.String("ap-guangzhou"),
-// 				BizType:    pulumi.Int(0),
-// 				MetricName: pulumi.String("test"),
-// 			},
-// 			ScheduledSqlContent: pulumi.String("xxx"),
-// 			ProcessStartTime:    pulumi.Int(1690515360000),
-// 			ProcessType:         pulumi.Int(1),
-// 			ProcessPeriod:       pulumi.Int(10),
-// 			ProcessTimeWindow:   pulumi.String("@m-15m,@m"),
-// 			ProcessDelay:        pulumi.Int(5),
-// 			SrcTopicRegion:      pulumi.String("ap-guangzhou"),
-// 			ProcessEndTime:      pulumi.Int(1690515360000),
-// 			SyntaxRule:          pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			logset, err := Cls.NewLogset(ctx, "logset", &Cls.LogsetArgs{
+//				LogsetName: pulumi.String("tf-example-logset"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			topic, err := Cls.NewTopic(ctx, "topic", &Cls.TopicArgs{
+//				TopicName:          pulumi.String("tf-example-topic"),
+//				LogsetId:           logset.ID(),
+//				AutoSplit:          pulumi.Bool(false),
+//				MaxSplitPartitions: pulumi.Int(20),
+//				PartitionCount:     pulumi.Int(1),
+//				Period:             pulumi.Int(10),
+//				StorageType:        pulumi.String("hot"),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cls.NewScheduledSql(ctx, "scheduledSql", &Cls.ScheduledSqlArgs{
+//				SrcTopicId: topic.ID(),
+//				EnableFlag: pulumi.Int(1),
+//				DstResource: &cls.ScheduledSqlDstResourceArgs{
+//					TopicId:    topic.ID(),
+//					Region:     pulumi.String("ap-guangzhou"),
+//					BizType:    pulumi.Int(0),
+//					MetricName: pulumi.String("test"),
+//				},
+//				ScheduledSqlContent: pulumi.String("xxx"),
+//				ProcessStartTime:    pulumi.Int(1690515360000),
+//				ProcessType:         pulumi.Int(1),
+//				ProcessPeriod:       pulumi.Int(10),
+//				ProcessTimeWindow:   pulumi.String("@m-15m,@m"),
+//				ProcessDelay:        pulumi.Int(5),
+//				SrcTopicRegion:      pulumi.String("ap-guangzhou"),
+//				ProcessEndTime:      pulumi.Int(1690515360000),
+//				SyntaxRule:          pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cls scheduled_sql can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/scheduledSql:ScheduledSql scheduled_sql scheduled_sql_id
+// $ pulumi import tencentcloud:Cls/scheduledSql:ScheduledSql scheduled_sql scheduled_sql_id
 // ```
 type ScheduledSql struct {
 	pulumi.CustomResourceState
@@ -152,7 +157,7 @@ func NewScheduledSql(ctx *pulumi.Context,
 	if args.SrcTopicRegion == nil {
 		return nil, errors.New("invalid value for required argument 'SrcTopicRegion'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ScheduledSql
 	err := ctx.RegisterResource("tencentcloud:Cls/scheduledSql:ScheduledSql", name, args, &resource, opts...)
 	if err != nil {
@@ -321,7 +326,7 @@ func (i *ScheduledSql) ToScheduledSqlOutputWithContext(ctx context.Context) Sche
 // ScheduledSqlArrayInput is an input type that accepts ScheduledSqlArray and ScheduledSqlArrayOutput values.
 // You can construct a concrete instance of `ScheduledSqlArrayInput` via:
 //
-//          ScheduledSqlArray{ ScheduledSqlArgs{...} }
+//	ScheduledSqlArray{ ScheduledSqlArgs{...} }
 type ScheduledSqlArrayInput interface {
 	pulumi.Input
 
@@ -346,7 +351,7 @@ func (i ScheduledSqlArray) ToScheduledSqlArrayOutputWithContext(ctx context.Cont
 // ScheduledSqlMapInput is an input type that accepts ScheduledSqlMap and ScheduledSqlMapOutput values.
 // You can construct a concrete instance of `ScheduledSqlMapInput` via:
 //
-//          ScheduledSqlMap{ "key": ScheduledSqlArgs{...} }
+//	ScheduledSqlMap{ "key": ScheduledSqlArgs{...} }
 type ScheduledSqlMapInput interface {
 	pulumi.Input
 

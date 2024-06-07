@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeHostTeoInstanceList = pulumi.output(tencentcloud.Ssl.getDescribeHostTeoInstanceList({
+ * const describeHostTeoInstanceList = tencentcloud.Ssl.getDescribeHostTeoInstanceList({
  *     certificateId: "8u8DII0l",
  *     resourceType: "teo",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeHostTeoInstanceList(args: GetDescribeHostTeoInstanceListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostTeoInstanceListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ssl/getDescribeHostTeoInstanceList:getDescribeHostTeoInstanceList", {
         "certificateId": args.certificateId,
         "filters": args.filters,
@@ -85,9 +85,25 @@ export interface GetDescribeHostTeoInstanceListResult {
     readonly resourceType: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of ssl describeHostTeoInstanceList
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeHostTeoInstanceList = tencentcloud.Ssl.getDescribeHostTeoInstanceList({
+ *     certificateId: "8u8DII0l",
+ *     resourceType: "teo",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeHostTeoInstanceListOutput(args: GetDescribeHostTeoInstanceListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeHostTeoInstanceListResult> {
-    return pulumi.output(args).apply(a => getDescribeHostTeoInstanceList(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeHostTeoInstanceList(a, opts))
 }
 
 /**

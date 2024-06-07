@@ -8,6 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tdcpg clusters.
@@ -16,33 +17,37 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdcpg"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdcpg"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdcpg"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdcpg.GetClusters(ctx, &tdcpg.GetClustersArgs{
-// 			ClusterId:   pulumi.StringRef(""),
-// 			ClusterName: pulumi.StringRef(""),
-// 			PayMode:     pulumi.StringRef(""),
-// 			ProjectId:   pulumi.IntRef(""),
-// 			Status:      pulumi.StringRef(""),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tdcpg.GetClusters(ctx, &tdcpg.GetClustersArgs{
+//				ClusterId:   pulumi.StringRef(""),
+//				ClusterName: pulumi.StringRef(""),
+//				PayMode:     pulumi.StringRef(""),
+//				ProjectId:   pulumi.IntRef(""),
+//				Status:      pulumi.StringRef(""),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetClusters(ctx *pulumi.Context, args *GetClustersArgs, opts ...pulumi.InvokeOption) (*GetClustersResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClustersResult
 	err := ctx.Invoke("tencentcloud:Tdcpg/getClusters:getClusters", args, &rv, opts...)
 	if err != nil {

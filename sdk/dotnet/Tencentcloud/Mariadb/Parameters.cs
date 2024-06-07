@@ -15,361 +15,362 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var parameters = new Tencentcloud.Mariadb.Parameters("parameters", new()
     ///     {
-    ///         var parameters = new Tencentcloud.Mariadb.Parameters("parameters", new Tencentcloud.Mariadb.ParametersArgs
+    ///         InstanceId = "tdsql-4pzs5b67",
+    ///         Params = new[]
     ///         {
-    ///             InstanceId = "tdsql-4pzs5b67",
-    ///             Params = 
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
     ///             {
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "auto_increment_increment",
-    ///                     Value = "1",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "auto_increment_offset",
-    ///                     Value = "1",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "autocommit",
-    ///                     Value = "ON",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "character_set_server",
-    ///                     Value = "utf8mb4",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "collation_connection",
-    ///                     Value = "utf8mb4_general_ci",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "collation_database",
-    ///                     Value = "utf8mb4_general_ci",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "collation_server",
-    ///                     Value = "utf8mb4_general_ci",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "connect_timeout",
-    ///                     Value = "10",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "default_collation_for_utf8mb4",
-    ///                     Value = "utf8mb4_general_ci",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "default_week_format",
-    ///                     Value = "0",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "delay_key_write",
-    ///                     Value = "ON",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "delayed_insert_limit",
-    ///                     Value = "100",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "delayed_insert_timeout",
-    ///                     Value = "300",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "delayed_queue_size",
-    ///                     Value = "1000",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "div_precision_increment",
-    ///                     Value = "4",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "event_scheduler",
-    ///                     Value = "ON",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "group_concat_max_len",
-    ///                     Value = "1024",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "innodb_concurrency_tickets",
-    ///                     Value = "5000",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "innodb_flush_log_at_trx_commit",
-    ///                     Value = "1",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "innodb_lock_wait_timeout",
-    ///                     Value = "20",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "innodb_max_dirty_pages_pct",
-    ///                     Value = "70.000000",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "innodb_old_blocks_pct",
-    ///                     Value = "37",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "innodb_old_blocks_time",
-    ///                     Value = "1000",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "innodb_purge_batch_size",
-    ///                     Value = "1000",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "innodb_read_ahead_threshold",
-    ///                     Value = "56",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "innodb_stats_method",
-    ///                     Value = "nulls_equal",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "innodb_stats_on_metadata",
-    ///                     Value = "OFF",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "innodb_strict_mode",
-    ///                     Value = "OFF",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "innodb_table_locks",
-    ///                     Value = "ON",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "innodb_thread_concurrency",
-    ///                     Value = "0",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "interactive_timeout",
-    ///                     Value = "28800",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "key_cache_age_threshold",
-    ///                     Value = "300",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "key_cache_block_size",
-    ///                     Value = "1024",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "key_cache_division_limit",
-    ///                     Value = "100",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "local_infile",
-    ///                     Value = "OFF",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "lock_wait_timeout",
-    ///                     Value = "5",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "log_queries_not_using_indexes",
-    ///                     Value = "OFF",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "long_query_time",
-    ///                     Value = "1.000000",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "low_priority_updates",
-    ///                     Value = "OFF",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "max_allowed_packet",
-    ///                     Value = "1073741824",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "max_binlog_size",
-    ///                     Value = "536870912",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "max_connect_errors",
-    ///                     Value = "2000",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "max_connections",
-    ///                     Value = "10000",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "max_execution_time",
-    ///                     Value = "0",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "max_prepared_stmt_count",
-    ///                     Value = "200000",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "myisam_sort_buffer_size",
-    ///                     Value = "4194304",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "net_buffer_length",
-    ///                     Value = "16384",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "net_read_timeout",
-    ///                     Value = "150",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "net_retry_count",
-    ///                     Value = "10",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "net_write_timeout",
-    ///                     Value = "300",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "query_alloc_block_size",
-    ///                     Value = "16384",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "query_prealloc_size",
-    ///                     Value = "24576",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "slow_launch_time",
-    ///                     Value = "2",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "sort_buffer_size",
-    ///                     Value = "2097152",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "sql_mode",
-    ///                     Value = "NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "sql_require_primary_key",
-    ///                     Value = "ON",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "sql_safe_updates",
-    ///                     Value = "OFF",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "sqlasyntimeout",
-    ///                     Value = "30",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "sync_binlog",
-    ///                     Value = "1",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "table_definition_cache",
-    ///                     Value = "10240",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "table_open_cache",
-    ///                     Value = "20480",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "time_zone",
-    ///                     Value = "+08:00",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "tmp_table_size",
-    ///                     Value = "33554432",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "tx_isolation",
-    ///                     Value = "READ-COMMITTED",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
-    ///                 {
-    ///                     Param = "wait_timeout",
-    ///                     Value = "28800",
-    ///                 },
+    ///                 Param = "auto_increment_increment",
+    ///                 Value = "1",
     ///             },
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "auto_increment_offset",
+    ///                 Value = "1",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "autocommit",
+    ///                 Value = "ON",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "character_set_server",
+    ///                 Value = "utf8mb4",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "collation_connection",
+    ///                 Value = "utf8mb4_general_ci",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "collation_database",
+    ///                 Value = "utf8mb4_general_ci",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "collation_server",
+    ///                 Value = "utf8mb4_general_ci",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "connect_timeout",
+    ///                 Value = "10",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "default_collation_for_utf8mb4",
+    ///                 Value = "utf8mb4_general_ci",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "default_week_format",
+    ///                 Value = "0",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "delay_key_write",
+    ///                 Value = "ON",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "delayed_insert_limit",
+    ///                 Value = "100",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "delayed_insert_timeout",
+    ///                 Value = "300",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "delayed_queue_size",
+    ///                 Value = "1000",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "div_precision_increment",
+    ///                 Value = "4",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "event_scheduler",
+    ///                 Value = "ON",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "group_concat_max_len",
+    ///                 Value = "1024",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_concurrency_tickets",
+    ///                 Value = "5000",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_flush_log_at_trx_commit",
+    ///                 Value = "1",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_lock_wait_timeout",
+    ///                 Value = "20",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_max_dirty_pages_pct",
+    ///                 Value = "70.000000",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_old_blocks_pct",
+    ///                 Value = "37",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_old_blocks_time",
+    ///                 Value = "1000",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_purge_batch_size",
+    ///                 Value = "1000",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_read_ahead_threshold",
+    ///                 Value = "56",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_stats_method",
+    ///                 Value = "nulls_equal",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_stats_on_metadata",
+    ///                 Value = "OFF",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_strict_mode",
+    ///                 Value = "OFF",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_table_locks",
+    ///                 Value = "ON",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "innodb_thread_concurrency",
+    ///                 Value = "0",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "interactive_timeout",
+    ///                 Value = "28800",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "key_cache_age_threshold",
+    ///                 Value = "300",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "key_cache_block_size",
+    ///                 Value = "1024",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "key_cache_division_limit",
+    ///                 Value = "100",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "local_infile",
+    ///                 Value = "OFF",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "lock_wait_timeout",
+    ///                 Value = "5",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "log_queries_not_using_indexes",
+    ///                 Value = "OFF",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "long_query_time",
+    ///                 Value = "1.000000",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "low_priority_updates",
+    ///                 Value = "OFF",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "max_allowed_packet",
+    ///                 Value = "1073741824",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "max_binlog_size",
+    ///                 Value = "536870912",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "max_connect_errors",
+    ///                 Value = "2000",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "max_connections",
+    ///                 Value = "10000",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "max_execution_time",
+    ///                 Value = "0",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "max_prepared_stmt_count",
+    ///                 Value = "200000",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "myisam_sort_buffer_size",
+    ///                 Value = "4194304",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "net_buffer_length",
+    ///                 Value = "16384",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "net_read_timeout",
+    ///                 Value = "150",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "net_retry_count",
+    ///                 Value = "10",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "net_write_timeout",
+    ///                 Value = "300",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "query_alloc_block_size",
+    ///                 Value = "16384",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "query_prealloc_size",
+    ///                 Value = "24576",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "slow_launch_time",
+    ///                 Value = "2",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "sort_buffer_size",
+    ///                 Value = "2097152",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "sql_mode",
+    ///                 Value = "NO_ENGINE_SUBSTITUTION,STRICT_TRANS_TABLES",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "sql_require_primary_key",
+    ///                 Value = "ON",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "sql_safe_updates",
+    ///                 Value = "OFF",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "sqlasyntimeout",
+    ///                 Value = "30",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "sync_binlog",
+    ///                 Value = "1",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "table_definition_cache",
+    ///                 Value = "10240",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "table_open_cache",
+    ///                 Value = "20480",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "time_zone",
+    ///                 Value = "+08:00",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "tmp_table_size",
+    ///                 Value = "33554432",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "tx_isolation",
+    ///                 Value = "READ-COMMITTED",
+    ///             },
+    ///             new Tencentcloud.Mariadb.Inputs.ParametersParamArgs
+    ///             {
+    ///                 Param = "wait_timeout",
+    ///                 Value = "28800",
+    ///             },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mariadb parameters can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mariadb/parameters:Parameters parameters tdsql-4pzs5b67
+    /// $ pulumi import tencentcloud:Mariadb/parameters:Parameters parameters tdsql-4pzs5b67
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/parameters:Parameters")]
-    public partial class Parameters : Pulumi.CustomResource
+    public partial class Parameters : global::Pulumi.CustomResource
     {
         /// <summary>
         /// instance id.
@@ -428,7 +429,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class ParametersArgs : Pulumi.ResourceArgs
+    public sealed class ParametersArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance id.
@@ -451,9 +452,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public ParametersArgs()
         {
         }
+        public static new ParametersArgs Empty => new ParametersArgs();
     }
 
-    public sealed class ParametersState : Pulumi.ResourceArgs
+    public sealed class ParametersState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance id.
@@ -476,5 +478,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public ParametersState()
         {
         }
+        public static new ParametersState Empty => new ParametersState();
     }
 }

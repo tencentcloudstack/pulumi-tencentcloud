@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,55 +11,55 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const gateway = new tencentcloud.Tem.Gateway("gateway", {
- *     ingress: {
- *         addressIpVersion: "IPV4",
- *         environmentId: "en-853mggjm",
- *         ingressName: "demo",
- *         mixed: false,
- *         rewriteType: "NONE",
- *         rules: [
- *             {
- *                 host: "test.com",
- *                 http: {
- *                     paths: [{
- *                         backend: {
- *                             serviceName: "demo",
- *                             servicePort: 80,
- *                         },
- *                         path: "/",
- *                     }],
- *                 },
- *                 protocol: "http",
+ * const gateway = new tencentcloud.tem.Gateway("gateway", {ingress: {
+ *     addressIpVersion: "IPV4",
+ *     environmentId: "en-853mggjm",
+ *     ingressName: "demo",
+ *     mixed: false,
+ *     rewriteType: "NONE",
+ *     rules: [
+ *         {
+ *             host: "test.com",
+ *             http: {
+ *                 paths: [{
+ *                     backend: {
+ *                         serviceName: "demo",
+ *                         servicePort: 80,
+ *                     },
+ *                     path: "/",
+ *                 }],
  *             },
- *             {
- *                 host: "hello.com",
- *                 http: {
- *                     paths: [{
- *                         backend: {
- *                             serviceName: "hello",
- *                             servicePort: 36000,
- *                         },
- *                         path: "/",
- *                     }],
- *                 },
- *                 protocol: "http",
+ *             protocol: "http",
+ *         },
+ *         {
+ *             host: "hello.com",
+ *             http: {
+ *                 paths: [{
+ *                     backend: {
+ *                         serviceName: "hello",
+ *                         servicePort: 36000,
+ *                     },
+ *                     path: "/",
+ *                 }],
  *             },
- *         ],
- *     },
- * });
+ *             protocol: "http",
+ *         },
+ *     ],
+ * }});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tem gateway can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tem/gateway:Gateway gateway environmentId#gatewayName
+ * $ pulumi import tencentcloud:Tem/gateway:Gateway gateway environmentId#gatewayName
  * ```
  */
 export class Gateway extends pulumi.CustomResource {

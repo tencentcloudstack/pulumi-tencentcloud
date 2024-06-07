@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaTranscodeTemplateTimeIntervalGetArgs : Pulumi.ResourceArgs
+    public sealed class MediaTranscodeTemplateTimeIntervalGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// duration, [0 video duration], in seconds, Support float format, the execution accuracy is accurate to milliseconds.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaTranscodeTemplateTimeIntervalGetArgs()
         {
         }
+        public static new MediaTranscodeTemplateTimeIntervalGetArgs Empty => new MediaTranscodeTemplateTimeIntervalGetArgs();
     }
 }

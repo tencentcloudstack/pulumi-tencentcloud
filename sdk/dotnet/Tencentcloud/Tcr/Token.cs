@@ -14,45 +14,48 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// Use this resource to create tcr long term token.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a token for tcr instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new()
     ///     {
-    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
+    ///         InstanceType = "basic",
+    ///         DeleteBucket = true,
+    ///         Tags = 
     ///         {
-    ///             InstanceType = "basic",
-    ///             DeleteBucket = true,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var exampleToken = new Tencentcloud.Tcr.Token("exampleToken", new Tencentcloud.Tcr.TokenArgs
-    ///         {
-    ///             InstanceId = exampleInstance.Id,
-    ///             Description = "example for the tcr token",
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleToken = new Tencentcloud.Tcr.Token("exampleToken", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///         Description = "example for the tcr token",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcr token can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/token:Token example instance_id#token_id
+    /// $ pulumi import tencentcloud:Tcr/token:Token example instance_id#token_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/token:Token")]
-    public partial class Token : Pulumi.CustomResource
+    public partial class Token : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create time.
@@ -141,7 +144,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         }
     }
 
-    public sealed class TokenArgs : Pulumi.ResourceArgs
+    public sealed class TokenArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of the token. Valid length is [0~255].
@@ -164,9 +167,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public TokenArgs()
         {
         }
+        public static new TokenArgs Empty => new TokenArgs();
     }
 
-    public sealed class TokenState : Pulumi.ResourceArgs
+    public sealed class TokenState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create time.
@@ -213,5 +217,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public TokenState()
         {
         }
+        public static new TokenState Empty => new TokenState();
     }
 }

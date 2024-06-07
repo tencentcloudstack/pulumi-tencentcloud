@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Cam.Group("foo", {
- *     remark: "tf_group_remark",
- * });
+ * const foo = new tencentcloud.cam.Group("foo", {remark: "tf_group_remark"});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CAM group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cam/group:Group foo 90496
+ * $ pulumi import tencentcloud:Cam/group:Group foo 90496
  * ```
  */
 export class Group extends pulumi.CustomResource {

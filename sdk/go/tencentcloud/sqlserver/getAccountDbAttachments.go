@@ -8,11 +8,12 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query the list of SQL Server account DB privileges.
 func GetAccountDbAttachments(ctx *pulumi.Context, args *GetAccountDbAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetAccountDbAttachmentsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAccountDbAttachmentsResult
 	err := ctx.Invoke("tencentcloud:Sqlserver/getAccountDbAttachments:getAccountDbAttachments", args, &rv, opts...)
 	if err != nil {

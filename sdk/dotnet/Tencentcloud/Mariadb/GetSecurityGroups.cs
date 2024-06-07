@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// <summary>
         /// Use this data source to query detailed information of mariadb securityGroups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var securityGroups = Tencentcloud.Mariadb.GetSecurityGroups.Invoke(new()
         ///     {
-        ///         var securityGroups = Output.Create(Tencentcloud.Mariadb.GetSecurityGroups.InvokeAsync(new Tencentcloud.Mariadb.GetSecurityGroupsArgs
-        ///         {
-        ///             InstanceId = "tdsql-4pzs5b67",
-        ///             Product = "mariadb",
-        ///         }));
-        ///     }
+        ///         InstanceId = "tdsql-4pzs5b67",
+        ///         Product = "mariadb",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSecurityGroupsResult> InvokeAsync(GetSecurityGroupsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSecurityGroupsResult>("tencentcloud:Mariadb/getSecurityGroups:getSecurityGroups", args ?? new GetSecurityGroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecurityGroupsResult>("tencentcloud:Mariadb/getSecurityGroups:getSecurityGroups", args ?? new GetSecurityGroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mariadb securityGroups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var securityGroups = Tencentcloud.Mariadb.GetSecurityGroups.Invoke(new()
         ///     {
-        ///         var securityGroups = Output.Create(Tencentcloud.Mariadb.GetSecurityGroups.InvokeAsync(new Tencentcloud.Mariadb.GetSecurityGroupsArgs
-        ///         {
-        ///             InstanceId = "tdsql-4pzs5b67",
-        ///             Product = "mariadb",
-        ///         }));
-        ///     }
+        ///         InstanceId = "tdsql-4pzs5b67",
+        ///         Product = "mariadb",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSecurityGroupsResult> Invoke(GetSecurityGroupsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSecurityGroupsResult>("tencentcloud:Mariadb/getSecurityGroups:getSecurityGroups", args ?? new GetSecurityGroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSecurityGroupsResult>("tencentcloud:Mariadb/getSecurityGroups:getSecurityGroups", args ?? new GetSecurityGroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSecurityGroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetSecurityGroupsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetSecurityGroupsArgs()
         {
         }
+        public static new GetSecurityGroupsArgs Empty => new GetSecurityGroupsArgs();
     }
 
-    public sealed class GetSecurityGroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSecurityGroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetSecurityGroupsInvokeArgs()
         {
         }
+        public static new GetSecurityGroupsInvokeArgs Empty => new GetSecurityGroupsInvokeArgs();
     }
 
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ProcessMediaOperationAiQualityControlTaskGetArgs : Pulumi.ResourceArgs
+    public sealed class ProcessMediaOperationAiQualityControlTaskGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The channel extension parameter, which is a serialized JSON string.Note: This field may return null, indicating that no valid values can be obtained.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ProcessMediaOperationAiQualityControlTaskGetArgs()
         {
         }
+        public static new ProcessMediaOperationAiQualityControlTaskGetArgs Empty => new ProcessMediaOperationAiQualityControlTaskGetArgs();
     }
 }

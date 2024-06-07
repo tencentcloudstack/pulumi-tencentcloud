@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.AutoDenyRules("example", {
+ * const example = new tencentcloud.waf.AutoDenyRules("example", {
  *     attackThreshold: 20,
  *     denyTimeThreshold: 5,
  *     domain: "demo.waf.com",
  *     timeThreshold: 12,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * waf auto_deny_rules can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Waf/autoDenyRules:AutoDenyRules example demo.waf.com
+ * $ pulumi import tencentcloud:Waf/autoDenyRules:AutoDenyRules example demo.waf.com
  * ```
  */
 export class AutoDenyRules extends pulumi.CustomResource {

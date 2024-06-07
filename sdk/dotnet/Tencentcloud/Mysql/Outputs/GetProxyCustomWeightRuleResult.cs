@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Outputs
     [OutputType]
     public sealed class GetProxyCustomWeightRuleResult
     {
+        /// <summary>
+        /// division ceiling.
+        /// </summary>
         public readonly int LessThan;
+        /// <summary>
+        /// weight limit.
+        /// </summary>
         public readonly int Weight;
 
         [OutputConstructor]

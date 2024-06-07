@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeDataEnginePythonSparkImages = pulumi.output(tencentcloud.Dlc.getDescribeDataEnginePythonSparkImages({
+ * const describeDataEnginePythonSparkImages = tencentcloud.Dlc.getDescribeDataEnginePythonSparkImages({
  *     childImageVersionId: "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeDataEnginePythonSparkImages(args: GetDescribeDataEnginePythonSparkImagesArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeDataEnginePythonSparkImagesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dlc/getDescribeDataEnginePythonSparkImages:getDescribeDataEnginePythonSparkImages", {
         "childImageVersionId": args.childImageVersionId,
         "resultOutputFile": args.resultOutputFile,
@@ -63,9 +63,24 @@ export interface GetDescribeDataEnginePythonSparkImagesResult {
     readonly pythonSparkImages: outputs.Dlc.GetDescribeDataEnginePythonSparkImagesPythonSparkImage[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of dlc describeDataEnginePythonSparkImages
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeDataEnginePythonSparkImages = tencentcloud.Dlc.getDescribeDataEnginePythonSparkImages({
+ *     childImageVersionId: "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeDataEnginePythonSparkImagesOutput(args: GetDescribeDataEnginePythonSparkImagesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeDataEnginePythonSparkImagesResult> {
-    return pulumi.output(args).apply(a => getDescribeDataEnginePythonSparkImages(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeDataEnginePythonSparkImages(a, opts))
 }
 
 /**

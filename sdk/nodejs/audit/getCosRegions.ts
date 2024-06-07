@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = pulumi.output(tencentcloud.Audit.getCosRegions());
+ * const foo = tencentcloud.Audit.getCosRegions({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCosRegions(args?: GetCosRegionsArgs, opts?: pulumi.InvokeOptions): Promise<GetCosRegionsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Audit/getCosRegions:getCosRegions", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetCosRegionsResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query the cos region list supported by the audit.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Audit.getCosRegions({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCosRegionsOutput(args?: GetCosRegionsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCosRegionsResult> {
-    return pulumi.output(args).apply(a => getCosRegions(a, opts))
+    return pulumi.output(args).apply((a: any) => getCosRegions(a, opts))
 }
 
 /**

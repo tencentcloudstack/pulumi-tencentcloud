@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
 {
 
-    public sealed class InstanceSecurityPolicyArgs : Pulumi.ResourceArgs
+    public sealed class InstanceSecurityPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The public network IP address of the access source.
@@ -25,14 +25,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
         [Input("description")]
         public Input<string>? Description { get; set; }
 
+        /// <summary>
+        /// Index of policy.
+        /// </summary>
         [Input("index")]
         public Input<int>? Index { get; set; }
 
+        /// <summary>
+        /// Version of policy.
+        /// </summary>
         [Input("version")]
         public Input<string>? Version { get; set; }
 
         public InstanceSecurityPolicyArgs()
         {
         }
+        public static new InstanceSecurityPolicyArgs Empty => new InstanceSecurityPolicyArgs();
     }
 }

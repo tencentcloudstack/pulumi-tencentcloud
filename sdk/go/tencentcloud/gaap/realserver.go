@@ -8,42 +8,48 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a GAAP realserver.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Gaap.NewRealserver(ctx, "foo", &Gaap.RealserverArgs{
-// 			Ip: pulumi.String("1.1.1.1"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Gaap.NewRealserver(ctx, "foo", &Gaap.RealserverArgs{
+//				Ip: pulumi.String("1.1.1.1"),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // GAAP realserver can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Gaap/realserver:Realserver tencentcloud_gaap_realserver.foo rs-4ftghy6
+// $ pulumi import tencentcloud:Gaap/realserver:Realserver tencentcloud_gaap_realserver.foo rs-4ftghy6
 // ```
 type Realserver struct {
 	pulumi.CustomResourceState
@@ -67,7 +73,7 @@ func NewRealserver(ctx *pulumi.Context,
 		args = &RealserverArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Realserver
 	err := ctx.RegisterResource("tencentcloud:Gaap/realserver:Realserver", name, args, &resource, opts...)
 	if err != nil {
@@ -172,7 +178,7 @@ func (i *Realserver) ToRealserverOutputWithContext(ctx context.Context) Realserv
 // RealserverArrayInput is an input type that accepts RealserverArray and RealserverArrayOutput values.
 // You can construct a concrete instance of `RealserverArrayInput` via:
 //
-//          RealserverArray{ RealserverArgs{...} }
+//	RealserverArray{ RealserverArgs{...} }
 type RealserverArrayInput interface {
 	pulumi.Input
 
@@ -197,7 +203,7 @@ func (i RealserverArray) ToRealserverArrayOutputWithContext(ctx context.Context)
 // RealserverMapInput is an input type that accepts RealserverMap and RealserverMapOutput values.
 // You can construct a concrete instance of `RealserverMapInput` via:
 //
-//          RealserverMap{ "key": RealserverArgs{...} }
+//	RealserverMap{ "key": RealserverArgs{...} }
 type RealserverMapInput interface {
 	pulumi.Input
 

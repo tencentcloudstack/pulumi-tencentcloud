@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const offlineLogConfig = pulumi.output(tencentcloud.Rum.getOfflineLogConfig({
+ * const offlineLogConfig = tencentcloud.Rum.getOfflineLogConfig({
  *     projectKey: "ZEYrYfvaYQ30jRdmPx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getOfflineLogConfig(args: GetOfflineLogConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetOfflineLogConfigResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getOfflineLogConfig:getOfflineLogConfig", {
         "projectKey": args.projectKey,
         "resultOutputFile": args.resultOutputFile,
@@ -63,9 +62,24 @@ export interface GetOfflineLogConfigResult {
      */
     readonly uniqueIdSets: string[];
 }
-
+/**
+ * Use this data source to query detailed information of rum offlineLogConfig
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const offlineLogConfig = tencentcloud.Rum.getOfflineLogConfig({
+ *     projectKey: "ZEYrYfvaYQ30jRdmPx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getOfflineLogConfigOutput(args: GetOfflineLogConfigOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOfflineLogConfigResult> {
-    return pulumi.output(args).apply(a => getOfflineLogConfig(a, opts))
+    return pulumi.output(args).apply((a: any) => getOfflineLogConfig(a, opts))
 }
 
 /**

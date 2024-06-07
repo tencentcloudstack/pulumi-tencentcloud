@@ -7,122 +7,127 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tse cngwRoute
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-4"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(availabilityZone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		cngwGateway, err := Tse.NewCngwGateway(ctx, "cngwGateway", &Tse.CngwGatewayArgs{
-// 			Description:             pulumi.String("terraform test1"),
-// 			EnableCls:               pulumi.Bool(true),
-// 			EngineRegion:            pulumi.String("ap-guangzhou"),
-// 			FeatureVersion:          pulumi.String("STANDARD"),
-// 			GatewayVersion:          pulumi.String("2.5.1"),
-// 			IngressClassName:        pulumi.String("tse-nginx-ingress"),
-// 			InternetMaxBandwidthOut: pulumi.Int(0),
-// 			TradeType:               pulumi.Int(0),
-// 			Type:                    pulumi.String("kong"),
-// 			NodeConfig: &tse.CngwGatewayNodeConfigArgs{
-// 				Number:        pulumi.Int(2),
-// 				Specification: pulumi.String("1c2g"),
-// 			},
-// 			VpcConfig: &tse.CngwGatewayVpcConfigArgs{
-// 				SubnetId: subnet.ID(),
-// 				VpcId:    vpc.ID(),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		cngwService, err := Tse.NewCngwService(ctx, "cngwService", &Tse.CngwServiceArgs{
-// 			GatewayId:    cngwGateway.ID(),
-// 			Path:         pulumi.String("/test"),
-// 			Protocol:     pulumi.String("http"),
-// 			Retries:      pulumi.Int(5),
-// 			Timeout:      pulumi.Int(60000),
-// 			UpstreamType: pulumi.String("HostIP"),
-// 			UpstreamInfo: &tse.CngwServiceUpstreamInfoArgs{
-// 				Algorithm:          pulumi.String("round-robin"),
-// 				AutoScalingCvmPort: pulumi.Int(0),
-// 				Host:               pulumi.String("arunma.cn"),
-// 				Port:               pulumi.Int(8012),
-// 				SlowStart:          pulumi.Int(0),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tse.NewCngwRoute(ctx, "cngwRoute", &Tse.CngwRouteArgs{
-// 			DestinationPorts: pulumi.IntArray{},
-// 			GatewayId:        cngwGateway.ID(),
-// 			Hosts: pulumi.StringArray{
-// 				pulumi.String("192.168.0.1:9090"),
-// 			},
-// 			HttpsRedirectStatusCode: pulumi.Int(426),
-// 			Paths: pulumi.StringArray{
-// 				pulumi.String("/user"),
-// 			},
-// 			Headers: tse.CngwRouteHeaderArray{
-// 				&tse.CngwRouteHeaderArgs{
-// 					Key:   pulumi.String("req"),
-// 					Value: pulumi.String("terraform"),
-// 				},
-// 			},
-// 			PreserveHost: pulumi.Bool(false),
-// 			Protocols: pulumi.StringArray{
-// 				pulumi.String("http"),
-// 				pulumi.String("https"),
-// 			},
-// 			RouteName: pulumi.String("terraform-route"),
-// 			ServiceId: cngwService.ServiceId,
-// 			StripPath: pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-4"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			cngwGateway, err := Tse.NewCngwGateway(ctx, "cngwGateway", &Tse.CngwGatewayArgs{
+//				Description:             pulumi.String("terraform test1"),
+//				EnableCls:               pulumi.Bool(true),
+//				EngineRegion:            pulumi.String("ap-guangzhou"),
+//				FeatureVersion:          pulumi.String("STANDARD"),
+//				GatewayVersion:          pulumi.String("2.5.1"),
+//				IngressClassName:        pulumi.String("tse-nginx-ingress"),
+//				InternetMaxBandwidthOut: pulumi.Int(0),
+//				TradeType:               pulumi.Int(0),
+//				Type:                    pulumi.String("kong"),
+//				NodeConfig: &tse.CngwGatewayNodeConfigArgs{
+//					Number:        pulumi.Int(2),
+//					Specification: pulumi.String("1c2g"),
+//				},
+//				VpcConfig: &tse.CngwGatewayVpcConfigArgs{
+//					SubnetId: subnet.ID(),
+//					VpcId:    vpc.ID(),
+//				},
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			cngwService, err := Tse.NewCngwService(ctx, "cngwService", &Tse.CngwServiceArgs{
+//				GatewayId:    cngwGateway.ID(),
+//				Path:         pulumi.String("/test"),
+//				Protocol:     pulumi.String("http"),
+//				Retries:      pulumi.Int(5),
+//				Timeout:      pulumi.Int(60000),
+//				UpstreamType: pulumi.String("HostIP"),
+//				UpstreamInfo: &tse.CngwServiceUpstreamInfoArgs{
+//					Algorithm:          pulumi.String("round-robin"),
+//					AutoScalingCvmPort: pulumi.Int(0),
+//					Host:               pulumi.String("arunma.cn"),
+//					Port:               pulumi.Int(8012),
+//					SlowStart:          pulumi.Int(0),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tse.NewCngwRoute(ctx, "cngwRoute", &Tse.CngwRouteArgs{
+//				DestinationPorts: pulumi.IntArray{},
+//				GatewayId:        cngwGateway.ID(),
+//				Hosts: pulumi.StringArray{
+//					pulumi.String("192.168.0.1:9090"),
+//				},
+//				HttpsRedirectStatusCode: pulumi.Int(426),
+//				Paths: pulumi.StringArray{
+//					pulumi.String("/user"),
+//				},
+//				Headers: tse.CngwRouteHeaderArray{
+//					&tse.CngwRouteHeaderArgs{
+//						Key:   pulumi.String("req"),
+//						Value: pulumi.String("terraform"),
+//					},
+//				},
+//				PreserveHost: pulumi.Bool(false),
+//				Protocols: pulumi.StringArray{
+//					pulumi.String("http"),
+//					pulumi.String("https"),
+//				},
+//				RouteName: pulumi.String("terraform-route"),
+//				ServiceId: cngwService.ServiceId,
+//				StripPath: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type CngwRoute struct {
 	pulumi.CustomResourceState
 
@@ -171,7 +176,7 @@ func NewCngwRoute(ctx *pulumi.Context,
 	if args.ServiceId == nil {
 		return nil, errors.New("invalid value for required argument 'ServiceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CngwRoute
 	err := ctx.RegisterResource("tencentcloud:Tse/cngwRoute:CngwRoute", name, args, &resource, opts...)
 	if err != nil {
@@ -352,7 +357,7 @@ func (i *CngwRoute) ToCngwRouteOutputWithContext(ctx context.Context) CngwRouteO
 // CngwRouteArrayInput is an input type that accepts CngwRouteArray and CngwRouteArrayOutput values.
 // You can construct a concrete instance of `CngwRouteArrayInput` via:
 //
-//          CngwRouteArray{ CngwRouteArgs{...} }
+//	CngwRouteArray{ CngwRouteArgs{...} }
 type CngwRouteArrayInput interface {
 	pulumi.Input
 
@@ -377,7 +382,7 @@ func (i CngwRouteArray) ToCngwRouteArrayOutputWithContext(ctx context.Context) C
 // CngwRouteMapInput is an input type that accepts CngwRouteMap and CngwRouteMapOutput values.
 // You can construct a concrete instance of `CngwRouteMapInput` via:
 //
-//          CngwRouteMap{ "key": CngwRouteArgs{...} }
+//	CngwRouteMap{ "key": CngwRouteArgs{...} }
 type CngwRouteMapInput interface {
 	pulumi.Input
 

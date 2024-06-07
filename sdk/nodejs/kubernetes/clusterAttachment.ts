@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
@@ -38,13 +40,13 @@ import * as utilities from "../utilities";
  * const foo = new tencentcloud.instance.Instance("foo", {
  *     instanceName: "tf-auto-test-1-1",
  *     availabilityZone: availabilityZone,
- *     imageId: defaultInstance.then(defaultInstance => defaultInstance.images?[0]?.imageId),
+ *     imageId: defaultInstance.then(defaultInstance => defaultInstance.images?.[0]?.imageId),
  *     instanceType: defaultInstanceType,
  *     systemDiskType: "CLOUD_PREMIUM",
  *     systemDiskSize: 50,
  * });
  * const managedCluster = new tencentcloud.kubernetes.Cluster("managedCluster", {
- *     vpcId: vpc.then(vpc => vpc.instanceLists?[0]?.vpcId),
+ *     vpcId: vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId),
  *     clusterCidr: "10.1.0.0/16",
  *     clusterMaxPodNum: 32,
  *     clusterName: "keep",
@@ -59,7 +61,7 @@ import * as utilities from "../utilities";
  *         internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
  *         internetMaxBandwidthOut: 100,
  *         publicIpAssigned: true,
- *         subnetId: vpc.then(vpc => vpc.instanceLists?[0]?.subnetId),
+ *         subnetId: vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId),
  *         dataDisks: [{
  *             diskType: "CLOUD_PREMIUM",
  *             diskSize: 50,
@@ -84,6 +86,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ClusterAttachment extends pulumi.CustomResource {
     /**
@@ -195,7 +198,7 @@ export class ClusterAttachment extends pulumi.CustomResource {
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
             resourceInputs["keyIds"] = args ? args.keyIds : undefined;
             resourceInputs["labels"] = args ? args.labels : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["unschedulable"] = args ? args.unschedulable : undefined;
             resourceInputs["workerConfig"] = args ? args.workerConfig : undefined;
             resourceInputs["workerConfigOverrides"] = args ? args.workerConfigOverrides : undefined;
@@ -203,6 +206,8 @@ export class ClusterAttachment extends pulumi.CustomResource {
             resourceInputs["state"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(ClusterAttachment.__pulumiType, name, resourceInputs, opts);
     }
 }

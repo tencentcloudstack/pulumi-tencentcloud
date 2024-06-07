@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Wedata.Baseline("example", {
+ * const example = new tencentcloud.wedata.Baseline("example", {
  *     baselineCreateAlarmRuleRequest: {
  *         alarmLevel: 2,
  *         alarmRecipientIds: ["100028439226"],
@@ -51,13 +53,14 @@ import * as utilities from "../utilities";
  *     warningMargin: 30,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * wedata baseline can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Wedata/baseline:Baseline example 1927766435649077248#2
+ * $ pulumi import tencentcloud:Wedata/baseline:Baseline example 1927766435649077248#2
  * ```
  */
 export class Baseline extends pulumi.CustomResource {

@@ -15,100 +15,96 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// <summary>
         /// Use this data source to query detailed information of cls machines
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var @group = new Tencentcloud.Cls.MachineGroup("group", new()
         ///     {
-        ///         var @group = new Tencentcloud.Cls.MachineGroup("group", new Tencentcloud.Cls.MachineGroupArgs
+        ///         GroupName = "tf-describe-mg-test",
+        ///         ServiceLogging = true,
+        ///         AutoUpdate = true,
+        ///         UpdateEndTime = "19:05:00",
+        ///         UpdateStartTime = "17:05:00",
+        ///         MachineGroupType = new Tencentcloud.Cls.Inputs.MachineGroupMachineGroupTypeArgs
         ///         {
-        ///             GroupName = "tf-describe-mg-test",
-        ///             ServiceLogging = true,
-        ///             AutoUpdate = true,
-        ///             UpdateEndTime = "19:05:00",
-        ///             UpdateStartTime = "17:05:00",
-        ///             MachineGroupType = new Tencentcloud.Cls.Inputs.MachineGroupMachineGroupTypeArgs
+        ///             Type = "ip",
+        ///             Values = new[]
         ///             {
-        ///                 Type = "ip",
-        ///                 Values = 
-        ///                 {
-        ///                     "192.168.1.1",
-        ///                     "192.168.1.2",
-        ///                 },
+        ///                 "192.168.1.1",
+        ///                 "192.168.1.2",
         ///             },
-        ///         });
-        ///         var machines = Tencentcloud.Cls.GetMachines.Invoke(new Tencentcloud.Cls.GetMachinesInvokeArgs
-        ///         {
-        ///             GroupId = @group.Id,
-        ///         });
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var machines = Tencentcloud.Cls.GetMachines.Invoke(new()
+        ///     {
+        ///         GroupId = @group.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetMachinesResult> InvokeAsync(GetMachinesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMachinesResult>("tencentcloud:Cls/getMachines:getMachines", args ?? new GetMachinesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMachinesResult>("tencentcloud:Cls/getMachines:getMachines", args ?? new GetMachinesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cls machines
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var @group = new Tencentcloud.Cls.MachineGroup("group", new()
         ///     {
-        ///         var @group = new Tencentcloud.Cls.MachineGroup("group", new Tencentcloud.Cls.MachineGroupArgs
+        ///         GroupName = "tf-describe-mg-test",
+        ///         ServiceLogging = true,
+        ///         AutoUpdate = true,
+        ///         UpdateEndTime = "19:05:00",
+        ///         UpdateStartTime = "17:05:00",
+        ///         MachineGroupType = new Tencentcloud.Cls.Inputs.MachineGroupMachineGroupTypeArgs
         ///         {
-        ///             GroupName = "tf-describe-mg-test",
-        ///             ServiceLogging = true,
-        ///             AutoUpdate = true,
-        ///             UpdateEndTime = "19:05:00",
-        ///             UpdateStartTime = "17:05:00",
-        ///             MachineGroupType = new Tencentcloud.Cls.Inputs.MachineGroupMachineGroupTypeArgs
+        ///             Type = "ip",
+        ///             Values = new[]
         ///             {
-        ///                 Type = "ip",
-        ///                 Values = 
-        ///                 {
-        ///                     "192.168.1.1",
-        ///                     "192.168.1.2",
-        ///                 },
+        ///                 "192.168.1.1",
+        ///                 "192.168.1.2",
         ///             },
-        ///         });
-        ///         var machines = Tencentcloud.Cls.GetMachines.Invoke(new Tencentcloud.Cls.GetMachinesInvokeArgs
-        ///         {
-        ///             GroupId = @group.Id,
-        ///         });
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var machines = Tencentcloud.Cls.GetMachines.Invoke(new()
+        ///     {
+        ///         GroupId = @group.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetMachinesResult> Invoke(GetMachinesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMachinesResult>("tencentcloud:Cls/getMachines:getMachines", args ?? new GetMachinesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMachinesResult>("tencentcloud:Cls/getMachines:getMachines", args ?? new GetMachinesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetMachinesArgs : Pulumi.InvokeArgs
+    public sealed class GetMachinesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Group id.
@@ -125,9 +121,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public GetMachinesArgs()
         {
         }
+        public static new GetMachinesArgs Empty => new GetMachinesArgs();
     }
 
-    public sealed class GetMachinesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetMachinesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Group id.
@@ -144,6 +141,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public GetMachinesInvokeArgs()
         {
         }
+        public static new GetMachinesInvokeArgs Empty => new GetMachinesInvokeArgs();
     }
 
 

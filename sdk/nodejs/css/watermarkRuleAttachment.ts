@@ -8,11 +8,13 @@ import * as utilities from "../utilities";
  * Provides a resource to create a css watermarkRule
  *
  * ## Example Usage
+ *
  * ### Binding watermark rule with a css stream
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const examplePullStreamTask = new tencentcloud.css.PullStreamTask("examplePullStreamTask", {
  *     streamName: "tf_example_stream_name",
@@ -40,13 +42,14 @@ import * as utilities from "../utilities";
  *     templateId: exampleWatermark.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css watermark_rule_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/watermarkRuleAttachment:WatermarkRuleAttachment watermark_rule domain_name#app_name#stream_name#template_id
+ * $ pulumi import tencentcloud:Css/watermarkRuleAttachment:WatermarkRuleAttachment watermark_rule domain_name#app_name#stream_name#template_id
  * ```
  */
 export class WatermarkRuleAttachment extends pulumi.CustomResource {

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class ScenarioLoadLoadSpecConcurrencyArgs : Pulumi.ResourceArgs
+    public sealed class ScenarioLoadLoadSpecConcurrencyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Wait time for graceful termination of the task.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public ScenarioLoadLoadSpecConcurrencyArgs()
         {
         }
+        public static new ScenarioLoadLoadSpecConcurrencyArgs Empty => new ScenarioLoadLoadSpecConcurrencyArgs();
     }
 }

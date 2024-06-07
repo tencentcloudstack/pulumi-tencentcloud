@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// <summary>
         /// Use this data source to query detailed information of elasticsearch index list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeIndexList = Tencentcloud.Elasticsearch.GetDescribeIndexList.Invoke(new()
         ///     {
-        ///         var describeIndexList = Output.Create(Tencentcloud.Elasticsearch.GetDescribeIndexList.InvokeAsync(new Tencentcloud.Elasticsearch.GetDescribeIndexListArgs
-        ///         {
-        ///             IndexType = "normal",
-        ///             InstanceId = "es-nni6pm4s",
-        ///         }));
-        ///     }
+        ///         IndexType = "normal",
+        ///         InstanceId = "es-nni6pm4s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeIndexListResult> InvokeAsync(GetDescribeIndexListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeIndexListResult>("tencentcloud:Elasticsearch/getDescribeIndexList:getDescribeIndexList", args ?? new GetDescribeIndexListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeIndexListResult>("tencentcloud:Elasticsearch/getDescribeIndexList:getDescribeIndexList", args ?? new GetDescribeIndexListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of elasticsearch index list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeIndexList = Tencentcloud.Elasticsearch.GetDescribeIndexList.Invoke(new()
         ///     {
-        ///         var describeIndexList = Output.Create(Tencentcloud.Elasticsearch.GetDescribeIndexList.InvokeAsync(new Tencentcloud.Elasticsearch.GetDescribeIndexListArgs
-        ///         {
-        ///             IndexType = "normal",
-        ///             InstanceId = "es-nni6pm4s",
-        ///         }));
-        ///     }
+        ///         IndexType = "normal",
+        ///         InstanceId = "es-nni6pm4s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeIndexListResult> Invoke(GetDescribeIndexListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeIndexListResult>("tencentcloud:Elasticsearch/getDescribeIndexList:getDescribeIndexList", args ?? new GetDescribeIndexListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeIndexListResult>("tencentcloud:Elasticsearch/getDescribeIndexList:getDescribeIndexList", args ?? new GetDescribeIndexListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeIndexListArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeIndexListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Index name. If you fill in the blanks, get all indexes.
@@ -139,9 +133,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public GetDescribeIndexListArgs()
         {
         }
+        public static new GetDescribeIndexListArgs Empty => new GetDescribeIndexListArgs();
     }
 
-    public sealed class GetDescribeIndexListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeIndexListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Index name. If you fill in the blanks, get all indexes.
@@ -206,6 +201,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public GetDescribeIndexListInvokeArgs()
         {
         }
+        public static new GetDescribeIndexListInvokeArgs Empty => new GetDescribeIndexListInvokeArgs();
     }
 
 

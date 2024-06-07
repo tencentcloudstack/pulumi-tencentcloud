@@ -2,46 +2,50 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of waf attackLogHistogram
  *
  * ## Example Usage
+ *
  * ### Obtain the specified domain name log information
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getAttackLogHistogram({
+ * const example = tencentcloud.Waf.getAttackLogHistogram({
  *     domain: "domain.com",
  *     endTime: "2023-09-29 00:00:00",
  *     queryString: "method:GET",
  *     startTime: "2023-09-01 00:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Obtain all domain name log information
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getAttackLogHistogram({
+ * const example = tencentcloud.Waf.getAttackLogHistogram({
  *     domain: "all",
  *     endTime: "2023-09-29 00:00:00",
  *     queryString: "method:GET",
  *     startTime: "2023-09-01 00:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAttackLogHistogram(args: GetAttackLogHistogramArgs, opts?: pulumi.InvokeOptions): Promise<GetAttackLogHistogramResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Waf/getAttackLogHistogram:getAttackLogHistogram", {
         "domain": args.domain,
         "endTime": args.endTime,
@@ -103,9 +107,45 @@ export interface GetAttackLogHistogramResult {
      */
     readonly totalCount: number;
 }
-
+/**
+ * Use this data source to query detailed information of waf attackLogHistogram
+ *
+ * ## Example Usage
+ *
+ * ### Obtain the specified domain name log information
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getAttackLogHistogram({
+ *     domain: "domain.com",
+ *     endTime: "2023-09-29 00:00:00",
+ *     queryString: "method:GET",
+ *     startTime: "2023-09-01 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Obtain all domain name log information
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getAttackLogHistogram({
+ *     domain: "all",
+ *     endTime: "2023-09-29 00:00:00",
+ *     queryString: "method:GET",
+ *     startTime: "2023-09-01 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAttackLogHistogramOutput(args: GetAttackLogHistogramOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAttackLogHistogramResult> {
-    return pulumi.output(args).apply(a => getAttackLogHistogram(a, opts))
+    return pulumi.output(args).apply((a: any) => getAttackLogHistogram(a, opts))
 }
 
 /**

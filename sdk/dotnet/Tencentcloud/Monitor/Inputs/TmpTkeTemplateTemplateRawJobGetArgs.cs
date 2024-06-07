@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpTkeTemplateTemplateRawJobGetArgs : Pulumi.ResourceArgs
+    public sealed class TmpTkeTemplateTemplateRawJobGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Config.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public TmpTkeTemplateTemplateRawJobGetArgs()
         {
         }
+        public static new TmpTkeTemplateTemplateRawJobGetArgs Empty => new TmpTkeTemplateTemplateRawJobGetArgs();
     }
 }

@@ -18,124 +18,132 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// &gt; **NOTE:** The value of parameter `parameters` can be used with tencentcloud.Mysql.getParameterList to obtain.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a single node instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "cdb",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "mysql test",
-    ///         });
-    ///         var example = new Tencentcloud.Mysql.Instance("example", new Tencentcloud.Mysql.InstanceArgs
-    ///         {
-    ///             InternetService = 1,
-    ///             EngineVersion = "5.7",
-    ///             ChargeType = "POSTPAID",
-    ///             RootPassword = "PassWord123",
-    ///             SlaveDeployMode = 0,
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///             SlaveSyncMode = 1,
-    ///             InstanceName = "tf-example-mysql",
-    ///             MemSize = 4000,
-    ///             VolumeSize = 200,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             IntranetPort = 3306,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 securityGroup.Id,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "name", "test" },
-    ///             },
-    ///             Parameters = 
-    ///             {
-    ///                 { "character_set_server", "utf8" },
-    ///                 { "max_connections", "1000" },
-    ///             },
-    ///         });
-    ///     }
+    ///         Product = "cdb",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    ///     {
+    ///         Description = "mysql test",
+    ///     });
+    /// 
+    ///     var example = new Tencentcloud.Mysql.Instance("example", new()
+    ///     {
+    ///         InternetService = 1,
+    ///         EngineVersion = "5.7",
+    ///         ChargeType = "POSTPAID",
+    ///         RootPassword = "PassWord123",
+    ///         SlaveDeployMode = 0,
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         SlaveSyncMode = 1,
+    ///         InstanceName = "tf-example-mysql",
+    ///         MemSize = 4000,
+    ///         VolumeSize = 200,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         IntranetPort = 3306,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             securityGroup.Id,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "name", "test" },
+    ///         },
+    ///         Parameters = 
+    ///         {
+    ///             { "character_set_server", "utf8" },
+    ///             { "max_connections", "1000" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a double node instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Mysql.Instance("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Mysql.Instance("example", new Tencentcloud.Mysql.InstanceArgs
+    ///         InternetService = 1,
+    ///         EngineVersion = "5.7",
+    ///         ChargeType = "POSTPAID",
+    ///         RootPassword = "PassWord123",
+    ///         SlaveDeployMode = 1,
+    ///         AvailabilityZone = data.Tencentcloud_availability_zones_by_product.Zones.Zones[0].Name,
+    ///         FirstSlaveZone = data.Tencentcloud_availability_zones_by_product.Zones.Zones[1].Name,
+    ///         SlaveSyncMode = 1,
+    ///         InstanceName = "tf-example-mysql",
+    ///         MemSize = 4000,
+    ///         VolumeSize = 200,
+    ///         VpcId = tencentcloud_vpc.Vpc.Id,
+    ///         SubnetId = tencentcloud_subnet.Subnet.Id,
+    ///         IntranetPort = 3306,
+    ///         SecurityGroups = new[]
     ///         {
-    ///             InternetService = 1,
-    ///             EngineVersion = "5.7",
-    ///             ChargeType = "POSTPAID",
-    ///             RootPassword = "PassWord123",
-    ///             SlaveDeployMode = 1,
-    ///             AvailabilityZone = data.Tencentcloud_availability_zones_by_product.Zones.Zones[0].Name,
-    ///             FirstSlaveZone = data.Tencentcloud_availability_zones_by_product.Zones.Zones[1].Name,
-    ///             SlaveSyncMode = 1,
-    ///             InstanceName = "tf-example-mysql",
-    ///             MemSize = 4000,
-    ///             VolumeSize = 200,
-    ///             VpcId = tencentcloud_vpc.Vpc.Id,
-    ///             SubnetId = tencentcloud_subnet.Subnet.Id,
-    ///             IntranetPort = 3306,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 tencentcloud_security_group.Security_group.Id,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "name", "test" },
-    ///             },
-    ///             Parameters = 
-    ///             {
-    ///                 { "character_set_server", "utf8" },
-    ///                 { "max_connections", "1000" },
-    ///             },
-    ///         });
-    ///     }
+    ///             tencentcloud_security_group.Security_group.Id,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "name", "test" },
+    ///         },
+    ///         Parameters = 
+    ///         {
+    ///             { "character_set_server", "utf8" },
+    ///             { "max_connections", "1000" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// MySQL instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678
+    /// $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Auto renew flag. NOTES: Only supported prepaid instance.
@@ -389,6 +397,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "rootPassword",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -410,7 +422,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Auto renew flag. NOTES: Only supported prepaid instance.
@@ -538,11 +550,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         [Input("projectId")]
         public Input<int>? ProjectId { get; set; }
 
+        [Input("rootPassword")]
+        private Input<string>? _rootPassword;
+
         /// <summary>
         /// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         /// </summary>
-        [Input("rootPassword")]
-        public Input<string>? RootPassword { get; set; }
+        public Input<string>? RootPassword
+        {
+            get => _rootPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _rootPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Zone information about second slave instance.
@@ -619,9 +641,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Auto renew flag. NOTES: Only supported prepaid instance.
@@ -779,11 +802,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         [Input("projectId")]
         public Input<int>? ProjectId { get; set; }
 
+        [Input("rootPassword")]
+        private Input<string>? _rootPassword;
+
         /// <summary>
         /// Password of root account. This parameter can be specified when you purchase master instances, but it should be ignored when you purchase read-only instances or disaster recovery instances.
         /// </summary>
-        [Input("rootPassword")]
-        public Input<string>? RootPassword { get; set; }
+        public Input<string>? RootPassword
+        {
+            get => _rootPassword;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _rootPassword = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Zone information about second slave instance.
@@ -872,5 +905,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

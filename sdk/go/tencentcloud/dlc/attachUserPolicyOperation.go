@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type AttachUserPolicyOperation struct {
@@ -30,7 +31,7 @@ func NewAttachUserPolicyOperation(ctx *pulumi.Context,
 	if args.UserId == nil {
 		return nil, errors.New("invalid value for required argument 'UserId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AttachUserPolicyOperation
 	err := ctx.RegisterResource("tencentcloud:Dlc/attachUserPolicyOperation:AttachUserPolicyOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -111,7 +112,7 @@ func (i *AttachUserPolicyOperation) ToAttachUserPolicyOperationOutputWithContext
 // AttachUserPolicyOperationArrayInput is an input type that accepts AttachUserPolicyOperationArray and AttachUserPolicyOperationArrayOutput values.
 // You can construct a concrete instance of `AttachUserPolicyOperationArrayInput` via:
 //
-//          AttachUserPolicyOperationArray{ AttachUserPolicyOperationArgs{...} }
+//	AttachUserPolicyOperationArray{ AttachUserPolicyOperationArgs{...} }
 type AttachUserPolicyOperationArrayInput interface {
 	pulumi.Input
 
@@ -136,7 +137,7 @@ func (i AttachUserPolicyOperationArray) ToAttachUserPolicyOperationArrayOutputWi
 // AttachUserPolicyOperationMapInput is an input type that accepts AttachUserPolicyOperationMap and AttachUserPolicyOperationMapOutput values.
 // You can construct a concrete instance of `AttachUserPolicyOperationMapInput` via:
 //
-//          AttachUserPolicyOperationMap{ "key": AttachUserPolicyOperationArgs{...} }
+//	AttachUserPolicyOperationMap{ "key": AttachUserPolicyOperationArgs{...} }
 type AttachUserPolicyOperationMapInput interface {
 	pulumi.Input
 

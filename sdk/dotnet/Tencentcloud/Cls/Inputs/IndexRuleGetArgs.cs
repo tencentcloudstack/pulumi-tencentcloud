@@ -11,8 +11,14 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class IndexRuleGetArgs : Pulumi.ResourceArgs
+    public sealed class IndexRuleGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The key value index is automatically configured. If it is empty, it means that the function is not enabled.
+        /// </summary>
+        [Input("dynamicIndex")]
+        public Input<Inputs.IndexRuleDynamicIndexGetArgs>? DynamicIndex { get; set; }
+
         /// <summary>
         /// Full-Text index configuration.
         /// </summary>
@@ -34,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public IndexRuleGetArgs()
         {
         }
+        public static new IndexRuleGetArgs Empty => new IndexRuleGetArgs();
     }
 }

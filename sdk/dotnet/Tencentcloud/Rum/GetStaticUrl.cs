@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum static_url
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var staticUrl = Tencentcloud.Rum.GetStaticUrl.Invoke(new()
         ///     {
-        ///         var staticUrl = Output.Create(Tencentcloud.Rum.GetStaticUrl.InvokeAsync(new Tencentcloud.Rum.GetStaticUrlArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "pagepv",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "pagepv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetStaticUrlResult> InvokeAsync(GetStaticUrlArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetStaticUrlResult>("tencentcloud:Rum/getStaticUrl:getStaticUrl", args ?? new GetStaticUrlArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetStaticUrlResult>("tencentcloud:Rum/getStaticUrl:getStaticUrl", args ?? new GetStaticUrlArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum static_url
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var staticUrl = Tencentcloud.Rum.GetStaticUrl.Invoke(new()
         ///     {
-        ///         var staticUrl = Output.Create(Tencentcloud.Rum.GetStaticUrl.InvokeAsync(new Tencentcloud.Rum.GetStaticUrlArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "pagepv",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "pagepv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetStaticUrlResult> Invoke(GetStaticUrlInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetStaticUrlResult>("tencentcloud:Rum/getStaticUrl:getStaticUrl", args ?? new GetStaticUrlInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetStaticUrlResult>("tencentcloud:Rum/getStaticUrl:getStaticUrl", args ?? new GetStaticUrlInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetStaticUrlArgs : Pulumi.InvokeArgs
+    public sealed class GetStaticUrlArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -227,9 +221,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetStaticUrlArgs()
         {
         }
+        public static new GetStaticUrlArgs Empty => new GetStaticUrlArgs();
     }
 
-    public sealed class GetStaticUrlInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetStaticUrlInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -378,6 +373,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetStaticUrlInvokeArgs()
         {
         }
+        public static new GetStaticUrlInvokeArgs Empty => new GetStaticUrlInvokeArgs();
     }
 
 

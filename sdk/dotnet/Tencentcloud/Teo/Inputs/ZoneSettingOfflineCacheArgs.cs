@@ -11,10 +11,10 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneSettingOfflineCacheArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingOfflineCacheArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether to enable offline cache.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Whether to enable offline cache.
         /// </summary>
         [Input("switch", required: true)]
         public Input<string> Switch { get; set; } = null!;
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneSettingOfflineCacheArgs()
         {
         }
+        public static new ZoneSettingOfflineCacheArgs Empty => new ZoneSettingOfflineCacheArgs();
     }
 }

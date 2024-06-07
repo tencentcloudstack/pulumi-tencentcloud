@@ -8,58 +8,63 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query API gateway IP strategy.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
-// 			ServiceName: pulumi.String("ck"),
-// 			Protocol:    pulumi.String("http&https"),
-// 			ServiceDesc: pulumi.String("your nice service"),
-// 			NetTypes: pulumi.StringArray{
-// 				pulumi.String("INNER"),
-// 				pulumi.String("OUTER"),
-// 			},
-// 			IpVersion: pulumi.String("IPv4"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		test, err := ApiGateway.NewIpStrategy(ctx, "test", &ApiGateway.IpStrategyArgs{
-// 			ServiceId:    service.ID(),
-// 			StrategyName: pulumi.String("tf_test"),
-// 			StrategyType: pulumi.String("BLACK"),
-// 			StrategyData: pulumi.String("9.9.9.9"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = ApiGateway.GetIpStrategiesOutput(ctx, apigateway.GetIpStrategiesOutputArgs{
-// 			ServiceId: test.ServiceId,
-// 		}, nil)
-// 		_ = ApiGateway.GetIpStrategiesOutput(ctx, apigateway.GetIpStrategiesOutputArgs{
-// 			ServiceId:    test.ServiceId,
-// 			StrategyName: test.StrategyName,
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
+//				ServiceName: pulumi.String("ck"),
+//				Protocol:    pulumi.String("http&https"),
+//				ServiceDesc: pulumi.String("your nice service"),
+//				NetTypes: pulumi.StringArray{
+//					pulumi.String("INNER"),
+//					pulumi.String("OUTER"),
+//				},
+//				IpVersion: pulumi.String("IPv4"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			test, err := ApiGateway.NewIpStrategy(ctx, "test", &ApiGateway.IpStrategyArgs{
+//				ServiceId:    service.ID(),
+//				StrategyName: pulumi.String("tf_test"),
+//				StrategyType: pulumi.String("BLACK"),
+//				StrategyData: pulumi.String("9.9.9.9"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = ApiGateway.GetIpStrategiesOutput(ctx, apigateway.GetIpStrategiesOutputArgs{
+//				ServiceId: test.ServiceId,
+//			}, nil)
+//			_ = ApiGateway.GetIpStrategiesOutput(ctx, apigateway.GetIpStrategiesOutputArgs{
+//				ServiceId:    test.ServiceId,
+//				StrategyName: test.StrategyName,
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetIpStrategies(ctx *pulumi.Context, args *GetIpStrategiesArgs, opts ...pulumi.InvokeOption) (*GetIpStrategiesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetIpStrategiesResult
 	err := ctx.Invoke("tencentcloud:ApiGateway/getIpStrategies:getIpStrategies", args, &rv, opts...)
 	if err != nil {

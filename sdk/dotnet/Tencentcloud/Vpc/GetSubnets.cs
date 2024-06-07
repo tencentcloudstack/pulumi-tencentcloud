@@ -15,116 +15,118 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query vpc subnets information.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var config = new Config();
+        ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+        ///     var foo = new Tencentcloud.Vpc.Instance("foo", new()
         ///     {
-        ///         var config = new Config();
-        ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-        ///         var foo = new Tencentcloud.Vpc.Instance("foo", new Tencentcloud.Vpc.InstanceArgs
-        ///         {
-        ///             CidrBlock = "10.0.0.0/16",
-        ///         });
-        ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-        ///         {
-        ///             AvailabilityZone = availabilityZone,
-        ///             VpcId = foo.Id,
-        ///             CidrBlock = "10.0.20.0/28",
-        ///             IsMulticast = false,
-        ///             Tags = 
-        ///             {
-        ///                 { "test", "test" },
-        ///             },
-        ///         });
-        ///         var idInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new Tencentcloud.Vpc.GetSubnetsInvokeArgs
-        ///         {
-        ///             SubnetId = subnet.Id,
-        ///         });
-        ///         var nameInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new Tencentcloud.Vpc.GetSubnetsInvokeArgs
-        ///         {
-        ///             Name = subnet.Name,
-        ///         });
-        ///         var tagsInstances = subnet.Tags.Apply(tags =&gt; Tencentcloud.Vpc.GetSubnets.Invoke(new Tencentcloud.Vpc.GetSubnetsInvokeArgs
-        ///         {
-        ///             Tags = tags,
-        ///         }));
-        ///     }
+        ///         CidrBlock = "10.0.0.0/16",
+        ///     });
         /// 
-        /// }
+        ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+        ///     {
+        ///         AvailabilityZone = availabilityZone,
+        ///         VpcId = foo.Id,
+        ///         CidrBlock = "10.0.20.0/28",
+        ///         IsMulticast = false,
+        ///         Tags = 
+        ///         {
+        ///             { "test", "test" },
+        ///         },
+        ///     });
+        /// 
+        ///     var idInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+        ///     {
+        ///         SubnetId = subnet.Id,
+        ///     });
+        /// 
+        ///     var nameInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+        ///     {
+        ///         Name = subnet.Name,
+        ///     });
+        /// 
+        ///     var tagsInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+        ///     {
+        ///         Tags = subnet.Tags,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSubnetsResult> InvokeAsync(GetSubnetsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSubnetsResult>("tencentcloud:Vpc/getSubnets:getSubnets", args ?? new GetSubnetsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSubnetsResult>("tencentcloud:Vpc/getSubnets:getSubnets", args ?? new GetSubnetsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query vpc subnets information.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var config = new Config();
+        ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+        ///     var foo = new Tencentcloud.Vpc.Instance("foo", new()
         ///     {
-        ///         var config = new Config();
-        ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-        ///         var foo = new Tencentcloud.Vpc.Instance("foo", new Tencentcloud.Vpc.InstanceArgs
-        ///         {
-        ///             CidrBlock = "10.0.0.0/16",
-        ///         });
-        ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-        ///         {
-        ///             AvailabilityZone = availabilityZone,
-        ///             VpcId = foo.Id,
-        ///             CidrBlock = "10.0.20.0/28",
-        ///             IsMulticast = false,
-        ///             Tags = 
-        ///             {
-        ///                 { "test", "test" },
-        ///             },
-        ///         });
-        ///         var idInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new Tencentcloud.Vpc.GetSubnetsInvokeArgs
-        ///         {
-        ///             SubnetId = subnet.Id,
-        ///         });
-        ///         var nameInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new Tencentcloud.Vpc.GetSubnetsInvokeArgs
-        ///         {
-        ///             Name = subnet.Name,
-        ///         });
-        ///         var tagsInstances = subnet.Tags.Apply(tags =&gt; Tencentcloud.Vpc.GetSubnets.Invoke(new Tencentcloud.Vpc.GetSubnetsInvokeArgs
-        ///         {
-        ///             Tags = tags,
-        ///         }));
-        ///     }
+        ///         CidrBlock = "10.0.0.0/16",
+        ///     });
         /// 
-        /// }
+        ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+        ///     {
+        ///         AvailabilityZone = availabilityZone,
+        ///         VpcId = foo.Id,
+        ///         CidrBlock = "10.0.20.0/28",
+        ///         IsMulticast = false,
+        ///         Tags = 
+        ///         {
+        ///             { "test", "test" },
+        ///         },
+        ///     });
+        /// 
+        ///     var idInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+        ///     {
+        ///         SubnetId = subnet.Id,
+        ///     });
+        /// 
+        ///     var nameInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+        ///     {
+        ///         Name = subnet.Name,
+        ///     });
+        /// 
+        ///     var tagsInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+        ///     {
+        ///         Tags = subnet.Tags,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSubnetsResult> Invoke(GetSubnetsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSubnetsResult>("tencentcloud:Vpc/getSubnets:getSubnets", args ?? new GetSubnetsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSubnetsResult>("tencentcloud:Vpc/getSubnets:getSubnets", args ?? new GetSubnetsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSubnetsArgs : Pulumi.InvokeArgs
+    public sealed class GetSubnetsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Zone of the subnet to be queried.
@@ -195,9 +197,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetSubnetsArgs()
         {
         }
+        public static new GetSubnetsArgs Empty => new GetSubnetsArgs();
     }
 
-    public sealed class GetSubnetsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSubnetsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Zone of the subnet to be queried.
@@ -268,6 +271,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetSubnetsInvokeArgs()
         {
         }
+        public static new GetSubnetsInvokeArgs Empty => new GetSubnetsInvokeArgs();
     }
 
 

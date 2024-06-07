@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class EventConnectorConnectionDescriptionGetArgs : Pulumi.ResourceArgs
+    public sealed class EventConnectorConnectionDescriptionGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// apigw parameter,Note: This field may return null, indicating that no valid value can be obtained.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
         public EventConnectorConnectionDescriptionGetArgs()
         {
         }
+        public static new EventConnectorConnectionDescriptionGetArgs Empty => new EventConnectorConnectionDescriptionGetArgs();
     }
 }

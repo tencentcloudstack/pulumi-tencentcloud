@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
 {
 
-    public sealed class ConfigInstanceParamParamListGetArgs : Pulumi.ResourceArgs
+    public sealed class ConfigInstanceParamParamListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Parameter value.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
         public ConfigInstanceParamParamListGetArgs()
         {
         }
+        public static new ConfigInstanceParamParamListGetArgs Empty => new ConfigInstanceParamParamListGetArgs();
     }
 }

@@ -8,52 +8,57 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dts syncJobs
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		job, err := Dts.NewSyncJob(ctx, "job", &Dts.SyncJobArgs{
-// 			JobName:         pulumi.String("tf_dts_test"),
-// 			PayMode:         pulumi.String("PostPay"),
-// 			SrcDatabaseType: pulumi.String("mysql"),
-// 			SrcRegion:       pulumi.String("ap-guangzhou"),
-// 			DstDatabaseType: pulumi.String("cynosdbmysql"),
-// 			DstRegion:       pulumi.String("ap-guangzhou"),
-// 			Tags: dts.SyncJobTagArray{
-// 				&dts.SyncJobTagArgs{
-// 					TagKey:   pulumi.String("aaa"),
-// 					TagValue: pulumi.String("bbb"),
-// 				},
-// 			},
-// 			AutoRenew:     pulumi.Int(0),
-// 			InstanceClass: pulumi.String("micro"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Dts.GetSyncJobsOutput(ctx, dts.GetSyncJobsOutputArgs{
-// 			JobId:   job.ID(),
-// 			JobName: pulumi.String("tf_dts_test"),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			job, err := Dts.NewSyncJob(ctx, "job", &Dts.SyncJobArgs{
+//				JobName:         pulumi.String("tf_dts_test"),
+//				PayMode:         pulumi.String("PostPay"),
+//				SrcDatabaseType: pulumi.String("mysql"),
+//				SrcRegion:       pulumi.String("ap-guangzhou"),
+//				DstDatabaseType: pulumi.String("cynosdbmysql"),
+//				DstRegion:       pulumi.String("ap-guangzhou"),
+//				Tags: dts.SyncJobTagArray{
+//					&dts.SyncJobTagArgs{
+//						TagKey:   pulumi.String("aaa"),
+//						TagValue: pulumi.String("bbb"),
+//					},
+//				},
+//				AutoRenew:     pulumi.Int(0),
+//				InstanceClass: pulumi.String("micro"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Dts.GetSyncJobsOutput(ctx, dts.GetSyncJobsOutputArgs{
+//				JobId:   job.ID(),
+//				JobName: pulumi.String("tf_dts_test"),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSyncJobs(ctx *pulumi.Context, args *GetSyncJobsArgs, opts ...pulumi.InvokeOption) (*GetSyncJobsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSyncJobsResult
 	err := ctx.Invoke("tencentcloud:Dts/getSyncJobs:getSyncJobs", args, &rv, opts...)
 	if err != nil {

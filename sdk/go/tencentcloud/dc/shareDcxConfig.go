@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dc shareDcxConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dc.NewShareDcxConfig(ctx, "shareDcxConfig", &Dc.ShareDcxConfigArgs{
-// 			DirectConnectTunnelId: pulumi.String("dcx-4z49tnws"),
-// 			Enable:                pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dc.NewShareDcxConfig(ctx, "shareDcxConfig", &Dc.ShareDcxConfigArgs{
+//				DirectConnectTunnelId: pulumi.String("dcx-4z49tnws"),
+//				Enable:                pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dc share_dcx_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dc/shareDcxConfig:ShareDcxConfig share_dcx_config dcx_id
+// $ pulumi import tencentcloud:Dc/shareDcxConfig:ShareDcxConfig share_dcx_config dcx_id
 // ```
 type ShareDcxConfig struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewShareDcxConfig(ctx *pulumi.Context,
 	if args.Enable == nil {
 		return nil, errors.New("invalid value for required argument 'Enable'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ShareDcxConfig
 	err := ctx.RegisterResource("tencentcloud:Dc/shareDcxConfig:ShareDcxConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *ShareDcxConfig) ToShareDcxConfigOutputWithContext(ctx context.Context) 
 // ShareDcxConfigArrayInput is an input type that accepts ShareDcxConfigArray and ShareDcxConfigArrayOutput values.
 // You can construct a concrete instance of `ShareDcxConfigArrayInput` via:
 //
-//          ShareDcxConfigArray{ ShareDcxConfigArgs{...} }
+//	ShareDcxConfigArray{ ShareDcxConfigArgs{...} }
 type ShareDcxConfigArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i ShareDcxConfigArray) ToShareDcxConfigArrayOutputWithContext(ctx context.
 // ShareDcxConfigMapInput is an input type that accepts ShareDcxConfigMap and ShareDcxConfigMapOutput values.
 // You can construct a concrete instance of `ShareDcxConfigMapInput` via:
 //
-//          ShareDcxConfigMap{ "key": ShareDcxConfigArgs{...} }
+//	ShareDcxConfigMap{ "key": ShareDcxConfigArgs{...} }
 type ShareDcxConfigMapInput interface {
 	pulumi.Input
 

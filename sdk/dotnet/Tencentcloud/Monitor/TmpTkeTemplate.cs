@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Monitor.TmpTkeTemplate("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Monitor.TmpTkeTemplate("foo", new Tencentcloud.Monitor.TmpTkeTemplateArgs
+    ///         Template = new Tencentcloud.Monitor.Inputs.TmpTkeTemplateTemplateArgs
     ///         {
-    ///             Template = new Tencentcloud.Monitor.Inputs.TmpTkeTemplateTemplateArgs
+    ///             Name = "tf-template",
+    ///             Level = "cluster",
+    ///             Describe = "template",
+    ///             ServiceMonitors = new[]
     ///             {
-    ///                 Name = "tf-template",
-    ///                 Level = "cluster",
-    ///                 Describe = "template",
-    ///                 ServiceMonitors = 
+    ///                 new Tencentcloud.Monitor.Inputs.TmpTkeTemplateTemplateServiceMonitorArgs
     ///                 {
-    ///                     new Tencentcloud.Monitor.Inputs.TmpTkeTemplateTemplateServiceMonitorArgs
-    ///                     {
-    ///                         Name = "tf-ServiceMonitor",
-    ///                         Config = @"apiVersion: monitoring.coreos.com/v1
+    ///                     Name = "tf-ServiceMonitor",
+    ///                     Config = @"apiVersion: monitoring.coreos.com/v1
     /// kind: ServiceMonitor
     /// metadata:
     ///   name: example-service-monitor
@@ -58,14 +59,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     ///     tlsConfig:
     ///       insecureSkipVerify: true
     /// ",
-    ///                     },
     ///                 },
-    ///                 PodMonitors = 
+    ///             },
+    ///             PodMonitors = new[]
+    ///             {
+    ///                 new Tencentcloud.Monitor.Inputs.TmpTkeTemplateTemplatePodMonitorArgs
     ///                 {
-    ///                     new Tencentcloud.Monitor.Inputs.TmpTkeTemplateTemplatePodMonitorArgs
-    ///                     {
-    ///                         Name = "tf-PodMonitors",
-    ///                         Config = @"apiVersion: monitoring.coreos.com/v1
+    ///                     Name = "tf-PodMonitors",
+    ///                     Config = @"apiVersion: monitoring.coreos.com/v1
     /// kind: PodMonitor
     /// metadata:
     ///   name: example-pod-monitor
@@ -88,11 +89,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     ///     tlsConfig:
     ///       insecureSkipVerify: true
     /// ",
-    ///                     },
-    ///                     new Tencentcloud.Monitor.Inputs.TmpTkeTemplateTemplatePodMonitorArgs
-    ///                     {
-    ///                         Name = "tf-RawJobs",
-    ///                         Config = @"scrape_configs:
+    ///                 },
+    ///                 new Tencentcloud.Monitor.Inputs.TmpTkeTemplateTemplatePodMonitorArgs
+    ///                 {
+    ///                     Name = "tf-RawJobs",
+    ///                     Config = @"scrape_configs:
     ///   - job_name: 'example-job'
     ///     scrape_interval: 30s
     ///     static_configs:
@@ -103,17 +104,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     ///     tls_config:
     ///       insecure_skip_verify: true
     /// ",
-    ///                     },
     ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpTkeTemplate:TmpTkeTemplate")]
-    public partial class TmpTkeTemplate : Pulumi.CustomResource
+    public partial class TmpTkeTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Template settings.
@@ -166,7 +167,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class TmpTkeTemplateArgs : Pulumi.ResourceArgs
+    public sealed class TmpTkeTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template settings.
@@ -177,9 +178,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpTkeTemplateArgs()
         {
         }
+        public static new TmpTkeTemplateArgs Empty => new TmpTkeTemplateArgs();
     }
 
-    public sealed class TmpTkeTemplateState : Pulumi.ResourceArgs
+    public sealed class TmpTkeTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template settings.
@@ -190,5 +192,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpTkeTemplateState()
         {
         }
+        public static new TmpTkeTemplateState Empty => new TmpTkeTemplateState();
     }
 }

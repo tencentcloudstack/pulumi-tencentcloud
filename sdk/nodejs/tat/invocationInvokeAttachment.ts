@@ -9,28 +9,29 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const invocationInvokeAttachment = new tencentcloud.Tat.InvocationInvokeAttachment("invocation_invoke_attachment", {
+ * const invocationInvokeAttachment = new tencentcloud.tat.InvocationInvokeAttachment("invocationInvokeAttachment", {
  *     commandId: "cmd-rxbs7f5z",
  *     instanceId: "ins-881b1c8w",
  *     outputCosBucketUrl: "https://BucketName-123454321.cos.ap-beijing.myqcloud.com",
  *     outputCosKeyPrefix: "log",
  *     timeout: 100,
- *     // parameters = "{\"varA\": \"222\"}"
  *     username: "root",
  *     workingDirectory: "/root",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tat invocation can be imported using the invocation_id#instance_id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tat/invocationInvokeAttachment:InvocationInvokeAttachment invocation_invoke_attachment inv-mhs6ca8z#ins-881b1c8w
+ * $ pulumi import tencentcloud:Tat/invocationInvokeAttachment:InvocationInvokeAttachment invocation_invoke_attachment inv-mhs6ca8z#ins-881b1c8w
  * ```
  */
 export class InvocationInvokeAttachment extends pulumi.CustomResource {

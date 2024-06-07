@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// Provides a resource for bind receivers to a policy group resource.
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/bindingReceiver:BindingReceiver")]
-    public partial class BindingReceiver : Pulumi.CustomResource
+    public partial class BindingReceiver : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Policy group ID for binding receivers.
@@ -73,7 +73,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class BindingReceiverArgs : Pulumi.ResourceArgs
+    public sealed class BindingReceiverArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Policy group ID for binding receivers.
@@ -90,9 +90,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public BindingReceiverArgs()
         {
         }
+        public static new BindingReceiverArgs Empty => new BindingReceiverArgs();
     }
 
-    public sealed class BindingReceiverState : Pulumi.ResourceArgs
+    public sealed class BindingReceiverState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Policy group ID for binding receivers.
@@ -109,5 +110,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public BindingReceiverState()
         {
         }
+        public static new BindingReceiverState Empty => new BindingReceiverState();
     }
 }

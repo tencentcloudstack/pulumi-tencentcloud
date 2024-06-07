@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -11,11 +12,13 @@ import * as utilities from "../utilities";
  * > **NOTE:** After setting `uniqVpcId`, it cannot be modified.
  *
  * ## Example Usage
+ *
  * ### Shared Service
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const example = new tencentcloud.apigateway.Service("example", {
@@ -36,11 +39,14 @@ import * as utilities from "../utilities";
  *     testLimit: 500,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Exclusive Service
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.apigateway.Service("example", {
  *     serviceName: "tf-example",
@@ -61,13 +67,14 @@ import * as utilities from "../utilities";
  *     testLimit: 500,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * API gateway service can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:ApiGateway/service:Service service service-pg6ud8pa
+ * $ pulumi import tencentcloud:ApiGateway/service:Service service service-pg6ud8pa
  * ```
  */
 export class Service extends pulumi.CustomResource {

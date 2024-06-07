@@ -9,22 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instTables = pulumi.output(tencentcloud.Mysql.getInstTables({
+ * const instTables = tencentcloud.Mysql.getInstTables({
  *     database: "tf_ci_test",
  *     instanceId: "cdb-fitq5t9h",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstTables(args: GetInstTablesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstTablesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getInstTables:getInstTables", {
         "database": args.database,
         "instanceId": args.instanceId,
@@ -72,9 +71,25 @@ export interface GetInstTablesResult {
     readonly resultOutputFile?: string;
     readonly tableRegexp?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mysql instTables
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instTables = tencentcloud.Mysql.getInstTables({
+ *     database: "tf_ci_test",
+ *     instanceId: "cdb-fitq5t9h",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstTablesOutput(args: GetInstTablesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstTablesResult> {
-    return pulumi.output(args).apply(a => getInstTables(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstTables(a, opts))
 }
 
 /**

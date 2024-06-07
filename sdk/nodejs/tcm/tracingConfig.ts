@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -12,11 +13,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tracingConfig = new tencentcloud.Tcm.TracingConfig("tracing_config", {
+ * const tracingConfig = new tencentcloud.tcm.TracingConfig("tracingConfig", {
  *     apm: {
  *         enable: true,
  *         instanceId: "apm-xxx",
@@ -24,12 +26,12 @@ import * as utilities from "../utilities";
  *     },
  *     enable: true,
  *     meshId: "mesh-xxxxxxxx",
- *     sampling: 0,
+ *     sampling: 1,
  *     zipkin: {
  *         address: "10.10.10.10:9411",
  *     },
  * });
- * const deleteConfig = new tencentcloud.Tcm.TracingConfig("delete_config", {
+ * const deleteConfig = new tencentcloud.tcm.TracingConfig("deleteConfig", {
  *     apm: {
  *         enable: false,
  *     },
@@ -41,13 +43,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tcm tracing_config can be imported using the mesh_id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcm/tracingConfig:TracingConfig tracing_config mesh-rofjmxxx
+ * $ pulumi import tencentcloud:Tcm/tracingConfig:TracingConfig tracing_config mesh-rofjmxxx
  * ```
  */
 export class TracingConfig extends pulumi.CustomResource {

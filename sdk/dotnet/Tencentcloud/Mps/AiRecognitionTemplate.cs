@@ -15,62 +15,63 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var aiRecognitionTemplate = new Tencentcloud.Mps.AiRecognitionTemplate("aiRecognitionTemplate", new()
     ///     {
-    ///         var aiRecognitionTemplate = new Tencentcloud.Mps.AiRecognitionTemplate("aiRecognitionTemplate", new Tencentcloud.Mps.AiRecognitionTemplateArgs
+    ///         AsrFullTextConfigure = new Tencentcloud.Mps.Inputs.AiRecognitionTemplateAsrFullTextConfigureArgs
     ///         {
-    ///             AsrFullTextConfigure = new Tencentcloud.Mps.Inputs.AiRecognitionTemplateAsrFullTextConfigureArgs
+    ///             Switch = "OFF",
+    ///         },
+    ///         AsrWordsConfigure = new Tencentcloud.Mps.Inputs.AiRecognitionTemplateAsrWordsConfigureArgs
+    ///         {
+    ///             LabelSets = new() { },
+    ///             Switch = "OFF",
+    ///         },
+    ///         FaceConfigure = new Tencentcloud.Mps.Inputs.AiRecognitionTemplateFaceConfigureArgs
+    ///         {
+    ///             DefaultLibraryLabelSets = new[]
     ///             {
-    ///                 Switch = "OFF",
+    ///                 "entertainment",
+    ///                 "sport",
     ///             },
-    ///             AsrWordsConfigure = new Tencentcloud.Mps.Inputs.AiRecognitionTemplateAsrWordsConfigureArgs
-    ///             {
-    ///                 LabelSets = {},
-    ///                 Switch = "OFF",
-    ///             },
-    ///             FaceConfigure = new Tencentcloud.Mps.Inputs.AiRecognitionTemplateFaceConfigureArgs
-    ///             {
-    ///                 DefaultLibraryLabelSets = 
-    ///                 {
-    ///                     "entertainment",
-    ///                     "sport",
-    ///                 },
-    ///                 FaceLibrary = "All",
-    ///                 Score = 85,
-    ///                 Switch = "ON",
-    ///                 UserDefineLibraryLabelSets = {},
-    ///             },
-    ///             OcrFullTextConfigure = new Tencentcloud.Mps.Inputs.AiRecognitionTemplateOcrFullTextConfigureArgs
-    ///             {
-    ///                 Switch = "OFF",
-    ///             },
-    ///             OcrWordsConfigure = new Tencentcloud.Mps.Inputs.AiRecognitionTemplateOcrWordsConfigureArgs
-    ///             {
-    ///                 LabelSets = {},
-    ///                 Switch = "OFF",
-    ///             },
-    ///         });
-    ///     }
+    ///             FaceLibrary = "All",
+    ///             Score = 85,
+    ///             Switch = "ON",
+    ///             UserDefineLibraryLabelSets = new() { },
+    ///         },
+    ///         OcrFullTextConfigure = new Tencentcloud.Mps.Inputs.AiRecognitionTemplateOcrFullTextConfigureArgs
+    ///         {
+    ///             Switch = "OFF",
+    ///         },
+    ///         OcrWordsConfigure = new Tencentcloud.Mps.Inputs.AiRecognitionTemplateOcrWordsConfigureArgs
+    ///         {
+    ///             LabelSets = new() { },
+    ///             Switch = "OFF",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mps ai_recognition_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/aiRecognitionTemplate:AiRecognitionTemplate ai_recognition_template ai_recognition_template_id
+    /// $ pulumi import tencentcloud:Mps/aiRecognitionTemplate:AiRecognitionTemplate ai_recognition_template ai_recognition_template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/aiRecognitionTemplate:AiRecognitionTemplate")]
-    public partial class AiRecognitionTemplate : Pulumi.CustomResource
+    public partial class AiRecognitionTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Asr full text recognition control parameters.
@@ -159,7 +160,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class AiRecognitionTemplateArgs : Pulumi.ResourceArgs
+    public sealed class AiRecognitionTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Asr full text recognition control parameters.
@@ -206,9 +207,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public AiRecognitionTemplateArgs()
         {
         }
+        public static new AiRecognitionTemplateArgs Empty => new AiRecognitionTemplateArgs();
     }
 
-    public sealed class AiRecognitionTemplateState : Pulumi.ResourceArgs
+    public sealed class AiRecognitionTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Asr full text recognition control parameters.
@@ -255,5 +257,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public AiRecognitionTemplateState()
         {
         }
+        public static new AiRecognitionTemplateState Empty => new AiRecognitionTemplateState();
     }
 }

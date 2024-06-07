@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class ServerlessNodePoolTaintGetArgs : Pulumi.ResourceArgs
+    public sealed class ServerlessNodePoolTaintGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Effect of the taint. Valid values are: `NoSchedule`, `PreferNoSchedule`, `NoExecute`.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public ServerlessNodePoolTaintGetArgs()
         {
         }
+        public static new ServerlessNodePoolTaintGetArgs Empty => new ServerlessNodePoolTaintGetArgs();
     }
 }

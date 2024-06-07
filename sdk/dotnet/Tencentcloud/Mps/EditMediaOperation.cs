@@ -14,64 +14,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// Provides a resource to create a mps edit_media_operation
     /// 
     /// ## Example Usage
+    /// 
     /// ### Operation through COS
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var output = new Tencentcloud.Cos.Bucket("output", new()
     ///     {
-    ///         var output = new Tencentcloud.Cos.Bucket("output", new Tencentcloud.Cos.BucketArgs
-    ///         {
-    ///             Bucket = $"tf-bucket-mps-output-{local.App_id}",
-    ///         });
-    ///         var @object = Output.Create(Tencentcloud.Cos.GetBucketObject.InvokeAsync(new Tencentcloud.Cos.GetBucketObjectArgs
-    ///         {
-    ///             Bucket = $"keep-bucket-{local.App_id}",
-    ///             Key = "/mps-test/test.mov",
-    ///         }));
-    ///         var operation = new Tencentcloud.Mps.EditMediaOperation("operation", new Tencentcloud.Mps.EditMediaOperationArgs
-    ///         {
-    ///             FileInfos = 
-    ///             {
-    ///                 new Tencentcloud.Mps.Inputs.EditMediaOperationFileInfoArgs
-    ///                 {
-    ///                     InputInfo = new Tencentcloud.Mps.Inputs.EditMediaOperationFileInfoInputInfoArgs
-    ///                     {
-    ///                         Type = "COS",
-    ///                         CosInputInfo = new Tencentcloud.Mps.Inputs.EditMediaOperationFileInfoInputInfoCosInputInfoArgs
-    ///                         {
-    ///                             Bucket = @object.Apply(@object =&gt; @object.Bucket),
-    ///                             Region = "%s",
-    ///                             Object = @object.Apply(@object =&gt; @object.Key),
-    ///                         },
-    ///                     },
-    ///                     StartTimeOffset = 60,
-    ///                     EndTimeOffset = 120,
-    ///                 },
-    ///             },
-    ///             OutputStorage = new Tencentcloud.Mps.Inputs.EditMediaOperationOutputStorageArgs
-    ///             {
-    ///                 Type = "COS",
-    ///                 CosOutputStorage = new Tencentcloud.Mps.Inputs.EditMediaOperationOutputStorageCosOutputStorageArgs
-    ///                 {
-    ///                     Bucket = output.CosBucket,
-    ///                     Region = "%s",
-    ///                 },
-    ///             },
-    ///             OutputObjectPath = "/output",
-    ///         });
-    ///     }
+    ///         CosBucket = $"tf-bucket-mps-output-{local.App_id}",
+    ///     });
     /// 
-    /// }
+    ///     var @object = Tencentcloud.Cos.GetBucketObject.Invoke(new()
+    ///     {
+    ///         Bucket = $"keep-bucket-{local.App_id}",
+    ///         Key = "/mps-test/test.mov",
+    ///     });
+    /// 
+    ///     var operation = new Tencentcloud.Mps.EditMediaOperation("operation", new()
+    ///     {
+    ///         FileInfos = new[]
+    ///         {
+    ///             new Tencentcloud.Mps.Inputs.EditMediaOperationFileInfoArgs
+    ///             {
+    ///                 InputInfo = new Tencentcloud.Mps.Inputs.EditMediaOperationFileInfoInputInfoArgs
+    ///                 {
+    ///                     Type = "COS",
+    ///                     CosInputInfo = new Tencentcloud.Mps.Inputs.EditMediaOperationFileInfoInputInfoCosInputInfoArgs
+    ///                     {
+    ///                         Bucket = @object.Apply(@object =&gt; @object.Apply(getBucketObjectResult =&gt; getBucketObjectResult.Bucket)),
+    ///                         Region = "%s",
+    ///                         Object = @object.Apply(@object =&gt; @object.Apply(getBucketObjectResult =&gt; getBucketObjectResult.Key)),
+    ///                     },
+    ///                 },
+    ///                 StartTimeOffset = 60,
+    ///                 EndTimeOffset = 120,
+    ///             },
+    ///         },
+    ///         OutputStorage = new Tencentcloud.Mps.Inputs.EditMediaOperationOutputStorageArgs
+    ///         {
+    ///             Type = "COS",
+    ///             CosOutputStorage = new Tencentcloud.Mps.Inputs.EditMediaOperationOutputStorageCosOutputStorageArgs
+    ///             {
+    ///                 Bucket = output.CosBucket,
+    ///                 Region = "%s",
+    ///             },
+    ///         },
+    ///         OutputObjectPath = "/output",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/editMediaOperation:EditMediaOperation")]
-    public partial class EditMediaOperation : Pulumi.CustomResource
+    public partial class EditMediaOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Information of input video file.
@@ -166,7 +170,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class EditMediaOperationArgs : Pulumi.ResourceArgs
+    public sealed class EditMediaOperationArgs : global::Pulumi.ResourceArgs
     {
         [Input("fileInfos", required: true)]
         private InputList<Inputs.EditMediaOperationFileInfoArgs>? _fileInfos;
@@ -225,9 +229,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public EditMediaOperationArgs()
         {
         }
+        public static new EditMediaOperationArgs Empty => new EditMediaOperationArgs();
     }
 
-    public sealed class EditMediaOperationState : Pulumi.ResourceArgs
+    public sealed class EditMediaOperationState : global::Pulumi.ResourceArgs
     {
         [Input("fileInfos")]
         private InputList<Inputs.EditMediaOperationFileInfoGetArgs>? _fileInfos;
@@ -286,5 +291,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public EditMediaOperationState()
         {
         }
+        public static new EditMediaOperationState Empty => new EditMediaOperationState();
     }
 }

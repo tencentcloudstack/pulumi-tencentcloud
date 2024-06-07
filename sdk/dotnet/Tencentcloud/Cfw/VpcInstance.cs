@@ -14,98 +14,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// Provides a resource to create a cfw vpc_instance
     /// 
     /// ## Example Usage
-    /// ### If mode is 0
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var example = new Tencentcloud.Cfw.VpcInstance("example", new Tencentcloud.Cfw.VpcInstanceArgs
-    ///         {
-    ///             FwVpcCidr = "auto",
-    ///             Mode = 0,
-    ///             SwitchMode = 1,
-    ///             VpcFwInstances = 
-    ///             {
-    ///                 new Tencentcloud.Cfw.Inputs.VpcInstanceVpcFwInstanceArgs
-    ///                 {
-    ///                     FwDeploy = new Tencentcloud.Cfw.Inputs.VpcInstanceVpcFwInstanceFwDeployArgs
-    ///                     {
-    ///                         CrossAZone = 1,
-    ///                         DeployRegion = "ap-guangzhou",
-    ///                         Width = 1024,
-    ///                         ZoneSet = 
-    ///                         {
-    ///                             "ap-guangzhou-6",
-    ///                             "ap-guangzhou-7",
-    ///                         },
-    ///                     },
-    ///                     Name = "fw_ins_example",
-    ///                     VpcIds = 
-    ///                     {
-    ///                         "vpc-291vnoeu",
-    ///                         "vpc-39ixq9ci",
-    ///                     },
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// ### If mode is 1
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var example = new Tencentcloud.Cfw.VpcInstance("example", new Tencentcloud.Cfw.VpcInstanceArgs
-    ///         {
-    ///             CcnId = "ccn-peihfqo7",
-    ///             FwVpcCidr = "auto",
-    ///             Mode = 1,
-    ///             SwitchMode = 1,
-    ///             VpcFwInstances = 
-    ///             {
-    ///                 new Tencentcloud.Cfw.Inputs.VpcInstanceVpcFwInstanceArgs
-    ///                 {
-    ///                     FwDeploy = new Tencentcloud.Cfw.Inputs.VpcInstanceVpcFwInstanceFwDeployArgs
-    ///                     {
-    ///                         CrossAZone = 0,
-    ///                         DeployRegion = "ap-guangzhou",
-    ///                         Width = 1024,
-    ///                         ZoneSet = 
-    ///                         {
-    ///                             "ap-guangzhou-6",
-    ///                         },
-    ///                     },
-    ///                     Name = "fw_ins_example",
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
     /// 
     /// ## Import
     /// 
     /// cfw vpc_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfw/vpcInstance:VpcInstance example cfwg-4ee69507
+    /// $ pulumi import tencentcloud:Cfw/vpcInstance:VpcInstance example cfwg-4ee69507
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/vpcInstance:VpcInstance")]
-    public partial class VpcInstance : Pulumi.CustomResource
+    public partial class VpcInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cloud networking id, suitable for cloud networking mode.
@@ -188,7 +107,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         }
     }
 
-    public sealed class VpcInstanceArgs : Pulumi.ResourceArgs
+    public sealed class VpcInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cloud networking id, suitable for cloud networking mode.
@@ -235,9 +154,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public VpcInstanceArgs()
         {
         }
+        public static new VpcInstanceArgs Empty => new VpcInstanceArgs();
     }
 
-    public sealed class VpcInstanceState : Pulumi.ResourceArgs
+    public sealed class VpcInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cloud networking id, suitable for cloud networking mode.
@@ -284,5 +204,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public VpcInstanceState()
         {
         }
+        public static new VpcInstanceState Empty => new VpcInstanceState();
     }
 }

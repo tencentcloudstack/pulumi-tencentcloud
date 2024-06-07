@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a bi projectUserRole
@@ -17,41 +18,46 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Bi.NewProjectUserRole(ctx, "projectUserRole", &Bi.ProjectUserRoleArgs{
-// 			AreaCode:    pulumi.String("+86"),
-// 			Email:       pulumi.String("123456@qq.com"),
-// 			PhoneNumber: pulumi.String("13130001000"),
-// 			ProjectId:   pulumi.Int(11015030),
-// 			RoleIdLists: pulumi.IntArray{
-// 				pulumi.Int(10629453),
-// 			},
-// 			UserId:   pulumi.String("100024664626"),
-// 			UserName: pulumi.String("keep-cam-user"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Bi.NewProjectUserRole(ctx, "projectUserRole", &Bi.ProjectUserRoleArgs{
+//				AreaCode:    pulumi.String("+86"),
+//				Email:       pulumi.String("123456@qq.com"),
+//				PhoneNumber: pulumi.String("13130001000"),
+//				ProjectId:   pulumi.Int(11015030),
+//				RoleIdLists: pulumi.IntArray{
+//					pulumi.Int(10629453),
+//				},
+//				UserId:   pulumi.String("100024664626"),
+//				UserName: pulumi.String("keep-cam-user"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // bi project_user_role can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Bi/projectUserRole:ProjectUserRole project_user_role projectId#userId
+// $ pulumi import tencentcloud:Bi/projectUserRole:ProjectUserRole project_user_role projectId#userId
 // ```
 type ProjectUserRole struct {
 	pulumi.CustomResourceState
@@ -94,7 +100,7 @@ func NewProjectUserRole(ctx *pulumi.Context,
 	if args.UserName == nil {
 		return nil, errors.New("invalid value for required argument 'UserName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ProjectUserRole
 	err := ctx.RegisterResource("tencentcloud:Bi/projectUserRole:ProjectUserRole", name, args, &resource, opts...)
 	if err != nil {
@@ -215,7 +221,7 @@ func (i *ProjectUserRole) ToProjectUserRoleOutputWithContext(ctx context.Context
 // ProjectUserRoleArrayInput is an input type that accepts ProjectUserRoleArray and ProjectUserRoleArrayOutput values.
 // You can construct a concrete instance of `ProjectUserRoleArrayInput` via:
 //
-//          ProjectUserRoleArray{ ProjectUserRoleArgs{...} }
+//	ProjectUserRoleArray{ ProjectUserRoleArgs{...} }
 type ProjectUserRoleArrayInput interface {
 	pulumi.Input
 
@@ -240,7 +246,7 @@ func (i ProjectUserRoleArray) ToProjectUserRoleArrayOutputWithContext(ctx contex
 // ProjectUserRoleMapInput is an input type that accepts ProjectUserRoleMap and ProjectUserRoleMapOutput values.
 // You can construct a concrete instance of `ProjectUserRoleMapInput` via:
 //
-//          ProjectUserRoleMap{ "key": ProjectUserRoleArgs{...} }
+//	ProjectUserRoleMap{ "key": ProjectUserRoleArgs{...} }
 type ProjectUserRoleMapInput interface {
 	pulumi.Input
 

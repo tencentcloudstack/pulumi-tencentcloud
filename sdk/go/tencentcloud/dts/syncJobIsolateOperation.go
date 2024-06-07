@@ -7,34 +7,40 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dts syncJobIsolateOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewSyncJobIsolateOperation(ctx, "syncJobIsolateOperation", &Dts.SyncJobIsolateOperationArgs{
-// 			JobId: pulumi.String("sync-werwfs23"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewSyncJobIsolateOperation(ctx, "syncJobIsolateOperation", &Dts.SyncJobIsolateOperationArgs{
+//				JobId: pulumi.String("sync-werwfs23"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type SyncJobIsolateOperation struct {
 	pulumi.CustomResourceState
 
@@ -52,7 +58,7 @@ func NewSyncJobIsolateOperation(ctx *pulumi.Context,
 	if args.JobId == nil {
 		return nil, errors.New("invalid value for required argument 'JobId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SyncJobIsolateOperation
 	err := ctx.RegisterResource("tencentcloud:Dts/syncJobIsolateOperation:SyncJobIsolateOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -125,7 +131,7 @@ func (i *SyncJobIsolateOperation) ToSyncJobIsolateOperationOutputWithContext(ctx
 // SyncJobIsolateOperationArrayInput is an input type that accepts SyncJobIsolateOperationArray and SyncJobIsolateOperationArrayOutput values.
 // You can construct a concrete instance of `SyncJobIsolateOperationArrayInput` via:
 //
-//          SyncJobIsolateOperationArray{ SyncJobIsolateOperationArgs{...} }
+//	SyncJobIsolateOperationArray{ SyncJobIsolateOperationArgs{...} }
 type SyncJobIsolateOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +156,7 @@ func (i SyncJobIsolateOperationArray) ToSyncJobIsolateOperationArrayOutputWithCo
 // SyncJobIsolateOperationMapInput is an input type that accepts SyncJobIsolateOperationMap and SyncJobIsolateOperationMapOutput values.
 // You can construct a concrete instance of `SyncJobIsolateOperationMapInput` via:
 //
-//          SyncJobIsolateOperationMap{ "key": SyncJobIsolateOperationArgs{...} }
+//	SyncJobIsolateOperationMap{ "key": SyncJobIsolateOperationArgs{...} }
 type SyncJobIsolateOperationMapInput interface {
 	pulumi.Input
 

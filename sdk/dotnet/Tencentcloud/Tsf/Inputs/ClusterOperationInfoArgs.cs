@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class ClusterOperationInfoArgs : Pulumi.ResourceArgs
+    public sealed class ClusterOperationInfoArgs : global::Pulumi.ResourceArgs
     {
         [Input("addInstances")]
         private InputList<Inputs.ClusterOperationInfoAddInstanceArgs>? _addInstances;
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public ClusterOperationInfoArgs()
         {
         }
+        public static new ClusterOperationInfoArgs Empty => new ClusterOperationInfoArgs();
     }
 }

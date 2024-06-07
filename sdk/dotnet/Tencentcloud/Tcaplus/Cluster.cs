@@ -16,50 +16,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
     /// &gt; **NOTE:** TcaplusDB now only supports the following regions: `ap-shanghai,ap-hongkong,na-siliconvalley,ap-singapore,ap-seoul,ap-tokyo,eu-frankfurt, and na-ashburn`.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a new tcaplus cluster instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///     var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    ///         var vpc = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
-    ///         {
-    ///             IsDefault = true,
-    ///             AvailabilityZone = availabilityZone,
-    ///         }));
-    ///         var vpcId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.VpcId);
-    ///         var subnetId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.SubnetId);
-    ///         var example = new Tencentcloud.Tcaplus.Cluster("example", new Tencentcloud.Tcaplus.ClusterArgs
-    ///         {
-    ///             IdlType = "PROTO",
-    ///             ClusterName = "tf_example_tcaplus_cluster",
-    ///             VpcId = vpcId,
-    ///             SubnetId = subnetId,
-    ///             Password = "your_pw_123111",
-    ///             OldPasswordExpireLast = 3600,
-    ///         });
-    ///     }
+    ///         IsDefault = true,
+    ///         AvailabilityZone = availabilityZone,
+    ///     });
     /// 
-    /// }
+    ///     var vpcId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId);
+    /// 
+    ///     var subnetId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.SubnetId);
+    /// 
+    ///     var example = new Tencentcloud.Tcaplus.Cluster("example", new()
+    ///     {
+    ///         IdlType = "PROTO",
+    ///         ClusterName = "tf_example_tcaplus_cluster",
+    ///         VpcId = vpcId,
+    ///         SubnetId = subnetId,
+    ///         Password = "your_pw_123111",
+    ///         OldPasswordExpireLast = 3600,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcaplus cluster can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcaplus/cluster:Cluster example cluster_id
+    /// $ pulumi import tencentcloud:Tcaplus/cluster:Cluster example cluster_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcaplus/cluster:Cluster")]
-    public partial class Cluster : Pulumi.CustomResource
+    public partial class Cluster : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Access ID of the TcaplusDB cluster.For TcaplusDB SDK connect.
@@ -163,6 +168,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -184,7 +193,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         }
     }
 
-    public sealed class ClusterArgs : Pulumi.ResourceArgs
+    public sealed class ClusterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of the TcaplusDB cluster. Name length should be between 1 and 30.
@@ -204,11 +213,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         [Input("oldPasswordExpireLast")]
         public Input<int>? OldPasswordExpireLast { get; set; }
 
+        [Input("password", required: true)]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
         /// </summary>
-        [Input("password", required: true)]
-        public Input<string> Password { get; set; } = null!;
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Subnet id of the TcaplusDB cluster.
@@ -225,9 +244,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public ClusterArgs()
         {
         }
+        public static new ClusterArgs Empty => new ClusterArgs();
     }
 
-    public sealed class ClusterState : Pulumi.ResourceArgs
+    public sealed class ClusterState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Access ID of the TcaplusDB cluster.For TcaplusDB SDK connect.
@@ -283,11 +303,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         [Input("oldPasswordExpireTime")]
         public Input<string>? OldPasswordExpireTime { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password of the TcaplusDB cluster. Password length should be between 12 and 16. The password must be a *mix* of uppercase letters (A-Z), lowercase *letters* (a-z) and *numbers* (0-9).
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Password status of the TcaplusDB cluster. Valid values: `unmodifiable`, `modifiable`. `unmodifiable`. which means the password can not be changed in this moment; `modifiable`, which means the password can be changed in this moment.
@@ -310,5 +340,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public ClusterState()
         {
         }
+        public static new ClusterState Empty => new ClusterState();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,9 +11,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooEventBus = new tencentcloud.eb.EventBus("fooEventBus", {
  *     eventBusName: "tf-event_bus",
@@ -87,13 +89,14 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * eb eb_transform can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Eb/eventTransform:EventTransform eb_transform eb_transform_id
+ * $ pulumi import tencentcloud:Eb/eventTransform:EventTransform eb_transform eb_transform_id
  * ```
  */
 export class EventTransform extends pulumi.CustomResource {

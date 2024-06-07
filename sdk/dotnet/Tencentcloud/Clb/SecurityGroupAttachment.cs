@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var securityGroupAttachment = new Tencentcloud.Clb.SecurityGroupAttachment("securityGroupAttachment", new()
     ///     {
-    ///         var securityGroupAttachment = new Tencentcloud.Clb.SecurityGroupAttachment("securityGroupAttachment", new Tencentcloud.Clb.SecurityGroupAttachmentArgs
-    ///         {
-    ///             LoadBalancerIds = "lb-5dnrkgry",
-    ///             SecurityGroup = "sg-ijato2x1",
-    ///         });
-    ///     }
+    ///         LoadBalancerIds = "lb-5dnrkgry",
+    ///         SecurityGroup = "sg-ijato2x1",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// clb security_group_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clb/securityGroupAttachment:SecurityGroupAttachment security_group_attachment security_group_id#clb_id
+    /// $ pulumi import tencentcloud:Clb/securityGroupAttachment:SecurityGroupAttachment security_group_attachment security_group_id#clb_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/securityGroupAttachment:SecurityGroupAttachment")]
-    public partial class SecurityGroupAttachment : Pulumi.CustomResource
+    public partial class SecurityGroupAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Array of CLB instance IDs. Only support set one security group now.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class SecurityGroupAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class SecurityGroupAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Array of CLB instance IDs. Only support set one security group now.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public SecurityGroupAttachmentArgs()
         {
         }
+        public static new SecurityGroupAttachmentArgs Empty => new SecurityGroupAttachmentArgs();
     }
 
-    public sealed class SecurityGroupAttachmentState : Pulumi.ResourceArgs
+    public sealed class SecurityGroupAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Array of CLB instance IDs. Only support set one security group now.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public SecurityGroupAttachmentState()
         {
         }
+        public static new SecurityGroupAttachmentState Empty => new SecurityGroupAttachmentState();
     }
 }

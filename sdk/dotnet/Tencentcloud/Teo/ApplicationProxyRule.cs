@@ -15,48 +15,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var applicationProxyRule = new Tencentcloud.Teo.ApplicationProxyRule("applicationProxyRule", new()
     ///     {
-    ///         var applicationProxyRule = new Tencentcloud.Teo.ApplicationProxyRule("applicationProxyRule", new Tencentcloud.Teo.ApplicationProxyRuleArgs
+    ///         ForwardClientIp = "TOA",
+    ///         OriginPort = "8083",
+    ///         OriginType = "custom",
+    ///         OriginValues = new[]
     ///         {
-    ///             ForwardClientIp = "TOA",
-    ///             OriginPort = "8083",
-    ///             OriginType = "custom",
-    ///             OriginValues = 
-    ///             {
-    ///                 "127.0.0.1",
-    ///             },
-    ///             Ports = 
-    ///             {
-    ///                 "8083",
-    ///             },
-    ///             Proto = "TCP",
-    ///             ProxyId = "proxy-6972528a-373a-11ed-afca-52540044a456",
-    ///             SessionPersist = false,
-    ///             Status = "online",
-    ///             ZoneId = "zone-2983wizgxqvm",
-    ///         });
-    ///     }
+    ///             "127.0.0.1",
+    ///         },
+    ///         Ports = new[]
+    ///         {
+    ///             "8083",
+    ///         },
+    ///         Proto = "TCP",
+    ///         ProxyId = "proxy-6972528a-373a-11ed-afca-52540044a456",
+    ///         SessionPersist = false,
+    ///         Status = "online",
+    ///         ZoneId = "zone-2983wizgxqvm",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// teo application_proxy_rule can be imported using the zoneId#proxyId#ruleId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Teo/applicationProxyRule:ApplicationProxyRule application_proxy_rule zone-2983wizgxqvm#proxy-6972528a-373a-11ed-afca-52540044a456#rule-90b13bb4-373a-11ed-8794-525400eddfed
+    /// $ pulumi import tencentcloud:Teo/applicationProxyRule:ApplicationProxyRule application_proxy_rule zone-2983wizgxqvm#proxy-6972528a-373a-11ed-afca-52540044a456#rule-90b13bb4-373a-11ed-8794-525400eddfed
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/applicationProxyRule:ApplicationProxyRule")]
-    public partial class ApplicationProxyRule : Pulumi.CustomResource
+    public partial class ApplicationProxyRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
@@ -169,7 +170,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
     }
 
-    public sealed class ApplicationProxyRuleArgs : Pulumi.ResourceArgs
+    public sealed class ApplicationProxyRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
@@ -246,9 +247,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public ApplicationProxyRuleArgs()
         {
         }
+        public static new ApplicationProxyRuleArgs Empty => new ApplicationProxyRuleArgs();
     }
 
-    public sealed class ApplicationProxyRuleState : Pulumi.ResourceArgs
+    public sealed class ApplicationProxyRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Passes the client IP. Default value is `OFF`. When Proto is TCP, valid values: `TOA`: Pass the client IP via TOA; `PPV1`: Pass the client IP via Proxy Protocol V1; `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP. When Proto=UDP, valid values: `PPV2`: Pass the client IP via Proxy Protocol V2; `OFF`: Do not pass the client IP.
@@ -331,5 +333,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public ApplicationProxyRuleState()
         {
         }
+        public static new ApplicationProxyRuleState Empty => new ApplicationProxyRuleState();
     }
 }

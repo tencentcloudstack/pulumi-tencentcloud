@@ -7,55 +7,60 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cls machine group.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cls.NewMachineGroup(ctx, "group", &Cls.MachineGroupArgs{
-// 			GroupName: pulumi.String("group"),
-// 			MachineGroupType: &cls.MachineGroupMachineGroupTypeArgs{
-// 				Type: pulumi.String("ip"),
-// 				Values: pulumi.StringArray{
-// 					pulumi.String("192.168.1.1"),
-// 					pulumi.String("192.168.1.2"),
-// 				},
-// 			},
-// 			ServiceLogging: pulumi.Bool(true),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test1"),
-// 			},
-// 			UpdateEndTime:   pulumi.String("19:05:40"),
-// 			UpdateStartTime: pulumi.String("17:05:40"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cls.NewMachineGroup(ctx, "group", &Cls.MachineGroupArgs{
+//				GroupName: pulumi.String("group"),
+//				MachineGroupType: &cls.MachineGroupMachineGroupTypeArgs{
+//					Type: pulumi.String("ip"),
+//					Values: pulumi.StringArray{
+//						pulumi.String("192.168.1.1"),
+//						pulumi.String("192.168.1.2"),
+//					},
+//				},
+//				ServiceLogging: pulumi.Bool(true),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test1"),
+//				},
+//				UpdateEndTime:   pulumi.String("19:05:40"),
+//				UpdateStartTime: pulumi.String("17:05:40"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cls machine group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/machineGroup:MachineGroup group caf168e7-32cd-4ac6-bf89-1950a760e09c
+// $ pulumi import tencentcloud:Cls/machineGroup:MachineGroup group caf168e7-32cd-4ac6-bf89-1950a760e09c
 // ```
 type MachineGroup struct {
 	pulumi.CustomResourceState
@@ -89,7 +94,7 @@ func NewMachineGroup(ctx *pulumi.Context,
 	if args.MachineGroupType == nil {
 		return nil, errors.New("invalid value for required argument 'MachineGroupType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MachineGroup
 	err := ctx.RegisterResource("tencentcloud:Cls/machineGroup:MachineGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -210,7 +215,7 @@ func (i *MachineGroup) ToMachineGroupOutputWithContext(ctx context.Context) Mach
 // MachineGroupArrayInput is an input type that accepts MachineGroupArray and MachineGroupArrayOutput values.
 // You can construct a concrete instance of `MachineGroupArrayInput` via:
 //
-//          MachineGroupArray{ MachineGroupArgs{...} }
+//	MachineGroupArray{ MachineGroupArgs{...} }
 type MachineGroupArrayInput interface {
 	pulumi.Input
 
@@ -235,7 +240,7 @@ func (i MachineGroupArray) ToMachineGroupArrayOutputWithContext(ctx context.Cont
 // MachineGroupMapInput is an input type that accepts MachineGroupMap and MachineGroupMapOutput values.
 // You can construct a concrete instance of `MachineGroupMapInput` via:
 //
-//          MachineGroupMap{ "key": MachineGroupArgs{...} }
+//	MachineGroupMap{ "key": MachineGroupArgs{...} }
 type MachineGroupMapInput interface {
 	pulumi.Input
 

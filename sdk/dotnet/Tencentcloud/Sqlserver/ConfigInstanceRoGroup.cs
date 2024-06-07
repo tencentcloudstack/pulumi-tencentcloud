@@ -18,11 +18,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// sqlserver config_instance_ro_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup example mssql-ds1xhnt9#mssqlro-o6dv2ugx#0#0
+    /// $ pulumi import tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup example mssql-ds1xhnt9#mssqlro-o6dv2ugx#0#0
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/configInstanceRoGroup:ConfigInstanceRoGroup")]
-    public partial class ConfigInstanceRoGroup : Pulumi.CustomResource
+    public partial class ConfigInstanceRoGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// 0-user-defined weight (adjusted according to WeightPairs), 1-system automatically assigns weight (WeightPairs is invalid), the default is 0.
@@ -123,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         }
     }
 
-    public sealed class ConfigInstanceRoGroupArgs : Pulumi.ResourceArgs
+    public sealed class ConfigInstanceRoGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// 0-user-defined weight (adjusted according to WeightPairs), 1-system automatically assigns weight (WeightPairs is invalid), the default is 0.
@@ -188,9 +188,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public ConfigInstanceRoGroupArgs()
         {
         }
+        public static new ConfigInstanceRoGroupArgs Empty => new ConfigInstanceRoGroupArgs();
     }
 
-    public sealed class ConfigInstanceRoGroupState : Pulumi.ResourceArgs
+    public sealed class ConfigInstanceRoGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// 0-user-defined weight (adjusted according to WeightPairs), 1-system automatically assigns weight (WeightPairs is invalid), the default is 0.
@@ -255,5 +256,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public ConfigInstanceRoGroupState()
         {
         }
+        public static new ConfigInstanceRoGroupState Empty => new ConfigInstanceRoGroupState();
     }
 }

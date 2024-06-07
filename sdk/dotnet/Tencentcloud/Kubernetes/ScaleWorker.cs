@@ -19,114 +19,117 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///     var subnet = config.Get("subnet") ?? "subnet-pqfek0t8";
+    ///     var scaleInstanceType = config.Get("scaleInstanceType") ?? "S2.LARGE16";
+    ///     var testScale = new Tencentcloud.Kubernetes.ScaleWorker("testScale", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    ///         var subnet = config.Get("subnet") ?? "subnet-pqfek0t8";
-    ///         var scaleInstanceType = config.Get("scaleInstanceType") ?? "S2.LARGE16";
-    ///         var testScale = new Tencentcloud.Kubernetes.ScaleWorker("testScale", new Tencentcloud.Kubernetes.ScaleWorkerArgs
+    ///         ClusterId = "cls-godovr32",
+    ///         DesiredPodNum = 16,
+    ///         Labels = 
     ///         {
-    ///             ClusterId = "cls-godovr32",
-    ///             DesiredPodNum = 16,
-    ///             Labels = 
+    ///             { "test1", "test1" },
+    ///             { "test2", "test2" },
+    ///         },
+    ///         WorkerConfig = new Tencentcloud.Kubernetes.Inputs.ScaleWorkerWorkerConfigArgs
+    ///         {
+    ///             Count = 3,
+    ///             AvailabilityZone = availabilityZone,
+    ///             InstanceType = scaleInstanceType,
+    ///             SubnetId = subnet,
+    ///             SystemDiskType = "CLOUD_SSD",
+    ///             SystemDiskSize = 50,
+    ///             InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+    ///             InternetMaxBandwidthOut = 100,
+    ///             PublicIpAssigned = true,
+    ///             DataDisks = new[]
     ///             {
-    ///                 { "test1", "test1" },
-    ///                 { "test2", "test2" },
-    ///             },
-    ///             WorkerConfig = new Tencentcloud.Kubernetes.Inputs.ScaleWorkerWorkerConfigArgs
-    ///             {
-    ///                 Count = 3,
-    ///                 AvailabilityZone = availabilityZone,
-    ///                 InstanceType = scaleInstanceType,
-    ///                 SubnetId = subnet,
-    ///                 SystemDiskType = "CLOUD_SSD",
-    ///                 SystemDiskSize = 50,
-    ///                 InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
-    ///                 InternetMaxBandwidthOut = 100,
-    ///                 PublicIpAssigned = true,
-    ///                 DataDisks = 
+    ///                 new Tencentcloud.Kubernetes.Inputs.ScaleWorkerWorkerConfigDataDiskArgs
     ///                 {
-    ///                     new Tencentcloud.Kubernetes.Inputs.ScaleWorkerWorkerConfigDataDiskArgs
-    ///                     {
-    ///                         DiskType = "CLOUD_PREMIUM",
-    ///                         DiskSize = 50,
-    ///                     },
+    ///                     DiskType = "CLOUD_PREMIUM",
+    ///                     DiskSize = 50,
     ///                 },
-    ///                 EnhancedSecurityService = false,
-    ///                 EnhancedMonitorService = false,
-    ///                 UserData = "dGVzdA==",
-    ///                 Password = "AABBccdd1122",
     ///             },
-    ///         });
-    ///     }
+    ///             EnhancedSecurityService = false,
+    ///             EnhancedMonitorService = false,
+    ///             UserData = "dGVzdA==",
+    ///             Password = "AABBccdd1122",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Use Kubelet
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///     var subnet = config.Get("subnet") ?? "subnet-pqfek0t8";
+    ///     var scaleInstanceType = config.Get("scaleInstanceType") ?? "S2.LARGE16";
+    ///     var testScale = new Tencentcloud.Kubernetes.ScaleWorker("testScale", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    ///         var subnet = config.Get("subnet") ?? "subnet-pqfek0t8";
-    ///         var scaleInstanceType = config.Get("scaleInstanceType") ?? "S2.LARGE16";
-    ///         var testScale = new Tencentcloud.Kubernetes.ScaleWorker("testScale", new Tencentcloud.Kubernetes.ScaleWorkerArgs
+    ///         ClusterId = "cls-godovr32",
+    ///         ExtraArgs = new[]
     ///         {
-    ///             ClusterId = "cls-godovr32",
-    ///             ExtraArgs = 
+    ///             "root-dir=/var/lib/kubelet",
+    ///         },
+    ///         Labels = 
+    ///         {
+    ///             { "test1", "test1" },
+    ///             { "test2", "test2" },
+    ///         },
+    ///         WorkerConfig = new Tencentcloud.Kubernetes.Inputs.ScaleWorkerWorkerConfigArgs
+    ///         {
+    ///             Count = 3,
+    ///             AvailabilityZone = availabilityZone,
+    ///             InstanceType = scaleInstanceType,
+    ///             SubnetId = subnet,
+    ///             SystemDiskType = "CLOUD_SSD",
+    ///             SystemDiskSize = 50,
+    ///             InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+    ///             InternetMaxBandwidthOut = 100,
+    ///             PublicIpAssigned = true,
+    ///             DataDisks = new[]
     ///             {
-    ///                 "root-dir=/var/lib/kubelet",
-    ///             },
-    ///             Labels = 
-    ///             {
-    ///                 { "test1", "test1" },
-    ///                 { "test2", "test2" },
-    ///             },
-    ///             WorkerConfig = new Tencentcloud.Kubernetes.Inputs.ScaleWorkerWorkerConfigArgs
-    ///             {
-    ///                 Count = 3,
-    ///                 AvailabilityZone = availabilityZone,
-    ///                 InstanceType = scaleInstanceType,
-    ///                 SubnetId = subnet,
-    ///                 SystemDiskType = "CLOUD_SSD",
-    ///                 SystemDiskSize = 50,
-    ///                 InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
-    ///                 InternetMaxBandwidthOut = 100,
-    ///                 PublicIpAssigned = true,
-    ///                 DataDisks = 
+    ///                 new Tencentcloud.Kubernetes.Inputs.ScaleWorkerWorkerConfigDataDiskArgs
     ///                 {
-    ///                     new Tencentcloud.Kubernetes.Inputs.ScaleWorkerWorkerConfigDataDiskArgs
-    ///                     {
-    ///                         DiskType = "CLOUD_PREMIUM",
-    ///                         DiskSize = 50,
-    ///                     },
+    ///                     DiskType = "CLOUD_PREMIUM",
+    ///                     DiskSize = 50,
     ///                 },
-    ///                 EnhancedSecurityService = false,
-    ///                 EnhancedMonitorService = false,
-    ///                 UserData = "dGVzdA==",
-    ///                 Password = "AABBccdd1122",
     ///             },
-    ///         });
-    ///     }
+    ///             EnhancedSecurityService = false,
+    ///             EnhancedMonitorService = false,
+    ///             UserData = "dGVzdA==",
+    ///             Password = "AABBccdd1122",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/scaleWorker:ScaleWorker")]
-    public partial class ScaleWorker : Pulumi.CustomResource
+    public partial class ScaleWorker : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the cluster.
@@ -177,10 +180,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string?> MountTarget { get; private set; } = null!;
 
         /// <summary>
-        /// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+        /// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        /// </summary>
+        [Output("preStartUserScript")]
+        public Output<string?> PreStartUserScript { get; private set; } = null!;
+
+        /// <summary>
+        /// Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
         /// </summary>
         [Output("unschedulable")]
         public Output<int?> Unschedulable { get; private set; } = null!;
+
+        /// <summary>
+        /// Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
+        /// </summary>
+        [Output("userScript")]
+        public Output<string?> UserScript { get; private set; } = null!;
 
         /// <summary>
         /// Deploy the machine configuration information of the 'WORK' service, and create &lt;=20 units for common users.
@@ -239,7 +254,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         }
     }
 
-    public sealed class ScaleWorkerArgs : Pulumi.ResourceArgs
+    public sealed class ScaleWorkerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the cluster.
@@ -308,10 +323,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? MountTarget { get; set; }
 
         /// <summary>
-        /// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+        /// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        /// </summary>
+        [Input("preStartUserScript")]
+        public Input<string>? PreStartUserScript { get; set; }
+
+        /// <summary>
+        /// Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
         /// </summary>
         [Input("unschedulable")]
         public Input<int>? Unschedulable { get; set; }
+
+        /// <summary>
+        /// Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
+        /// </summary>
+        [Input("userScript")]
+        public Input<string>? UserScript { get; set; }
 
         /// <summary>
         /// Deploy the machine configuration information of the 'WORK' service, and create &lt;=20 units for common users.
@@ -322,9 +349,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public ScaleWorkerArgs()
         {
         }
+        public static new ScaleWorkerArgs Empty => new ScaleWorkerArgs();
     }
 
-    public sealed class ScaleWorkerState : Pulumi.ResourceArgs
+    public sealed class ScaleWorkerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the cluster.
@@ -393,10 +421,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? MountTarget { get; set; }
 
         /// <summary>
-        /// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+        /// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        /// </summary>
+        [Input("preStartUserScript")]
+        public Input<string>? PreStartUserScript { get; set; }
+
+        /// <summary>
+        /// Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
         /// </summary>
         [Input("unschedulable")]
         public Input<int>? Unschedulable { get; set; }
+
+        /// <summary>
+        /// Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
+        /// </summary>
+        [Input("userScript")]
+        public Input<string>? UserScript { get; set; }
 
         /// <summary>
         /// Deploy the machine configuration information of the 'WORK' service, and create &lt;=20 units for common users.
@@ -419,5 +459,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public ScaleWorkerState()
         {
         }
+        public static new ScaleWorkerState Empty => new ScaleWorkerState();
     }
 }

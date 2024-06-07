@@ -14,12 +14,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
     [OutputType]
     public sealed class GetDomainsDomainListRuleCachResult
     {
+        /// <summary>
+        /// Cache expiration time setting, the unit is second.
+        /// </summary>
         public readonly int CacheTime;
+        /// <summary>
+        /// Advanced cache expiration configuration.
+        /// </summary>
         public readonly string? CompareMaxAge;
         /// <summary>
         /// Follow the source station configuration switch.
         /// </summary>
         public readonly string FollowOriginSwitch;
+        /// <summary>
+        /// Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules.
+        /// </summary>
         public readonly string? IgnoreCacheControl;
         /// <summary>
         /// Ignore the Set-Cookie header of the origin site.

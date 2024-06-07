@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const listEntitiesForPolicy = pulumi.output(tencentcloud.Cam.getListEntitiesForPolicy({
+ * const listEntitiesForPolicy = tencentcloud.Cam.getListEntitiesForPolicy({
  *     entityFilter: "All",
  *     policyId: 1,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getListEntitiesForPolicy(args: GetListEntitiesForPolicyArgs, opts?: pulumi.InvokeOptions): Promise<GetListEntitiesForPolicyResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cam/getListEntitiesForPolicy:getListEntitiesForPolicy", {
         "entityFilter": args.entityFilter,
         "policyId": args.policyId,
@@ -73,9 +73,25 @@ export interface GetListEntitiesForPolicyResult {
     readonly resultOutputFile?: string;
     readonly rp?: number;
 }
-
+/**
+ * Use this data source to query detailed information of cam listEntitiesForPolicy
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const listEntitiesForPolicy = tencentcloud.Cam.getListEntitiesForPolicy({
+ *     entityFilter: "All",
+ *     policyId: 1,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getListEntitiesForPolicyOutput(args: GetListEntitiesForPolicyOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetListEntitiesForPolicyResult> {
-    return pulumi.output(args).apply(a => getListEntitiesForPolicy(a, opts))
+    return pulumi.output(args).apply((a: any) => getListEntitiesForPolicy(a, opts))
 }
 
 /**

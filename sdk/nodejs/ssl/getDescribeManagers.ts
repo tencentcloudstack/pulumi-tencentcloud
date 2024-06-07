@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeManagers = pulumi.output(tencentcloud.Ssl.getDescribeManagers({
+ * const describeManagers = tencentcloud.Ssl.getDescribeManagers({
  *     companyId: 11772,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeManagers(args: GetDescribeManagersArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeManagersResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ssl/getDescribeManagers:getDescribeManagers", {
         "companyId": args.companyId,
         "managerMail": args.managerMail,
@@ -90,9 +90,24 @@ export interface GetDescribeManagersResult {
      */
     readonly status?: string;
 }
-
+/**
+ * Use this data source to query detailed information of ssl describeManagers
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeManagers = tencentcloud.Ssl.getDescribeManagers({
+ *     companyId: 11772,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeManagersOutput(args: GetDescribeManagersOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeManagersResult> {
-    return pulumi.output(args).apply(a => getDescribeManagers(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeManagers(a, opts))
 }
 
 /**

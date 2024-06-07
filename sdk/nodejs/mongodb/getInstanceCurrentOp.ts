@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instanceCurrentOp = pulumi.output(tencentcloud.Mongodb.getInstanceCurrentOp({
+ * const instanceCurrentOp = tencentcloud.Mongodb.getInstanceCurrentOp({
  *     instanceId: "cmgo-b43i3wkj",
  *     op: "command",
  *     orderByType: "desc",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceCurrentOp(args: GetInstanceCurrentOpArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceCurrentOpResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mongodb/getInstanceCurrentOp:getInstanceCurrentOp", {
         "instanceId": args.instanceId,
         "millisecondRunning": args.millisecondRunning,
@@ -116,9 +116,26 @@ export interface GetInstanceCurrentOpResult {
      */
     readonly state?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mongodb instanceCurrentOp
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instanceCurrentOp = tencentcloud.Mongodb.getInstanceCurrentOp({
+ *     instanceId: "cmgo-b43i3wkj",
+ *     op: "command",
+ *     orderByType: "desc",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceCurrentOpOutput(args: GetInstanceCurrentOpOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceCurrentOpResult> {
-    return pulumi.output(args).apply(a => getInstanceCurrentOp(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceCurrentOp(a, opts))
 }
 
 /**

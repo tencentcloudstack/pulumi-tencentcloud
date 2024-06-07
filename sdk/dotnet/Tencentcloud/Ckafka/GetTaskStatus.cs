@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// <summary>
         /// Use this data source to query detailed information of ckafka task_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var taskStatus = Tencentcloud.Ckafka.GetTaskStatus.Invoke(new()
         ///     {
-        ///         var taskStatus = Output.Create(Tencentcloud.Ckafka.GetTaskStatus.InvokeAsync(new Tencentcloud.Ckafka.GetTaskStatusArgs
-        ///         {
-        ///             FlowId = 123456,
-        ///         }));
-        ///     }
+        ///         FlowId = 123456,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTaskStatusResult> InvokeAsync(GetTaskStatusArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTaskStatusResult>("tencentcloud:Ckafka/getTaskStatus:getTaskStatus", args ?? new GetTaskStatusArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTaskStatusResult>("tencentcloud:Ckafka/getTaskStatus:getTaskStatus", args ?? new GetTaskStatusArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ckafka task_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var taskStatus = Tencentcloud.Ckafka.GetTaskStatus.Invoke(new()
         ///     {
-        ///         var taskStatus = Output.Create(Tencentcloud.Ckafka.GetTaskStatus.InvokeAsync(new Tencentcloud.Ckafka.GetTaskStatusArgs
-        ///         {
-        ///             FlowId = 123456,
-        ///         }));
-        ///     }
+        ///         FlowId = 123456,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTaskStatusResult> Invoke(GetTaskStatusInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTaskStatusResult>("tencentcloud:Ckafka/getTaskStatus:getTaskStatus", args ?? new GetTaskStatusInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTaskStatusResult>("tencentcloud:Ckafka/getTaskStatus:getTaskStatus", args ?? new GetTaskStatusInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTaskStatusArgs : Pulumi.InvokeArgs
+    public sealed class GetTaskStatusArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// FlowId.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetTaskStatusArgs()
         {
         }
+        public static new GetTaskStatusArgs Empty => new GetTaskStatusArgs();
     }
 
-    public sealed class GetTaskStatusInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTaskStatusInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// FlowId.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetTaskStatusInvokeArgs()
         {
         }
+        public static new GetTaskStatusInvokeArgs Empty => new GetTaskStatusInvokeArgs();
     }
 
 

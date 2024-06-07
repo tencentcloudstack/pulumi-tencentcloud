@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpTkeClusterAgentAgentsInClusterPodConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class TmpTkeClusterAgentAgentsInClusterPodConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to use HostNetWork.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public TmpTkeClusterAgentAgentsInClusterPodConfigGetArgs()
         {
         }
+        public static new TmpTkeClusterAgentAgentsInClusterPodConfigGetArgs Empty => new TmpTkeClusterAgentAgentsInClusterPodConfigGetArgs();
     }
 }

@@ -7,104 +7,108 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a sqlserver generalCloudInstance
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "sqlserver",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[4].Name),
-// 			VpcId:            vpc.ID(),
-// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-// 			Description: pulumi.String("desc."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Sqlserver.NewGeneralCloudInstance(ctx, "example", &Sqlserver.GeneralCloudInstanceArgs{
-// 			Zone:               pulumi.String(zones.Zones[4].Name),
-// 			Memory:             pulumi.Int(4),
-// 			Storage:            pulumi.Int(100),
-// 			Cpu:                pulumi.Int(2),
-// 			MachineType:        pulumi.String("CLOUD_HSSD"),
-// 			InstanceChargeType: pulumi.String("POSTPAID"),
-// 			ProjectId:          pulumi.Int(0),
-// 			SubnetId:           subnet.ID(),
-// 			VpcId:              vpc.ID(),
-// 			DbVersion:          pulumi.String("2008R2"),
-// 			SecurityGroupLists: pulumi.StringArray{
-// 				securityGroup.ID(),
-// 			},
-// 			Weeklies: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(2),
-// 				pulumi.Int(3),
-// 				pulumi.Int(5),
-// 				pulumi.Int(6),
-// 				pulumi.Int(7),
-// 			},
-// 			StartTime: pulumi.String("00:00"),
-// 			Span:      pulumi.Int(6),
-// 			ResourceTags: sqlserver.GeneralCloudInstanceResourceTagArray{
-// 				&sqlserver.GeneralCloudInstanceResourceTagArgs{
-// 					TagKey:   pulumi.String("test"),
-// 					TagValue: pulumi.String("test"),
-// 				},
-// 			},
-// 			Collation: pulumi.String("Chinese_PRC_CI_AS"),
-// 			TimeZone:  pulumi.String("China Standard Time"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "sqlserver",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[4].Name),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+//				Description: pulumi.String("desc."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Sqlserver.NewGeneralCloudInstance(ctx, "example", &Sqlserver.GeneralCloudInstanceArgs{
+//				Zone:               pulumi.String(zones.Zones[4].Name),
+//				Memory:             pulumi.Int(4),
+//				Storage:            pulumi.Int(100),
+//				Cpu:                pulumi.Int(2),
+//				MachineType:        pulumi.String("CLOUD_HSSD"),
+//				InstanceChargeType: pulumi.String("POSTPAID"),
+//				ProjectId:          pulumi.Int(0),
+//				SubnetId:           subnet.ID(),
+//				VpcId:              vpc.ID(),
+//				DbVersion:          pulumi.String("2008R2"),
+//				SecurityGroupLists: pulumi.StringArray{
+//					securityGroup.ID(),
+//				},
+//				Weeklies: pulumi.IntArray{
+//					pulumi.Int(1),
+//					pulumi.Int(2),
+//					pulumi.Int(3),
+//					pulumi.Int(5),
+//					pulumi.Int(6),
+//					pulumi.Int(7),
+//				},
+//				StartTime: pulumi.String("00:00"),
+//				Span:      pulumi.Int(6),
+//				ResourceTags: sqlserver.GeneralCloudInstanceResourceTagArray{
+//					&sqlserver.GeneralCloudInstanceResourceTagArgs{
+//						TagKey:   pulumi.String("test"),
+//						TagValue: pulumi.String("test"),
+//					},
+//				},
+//				Collation: pulumi.String("Chinese_PRC_CI_AS"),
+//				TimeZone:  pulumi.String("China Standard Time"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // sqlserver general_cloud_instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance example mssql-i9ma6oy7
+// $ pulumi import tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance example mssql-i9ma6oy7
 // ```
 type GeneralCloudInstance struct {
 	pulumi.CustomResourceState
@@ -177,7 +181,7 @@ func NewGeneralCloudInstance(ctx *pulumi.Context,
 	if args.Zone == nil {
 		return nil, errors.New("invalid value for required argument 'Zone'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource GeneralCloudInstance
 	err := ctx.RegisterResource("tencentcloud:Sqlserver/generalCloudInstance:GeneralCloudInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -418,7 +422,7 @@ func (i *GeneralCloudInstance) ToGeneralCloudInstanceOutputWithContext(ctx conte
 // GeneralCloudInstanceArrayInput is an input type that accepts GeneralCloudInstanceArray and GeneralCloudInstanceArrayOutput values.
 // You can construct a concrete instance of `GeneralCloudInstanceArrayInput` via:
 //
-//          GeneralCloudInstanceArray{ GeneralCloudInstanceArgs{...} }
+//	GeneralCloudInstanceArray{ GeneralCloudInstanceArgs{...} }
 type GeneralCloudInstanceArrayInput interface {
 	pulumi.Input
 
@@ -443,7 +447,7 @@ func (i GeneralCloudInstanceArray) ToGeneralCloudInstanceArrayOutputWithContext(
 // GeneralCloudInstanceMapInput is an input type that accepts GeneralCloudInstanceMap and GeneralCloudInstanceMapOutput values.
 // You can construct a concrete instance of `GeneralCloudInstanceMapInput` via:
 //
-//          GeneralCloudInstanceMap{ "key": GeneralCloudInstanceArgs{...} }
+//	GeneralCloudInstanceMap{ "key": GeneralCloudInstanceArgs{...} }
 type GeneralCloudInstanceMapInput interface {
 	pulumi.Input
 

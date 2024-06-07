@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
 {
 
-    public sealed class AttachmentTargetGetArgs : Pulumi.ResourceArgs
+    public sealed class AttachmentTargetGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Eni IP address of the backend server, conflict with `instance_id` but must specify one of them.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
         public AttachmentTargetGetArgs()
         {
         }
+        public static new AttachmentTargetGetArgs Empty => new AttachmentTargetGetArgs();
     }
 }

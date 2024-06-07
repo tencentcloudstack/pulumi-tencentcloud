@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// <summary>
         /// Use this data source to query detailed information of TCR tokens.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var name = Tencentcloud.Tcr.GetTokens.Invoke(new()
         ///     {
-        ///         var name = Output.Create(Tencentcloud.Tcr.GetTokens.InvokeAsync(new Tencentcloud.Tcr.GetTokensArgs
-        ///         {
-        ///             InstanceId = "cls-satg5125",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cls-satg5125",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTokensResult> InvokeAsync(GetTokensArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTokensResult>("tencentcloud:Tcr/getTokens:getTokens", args ?? new GetTokensArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTokensResult>("tencentcloud:Tcr/getTokens:getTokens", args ?? new GetTokensArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of TCR tokens.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var name = Tencentcloud.Tcr.GetTokens.Invoke(new()
         ///     {
-        ///         var name = Output.Create(Tencentcloud.Tcr.GetTokens.InvokeAsync(new Tencentcloud.Tcr.GetTokensArgs
-        ///         {
-        ///             InstanceId = "cls-satg5125",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cls-satg5125",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTokensResult> Invoke(GetTokensInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTokensResult>("tencentcloud:Tcr/getTokens:getTokens", args ?? new GetTokensInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTokensResult>("tencentcloud:Tcr/getTokens:getTokens", args ?? new GetTokensInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTokensArgs : Pulumi.InvokeArgs
+    public sealed class GetTokensArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the instance that the token belongs to.
@@ -95,9 +89,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetTokensArgs()
         {
         }
+        public static new GetTokensArgs Empty => new GetTokensArgs();
     }
 
-    public sealed class GetTokensInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTokensInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the instance that the token belongs to.
@@ -120,6 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetTokensInvokeArgs()
         {
         }
+        public static new GetTokensInvokeArgs Empty => new GetTokensInvokeArgs();
     }
 
 

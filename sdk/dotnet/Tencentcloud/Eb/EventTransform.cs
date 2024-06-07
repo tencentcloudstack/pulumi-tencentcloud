@@ -15,127 +15,128 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var fooEventBus = new Tencentcloud.Eb.EventBus("fooEventBus", new()
     ///     {
-    ///         var fooEventBus = new Tencentcloud.Eb.EventBus("fooEventBus", new Tencentcloud.Eb.EventBusArgs
+    ///         EventBusName = "tf-event_bus",
+    ///         Description = "event bus desc",
+    ///         EnableStore = false,
+    ///         SaveDays = 1,
+    ///         Tags = 
     ///         {
-    ///             EventBusName = "tf-event_bus",
-    ///             Description = "event bus desc",
-    ///             EnableStore = false,
-    ///             SaveDays = 1,
-    ///             Tags = 
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var fooEventRule = new Tencentcloud.Eb.EventRule("fooEventRule", new()
+    ///     {
+    ///         EventBusId = fooEventBus.Id,
+    ///         RuleName = "tf-event_rule",
+    ///         Description = "event rule desc",
+    ///         Enable = true,
+    ///         EventPattern = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///         {
+    ///             ["source"] = "apigw.cloud.tencent",
+    ///             ["type"] = new[]
     ///             {
-    ///                 { "createdBy", "terraform" },
+    ///                 "connector:apigw",
     ///             },
-    ///         });
-    ///         var fooEventRule = new Tencentcloud.Eb.EventRule("fooEventRule", new Tencentcloud.Eb.EventRuleArgs
+    ///         }),
+    ///         Tags = 
     ///         {
-    ///             EventBusId = fooEventBus.Id,
-    ///             RuleName = "tf-event_rule",
-    ///             Description = "event rule desc",
-    ///             Enable = true,
-    ///             EventPattern = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
-    ///             {
-    ///                 { "source", "apigw.cloud.tencent" },
-    ///                 { "type", new[]
-    ///                     {
-    ///                         "connector:apigw",
-    ///                     }
-    ///                  },
-    ///             }),
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var fooEventTransform = new Tencentcloud.Eb.EventTransform("fooEventTransform", new Tencentcloud.Eb.EventTransformArgs
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var fooEventTransform = new Tencentcloud.Eb.EventTransform("fooEventTransform", new()
+    ///     {
+    ///         EventBusId = fooEventBus.Id,
+    ///         RuleId = fooEventRule.RuleId,
+    ///         Transformations = new[]
     ///         {
-    ///             EventBusId = fooEventBus.Id,
-    ///             RuleId = fooEventRule.RuleId,
-    ///             Transformations = 
+    ///             new Tencentcloud.Eb.Inputs.EventTransformTransformationArgs
     ///             {
-    ///                 new Tencentcloud.Eb.Inputs.EventTransformTransformationArgs
+    ///                 Extraction = new Tencentcloud.Eb.Inputs.EventTransformTransformationExtractionArgs
     ///                 {
-    ///                     Extraction = new Tencentcloud.Eb.Inputs.EventTransformTransformationExtractionArgs
+    ///                     ExtractionInputPath = "$",
+    ///                     Format = "JSON",
+    ///                 },
+    ///                 Transform = new Tencentcloud.Eb.Inputs.EventTransformTransformationTransformArgs
+    ///                 {
+    ///                     OutputStructs = new[]
     ///                     {
-    ///                         ExtractionInputPath = "$",
-    ///                         Format = "JSON",
-    ///                     },
-    ///                     Transform = new Tencentcloud.Eb.Inputs.EventTransformTransformationTransformArgs
-    ///                     {
-    ///                         OutputStructs = 
+    ///                         new Tencentcloud.Eb.Inputs.EventTransformTransformationTransformOutputStructArgs
     ///                         {
-    ///                             new Tencentcloud.Eb.Inputs.EventTransformTransformationTransformOutputStructArgs
+    ///                             Key = "type",
+    ///                             Value = "connector:ckafka",
+    ///                             ValueType = "STRING",
+    ///                         },
+    ///                         new Tencentcloud.Eb.Inputs.EventTransformTransformationTransformOutputStructArgs
+    ///                         {
+    ///                             Key = "source",
+    ///                             Value = "ckafka.cloud.tencent",
+    ///                             ValueType = "STRING",
+    ///                         },
+    ///                         new Tencentcloud.Eb.Inputs.EventTransformTransformationTransformOutputStructArgs
+    ///                         {
+    ///                             Key = "region",
+    ///                             Value = "ap-guangzhou",
+    ///                             ValueType = "STRING",
+    ///                         },
+    ///                         new Tencentcloud.Eb.Inputs.EventTransformTransformationTransformOutputStructArgs
+    ///                         {
+    ///                             Key = "datacontenttype",
+    ///                             Value = "application/json;charset=utf-8",
+    ///                             ValueType = "STRING",
+    ///                         },
+    ///                         new Tencentcloud.Eb.Inputs.EventTransformTransformationTransformOutputStructArgs
+    ///                         {
+    ///                             Key = "status",
+    ///                             Value = "-",
+    ///                             ValueType = "STRING",
+    ///                         },
+    ///                         new Tencentcloud.Eb.Inputs.EventTransformTransformationTransformOutputStructArgs
+    ///                         {
+    ///                             Key = "data",
+    ///                             Value = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
     ///                             {
-    ///                                 Key = "type",
-    ///                                 Value = "connector:ckafka",
-    ///                                 ValueType = "STRING",
-    ///                             },
-    ///                             new Tencentcloud.Eb.Inputs.EventTransformTransformationTransformOutputStructArgs
-    ///                             {
-    ///                                 Key = "source",
-    ///                                 Value = "ckafka.cloud.tencent",
-    ///                                 ValueType = "STRING",
-    ///                             },
-    ///                             new Tencentcloud.Eb.Inputs.EventTransformTransformationTransformOutputStructArgs
-    ///                             {
-    ///                                 Key = "region",
-    ///                                 Value = "ap-guangzhou",
-    ///                                 ValueType = "STRING",
-    ///                             },
-    ///                             new Tencentcloud.Eb.Inputs.EventTransformTransformationTransformOutputStructArgs
-    ///                             {
-    ///                                 Key = "datacontenttype",
-    ///                                 Value = "application/json;charset=utf-8",
-    ///                                 ValueType = "STRING",
-    ///                             },
-    ///                             new Tencentcloud.Eb.Inputs.EventTransformTransformationTransformOutputStructArgs
-    ///                             {
-    ///                                 Key = "status",
-    ///                                 Value = "-",
-    ///                                 ValueType = "STRING",
-    ///                             },
-    ///                             new Tencentcloud.Eb.Inputs.EventTransformTransformationTransformOutputStructArgs
-    ///                             {
-    ///                                 Key = "data",
-    ///                                 Value = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
-    ///                                 {
-    ///                                     { "Partition", 1 },
-    ///                                     { "msgBody", "Hello from Ckafka again!" },
-    ///                                     { "msgKey", "test" },
-    ///                                     { "offset", 37 },
-    ///                                     { "topic", "test-topic" },
-    ///                                 }),
-    ///                                 ValueType = "STRING",
-    ///                             },
+    ///                                 ["Partition"] = 1,
+    ///                                 ["msgBody"] = "Hello from Ckafka again!",
+    ///                                 ["msgKey"] = "test",
+    ///                                 ["offset"] = 37,
+    ///                                 ["topic"] = "test-topic",
+    ///                             }),
+    ///                             ValueType = "STRING",
     ///                         },
     ///                     },
     ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// eb eb_transform can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Eb/eventTransform:EventTransform eb_transform eb_transform_id
+    /// $ pulumi import tencentcloud:Eb/eventTransform:EventTransform eb_transform eb_transform_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eb/eventTransform:EventTransform")]
-    public partial class EventTransform : Pulumi.CustomResource
+    public partial class EventTransform : global::Pulumi.CustomResource
     {
         /// <summary>
         /// event bus Id.
@@ -200,7 +201,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         }
     }
 
-    public sealed class EventTransformArgs : Pulumi.ResourceArgs
+    public sealed class EventTransformArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// event bus Id.
@@ -229,9 +230,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public EventTransformArgs()
         {
         }
+        public static new EventTransformArgs Empty => new EventTransformArgs();
     }
 
-    public sealed class EventTransformState : Pulumi.ResourceArgs
+    public sealed class EventTransformState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// event bus Id.
@@ -260,5 +262,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public EventTransformState()
         {
         }
+        public static new EventTransformState Empty => new EventTransformState();
     }
 }

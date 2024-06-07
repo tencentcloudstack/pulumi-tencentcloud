@@ -20,11 +20,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// KubernetesClusterEndpoint instance can be imported by passing cluster id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint test cluster-id
+    /// $ pulumi import tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint test cluster-id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/clusterEndpoint:ClusterEndpoint")]
-    public partial class ClusterEndpoint : Pulumi.CustomResource
+    public partial class ClusterEndpoint : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The certificate used for access.
@@ -146,6 +146,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -167,7 +171,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         }
     }
 
-    public sealed class ClusterEndpointArgs : Pulumi.ResourceArgs
+    public sealed class ClusterEndpointArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specify cluster ID.
@@ -233,9 +237,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public ClusterEndpointArgs()
         {
         }
+        public static new ClusterEndpointArgs Empty => new ClusterEndpointArgs();
     }
 
-    public sealed class ClusterEndpointState : Pulumi.ResourceArgs
+    public sealed class ClusterEndpointState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The certificate used for access.
@@ -322,11 +327,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
             set => _managedClusterInternetSecurityPolicies = value;
         }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password of account.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The Intranet address used for access.
@@ -343,5 +358,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public ClusterEndpointState()
         {
         }
+        public static new ClusterEndpointState Empty => new ClusterEndpointState();
     }
 }

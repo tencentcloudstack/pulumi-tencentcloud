@@ -23,6 +23,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Outputs
         /// </summary>
         public readonly string Codec;
         /// <summary>
+        /// Encoding label, valid only if the encoding format of the video stream is H.265 encoding. Available values:
+        /// - hvc1: stands for hvc1 tag;
+        /// - hev1: stands for the hev1 tag;
+        /// Default value: hvc1.
+        /// </summary>
+        public readonly string? CodecTag;
+        /// <summary>
         /// Fill type. Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: black. Note: this field may return null, indicating that no valid values can be obtained.
         /// </summary>
         public readonly string? FillType;
@@ -31,13 +38,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Outputs
         /// </summary>
         public readonly int Fps;
         /// <summary>
+        /// Interval between Keyframe I frames, value range: 0 and [1, 100000], unit: number of frames. When you fill in 0 or leave it empty, the gop length is automatically set.
+        /// </summary>
+        public readonly int? Gop;
+        /// <summary>
         /// Maximum value of the height (or short side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
         /// </summary>
         public readonly int? Height;
         /// <summary>
+        /// Whether the transcoding output still maintains HDR when the original video is HDR (High Dynamic Range). Value range:
+        /// - ON: if the original file is HDR, the transcoding output remains HDR;, otherwise the transcoding output is SDR (Standard Dynamic Range);
+        /// - OFF: regardless of whether the original file is HDR or SDR, the transcoding output is SDR;
+        /// Default value: OFF.
+        /// </summary>
+        public readonly string? PreserveHdrSwitch;
+        /// <summary>
         /// Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`. Note: this field may return null, indicating that no valid values can be obtained.
         /// </summary>
         public readonly bool? ResolutionAdaptive;
+        /// <summary>
+        /// Video constant bit rate control factor, value range is [1,51].
+        /// Note:
+        /// - If this parameter is specified, the bitrate control method of CRF will be used for transcoding (the video bitrate will no longer take effect);
+        /// - This field is required when the video stream encoding format is H.266. The recommended value is 28;
+        /// - If there are no special requirements, it is not recommended to specify this parameter.
+        /// </summary>
+        public readonly int? Vcrf;
         /// <summary>
         /// Maximum value of the width (or long side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
         /// </summary>
@@ -49,22 +75,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Outputs
 
             string codec,
 
+            string? codecTag,
+
             string? fillType,
 
             int fps,
 
+            int? gop,
+
             int? height,
 
+            string? preserveHdrSwitch,
+
             bool? resolutionAdaptive,
+
+            int? vcrf,
 
             int? width)
         {
             Bitrate = bitrate;
             Codec = codec;
+            CodecTag = codecTag;
             FillType = fillType;
             Fps = fps;
+            Gop = gop;
             Height = height;
+            PreserveHdrSwitch = preserveHdrSwitch;
             ResolutionAdaptive = resolutionAdaptive;
+            Vcrf = vcrf;
             Width = width;
         }
     }

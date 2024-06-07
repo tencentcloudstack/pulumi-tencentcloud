@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Placement
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Placement.Group("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Placement.Group("foo", new Tencentcloud.Placement.GroupArgs
-    ///         {
-    ///             Type = "HOST",
-    ///         });
-    ///     }
+    ///         Type = "HOST",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Placement group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Placement/group:Group foo ps-ilan8vjf
+    /// $ pulumi import tencentcloud:Placement/group:Group foo ps-ilan8vjf
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Placement/group:Group")]
-    public partial class Group : Pulumi.CustomResource
+    public partial class Group : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Creation time of the placement group.
@@ -118,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Placement
         }
     }
 
-    public sealed class GroupArgs : Pulumi.ResourceArgs
+    public sealed class GroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of the placement group, 1-60 characters in length.
@@ -135,9 +136,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Placement
         public GroupArgs()
         {
         }
+        public static new GroupArgs Empty => new GroupArgs();
     }
 
-    public sealed class GroupState : Pulumi.ResourceArgs
+    public sealed class GroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Creation time of the placement group.
@@ -172,5 +174,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Placement
         public GroupState()
         {
         }
+        public static new GroupState Empty => new GroupState();
     }
 }

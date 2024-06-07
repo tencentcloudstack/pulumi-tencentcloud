@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a mysql instance resource to create master database instances.
@@ -18,134 +19,145 @@ import (
 // > **NOTE:** The value of parameter `parameters` can be used with Mysql.getParameterList to obtain.
 //
 // ## Example Usage
+//
 // ### Create a single node instance
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "cdb",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// 			VpcId:            vpc.ID(),
-// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-// 			Description: pulumi.String("mysql test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mysql.NewInstance(ctx, "example", &Mysql.InstanceArgs{
-// 			InternetService:  pulumi.Int(1),
-// 			EngineVersion:    pulumi.String("5.7"),
-// 			ChargeType:       pulumi.String("POSTPAID"),
-// 			RootPassword:     pulumi.String("PassWord123"),
-// 			SlaveDeployMode:  pulumi.Int(0),
-// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// 			SlaveSyncMode:    pulumi.Int(1),
-// 			InstanceName:     pulumi.String("tf-example-mysql"),
-// 			MemSize:          pulumi.Int(4000),
-// 			VolumeSize:       pulumi.Int(200),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			IntranetPort:     pulumi.Int(3306),
-// 			SecurityGroups: pulumi.StringArray{
-// 				securityGroup.ID(),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"name": pulumi.Any("test"),
-// 			},
-// 			Parameters: pulumi.AnyMap{
-// 				"character_set_server": pulumi.Any("utf8"),
-// 				"max_connections":      pulumi.Any("1000"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "cdb",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+//				Description: pulumi.String("mysql test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mysql.NewInstance(ctx, "example", &Mysql.InstanceArgs{
+//				InternetService:  pulumi.Int(1),
+//				EngineVersion:    pulumi.String("5.7"),
+//				ChargeType:       pulumi.String("POSTPAID"),
+//				RootPassword:     pulumi.String("PassWord123"),
+//				SlaveDeployMode:  pulumi.Int(0),
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				SlaveSyncMode:    pulumi.Int(1),
+//				InstanceName:     pulumi.String("tf-example-mysql"),
+//				MemSize:          pulumi.Int(4000),
+//				VolumeSize:       pulumi.Int(200),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				IntranetPort:     pulumi.Int(3306),
+//				SecurityGroups: pulumi.StringArray{
+//					securityGroup.ID(),
+//				},
+//				Tags: pulumi.Map{
+//					"name": pulumi.Any("test"),
+//				},
+//				Parameters: pulumi.Map{
+//					"character_set_server": pulumi.Any("utf8"),
+//					"max_connections":      pulumi.Any("1000"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Create a double node instance
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.NewInstance(ctx, "example", &Mysql.InstanceArgs{
-// 			InternetService:  pulumi.Int(1),
-// 			EngineVersion:    pulumi.String("5.7"),
-// 			ChargeType:       pulumi.String("POSTPAID"),
-// 			RootPassword:     pulumi.String("PassWord123"),
-// 			SlaveDeployMode:  pulumi.Int(1),
-// 			AvailabilityZone: pulumi.Any(data.Tencentcloud_availability_zones_by_product.Zones.Zones[0].Name),
-// 			FirstSlaveZone:   pulumi.Any(data.Tencentcloud_availability_zones_by_product.Zones.Zones[1].Name),
-// 			SlaveSyncMode:    pulumi.Int(1),
-// 			InstanceName:     pulumi.String("tf-example-mysql"),
-// 			MemSize:          pulumi.Int(4000),
-// 			VolumeSize:       pulumi.Int(200),
-// 			VpcId:            pulumi.Any(tencentcloud_vpc.Vpc.Id),
-// 			SubnetId:         pulumi.Any(tencentcloud_subnet.Subnet.Id),
-// 			IntranetPort:     pulumi.Int(3306),
-// 			SecurityGroups: pulumi.StringArray{
-// 				pulumi.Any(tencentcloud_security_group.Security_group.Id),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"name": pulumi.Any("test"),
-// 			},
-// 			Parameters: pulumi.AnyMap{
-// 				"character_set_server": pulumi.Any("utf8"),
-// 				"max_connections":      pulumi.Any("1000"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mysql.NewInstance(ctx, "example", &Mysql.InstanceArgs{
+//				InternetService:  pulumi.Int(1),
+//				EngineVersion:    pulumi.String("5.7"),
+//				ChargeType:       pulumi.String("POSTPAID"),
+//				RootPassword:     pulumi.String("PassWord123"),
+//				SlaveDeployMode:  pulumi.Int(1),
+//				AvailabilityZone: pulumi.Any(data.Tencentcloud_availability_zones_by_product.Zones.Zones[0].Name),
+//				FirstSlaveZone:   pulumi.Any(data.Tencentcloud_availability_zones_by_product.Zones.Zones[1].Name),
+//				SlaveSyncMode:    pulumi.Int(1),
+//				InstanceName:     pulumi.String("tf-example-mysql"),
+//				MemSize:          pulumi.Int(4000),
+//				VolumeSize:       pulumi.Int(200),
+//				VpcId:            pulumi.Any(tencentcloud_vpc.Vpc.Id),
+//				SubnetId:         pulumi.Any(tencentcloud_subnet.Subnet.Id),
+//				IntranetPort:     pulumi.Int(3306),
+//				SecurityGroups: pulumi.StringArray{
+//					tencentcloud_security_group.Security_group.Id,
+//				},
+//				Tags: pulumi.Map{
+//					"name": pulumi.Any("test"),
+//				},
+//				Parameters: pulumi.Map{
+//					"character_set_server": pulumi.Any("utf8"),
+//					"max_connections":      pulumi.Any("1000"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // MySQL instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678
+// $ pulumi import tencentcloud:Mysql/instance:Instance foo cdb-12345678
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -194,11 +206,11 @@ type Instance struct {
 	Parameters pulumi.MapOutput `pulumi:"parameters"`
 	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `chargeType` instead.
 	PayType pulumi.IntPtrOutput `pulumi:"payType"`
 	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
 	Period pulumi.IntPtrOutput `pulumi:"period"`
 	// Period of instance. NOTES: Only supported prepaid instance.
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
@@ -248,7 +260,14 @@ func NewInstance(ctx *pulumi.Context,
 	if args.VolumeSize == nil {
 		return nil, errors.New("invalid value for required argument 'VolumeSize'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.RootPassword != nil {
+		args.RootPassword = pulumi.ToSecret(args.RootPassword).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"rootPassword",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Mysql/instance:Instance", name, args, &resource, opts...)
 	if err != nil {
@@ -315,11 +334,11 @@ type instanceState struct {
 	Parameters map[string]interface{} `pulumi:"parameters"`
 	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `chargeType` instead.
 	PayType *int `pulumi:"payType"`
 	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
 	Period *int `pulumi:"period"`
 	// Period of instance. NOTES: Only supported prepaid instance.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
@@ -398,11 +417,11 @@ type InstanceState struct {
 	Parameters pulumi.MapInput
 	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `chargeType` instead.
 	PayType pulumi.IntPtrInput
 	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
 	Period pulumi.IntPtrInput
 	// Period of instance. NOTES: Only supported prepaid instance.
 	PrepaidPeriod pulumi.IntPtrInput
@@ -475,11 +494,11 @@ type instanceArgs struct {
 	Parameters map[string]interface{} `pulumi:"parameters"`
 	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `chargeType` instead.
 	PayType *int `pulumi:"payType"`
 	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
 	Period *int `pulumi:"period"`
 	// Period of instance. NOTES: Only supported prepaid instance.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
@@ -545,11 +564,11 @@ type InstanceArgs struct {
 	Parameters pulumi.MapInput
 	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `chargeType` instead.
 	PayType pulumi.IntPtrInput
 	// It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
 	Period pulumi.IntPtrInput
 	// Period of instance. NOTES: Only supported prepaid instance.
 	PrepaidPeriod pulumi.IntPtrInput
@@ -605,7 +624,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -630,7 +649,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -773,14 +792,14 @@ func (o InstanceOutput) Parameters() pulumi.MapOutput {
 
 // It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance. Valid values: `0`, `1`. `0`: prepaid, `1`: postpaid.
 //
-// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+// Deprecated: It has been deprecated from version 1.36.0. Please use `chargeType` instead.
 func (o InstanceOutput) PayType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.PayType }).(pulumi.IntPtrOutput)
 }
 
 // It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead. Period of instance. NOTES: Only supported prepaid instance.
 //
-// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaid_period` instead.
+// Deprecated: It has been deprecated from version 1.36.0. Please use `prepaidPeriod` instead.
 func (o InstanceOutput) Period() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.Period }).(pulumi.IntPtrOutput)
 }

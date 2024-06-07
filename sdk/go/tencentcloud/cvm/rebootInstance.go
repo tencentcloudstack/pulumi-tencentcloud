@@ -7,41 +7,47 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cvm rebootInstance
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cvm.NewRebootInstance(ctx, "rebootInstance", &Cvm.RebootInstanceArgs{
-// 			InstanceId: pulumi.String("ins-f9jr4bd2"),
-// 			StopType:   pulumi.String("SOFT_FIRST"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cvm.NewRebootInstance(ctx, "rebootInstance", &Cvm.RebootInstanceArgs{
+//				InstanceId: pulumi.String("ins-f9jr4bd2"),
+//				StopType:   pulumi.String("SOFT_FIRST"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type RebootInstance struct {
 	pulumi.CustomResourceState
 
 	// It has been deprecated from version 1.81.21. Please use `stopType` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
 	//
-	// Deprecated: It has been deprecated from version 1.81.21. Please use `stop_type` instead.
+	// Deprecated: It has been deprecated from version 1.81.21. Please use `stopType` instead.
 	ForceReboot pulumi.BoolPtrOutput `pulumi:"forceReboot"`
 	// Instance ID.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
@@ -59,7 +65,7 @@ func NewRebootInstance(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RebootInstance
 	err := ctx.RegisterResource("tencentcloud:Cvm/rebootInstance:RebootInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -84,7 +90,7 @@ func GetRebootInstance(ctx *pulumi.Context,
 type rebootInstanceState struct {
 	// It has been deprecated from version 1.81.21. Please use `stopType` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
 	//
-	// Deprecated: It has been deprecated from version 1.81.21. Please use `stop_type` instead.
+	// Deprecated: It has been deprecated from version 1.81.21. Please use `stopType` instead.
 	ForceReboot *bool `pulumi:"forceReboot"`
 	// Instance ID.
 	InstanceId *string `pulumi:"instanceId"`
@@ -95,7 +101,7 @@ type rebootInstanceState struct {
 type RebootInstanceState struct {
 	// It has been deprecated from version 1.81.21. Please use `stopType` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
 	//
-	// Deprecated: It has been deprecated from version 1.81.21. Please use `stop_type` instead.
+	// Deprecated: It has been deprecated from version 1.81.21. Please use `stopType` instead.
 	ForceReboot pulumi.BoolPtrInput
 	// Instance ID.
 	InstanceId pulumi.StringPtrInput
@@ -110,7 +116,7 @@ func (RebootInstanceState) ElementType() reflect.Type {
 type rebootInstanceArgs struct {
 	// It has been deprecated from version 1.81.21. Please use `stopType` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
 	//
-	// Deprecated: It has been deprecated from version 1.81.21. Please use `stop_type` instead.
+	// Deprecated: It has been deprecated from version 1.81.21. Please use `stopType` instead.
 	ForceReboot *bool `pulumi:"forceReboot"`
 	// Instance ID.
 	InstanceId string `pulumi:"instanceId"`
@@ -122,7 +128,7 @@ type rebootInstanceArgs struct {
 type RebootInstanceArgs struct {
 	// It has been deprecated from version 1.81.21. Please use `stopType` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
 	//
-	// Deprecated: It has been deprecated from version 1.81.21. Please use `stop_type` instead.
+	// Deprecated: It has been deprecated from version 1.81.21. Please use `stopType` instead.
 	ForceReboot pulumi.BoolPtrInput
 	// Instance ID.
 	InstanceId pulumi.StringInput
@@ -156,7 +162,7 @@ func (i *RebootInstance) ToRebootInstanceOutputWithContext(ctx context.Context) 
 // RebootInstanceArrayInput is an input type that accepts RebootInstanceArray and RebootInstanceArrayOutput values.
 // You can construct a concrete instance of `RebootInstanceArrayInput` via:
 //
-//          RebootInstanceArray{ RebootInstanceArgs{...} }
+//	RebootInstanceArray{ RebootInstanceArgs{...} }
 type RebootInstanceArrayInput interface {
 	pulumi.Input
 
@@ -181,7 +187,7 @@ func (i RebootInstanceArray) ToRebootInstanceArrayOutputWithContext(ctx context.
 // RebootInstanceMapInput is an input type that accepts RebootInstanceMap and RebootInstanceMapOutput values.
 // You can construct a concrete instance of `RebootInstanceMapInput` via:
 //
-//          RebootInstanceMap{ "key": RebootInstanceArgs{...} }
+//	RebootInstanceMap{ "key": RebootInstanceArgs{...} }
 type RebootInstanceMapInput interface {
 	pulumi.Input
 
@@ -219,7 +225,7 @@ func (o RebootInstanceOutput) ToRebootInstanceOutputWithContext(ctx context.Cont
 
 // It has been deprecated from version 1.81.21. Please use `stopType` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
 //
-// Deprecated: It has been deprecated from version 1.81.21. Please use `stop_type` instead.
+// Deprecated: It has been deprecated from version 1.81.21. Please use `stopType` instead.
 func (o RebootInstanceOutput) ForceReboot() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *RebootInstance) pulumi.BoolPtrOutput { return v.ForceReboot }).(pulumi.BoolPtrOutput)
 }

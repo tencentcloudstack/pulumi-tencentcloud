@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const all = pulumi.output(tencentcloud.Audit.getKeyAlias({
+ * const all = tencentcloud.Audit.getKeyAlias({
  *     region: "ap-hongkong",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getKeyAlias(args: GetKeyAliasArgs, opts?: pulumi.InvokeOptions): Promise<GetKeyAliasResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Audit/getKeyAlias:getKeyAlias", {
         "region": args.region,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetKeyAliasResult {
     readonly region: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query the key alias list specified with region supported by the audit.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const all = tencentcloud.Audit.getKeyAlias({
+ *     region: "ap-hongkong",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getKeyAliasOutput(args: GetKeyAliasOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetKeyAliasResult> {
-    return pulumi.output(args).apply(a => getKeyAlias(a, opts))
+    return pulumi.output(args).apply((a: any) => getKeyAlias(a, opts))
 }
 
 /**

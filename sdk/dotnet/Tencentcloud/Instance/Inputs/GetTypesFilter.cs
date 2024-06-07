@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance.Inputs
 {
 
-    public sealed class GetTypesFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetTypesFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The filter name. Valid values: `zone`, `instance-family` and `instance-charge-type`.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance.Inputs
         public GetTypesFilterArgs()
         {
         }
+        public static new GetTypesFilterArgs Empty => new GetTypesFilterArgs();
     }
 }

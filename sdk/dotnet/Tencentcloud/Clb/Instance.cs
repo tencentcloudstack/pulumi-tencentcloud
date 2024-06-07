@@ -14,348 +14,377 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// Provides a resource to create a CLB instance.
     /// 
     /// ## Example Usage
+    /// 
     /// ### INTERNAL CLB
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var internalClb = new Tencentcloud.Clb.Instance("internalClb", new()
     ///     {
-    ///         var internalClb = new Tencentcloud.Clb.Instance("internalClb", new Tencentcloud.Clb.InstanceArgs
+    ///         ClbName = "myclb",
+    ///         NetworkType = "INTERNAL",
+    ///         ProjectId = 0,
+    ///         SubnetId = "subnet-12rastkr",
+    ///         Tags = 
     ///         {
-    ///             ClbName = "myclb",
-    ///             NetworkType = "INTERNAL",
-    ///             ProjectId = 0,
-    ///             SubnetId = "subnet-12rastkr",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "tf" },
-    ///             },
-    ///             VpcId = "vpc-7007ll7q",
-    ///         });
-    ///     }
+    ///             { "test", "tf" },
+    ///         },
+    ///         VpcId = "vpc-7007ll7q",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### LCU-supported CLB
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var internalClb = new Tencentcloud.Clb.Instance("internalClb", new()
     ///     {
-    ///         var internalClb = new Tencentcloud.Clb.Instance("internalClb", new Tencentcloud.Clb.InstanceArgs
+    ///         ClbName = "myclb",
+    ///         NetworkType = "INTERNAL",
+    ///         ProjectId = 0,
+    ///         SlaType = "clb.c3.medium",
+    ///         SubnetId = "subnet-o3a5nt20",
+    ///         Tags = 
     ///         {
-    ///             ClbName = "myclb",
-    ///             NetworkType = "INTERNAL",
-    ///             ProjectId = 0,
-    ///             SlaType = "clb.c3.medium",
-    ///             SubnetId = "subnet-o3a5nt20",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "tf" },
-    ///             },
-    ///             VpcId = "vpc-2hfyray3",
-    ///         });
-    ///     }
+    ///             { "test", "tf" },
+    ///         },
+    ///         VpcId = "vpc-2hfyray3",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### OPEN CLB
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var openClb = new Tencentcloud.Clb.Instance("openClb", new()
     ///     {
-    ///         var openClb = new Tencentcloud.Clb.Instance("openClb", new Tencentcloud.Clb.InstanceArgs
+    ///         ClbName = "myclb",
+    ///         NetworkType = "OPEN",
+    ///         ProjectId = 0,
+    ///         SecurityGroups = new[]
     ///         {
-    ///             ClbName = "myclb",
-    ///             NetworkType = "OPEN",
-    ///             ProjectId = 0,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 "sg-o0ek7r93",
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "tf" },
-    ///             },
-    ///             TargetRegionInfoRegion = "ap-guangzhou",
-    ///             TargetRegionInfoVpcId = "vpc-da7ffa61",
-    ///             VpcId = "vpc-da7ffa61",
-    ///         });
-    ///     }
+    ///             "sg-o0ek7r93",
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "test", "tf" },
+    ///         },
+    ///         TargetRegionInfoRegion = "ap-guangzhou",
+    ///         TargetRegionInfoVpcId = "vpc-da7ffa61",
+    ///         VpcId = "vpc-da7ffa61",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### OPNE CLB with VipIsp
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Vpc.BandwidthPackage("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Vpc.BandwidthPackage("example", new Tencentcloud.Vpc.BandwidthPackageArgs
+    ///         NetworkType = "SINGLEISP_CMCC",
+    ///         ChargeType = "ENHANCED95_POSTPAID_BY_MONTH",
+    ///         BandwidthPackageName = "tf-example",
+    ///         InternetMaxBandwidth = 300,
+    ///         Egress = "center_egress1",
+    ///         Tags = 
     ///         {
-    ///             NetworkType = "SINGLEISP_CMCC",
-    ///             ChargeType = "ENHANCED95_POSTPAID_BY_MONTH",
-    ///             BandwidthPackageName = "tf-example",
-    ///             InternetMaxBandwidth = 300,
-    ///             Egress = "center_egress1",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var openClb = new Tencentcloud.Clb.Instance("openClb", new Tencentcloud.Clb.InstanceArgs
-    ///         {
-    ///             NetworkType = "OPEN",
-    ///             ClbName = "my-open-clb",
-    ///             ProjectId = 0,
-    ///             VpcId = "vpc-4owdpnwr",
-    ///             VipIsp = "CMCC",
-    ///             InternetChargeType = "BANDWIDTH_PACKAGE",
-    ///             BandwidthPackageId = example.Id,
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "open" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var openClb = new Tencentcloud.Clb.Instance("openClb", new()
+    ///     {
+    ///         NetworkType = "OPEN",
+    ///         ClbName = "my-open-clb",
+    ///         ProjectId = 0,
+    ///         VpcId = "vpc-4owdpnwr",
+    ///         VipIsp = "CMCC",
+    ///         InternetChargeType = "BANDWIDTH_PACKAGE",
+    ///         BandwidthPackageId = example.Id,
+    ///         Tags = 
+    ///         {
+    ///             { "test", "open" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Dynamic Vip Instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var fooGroup = new Tencentcloud.Security.Group("fooGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///         });
-    ///         var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var clbOpen = new Tencentcloud.Clb.Instance("clbOpen", new Tencentcloud.Clb.InstanceArgs
-    ///         {
-    ///             NetworkType = "OPEN",
-    ///             ClbName = "clb-instance-open",
-    ///             ProjectId = 0,
-    ///             VpcId = fooInstance.Id,
-    ///             TargetRegionInfoRegion = "ap-guangzhou",
-    ///             TargetRegionInfoVpcId = fooInstance.Id,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 fooGroup.Id,
-    ///             },
-    ///             DynamicVip = true,
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "tf" },
-    ///             },
-    ///         });
-    ///         this.Domain = clbOpen.Domain;
-    ///     }
+    ///     var fooGroup = new Tencentcloud.Security.Group("fooGroup");
     /// 
-    ///     [Output("domain")]
-    ///     public Output&lt;string&gt; Domain { get; set; }
-    /// }
+    ///     var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var clbOpen = new Tencentcloud.Clb.Instance("clbOpen", new()
+    ///     {
+    ///         NetworkType = "OPEN",
+    ///         ClbName = "clb-instance-open",
+    ///         ProjectId = 0,
+    ///         VpcId = fooInstance.Id,
+    ///         TargetRegionInfoRegion = "ap-guangzhou",
+    ///         TargetRegionInfoVpcId = fooInstance.Id,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             fooGroup.Id,
+    ///         },
+    ///         DynamicVip = true,
+    ///         Tags = 
+    ///         {
+    ///             { "test", "tf" },
+    ///         },
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["domain"] = clbOpen.Domain,
+    ///     };
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Specified  Vip Instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var fooGroup = new Tencentcloud.Security.Group("fooGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///         });
-    ///         var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var clbOpen = new Tencentcloud.Clb.Instance("clbOpen", new Tencentcloud.Clb.InstanceArgs
-    ///         {
-    ///             NetworkType = "OPEN",
-    ///             ClbName = "clb-instance-open",
-    ///             ProjectId = 0,
-    ///             VpcId = fooInstance.Id,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 fooGroup.Id,
-    ///             },
-    ///             Vip = "111.230.4.204",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "tf" },
-    ///             },
-    ///         });
-    ///         this.Domain = tencentcloud_clb_instance.Vip;
-    ///     }
+    ///     var fooGroup = new Tencentcloud.Security.Group("fooGroup");
     /// 
-    ///     [Output("domain")]
-    ///     public Output&lt;string&gt; Domain { get; set; }
-    /// }
+    ///     var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var clbOpen = new Tencentcloud.Clb.Instance("clbOpen", new()
+    ///     {
+    ///         NetworkType = "OPEN",
+    ///         ClbName = "clb-instance-open",
+    ///         ProjectId = 0,
+    ///         VpcId = fooInstance.Id,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             fooGroup.Id,
+    ///         },
+    ///         Vip = "111.230.4.204",
+    ///         Tags = 
+    ///         {
+    ///             { "test", "tf" },
+    ///         },
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["domain"] = tencentcloud_clb_instance.Vip,
+    ///     };
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Default enable
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Vpc.Instance("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Vpc.Instance("foo", new Tencentcloud.Vpc.InstanceArgs
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         Tags = 
     ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "mytest" },
-    ///             },
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = "ap-guangzhou-1",
-    ///             VpcId = foo.Id,
-    ///             CidrBlock = "10.0.20.0/28",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var sglab = new Tencentcloud.Security.Group("sglab", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "favourite sg",
-    ///             ProjectId = 0,
-    ///         });
-    ///         var openClb = new Tencentcloud.Clb.Instance("openClb", new Tencentcloud.Clb.InstanceArgs
-    ///         {
-    ///             NetworkType = "OPEN",
-    ///             ClbName = "my-open-clb",
-    ///             ProjectId = 0,
-    ///             VpcId = foo.Id,
-    ///             LoadBalancerPassToTarget = true,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 sglab.Id,
-    ///             },
-    ///             TargetRegionInfoRegion = "ap-guangzhou",
-    ///             TargetRegionInfoVpcId = foo.Id,
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "open" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "test", "mytest" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = "ap-guangzhou-1",
+    ///         VpcId = foo.Id,
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var sglab = new Tencentcloud.Security.Group("sglab", new()
+    ///     {
+    ///         Description = "favourite sg",
+    ///         ProjectId = 0,
+    ///     });
+    /// 
+    ///     var openClb = new Tencentcloud.Clb.Instance("openClb", new()
+    ///     {
+    ///         NetworkType = "OPEN",
+    ///         ClbName = "my-open-clb",
+    ///         ProjectId = 0,
+    ///         VpcId = foo.Id,
+    ///         LoadBalancerPassToTarget = true,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             sglab.Id,
+    ///         },
+    ///         TargetRegionInfoRegion = "ap-guangzhou",
+    ///         TargetRegionInfoVpcId = foo.Id,
+    ///         Tags = 
+    ///         {
+    ///             { "test", "open" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### CREATE multiple instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var openClb1 = new Tencentcloud.Clb.Instance("openClb1", new()
     ///     {
-    ///         var openClb1 = new Tencentcloud.Clb.Instance("openClb1", new Tencentcloud.Clb.InstanceArgs
-    ///         {
-    ///             ClbName = "hello",
-    ///             MasterZoneId = "ap-guangzhou-3",
-    ///             NetworkType = "OPEN",
-    ///         });
-    ///     }
+    ///         ClbName = "hello",
+    ///         MasterZoneId = "ap-guangzhou-3",
+    ///         NetworkType = "OPEN",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### CREATE instance with log
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpcTest = new Tencentcloud.Vpc.Instance("vpcTest", new()
     ///     {
-    ///         var vpcTest = new Tencentcloud.Vpc.Instance("vpcTest", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var rtbTest = new Tencentcloud.Route.Table("rtbTest", new Tencentcloud.Route.TableArgs
-    ///         {
-    ///             VpcId = vpcTest.Id,
-    ///         });
-    ///         var subnetTest = new Tencentcloud.Subnet.Instance("subnetTest", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = "ap-guangzhou-3",
-    ///             CidrBlock = "10.0.1.0/24",
-    ///             RouteTableId = rtbTest.Id,
-    ///             VpcId = vpcTest.Id,
-    ///         });
-    ///         var @set = new Tencentcloud.Clb.LogSet("set", new Tencentcloud.Clb.LogSetArgs
-    ///         {
-    ///             Period = 7,
-    ///         });
-    ///         var topic = new Tencentcloud.Clb.LogTopic("topic", new Tencentcloud.Clb.LogTopicArgs
-    ///         {
-    ///             LogSetId = @set.Id,
-    ///             TopicName = "clb-topic",
-    ///         });
-    ///         var internalClb = new Tencentcloud.Clb.Instance("internalClb", new Tencentcloud.Clb.InstanceArgs
-    ///         {
-    ///             ClbName = "myclb",
-    ///             LoadBalancerPassToTarget = true,
-    ///             LogSetId = @set.Id,
-    ///             LogTopicId = topic.Id,
-    ///             NetworkType = "INTERNAL",
-    ///             ProjectId = 0,
-    ///             SubnetId = subnetTest.Id,
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "tf" },
-    ///             },
-    ///             VpcId = vpcTest.Id,
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var rtbTest = new Tencentcloud.Route.Table("rtbTest", new()
+    ///     {
+    ///         VpcId = vpcTest.Id,
+    ///     });
+    /// 
+    ///     var subnetTest = new Tencentcloud.Subnet.Instance("subnetTest", new()
+    ///     {
+    ///         AvailabilityZone = "ap-guangzhou-3",
+    ///         CidrBlock = "10.0.1.0/24",
+    ///         RouteTableId = rtbTest.Id,
+    ///         VpcId = vpcTest.Id,
+    ///     });
+    /// 
+    ///     var @set = new Tencentcloud.Clb.LogSet("set", new()
+    ///     {
+    ///         Period = 7,
+    ///     });
+    /// 
+    ///     var topic = new Tencentcloud.Clb.LogTopic("topic", new()
+    ///     {
+    ///         LogSetId = @set.Id,
+    ///         TopicName = "clb-topic",
+    ///     });
+    /// 
+    ///     var internalClb = new Tencentcloud.Clb.Instance("internalClb", new()
+    ///     {
+    ///         ClbName = "myclb",
+    ///         LoadBalancerPassToTarget = true,
+    ///         LogSetId = @set.Id,
+    ///         LogTopicId = topic.Id,
+    ///         NetworkType = "INTERNAL",
+    ///         ProjectId = 0,
+    ///         SubnetId = subnetTest.Id,
+    ///         Tags = 
+    ///         {
+    ///             { "test", "tf" },
+    ///         },
+    ///         VpcId = vpcTest.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CLB instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clb/instance:Instance foo lb-7a0t6zqb
+    /// $ pulumi import tencentcloud:Clb/instance:Instance foo lb-7a0t6zqb
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
@@ -478,7 +507,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<bool?> SnatPro { get; private set; } = null!;
 
         /// <summary>
-        /// Subnet ID of the CLB. Effective only for CLB within the VPC. Only supports `INTERNAL` CLBs. Default is `ipv4`.
+        /// In the case of purchasing a `INTERNAL` clb instance, the subnet id must be specified. The VIP of the `INTERNAL` clb instance will be generated from this subnet.
         /// </summary>
         [Output("subnetId")]
         public Output<string?> SubnetId { get; private set; } = null!;
@@ -570,7 +599,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
@@ -693,7 +722,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<bool>? SnatPro { get; set; }
 
         /// <summary>
-        /// Subnet ID of the CLB. Effective only for CLB within the VPC. Only supports `INTERNAL` CLBs. Default is `ipv4`.
+        /// In the case of purchasing a `INTERNAL` clb instance, the subnet id must be specified. The VIP of the `INTERNAL` clb instance will be generated from this subnet.
         /// </summary>
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
@@ -749,9 +778,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
@@ -892,7 +922,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<bool>? SnatPro { get; set; }
 
         /// <summary>
-        /// Subnet ID of the CLB. Effective only for CLB within the VPC. Only supports `INTERNAL` CLBs. Default is `ipv4`.
+        /// In the case of purchasing a `INTERNAL` clb instance, the subnet id must be specified. The VIP of the `INTERNAL` clb instance will be generated from this subnet.
         /// </summary>
         [Input("subnetId")]
         public Input<string>? SubnetId { get; set; }
@@ -948,5 +978,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to open clickhouse backup
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clickhouse.NewBackup(ctx, "backup", &Clickhouse.BackupArgs{
-// 			CosBucketName: pulumi.String("xxxxxx"),
-// 			InstanceId:    pulumi.String("cdwch-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clickhouse.NewBackup(ctx, "backup", &Clickhouse.BackupArgs{
+//				CosBucketName: pulumi.String("xxxxxx"),
+//				InstanceId:    pulumi.String("cdwch-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // clickhouse backup can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clickhouse/backup:Backup backup instance_id
+// $ pulumi import tencentcloud:Clickhouse/backup:Backup backup instance_id
 // ```
 type Backup struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewBackup(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Backup
 	err := ctx.RegisterResource("tencentcloud:Clickhouse/backup:Backup", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *Backup) ToBackupOutputWithContext(ctx context.Context) BackupOutput {
 // BackupArrayInput is an input type that accepts BackupArray and BackupArrayOutput values.
 // You can construct a concrete instance of `BackupArrayInput` via:
 //
-//          BackupArray{ BackupArgs{...} }
+//	BackupArray{ BackupArgs{...} }
 type BackupArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i BackupArray) ToBackupArrayOutputWithContext(ctx context.Context) BackupA
 // BackupMapInput is an input type that accepts BackupMap and BackupMapOutput values.
 // You can construct a concrete instance of `BackupMapInput` via:
 //
-//          BackupMap{ "key": BackupArgs{...} }
+//	BackupMap{ "key": BackupArgs{...} }
 type BackupMapInput interface {
 	pulumi.Input
 

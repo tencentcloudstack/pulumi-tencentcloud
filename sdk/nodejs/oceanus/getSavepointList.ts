@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Oceanus.getSavepointList({
+ * const example = tencentcloud.Oceanus.getSavepointList({
  *     jobId: "cql-314rw6w0",
  *     workSpaceId: "space-2idq8wbr",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSavepointList(args: GetSavepointListArgs, opts?: pulumi.InvokeOptions): Promise<GetSavepointListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Oceanus/getSavepointList:getSavepointList", {
         "jobId": args.jobId,
         "resultOutputFile": args.resultOutputFile,
@@ -67,9 +67,25 @@ export interface GetSavepointListResult {
     readonly savepoints: outputs.Oceanus.GetSavepointListSavepoint[];
     readonly workSpaceId?: string;
 }
-
+/**
+ * Use this data source to query detailed information of oceanus savepointList
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Oceanus.getSavepointList({
+ *     jobId: "cql-314rw6w0",
+ *     workSpaceId: "space-2idq8wbr",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSavepointListOutput(args: GetSavepointListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSavepointListResult> {
-    return pulumi.output(args).apply(a => getSavepointList(a, opts))
+    return pulumi.output(args).apply((a: any) => getSavepointList(a, opts))
 }
 
 /**

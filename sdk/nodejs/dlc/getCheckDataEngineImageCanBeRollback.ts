@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const checkDataEngineImageCanBeRollback = pulumi.output(tencentcloud.Dlc.getCheckDataEngineImageCanBeRollback({
+ * const checkDataEngineImageCanBeRollback = tencentcloud.Dlc.getCheckDataEngineImageCanBeRollback({
  *     dataEngineId: "DataEngine-public-1308919341",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCheckDataEngineImageCanBeRollback(args: GetCheckDataEngineImageCanBeRollbackArgs, opts?: pulumi.InvokeOptions): Promise<GetCheckDataEngineImageCanBeRollbackResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dlc/getCheckDataEngineImageCanBeRollback:getCheckDataEngineImageCanBeRollback", {
         "dataEngineId": args.dataEngineId,
         "resultOutputFile": args.resultOutputFile,
@@ -67,9 +66,24 @@ export interface GetCheckDataEngineImageCanBeRollbackResult {
      */
     readonly toRecordId: string;
 }
-
+/**
+ * Use this data source to query detailed information of dlc checkDataEngineImageCanBeRollback
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const checkDataEngineImageCanBeRollback = tencentcloud.Dlc.getCheckDataEngineImageCanBeRollback({
+ *     dataEngineId: "DataEngine-public-1308919341",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCheckDataEngineImageCanBeRollbackOutput(args: GetCheckDataEngineImageCanBeRollbackOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCheckDataEngineImageCanBeRollbackResult> {
-    return pulumi.output(args).apply(a => getCheckDataEngineImageCanBeRollback(a, opts))
+    return pulumi.output(args).apply((a: any) => getCheckDataEngineImageCanBeRollback(a, opts))
 }
 
 /**

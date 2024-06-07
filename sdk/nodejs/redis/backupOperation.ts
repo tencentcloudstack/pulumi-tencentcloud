@@ -8,20 +8,23 @@ import * as utilities from "../utilities";
  * Provides a resource to create a redis backupOperation
  *
  * ## Example Usage
+ *
  * ### Manually back up the Redis instance, and the backup data is kept for 7 days
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const foo = tencentcloud.Mysql.getInstance({});
  * const backupOperation = new tencentcloud.redis.BackupOperation("backupOperation", {
- *     instanceId: foo.then(foo => foo.instanceLists?[0]?.mysqlId),
+ *     instanceId: foo.then(foo => foo.instanceLists?.[0]?.mysqlId),
  *     remark: "manually back",
  *     storageDays: 7,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class BackupOperation extends pulumi.CustomResource {
     /**

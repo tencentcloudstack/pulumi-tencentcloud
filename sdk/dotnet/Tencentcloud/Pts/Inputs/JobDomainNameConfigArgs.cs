@@ -11,13 +11,20 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class JobDomainNameConfigArgs : Pulumi.ResourceArgs
+    public sealed class JobDomainNameConfigArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// DNS configuration.
+        /// </summary>
         [Input("dnsConfig")]
         public Input<Inputs.JobDomainNameConfigDnsConfigArgs>? DnsConfig { get; set; }
 
         [Input("hostAliases")]
         private InputList<Inputs.JobDomainNameConfigHostAliasArgs>? _hostAliases;
+
+        /// <summary>
+        /// Domain name binding configuration.
+        /// </summary>
         public InputList<Inputs.JobDomainNameConfigHostAliasArgs> HostAliases
         {
             get => _hostAliases ?? (_hostAliases = new InputList<Inputs.JobDomainNameConfigHostAliasArgs>());
@@ -27,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public JobDomainNameConfigArgs()
         {
         }
+        public static new JobDomainNameConfigArgs Empty => new JobDomainNameConfigArgs();
     }
 }

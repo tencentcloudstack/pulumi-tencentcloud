@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type GetAddressQuotaQuotaSet struct {
 	// Current count.
@@ -22,7 +25,7 @@ type GetAddressQuotaQuotaSet struct {
 // GetAddressQuotaQuotaSetInput is an input type that accepts GetAddressQuotaQuotaSetArgs and GetAddressQuotaQuotaSetOutput values.
 // You can construct a concrete instance of `GetAddressQuotaQuotaSetInput` via:
 //
-//          GetAddressQuotaQuotaSetArgs{...}
+//	GetAddressQuotaQuotaSetArgs{...}
 type GetAddressQuotaQuotaSetInput interface {
 	pulumi.Input
 
@@ -54,7 +57,7 @@ func (i GetAddressQuotaQuotaSetArgs) ToGetAddressQuotaQuotaSetOutputWithContext(
 // GetAddressQuotaQuotaSetArrayInput is an input type that accepts GetAddressQuotaQuotaSetArray and GetAddressQuotaQuotaSetArrayOutput values.
 // You can construct a concrete instance of `GetAddressQuotaQuotaSetArrayInput` via:
 //
-//          GetAddressQuotaQuotaSetArray{ GetAddressQuotaQuotaSetArgs{...} }
+//	GetAddressQuotaQuotaSetArray{ GetAddressQuotaQuotaSetArgs{...} }
 type GetAddressQuotaQuotaSetArrayInput interface {
 	pulumi.Input
 

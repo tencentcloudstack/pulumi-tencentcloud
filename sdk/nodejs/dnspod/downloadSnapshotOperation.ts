@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const downloadSnapshot = new tencentcloud.Dnspod.DownloadSnapshotOperation("download_snapshot", {
+ * const downloadSnapshot = new tencentcloud.dnspod.DownloadSnapshotOperation("downloadSnapshot", {
  *     domain: "dnspod.cn",
  *     snapshotId: "456",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class DownloadSnapshotOperation extends pulumi.CustomResource {
     /**

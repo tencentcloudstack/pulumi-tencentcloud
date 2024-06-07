@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,8 @@ import * as utilities from "../utilities";
  */
 export function getMigrateJobs(args?: GetMigrateJobsArgs, opts?: pulumi.InvokeOptions): Promise<GetMigrateJobsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dts/getMigrateJobs:getMigrateJobs", {
         "dstAccessTypes": args.dstAccessTypes,
         "dstDatabaseTypes": args.dstDatabaseTypes,
@@ -137,9 +135,11 @@ export interface GetMigrateJobsResult {
     readonly statuses?: string[];
     readonly tagFilters?: outputs.Dts.GetMigrateJobsTagFilter[];
 }
-
+/**
+ * Use this data source to query detailed information of dts migrateJobs
+ */
 export function getMigrateJobsOutput(args?: GetMigrateJobsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetMigrateJobsResult> {
-    return pulumi.output(args).apply(a => getMigrateJobs(a, opts))
+    return pulumi.output(args).apply((a: any) => getMigrateJobs(a, opts))
 }
 
 /**

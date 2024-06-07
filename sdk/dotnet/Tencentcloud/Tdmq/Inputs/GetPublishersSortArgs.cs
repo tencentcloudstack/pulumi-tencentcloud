@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Inputs
 {
 
-    public sealed class GetPublishersSortInputArgs : Pulumi.ResourceArgs
+    public sealed class GetPublishersSortInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// sorter.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Inputs
         public GetPublishersSortInputArgs()
         {
         }
+        public static new GetPublishersSortInputArgs Empty => new GetPublishersSortInputArgs();
     }
 }

@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const snapshotByTimeoffsetTemplate = new tencentcloud.Mps.SnapshotByTimeoffsetTemplate("snapshot_by_timeoffset_template", {
+ * const snapshotByTimeoffsetTemplate = new tencentcloud.mps.SnapshotByTimeoffsetTemplate("snapshotByTimeoffsetTemplate", {
  *     fillType: "stretch",
  *     format: "jpg",
  *     height: 128,
@@ -21,13 +22,14 @@ import * as utilities from "../utilities";
  *     width: 140,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mps snapshot_by_timeoffset_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/snapshotByTimeoffsetTemplate:SnapshotByTimeoffsetTemplate snapshot_by_timeoffset_template snapshot_by_timeoffset_template_id
+ * $ pulumi import tencentcloud:Mps/snapshotByTimeoffsetTemplate:SnapshotByTimeoffsetTemplate snapshot_by_timeoffset_template snapshot_by_timeoffset_template_id
  * ```
  */
 export class SnapshotByTimeoffsetTemplate extends pulumi.CustomResource {

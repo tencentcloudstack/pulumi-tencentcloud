@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class AlarmNoticeNoticeReceiverGetArgs : Pulumi.ResourceArgs
+    public sealed class AlarmNoticeNoticeReceiverGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// end time allowed to receive messages.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public AlarmNoticeNoticeReceiverGetArgs()
         {
         }
+        public static new AlarmNoticeNoticeReceiverGetArgs Empty => new AlarmNoticeNoticeReceiverGetArgs();
     }
 }

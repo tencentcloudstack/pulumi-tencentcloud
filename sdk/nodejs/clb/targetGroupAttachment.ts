@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const clbBasic = new tencentcloud.clb.Instance("clbBasic", {
  *     networkType: "OPEN",
@@ -40,13 +41,14 @@ import * as utilities from "../utilities";
  *     targetGroupId: test.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CLB target group attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment group lbtg-odareyb2#lbl-bicjmx3i#lb-cv0iz74c#loc-ac6uk7b6
+ * $ pulumi import tencentcloud:Clb/targetGroupAttachment:TargetGroupAttachment group lbtg-odareyb2#lbl-bicjmx3i#lb-cv0iz74c#loc-ac6uk7b6
  * ```
  */
 export class TargetGroupAttachment extends pulumi.CustomResource {
@@ -96,7 +98,7 @@ export class TargetGroupAttachment extends pulumi.CustomResource {
     /**
      * It has been deprecated from version 1.47.1. Use `targetGroupId` instead. ID of the CLB target group.
      *
-     * @deprecated It has been deprecated from version 1.47.1. Use `target_group_id` instead.
+     * @deprecated It has been deprecated from version 1.47.1. Use `targetGroupId` instead.
      */
     public readonly targrtGroupId!: pulumi.Output<string | undefined>;
 
@@ -160,7 +162,7 @@ export interface TargetGroupAttachmentState {
     /**
      * It has been deprecated from version 1.47.1. Use `targetGroupId` instead. ID of the CLB target group.
      *
-     * @deprecated It has been deprecated from version 1.47.1. Use `target_group_id` instead.
+     * @deprecated It has been deprecated from version 1.47.1. Use `targetGroupId` instead.
      */
     targrtGroupId?: pulumi.Input<string>;
 }
@@ -188,7 +190,7 @@ export interface TargetGroupAttachmentArgs {
     /**
      * It has been deprecated from version 1.47.1. Use `targetGroupId` instead. ID of the CLB target group.
      *
-     * @deprecated It has been deprecated from version 1.47.1. Use `target_group_id` instead.
+     * @deprecated It has been deprecated from version 1.47.1. Use `targetGroupId` instead.
      */
     targrtGroupId?: pulumi.Input<string>;
 }

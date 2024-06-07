@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// <summary>
         /// Use this data source to query detailed information of apiGateway service_release_versions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.ApiGateway.GetServiceReleaseVersions.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.ApiGateway.GetServiceReleaseVersions.InvokeAsync(new Tencentcloud.ApiGateway.GetServiceReleaseVersionsArgs
-        ///         {
-        ///             ServiceId = "service-nxz6yync",
-        ///         }));
-        ///     }
+        ///         ServiceId = "service-nxz6yync",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetServiceReleaseVersionsResult> InvokeAsync(GetServiceReleaseVersionsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetServiceReleaseVersionsResult>("tencentcloud:ApiGateway/getServiceReleaseVersions:getServiceReleaseVersions", args ?? new GetServiceReleaseVersionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetServiceReleaseVersionsResult>("tencentcloud:ApiGateway/getServiceReleaseVersions:getServiceReleaseVersions", args ?? new GetServiceReleaseVersionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of apiGateway service_release_versions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.ApiGateway.GetServiceReleaseVersions.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.ApiGateway.GetServiceReleaseVersions.InvokeAsync(new Tencentcloud.ApiGateway.GetServiceReleaseVersionsArgs
-        ///         {
-        ///             ServiceId = "service-nxz6yync",
-        ///         }));
-        ///     }
+        ///         ServiceId = "service-nxz6yync",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetServiceReleaseVersionsResult> Invoke(GetServiceReleaseVersionsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetServiceReleaseVersionsResult>("tencentcloud:ApiGateway/getServiceReleaseVersions:getServiceReleaseVersions", args ?? new GetServiceReleaseVersionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetServiceReleaseVersionsResult>("tencentcloud:ApiGateway/getServiceReleaseVersions:getServiceReleaseVersions", args ?? new GetServiceReleaseVersionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetServiceReleaseVersionsArgs : Pulumi.InvokeArgs
+    public sealed class GetServiceReleaseVersionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetServiceReleaseVersionsArgs()
         {
         }
+        public static new GetServiceReleaseVersionsArgs Empty => new GetServiceReleaseVersionsArgs();
     }
 
-    public sealed class GetServiceReleaseVersionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetServiceReleaseVersionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetServiceReleaseVersionsInvokeArgs()
         {
         }
+        public static new GetServiceReleaseVersionsInvokeArgs Empty => new GetServiceReleaseVersionsInvokeArgs();
     }
 
 

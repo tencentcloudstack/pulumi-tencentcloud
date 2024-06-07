@@ -8,33 +8,92 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a eip publicAddressAdjust
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eip.NewPublicAddressAdjust(ctx, "publicAddressAdjust", &Eip.PublicAddressAdjustArgs{
-// 			AddressId:  pulumi.String("eip-erft45fu"),
-// 			InstanceId: pulumi.String("ins-cr2rfq78"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// create vpc
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create vpc subnet
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+//				CidrBlock:        pulumi.String("10.0.20.0/28"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create cvm
+//			exampleInstance, err := Instance.NewInstance(ctx, "exampleInstance", &Instance.InstanceArgs{
+//				InstanceName:            pulumi.String("tf_example"),
+//				AvailabilityZone:        pulumi.String("ap-guangzhou-6"),
+//				ImageId:                 pulumi.String("img-9qrfy1xt"),
+//				InstanceType:            pulumi.String("SA3.MEDIUM4"),
+//				SystemDiskType:          pulumi.String("CLOUD_HSSD"),
+//				SystemDiskSize:          pulumi.Int(100),
+//				Hostname:                pulumi.String("example"),
+//				ProjectId:               pulumi.Int(0),
+//				VpcId:                   vpc.ID(),
+//				SubnetId:                subnet.ID(),
+//				AllocatePublicIp:        pulumi.Bool(true),
+//				InternetMaxBandwidthOut: pulumi.Int(10),
+//				DataDisks: instance.InstanceDataDiskArray{
+//					&instance.InstanceDataDiskArgs{
+//						DataDiskType: pulumi.String("CLOUD_HSSD"),
+//						DataDiskSize: pulumi.Int(50),
+//						Encrypt:      pulumi.Bool(false),
+//					},
+//				},
+//				Tags: pulumi.Map{
+//					"tagKey": pulumi.Any("tagValue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create eip
+//			_, err = Eip.NewInstance(ctx, "exampleEip/instanceInstance", nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Eip.NewPublicAddressAdjust(ctx, "examplePublicAddressAdjust", &Eip.PublicAddressAdjustArgs{
+//				InstanceId: exampleInstance.ID(),
+//				AddressId:  exampleEip / instanceInstance.Id,
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type PublicAddressAdjust struct {
 	pulumi.CustomResourceState
 
@@ -51,7 +110,7 @@ func NewPublicAddressAdjust(ctx *pulumi.Context,
 		args = &PublicAddressAdjustArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource PublicAddressAdjust
 	err := ctx.RegisterResource("tencentcloud:Eip/publicAddressAdjust:PublicAddressAdjust", name, args, &resource, opts...)
 	if err != nil {
@@ -132,7 +191,7 @@ func (i *PublicAddressAdjust) ToPublicAddressAdjustOutputWithContext(ctx context
 // PublicAddressAdjustArrayInput is an input type that accepts PublicAddressAdjustArray and PublicAddressAdjustArrayOutput values.
 // You can construct a concrete instance of `PublicAddressAdjustArrayInput` via:
 //
-//          PublicAddressAdjustArray{ PublicAddressAdjustArgs{...} }
+//	PublicAddressAdjustArray{ PublicAddressAdjustArgs{...} }
 type PublicAddressAdjustArrayInput interface {
 	pulumi.Input
 
@@ -157,7 +216,7 @@ func (i PublicAddressAdjustArray) ToPublicAddressAdjustArrayOutputWithContext(ct
 // PublicAddressAdjustMapInput is an input type that accepts PublicAddressAdjustMap and PublicAddressAdjustMapOutput values.
 // You can construct a concrete instance of `PublicAddressAdjustMapInput` via:
 //
-//          PublicAddressAdjustMap{ "key": PublicAddressAdjustArgs{...} }
+//	PublicAddressAdjustMap{ "key": PublicAddressAdjustArgs{...} }
 type PublicAddressAdjustMapInput interface {
 	pulumi.Input
 

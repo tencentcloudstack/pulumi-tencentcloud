@@ -7,48 +7,54 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cos bucketReferer
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cos.NewBucketReferer(ctx, "bucketReferer", &Cos.BucketRefererArgs{
-// 			Bucket: pulumi.String("mycos-1258798060"),
-// 			DomainLists: pulumi.StringArray{
-// 				pulumi.String("127.0.0.1"),
-// 				pulumi.String("terraform.com"),
-// 			},
-// 			EmptyReferConfiguration: pulumi.String("Allow"),
-// 			RefererType:             pulumi.String("Black-List"),
-// 			Status:                  pulumi.String("Enabled"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cos.NewBucketReferer(ctx, "bucketReferer", &Cos.BucketRefererArgs{
+//				Bucket: pulumi.String("mycos-1258798060"),
+//				DomainLists: pulumi.StringArray{
+//					pulumi.String("127.0.0.1"),
+//					pulumi.String("terraform.com"),
+//				},
+//				EmptyReferConfiguration: pulumi.String("Allow"),
+//				RefererType:             pulumi.String("Black-List"),
+//				Status:                  pulumi.String("Enabled"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cos bucket_referer can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cos/bucketReferer:BucketReferer bucket_referer bucket_id
+// $ pulumi import tencentcloud:Cos/bucketReferer:BucketReferer bucket_referer bucket_id
 // ```
 type BucketReferer struct {
 	pulumi.CustomResourceState
@@ -84,7 +90,7 @@ func NewBucketReferer(ctx *pulumi.Context,
 	if args.Status == nil {
 		return nil, errors.New("invalid value for required argument 'Status'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BucketReferer
 	err := ctx.RegisterResource("tencentcloud:Cos/bucketReferer:BucketReferer", name, args, &resource, opts...)
 	if err != nil {
@@ -189,7 +195,7 @@ func (i *BucketReferer) ToBucketRefererOutputWithContext(ctx context.Context) Bu
 // BucketRefererArrayInput is an input type that accepts BucketRefererArray and BucketRefererArrayOutput values.
 // You can construct a concrete instance of `BucketRefererArrayInput` via:
 //
-//          BucketRefererArray{ BucketRefererArgs{...} }
+//	BucketRefererArray{ BucketRefererArgs{...} }
 type BucketRefererArrayInput interface {
 	pulumi.Input
 
@@ -214,7 +220,7 @@ func (i BucketRefererArray) ToBucketRefererArrayOutputWithContext(ctx context.Co
 // BucketRefererMapInput is an input type that accepts BucketRefererMap and BucketRefererMapOutput values.
 // You can construct a concrete instance of `BucketRefererMapInput` via:
 //
-//          BucketRefererMap{ "key": BucketRefererArgs{...} }
+//	BucketRefererMap{ "key": BucketRefererArgs{...} }
 type BucketRefererMapInput interface {
 	pulumi.Input
 

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -13,7 +14,7 @@ import * as utilities from "../utilities";
  * dcdb account_privileges can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dcdb/accountPrivileges:AccountPrivileges account_privileges instanceId#userName#host#dbName#tabName#viewName#colName
+ * $ pulumi import tencentcloud:Dcdb/accountPrivileges:AccountPrivileges account_privileges instanceId#userName#host#dbName#tabName#viewName#colName
  * ```
  */
 export class AccountPrivileges extends pulumi.CustomResource {

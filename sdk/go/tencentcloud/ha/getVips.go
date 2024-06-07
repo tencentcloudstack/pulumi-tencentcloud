@@ -8,39 +8,44 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of HA VIPs.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ha.GetVips(ctx, &ha.GetVipsArgs{
-// 			AddressIp: pulumi.StringRef("10.0.4.16"),
-// 			Id:        pulumi.StringRef("havip-kjqwe4ba"),
-// 			Name:      pulumi.StringRef("test"),
-// 			SubnetId:  pulumi.StringRef("subnet-4d4m4cd4"),
-// 			VpcId:     pulumi.StringRef("vpc-gzea3dd7"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ha.GetVips(ctx, &ha.GetVipsArgs{
+//				AddressIp: pulumi.StringRef("10.0.4.16"),
+//				Id:        pulumi.StringRef("havip-kjqwe4ba"),
+//				Name:      pulumi.StringRef("test"),
+//				SubnetId:  pulumi.StringRef("subnet-4d4m4cd4"),
+//				VpcId:     pulumi.StringRef("vpc-gzea3dd7"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetVips(ctx *pulumi.Context, args *GetVipsArgs, opts ...pulumi.InvokeOption) (*GetVipsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetVipsResult
 	err := ctx.Invoke("tencentcloud:Ha/getVips:getVips", args, &rv, opts...)
 	if err != nil {

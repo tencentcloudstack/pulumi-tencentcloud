@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var deleteBackUpData = new Tencentcloud.Clickhouse.DeleteBackupData("deleteBackUpData", new()
     ///     {
-    ///         var deleteBackUpData = new Tencentcloud.Clickhouse.DeleteBackupData("deleteBackUpData", new Tencentcloud.Clickhouse.DeleteBackupDataArgs
-    ///         {
-    ///             BackUpJobId = 1234,
-    ///             InstanceId = "cdwch-xxxxxx",
-    ///         });
-    ///     }
+    ///         BackUpJobId = 1234,
+    ///         InstanceId = "cdwch-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clickhouse/deleteBackupData:DeleteBackupData")]
-    public partial class DeleteBackupData : Pulumi.CustomResource
+    public partial class DeleteBackupData : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Back up job id.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         }
     }
 
-    public sealed class DeleteBackupDataArgs : Pulumi.ResourceArgs
+    public sealed class DeleteBackupDataArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Back up job id.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public DeleteBackupDataArgs()
         {
         }
+        public static new DeleteBackupDataArgs Empty => new DeleteBackupDataArgs();
     }
 
-    public sealed class DeleteBackupDataState : Pulumi.ResourceArgs
+    public sealed class DeleteBackupDataState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Back up job id.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public DeleteBackupDataState()
         {
         }
+        public static new DeleteBackupDataState Empty => new DeleteBackupDataState();
     }
 }

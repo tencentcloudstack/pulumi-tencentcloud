@@ -15,206 +15,220 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var service = new Tencentcloud.Dts.MigrateService("service", new()
     ///     {
-    ///         var service = new Tencentcloud.Dts.MigrateService("service", new Tencentcloud.Dts.MigrateServiceArgs
+    ///         SrcDatabaseType = "mysql",
+    ///         DstDatabaseType = "cynosdbmysql",
+    ///         SrcRegion = "ap-guangzhou",
+    ///         DstRegion = "ap-guangzhou",
+    ///         InstanceClass = "small",
+    ///         JobName = "tf_test_xxx",
+    ///         Tags = new[]
     ///         {
-    ///             SrcDatabaseType = "mysql",
-    ///             DstDatabaseType = "cynosdbmysql",
-    ///             SrcRegion = "ap-guangzhou",
-    ///             DstRegion = "ap-guangzhou",
-    ///             InstanceClass = "small",
-    ///             JobName = "tf_test_xxx",
-    ///             Tags = 
+    ///             new Tencentcloud.Dts.Inputs.MigrateServiceTagArgs
     ///             {
-    ///                 new Tencentcloud.Dts.Inputs.MigrateServiceTagArgs
-    ///                 {
-    ///                     TagKey = "aaa",
-    ///                     TagValue = "bbb",
-    ///                 },
+    ///                 TagKey = "aaa",
+    ///                 TagValue = "bbb",
     ///             },
-    ///         });
-    ///         var job = new Tencentcloud.Dts.MigrateJob("job", new Tencentcloud.Dts.MigrateJobArgs
+    ///         },
+    ///     });
+    /// 
+    ///     var job = new Tencentcloud.Dts.MigrateJob("job", new()
+    ///     {
+    ///         ServiceId = service.Id,
+    ///         RunMode = "immediate",
+    ///         MigrateOption = new Tencentcloud.Dts.Inputs.MigrateJobMigrateOptionArgs
     ///         {
-    ///             ServiceId = service.Id,
-    ///             RunMode = "immediate",
-    ///             MigrateOption = new Tencentcloud.Dts.Inputs.MigrateJobMigrateOptionArgs
+    ///             DatabaseTable = new Tencentcloud.Dts.Inputs.MigrateJobMigrateOptionDatabaseTableArgs
     ///             {
-    ///                 DatabaseTable = new Tencentcloud.Dts.Inputs.MigrateJobMigrateOptionDatabaseTableArgs
+    ///                 ObjectMode = "partial",
+    ///                 Databases = new[]
     ///                 {
-    ///                     ObjectMode = "partial",
-    ///                     Databases = 
+    ///                     new Tencentcloud.Dts.Inputs.MigrateJobMigrateOptionDatabaseTableDatabaseArgs
     ///                     {
-    ///                         new Tencentcloud.Dts.Inputs.MigrateJobMigrateOptionDatabaseTableDatabaseArgs
+    ///                         DbName = "tf_ci_test",
+    ///                         DbMode = "partial",
+    ///                         TableMode = "partial",
+    ///                         Tables = new[]
     ///                         {
-    ///                             DbName = "tf_ci_test",
-    ///                             DbMode = "partial",
-    ///                             TableMode = "partial",
-    ///                             Tables = 
+    ///                             new Tencentcloud.Dts.Inputs.MigrateJobMigrateOptionDatabaseTableDatabaseTableArgs
     ///                             {
-    ///                                 new Tencentcloud.Dts.Inputs.MigrateJobMigrateOptionDatabaseTableDatabaseTableArgs
-    ///                                 {
-    ///                                     TableName = "test",
-    ///                                     NewTableName = "test_xxx",
-    ///                                     TableEditMode = "rename",
-    ///                                 },
+    ///                                 TableName = "test",
+    ///                                 NewTableName = "test_xxx",
+    ///                                 TableEditMode = "rename",
     ///                             },
     ///                         },
     ///                     },
     ///                 },
     ///             },
-    ///             SrcInfo = new Tencentcloud.Dts.Inputs.MigrateJobSrcInfoArgs
+    ///         },
+    ///         SrcInfo = new Tencentcloud.Dts.Inputs.MigrateJobSrcInfoArgs
+    ///         {
+    ///             Region = "ap-guangzhou",
+    ///             AccessType = "cdb",
+    ///             DatabaseType = "mysql",
+    ///             NodeType = "simple",
+    ///             Infos = new[]
     ///             {
-    ///                 Region = "ap-guangzhou",
-    ///                 AccessType = "cdb",
-    ///                 DatabaseType = "mysql",
-    ///                 NodeType = "simple",
-    ///                 Infos = 
+    ///                 new Tencentcloud.Dts.Inputs.MigrateJobSrcInfoInfoArgs
     ///                 {
-    ///                     new Tencentcloud.Dts.Inputs.MigrateJobSrcInfoInfoArgs
-    ///                     {
-    ///                         User = "root",
-    ///                         Password = "xxx",
-    ///                         InstanceId = "id",
-    ///                     },
+    ///                     User = "root",
+    ///                     Password = "xxx",
+    ///                     InstanceId = "id",
     ///                 },
     ///             },
-    ///             DstInfo = new Tencentcloud.Dts.Inputs.MigrateJobDstInfoArgs
+    ///         },
+    ///         DstInfo = new Tencentcloud.Dts.Inputs.MigrateJobDstInfoArgs
+    ///         {
+    ///             Region = "ap-guangzhou",
+    ///             AccessType = "cdb",
+    ///             DatabaseType = "cynosdbmysql",
+    ///             NodeType = "simple",
+    ///             Infos = new[]
     ///             {
-    ///                 Region = "ap-guangzhou",
-    ///                 AccessType = "cdb",
-    ///                 DatabaseType = "cynosdbmysql",
-    ///                 NodeType = "simple",
-    ///                 Infos = 
+    ///                 new Tencentcloud.Dts.Inputs.MigrateJobDstInfoInfoArgs
     ///                 {
-    ///                     new Tencentcloud.Dts.Inputs.MigrateJobDstInfoInfoArgs
-    ///                     {
-    ///                         User = "user",
-    ///                         Password = "xxx",
-    ///                         InstanceId = "id",
-    ///                     },
+    ///                     User = "user",
+    ///                     Password = "xxx",
+    ///                     InstanceId = "id",
     ///                 },
     ///             },
-    ///             AutoRetryTimeRangeMinutes = 0,
-    ///         });
-    ///         var start = new Tencentcloud.Dts.MigrateJobStartOperation("start", new Tencentcloud.Dts.MigrateJobStartOperationArgs
-    ///         {
-    ///             JobId = job.Id,
-    ///         });
-    ///         // pause the migration job
-    ///         var config = new Tencentcloud.Dts.MigrateJobConfig("config", new Tencentcloud.Dts.MigrateJobConfigArgs
-    ///         {
-    ///             JobId = start.Id,
-    ///             Action = "pause",
-    ///         });
-    ///     }
+    ///         },
+    ///         AutoRetryTimeRangeMinutes = 0,
+    ///     });
     /// 
-    /// }
+    ///     var start = new Tencentcloud.Dts.MigrateJobStartOperation("start", new()
+    ///     {
+    ///         JobId = job.Id,
+    ///     });
+    /// 
+    ///     // pause the migration job
+    ///     var config = new Tencentcloud.Dts.MigrateJobConfig("config", new()
+    ///     {
+    ///         JobId = start.Id,
+    ///         Action = "pause",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Continue the a migration job
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Tencentcloud.Dts.MigrateJobConfig("config", new()
     ///     {
-    ///         var config = new Tencentcloud.Dts.MigrateJobConfig("config", new Tencentcloud.Dts.MigrateJobConfigArgs
-    ///         {
-    ///             JobId = tencentcloud_dts_migrate_job_start_operation.Start.Id,
-    ///             Action = "continue",
-    ///         });
-    ///     }
+    ///         JobId = tencentcloud_dts_migrate_job_start_operation.Start.Id,
+    ///         Action = "continue",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Complete a migration job when the status is readyComplete
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Tencentcloud.Dts.MigrateJobConfig("config", new()
     ///     {
-    ///         var config = new Tencentcloud.Dts.MigrateJobConfig("config", new Tencentcloud.Dts.MigrateJobConfigArgs
-    ///         {
-    ///             JobId = tencentcloud_dts_migrate_job_start_operation.Start.Id,
-    ///             Action = "continue",
-    ///         });
-    ///     }
+    ///         JobId = tencentcloud_dts_migrate_job_start_operation.Start.Id,
+    ///         Action = "continue",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Stop a running migration job
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Tencentcloud.Dts.MigrateJobConfig("config", new()
     ///     {
-    ///         var config = new Tencentcloud.Dts.MigrateJobConfig("config", new Tencentcloud.Dts.MigrateJobConfigArgs
-    ///         {
-    ///             JobId = tencentcloud_dts_migrate_job_start_operation.Start.Id,
-    ///             Action = "stop",
-    ///         });
-    ///     }
+    ///         JobId = tencentcloud_dts_migrate_job_start_operation.Start.Id,
+    ///         Action = "stop",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Isolate a stopped/canceled migration job
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Tencentcloud.Dts.MigrateJobConfig("config", new()
     ///     {
-    ///         var config = new Tencentcloud.Dts.MigrateJobConfig("config", new Tencentcloud.Dts.MigrateJobConfigArgs
-    ///         {
-    ///             JobId = tencentcloud_dts_migrate_job_start_operation.Start.Id,
-    ///             Action = "isolate",
-    ///         });
-    ///     }
+    ///         JobId = tencentcloud_dts_migrate_job_start_operation.Start.Id,
+    ///         Action = "isolate",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Recover a isolated migration job
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Tencentcloud.Dts.MigrateJobConfig("config", new()
     ///     {
-    ///         var config = new Tencentcloud.Dts.MigrateJobConfig("config", new Tencentcloud.Dts.MigrateJobConfigArgs
-    ///         {
-    ///             JobId = tencentcloud_dts_migrate_job_start_operation.Start.Id,
-    ///             Action = "recover",
-    ///         });
-    ///     }
+    ///         JobId = tencentcloud_dts_migrate_job_start_operation.Start.Id,
+    ///         Action = "recover",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/migrateJobConfig:MigrateJobConfig")]
-    public partial class MigrateJobConfig : Pulumi.CustomResource
+    public partial class MigrateJobConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The operation want to perform. Valid values are: `pause`, `continue`, `complete`, `recover`,`stop`.
@@ -279,7 +293,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         }
     }
 
-    public sealed class MigrateJobConfigArgs : Pulumi.ResourceArgs
+    public sealed class MigrateJobConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The operation want to perform. Valid values are: `pause`, `continue`, `complete`, `recover`,`stop`.
@@ -302,9 +316,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public MigrateJobConfigArgs()
         {
         }
+        public static new MigrateJobConfigArgs Empty => new MigrateJobConfigArgs();
     }
 
-    public sealed class MigrateJobConfigState : Pulumi.ResourceArgs
+    public sealed class MigrateJobConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The operation want to perform. Valid values are: `pause`, `continue`, `complete`, `recover`,`stop`.
@@ -327,5 +342,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public MigrateJobConfigState()
         {
         }
+        public static new MigrateJobConfigState Empty => new MigrateJobConfigState();
     }
 }

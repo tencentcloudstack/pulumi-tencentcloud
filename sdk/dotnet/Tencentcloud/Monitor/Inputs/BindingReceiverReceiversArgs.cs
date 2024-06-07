@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class BindingReceiverReceiversArgs : Pulumi.ResourceArgs
+    public sealed class BindingReceiverReceiversArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// End of alarm period. Meaning with `start_time`.
@@ -76,5 +76,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public BindingReceiverReceiversArgs()
         {
         }
+        public static new BindingReceiverReceiversArgs Empty => new BindingReceiverReceiversArgs();
     }
 }

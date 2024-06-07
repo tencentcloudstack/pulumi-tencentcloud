@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class GetAlarmHistoryNamespaceArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmHistoryNamespaceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Monitor type.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public GetAlarmHistoryNamespaceArgs()
         {
         }
+        public static new GetAlarmHistoryNamespaceArgs Empty => new GetAlarmHistoryNamespaceArgs();
     }
 }

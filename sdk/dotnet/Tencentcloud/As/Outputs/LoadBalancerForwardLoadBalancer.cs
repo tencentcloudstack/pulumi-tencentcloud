@@ -14,10 +14,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Outputs
     [OutputType]
     public sealed class LoadBalancerForwardLoadBalancer
     {
+        /// <summary>
+        /// Application load balancer listener ID.
+        /// </summary>
         public readonly string ListenerId;
+        /// <summary>
+        /// Application load balancer instance ID.
+        /// </summary>
         public readonly string LoadBalancerId;
+        /// <summary>
+        /// Application load balancer location ID.
+        /// </summary>
         public readonly string? LocationId;
+        /// <summary>
+        /// Load balancer instance region. Default value is the region of current auto scaling group. The format is the same as the public parameter Region, for example: ap-guangzhou.
+        /// </summary>
         public readonly string? Region;
+        /// <summary>
+        /// List of TargetAttribute.
+        /// </summary>
         public readonly ImmutableArray<Outputs.LoadBalancerForwardLoadBalancerTargetAttribute> TargetAttributes;
 
         [OutputConstructor]

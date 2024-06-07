@@ -15,74 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// <summary>
         /// Use this data source to query detailed information of ccn cross_border_compliance
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var crossBorderCompliance = Tencentcloud.Ccn.GetCrossBorderCompliance.Invoke(new()
         ///     {
-        ///         var crossBorderCompliance = Output.Create(Tencentcloud.Ccn.GetCrossBorderCompliance.InvokeAsync(new Tencentcloud.Ccn.GetCrossBorderComplianceArgs
-        ///         {
-        ///             ComplianceId = 10002,
-        ///             Email = "test@tencent.com",
-        ///             ServiceEndDate = "2021-07-29",
-        ///             ServiceProvider = "UNICOM",
-        ///             ServiceStartDate = "2020-07-29",
-        ///             State = "APPROVED",
-        ///         }));
-        ///     }
+        ///         ComplianceId = 10002,
+        ///         Email = "test@tencent.com",
+        ///         ServiceEndDate = "2021-07-29",
+        ///         ServiceProvider = "UNICOM",
+        ///         ServiceStartDate = "2020-07-29",
+        ///         State = "APPROVED",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCrossBorderComplianceResult> InvokeAsync(GetCrossBorderComplianceArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCrossBorderComplianceResult>("tencentcloud:Ccn/getCrossBorderCompliance:getCrossBorderCompliance", args ?? new GetCrossBorderComplianceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCrossBorderComplianceResult>("tencentcloud:Ccn/getCrossBorderCompliance:getCrossBorderCompliance", args ?? new GetCrossBorderComplianceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ccn cross_border_compliance
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var crossBorderCompliance = Tencentcloud.Ccn.GetCrossBorderCompliance.Invoke(new()
         ///     {
-        ///         var crossBorderCompliance = Output.Create(Tencentcloud.Ccn.GetCrossBorderCompliance.InvokeAsync(new Tencentcloud.Ccn.GetCrossBorderComplianceArgs
-        ///         {
-        ///             ComplianceId = 10002,
-        ///             Email = "test@tencent.com",
-        ///             ServiceEndDate = "2021-07-29",
-        ///             ServiceProvider = "UNICOM",
-        ///             ServiceStartDate = "2020-07-29",
-        ///             State = "APPROVED",
-        ///         }));
-        ///     }
+        ///         ComplianceId = 10002,
+        ///         Email = "test@tencent.com",
+        ///         ServiceEndDate = "2021-07-29",
+        ///         ServiceProvider = "UNICOM",
+        ///         ServiceStartDate = "2020-07-29",
+        ///         State = "APPROVED",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCrossBorderComplianceResult> Invoke(GetCrossBorderComplianceInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCrossBorderComplianceResult>("tencentcloud:Ccn/getCrossBorderCompliance:getCrossBorderCompliance", args ?? new GetCrossBorderComplianceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCrossBorderComplianceResult>("tencentcloud:Ccn/getCrossBorderCompliance:getCrossBorderCompliance", args ?? new GetCrossBorderComplianceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCrossBorderComplianceArgs : Pulumi.InvokeArgs
+    public sealed class GetCrossBorderComplianceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// (Fuzzy query) business license address.
@@ -189,9 +183,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public GetCrossBorderComplianceArgs()
         {
         }
+        public static new GetCrossBorderComplianceArgs Empty => new GetCrossBorderComplianceArgs();
     }
 
-    public sealed class GetCrossBorderComplianceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCrossBorderComplianceInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// (Fuzzy query) business license address.
@@ -298,6 +293,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public GetCrossBorderComplianceInvokeArgs()
         {
         }
+        public static new GetCrossBorderComplianceInvokeArgs Empty => new GetCrossBorderComplianceInvokeArgs();
     }
 
 

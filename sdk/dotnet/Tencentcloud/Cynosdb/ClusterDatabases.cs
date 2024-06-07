@@ -15,46 +15,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var clusterDatabases = new Tencentcloud.Cynosdb.ClusterDatabases("clusterDatabases", new()
     ///     {
-    ///         var clusterDatabases = new Tencentcloud.Cynosdb.ClusterDatabases("clusterDatabases", new Tencentcloud.Cynosdb.ClusterDatabasesArgs
+    ///         CharacterSet = "utf8",
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         CollateRule = "utf8_general_ci",
+    ///         DbName = "terraform-test",
+    ///         Description = "terraform test",
+    ///         UserHostPrivileges = new[]
     ///         {
-    ///             CharacterSet = "utf8",
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             CollateRule = "utf8_general_ci",
-    ///             DbName = "terraform-test",
-    ///             Description = "terraform test",
-    ///             UserHostPrivileges = 
+    ///             new Tencentcloud.Cynosdb.Inputs.ClusterDatabasesUserHostPrivilegeArgs
     ///             {
-    ///                 new Tencentcloud.Cynosdb.Inputs.ClusterDatabasesUserHostPrivilegeArgs
-    ///                 {
-    ///                     DbHost = "%",
-    ///                     DbPrivilege = "READ_ONLY",
-    ///                     DbUserName = "root",
-    ///                 },
+    ///                 DbHost = "%",
+    ///                 DbPrivilege = "READ_ONLY",
+    ///                 DbUserName = "root",
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cynosdb cluster_databases can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cynosdb/clusterDatabases:ClusterDatabases cluster_databases cluster_databases_id
+    /// $ pulumi import tencentcloud:Cynosdb/clusterDatabases:ClusterDatabases cluster_databases cluster_databases_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/clusterDatabases:ClusterDatabases")]
-    public partial class ClusterDatabases : Pulumi.CustomResource
+    public partial class ClusterDatabases : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Character Set Type.
@@ -137,7 +138,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class ClusterDatabasesArgs : Pulumi.ResourceArgs
+    public sealed class ClusterDatabasesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Character Set Type.
@@ -184,9 +185,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ClusterDatabasesArgs()
         {
         }
+        public static new ClusterDatabasesArgs Empty => new ClusterDatabasesArgs();
     }
 
-    public sealed class ClusterDatabasesState : Pulumi.ResourceArgs
+    public sealed class ClusterDatabasesState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Character Set Type.
@@ -233,5 +235,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ClusterDatabasesState()
         {
         }
+        public static new ClusterDatabasesState Empty => new ClusterDatabasesState();
     }
 }

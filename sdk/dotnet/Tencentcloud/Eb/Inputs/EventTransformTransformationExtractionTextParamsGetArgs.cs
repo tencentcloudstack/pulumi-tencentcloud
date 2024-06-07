@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class EventTransformTransformationExtractionTextParamsGetArgs : Pulumi.ResourceArgs
+    public sealed class EventTransformTransformationExtractionTextParamsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Fill in the regular expression: length 128.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
         public EventTransformTransformationExtractionTextParamsGetArgs()
         {
         }
+        public static new EventTransformTransformationExtractionTextParamsGetArgs Empty => new EventTransformTransformationExtractionTextParamsGetArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainOriginPullOptimizationGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainOriginPullOptimizationGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Optimization type, values: `OVToCN` - Overseas to CN, `CNToOV` CN to Overseas.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainOriginPullOptimizationGetArgs()
         {
         }
+        public static new DomainOriginPullOptimizationGetArgs Empty => new DomainOriginPullOptimizationGetArgs();
     }
 }

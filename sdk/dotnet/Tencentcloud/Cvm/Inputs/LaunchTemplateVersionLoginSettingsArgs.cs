@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateVersionLoginSettingsArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateVersionLoginSettingsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to keep the original settings of an image.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateVersionLoginSettingsArgs()
         {
         }
+        public static new LaunchTemplateVersionLoginSettingsArgs Empty => new LaunchTemplateVersionLoginSettingsArgs();
     }
 }

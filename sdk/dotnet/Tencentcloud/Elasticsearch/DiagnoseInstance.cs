@@ -15,30 +15,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var diagnoseInstance = new Tencentcloud.Elasticsearch.DiagnoseInstance("diagnoseInstance", new()
     ///     {
-    ///         var diagnoseInstance = new Tencentcloud.Elasticsearch.DiagnoseInstance("diagnoseInstance", new Tencentcloud.Elasticsearch.DiagnoseInstanceArgs
+    ///         DiagnoseIndices = "*",
+    ///         DiagnoseJobs = new[]
     ///         {
-    ///             DiagnoseIndices = "*",
-    ///             DiagnoseJobs = 
-    ///             {
-    ///                 "cluster_health",
-    ///             },
-    ///             InstanceId = "es-xxxxxx",
-    ///         });
-    ///     }
+    ///             "cluster_health",
+    ///         },
+    ///         InstanceId = "es-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/diagnoseInstance:DiagnoseInstance")]
-    public partial class DiagnoseInstance : Pulumi.CustomResource
+    public partial class DiagnoseInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Indexes that need to be diagnosed. Wildcards are supported.
@@ -103,7 +104,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         }
     }
 
-    public sealed class DiagnoseInstanceArgs : Pulumi.ResourceArgs
+    public sealed class DiagnoseInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indexes that need to be diagnosed. Wildcards are supported.
@@ -132,9 +133,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public DiagnoseInstanceArgs()
         {
         }
+        public static new DiagnoseInstanceArgs Empty => new DiagnoseInstanceArgs();
     }
 
-    public sealed class DiagnoseInstanceState : Pulumi.ResourceArgs
+    public sealed class DiagnoseInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indexes that need to be diagnosed. Wildcards are supported.
@@ -163,5 +165,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public DiagnoseInstanceState()
         {
         }
+        public static new DiagnoseInstanceState Empty => new DiagnoseInstanceState();
     }
 }

@@ -17,74 +17,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
         /// 
         /// &gt; **NOTE:** This data source is still in internal testing. To experience its functions, you need to apply for a whitelist from Tencent Cloud.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instances = Tencentcloud.Tdcpg.GetInstances.Invoke(new()
         ///     {
-        ///         var instances = Output.Create(Tencentcloud.Tdcpg.GetInstances.InvokeAsync(new Tencentcloud.Tdcpg.GetInstancesArgs
-        ///         {
-        ///             ClusterId = "",
-        ///             InstanceId = "",
-        ///             InstanceName = "",
-        ///             InstanceType = "",
-        ///             Status = "",
-        ///         }));
-        ///     }
+        ///         ClusterId = "",
+        ///         InstanceId = "",
+        ///         InstanceName = "",
+        ///         InstanceType = "",
+        ///         Status = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstancesResult> InvokeAsync(GetInstancesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstancesResult>("tencentcloud:Tdcpg/getInstances:getInstances", args ?? new GetInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstancesResult>("tencentcloud:Tdcpg/getInstances:getInstances", args ?? new GetInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tdcpg instances.
         /// 
         /// &gt; **NOTE:** This data source is still in internal testing. To experience its functions, you need to apply for a whitelist from Tencent Cloud.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instances = Tencentcloud.Tdcpg.GetInstances.Invoke(new()
         ///     {
-        ///         var instances = Output.Create(Tencentcloud.Tdcpg.GetInstances.InvokeAsync(new Tencentcloud.Tdcpg.GetInstancesArgs
-        ///         {
-        ///             ClusterId = "",
-        ///             InstanceId = "",
-        ///             InstanceName = "",
-        ///             InstanceType = "",
-        ///             Status = "",
-        ///         }));
-        ///     }
+        ///         ClusterId = "",
+        ///         InstanceId = "",
+        ///         InstanceName = "",
+        ///         InstanceType = "",
+        ///         Status = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstancesResult> Invoke(GetInstancesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstancesResult>("tencentcloud:Tdcpg/getInstances:getInstances", args ?? new GetInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstancesResult>("tencentcloud:Tdcpg/getInstances:getInstances", args ?? new GetInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetInstancesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -125,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
         public GetInstancesArgs()
         {
         }
+        public static new GetInstancesArgs Empty => new GetInstancesArgs();
     }
 
-    public sealed class GetInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -168,6 +163,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
         public GetInstancesInvokeArgs()
         {
         }
+        public static new GetInstancesInvokeArgs Empty => new GetInstancesInvokeArgs();
     }
 
 

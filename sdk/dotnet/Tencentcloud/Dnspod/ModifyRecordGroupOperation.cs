@@ -15,28 +15,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var modifyRecordGroup = new Tencentcloud.Dnspod.ModifyRecordGroupOperation("modifyRecordGroup", new()
     ///     {
-    ///         var modifyRecordGroup = new Tencentcloud.Dnspod.ModifyRecordGroupOperation("modifyRecordGroup", new Tencentcloud.Dnspod.ModifyRecordGroupOperationArgs
-    ///         {
-    ///             Domain = "dnspod.cn",
-    ///             DomainId = 123,
-    ///             GroupId = 1,
-    ///             RecordId = "234|345",
-    ///         });
-    ///     }
+    ///         Domain = "dnspod.cn",
+    ///         DomainId = 123,
+    ///         GroupId = 1,
+    ///         RecordId = "234|345",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnspod/modifyRecordGroupOperation:ModifyRecordGroupOperation")]
-    public partial class ModifyRecordGroupOperation : Pulumi.CustomResource
+    public partial class ModifyRecordGroupOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Domain.
@@ -107,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         }
     }
 
-    public sealed class ModifyRecordGroupOperationArgs : Pulumi.ResourceArgs
+    public sealed class ModifyRecordGroupOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -136,9 +137,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public ModifyRecordGroupOperationArgs()
         {
         }
+        public static new ModifyRecordGroupOperationArgs Empty => new ModifyRecordGroupOperationArgs();
     }
 
-    public sealed class ModifyRecordGroupOperationState : Pulumi.ResourceArgs
+    public sealed class ModifyRecordGroupOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -167,5 +169,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public ModifyRecordGroupOperationState()
         {
         }
+        public static new ModifyRecordGroupOperationState Empty => new ModifyRecordGroupOperationState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingGetArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether the message is allowed to be empty.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingGetArgs()
         {
         }
+        public static new DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingGetArgs Empty => new DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingGetArgs();
     }
 }

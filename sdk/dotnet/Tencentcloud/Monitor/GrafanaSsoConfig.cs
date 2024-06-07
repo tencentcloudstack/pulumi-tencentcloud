@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var grafanaSsoConfig = new Tencentcloud.Monitor.GrafanaSsoConfig("grafanaSsoConfig", new()
     ///     {
-    ///         var grafanaSsoConfig = new Tencentcloud.Monitor.GrafanaSsoConfig("grafanaSsoConfig", new Tencentcloud.Monitor.GrafanaSsoConfigArgs
-    ///         {
-    ///             EnableSso = false,
-    ///             InstanceId = "grafana-dp2hnnfa",
-    ///         });
-    ///     }
+    ///         EnableSso = false,
+    ///         InstanceId = "grafana-dp2hnnfa",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor grafana_sso_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/grafanaSsoConfig:GrafanaSsoConfig grafana_sso_config instance_id
+    /// $ pulumi import tencentcloud:Monitor/grafanaSsoConfig:GrafanaSsoConfig grafana_sso_config instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/grafanaSsoConfig:GrafanaSsoConfig")]
-    public partial class GrafanaSsoConfig : Pulumi.CustomResource
+    public partial class GrafanaSsoConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to enable SSO: `true` for enabling; `false` for disabling.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class GrafanaSsoConfigArgs : Pulumi.ResourceArgs
+    public sealed class GrafanaSsoConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable SSO: `true` for enabling; `false` for disabling.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaSsoConfigArgs()
         {
         }
+        public static new GrafanaSsoConfigArgs Empty => new GrafanaSsoConfigArgs();
     }
 
-    public sealed class GrafanaSsoConfigState : Pulumi.ResourceArgs
+    public sealed class GrafanaSsoConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable SSO: `true` for enabling; `false` for disabling.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaSsoConfigState()
         {
         }
+        public static new GrafanaSsoConfigState Empty => new GrafanaSsoConfigState();
     }
 }

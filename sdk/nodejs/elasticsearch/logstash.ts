@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logstash = new tencentcloud.Elasticsearch.Logstash("logstash", {
+ * const logstash = new tencentcloud.elasticsearch.Logstash("logstash", {
  *     chargeType: "POSTPAID_BY_HOUR",
  *     diskSize: 20,
  *     diskType: "CLOUD_SSD",
@@ -45,13 +47,14 @@ import * as utilities from "../utilities";
  *     zone: "ap-guangzhou-6",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * elasticsearch logstash can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Elasticsearch/logstash:Logstash logstash logstash_id
+ * $ pulumi import tencentcloud:Elasticsearch/logstash:Logstash logstash logstash_id
  * ```
  */
 export class Logstash extends pulumi.CustomResource {

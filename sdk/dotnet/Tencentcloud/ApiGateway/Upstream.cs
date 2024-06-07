@@ -14,181 +14,191 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// Provides a resource to create a apigateway upstream
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a basic VPC channel
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "cvm",
-    ///         }));
-    ///         var images = Output.Create(Tencentcloud.Images.GetInstance.InvokeAsync(new Tencentcloud.Images.GetInstanceArgs
-    ///         {
-    ///             ImageTypes = 
-    ///             {
-    ///                 "PUBLIC_IMAGE",
-    ///             },
-    ///             ImageNameRegex = "Final",
-    ///         }));
-    ///         var instanceTypes = Output.Create(Tencentcloud.Instance.GetTypes.InvokeAsync(new Tencentcloud.Instance.GetTypesArgs
-    ///         {
-    ///             Filters = 
-    ///             {
-    ///                 new Tencentcloud.Instance.Inputs.GetTypesFilterArgs
-    ///                 {
-    ///                     Name = "instance-family",
-    ///                     Values = 
-    ///                     {
-    ///                         "S5",
-    ///                     },
-    ///                 },
-    ///             },
-    ///             CpuCoreCount = 2,
-    ///             ExcludeSoldOut = true,
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[3]?.Name),
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var exampleInstance = new Tencentcloud.Instance.Instance("exampleInstance", new Tencentcloud.Instance.InstanceArgs
-    ///         {
-    ///             InstanceName = "tf_example",
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[3]?.Name),
-    ///             ImageId = images.Apply(images =&gt; images.Images?[0]?.ImageId),
-    ///             InstanceType = instanceTypes.Apply(instanceTypes =&gt; instanceTypes.InstanceTypes?[0]?.InstanceType),
-    ///             SystemDiskType = "CLOUD_PREMIUM",
-    ///             SystemDiskSize = 50,
-    ///             Hostname = "terraform",
-    ///             ProjectId = 0,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             DataDisks = 
-    ///             {
-    ///                 new Tencentcloud.Instance.Inputs.InstanceDataDiskArgs
-    ///                 {
-    ///                     DataDiskType = "CLOUD_PREMIUM",
-    ///                     DataDiskSize = 50,
-    ///                     Encrypt = false,
-    ///                 },
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "tagKey", "tagValue" },
-    ///             },
-    ///         });
-    ///         var exampleUpstream = new Tencentcloud.ApiGateway.Upstream("exampleUpstream", new Tencentcloud.ApiGateway.UpstreamArgs
-    ///         {
-    ///             Scheme = "HTTP",
-    ///             Algorithm = "ROUND-ROBIN",
-    ///             UniqVpcId = vpc.Id,
-    ///             UpstreamName = "tf_example",
-    ///             UpstreamDescription = "desc.",
-    ///             UpstreamType = "IP_PORT",
-    ///             Retries = 5,
-    ///             Nodes = 
-    ///             {
-    ///                 new Tencentcloud.ApiGateway.Inputs.UpstreamNodeArgs
-    ///                 {
-    ///                     Host = "1.1.1.1",
-    ///                     Port = 9090,
-    ///                     Weight = 10,
-    ///                     VmInstanceId = exampleInstance.Id,
-    ///                     Tags = 
-    ///                     {
-    ///                         "tags",
-    ///                     },
-    ///                 },
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///         Product = "cvm",
+    ///     });
     /// 
-    /// }
+    ///     var images = Tencentcloud.Images.GetInstance.Invoke(new()
+    ///     {
+    ///         ImageTypes = new[]
+    ///         {
+    ///             "PUBLIC_IMAGE",
+    ///         },
+    ///         ImageNameRegex = "Final",
+    ///     });
+    /// 
+    ///     var instanceTypes = Tencentcloud.Instance.GetTypes.Invoke(new()
+    ///     {
+    ///         Filters = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
+    ///             {
+    ///                 Name = "instance-family",
+    ///                 Values = new[]
+    ///                 {
+    ///                     "S5",
+    ///                 },
+    ///             },
+    ///         },
+    ///         CpuCoreCount = 2,
+    ///         ExcludeSoldOut = true,
+    ///     });
+    /// 
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[3]?.Name),
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var exampleInstance = new Tencentcloud.Instance.Instance("exampleInstance", new()
+    ///     {
+    ///         InstanceName = "tf_example",
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[3]?.Name),
+    ///         ImageId = images.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
+    ///         InstanceType = instanceTypes.Apply(getTypesResult =&gt; getTypesResult.InstanceTypes[0]?.InstanceType),
+    ///         SystemDiskType = "CLOUD_PREMIUM",
+    ///         SystemDiskSize = 50,
+    ///         Hostname = "terraform",
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DataDisks = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.InstanceDataDiskArgs
+    ///             {
+    ///                 DataDiskType = "CLOUD_PREMIUM",
+    ///                 DataDiskSize = 50,
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleUpstream = new Tencentcloud.ApiGateway.Upstream("exampleUpstream", new()
+    ///     {
+    ///         Scheme = "HTTP",
+    ///         Algorithm = "ROUND-ROBIN",
+    ///         UniqVpcId = vpc.Id,
+    ///         UpstreamName = "tf_example",
+    ///         UpstreamDescription = "desc.",
+    ///         UpstreamType = "IP_PORT",
+    ///         Retries = 5,
+    ///         Nodes = new[]
+    ///         {
+    ///             new Tencentcloud.ApiGateway.Inputs.UpstreamNodeArgs
+    ///             {
+    ///                 Host = "1.1.1.1",
+    ///                 Port = 9090,
+    ///                 Weight = 10,
+    ///                 VmInstanceId = exampleInstance.Id,
+    ///                 Tags = new[]
+    ///                 {
+    ///                     "tags",
+    ///                 },
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a complete VPC channel
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.ApiGateway.Upstream("example", new()
     ///     {
-    ///         var example = new Tencentcloud.ApiGateway.Upstream("example", new Tencentcloud.ApiGateway.UpstreamArgs
+    ///         Scheme = "HTTP",
+    ///         Algorithm = "ROUND-ROBIN",
+    ///         UniqVpcId = tencentcloud_vpc.Vpc.Id,
+    ///         UpstreamName = "tf_example",
+    ///         UpstreamDescription = "desc.",
+    ///         UpstreamType = "IP_PORT",
+    ///         Retries = 5,
+    ///         Nodes = new[]
     ///         {
-    ///             Scheme = "HTTP",
-    ///             Algorithm = "ROUND-ROBIN",
-    ///             UniqVpcId = tencentcloud_vpc.Vpc.Id,
-    ///             UpstreamName = "tf_example",
-    ///             UpstreamDescription = "desc.",
-    ///             UpstreamType = "IP_PORT",
-    ///             Retries = 5,
-    ///             Nodes = 
+    ///             new Tencentcloud.ApiGateway.Inputs.UpstreamNodeArgs
     ///             {
-    ///                 new Tencentcloud.ApiGateway.Inputs.UpstreamNodeArgs
+    ///                 Host = "1.1.1.1",
+    ///                 Port = 9090,
+    ///                 Weight = 10,
+    ///                 VmInstanceId = tencentcloud_instance.Example.Id,
+    ///                 Tags = new[]
     ///                 {
-    ///                     Host = "1.1.1.1",
-    ///                     Port = 9090,
-    ///                     Weight = 10,
-    ///                     VmInstanceId = tencentcloud_instance.Example.Id,
-    ///                     Tags = 
-    ///                     {
-    ///                         "tags",
-    ///                     },
+    ///                     "tags",
     ///                 },
     ///             },
-    ///             HealthChecker = new Tencentcloud.ApiGateway.Inputs.UpstreamHealthCheckerArgs
-    ///             {
-    ///                 EnableActiveCheck = true,
-    ///                 EnablePassiveCheck = true,
-    ///                 HealthyHttpStatus = "200",
-    ///                 UnhealthyHttpStatus = "500",
-    ///                 TcpFailureThreshold = 5,
-    ///                 TimeoutThreshold = 5,
-    ///                 HttpFailureThreshold = 3,
-    ///                 ActiveCheckHttpPath = "/",
-    ///                 ActiveCheckTimeout = 5,
-    ///                 ActiveCheckInterval = 5,
-    ///                 UnhealthyTimeout = 30,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         HealthChecker = new Tencentcloud.ApiGateway.Inputs.UpstreamHealthCheckerArgs
+    ///         {
+    ///             EnableActiveCheck = true,
+    ///             EnablePassiveCheck = true,
+    ///             HealthyHttpStatus = "200",
+    ///             UnhealthyHttpStatus = "500",
+    ///             TcpFailureThreshold = 5,
+    ///             TimeoutThreshold = 5,
+    ///             HttpFailureThreshold = 3,
+    ///             ActiveCheckHttpPath = "/",
+    ///             ActiveCheckTimeout = 5,
+    ///             ActiveCheckInterval = 5,
+    ///             UnhealthyTimeout = 30,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// apigateway upstream can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:ApiGateway/upstream:Upstream upstream upstream_id
+    /// $ pulumi import tencentcloud:ApiGateway/upstream:Upstream upstream upstream_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/upstream:Upstream")]
-    public partial class Upstream : Pulumi.CustomResource
+    public partial class Upstream : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Load balancing algorithm, value range: ROUND-ROBIN.
@@ -307,7 +317,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         }
     }
 
-    public sealed class UpstreamArgs : Pulumi.ResourceArgs
+    public sealed class UpstreamArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Load balancing algorithm, value range: ROUND-ROBIN.
@@ -402,9 +412,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public UpstreamArgs()
         {
         }
+        public static new UpstreamArgs Empty => new UpstreamArgs();
     }
 
-    public sealed class UpstreamState : Pulumi.ResourceArgs
+    public sealed class UpstreamState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Load balancing algorithm, value range: ROUND-ROBIN.
@@ -499,5 +510,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public UpstreamState()
         {
         }
+        public static new UpstreamState Empty => new UpstreamState();
     }
 }

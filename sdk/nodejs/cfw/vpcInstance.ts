@@ -2,70 +2,21 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a cfw vpcInstance
  *
  * ## Example Usage
- * ### If mode is 0
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const example = new tencentcloud.Cfw.VpcInstance("example", {
- *     fwVpcCidr: "auto",
- *     mode: 0,
- *     switchMode: 1,
- *     vpcFwInstances: [{
- *         fwDeploy: {
- *             crossAZone: 1,
- *             deployRegion: "ap-guangzhou",
- *             width: 1024,
- *             zoneSets: [
- *                 "ap-guangzhou-6",
- *                 "ap-guangzhou-7",
- *             ],
- *         },
- *         name: "fw_ins_example",
- *         vpcIds: [
- *             "vpc-291vnoeu",
- *             "vpc-39ixq9ci",
- *         ],
- *     }],
- * });
- * ```
- * ### If mode is 1
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const example = new tencentcloud.Cfw.VpcInstance("example", {
- *     ccnId: "ccn-peihfqo7",
- *     fwVpcCidr: "auto",
- *     mode: 1,
- *     switchMode: 1,
- *     vpcFwInstances: [{
- *         fwDeploy: {
- *             crossAZone: 0,
- *             deployRegion: "ap-guangzhou",
- *             width: 1024,
- *             zoneSets: ["ap-guangzhou-6"],
- *         },
- *         name: "fw_ins_example",
- *     }],
- * });
- * ```
  *
  * ## Import
  *
  * cfw vpc_instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cfw/vpcInstance:VpcInstance example cfwg-4ee69507
+ * $ pulumi import tencentcloud:Cfw/vpcInstance:VpcInstance example cfwg-4ee69507
  * ```
  */
 export class VpcInstance extends pulumi.CustomResource {

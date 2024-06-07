@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const sendEmail = new tencentcloud.Ses.SendEmail("send_email", {
+ * const sendEmail = new tencentcloud.ses.SendEmail("sendEmail", {
  *     destinations: ["1055482519@qq.com"],
  *     fromEmailAddress: "aaa@iac-tf.cloud",
  *     replyToAddresses: "aaa@iac-tf.cloud",
@@ -27,6 +29,7 @@ import * as utilities from "../utilities";
  *     unsubscribe: "1",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class SendEmail extends pulumi.CustomResource {
     /**

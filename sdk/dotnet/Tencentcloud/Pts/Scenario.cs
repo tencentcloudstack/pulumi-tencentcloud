@@ -15,68 +15,69 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var scenario = new Tencentcloud.Pts.Scenario("scenario", new()
     ///     {
-    ///         var scenario = new Tencentcloud.Pts.Scenario("scenario", new Tencentcloud.Pts.ScenarioArgs
+    ///         DomainNameConfig = null,
+    ///         Load = new Tencentcloud.Pts.Inputs.ScenarioLoadArgs
     ///         {
-    ///             DomainNameConfig = ,
-    ///             Load = new Tencentcloud.Pts.Inputs.ScenarioLoadArgs
+    ///             GeoRegionsLoadDistributions = new[]
     ///             {
-    ///                 GeoRegionsLoadDistributions = 
+    ///                 new Tencentcloud.Pts.Inputs.ScenarioLoadGeoRegionsLoadDistributionArgs
     ///                 {
-    ///                     new Tencentcloud.Pts.Inputs.ScenarioLoadGeoRegionsLoadDistributionArgs
-    ///                     {
-    ///                         Percentage = 100,
-    ///                         Region = "ap-guangzhou",
-    ///                         RegionId = 1,
-    ///                     },
+    ///                     Percentage = 100,
+    ///                     Region = "ap-guangzhou",
+    ///                     RegionId = 1,
     ///                 },
-    ///                 LoadSpec = new Tencentcloud.Pts.Inputs.ScenarioLoadLoadSpecArgs
+    ///             },
+    ///             LoadSpec = new Tencentcloud.Pts.Inputs.ScenarioLoadLoadSpecArgs
+    ///             {
+    ///                 Concurrency = new Tencentcloud.Pts.Inputs.ScenarioLoadLoadSpecConcurrencyArgs
     ///                 {
-    ///                     Concurrency = new Tencentcloud.Pts.Inputs.ScenarioLoadLoadSpecConcurrencyArgs
+    ///                     GracefulStopSeconds = 3,
+    ///                     IterationCount = 0,
+    ///                     MaxRequestsPerSecond = 0,
+    ///                     Stages = new[]
     ///                     {
-    ///                         GracefulStopSeconds = 3,
-    ///                         IterationCount = 0,
-    ///                         MaxRequestsPerSecond = 0,
-    ///                         Stages = 
+    ///                         new Tencentcloud.Pts.Inputs.ScenarioLoadLoadSpecConcurrencyStageArgs
     ///                         {
-    ///                             new Tencentcloud.Pts.Inputs.ScenarioLoadLoadSpecConcurrencyStageArgs
-    ///                             {
-    ///                                 DurationSeconds = 120,
-    ///                                 TargetVirtualUsers = 2,
-    ///                             },
-    ///                             new Tencentcloud.Pts.Inputs.ScenarioLoadLoadSpecConcurrencyStageArgs
-    ///                             {
-    ///                                 DurationSeconds = 120,
-    ///                                 TargetVirtualUsers = 4,
-    ///                             },
-    ///                             new Tencentcloud.Pts.Inputs.ScenarioLoadLoadSpecConcurrencyStageArgs
-    ///                             {
-    ///                                 DurationSeconds = 120,
-    ///                                 TargetVirtualUsers = 5,
-    ///                             },
-    ///                             new Tencentcloud.Pts.Inputs.ScenarioLoadLoadSpecConcurrencyStageArgs
-    ///                             {
-    ///                                 DurationSeconds = 240,
-    ///                                 TargetVirtualUsers = 5,
-    ///                             },
+    ///                             DurationSeconds = 120,
+    ///                             TargetVirtualUsers = 2,
+    ///                         },
+    ///                         new Tencentcloud.Pts.Inputs.ScenarioLoadLoadSpecConcurrencyStageArgs
+    ///                         {
+    ///                             DurationSeconds = 120,
+    ///                             TargetVirtualUsers = 4,
+    ///                         },
+    ///                         new Tencentcloud.Pts.Inputs.ScenarioLoadLoadSpecConcurrencyStageArgs
+    ///                         {
+    ///                             DurationSeconds = 120,
+    ///                             TargetVirtualUsers = 5,
+    ///                         },
+    ///                         new Tencentcloud.Pts.Inputs.ScenarioLoadLoadSpecConcurrencyStageArgs
+    ///                         {
+    ///                             DurationSeconds = 240,
+    ///                             TargetVirtualUsers = 5,
     ///                         },
     ///                     },
     ///                 },
     ///             },
-    ///             ProjectId = "project-45vw7v82",
-    ///             SlaPolicy = ,
-    ///             TestScripts = 
+    ///         },
+    ///         ProjectId = "project-45vw7v82",
+    ///         SlaPolicy = null,
+    ///         TestScripts = new[]
+    ///         {
+    ///             new Tencentcloud.Pts.Inputs.ScenarioTestScriptArgs
     ///             {
-    ///                 new Tencentcloud.Pts.Inputs.ScenarioTestScriptArgs
-    ///                 {
-    ///                     EncodedContent = @"            // Send a http get request
+    ///                 EncodedContent = @"            // Send a http get request
     ///             import http from 'pts/http';
     ///             import { check, sleep } from 'pts';
     /// 
@@ -108,30 +109,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     ///             }
     /// 
     /// ",
-    ///                     LoadWeight = 100,
-    ///                     Name = "script.js",
-    ///                     Size = 838,
-    ///                     Type = "js",
-    ///                     UpdatedAt = "2022-11-11T16:18:37+08:00",
-    ///                 },
+    ///                 LoadWeight = 100,
+    ///                 Name = "script.js",
+    ///                 Size = 838,
+    ///                 Type = "js",
+    ///                 UpdatedAt = "2022-11-11T16:18:37+08:00",
     ///             },
-    ///             Type = "pts-js",
-    ///         });
-    ///     }
+    ///         },
+    ///         Type = "pts-js",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// pts scenario can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Pts/scenario:Scenario scenario scenario_id
+    /// $ pulumi import tencentcloud:Pts/scenario:Scenario scenario scenario_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Pts/scenario:Scenario")]
-    public partial class Scenario : Pulumi.CustomResource
+    public partial class Scenario : global::Pulumi.CustomResource
     {
         /// <summary>
         /// App ID Note: this field may return null, indicating that a valid value cannot be obtained.
@@ -298,7 +299,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         }
     }
 
-    public sealed class ScenarioArgs : Pulumi.ResourceArgs
+    public sealed class ScenarioArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// cron job ID.
@@ -423,9 +424,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public ScenarioArgs()
         {
         }
+        public static new ScenarioArgs Empty => new ScenarioArgs();
     }
 
-    public sealed class ScenarioState : Pulumi.ResourceArgs
+    public sealed class ScenarioState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// App ID Note: this field may return null, indicating that a valid value cannot be obtained.
@@ -586,5 +588,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public ScenarioState()
         {
         }
+        public static new ScenarioState Empty => new ScenarioState();
     }
 }

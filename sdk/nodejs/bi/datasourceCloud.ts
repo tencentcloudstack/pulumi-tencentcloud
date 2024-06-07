@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const datasourceCloud = new tencentcloud.Bi.DatasourceCloud("datasource_cloud", {
+ * const datasourceCloud = new tencentcloud.bi.DatasourceCloud("datasourceCloud", {
  *     charset: "utf8",
  *     dbName: "bi_dev",
  *     dbPwd: "xxxxxx",
@@ -29,10 +31,11 @@ import * as utilities from "../utilities";
  *     },
  *     sourceName: "tf-test1",
  *     vip: "10.0.0.4",
- *     vpcId: "5.292713e+06",
+ *     vpcId: "5292713",
  *     vport: "3306",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class DatasourceCloud extends pulumi.CustomResource {
     /**
@@ -201,7 +204,7 @@ export class DatasourceCloud extends pulumi.CustomResource {
             resourceInputs["dataOriginDatasourceId"] = args ? args.dataOriginDatasourceId : undefined;
             resourceInputs["dataOriginProjectId"] = args ? args.dataOriginProjectId : undefined;
             resourceInputs["dbName"] = args ? args.dbName : undefined;
-            resourceInputs["dbPwd"] = args ? args.dbPwd : undefined;
+            resourceInputs["dbPwd"] = args?.dbPwd ? pulumi.secret(args.dbPwd) : undefined;
             resourceInputs["dbType"] = args ? args.dbType : undefined;
             resourceInputs["dbUser"] = args ? args.dbUser : undefined;
             resourceInputs["extraParam"] = args ? args.extraParam : undefined;
@@ -215,6 +218,8 @@ export class DatasourceCloud extends pulumi.CustomResource {
             resourceInputs["vport"] = args ? args.vport : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["dbPwd"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(DatasourceCloud.__pulumiType, name, resourceInputs, opts);
     }
 }

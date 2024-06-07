@@ -13,131 +13,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// <summary>
     /// Provides a resource to create a mps workflow
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var workflow = new Tencentcloud.Mps.Workflow("workflow", new Tencentcloud.Mps.WorkflowArgs
-    ///         {
-    ///             AiAnalysisTask = new Tencentcloud.Mps.Inputs.WorkflowAiAnalysisTaskArgs
-    ///             {
-    ///                 Definition = 20,
-    ///             },
-    ///             AiContentReviewTask = new Tencentcloud.Mps.Inputs.WorkflowAiContentReviewTaskArgs
-    ///             {
-    ///                 Definition = 20,
-    ///             },
-    ///             AiRecognitionTask = new Tencentcloud.Mps.Inputs.WorkflowAiRecognitionTaskArgs
-    ///             {
-    ///                 Definition = 20,
-    ///             },
-    ///             MediaProcessTask = new Tencentcloud.Mps.Inputs.WorkflowMediaProcessTaskArgs
-    ///             {
-    ///                 AdaptiveDynamicStreamingTaskSets = 
-    ///                 {
-    ///                     new Tencentcloud.Mps.Inputs.WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetArgs
-    ///                     {
-    ///                         Definition = 12,
-    ///                         OutputObjectPath = "/out",
-    ///                         OutputStorage = new Tencentcloud.Mps.Inputs.WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageArgs
-    ///                         {
-    ///                             CosOutputStorage = new Tencentcloud.Mps.Inputs.WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageCosOutputStorageArgs
-    ///                             {
-    ///                                 Bucket = "cos-lock-1308919341",
-    ///                                 Region = "ap-guangzhou",
-    ///                             },
-    ///                             Type = "COS",
-    ///                         },
-    ///                         SegmentObjectName = "/out",
-    ///                         SubStreamObjectName = "/out/out/",
-    ///                     },
-    ///                 },
-    ///                 AnimatedGraphicTaskSets = 
-    ///                 {
-    ///                     new Tencentcloud.Mps.Inputs.WorkflowMediaProcessTaskAnimatedGraphicTaskSetArgs
-    ///                     {
-    ///                         Definition = 20000,
-    ///                         EndTimeOffset = 0,
-    ///                         OutputObjectPath = "/test/",
-    ///                         OutputStorage = new Tencentcloud.Mps.Inputs.WorkflowMediaProcessTaskAnimatedGraphicTaskSetOutputStorageArgs
-    ///                         {
-    ///                             CosOutputStorage = new Tencentcloud.Mps.Inputs.WorkflowMediaProcessTaskAnimatedGraphicTaskSetOutputStorageCosOutputStorageArgs
-    ///                             {
-    ///                                 Bucket = "cos-lock-1308919341",
-    ///                                 Region = "ap-guangzhou",
-    ///                             },
-    ///                             Type = "COS",
-    ///                         },
-    ///                         StartTimeOffset = 0,
-    ///                     },
-    ///                 },
-    ///                 SnapshotByTimeOffsetTaskSets = 
-    ///                 {
-    ///                     new Tencentcloud.Mps.Inputs.WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetArgs
-    ///                     {
-    ///                         Definition = 10,
-    ///                         ExtTimeOffsetSet = 
-    ///                         {
-    ///                             "1s",
-    ///                         },
-    ///                         OutputObjectPath = "/snapshot/",
-    ///                         OutputStorage = new Tencentcloud.Mps.Inputs.WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageArgs
-    ///                         {
-    ///                             CosOutputStorage = new Tencentcloud.Mps.Inputs.WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageCosOutputStorageArgs
-    ///                             {
-    ///                                 Bucket = "cos-lock-1308919341",
-    ///                                 Region = "ap-guangzhou",
-    ///                             },
-    ///                             Type = "COS",
-    ///                         },
-    ///                         TimeOffsetSet = {},
-    ///                     },
-    ///                 },
-    ///             },
-    ///             OutputDir = "/",
-    ///             OutputStorage = new Tencentcloud.Mps.Inputs.WorkflowOutputStorageArgs
-    ///             {
-    ///                 CosOutputStorage = new Tencentcloud.Mps.Inputs.WorkflowOutputStorageCosOutputStorageArgs
-    ///                 {
-    ///                     Bucket = "cos-lock-1308919341",
-    ///                     Region = "ap-guangzhou",
-    ///                 },
-    ///                 Type = "COS",
-    ///             },
-    ///             TaskPriority = 0,
-    ///             Trigger = new Tencentcloud.Mps.Inputs.WorkflowTriggerArgs
-    ///             {
-    ///                 CosFileUploadTrigger = new Tencentcloud.Mps.Inputs.WorkflowTriggerCosFileUploadTriggerArgs
-    ///                 {
-    ///                     Bucket = "cos-lock-1308919341",
-    ///                     Dir = "/",
-    ///                     Region = "ap-guangzhou",
-    ///                 },
-    ///                 Type = "CosFileUpload",
-    ///             },
-    ///             WorkflowName = "tf-workflow",
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// mps workflow can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/workflow:Workflow workflow workflow_id
+    /// $ pulumi import tencentcloud:Mps/workflow:Workflow workflow workflow_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/workflow:Workflow")]
-    public partial class Workflow : Pulumi.CustomResource
+    public partial class Workflow : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Video Content Analysis Type Task Parameters.
@@ -244,7 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class WorkflowArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Video Content Analysis Type Task Parameters.
@@ -309,9 +194,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public WorkflowArgs()
         {
         }
+        public static new WorkflowArgs Empty => new WorkflowArgs();
     }
 
-    public sealed class WorkflowState : Pulumi.ResourceArgs
+    public sealed class WorkflowState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Video Content Analysis Type Task Parameters.
@@ -376,5 +262,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public WorkflowState()
         {
         }
+        public static new WorkflowState Empty => new WorkflowState();
     }
 }

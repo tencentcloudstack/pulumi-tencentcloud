@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const launchTemplateDefaultVersion = new tencentcloud.Cvm.LaunchTemplateDefaultVersion("launch_template_default_version", {
+ * const launchTemplateDefaultVersion = new tencentcloud.cvm.LaunchTemplateDefaultVersion("launchTemplateDefaultVersion", {
  *     defaultVersion: 2,
  *     launchTemplateId: "lt-34vaef8fe",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cvm launch_template_default_version can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cvm/launchTemplateDefaultVersion:LaunchTemplateDefaultVersion launch_template_default_version launch_template_id
+ * $ pulumi import tencentcloud:Cvm/launchTemplateDefaultVersion:LaunchTemplateDefaultVersion launch_template_default_version launch_template_id
  * ```
  */
 export class LaunchTemplateDefaultVersion extends pulumi.CustomResource {

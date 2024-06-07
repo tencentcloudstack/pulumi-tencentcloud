@@ -15,62 +15,63 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var tmpAlertGroup = new Tencentcloud.Monitor.TmpAlertGroup("tmpAlertGroup", new()
     ///     {
-    ///         var tmpAlertGroup = new Tencentcloud.Monitor.TmpAlertGroup("tmpAlertGroup", new Tencentcloud.Monitor.TmpAlertGroupArgs
+    ///         AmpReceivers = new[]
     ///         {
-    ///             AmpReceivers = 
+    ///             "notice-om017kc2",
+    ///         },
+    ///         CustomReceiver = new Tencentcloud.Monitor.Inputs.TmpAlertGroupCustomReceiverArgs
+    ///         {
+    ///             Type = "amp",
+    ///         },
+    ///         GroupName = "tf-test",
+    ///         InstanceId = "prom-ip429jis",
+    ///         RepeatInterval = "5m",
+    ///         Rules = new[]
+    ///         {
+    ///             new Tencentcloud.Monitor.Inputs.TmpAlertGroupRuleArgs
     ///             {
-    ///                 "notice-om017kc2",
-    ///             },
-    ///             CustomReceiver = new Tencentcloud.Monitor.Inputs.TmpAlertGroupCustomReceiverArgs
-    ///             {
-    ///                 Type = "amp",
-    ///             },
-    ///             GroupName = "tf-test",
-    ///             InstanceId = "prom-ip429jis",
-    ///             RepeatInterval = "5m",
-    ///             Rules = 
-    ///             {
-    ///                 new Tencentcloud.Monitor.Inputs.TmpAlertGroupRuleArgs
+    ///                 Annotations = 
     ///                 {
-    ///                     Annotations = 
-    ///                     {
-    ///                         { "description", "Agent {{$labels.instance}} is deactivated, please pay attention!" },
-    ///                         { "summary", "Agent health check" },
-    ///                     },
-    ///                     Duration = "1m",
-    ///                     Expr = "up{job=\"prometheus-agent\"} != 1",
-    ///                     Labels = 
-    ///                     {
-    ///                         { "severity", "critical" },
-    ///                     },
-    ///                     RuleName = "Agent health check",
-    ///                     State = 2,
+    ///                     { "description", "Agent {{$labels.instance}} is deactivated, please pay attention!" },
+    ///                     { "summary", "Agent health check" },
     ///                 },
+    ///                 Duration = "1m",
+    ///                 Expr = "up{job=\"prometheus-agent\"} != 1",
+    ///                 Labels = 
+    ///                 {
+    ///                     { "severity", "critical" },
+    ///                 },
+    ///                 RuleName = "Agent health check",
+    ///                 State = 2,
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor tmp_alert_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup tmp_alert_group instance_id#group_id
+    /// $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup tmp_alert_group instance_id#group_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup")]
-    public partial class TmpAlertGroup : Pulumi.CustomResource
+    public partial class TmpAlertGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Tencent cloud notification template id list.
@@ -159,7 +160,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class TmpAlertGroupArgs : Pulumi.ResourceArgs
+    public sealed class TmpAlertGroupArgs : global::Pulumi.ResourceArgs
     {
         [Input("ampReceivers")]
         private InputList<string>? _ampReceivers;
@@ -212,9 +213,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpAlertGroupArgs()
         {
         }
+        public static new TmpAlertGroupArgs Empty => new TmpAlertGroupArgs();
     }
 
-    public sealed class TmpAlertGroupState : Pulumi.ResourceArgs
+    public sealed class TmpAlertGroupState : global::Pulumi.ResourceArgs
     {
         [Input("ampReceivers")]
         private InputList<string>? _ampReceivers;
@@ -273,5 +275,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpAlertGroupState()
         {
         }
+        public static new TmpAlertGroupState Empty => new TmpAlertGroupState();
     }
 }

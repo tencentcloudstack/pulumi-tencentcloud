@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instanceNodes = pulumi.output(tencentcloud.Clickhouse.getInstanceNodes({
+ * const instanceNodes = tencentcloud.Clickhouse.getInstanceNodes({
  *     displayPolicy: "all",
  *     forceAll: true,
  *     instanceId: "cdwch-mvfjh373",
  *     nodeRole: "data",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceNodes(args: GetInstanceNodesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceNodesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Clickhouse/getInstanceNodes:getInstanceNodes", {
         "displayPolicy": args.displayPolicy,
         "forceAll": args.forceAll,
@@ -81,9 +81,27 @@ export interface GetInstanceNodesResult {
     readonly nodeRole?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of clickhouse instanceNodes
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instanceNodes = tencentcloud.Clickhouse.getInstanceNodes({
+ *     displayPolicy: "all",
+ *     forceAll: true,
+ *     instanceId: "cdwch-mvfjh373",
+ *     nodeRole: "data",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceNodesOutput(args: GetInstanceNodesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceNodesResult> {
-    return pulumi.output(args).apply(a => getInstanceNodes(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceNodes(a, opts))
 }
 
 /**

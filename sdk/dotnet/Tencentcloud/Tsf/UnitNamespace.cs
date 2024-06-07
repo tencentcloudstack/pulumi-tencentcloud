@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var unitNamespace = new Tencentcloud.Tsf.UnitNamespace("unitNamespace", new()
     ///     {
-    ///         var unitNamespace = new Tencentcloud.Tsf.UnitNamespace("unitNamespace", new Tencentcloud.Tsf.UnitNamespaceArgs
-    ///         {
-    ///             GatewayInstanceId = "gw-ins-lvdypq5k",
-    ///             NamespaceId = "namespace-vwgo38wy",
-    ///             NamespaceName = "keep-terraform-cls",
-    ///         });
-    ///     }
+    ///         GatewayInstanceId = "gw-ins-lvdypq5k",
+    ///         NamespaceId = "namespace-vwgo38wy",
+    ///         NamespaceName = "keep-terraform-cls",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tsf unit_namespace can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tsf/unitNamespace:UnitNamespace unit_namespace gw-ins-lvdypq5k#namespace-vwgo38wy
+    /// $ pulumi import tencentcloud:Tsf/unitNamespace:UnitNamespace unit_namespace gw-ins-lvdypq5k#namespace-vwgo38wy
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/unitNamespace:UnitNamespace")]
-    public partial class UnitNamespace : Pulumi.CustomResource
+    public partial class UnitNamespace : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create time. Note: This field may return null, indicating that no valid value was found.
@@ -120,7 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class UnitNamespaceArgs : Pulumi.ResourceArgs
+    public sealed class UnitNamespaceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// gateway instance Id.
@@ -143,9 +144,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public UnitNamespaceArgs()
         {
         }
+        public static new UnitNamespaceArgs Empty => new UnitNamespaceArgs();
     }
 
-    public sealed class UnitNamespaceState : Pulumi.ResourceArgs
+    public sealed class UnitNamespaceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create time. Note: This field may return null, indicating that no valid value was found.
@@ -180,5 +182,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public UnitNamespaceState()
         {
         }
+        public static new UnitNamespaceState Empty => new UnitNamespaceState();
     }
 }

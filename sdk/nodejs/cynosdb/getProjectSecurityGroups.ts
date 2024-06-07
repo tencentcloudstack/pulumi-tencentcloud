@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const projectSecurityGroups = pulumi.output(tencentcloud.Cynosdb.getProjectSecurityGroups({
+ * const projectSecurityGroups = tencentcloud.Cynosdb.getProjectSecurityGroups({
  *     projectId: 1250480,
  *     searchKey: "自定义模版",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getProjectSecurityGroups(args?: GetProjectSecurityGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetProjectSecurityGroupsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cynosdb/getProjectSecurityGroups:getProjectSecurityGroups", {
         "projectId": args.projectId,
         "resultOutputFile": args.resultOutputFile,
@@ -71,9 +71,25 @@ export interface GetProjectSecurityGroupsResult {
     readonly resultOutputFile?: string;
     readonly searchKey?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cynosdb projectSecurityGroups
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const projectSecurityGroups = tencentcloud.Cynosdb.getProjectSecurityGroups({
+ *     projectId: 1250480,
+ *     searchKey: "自定义模版",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getProjectSecurityGroupsOutput(args?: GetProjectSecurityGroupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProjectSecurityGroupsResult> {
-    return pulumi.output(args).apply(a => getProjectSecurityGroups(a, opts))
+    return pulumi.output(args).apply((a: any) => getProjectSecurityGroups(a, opts))
 }
 
 /**

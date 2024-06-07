@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooAdaptiveDynamicStreamingTemplate = new tencentcloud.vod.AdaptiveDynamicStreamingTemplate("fooAdaptiveDynamicStreamingTemplate", {
  *     format: "HLS",
@@ -60,14 +62,12 @@ import * as utilities from "../utilities";
  *     definition: fooAdaptiveDynamicStreamingTemplate.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAdaptiveDynamicStreamingTemplates(args?: GetAdaptiveDynamicStreamingTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetAdaptiveDynamicStreamingTemplatesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vod/getAdaptiveDynamicStreamingTemplates:getAdaptiveDynamicStreamingTemplates", {
         "definition": args.definition,
         "resultOutputFile": args.resultOutputFile,
@@ -121,9 +121,66 @@ export interface GetAdaptiveDynamicStreamingTemplatesResult {
      */
     readonly type?: string;
 }
-
+/**
+ * Use this data source to query detailed information of VOD adaptive dynamic streaming templates.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const fooAdaptiveDynamicStreamingTemplate = new tencentcloud.vod.AdaptiveDynamicStreamingTemplate("fooAdaptiveDynamicStreamingTemplate", {
+ *     format: "HLS",
+ *     drmType: "SimpleAES",
+ *     disableHigherVideoBitrate: false,
+ *     disableHigherVideoResolution: false,
+ *     comment: "test",
+ *     streamInfos: [
+ *         {
+ *             video: {
+ *                 codec: "libx265",
+ *                 fps: 4,
+ *                 bitrate: 129,
+ *                 resolutionAdaptive: false,
+ *                 width: 128,
+ *                 height: 128,
+ *                 fillType: "stretch",
+ *             },
+ *             audio: {
+ *                 codec: "libmp3lame",
+ *                 bitrate: 129,
+ *                 sampleRate: 44100,
+ *                 audioChannel: "dual",
+ *             },
+ *             removeAudio: false,
+ *         },
+ *         {
+ *             video: {
+ *                 codec: "libx264",
+ *                 fps: 4,
+ *                 bitrate: 256,
+ *             },
+ *             audio: {
+ *                 codec: "libfdk_aac",
+ *                 bitrate: 256,
+ *                 sampleRate: 44100,
+ *             },
+ *             removeAudio: true,
+ *         },
+ *     ],
+ * });
+ * const fooAdaptiveDynamicStreamingTemplates = tencentcloud.Vod.getAdaptiveDynamicStreamingTemplatesOutput({
+ *     type: "Custom",
+ *     definition: fooAdaptiveDynamicStreamingTemplate.id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAdaptiveDynamicStreamingTemplatesOutput(args?: GetAdaptiveDynamicStreamingTemplatesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAdaptiveDynamicStreamingTemplatesResult> {
-    return pulumi.output(args).apply(a => getAdaptiveDynamicStreamingTemplates(a, opts))
+    return pulumi.output(args).apply((a: any) => getAdaptiveDynamicStreamingTemplates(a, opts))
 }
 
 /**

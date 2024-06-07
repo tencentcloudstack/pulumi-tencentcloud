@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// <summary>
         /// Use this data source to query detailed information of sqlserver query_xevent
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetQueryXevent.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetQueryXevent.InvokeAsync(new Tencentcloud.Sqlserver.GetQueryXeventArgs
-        ///         {
-        ///             EndTime = "2023-08-10 00:00:00",
-        ///             EventType = "blocked",
-        ///             InstanceId = "mssql-gyg9xycl",
-        ///             StartTime = "2023-08-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         EndTime = "2023-08-10 00:00:00",
+        ///         EventType = "blocked",
+        ///         InstanceId = "mssql-gyg9xycl",
+        ///         StartTime = "2023-08-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetQueryXeventResult> InvokeAsync(GetQueryXeventArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetQueryXeventResult>("tencentcloud:Sqlserver/getQueryXevent:getQueryXevent", args ?? new GetQueryXeventArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetQueryXeventResult>("tencentcloud:Sqlserver/getQueryXevent:getQueryXevent", args ?? new GetQueryXeventArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of sqlserver query_xevent
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetQueryXevent.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetQueryXevent.InvokeAsync(new Tencentcloud.Sqlserver.GetQueryXeventArgs
-        ///         {
-        ///             EndTime = "2023-08-10 00:00:00",
-        ///             EventType = "blocked",
-        ///             InstanceId = "mssql-gyg9xycl",
-        ///             StartTime = "2023-08-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         EndTime = "2023-08-10 00:00:00",
+        ///         EventType = "blocked",
+        ///         InstanceId = "mssql-gyg9xycl",
+        ///         StartTime = "2023-08-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetQueryXeventResult> Invoke(GetQueryXeventInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetQueryXeventResult>("tencentcloud:Sqlserver/getQueryXevent:getQueryXevent", args ?? new GetQueryXeventInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetQueryXeventResult>("tencentcloud:Sqlserver/getQueryXevent:getQueryXevent", args ?? new GetQueryXeventInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetQueryXeventArgs : Pulumi.InvokeArgs
+    public sealed class GetQueryXeventArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Generation end time of an extended file.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetQueryXeventArgs()
         {
         }
+        public static new GetQueryXeventArgs Empty => new GetQueryXeventArgs();
     }
 
-    public sealed class GetQueryXeventInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetQueryXeventInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Generation end time of an extended file.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetQueryXeventInvokeArgs()
         {
         }
+        public static new GetQueryXeventInvokeArgs Empty => new GetQueryXeventInvokeArgs();
     }
 
 

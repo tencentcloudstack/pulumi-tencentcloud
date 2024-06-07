@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class AccelerationDomainOriginInfoPrivateParameterGetArgs : Pulumi.ResourceArgs
+    public sealed class AccelerationDomainOriginInfoPrivateParameterGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The parameter name. Valid values: `AccessKeyId`: Access Key ID; `SecretAccessKey`: Secret Access Key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public AccelerationDomainOriginInfoPrivateParameterGetArgs()
         {
         }
+        public static new AccelerationDomainOriginInfoPrivateParameterGetArgs Empty => new AccelerationDomainOriginInfoPrivateParameterGetArgs();
     }
 }

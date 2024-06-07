@@ -15,80 +15,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query monitor policy groups (There is a lot of data and it is recommended to output to a file)
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groups = Tencentcloud.Monitor.GetPolicyGroups.Invoke(new()
         ///     {
-        ///         var groups = Output.Create(Tencentcloud.Monitor.GetPolicyGroups.InvokeAsync(new Tencentcloud.Monitor.GetPolicyGroupsArgs
+        ///         PolicyViewNames = new[]
         ///         {
-        ///             PolicyViewNames = 
-        ///             {
-        ///                 "REDIS-CLUSTER",
-        ///                 "cvm_device",
-        ///             },
-        ///         }));
-        ///         var name = Output.Create(Tencentcloud.Monitor.GetPolicyGroups.InvokeAsync(new Tencentcloud.Monitor.GetPolicyGroupsArgs
-        ///         {
-        ///             Name = "test",
-        ///         }));
-        ///     }
+        ///             "REDIS-CLUSTER",
+        ///             "cvm_device",
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var name = Tencentcloud.Monitor.GetPolicyGroups.Invoke(new()
+        ///     {
+        ///         Name = "test",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPolicyGroupsResult> InvokeAsync(GetPolicyGroupsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPolicyGroupsResult>("tencentcloud:Monitor/getPolicyGroups:getPolicyGroups", args ?? new GetPolicyGroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPolicyGroupsResult>("tencentcloud:Monitor/getPolicyGroups:getPolicyGroups", args ?? new GetPolicyGroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query monitor policy groups (There is a lot of data and it is recommended to output to a file)
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groups = Tencentcloud.Monitor.GetPolicyGroups.Invoke(new()
         ///     {
-        ///         var groups = Output.Create(Tencentcloud.Monitor.GetPolicyGroups.InvokeAsync(new Tencentcloud.Monitor.GetPolicyGroupsArgs
+        ///         PolicyViewNames = new[]
         ///         {
-        ///             PolicyViewNames = 
-        ///             {
-        ///                 "REDIS-CLUSTER",
-        ///                 "cvm_device",
-        ///             },
-        ///         }));
-        ///         var name = Output.Create(Tencentcloud.Monitor.GetPolicyGroups.InvokeAsync(new Tencentcloud.Monitor.GetPolicyGroupsArgs
-        ///         {
-        ///             Name = "test",
-        ///         }));
-        ///     }
+        ///             "REDIS-CLUSTER",
+        ///             "cvm_device",
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var name = Tencentcloud.Monitor.GetPolicyGroups.Invoke(new()
+        ///     {
+        ///         Name = "test",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPolicyGroupsResult> Invoke(GetPolicyGroupsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPolicyGroupsResult>("tencentcloud:Monitor/getPolicyGroups:getPolicyGroups", args ?? new GetPolicyGroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPolicyGroupsResult>("tencentcloud:Monitor/getPolicyGroups:getPolicyGroups", args ?? new GetPolicyGroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPolicyGroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetPolicyGroupsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Policy group name for query.
@@ -117,9 +113,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetPolicyGroupsArgs()
         {
         }
+        public static new GetPolicyGroupsArgs Empty => new GetPolicyGroupsArgs();
     }
 
-    public sealed class GetPolicyGroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPolicyGroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Policy group name for query.
@@ -148,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetPolicyGroupsInvokeArgs()
         {
         }
+        public static new GetPolicyGroupsInvokeArgs Empty => new GetPolicyGroupsInvokeArgs();
     }
 
 

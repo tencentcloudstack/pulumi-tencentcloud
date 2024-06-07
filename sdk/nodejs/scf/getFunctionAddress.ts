@@ -9,23 +9,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const functionAddress = pulumi.output(tencentcloud.Scf.getFunctionAddress({
+ * const functionAddress = tencentcloud.Scf.getFunctionAddress({
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  *     qualifier: "$LATEST",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getFunctionAddress(args: GetFunctionAddressArgs, opts?: pulumi.InvokeOptions): Promise<GetFunctionAddressResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Scf/getFunctionAddress:getFunctionAddress", {
         "functionName": args.functionName,
         "namespace": args.namespace,
@@ -77,9 +76,26 @@ export interface GetFunctionAddressResult {
      */
     readonly url: string;
 }
-
+/**
+ * Use this data source to query detailed information of scf functionAddress
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const functionAddress = tencentcloud.Scf.getFunctionAddress({
+ *     functionName: "keep-1676351130",
+ *     namespace: "default",
+ *     qualifier: "$LATEST",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getFunctionAddressOutput(args: GetFunctionAddressOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetFunctionAddressResult> {
-    return pulumi.output(args).apply(a => getFunctionAddress(a, opts))
+    return pulumi.output(args).apply((a: any) => getFunctionAddress(a, opts))
 }
 
 /**

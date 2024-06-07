@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb.Outputs
     [OutputType]
     public sealed class GetInstanceNodeInfoNodesInfoResult
     {
+        /// <summary>
+        /// Node ID.
+        /// </summary>
         public readonly string NodeId;
+        /// <summary>
+        /// Node role. Valid values: `master`, `slave`.
+        /// </summary>
         public readonly string Role;
 
         [OutputConstructor]

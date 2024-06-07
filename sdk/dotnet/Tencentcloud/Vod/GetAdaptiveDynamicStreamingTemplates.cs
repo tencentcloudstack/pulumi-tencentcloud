@@ -15,164 +15,160 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// <summary>
         /// Use this data source to query detailed information of VOD adaptive dynamic streaming templates.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooAdaptiveDynamicStreamingTemplate = new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplate("fooAdaptiveDynamicStreamingTemplate", new()
         ///     {
-        ///         var fooAdaptiveDynamicStreamingTemplate = new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplate("fooAdaptiveDynamicStreamingTemplate", new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplateArgs
+        ///         Format = "HLS",
+        ///         DrmType = "SimpleAES",
+        ///         DisableHigherVideoBitrate = false,
+        ///         DisableHigherVideoResolution = false,
+        ///         Comment = "test",
+        ///         StreamInfos = new[]
         ///         {
-        ///             Format = "HLS",
-        ///             DrmType = "SimpleAES",
-        ///             DisableHigherVideoBitrate = false,
-        ///             DisableHigherVideoResolution = false,
-        ///             Comment = "test",
-        ///             StreamInfos = 
+        ///             new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
         ///             {
-        ///                 new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
+        ///                 Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
         ///                 {
-        ///                     Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
-        ///                     {
-        ///                         Codec = "libx265",
-        ///                         Fps = 4,
-        ///                         Bitrate = 129,
-        ///                         ResolutionAdaptive = false,
-        ///                         Width = 128,
-        ///                         Height = 128,
-        ///                         FillType = "stretch",
-        ///                     },
-        ///                     Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
-        ///                     {
-        ///                         Codec = "libmp3lame",
-        ///                         Bitrate = 129,
-        ///                         SampleRate = 44100,
-        ///                         AudioChannel = "dual",
-        ///                     },
-        ///                     RemoveAudio = false,
+        ///                     Codec = "libx265",
+        ///                     Fps = 4,
+        ///                     Bitrate = 129,
+        ///                     ResolutionAdaptive = false,
+        ///                     Width = 128,
+        ///                     Height = 128,
+        ///                     FillType = "stretch",
         ///                 },
-        ///                 new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
+        ///                 Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
         ///                 {
-        ///                     Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
-        ///                     {
-        ///                         Codec = "libx264",
-        ///                         Fps = 4,
-        ///                         Bitrate = 256,
-        ///                     },
-        ///                     Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
-        ///                     {
-        ///                         Codec = "libfdk_aac",
-        ///                         Bitrate = 256,
-        ///                         SampleRate = 44100,
-        ///                     },
-        ///                     RemoveAudio = true,
+        ///                     Codec = "libmp3lame",
+        ///                     Bitrate = 129,
+        ///                     SampleRate = 44100,
+        ///                     AudioChannel = "dual",
         ///                 },
+        ///                 RemoveAudio = false,
         ///             },
-        ///         });
-        ///         var fooAdaptiveDynamicStreamingTemplates = Tencentcloud.Vod.GetAdaptiveDynamicStreamingTemplates.Invoke(new Tencentcloud.Vod.GetAdaptiveDynamicStreamingTemplatesInvokeArgs
-        ///         {
-        ///             Type = "Custom",
-        ///             Definition = fooAdaptiveDynamicStreamingTemplate.Id,
-        ///         });
-        ///     }
+        ///             new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
+        ///             {
+        ///                 Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
+        ///                 {
+        ///                     Codec = "libx264",
+        ///                     Fps = 4,
+        ///                     Bitrate = 256,
+        ///                 },
+        ///                 Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
+        ///                 {
+        ///                     Codec = "libfdk_aac",
+        ///                     Bitrate = 256,
+        ///                     SampleRate = 44100,
+        ///                 },
+        ///                 RemoveAudio = true,
+        ///             },
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var fooAdaptiveDynamicStreamingTemplates = Tencentcloud.Vod.GetAdaptiveDynamicStreamingTemplates.Invoke(new()
+        ///     {
+        ///         Type = "Custom",
+        ///         Definition = fooAdaptiveDynamicStreamingTemplate.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAdaptiveDynamicStreamingTemplatesResult> InvokeAsync(GetAdaptiveDynamicStreamingTemplatesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAdaptiveDynamicStreamingTemplatesResult>("tencentcloud:Vod/getAdaptiveDynamicStreamingTemplates:getAdaptiveDynamicStreamingTemplates", args ?? new GetAdaptiveDynamicStreamingTemplatesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAdaptiveDynamicStreamingTemplatesResult>("tencentcloud:Vod/getAdaptiveDynamicStreamingTemplates:getAdaptiveDynamicStreamingTemplates", args ?? new GetAdaptiveDynamicStreamingTemplatesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of VOD adaptive dynamic streaming templates.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooAdaptiveDynamicStreamingTemplate = new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplate("fooAdaptiveDynamicStreamingTemplate", new()
         ///     {
-        ///         var fooAdaptiveDynamicStreamingTemplate = new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplate("fooAdaptiveDynamicStreamingTemplate", new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplateArgs
+        ///         Format = "HLS",
+        ///         DrmType = "SimpleAES",
+        ///         DisableHigherVideoBitrate = false,
+        ///         DisableHigherVideoResolution = false,
+        ///         Comment = "test",
+        ///         StreamInfos = new[]
         ///         {
-        ///             Format = "HLS",
-        ///             DrmType = "SimpleAES",
-        ///             DisableHigherVideoBitrate = false,
-        ///             DisableHigherVideoResolution = false,
-        ///             Comment = "test",
-        ///             StreamInfos = 
+        ///             new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
         ///             {
-        ///                 new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
+        ///                 Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
         ///                 {
-        ///                     Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
-        ///                     {
-        ///                         Codec = "libx265",
-        ///                         Fps = 4,
-        ///                         Bitrate = 129,
-        ///                         ResolutionAdaptive = false,
-        ///                         Width = 128,
-        ///                         Height = 128,
-        ///                         FillType = "stretch",
-        ///                     },
-        ///                     Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
-        ///                     {
-        ///                         Codec = "libmp3lame",
-        ///                         Bitrate = 129,
-        ///                         SampleRate = 44100,
-        ///                         AudioChannel = "dual",
-        ///                     },
-        ///                     RemoveAudio = false,
+        ///                     Codec = "libx265",
+        ///                     Fps = 4,
+        ///                     Bitrate = 129,
+        ///                     ResolutionAdaptive = false,
+        ///                     Width = 128,
+        ///                     Height = 128,
+        ///                     FillType = "stretch",
         ///                 },
-        ///                 new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
+        ///                 Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
         ///                 {
-        ///                     Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
-        ///                     {
-        ///                         Codec = "libx264",
-        ///                         Fps = 4,
-        ///                         Bitrate = 256,
-        ///                     },
-        ///                     Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
-        ///                     {
-        ///                         Codec = "libfdk_aac",
-        ///                         Bitrate = 256,
-        ///                         SampleRate = 44100,
-        ///                     },
-        ///                     RemoveAudio = true,
+        ///                     Codec = "libmp3lame",
+        ///                     Bitrate = 129,
+        ///                     SampleRate = 44100,
+        ///                     AudioChannel = "dual",
         ///                 },
+        ///                 RemoveAudio = false,
         ///             },
-        ///         });
-        ///         var fooAdaptiveDynamicStreamingTemplates = Tencentcloud.Vod.GetAdaptiveDynamicStreamingTemplates.Invoke(new Tencentcloud.Vod.GetAdaptiveDynamicStreamingTemplatesInvokeArgs
-        ///         {
-        ///             Type = "Custom",
-        ///             Definition = fooAdaptiveDynamicStreamingTemplate.Id,
-        ///         });
-        ///     }
+        ///             new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
+        ///             {
+        ///                 Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
+        ///                 {
+        ///                     Codec = "libx264",
+        ///                     Fps = 4,
+        ///                     Bitrate = 256,
+        ///                 },
+        ///                 Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
+        ///                 {
+        ///                     Codec = "libfdk_aac",
+        ///                     Bitrate = 256,
+        ///                     SampleRate = 44100,
+        ///                 },
+        ///                 RemoveAudio = true,
+        ///             },
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var fooAdaptiveDynamicStreamingTemplates = Tencentcloud.Vod.GetAdaptiveDynamicStreamingTemplates.Invoke(new()
+        ///     {
+        ///         Type = "Custom",
+        ///         Definition = fooAdaptiveDynamicStreamingTemplate.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAdaptiveDynamicStreamingTemplatesResult> Invoke(GetAdaptiveDynamicStreamingTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAdaptiveDynamicStreamingTemplatesResult>("tencentcloud:Vod/getAdaptiveDynamicStreamingTemplates:getAdaptiveDynamicStreamingTemplates", args ?? new GetAdaptiveDynamicStreamingTemplatesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAdaptiveDynamicStreamingTemplatesResult>("tencentcloud:Vod/getAdaptiveDynamicStreamingTemplates:getAdaptiveDynamicStreamingTemplates", args ?? new GetAdaptiveDynamicStreamingTemplatesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAdaptiveDynamicStreamingTemplatesArgs : Pulumi.InvokeArgs
+    public sealed class GetAdaptiveDynamicStreamingTemplatesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Unique ID filter of adaptive dynamic streaming template.
@@ -201,9 +197,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public GetAdaptiveDynamicStreamingTemplatesArgs()
         {
         }
+        public static new GetAdaptiveDynamicStreamingTemplatesArgs Empty => new GetAdaptiveDynamicStreamingTemplatesArgs();
     }
 
-    public sealed class GetAdaptiveDynamicStreamingTemplatesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAdaptiveDynamicStreamingTemplatesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Unique ID filter of adaptive dynamic streaming template.
@@ -232,6 +229,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public GetAdaptiveDynamicStreamingTemplatesInvokeArgs()
         {
         }
+        public static new GetAdaptiveDynamicStreamingTemplatesInvokeArgs Empty => new GetAdaptiveDynamicStreamingTemplatesInvokeArgs();
     }
 
 

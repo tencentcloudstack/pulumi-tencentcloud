@@ -15,19 +15,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Outputs
     public sealed class ScheduleTriggerAwsS3FileUploadTrigger
     {
         /// <summary>
-        /// The SQS queue of the AWS S3 bucket.Note: The queue must be in the same region as the bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        /// The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
         /// </summary>
         public readonly Outputs.ScheduleTriggerAwsS3FileUploadTriggerAwsSqs? AwsSqs;
         /// <summary>
-        /// The bucket directory bound. It must be an absolute path that starts and ends with `/`, such as `/movie/201907/`. If you do not specify this, the root directory will be bound.	.
+        /// Input path directory bound to a workflow, such as `/movie/201907/`. If this parameter is left empty, the `/` root directory will be used.
         /// </summary>
         public readonly string? Dir;
         /// <summary>
-        /// The file formats that will trigger the scheme, such as [mp4, flv, mov]. If you do not specify this, the upload of files in any format will trigger the scheme.	.
+        /// Format list of files that can trigger a workflow, such as [mp4, flv, mov]. If this parameter is left empty, files in all formats can trigger the workflow.
         /// </summary>
         public readonly ImmutableArray<string> Formats;
         /// <summary>
-        /// The AWS S3 bucket bound to the scheme.
+        /// The AWS S3 bucket.
         /// </summary>
         public readonly string S3Bucket;
         /// <summary>
@@ -35,11 +35,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Outputs
         /// </summary>
         public readonly string S3Region;
         /// <summary>
-        /// The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        /// The key ID required to access the AWS S3 object.
         /// </summary>
         public readonly string? S3SecretId;
         /// <summary>
-        /// The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        /// The key required to access the AWS S3 object.
         /// </summary>
         public readonly string? S3SecretKey;
 

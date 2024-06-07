@@ -7,42 +7,88 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a eip addressTransform
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eip.NewAddressTransform(ctx, "addressTransform", &Eip.AddressTransformArgs{
-// 			InstanceId: pulumi.String(""),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// create vpc
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create vpc subnet
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+//				CidrBlock:        pulumi.String("10.0.20.0/28"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create cvm
+//			exampleInstance, err := Instance.NewInstance(ctx, "exampleInstance", &Instance.InstanceArgs{
+//				InstanceName:            pulumi.String("tf_example"),
+//				AvailabilityZone:        pulumi.String("ap-guangzhou-6"),
+//				ImageId:                 pulumi.String("img-9qrfy1xt"),
+//				InstanceType:            pulumi.String("SA3.MEDIUM4"),
+//				SystemDiskType:          pulumi.String("CLOUD_HSSD"),
+//				SystemDiskSize:          pulumi.Int(100),
+//				Hostname:                pulumi.String("example"),
+//				ProjectId:               pulumi.Int(0),
+//				VpcId:                   vpc.ID(),
+//				SubnetId:                subnet.ID(),
+//				AllocatePublicIp:        pulumi.Bool(true),
+//				InternetMaxBandwidthOut: pulumi.Int(10),
+//				DataDisks: instance.InstanceDataDiskArray{
+//					&instance.InstanceDataDiskArgs{
+//						DataDiskType: pulumi.String("CLOUD_HSSD"),
+//						DataDiskSize: pulumi.Int(50),
+//						Encrypt:      pulumi.Bool(false),
+//					},
+//				},
+//				Tags: pulumi.Map{
+//					"tagKey": pulumi.Any("tagValue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Eip.NewAddressTransform(ctx, "exampleAddressTransform", &Eip.AddressTransformArgs{
+//				InstanceId: exampleInstance.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
-//
-// ## Import
-//
-// eip address_transform can be imported using the id, e.g.
-//
-// ```sh
-//  $ pulumi import tencentcloud:Eip/addressTransform:AddressTransform address_transform address_transform_id
-// ```
+// <!--End PulumiCodeChooser -->
 type AddressTransform struct {
 	pulumi.CustomResourceState
 
@@ -60,7 +106,7 @@ func NewAddressTransform(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AddressTransform
 	err := ctx.RegisterResource("tencentcloud:Eip/addressTransform:AddressTransform", name, args, &resource, opts...)
 	if err != nil {
@@ -133,7 +179,7 @@ func (i *AddressTransform) ToAddressTransformOutputWithContext(ctx context.Conte
 // AddressTransformArrayInput is an input type that accepts AddressTransformArray and AddressTransformArrayOutput values.
 // You can construct a concrete instance of `AddressTransformArrayInput` via:
 //
-//          AddressTransformArray{ AddressTransformArgs{...} }
+//	AddressTransformArray{ AddressTransformArgs{...} }
 type AddressTransformArrayInput interface {
 	pulumi.Input
 
@@ -158,7 +204,7 @@ func (i AddressTransformArray) ToAddressTransformArrayOutputWithContext(ctx cont
 // AddressTransformMapInput is an input type that accepts AddressTransformMap and AddressTransformMapOutput values.
 // You can construct a concrete instance of `AddressTransformMapInput` via:
 //
-//          AddressTransformMap{ "key": AddressTransformArgs{...} }
+//	AddressTransformMap{ "key": AddressTransformArgs{...} }
 type AddressTransformMapInput interface {
 	pulumi.Input
 

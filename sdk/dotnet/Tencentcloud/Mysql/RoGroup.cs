@@ -15,44 +15,45 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Mysql.RoGroup("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Mysql.RoGroup("example", new Tencentcloud.Mysql.RoGroupArgs
+    ///         InstanceId = "cdb-e8i766hx",
+    ///         IsBalanceRoLoad = 1,
+    ///         RoGroupId = "cdbrg-f49t0gnj",
+    ///         RoGroupInfo = new Tencentcloud.Mysql.Inputs.RoGroupRoGroupInfoArgs
     ///         {
-    ///             InstanceId = "cdb-e8i766hx",
-    ///             IsBalanceRoLoad = 1,
-    ///             RoGroupId = "cdbrg-f49t0gnj",
-    ///             RoGroupInfo = new Tencentcloud.Mysql.Inputs.RoGroupRoGroupInfoArgs
+    ///             MinRoInGroup = 1,
+    ///             ReplicationDelayTime = 1,
+    ///             RoGroupName = "keep-ro",
+    ///             RoMaxDelayTime = 1,
+    ///             RoOfflineDelay = 1,
+    ///             WeightMode = "custom",
+    ///         },
+    ///         RoWeightValues = new[]
+    ///         {
+    ///             new Tencentcloud.Mysql.Inputs.RoGroupRoWeightValueArgs
     ///             {
-    ///                 MinRoInGroup = 1,
-    ///                 ReplicationDelayTime = 1,
-    ///                 RoGroupName = "keep-ro",
-    ///                 RoMaxDelayTime = 1,
-    ///                 RoOfflineDelay = 1,
-    ///                 WeightMode = "custom",
+    ///                 InstanceId = "cdbro-f49t0gnj",
+    ///                 Weight = 10,
     ///             },
-    ///             RoWeightValues = 
-    ///             {
-    ///                 new Tencentcloud.Mysql.Inputs.RoGroupRoWeightValueArgs
-    ///                 {
-    ///                     InstanceId = "cdbro-f49t0gnj",
-    ///                     Weight = 10,
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/roGroup:RoGroup")]
-    public partial class RoGroup : Pulumi.CustomResource
+    public partial class RoGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID, in the format: cdbro-3i70uj0k.
@@ -129,7 +130,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         }
     }
 
-    public sealed class RoGroupArgs : Pulumi.ResourceArgs
+    public sealed class RoGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID, in the format: cdbro-3i70uj0k.
@@ -170,9 +171,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public RoGroupArgs()
         {
         }
+        public static new RoGroupArgs Empty => new RoGroupArgs();
     }
 
-    public sealed class RoGroupState : Pulumi.ResourceArgs
+    public sealed class RoGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID, in the format: cdbro-3i70uj0k.
@@ -213,5 +215,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public RoGroupState()
         {
         }
+        public static new RoGroupState Empty => new RoGroupState();
     }
 }

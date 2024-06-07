@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateInternetAccessibleArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateInternetAccessibleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of bandwidth package.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateInternetAccessibleArgs()
         {
         }
+        public static new LaunchTemplateInternetAccessibleArgs Empty => new LaunchTemplateInternetAccessibleArgs();
     }
 }

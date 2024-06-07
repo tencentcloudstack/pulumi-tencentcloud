@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var diskAttachment = new Tencentcloud.Lighthouse.DiskAttachment("diskAttachment", new()
     ///     {
-    ///         var diskAttachment = new Tencentcloud.Lighthouse.DiskAttachment("diskAttachment", new Tencentcloud.Lighthouse.DiskAttachmentArgs
-    ///         {
-    ///             DiskId = "lhdisk-xxxxxx",
-    ///             InstanceId = "lhins-xxxxxx",
-    ///         });
-    ///     }
+    ///         DiskId = "lhdisk-xxxxxx",
+    ///         InstanceId = "lhins-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// lighthouse disk_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Lighthouse/diskAttachment:DiskAttachment disk_attachment disk_attachment_id
+    /// $ pulumi import tencentcloud:Lighthouse/diskAttachment:DiskAttachment disk_attachment disk_attachment_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/diskAttachment:DiskAttachment")]
-    public partial class DiskAttachment : Pulumi.CustomResource
+    public partial class DiskAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Disk id.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class DiskAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class DiskAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Disk id.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public DiskAttachmentArgs()
         {
         }
+        public static new DiskAttachmentArgs Empty => new DiskAttachmentArgs();
     }
 
-    public sealed class DiskAttachmentState : Pulumi.ResourceArgs
+    public sealed class DiskAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Disk id.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public DiskAttachmentState()
         {
         }
+        public static new DiskAttachmentState Empty => new DiskAttachmentState();
     }
 }

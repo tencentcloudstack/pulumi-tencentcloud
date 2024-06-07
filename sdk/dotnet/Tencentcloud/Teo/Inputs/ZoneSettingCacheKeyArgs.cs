@@ -11,10 +11,10 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneSettingCacheKeyArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingCacheKeyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Specifies whether to enable full-path cache.- `on`: Enable full-path cache (i.e., disable Ignore Query String).- `off`: Disable full-path cache (i.e., enable Ignore Query String). Note: This field may return null, indicating that no valid value can be obtained.
+        /// Specifies whether to enable full-path cache.
         /// </summary>
         [Input("fullUrlCache")]
         public Input<string>? FullUrlCache { get; set; }
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneSettingCacheKeyArgs()
         {
         }
+        public static new ZoneSettingCacheKeyArgs Empty => new ZoneSettingCacheKeyArgs();
     }
 }

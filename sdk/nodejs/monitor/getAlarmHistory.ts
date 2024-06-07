@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const alarmHistory = pulumi.output(tencentcloud.Monitor.getAlarmHistory({
+ * const alarmHistory = tencentcloud.Monitor.getAlarmHistory({
  *     content: "CPU利用率 > 3%",
  *     endTime: 1697212799,
  *     module: "monitor",
@@ -28,15 +30,13 @@ import * as utilities from "../utilities";
  *     policyName: "terraform_test",
  *     projectIds: [0],
  *     startTime: 1696608000,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAlarmHistory(args: GetAlarmHistoryArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmHistoryResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Monitor/getAlarmHistory:getAlarmHistory", {
         "alarmLevels": args.alarmLevels,
         "alarmObject": args.alarmObject,
@@ -186,9 +186,36 @@ export interface GetAlarmHistoryResult {
     readonly resultOutputFile?: string;
     readonly startTime?: number;
 }
-
+/**
+ * Use this data source to query detailed information of monitor alarmHistory
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const alarmHistory = tencentcloud.Monitor.getAlarmHistory({
+ *     content: "CPU利用率 > 3%",
+ *     endTime: 1697212799,
+ *     module: "monitor",
+ *     monitorTypes: ["MT_QCE"],
+ *     namespaces: [{
+ *         monitorType: "CpuUsage",
+ *         namespace: "cvm_device",
+ *     }],
+ *     order: "DESC",
+ *     policyIds: ["policy-iejtp4ue"],
+ *     policyName: "terraform_test",
+ *     projectIds: [0],
+ *     startTime: 1696608000,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAlarmHistoryOutput(args: GetAlarmHistoryOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAlarmHistoryResult> {
-    return pulumi.output(args).apply(a => getAlarmHistory(a, opts))
+    return pulumi.output(args).apply((a: any) => getAlarmHistory(a, opts))
 }
 
 /**

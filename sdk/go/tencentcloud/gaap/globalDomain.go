@@ -7,46 +7,52 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a gaap global domain
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Gaap.NewGlobalDomain(ctx, "globalDomain", &Gaap.GlobalDomainArgs{
-// 			Alias:        pulumi.String("demo"),
-// 			DefaultValue: pulumi.String("xxxxxx.com"),
-// 			ProjectId:    pulumi.Int(0),
-// 			Tags: pulumi.AnyMap{
-// 				"key": pulumi.Any("value"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Gaap.NewGlobalDomain(ctx, "globalDomain", &Gaap.GlobalDomainArgs{
+//				Alias:        pulumi.String("demo"),
+//				DefaultValue: pulumi.String("xxxxxx.com"),
+//				ProjectId:    pulumi.Int(0),
+//				Tags: pulumi.Map{
+//					"key": pulumi.Any("value"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // gaap global_domain can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Gaap/globalDomain:GlobalDomain global_domain ${projectId}#${domainId}
+// $ pulumi import tencentcloud:Gaap/globalDomain:GlobalDomain global_domain ${projectId}#${domainId}
 // ```
 type GlobalDomain struct {
 	pulumi.CustomResourceState
@@ -76,7 +82,7 @@ func NewGlobalDomain(ctx *pulumi.Context,
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource GlobalDomain
 	err := ctx.RegisterResource("tencentcloud:Gaap/globalDomain:GlobalDomain", name, args, &resource, opts...)
 	if err != nil {
@@ -181,7 +187,7 @@ func (i *GlobalDomain) ToGlobalDomainOutputWithContext(ctx context.Context) Glob
 // GlobalDomainArrayInput is an input type that accepts GlobalDomainArray and GlobalDomainArrayOutput values.
 // You can construct a concrete instance of `GlobalDomainArrayInput` via:
 //
-//          GlobalDomainArray{ GlobalDomainArgs{...} }
+//	GlobalDomainArray{ GlobalDomainArgs{...} }
 type GlobalDomainArrayInput interface {
 	pulumi.Input
 
@@ -206,7 +212,7 @@ func (i GlobalDomainArray) ToGlobalDomainArrayOutputWithContext(ctx context.Cont
 // GlobalDomainMapInput is an input type that accepts GlobalDomainMap and GlobalDomainMapOutput values.
 // You can construct a concrete instance of `GlobalDomainMapInput` via:
 //
-//          GlobalDomainMap{ "key": GlobalDomainArgs{...} }
+//	GlobalDomainMap{ "key": GlobalDomainArgs{...} }
 type GlobalDomainMapInput interface {
 	pulumi.Input
 

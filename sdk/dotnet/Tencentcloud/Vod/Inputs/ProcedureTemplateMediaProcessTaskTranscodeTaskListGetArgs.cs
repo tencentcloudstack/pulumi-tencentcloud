@@ -11,13 +11,37 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
 {
 
-    public sealed class ProcedureTemplateMediaProcessTaskTranscodeTaskListGetArgs : Pulumi.ResourceArgs
+    public sealed class ProcedureTemplateMediaProcessTaskTranscodeTaskListGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// opyright watermark.
+        /// </summary>
+        [Input("copyRightWatermark")]
+        public Input<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermarkGetArgs>? CopyRightWatermark { get; set; }
+
         /// <summary>
         /// Video transcoding template ID.
         /// </summary>
         [Input("definition", required: true)]
         public Input<string> Definition { get; set; } = null!;
+
+        /// <summary>
+        /// End time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will exist till the last video frame; If this value is greater than `0` (e.g., n), the blur will exist till second n; If this value is smaller than `0` (e.g., -n), the blur will exist till second n before the last video frame.
+        /// </summary>
+        [Input("endTimeOffset")]
+        public Input<double>? EndTimeOffset { get; set; }
+
+        [Input("headTailLists")]
+        private InputList<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListGetArgs>? _headTailLists;
+
+        /// <summary>
+        /// List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.
+        /// </summary>
+        public InputList<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListGetArgs> HeadTailLists
+        {
+            get => _headTailLists ?? (_headTailLists = new InputList<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailListGetArgs>());
+            set => _headTailLists = value;
+        }
 
         [Input("mosaicLists")]
         private InputList<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListGetArgs>? _mosaicLists;
@@ -30,6 +54,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
             get => _mosaicLists ?? (_mosaicLists = new InputList<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicListGetArgs>());
             set => _mosaicLists = value;
         }
+
+        /// <summary>
+        /// Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
+        /// </summary>
+        [Input("startTimeOffset")]
+        public Input<double>? StartTimeOffset { get; set; }
+
+        /// <summary>
+        /// Digital watermark.
+        /// </summary>
+        [Input("traceWatermark")]
+        public Input<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermarkGetArgs>? TraceWatermark { get; set; }
 
         [Input("watermarkLists")]
         private InputList<Inputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkListGetArgs>? _watermarkLists;
@@ -46,5 +82,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
         public ProcedureTemplateMediaProcessTaskTranscodeTaskListGetArgs()
         {
         }
+        public static new ProcedureTemplateMediaProcessTaskTranscodeTaskListGetArgs Empty => new ProcedureTemplateMediaProcessTaskTranscodeTaskListGetArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
 {
 
-    public sealed class GetCrossTargetsFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetCrossTargetsFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter name.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
         public GetCrossTargetsFilterArgs()
         {
         }
+        public static new GetCrossTargetsFilterArgs Empty => new GetCrossTargetsFilterArgs();
     }
 }

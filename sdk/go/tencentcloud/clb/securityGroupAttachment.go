@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a clb securityGroupAttachment
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewSecurityGroupAttachment(ctx, "securityGroupAttachment", &Clb.SecurityGroupAttachmentArgs{
-// 			LoadBalancerIds: pulumi.String("lb-5dnrkgry"),
-// 			SecurityGroup:   pulumi.String("sg-ijato2x1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewSecurityGroupAttachment(ctx, "securityGroupAttachment", &Clb.SecurityGroupAttachmentArgs{
+//				LoadBalancerIds: pulumi.String("lb-5dnrkgry"),
+//				SecurityGroup:   pulumi.String("sg-ijato2x1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // clb security_group_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clb/securityGroupAttachment:SecurityGroupAttachment security_group_attachment security_group_id#clb_id
+// $ pulumi import tencentcloud:Clb/securityGroupAttachment:SecurityGroupAttachment security_group_attachment security_group_id#clb_id
 // ```
 type SecurityGroupAttachment struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewSecurityGroupAttachment(ctx *pulumi.Context,
 	if args.SecurityGroup == nil {
 		return nil, errors.New("invalid value for required argument 'SecurityGroup'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SecurityGroupAttachment
 	err := ctx.RegisterResource("tencentcloud:Clb/securityGroupAttachment:SecurityGroupAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *SecurityGroupAttachment) ToSecurityGroupAttachmentOutputWithContext(ctx
 // SecurityGroupAttachmentArrayInput is an input type that accepts SecurityGroupAttachmentArray and SecurityGroupAttachmentArrayOutput values.
 // You can construct a concrete instance of `SecurityGroupAttachmentArrayInput` via:
 //
-//          SecurityGroupAttachmentArray{ SecurityGroupAttachmentArgs{...} }
+//	SecurityGroupAttachmentArray{ SecurityGroupAttachmentArgs{...} }
 type SecurityGroupAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i SecurityGroupAttachmentArray) ToSecurityGroupAttachmentArrayOutputWithCo
 // SecurityGroupAttachmentMapInput is an input type that accepts SecurityGroupAttachmentMap and SecurityGroupAttachmentMapOutput values.
 // You can construct a concrete instance of `SecurityGroupAttachmentMapInput` via:
 //
-//          SecurityGroupAttachmentMap{ "key": SecurityGroupAttachmentArgs{...} }
+//	SecurityGroupAttachmentMap{ "key": SecurityGroupAttachmentArgs{...} }
 type SecurityGroupAttachmentMapInput interface {
 	pulumi.Input
 

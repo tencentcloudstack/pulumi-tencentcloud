@@ -22,7 +22,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
         /// Server certificate ID.
         /// </summary>
         public readonly string? CertificateId;
+        /// <summary>
+        /// Server certificate name.
+        /// </summary>
         public readonly string? CertificateName;
+        /// <summary>
+        /// Deploy time of server certificate.
+        /// </summary>
         public readonly string? DeployTime;
         /// <summary>
         /// Signature expiration time in second. The maximum value is 630720000.

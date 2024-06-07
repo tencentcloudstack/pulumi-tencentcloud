@@ -2,44 +2,48 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of dbbrain topSpaceTables
  *
  * ## Example Usage
+ *
  * ### Sort by PhysicalFileSize
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const topSpaceTables = pulumi.output(tencentcloud.Dbbrain.getTopSpaceTables({
+ * const topSpaceTables = tencentcloud.Dbbrain.getTopSpaceTables({
  *     instanceId: "%s",
  *     product: "mysql",
  *     sortBy: "PhysicalFileSize",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Sort by TotalLength
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const topSpaceTables = pulumi.output(tencentcloud.Dbbrain.getTopSpaceTables({
+ * const topSpaceTables = tencentcloud.Dbbrain.getTopSpaceTables({
  *     instanceId: "%s",
  *     product: "mysql",
  *     sortBy: "PhysicalFileSize",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTopSpaceTables(args: GetTopSpaceTablesArgs, opts?: pulumi.InvokeOptions): Promise<GetTopSpaceTablesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dbbrain/getTopSpaceTables:getTopSpaceTables", {
         "instanceId": args.instanceId,
         "limit": args.limit,
@@ -97,9 +101,43 @@ export interface GetTopSpaceTablesResult {
      */
     readonly topSpaceTables: outputs.Dbbrain.GetTopSpaceTablesTopSpaceTable[];
 }
-
+/**
+ * Use this data source to query detailed information of dbbrain topSpaceTables
+ *
+ * ## Example Usage
+ *
+ * ### Sort by PhysicalFileSize
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const topSpaceTables = tencentcloud.Dbbrain.getTopSpaceTables({
+ *     instanceId: "%s",
+ *     product: "mysql",
+ *     sortBy: "PhysicalFileSize",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Sort by TotalLength
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const topSpaceTables = tencentcloud.Dbbrain.getTopSpaceTables({
+ *     instanceId: "%s",
+ *     product: "mysql",
+ *     sortBy: "PhysicalFileSize",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTopSpaceTablesOutput(args: GetTopSpaceTablesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTopSpaceTablesResult> {
-    return pulumi.output(args).apply(a => getTopSpaceTables(a, opts))
+    return pulumi.output(args).apply((a: any) => getTopSpaceTables(a, opts))
 }
 
 /**

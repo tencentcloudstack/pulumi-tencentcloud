@@ -16,161 +16,175 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     /// &gt; **NOTE:** When the type is `apigw`, the import function is not supported.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create ckafka event connector
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var fooInfo = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
-    ///         var fooEventBus = new Tencentcloud.Eb.EventBus("fooEventBus", new Tencentcloud.Eb.EventBusArgs
-    ///         {
-    ///             EventBusName = "tf-event_bus",
-    ///             Description = "event bus desc",
-    ///             EnableStore = false,
-    ///             SaveDays = 1,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var kafkaInstance = new Tencentcloud.Ckafka.Instance("kafkaInstance", new Tencentcloud.Ckafka.InstanceArgs
-    ///         {
-    ///             InstanceName = "ckafka-instance-maz-tf-test",
-    ///             ZoneId = 100003,
-    ///             MultiZoneFlag = true,
-    ///             ZoneIds = 
-    ///             {
-    ///                 100003,
-    ///                 100006,
-    ///             },
-    ///             Period = 1,
-    ///             VpcId = @var.Vpc_id,
-    ///             SubnetId = @var.Subnet_id,
-    ///             MsgRetentionTime = 1300,
-    ///             RenewFlag = 0,
-    ///             KafkaVersion = "1.1.1",
-    ///             DiskSize = 500,
-    ///             DiskType = "CLOUD_BASIC",
-    ///             Config = new Tencentcloud.Ckafka.Inputs.InstanceConfigArgs
-    ///             {
-    ///                 AutoCreateTopicEnable = true,
-    ///                 DefaultNumPartitions = 3,
-    ///                 DefaultReplicationFactor = 3,
-    ///             },
-    ///             DynamicRetentionConfig = new Tencentcloud.Ckafka.Inputs.InstanceDynamicRetentionConfigArgs
-    ///             {
-    ///                 Enable = 1,
-    ///             },
-    ///         });
-    ///         var ckafkaId = kafkaInstance.Id;
-    ///         var uin = fooInfo.Apply(fooInfo =&gt; fooInfo.OwnerUin);
-    ///         var eventConnector = new Tencentcloud.Eb.EventConnector("eventConnector", new Tencentcloud.Eb.EventConnectorArgs
-    ///         {
-    ///             EventBusId = fooEventBus.Id,
-    ///             ConnectionName = "tf-event-connector",
-    ///             Description = "event connector desc1",
-    ///             Enable = true,
-    ///             Type = "ckafka",
-    ///             ConnectionDescription = new Tencentcloud.Eb.Inputs.EventConnectorConnectionDescriptionArgs
-    ///             {
-    ///                 ResourceDescription = Output.Tuple(uin, uin, ckafkaId).Apply(values =&gt;
-    ///                 {
-    ///                     var uin = values.Item1;
-    ///                     var uin1 = values.Item2;
-    ///                     var ckafkaId = values.Item3;
-    ///                     return $"qcs::ckafka:ap-guangzhou:uin/{uin}:ckafkaId/uin/{uin1}/{ckafkaId}";
-    ///                 }),
-    ///                 CkafkaParams = new Tencentcloud.Eb.Inputs.EventConnectorConnectionDescriptionCkafkaParamsArgs
-    ///                 {
-    ///                     Offset = "latest",
-    ///                     TopicName = "dasdasd",
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///     var fooInfo = Tencentcloud.User.GetInfo.Invoke();
     /// 
-    /// }
+    ///     var fooEventBus = new Tencentcloud.Eb.EventBus("fooEventBus", new()
+    ///     {
+    ///         EventBusName = "tf-event_bus",
+    ///         Description = "event bus desc",
+    ///         EnableStore = false,
+    ///         SaveDays = 1,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var kafkaInstance = new Tencentcloud.Ckafka.Instance("kafkaInstance", new()
+    ///     {
+    ///         InstanceName = "ckafka-instance-maz-tf-test",
+    ///         ZoneId = 100003,
+    ///         MultiZoneFlag = true,
+    ///         ZoneIds = new[]
+    ///         {
+    ///             100003,
+    ///             100006,
+    ///         },
+    ///         Period = 1,
+    ///         VpcId = @var.Vpc_id,
+    ///         SubnetId = @var.Subnet_id,
+    ///         MsgRetentionTime = 1300,
+    ///         RenewFlag = 0,
+    ///         KafkaVersion = "1.1.1",
+    ///         DiskSize = 500,
+    ///         DiskType = "CLOUD_BASIC",
+    ///         Config = new Tencentcloud.Ckafka.Inputs.InstanceConfigArgs
+    ///         {
+    ///             AutoCreateTopicEnable = true,
+    ///             DefaultNumPartitions = 3,
+    ///             DefaultReplicationFactor = 3,
+    ///         },
+    ///         DynamicRetentionConfig = new Tencentcloud.Ckafka.Inputs.InstanceDynamicRetentionConfigArgs
+    ///         {
+    ///             Enable = 1,
+    ///         },
+    ///     });
+    /// 
+    ///     var ckafkaId = kafkaInstance.Id;
+    /// 
+    ///     var uin = fooInfo.Apply(getInfoResult =&gt; getInfoResult.OwnerUin);
+    /// 
+    ///     var eventConnector = new Tencentcloud.Eb.EventConnector("eventConnector", new()
+    ///     {
+    ///         EventBusId = fooEventBus.Id,
+    ///         ConnectionName = "tf-event-connector",
+    ///         Description = "event connector desc1",
+    ///         Enable = true,
+    ///         Type = "ckafka",
+    ///         ConnectionDescription = new Tencentcloud.Eb.Inputs.EventConnectorConnectionDescriptionArgs
+    ///         {
+    ///             ResourceDescription = Output.Tuple(uin, uin, ckafkaId).Apply(values =&gt;
+    ///             {
+    ///                 var uin = values.Item1;
+    ///                 var uin1 = values.Item2;
+    ///                 var ckafkaId = values.Item3;
+    ///                 return $"qcs::ckafka:ap-guangzhou:uin/{uin}:ckafkaId/uin/{uin1}/{ckafkaId}";
+    ///             }),
+    ///             CkafkaParams = new Tencentcloud.Eb.Inputs.EventConnectorConnectionDescriptionCkafkaParamsArgs
+    ///             {
+    ///                 Offset = "latest",
+    ///                 TopicName = "dasdasd",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create api_gateway event connector
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var fooInfo = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
-    ///         var fooEventBus = new Tencentcloud.Eb.EventBus("fooEventBus", new Tencentcloud.Eb.EventBusArgs
-    ///         {
-    ///             EventBusName = "tf-event_bus",
-    ///             Description = "event bus desc",
-    ///             EnableStore = false,
-    ///             SaveDays = 1,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
-    ///         {
-    ///             ServiceName = "tf-eb-service",
-    ///             Protocol = "http&amp;https",
-    ///             ServiceDesc = "your nice service",
-    ///             NetTypes = 
-    ///             {
-    ///                 "INNER",
-    ///                 "OUTER",
-    ///             },
-    ///             IpVersion = "IPv4",
-    ///         });
-    ///         var uin = fooInfo.Apply(fooInfo =&gt; fooInfo.OwnerUin);
-    ///         var serviceId = service.Id;
-    ///         var eventConnector = new Tencentcloud.Eb.EventConnector("eventConnector", new Tencentcloud.Eb.EventConnectorArgs
-    ///         {
-    ///             EventBusId = fooEventBus.Id,
-    ///             ConnectionName = "tf-event-connector",
-    ///             Description = "event connector desc1",
-    ///             Enable = false,
-    ///             Type = "apigw",
-    ///             ConnectionDescription = new Tencentcloud.Eb.Inputs.EventConnectorConnectionDescriptionArgs
-    ///             {
-    ///                 ResourceDescription = Output.Tuple(uin, serviceId).Apply(values =&gt;
-    ///                 {
-    ///                     var uin = values.Item1;
-    ///                     var serviceId = values.Item2;
-    ///                     return $"qcs::apigw:ap-guangzhou:uin/{uin}:serviceid/{serviceId}";
-    ///                 }),
-    ///                 ApiGwParams = new Tencentcloud.Eb.Inputs.EventConnectorConnectionDescriptionApiGwParamsArgs
-    ///                 {
-    ///                     Protocol = "HTTP",
-    ///                     Method = "GET",
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///     var fooInfo = Tencentcloud.User.GetInfo.Invoke();
     /// 
-    /// }
+    ///     var fooEventBus = new Tencentcloud.Eb.EventBus("fooEventBus", new()
+    ///     {
+    ///         EventBusName = "tf-event_bus",
+    ///         Description = "event bus desc",
+    ///         EnableStore = false,
+    ///         SaveDays = 1,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var service = new Tencentcloud.ApiGateway.Service("service", new()
+    ///     {
+    ///         ServiceName = "tf-eb-service",
+    ///         Protocol = "http&amp;https",
+    ///         ServiceDesc = "your nice service",
+    ///         NetTypes = new[]
+    ///         {
+    ///             "INNER",
+    ///             "OUTER",
+    ///         },
+    ///         IpVersion = "IPv4",
+    ///     });
+    /// 
+    ///     var uin = fooInfo.Apply(getInfoResult =&gt; getInfoResult.OwnerUin);
+    /// 
+    ///     var serviceId = service.Id;
+    /// 
+    ///     var eventConnector = new Tencentcloud.Eb.EventConnector("eventConnector", new()
+    ///     {
+    ///         EventBusId = fooEventBus.Id,
+    ///         ConnectionName = "tf-event-connector",
+    ///         Description = "event connector desc1",
+    ///         Enable = false,
+    ///         Type = "apigw",
+    ///         ConnectionDescription = new Tencentcloud.Eb.Inputs.EventConnectorConnectionDescriptionArgs
+    ///         {
+    ///             ResourceDescription = Output.Tuple(uin, serviceId).Apply(values =&gt;
+    ///             {
+    ///                 var uin = values.Item1;
+    ///                 var serviceId = values.Item2;
+    ///                 return $"qcs::apigw:ap-guangzhou:uin/{uin}:serviceid/{serviceId}";
+    ///             }),
+    ///             ApiGwParams = new Tencentcloud.Eb.Inputs.EventConnectorConnectionDescriptionApiGwParamsArgs
+    ///             {
+    ///                 Protocol = "HTTP",
+    ///                 Method = "GET",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// eb event_connector can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Eb/eventConnector:EventConnector event_connector eventBusId#connectionId
+    /// $ pulumi import tencentcloud:Eb/eventConnector:EventConnector event_connector eventBusId#connectionId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eb/eventConnector:EventConnector")]
-    public partial class EventConnector : Pulumi.CustomResource
+    public partial class EventConnector : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Connector description.
@@ -253,7 +267,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         }
     }
 
-    public sealed class EventConnectorArgs : Pulumi.ResourceArgs
+    public sealed class EventConnectorArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Connector description.
@@ -294,9 +308,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public EventConnectorArgs()
         {
         }
+        public static new EventConnectorArgs Empty => new EventConnectorArgs();
     }
 
-    public sealed class EventConnectorState : Pulumi.ResourceArgs
+    public sealed class EventConnectorState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Connector description.
@@ -337,5 +352,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public EventConnectorState()
         {
         }
+        public static new EventConnectorState Empty => new EventConnectorState();
     }
 }

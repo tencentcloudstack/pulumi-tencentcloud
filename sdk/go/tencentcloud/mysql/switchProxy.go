@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type SwitchProxy struct {
@@ -33,7 +34,7 @@ func NewSwitchProxy(ctx *pulumi.Context,
 	if args.ProxyGroupId == nil {
 		return nil, errors.New("invalid value for required argument 'ProxyGroupId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SwitchProxy
 	err := ctx.RegisterResource("tencentcloud:Mysql/switchProxy:SwitchProxy", name, args, &resource, opts...)
 	if err != nil {
@@ -114,7 +115,7 @@ func (i *SwitchProxy) ToSwitchProxyOutputWithContext(ctx context.Context) Switch
 // SwitchProxyArrayInput is an input type that accepts SwitchProxyArray and SwitchProxyArrayOutput values.
 // You can construct a concrete instance of `SwitchProxyArrayInput` via:
 //
-//          SwitchProxyArray{ SwitchProxyArgs{...} }
+//	SwitchProxyArray{ SwitchProxyArgs{...} }
 type SwitchProxyArrayInput interface {
 	pulumi.Input
 
@@ -139,7 +140,7 @@ func (i SwitchProxyArray) ToSwitchProxyArrayOutputWithContext(ctx context.Contex
 // SwitchProxyMapInput is an input type that accepts SwitchProxyMap and SwitchProxyMapOutput values.
 // You can construct a concrete instance of `SwitchProxyMapInput` via:
 //
-//          SwitchProxyMap{ "key": SwitchProxyArgs{...} }
+//	SwitchProxyMap{ "key": SwitchProxyArgs{...} }
 type SwitchProxyMapInput interface {
 	pulumi.Input
 

@@ -11,19 +11,29 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Inputs
 {
 
-    public sealed class PayCertificateDvAuthArgs : Pulumi.ResourceArgs
+    public sealed class PayCertificateDvAuthArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// DV authentication key.
+        /// </summary>
         [Input("dvAuthKey")]
         public Input<string>? DvAuthKey { get; set; }
 
+        /// <summary>
+        /// DV authentication value.
+        /// </summary>
         [Input("dvAuthValue")]
         public Input<string>? DvAuthValue { get; set; }
 
+        /// <summary>
+        /// DV authentication type.
+        /// </summary>
         [Input("dvAuthVerifyType")]
         public Input<string>? DvAuthVerifyType { get; set; }
 
         public PayCertificateDvAuthArgs()
         {
         }
+        public static new PayCertificateDvAuthArgs Empty => new PayCertificateDvAuthArgs();
     }
 }

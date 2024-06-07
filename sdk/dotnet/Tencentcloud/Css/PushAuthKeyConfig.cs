@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var pushAuthKeyConfig = new Tencentcloud.Css.PushAuthKeyConfig("pushAuthKeyConfig", new()
     ///     {
-    ///         var pushAuthKeyConfig = new Tencentcloud.Css.PushAuthKeyConfig("pushAuthKeyConfig", new Tencentcloud.Css.PushAuthKeyConfigArgs
-    ///         {
-    ///             AuthDelta = 1800,
-    ///             BackupAuthKey = "testbackkey",
-    ///             DomainName = "your_push_domain_name",
-    ///             Enable = 1,
-    ///             MasterAuthKey = "testmasterkey",
-    ///         });
-    ///     }
+    ///         AuthDelta = 1800,
+    ///         BackupAuthKey = "testbackkey",
+    ///         DomainName = "your_push_domain_name",
+    ///         Enable = 1,
+    ///         MasterAuthKey = "testmasterkey",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css push_auth_key_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/pushAuthKeyConfig:PushAuthKeyConfig push_auth_key_config push_auth_key_config_id
+    /// $ pulumi import tencentcloud:Css/pushAuthKeyConfig:PushAuthKeyConfig push_auth_key_config push_auth_key_config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/pushAuthKeyConfig:PushAuthKeyConfig")]
-    public partial class PushAuthKeyConfig : Pulumi.CustomResource
+    public partial class PushAuthKeyConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Valid time, unit: second.
@@ -122,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class PushAuthKeyConfigArgs : Pulumi.ResourceArgs
+    public sealed class PushAuthKeyConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Valid time, unit: second.
@@ -157,9 +158,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public PushAuthKeyConfigArgs()
         {
         }
+        public static new PushAuthKeyConfigArgs Empty => new PushAuthKeyConfigArgs();
     }
 
-    public sealed class PushAuthKeyConfigState : Pulumi.ResourceArgs
+    public sealed class PushAuthKeyConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Valid time, unit: second.
@@ -194,5 +196,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public PushAuthKeyConfigState()
         {
         }
+        public static new PushAuthKeyConfigState Empty => new PushAuthKeyConfigState();
     }
 }

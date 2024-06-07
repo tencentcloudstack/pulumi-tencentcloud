@@ -8,39 +8,44 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tdmq message
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdmq.GetRocketmqMessages(ctx, &tdmq.GetRocketmqMessagesArgs{
-// 			ClusterId:     "rocketmq-rkrbm52djmro",
-// 			EnvironmentId: "keep_ns",
-// 			MsgId:         "A9FE8D0567FE15DB97425FC08EEF0000",
-// 			QueryDlqMsg:   pulumi.BoolRef(false),
-// 			TopicName:     "keep-topic",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tdmq.GetRocketmqMessages(ctx, &tdmq.GetRocketmqMessagesArgs{
+//				ClusterId:     "rocketmq-rkrbm52djmro",
+//				EnvironmentId: "keep_ns",
+//				MsgId:         "A9FE8D0567FE15DB97425FC08EEF0000",
+//				QueryDlqMsg:   pulumi.BoolRef(false),
+//				TopicName:     "keep-topic",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetRocketmqMessages(ctx *pulumi.Context, args *GetRocketmqMessagesArgs, opts ...pulumi.InvokeOption) (*GetRocketmqMessagesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRocketmqMessagesResult
 	err := ctx.Invoke("tencentcloud:Tdmq/getRocketmqMessages:getRocketmqMessages", args, &rv, opts...)
 	if err != nil {

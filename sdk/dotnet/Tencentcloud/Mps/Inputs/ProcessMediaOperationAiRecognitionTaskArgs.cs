@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ProcessMediaOperationAiRecognitionTaskArgs : Pulumi.ResourceArgs
+    public sealed class ProcessMediaOperationAiRecognitionTaskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Intelligent video recognition template ID.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ProcessMediaOperationAiRecognitionTaskArgs()
         {
         }
+        public static new ProcessMediaOperationAiRecognitionTaskArgs Empty => new ProcessMediaOperationAiRecognitionTaskArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class MigrateJobMigrateOptionDatabaseTableDatabaseTableGetArgs : Pulumi.ResourceArgs
+    public sealed class MigrateJobMigrateOptionDatabaseTableDatabaseTableGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// new table name.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public MigrateJobMigrateOptionDatabaseTableDatabaseTableGetArgs()
         {
         }
+        public static new MigrateJobMigrateOptionDatabaseTableDatabaseTableGetArgs Empty => new MigrateJobMigrateOptionDatabaseTableDatabaseTableGetArgs();
     }
 }

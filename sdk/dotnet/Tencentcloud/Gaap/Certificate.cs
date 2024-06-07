@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Gaap.Certificate("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Gaap.Certificate("foo", new Tencentcloud.Gaap.CertificateArgs
-    ///         {
-    ///             Content = "test:tx2KGdo3zJg/.",
-    ///             Type = "BASIC",
-    ///         });
-    ///     }
+    ///         Content = "test:tx2KGdo3zJg/.",
+    ///         Type = "BASIC",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// GAAP certificate can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Gaap/certificate:Certificate tencentcloud_gaap_certificate.foo cert-d5y6ei3b
+    /// $ pulumi import tencentcloud:Gaap/certificate:Certificate tencentcloud_gaap_certificate.foo cert-d5y6ei3b
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/certificate:Certificate")]
-    public partial class Certificate : Pulumi.CustomResource
+    public partial class Certificate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Beginning time of the certificate.
@@ -122,6 +123,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "key",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -143,7 +148,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         }
     }
 
-    public sealed class CertificateArgs : Pulumi.ResourceArgs
+    public sealed class CertificateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Content of the certificate, and URL encoding. When the certificate is basic authentication, use the `user:xxx password:xxx` format, where the password is encrypted with `htpasswd` or `openssl`; When the certificate is `CA` or `SSL`, the format is `pem`.
@@ -151,11 +156,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         [Input("content", required: true)]
         public Input<string> Content { get; set; } = null!;
 
+        [Input("key")]
+        private Input<string>? _key;
+
         /// <summary>
         /// Key of the `SSL` certificate.
         /// </summary>
-        [Input("key")]
-        public Input<string>? Key { get; set; }
+        public Input<string>? Key
+        {
+            get => _key;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _key = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Name of the certificate.
@@ -172,9 +187,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public CertificateArgs()
         {
         }
+        public static new CertificateArgs Empty => new CertificateArgs();
     }
 
-    public sealed class CertificateState : Pulumi.ResourceArgs
+    public sealed class CertificateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Beginning time of the certificate.
@@ -206,11 +222,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         [Input("issuerCn")]
         public Input<string>? IssuerCn { get; set; }
 
+        [Input("key")]
+        private Input<string>? _key;
+
         /// <summary>
         /// Key of the `SSL` certificate.
         /// </summary>
-        [Input("key")]
-        public Input<string>? Key { get; set; }
+        public Input<string>? Key
+        {
+            get => _key;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _key = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Name of the certificate.
@@ -233,5 +259,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public CertificateState()
         {
         }
+        public static new CertificateState Empty => new CertificateState();
     }
 }

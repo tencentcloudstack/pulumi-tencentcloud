@@ -15,28 +15,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var rabbitmqVirtualHost = new Tencentcloud.Tdmq.RabbitmqVirtualHost("rabbitmqVirtualHost", new()
     ///     {
-    ///         var rabbitmqVirtualHost = new Tencentcloud.Tdmq.RabbitmqVirtualHost("rabbitmqVirtualHost", new Tencentcloud.Tdmq.RabbitmqVirtualHostArgs
-    ///         {
-    ///             Description = "desc",
-    ///             InstanceId = "amqp-kzbe8p3n",
-    ///             TraceFlag = false,
-    ///             VirtualHost = "vh-test-1",
-    ///         });
-    ///     }
+    ///         Description = "desc",
+    ///         InstanceId = "amqp-kzbe8p3n",
+    ///         TraceFlag = false,
+    ///         VirtualHost = "vh-test-1",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/rabbitmqVirtualHost:RabbitmqVirtualHost")]
-    public partial class RabbitmqVirtualHost : Pulumi.CustomResource
+    public partial class RabbitmqVirtualHost : global::Pulumi.CustomResource
     {
         /// <summary>
         /// describe.
@@ -107,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class RabbitmqVirtualHostArgs : Pulumi.ResourceArgs
+    public sealed class RabbitmqVirtualHostArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// describe.
@@ -136,9 +137,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RabbitmqVirtualHostArgs()
         {
         }
+        public static new RabbitmqVirtualHostArgs Empty => new RabbitmqVirtualHostArgs();
     }
 
-    public sealed class RabbitmqVirtualHostState : Pulumi.ResourceArgs
+    public sealed class RabbitmqVirtualHostState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// describe.
@@ -167,5 +169,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RabbitmqVirtualHostState()
         {
         }
+        public static new RabbitmqVirtualHostState Empty => new RabbitmqVirtualHostState();
     }
 }

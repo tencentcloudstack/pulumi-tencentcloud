@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowMediaProcessTaskGetArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowMediaProcessTaskGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("adaptiveDynamicStreamingTaskSets")]
         private InputList<Inputs.WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetGetArgs>? _adaptiveDynamicStreamingTaskSets;
@@ -88,5 +88,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowMediaProcessTaskGetArgs()
         {
         }
+        public static new WorkflowMediaProcessTaskGetArgs Empty => new WorkflowMediaProcessTaskGetArgs();
     }
 }

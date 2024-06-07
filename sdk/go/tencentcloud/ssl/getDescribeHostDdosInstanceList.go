@@ -8,36 +8,41 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of ssl describeHostDdosInstanceList
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.GetDescribeHostDdosInstanceList(ctx, &ssl.GetDescribeHostDdosInstanceListArgs{
-// 			CertificateId: "8u8DII0l",
-// 			ResourceType:  "ddos",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.GetDescribeHostDdosInstanceList(ctx, &ssl.GetDescribeHostDdosInstanceListArgs{
+//				CertificateId: "8u8DII0l",
+//				ResourceType:  "ddos",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetDescribeHostDdosInstanceList(ctx *pulumi.Context, args *GetDescribeHostDdosInstanceListArgs, opts ...pulumi.InvokeOption) (*GetDescribeHostDdosInstanceListResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeHostDdosInstanceListResult
 	err := ctx.Invoke("tencentcloud:Ssl/getDescribeHostDdosInstanceList:getDescribeHostDdosInstanceList", args, &rv, opts...)
 	if err != nil {

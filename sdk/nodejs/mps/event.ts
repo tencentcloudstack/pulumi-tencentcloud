@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const event = new tencentcloud.Mps.Event("event", {
+ * const event = new tencentcloud.mps.Event("event", {
  *     description: "event description",
  *     eventName: "you-event-name",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mps event can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/event:Event event event_id
+ * $ pulumi import tencentcloud:Mps/event:Event event event_id
  * ```
  */
 export class Event extends pulumi.CustomResource {

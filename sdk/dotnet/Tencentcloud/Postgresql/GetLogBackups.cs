@@ -15,92 +15,86 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// <summary>
         /// Use this data source to query detailed information of postgresql log_backups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var logBackups = Tencentcloud.Postgresql.GetLogBackups.Invoke(new()
         ///     {
-        ///         var logBackups = Output.Create(Tencentcloud.Postgresql.GetLogBackups.InvokeAsync(new Tencentcloud.Postgresql.GetLogBackupsArgs
+        ///         MinFinishTime = "%s",
+        ///         MaxFinishTime = "%s",
+        ///         Filters = new[]
         ///         {
-        ///             MinFinishTime = "%s",
-        ///             MaxFinishTime = "%s",
-        ///             Filters = 
+        ///             new Tencentcloud.Postgresql.Inputs.GetLogBackupsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Postgresql.Inputs.GetLogBackupsFilterArgs
+        ///                 Name = "db-instance-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "db-instance-id",
-        ///                     Values = 
-        ///                     {
-        ///                         local.Pgsql_id,
-        ///                     },
+        ///                     local.Pgsql_id,
         ///                 },
         ///             },
-        ///             OrderBy = "StartTime",
-        ///             OrderByType = "desc",
-        ///         }));
-        ///     }
+        ///         },
+        ///         OrderBy = "StartTime",
+        ///         OrderByType = "desc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetLogBackupsResult> InvokeAsync(GetLogBackupsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetLogBackupsResult>("tencentcloud:Postgresql/getLogBackups:getLogBackups", args ?? new GetLogBackupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogBackupsResult>("tencentcloud:Postgresql/getLogBackups:getLogBackups", args ?? new GetLogBackupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of postgresql log_backups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var logBackups = Tencentcloud.Postgresql.GetLogBackups.Invoke(new()
         ///     {
-        ///         var logBackups = Output.Create(Tencentcloud.Postgresql.GetLogBackups.InvokeAsync(new Tencentcloud.Postgresql.GetLogBackupsArgs
+        ///         MinFinishTime = "%s",
+        ///         MaxFinishTime = "%s",
+        ///         Filters = new[]
         ///         {
-        ///             MinFinishTime = "%s",
-        ///             MaxFinishTime = "%s",
-        ///             Filters = 
+        ///             new Tencentcloud.Postgresql.Inputs.GetLogBackupsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Postgresql.Inputs.GetLogBackupsFilterArgs
+        ///                 Name = "db-instance-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "db-instance-id",
-        ///                     Values = 
-        ///                     {
-        ///                         local.Pgsql_id,
-        ///                     },
+        ///                     local.Pgsql_id,
         ///                 },
         ///             },
-        ///             OrderBy = "StartTime",
-        ///             OrderByType = "desc",
-        ///         }));
-        ///     }
+        ///         },
+        ///         OrderBy = "StartTime",
+        ///         OrderByType = "desc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetLogBackupsResult> Invoke(GetLogBackupsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetLogBackupsResult>("tencentcloud:Postgresql/getLogBackups:getLogBackups", args ?? new GetLogBackupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetLogBackupsResult>("tencentcloud:Postgresql/getLogBackups:getLogBackups", args ?? new GetLogBackupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetLogBackupsArgs : Pulumi.InvokeArgs
+    public sealed class GetLogBackupsArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetLogBackupsFilterArgs>? _filters;
@@ -147,9 +141,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetLogBackupsArgs()
         {
         }
+        public static new GetLogBackupsArgs Empty => new GetLogBackupsArgs();
     }
 
-    public sealed class GetLogBackupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetLogBackupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetLogBackupsFilterInputArgs>? _filters;
@@ -196,6 +191,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetLogBackupsInvokeArgs()
         {
         }
+        public static new GetLogBackupsInvokeArgs Empty => new GetLogBackupsInvokeArgs();
     }
 
 

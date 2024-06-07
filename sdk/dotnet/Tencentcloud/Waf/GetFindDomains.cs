@@ -15,106 +15,102 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// <summary>
         /// Use this data source to query detailed information of waf find_domains
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Find all domains
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetFindDomains.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Waf.GetFindDomains.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Find domains by filter
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetFindDomains.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetFindDomains.InvokeAsync(new Tencentcloud.Waf.GetFindDomainsArgs
-        ///         {
-        ///             By = "FindTime",
-        ///             IsWafDomain = "1",
-        ///             Key = "keyWord",
-        ///             Order = "asc",
-        ///         }));
-        ///     }
+        ///         By = "FindTime",
+        ///         IsWafDomain = "1",
+        ///         Key = "keyWord",
+        ///         Order = "asc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetFindDomainsResult> InvokeAsync(GetFindDomainsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetFindDomainsResult>("tencentcloud:Waf/getFindDomains:getFindDomains", args ?? new GetFindDomainsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetFindDomainsResult>("tencentcloud:Waf/getFindDomains:getFindDomains", args ?? new GetFindDomainsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of waf find_domains
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Find all domains
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetFindDomains.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Waf.GetFindDomains.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Find domains by filter
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetFindDomains.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetFindDomains.InvokeAsync(new Tencentcloud.Waf.GetFindDomainsArgs
-        ///         {
-        ///             By = "FindTime",
-        ///             IsWafDomain = "1",
-        ///             Key = "keyWord",
-        ///             Order = "asc",
-        ///         }));
-        ///     }
+        ///         By = "FindTime",
+        ///         IsWafDomain = "1",
+        ///         Key = "keyWord",
+        ///         Order = "asc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetFindDomainsResult> Invoke(GetFindDomainsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetFindDomainsResult>("tencentcloud:Waf/getFindDomains:getFindDomains", args ?? new GetFindDomainsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetFindDomainsResult>("tencentcloud:Waf/getFindDomains:getFindDomains", args ?? new GetFindDomainsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetFindDomainsArgs : Pulumi.InvokeArgs
+    public sealed class GetFindDomainsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Sorting parameter, eg: FindTime.
@@ -149,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetFindDomainsArgs()
         {
         }
+        public static new GetFindDomainsArgs Empty => new GetFindDomainsArgs();
     }
 
-    public sealed class GetFindDomainsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetFindDomainsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Sorting parameter, eg: FindTime.
@@ -186,6 +183,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetFindDomainsInvokeArgs()
         {
         }
+        public static new GetFindDomainsInvokeArgs Empty => new GetFindDomainsInvokeArgs();
     }
 
 

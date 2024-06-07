@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cbs.SnapshotPolicyAttachment("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cbs.SnapshotPolicyAttachment("foo", new Tencentcloud.Cbs.SnapshotPolicyAttachmentArgs
-    ///         {
-    ///             StorageId = tencentcloud_cbs_storage.Foo.Id,
-    ///             SnapshotPolicyId = tencentcloud_cbs_snapshot_policy.Policy.Id,
-    ///         });
-    ///     }
+    ///         StorageId = tencentcloud_cbs_storage.Foo.Id,
+    ///         SnapshotPolicyId = tencentcloud_cbs_snapshot_policy.Policy.Id,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/snapshotPolicyAttachment:SnapshotPolicyAttachment")]
-    public partial class SnapshotPolicyAttachment : Pulumi.CustomResource
+    public partial class SnapshotPolicyAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of CBS snapshot policy.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         }
     }
 
-    public sealed class SnapshotPolicyAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class SnapshotPolicyAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of CBS snapshot policy.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public SnapshotPolicyAttachmentArgs()
         {
         }
+        public static new SnapshotPolicyAttachmentArgs Empty => new SnapshotPolicyAttachmentArgs();
     }
 
-    public sealed class SnapshotPolicyAttachmentState : Pulumi.ResourceArgs
+    public sealed class SnapshotPolicyAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of CBS snapshot policy.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public SnapshotPolicyAttachmentState()
         {
         }
+        public static new SnapshotPolicyAttachmentState Empty => new SnapshotPolicyAttachmentState();
     }
 }

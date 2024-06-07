@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const topic = pulumi.output(tencentcloud.Tcmq.getTopic({
+ * const topic = tencentcloud.Tcmq.getTopic({
  *     topicName: "topic_name",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTopic(args?: GetTopicArgs, opts?: pulumi.InvokeOptions): Promise<GetTopicResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tcmq/getTopic:getTopic", {
         "filters": args.filters,
         "isTagFilter": args.isTagFilter,
@@ -94,9 +94,24 @@ export interface GetTopicResult {
     readonly topicName?: string;
     readonly topicNameLists?: string[];
 }
-
+/**
+ * Use this data source to query detailed information of tcmq topic
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const topic = tencentcloud.Tcmq.getTopic({
+ *     topicName: "topic_name",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTopicOutput(args?: GetTopicOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTopicResult> {
-    return pulumi.output(args).apply(a => getTopic(a, opts))
+    return pulumi.output(args).apply((a: any) => getTopic(a, opts))
 }
 
 /**

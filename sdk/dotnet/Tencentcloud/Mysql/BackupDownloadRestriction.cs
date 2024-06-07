@@ -15,50 +15,51 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Mysql.BackupDownloadRestriction("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Mysql.BackupDownloadRestriction("example", new Tencentcloud.Mysql.BackupDownloadRestrictionArgs
+    ///         IpComparisonSymbol = "In",
+    ///         LimitIps = new[]
     ///         {
-    ///             IpComparisonSymbol = "In",
-    ///             LimitIps = 
+    ///             "127.0.0.1",
+    ///         },
+    ///         LimitType = "Customize",
+    ///         LimitVpcs = new[]
+    ///         {
+    ///             new Tencentcloud.Mysql.Inputs.BackupDownloadRestrictionLimitVpcArgs
     ///             {
-    ///                 "127.0.0.1",
-    ///             },
-    ///             LimitType = "Customize",
-    ///             LimitVpcs = 
-    ///             {
-    ///                 new Tencentcloud.Mysql.Inputs.BackupDownloadRestrictionLimitVpcArgs
+    ///                 Region = "ap-guangzhou",
+    ///                 VpcLists = new[]
     ///                 {
-    ///                     Region = "ap-guangzhou",
-    ///                     VpcLists = 
-    ///                     {
-    ///                         "vpc-4owdpnwr",
-    ///                     },
+    ///                     "vpc-4owdpnwr",
     ///                 },
     ///             },
-    ///             VpcComparisonSymbol = "In",
-    ///         });
-    ///     }
+    ///         },
+    ///         VpcComparisonSymbol = "In",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mysql backup_download_restriction can be imported using the "BackupDownloadRestriction", as follows.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mysql/backupDownloadRestriction:BackupDownloadRestriction backup_download_restriction BackupDownloadRestriction
+    /// $ pulumi import tencentcloud:Mysql/backupDownloadRestriction:BackupDownloadRestriction backup_download_restriction BackupDownloadRestriction
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/backupDownloadRestriction:BackupDownloadRestriction")]
-    public partial class BackupDownloadRestriction : Pulumi.CustomResource
+    public partial class BackupDownloadRestriction : global::Pulumi.CustomResource
     {
         /// <summary>
         /// In: The specified ip can be downloaded; NotIn: The specified ip cannot be downloaded. The default is In.
@@ -135,7 +136,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         }
     }
 
-    public sealed class BackupDownloadRestrictionArgs : Pulumi.ResourceArgs
+    public sealed class BackupDownloadRestrictionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// In: The specified ip can be downloaded; NotIn: The specified ip cannot be downloaded. The default is In.
@@ -182,9 +183,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public BackupDownloadRestrictionArgs()
         {
         }
+        public static new BackupDownloadRestrictionArgs Empty => new BackupDownloadRestrictionArgs();
     }
 
-    public sealed class BackupDownloadRestrictionState : Pulumi.ResourceArgs
+    public sealed class BackupDownloadRestrictionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// In: The specified ip can be downloaded; NotIn: The specified ip cannot be downloaded. The default is In.
@@ -231,5 +233,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public BackupDownloadRestrictionState()
         {
         }
+        public static new BackupDownloadRestrictionState Empty => new BackupDownloadRestrictionState();
     }
 }

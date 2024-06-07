@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var modifyUserTypOperation = new Tencentcloud.Dlc.ModifyUserTypOperation("modifyUserTypOperation", new()
     ///     {
-    ///         var modifyUserTypOperation = new Tencentcloud.Dlc.ModifyUserTypOperation("modifyUserTypOperation", new Tencentcloud.Dlc.ModifyUserTypOperationArgs
-    ///         {
-    ///             UserId = "127382378",
-    ///             UserType = "ADMIN",
-    ///         });
-    ///     }
+    ///         UserId = "127382378",
+    ///         UserType = "ADMIN",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dlc modify_user_typ_operation can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dlc/modifyUserTypOperation:ModifyUserTypOperation modify_user_typ_operation modify_user_typ_operation_id
+    /// $ pulumi import tencentcloud:Dlc/modifyUserTypOperation:ModifyUserTypOperation modify_user_typ_operation modify_user_typ_operation_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/modifyUserTypOperation:ModifyUserTypOperation")]
-    public partial class ModifyUserTypOperation : Pulumi.CustomResource
+    public partial class ModifyUserTypOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// User id (uin), if left blank, it defaults to the caller's sub-uin.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class ModifyUserTypOperationArgs : Pulumi.ResourceArgs
+    public sealed class ModifyUserTypOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User id (uin), if left blank, it defaults to the caller's sub-uin.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public ModifyUserTypOperationArgs()
         {
         }
+        public static new ModifyUserTypOperationArgs Empty => new ModifyUserTypOperationArgs();
     }
 
-    public sealed class ModifyUserTypOperationState : Pulumi.ResourceArgs
+    public sealed class ModifyUserTypOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User id (uin), if left blank, it defaults to the caller's sub-uin.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public ModifyUserTypOperationState()
         {
         }
+        public static new ModifyUserTypOperationState Empty => new ModifyUserTypOperationState();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Kms.getKeys({
+ * const example = tencentcloud.Kms.getKeys({
  *     keyState: 0,
  *     keyUsage: "ALL",
  *     origin: "TENCENT_KMS",
  *     searchKeyAlias: "tf_example",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getKeys(args?: GetKeysArgs, opts?: pulumi.InvokeOptions): Promise<GetKeysResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Kms/getKeys:getKeys", {
         "keyState": args.keyState,
         "keyUsage": args.keyUsage,
@@ -109,9 +109,27 @@ export interface GetKeysResult {
     readonly searchKeyAlias?: string;
     readonly tags?: {[key: string]: any};
 }
-
+/**
+ * Use this data source to query detailed information of KMS key
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Kms.getKeys({
+ *     keyState: 0,
+ *     keyUsage: "ALL",
+ *     origin: "TENCENT_KMS",
+ *     searchKeyAlias: "tf_example",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getKeysOutput(args?: GetKeysOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetKeysResult> {
-    return pulumi.output(args).apply(a => getKeys(a, opts))
+    return pulumi.output(args).apply((a: any) => getKeys(a, opts))
 }
 
 /**

@@ -9,14 +9,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const restartInstance = new tencentcloud.Cynosdb.RestartInstance("restart_instance", {
- *     instanceId: "cynosdbmysql-ins-afqx1hy0",
- * });
+ * const restartInstance = new tencentcloud.cynosdb.RestartInstance("restartInstance", {instanceId: "cynosdbmysql-ins-afqx1hy0"});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RestartInstance extends pulumi.CustomResource {
     /**

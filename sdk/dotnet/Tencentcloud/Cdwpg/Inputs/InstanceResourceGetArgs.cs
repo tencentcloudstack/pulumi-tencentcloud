@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwpg.Inputs
 {
 
-    public sealed class InstanceResourceGetArgs : Pulumi.ResourceArgs
+    public sealed class InstanceResourceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// resource count.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwpg.Inputs
         public InstanceResourceGetArgs()
         {
         }
+        public static new InstanceResourceGetArgs Empty => new InstanceResourceGetArgs();
     }
 }

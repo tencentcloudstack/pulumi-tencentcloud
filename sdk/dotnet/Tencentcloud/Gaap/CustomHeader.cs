@@ -15,46 +15,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var customHeader = new Tencentcloud.Gaap.CustomHeader("customHeader", new()
     ///     {
-    ///         var customHeader = new Tencentcloud.Gaap.CustomHeader("customHeader", new Tencentcloud.Gaap.CustomHeaderArgs
+    ///         Headers = new[]
     ///         {
-    ///             Headers = 
+    ///             new Tencentcloud.Gaap.Inputs.CustomHeaderHeaderArgs
     ///             {
-    ///                 new Tencentcloud.Gaap.Inputs.CustomHeaderHeaderArgs
-    ///                 {
-    ///                     HeaderName = "HeaderName1",
-    ///                     HeaderValue = "HeaderValue1",
-    ///                 },
-    ///                 new Tencentcloud.Gaap.Inputs.CustomHeaderHeaderArgs
-    ///                 {
-    ///                     HeaderName = "HeaderName2",
-    ///                     HeaderValue = "HeaderValue2",
-    ///                 },
+    ///                 HeaderName = "HeaderName1",
+    ///                 HeaderValue = "HeaderValue1",
     ///             },
-    ///             RuleId = "rule-xxxxxx",
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Gaap.Inputs.CustomHeaderHeaderArgs
+    ///             {
+    ///                 HeaderName = "HeaderName2",
+    ///                 HeaderValue = "HeaderValue2",
+    ///             },
+    ///         },
+    ///         RuleId = "rule-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// gaap custom_header can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Gaap/customHeader:CustomHeader custom_header ruleId
+    /// $ pulumi import tencentcloud:Gaap/customHeader:CustomHeader custom_header ruleId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/customHeader:CustomHeader")]
-    public partial class CustomHeader : Pulumi.CustomResource
+    public partial class CustomHeader : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Headers.
@@ -113,7 +114,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         }
     }
 
-    public sealed class CustomHeaderArgs : Pulumi.ResourceArgs
+    public sealed class CustomHeaderArgs : global::Pulumi.ResourceArgs
     {
         [Input("headers")]
         private InputList<Inputs.CustomHeaderHeaderArgs>? _headers;
@@ -136,9 +137,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public CustomHeaderArgs()
         {
         }
+        public static new CustomHeaderArgs Empty => new CustomHeaderArgs();
     }
 
-    public sealed class CustomHeaderState : Pulumi.ResourceArgs
+    public sealed class CustomHeaderState : global::Pulumi.ResourceArgs
     {
         [Input("headers")]
         private InputList<Inputs.CustomHeaderHeaderGetArgs>? _headers;
@@ -161,5 +163,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public CustomHeaderState()
         {
         }
+        public static new CustomHeaderState Empty => new CustomHeaderState();
     }
 }

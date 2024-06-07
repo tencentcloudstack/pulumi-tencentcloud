@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var flushBinlog = new Tencentcloud.Mariadb.FlushBinlog("flushBinlog", new()
     ///     {
-    ///         var flushBinlog = new Tencentcloud.Mariadb.FlushBinlog("flushBinlog", new Tencentcloud.Mariadb.FlushBinlogArgs
-    ///         {
-    ///             InstanceId = "tdsql-9vqvls95",
-    ///         });
-    ///     }
+    ///         InstanceId = "tdsql-9vqvls95",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/flushBinlog:FlushBinlog")]
-    public partial class FlushBinlog : Pulumi.CustomResource
+    public partial class FlushBinlog : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class FlushBinlogArgs : Pulumi.ResourceArgs
+    public sealed class FlushBinlogArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public FlushBinlogArgs()
         {
         }
+        public static new FlushBinlogArgs Empty => new FlushBinlogArgs();
     }
 
-    public sealed class FlushBinlogState : Pulumi.ResourceArgs
+    public sealed class FlushBinlogState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public FlushBinlogState()
         {
         }
+        public static new FlushBinlogState Empty => new FlushBinlogState();
     }
 }

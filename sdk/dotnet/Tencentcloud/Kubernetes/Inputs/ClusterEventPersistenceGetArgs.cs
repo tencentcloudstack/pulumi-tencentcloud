@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class ClusterEventPersistenceGetArgs : Pulumi.ResourceArgs
+    public sealed class ClusterEventPersistenceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// when you want to close the cluster event persistence or delete the cluster, you can use this parameter to determine whether the event persistence log set and topic created by default will be deleted.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public ClusterEventPersistenceGetArgs()
         {
         }
+        public static new ClusterEventPersistenceGetArgs Empty => new ClusterEventPersistenceGetArgs();
     }
 }

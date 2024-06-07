@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var bucketVersion = new Tencentcloud.Cos.BucketVersion("bucketVersion", new()
     ///     {
-    ///         var bucketVersion = new Tencentcloud.Cos.BucketVersion("bucketVersion", new Tencentcloud.Cos.BucketVersionArgs
-    ///         {
-    ///             Bucket = "mycos-1258798060",
-    ///             Status = "Enabled",
-    ///         });
-    ///     }
+    ///         Bucket = "mycos-1258798060",
+    ///         Status = "Enabled",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cos bucket_version can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cos/bucketVersion:BucketVersion bucket_version bucket_id
+    /// $ pulumi import tencentcloud:Cos/bucketVersion:BucketVersion bucket_version bucket_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cos/bucketVersion:BucketVersion")]
-    public partial class BucketVersion : Pulumi.CustomResource
+    public partial class BucketVersion : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         }
     }
 
-    public sealed class BucketVersionArgs : Pulumi.ResourceArgs
+    public sealed class BucketVersionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public BucketVersionArgs()
         {
         }
+        public static new BucketVersionArgs Empty => new BucketVersionArgs();
     }
 
-    public sealed class BucketVersionState : Pulumi.ResourceArgs
+    public sealed class BucketVersionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public BucketVersionState()
         {
         }
+        public static new BucketVersionState Empty => new BucketVersionState();
     }
 }

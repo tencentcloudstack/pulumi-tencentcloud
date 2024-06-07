@@ -5,41 +5,108 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./addonAttachment";
-export * from "./authAttachment";
-export * from "./backupStorageLocation";
-export * from "./cluster";
-export * from "./clusterAttachment";
-export * from "./clusterEndpoint";
-export * from "./encryptionProtection";
-export * from "./getAvailableClusterVersions";
-export * from "./getCharts";
-export * from "./getClusterAuthenticationOptions";
-export * from "./getClusterCommonNames";
-export * from "./getClusterInstances";
-export * from "./getClusterLevels";
-export * from "./getClusterNodePools";
-export * from "./getClusters";
-export * from "./nodePool";
-export * from "./scaleWorker";
-export * from "./serverlessNodePool";
+export { AddonArgs, AddonState } from "./addon";
+export type Addon = import("./addon").Addon;
+export const Addon: typeof import("./addon").Addon = null as any;
+utilities.lazyLoad(exports, ["Addon"], () => require("./addon"));
 
-// Import resources to register:
-import { AddonAttachment } from "./addonAttachment";
-import { AuthAttachment } from "./authAttachment";
-import { BackupStorageLocation } from "./backupStorageLocation";
-import { Cluster } from "./cluster";
-import { ClusterAttachment } from "./clusterAttachment";
-import { ClusterEndpoint } from "./clusterEndpoint";
-import { EncryptionProtection } from "./encryptionProtection";
-import { NodePool } from "./nodePool";
-import { ScaleWorker } from "./scaleWorker";
-import { ServerlessNodePool } from "./serverlessNodePool";
+export { AddonAttachmentArgs, AddonAttachmentState } from "./addonAttachment";
+export type AddonAttachment = import("./addonAttachment").AddonAttachment;
+export const AddonAttachment: typeof import("./addonAttachment").AddonAttachment = null as any;
+utilities.lazyLoad(exports, ["AddonAttachment"], () => require("./addonAttachment"));
+
+export { AuthAttachmentArgs, AuthAttachmentState } from "./authAttachment";
+export type AuthAttachment = import("./authAttachment").AuthAttachment;
+export const AuthAttachment: typeof import("./authAttachment").AuthAttachment = null as any;
+utilities.lazyLoad(exports, ["AuthAttachment"], () => require("./authAttachment"));
+
+export { BackupStorageLocationArgs, BackupStorageLocationState } from "./backupStorageLocation";
+export type BackupStorageLocation = import("./backupStorageLocation").BackupStorageLocation;
+export const BackupStorageLocation: typeof import("./backupStorageLocation").BackupStorageLocation = null as any;
+utilities.lazyLoad(exports, ["BackupStorageLocation"], () => require("./backupStorageLocation"));
+
+export { ClusterArgs, ClusterState } from "./cluster";
+export type Cluster = import("./cluster").Cluster;
+export const Cluster: typeof import("./cluster").Cluster = null as any;
+utilities.lazyLoad(exports, ["Cluster"], () => require("./cluster"));
+
+export { ClusterAttachmentArgs, ClusterAttachmentState } from "./clusterAttachment";
+export type ClusterAttachment = import("./clusterAttachment").ClusterAttachment;
+export const ClusterAttachment: typeof import("./clusterAttachment").ClusterAttachment = null as any;
+utilities.lazyLoad(exports, ["ClusterAttachment"], () => require("./clusterAttachment"));
+
+export { ClusterEndpointArgs, ClusterEndpointState } from "./clusterEndpoint";
+export type ClusterEndpoint = import("./clusterEndpoint").ClusterEndpoint;
+export const ClusterEndpoint: typeof import("./clusterEndpoint").ClusterEndpoint = null as any;
+utilities.lazyLoad(exports, ["ClusterEndpoint"], () => require("./clusterEndpoint"));
+
+export { EncryptionProtectionArgs, EncryptionProtectionState } from "./encryptionProtection";
+export type EncryptionProtection = import("./encryptionProtection").EncryptionProtection;
+export const EncryptionProtection: typeof import("./encryptionProtection").EncryptionProtection = null as any;
+utilities.lazyLoad(exports, ["EncryptionProtection"], () => require("./encryptionProtection"));
+
+export { GetAvailableClusterVersionsArgs, GetAvailableClusterVersionsResult, GetAvailableClusterVersionsOutputArgs } from "./getAvailableClusterVersions";
+export const getAvailableClusterVersions: typeof import("./getAvailableClusterVersions").getAvailableClusterVersions = null as any;
+export const getAvailableClusterVersionsOutput: typeof import("./getAvailableClusterVersions").getAvailableClusterVersionsOutput = null as any;
+utilities.lazyLoad(exports, ["getAvailableClusterVersions","getAvailableClusterVersionsOutput"], () => require("./getAvailableClusterVersions"));
+
+export { GetChartsArgs, GetChartsResult, GetChartsOutputArgs } from "./getCharts";
+export const getCharts: typeof import("./getCharts").getCharts = null as any;
+export const getChartsOutput: typeof import("./getCharts").getChartsOutput = null as any;
+utilities.lazyLoad(exports, ["getCharts","getChartsOutput"], () => require("./getCharts"));
+
+export { GetClusterAuthenticationOptionsArgs, GetClusterAuthenticationOptionsResult, GetClusterAuthenticationOptionsOutputArgs } from "./getClusterAuthenticationOptions";
+export const getClusterAuthenticationOptions: typeof import("./getClusterAuthenticationOptions").getClusterAuthenticationOptions = null as any;
+export const getClusterAuthenticationOptionsOutput: typeof import("./getClusterAuthenticationOptions").getClusterAuthenticationOptionsOutput = null as any;
+utilities.lazyLoad(exports, ["getClusterAuthenticationOptions","getClusterAuthenticationOptionsOutput"], () => require("./getClusterAuthenticationOptions"));
+
+export { GetClusterCommonNamesArgs, GetClusterCommonNamesResult, GetClusterCommonNamesOutputArgs } from "./getClusterCommonNames";
+export const getClusterCommonNames: typeof import("./getClusterCommonNames").getClusterCommonNames = null as any;
+export const getClusterCommonNamesOutput: typeof import("./getClusterCommonNames").getClusterCommonNamesOutput = null as any;
+utilities.lazyLoad(exports, ["getClusterCommonNames","getClusterCommonNamesOutput"], () => require("./getClusterCommonNames"));
+
+export { GetClusterInstancesArgs, GetClusterInstancesResult, GetClusterInstancesOutputArgs } from "./getClusterInstances";
+export const getClusterInstances: typeof import("./getClusterInstances").getClusterInstances = null as any;
+export const getClusterInstancesOutput: typeof import("./getClusterInstances").getClusterInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getClusterInstances","getClusterInstancesOutput"], () => require("./getClusterInstances"));
+
+export { GetClusterLevelsArgs, GetClusterLevelsResult, GetClusterLevelsOutputArgs } from "./getClusterLevels";
+export const getClusterLevels: typeof import("./getClusterLevels").getClusterLevels = null as any;
+export const getClusterLevelsOutput: typeof import("./getClusterLevels").getClusterLevelsOutput = null as any;
+utilities.lazyLoad(exports, ["getClusterLevels","getClusterLevelsOutput"], () => require("./getClusterLevels"));
+
+export { GetClusterNodePoolsArgs, GetClusterNodePoolsResult, GetClusterNodePoolsOutputArgs } from "./getClusterNodePools";
+export const getClusterNodePools: typeof import("./getClusterNodePools").getClusterNodePools = null as any;
+export const getClusterNodePoolsOutput: typeof import("./getClusterNodePools").getClusterNodePoolsOutput = null as any;
+utilities.lazyLoad(exports, ["getClusterNodePools","getClusterNodePoolsOutput"], () => require("./getClusterNodePools"));
+
+export { GetClustersArgs, GetClustersResult, GetClustersOutputArgs } from "./getClusters";
+export const getClusters: typeof import("./getClusters").getClusters = null as any;
+export const getClustersOutput: typeof import("./getClusters").getClustersOutput = null as any;
+utilities.lazyLoad(exports, ["getClusters","getClustersOutput"], () => require("./getClusters"));
+
+export { NodePoolArgs, NodePoolState } from "./nodePool";
+export type NodePool = import("./nodePool").NodePool;
+export const NodePool: typeof import("./nodePool").NodePool = null as any;
+utilities.lazyLoad(exports, ["NodePool"], () => require("./nodePool"));
+
+export { ScaleWorkerArgs, ScaleWorkerState } from "./scaleWorker";
+export type ScaleWorker = import("./scaleWorker").ScaleWorker;
+export const ScaleWorker: typeof import("./scaleWorker").ScaleWorker = null as any;
+utilities.lazyLoad(exports, ["ScaleWorker"], () => require("./scaleWorker"));
+
+export { ServerlessNodePoolArgs, ServerlessNodePoolState } from "./serverlessNodePool";
+export type ServerlessNodePool = import("./serverlessNodePool").ServerlessNodePool;
+export const ServerlessNodePool: typeof import("./serverlessNodePool").ServerlessNodePool = null as any;
+utilities.lazyLoad(exports, ["ServerlessNodePool"], () => require("./serverlessNodePool"));
+
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Kubernetes/addon:Addon":
+                return new Addon(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/addonAttachment:AddonAttachment":
                 return new AddonAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/authAttachment:AuthAttachment":
@@ -65,6 +132,7 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/addon", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/addonAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/authAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/backupStorageLocation", _module)

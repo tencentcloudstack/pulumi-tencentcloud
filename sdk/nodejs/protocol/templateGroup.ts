@@ -9,24 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Protocol.TemplateGroup("foo", {
- *     templateIds: [
- *         "ipl-axaf24151",
- *         "ipl-axaf24152",
- *     ],
- * });
+ * const foo = new tencentcloud.protocol.TemplateGroup("foo", {templateIds: [
+ *     "ipl-axaf24151",
+ *     "ipl-axaf24152",
+ * ]});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Protocol template group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Protocol/templateGroup:TemplateGroup foo ppmg-0np3u974
+ * $ pulumi import tencentcloud:Protocol/templateGroup:TemplateGroup foo ppmg-0np3u974
  * ```
  */
 export class TemplateGroup extends pulumi.CustomResource {

@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type AclRuleRuleList struct {
 	// The default is *, which means that any host can be accessed. Currently, ckafka does not support host and ip network segment.
@@ -24,7 +27,7 @@ type AclRuleRuleList struct {
 // AclRuleRuleListInput is an input type that accepts AclRuleRuleListArgs and AclRuleRuleListOutput values.
 // You can construct a concrete instance of `AclRuleRuleListInput` via:
 //
-//          AclRuleRuleListArgs{...}
+//	AclRuleRuleListArgs{...}
 type AclRuleRuleListInput interface {
 	pulumi.Input
 
@@ -58,7 +61,7 @@ func (i AclRuleRuleListArgs) ToAclRuleRuleListOutputWithContext(ctx context.Cont
 // AclRuleRuleListArrayInput is an input type that accepts AclRuleRuleListArray and AclRuleRuleListArrayOutput values.
 // You can construct a concrete instance of `AclRuleRuleListArrayInput` via:
 //
-//          AclRuleRuleListArray{ AclRuleRuleListArgs{...} }
+//	AclRuleRuleListArray{ AclRuleRuleListArgs{...} }
 type AclRuleRuleListArrayInput interface {
 	pulumi.Input
 
@@ -156,7 +159,7 @@ type ConnectResourceClickhouseConnectParam struct {
 // ConnectResourceClickhouseConnectParamInput is an input type that accepts ConnectResourceClickhouseConnectParamArgs and ConnectResourceClickhouseConnectParamOutput values.
 // You can construct a concrete instance of `ConnectResourceClickhouseConnectParamInput` via:
 //
-//          ConnectResourceClickhouseConnectParamArgs{...}
+//	ConnectResourceClickhouseConnectParamArgs{...}
 type ConnectResourceClickhouseConnectParamInput interface {
 	pulumi.Input
 
@@ -206,11 +209,11 @@ func (i ConnectResourceClickhouseConnectParamArgs) ToConnectResourceClickhouseCo
 // ConnectResourceClickhouseConnectParamPtrInput is an input type that accepts ConnectResourceClickhouseConnectParamArgs, ConnectResourceClickhouseConnectParamPtr and ConnectResourceClickhouseConnectParamPtrOutput values.
 // You can construct a concrete instance of `ConnectResourceClickhouseConnectParamPtrInput` via:
 //
-//          ConnectResourceClickhouseConnectParamArgs{...}
+//	        ConnectResourceClickhouseConnectParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ConnectResourceClickhouseConnectParamPtrInput interface {
 	pulumi.Input
 
@@ -428,7 +431,7 @@ type ConnectResourceDorisConnectParam struct {
 // ConnectResourceDorisConnectParamInput is an input type that accepts ConnectResourceDorisConnectParamArgs and ConnectResourceDorisConnectParamOutput values.
 // You can construct a concrete instance of `ConnectResourceDorisConnectParamInput` via:
 //
-//          ConnectResourceDorisConnectParamArgs{...}
+//	ConnectResourceDorisConnectParamArgs{...}
 type ConnectResourceDorisConnectParamInput interface {
 	pulumi.Input
 
@@ -480,11 +483,11 @@ func (i ConnectResourceDorisConnectParamArgs) ToConnectResourceDorisConnectParam
 // ConnectResourceDorisConnectParamPtrInput is an input type that accepts ConnectResourceDorisConnectParamArgs, ConnectResourceDorisConnectParamPtr and ConnectResourceDorisConnectParamPtrOutput values.
 // You can construct a concrete instance of `ConnectResourceDorisConnectParamPtrInput` via:
 //
-//          ConnectResourceDorisConnectParamArgs{...}
+//	        ConnectResourceDorisConnectParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ConnectResourceDorisConnectParamPtrInput interface {
 	pulumi.Input
 
@@ -713,7 +716,7 @@ type ConnectResourceDtsConnectParam struct {
 // ConnectResourceDtsConnectParamInput is an input type that accepts ConnectResourceDtsConnectParamArgs and ConnectResourceDtsConnectParamOutput values.
 // You can construct a concrete instance of `ConnectResourceDtsConnectParamInput` via:
 //
-//          ConnectResourceDtsConnectParamArgs{...}
+//	ConnectResourceDtsConnectParamArgs{...}
 type ConnectResourceDtsConnectParamInput interface {
 	pulumi.Input
 
@@ -761,11 +764,11 @@ func (i ConnectResourceDtsConnectParamArgs) ToConnectResourceDtsConnectParamPtrO
 // ConnectResourceDtsConnectParamPtrInput is an input type that accepts ConnectResourceDtsConnectParamArgs, ConnectResourceDtsConnectParamPtr and ConnectResourceDtsConnectParamPtrOutput values.
 // You can construct a concrete instance of `ConnectResourceDtsConnectParamPtrInput` via:
 //
-//          ConnectResourceDtsConnectParamArgs{...}
+//	        ConnectResourceDtsConnectParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ConnectResourceDtsConnectParamPtrInput interface {
 	pulumi.Input
 
@@ -966,7 +969,7 @@ type ConnectResourceEsConnectParam struct {
 // ConnectResourceEsConnectParamInput is an input type that accepts ConnectResourceEsConnectParamArgs and ConnectResourceEsConnectParamOutput values.
 // You can construct a concrete instance of `ConnectResourceEsConnectParamInput` via:
 //
-//          ConnectResourceEsConnectParamArgs{...}
+//	ConnectResourceEsConnectParamArgs{...}
 type ConnectResourceEsConnectParamInput interface {
 	pulumi.Input
 
@@ -1016,11 +1019,11 @@ func (i ConnectResourceEsConnectParamArgs) ToConnectResourceEsConnectParamPtrOut
 // ConnectResourceEsConnectParamPtrInput is an input type that accepts ConnectResourceEsConnectParamArgs, ConnectResourceEsConnectParamPtr and ConnectResourceEsConnectParamPtrOutput values.
 // You can construct a concrete instance of `ConnectResourceEsConnectParamPtrInput` via:
 //
-//          ConnectResourceEsConnectParamArgs{...}
+//	        ConnectResourceEsConnectParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ConnectResourceEsConnectParamPtrInput interface {
 	pulumi.Input
 
@@ -1230,7 +1233,7 @@ type ConnectResourceKafkaConnectParam struct {
 // ConnectResourceKafkaConnectParamInput is an input type that accepts ConnectResourceKafkaConnectParamArgs and ConnectResourceKafkaConnectParamOutput values.
 // You can construct a concrete instance of `ConnectResourceKafkaConnectParamInput` via:
 //
-//          ConnectResourceKafkaConnectParamArgs{...}
+//	ConnectResourceKafkaConnectParamArgs{...}
 type ConnectResourceKafkaConnectParamInput interface {
 	pulumi.Input
 
@@ -1274,11 +1277,11 @@ func (i ConnectResourceKafkaConnectParamArgs) ToConnectResourceKafkaConnectParam
 // ConnectResourceKafkaConnectParamPtrInput is an input type that accepts ConnectResourceKafkaConnectParamArgs, ConnectResourceKafkaConnectParamPtr and ConnectResourceKafkaConnectParamPtrOutput values.
 // You can construct a concrete instance of `ConnectResourceKafkaConnectParamPtrInput` via:
 //
-//          ConnectResourceKafkaConnectParamArgs{...}
+//	        ConnectResourceKafkaConnectParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ConnectResourceKafkaConnectParamPtrInput interface {
 	pulumi.Input
 
@@ -1447,7 +1450,7 @@ type ConnectResourceMariadbConnectParam struct {
 // ConnectResourceMariadbConnectParamInput is an input type that accepts ConnectResourceMariadbConnectParamArgs and ConnectResourceMariadbConnectParamOutput values.
 // You can construct a concrete instance of `ConnectResourceMariadbConnectParamInput` via:
 //
-//          ConnectResourceMariadbConnectParamArgs{...}
+//	ConnectResourceMariadbConnectParamArgs{...}
 type ConnectResourceMariadbConnectParamInput interface {
 	pulumi.Input
 
@@ -1495,11 +1498,11 @@ func (i ConnectResourceMariadbConnectParamArgs) ToConnectResourceMariadbConnectP
 // ConnectResourceMariadbConnectParamPtrInput is an input type that accepts ConnectResourceMariadbConnectParamArgs, ConnectResourceMariadbConnectParamPtr and ConnectResourceMariadbConnectParamPtrOutput values.
 // You can construct a concrete instance of `ConnectResourceMariadbConnectParamPtrInput` via:
 //
-//          ConnectResourceMariadbConnectParamArgs{...}
+//	        ConnectResourceMariadbConnectParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ConnectResourceMariadbConnectParamPtrInput interface {
 	pulumi.Input
 
@@ -1700,7 +1703,7 @@ type ConnectResourceMongodbConnectParam struct {
 // ConnectResourceMongodbConnectParamInput is an input type that accepts ConnectResourceMongodbConnectParamArgs and ConnectResourceMongodbConnectParamOutput values.
 // You can construct a concrete instance of `ConnectResourceMongodbConnectParamInput` via:
 //
-//          ConnectResourceMongodbConnectParamArgs{...}
+//	ConnectResourceMongodbConnectParamArgs{...}
 type ConnectResourceMongodbConnectParamInput interface {
 	pulumi.Input
 
@@ -1750,11 +1753,11 @@ func (i ConnectResourceMongodbConnectParamArgs) ToConnectResourceMongodbConnectP
 // ConnectResourceMongodbConnectParamPtrInput is an input type that accepts ConnectResourceMongodbConnectParamArgs, ConnectResourceMongodbConnectParamPtr and ConnectResourceMongodbConnectParamPtrOutput values.
 // You can construct a concrete instance of `ConnectResourceMongodbConnectParamPtrInput` via:
 //
-//          ConnectResourceMongodbConnectParamArgs{...}
+//	        ConnectResourceMongodbConnectParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ConnectResourceMongodbConnectParamPtrInput interface {
 	pulumi.Input
 
@@ -1972,7 +1975,7 @@ type ConnectResourceMysqlConnectParam struct {
 // ConnectResourceMysqlConnectParamInput is an input type that accepts ConnectResourceMysqlConnectParamArgs and ConnectResourceMysqlConnectParamOutput values.
 // You can construct a concrete instance of `ConnectResourceMysqlConnectParamInput` via:
 //
-//          ConnectResourceMysqlConnectParamArgs{...}
+//	ConnectResourceMysqlConnectParamArgs{...}
 type ConnectResourceMysqlConnectParamInput interface {
 	pulumi.Input
 
@@ -2024,11 +2027,11 @@ func (i ConnectResourceMysqlConnectParamArgs) ToConnectResourceMysqlConnectParam
 // ConnectResourceMysqlConnectParamPtrInput is an input type that accepts ConnectResourceMysqlConnectParamArgs, ConnectResourceMysqlConnectParamPtr and ConnectResourceMysqlConnectParamPtrOutput values.
 // You can construct a concrete instance of `ConnectResourceMysqlConnectParamPtrInput` via:
 //
-//          ConnectResourceMysqlConnectParamArgs{...}
+//	        ConnectResourceMysqlConnectParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ConnectResourceMysqlConnectParamPtrInput interface {
 	pulumi.Input
 
@@ -2261,7 +2264,7 @@ type ConnectResourcePostgresqlConnectParam struct {
 // ConnectResourcePostgresqlConnectParamInput is an input type that accepts ConnectResourcePostgresqlConnectParamArgs and ConnectResourcePostgresqlConnectParamOutput values.
 // You can construct a concrete instance of `ConnectResourcePostgresqlConnectParamInput` via:
 //
-//          ConnectResourcePostgresqlConnectParamArgs{...}
+//	ConnectResourcePostgresqlConnectParamArgs{...}
 type ConnectResourcePostgresqlConnectParamInput interface {
 	pulumi.Input
 
@@ -2313,11 +2316,11 @@ func (i ConnectResourcePostgresqlConnectParamArgs) ToConnectResourcePostgresqlCo
 // ConnectResourcePostgresqlConnectParamPtrInput is an input type that accepts ConnectResourcePostgresqlConnectParamArgs, ConnectResourcePostgresqlConnectParamPtr and ConnectResourcePostgresqlConnectParamPtrOutput values.
 // You can construct a concrete instance of `ConnectResourcePostgresqlConnectParamPtrInput` via:
 //
-//          ConnectResourcePostgresqlConnectParamArgs{...}
+//	        ConnectResourcePostgresqlConnectParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ConnectResourcePostgresqlConnectParamPtrInput interface {
 	pulumi.Input
 
@@ -2546,7 +2549,7 @@ type ConnectResourceSqlserverConnectParam struct {
 // ConnectResourceSqlserverConnectParamInput is an input type that accepts ConnectResourceSqlserverConnectParamArgs and ConnectResourceSqlserverConnectParamOutput values.
 // You can construct a concrete instance of `ConnectResourceSqlserverConnectParamInput` via:
 //
-//          ConnectResourceSqlserverConnectParamArgs{...}
+//	ConnectResourceSqlserverConnectParamArgs{...}
 type ConnectResourceSqlserverConnectParamInput interface {
 	pulumi.Input
 
@@ -2594,11 +2597,11 @@ func (i ConnectResourceSqlserverConnectParamArgs) ToConnectResourceSqlserverConn
 // ConnectResourceSqlserverConnectParamPtrInput is an input type that accepts ConnectResourceSqlserverConnectParamArgs, ConnectResourceSqlserverConnectParamPtr and ConnectResourceSqlserverConnectParamPtrOutput values.
 // You can construct a concrete instance of `ConnectResourceSqlserverConnectParamPtrInput` via:
 //
-//          ConnectResourceSqlserverConnectParamArgs{...}
+//	        ConnectResourceSqlserverConnectParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ConnectResourceSqlserverConnectParamPtrInput interface {
 	pulumi.Input
 
@@ -2817,7 +2820,7 @@ type DatahubTaskSourceResource struct {
 // DatahubTaskSourceResourceInput is an input type that accepts DatahubTaskSourceResourceArgs and DatahubTaskSourceResourceOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceInput` via:
 //
-//          DatahubTaskSourceResourceArgs{...}
+//	DatahubTaskSourceResourceArgs{...}
 type DatahubTaskSourceResourceInput interface {
 	pulumi.Input
 
@@ -2885,11 +2888,11 @@ func (i DatahubTaskSourceResourceArgs) ToDatahubTaskSourceResourcePtrOutputWithC
 // DatahubTaskSourceResourcePtrInput is an input type that accepts DatahubTaskSourceResourceArgs, DatahubTaskSourceResourcePtr and DatahubTaskSourceResourcePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourcePtrInput` via:
 //
-//          DatahubTaskSourceResourceArgs{...}
+//	        DatahubTaskSourceResourceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourcePtrInput interface {
 	pulumi.Input
 
@@ -3254,7 +3257,7 @@ type DatahubTaskSourceResourceClickHouseParam struct {
 // DatahubTaskSourceResourceClickHouseParamInput is an input type that accepts DatahubTaskSourceResourceClickHouseParamArgs and DatahubTaskSourceResourceClickHouseParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceClickHouseParamInput` via:
 //
-//          DatahubTaskSourceResourceClickHouseParamArgs{...}
+//	DatahubTaskSourceResourceClickHouseParamArgs{...}
 type DatahubTaskSourceResourceClickHouseParamInput interface {
 	pulumi.Input
 
@@ -3318,11 +3321,11 @@ func (i DatahubTaskSourceResourceClickHouseParamArgs) ToDatahubTaskSourceResourc
 // DatahubTaskSourceResourceClickHouseParamPtrInput is an input type that accepts DatahubTaskSourceResourceClickHouseParamArgs, DatahubTaskSourceResourceClickHouseParamPtr and DatahubTaskSourceResourceClickHouseParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceClickHouseParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceClickHouseParamArgs{...}
+//	        DatahubTaskSourceResourceClickHouseParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceClickHouseParamPtrInput interface {
 	pulumi.Input
 
@@ -3436,7 +3439,7 @@ func (o DatahubTaskSourceResourceClickHouseParamOutput) Table() pulumi.StringOut
 	return o.ApplyT(func(v DatahubTaskSourceResourceClickHouseParam) string { return v.Table }).(pulumi.StringOutput)
 }
 
-// ClickHouse type, emr-clickhouse: emr;cdw-clickhouse: cdwch;selfBuilt: ``.
+// ClickHouse type, emr-clickhouse: emr;cdw-clickhouse: cdwch;selfBuilt: “.
 func (o DatahubTaskSourceResourceClickHouseParamOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskSourceResourceClickHouseParam) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
@@ -3595,7 +3598,7 @@ func (o DatahubTaskSourceResourceClickHouseParamPtrOutput) Table() pulumi.String
 	}).(pulumi.StringPtrOutput)
 }
 
-// ClickHouse type, emr-clickhouse: emr;cdw-clickhouse: cdwch;selfBuilt: ``.
+// ClickHouse type, emr-clickhouse: emr;cdw-clickhouse: cdwch;selfBuilt: “.
 func (o DatahubTaskSourceResourceClickHouseParamPtrOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskSourceResourceClickHouseParam) *string {
 		if v == nil {
@@ -3641,7 +3644,7 @@ type DatahubTaskSourceResourceClickHouseParamDropCls struct {
 // DatahubTaskSourceResourceClickHouseParamDropClsInput is an input type that accepts DatahubTaskSourceResourceClickHouseParamDropClsArgs and DatahubTaskSourceResourceClickHouseParamDropClsOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceClickHouseParamDropClsInput` via:
 //
-//          DatahubTaskSourceResourceClickHouseParamDropClsArgs{...}
+//	DatahubTaskSourceResourceClickHouseParamDropClsArgs{...}
 type DatahubTaskSourceResourceClickHouseParamDropClsInput interface {
 	pulumi.Input
 
@@ -3685,11 +3688,11 @@ func (i DatahubTaskSourceResourceClickHouseParamDropClsArgs) ToDatahubTaskSource
 // DatahubTaskSourceResourceClickHouseParamDropClsPtrInput is an input type that accepts DatahubTaskSourceResourceClickHouseParamDropClsArgs, DatahubTaskSourceResourceClickHouseParamDropClsPtr and DatahubTaskSourceResourceClickHouseParamDropClsPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceClickHouseParamDropClsPtrInput` via:
 //
-//          DatahubTaskSourceResourceClickHouseParamDropClsArgs{...}
+//	        DatahubTaskSourceResourceClickHouseParamDropClsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceClickHouseParamDropClsPtrInput interface {
 	pulumi.Input
 
@@ -3852,7 +3855,7 @@ type DatahubTaskSourceResourceClickHouseParamSchema struct {
 // DatahubTaskSourceResourceClickHouseParamSchemaInput is an input type that accepts DatahubTaskSourceResourceClickHouseParamSchemaArgs and DatahubTaskSourceResourceClickHouseParamSchemaOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceClickHouseParamSchemaInput` via:
 //
-//          DatahubTaskSourceResourceClickHouseParamSchemaArgs{...}
+//	DatahubTaskSourceResourceClickHouseParamSchemaArgs{...}
 type DatahubTaskSourceResourceClickHouseParamSchemaInput interface {
 	pulumi.Input
 
@@ -3886,7 +3889,7 @@ func (i DatahubTaskSourceResourceClickHouseParamSchemaArgs) ToDatahubTaskSourceR
 // DatahubTaskSourceResourceClickHouseParamSchemaArrayInput is an input type that accepts DatahubTaskSourceResourceClickHouseParamSchemaArray and DatahubTaskSourceResourceClickHouseParamSchemaArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceClickHouseParamSchemaArrayInput` via:
 //
-//          DatahubTaskSourceResourceClickHouseParamSchemaArray{ DatahubTaskSourceResourceClickHouseParamSchemaArgs{...} }
+//	DatahubTaskSourceResourceClickHouseParamSchemaArray{ DatahubTaskSourceResourceClickHouseParamSchemaArgs{...} }
 type DatahubTaskSourceResourceClickHouseParamSchemaArrayInput interface {
 	pulumi.Input
 
@@ -3978,7 +3981,7 @@ type DatahubTaskSourceResourceClsParam struct {
 // DatahubTaskSourceResourceClsParamInput is an input type that accepts DatahubTaskSourceResourceClsParamArgs and DatahubTaskSourceResourceClsParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceClsParamInput` via:
 //
-//          DatahubTaskSourceResourceClsParamArgs{...}
+//	DatahubTaskSourceResourceClsParamArgs{...}
 type DatahubTaskSourceResourceClsParamInput interface {
 	pulumi.Input
 
@@ -4022,11 +4025,11 @@ func (i DatahubTaskSourceResourceClsParamArgs) ToDatahubTaskSourceResourceClsPar
 // DatahubTaskSourceResourceClsParamPtrInput is an input type that accepts DatahubTaskSourceResourceClsParamArgs, DatahubTaskSourceResourceClsParamPtr and DatahubTaskSourceResourceClsParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceClsParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceClsParamArgs{...}
+//	        DatahubTaskSourceResourceClsParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceClsParamPtrInput interface {
 	pulumi.Input
 
@@ -4197,7 +4200,7 @@ type DatahubTaskSourceResourceCosParam struct {
 // DatahubTaskSourceResourceCosParamInput is an input type that accepts DatahubTaskSourceResourceCosParamArgs and DatahubTaskSourceResourceCosParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceCosParamInput` via:
 //
-//          DatahubTaskSourceResourceCosParamArgs{...}
+//	DatahubTaskSourceResourceCosParamArgs{...}
 type DatahubTaskSourceResourceCosParamInput interface {
 	pulumi.Input
 
@@ -4247,11 +4250,11 @@ func (i DatahubTaskSourceResourceCosParamArgs) ToDatahubTaskSourceResourceCosPar
 // DatahubTaskSourceResourceCosParamPtrInput is an input type that accepts DatahubTaskSourceResourceCosParamArgs, DatahubTaskSourceResourceCosParamPtr and DatahubTaskSourceResourceCosParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceCosParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceCosParamArgs{...}
+//	        DatahubTaskSourceResourceCosParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceCosParamPtrInput interface {
 	pulumi.Input
 
@@ -4455,7 +4458,7 @@ type DatahubTaskSourceResourceCtsdbParam struct {
 // DatahubTaskSourceResourceCtsdbParamInput is an input type that accepts DatahubTaskSourceResourceCtsdbParamArgs and DatahubTaskSourceResourceCtsdbParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceCtsdbParamInput` via:
 //
-//          DatahubTaskSourceResourceCtsdbParamArgs{...}
+//	DatahubTaskSourceResourceCtsdbParamArgs{...}
 type DatahubTaskSourceResourceCtsdbParamInput interface {
 	pulumi.Input
 
@@ -4493,11 +4496,11 @@ func (i DatahubTaskSourceResourceCtsdbParamArgs) ToDatahubTaskSourceResourceCtsd
 // DatahubTaskSourceResourceCtsdbParamPtrInput is an input type that accepts DatahubTaskSourceResourceCtsdbParamArgs, DatahubTaskSourceResourceCtsdbParamPtr and DatahubTaskSourceResourceCtsdbParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceCtsdbParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceCtsdbParamArgs{...}
+//	        DatahubTaskSourceResourceCtsdbParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceCtsdbParamPtrInput interface {
 	pulumi.Input
 
@@ -4623,7 +4626,7 @@ type DatahubTaskSourceResourceDtsParam struct {
 // DatahubTaskSourceResourceDtsParamInput is an input type that accepts DatahubTaskSourceResourceDtsParamArgs and DatahubTaskSourceResourceDtsParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceDtsParamInput` via:
 //
-//          DatahubTaskSourceResourceDtsParamArgs{...}
+//	DatahubTaskSourceResourceDtsParamArgs{...}
 type DatahubTaskSourceResourceDtsParamInput interface {
 	pulumi.Input
 
@@ -4673,11 +4676,11 @@ func (i DatahubTaskSourceResourceDtsParamArgs) ToDatahubTaskSourceResourceDtsPar
 // DatahubTaskSourceResourceDtsParamPtrInput is an input type that accepts DatahubTaskSourceResourceDtsParamArgs, DatahubTaskSourceResourceDtsParamPtr and DatahubTaskSourceResourceDtsParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceDtsParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceDtsParamArgs{...}
+//	        DatahubTaskSourceResourceDtsParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceDtsParamPtrInput interface {
 	pulumi.Input
 
@@ -4911,7 +4914,7 @@ type DatahubTaskSourceResourceEsParam struct {
 // DatahubTaskSourceResourceEsParamInput is an input type that accepts DatahubTaskSourceResourceEsParamArgs and DatahubTaskSourceResourceEsParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceEsParamInput` via:
 //
-//          DatahubTaskSourceResourceEsParamArgs{...}
+//	DatahubTaskSourceResourceEsParamArgs{...}
 type DatahubTaskSourceResourceEsParamInput interface {
 	pulumi.Input
 
@@ -4979,11 +4982,11 @@ func (i DatahubTaskSourceResourceEsParamArgs) ToDatahubTaskSourceResourceEsParam
 // DatahubTaskSourceResourceEsParamPtrInput is an input type that accepts DatahubTaskSourceResourceEsParamArgs, DatahubTaskSourceResourceEsParamPtr and DatahubTaskSourceResourceEsParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceEsParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceEsParamArgs{...}
+//	        DatahubTaskSourceResourceEsParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceEsParamPtrInput interface {
 	pulumi.Input
 
@@ -5328,7 +5331,7 @@ type DatahubTaskSourceResourceEsParamDropCls struct {
 // DatahubTaskSourceResourceEsParamDropClsInput is an input type that accepts DatahubTaskSourceResourceEsParamDropClsArgs and DatahubTaskSourceResourceEsParamDropClsOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceEsParamDropClsInput` via:
 //
-//          DatahubTaskSourceResourceEsParamDropClsArgs{...}
+//	DatahubTaskSourceResourceEsParamDropClsArgs{...}
 type DatahubTaskSourceResourceEsParamDropClsInput interface {
 	pulumi.Input
 
@@ -5372,11 +5375,11 @@ func (i DatahubTaskSourceResourceEsParamDropClsArgs) ToDatahubTaskSourceResource
 // DatahubTaskSourceResourceEsParamDropClsPtrInput is an input type that accepts DatahubTaskSourceResourceEsParamDropClsArgs, DatahubTaskSourceResourceEsParamDropClsPtr and DatahubTaskSourceResourceEsParamDropClsPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceEsParamDropClsPtrInput` via:
 //
-//          DatahubTaskSourceResourceEsParamDropClsArgs{...}
+//	        DatahubTaskSourceResourceEsParamDropClsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceEsParamDropClsPtrInput interface {
 	pulumi.Input
 
@@ -5543,7 +5546,7 @@ type DatahubTaskSourceResourceEsParamDropDlq struct {
 // DatahubTaskSourceResourceEsParamDropDlqInput is an input type that accepts DatahubTaskSourceResourceEsParamDropDlqArgs and DatahubTaskSourceResourceEsParamDropDlqOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceEsParamDropDlqInput` via:
 //
-//          DatahubTaskSourceResourceEsParamDropDlqArgs{...}
+//	DatahubTaskSourceResourceEsParamDropDlqArgs{...}
 type DatahubTaskSourceResourceEsParamDropDlqInput interface {
 	pulumi.Input
 
@@ -5589,11 +5592,11 @@ func (i DatahubTaskSourceResourceEsParamDropDlqArgs) ToDatahubTaskSourceResource
 // DatahubTaskSourceResourceEsParamDropDlqPtrInput is an input type that accepts DatahubTaskSourceResourceEsParamDropDlqArgs, DatahubTaskSourceResourceEsParamDropDlqPtr and DatahubTaskSourceResourceEsParamDropDlqPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceEsParamDropDlqPtrInput` via:
 //
-//          DatahubTaskSourceResourceEsParamDropDlqArgs{...}
+//	        DatahubTaskSourceResourceEsParamDropDlqArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceEsParamDropDlqPtrInput interface {
 	pulumi.Input
 
@@ -5799,7 +5802,7 @@ type DatahubTaskSourceResourceEsParamDropDlqKafkaParam struct {
 // DatahubTaskSourceResourceEsParamDropDlqKafkaParamInput is an input type that accepts DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs and DatahubTaskSourceResourceEsParamDropDlqKafkaParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceEsParamDropDlqKafkaParamInput` via:
 //
-//          DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs{...}
+//	DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs{...}
 type DatahubTaskSourceResourceEsParamDropDlqKafkaParamInput interface {
 	pulumi.Input
 
@@ -5865,11 +5868,11 @@ func (i DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs) ToDatahubTaskSour
 // DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrInput is an input type that accepts DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs, DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtr and DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs{...}
+//	        DatahubTaskSourceResourceEsParamDropDlqKafkaParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceEsParamDropDlqKafkaParamPtrInput interface {
 	pulumi.Input
 
@@ -6199,7 +6202,7 @@ type DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMapping struct {
 // DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingInput is an input type that accepts DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs and DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingInput` via:
 //
-//          DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs{...}
+//	DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs{...}
 type DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingInput interface {
 	pulumi.Input
 
@@ -6233,7 +6236,7 @@ func (i DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs) ToDat
 // DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArrayInput is an input type that accepts DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArray and DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArrayInput` via:
 //
-//          DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArray{ DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs{...} }
+//	DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArray{ DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArgs{...} }
 type DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingArrayInput interface {
 	pulumi.Input
 
@@ -6329,7 +6332,7 @@ type DatahubTaskSourceResourceEsParamDropDlqTopicParam struct {
 // DatahubTaskSourceResourceEsParamDropDlqTopicParamInput is an input type that accepts DatahubTaskSourceResourceEsParamDropDlqTopicParamArgs and DatahubTaskSourceResourceEsParamDropDlqTopicParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceEsParamDropDlqTopicParamInput` via:
 //
-//          DatahubTaskSourceResourceEsParamDropDlqTopicParamArgs{...}
+//	DatahubTaskSourceResourceEsParamDropDlqTopicParamArgs{...}
 type DatahubTaskSourceResourceEsParamDropDlqTopicParamInput interface {
 	pulumi.Input
 
@@ -6377,11 +6380,11 @@ func (i DatahubTaskSourceResourceEsParamDropDlqTopicParamArgs) ToDatahubTaskSour
 // DatahubTaskSourceResourceEsParamDropDlqTopicParamPtrInput is an input type that accepts DatahubTaskSourceResourceEsParamDropDlqTopicParamArgs, DatahubTaskSourceResourceEsParamDropDlqTopicParamPtr and DatahubTaskSourceResourceEsParamDropDlqTopicParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceEsParamDropDlqTopicParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceEsParamDropDlqTopicParamArgs{...}
+//	        DatahubTaskSourceResourceEsParamDropDlqTopicParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceEsParamDropDlqTopicParamPtrInput interface {
 	pulumi.Input
 
@@ -6578,7 +6581,7 @@ type DatahubTaskSourceResourceEventBusParam struct {
 // DatahubTaskSourceResourceEventBusParamInput is an input type that accepts DatahubTaskSourceResourceEventBusParamArgs and DatahubTaskSourceResourceEventBusParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceEventBusParamInput` via:
 //
-//          DatahubTaskSourceResourceEventBusParamArgs{...}
+//	DatahubTaskSourceResourceEventBusParamArgs{...}
 type DatahubTaskSourceResourceEventBusParamInput interface {
 	pulumi.Input
 
@@ -6624,11 +6627,11 @@ func (i DatahubTaskSourceResourceEventBusParamArgs) ToDatahubTaskSourceResourceE
 // DatahubTaskSourceResourceEventBusParamPtrInput is an input type that accepts DatahubTaskSourceResourceEventBusParamArgs, DatahubTaskSourceResourceEventBusParamPtr and DatahubTaskSourceResourceEventBusParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceEventBusParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceEventBusParamArgs{...}
+//	        DatahubTaskSourceResourceEventBusParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceEventBusParamPtrInput interface {
 	pulumi.Input
 
@@ -6830,7 +6833,7 @@ type DatahubTaskSourceResourceKafkaParam struct {
 // DatahubTaskSourceResourceKafkaParamInput is an input type that accepts DatahubTaskSourceResourceKafkaParamArgs and DatahubTaskSourceResourceKafkaParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceKafkaParamInput` via:
 //
-//          DatahubTaskSourceResourceKafkaParamArgs{...}
+//	DatahubTaskSourceResourceKafkaParamArgs{...}
 type DatahubTaskSourceResourceKafkaParamInput interface {
 	pulumi.Input
 
@@ -6896,11 +6899,11 @@ func (i DatahubTaskSourceResourceKafkaParamArgs) ToDatahubTaskSourceResourceKafk
 // DatahubTaskSourceResourceKafkaParamPtrInput is an input type that accepts DatahubTaskSourceResourceKafkaParamArgs, DatahubTaskSourceResourceKafkaParamPtr and DatahubTaskSourceResourceKafkaParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceKafkaParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceKafkaParamArgs{...}
+//	        DatahubTaskSourceResourceKafkaParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceKafkaParamPtrInput interface {
 	pulumi.Input
 
@@ -7230,7 +7233,7 @@ type DatahubTaskSourceResourceKafkaParamTableMapping struct {
 // DatahubTaskSourceResourceKafkaParamTableMappingInput is an input type that accepts DatahubTaskSourceResourceKafkaParamTableMappingArgs and DatahubTaskSourceResourceKafkaParamTableMappingOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceKafkaParamTableMappingInput` via:
 //
-//          DatahubTaskSourceResourceKafkaParamTableMappingArgs{...}
+//	DatahubTaskSourceResourceKafkaParamTableMappingArgs{...}
 type DatahubTaskSourceResourceKafkaParamTableMappingInput interface {
 	pulumi.Input
 
@@ -7264,7 +7267,7 @@ func (i DatahubTaskSourceResourceKafkaParamTableMappingArgs) ToDatahubTaskSource
 // DatahubTaskSourceResourceKafkaParamTableMappingArrayInput is an input type that accepts DatahubTaskSourceResourceKafkaParamTableMappingArray and DatahubTaskSourceResourceKafkaParamTableMappingArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceKafkaParamTableMappingArrayInput` via:
 //
-//          DatahubTaskSourceResourceKafkaParamTableMappingArray{ DatahubTaskSourceResourceKafkaParamTableMappingArgs{...} }
+//	DatahubTaskSourceResourceKafkaParamTableMappingArray{ DatahubTaskSourceResourceKafkaParamTableMappingArgs{...} }
 type DatahubTaskSourceResourceKafkaParamTableMappingArrayInput interface {
 	pulumi.Input
 
@@ -7366,7 +7369,7 @@ type DatahubTaskSourceResourceMariaDbParam struct {
 // DatahubTaskSourceResourceMariaDbParamInput is an input type that accepts DatahubTaskSourceResourceMariaDbParamArgs and DatahubTaskSourceResourceMariaDbParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceMariaDbParamInput` via:
 //
-//          DatahubTaskSourceResourceMariaDbParamArgs{...}
+//	DatahubTaskSourceResourceMariaDbParamArgs{...}
 type DatahubTaskSourceResourceMariaDbParamInput interface {
 	pulumi.Input
 
@@ -7420,11 +7423,11 @@ func (i DatahubTaskSourceResourceMariaDbParamArgs) ToDatahubTaskSourceResourceMa
 // DatahubTaskSourceResourceMariaDbParamPtrInput is an input type that accepts DatahubTaskSourceResourceMariaDbParamArgs, DatahubTaskSourceResourceMariaDbParamPtr and DatahubTaskSourceResourceMariaDbParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceMariaDbParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceMariaDbParamArgs{...}
+//	        DatahubTaskSourceResourceMariaDbParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceMariaDbParamPtrInput interface {
 	pulumi.Input
 
@@ -7678,7 +7681,7 @@ type DatahubTaskSourceResourceMongoDbParam struct {
 // DatahubTaskSourceResourceMongoDbParamInput is an input type that accepts DatahubTaskSourceResourceMongoDbParamArgs and DatahubTaskSourceResourceMongoDbParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceMongoDbParamInput` via:
 //
-//          DatahubTaskSourceResourceMongoDbParamArgs{...}
+//	DatahubTaskSourceResourceMongoDbParamArgs{...}
 type DatahubTaskSourceResourceMongoDbParamInput interface {
 	pulumi.Input
 
@@ -7736,11 +7739,11 @@ func (i DatahubTaskSourceResourceMongoDbParamArgs) ToDatahubTaskSourceResourceMo
 // DatahubTaskSourceResourceMongoDbParamPtrInput is an input type that accepts DatahubTaskSourceResourceMongoDbParamArgs, DatahubTaskSourceResourceMongoDbParamPtr and DatahubTaskSourceResourceMongoDbParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceMongoDbParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceMongoDbParamArgs{...}
+//	        DatahubTaskSourceResourceMongoDbParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceMongoDbParamPtrInput interface {
 	pulumi.Input
 
@@ -8050,7 +8053,7 @@ type DatahubTaskSourceResourceMySqlParam struct {
 // DatahubTaskSourceResourceMySqlParamInput is an input type that accepts DatahubTaskSourceResourceMySqlParamArgs and DatahubTaskSourceResourceMySqlParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceMySqlParamInput` via:
 //
-//          DatahubTaskSourceResourceMySqlParamArgs{...}
+//	DatahubTaskSourceResourceMySqlParamArgs{...}
 type DatahubTaskSourceResourceMySqlParamInput interface {
 	pulumi.Input
 
@@ -8134,11 +8137,11 @@ func (i DatahubTaskSourceResourceMySqlParamArgs) ToDatahubTaskSourceResourceMySq
 // DatahubTaskSourceResourceMySqlParamPtrInput is an input type that accepts DatahubTaskSourceResourceMySqlParamArgs, DatahubTaskSourceResourceMySqlParamPtr and DatahubTaskSourceResourceMySqlParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceMySqlParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceMySqlParamArgs{...}
+//	        DatahubTaskSourceResourceMySqlParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceMySqlParamPtrInput interface {
 	pulumi.Input
 
@@ -8615,7 +8618,7 @@ type DatahubTaskSourceResourceMySqlParamDataTargetRecordMapping struct {
 // DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingInput is an input type that accepts DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs and DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingInput` via:
 //
-//          DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs{...}
+//	DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs{...}
 type DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingInput interface {
 	pulumi.Input
 
@@ -8659,7 +8662,7 @@ func (i DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs) ToDatahu
 // DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArrayInput is an input type that accepts DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArray and DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArrayInput` via:
 //
-//          DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArray{ DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs{...} }
+//	DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArray{ DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArgs{...} }
 type DatahubTaskSourceResourceMySqlParamDataTargetRecordMappingArrayInput interface {
 	pulumi.Input
 
@@ -8776,7 +8779,7 @@ type DatahubTaskSourceResourceMySqlParamDropCls struct {
 // DatahubTaskSourceResourceMySqlParamDropClsInput is an input type that accepts DatahubTaskSourceResourceMySqlParamDropClsArgs and DatahubTaskSourceResourceMySqlParamDropClsOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceMySqlParamDropClsInput` via:
 //
-//          DatahubTaskSourceResourceMySqlParamDropClsArgs{...}
+//	DatahubTaskSourceResourceMySqlParamDropClsArgs{...}
 type DatahubTaskSourceResourceMySqlParamDropClsInput interface {
 	pulumi.Input
 
@@ -8820,11 +8823,11 @@ func (i DatahubTaskSourceResourceMySqlParamDropClsArgs) ToDatahubTaskSourceResou
 // DatahubTaskSourceResourceMySqlParamDropClsPtrInput is an input type that accepts DatahubTaskSourceResourceMySqlParamDropClsArgs, DatahubTaskSourceResourceMySqlParamDropClsPtr and DatahubTaskSourceResourceMySqlParamDropClsPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceMySqlParamDropClsPtrInput` via:
 //
-//          DatahubTaskSourceResourceMySqlParamDropClsArgs{...}
+//	        DatahubTaskSourceResourceMySqlParamDropClsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceMySqlParamDropClsPtrInput interface {
 	pulumi.Input
 
@@ -9005,7 +9008,7 @@ type DatahubTaskSourceResourcePostgreSqlParam struct {
 // DatahubTaskSourceResourcePostgreSqlParamInput is an input type that accepts DatahubTaskSourceResourcePostgreSqlParamArgs and DatahubTaskSourceResourcePostgreSqlParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourcePostgreSqlParamInput` via:
 //
-//          DatahubTaskSourceResourcePostgreSqlParamArgs{...}
+//	DatahubTaskSourceResourcePostgreSqlParamArgs{...}
 type DatahubTaskSourceResourcePostgreSqlParamInput interface {
 	pulumi.Input
 
@@ -9065,11 +9068,11 @@ func (i DatahubTaskSourceResourcePostgreSqlParamArgs) ToDatahubTaskSourceResourc
 // DatahubTaskSourceResourcePostgreSqlParamPtrInput is an input type that accepts DatahubTaskSourceResourcePostgreSqlParamArgs, DatahubTaskSourceResourcePostgreSqlParamPtr and DatahubTaskSourceResourcePostgreSqlParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourcePostgreSqlParamPtrInput` via:
 //
-//          DatahubTaskSourceResourcePostgreSqlParamArgs{...}
+//	        DatahubTaskSourceResourcePostgreSqlParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourcePostgreSqlParamPtrInput interface {
 	pulumi.Input
 
@@ -9364,7 +9367,7 @@ type DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMapping struct {
 // DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingInput is an input type that accepts DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs and DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingInput` via:
 //
-//          DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs{...}
+//	DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs{...}
 type DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingInput interface {
 	pulumi.Input
 
@@ -9408,7 +9411,7 @@ func (i DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs) ToD
 // DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArrayInput is an input type that accepts DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArray and DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArrayInput` via:
 //
-//          DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArray{ DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs{...} }
+//	DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArray{ DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArgs{...} }
 type DatahubTaskSourceResourcePostgreSqlParamDataTargetRecordMappingArrayInput interface {
 	pulumi.Input
 
@@ -9527,7 +9530,7 @@ type DatahubTaskSourceResourceScfParam struct {
 // DatahubTaskSourceResourceScfParamInput is an input type that accepts DatahubTaskSourceResourceScfParamArgs and DatahubTaskSourceResourceScfParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceScfParamInput` via:
 //
-//          DatahubTaskSourceResourceScfParamArgs{...}
+//	DatahubTaskSourceResourceScfParamArgs{...}
 type DatahubTaskSourceResourceScfParamInput interface {
 	pulumi.Input
 
@@ -9571,11 +9574,11 @@ func (i DatahubTaskSourceResourceScfParamArgs) ToDatahubTaskSourceResourceScfPar
 // DatahubTaskSourceResourceScfParamPtrInput is an input type that accepts DatahubTaskSourceResourceScfParamArgs, DatahubTaskSourceResourceScfParamPtr and DatahubTaskSourceResourceScfParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceScfParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceScfParamArgs{...}
+//	        DatahubTaskSourceResourceScfParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceScfParamPtrInput interface {
 	pulumi.Input
 
@@ -9738,7 +9741,7 @@ type DatahubTaskSourceResourceSqlServerParam struct {
 // DatahubTaskSourceResourceSqlServerParamInput is an input type that accepts DatahubTaskSourceResourceSqlServerParamArgs and DatahubTaskSourceResourceSqlServerParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceSqlServerParamInput` via:
 //
-//          DatahubTaskSourceResourceSqlServerParamArgs{...}
+//	DatahubTaskSourceResourceSqlServerParamArgs{...}
 type DatahubTaskSourceResourceSqlServerParamInput interface {
 	pulumi.Input
 
@@ -9780,11 +9783,11 @@ func (i DatahubTaskSourceResourceSqlServerParamArgs) ToDatahubTaskSourceResource
 // DatahubTaskSourceResourceSqlServerParamPtrInput is an input type that accepts DatahubTaskSourceResourceSqlServerParamArgs, DatahubTaskSourceResourceSqlServerParamPtr and DatahubTaskSourceResourceSqlServerParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceSqlServerParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceSqlServerParamArgs{...}
+//	        DatahubTaskSourceResourceSqlServerParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceSqlServerParamPtrInput interface {
 	pulumi.Input
 
@@ -9934,7 +9937,7 @@ type DatahubTaskSourceResourceTdwParam struct {
 // DatahubTaskSourceResourceTdwParamInput is an input type that accepts DatahubTaskSourceResourceTdwParamArgs and DatahubTaskSourceResourceTdwParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceTdwParamInput` via:
 //
-//          DatahubTaskSourceResourceTdwParamArgs{...}
+//	DatahubTaskSourceResourceTdwParamArgs{...}
 type DatahubTaskSourceResourceTdwParamInput interface {
 	pulumi.Input
 
@@ -9978,11 +9981,11 @@ func (i DatahubTaskSourceResourceTdwParamArgs) ToDatahubTaskSourceResourceTdwPar
 // DatahubTaskSourceResourceTdwParamPtrInput is an input type that accepts DatahubTaskSourceResourceTdwParamArgs, DatahubTaskSourceResourceTdwParamPtr and DatahubTaskSourceResourceTdwParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceTdwParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceTdwParamArgs{...}
+//	        DatahubTaskSourceResourceTdwParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceTdwParamPtrInput interface {
 	pulumi.Input
 
@@ -10151,7 +10154,7 @@ type DatahubTaskSourceResourceTopicParam struct {
 // DatahubTaskSourceResourceTopicParamInput is an input type that accepts DatahubTaskSourceResourceTopicParamArgs and DatahubTaskSourceResourceTopicParamOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceTopicParamInput` via:
 //
-//          DatahubTaskSourceResourceTopicParamArgs{...}
+//	DatahubTaskSourceResourceTopicParamArgs{...}
 type DatahubTaskSourceResourceTopicParamInput interface {
 	pulumi.Input
 
@@ -10199,11 +10202,11 @@ func (i DatahubTaskSourceResourceTopicParamArgs) ToDatahubTaskSourceResourceTopi
 // DatahubTaskSourceResourceTopicParamPtrInput is an input type that accepts DatahubTaskSourceResourceTopicParamArgs, DatahubTaskSourceResourceTopicParamPtr and DatahubTaskSourceResourceTopicParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskSourceResourceTopicParamPtrInput` via:
 //
-//          DatahubTaskSourceResourceTopicParamArgs{...}
+//	        DatahubTaskSourceResourceTopicParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskSourceResourceTopicParamPtrInput interface {
 	pulumi.Input
 
@@ -10422,7 +10425,7 @@ type DatahubTaskTargetResource struct {
 // DatahubTaskTargetResourceInput is an input type that accepts DatahubTaskTargetResourceArgs and DatahubTaskTargetResourceOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceInput` via:
 //
-//          DatahubTaskTargetResourceArgs{...}
+//	DatahubTaskTargetResourceArgs{...}
 type DatahubTaskTargetResourceInput interface {
 	pulumi.Input
 
@@ -10490,11 +10493,11 @@ func (i DatahubTaskTargetResourceArgs) ToDatahubTaskTargetResourcePtrOutputWithC
 // DatahubTaskTargetResourcePtrInput is an input type that accepts DatahubTaskTargetResourceArgs, DatahubTaskTargetResourcePtr and DatahubTaskTargetResourcePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourcePtrInput` via:
 //
-//          DatahubTaskTargetResourceArgs{...}
+//	        DatahubTaskTargetResourceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourcePtrInput interface {
 	pulumi.Input
 
@@ -10859,7 +10862,7 @@ type DatahubTaskTargetResourceClickHouseParam struct {
 // DatahubTaskTargetResourceClickHouseParamInput is an input type that accepts DatahubTaskTargetResourceClickHouseParamArgs and DatahubTaskTargetResourceClickHouseParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceClickHouseParamInput` via:
 //
-//          DatahubTaskTargetResourceClickHouseParamArgs{...}
+//	DatahubTaskTargetResourceClickHouseParamArgs{...}
 type DatahubTaskTargetResourceClickHouseParamInput interface {
 	pulumi.Input
 
@@ -10923,11 +10926,11 @@ func (i DatahubTaskTargetResourceClickHouseParamArgs) ToDatahubTaskTargetResourc
 // DatahubTaskTargetResourceClickHouseParamPtrInput is an input type that accepts DatahubTaskTargetResourceClickHouseParamArgs, DatahubTaskTargetResourceClickHouseParamPtr and DatahubTaskTargetResourceClickHouseParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceClickHouseParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceClickHouseParamArgs{...}
+//	        DatahubTaskTargetResourceClickHouseParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceClickHouseParamPtrInput interface {
 	pulumi.Input
 
@@ -11041,7 +11044,7 @@ func (o DatahubTaskTargetResourceClickHouseParamOutput) Table() pulumi.StringOut
 	return o.ApplyT(func(v DatahubTaskTargetResourceClickHouseParam) string { return v.Table }).(pulumi.StringOutput)
 }
 
-// ClickHouse type, emr-clickhouse: emr;cdw-clickhouse: cdwch;selfBuilt: ``.
+// ClickHouse type, emr-clickhouse: emr;cdw-clickhouse: cdwch;selfBuilt: “.
 func (o DatahubTaskTargetResourceClickHouseParamOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DatahubTaskTargetResourceClickHouseParam) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
@@ -11200,7 +11203,7 @@ func (o DatahubTaskTargetResourceClickHouseParamPtrOutput) Table() pulumi.String
 	}).(pulumi.StringPtrOutput)
 }
 
-// ClickHouse type, emr-clickhouse: emr;cdw-clickhouse: cdwch;selfBuilt: ``.
+// ClickHouse type, emr-clickhouse: emr;cdw-clickhouse: cdwch;selfBuilt: “.
 func (o DatahubTaskTargetResourceClickHouseParamPtrOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DatahubTaskTargetResourceClickHouseParam) *string {
 		if v == nil {
@@ -11246,7 +11249,7 @@ type DatahubTaskTargetResourceClickHouseParamDropCls struct {
 // DatahubTaskTargetResourceClickHouseParamDropClsInput is an input type that accepts DatahubTaskTargetResourceClickHouseParamDropClsArgs and DatahubTaskTargetResourceClickHouseParamDropClsOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceClickHouseParamDropClsInput` via:
 //
-//          DatahubTaskTargetResourceClickHouseParamDropClsArgs{...}
+//	DatahubTaskTargetResourceClickHouseParamDropClsArgs{...}
 type DatahubTaskTargetResourceClickHouseParamDropClsInput interface {
 	pulumi.Input
 
@@ -11290,11 +11293,11 @@ func (i DatahubTaskTargetResourceClickHouseParamDropClsArgs) ToDatahubTaskTarget
 // DatahubTaskTargetResourceClickHouseParamDropClsPtrInput is an input type that accepts DatahubTaskTargetResourceClickHouseParamDropClsArgs, DatahubTaskTargetResourceClickHouseParamDropClsPtr and DatahubTaskTargetResourceClickHouseParamDropClsPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceClickHouseParamDropClsPtrInput` via:
 //
-//          DatahubTaskTargetResourceClickHouseParamDropClsArgs{...}
+//	        DatahubTaskTargetResourceClickHouseParamDropClsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceClickHouseParamDropClsPtrInput interface {
 	pulumi.Input
 
@@ -11457,7 +11460,7 @@ type DatahubTaskTargetResourceClickHouseParamSchema struct {
 // DatahubTaskTargetResourceClickHouseParamSchemaInput is an input type that accepts DatahubTaskTargetResourceClickHouseParamSchemaArgs and DatahubTaskTargetResourceClickHouseParamSchemaOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceClickHouseParamSchemaInput` via:
 //
-//          DatahubTaskTargetResourceClickHouseParamSchemaArgs{...}
+//	DatahubTaskTargetResourceClickHouseParamSchemaArgs{...}
 type DatahubTaskTargetResourceClickHouseParamSchemaInput interface {
 	pulumi.Input
 
@@ -11491,7 +11494,7 @@ func (i DatahubTaskTargetResourceClickHouseParamSchemaArgs) ToDatahubTaskTargetR
 // DatahubTaskTargetResourceClickHouseParamSchemaArrayInput is an input type that accepts DatahubTaskTargetResourceClickHouseParamSchemaArray and DatahubTaskTargetResourceClickHouseParamSchemaArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceClickHouseParamSchemaArrayInput` via:
 //
-//          DatahubTaskTargetResourceClickHouseParamSchemaArray{ DatahubTaskTargetResourceClickHouseParamSchemaArgs{...} }
+//	DatahubTaskTargetResourceClickHouseParamSchemaArray{ DatahubTaskTargetResourceClickHouseParamSchemaArgs{...} }
 type DatahubTaskTargetResourceClickHouseParamSchemaArrayInput interface {
 	pulumi.Input
 
@@ -11583,7 +11586,7 @@ type DatahubTaskTargetResourceClsParam struct {
 // DatahubTaskTargetResourceClsParamInput is an input type that accepts DatahubTaskTargetResourceClsParamArgs and DatahubTaskTargetResourceClsParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceClsParamInput` via:
 //
-//          DatahubTaskTargetResourceClsParamArgs{...}
+//	DatahubTaskTargetResourceClsParamArgs{...}
 type DatahubTaskTargetResourceClsParamInput interface {
 	pulumi.Input
 
@@ -11627,11 +11630,11 @@ func (i DatahubTaskTargetResourceClsParamArgs) ToDatahubTaskTargetResourceClsPar
 // DatahubTaskTargetResourceClsParamPtrInput is an input type that accepts DatahubTaskTargetResourceClsParamArgs, DatahubTaskTargetResourceClsParamPtr and DatahubTaskTargetResourceClsParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceClsParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceClsParamArgs{...}
+//	        DatahubTaskTargetResourceClsParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceClsParamPtrInput interface {
 	pulumi.Input
 
@@ -11802,7 +11805,7 @@ type DatahubTaskTargetResourceCosParam struct {
 // DatahubTaskTargetResourceCosParamInput is an input type that accepts DatahubTaskTargetResourceCosParamArgs and DatahubTaskTargetResourceCosParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceCosParamInput` via:
 //
-//          DatahubTaskTargetResourceCosParamArgs{...}
+//	DatahubTaskTargetResourceCosParamArgs{...}
 type DatahubTaskTargetResourceCosParamInput interface {
 	pulumi.Input
 
@@ -11852,11 +11855,11 @@ func (i DatahubTaskTargetResourceCosParamArgs) ToDatahubTaskTargetResourceCosPar
 // DatahubTaskTargetResourceCosParamPtrInput is an input type that accepts DatahubTaskTargetResourceCosParamArgs, DatahubTaskTargetResourceCosParamPtr and DatahubTaskTargetResourceCosParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceCosParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceCosParamArgs{...}
+//	        DatahubTaskTargetResourceCosParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceCosParamPtrInput interface {
 	pulumi.Input
 
@@ -12060,7 +12063,7 @@ type DatahubTaskTargetResourceCtsdbParam struct {
 // DatahubTaskTargetResourceCtsdbParamInput is an input type that accepts DatahubTaskTargetResourceCtsdbParamArgs and DatahubTaskTargetResourceCtsdbParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceCtsdbParamInput` via:
 //
-//          DatahubTaskTargetResourceCtsdbParamArgs{...}
+//	DatahubTaskTargetResourceCtsdbParamArgs{...}
 type DatahubTaskTargetResourceCtsdbParamInput interface {
 	pulumi.Input
 
@@ -12098,11 +12101,11 @@ func (i DatahubTaskTargetResourceCtsdbParamArgs) ToDatahubTaskTargetResourceCtsd
 // DatahubTaskTargetResourceCtsdbParamPtrInput is an input type that accepts DatahubTaskTargetResourceCtsdbParamArgs, DatahubTaskTargetResourceCtsdbParamPtr and DatahubTaskTargetResourceCtsdbParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceCtsdbParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceCtsdbParamArgs{...}
+//	        DatahubTaskTargetResourceCtsdbParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceCtsdbParamPtrInput interface {
 	pulumi.Input
 
@@ -12228,7 +12231,7 @@ type DatahubTaskTargetResourceDtsParam struct {
 // DatahubTaskTargetResourceDtsParamInput is an input type that accepts DatahubTaskTargetResourceDtsParamArgs and DatahubTaskTargetResourceDtsParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceDtsParamInput` via:
 //
-//          DatahubTaskTargetResourceDtsParamArgs{...}
+//	DatahubTaskTargetResourceDtsParamArgs{...}
 type DatahubTaskTargetResourceDtsParamInput interface {
 	pulumi.Input
 
@@ -12278,11 +12281,11 @@ func (i DatahubTaskTargetResourceDtsParamArgs) ToDatahubTaskTargetResourceDtsPar
 // DatahubTaskTargetResourceDtsParamPtrInput is an input type that accepts DatahubTaskTargetResourceDtsParamArgs, DatahubTaskTargetResourceDtsParamPtr and DatahubTaskTargetResourceDtsParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceDtsParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceDtsParamArgs{...}
+//	        DatahubTaskTargetResourceDtsParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceDtsParamPtrInput interface {
 	pulumi.Input
 
@@ -12516,7 +12519,7 @@ type DatahubTaskTargetResourceEsParam struct {
 // DatahubTaskTargetResourceEsParamInput is an input type that accepts DatahubTaskTargetResourceEsParamArgs and DatahubTaskTargetResourceEsParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceEsParamInput` via:
 //
-//          DatahubTaskTargetResourceEsParamArgs{...}
+//	DatahubTaskTargetResourceEsParamArgs{...}
 type DatahubTaskTargetResourceEsParamInput interface {
 	pulumi.Input
 
@@ -12584,11 +12587,11 @@ func (i DatahubTaskTargetResourceEsParamArgs) ToDatahubTaskTargetResourceEsParam
 // DatahubTaskTargetResourceEsParamPtrInput is an input type that accepts DatahubTaskTargetResourceEsParamArgs, DatahubTaskTargetResourceEsParamPtr and DatahubTaskTargetResourceEsParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceEsParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceEsParamArgs{...}
+//	        DatahubTaskTargetResourceEsParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceEsParamPtrInput interface {
 	pulumi.Input
 
@@ -12933,7 +12936,7 @@ type DatahubTaskTargetResourceEsParamDropCls struct {
 // DatahubTaskTargetResourceEsParamDropClsInput is an input type that accepts DatahubTaskTargetResourceEsParamDropClsArgs and DatahubTaskTargetResourceEsParamDropClsOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceEsParamDropClsInput` via:
 //
-//          DatahubTaskTargetResourceEsParamDropClsArgs{...}
+//	DatahubTaskTargetResourceEsParamDropClsArgs{...}
 type DatahubTaskTargetResourceEsParamDropClsInput interface {
 	pulumi.Input
 
@@ -12977,11 +12980,11 @@ func (i DatahubTaskTargetResourceEsParamDropClsArgs) ToDatahubTaskTargetResource
 // DatahubTaskTargetResourceEsParamDropClsPtrInput is an input type that accepts DatahubTaskTargetResourceEsParamDropClsArgs, DatahubTaskTargetResourceEsParamDropClsPtr and DatahubTaskTargetResourceEsParamDropClsPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceEsParamDropClsPtrInput` via:
 //
-//          DatahubTaskTargetResourceEsParamDropClsArgs{...}
+//	        DatahubTaskTargetResourceEsParamDropClsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceEsParamDropClsPtrInput interface {
 	pulumi.Input
 
@@ -13148,7 +13151,7 @@ type DatahubTaskTargetResourceEsParamDropDlq struct {
 // DatahubTaskTargetResourceEsParamDropDlqInput is an input type that accepts DatahubTaskTargetResourceEsParamDropDlqArgs and DatahubTaskTargetResourceEsParamDropDlqOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceEsParamDropDlqInput` via:
 //
-//          DatahubTaskTargetResourceEsParamDropDlqArgs{...}
+//	DatahubTaskTargetResourceEsParamDropDlqArgs{...}
 type DatahubTaskTargetResourceEsParamDropDlqInput interface {
 	pulumi.Input
 
@@ -13194,11 +13197,11 @@ func (i DatahubTaskTargetResourceEsParamDropDlqArgs) ToDatahubTaskTargetResource
 // DatahubTaskTargetResourceEsParamDropDlqPtrInput is an input type that accepts DatahubTaskTargetResourceEsParamDropDlqArgs, DatahubTaskTargetResourceEsParamDropDlqPtr and DatahubTaskTargetResourceEsParamDropDlqPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceEsParamDropDlqPtrInput` via:
 //
-//          DatahubTaskTargetResourceEsParamDropDlqArgs{...}
+//	        DatahubTaskTargetResourceEsParamDropDlqArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceEsParamDropDlqPtrInput interface {
 	pulumi.Input
 
@@ -13404,7 +13407,7 @@ type DatahubTaskTargetResourceEsParamDropDlqKafkaParam struct {
 // DatahubTaskTargetResourceEsParamDropDlqKafkaParamInput is an input type that accepts DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs and DatahubTaskTargetResourceEsParamDropDlqKafkaParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceEsParamDropDlqKafkaParamInput` via:
 //
-//          DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs{...}
+//	DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs{...}
 type DatahubTaskTargetResourceEsParamDropDlqKafkaParamInput interface {
 	pulumi.Input
 
@@ -13470,11 +13473,11 @@ func (i DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs) ToDatahubTaskTarg
 // DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrInput is an input type that accepts DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs, DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtr and DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs{...}
+//	        DatahubTaskTargetResourceEsParamDropDlqKafkaParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceEsParamDropDlqKafkaParamPtrInput interface {
 	pulumi.Input
 
@@ -13804,7 +13807,7 @@ type DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMapping struct {
 // DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingInput is an input type that accepts DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArgs and DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingInput` via:
 //
-//          DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArgs{...}
+//	DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArgs{...}
 type DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingInput interface {
 	pulumi.Input
 
@@ -13838,7 +13841,7 @@ func (i DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArgs) ToDat
 // DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArrayInput is an input type that accepts DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArray and DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArrayInput` via:
 //
-//          DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArray{ DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArgs{...} }
+//	DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArray{ DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArgs{...} }
 type DatahubTaskTargetResourceEsParamDropDlqKafkaParamTableMappingArrayInput interface {
 	pulumi.Input
 
@@ -13934,7 +13937,7 @@ type DatahubTaskTargetResourceEsParamDropDlqTopicParam struct {
 // DatahubTaskTargetResourceEsParamDropDlqTopicParamInput is an input type that accepts DatahubTaskTargetResourceEsParamDropDlqTopicParamArgs and DatahubTaskTargetResourceEsParamDropDlqTopicParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceEsParamDropDlqTopicParamInput` via:
 //
-//          DatahubTaskTargetResourceEsParamDropDlqTopicParamArgs{...}
+//	DatahubTaskTargetResourceEsParamDropDlqTopicParamArgs{...}
 type DatahubTaskTargetResourceEsParamDropDlqTopicParamInput interface {
 	pulumi.Input
 
@@ -13982,11 +13985,11 @@ func (i DatahubTaskTargetResourceEsParamDropDlqTopicParamArgs) ToDatahubTaskTarg
 // DatahubTaskTargetResourceEsParamDropDlqTopicParamPtrInput is an input type that accepts DatahubTaskTargetResourceEsParamDropDlqTopicParamArgs, DatahubTaskTargetResourceEsParamDropDlqTopicParamPtr and DatahubTaskTargetResourceEsParamDropDlqTopicParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceEsParamDropDlqTopicParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceEsParamDropDlqTopicParamArgs{...}
+//	        DatahubTaskTargetResourceEsParamDropDlqTopicParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceEsParamDropDlqTopicParamPtrInput interface {
 	pulumi.Input
 
@@ -14183,7 +14186,7 @@ type DatahubTaskTargetResourceEventBusParam struct {
 // DatahubTaskTargetResourceEventBusParamInput is an input type that accepts DatahubTaskTargetResourceEventBusParamArgs and DatahubTaskTargetResourceEventBusParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceEventBusParamInput` via:
 //
-//          DatahubTaskTargetResourceEventBusParamArgs{...}
+//	DatahubTaskTargetResourceEventBusParamArgs{...}
 type DatahubTaskTargetResourceEventBusParamInput interface {
 	pulumi.Input
 
@@ -14229,11 +14232,11 @@ func (i DatahubTaskTargetResourceEventBusParamArgs) ToDatahubTaskTargetResourceE
 // DatahubTaskTargetResourceEventBusParamPtrInput is an input type that accepts DatahubTaskTargetResourceEventBusParamArgs, DatahubTaskTargetResourceEventBusParamPtr and DatahubTaskTargetResourceEventBusParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceEventBusParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceEventBusParamArgs{...}
+//	        DatahubTaskTargetResourceEventBusParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceEventBusParamPtrInput interface {
 	pulumi.Input
 
@@ -14435,7 +14438,7 @@ type DatahubTaskTargetResourceKafkaParam struct {
 // DatahubTaskTargetResourceKafkaParamInput is an input type that accepts DatahubTaskTargetResourceKafkaParamArgs and DatahubTaskTargetResourceKafkaParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceKafkaParamInput` via:
 //
-//          DatahubTaskTargetResourceKafkaParamArgs{...}
+//	DatahubTaskTargetResourceKafkaParamArgs{...}
 type DatahubTaskTargetResourceKafkaParamInput interface {
 	pulumi.Input
 
@@ -14501,11 +14504,11 @@ func (i DatahubTaskTargetResourceKafkaParamArgs) ToDatahubTaskTargetResourceKafk
 // DatahubTaskTargetResourceKafkaParamPtrInput is an input type that accepts DatahubTaskTargetResourceKafkaParamArgs, DatahubTaskTargetResourceKafkaParamPtr and DatahubTaskTargetResourceKafkaParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceKafkaParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceKafkaParamArgs{...}
+//	        DatahubTaskTargetResourceKafkaParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceKafkaParamPtrInput interface {
 	pulumi.Input
 
@@ -14835,7 +14838,7 @@ type DatahubTaskTargetResourceKafkaParamTableMapping struct {
 // DatahubTaskTargetResourceKafkaParamTableMappingInput is an input type that accepts DatahubTaskTargetResourceKafkaParamTableMappingArgs and DatahubTaskTargetResourceKafkaParamTableMappingOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceKafkaParamTableMappingInput` via:
 //
-//          DatahubTaskTargetResourceKafkaParamTableMappingArgs{...}
+//	DatahubTaskTargetResourceKafkaParamTableMappingArgs{...}
 type DatahubTaskTargetResourceKafkaParamTableMappingInput interface {
 	pulumi.Input
 
@@ -14869,7 +14872,7 @@ func (i DatahubTaskTargetResourceKafkaParamTableMappingArgs) ToDatahubTaskTarget
 // DatahubTaskTargetResourceKafkaParamTableMappingArrayInput is an input type that accepts DatahubTaskTargetResourceKafkaParamTableMappingArray and DatahubTaskTargetResourceKafkaParamTableMappingArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceKafkaParamTableMappingArrayInput` via:
 //
-//          DatahubTaskTargetResourceKafkaParamTableMappingArray{ DatahubTaskTargetResourceKafkaParamTableMappingArgs{...} }
+//	DatahubTaskTargetResourceKafkaParamTableMappingArray{ DatahubTaskTargetResourceKafkaParamTableMappingArgs{...} }
 type DatahubTaskTargetResourceKafkaParamTableMappingArrayInput interface {
 	pulumi.Input
 
@@ -14971,7 +14974,7 @@ type DatahubTaskTargetResourceMariaDbParam struct {
 // DatahubTaskTargetResourceMariaDbParamInput is an input type that accepts DatahubTaskTargetResourceMariaDbParamArgs and DatahubTaskTargetResourceMariaDbParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceMariaDbParamInput` via:
 //
-//          DatahubTaskTargetResourceMariaDbParamArgs{...}
+//	DatahubTaskTargetResourceMariaDbParamArgs{...}
 type DatahubTaskTargetResourceMariaDbParamInput interface {
 	pulumi.Input
 
@@ -15025,11 +15028,11 @@ func (i DatahubTaskTargetResourceMariaDbParamArgs) ToDatahubTaskTargetResourceMa
 // DatahubTaskTargetResourceMariaDbParamPtrInput is an input type that accepts DatahubTaskTargetResourceMariaDbParamArgs, DatahubTaskTargetResourceMariaDbParamPtr and DatahubTaskTargetResourceMariaDbParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceMariaDbParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceMariaDbParamArgs{...}
+//	        DatahubTaskTargetResourceMariaDbParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceMariaDbParamPtrInput interface {
 	pulumi.Input
 
@@ -15283,7 +15286,7 @@ type DatahubTaskTargetResourceMongoDbParam struct {
 // DatahubTaskTargetResourceMongoDbParamInput is an input type that accepts DatahubTaskTargetResourceMongoDbParamArgs and DatahubTaskTargetResourceMongoDbParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceMongoDbParamInput` via:
 //
-//          DatahubTaskTargetResourceMongoDbParamArgs{...}
+//	DatahubTaskTargetResourceMongoDbParamArgs{...}
 type DatahubTaskTargetResourceMongoDbParamInput interface {
 	pulumi.Input
 
@@ -15341,11 +15344,11 @@ func (i DatahubTaskTargetResourceMongoDbParamArgs) ToDatahubTaskTargetResourceMo
 // DatahubTaskTargetResourceMongoDbParamPtrInput is an input type that accepts DatahubTaskTargetResourceMongoDbParamArgs, DatahubTaskTargetResourceMongoDbParamPtr and DatahubTaskTargetResourceMongoDbParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceMongoDbParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceMongoDbParamArgs{...}
+//	        DatahubTaskTargetResourceMongoDbParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceMongoDbParamPtrInput interface {
 	pulumi.Input
 
@@ -15655,7 +15658,7 @@ type DatahubTaskTargetResourceMySqlParam struct {
 // DatahubTaskTargetResourceMySqlParamInput is an input type that accepts DatahubTaskTargetResourceMySqlParamArgs and DatahubTaskTargetResourceMySqlParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceMySqlParamInput` via:
 //
-//          DatahubTaskTargetResourceMySqlParamArgs{...}
+//	DatahubTaskTargetResourceMySqlParamArgs{...}
 type DatahubTaskTargetResourceMySqlParamInput interface {
 	pulumi.Input
 
@@ -15739,11 +15742,11 @@ func (i DatahubTaskTargetResourceMySqlParamArgs) ToDatahubTaskTargetResourceMySq
 // DatahubTaskTargetResourceMySqlParamPtrInput is an input type that accepts DatahubTaskTargetResourceMySqlParamArgs, DatahubTaskTargetResourceMySqlParamPtr and DatahubTaskTargetResourceMySqlParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceMySqlParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceMySqlParamArgs{...}
+//	        DatahubTaskTargetResourceMySqlParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceMySqlParamPtrInput interface {
 	pulumi.Input
 
@@ -16220,7 +16223,7 @@ type DatahubTaskTargetResourceMySqlParamDataTargetRecordMapping struct {
 // DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingInput is an input type that accepts DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs and DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingInput` via:
 //
-//          DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs{...}
+//	DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs{...}
 type DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingInput interface {
 	pulumi.Input
 
@@ -16264,7 +16267,7 @@ func (i DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs) ToDatahu
 // DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArrayInput is an input type that accepts DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArray and DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArrayInput` via:
 //
-//          DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArray{ DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs{...} }
+//	DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArray{ DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArgs{...} }
 type DatahubTaskTargetResourceMySqlParamDataTargetRecordMappingArrayInput interface {
 	pulumi.Input
 
@@ -16381,7 +16384,7 @@ type DatahubTaskTargetResourceMySqlParamDropCls struct {
 // DatahubTaskTargetResourceMySqlParamDropClsInput is an input type that accepts DatahubTaskTargetResourceMySqlParamDropClsArgs and DatahubTaskTargetResourceMySqlParamDropClsOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceMySqlParamDropClsInput` via:
 //
-//          DatahubTaskTargetResourceMySqlParamDropClsArgs{...}
+//	DatahubTaskTargetResourceMySqlParamDropClsArgs{...}
 type DatahubTaskTargetResourceMySqlParamDropClsInput interface {
 	pulumi.Input
 
@@ -16425,11 +16428,11 @@ func (i DatahubTaskTargetResourceMySqlParamDropClsArgs) ToDatahubTaskTargetResou
 // DatahubTaskTargetResourceMySqlParamDropClsPtrInput is an input type that accepts DatahubTaskTargetResourceMySqlParamDropClsArgs, DatahubTaskTargetResourceMySqlParamDropClsPtr and DatahubTaskTargetResourceMySqlParamDropClsPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceMySqlParamDropClsPtrInput` via:
 //
-//          DatahubTaskTargetResourceMySqlParamDropClsArgs{...}
+//	        DatahubTaskTargetResourceMySqlParamDropClsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceMySqlParamDropClsPtrInput interface {
 	pulumi.Input
 
@@ -16610,7 +16613,7 @@ type DatahubTaskTargetResourcePostgreSqlParam struct {
 // DatahubTaskTargetResourcePostgreSqlParamInput is an input type that accepts DatahubTaskTargetResourcePostgreSqlParamArgs and DatahubTaskTargetResourcePostgreSqlParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourcePostgreSqlParamInput` via:
 //
-//          DatahubTaskTargetResourcePostgreSqlParamArgs{...}
+//	DatahubTaskTargetResourcePostgreSqlParamArgs{...}
 type DatahubTaskTargetResourcePostgreSqlParamInput interface {
 	pulumi.Input
 
@@ -16670,11 +16673,11 @@ func (i DatahubTaskTargetResourcePostgreSqlParamArgs) ToDatahubTaskTargetResourc
 // DatahubTaskTargetResourcePostgreSqlParamPtrInput is an input type that accepts DatahubTaskTargetResourcePostgreSqlParamArgs, DatahubTaskTargetResourcePostgreSqlParamPtr and DatahubTaskTargetResourcePostgreSqlParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourcePostgreSqlParamPtrInput` via:
 //
-//          DatahubTaskTargetResourcePostgreSqlParamArgs{...}
+//	        DatahubTaskTargetResourcePostgreSqlParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourcePostgreSqlParamPtrInput interface {
 	pulumi.Input
 
@@ -16969,7 +16972,7 @@ type DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMapping struct {
 // DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingInput is an input type that accepts DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs and DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingInput` via:
 //
-//          DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs{...}
+//	DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs{...}
 type DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingInput interface {
 	pulumi.Input
 
@@ -17013,7 +17016,7 @@ func (i DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs) ToD
 // DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArrayInput is an input type that accepts DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArray and DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArrayInput` via:
 //
-//          DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArray{ DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs{...} }
+//	DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArray{ DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArgs{...} }
 type DatahubTaskTargetResourcePostgreSqlParamDataTargetRecordMappingArrayInput interface {
 	pulumi.Input
 
@@ -17132,7 +17135,7 @@ type DatahubTaskTargetResourceScfParam struct {
 // DatahubTaskTargetResourceScfParamInput is an input type that accepts DatahubTaskTargetResourceScfParamArgs and DatahubTaskTargetResourceScfParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceScfParamInput` via:
 //
-//          DatahubTaskTargetResourceScfParamArgs{...}
+//	DatahubTaskTargetResourceScfParamArgs{...}
 type DatahubTaskTargetResourceScfParamInput interface {
 	pulumi.Input
 
@@ -17176,11 +17179,11 @@ func (i DatahubTaskTargetResourceScfParamArgs) ToDatahubTaskTargetResourceScfPar
 // DatahubTaskTargetResourceScfParamPtrInput is an input type that accepts DatahubTaskTargetResourceScfParamArgs, DatahubTaskTargetResourceScfParamPtr and DatahubTaskTargetResourceScfParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceScfParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceScfParamArgs{...}
+//	        DatahubTaskTargetResourceScfParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceScfParamPtrInput interface {
 	pulumi.Input
 
@@ -17343,7 +17346,7 @@ type DatahubTaskTargetResourceSqlServerParam struct {
 // DatahubTaskTargetResourceSqlServerParamInput is an input type that accepts DatahubTaskTargetResourceSqlServerParamArgs and DatahubTaskTargetResourceSqlServerParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceSqlServerParamInput` via:
 //
-//          DatahubTaskTargetResourceSqlServerParamArgs{...}
+//	DatahubTaskTargetResourceSqlServerParamArgs{...}
 type DatahubTaskTargetResourceSqlServerParamInput interface {
 	pulumi.Input
 
@@ -17385,11 +17388,11 @@ func (i DatahubTaskTargetResourceSqlServerParamArgs) ToDatahubTaskTargetResource
 // DatahubTaskTargetResourceSqlServerParamPtrInput is an input type that accepts DatahubTaskTargetResourceSqlServerParamArgs, DatahubTaskTargetResourceSqlServerParamPtr and DatahubTaskTargetResourceSqlServerParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceSqlServerParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceSqlServerParamArgs{...}
+//	        DatahubTaskTargetResourceSqlServerParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceSqlServerParamPtrInput interface {
 	pulumi.Input
 
@@ -17539,7 +17542,7 @@ type DatahubTaskTargetResourceTdwParam struct {
 // DatahubTaskTargetResourceTdwParamInput is an input type that accepts DatahubTaskTargetResourceTdwParamArgs and DatahubTaskTargetResourceTdwParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceTdwParamInput` via:
 //
-//          DatahubTaskTargetResourceTdwParamArgs{...}
+//	DatahubTaskTargetResourceTdwParamArgs{...}
 type DatahubTaskTargetResourceTdwParamInput interface {
 	pulumi.Input
 
@@ -17583,11 +17586,11 @@ func (i DatahubTaskTargetResourceTdwParamArgs) ToDatahubTaskTargetResourceTdwPar
 // DatahubTaskTargetResourceTdwParamPtrInput is an input type that accepts DatahubTaskTargetResourceTdwParamArgs, DatahubTaskTargetResourceTdwParamPtr and DatahubTaskTargetResourceTdwParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceTdwParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceTdwParamArgs{...}
+//	        DatahubTaskTargetResourceTdwParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceTdwParamPtrInput interface {
 	pulumi.Input
 
@@ -17756,7 +17759,7 @@ type DatahubTaskTargetResourceTopicParam struct {
 // DatahubTaskTargetResourceTopicParamInput is an input type that accepts DatahubTaskTargetResourceTopicParamArgs and DatahubTaskTargetResourceTopicParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceTopicParamInput` via:
 //
-//          DatahubTaskTargetResourceTopicParamArgs{...}
+//	DatahubTaskTargetResourceTopicParamArgs{...}
 type DatahubTaskTargetResourceTopicParamInput interface {
 	pulumi.Input
 
@@ -17804,11 +17807,11 @@ func (i DatahubTaskTargetResourceTopicParamArgs) ToDatahubTaskTargetResourceTopi
 // DatahubTaskTargetResourceTopicParamPtrInput is an input type that accepts DatahubTaskTargetResourceTopicParamArgs, DatahubTaskTargetResourceTopicParamPtr and DatahubTaskTargetResourceTopicParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTargetResourceTopicParamPtrInput` via:
 //
-//          DatahubTaskTargetResourceTopicParamArgs{...}
+//	        DatahubTaskTargetResourceTopicParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTargetResourceTopicParamPtrInput interface {
 	pulumi.Input
 
@@ -18015,7 +18018,7 @@ type DatahubTaskTransformParam struct {
 // DatahubTaskTransformParamInput is an input type that accepts DatahubTaskTransformParamArgs and DatahubTaskTransformParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformParamInput` via:
 //
-//          DatahubTaskTransformParamArgs{...}
+//	DatahubTaskTransformParamArgs{...}
 type DatahubTaskTransformParamInput interface {
 	pulumi.Input
 
@@ -18071,11 +18074,11 @@ func (i DatahubTaskTransformParamArgs) ToDatahubTaskTransformParamPtrOutputWithC
 // DatahubTaskTransformParamPtrInput is an input type that accepts DatahubTaskTransformParamArgs, DatahubTaskTransformParamPtr and DatahubTaskTransformParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformParamPtrInput` via:
 //
-//          DatahubTaskTransformParamArgs{...}
+//	        DatahubTaskTransformParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformParamPtrInput interface {
 	pulumi.Input
 
@@ -18326,7 +18329,7 @@ type DatahubTaskTransformParamAnalyseResult struct {
 // DatahubTaskTransformParamAnalyseResultInput is an input type that accepts DatahubTaskTransformParamAnalyseResultArgs and DatahubTaskTransformParamAnalyseResultOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformParamAnalyseResultInput` via:
 //
-//          DatahubTaskTransformParamAnalyseResultArgs{...}
+//	DatahubTaskTransformParamAnalyseResultArgs{...}
 type DatahubTaskTransformParamAnalyseResultInput interface {
 	pulumi.Input
 
@@ -18358,7 +18361,7 @@ func (i DatahubTaskTransformParamAnalyseResultArgs) ToDatahubTaskTransformParamA
 // DatahubTaskTransformParamAnalyseResultArrayInput is an input type that accepts DatahubTaskTransformParamAnalyseResultArray and DatahubTaskTransformParamAnalyseResultArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformParamAnalyseResultArrayInput` via:
 //
-//          DatahubTaskTransformParamAnalyseResultArray{ DatahubTaskTransformParamAnalyseResultArgs{...} }
+//	DatahubTaskTransformParamAnalyseResultArray{ DatahubTaskTransformParamAnalyseResultArgs{...} }
 type DatahubTaskTransformParamAnalyseResultArrayInput interface {
 	pulumi.Input
 
@@ -18447,7 +18450,7 @@ type DatahubTaskTransformParamFailureParam struct {
 // DatahubTaskTransformParamFailureParamInput is an input type that accepts DatahubTaskTransformParamFailureParamArgs and DatahubTaskTransformParamFailureParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformParamFailureParamInput` via:
 //
-//          DatahubTaskTransformParamFailureParamArgs{...}
+//	DatahubTaskTransformParamFailureParamArgs{...}
 type DatahubTaskTransformParamFailureParamInput interface {
 	pulumi.Input
 
@@ -18493,11 +18496,11 @@ func (i DatahubTaskTransformParamFailureParamArgs) ToDatahubTaskTransformParamFa
 // DatahubTaskTransformParamFailureParamPtrInput is an input type that accepts DatahubTaskTransformParamFailureParamArgs, DatahubTaskTransformParamFailureParamPtr and DatahubTaskTransformParamFailureParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformParamFailureParamPtrInput` via:
 //
-//          DatahubTaskTransformParamFailureParamArgs{...}
+//	        DatahubTaskTransformParamFailureParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformParamFailureParamPtrInput interface {
 	pulumi.Input
 
@@ -18703,7 +18706,7 @@ type DatahubTaskTransformParamFailureParamKafkaParam struct {
 // DatahubTaskTransformParamFailureParamKafkaParamInput is an input type that accepts DatahubTaskTransformParamFailureParamKafkaParamArgs and DatahubTaskTransformParamFailureParamKafkaParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformParamFailureParamKafkaParamInput` via:
 //
-//          DatahubTaskTransformParamFailureParamKafkaParamArgs{...}
+//	DatahubTaskTransformParamFailureParamKafkaParamArgs{...}
 type DatahubTaskTransformParamFailureParamKafkaParamInput interface {
 	pulumi.Input
 
@@ -18769,11 +18772,11 @@ func (i DatahubTaskTransformParamFailureParamKafkaParamArgs) ToDatahubTaskTransf
 // DatahubTaskTransformParamFailureParamKafkaParamPtrInput is an input type that accepts DatahubTaskTransformParamFailureParamKafkaParamArgs, DatahubTaskTransformParamFailureParamKafkaParamPtr and DatahubTaskTransformParamFailureParamKafkaParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformParamFailureParamKafkaParamPtrInput` via:
 //
-//          DatahubTaskTransformParamFailureParamKafkaParamArgs{...}
+//	        DatahubTaskTransformParamFailureParamKafkaParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformParamFailureParamKafkaParamPtrInput interface {
 	pulumi.Input
 
@@ -19103,7 +19106,7 @@ type DatahubTaskTransformParamFailureParamKafkaParamTableMapping struct {
 // DatahubTaskTransformParamFailureParamKafkaParamTableMappingInput is an input type that accepts DatahubTaskTransformParamFailureParamKafkaParamTableMappingArgs and DatahubTaskTransformParamFailureParamKafkaParamTableMappingOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformParamFailureParamKafkaParamTableMappingInput` via:
 //
-//          DatahubTaskTransformParamFailureParamKafkaParamTableMappingArgs{...}
+//	DatahubTaskTransformParamFailureParamKafkaParamTableMappingArgs{...}
 type DatahubTaskTransformParamFailureParamKafkaParamTableMappingInput interface {
 	pulumi.Input
 
@@ -19137,7 +19140,7 @@ func (i DatahubTaskTransformParamFailureParamKafkaParamTableMappingArgs) ToDatah
 // DatahubTaskTransformParamFailureParamKafkaParamTableMappingArrayInput is an input type that accepts DatahubTaskTransformParamFailureParamKafkaParamTableMappingArray and DatahubTaskTransformParamFailureParamKafkaParamTableMappingArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformParamFailureParamKafkaParamTableMappingArrayInput` via:
 //
-//          DatahubTaskTransformParamFailureParamKafkaParamTableMappingArray{ DatahubTaskTransformParamFailureParamKafkaParamTableMappingArgs{...} }
+//	DatahubTaskTransformParamFailureParamKafkaParamTableMappingArray{ DatahubTaskTransformParamFailureParamKafkaParamTableMappingArgs{...} }
 type DatahubTaskTransformParamFailureParamKafkaParamTableMappingArrayInput interface {
 	pulumi.Input
 
@@ -19233,7 +19236,7 @@ type DatahubTaskTransformParamFailureParamTopicParam struct {
 // DatahubTaskTransformParamFailureParamTopicParamInput is an input type that accepts DatahubTaskTransformParamFailureParamTopicParamArgs and DatahubTaskTransformParamFailureParamTopicParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformParamFailureParamTopicParamInput` via:
 //
-//          DatahubTaskTransformParamFailureParamTopicParamArgs{...}
+//	DatahubTaskTransformParamFailureParamTopicParamArgs{...}
 type DatahubTaskTransformParamFailureParamTopicParamInput interface {
 	pulumi.Input
 
@@ -19281,11 +19284,11 @@ func (i DatahubTaskTransformParamFailureParamTopicParamArgs) ToDatahubTaskTransf
 // DatahubTaskTransformParamFailureParamTopicParamPtrInput is an input type that accepts DatahubTaskTransformParamFailureParamTopicParamArgs, DatahubTaskTransformParamFailureParamTopicParamPtr and DatahubTaskTransformParamFailureParamTopicParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformParamFailureParamTopicParamPtrInput` via:
 //
-//          DatahubTaskTransformParamFailureParamTopicParamArgs{...}
+//	        DatahubTaskTransformParamFailureParamTopicParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformParamFailureParamTopicParamPtrInput interface {
 	pulumi.Input
 
@@ -19478,7 +19481,7 @@ type DatahubTaskTransformParamFilterParam struct {
 // DatahubTaskTransformParamFilterParamInput is an input type that accepts DatahubTaskTransformParamFilterParamArgs and DatahubTaskTransformParamFilterParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformParamFilterParamInput` via:
 //
-//          DatahubTaskTransformParamFilterParamArgs{...}
+//	DatahubTaskTransformParamFilterParamArgs{...}
 type DatahubTaskTransformParamFilterParamInput interface {
 	pulumi.Input
 
@@ -19512,7 +19515,7 @@ func (i DatahubTaskTransformParamFilterParamArgs) ToDatahubTaskTransformParamFil
 // DatahubTaskTransformParamFilterParamArrayInput is an input type that accepts DatahubTaskTransformParamFilterParamArray and DatahubTaskTransformParamFilterParamArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformParamFilterParamArrayInput` via:
 //
-//          DatahubTaskTransformParamFilterParamArray{ DatahubTaskTransformParamFilterParamArgs{...} }
+//	DatahubTaskTransformParamFilterParamArray{ DatahubTaskTransformParamFilterParamArgs{...} }
 type DatahubTaskTransformParamFilterParamArrayInput interface {
 	pulumi.Input
 
@@ -19600,7 +19603,7 @@ type DatahubTaskTransformParamMapParam struct {
 // DatahubTaskTransformParamMapParamInput is an input type that accepts DatahubTaskTransformParamMapParamArgs and DatahubTaskTransformParamMapParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformParamMapParamInput` via:
 //
-//          DatahubTaskTransformParamMapParamArgs{...}
+//	DatahubTaskTransformParamMapParamArgs{...}
 type DatahubTaskTransformParamMapParamInput interface {
 	pulumi.Input
 
@@ -19632,7 +19635,7 @@ func (i DatahubTaskTransformParamMapParamArgs) ToDatahubTaskTransformParamMapPar
 // DatahubTaskTransformParamMapParamArrayInput is an input type that accepts DatahubTaskTransformParamMapParamArray and DatahubTaskTransformParamMapParamArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformParamMapParamArrayInput` via:
 //
-//          DatahubTaskTransformParamMapParamArray{ DatahubTaskTransformParamMapParamArgs{...} }
+//	DatahubTaskTransformParamMapParamArray{ DatahubTaskTransformParamMapParamArgs{...} }
 type DatahubTaskTransformParamMapParamArrayInput interface {
 	pulumi.Input
 
@@ -19729,7 +19732,7 @@ type DatahubTaskTransformsParam struct {
 // DatahubTaskTransformsParamInput is an input type that accepts DatahubTaskTransformsParamArgs and DatahubTaskTransformsParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamInput` via:
 //
-//          DatahubTaskTransformsParamArgs{...}
+//	DatahubTaskTransformsParamArgs{...}
 type DatahubTaskTransformsParamInput interface {
 	pulumi.Input
 
@@ -19783,11 +19786,11 @@ func (i DatahubTaskTransformsParamArgs) ToDatahubTaskTransformsParamPtrOutputWit
 // DatahubTaskTransformsParamPtrInput is an input type that accepts DatahubTaskTransformsParamArgs, DatahubTaskTransformsParamPtr and DatahubTaskTransformsParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamPtrInput` via:
 //
-//          DatahubTaskTransformsParamArgs{...}
+//	        DatahubTaskTransformsParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamPtrInput interface {
 	pulumi.Input
 
@@ -20019,7 +20022,7 @@ type DatahubTaskTransformsParamBatchAnalyse struct {
 // DatahubTaskTransformsParamBatchAnalyseInput is an input type that accepts DatahubTaskTransformsParamBatchAnalyseArgs and DatahubTaskTransformsParamBatchAnalyseOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamBatchAnalyseInput` via:
 //
-//          DatahubTaskTransformsParamBatchAnalyseArgs{...}
+//	DatahubTaskTransformsParamBatchAnalyseArgs{...}
 type DatahubTaskTransformsParamBatchAnalyseInput interface {
 	pulumi.Input
 
@@ -20055,11 +20058,11 @@ func (i DatahubTaskTransformsParamBatchAnalyseArgs) ToDatahubTaskTransformsParam
 // DatahubTaskTransformsParamBatchAnalysePtrInput is an input type that accepts DatahubTaskTransformsParamBatchAnalyseArgs, DatahubTaskTransformsParamBatchAnalysePtr and DatahubTaskTransformsParamBatchAnalysePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamBatchAnalysePtrInput` via:
 //
-//          DatahubTaskTransformsParamBatchAnalyseArgs{...}
+//	        DatahubTaskTransformsParamBatchAnalyseArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamBatchAnalysePtrInput interface {
 	pulumi.Input
 
@@ -20166,7 +20169,7 @@ type DatahubTaskTransformsParamFailureParam struct {
 // DatahubTaskTransformsParamFailureParamInput is an input type that accepts DatahubTaskTransformsParamFailureParamArgs and DatahubTaskTransformsParamFailureParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFailureParamInput` via:
 //
-//          DatahubTaskTransformsParamFailureParamArgs{...}
+//	DatahubTaskTransformsParamFailureParamArgs{...}
 type DatahubTaskTransformsParamFailureParamInput interface {
 	pulumi.Input
 
@@ -20212,11 +20215,11 @@ func (i DatahubTaskTransformsParamFailureParamArgs) ToDatahubTaskTransformsParam
 // DatahubTaskTransformsParamFailureParamPtrInput is an input type that accepts DatahubTaskTransformsParamFailureParamArgs, DatahubTaskTransformsParamFailureParamPtr and DatahubTaskTransformsParamFailureParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFailureParamPtrInput` via:
 //
-//          DatahubTaskTransformsParamFailureParamArgs{...}
+//	        DatahubTaskTransformsParamFailureParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFailureParamPtrInput interface {
 	pulumi.Input
 
@@ -20422,7 +20425,7 @@ type DatahubTaskTransformsParamFailureParamKafkaParam struct {
 // DatahubTaskTransformsParamFailureParamKafkaParamInput is an input type that accepts DatahubTaskTransformsParamFailureParamKafkaParamArgs and DatahubTaskTransformsParamFailureParamKafkaParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFailureParamKafkaParamInput` via:
 //
-//          DatahubTaskTransformsParamFailureParamKafkaParamArgs{...}
+//	DatahubTaskTransformsParamFailureParamKafkaParamArgs{...}
 type DatahubTaskTransformsParamFailureParamKafkaParamInput interface {
 	pulumi.Input
 
@@ -20488,11 +20491,11 @@ func (i DatahubTaskTransformsParamFailureParamKafkaParamArgs) ToDatahubTaskTrans
 // DatahubTaskTransformsParamFailureParamKafkaParamPtrInput is an input type that accepts DatahubTaskTransformsParamFailureParamKafkaParamArgs, DatahubTaskTransformsParamFailureParamKafkaParamPtr and DatahubTaskTransformsParamFailureParamKafkaParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFailureParamKafkaParamPtrInput` via:
 //
-//          DatahubTaskTransformsParamFailureParamKafkaParamArgs{...}
+//	        DatahubTaskTransformsParamFailureParamKafkaParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFailureParamKafkaParamPtrInput interface {
 	pulumi.Input
 
@@ -20822,7 +20825,7 @@ type DatahubTaskTransformsParamFailureParamKafkaParamTableMapping struct {
 // DatahubTaskTransformsParamFailureParamKafkaParamTableMappingInput is an input type that accepts DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArgs and DatahubTaskTransformsParamFailureParamKafkaParamTableMappingOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFailureParamKafkaParamTableMappingInput` via:
 //
-//          DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArgs{...}
+//	DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArgs{...}
 type DatahubTaskTransformsParamFailureParamKafkaParamTableMappingInput interface {
 	pulumi.Input
 
@@ -20856,7 +20859,7 @@ func (i DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArgs) ToData
 // DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArrayInput is an input type that accepts DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArray and DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArrayInput` via:
 //
-//          DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArray{ DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArgs{...} }
+//	DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArray{ DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArgs{...} }
 type DatahubTaskTransformsParamFailureParamKafkaParamTableMappingArrayInput interface {
 	pulumi.Input
 
@@ -20952,7 +20955,7 @@ type DatahubTaskTransformsParamFailureParamTopicParam struct {
 // DatahubTaskTransformsParamFailureParamTopicParamInput is an input type that accepts DatahubTaskTransformsParamFailureParamTopicParamArgs and DatahubTaskTransformsParamFailureParamTopicParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFailureParamTopicParamInput` via:
 //
-//          DatahubTaskTransformsParamFailureParamTopicParamArgs{...}
+//	DatahubTaskTransformsParamFailureParamTopicParamArgs{...}
 type DatahubTaskTransformsParamFailureParamTopicParamInput interface {
 	pulumi.Input
 
@@ -21000,11 +21003,11 @@ func (i DatahubTaskTransformsParamFailureParamTopicParamArgs) ToDatahubTaskTrans
 // DatahubTaskTransformsParamFailureParamTopicParamPtrInput is an input type that accepts DatahubTaskTransformsParamFailureParamTopicParamArgs, DatahubTaskTransformsParamFailureParamTopicParamPtr and DatahubTaskTransformsParamFailureParamTopicParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFailureParamTopicParamPtrInput` via:
 //
-//          DatahubTaskTransformsParamFailureParamTopicParamArgs{...}
+//	        DatahubTaskTransformsParamFailureParamTopicParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFailureParamTopicParamPtrInput interface {
 	pulumi.Input
 
@@ -21205,7 +21208,7 @@ type DatahubTaskTransformsParamFieldChain struct {
 // DatahubTaskTransformsParamFieldChainInput is an input type that accepts DatahubTaskTransformsParamFieldChainArgs and DatahubTaskTransformsParamFieldChainOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainArgs{...}
+//	DatahubTaskTransformsParamFieldChainArgs{...}
 type DatahubTaskTransformsParamFieldChainInput interface {
 	pulumi.Input
 
@@ -21247,7 +21250,7 @@ func (i DatahubTaskTransformsParamFieldChainArgs) ToDatahubTaskTransformsParamFi
 // DatahubTaskTransformsParamFieldChainArrayInput is an input type that accepts DatahubTaskTransformsParamFieldChainArray and DatahubTaskTransformsParamFieldChainArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainArrayInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainArray{ DatahubTaskTransformsParamFieldChainArgs{...} }
+//	DatahubTaskTransformsParamFieldChainArray{ DatahubTaskTransformsParamFieldChainArgs{...} }
 type DatahubTaskTransformsParamFieldChainArrayInput interface {
 	pulumi.Input
 
@@ -21365,7 +21368,7 @@ type DatahubTaskTransformsParamFieldChainAnalyse struct {
 // DatahubTaskTransformsParamFieldChainAnalyseInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseArgs and DatahubTaskTransformsParamFieldChainAnalyseOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseArgs{...}
+//	DatahubTaskTransformsParamFieldChainAnalyseArgs{...}
 type DatahubTaskTransformsParamFieldChainAnalyseInput interface {
 	pulumi.Input
 
@@ -21450,7 +21453,7 @@ type DatahubTaskTransformsParamFieldChainAnalyseResult struct {
 // DatahubTaskTransformsParamFieldChainAnalyseResultInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultArgs and DatahubTaskTransformsParamFieldChainAnalyseResultOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultArgs{...}
+//	DatahubTaskTransformsParamFieldChainAnalyseResultArgs{...}
 type DatahubTaskTransformsParamFieldChainAnalyseResultInput interface {
 	pulumi.Input
 
@@ -21490,7 +21493,7 @@ func (i DatahubTaskTransformsParamFieldChainAnalyseResultArgs) ToDatahubTaskTran
 // DatahubTaskTransformsParamFieldChainAnalyseResultArrayInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultArray and DatahubTaskTransformsParamFieldChainAnalyseResultArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultArrayInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultArray{ DatahubTaskTransformsParamFieldChainAnalyseResultArgs{...} }
+//	DatahubTaskTransformsParamFieldChainAnalyseResultArray{ DatahubTaskTransformsParamFieldChainAnalyseResultArgs{...} }
 type DatahubTaskTransformsParamFieldChainAnalyseResultArrayInput interface {
 	pulumi.Input
 
@@ -21611,7 +21614,7 @@ type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperate struct {
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs{...}
+//	DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs{...}
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateInput interface {
 	pulumi.Input
 
@@ -21665,11 +21668,11 @@ func (i DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs) ToDat
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperatePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs, DatahubTaskTransformsParamFieldChainAnalyseResultValueOperatePtr and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperatePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperatePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs{...}
+//	        DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperatePtrInput interface {
 	pulumi.Input
 
@@ -21698,7 +21701,7 @@ func (i *datahubTaskTransformsParamFieldChainAnalyseResultValueOperatePtrType) T
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArrayInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArray and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArrayInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArray{ DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs{...} }
+//	DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArray{ DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArgs{...} }
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateArrayInput interface {
 	pulumi.Input
 
@@ -21966,7 +21969,7 @@ type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDate struct {
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateArgs and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateArgs{...}
+//	DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateArgs{...}
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateInput interface {
 	pulumi.Input
 
@@ -22006,11 +22009,11 @@ func (i DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateArgs) T
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDatePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateArgs, DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDatePtr and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDatePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDatePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateArgs{...}
+//	        DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDateArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateDatePtrInput interface {
 	pulumi.Input
 
@@ -22139,7 +22142,7 @@ type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplac
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplaceInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplaceArgs and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplaceOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplaceInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplaceArgs{...}
+//	DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplaceArgs{...}
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplaceInput interface {
 	pulumi.Input
 
@@ -22177,11 +22180,11 @@ func (i DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathRep
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplacePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplaceArgs, DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplacePtr and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplacePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplacePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplaceArgs{...}
+//	        DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplaceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateJsonPathReplacePtrInput interface {
 	pulumi.Input
 
@@ -22301,7 +22304,7 @@ type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKV struct {
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVArgs and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVArgs{...}
+//	DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVArgs{...}
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVInput interface {
 	pulumi.Input
 
@@ -22341,11 +22344,11 @@ func (i DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVArgs) ToD
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVPtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVArgs, DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVPtr and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVPtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVArgs{...}
+//	        DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateKVPtrInput interface {
 	pulumi.Input
 
@@ -22476,7 +22479,7 @@ type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplace s
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplaceInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplaceArgs and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplaceOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplaceInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplaceArgs{...}
+//	DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplaceArgs{...}
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplaceInput interface {
 	pulumi.Input
 
@@ -22514,11 +22517,11 @@ func (i DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplac
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplacePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplaceArgs, DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplacePtr and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplacePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplacePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplaceArgs{...}
+//	        DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplaceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateRegexReplacePtrInput interface {
 	pulumi.Input
 
@@ -22636,7 +22639,7 @@ type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplace struct
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceArgs and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceArgs{...}
+//	DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceArgs{...}
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceInput interface {
 	pulumi.Input
 
@@ -22674,11 +22677,11 @@ func (i DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceArgs
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplacePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceArgs, DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplacePtr and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplacePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplacePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceArgs{...}
+//	        DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplaceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateReplacePtrInput interface {
 	pulumi.Input
 
@@ -22790,7 +22793,7 @@ type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplit struct {
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitArgs and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitArgs{...}
+//	DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitArgs{...}
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitInput interface {
 	pulumi.Input
 
@@ -22826,11 +22829,11 @@ func (i DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitArgs) 
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitPtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitArgs, DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitPtr and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitPtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitArgs{...}
+//	        DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSplitPtrInput interface {
 	pulumi.Input
 
@@ -22929,7 +22932,7 @@ type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstr struct 
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrArgs and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrArgs{...}
+//	DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrArgs{...}
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrInput interface {
 	pulumi.Input
 
@@ -22967,11 +22970,11 @@ func (i DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrArgs)
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrPtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrArgs, DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrPtr and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrPtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrArgs{...}
+//	        DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateSubstrPtrInput interface {
 	pulumi.Input
 
@@ -23083,7 +23086,7 @@ type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecode stru
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeArgs and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeArgs{...}
+//	DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeArgs{...}
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeInput interface {
 	pulumi.Input
 
@@ -23119,11 +23122,11 @@ func (i DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeAr
 // DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeArgs, DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodePtr and DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeArgs{...}
+//	        DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainAnalyseResultValueOperateUrlDecodePtrInput interface {
 	pulumi.Input
 
@@ -23234,7 +23237,7 @@ type DatahubTaskTransformsParamFieldChainSMT struct {
 // DatahubTaskTransformsParamFieldChainSMTInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTArgs and DatahubTaskTransformsParamFieldChainSMTOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTArgs{...}
+//	DatahubTaskTransformsParamFieldChainSMTArgs{...}
 type DatahubTaskTransformsParamFieldChainSMTInput interface {
 	pulumi.Input
 
@@ -23274,7 +23277,7 @@ func (i DatahubTaskTransformsParamFieldChainSMTArgs) ToDatahubTaskTransformsPara
 // DatahubTaskTransformsParamFieldChainSMTArrayInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTArray and DatahubTaskTransformsParamFieldChainSMTArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTArrayInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTArray{ DatahubTaskTransformsParamFieldChainSMTArgs{...} }
+//	DatahubTaskTransformsParamFieldChainSMTArray{ DatahubTaskTransformsParamFieldChainSMTArgs{...} }
 type DatahubTaskTransformsParamFieldChainSMTArrayInput interface {
 	pulumi.Input
 
@@ -23395,7 +23398,7 @@ type DatahubTaskTransformsParamFieldChainSMTValueOperate struct {
 // DatahubTaskTransformsParamFieldChainSMTValueOperateInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateArgs and DatahubTaskTransformsParamFieldChainSMTValueOperateOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateArgs{...}
+//	DatahubTaskTransformsParamFieldChainSMTValueOperateArgs{...}
 type DatahubTaskTransformsParamFieldChainSMTValueOperateInput interface {
 	pulumi.Input
 
@@ -23449,11 +23452,11 @@ func (i DatahubTaskTransformsParamFieldChainSMTValueOperateArgs) ToDatahubTaskTr
 // DatahubTaskTransformsParamFieldChainSMTValueOperatePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateArgs, DatahubTaskTransformsParamFieldChainSMTValueOperatePtr and DatahubTaskTransformsParamFieldChainSMTValueOperatePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperatePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSMTValueOperateArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSMTValueOperatePtrInput interface {
 	pulumi.Input
 
@@ -23482,7 +23485,7 @@ func (i *datahubTaskTransformsParamFieldChainSMTValueOperatePtrType) ToDatahubTa
 // DatahubTaskTransformsParamFieldChainSMTValueOperateArrayInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateArray and DatahubTaskTransformsParamFieldChainSMTValueOperateArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateArrayInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateArray{ DatahubTaskTransformsParamFieldChainSMTValueOperateArgs{...} }
+//	DatahubTaskTransformsParamFieldChainSMTValueOperateArray{ DatahubTaskTransformsParamFieldChainSMTValueOperateArgs{...} }
 type DatahubTaskTransformsParamFieldChainSMTValueOperateArrayInput interface {
 	pulumi.Input
 
@@ -23750,7 +23753,7 @@ type DatahubTaskTransformsParamFieldChainSMTValueOperateDate struct {
 // DatahubTaskTransformsParamFieldChainSMTValueOperateDateInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs and DatahubTaskTransformsParamFieldChainSMTValueOperateDateOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateDateInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs{...}
+//	DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs{...}
 type DatahubTaskTransformsParamFieldChainSMTValueOperateDateInput interface {
 	pulumi.Input
 
@@ -23790,11 +23793,11 @@ func (i DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs) ToDatahubTa
 // DatahubTaskTransformsParamFieldChainSMTValueOperateDatePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs, DatahubTaskTransformsParamFieldChainSMTValueOperateDatePtr and DatahubTaskTransformsParamFieldChainSMTValueOperateDatePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateDatePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSMTValueOperateDatePtrInput interface {
 	pulumi.Input
 
@@ -23923,7 +23926,7 @@ type DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplace struct {
 // DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceArgs and DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceArgs{...}
+//	DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceArgs{...}
 type DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceInput interface {
 	pulumi.Input
 
@@ -23961,11 +23964,11 @@ func (i DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceArgs) 
 // DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplacePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceArgs, DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplacePtr and DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplacePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplacePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplaceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSMTValueOperateJsonPathReplacePtrInput interface {
 	pulumi.Input
 
@@ -24081,7 +24084,7 @@ type DatahubTaskTransformsParamFieldChainSMTValueOperateKV struct {
 // DatahubTaskTransformsParamFieldChainSMTValueOperateKVInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateKVArgs and DatahubTaskTransformsParamFieldChainSMTValueOperateKVOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateKVInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateKVArgs{...}
+//	DatahubTaskTransformsParamFieldChainSMTValueOperateKVArgs{...}
 type DatahubTaskTransformsParamFieldChainSMTValueOperateKVInput interface {
 	pulumi.Input
 
@@ -24121,11 +24124,11 @@ func (i DatahubTaskTransformsParamFieldChainSMTValueOperateKVArgs) ToDatahubTask
 // DatahubTaskTransformsParamFieldChainSMTValueOperateKVPtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateKVArgs, DatahubTaskTransformsParamFieldChainSMTValueOperateKVPtr and DatahubTaskTransformsParamFieldChainSMTValueOperateKVPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateKVPtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateKVArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSMTValueOperateKVArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSMTValueOperateKVPtrInput interface {
 	pulumi.Input
 
@@ -24254,7 +24257,7 @@ type DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplace struct {
 // DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceArgs and DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceArgs{...}
+//	DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceArgs{...}
 type DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceInput interface {
 	pulumi.Input
 
@@ -24292,11 +24295,11 @@ func (i DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceArgs) ToD
 // DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplacePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceArgs, DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplacePtr and DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplacePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplacePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplaceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSMTValueOperateRegexReplacePtrInput interface {
 	pulumi.Input
 
@@ -24410,7 +24413,7 @@ type DatahubTaskTransformsParamFieldChainSMTValueOperateReplace struct {
 // DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceArgs and DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceArgs{...}
+//	DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceArgs{...}
 type DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceInput interface {
 	pulumi.Input
 
@@ -24448,11 +24451,11 @@ func (i DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceArgs) ToDatahu
 // DatahubTaskTransformsParamFieldChainSMTValueOperateReplacePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceArgs, DatahubTaskTransformsParamFieldChainSMTValueOperateReplacePtr and DatahubTaskTransformsParamFieldChainSMTValueOperateReplacePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateReplacePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSMTValueOperateReplaceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSMTValueOperateReplacePtrInput interface {
 	pulumi.Input
 
@@ -24564,7 +24567,7 @@ type DatahubTaskTransformsParamFieldChainSMTValueOperateSplit struct {
 // DatahubTaskTransformsParamFieldChainSMTValueOperateSplitInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateSplitArgs and DatahubTaskTransformsParamFieldChainSMTValueOperateSplitOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateSplitInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateSplitArgs{...}
+//	DatahubTaskTransformsParamFieldChainSMTValueOperateSplitArgs{...}
 type DatahubTaskTransformsParamFieldChainSMTValueOperateSplitInput interface {
 	pulumi.Input
 
@@ -24600,11 +24603,11 @@ func (i DatahubTaskTransformsParamFieldChainSMTValueOperateSplitArgs) ToDatahubT
 // DatahubTaskTransformsParamFieldChainSMTValueOperateSplitPtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateSplitArgs, DatahubTaskTransformsParamFieldChainSMTValueOperateSplitPtr and DatahubTaskTransformsParamFieldChainSMTValueOperateSplitPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateSplitPtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateSplitArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSMTValueOperateSplitArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSMTValueOperateSplitPtrInput interface {
 	pulumi.Input
 
@@ -24703,7 +24706,7 @@ type DatahubTaskTransformsParamFieldChainSMTValueOperateSubstr struct {
 // DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrArgs and DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrArgs{...}
+//	DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrArgs{...}
 type DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrInput interface {
 	pulumi.Input
 
@@ -24741,11 +24744,11 @@ func (i DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrArgs) ToDatahub
 // DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrPtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrArgs, DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrPtr and DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrPtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSMTValueOperateSubstrPtrInput interface {
 	pulumi.Input
 
@@ -24857,7 +24860,7 @@ type DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecode struct {
 // DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeArgs and DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeArgs{...}
+//	DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeArgs{...}
 type DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeInput interface {
 	pulumi.Input
 
@@ -24893,11 +24896,11 @@ func (i DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeArgs) ToData
 // DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeArgs, DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodePtr and DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSMTValueOperateUrlDecodePtrInput interface {
 	pulumi.Input
 
@@ -24994,7 +24997,7 @@ type DatahubTaskTransformsParamFieldChainSecondaryAnalyse struct {
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseArgs and DatahubTaskTransformsParamFieldChainSecondaryAnalyseOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseArgs{...}
+//	DatahubTaskTransformsParamFieldChainSecondaryAnalyseArgs{...}
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseInput interface {
 	pulumi.Input
 
@@ -25030,11 +25033,11 @@ func (i DatahubTaskTransformsParamFieldChainSecondaryAnalyseArgs) ToDatahubTaskT
 // DatahubTaskTransformsParamFieldChainSecondaryAnalysePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseArgs, DatahubTaskTransformsParamFieldChainSecondaryAnalysePtr and DatahubTaskTransformsParamFieldChainSecondaryAnalysePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalysePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSecondaryAnalyseArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSecondaryAnalysePtrInput interface {
 	pulumi.Input
 
@@ -25143,7 +25146,7 @@ type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResult struct {
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArgs and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArgs{...}
+//	DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArgs{...}
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultInput interface {
 	pulumi.Input
 
@@ -25183,7 +25186,7 @@ func (i DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArgs) ToDatahu
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArrayInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArray and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArrayInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArray{ DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArgs{...} }
+//	DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArray{ DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArgs{...} }
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultArrayInput interface {
 	pulumi.Input
 
@@ -25304,7 +25307,7 @@ type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperate stru
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs{...}
+//	DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs{...}
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateInput interface {
 	pulumi.Input
 
@@ -25358,11 +25361,11 @@ func (i DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateAr
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperatePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs, DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperatePtr and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperatePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperatePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperatePtrInput interface {
 	pulumi.Input
 
@@ -25391,7 +25394,7 @@ func (i *datahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateP
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArrayInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArray and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArrayInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArray{ DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs{...} }
+//	DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArray{ DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArgs{...} }
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateArrayInput interface {
 	pulumi.Input
 
@@ -25661,7 +25664,7 @@ type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDate 
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDateInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDateArgs and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDateOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDateInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDateArgs{...}
+//	DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDateArgs{...}
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDateInput interface {
 	pulumi.Input
 
@@ -25701,11 +25704,11 @@ func (i DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDa
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDatePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDateArgs, DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDatePtr and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDatePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDatePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDateArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDateArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateDatePtrInput interface {
 	pulumi.Input
 
@@ -25840,7 +25843,7 @@ type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonP
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplaceInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplaceArgs and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplaceOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplaceInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplaceArgs{...}
+//	DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplaceArgs{...}
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplaceInput interface {
 	pulumi.Input
 
@@ -25878,11 +25881,11 @@ func (i DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJs
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplacePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplaceArgs, DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplacePtr and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplacePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplacePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplaceArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplaceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateJsonPathReplacePtrInput interface {
 	pulumi.Input
 
@@ -26002,7 +26005,7 @@ type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKV st
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVArgs and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVArgs{...}
+//	DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVArgs{...}
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVInput interface {
 	pulumi.Input
 
@@ -26042,11 +26045,11 @@ func (i DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKV
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVPtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVArgs, DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVPtr and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVPtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateKVPtrInput interface {
 	pulumi.Input
 
@@ -26181,7 +26184,7 @@ type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegex
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplaceInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplaceArgs and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplaceOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplaceInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplaceArgs{...}
+//	DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplaceArgs{...}
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplaceInput interface {
 	pulumi.Input
 
@@ -26219,11 +26222,11 @@ func (i DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRe
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplacePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplaceArgs, DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplacePtr and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplacePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplacePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplaceArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplaceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRegexReplacePtrInput interface {
 	pulumi.Input
 
@@ -26341,7 +26344,7 @@ type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRepla
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplaceInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplaceArgs and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplaceOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplaceInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplaceArgs{...}
+//	DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplaceArgs{...}
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplaceInput interface {
 	pulumi.Input
 
@@ -26379,11 +26382,11 @@ func (i DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateRe
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplacePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplaceArgs, DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplacePtr and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplacePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplacePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplaceArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplaceArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateReplacePtrInput interface {
 	pulumi.Input
 
@@ -26499,7 +26502,7 @@ type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplit
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitArgs and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitArgs{...}
+//	DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitArgs{...}
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitInput interface {
 	pulumi.Input
 
@@ -26535,11 +26538,11 @@ func (i DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSp
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitPtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitArgs, DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitPtr and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitPtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSplitPtrInput interface {
 	pulumi.Input
 
@@ -26640,7 +26643,7 @@ type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubst
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrArgs and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrArgs{...}
+//	DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrArgs{...}
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrInput interface {
 	pulumi.Input
 
@@ -26678,11 +26681,11 @@ func (i DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSu
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrPtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrArgs, DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrPtr and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrPtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateSubstrPtrInput interface {
 	pulumi.Input
 
@@ -26796,7 +26799,7 @@ type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDe
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodeInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodeArgs and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodeOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodeInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodeArgs{...}
+//	DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodeArgs{...}
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodeInput interface {
 	pulumi.Input
 
@@ -26832,11 +26835,11 @@ func (i DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUr
 // DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodePtrInput is an input type that accepts DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodeArgs, DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodePtr and DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodePtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodePtrInput` via:
 //
-//          DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodeArgs{...}
+//	        DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamFieldChainSecondaryAnalyseResultValueOperateUrlDecodePtrInput interface {
 	pulumi.Input
 
@@ -26941,7 +26944,7 @@ type DatahubTaskTransformsParamFilterParam struct {
 // DatahubTaskTransformsParamFilterParamInput is an input type that accepts DatahubTaskTransformsParamFilterParamArgs and DatahubTaskTransformsParamFilterParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFilterParamInput` via:
 //
-//          DatahubTaskTransformsParamFilterParamArgs{...}
+//	DatahubTaskTransformsParamFilterParamArgs{...}
 type DatahubTaskTransformsParamFilterParamInput interface {
 	pulumi.Input
 
@@ -26975,7 +26978,7 @@ func (i DatahubTaskTransformsParamFilterParamArgs) ToDatahubTaskTransformsParamF
 // DatahubTaskTransformsParamFilterParamArrayInput is an input type that accepts DatahubTaskTransformsParamFilterParamArray and DatahubTaskTransformsParamFilterParamArrayOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamFilterParamArrayInput` via:
 //
-//          DatahubTaskTransformsParamFilterParamArray{ DatahubTaskTransformsParamFilterParamArgs{...} }
+//	DatahubTaskTransformsParamFilterParamArray{ DatahubTaskTransformsParamFilterParamArgs{...} }
 type DatahubTaskTransformsParamFilterParamArrayInput interface {
 	pulumi.Input
 
@@ -27063,7 +27066,7 @@ type DatahubTaskTransformsParamRowParam struct {
 // DatahubTaskTransformsParamRowParamInput is an input type that accepts DatahubTaskTransformsParamRowParamArgs and DatahubTaskTransformsParamRowParamOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamRowParamInput` via:
 //
-//          DatahubTaskTransformsParamRowParamArgs{...}
+//	DatahubTaskTransformsParamRowParamArgs{...}
 type DatahubTaskTransformsParamRowParamInput interface {
 	pulumi.Input
 
@@ -27103,11 +27106,11 @@ func (i DatahubTaskTransformsParamRowParamArgs) ToDatahubTaskTransformsParamRowP
 // DatahubTaskTransformsParamRowParamPtrInput is an input type that accepts DatahubTaskTransformsParamRowParamArgs, DatahubTaskTransformsParamRowParamPtr and DatahubTaskTransformsParamRowParamPtrOutput values.
 // You can construct a concrete instance of `DatahubTaskTransformsParamRowParamPtrInput` via:
 //
-//          DatahubTaskTransformsParamRowParamArgs{...}
+//	        DatahubTaskTransformsParamRowParamArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatahubTaskTransformsParamRowParamPtrInput interface {
 	pulumi.Input
 
@@ -27238,7 +27241,7 @@ type InstanceConfig struct {
 // InstanceConfigInput is an input type that accepts InstanceConfigArgs and InstanceConfigOutput values.
 // You can construct a concrete instance of `InstanceConfigInput` via:
 //
-//          InstanceConfigArgs{...}
+//	InstanceConfigArgs{...}
 type InstanceConfigInput interface {
 	pulumi.Input
 
@@ -27278,11 +27281,11 @@ func (i InstanceConfigArgs) ToInstanceConfigPtrOutputWithContext(ctx context.Con
 // InstanceConfigPtrInput is an input type that accepts InstanceConfigArgs, InstanceConfigPtr and InstanceConfigPtrOutput values.
 // You can construct a concrete instance of `InstanceConfigPtrInput` via:
 //
-//          InstanceConfigArgs{...}
+//	        InstanceConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type InstanceConfigPtrInput interface {
 	pulumi.Input
 
@@ -27415,7 +27418,7 @@ type InstanceDynamicRetentionConfig struct {
 // InstanceDynamicRetentionConfigInput is an input type that accepts InstanceDynamicRetentionConfigArgs and InstanceDynamicRetentionConfigOutput values.
 // You can construct a concrete instance of `InstanceDynamicRetentionConfigInput` via:
 //
-//          InstanceDynamicRetentionConfigArgs{...}
+//	InstanceDynamicRetentionConfigArgs{...}
 type InstanceDynamicRetentionConfigInput interface {
 	pulumi.Input
 
@@ -27457,11 +27460,11 @@ func (i InstanceDynamicRetentionConfigArgs) ToInstanceDynamicRetentionConfigPtrO
 // InstanceDynamicRetentionConfigPtrInput is an input type that accepts InstanceDynamicRetentionConfigArgs, InstanceDynamicRetentionConfigPtr and InstanceDynamicRetentionConfigPtrOutput values.
 // You can construct a concrete instance of `InstanceDynamicRetentionConfigPtrInput` via:
 //
-//          InstanceDynamicRetentionConfigArgs{...}
+//	        InstanceDynamicRetentionConfigArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type InstanceDynamicRetentionConfigPtrInput interface {
 	pulumi.Input
 
@@ -27605,7 +27608,7 @@ type InstanceTag struct {
 // InstanceTagInput is an input type that accepts InstanceTagArgs and InstanceTagOutput values.
 // You can construct a concrete instance of `InstanceTagInput` via:
 //
-//          InstanceTagArgs{...}
+//	InstanceTagArgs{...}
 type InstanceTagInput interface {
 	pulumi.Input
 
@@ -27635,7 +27638,7 @@ func (i InstanceTagArgs) ToInstanceTagOutputWithContext(ctx context.Context) Ins
 // InstanceTagArrayInput is an input type that accepts InstanceTagArray and InstanceTagArrayOutput values.
 // You can construct a concrete instance of `InstanceTagArrayInput` via:
 //
-//          InstanceTagArray{ InstanceTagArgs{...} }
+//	InstanceTagArray{ InstanceTagArgs{...} }
 type InstanceTagArrayInput interface {
 	pulumi.Input
 
@@ -27711,7 +27714,7 @@ type RouteBrokerVipList struct {
 // RouteBrokerVipListInput is an input type that accepts RouteBrokerVipListArgs and RouteBrokerVipListOutput values.
 // You can construct a concrete instance of `RouteBrokerVipListInput` via:
 //
-//          RouteBrokerVipListArgs{...}
+//	RouteBrokerVipListArgs{...}
 type RouteBrokerVipListInput interface {
 	pulumi.Input
 
@@ -27741,7 +27744,7 @@ func (i RouteBrokerVipListArgs) ToRouteBrokerVipListOutputWithContext(ctx contex
 // RouteBrokerVipListArrayInput is an input type that accepts RouteBrokerVipListArray and RouteBrokerVipListArrayOutput values.
 // You can construct a concrete instance of `RouteBrokerVipListArrayInput` via:
 //
-//          RouteBrokerVipListArray{ RouteBrokerVipListArgs{...} }
+//	RouteBrokerVipListArray{ RouteBrokerVipListArgs{...} }
 type RouteBrokerVipListArrayInput interface {
 	pulumi.Input
 
@@ -27817,7 +27820,7 @@ type RouteVipList struct {
 // RouteVipListInput is an input type that accepts RouteVipListArgs and RouteVipListOutput values.
 // You can construct a concrete instance of `RouteVipListInput` via:
 //
-//          RouteVipListArgs{...}
+//	RouteVipListArgs{...}
 type RouteVipListInput interface {
 	pulumi.Input
 
@@ -27847,7 +27850,7 @@ func (i RouteVipListArgs) ToRouteVipListOutputWithContext(ctx context.Context) R
 // RouteVipListArrayInput is an input type that accepts RouteVipListArray and RouteVipListArrayOutput values.
 // You can construct a concrete instance of `RouteVipListArrayInput` via:
 //
-//          RouteVipListArray{ RouteVipListArgs{...} }
+//	RouteVipListArray{ RouteVipListArgs{...} }
 type RouteVipListArrayInput interface {
 	pulumi.Input
 
@@ -27931,7 +27934,7 @@ type GetAclsAclList struct {
 // GetAclsAclListInput is an input type that accepts GetAclsAclListArgs and GetAclsAclListOutput values.
 // You can construct a concrete instance of `GetAclsAclListInput` via:
 //
-//          GetAclsAclListArgs{...}
+//	GetAclsAclListArgs{...}
 type GetAclsAclListInput interface {
 	pulumi.Input
 
@@ -27969,7 +27972,7 @@ func (i GetAclsAclListArgs) ToGetAclsAclListOutputWithContext(ctx context.Contex
 // GetAclsAclListArrayInput is an input type that accepts GetAclsAclListArray and GetAclsAclListArrayOutput values.
 // You can construct a concrete instance of `GetAclsAclListArrayInput` via:
 //
-//          GetAclsAclListArray{ GetAclsAclListArgs{...} }
+//	GetAclsAclListArray{ GetAclsAclListArgs{...} }
 type GetAclsAclListArrayInput interface {
 	pulumi.Input
 
@@ -28065,7 +28068,7 @@ type GetConnectResourceResult struct {
 // GetConnectResourceResultInput is an input type that accepts GetConnectResourceResultArgs and GetConnectResourceResultOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultInput` via:
 //
-//          GetConnectResourceResultArgs{...}
+//	GetConnectResourceResultArgs{...}
 type GetConnectResourceResultInput interface {
 	pulumi.Input
 
@@ -28095,7 +28098,7 @@ func (i GetConnectResourceResultArgs) ToGetConnectResourceResultOutputWithContex
 // GetConnectResourceResultArrayInput is an input type that accepts GetConnectResourceResultArray and GetConnectResourceResultArrayOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultArrayInput` via:
 //
-//          GetConnectResourceResultArray{ GetConnectResourceResultArgs{...} }
+//	GetConnectResourceResultArray{ GetConnectResourceResultArgs{...} }
 type GetConnectResourceResultArrayInput interface {
 	pulumi.Input
 
@@ -28213,7 +28216,7 @@ type GetConnectResourceResultConnectResourceList struct {
 // GetConnectResourceResultConnectResourceListInput is an input type that accepts GetConnectResourceResultConnectResourceListArgs and GetConnectResourceResultConnectResourceListOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListInput` via:
 //
-//          GetConnectResourceResultConnectResourceListArgs{...}
+//	GetConnectResourceResultConnectResourceListArgs{...}
 type GetConnectResourceResultConnectResourceListInput interface {
 	pulumi.Input
 
@@ -28283,7 +28286,7 @@ func (i GetConnectResourceResultConnectResourceListArgs) ToGetConnectResourceRes
 // GetConnectResourceResultConnectResourceListArrayInput is an input type that accepts GetConnectResourceResultConnectResourceListArray and GetConnectResourceResultConnectResourceListArrayOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListArrayInput` via:
 //
-//          GetConnectResourceResultConnectResourceListArray{ GetConnectResourceResultConnectResourceListArgs{...} }
+//	GetConnectResourceResultConnectResourceListArray{ GetConnectResourceResultConnectResourceListArgs{...} }
 type GetConnectResourceResultConnectResourceListArrayInput interface {
 	pulumi.Input
 
@@ -28493,7 +28496,7 @@ type GetConnectResourceResultConnectResourceListClickhouseConnectParam struct {
 // GetConnectResourceResultConnectResourceListClickhouseConnectParamInput is an input type that accepts GetConnectResourceResultConnectResourceListClickhouseConnectParamArgs and GetConnectResourceResultConnectResourceListClickhouseConnectParamOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListClickhouseConnectParamInput` via:
 //
-//          GetConnectResourceResultConnectResourceListClickhouseConnectParamArgs{...}
+//	GetConnectResourceResultConnectResourceListClickhouseConnectParamArgs{...}
 type GetConnectResourceResultConnectResourceListClickhouseConnectParamInput interface {
 	pulumi.Input
 
@@ -28535,7 +28538,7 @@ func (i GetConnectResourceResultConnectResourceListClickhouseConnectParamArgs) T
 // GetConnectResourceResultConnectResourceListClickhouseConnectParamArrayInput is an input type that accepts GetConnectResourceResultConnectResourceListClickhouseConnectParamArray and GetConnectResourceResultConnectResourceListClickhouseConnectParamArrayOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListClickhouseConnectParamArrayInput` via:
 //
-//          GetConnectResourceResultConnectResourceListClickhouseConnectParamArray{ GetConnectResourceResultConnectResourceListClickhouseConnectParamArgs{...} }
+//	GetConnectResourceResultConnectResourceListClickhouseConnectParamArray{ GetConnectResourceResultConnectResourceListClickhouseConnectParamArgs{...} }
 type GetConnectResourceResultConnectResourceListClickhouseConnectParamArrayInput interface {
 	pulumi.Input
 
@@ -28649,7 +28652,7 @@ type GetConnectResourceResultConnectResourceListCtsdbConnectParam struct {
 // GetConnectResourceResultConnectResourceListCtsdbConnectParamInput is an input type that accepts GetConnectResourceResultConnectResourceListCtsdbConnectParamArgs and GetConnectResourceResultConnectResourceListCtsdbConnectParamOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListCtsdbConnectParamInput` via:
 //
-//          GetConnectResourceResultConnectResourceListCtsdbConnectParamArgs{...}
+//	GetConnectResourceResultConnectResourceListCtsdbConnectParamArgs{...}
 type GetConnectResourceResultConnectResourceListCtsdbConnectParamInput interface {
 	pulumi.Input
 
@@ -28687,7 +28690,7 @@ func (i GetConnectResourceResultConnectResourceListCtsdbConnectParamArgs) ToGetC
 // GetConnectResourceResultConnectResourceListCtsdbConnectParamArrayInput is an input type that accepts GetConnectResourceResultConnectResourceListCtsdbConnectParamArray and GetConnectResourceResultConnectResourceListCtsdbConnectParamArrayOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListCtsdbConnectParamArrayInput` via:
 //
-//          GetConnectResourceResultConnectResourceListCtsdbConnectParamArray{ GetConnectResourceResultConnectResourceListCtsdbConnectParamArgs{...} }
+//	GetConnectResourceResultConnectResourceListCtsdbConnectParamArray{ GetConnectResourceResultConnectResourceListCtsdbConnectParamArgs{...} }
 type GetConnectResourceResultConnectResourceListCtsdbConnectParamArrayInput interface {
 	pulumi.Input
 
@@ -28797,7 +28800,7 @@ type GetConnectResourceResultConnectResourceListDorisConnectParam struct {
 // GetConnectResourceResultConnectResourceListDorisConnectParamInput is an input type that accepts GetConnectResourceResultConnectResourceListDorisConnectParamArgs and GetConnectResourceResultConnectResourceListDorisConnectParamOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListDorisConnectParamInput` via:
 //
-//          GetConnectResourceResultConnectResourceListDorisConnectParamArgs{...}
+//	GetConnectResourceResultConnectResourceListDorisConnectParamArgs{...}
 type GetConnectResourceResultConnectResourceListDorisConnectParamInput interface {
 	pulumi.Input
 
@@ -28841,7 +28844,7 @@ func (i GetConnectResourceResultConnectResourceListDorisConnectParamArgs) ToGetC
 // GetConnectResourceResultConnectResourceListDorisConnectParamArrayInput is an input type that accepts GetConnectResourceResultConnectResourceListDorisConnectParamArray and GetConnectResourceResultConnectResourceListDorisConnectParamArrayOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListDorisConnectParamArrayInput` via:
 //
-//          GetConnectResourceResultConnectResourceListDorisConnectParamArray{ GetConnectResourceResultConnectResourceListDorisConnectParamArgs{...} }
+//	GetConnectResourceResultConnectResourceListDorisConnectParamArray{ GetConnectResourceResultConnectResourceListDorisConnectParamArgs{...} }
 type GetConnectResourceResultConnectResourceListDorisConnectParamArrayInput interface {
 	pulumi.Input
 
@@ -28962,7 +28965,7 @@ type GetConnectResourceResultConnectResourceListDtsConnectParam struct {
 // GetConnectResourceResultConnectResourceListDtsConnectParamInput is an input type that accepts GetConnectResourceResultConnectResourceListDtsConnectParamArgs and GetConnectResourceResultConnectResourceListDtsConnectParamOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListDtsConnectParamInput` via:
 //
-//          GetConnectResourceResultConnectResourceListDtsConnectParamArgs{...}
+//	GetConnectResourceResultConnectResourceListDtsConnectParamArgs{...}
 type GetConnectResourceResultConnectResourceListDtsConnectParamInput interface {
 	pulumi.Input
 
@@ -29002,7 +29005,7 @@ func (i GetConnectResourceResultConnectResourceListDtsConnectParamArgs) ToGetCon
 // GetConnectResourceResultConnectResourceListDtsConnectParamArrayInput is an input type that accepts GetConnectResourceResultConnectResourceListDtsConnectParamArray and GetConnectResourceResultConnectResourceListDtsConnectParamArrayOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListDtsConnectParamArrayInput` via:
 //
-//          GetConnectResourceResultConnectResourceListDtsConnectParamArray{ GetConnectResourceResultConnectResourceListDtsConnectParamArgs{...} }
+//	GetConnectResourceResultConnectResourceListDtsConnectParamArray{ GetConnectResourceResultConnectResourceListDtsConnectParamArgs{...} }
 type GetConnectResourceResultConnectResourceListDtsConnectParamArrayInput interface {
 	pulumi.Input
 
@@ -29115,7 +29118,7 @@ type GetConnectResourceResultConnectResourceListEsConnectParam struct {
 // GetConnectResourceResultConnectResourceListEsConnectParamInput is an input type that accepts GetConnectResourceResultConnectResourceListEsConnectParamArgs and GetConnectResourceResultConnectResourceListEsConnectParamOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListEsConnectParamInput` via:
 //
-//          GetConnectResourceResultConnectResourceListEsConnectParamArgs{...}
+//	GetConnectResourceResultConnectResourceListEsConnectParamArgs{...}
 type GetConnectResourceResultConnectResourceListEsConnectParamInput interface {
 	pulumi.Input
 
@@ -29157,7 +29160,7 @@ func (i GetConnectResourceResultConnectResourceListEsConnectParamArgs) ToGetConn
 // GetConnectResourceResultConnectResourceListEsConnectParamArrayInput is an input type that accepts GetConnectResourceResultConnectResourceListEsConnectParamArray and GetConnectResourceResultConnectResourceListEsConnectParamArrayOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListEsConnectParamArrayInput` via:
 //
-//          GetConnectResourceResultConnectResourceListEsConnectParamArray{ GetConnectResourceResultConnectResourceListEsConnectParamArgs{...} }
+//	GetConnectResourceResultConnectResourceListEsConnectParamArray{ GetConnectResourceResultConnectResourceListEsConnectParamArgs{...} }
 type GetConnectResourceResultConnectResourceListEsConnectParamArrayInput interface {
 	pulumi.Input
 
@@ -29269,7 +29272,7 @@ type GetConnectResourceResultConnectResourceListKafkaConnectParam struct {
 // GetConnectResourceResultConnectResourceListKafkaConnectParamInput is an input type that accepts GetConnectResourceResultConnectResourceListKafkaConnectParamArgs and GetConnectResourceResultConnectResourceListKafkaConnectParamOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListKafkaConnectParamInput` via:
 //
-//          GetConnectResourceResultConnectResourceListKafkaConnectParamArgs{...}
+//	GetConnectResourceResultConnectResourceListKafkaConnectParamArgs{...}
 type GetConnectResourceResultConnectResourceListKafkaConnectParamInput interface {
 	pulumi.Input
 
@@ -29305,7 +29308,7 @@ func (i GetConnectResourceResultConnectResourceListKafkaConnectParamArgs) ToGetC
 // GetConnectResourceResultConnectResourceListKafkaConnectParamArrayInput is an input type that accepts GetConnectResourceResultConnectResourceListKafkaConnectParamArray and GetConnectResourceResultConnectResourceListKafkaConnectParamArrayOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListKafkaConnectParamArrayInput` via:
 //
-//          GetConnectResourceResultConnectResourceListKafkaConnectParamArray{ GetConnectResourceResultConnectResourceListKafkaConnectParamArgs{...} }
+//	GetConnectResourceResultConnectResourceListKafkaConnectParamArray{ GetConnectResourceResultConnectResourceListKafkaConnectParamArgs{...} }
 type GetConnectResourceResultConnectResourceListKafkaConnectParamArrayInput interface {
 	pulumi.Input
 
@@ -29406,7 +29409,7 @@ type GetConnectResourceResultConnectResourceListMariaDbConnectParam struct {
 // GetConnectResourceResultConnectResourceListMariaDbConnectParamInput is an input type that accepts GetConnectResourceResultConnectResourceListMariaDbConnectParamArgs and GetConnectResourceResultConnectResourceListMariaDbConnectParamOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListMariaDbConnectParamInput` via:
 //
-//          GetConnectResourceResultConnectResourceListMariaDbConnectParamArgs{...}
+//	GetConnectResourceResultConnectResourceListMariaDbConnectParamArgs{...}
 type GetConnectResourceResultConnectResourceListMariaDbConnectParamInput interface {
 	pulumi.Input
 
@@ -29446,7 +29449,7 @@ func (i GetConnectResourceResultConnectResourceListMariaDbConnectParamArgs) ToGe
 // GetConnectResourceResultConnectResourceListMariaDbConnectParamArrayInput is an input type that accepts GetConnectResourceResultConnectResourceListMariaDbConnectParamArray and GetConnectResourceResultConnectResourceListMariaDbConnectParamArrayOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListMariaDbConnectParamArrayInput` via:
 //
-//          GetConnectResourceResultConnectResourceListMariaDbConnectParamArray{ GetConnectResourceResultConnectResourceListMariaDbConnectParamArgs{...} }
+//	GetConnectResourceResultConnectResourceListMariaDbConnectParamArray{ GetConnectResourceResultConnectResourceListMariaDbConnectParamArgs{...} }
 type GetConnectResourceResultConnectResourceListMariaDbConnectParamArrayInput interface {
 	pulumi.Input
 
@@ -29559,7 +29562,7 @@ type GetConnectResourceResultConnectResourceListMongoDbConnectParam struct {
 // GetConnectResourceResultConnectResourceListMongoDbConnectParamInput is an input type that accepts GetConnectResourceResultConnectResourceListMongoDbConnectParamArgs and GetConnectResourceResultConnectResourceListMongoDbConnectParamOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListMongoDbConnectParamInput` via:
 //
-//          GetConnectResourceResultConnectResourceListMongoDbConnectParamArgs{...}
+//	GetConnectResourceResultConnectResourceListMongoDbConnectParamArgs{...}
 type GetConnectResourceResultConnectResourceListMongoDbConnectParamInput interface {
 	pulumi.Input
 
@@ -29601,7 +29604,7 @@ func (i GetConnectResourceResultConnectResourceListMongoDbConnectParamArgs) ToGe
 // GetConnectResourceResultConnectResourceListMongoDbConnectParamArrayInput is an input type that accepts GetConnectResourceResultConnectResourceListMongoDbConnectParamArray and GetConnectResourceResultConnectResourceListMongoDbConnectParamArrayOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListMongoDbConnectParamArrayInput` via:
 //
-//          GetConnectResourceResultConnectResourceListMongoDbConnectParamArray{ GetConnectResourceResultConnectResourceListMongoDbConnectParamArgs{...} }
+//	GetConnectResourceResultConnectResourceListMongoDbConnectParamArray{ GetConnectResourceResultConnectResourceListMongoDbConnectParamArgs{...} }
 type GetConnectResourceResultConnectResourceListMongoDbConnectParamArrayInput interface {
 	pulumi.Input
 
@@ -29721,7 +29724,7 @@ type GetConnectResourceResultConnectResourceListMysqlConnectParam struct {
 // GetConnectResourceResultConnectResourceListMysqlConnectParamInput is an input type that accepts GetConnectResourceResultConnectResourceListMysqlConnectParamArgs and GetConnectResourceResultConnectResourceListMysqlConnectParamOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListMysqlConnectParamInput` via:
 //
-//          GetConnectResourceResultConnectResourceListMysqlConnectParamArgs{...}
+//	GetConnectResourceResultConnectResourceListMysqlConnectParamArgs{...}
 type GetConnectResourceResultConnectResourceListMysqlConnectParamInput interface {
 	pulumi.Input
 
@@ -29765,7 +29768,7 @@ func (i GetConnectResourceResultConnectResourceListMysqlConnectParamArgs) ToGetC
 // GetConnectResourceResultConnectResourceListMysqlConnectParamArrayInput is an input type that accepts GetConnectResourceResultConnectResourceListMysqlConnectParamArray and GetConnectResourceResultConnectResourceListMysqlConnectParamArrayOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListMysqlConnectParamArrayInput` via:
 //
-//          GetConnectResourceResultConnectResourceListMysqlConnectParamArray{ GetConnectResourceResultConnectResourceListMysqlConnectParamArgs{...} }
+//	GetConnectResourceResultConnectResourceListMysqlConnectParamArray{ GetConnectResourceResultConnectResourceListMysqlConnectParamArgs{...} }
 type GetConnectResourceResultConnectResourceListMysqlConnectParamArrayInput interface {
 	pulumi.Input
 
@@ -29890,7 +29893,7 @@ type GetConnectResourceResultConnectResourceListPostgreSqlConnectParam struct {
 // GetConnectResourceResultConnectResourceListPostgreSqlConnectParamInput is an input type that accepts GetConnectResourceResultConnectResourceListPostgreSqlConnectParamArgs and GetConnectResourceResultConnectResourceListPostgreSqlConnectParamOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListPostgreSqlConnectParamInput` via:
 //
-//          GetConnectResourceResultConnectResourceListPostgreSqlConnectParamArgs{...}
+//	GetConnectResourceResultConnectResourceListPostgreSqlConnectParamArgs{...}
 type GetConnectResourceResultConnectResourceListPostgreSqlConnectParamInput interface {
 	pulumi.Input
 
@@ -29934,7 +29937,7 @@ func (i GetConnectResourceResultConnectResourceListPostgreSqlConnectParamArgs) T
 // GetConnectResourceResultConnectResourceListPostgreSqlConnectParamArrayInput is an input type that accepts GetConnectResourceResultConnectResourceListPostgreSqlConnectParamArray and GetConnectResourceResultConnectResourceListPostgreSqlConnectParamArrayOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListPostgreSqlConnectParamArrayInput` via:
 //
-//          GetConnectResourceResultConnectResourceListPostgreSqlConnectParamArray{ GetConnectResourceResultConnectResourceListPostgreSqlConnectParamArgs{...} }
+//	GetConnectResourceResultConnectResourceListPostgreSqlConnectParamArray{ GetConnectResourceResultConnectResourceListPostgreSqlConnectParamArgs{...} }
 type GetConnectResourceResultConnectResourceListPostgreSqlConnectParamArrayInput interface {
 	pulumi.Input
 
@@ -30055,7 +30058,7 @@ type GetConnectResourceResultConnectResourceListSqlServerConnectParam struct {
 // GetConnectResourceResultConnectResourceListSqlServerConnectParamInput is an input type that accepts GetConnectResourceResultConnectResourceListSqlServerConnectParamArgs and GetConnectResourceResultConnectResourceListSqlServerConnectParamOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListSqlServerConnectParamInput` via:
 //
-//          GetConnectResourceResultConnectResourceListSqlServerConnectParamArgs{...}
+//	GetConnectResourceResultConnectResourceListSqlServerConnectParamArgs{...}
 type GetConnectResourceResultConnectResourceListSqlServerConnectParamInput interface {
 	pulumi.Input
 
@@ -30095,7 +30098,7 @@ func (i GetConnectResourceResultConnectResourceListSqlServerConnectParamArgs) To
 // GetConnectResourceResultConnectResourceListSqlServerConnectParamArrayInput is an input type that accepts GetConnectResourceResultConnectResourceListSqlServerConnectParamArray and GetConnectResourceResultConnectResourceListSqlServerConnectParamArrayOutput values.
 // You can construct a concrete instance of `GetConnectResourceResultConnectResourceListSqlServerConnectParamArrayInput` via:
 //
-//          GetConnectResourceResultConnectResourceListSqlServerConnectParamArray{ GetConnectResourceResultConnectResourceListSqlServerConnectParamArgs{...} }
+//	GetConnectResourceResultConnectResourceListSqlServerConnectParamArray{ GetConnectResourceResultConnectResourceListSqlServerConnectParamArgs{...} }
 type GetConnectResourceResultConnectResourceListSqlServerConnectParamArrayInput interface {
 	pulumi.Input
 
@@ -30196,7 +30199,7 @@ type GetDatahubGroupOffsetsTopicList struct {
 // GetDatahubGroupOffsetsTopicListInput is an input type that accepts GetDatahubGroupOffsetsTopicListArgs and GetDatahubGroupOffsetsTopicListOutput values.
 // You can construct a concrete instance of `GetDatahubGroupOffsetsTopicListInput` via:
 //
-//          GetDatahubGroupOffsetsTopicListArgs{...}
+//	GetDatahubGroupOffsetsTopicListArgs{...}
 type GetDatahubGroupOffsetsTopicListInput interface {
 	pulumi.Input
 
@@ -30226,7 +30229,7 @@ func (i GetDatahubGroupOffsetsTopicListArgs) ToGetDatahubGroupOffsetsTopicListOu
 // GetDatahubGroupOffsetsTopicListArrayInput is an input type that accepts GetDatahubGroupOffsetsTopicListArray and GetDatahubGroupOffsetsTopicListArrayOutput values.
 // You can construct a concrete instance of `GetDatahubGroupOffsetsTopicListArrayInput` via:
 //
-//          GetDatahubGroupOffsetsTopicListArray{ GetDatahubGroupOffsetsTopicListArgs{...} }
+//	GetDatahubGroupOffsetsTopicListArray{ GetDatahubGroupOffsetsTopicListArgs{...} }
 type GetDatahubGroupOffsetsTopicListArrayInput interface {
 	pulumi.Input
 
@@ -30312,7 +30315,7 @@ type GetDatahubGroupOffsetsTopicListPartition struct {
 // GetDatahubGroupOffsetsTopicListPartitionInput is an input type that accepts GetDatahubGroupOffsetsTopicListPartitionArgs and GetDatahubGroupOffsetsTopicListPartitionOutput values.
 // You can construct a concrete instance of `GetDatahubGroupOffsetsTopicListPartitionInput` via:
 //
-//          GetDatahubGroupOffsetsTopicListPartitionArgs{...}
+//	GetDatahubGroupOffsetsTopicListPartitionArgs{...}
 type GetDatahubGroupOffsetsTopicListPartitionInput interface {
 	pulumi.Input
 
@@ -30350,7 +30353,7 @@ func (i GetDatahubGroupOffsetsTopicListPartitionArgs) ToGetDatahubGroupOffsetsTo
 // GetDatahubGroupOffsetsTopicListPartitionArrayInput is an input type that accepts GetDatahubGroupOffsetsTopicListPartitionArray and GetDatahubGroupOffsetsTopicListPartitionArrayOutput values.
 // You can construct a concrete instance of `GetDatahubGroupOffsetsTopicListPartitionArrayInput` via:
 //
-//          GetDatahubGroupOffsetsTopicListPartitionArray{ GetDatahubGroupOffsetsTopicListPartitionArgs{...} }
+//	GetDatahubGroupOffsetsTopicListPartitionArray{ GetDatahubGroupOffsetsTopicListPartitionArgs{...} }
 type GetDatahubGroupOffsetsTopicListPartitionArrayInput interface {
 	pulumi.Input
 
@@ -30466,7 +30469,7 @@ type GetDatahubTaskTaskList struct {
 // GetDatahubTaskTaskListInput is an input type that accepts GetDatahubTaskTaskListArgs and GetDatahubTaskTaskListOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListInput` via:
 //
-//          GetDatahubTaskTaskListArgs{...}
+//	GetDatahubTaskTaskListArgs{...}
 type GetDatahubTaskTaskListInput interface {
 	pulumi.Input
 
@@ -30516,7 +30519,7 @@ func (i GetDatahubTaskTaskListArgs) ToGetDatahubTaskTaskListOutputWithContext(ct
 // GetDatahubTaskTaskListArrayInput is an input type that accepts GetDatahubTaskTaskListArray and GetDatahubTaskTaskListArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListArrayInput` via:
 //
-//          GetDatahubTaskTaskListArray{ GetDatahubTaskTaskListArgs{...} }
+//	GetDatahubTaskTaskListArray{ GetDatahubTaskTaskListArgs{...} }
 type GetDatahubTaskTaskListArrayInput interface {
 	pulumi.Input
 
@@ -30672,7 +30675,7 @@ type GetDatahubTaskTaskListSourceResource struct {
 // GetDatahubTaskTaskListSourceResourceInput is an input type that accepts GetDatahubTaskTaskListSourceResourceArgs and GetDatahubTaskTaskListSourceResourceOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceArgs{...}
+//	GetDatahubTaskTaskListSourceResourceArgs{...}
 type GetDatahubTaskTaskListSourceResourceInput interface {
 	pulumi.Input
 
@@ -30732,7 +30735,7 @@ func (i GetDatahubTaskTaskListSourceResourceArgs) ToGetDatahubTaskTaskListSource
 // GetDatahubTaskTaskListSourceResourceArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceArray and GetDatahubTaskTaskListSourceResourceArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceArray{ GetDatahubTaskTaskListSourceResourceArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceArray{ GetDatahubTaskTaskListSourceResourceArgs{...} }
 type GetDatahubTaskTaskListSourceResourceArrayInput interface {
 	pulumi.Input
 
@@ -30941,7 +30944,7 @@ type GetDatahubTaskTaskListSourceResourceClickHouseParam struct {
 // GetDatahubTaskTaskListSourceResourceClickHouseParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceClickHouseParamArgs and GetDatahubTaskTaskListSourceResourceClickHouseParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceClickHouseParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceClickHouseParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceClickHouseParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceClickHouseParamInput interface {
 	pulumi.Input
 
@@ -30997,7 +31000,7 @@ func (i GetDatahubTaskTaskListSourceResourceClickHouseParamArgs) ToGetDatahubTas
 // GetDatahubTaskTaskListSourceResourceClickHouseParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceClickHouseParamArray and GetDatahubTaskTaskListSourceResourceClickHouseParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceClickHouseParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceClickHouseParamArray{ GetDatahubTaskTaskListSourceResourceClickHouseParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceClickHouseParamArray{ GetDatahubTaskTaskListSourceResourceClickHouseParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceClickHouseParamArrayInput interface {
 	pulumi.Input
 
@@ -31148,7 +31151,7 @@ type GetDatahubTaskTaskListSourceResourceClickHouseParamDropCl struct {
 // GetDatahubTaskTaskListSourceResourceClickHouseParamDropClInput is an input type that accepts GetDatahubTaskTaskListSourceResourceClickHouseParamDropClArgs and GetDatahubTaskTaskListSourceResourceClickHouseParamDropClOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceClickHouseParamDropClInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceClickHouseParamDropClArgs{...}
+//	GetDatahubTaskTaskListSourceResourceClickHouseParamDropClArgs{...}
 type GetDatahubTaskTaskListSourceResourceClickHouseParamDropClInput interface {
 	pulumi.Input
 
@@ -31184,7 +31187,7 @@ func (i GetDatahubTaskTaskListSourceResourceClickHouseParamDropClArgs) ToGetData
 // GetDatahubTaskTaskListSourceResourceClickHouseParamDropClArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceClickHouseParamDropClArray and GetDatahubTaskTaskListSourceResourceClickHouseParamDropClArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceClickHouseParamDropClArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceClickHouseParamDropClArray{ GetDatahubTaskTaskListSourceResourceClickHouseParamDropClArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceClickHouseParamDropClArray{ GetDatahubTaskTaskListSourceResourceClickHouseParamDropClArgs{...} }
 type GetDatahubTaskTaskListSourceResourceClickHouseParamDropClArrayInput interface {
 	pulumi.Input
 
@@ -31281,7 +31284,7 @@ type GetDatahubTaskTaskListSourceResourceClickHouseParamSchema struct {
 // GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaInput is an input type that accepts GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaArgs and GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaArgs{...}
+//	GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaArgs{...}
 type GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaInput interface {
 	pulumi.Input
 
@@ -31315,7 +31318,7 @@ func (i GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaArgs) ToGetData
 // GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaArray and GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaArray{ GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaArray{ GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaArgs{...} }
 type GetDatahubTaskTaskListSourceResourceClickHouseParamSchemaArrayInput interface {
 	pulumi.Input
 
@@ -31407,7 +31410,7 @@ type GetDatahubTaskTaskListSourceResourceClsParam struct {
 // GetDatahubTaskTaskListSourceResourceClsParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceClsParamArgs and GetDatahubTaskTaskListSourceResourceClsParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceClsParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceClsParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceClsParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceClsParamInput interface {
 	pulumi.Input
 
@@ -31443,7 +31446,7 @@ func (i GetDatahubTaskTaskListSourceResourceClsParamArgs) ToGetDatahubTaskTaskLi
 // GetDatahubTaskTaskListSourceResourceClsParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceClsParamArray and GetDatahubTaskTaskListSourceResourceClsParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceClsParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceClsParamArray{ GetDatahubTaskTaskListSourceResourceClsParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceClsParamArray{ GetDatahubTaskTaskListSourceResourceClsParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceClsParamArrayInput interface {
 	pulumi.Input
 
@@ -31546,7 +31549,7 @@ type GetDatahubTaskTaskListSourceResourceCosParam struct {
 // GetDatahubTaskTaskListSourceResourceCosParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceCosParamArgs and GetDatahubTaskTaskListSourceResourceCosParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceCosParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceCosParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceCosParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceCosParamInput interface {
 	pulumi.Input
 
@@ -31588,7 +31591,7 @@ func (i GetDatahubTaskTaskListSourceResourceCosParamArgs) ToGetDatahubTaskTaskLi
 // GetDatahubTaskTaskListSourceResourceCosParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceCosParamArray and GetDatahubTaskTaskListSourceResourceCosParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceCosParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceCosParamArray{ GetDatahubTaskTaskListSourceResourceCosParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceCosParamArray{ GetDatahubTaskTaskListSourceResourceCosParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceCosParamArrayInput interface {
 	pulumi.Input
 
@@ -31694,7 +31697,7 @@ type GetDatahubTaskTaskListSourceResourceCtsdbParam struct {
 // GetDatahubTaskTaskListSourceResourceCtsdbParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceCtsdbParamArgs and GetDatahubTaskTaskListSourceResourceCtsdbParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceCtsdbParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceCtsdbParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceCtsdbParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceCtsdbParamInput interface {
 	pulumi.Input
 
@@ -31724,7 +31727,7 @@ func (i GetDatahubTaskTaskListSourceResourceCtsdbParamArgs) ToGetDatahubTaskTask
 // GetDatahubTaskTaskListSourceResourceCtsdbParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceCtsdbParamArray and GetDatahubTaskTaskListSourceResourceCtsdbParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceCtsdbParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceCtsdbParamArray{ GetDatahubTaskTaskListSourceResourceCtsdbParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceCtsdbParamArray{ GetDatahubTaskTaskListSourceResourceCtsdbParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceCtsdbParamArrayInput interface {
 	pulumi.Input
 
@@ -31812,7 +31815,7 @@ type GetDatahubTaskTaskListSourceResourceDtsParam struct {
 // GetDatahubTaskTaskListSourceResourceDtsParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceDtsParamArgs and GetDatahubTaskTaskListSourceResourceDtsParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceDtsParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceDtsParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceDtsParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceDtsParamInput interface {
 	pulumi.Input
 
@@ -31854,7 +31857,7 @@ func (i GetDatahubTaskTaskListSourceResourceDtsParamArgs) ToGetDatahubTaskTaskLi
 // GetDatahubTaskTaskListSourceResourceDtsParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceDtsParamArray and GetDatahubTaskTaskListSourceResourceDtsParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceDtsParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceDtsParamArray{ GetDatahubTaskTaskListSourceResourceDtsParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceDtsParamArray{ GetDatahubTaskTaskListSourceResourceDtsParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceDtsParamArrayInput interface {
 	pulumi.Input
 
@@ -31990,7 +31993,7 @@ type GetDatahubTaskTaskListSourceResourceEsParam struct {
 // GetDatahubTaskTaskListSourceResourceEsParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceEsParamArgs and GetDatahubTaskTaskListSourceResourceEsParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceEsParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceEsParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceEsParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceEsParamInput interface {
 	pulumi.Input
 
@@ -32050,7 +32053,7 @@ func (i GetDatahubTaskTaskListSourceResourceEsParamArgs) ToGetDatahubTaskTaskLis
 // GetDatahubTaskTaskListSourceResourceEsParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceEsParamArray and GetDatahubTaskTaskListSourceResourceEsParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceEsParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceEsParamArray{ GetDatahubTaskTaskListSourceResourceEsParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceEsParamArray{ GetDatahubTaskTaskListSourceResourceEsParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceEsParamArrayInput interface {
 	pulumi.Input
 
@@ -32211,7 +32214,7 @@ type GetDatahubTaskTaskListSourceResourceEsParamDropCl struct {
 // GetDatahubTaskTaskListSourceResourceEsParamDropClInput is an input type that accepts GetDatahubTaskTaskListSourceResourceEsParamDropClArgs and GetDatahubTaskTaskListSourceResourceEsParamDropClOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceEsParamDropClInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceEsParamDropClArgs{...}
+//	GetDatahubTaskTaskListSourceResourceEsParamDropClArgs{...}
 type GetDatahubTaskTaskListSourceResourceEsParamDropClInput interface {
 	pulumi.Input
 
@@ -32247,7 +32250,7 @@ func (i GetDatahubTaskTaskListSourceResourceEsParamDropClArgs) ToGetDatahubTaskT
 // GetDatahubTaskTaskListSourceResourceEsParamDropClArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceEsParamDropClArray and GetDatahubTaskTaskListSourceResourceEsParamDropClArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceEsParamDropClArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceEsParamDropClArray{ GetDatahubTaskTaskListSourceResourceEsParamDropClArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceEsParamDropClArray{ GetDatahubTaskTaskListSourceResourceEsParamDropClArgs{...} }
 type GetDatahubTaskTaskListSourceResourceEsParamDropClArrayInput interface {
 	pulumi.Input
 
@@ -32346,7 +32349,7 @@ type GetDatahubTaskTaskListSourceResourceEsParamDropDlq struct {
 // GetDatahubTaskTaskListSourceResourceEsParamDropDlqInput is an input type that accepts GetDatahubTaskTaskListSourceResourceEsParamDropDlqArgs and GetDatahubTaskTaskListSourceResourceEsParamDropDlqOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceEsParamDropDlqInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceEsParamDropDlqArgs{...}
+//	GetDatahubTaskTaskListSourceResourceEsParamDropDlqArgs{...}
 type GetDatahubTaskTaskListSourceResourceEsParamDropDlqInput interface {
 	pulumi.Input
 
@@ -32384,7 +32387,7 @@ func (i GetDatahubTaskTaskListSourceResourceEsParamDropDlqArgs) ToGetDatahubTask
 // GetDatahubTaskTaskListSourceResourceEsParamDropDlqArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceEsParamDropDlqArray and GetDatahubTaskTaskListSourceResourceEsParamDropDlqArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceEsParamDropDlqArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceEsParamDropDlqArray{ GetDatahubTaskTaskListSourceResourceEsParamDropDlqArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceEsParamDropDlqArray{ GetDatahubTaskTaskListSourceResourceEsParamDropDlqArgs{...} }
 type GetDatahubTaskTaskListSourceResourceEsParamDropDlqArrayInput interface {
 	pulumi.Input
 
@@ -32516,7 +32519,7 @@ type GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParam struct {
 // GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamArgs and GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamInput interface {
 	pulumi.Input
 
@@ -32578,7 +32581,7 @@ func (i GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamArgs) ToGetD
 // GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamArray and GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamArray{ GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamArray{ GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamArrayInput interface {
 	pulumi.Input
 
@@ -32742,7 +32745,7 @@ type GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMapping st
 // GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMappingInput is an input type that accepts GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMappingArgs and GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMappingOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMappingInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMappingArgs{...}
+//	GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMappingArgs{...}
 type GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMappingInput interface {
 	pulumi.Input
 
@@ -32776,7 +32779,7 @@ func (i GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMapping
 // GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMappingArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMappingArray and GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMappingArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMappingArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMappingArray{ GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMappingArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMappingArray{ GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMappingArgs{...} }
 type GetDatahubTaskTaskListSourceResourceEsParamDropDlqKafkaParamTableMappingArrayInput interface {
 	pulumi.Input
 
@@ -32880,7 +32883,7 @@ type GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParam struct {
 // GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamArgs and GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamInput interface {
 	pulumi.Input
 
@@ -32920,7 +32923,7 @@ func (i GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamArgs) ToGetD
 // GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamArray and GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamArray{ GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamArray{ GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceEsParamDropDlqTopicParamArrayInput interface {
 	pulumi.Input
 
@@ -33029,7 +33032,7 @@ type GetDatahubTaskTaskListSourceResourceEventBusParam struct {
 // GetDatahubTaskTaskListSourceResourceEventBusParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceEventBusParamArgs and GetDatahubTaskTaskListSourceResourceEventBusParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceEventBusParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceEventBusParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceEventBusParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceEventBusParamInput interface {
 	pulumi.Input
 
@@ -33067,7 +33070,7 @@ func (i GetDatahubTaskTaskListSourceResourceEventBusParamArgs) ToGetDatahubTaskT
 // GetDatahubTaskTaskListSourceResourceEventBusParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceEventBusParamArray and GetDatahubTaskTaskListSourceResourceEventBusParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceEventBusParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceEventBusParamArray{ GetDatahubTaskTaskListSourceResourceEventBusParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceEventBusParamArray{ GetDatahubTaskTaskListSourceResourceEventBusParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceEventBusParamArrayInput interface {
 	pulumi.Input
 
@@ -33195,7 +33198,7 @@ type GetDatahubTaskTaskListSourceResourceKafkaParam struct {
 // GetDatahubTaskTaskListSourceResourceKafkaParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceKafkaParamArgs and GetDatahubTaskTaskListSourceResourceKafkaParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceKafkaParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceKafkaParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceKafkaParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceKafkaParamInput interface {
 	pulumi.Input
 
@@ -33257,7 +33260,7 @@ func (i GetDatahubTaskTaskListSourceResourceKafkaParamArgs) ToGetDatahubTaskTask
 // GetDatahubTaskTaskListSourceResourceKafkaParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceKafkaParamArray and GetDatahubTaskTaskListSourceResourceKafkaParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceKafkaParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceKafkaParamArray{ GetDatahubTaskTaskListSourceResourceKafkaParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceKafkaParamArray{ GetDatahubTaskTaskListSourceResourceKafkaParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceKafkaParamArrayInput interface {
 	pulumi.Input
 
@@ -33419,7 +33422,7 @@ type GetDatahubTaskTaskListSourceResourceKafkaParamTableMapping struct {
 // GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingInput is an input type that accepts GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingArgs and GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingArgs{...}
+//	GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingArgs{...}
 type GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingInput interface {
 	pulumi.Input
 
@@ -33453,7 +33456,7 @@ func (i GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingArgs) ToGetDat
 // GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingArray and GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingArray{ GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingArray{ GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingArgs{...} }
 type GetDatahubTaskTaskListSourceResourceKafkaParamTableMappingArrayInput interface {
 	pulumi.Input
 
@@ -33555,7 +33558,7 @@ type GetDatahubTaskTaskListSourceResourceMariaDbParam struct {
 // GetDatahubTaskTaskListSourceResourceMariaDbParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceMariaDbParamArgs and GetDatahubTaskTaskListSourceResourceMariaDbParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceMariaDbParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceMariaDbParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceMariaDbParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceMariaDbParamInput interface {
 	pulumi.Input
 
@@ -33601,7 +33604,7 @@ func (i GetDatahubTaskTaskListSourceResourceMariaDbParamArgs) ToGetDatahubTaskTa
 // GetDatahubTaskTaskListSourceResourceMariaDbParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceMariaDbParamArray and GetDatahubTaskTaskListSourceResourceMariaDbParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceMariaDbParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceMariaDbParamArray{ GetDatahubTaskTaskListSourceResourceMariaDbParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceMariaDbParamArray{ GetDatahubTaskTaskListSourceResourceMariaDbParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceMariaDbParamArrayInput interface {
 	pulumi.Input
 
@@ -33737,7 +33740,7 @@ type GetDatahubTaskTaskListSourceResourceMongoDbParam struct {
 // GetDatahubTaskTaskListSourceResourceMongoDbParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceMongoDbParamArgs and GetDatahubTaskTaskListSourceResourceMongoDbParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceMongoDbParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceMongoDbParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceMongoDbParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceMongoDbParamInput interface {
 	pulumi.Input
 
@@ -33787,7 +33790,7 @@ func (i GetDatahubTaskTaskListSourceResourceMongoDbParamArgs) ToGetDatahubTaskTa
 // GetDatahubTaskTaskListSourceResourceMongoDbParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceMongoDbParamArray and GetDatahubTaskTaskListSourceResourceMongoDbParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceMongoDbParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceMongoDbParamArray{ GetDatahubTaskTaskListSourceResourceMongoDbParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceMongoDbParamArray{ GetDatahubTaskTaskListSourceResourceMongoDbParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceMongoDbParamArrayInput interface {
 	pulumi.Input
 
@@ -33959,7 +33962,7 @@ type GetDatahubTaskTaskListSourceResourceMySqlParam struct {
 // GetDatahubTaskTaskListSourceResourceMySqlParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceMySqlParamArgs and GetDatahubTaskTaskListSourceResourceMySqlParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceMySqlParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceMySqlParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceMySqlParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceMySqlParamInput interface {
 	pulumi.Input
 
@@ -34035,7 +34038,7 @@ func (i GetDatahubTaskTaskListSourceResourceMySqlParamArgs) ToGetDatahubTaskTask
 // GetDatahubTaskTaskListSourceResourceMySqlParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceMySqlParamArray and GetDatahubTaskTaskListSourceResourceMySqlParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceMySqlParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceMySqlParamArray{ GetDatahubTaskTaskListSourceResourceMySqlParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceMySqlParamArray{ GetDatahubTaskTaskListSourceResourceMySqlParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceMySqlParamArrayInput interface {
 	pulumi.Input
 
@@ -34244,7 +34247,7 @@ type GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMapping struc
 // GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingInput is an input type that accepts GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingArgs and GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingArgs{...}
+//	GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingArgs{...}
 type GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingInput interface {
 	pulumi.Input
 
@@ -34288,7 +34291,7 @@ func (i GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingArg
 // GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingArray and GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingArray{ GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingArray{ GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingArgs{...} }
 type GetDatahubTaskTaskListSourceResourceMySqlParamDataTargetRecordMappingArrayInput interface {
 	pulumi.Input
 
@@ -34417,7 +34420,7 @@ type GetDatahubTaskTaskListSourceResourceMySqlParamDropCl struct {
 // GetDatahubTaskTaskListSourceResourceMySqlParamDropClInput is an input type that accepts GetDatahubTaskTaskListSourceResourceMySqlParamDropClArgs and GetDatahubTaskTaskListSourceResourceMySqlParamDropClOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceMySqlParamDropClInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceMySqlParamDropClArgs{...}
+//	GetDatahubTaskTaskListSourceResourceMySqlParamDropClArgs{...}
 type GetDatahubTaskTaskListSourceResourceMySqlParamDropClInput interface {
 	pulumi.Input
 
@@ -34453,7 +34456,7 @@ func (i GetDatahubTaskTaskListSourceResourceMySqlParamDropClArgs) ToGetDatahubTa
 // GetDatahubTaskTaskListSourceResourceMySqlParamDropClArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceMySqlParamDropClArray and GetDatahubTaskTaskListSourceResourceMySqlParamDropClArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceMySqlParamDropClArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceMySqlParamDropClArray{ GetDatahubTaskTaskListSourceResourceMySqlParamDropClArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceMySqlParamDropClArray{ GetDatahubTaskTaskListSourceResourceMySqlParamDropClArgs{...} }
 type GetDatahubTaskTaskListSourceResourceMySqlParamDropClArrayInput interface {
 	pulumi.Input
 
@@ -34566,7 +34569,7 @@ type GetDatahubTaskTaskListSourceResourcePostgreSqlParam struct {
 // GetDatahubTaskTaskListSourceResourcePostgreSqlParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourcePostgreSqlParamArgs and GetDatahubTaskTaskListSourceResourcePostgreSqlParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourcePostgreSqlParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourcePostgreSqlParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourcePostgreSqlParamArgs{...}
 type GetDatahubTaskTaskListSourceResourcePostgreSqlParamInput interface {
 	pulumi.Input
 
@@ -34618,7 +34621,7 @@ func (i GetDatahubTaskTaskListSourceResourcePostgreSqlParamArgs) ToGetDatahubTas
 // GetDatahubTaskTaskListSourceResourcePostgreSqlParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourcePostgreSqlParamArray and GetDatahubTaskTaskListSourceResourcePostgreSqlParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourcePostgreSqlParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourcePostgreSqlParamArray{ GetDatahubTaskTaskListSourceResourcePostgreSqlParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourcePostgreSqlParamArray{ GetDatahubTaskTaskListSourceResourcePostgreSqlParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourcePostgreSqlParamArrayInput interface {
 	pulumi.Input
 
@@ -34765,7 +34768,7 @@ type GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMapping 
 // GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappingInput is an input type that accepts GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappingArgs and GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappingOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappingInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappingArgs{...}
+//	GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappingArgs{...}
 type GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappingInput interface {
 	pulumi.Input
 
@@ -34809,7 +34812,7 @@ func (i GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappi
 // GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappingArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappingArray and GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappingArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappingArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappingArray{ GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappingArgs{...} }
+//	GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappingArray{ GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappingArgs{...} }
 type GetDatahubTaskTaskListSourceResourcePostgreSqlParamDataTargetRecordMappingArrayInput interface {
 	pulumi.Input
 
@@ -34944,7 +34947,7 @@ type GetDatahubTaskTaskListSourceResourceScfParam struct {
 // GetDatahubTaskTaskListSourceResourceScfParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceScfParamArgs and GetDatahubTaskTaskListSourceResourceScfParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceScfParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceScfParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceScfParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceScfParamInput interface {
 	pulumi.Input
 
@@ -34980,7 +34983,7 @@ func (i GetDatahubTaskTaskListSourceResourceScfParamArgs) ToGetDatahubTaskTaskLi
 // GetDatahubTaskTaskListSourceResourceScfParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceScfParamArray and GetDatahubTaskTaskListSourceResourceScfParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceScfParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceScfParamArray{ GetDatahubTaskTaskListSourceResourceScfParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceScfParamArray{ GetDatahubTaskTaskListSourceResourceScfParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceScfParamArrayInput interface {
 	pulumi.Input
 
@@ -35075,7 +35078,7 @@ type GetDatahubTaskTaskListSourceResourceSqlServerParam struct {
 // GetDatahubTaskTaskListSourceResourceSqlServerParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceSqlServerParamArgs and GetDatahubTaskTaskListSourceResourceSqlServerParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceSqlServerParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceSqlServerParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceSqlServerParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceSqlServerParamInput interface {
 	pulumi.Input
 
@@ -35109,7 +35112,7 @@ func (i GetDatahubTaskTaskListSourceResourceSqlServerParamArgs) ToGetDatahubTask
 // GetDatahubTaskTaskListSourceResourceSqlServerParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceSqlServerParamArray and GetDatahubTaskTaskListSourceResourceSqlServerParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceSqlServerParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceSqlServerParamArray{ GetDatahubTaskTaskListSourceResourceSqlServerParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceSqlServerParamArray{ GetDatahubTaskTaskListSourceResourceSqlServerParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceSqlServerParamArrayInput interface {
 	pulumi.Input
 
@@ -35201,7 +35204,7 @@ type GetDatahubTaskTaskListSourceResourceTdwParam struct {
 // GetDatahubTaskTaskListSourceResourceTdwParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceTdwParamArgs and GetDatahubTaskTaskListSourceResourceTdwParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceTdwParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceTdwParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceTdwParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceTdwParamInput interface {
 	pulumi.Input
 
@@ -35237,7 +35240,7 @@ func (i GetDatahubTaskTaskListSourceResourceTdwParamArgs) ToGetDatahubTaskTaskLi
 // GetDatahubTaskTaskListSourceResourceTdwParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceTdwParamArray and GetDatahubTaskTaskListSourceResourceTdwParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceTdwParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceTdwParamArray{ GetDatahubTaskTaskListSourceResourceTdwParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceTdwParamArray{ GetDatahubTaskTaskListSourceResourceTdwParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceTdwParamArrayInput interface {
 	pulumi.Input
 
@@ -35338,7 +35341,7 @@ type GetDatahubTaskTaskListSourceResourceTopicParam struct {
 // GetDatahubTaskTaskListSourceResourceTopicParamInput is an input type that accepts GetDatahubTaskTaskListSourceResourceTopicParamArgs and GetDatahubTaskTaskListSourceResourceTopicParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceTopicParamInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceTopicParamArgs{...}
+//	GetDatahubTaskTaskListSourceResourceTopicParamArgs{...}
 type GetDatahubTaskTaskListSourceResourceTopicParamInput interface {
 	pulumi.Input
 
@@ -35378,7 +35381,7 @@ func (i GetDatahubTaskTaskListSourceResourceTopicParamArgs) ToGetDatahubTaskTask
 // GetDatahubTaskTaskListSourceResourceTopicParamArrayInput is an input type that accepts GetDatahubTaskTaskListSourceResourceTopicParamArray and GetDatahubTaskTaskListSourceResourceTopicParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListSourceResourceTopicParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListSourceResourceTopicParamArray{ GetDatahubTaskTaskListSourceResourceTopicParamArgs{...} }
+//	GetDatahubTaskTaskListSourceResourceTopicParamArray{ GetDatahubTaskTaskListSourceResourceTopicParamArgs{...} }
 type GetDatahubTaskTaskListSourceResourceTopicParamArrayInput interface {
 	pulumi.Input
 
@@ -35509,7 +35512,7 @@ type GetDatahubTaskTaskListTargetResource struct {
 // GetDatahubTaskTaskListTargetResourceInput is an input type that accepts GetDatahubTaskTaskListTargetResourceArgs and GetDatahubTaskTaskListTargetResourceOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceArgs{...}
+//	GetDatahubTaskTaskListTargetResourceArgs{...}
 type GetDatahubTaskTaskListTargetResourceInput interface {
 	pulumi.Input
 
@@ -35569,7 +35572,7 @@ func (i GetDatahubTaskTaskListTargetResourceArgs) ToGetDatahubTaskTaskListTarget
 // GetDatahubTaskTaskListTargetResourceArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceArray and GetDatahubTaskTaskListTargetResourceArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceArray{ GetDatahubTaskTaskListTargetResourceArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceArray{ GetDatahubTaskTaskListTargetResourceArgs{...} }
 type GetDatahubTaskTaskListTargetResourceArrayInput interface {
 	pulumi.Input
 
@@ -35778,7 +35781,7 @@ type GetDatahubTaskTaskListTargetResourceClickHouseParam struct {
 // GetDatahubTaskTaskListTargetResourceClickHouseParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceClickHouseParamArgs and GetDatahubTaskTaskListTargetResourceClickHouseParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceClickHouseParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceClickHouseParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceClickHouseParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceClickHouseParamInput interface {
 	pulumi.Input
 
@@ -35834,7 +35837,7 @@ func (i GetDatahubTaskTaskListTargetResourceClickHouseParamArgs) ToGetDatahubTas
 // GetDatahubTaskTaskListTargetResourceClickHouseParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceClickHouseParamArray and GetDatahubTaskTaskListTargetResourceClickHouseParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceClickHouseParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceClickHouseParamArray{ GetDatahubTaskTaskListTargetResourceClickHouseParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceClickHouseParamArray{ GetDatahubTaskTaskListTargetResourceClickHouseParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceClickHouseParamArrayInput interface {
 	pulumi.Input
 
@@ -35985,7 +35988,7 @@ type GetDatahubTaskTaskListTargetResourceClickHouseParamDropCl struct {
 // GetDatahubTaskTaskListTargetResourceClickHouseParamDropClInput is an input type that accepts GetDatahubTaskTaskListTargetResourceClickHouseParamDropClArgs and GetDatahubTaskTaskListTargetResourceClickHouseParamDropClOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceClickHouseParamDropClInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceClickHouseParamDropClArgs{...}
+//	GetDatahubTaskTaskListTargetResourceClickHouseParamDropClArgs{...}
 type GetDatahubTaskTaskListTargetResourceClickHouseParamDropClInput interface {
 	pulumi.Input
 
@@ -36021,7 +36024,7 @@ func (i GetDatahubTaskTaskListTargetResourceClickHouseParamDropClArgs) ToGetData
 // GetDatahubTaskTaskListTargetResourceClickHouseParamDropClArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceClickHouseParamDropClArray and GetDatahubTaskTaskListTargetResourceClickHouseParamDropClArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceClickHouseParamDropClArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceClickHouseParamDropClArray{ GetDatahubTaskTaskListTargetResourceClickHouseParamDropClArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceClickHouseParamDropClArray{ GetDatahubTaskTaskListTargetResourceClickHouseParamDropClArgs{...} }
 type GetDatahubTaskTaskListTargetResourceClickHouseParamDropClArrayInput interface {
 	pulumi.Input
 
@@ -36118,7 +36121,7 @@ type GetDatahubTaskTaskListTargetResourceClickHouseParamSchema struct {
 // GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaInput is an input type that accepts GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaArgs and GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaArgs{...}
+//	GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaArgs{...}
 type GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaInput interface {
 	pulumi.Input
 
@@ -36152,7 +36155,7 @@ func (i GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaArgs) ToGetData
 // GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaArray and GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaArray{ GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaArray{ GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaArgs{...} }
 type GetDatahubTaskTaskListTargetResourceClickHouseParamSchemaArrayInput interface {
 	pulumi.Input
 
@@ -36244,7 +36247,7 @@ type GetDatahubTaskTaskListTargetResourceClsParam struct {
 // GetDatahubTaskTaskListTargetResourceClsParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceClsParamArgs and GetDatahubTaskTaskListTargetResourceClsParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceClsParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceClsParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceClsParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceClsParamInput interface {
 	pulumi.Input
 
@@ -36280,7 +36283,7 @@ func (i GetDatahubTaskTaskListTargetResourceClsParamArgs) ToGetDatahubTaskTaskLi
 // GetDatahubTaskTaskListTargetResourceClsParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceClsParamArray and GetDatahubTaskTaskListTargetResourceClsParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceClsParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceClsParamArray{ GetDatahubTaskTaskListTargetResourceClsParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceClsParamArray{ GetDatahubTaskTaskListTargetResourceClsParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceClsParamArrayInput interface {
 	pulumi.Input
 
@@ -36383,7 +36386,7 @@ type GetDatahubTaskTaskListTargetResourceCosParam struct {
 // GetDatahubTaskTaskListTargetResourceCosParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceCosParamArgs and GetDatahubTaskTaskListTargetResourceCosParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceCosParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceCosParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceCosParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceCosParamInput interface {
 	pulumi.Input
 
@@ -36425,7 +36428,7 @@ func (i GetDatahubTaskTaskListTargetResourceCosParamArgs) ToGetDatahubTaskTaskLi
 // GetDatahubTaskTaskListTargetResourceCosParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceCosParamArray and GetDatahubTaskTaskListTargetResourceCosParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceCosParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceCosParamArray{ GetDatahubTaskTaskListTargetResourceCosParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceCosParamArray{ GetDatahubTaskTaskListTargetResourceCosParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceCosParamArrayInput interface {
 	pulumi.Input
 
@@ -36531,7 +36534,7 @@ type GetDatahubTaskTaskListTargetResourceCtsdbParam struct {
 // GetDatahubTaskTaskListTargetResourceCtsdbParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceCtsdbParamArgs and GetDatahubTaskTaskListTargetResourceCtsdbParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceCtsdbParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceCtsdbParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceCtsdbParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceCtsdbParamInput interface {
 	pulumi.Input
 
@@ -36561,7 +36564,7 @@ func (i GetDatahubTaskTaskListTargetResourceCtsdbParamArgs) ToGetDatahubTaskTask
 // GetDatahubTaskTaskListTargetResourceCtsdbParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceCtsdbParamArray and GetDatahubTaskTaskListTargetResourceCtsdbParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceCtsdbParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceCtsdbParamArray{ GetDatahubTaskTaskListTargetResourceCtsdbParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceCtsdbParamArray{ GetDatahubTaskTaskListTargetResourceCtsdbParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceCtsdbParamArrayInput interface {
 	pulumi.Input
 
@@ -36649,7 +36652,7 @@ type GetDatahubTaskTaskListTargetResourceDtsParam struct {
 // GetDatahubTaskTaskListTargetResourceDtsParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceDtsParamArgs and GetDatahubTaskTaskListTargetResourceDtsParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceDtsParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceDtsParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceDtsParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceDtsParamInput interface {
 	pulumi.Input
 
@@ -36691,7 +36694,7 @@ func (i GetDatahubTaskTaskListTargetResourceDtsParamArgs) ToGetDatahubTaskTaskLi
 // GetDatahubTaskTaskListTargetResourceDtsParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceDtsParamArray and GetDatahubTaskTaskListTargetResourceDtsParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceDtsParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceDtsParamArray{ GetDatahubTaskTaskListTargetResourceDtsParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceDtsParamArray{ GetDatahubTaskTaskListTargetResourceDtsParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceDtsParamArrayInput interface {
 	pulumi.Input
 
@@ -36827,7 +36830,7 @@ type GetDatahubTaskTaskListTargetResourceEsParam struct {
 // GetDatahubTaskTaskListTargetResourceEsParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceEsParamArgs and GetDatahubTaskTaskListTargetResourceEsParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceEsParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceEsParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceEsParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceEsParamInput interface {
 	pulumi.Input
 
@@ -36887,7 +36890,7 @@ func (i GetDatahubTaskTaskListTargetResourceEsParamArgs) ToGetDatahubTaskTaskLis
 // GetDatahubTaskTaskListTargetResourceEsParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceEsParamArray and GetDatahubTaskTaskListTargetResourceEsParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceEsParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceEsParamArray{ GetDatahubTaskTaskListTargetResourceEsParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceEsParamArray{ GetDatahubTaskTaskListTargetResourceEsParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceEsParamArrayInput interface {
 	pulumi.Input
 
@@ -37048,7 +37051,7 @@ type GetDatahubTaskTaskListTargetResourceEsParamDropCl struct {
 // GetDatahubTaskTaskListTargetResourceEsParamDropClInput is an input type that accepts GetDatahubTaskTaskListTargetResourceEsParamDropClArgs and GetDatahubTaskTaskListTargetResourceEsParamDropClOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceEsParamDropClInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceEsParamDropClArgs{...}
+//	GetDatahubTaskTaskListTargetResourceEsParamDropClArgs{...}
 type GetDatahubTaskTaskListTargetResourceEsParamDropClInput interface {
 	pulumi.Input
 
@@ -37084,7 +37087,7 @@ func (i GetDatahubTaskTaskListTargetResourceEsParamDropClArgs) ToGetDatahubTaskT
 // GetDatahubTaskTaskListTargetResourceEsParamDropClArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceEsParamDropClArray and GetDatahubTaskTaskListTargetResourceEsParamDropClArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceEsParamDropClArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceEsParamDropClArray{ GetDatahubTaskTaskListTargetResourceEsParamDropClArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceEsParamDropClArray{ GetDatahubTaskTaskListTargetResourceEsParamDropClArgs{...} }
 type GetDatahubTaskTaskListTargetResourceEsParamDropClArrayInput interface {
 	pulumi.Input
 
@@ -37183,7 +37186,7 @@ type GetDatahubTaskTaskListTargetResourceEsParamDropDlq struct {
 // GetDatahubTaskTaskListTargetResourceEsParamDropDlqInput is an input type that accepts GetDatahubTaskTaskListTargetResourceEsParamDropDlqArgs and GetDatahubTaskTaskListTargetResourceEsParamDropDlqOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceEsParamDropDlqInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceEsParamDropDlqArgs{...}
+//	GetDatahubTaskTaskListTargetResourceEsParamDropDlqArgs{...}
 type GetDatahubTaskTaskListTargetResourceEsParamDropDlqInput interface {
 	pulumi.Input
 
@@ -37221,7 +37224,7 @@ func (i GetDatahubTaskTaskListTargetResourceEsParamDropDlqArgs) ToGetDatahubTask
 // GetDatahubTaskTaskListTargetResourceEsParamDropDlqArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceEsParamDropDlqArray and GetDatahubTaskTaskListTargetResourceEsParamDropDlqArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceEsParamDropDlqArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceEsParamDropDlqArray{ GetDatahubTaskTaskListTargetResourceEsParamDropDlqArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceEsParamDropDlqArray{ GetDatahubTaskTaskListTargetResourceEsParamDropDlqArgs{...} }
 type GetDatahubTaskTaskListTargetResourceEsParamDropDlqArrayInput interface {
 	pulumi.Input
 
@@ -37353,7 +37356,7 @@ type GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParam struct {
 // GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamArgs and GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamInput interface {
 	pulumi.Input
 
@@ -37415,7 +37418,7 @@ func (i GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamArgs) ToGetD
 // GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamArray and GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamArray{ GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamArray{ GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamArrayInput interface {
 	pulumi.Input
 
@@ -37579,7 +37582,7 @@ type GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMapping st
 // GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMappingInput is an input type that accepts GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMappingArgs and GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMappingOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMappingInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMappingArgs{...}
+//	GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMappingArgs{...}
 type GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMappingInput interface {
 	pulumi.Input
 
@@ -37613,7 +37616,7 @@ func (i GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMapping
 // GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMappingArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMappingArray and GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMappingArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMappingArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMappingArray{ GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMappingArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMappingArray{ GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMappingArgs{...} }
 type GetDatahubTaskTaskListTargetResourceEsParamDropDlqKafkaParamTableMappingArrayInput interface {
 	pulumi.Input
 
@@ -37717,7 +37720,7 @@ type GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParam struct {
 // GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamArgs and GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamInput interface {
 	pulumi.Input
 
@@ -37757,7 +37760,7 @@ func (i GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamArgs) ToGetD
 // GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamArray and GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamArray{ GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamArray{ GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceEsParamDropDlqTopicParamArrayInput interface {
 	pulumi.Input
 
@@ -37866,7 +37869,7 @@ type GetDatahubTaskTaskListTargetResourceEventBusParam struct {
 // GetDatahubTaskTaskListTargetResourceEventBusParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceEventBusParamArgs and GetDatahubTaskTaskListTargetResourceEventBusParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceEventBusParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceEventBusParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceEventBusParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceEventBusParamInput interface {
 	pulumi.Input
 
@@ -37904,7 +37907,7 @@ func (i GetDatahubTaskTaskListTargetResourceEventBusParamArgs) ToGetDatahubTaskT
 // GetDatahubTaskTaskListTargetResourceEventBusParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceEventBusParamArray and GetDatahubTaskTaskListTargetResourceEventBusParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceEventBusParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceEventBusParamArray{ GetDatahubTaskTaskListTargetResourceEventBusParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceEventBusParamArray{ GetDatahubTaskTaskListTargetResourceEventBusParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceEventBusParamArrayInput interface {
 	pulumi.Input
 
@@ -38032,7 +38035,7 @@ type GetDatahubTaskTaskListTargetResourceKafkaParam struct {
 // GetDatahubTaskTaskListTargetResourceKafkaParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceKafkaParamArgs and GetDatahubTaskTaskListTargetResourceKafkaParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceKafkaParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceKafkaParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceKafkaParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceKafkaParamInput interface {
 	pulumi.Input
 
@@ -38094,7 +38097,7 @@ func (i GetDatahubTaskTaskListTargetResourceKafkaParamArgs) ToGetDatahubTaskTask
 // GetDatahubTaskTaskListTargetResourceKafkaParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceKafkaParamArray and GetDatahubTaskTaskListTargetResourceKafkaParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceKafkaParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceKafkaParamArray{ GetDatahubTaskTaskListTargetResourceKafkaParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceKafkaParamArray{ GetDatahubTaskTaskListTargetResourceKafkaParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceKafkaParamArrayInput interface {
 	pulumi.Input
 
@@ -38256,7 +38259,7 @@ type GetDatahubTaskTaskListTargetResourceKafkaParamTableMapping struct {
 // GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingInput is an input type that accepts GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingArgs and GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingArgs{...}
+//	GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingArgs{...}
 type GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingInput interface {
 	pulumi.Input
 
@@ -38290,7 +38293,7 @@ func (i GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingArgs) ToGetDat
 // GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingArray and GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingArray{ GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingArray{ GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingArgs{...} }
 type GetDatahubTaskTaskListTargetResourceKafkaParamTableMappingArrayInput interface {
 	pulumi.Input
 
@@ -38392,7 +38395,7 @@ type GetDatahubTaskTaskListTargetResourceMariaDbParam struct {
 // GetDatahubTaskTaskListTargetResourceMariaDbParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceMariaDbParamArgs and GetDatahubTaskTaskListTargetResourceMariaDbParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceMariaDbParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceMariaDbParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceMariaDbParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceMariaDbParamInput interface {
 	pulumi.Input
 
@@ -38438,7 +38441,7 @@ func (i GetDatahubTaskTaskListTargetResourceMariaDbParamArgs) ToGetDatahubTaskTa
 // GetDatahubTaskTaskListTargetResourceMariaDbParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceMariaDbParamArray and GetDatahubTaskTaskListTargetResourceMariaDbParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceMariaDbParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceMariaDbParamArray{ GetDatahubTaskTaskListTargetResourceMariaDbParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceMariaDbParamArray{ GetDatahubTaskTaskListTargetResourceMariaDbParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceMariaDbParamArrayInput interface {
 	pulumi.Input
 
@@ -38574,7 +38577,7 @@ type GetDatahubTaskTaskListTargetResourceMongoDbParam struct {
 // GetDatahubTaskTaskListTargetResourceMongoDbParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceMongoDbParamArgs and GetDatahubTaskTaskListTargetResourceMongoDbParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceMongoDbParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceMongoDbParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceMongoDbParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceMongoDbParamInput interface {
 	pulumi.Input
 
@@ -38624,7 +38627,7 @@ func (i GetDatahubTaskTaskListTargetResourceMongoDbParamArgs) ToGetDatahubTaskTa
 // GetDatahubTaskTaskListTargetResourceMongoDbParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceMongoDbParamArray and GetDatahubTaskTaskListTargetResourceMongoDbParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceMongoDbParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceMongoDbParamArray{ GetDatahubTaskTaskListTargetResourceMongoDbParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceMongoDbParamArray{ GetDatahubTaskTaskListTargetResourceMongoDbParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceMongoDbParamArrayInput interface {
 	pulumi.Input
 
@@ -38796,7 +38799,7 @@ type GetDatahubTaskTaskListTargetResourceMySqlParam struct {
 // GetDatahubTaskTaskListTargetResourceMySqlParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceMySqlParamArgs and GetDatahubTaskTaskListTargetResourceMySqlParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceMySqlParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceMySqlParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceMySqlParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceMySqlParamInput interface {
 	pulumi.Input
 
@@ -38872,7 +38875,7 @@ func (i GetDatahubTaskTaskListTargetResourceMySqlParamArgs) ToGetDatahubTaskTask
 // GetDatahubTaskTaskListTargetResourceMySqlParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceMySqlParamArray and GetDatahubTaskTaskListTargetResourceMySqlParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceMySqlParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceMySqlParamArray{ GetDatahubTaskTaskListTargetResourceMySqlParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceMySqlParamArray{ GetDatahubTaskTaskListTargetResourceMySqlParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceMySqlParamArrayInput interface {
 	pulumi.Input
 
@@ -39081,7 +39084,7 @@ type GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMapping struc
 // GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingInput is an input type that accepts GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingArgs and GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingArgs{...}
+//	GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingArgs{...}
 type GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingInput interface {
 	pulumi.Input
 
@@ -39125,7 +39128,7 @@ func (i GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingArg
 // GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingArray and GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingArray{ GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingArray{ GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingArgs{...} }
 type GetDatahubTaskTaskListTargetResourceMySqlParamDataTargetRecordMappingArrayInput interface {
 	pulumi.Input
 
@@ -39254,7 +39257,7 @@ type GetDatahubTaskTaskListTargetResourceMySqlParamDropCl struct {
 // GetDatahubTaskTaskListTargetResourceMySqlParamDropClInput is an input type that accepts GetDatahubTaskTaskListTargetResourceMySqlParamDropClArgs and GetDatahubTaskTaskListTargetResourceMySqlParamDropClOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceMySqlParamDropClInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceMySqlParamDropClArgs{...}
+//	GetDatahubTaskTaskListTargetResourceMySqlParamDropClArgs{...}
 type GetDatahubTaskTaskListTargetResourceMySqlParamDropClInput interface {
 	pulumi.Input
 
@@ -39290,7 +39293,7 @@ func (i GetDatahubTaskTaskListTargetResourceMySqlParamDropClArgs) ToGetDatahubTa
 // GetDatahubTaskTaskListTargetResourceMySqlParamDropClArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceMySqlParamDropClArray and GetDatahubTaskTaskListTargetResourceMySqlParamDropClArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceMySqlParamDropClArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceMySqlParamDropClArray{ GetDatahubTaskTaskListTargetResourceMySqlParamDropClArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceMySqlParamDropClArray{ GetDatahubTaskTaskListTargetResourceMySqlParamDropClArgs{...} }
 type GetDatahubTaskTaskListTargetResourceMySqlParamDropClArrayInput interface {
 	pulumi.Input
 
@@ -39403,7 +39406,7 @@ type GetDatahubTaskTaskListTargetResourcePostgreSqlParam struct {
 // GetDatahubTaskTaskListTargetResourcePostgreSqlParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourcePostgreSqlParamArgs and GetDatahubTaskTaskListTargetResourcePostgreSqlParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourcePostgreSqlParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourcePostgreSqlParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourcePostgreSqlParamArgs{...}
 type GetDatahubTaskTaskListTargetResourcePostgreSqlParamInput interface {
 	pulumi.Input
 
@@ -39455,7 +39458,7 @@ func (i GetDatahubTaskTaskListTargetResourcePostgreSqlParamArgs) ToGetDatahubTas
 // GetDatahubTaskTaskListTargetResourcePostgreSqlParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourcePostgreSqlParamArray and GetDatahubTaskTaskListTargetResourcePostgreSqlParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourcePostgreSqlParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourcePostgreSqlParamArray{ GetDatahubTaskTaskListTargetResourcePostgreSqlParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourcePostgreSqlParamArray{ GetDatahubTaskTaskListTargetResourcePostgreSqlParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourcePostgreSqlParamArrayInput interface {
 	pulumi.Input
 
@@ -39602,7 +39605,7 @@ type GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMapping 
 // GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappingInput is an input type that accepts GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappingArgs and GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappingOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappingInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappingArgs{...}
+//	GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappingArgs{...}
 type GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappingInput interface {
 	pulumi.Input
 
@@ -39646,7 +39649,7 @@ func (i GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappi
 // GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappingArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappingArray and GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappingArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappingArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappingArray{ GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappingArgs{...} }
+//	GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappingArray{ GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappingArgs{...} }
 type GetDatahubTaskTaskListTargetResourcePostgreSqlParamDataTargetRecordMappingArrayInput interface {
 	pulumi.Input
 
@@ -39781,7 +39784,7 @@ type GetDatahubTaskTaskListTargetResourceScfParam struct {
 // GetDatahubTaskTaskListTargetResourceScfParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceScfParamArgs and GetDatahubTaskTaskListTargetResourceScfParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceScfParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceScfParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceScfParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceScfParamInput interface {
 	pulumi.Input
 
@@ -39817,7 +39820,7 @@ func (i GetDatahubTaskTaskListTargetResourceScfParamArgs) ToGetDatahubTaskTaskLi
 // GetDatahubTaskTaskListTargetResourceScfParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceScfParamArray and GetDatahubTaskTaskListTargetResourceScfParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceScfParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceScfParamArray{ GetDatahubTaskTaskListTargetResourceScfParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceScfParamArray{ GetDatahubTaskTaskListTargetResourceScfParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceScfParamArrayInput interface {
 	pulumi.Input
 
@@ -39912,7 +39915,7 @@ type GetDatahubTaskTaskListTargetResourceSqlServerParam struct {
 // GetDatahubTaskTaskListTargetResourceSqlServerParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceSqlServerParamArgs and GetDatahubTaskTaskListTargetResourceSqlServerParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceSqlServerParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceSqlServerParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceSqlServerParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceSqlServerParamInput interface {
 	pulumi.Input
 
@@ -39946,7 +39949,7 @@ func (i GetDatahubTaskTaskListTargetResourceSqlServerParamArgs) ToGetDatahubTask
 // GetDatahubTaskTaskListTargetResourceSqlServerParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceSqlServerParamArray and GetDatahubTaskTaskListTargetResourceSqlServerParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceSqlServerParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceSqlServerParamArray{ GetDatahubTaskTaskListTargetResourceSqlServerParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceSqlServerParamArray{ GetDatahubTaskTaskListTargetResourceSqlServerParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceSqlServerParamArrayInput interface {
 	pulumi.Input
 
@@ -40038,7 +40041,7 @@ type GetDatahubTaskTaskListTargetResourceTdwParam struct {
 // GetDatahubTaskTaskListTargetResourceTdwParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceTdwParamArgs and GetDatahubTaskTaskListTargetResourceTdwParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceTdwParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceTdwParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceTdwParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceTdwParamInput interface {
 	pulumi.Input
 
@@ -40074,7 +40077,7 @@ func (i GetDatahubTaskTaskListTargetResourceTdwParamArgs) ToGetDatahubTaskTaskLi
 // GetDatahubTaskTaskListTargetResourceTdwParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceTdwParamArray and GetDatahubTaskTaskListTargetResourceTdwParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceTdwParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceTdwParamArray{ GetDatahubTaskTaskListTargetResourceTdwParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceTdwParamArray{ GetDatahubTaskTaskListTargetResourceTdwParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceTdwParamArrayInput interface {
 	pulumi.Input
 
@@ -40175,7 +40178,7 @@ type GetDatahubTaskTaskListTargetResourceTopicParam struct {
 // GetDatahubTaskTaskListTargetResourceTopicParamInput is an input type that accepts GetDatahubTaskTaskListTargetResourceTopicParamArgs and GetDatahubTaskTaskListTargetResourceTopicParamOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceTopicParamInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceTopicParamArgs{...}
+//	GetDatahubTaskTaskListTargetResourceTopicParamArgs{...}
 type GetDatahubTaskTaskListTargetResourceTopicParamInput interface {
 	pulumi.Input
 
@@ -40215,7 +40218,7 @@ func (i GetDatahubTaskTaskListTargetResourceTopicParamArgs) ToGetDatahubTaskTask
 // GetDatahubTaskTaskListTargetResourceTopicParamArrayInput is an input type that accepts GetDatahubTaskTaskListTargetResourceTopicParamArray and GetDatahubTaskTaskListTargetResourceTopicParamArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTaskTaskListTargetResourceTopicParamArrayInput` via:
 //
-//          GetDatahubTaskTaskListTargetResourceTopicParamArray{ GetDatahubTaskTaskListTargetResourceTopicParamArgs{...} }
+//	GetDatahubTaskTaskListTargetResourceTopicParamArray{ GetDatahubTaskTaskListTargetResourceTopicParamArgs{...} }
 type GetDatahubTaskTaskListTargetResourceTopicParamArrayInput interface {
 	pulumi.Input
 
@@ -40326,7 +40329,7 @@ type GetDatahubTopicTopicList struct {
 // GetDatahubTopicTopicListInput is an input type that accepts GetDatahubTopicTopicListArgs and GetDatahubTopicTopicListOutput values.
 // You can construct a concrete instance of `GetDatahubTopicTopicListInput` via:
 //
-//          GetDatahubTopicTopicListArgs{...}
+//	GetDatahubTopicTopicListArgs{...}
 type GetDatahubTopicTopicListInput interface {
 	pulumi.Input
 
@@ -40366,7 +40369,7 @@ func (i GetDatahubTopicTopicListArgs) ToGetDatahubTopicTopicListOutputWithContex
 // GetDatahubTopicTopicListArrayInput is an input type that accepts GetDatahubTopicTopicListArray and GetDatahubTopicTopicListArrayOutput values.
 // You can construct a concrete instance of `GetDatahubTopicTopicListArrayInput` via:
 //
-//          GetDatahubTopicTopicListArray{ GetDatahubTopicTopicListArgs{...} }
+//	GetDatahubTopicTopicListArray{ GetDatahubTopicTopicListArgs{...} }
 type GetDatahubTopicTopicListArrayInput interface {
 	pulumi.Input
 
@@ -40467,7 +40470,7 @@ type GetGroupGroupList struct {
 // GetGroupGroupListInput is an input type that accepts GetGroupGroupListArgs and GetGroupGroupListOutput values.
 // You can construct a concrete instance of `GetGroupGroupListInput` via:
 //
-//          GetGroupGroupListArgs{...}
+//	GetGroupGroupListArgs{...}
 type GetGroupGroupListInput interface {
 	pulumi.Input
 
@@ -40497,7 +40500,7 @@ func (i GetGroupGroupListArgs) ToGetGroupGroupListOutputWithContext(ctx context.
 // GetGroupGroupListArrayInput is an input type that accepts GetGroupGroupListArray and GetGroupGroupListArrayOutput values.
 // You can construct a concrete instance of `GetGroupGroupListArrayInput` via:
 //
-//          GetGroupGroupListArray{ GetGroupGroupListArgs{...} }
+//	GetGroupGroupListArray{ GetGroupGroupListArgs{...} }
 type GetGroupGroupListArrayInput interface {
 	pulumi.Input
 
@@ -40581,7 +40584,7 @@ type GetGroupInfoResult struct {
 // GetGroupInfoResultInput is an input type that accepts GetGroupInfoResultArgs and GetGroupInfoResultOutput values.
 // You can construct a concrete instance of `GetGroupInfoResultInput` via:
 //
-//          GetGroupInfoResultArgs{...}
+//	GetGroupInfoResultArgs{...}
 type GetGroupInfoResultInput interface {
 	pulumi.Input
 
@@ -40619,7 +40622,7 @@ func (i GetGroupInfoResultArgs) ToGetGroupInfoResultOutputWithContext(ctx contex
 // GetGroupInfoResultArrayInput is an input type that accepts GetGroupInfoResultArray and GetGroupInfoResultArrayOutput values.
 // You can construct a concrete instance of `GetGroupInfoResultArrayInput` via:
 //
-//          GetGroupInfoResultArray{ GetGroupInfoResultArgs{...} }
+//	GetGroupInfoResultArray{ GetGroupInfoResultArgs{...} }
 type GetGroupInfoResultArrayInput interface {
 	pulumi.Input
 
@@ -40719,7 +40722,7 @@ type GetGroupInfoResultMember struct {
 // GetGroupInfoResultMemberInput is an input type that accepts GetGroupInfoResultMemberArgs and GetGroupInfoResultMemberOutput values.
 // You can construct a concrete instance of `GetGroupInfoResultMemberInput` via:
 //
-//          GetGroupInfoResultMemberArgs{...}
+//	GetGroupInfoResultMemberArgs{...}
 type GetGroupInfoResultMemberInput interface {
 	pulumi.Input
 
@@ -40753,7 +40756,7 @@ func (i GetGroupInfoResultMemberArgs) ToGetGroupInfoResultMemberOutputWithContex
 // GetGroupInfoResultMemberArrayInput is an input type that accepts GetGroupInfoResultMemberArray and GetGroupInfoResultMemberArrayOutput values.
 // You can construct a concrete instance of `GetGroupInfoResultMemberArrayInput` via:
 //
-//          GetGroupInfoResultMemberArray{ GetGroupInfoResultMemberArgs{...} }
+//	GetGroupInfoResultMemberArray{ GetGroupInfoResultMemberArgs{...} }
 type GetGroupInfoResultMemberArrayInput interface {
 	pulumi.Input
 
@@ -40839,7 +40842,7 @@ type GetGroupInfoResultMemberAssignment struct {
 // GetGroupInfoResultMemberAssignmentInput is an input type that accepts GetGroupInfoResultMemberAssignmentArgs and GetGroupInfoResultMemberAssignmentOutput values.
 // You can construct a concrete instance of `GetGroupInfoResultMemberAssignmentInput` via:
 //
-//          GetGroupInfoResultMemberAssignmentArgs{...}
+//	GetGroupInfoResultMemberAssignmentArgs{...}
 type GetGroupInfoResultMemberAssignmentInput interface {
 	pulumi.Input
 
@@ -40869,7 +40872,7 @@ func (i GetGroupInfoResultMemberAssignmentArgs) ToGetGroupInfoResultMemberAssign
 // GetGroupInfoResultMemberAssignmentArrayInput is an input type that accepts GetGroupInfoResultMemberAssignmentArray and GetGroupInfoResultMemberAssignmentArrayOutput values.
 // You can construct a concrete instance of `GetGroupInfoResultMemberAssignmentArrayInput` via:
 //
-//          GetGroupInfoResultMemberAssignmentArray{ GetGroupInfoResultMemberAssignmentArgs{...} }
+//	GetGroupInfoResultMemberAssignmentArray{ GetGroupInfoResultMemberAssignmentArgs{...} }
 type GetGroupInfoResultMemberAssignmentArrayInput interface {
 	pulumi.Input
 
@@ -40945,7 +40948,7 @@ type GetGroupInfoResultMemberAssignmentTopic struct {
 // GetGroupInfoResultMemberAssignmentTopicInput is an input type that accepts GetGroupInfoResultMemberAssignmentTopicArgs and GetGroupInfoResultMemberAssignmentTopicOutput values.
 // You can construct a concrete instance of `GetGroupInfoResultMemberAssignmentTopicInput` via:
 //
-//          GetGroupInfoResultMemberAssignmentTopicArgs{...}
+//	GetGroupInfoResultMemberAssignmentTopicArgs{...}
 type GetGroupInfoResultMemberAssignmentTopicInput interface {
 	pulumi.Input
 
@@ -40975,7 +40978,7 @@ func (i GetGroupInfoResultMemberAssignmentTopicArgs) ToGetGroupInfoResultMemberA
 // GetGroupInfoResultMemberAssignmentTopicArrayInput is an input type that accepts GetGroupInfoResultMemberAssignmentTopicArray and GetGroupInfoResultMemberAssignmentTopicArrayOutput values.
 // You can construct a concrete instance of `GetGroupInfoResultMemberAssignmentTopicArrayInput` via:
 //
-//          GetGroupInfoResultMemberAssignmentTopicArray{ GetGroupInfoResultMemberAssignmentTopicArgs{...} }
+//	GetGroupInfoResultMemberAssignmentTopicArray{ GetGroupInfoResultMemberAssignmentTopicArgs{...} }
 type GetGroupInfoResultMemberAssignmentTopicArrayInput interface {
 	pulumi.Input
 
@@ -41051,7 +41054,7 @@ type GetGroupOffsetsTopicList struct {
 // GetGroupOffsetsTopicListInput is an input type that accepts GetGroupOffsetsTopicListArgs and GetGroupOffsetsTopicListOutput values.
 // You can construct a concrete instance of `GetGroupOffsetsTopicListInput` via:
 //
-//          GetGroupOffsetsTopicListArgs{...}
+//	GetGroupOffsetsTopicListArgs{...}
 type GetGroupOffsetsTopicListInput interface {
 	pulumi.Input
 
@@ -41081,7 +41084,7 @@ func (i GetGroupOffsetsTopicListArgs) ToGetGroupOffsetsTopicListOutputWithContex
 // GetGroupOffsetsTopicListArrayInput is an input type that accepts GetGroupOffsetsTopicListArray and GetGroupOffsetsTopicListArrayOutput values.
 // You can construct a concrete instance of `GetGroupOffsetsTopicListArrayInput` via:
 //
-//          GetGroupOffsetsTopicListArray{ GetGroupOffsetsTopicListArgs{...} }
+//	GetGroupOffsetsTopicListArray{ GetGroupOffsetsTopicListArgs{...} }
 type GetGroupOffsetsTopicListArrayInput interface {
 	pulumi.Input
 
@@ -41165,7 +41168,7 @@ type GetGroupOffsetsTopicListPartition struct {
 // GetGroupOffsetsTopicListPartitionInput is an input type that accepts GetGroupOffsetsTopicListPartitionArgs and GetGroupOffsetsTopicListPartitionOutput values.
 // You can construct a concrete instance of `GetGroupOffsetsTopicListPartitionInput` via:
 //
-//          GetGroupOffsetsTopicListPartitionArgs{...}
+//	GetGroupOffsetsTopicListPartitionArgs{...}
 type GetGroupOffsetsTopicListPartitionInput interface {
 	pulumi.Input
 
@@ -41203,7 +41206,7 @@ func (i GetGroupOffsetsTopicListPartitionArgs) ToGetGroupOffsetsTopicListPartiti
 // GetGroupOffsetsTopicListPartitionArrayInput is an input type that accepts GetGroupOffsetsTopicListPartitionArray and GetGroupOffsetsTopicListPartitionArrayOutput values.
 // You can construct a concrete instance of `GetGroupOffsetsTopicListPartitionArrayInput` via:
 //
-//          GetGroupOffsetsTopicListPartitionArray{ GetGroupOffsetsTopicListPartitionArgs{...} }
+//	GetGroupOffsetsTopicListPartitionArray{ GetGroupOffsetsTopicListPartitionArgs{...} }
 type GetGroupOffsetsTopicListPartitionArrayInput interface {
 	pulumi.Input
 
@@ -41299,7 +41302,7 @@ type GetInstancesFilter struct {
 // GetInstancesFilterInput is an input type that accepts GetInstancesFilterArgs and GetInstancesFilterOutput values.
 // You can construct a concrete instance of `GetInstancesFilterInput` via:
 //
-//          GetInstancesFilterArgs{...}
+//	GetInstancesFilterArgs{...}
 type GetInstancesFilterInput interface {
 	pulumi.Input
 
@@ -41329,7 +41332,7 @@ func (i GetInstancesFilterArgs) ToGetInstancesFilterOutputWithContext(ctx contex
 // GetInstancesFilterArrayInput is an input type that accepts GetInstancesFilterArray and GetInstancesFilterArrayOutput values.
 // You can construct a concrete instance of `GetInstancesFilterArrayInput` via:
 //
-//          GetInstancesFilterArray{ GetInstancesFilterArgs{...} }
+//	GetInstancesFilterArray{ GetInstancesFilterArgs{...} }
 type GetInstancesFilterArrayInput interface {
 	pulumi.Input
 
@@ -41461,7 +41464,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -41547,7 +41550,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -41763,7 +41766,7 @@ type GetInstancesInstanceListTag struct {
 // GetInstancesInstanceListTagInput is an input type that accepts GetInstancesInstanceListTagArgs and GetInstancesInstanceListTagOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListTagInput` via:
 //
-//          GetInstancesInstanceListTagArgs{...}
+//	GetInstancesInstanceListTagArgs{...}
 type GetInstancesInstanceListTagInput interface {
 	pulumi.Input
 
@@ -41793,7 +41796,7 @@ func (i GetInstancesInstanceListTagArgs) ToGetInstancesInstanceListTagOutputWith
 // GetInstancesInstanceListTagArrayInput is an input type that accepts GetInstancesInstanceListTagArray and GetInstancesInstanceListTagArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListTagArrayInput` via:
 //
-//          GetInstancesInstanceListTagArray{ GetInstancesInstanceListTagArgs{...} }
+//	GetInstancesInstanceListTagArray{ GetInstancesInstanceListTagArgs{...} }
 type GetInstancesInstanceListTagArrayInput interface {
 	pulumi.Input
 
@@ -41869,7 +41872,7 @@ type GetInstancesInstanceListVipList struct {
 // GetInstancesInstanceListVipListInput is an input type that accepts GetInstancesInstanceListVipListArgs and GetInstancesInstanceListVipListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListVipListInput` via:
 //
-//          GetInstancesInstanceListVipListArgs{...}
+//	GetInstancesInstanceListVipListArgs{...}
 type GetInstancesInstanceListVipListInput interface {
 	pulumi.Input
 
@@ -41942,7 +41945,7 @@ type GetRegionResult struct {
 // GetRegionResultInput is an input type that accepts GetRegionResultArgs and GetRegionResultOutput values.
 // You can construct a concrete instance of `GetRegionResultInput` via:
 //
-//          GetRegionResultArgs{...}
+//	GetRegionResultArgs{...}
 type GetRegionResultInput interface {
 	pulumi.Input
 
@@ -41984,7 +41987,7 @@ func (i GetRegionResultArgs) ToGetRegionResultOutputWithContext(ctx context.Cont
 // GetRegionResultArrayInput is an input type that accepts GetRegionResultArray and GetRegionResultArrayOutput values.
 // You can construct a concrete instance of `GetRegionResultArrayInput` via:
 //
-//          GetRegionResultArray{ GetRegionResultArgs{...} }
+//	GetRegionResultArray{ GetRegionResultArgs{...} }
 type GetRegionResultArrayInput interface {
 	pulumi.Input
 
@@ -42090,7 +42093,7 @@ type GetTaskStatusResult struct {
 // GetTaskStatusResultInput is an input type that accepts GetTaskStatusResultArgs and GetTaskStatusResultOutput values.
 // You can construct a concrete instance of `GetTaskStatusResultInput` via:
 //
-//          GetTaskStatusResultArgs{...}
+//	GetTaskStatusResultArgs{...}
 type GetTaskStatusResultInput interface {
 	pulumi.Input
 
@@ -42120,7 +42123,7 @@ func (i GetTaskStatusResultArgs) ToGetTaskStatusResultOutputWithContext(ctx cont
 // GetTaskStatusResultArrayInput is an input type that accepts GetTaskStatusResultArray and GetTaskStatusResultArrayOutput values.
 // You can construct a concrete instance of `GetTaskStatusResultArrayInput` via:
 //
-//          GetTaskStatusResultArray{ GetTaskStatusResultArgs{...} }
+//	GetTaskStatusResultArray{ GetTaskStatusResultArgs{...} }
 type GetTaskStatusResultArrayInput interface {
 	pulumi.Input
 
@@ -42198,7 +42201,7 @@ type GetTopicFlowRankingResult struct {
 // GetTopicFlowRankingResultInput is an input type that accepts GetTopicFlowRankingResultArgs and GetTopicFlowRankingResultOutput values.
 // You can construct a concrete instance of `GetTopicFlowRankingResultInput` via:
 //
-//          GetTopicFlowRankingResultArgs{...}
+//	GetTopicFlowRankingResultArgs{...}
 type GetTopicFlowRankingResultInput interface {
 	pulumi.Input
 
@@ -42230,7 +42233,7 @@ func (i GetTopicFlowRankingResultArgs) ToGetTopicFlowRankingResultOutputWithCont
 // GetTopicFlowRankingResultArrayInput is an input type that accepts GetTopicFlowRankingResultArray and GetTopicFlowRankingResultArrayOutput values.
 // You can construct a concrete instance of `GetTopicFlowRankingResultArrayInput` via:
 //
-//          GetTopicFlowRankingResultArray{ GetTopicFlowRankingResultArgs{...} }
+//	GetTopicFlowRankingResultArray{ GetTopicFlowRankingResultArgs{...} }
 type GetTopicFlowRankingResultArrayInput interface {
 	pulumi.Input
 
@@ -42313,7 +42316,7 @@ type GetTopicFlowRankingResultConsumeSpeed struct {
 // GetTopicFlowRankingResultConsumeSpeedInput is an input type that accepts GetTopicFlowRankingResultConsumeSpeedArgs and GetTopicFlowRankingResultConsumeSpeedOutput values.
 // You can construct a concrete instance of `GetTopicFlowRankingResultConsumeSpeedInput` via:
 //
-//          GetTopicFlowRankingResultConsumeSpeedArgs{...}
+//	GetTopicFlowRankingResultConsumeSpeedArgs{...}
 type GetTopicFlowRankingResultConsumeSpeedInput interface {
 	pulumi.Input
 
@@ -42343,7 +42346,7 @@ func (i GetTopicFlowRankingResultConsumeSpeedArgs) ToGetTopicFlowRankingResultCo
 // GetTopicFlowRankingResultConsumeSpeedArrayInput is an input type that accepts GetTopicFlowRankingResultConsumeSpeedArray and GetTopicFlowRankingResultConsumeSpeedArrayOutput values.
 // You can construct a concrete instance of `GetTopicFlowRankingResultConsumeSpeedArrayInput` via:
 //
-//          GetTopicFlowRankingResultConsumeSpeedArray{ GetTopicFlowRankingResultConsumeSpeedArgs{...} }
+//	GetTopicFlowRankingResultConsumeSpeedArray{ GetTopicFlowRankingResultConsumeSpeedArgs{...} }
 type GetTopicFlowRankingResultConsumeSpeedArrayInput interface {
 	pulumi.Input
 
@@ -42427,7 +42430,7 @@ type GetTopicFlowRankingResultTopicFlow struct {
 // GetTopicFlowRankingResultTopicFlowInput is an input type that accepts GetTopicFlowRankingResultTopicFlowArgs and GetTopicFlowRankingResultTopicFlowOutput values.
 // You can construct a concrete instance of `GetTopicFlowRankingResultTopicFlowInput` via:
 //
-//          GetTopicFlowRankingResultTopicFlowArgs{...}
+//	GetTopicFlowRankingResultTopicFlowArgs{...}
 type GetTopicFlowRankingResultTopicFlowInput interface {
 	pulumi.Input
 
@@ -42465,7 +42468,7 @@ func (i GetTopicFlowRankingResultTopicFlowArgs) ToGetTopicFlowRankingResultTopic
 // GetTopicFlowRankingResultTopicFlowArrayInput is an input type that accepts GetTopicFlowRankingResultTopicFlowArray and GetTopicFlowRankingResultTopicFlowArrayOutput values.
 // You can construct a concrete instance of `GetTopicFlowRankingResultTopicFlowArrayInput` via:
 //
-//          GetTopicFlowRankingResultTopicFlowArray{ GetTopicFlowRankingResultTopicFlowArgs{...} }
+//	GetTopicFlowRankingResultTopicFlowArray{ GetTopicFlowRankingResultTopicFlowArgs{...} }
 type GetTopicFlowRankingResultTopicFlowArrayInput interface {
 	pulumi.Input
 
@@ -42569,7 +42572,7 @@ type GetTopicFlowRankingResultTopicMessageHeap struct {
 // GetTopicFlowRankingResultTopicMessageHeapInput is an input type that accepts GetTopicFlowRankingResultTopicMessageHeapArgs and GetTopicFlowRankingResultTopicMessageHeapOutput values.
 // You can construct a concrete instance of `GetTopicFlowRankingResultTopicMessageHeapInput` via:
 //
-//          GetTopicFlowRankingResultTopicMessageHeapArgs{...}
+//	GetTopicFlowRankingResultTopicMessageHeapArgs{...}
 type GetTopicFlowRankingResultTopicMessageHeapInput interface {
 	pulumi.Input
 
@@ -42607,7 +42610,7 @@ func (i GetTopicFlowRankingResultTopicMessageHeapArgs) ToGetTopicFlowRankingResu
 // GetTopicFlowRankingResultTopicMessageHeapArrayInput is an input type that accepts GetTopicFlowRankingResultTopicMessageHeapArray and GetTopicFlowRankingResultTopicMessageHeapArrayOutput values.
 // You can construct a concrete instance of `GetTopicFlowRankingResultTopicMessageHeapArrayInput` via:
 //
-//          GetTopicFlowRankingResultTopicMessageHeapArray{ GetTopicFlowRankingResultTopicMessageHeapArgs{...} }
+//	GetTopicFlowRankingResultTopicMessageHeapArray{ GetTopicFlowRankingResultTopicMessageHeapArgs{...} }
 type GetTopicFlowRankingResultTopicMessageHeapArrayInput interface {
 	pulumi.Input
 
@@ -42705,7 +42708,7 @@ type GetTopicProduceConnectionResult struct {
 // GetTopicProduceConnectionResultInput is an input type that accepts GetTopicProduceConnectionResultArgs and GetTopicProduceConnectionResultOutput values.
 // You can construct a concrete instance of `GetTopicProduceConnectionResultInput` via:
 //
-//          GetTopicProduceConnectionResultArgs{...}
+//	GetTopicProduceConnectionResultArgs{...}
 type GetTopicProduceConnectionResultInput interface {
 	pulumi.Input
 
@@ -42737,7 +42740,7 @@ func (i GetTopicProduceConnectionResultArgs) ToGetTopicProduceConnectionResultOu
 // GetTopicProduceConnectionResultArrayInput is an input type that accepts GetTopicProduceConnectionResultArray and GetTopicProduceConnectionResultArrayOutput values.
 // You can construct a concrete instance of `GetTopicProduceConnectionResultArrayInput` via:
 //
-//          GetTopicProduceConnectionResultArray{ GetTopicProduceConnectionResultArgs{...} }
+//	GetTopicProduceConnectionResultArray{ GetTopicProduceConnectionResultArgs{...} }
 type GetTopicProduceConnectionResultArrayInput interface {
 	pulumi.Input
 
@@ -42826,7 +42829,7 @@ type GetTopicSubscribeGroupGroupsInfo struct {
 // GetTopicSubscribeGroupGroupsInfoInput is an input type that accepts GetTopicSubscribeGroupGroupsInfoArgs and GetTopicSubscribeGroupGroupsInfoOutput values.
 // You can construct a concrete instance of `GetTopicSubscribeGroupGroupsInfoInput` via:
 //
-//          GetTopicSubscribeGroupGroupsInfoArgs{...}
+//	GetTopicSubscribeGroupGroupsInfoArgs{...}
 type GetTopicSubscribeGroupGroupsInfoInput interface {
 	pulumi.Input
 
@@ -42864,7 +42867,7 @@ func (i GetTopicSubscribeGroupGroupsInfoArgs) ToGetTopicSubscribeGroupGroupsInfo
 // GetTopicSubscribeGroupGroupsInfoArrayInput is an input type that accepts GetTopicSubscribeGroupGroupsInfoArray and GetTopicSubscribeGroupGroupsInfoArrayOutput values.
 // You can construct a concrete instance of `GetTopicSubscribeGroupGroupsInfoArrayInput` via:
 //
-//          GetTopicSubscribeGroupGroupsInfoArray{ GetTopicSubscribeGroupGroupsInfoArgs{...} }
+//	GetTopicSubscribeGroupGroupsInfoArray{ GetTopicSubscribeGroupGroupsInfoArgs{...} }
 type GetTopicSubscribeGroupGroupsInfoArrayInput interface {
 	pulumi.Input
 
@@ -42964,7 +42967,7 @@ type GetTopicSubscribeGroupGroupsInfoMember struct {
 // GetTopicSubscribeGroupGroupsInfoMemberInput is an input type that accepts GetTopicSubscribeGroupGroupsInfoMemberArgs and GetTopicSubscribeGroupGroupsInfoMemberOutput values.
 // You can construct a concrete instance of `GetTopicSubscribeGroupGroupsInfoMemberInput` via:
 //
-//          GetTopicSubscribeGroupGroupsInfoMemberArgs{...}
+//	GetTopicSubscribeGroupGroupsInfoMemberArgs{...}
 type GetTopicSubscribeGroupGroupsInfoMemberInput interface {
 	pulumi.Input
 
@@ -42998,7 +43001,7 @@ func (i GetTopicSubscribeGroupGroupsInfoMemberArgs) ToGetTopicSubscribeGroupGrou
 // GetTopicSubscribeGroupGroupsInfoMemberArrayInput is an input type that accepts GetTopicSubscribeGroupGroupsInfoMemberArray and GetTopicSubscribeGroupGroupsInfoMemberArrayOutput values.
 // You can construct a concrete instance of `GetTopicSubscribeGroupGroupsInfoMemberArrayInput` via:
 //
-//          GetTopicSubscribeGroupGroupsInfoMemberArray{ GetTopicSubscribeGroupGroupsInfoMemberArgs{...} }
+//	GetTopicSubscribeGroupGroupsInfoMemberArray{ GetTopicSubscribeGroupGroupsInfoMemberArgs{...} }
 type GetTopicSubscribeGroupGroupsInfoMemberArrayInput interface {
 	pulumi.Input
 
@@ -43086,7 +43089,7 @@ type GetTopicSubscribeGroupGroupsInfoMemberAssignment struct {
 // GetTopicSubscribeGroupGroupsInfoMemberAssignmentInput is an input type that accepts GetTopicSubscribeGroupGroupsInfoMemberAssignmentArgs and GetTopicSubscribeGroupGroupsInfoMemberAssignmentOutput values.
 // You can construct a concrete instance of `GetTopicSubscribeGroupGroupsInfoMemberAssignmentInput` via:
 //
-//          GetTopicSubscribeGroupGroupsInfoMemberAssignmentArgs{...}
+//	GetTopicSubscribeGroupGroupsInfoMemberAssignmentArgs{...}
 type GetTopicSubscribeGroupGroupsInfoMemberAssignmentInput interface {
 	pulumi.Input
 
@@ -43116,7 +43119,7 @@ func (i GetTopicSubscribeGroupGroupsInfoMemberAssignmentArgs) ToGetTopicSubscrib
 // GetTopicSubscribeGroupGroupsInfoMemberAssignmentArrayInput is an input type that accepts GetTopicSubscribeGroupGroupsInfoMemberAssignmentArray and GetTopicSubscribeGroupGroupsInfoMemberAssignmentArrayOutput values.
 // You can construct a concrete instance of `GetTopicSubscribeGroupGroupsInfoMemberAssignmentArrayInput` via:
 //
-//          GetTopicSubscribeGroupGroupsInfoMemberAssignmentArray{ GetTopicSubscribeGroupGroupsInfoMemberAssignmentArgs{...} }
+//	GetTopicSubscribeGroupGroupsInfoMemberAssignmentArray{ GetTopicSubscribeGroupGroupsInfoMemberAssignmentArgs{...} }
 type GetTopicSubscribeGroupGroupsInfoMemberAssignmentArrayInput interface {
 	pulumi.Input
 
@@ -43194,7 +43197,7 @@ type GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopic struct {
 // GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicInput is an input type that accepts GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicArgs and GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicOutput values.
 // You can construct a concrete instance of `GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicInput` via:
 //
-//          GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicArgs{...}
+//	GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicArgs{...}
 type GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicInput interface {
 	pulumi.Input
 
@@ -43224,7 +43227,7 @@ func (i GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicArgs) ToGetTopicSub
 // GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicArrayInput is an input type that accepts GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicArray and GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicArrayOutput values.
 // You can construct a concrete instance of `GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicArrayInput` via:
 //
-//          GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicArray{ GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicArgs{...} }
+//	GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicArray{ GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicArgs{...} }
 type GetTopicSubscribeGroupGroupsInfoMemberAssignmentTopicArrayInput interface {
 	pulumi.Input
 
@@ -43312,7 +43315,7 @@ type GetTopicSyncReplicaTopicInSyncReplicaList struct {
 // GetTopicSyncReplicaTopicInSyncReplicaListInput is an input type that accepts GetTopicSyncReplicaTopicInSyncReplicaListArgs and GetTopicSyncReplicaTopicInSyncReplicaListOutput values.
 // You can construct a concrete instance of `GetTopicSyncReplicaTopicInSyncReplicaListInput` via:
 //
-//          GetTopicSyncReplicaTopicInSyncReplicaListArgs{...}
+//	GetTopicSyncReplicaTopicInSyncReplicaListArgs{...}
 type GetTopicSyncReplicaTopicInSyncReplicaListInput interface {
 	pulumi.Input
 
@@ -43354,7 +43357,7 @@ func (i GetTopicSyncReplicaTopicInSyncReplicaListArgs) ToGetTopicSyncReplicaTopi
 // GetTopicSyncReplicaTopicInSyncReplicaListArrayInput is an input type that accepts GetTopicSyncReplicaTopicInSyncReplicaListArray and GetTopicSyncReplicaTopicInSyncReplicaListArrayOutput values.
 // You can construct a concrete instance of `GetTopicSyncReplicaTopicInSyncReplicaListArrayInput` via:
 //
-//          GetTopicSyncReplicaTopicInSyncReplicaListArray{ GetTopicSyncReplicaTopicInSyncReplicaListArgs{...} }
+//	GetTopicSyncReplicaTopicInSyncReplicaListArray{ GetTopicSyncReplicaTopicInSyncReplicaListArgs{...} }
 type GetTopicSyncReplicaTopicInSyncReplicaListArrayInput interface {
 	pulumi.Input
 
@@ -43492,7 +43495,7 @@ type GetTopicsInstanceList struct {
 // GetTopicsInstanceListInput is an input type that accepts GetTopicsInstanceListArgs and GetTopicsInstanceListOutput values.
 // You can construct a concrete instance of `GetTopicsInstanceListInput` via:
 //
-//          GetTopicsInstanceListArgs{...}
+//	GetTopicsInstanceListArgs{...}
 type GetTopicsInstanceListInput interface {
 	pulumi.Input
 
@@ -43554,7 +43557,7 @@ func (i GetTopicsInstanceListArgs) ToGetTopicsInstanceListOutputWithContext(ctx 
 // GetTopicsInstanceListArrayInput is an input type that accepts GetTopicsInstanceListArray and GetTopicsInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetTopicsInstanceListArrayInput` via:
 //
-//          GetTopicsInstanceListArray{ GetTopicsInstanceListArgs{...} }
+//	GetTopicsInstanceListArray{ GetTopicsInstanceListArgs{...} }
 type GetTopicsInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -43712,7 +43715,7 @@ type GetUsersUserList struct {
 // GetUsersUserListInput is an input type that accepts GetUsersUserListArgs and GetUsersUserListOutput values.
 // You can construct a concrete instance of `GetUsersUserListInput` via:
 //
-//          GetUsersUserListArgs{...}
+//	GetUsersUserListArgs{...}
 type GetUsersUserListInput interface {
 	pulumi.Input
 
@@ -43744,7 +43747,7 @@ func (i GetUsersUserListArgs) ToGetUsersUserListOutputWithContext(ctx context.Co
 // GetUsersUserListArrayInput is an input type that accepts GetUsersUserListArray and GetUsersUserListArrayOutput values.
 // You can construct a concrete instance of `GetUsersUserListArrayInput` via:
 //
-//          GetUsersUserListArray{ GetUsersUserListArgs{...} }
+//	GetUsersUserListArray{ GetUsersUserListArgs{...} }
 type GetUsersUserListArrayInput interface {
 	pulumi.Input
 
@@ -43845,7 +43848,7 @@ type GetZoneResult struct {
 // GetZoneResultInput is an input type that accepts GetZoneResultArgs and GetZoneResultOutput values.
 // You can construct a concrete instance of `GetZoneResultInput` via:
 //
-//          GetZoneResultArgs{...}
+//	GetZoneResultArgs{...}
 type GetZoneResultInput interface {
 	pulumi.Input
 
@@ -43895,7 +43898,7 @@ func (i GetZoneResultArgs) ToGetZoneResultOutputWithContext(ctx context.Context)
 // GetZoneResultArrayInput is an input type that accepts GetZoneResultArray and GetZoneResultArrayOutput values.
 // You can construct a concrete instance of `GetZoneResultArrayInput` via:
 //
-//          GetZoneResultArray{ GetZoneResultArgs{...} }
+//	GetZoneResultArray{ GetZoneResultArgs{...} }
 type GetZoneResultArrayInput interface {
 	pulumi.Input
 
@@ -44033,7 +44036,7 @@ type GetZoneResultClusterInfo struct {
 // GetZoneResultClusterInfoInput is an input type that accepts GetZoneResultClusterInfoArgs and GetZoneResultClusterInfoOutput values.
 // You can construct a concrete instance of `GetZoneResultClusterInfoInput` via:
 //
-//          GetZoneResultClusterInfoArgs{...}
+//	GetZoneResultClusterInfoArgs{...}
 type GetZoneResultClusterInfoInput interface {
 	pulumi.Input
 
@@ -44075,7 +44078,7 @@ func (i GetZoneResultClusterInfoArgs) ToGetZoneResultClusterInfoOutputWithContex
 // GetZoneResultClusterInfoArrayInput is an input type that accepts GetZoneResultClusterInfoArray and GetZoneResultClusterInfoArrayOutput values.
 // You can construct a concrete instance of `GetZoneResultClusterInfoArrayInput` via:
 //
-//          GetZoneResultClusterInfoArray{ GetZoneResultClusterInfoArgs{...} }
+//	GetZoneResultClusterInfoArray{ GetZoneResultClusterInfoArgs{...} }
 type GetZoneResultClusterInfoArrayInput interface {
 	pulumi.Input
 
@@ -44181,7 +44184,7 @@ type GetZoneResultMessagePrice struct {
 // GetZoneResultMessagePriceInput is an input type that accepts GetZoneResultMessagePriceArgs and GetZoneResultMessagePriceOutput values.
 // You can construct a concrete instance of `GetZoneResultMessagePriceInput` via:
 //
-//          GetZoneResultMessagePriceArgs{...}
+//	GetZoneResultMessagePriceArgs{...}
 type GetZoneResultMessagePriceInput interface {
 	pulumi.Input
 
@@ -44211,7 +44214,7 @@ func (i GetZoneResultMessagePriceArgs) ToGetZoneResultMessagePriceOutputWithCont
 // GetZoneResultMessagePriceArrayInput is an input type that accepts GetZoneResultMessagePriceArray and GetZoneResultMessagePriceArrayOutput values.
 // You can construct a concrete instance of `GetZoneResultMessagePriceArrayInput` via:
 //
-//          GetZoneResultMessagePriceArray{ GetZoneResultMessagePriceArgs{...} }
+//	GetZoneResultMessagePriceArray{ GetZoneResultMessagePriceArgs{...} }
 type GetZoneResultMessagePriceArrayInput interface {
 	pulumi.Input
 
@@ -44287,7 +44290,7 @@ type GetZoneResultUnitPrice struct {
 // GetZoneResultUnitPriceInput is an input type that accepts GetZoneResultUnitPriceArgs and GetZoneResultUnitPriceOutput values.
 // You can construct a concrete instance of `GetZoneResultUnitPriceInput` via:
 //
-//          GetZoneResultUnitPriceArgs{...}
+//	GetZoneResultUnitPriceArgs{...}
 type GetZoneResultUnitPriceInput interface {
 	pulumi.Input
 
@@ -44317,7 +44320,7 @@ func (i GetZoneResultUnitPriceArgs) ToGetZoneResultUnitPriceOutputWithContext(ct
 // GetZoneResultUnitPriceArrayInput is an input type that accepts GetZoneResultUnitPriceArray and GetZoneResultUnitPriceArrayOutput values.
 // You can construct a concrete instance of `GetZoneResultUnitPriceArrayInput` via:
 //
-//          GetZoneResultUnitPriceArray{ GetZoneResultUnitPriceArgs{...} }
+//	GetZoneResultUnitPriceArray{ GetZoneResultUnitPriceArgs{...} }
 type GetZoneResultUnitPriceArrayInput interface {
 	pulumi.Input
 
@@ -44407,7 +44410,7 @@ type GetZoneResultZoneList struct {
 // GetZoneResultZoneListInput is an input type that accepts GetZoneResultZoneListArgs and GetZoneResultZoneListOutput values.
 // You can construct a concrete instance of `GetZoneResultZoneListInput` via:
 //
-//          GetZoneResultZoneListArgs{...}
+//	GetZoneResultZoneListArgs{...}
 type GetZoneResultZoneListInput interface {
 	pulumi.Input
 
@@ -44451,7 +44454,7 @@ func (i GetZoneResultZoneListArgs) ToGetZoneResultZoneListOutputWithContext(ctx 
 // GetZoneResultZoneListArrayInput is an input type that accepts GetZoneResultZoneListArray and GetZoneResultZoneListArrayOutput values.
 // You can construct a concrete instance of `GetZoneResultZoneListArrayInput` via:
 //
-//          GetZoneResultZoneListArray{ GetZoneResultZoneListArgs{...} }
+//	GetZoneResultZoneListArray{ GetZoneResultZoneListArgs{...} }
 type GetZoneResultZoneListArrayInput interface {
 	pulumi.Input
 
@@ -44566,7 +44569,7 @@ type GetZoneResultZoneListSalesInfo struct {
 // GetZoneResultZoneListSalesInfoInput is an input type that accepts GetZoneResultZoneListSalesInfoArgs and GetZoneResultZoneListSalesInfoOutput values.
 // You can construct a concrete instance of `GetZoneResultZoneListSalesInfoInput` via:
 //
-//          GetZoneResultZoneListSalesInfoArgs{...}
+//	GetZoneResultZoneListSalesInfoArgs{...}
 type GetZoneResultZoneListSalesInfoInput interface {
 	pulumi.Input
 
@@ -44600,7 +44603,7 @@ func (i GetZoneResultZoneListSalesInfoArgs) ToGetZoneResultZoneListSalesInfoOutp
 // GetZoneResultZoneListSalesInfoArrayInput is an input type that accepts GetZoneResultZoneListSalesInfoArray and GetZoneResultZoneListSalesInfoArrayOutput values.
 // You can construct a concrete instance of `GetZoneResultZoneListSalesInfoArrayInput` via:
 //
-//          GetZoneResultZoneListSalesInfoArray{ GetZoneResultZoneListSalesInfoArgs{...} }
+//	GetZoneResultZoneListSalesInfoArray{ GetZoneResultZoneListSalesInfoArgs{...} }
 type GetZoneResultZoneListSalesInfoArrayInput interface {
 	pulumi.Input
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterGetArgs : Pulumi.ResourceArgs
+    public sealed class ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Audio stream configuration parameter. This field is required when `RemoveAudio` is 0.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterGetArgs()
         {
         }
+        public static new ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterGetArgs Empty => new ProcessMediaOperationMediaProcessTaskTranscodeTaskSetRawParameterGetArgs();
     }
 }

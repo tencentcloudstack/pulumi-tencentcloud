@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var triggerConfig = new Tencentcloud.Scf.TriggerConfig("triggerConfig", new()
     ///     {
-    ///         var triggerConfig = new Tencentcloud.Scf.TriggerConfig("triggerConfig", new Tencentcloud.Scf.TriggerConfigArgs
-    ///         {
-    ///             CustomArgument = "Information",
-    ///             Description = "func",
-    ///             Enable = "OPEN",
-    ///             FunctionName = "keep-1676351130",
-    ///             Namespace = "default",
-    ///             Qualifier = "$DEFAULT",
-    ///             TriggerDesc = "* 1 2 * * * *",
-    ///             TriggerName = "SCF-timer-1685540160",
-    ///             Type = "timer",
-    ///         });
-    ///     }
+    ///         CustomArgument = "Information",
+    ///         Description = "func",
+    ///         Enable = "OPEN",
+    ///         FunctionName = "keep-1676351130",
+    ///         Namespace = "default",
+    ///         Qualifier = "$DEFAULT",
+    ///         TriggerDesc = "* 1 2 * * * *",
+    ///         TriggerName = "SCF-timer-1685540160",
+    ///         Type = "timer",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// scf trigger_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Scf/triggerConfig:TriggerConfig trigger_config functionName#namespace#triggerName
+    /// $ pulumi import tencentcloud:Scf/triggerConfig:TriggerConfig trigger_config functionName#namespace#triggerName
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/triggerConfig:TriggerConfig")]
-    public partial class TriggerConfig : Pulumi.CustomResource
+    public partial class TriggerConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// User Additional Information.
@@ -150,7 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         }
     }
 
-    public sealed class TriggerConfigArgs : Pulumi.ResourceArgs
+    public sealed class TriggerConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User Additional Information.
@@ -209,9 +210,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public TriggerConfigArgs()
         {
         }
+        public static new TriggerConfigArgs Empty => new TriggerConfigArgs();
     }
 
-    public sealed class TriggerConfigState : Pulumi.ResourceArgs
+    public sealed class TriggerConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User Additional Information.
@@ -270,5 +272,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public TriggerConfigState()
         {
         }
+        public static new TriggerConfigState Empty => new TriggerConfigState();
     }
 }

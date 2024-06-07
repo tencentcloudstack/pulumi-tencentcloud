@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb.Inputs
 {
 
-    public sealed class DbParametersParamsArgs : Pulumi.ResourceArgs
+    public sealed class DbParametersParamsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of parameter.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb.Inputs
         public DbParametersParamsArgs()
         {
         }
+        public static new DbParametersParamsArgs Empty => new DbParametersParamsArgs();
     }
 }

@@ -7,28 +7,12 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a mariadb instanceConfig
  *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const test = new tencentcloud.Mariadb.InstanceConfig("test", {
- *     extranetAccess: 0,
- *     instanceId: "tdsql-9vqvls95",
- *     rsAccessStrategy: 1,
- *     subnetId: "subnet-3ku415by",
- *     vip: "127.0.0.1",
- *     vpcId: "vpc-ii1jfbhl",
- * });
- * ```
- *
  * ## Import
  *
  * mariadb instance_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mariadb/instanceConfig:InstanceConfig test id
+ * $ pulumi import tencentcloud:Mariadb/instanceConfig:InstanceConfig test id
  * ```
  */
 export class InstanceConfig extends pulumi.CustomResource {

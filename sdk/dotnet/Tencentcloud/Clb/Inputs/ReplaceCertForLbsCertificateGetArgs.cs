@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
 {
 
-    public sealed class ReplaceCertForLbsCertificateGetArgs : Pulumi.ResourceArgs
+    public sealed class ReplaceCertForLbsCertificateGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Content of the uploaded client certificate. When SSLMode = mutual, if there is no CertCaId, this parameter is required.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
         public ReplaceCertForLbsCertificateGetArgs()
         {
         }
+        public static new ReplaceCertForLbsCertificateGetArgs Empty => new ReplaceCertForLbsCertificateGetArgs();
     }
 }

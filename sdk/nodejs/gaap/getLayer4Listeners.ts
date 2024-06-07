@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
  *     bandwidth: 10,
@@ -42,13 +44,11 @@ import * as utilities from "../utilities";
  *     listenerId: fooLayer4Listener.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getLayer4Listeners(args: GetLayer4ListenersArgs, opts?: pulumi.InvokeOptions): Promise<GetLayer4ListenersResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getLayer4Listeners:getLayer4Listeners", {
         "listenerId": args.listenerId,
         "listenerName": args.listenerName,
@@ -117,9 +117,48 @@ export interface GetLayer4ListenersResult {
     readonly proxyId?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query gaap layer4 listeners.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+ *     bandwidth: 10,
+ *     concurrent: 2,
+ *     accessRegion: "SouthChina",
+ *     realserverRegion: "NorthChina",
+ * });
+ * const fooRealserver = new tencentcloud.gaap.Realserver("fooRealserver", {ip: "1.1.1.1"});
+ * const fooLayer4Listener = new tencentcloud.gaap.Layer4Listener("fooLayer4Listener", {
+ *     protocol: "TCP",
+ *     port: 80,
+ *     realserverType: "IP",
+ *     proxyId: fooProxy.id,
+ *     healthCheck: true,
+ *     interval: 5,
+ *     connectTimeout: 2,
+ *     realserverBindSets: [{
+ *         id: fooRealserver.id,
+ *         ip: fooRealserver.ip,
+ *         port: 80,
+ *     }],
+ * });
+ * const fooLayer4Listeners = tencentcloud.Gaap.getLayer4ListenersOutput({
+ *     protocol: "TCP",
+ *     proxyId: fooProxy.id,
+ *     listenerId: fooLayer4Listener.id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getLayer4ListenersOutput(args: GetLayer4ListenersOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetLayer4ListenersResult> {
-    return pulumi.output(args).apply(a => getLayer4Listeners(a, opts))
+    return pulumi.output(args).apply((a: any) => getLayer4Listeners(a, opts))
 }
 
 /**

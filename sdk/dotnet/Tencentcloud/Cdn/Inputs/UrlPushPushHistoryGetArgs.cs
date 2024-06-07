@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class UrlPushPushHistoryGetArgs : Pulumi.ResourceArgs
+    public sealed class UrlPushPushHistoryGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specify push area. NOTE: only push same area cache contents.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public UrlPushPushHistoryGetArgs()
         {
         }
+        public static new UrlPushPushHistoryGetArgs Empty => new UrlPushPushHistoryGetArgs();
     }
 }

@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Oceanus.Folder("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Oceanus.Folder("example", new Tencentcloud.Oceanus.FolderArgs
-    ///         {
-    ///             FolderName = "tf_example",
-    ///             FolderType = 0,
-    ///             ParentId = "folder-lfqkt11s",
-    ///             WorkSpaceId = "space-125703345ap-shenzhen-fsi",
-    ///         });
-    ///     }
+    ///         FolderName = "tf_example",
+    ///         FolderType = 0,
+    ///         ParentId = "folder-lfqkt11s",
+    ///         WorkSpaceId = "space-125703345ap-shenzhen-fsi",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// oceanus folder can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Oceanus/folder:Folder example space-125703345ap-shenzhen-fsi#folder-f40fq79g#0
+    /// $ pulumi import tencentcloud:Oceanus/folder:Folder example space-125703345ap-shenzhen-fsi#folder-f40fq79g#0
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Oceanus/folder:Folder")]
-    public partial class Folder : Pulumi.CustomResource
+    public partial class Folder : global::Pulumi.CustomResource
     {
         /// <summary>
         /// New file name.
@@ -115,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         }
     }
 
-    public sealed class FolderArgs : Pulumi.ResourceArgs
+    public sealed class FolderArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// New file name.
@@ -144,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public FolderArgs()
         {
         }
+        public static new FolderArgs Empty => new FolderArgs();
     }
 
-    public sealed class FolderState : Pulumi.ResourceArgs
+    public sealed class FolderState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// New file name.
@@ -175,5 +177,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public FolderState()
         {
         }
+        public static new FolderState Empty => new FolderState();
     }
 }

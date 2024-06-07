@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.ApiGateway.UsagePlan("example", new()
     ///     {
-    ///         var example = new Tencentcloud.ApiGateway.UsagePlan("example", new Tencentcloud.ApiGateway.UsagePlanArgs
-    ///         {
-    ///             MaxRequestNum = 100,
-    ///             MaxRequestNumPreSec = 10,
-    ///             UsagePlanDesc = "desc.",
-    ///             UsagePlanName = "tf_example",
-    ///         });
-    ///     }
+    ///         MaxRequestNum = 100,
+    ///         MaxRequestNumPreSec = 10,
+    ///         UsagePlanDesc = "desc.",
+    ///         UsagePlanName = "tf_example",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// API gateway usage plan can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:ApiGateway/usagePlan:UsagePlan plan usagePlan-gyeafpab
+    /// $ pulumi import tencentcloud:ApiGateway/usagePlan:UsagePlan plan usagePlan-gyeafpab
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/usagePlan:UsagePlan")]
-    public partial class UsagePlan : Pulumi.CustomResource
+    public partial class UsagePlan : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Attach API keys list.
@@ -139,7 +140,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         }
     }
 
-    public sealed class UsagePlanArgs : Pulumi.ResourceArgs
+    public sealed class UsagePlanArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Total number of requests allowed. Valid values: -1, [1,99999999]. The default value is -1, which indicates no limit.
@@ -168,9 +169,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public UsagePlanArgs()
         {
         }
+        public static new UsagePlanArgs Empty => new UsagePlanArgs();
     }
 
-    public sealed class UsagePlanState : Pulumi.ResourceArgs
+    public sealed class UsagePlanState : global::Pulumi.ResourceArgs
     {
         [Input("attachApiKeys")]
         private InputList<string>? _attachApiKeys;
@@ -235,5 +237,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public UsagePlanState()
         {
         }
+        public static new UsagePlanState Empty => new UsagePlanState();
     }
 }

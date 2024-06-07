@@ -8,48 +8,53 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query API gateway throttling services.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
-// 			ServiceName: pulumi.String("niceservice"),
-// 			Protocol:    pulumi.String("http&https"),
-// 			ServiceDesc: pulumi.String("your nice service"),
-// 			NetTypes: pulumi.StringArray{
-// 				pulumi.String("INNER"),
-// 				pulumi.String("OUTER"),
-// 			},
-// 			IpVersion:    pulumi.String("IPv4"),
-// 			ReleaseLimit: pulumi.Int(100),
-// 			PreLimit:     pulumi.Int(100),
-// 			TestLimit:    pulumi.Int(100),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = ApiGateway.GetThrottlingServicesOutput(ctx, apigateway.GetThrottlingServicesOutputArgs{
-// 			ServiceId: service.ID(),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
+//				ServiceName: pulumi.String("niceservice"),
+//				Protocol:    pulumi.String("http&https"),
+//				ServiceDesc: pulumi.String("your nice service"),
+//				NetTypes: pulumi.StringArray{
+//					pulumi.String("INNER"),
+//					pulumi.String("OUTER"),
+//				},
+//				IpVersion:    pulumi.String("IPv4"),
+//				ReleaseLimit: pulumi.Int(100),
+//				PreLimit:     pulumi.Int(100),
+//				TestLimit:    pulumi.Int(100),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = ApiGateway.GetThrottlingServicesOutput(ctx, apigateway.GetThrottlingServicesOutputArgs{
+//				ServiceId: service.ID(),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetThrottlingServices(ctx *pulumi.Context, args *GetThrottlingServicesArgs, opts ...pulumi.InvokeOption) (*GetThrottlingServicesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetThrottlingServicesResult
 	err := ctx.Invoke("tencentcloud:ApiGateway/getThrottlingServices:getThrottlingServices", args, &rv, opts...)
 	if err != nil {

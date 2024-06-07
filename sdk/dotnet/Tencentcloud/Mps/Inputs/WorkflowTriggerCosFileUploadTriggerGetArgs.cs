@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowTriggerCosFileUploadTriggerGetArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowTriggerCosFileUploadTriggerGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of the COS Bucket bound to the workflow.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowTriggerCosFileUploadTriggerGetArgs()
         {
         }
+        public static new WorkflowTriggerCosFileUploadTriggerGetArgs Empty => new WorkflowTriggerCosFileUploadTriggerGetArgs();
     }
 }

@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var export = new Tencentcloud.Cls.Export("export", new()
     ///     {
-    ///         var export = new Tencentcloud.Cls.Export("export", new Tencentcloud.Cls.ExportArgs
-    ///         {
-    ///             Format = "json",
-    ///             From = 1607499107000,
-    ///             LogCount = 2,
-    ///             Order = "desc",
-    ///             Query = "select count(*) as count",
-    ///             To = 1607499108000,
-    ///             TopicId = "7e34a3a7-635e-4da8-9005-88106c1fde69",
-    ///         });
-    ///     }
+    ///         Format = "json",
+    ///         From = 1607499107000,
+    ///         LogCount = 2,
+    ///         Order = "desc",
+    ///         Query = "select count(*) as count",
+    ///         To = 1607499108000,
+    ///         TopicId = "7e34a3a7-635e-4da8-9005-88106c1fde69",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cls export can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/export:Export export topic_id#export_id
+    /// $ pulumi import tencentcloud:Cls/export:Export export topic_id#export_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/export:Export")]
-    public partial class Export : Pulumi.CustomResource
+    public partial class Export : global::Pulumi.CustomResource
     {
         /// <summary>
         /// log export format.
@@ -136,7 +137,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
     }
 
-    public sealed class ExportArgs : Pulumi.ResourceArgs
+    public sealed class ExportArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// log export format.
@@ -183,9 +184,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public ExportArgs()
         {
         }
+        public static new ExportArgs Empty => new ExportArgs();
     }
 
-    public sealed class ExportState : Pulumi.ResourceArgs
+    public sealed class ExportState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// log export format.
@@ -232,5 +234,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public ExportState()
         {
         }
+        public static new ExportState Empty => new ExportState();
     }
 }

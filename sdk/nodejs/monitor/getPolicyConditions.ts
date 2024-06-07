@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const monitorPolicyConditions = pulumi.output(tencentcloud.Monitor.getPolicyConditions({
+ * const monitorPolicyConditions = tencentcloud.Monitor.getPolicyConditions({
  *     name: "Cloud Virtual Machine",
  *     resultOutputFile: "./tencentcloud_monitor_policy_conditions.txt",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPolicyConditions(args?: GetPolicyConditionsArgs, opts?: pulumi.InvokeOptions): Promise<GetPolicyConditionsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Monitor/getPolicyConditions:getPolicyConditions", {
         "name": args.name,
         "resultOutputFile": args.resultOutputFile,
@@ -65,9 +65,25 @@ export interface GetPolicyConditionsResult {
     readonly name?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query monitor policy conditions(There is a lot of data and it is recommended to output to a file)
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const monitorPolicyConditions = tencentcloud.Monitor.getPolicyConditions({
+ *     name: "Cloud Virtual Machine",
+ *     resultOutputFile: "./tencentcloud_monitor_policy_conditions.txt",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPolicyConditionsOutput(args?: GetPolicyConditionsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPolicyConditionsResult> {
-    return pulumi.output(args).apply(a => getPolicyConditions(a, opts))
+    return pulumi.output(args).apply((a: any) => getPolicyConditions(a, opts))
 }
 
 /**

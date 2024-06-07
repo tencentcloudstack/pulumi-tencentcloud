@@ -15,65 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Vpn.Connection("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Vpn.Connection("foo", new Tencentcloud.Vpn.ConnectionArgs
+    ///         CustomerGatewayId = "cgw-xfqag",
+    ///         IkeDhGroupName = "GROUP2",
+    ///         IkeExchangeMode = "AGGRESSIVE",
+    ///         IkeLocalAddress = "1.1.1.1",
+    ///         IkeLocalIdentity = "ADDRESS",
+    ///         IkeProtoAuthenAlgorithm = "SHA",
+    ///         IkeProtoEncryAlgorithm = "3DES-CBC",
+    ///         IkeRemoteAddress = "2.2.2.2",
+    ///         IkeRemoteIdentity = "ADDRESS",
+    ///         IkeSaLifetimeSeconds = 86401,
+    ///         IpsecEncryptAlgorithm = "3DES-CBC",
+    ///         IpsecIntegrityAlgorithm = "SHA1",
+    ///         IpsecPfsDhGroup = "NULL",
+    ///         IpsecSaLifetimeSeconds = 7200,
+    ///         IpsecSaLifetimeTraffic = 2570,
+    ///         PreShareKey = "testt",
+    ///         SecurityGroupPolicies = new[]
     ///         {
-    ///             CustomerGatewayId = "cgw-xfqag",
-    ///             IkeDhGroupName = "GROUP2",
-    ///             IkeExchangeMode = "AGGRESSIVE",
-    ///             IkeLocalAddress = "1.1.1.1",
-    ///             IkeLocalIdentity = "ADDRESS",
-    ///             IkeProtoAuthenAlgorithm = "SHA",
-    ///             IkeProtoEncryAlgorithm = "3DES-CBC",
-    ///             IkeRemoteAddress = "2.2.2.2",
-    ///             IkeRemoteIdentity = "ADDRESS",
-    ///             IkeSaLifetimeSeconds = 86401,
-    ///             IpsecEncryptAlgorithm = "3DES-CBC",
-    ///             IpsecIntegrityAlgorithm = "SHA1",
-    ///             IpsecPfsDhGroup = "NULL",
-    ///             IpsecSaLifetimeSeconds = 7200,
-    ///             IpsecSaLifetimeTraffic = 2570,
-    ///             PreShareKey = "testt",
-    ///             SecurityGroupPolicies = 
+    ///             new Tencentcloud.Vpn.Inputs.ConnectionSecurityGroupPolicyArgs
     ///             {
-    ///                 new Tencentcloud.Vpn.Inputs.ConnectionSecurityGroupPolicyArgs
+    ///                 LocalCidrBlock = "172.16.0.0/16",
+    ///                 RemoteCidrBlocks = new[]
     ///                 {
-    ///                     LocalCidrBlock = "172.16.0.0/16",
-    ///                     RemoteCidrBlocks = 
-    ///                     {
-    ///                         "2.2.2.0/26",
-    ///                     },
+    ///                     "2.2.2.0/26",
     ///                 },
     ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "testt" },
-    ///             },
-    ///             VpcId = "vpc-dk8zmwuf",
-    ///             VpnGatewayId = "vpngw-8ccsnclt",
-    ///         });
-    ///     }
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "test", "testt" },
+    ///         },
+    ///         VpcId = "vpc-dk8zmwuf",
+    ///         VpnGatewayId = "vpngw-8ccsnclt",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// VPN connection can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpn/connection:Connection foo vpnx-nadifg3s
+    /// $ pulumi import tencentcloud:Vpn/connection:Connection foo vpnx-nadifg3s
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/connection:Connection")]
-    public partial class Connection : Pulumi.CustomResource
+    public partial class Connection : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create time of the VPN connection.
@@ -342,7 +343,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         }
     }
 
-    public sealed class ConnectionArgs : Pulumi.ResourceArgs
+    public sealed class ConnectionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the customer gateway.
@@ -545,9 +546,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public ConnectionArgs()
         {
         }
+        public static new ConnectionArgs Empty => new ConnectionArgs();
     }
 
-    public sealed class ConnectionState : Pulumi.ResourceArgs
+    public sealed class ConnectionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create time of the VPN connection.
@@ -786,5 +788,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public ConnectionState()
         {
         }
+        public static new ConnectionState Empty => new ConnectionState();
     }
 }

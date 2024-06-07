@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Tdmq.Instance("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Tdmq.Instance("foo", new Tencentcloud.Tdmq.InstanceArgs
+    ///         ClusterName = "example",
+    ///         Remark = "this is description.",
+    ///         Tags = 
     ///         {
-    ///             ClusterName = "example",
-    ///             Remark = "this is description.",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Tdmq instance can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tdmq/instance:Instance test tdmq_id
+    /// $ pulumi import tencentcloud:Tdmq/instance:Instance test tdmq_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The Dedicated Cluster Id.
@@ -117,7 +118,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The Dedicated Cluster Id.
@@ -152,9 +153,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The Dedicated Cluster Id.
@@ -189,5 +191,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

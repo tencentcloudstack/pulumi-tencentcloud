@@ -17,39 +17,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var file = new Tencentcloud.Pts.File("file", new()
     ///     {
-    ///         var file = new Tencentcloud.Pts.File("file", new Tencentcloud.Pts.FileArgs
-    ///         {
-    ///             FileId = "file-de2dbaf8",
-    ///             HeaderInFile = false,
-    ///             Kind = 3,
-    ///             LineCount = 0,
-    ///             ProjectId = "project-45vw7v82",
-    ///             Size = 10799,
-    ///             Type = "text/plain",
-    ///         });
-    ///     }
+    ///         FileId = "file-de2dbaf8",
+    ///         HeaderInFile = false,
+    ///         Kind = 3,
+    ///         LineCount = 0,
+    ///         ProjectId = "project-45vw7v82",
+    ///         Size = 10799,
+    ///         Type = "text/plain",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// pts file can be imported using the project_id#file_id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Pts/file:File file project-45vw7v82#file-de2dbaf8
+    /// $ pulumi import tencentcloud:Pts/file:File file project-45vw7v82#file-de2dbaf8
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Pts/file:File")]
-    public partial class File : Pulumi.CustomResource
+    public partial class File : global::Pulumi.CustomResource
     {
         /// <summary>
         /// File id.
@@ -168,7 +169,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         }
     }
 
-    public sealed class FileArgs : Pulumi.ResourceArgs
+    public sealed class FileArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// File id.
@@ -269,9 +270,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public FileArgs()
         {
         }
+        public static new FileArgs Empty => new FileArgs();
     }
 
-    public sealed class FileState : Pulumi.ResourceArgs
+    public sealed class FileState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// File id.
@@ -372,5 +374,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public FileState()
         {
         }
+        public static new FileState Empty => new FileState();
     }
 }

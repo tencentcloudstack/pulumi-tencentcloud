@@ -7,80 +7,92 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a monitor tmp recordingRule
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-4"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(availabilityZone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		foo, err := Monitor.NewTmpInstance(ctx, "foo", &Monitor.TmpInstanceArgs{
-// 			InstanceName:      pulumi.String("tf-tmp-instance"),
-// 			VpcId:             vpc.ID(),
-// 			SubnetId:          subnet.ID(),
-// 			DataRetentionTime: pulumi.Int(30),
-// 			Zone:              pulumi.String(availabilityZone),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Monitor.NewTmpRecordingRule(ctx, "recordingRule", &Monitor.TmpRecordingRuleArgs{
-// 			InstanceId: foo.ID(),
-// 			RuleState:  pulumi.Int(2),
-// 			Group:      pulumi.String(fmt.Sprintf("%v%v%v%v%v", "---\n", "name: example-test\n", "rules:\n", "  - record: job:http_inprogress_requests:sum\n", "    expr: sum by (job) (http_inprogress_requests)\n")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-4"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			foo, err := Monitor.NewTmpInstance(ctx, "foo", &Monitor.TmpInstanceArgs{
+//				InstanceName:      pulumi.String("tf-tmp-instance"),
+//				VpcId:             vpc.ID(),
+//				SubnetId:          subnet.ID(),
+//				DataRetentionTime: pulumi.Int(30),
+//				Zone:              pulumi.String(availabilityZone),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Monitor.NewTmpRecordingRule(ctx, "recordingRule", &Monitor.TmpRecordingRuleArgs{
+//				InstanceId: foo.ID(),
+//				RuleState:  pulumi.Int(2),
+//				Group: pulumi.String(`---
+//
+// name: example-test
+// rules:
+//   - record: job:http_inprogress_requests:sum
+//     expr: sum by (job) (http_inprogress_requests)
+//
+// `),
+//
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // monitor recordingRule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/tmpRecordingRule:TmpRecordingRule recordingRule instanceId#recordingRule_id
+// $ pulumi import tencentcloud:Monitor/tmpRecordingRule:TmpRecordingRule recordingRule instanceId#recordingRule_id
 // ```
 type TmpRecordingRule struct {
 	pulumi.CustomResourceState
@@ -108,7 +120,7 @@ func NewTmpRecordingRule(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TmpRecordingRule
 	err := ctx.RegisterResource("tencentcloud:Monitor/tmpRecordingRule:TmpRecordingRule", name, args, &resource, opts...)
 	if err != nil {
@@ -205,7 +217,7 @@ func (i *TmpRecordingRule) ToTmpRecordingRuleOutputWithContext(ctx context.Conte
 // TmpRecordingRuleArrayInput is an input type that accepts TmpRecordingRuleArray and TmpRecordingRuleArrayOutput values.
 // You can construct a concrete instance of `TmpRecordingRuleArrayInput` via:
 //
-//          TmpRecordingRuleArray{ TmpRecordingRuleArgs{...} }
+//	TmpRecordingRuleArray{ TmpRecordingRuleArgs{...} }
 type TmpRecordingRuleArrayInput interface {
 	pulumi.Input
 
@@ -230,7 +242,7 @@ func (i TmpRecordingRuleArray) ToTmpRecordingRuleArrayOutputWithContext(ctx cont
 // TmpRecordingRuleMapInput is an input type that accepts TmpRecordingRuleMap and TmpRecordingRuleMapOutput values.
 // You can construct a concrete instance of `TmpRecordingRuleMapInput` via:
 //
-//          TmpRecordingRuleMap{ "key": TmpRecordingRuleArgs{...} }
+//	TmpRecordingRuleMap{ "key": TmpRecordingRuleArgs{...} }
 type TmpRecordingRuleMapInput interface {
 	pulumi.Input
 

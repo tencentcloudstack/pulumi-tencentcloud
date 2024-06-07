@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Address
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Address.Template("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Address.Template("foo", new Tencentcloud.Address.TemplateArgs
+    ///         Addresses = new[]
     ///         {
-    ///             Addresses = 
-    ///             {
-    ///                 "10.0.0.1",
-    ///                 "10.0.1.0/24",
-    ///                 "10.0.0.1-10.0.0.100",
-    ///             },
-    ///         });
-    ///     }
+    ///             "10.0.0.1",
+    ///             "10.0.1.0/24",
+    ///             "10.0.0.1-10.0.0.100",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Address template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Address/template:Template foo ipm-makf7k9e"
+    /// $ pulumi import tencentcloud:Address/template:Template foo ipm-makf7k9e"
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Address/template:Template")]
-    public partial class Template : Pulumi.CustomResource
+    public partial class Template : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Address list. IP(`10.0.0.1`), CIDR(`10.0.1.0/24`), IP range(`10.0.0.1-10.0.0.100`) format are supported.
@@ -105,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Address
         }
     }
 
-    public sealed class TemplateArgs : Pulumi.ResourceArgs
+    public sealed class TemplateArgs : global::Pulumi.ResourceArgs
     {
         [Input("addresses", required: true)]
         private InputList<string>? _addresses;
@@ -128,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Address
         public TemplateArgs()
         {
         }
+        public static new TemplateArgs Empty => new TemplateArgs();
     }
 
-    public sealed class TemplateState : Pulumi.ResourceArgs
+    public sealed class TemplateState : global::Pulumi.ResourceArgs
     {
         [Input("addresses")]
         private InputList<string>? _addresses;
@@ -153,5 +155,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Address
         public TemplateState()
         {
         }
+        public static new TemplateState Empty => new TemplateState();
     }
 }

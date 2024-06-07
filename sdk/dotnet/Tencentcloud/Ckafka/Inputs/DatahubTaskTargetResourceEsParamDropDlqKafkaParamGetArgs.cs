@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskTargetResourceEsParamDropDlqKafkaParamGetArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskTargetResourceEsParamDropDlqKafkaParamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to compress when writing to the Topic, if it is not enabled, fill in none, if it is enabled, fill in open.
@@ -118,5 +118,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskTargetResourceEsParamDropDlqKafkaParamGetArgs()
         {
         }
+        public static new DatahubTaskTargetResourceEsParamDropDlqKafkaParamGetArgs Empty => new DatahubTaskTargetResourceEsParamDropDlqKafkaParamGetArgs();
     }
 }

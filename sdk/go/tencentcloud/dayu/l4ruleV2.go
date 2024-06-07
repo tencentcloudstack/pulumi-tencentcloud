@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type L4RuleV2 struct {
@@ -48,7 +49,7 @@ func NewL4RuleV2(ctx *pulumi.Context,
 	if args.Vpn == nil {
 		return nil, errors.New("invalid value for required argument 'Vpn'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource L4RuleV2
 	err := ctx.RegisterResource("tencentcloud:Dayu/l4RuleV2:L4RuleV2", name, args, &resource, opts...)
 	if err != nil {
@@ -153,7 +154,7 @@ func (i *L4RuleV2) ToL4RuleV2OutputWithContext(ctx context.Context) L4RuleV2Outp
 // L4RuleV2ArrayInput is an input type that accepts L4RuleV2Array and L4RuleV2ArrayOutput values.
 // You can construct a concrete instance of `L4RuleV2ArrayInput` via:
 //
-//          L4RuleV2Array{ L4RuleV2Args{...} }
+//	L4RuleV2Array{ L4RuleV2Args{...} }
 type L4RuleV2ArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +179,7 @@ func (i L4RuleV2Array) ToL4RuleV2ArrayOutputWithContext(ctx context.Context) L4R
 // L4RuleV2MapInput is an input type that accepts L4RuleV2Map and L4RuleV2MapOutput values.
 // You can construct a concrete instance of `L4RuleV2MapInput` via:
 //
-//          L4RuleV2Map{ "key": L4RuleV2Args{...} }
+//	L4RuleV2Map{ "key": L4RuleV2Args{...} }
 type L4RuleV2MapInput interface {
 	pulumi.Input
 

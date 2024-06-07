@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// <summary>
         /// Use this data source to query detailed information of sqlserver_ins_attribute
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetInsAttribute.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetInsAttribute.InvokeAsync(new Tencentcloud.Sqlserver.GetInsAttributeArgs
-        ///         {
-        ///             InstanceId = "mssql-gyg9xycl",
-        ///         }));
-        ///     }
+        ///         InstanceId = "mssql-gyg9xycl",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInsAttributeResult> InvokeAsync(GetInsAttributeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInsAttributeResult>("tencentcloud:Sqlserver/getInsAttribute:getInsAttribute", args ?? new GetInsAttributeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInsAttributeResult>("tencentcloud:Sqlserver/getInsAttribute:getInsAttribute", args ?? new GetInsAttributeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of sqlserver_ins_attribute
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetInsAttribute.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetInsAttribute.InvokeAsync(new Tencentcloud.Sqlserver.GetInsAttributeArgs
-        ///         {
-        ///             InstanceId = "mssql-gyg9xycl",
-        ///         }));
-        ///     }
+        ///         InstanceId = "mssql-gyg9xycl",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInsAttributeResult> Invoke(GetInsAttributeInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInsAttributeResult>("tencentcloud:Sqlserver/getInsAttribute:getInsAttribute", args ?? new GetInsAttributeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInsAttributeResult>("tencentcloud:Sqlserver/getInsAttribute:getInsAttribute", args ?? new GetInsAttributeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInsAttributeArgs : Pulumi.InvokeArgs
+    public sealed class GetInsAttributeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetInsAttributeArgs()
         {
         }
+        public static new GetInsAttributeArgs Empty => new GetInsAttributeArgs();
     }
 
-    public sealed class GetInsAttributeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInsAttributeInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetInsAttributeInvokeArgs()
         {
         }
+        public static new GetInsAttributeInvokeArgs Empty => new GetInsAttributeInvokeArgs();
     }
 
 

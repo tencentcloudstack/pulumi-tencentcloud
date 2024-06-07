@@ -15,102 +15,96 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum tawInstance
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var tawInstance = Tencentcloud.Rum.GetTawInstance.Invoke(new()
         ///     {
-        ///         var tawInstance = Output.Create(Tencentcloud.Rum.GetTawInstance.InvokeAsync(new Tencentcloud.Rum.GetTawInstanceArgs
+        ///         AreaIds = new[]
         ///         {
-        ///             AreaIds = 
-        ///             {
-        ///                 1,
-        ///             },
-        ///             ChargeStatuses = 
-        ///             {
-        ///                 1,
-        ///             },
-        ///             ChargeTypes = 
-        ///             {
-        ///                 1,
-        ///             },
-        ///             InstanceIds = 
-        ///             {
-        ///                 "rum-pasZKEI3RLgakj",
-        ///             },
-        ///             InstanceStatuses = 
-        ///             {
-        ///                 2,
-        ///             },
-        ///         }));
-        ///     }
+        ///             1,
+        ///         },
+        ///         ChargeStatuses = new[]
+        ///         {
+        ///             1,
+        ///         },
+        ///         ChargeTypes = new[]
+        ///         {
+        ///             1,
+        ///         },
+        ///         InstanceIds = new[]
+        ///         {
+        ///             "rum-pasZKEI3RLgakj",
+        ///         },
+        ///         InstanceStatuses = new[]
+        ///         {
+        ///             2,
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTawInstanceResult> InvokeAsync(GetTawInstanceArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTawInstanceResult>("tencentcloud:Rum/getTawInstance:getTawInstance", args ?? new GetTawInstanceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTawInstanceResult>("tencentcloud:Rum/getTawInstance:getTawInstance", args ?? new GetTawInstanceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum tawInstance
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var tawInstance = Tencentcloud.Rum.GetTawInstance.Invoke(new()
         ///     {
-        ///         var tawInstance = Output.Create(Tencentcloud.Rum.GetTawInstance.InvokeAsync(new Tencentcloud.Rum.GetTawInstanceArgs
+        ///         AreaIds = new[]
         ///         {
-        ///             AreaIds = 
-        ///             {
-        ///                 1,
-        ///             },
-        ///             ChargeStatuses = 
-        ///             {
-        ///                 1,
-        ///             },
-        ///             ChargeTypes = 
-        ///             {
-        ///                 1,
-        ///             },
-        ///             InstanceIds = 
-        ///             {
-        ///                 "rum-pasZKEI3RLgakj",
-        ///             },
-        ///             InstanceStatuses = 
-        ///             {
-        ///                 2,
-        ///             },
-        ///         }));
-        ///     }
+        ///             1,
+        ///         },
+        ///         ChargeStatuses = new[]
+        ///         {
+        ///             1,
+        ///         },
+        ///         ChargeTypes = new[]
+        ///         {
+        ///             1,
+        ///         },
+        ///         InstanceIds = new[]
+        ///         {
+        ///             "rum-pasZKEI3RLgakj",
+        ///         },
+        ///         InstanceStatuses = new[]
+        ///         {
+        ///             2,
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTawInstanceResult> Invoke(GetTawInstanceInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTawInstanceResult>("tencentcloud:Rum/getTawInstance:getTawInstance", args ?? new GetTawInstanceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTawInstanceResult>("tencentcloud:Rum/getTawInstance:getTawInstance", args ?? new GetTawInstanceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTawInstanceArgs : Pulumi.InvokeArgs
+    public sealed class GetTawInstanceArgs : global::Pulumi.InvokeArgs
     {
         [Input("areaIds")]
         private List<int>? _areaIds;
@@ -181,9 +175,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetTawInstanceArgs()
         {
         }
+        public static new GetTawInstanceArgs Empty => new GetTawInstanceArgs();
     }
 
-    public sealed class GetTawInstanceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTawInstanceInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("areaIds")]
         private InputList<int>? _areaIds;
@@ -254,6 +249,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetTawInstanceInvokeArgs()
         {
         }
+        public static new GetTawInstanceInvokeArgs Empty => new GetTawInstanceInvokeArgs();
     }
 
 

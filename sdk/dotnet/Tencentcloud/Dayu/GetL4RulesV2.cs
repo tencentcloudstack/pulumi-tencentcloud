@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// <summary>
         /// Use this data source to query dayu new layer 4 rules
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var tencentcloudDayuL4RulesV2 = Tencentcloud.Dayu.GetL4RulesV2.Invoke(new()
         ///     {
-        ///         var tencentcloudDayuL4RulesV2 = Output.Create(Tencentcloud.Dayu.GetL4RulesV2.InvokeAsync(new Tencentcloud.Dayu.GetL4RulesV2Args
-        ///         {
-        ///             Business = "bgpip",
-        ///         }));
-        ///     }
+        ///         Business = "bgpip",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetL4RulesV2Result> InvokeAsync(GetL4RulesV2Args args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetL4RulesV2Result>("tencentcloud:Dayu/getL4RulesV2:getL4RulesV2", args ?? new GetL4RulesV2Args(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetL4RulesV2Result>("tencentcloud:Dayu/getL4RulesV2:getL4RulesV2", args ?? new GetL4RulesV2Args(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query dayu new layer 4 rules
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var tencentcloudDayuL4RulesV2 = Tencentcloud.Dayu.GetL4RulesV2.Invoke(new()
         ///     {
-        ///         var tencentcloudDayuL4RulesV2 = Output.Create(Tencentcloud.Dayu.GetL4RulesV2.InvokeAsync(new Tencentcloud.Dayu.GetL4RulesV2Args
-        ///         {
-        ///             Business = "bgpip",
-        ///         }));
-        ///     }
+        ///         Business = "bgpip",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetL4RulesV2Result> Invoke(GetL4RulesV2InvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetL4RulesV2Result>("tencentcloud:Dayu/getL4RulesV2:getL4RulesV2", args ?? new GetL4RulesV2InvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetL4RulesV2Result>("tencentcloud:Dayu/getL4RulesV2:getL4RulesV2", args ?? new GetL4RulesV2InvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetL4RulesV2Args : Pulumi.InvokeArgs
+    public sealed class GetL4RulesV2Args : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Type of the resource that the layer 4 rule works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public GetL4RulesV2Args()
         {
         }
+        public static new GetL4RulesV2Args Empty => new GetL4RulesV2Args();
     }
 
-    public sealed class GetL4RulesV2InvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetL4RulesV2InvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Type of the resource that the layer 4 rule works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
@@ -132,6 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public GetL4RulesV2InvokeArgs()
         {
         }
+        public static new GetL4RulesV2InvokeArgs Empty => new GetL4RulesV2InvokeArgs();
     }
 
 

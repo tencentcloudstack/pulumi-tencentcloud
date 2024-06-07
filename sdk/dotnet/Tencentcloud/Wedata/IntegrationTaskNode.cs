@@ -15,99 +15,100 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Wedata.IntegrationTaskNode("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Wedata.IntegrationTaskNode("example", new Tencentcloud.Wedata.IntegrationTaskNodeArgs
+    ///         DataSourceType = "MYSQL",
+    ///         NodeInfo = new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoArgs
     ///         {
-    ///             DataSourceType = "MYSQL",
-    ///             NodeInfo = new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoArgs
+    ///             Configs = new[]
     ///             {
-    ///                 Configs = 
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
     ///                 {
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
-    ///                     {
-    ///                         Name = "Type",
-    ///                         Value = "MYSQL",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
-    ///                     {
-    ///                         Name = "splitPk",
-    ///                         Value = "id",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
-    ///                     {
-    ///                         Name = "PrimaryKey",
-    ///                         Value = "id",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
-    ///                     {
-    ///                         Name = "isNew",
-    ///                         Value = "true",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
-    ///                     {
-    ///                         Name = "PrimaryKey_INPUT_SYMBOL",
-    ///                         Value = "input",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
-    ///                     {
-    ///                         Name = "splitPk_INPUT_SYMBOL",
-    ///                         Value = "input",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
-    ///                     {
-    ///                         Name = "Database",
-    ///                         Value = "demo_mysql",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
-    ///                     {
-    ///                         Name = "TableNames",
-    ///                         Value = "users",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
-    ///                     {
-    ///                         Name = "SiblingNodes",
-    ///                         Value = "[]",
-    ///                     },
+    ///                     Name = "Type",
+    ///                     Value = "MYSQL",
     ///                 },
-    ///                 DatasourceId = "5085",
-    ///                 Schemas = 
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
     ///                 {
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoSchemaArgs
-    ///                     {
-    ///                         Alias = "id",
-    ///                         Id = "471331072",
-    ///                         Name = "id",
-    ///                         Type = "INT",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoSchemaArgs
-    ///                     {
-    ///                         Alias = "username",
-    ///                         Id = "422052352",
-    ///                         Name = "username",
-    ///                         Type = "VARCHAR(50)",
-    ///                     },
+    ///                     Name = "splitPk",
+    ///                     Value = "id",
+    ///                 },
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
+    ///                 {
+    ///                     Name = "PrimaryKey",
+    ///                     Value = "id",
+    ///                 },
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
+    ///                 {
+    ///                     Name = "isNew",
+    ///                     Value = "true",
+    ///                 },
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
+    ///                 {
+    ///                     Name = "PrimaryKey_INPUT_SYMBOL",
+    ///                     Value = "input",
+    ///                 },
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
+    ///                 {
+    ///                     Name = "splitPk_INPUT_SYMBOL",
+    ///                     Value = "input",
+    ///                 },
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
+    ///                 {
+    ///                     Name = "Database",
+    ///                     Value = "demo_mysql",
+    ///                 },
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
+    ///                 {
+    ///                     Name = "TableNames",
+    ///                     Value = "users",
+    ///                 },
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoConfigArgs
+    ///                 {
+    ///                     Name = "SiblingNodes",
+    ///                     Value = "[]",
     ///                 },
     ///             },
-    ///             NodeType = "INPUT",
-    ///             ProjectId = "1612982498218618880",
-    ///             TaskId = "20231022181114990",
-    ///             TaskMode = 2,
-    ///             TaskType = 202,
-    ///         });
-    ///     }
+    ///             DatasourceId = "5085",
+    ///             Schemas = new[]
+    ///             {
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoSchemaArgs
+    ///                 {
+    ///                     Alias = "id",
+    ///                     Id = "471331072",
+    ///                     Name = "id",
+    ///                     Type = "INT",
+    ///                 },
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationTaskNodeNodeInfoSchemaArgs
+    ///                 {
+    ///                     Alias = "username",
+    ///                     Id = "422052352",
+    ///                     Name = "username",
+    ///                     Type = "VARCHAR(50)",
+    ///                 },
+    ///             },
+    ///         },
+    ///         NodeType = "INPUT",
+    ///         ProjectId = "1612982498218618880",
+    ///         TaskId = "20231022181114990",
+    ///         TaskMode = 2,
+    ///         TaskType = 202,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/integrationTaskNode:IntegrationTaskNode")]
-    public partial class IntegrationTaskNode : Pulumi.CustomResource
+    public partial class IntegrationTaskNode : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Data source type: MYSQL, POSTGRE, ORACLE, SQLSERVER, FTP, HIVE, HDFS, ICEBERG, KAFKA, HBASE, SPARK, TBASE, DB2, DM, GAUSSDB, GBASE, IMPALA, ES, S3_DATAINSIGHT, GREENPLUM, PHOENIX, SAP_HANA, SFTP, OCEANBASE, CLICKHOUSE, KUDU, VERTICA, REDIS, COS, DLC, DORIS, CKAFKA, DTS_KAFKA, S3, CDW, TDSQLC, TDSQL, MONGODB, SYBASE, REST_API, StarRocks, TCHOUSE_X.
@@ -208,7 +209,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         }
     }
 
-    public sealed class IntegrationTaskNodeArgs : Pulumi.ResourceArgs
+    public sealed class IntegrationTaskNodeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Data source type: MYSQL, POSTGRE, ORACLE, SQLSERVER, FTP, HIVE, HDFS, ICEBERG, KAFKA, HBASE, SPARK, TBASE, DB2, DM, GAUSSDB, GBASE, IMPALA, ES, S3_DATAINSIGHT, GREENPLUM, PHOENIX, SAP_HANA, SFTP, OCEANBASE, CLICKHOUSE, KUDU, VERTICA, REDIS, COS, DLC, DORIS, CKAFKA, DTS_KAFKA, S3, CDW, TDSQLC, TDSQL, MONGODB, SYBASE, REST_API, StarRocks, TCHOUSE_X.
@@ -261,9 +262,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public IntegrationTaskNodeArgs()
         {
         }
+        public static new IntegrationTaskNodeArgs Empty => new IntegrationTaskNodeArgs();
     }
 
-    public sealed class IntegrationTaskNodeState : Pulumi.ResourceArgs
+    public sealed class IntegrationTaskNodeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Data source type: MYSQL, POSTGRE, ORACLE, SQLSERVER, FTP, HIVE, HDFS, ICEBERG, KAFKA, HBASE, SPARK, TBASE, DB2, DM, GAUSSDB, GBASE, IMPALA, ES, S3_DATAINSIGHT, GREENPLUM, PHOENIX, SAP_HANA, SFTP, OCEANBASE, CLICKHOUSE, KUDU, VERTICA, REDIS, COS, DLC, DORIS, CKAFKA, DTS_KAFKA, S3, CDW, TDSQLC, TDSQL, MONGODB, SYBASE, REST_API, StarRocks, TCHOUSE_X.
@@ -322,5 +324,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public IntegrationTaskNodeState()
         {
         }
+        public static new IntegrationTaskNodeState Empty => new IntegrationTaskNodeState();
     }
 }

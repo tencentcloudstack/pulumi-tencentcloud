@@ -8,42 +8,47 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of CCN instances.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-// 			Description: pulumi.String("ci-temp-test-ccn-des"),
-// 			Qos:         pulumi.String("AG"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Ccn.GetInstancesOutput(ctx, ccn.GetInstancesOutputArgs{
-// 			CcnId: main.ID(),
-// 		}, nil)
-// 		_ = Ccn.GetInstancesOutput(ctx, ccn.GetInstancesOutputArgs{
-// 			Name: main.Name,
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
+//				Description: pulumi.String("ci-temp-test-ccn-des"),
+//				Qos:         pulumi.String("AG"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Ccn.GetInstancesOutput(ctx, ccn.GetInstancesOutputArgs{
+//				CcnId: main.ID(),
+//			}, nil)
+//			_ = Ccn.GetInstancesOutput(ctx, ccn.GetInstancesOutputArgs{
+//				Name: main.Name,
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetInstances(ctx *pulumi.Context, args *GetInstancesArgs, opts ...pulumi.InvokeOption) (*GetInstancesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstancesResult
 	err := ctx.Invoke("tencentcloud:Ccn/getInstances:getInstances", args, &rv, opts...)
 	if err != nil {

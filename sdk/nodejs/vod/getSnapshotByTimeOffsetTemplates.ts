@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooSnapshotByTimeOffsetTemplate = new tencentcloud.vod.SnapshotByTimeOffsetTemplate("fooSnapshotByTimeOffsetTemplate", {
  *     width: 130,
@@ -28,14 +30,12 @@ import * as utilities from "../utilities";
  *     definition: fooSnapshotByTimeOffsetTemplate.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSnapshotByTimeOffsetTemplates(args?: GetSnapshotByTimeOffsetTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetSnapshotByTimeOffsetTemplatesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vod/getSnapshotByTimeOffsetTemplates:getSnapshotByTimeOffsetTemplates", {
         "definition": args.definition,
         "resultOutputFile": args.resultOutputFile,
@@ -89,9 +89,34 @@ export interface GetSnapshotByTimeOffsetTemplatesResult {
      */
     readonly type?: string;
 }
-
+/**
+ * Use this data source to query detailed information of VOD snapshot by time offset templates.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const fooSnapshotByTimeOffsetTemplate = new tencentcloud.vod.SnapshotByTimeOffsetTemplate("fooSnapshotByTimeOffsetTemplate", {
+ *     width: 130,
+ *     height: 128,
+ *     resolutionAdaptive: false,
+ *     format: "png",
+ *     comment: "test",
+ *     fillType: "white",
+ * });
+ * const fooSnapshotByTimeOffsetTemplates = tencentcloud.Vod.getSnapshotByTimeOffsetTemplatesOutput({
+ *     type: "Custom",
+ *     definition: fooSnapshotByTimeOffsetTemplate.id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSnapshotByTimeOffsetTemplatesOutput(args?: GetSnapshotByTimeOffsetTemplatesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSnapshotByTimeOffsetTemplatesResult> {
-    return pulumi.output(args).apply(a => getSnapshotByTimeOffsetTemplates(a, opts))
+    return pulumi.output(args).apply((a: any) => getSnapshotByTimeOffsetTemplates(a, opts))
 }
 
 /**

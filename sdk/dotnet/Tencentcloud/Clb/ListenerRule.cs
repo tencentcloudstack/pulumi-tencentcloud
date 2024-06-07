@@ -17,49 +17,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Clb.ListenerRule("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Clb.ListenerRule("foo", new Tencentcloud.Clb.ListenerRuleArgs
-    ///         {
-    ///             CertificateCaId = "VfqO4zkB",
-    ///             CertificateId = "VjANRdz8",
-    ///             CertificateSslMode = "MUTUAL",
-    ///             ClbId = "lb-k2zjp9lv",
-    ///             Domain = "foo.net",
-    ///             HealthCheckHealthNum = 3,
-    ///             HealthCheckHttpCode = 2,
-    ///             HealthCheckHttpDomain = "Default Domain",
-    ///             HealthCheckHttpMethod = "GET",
-    ///             HealthCheckHttpPath = "Default Path",
-    ///             HealthCheckIntervalTime = 5,
-    ///             HealthCheckSwitch = true,
-    ///             HealthCheckUnhealthNum = 3,
-    ///             ListenerId = "lbl-hh141sn9",
-    ///             Scheduler = "WRR",
-    ///             SessionExpireTime = 30,
-    ///             Url = "/bar",
-    ///         });
-    ///     }
+    ///         CertificateCaId = "VfqO4zkB",
+    ///         CertificateId = "VjANRdz8",
+    ///         CertificateSslMode = "MUTUAL",
+    ///         ClbId = "lb-k2zjp9lv",
+    ///         Domain = "foo.net",
+    ///         HealthCheckHealthNum = 3,
+    ///         HealthCheckHttpCode = 2,
+    ///         HealthCheckHttpDomain = "Default Domain",
+    ///         HealthCheckHttpMethod = "GET",
+    ///         HealthCheckHttpPath = "Default Path",
+    ///         HealthCheckIntervalTime = 5,
+    ///         HealthCheckSwitch = true,
+    ///         HealthCheckUnhealthNum = 3,
+    ///         ListenerId = "lbl-hh141sn9",
+    ///         Scheduler = "WRR",
+    ///         SessionExpireTime = 30,
+    ///         Url = "/bar",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CLB listener rule can be imported using the id (version &gt;= 1.47.0), e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule foo lb-7a0t6zqb#lbl-hh141sn9#loc-agg236ys
+    /// $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule foo lb-7a0t6zqb#lbl-hh141sn9#loc-agg236ys
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/listenerRule:ListenerRule")]
-    public partial class ListenerRule : Pulumi.CustomResource
+    public partial class ListenerRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the client certificate. NOTES: Only supports listeners of HTTPS protocol.
@@ -250,7 +251,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class ListenerRuleArgs : Pulumi.ResourceArgs
+    public sealed class ListenerRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the client certificate. NOTES: Only supports listeners of HTTPS protocol.
@@ -393,9 +394,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public ListenerRuleArgs()
         {
         }
+        public static new ListenerRuleArgs Empty => new ListenerRuleArgs();
     }
 
-    public sealed class ListenerRuleState : Pulumi.ResourceArgs
+    public sealed class ListenerRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the client certificate. NOTES: Only supports listeners of HTTPS protocol.
@@ -544,5 +546,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public ListenerRuleState()
         {
         }
+        public static new ListenerRuleState Empty => new ListenerRuleState();
     }
 }

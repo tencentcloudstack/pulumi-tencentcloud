@@ -18,11 +18,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// wedata rule_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Wedata/ruleTemplate:RuleTemplate rule_template rule_template_id
+    /// $ pulumi import tencentcloud:Wedata/ruleTemplate:RuleTemplate rule_template rule_template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/ruleTemplate:RuleTemplate")]
-    public partial class RuleTemplate : Pulumi.CustomResource
+    public partial class RuleTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Description of Template.
@@ -129,7 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         }
     }
 
-    public sealed class RuleTemplateArgs : Pulumi.ResourceArgs
+    public sealed class RuleTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of Template.
@@ -200,9 +200,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public RuleTemplateArgs()
         {
         }
+        public static new RuleTemplateArgs Empty => new RuleTemplateArgs();
     }
 
-    public sealed class RuleTemplateState : Pulumi.ResourceArgs
+    public sealed class RuleTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of Template.
@@ -273,5 +274,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public RuleTemplateState()
         {
         }
+        public static new RuleTemplateState Empty => new RuleTemplateState();
     }
 }

@@ -8,65 +8,76 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of waf attackTotalCount
 //
 // ## Example Usage
+//
 // ### Obtain the specified domain name attack log
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.GetAttackTotalCount(ctx, &waf.GetAttackTotalCountArgs{
-// 			Domain:      "domain.com",
-// 			EndTime:     "2023-09-07 00:00:00",
-// 			QueryString: pulumi.StringRef("method:GET"),
-// 			StartTime:   "2023-09-01 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.GetAttackTotalCount(ctx, &waf.GetAttackTotalCountArgs{
+//				Domain:      "domain.com",
+//				EndTime:     "2023-09-07 00:00:00",
+//				QueryString: pulumi.StringRef("method:GET"),
+//				StartTime:   "2023-09-01 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Obtain all domain name attack log
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.GetAttackTotalCount(ctx, &waf.GetAttackTotalCountArgs{
-// 			Domain:      "all",
-// 			EndTime:     "2023-09-07 00:00:00",
-// 			QueryString: pulumi.StringRef("method:GET"),
-// 			StartTime:   "2023-09-01 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.GetAttackTotalCount(ctx, &waf.GetAttackTotalCountArgs{
+//				Domain:      "all",
+//				EndTime:     "2023-09-07 00:00:00",
+//				QueryString: pulumi.StringRef("method:GET"),
+//				StartTime:   "2023-09-01 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetAttackTotalCount(ctx *pulumi.Context, args *GetAttackTotalCountArgs, opts ...pulumi.InvokeOption) (*GetAttackTotalCountResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAttackTotalCountResult
 	err := ctx.Invoke("tencentcloud:Waf/getAttackTotalCount:getAttackTotalCount", args, &rv, opts...)
 	if err != nil {

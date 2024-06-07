@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const suspendResumeDataEngine = new tencentcloud.Dlc.SuspendResumeDataEngine("suspend_resume_data_engine", {
+ * const suspendResumeDataEngine = new tencentcloud.dlc.SuspendResumeDataEngine("suspendResumeDataEngine", {
  *     dataEngineName: "example-iac",
  *     operate: "suspend",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dlc suspend_resume_data_engine can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dlc/suspendResumeDataEngine:SuspendResumeDataEngine suspend_resume_data_engine suspend_resume_data_engine_id
+ * $ pulumi import tencentcloud:Dlc/suspendResumeDataEngine:SuspendResumeDataEngine suspend_resume_data_engine suspend_resume_data_engine_id
  * ```
  */
 export class SuspendResumeDataEngine extends pulumi.CustomResource {

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,14 +11,15 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const proxyGroupStatistics = pulumi.output(tencentcloud.Gaap.getProxyGroupStatistics({
+ * const proxyGroupStatistics = tencentcloud.Gaap.getProxyGroupStatistics({
  *     endTime: "2023-10-09 23:59:59",
  *     granularity: 300,
- *     groupId: "link-8lpyo88p",
+ *     groupId: "link-m9t4yho9",
  *     metricNames: [
  *         "InBandwidth",
  *         "OutBandwidth",
@@ -25,15 +27,13 @@ import * as utilities from "../utilities";
  *         "OutFlow",
  *     ],
  *     startTime: "2023-10-09 00:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getProxyGroupStatistics(args: GetProxyGroupStatisticsArgs, opts?: pulumi.InvokeOptions): Promise<GetProxyGroupStatisticsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getProxyGroupStatistics:getProxyGroupStatistics", {
         "endTime": args.endTime,
         "granularity": args.granularity,
@@ -93,9 +93,33 @@ export interface GetProxyGroupStatisticsResult {
      */
     readonly statisticsDatas: outputs.Gaap.GetProxyGroupStatisticsStatisticsData[];
 }
-
+/**
+ * Use this data source to query detailed information of gaap proxy group statistics
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const proxyGroupStatistics = tencentcloud.Gaap.getProxyGroupStatistics({
+ *     endTime: "2023-10-09 23:59:59",
+ *     granularity: 300,
+ *     groupId: "link-m9t4yho9",
+ *     metricNames: [
+ *         "InBandwidth",
+ *         "OutBandwidth",
+ *         "InFlow",
+ *         "OutFlow",
+ *     ],
+ *     startTime: "2023-10-09 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getProxyGroupStatisticsOutput(args: GetProxyGroupStatisticsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProxyGroupStatisticsResult> {
-    return pulumi.output(args).apply(a => getProxyGroupStatistics(a, opts))
+    return pulumi.output(args).apply((a: any) => getProxyGroupStatistics(a, opts))
 }
 
 /**

@@ -8,43 +8,48 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tat invocationTask
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tat.GetInvocationTask(ctx, &tat.GetInvocationTaskArgs{
-// 			Filters: []tat.GetInvocationTaskFilter{
-// 				tat.GetInvocationTaskFilter{
-// 					Name: "instance-id",
-// 					Values: []string{
-// 						"ins-p4pq4gaq",
-// 					},
-// 				},
-// 			},
-// 			HideOutput: pulumi.BoolRef(true),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tat.GetInvocationTask(ctx, &tat.GetInvocationTaskArgs{
+//				Filters: []tat.GetInvocationTaskFilter{
+//					{
+//						Name: "instance-id",
+//						Values: []string{
+//							"ins-p4pq4gaq",
+//						},
+//					},
+//				},
+//				HideOutput: pulumi.BoolRef(true),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetInvocationTask(ctx *pulumi.Context, args *GetInvocationTaskArgs, opts ...pulumi.InvokeOption) (*GetInvocationTaskResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInvocationTaskResult
 	err := ctx.Invoke("tencentcloud:Tat/getInvocationTask:getInvocationTask", args, &rv, opts...)
 	if err != nil {

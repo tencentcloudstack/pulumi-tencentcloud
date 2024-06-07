@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cngwCertificate = new tencentcloud.Tse.CngwCertificate("cngw_certificate", {
+ * const cngwCertificate = new tencentcloud.tse.CngwCertificate("cngwCertificate", {
  *     bindDomains: ["example1.com"],
  *     certId: "vYSQkJ3K",
  *     gatewayId: "gateway-ddbb709b",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tse cngw_certificate can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tse/cngwCertificate:CngwCertificate cngw_certificate gatewayId#Id
+ * $ pulumi import tencentcloud:Tse/cngwCertificate:CngwCertificate cngw_certificate gatewayId#Id
  * ```
  */
 export class CngwCertificate extends pulumi.CustomResource {

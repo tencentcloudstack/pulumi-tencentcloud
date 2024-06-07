@@ -15,41 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ciam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var userStore = new Tencentcloud.Ciam.UserStore("userStore", new()
     ///     {
-    ///         var userStore = new Tencentcloud.Ciam.UserStore("userStore", new Tencentcloud.Ciam.UserStoreArgs
-    ///         {
-    ///             UserPoolName = "tf_user_store",
-    ///             UserPoolDesc = "for terraform test",
-    ///             UserPoolLogo = "https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png",
-    ///         });
-    ///         var userGroup = new Tencentcloud.Ciam.UserGroup("userGroup", new Tencentcloud.Ciam.UserGroupArgs
-    ///         {
-    ///             DisplayName = "tf_user_group",
-    ///             UserStoreId = userStore.Id,
-    ///             Description = "for terrafrom test",
-    ///         });
-    ///     }
+    ///         UserPoolName = "tf_user_store",
+    ///         UserPoolDesc = "for terraform test",
+    ///         UserPoolLogo = "https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png",
+    ///     });
     /// 
-    /// }
+    ///     var userGroup = new Tencentcloud.Ciam.UserGroup("userGroup", new()
+    ///     {
+    ///         DisplayName = "tf_user_group",
+    ///         UserStoreId = userStore.Id,
+    ///         Description = "for terrafrom test",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ciam user_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ciam/userGroup:UserGroup user_group userStoreId#userGroupId
+    /// $ pulumi import tencentcloud:Ciam/userGroup:UserGroup user_group userStoreId#userGroupId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ciam/userGroup:UserGroup")]
-    public partial class UserGroup : Pulumi.CustomResource
+    public partial class UserGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// User Group Description.
@@ -114,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ciam
         }
     }
 
-    public sealed class UserGroupArgs : Pulumi.ResourceArgs
+    public sealed class UserGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User Group Description.
@@ -137,9 +139,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ciam
         public UserGroupArgs()
         {
         }
+        public static new UserGroupArgs Empty => new UserGroupArgs();
     }
 
-    public sealed class UserGroupState : Pulumi.ResourceArgs
+    public sealed class UserGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User Group Description.
@@ -162,5 +165,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ciam
         public UserGroupState()
         {
         }
+        public static new UserGroupState Empty => new UserGroupState();
     }
 }

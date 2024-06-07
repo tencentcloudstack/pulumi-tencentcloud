@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Scf.Layer("foo", {
+ * const foo = new tencentcloud.scf.Layer("foo", {
  *     compatibleRuntimes: ["Python3.6"],
  *     content: {
  *         cosBucketName: "test-bucket",
@@ -26,13 +28,14 @@ import * as utilities from "../utilities";
  *     licenseInfo: "foo",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Scf layer can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Scf/layer:Layer layer layerId#layerVersion
+ * $ pulumi import tencentcloud:Scf/layer:Layer layer layerId#layerVersion
  * ```
  */
 export class Layer extends pulumi.CustomResource {

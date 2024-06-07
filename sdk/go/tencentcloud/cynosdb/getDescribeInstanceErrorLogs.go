@@ -8,46 +8,51 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of cynosdb describeInstanceErrorLogs
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.GetDescribeInstanceErrorLogs(ctx, &cynosdb.GetDescribeInstanceErrorLogsArgs{
-// 			EndTime:    pulumi.StringRef("2023-06-19 15:04:05"),
-// 			InstanceId: "cynosdbmysql-ins-afqx1hy0",
-// 			KeyWords: []string{
-// 				"Aborted",
-// 			},
-// 			LogLevels: []string{
-// 				"note",
-// 				"warning",
-// 			},
-// 			OrderBy:     pulumi.StringRef("Timestamp"),
-// 			OrderByType: pulumi.StringRef("DESC"),
-// 			StartTime:   pulumi.StringRef("2023-06-01 15:04:05"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.GetDescribeInstanceErrorLogs(ctx, &cynosdb.GetDescribeInstanceErrorLogsArgs{
+//				EndTime:    pulumi.StringRef("2023-06-19 15:04:05"),
+//				InstanceId: "cynosdbmysql-ins-afqx1hy0",
+//				KeyWords: []string{
+//					"Aborted",
+//				},
+//				LogLevels: []string{
+//					"note",
+//					"warning",
+//				},
+//				OrderBy:     pulumi.StringRef("Timestamp"),
+//				OrderByType: pulumi.StringRef("DESC"),
+//				StartTime:   pulumi.StringRef("2023-06-01 15:04:05"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetDescribeInstanceErrorLogs(ctx *pulumi.Context, args *GetDescribeInstanceErrorLogsArgs, opts ...pulumi.InvokeOption) (*GetDescribeInstanceErrorLogsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeInstanceErrorLogsResult
 	err := ctx.Invoke("tencentcloud:Cynosdb/getDescribeInstanceErrorLogs:getDescribeInstanceErrorLogs", args, &rv, opts...)
 	if err != nil {

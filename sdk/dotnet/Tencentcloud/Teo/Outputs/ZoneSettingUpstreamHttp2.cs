@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class ZoneSettingUpstreamHttp2
     {
         /// <summary>
-        /// Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+        /// Cache configuration switch.
         /// </summary>
         public readonly string Switch;
 

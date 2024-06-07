@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var lane = new Tencentcloud.Tsf.Lane("lane", new()
     ///     {
-    ///         var lane = new Tencentcloud.Tsf.Lane("lane", new Tencentcloud.Tsf.LaneArgs
+    ///         LaneGroupLists = new[]
     ///         {
-    ///             LaneGroupLists = 
+    ///             new Tencentcloud.Tsf.Inputs.LaneLaneGroupListArgs
     ///             {
-    ///                 new Tencentcloud.Tsf.Inputs.LaneLaneGroupListArgs
-    ///                 {
-    ///                     Entrance = true,
-    ///                     GroupId = "group-yn7j5l8a",
-    ///                 },
+    ///                 Entrance = true,
+    ///                 GroupId = "group-yn7j5l8a",
     ///             },
-    ///             LaneName = "lane-name-1",
-    ///             Remark = "lane desc1",
-    ///         });
-    ///     }
+    ///         },
+    ///         LaneName = "lane-name-1",
+    ///         Remark = "lane desc1",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/lane:Lane")]
-    public partial class Lane : Pulumi.CustomResource
+    public partial class Lane : global::Pulumi.CustomResource
     {
         /// <summary>
         /// creation time.
@@ -143,7 +144,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class LaneArgs : Pulumi.ResourceArgs
+    public sealed class LaneArgs : global::Pulumi.ResourceArgs
     {
         [Input("laneGroupLists", required: true)]
         private InputList<Inputs.LaneLaneGroupListArgs>? _laneGroupLists;
@@ -184,9 +185,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public LaneArgs()
         {
         }
+        public static new LaneArgs Empty => new LaneArgs();
     }
 
-    public sealed class LaneState : Pulumi.ResourceArgs
+    public sealed class LaneState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// creation time.
@@ -263,5 +265,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public LaneState()
         {
         }
+        public static new LaneState Empty => new LaneState();
     }
 }

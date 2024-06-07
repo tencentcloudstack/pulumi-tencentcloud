@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class CompareTaskObjectsGetArgs : Pulumi.ResourceArgs
+    public sealed class CompareTaskObjectsGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("objectItems")]
         private InputList<Inputs.CompareTaskObjectsObjectItemGetArgs>? _objectItems;
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public CompareTaskObjectsGetArgs()
         {
         }
+        public static new CompareTaskObjectsGetArgs Empty => new CompareTaskObjectsGetArgs();
     }
 }

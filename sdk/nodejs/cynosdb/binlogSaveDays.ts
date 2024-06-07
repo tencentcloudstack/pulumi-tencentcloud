@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const binlogSaveDays = new tencentcloud.Cynosdb.BinlogSaveDays("binlog_save_days", {
+ * const binlogSaveDays = new tencentcloud.cynosdb.BinlogSaveDays("binlogSaveDays", {
  *     binlogSaveDays: 7,
  *     clusterId: "cynosdbmysql-123",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cynosdb binlog_save_days can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cynosdb/binlogSaveDays:BinlogSaveDays binlog_save_days binlog_save_days_id
+ * $ pulumi import tencentcloud:Cynosdb/binlogSaveDays:BinlogSaveDays binlog_save_days binlog_save_days_id
  * ```
  */
 export class BinlogSaveDays extends pulumi.CustomResource {

@@ -15,90 +15,84 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// <summary>
         /// Use this data source to query detailed information of cynosdb describe_instance_error_logs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeInstanceErrorLogs = Tencentcloud.Cynosdb.GetDescribeInstanceErrorLogs.Invoke(new()
         ///     {
-        ///         var describeInstanceErrorLogs = Output.Create(Tencentcloud.Cynosdb.GetDescribeInstanceErrorLogs.InvokeAsync(new Tencentcloud.Cynosdb.GetDescribeInstanceErrorLogsArgs
+        ///         EndTime = "2023-06-19 15:04:05",
+        ///         InstanceId = "cynosdbmysql-ins-afqx1hy0",
+        ///         KeyWords = new[]
         ///         {
-        ///             EndTime = "2023-06-19 15:04:05",
-        ///             InstanceId = "cynosdbmysql-ins-afqx1hy0",
-        ///             KeyWords = 
-        ///             {
-        ///                 "Aborted",
-        ///             },
-        ///             LogLevels = 
-        ///             {
-        ///                 "note",
-        ///                 "warning",
-        ///             },
-        ///             OrderBy = "Timestamp",
-        ///             OrderByType = "DESC",
-        ///             StartTime = "2023-06-01 15:04:05",
-        ///         }));
-        ///     }
+        ///             "Aborted",
+        ///         },
+        ///         LogLevels = new[]
+        ///         {
+        ///             "note",
+        ///             "warning",
+        ///         },
+        ///         OrderBy = "Timestamp",
+        ///         OrderByType = "DESC",
+        ///         StartTime = "2023-06-01 15:04:05",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeInstanceErrorLogsResult> InvokeAsync(GetDescribeInstanceErrorLogsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeInstanceErrorLogsResult>("tencentcloud:Cynosdb/getDescribeInstanceErrorLogs:getDescribeInstanceErrorLogs", args ?? new GetDescribeInstanceErrorLogsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeInstanceErrorLogsResult>("tencentcloud:Cynosdb/getDescribeInstanceErrorLogs:getDescribeInstanceErrorLogs", args ?? new GetDescribeInstanceErrorLogsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cynosdb describe_instance_error_logs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeInstanceErrorLogs = Tencentcloud.Cynosdb.GetDescribeInstanceErrorLogs.Invoke(new()
         ///     {
-        ///         var describeInstanceErrorLogs = Output.Create(Tencentcloud.Cynosdb.GetDescribeInstanceErrorLogs.InvokeAsync(new Tencentcloud.Cynosdb.GetDescribeInstanceErrorLogsArgs
+        ///         EndTime = "2023-06-19 15:04:05",
+        ///         InstanceId = "cynosdbmysql-ins-afqx1hy0",
+        ///         KeyWords = new[]
         ///         {
-        ///             EndTime = "2023-06-19 15:04:05",
-        ///             InstanceId = "cynosdbmysql-ins-afqx1hy0",
-        ///             KeyWords = 
-        ///             {
-        ///                 "Aborted",
-        ///             },
-        ///             LogLevels = 
-        ///             {
-        ///                 "note",
-        ///                 "warning",
-        ///             },
-        ///             OrderBy = "Timestamp",
-        ///             OrderByType = "DESC",
-        ///             StartTime = "2023-06-01 15:04:05",
-        ///         }));
-        ///     }
+        ///             "Aborted",
+        ///         },
+        ///         LogLevels = new[]
+        ///         {
+        ///             "note",
+        ///             "warning",
+        ///         },
+        ///         OrderBy = "Timestamp",
+        ///         OrderByType = "DESC",
+        ///         StartTime = "2023-06-01 15:04:05",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeInstanceErrorLogsResult> Invoke(GetDescribeInstanceErrorLogsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeInstanceErrorLogsResult>("tencentcloud:Cynosdb/getDescribeInstanceErrorLogs:getDescribeInstanceErrorLogs", args ?? new GetDescribeInstanceErrorLogsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeInstanceErrorLogsResult>("tencentcloud:Cynosdb/getDescribeInstanceErrorLogs:getDescribeInstanceErrorLogs", args ?? new GetDescribeInstanceErrorLogsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeInstanceErrorLogsArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeInstanceErrorLogsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time.
@@ -163,9 +157,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetDescribeInstanceErrorLogsArgs()
         {
         }
+        public static new GetDescribeInstanceErrorLogsArgs Empty => new GetDescribeInstanceErrorLogsArgs();
     }
 
-    public sealed class GetDescribeInstanceErrorLogsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeInstanceErrorLogsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time.
@@ -230,6 +225,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetDescribeInstanceErrorLogsInvokeArgs()
         {
         }
+        public static new GetDescribeInstanceErrorLogsInvokeArgs Empty => new GetDescribeInstanceErrorLogsInvokeArgs();
     }
 
 

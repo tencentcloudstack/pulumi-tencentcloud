@@ -15,100 +15,94 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// <summary>
         /// Use this data source to query detailed information of wedata data_source_without_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Wedata.GetDataSourceWithoutInfo.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Wedata.GetDataSourceWithoutInfo.InvokeAsync(new Tencentcloud.Wedata.GetDataSourceWithoutInfoArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Wedata.Inputs.GetDataSourceWithoutInfoFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Wedata.Inputs.GetDataSourceWithoutInfoFilterArgs
+        ///                 Name = "ownerProjectId",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "ownerProjectId",
-        ///                     Values = 
-        ///                     {
-        ///                         "1612982498218618880",
-        ///                     },
+        ///                     "1612982498218618880",
         ///                 },
         ///             },
-        ///             OrderFields = 
+        ///         },
+        ///         OrderFields = new[]
+        ///         {
+        ///             new Tencentcloud.Wedata.Inputs.GetDataSourceWithoutInfoOrderFieldInputArgs
         ///             {
-        ///                 new Tencentcloud.Wedata.Inputs.GetDataSourceWithoutInfoOrderFieldArgs
-        ///                 {
-        ///                     Direction = "DESC",
-        ///                     Name = "create_time",
-        ///                 },
+        ///                 Direction = "DESC",
+        ///                 Name = "create_time",
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDataSourceWithoutInfoResult> InvokeAsync(GetDataSourceWithoutInfoArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDataSourceWithoutInfoResult>("tencentcloud:Wedata/getDataSourceWithoutInfo:getDataSourceWithoutInfo", args ?? new GetDataSourceWithoutInfoArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDataSourceWithoutInfoResult>("tencentcloud:Wedata/getDataSourceWithoutInfo:getDataSourceWithoutInfo", args ?? new GetDataSourceWithoutInfoArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of wedata data_source_without_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Wedata.GetDataSourceWithoutInfo.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Wedata.GetDataSourceWithoutInfo.InvokeAsync(new Tencentcloud.Wedata.GetDataSourceWithoutInfoArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Wedata.Inputs.GetDataSourceWithoutInfoFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Wedata.Inputs.GetDataSourceWithoutInfoFilterArgs
+        ///                 Name = "ownerProjectId",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "ownerProjectId",
-        ///                     Values = 
-        ///                     {
-        ///                         "1612982498218618880",
-        ///                     },
+        ///                     "1612982498218618880",
         ///                 },
         ///             },
-        ///             OrderFields = 
+        ///         },
+        ///         OrderFields = new[]
+        ///         {
+        ///             new Tencentcloud.Wedata.Inputs.GetDataSourceWithoutInfoOrderFieldInputArgs
         ///             {
-        ///                 new Tencentcloud.Wedata.Inputs.GetDataSourceWithoutInfoOrderFieldArgs
-        ///                 {
-        ///                     Direction = "DESC",
-        ///                     Name = "create_time",
-        ///                 },
+        ///                 Direction = "DESC",
+        ///                 Name = "create_time",
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDataSourceWithoutInfoResult> Invoke(GetDataSourceWithoutInfoInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDataSourceWithoutInfoResult>("tencentcloud:Wedata/getDataSourceWithoutInfo:getDataSourceWithoutInfo", args ?? new GetDataSourceWithoutInfoInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDataSourceWithoutInfoResult>("tencentcloud:Wedata/getDataSourceWithoutInfo:getDataSourceWithoutInfo", args ?? new GetDataSourceWithoutInfoInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDataSourceWithoutInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetDataSourceWithoutInfoArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetDataSourceWithoutInfoFilterArgs>? _filters;
@@ -143,9 +137,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public GetDataSourceWithoutInfoArgs()
         {
         }
+        public static new GetDataSourceWithoutInfoArgs Empty => new GetDataSourceWithoutInfoArgs();
     }
 
-    public sealed class GetDataSourceWithoutInfoInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDataSourceWithoutInfoInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetDataSourceWithoutInfoFilterInputArgs>? _filters;
@@ -180,6 +175,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public GetDataSourceWithoutInfoInvokeArgs()
         {
         }
+        public static new GetDataSourceWithoutInfoInvokeArgs Empty => new GetDataSourceWithoutInfoInvokeArgs();
     }
 
 

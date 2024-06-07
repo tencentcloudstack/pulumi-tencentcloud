@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a monitor grafanaSsoConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewGrafanaSsoConfig(ctx, "grafanaSsoConfig", &Monitor.GrafanaSsoConfigArgs{
-// 			EnableSso:  pulumi.Bool(false),
-// 			InstanceId: pulumi.String("grafana-dp2hnnfa"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.NewGrafanaSsoConfig(ctx, "grafanaSsoConfig", &Monitor.GrafanaSsoConfigArgs{
+//				EnableSso:  pulumi.Bool(false),
+//				InstanceId: pulumi.String("grafana-dp2hnnfa"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // monitor grafana_sso_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/grafanaSsoConfig:GrafanaSsoConfig grafana_sso_config instance_id
+// $ pulumi import tencentcloud:Monitor/grafanaSsoConfig:GrafanaSsoConfig grafana_sso_config instance_id
 // ```
 type GrafanaSsoConfig struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewGrafanaSsoConfig(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource GrafanaSsoConfig
 	err := ctx.RegisterResource("tencentcloud:Monitor/grafanaSsoConfig:GrafanaSsoConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *GrafanaSsoConfig) ToGrafanaSsoConfigOutputWithContext(ctx context.Conte
 // GrafanaSsoConfigArrayInput is an input type that accepts GrafanaSsoConfigArray and GrafanaSsoConfigArrayOutput values.
 // You can construct a concrete instance of `GrafanaSsoConfigArrayInput` via:
 //
-//          GrafanaSsoConfigArray{ GrafanaSsoConfigArgs{...} }
+//	GrafanaSsoConfigArray{ GrafanaSsoConfigArgs{...} }
 type GrafanaSsoConfigArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i GrafanaSsoConfigArray) ToGrafanaSsoConfigArrayOutputWithContext(ctx cont
 // GrafanaSsoConfigMapInput is an input type that accepts GrafanaSsoConfigMap and GrafanaSsoConfigMapOutput values.
 // You can construct a concrete instance of `GrafanaSsoConfigMapInput` via:
 //
-//          GrafanaSsoConfigMap{ "key": GrafanaSsoConfigArgs{...} }
+//	GrafanaSsoConfigMap{ "key": GrafanaSsoConfigArgs{...} }
 type GrafanaSsoConfigMapInput interface {
 	pulumi.Input
 

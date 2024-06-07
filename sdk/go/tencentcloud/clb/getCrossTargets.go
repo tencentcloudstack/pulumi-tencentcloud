@@ -8,42 +8,47 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of clb crossTargets
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.GetCrossTargets(ctx, &clb.GetCrossTargetsArgs{
-// 			Filters: []clb.GetCrossTargetsFilter{
-// 				clb.GetCrossTargetsFilter{
-// 					Name: "vpc-id",
-// 					Values: []string{
-// 						"vpc-4owdpnwr",
-// 					},
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.GetCrossTargets(ctx, &clb.GetCrossTargetsArgs{
+//				Filters: []clb.GetCrossTargetsFilter{
+//					{
+//						Name: "vpc-id",
+//						Values: []string{
+//							"vpc-4owdpnwr",
+//						},
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetCrossTargets(ctx *pulumi.Context, args *GetCrossTargetsArgs, opts ...pulumi.InvokeOption) (*GetCrossTargetsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCrossTargetsResult
 	err := ctx.Invoke("tencentcloud:Clb/getCrossTargets:getCrossTargets", args, &rv, opts...)
 	if err != nil {

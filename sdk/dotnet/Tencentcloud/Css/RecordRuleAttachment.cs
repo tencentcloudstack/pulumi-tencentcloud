@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var recordRule = new Tencentcloud.Css.RecordRuleAttachment("recordRule", new()
     ///     {
-    ///         var recordRule = new Tencentcloud.Css.RecordRuleAttachment("recordRule", new Tencentcloud.Css.RecordRuleAttachmentArgs
-    ///         {
-    ///             AppName = "qqq",
-    ///             DomainName = "177154.push.tlivecloud.com",
-    ///             StreamName = "ppp",
-    ///             TemplateId = 1262818,
-    ///         });
-    ///     }
+    ///         AppName = "qqq",
+    ///         DomainName = "177154.push.tlivecloud.com",
+    ///         StreamName = "ppp",
+    ///         TemplateId = 1262818,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css record_rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/recordRuleAttachment:RecordRuleAttachment record_rule templateId#domainName
+    /// $ pulumi import tencentcloud:Css/recordRuleAttachment:RecordRuleAttachment record_rule templateId#domainName
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/recordRuleAttachment:RecordRuleAttachment")]
-    public partial class RecordRuleAttachment : Pulumi.CustomResource
+    public partial class RecordRuleAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The streaming path is consistent with the AppName in the streaming and playback addresses. The default is live.
@@ -115,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class RecordRuleAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class RecordRuleAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The streaming path is consistent with the AppName in the streaming and playback addresses. The default is live.
@@ -144,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public RecordRuleAttachmentArgs()
         {
         }
+        public static new RecordRuleAttachmentArgs Empty => new RecordRuleAttachmentArgs();
     }
 
-    public sealed class RecordRuleAttachmentState : Pulumi.ResourceArgs
+    public sealed class RecordRuleAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The streaming path is consistent with the AppName in the streaming and playback addresses. The default is live.
@@ -175,5 +177,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public RecordRuleAttachmentState()
         {
         }
+        public static new RecordRuleAttachmentState Empty => new RecordRuleAttachmentState();
     }
 }

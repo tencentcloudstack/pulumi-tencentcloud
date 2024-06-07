@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityActivityParaSnapshotByTimeOffsetTaskArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityActivityParaSnapshotByTimeOffsetTaskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of a time point screencapturing template.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityActivityParaSnapshotByTimeOffsetTaskArgs()
         {
         }
+        public static new ScheduleActivityActivityParaSnapshotByTimeOffsetTaskArgs Empty => new ScheduleActivityActivityParaSnapshotByTimeOffsetTaskArgs();
     }
 }

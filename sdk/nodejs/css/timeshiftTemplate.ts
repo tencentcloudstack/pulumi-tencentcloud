@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const timeshiftTemplate = new tencentcloud.Css.TimeshiftTemplate("timeshift_template", {
+ * const timeshiftTemplate = new tencentcloud.css.TimeshiftTemplate("timeshiftTemplate", {
  *     area: "Mainland",
  *     description: "timeshift template",
  *     duration: 604800,
@@ -23,13 +24,14 @@ import * as utilities from "../utilities";
  *     transcodeTemplateIds: [],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css timeshift_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/timeshiftTemplate:TimeshiftTemplate timeshift_template templateId
+ * $ pulumi import tencentcloud:Css/timeshiftTemplate:TimeshiftTemplate timeshift_template templateId
  * ```
  */
 export class TimeshiftTemplate extends pulumi.CustomResource {

@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf application_attribute
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var applicationAttribute = Tencentcloud.Tsf.GetApplicationAttribute.Invoke(new()
         ///     {
-        ///         var applicationAttribute = Output.Create(Tencentcloud.Tsf.GetApplicationAttribute.InvokeAsync(new Tencentcloud.Tsf.GetApplicationAttributeArgs
-        ///         {
-        ///             ApplicationId = "application-a24x29xv",
-        ///         }));
-        ///     }
+        ///         ApplicationId = "application-a24x29xv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetApplicationAttributeResult> InvokeAsync(GetApplicationAttributeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApplicationAttributeResult>("tencentcloud:Tsf/getApplicationAttribute:getApplicationAttribute", args ?? new GetApplicationAttributeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApplicationAttributeResult>("tencentcloud:Tsf/getApplicationAttribute:getApplicationAttribute", args ?? new GetApplicationAttributeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf application_attribute
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var applicationAttribute = Tencentcloud.Tsf.GetApplicationAttribute.Invoke(new()
         ///     {
-        ///         var applicationAttribute = Output.Create(Tencentcloud.Tsf.GetApplicationAttribute.InvokeAsync(new Tencentcloud.Tsf.GetApplicationAttributeArgs
-        ///         {
-        ///             ApplicationId = "application-a24x29xv",
-        ///         }));
-        ///     }
+        ///         ApplicationId = "application-a24x29xv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetApplicationAttributeResult> Invoke(GetApplicationAttributeInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApplicationAttributeResult>("tencentcloud:Tsf/getApplicationAttribute:getApplicationAttribute", args ?? new GetApplicationAttributeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApplicationAttributeResult>("tencentcloud:Tsf/getApplicationAttribute:getApplicationAttribute", args ?? new GetApplicationAttributeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetApplicationAttributeArgs : Pulumi.InvokeArgs
+    public sealed class GetApplicationAttributeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// application Id.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetApplicationAttributeArgs()
         {
         }
+        public static new GetApplicationAttributeArgs Empty => new GetApplicationAttributeArgs();
     }
 
-    public sealed class GetApplicationAttributeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetApplicationAttributeInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// application Id.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetApplicationAttributeInvokeArgs()
         {
         }
+        public static new GetApplicationAttributeInvokeArgs Empty => new GetApplicationAttributeInvokeArgs();
     }
 
 

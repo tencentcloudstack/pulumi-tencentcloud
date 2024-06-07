@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainRequestHeaderHeaderRuleGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainRequestHeaderHeaderRuleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Response header mode.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainRequestHeaderHeaderRuleGetArgs()
         {
         }
+        public static new DomainRequestHeaderHeaderRuleGetArgs Empty => new DomainRequestHeaderHeaderRuleGetArgs();
     }
 }

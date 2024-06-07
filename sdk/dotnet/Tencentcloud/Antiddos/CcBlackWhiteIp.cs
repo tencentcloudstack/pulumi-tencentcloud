@@ -15,42 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var ccBlackWhiteIp = new Tencentcloud.Antiddos.CcBlackWhiteIp("ccBlackWhiteIp", new()
     ///     {
-    ///         var ccBlackWhiteIp = new Tencentcloud.Antiddos.CcBlackWhiteIp("ccBlackWhiteIp", new Tencentcloud.Antiddos.CcBlackWhiteIpArgs
+    ///         BlackWhiteIp = new Tencentcloud.Antiddos.Inputs.CcBlackWhiteIpBlackWhiteIpArgs
     ///         {
-    ///             BlackWhiteIp = new Tencentcloud.Antiddos.Inputs.CcBlackWhiteIpBlackWhiteIpArgs
-    ///             {
-    ///                 Ip = "1.2.3.5",
-    ///                 Mask = 0,
-    ///             },
-    ///             Domain = "t.baidu.com",
-    ///             InstanceId = "bgpip-xxxxxx",
-    ///             Ip = "xxx.xxx.xxx.xxx",
-    ///             Protocol = "http",
-    ///             Type = "black",
-    ///         });
-    ///     }
+    ///             Ip = "1.2.3.5",
+    ///             Mask = 0,
+    ///         },
+    ///         Domain = "t.baidu.com",
+    ///         InstanceId = "bgpip-xxxxxx",
+    ///         Ip = "xxx.xxx.xxx.xxx",
+    ///         Protocol = "http",
+    ///         Type = "black",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// antiddos cc_black_white_ip can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Antiddos/ccBlackWhiteIp:CcBlackWhiteIp cc_black_white_ip ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}
+    /// $ pulumi import tencentcloud:Antiddos/ccBlackWhiteIp:CcBlackWhiteIp cc_black_white_ip ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Antiddos/ccBlackWhiteIp:CcBlackWhiteIp")]
-    public partial class CcBlackWhiteIp : Pulumi.CustomResource
+    public partial class CcBlackWhiteIp : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Black white ip.
@@ -133,7 +134,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         }
     }
 
-    public sealed class CcBlackWhiteIpArgs : Pulumi.ResourceArgs
+    public sealed class CcBlackWhiteIpArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Black white ip.
@@ -174,9 +175,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public CcBlackWhiteIpArgs()
         {
         }
+        public static new CcBlackWhiteIpArgs Empty => new CcBlackWhiteIpArgs();
     }
 
-    public sealed class CcBlackWhiteIpState : Pulumi.ResourceArgs
+    public sealed class CcBlackWhiteIpState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Black white ip.
@@ -217,5 +219,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public CcBlackWhiteIpState()
         {
         }
+        public static new CcBlackWhiteIpState Empty => new CcBlackWhiteIpState();
     }
 }

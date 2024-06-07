@@ -15,78 +15,72 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         /// <summary>
         /// Use this data source to query detailed information of VPN gateways.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var snat = Tencentcloud.Nat.GetGatewaySnats.Invoke(new()
         ///     {
-        ///         var snat = Output.Create(Tencentcloud.Nat.GetGatewaySnats.InvokeAsync(new Tencentcloud.Nat.GetGatewaySnatsArgs
+        ///         NatGatewayId = tencentcloud_nat_gateway.My_nat.Id,
+        ///         SubnetId = tencentcloud_nat_gateway_snat.My_subnet.Id,
+        ///         PublicIpAddrs = new[]
         ///         {
-        ///             NatGatewayId = tencentcloud_nat_gateway.My_nat.Id,
-        ///             SubnetId = tencentcloud_nat_gateway_snat.My_subnet.Id,
-        ///             PublicIpAddrs = 
-        ///             {
-        ///                 "50.29.23.234",
-        ///             },
-        ///             Description = "snat demo",
-        ///             ResultOutputFile = "./snat.txt",
-        ///         }));
-        ///     }
+        ///             "50.29.23.234",
+        ///         },
+        ///         Description = "snat demo",
+        ///         ResultOutputFile = "./snat.txt",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGatewaySnatsResult> InvokeAsync(GetGatewaySnatsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGatewaySnatsResult>("tencentcloud:Nat/getGatewaySnats:getGatewaySnats", args ?? new GetGatewaySnatsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewaySnatsResult>("tencentcloud:Nat/getGatewaySnats:getGatewaySnats", args ?? new GetGatewaySnatsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of VPN gateways.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var snat = Tencentcloud.Nat.GetGatewaySnats.Invoke(new()
         ///     {
-        ///         var snat = Output.Create(Tencentcloud.Nat.GetGatewaySnats.InvokeAsync(new Tencentcloud.Nat.GetGatewaySnatsArgs
+        ///         NatGatewayId = tencentcloud_nat_gateway.My_nat.Id,
+        ///         SubnetId = tencentcloud_nat_gateway_snat.My_subnet.Id,
+        ///         PublicIpAddrs = new[]
         ///         {
-        ///             NatGatewayId = tencentcloud_nat_gateway.My_nat.Id,
-        ///             SubnetId = tencentcloud_nat_gateway_snat.My_subnet.Id,
-        ///             PublicIpAddrs = 
-        ///             {
-        ///                 "50.29.23.234",
-        ///             },
-        ///             Description = "snat demo",
-        ///             ResultOutputFile = "./snat.txt",
-        ///         }));
-        ///     }
+        ///             "50.29.23.234",
+        ///         },
+        ///         Description = "snat demo",
+        ///         ResultOutputFile = "./snat.txt",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGatewaySnatsResult> Invoke(GetGatewaySnatsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGatewaySnatsResult>("tencentcloud:Nat/getGatewaySnats:getGatewaySnats", args ?? new GetGatewaySnatsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGatewaySnatsResult>("tencentcloud:Nat/getGatewaySnats:getGatewaySnats", args ?? new GetGatewaySnatsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGatewaySnatsArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewaySnatsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Description.
@@ -133,9 +127,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public GetGatewaySnatsArgs()
         {
         }
+        public static new GetGatewaySnatsArgs Empty => new GetGatewaySnatsArgs();
     }
 
-    public sealed class GetGatewaySnatsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewaySnatsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Description.
@@ -182,6 +177,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public GetGatewaySnatsInvokeArgs()
         {
         }
+        public static new GetGatewaySnatsInvokeArgs Empty => new GetGatewaySnatsInvokeArgs();
     }
 
 

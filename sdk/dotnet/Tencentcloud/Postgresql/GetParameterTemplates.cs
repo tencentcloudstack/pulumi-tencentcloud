@@ -15,104 +15,98 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// <summary>
         /// Use this data source to query detailed information of postgresql parameter_templates
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var parameterTemplates = Tencentcloud.Postgresql.GetParameterTemplates.Invoke(new()
         ///     {
-        ///         var parameterTemplates = Output.Create(Tencentcloud.Postgresql.GetParameterTemplates.InvokeAsync(new Tencentcloud.Postgresql.GetParameterTemplatesArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Postgresql.Inputs.GetParameterTemplatesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Postgresql.Inputs.GetParameterTemplatesFilterArgs
+        ///                 Name = "TemplateName",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "TemplateName",
-        ///                     Values = 
-        ///                     {
-        ///                         "temp_name",
-        ///                     },
-        ///                 },
-        ///                 new Tencentcloud.Postgresql.Inputs.GetParameterTemplatesFilterArgs
-        ///                 {
-        ///                     Name = "DBEngine",
-        ///                     Values = 
-        ///                     {
-        ///                         "postgresql",
-        ///                     },
+        ///                     "temp_name",
         ///                 },
         ///             },
-        ///             OrderBy = "CreateTime",
-        ///             OrderByType = "desc",
-        ///         }));
-        ///     }
+        ///             new Tencentcloud.Postgresql.Inputs.GetParameterTemplatesFilterInputArgs
+        ///             {
+        ///                 Name = "DBEngine",
+        ///                 Values = new[]
+        ///                 {
+        ///                     "postgresql",
+        ///                 },
+        ///             },
+        ///         },
+        ///         OrderBy = "CreateTime",
+        ///         OrderByType = "desc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetParameterTemplatesResult> InvokeAsync(GetParameterTemplatesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetParameterTemplatesResult>("tencentcloud:Postgresql/getParameterTemplates:getParameterTemplates", args ?? new GetParameterTemplatesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetParameterTemplatesResult>("tencentcloud:Postgresql/getParameterTemplates:getParameterTemplates", args ?? new GetParameterTemplatesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of postgresql parameter_templates
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var parameterTemplates = Tencentcloud.Postgresql.GetParameterTemplates.Invoke(new()
         ///     {
-        ///         var parameterTemplates = Output.Create(Tencentcloud.Postgresql.GetParameterTemplates.InvokeAsync(new Tencentcloud.Postgresql.GetParameterTemplatesArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Postgresql.Inputs.GetParameterTemplatesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Postgresql.Inputs.GetParameterTemplatesFilterArgs
+        ///                 Name = "TemplateName",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "TemplateName",
-        ///                     Values = 
-        ///                     {
-        ///                         "temp_name",
-        ///                     },
-        ///                 },
-        ///                 new Tencentcloud.Postgresql.Inputs.GetParameterTemplatesFilterArgs
-        ///                 {
-        ///                     Name = "DBEngine",
-        ///                     Values = 
-        ///                     {
-        ///                         "postgresql",
-        ///                     },
+        ///                     "temp_name",
         ///                 },
         ///             },
-        ///             OrderBy = "CreateTime",
-        ///             OrderByType = "desc",
-        ///         }));
-        ///     }
+        ///             new Tencentcloud.Postgresql.Inputs.GetParameterTemplatesFilterInputArgs
+        ///             {
+        ///                 Name = "DBEngine",
+        ///                 Values = new[]
+        ///                 {
+        ///                     "postgresql",
+        ///                 },
+        ///             },
+        ///         },
+        ///         OrderBy = "CreateTime",
+        ///         OrderByType = "desc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetParameterTemplatesResult> Invoke(GetParameterTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetParameterTemplatesResult>("tencentcloud:Postgresql/getParameterTemplates:getParameterTemplates", args ?? new GetParameterTemplatesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetParameterTemplatesResult>("tencentcloud:Postgresql/getParameterTemplates:getParameterTemplates", args ?? new GetParameterTemplatesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetParameterTemplatesArgs : Pulumi.InvokeArgs
+    public sealed class GetParameterTemplatesArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetParameterTemplatesFilterArgs>? _filters;
@@ -147,9 +141,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetParameterTemplatesArgs()
         {
         }
+        public static new GetParameterTemplatesArgs Empty => new GetParameterTemplatesArgs();
     }
 
-    public sealed class GetParameterTemplatesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetParameterTemplatesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetParameterTemplatesFilterInputArgs>? _filters;
@@ -184,6 +179,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetParameterTemplatesInvokeArgs()
         {
         }
+        public static new GetParameterTemplatesInvokeArgs Empty => new GetParameterTemplatesInvokeArgs();
     }
 
 

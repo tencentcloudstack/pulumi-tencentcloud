@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,19 +11,39 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const index = new tencentcloud.Cls.Index("index", {
- *     includeInternalFields: true,
- *     metadataFlag: 1,
+ * const exampleLogset = new tencentcloud.cls.Logset("exampleLogset", {
+ *     logsetName: "tf_example",
+ *     tags: {
+ *         demo: "test",
+ *     },
+ * });
+ * const exampleTopic = new tencentcloud.cls.Topic("exampleTopic", {
+ *     topicName: "tf_example",
+ *     logsetId: exampleLogset.id,
+ *     autoSplit: false,
+ *     maxSplitPartitions: 20,
+ *     partitionCount: 1,
+ *     period: 30,
+ *     storageType: "hot",
+ *     describes: "Test Demo.",
+ *     hotPeriod: 10,
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * const tokenizerValue = "@&?|#()='\",;:<>[]{}";
+ * const exampleIndex = new tencentcloud.cls.Index("exampleIndex", {
+ *     topicId: exampleTopic.id,
  *     rule: {
  *         fullText: {
  *             caseSensitive: true,
+ *             tokenizer: tokenizerValue,
  *             containZH: true,
- *             tokenizer: `@&?|#()='",;:<>[]{}/ 
- * 	\\`,
  *         },
  *         keyValue: {
  *             caseSensitive: true,
@@ -32,8 +53,7 @@ import * as utilities from "../utilities";
  *                     value: {
  *                         containZH: true,
  *                         sqlFlag: true,
- *                         tokenizer: `@&?|#()='",;:<>[]{}/ 
- * 	\\`,
+ *                         tokenizer: tokenizerValue,
  *                         type: "text",
  *                     },
  *                 },
@@ -42,8 +62,7 @@ import * as utilities from "../utilities";
  *                     value: {
  *                         containZH: true,
  *                         sqlFlag: true,
- *                         tokenizer: `@&?|#()='",;:<>[]{}/ 
- * 	\\`,
+ *                         tokenizer: tokenizerValue,
  *                         type: "text",
  *                     },
  *                 },
@@ -56,24 +75,28 @@ import * as utilities from "../utilities";
  *                 value: {
  *                     containZH: true,
  *                     sqlFlag: true,
- *                     tokenizer: `@&?|#()='",;:<>[]{}/ 
- * 	\\`,
+ *                     tokenizer: tokenizerValue,
  *                     type: "text",
  *                 },
  *             }],
  *         },
+ *         dynamicIndex: {
+ *             status: true,
+ *         },
  *     },
  *     status: true,
- *     topicId: "0937e56f-4008-49d2-ad2d-69c52a9f11cc",
+ *     includeInternalFields: true,
+ *     metadataFlag: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cls cos index can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cls/index:Index index 0937e56f-4008-49d2-ad2d-69c52a9f11cc
+ * $ pulumi import tencentcloud:Cls/index:Index example 0937e56f-4008-49d2-ad2d-69c52a9f11cc
  * ```
  */
 export class Index extends pulumi.CustomResource {

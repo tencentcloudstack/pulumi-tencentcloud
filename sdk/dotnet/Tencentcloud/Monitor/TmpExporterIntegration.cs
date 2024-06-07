@@ -16,81 +16,162 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// &gt; **NOTE:** If you only want to upgrade the exporter version with same config, you can set `version` under `instanceSpec` with any value to trigger the change.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Use blackbox-exporter
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var tmpExporterIntegration = new Tencentcloud.Monitor.TmpExporterIntegration("tmpExporterIntegration", new()
     ///     {
-    ///         var tmpExporterIntegration = new Tencentcloud.Monitor.TmpExporterIntegration("tmpExporterIntegration", new Tencentcloud.Monitor.TmpExporterIntegrationArgs
-    ///         {
-    ///             ClusterId = "cls-bmuaukfu",
-    ///             Content = "{\"name\":\"test\",\"kind\":\"blackbox-exporter\",\"spec\":{\"instanceSpec\":{\"module\":\"http_get\",\"urls\":[\"xx\"]}}}",
-    ///             InstanceId = "prom-dko9d0nu",
-    ///             Kind = "blackbox-exporter",
-    ///             KubeType = 1,
-    ///         });
-    ///     }
+    ///         ClusterId = "cls-bmuaukfu",
+    ///         Content = "{\"name\":\"test\",\"kind\":\"blackbox-exporter\",\"spec\":{\"instanceSpec\":{\"module\":\"http_get\",\"urls\":[\"xx\"]}}}",
+    ///         InstanceId = "prom-dko9d0nu",
+    ///         Kind = "blackbox-exporter",
+    ///         KubeType = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Use es-exporter
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var tmpExporterIntegrationEs = new Tencentcloud.Monitor.TmpExporterIntegration("tmpExporterIntegrationEs", new()
     ///     {
-    ///         var tmpExporterIntegrationEs = new Tencentcloud.Monitor.TmpExporterIntegration("tmpExporterIntegrationEs", new Tencentcloud.Monitor.TmpExporterIntegrationArgs
+    ///         InstanceId = tencentcloud_monitor_tmp_instance.TmpInstance.Id,
+    ///         Kind = "es-exporter",
+    ///         Content = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             InstanceId = tencentcloud_monitor_tmp_instance.TmpInstance.Id,
-    ///             Kind = "es-exporter",
-    ///             Content = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///             ["name"] = "ex-exporter-example",
+    ///             ["kind"] = "es-exporter",
+    ///             ["spec"] = new Dictionary&lt;string, object?&gt;
     ///             {
-    ///                 { "name", "ex-exporter-example" },
-    ///                 { "kind", "es-exporter" },
-    ///                 { "spec", new Dictionary&lt;string, object?&gt;
+    ///                 ["instanceSpec"] = new Dictionary&lt;string, object?&gt;
     ///                 {
-    ///                     { "instanceSpec", new Dictionary&lt;string, object?&gt;
+    ///                     ["url"] = "http://127.0.0.1:9123",
+    ///                     ["labels"] = new Dictionary&lt;string, object?&gt;
     ///                     {
-    ///                         { "url", "http://127.0.0.1:9123" },
-    ///                         { "labels", new Dictionary&lt;string, object?&gt;
-    ///                         {
-    ///                             { "instance", "es-abcd" },
-    ///                         } },
-    ///                         { "version", "1.70.1" },
-    ///                         { "user", "fugiat Duis minim" },
-    ///                         { "password", "exercitation cillum velit" },
-    ///                     } },
-    ///                     { "exporterSpec", new Dictionary&lt;string, object?&gt;
-    ///                     {
-    ///                         { "all", true },
-    ///                         { "indicesSettings", false },
-    ///                         { "snapshots", false },
-    ///                         { "indices", true },
-    ///                         { "shards", false },
-    ///                     } },
-    ///                 } },
-    ///             }),
-    ///             ClusterId = "",
-    ///             KubeType = 3,
-    ///         });
-    ///     }
+    ///                         ["instance"] = "es-abcd",
+    ///                     },
+    ///                     ["version"] = "1.70.1",
+    ///                     ["user"] = "fugiat Duis minim",
+    ///                     ["password"] = "exercitation cillum velit",
+    ///                 },
+    ///                 ["exporterSpec"] = new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     ["all"] = true,
+    ///                     ["indicesSettings"] = false,
+    ///                     ["snapshots"] = false,
+    ///                     ["indices"] = true,
+    ///                     ["shards"] = false,
+    ///                 },
+    ///             },
+    ///         }),
+    ///         ClusterId = "",
+    ///         KubeType = 3,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Integration Center: CVM Scrape Job
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using System.Text.Json;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.2.0.0/16",
+    ///     });
+    /// 
+    ///     var sub = new Tencentcloud.Subnet.Instance("sub", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.2.11.0/24",
+    ///         AvailabilityZone = "ap-guangzhou-3",
+    ///     });
+    /// 
+    ///     var tmpInstance = new Tencentcloud.Monitor.TmpInstance("tmpInstance", new()
+    ///     {
+    ///         InstanceName = "tf-test-tmp",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = sub.Id,
+    ///         DataRetentionTime = 15,
+    ///         Zone = "ap-guangzhou-3",
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     // Integration Center: CVM Scrape Job
+    ///     var tmpExporterIntegration = new Tencentcloud.Monitor.TmpExporterIntegration("tmpExporterIntegration", new()
+    ///     {
+    ///         InstanceId = tmpInstance.Id,
+    ///         Kind = "cvm-http-sd-exporter",
+    ///         Content = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///         {
+    ///             ["kind"] = "cvm-http-sd-exporter",
+    ///             ["spec"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["job"] = @"job_name: example-cvm-job-name
+    /// metrics_path: /metrics
+    /// cvm_sd_configs:
+    /// - region: ap-guangzhou
+    ///   ports:
+    ///     - 9100
+    ///   filters:         
+    ///     - name: tag:YOUR_TAG_KEY
+    ///       values: 
+    ///       - YOUR_TAG_VALUE
+    /// relabel_configs: 
+    ///   - source_labels: [__meta_cvm_instance_state]
+    ///     regex: RUNNING
+    ///     action: keep
+    ///   - regex: __meta_cvm_tag_(.*)
+    ///     replacement: $1
+    ///     action: labelmap
+    ///   - source_labels: [__meta_cvm_region]
+    ///     target_label: region
+    ///     action: replace
+    /// ",
+    ///             },
+    ///         }),
+    ///         KubeType = 3,
+    ///         ClusterId = "",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpExporterIntegration:TmpExporterIntegration")]
-    public partial class TmpExporterIntegration : Pulumi.CustomResource
+    public partial class TmpExporterIntegration : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster ID.
@@ -167,7 +248,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class TmpExporterIntegrationArgs : Pulumi.ResourceArgs
+    public sealed class TmpExporterIntegrationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -202,9 +283,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpExporterIntegrationArgs()
         {
         }
+        public static new TmpExporterIntegrationArgs Empty => new TmpExporterIntegrationArgs();
     }
 
-    public sealed class TmpExporterIntegrationState : Pulumi.ResourceArgs
+    public sealed class TmpExporterIntegrationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -239,5 +321,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpExporterIntegrationState()
         {
         }
+        public static new TmpExporterIntegrationState Empty => new TmpExporterIntegrationState();
     }
 }

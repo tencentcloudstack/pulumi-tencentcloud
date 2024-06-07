@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class UsagePlanAttachListGetArgs : Pulumi.ResourceArgs
+    public sealed class UsagePlanAttachListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The API ID, this value is empty if attach service.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public UsagePlanAttachListGetArgs()
         {
         }
+        public static new UsagePlanAttachListGetArgs Empty => new UsagePlanAttachListGetArgs();
     }
 }

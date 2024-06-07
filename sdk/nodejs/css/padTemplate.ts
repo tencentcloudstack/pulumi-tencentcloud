@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const padTemplate = new tencentcloud.Css.PadTemplate("pad_template", {
+ * const padTemplate = new tencentcloud.css.PadTemplate("padTemplate", {
  *     description: "pad template",
  *     maxDuration: 120000,
  *     templateName: "tf-pad",
@@ -22,13 +23,14 @@ import * as utilities from "../utilities";
  *     waitDuration: 2000,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css pad_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/padTemplate:PadTemplate pad_template templateId
+ * $ pulumi import tencentcloud:Css/padTemplate:PadTemplate pad_template templateId
  * ```
  */
 export class PadTemplate extends pulumi.CustomResource {

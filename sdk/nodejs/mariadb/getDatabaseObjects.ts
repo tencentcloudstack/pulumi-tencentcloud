@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const databaseObjects = pulumi.output(tencentcloud.Mariadb.getDatabaseObjects({
+ * const databaseObjects = tencentcloud.Mariadb.getDatabaseObjects({
  *     dbName: "mysql",
  *     instanceId: "tdsql-n2fw7pn3",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDatabaseObjects(args: GetDatabaseObjectsArgs, opts?: pulumi.InvokeOptions): Promise<GetDatabaseObjectsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mariadb/getDatabaseObjects:getDatabaseObjects", {
         "dbName": args.dbName,
         "instanceId": args.instanceId,
@@ -79,9 +79,25 @@ export interface GetDatabaseObjectsResult {
      */
     readonly views: outputs.Mariadb.GetDatabaseObjectsView[];
 }
-
+/**
+ * Use this data source to query detailed information of mariadb databaseObjects
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const databaseObjects = tencentcloud.Mariadb.getDatabaseObjects({
+ *     dbName: "mysql",
+ *     instanceId: "tdsql-n2fw7pn3",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDatabaseObjectsOutput(args: GetDatabaseObjectsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDatabaseObjectsResult> {
-    return pulumi.output(args).apply(a => getDatabaseObjects(a, opts))
+    return pulumi.output(args).apply((a: any) => getDatabaseObjects(a, opts))
 }
 
 /**

@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// <summary>
         /// Use this data source to query detailed information of mongodb instance_slow_log
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceSlowLog = Tencentcloud.Mongodb.GetInstanceSlowLog.Invoke(new()
         ///     {
-        ///         var instanceSlowLog = Output.Create(Tencentcloud.Mongodb.GetInstanceSlowLog.InvokeAsync(new Tencentcloud.Mongodb.GetInstanceSlowLogArgs
-        ///         {
-        ///             EndTime = "2019-06-02 12:00:00",
-        ///             Format = "json",
-        ///             InstanceId = "cmgo-9d0p6umb",
-        ///             SlowMS = 100,
-        ///             StartTime = "2019-06-01 10:00:00",
-        ///         }));
-        ///     }
+        ///         EndTime = "2019-06-02 12:00:00",
+        ///         Format = "json",
+        ///         InstanceId = "cmgo-9d0p6umb",
+        ///         SlowMS = 100,
+        ///         StartTime = "2019-06-01 10:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceSlowLogResult> InvokeAsync(GetInstanceSlowLogArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceSlowLogResult>("tencentcloud:Mongodb/getInstanceSlowLog:getInstanceSlowLog", args ?? new GetInstanceSlowLogArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceSlowLogResult>("tencentcloud:Mongodb/getInstanceSlowLog:getInstanceSlowLog", args ?? new GetInstanceSlowLogArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mongodb instance_slow_log
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceSlowLog = Tencentcloud.Mongodb.GetInstanceSlowLog.Invoke(new()
         ///     {
-        ///         var instanceSlowLog = Output.Create(Tencentcloud.Mongodb.GetInstanceSlowLog.InvokeAsync(new Tencentcloud.Mongodb.GetInstanceSlowLogArgs
-        ///         {
-        ///             EndTime = "2019-06-02 12:00:00",
-        ///             Format = "json",
-        ///             InstanceId = "cmgo-9d0p6umb",
-        ///             SlowMS = 100,
-        ///             StartTime = "2019-06-01 10:00:00",
-        ///         }));
-        ///     }
+        ///         EndTime = "2019-06-02 12:00:00",
+        ///         Format = "json",
+        ///         InstanceId = "cmgo-9d0p6umb",
+        ///         SlowMS = 100,
+        ///         StartTime = "2019-06-01 10:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceSlowLogResult> Invoke(GetInstanceSlowLogInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceSlowLogResult>("tencentcloud:Mongodb/getInstanceSlowLog:getInstanceSlowLog", args ?? new GetInstanceSlowLogInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceSlowLogResult>("tencentcloud:Mongodb/getInstanceSlowLog:getInstanceSlowLog", args ?? new GetInstanceSlowLogInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceSlowLogArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceSlowLogArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Slow log termination time, format: yyyy-mm-dd hh:mm:ss, such as: 2019-06-02 12:00:00.The time interval between the start and end of the query cannot exceed 24 hours,and only slow logs within the last 7 days are allowed to be queried.
@@ -121,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public GetInstanceSlowLogArgs()
         {
         }
+        public static new GetInstanceSlowLogArgs Empty => new GetInstanceSlowLogArgs();
     }
 
-    public sealed class GetInstanceSlowLogInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceSlowLogInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Slow log termination time, format: yyyy-mm-dd hh:mm:ss, such as: 2019-06-02 12:00:00.The time interval between the start and end of the query cannot exceed 24 hours,and only slow logs within the last 7 days are allowed to be queried.
@@ -164,6 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public GetInstanceSlowLogInvokeArgs()
         {
         }
+        public static new GetInstanceSlowLogInvokeArgs Empty => new GetInstanceSlowLogInvokeArgs();
     }
 
 

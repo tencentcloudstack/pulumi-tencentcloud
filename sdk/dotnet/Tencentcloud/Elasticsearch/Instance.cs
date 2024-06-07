@@ -14,181 +14,192 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// Provides an elasticsearch instance resource.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a basic version of elasticsearch instance paid by the hour
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var availabilityZone = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var availabilityZone = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "es",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone.Apply(availabilityZone =&gt; availabilityZone.Zones?[0]?.Name),
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var example = new Tencentcloud.Elasticsearch.Instance("example", new Tencentcloud.Elasticsearch.InstanceArgs
-    ///         {
-    ///             InstanceName = "tf_example_es",
-    ///             AvailabilityZone = availabilityZone.Apply(availabilityZone =&gt; availabilityZone.Zones?[0]?.Name),
-    ///             Version = "7.10.1",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             Password = "Test12345",
-    ///             LicenseType = "basic",
-    ///             BasicSecurityType = 2,
-    ///             WebNodeTypeInfos = 
-    ///             {
-    ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceWebNodeTypeInfoArgs
-    ///                 {
-    ///                     NodeNum = 1,
-    ///                     NodeType = "ES.S1.MEDIUM4",
-    ///                 },
-    ///             },
-    ///             NodeInfoLists = 
-    ///             {
-    ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
-    ///                 {
-    ///                     NodeNum = 2,
-    ///                     NodeType = "ES.S1.MEDIUM8",
-    ///                     Encrypt = false,
-    ///                 },
-    ///             },
-    ///             EsAcl = new Tencentcloud.Elasticsearch.Inputs.InstanceEsAclArgs
-    ///             {
-    ///                 WhiteLists = 
-    ///                 {
-    ///                     "127.0.0.1",
-    ///                 },
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///     }
+    ///         Product = "es",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var example = new Tencentcloud.Elasticsearch.Instance("example", new()
+    ///     {
+    ///         InstanceName = "tf_example_es",
+    ///         AvailabilityZone = availabilityZone.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         Version = "7.10.1",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         Password = "Test12345",
+    ///         LicenseType = "basic",
+    ///         BasicSecurityType = 2,
+    ///         WebNodeTypeInfos = new[]
+    ///         {
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceWebNodeTypeInfoArgs
+    ///             {
+    ///                 NodeNum = 1,
+    ///                 NodeType = "ES.S1.MEDIUM4",
+    ///             },
+    ///         },
+    ///         NodeInfoLists = new[]
+    ///         {
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+    ///             {
+    ///                 NodeNum = 2,
+    ///                 NodeType = "ES.S1.MEDIUM8",
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///         EsAcl = new Tencentcloud.Elasticsearch.Inputs.InstanceEsAclArgs
+    ///         {
+    ///             WhiteLists = new[]
+    ///             {
+    ///                 "127.0.0.1",
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a basic version of elasticsearch instance for multi-availability zone deployment
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var availabilityZone = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var availabilityZone = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "es",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone.Apply(availabilityZone =&gt; availabilityZone.Zones?[0]?.Name),
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var subnetMultiZone = new Tencentcloud.Subnet.Instance("subnetMultiZone", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone.Apply(availabilityZone =&gt; availabilityZone.Zones?[1]?.Name),
-    ///             CidrBlock = "10.0.2.0/24",
-    ///         });
-    ///         var exampleMultiZone = new Tencentcloud.Elasticsearch.Instance("exampleMultiZone", new Tencentcloud.Elasticsearch.InstanceArgs
-    ///         {
-    ///             InstanceName = "tf_example_es",
-    ///             AvailabilityZone = "-",
-    ///             Version = "7.10.1",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = "-",
-    ///             Password = "Test12345",
-    ///             LicenseType = "basic",
-    ///             BasicSecurityType = 2,
-    ///             DeployMode = 1,
-    ///             MultiZoneInfos = 
-    ///             {
-    ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceMultiZoneInfoArgs
-    ///                 {
-    ///                     AvailabilityZone = availabilityZone.Apply(availabilityZone =&gt; availabilityZone.Zones?[0]?.Name),
-    ///                     SubnetId = subnet.Id,
-    ///                 },
-    ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceMultiZoneInfoArgs
-    ///                 {
-    ///                     AvailabilityZone = availabilityZone.Apply(availabilityZone =&gt; availabilityZone.Zones?[1]?.Name),
-    ///                     SubnetId = subnetMultiZone.Id,
-    ///                 },
-    ///             },
-    ///             WebNodeTypeInfos = 
-    ///             {
-    ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceWebNodeTypeInfoArgs
-    ///                 {
-    ///                     NodeNum = 1,
-    ///                     NodeType = "ES.S1.MEDIUM4",
-    ///                 },
-    ///             },
-    ///             NodeInfoLists = 
-    ///             {
-    ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
-    ///                 {
-    ///                     Type = "dedicatedMaster",
-    ///                     NodeNum = 3,
-    ///                     NodeType = "ES.S1.MEDIUM8",
-    ///                     Encrypt = false,
-    ///                 },
-    ///                 new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
-    ///                 {
-    ///                     Type = "hotData",
-    ///                     NodeNum = 2,
-    ///                     NodeType = "ES.S1.MEDIUM8",
-    ///                     Encrypt = false,
-    ///                 },
-    ///             },
-    ///             EsAcl = new Tencentcloud.Elasticsearch.Inputs.InstanceEsAclArgs
-    ///             {
-    ///                 WhiteLists = 
-    ///                 {
-    ///                     "127.0.0.1",
-    ///                 },
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///     }
+    ///         Product = "es",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var subnetMultiZone = new Tencentcloud.Subnet.Instance("subnetMultiZone", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[1]?.Name),
+    ///         CidrBlock = "10.0.2.0/24",
+    ///     });
+    /// 
+    ///     var exampleMultiZone = new Tencentcloud.Elasticsearch.Instance("exampleMultiZone", new()
+    ///     {
+    ///         InstanceName = "tf_example_es",
+    ///         AvailabilityZone = "-",
+    ///         Version = "7.10.1",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = "-",
+    ///         Password = "Test12345",
+    ///         LicenseType = "basic",
+    ///         BasicSecurityType = 2,
+    ///         DeployMode = 1,
+    ///         MultiZoneInfos = new[]
+    ///         {
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceMultiZoneInfoArgs
+    ///             {
+    ///                 AvailabilityZone = availabilityZone.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///                 SubnetId = subnet.Id,
+    ///             },
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceMultiZoneInfoArgs
+    ///             {
+    ///                 AvailabilityZone = availabilityZone.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[1]?.Name),
+    ///                 SubnetId = subnetMultiZone.Id,
+    ///             },
+    ///         },
+    ///         WebNodeTypeInfos = new[]
+    ///         {
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceWebNodeTypeInfoArgs
+    ///             {
+    ///                 NodeNum = 1,
+    ///                 NodeType = "ES.S1.MEDIUM4",
+    ///             },
+    ///         },
+    ///         NodeInfoLists = new[]
+    ///         {
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+    ///             {
+    ///                 Type = "dedicatedMaster",
+    ///                 NodeNum = 3,
+    ///                 NodeType = "ES.S1.MEDIUM8",
+    ///                 Encrypt = false,
+    ///             },
+    ///             new Tencentcloud.Elasticsearch.Inputs.InstanceNodeInfoListArgs
+    ///             {
+    ///                 Type = "hotData",
+    ///                 NodeNum = 2,
+    ///                 NodeType = "ES.S1.MEDIUM8",
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///         EsAcl = new Tencentcloud.Elasticsearch.Inputs.InstanceEsAclArgs
+    ///         {
+    ///             WhiteLists = new[]
+    ///             {
+    ///                 "127.0.0.1",
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Elasticsearch instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
+    /// $ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Availability zone. When create multi-az es, this parameter must be omitted or `-`.
@@ -346,6 +357,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -367,7 +382,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Availability zone. When create multi-az es, this parameter must be omitted or `-`.
@@ -441,11 +456,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
             set => _nodeInfoLists = value;
         }
 
+        [Input("password", required: true)]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.
         /// </summary>
-        [Input("password", required: true)]
-        public Input<string> Password { get; set; } = null!;
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
@@ -498,9 +523,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Availability zone. When create multi-az es, this parameter must be omitted or `-`.
@@ -604,11 +630,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
             set => _nodeInfoLists = value;
         }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password to an instance, the password needs to be 8 to 16 characters, including at least two items ([a-z,A-Z], [0-9] and [-!@#$%&amp;^*+=_:;,.?] special symbols.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
@@ -661,5 +697,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

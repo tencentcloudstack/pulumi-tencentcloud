@@ -15,77 +15,79 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Cfw.EdgePolicy("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Cfw.EdgePolicy("example", new Tencentcloud.Cfw.EdgePolicyArgs
-    ///         {
-    ///             Description = "policy description.",
-    ///             Direction = 1,
-    ///             Enable = "true",
-    ///             Port = "-1/-1",
-    ///             Protocol = "TCP",
-    ///             RuleAction = "drop",
-    ///             Scope = "all",
-    ///             SourceContent = "1.1.1.1/0",
-    ///             SourceType = "net",
-    ///             TargetContent = "0.0.0.0/0",
-    ///             TargetType = "net",
-    ///         });
-    ///     }
+    ///         Description = "policy description.",
+    ///         Direction = 1,
+    ///         Enable = "true",
+    ///         Port = "-1/-1",
+    ///         Protocol = "TCP",
+    ///         RuleAction = "drop",
+    ///         Scope = "all",
+    ///         SourceContent = "1.1.1.1/0",
+    ///         SourceType = "net",
+    ///         TargetContent = "0.0.0.0/0",
+    ///         TargetType = "net",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### If target_type is tag
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Cfw.EdgePolicy("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Cfw.EdgePolicy("example", new Tencentcloud.Cfw.EdgePolicyArgs
+    ///         SourceContent = "0.0.0.0/0",
+    ///         SourceType = "net",
+    ///         TargetContent = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
     ///         {
-    ///             SourceContent = "0.0.0.0/0",
-    ///             SourceType = "net",
-    ///             TargetContent = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
-    ///             {
-    ///                 { "Key", "test" },
-    ///                 { "Value", "dddd" },
-    ///             }),
-    ///             TargetType = "tag",
-    ///             Protocol = "TCP",
-    ///             RuleAction = "drop",
-    ///             Port = "-1/-1",
-    ///             Direction = 1,
-    ///             Enable = "true",
-    ///             Description = "policy description.",
-    ///             Scope = "all",
-    ///         });
-    ///     }
+    ///             ["Key"] = "test",
+    ///             ["Value"] = "dddd",
+    ///         }),
+    ///         TargetType = "tag",
+    ///         Protocol = "TCP",
+    ///         RuleAction = "drop",
+    ///         Port = "-1/-1",
+    ///         Direction = 1,
+    ///         Enable = "true",
+    ///         Description = "policy description.",
+    ///         Scope = "all",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cfw edge_policy can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfw/edgePolicy:EdgePolicy example edge_policy_id
+    /// $ pulumi import tencentcloud:Cfw/edgePolicy:EdgePolicy example edge_policy_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/edgePolicy:EdgePolicy")]
-    public partial class EdgePolicy : Pulumi.CustomResource
+    public partial class EdgePolicy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Description.
@@ -210,7 +212,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         }
     }
 
-    public sealed class EdgePolicyArgs : Pulumi.ResourceArgs
+    public sealed class EdgePolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description.
@@ -281,9 +283,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public EdgePolicyArgs()
         {
         }
+        public static new EdgePolicyArgs Empty => new EdgePolicyArgs();
     }
 
-    public sealed class EdgePolicyState : Pulumi.ResourceArgs
+    public sealed class EdgePolicyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description.
@@ -366,5 +369,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public EdgePolicyState()
         {
         }
+        public static new EdgePolicyState Empty => new EdgePolicyState();
     }
 }

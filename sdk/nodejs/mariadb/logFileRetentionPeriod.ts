@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logFileRetentionPeriod = new tencentcloud.Mariadb.LogFileRetentionPeriod("log_file_retention_period", {
+ * const logFileRetentionPeriod = new tencentcloud.mariadb.LogFileRetentionPeriod("logFileRetentionPeriod", {
  *     days: 8,
  *     instanceId: "tdsql-4pzs5b67",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mariadb log_file_retention_period can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mariadb/logFileRetentionPeriod:LogFileRetentionPeriod log_file_retention_period tdsql-4pzs5b67
+ * $ pulumi import tencentcloud:Mariadb/logFileRetentionPeriod:LogFileRetentionPeriod log_file_retention_period tdsql-4pzs5b67
  * ```
  */
 export class LogFileRetentionPeriod extends pulumi.CustomResource {

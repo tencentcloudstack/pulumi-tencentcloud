@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const transcodeTemplate = new tencentcloud.Mps.TranscodeTemplate("transcode_template", {
+ * const transcodeTemplate = new tencentcloud.mps.TranscodeTemplate("transcodeTemplate", {
  *     audioTemplate: {
  *         audioChannel: 2,
  *         bitrate: 27,
@@ -37,13 +39,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mps transcode_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/transcodeTemplate:TranscodeTemplate transcode_template transcode_template_id
+ * $ pulumi import tencentcloud:Mps/transcodeTemplate:TranscodeTemplate transcode_template transcode_template_id
  * ```
  */
 export class TranscodeTemplate extends pulumi.CustomResource {

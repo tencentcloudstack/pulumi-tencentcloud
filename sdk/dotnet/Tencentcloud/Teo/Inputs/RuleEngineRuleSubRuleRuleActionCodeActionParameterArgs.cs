@@ -11,16 +11,16 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs : Pulumi.ResourceArgs
+    public sealed class RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Target HEADER name.
+        /// Parameter name.
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
         /// <summary>
-        /// HTTP status code to use.
+        /// The status code.
         /// </summary>
         [Input("statusCode", required: true)]
         public Input<int> StatusCode { get; set; } = null!;
@@ -29,7 +29,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         private InputList<string>? _values;
 
         /// <summary>
-        /// Parameter Value.
+        /// Parameter value.
         /// </summary>
         public InputList<string> Values
         {
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs()
         {
         }
+        public static new RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs Empty => new RuleEngineRuleSubRuleRuleActionCodeActionParameterArgs();
     }
 }

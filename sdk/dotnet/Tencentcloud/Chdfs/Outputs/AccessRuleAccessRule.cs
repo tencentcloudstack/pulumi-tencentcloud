@@ -18,11 +18,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs.Outputs
         /// rule access mode, 1: read only, 2: read &amp;amp; wirte.
         /// </summary>
         public readonly int? AccessMode;
+        /// <summary>
+        /// single rule id.
+        /// </summary>
         public readonly int? AccessRuleId;
         /// <summary>
         /// rule address, IP OR IP SEG.
         /// </summary>
         public readonly string? Address;
+        /// <summary>
+        /// rule create time.
+        /// </summary>
         public readonly string? CreateTime;
         /// <summary>
         /// rule priority, range 1 - 100, value less higher priority.

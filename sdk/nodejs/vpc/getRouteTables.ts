@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
@@ -38,14 +40,12 @@ import * as utilities from "../utilities";
  *     tags: tags,
  * }));
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRouteTables(args?: GetRouteTablesArgs, opts?: pulumi.InvokeOptions): Promise<GetRouteTablesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpc/getRouteTables:getRouteTables", {
         "associationMain": args.associationMain,
         "name": args.name,
@@ -123,9 +123,44 @@ export interface GetRouteTablesResult {
      */
     readonly vpcId?: string;
 }
-
+/**
+ * Use this data source to query vpc route tables information.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
+ * const foo = new tencentcloud.vpc.Instance("foo", {cidrBlock: "10.0.0.0/16"});
+ * const routeTable = new tencentcloud.route.Table("routeTable", {
+ *     vpcId: foo.id,
+ *     tags: {
+ *         test: "test",
+ *     },
+ * });
+ * const idInstances = tencentcloud.Vpc.getRouteTablesOutput({
+ *     routeTableId: routeTable.id,
+ * });
+ * const nameInstances = tencentcloud.Vpc.getRouteTablesOutput({
+ *     name: routeTable.name,
+ * });
+ * const vpcDefaultInstance = tencentcloud.Vpc.getRouteTablesOutput({
+ *     vpcId: foo.id,
+ *     associationMain: true,
+ * });
+ * const tagsInstances = routeTable.tags.apply(tags => tencentcloud.Vpc.getRouteTablesOutput({
+ *     tags: tags,
+ * }));
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRouteTablesOutput(args?: GetRouteTablesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRouteTablesResult> {
-    return pulumi.output(args).apply(a => getRouteTables(a, opts))
+    return pulumi.output(args).apply((a: any) => getRouteTables(a, opts))
 }
 
 /**

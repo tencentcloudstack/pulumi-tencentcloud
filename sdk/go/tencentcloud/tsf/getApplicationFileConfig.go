@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tsf applicationFileConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.GetApplicationFileConfig(ctx, &tsf.GetApplicationFileConfigArgs{
-// 			ApplicationId: pulumi.StringRef("application-2vzk6n3v"),
-// 			ConfigId:      pulumi.StringRef("dcfg-f-4y4ekzqv"),
-// 			ConfigName:    pulumi.StringRef("file-log1"),
-// 			ConfigVersion: pulumi.StringRef("1.2"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.GetApplicationFileConfig(ctx, &tsf.GetApplicationFileConfigArgs{
+//				ApplicationId: pulumi.StringRef("application-2vzk6n3v"),
+//				ConfigId:      pulumi.StringRef("dcfg-f-4y4ekzqv"),
+//				ConfigName:    pulumi.StringRef("file-log1"),
+//				ConfigVersion: pulumi.StringRef("1.2"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func LookupApplicationFileConfig(ctx *pulumi.Context, args *LookupApplicationFileConfigArgs, opts ...pulumi.InvokeOption) (*LookupApplicationFileConfigResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupApplicationFileConfigResult
 	err := ctx.Invoke("tencentcloud:Tsf/getApplicationFileConfig:getApplicationFileConfig", args, &rv, opts...)
 	if err != nil {

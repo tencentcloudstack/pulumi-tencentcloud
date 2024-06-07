@@ -8,50 +8,55 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dbbrain securityAuditLogExportTasks
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		task, err := Dbbrain.NewSecurityAuditLogExportTask(ctx, "task", &Dbbrain.SecurityAuditLogExportTaskArgs{
-// 			SecAuditGroupId: pulumi.String("sec_audit_group_id"),
-// 			StartTime:       pulumi.String("start_time"),
-// 			EndTime:         pulumi.String("end_time"),
-// 			Product:         pulumi.String("mysql"),
-// 			DangerLevels: pulumi.IntArray{
-// 				pulumi.Int(0),
-// 				pulumi.Int(1),
-// 				pulumi.Int(2),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Dbbrain.GetSecurityAuditLogExportTasksOutput(ctx, dbbrain.GetSecurityAuditLogExportTasksOutputArgs{
-// 			SecAuditGroupId: pulumi.String("sec_audit_group_id"),
-// 			Product:         pulumi.String("mysql"),
-// 			AsyncRequestIds: pulumi.IntArray{
-// 				task.AsyncRequestId,
-// 			},
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			task, err := Dbbrain.NewSecurityAuditLogExportTask(ctx, "task", &Dbbrain.SecurityAuditLogExportTaskArgs{
+//				SecAuditGroupId: pulumi.String("sec_audit_group_id"),
+//				StartTime:       pulumi.String("start_time"),
+//				EndTime:         pulumi.String("end_time"),
+//				Product:         pulumi.String("mysql"),
+//				DangerLevels: pulumi.IntArray{
+//					pulumi.Int(0),
+//					pulumi.Int(1),
+//					pulumi.Int(2),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Dbbrain.GetSecurityAuditLogExportTasksOutput(ctx, dbbrain.GetSecurityAuditLogExportTasksOutputArgs{
+//				SecAuditGroupId: pulumi.String("sec_audit_group_id"),
+//				Product:         pulumi.String("mysql"),
+//				AsyncRequestIds: pulumi.IntArray{
+//					task.AsyncRequestId,
+//				},
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSecurityAuditLogExportTasks(ctx *pulumi.Context, args *GetSecurityAuditLogExportTasksArgs, opts ...pulumi.InvokeOption) (*GetSecurityAuditLogExportTasksResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSecurityAuditLogExportTasksResult
 	err := ctx.Invoke("tencentcloud:Dbbrain/getSecurityAuditLogExportTasks:getSecurityAuditLogExportTasks", args, &rv, opts...)
 	if err != nil {

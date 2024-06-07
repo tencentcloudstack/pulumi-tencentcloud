@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneSettingClientIpHeaderGetArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingClientIpHeaderGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of the origin-pull client IP request header. Note: This field may return null, indicating that no valid value can be obtained.
@@ -20,7 +20,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<string>? HeaderName { get; set; }
 
         /// <summary>
-        /// Specifies whether to enable client IP header.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Specifies whether to enable client IP header.
         /// </summary>
         [Input("switch", required: true)]
         public Input<string> Switch { get; set; } = null!;
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneSettingClientIpHeaderGetArgs()
         {
         }
+        public static new ZoneSettingClientIpHeaderGetArgs Empty => new ZoneSettingClientIpHeaderGetArgs();
     }
 }

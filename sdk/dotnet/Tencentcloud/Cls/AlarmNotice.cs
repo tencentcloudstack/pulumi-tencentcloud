@@ -15,56 +15,57 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var alarmNotice = new Tencentcloud.Cls.AlarmNotice("alarmNotice", new()
     ///     {
-    ///         var alarmNotice = new Tencentcloud.Cls.AlarmNotice("alarmNotice", new Tencentcloud.Cls.AlarmNoticeArgs
+    ///         NoticeReceivers = new[]
     ///         {
-    ///             NoticeReceivers = 
+    ///             new Tencentcloud.Cls.Inputs.AlarmNoticeNoticeReceiverArgs
     ///             {
-    ///                 new Tencentcloud.Cls.Inputs.AlarmNoticeNoticeReceiverArgs
+    ///                 EndTime = "23:59:59",
+    ///                 Index = 0,
+    ///                 ReceiverChannels = new[]
     ///                 {
-    ///                     EndTime = "23:59:59",
-    ///                     Index = 0,
-    ///                     ReceiverChannels = 
-    ///                     {
-    ///                         "Sms",
-    ///                     },
-    ///                     ReceiverIds = 
-    ///                     {
-    ///                         13478043,
-    ///                         15972111,
-    ///                     },
-    ///                     ReceiverType = "Uin",
-    ///                     StartTime = "00:00:00",
+    ///                     "Sms",
     ///                 },
+    ///                 ReceiverIds = new[]
+    ///                 {
+    ///                     13478043,
+    ///                     15972111,
+    ///                 },
+    ///                 ReceiverType = "Uin",
+    ///                 StartTime = "00:00:00",
     ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///             Type = "All",
-    ///         });
-    ///     }
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///         Type = "All",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cls alarm_notice can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/alarmNotice:AlarmNotice alarm_notice alarm_notice_id
+    /// $ pulumi import tencentcloud:Cls/alarmNotice:AlarmNotice alarm_notice alarm_notice_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/alarmNotice:AlarmNotice")]
-    public partial class AlarmNotice : Pulumi.CustomResource
+    public partial class AlarmNotice : global::Pulumi.CustomResource
     {
         /// <summary>
         /// alarm notice name.
@@ -141,7 +142,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
     }
 
-    public sealed class AlarmNoticeArgs : Pulumi.ResourceArgs
+    public sealed class AlarmNoticeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// alarm notice name.
@@ -194,9 +195,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public AlarmNoticeArgs()
         {
         }
+        public static new AlarmNoticeArgs Empty => new AlarmNoticeArgs();
     }
 
-    public sealed class AlarmNoticeState : Pulumi.ResourceArgs
+    public sealed class AlarmNoticeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// alarm notice name.
@@ -249,5 +251,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public AlarmNoticeState()
         {
         }
+        public static new AlarmNoticeState Empty => new AlarmNoticeState();
     }
 }

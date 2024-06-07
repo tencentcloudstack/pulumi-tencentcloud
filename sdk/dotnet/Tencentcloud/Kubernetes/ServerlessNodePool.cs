@@ -14,141 +14,151 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// Provide a resource to create serverless node pool of cluster.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Add serverless node pool to a cluster
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///     var exampleClusterCidr = config.Get("exampleClusterCidr") ?? "10.31.0.0/16";
+    ///     var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    ///         var exampleClusterCidr = config.Get("exampleClusterCidr") ?? "10.31.0.0/16";
-    ///         var vpc = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
-    ///         {
-    ///             IsDefault = true,
-    ///             AvailabilityZone = availabilityZone,
-    ///         }));
-    ///         var vpcId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.VpcId);
-    ///         var subnetId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.SubnetId);
-    ///         var sg = Output.Create(Tencentcloud.Security.GetGroups.InvokeAsync(new Tencentcloud.Security.GetGroupsArgs
-    ///         {
-    ///             Name = "default",
-    ///         }));
-    ///         var sgId = sg.Apply(sg =&gt; sg.SecurityGroups?[0]?.SecurityGroupId);
-    ///         var exampleCluster = new Tencentcloud.Kubernetes.Cluster("exampleCluster", new Tencentcloud.Kubernetes.ClusterArgs
-    ///         {
-    ///             VpcId = vpcId,
-    ///             ClusterCidr = exampleClusterCidr,
-    ///             ClusterMaxPodNum = 32,
-    ///             ClusterName = "tf_example_cluster",
-    ///             ClusterDesc = "tf example cluster",
-    ///             ClusterMaxServiceNum = 32,
-    ///             ClusterVersion = "1.18.4",
-    ///             ClusterDeployType = "MANAGED_CLUSTER",
-    ///         });
-    ///         var exampleServerlessNodePool = new Tencentcloud.Kubernetes.ServerlessNodePool("exampleServerlessNodePool", new Tencentcloud.Kubernetes.ServerlessNodePoolArgs
-    ///         {
-    ///             ClusterId = exampleCluster.Id,
-    ///             ServerlessNodes = 
-    ///             {
-    ///                 new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolServerlessNodeArgs
-    ///                 {
-    ///                     DisplayName = "tf_example_serverless_node1",
-    ///                     SubnetId = subnetId,
-    ///                 },
-    ///                 new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolServerlessNodeArgs
-    ///                 {
-    ///                     DisplayName = "tf_example_serverless_node2",
-    ///                     SubnetId = subnetId,
-    ///                 },
-    ///             },
-    ///             SecurityGroupIds = 
-    ///             {
-    ///                 sgId,
-    ///             },
-    ///             Labels = 
-    ///             {
-    ///                 { "label1", "value1" },
-    ///                 { "label2", "value2" },
-    ///             },
-    ///         });
-    ///     }
+    ///         IsDefault = true,
+    ///         AvailabilityZone = availabilityZone,
+    ///     });
     /// 
-    /// }
+    ///     var vpcId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId);
+    /// 
+    ///     var subnetId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.SubnetId);
+    /// 
+    ///     var sg = Tencentcloud.Security.GetGroups.Invoke(new()
+    ///     {
+    ///         Name = "default",
+    ///     });
+    /// 
+    ///     var sgId = sg.Apply(getGroupsResult =&gt; getGroupsResult.SecurityGroups[0]?.SecurityGroupId);
+    /// 
+    ///     var exampleCluster = new Tencentcloud.Kubernetes.Cluster("exampleCluster", new()
+    ///     {
+    ///         VpcId = vpcId,
+    ///         ClusterCidr = exampleClusterCidr,
+    ///         ClusterMaxPodNum = 32,
+    ///         ClusterName = "tf_example_cluster",
+    ///         ClusterDesc = "tf example cluster",
+    ///         ClusterMaxServiceNum = 32,
+    ///         ClusterVersion = "1.18.4",
+    ///         ClusterDeployType = "MANAGED_CLUSTER",
+    ///     });
+    /// 
+    ///     var exampleServerlessNodePool = new Tencentcloud.Kubernetes.ServerlessNodePool("exampleServerlessNodePool", new()
+    ///     {
+    ///         ClusterId = exampleCluster.Id,
+    ///         ServerlessNodes = new[]
+    ///         {
+    ///             new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolServerlessNodeArgs
+    ///             {
+    ///                 DisplayName = "tf_example_serverless_node1",
+    ///                 SubnetId = subnetId,
+    ///             },
+    ///             new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolServerlessNodeArgs
+    ///             {
+    ///                 DisplayName = "tf_example_serverless_node2",
+    ///                 SubnetId = subnetId,
+    ///             },
+    ///         },
+    ///         SecurityGroupIds = new[]
+    ///         {
+    ///             sgId,
+    ///         },
+    ///         Labels = 
+    ///         {
+    ///             { "label1", "value1" },
+    ///             { "label2", "value2" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Adding taints to the virtual nodes under this node pool
     /// 
     /// The pods without appropriate tolerations will not be scheduled on this node. Refer [taint-and-toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for more details.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Kubernetes.ServerlessNodePool("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Kubernetes.ServerlessNodePool("example", new Tencentcloud.Kubernetes.ServerlessNodePoolArgs
+    ///         ClusterId = tencentcloud_kubernetes_cluster.Example.Id,
+    ///         ServerlessNodes = new[]
     ///         {
-    ///             ClusterId = tencentcloud_kubernetes_cluster.Example.Id,
-    ///             ServerlessNodes = 
+    ///             new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolServerlessNodeArgs
     ///             {
-    ///                 new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolServerlessNodeArgs
-    ///                 {
-    ///                     DisplayName = "tf_example_serverless_node1",
-    ///                     SubnetId = local.Subnet_id,
-    ///                 },
-    ///                 new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolServerlessNodeArgs
-    ///                 {
-    ///                     DisplayName = "tf_example_serverless_node2",
-    ///                     SubnetId = local.Subnet_id,
-    ///                 },
+    ///                 DisplayName = "tf_example_serverless_node1",
+    ///                 SubnetId = local.Subnet_id,
     ///             },
-    ///             SecurityGroupIds = 
+    ///             new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolServerlessNodeArgs
     ///             {
-    ///                 local.Sg_id,
+    ///                 DisplayName = "tf_example_serverless_node2",
+    ///                 SubnetId = local.Subnet_id,
     ///             },
-    ///             Labels = 
+    ///         },
+    ///         SecurityGroupIds = new[]
+    ///         {
+    ///             local.Sg_id,
+    ///         },
+    ///         Labels = 
+    ///         {
+    ///             { "label1", "value1" },
+    ///             { "label2", "value2" },
+    ///         },
+    ///         Taints = new[]
+    ///         {
+    ///             new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolTaintArgs
     ///             {
-    ///                 { "label1", "value1" },
-    ///                 { "label2", "value2" },
+    ///                 Key = "key1",
+    ///                 Value = "value1",
+    ///                 Effect = "NoSchedule",
     ///             },
-    ///             Taints = 
+    ///             new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolTaintArgs
     ///             {
-    ///                 new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolTaintArgs
-    ///                 {
-    ///                     Key = "key1",
-    ///                     Value = "value1",
-    ///                     Effect = "NoSchedule",
-    ///                 },
-    ///                 new Tencentcloud.Kubernetes.Inputs.ServerlessNodePoolTaintArgs
-    ///                 {
-    ///                     Key = "key1",
-    ///                     Value = "value1",
-    ///                     Effect = "NoExecute",
-    ///                 },
+    ///                 Key = "key1",
+    ///                 Value = "value1",
+    ///                 Effect = "NoExecute",
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// serverless node pool can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool test cls-xxx#np-xxx
+    /// $ pulumi import tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool test cls-xxx#np-xxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/serverlessNodePool:ServerlessNodePool")]
-    public partial class ServerlessNodePool : Pulumi.CustomResource
+    public partial class ServerlessNodePool : global::Pulumi.CustomResource
     {
         /// <summary>
         /// cluster id of serverless node pool.
@@ -237,7 +247,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         }
     }
 
-    public sealed class ServerlessNodePoolArgs : Pulumi.ResourceArgs
+    public sealed class ServerlessNodePoolArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// cluster id of serverless node pool.
@@ -302,9 +312,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public ServerlessNodePoolArgs()
         {
         }
+        public static new ServerlessNodePoolArgs Empty => new ServerlessNodePoolArgs();
     }
 
-    public sealed class ServerlessNodePoolState : Pulumi.ResourceArgs
+    public sealed class ServerlessNodePoolState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// cluster id of serverless node pool.
@@ -375,5 +386,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public ServerlessNodePoolState()
         {
         }
+        public static new ServerlessNodePoolState Empty => new ServerlessNodePoolState();
     }
 }

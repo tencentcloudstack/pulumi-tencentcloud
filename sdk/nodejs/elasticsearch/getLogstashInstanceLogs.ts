@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const logstashInstanceLogs = pulumi.output(tencentcloud.Elasticsearch.getLogstashInstanceLogs({
+ * const logstashInstanceLogs = tencentcloud.Elasticsearch.getLogstashInstanceLogs({
  *     endTime: "2023-10-31 10:30:10",
  *     instanceId: "ls-xxxxxx",
  *     logType: 1,
  *     startTime: "2023-10-31 10:30:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getLogstashInstanceLogs(args: GetLogstashInstanceLogsArgs, opts?: pulumi.InvokeOptions): Promise<GetLogstashInstanceLogsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Elasticsearch/getLogstashInstanceLogs:getLogstashInstanceLogs", {
         "endTime": args.endTime,
         "instanceId": args.instanceId,
@@ -96,9 +96,27 @@ export interface GetLogstashInstanceLogsResult {
     readonly searchKey?: string;
     readonly startTime?: string;
 }
-
+/**
+ * Use this data source to query detailed information of elasticsearch logstashInstanceLogs
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const logstashInstanceLogs = tencentcloud.Elasticsearch.getLogstashInstanceLogs({
+ *     endTime: "2023-10-31 10:30:10",
+ *     instanceId: "ls-xxxxxx",
+ *     logType: 1,
+ *     startTime: "2023-10-31 10:30:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getLogstashInstanceLogsOutput(args: GetLogstashInstanceLogsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetLogstashInstanceLogsResult> {
-    return pulumi.output(args).apply(a => getLogstashInstanceLogs(a, opts))
+    return pulumi.output(args).apply((a: any) => getLogstashInstanceLogs(a, opts))
 }
 
 /**

@@ -11,14 +11,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const verifyDomain = new tencentcloud.Ses.VerifyDomain("verify_domain", {
- *     emailIdentity: "example.com",
- * });
+ * const verifyDomain = new tencentcloud.ses.VerifyDomain("verifyDomain", {emailIdentity: "example.com"});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class VerifyDomain extends pulumi.CustomResource {
     /**

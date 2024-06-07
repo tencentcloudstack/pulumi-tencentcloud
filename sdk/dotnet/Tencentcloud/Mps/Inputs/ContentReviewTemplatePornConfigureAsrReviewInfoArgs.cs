@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ContentReviewTemplatePornConfigureAsrReviewInfoArgs : Pulumi.ResourceArgs
+    public sealed class ContentReviewTemplatePornConfigureAsrReviewInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ContentReviewTemplatePornConfigureAsrReviewInfoArgs()
         {
         }
+        public static new ContentReviewTemplatePornConfigureAsrReviewInfoArgs Empty => new ContentReviewTemplatePornConfigureAsrReviewInfoArgs();
     }
 }

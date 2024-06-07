@@ -15,98 +15,92 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap proxy statistics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var proxyStatistics = Tencentcloud.Gaap.GetProxyStatistics.Invoke(new()
         ///     {
-        ///         var proxyStatistics = Output.Create(Tencentcloud.Gaap.GetProxyStatistics.InvokeAsync(new Tencentcloud.Gaap.GetProxyStatisticsArgs
+        ///         EndTime = "2024-05-20 23:59:59",
+        ///         Granularity = 300,
+        ///         MetricNames = new[]
         ///         {
-        ///             EndTime = "2023-10-09 23:59:59",
-        ///             Granularity = 300,
-        ///             MetricNames = 
-        ///             {
-        ///                 "InBandwidth",
-        ///                 "OutBandwidth",
-        ///                 "InFlow",
-        ///                 "OutFlow",
-        ///                 "InPackets",
-        ///                 "OutPackets",
-        ///                 "Concurrent",
-        ///                 "HttpQPS",
-        ///                 "HttpsQPS",
-        ///                 "Latency",
-        ///                 "PacketLoss",
-        ///             },
-        ///             ProxyId = "link-8lpyo88p",
-        ///             StartTime = "2023-10-09 00:00:00",
-        ///         }));
-        ///     }
+        ///             "InBandwidth",
+        ///             "OutBandwidth",
+        ///             "InFlow",
+        ///             "OutFlow",
+        ///             "InPackets",
+        ///             "OutPackets",
+        ///             "Concurrent",
+        ///             "HttpQPS",
+        ///             "HttpsQPS",
+        ///             "Latency",
+        ///             "PacketLoss",
+        ///         },
+        ///         ProxyId = "link-m9t4yho9",
+        ///         StartTime = "2024-05-20 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProxyStatisticsResult> InvokeAsync(GetProxyStatisticsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProxyStatisticsResult>("tencentcloud:Gaap/getProxyStatistics:getProxyStatistics", args ?? new GetProxyStatisticsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxyStatisticsResult>("tencentcloud:Gaap/getProxyStatistics:getProxyStatistics", args ?? new GetProxyStatisticsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap proxy statistics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var proxyStatistics = Tencentcloud.Gaap.GetProxyStatistics.Invoke(new()
         ///     {
-        ///         var proxyStatistics = Output.Create(Tencentcloud.Gaap.GetProxyStatistics.InvokeAsync(new Tencentcloud.Gaap.GetProxyStatisticsArgs
+        ///         EndTime = "2024-05-20 23:59:59",
+        ///         Granularity = 300,
+        ///         MetricNames = new[]
         ///         {
-        ///             EndTime = "2023-10-09 23:59:59",
-        ///             Granularity = 300,
-        ///             MetricNames = 
-        ///             {
-        ///                 "InBandwidth",
-        ///                 "OutBandwidth",
-        ///                 "InFlow",
-        ///                 "OutFlow",
-        ///                 "InPackets",
-        ///                 "OutPackets",
-        ///                 "Concurrent",
-        ///                 "HttpQPS",
-        ///                 "HttpsQPS",
-        ///                 "Latency",
-        ///                 "PacketLoss",
-        ///             },
-        ///             ProxyId = "link-8lpyo88p",
-        ///             StartTime = "2023-10-09 00:00:00",
-        ///         }));
-        ///     }
+        ///             "InBandwidth",
+        ///             "OutBandwidth",
+        ///             "InFlow",
+        ///             "OutFlow",
+        ///             "InPackets",
+        ///             "OutPackets",
+        ///             "Concurrent",
+        ///             "HttpQPS",
+        ///             "HttpsQPS",
+        ///             "Latency",
+        ///             "PacketLoss",
+        ///         },
+        ///         ProxyId = "link-m9t4yho9",
+        ///         StartTime = "2024-05-20 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProxyStatisticsResult> Invoke(GetProxyStatisticsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProxyStatisticsResult>("tencentcloud:Gaap/getProxyStatistics:getProxyStatistics", args ?? new GetProxyStatisticsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProxyStatisticsResult>("tencentcloud:Gaap/getProxyStatistics:getProxyStatistics", args ?? new GetProxyStatisticsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProxyStatisticsArgs : Pulumi.InvokeArgs
+    public sealed class GetProxyStatisticsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End Time(2019-03-25 12:00:00).
@@ -159,9 +153,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetProxyStatisticsArgs()
         {
         }
+        public static new GetProxyStatisticsArgs Empty => new GetProxyStatisticsArgs();
     }
 
-    public sealed class GetProxyStatisticsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProxyStatisticsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End Time(2019-03-25 12:00:00).
@@ -214,6 +209,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetProxyStatisticsInvokeArgs()
         {
         }
+        public static new GetProxyStatisticsInvokeArgs Empty => new GetProxyStatisticsInvokeArgs();
     }
 
 

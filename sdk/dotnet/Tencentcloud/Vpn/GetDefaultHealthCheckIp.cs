@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// <summary>
         /// Use this data source to query detailed information of vpn default_health_check_ip
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var defaultHealthCheckIp = Tencentcloud.Vpn.GetDefaultHealthCheckIp.Invoke(new()
         ///     {
-        ///         var defaultHealthCheckIp = Output.Create(Tencentcloud.Vpn.GetDefaultHealthCheckIp.InvokeAsync(new Tencentcloud.Vpn.GetDefaultHealthCheckIpArgs
-        ///         {
-        ///             VpnGatewayId = "vpngw-gt8bianl",
-        ///         }));
-        ///     }
+        ///         VpnGatewayId = "vpngw-gt8bianl",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDefaultHealthCheckIpResult> InvokeAsync(GetDefaultHealthCheckIpArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDefaultHealthCheckIpResult>("tencentcloud:Vpn/getDefaultHealthCheckIp:getDefaultHealthCheckIp", args ?? new GetDefaultHealthCheckIpArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDefaultHealthCheckIpResult>("tencentcloud:Vpn/getDefaultHealthCheckIp:getDefaultHealthCheckIp", args ?? new GetDefaultHealthCheckIpArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpn default_health_check_ip
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var defaultHealthCheckIp = Tencentcloud.Vpn.GetDefaultHealthCheckIp.Invoke(new()
         ///     {
-        ///         var defaultHealthCheckIp = Output.Create(Tencentcloud.Vpn.GetDefaultHealthCheckIp.InvokeAsync(new Tencentcloud.Vpn.GetDefaultHealthCheckIpArgs
-        ///         {
-        ///             VpnGatewayId = "vpngw-gt8bianl",
-        ///         }));
-        ///     }
+        ///         VpnGatewayId = "vpngw-gt8bianl",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDefaultHealthCheckIpResult> Invoke(GetDefaultHealthCheckIpInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDefaultHealthCheckIpResult>("tencentcloud:Vpn/getDefaultHealthCheckIp:getDefaultHealthCheckIp", args ?? new GetDefaultHealthCheckIpInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDefaultHealthCheckIpResult>("tencentcloud:Vpn/getDefaultHealthCheckIp:getDefaultHealthCheckIp", args ?? new GetDefaultHealthCheckIpInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDefaultHealthCheckIpArgs : Pulumi.InvokeArgs
+    public sealed class GetDefaultHealthCheckIpArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GetDefaultHealthCheckIpArgs()
         {
         }
+        public static new GetDefaultHealthCheckIpArgs Empty => new GetDefaultHealthCheckIpArgs();
     }
 
-    public sealed class GetDefaultHealthCheckIpInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDefaultHealthCheckIpInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GetDefaultHealthCheckIpInvokeArgs()
         {
         }
+        public static new GetDefaultHealthCheckIpInvokeArgs Empty => new GetDefaultHealthCheckIpInvokeArgs();
     }
 
 

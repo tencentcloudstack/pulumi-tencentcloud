@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of sqlserver rollbackTime
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.GetRollbackTime(ctx, &sqlserver.GetRollbackTimeArgs{
-// 			Dbs: []string{
-// 				"keep_pubsub_db",
-// 			},
-// 			InstanceId: "mssql-qelbzgwf",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.GetRollbackTime(ctx, &sqlserver.GetRollbackTimeArgs{
+//				Dbs: []string{
+//					"keep_pubsub_db",
+//				},
+//				InstanceId: "mssql-qelbzgwf",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetRollbackTime(ctx *pulumi.Context, args *GetRollbackTimeArgs, opts ...pulumi.InvokeOption) (*GetRollbackTimeResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRollbackTimeResult
 	err := ctx.Invoke("tencentcloud:Sqlserver/getRollbackTime:getRollbackTime", args, &rv, opts...)
 	if err != nil {

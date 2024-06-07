@@ -14,59 +14,67 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// Use this resource to attach tcr instance with the vpc and subnet network.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Attach a tcr instance with vpc resource
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
     ///     {
-    ///         var vpc = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
-    ///         {
-    ///             IsDefault = true,
-    ///             AvailabilityZone = @var.Availability_zone,
-    ///         }));
-    ///         var vpcId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.VpcId);
-    ///         var subnetId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.SubnetId);
-    ///         var example = new Tencentcloud.Tcr.Instance("example", new Tencentcloud.Tcr.InstanceArgs
-    ///         {
-    ///             InstanceType = "basic",
-    ///             DeleteBucket = true,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var tcrId = example.Id;
-    ///         var sg = Output.Create(Tencentcloud.Security.GetGroups.InvokeAsync(new Tencentcloud.Security.GetGroupsArgs
-    ///         {
-    ///             Name = "default",
-    ///         }));
-    ///         var foo = new Tencentcloud.Tcr.VpcAttachment("foo", new Tencentcloud.Tcr.VpcAttachmentArgs
-    ///         {
-    ///             InstanceId = tcrId,
-    ///             VpcId = vpcId,
-    ///             SubnetId = subnetId,
-    ///         });
-    ///     }
+    ///         IsDefault = true,
+    ///         AvailabilityZone = @var.Availability_zone,
+    ///     });
     /// 
-    /// }
+    ///     var vpcId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId);
+    /// 
+    ///     var subnetId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.SubnetId);
+    /// 
+    ///     var example = new Tencentcloud.Tcr.Instance("example", new()
+    ///     {
+    ///         InstanceType = "basic",
+    ///         DeleteBucket = true,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var tcrId = example.Id;
+    /// 
+    ///     var sg = Tencentcloud.Security.GetGroups.Invoke(new()
+    ///     {
+    ///         Name = "default",
+    ///     });
+    /// 
+    ///     var foo = new Tencentcloud.Tcr.VpcAttachment("foo", new()
+    ///     {
+    ///         InstanceId = tcrId,
+    ///         VpcId = vpcId,
+    ///         SubnetId = subnetId,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcr vpc attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo instance_id#vpc_id#subnet_id
+    /// $ pulumi import tencentcloud:Tcr/vpcAttachment:VpcAttachment foo instance_id#vpc_id#subnet_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/vpcAttachment:VpcAttachment")]
-    public partial class VpcAttachment : Pulumi.CustomResource
+    public partial class VpcAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// IP address of the internal access.
@@ -167,7 +175,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         }
     }
 
-    public sealed class VpcAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class VpcAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable public domain dns. Default value is `false`.
@@ -214,9 +222,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public VpcAttachmentArgs()
         {
         }
+        public static new VpcAttachmentArgs Empty => new VpcAttachmentArgs();
     }
 
-    public sealed class VpcAttachmentState : Pulumi.ResourceArgs
+    public sealed class VpcAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// IP address of the internal access.
@@ -275,5 +284,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public VpcAttachmentState()
         {
         }
+        public static new VpcAttachmentState Empty => new VpcAttachmentState();
     }
 }

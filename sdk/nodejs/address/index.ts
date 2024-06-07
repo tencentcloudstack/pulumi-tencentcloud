@@ -5,14 +5,26 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./getTemplateGroups";
-export * from "./getTemplates";
-export * from "./template";
-export * from "./templateGroup";
+export { GetTemplateGroupsArgs, GetTemplateGroupsResult, GetTemplateGroupsOutputArgs } from "./getTemplateGroups";
+export const getTemplateGroups: typeof import("./getTemplateGroups").getTemplateGroups = null as any;
+export const getTemplateGroupsOutput: typeof import("./getTemplateGroups").getTemplateGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getTemplateGroups","getTemplateGroupsOutput"], () => require("./getTemplateGroups"));
 
-// Import resources to register:
-import { Template } from "./template";
-import { TemplateGroup } from "./templateGroup";
+export { GetTemplatesArgs, GetTemplatesResult, GetTemplatesOutputArgs } from "./getTemplates";
+export const getTemplates: typeof import("./getTemplates").getTemplates = null as any;
+export const getTemplatesOutput: typeof import("./getTemplates").getTemplatesOutput = null as any;
+utilities.lazyLoad(exports, ["getTemplates","getTemplatesOutput"], () => require("./getTemplates"));
+
+export { TemplateArgs, TemplateState } from "./template";
+export type Template = import("./template").Template;
+export const Template: typeof import("./template").Template = null as any;
+utilities.lazyLoad(exports, ["Template"], () => require("./template"));
+
+export { TemplateGroupArgs, TemplateGroupState } from "./templateGroup";
+export type TemplateGroup = import("./templateGroup").TemplateGroup;
+export const TemplateGroup: typeof import("./templateGroup").TemplateGroup = null as any;
+utilities.lazyLoad(exports, ["TemplateGroup"], () => require("./templateGroup"));
+
 
 const _module = {
     version: utilities.getVersion(),

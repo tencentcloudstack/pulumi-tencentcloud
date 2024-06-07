@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var jobAbort = new Tencentcloud.Pts.JobAbort("jobAbort", new()
     ///     {
-    ///         var jobAbort = new Tencentcloud.Pts.JobAbort("jobAbort", new Tencentcloud.Pts.JobAbortArgs
-    ///         {
-    ///             JobId = "job-my644ozi",
-    ///             ProjectId = "project-45vw7v82",
-    ///             ScenarioId = "scenario-22q19f3k",
-    ///         });
-    ///     }
+    ///         JobId = "job-my644ozi",
+    ///         ProjectId = "project-45vw7v82",
+    ///         ScenarioId = "scenario-22q19f3k",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Pts/jobAbort:JobAbort")]
-    public partial class JobAbort : Pulumi.CustomResource
+    public partial class JobAbort : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The reason for aborting the job.
@@ -106,7 +107,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         }
     }
 
-    public sealed class JobAbortArgs : Pulumi.ResourceArgs
+    public sealed class JobAbortArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The reason for aborting the job.
@@ -135,9 +136,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public JobAbortArgs()
         {
         }
+        public static new JobAbortArgs Empty => new JobAbortArgs();
     }
 
-    public sealed class JobAbortState : Pulumi.ResourceArgs
+    public sealed class JobAbortState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The reason for aborting the job.
@@ -166,5 +168,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public JobAbortState()
         {
         }
+        public static new JobAbortState Empty => new JobAbortState();
     }
 }

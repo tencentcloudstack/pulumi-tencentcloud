@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// <summary>
         /// Use this data source to query detailed information of kubernetes cluster_authentication_options
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clusterAuthenticationOptions = Tencentcloud.Kubernetes.GetClusterAuthenticationOptions.Invoke(new()
         ///     {
-        ///         var clusterAuthenticationOptions = Output.Create(Tencentcloud.Kubernetes.GetClusterAuthenticationOptions.InvokeAsync(new Tencentcloud.Kubernetes.GetClusterAuthenticationOptionsArgs
-        ///         {
-        ///             ClusterId = "cls-kzilgv5m",
-        ///         }));
-        ///     }
+        ///         ClusterId = "cls-kzilgv5m",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetClusterAuthenticationOptionsResult> InvokeAsync(GetClusterAuthenticationOptionsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetClusterAuthenticationOptionsResult>("tencentcloud:Kubernetes/getClusterAuthenticationOptions:getClusterAuthenticationOptions", args ?? new GetClusterAuthenticationOptionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterAuthenticationOptionsResult>("tencentcloud:Kubernetes/getClusterAuthenticationOptions:getClusterAuthenticationOptions", args ?? new GetClusterAuthenticationOptionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of kubernetes cluster_authentication_options
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clusterAuthenticationOptions = Tencentcloud.Kubernetes.GetClusterAuthenticationOptions.Invoke(new()
         ///     {
-        ///         var clusterAuthenticationOptions = Output.Create(Tencentcloud.Kubernetes.GetClusterAuthenticationOptions.InvokeAsync(new Tencentcloud.Kubernetes.GetClusterAuthenticationOptionsArgs
-        ///         {
-        ///             ClusterId = "cls-kzilgv5m",
-        ///         }));
-        ///     }
+        ///         ClusterId = "cls-kzilgv5m",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetClusterAuthenticationOptionsResult> Invoke(GetClusterAuthenticationOptionsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetClusterAuthenticationOptionsResult>("tencentcloud:Kubernetes/getClusterAuthenticationOptions:getClusterAuthenticationOptions", args ?? new GetClusterAuthenticationOptionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetClusterAuthenticationOptionsResult>("tencentcloud:Kubernetes/getClusterAuthenticationOptions:getClusterAuthenticationOptions", args ?? new GetClusterAuthenticationOptionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetClusterAuthenticationOptionsArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterAuthenticationOptionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public GetClusterAuthenticationOptionsArgs()
         {
         }
+        public static new GetClusterAuthenticationOptionsArgs Empty => new GetClusterAuthenticationOptionsArgs();
     }
 
-    public sealed class GetClusterAuthenticationOptionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterAuthenticationOptionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public GetClusterAuthenticationOptionsInvokeArgs()
         {
         }
+        public static new GetClusterAuthenticationOptionsInvokeArgs Empty => new GetClusterAuthenticationOptionsInvokeArgs();
     }
 
 

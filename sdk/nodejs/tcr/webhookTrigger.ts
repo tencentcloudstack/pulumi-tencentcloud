@@ -2,19 +2,22 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a tcr webhook trigger
  *
  * ## Example Usage
+ *
  * ### Create a tcr webhook trigger instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
  *     instanceType: "basic",
@@ -36,7 +39,7 @@ import * as utilities from "../utilities";
  * const exampleNamespaces = tencentcloud.Tcr.getNamespacesOutput({
  *     instanceId: exampleNamespace.instanceId,
  * });
- * const nsId = exampleNamespaces.apply(exampleNamespaces => exampleNamespaces.namespaceLists?[0]?.id);
+ * const nsId = exampleNamespaces.apply(exampleNamespaces => exampleNamespaces.namespaceLists?.[0]?.id);
  * const exampleWebhookTrigger = new tencentcloud.tcr.WebhookTrigger("exampleWebhookTrigger", {
  *     registryId: exampleInstance.id,
  *     namespace: exampleNamespace.name,
@@ -60,13 +63,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tcr webhook_trigger can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger example webhook_trigger_id
+ * $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger example webhook_trigger_id
  * ```
  */
 export class WebhookTrigger extends pulumi.CustomResource {

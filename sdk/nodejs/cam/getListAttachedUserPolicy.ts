@@ -2,15 +2,13 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 export function getListAttachedUserPolicy(args: GetListAttachedUserPolicyArgs, opts?: pulumi.InvokeOptions): Promise<GetListAttachedUserPolicyResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cam/getListAttachedUserPolicy:getListAttachedUserPolicy", {
         "attachType": args.attachType,
         "keyword": args.keyword,
@@ -46,9 +44,8 @@ export interface GetListAttachedUserPolicyResult {
     readonly strategyType?: number;
     readonly targetUin: number;
 }
-
 export function getListAttachedUserPolicyOutput(args: GetListAttachedUserPolicyOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetListAttachedUserPolicyResult> {
-    return pulumi.output(args).apply(a => getListAttachedUserPolicy(a, opts))
+    return pulumi.output(args).apply((a: any) => getListAttachedUserPolicy(a, opts))
 }
 
 /**

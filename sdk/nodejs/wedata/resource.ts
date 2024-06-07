@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Wedata.Resource("example", {
+ * const example = new tencentcloud.wedata.Resource("example", {
  *     cosBucketName: "wedata-demo-1314991481",
  *     cosRegion: "ap-guangzhou",
  *     fileName: "tf_example",
@@ -22,13 +23,14 @@ import * as utilities from "../utilities";
  *     projectId: "1612982498218618880",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * wedata resource can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Wedata/resource:Resource example 1612982498218618880#/datastudio/resource/demo#75431931-7d27-4034-b3de-3dc3348a220e
+ * $ pulumi import tencentcloud:Wedata/resource:Resource example 1612982498218618880#/datastudio/resource/demo#75431931-7d27-4034-b3de-3dc3348a220e
  * ```
  */
 export class Resource extends pulumi.CustomResource {

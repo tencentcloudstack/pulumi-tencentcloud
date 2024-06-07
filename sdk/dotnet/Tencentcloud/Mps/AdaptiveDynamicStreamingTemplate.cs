@@ -15,87 +15,88 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var adaptiveDynamicStreamingTemplate = new Tencentcloud.Mps.AdaptiveDynamicStreamingTemplate("adaptiveDynamicStreamingTemplate", new()
     ///     {
-    ///         var adaptiveDynamicStreamingTemplate = new Tencentcloud.Mps.AdaptiveDynamicStreamingTemplate("adaptiveDynamicStreamingTemplate", new Tencentcloud.Mps.AdaptiveDynamicStreamingTemplateArgs
+    ///         Comment = "terrraform test",
+    ///         DisableHigherVideoBitrate = 0,
+    ///         DisableHigherVideoResolution = 1,
+    ///         Format = "HLS",
+    ///         StreamInfos = new[]
     ///         {
-    ///             Comment = "terrraform test",
-    ///             DisableHigherVideoBitrate = 0,
-    ///             DisableHigherVideoResolution = 1,
-    ///             Format = "HLS",
-    ///             StreamInfos = 
+    ///             new Tencentcloud.Mps.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
     ///             {
-    ///                 new Tencentcloud.Mps.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
+    ///                 Audio = new Tencentcloud.Mps.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
     ///                 {
-    ///                     Audio = new Tencentcloud.Mps.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
-    ///                     {
-    ///                         AudioChannel = 1,
-    ///                         Bitrate = 55,
-    ///                         Codec = "libmp3lame",
-    ///                         SampleRate = 32000,
-    ///                     },
-    ///                     RemoveAudio = 0,
-    ///                     RemoveVideo = 0,
-    ///                     Video = new Tencentcloud.Mps.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
-    ///                     {
-    ///                         Bitrate = 245,
-    ///                         Codec = "libx264",
-    ///                         FillType = "black",
-    ///                         Fps = 30,
-    ///                         Gop = 0,
-    ///                         Height = 135,
-    ///                         ResolutionAdaptive = "open",
-    ///                         Vcrf = 0,
-    ///                         Width = 145,
-    ///                     },
+    ///                     AudioChannel = 1,
+    ///                     Bitrate = 55,
+    ///                     Codec = "libmp3lame",
+    ///                     SampleRate = 32000,
     ///                 },
-    ///                 new Tencentcloud.Mps.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
+    ///                 RemoveAudio = 0,
+    ///                 RemoveVideo = 0,
+    ///                 Video = new Tencentcloud.Mps.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
     ///                 {
-    ///                     Audio = new Tencentcloud.Mps.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
-    ///                     {
-    ///                         AudioChannel = 2,
-    ///                         Bitrate = 60,
-    ///                         Codec = "libfdk_aac",
-    ///                         SampleRate = 32000,
-    ///                     },
-    ///                     RemoveAudio = 0,
-    ///                     RemoveVideo = 0,
-    ///                     Video = new Tencentcloud.Mps.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
-    ///                     {
-    ///                         Bitrate = 400,
-    ///                         Codec = "libx264",
-    ///                         FillType = "black",
-    ///                         Fps = 40,
-    ///                         Gop = 0,
-    ///                         Height = 150,
-    ///                         ResolutionAdaptive = "open",
-    ///                         Vcrf = 0,
-    ///                         Width = 160,
-    ///                     },
+    ///                     Bitrate = 245,
+    ///                     Codec = "libx264",
+    ///                     FillType = "black",
+    ///                     Fps = 30,
+    ///                     Gop = 0,
+    ///                     Height = 135,
+    ///                     ResolutionAdaptive = "open",
+    ///                     Vcrf = 0,
+    ///                     Width = 145,
     ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Mps.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
+    ///             {
+    ///                 Audio = new Tencentcloud.Mps.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
+    ///                 {
+    ///                     AudioChannel = 2,
+    ///                     Bitrate = 60,
+    ///                     Codec = "libfdk_aac",
+    ///                     SampleRate = 32000,
+    ///                 },
+    ///                 RemoveAudio = 0,
+    ///                 RemoveVideo = 0,
+    ///                 Video = new Tencentcloud.Mps.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
+    ///                 {
+    ///                     Bitrate = 400,
+    ///                     Codec = "libx264",
+    ///                     FillType = "black",
+    ///                     Fps = 40,
+    ///                     Gop = 0,
+    ///                     Height = 150,
+    ///                     ResolutionAdaptive = "open",
+    ///                     Vcrf = 0,
+    ///                     Width = 160,
+    ///                 },
+    ///             },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mps adaptive_dynamic_streaming_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate adaptive_dynamic_streaming_template adaptive_dynamic_streaming_template_id
+    /// $ pulumi import tencentcloud:Mps/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate adaptive_dynamic_streaming_template adaptive_dynamic_streaming_template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/adaptiveDynamicStreamingTemplate:AdaptiveDynamicStreamingTemplate")]
-    public partial class AdaptiveDynamicStreamingTemplate : Pulumi.CustomResource
+    public partial class AdaptiveDynamicStreamingTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Template description information, length limit: 256 characters.
@@ -178,7 +179,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class AdaptiveDynamicStreamingTemplateArgs : Pulumi.ResourceArgs
+    public sealed class AdaptiveDynamicStreamingTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template description information, length limit: 256 characters.
@@ -225,9 +226,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public AdaptiveDynamicStreamingTemplateArgs()
         {
         }
+        public static new AdaptiveDynamicStreamingTemplateArgs Empty => new AdaptiveDynamicStreamingTemplateArgs();
     }
 
-    public sealed class AdaptiveDynamicStreamingTemplateState : Pulumi.ResourceArgs
+    public sealed class AdaptiveDynamicStreamingTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template description information, length limit: 256 characters.
@@ -274,5 +276,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public AdaptiveDynamicStreamingTemplateState()
         {
         }
+        public static new AdaptiveDynamicStreamingTemplateState Empty => new AdaptiveDynamicStreamingTemplateState();
     }
 }

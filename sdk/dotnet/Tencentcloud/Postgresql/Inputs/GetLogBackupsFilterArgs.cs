@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Inputs
 {
 
-    public sealed class GetLogBackupsFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetLogBackupsFilterInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Filter name.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Inputs
         public GetLogBackupsFilterInputArgs()
         {
         }
+        public static new GetLogBackupsFilterInputArgs Empty => new GetLogBackupsFilterInputArgs();
     }
 }

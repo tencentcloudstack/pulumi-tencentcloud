@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Outputs
     [OutputType]
     public sealed class GetVipInstanceClusterInfoVpcResult
     {
+        /// <summary>
+        /// Subnet Id.
+        /// </summary>
         public readonly string SubnetId;
+        /// <summary>
+        /// VPC ID.
+        /// </summary>
         public readonly string VpcId;
 
         [OutputConstructor]

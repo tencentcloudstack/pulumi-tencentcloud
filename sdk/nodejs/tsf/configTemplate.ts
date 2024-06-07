@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const configTemplate = new tencentcloud.Tsf.ConfigTemplate("config_template", {
+ * const configTemplate = new tencentcloud.tsf.ConfigTemplate("configTemplate", {
  *     configTemplateDesc: "terraform-test",
  *     configTemplateName: "terraform-template-name",
  *     configTemplateType: "Ribbon",
@@ -22,9 +23,11 @@ import * as utilities from "../utilities";
  *   ribbon.MaxAutoRetries: 0
  *   ribbon.MaxAutoRetriesNextServer: 1
  *   ribbon.OkToRetryOnAllOperations: true
+ *
  * `,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ConfigTemplate extends pulumi.CustomResource {
     /**

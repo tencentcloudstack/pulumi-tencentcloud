@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const activateHourDbInstance = new tencentcloud.Mariadb.OperateHourDbInstance("activate_hour_db_instance", {
+ * const activateHourDbInstance = new tencentcloud.mariadb.OperateHourDbInstance("activateHourDbInstance", {
  *     instanceId: "tdsql-9vqvls95",
  *     operate: "activate",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class OperateHourDbInstance extends pulumi.CustomResource {
     /**

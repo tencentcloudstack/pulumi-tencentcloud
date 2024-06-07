@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse.Inputs
 {
 
-    public sealed class XmlConfigModifyConfContextGetArgs : Pulumi.ResourceArgs
+    public sealed class XmlConfigModifyConfContextGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Configuration file name.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse.Inputs
         public XmlConfigModifyConfContextGetArgs()
         {
         }
+        public static new XmlConfigModifyConfContextGetArgs Empty => new XmlConfigModifyConfContextGetArgs();
     }
 }

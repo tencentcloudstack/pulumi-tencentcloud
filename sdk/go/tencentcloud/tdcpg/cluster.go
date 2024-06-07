@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tdcpg cluster.
@@ -17,44 +18,49 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdcpg"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdcpg"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdcpg.NewCluster(ctx, "cluster", &Tdcpg.ClusterArgs{
-// 			ClusterName:        pulumi.String("cluster_name"),
-// 			Cpu:                pulumi.Int(1),
-// 			DbVersion:          pulumi.String("10.17"),
-// 			InstanceCount:      pulumi.Int(1),
-// 			MasterUserPassword: pulumi.String(""),
-// 			Memory:             pulumi.Int(1),
-// 			PayMode:            pulumi.String("POSTPAID_BY_HOUR"),
-// 			Period:             pulumi.Int(1),
-// 			ProjectId:          pulumi.Int(0),
-// 			SubnetId:           pulumi.String("subnet_id"),
-// 			VpcId:              pulumi.String("vpc_id"),
-// 			Zone:               pulumi.String("ap-guangzhou-3"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tdcpg.NewCluster(ctx, "cluster", &Tdcpg.ClusterArgs{
+//				ClusterName:        pulumi.String("cluster_name"),
+//				Cpu:                pulumi.Int(1),
+//				DbVersion:          pulumi.String("10.17"),
+//				InstanceCount:      pulumi.Int(1),
+//				MasterUserPassword: pulumi.String(""),
+//				Memory:             pulumi.Int(1),
+//				PayMode:            pulumi.String("POSTPAID_BY_HOUR"),
+//				Period:             pulumi.Int(1),
+//				ProjectId:          pulumi.Int(0),
+//				SubnetId:           pulumi.String("subnet_id"),
+//				VpcId:              pulumi.String("vpc_id"),
+//				Zone:               pulumi.String("ap-guangzhou-3"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tdcpg cluster can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tdcpg/cluster:Cluster cluster cluster_id
+// $ pulumi import tencentcloud:Tdcpg/cluster:Cluster cluster cluster_id
 // ```
 type Cluster struct {
 	pulumi.CustomResourceState
@@ -115,7 +121,14 @@ func NewCluster(ctx *pulumi.Context,
 	if args.Zone == nil {
 		return nil, errors.New("invalid value for required argument 'Zone'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.MasterUserPassword != nil {
+		args.MasterUserPassword = pulumi.ToSecret(args.MasterUserPassword).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"masterUserPassword",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Cluster
 	err := ctx.RegisterResource("tencentcloud:Tdcpg/cluster:Cluster", name, args, &resource, opts...)
 	if err != nil {
@@ -284,7 +297,7 @@ func (i *Cluster) ToClusterOutputWithContext(ctx context.Context) ClusterOutput 
 // ClusterArrayInput is an input type that accepts ClusterArray and ClusterArrayOutput values.
 // You can construct a concrete instance of `ClusterArrayInput` via:
 //
-//          ClusterArray{ ClusterArgs{...} }
+//	ClusterArray{ ClusterArgs{...} }
 type ClusterArrayInput interface {
 	pulumi.Input
 
@@ -309,7 +322,7 @@ func (i ClusterArray) ToClusterArrayOutputWithContext(ctx context.Context) Clust
 // ClusterMapInput is an input type that accepts ClusterMap and ClusterMapOutput values.
 // You can construct a concrete instance of `ClusterMapInput` via:
 //
-//          ClusterMap{ "key": ClusterArgs{...} }
+//	ClusterMap{ "key": ClusterArgs{...} }
 type ClusterMapInput interface {
 	pulumi.Input
 

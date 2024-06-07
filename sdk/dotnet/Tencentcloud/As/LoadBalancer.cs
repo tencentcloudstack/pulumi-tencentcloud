@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
 {
     [TencentcloudResourceType("tencentcloud:As/loadBalancer:LoadBalancer")]
-    public partial class LoadBalancer : Pulumi.CustomResource
+    public partial class LoadBalancer : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of a scaling group.
@@ -78,7 +78,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         }
     }
 
-    public sealed class LoadBalancerArgs : Pulumi.ResourceArgs
+    public sealed class LoadBalancerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of a scaling group.
@@ -115,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public LoadBalancerArgs()
         {
         }
+        public static new LoadBalancerArgs Empty => new LoadBalancerArgs();
     }
 
-    public sealed class LoadBalancerState : Pulumi.ResourceArgs
+    public sealed class LoadBalancerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of a scaling group.
@@ -154,5 +155,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public LoadBalancerState()
         {
         }
+        public static new LoadBalancerState Empty => new LoadBalancerState();
     }
 }

@@ -9,25 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Key.Pair("foo", {
- *     keyName: "terraform_test",
- * });
- * const foo1 = new tencentcloud.Key.Pair("foo1", {
+ * const foo = new tencentcloud.key.Pair("foo", {keyName: "terraform_test"});
+ * const foo1 = new tencentcloud.key.Pair("foo1", {
  *     keyName: "terraform_test",
  *     publicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Key pair can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Key/pair:Pair foo skey-17634f05
+ * $ pulumi import tencentcloud:Key/pair:Pair foo skey-17634f05
  * ```
  */
 export class Pair extends pulumi.CustomResource {

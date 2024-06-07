@@ -8,35 +8,40 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of scf asyncEventStatus
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.GetAsyncEventStatus(ctx, &scf.GetAsyncEventStatusArgs{
-// 			InvokeRequestId: "9de9405a-e33a-498d-bb59-e80b7bed1191",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.GetAsyncEventStatus(ctx, &scf.GetAsyncEventStatusArgs{
+//				InvokeRequestId: "9de9405a-e33a-498d-bb59-e80b7bed1191",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func LookupAsyncEventStatus(ctx *pulumi.Context, args *LookupAsyncEventStatusArgs, opts ...pulumi.InvokeOption) (*LookupAsyncEventStatusResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupAsyncEventStatusResult
 	err := ctx.Invoke("tencentcloud:Scf/getAsyncEventStatus:getAsyncEventStatus", args, &rv, opts...)
 	if err != nil {

@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type InstanceHostResource struct {
 	// The number of available CPU cores of the instance.
@@ -30,7 +33,7 @@ type InstanceHostResource struct {
 // InstanceHostResourceInput is an input type that accepts InstanceHostResourceArgs and InstanceHostResourceOutput values.
 // You can construct a concrete instance of `InstanceHostResourceInput` via:
 //
-//          InstanceHostResourceArgs{...}
+//	InstanceHostResourceArgs{...}
 type InstanceHostResourceInput interface {
 	pulumi.Input
 
@@ -70,7 +73,7 @@ func (i InstanceHostResourceArgs) ToInstanceHostResourceOutputWithContext(ctx co
 // InstanceHostResourceArrayInput is an input type that accepts InstanceHostResourceArray and InstanceHostResourceArrayOutput values.
 // You can construct a concrete instance of `InstanceHostResourceArrayInput` via:
 //
-//          InstanceHostResourceArray{ InstanceHostResourceArgs{...} }
+//	InstanceHostResourceArray{ InstanceHostResourceArgs{...} }
 type InstanceHostResourceArrayInput interface {
 	pulumi.Input
 
@@ -193,7 +196,7 @@ type GetInstancesCdhInstanceList struct {
 // GetInstancesCdhInstanceListInput is an input type that accepts GetInstancesCdhInstanceListArgs and GetInstancesCdhInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesCdhInstanceListInput` via:
 //
-//          GetInstancesCdhInstanceListArgs{...}
+//	GetInstancesCdhInstanceListArgs{...}
 type GetInstancesCdhInstanceListInput interface {
 	pulumi.Input
 
@@ -245,7 +248,7 @@ func (i GetInstancesCdhInstanceListArgs) ToGetInstancesCdhInstanceListOutputWith
 // GetInstancesCdhInstanceListArrayInput is an input type that accepts GetInstancesCdhInstanceListArray and GetInstancesCdhInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesCdhInstanceListArrayInput` via:
 //
-//          GetInstancesCdhInstanceListArray{ GetInstancesCdhInstanceListArgs{...} }
+//	GetInstancesCdhInstanceListArray{ GetInstancesCdhInstanceListArgs{...} }
 type GetInstancesCdhInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -386,7 +389,7 @@ type GetInstancesCdhInstanceListHostResource struct {
 // GetInstancesCdhInstanceListHostResourceInput is an input type that accepts GetInstancesCdhInstanceListHostResourceArgs and GetInstancesCdhInstanceListHostResourceOutput values.
 // You can construct a concrete instance of `GetInstancesCdhInstanceListHostResourceInput` via:
 //
-//          GetInstancesCdhInstanceListHostResourceArgs{...}
+//	GetInstancesCdhInstanceListHostResourceArgs{...}
 type GetInstancesCdhInstanceListHostResourceInput interface {
 	pulumi.Input
 
@@ -426,7 +429,7 @@ func (i GetInstancesCdhInstanceListHostResourceArgs) ToGetInstancesCdhInstanceLi
 // GetInstancesCdhInstanceListHostResourceArrayInput is an input type that accepts GetInstancesCdhInstanceListHostResourceArray and GetInstancesCdhInstanceListHostResourceArrayOutput values.
 // You can construct a concrete instance of `GetInstancesCdhInstanceListHostResourceArrayInput` via:
 //
-//          GetInstancesCdhInstanceListHostResourceArray{ GetInstancesCdhInstanceListHostResourceArgs{...} }
+//	GetInstancesCdhInstanceListHostResourceArray{ GetInstancesCdhInstanceListHostResourceArgs{...} }
 type GetInstancesCdhInstanceListHostResourceArrayInput interface {
 	pulumi.Input
 

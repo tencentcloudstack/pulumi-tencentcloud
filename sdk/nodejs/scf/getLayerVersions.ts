@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const layerVersions = pulumi.output(tencentcloud.Scf.getLayerVersions({
+ * const layerVersions = tencentcloud.Scf.getLayerVersions({
  *     layerName: "tf-test",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getLayerVersions(args: GetLayerVersionsArgs, opts?: pulumi.InvokeOptions): Promise<GetLayerVersionsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Scf/getLayerVersions:getLayerVersions", {
         "compatibleRuntimes": args.compatibleRuntimes,
         "layerName": args.layerName,
@@ -69,9 +69,24 @@ export interface GetLayerVersionsResult {
     readonly layerVersions: outputs.Scf.GetLayerVersionsLayerVersion[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of scf layerVersions
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const layerVersions = tencentcloud.Scf.getLayerVersions({
+ *     layerName: "tf-test",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getLayerVersionsOutput(args: GetLayerVersionsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetLayerVersionsResult> {
-    return pulumi.output(args).apply(a => getLayerVersions(a, opts))
+    return pulumi.output(args).apply((a: any) => getLayerVersions(a, opts))
 }
 
 /**

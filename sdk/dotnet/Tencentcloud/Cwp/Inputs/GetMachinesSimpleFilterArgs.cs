@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp.Inputs
 {
 
-    public sealed class GetMachinesSimpleFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetMachinesSimpleFilterInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// exact match. true or false.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp.Inputs
         public GetMachinesSimpleFilterInputArgs()
         {
         }
+        public static new GetMachinesSimpleFilterInputArgs Empty => new GetMachinesSimpleFilterInputArgs();
     }
 }

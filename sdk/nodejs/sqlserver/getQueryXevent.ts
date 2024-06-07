@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Sqlserver.getQueryXevent({
+ * const example = tencentcloud.Sqlserver.getQueryXevent({
  *     endTime: "2023-08-10 00:00:00",
  *     eventType: "blocked",
  *     instanceId: "mssql-gyg9xycl",
  *     startTime: "2023-08-01 00:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getQueryXevent(args: GetQueryXeventArgs, opts?: pulumi.InvokeOptions): Promise<GetQueryXeventResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Sqlserver/getQueryXevent:getQueryXevent", {
         "endTime": args.endTime,
         "eventType": args.eventType,
@@ -90,9 +90,27 @@ export interface GetQueryXeventResult {
      */
     readonly startTime: string;
 }
-
+/**
+ * Use this data source to query detailed information of sqlserver queryXevent
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Sqlserver.getQueryXevent({
+ *     endTime: "2023-08-10 00:00:00",
+ *     eventType: "blocked",
+ *     instanceId: "mssql-gyg9xycl",
+ *     startTime: "2023-08-01 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getQueryXeventOutput(args: GetQueryXeventOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetQueryXeventResult> {
-    return pulumi.output(args).apply(a => getQueryXevent(a, opts))
+    return pulumi.output(args).apply((a: any) => getQueryXevent(a, opts))
 }
 
 /**

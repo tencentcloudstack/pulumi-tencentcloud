@@ -7,48 +7,53 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cam tagRole
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.NewTagRoleAttachment(ctx, "tagRole", &Cam.TagRoleAttachmentArgs{
-// 			RoleId: pulumi.String("test-cam-tag"),
-// 			Tags: cam.TagRoleAttachmentTagArray{
-// 				&cam.TagRoleAttachmentTagArgs{
-// 					Key:   pulumi.String("test1"),
-// 					Value: pulumi.String("test1"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.NewTagRoleAttachment(ctx, "tagRole", &Cam.TagRoleAttachmentArgs{
+//				RoleId: pulumi.String("test-cam-tag"),
+//				Tags: cam.TagRoleAttachmentTagArray{
+//					&cam.TagRoleAttachmentTagArgs{
+//						Key:   pulumi.String("test1"),
+//						Value: pulumi.String("test1"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cam tag_role can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/tagRoleAttachment:TagRoleAttachment tag_role tag_role_id
+// $ pulumi import tencentcloud:Cam/tagRoleAttachment:TagRoleAttachment tag_role tag_role_id
 // ```
 type TagRoleAttachment struct {
 	pulumi.CustomResourceState
@@ -71,7 +76,7 @@ func NewTagRoleAttachment(ctx *pulumi.Context,
 	if args.Tags == nil {
 		return nil, errors.New("invalid value for required argument 'Tags'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TagRoleAttachment
 	err := ctx.RegisterResource("tencentcloud:Cam/tagRoleAttachment:TagRoleAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -160,7 +165,7 @@ func (i *TagRoleAttachment) ToTagRoleAttachmentOutputWithContext(ctx context.Con
 // TagRoleAttachmentArrayInput is an input type that accepts TagRoleAttachmentArray and TagRoleAttachmentArrayOutput values.
 // You can construct a concrete instance of `TagRoleAttachmentArrayInput` via:
 //
-//          TagRoleAttachmentArray{ TagRoleAttachmentArgs{...} }
+//	TagRoleAttachmentArray{ TagRoleAttachmentArgs{...} }
 type TagRoleAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -185,7 +190,7 @@ func (i TagRoleAttachmentArray) ToTagRoleAttachmentArrayOutputWithContext(ctx co
 // TagRoleAttachmentMapInput is an input type that accepts TagRoleAttachmentMap and TagRoleAttachmentMapOutput values.
 // You can construct a concrete instance of `TagRoleAttachmentMapInput` via:
 //
-//          TagRoleAttachmentMap{ "key": TagRoleAttachmentArgs{...} }
+//	TagRoleAttachmentMap{ "key": TagRoleAttachmentArgs{...} }
 type TagRoleAttachmentMapInput interface {
 	pulumi.Input
 

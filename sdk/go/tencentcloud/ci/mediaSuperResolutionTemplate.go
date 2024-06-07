@@ -7,44 +7,50 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ci mediaSuperResolutionTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewMediaSuperResolutionTemplate(ctx, "mediaSuperResolutionTemplate", &Ci.MediaSuperResolutionTemplateArgs{
-// 			Bucket:        pulumi.String("terraform-ci-1308919341"),
-// 			EnableScaleUp: pulumi.String("true"),
-// 			Resolution:    pulumi.String("sdtohd"),
-// 			Version:       pulumi.String("Enhance"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewMediaSuperResolutionTemplate(ctx, "mediaSuperResolutionTemplate", &Ci.MediaSuperResolutionTemplateArgs{
+//				Bucket:        pulumi.String("terraform-ci-1308919341"),
+//				EnableScaleUp: pulumi.String("true"),
+//				Resolution:    pulumi.String("sdtohd"),
+//				Version:       pulumi.String("Enhance"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ci media_super_resolution_template can be imported using the bucket#templateId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/mediaSuperResolutionTemplate:MediaSuperResolutionTemplate media_super_resolution_template terraform-ci-xxxxxx#t1d707eb2be3294e22b47123894f85cb8f
+// $ pulumi import tencentcloud:Ci/mediaSuperResolutionTemplate:MediaSuperResolutionTemplate media_super_resolution_template terraform-ci-xxxxxx#t1d707eb2be3294e22b47123894f85cb8f
 // ```
 type MediaSuperResolutionTemplate struct {
 	pulumi.CustomResourceState
@@ -74,7 +80,7 @@ func NewMediaSuperResolutionTemplate(ctx *pulumi.Context,
 	if args.Resolution == nil {
 		return nil, errors.New("invalid value for required argument 'Resolution'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MediaSuperResolutionTemplate
 	err := ctx.RegisterResource("tencentcloud:Ci/mediaSuperResolutionTemplate:MediaSuperResolutionTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -179,7 +185,7 @@ func (i *MediaSuperResolutionTemplate) ToMediaSuperResolutionTemplateOutputWithC
 // MediaSuperResolutionTemplateArrayInput is an input type that accepts MediaSuperResolutionTemplateArray and MediaSuperResolutionTemplateArrayOutput values.
 // You can construct a concrete instance of `MediaSuperResolutionTemplateArrayInput` via:
 //
-//          MediaSuperResolutionTemplateArray{ MediaSuperResolutionTemplateArgs{...} }
+//	MediaSuperResolutionTemplateArray{ MediaSuperResolutionTemplateArgs{...} }
 type MediaSuperResolutionTemplateArrayInput interface {
 	pulumi.Input
 
@@ -204,7 +210,7 @@ func (i MediaSuperResolutionTemplateArray) ToMediaSuperResolutionTemplateArrayOu
 // MediaSuperResolutionTemplateMapInput is an input type that accepts MediaSuperResolutionTemplateMap and MediaSuperResolutionTemplateMapOutput values.
 // You can construct a concrete instance of `MediaSuperResolutionTemplateMapInput` via:
 //
-//          MediaSuperResolutionTemplateMap{ "key": MediaSuperResolutionTemplateArgs{...} }
+//	MediaSuperResolutionTemplateMap{ "key": MediaSuperResolutionTemplateArgs{...} }
 type MediaSuperResolutionTemplateMapInput interface {
 	pulumi.Input
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class ScenarioLoadVpcLoadDistributionGetArgs : Pulumi.ResourceArgs
+    public sealed class ScenarioLoadVpcLoadDistributionGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Region.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public ScenarioLoadVpcLoadDistributionGetArgs()
         {
         }
+        public static new ScenarioLoadVpcLoadDistributionGetArgs Empty => new ScenarioLoadVpcLoadDistributionGetArgs();
     }
 }

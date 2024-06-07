@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var objectDownload = new Tencentcloud.Cos.ObjectDownloadOperation("objectDownload", new()
     ///     {
-    ///         var objectDownload = new Tencentcloud.Cos.ObjectDownloadOperation("objectDownload", new Tencentcloud.Cos.ObjectDownloadOperationArgs
-    ///         {
-    ///             Bucket = "xxxxxxx",
-    ///             DownloadPath = "/tmp/test.txt",
-    ///             Key = "test.txt",
-    ///         });
-    ///     }
+    ///         Bucket = "xxxxxxx",
+    ///         DownloadPath = "/tmp/test.txt",
+    ///         Key = "test.txt",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cos/objectDownloadOperation:ObjectDownloadOperation")]
-    public partial class ObjectDownloadOperation : Pulumi.CustomResource
+    public partial class ObjectDownloadOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Bucket.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         }
     }
 
-    public sealed class ObjectDownloadOperationArgs : Pulumi.ResourceArgs
+    public sealed class ObjectDownloadOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket.
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public ObjectDownloadOperationArgs()
         {
         }
+        public static new ObjectDownloadOperationArgs Empty => new ObjectDownloadOperationArgs();
     }
 
-    public sealed class ObjectDownloadOperationState : Pulumi.ResourceArgs
+    public sealed class ObjectDownloadOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket.
@@ -148,5 +150,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public ObjectDownloadOperationState()
         {
         }
+        public static new ObjectDownloadOperationState Empty => new ObjectDownloadOperationState();
     }
 }

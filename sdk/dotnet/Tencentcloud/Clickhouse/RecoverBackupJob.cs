@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var recoverBackupJob = new Tencentcloud.Clickhouse.RecoverBackupJob("recoverBackupJob", new()
     ///     {
-    ///         var recoverBackupJob = new Tencentcloud.Clickhouse.RecoverBackupJob("recoverBackupJob", new Tencentcloud.Clickhouse.RecoverBackupJobArgs
-    ///         {
-    ///             BackUpJobId = 1234,
-    ///             InstanceId = "cdwch-xxxxxx",
-    ///         });
-    ///     }
+    ///         BackUpJobId = 1234,
+    ///         InstanceId = "cdwch-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clickhouse/recoverBackupJob:RecoverBackupJob")]
-    public partial class RecoverBackupJob : Pulumi.CustomResource
+    public partial class RecoverBackupJob : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Back up job id.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         }
     }
 
-    public sealed class RecoverBackupJobArgs : Pulumi.ResourceArgs
+    public sealed class RecoverBackupJobArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Back up job id.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public RecoverBackupJobArgs()
         {
         }
+        public static new RecoverBackupJobArgs Empty => new RecoverBackupJobArgs();
     }
 
-    public sealed class RecoverBackupJobState : Pulumi.ResourceArgs
+    public sealed class RecoverBackupJobState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Back up job id.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public RecoverBackupJobState()
         {
         }
+        public static new RecoverBackupJobState Empty => new RecoverBackupJobState();
     }
 }

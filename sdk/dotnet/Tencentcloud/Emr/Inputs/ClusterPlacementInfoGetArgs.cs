@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Inputs
 {
 
-    public sealed class ClusterPlacementInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class ClusterPlacementInfoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Project id.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Inputs
         public ClusterPlacementInfoGetArgs()
         {
         }
+        public static new ClusterPlacementInfoGetArgs Empty => new ClusterPlacementInfoGetArgs();
     }
 }

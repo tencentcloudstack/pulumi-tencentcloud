@@ -7,46 +7,51 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a clickhouse keyvalConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clickhouse.NewKeyvalConfig(ctx, "keyvalConfig", &Clickhouse.KeyvalConfigArgs{
-// 			InstanceId: pulumi.String("cdwch-datuhk3z"),
-// 			Items: &clickhouse.KeyvalConfigItemsArgs{
-// 				ConfKey:   pulumi.String("max_open_files"),
-// 				ConfValue: pulumi.String("50000"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clickhouse.NewKeyvalConfig(ctx, "keyvalConfig", &Clickhouse.KeyvalConfigArgs{
+//				InstanceId: pulumi.String("cdwch-datuhk3z"),
+//				Items: &clickhouse.KeyvalConfigItemsArgs{
+//					ConfKey:   pulumi.String("max_open_files"),
+//					ConfValue: pulumi.String("50000"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // clickhouse config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clickhouse/keyvalConfig:KeyvalConfig config cdwch-datuhk3z#max_open_files#50000
+// $ pulumi import tencentcloud:Clickhouse/keyvalConfig:KeyvalConfig config cdwch-datuhk3z#max_open_files#50000
 // ```
 type KeyvalConfig struct {
 	pulumi.CustomResourceState
@@ -70,7 +75,7 @@ func NewKeyvalConfig(ctx *pulumi.Context,
 	if args.Items == nil {
 		return nil, errors.New("invalid value for required argument 'Items'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource KeyvalConfig
 	err := ctx.RegisterResource("tencentcloud:Clickhouse/keyvalConfig:KeyvalConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -151,7 +156,7 @@ func (i *KeyvalConfig) ToKeyvalConfigOutputWithContext(ctx context.Context) Keyv
 // KeyvalConfigArrayInput is an input type that accepts KeyvalConfigArray and KeyvalConfigArrayOutput values.
 // You can construct a concrete instance of `KeyvalConfigArrayInput` via:
 //
-//          KeyvalConfigArray{ KeyvalConfigArgs{...} }
+//	KeyvalConfigArray{ KeyvalConfigArgs{...} }
 type KeyvalConfigArrayInput interface {
 	pulumi.Input
 
@@ -176,7 +181,7 @@ func (i KeyvalConfigArray) ToKeyvalConfigArrayOutputWithContext(ctx context.Cont
 // KeyvalConfigMapInput is an input type that accepts KeyvalConfigMap and KeyvalConfigMapOutput values.
 // You can construct a concrete instance of `KeyvalConfigMapInput` via:
 //
-//          KeyvalConfigMap{ "key": KeyvalConfigArgs{...} }
+//	KeyvalConfigMap{ "key": KeyvalConfigArgs{...} }
 type KeyvalConfigMapInput interface {
 	pulumi.Input
 

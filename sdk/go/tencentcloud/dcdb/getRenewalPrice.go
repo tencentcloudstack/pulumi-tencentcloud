@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dcdb renewalPrice
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.GetRenewalPrice(ctx, &dcdb.GetRenewalPriceArgs{
-// 			InstanceId: local.Dcdb_id,
-// 			Period:     pulumi.IntRef(1),
-// 			AmountUnit: pulumi.StringRef("pent"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcdb.GetRenewalPrice(ctx, &dcdb.GetRenewalPriceArgs{
+//				InstanceId: local.Dcdb_id,
+//				Period:     pulumi.IntRef(1),
+//				AmountUnit: pulumi.StringRef("pent"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetRenewalPrice(ctx *pulumi.Context, args *GetRenewalPriceArgs, opts ...pulumi.InvokeOption) (*GetRenewalPriceResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRenewalPriceResult
 	err := ctx.Invoke("tencentcloud:Dcdb/getRenewalPrice:getRenewalPrice", args, &rv, opts...)
 	if err != nil {

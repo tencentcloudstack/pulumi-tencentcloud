@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,26 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const list = pulumi.output(tencentcloud.Cdh.getInstances({
+ * const list = tencentcloud.Cdh.getInstances({
  *     availabilityZone: "ap-guangzhou-3",
  *     hostId: "host-d6s7i5q4",
  *     hostName: "test",
  *     hostState: "RUNNING",
  *     projectId: 1154137,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cdh/getInstances:getInstances", {
         "availabilityZone": args.availabilityZone,
         "hostId": args.hostId,
@@ -104,9 +104,28 @@ export interface GetInstancesResult {
     readonly projectId?: number;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query CDH instances.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const list = tencentcloud.Cdh.getInstances({
+ *     availabilityZone: "ap-guangzhou-3",
+ *     hostId: "host-d6s7i5q4",
+ *     hostName: "test",
+ *     hostState: "RUNNING",
+ *     projectId: 1154137,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstancesResult> {
-    return pulumi.output(args).apply(a => getInstances(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstances(a, opts))
 }
 
 /**

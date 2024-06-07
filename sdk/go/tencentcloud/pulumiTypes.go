@@ -8,19 +8,26 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
+var _ = internal.GetEnvOrDefault
+
 type ProviderAssumeRole struct {
-	Policy          *string `pulumi:"policy"`
-	RoleArn         string  `pulumi:"roleArn"`
-	SessionDuration int     `pulumi:"sessionDuration"`
-	SessionName     string  `pulumi:"sessionName"`
+	// A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
+	Policy *string `pulumi:"policy"`
+	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+	RoleArn string `pulumi:"roleArn"`
+	// The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+	SessionDuration int `pulumi:"sessionDuration"`
+	// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+	SessionName string `pulumi:"sessionName"`
 }
 
 // ProviderAssumeRoleInput is an input type that accepts ProviderAssumeRoleArgs and ProviderAssumeRoleOutput values.
 // You can construct a concrete instance of `ProviderAssumeRoleInput` via:
 //
-//          ProviderAssumeRoleArgs{...}
+//	ProviderAssumeRoleArgs{...}
 type ProviderAssumeRoleInput interface {
 	pulumi.Input
 
@@ -29,10 +36,14 @@ type ProviderAssumeRoleInput interface {
 }
 
 type ProviderAssumeRoleArgs struct {
-	Policy          pulumi.StringPtrInput `pulumi:"policy"`
-	RoleArn         pulumi.StringInput    `pulumi:"roleArn"`
-	SessionDuration pulumi.IntInput       `pulumi:"sessionDuration"`
-	SessionName     pulumi.StringInput    `pulumi:"sessionName"`
+	// A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
+	Policy pulumi.StringPtrInput `pulumi:"policy"`
+	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+	RoleArn pulumi.StringInput `pulumi:"roleArn"`
+	// The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+	SessionDuration pulumi.IntInput `pulumi:"sessionDuration"`
+	// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+	SessionName pulumi.StringInput `pulumi:"sessionName"`
 }
 
 func (ProviderAssumeRoleArgs) ElementType() reflect.Type {
@@ -58,11 +69,11 @@ func (i ProviderAssumeRoleArgs) ToProviderAssumeRolePtrOutputWithContext(ctx con
 // ProviderAssumeRolePtrInput is an input type that accepts ProviderAssumeRoleArgs, ProviderAssumeRolePtr and ProviderAssumeRolePtrOutput values.
 // You can construct a concrete instance of `ProviderAssumeRolePtrInput` via:
 //
-//          ProviderAssumeRoleArgs{...}
+//	        ProviderAssumeRoleArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ProviderAssumeRolePtrInput interface {
 	pulumi.Input
 
@@ -112,18 +123,22 @@ func (o ProviderAssumeRoleOutput) ToProviderAssumeRolePtrOutputWithContext(ctx c
 	}).(ProviderAssumeRolePtrOutput)
 }
 
+// A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
 func (o ProviderAssumeRoleOutput) Policy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ProviderAssumeRole) *string { return v.Policy }).(pulumi.StringPtrOutput)
 }
 
+// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
 func (o ProviderAssumeRoleOutput) RoleArn() pulumi.StringOutput {
 	return o.ApplyT(func(v ProviderAssumeRole) string { return v.RoleArn }).(pulumi.StringOutput)
 }
 
+// The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
 func (o ProviderAssumeRoleOutput) SessionDuration() pulumi.IntOutput {
 	return o.ApplyT(func(v ProviderAssumeRole) int { return v.SessionDuration }).(pulumi.IntOutput)
 }
 
+// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
 func (o ProviderAssumeRoleOutput) SessionName() pulumi.StringOutput {
 	return o.ApplyT(func(v ProviderAssumeRole) string { return v.SessionName }).(pulumi.StringOutput)
 }
@@ -152,6 +167,7 @@ func (o ProviderAssumeRolePtrOutput) Elem() ProviderAssumeRoleOutput {
 	}).(ProviderAssumeRoleOutput)
 }
 
+// A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
 func (o ProviderAssumeRolePtrOutput) Policy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderAssumeRole) *string {
 		if v == nil {
@@ -161,6 +177,7 @@ func (o ProviderAssumeRolePtrOutput) Policy() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
 func (o ProviderAssumeRolePtrOutput) RoleArn() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderAssumeRole) *string {
 		if v == nil {
@@ -170,6 +187,7 @@ func (o ProviderAssumeRolePtrOutput) RoleArn() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
 func (o ProviderAssumeRolePtrOutput) SessionDuration() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ProviderAssumeRole) *int {
 		if v == nil {
@@ -179,6 +197,7 @@ func (o ProviderAssumeRolePtrOutput) SessionDuration() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
 func (o ProviderAssumeRolePtrOutput) SessionName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ProviderAssumeRole) *string {
 		if v == nil {

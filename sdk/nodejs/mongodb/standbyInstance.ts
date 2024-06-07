@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const shanghai = new tencentcloud.Provider("shanghai", {region: "ap-shanghai"});
  * const mongodbInstance = new tencentcloud.mongodb.Instance("mongodbInstance", {
@@ -42,13 +43,14 @@ import * as utilities from "../utilities";
  *     provider: tencentcloud.shanghai,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Mongodb instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mongodb/standbyInstance:StandbyInstance mongodb cmgo-41s6jwy4
+ * $ pulumi import tencentcloud:Mongodb/standbyInstance:StandbyInstance mongodb cmgo-41s6jwy4
  * ```
  */
 export class StandbyInstance extends pulumi.CustomResource {

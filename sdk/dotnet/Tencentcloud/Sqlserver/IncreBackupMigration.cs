@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Sqlserver.IncreBackupMigration("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Sqlserver.IncreBackupMigration("example", new Tencentcloud.Sqlserver.IncreBackupMigrationArgs
-    ///         {
-    ///             BackupFiles = {},
-    ///             BackupMigrationId = "mssql-backup-migration-9tj0sxnz",
-    ///             InstanceId = "mssql-4gmc5805",
-    ///             IsRecovery = "YES",
-    ///         });
-    ///     }
+    ///         BackupFiles = new[] {},
+    ///         BackupMigrationId = "mssql-backup-migration-9tj0sxnz",
+    ///         InstanceId = "mssql-4gmc5805",
+    ///         IsRecovery = "YES",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// sqlserver incre_backup_migration can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/increBackupMigration:IncreBackupMigration incre_backup_migration incre_backup_migration_id
+    /// $ pulumi import tencentcloud:Sqlserver/increBackupMigration:IncreBackupMigration incre_backup_migration incre_backup_migration_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/increBackupMigration:IncreBackupMigration")]
-    public partial class IncreBackupMigration : Pulumi.CustomResource
+    public partial class IncreBackupMigration : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Incremental backup file. If the UploadType of a full backup file is COS_URL, fill in URL here. If the UploadType is COS_UPLOAD, fill in the name of the backup file here. Only 1 backup file is supported, but a backup file can involve multiple databases.
@@ -121,7 +122,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         }
     }
 
-    public sealed class IncreBackupMigrationArgs : Pulumi.ResourceArgs
+    public sealed class IncreBackupMigrationArgs : global::Pulumi.ResourceArgs
     {
         [Input("backupFiles")]
         private InputList<string>? _backupFiles;
@@ -156,9 +157,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public IncreBackupMigrationArgs()
         {
         }
+        public static new IncreBackupMigrationArgs Empty => new IncreBackupMigrationArgs();
     }
 
-    public sealed class IncreBackupMigrationState : Pulumi.ResourceArgs
+    public sealed class IncreBackupMigrationState : global::Pulumi.ResourceArgs
     {
         [Input("backupFiles")]
         private InputList<string>? _backupFiles;
@@ -199,5 +201,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public IncreBackupMigrationState()
         {
         }
+        public static new IncreBackupMigrationState Empty => new IncreBackupMigrationState();
     }
 }

@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// <summary>
         /// Use this data source to query detailed information of cvm instance_vnc_url
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceVncUrl = Tencentcloud.Cvm.GetInstanceVncUrl.Invoke(new()
         ///     {
-        ///         var instanceVncUrl = Output.Create(Tencentcloud.Cvm.GetInstanceVncUrl.InvokeAsync(new Tencentcloud.Cvm.GetInstanceVncUrlArgs
-        ///         {
-        ///             InstanceId = "ins-xxxxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ins-xxxxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceVncUrlResult> InvokeAsync(GetInstanceVncUrlArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceVncUrlResult>("tencentcloud:Cvm/getInstanceVncUrl:getInstanceVncUrl", args ?? new GetInstanceVncUrlArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceVncUrlResult>("tencentcloud:Cvm/getInstanceVncUrl:getInstanceVncUrl", args ?? new GetInstanceVncUrlArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cvm instance_vnc_url
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceVncUrl = Tencentcloud.Cvm.GetInstanceVncUrl.Invoke(new()
         ///     {
-        ///         var instanceVncUrl = Output.Create(Tencentcloud.Cvm.GetInstanceVncUrl.InvokeAsync(new Tencentcloud.Cvm.GetInstanceVncUrlArgs
-        ///         {
-        ///             InstanceId = "ins-xxxxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ins-xxxxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceVncUrlResult> Invoke(GetInstanceVncUrlInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceVncUrlResult>("tencentcloud:Cvm/getInstanceVncUrl:getInstanceVncUrl", args ?? new GetInstanceVncUrlInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceVncUrlResult>("tencentcloud:Cvm/getInstanceVncUrl:getInstanceVncUrl", args ?? new GetInstanceVncUrlInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceVncUrlArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceVncUrlArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID. To obtain the instance IDs, you can call `DescribeInstances` and look for `InstanceId` in the response.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public GetInstanceVncUrlArgs()
         {
         }
+        public static new GetInstanceVncUrlArgs Empty => new GetInstanceVncUrlArgs();
     }
 
-    public sealed class GetInstanceVncUrlInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceVncUrlInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID. To obtain the instance IDs, you can call `DescribeInstances` and look for `InstanceId` in the response.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public GetInstanceVncUrlInvokeArgs()
         {
         }
+        public static new GetInstanceVncUrlInvokeArgs Empty => new GetInstanceVncUrlInvokeArgs();
     }
 
 

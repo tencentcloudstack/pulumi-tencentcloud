@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bucketVersion = new tencentcloud.Cos.BucketVersion("bucket_version", {
+ * const bucketVersion = new tencentcloud.cos.BucketVersion("bucketVersion", {
  *     bucket: "mycos-1258798060",
  *     status: "Enabled",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cos bucket_version can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cos/bucketVersion:BucketVersion bucket_version bucket_id
+ * $ pulumi import tencentcloud:Cos/bucketVersion:BucketVersion bucket_version bucket_id
  * ```
  */
 export class BucketVersion extends pulumi.CustomResource {

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class AiRecognitionTemplateAsrFullTextConfigureGetArgs : Pulumi.ResourceArgs
+    public sealed class AiRecognitionTemplateAsrFullTextConfigureGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Generated subtitle file format, if left blank or blank string means no subtitle file will be generated, optional value:vtt: Generate WebVTT subtitle files.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public AiRecognitionTemplateAsrFullTextConfigureGetArgs()
         {
         }
+        public static new AiRecognitionTemplateAsrFullTextConfigureGetArgs Empty => new AiRecognitionTemplateAsrFullTextConfigureGetArgs();
     }
 }

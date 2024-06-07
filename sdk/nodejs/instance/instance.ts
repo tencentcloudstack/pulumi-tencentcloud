@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -17,7 +18,7 @@ import * as utilities from "../utilities";
  * CVM instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Instance/instance:Instance foo ins-2qol3a80
+ * $ pulumi import tencentcloud:Instance/instance:Instance foo ins-2qol3a80
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -73,6 +74,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly cdhInstanceType!: pulumi.Output<string | undefined>;
     /**
+     * The number of CPU cores of the instance.
+     */
+    public /*out*/ readonly cpu!: pulumi.Output<number>;
+    /**
      * Create time of the instance.
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
@@ -109,11 +114,11 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly imageId!: pulumi.Output<string>;
     /**
-     * The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID` and `CDHPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
+     * The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDHPAID` and `CDCPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
      */
     public readonly instanceChargeType!: pulumi.Output<string | undefined>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60`.
      */
     public readonly instanceChargeTypePrepaidPeriod!: pulumi.Output<number | undefined>;
     /**
@@ -157,13 +162,21 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
      *
-     * @deprecated Please use `key_ids` instead.
+     * @deprecated Please use `keyIds` instead.
      */
     public readonly keyName!: pulumi.Output<string>;
+    /**
+     * Instance memory capacity, unit in GB.
+     */
+    public /*out*/ readonly memory!: pulumi.Output<number>;
     /**
      * A list of orderly security group IDs to associate with.
      */
     public readonly orderlySecurityGroups!: pulumi.Output<string[]>;
+    /**
+     * Instance os name.
+     */
+    public /*out*/ readonly osName!: pulumi.Output<string>;
     /**
      * Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
      */
@@ -191,7 +204,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
      *
-     * @deprecated It will be deprecated. Use `orderly_security_groups` instead.
+     * @deprecated It will be deprecated. Use `orderlySecurityGroups` instead.
      */
     public readonly securityGroups!: pulumi.Output<string[]>;
     /**
@@ -235,6 +248,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly userDataRaw!: pulumi.Output<string | undefined>;
     /**
+     * Globally unique ID of the instance.
+     */
+    public /*out*/ readonly uuid!: pulumi.Output<string>;
+    /**
      * The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.
      */
     public readonly vpcId!: pulumi.Output<string>;
@@ -258,6 +275,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["camRoleName"] = state ? state.camRoleName : undefined;
             resourceInputs["cdhHostId"] = state ? state.cdhHostId : undefined;
             resourceInputs["cdhInstanceType"] = state ? state.cdhInstanceType : undefined;
+            resourceInputs["cpu"] = state ? state.cpu : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["dataDisks"] = state ? state.dataDisks : undefined;
             resourceInputs["disableApiTermination"] = state ? state.disableApiTermination : undefined;
@@ -279,7 +297,9 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["keepImageLogin"] = state ? state.keepImageLogin : undefined;
             resourceInputs["keyIds"] = state ? state.keyIds : undefined;
             resourceInputs["keyName"] = state ? state.keyName : undefined;
+            resourceInputs["memory"] = state ? state.memory : undefined;
             resourceInputs["orderlySecurityGroups"] = state ? state.orderlySecurityGroups : undefined;
+            resourceInputs["osName"] = state ? state.osName : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["placementGroupId"] = state ? state.placementGroupId : undefined;
             resourceInputs["privateIp"] = state ? state.privateIp : undefined;
@@ -297,6 +317,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["userData"] = state ? state.userData : undefined;
             resourceInputs["userDataRaw"] = state ? state.userDataRaw : undefined;
+            resourceInputs["uuid"] = state ? state.uuid : undefined;
             resourceInputs["vpcId"] = state ? state.vpcId : undefined;
         } else {
             const args = argsOrState as InstanceArgs | undefined;
@@ -331,7 +352,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["keyIds"] = args ? args.keyIds : undefined;
             resourceInputs["keyName"] = args ? args.keyName : undefined;
             resourceInputs["orderlySecurityGroups"] = args ? args.orderlySecurityGroups : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["placementGroupId"] = args ? args.placementGroupId : undefined;
             resourceInputs["privateIp"] = args ? args.privateIp : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
@@ -348,12 +369,18 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["userData"] = args ? args.userData : undefined;
             resourceInputs["userDataRaw"] = args ? args.userDataRaw : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
+            resourceInputs["cpu"] = undefined /*out*/;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["expiredTime"] = undefined /*out*/;
             resourceInputs["instanceStatus"] = undefined /*out*/;
+            resourceInputs["memory"] = undefined /*out*/;
+            resourceInputs["osName"] = undefined /*out*/;
             resourceInputs["publicIp"] = undefined /*out*/;
+            resourceInputs["uuid"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Instance.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -386,6 +413,10 @@ export interface InstanceState {
      * Type of instance created on cdh, the value of this parameter is in the format of CDH_XCXG based on the number of CPU cores and memory capacity. Note: it only works when instanceChargeType is set to `CDHPAID`.
      */
     cdhInstanceType?: pulumi.Input<string>;
+    /**
+     * The number of CPU cores of the instance.
+     */
+    cpu?: pulumi.Input<number>;
     /**
      * Create time of the instance.
      */
@@ -423,11 +454,11 @@ export interface InstanceState {
      */
     imageId?: pulumi.Input<string>;
     /**
-     * The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID` and `CDHPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
+     * The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDHPAID` and `CDCPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
      */
     instanceChargeType?: pulumi.Input<string>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60`.
      */
     instanceChargeTypePrepaidPeriod?: pulumi.Input<number>;
     /**
@@ -471,13 +502,21 @@ export interface InstanceState {
     /**
      * Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
      *
-     * @deprecated Please use `key_ids` instead.
+     * @deprecated Please use `keyIds` instead.
      */
     keyName?: pulumi.Input<string>;
+    /**
+     * Instance memory capacity, unit in GB.
+     */
+    memory?: pulumi.Input<number>;
     /**
      * A list of orderly security group IDs to associate with.
      */
     orderlySecurityGroups?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Instance os name.
+     */
+    osName?: pulumi.Input<string>;
     /**
      * Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
      */
@@ -505,7 +544,7 @@ export interface InstanceState {
     /**
      * It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
      *
-     * @deprecated It will be deprecated. Use `orderly_security_groups` instead.
+     * @deprecated It will be deprecated. Use `orderlySecurityGroups` instead.
      */
     securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -548,6 +587,10 @@ export interface InstanceState {
      * The user data to be injected into this instance, in plain text. Conflicts with `userData`. Up to 16 KB after base64 encoded.
      */
     userDataRaw?: pulumi.Input<string>;
+    /**
+     * Globally unique ID of the instance.
+     */
+    uuid?: pulumi.Input<string>;
     /**
      * The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.
      */
@@ -611,11 +654,11 @@ export interface InstanceArgs {
      */
     imageId: pulumi.Input<string>;
     /**
-     * The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID` and `CDHPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
+     * The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDHPAID` and `CDCPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
      */
     instanceChargeType?: pulumi.Input<string>;
     /**
-     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+     * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60`.
      */
     instanceChargeTypePrepaidPeriod?: pulumi.Input<number>;
     /**
@@ -655,7 +698,7 @@ export interface InstanceArgs {
     /**
      * Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
      *
-     * @deprecated Please use `key_ids` instead.
+     * @deprecated Please use `keyIds` instead.
      */
     keyName?: pulumi.Input<string>;
     /**
@@ -685,7 +728,7 @@ export interface InstanceArgs {
     /**
      * It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
      *
-     * @deprecated It will be deprecated. Use `orderly_security_groups` instead.
+     * @deprecated It will be deprecated. Use `orderlySecurityGroups` instead.
      */
     securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
     /**

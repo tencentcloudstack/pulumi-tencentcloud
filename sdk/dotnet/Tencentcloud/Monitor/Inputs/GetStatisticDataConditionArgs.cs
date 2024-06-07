@@ -11,16 +11,26 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class GetStatisticDataConditionInputArgs : Pulumi.ResourceArgs
+    public sealed class GetStatisticDataConditionInputArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Dimension.
+        /// </summary>
         [Input("key", required: true)]
         public Input<string> Key { get; set; } = null!;
 
+        /// <summary>
+        /// Operator. Valid values: eq (equal to), ne (not equal to), in.
+        /// </summary>
         [Input("operator", required: true)]
         public Input<string> Operator { get; set; } = null!;
 
         [Input("values", required: true)]
         private InputList<string>? _values;
+
+        /// <summary>
+        /// Dimension value. If Operator is eq or ne, only the first element will be used.
+        /// </summary>
         public InputList<string> Values
         {
             get => _values ?? (_values = new InputList<string>());
@@ -30,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public GetStatisticDataConditionInputArgs()
         {
         }
+        public static new GetStatisticDataConditionInputArgs Empty => new GetStatisticDataConditionInputArgs();
     }
 }

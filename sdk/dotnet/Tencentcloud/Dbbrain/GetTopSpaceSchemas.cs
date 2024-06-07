@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain top_space_schemas
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topSpaceSchemas = Tencentcloud.Dbbrain.GetTopSpaceSchemas.Invoke(new()
         ///     {
-        ///         var topSpaceSchemas = Output.Create(Tencentcloud.Dbbrain.GetTopSpaceSchemas.InvokeAsync(new Tencentcloud.Dbbrain.GetTopSpaceSchemasArgs
-        ///         {
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             SortBy = "DataLength",
-        ///         }));
-        ///     }
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         SortBy = "DataLength",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTopSpaceSchemasResult> InvokeAsync(GetTopSpaceSchemasArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTopSpaceSchemasResult>("tencentcloud:Dbbrain/getTopSpaceSchemas:getTopSpaceSchemas", args ?? new GetTopSpaceSchemasArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopSpaceSchemasResult>("tencentcloud:Dbbrain/getTopSpaceSchemas:getTopSpaceSchemas", args ?? new GetTopSpaceSchemasArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain top_space_schemas
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topSpaceSchemas = Tencentcloud.Dbbrain.GetTopSpaceSchemas.Invoke(new()
         ///     {
-        ///         var topSpaceSchemas = Output.Create(Tencentcloud.Dbbrain.GetTopSpaceSchemas.InvokeAsync(new Tencentcloud.Dbbrain.GetTopSpaceSchemasArgs
-        ///         {
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             SortBy = "DataLength",
-        ///         }));
-        ///     }
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         SortBy = "DataLength",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTopSpaceSchemasResult> Invoke(GetTopSpaceSchemasInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTopSpaceSchemasResult>("tencentcloud:Dbbrain/getTopSpaceSchemas:getTopSpaceSchemas", args ?? new GetTopSpaceSchemasInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTopSpaceSchemasResult>("tencentcloud:Dbbrain/getTopSpaceSchemas:getTopSpaceSchemas", args ?? new GetTopSpaceSchemasInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTopSpaceSchemasArgs : Pulumi.InvokeArgs
+    public sealed class GetTopSpaceSchemasArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -111,9 +105,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetTopSpaceSchemasArgs()
         {
         }
+        public static new GetTopSpaceSchemasArgs Empty => new GetTopSpaceSchemasArgs();
     }
 
-    public sealed class GetTopSpaceSchemasInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTopSpaceSchemasInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -148,6 +143,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetTopSpaceSchemasInvokeArgs()
         {
         }
+        public static new GetTopSpaceSchemasInvokeArgs Empty => new GetTopSpaceSchemasInvokeArgs();
     }
 
 

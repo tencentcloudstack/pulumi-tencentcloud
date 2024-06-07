@@ -15,75 +15,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var instance = new Tencentcloud.Mariadb.Instance("instance", new()
     ///     {
-    ///         var instance = new Tencentcloud.Mariadb.Instance("instance", new Tencentcloud.Mariadb.InstanceArgs
+    ///         AutoRenewFlag = 1,
+    ///         DbVersionId = "8.0",
+    ///         DcnInstanceId = "",
+    ///         DcnRegion = "",
+    ///         InitParams = new[]
     ///         {
-    ///             AutoRenewFlag = 1,
-    ///             DbVersionId = "8.0",
-    ///             DcnInstanceId = "",
-    ///             DcnRegion = "",
-    ///             InitParams = 
+    ///             new Tencentcloud.Mariadb.Inputs.InstanceInitParamArgs
     ///             {
-    ///                 new Tencentcloud.Mariadb.Inputs.InstanceInitParamArgs
-    ///                 {
-    ///                     Param = "character_set_server",
-    ///                     Value = "utf8mb4",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.InstanceInitParamArgs
-    ///                 {
-    ///                     Param = "lower_case_table_names",
-    ///                     Value = "0",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.InstanceInitParamArgs
-    ///                 {
-    ///                     Param = "innodb_page_size",
-    ///                     Value = "16384",
-    ///                 },
-    ///                 new Tencentcloud.Mariadb.Inputs.InstanceInitParamArgs
-    ///                 {
-    ///                     Param = "sync_mode",
-    ///                     Value = "1",
-    ///                 },
+    ///                 Param = "character_set_server",
+    ///                 Value = "utf8mb4",
     ///             },
-    ///             InstanceName = "terraform-test",
-    ///             Ipv6Flag = 0,
-    ///             Memory = 8,
-    ///             NodeCount = 2,
-    ///             Period = 1,
-    ///             Storage = 10,
-    ///             SubnetId = "subnet-3ku415by",
-    ///             Tags = 
+    ///             new Tencentcloud.Mariadb.Inputs.InstanceInitParamArgs
     ///             {
-    ///                 { "createby", "terrafrom-2" },
+    ///                 Param = "lower_case_table_names",
+    ///                 Value = "0",
     ///             },
-    ///             VpcId = "vpc-ii1jfbhl",
-    ///             Zones = 
+    ///             new Tencentcloud.Mariadb.Inputs.InstanceInitParamArgs
     ///             {
-    ///                 "ap-guangzhou-3",
+    ///                 Param = "innodb_page_size",
+    ///                 Value = "16384",
     ///             },
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Mariadb.Inputs.InstanceInitParamArgs
+    ///             {
+    ///                 Param = "sync_mode",
+    ///                 Value = "1",
+    ///             },
+    ///         },
+    ///         InstanceName = "terraform-test",
+    ///         Ipv6Flag = 0,
+    ///         Memory = 8,
+    ///         NodeCount = 2,
+    ///         Period = 1,
+    ///         Storage = 10,
+    ///         SubnetId = "subnet-3ku415by",
+    ///         Tags = 
+    ///         {
+    ///             { "createby", "terrafrom-2" },
+    ///         },
+    ///         VpcId = "vpc-ii1jfbhl",
+    ///         Zones = new[]
+    ///         {
+    ///             "ap-guangzhou-3",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mariadb tencentcloud_mariadb_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mariadb/instance:Instance instance tdsql-4pzs5b67
+    /// $ pulumi import tencentcloud:Mariadb/instance:Instance instance tdsql-4pzs5b67
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the application to which the instance belongs.
@@ -454,7 +455,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Automatic renewal flag, 1: automatic renewal, 2: no automatic renewal.
@@ -609,9 +610,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the application to which the instance belongs.
@@ -970,5 +972,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

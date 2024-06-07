@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const renewCkafkaInstance = new tencentcloud.Ckafka.RenewInstance("renew_ckafka_instance", {
+ * const renewCkafkaInstance = new tencentcloud.ckafka.RenewInstance("renewCkafkaInstance", {
  *     instanceId: "InstanceId",
  *     timeSpan: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RenewInstance extends pulumi.CustomResource {
     /**

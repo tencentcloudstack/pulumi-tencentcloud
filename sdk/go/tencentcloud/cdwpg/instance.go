@@ -7,77 +7,82 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cdwpg instance
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cdwpg"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdwpg"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cdwpg"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cdwpg.NewInstance(ctx, "instance", &Cdwpg.InstanceArgs{
-// 			AdminPassword: pulumi.String("xxxxxx"),
-// 			ChargeProperties: &cdwpg.InstanceChargePropertiesArgs{
-// 				ChargeType: pulumi.String("POSTPAID_BY_HOUR"),
-// 				RenewFlag:  pulumi.Int(0),
-// 				TimeSpan:   pulumi.Int(1),
-// 				TimeUnit:   pulumi.String("h"),
-// 			},
-// 			InstanceName: pulumi.String("test_cdwpg"),
-// 			Resources: cdwpg.InstanceResourceArray{
-// 				&cdwpg.InstanceResourceArgs{
-// 					Count: pulumi.Int(2),
-// 					DiskSpec: &cdwpg.InstanceResourceDiskSpecArgs{
-// 						DiskCount: pulumi.Int(1),
-// 						DiskSize:  pulumi.Int(200),
-// 						DiskType:  pulumi.String("CLOUD_HSSD"),
-// 					},
-// 					SpecName: pulumi.String("S_4_16_H_CN"),
-// 					Type:     pulumi.String("cn"),
-// 				},
-// 				&cdwpg.InstanceResourceArgs{
-// 					Count: pulumi.Int(2),
-// 					DiskSpec: &cdwpg.InstanceResourceDiskSpecArgs{
-// 						DiskCount: pulumi.Int(10),
-// 						DiskSize:  pulumi.Int(20),
-// 						DiskType:  pulumi.String("CLOUD_HSSD"),
-// 					},
-// 					SpecName: pulumi.String("S_4_16_H_CN"),
-// 					Type:     pulumi.String("dn"),
-// 				},
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"tagKey": pulumi.Any("tagValue"),
-// 			},
-// 			UserSubnetId: pulumi.String("subnet-xxxxxx"),
-// 			UserVpcId:    pulumi.String("vpc-xxxxxx"),
-// 			Zone:         pulumi.String("ap-guangzhou-6"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cdwpg.NewInstance(ctx, "instance", &Cdwpg.InstanceArgs{
+//				AdminPassword: pulumi.String("xxxxxx"),
+//				ChargeProperties: &cdwpg.InstanceChargePropertiesArgs{
+//					ChargeType: pulumi.String("POSTPAID_BY_HOUR"),
+//					RenewFlag:  pulumi.Int(0),
+//					TimeSpan:   pulumi.Int(1),
+//					TimeUnit:   pulumi.String("h"),
+//				},
+//				InstanceName: pulumi.String("test_cdwpg"),
+//				Resources: cdwpg.InstanceResourceArray{
+//					&cdwpg.InstanceResourceArgs{
+//						Count: pulumi.Int(2),
+//						DiskSpec: &cdwpg.InstanceResourceDiskSpecArgs{
+//							DiskCount: pulumi.Int(1),
+//							DiskSize:  pulumi.Int(200),
+//							DiskType:  pulumi.String("CLOUD_HSSD"),
+//						},
+//						SpecName: pulumi.String("S_4_16_H_CN"),
+//						Type:     pulumi.String("cn"),
+//					},
+//					&cdwpg.InstanceResourceArgs{
+//						Count: pulumi.Int(2),
+//						DiskSpec: &cdwpg.InstanceResourceDiskSpecArgs{
+//							DiskCount: pulumi.Int(10),
+//							DiskSize:  pulumi.Int(20),
+//							DiskType:  pulumi.String("CLOUD_HSSD"),
+//						},
+//						SpecName: pulumi.String("S_4_16_H_CN"),
+//						Type:     pulumi.String("dn"),
+//					},
+//				},
+//				Tags: pulumi.Map{
+//					"tagKey": pulumi.Any("tagValue"),
+//				},
+//				UserSubnetId: pulumi.String("subnet-xxxxxx"),
+//				UserVpcId:    pulumi.String("vpc-xxxxxx"),
+//				Zone:         pulumi.String("ap-guangzhou-6"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cdwpg instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cdwpg/instance:Instance instance instance_id
+// $ pulumi import tencentcloud:Cdwpg/instance:Instance instance instance_id
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -128,7 +133,14 @@ func NewInstance(ctx *pulumi.Context,
 	if args.Zone == nil {
 		return nil, errors.New("invalid value for required argument 'Zone'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.AdminPassword != nil {
+		args.AdminPassword = pulumi.ToSecret(args.AdminPassword).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"adminPassword",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Cdwpg/instance:Instance", name, args, &resource, opts...)
 	if err != nil {
@@ -257,7 +269,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -282,7 +294,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

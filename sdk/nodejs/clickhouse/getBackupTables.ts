@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const backupTables = pulumi.output(tencentcloud.Clickhouse.getBackupTables({
+ * const backupTables = tencentcloud.Clickhouse.getBackupTables({
  *     instanceId: "cdwch-xxxxxx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBackupTables(args: GetBackupTablesArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupTablesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Clickhouse/getBackupTables:getBackupTables", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetBackupTablesResult {
     readonly instanceId: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of clickhouse backup tables
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const backupTables = tencentcloud.Clickhouse.getBackupTables({
+ *     instanceId: "cdwch-xxxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBackupTablesOutput(args: GetBackupTablesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBackupTablesResult> {
-    return pulumi.output(args).apply(a => getBackupTables(a, opts))
+    return pulumi.output(args).apply((a: any) => getBackupTables(a, opts))
 }
 
 /**

@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orgNode = new tencentcloud.Organization.OrgNode("org_node", {
+ * const orgNode = new tencentcloud.organization.OrgNode("orgNode", {
  *     parentNodeId: 2003721,
  *     remark: "for terraform test",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * organization org_node can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Organization/orgNode:OrgNode org_node orgNode_id
+ * $ pulumi import tencentcloud:Organization/orgNode:OrgNode org_node orgNode_id
  * ```
  */
 export class OrgNode extends pulumi.CustomResource {

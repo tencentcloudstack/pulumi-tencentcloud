@@ -5,50 +5,156 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./acl";
-export * from "./aclRule";
-export * from "./connectResource";
-export * from "./consumerGroup";
-export * from "./consumerGroupModifyOffset";
-export * from "./datahubTask";
-export * from "./datahubTopic";
-export * from "./getAcls";
-export * from "./getConnectResource";
-export * from "./getDatahubGroupOffsets";
-export * from "./getDatahubTask";
-export * from "./getDatahubTopic";
-export * from "./getGroup";
-export * from "./getGroupInfo";
-export * from "./getGroupOffsets";
-export * from "./getInstances";
-export * from "./getRegion";
-export * from "./getTaskStatus";
-export * from "./getTopicFlowRanking";
-export * from "./getTopicProduceConnection";
-export * from "./getTopicSubscribeGroup";
-export * from "./getTopicSyncReplica";
-export * from "./getTopics";
-export * from "./getUsers";
-export * from "./getZone";
-export * from "./instance";
-export * from "./renewInstance";
-export * from "./route";
-export * from "./topic";
-export * from "./user";
+export { AclArgs, AclState } from "./acl";
+export type Acl = import("./acl").Acl;
+export const Acl: typeof import("./acl").Acl = null as any;
+utilities.lazyLoad(exports, ["Acl"], () => require("./acl"));
 
-// Import resources to register:
-import { Acl } from "./acl";
-import { AclRule } from "./aclRule";
-import { ConnectResource } from "./connectResource";
-import { ConsumerGroup } from "./consumerGroup";
-import { ConsumerGroupModifyOffset } from "./consumerGroupModifyOffset";
-import { DatahubTask } from "./datahubTask";
-import { DatahubTopic } from "./datahubTopic";
-import { Instance } from "./instance";
-import { RenewInstance } from "./renewInstance";
-import { Route } from "./route";
-import { Topic } from "./topic";
-import { User } from "./user";
+export { AclRuleArgs, AclRuleState } from "./aclRule";
+export type AclRule = import("./aclRule").AclRule;
+export const AclRule: typeof import("./aclRule").AclRule = null as any;
+utilities.lazyLoad(exports, ["AclRule"], () => require("./aclRule"));
+
+export { ConnectResourceArgs, ConnectResourceState } from "./connectResource";
+export type ConnectResource = import("./connectResource").ConnectResource;
+export const ConnectResource: typeof import("./connectResource").ConnectResource = null as any;
+utilities.lazyLoad(exports, ["ConnectResource"], () => require("./connectResource"));
+
+export { ConsumerGroupArgs, ConsumerGroupState } from "./consumerGroup";
+export type ConsumerGroup = import("./consumerGroup").ConsumerGroup;
+export const ConsumerGroup: typeof import("./consumerGroup").ConsumerGroup = null as any;
+utilities.lazyLoad(exports, ["ConsumerGroup"], () => require("./consumerGroup"));
+
+export { ConsumerGroupModifyOffsetArgs, ConsumerGroupModifyOffsetState } from "./consumerGroupModifyOffset";
+export type ConsumerGroupModifyOffset = import("./consumerGroupModifyOffset").ConsumerGroupModifyOffset;
+export const ConsumerGroupModifyOffset: typeof import("./consumerGroupModifyOffset").ConsumerGroupModifyOffset = null as any;
+utilities.lazyLoad(exports, ["ConsumerGroupModifyOffset"], () => require("./consumerGroupModifyOffset"));
+
+export { DatahubTaskArgs, DatahubTaskState } from "./datahubTask";
+export type DatahubTask = import("./datahubTask").DatahubTask;
+export const DatahubTask: typeof import("./datahubTask").DatahubTask = null as any;
+utilities.lazyLoad(exports, ["DatahubTask"], () => require("./datahubTask"));
+
+export { DatahubTopicArgs, DatahubTopicState } from "./datahubTopic";
+export type DatahubTopic = import("./datahubTopic").DatahubTopic;
+export const DatahubTopic: typeof import("./datahubTopic").DatahubTopic = null as any;
+utilities.lazyLoad(exports, ["DatahubTopic"], () => require("./datahubTopic"));
+
+export { GetAclsArgs, GetAclsResult, GetAclsOutputArgs } from "./getAcls";
+export const getAcls: typeof import("./getAcls").getAcls = null as any;
+export const getAclsOutput: typeof import("./getAcls").getAclsOutput = null as any;
+utilities.lazyLoad(exports, ["getAcls","getAclsOutput"], () => require("./getAcls"));
+
+export { GetConnectResourceArgs, GetConnectResourceResult, GetConnectResourceOutputArgs } from "./getConnectResource";
+export const getConnectResource: typeof import("./getConnectResource").getConnectResource = null as any;
+export const getConnectResourceOutput: typeof import("./getConnectResource").getConnectResourceOutput = null as any;
+utilities.lazyLoad(exports, ["getConnectResource","getConnectResourceOutput"], () => require("./getConnectResource"));
+
+export { GetDatahubGroupOffsetsArgs, GetDatahubGroupOffsetsResult, GetDatahubGroupOffsetsOutputArgs } from "./getDatahubGroupOffsets";
+export const getDatahubGroupOffsets: typeof import("./getDatahubGroupOffsets").getDatahubGroupOffsets = null as any;
+export const getDatahubGroupOffsetsOutput: typeof import("./getDatahubGroupOffsets").getDatahubGroupOffsetsOutput = null as any;
+utilities.lazyLoad(exports, ["getDatahubGroupOffsets","getDatahubGroupOffsetsOutput"], () => require("./getDatahubGroupOffsets"));
+
+export { GetDatahubTaskArgs, GetDatahubTaskResult, GetDatahubTaskOutputArgs } from "./getDatahubTask";
+export const getDatahubTask: typeof import("./getDatahubTask").getDatahubTask = null as any;
+export const getDatahubTaskOutput: typeof import("./getDatahubTask").getDatahubTaskOutput = null as any;
+utilities.lazyLoad(exports, ["getDatahubTask","getDatahubTaskOutput"], () => require("./getDatahubTask"));
+
+export { GetDatahubTopicArgs, GetDatahubTopicResult, GetDatahubTopicOutputArgs } from "./getDatahubTopic";
+export const getDatahubTopic: typeof import("./getDatahubTopic").getDatahubTopic = null as any;
+export const getDatahubTopicOutput: typeof import("./getDatahubTopic").getDatahubTopicOutput = null as any;
+utilities.lazyLoad(exports, ["getDatahubTopic","getDatahubTopicOutput"], () => require("./getDatahubTopic"));
+
+export { GetGroupArgs, GetGroupResult, GetGroupOutputArgs } from "./getGroup";
+export const getGroup: typeof import("./getGroup").getGroup = null as any;
+export const getGroupOutput: typeof import("./getGroup").getGroupOutput = null as any;
+utilities.lazyLoad(exports, ["getGroup","getGroupOutput"], () => require("./getGroup"));
+
+export { GetGroupInfoArgs, GetGroupInfoResult, GetGroupInfoOutputArgs } from "./getGroupInfo";
+export const getGroupInfo: typeof import("./getGroupInfo").getGroupInfo = null as any;
+export const getGroupInfoOutput: typeof import("./getGroupInfo").getGroupInfoOutput = null as any;
+utilities.lazyLoad(exports, ["getGroupInfo","getGroupInfoOutput"], () => require("./getGroupInfo"));
+
+export { GetGroupOffsetsArgs, GetGroupOffsetsResult, GetGroupOffsetsOutputArgs } from "./getGroupOffsets";
+export const getGroupOffsets: typeof import("./getGroupOffsets").getGroupOffsets = null as any;
+export const getGroupOffsetsOutput: typeof import("./getGroupOffsets").getGroupOffsetsOutput = null as any;
+utilities.lazyLoad(exports, ["getGroupOffsets","getGroupOffsetsOutput"], () => require("./getGroupOffsets"));
+
+export { GetInstancesArgs, GetInstancesResult, GetInstancesOutputArgs } from "./getInstances";
+export const getInstances: typeof import("./getInstances").getInstances = null as any;
+export const getInstancesOutput: typeof import("./getInstances").getInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstances","getInstancesOutput"], () => require("./getInstances"));
+
+export { GetRegionArgs, GetRegionResult, GetRegionOutputArgs } from "./getRegion";
+export const getRegion: typeof import("./getRegion").getRegion = null as any;
+export const getRegionOutput: typeof import("./getRegion").getRegionOutput = null as any;
+utilities.lazyLoad(exports, ["getRegion","getRegionOutput"], () => require("./getRegion"));
+
+export { GetTaskStatusArgs, GetTaskStatusResult, GetTaskStatusOutputArgs } from "./getTaskStatus";
+export const getTaskStatus: typeof import("./getTaskStatus").getTaskStatus = null as any;
+export const getTaskStatusOutput: typeof import("./getTaskStatus").getTaskStatusOutput = null as any;
+utilities.lazyLoad(exports, ["getTaskStatus","getTaskStatusOutput"], () => require("./getTaskStatus"));
+
+export { GetTopicFlowRankingArgs, GetTopicFlowRankingResult, GetTopicFlowRankingOutputArgs } from "./getTopicFlowRanking";
+export const getTopicFlowRanking: typeof import("./getTopicFlowRanking").getTopicFlowRanking = null as any;
+export const getTopicFlowRankingOutput: typeof import("./getTopicFlowRanking").getTopicFlowRankingOutput = null as any;
+utilities.lazyLoad(exports, ["getTopicFlowRanking","getTopicFlowRankingOutput"], () => require("./getTopicFlowRanking"));
+
+export { GetTopicProduceConnectionArgs, GetTopicProduceConnectionResult, GetTopicProduceConnectionOutputArgs } from "./getTopicProduceConnection";
+export const getTopicProduceConnection: typeof import("./getTopicProduceConnection").getTopicProduceConnection = null as any;
+export const getTopicProduceConnectionOutput: typeof import("./getTopicProduceConnection").getTopicProduceConnectionOutput = null as any;
+utilities.lazyLoad(exports, ["getTopicProduceConnection","getTopicProduceConnectionOutput"], () => require("./getTopicProduceConnection"));
+
+export { GetTopicSubscribeGroupArgs, GetTopicSubscribeGroupResult, GetTopicSubscribeGroupOutputArgs } from "./getTopicSubscribeGroup";
+export const getTopicSubscribeGroup: typeof import("./getTopicSubscribeGroup").getTopicSubscribeGroup = null as any;
+export const getTopicSubscribeGroupOutput: typeof import("./getTopicSubscribeGroup").getTopicSubscribeGroupOutput = null as any;
+utilities.lazyLoad(exports, ["getTopicSubscribeGroup","getTopicSubscribeGroupOutput"], () => require("./getTopicSubscribeGroup"));
+
+export { GetTopicSyncReplicaArgs, GetTopicSyncReplicaResult, GetTopicSyncReplicaOutputArgs } from "./getTopicSyncReplica";
+export const getTopicSyncReplica: typeof import("./getTopicSyncReplica").getTopicSyncReplica = null as any;
+export const getTopicSyncReplicaOutput: typeof import("./getTopicSyncReplica").getTopicSyncReplicaOutput = null as any;
+utilities.lazyLoad(exports, ["getTopicSyncReplica","getTopicSyncReplicaOutput"], () => require("./getTopicSyncReplica"));
+
+export { GetTopicsArgs, GetTopicsResult, GetTopicsOutputArgs } from "./getTopics";
+export const getTopics: typeof import("./getTopics").getTopics = null as any;
+export const getTopicsOutput: typeof import("./getTopics").getTopicsOutput = null as any;
+utilities.lazyLoad(exports, ["getTopics","getTopicsOutput"], () => require("./getTopics"));
+
+export { GetUsersArgs, GetUsersResult, GetUsersOutputArgs } from "./getUsers";
+export const getUsers: typeof import("./getUsers").getUsers = null as any;
+export const getUsersOutput: typeof import("./getUsers").getUsersOutput = null as any;
+utilities.lazyLoad(exports, ["getUsers","getUsersOutput"], () => require("./getUsers"));
+
+export { GetZoneArgs, GetZoneResult, GetZoneOutputArgs } from "./getZone";
+export const getZone: typeof import("./getZone").getZone = null as any;
+export const getZoneOutput: typeof import("./getZone").getZoneOutput = null as any;
+utilities.lazyLoad(exports, ["getZone","getZoneOutput"], () => require("./getZone"));
+
+export { InstanceArgs, InstanceState } from "./instance";
+export type Instance = import("./instance").Instance;
+export const Instance: typeof import("./instance").Instance = null as any;
+utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { RenewInstanceArgs, RenewInstanceState } from "./renewInstance";
+export type RenewInstance = import("./renewInstance").RenewInstance;
+export const RenewInstance: typeof import("./renewInstance").RenewInstance = null as any;
+utilities.lazyLoad(exports, ["RenewInstance"], () => require("./renewInstance"));
+
+export { RouteArgs, RouteState } from "./route";
+export type Route = import("./route").Route;
+export const Route: typeof import("./route").Route = null as any;
+utilities.lazyLoad(exports, ["Route"], () => require("./route"));
+
+export { TopicArgs, TopicState } from "./topic";
+export type Topic = import("./topic").Topic;
+export const Topic: typeof import("./topic").Topic = null as any;
+utilities.lazyLoad(exports, ["Topic"], () => require("./topic"));
+
+export { UserArgs, UserState } from "./user";
+export type User = import("./user").User;
+export const User: typeof import("./user").User = null as any;
+utilities.lazyLoad(exports, ["User"], () => require("./user"));
+
 
 const _module = {
     version: utilities.getVersion(),

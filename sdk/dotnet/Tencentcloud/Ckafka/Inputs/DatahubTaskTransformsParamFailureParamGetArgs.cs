@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskTransformsParamFailureParamGetArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskTransformsParamFailureParamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// dlq type, CKAFKA|TOPIC.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskTransformsParamFailureParamGetArgs()
         {
         }
+        public static new DatahubTaskTransformsParamFailureParamGetArgs Empty => new DatahubTaskTransformsParamFailureParamGetArgs();
     }
 }

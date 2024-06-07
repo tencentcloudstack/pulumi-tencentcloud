@@ -7,41 +7,47 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ssl completeCertificate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewCompleteCertificateOperation(ctx, "completeCertificate", &Ssl.CompleteCertificateOperationArgs{
-// 			CertificateId: pulumi.String("9Bfe1IBR"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.NewCompleteCertificateOperation(ctx, "completeCertificate", &Ssl.CompleteCertificateOperationArgs{
+//				CertificateId: pulumi.String("9Bfe1IBR"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ssl complete_certificate can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssl/completeCertificateOperation:CompleteCertificateOperation complete_certificate complete_certificate_id
+// $ pulumi import tencentcloud:Ssl/completeCertificateOperation:CompleteCertificateOperation complete_certificate complete_certificate_id
 // ```
 type CompleteCertificateOperation struct {
 	pulumi.CustomResourceState
@@ -60,7 +66,7 @@ func NewCompleteCertificateOperation(ctx *pulumi.Context,
 	if args.CertificateId == nil {
 		return nil, errors.New("invalid value for required argument 'CertificateId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CompleteCertificateOperation
 	err := ctx.RegisterResource("tencentcloud:Ssl/completeCertificateOperation:CompleteCertificateOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -133,7 +139,7 @@ func (i *CompleteCertificateOperation) ToCompleteCertificateOperationOutputWithC
 // CompleteCertificateOperationArrayInput is an input type that accepts CompleteCertificateOperationArray and CompleteCertificateOperationArrayOutput values.
 // You can construct a concrete instance of `CompleteCertificateOperationArrayInput` via:
 //
-//          CompleteCertificateOperationArray{ CompleteCertificateOperationArgs{...} }
+//	CompleteCertificateOperationArray{ CompleteCertificateOperationArgs{...} }
 type CompleteCertificateOperationArrayInput interface {
 	pulumi.Input
 
@@ -158,7 +164,7 @@ func (i CompleteCertificateOperationArray) ToCompleteCertificateOperationArrayOu
 // CompleteCertificateOperationMapInput is an input type that accepts CompleteCertificateOperationMap and CompleteCertificateOperationMapOutput values.
 // You can construct a concrete instance of `CompleteCertificateOperationMapInput` via:
 //
-//          CompleteCertificateOperationMap{ "key": CompleteCertificateOperationArgs{...} }
+//	CompleteCertificateOperationMap{ "key": CompleteCertificateOperationArgs{...} }
 type CompleteCertificateOperationMapInput interface {
 	pulumi.Input
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Inputs
 {
 
-    public sealed class ClbDomainLoadBalancerSetArgs : Pulumi.ResourceArgs
+    public sealed class ClbDomainLoadBalancerSetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Unique ID of listener in LB.
@@ -82,5 +82,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Inputs
         public ClbDomainLoadBalancerSetArgs()
         {
         }
+        public static new ClbDomainLoadBalancerSetArgs Empty => new ClbDomainLoadBalancerSetArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Inputs
 {
 
-    public sealed class InstanceDbNodeSetGetArgs : Pulumi.ResourceArgs
+    public sealed class InstanceDbNodeSetGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicates node type, available values:`Primary`, `Standby`. Default: `Standby`.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Inputs
         public InstanceDbNodeSetGetArgs()
         {
         }
+        public static new InstanceDbNodeSetGetArgs Empty => new InstanceDbNodeSetGetArgs();
     }
 }

@@ -13,90 +13,81 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// <summary>
     /// Provides a resource to create a teo origin_group
     /// 
+    /// &gt; **NOTE:** Please note that `tencentcloud.Teo.OriginGroup` had to undergo incompatible changes in version v1.81.96.
+    /// 
     /// ## Example Usage
+    /// 
     /// ### Self origin group
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var basic = new Tencentcloud.Teo.OriginGroup("basic", new()
     ///     {
-    ///         var originGroup = new Tencentcloud.Teo.OriginGroup("originGroup", new Tencentcloud.Teo.OriginGroupArgs
+    ///         Records = new[]
     ///         {
-    ///             ConfigurationType = "weight",
-    ///             OriginGroupName = "test-group",
-    ///             OriginRecords = 
+    ///             new Tencentcloud.Teo.Inputs.OriginGroupRecordArgs
     ///             {
-    ///                 new Tencentcloud.Teo.Inputs.OriginGroupOriginRecordArgs
+    ///                 Private = true,
+    ///                 PrivateParameters = new[]
     ///                 {
-    ///                     Areas = {},
-    ///                     Port = 8080,
-    ///                     Private = false,
-    ///                     Record = "150.109.8.1",
-    ///                     Weight = 100,
+    ///                     new Tencentcloud.Teo.Inputs.OriginGroupRecordPrivateParameterArgs
+    ///                     {
+    ///                         Name = "SecretAccessKey",
+    ///                         Value = "test",
+    ///                     },
     ///                 },
+    ///                 Record = "tf-teo.xyz",
+    ///                 Type = "IP_DOMAIN",
+    ///                 Weight = 100,
     ///             },
-    ///             OriginType = "self",
-    ///             ZoneId = "zone-297z8rf93cfw",
-    ///         });
-    ///     }
+    ///         },
+    ///         Type = "GENERAL",
+    ///         ZoneId = "zone-197z8rf93cfw",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
-    /// ### Cos origin group
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var originGroup = new Tencentcloud.Teo.OriginGroup("originGroup", new Tencentcloud.Teo.OriginGroupArgs
-    ///         {
-    ///             ConfigurationType = "weight",
-    ///             OriginGroupName = "test",
-    ///             OriginRecords = 
-    ///             {
-    ///                 new Tencentcloud.Teo.Inputs.OriginGroupOriginRecordArgs
-    ///                 {
-    ///                     Areas = {},
-    ///                     Port = 0,
-    ///                     Private = true,
-    ///                     Record = "test-ruichaolin-1310708577.cos.ap-nanjing.myqcloud.com",
-    ///                     Weight = 100,
-    ///                 },
-    ///             },
-    ///             OriginType = "cos",
-    ///             ZoneId = "zone-2o3h21ed8bpu",
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
-    /// teo origin_group can be imported using the zone_id#originGroup_id, e.g. `
+    /// teo origin_group can be imported using the zone_id#originGroup_id, e.g.
+    /// 
+    /// `
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Teo/originGroup:OriginGroup origin_group zone-297z8rf93cfw#origin-4f8a30b2-3720-11ed-b66b-525400dceb86
+    /// $ pulumi import tencentcloud:Teo/originGroup:OriginGroup origin_group zone-297z8rf93cfw#origin-4f8a30b2-3720-11ed-b66b-525400dceb86
     /// ```
     /// 
-    ///  `
+    /// `
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/originGroup:OriginGroup")]
-    public partial class OriginGroup : Pulumi.CustomResource
+    public partial class OriginGroup : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
+        /// Origin site group creation time.
         /// </summary>
-        [Output("configurationType")]
-        public Output<string> ConfigurationType { get; private set; } = null!;
+        [Output("createTime")]
+        public Output<string> CreateTime { get; private set; } = null!;
+
+        /// <summary>
+        /// Back-to-origin Host Header, it only takes effect when type = HTTP is passed in. The rule engine modifies the Host Header configuration priority to be higher than the Host Header of the origin site group.
+        /// </summary>
+        [Output("hostHeader")]
+        public Output<string?> HostHeader { get; private set; } = null!;
+
+        /// <summary>
+        /// OriginGroup Name.
+        /// </summary>
+        [Output("name")]
+        public Output<string> Name { get; private set; } = null!;
 
         /// <summary>
         /// OriginGroup ID.
@@ -105,25 +96,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<string> OriginGroupId { get; private set; } = null!;
 
         /// <summary>
-        /// OriginGroup Name.
-        /// </summary>
-        [Output("originGroupName")]
-        public Output<string> OriginGroupName { get; private set; } = null!;
-
-        /// <summary>
         /// Origin site records.
         /// </summary>
-        [Output("originRecords")]
-        public Output<ImmutableArray<Outputs.OriginGroupOriginRecord>> OriginRecords { get; private set; } = null!;
+        [Output("records")]
+        public Output<ImmutableArray<Outputs.OriginGroupRecord>> Records { get; private set; } = null!;
 
         /// <summary>
-        /// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `third_party`: third party cos.
+        /// List of referenced instances of the origin site group.
         /// </summary>
-        [Output("originType")]
-        public Output<string> OriginType { get; private set; } = null!;
+        [Output("references")]
+        public Output<ImmutableArray<Outputs.OriginGroupReference>> References { get; private set; } = null!;
 
         /// <summary>
-        /// Last modification date.
+        /// Type of the origin site. Valid values:
+        /// </summary>
+        [Output("type")]
+        public Output<string> Type { get; private set; } = null!;
+
+        /// <summary>
+        /// Origin site group update time.
         /// </summary>
         [Output("updateTime")]
         public Output<string> UpdateTime { get; private set; } = null!;
@@ -179,37 +170,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
     }
 
-    public sealed class OriginGroupArgs : Pulumi.ResourceArgs
+    public sealed class OriginGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
+        /// Back-to-origin Host Header, it only takes effect when type = HTTP is passed in. The rule engine modifies the Host Header configuration priority to be higher than the Host Header of the origin site group.
         /// </summary>
-        [Input("configurationType", required: true)]
-        public Input<string> ConfigurationType { get; set; } = null!;
+        [Input("hostHeader")]
+        public Input<string>? HostHeader { get; set; }
 
         /// <summary>
         /// OriginGroup Name.
         /// </summary>
-        [Input("originGroupName", required: true)]
-        public Input<string> OriginGroupName { get; set; } = null!;
+        [Input("name")]
+        public Input<string>? Name { get; set; }
 
-        [Input("originRecords", required: true)]
-        private InputList<Inputs.OriginGroupOriginRecordArgs>? _originRecords;
+        [Input("records", required: true)]
+        private InputList<Inputs.OriginGroupRecordArgs>? _records;
 
         /// <summary>
         /// Origin site records.
         /// </summary>
-        public InputList<Inputs.OriginGroupOriginRecordArgs> OriginRecords
+        public InputList<Inputs.OriginGroupRecordArgs> Records
         {
-            get => _originRecords ?? (_originRecords = new InputList<Inputs.OriginGroupOriginRecordArgs>());
-            set => _originRecords = value;
+            get => _records ?? (_records = new InputList<Inputs.OriginGroupRecordArgs>());
+            set => _records = value;
         }
 
         /// <summary>
-        /// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `third_party`: third party cos.
+        /// Type of the origin site. Valid values:
         /// </summary>
-        [Input("originType", required: true)]
-        public Input<string> OriginType { get; set; } = null!;
+        [Input("type", required: true)]
+        public Input<string> Type { get; set; } = null!;
 
         /// <summary>
         /// Site ID.
@@ -220,15 +211,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public OriginGroupArgs()
         {
         }
+        public static new OriginGroupArgs Empty => new OriginGroupArgs();
     }
 
-    public sealed class OriginGroupState : Pulumi.ResourceArgs
+    public sealed class OriginGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
+        /// Origin site group creation time.
         /// </summary>
-        [Input("configurationType")]
-        public Input<string>? ConfigurationType { get; set; }
+        [Input("createTime")]
+        public Input<string>? CreateTime { get; set; }
+
+        /// <summary>
+        /// Back-to-origin Host Header, it only takes effect when type = HTTP is passed in. The rule engine modifies the Host Header configuration priority to be higher than the Host Header of the origin site group.
+        /// </summary>
+        [Input("hostHeader")]
+        public Input<string>? HostHeader { get; set; }
+
+        /// <summary>
+        /// OriginGroup Name.
+        /// </summary>
+        [Input("name")]
+        public Input<string>? Name { get; set; }
 
         /// <summary>
         /// OriginGroup ID.
@@ -236,32 +240,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         [Input("originGroupId")]
         public Input<string>? OriginGroupId { get; set; }
 
-        /// <summary>
-        /// OriginGroup Name.
-        /// </summary>
-        [Input("originGroupName")]
-        public Input<string>? OriginGroupName { get; set; }
-
-        [Input("originRecords")]
-        private InputList<Inputs.OriginGroupOriginRecordGetArgs>? _originRecords;
+        [Input("records")]
+        private InputList<Inputs.OriginGroupRecordGetArgs>? _records;
 
         /// <summary>
         /// Origin site records.
         /// </summary>
-        public InputList<Inputs.OriginGroupOriginRecordGetArgs> OriginRecords
+        public InputList<Inputs.OriginGroupRecordGetArgs> Records
         {
-            get => _originRecords ?? (_originRecords = new InputList<Inputs.OriginGroupOriginRecordGetArgs>());
-            set => _originRecords = value;
+            get => _records ?? (_records = new InputList<Inputs.OriginGroupRecordGetArgs>());
+            set => _records = value;
+        }
+
+        [Input("references")]
+        private InputList<Inputs.OriginGroupReferenceGetArgs>? _references;
+
+        /// <summary>
+        /// List of referenced instances of the origin site group.
+        /// </summary>
+        public InputList<Inputs.OriginGroupReferenceGetArgs> References
+        {
+            get => _references ?? (_references = new InputList<Inputs.OriginGroupReferenceGetArgs>());
+            set => _references = value;
         }
 
         /// <summary>
-        /// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `third_party`: third party cos.
+        /// Type of the origin site. Valid values:
         /// </summary>
-        [Input("originType")]
-        public Input<string>? OriginType { get; set; }
+        [Input("type")]
+        public Input<string>? Type { get; set; }
 
         /// <summary>
-        /// Last modification date.
+        /// Origin site group update time.
         /// </summary>
         [Input("updateTime")]
         public Input<string>? UpdateTime { get; set; }
@@ -275,5 +285,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public OriginGroupState()
         {
         }
+        public static new OriginGroupState Empty => new OriginGroupState();
     }
 }

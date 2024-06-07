@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Inputs
 {
 
-    public sealed class FlowLogFlowLogStorageArgs : Pulumi.ResourceArgs
+    public sealed class FlowLogFlowLogStorageArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specify storage instance id, required while `storage_type` is `ckafka`.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Inputs
         public FlowLogFlowLogStorageArgs()
         {
         }
+        public static new FlowLogFlowLogStorageArgs Empty => new FlowLogFlowLogStorageArgs();
     }
 }

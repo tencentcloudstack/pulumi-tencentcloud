@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainHttpsConfigClientCertificateConfigArgs : Pulumi.ResourceArgs
+    public sealed class DomainHttpsConfigClientCertificateConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Client Certificate PEM format, requires Base64 encoding.
@@ -19,9 +19,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         [Input("certificateContent", required: true)]
         public Input<string> CertificateContent { get; set; } = null!;
 
+        /// <summary>
+        /// Client certificate name.
+        /// </summary>
         [Input("certificateName")]
         public Input<string>? CertificateName { get; set; }
 
+        /// <summary>
+        /// Deploy time of client certificate.
+        /// </summary>
         [Input("deployTime")]
         public Input<string>? DeployTime { get; set; }
 
@@ -34,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainHttpsConfigClientCertificateConfigArgs()
         {
         }
+        public static new DomainHttpsConfigClientCertificateConfigArgs Empty => new DomainHttpsConfigClientCertificateConfigArgs();
     }
 }

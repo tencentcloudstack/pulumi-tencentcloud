@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskSourceResourceEventBusParamGetArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskSourceResourceEventBusParamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// SCF function name.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskSourceResourceEventBusParamGetArgs()
         {
         }
+        public static new DatahubTaskSourceResourceEventBusParamGetArgs Empty => new DatahubTaskSourceResourceEventBusParamGetArgs();
     }
 }

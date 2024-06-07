@@ -8,26 +8,28 @@ import * as utilities from "../utilities";
  * Provides a resource to create a sqlserver generalCloudRoInstance
  *
  * ## Example Usage
+ *
  * ### If readOnlyGroupType value is 1 - Ship according to one instance and one read-only group:
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,
  * });
  * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
  * const exampleGeneralCloudInstance = new tencentcloud.sqlserver.GeneralCloudInstance("exampleGeneralCloudInstance", {
- *     zone: zones.then(zones => zones.zones?[4]?.name),
+ *     zone: zones.then(zones => zones.zones?.[4]?.name),
  *     memory: 4,
  *     storage: 100,
  *     cpu: 2,
@@ -57,7 +59,7 @@ import * as utilities from "../utilities";
  * });
  * const exampleGeneralCloudRoInstance = new tencentcloud.sqlserver.GeneralCloudRoInstance("exampleGeneralCloudRoInstance", {
  *     instanceId: exampleGeneralCloudInstance.id,
- *     zone: zones.then(zones => zones.zones?[4]?.name),
+ *     zone: zones.then(zones => zones.zones?.[4]?.name),
  *     readOnlyGroupType: 1,
  *     memory: 4,
  *     storage: 100,
@@ -75,11 +77,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### If readOnlyGroupType value is 2 - Ship after creating a read-only group, all instances are under this read-only group:
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.sqlserver.GeneralCloudRoInstance("example", {
  *     instanceId: tencentcloud_sqlserver_general_cloud_instance.example.id,
@@ -105,11 +110,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### If readOnlyGroupType value is 3 - All instances shipped are in the existing Some read-only groups below:
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.sqlserver.GeneralCloudRoInstance("example", {
  *     instanceId: tencentcloud_sqlserver_general_cloud_instance.example.id,
@@ -132,6 +140,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class GeneralCloudRoInstance extends pulumi.CustomResource {
     /**

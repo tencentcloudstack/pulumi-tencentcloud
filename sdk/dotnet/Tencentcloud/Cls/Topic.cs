@@ -15,49 +15,73 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleLogset = new Tencentcloud.Cls.Logset("exampleLogset", new()
     ///     {
-    ///         var topic = new Tencentcloud.Cls.Topic("topic", new Tencentcloud.Cls.TopicArgs
+    ///         LogsetName = "tf_example",
+    ///         Tags = 
     ///         {
-    ///             AutoSplit = false,
-    ///             LogsetId = "5cd3a17e-fb0b-418c-afd7-77b365397426",
-    ///             MaxSplitPartitions = 20,
-    ///             PartitionCount = 1,
-    ///             Period = 10,
-    ///             StorageType = "hot",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///             TopicName = "topic",
-    ///         });
-    ///     }
+    ///             { "demo", "test" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleTopic = new Tencentcloud.Cls.Topic("exampleTopic", new()
+    ///     {
+    ///         TopicName = "tf_example",
+    ///         LogsetId = exampleLogset.Id,
+    ///         AutoSplit = false,
+    ///         MaxSplitPartitions = 20,
+    ///         PartitionCount = 1,
+    ///         Period = 30,
+    ///         StorageType = "hot",
+    ///         Describes = "Test Demo.",
+    ///         HotPeriod = 10,
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cls topic can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/topic:Topic topic 2f5764c1-c833-44c5-84c7-950979b2a278
+    /// $ pulumi import tencentcloud:Cls/topic:Topic example 2f5764c1-c833-44c5-84c7-950979b2a278
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/topic:Topic")]
-    public partial class Topic : Pulumi.CustomResource
+    public partial class Topic : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to enable automatic split. Default value: true.
         /// </summary>
         [Output("autoSplit")]
         public Output<bool> AutoSplit { get; private set; } = null!;
+
+        /// <summary>
+        /// Log Topic Description.
+        /// </summary>
+        [Output("describes")]
+        public Output<string?> Describes { get; private set; } = null!;
+
+        /// <summary>
+        /// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+        /// </summary>
+        [Output("hotPeriod")]
+        public Output<int> HotPeriod { get; private set; } = null!;
 
         /// <summary>
         /// Logset ID.
@@ -84,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Output<int> Period { get; private set; } = null!;
 
         /// <summary>
-        /// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
+        /// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
         /// </summary>
         [Output("storageType")]
         public Output<string> StorageType { get; private set; } = null!;
@@ -146,13 +170,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
     }
 
-    public sealed class TopicArgs : Pulumi.ResourceArgs
+    public sealed class TopicArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable automatic split. Default value: true.
         /// </summary>
         [Input("autoSplit")]
         public Input<bool>? AutoSplit { get; set; }
+
+        /// <summary>
+        /// Log Topic Description.
+        /// </summary>
+        [Input("describes")]
+        public Input<string>? Describes { get; set; }
+
+        /// <summary>
+        /// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+        /// </summary>
+        [Input("hotPeriod")]
+        public Input<int>? HotPeriod { get; set; }
 
         /// <summary>
         /// Logset ID.
@@ -179,7 +215,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Input<int>? Period { get; set; }
 
         /// <summary>
-        /// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
+        /// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
         /// </summary>
         [Input("storageType")]
         public Input<string>? StorageType { get; set; }
@@ -205,15 +241,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public TopicArgs()
         {
         }
+        public static new TopicArgs Empty => new TopicArgs();
     }
 
-    public sealed class TopicState : Pulumi.ResourceArgs
+    public sealed class TopicState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable automatic split. Default value: true.
         /// </summary>
         [Input("autoSplit")]
         public Input<bool>? AutoSplit { get; set; }
+
+        /// <summary>
+        /// Log Topic Description.
+        /// </summary>
+        [Input("describes")]
+        public Input<string>? Describes { get; set; }
+
+        /// <summary>
+        /// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+        /// </summary>
+        [Input("hotPeriod")]
+        public Input<int>? HotPeriod { get; set; }
 
         /// <summary>
         /// Logset ID.
@@ -240,7 +289,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Input<int>? Period { get; set; }
 
         /// <summary>
-        /// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
+        /// Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
         /// </summary>
         [Input("storageType")]
         public Input<string>? StorageType { get; set; }
@@ -266,5 +315,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public TopicState()
         {
         }
+        public static new TopicState Empty => new TopicState();
     }
 }

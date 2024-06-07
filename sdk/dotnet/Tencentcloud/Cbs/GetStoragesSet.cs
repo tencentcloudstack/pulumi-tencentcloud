@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// <summary>
         /// Use this data source to query detailed information of CBS storages in parallel.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var storages = Tencentcloud.Cbs.GetStoragesSet.Invoke(new()
         ///     {
-        ///         var storages = Output.Create(Tencentcloud.Cbs.GetStoragesSet.InvokeAsync(new Tencentcloud.Cbs.GetStoragesSetArgs
-        ///         {
-        ///             AvailabilityZone = "ap-guangzhou-3",
-        ///         }));
-        ///     }
+        ///         AvailabilityZone = "ap-guangzhou-3",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetStoragesSetResult> InvokeAsync(GetStoragesSetArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetStoragesSetResult>("tencentcloud:Cbs/getStoragesSet:getStoragesSet", args ?? new GetStoragesSetArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetStoragesSetResult>("tencentcloud:Cbs/getStoragesSet:getStoragesSet", args ?? new GetStoragesSetArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of CBS storages in parallel.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var storages = Tencentcloud.Cbs.GetStoragesSet.Invoke(new()
         ///     {
-        ///         var storages = Output.Create(Tencentcloud.Cbs.GetStoragesSet.InvokeAsync(new Tencentcloud.Cbs.GetStoragesSetArgs
-        ///         {
-        ///             AvailabilityZone = "ap-guangzhou-3",
-        ///         }));
-        ///     }
+        ///         AvailabilityZone = "ap-guangzhou-3",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetStoragesSetResult> Invoke(GetStoragesSetInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetStoragesSetResult>("tencentcloud:Cbs/getStoragesSet:getStoragesSet", args ?? new GetStoragesSetInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetStoragesSetResult>("tencentcloud:Cbs/getStoragesSet:getStoragesSet", args ?? new GetStoragesSetInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetStoragesSetArgs : Pulumi.InvokeArgs
+    public sealed class GetStoragesSetArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The available zone that the CBS instance locates at.
@@ -197,9 +191,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public GetStoragesSetArgs()
         {
         }
+        public static new GetStoragesSetArgs Empty => new GetStoragesSetArgs();
     }
 
-    public sealed class GetStoragesSetInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetStoragesSetInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The available zone that the CBS instance locates at.
@@ -324,6 +319,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public GetStoragesSetInvokeArgs()
         {
         }
+        public static new GetStoragesSetInvokeArgs Empty => new GetStoragesSetInvokeArgs();
     }
 
 

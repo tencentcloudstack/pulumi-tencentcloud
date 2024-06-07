@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const healthScores = pulumi.output(tencentcloud.Dbbrain.getHealthScores({
+ * const healthScores = tencentcloud.Dbbrain.getHealthScores({
  *     instanceId: "",
  *     product: "",
  *     time: "",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getHealthScores(args: GetHealthScoresArgs, opts?: pulumi.InvokeOptions): Promise<GetHealthScoresResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dbbrain/getHealthScores:getHealthScores", {
         "instanceId": args.instanceId,
         "product": args.product,
@@ -74,9 +74,26 @@ export interface GetHealthScoresResult {
     readonly resultOutputFile?: string;
     readonly time: string;
 }
-
+/**
+ * Use this data source to query detailed information of dbbrain healthScores
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const healthScores = tencentcloud.Dbbrain.getHealthScores({
+ *     instanceId: "",
+ *     product: "",
+ *     time: "",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getHealthScoresOutput(args: GetHealthScoresOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetHealthScoresResult> {
-    return pulumi.output(args).apply(a => getHealthScores(a, opts))
+    return pulumi.output(args).apply((a: any) => getHealthScores(a, opts))
 }
 
 /**

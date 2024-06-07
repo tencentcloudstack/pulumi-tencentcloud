@@ -15,54 +15,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var ccPrecisionPolicy = new Tencentcloud.Antiddos.CcPrecisionPolicy("ccPrecisionPolicy", new()
     ///     {
-    ///         var ccPrecisionPolicy = new Tencentcloud.Antiddos.CcPrecisionPolicy("ccPrecisionPolicy", new Tencentcloud.Antiddos.CcPrecisionPolicyArgs
+    ///         Domain = "t.baidu.com",
+    ///         InstanceId = "bgpip-0000078h",
+    ///         Ip = "212.64.62.191",
+    ///         PolicyAction = "drop",
+    ///         PolicyLists = new[]
     ///         {
-    ///             Domain = "t.baidu.com",
-    ///             InstanceId = "bgpip-0000078h",
-    ///             Ip = "212.64.62.191",
-    ///             PolicyAction = "drop",
-    ///             PolicyLists = 
+    ///             new Tencentcloud.Antiddos.Inputs.CcPrecisionPolicyPolicyListArgs
     ///             {
-    ///                 new Tencentcloud.Antiddos.Inputs.CcPrecisionPolicyPolicyListArgs
-    ///                 {
-    ///                     FieldName = "cgi",
-    ///                     FieldType = "value",
-    ///                     Value = "a.com",
-    ///                     ValueOperator = "equal",
-    ///                 },
-    ///                 new Tencentcloud.Antiddos.Inputs.CcPrecisionPolicyPolicyListArgs
-    ///                 {
-    ///                     FieldName = "ua",
-    ///                     FieldType = "value",
-    ///                     Value = "test",
-    ///                     ValueOperator = "equal",
-    ///                 },
+    ///                 FieldName = "cgi",
+    ///                 FieldType = "value",
+    ///                 Value = "a.com",
+    ///                 ValueOperator = "equal",
     ///             },
-    ///             Protocol = "http",
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Antiddos.Inputs.CcPrecisionPolicyPolicyListArgs
+    ///             {
+    ///                 FieldName = "ua",
+    ///                 FieldType = "value",
+    ///                 Value = "test",
+    ///                 ValueOperator = "equal",
+    ///             },
+    ///         },
+    ///         Protocol = "http",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// antiddos cc_precision_policy can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Antiddos/ccPrecisionPolicy:CcPrecisionPolicy cc_precision_policy ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}
+    /// $ pulumi import tencentcloud:Antiddos/ccPrecisionPolicy:CcPrecisionPolicy cc_precision_policy ${instanceId}#${policyId}#${instanceIp}#${domain}#${protocol}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Antiddos/ccPrecisionPolicy:CcPrecisionPolicy")]
-    public partial class CcPrecisionPolicy : Pulumi.CustomResource
+    public partial class CcPrecisionPolicy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// domain.
@@ -145,7 +146,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         }
     }
 
-    public sealed class CcPrecisionPolicyArgs : Pulumi.ResourceArgs
+    public sealed class CcPrecisionPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// domain.
@@ -192,9 +193,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public CcPrecisionPolicyArgs()
         {
         }
+        public static new CcPrecisionPolicyArgs Empty => new CcPrecisionPolicyArgs();
     }
 
-    public sealed class CcPrecisionPolicyState : Pulumi.ResourceArgs
+    public sealed class CcPrecisionPolicyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// domain.
@@ -241,5 +243,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public CcPrecisionPolicyState()
         {
         }
+        public static new CcPrecisionPolicyState Empty => new CcPrecisionPolicyState();
     }
 }

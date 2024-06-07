@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var launchTemplateDefaultVersion = new Tencentcloud.Cvm.LaunchTemplateDefaultVersion("launchTemplateDefaultVersion", new()
     ///     {
-    ///         var launchTemplateDefaultVersion = new Tencentcloud.Cvm.LaunchTemplateDefaultVersion("launchTemplateDefaultVersion", new Tencentcloud.Cvm.LaunchTemplateDefaultVersionArgs
-    ///         {
-    ///             DefaultVersion = 2,
-    ///             LaunchTemplateId = "lt-34vaef8fe",
-    ///         });
-    ///     }
+    ///         DefaultVersion = 2,
+    ///         LaunchTemplateId = "lt-34vaef8fe",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cvm launch_template_default_version can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cvm/launchTemplateDefaultVersion:LaunchTemplateDefaultVersion launch_template_default_version launch_template_id
+    /// $ pulumi import tencentcloud:Cvm/launchTemplateDefaultVersion:LaunchTemplateDefaultVersion launch_template_default_version launch_template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cvm/launchTemplateDefaultVersion:LaunchTemplateDefaultVersion")]
-    public partial class LaunchTemplateDefaultVersion : Pulumi.CustomResource
+    public partial class LaunchTemplateDefaultVersion : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The number of the version that you want to set as the default version.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         }
     }
 
-    public sealed class LaunchTemplateDefaultVersionArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateDefaultVersionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The number of the version that you want to set as the default version.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public LaunchTemplateDefaultVersionArgs()
         {
         }
+        public static new LaunchTemplateDefaultVersionArgs Empty => new LaunchTemplateDefaultVersionArgs();
     }
 
-    public sealed class LaunchTemplateDefaultVersionState : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateDefaultVersionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The number of the version that you want to set as the default version.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public LaunchTemplateDefaultVersionState()
         {
         }
+        public static new LaunchTemplateDefaultVersionState Empty => new LaunchTemplateDefaultVersionState();
     }
 }

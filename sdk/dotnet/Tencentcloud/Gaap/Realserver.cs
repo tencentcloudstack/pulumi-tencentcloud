@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Gaap.Realserver("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Gaap.Realserver("foo", new Tencentcloud.Gaap.RealserverArgs
+    ///         Ip = "1.1.1.1",
+    ///         Tags = 
     ///         {
-    ///             Ip = "1.1.1.1",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "test", "test" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// GAAP realserver can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Gaap/realserver:Realserver tencentcloud_gaap_realserver.foo rs-4ftghy6
+    /// $ pulumi import tencentcloud:Gaap/realserver:Realserver tencentcloud_gaap_realserver.foo rs-4ftghy6
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/realserver:Realserver")]
-    public partial class Realserver : Pulumi.CustomResource
+    public partial class Realserver : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Domain of the GAAP realserver, conflict with `ip`.
@@ -122,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         }
     }
 
-    public sealed class RealserverArgs : Pulumi.ResourceArgs
+    public sealed class RealserverArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain of the GAAP realserver, conflict with `ip`.
@@ -163,9 +164,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public RealserverArgs()
         {
         }
+        public static new RealserverArgs Empty => new RealserverArgs();
     }
 
-    public sealed class RealserverState : Pulumi.ResourceArgs
+    public sealed class RealserverState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain of the GAAP realserver, conflict with `ip`.
@@ -206,5 +208,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public RealserverState()
         {
         }
+        public static new RealserverState Empty => new RealserverState();
     }
 }

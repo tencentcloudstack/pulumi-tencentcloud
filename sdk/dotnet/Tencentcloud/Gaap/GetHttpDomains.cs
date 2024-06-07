@@ -15,104 +15,104 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query forward domain of layer7 listeners.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
         ///     {
-        ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-        ///         {
-        ///             Bandwidth = 10,
-        ///             Concurrent = 2,
-        ///             AccessRegion = "SouthChina",
-        ///             RealserverRegion = "NorthChina",
-        ///         });
-        ///         var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new Tencentcloud.Gaap.Layer7ListenerArgs
-        ///         {
-        ///             Protocol = "HTTP",
-        ///             Port = 80,
-        ///             ProxyId = fooProxy.Id,
-        ///         });
-        ///         var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new Tencentcloud.Gaap.HttpDomainArgs
-        ///         {
-        ///             ListenerId = fooLayer7Listener.Id,
-        ///             Domain = "www.qq.com",
-        ///         });
-        ///         var fooHttpDomains = Tencentcloud.Gaap.GetHttpDomains.Invoke(new Tencentcloud.Gaap.GetHttpDomainsInvokeArgs
-        ///         {
-        ///             ListenerId = fooLayer7Listener.Id,
-        ///             Domain = fooHttpDomain.Domain,
-        ///         });
-        ///     }
+        ///         Bandwidth = 10,
+        ///         Concurrent = 2,
+        ///         AccessRegion = "SouthChina",
+        ///         RealserverRegion = "NorthChina",
+        ///     });
         /// 
-        /// }
+        ///     var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
+        ///     {
+        ///         Protocol = "HTTP",
+        ///         Port = 80,
+        ///         ProxyId = fooProxy.Id,
+        ///     });
+        /// 
+        ///     var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new()
+        ///     {
+        ///         ListenerId = fooLayer7Listener.Id,
+        ///         Domain = "www.qq.com",
+        ///     });
+        /// 
+        ///     var fooHttpDomains = Tencentcloud.Gaap.GetHttpDomains.Invoke(new()
+        ///     {
+        ///         ListenerId = fooLayer7Listener.Id,
+        ///         Domain = fooHttpDomain.Domain,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetHttpDomainsResult> InvokeAsync(GetHttpDomainsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetHttpDomainsResult>("tencentcloud:Gaap/getHttpDomains:getHttpDomains", args ?? new GetHttpDomainsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetHttpDomainsResult>("tencentcloud:Gaap/getHttpDomains:getHttpDomains", args ?? new GetHttpDomainsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query forward domain of layer7 listeners.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
         ///     {
-        ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-        ///         {
-        ///             Bandwidth = 10,
-        ///             Concurrent = 2,
-        ///             AccessRegion = "SouthChina",
-        ///             RealserverRegion = "NorthChina",
-        ///         });
-        ///         var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new Tencentcloud.Gaap.Layer7ListenerArgs
-        ///         {
-        ///             Protocol = "HTTP",
-        ///             Port = 80,
-        ///             ProxyId = fooProxy.Id,
-        ///         });
-        ///         var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new Tencentcloud.Gaap.HttpDomainArgs
-        ///         {
-        ///             ListenerId = fooLayer7Listener.Id,
-        ///             Domain = "www.qq.com",
-        ///         });
-        ///         var fooHttpDomains = Tencentcloud.Gaap.GetHttpDomains.Invoke(new Tencentcloud.Gaap.GetHttpDomainsInvokeArgs
-        ///         {
-        ///             ListenerId = fooLayer7Listener.Id,
-        ///             Domain = fooHttpDomain.Domain,
-        ///         });
-        ///     }
+        ///         Bandwidth = 10,
+        ///         Concurrent = 2,
+        ///         AccessRegion = "SouthChina",
+        ///         RealserverRegion = "NorthChina",
+        ///     });
         /// 
-        /// }
+        ///     var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
+        ///     {
+        ///         Protocol = "HTTP",
+        ///         Port = 80,
+        ///         ProxyId = fooProxy.Id,
+        ///     });
+        /// 
+        ///     var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new()
+        ///     {
+        ///         ListenerId = fooLayer7Listener.Id,
+        ///         Domain = "www.qq.com",
+        ///     });
+        /// 
+        ///     var fooHttpDomains = Tencentcloud.Gaap.GetHttpDomains.Invoke(new()
+        ///     {
+        ///         ListenerId = fooLayer7Listener.Id,
+        ///         Domain = fooHttpDomain.Domain,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetHttpDomainsResult> Invoke(GetHttpDomainsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetHttpDomainsResult>("tencentcloud:Gaap/getHttpDomains:getHttpDomains", args ?? new GetHttpDomainsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetHttpDomainsResult>("tencentcloud:Gaap/getHttpDomains:getHttpDomains", args ?? new GetHttpDomainsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetHttpDomainsArgs : Pulumi.InvokeArgs
+    public sealed class GetHttpDomainsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Forward domain of the layer7 listener to be queried.
@@ -135,9 +135,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetHttpDomainsArgs()
         {
         }
+        public static new GetHttpDomainsArgs Empty => new GetHttpDomainsArgs();
     }
 
-    public sealed class GetHttpDomainsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetHttpDomainsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Forward domain of the layer7 listener to be queried.
@@ -160,6 +161,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetHttpDomainsInvokeArgs()
         {
         }
+        public static new GetHttpDomainsInvokeArgs Empty => new GetHttpDomainsInvokeArgs();
     }
 
 

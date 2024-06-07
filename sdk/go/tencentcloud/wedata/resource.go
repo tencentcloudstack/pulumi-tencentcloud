@@ -7,46 +7,52 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a wedata resource
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Wedata.NewResource(ctx, "example", &Wedata.ResourceArgs{
-// 			CosBucketName: pulumi.String("wedata-demo-1314991481"),
-// 			CosRegion:     pulumi.String("ap-guangzhou"),
-// 			FileName:      pulumi.String("tf_example"),
-// 			FilePath:      pulumi.String("/datastudio/resource/demo"),
-// 			FilesSize:     pulumi.String("8165"),
-// 			ProjectId:     pulumi.String("1612982498218618880"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Wedata.NewResource(ctx, "example", &Wedata.ResourceArgs{
+//				CosBucketName: pulumi.String("wedata-demo-1314991481"),
+//				CosRegion:     pulumi.String("ap-guangzhou"),
+//				FileName:      pulumi.String("tf_example"),
+//				FilePath:      pulumi.String("/datastudio/resource/demo"),
+//				FilesSize:     pulumi.String("8165"),
+//				ProjectId:     pulumi.String("1612982498218618880"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // wedata resource can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Wedata/resource:Resource example 1612982498218618880#/datastudio/resource/demo#75431931-7d27-4034-b3de-3dc3348a220e
+// $ pulumi import tencentcloud:Wedata/resource:Resource example 1612982498218618880#/datastudio/resource/demo#75431931-7d27-4034-b3de-3dc3348a220e
 // ```
 type Resource struct {
 	pulumi.CustomResourceState
@@ -92,7 +98,7 @@ func NewResource(ctx *pulumi.Context,
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Resource
 	err := ctx.RegisterResource("tencentcloud:Wedata/resource:Resource", name, args, &resource, opts...)
 	if err != nil {
@@ -209,7 +215,7 @@ func (i *Resource) ToResourceOutputWithContext(ctx context.Context) ResourceOutp
 // ResourceArrayInput is an input type that accepts ResourceArray and ResourceArrayOutput values.
 // You can construct a concrete instance of `ResourceArrayInput` via:
 //
-//          ResourceArray{ ResourceArgs{...} }
+//	ResourceArray{ ResourceArgs{...} }
 type ResourceArrayInput interface {
 	pulumi.Input
 
@@ -234,7 +240,7 @@ func (i ResourceArray) ToResourceArrayOutputWithContext(ctx context.Context) Res
 // ResourceMapInput is an input type that accepts ResourceMap and ResourceMapOutput values.
 // You can construct a concrete instance of `ResourceMapInput` via:
 //
-//          ResourceMap{ "key": ResourceArgs{...} }
+//	ResourceMap{ "key": ResourceArgs{...} }
 type ResourceMapInput interface {
 	pulumi.Input
 

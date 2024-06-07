@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
 {
 
-    public sealed class PublishSubscribeDatabaseTupleArgs : Pulumi.ResourceArgs
+    public sealed class PublishSubscribeDatabaseTupleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Publish the database.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
         public PublishSubscribeDatabaseTupleArgs()
         {
         }
+        public static new PublishSubscribeDatabaseTupleArgs Empty => new PublishSubscribeDatabaseTupleArgs();
     }
 }

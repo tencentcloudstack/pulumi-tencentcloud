@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.User
         /// <summary>
         /// Use this data source to query user appid, uin and ownerUin.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var foo = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
-        ///     }
+        ///     var foo = Tencentcloud.User.GetInfo.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInfoResult> InvokeAsync(GetInfoArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInfoResult>("tencentcloud:User/getInfo:getInfo", args ?? new GetInfoArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInfoResult>("tencentcloud:User/getInfo:getInfo", args ?? new GetInfoArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query user appid, uin and ownerUin.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var foo = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
-        ///     }
+        ///     var foo = Tencentcloud.User.GetInfo.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInfoResult> Invoke(GetInfoInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInfoResult>("tencentcloud:User/getInfo:getInfo", args ?? new GetInfoInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInfoResult>("tencentcloud:User/getInfo:getInfo", args ?? new GetInfoInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetInfoArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used for save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.User
         public GetInfoArgs()
         {
         }
+        public static new GetInfoArgs Empty => new GetInfoArgs();
     }
 
-    public sealed class GetInfoInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInfoInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used for save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.User
         public GetInfoInvokeArgs()
         {
         }
+        public static new GetInfoInvokeArgs Empty => new GetInfoInvokeArgs();
     }
 
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Inputs
 {
 
-    public sealed class GetClassicLinkInstancesFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetClassicLinkInstancesFilterInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Inputs
         public GetClassicLinkInstancesFilterInputArgs()
         {
         }
+        public static new GetClassicLinkInstancesFilterInputArgs Empty => new GetClassicLinkInstancesFilterInputArgs();
     }
 }

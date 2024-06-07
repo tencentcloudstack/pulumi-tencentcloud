@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const attachment = new tencentcloud.Cbs.StorageAttachment("attachment", {
+ * const attachment = new tencentcloud.cbs.StorageAttachment("attachment", {
  *     instanceId: "ins-jqlegd42",
  *     storageId: "disk-kdt0sq6m",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CBS storage attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cbs/storageAttachment:StorageAttachment attachment disk-41s6jwy4
+ * $ pulumi import tencentcloud:Cbs/storageAttachment:StorageAttachment attachment disk-41s6jwy4
  * ```
  */
 export class StorageAttachment extends pulumi.CustomResource {

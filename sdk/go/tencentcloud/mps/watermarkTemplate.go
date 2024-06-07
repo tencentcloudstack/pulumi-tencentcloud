@@ -7,63 +7,67 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mps watermarkTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"encoding/base64"
-// 	"fmt"
-// 	"io/ioutil"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"encoding/base64"
+//	"os"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func filebase64OrPanic(path string) pulumi.StringPtrInput {
-// 	if fileData, err := ioutil.ReadFile(path); err == nil {
-// 		return pulumi.String(base64.StdEncoding.EncodeToString(fileData[:]))
-// 	} else {
-// 		panic(err.Error())
-// 	}
-// }
+//	func filebase64OrPanic(path string) string {
+//		if fileData, err := os.ReadFile(path); err == nil {
+//			return base64.StdEncoding.EncodeToString(fileData[:])
+//		} else {
+//			panic(err.Error())
+//		}
+//	}
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewWatermarkTemplate(ctx, "watermarkTemplate", &Mps.WatermarkTemplateArgs{
-// 			CoordinateOrigin: pulumi.String("TopLeft"),
-// 			Type:             pulumi.String("image"),
-// 			XPos:             pulumi.String(fmt.Sprintf("%v%v", "12", "%")),
-// 			YPos:             pulumi.String(fmt.Sprintf("%v%v", "21", "%")),
-// 			ImageTemplate: &mps.WatermarkTemplateImageTemplateArgs{
-// 				Height:       pulumi.String("17px"),
-// 				ImageContent: filebase64OrPanic("./logo.png"),
-// 				RepeatType:   pulumi.String("repeat"),
-// 				Width:        pulumi.String("12px"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewWatermarkTemplate(ctx, "watermarkTemplate", &Mps.WatermarkTemplateArgs{
+//				CoordinateOrigin: pulumi.String("TopLeft"),
+//				Type:             pulumi.String("image"),
+//				XPos:             pulumi.String("12%"),
+//				YPos:             pulumi.String("21%"),
+//				ImageTemplate: &mps.WatermarkTemplateImageTemplateArgs{
+//					Height:       pulumi.String("17px"),
+//					ImageContent: filebase64OrPanic("./logo.png"),
+//					RepeatType:   pulumi.String("repeat"),
+//					Width:        pulumi.String("12px"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // mps watermark_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/watermarkTemplate:WatermarkTemplate watermark_template watermark_template_id
+// $ pulumi import tencentcloud:Mps/watermarkTemplate:WatermarkTemplate watermark_template watermark_template_id
 // ```
 type WatermarkTemplate struct {
 	pulumi.CustomResourceState
@@ -98,7 +102,7 @@ func NewWatermarkTemplate(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource WatermarkTemplate
 	err := ctx.RegisterResource("tencentcloud:Mps/watermarkTemplate:WatermarkTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -235,7 +239,7 @@ func (i *WatermarkTemplate) ToWatermarkTemplateOutputWithContext(ctx context.Con
 // WatermarkTemplateArrayInput is an input type that accepts WatermarkTemplateArray and WatermarkTemplateArrayOutput values.
 // You can construct a concrete instance of `WatermarkTemplateArrayInput` via:
 //
-//          WatermarkTemplateArray{ WatermarkTemplateArgs{...} }
+//	WatermarkTemplateArray{ WatermarkTemplateArgs{...} }
 type WatermarkTemplateArrayInput interface {
 	pulumi.Input
 
@@ -260,7 +264,7 @@ func (i WatermarkTemplateArray) ToWatermarkTemplateArrayOutputWithContext(ctx co
 // WatermarkTemplateMapInput is an input type that accepts WatermarkTemplateMap and WatermarkTemplateMapOutput values.
 // You can construct a concrete instance of `WatermarkTemplateMapInput` via:
 //
-//          WatermarkTemplateMap{ "key": WatermarkTemplateArgs{...} }
+//	WatermarkTemplateMap{ "key": WatermarkTemplateArgs{...} }
 type WatermarkTemplateMapInput interface {
 	pulumi.Input
 

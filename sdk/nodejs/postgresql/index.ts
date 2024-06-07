@@ -5,58 +5,166 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./backupDownloadRestrictionConfig";
-export * from "./backupPlanConfig";
-export * from "./baseBackup";
-export * from "./deleteLogBackupOperation";
-export * from "./disisolateDbInstanceOperation";
-export * from "./getBackupDownloadUrls";
-export * from "./getBaseBackups";
-export * from "./getDbInstanceClasses";
-export * from "./getDbInstanceVersions";
-export * from "./getDefaultParameters";
-export * from "./getInstances";
-export * from "./getLogBackups";
-export * from "./getParameterTemplates";
-export * from "./getReadonlyGroups";
-export * from "./getRecoveryTime";
-export * from "./getRegions";
-export * from "./getSpecinfos";
-export * from "./getXlogs";
-export * from "./getZones";
-export * from "./instance";
-export * from "./instanceHaConfig";
-export * from "./isolateDbInstanceOperation";
-export * from "./modifyAccountRemarkOperation";
-export * from "./modifySwitchTimePeriodOperation";
-export * from "./parameterTemplate";
-export * from "./readonlyAttachment";
-export * from "./readonlyGroup";
-export * from "./readonlyInstance";
-export * from "./rebalanceReadonlyGroupOperation";
-export * from "./renewDbInstanceOperation";
-export * from "./restartDbInstanceOperation";
-export * from "./securityGroupConfig";
+export { BackupDownloadRestrictionConfigArgs, BackupDownloadRestrictionConfigState } from "./backupDownloadRestrictionConfig";
+export type BackupDownloadRestrictionConfig = import("./backupDownloadRestrictionConfig").BackupDownloadRestrictionConfig;
+export const BackupDownloadRestrictionConfig: typeof import("./backupDownloadRestrictionConfig").BackupDownloadRestrictionConfig = null as any;
+utilities.lazyLoad(exports, ["BackupDownloadRestrictionConfig"], () => require("./backupDownloadRestrictionConfig"));
 
-// Import resources to register:
-import { BackupDownloadRestrictionConfig } from "./backupDownloadRestrictionConfig";
-import { BackupPlanConfig } from "./backupPlanConfig";
-import { BaseBackup } from "./baseBackup";
-import { DeleteLogBackupOperation } from "./deleteLogBackupOperation";
-import { DisisolateDbInstanceOperation } from "./disisolateDbInstanceOperation";
-import { Instance } from "./instance";
-import { InstanceHaConfig } from "./instanceHaConfig";
-import { IsolateDbInstanceOperation } from "./isolateDbInstanceOperation";
-import { ModifyAccountRemarkOperation } from "./modifyAccountRemarkOperation";
-import { ModifySwitchTimePeriodOperation } from "./modifySwitchTimePeriodOperation";
-import { ParameterTemplate } from "./parameterTemplate";
-import { ReadonlyAttachment } from "./readonlyAttachment";
-import { ReadonlyGroup } from "./readonlyGroup";
-import { ReadonlyInstance } from "./readonlyInstance";
-import { RebalanceReadonlyGroupOperation } from "./rebalanceReadonlyGroupOperation";
-import { RenewDbInstanceOperation } from "./renewDbInstanceOperation";
-import { RestartDbInstanceOperation } from "./restartDbInstanceOperation";
-import { SecurityGroupConfig } from "./securityGroupConfig";
+export { BackupPlanConfigArgs, BackupPlanConfigState } from "./backupPlanConfig";
+export type BackupPlanConfig = import("./backupPlanConfig").BackupPlanConfig;
+export const BackupPlanConfig: typeof import("./backupPlanConfig").BackupPlanConfig = null as any;
+utilities.lazyLoad(exports, ["BackupPlanConfig"], () => require("./backupPlanConfig"));
+
+export { BaseBackupArgs, BaseBackupState } from "./baseBackup";
+export type BaseBackup = import("./baseBackup").BaseBackup;
+export const BaseBackup: typeof import("./baseBackup").BaseBackup = null as any;
+utilities.lazyLoad(exports, ["BaseBackup"], () => require("./baseBackup"));
+
+export { DeleteLogBackupOperationArgs, DeleteLogBackupOperationState } from "./deleteLogBackupOperation";
+export type DeleteLogBackupOperation = import("./deleteLogBackupOperation").DeleteLogBackupOperation;
+export const DeleteLogBackupOperation: typeof import("./deleteLogBackupOperation").DeleteLogBackupOperation = null as any;
+utilities.lazyLoad(exports, ["DeleteLogBackupOperation"], () => require("./deleteLogBackupOperation"));
+
+export { DisisolateDbInstanceOperationArgs, DisisolateDbInstanceOperationState } from "./disisolateDbInstanceOperation";
+export type DisisolateDbInstanceOperation = import("./disisolateDbInstanceOperation").DisisolateDbInstanceOperation;
+export const DisisolateDbInstanceOperation: typeof import("./disisolateDbInstanceOperation").DisisolateDbInstanceOperation = null as any;
+utilities.lazyLoad(exports, ["DisisolateDbInstanceOperation"], () => require("./disisolateDbInstanceOperation"));
+
+export { GetBackupDownloadUrlsArgs, GetBackupDownloadUrlsResult, GetBackupDownloadUrlsOutputArgs } from "./getBackupDownloadUrls";
+export const getBackupDownloadUrls: typeof import("./getBackupDownloadUrls").getBackupDownloadUrls = null as any;
+export const getBackupDownloadUrlsOutput: typeof import("./getBackupDownloadUrls").getBackupDownloadUrlsOutput = null as any;
+utilities.lazyLoad(exports, ["getBackupDownloadUrls","getBackupDownloadUrlsOutput"], () => require("./getBackupDownloadUrls"));
+
+export { GetBaseBackupsArgs, GetBaseBackupsResult, GetBaseBackupsOutputArgs } from "./getBaseBackups";
+export const getBaseBackups: typeof import("./getBaseBackups").getBaseBackups = null as any;
+export const getBaseBackupsOutput: typeof import("./getBaseBackups").getBaseBackupsOutput = null as any;
+utilities.lazyLoad(exports, ["getBaseBackups","getBaseBackupsOutput"], () => require("./getBaseBackups"));
+
+export { GetDbInstanceClassesArgs, GetDbInstanceClassesResult, GetDbInstanceClassesOutputArgs } from "./getDbInstanceClasses";
+export const getDbInstanceClasses: typeof import("./getDbInstanceClasses").getDbInstanceClasses = null as any;
+export const getDbInstanceClassesOutput: typeof import("./getDbInstanceClasses").getDbInstanceClassesOutput = null as any;
+utilities.lazyLoad(exports, ["getDbInstanceClasses","getDbInstanceClassesOutput"], () => require("./getDbInstanceClasses"));
+
+export { GetDbInstanceVersionsArgs, GetDbInstanceVersionsResult, GetDbInstanceVersionsOutputArgs } from "./getDbInstanceVersions";
+export const getDbInstanceVersions: typeof import("./getDbInstanceVersions").getDbInstanceVersions = null as any;
+export const getDbInstanceVersionsOutput: typeof import("./getDbInstanceVersions").getDbInstanceVersionsOutput = null as any;
+utilities.lazyLoad(exports, ["getDbInstanceVersions","getDbInstanceVersionsOutput"], () => require("./getDbInstanceVersions"));
+
+export { GetDefaultParametersArgs, GetDefaultParametersResult, GetDefaultParametersOutputArgs } from "./getDefaultParameters";
+export const getDefaultParameters: typeof import("./getDefaultParameters").getDefaultParameters = null as any;
+export const getDefaultParametersOutput: typeof import("./getDefaultParameters").getDefaultParametersOutput = null as any;
+utilities.lazyLoad(exports, ["getDefaultParameters","getDefaultParametersOutput"], () => require("./getDefaultParameters"));
+
+export { GetInstancesArgs, GetInstancesResult, GetInstancesOutputArgs } from "./getInstances";
+export const getInstances: typeof import("./getInstances").getInstances = null as any;
+export const getInstancesOutput: typeof import("./getInstances").getInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstances","getInstancesOutput"], () => require("./getInstances"));
+
+export { GetLogBackupsArgs, GetLogBackupsResult, GetLogBackupsOutputArgs } from "./getLogBackups";
+export const getLogBackups: typeof import("./getLogBackups").getLogBackups = null as any;
+export const getLogBackupsOutput: typeof import("./getLogBackups").getLogBackupsOutput = null as any;
+utilities.lazyLoad(exports, ["getLogBackups","getLogBackupsOutput"], () => require("./getLogBackups"));
+
+export { GetParameterTemplatesArgs, GetParameterTemplatesResult, GetParameterTemplatesOutputArgs } from "./getParameterTemplates";
+export const getParameterTemplates: typeof import("./getParameterTemplates").getParameterTemplates = null as any;
+export const getParameterTemplatesOutput: typeof import("./getParameterTemplates").getParameterTemplatesOutput = null as any;
+utilities.lazyLoad(exports, ["getParameterTemplates","getParameterTemplatesOutput"], () => require("./getParameterTemplates"));
+
+export { GetReadonlyGroupsArgs, GetReadonlyGroupsResult, GetReadonlyGroupsOutputArgs } from "./getReadonlyGroups";
+export const getReadonlyGroups: typeof import("./getReadonlyGroups").getReadonlyGroups = null as any;
+export const getReadonlyGroupsOutput: typeof import("./getReadonlyGroups").getReadonlyGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getReadonlyGroups","getReadonlyGroupsOutput"], () => require("./getReadonlyGroups"));
+
+export { GetRecoveryTimeArgs, GetRecoveryTimeResult, GetRecoveryTimeOutputArgs } from "./getRecoveryTime";
+export const getRecoveryTime: typeof import("./getRecoveryTime").getRecoveryTime = null as any;
+export const getRecoveryTimeOutput: typeof import("./getRecoveryTime").getRecoveryTimeOutput = null as any;
+utilities.lazyLoad(exports, ["getRecoveryTime","getRecoveryTimeOutput"], () => require("./getRecoveryTime"));
+
+export { GetRegionsArgs, GetRegionsResult, GetRegionsOutputArgs } from "./getRegions";
+export const getRegions: typeof import("./getRegions").getRegions = null as any;
+export const getRegionsOutput: typeof import("./getRegions").getRegionsOutput = null as any;
+utilities.lazyLoad(exports, ["getRegions","getRegionsOutput"], () => require("./getRegions"));
+
+export { GetSpecinfosArgs, GetSpecinfosResult, GetSpecinfosOutputArgs } from "./getSpecinfos";
+export const getSpecinfos: typeof import("./getSpecinfos").getSpecinfos = null as any;
+export const getSpecinfosOutput: typeof import("./getSpecinfos").getSpecinfosOutput = null as any;
+utilities.lazyLoad(exports, ["getSpecinfos","getSpecinfosOutput"], () => require("./getSpecinfos"));
+
+export { GetXlogsArgs, GetXlogsResult, GetXlogsOutputArgs } from "./getXlogs";
+export const getXlogs: typeof import("./getXlogs").getXlogs = null as any;
+export const getXlogsOutput: typeof import("./getXlogs").getXlogsOutput = null as any;
+utilities.lazyLoad(exports, ["getXlogs","getXlogsOutput"], () => require("./getXlogs"));
+
+export { GetZonesArgs, GetZonesResult, GetZonesOutputArgs } from "./getZones";
+export const getZones: typeof import("./getZones").getZones = null as any;
+export const getZonesOutput: typeof import("./getZones").getZonesOutput = null as any;
+utilities.lazyLoad(exports, ["getZones","getZonesOutput"], () => require("./getZones"));
+
+export { InstanceArgs, InstanceState } from "./instance";
+export type Instance = import("./instance").Instance;
+export const Instance: typeof import("./instance").Instance = null as any;
+utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { InstanceHaConfigArgs, InstanceHaConfigState } from "./instanceHaConfig";
+export type InstanceHaConfig = import("./instanceHaConfig").InstanceHaConfig;
+export const InstanceHaConfig: typeof import("./instanceHaConfig").InstanceHaConfig = null as any;
+utilities.lazyLoad(exports, ["InstanceHaConfig"], () => require("./instanceHaConfig"));
+
+export { IsolateDbInstanceOperationArgs, IsolateDbInstanceOperationState } from "./isolateDbInstanceOperation";
+export type IsolateDbInstanceOperation = import("./isolateDbInstanceOperation").IsolateDbInstanceOperation;
+export const IsolateDbInstanceOperation: typeof import("./isolateDbInstanceOperation").IsolateDbInstanceOperation = null as any;
+utilities.lazyLoad(exports, ["IsolateDbInstanceOperation"], () => require("./isolateDbInstanceOperation"));
+
+export { ModifyAccountRemarkOperationArgs, ModifyAccountRemarkOperationState } from "./modifyAccountRemarkOperation";
+export type ModifyAccountRemarkOperation = import("./modifyAccountRemarkOperation").ModifyAccountRemarkOperation;
+export const ModifyAccountRemarkOperation: typeof import("./modifyAccountRemarkOperation").ModifyAccountRemarkOperation = null as any;
+utilities.lazyLoad(exports, ["ModifyAccountRemarkOperation"], () => require("./modifyAccountRemarkOperation"));
+
+export { ModifySwitchTimePeriodOperationArgs, ModifySwitchTimePeriodOperationState } from "./modifySwitchTimePeriodOperation";
+export type ModifySwitchTimePeriodOperation = import("./modifySwitchTimePeriodOperation").ModifySwitchTimePeriodOperation;
+export const ModifySwitchTimePeriodOperation: typeof import("./modifySwitchTimePeriodOperation").ModifySwitchTimePeriodOperation = null as any;
+utilities.lazyLoad(exports, ["ModifySwitchTimePeriodOperation"], () => require("./modifySwitchTimePeriodOperation"));
+
+export { ParameterTemplateArgs, ParameterTemplateState } from "./parameterTemplate";
+export type ParameterTemplate = import("./parameterTemplate").ParameterTemplate;
+export const ParameterTemplate: typeof import("./parameterTemplate").ParameterTemplate = null as any;
+utilities.lazyLoad(exports, ["ParameterTemplate"], () => require("./parameterTemplate"));
+
+export { ReadonlyAttachmentArgs, ReadonlyAttachmentState } from "./readonlyAttachment";
+export type ReadonlyAttachment = import("./readonlyAttachment").ReadonlyAttachment;
+export const ReadonlyAttachment: typeof import("./readonlyAttachment").ReadonlyAttachment = null as any;
+utilities.lazyLoad(exports, ["ReadonlyAttachment"], () => require("./readonlyAttachment"));
+
+export { ReadonlyGroupArgs, ReadonlyGroupState } from "./readonlyGroup";
+export type ReadonlyGroup = import("./readonlyGroup").ReadonlyGroup;
+export const ReadonlyGroup: typeof import("./readonlyGroup").ReadonlyGroup = null as any;
+utilities.lazyLoad(exports, ["ReadonlyGroup"], () => require("./readonlyGroup"));
+
+export { ReadonlyInstanceArgs, ReadonlyInstanceState } from "./readonlyInstance";
+export type ReadonlyInstance = import("./readonlyInstance").ReadonlyInstance;
+export const ReadonlyInstance: typeof import("./readonlyInstance").ReadonlyInstance = null as any;
+utilities.lazyLoad(exports, ["ReadonlyInstance"], () => require("./readonlyInstance"));
+
+export { RebalanceReadonlyGroupOperationArgs, RebalanceReadonlyGroupOperationState } from "./rebalanceReadonlyGroupOperation";
+export type RebalanceReadonlyGroupOperation = import("./rebalanceReadonlyGroupOperation").RebalanceReadonlyGroupOperation;
+export const RebalanceReadonlyGroupOperation: typeof import("./rebalanceReadonlyGroupOperation").RebalanceReadonlyGroupOperation = null as any;
+utilities.lazyLoad(exports, ["RebalanceReadonlyGroupOperation"], () => require("./rebalanceReadonlyGroupOperation"));
+
+export { RenewDbInstanceOperationArgs, RenewDbInstanceOperationState } from "./renewDbInstanceOperation";
+export type RenewDbInstanceOperation = import("./renewDbInstanceOperation").RenewDbInstanceOperation;
+export const RenewDbInstanceOperation: typeof import("./renewDbInstanceOperation").RenewDbInstanceOperation = null as any;
+utilities.lazyLoad(exports, ["RenewDbInstanceOperation"], () => require("./renewDbInstanceOperation"));
+
+export { RestartDbInstanceOperationArgs, RestartDbInstanceOperationState } from "./restartDbInstanceOperation";
+export type RestartDbInstanceOperation = import("./restartDbInstanceOperation").RestartDbInstanceOperation;
+export const RestartDbInstanceOperation: typeof import("./restartDbInstanceOperation").RestartDbInstanceOperation = null as any;
+utilities.lazyLoad(exports, ["RestartDbInstanceOperation"], () => require("./restartDbInstanceOperation"));
+
+export { SecurityGroupConfigArgs, SecurityGroupConfigState } from "./securityGroupConfig";
+export type SecurityGroupConfig = import("./securityGroupConfig").SecurityGroupConfig;
+export const SecurityGroupConfig: typeof import("./securityGroupConfig").SecurityGroupConfig = null as any;
+utilities.lazyLoad(exports, ["SecurityGroupConfig"], () => require("./securityGroupConfig"));
+
 
 const _module = {
     version: utilities.getVersion(),

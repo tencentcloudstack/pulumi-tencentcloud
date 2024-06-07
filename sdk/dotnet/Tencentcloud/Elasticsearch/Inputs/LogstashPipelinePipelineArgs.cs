@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Inputs
 {
 
-    public sealed class LogstashPipelinePipelineArgs : Pulumi.ResourceArgs
+    public sealed class LogstashPipelinePipelineArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Pipeline batch processing delay.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Inputs
         public LogstashPipelinePipelineArgs()
         {
         }
+        public static new LogstashPipelinePipelineArgs Empty => new LogstashPipelinePipelineArgs();
     }
 }

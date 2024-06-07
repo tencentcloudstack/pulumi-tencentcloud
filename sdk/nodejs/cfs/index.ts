@@ -5,30 +5,76 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./accessGroup";
-export * from "./accessRule";
-export * from "./autoSnapshotPolicy";
-export * from "./autoSnapshotPolicyAttachment";
-export * from "./fileSystem";
-export * from "./getAccessGroups";
-export * from "./getAccessRules";
-export * from "./getAvailableZone";
-export * from "./getFileSystemClients";
-export * from "./getFileSystems";
-export * from "./getMountTargets";
-export * from "./signUpCfsService";
-export * from "./snapshot";
-export * from "./userQuota";
+export { AccessGroupArgs, AccessGroupState } from "./accessGroup";
+export type AccessGroup = import("./accessGroup").AccessGroup;
+export const AccessGroup: typeof import("./accessGroup").AccessGroup = null as any;
+utilities.lazyLoad(exports, ["AccessGroup"], () => require("./accessGroup"));
 
-// Import resources to register:
-import { AccessGroup } from "./accessGroup";
-import { AccessRule } from "./accessRule";
-import { AutoSnapshotPolicy } from "./autoSnapshotPolicy";
-import { AutoSnapshotPolicyAttachment } from "./autoSnapshotPolicyAttachment";
-import { FileSystem } from "./fileSystem";
-import { SignUpCfsService } from "./signUpCfsService";
-import { Snapshot } from "./snapshot";
-import { UserQuota } from "./userQuota";
+export { AccessRuleArgs, AccessRuleState } from "./accessRule";
+export type AccessRule = import("./accessRule").AccessRule;
+export const AccessRule: typeof import("./accessRule").AccessRule = null as any;
+utilities.lazyLoad(exports, ["AccessRule"], () => require("./accessRule"));
+
+export { AutoSnapshotPolicyArgs, AutoSnapshotPolicyState } from "./autoSnapshotPolicy";
+export type AutoSnapshotPolicy = import("./autoSnapshotPolicy").AutoSnapshotPolicy;
+export const AutoSnapshotPolicy: typeof import("./autoSnapshotPolicy").AutoSnapshotPolicy = null as any;
+utilities.lazyLoad(exports, ["AutoSnapshotPolicy"], () => require("./autoSnapshotPolicy"));
+
+export { AutoSnapshotPolicyAttachmentArgs, AutoSnapshotPolicyAttachmentState } from "./autoSnapshotPolicyAttachment";
+export type AutoSnapshotPolicyAttachment = import("./autoSnapshotPolicyAttachment").AutoSnapshotPolicyAttachment;
+export const AutoSnapshotPolicyAttachment: typeof import("./autoSnapshotPolicyAttachment").AutoSnapshotPolicyAttachment = null as any;
+utilities.lazyLoad(exports, ["AutoSnapshotPolicyAttachment"], () => require("./autoSnapshotPolicyAttachment"));
+
+export { FileSystemArgs, FileSystemState } from "./fileSystem";
+export type FileSystem = import("./fileSystem").FileSystem;
+export const FileSystem: typeof import("./fileSystem").FileSystem = null as any;
+utilities.lazyLoad(exports, ["FileSystem"], () => require("./fileSystem"));
+
+export { GetAccessGroupsArgs, GetAccessGroupsResult, GetAccessGroupsOutputArgs } from "./getAccessGroups";
+export const getAccessGroups: typeof import("./getAccessGroups").getAccessGroups = null as any;
+export const getAccessGroupsOutput: typeof import("./getAccessGroups").getAccessGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getAccessGroups","getAccessGroupsOutput"], () => require("./getAccessGroups"));
+
+export { GetAccessRulesArgs, GetAccessRulesResult, GetAccessRulesOutputArgs } from "./getAccessRules";
+export const getAccessRules: typeof import("./getAccessRules").getAccessRules = null as any;
+export const getAccessRulesOutput: typeof import("./getAccessRules").getAccessRulesOutput = null as any;
+utilities.lazyLoad(exports, ["getAccessRules","getAccessRulesOutput"], () => require("./getAccessRules"));
+
+export { GetAvailableZoneArgs, GetAvailableZoneResult, GetAvailableZoneOutputArgs } from "./getAvailableZone";
+export const getAvailableZone: typeof import("./getAvailableZone").getAvailableZone = null as any;
+export const getAvailableZoneOutput: typeof import("./getAvailableZone").getAvailableZoneOutput = null as any;
+utilities.lazyLoad(exports, ["getAvailableZone","getAvailableZoneOutput"], () => require("./getAvailableZone"));
+
+export { GetFileSystemClientsArgs, GetFileSystemClientsResult, GetFileSystemClientsOutputArgs } from "./getFileSystemClients";
+export const getFileSystemClients: typeof import("./getFileSystemClients").getFileSystemClients = null as any;
+export const getFileSystemClientsOutput: typeof import("./getFileSystemClients").getFileSystemClientsOutput = null as any;
+utilities.lazyLoad(exports, ["getFileSystemClients","getFileSystemClientsOutput"], () => require("./getFileSystemClients"));
+
+export { GetFileSystemsArgs, GetFileSystemsResult, GetFileSystemsOutputArgs } from "./getFileSystems";
+export const getFileSystems: typeof import("./getFileSystems").getFileSystems = null as any;
+export const getFileSystemsOutput: typeof import("./getFileSystems").getFileSystemsOutput = null as any;
+utilities.lazyLoad(exports, ["getFileSystems","getFileSystemsOutput"], () => require("./getFileSystems"));
+
+export { GetMountTargetsArgs, GetMountTargetsResult, GetMountTargetsOutputArgs } from "./getMountTargets";
+export const getMountTargets: typeof import("./getMountTargets").getMountTargets = null as any;
+export const getMountTargetsOutput: typeof import("./getMountTargets").getMountTargetsOutput = null as any;
+utilities.lazyLoad(exports, ["getMountTargets","getMountTargetsOutput"], () => require("./getMountTargets"));
+
+export { SignUpCfsServiceArgs, SignUpCfsServiceState } from "./signUpCfsService";
+export type SignUpCfsService = import("./signUpCfsService").SignUpCfsService;
+export const SignUpCfsService: typeof import("./signUpCfsService").SignUpCfsService = null as any;
+utilities.lazyLoad(exports, ["SignUpCfsService"], () => require("./signUpCfsService"));
+
+export { SnapshotArgs, SnapshotState } from "./snapshot";
+export type Snapshot = import("./snapshot").Snapshot;
+export const Snapshot: typeof import("./snapshot").Snapshot = null as any;
+utilities.lazyLoad(exports, ["Snapshot"], () => require("./snapshot"));
+
+export { UserQuotaArgs, UserQuotaState } from "./userQuota";
+export type UserQuota = import("./userQuota").UserQuota;
+export const UserQuota: typeof import("./userQuota").UserQuota = null as any;
+utilities.lazyLoad(exports, ["UserQuota"], () => require("./userQuota"));
+
 
 const _module = {
     version: utilities.getVersion(),

@@ -4,5 +4,8 @@ package main
 import "github.com/tencentcloudstack/pulumi-tencentcloud/provider/info"
 
 func main() {
-	info.WriteInfos()
+	err := info.WriteInfos()
+	if err != nil {
+		panic(err)
+	}
 }

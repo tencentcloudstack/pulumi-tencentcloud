@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var hpcCluster = new Tencentcloud.Cvm.HpcCluster("hpcCluster", new()
     ///     {
-    ///         var hpcCluster = new Tencentcloud.Cvm.HpcCluster("hpcCluster", new Tencentcloud.Cvm.HpcClusterArgs
-    ///         {
-    ///             Remark = "create for test",
-    ///             Zone = "ap-beijing-6",
-    ///         });
-    ///     }
+    ///         Remark = "create for test",
+    ///         Zone = "ap-beijing-6",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cvm hpc_cluster can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cvm/hpcCluster:HpcCluster hpc_cluster hpc_cluster_id
+    /// $ pulumi import tencentcloud:Cvm/hpcCluster:HpcCluster hpc_cluster hpc_cluster_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cvm/hpcCluster:HpcCluster")]
-    public partial class HpcCluster : Pulumi.CustomResource
+    public partial class HpcCluster : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Name of Hpc Cluster.
@@ -107,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         }
     }
 
-    public sealed class HpcClusterArgs : Pulumi.ResourceArgs
+    public sealed class HpcClusterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of Hpc Cluster.
@@ -130,9 +131,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public HpcClusterArgs()
         {
         }
+        public static new HpcClusterArgs Empty => new HpcClusterArgs();
     }
 
-    public sealed class HpcClusterState : Pulumi.ResourceArgs
+    public sealed class HpcClusterState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of Hpc Cluster.
@@ -155,5 +157,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public HpcClusterState()
         {
         }
+        public static new HpcClusterState Empty => new HpcClusterState();
     }
 }

@@ -9,14 +9,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const peerConnectAcceptOperation = new tencentcloud.Vpc.PeerConnectAcceptOperation("peer_connect_accept_operation", {
- *     peeringConnectionId: "pcx-abced",
- * });
+ * const peerConnectAcceptOperation = new tencentcloud.vpc.PeerConnectAcceptOperation("peerConnectAcceptOperation", {peeringConnectionId: "pcx-abced"});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class PeerConnectAcceptOperation extends pulumi.CustomResource {
     /**

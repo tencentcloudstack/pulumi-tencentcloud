@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const padRuleAttachment = new tencentcloud.Css.PadRuleAttachment("pad_rule_attachment", {
+ * const padRuleAttachment = new tencentcloud.css.PadRuleAttachment("padRuleAttachment", {
  *     appName: "qqq",
  *     domainName: "177154.push.tlivecloud.com",
  *     streamName: "ppp",
  *     templateId: 17067,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css pad_rule_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/padRuleAttachment:PadRuleAttachment pad_rule_attachment templateId#domainName
+ * $ pulumi import tencentcloud:Css/padRuleAttachment:PadRuleAttachment pad_rule_attachment templateId#domainName
  * ```
  */
 export class PadRuleAttachment extends pulumi.CustomResource {

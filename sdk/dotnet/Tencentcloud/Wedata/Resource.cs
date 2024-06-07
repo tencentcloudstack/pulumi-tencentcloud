@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Wedata.Resource("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Wedata.Resource("example", new Tencentcloud.Wedata.ResourceArgs
-    ///         {
-    ///             CosBucketName = "wedata-demo-1314991481",
-    ///             CosRegion = "ap-guangzhou",
-    ///             FileName = "tf_example",
-    ///             FilePath = "/datastudio/resource/demo",
-    ///             FilesSize = "8165",
-    ///             ProjectId = "1612982498218618880",
-    ///         });
-    ///     }
+    ///         CosBucketName = "wedata-demo-1314991481",
+    ///         CosRegion = "ap-guangzhou",
+    ///         FileName = "tf_example",
+    ///         FilePath = "/datastudio/resource/demo",
+    ///         FilesSize = "8165",
+    ///         ProjectId = "1612982498218618880",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// wedata resource can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Wedata/resource:Resource example 1612982498218618880#/datastudio/resource/demo#75431931-7d27-4034-b3de-3dc3348a220e
+    /// $ pulumi import tencentcloud:Wedata/resource:Resource example 1612982498218618880#/datastudio/resource/demo#75431931-7d27-4034-b3de-3dc3348a220e
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/resource:Resource")]
-    public partial class Resource : Pulumi.CustomResource
+    public partial class Resource : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cos bucket name.
@@ -135,7 +136,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         }
     }
 
-    public sealed class ResourceArgs : Pulumi.ResourceArgs
+    public sealed class ResourceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cos bucket name.
@@ -176,9 +177,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public ResourceArgs()
         {
         }
+        public static new ResourceArgs Empty => new ResourceArgs();
     }
 
-    public sealed class ResourceState : Pulumi.ResourceArgs
+    public sealed class ResourceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cos bucket name.
@@ -225,5 +227,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public ResourceState()
         {
         }
+        public static new ResourceState Empty => new ResourceState();
     }
 }

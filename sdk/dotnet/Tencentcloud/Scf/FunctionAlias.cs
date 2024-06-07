@@ -15,50 +15,51 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     // by route
+    ///     var functionAlias = new Tencentcloud.Scf.FunctionAlias("functionAlias", new()
     ///     {
-    ///         // by route
-    ///         var functionAlias = new Tencentcloud.Scf.FunctionAlias("functionAlias", new Tencentcloud.Scf.FunctionAliasArgs
+    ///         Description = "matchs for test 12312312",
+    ///         FunctionName = "keep-1676351130",
+    ///         FunctionVersion = "3",
+    ///         Namespace = "default",
+    ///         RoutingConfig = new Tencentcloud.Scf.Inputs.FunctionAliasRoutingConfigArgs
     ///         {
-    ///             Description = "matchs for test 12312312",
-    ///             FunctionName = "keep-1676351130",
-    ///             FunctionVersion = "3",
-    ///             Namespace = "default",
-    ///             RoutingConfig = new Tencentcloud.Scf.Inputs.FunctionAliasRoutingConfigArgs
+    ///             AdditionalVersionMatches = new[]
     ///             {
-    ///                 AdditionalVersionMatches = 
+    ///                 new Tencentcloud.Scf.Inputs.FunctionAliasRoutingConfigAdditionalVersionMatchArgs
     ///                 {
-    ///                     new Tencentcloud.Scf.Inputs.FunctionAliasRoutingConfigAdditionalVersionMatchArgs
-    ///                     {
-    ///                         Expression = "testuser",
-    ///                         Key = "invoke.headers.User",
-    ///                         Method = "exact",
-    ///                         Version = "2",
-    ///                     },
+    ///                     Expression = "testuser",
+    ///                     Key = "invoke.headers.User",
+    ///                     Method = "exact",
+    ///                     Version = "2",
     ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// scf function_alias can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Scf/functionAlias:FunctionAlias function_alias namespace#functionName#name
+    /// $ pulumi import tencentcloud:Scf/functionAlias:FunctionAlias function_alias namespace#functionName#name
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/functionAlias:FunctionAlias")]
-    public partial class FunctionAlias : Pulumi.CustomResource
+    public partial class FunctionAlias : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Alias description information.
@@ -141,7 +142,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         }
     }
 
-    public sealed class FunctionAliasArgs : Pulumi.ResourceArgs
+    public sealed class FunctionAliasArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alias description information.
@@ -182,9 +183,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public FunctionAliasArgs()
         {
         }
+        public static new FunctionAliasArgs Empty => new FunctionAliasArgs();
     }
 
-    public sealed class FunctionAliasState : Pulumi.ResourceArgs
+    public sealed class FunctionAliasState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alias description information.
@@ -225,5 +227,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public FunctionAliasState()
         {
         }
+        public static new FunctionAliasState Empty => new FunctionAliasState();
     }
 }

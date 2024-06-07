@@ -15,136 +15,138 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query forward rule of layer7 listeners.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
         ///     {
-        ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-        ///         {
-        ///             Bandwidth = 10,
-        ///             Concurrent = 2,
-        ///             AccessRegion = "SouthChina",
-        ///             RealserverRegion = "NorthChina",
-        ///         });
-        ///         var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new Tencentcloud.Gaap.Layer7ListenerArgs
-        ///         {
-        ///             Protocol = "HTTP",
-        ///             Port = 80,
-        ///             ProxyId = fooProxy.Id,
-        ///         });
-        ///         var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new Tencentcloud.Gaap.RealserverArgs
-        ///         {
-        ///             Ip = "1.1.1.1",
-        ///         });
-        ///         var fooHttpRule = new Tencentcloud.Gaap.HttpRule("fooHttpRule", new Tencentcloud.Gaap.HttpRuleArgs
-        ///         {
-        ///             ListenerId = fooLayer7Listener.Id,
-        ///             Domain = "www.qq.com",
-        ///             Path = "/",
-        ///             RealserverType = "IP",
-        ///             HealthCheck = true,
-        ///             Realservers = 
-        ///             {
-        ///                 new Tencentcloud.Gaap.Inputs.HttpRuleRealserverArgs
-        ///                 {
-        ///                     Id = fooRealserver.Id,
-        ///                     Ip = fooRealserver.Ip,
-        ///                     Port = 80,
-        ///                 },
-        ///             },
-        ///         });
-        ///         var fooHttpRules = Tencentcloud.Gaap.GetHttpRules.Invoke(new Tencentcloud.Gaap.GetHttpRulesInvokeArgs
-        ///         {
-        ///             ListenerId = fooLayer7Listener.Id,
-        ///             Domain = fooHttpRule.Domain,
-        ///         });
-        ///     }
+        ///         Bandwidth = 10,
+        ///         Concurrent = 2,
+        ///         AccessRegion = "SouthChina",
+        ///         RealserverRegion = "NorthChina",
+        ///     });
         /// 
-        /// }
+        ///     var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
+        ///     {
+        ///         Protocol = "HTTP",
+        ///         Port = 80,
+        ///         ProxyId = fooProxy.Id,
+        ///     });
+        /// 
+        ///     var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new()
+        ///     {
+        ///         Ip = "1.1.1.1",
+        ///     });
+        /// 
+        ///     var fooHttpRule = new Tencentcloud.Gaap.HttpRule("fooHttpRule", new()
+        ///     {
+        ///         ListenerId = fooLayer7Listener.Id,
+        ///         Domain = "www.qq.com",
+        ///         Path = "/",
+        ///         RealserverType = "IP",
+        ///         HealthCheck = true,
+        ///         Realservers = new[]
+        ///         {
+        ///             new Tencentcloud.Gaap.Inputs.HttpRuleRealserverArgs
+        ///             {
+        ///                 Id = fooRealserver.Id,
+        ///                 Ip = fooRealserver.Ip,
+        ///                 Port = 80,
+        ///             },
+        ///         },
+        ///     });
+        /// 
+        ///     var fooHttpRules = Tencentcloud.Gaap.GetHttpRules.Invoke(new()
+        ///     {
+        ///         ListenerId = fooLayer7Listener.Id,
+        ///         Domain = fooHttpRule.Domain,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetHttpRulesResult> InvokeAsync(GetHttpRulesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetHttpRulesResult>("tencentcloud:Gaap/getHttpRules:getHttpRules", args ?? new GetHttpRulesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetHttpRulesResult>("tencentcloud:Gaap/getHttpRules:getHttpRules", args ?? new GetHttpRulesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query forward rule of layer7 listeners.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
         ///     {
-        ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-        ///         {
-        ///             Bandwidth = 10,
-        ///             Concurrent = 2,
-        ///             AccessRegion = "SouthChina",
-        ///             RealserverRegion = "NorthChina",
-        ///         });
-        ///         var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new Tencentcloud.Gaap.Layer7ListenerArgs
-        ///         {
-        ///             Protocol = "HTTP",
-        ///             Port = 80,
-        ///             ProxyId = fooProxy.Id,
-        ///         });
-        ///         var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new Tencentcloud.Gaap.RealserverArgs
-        ///         {
-        ///             Ip = "1.1.1.1",
-        ///         });
-        ///         var fooHttpRule = new Tencentcloud.Gaap.HttpRule("fooHttpRule", new Tencentcloud.Gaap.HttpRuleArgs
-        ///         {
-        ///             ListenerId = fooLayer7Listener.Id,
-        ///             Domain = "www.qq.com",
-        ///             Path = "/",
-        ///             RealserverType = "IP",
-        ///             HealthCheck = true,
-        ///             Realservers = 
-        ///             {
-        ///                 new Tencentcloud.Gaap.Inputs.HttpRuleRealserverArgs
-        ///                 {
-        ///                     Id = fooRealserver.Id,
-        ///                     Ip = fooRealserver.Ip,
-        ///                     Port = 80,
-        ///                 },
-        ///             },
-        ///         });
-        ///         var fooHttpRules = Tencentcloud.Gaap.GetHttpRules.Invoke(new Tencentcloud.Gaap.GetHttpRulesInvokeArgs
-        ///         {
-        ///             ListenerId = fooLayer7Listener.Id,
-        ///             Domain = fooHttpRule.Domain,
-        ///         });
-        ///     }
+        ///         Bandwidth = 10,
+        ///         Concurrent = 2,
+        ///         AccessRegion = "SouthChina",
+        ///         RealserverRegion = "NorthChina",
+        ///     });
         /// 
-        /// }
+        ///     var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
+        ///     {
+        ///         Protocol = "HTTP",
+        ///         Port = 80,
+        ///         ProxyId = fooProxy.Id,
+        ///     });
+        /// 
+        ///     var fooRealserver = new Tencentcloud.Gaap.Realserver("fooRealserver", new()
+        ///     {
+        ///         Ip = "1.1.1.1",
+        ///     });
+        /// 
+        ///     var fooHttpRule = new Tencentcloud.Gaap.HttpRule("fooHttpRule", new()
+        ///     {
+        ///         ListenerId = fooLayer7Listener.Id,
+        ///         Domain = "www.qq.com",
+        ///         Path = "/",
+        ///         RealserverType = "IP",
+        ///         HealthCheck = true,
+        ///         Realservers = new[]
+        ///         {
+        ///             new Tencentcloud.Gaap.Inputs.HttpRuleRealserverArgs
+        ///             {
+        ///                 Id = fooRealserver.Id,
+        ///                 Ip = fooRealserver.Ip,
+        ///                 Port = 80,
+        ///             },
+        ///         },
+        ///     });
+        /// 
+        ///     var fooHttpRules = Tencentcloud.Gaap.GetHttpRules.Invoke(new()
+        ///     {
+        ///         ListenerId = fooLayer7Listener.Id,
+        ///         Domain = fooHttpRule.Domain,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetHttpRulesResult> Invoke(GetHttpRulesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetHttpRulesResult>("tencentcloud:Gaap/getHttpRules:getHttpRules", args ?? new GetHttpRulesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetHttpRulesResult>("tencentcloud:Gaap/getHttpRules:getHttpRules", args ?? new GetHttpRulesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetHttpRulesArgs : Pulumi.InvokeArgs
+    public sealed class GetHttpRulesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Forward domain of the layer7 listener to be queried.
@@ -179,9 +181,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetHttpRulesArgs()
         {
         }
+        public static new GetHttpRulesArgs Empty => new GetHttpRulesArgs();
     }
 
-    public sealed class GetHttpRulesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetHttpRulesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Forward domain of the layer7 listener to be queried.
@@ -216,6 +219,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetHttpRulesInvokeArgs()
         {
         }
+        public static new GetHttpRulesInvokeArgs Empty => new GetHttpRulesInvokeArgs();
     }
 
 

@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Dasb.Device("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Dasb.Device("example", new Tencentcloud.Dasb.DeviceArgs
-    ///         {
-    ///             DepartmentId = "1.2.3",
-    ///             Ip = "192.168.0.1",
-    ///             OsName = "Linux",
-    ///             Port = 80,
-    ///         });
-    ///     }
+    ///         DepartmentId = "1.2.3",
+    ///         Ip = "192.168.0.1",
+    ///         OsName = "Linux",
+    ///         Port = 80,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dasb device can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dasb/device:Device example 17
+    /// $ pulumi import tencentcloud:Dasb/device:Device example 17
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/device:Device")]
-    public partial class Device : Pulumi.CustomResource
+    public partial class Device : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The department ID to which the device belongs.
@@ -127,7 +128,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         }
     }
 
-    public sealed class DeviceArgs : Pulumi.ResourceArgs
+    public sealed class DeviceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The department ID to which the device belongs.
@@ -174,9 +175,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public DeviceArgs()
         {
         }
+        public static new DeviceArgs Empty => new DeviceArgs();
     }
 
-    public sealed class DeviceState : Pulumi.ResourceArgs
+    public sealed class DeviceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The department ID to which the device belongs.
@@ -223,5 +225,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public DeviceState()
         {
         }
+        public static new DeviceState Empty => new DeviceState();
     }
 }

@@ -8,39 +8,44 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query GAAP certificate.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooCertificate, err := Gaap.NewCertificate(ctx, "fooCertificate", &Gaap.CertificateArgs{
-// 			Type:    pulumi.String("BASIC"),
-// 			Content: pulumi.String("test:tx2KGdo3zJg/."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Gaap.GetCertificatesOutput(ctx, gaap.GetCertificatesOutputArgs{
-// 			Id: fooCertificate.ID(),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooCertificate, err := Gaap.NewCertificate(ctx, "fooCertificate", &Gaap.CertificateArgs{
+//				Type:    pulumi.String("BASIC"),
+//				Content: pulumi.String("test:tx2KGdo3zJg/."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Gaap.GetCertificatesOutput(ctx, gaap.GetCertificatesOutputArgs{
+//				Id: fooCertificate.ID(),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetCertificates(ctx *pulumi.Context, args *GetCertificatesArgs, opts ...pulumi.InvokeOption) (*GetCertificatesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCertificatesResult
 	err := ctx.Invoke("tencentcloud:Gaap/getCertificates:getCertificates", args, &rv, opts...)
 	if err != nil {

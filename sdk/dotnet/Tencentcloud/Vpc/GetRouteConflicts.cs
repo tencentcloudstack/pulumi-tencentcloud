@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc route_conflicts
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var routeConflicts = Tencentcloud.Vpc.GetRouteConflicts.Invoke(new()
         ///     {
-        ///         var routeConflicts = Output.Create(Tencentcloud.Vpc.GetRouteConflicts.InvokeAsync(new Tencentcloud.Vpc.GetRouteConflictsArgs
+        ///         DestinationCidrBlocks = new[]
         ///         {
-        ///             DestinationCidrBlocks = 
-        ///             {
-        ///                 "172.18.111.0/24",
-        ///             },
-        ///             RouteTableId = "rtb-6xypllqe",
-        ///         }));
-        ///     }
+        ///             "172.18.111.0/24",
+        ///         },
+        ///         RouteTableId = "rtb-6xypllqe",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRouteConflictsResult> InvokeAsync(GetRouteConflictsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRouteConflictsResult>("tencentcloud:Vpc/getRouteConflicts:getRouteConflicts", args ?? new GetRouteConflictsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRouteConflictsResult>("tencentcloud:Vpc/getRouteConflicts:getRouteConflicts", args ?? new GetRouteConflictsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc route_conflicts
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var routeConflicts = Tencentcloud.Vpc.GetRouteConflicts.Invoke(new()
         ///     {
-        ///         var routeConflicts = Output.Create(Tencentcloud.Vpc.GetRouteConflicts.InvokeAsync(new Tencentcloud.Vpc.GetRouteConflictsArgs
+        ///         DestinationCidrBlocks = new[]
         ///         {
-        ///             DestinationCidrBlocks = 
-        ///             {
-        ///                 "172.18.111.0/24",
-        ///             },
-        ///             RouteTableId = "rtb-6xypllqe",
-        ///         }));
-        ///     }
+        ///             "172.18.111.0/24",
+        ///         },
+        ///         RouteTableId = "rtb-6xypllqe",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRouteConflictsResult> Invoke(GetRouteConflictsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRouteConflictsResult>("tencentcloud:Vpc/getRouteConflicts:getRouteConflicts", args ?? new GetRouteConflictsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRouteConflictsResult>("tencentcloud:Vpc/getRouteConflicts:getRouteConflicts", args ?? new GetRouteConflictsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRouteConflictsArgs : Pulumi.InvokeArgs
+    public sealed class GetRouteConflictsArgs : global::Pulumi.InvokeArgs
     {
         [Input("destinationCidrBlocks", required: true)]
         private List<string>? _destinationCidrBlocks;
@@ -109,9 +103,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetRouteConflictsArgs()
         {
         }
+        public static new GetRouteConflictsArgs Empty => new GetRouteConflictsArgs();
     }
 
-    public sealed class GetRouteConflictsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRouteConflictsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("destinationCidrBlocks", required: true)]
         private InputList<string>? _destinationCidrBlocks;
@@ -140,6 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetRouteConflictsInvokeArgs()
         {
         }
+        public static new GetRouteConflictsInvokeArgs Empty => new GetRouteConflictsInvokeArgs();
     }
 
 

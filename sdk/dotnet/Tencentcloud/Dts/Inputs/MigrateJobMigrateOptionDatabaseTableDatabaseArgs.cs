@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class MigrateJobMigrateOptionDatabaseTableDatabaseArgs : Pulumi.ResourceArgs
+    public sealed class MigrateJobMigrateOptionDatabaseTableDatabaseArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// DB selection mode:all (for all objects under the current object), partial (partial objects), when the ObjectMode is partial, this item is required.
@@ -178,5 +178,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public MigrateJobMigrateOptionDatabaseTableDatabaseArgs()
         {
         }
+        public static new MigrateJobMigrateOptionDatabaseTableDatabaseArgs Empty => new MigrateJobMigrateOptionDatabaseTableDatabaseArgs();
     }
 }

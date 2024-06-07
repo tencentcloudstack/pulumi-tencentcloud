@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// <summary>
         /// Use this data source to query detailed information of scf function_aliases
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var functionAliases = Tencentcloud.Scf.GetFunctionAliases.Invoke(new()
         ///     {
-        ///         var functionAliases = Output.Create(Tencentcloud.Scf.GetFunctionAliases.InvokeAsync(new Tencentcloud.Scf.GetFunctionAliasesArgs
-        ///         {
-        ///             FunctionName = "keep-1676351130",
-        ///             Namespace = "default",
-        ///         }));
-        ///     }
+        ///         FunctionName = "keep-1676351130",
+        ///         Namespace = "default",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetFunctionAliasesResult> InvokeAsync(GetFunctionAliasesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetFunctionAliasesResult>("tencentcloud:Scf/getFunctionAliases:getFunctionAliases", args ?? new GetFunctionAliasesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetFunctionAliasesResult>("tencentcloud:Scf/getFunctionAliases:getFunctionAliases", args ?? new GetFunctionAliasesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of scf function_aliases
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var functionAliases = Tencentcloud.Scf.GetFunctionAliases.Invoke(new()
         ///     {
-        ///         var functionAliases = Output.Create(Tencentcloud.Scf.GetFunctionAliases.InvokeAsync(new Tencentcloud.Scf.GetFunctionAliasesArgs
-        ///         {
-        ///             FunctionName = "keep-1676351130",
-        ///             Namespace = "default",
-        ///         }));
-        ///     }
+        ///         FunctionName = "keep-1676351130",
+        ///         Namespace = "default",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetFunctionAliasesResult> Invoke(GetFunctionAliasesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetFunctionAliasesResult>("tencentcloud:Scf/getFunctionAliases:getFunctionAliases", args ?? new GetFunctionAliasesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetFunctionAliasesResult>("tencentcloud:Scf/getFunctionAliases:getFunctionAliases", args ?? new GetFunctionAliasesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetFunctionAliasesArgs : Pulumi.InvokeArgs
+    public sealed class GetFunctionAliasesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Function name.
@@ -103,9 +97,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetFunctionAliasesArgs()
         {
         }
+        public static new GetFunctionAliasesArgs Empty => new GetFunctionAliasesArgs();
     }
 
-    public sealed class GetFunctionAliasesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetFunctionAliasesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Function name.
@@ -134,6 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetFunctionAliasesInvokeArgs()
         {
         }
+        public static new GetFunctionAliasesInvokeArgs Empty => new GetFunctionAliasesInvokeArgs();
     }
 
 

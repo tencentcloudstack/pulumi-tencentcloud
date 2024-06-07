@@ -7,110 +7,115 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tcm mesh
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcm.NewMesh(ctx, "mesh", &Tcm.MeshArgs{
-// 			Config: &tcm.MeshConfigArgs{
-// 				Inject: &tcm.MeshConfigInjectArgs{
-// 					ExcludeIpRanges: pulumi.StringArray{
-// 						pulumi.String("172.16.0.0/16"),
-// 					},
-// 					HoldApplicationUntilProxyStarts: pulumi.Bool(true),
-// 					HoldProxyUntilApplicationEnds:   pulumi.Bool(true),
-// 				},
-// 				Istio: &tcm.MeshConfigIstioArgs{
-// 					DisableHttpRetry:      pulumi.Bool(true),
-// 					DisablePolicyChecks:   pulumi.Bool(true),
-// 					EnablePilotHttp:       pulumi.Bool(true),
-// 					OutboundTrafficPolicy: pulumi.String("ALLOW_ANY"),
-// 					SmartDns: &tcm.MeshConfigIstioSmartDnsArgs{
-// 						IstioMetaDnsAutoAllocate: pulumi.Bool(true),
-// 						IstioMetaDnsCapture:      pulumi.Bool(true),
-// 					},
-// 					Tracing: &tcm.MeshConfigIstioTracingArgs{
-// 						Enable: pulumi.Bool(false),
-// 					},
-// 				},
-// 				Prometheus: &tcm.MeshConfigPrometheusArgs{
-// 					CustomProm: &tcm.MeshConfigPrometheusCustomPromArgs{
-// 						AuthType: pulumi.String("none"),
-// 						Url:      pulumi.String("https://10.0.0.1:1000"),
-// 						VpcId:    pulumi.String("vpc-j9yhbzpn"),
-// 					},
-// 				},
-// 				SidecarResources: &tcm.MeshConfigSidecarResourcesArgs{
-// 					Limits: tcm.MeshConfigSidecarResourcesLimitArray{
-// 						&tcm.MeshConfigSidecarResourcesLimitArgs{
-// 							Name:     pulumi.String("cpu"),
-// 							Quantity: pulumi.String("2"),
-// 						},
-// 						&tcm.MeshConfigSidecarResourcesLimitArgs{
-// 							Name:     pulumi.String("memory"),
-// 							Quantity: pulumi.String("1Gi"),
-// 						},
-// 					},
-// 					Requests: tcm.MeshConfigSidecarResourcesRequestArray{
-// 						&tcm.MeshConfigSidecarResourcesRequestArgs{
-// 							Name:     pulumi.String("cpu"),
-// 							Quantity: pulumi.String("100m"),
-// 						},
-// 						&tcm.MeshConfigSidecarResourcesRequestArgs{
-// 							Name:     pulumi.String("memory"),
-// 							Quantity: pulumi.String("128Mi"),
-// 						},
-// 					},
-// 				},
-// 				Tracing: &tcm.MeshConfigTracingArgs{
-// 					Apm: &tcm.MeshConfigTracingApmArgs{
-// 						Enable: pulumi.Bool(true),
-// 						Region: pulumi.String("ap-guangzhou"),
-// 					},
-// 					Enable:   pulumi.Bool(true),
-// 					Sampling: pulumi.Float64(1),
-// 				},
-// 			},
-// 			DisplayName: pulumi.String("test_mesh"),
-// 			MeshVersion: pulumi.String("1.12.5"),
-// 			TagLists: tcm.MeshTagListArray{
-// 				&tcm.MeshTagListArgs{
-// 					Key:         pulumi.String("key"),
-// 					Passthrough: pulumi.Bool(false),
-// 					Value:       pulumi.String("value"),
-// 				},
-// 			},
-// 			Type: pulumi.String("HOSTED"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcm.NewMesh(ctx, "mesh", &Tcm.MeshArgs{
+//				Config: &tcm.MeshConfigArgs{
+//					Inject: &tcm.MeshConfigInjectArgs{
+//						ExcludeIpRanges: pulumi.StringArray{
+//							pulumi.String("172.16.0.0/16"),
+//						},
+//						HoldApplicationUntilProxyStarts: pulumi.Bool(true),
+//						HoldProxyUntilApplicationEnds:   pulumi.Bool(true),
+//					},
+//					Istio: &tcm.MeshConfigIstioArgs{
+//						DisableHttpRetry:      pulumi.Bool(true),
+//						DisablePolicyChecks:   pulumi.Bool(true),
+//						EnablePilotHttp:       pulumi.Bool(true),
+//						OutboundTrafficPolicy: pulumi.String("ALLOW_ANY"),
+//						SmartDns: &tcm.MeshConfigIstioSmartDnsArgs{
+//							IstioMetaDnsAutoAllocate: pulumi.Bool(true),
+//							IstioMetaDnsCapture:      pulumi.Bool(true),
+//						},
+//						Tracing: &tcm.MeshConfigIstioTracingArgs{
+//							Enable: pulumi.Bool(false),
+//						},
+//					},
+//					Prometheus: &tcm.MeshConfigPrometheusArgs{
+//						CustomProm: &tcm.MeshConfigPrometheusCustomPromArgs{
+//							AuthType: pulumi.String("none"),
+//							Url:      pulumi.String("https://10.0.0.1:1000"),
+//							VpcId:    pulumi.String("vpc-j9yhbzpn"),
+//						},
+//					},
+//					SidecarResources: &tcm.MeshConfigSidecarResourcesArgs{
+//						Limits: tcm.MeshConfigSidecarResourcesLimitArray{
+//							&tcm.MeshConfigSidecarResourcesLimitArgs{
+//								Name:     pulumi.String("cpu"),
+//								Quantity: pulumi.String("2"),
+//							},
+//							&tcm.MeshConfigSidecarResourcesLimitArgs{
+//								Name:     pulumi.String("memory"),
+//								Quantity: pulumi.String("1Gi"),
+//							},
+//						},
+//						Requests: tcm.MeshConfigSidecarResourcesRequestArray{
+//							&tcm.MeshConfigSidecarResourcesRequestArgs{
+//								Name:     pulumi.String("cpu"),
+//								Quantity: pulumi.String("100m"),
+//							},
+//							&tcm.MeshConfigSidecarResourcesRequestArgs{
+//								Name:     pulumi.String("memory"),
+//								Quantity: pulumi.String("128Mi"),
+//							},
+//						},
+//					},
+//					Tracing: &tcm.MeshConfigTracingArgs{
+//						Apm: &tcm.MeshConfigTracingApmArgs{
+//							Enable: pulumi.Bool(true),
+//							Region: pulumi.String("ap-guangzhou"),
+//						},
+//						Enable:   pulumi.Bool(true),
+//						Sampling: pulumi.Float64(1),
+//					},
+//				},
+//				DisplayName: pulumi.String("test_mesh"),
+//				MeshVersion: pulumi.String("1.12.5"),
+//				TagLists: tcm.MeshTagListArray{
+//					&tcm.MeshTagListArgs{
+//						Key:         pulumi.String("key"),
+//						Passthrough: pulumi.Bool(false),
+//						Value:       pulumi.String("value"),
+//					},
+//				},
+//				Type: pulumi.String("HOSTED"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tcm mesh can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcm/mesh:Mesh mesh mesh_id
+// $ pulumi import tencentcloud:Tcm/mesh:Mesh mesh mesh_id
 // ```
 type Mesh struct {
 	pulumi.CustomResourceState
@@ -148,7 +153,7 @@ func NewMesh(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Mesh
 	err := ctx.RegisterResource("tencentcloud:Tcm/mesh:Mesh", name, args, &resource, opts...)
 	if err != nil {
@@ -261,7 +266,7 @@ func (i *Mesh) ToMeshOutputWithContext(ctx context.Context) MeshOutput {
 // MeshArrayInput is an input type that accepts MeshArray and MeshArrayOutput values.
 // You can construct a concrete instance of `MeshArrayInput` via:
 //
-//          MeshArray{ MeshArgs{...} }
+//	MeshArray{ MeshArgs{...} }
 type MeshArrayInput interface {
 	pulumi.Input
 
@@ -286,7 +291,7 @@ func (i MeshArray) ToMeshArrayOutputWithContext(ctx context.Context) MeshArrayOu
 // MeshMapInput is an input type that accepts MeshMap and MeshMapOutput values.
 // You can construct a concrete instance of `MeshMapInput` via:
 //
-//          MeshMap{ "key": MeshArgs{...} }
+//	MeshMap{ "key": MeshArgs{...} }
 type MeshMapInput interface {
 	pulumi.Input
 

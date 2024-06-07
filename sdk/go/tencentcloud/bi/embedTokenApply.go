@@ -8,37 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a bi embedToken
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Bi.NewEmbedTokenApply(ctx, "embedToken", &Bi.EmbedTokenApplyArgs{
-// 			ExpireTime: pulumi.String("240"),
-// 			PageId:     pulumi.Int(10520483),
-// 			ProjectId:  pulumi.Int(11015030),
-// 			Scope:      pulumi.String("page"),
-// 			UserCorpId: pulumi.String("100022975249"),
-// 			UserId:     pulumi.String("100024664626"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Bi.NewEmbedTokenApply(ctx, "embedToken", &Bi.EmbedTokenApplyArgs{
+//				ExpireTime: pulumi.String("240"),
+//				PageId:     pulumi.Int(10520483),
+//				ProjectId:  pulumi.Int(11015030),
+//				Scope:      pulumi.String("page"),
+//				UserCorpId: pulumi.String("100022975249"),
+//				UserId:     pulumi.String("100024664626"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type EmbedTokenApply struct {
 	pulumi.CustomResourceState
 
@@ -71,7 +77,7 @@ func NewEmbedTokenApply(ctx *pulumi.Context,
 		args = &EmbedTokenApplyArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource EmbedTokenApply
 	err := ctx.RegisterResource("tencentcloud:Bi/embedTokenApply:EmbedTokenApply", name, args, &resource, opts...)
 	if err != nil {
@@ -204,7 +210,7 @@ func (i *EmbedTokenApply) ToEmbedTokenApplyOutputWithContext(ctx context.Context
 // EmbedTokenApplyArrayInput is an input type that accepts EmbedTokenApplyArray and EmbedTokenApplyArrayOutput values.
 // You can construct a concrete instance of `EmbedTokenApplyArrayInput` via:
 //
-//          EmbedTokenApplyArray{ EmbedTokenApplyArgs{...} }
+//	EmbedTokenApplyArray{ EmbedTokenApplyArgs{...} }
 type EmbedTokenApplyArrayInput interface {
 	pulumi.Input
 
@@ -229,7 +235,7 @@ func (i EmbedTokenApplyArray) ToEmbedTokenApplyArrayOutputWithContext(ctx contex
 // EmbedTokenApplyMapInput is an input type that accepts EmbedTokenApplyMap and EmbedTokenApplyMapOutput values.
 // You can construct a concrete instance of `EmbedTokenApplyMapInput` via:
 //
-//          EmbedTokenApplyMap{ "key": EmbedTokenApplyArgs{...} }
+//	EmbedTokenApplyMap{ "key": EmbedTokenApplyArgs{...} }
 type EmbedTokenApplyMapInput interface {
 	pulumi.Input
 

@@ -8,44 +8,47 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dcdb slowLogs
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.GetSlowLogs(ctx, &dcdb.GetSlowLogsArgs{
-// 			InstanceId:  local.Dcdb_id,
-// 			StartTime:   fmt.Sprintf("%v%v", "%", "s"),
-// 			EndTime:     pulumi.StringRef(fmt.Sprintf("%v%v", "%", "s")),
-// 			ShardId:     "shard-1b5r04az",
-// 			Db:          pulumi.StringRef("tf_test_db"),
-// 			OrderBy:     pulumi.StringRef("query_time_sum"),
-// 			OrderByType: pulumi.StringRef("desc"),
-// 			Slave:       pulumi.IntRef(0),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcdb.GetSlowLogs(ctx, &dcdb.GetSlowLogsArgs{
+//				InstanceId:  local.Dcdb_id,
+//				StartTime:   "%s",
+//				EndTime:     pulumi.StringRef("%s"),
+//				ShardId:     "shard-1b5r04az",
+//				Db:          pulumi.StringRef("tf_test_db"),
+//				OrderBy:     pulumi.StringRef("query_time_sum"),
+//				OrderByType: pulumi.StringRef("desc"),
+//				Slave:       pulumi.IntRef(0),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSlowLogs(ctx *pulumi.Context, args *GetSlowLogsArgs, opts ...pulumi.InvokeOption) (*GetSlowLogsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSlowLogsResult
 	err := ctx.Invoke("tencentcloud:Dcdb/getSlowLogs:getSlowLogs", args, &rv, opts...)
 	if err != nil {

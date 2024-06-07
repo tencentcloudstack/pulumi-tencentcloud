@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bucketReferer = new tencentcloud.Cos.BucketReferer("bucket_referer", {
+ * const bucketReferer = new tencentcloud.cos.BucketReferer("bucketReferer", {
  *     bucket: "mycos-1258798060",
  *     domainLists: [
  *         "127.0.0.1",
@@ -24,13 +25,14 @@ import * as utilities from "../utilities";
  *     status: "Enabled",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cos bucket_referer can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cos/bucketReferer:BucketReferer bucket_referer bucket_id
+ * $ pulumi import tencentcloud:Cos/bucketReferer:BucketReferer bucket_referer bucket_id
  * ```
  */
 export class BucketReferer extends pulumi.CustomResource {

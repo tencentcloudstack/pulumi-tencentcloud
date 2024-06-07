@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var modifySwitchTimePeriodOperation = new Tencentcloud.Postgresql.ModifySwitchTimePeriodOperation("modifySwitchTimePeriodOperation", new()
     ///     {
-    ///         var modifySwitchTimePeriodOperation = new Tencentcloud.Postgresql.ModifySwitchTimePeriodOperation("modifySwitchTimePeriodOperation", new Tencentcloud.Postgresql.ModifySwitchTimePeriodOperationArgs
-    ///         {
-    ///             DbInstanceId = local.Pgsql_id,
-    ///             SwitchTag = 0,
-    ///         });
-    ///     }
+    ///         DbInstanceId = local.Pgsql_id,
+    ///         SwitchTag = 0,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/modifySwitchTimePeriodOperation:ModifySwitchTimePeriodOperation")]
-    public partial class ModifySwitchTimePeriodOperation : Pulumi.CustomResource
+    public partial class ModifySwitchTimePeriodOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The ID of the instance waiting for a switch.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class ModifySwitchTimePeriodOperationArgs : Pulumi.ResourceArgs
+    public sealed class ModifySwitchTimePeriodOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of the instance waiting for a switch.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public ModifySwitchTimePeriodOperationArgs()
         {
         }
+        public static new ModifySwitchTimePeriodOperationArgs Empty => new ModifySwitchTimePeriodOperationArgs();
     }
 
-    public sealed class ModifySwitchTimePeriodOperationState : Pulumi.ResourceArgs
+    public sealed class ModifySwitchTimePeriodOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of the instance waiting for a switch.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public ModifySwitchTimePeriodOperationState()
         {
         }
+        public static new ModifySwitchTimePeriodOperationState Empty => new ModifySwitchTimePeriodOperationState();
     }
 }

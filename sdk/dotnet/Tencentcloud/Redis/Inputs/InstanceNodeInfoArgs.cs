@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis.Inputs
 {
 
-    public sealed class InstanceNodeInfoArgs : Pulumi.ResourceArgs
+    public sealed class InstanceNodeInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the master or replica node.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis.Inputs
         public InstanceNodeInfoArgs()
         {
         }
+        public static new InstanceNodeInfoArgs Empty => new InstanceNodeInfoArgs();
     }
 }

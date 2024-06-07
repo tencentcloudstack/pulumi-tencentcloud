@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
 {
     [TencentcloudResourceType("tencentcloud:Vpc/dhcpAssociateAddress:DhcpAssociateAddress")]
-    public partial class DhcpAssociateAddress : Pulumi.CustomResource
+    public partial class DhcpAssociateAddress : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Elastic public network `IP`. Must be `EIP` not bound to `DhcpIp`.
@@ -70,7 +70,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class DhcpAssociateAddressArgs : Pulumi.ResourceArgs
+    public sealed class DhcpAssociateAddressArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Elastic public network `IP`. Must be `EIP` not bound to `DhcpIp`.
@@ -87,9 +87,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public DhcpAssociateAddressArgs()
         {
         }
+        public static new DhcpAssociateAddressArgs Empty => new DhcpAssociateAddressArgs();
     }
 
-    public sealed class DhcpAssociateAddressState : Pulumi.ResourceArgs
+    public sealed class DhcpAssociateAddressState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Elastic public network `IP`. Must be `EIP` not bound to `DhcpIp`.
@@ -106,5 +107,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public DhcpAssociateAddressState()
         {
         }
+        public static new DhcpAssociateAddressState Empty => new DhcpAssociateAddressState();
     }
 }

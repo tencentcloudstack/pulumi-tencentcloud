@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const padTemplates = pulumi.output(tencentcloud.Css.getPadTemplates());
+ * const padTemplates = tencentcloud.Css.getPadTemplates({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPadTemplates(args?: GetPadTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetPadTemplatesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Css/getPadTemplates:getPadTemplates", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetPadTemplatesResult {
      */
     readonly templates: outputs.Css.GetPadTemplatesTemplate[];
 }
-
+/**
+ * Use this data source to query detailed information of css padTemplates
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const padTemplates = tencentcloud.Css.getPadTemplates({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPadTemplatesOutput(args?: GetPadTemplatesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPadTemplatesResult> {
-    return pulumi.output(args).apply(a => getPadTemplates(a, opts))
+    return pulumi.output(args).apply((a: any) => getPadTemplates(a, opts))
 }
 
 /**

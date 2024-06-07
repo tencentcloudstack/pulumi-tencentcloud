@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// <summary>
         /// Use this data source to query the detail information of an existing autoscaling group.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var asScalingGroups = Tencentcloud.As.GetScalingGroups.Invoke(new()
         ///     {
-        ///         var asScalingGroups = Output.Create(Tencentcloud.As.GetScalingGroups.InvokeAsync(new Tencentcloud.As.GetScalingGroupsArgs
-        ///         {
-        ///             ConfigurationId = "asc-oqio4yyj",
-        ///             ResultOutputFile = "my_test_path",
-        ///             ScalingGroupName = "myasgroup",
-        ///         }));
-        ///     }
+        ///         ConfigurationId = "asc-oqio4yyj",
+        ///         ResultOutputFile = "my_test_path",
+        ///         ScalingGroupName = "myasgroup",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetScalingGroupsResult> InvokeAsync(GetScalingGroupsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetScalingGroupsResult>("tencentcloud:As/getScalingGroups:getScalingGroups", args ?? new GetScalingGroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetScalingGroupsResult>("tencentcloud:As/getScalingGroups:getScalingGroups", args ?? new GetScalingGroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the detail information of an existing autoscaling group.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var asScalingGroups = Tencentcloud.As.GetScalingGroups.Invoke(new()
         ///     {
-        ///         var asScalingGroups = Output.Create(Tencentcloud.As.GetScalingGroups.InvokeAsync(new Tencentcloud.As.GetScalingGroupsArgs
-        ///         {
-        ///             ConfigurationId = "asc-oqio4yyj",
-        ///             ResultOutputFile = "my_test_path",
-        ///             ScalingGroupName = "myasgroup",
-        ///         }));
-        ///     }
+        ///         ConfigurationId = "asc-oqio4yyj",
+        ///         ResultOutputFile = "my_test_path",
+        ///         ScalingGroupName = "myasgroup",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetScalingGroupsResult> Invoke(GetScalingGroupsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetScalingGroupsResult>("tencentcloud:As/getScalingGroups:getScalingGroups", args ?? new GetScalingGroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetScalingGroupsResult>("tencentcloud:As/getScalingGroups:getScalingGroups", args ?? new GetScalingGroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetScalingGroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetScalingGroupsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter results by launch configuration ID.
@@ -117,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public GetScalingGroupsArgs()
         {
         }
+        public static new GetScalingGroupsArgs Empty => new GetScalingGroupsArgs();
     }
 
-    public sealed class GetScalingGroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetScalingGroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter results by launch configuration ID.
@@ -160,6 +155,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public GetScalingGroupsInvokeArgs()
         {
         }
+        public static new GetScalingGroupsInvokeArgs Empty => new GetScalingGroupsInvokeArgs();
     }
 
 

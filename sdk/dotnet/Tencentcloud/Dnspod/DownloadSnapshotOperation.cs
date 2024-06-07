@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var downloadSnapshot = new Tencentcloud.Dnspod.DownloadSnapshotOperation("downloadSnapshot", new()
     ///     {
-    ///         var downloadSnapshot = new Tencentcloud.Dnspod.DownloadSnapshotOperation("downloadSnapshot", new Tencentcloud.Dnspod.DownloadSnapshotOperationArgs
-    ///         {
-    ///             Domain = "dnspod.cn",
-    ///             SnapshotId = "456",
-    ///         });
-    ///     }
+    ///         Domain = "dnspod.cn",
+    ///         SnapshotId = "456",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnspod/downloadSnapshotOperation:DownloadSnapshotOperation")]
-    public partial class DownloadSnapshotOperation : Pulumi.CustomResource
+    public partial class DownloadSnapshotOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Snapshot download url.
@@ -99,7 +100,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         }
     }
 
-    public sealed class DownloadSnapshotOperationArgs : Pulumi.ResourceArgs
+    public sealed class DownloadSnapshotOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -116,9 +117,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public DownloadSnapshotOperationArgs()
         {
         }
+        public static new DownloadSnapshotOperationArgs Empty => new DownloadSnapshotOperationArgs();
     }
 
-    public sealed class DownloadSnapshotOperationState : Pulumi.ResourceArgs
+    public sealed class DownloadSnapshotOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Snapshot download url.
@@ -141,5 +143,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public DownloadSnapshotOperationState()
         {
         }
+        public static new DownloadSnapshotOperationState Empty => new DownloadSnapshotOperationState();
     }
 }

@@ -15,100 +15,98 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// <summary>
         /// Use this data source to query detailed information of tdmq environment_attributes
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new()
         ///     {
-        ///         var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new Tencentcloud.Tdmq.InstanceArgs
+        ///         ClusterName = "tf_example",
+        ///         Remark = "remark.",
+        ///         Tags = 
         ///         {
-        ///             ClusterName = "tf_example",
-        ///             Remark = "remark.",
-        ///             Tags = 
-        ///             {
-        ///                 { "createdBy", "terraform" },
-        ///             },
-        ///         });
-        ///         var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new Tencentcloud.Tdmq.NamespaceArgs
-        ///         {
-        ///             EnvironName = "tf_example",
-        ///             MsgTtl = 300,
-        ///             ClusterId = exampleInstance.Id,
-        ///             Remark = "remark.",
-        ///         });
-        ///         var exampleEnvironmentAttributes = Tencentcloud.Tdmq.GetEnvironmentAttributes.Invoke(new Tencentcloud.Tdmq.GetEnvironmentAttributesInvokeArgs
-        ///         {
-        ///             EnvironmentId = exampleNamespace.EnvironName,
-        ///             ClusterId = exampleInstance.Id,
-        ///         });
-        ///     }
+        ///             { "createdBy", "terraform" },
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new()
+        ///     {
+        ///         EnvironName = "tf_example",
+        ///         MsgTtl = 300,
+        ///         ClusterId = exampleInstance.Id,
+        ///         Remark = "remark.",
+        ///     });
+        /// 
+        ///     var exampleEnvironmentAttributes = Tencentcloud.Tdmq.GetEnvironmentAttributes.Invoke(new()
+        ///     {
+        ///         EnvironmentId = exampleNamespace.EnvironName,
+        ///         ClusterId = exampleInstance.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetEnvironmentAttributesResult> InvokeAsync(GetEnvironmentAttributesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetEnvironmentAttributesResult>("tencentcloud:Tdmq/getEnvironmentAttributes:getEnvironmentAttributes", args ?? new GetEnvironmentAttributesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetEnvironmentAttributesResult>("tencentcloud:Tdmq/getEnvironmentAttributes:getEnvironmentAttributes", args ?? new GetEnvironmentAttributesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tdmq environment_attributes
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new()
         ///     {
-        ///         var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new Tencentcloud.Tdmq.InstanceArgs
+        ///         ClusterName = "tf_example",
+        ///         Remark = "remark.",
+        ///         Tags = 
         ///         {
-        ///             ClusterName = "tf_example",
-        ///             Remark = "remark.",
-        ///             Tags = 
-        ///             {
-        ///                 { "createdBy", "terraform" },
-        ///             },
-        ///         });
-        ///         var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new Tencentcloud.Tdmq.NamespaceArgs
-        ///         {
-        ///             EnvironName = "tf_example",
-        ///             MsgTtl = 300,
-        ///             ClusterId = exampleInstance.Id,
-        ///             Remark = "remark.",
-        ///         });
-        ///         var exampleEnvironmentAttributes = Tencentcloud.Tdmq.GetEnvironmentAttributes.Invoke(new Tencentcloud.Tdmq.GetEnvironmentAttributesInvokeArgs
-        ///         {
-        ///             EnvironmentId = exampleNamespace.EnvironName,
-        ///             ClusterId = exampleInstance.Id,
-        ///         });
-        ///     }
+        ///             { "createdBy", "terraform" },
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new()
+        ///     {
+        ///         EnvironName = "tf_example",
+        ///         MsgTtl = 300,
+        ///         ClusterId = exampleInstance.Id,
+        ///         Remark = "remark.",
+        ///     });
+        /// 
+        ///     var exampleEnvironmentAttributes = Tencentcloud.Tdmq.GetEnvironmentAttributes.Invoke(new()
+        ///     {
+        ///         EnvironmentId = exampleNamespace.EnvironName,
+        ///         ClusterId = exampleInstance.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetEnvironmentAttributesResult> Invoke(GetEnvironmentAttributesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetEnvironmentAttributesResult>("tencentcloud:Tdmq/getEnvironmentAttributes:getEnvironmentAttributes", args ?? new GetEnvironmentAttributesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetEnvironmentAttributesResult>("tencentcloud:Tdmq/getEnvironmentAttributes:getEnvironmentAttributes", args ?? new GetEnvironmentAttributesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetEnvironmentAttributesArgs : Pulumi.InvokeArgs
+    public sealed class GetEnvironmentAttributesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the Pulsar cluster.
@@ -131,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetEnvironmentAttributesArgs()
         {
         }
+        public static new GetEnvironmentAttributesArgs Empty => new GetEnvironmentAttributesArgs();
     }
 
-    public sealed class GetEnvironmentAttributesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetEnvironmentAttributesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the Pulsar cluster.
@@ -156,6 +155,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetEnvironmentAttributesInvokeArgs()
         {
         }
+        public static new GetEnvironmentAttributesInvokeArgs Empty => new GetEnvironmentAttributesInvokeArgs();
     }
 
 

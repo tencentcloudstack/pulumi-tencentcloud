@@ -7,44 +7,50 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a VPN customer gateway.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpn.NewCustomerGateway(ctx, "foo", &Vpn.CustomerGatewayArgs{
-// 			PublicIpAddress: pulumi.String("1.1.1.1"),
-// 			Tags: pulumi.AnyMap{
-// 				"tag": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpn.NewCustomerGateway(ctx, "foo", &Vpn.CustomerGatewayArgs{
+//				PublicIpAddress: pulumi.String("1.1.1.1"),
+//				Tags: pulumi.Map{
+//					"tag": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // VPN customer gateway can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpn/customerGateway:CustomerGateway foo cgw-xfqag
+// $ pulumi import tencentcloud:Vpn/customerGateway:CustomerGateway foo cgw-xfqag
 // ```
 type CustomerGateway struct {
 	pulumi.CustomResourceState
@@ -69,7 +75,7 @@ func NewCustomerGateway(ctx *pulumi.Context,
 	if args.PublicIpAddress == nil {
 		return nil, errors.New("invalid value for required argument 'PublicIpAddress'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CustomerGateway
 	err := ctx.RegisterResource("tencentcloud:Vpn/customerGateway:CustomerGateway", name, args, &resource, opts...)
 	if err != nil {
@@ -162,7 +168,7 @@ func (i *CustomerGateway) ToCustomerGatewayOutputWithContext(ctx context.Context
 // CustomerGatewayArrayInput is an input type that accepts CustomerGatewayArray and CustomerGatewayArrayOutput values.
 // You can construct a concrete instance of `CustomerGatewayArrayInput` via:
 //
-//          CustomerGatewayArray{ CustomerGatewayArgs{...} }
+//	CustomerGatewayArray{ CustomerGatewayArgs{...} }
 type CustomerGatewayArrayInput interface {
 	pulumi.Input
 
@@ -187,7 +193,7 @@ func (i CustomerGatewayArray) ToCustomerGatewayArrayOutputWithContext(ctx contex
 // CustomerGatewayMapInput is an input type that accepts CustomerGatewayMap and CustomerGatewayMapOutput values.
 // You can construct a concrete instance of `CustomerGatewayMapInput` via:
 //
-//          CustomerGatewayMap{ "key": CustomerGatewayArgs{...} }
+//	CustomerGatewayMap{ "key": CustomerGatewayArgs{...} }
 type CustomerGatewayMapInput interface {
 	pulumi.Input
 

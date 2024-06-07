@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type GetVipEipAttachmentsHaVipEipAttachmentList struct {
 	// Public IP address of EIP to be queried.
@@ -20,7 +23,7 @@ type GetVipEipAttachmentsHaVipEipAttachmentList struct {
 // GetVipEipAttachmentsHaVipEipAttachmentListInput is an input type that accepts GetVipEipAttachmentsHaVipEipAttachmentListArgs and GetVipEipAttachmentsHaVipEipAttachmentListOutput values.
 // You can construct a concrete instance of `GetVipEipAttachmentsHaVipEipAttachmentListInput` via:
 //
-//          GetVipEipAttachmentsHaVipEipAttachmentListArgs{...}
+//	GetVipEipAttachmentsHaVipEipAttachmentListArgs{...}
 type GetVipEipAttachmentsHaVipEipAttachmentListInput interface {
 	pulumi.Input
 
@@ -50,7 +53,7 @@ func (i GetVipEipAttachmentsHaVipEipAttachmentListArgs) ToGetVipEipAttachmentsHa
 // GetVipEipAttachmentsHaVipEipAttachmentListArrayInput is an input type that accepts GetVipEipAttachmentsHaVipEipAttachmentListArray and GetVipEipAttachmentsHaVipEipAttachmentListArrayOutput values.
 // You can construct a concrete instance of `GetVipEipAttachmentsHaVipEipAttachmentListArrayInput` via:
 //
-//          GetVipEipAttachmentsHaVipEipAttachmentListArray{ GetVipEipAttachmentsHaVipEipAttachmentListArgs{...} }
+//	GetVipEipAttachmentsHaVipEipAttachmentListArray{ GetVipEipAttachmentsHaVipEipAttachmentListArgs{...} }
 type GetVipEipAttachmentsHaVipEipAttachmentListArrayInput interface {
 	pulumi.Input
 
@@ -142,7 +145,7 @@ type GetVipsHaVipList struct {
 // GetVipsHaVipListInput is an input type that accepts GetVipsHaVipListArgs and GetVipsHaVipListOutput values.
 // You can construct a concrete instance of `GetVipsHaVipListInput` via:
 //
-//          GetVipsHaVipListArgs{...}
+//	GetVipsHaVipListArgs{...}
 type GetVipsHaVipListInput interface {
 	pulumi.Input
 
@@ -188,7 +191,7 @@ func (i GetVipsHaVipListArgs) ToGetVipsHaVipListOutputWithContext(ctx context.Co
 // GetVipsHaVipListArrayInput is an input type that accepts GetVipsHaVipListArray and GetVipsHaVipListArrayOutput values.
 // You can construct a concrete instance of `GetVipsHaVipListArrayInput` via:
 //
-//          GetVipsHaVipListArray{ GetVipsHaVipListArgs{...} }
+//	GetVipsHaVipListArray{ GetVipsHaVipListArgs{...} }
 type GetVipsHaVipListArrayInput interface {
 	pulumi.Input
 

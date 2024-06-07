@@ -9,10 +9,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zone = tencentcloud.Redis.getZoneConfig({
  *     typeId: 7,
@@ -20,16 +21,16 @@ import * as utilities from "../utilities";
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
  *     vpcId: vpc.id,
- *     availabilityZone: zone.then(zone => zone.lists?[0]?.zone),
+ *     availabilityZone: zone.then(zone => zone.lists?.[0]?.zone),
  *     cidrBlock: "10.0.1.0/24",
  * });
  * const fooInstance = new tencentcloud.redis.Instance("fooInstance", {
- *     availabilityZone: zone.then(zone => zone.lists?[0]?.zone),
- *     typeId: zone.then(zone => zone.lists?[0]?.typeId),
+ *     availabilityZone: zone.then(zone => zone.lists?.[0]?.zone),
+ *     typeId: zone.then(zone => zone.lists?.[0]?.typeId),
  *     password: "test12345789",
  *     memSize: 8192,
- *     redisShardNum: zone.then(zone => zone.lists?[0]?.redisShardNums?[0]),
- *     redisReplicasNum: zone.then(zone => zone.lists?[0]?.redisReplicasNums?[0]),
+ *     redisShardNum: zone.then(zone => zone.lists?.[0]?.redisShardNums?.[0]),
+ *     redisReplicasNum: zone.then(zone => zone.lists?.[0]?.redisReplicasNums?.[0]),
  *     port: 6379,
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
@@ -40,13 +41,14 @@ import * as utilities from "../utilities";
  *     endTime: "19:00",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * redis maintenance_window can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Redis/maintenanceWindow:MaintenanceWindow foo instance_id
+ * $ pulumi import tencentcloud:Redis/maintenanceWindow:MaintenanceWindow foo instance_id
  * ```
  */
 export class MaintenanceWindow extends pulumi.CustomResource {

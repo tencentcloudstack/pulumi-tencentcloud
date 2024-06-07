@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-6";
@@ -83,6 +84,7 @@ import * as utilities from "../utilities";
  *     extraOrgIds: ["1"],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class GrafanaNotificationChannel extends pulumi.CustomResource {
     /**

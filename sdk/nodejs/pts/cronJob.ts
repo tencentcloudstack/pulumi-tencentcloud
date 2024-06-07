@@ -9,29 +9,30 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cronJob = new tencentcloud.Pts.CronJob("cron_job", {
+ * const cronJob = new tencentcloud.pts.CronJob("cronJob", {
  *     cronExpression: "* 1 * * *",
  *     frequencyType: 2,
  *     jobOwner: "userName",
  *     note: "desc",
- *     // end_time = ""
  *     noticeId: "notice-vp6i38jt",
  *     projectId: "project-7qkzxhea",
  *     scenarioId: "scenario-c22lqb1w",
  *     scenarioName: "pts-js(2022-11-10 21:53:53)",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * pts cron_job can be imported using the projectId#cronJobId, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Pts/cronJob:CronJob cron_job project-7qkzxhea#scenario-c22lqb1w
+ * $ pulumi import tencentcloud:Pts/cronJob:CronJob cron_job project-7qkzxhea#scenario-c22lqb1w
  * ```
  */
 export class CronJob extends pulumi.CustomResource {

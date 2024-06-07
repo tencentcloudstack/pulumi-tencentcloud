@@ -15,59 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new()
     ///     {
-    ///         var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new Tencentcloud.Tdmq.InstanceArgs
+    ///         ClusterName = "tf_example",
+    ///         Remark = "remark.",
+    ///         Tags = 
     ///         {
-    ///             ClusterName = "tf_example",
-    ///             Remark = "remark.",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new Tencentcloud.Tdmq.NamespaceArgs
-    ///         {
-    ///             EnvironName = "tf_example",
-    ///             MsgTtl = 300,
-    ///             ClusterId = exampleInstance.Id,
-    ///             RetentionPolicy = new Tencentcloud.Tdmq.Inputs.NamespaceRetentionPolicyArgs
-    ///             {
-    ///                 TimeInMinutes = 60,
-    ///                 SizeInMb = 10,
-    ///             },
-    ///             Remark = "remark.",
-    ///         });
-    ///         var exampleTopic = new Tencentcloud.Tdmq.Topic("exampleTopic", new Tencentcloud.Tdmq.TopicArgs
-    ///         {
-    ///             EnvironId = exampleNamespace.EnvironName,
-    ///             ClusterId = exampleInstance.Id,
-    ///             TopicName = "tf-example-topic",
-    ///             Partitions = 6,
-    ///             PulsarTopicType = 3,
-    ///             Remark = "remark.",
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new()
+    ///     {
+    ///         EnvironName = "tf_example",
+    ///         MsgTtl = 300,
+    ///         ClusterId = exampleInstance.Id,
+    ///         RetentionPolicy = new Tencentcloud.Tdmq.Inputs.NamespaceRetentionPolicyArgs
+    ///         {
+    ///             TimeInMinutes = 60,
+    ///             SizeInMb = 10,
+    ///         },
+    ///         Remark = "remark.",
+    ///     });
+    /// 
+    ///     var exampleTopic = new Tencentcloud.Tdmq.Topic("exampleTopic", new()
+    ///     {
+    ///         EnvironId = exampleNamespace.EnvironName,
+    ///         ClusterId = exampleInstance.Id,
+    ///         TopicName = "tf-example-topic",
+    ///         Partitions = 6,
+    ///         PulsarTopicType = 3,
+    ///         Remark = "remark.",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Tdmq Topic can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tdmq/topic:Topic test topic_id
+    /// $ pulumi import tencentcloud:Tdmq/topic:Topic test topic_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/topic:Topic")]
-    public partial class Topic : Pulumi.CustomResource
+    public partial class Topic : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The Dedicated Cluster Id.
@@ -162,7 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class TopicArgs : Pulumi.ResourceArgs
+    public sealed class TopicArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The Dedicated Cluster Id.
@@ -209,9 +212,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public TopicArgs()
         {
         }
+        public static new TopicArgs Empty => new TopicArgs();
     }
 
-    public sealed class TopicState : Pulumi.ResourceArgs
+    public sealed class TopicState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The Dedicated Cluster Id.
@@ -264,5 +268,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public TopicState()
         {
         }
+        public static new TopicState Empty => new TopicState();
     }
 }

@@ -5,46 +5,101 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./bucketAttachment";
-export * from "./bucketPicStyle";
-export * from "./guetzli";
-export * from "./hotLink";
-export * from "./mediaAnimationTemplate";
-export * from "./mediaConcatTemplate";
-export * from "./mediaPicProcessTemplate";
-export * from "./mediaSmartCoverTemplate";
-export * from "./mediaSnapshotTemplate";
-export * from "./mediaSpeechRecognitionTemplate";
-export * from "./mediaSuperResolutionTemplate";
-export * from "./mediaTranscodeProTemplate";
-export * from "./mediaTranscodeTemplate";
-export * from "./mediaTtsTemplate";
-export * from "./mediaVideoMontageTemplate";
-export * from "./mediaVideoProcessTemplate";
-export * from "./mediaVoiceSeparateTemplate";
-export * from "./mediaWatermarkTemplate";
-export * from "./originalImageProtection";
+export { BucketAttachmentArgs, BucketAttachmentState } from "./bucketAttachment";
+export type BucketAttachment = import("./bucketAttachment").BucketAttachment;
+export const BucketAttachment: typeof import("./bucketAttachment").BucketAttachment = null as any;
+utilities.lazyLoad(exports, ["BucketAttachment"], () => require("./bucketAttachment"));
 
-// Import resources to register:
-import { BucketAttachment } from "./bucketAttachment";
-import { BucketPicStyle } from "./bucketPicStyle";
-import { Guetzli } from "./guetzli";
-import { HotLink } from "./hotLink";
-import { MediaAnimationTemplate } from "./mediaAnimationTemplate";
-import { MediaConcatTemplate } from "./mediaConcatTemplate";
-import { MediaPicProcessTemplate } from "./mediaPicProcessTemplate";
-import { MediaSmartCoverTemplate } from "./mediaSmartCoverTemplate";
-import { MediaSnapshotTemplate } from "./mediaSnapshotTemplate";
-import { MediaSpeechRecognitionTemplate } from "./mediaSpeechRecognitionTemplate";
-import { MediaSuperResolutionTemplate } from "./mediaSuperResolutionTemplate";
-import { MediaTranscodeProTemplate } from "./mediaTranscodeProTemplate";
-import { MediaTranscodeTemplate } from "./mediaTranscodeTemplate";
-import { MediaTtsTemplate } from "./mediaTtsTemplate";
-import { MediaVideoMontageTemplate } from "./mediaVideoMontageTemplate";
-import { MediaVideoProcessTemplate } from "./mediaVideoProcessTemplate";
-import { MediaVoiceSeparateTemplate } from "./mediaVoiceSeparateTemplate";
-import { MediaWatermarkTemplate } from "./mediaWatermarkTemplate";
-import { OriginalImageProtection } from "./originalImageProtection";
+export { BucketPicStyleArgs, BucketPicStyleState } from "./bucketPicStyle";
+export type BucketPicStyle = import("./bucketPicStyle").BucketPicStyle;
+export const BucketPicStyle: typeof import("./bucketPicStyle").BucketPicStyle = null as any;
+utilities.lazyLoad(exports, ["BucketPicStyle"], () => require("./bucketPicStyle"));
+
+export { GuetzliArgs, GuetzliState } from "./guetzli";
+export type Guetzli = import("./guetzli").Guetzli;
+export const Guetzli: typeof import("./guetzli").Guetzli = null as any;
+utilities.lazyLoad(exports, ["Guetzli"], () => require("./guetzli"));
+
+export { HotLinkArgs, HotLinkState } from "./hotLink";
+export type HotLink = import("./hotLink").HotLink;
+export const HotLink: typeof import("./hotLink").HotLink = null as any;
+utilities.lazyLoad(exports, ["HotLink"], () => require("./hotLink"));
+
+export { MediaAnimationTemplateArgs, MediaAnimationTemplateState } from "./mediaAnimationTemplate";
+export type MediaAnimationTemplate = import("./mediaAnimationTemplate").MediaAnimationTemplate;
+export const MediaAnimationTemplate: typeof import("./mediaAnimationTemplate").MediaAnimationTemplate = null as any;
+utilities.lazyLoad(exports, ["MediaAnimationTemplate"], () => require("./mediaAnimationTemplate"));
+
+export { MediaConcatTemplateArgs, MediaConcatTemplateState } from "./mediaConcatTemplate";
+export type MediaConcatTemplate = import("./mediaConcatTemplate").MediaConcatTemplate;
+export const MediaConcatTemplate: typeof import("./mediaConcatTemplate").MediaConcatTemplate = null as any;
+utilities.lazyLoad(exports, ["MediaConcatTemplate"], () => require("./mediaConcatTemplate"));
+
+export { MediaPicProcessTemplateArgs, MediaPicProcessTemplateState } from "./mediaPicProcessTemplate";
+export type MediaPicProcessTemplate = import("./mediaPicProcessTemplate").MediaPicProcessTemplate;
+export const MediaPicProcessTemplate: typeof import("./mediaPicProcessTemplate").MediaPicProcessTemplate = null as any;
+utilities.lazyLoad(exports, ["MediaPicProcessTemplate"], () => require("./mediaPicProcessTemplate"));
+
+export { MediaSmartCoverTemplateArgs, MediaSmartCoverTemplateState } from "./mediaSmartCoverTemplate";
+export type MediaSmartCoverTemplate = import("./mediaSmartCoverTemplate").MediaSmartCoverTemplate;
+export const MediaSmartCoverTemplate: typeof import("./mediaSmartCoverTemplate").MediaSmartCoverTemplate = null as any;
+utilities.lazyLoad(exports, ["MediaSmartCoverTemplate"], () => require("./mediaSmartCoverTemplate"));
+
+export { MediaSnapshotTemplateArgs, MediaSnapshotTemplateState } from "./mediaSnapshotTemplate";
+export type MediaSnapshotTemplate = import("./mediaSnapshotTemplate").MediaSnapshotTemplate;
+export const MediaSnapshotTemplate: typeof import("./mediaSnapshotTemplate").MediaSnapshotTemplate = null as any;
+utilities.lazyLoad(exports, ["MediaSnapshotTemplate"], () => require("./mediaSnapshotTemplate"));
+
+export { MediaSpeechRecognitionTemplateArgs, MediaSpeechRecognitionTemplateState } from "./mediaSpeechRecognitionTemplate";
+export type MediaSpeechRecognitionTemplate = import("./mediaSpeechRecognitionTemplate").MediaSpeechRecognitionTemplate;
+export const MediaSpeechRecognitionTemplate: typeof import("./mediaSpeechRecognitionTemplate").MediaSpeechRecognitionTemplate = null as any;
+utilities.lazyLoad(exports, ["MediaSpeechRecognitionTemplate"], () => require("./mediaSpeechRecognitionTemplate"));
+
+export { MediaSuperResolutionTemplateArgs, MediaSuperResolutionTemplateState } from "./mediaSuperResolutionTemplate";
+export type MediaSuperResolutionTemplate = import("./mediaSuperResolutionTemplate").MediaSuperResolutionTemplate;
+export const MediaSuperResolutionTemplate: typeof import("./mediaSuperResolutionTemplate").MediaSuperResolutionTemplate = null as any;
+utilities.lazyLoad(exports, ["MediaSuperResolutionTemplate"], () => require("./mediaSuperResolutionTemplate"));
+
+export { MediaTranscodeProTemplateArgs, MediaTranscodeProTemplateState } from "./mediaTranscodeProTemplate";
+export type MediaTranscodeProTemplate = import("./mediaTranscodeProTemplate").MediaTranscodeProTemplate;
+export const MediaTranscodeProTemplate: typeof import("./mediaTranscodeProTemplate").MediaTranscodeProTemplate = null as any;
+utilities.lazyLoad(exports, ["MediaTranscodeProTemplate"], () => require("./mediaTranscodeProTemplate"));
+
+export { MediaTranscodeTemplateArgs, MediaTranscodeTemplateState } from "./mediaTranscodeTemplate";
+export type MediaTranscodeTemplate = import("./mediaTranscodeTemplate").MediaTranscodeTemplate;
+export const MediaTranscodeTemplate: typeof import("./mediaTranscodeTemplate").MediaTranscodeTemplate = null as any;
+utilities.lazyLoad(exports, ["MediaTranscodeTemplate"], () => require("./mediaTranscodeTemplate"));
+
+export { MediaTtsTemplateArgs, MediaTtsTemplateState } from "./mediaTtsTemplate";
+export type MediaTtsTemplate = import("./mediaTtsTemplate").MediaTtsTemplate;
+export const MediaTtsTemplate: typeof import("./mediaTtsTemplate").MediaTtsTemplate = null as any;
+utilities.lazyLoad(exports, ["MediaTtsTemplate"], () => require("./mediaTtsTemplate"));
+
+export { MediaVideoMontageTemplateArgs, MediaVideoMontageTemplateState } from "./mediaVideoMontageTemplate";
+export type MediaVideoMontageTemplate = import("./mediaVideoMontageTemplate").MediaVideoMontageTemplate;
+export const MediaVideoMontageTemplate: typeof import("./mediaVideoMontageTemplate").MediaVideoMontageTemplate = null as any;
+utilities.lazyLoad(exports, ["MediaVideoMontageTemplate"], () => require("./mediaVideoMontageTemplate"));
+
+export { MediaVideoProcessTemplateArgs, MediaVideoProcessTemplateState } from "./mediaVideoProcessTemplate";
+export type MediaVideoProcessTemplate = import("./mediaVideoProcessTemplate").MediaVideoProcessTemplate;
+export const MediaVideoProcessTemplate: typeof import("./mediaVideoProcessTemplate").MediaVideoProcessTemplate = null as any;
+utilities.lazyLoad(exports, ["MediaVideoProcessTemplate"], () => require("./mediaVideoProcessTemplate"));
+
+export { MediaVoiceSeparateTemplateArgs, MediaVoiceSeparateTemplateState } from "./mediaVoiceSeparateTemplate";
+export type MediaVoiceSeparateTemplate = import("./mediaVoiceSeparateTemplate").MediaVoiceSeparateTemplate;
+export const MediaVoiceSeparateTemplate: typeof import("./mediaVoiceSeparateTemplate").MediaVoiceSeparateTemplate = null as any;
+utilities.lazyLoad(exports, ["MediaVoiceSeparateTemplate"], () => require("./mediaVoiceSeparateTemplate"));
+
+export { MediaWatermarkTemplateArgs, MediaWatermarkTemplateState } from "./mediaWatermarkTemplate";
+export type MediaWatermarkTemplate = import("./mediaWatermarkTemplate").MediaWatermarkTemplate;
+export const MediaWatermarkTemplate: typeof import("./mediaWatermarkTemplate").MediaWatermarkTemplate = null as any;
+utilities.lazyLoad(exports, ["MediaWatermarkTemplate"], () => require("./mediaWatermarkTemplate"));
+
+export { OriginalImageProtectionArgs, OriginalImageProtectionState } from "./originalImageProtection";
+export type OriginalImageProtection = import("./originalImageProtection").OriginalImageProtection;
+export const OriginalImageProtection: typeof import("./originalImageProtection").OriginalImageProtection = null as any;
+utilities.lazyLoad(exports, ["OriginalImageProtection"], () => require("./originalImageProtection"));
+
 
 const _module = {
     version: utilities.getVersion(),

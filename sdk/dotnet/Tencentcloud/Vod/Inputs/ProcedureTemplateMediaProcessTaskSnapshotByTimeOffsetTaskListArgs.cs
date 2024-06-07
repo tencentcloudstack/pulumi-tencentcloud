@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
 {
 
-    public sealed class ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs : Pulumi.ResourceArgs
+    public sealed class ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Time point screen capturing template ID.
@@ -31,6 +31,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
             set => _extTimeOffsetLists = value;
         }
 
+        [Input("timeOffsetLists")]
+        private InputList<double>? _timeOffsetLists;
+
+        /// <summary>
+        /// List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
+        public InputList<double> TimeOffsetLists
+        {
+            get => _timeOffsetLists ?? (_timeOffsetLists = new InputList<double>());
+            set => _timeOffsetLists = value;
+        }
+
         [Input("watermarkLists")]
         private InputList<Inputs.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkListArgs>? _watermarkLists;
 
@@ -46,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
         public ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs()
         {
         }
+        public static new ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs Empty => new ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs();
     }
 }

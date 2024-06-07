@@ -7,68 +7,74 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this resource to create tcr repository.
 //
 // ## Example Usage
+//
 // ### Create a tcr repository instance
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
-// 			InstanceType: pulumi.String("premium"),
-// 			DeleteBucket: pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
-// 			InstanceId:   exampleInstance.ID(),
-// 			IsPublic:     pulumi.Bool(true),
-// 			IsAutoScan:   pulumi.Bool(true),
-// 			IsPreventVul: pulumi.Bool(true),
-// 			Severity:     pulumi.String("medium"),
-// 			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
-// 				&tcr.NamespaceCveWhitelistItemArgs{
-// 					CveId: pulumi.String("cve-xxxxx"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tcr.NewRepository(ctx, "exampleRepository", &Tcr.RepositoryArgs{
-// 			InstanceId:    exampleInstance.ID(),
-// 			NamespaceName: exampleNamespace.Name,
-// 			BriefDesc:     pulumi.String("111"),
-// 			Description:   pulumi.String("111111111111111111111111111111111111"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+//				InstanceType: pulumi.String("premium"),
+//				DeleteBucket: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
+//				InstanceId:   exampleInstance.ID(),
+//				IsPublic:     pulumi.Bool(true),
+//				IsAutoScan:   pulumi.Bool(true),
+//				IsPreventVul: pulumi.Bool(true),
+//				Severity:     pulumi.String("medium"),
+//				CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+//					&tcr.NamespaceCveWhitelistItemArgs{
+//						CveId: pulumi.String("cve-xxxxx"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcr.NewRepository(ctx, "exampleRepository", &Tcr.RepositoryArgs{
+//				InstanceId:    exampleInstance.ID(),
+//				NamespaceName: exampleNamespace.Name,
+//				BriefDesc:     pulumi.String("111"),
+//				Description:   pulumi.String("111111111111111111111111111111111111"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tcr repository can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcr/repository:Repository foo instance_id#namespace_name#repository_name
+// $ pulumi import tencentcloud:Tcr/repository:Repository foo instance_id#namespace_name#repository_name
 // ```
 type Repository struct {
 	pulumi.CustomResourceState
@@ -106,7 +112,7 @@ func NewRepository(ctx *pulumi.Context,
 	if args.NamespaceName == nil {
 		return nil, errors.New("invalid value for required argument 'NamespaceName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Repository
 	err := ctx.RegisterResource("tencentcloud:Tcr/repository:Repository", name, args, &resource, opts...)
 	if err != nil {
@@ -227,7 +233,7 @@ func (i *Repository) ToRepositoryOutputWithContext(ctx context.Context) Reposito
 // RepositoryArrayInput is an input type that accepts RepositoryArray and RepositoryArrayOutput values.
 // You can construct a concrete instance of `RepositoryArrayInput` via:
 //
-//          RepositoryArray{ RepositoryArgs{...} }
+//	RepositoryArray{ RepositoryArgs{...} }
 type RepositoryArrayInput interface {
 	pulumi.Input
 
@@ -252,7 +258,7 @@ func (i RepositoryArray) ToRepositoryArrayOutputWithContext(ctx context.Context)
 // RepositoryMapInput is an input type that accepts RepositoryMap and RepositoryMapOutput values.
 // You can construct a concrete instance of `RepositoryMapInput` via:
 //
-//          RepositoryMap{ "key": RepositoryArgs{...} }
+//	RepositoryMap{ "key": RepositoryArgs{...} }
 type RepositoryMapInput interface {
 	pulumi.Input
 

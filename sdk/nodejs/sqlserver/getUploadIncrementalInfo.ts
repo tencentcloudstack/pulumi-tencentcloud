@@ -9,23 +9,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Sqlserver.getUploadIncrementalInfo({
+ * const example = tencentcloud.Sqlserver.getUploadIncrementalInfo({
  *     backupMigrationId: "mssql-backup-migration-83t5u3tv",
  *     incrementalMigrationId: "mssql-incremental-migration-h36gkdxn",
  *     instanceId: "mssql-4tgeyeeh",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getUploadIncrementalInfo(args: GetUploadIncrementalInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetUploadIncrementalInfoResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Sqlserver/getUploadIncrementalInfo:getUploadIncrementalInfo", {
         "backupMigrationId": args.backupMigrationId,
         "incrementalMigrationId": args.incrementalMigrationId,
@@ -101,9 +100,26 @@ export interface GetUploadIncrementalInfoResult {
      */
     readonly xCosSecurityToken: string;
 }
-
+/**
+ * Use this data source to query detailed information of sqlserver uploadIncrementalInfo
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Sqlserver.getUploadIncrementalInfo({
+ *     backupMigrationId: "mssql-backup-migration-83t5u3tv",
+ *     incrementalMigrationId: "mssql-incremental-migration-h36gkdxn",
+ *     instanceId: "mssql-4tgeyeeh",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getUploadIncrementalInfoOutput(args: GetUploadIncrementalInfoOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetUploadIncrementalInfoResult> {
-    return pulumi.output(args).apply(a => getUploadIncrementalInfo(a, opts))
+    return pulumi.output(args).apply((a: any) => getUploadIncrementalInfo(a, opts))
 }
 
 /**

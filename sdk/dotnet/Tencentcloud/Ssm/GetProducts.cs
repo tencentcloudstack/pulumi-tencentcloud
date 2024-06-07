@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// <summary>
         /// Use this data source to query detailed information of ssm products
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var products = Output.Create(Tencentcloud.Ssm.GetProducts.InvokeAsync());
-        ///     }
+        ///     var products = Tencentcloud.Ssm.GetProducts.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProductsResult> InvokeAsync(GetProductsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProductsResult>("tencentcloud:Ssm/getProducts:getProducts", args ?? new GetProductsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProductsResult>("tencentcloud:Ssm/getProducts:getProducts", args ?? new GetProductsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ssm products
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var products = Output.Create(Tencentcloud.Ssm.GetProducts.InvokeAsync());
-        ///     }
+        ///     var products = Tencentcloud.Ssm.GetProducts.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProductsResult> Invoke(GetProductsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProductsResult>("tencentcloud:Ssm/getProducts:getProducts", args ?? new GetProductsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProductsResult>("tencentcloud:Ssm/getProducts:getProducts", args ?? new GetProductsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProductsArgs : Pulumi.InvokeArgs
+    public sealed class GetProductsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public GetProductsArgs()
         {
         }
+        public static new GetProductsArgs Empty => new GetProductsArgs();
     }
 
-    public sealed class GetProductsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProductsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public GetProductsInvokeArgs()
         {
         }
+        public static new GetProductsInvokeArgs Empty => new GetProductsInvokeArgs();
     }
 
 

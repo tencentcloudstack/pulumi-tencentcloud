@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var attach = new Tencentcloud.Postgresql.ReadonlyAttachment("attach", new()
     ///     {
-    ///         var attach = new Tencentcloud.Postgresql.ReadonlyAttachment("attach", new Tencentcloud.Postgresql.ReadonlyAttachmentArgs
-    ///         {
-    ///             DbInstanceId = tencentcloud_postgresql_readonly_instance.Foo.Id,
-    ///             ReadOnlyGroupId = tencentcloud_postgresql_readonly_group.Group.Id,
-    ///         });
-    ///     }
+    ///         DbInstanceId = tencentcloud_postgresql_readonly_instance.Foo.Id,
+    ///         ReadOnlyGroupId = tencentcloud_postgresql_readonly_group.Group.Id,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/readonlyAttachment:ReadonlyAttachment")]
-    public partial class ReadonlyAttachment : Pulumi.CustomResource
+    public partial class ReadonlyAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Read only instance ID.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class ReadonlyAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class ReadonlyAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Read only instance ID.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public ReadonlyAttachmentArgs()
         {
         }
+        public static new ReadonlyAttachmentArgs Empty => new ReadonlyAttachmentArgs();
     }
 
-    public sealed class ReadonlyAttachmentState : Pulumi.ResourceArgs
+    public sealed class ReadonlyAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Read only instance ID.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public ReadonlyAttachmentState()
         {
         }
+        public static new ReadonlyAttachmentState Empty => new ReadonlyAttachmentState();
     }
 }

@@ -15,118 +15,114 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// <summary>
         /// Use this data source to query detailed information of waf attack_total_count
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Obtain the specified domain name attack log
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetAttackTotalCount.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetAttackTotalCount.InvokeAsync(new Tencentcloud.Waf.GetAttackTotalCountArgs
-        ///         {
-        ///             Domain = "domain.com",
-        ///             EndTime = "2023-09-07 00:00:00",
-        ///             QueryString = "method:GET",
-        ///             StartTime = "2023-09-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         Domain = "domain.com",
+        ///         EndTime = "2023-09-07 00:00:00",
+        ///         QueryString = "method:GET",
+        ///         StartTime = "2023-09-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Obtain all domain name attack log
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetAttackTotalCount.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetAttackTotalCount.InvokeAsync(new Tencentcloud.Waf.GetAttackTotalCountArgs
-        ///         {
-        ///             Domain = "all",
-        ///             EndTime = "2023-09-07 00:00:00",
-        ///             QueryString = "method:GET",
-        ///             StartTime = "2023-09-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         Domain = "all",
+        ///         EndTime = "2023-09-07 00:00:00",
+        ///         QueryString = "method:GET",
+        ///         StartTime = "2023-09-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAttackTotalCountResult> InvokeAsync(GetAttackTotalCountArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAttackTotalCountResult>("tencentcloud:Waf/getAttackTotalCount:getAttackTotalCount", args ?? new GetAttackTotalCountArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAttackTotalCountResult>("tencentcloud:Waf/getAttackTotalCount:getAttackTotalCount", args ?? new GetAttackTotalCountArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of waf attack_total_count
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Obtain the specified domain name attack log
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetAttackTotalCount.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetAttackTotalCount.InvokeAsync(new Tencentcloud.Waf.GetAttackTotalCountArgs
-        ///         {
-        ///             Domain = "domain.com",
-        ///             EndTime = "2023-09-07 00:00:00",
-        ///             QueryString = "method:GET",
-        ///             StartTime = "2023-09-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         Domain = "domain.com",
+        ///         EndTime = "2023-09-07 00:00:00",
+        ///         QueryString = "method:GET",
+        ///         StartTime = "2023-09-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Obtain all domain name attack log
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetAttackTotalCount.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetAttackTotalCount.InvokeAsync(new Tencentcloud.Waf.GetAttackTotalCountArgs
-        ///         {
-        ///             Domain = "all",
-        ///             EndTime = "2023-09-07 00:00:00",
-        ///             QueryString = "method:GET",
-        ///             StartTime = "2023-09-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         Domain = "all",
+        ///         EndTime = "2023-09-07 00:00:00",
+        ///         QueryString = "method:GET",
+        ///         StartTime = "2023-09-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAttackTotalCountResult> Invoke(GetAttackTotalCountInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAttackTotalCountResult>("tencentcloud:Waf/getAttackTotalCount:getAttackTotalCount", args ?? new GetAttackTotalCountInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAttackTotalCountResult>("tencentcloud:Waf/getAttackTotalCount:getAttackTotalCount", args ?? new GetAttackTotalCountInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAttackTotalCountArgs : Pulumi.InvokeArgs
+    public sealed class GetAttackTotalCountArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Query domain name, all domain use all.
@@ -161,9 +157,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetAttackTotalCountArgs()
         {
         }
+        public static new GetAttackTotalCountArgs Empty => new GetAttackTotalCountArgs();
     }
 
-    public sealed class GetAttackTotalCountInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAttackTotalCountInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Query domain name, all domain use all.
@@ -198,6 +195,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetAttackTotalCountInvokeArgs()
         {
         }
+        public static new GetAttackTotalCountInvokeArgs Empty => new GetAttackTotalCountInvokeArgs();
     }
 
 

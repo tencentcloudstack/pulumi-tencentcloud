@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns.Inputs
 {
 
-    public sealed class GetRecordsFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetRecordsFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Parameter name.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns.Inputs
         public GetRecordsFilterArgs()
         {
         }
+        public static new GetRecordsFilterArgs Empty => new GetRecordsFilterArgs();
     }
 }

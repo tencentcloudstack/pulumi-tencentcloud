@@ -9,14 +9,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const syncJobContinueOperation = new tencentcloud.Dts.SyncJobContinueOperation("sync_job_continue_operation", {
- *     jobId: "sync-werwfs23",
- * });
+ * const syncJobContinueOperation = new tencentcloud.dts.SyncJobContinueOperation("syncJobContinueOperation", {jobId: "sync-werwfs23"});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class SyncJobContinueOperation extends pulumi.CustomResource {
     /**

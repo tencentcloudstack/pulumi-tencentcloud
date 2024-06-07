@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const tencentcloudDayuL4RulesV2 = pulumi.output(tencentcloud.Dayu.getL4RulesV2({
+ * const tencentcloudDayuL4RulesV2 = tencentcloud.Dayu.getL4RulesV2({
  *     business: "bgpip",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getL4RulesV2(args: GetL4RulesV2Args, opts?: pulumi.InvokeOptions): Promise<GetL4RulesV2Result> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dayu/getL4RulesV2:getL4RulesV2", {
         "business": args.business,
         "ip": args.ip,
@@ -78,9 +78,24 @@ export interface GetL4RulesV2Result {
      */
     readonly virtualPort?: number;
 }
-
+/**
+ * Use this data source to query dayu new layer 4 rules
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const tencentcloudDayuL4RulesV2 = tencentcloud.Dayu.getL4RulesV2({
+ *     business: "bgpip",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getL4RulesV2Output(args: GetL4RulesV2OutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetL4RulesV2Result> {
-    return pulumi.output(args).apply(a => getL4RulesV2(a, opts))
+    return pulumi.output(args).apply((a: any) => getL4RulesV2(a, opts))
 }
 
 /**

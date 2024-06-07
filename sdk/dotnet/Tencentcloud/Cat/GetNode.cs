@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         /// <summary>
         /// Use this data source to query detailed information of cat node
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var node = Tencentcloud.Cat.GetNode.Invoke(new()
         ///     {
-        ///         var node = Output.Create(Tencentcloud.Cat.GetNode.InvokeAsync(new Tencentcloud.Cat.GetNodeArgs
-        ///         {
-        ///             IsIpv6 = false,
-        ///             Location = 2,
-        ///             NodeType = 1,
-        ///         }));
-        ///     }
+        ///         IsIpv6 = false,
+        ///         Location = 2,
+        ///         NodeType = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetNodeResult> InvokeAsync(GetNodeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetNodeResult>("tencentcloud:Cat/getNode:getNode", args ?? new GetNodeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetNodeResult>("tencentcloud:Cat/getNode:getNode", args ?? new GetNodeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cat node
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var node = Tencentcloud.Cat.GetNode.Invoke(new()
         ///     {
-        ///         var node = Output.Create(Tencentcloud.Cat.GetNode.InvokeAsync(new Tencentcloud.Cat.GetNodeArgs
-        ///         {
-        ///             IsIpv6 = false,
-        ///             Location = 2,
-        ///             NodeType = 1,
-        ///         }));
-        ///     }
+        ///         IsIpv6 = false,
+        ///         Location = 2,
+        ///         NodeType = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetNodeResult> Invoke(GetNodeInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetNodeResult>("tencentcloud:Cat/getNode:getNode", args ?? new GetNodeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetNodeResult>("tencentcloud:Cat/getNode:getNode", args ?? new GetNodeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetNodeArgs : Pulumi.InvokeArgs
+    public sealed class GetNodeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// is IPv6.
@@ -117,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         public GetNodeArgs()
         {
         }
+        public static new GetNodeArgs Empty => new GetNodeArgs();
     }
 
-    public sealed class GetNodeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetNodeInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// is IPv6.
@@ -160,6 +155,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         public GetNodeInvokeArgs()
         {
         }
+        public static new GetNodeInvokeArgs Empty => new GetNodeInvokeArgs();
     }
 
 

@@ -7,58 +7,62 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cam mfaFlag
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/User"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		info, err := User.GetInfo(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cam.NewMfaFlag(ctx, "mfaFlag", &Cam.MfaFlagArgs{
-// 			OpUin: pulumi.String(info.Uin),
-// 			LoginFlag: &cam.MfaFlagLoginFlagArgs{
-// 				Phone:  pulumi.Int(0),
-// 				Stoken: pulumi.Int(1),
-// 				Wechat: pulumi.Int(0),
-// 			},
-// 			ActionFlag: &cam.MfaFlagActionFlagArgs{
-// 				Phone:  pulumi.Int(0),
-// 				Stoken: pulumi.Int(1),
-// 				Wechat: pulumi.Int(0),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cam.NewMfaFlag(ctx, "mfaFlag", &Cam.MfaFlagArgs{
+//				OpUin: pulumi.String(info.Uin),
+//				LoginFlag: &cam.MfaFlagLoginFlagArgs{
+//					Phone:  pulumi.Int(0),
+//					Stoken: pulumi.Int(1),
+//					Wechat: pulumi.Int(0),
+//				},
+//				ActionFlag: &cam.MfaFlagActionFlagArgs{
+//					Phone:  pulumi.Int(0),
+//					Stoken: pulumi.Int(1),
+//					Wechat: pulumi.Int(0),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cam mfa_flag can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cam/mfaFlag:MfaFlag mfa_flag mfa_flag_id
+// $ pulumi import tencentcloud:Cam/mfaFlag:MfaFlag mfa_flag mfa_flag_id
 // ```
 type MfaFlag struct {
 	pulumi.CustomResourceState
@@ -81,7 +85,7 @@ func NewMfaFlag(ctx *pulumi.Context,
 	if args.OpUin == nil {
 		return nil, errors.New("invalid value for required argument 'OpUin'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MfaFlag
 	err := ctx.RegisterResource("tencentcloud:Cam/mfaFlag:MfaFlag", name, args, &resource, opts...)
 	if err != nil {
@@ -170,7 +174,7 @@ func (i *MfaFlag) ToMfaFlagOutputWithContext(ctx context.Context) MfaFlagOutput 
 // MfaFlagArrayInput is an input type that accepts MfaFlagArray and MfaFlagArrayOutput values.
 // You can construct a concrete instance of `MfaFlagArrayInput` via:
 //
-//          MfaFlagArray{ MfaFlagArgs{...} }
+//	MfaFlagArray{ MfaFlagArgs{...} }
 type MfaFlagArrayInput interface {
 	pulumi.Input
 
@@ -195,7 +199,7 @@ func (i MfaFlagArray) ToMfaFlagArrayOutputWithContext(ctx context.Context) MfaFl
 // MfaFlagMapInput is an input type that accepts MfaFlagMap and MfaFlagMapOutput values.
 // You can construct a concrete instance of `MfaFlagMapInput` via:
 //
-//          MfaFlagMap{ "key": MfaFlagArgs{...} }
+//	MfaFlagMap{ "key": MfaFlagArgs{...} }
 type MfaFlagMapInput interface {
 	pulumi.Input
 

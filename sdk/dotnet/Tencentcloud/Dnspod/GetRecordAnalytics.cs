@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// <summary>
         /// Use this data source to query detailed information of dnspod record_analytics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var recordAnalytics = Tencentcloud.Dnspod.GetRecordAnalytics.Invoke(new()
         ///     {
-        ///         var recordAnalytics = Output.Create(Tencentcloud.Dnspod.GetRecordAnalytics.InvokeAsync(new Tencentcloud.Dnspod.GetRecordAnalyticsArgs
-        ///         {
-        ///             DnsFormat = "HOUR",
-        ///             Domain = "iac-tf.cloud",
-        ///             EndDate = "2023-11-07",
-        ///             StartDate = "2023-09-07",
-        ///             Subdomain = "www",
-        ///         }));
-        ///     }
+        ///         DnsFormat = "HOUR",
+        ///         Domain = "iac-tf.cloud",
+        ///         EndDate = "2023-11-07",
+        ///         StartDate = "2023-09-07",
+        ///         Subdomain = "www",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRecordAnalyticsResult> InvokeAsync(GetRecordAnalyticsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRecordAnalyticsResult>("tencentcloud:Dnspod/getRecordAnalytics:getRecordAnalytics", args ?? new GetRecordAnalyticsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRecordAnalyticsResult>("tencentcloud:Dnspod/getRecordAnalytics:getRecordAnalytics", args ?? new GetRecordAnalyticsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dnspod record_analytics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var recordAnalytics = Tencentcloud.Dnspod.GetRecordAnalytics.Invoke(new()
         ///     {
-        ///         var recordAnalytics = Output.Create(Tencentcloud.Dnspod.GetRecordAnalytics.InvokeAsync(new Tencentcloud.Dnspod.GetRecordAnalyticsArgs
-        ///         {
-        ///             DnsFormat = "HOUR",
-        ///             Domain = "iac-tf.cloud",
-        ///             EndDate = "2023-11-07",
-        ///             StartDate = "2023-09-07",
-        ///             Subdomain = "www",
-        ///         }));
-        ///     }
+        ///         DnsFormat = "HOUR",
+        ///         Domain = "iac-tf.cloud",
+        ///         EndDate = "2023-11-07",
+        ///         StartDate = "2023-09-07",
+        ///         Subdomain = "www",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRecordAnalyticsResult> Invoke(GetRecordAnalyticsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRecordAnalyticsResult>("tencentcloud:Dnspod/getRecordAnalytics:getRecordAnalytics", args ?? new GetRecordAnalyticsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRecordAnalyticsResult>("tencentcloud:Dnspod/getRecordAnalytics:getRecordAnalytics", args ?? new GetRecordAnalyticsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRecordAnalyticsArgs : Pulumi.InvokeArgs
+    public sealed class GetRecordAnalyticsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// DATE: Statistics by day dimension, HOUR: Statistics by hour dimension.
@@ -127,9 +121,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public GetRecordAnalyticsArgs()
         {
         }
+        public static new GetRecordAnalyticsArgs Empty => new GetRecordAnalyticsArgs();
     }
 
-    public sealed class GetRecordAnalyticsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRecordAnalyticsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// DATE: Statistics by day dimension, HOUR: Statistics by hour dimension.
@@ -176,6 +171,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public GetRecordAnalyticsInvokeArgs()
         {
         }
+        public static new GetRecordAnalyticsInvokeArgs Empty => new GetRecordAnalyticsInvokeArgs();
     }
 
 

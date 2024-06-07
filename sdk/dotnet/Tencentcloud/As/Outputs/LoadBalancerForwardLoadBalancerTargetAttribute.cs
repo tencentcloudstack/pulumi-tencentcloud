@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Outputs
     [OutputType]
     public sealed class LoadBalancerForwardLoadBalancerTargetAttribute
     {
+        /// <summary>
+        /// Target port.
+        /// </summary>
         public readonly int Port;
+        /// <summary>
+        /// Target weight.
+        /// </summary>
         public readonly int Weight;
 
         [OutputConstructor]

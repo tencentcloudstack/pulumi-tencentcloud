@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
 {
 
-    public sealed class IntegrationRealtimeTaskTaskInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class IntegrationRealtimeTaskTaskInfoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User App Id.
@@ -292,5 +292,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         public IntegrationRealtimeTaskTaskInfoGetArgs()
         {
         }
+        public static new IntegrationRealtimeTaskTaskInfoGetArgs Empty => new IntegrationRealtimeTaskTaskInfoGetArgs();
     }
 }

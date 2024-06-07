@@ -15,69 +15,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mediaTranscodeProTemplate = new Tencentcloud.Ci.MediaTranscodeProTemplate("mediaTranscodeProTemplate", new()
     ///     {
-    ///         var mediaTranscodeProTemplate = new Tencentcloud.Ci.MediaTranscodeProTemplate("mediaTranscodeProTemplate", new Tencentcloud.Ci.MediaTranscodeProTemplateArgs
+    ///         Audio = new Tencentcloud.Ci.Inputs.MediaTranscodeProTemplateAudioArgs
     ///         {
-    ///             Audio = new Tencentcloud.Ci.Inputs.MediaTranscodeProTemplateAudioArgs
-    ///             {
-    ///                 Codec = "pcm_s24le",
-    ///                 Remove = "true",
-    ///             },
-    ///             Bucket = "terraform-ci-xxxxxx",
-    ///             Container = new Tencentcloud.Ci.Inputs.MediaTranscodeProTemplateContainerArgs
-    ///             {
-    ///                 Format = "mxf",
-    ///             },
-    ///             TimeInterval = new Tencentcloud.Ci.Inputs.MediaTranscodeProTemplateTimeIntervalArgs
-    ///             {
-    ///                 Duration = "",
-    ///                 Start = "",
-    ///             },
-    ///             TransConfig = new Tencentcloud.Ci.Inputs.MediaTranscodeProTemplateTransConfigArgs
-    ///             {
-    ///                 AdjDarMethod = "scale",
-    ///                 AudioBitrateAdjMethod = "0",
-    ///                 DeleteMetadata = "false",
-    ///                 IsCheckAudioBitrate = "false",
-    ///                 IsCheckReso = "false",
-    ///                 IsCheckVideoBitrate = "false",
-    ///                 IsHdr2Sdr = "false",
-    ///                 ResoAdjMethod = "1",
-    ///                 VideoBitrateAdjMethod = "0",
-    ///             },
-    ///             Video = new Tencentcloud.Ci.Inputs.MediaTranscodeProTemplateVideoArgs
-    ///             {
-    ///                 Bitrate = "50000",
-    ///                 Codec = "xavc",
-    ///                 Fps = "30000/1001",
-    ///                 Height = "1080",
-    ///                 Interlaced = "true",
-    ///                 Profile = "XAVC-HD_422_10bit",
-    ///                 Width = "1920",
-    ///             },
-    ///         });
-    ///     }
+    ///             Codec = "pcm_s24le",
+    ///             Remove = "true",
+    ///         },
+    ///         Bucket = "terraform-ci-xxxxxx",
+    ///         Container = new Tencentcloud.Ci.Inputs.MediaTranscodeProTemplateContainerArgs
+    ///         {
+    ///             Format = "mxf",
+    ///         },
+    ///         TimeInterval = new Tencentcloud.Ci.Inputs.MediaTranscodeProTemplateTimeIntervalArgs
+    ///         {
+    ///             Duration = "",
+    ///             Start = "",
+    ///         },
+    ///         TransConfig = new Tencentcloud.Ci.Inputs.MediaTranscodeProTemplateTransConfigArgs
+    ///         {
+    ///             AdjDarMethod = "scale",
+    ///             AudioBitrateAdjMethod = "0",
+    ///             DeleteMetadata = "false",
+    ///             IsCheckAudioBitrate = "false",
+    ///             IsCheckReso = "false",
+    ///             IsCheckVideoBitrate = "false",
+    ///             IsHdr2Sdr = "false",
+    ///             ResoAdjMethod = "1",
+    ///             VideoBitrateAdjMethod = "0",
+    ///         },
+    ///         Video = new Tencentcloud.Ci.Inputs.MediaTranscodeProTemplateVideoArgs
+    ///         {
+    ///             Bitrate = "50000",
+    ///             Codec = "xavc",
+    ///             Fps = "30000/1001",
+    ///             Height = "1080",
+    ///             Interlaced = "true",
+    ///             Profile = "XAVC-HD_422_10bit",
+    ///             Width = "1920",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ci media_transcode_pro_template can be imported using the bucket#templateId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/mediaTranscodeProTemplate:MediaTranscodeProTemplate media_transcode_pro_template terraform-ci-xxxxxx#t13ed9af009da0414e9c7c63456ec8f4d2
+    /// $ pulumi import tencentcloud:Ci/mediaTranscodeProTemplate:MediaTranscodeProTemplate media_transcode_pro_template terraform-ci-xxxxxx#t13ed9af009da0414e9c7c63456ec8f4d2
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/mediaTranscodeProTemplate:MediaTranscodeProTemplate")]
-    public partial class MediaTranscodeProTemplate : Pulumi.CustomResource
+    public partial class MediaTranscodeProTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Audio information, do not transmit Audio, which is equivalent to deleting audio information.
@@ -166,7 +167,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class MediaTranscodeProTemplateArgs : Pulumi.ResourceArgs
+    public sealed class MediaTranscodeProTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Audio information, do not transmit Audio, which is equivalent to deleting audio information.
@@ -213,9 +214,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaTranscodeProTemplateArgs()
         {
         }
+        public static new MediaTranscodeProTemplateArgs Empty => new MediaTranscodeProTemplateArgs();
     }
 
-    public sealed class MediaTranscodeProTemplateState : Pulumi.ResourceArgs
+    public sealed class MediaTranscodeProTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Audio information, do not transmit Audio, which is equivalent to deleting audio information.
@@ -262,5 +264,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaTranscodeProTemplateState()
         {
         }
+        public static new MediaTranscodeProTemplateState Empty => new MediaTranscodeProTemplateState();
     }
 }

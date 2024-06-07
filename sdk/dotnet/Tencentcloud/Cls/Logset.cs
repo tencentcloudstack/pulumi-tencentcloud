@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var logset = new Tencentcloud.Cls.Logset("logset", new()
     ///     {
-    ///         var logset = new Tencentcloud.Cls.Logset("logset", new Tencentcloud.Cls.LogsetArgs
+    ///         LogsetName = "demo",
+    ///         Tags = 
     ///         {
-    ///             LogsetName = "demo",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cls logset can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/logset:Logset logset logset_id
+    /// $ pulumi import tencentcloud:Cls/logset:Logset logset logset_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/logset:Logset")]
-    public partial class Logset : Pulumi.CustomResource
+    public partial class Logset : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Creation time.
@@ -122,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
     }
 
-    public sealed class LogsetArgs : Pulumi.ResourceArgs
+    public sealed class LogsetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Logset name, which must be unique.
@@ -145,9 +146,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public LogsetArgs()
         {
         }
+        public static new LogsetArgs Empty => new LogsetArgs();
     }
 
-    public sealed class LogsetState : Pulumi.ResourceArgs
+    public sealed class LogsetState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Creation time.
@@ -188,5 +190,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public LogsetState()
         {
         }
+        public static new LogsetState Empty => new LogsetState();
     }
 }

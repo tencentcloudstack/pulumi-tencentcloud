@@ -7,95 +7,106 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tdmq professionalCluster
 //
 // ## Example Usage
+//
 // ### single-zone Professional Cluster
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdmq.NewProfessionalCluster(ctx, "professionalCluster", &Tdmq.ProfessionalClusterArgs{
-// 			AutoRenewFlag: pulumi.Int(1),
-// 			ClusterName:   pulumi.String("single_zone_cluster"),
-// 			ProductName:   pulumi.String("PULSAR.P1.MINI2"),
-// 			StorageSize:   pulumi.Int(600),
-// 			Tags: pulumi.AnyMap{
-// 				"createby": pulumi.Any("terrafrom"),
-// 			},
-// 			Vpc: &tdmq.ProfessionalClusterVpcArgs{
-// 				SubnetId: pulumi.String("subnet-xxxx"),
-// 				VpcId:    pulumi.String("vpc-xxxx"),
-// 			},
-// 			ZoneIds: pulumi.IntArray{
-// 				pulumi.Int(100004),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tdmq.NewProfessionalCluster(ctx, "professionalCluster", &Tdmq.ProfessionalClusterArgs{
+//				AutoRenewFlag: pulumi.Int(1),
+//				ClusterName:   pulumi.String("single_zone_cluster"),
+//				ProductName:   pulumi.String("PULSAR.P1.MINI2"),
+//				StorageSize:   pulumi.Int(600),
+//				Tags: pulumi.Map{
+//					"createby": pulumi.Any("terrafrom"),
+//				},
+//				Vpc: &tdmq.ProfessionalClusterVpcArgs{
+//					SubnetId: pulumi.String("subnet-xxxx"),
+//					VpcId:    pulumi.String("vpc-xxxx"),
+//				},
+//				ZoneIds: pulumi.IntArray{
+//					pulumi.Int(100004),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Multi-zone Professional Cluster
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdmq.NewProfessionalCluster(ctx, "professionalCluster", &Tdmq.ProfessionalClusterArgs{
-// 			AutoRenewFlag: pulumi.Int(1),
-// 			ClusterName:   pulumi.String("multi_zone_cluster"),
-// 			ProductName:   pulumi.String("PULSAR.P1.MINI2"),
-// 			StorageSize:   pulumi.Int(200),
-// 			Tags: pulumi.AnyMap{
-// 				"key":  pulumi.Any("value1"),
-// 				"key2": pulumi.Any("value2"),
-// 			},
-// 			Vpc: &tdmq.ProfessionalClusterVpcArgs{
-// 				SubnetId: pulumi.String("subnet-xxxx"),
-// 				VpcId:    pulumi.String("vpc-xxxx"),
-// 			},
-// 			ZoneIds: pulumi.IntArray{
-// 				pulumi.Int(330001),
-// 				pulumi.Int(330002),
-// 				pulumi.Int(330003),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tdmq.NewProfessionalCluster(ctx, "professionalCluster", &Tdmq.ProfessionalClusterArgs{
+//				AutoRenewFlag: pulumi.Int(1),
+//				ClusterName:   pulumi.String("multi_zone_cluster"),
+//				ProductName:   pulumi.String("PULSAR.P1.MINI2"),
+//				StorageSize:   pulumi.Int(200),
+//				Tags: pulumi.Map{
+//					"key":  pulumi.Any("value1"),
+//					"key2": pulumi.Any("value2"),
+//				},
+//				Vpc: &tdmq.ProfessionalClusterVpcArgs{
+//					SubnetId: pulumi.String("subnet-xxxx"),
+//					VpcId:    pulumi.String("vpc-xxxx"),
+//				},
+//				ZoneIds: pulumi.IntArray{
+//					pulumi.Int(330001),
+//					pulumi.Int(330002),
+//					pulumi.Int(330003),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tdmq professional_cluster can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster professional_cluster professional_cluster_id
+// $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster professional_cluster professional_cluster_id
 // ```
 type ProfessionalCluster struct {
 	pulumi.CustomResourceState
@@ -142,7 +153,7 @@ func NewProfessionalCluster(ctx *pulumi.Context,
 	if args.ZoneIds == nil {
 		return nil, errors.New("invalid value for required argument 'ZoneIds'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ProfessionalCluster
 	err := ctx.RegisterResource("tencentcloud:Tdmq/professionalCluster:ProfessionalCluster", name, args, &resource, opts...)
 	if err != nil {
@@ -279,7 +290,7 @@ func (i *ProfessionalCluster) ToProfessionalClusterOutputWithContext(ctx context
 // ProfessionalClusterArrayInput is an input type that accepts ProfessionalClusterArray and ProfessionalClusterArrayOutput values.
 // You can construct a concrete instance of `ProfessionalClusterArrayInput` via:
 //
-//          ProfessionalClusterArray{ ProfessionalClusterArgs{...} }
+//	ProfessionalClusterArray{ ProfessionalClusterArgs{...} }
 type ProfessionalClusterArrayInput interface {
 	pulumi.Input
 
@@ -304,7 +315,7 @@ func (i ProfessionalClusterArray) ToProfessionalClusterArrayOutputWithContext(ct
 // ProfessionalClusterMapInput is an input type that accepts ProfessionalClusterMap and ProfessionalClusterMapOutput values.
 // You can construct a concrete instance of `ProfessionalClusterMapInput` via:
 //
-//          ProfessionalClusterMap{ "key": ProfessionalClusterArgs{...} }
+//	ProfessionalClusterMap{ "key": ProfessionalClusterArgs{...} }
 type ProfessionalClusterMapInput interface {
 	pulumi.Input
 

@@ -23,11 +23,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Outputs
         /// </summary>
         public readonly string S3Region;
         /// <summary>
-        /// The key ID required to read from/write to the SQS queue.
+        /// The key ID required to access the AWS S3 object.
         /// </summary>
         public readonly string? S3SecretId;
         /// <summary>
-        /// The key required to read from/write to the SQS queue.
+        /// The key required to access the AWS S3 object.
         /// </summary>
         public readonly string? S3SecretKey;
 

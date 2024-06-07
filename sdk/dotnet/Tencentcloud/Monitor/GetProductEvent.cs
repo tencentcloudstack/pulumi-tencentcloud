@@ -15,74 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query monitor events(There is a lot of data and it is recommended to output to a file)
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var cvmEventData = Tencentcloud.Monitor.GetProductEvent.Invoke(new()
         ///     {
-        ///         var cvmEventData = Output.Create(Tencentcloud.Monitor.GetProductEvent.InvokeAsync(new Tencentcloud.Monitor.GetProductEventArgs
+        ///         IsAlarmConfig = 0,
+        ///         ProductNames = new[]
         ///         {
-        ///             IsAlarmConfig = 0,
-        ///             ProductNames = 
-        ///             {
-        ///                 "cvm",
-        ///             },
-        ///             StartTime = 1588700283,
-        ///         }));
-        ///     }
+        ///             "cvm",
+        ///         },
+        ///         StartTime = 1588700283,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProductEventResult> InvokeAsync(GetProductEventArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProductEventResult>("tencentcloud:Monitor/getProductEvent:getProductEvent", args ?? new GetProductEventArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProductEventResult>("tencentcloud:Monitor/getProductEvent:getProductEvent", args ?? new GetProductEventArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query monitor events(There is a lot of data and it is recommended to output to a file)
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var cvmEventData = Tencentcloud.Monitor.GetProductEvent.Invoke(new()
         ///     {
-        ///         var cvmEventData = Output.Create(Tencentcloud.Monitor.GetProductEvent.InvokeAsync(new Tencentcloud.Monitor.GetProductEventArgs
+        ///         IsAlarmConfig = 0,
+        ///         ProductNames = new[]
         ///         {
-        ///             IsAlarmConfig = 0,
-        ///             ProductNames = 
-        ///             {
-        ///                 "cvm",
-        ///             },
-        ///             StartTime = 1588700283,
-        ///         }));
-        ///     }
+        ///             "cvm",
+        ///         },
+        ///         StartTime = 1588700283,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProductEventResult> Invoke(GetProductEventInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProductEventResult>("tencentcloud:Monitor/getProductEvent:getProductEvent", args ?? new GetProductEventInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProductEventResult>("tencentcloud:Monitor/getProductEvent:getProductEvent", args ?? new GetProductEventInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProductEventArgs : Pulumi.InvokeArgs
+    public sealed class GetProductEventArgs : global::Pulumi.InvokeArgs
     {
         [Input("dimensions")]
         private List<Inputs.GetProductEventDimensionArgs>? _dimensions;
@@ -207,9 +201,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetProductEventArgs()
         {
         }
+        public static new GetProductEventArgs Empty => new GetProductEventArgs();
     }
 
-    public sealed class GetProductEventInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProductEventInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("dimensions")]
         private InputList<Inputs.GetProductEventDimensionInputArgs>? _dimensions;
@@ -334,6 +329,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetProductEventInvokeArgs()
         {
         }
+        public static new GetProductEventInvokeArgs Empty => new GetProductEventInvokeArgs();
     }
 
 

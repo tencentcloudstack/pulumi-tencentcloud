@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class CosShipperCompressGetArgs : Pulumi.ResourceArgs
+    public sealed class CosShipperCompressGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Compression format. Valid values: gzip, lzop, none (no compression).
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public CosShipperCompressGetArgs()
         {
         }
+        public static new CosShipperCompressGetArgs Empty => new CosShipperCompressGetArgs();
     }
 }

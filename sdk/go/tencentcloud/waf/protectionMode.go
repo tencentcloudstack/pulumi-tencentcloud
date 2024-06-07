@@ -7,37 +7,43 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a waf protectionMode
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewProtectionMode(ctx, "example", &Waf.ProtectionModeArgs{
-// 			Domain:  pulumi.String("keep.qcloudwaf.com"),
-// 			Edition: pulumi.String("sparta-waf"),
-// 			Mode:    pulumi.Int(10),
-// 			Type:    pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewProtectionMode(ctx, "example", &Waf.ProtectionModeArgs{
+//				Domain:  pulumi.String("keep.qcloudwaf.com"),
+//				Edition: pulumi.String("sparta-waf"),
+//				Mode:    pulumi.Int(10),
+//				Type:    pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ProtectionMode struct {
 	pulumi.CustomResourceState
 
@@ -64,7 +70,7 @@ func NewProtectionMode(ctx *pulumi.Context,
 	if args.Mode == nil {
 		return nil, errors.New("invalid value for required argument 'Mode'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ProtectionMode
 	err := ctx.RegisterResource("tencentcloud:Waf/protectionMode:ProtectionMode", name, args, &resource, opts...)
 	if err != nil {
@@ -161,7 +167,7 @@ func (i *ProtectionMode) ToProtectionModeOutputWithContext(ctx context.Context) 
 // ProtectionModeArrayInput is an input type that accepts ProtectionModeArray and ProtectionModeArrayOutput values.
 // You can construct a concrete instance of `ProtectionModeArrayInput` via:
 //
-//          ProtectionModeArray{ ProtectionModeArgs{...} }
+//	ProtectionModeArray{ ProtectionModeArgs{...} }
 type ProtectionModeArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +192,7 @@ func (i ProtectionModeArray) ToProtectionModeArrayOutputWithContext(ctx context.
 // ProtectionModeMapInput is an input type that accepts ProtectionModeMap and ProtectionModeMapOutput values.
 // You can construct a concrete instance of `ProtectionModeMapInput` via:
 //
-//          ProtectionModeMap{ "key": ProtectionModeArgs{...} }
+//	ProtectionModeMap{ "key": ProtectionModeArgs{...} }
 type ProtectionModeMapInput interface {
 	pulumi.Input
 

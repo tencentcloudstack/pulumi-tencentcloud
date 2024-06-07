@@ -15,84 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// Use this data source to query detailed information of clb cluster_resources
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clusterResources = Tencentcloud.Clb.GetClusterResources.Invoke(new()
         ///     {
-        ///         var clusterResources = Output.Create(Tencentcloud.Clb.GetClusterResources.InvokeAsync(new Tencentcloud.Clb.GetClusterResourcesArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Clb.Inputs.GetClusterResourcesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Clb.Inputs.GetClusterResourcesFilterArgs
+        ///                 Name = "idle",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "idle",
-        ///                     Values = 
-        ///                     {
-        ///                         "True",
-        ///                     },
+        ///                     "True",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetClusterResourcesResult> InvokeAsync(GetClusterResourcesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetClusterResourcesResult>("tencentcloud:Clb/getClusterResources:getClusterResources", args ?? new GetClusterResourcesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterResourcesResult>("tencentcloud:Clb/getClusterResources:getClusterResources", args ?? new GetClusterResourcesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of clb cluster_resources
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clusterResources = Tencentcloud.Clb.GetClusterResources.Invoke(new()
         ///     {
-        ///         var clusterResources = Output.Create(Tencentcloud.Clb.GetClusterResources.InvokeAsync(new Tencentcloud.Clb.GetClusterResourcesArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Clb.Inputs.GetClusterResourcesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Clb.Inputs.GetClusterResourcesFilterArgs
+        ///                 Name = "idle",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "idle",
-        ///                     Values = 
-        ///                     {
-        ///                         "True",
-        ///                     },
+        ///                     "True",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetClusterResourcesResult> Invoke(GetClusterResourcesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetClusterResourcesResult>("tencentcloud:Clb/getClusterResources:getClusterResources", args ?? new GetClusterResourcesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetClusterResourcesResult>("tencentcloud:Clb/getClusterResources:getClusterResources", args ?? new GetClusterResourcesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetClusterResourcesArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterResourcesArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetClusterResourcesFilterArgs>? _filters;
@@ -115,9 +109,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetClusterResourcesArgs()
         {
         }
+        public static new GetClusterResourcesArgs Empty => new GetClusterResourcesArgs();
     }
 
-    public sealed class GetClusterResourcesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterResourcesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetClusterResourcesFilterInputArgs>? _filters;
@@ -140,6 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetClusterResourcesInvokeArgs()
         {
         }
+        public static new GetClusterResourcesInvokeArgs Empty => new GetClusterResourcesInvokeArgs();
     }
 
 

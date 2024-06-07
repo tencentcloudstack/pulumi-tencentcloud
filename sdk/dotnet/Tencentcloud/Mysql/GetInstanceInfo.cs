@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql instance_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceInfo = Tencentcloud.Mysql.GetInstanceInfo.Invoke(new()
         ///     {
-        ///         var instanceInfo = Output.Create(Tencentcloud.Mysql.GetInstanceInfo.InvokeAsync(new Tencentcloud.Mysql.GetInstanceInfoArgs
-        ///         {
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceInfoResult> InvokeAsync(GetInstanceInfoArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceInfoResult>("tencentcloud:Mysql/getInstanceInfo:getInstanceInfo", args ?? new GetInstanceInfoArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceInfoResult>("tencentcloud:Mysql/getInstanceInfo:getInstanceInfo", args ?? new GetInstanceInfoArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql instance_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceInfo = Tencentcloud.Mysql.GetInstanceInfo.Invoke(new()
         ///     {
-        ///         var instanceInfo = Output.Create(Tencentcloud.Mysql.GetInstanceInfo.InvokeAsync(new Tencentcloud.Mysql.GetInstanceInfoArgs
-        ///         {
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceInfoResult> Invoke(GetInstanceInfoInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceInfoResult>("tencentcloud:Mysql/getInstanceInfo:getInstanceInfo", args ?? new GetInstanceInfoInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceInfoResult>("tencentcloud:Mysql/getInstanceInfo:getInstanceInfo", args ?? new GetInstanceInfoInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceInfoArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetInstanceInfoArgs()
         {
         }
+        public static new GetInstanceInfoArgs Empty => new GetInstanceInfoArgs();
     }
 
-    public sealed class GetInstanceInfoInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceInfoInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetInstanceInfoInvokeArgs()
         {
         }
+        public static new GetInstanceInfoInvokeArgs Empty => new GetInstanceInfoInvokeArgs();
     }
 
 

@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// <summary>
         /// Use this data source to query detailed information of kms key_lists
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Kms.GetDescribeKeys.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Kms.GetDescribeKeys.InvokeAsync(new Tencentcloud.Kms.GetDescribeKeysArgs
+        ///         KeyIds = new[]
         ///         {
-        ///             KeyIds = 
-        ///             {
-        ///                 "9ffacc8b-6461-11ee-a54e-525400dd8a7d",
-        ///                 "bffae4ed-6465-11ee-90b2-5254000ef00e",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "9ffacc8b-6461-11ee-a54e-525400dd8a7d",
+        ///             "bffae4ed-6465-11ee-90b2-5254000ef00e",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeKeysResult> InvokeAsync(GetDescribeKeysArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeKeysResult>("tencentcloud:Kms/getDescribeKeys:getDescribeKeys", args ?? new GetDescribeKeysArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeKeysResult>("tencentcloud:Kms/getDescribeKeys:getDescribeKeys", args ?? new GetDescribeKeysArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of kms key_lists
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Kms.GetDescribeKeys.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Kms.GetDescribeKeys.InvokeAsync(new Tencentcloud.Kms.GetDescribeKeysArgs
+        ///         KeyIds = new[]
         ///         {
-        ///             KeyIds = 
-        ///             {
-        ///                 "9ffacc8b-6461-11ee-a54e-525400dd8a7d",
-        ///                 "bffae4ed-6465-11ee-90b2-5254000ef00e",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "9ffacc8b-6461-11ee-a54e-525400dd8a7d",
+        ///             "bffae4ed-6465-11ee-90b2-5254000ef00e",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeKeysResult> Invoke(GetDescribeKeysInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeKeysResult>("tencentcloud:Kms/getDescribeKeys:getDescribeKeys", args ?? new GetDescribeKeysInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeKeysResult>("tencentcloud:Kms/getDescribeKeys:getDescribeKeys", args ?? new GetDescribeKeysInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeKeysArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeKeysArgs : global::Pulumi.InvokeArgs
     {
         [Input("keyIds", required: true)]
         private List<string>? _keyIds;
@@ -103,9 +97,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public GetDescribeKeysArgs()
         {
         }
+        public static new GetDescribeKeysArgs Empty => new GetDescribeKeysArgs();
     }
 
-    public sealed class GetDescribeKeysInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeKeysInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("keyIds", required: true)]
         private InputList<string>? _keyIds;
@@ -128,6 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public GetDescribeKeysInvokeArgs()
         {
         }
+        public static new GetDescribeKeysInvokeArgs Empty => new GetDescribeKeysInvokeArgs();
     }
 
 

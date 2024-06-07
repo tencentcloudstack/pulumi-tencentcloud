@@ -14,17 +14,53 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Outputs
     [OutputType]
     public sealed class GetVipInstanceInstanceConfigResult
     {
+        /// <summary>
+        /// Cluster type.
+        /// </summary>
         public readonly string ConfigDisplay;
+        /// <summary>
+        /// Maximum number of groups.
+        /// </summary>
         public readonly int MaxGroupNum;
+        /// <summary>
+        /// Maximum number of namespaces.
+        /// </summary>
         public readonly int MaxNamespaceNum;
+        /// <summary>
+        /// Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly int MaxQueuesPerTopic;
+        /// <summary>
+        /// Maximum number of topics.
+        /// </summary>
         public readonly int MaxTopicNum;
+        /// <summary>
+        /// Single namespace TPS upper limit.
+        /// </summary>
         public readonly int MaxTpsPerNamespace;
+        /// <summary>
+        /// Number of cluster nodes.
+        /// </summary>
         public readonly int NodeCount;
+        /// <summary>
+        /// Node distribution.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetVipInstanceInstanceConfigNodeDistributionResult> NodeDistributions;
+        /// <summary>
+        /// Topic distribution.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetVipInstanceInstanceConfigTopicDistributionResult> TopicDistributions;
+        /// <summary>
+        /// Number of used groups.
+        /// </summary>
         public readonly int UsedGroupNum;
+        /// <summary>
+        /// Number of used namespaces.
+        /// </summary>
         public readonly int UsedNamespaceNum;
+        /// <summary>
+        /// The number of topics used.
+        /// </summary>
         public readonly int UsedTopicNum;
 
         [OutputConstructor]

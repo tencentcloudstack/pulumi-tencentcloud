@@ -7,34 +7,40 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mariadb cancelDcnJob
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.NewCancelDcnJob(ctx, "cancelDcnJob", &Mariadb.CancelDcnJobArgs{
-// 			InstanceId: pulumi.String("tdsql-9vqvls95"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.NewCancelDcnJob(ctx, "cancelDcnJob", &Mariadb.CancelDcnJobArgs{
+//				InstanceId: pulumi.String("tdsql-9vqvls95"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type CancelDcnJob struct {
 	pulumi.CustomResourceState
 
@@ -52,7 +58,7 @@ func NewCancelDcnJob(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CancelDcnJob
 	err := ctx.RegisterResource("tencentcloud:Mariadb/cancelDcnJob:CancelDcnJob", name, args, &resource, opts...)
 	if err != nil {
@@ -125,7 +131,7 @@ func (i *CancelDcnJob) ToCancelDcnJobOutputWithContext(ctx context.Context) Canc
 // CancelDcnJobArrayInput is an input type that accepts CancelDcnJobArray and CancelDcnJobArrayOutput values.
 // You can construct a concrete instance of `CancelDcnJobArrayInput` via:
 //
-//          CancelDcnJobArray{ CancelDcnJobArgs{...} }
+//	CancelDcnJobArray{ CancelDcnJobArgs{...} }
 type CancelDcnJobArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +156,7 @@ func (i CancelDcnJobArray) ToCancelDcnJobArrayOutputWithContext(ctx context.Cont
 // CancelDcnJobMapInput is an input type that accepts CancelDcnJobMap and CancelDcnJobMapOutput values.
 // You can construct a concrete instance of `CancelDcnJobMapInput` via:
 //
-//          CancelDcnJobMap{ "key": CancelDcnJobArgs{...} }
+//	CancelDcnJobMap{ "key": CancelDcnJobArgs{...} }
 type CancelDcnJobMapInput interface {
 	pulumi.Input
 

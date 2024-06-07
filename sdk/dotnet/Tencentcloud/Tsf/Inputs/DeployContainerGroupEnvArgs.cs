@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class DeployContainerGroupEnvArgs : Pulumi.ResourceArgs
+    public sealed class DeployContainerGroupEnvArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// env param name.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public DeployContainerGroupEnvArgs()
         {
         }
+        public static new DeployContainerGroupEnvArgs Empty => new DeployContainerGroupEnvArgs();
     }
 }

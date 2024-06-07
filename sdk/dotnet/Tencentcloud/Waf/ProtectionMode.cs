@@ -15,28 +15,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.ProtectionMode("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.ProtectionMode("example", new Tencentcloud.Waf.ProtectionModeArgs
-    ///         {
-    ///             Domain = "keep.qcloudwaf.com",
-    ///             Edition = "sparta-waf",
-    ///             Mode = 10,
-    ///             Type = 0,
-    ///         });
-    ///     }
+    ///         Domain = "keep.qcloudwaf.com",
+    ///         Edition = "sparta-waf",
+    ///         Mode = 10,
+    ///         Type = 0,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/protectionMode:ProtectionMode")]
-    public partial class ProtectionMode : Pulumi.CustomResource
+    public partial class ProtectionMode : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Domain.
@@ -107,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class ProtectionModeArgs : Pulumi.ResourceArgs
+    public sealed class ProtectionModeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -136,9 +137,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public ProtectionModeArgs()
         {
         }
+        public static new ProtectionModeArgs Empty => new ProtectionModeArgs();
     }
 
-    public sealed class ProtectionModeState : Pulumi.ResourceArgs
+    public sealed class ProtectionModeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -167,5 +169,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public ProtectionModeState()
         {
         }
+        public static new ProtectionModeState Empty => new ProtectionModeState();
     }
 }

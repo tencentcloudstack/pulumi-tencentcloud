@@ -7,38 +7,44 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a elasticsearch diagnose instance
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.NewDiagnoseInstance(ctx, "diagnoseInstance", &Elasticsearch.DiagnoseInstanceArgs{
-// 			DiagnoseIndices: pulumi.String("*"),
-// 			DiagnoseJobs: pulumi.StringArray{
-// 				pulumi.String("cluster_health"),
-// 			},
-// 			InstanceId: pulumi.String("es-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.NewDiagnoseInstance(ctx, "diagnoseInstance", &Elasticsearch.DiagnoseInstanceArgs{
+//				DiagnoseIndices: pulumi.String("*"),
+//				DiagnoseJobs: pulumi.StringArray{
+//					pulumi.String("cluster_health"),
+//				},
+//				InstanceId: pulumi.String("es-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type DiagnoseInstance struct {
 	pulumi.CustomResourceState
 
@@ -60,7 +66,7 @@ func NewDiagnoseInstance(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DiagnoseInstance
 	err := ctx.RegisterResource("tencentcloud:Elasticsearch/diagnoseInstance:DiagnoseInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -149,7 +155,7 @@ func (i *DiagnoseInstance) ToDiagnoseInstanceOutputWithContext(ctx context.Conte
 // DiagnoseInstanceArrayInput is an input type that accepts DiagnoseInstanceArray and DiagnoseInstanceArrayOutput values.
 // You can construct a concrete instance of `DiagnoseInstanceArrayInput` via:
 //
-//          DiagnoseInstanceArray{ DiagnoseInstanceArgs{...} }
+//	DiagnoseInstanceArray{ DiagnoseInstanceArgs{...} }
 type DiagnoseInstanceArrayInput interface {
 	pulumi.Input
 
@@ -174,7 +180,7 @@ func (i DiagnoseInstanceArray) ToDiagnoseInstanceArrayOutputWithContext(ctx cont
 // DiagnoseInstanceMapInput is an input type that accepts DiagnoseInstanceMap and DiagnoseInstanceMapOutput values.
 // You can construct a concrete instance of `DiagnoseInstanceMapInput` via:
 //
-//          DiagnoseInstanceMap{ "key": DiagnoseInstanceArgs{...} }
+//	DiagnoseInstanceMap{ "key": DiagnoseInstanceArgs{...} }
 type DiagnoseInstanceMapInput interface {
 	pulumi.Input
 

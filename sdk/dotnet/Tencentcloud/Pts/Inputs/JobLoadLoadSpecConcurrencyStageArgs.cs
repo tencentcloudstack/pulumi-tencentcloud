@@ -11,16 +11,23 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class JobLoadLoadSpecConcurrencyStageArgs : Pulumi.ResourceArgs
+    public sealed class JobLoadLoadSpecConcurrencyStageArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Pressure time.
+        /// </summary>
         [Input("durationSeconds")]
         public Input<int>? DurationSeconds { get; set; }
 
+        /// <summary>
+        /// Number of virtual users.
+        /// </summary>
         [Input("targetVirtualUsers")]
         public Input<int>? TargetVirtualUsers { get; set; }
 
         public JobLoadLoadSpecConcurrencyStageArgs()
         {
         }
+        public static new JobLoadLoadSpecConcurrencyStageArgs Empty => new JobLoadLoadSpecConcurrencyStageArgs();
     }
 }

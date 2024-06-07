@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const zookeeperReplicas = pulumi.output(tencentcloud.Tse.getZookeeperReplicas({
+ * const zookeeperReplicas = tencentcloud.Tse.getZookeeperReplicas({
  *     instanceId: "ins-7eb7eea7",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getZookeeperReplicas(args: GetZookeeperReplicasArgs, opts?: pulumi.InvokeOptions): Promise<GetZookeeperReplicasResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tse/getZookeeperReplicas:getZookeeperReplicas", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetZookeeperReplicasResult {
     readonly replicas: outputs.Tse.GetZookeeperReplicasReplica[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tse zookeeperReplicas
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const zookeeperReplicas = tencentcloud.Tse.getZookeeperReplicas({
+ *     instanceId: "ins-7eb7eea7",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getZookeeperReplicasOutput(args: GetZookeeperReplicasOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetZookeeperReplicasResult> {
-    return pulumi.output(args).apply(a => getZookeeperReplicas(a, opts))
+    return pulumi.output(args).apply((a: any) => getZookeeperReplicas(a, opts))
 }
 
 /**

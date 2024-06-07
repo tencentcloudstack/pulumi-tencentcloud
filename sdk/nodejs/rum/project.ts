@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const project = new tencentcloud.Rum.Project("project", {
+ * const project = new tencentcloud.rum.Project("project", {
  *     desc: "projectDesc-1",
  *     enableUrlGroup: 0,
  *     instanceId: "rum-pasZKEI3RLgakj",
@@ -23,13 +24,14 @@ import * as utilities from "../utilities";
  *     url: "iac-tf.com",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * rum project can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Rum/project:Project project project_id
+ * $ pulumi import tencentcloud:Rum/project:Project project project_id
  * ```
  */
 export class Project extends pulumi.CustomResource {

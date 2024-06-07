@@ -2,25 +2,28 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a eb eventTarget
  *
  * ## Example Usage
+ *
  * ### Create an event target of type scf
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const zone = config.get("zone") || "ap-guangzhou";
  * const namespace = config.get("namespace") || "default";
- * const function = config.get("function") || "keep-1676351130";
- * const functionVersion = config.get("functionVersion") || `$LATEST`;
+ * const _function = config.get("function") || "keep-1676351130";
+ * const functionVersion = config.get("functionVersion") || "$LATEST";
  * const fooUsers = tencentcloud.Cam.getUsers({});
  * const fooEventBus = new tencentcloud.eb.EventBus("fooEventBus", {
  *     eventBusName: "tf-event_bus",
@@ -49,7 +52,7 @@ import * as utilities from "../utilities";
  *     ruleId: fooEventRule.ruleId,
  *     type: "scf",
  *     targetDescription: {
- *         resourceDescription: fooUsers.then(fooUsers => `qcs::scf:${zone}:uin/${fooUsers.userLists?[0]?.uin}:namespace/${namespace}/function/${_function}/${functionVersion}`),
+ *         resourceDescription: fooUsers.then(fooUsers => `qcs::scf:${zone}:uin/${fooUsers.userLists?.[0]?.uin}:namespace/${namespace}/function/${_function}/${functionVersion}`),
  *         scfParams: {
  *             batchEventCount: 1,
  *             batchTimeout: 1,
@@ -58,11 +61,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create an event target of type ckafka
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const ckafka = config.get("ckafka") || "ckafka-qzoeaqx8";
@@ -82,13 +88,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * eb event_target can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Eb/eventTarget:EventTarget event_target event_target_id
+ * $ pulumi import tencentcloud:Eb/eventTarget:EventTarget event_target event_target_id
  * ```
  */
 export class EventTarget extends pulumi.CustomResource {

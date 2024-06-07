@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
 {
 
-    public sealed class PasswordComplexityParamListGetArgs : Pulumi.ResourceArgs
+    public sealed class PasswordComplexityParamListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Parameter value.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
         public PasswordComplexityParamListGetArgs()
         {
         }
+        public static new PasswordComplexityParamListGetArgs Empty => new PasswordComplexityParamListGetArgs();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ckafkaConsumer = new tencentcloud.Cls.CkafkaConsumer("ckafka_consumer", {
+ * const ckafkaConsumer = new tencentcloud.cls.CkafkaConsumer("ckafkaConsumer", {
  *     ckafka: {
  *         instanceId: "ckafka-qzoeaqx8",
  *         instanceName: "ckafka-instance",
@@ -40,13 +42,14 @@ import * as utilities from "../utilities";
  *     topicId: "7e34a3a7-635e-4da8-9005-88106c1fde69",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cls ckafka_consumer can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cls/ckafkaConsumer:CkafkaConsumer ckafka_consumer topic_id
+ * $ pulumi import tencentcloud:Cls/ckafkaConsumer:CkafkaConsumer ckafka_consumer topic_id
  * ```
  */
 export class CkafkaConsumer extends pulumi.CustomResource {

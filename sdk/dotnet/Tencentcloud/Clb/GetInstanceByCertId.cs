@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// Use this data source to query detailed information of clb instance_by_cert_id
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceByCertId = Tencentcloud.Clb.GetInstanceByCertId.Invoke(new()
         ///     {
-        ///         var instanceByCertId = Output.Create(Tencentcloud.Clb.GetInstanceByCertId.InvokeAsync(new Tencentcloud.Clb.GetInstanceByCertIdArgs
+        ///         CertIds = new[]
         ///         {
-        ///             CertIds = 
-        ///             {
-        ///                 "3a6B5y8v",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "3a6B5y8v",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceByCertIdResult> InvokeAsync(GetInstanceByCertIdArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceByCertIdResult>("tencentcloud:Clb/getInstanceByCertId:getInstanceByCertId", args ?? new GetInstanceByCertIdArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceByCertIdResult>("tencentcloud:Clb/getInstanceByCertId:getInstanceByCertId", args ?? new GetInstanceByCertIdArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of clb instance_by_cert_id
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceByCertId = Tencentcloud.Clb.GetInstanceByCertId.Invoke(new()
         ///     {
-        ///         var instanceByCertId = Output.Create(Tencentcloud.Clb.GetInstanceByCertId.InvokeAsync(new Tencentcloud.Clb.GetInstanceByCertIdArgs
+        ///         CertIds = new[]
         ///         {
-        ///             CertIds = 
-        ///             {
-        ///                 "3a6B5y8v",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "3a6B5y8v",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceByCertIdResult> Invoke(GetInstanceByCertIdInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceByCertIdResult>("tencentcloud:Clb/getInstanceByCertId:getInstanceByCertId", args ?? new GetInstanceByCertIdInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceByCertIdResult>("tencentcloud:Clb/getInstanceByCertId:getInstanceByCertId", args ?? new GetInstanceByCertIdInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceByCertIdArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceByCertIdArgs : global::Pulumi.InvokeArgs
     {
         [Input("certIds", required: true)]
         private List<string>? _certIds;
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetInstanceByCertIdArgs()
         {
         }
+        public static new GetInstanceByCertIdArgs Empty => new GetInstanceByCertIdArgs();
     }
 
-    public sealed class GetInstanceByCertIdInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceByCertIdInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("certIds", required: true)]
         private InputList<string>? _certIds;
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetInstanceByCertIdInvokeArgs()
         {
         }
+        public static new GetInstanceByCertIdInvokeArgs Empty => new GetInstanceByCertIdInvokeArgs();
     }
 
 

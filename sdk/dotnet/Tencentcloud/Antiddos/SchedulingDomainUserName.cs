@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var schedulingDomainUserName = new Tencentcloud.Antiddos.SchedulingDomainUserName("schedulingDomainUserName", new()
     ///     {
-    ///         var schedulingDomainUserName = new Tencentcloud.Antiddos.SchedulingDomainUserName("schedulingDomainUserName", new Tencentcloud.Antiddos.SchedulingDomainUserNameArgs
-    ///         {
-    ///             DomainName = "test.com",
-    ///             DomainUserName = "",
-    ///         });
-    ///     }
+    ///         DomainName = "test.com",
+    ///         DomainUserName = "",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// antiddos scheduling_domain_user_name can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Antiddos/schedulingDomainUserName:SchedulingDomainUserName scheduling_domain_user_name ${domainName}
+    /// $ pulumi import tencentcloud:Antiddos/schedulingDomainUserName:SchedulingDomainUserName scheduling_domain_user_name ${domainName}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Antiddos/schedulingDomainUserName:SchedulingDomainUserName")]
-    public partial class SchedulingDomainUserName : Pulumi.CustomResource
+    public partial class SchedulingDomainUserName : global::Pulumi.CustomResource
     {
         /// <summary>
         /// user cname.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         }
     }
 
-    public sealed class SchedulingDomainUserNameArgs : Pulumi.ResourceArgs
+    public sealed class SchedulingDomainUserNameArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// user cname.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public SchedulingDomainUserNameArgs()
         {
         }
+        public static new SchedulingDomainUserNameArgs Empty => new SchedulingDomainUserNameArgs();
     }
 
-    public sealed class SchedulingDomainUserNameState : Pulumi.ResourceArgs
+    public sealed class SchedulingDomainUserNameState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// user cname.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public SchedulingDomainUserNameState()
         {
         }
+        public static new SchedulingDomainUserNameState Empty => new SchedulingDomainUserNameState();
     }
 }

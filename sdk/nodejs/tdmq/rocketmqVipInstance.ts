@@ -2,13 +2,15 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a tdmq rocketmqVipInstance
  *
  * > **NOTE:** The instance cannot be downgraded, Include parameters `nodeCount`, `spec`, `storageSize`.
+ * **NOTE:** If `spec` is `rocket-vip-basic-2`, configuration changes are not supported.
  */
 export class RocketmqVipInstance extends pulumi.CustomResource {
     /**
@@ -39,6 +41,10 @@ export class RocketmqVipInstance extends pulumi.CustomResource {
     }
 
     /**
+     * Public IP access control rules.
+     */
+    public readonly ipRules!: pulumi.Output<outputs.Tdmq.RocketmqVipInstanceIpRule[] | undefined>;
+    /**
      * Instance name.
      */
     public readonly name!: pulumi.Output<string>;
@@ -47,7 +53,7 @@ export class RocketmqVipInstance extends pulumi.CustomResource {
      */
     public readonly nodeCount!: pulumi.Output<number>;
     /**
-     * Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
+     * Instance specification: Universal type, rocket-vip-basic-0, Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
      */
     public readonly spec!: pulumi.Output<string>;
     /**
@@ -80,6 +86,7 @@ export class RocketmqVipInstance extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as RocketmqVipInstanceState | undefined;
+            resourceInputs["ipRules"] = state ? state.ipRules : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["nodeCount"] = state ? state.nodeCount : undefined;
             resourceInputs["spec"] = state ? state.spec : undefined;
@@ -107,6 +114,7 @@ export class RocketmqVipInstance extends pulumi.CustomResource {
             if ((!args || args.zoneIds === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'zoneIds'");
             }
+            resourceInputs["ipRules"] = args ? args.ipRules : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["nodeCount"] = args ? args.nodeCount : undefined;
             resourceInputs["spec"] = args ? args.spec : undefined;
@@ -125,6 +133,10 @@ export class RocketmqVipInstance extends pulumi.CustomResource {
  */
 export interface RocketmqVipInstanceState {
     /**
+     * Public IP access control rules.
+     */
+    ipRules?: pulumi.Input<pulumi.Input<inputs.Tdmq.RocketmqVipInstanceIpRule>[]>;
+    /**
      * Instance name.
      */
     name?: pulumi.Input<string>;
@@ -133,7 +145,7 @@ export interface RocketmqVipInstanceState {
      */
     nodeCount?: pulumi.Input<number>;
     /**
-     * Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
+     * Instance specification: Universal type, rocket-vip-basic-0, Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
      */
     spec?: pulumi.Input<string>;
     /**
@@ -159,6 +171,10 @@ export interface RocketmqVipInstanceState {
  */
 export interface RocketmqVipInstanceArgs {
     /**
+     * Public IP access control rules.
+     */
+    ipRules?: pulumi.Input<pulumi.Input<inputs.Tdmq.RocketmqVipInstanceIpRule>[]>;
+    /**
      * Instance name.
      */
     name?: pulumi.Input<string>;
@@ -167,7 +183,7 @@ export interface RocketmqVipInstanceArgs {
      */
     nodeCount: pulumi.Input<number>;
     /**
-     * Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
+     * Instance specification: Universal type, rocket-vip-basic-0, Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
      */
     spec: pulumi.Input<string>;
     /**

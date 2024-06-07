@@ -13,140 +13,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// <summary>
     /// Provides a resource to create a teo zone_setting
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var zoneSetting = new Tencentcloud.Teo.ZoneSetting("zoneSetting", new Tencentcloud.Teo.ZoneSettingArgs
-    ///         {
-    ///             Cache = new Tencentcloud.Teo.Inputs.ZoneSettingCacheArgs
-    ///             {
-    ///                 FollowOrigin = new Tencentcloud.Teo.Inputs.ZoneSettingCacheFollowOriginArgs
-    ///                 {
-    ///                     Switch = "on",
-    ///                 },
-    ///                 NoCache = new Tencentcloud.Teo.Inputs.ZoneSettingCacheNoCacheArgs
-    ///                 {
-    ///                     Switch = "off",
-    ///                 },
-    ///             },
-    ///             CacheKey = new Tencentcloud.Teo.Inputs.ZoneSettingCacheKeyArgs
-    ///             {
-    ///                 FullUrlCache = "on",
-    ///                 IgnoreCase = "off",
-    ///                 QueryString = new Tencentcloud.Teo.Inputs.ZoneSettingCacheKeyQueryStringArgs
-    ///                 {
-    ///                     Action = "includeCustom",
-    ///                     Switch = "off",
-    ///                     Value = {},
-    ///                 },
-    ///             },
-    ///             CachePrefresh = new Tencentcloud.Teo.Inputs.ZoneSettingCachePrefreshArgs
-    ///             {
-    ///                 Percent = 90,
-    ///                 Switch = "off",
-    ///             },
-    ///             ClientIpHeader = new Tencentcloud.Teo.Inputs.ZoneSettingClientIpHeaderArgs
-    ///             {
-    ///                 Switch = "off",
-    ///             },
-    ///             Compression = new Tencentcloud.Teo.Inputs.ZoneSettingCompressionArgs
-    ///             {
-    ///                 Algorithms = 
-    ///                 {
-    ///                     "brotli",
-    ///                     "gzip",
-    ///                 },
-    ///                 Switch = "on",
-    ///             },
-    ///             ForceRedirect = new Tencentcloud.Teo.Inputs.ZoneSettingForceRedirectArgs
-    ///             {
-    ///                 RedirectStatusCode = 302,
-    ///                 Switch = "off",
-    ///             },
-    ///             Https = new Tencentcloud.Teo.Inputs.ZoneSettingHttpsArgs
-    ///             {
-    ///                 Hsts = new Tencentcloud.Teo.Inputs.ZoneSettingHttpsHstsArgs
-    ///                 {
-    ///                     IncludeSubDomains = "off",
-    ///                     MaxAge = 0,
-    ///                     Preload = "off",
-    ///                     Switch = "off",
-    ///                 },
-    ///                 Http2 = "on",
-    ///                 OcspStapling = "off",
-    ///                 TlsVersions = 
-    ///                 {
-    ///                     "TLSv1",
-    ///                     "TLSv1.1",
-    ///                     "TLSv1.2",
-    ///                     "TLSv1.3",
-    ///                 },
-    ///             },
-    ///             Ipv6 = new Tencentcloud.Teo.Inputs.ZoneSettingIpv6Args
-    ///             {
-    ///                 Switch = "off",
-    ///             },
-    ///             MaxAge = new Tencentcloud.Teo.Inputs.ZoneSettingMaxAgeArgs
-    ///             {
-    ///                 FollowOrigin = "on",
-    ///                 MaxAgeTime = 0,
-    ///             },
-    ///             OfflineCache = new Tencentcloud.Teo.Inputs.ZoneSettingOfflineCacheArgs
-    ///             {
-    ///                 Switch = "on",
-    ///             },
-    ///             Origin = new Tencentcloud.Teo.Inputs.ZoneSettingOriginArgs
-    ///             {
-    ///                 BackupOrigins = {},
-    ///                 OriginPullProtocol = "follow",
-    ///                 Origins = {},
-    ///             },
-    ///             PostMaxSize = new Tencentcloud.Teo.Inputs.ZoneSettingPostMaxSizeArgs
-    ///             {
-    ///                 MaxSize = 524288000,
-    ///                 Switch = "on",
-    ///             },
-    ///             Quic = new Tencentcloud.Teo.Inputs.ZoneSettingQuicArgs
-    ///             {
-    ///                 Switch = "off",
-    ///             },
-    ///             SmartRouting = new Tencentcloud.Teo.Inputs.ZoneSettingSmartRoutingArgs
-    ///             {
-    ///                 Switch = "off",
-    ///             },
-    ///             UpstreamHttp2 = new Tencentcloud.Teo.Inputs.ZoneSettingUpstreamHttp2Args
-    ///             {
-    ///                 Switch = "off",
-    ///             },
-    ///             WebSocket = new Tencentcloud.Teo.Inputs.ZoneSettingWebSocketArgs
-    ///             {
-    ///                 Switch = "off",
-    ///                 Timeout = 30,
-    ///             },
-    ///             ZoneId = "zone-297z8rf93cfw",
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// teo zone_setting can be imported using the zone_id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Teo/zoneSetting:ZoneSetting zone_setting zone-297z8rf93cfw#
+    /// $ pulumi import tencentcloud:Teo/zoneSetting:ZoneSetting zone_setting zone-297z8rf93cfw#
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/zoneSetting:ZoneSetting")]
-    public partial class ZoneSetting : Pulumi.CustomResource
+    public partial class ZoneSetting : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Acceleration area of the zone. Valid values: `mainland`, `overseas`.
@@ -301,7 +177,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
     }
 
-    public sealed class ZoneSettingArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cache expiration time configuration.
@@ -408,9 +284,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public ZoneSettingArgs()
         {
         }
+        public static new ZoneSettingArgs Empty => new ZoneSettingArgs();
     }
 
-    public sealed class ZoneSettingState : Pulumi.ResourceArgs
+    public sealed class ZoneSettingState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Acceleration area of the zone. Valid values: `mainland`, `overseas`.
@@ -523,5 +400,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public ZoneSettingState()
         {
         }
+        public static new ZoneSettingState Empty => new ZoneSettingState();
     }
 }

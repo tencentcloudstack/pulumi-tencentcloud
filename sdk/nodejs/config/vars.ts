@@ -2,15 +2,13 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 declare var exports: any;
 const __config = new pulumi.Config("tencentcloud");
 
-/**
- * The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
- */
 export declare const assumeRole: outputs.config.AssumeRole | undefined;
 Object.defineProperty(exports, "assumeRole", {
     get() {

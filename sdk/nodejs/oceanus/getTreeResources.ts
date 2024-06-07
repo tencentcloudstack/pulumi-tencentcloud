@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Oceanus.getTreeResources({
+ * const example = tencentcloud.Oceanus.getTreeResources({
  *     workSpaceId: "space-2idq8wbr",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTreeResources(args: GetTreeResourcesArgs, opts?: pulumi.InvokeOptions): Promise<GetTreeResourcesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Oceanus/getTreeResources:getTreeResources", {
         "resultOutputFile": args.resultOutputFile,
         "workSpaceId": args.workSpaceId,
@@ -60,9 +60,24 @@ export interface GetTreeResourcesResult {
     readonly treeInfos: outputs.Oceanus.GetTreeResourcesTreeInfo[];
     readonly workSpaceId: string;
 }
-
+/**
+ * Use this data source to query detailed information of oceanus treeResources
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Oceanus.getTreeResources({
+ *     workSpaceId: "space-2idq8wbr",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTreeResourcesOutput(args: GetTreeResourcesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTreeResourcesResult> {
-    return pulumi.output(args).apply(a => getTreeResources(a, opts))
+    return pulumi.output(args).apply((a: any) => getTreeResources(a, opts))
 }
 
 /**

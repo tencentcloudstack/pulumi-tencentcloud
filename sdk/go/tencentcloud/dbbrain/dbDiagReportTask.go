@@ -7,47 +7,51 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dbbrain dbDiagReportTask
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.NewDbDiagReportTask(ctx, "dbDiagReportTask", &Dbbrain.DbDiagReportTaskArgs{
-// 			EndTime:      pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			InstanceId:   pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 			Product:      pulumi.String("mysql"),
-// 			SendMailFlag: pulumi.Int(0),
-// 			StartTime:    pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.NewDbDiagReportTask(ctx, "dbDiagReportTask", &Dbbrain.DbDiagReportTaskArgs{
+//				EndTime:      pulumi.String("%s"),
+//				InstanceId:   pulumi.String("%s"),
+//				Product:      pulumi.String("mysql"),
+//				SendMailFlag: pulumi.Int(0),
+//				StartTime:    pulumi.String("%s"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type DbDiagReportTask struct {
 	pulumi.CustomResourceState
 
 	// An array of contact group IDs to receive mail from.
 	ContactGroups pulumi.IntArrayOutput `pulumi:"contactGroups"`
 	// An array of contact IDs to receive emails from.
-	ContactPeoples pulumi.IntArrayOutput `pulumi:"contactPeoples"`
+	ContactPeople pulumi.IntArrayOutput `pulumi:"contactPeople"`
 	// End time, such as 2020-11-09T14:00:00+08:00.
 	EndTime pulumi.StringOutput `pulumi:"endTime"`
 	// instance id.
@@ -82,7 +86,7 @@ func NewDbDiagReportTask(ctx *pulumi.Context,
 	if args.StartTime == nil {
 		return nil, errors.New("invalid value for required argument 'StartTime'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DbDiagReportTask
 	err := ctx.RegisterResource("tencentcloud:Dbbrain/dbDiagReportTask:DbDiagReportTask", name, args, &resource, opts...)
 	if err != nil {
@@ -108,7 +112,7 @@ type dbDiagReportTaskState struct {
 	// An array of contact group IDs to receive mail from.
 	ContactGroups []int `pulumi:"contactGroups"`
 	// An array of contact IDs to receive emails from.
-	ContactPeoples []int `pulumi:"contactPeoples"`
+	ContactPeople []int `pulumi:"contactPeople"`
 	// End time, such as 2020-11-09T14:00:00+08:00.
 	EndTime *string `pulumi:"endTime"`
 	// instance id.
@@ -125,7 +129,7 @@ type DbDiagReportTaskState struct {
 	// An array of contact group IDs to receive mail from.
 	ContactGroups pulumi.IntArrayInput
 	// An array of contact IDs to receive emails from.
-	ContactPeoples pulumi.IntArrayInput
+	ContactPeople pulumi.IntArrayInput
 	// End time, such as 2020-11-09T14:00:00+08:00.
 	EndTime pulumi.StringPtrInput
 	// instance id.
@@ -146,7 +150,7 @@ type dbDiagReportTaskArgs struct {
 	// An array of contact group IDs to receive mail from.
 	ContactGroups []int `pulumi:"contactGroups"`
 	// An array of contact IDs to receive emails from.
-	ContactPeoples []int `pulumi:"contactPeoples"`
+	ContactPeople []int `pulumi:"contactPeople"`
 	// End time, such as 2020-11-09T14:00:00+08:00.
 	EndTime string `pulumi:"endTime"`
 	// instance id.
@@ -164,7 +168,7 @@ type DbDiagReportTaskArgs struct {
 	// An array of contact group IDs to receive mail from.
 	ContactGroups pulumi.IntArrayInput
 	// An array of contact IDs to receive emails from.
-	ContactPeoples pulumi.IntArrayInput
+	ContactPeople pulumi.IntArrayInput
 	// End time, such as 2020-11-09T14:00:00+08:00.
 	EndTime pulumi.StringInput
 	// instance id.
@@ -203,7 +207,7 @@ func (i *DbDiagReportTask) ToDbDiagReportTaskOutputWithContext(ctx context.Conte
 // DbDiagReportTaskArrayInput is an input type that accepts DbDiagReportTaskArray and DbDiagReportTaskArrayOutput values.
 // You can construct a concrete instance of `DbDiagReportTaskArrayInput` via:
 //
-//          DbDiagReportTaskArray{ DbDiagReportTaskArgs{...} }
+//	DbDiagReportTaskArray{ DbDiagReportTaskArgs{...} }
 type DbDiagReportTaskArrayInput interface {
 	pulumi.Input
 
@@ -228,7 +232,7 @@ func (i DbDiagReportTaskArray) ToDbDiagReportTaskArrayOutputWithContext(ctx cont
 // DbDiagReportTaskMapInput is an input type that accepts DbDiagReportTaskMap and DbDiagReportTaskMapOutput values.
 // You can construct a concrete instance of `DbDiagReportTaskMapInput` via:
 //
-//          DbDiagReportTaskMap{ "key": DbDiagReportTaskArgs{...} }
+//	DbDiagReportTaskMap{ "key": DbDiagReportTaskArgs{...} }
 type DbDiagReportTaskMapInput interface {
 	pulumi.Input
 
@@ -270,8 +274,8 @@ func (o DbDiagReportTaskOutput) ContactGroups() pulumi.IntArrayOutput {
 }
 
 // An array of contact IDs to receive emails from.
-func (o DbDiagReportTaskOutput) ContactPeoples() pulumi.IntArrayOutput {
-	return o.ApplyT(func(v *DbDiagReportTask) pulumi.IntArrayOutput { return v.ContactPeoples }).(pulumi.IntArrayOutput)
+func (o DbDiagReportTaskOutput) ContactPeople() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v *DbDiagReportTask) pulumi.IntArrayOutput { return v.ContactPeople }).(pulumi.IntArrayOutput)
 }
 
 // End time, such as 2020-11-09T14:00:00+08:00.

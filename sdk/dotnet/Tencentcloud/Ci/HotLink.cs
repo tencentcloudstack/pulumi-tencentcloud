@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var hotLink = new Tencentcloud.Ci.HotLink("hotLink", new()
     ///     {
-    ///         var hotLink = new Tencentcloud.Ci.HotLink("hotLink", new Tencentcloud.Ci.HotLinkArgs
+    ///         Bucket = "terraform-ci-xxxxxx",
+    ///         Type = "white",
+    ///         Urls = new[]
     ///         {
-    ///             Bucket = "terraform-ci-xxxxxx",
-    ///             Type = "white",
-    ///             Urls = 
-    ///             {
-    ///                 "10.0.0.1",
-    ///                 "10.0.0.2",
-    ///             },
-    ///         });
-    ///     }
+    ///             "10.0.0.1",
+    ///             "10.0.0.2",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ci hot_link can be imported using the bucket, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/hotLink:HotLink hot_link terraform-ci-xxxxxx
+    /// $ pulumi import tencentcloud:Ci/hotLink:HotLink hot_link terraform-ci-xxxxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/hotLink:HotLink")]
-    public partial class HotLink : Pulumi.CustomResource
+    public partial class HotLink : global::Pulumi.CustomResource
     {
         /// <summary>
         /// bucket name.
@@ -112,7 +113,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class HotLinkArgs : Pulumi.ResourceArgs
+    public sealed class HotLinkArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -141,9 +142,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public HotLinkArgs()
         {
         }
+        public static new HotLinkArgs Empty => new HotLinkArgs();
     }
 
-    public sealed class HotLinkState : Pulumi.ResourceArgs
+    public sealed class HotLinkState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -172,5 +174,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public HotLinkState()
         {
         }
+        public static new HotLinkState Empty => new HotLinkState();
     }
 }

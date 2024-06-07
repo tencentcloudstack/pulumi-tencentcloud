@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const slowLogs = pulumi.output(tencentcloud.Dbbrain.getSlowLogs({
+ * const slowLogs = tencentcloud.Dbbrain.getSlowLogs({
  *     endTime: "%s",
  *     instanceId: "%s",
  *     md5: "4961208426639258265",
  *     product: "mysql",
  *     startTime: "%s",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSlowLogs(args: GetSlowLogsArgs, opts?: pulumi.InvokeOptions): Promise<GetSlowLogsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dbbrain/getSlowLogs:getSlowLogs", {
         "dbs": args.dbs,
         "endTime": args.endTime,
@@ -118,9 +118,28 @@ export interface GetSlowLogsResult {
     readonly times?: number[];
     readonly users?: string[];
 }
-
+/**
+ * Use this data source to query detailed information of dbbrain slowLogs
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const slowLogs = tencentcloud.Dbbrain.getSlowLogs({
+ *     endTime: "%s",
+ *     instanceId: "%s",
+ *     md5: "4961208426639258265",
+ *     product: "mysql",
+ *     startTime: "%s",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSlowLogsOutput(args: GetSlowLogsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSlowLogsResult> {
-    return pulumi.output(args).apply(a => getSlowLogs(a, opts))
+    return pulumi.output(args).apply((a: any) => getSlowLogs(a, opts))
 }
 
 /**

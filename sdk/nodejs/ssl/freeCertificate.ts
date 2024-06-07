@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -11,13 +12,15 @@ import * as utilities from "../utilities";
  * > **NOTE:** Once certificat created, it cannot be removed within 1 hours.
  *
  * ## Example Usage
+ *
  * ### only support type 2. 2=TrustAsia TLS RSA CA.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Ssl.FreeCertificate("example", {
+ * const example = new tencentcloud.ssl.FreeCertificate("example", {
  *     alias: "example_free_cert",
  *     contactEmail: "test@example.com",
  *     contactPhone: "18352458901",
@@ -30,13 +33,14 @@ import * as utilities from "../utilities";
  *     validityPeriod: "12",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * FreeCertificate instance can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ssl/freeCertificate:FreeCertificate test free_certificate-id
+ * $ pulumi import tencentcloud:Ssl/freeCertificate:FreeCertificate test free_certificate-id
  * ```
  */
 export class FreeCertificate extends pulumi.CustomResource {
@@ -219,7 +223,7 @@ export class FreeCertificate extends pulumi.CustomResource {
             resourceInputs["contactPhone"] = args ? args.contactPhone : undefined;
             resourceInputs["csrEncryptAlgo"] = args ? args.csrEncryptAlgo : undefined;
             resourceInputs["csrKeyParameter"] = args ? args.csrKeyParameter : undefined;
-            resourceInputs["csrKeyPassword"] = args ? args.csrKeyPassword : undefined;
+            resourceInputs["csrKeyPassword"] = args?.csrKeyPassword ? pulumi.secret(args.csrKeyPassword) : undefined;
             resourceInputs["domain"] = args ? args.domain : undefined;
             resourceInputs["dvAuthMethod"] = args ? args.dvAuthMethod : undefined;
             resourceInputs["oldCertificateId"] = args ? args.oldCertificateId : undefined;
@@ -241,6 +245,8 @@ export class FreeCertificate extends pulumi.CustomResource {
             resourceInputs["vulnerabilityStatus"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["csrKeyPassword"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(FreeCertificate.__pulumiType, name, resourceInputs, opts);
     }
 }

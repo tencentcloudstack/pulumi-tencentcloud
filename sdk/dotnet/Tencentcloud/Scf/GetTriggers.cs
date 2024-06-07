@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// <summary>
         /// Use this data source to query detailed information of scf triggers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var triggers = Tencentcloud.Scf.GetTriggers.Invoke(new()
         ///     {
-        ///         var triggers = Output.Create(Tencentcloud.Scf.GetTriggers.InvokeAsync(new Tencentcloud.Scf.GetTriggersArgs
-        ///         {
-        ///             FunctionName = "keep-1676351130",
-        ///             Namespace = "default",
-        ///             Order = "DESC",
-        ///             OrderBy = "add_time",
-        ///         }));
-        ///     }
+        ///         FunctionName = "keep-1676351130",
+        ///         Namespace = "default",
+        ///         Order = "DESC",
+        ///         OrderBy = "add_time",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTriggersResult> InvokeAsync(GetTriggersArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTriggersResult>("tencentcloud:Scf/getTriggers:getTriggers", args ?? new GetTriggersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTriggersResult>("tencentcloud:Scf/getTriggers:getTriggers", args ?? new GetTriggersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of scf triggers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var triggers = Tencentcloud.Scf.GetTriggers.Invoke(new()
         ///     {
-        ///         var triggers = Output.Create(Tencentcloud.Scf.GetTriggers.InvokeAsync(new Tencentcloud.Scf.GetTriggersArgs
-        ///         {
-        ///             FunctionName = "keep-1676351130",
-        ///             Namespace = "default",
-        ///             Order = "DESC",
-        ///             OrderBy = "add_time",
-        ///         }));
-        ///     }
+        ///         FunctionName = "keep-1676351130",
+        ///         Namespace = "default",
+        ///         Order = "DESC",
+        ///         OrderBy = "add_time",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTriggersResult> Invoke(GetTriggersInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTriggersResult>("tencentcloud:Scf/getTriggers:getTriggers", args ?? new GetTriggersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTriggersResult>("tencentcloud:Scf/getTriggers:getTriggers", args ?? new GetTriggersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTriggersArgs : Pulumi.InvokeArgs
+    public sealed class GetTriggersArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetTriggersFilterArgs>? _filters;
@@ -125,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetTriggersArgs()
         {
         }
+        public static new GetTriggersArgs Empty => new GetTriggersArgs();
     }
 
-    public sealed class GetTriggersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTriggersInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetTriggersFilterInputArgs>? _filters;
@@ -174,6 +169,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetTriggersInvokeArgs()
         {
         }
+        public static new GetTriggersInvokeArgs Empty => new GetTriggersInvokeArgs();
     }
 
 

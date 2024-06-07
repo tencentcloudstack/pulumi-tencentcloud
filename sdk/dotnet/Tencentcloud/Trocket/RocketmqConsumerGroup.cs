@@ -15,51 +15,53 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var rocketmqInstance = new Tencentcloud.Trocket.RocketmqInstance("rocketmqInstance", new()
     ///     {
-    ///         var rocketmqInstance = new Tencentcloud.Trocket.RocketmqInstance("rocketmqInstance", new Tencentcloud.Trocket.RocketmqInstanceArgs
+    ///         InstanceType = "EXPERIMENT",
+    ///         SkuCode = "experiment_500",
+    ///         Remark = "test",
+    ///         VpcId = "vpc-xxxxxx",
+    ///         SubnetId = "subnet-xxxxx",
+    ///         Tags = 
     ///         {
-    ///             InstanceType = "EXPERIMENT",
-    ///             SkuCode = "experiment_500",
-    ///             Remark = "test",
-    ///             VpcId = "vpc-xxxxxx",
-    ///             SubnetId = "subnet-xxxxx",
-    ///             Tags = 
-    ///             {
-    ///                 { "tag_key", "rocketmq" },
-    ///                 { "tag_value", "5.x" },
-    ///             },
-    ///         });
-    ///         var rocketmqConsumerGroup = new Tencentcloud.Trocket.RocketmqConsumerGroup("rocketmqConsumerGroup", new Tencentcloud.Trocket.RocketmqConsumerGroupArgs
-    ///         {
-    ///             InstanceId = rocketmqInstance.Id,
-    ///             ConsumerGroup = "test_consumer_group",
-    ///             MaxRetryTimes = 20,
-    ///             ConsumeEnable = false,
-    ///             ConsumeMessageOrderly = true,
-    ///             Remark = "test for terraform",
-    ///         });
-    ///     }
+    ///             { "tag_key", "rocketmq" },
+    ///             { "tag_value", "5.x" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var rocketmqConsumerGroup = new Tencentcloud.Trocket.RocketmqConsumerGroup("rocketmqConsumerGroup", new()
+    ///     {
+    ///         InstanceId = rocketmqInstance.Id,
+    ///         ConsumerGroup = "test_consumer_group",
+    ///         MaxRetryTimes = 20,
+    ///         ConsumeEnable = false,
+    ///         ConsumeMessageOrderly = true,
+    ///         Remark = "test for terraform",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// trocket rocketmq_consumer_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Trocket/rocketmqConsumerGroup:RocketmqConsumerGroup rocketmq_consumer_group instanceId#consumerGroup
+    /// $ pulumi import tencentcloud:Trocket/rocketmqConsumerGroup:RocketmqConsumerGroup rocketmq_consumer_group instanceId#consumerGroup
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Trocket/rocketmqConsumerGroup:RocketmqConsumerGroup")]
-    public partial class RocketmqConsumerGroup : Pulumi.CustomResource
+    public partial class RocketmqConsumerGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to enable consumption.
@@ -142,7 +144,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         }
     }
 
-    public sealed class RocketmqConsumerGroupArgs : Pulumi.ResourceArgs
+    public sealed class RocketmqConsumerGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable consumption.
@@ -183,9 +185,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         public RocketmqConsumerGroupArgs()
         {
         }
+        public static new RocketmqConsumerGroupArgs Empty => new RocketmqConsumerGroupArgs();
     }
 
-    public sealed class RocketmqConsumerGroupState : Pulumi.ResourceArgs
+    public sealed class RocketmqConsumerGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable consumption.
@@ -226,5 +229,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         public RocketmqConsumerGroupState()
         {
         }
+        public static new RocketmqConsumerGroupState Empty => new RocketmqConsumerGroupState();
     }
 }

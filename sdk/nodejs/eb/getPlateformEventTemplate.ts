@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const plateformEventTemplate = pulumi.output(tencentcloud.Eb.getPlateformEventTemplate({
+ * const plateformEventTemplate = tencentcloud.Eb.getPlateformEventTemplate({
  *     eventType: "eb_platform_test:TEST:ALL",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPlateformEventTemplate(args: GetPlateformEventTemplateArgs, opts?: pulumi.InvokeOptions): Promise<GetPlateformEventTemplateResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Eb/getPlateformEventTemplate:getPlateformEventTemplate", {
         "eventType": args.eventType,
         "resultOutputFile": args.resultOutputFile,
@@ -59,9 +58,24 @@ export interface GetPlateformEventTemplateResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of eb plateformEventTemplate
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const plateformEventTemplate = tencentcloud.Eb.getPlateformEventTemplate({
+ *     eventType: "eb_platform_test:TEST:ALL",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPlateformEventTemplateOutput(args: GetPlateformEventTemplateOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPlateformEventTemplateResult> {
-    return pulumi.output(args).apply(a => getPlateformEventTemplate(a, opts))
+    return pulumi.output(args).apply((a: any) => getPlateformEventTemplate(a, opts))
 }
 
 /**

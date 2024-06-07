@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to get information about a parameter group of a database instance.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var mysql = Tencentcloud.Mysql.GetParameterList.Invoke(new()
         ///     {
-        ///         var mysql = Output.Create(Tencentcloud.Mysql.GetParameterList.InvokeAsync(new Tencentcloud.Mysql.GetParameterListArgs
-        ///         {
-        ///             EngineVersion = "5.5",
-        ///             MysqlId = "terraform-test-local-database",
-        ///             ResultOutputFile = "mytestpath",
-        ///         }));
-        ///     }
+        ///         EngineVersion = "5.5",
+        ///         MysqlId = "terraform-test-local-database",
+        ///         ResultOutputFile = "mytestpath",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetParameterListResult> InvokeAsync(GetParameterListArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetParameterListResult>("tencentcloud:Mysql/getParameterList:getParameterList", args ?? new GetParameterListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetParameterListResult>("tencentcloud:Mysql/getParameterList:getParameterList", args ?? new GetParameterListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to get information about a parameter group of a database instance.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var mysql = Tencentcloud.Mysql.GetParameterList.Invoke(new()
         ///     {
-        ///         var mysql = Output.Create(Tencentcloud.Mysql.GetParameterList.InvokeAsync(new Tencentcloud.Mysql.GetParameterListArgs
-        ///         {
-        ///             EngineVersion = "5.5",
-        ///             MysqlId = "terraform-test-local-database",
-        ///             ResultOutputFile = "mytestpath",
-        ///         }));
-        ///     }
+        ///         EngineVersion = "5.5",
+        ///         MysqlId = "terraform-test-local-database",
+        ///         ResultOutputFile = "mytestpath",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetParameterListResult> Invoke(GetParameterListInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetParameterListResult>("tencentcloud:Mysql/getParameterList:getParameterList", args ?? new GetParameterListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetParameterListResult>("tencentcloud:Mysql/getParameterList:getParameterList", args ?? new GetParameterListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetParameterListArgs : Pulumi.InvokeArgs
+    public sealed class GetParameterListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
@@ -99,9 +93,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetParameterListArgs()
         {
         }
+        public static new GetParameterListArgs Empty => new GetParameterListArgs();
     }
 
-    public sealed class GetParameterListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetParameterListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0.
@@ -124,6 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetParameterListInvokeArgs()
         {
         }
+        public static new GetParameterListInvokeArgs Empty => new GetParameterListInvokeArgs();
     }
 
 

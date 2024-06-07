@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// <summary>
         /// Use this data source to query detailed information of mariadb file_download_url
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fileDownloadUrl = Tencentcloud.Mariadb.GetFileDownloadUrl.Invoke(new()
         ///     {
-        ///         var fileDownloadUrl = Output.Create(Tencentcloud.Mariadb.GetFileDownloadUrl.InvokeAsync(new Tencentcloud.Mariadb.GetFileDownloadUrlArgs
-        ///         {
-        ///             FilePath = "/cos_backup/test.txt",
-        ///             InstanceId = "tdsql-9vqvls95",
-        ///         }));
-        ///     }
+        ///         FilePath = "/cos_backup/test.txt",
+        ///         InstanceId = "tdsql-9vqvls95",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetFileDownloadUrlResult> InvokeAsync(GetFileDownloadUrlArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetFileDownloadUrlResult>("tencentcloud:Mariadb/getFileDownloadUrl:getFileDownloadUrl", args ?? new GetFileDownloadUrlArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetFileDownloadUrlResult>("tencentcloud:Mariadb/getFileDownloadUrl:getFileDownloadUrl", args ?? new GetFileDownloadUrlArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mariadb file_download_url
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fileDownloadUrl = Tencentcloud.Mariadb.GetFileDownloadUrl.Invoke(new()
         ///     {
-        ///         var fileDownloadUrl = Output.Create(Tencentcloud.Mariadb.GetFileDownloadUrl.InvokeAsync(new Tencentcloud.Mariadb.GetFileDownloadUrlArgs
-        ///         {
-        ///             FilePath = "/cos_backup/test.txt",
-        ///             InstanceId = "tdsql-9vqvls95",
-        ///         }));
-        ///     }
+        ///         FilePath = "/cos_backup/test.txt",
+        ///         InstanceId = "tdsql-9vqvls95",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetFileDownloadUrlResult> Invoke(GetFileDownloadUrlInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetFileDownloadUrlResult>("tencentcloud:Mariadb/getFileDownloadUrl:getFileDownloadUrl", args ?? new GetFileDownloadUrlInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetFileDownloadUrlResult>("tencentcloud:Mariadb/getFileDownloadUrl:getFileDownloadUrl", args ?? new GetFileDownloadUrlInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetFileDownloadUrlArgs : Pulumi.InvokeArgs
+    public sealed class GetFileDownloadUrlArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Unsigned file path.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetFileDownloadUrlArgs()
         {
         }
+        public static new GetFileDownloadUrlArgs Empty => new GetFileDownloadUrlArgs();
     }
 
-    public sealed class GetFileDownloadUrlInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetFileDownloadUrlInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Unsigned file path.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetFileDownloadUrlInvokeArgs()
         {
         }
+        public static new GetFileDownloadUrlInvokeArgs Empty => new GetFileDownloadUrlInvokeArgs();
     }
 
 

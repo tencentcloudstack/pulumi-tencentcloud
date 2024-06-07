@@ -15,70 +15,73 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleMachinesSimple = Tencentcloud.Cwp.GetMachinesSimple.Invoke(new()
     ///     {
-    ///         var exampleMachinesSimple = Output.Create(Tencentcloud.Cwp.GetMachinesSimple.InvokeAsync(new Tencentcloud.Cwp.GetMachinesSimpleArgs
+    ///         MachineType = "CVM",
+    ///         MachineRegion = "ap-guangzhou",
+    ///         ProjectIds = new[]
     ///         {
-    ///             MachineType = "CVM",
-    ///             MachineRegion = "ap-guangzhou",
-    ///             ProjectIds = 
+    ///             1210293,
+    ///         },
+    ///         Filters = new[]
+    ///         {
+    ///             new Tencentcloud.Cwp.Inputs.GetMachinesSimpleFilterInputArgs
     ///             {
-    ///                 1210293,
-    ///             },
-    ///             Filters = 
-    ///             {
-    ///                 new Tencentcloud.Cwp.Inputs.GetMachinesSimpleFilterArgs
+    ///                 Name = "Version",
+    ///                 Values = new[]
     ///                 {
-    ///                     Name = "Version",
-    ///                     Values = 
-    ///                     {
-    ///                         "BASIC_VERSION",
-    ///                     },
-    ///                     ExactMatch = true,
+    ///                     "BASIC_VERSION",
     ///                 },
+    ///                 ExactMatch = true,
     ///             },
-    ///         }));
-    ///         var exampleLicenseOrder = new Tencentcloud.Cwp.LicenseOrder("exampleLicenseOrder", new Tencentcloud.Cwp.LicenseOrderArgs
-    ///         {
-    ///             Alias = "tf_example",
-    ///             LicenseType = 0,
-    ///             LicenseNum = 1,
-    ///             RegionId = 1,
-    ///             ProjectId = 0,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var exampleLicenseBindAttachment = new Tencentcloud.Cwp.LicenseBindAttachment("exampleLicenseBindAttachment", new Tencentcloud.Cwp.LicenseBindAttachmentArgs
-    ///         {
-    ///             ResourceId = exampleLicenseOrder.ResourceId,
-    ///             LicenseId = exampleLicenseOrder.LicenseId,
-    ///             LicenseType = 0,
-    ///             Quuid = exampleMachinesSimple.Apply(exampleMachinesSimple =&gt; exampleMachinesSimple.Machines?[0]?.Quuid),
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleLicenseOrder = new Tencentcloud.Cwp.LicenseOrder("exampleLicenseOrder", new()
+    ///     {
+    ///         Alias = "tf_example",
+    ///         LicenseType = 0,
+    ///         LicenseNum = 1,
+    ///         RegionId = 1,
+    ///         ProjectId = 0,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleLicenseBindAttachment = new Tencentcloud.Cwp.LicenseBindAttachment("exampleLicenseBindAttachment", new()
+    ///     {
+    ///         ResourceId = exampleLicenseOrder.ResourceId,
+    ///         LicenseId = exampleLicenseOrder.LicenseId,
+    ///         LicenseType = 0,
+    ///         Quuid = exampleMachinesSimple.Apply(getMachinesSimpleResult =&gt; getMachinesSimpleResult.Machines[0]?.Quuid),
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cwp license_bind_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cwp/licenseBindAttachment:LicenseBindAttachment example cwplic-ab3edffa#44#2c7e5cce-1cec-4456-8d18-018f160dd987#0
+    /// $ pulumi import tencentcloud:Cwp/licenseBindAttachment:LicenseBindAttachment example cwplic-ab3edffa#44#2c7e5cce-1cec-4456-8d18-018f160dd987#0
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cwp/licenseBindAttachment:LicenseBindAttachment")]
-    public partial class LicenseBindAttachment : Pulumi.CustomResource
+    public partial class LicenseBindAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// agent status.
@@ -191,7 +194,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         }
     }
 
-    public sealed class LicenseBindAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class LicenseBindAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// License ID.
@@ -220,9 +223,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         public LicenseBindAttachmentArgs()
         {
         }
+        public static new LicenseBindAttachmentArgs Empty => new LicenseBindAttachmentArgs();
     }
 
-    public sealed class LicenseBindAttachmentState : Pulumi.ResourceArgs
+    public sealed class LicenseBindAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// agent status.
@@ -293,5 +297,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cwp
         public LicenseBindAttachmentState()
         {
         }
+        public static new LicenseBindAttachmentState Empty => new LicenseBindAttachmentState();
     }
 }

@@ -14,33 +14,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sms
     /// Provides a resource to create a sms sign
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a sms sign instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Sms.Sign("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Sms.Sign("example", new Tencentcloud.Sms.SignArgs
-    ///         {
-    ///             DocumentType = 4,
-    ///             International = 0,
-    ///             ProofImage = "your_proof_image",
-    ///             SignName = "tf_example_sms_sign",
-    ///             SignPurpose = 0,
-    ///             SignType = 1,
-    ///         });
-    ///         // 1：APP,  DocumentType can be chosen（0，1，2，3，4）
-    ///     }
+    ///         DocumentType = 4,
+    ///         International = 0,
+    ///         ProofImage = "your_proof_image",
+    ///         SignName = "tf_example_sms_sign",
+    ///         SignPurpose = 0,
+    ///         SignType = 1,
+    ///     });
     /// 
-    /// }
+    ///     // 1：APP,  DocumentType can be chosen（0，1，2，3，4）
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sms/sign:Sign")]
-    public partial class Sign : Pulumi.CustomResource
+    public partial class Sign : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).
@@ -135,7 +137,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sms
         }
     }
 
-    public sealed class SignArgs : Pulumi.ResourceArgs
+    public sealed class SignArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).
@@ -188,9 +190,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sms
         public SignArgs()
         {
         }
+        public static new SignArgs Empty => new SignArgs();
     }
 
-    public sealed class SignState : Pulumi.ResourceArgs
+    public sealed class SignState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Power of attorney, which should be submitted if SignPurpose is for use by others. You should Base64-encode the image first, remove the prefix data:image/jpeg;base64, from the resulted string, and then use it as the value of this parameter. Note: this field will take effect only when SignPurpose is 1 (for user by others).
@@ -243,5 +246,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sms
         public SignState()
         {
         }
+        public static new SignState Empty => new SignState();
     }
 }

@@ -7,22 +7,24 @@ import * as utilities from "../utilities";
 /**
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const customLine = new tencentcloud.Dnspod.CustomLine("custom_line", {
+ * const customLine = new tencentcloud.dnspod.CustomLine("customLine", {
  *     area: "6.6.6.1-6.6.6.2",
  *     domain: "dnspod.com",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dnspod custom_line can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dnspod/customLine:CustomLine custom_line domain#name
+ * $ pulumi import tencentcloud:Dnspod/customLine:CustomLine custom_line domain#name
  * ```
  */
 export class CustomLine extends pulumi.CustomResource {

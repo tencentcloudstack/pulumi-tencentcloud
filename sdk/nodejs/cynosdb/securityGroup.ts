@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const test = new tencentcloud.Cynosdb.SecurityGroup("test", {
+ * const test = new tencentcloud.cynosdb.SecurityGroup("test", {
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     instanceGroupType: "RO",
  *     securityGroupIds: ["sg-baxfiao5"],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cynosdb security_group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cynosdb/securityGroup:SecurityGroup security_group ${cluster_id}#${instance_group_type}
+ * $ pulumi import tencentcloud:Cynosdb/securityGroup:SecurityGroup security_group ${cluster_id}#${instance_group_type}
  * ```
  */
 export class SecurityGroup extends pulumi.CustomResource {
@@ -61,10 +63,7 @@ export class SecurityGroup extends pulumi.CustomResource {
      */
     public readonly clusterId!: pulumi.Output<string>;
     /**
-     * Instance group type. Available values: 
-     * -`HA` - HA group;
-     * -`RO` - Read-only group;
-     * -`ALL` - HA and RO group.
+     * Instance group type. Available values:
      */
     public readonly instanceGroupType!: pulumi.Output<string>;
     /**
@@ -117,10 +116,7 @@ export interface SecurityGroupState {
      */
     clusterId?: pulumi.Input<string>;
     /**
-     * Instance group type. Available values: 
-     * -`HA` - HA group;
-     * -`RO` - Read-only group;
-     * -`ALL` - HA and RO group.
+     * Instance group type. Available values:
      */
     instanceGroupType?: pulumi.Input<string>;
     /**
@@ -138,10 +134,7 @@ export interface SecurityGroupArgs {
      */
     clusterId: pulumi.Input<string>;
     /**
-     * Instance group type. Available values: 
-     * -`HA` - HA group;
-     * -`RO` - Read-only group;
-     * -`ALL` - HA and RO group.
+     * Instance group type. Available values:
      */
     instanceGroupType: pulumi.Input<string>;
     /**

@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var securityGroupAttachment = new Tencentcloud.Dcdb.SecurityGroupAttachment("securityGroupAttachment", new()
     ///     {
-    ///         var securityGroupAttachment = new Tencentcloud.Dcdb.SecurityGroupAttachment("securityGroupAttachment", new Tencentcloud.Dcdb.SecurityGroupAttachmentArgs
-    ///         {
-    ///             InstanceId = "",
-    ///             SecurityGroupId = "",
-    ///         });
-    ///     }
+    ///         InstanceId = "",
+    ///         SecurityGroupId = "",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dcdb security_group_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dcdb/securityGroupAttachment:SecurityGroupAttachment security_group_attachment securityGroupAttachment_id
+    /// $ pulumi import tencentcloud:Dcdb/securityGroupAttachment:SecurityGroupAttachment security_group_attachment securityGroupAttachment_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/securityGroupAttachment:SecurityGroupAttachment")]
-    public partial class SecurityGroupAttachment : Pulumi.CustomResource
+    public partial class SecurityGroupAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// attached instance id.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         }
     }
 
-    public sealed class SecurityGroupAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class SecurityGroupAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// attached instance id.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public SecurityGroupAttachmentArgs()
         {
         }
+        public static new SecurityGroupAttachmentArgs Empty => new SecurityGroupAttachmentArgs();
     }
 
-    public sealed class SecurityGroupAttachmentState : Pulumi.ResourceArgs
+    public sealed class SecurityGroupAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// attached instance id.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public SecurityGroupAttachmentState()
         {
         }
+        public static new SecurityGroupAttachmentState Empty => new SecurityGroupAttachmentState();
     }
 }

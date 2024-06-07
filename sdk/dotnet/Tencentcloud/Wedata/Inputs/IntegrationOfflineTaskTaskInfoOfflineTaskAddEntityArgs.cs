@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
 {
 
-    public sealed class IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityArgs : Pulumi.ResourceArgs
+    public sealed class IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Crontab expression.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         public IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityArgs()
         {
         }
+        public static new IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityArgs Empty => new IntegrationOfflineTaskTaskInfoOfflineTaskAddEntityArgs();
     }
 }

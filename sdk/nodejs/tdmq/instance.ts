@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Tdmq.Instance("foo", {
+ * const foo = new tencentcloud.tdmq.Instance("foo", {
  *     clusterName: "example",
  *     remark: "this is description.",
  *     tags: {
@@ -21,13 +22,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Tdmq instance can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tdmq/instance:Instance test tdmq_id
+ * $ pulumi import tencentcloud:Tdmq/instance:Instance test tdmq_id
  * ```
  */
 export class Instance extends pulumi.CustomResource {

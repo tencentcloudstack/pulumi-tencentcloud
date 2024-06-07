@@ -10,24 +10,29 @@ import * as utilities from "../utilities";
  * > **NOTE:** Region only supports `ap-guangzhou` and `ap-seoul`.
  *
  * ## Example Usage
+ *
  * ### Create a basic waf premium saas instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.SaasInstance("example", {
+ * const example = new tencentcloud.waf.SaasInstance("example", {
  *     goodsCategory: "premium_saas",
  *     instanceName: "tf-example-saas-waf",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a complete waf ultimateSaas instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.SaasInstance("example", {
+ * const example = new tencentcloud.waf.SaasInstance("example", {
  *     apiSecurity: 1,
  *     autoRenewFlag: 1,
  *     botManagement: 1,
@@ -39,13 +44,16 @@ import * as utilities from "../utilities";
  *     timeUnit: "m",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Set waf ultimateSaas instance qps limit
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.SaasInstance("example", {
+ * const example = new tencentcloud.waf.SaasInstance("example", {
  *     apiSecurity: 1,
  *     autoRenewFlag: 1,
  *     botManagement: 1,
@@ -58,6 +66,7 @@ import * as utilities from "../utilities";
  *     timeUnit: "m",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class SaasInstance extends pulumi.CustomResource {
     /**

@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// <summary>
         /// Use this data source to query detailed information of ssm rotation_detail
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Ssm.GetRotationDetail.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Ssm.GetRotationDetail.InvokeAsync(new Tencentcloud.Ssm.GetRotationDetailArgs
-        ///         {
-        ///             SecretName = "tf_example",
-        ///         }));
-        ///     }
+        ///         SecretName = "tf_example",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRotationDetailResult> InvokeAsync(GetRotationDetailArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRotationDetailResult>("tencentcloud:Ssm/getRotationDetail:getRotationDetail", args ?? new GetRotationDetailArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRotationDetailResult>("tencentcloud:Ssm/getRotationDetail:getRotationDetail", args ?? new GetRotationDetailArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ssm rotation_detail
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Ssm.GetRotationDetail.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Ssm.GetRotationDetail.InvokeAsync(new Tencentcloud.Ssm.GetRotationDetailArgs
-        ///         {
-        ///             SecretName = "tf_example",
-        ///         }));
-        ///     }
+        ///         SecretName = "tf_example",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRotationDetailResult> Invoke(GetRotationDetailInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRotationDetailResult>("tencentcloud:Ssm/getRotationDetail:getRotationDetail", args ?? new GetRotationDetailInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRotationDetailResult>("tencentcloud:Ssm/getRotationDetail:getRotationDetail", args ?? new GetRotationDetailInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRotationDetailArgs : Pulumi.InvokeArgs
+    public sealed class GetRotationDetailArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public GetRotationDetailArgs()
         {
         }
+        public static new GetRotationDetailArgs Empty => new GetRotationDetailArgs();
     }
 
-    public sealed class GetRotationDetailInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRotationDetailInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public GetRotationDetailInvokeArgs()
         {
         }
+        public static new GetRotationDetailInvokeArgs Empty => new GetRotationDetailInvokeArgs();
     }
 
 

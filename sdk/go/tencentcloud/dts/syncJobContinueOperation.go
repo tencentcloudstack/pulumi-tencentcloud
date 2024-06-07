@@ -7,34 +7,40 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dts syncJobContinueOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dts.NewSyncJobContinueOperation(ctx, "syncJobContinueOperation", &Dts.SyncJobContinueOperationArgs{
-// 			JobId: pulumi.String("sync-werwfs23"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dts.NewSyncJobContinueOperation(ctx, "syncJobContinueOperation", &Dts.SyncJobContinueOperationArgs{
+//				JobId: pulumi.String("sync-werwfs23"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type SyncJobContinueOperation struct {
 	pulumi.CustomResourceState
 
@@ -52,7 +58,7 @@ func NewSyncJobContinueOperation(ctx *pulumi.Context,
 	if args.JobId == nil {
 		return nil, errors.New("invalid value for required argument 'JobId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SyncJobContinueOperation
 	err := ctx.RegisterResource("tencentcloud:Dts/syncJobContinueOperation:SyncJobContinueOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -125,7 +131,7 @@ func (i *SyncJobContinueOperation) ToSyncJobContinueOperationOutputWithContext(c
 // SyncJobContinueOperationArrayInput is an input type that accepts SyncJobContinueOperationArray and SyncJobContinueOperationArrayOutput values.
 // You can construct a concrete instance of `SyncJobContinueOperationArrayInput` via:
 //
-//          SyncJobContinueOperationArray{ SyncJobContinueOperationArgs{...} }
+//	SyncJobContinueOperationArray{ SyncJobContinueOperationArgs{...} }
 type SyncJobContinueOperationArrayInput interface {
 	pulumi.Input
 
@@ -150,7 +156,7 @@ func (i SyncJobContinueOperationArray) ToSyncJobContinueOperationArrayOutputWith
 // SyncJobContinueOperationMapInput is an input type that accepts SyncJobContinueOperationMap and SyncJobContinueOperationMapOutput values.
 // You can construct a concrete instance of `SyncJobContinueOperationMapInput` via:
 //
-//          SyncJobContinueOperationMap{ "key": SyncJobContinueOperationArgs{...} }
+//	SyncJobContinueOperationMap{ "key": SyncJobContinueOperationArgs{...} }
 type SyncJobContinueOperationMapInput interface {
 	pulumi.Input
 

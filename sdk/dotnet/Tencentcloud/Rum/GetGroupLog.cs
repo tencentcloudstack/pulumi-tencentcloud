@@ -15,74 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum group_log
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groupLog = Tencentcloud.Rum.GetGroupLog.Invoke(new()
         ///     {
-        ///         var groupLog = Output.Create(Tencentcloud.Rum.GetGroupLog.InvokeAsync(new Tencentcloud.Rum.GetGroupLogArgs
-        ///         {
-        ///             EndTime = "1625454840000",
-        ///             GroupField = "level",
-        ///             OrderBy = "desc",
-        ///             ProjectId = 1,
-        ///             Query = "id:123 AND type:\"log\"",
-        ///             StartTime = "1625444040000",
-        ///         }));
-        ///     }
+        ///         EndTime = "1625454840000",
+        ///         GroupField = "level",
+        ///         OrderBy = "desc",
+        ///         ProjectId = 1,
+        ///         Query = "id:123 AND type:\"log\"",
+        ///         StartTime = "1625444040000",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGroupLogResult> InvokeAsync(GetGroupLogArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGroupLogResult>("tencentcloud:Rum/getGroupLog:getGroupLog", args ?? new GetGroupLogArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupLogResult>("tencentcloud:Rum/getGroupLog:getGroupLog", args ?? new GetGroupLogArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum group_log
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groupLog = Tencentcloud.Rum.GetGroupLog.Invoke(new()
         ///     {
-        ///         var groupLog = Output.Create(Tencentcloud.Rum.GetGroupLog.InvokeAsync(new Tencentcloud.Rum.GetGroupLogArgs
-        ///         {
-        ///             EndTime = "1625454840000",
-        ///             GroupField = "level",
-        ///             OrderBy = "desc",
-        ///             ProjectId = 1,
-        ///             Query = "id:123 AND type:\"log\"",
-        ///             StartTime = "1625444040000",
-        ///         }));
-        ///     }
+        ///         EndTime = "1625454840000",
+        ///         GroupField = "level",
+        ///         OrderBy = "desc",
+        ///         ProjectId = 1,
+        ///         Query = "id:123 AND type:\"log\"",
+        ///         StartTime = "1625444040000",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGroupLogResult> Invoke(GetGroupLogInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGroupLogResult>("tencentcloud:Rum/getGroupLog:getGroupLog", args ?? new GetGroupLogInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGroupLogResult>("tencentcloud:Rum/getGroupLog:getGroupLog", args ?? new GetGroupLogInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGroupLogArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupLogArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time but is represented using a timestamp in milliseconds.
@@ -129,9 +123,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetGroupLogArgs()
         {
         }
+        public static new GetGroupLogArgs Empty => new GetGroupLogArgs();
     }
 
-    public sealed class GetGroupLogInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupLogInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time but is represented using a timestamp in milliseconds.
@@ -178,6 +173,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetGroupLogInvokeArgs()
         {
         }
+        public static new GetGroupLogInvokeArgs Empty => new GetGroupLogInvokeArgs();
     }
 
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainIpFilterGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainIpFilterGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("filterRules")]
         private InputList<Inputs.DomainIpFilterFilterRuleGetArgs>? _filterRules;
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainIpFilterGetArgs()
         {
         }
+        public static new DomainIpFilterGetArgs Empty => new DomainIpFilterGetArgs();
     }
 }

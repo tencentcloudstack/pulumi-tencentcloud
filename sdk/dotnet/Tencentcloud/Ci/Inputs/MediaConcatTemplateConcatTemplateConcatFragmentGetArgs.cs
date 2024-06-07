@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaConcatTemplateConcatTemplateConcatFragmentGetArgs : Pulumi.ResourceArgs
+    public sealed class MediaConcatTemplateConcatTemplateConcatFragmentGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// node type, `start`, `end`.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaConcatTemplateConcatTemplateConcatFragmentGetArgs()
         {
         }
+        public static new MediaConcatTemplateConcatTemplateConcatFragmentGetArgs Empty => new MediaConcatTemplateConcatTemplateConcatFragmentGetArgs();
     }
 }

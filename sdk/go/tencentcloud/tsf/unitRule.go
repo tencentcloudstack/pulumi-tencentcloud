@@ -7,60 +7,65 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tsf unitRule
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewUnitRule(ctx, "unitRule", &Tsf.UnitRuleArgs{
-// 			Description:       pulumi.String("terraform-desc"),
-// 			GatewayInstanceId: pulumi.String("gw-ins-rug79a70"),
-// 			UnitRuleItemLists: tsf.UnitRuleUnitRuleItemListArray{
-// 				&tsf.UnitRuleUnitRuleItemListArgs{
-// 					Description:       pulumi.String("rule1-desc"),
-// 					DestNamespaceId:   pulumi.String("namespace-y8p88eka"),
-// 					DestNamespaceName: pulumi.String("garden-test_default"),
-// 					Name:              pulumi.String("Rule1"),
-// 					Relationship:      pulumi.String("AND"),
-// 					UnitRuleTagLists: tsf.UnitRuleUnitRuleItemListUnitRuleTagListArray{
-// 						&tsf.UnitRuleUnitRuleItemListUnitRuleTagListArgs{
-// 							TagField:    pulumi.String("aaa"),
-// 							TagOperator: pulumi.String("IN"),
-// 							TagType:     pulumi.String("U"),
-// 							TagValue:    pulumi.String("1"),
-// 						},
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewUnitRule(ctx, "unitRule", &Tsf.UnitRuleArgs{
+//				Description:       pulumi.String("terraform-desc"),
+//				GatewayInstanceId: pulumi.String("gw-ins-rug79a70"),
+//				UnitRuleItemLists: tsf.UnitRuleUnitRuleItemListArray{
+//					&tsf.UnitRuleUnitRuleItemListArgs{
+//						Description:       pulumi.String("rule1-desc"),
+//						DestNamespaceId:   pulumi.String("namespace-y8p88eka"),
+//						DestNamespaceName: pulumi.String("garden-test_default"),
+//						Name:              pulumi.String("Rule1"),
+//						Relationship:      pulumi.String("AND"),
+//						UnitRuleTagLists: tsf.UnitRuleUnitRuleItemListUnitRuleTagListArray{
+//							&tsf.UnitRuleUnitRuleItemListUnitRuleTagListArgs{
+//								TagField:    pulumi.String("aaa"),
+//								TagOperator: pulumi.String("IN"),
+//								TagType:     pulumi.String("U"),
+//								TagValue:    pulumi.String("1"),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tsf unit_rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tsf/unitRule:UnitRule unit_rule unit-rl-zbywqeca
+// $ pulumi import tencentcloud:Tsf/unitRule:UnitRule unit_rule unit-rl-zbywqeca
 // ```
 type UnitRule struct {
 	pulumi.CustomResourceState
@@ -89,7 +94,7 @@ func NewUnitRule(ctx *pulumi.Context,
 	if args.GatewayInstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'GatewayInstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UnitRule
 	err := ctx.RegisterResource("tencentcloud:Tsf/unitRule:UnitRule", name, args, &resource, opts...)
 	if err != nil {
@@ -194,7 +199,7 @@ func (i *UnitRule) ToUnitRuleOutputWithContext(ctx context.Context) UnitRuleOutp
 // UnitRuleArrayInput is an input type that accepts UnitRuleArray and UnitRuleArrayOutput values.
 // You can construct a concrete instance of `UnitRuleArrayInput` via:
 //
-//          UnitRuleArray{ UnitRuleArgs{...} }
+//	UnitRuleArray{ UnitRuleArgs{...} }
 type UnitRuleArrayInput interface {
 	pulumi.Input
 
@@ -219,7 +224,7 @@ func (i UnitRuleArray) ToUnitRuleArrayOutputWithContext(ctx context.Context) Uni
 // UnitRuleMapInput is an input type that accepts UnitRuleMap and UnitRuleMapOutput values.
 // You can construct a concrete instance of `UnitRuleMapInput` via:
 //
-//          UnitRuleMap{ "key": UnitRuleArgs{...} }
+//	UnitRuleMap{ "key": UnitRuleArgs{...} }
 type UnitRuleMapInput interface {
 	pulumi.Input
 

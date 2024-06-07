@@ -15,82 +15,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query vpc instances' information.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = new Tencentcloud.Vpc.Instance("foo", new()
         ///     {
-        ///         var foo = new Tencentcloud.Vpc.Instance("foo", new Tencentcloud.Vpc.InstanceArgs
-        ///         {
-        ///             CidrBlock = "10.0.0.0/16",
-        ///         });
-        ///         var idInstances = Tencentcloud.Vpc.GetInstances.Invoke(new Tencentcloud.Vpc.GetInstancesInvokeArgs
-        ///         {
-        ///             VpcId = foo.Id,
-        ///         });
-        ///         var nameInstances = Tencentcloud.Vpc.GetInstances.Invoke(new Tencentcloud.Vpc.GetInstancesInvokeArgs
-        ///         {
-        ///             Name = foo.Name,
-        ///         });
-        ///     }
+        ///         CidrBlock = "10.0.0.0/16",
+        ///     });
         /// 
-        /// }
+        ///     var idInstances = Tencentcloud.Vpc.GetInstances.Invoke(new()
+        ///     {
+        ///         VpcId = foo.Id,
+        ///     });
+        /// 
+        ///     var nameInstances = Tencentcloud.Vpc.GetInstances.Invoke(new()
+        ///     {
+        ///         Name = foo.Name,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstancesResult> InvokeAsync(GetInstancesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstancesResult>("tencentcloud:Vpc/getInstances:getInstances", args ?? new GetInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstancesResult>("tencentcloud:Vpc/getInstances:getInstances", args ?? new GetInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query vpc instances' information.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = new Tencentcloud.Vpc.Instance("foo", new()
         ///     {
-        ///         var foo = new Tencentcloud.Vpc.Instance("foo", new Tencentcloud.Vpc.InstanceArgs
-        ///         {
-        ///             CidrBlock = "10.0.0.0/16",
-        ///         });
-        ///         var idInstances = Tencentcloud.Vpc.GetInstances.Invoke(new Tencentcloud.Vpc.GetInstancesInvokeArgs
-        ///         {
-        ///             VpcId = foo.Id,
-        ///         });
-        ///         var nameInstances = Tencentcloud.Vpc.GetInstances.Invoke(new Tencentcloud.Vpc.GetInstancesInvokeArgs
-        ///         {
-        ///             Name = foo.Name,
-        ///         });
-        ///     }
+        ///         CidrBlock = "10.0.0.0/16",
+        ///     });
         /// 
-        /// }
+        ///     var idInstances = Tencentcloud.Vpc.GetInstances.Invoke(new()
+        ///     {
+        ///         VpcId = foo.Id,
+        ///     });
+        /// 
+        ///     var nameInstances = Tencentcloud.Vpc.GetInstances.Invoke(new()
+        ///     {
+        ///         Name = foo.Name,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstancesResult> Invoke(GetInstancesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstancesResult>("tencentcloud:Vpc/getInstances:getInstances", args ?? new GetInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstancesResult>("tencentcloud:Vpc/getInstances:getInstances", args ?? new GetInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetInstancesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter VPC with this CIDR.
@@ -143,9 +141,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetInstancesArgs()
         {
         }
+        public static new GetInstancesArgs Empty => new GetInstancesArgs();
     }
 
-    public sealed class GetInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter VPC with this CIDR.
@@ -198,6 +197,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetInstancesInvokeArgs()
         {
         }
+        public static new GetInstancesInvokeArgs Empty => new GetInstancesInvokeArgs();
     }
 
 

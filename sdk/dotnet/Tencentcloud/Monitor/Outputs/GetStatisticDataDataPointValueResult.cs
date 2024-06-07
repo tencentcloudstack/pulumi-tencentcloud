@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Outputs
     [OutputType]
     public sealed class GetStatisticDataDataPointValueResult
     {
+        /// <summary>
+        /// Time point when this monitoring data point is generated.
+        /// </summary>
         public readonly int Timestamp;
+        /// <summary>
+        /// Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public readonly double Value;
 
         [OutputConstructor]

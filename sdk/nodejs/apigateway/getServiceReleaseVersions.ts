@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.ApiGateway.getServiceReleaseVersions({
+ * const example = tencentcloud.ApiGateway.getServiceReleaseVersions({
  *     serviceId: "service-nxz6yync",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getServiceReleaseVersions(args: GetServiceReleaseVersionsArgs, opts?: pulumi.InvokeOptions): Promise<GetServiceReleaseVersionsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:ApiGateway/getServiceReleaseVersions:getServiceReleaseVersions", {
         "resultOutputFile": args.resultOutputFile,
         "serviceId": args.serviceId,
@@ -60,9 +60,24 @@ export interface GetServiceReleaseVersionsResult {
     readonly results: outputs.ApiGateway.GetServiceReleaseVersionsResult[];
     readonly serviceId: string;
 }
-
+/**
+ * Use this data source to query detailed information of apiGateway serviceReleaseVersions
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.ApiGateway.getServiceReleaseVersions({
+ *     serviceId: "service-nxz6yync",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getServiceReleaseVersionsOutput(args: GetServiceReleaseVersionsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetServiceReleaseVersionsResult> {
-    return pulumi.output(args).apply(a => getServiceReleaseVersions(a, opts))
+    return pulumi.output(args).apply((a: any) => getServiceReleaseVersions(a, opts))
 }
 
 /**

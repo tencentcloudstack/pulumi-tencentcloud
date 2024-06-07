@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var keyPair = new Tencentcloud.Lighthouse.KeyPair("keyPair", new()
     ///     {
-    ///         var keyPair = new Tencentcloud.Lighthouse.KeyPair("keyPair", new Tencentcloud.Lighthouse.KeyPairArgs
-    ///         {
-    ///             KeyName = "key_name_test",
-    ///         });
-    ///     }
+    ///         KeyName = "key_name_test",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// lighthouse key_pair can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Lighthouse/keyPair:KeyPair key_pair key_pair_id
+    /// $ pulumi import tencentcloud:Lighthouse/keyPair:KeyPair key_pair key_pair_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/keyPair:KeyPair")]
-    public partial class KeyPair : Pulumi.CustomResource
+    public partial class KeyPair : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Creation time. Expressed according to the ISO8601 standard, and using UTC time. Format: YYYY-MM-DDThh:mm:ssZ.
@@ -112,7 +113,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class KeyPairArgs : Pulumi.ResourceArgs
+    public sealed class KeyPairArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Key pair name, which can contain up to 25 digits, letters, and underscores.
@@ -129,9 +130,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public KeyPairArgs()
         {
         }
+        public static new KeyPairArgs Empty => new KeyPairArgs();
     }
 
-    public sealed class KeyPairState : Pulumi.ResourceArgs
+    public sealed class KeyPairState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Creation time. Expressed according to the ISO8601 standard, and using UTC time. Format: YYYY-MM-DDThh:mm:ssZ.
@@ -160,5 +162,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public KeyPairState()
         {
         }
+        public static new KeyPairState Empty => new KeyPairState();
     }
 }

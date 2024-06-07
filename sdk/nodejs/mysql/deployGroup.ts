@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Mysql.DeployGroup("example", {
+ * const example = new tencentcloud.mysql.DeployGroup("example", {
  *     deployGroupName: "tf-example",
  *     description: "desc.",
  *     devClasses: ["TS85"],
  *     limitNum: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mysql deploy_group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mysql/deployGroup:DeployGroup deploy_group deploy_group_id
+ * $ pulumi import tencentcloud:Mysql/deployGroup:DeployGroup deploy_group deploy_group_id
  * ```
  */
 export class DeployGroup extends pulumi.CustomResource {

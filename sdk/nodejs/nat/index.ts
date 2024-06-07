@@ -5,17 +5,36 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./gateway";
-export * from "./gatewaySnat";
-export * from "./getDcRoute";
-export * from "./getGatewaySnats";
-export * from "./getGateways";
-export * from "./refreshNatDcRoute";
+export { GatewayArgs, GatewayState } from "./gateway";
+export type Gateway = import("./gateway").Gateway;
+export const Gateway: typeof import("./gateway").Gateway = null as any;
+utilities.lazyLoad(exports, ["Gateway"], () => require("./gateway"));
 
-// Import resources to register:
-import { Gateway } from "./gateway";
-import { GatewaySnat } from "./gatewaySnat";
-import { RefreshNatDcRoute } from "./refreshNatDcRoute";
+export { GatewaySnatArgs, GatewaySnatState } from "./gatewaySnat";
+export type GatewaySnat = import("./gatewaySnat").GatewaySnat;
+export const GatewaySnat: typeof import("./gatewaySnat").GatewaySnat = null as any;
+utilities.lazyLoad(exports, ["GatewaySnat"], () => require("./gatewaySnat"));
+
+export { GetDcRouteArgs, GetDcRouteResult, GetDcRouteOutputArgs } from "./getDcRoute";
+export const getDcRoute: typeof import("./getDcRoute").getDcRoute = null as any;
+export const getDcRouteOutput: typeof import("./getDcRoute").getDcRouteOutput = null as any;
+utilities.lazyLoad(exports, ["getDcRoute","getDcRouteOutput"], () => require("./getDcRoute"));
+
+export { GetGatewaySnatsArgs, GetGatewaySnatsResult, GetGatewaySnatsOutputArgs } from "./getGatewaySnats";
+export const getGatewaySnats: typeof import("./getGatewaySnats").getGatewaySnats = null as any;
+export const getGatewaySnatsOutput: typeof import("./getGatewaySnats").getGatewaySnatsOutput = null as any;
+utilities.lazyLoad(exports, ["getGatewaySnats","getGatewaySnatsOutput"], () => require("./getGatewaySnats"));
+
+export { GetGatewaysArgs, GetGatewaysResult, GetGatewaysOutputArgs } from "./getGateways";
+export const getGateways: typeof import("./getGateways").getGateways = null as any;
+export const getGatewaysOutput: typeof import("./getGateways").getGatewaysOutput = null as any;
+utilities.lazyLoad(exports, ["getGateways","getGatewaysOutput"], () => require("./getGateways"));
+
+export { RefreshNatDcRouteArgs, RefreshNatDcRouteState } from "./refreshNatDcRoute";
+export type RefreshNatDcRoute = import("./refreshNatDcRoute").RefreshNatDcRoute;
+export const RefreshNatDcRoute: typeof import("./refreshNatDcRoute").RefreshNatDcRoute = null as any;
+utilities.lazyLoad(exports, ["RefreshNatDcRoute"], () => require("./refreshNatDcRoute"));
+
 
 const _module = {
     version: utilities.getVersion(),

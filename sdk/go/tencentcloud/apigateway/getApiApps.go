@@ -8,11 +8,12 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query list information of apiGateway api_app
 func GetApiApps(ctx *pulumi.Context, args *GetApiAppsArgs, opts ...pulumi.InvokeOption) (*GetApiAppsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetApiAppsResult
 	err := ctx.Invoke("tencentcloud:ApiGateway/getApiApps:getApiApps", args, &rv, opts...)
 	if err != nil {

@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of kms keyLists
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kms.GetDescribeKeys(ctx, &kms.GetDescribeKeysArgs{
-// 			KeyIds: []string{
-// 				"9ffacc8b-6461-11ee-a54e-525400dd8a7d",
-// 				"bffae4ed-6465-11ee-90b2-5254000ef00e",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kms.GetDescribeKeys(ctx, &kms.GetDescribeKeysArgs{
+//				KeyIds: []string{
+//					"9ffacc8b-6461-11ee-a54e-525400dd8a7d",
+//					"bffae4ed-6465-11ee-90b2-5254000ef00e",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetDescribeKeys(ctx *pulumi.Context, args *GetDescribeKeysArgs, opts ...pulumi.InvokeOption) (*GetDescribeKeysResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeKeysResult
 	err := ctx.Invoke("tencentcloud:Kms/getDescribeKeys:getDescribeKeys", args, &rv, opts...)
 	if err != nil {

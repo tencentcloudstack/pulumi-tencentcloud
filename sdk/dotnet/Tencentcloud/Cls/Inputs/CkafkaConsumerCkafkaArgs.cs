@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class CkafkaConsumerCkafkaArgs : Pulumi.ResourceArgs
+    public sealed class CkafkaConsumerCkafkaArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance id.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public CkafkaConsumerCkafkaArgs()
         {
         }
+        public static new CkafkaConsumerCkafkaArgs Empty => new CkafkaConsumerCkafkaArgs();
     }
 }

@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ddosBlackWhiteIp = new tencentcloud.Antiddos.DdosBlackWhiteIp("ddos_black_white_ip", {
+ * const ddosBlackWhiteIp = new tencentcloud.antiddos.DdosBlackWhiteIp("ddosBlackWhiteIp", {
  *     instanceId: "bgp-xxxxxx",
  *     ip: "1.2.3.5",
  *     mask: 0,
  *     type: "black",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * antiddos ddos_black_white_ip can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Antiddos/ddosBlackWhiteIp:DdosBlackWhiteIp ddos_black_white_ip ${instanceId}#${ip}
+ * $ pulumi import tencentcloud:Antiddos/ddosBlackWhiteIp:DdosBlackWhiteIp ddos_black_white_ip ${instanceId}#${ip}
  * ```
  */
 export class DdosBlackWhiteIp extends pulumi.CustomResource {

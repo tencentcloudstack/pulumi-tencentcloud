@@ -7,44 +7,50 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a css recordRule
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewRecordRuleAttachment(ctx, "recordRule", &Css.RecordRuleAttachmentArgs{
-// 			AppName:    pulumi.String("qqq"),
-// 			DomainName: pulumi.String("177154.push.tlivecloud.com"),
-// 			StreamName: pulumi.String("ppp"),
-// 			TemplateId: pulumi.Int(1262818),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewRecordRuleAttachment(ctx, "recordRule", &Css.RecordRuleAttachmentArgs{
+//				AppName:    pulumi.String("qqq"),
+//				DomainName: pulumi.String("177154.push.tlivecloud.com"),
+//				StreamName: pulumi.String("ppp"),
+//				TemplateId: pulumi.Int(1262818),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // css record_rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/recordRuleAttachment:RecordRuleAttachment record_rule templateId#domainName
+// $ pulumi import tencentcloud:Css/recordRuleAttachment:RecordRuleAttachment record_rule templateId#domainName
 // ```
 type RecordRuleAttachment struct {
 	pulumi.CustomResourceState
@@ -72,7 +78,7 @@ func NewRecordRuleAttachment(ctx *pulumi.Context,
 	if args.TemplateId == nil {
 		return nil, errors.New("invalid value for required argument 'TemplateId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RecordRuleAttachment
 	err := ctx.RegisterResource("tencentcloud:Css/recordRuleAttachment:RecordRuleAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -169,7 +175,7 @@ func (i *RecordRuleAttachment) ToRecordRuleAttachmentOutputWithContext(ctx conte
 // RecordRuleAttachmentArrayInput is an input type that accepts RecordRuleAttachmentArray and RecordRuleAttachmentArrayOutput values.
 // You can construct a concrete instance of `RecordRuleAttachmentArrayInput` via:
 //
-//          RecordRuleAttachmentArray{ RecordRuleAttachmentArgs{...} }
+//	RecordRuleAttachmentArray{ RecordRuleAttachmentArgs{...} }
 type RecordRuleAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -194,7 +200,7 @@ func (i RecordRuleAttachmentArray) ToRecordRuleAttachmentArrayOutputWithContext(
 // RecordRuleAttachmentMapInput is an input type that accepts RecordRuleAttachmentMap and RecordRuleAttachmentMapOutput values.
 // You can construct a concrete instance of `RecordRuleAttachmentMapInput` via:
 //
-//          RecordRuleAttachmentMap{ "key": RecordRuleAttachmentArgs{...} }
+//	RecordRuleAttachmentMap{ "key": RecordRuleAttachmentArgs{...} }
 type RecordRuleAttachmentMapInput interface {
 	pulumi.Input
 

@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const syncJobResizeOperation = new tencentcloud.Dts.SyncJobResizeOperation("sync_job_resize_operation", {
+ * const syncJobResizeOperation = new tencentcloud.dts.SyncJobResizeOperation("syncJobResizeOperation", {
  *     jobId: "sync-werwfs23",
  *     newInstanceClass: "large",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class SyncJobResizeOperation extends pulumi.CustomResource {
     /**

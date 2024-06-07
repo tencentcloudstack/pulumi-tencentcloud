@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const example = new tencentcloud.vpc.Acl("example", {
@@ -26,13 +27,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Vpc ACL can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpc/acl:Acl default acl-id
+ * $ pulumi import tencentcloud:Vpc/acl:Acl default acl-id
  * ```
  */
 export class Acl extends pulumi.CustomResource {

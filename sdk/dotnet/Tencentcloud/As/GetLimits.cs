@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// <summary>
         /// Use this data source to query detailed information of as limits
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var limits = Output.Create(Tencentcloud.As.GetLimits.InvokeAsync());
-        ///     }
+        ///     var limits = Tencentcloud.As.GetLimits.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetLimitsResult> InvokeAsync(GetLimitsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetLimitsResult>("tencentcloud:As/getLimits:getLimits", args ?? new GetLimitsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetLimitsResult>("tencentcloud:As/getLimits:getLimits", args ?? new GetLimitsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of as limits
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var limits = Output.Create(Tencentcloud.As.GetLimits.InvokeAsync());
-        ///     }
+        ///     var limits = Tencentcloud.As.GetLimits.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetLimitsResult> Invoke(GetLimitsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetLimitsResult>("tencentcloud:As/getLimits:getLimits", args ?? new GetLimitsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetLimitsResult>("tencentcloud:As/getLimits:getLimits", args ?? new GetLimitsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetLimitsArgs : Pulumi.InvokeArgs
+    public sealed class GetLimitsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public GetLimitsArgs()
         {
         }
+        public static new GetLimitsArgs Empty => new GetLimitsArgs();
     }
 
-    public sealed class GetLimitsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetLimitsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public GetLimitsInvokeArgs()
         {
         }
+        public static new GetLimitsInvokeArgs Empty => new GetLimitsInvokeArgs();
     }
 
 

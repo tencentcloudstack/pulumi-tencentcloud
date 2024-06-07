@@ -15,80 +15,88 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Cls.Alarm("example", new()
     ///     {
-    ///         var alarm = new Tencentcloud.Cls.Alarm("alarm", new Tencentcloud.Cls.AlarmArgs
+    ///         AlarmLevel = 0,
+    ///         AlarmNoticeIds = new[]
     ///         {
-    ///             AlarmNoticeIds = 
+    ///             "notice-0850756b-245d-4bc7-bb27-2a58fffc780b",
+    ///         },
+    ///         AlarmPeriod = 15,
+    ///         AlarmTargets = new[]
+    ///         {
+    ///             new Tencentcloud.Cls.Inputs.AlarmAlarmTargetArgs
     ///             {
-    ///                 "notice-0850756b-245d-4bc7-bb27-2a58fffc780b",
+    ///                 EndTimeOffset = 0,
+    ///                 LogsetId = "33aaf0ae-6163-411b-a415-9f27450f68db",
+    ///                 Number = 1,
+    ///                 Query = "status:&gt;500 | select count(*) as errorCounts",
+    ///                 StartTimeOffset = -15,
+    ///                 TopicId = "88735a07-bea4-4985-8763-e9deb6da4fad",
     ///             },
-    ///             AlarmPeriod = 15,
-    ///             AlarmTargets = 
+    ///         },
+    ///         Analyses = new[]
+    ///         {
+    ///             new Tencentcloud.Cls.Inputs.AlarmAnalysisArgs
     ///             {
-    ///                 new Tencentcloud.Cls.Inputs.AlarmAlarmTargetArgs
+    ///                 ConfigInfos = new[]
     ///                 {
-    ///                     EndTimeOffset = 0,
-    ///                     LogsetId = "33aaf0ae-6163-411b-a415-9f27450f68db",
-    ///                     Number = 1,
-    ///                     Query = "status:&gt;500 | select count(*) as errorCounts",
-    ///                     StartTimeOffset = -15,
-    ///                     TopicId = "88735a07-bea4-4985-8763-e9deb6da4fad",
-    ///                 },
-    ///             },
-    ///             Analyses = 
-    ///             {
-    ///                 new Tencentcloud.Cls.Inputs.AlarmAnalysisArgs
-    ///                 {
-    ///                     ConfigInfos = 
+    ///                     new Tencentcloud.Cls.Inputs.AlarmAnalysisConfigInfoArgs
     ///                     {
-    ///                         new Tencentcloud.Cls.Inputs.AlarmAnalysisConfigInfoArgs
-    ///                         {
-    ///                             Key = "QueryIndex",
-    ///                             Value = "1",
-    ///                         },
+    ///                         Key = "QueryIndex",
+    ///                         Value = "1",
     ///                     },
-    ///                     Content = "__FILENAME__",
-    ///                     Name = "terraform",
-    ///                     Type = "field",
     ///                 },
+    ///                 Content = "__FILENAME__",
+    ///                 Name = "terraform",
+    ///                 Type = "field",
     ///             },
-    ///             Condition = "test",
-    ///             MessageTemplate = "{{.Label}}",
-    ///             MonitorTime = new Tencentcloud.Cls.Inputs.AlarmMonitorTimeArgs
-    ///             {
-    ///                 Time = 1,
-    ///                 Type = "Period",
-    ///             },
-    ///             Status = true,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///             TriggerCount = 1,
-    ///         });
-    ///     }
+    ///         },
+    ///         Condition = "test",
+    ///         MessageTemplate = "{{.Label}}",
+    ///         MonitorTime = new Tencentcloud.Cls.Inputs.AlarmMonitorTimeArgs
+    ///         {
+    ///             Time = 1,
+    ///             Type = "Period",
+    ///         },
+    ///         Status = true,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///         TriggerCount = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cls alarm can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/alarm:Alarm alarm alarm_id
+    /// $ pulumi import tencentcloud:Cls/alarm:Alarm example alarm-d8529662-e10f-440c-ba80-50f3dcf215a3
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/alarm:Alarm")]
-    public partial class Alarm : Pulumi.CustomResource
+    public partial class Alarm : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
+        /// </summary>
+        [Output("alarmLevel")]
+        public Output<int> AlarmLevel { get; private set; } = null!;
+
         /// <summary>
         /// list of alarm notice id.
         /// </summary>
@@ -117,7 +125,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// user define callback.
         /// </summary>
         [Output("callBack")]
-        public Output<Outputs.AlarmCallBack?> CallBack { get; private set; } = null!;
+        public Output<Outputs.AlarmCallBack> CallBack { get; private set; } = null!;
 
         /// <summary>
         /// triggering conditions.
@@ -147,7 +155,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// whether to enable the alarm policy.
         /// </summary>
         [Output("status")]
-        public Output<bool?> Status { get; private set; } = null!;
+        public Output<bool> Status { get; private set; } = null!;
 
         /// <summary>
         /// Tag description list.
@@ -206,8 +214,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
     }
 
-    public sealed class AlarmArgs : Pulumi.ResourceArgs
+    public sealed class AlarmArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
+        /// </summary>
+        [Input("alarmLevel")]
+        public Input<int>? AlarmLevel { get; set; }
+
         [Input("alarmNoticeIds", required: true)]
         private InputList<string>? _alarmNoticeIds;
 
@@ -307,10 +321,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public AlarmArgs()
         {
         }
+        public static new AlarmArgs Empty => new AlarmArgs();
     }
 
-    public sealed class AlarmState : Pulumi.ResourceArgs
+    public sealed class AlarmState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
+        /// </summary>
+        [Input("alarmLevel")]
+        public Input<int>? AlarmLevel { get; set; }
+
         [Input("alarmNoticeIds")]
         private InputList<string>? _alarmNoticeIds;
 
@@ -410,5 +431,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public AlarmState()
         {
         }
+        public static new AlarmState Empty => new AlarmState();
     }
 }

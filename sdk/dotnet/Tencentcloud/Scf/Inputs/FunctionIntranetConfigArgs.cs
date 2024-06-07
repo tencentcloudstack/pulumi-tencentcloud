@@ -11,10 +11,14 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
 {
 
-    public sealed class FunctionIntranetConfigArgs : Pulumi.ResourceArgs
+    public sealed class FunctionIntranetConfigArgs : global::Pulumi.ResourceArgs
     {
         [Input("ipAddresses")]
         private InputList<string>? _ipAddresses;
+
+        /// <summary>
+        /// If fixed intranet IP is enabled, this field returns the IP list used.
+        /// </summary>
         public InputList<string> IpAddresses
         {
             get => _ipAddresses ?? (_ipAddresses = new InputList<string>());
@@ -30,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public FunctionIntranetConfigArgs()
         {
         }
+        public static new FunctionIntranetConfigArgs Empty => new FunctionIntranetConfigArgs();
     }
 }

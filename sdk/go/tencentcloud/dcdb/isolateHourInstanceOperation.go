@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dcdb isolateHourInstanceOperation
@@ -29,7 +30,7 @@ func NewIsolateHourInstanceOperation(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource IsolateHourInstanceOperation
 	err := ctx.RegisterResource("tencentcloud:Dcdb/isolateHourInstanceOperation:IsolateHourInstanceOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -102,7 +103,7 @@ func (i *IsolateHourInstanceOperation) ToIsolateHourInstanceOperationOutputWithC
 // IsolateHourInstanceOperationArrayInput is an input type that accepts IsolateHourInstanceOperationArray and IsolateHourInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `IsolateHourInstanceOperationArrayInput` via:
 //
-//          IsolateHourInstanceOperationArray{ IsolateHourInstanceOperationArgs{...} }
+//	IsolateHourInstanceOperationArray{ IsolateHourInstanceOperationArgs{...} }
 type IsolateHourInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -127,7 +128,7 @@ func (i IsolateHourInstanceOperationArray) ToIsolateHourInstanceOperationArrayOu
 // IsolateHourInstanceOperationMapInput is an input type that accepts IsolateHourInstanceOperationMap and IsolateHourInstanceOperationMapOutput values.
 // You can construct a concrete instance of `IsolateHourInstanceOperationMapInput` via:
 //
-//          IsolateHourInstanceOperationMap{ "key": IsolateHourInstanceOperationArgs{...} }
+//	IsolateHourInstanceOperationMap{ "key": IsolateHourInstanceOperationArgs{...} }
 type IsolateHourInstanceOperationMapInput interface {
 	pulumi.Input
 

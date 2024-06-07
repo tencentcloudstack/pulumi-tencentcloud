@@ -15,29 +15,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cfs.AccessRule("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cfs.AccessRule("foo", new Tencentcloud.Cfs.AccessRuleArgs
-    ///         {
-    ///             AccessGroupId = "pgroup-7nx89k7l",
-    ///             AuthClientIp = "10.10.1.0/24",
-    ///             Priority = 1,
-    ///             RwPermission = "RO",
-    ///             UserPermission = "root_squash",
-    ///         });
-    ///     }
+    ///         AccessGroupId = "pgroup-7nx89k7l",
+    ///         AuthClientIp = "10.10.1.0/24",
+    ///         Priority = 1,
+    ///         RwPermission = "RO",
+    ///         UserPermission = "root_squash",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfs/accessRule:AccessRule")]
-    public partial class AccessRule : Pulumi.CustomResource
+    public partial class AccessRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of a access group.
@@ -114,7 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         }
     }
 
-    public sealed class AccessRuleArgs : Pulumi.ResourceArgs
+    public sealed class AccessRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of a access group.
@@ -149,9 +150,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public AccessRuleArgs()
         {
         }
+        public static new AccessRuleArgs Empty => new AccessRuleArgs();
     }
 
-    public sealed class AccessRuleState : Pulumi.ResourceArgs
+    public sealed class AccessRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of a access group.
@@ -186,5 +188,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public AccessRuleState()
         {
         }
+        public static new AccessRuleState Empty => new AccessRuleState();
     }
 }

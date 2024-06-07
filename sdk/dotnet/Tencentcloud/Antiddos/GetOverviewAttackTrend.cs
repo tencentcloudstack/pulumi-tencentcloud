@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// <summary>
         /// Use this data source to query detailed information of antiddos overview_attack_trend
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var overviewAttackTrend = Tencentcloud.Antiddos.GetOverviewAttackTrend.Invoke(new()
         ///     {
-        ///         var overviewAttackTrend = Output.Create(Tencentcloud.Antiddos.GetOverviewAttackTrend.InvokeAsync(new Tencentcloud.Antiddos.GetOverviewAttackTrendArgs
-        ///         {
-        ///             Dimension = "attackcount",
-        ///             EndTime = "2023-11-22 10:28:31",
-        ///             Period = 86400,
-        ///             StartTime = "2023-11-21 10:28:31",
-        ///             Type = "ddos",
-        ///         }));
-        ///     }
+        ///         Dimension = "attackcount",
+        ///         EndTime = "2023-11-22 10:28:31",
+        ///         Period = 86400,
+        ///         StartTime = "2023-11-21 10:28:31",
+        ///         Type = "ddos",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetOverviewAttackTrendResult> InvokeAsync(GetOverviewAttackTrendArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOverviewAttackTrendResult>("tencentcloud:Antiddos/getOverviewAttackTrend:getOverviewAttackTrend", args ?? new GetOverviewAttackTrendArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOverviewAttackTrendResult>("tencentcloud:Antiddos/getOverviewAttackTrend:getOverviewAttackTrend", args ?? new GetOverviewAttackTrendArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of antiddos overview_attack_trend
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var overviewAttackTrend = Tencentcloud.Antiddos.GetOverviewAttackTrend.Invoke(new()
         ///     {
-        ///         var overviewAttackTrend = Output.Create(Tencentcloud.Antiddos.GetOverviewAttackTrend.InvokeAsync(new Tencentcloud.Antiddos.GetOverviewAttackTrendArgs
-        ///         {
-        ///             Dimension = "attackcount",
-        ///             EndTime = "2023-11-22 10:28:31",
-        ///             Period = 86400,
-        ///             StartTime = "2023-11-21 10:28:31",
-        ///             Type = "ddos",
-        ///         }));
-        ///     }
+        ///         Dimension = "attackcount",
+        ///         EndTime = "2023-11-22 10:28:31",
+        ///         Period = 86400,
+        ///         StartTime = "2023-11-21 10:28:31",
+        ///         Type = "ddos",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetOverviewAttackTrendResult> Invoke(GetOverviewAttackTrendInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOverviewAttackTrendResult>("tencentcloud:Antiddos/getOverviewAttackTrend:getOverviewAttackTrend", args ?? new GetOverviewAttackTrendInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOverviewAttackTrendResult>("tencentcloud:Antiddos/getOverviewAttackTrend:getOverviewAttackTrend", args ?? new GetOverviewAttackTrendInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetOverviewAttackTrendArgs : Pulumi.InvokeArgs
+    public sealed class GetOverviewAttackTrendArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Latitude, currently only attackcount is supported.
@@ -121,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public GetOverviewAttackTrendArgs()
         {
         }
+        public static new GetOverviewAttackTrendArgs Empty => new GetOverviewAttackTrendArgs();
     }
 
-    public sealed class GetOverviewAttackTrendInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetOverviewAttackTrendInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Latitude, currently only attackcount is supported.
@@ -164,6 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public GetOverviewAttackTrendInvokeArgs()
         {
         }
+        public static new GetOverviewAttackTrendInvokeArgs Empty => new GetOverviewAttackTrendInvokeArgs();
     }
 
 

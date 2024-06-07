@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// <summary>
         /// Use this data source to query detailed information of dc internet_address_quota
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var internetAddressQuota = Output.Create(Tencentcloud.Dc.GetInternetAddressQuota.InvokeAsync());
-        ///     }
+        ///     var internetAddressQuota = Tencentcloud.Dc.GetInternetAddressQuota.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInternetAddressQuotaResult> InvokeAsync(GetInternetAddressQuotaArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInternetAddressQuotaResult>("tencentcloud:Dc/getInternetAddressQuota:getInternetAddressQuota", args ?? new GetInternetAddressQuotaArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInternetAddressQuotaResult>("tencentcloud:Dc/getInternetAddressQuota:getInternetAddressQuota", args ?? new GetInternetAddressQuotaArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dc internet_address_quota
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var internetAddressQuota = Output.Create(Tencentcloud.Dc.GetInternetAddressQuota.InvokeAsync());
-        ///     }
+        ///     var internetAddressQuota = Tencentcloud.Dc.GetInternetAddressQuota.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInternetAddressQuotaResult> Invoke(GetInternetAddressQuotaInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInternetAddressQuotaResult>("tencentcloud:Dc/getInternetAddressQuota:getInternetAddressQuota", args ?? new GetInternetAddressQuotaInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInternetAddressQuotaResult>("tencentcloud:Dc/getInternetAddressQuota:getInternetAddressQuota", args ?? new GetInternetAddressQuotaInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInternetAddressQuotaArgs : Pulumi.InvokeArgs
+    public sealed class GetInternetAddressQuotaArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GetInternetAddressQuotaArgs()
         {
         }
+        public static new GetInternetAddressQuotaArgs Empty => new GetInternetAddressQuotaArgs();
     }
 
-    public sealed class GetInternetAddressQuotaInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInternetAddressQuotaInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GetInternetAddressQuotaInvokeArgs()
         {
         }
+        public static new GetInternetAddressQuotaInvokeArgs Empty => new GetInternetAddressQuotaInvokeArgs();
     }
 
 

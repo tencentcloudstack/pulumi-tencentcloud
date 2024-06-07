@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const liveTranscodeTemplate = new tencentcloud.Css.LiveTranscodeTemplate("live_transcode_template", {
+ * const liveTranscodeTemplate = new tencentcloud.css.LiveTranscodeTemplate("liveTranscodeTemplate", {
  *     acodec: "aac",
  *     adaptBitratePercent: 0,
  *     aiTransCode: 0,
@@ -38,13 +39,14 @@ import * as utilities from "../utilities";
  *     width: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css live_transcode_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/liveTranscodeTemplate:LiveTranscodeTemplate live_transcode_template liveTranscodeTemplate_id
+ * $ pulumi import tencentcloud:Css/liveTranscodeTemplate:LiveTranscodeTemplate live_transcode_template liveTranscodeTemplate_id
  * ```
  */
 export class LiveTranscodeTemplate extends pulumi.CustomResource {

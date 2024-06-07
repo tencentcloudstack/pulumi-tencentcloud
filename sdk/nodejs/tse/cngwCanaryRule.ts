@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,9 +11,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const cngwService = new tencentcloud.tse.CngwService("cngwService", {
  *     gatewayId: "gateway-ddbb709b",
@@ -63,13 +65,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tse cngw_canary_rule can be imported using the gatewayId#serviceId#priority, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule cngw_canary_rule gateway-ddbb709b#b6017eaf-2363-481e-9e93-8d65aaf498cd#100
+ * $ pulumi import tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule cngw_canary_rule gateway-ddbb709b#b6017eaf-2363-481e-9e93-8d65aaf498cd#100
  * ```
  */
 export class CngwCanaryRule extends pulumi.CustomResource {

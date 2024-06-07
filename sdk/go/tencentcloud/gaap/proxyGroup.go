@@ -7,45 +7,51 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a gaap proxy group
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Gaap.NewProxyGroup(ctx, "proxyGroup", &Gaap.ProxyGroupArgs{
-// 			GroupName:        pulumi.String("tf-test-update"),
-// 			IpAddressVersion: pulumi.String("IPv4"),
-// 			PackageType:      pulumi.String("Thunder"),
-// 			ProjectId:        pulumi.Int(0),
-// 			RealServerRegion: pulumi.String("Beijing"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Gaap.NewProxyGroup(ctx, "proxyGroup", &Gaap.ProxyGroupArgs{
+//				GroupName:        pulumi.String("tf-test-update"),
+//				IpAddressVersion: pulumi.String("IPv4"),
+//				PackageType:      pulumi.String("Thunder"),
+//				ProjectId:        pulumi.Int(0),
+//				RealServerRegion: pulumi.String("Beijing"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // gaap proxy_group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Gaap/proxyGroup:ProxyGroup proxy_group proxy_group_id
+// $ pulumi import tencentcloud:Gaap/proxyGroup:ProxyGroup proxy_group proxy_group_id
 // ```
 type ProxyGroup struct {
 	pulumi.CustomResourceState
@@ -78,7 +84,7 @@ func NewProxyGroup(ctx *pulumi.Context,
 	if args.RealServerRegion == nil {
 		return nil, errors.New("invalid value for required argument 'RealServerRegion'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ProxyGroup
 	err := ctx.RegisterResource("tencentcloud:Gaap/proxyGroup:ProxyGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -183,7 +189,7 @@ func (i *ProxyGroup) ToProxyGroupOutputWithContext(ctx context.Context) ProxyGro
 // ProxyGroupArrayInput is an input type that accepts ProxyGroupArray and ProxyGroupArrayOutput values.
 // You can construct a concrete instance of `ProxyGroupArrayInput` via:
 //
-//          ProxyGroupArray{ ProxyGroupArgs{...} }
+//	ProxyGroupArray{ ProxyGroupArgs{...} }
 type ProxyGroupArrayInput interface {
 	pulumi.Input
 
@@ -208,7 +214,7 @@ func (i ProxyGroupArray) ToProxyGroupArrayOutputWithContext(ctx context.Context)
 // ProxyGroupMapInput is an input type that accepts ProxyGroupMap and ProxyGroupMapOutput values.
 // You can construct a concrete instance of `ProxyGroupMapInput` via:
 //
-//          ProxyGroupMap{ "key": ProxyGroupArgs{...} }
+//	ProxyGroupMap{ "key": ProxyGroupArgs{...} }
 type ProxyGroupMapInput interface {
 	pulumi.Input
 

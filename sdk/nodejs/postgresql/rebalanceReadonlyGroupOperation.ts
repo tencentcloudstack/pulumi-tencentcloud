@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const groupRebalance = new tencentcloud.postgresql.ReadonlyGroup("groupRebalance", {
  *     masterDbInstanceId: local.pgsql_id,
@@ -26,6 +27,7 @@ import * as utilities from "../utilities";
  * });
  * const rebalanceReadonlyGroupOperation = new tencentcloud.postgresql.RebalanceReadonlyGroupOperation("rebalanceReadonlyGroupOperation", {readOnlyGroupId: groupRebalance.id});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RebalanceReadonlyGroupOperation extends pulumi.CustomResource {
     /**

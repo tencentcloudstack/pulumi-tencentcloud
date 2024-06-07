@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// <summary>
         /// Use this data source to query detailed information of cynosdb resource_package_sale_specs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var resourcePackageSaleSpecs = Tencentcloud.Cynosdb.GetResourcePackageSaleSpecs.Invoke(new()
         ///     {
-        ///         var resourcePackageSaleSpecs = Output.Create(Tencentcloud.Cynosdb.GetResourcePackageSaleSpecs.InvokeAsync(new Tencentcloud.Cynosdb.GetResourcePackageSaleSpecsArgs
-        ///         {
-        ///             InstanceType = "cynosdb-serverless",
-        ///             PackageRegion = "china",
-        ///             PackageType = "CCU",
-        ///         }));
-        ///     }
+        ///         InstanceType = "cynosdb-serverless",
+        ///         PackageRegion = "china",
+        ///         PackageType = "CCU",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetResourcePackageSaleSpecsResult> InvokeAsync(GetResourcePackageSaleSpecsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetResourcePackageSaleSpecsResult>("tencentcloud:Cynosdb/getResourcePackageSaleSpecs:getResourcePackageSaleSpecs", args ?? new GetResourcePackageSaleSpecsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetResourcePackageSaleSpecsResult>("tencentcloud:Cynosdb/getResourcePackageSaleSpecs:getResourcePackageSaleSpecs", args ?? new GetResourcePackageSaleSpecsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cynosdb resource_package_sale_specs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var resourcePackageSaleSpecs = Tencentcloud.Cynosdb.GetResourcePackageSaleSpecs.Invoke(new()
         ///     {
-        ///         var resourcePackageSaleSpecs = Output.Create(Tencentcloud.Cynosdb.GetResourcePackageSaleSpecs.InvokeAsync(new Tencentcloud.Cynosdb.GetResourcePackageSaleSpecsArgs
-        ///         {
-        ///             InstanceType = "cynosdb-serverless",
-        ///             PackageRegion = "china",
-        ///             PackageType = "CCU",
-        ///         }));
-        ///     }
+        ///         InstanceType = "cynosdb-serverless",
+        ///         PackageRegion = "china",
+        ///         PackageType = "CCU",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetResourcePackageSaleSpecsResult> Invoke(GetResourcePackageSaleSpecsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetResourcePackageSaleSpecsResult>("tencentcloud:Cynosdb/getResourcePackageSaleSpecs:getResourcePackageSaleSpecs", args ?? new GetResourcePackageSaleSpecsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetResourcePackageSaleSpecsResult>("tencentcloud:Cynosdb/getResourcePackageSaleSpecs:getResourcePackageSaleSpecs", args ?? new GetResourcePackageSaleSpecsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetResourcePackageSaleSpecsArgs : Pulumi.InvokeArgs
+    public sealed class GetResourcePackageSaleSpecsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance Type. Value range: cynosdb-serverless, cynosdb, cdb.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetResourcePackageSaleSpecsArgs()
         {
         }
+        public static new GetResourcePackageSaleSpecsArgs Empty => new GetResourcePackageSaleSpecsArgs();
     }
 
-    public sealed class GetResourcePackageSaleSpecsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetResourcePackageSaleSpecsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance Type. Value range: cynosdb-serverless, cynosdb, cdb.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetResourcePackageSaleSpecsInvokeArgs()
         {
         }
+        public static new GetResourcePackageSaleSpecsInvokeArgs Empty => new GetResourcePackageSaleSpecsInvokeArgs();
     }
 
 

@@ -8,10 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 func GetVipInstance(ctx *pulumi.Context, args *GetVipInstanceArgs, opts ...pulumi.InvokeOption) (*GetVipInstanceResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetVipInstanceResult
 	err := ctx.Invoke("tencentcloud:Tdmq/getVipInstance:getVipInstance", args, &rv, opts...)
 	if err != nil {

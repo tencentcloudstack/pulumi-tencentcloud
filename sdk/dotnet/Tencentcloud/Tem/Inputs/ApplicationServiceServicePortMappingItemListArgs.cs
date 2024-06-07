@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
 {
 
-    public sealed class ApplicationServiceServicePortMappingItemListArgs : Pulumi.ResourceArgs
+    public sealed class ApplicationServiceServicePortMappingItemListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// container port.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
         public ApplicationServiceServicePortMappingItemListArgs()
         {
         }
+        public static new ApplicationServiceServicePortMappingItemListArgs Empty => new ApplicationServiceServicePortMappingItemListArgs();
     }
 }

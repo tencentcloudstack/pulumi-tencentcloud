@@ -5,56 +5,176 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./account";
-export * from "./accountPrivileges";
-export * from "./activateHourInstanceOperation";
-export * from "./cancelDcnJobOperation";
-export * from "./dbInstance";
-export * from "./dbParameters";
-export * from "./dbSyncModeConfig";
-export * from "./encryptAttributesConfig";
-export * from "./flushBinlogOperation";
-export * from "./getAccounts";
-export * from "./getDatabaseObjects";
-export * from "./getDatabaseTables";
-export * from "./getDatabases";
-export * from "./getFileDownloadUrl";
-export * from "./getInstanceNodeInfo";
-export * from "./getInstances";
-export * from "./getLogFiles";
-export * from "./getOrders";
-export * from "./getParameters";
-export * from "./getPrice";
-export * from "./getProjectSecurityGroups";
-export * from "./getProjects";
-export * from "./getRenewalPrice";
-export * from "./getSaleInfo";
-export * from "./getSecurityGroups";
-export * from "./getShardSpec";
-export * from "./getShards";
-export * from "./getSlowLogs";
-export * from "./getUpgradePrice";
-export * from "./hourdbInstance";
-export * from "./instanceConfig";
-export * from "./isolateHourInstanceOperation";
-export * from "./securityGroupAttachment";
-export * from "./switchDbInstanceHaOperation";
+export { AccountArgs, AccountState } from "./account";
+export type Account = import("./account").Account;
+export const Account: typeof import("./account").Account = null as any;
+utilities.lazyLoad(exports, ["Account"], () => require("./account"));
 
-// Import resources to register:
-import { Account } from "./account";
-import { AccountPrivileges } from "./accountPrivileges";
-import { ActivateHourInstanceOperation } from "./activateHourInstanceOperation";
-import { CancelDcnJobOperation } from "./cancelDcnJobOperation";
-import { DbInstance } from "./dbInstance";
-import { DbParameters } from "./dbParameters";
-import { DbSyncModeConfig } from "./dbSyncModeConfig";
-import { EncryptAttributesConfig } from "./encryptAttributesConfig";
-import { FlushBinlogOperation } from "./flushBinlogOperation";
-import { HourdbInstance } from "./hourdbInstance";
-import { InstanceConfig } from "./instanceConfig";
-import { IsolateHourInstanceOperation } from "./isolateHourInstanceOperation";
-import { SecurityGroupAttachment } from "./securityGroupAttachment";
-import { SwitchDbInstanceHaOperation } from "./switchDbInstanceHaOperation";
+export { AccountPrivilegesArgs, AccountPrivilegesState } from "./accountPrivileges";
+export type AccountPrivileges = import("./accountPrivileges").AccountPrivileges;
+export const AccountPrivileges: typeof import("./accountPrivileges").AccountPrivileges = null as any;
+utilities.lazyLoad(exports, ["AccountPrivileges"], () => require("./accountPrivileges"));
+
+export { ActivateHourInstanceOperationArgs, ActivateHourInstanceOperationState } from "./activateHourInstanceOperation";
+export type ActivateHourInstanceOperation = import("./activateHourInstanceOperation").ActivateHourInstanceOperation;
+export const ActivateHourInstanceOperation: typeof import("./activateHourInstanceOperation").ActivateHourInstanceOperation = null as any;
+utilities.lazyLoad(exports, ["ActivateHourInstanceOperation"], () => require("./activateHourInstanceOperation"));
+
+export { CancelDcnJobOperationArgs, CancelDcnJobOperationState } from "./cancelDcnJobOperation";
+export type CancelDcnJobOperation = import("./cancelDcnJobOperation").CancelDcnJobOperation;
+export const CancelDcnJobOperation: typeof import("./cancelDcnJobOperation").CancelDcnJobOperation = null as any;
+utilities.lazyLoad(exports, ["CancelDcnJobOperation"], () => require("./cancelDcnJobOperation"));
+
+export { DbInstanceArgs, DbInstanceState } from "./dbInstance";
+export type DbInstance = import("./dbInstance").DbInstance;
+export const DbInstance: typeof import("./dbInstance").DbInstance = null as any;
+utilities.lazyLoad(exports, ["DbInstance"], () => require("./dbInstance"));
+
+export { DbParametersArgs, DbParametersState } from "./dbParameters";
+export type DbParameters = import("./dbParameters").DbParameters;
+export const DbParameters: typeof import("./dbParameters").DbParameters = null as any;
+utilities.lazyLoad(exports, ["DbParameters"], () => require("./dbParameters"));
+
+export { DbSyncModeConfigArgs, DbSyncModeConfigState } from "./dbSyncModeConfig";
+export type DbSyncModeConfig = import("./dbSyncModeConfig").DbSyncModeConfig;
+export const DbSyncModeConfig: typeof import("./dbSyncModeConfig").DbSyncModeConfig = null as any;
+utilities.lazyLoad(exports, ["DbSyncModeConfig"], () => require("./dbSyncModeConfig"));
+
+export { EncryptAttributesConfigArgs, EncryptAttributesConfigState } from "./encryptAttributesConfig";
+export type EncryptAttributesConfig = import("./encryptAttributesConfig").EncryptAttributesConfig;
+export const EncryptAttributesConfig: typeof import("./encryptAttributesConfig").EncryptAttributesConfig = null as any;
+utilities.lazyLoad(exports, ["EncryptAttributesConfig"], () => require("./encryptAttributesConfig"));
+
+export { FlushBinlogOperationArgs, FlushBinlogOperationState } from "./flushBinlogOperation";
+export type FlushBinlogOperation = import("./flushBinlogOperation").FlushBinlogOperation;
+export const FlushBinlogOperation: typeof import("./flushBinlogOperation").FlushBinlogOperation = null as any;
+utilities.lazyLoad(exports, ["FlushBinlogOperation"], () => require("./flushBinlogOperation"));
+
+export { GetAccountsArgs, GetAccountsResult, GetAccountsOutputArgs } from "./getAccounts";
+export const getAccounts: typeof import("./getAccounts").getAccounts = null as any;
+export const getAccountsOutput: typeof import("./getAccounts").getAccountsOutput = null as any;
+utilities.lazyLoad(exports, ["getAccounts","getAccountsOutput"], () => require("./getAccounts"));
+
+export { GetDatabaseObjectsArgs, GetDatabaseObjectsResult, GetDatabaseObjectsOutputArgs } from "./getDatabaseObjects";
+export const getDatabaseObjects: typeof import("./getDatabaseObjects").getDatabaseObjects = null as any;
+export const getDatabaseObjectsOutput: typeof import("./getDatabaseObjects").getDatabaseObjectsOutput = null as any;
+utilities.lazyLoad(exports, ["getDatabaseObjects","getDatabaseObjectsOutput"], () => require("./getDatabaseObjects"));
+
+export { GetDatabaseTablesArgs, GetDatabaseTablesResult, GetDatabaseTablesOutputArgs } from "./getDatabaseTables";
+export const getDatabaseTables: typeof import("./getDatabaseTables").getDatabaseTables = null as any;
+export const getDatabaseTablesOutput: typeof import("./getDatabaseTables").getDatabaseTablesOutput = null as any;
+utilities.lazyLoad(exports, ["getDatabaseTables","getDatabaseTablesOutput"], () => require("./getDatabaseTables"));
+
+export { GetDatabasesArgs, GetDatabasesResult, GetDatabasesOutputArgs } from "./getDatabases";
+export const getDatabases: typeof import("./getDatabases").getDatabases = null as any;
+export const getDatabasesOutput: typeof import("./getDatabases").getDatabasesOutput = null as any;
+utilities.lazyLoad(exports, ["getDatabases","getDatabasesOutput"], () => require("./getDatabases"));
+
+export { GetFileDownloadUrlArgs, GetFileDownloadUrlResult, GetFileDownloadUrlOutputArgs } from "./getFileDownloadUrl";
+export const getFileDownloadUrl: typeof import("./getFileDownloadUrl").getFileDownloadUrl = null as any;
+export const getFileDownloadUrlOutput: typeof import("./getFileDownloadUrl").getFileDownloadUrlOutput = null as any;
+utilities.lazyLoad(exports, ["getFileDownloadUrl","getFileDownloadUrlOutput"], () => require("./getFileDownloadUrl"));
+
+export { GetInstanceNodeInfoArgs, GetInstanceNodeInfoResult, GetInstanceNodeInfoOutputArgs } from "./getInstanceNodeInfo";
+export const getInstanceNodeInfo: typeof import("./getInstanceNodeInfo").getInstanceNodeInfo = null as any;
+export const getInstanceNodeInfoOutput: typeof import("./getInstanceNodeInfo").getInstanceNodeInfoOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceNodeInfo","getInstanceNodeInfoOutput"], () => require("./getInstanceNodeInfo"));
+
+export { GetInstancesArgs, GetInstancesResult, GetInstancesOutputArgs } from "./getInstances";
+export const getInstances: typeof import("./getInstances").getInstances = null as any;
+export const getInstancesOutput: typeof import("./getInstances").getInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstances","getInstancesOutput"], () => require("./getInstances"));
+
+export { GetLogFilesArgs, GetLogFilesResult, GetLogFilesOutputArgs } from "./getLogFiles";
+export const getLogFiles: typeof import("./getLogFiles").getLogFiles = null as any;
+export const getLogFilesOutput: typeof import("./getLogFiles").getLogFilesOutput = null as any;
+utilities.lazyLoad(exports, ["getLogFiles","getLogFilesOutput"], () => require("./getLogFiles"));
+
+export { GetOrdersArgs, GetOrdersResult, GetOrdersOutputArgs } from "./getOrders";
+export const getOrders: typeof import("./getOrders").getOrders = null as any;
+export const getOrdersOutput: typeof import("./getOrders").getOrdersOutput = null as any;
+utilities.lazyLoad(exports, ["getOrders","getOrdersOutput"], () => require("./getOrders"));
+
+export { GetParametersArgs, GetParametersResult, GetParametersOutputArgs } from "./getParameters";
+export const getParameters: typeof import("./getParameters").getParameters = null as any;
+export const getParametersOutput: typeof import("./getParameters").getParametersOutput = null as any;
+utilities.lazyLoad(exports, ["getParameters","getParametersOutput"], () => require("./getParameters"));
+
+export { GetPriceArgs, GetPriceResult, GetPriceOutputArgs } from "./getPrice";
+export const getPrice: typeof import("./getPrice").getPrice = null as any;
+export const getPriceOutput: typeof import("./getPrice").getPriceOutput = null as any;
+utilities.lazyLoad(exports, ["getPrice","getPriceOutput"], () => require("./getPrice"));
+
+export { GetProjectSecurityGroupsArgs, GetProjectSecurityGroupsResult, GetProjectSecurityGroupsOutputArgs } from "./getProjectSecurityGroups";
+export const getProjectSecurityGroups: typeof import("./getProjectSecurityGroups").getProjectSecurityGroups = null as any;
+export const getProjectSecurityGroupsOutput: typeof import("./getProjectSecurityGroups").getProjectSecurityGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getProjectSecurityGroups","getProjectSecurityGroupsOutput"], () => require("./getProjectSecurityGroups"));
+
+export { GetProjectsArgs, GetProjectsResult, GetProjectsOutputArgs } from "./getProjects";
+export const getProjects: typeof import("./getProjects").getProjects = null as any;
+export const getProjectsOutput: typeof import("./getProjects").getProjectsOutput = null as any;
+utilities.lazyLoad(exports, ["getProjects","getProjectsOutput"], () => require("./getProjects"));
+
+export { GetRenewalPriceArgs, GetRenewalPriceResult, GetRenewalPriceOutputArgs } from "./getRenewalPrice";
+export const getRenewalPrice: typeof import("./getRenewalPrice").getRenewalPrice = null as any;
+export const getRenewalPriceOutput: typeof import("./getRenewalPrice").getRenewalPriceOutput = null as any;
+utilities.lazyLoad(exports, ["getRenewalPrice","getRenewalPriceOutput"], () => require("./getRenewalPrice"));
+
+export { GetSaleInfoArgs, GetSaleInfoResult, GetSaleInfoOutputArgs } from "./getSaleInfo";
+export const getSaleInfo: typeof import("./getSaleInfo").getSaleInfo = null as any;
+export const getSaleInfoOutput: typeof import("./getSaleInfo").getSaleInfoOutput = null as any;
+utilities.lazyLoad(exports, ["getSaleInfo","getSaleInfoOutput"], () => require("./getSaleInfo"));
+
+export { GetSecurityGroupsArgs, GetSecurityGroupsResult, GetSecurityGroupsOutputArgs } from "./getSecurityGroups";
+export const getSecurityGroups: typeof import("./getSecurityGroups").getSecurityGroups = null as any;
+export const getSecurityGroupsOutput: typeof import("./getSecurityGroups").getSecurityGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getSecurityGroups","getSecurityGroupsOutput"], () => require("./getSecurityGroups"));
+
+export { GetShardSpecArgs, GetShardSpecResult, GetShardSpecOutputArgs } from "./getShardSpec";
+export const getShardSpec: typeof import("./getShardSpec").getShardSpec = null as any;
+export const getShardSpecOutput: typeof import("./getShardSpec").getShardSpecOutput = null as any;
+utilities.lazyLoad(exports, ["getShardSpec","getShardSpecOutput"], () => require("./getShardSpec"));
+
+export { GetShardsArgs, GetShardsResult, GetShardsOutputArgs } from "./getShards";
+export const getShards: typeof import("./getShards").getShards = null as any;
+export const getShardsOutput: typeof import("./getShards").getShardsOutput = null as any;
+utilities.lazyLoad(exports, ["getShards","getShardsOutput"], () => require("./getShards"));
+
+export { GetSlowLogsArgs, GetSlowLogsResult, GetSlowLogsOutputArgs } from "./getSlowLogs";
+export const getSlowLogs: typeof import("./getSlowLogs").getSlowLogs = null as any;
+export const getSlowLogsOutput: typeof import("./getSlowLogs").getSlowLogsOutput = null as any;
+utilities.lazyLoad(exports, ["getSlowLogs","getSlowLogsOutput"], () => require("./getSlowLogs"));
+
+export { GetUpgradePriceArgs, GetUpgradePriceResult, GetUpgradePriceOutputArgs } from "./getUpgradePrice";
+export const getUpgradePrice: typeof import("./getUpgradePrice").getUpgradePrice = null as any;
+export const getUpgradePriceOutput: typeof import("./getUpgradePrice").getUpgradePriceOutput = null as any;
+utilities.lazyLoad(exports, ["getUpgradePrice","getUpgradePriceOutput"], () => require("./getUpgradePrice"));
+
+export { HourdbInstanceArgs, HourdbInstanceState } from "./hourdbInstance";
+export type HourdbInstance = import("./hourdbInstance").HourdbInstance;
+export const HourdbInstance: typeof import("./hourdbInstance").HourdbInstance = null as any;
+utilities.lazyLoad(exports, ["HourdbInstance"], () => require("./hourdbInstance"));
+
+export { InstanceConfigArgs, InstanceConfigState } from "./instanceConfig";
+export type InstanceConfig = import("./instanceConfig").InstanceConfig;
+export const InstanceConfig: typeof import("./instanceConfig").InstanceConfig = null as any;
+utilities.lazyLoad(exports, ["InstanceConfig"], () => require("./instanceConfig"));
+
+export { IsolateHourInstanceOperationArgs, IsolateHourInstanceOperationState } from "./isolateHourInstanceOperation";
+export type IsolateHourInstanceOperation = import("./isolateHourInstanceOperation").IsolateHourInstanceOperation;
+export const IsolateHourInstanceOperation: typeof import("./isolateHourInstanceOperation").IsolateHourInstanceOperation = null as any;
+utilities.lazyLoad(exports, ["IsolateHourInstanceOperation"], () => require("./isolateHourInstanceOperation"));
+
+export { SecurityGroupAttachmentArgs, SecurityGroupAttachmentState } from "./securityGroupAttachment";
+export type SecurityGroupAttachment = import("./securityGroupAttachment").SecurityGroupAttachment;
+export const SecurityGroupAttachment: typeof import("./securityGroupAttachment").SecurityGroupAttachment = null as any;
+utilities.lazyLoad(exports, ["SecurityGroupAttachment"], () => require("./securityGroupAttachment"));
+
+export { SwitchDbInstanceHaOperationArgs, SwitchDbInstanceHaOperationState } from "./switchDbInstanceHaOperation";
+export type SwitchDbInstanceHaOperation = import("./switchDbInstanceHaOperation").SwitchDbInstanceHaOperation;
+export const SwitchDbInstanceHaOperation: typeof import("./switchDbInstanceHaOperation").SwitchDbInstanceHaOperation = null as any;
+utilities.lazyLoad(exports, ["SwitchDbInstanceHaOperation"], () => require("./switchDbInstanceHaOperation"));
+
 
 const _module = {
     version: utilities.getVersion(),

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const groups = pulumi.output(tencentcloud.Tse.getGroups({
+ * const groups = tencentcloud.Tse.getGroups({
  *     filters: [{
  *         name: "GroupId",
  *         values: ["group-013c0d8e"],
  *     }],
  *     gatewayId: "gateway-ddbb709b",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getGroups(args: GetGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tse/getGroups:getGroups", {
         "filters": args.filters,
         "gatewayId": args.gatewayId,
@@ -73,9 +73,28 @@ export interface GetGroupsResult {
      */
     readonly results: outputs.Tse.GetGroupsResult[];
 }
-
+/**
+ * Use this data source to query detailed information of tse groups
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const groups = tencentcloud.Tse.getGroups({
+ *     filters: [{
+ *         name: "GroupId",
+ *         values: ["group-013c0d8e"],
+ *     }],
+ *     gatewayId: "gateway-ddbb709b",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getGroupsOutput(args: GetGroupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGroupsResult> {
-    return pulumi.output(args).apply(a => getGroups(a, opts))
+    return pulumi.output(args).apply((a: any) => getGroups(a, opts))
 }
 
 /**

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,14 +11,13 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instance = new tencentcloud.Mariadb.Instance("instance", {
- *     // security_group_ids = ""
+ * const instance = new tencentcloud.mariadb.Instance("instance", {
  *     autoRenewFlag: 1,
- *     // project_id = ""
  *     dbVersionId: "8.0",
  *     dcnInstanceId: "",
  *     dcnRegion: "",
@@ -49,19 +49,18 @@ import * as utilities from "../utilities";
  *     tags: {
  *         createby: "terrafrom-2",
  *     },
- *     // auto_voucher =
- *     // voucher_ids =
  *     vpcId: "vpc-ii1jfbhl",
  *     zones: ["ap-guangzhou-3"],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mariadb tencentcloud_mariadb_instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mariadb/instance:Instance instance tdsql-4pzs5b67
+ * $ pulumi import tencentcloud:Mariadb/instance:Instance instance tdsql-4pzs5b67
  * ```
  */
 export class Instance extends pulumi.CustomResource {

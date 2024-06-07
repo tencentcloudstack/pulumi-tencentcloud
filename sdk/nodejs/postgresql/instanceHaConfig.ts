@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Postgresql.InstanceHaConfig("example", {
+ * const example = new tencentcloud.postgresql.InstanceHaConfig("example", {
  *     instanceId: "postgres-gzg9jb2n",
  *     maxStandbyLag: 10,
  *     maxStandbyLatency: 10737418240,
@@ -22,18 +23,21 @@ import * as utilities from "../utilities";
  *     syncMode: "Semi-sync",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Postgresql.InstanceHaConfig("example", {
+ * const example = new tencentcloud.postgresql.InstanceHaConfig("example", {
  *     instanceId: "postgres-gzg9jb2n",
  *     maxStandbyLag: 10,
  *     maxStandbyLatency: 10737418240,
  *     syncMode: "Async",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class InstanceHaConfig extends pulumi.CustomResource {
     /**

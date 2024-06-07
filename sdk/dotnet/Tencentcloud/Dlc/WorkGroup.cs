@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var workGroup = new Tencentcloud.Dlc.WorkGroup("workGroup", new()
     ///     {
-    ///         var workGroup = new Tencentcloud.Dlc.WorkGroup("workGroup", new Tencentcloud.Dlc.WorkGroupArgs
-    ///         {
-    ///             WorkGroupDescription = "dlc workgroup test",
-    ///             WorkGroupName = "tf-demo",
-    ///         });
-    ///     }
+    ///         WorkGroupDescription = "dlc workgroup test",
+    ///         WorkGroupName = "tf-demo",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dlc work_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dlc/workGroup:WorkGroup work_group work_group_id
+    /// $ pulumi import tencentcloud:Dlc/workGroup:WorkGroup work_group work_group_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/workGroup:WorkGroup")]
-    public partial class WorkGroup : Pulumi.CustomResource
+    public partial class WorkGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// A collection of user IDs that has been bound to the workgroup.
@@ -107,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class WorkGroupArgs : Pulumi.ResourceArgs
+    public sealed class WorkGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of Work Group.
@@ -124,9 +125,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public WorkGroupArgs()
         {
         }
+        public static new WorkGroupArgs Empty => new WorkGroupArgs();
     }
 
-    public sealed class WorkGroupState : Pulumi.ResourceArgs
+    public sealed class WorkGroupState : global::Pulumi.ResourceArgs
     {
         [Input("userIds")]
         private InputList<string>? _userIds;
@@ -155,5 +157,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public WorkGroupState()
         {
         }
+        public static new WorkGroupState Empty => new WorkGroupState();
     }
 }

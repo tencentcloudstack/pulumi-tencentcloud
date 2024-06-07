@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query detailed information of monitor alarm_notice_callbacks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var alarmNoticeCallbacks = Output.Create(Tencentcloud.Monitor.GetAlarmNoticeCallbacks.InvokeAsync());
-        ///     }
+        ///     var alarmNoticeCallbacks = Tencentcloud.Monitor.GetAlarmNoticeCallbacks.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAlarmNoticeCallbacksResult> InvokeAsync(GetAlarmNoticeCallbacksArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAlarmNoticeCallbacksResult>("tencentcloud:Monitor/getAlarmNoticeCallbacks:getAlarmNoticeCallbacks", args ?? new GetAlarmNoticeCallbacksArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmNoticeCallbacksResult>("tencentcloud:Monitor/getAlarmNoticeCallbacks:getAlarmNoticeCallbacks", args ?? new GetAlarmNoticeCallbacksArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of monitor alarm_notice_callbacks
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var alarmNoticeCallbacks = Output.Create(Tencentcloud.Monitor.GetAlarmNoticeCallbacks.InvokeAsync());
-        ///     }
+        ///     var alarmNoticeCallbacks = Tencentcloud.Monitor.GetAlarmNoticeCallbacks.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAlarmNoticeCallbacksResult> Invoke(GetAlarmNoticeCallbacksInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAlarmNoticeCallbacksResult>("tencentcloud:Monitor/getAlarmNoticeCallbacks:getAlarmNoticeCallbacks", args ?? new GetAlarmNoticeCallbacksInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAlarmNoticeCallbacksResult>("tencentcloud:Monitor/getAlarmNoticeCallbacks:getAlarmNoticeCallbacks", args ?? new GetAlarmNoticeCallbacksInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAlarmNoticeCallbacksArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmNoticeCallbacksArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmNoticeCallbacksArgs()
         {
         }
+        public static new GetAlarmNoticeCallbacksArgs Empty => new GetAlarmNoticeCallbacksArgs();
     }
 
-    public sealed class GetAlarmNoticeCallbacksInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmNoticeCallbacksInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -114,6 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmNoticeCallbacksInvokeArgs()
         {
         }
+        public static new GetAlarmNoticeCallbacksInvokeArgs Empty => new GetAlarmNoticeCallbacksInvokeArgs();
     }
 
 

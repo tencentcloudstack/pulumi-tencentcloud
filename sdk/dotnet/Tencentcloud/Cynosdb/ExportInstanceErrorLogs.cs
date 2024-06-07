@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exportInstanceErrorLogs = new Tencentcloud.Cynosdb.ExportInstanceErrorLogs("exportInstanceErrorLogs", new()
     ///     {
-    ///         var exportInstanceErrorLogs = new Tencentcloud.Cynosdb.ExportInstanceErrorLogs("exportInstanceErrorLogs", new Tencentcloud.Cynosdb.ExportInstanceErrorLogsArgs
+    ///         EndTime = "2022-01-01 14:00:00",
+    ///         FileType = "csv",
+    ///         InstanceId = "cynosdbmysql-ins-afqx1hy0",
+    ///         KeyWords = new[]
     ///         {
-    ///             EndTime = "2022-01-01 14:00:00",
-    ///             FileType = "csv",
-    ///             InstanceId = "cynosdbmysql-ins-afqx1hy0",
-    ///             KeyWords = 
-    ///             {
-    ///                 "content",
-    ///             },
-    ///             LogLevels = 
-    ///             {
-    ///                 "note",
-    ///             },
-    ///             OrderBy = "Timestamp",
-    ///             OrderByType = "ASC",
-    ///             StartTime = "2022-01-01 12:00:00",
-    ///         });
-    ///     }
+    ///             "content",
+    ///         },
+    ///         LogLevels = new[]
+    ///         {
+    ///             "note",
+    ///         },
+    ///         OrderBy = "Timestamp",
+    ///         OrderByType = "ASC",
+    ///         StartTime = "2022-01-01 12:00:00",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/exportInstanceErrorLogs:ExportInstanceErrorLogs")]
-    public partial class ExportInstanceErrorLogs : Pulumi.CustomResource
+    public partial class ExportInstanceErrorLogs : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Latest log time.
@@ -147,7 +148,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class ExportInstanceErrorLogsArgs : Pulumi.ResourceArgs
+    public sealed class ExportInstanceErrorLogsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Latest log time.
@@ -212,9 +213,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ExportInstanceErrorLogsArgs()
         {
         }
+        public static new ExportInstanceErrorLogsArgs Empty => new ExportInstanceErrorLogsArgs();
     }
 
-    public sealed class ExportInstanceErrorLogsState : Pulumi.ResourceArgs
+    public sealed class ExportInstanceErrorLogsState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Latest log time.
@@ -291,5 +293,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ExportInstanceErrorLogsState()
         {
         }
+        public static new ExportInstanceErrorLogsState Empty => new ExportInstanceErrorLogsState();
     }
 }

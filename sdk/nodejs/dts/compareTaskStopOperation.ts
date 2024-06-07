@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const compareTaskStopOperation = new tencentcloud.Dts.CompareTaskStopOperation("compare_task_stop_operation", {
+ * const compareTaskStopOperation = new tencentcloud.dts.CompareTaskStopOperation("compareTaskStopOperation", {
  *     compareTaskId: "dts-8yv4w2i1-cmp-37skmii9",
  *     jobId: "dts-8yv4w2i1",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class CompareTaskStopOperation extends pulumi.CustomResource {
     /**

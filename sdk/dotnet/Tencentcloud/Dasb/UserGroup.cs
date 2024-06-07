@@ -15,50 +15,51 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var example = new Tencentcloud.Dasb.UserGroup("example", new Tencentcloud.Dasb.UserGroupArgs
-    ///         {
-    ///         });
-    ///     }
+    ///     var example = new Tencentcloud.Dasb.UserGroup("example");
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Or
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Dasb.UserGroup("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Dasb.UserGroup("example", new Tencentcloud.Dasb.UserGroupArgs
-    ///         {
-    ///             DepartmentId = "1.2",
-    ///         });
-    ///     }
+    ///         DepartmentId = "1.2",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dasb user_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dasb/userGroup:UserGroup example 16
+    /// $ pulumi import tencentcloud:Dasb/userGroup:UserGroup example 16
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/userGroup:UserGroup")]
-    public partial class UserGroup : Pulumi.CustomResource
+    public partial class UserGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the department to which the user group belongs, such as: 1.2.3.
@@ -117,7 +118,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         }
     }
 
-    public sealed class UserGroupArgs : Pulumi.ResourceArgs
+    public sealed class UserGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the department to which the user group belongs, such as: 1.2.3.
@@ -134,9 +135,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public UserGroupArgs()
         {
         }
+        public static new UserGroupArgs Empty => new UserGroupArgs();
     }
 
-    public sealed class UserGroupState : Pulumi.ResourceArgs
+    public sealed class UserGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the department to which the user group belongs, such as: 1.2.3.
@@ -153,5 +155,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public UserGroupState()
         {
         }
+        public static new UserGroupState Empty => new UserGroupState();
     }
 }

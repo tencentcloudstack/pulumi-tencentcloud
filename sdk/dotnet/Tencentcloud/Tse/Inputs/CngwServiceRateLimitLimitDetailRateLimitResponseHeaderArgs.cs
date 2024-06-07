@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs : Pulumi.ResourceArgs
+    public sealed class CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// key of header.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs()
         {
         }
+        public static new CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs Empty => new CngwServiceRateLimitLimitDetailRateLimitResponseHeaderArgs();
     }
 }

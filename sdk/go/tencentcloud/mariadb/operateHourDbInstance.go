@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mariadb activateHourDbInstance
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.NewOperateHourDbInstance(ctx, "activateHourDbInstance", &Mariadb.OperateHourDbInstanceArgs{
-// 			InstanceId: pulumi.String("tdsql-9vqvls95"),
-// 			Operate:    pulumi.String("activate"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.NewOperateHourDbInstance(ctx, "activateHourDbInstance", &Mariadb.OperateHourDbInstanceArgs{
+//				InstanceId: pulumi.String("tdsql-9vqvls95"),
+//				Operate:    pulumi.String("activate"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type OperateHourDbInstance struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewOperateHourDbInstance(ctx *pulumi.Context,
 	if args.Operate == nil {
 		return nil, errors.New("invalid value for required argument 'Operate'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OperateHourDbInstance
 	err := ctx.RegisterResource("tencentcloud:Mariadb/operateHourDbInstance:OperateHourDbInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *OperateHourDbInstance) ToOperateHourDbInstanceOutputWithContext(ctx con
 // OperateHourDbInstanceArrayInput is an input type that accepts OperateHourDbInstanceArray and OperateHourDbInstanceArrayOutput values.
 // You can construct a concrete instance of `OperateHourDbInstanceArrayInput` via:
 //
-//          OperateHourDbInstanceArray{ OperateHourDbInstanceArgs{...} }
+//	OperateHourDbInstanceArray{ OperateHourDbInstanceArgs{...} }
 type OperateHourDbInstanceArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i OperateHourDbInstanceArray) ToOperateHourDbInstanceArrayOutputWithContex
 // OperateHourDbInstanceMapInput is an input type that accepts OperateHourDbInstanceMap and OperateHourDbInstanceMapOutput values.
 // You can construct a concrete instance of `OperateHourDbInstanceMapInput` via:
 //
-//          OperateHourDbInstanceMap{ "key": OperateHourDbInstanceArgs{...} }
+//	OperateHourDbInstanceMap{ "key": OperateHourDbInstanceArgs{...} }
 type OperateHourDbInstanceMapInput interface {
 	pulumi.Input
 

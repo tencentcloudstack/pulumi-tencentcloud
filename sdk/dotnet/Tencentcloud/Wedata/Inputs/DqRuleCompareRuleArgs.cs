@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
 {
 
-    public sealed class DqRuleCompareRuleArgs : Pulumi.ResourceArgs
+    public sealed class DqRuleCompareRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Periodic Indicates the default period of a template, in secondsNote: This field may return null, indicating that a valid value cannot be obtained.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         public DqRuleCompareRuleArgs()
         {
         }
+        public static new DqRuleCompareRuleArgs Empty => new DqRuleCompareRuleArgs();
     }
 }

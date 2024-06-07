@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Inputs
 {
 
-    public sealed class UserDataEngineConfigDataEngineConfigPairGetArgs : Pulumi.ResourceArgs
+    public sealed class UserDataEngineConfigDataEngineConfigPairGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Config key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Inputs
         public UserDataEngineConfigDataEngineConfigPairGetArgs()
         {
         }
+        public static new UserDataEngineConfigDataEngineConfigPairGetArgs Empty => new UserDataEngineConfigDataEngineConfigPairGetArgs();
     }
 }

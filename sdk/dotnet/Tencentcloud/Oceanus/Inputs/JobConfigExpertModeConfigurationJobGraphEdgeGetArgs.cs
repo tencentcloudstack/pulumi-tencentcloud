@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
 {
 
-    public sealed class JobConfigExpertModeConfigurationJobGraphEdgeGetArgs : Pulumi.ResourceArgs
+    public sealed class JobConfigExpertModeConfigurationJobGraphEdgeGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Starting node ID of the edgeNote: This field may return null, indicating that no valid value can be obtained.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
         public JobConfigExpertModeConfigurationJobGraphEdgeGetArgs()
         {
         }
+        public static new JobConfigExpertModeConfigurationJobGraphEdgeGetArgs Empty => new JobConfigExpertModeConfigurationJobGraphEdgeGetArgs();
     }
 }

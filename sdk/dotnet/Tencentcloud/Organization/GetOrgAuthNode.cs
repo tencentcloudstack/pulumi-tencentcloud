@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// <summary>
         /// Use this data source to query detailed information of organization org_auth_node
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var orgAuthNode = Output.Create(Tencentcloud.Organization.GetOrgAuthNode.InvokeAsync());
-        ///     }
+        ///     var orgAuthNode = Tencentcloud.Organization.GetOrgAuthNode.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetOrgAuthNodeResult> InvokeAsync(GetOrgAuthNodeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOrgAuthNodeResult>("tencentcloud:Organization/getOrgAuthNode:getOrgAuthNode", args ?? new GetOrgAuthNodeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgAuthNodeResult>("tencentcloud:Organization/getOrgAuthNode:getOrgAuthNode", args ?? new GetOrgAuthNodeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of organization org_auth_node
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var orgAuthNode = Output.Create(Tencentcloud.Organization.GetOrgAuthNode.InvokeAsync());
-        ///     }
+        ///     var orgAuthNode = Tencentcloud.Organization.GetOrgAuthNode.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetOrgAuthNodeResult> Invoke(GetOrgAuthNodeInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOrgAuthNodeResult>("tencentcloud:Organization/getOrgAuthNode:getOrgAuthNode", args ?? new GetOrgAuthNodeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrgAuthNodeResult>("tencentcloud:Organization/getOrgAuthNode:getOrgAuthNode", args ?? new GetOrgAuthNodeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetOrgAuthNodeArgs : Pulumi.InvokeArgs
+    public sealed class GetOrgAuthNodeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Verified company name.
@@ -83,9 +77,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public GetOrgAuthNodeArgs()
         {
         }
+        public static new GetOrgAuthNodeArgs Empty => new GetOrgAuthNodeArgs();
     }
 
-    public sealed class GetOrgAuthNodeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetOrgAuthNodeInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Verified company name.
@@ -102,6 +97,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public GetOrgAuthNodeInvokeArgs()
         {
         }
+        public static new GetOrgAuthNodeInvokeArgs Empty => new GetOrgAuthNodeInvokeArgs();
     }
 
 

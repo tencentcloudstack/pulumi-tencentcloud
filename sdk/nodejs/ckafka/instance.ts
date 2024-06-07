@@ -2,19 +2,22 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this resource to create ckafka instance.
  *
  * ## Example Usage
+ *
  * ### Basic Instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const vpcId = config.get("vpcId") || "vpc-68vi2d3h";
@@ -25,7 +28,7 @@ import * as utilities from "../utilities";
  * });
  * const kafkaInstancePrepaid = new tencentcloud.ckafka.Instance("kafkaInstancePrepaid", {
  *     instanceName: "ckafka-instance-prepaid",
- *     zoneId: gz.then(gz => gz.zones?[0]?.id),
+ *     zoneId: gz.then(gz => gz.zones?.[0]?.id),
  *     period: 1,
  *     vpcId: vpcId,
  *     subnetId: subnetId,
@@ -49,7 +52,7 @@ import * as utilities from "../utilities";
  * });
  * const kafkaInstancePostpaid = new tencentcloud.ckafka.Instance("kafkaInstancePostpaid", {
  *     instanceName: "ckafka-instance-postpaid",
- *     zoneId: gz.then(gz => gz.zones?[0]?.id),
+ *     zoneId: gz.then(gz => gz.zones?.[0]?.id),
  *     vpcId: vpcId,
  *     subnetId: subnetId,
  *     msgRetentionTime: 1300,
@@ -69,12 +72,15 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Multi zone Instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const vpcId = config.get("vpcId") || "vpc-68vi2d3h";
@@ -89,11 +95,11 @@ import * as utilities from "../utilities";
  * });
  * const kafkaInstance = new tencentcloud.ckafka.Instance("kafkaInstance", {
  *     instanceName: "ckafka-instance-maz-tf-test",
- *     zoneId: gz3.then(gz3 => gz3.zones?[0]?.id),
+ *     zoneId: gz3.then(gz3 => gz3.zones?.[0]?.id),
  *     multiZoneFlag: true,
  *     zoneIds: [
- *         gz3.then(gz3 => gz3.zones?[0]?.id),
- *         gz6.then(gz6 => gz6.zones?[0]?.id),
+ *         gz3.then(gz3 => gz3.zones?.[0]?.id),
+ *         gz6.then(gz6 => gz6.zones?.[0]?.id),
  *     ],
  *     period: 1,
  *     vpcId: vpcId,
@@ -113,13 +119,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ckafka instance can be imported using the instance_id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ckafka/instance:Instance foo ckafka-f9ife4zz
+ * $ pulumi import tencentcloud:Ckafka/instance:Instance foo ckafka-f9ife4zz
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -207,9 +214,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly period!: pulumi.Output<number | undefined>;
     /**
-     * It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
-     *
-     * @deprecated It has been deprecated from version 1.81.6. If set public network value, it will cause error.
+     * Bandwidth of the public network.
      */
     public readonly publicNetwork!: pulumi.Output<number>;
     /**
@@ -235,7 +240,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
      *
-     * @deprecated It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
+     * @deprecated It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead.
      */
     public readonly tags!: pulumi.Output<outputs.Ckafka.InstanceTag[]>;
     /**
@@ -407,9 +412,7 @@ export interface InstanceState {
      */
     period?: pulumi.Input<number>;
     /**
-     * It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
-     *
-     * @deprecated It has been deprecated from version 1.81.6. If set public network value, it will cause error.
+     * Bandwidth of the public network.
      */
     publicNetwork?: pulumi.Input<number>;
     /**
@@ -435,7 +438,7 @@ export interface InstanceState {
     /**
      * It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
      *
-     * @deprecated It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
+     * @deprecated It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead.
      */
     tags?: pulumi.Input<pulumi.Input<inputs.Ckafka.InstanceTag>[]>;
     /**
@@ -527,9 +530,7 @@ export interface InstanceArgs {
      */
     period?: pulumi.Input<number>;
     /**
-     * It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
-     *
-     * @deprecated It has been deprecated from version 1.81.6. If set public network value, it will cause error.
+     * Bandwidth of the public network.
      */
     publicNetwork?: pulumi.Input<number>;
     /**
@@ -555,7 +556,7 @@ export interface InstanceArgs {
     /**
      * It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
      *
-     * @deprecated It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
+     * @deprecated It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead.
      */
     tags?: pulumi.Input<pulumi.Input<inputs.Ckafka.InstanceTag>[]>;
     /**

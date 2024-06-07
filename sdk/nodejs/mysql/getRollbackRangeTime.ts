@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const rollbackRangeTime = pulumi.output(tencentcloud.Mysql.getRollbackRangeTime({
+ * const rollbackRangeTime = tencentcloud.Mysql.getRollbackRangeTime({
  *     instanceIds: ["cdb-fitq5t9h"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRollbackRangeTime(args: GetRollbackRangeTimeArgs, opts?: pulumi.InvokeOptions): Promise<GetRollbackRangeTimeResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getRollbackRangeTime:getRollbackRangeTime", {
         "backupRegion": args.backupRegion,
         "instanceIds": args.instanceIds,
@@ -72,9 +72,24 @@ export interface GetRollbackRangeTimeResult {
     readonly items: outputs.Mysql.GetRollbackRangeTimeItem[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mysql rollbackRangeTime
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const rollbackRangeTime = tencentcloud.Mysql.getRollbackRangeTime({
+ *     instanceIds: ["cdb-fitq5t9h"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRollbackRangeTimeOutput(args: GetRollbackRangeTimeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRollbackRangeTimeResult> {
-    return pulumi.output(args).apply(a => getRollbackRangeTime(a, opts))
+    return pulumi.output(args).apply((a: any) => getRollbackRangeTime(a, opts))
 }
 
 /**

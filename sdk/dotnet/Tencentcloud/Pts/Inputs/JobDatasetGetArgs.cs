@@ -11,13 +11,20 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class JobDatasetGetArgs : Pulumi.ResourceArgs
+    public sealed class JobDatasetGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// File ID.
+        /// </summary>
         [Input("fileId")]
         public Input<string>? FileId { get; set; }
 
         [Input("headLines")]
         private InputList<string>? _headLines;
+
+        /// <summary>
+        /// Header data row.
+        /// </summary>
         public InputList<string> HeadLines
         {
             get => _headLines ?? (_headLines = new InputList<string>());
@@ -26,29 +33,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 
         [Input("headerColumns")]
         private InputList<string>? _headerColumns;
+
+        /// <summary>
+        /// Parameter name array.
+        /// </summary>
         public InputList<string> HeaderColumns
         {
             get => _headerColumns ?? (_headerColumns = new InputList<string>());
             set => _headerColumns = value;
         }
 
+        /// <summary>
+        /// Whether the first line is the parameter name.
+        /// </summary>
         [Input("headerInFile", required: true)]
         public Input<bool> HeaderInFile { get; set; } = null!;
 
+        /// <summary>
+        /// Number of file lines.
+        /// </summary>
         [Input("lineCount")]
         public Input<int>? LineCount { get; set; }
 
+        /// <summary>
+        /// The file name where the test dataset is located.
+        /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
 
+        /// <summary>
+        /// Number of file bytes.
+        /// </summary>
         [Input("size")]
         public Input<int>? Size { get; set; }
 
+        /// <summary>
+        /// Test whether the dataset is fragmented.
+        /// </summary>
         [Input("split", required: true)]
         public Input<bool> Split { get; set; } = null!;
 
         [Input("tailLines")]
         private InputList<string>? _tailLines;
+
+        /// <summary>
+        /// Trailing data row.
+        /// </summary>
         public InputList<string> TailLines
         {
             get => _tailLines ?? (_tailLines = new InputList<string>());
@@ -61,11 +91,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         [Input("type")]
         public Input<string>? Type { get; set; }
 
+        /// <summary>
+        /// Update time.
+        /// </summary>
         [Input("updatedAt")]
         public Input<string>? UpdatedAt { get; set; }
 
         public JobDatasetGetArgs()
         {
         }
+        public static new JobDatasetGetArgs Empty => new JobDatasetGetArgs();
     }
 }

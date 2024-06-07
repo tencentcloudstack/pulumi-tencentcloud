@@ -14,16 +14,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Outputs
     [OutputType]
     public sealed class GetEipListResult
     {
+        /// <summary>
+        /// The created time of resource.
+        /// </summary>
         public readonly string CreatedTime;
+        /// <summary>
+        /// Eip PUBLIC IP status.
+        /// </summary>
         public readonly string EipAddressStatus;
+        /// <summary>
+        /// The ID of the bound ENI.
+        /// </summary>
         public readonly string EipBoundRscEni;
+        /// <summary>
+        /// The ID of the resource instance for the binding.
+        /// </summary>
         public readonly string? EipBoundRscIns;
+        /// <summary>
+        /// Bind the resource intranet IP.
+        /// </summary>
         public readonly string EipBoundRscVip;
         public readonly ImmutableArray<string> EipLists;
+        /// <summary>
+        /// The expired time of resource.
+        /// </summary>
         public readonly string ExpiredTime;
+        /// <summary>
+        /// ID of the resource instance.
+        /// </summary>
         public readonly string? InstanceId;
+        /// <summary>
+        /// The modify time of resource.
+        /// </summary>
         public readonly string ModifyTime;
+        /// <summary>
+        /// The protection status of the asset instance.
+        /// </summary>
         public readonly string ProtectionStatus;
+        /// <summary>
+        /// The region where the asset instance is located.
+        /// </summary>
         public readonly string Region;
 
         [OutputConstructor]

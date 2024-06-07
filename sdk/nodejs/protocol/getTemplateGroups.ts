@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const name = pulumi.output(tencentcloud.Protocol.getTemplateGroups({
+ * const name = tencentcloud.Protocol.getTemplateGroups({
  *     name: "test",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTemplateGroups(args?: GetTemplateGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetTemplateGroupsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Protocol/getTemplateGroups:getTemplateGroups", {
         "id": args.id,
         "name": args.name,
@@ -69,9 +69,24 @@ export interface GetTemplateGroupsResult {
     readonly name?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of protocol template groups.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const name = tencentcloud.Protocol.getTemplateGroups({
+ *     name: "test",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTemplateGroupsOutput(args?: GetTemplateGroupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTemplateGroupsResult> {
-    return pulumi.output(args).apply(a => getTemplateGroups(a, opts))
+    return pulumi.output(args).apply((a: any) => getTemplateGroups(a, opts))
 }
 
 /**

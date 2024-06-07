@@ -9,20 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const limits = pulumi.output(tencentcloud.As.getLimits());
+ * const limits = tencentcloud.As.getLimits({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getLimits(args?: GetLimitsArgs, opts?: pulumi.InvokeOptions): Promise<GetLimitsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:As/getLimits:getLimits", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -64,9 +63,22 @@ export interface GetLimitsResult {
     readonly numberOfLaunchConfigurations: number;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of as limits
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const limits = tencentcloud.As.getLimits({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getLimitsOutput(args?: GetLimitsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetLimitsResult> {
-    return pulumi.output(args).apply(a => getLimits(a, opts))
+    return pulumi.output(args).apply((a: any) => getLimits(a, opts))
 }
 
 /**

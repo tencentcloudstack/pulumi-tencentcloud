@@ -14,57 +14,63 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// Provides a resource to create a redis clear_instance_operation
     /// 
     /// ## Example Usage
+    /// 
     /// ### Clear the instance data of the Redis instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var password = config.Get("password") ?? "test12345789";
+    ///     var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
     ///     {
-    ///         var config = new Config();
-    ///         var password = config.Get("password") ?? "test12345789";
-    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
-    ///         {
-    ///             TypeId = 7,
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[1]?.Zone),
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var foo = new Tencentcloud.Redis.Instance("foo", new Tencentcloud.Redis.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[1]?.Zone),
-    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[1]?.TypeId),
-    ///             Password = password,
-    ///             MemSize = 8192,
-    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[1]?.RedisShardNums?[0]),
-    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[1]?.RedisReplicasNums?[0]),
-    ///             Port = 6379,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///         });
-    ///         var clearInstanceOperation = new Tencentcloud.Redis.ClearInstanceOperation("clearInstanceOperation", new Tencentcloud.Redis.ClearInstanceOperationArgs
-    ///         {
-    ///             InstanceId = foo.Id,
-    ///             Password = password,
-    ///         });
-    ///     }
+    ///         TypeId = 7,
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.Zone),
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var foo = new Tencentcloud.Redis.Instance("foo", new()
+    ///     {
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.Zone),
+    ///         TypeId = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.TypeId),
+    ///         Password = password,
+    ///         MemSize = 8192,
+    ///         RedisShardNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.RedisShardNums[0]),
+    ///         RedisReplicasNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.RedisReplicasNums[0]),
+    ///         Port = 6379,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///     });
+    /// 
+    ///     var clearInstanceOperation = new Tencentcloud.Redis.ClearInstanceOperation("clearInstanceOperation", new()
+    ///     {
+    ///         InstanceId = foo.Id,
+    ///         Password = password,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/clearInstanceOperation:ClearInstanceOperation")]
-    public partial class ClearInstanceOperation : Pulumi.CustomResource
+    public partial class ClearInstanceOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The ID of instance.
@@ -102,6 +108,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -123,7 +133,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class ClearInstanceOperationArgs : Pulumi.ResourceArgs
+    public sealed class ClearInstanceOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -131,18 +141,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         [Input("instanceId", required: true)]
         public Input<string> InstanceId { get; set; } = null!;
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Redis instance password (password-free instances do not need to pass passwords, non-password-free instances must be transmitted).
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public ClearInstanceOperationArgs()
         {
         }
+        public static new ClearInstanceOperationArgs Empty => new ClearInstanceOperationArgs();
     }
 
-    public sealed class ClearInstanceOperationState : Pulumi.ResourceArgs
+    public sealed class ClearInstanceOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -150,14 +171,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Redis instance password (password-free instances do not need to pass passwords, non-password-free instances must be transmitted).
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public ClearInstanceOperationState()
         {
         }
+        public static new ClearInstanceOperationState Empty => new ClearInstanceOperationState();
     }
 }

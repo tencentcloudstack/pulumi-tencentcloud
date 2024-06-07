@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class CosShipperContentArgs : Pulumi.ResourceArgs
+    public sealed class CosShipperContentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CSV format content description.Note: this field may return null, indicating that no valid values can be obtained.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public CosShipperContentArgs()
         {
         }
+        public static new CosShipperContentArgs Empty => new CosShipperContentArgs();
     }
 }

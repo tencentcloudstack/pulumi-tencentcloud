@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const gatewayCanaryRules = pulumi.output(tencentcloud.Tse.getGatewayCanaryRules({
+ * const gatewayCanaryRules = tencentcloud.Tse.getGatewayCanaryRules({
  *     gatewayId: "gateway-xxxxxx",
  *     serviceId: "451a9920-e67a-4519-af41-fccac0e72005",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getGatewayCanaryRules(args: GetGatewayCanaryRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewayCanaryRulesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tse/getGatewayCanaryRules:getGatewayCanaryRules", {
         "gatewayId": args.gatewayId,
         "resultOutputFile": args.resultOutputFile,
@@ -70,9 +70,25 @@ export interface GetGatewayCanaryRulesResult {
      */
     readonly serviceId: string;
 }
-
+/**
+ * Use this data source to query detailed information of tse gatewayCanaryRules
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const gatewayCanaryRules = tencentcloud.Tse.getGatewayCanaryRules({
+ *     gatewayId: "gateway-xxxxxx",
+ *     serviceId: "451a9920-e67a-4519-af41-fccac0e72005",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getGatewayCanaryRulesOutput(args: GetGatewayCanaryRulesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGatewayCanaryRulesResult> {
-    return pulumi.output(args).apply(a => getGatewayCanaryRules(a, opts))
+    return pulumi.output(args).apply((a: any) => getGatewayCanaryRules(a, opts))
 }
 
 /**

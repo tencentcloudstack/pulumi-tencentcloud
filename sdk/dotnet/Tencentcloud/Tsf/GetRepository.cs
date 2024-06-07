@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf repository
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var repository = Tencentcloud.Tsf.GetRepository.Invoke(new()
         ///     {
-        ///         var repository = Output.Create(Tencentcloud.Tsf.GetRepository.InvokeAsync(new Tencentcloud.Tsf.GetRepositoryArgs
-        ///         {
-        ///             RepositoryType = "default",
-        ///             SearchWord = "test",
-        ///         }));
-        ///     }
+        ///         RepositoryType = "default",
+        ///         SearchWord = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRepositoryResult> InvokeAsync(GetRepositoryArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRepositoryResult>("tencentcloud:Tsf/getRepository:getRepository", args ?? new GetRepositoryArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRepositoryResult>("tencentcloud:Tsf/getRepository:getRepository", args ?? new GetRepositoryArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf repository
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var repository = Tencentcloud.Tsf.GetRepository.Invoke(new()
         ///     {
-        ///         var repository = Output.Create(Tencentcloud.Tsf.GetRepository.InvokeAsync(new Tencentcloud.Tsf.GetRepositoryArgs
-        ///         {
-        ///             RepositoryType = "default",
-        ///             SearchWord = "test",
-        ///         }));
-        ///     }
+        ///         RepositoryType = "default",
+        ///         SearchWord = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRepositoryResult> Invoke(GetRepositoryInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRepositoryResult>("tencentcloud:Tsf/getRepository:getRepository", args ?? new GetRepositoryInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRepositoryResult>("tencentcloud:Tsf/getRepository:getRepository", args ?? new GetRepositoryInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRepositoryArgs : Pulumi.InvokeArgs
+    public sealed class GetRepositoryArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Repository type (default Repository: default, private Repository: private).
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetRepositoryArgs()
         {
         }
+        public static new GetRepositoryArgs Empty => new GetRepositoryArgs();
     }
 
-    public sealed class GetRepositoryInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRepositoryInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Repository type (default Repository: default, private Repository: private).
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetRepositoryInvokeArgs()
         {
         }
+        public static new GetRepositoryInvokeArgs Empty => new GetRepositoryInvokeArgs();
     }
 
 

@@ -8,39 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dbbrain dbSpaceStatus
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.GetDbSpaceStatus(ctx, &dbbrain.GetDbSpaceStatusArgs{
-// 			InstanceId: fmt.Sprintf("%v%v", "%", "s"),
-// 			Product:    pulumi.StringRef("mysql"),
-// 			RangeDays:  pulumi.IntRef(7),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.GetDbSpaceStatus(ctx, &dbbrain.GetDbSpaceStatusArgs{
+//				InstanceId: "%s",
+//				Product:    pulumi.StringRef("mysql"),
+//				RangeDays:  pulumi.IntRef(7),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetDbSpaceStatus(ctx *pulumi.Context, args *GetDbSpaceStatusArgs, opts ...pulumi.InvokeOption) (*GetDbSpaceStatusResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDbSpaceStatusResult
 	err := ctx.Invoke("tencentcloud:Dbbrain/getDbSpaceStatus:getDbSpaceStatus", args, &rv, opts...)
 	if err != nil {

@@ -7,61 +7,67 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a trocket rocketmqRole
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Trocket"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Trocket"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		rocketmqInstance, err := Trocket.NewRocketmqInstance(ctx, "rocketmqInstance", &Trocket.RocketmqInstanceArgs{
-// 			InstanceType: pulumi.String("EXPERIMENT"),
-// 			SkuCode:      pulumi.String("experiment_500"),
-// 			Remark:       pulumi.String("test"),
-// 			VpcId:        pulumi.String("vpc-xxxxx"),
-// 			SubnetId:     pulumi.String("subnet-xxxxx"),
-// 			Tags: pulumi.AnyMap{
-// 				"tag_key":   pulumi.Any("rocketmq"),
-// 				"tag_value": pulumi.Any("5.x"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		rocketmqRole, err := Trocket.NewRocketmqRole(ctx, "rocketmqRole", &Trocket.RocketmqRoleArgs{
-// 			InstanceId: rocketmqInstance.ID(),
-// 			Role:       pulumi.String("test_role"),
-// 			Remark:     pulumi.String("test for terraform"),
-// 			PermWrite:  pulumi.Bool(false),
-// 			PermRead:   pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		ctx.Export("accessKey", rocketmqRole.AccessKey)
-// 		ctx.Export("secretKey", rocketmqRole.SecretKey)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			rocketmqInstance, err := Trocket.NewRocketmqInstance(ctx, "rocketmqInstance", &Trocket.RocketmqInstanceArgs{
+//				InstanceType: pulumi.String("EXPERIMENT"),
+//				SkuCode:      pulumi.String("experiment_500"),
+//				Remark:       pulumi.String("test"),
+//				VpcId:        pulumi.String("vpc-xxxxx"),
+//				SubnetId:     pulumi.String("subnet-xxxxx"),
+//				Tags: pulumi.Map{
+//					"tag_key":   pulumi.Any("rocketmq"),
+//					"tag_value": pulumi.Any("5.x"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			rocketmqRole, err := Trocket.NewRocketmqRole(ctx, "rocketmqRole", &Trocket.RocketmqRoleArgs{
+//				InstanceId: rocketmqInstance.ID(),
+//				Role:       pulumi.String("test_role"),
+//				Remark:     pulumi.String("test for terraform"),
+//				PermWrite:  pulumi.Bool(false),
+//				PermRead:   pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			ctx.Export("accessKey", rocketmqRole.AccessKey)
+//			ctx.Export("secretKey", rocketmqRole.SecretKey)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // trocket rocketmq_role can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Trocket/rocketmqRole:RocketmqRole rocketmq_role instanceId#role
+// $ pulumi import tencentcloud:Trocket/rocketmqRole:RocketmqRole rocketmq_role instanceId#role
 // ```
 type RocketmqRole struct {
 	pulumi.CustomResourceState
@@ -108,7 +114,7 @@ func NewRocketmqRole(ctx *pulumi.Context,
 	if args.Role == nil {
 		return nil, errors.New("invalid value for required argument 'Role'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RocketmqRole
 	err := ctx.RegisterResource("tencentcloud:Trocket/rocketmqRole:RocketmqRole", name, args, &resource, opts...)
 	if err != nil {
@@ -229,7 +235,7 @@ func (i *RocketmqRole) ToRocketmqRoleOutputWithContext(ctx context.Context) Rock
 // RocketmqRoleArrayInput is an input type that accepts RocketmqRoleArray and RocketmqRoleArrayOutput values.
 // You can construct a concrete instance of `RocketmqRoleArrayInput` via:
 //
-//          RocketmqRoleArray{ RocketmqRoleArgs{...} }
+//	RocketmqRoleArray{ RocketmqRoleArgs{...} }
 type RocketmqRoleArrayInput interface {
 	pulumi.Input
 
@@ -254,7 +260,7 @@ func (i RocketmqRoleArray) ToRocketmqRoleArrayOutputWithContext(ctx context.Cont
 // RocketmqRoleMapInput is an input type that accepts RocketmqRoleMap and RocketmqRoleMapOutput values.
 // You can construct a concrete instance of `RocketmqRoleMapInput` via:
 //
-//          RocketmqRoleMap{ "key": RocketmqRoleArgs{...} }
+//	RocketmqRoleMap{ "key": RocketmqRoleArgs{...} }
 type RocketmqRoleMapInput interface {
 	pulumi.Input
 

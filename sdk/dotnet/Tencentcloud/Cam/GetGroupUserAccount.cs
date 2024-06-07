@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// <summary>
         /// Use this data source to query detailed information of cam group_user_account
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groupUserAccount = Tencentcloud.Cam.GetGroupUserAccount.Invoke(new()
         ///     {
-        ///         var groupUserAccount = Output.Create(Tencentcloud.Cam.GetGroupUserAccount.InvokeAsync(new Tencentcloud.Cam.GetGroupUserAccountArgs
-        ///         {
-        ///             SubUin = 100033690181,
-        ///         }));
-        ///     }
+        ///         SubUin = 100033690181,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGroupUserAccountResult> InvokeAsync(GetGroupUserAccountArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGroupUserAccountResult>("tencentcloud:Cam/getGroupUserAccount:getGroupUserAccount", args ?? new GetGroupUserAccountArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupUserAccountResult>("tencentcloud:Cam/getGroupUserAccount:getGroupUserAccount", args ?? new GetGroupUserAccountArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cam group_user_account
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groupUserAccount = Tencentcloud.Cam.GetGroupUserAccount.Invoke(new()
         ///     {
-        ///         var groupUserAccount = Output.Create(Tencentcloud.Cam.GetGroupUserAccount.InvokeAsync(new Tencentcloud.Cam.GetGroupUserAccountArgs
-        ///         {
-        ///             SubUin = 100033690181,
-        ///         }));
-        ///     }
+        ///         SubUin = 100033690181,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGroupUserAccountResult> Invoke(GetGroupUserAccountInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGroupUserAccountResult>("tencentcloud:Cam/getGroupUserAccount:getGroupUserAccount", args ?? new GetGroupUserAccountInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGroupUserAccountResult>("tencentcloud:Cam/getGroupUserAccount:getGroupUserAccount", args ?? new GetGroupUserAccountInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGroupUserAccountArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupUserAccountArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetGroupUserAccountArgs()
         {
         }
+        public static new GetGroupUserAccountArgs Empty => new GetGroupUserAccountArgs();
     }
 
-    public sealed class GetGroupUserAccountInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupUserAccountInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -132,6 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetGroupUserAccountInvokeArgs()
         {
         }
+        public static new GetGroupUserAccountInvokeArgs Empty => new GetGroupUserAccountInvokeArgs();
     }
 
 

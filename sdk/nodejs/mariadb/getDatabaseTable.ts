@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const databaseTable = pulumi.output(tencentcloud.Mariadb.getDatabaseTable({
+ * const databaseTable = tencentcloud.Mariadb.getDatabaseTable({
  *     dbName: "mysql",
  *     instanceId: "tdsql-e9tklsgz",
  *     table: "server_cost",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDatabaseTable(args: GetDatabaseTableArgs, opts?: pulumi.InvokeOptions): Promise<GetDatabaseTableResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mariadb/getDatabaseTable:getDatabaseTable", {
         "dbName": args.dbName,
         "instanceId": args.instanceId,
@@ -74,9 +74,26 @@ export interface GetDatabaseTableResult {
     readonly resultOutputFile?: string;
     readonly table: string;
 }
-
+/**
+ * Use this data source to query detailed information of mariadb databaseTable
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const databaseTable = tencentcloud.Mariadb.getDatabaseTable({
+ *     dbName: "mysql",
+ *     instanceId: "tdsql-e9tklsgz",
+ *     table: "server_cost",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDatabaseTableOutput(args: GetDatabaseTableOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDatabaseTableResult> {
-    return pulumi.output(args).apply(a => getDatabaseTable(a, opts))
+    return pulumi.output(args).apply((a: any) => getDatabaseTable(a, opts))
 }
 
 /**

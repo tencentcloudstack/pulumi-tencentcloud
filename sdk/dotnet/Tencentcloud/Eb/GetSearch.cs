@@ -13,14 +13,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     public static class GetSearch
     {
         public static Task<GetSearchResult> InvokeAsync(GetSearchArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSearchResult>("tencentcloud:Eb/getSearch:getSearch", args ?? new GetSearchArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSearchResult>("tencentcloud:Eb/getSearch:getSearch", args ?? new GetSearchArgs(), options.WithDefaults());
 
         public static Output<GetSearchResult> Invoke(GetSearchInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSearchResult>("tencentcloud:Eb/getSearch:getSearch", args ?? new GetSearchInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSearchResult>("tencentcloud:Eb/getSearch:getSearch", args ?? new GetSearchInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSearchArgs : Pulumi.InvokeArgs
+    public sealed class GetSearchArgs : global::Pulumi.InvokeArgs
     {
         [Input("endTime", required: true)]
         public int EndTime { get; set; }
@@ -59,9 +59,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public GetSearchArgs()
         {
         }
+        public static new GetSearchArgs Empty => new GetSearchArgs();
     }
 
-    public sealed class GetSearchInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSearchInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("endTime", required: true)]
         public Input<int> EndTime { get; set; } = null!;
@@ -100,6 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public GetSearchInvokeArgs()
         {
         }
+        public static new GetSearchInvokeArgs Empty => new GetSearchInvokeArgs();
     }
 
 

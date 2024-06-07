@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const paramRecords = pulumi.output(tencentcloud.Redis.getParamRecords({
+ * const paramRecords = tencentcloud.Redis.getParamRecords({
  *     instanceId: "crs-c1nl9rpv",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getParamRecords(args: GetParamRecordsArgs, opts?: pulumi.InvokeOptions): Promise<GetParamRecordsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Redis/getParamRecords:getParamRecords", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetParamRecordsResult {
     readonly instanceParamHistories: outputs.Redis.GetParamRecordsInstanceParamHistory[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of redis param records
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const paramRecords = tencentcloud.Redis.getParamRecords({
+ *     instanceId: "crs-c1nl9rpv",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getParamRecordsOutput(args: GetParamRecordsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetParamRecordsResult> {
-    return pulumi.output(args).apply(a => getParamRecords(a, opts))
+    return pulumi.output(args).apply((a: any) => getParamRecords(a, opts))
 }
 
 /**

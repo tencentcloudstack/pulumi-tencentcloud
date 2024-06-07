@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Outputs
     [OutputType]
     public sealed class GetStatisticDataDataResult
     {
+        /// <summary>
+        /// Metric name.
+        /// </summary>
         public readonly string MetricName;
+        /// <summary>
+        /// Monitoring data point.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetStatisticDataDataPointResult> Points;
 
         [OutputConstructor]

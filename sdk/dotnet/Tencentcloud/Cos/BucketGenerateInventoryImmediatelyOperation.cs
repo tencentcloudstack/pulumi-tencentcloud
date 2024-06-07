@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var generateInventoryImmediately = new Tencentcloud.Cos.BucketGenerateInventoryImmediatelyOperation("generateInventoryImmediately", new()
     ///     {
-    ///         var generateInventoryImmediately = new Tencentcloud.Cos.BucketGenerateInventoryImmediatelyOperation("generateInventoryImmediately", new Tencentcloud.Cos.BucketGenerateInventoryImmediatelyOperationArgs
-    ///         {
-    ///             Bucket = "keep-test-xxxxxx",
-    ///             InventoryId = "test",
-    ///         });
-    ///     }
+    ///         Bucket = "keep-test-xxxxxx",
+    ///         InventoryId = "test",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cos/bucketGenerateInventoryImmediatelyOperation:BucketGenerateInventoryImmediatelyOperation")]
-    public partial class BucketGenerateInventoryImmediatelyOperation : Pulumi.CustomResource
+    public partial class BucketGenerateInventoryImmediatelyOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Bucket.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         }
     }
 
-    public sealed class BucketGenerateInventoryImmediatelyOperationArgs : Pulumi.ResourceArgs
+    public sealed class BucketGenerateInventoryImmediatelyOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public BucketGenerateInventoryImmediatelyOperationArgs()
         {
         }
+        public static new BucketGenerateInventoryImmediatelyOperationArgs Empty => new BucketGenerateInventoryImmediatelyOperationArgs();
     }
 
-    public sealed class BucketGenerateInventoryImmediatelyOperationState : Pulumi.ResourceArgs
+    public sealed class BucketGenerateInventoryImmediatelyOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public BucketGenerateInventoryImmediatelyOperationState()
         {
         }
+        public static new BucketGenerateInventoryImmediatelyOperationState Empty => new BucketGenerateInventoryImmediatelyOperationState();
     }
 }

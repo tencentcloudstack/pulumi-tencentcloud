@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tawInstance = new tencentcloud.Rum.TawInstance("taw_instance", {
+ * const tawInstance = new tencentcloud.rum.TawInstance("tawInstance", {
  *     areaId: 1,
  *     chargeType: 1,
  *     dataRetentionDays: 30,
@@ -24,13 +25,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * rum taw_instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Rum/tawInstance:TawInstance taw_instance tawInstance_id
+ * $ pulumi import tencentcloud:Rum/tawInstance:TawInstance taw_instance tawInstance_id
  * ```
  */
 export class TawInstance extends pulumi.CustomResource {

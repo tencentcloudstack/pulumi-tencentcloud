@@ -8,10 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 func GetTawArea(ctx *pulumi.Context, args *GetTawAreaArgs, opts ...pulumi.InvokeOption) (*GetTawAreaResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTawAreaResult
 	err := ctx.Invoke("tencentcloud:Rum/getTawArea:getTawArea", args, &rv, opts...)
 	if err != nil {

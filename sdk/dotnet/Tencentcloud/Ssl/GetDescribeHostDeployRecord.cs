@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_host_deploy_record
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeHostDeployRecord = Tencentcloud.Ssl.GetDescribeHostDeployRecord.Invoke(new()
         ///     {
-        ///         var describeHostDeployRecord = Output.Create(Tencentcloud.Ssl.GetDescribeHostDeployRecord.InvokeAsync(new Tencentcloud.Ssl.GetDescribeHostDeployRecordArgs
-        ///         {
-        ///             CertificateId = "8u8DII0l",
-        ///             ResourceType = "ddos",
-        ///         }));
-        ///     }
+        ///         CertificateId = "8u8DII0l",
+        ///         ResourceType = "ddos",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeHostDeployRecordResult> InvokeAsync(GetDescribeHostDeployRecordArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostDeployRecordResult>("tencentcloud:Ssl/getDescribeHostDeployRecord:getDescribeHostDeployRecord", args ?? new GetDescribeHostDeployRecordArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostDeployRecordResult>("tencentcloud:Ssl/getDescribeHostDeployRecord:getDescribeHostDeployRecord", args ?? new GetDescribeHostDeployRecordArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_host_deploy_record
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeHostDeployRecord = Tencentcloud.Ssl.GetDescribeHostDeployRecord.Invoke(new()
         ///     {
-        ///         var describeHostDeployRecord = Output.Create(Tencentcloud.Ssl.GetDescribeHostDeployRecord.InvokeAsync(new Tencentcloud.Ssl.GetDescribeHostDeployRecordArgs
-        ///         {
-        ///             CertificateId = "8u8DII0l",
-        ///             ResourceType = "ddos",
-        ///         }));
-        ///     }
+        ///         CertificateId = "8u8DII0l",
+        ///         ResourceType = "ddos",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeHostDeployRecordResult> Invoke(GetDescribeHostDeployRecordInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeHostDeployRecordResult>("tencentcloud:Ssl/getDescribeHostDeployRecord:getDescribeHostDeployRecord", args ?? new GetDescribeHostDeployRecordInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostDeployRecordResult>("tencentcloud:Ssl/getDescribeHostDeployRecord:getDescribeHostDeployRecord", args ?? new GetDescribeHostDeployRecordInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeHostDeployRecordArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeHostDeployRecordArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Certificate ID to be deployed.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeHostDeployRecordArgs()
         {
         }
+        public static new GetDescribeHostDeployRecordArgs Empty => new GetDescribeHostDeployRecordArgs();
     }
 
-    public sealed class GetDescribeHostDeployRecordInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeHostDeployRecordInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Certificate ID to be deployed.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeHostDeployRecordInvokeArgs()
         {
         }
+        public static new GetDescribeHostDeployRecordInvokeArgs Empty => new GetDescribeHostDeployRecordInvokeArgs();
     }
 
 

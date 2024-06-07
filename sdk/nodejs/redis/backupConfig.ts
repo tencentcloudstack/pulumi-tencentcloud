@@ -8,12 +8,14 @@ import * as utilities from "../utilities";
  * Use this resource to create a backup config of redis.
  *
  * ## Example Usage
+ *
  * ### Set configuration for automatic backups
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zone = tencentcloud.Redis.getZoneConfig({
  *     typeId: 7,
@@ -21,16 +23,16 @@ import * as utilities from "../utilities";
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
  *     vpcId: vpc.id,
- *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
+ *     availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
  *     cidrBlock: "10.0.1.0/24",
  * });
  * const fooInstance = new tencentcloud.redis.Instance("fooInstance", {
- *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
- *     typeId: zone.then(zone => zone.lists?[1]?.typeId),
+ *     availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
+ *     typeId: zone.then(zone => zone.lists?.[1]?.typeId),
  *     password: "test12345789",
  *     memSize: 8192,
- *     redisShardNum: zone.then(zone => zone.lists?[1]?.redisShardNums?[0]),
- *     redisReplicasNum: zone.then(zone => zone.lists?[1]?.redisReplicasNums?[0]),
+ *     redisShardNum: zone.then(zone => zone.lists?.[1]?.redisShardNums?.[0]),
+ *     redisReplicasNum: zone.then(zone => zone.lists?.[1]?.redisReplicasNums?.[0]),
  *     port: 6379,
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
@@ -41,15 +43,14 @@ import * as utilities from "../utilities";
  *     backupPeriods: ["Monday"],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
- * Redis
- *
- * backup config can be imported, e.g.
+ * Redis  backup config can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig foo redis-id
+ * $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig foo redis-id
  * ```
  */
 export class BackupConfig extends pulumi.CustomResource {

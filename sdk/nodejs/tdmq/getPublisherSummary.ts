@@ -9,23 +9,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const publisherSummary = pulumi.output(tencentcloud.Tdmq.getPublisherSummary({
+ * const publisherSummary = tencentcloud.Tdmq.getPublisherSummary({
  *     clusterId: "pulsar-9n95ax58b9vn",
  *     namespace: "keep-ns",
  *     topic: "keep-topic",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPublisherSummary(args: GetPublisherSummaryArgs, opts?: pulumi.InvokeOptions): Promise<GetPublisherSummaryResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tdmq/getPublisherSummary:getPublisherSummary", {
         "clusterId": args.clusterId,
         "namespace": args.namespace,
@@ -85,9 +84,26 @@ export interface GetPublisherSummaryResult {
     readonly storageSize: number;
     readonly topic: string;
 }
-
+/**
+ * Use this data source to query detailed information of tdmq publisherSummary
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const publisherSummary = tencentcloud.Tdmq.getPublisherSummary({
+ *     clusterId: "pulsar-9n95ax58b9vn",
+ *     namespace: "keep-ns",
+ *     topic: "keep-topic",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPublisherSummaryOutput(args: GetPublisherSummaryOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPublisherSummaryResult> {
-    return pulumi.output(args).apply(a => getPublisherSummary(a, opts))
+    return pulumi.output(args).apply((a: any) => getPublisherSummary(a, opts))
 }
 
 /**

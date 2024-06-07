@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain diag_history
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var diagHistory = Tencentcloud.Dbbrain.GetDiagHistory.Invoke(new()
         ///     {
-        ///         var diagHistory = Output.Create(Tencentcloud.Dbbrain.GetDiagHistory.InvokeAsync(new Tencentcloud.Dbbrain.GetDiagHistoryArgs
-        ///         {
-        ///             EndTime = "%s",
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             StartTime = "%s",
-        ///         }));
-        ///     }
+        ///         EndTime = "%s",
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         StartTime = "%s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDiagHistoryResult> InvokeAsync(GetDiagHistoryArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDiagHistoryResult>("tencentcloud:Dbbrain/getDiagHistory:getDiagHistory", args ?? new GetDiagHistoryArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDiagHistoryResult>("tencentcloud:Dbbrain/getDiagHistory:getDiagHistory", args ?? new GetDiagHistoryArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain diag_history
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var diagHistory = Tencentcloud.Dbbrain.GetDiagHistory.Invoke(new()
         ///     {
-        ///         var diagHistory = Output.Create(Tencentcloud.Dbbrain.GetDiagHistory.InvokeAsync(new Tencentcloud.Dbbrain.GetDiagHistoryArgs
-        ///         {
-        ///             EndTime = "%s",
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             StartTime = "%s",
-        ///         }));
-        ///     }
+        ///         EndTime = "%s",
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         StartTime = "%s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDiagHistoryResult> Invoke(GetDiagHistoryInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDiagHistoryResult>("tencentcloud:Dbbrain/getDiagHistory:getDiagHistory", args ?? new GetDiagHistoryInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDiagHistoryResult>("tencentcloud:Dbbrain/getDiagHistory:getDiagHistory", args ?? new GetDiagHistoryInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDiagHistoryArgs : Pulumi.InvokeArgs
+    public sealed class GetDiagHistoryArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time, such as `2019-09-11 12:13:14`, the interval between the end time and the start time can be up to 2 days.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetDiagHistoryArgs()
         {
         }
+        public static new GetDiagHistoryArgs Empty => new GetDiagHistoryArgs();
     }
 
-    public sealed class GetDiagHistoryInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDiagHistoryInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time, such as `2019-09-11 12:13:14`, the interval between the end time and the start time can be up to 2 days.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetDiagHistoryInvokeArgs()
         {
         }
+        public static new GetDiagHistoryInvokeArgs Empty => new GetDiagHistoryInvokeArgs();
     }
 
 

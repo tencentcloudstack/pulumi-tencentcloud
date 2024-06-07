@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var @event = new Tencentcloud.Mps.Event("event", new()
     ///     {
-    ///         var @event = new Tencentcloud.Mps.Event("event", new Tencentcloud.Mps.EventArgs
-    ///         {
-    ///             Description = "event description",
-    ///             EventName = "you-event-name",
-    ///         });
-    ///     }
+    ///         Description = "event description",
+    ///         EventName = "you-event-name",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mps event can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/event:Event event event_id
+    /// $ pulumi import tencentcloud:Mps/event:Event event event_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/event:Event")]
-    public partial class Event : Pulumi.CustomResource
+    public partial class Event : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Event description.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class EventArgs : Pulumi.ResourceArgs
+    public sealed class EventArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Event description.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public EventArgs()
         {
         }
+        public static new EventArgs Empty => new EventArgs();
     }
 
-    public sealed class EventState : Pulumi.ResourceArgs
+    public sealed class EventState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Event description.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public EventState()
         {
         }
+        public static new EventState Empty => new EventState();
     }
 }

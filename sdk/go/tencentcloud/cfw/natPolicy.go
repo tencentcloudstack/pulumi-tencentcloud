@@ -7,50 +7,56 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cfw natPolicy
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewNatPolicy(ctx, "example", &Cfw.NatPolicyArgs{
-// 			Description:   pulumi.String("policy description."),
-// 			Direction:     pulumi.Int(1),
-// 			Enable:        pulumi.String("true"),
-// 			Port:          pulumi.String("-1/-1"),
-// 			Protocol:      pulumi.String("TCP"),
-// 			RuleAction:    pulumi.String("drop"),
-// 			SourceContent: pulumi.String("1.1.1.1/0"),
-// 			SourceType:    pulumi.String("net"),
-// 			TargetContent: pulumi.String("0.0.0.0/0"),
-// 			TargetType:    pulumi.String("net"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.NewNatPolicy(ctx, "example", &Cfw.NatPolicyArgs{
+//				Description:   pulumi.String("policy description."),
+//				Direction:     pulumi.Int(1),
+//				Enable:        pulumi.String("true"),
+//				Port:          pulumi.String("-1/-1"),
+//				Protocol:      pulumi.String("TCP"),
+//				RuleAction:    pulumi.String("drop"),
+//				SourceContent: pulumi.String("1.1.1.1/0"),
+//				SourceType:    pulumi.String("net"),
+//				TargetContent: pulumi.String("0.0.0.0/0"),
+//				TargetType:    pulumi.String("net"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cfw nat_policy can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfw/natPolicy:NatPolicy example nat_policy_id
+// $ pulumi import tencentcloud:Cfw/natPolicy:NatPolicy example nat_policy_id
 // ```
 type NatPolicy struct {
 	pulumi.CustomResourceState
@@ -112,7 +118,7 @@ func NewNatPolicy(ctx *pulumi.Context,
 	if args.TargetType == nil {
 		return nil, errors.New("invalid value for required argument 'TargetType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource NatPolicy
 	err := ctx.RegisterResource("tencentcloud:Cfw/natPolicy:NatPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -265,7 +271,7 @@ func (i *NatPolicy) ToNatPolicyOutputWithContext(ctx context.Context) NatPolicyO
 // NatPolicyArrayInput is an input type that accepts NatPolicyArray and NatPolicyArrayOutput values.
 // You can construct a concrete instance of `NatPolicyArrayInput` via:
 //
-//          NatPolicyArray{ NatPolicyArgs{...} }
+//	NatPolicyArray{ NatPolicyArgs{...} }
 type NatPolicyArrayInput interface {
 	pulumi.Input
 
@@ -290,7 +296,7 @@ func (i NatPolicyArray) ToNatPolicyArrayOutputWithContext(ctx context.Context) N
 // NatPolicyMapInput is an input type that accepts NatPolicyMap and NatPolicyMapOutput values.
 // You can construct a concrete instance of `NatPolicyMapInput` via:
 //
-//          NatPolicyMap{ "key": NatPolicyArgs{...} }
+//	NatPolicyMap{ "key": NatPolicyArgs{...} }
 type NatPolicyMapInput interface {
 	pulumi.Input
 

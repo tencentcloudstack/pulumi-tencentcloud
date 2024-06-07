@@ -7,73 +7,84 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a teo certificate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.NewCertificateConfig(ctx, "certificate", &Teo.CertificateConfigArgs{
-// 			Host:   pulumi.String("test.tencentcloud-terraform-provider.cn"),
-// 			Mode:   pulumi.String("eofreecert"),
-// 			ZoneId: pulumi.String("zone-2o1t24kgy362"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Teo.NewCertificateConfig(ctx, "certificate", &Teo.CertificateConfigArgs{
+//				Host:   pulumi.String("test.tencentcloud-terraform-provider.cn"),
+//				Mode:   pulumi.String("eofreecert"),
+//				ZoneId: pulumi.String("zone-2o1t24kgy362"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Configure SSL certificate
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.NewCertificateConfig(ctx, "certificate", &Teo.CertificateConfigArgs{
-// 			Host: pulumi.String("test.tencentcloud-terraform-provider.cn"),
-// 			Mode: pulumi.String("sslcert"),
-// 			ServerCertInfos: teo.CertificateConfigServerCertInfoArray{
-// 				&teo.CertificateConfigServerCertInfoArgs{
-// 					CertId: pulumi.String("8xiUJIJd"),
-// 				},
-// 			},
-// 			ZoneId: pulumi.String("zone-2o1t24kgy362"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Teo.NewCertificateConfig(ctx, "certificate", &Teo.CertificateConfigArgs{
+//				Host: pulumi.String("test.tencentcloud-terraform-provider.cn"),
+//				Mode: pulumi.String("sslcert"),
+//				ServerCertInfos: teo.CertificateConfigServerCertInfoArray{
+//					&teo.CertificateConfigServerCertInfoArgs{
+//						CertId: pulumi.String("8xiUJIJd"),
+//					},
+//				},
+//				ZoneId: pulumi.String("zone-2o1t24kgy362"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // teo certificate can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Teo/certificateConfig:CertificateConfig certificate zone_id#host#cert_id
+// $ pulumi import tencentcloud:Teo/certificateConfig:CertificateConfig certificate zone_id#host#cert_id
 // ```
 type CertificateConfig struct {
 	pulumi.CustomResourceState
@@ -101,7 +112,7 @@ func NewCertificateConfig(ctx *pulumi.Context,
 	if args.ZoneId == nil {
 		return nil, errors.New("invalid value for required argument 'ZoneId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CertificateConfig
 	err := ctx.RegisterResource("tencentcloud:Teo/certificateConfig:CertificateConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -198,7 +209,7 @@ func (i *CertificateConfig) ToCertificateConfigOutputWithContext(ctx context.Con
 // CertificateConfigArrayInput is an input type that accepts CertificateConfigArray and CertificateConfigArrayOutput values.
 // You can construct a concrete instance of `CertificateConfigArrayInput` via:
 //
-//          CertificateConfigArray{ CertificateConfigArgs{...} }
+//	CertificateConfigArray{ CertificateConfigArgs{...} }
 type CertificateConfigArrayInput interface {
 	pulumi.Input
 
@@ -223,7 +234,7 @@ func (i CertificateConfigArray) ToCertificateConfigArrayOutputWithContext(ctx co
 // CertificateConfigMapInput is an input type that accepts CertificateConfigMap and CertificateConfigMapOutput values.
 // You can construct a concrete instance of `CertificateConfigMapInput` via:
 //
-//          CertificateConfigMap{ "key": CertificateConfigArgs{...} }
+//	CertificateConfigMap{ "key": CertificateConfigArgs{...} }
 type CertificateConfigMapInput interface {
 	pulumi.Input
 

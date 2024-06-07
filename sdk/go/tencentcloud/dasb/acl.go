@@ -7,83 +7,120 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dasb acl
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewAcl(ctx, "example", &Dasb.AclArgs{
-// 			AcTemplateIdSets: pulumi.StringArray{},
-// 			AccountSets: pulumi.StringArray{
-// 				pulumi.String("root"),
-// 			},
-// 			AllowAccessCredential: pulumi.Bool(true),
-// 			AllowAnyAccount:       pulumi.Bool(false),
-// 			AllowClipFileDown:     pulumi.Bool(true),
-// 			AllowClipFileUp:       pulumi.Bool(true),
-// 			AllowClipTextDown:     pulumi.Bool(true),
-// 			AllowClipTextUp:       pulumi.Bool(true),
-// 			AllowDiskFileDown:     pulumi.Bool(true),
-// 			AllowDiskFileUp:       pulumi.Bool(true),
-// 			AllowDiskRedirect:     pulumi.Bool(true),
-// 			AllowFileDel:          pulumi.Bool(true),
-// 			AllowFileDown:         pulumi.Bool(true),
-// 			AllowFileUp:           pulumi.Bool(true),
-// 			AllowShellFileDown:    pulumi.Bool(true),
-// 			AllowShellFileUp:      pulumi.Bool(true),
-// 			CmdTemplateIdSets: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(7),
-// 			},
-// 			DepartmentId: pulumi.String("1.2"),
-// 			DeviceGroupIdSets: pulumi.IntArray{
-// 				pulumi.Int(2),
-// 				pulumi.Int(3),
-// 			},
-// 			DeviceIdSets: pulumi.IntArray{
-// 				pulumi.Int(39),
-// 				pulumi.Int(81),
-// 			},
-// 			MaxFileDownSize: pulumi.Int(0),
-// 			MaxFileUpSize:   pulumi.Int(0),
-// 			UserGroupIdSets: pulumi.IntArray{
-// 				pulumi.Int(6),
-// 				pulumi.Int(36),
-// 			},
-// 			UserIdSets: pulumi.IntArray{
-// 				pulumi.Int(6),
-// 				pulumi.Int(2),
-// 			},
-// 			ValidateFrom: pulumi.String("2023-09-22T00:00:00+08:00"),
-// 			ValidateTo:   pulumi.String("2024-09-23T00:00:00+08:00"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleUser, err := Dasb.NewUser(ctx, "exampleUser", &Dasb.UserArgs{
+//				UserName: pulumi.String("tf_example"),
+//				RealName: pulumi.String("terraform"),
+//				Phone:    pulumi.String("+86|18345678782"),
+//				Email:    pulumi.String("demo@tencent.com"),
+//				AuthType: pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleUserGroup, err := Dasb.NewUserGroup(ctx, "exampleUserGroup", nil)
+//			if err != nil {
+//				return err
+//			}
+//			exampleDevice, err := Dasb.NewDevice(ctx, "exampleDevice", &Dasb.DeviceArgs{
+//				OsName: pulumi.String("Linux"),
+//				Ip:     pulumi.String("192.168.0.1"),
+//				Port:   pulumi.Int(80),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleDeviceGroup, err := Dasb.NewDeviceGroup(ctx, "exampleDeviceGroup", nil)
+//			if err != nil {
+//				return err
+//			}
+//			exampleDeviceAccount, err := Dasb.NewDeviceAccount(ctx, "exampleDeviceAccount", &Dasb.DeviceAccountArgs{
+//				DeviceId: exampleDevice.ID(),
+//				Account:  pulumi.String("root"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleCmdTemplate, err := Dasb.NewCmdTemplate(ctx, "exampleCmdTemplate", &Dasb.CmdTemplateArgs{
+//				CmdList: pulumi.String("rm -rf*"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dasb.NewAcl(ctx, "exampleAcl", &Dasb.AclArgs{
+//				AllowDiskRedirect: pulumi.Bool(true),
+//				AllowAnyAccount:   pulumi.Bool(false),
+//				AllowClipFileUp:   pulumi.Bool(true),
+//				AllowClipFileDown: pulumi.Bool(true),
+//				AllowClipTextUp:   pulumi.Bool(true),
+//				AllowClipTextDown: pulumi.Bool(true),
+//				AllowFileUp:       pulumi.Bool(true),
+//				AllowFileDown:     pulumi.Bool(true),
+//				MaxFileUpSize:     pulumi.Int(0),
+//				MaxFileDownSize:   pulumi.Int(0),
+//				UserIdSets: pulumi.IntArray{
+//					exampleUser.ID(),
+//				},
+//				UserGroupIdSets: pulumi.IntArray{
+//					exampleUserGroup.ID(),
+//				},
+//				DeviceIdSets: pulumi.IntArray{
+//					exampleDevice.ID(),
+//				},
+//				DeviceGroupIdSets: pulumi.IntArray{
+//					exampleDeviceGroup.ID(),
+//				},
+//				AccountSets: pulumi.StringArray{
+//					exampleDeviceAccount.ID(),
+//				},
+//				CmdTemplateIdSets: pulumi.IntArray{
+//					exampleCmdTemplate.ID(),
+//				},
+//				AcTemplateIdSets:      pulumi.StringArray{},
+//				AllowDiskFileUp:       pulumi.Bool(true),
+//				AllowDiskFileDown:     pulumi.Bool(true),
+//				AllowShellFileUp:      pulumi.Bool(true),
+//				AllowShellFileDown:    pulumi.Bool(true),
+//				AllowFileDel:          pulumi.Bool(true),
+//				AllowAccessCredential: pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dasb acl can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dasb/acl:Acl example 132
+// $ pulumi import tencentcloud:Dasb/acl:Acl example 132
 // ```
 type Acl struct {
 	pulumi.CustomResourceState
@@ -139,9 +176,9 @@ type Acl struct {
 	// Associated set of user IDs.
 	UserIdSets pulumi.IntArrayOutput `pulumi:"userIdSets"`
 	// Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.
-	ValidateFrom pulumi.StringPtrOutput `pulumi:"validateFrom"`
+	ValidateFrom pulumi.StringOutput `pulumi:"validateFrom"`
 	// Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.
-	ValidateTo pulumi.StringPtrOutput `pulumi:"validateTo"`
+	ValidateTo pulumi.StringOutput `pulumi:"validateTo"`
 }
 
 // NewAcl registers a new resource with the given unique name, arguments, and options.
@@ -157,7 +194,7 @@ func NewAcl(ctx *pulumi.Context,
 	if args.AllowDiskRedirect == nil {
 		return nil, errors.New("invalid value for required argument 'AllowDiskRedirect'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Acl
 	err := ctx.RegisterResource("tencentcloud:Dasb/acl:Acl", name, args, &resource, opts...)
 	if err != nil {
@@ -438,7 +475,7 @@ func (i *Acl) ToAclOutputWithContext(ctx context.Context) AclOutput {
 // AclArrayInput is an input type that accepts AclArray and AclArrayOutput values.
 // You can construct a concrete instance of `AclArrayInput` via:
 //
-//          AclArray{ AclArgs{...} }
+//	AclArray{ AclArgs{...} }
 type AclArrayInput interface {
 	pulumi.Input
 
@@ -463,7 +500,7 @@ func (i AclArray) ToAclArrayOutputWithContext(ctx context.Context) AclArrayOutpu
 // AclMapInput is an input type that accepts AclMap and AclMapOutput values.
 // You can construct a concrete instance of `AclMapInput` via:
 //
-//          AclMap{ "key": AclArgs{...} }
+//	AclMap{ "key": AclArgs{...} }
 type AclMapInput interface {
 	pulumi.Input
 
@@ -625,13 +662,13 @@ func (o AclOutput) UserIdSets() pulumi.IntArrayOutput {
 }
 
 // Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.
-func (o AclOutput) ValidateFrom() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Acl) pulumi.StringPtrOutput { return v.ValidateFrom }).(pulumi.StringPtrOutput)
+func (o AclOutput) ValidateFrom() pulumi.StringOutput {
+	return o.ApplyT(func(v *Acl) pulumi.StringOutput { return v.ValidateFrom }).(pulumi.StringOutput)
 }
 
 // Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.
-func (o AclOutput) ValidateTo() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Acl) pulumi.StringPtrOutput { return v.ValidateTo }).(pulumi.StringPtrOutput)
+func (o AclOutput) ValidateTo() pulumi.StringOutput {
+	return o.ApplyT(func(v *Acl) pulumi.StringOutput { return v.ValidateTo }).(pulumi.StringOutput)
 }
 
 type AclArrayOutput struct{ *pulumi.OutputState }

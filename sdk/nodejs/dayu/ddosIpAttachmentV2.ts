@@ -2,28 +2,12 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a antiddos ip. Only support for bgp-multip.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const boundip = new tencentcloud.Dayu.DdosIpAttachmentV2("boundip", {
- *     boundIpLists: [{
- *         bizType: "public",
- *         deviceType: "cvm",
- *         instanceId: "ins-xxx",
- *         ip: "1.1.1.1",
- *     }],
- *     id: "bgp-xxxxxx",
- * });
- * ```
  */
 export class DdosIpAttachmentV2 extends pulumi.CustomResource {
     /**

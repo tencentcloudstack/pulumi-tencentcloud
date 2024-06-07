@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var diskBackup = new Tencentcloud.Lighthouse.DiskBackup("diskBackup", new()
     ///     {
-    ///         var diskBackup = new Tencentcloud.Lighthouse.DiskBackup("diskBackup", new Tencentcloud.Lighthouse.DiskBackupArgs
-    ///         {
-    ///             DiskBackupName = "disk-backup",
-    ///             DiskId = "lhdisk-xxxxx",
-    ///         });
-    ///     }
+    ///         DiskBackupName = "disk-backup",
+    ///         DiskId = "lhdisk-xxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// lighthouse disk_backup can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Lighthouse/diskBackup:DiskBackup disk_backup disk_backup_id
+    /// $ pulumi import tencentcloud:Lighthouse/diskBackup:DiskBackup disk_backup disk_backup_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/diskBackup:DiskBackup")]
-    public partial class DiskBackup : Pulumi.CustomResource
+    public partial class DiskBackup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Disk backup name. The maximum length is 90 characters.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class DiskBackupArgs : Pulumi.ResourceArgs
+    public sealed class DiskBackupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Disk backup name. The maximum length is 90 characters.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public DiskBackupArgs()
         {
         }
+        public static new DiskBackupArgs Empty => new DiskBackupArgs();
     }
 
-    public sealed class DiskBackupState : Pulumi.ResourceArgs
+    public sealed class DiskBackupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Disk backup name. The maximum length is 90 characters.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public DiskBackupState()
         {
         }
+        public static new DiskBackupState Empty => new DiskBackupState();
     }
 }

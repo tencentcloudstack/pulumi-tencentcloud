@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const keyvalConfig = new tencentcloud.Clickhouse.KeyvalConfig("keyval_config", {
+ * const keyvalConfig = new tencentcloud.clickhouse.KeyvalConfig("keyvalConfig", {
  *     instanceId: "cdwch-datuhk3z",
  *     items: {
  *         confKey: "max_open_files",
@@ -22,13 +24,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * clickhouse config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clickhouse/keyvalConfig:KeyvalConfig config cdwch-datuhk3z#max_open_files#50000
+ * $ pulumi import tencentcloud:Clickhouse/keyvalConfig:KeyvalConfig config cdwch-datuhk3z#max_open_files#50000
  * ```
  */
 export class KeyvalConfig extends pulumi.CustomResource {

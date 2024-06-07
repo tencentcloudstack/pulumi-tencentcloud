@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum log_url_statistics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var logUrlStatistics = Tencentcloud.Rum.GetLogUrlStatistics.Invoke(new()
         ///     {
-        ///         var logUrlStatistics = Output.Create(Tencentcloud.Rum.GetLogUrlStatistics.InvokeAsync(new Tencentcloud.Rum.GetLogUrlStatisticsArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "analysis",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "analysis",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetLogUrlStatisticsResult> InvokeAsync(GetLogUrlStatisticsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetLogUrlStatisticsResult>("tencentcloud:Rum/getLogUrlStatistics:getLogUrlStatistics", args ?? new GetLogUrlStatisticsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogUrlStatisticsResult>("tencentcloud:Rum/getLogUrlStatistics:getLogUrlStatistics", args ?? new GetLogUrlStatisticsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum log_url_statistics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var logUrlStatistics = Tencentcloud.Rum.GetLogUrlStatistics.Invoke(new()
         ///     {
-        ///         var logUrlStatistics = Output.Create(Tencentcloud.Rum.GetLogUrlStatistics.InvokeAsync(new Tencentcloud.Rum.GetLogUrlStatisticsArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "analysis",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "analysis",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetLogUrlStatisticsResult> Invoke(GetLogUrlStatisticsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetLogUrlStatisticsResult>("tencentcloud:Rum/getLogUrlStatistics:getLogUrlStatistics", args ?? new GetLogUrlStatisticsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetLogUrlStatisticsResult>("tencentcloud:Rum/getLogUrlStatistics:getLogUrlStatistics", args ?? new GetLogUrlStatisticsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetLogUrlStatisticsArgs : Pulumi.InvokeArgs
+    public sealed class GetLogUrlStatisticsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -215,9 +209,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetLogUrlStatisticsArgs()
         {
         }
+        public static new GetLogUrlStatisticsArgs Empty => new GetLogUrlStatisticsArgs();
     }
 
-    public sealed class GetLogUrlStatisticsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetLogUrlStatisticsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -354,6 +349,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetLogUrlStatisticsInvokeArgs()
         {
         }
+        public static new GetLogUrlStatisticsInvokeArgs Empty => new GetLogUrlStatisticsInvokeArgs();
     }
 
 

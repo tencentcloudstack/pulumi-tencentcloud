@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var task = new Tencentcloud.Dbbrain.SecurityAuditLogExportTask("task", new()
     ///     {
-    ///         var task = new Tencentcloud.Dbbrain.SecurityAuditLogExportTask("task", new Tencentcloud.Dbbrain.SecurityAuditLogExportTaskArgs
+    ///         DangerLevels = new[]
     ///         {
-    ///             DangerLevels = 
-    ///             {
-    ///                 0,
-    ///                 1,
-    ///                 2,
-    ///             },
-    ///             EndTime = "2020-12-28 01:00:00",
-    ///             Product = "mysql",
-    ///             SecAuditGroupId = "sec_audit_group_id",
-    ///             StartTime = "2020-12-28 00:00:00",
-    ///         });
-    ///     }
+    ///             0,
+    ///             1,
+    ///             2,
+    ///         },
+    ///         EndTime = "2020-12-28 01:00:00",
+    ///         Product = "mysql",
+    ///         SecAuditGroupId = "sec_audit_group_id",
+    ///         StartTime = "2020-12-28 00:00:00",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dbbrain/securityAuditLogExportTask:SecurityAuditLogExportTask")]
-    public partial class SecurityAuditLogExportTask : Pulumi.CustomResource
+    public partial class SecurityAuditLogExportTask : global::Pulumi.CustomResource
     {
         /// <summary>
         /// request of async id.
@@ -125,7 +126,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         }
     }
 
-    public sealed class SecurityAuditLogExportTaskArgs : Pulumi.ResourceArgs
+    public sealed class SecurityAuditLogExportTaskArgs : global::Pulumi.ResourceArgs
     {
         [Input("dangerLevels")]
         private InputList<int>? _dangerLevels;
@@ -166,9 +167,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public SecurityAuditLogExportTaskArgs()
         {
         }
+        public static new SecurityAuditLogExportTaskArgs Empty => new SecurityAuditLogExportTaskArgs();
     }
 
-    public sealed class SecurityAuditLogExportTaskState : Pulumi.ResourceArgs
+    public sealed class SecurityAuditLogExportTaskState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// request of async id.
@@ -215,5 +217,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public SecurityAuditLogExportTaskState()
         {
         }
+        public static new SecurityAuditLogExportTaskState Empty => new SecurityAuditLogExportTaskState();
     }
 }

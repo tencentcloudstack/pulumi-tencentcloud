@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a css restartPushTask
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewPullStreamTaskRestart(ctx, "restartPushTask", &Css.PullStreamTaskRestartArgs{
-// 			Operator: pulumi.String("tf-test"),
-// 			TaskId:   pulumi.String("3573"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewPullStreamTaskRestart(ctx, "restartPushTask", &Css.PullStreamTaskRestartArgs{
+//				Operator: pulumi.String("tf-test"),
+//				TaskId:   pulumi.String("3573"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type PullStreamTaskRestart struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewPullStreamTaskRestart(ctx *pulumi.Context,
 	if args.TaskId == nil {
 		return nil, errors.New("invalid value for required argument 'TaskId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource PullStreamTaskRestart
 	err := ctx.RegisterResource("tencentcloud:Css/pullStreamTaskRestart:PullStreamTaskRestart", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *PullStreamTaskRestart) ToPullStreamTaskRestartOutputWithContext(ctx con
 // PullStreamTaskRestartArrayInput is an input type that accepts PullStreamTaskRestartArray and PullStreamTaskRestartArrayOutput values.
 // You can construct a concrete instance of `PullStreamTaskRestartArrayInput` via:
 //
-//          PullStreamTaskRestartArray{ PullStreamTaskRestartArgs{...} }
+//	PullStreamTaskRestartArray{ PullStreamTaskRestartArgs{...} }
 type PullStreamTaskRestartArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i PullStreamTaskRestartArray) ToPullStreamTaskRestartArrayOutputWithContex
 // PullStreamTaskRestartMapInput is an input type that accepts PullStreamTaskRestartMap and PullStreamTaskRestartMapOutput values.
 // You can construct a concrete instance of `PullStreamTaskRestartMapInput` via:
 //
-//          PullStreamTaskRestartMap{ "key": PullStreamTaskRestartArgs{...} }
+//	PullStreamTaskRestartMap{ "key": PullStreamTaskRestartArgs{...} }
 type PullStreamTaskRestartMapInput interface {
 	pulumi.Input
 

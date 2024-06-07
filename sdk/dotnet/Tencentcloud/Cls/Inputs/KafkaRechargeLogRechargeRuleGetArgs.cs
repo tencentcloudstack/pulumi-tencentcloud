@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class KafkaRechargeLogRechargeRuleGetArgs : Pulumi.ResourceArgs
+    public sealed class KafkaRechargeLogRechargeRuleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// default time from.
@@ -112,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public KafkaRechargeLogRechargeRuleGetArgs()
         {
         }
+        public static new KafkaRechargeLogRechargeRuleGetArgs Empty => new KafkaRechargeLogRechargeRuleGetArgs();
     }
 }

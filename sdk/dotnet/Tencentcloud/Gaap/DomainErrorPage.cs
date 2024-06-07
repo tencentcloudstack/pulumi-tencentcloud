@@ -15,50 +15,54 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
     ///     {
-    ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-    ///         {
-    ///             Bandwidth = 10,
-    ///             Concurrent = 2,
-    ///             AccessRegion = "SouthChina",
-    ///             RealserverRegion = "NorthChina",
-    ///         });
-    ///         var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new Tencentcloud.Gaap.Layer7ListenerArgs
-    ///         {
-    ///             Protocol = "HTTP",
-    ///             Port = 80,
-    ///             ProxyId = fooProxy.Id,
-    ///         });
-    ///         var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new Tencentcloud.Gaap.HttpDomainArgs
-    ///         {
-    ///             ListenerId = fooLayer7Listener.Id,
-    ///             Domain = "www.qq.com",
-    ///         });
-    ///         var fooDomainErrorPage = new Tencentcloud.Gaap.DomainErrorPage("fooDomainErrorPage", new Tencentcloud.Gaap.DomainErrorPageArgs
-    ///         {
-    ///             ListenerId = fooLayer7Listener.Id,
-    ///             Domain = fooHttpDomain.Domain,
-    ///             ErrorCodes = 
-    ///             {
-    ///                 404,
-    ///                 503,
-    ///             },
-    ///             Body = "bad request",
-    ///         });
-    ///     }
+    ///         Bandwidth = 10,
+    ///         Concurrent = 2,
+    ///         AccessRegion = "SouthChina",
+    ///         RealserverRegion = "NorthChina",
+    ///     });
     /// 
-    /// }
+    ///     var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
+    ///     {
+    ///         Protocol = "HTTP",
+    ///         Port = 80,
+    ///         ProxyId = fooProxy.Id,
+    ///     });
+    /// 
+    ///     var fooHttpDomain = new Tencentcloud.Gaap.HttpDomain("fooHttpDomain", new()
+    ///     {
+    ///         ListenerId = fooLayer7Listener.Id,
+    ///         Domain = "www.qq.com",
+    ///     });
+    /// 
+    ///     var fooDomainErrorPage = new Tencentcloud.Gaap.DomainErrorPage("fooDomainErrorPage", new()
+    ///     {
+    ///         ListenerId = fooLayer7Listener.Id,
+    ///         Domain = fooHttpDomain.Domain,
+    ///         ErrorCodes = new[]
+    ///         {
+    ///             404,
+    ///             503,
+    ///         },
+    ///         Body = "bad request",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/domainErrorPage:DomainErrorPage")]
-    public partial class DomainErrorPage : Pulumi.CustomResource
+    public partial class DomainErrorPage : global::Pulumi.CustomResource
     {
         /// <summary>
         /// New response body.
@@ -147,7 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         }
     }
 
-    public sealed class DomainErrorPageArgs : Pulumi.ResourceArgs
+    public sealed class DomainErrorPageArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// New response body.
@@ -212,9 +216,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public DomainErrorPageArgs()
         {
         }
+        public static new DomainErrorPageArgs Empty => new DomainErrorPageArgs();
     }
 
-    public sealed class DomainErrorPageState : Pulumi.ResourceArgs
+    public sealed class DomainErrorPageState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// New response body.
@@ -279,5 +284,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public DomainErrorPageState()
         {
         }
+        public static new DomainErrorPageState Empty => new DomainErrorPageState();
     }
 }

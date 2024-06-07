@@ -7,68 +7,74 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tcr tag retention rule.
 //
 // ## Example Usage
+//
 // ### Create a tcr tag retention rule instance
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
-// 			InstanceType: pulumi.String("basic"),
-// 			DeleteBucket: pulumi.Bool(true),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
-// 			InstanceId:   exampleInstance.ID(),
-// 			IsPublic:     pulumi.Bool(true),
-// 			IsAutoScan:   pulumi.Bool(true),
-// 			IsPreventVul: pulumi.Bool(true),
-// 			Severity:     pulumi.String("medium"),
-// 			CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
-// 				&tcr.NamespaceCveWhitelistItemArgs{
-// 					CveId: pulumi.String("cve-xxxxx"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tcr.NewTagRetentionRule(ctx, "myRule", &Tcr.TagRetentionRuleArgs{
-// 			RegistryId:    exampleInstance.ID(),
-// 			NamespaceName: exampleNamespace.Name,
-// 			RetentionRule: &tcr.TagRetentionRuleRetentionRuleArgs{
-// 				Key:   pulumi.String("nDaysSinceLastPush"),
-// 				Value: pulumi.Int(2),
-// 			},
-// 			CronSetting: pulumi.String("daily"),
-// 			Disabled:    pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+//				InstanceType: pulumi.String("basic"),
+//				DeleteBucket: pulumi.Bool(true),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleNamespace, err := Tcr.NewNamespace(ctx, "exampleNamespace", &Tcr.NamespaceArgs{
+//				InstanceId:   exampleInstance.ID(),
+//				IsPublic:     pulumi.Bool(true),
+//				IsAutoScan:   pulumi.Bool(true),
+//				IsPreventVul: pulumi.Bool(true),
+//				Severity:     pulumi.String("medium"),
+//				CveWhitelistItems: tcr.NamespaceCveWhitelistItemArray{
+//					&tcr.NamespaceCveWhitelistItemArgs{
+//						CveId: pulumi.String("cve-xxxxx"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcr.NewTagRetentionRule(ctx, "myRule", &Tcr.TagRetentionRuleArgs{
+//				RegistryId:    exampleInstance.ID(),
+//				NamespaceName: exampleNamespace.Name,
+//				RetentionRule: &tcr.TagRetentionRuleRetentionRuleArgs{
+//					Key:   pulumi.String("nDaysSinceLastPush"),
+//					Value: pulumi.Int(2),
+//				},
+//				CronSetting: pulumi.String("daily"),
+//				Disabled:    pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type TagRetentionRule struct {
 	pulumi.CustomResourceState
 
@@ -105,7 +111,7 @@ func NewTagRetentionRule(ctx *pulumi.Context,
 	if args.RetentionRule == nil {
 		return nil, errors.New("invalid value for required argument 'RetentionRule'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TagRetentionRule
 	err := ctx.RegisterResource("tencentcloud:Tcr/tagRetentionRule:TagRetentionRule", name, args, &resource, opts...)
 	if err != nil {
@@ -214,7 +220,7 @@ func (i *TagRetentionRule) ToTagRetentionRuleOutputWithContext(ctx context.Conte
 // TagRetentionRuleArrayInput is an input type that accepts TagRetentionRuleArray and TagRetentionRuleArrayOutput values.
 // You can construct a concrete instance of `TagRetentionRuleArrayInput` via:
 //
-//          TagRetentionRuleArray{ TagRetentionRuleArgs{...} }
+//	TagRetentionRuleArray{ TagRetentionRuleArgs{...} }
 type TagRetentionRuleArrayInput interface {
 	pulumi.Input
 
@@ -239,7 +245,7 @@ func (i TagRetentionRuleArray) ToTagRetentionRuleArrayOutputWithContext(ctx cont
 // TagRetentionRuleMapInput is an input type that accepts TagRetentionRuleMap and TagRetentionRuleMapOutput values.
 // You can construct a concrete instance of `TagRetentionRuleMapInput` via:
 //
-//          TagRetentionRuleMap{ "key": TagRetentionRuleArgs{...} }
+//	TagRetentionRuleMap{ "key": TagRetentionRuleArgs{...} }
 type TagRetentionRuleMapInput interface {
 	pulumi.Input
 

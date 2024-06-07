@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accessGroup = new tencentcloud.Chdfs.AccessGroup("access_group", {
+ * const accessGroup = new tencentcloud.chdfs.AccessGroup("accessGroup", {
  *     accessGroupName: "testAccessGroup",
  *     description: "test access group",
  *     vpcId: "vpc-4owdpnwr",
  *     vpcType: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * chdfs access_group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Chdfs/accessGroup:AccessGroup access_group access_group_id
+ * $ pulumi import tencentcloud:Chdfs/accessGroup:AccessGroup access_group access_group_id
  * ```
  */
 export class AccessGroup extends pulumi.CustomResource {

@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const keyPairAttachment = new tencentcloud.Lighthouse.KeyPairAttachment("key_pair_attachment", {
+ * const keyPairAttachment = new tencentcloud.lighthouse.KeyPairAttachment("keyPairAttachment", {
  *     instanceId: "lhins-xxxxxx",
  *     keyId: "lhkp-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * lighthouse key_pair_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Lighthouse/keyPairAttachment:KeyPairAttachment key_pair_attachment key_pair_attachment_id
+ * $ pulumi import tencentcloud:Lighthouse/keyPairAttachment:KeyPairAttachment key_pair_attachment key_pair_attachment_id
  * ```
  */
 export class KeyPairAttachment extends pulumi.CustomResource {

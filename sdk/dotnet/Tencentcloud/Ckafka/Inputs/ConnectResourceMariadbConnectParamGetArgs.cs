@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class ConnectResourceMariadbConnectParamGetArgs : Pulumi.ResourceArgs
+    public sealed class ConnectResourceMariadbConnectParamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to update to the associated Datahub task, default: false.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public ConnectResourceMariadbConnectParamGetArgs()
         {
         }
+        public static new ConnectResourceMariadbConnectParamGetArgs Empty => new ConnectResourceMariadbConnectParamGetArgs();
     }
 }

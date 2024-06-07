@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dbbrain sqlTemplates
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.GetSqlTemplates(ctx, &dbbrain.GetSqlTemplatesArgs{
-// 			InstanceId: "",
-// 			Product:    pulumi.StringRef(""),
-// 			Schema:     "",
-// 			SqlText:    "",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.GetSqlTemplates(ctx, &dbbrain.GetSqlTemplatesArgs{
+//				InstanceId: "",
+//				Product:    pulumi.StringRef(""),
+//				Schema:     "",
+//				SqlText:    "",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSqlTemplates(ctx *pulumi.Context, args *GetSqlTemplatesArgs, opts ...pulumi.InvokeOption) (*GetSqlTemplatesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSqlTemplatesResult
 	err := ctx.Invoke("tencentcloud:Dbbrain/getSqlTemplates:getSqlTemplates", args, &rv, opts...)
 	if err != nil {

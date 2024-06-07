@@ -15,80 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// <summary>
         /// Use this data source to query detailed information of CAM users
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cam.GetUsers.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cam.GetUsers.InvokeAsync(new Tencentcloud.Cam.GetUsersArgs
-        ///         {
-        ///             Name = "cam-user-test",
-        ///         }));
-        ///         var bar = Output.Create(Tencentcloud.Cam.GetUsers.InvokeAsync(new Tencentcloud.Cam.GetUsersArgs
-        ///         {
-        ///             Email = "hello@test.com",
-        ///         }));
-        ///         var far = Output.Create(Tencentcloud.Cam.GetUsers.InvokeAsync(new Tencentcloud.Cam.GetUsersArgs
-        ///         {
-        ///             PhoneNum = "12345678910",
-        ///         }));
-        ///     }
+        ///         Name = "cam-user-test",
+        ///     });
         /// 
-        /// }
+        ///     var bar = Tencentcloud.Cam.GetUsers.Invoke(new()
+        ///     {
+        ///         Email = "hello@test.com",
+        ///     });
+        /// 
+        ///     var far = Tencentcloud.Cam.GetUsers.Invoke(new()
+        ///     {
+        ///         PhoneNum = "12345678910",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetUsersResult> InvokeAsync(GetUsersArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetUsersResult>("tencentcloud:Cam/getUsers:getUsers", args ?? new GetUsersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetUsersResult>("tencentcloud:Cam/getUsers:getUsers", args ?? new GetUsersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of CAM users
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cam.GetUsers.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cam.GetUsers.InvokeAsync(new Tencentcloud.Cam.GetUsersArgs
-        ///         {
-        ///             Name = "cam-user-test",
-        ///         }));
-        ///         var bar = Output.Create(Tencentcloud.Cam.GetUsers.InvokeAsync(new Tencentcloud.Cam.GetUsersArgs
-        ///         {
-        ///             Email = "hello@test.com",
-        ///         }));
-        ///         var far = Output.Create(Tencentcloud.Cam.GetUsers.InvokeAsync(new Tencentcloud.Cam.GetUsersArgs
-        ///         {
-        ///             PhoneNum = "12345678910",
-        ///         }));
-        ///     }
+        ///         Name = "cam-user-test",
+        ///     });
         /// 
-        /// }
+        ///     var bar = Tencentcloud.Cam.GetUsers.Invoke(new()
+        ///     {
+        ///         Email = "hello@test.com",
+        ///     });
+        /// 
+        ///     var far = Tencentcloud.Cam.GetUsers.Invoke(new()
+        ///     {
+        ///         PhoneNum = "12345678910",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetUsersResult> Invoke(GetUsersInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetUsersResult>("tencentcloud:Cam/getUsers:getUsers", args ?? new GetUsersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetUsersResult>("tencentcloud:Cam/getUsers:getUsers", args ?? new GetUsersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetUsersArgs : Pulumi.InvokeArgs
+    public sealed class GetUsersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Indicate whether the user can login in.
@@ -147,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetUsersArgs()
         {
         }
+        public static new GetUsersArgs Empty => new GetUsersArgs();
     }
 
-    public sealed class GetUsersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetUsersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Indicate whether the user can login in.
@@ -208,6 +207,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetUsersInvokeArgs()
         {
         }
+        public static new GetUsersInvokeArgs Empty => new GetUsersInvokeArgs();
     }
 
 

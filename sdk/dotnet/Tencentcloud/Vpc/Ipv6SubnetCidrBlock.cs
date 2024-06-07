@@ -18,11 +18,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// vpc ipv6_subnet_cidr_block can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/ipv6SubnetCidrBlock:Ipv6SubnetCidrBlock ipv6_subnet_cidr_block ipv6_subnet_cidr_block_id
+    /// $ pulumi import tencentcloud:Vpc/ipv6SubnetCidrBlock:Ipv6SubnetCidrBlock ipv6_subnet_cidr_block ipv6_subnet_cidr_block_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/ipv6SubnetCidrBlock:Ipv6SubnetCidrBlock")]
-    public partial class Ipv6SubnetCidrBlock : Pulumi.CustomResource
+    public partial class Ipv6SubnetCidrBlock : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Allocate a list of `IPv6` subnets.
@@ -81,7 +81,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class Ipv6SubnetCidrBlockArgs : Pulumi.ResourceArgs
+    public sealed class Ipv6SubnetCidrBlockArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Allocate a list of `IPv6` subnets.
@@ -98,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Ipv6SubnetCidrBlockArgs()
         {
         }
+        public static new Ipv6SubnetCidrBlockArgs Empty => new Ipv6SubnetCidrBlockArgs();
     }
 
-    public sealed class Ipv6SubnetCidrBlockState : Pulumi.ResourceArgs
+    public sealed class Ipv6SubnetCidrBlockState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Allocate a list of `IPv6` subnets.
@@ -117,5 +118,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Ipv6SubnetCidrBlockState()
         {
         }
+        public static new Ipv6SubnetCidrBlockState Empty => new Ipv6SubnetCidrBlockState();
     }
 }

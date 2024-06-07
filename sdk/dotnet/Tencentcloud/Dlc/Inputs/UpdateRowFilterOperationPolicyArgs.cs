@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Inputs
 {
 
-    public sealed class UpdateRowFilterOperationPolicyArgs : Pulumi.ResourceArgs
+    public sealed class UpdateRowFilterOperationPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
@@ -118,5 +118,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Inputs
         public UpdateRowFilterOperationPolicyArgs()
         {
         }
+        public static new UpdateRowFilterOperationPolicyArgs Empty => new UpdateRowFilterOperationPolicyArgs();
     }
 }

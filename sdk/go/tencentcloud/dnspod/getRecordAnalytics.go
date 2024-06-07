@@ -8,39 +8,44 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dnspod recordAnalytics
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.GetRecordAnalytics(ctx, &dnspod.GetRecordAnalyticsArgs{
-// 			DnsFormat: pulumi.StringRef("HOUR"),
-// 			Domain:    "iac-tf.cloud",
-// 			EndDate:   "2023-11-07",
-// 			StartDate: "2023-09-07",
-// 			Subdomain: "www",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.GetRecordAnalytics(ctx, &dnspod.GetRecordAnalyticsArgs{
+//				DnsFormat: pulumi.StringRef("HOUR"),
+//				Domain:    "iac-tf.cloud",
+//				EndDate:   "2023-11-07",
+//				StartDate: "2023-09-07",
+//				Subdomain: "www",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetRecordAnalytics(ctx *pulumi.Context, args *GetRecordAnalyticsArgs, opts ...pulumi.InvokeOption) (*GetRecordAnalyticsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRecordAnalyticsResult
 	err := ctx.Invoke("tencentcloud:Dnspod/getRecordAnalytics:getRecordAnalytics", args, &rv, opts...)
 	if err != nil {

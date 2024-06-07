@@ -15,89 +15,90 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mediaConcatTemplate = new Tencentcloud.Ci.MediaConcatTemplate("mediaConcatTemplate", new()
     ///     {
-    ///         var mediaConcatTemplate = new Tencentcloud.Ci.MediaConcatTemplate("mediaConcatTemplate", new Tencentcloud.Ci.MediaConcatTemplateArgs
+    ///         Bucket = "terraform-ci-xxxxxx",
+    ///         ConcatTemplate = new Tencentcloud.Ci.Inputs.MediaConcatTemplateConcatTemplateArgs
     ///         {
-    ///             Bucket = "terraform-ci-xxxxxx",
-    ///             ConcatTemplate = new Tencentcloud.Ci.Inputs.MediaConcatTemplateConcatTemplateArgs
+    ///             Audio = new Tencentcloud.Ci.Inputs.MediaConcatTemplateConcatTemplateAudioArgs
     ///             {
-    ///                 Audio = new Tencentcloud.Ci.Inputs.MediaConcatTemplateConcatTemplateAudioArgs
+    ///                 Bitrate = "",
+    ///                 Channels = "",
+    ///                 Codec = "mp3",
+    ///                 Samplerate = "",
+    ///             },
+    ///             AudioMixes = new[]
+    ///             {
+    ///                 new Tencentcloud.Ci.Inputs.MediaConcatTemplateConcatTemplateAudioMixArgs
     ///                 {
-    ///                     Bitrate = "",
-    ///                     Channels = "",
-    ///                     Codec = "mp3",
-    ///                     Samplerate = "",
-    ///                 },
-    ///                 AudioMixes = 
-    ///                 {
-    ///                     new Tencentcloud.Ci.Inputs.MediaConcatTemplateConcatTemplateAudioMixArgs
+    ///                     AudioSource = "https://terraform-ci-xxxxxx.cos.ap-guangzhou.myqcloud.com/mp3%2Fnizhan-test.mp3",
+    ///                     EffectConfig = new Tencentcloud.Ci.Inputs.MediaConcatTemplateConcatTemplateAudioMixEffectConfigArgs
     ///                     {
-    ///                         AudioSource = "https://terraform-ci-xxxxxx.cos.ap-guangzhou.myqcloud.com/mp3%2Fnizhan-test.mp3",
-    ///                         EffectConfig = new Tencentcloud.Ci.Inputs.MediaConcatTemplateConcatTemplateAudioMixEffectConfigArgs
-    ///                         {
-    ///                             BgmFadeTime = "1.7",
-    ///                             EnableBgmFade = "true",
-    ///                             EnableEndFadeout = "false",
-    ///                             EnableStartFadein = "true",
-    ///                             EndFadeoutTime = "0.1",
-    ///                             StartFadeinTime = "3",
-    ///                         },
-    ///                         MixMode = "Once",
-    ///                         Replace = "true",
+    ///                         BgmFadeTime = "1.7",
+    ///                         EnableBgmFade = "true",
+    ///                         EnableEndFadeout = "false",
+    ///                         EnableStartFadein = "true",
+    ///                         EndFadeoutTime = "0.1",
+    ///                         StartFadeinTime = "3",
     ///                     },
-    ///                 },
-    ///                 ConcatFragments = 
-    ///                 {
-    ///                     new Tencentcloud.Ci.Inputs.MediaConcatTemplateConcatTemplateConcatFragmentArgs
-    ///                     {
-    ///                         Mode = "Start",
-    ///                         Url = "https://terraform-ci-xxxxxx.cos.ap-guangzhou.myqcloud.com/mp4%2Fmp4-test.mp4",
-    ///                     },
-    ///                     new Tencentcloud.Ci.Inputs.MediaConcatTemplateConcatTemplateConcatFragmentArgs
-    ///                     {
-    ///                         Mode = "End",
-    ///                         Url = "https://terraform-ci-xxxxxx.cos.ap-guangzhou.myqcloud.com/mp4%2Fmp4-test.mp4",
-    ///                     },
-    ///                 },
-    ///                 Container = new Tencentcloud.Ci.Inputs.MediaConcatTemplateConcatTemplateContainerArgs
-    ///                 {
-    ///                     Format = "mp4",
-    ///                 },
-    ///                 Video = new Tencentcloud.Ci.Inputs.MediaConcatTemplateConcatTemplateVideoArgs
-    ///                 {
-    ///                     Bitrate = "1000",
-    ///                     Codec = "H.264",
-    ///                     Crf = "",
-    ///                     Fps = "25",
-    ///                     Height = "",
-    ///                     Remove = "",
-    ///                     Rotate = "",
-    ///                     Width = "1280",
+    ///                     MixMode = "Once",
+    ///                     Replace = "true",
     ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///             ConcatFragments = new[]
+    ///             {
+    ///                 new Tencentcloud.Ci.Inputs.MediaConcatTemplateConcatTemplateConcatFragmentArgs
+    ///                 {
+    ///                     Mode = "Start",
+    ///                     Url = "https://terraform-ci-xxxxxx.cos.ap-guangzhou.myqcloud.com/mp4%2Fmp4-test.mp4",
+    ///                 },
+    ///                 new Tencentcloud.Ci.Inputs.MediaConcatTemplateConcatTemplateConcatFragmentArgs
+    ///                 {
+    ///                     Mode = "End",
+    ///                     Url = "https://terraform-ci-xxxxxx.cos.ap-guangzhou.myqcloud.com/mp4%2Fmp4-test.mp4",
+    ///                 },
+    ///             },
+    ///             Container = new Tencentcloud.Ci.Inputs.MediaConcatTemplateConcatTemplateContainerArgs
+    ///             {
+    ///                 Format = "mp4",
+    ///             },
+    ///             Video = new Tencentcloud.Ci.Inputs.MediaConcatTemplateConcatTemplateVideoArgs
+    ///             {
+    ///                 Bitrate = "1000",
+    ///                 Codec = "H.264",
+    ///                 Crf = "",
+    ///                 Fps = "25",
+    ///                 Height = "",
+    ///                 Remove = "",
+    ///                 Rotate = "",
+    ///                 Width = "1280",
+    ///             },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ci media_concat_template can be imported using the bucket#templateId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/mediaConcatTemplate:MediaConcatTemplate media_concat_template id=terraform-ci-xxxxxx#t1cb115dfa1fcc414284f83b7c69bcedcf
+    /// $ pulumi import tencentcloud:Ci/mediaConcatTemplate:MediaConcatTemplate media_concat_template id=terraform-ci-xxxxxx#t1cb115dfa1fcc414284f83b7c69bcedcf
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/mediaConcatTemplate:MediaConcatTemplate")]
-    public partial class MediaConcatTemplate : Pulumi.CustomResource
+    public partial class MediaConcatTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// bucket name.
@@ -162,7 +163,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class MediaConcatTemplateArgs : Pulumi.ResourceArgs
+    public sealed class MediaConcatTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -185,9 +186,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaConcatTemplateArgs()
         {
         }
+        public static new MediaConcatTemplateArgs Empty => new MediaConcatTemplateArgs();
     }
 
-    public sealed class MediaConcatTemplateState : Pulumi.ResourceArgs
+    public sealed class MediaConcatTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -210,5 +212,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaConcatTemplateState()
         {
         }
+        public static new MediaConcatTemplateState Empty => new MediaConcatTemplateState();
     }
 }

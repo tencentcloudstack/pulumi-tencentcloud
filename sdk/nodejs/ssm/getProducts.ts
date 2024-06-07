@@ -9,20 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const products = pulumi.output(tencentcloud.Ssm.getProducts());
+ * const products = tencentcloud.Ssm.getProducts({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getProducts(args?: GetProductsArgs, opts?: pulumi.InvokeOptions): Promise<GetProductsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ssm/getProducts:getProducts", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -52,9 +51,22 @@ export interface GetProductsResult {
     readonly products: string[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of ssm products
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const products = tencentcloud.Ssm.getProducts({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getProductsOutput(args?: GetProductsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProductsResult> {
-    return pulumi.output(args).apply(a => getProducts(a, opts))
+    return pulumi.output(args).apply((a: any) => getProducts(a, opts))
 }
 
 /**

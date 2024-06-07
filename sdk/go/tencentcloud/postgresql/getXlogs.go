@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a datasource to query PostgreSQL Xlogs.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.GetXlogs(ctx, &postgresql.GetXlogsArgs{
-// 			EndTime:    pulumi.StringRef("2022-01-07 01:02:03"),
-// 			InstanceId: "postgres-xxxxxxxx",
-// 			StartTime:  pulumi.StringRef("2022-01-01 00:00:00"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.GetXlogs(ctx, &postgresql.GetXlogsArgs{
+//				EndTime:    pulumi.StringRef("2022-01-07 01:02:03"),
+//				InstanceId: "postgres-xxxxxxxx",
+//				StartTime:  pulumi.StringRef("2022-01-01 00:00:00"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetXlogs(ctx *pulumi.Context, args *GetXlogsArgs, opts ...pulumi.InvokeOption) (*GetXlogsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetXlogsResult
 	err := ctx.Invoke("tencentcloud:Postgresql/getXlogs:getXlogs", args, &rv, opts...)
 	if err != nil {

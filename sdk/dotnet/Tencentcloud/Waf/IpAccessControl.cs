@@ -15,59 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.IpAccessControl("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.IpAccessControl("example", new Tencentcloud.Waf.IpAccessControlArgs
+    ///         Domain = "www.demo.com",
+    ///         Edition = "sparta-waf",
+    ///         InstanceId = "waf_2kxtlbky00b3b4qz",
+    ///         Items = new[]
     ///         {
-    ///             Domain = "www.demo.com",
-    ///             Edition = "sparta-waf",
-    ///             InstanceId = "waf_2kxtlbky00b3b4qz",
-    ///             Items = 
+    ///             new Tencentcloud.Waf.Inputs.IpAccessControlItemArgs
     ///             {
-    ///                 new Tencentcloud.Waf.Inputs.IpAccessControlItemArgs
-    ///                 {
-    ///                     Action = 40,
-    ///                     Ip = "1.1.1.1",
-    ///                     Note = "desc info.",
-    ///                     ValidTs = 2019571199,
-    ///                 },
-    ///                 new Tencentcloud.Waf.Inputs.IpAccessControlItemArgs
-    ///                 {
-    ///                     Action = 42,
-    ///                     Ip = "2.2.2.2",
-    ///                     Note = "desc info.",
-    ///                     ValidTs = 2019571199,
-    ///                 },
-    ///                 new Tencentcloud.Waf.Inputs.IpAccessControlItemArgs
-    ///                 {
-    ///                     Action = 40,
-    ///                     Ip = "3.3.3.3",
-    ///                     Note = "desc info.",
-    ///                     ValidTs = 1680570420,
-    ///                 },
+    ///                 Action = 40,
+    ///                 Ip = "1.1.1.1",
+    ///                 Note = "desc info.",
+    ///                 ValidTs = 2019571199,
     ///             },
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Waf.Inputs.IpAccessControlItemArgs
+    ///             {
+    ///                 Action = 42,
+    ///                 Ip = "2.2.2.2",
+    ///                 Note = "desc info.",
+    ///                 ValidTs = 2019571199,
+    ///             },
+    ///             new Tencentcloud.Waf.Inputs.IpAccessControlItemArgs
+    ///             {
+    ///                 Action = 40,
+    ///                 Ip = "3.3.3.3",
+    ///                 Note = "desc info.",
+    ///                 ValidTs = 1680570420,
+    ///             },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// waf ip_access_control can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Waf/ipAccessControl:IpAccessControl example waf_2kxtlbky00b3b4qz#www.demo.com#sparta-waf
+    /// $ pulumi import tencentcloud:Waf/ipAccessControl:IpAccessControl example waf_2kxtlbky00b3b4qz#www.demo.com#sparta-waf
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/ipAccessControl:IpAccessControl")]
-    public partial class IpAccessControl : Pulumi.CustomResource
+    public partial class IpAccessControl : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Domain.
@@ -138,7 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class IpAccessControlArgs : Pulumi.ResourceArgs
+    public sealed class IpAccessControlArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -173,9 +174,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public IpAccessControlArgs()
         {
         }
+        public static new IpAccessControlArgs Empty => new IpAccessControlArgs();
     }
 
-    public sealed class IpAccessControlState : Pulumi.ResourceArgs
+    public sealed class IpAccessControlState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -210,5 +212,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public IpAccessControlState()
         {
         }
+        public static new IpAccessControlState Empty => new IpAccessControlState();
     }
 }

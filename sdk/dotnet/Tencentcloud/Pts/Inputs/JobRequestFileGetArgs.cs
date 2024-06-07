@@ -11,14 +11,23 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class JobRequestFileGetArgs : Pulumi.ResourceArgs
+    public sealed class JobRequestFileGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// File id.
+        /// </summary>
         [Input("fileId")]
         public Input<string>? FileId { get; set; }
 
+        /// <summary>
+        /// File name.
+        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// File size.
+        /// </summary>
         [Input("size")]
         public Input<int>? Size { get; set; }
 
@@ -28,11 +37,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         [Input("type")]
         public Input<string>? Type { get; set; }
 
+        /// <summary>
+        /// Update time.
+        /// </summary>
         [Input("updatedAt")]
         public Input<string>? UpdatedAt { get; set; }
 
         public JobRequestFileGetArgs()
         {
         }
+        public static new JobRequestFileGetArgs Empty => new JobRequestFileGetArgs();
     }
 }

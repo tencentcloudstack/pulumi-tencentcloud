@@ -15,11 +15,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class RuleEngineRuleSubRule
     {
         /// <summary>
-        /// Rule items list.
+        /// Nested rule settings.
         /// </summary>
         public readonly ImmutableArray<Outputs.RuleEngineRuleSubRuleRule> Rules;
         /// <summary>
-        /// rule tag list.
+        /// Tag of the rule.
         /// </summary>
         public readonly ImmutableArray<string> Tags;
 

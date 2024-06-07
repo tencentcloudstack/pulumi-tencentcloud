@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type GetInstanceConfigsConfigList struct {
 	// The available zone that the reserved instance locates at.
@@ -34,7 +37,7 @@ type GetInstanceConfigsConfigList struct {
 // GetInstanceConfigsConfigListInput is an input type that accepts GetInstanceConfigsConfigListArgs and GetInstanceConfigsConfigListOutput values.
 // You can construct a concrete instance of `GetInstanceConfigsConfigListInput` via:
 //
-//          GetInstanceConfigsConfigListArgs{...}
+//	GetInstanceConfigsConfigListArgs{...}
 type GetInstanceConfigsConfigListInput interface {
 	pulumi.Input
 
@@ -78,7 +81,7 @@ func (i GetInstanceConfigsConfigListArgs) ToGetInstanceConfigsConfigListOutputWi
 // GetInstanceConfigsConfigListArrayInput is an input type that accepts GetInstanceConfigsConfigListArray and GetInstanceConfigsConfigListArrayOutput values.
 // You can construct a concrete instance of `GetInstanceConfigsConfigListArrayInput` via:
 //
-//          GetInstanceConfigsConfigListArray{ GetInstanceConfigsConfigListArgs{...} }
+//	GetInstanceConfigsConfigListArray{ GetInstanceConfigsConfigListArgs{...} }
 type GetInstanceConfigsConfigListArrayInput interface {
 	pulumi.Input
 
@@ -199,7 +202,7 @@ type GetInstancesReservedInstanceList struct {
 // GetInstancesReservedInstanceListInput is an input type that accepts GetInstancesReservedInstanceListArgs and GetInstancesReservedInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesReservedInstanceListInput` via:
 //
-//          GetInstancesReservedInstanceListArgs{...}
+//	GetInstancesReservedInstanceListArgs{...}
 type GetInstancesReservedInstanceListInput interface {
 	pulumi.Input
 
@@ -239,7 +242,7 @@ func (i GetInstancesReservedInstanceListArgs) ToGetInstancesReservedInstanceList
 // GetInstancesReservedInstanceListArrayInput is an input type that accepts GetInstancesReservedInstanceListArray and GetInstancesReservedInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesReservedInstanceListArrayInput` via:
 //
-//          GetInstancesReservedInstanceListArray{ GetInstancesReservedInstanceListArgs{...} }
+//	GetInstancesReservedInstanceListArray{ GetInstancesReservedInstanceListArgs{...} }
 type GetInstancesReservedInstanceListArrayInput interface {
 	pulumi.Input
 

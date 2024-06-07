@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,27 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const invocationTask = pulumi.output(tencentcloud.Tat.getInvocationTask({
- *     // invocation_task_ids = ["invt-a8bv0ip7"]
+ * const invocationTask = tencentcloud.Tat.getInvocationTask({
  *     filters: [{
  *         name: "instance-id",
  *         values: ["ins-p4pq4gaq"],
  *     }],
  *     hideOutput: true,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInvocationTask(args?: GetInvocationTaskArgs, opts?: pulumi.InvokeOptions): Promise<GetInvocationTaskResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tat/getInvocationTask:getInvocationTask", {
         "filters": args.filters,
         "hideOutput": args.hideOutput,
@@ -78,9 +77,28 @@ export interface GetInvocationTaskResult {
     readonly invocationTaskSets: outputs.Tat.GetInvocationTaskInvocationTaskSet[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tat invocationTask
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const invocationTask = tencentcloud.Tat.getInvocationTask({
+ *     filters: [{
+ *         name: "instance-id",
+ *         values: ["ins-p4pq4gaq"],
+ *     }],
+ *     hideOutput: true,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInvocationTaskOutput(args?: GetInvocationTaskOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInvocationTaskResult> {
-    return pulumi.output(args).apply(a => getInvocationTask(a, opts))
+    return pulumi.output(args).apply((a: any) => getInvocationTask(a, opts))
 }
 
 /**

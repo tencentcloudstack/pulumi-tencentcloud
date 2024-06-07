@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw.Inputs
 {
 
-    public sealed class NatInstanceNewModeItemsArgs : Pulumi.ResourceArgs
+    public sealed class NatInstanceNewModeItemsArgs : global::Pulumi.ResourceArgs
     {
         [Input("eips", required: true)]
         private InputList<string>? _eips;
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw.Inputs
         public NatInstanceNewModeItemsArgs()
         {
         }
+        public static new NatInstanceNewModeItemsArgs Empty => new NatInstanceNewModeItemsArgs();
     }
 }

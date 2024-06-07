@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainErrorPageArgs : Pulumi.ResourceArgs
+    public sealed class DomainErrorPageArgs : global::Pulumi.ResourceArgs
     {
         [Input("pageRules")]
         private InputList<Inputs.DomainErrorPagePageRuleArgs>? _pageRules;
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainErrorPageArgs()
         {
         }
+        public static new DomainErrorPageArgs Empty => new DomainErrorPageArgs();
     }
 }

@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// <summary>
         /// Use this data source to query detailed information of dnspod record_line_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var recordLineList = Tencentcloud.Dnspod.GetRecordLineList.Invoke(new()
         ///     {
-        ///         var recordLineList = Output.Create(Tencentcloud.Dnspod.GetRecordLineList.InvokeAsync(new Tencentcloud.Dnspod.GetRecordLineListArgs
-        ///         {
-        ///             Domain = "iac-tf.cloud",
-        ///             DomainGrade = "DP_FREE",
-        ///             DomainId = 123,
-        ///         }));
-        ///     }
+        ///         Domain = "iac-tf.cloud",
+        ///         DomainGrade = "DP_FREE",
+        ///         DomainId = 123,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRecordLineListResult> InvokeAsync(GetRecordLineListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRecordLineListResult>("tencentcloud:Dnspod/getRecordLineList:getRecordLineList", args ?? new GetRecordLineListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRecordLineListResult>("tencentcloud:Dnspod/getRecordLineList:getRecordLineList", args ?? new GetRecordLineListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dnspod record_line_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var recordLineList = Tencentcloud.Dnspod.GetRecordLineList.Invoke(new()
         ///     {
-        ///         var recordLineList = Output.Create(Tencentcloud.Dnspod.GetRecordLineList.InvokeAsync(new Tencentcloud.Dnspod.GetRecordLineListArgs
-        ///         {
-        ///             Domain = "iac-tf.cloud",
-        ///             DomainGrade = "DP_FREE",
-        ///             DomainId = 123,
-        ///         }));
-        ///     }
+        ///         Domain = "iac-tf.cloud",
+        ///         DomainGrade = "DP_FREE",
+        ///         DomainId = 123,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRecordLineListResult> Invoke(GetRecordLineListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRecordLineListResult>("tencentcloud:Dnspod/getRecordLineList:getRecordLineList", args ?? new GetRecordLineListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRecordLineListResult>("tencentcloud:Dnspod/getRecordLineList:getRecordLineList", args ?? new GetRecordLineListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRecordLineListArgs : Pulumi.InvokeArgs
+    public sealed class GetRecordLineListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Domain.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public GetRecordLineListArgs()
         {
         }
+        public static new GetRecordLineListArgs Empty => new GetRecordLineListArgs();
     }
 
-    public sealed class GetRecordLineListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRecordLineListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Domain.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public GetRecordLineListInvokeArgs()
         {
         }
+        public static new GetRecordLineListInvokeArgs Empty => new GetRecordLineListInvokeArgs();
     }
 
 

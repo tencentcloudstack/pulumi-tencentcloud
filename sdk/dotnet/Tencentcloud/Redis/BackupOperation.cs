@@ -14,31 +14,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// Provides a resource to create a redis backup_operation
     /// 
     /// ## Example Usage
+    /// 
     /// ### Manually back up the Redis instance, and the backup data is kept for 7 days
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var foo = Output.Create(Tencentcloud.Mysql.GetInstance.InvokeAsync());
-    ///         var backupOperation = new Tencentcloud.Redis.BackupOperation("backupOperation", new Tencentcloud.Redis.BackupOperationArgs
-    ///         {
-    ///             InstanceId = foo.Apply(foo =&gt; foo.InstanceLists?[0]?.MysqlId),
-    ///             Remark = "manually back",
-    ///             StorageDays = 7,
-    ///         });
-    ///     }
+    ///     var foo = Tencentcloud.Mysql.GetInstance.Invoke();
     /// 
-    /// }
+    ///     var backupOperation = new Tencentcloud.Redis.BackupOperation("backupOperation", new()
+    ///     {
+    ///         InstanceId = foo.Apply(getInstanceResult =&gt; getInstanceResult.InstanceLists[0]?.MysqlId),
+    ///         Remark = "manually back",
+    ///         StorageDays = 7,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/backupOperation:BackupOperation")]
-    public partial class BackupOperation : Pulumi.CustomResource
+    public partial class BackupOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The ID of instance.
@@ -103,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class BackupOperationArgs : Pulumi.ResourceArgs
+    public sealed class BackupOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -126,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public BackupOperationArgs()
         {
         }
+        public static new BackupOperationArgs Empty => new BackupOperationArgs();
     }
 
-    public sealed class BackupOperationState : Pulumi.ResourceArgs
+    public sealed class BackupOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -151,5 +155,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public BackupOperationState()
         {
         }
+        public static new BackupOperationState Empty => new BackupOperationState();
     }
 }

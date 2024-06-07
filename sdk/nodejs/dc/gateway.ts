@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const main = new tencentcloud.vpc.Instance("main", {cidrBlock: "10.0.0.0/16"});
  * const vpcMain = new tencentcloud.dc.Gateway("vpcMain", {
@@ -20,13 +21,14 @@ import * as utilities from "../utilities";
  *     gatewayType: "NAT",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Direct connect gateway instance can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dc/gateway:Gateway instance dcg-id
+ * $ pulumi import tencentcloud:Dc/gateway:Gateway instance dcg-id
  * ```
  */
 export class Gateway extends pulumi.CustomResource {

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,26 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Oceanus.getWorkSpaces({
+ * const example = tencentcloud.Oceanus.getWorkSpaces({
  *     filters: [{
  *         name: "WorkSpaceName",
  *         values: ["tf_example"],
  *     }],
  *     orderType: 1,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getWorkSpaces(args?: GetWorkSpacesArgs, opts?: pulumi.InvokeOptions): Promise<GetWorkSpacesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Oceanus/getWorkSpaces:getWorkSpaces", {
         "filters": args.filters,
         "orderType": args.orderType,
@@ -71,9 +71,28 @@ export interface GetWorkSpacesResult {
      */
     readonly workSpaceSetItems: outputs.Oceanus.GetWorkSpacesWorkSpaceSetItem[];
 }
-
+/**
+ * Use this data source to query detailed information of oceanus workSpaces
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Oceanus.getWorkSpaces({
+ *     filters: [{
+ *         name: "WorkSpaceName",
+ *         values: ["tf_example"],
+ *     }],
+ *     orderType: 1,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getWorkSpacesOutput(args?: GetWorkSpacesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetWorkSpacesResult> {
-    return pulumi.output(args).apply(a => getWorkSpaces(a, opts))
+    return pulumi.output(args).apply((a: any) => getWorkSpaces(a, opts))
 }
 
 /**

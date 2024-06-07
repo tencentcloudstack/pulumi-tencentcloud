@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class SyncConfigObjectsDatabaseTableArgs : Pulumi.ResourceArgs
+    public sealed class SyncConfigObjectsDatabaseTableArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public SyncConfigObjectsDatabaseTableArgs()
         {
         }
+        public static new SyncConfigObjectsDatabaseTableArgs Empty => new SyncConfigObjectsDatabaseTableArgs();
     }
 }

@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.ApiGateway.UpdateApiAppKey("example", new()
     ///     {
-    ///         var example = new Tencentcloud.ApiGateway.UpdateApiAppKey("example", new Tencentcloud.ApiGateway.UpdateApiAppKeyArgs
-    ///         {
-    ///             ApiAppId = "app-krljp4wn",
-    ///             ApiAppKey = "APID6JmG21yRCc03h4z16hlsTqj1wpO3dB3ZQcUP",
-    ///         });
-    ///     }
+    ///         ApiAppId = "app-krljp4wn",
+    ///         ApiAppKey = "APID6JmG21yRCc03h4z16hlsTqj1wpO3dB3ZQcUP",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/updateApiAppKey:UpdateApiAppKey")]
-    public partial class UpdateApiAppKey : Pulumi.CustomResource
+    public partial class UpdateApiAppKey : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Application unique ID.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         }
     }
 
-    public sealed class UpdateApiAppKeyArgs : Pulumi.ResourceArgs
+    public sealed class UpdateApiAppKeyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Application unique ID.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public UpdateApiAppKeyArgs()
         {
         }
+        public static new UpdateApiAppKeyArgs Empty => new UpdateApiAppKeyArgs();
     }
 
-    public sealed class UpdateApiAppKeyState : Pulumi.ResourceArgs
+    public sealed class UpdateApiAppKeyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Application unique ID.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public UpdateApiAppKeyState()
         {
         }
+        public static new UpdateApiAppKeyState Empty => new UpdateApiAppKeyState();
     }
 }

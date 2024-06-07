@@ -14,10 +14,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// Provides a resource to create a tdmq rocketmq_vip_instance
     /// 
     /// &gt; **NOTE:** The instance cannot be downgraded, Include parameters `node_count`, `spec`, `storage_size`.
+    /// **NOTE:** If `spec` is `rocket-vip-basic-2`, configuration changes are not supported.
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/rocketmqVipInstance:RocketmqVipInstance")]
-    public partial class RocketmqVipInstance : Pulumi.CustomResource
+    public partial class RocketmqVipInstance : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Public IP access control rules.
+        /// </summary>
+        [Output("ipRules")]
+        public Output<ImmutableArray<Outputs.RocketmqVipInstanceIpRule>> IpRules { get; private set; } = null!;
+
         /// <summary>
         /// Instance name.
         /// </summary>
@@ -31,7 +38,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Output<int> NodeCount { get; private set; } = null!;
 
         /// <summary>
-        /// Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
+        /// Instance specification: Universal type, rocket-vip-basic-0, Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
         /// </summary>
         [Output("spec")]
         public Output<string> Spec { get; private set; } = null!;
@@ -105,8 +112,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class RocketmqVipInstanceArgs : Pulumi.ResourceArgs
+    public sealed class RocketmqVipInstanceArgs : global::Pulumi.ResourceArgs
     {
+        [Input("ipRules")]
+        private InputList<Inputs.RocketmqVipInstanceIpRuleArgs>? _ipRules;
+
+        /// <summary>
+        /// Public IP access control rules.
+        /// </summary>
+        public InputList<Inputs.RocketmqVipInstanceIpRuleArgs> IpRules
+        {
+            get => _ipRules ?? (_ipRules = new InputList<Inputs.RocketmqVipInstanceIpRuleArgs>());
+            set => _ipRules = value;
+        }
+
         /// <summary>
         /// Instance name.
         /// </summary>
@@ -120,7 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Input<int> NodeCount { get; set; } = null!;
 
         /// <summary>
-        /// Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
+        /// Instance specification: Universal type, rocket-vip-basic-0, Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
         /// </summary>
         [Input("spec", required: true)]
         public Input<string> Spec { get; set; } = null!;
@@ -158,10 +177,23 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RocketmqVipInstanceArgs()
         {
         }
+        public static new RocketmqVipInstanceArgs Empty => new RocketmqVipInstanceArgs();
     }
 
-    public sealed class RocketmqVipInstanceState : Pulumi.ResourceArgs
+    public sealed class RocketmqVipInstanceState : global::Pulumi.ResourceArgs
     {
+        [Input("ipRules")]
+        private InputList<Inputs.RocketmqVipInstanceIpRuleGetArgs>? _ipRules;
+
+        /// <summary>
+        /// Public IP access control rules.
+        /// </summary>
+        public InputList<Inputs.RocketmqVipInstanceIpRuleGetArgs> IpRules
+        {
+            get => _ipRules ?? (_ipRules = new InputList<Inputs.RocketmqVipInstanceIpRuleGetArgs>());
+            set => _ipRules = value;
+        }
+
         /// <summary>
         /// Instance name.
         /// </summary>
@@ -175,7 +207,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Input<int>? NodeCount { get; set; }
 
         /// <summary>
-        /// Instance specification: Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
+        /// Instance specification: Universal type, rocket-vip-basic-0, Basic type: `rocket-vip-basic-1`, Standard type: `rocket-vip-basic-2`, Advanced Type I: `rocket-vip-basic-3`, Advanced Type II: `rocket-vip-basic-4`.
         /// </summary>
         [Input("spec")]
         public Input<string>? Spec { get; set; }
@@ -213,5 +245,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RocketmqVipInstanceState()
         {
         }
+        public static new RocketmqVipInstanceState Empty => new RocketmqVipInstanceState();
     }
 }

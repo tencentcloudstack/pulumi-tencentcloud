@@ -8,24 +8,27 @@ import * as utilities from "../utilities";
  * Provides a resource to create a vpc flowLogConfig
  *
  * ## Example Usage
+ *
  * ### If enable FlowLogs
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new tencentcloud.vpc.FlowLogConfig("config", {
  *     flowLogId: tencentcloud_vpc_flow_log.example.id,
  *     enable: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * vpc flow_log_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpc/flowLogConfig:FlowLogConfig flow_log_config flow_log_id
+ * $ pulumi import tencentcloud:Vpc/flowLogConfig:FlowLogConfig flow_log_config flow_log_id
  * ```
  */
 export class FlowLogConfig extends pulumi.CustomResource {

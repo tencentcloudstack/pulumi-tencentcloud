@@ -8,47 +8,52 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of kubernetes clusterInstances
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kubernetes.GetClusterInstances(ctx, &kubernetes.GetClusterInstancesArgs{
-// 			ClusterId: "cls-ely08ic4",
-// 			Filters: []kubernetes.GetClusterInstancesFilter{
-// 				kubernetes.GetClusterInstancesFilter{
-// 					Name: "nodepool-id",
-// 					Values: []string{
-// 						"np-p4e6whqu",
-// 					},
-// 				},
-// 			},
-// 			InstanceIds: []string{
-// 				"ins-kqmx8dm2",
-// 			},
-// 			InstanceRole: pulumi.StringRef("WORKER"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kubernetes.GetClusterInstances(ctx, &kubernetes.GetClusterInstancesArgs{
+//				ClusterId: "cls-ely08ic4",
+//				Filters: []kubernetes.GetClusterInstancesFilter{
+//					{
+//						Name: "nodepool-id",
+//						Values: []string{
+//							"np-p4e6whqu",
+//						},
+//					},
+//				},
+//				InstanceIds: []string{
+//					"ins-kqmx8dm2",
+//				},
+//				InstanceRole: pulumi.StringRef("WORKER"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetClusterInstances(ctx *pulumi.Context, args *GetClusterInstancesArgs, opts ...pulumi.InvokeOption) (*GetClusterInstancesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClusterInstancesResult
 	err := ctx.Invoke("tencentcloud:Kubernetes/getClusterInstances:getClusterInstances", args, &rv, opts...)
 	if err != nil {

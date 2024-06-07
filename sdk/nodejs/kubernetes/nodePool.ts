@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -16,10 +17,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
@@ -31,7 +33,7 @@ import * as utilities from "../utilities";
  * const defaultInstanceType = config.get("defaultInstanceType") || "S1.SMALL1";
  * //this is the cluster with empty worker config
  * const managedCluster = new tencentcloud.kubernetes.Cluster("managedCluster", {
- *     vpcId: vpc.then(vpc => vpc.instanceLists?[0]?.vpcId),
+ *     vpcId: vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId),
  *     clusterCidr: clusterCidr,
  *     clusterMaxPodNum: 32,
  *     clusterName: "tf-tke-unit-test",
@@ -45,8 +47,8 @@ import * as utilities from "../utilities";
  *     clusterId: managedCluster.id,
  *     maxSize: 6,
  *     minSize: 1,
- *     vpcId: vpc.then(vpc => vpc.instanceLists?[0]?.vpcId),
- *     subnetIds: [vpc.then(vpc => vpc.instanceLists?[0]?.subnetId)],
+ *     vpcId: vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId),
+ *     subnetIds: [vpc.then(vpc => vpc.instanceLists?.[0]?.subnetId)],
  *     retryPolicy: "INCREMENTAL_INTERVALS",
  *     desiredCapacity: 4,
  *     enableAutoScale: true,
@@ -90,11 +92,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Using Spot CVM Instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const mynodepool = new tencentcloud.kubernetes.NodePool("mynodepool", {
  *     clusterId: tencentcloud_kubernetes_cluster.managed_cluster.id,
@@ -134,6 +139,15 @@ import * as utilities from "../utilities";
  *         test2: "test2",
  *     },
  * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ## Import
+ *
+ * tke node pool can be imported, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Kubernetes/nodePool:NodePool test cls-xxx#np-xxx
  * ```
  */
 export class NodePool extends pulumi.CustomResource {

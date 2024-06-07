@@ -5,14 +5,31 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./attachment";
-export * from "./instance";
-export * from "./sgAttachment";
+export { AttachmentArgs, AttachmentState } from "./attachment";
+export type Attachment = import("./attachment").Attachment;
+export const Attachment: typeof import("./attachment").Attachment = null as any;
+utilities.lazyLoad(exports, ["Attachment"], () => require("./attachment"));
 
-// Import resources to register:
-import { Attachment } from "./attachment";
-import { Instance } from "./instance";
-import { SgAttachment } from "./sgAttachment";
+export { InstanceArgs, InstanceState } from "./instance";
+export type Instance = import("./instance").Instance;
+export const Instance: typeof import("./instance").Instance = null as any;
+utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { Ipv4AddressArgs, Ipv4AddressState } from "./ipv4Address";
+export type Ipv4Address = import("./ipv4Address").Ipv4Address;
+export const Ipv4Address: typeof import("./ipv4Address").Ipv4Address = null as any;
+utilities.lazyLoad(exports, ["Ipv4Address"], () => require("./ipv4Address"));
+
+export { Ipv6AddressArgs, Ipv6AddressState } from "./ipv6Address";
+export type Ipv6Address = import("./ipv6Address").Ipv6Address;
+export const Ipv6Address: typeof import("./ipv6Address").Ipv6Address = null as any;
+utilities.lazyLoad(exports, ["Ipv6Address"], () => require("./ipv6Address"));
+
+export { SgAttachmentArgs, SgAttachmentState } from "./sgAttachment";
+export type SgAttachment = import("./sgAttachment").SgAttachment;
+export const SgAttachment: typeof import("./sgAttachment").SgAttachment = null as any;
+utilities.lazyLoad(exports, ["SgAttachment"], () => require("./sgAttachment"));
+
 
 const _module = {
     version: utilities.getVersion(),
@@ -22,6 +39,10 @@ const _module = {
                 return new Attachment(name, <any>undefined, { urn })
             case "tencentcloud:Eni/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Eni/ipv4Address:Ipv4Address":
+                return new Ipv4Address(name, <any>undefined, { urn })
+            case "tencentcloud:Eni/ipv6Address:Ipv6Address":
+                return new Ipv6Address(name, <any>undefined, { urn })
             case "tencentcloud:Eni/sgAttachment:SgAttachment":
                 return new SgAttachment(name, <any>undefined, { urn })
             default:
@@ -31,4 +52,6 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Eni/attachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Eni/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Eni/ipv4Address", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Eni/ipv6Address", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Eni/sgAttachment", _module)

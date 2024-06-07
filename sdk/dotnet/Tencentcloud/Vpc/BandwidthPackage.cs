@@ -15,91 +15,96 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Vpc.BandwidthPackage("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Vpc.BandwidthPackage("example", new Tencentcloud.Vpc.BandwidthPackageArgs
+    ///         BandwidthPackageName = "tf-example",
+    ///         ChargeType = "TOP5_POSTPAID_BY_MONTH",
+    ///         NetworkType = "BGP",
+    ///         Tags = 
     ///         {
-    ///             BandwidthPackageName = "tf-example",
-    ///             ChargeType = "TOP5_POSTPAID_BY_MONTH",
-    ///             NetworkType = "BGP",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### PrePaid Bandwidth Package
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var bandwidthPackage = new Tencentcloud.Vpc.BandwidthPackage("bandwidthPackage", new()
     ///     {
-    ///         var bandwidthPackage = new Tencentcloud.Vpc.BandwidthPackage("bandwidthPackage", new Tencentcloud.Vpc.BandwidthPackageArgs
+    ///         BandwidthPackageName = "test-001",
+    ///         ChargeType = "FIXED_PREPAID_BY_MONTH",
+    ///         InternetMaxBandwidth = 100,
+    ///         NetworkType = "BGP",
+    ///         Tags = 
     ///         {
-    ///             BandwidthPackageName = "test-001",
-    ///             ChargeType = "FIXED_PREPAID_BY_MONTH",
-    ///             InternetMaxBandwidth = 100,
-    ///             NetworkType = "BGP",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///             TimeSpan = 3,
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///         TimeSpan = 3,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Bandwidth Package With Egress
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Vpc.BandwidthPackage("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Vpc.BandwidthPackage("example", new Tencentcloud.Vpc.BandwidthPackageArgs
+    ///         BandwidthPackageName = "tf-example",
+    ///         ChargeType = "ENHANCED95_POSTPAID_BY_MONTH",
+    ///         Egress = "center_egress2",
+    ///         InternetMaxBandwidth = 400,
+    ///         NetworkType = "SINGLEISP_CMCC",
+    ///         Tags = 
     ///         {
-    ///             BandwidthPackageName = "tf-example",
-    ///             ChargeType = "ENHANCED95_POSTPAID_BY_MONTH",
-    ///             Egress = "center_egress2",
-    ///             InternetMaxBandwidth = 400,
-    ///             NetworkType = "SINGLEISP_CMCC",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// vpc bandwidth_package can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/bandwidthPackage:BandwidthPackage bandwidth_package bandwidthPackage_id
+    /// $ pulumi import tencentcloud:Vpc/bandwidthPackage:BandwidthPackage bandwidth_package bandwidthPackage_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/bandwidthPackage:BandwidthPackage")]
-    public partial class BandwidthPackage : Pulumi.CustomResource
+    public partial class BandwidthPackage : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Bandwidth package name.
@@ -188,7 +193,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class BandwidthPackageArgs : Pulumi.ResourceArgs
+    public sealed class BandwidthPackageArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bandwidth package name.
@@ -241,9 +246,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public BandwidthPackageArgs()
         {
         }
+        public static new BandwidthPackageArgs Empty => new BandwidthPackageArgs();
     }
 
-    public sealed class BandwidthPackageState : Pulumi.ResourceArgs
+    public sealed class BandwidthPackageState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bandwidth package name.
@@ -296,5 +302,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public BandwidthPackageState()
         {
         }
+        public static new BandwidthPackageState Empty => new BandwidthPackageState();
     }
 }

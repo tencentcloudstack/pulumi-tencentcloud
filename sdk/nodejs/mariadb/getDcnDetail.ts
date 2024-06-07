@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const dcnDetail = pulumi.output(tencentcloud.Mariadb.getDcnDetail({
+ * const dcnDetail = tencentcloud.Mariadb.getDcnDetail({
  *     instanceId: "tdsql-9vqvls95",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDcnDetail(args: GetDcnDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetDcnDetailResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mariadb/getDcnDetail:getDcnDetail", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -63,9 +63,24 @@ export interface GetDcnDetailResult {
     readonly instanceId: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mariadb dcnDetail
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const dcnDetail = tencentcloud.Mariadb.getDcnDetail({
+ *     instanceId: "tdsql-9vqvls95",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDcnDetailOutput(args: GetDcnDetailOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDcnDetailResult> {
-    return pulumi.output(args).apply(a => getDcnDetail(a, opts))
+    return pulumi.output(args).apply((a: any) => getDcnDetail(a, opts))
 }
 
 /**

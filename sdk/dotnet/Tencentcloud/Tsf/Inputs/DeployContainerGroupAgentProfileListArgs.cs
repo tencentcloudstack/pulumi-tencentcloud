@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class DeployContainerGroupAgentProfileListArgs : Pulumi.ResourceArgs
+    public sealed class DeployContainerGroupAgentProfileListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Agent type.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public DeployContainerGroupAgentProfileListArgs()
         {
         }
+        public static new DeployContainerGroupAgentProfileListArgs Empty => new DeployContainerGroupAgentProfileListArgs();
     }
 }

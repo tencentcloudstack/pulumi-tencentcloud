@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class RuleEngineRuleSubRuleRule
     {
         /// <summary>
-        /// Actions list of the rule. See details in data source `rule_engine_setting`.
+        /// Feature to be executed.
         /// </summary>
         public readonly ImmutableArray<Outputs.RuleEngineRuleSubRuleRuleAction> Actions;
         /// <summary>

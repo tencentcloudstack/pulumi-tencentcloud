@@ -9,6 +9,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -19,13 +20,11 @@ import * as utilities from "../utilities";
  *     filePath: "/cos_backup/test.txt",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getFileDownloadUrl(args: GetFileDownloadUrlArgs, opts?: pulumi.InvokeOptions): Promise<GetFileDownloadUrlResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dcdb/getFileDownloadUrl:getFileDownloadUrl", {
         "filePath": args.filePath,
         "instanceId": args.instanceId,
@@ -73,9 +72,26 @@ export interface GetFileDownloadUrlResult {
     readonly resultOutputFile?: string;
     readonly shardId: string;
 }
-
+/**
+ * Use this data source to query detailed information of dcdb fileDownloadUrl
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const fileDownloadUrl = tencentcloud.Dcdb.getFileDownloadUrl({
+ *     instanceId: local.dcdb_id,
+ *     shardId: "shard-1b5r04az",
+ *     filePath: "/cos_backup/test.txt",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getFileDownloadUrlOutput(args: GetFileDownloadUrlOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetFileDownloadUrlResult> {
-    return pulumi.output(args).apply(a => getFileDownloadUrl(a, opts))
+    return pulumi.output(args).apply((a: any) => getFileDownloadUrl(a, opts))
 }
 
 /**

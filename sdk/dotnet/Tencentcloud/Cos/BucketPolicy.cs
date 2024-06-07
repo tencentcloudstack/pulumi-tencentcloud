@@ -15,18 +15,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var cosPolicy = new Tencentcloud.Cos.BucketPolicy("cosPolicy", new()
     ///     {
-    ///         var cosPolicy = new Tencentcloud.Cos.BucketPolicy("cosPolicy", new Tencentcloud.Cos.BucketPolicyArgs
-    ///         {
-    ///             Bucket = "mycos-1258798060",
-    ///             Policy = @"{
+    ///         Bucket = "mycos-1258798060",
+    ///         Policy = @"{
     ///   ""version"": ""2.0"",
     ///   ""Statement"": [
     ///     {
@@ -48,22 +49,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// }
     /// 
     /// ",
-    ///         });
-    ///     }
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// COS bucket policy can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cos/bucketPolicy:BucketPolicy bucket bucket-name
+    /// $ pulumi import tencentcloud:Cos/bucketPolicy:BucketPolicy bucket bucket-name
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cos/bucketPolicy:BucketPolicy")]
-    public partial class BucketPolicy : Pulumi.CustomResource
+    public partial class BucketPolicy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
@@ -122,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         }
     }
 
-    public sealed class BucketPolicyArgs : Pulumi.ResourceArgs
+    public sealed class BucketPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
@@ -139,9 +140,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public BucketPolicyArgs()
         {
         }
+        public static new BucketPolicyArgs Empty => new BucketPolicyArgs();
     }
 
-    public sealed class BucketPolicyState : Pulumi.ResourceArgs
+    public sealed class BucketPolicyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
@@ -158,5 +160,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public BucketPolicyState()
         {
         }
+        public static new BucketPolicyState Empty => new BucketPolicyState();
     }
 }

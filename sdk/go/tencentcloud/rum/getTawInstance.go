@@ -8,11 +8,52 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of rum tawInstance
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// _, err := Rum.GetTawInstance(ctx, &rum.GetTawInstanceArgs{
+// AreaIds: interface{}{
+// 1,
+// },
+// ChargeStatuses: interface{}{
+// 1,
+// },
+// ChargeTypes: interface{}{
+// 1,
+// },
+// InstanceIds: []string{
+// "rum-pasZKEI3RLgakj",
+// },
+// InstanceStatuses: interface{}{
+// 2,
+// },
+// }, nil);
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
 func LookupTawInstance(ctx *pulumi.Context, args *LookupTawInstanceArgs, opts ...pulumi.InvokeOption) (*LookupTawInstanceResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupTawInstanceResult
 	err := ctx.Invoke("tencentcloud:Rum/getTawInstance:getTawInstance", args, &rv, opts...)
 	if err != nil {

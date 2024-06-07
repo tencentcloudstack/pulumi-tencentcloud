@@ -8,13 +8,15 @@ import * as utilities from "../utilities";
  * Provides a resource to create a cloud file system(CFS).
  *
  * ## Example Usage
+ *
  * ### Standard Nfs CFS
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Cfs.FileSystem("foo", {
+ * const foo = new tencentcloud.cfs.FileSystem("foo", {
  *     accessGroupId: "pgroup-7nx89k7l",
  *     availabilityZone: "ap-guangzhou-3",
  *     protocol: "NFS",
@@ -22,13 +24,16 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-ah9fbkap",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### High-Performance Nfs CFS
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Cfs.FileSystem("foo", {
+ * const foo = new tencentcloud.cfs.FileSystem("foo", {
  *     accessGroupId: "pgroup-drwt29od",
  *     availabilityZone: "ap-guangzhou-6",
  *     protocol: "NFS",
@@ -37,13 +42,16 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-86v957zb",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Standard Turbo CFS
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Cfs.FileSystem("foo", {
+ * const foo = new tencentcloud.cfs.FileSystem("foo", {
  *     accessGroupId: "pgroup-drwt29od",
  *     availabilityZone: "ap-guangzhou-6",
  *     capacity: 20480,
@@ -54,13 +62,16 @@ import * as utilities from "../utilities";
  *     storageType: "TB",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### High-Performance Turbo CFS
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Cfs.FileSystem("foo", {
+ * const foo = new tencentcloud.cfs.FileSystem("foo", {
  *     accessGroupId: "pgroup-drwt29od",
  *     availabilityZone: "ap-guangzhou-6",
  *     capacity: 10240,
@@ -71,13 +82,14 @@ import * as utilities from "../utilities";
  *     storageType: "TP",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Cloud file system can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cfs/fileSystem:FileSystem foo cfs-6hgquxmj
+ * $ pulumi import tencentcloud:Cfs/fileSystem:FileSystem foo cfs-6hgquxmj
  * ```
  */
 export class FileSystem extends pulumi.CustomResource {

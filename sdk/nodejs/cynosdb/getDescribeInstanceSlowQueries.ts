@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeInstanceSlowQueries = pulumi.output(tencentcloud.Cynosdb.getDescribeInstanceSlowQueries({
+ * const describeInstanceSlowQueries = tencentcloud.Cynosdb.getDescribeInstanceSlowQueries({
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     endTime: "2023-06-19 14:00:00",
  *     startTime: "2023-06-01 12:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeInstanceSlowQueries(args: GetDescribeInstanceSlowQueriesArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeInstanceSlowQueriesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cynosdb/getDescribeInstanceSlowQueries:getDescribeInstanceSlowQueries", {
         "clusterId": args.clusterId,
         "endTime": args.endTime,
@@ -77,9 +77,26 @@ export interface GetDescribeInstanceSlowQueriesResult {
      */
     readonly startTime?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cynosdb describeInstanceSlowQueries
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeInstanceSlowQueries = tencentcloud.Cynosdb.getDescribeInstanceSlowQueries({
+ *     clusterId: "cynosdbmysql-bws8h88b",
+ *     endTime: "2023-06-19 14:00:00",
+ *     startTime: "2023-06-01 12:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeInstanceSlowQueriesOutput(args: GetDescribeInstanceSlowQueriesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeInstanceSlowQueriesResult> {
-    return pulumi.output(args).apply(a => getDescribeInstanceSlowQueries(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeInstanceSlowQueries(a, opts))
 }
 
 /**

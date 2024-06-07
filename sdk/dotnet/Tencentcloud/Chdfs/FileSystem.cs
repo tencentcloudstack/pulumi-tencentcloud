@@ -15,47 +15,48 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var fileSystem = new Tencentcloud.Chdfs.FileSystem("fileSystem", new()
     ///     {
-    ///         var fileSystem = new Tencentcloud.Chdfs.FileSystem("fileSystem", new Tencentcloud.Chdfs.FileSystemArgs
+    ///         CapacityQuota = 10995116277760,
+    ///         Description = "file system for terraform test",
+    ///         EnableRanger = true,
+    ///         FileSystemName = "terraform-test",
+    ///         PosixAcl = false,
+    ///         RangerServiceAddresses = new[]
     ///         {
-    ///             CapacityQuota = 10995116277760,
-    ///             Description = "file system for terraform test",
-    ///             EnableRanger = true,
-    ///             FileSystemName = "terraform-test",
-    ///             PosixAcl = false,
-    ///             RangerServiceAddresses = 
-    ///             {
-    ///                 "127.0.0.1:80",
-    ///                 "127.0.0.1:8000",
-    ///             },
-    ///             SuperUsers = 
-    ///             {
-    ///                 "terraform",
-    ///                 "iac",
-    ///             },
-    ///         });
-    ///     }
+    ///             "127.0.0.1:80",
+    ///             "127.0.0.1:8000",
+    ///         },
+    ///         SuperUsers = new[]
+    ///         {
+    ///             "terraform",
+    ///             "iac",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// chdfs file_system can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Chdfs/fileSystem:FileSystem file_system file_system_id
+    /// $ pulumi import tencentcloud:Chdfs/fileSystem:FileSystem file_system file_system_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Chdfs/fileSystem:FileSystem")]
-    public partial class FileSystem : Pulumi.CustomResource
+    public partial class FileSystem : global::Pulumi.CustomResource
     {
         /// <summary>
         /// file system capacity. min 1GB, max 1PB, CapacityQuota is N * 1073741824.
@@ -144,7 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         }
     }
 
-    public sealed class FileSystemArgs : Pulumi.ResourceArgs
+    public sealed class FileSystemArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// file system capacity. min 1GB, max 1PB, CapacityQuota is N * 1073741824.
@@ -203,9 +204,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public FileSystemArgs()
         {
         }
+        public static new FileSystemArgs Empty => new FileSystemArgs();
     }
 
-    public sealed class FileSystemState : Pulumi.ResourceArgs
+    public sealed class FileSystemState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// file system capacity. min 1GB, max 1PB, CapacityQuota is N * 1073741824.
@@ -264,5 +266,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public FileSystemState()
         {
         }
+        public static new FileSystemState Empty => new FileSystemState();
     }
 }

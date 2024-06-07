@@ -8,41 +8,44 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dbbrain redisTopBigKeys
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dbbrain.GetRedisTopBigKeys(ctx, &dbbrain.GetRedisTopBigKeysArgs{
-// 			InstanceId: local.Redis_id,
-// 			Date:       fmt.Sprintf("%v%v", "%", "s"),
-// 			Product:    "redis",
-// 			SortBy:     pulumi.StringRef("Capacity"),
-// 			KeyType:    pulumi.StringRef("string"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dbbrain.GetRedisTopBigKeys(ctx, &dbbrain.GetRedisTopBigKeysArgs{
+//				InstanceId: local.Redis_id,
+//				Date:       "%s",
+//				Product:    "redis",
+//				SortBy:     pulumi.StringRef("Capacity"),
+//				KeyType:    pulumi.StringRef("string"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetRedisTopBigKeys(ctx *pulumi.Context, args *GetRedisTopBigKeysArgs, opts ...pulumi.InvokeOption) (*GetRedisTopBigKeysResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRedisTopBigKeysResult
 	err := ctx.Invoke("tencentcloud:Dbbrain/getRedisTopBigKeys:getRedisTopBigKeys", args, &rv, opts...)
 	if err != nil {

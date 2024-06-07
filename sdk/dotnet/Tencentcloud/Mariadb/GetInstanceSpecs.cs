@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// <summary>
         /// Use this data source to query detailed information of mariadb instance_specs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var instanceSpecs = Output.Create(Tencentcloud.Mariadb.GetInstanceSpecs.InvokeAsync());
-        ///     }
+        ///     var instanceSpecs = Tencentcloud.Mariadb.GetInstanceSpecs.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceSpecsResult> InvokeAsync(GetInstanceSpecsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceSpecsResult>("tencentcloud:Mariadb/getInstanceSpecs:getInstanceSpecs", args ?? new GetInstanceSpecsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceSpecsResult>("tencentcloud:Mariadb/getInstanceSpecs:getInstanceSpecs", args ?? new GetInstanceSpecsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mariadb instance_specs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var instanceSpecs = Output.Create(Tencentcloud.Mariadb.GetInstanceSpecs.InvokeAsync());
-        ///     }
+        ///     var instanceSpecs = Tencentcloud.Mariadb.GetInstanceSpecs.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceSpecsResult> Invoke(GetInstanceSpecsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceSpecsResult>("tencentcloud:Mariadb/getInstanceSpecs:getInstanceSpecs", args ?? new GetInstanceSpecsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceSpecsResult>("tencentcloud:Mariadb/getInstanceSpecs:getInstanceSpecs", args ?? new GetInstanceSpecsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceSpecsArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceSpecsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetInstanceSpecsArgs()
         {
         }
+        public static new GetInstanceSpecsArgs Empty => new GetInstanceSpecsArgs();
     }
 
-    public sealed class GetInstanceSpecsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceSpecsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetInstanceSpecsInvokeArgs()
         {
         }
+        public static new GetInstanceSpecsInvokeArgs Empty => new GetInstanceSpecsInvokeArgs();
     }
 
 

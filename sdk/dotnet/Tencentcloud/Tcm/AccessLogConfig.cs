@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var accessLogConfig = new Tencentcloud.Tcm.AccessLogConfig("accessLogConfig", new()
     ///     {
-    ///         var accessLogConfig = new Tencentcloud.Tcm.AccessLogConfig("accessLogConfig", new Tencentcloud.Tcm.AccessLogConfigArgs
+    ///         Address = "10.0.0.1",
+    ///         Cls = new Tencentcloud.Tcm.Inputs.AccessLogConfigClsArgs
     ///         {
-    ///             Address = "10.0.0.1",
-    ///             Cls = new Tencentcloud.Tcm.Inputs.AccessLogConfigClsArgs
-    ///             {
-    ///                 Enable = false,
-    ///             },
-    ///             Enable = true,
-    ///             EnableServer = true,
-    ///             EnableStdout = true,
-    ///             Encoding = "JSON",
-    ///             Format = @"{
+    ///             Enable = false,
+    ///         },
+    ///         Enable = true,
+    ///         EnableServer = true,
+    ///         EnableStdout = true,
+    ///         Encoding = "JSON",
+    ///         Format = @"{
     /// 	""authority"": ""%REQ(:AUTHORITY)%"",
     /// 	""bytes_received"": ""%BYTES_RECEIVED%"",
     /// 	""bytes_sent"": ""%BYTES_SENT%"",
@@ -61,38 +62,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
     /// }
     /// 
     /// ",
-    ///             MeshName = "mesh-rofjmxxx",
-    ///             SelectedRange = new Tencentcloud.Tcm.Inputs.AccessLogConfigSelectedRangeArgs
-    ///             {
-    ///                 All = true,
-    ///             },
-    ///             Template = "istio",
-    ///         });
-    ///         var deleteLogConfig = new Tencentcloud.Tcm.AccessLogConfig("deleteLogConfig", new Tencentcloud.Tcm.AccessLogConfigArgs
+    ///         MeshName = "mesh-rofjmxxx",
+    ///         SelectedRange = new Tencentcloud.Tcm.Inputs.AccessLogConfigSelectedRangeArgs
     ///         {
-    ///             Cls = new Tencentcloud.Tcm.Inputs.AccessLogConfigClsArgs
-    ///             {
-    ///                 Enable = false,
-    ///             },
-    ///             EnableServer = false,
-    ///             EnableStdout = false,
-    ///             MeshName = "mesh-rofjmux7",
-    ///         });
-    ///     }
+    ///             All = true,
+    ///         },
+    ///         Template = "istio",
+    ///     });
     /// 
-    /// }
+    ///     var deleteLogConfig = new Tencentcloud.Tcm.AccessLogConfig("deleteLogConfig", new()
+    ///     {
+    ///         Cls = new Tencentcloud.Tcm.Inputs.AccessLogConfigClsArgs
+    ///         {
+    ///             Enable = false,
+    ///         },
+    ///         EnableServer = false,
+    ///         EnableStdout = false,
+    ///         MeshName = "mesh-rofjmux7",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcm access_log_config can be imported using the mesh_id(mesh_name), e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcm/accessLogConfig:AccessLogConfig access_log_config mesh-rofjmxxx
+    /// $ pulumi import tencentcloud:Tcm/accessLogConfig:AccessLogConfig access_log_config mesh-rofjmxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcm/accessLogConfig:AccessLogConfig")]
-    public partial class AccessLogConfig : Pulumi.CustomResource
+    public partial class AccessLogConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Third party grpc server address.
@@ -199,7 +201,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         }
     }
 
-    public sealed class AccessLogConfigArgs : Pulumi.ResourceArgs
+    public sealed class AccessLogConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Third party grpc server address.
@@ -264,9 +266,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         public AccessLogConfigArgs()
         {
         }
+        public static new AccessLogConfigArgs Empty => new AccessLogConfigArgs();
     }
 
-    public sealed class AccessLogConfigState : Pulumi.ResourceArgs
+    public sealed class AccessLogConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Third party grpc server address.
@@ -331,5 +334,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         public AccessLogConfigState()
         {
         }
+        public static new AccessLogConfigState Empty => new AccessLogConfigState();
     }
 }

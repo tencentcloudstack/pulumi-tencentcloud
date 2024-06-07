@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var backupTime = new Tencentcloud.Mariadb.BackupTime("backupTime", new()
     ///     {
-    ///         var backupTime = new Tencentcloud.Mariadb.BackupTime("backupTime", new Tencentcloud.Mariadb.BackupTimeArgs
-    ///         {
-    ///             EndBackupTime = "04:00",
-    ///             InstanceId = "tdsql-9vqvls95",
-    ///             StartBackupTime = "01:00",
-    ///         });
-    ///     }
+    ///         EndBackupTime = "04:00",
+    ///         InstanceId = "tdsql-9vqvls95",
+    ///         StartBackupTime = "01:00",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mariadb backup_time can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mariadb/backupTime:BackupTime backup_time backup_time_id
+    /// $ pulumi import tencentcloud:Mariadb/backupTime:BackupTime backup_time backup_time_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/backupTime:BackupTime")]
-    public partial class BackupTime : Pulumi.CustomResource
+    public partial class BackupTime : global::Pulumi.CustomResource
     {
         /// <summary>
         /// End time of daily backup window in the format of `mm:ss`, such as 23:59.
@@ -108,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class BackupTimeArgs : Pulumi.ResourceArgs
+    public sealed class BackupTimeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// End time of daily backup window in the format of `mm:ss`, such as 23:59.
@@ -131,9 +132,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public BackupTimeArgs()
         {
         }
+        public static new BackupTimeArgs Empty => new BackupTimeArgs();
     }
 
-    public sealed class BackupTimeState : Pulumi.ResourceArgs
+    public sealed class BackupTimeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// End time of daily backup window in the format of `mm:ss`, such as 23:59.
@@ -156,5 +158,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public BackupTimeState()
         {
         }
+        public static new BackupTimeState Empty => new BackupTimeState();
     }
 }

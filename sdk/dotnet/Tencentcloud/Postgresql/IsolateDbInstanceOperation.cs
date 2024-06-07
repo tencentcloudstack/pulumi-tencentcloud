@@ -15,28 +15,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var isolateDbInstanceOperation = new Tencentcloud.Postgresql.IsolateDbInstanceOperation("isolateDbInstanceOperation", new()
     ///     {
-    ///         var isolateDbInstanceOperation = new Tencentcloud.Postgresql.IsolateDbInstanceOperation("isolateDbInstanceOperation", new Tencentcloud.Postgresql.IsolateDbInstanceOperationArgs
+    ///         DbInstanceIdSets = new[]
     ///         {
-    ///             DbInstanceIdSets = 
-    ///             {
-    ///                 local.Pgsql_id,
-    ///             },
-    ///         });
-    ///     }
+    ///             local.Pgsql_id,
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/isolateDbInstanceOperation:IsolateDbInstanceOperation")]
-    public partial class IsolateDbInstanceOperation : Pulumi.CustomResource
+    public partial class IsolateDbInstanceOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// List of resource IDs. Note that currently you cannot isolate multiple instances at the same time. Only one instance ID can be passed in here.
@@ -89,7 +90,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class IsolateDbInstanceOperationArgs : Pulumi.ResourceArgs
+    public sealed class IsolateDbInstanceOperationArgs : global::Pulumi.ResourceArgs
     {
         [Input("dbInstanceIdSets", required: true)]
         private InputList<string>? _dbInstanceIdSets;
@@ -106,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public IsolateDbInstanceOperationArgs()
         {
         }
+        public static new IsolateDbInstanceOperationArgs Empty => new IsolateDbInstanceOperationArgs();
     }
 
-    public sealed class IsolateDbInstanceOperationState : Pulumi.ResourceArgs
+    public sealed class IsolateDbInstanceOperationState : global::Pulumi.ResourceArgs
     {
         [Input("dbInstanceIdSets")]
         private InputList<string>? _dbInstanceIdSets;
@@ -125,5 +127,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public IsolateDbInstanceOperationState()
         {
         }
+        public static new IsolateDbInstanceOperationState Empty => new IsolateDbInstanceOperationState();
     }
 }

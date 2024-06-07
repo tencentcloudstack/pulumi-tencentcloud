@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class ConnectResourceDorisConnectParamArgs : Pulumi.ResourceArgs
+    public sealed class ConnectResourceDorisConnectParamArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Doris http CLB port, Usually mapped to port 8040 of be.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public ConnectResourceDorisConnectParamArgs()
         {
         }
+        public static new ConnectResourceDorisConnectParamArgs Empty => new ConnectResourceDorisConnectParamArgs();
     }
 }

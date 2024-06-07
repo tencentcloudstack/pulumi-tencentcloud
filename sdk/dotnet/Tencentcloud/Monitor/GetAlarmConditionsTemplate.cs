@@ -15,74 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query detailed information of monitor alarm_conditions_template
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var alarmConditionsTemplate = Tencentcloud.Monitor.GetAlarmConditionsTemplate.Invoke(new()
         ///     {
-        ///         var alarmConditionsTemplate = Output.Create(Tencentcloud.Monitor.GetAlarmConditionsTemplate.InvokeAsync(new Tencentcloud.Monitor.GetAlarmConditionsTemplateArgs
-        ///         {
-        ///             GroupId = "7803070",
-        ///             GroupName = "keep-template",
-        ///             Module = "monitor",
-        ///             PolicyCountOrder = "asc=ascending",
-        ///             UpdateTimeOrder = "desc=descending",
-        ///             ViewName = "cvm_device",
-        ///         }));
-        ///     }
+        ///         GroupId = "7803070",
+        ///         GroupName = "keep-template",
+        ///         Module = "monitor",
+        ///         PolicyCountOrder = "asc=ascending",
+        ///         UpdateTimeOrder = "desc=descending",
+        ///         ViewName = "cvm_device",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAlarmConditionsTemplateResult> InvokeAsync(GetAlarmConditionsTemplateArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAlarmConditionsTemplateResult>("tencentcloud:Monitor/getAlarmConditionsTemplate:getAlarmConditionsTemplate", args ?? new GetAlarmConditionsTemplateArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmConditionsTemplateResult>("tencentcloud:Monitor/getAlarmConditionsTemplate:getAlarmConditionsTemplate", args ?? new GetAlarmConditionsTemplateArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of monitor alarm_conditions_template
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var alarmConditionsTemplate = Tencentcloud.Monitor.GetAlarmConditionsTemplate.Invoke(new()
         ///     {
-        ///         var alarmConditionsTemplate = Output.Create(Tencentcloud.Monitor.GetAlarmConditionsTemplate.InvokeAsync(new Tencentcloud.Monitor.GetAlarmConditionsTemplateArgs
-        ///         {
-        ///             GroupId = "7803070",
-        ///             GroupName = "keep-template",
-        ///             Module = "monitor",
-        ///             PolicyCountOrder = "asc=ascending",
-        ///             UpdateTimeOrder = "desc=descending",
-        ///             ViewName = "cvm_device",
-        ///         }));
-        ///     }
+        ///         GroupId = "7803070",
+        ///         GroupName = "keep-template",
+        ///         Module = "monitor",
+        ///         PolicyCountOrder = "asc=ascending",
+        ///         UpdateTimeOrder = "desc=descending",
+        ///         ViewName = "cvm_device",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAlarmConditionsTemplateResult> Invoke(GetAlarmConditionsTemplateInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAlarmConditionsTemplateResult>("tencentcloud:Monitor/getAlarmConditionsTemplate:getAlarmConditionsTemplate", args ?? new GetAlarmConditionsTemplateInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAlarmConditionsTemplateResult>("tencentcloud:Monitor/getAlarmConditionsTemplate:getAlarmConditionsTemplate", args ?? new GetAlarmConditionsTemplateInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAlarmConditionsTemplateArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmConditionsTemplateArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter queries based on trigger condition template ID.
@@ -129,9 +123,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmConditionsTemplateArgs()
         {
         }
+        public static new GetAlarmConditionsTemplateArgs Empty => new GetAlarmConditionsTemplateArgs();
     }
 
-    public sealed class GetAlarmConditionsTemplateInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmConditionsTemplateInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter queries based on trigger condition template ID.
@@ -178,6 +173,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmConditionsTemplateInvokeArgs()
         {
         }
+        public static new GetAlarmConditionsTemplateInvokeArgs Empty => new GetAlarmConditionsTemplateInvokeArgs();
     }
 
 

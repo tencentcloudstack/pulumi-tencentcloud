@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
     public sealed class GetAttachmentsAttachmentListTargetResult
     {
         /// <summary>
+        /// Elastic network card unique ID.
+        /// </summary>
+        public readonly string EniIp;
+        /// <summary>
         /// Id of the backend server.
         /// </summary>
         public readonly string InstanceId;
@@ -29,12 +33,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
 
         [OutputConstructor]
         private GetAttachmentsAttachmentListTargetResult(
+            string eniIp,
+
             string instanceId,
 
             int port,
 
             int weight)
         {
+            EniIp = eniIp;
             InstanceId = instanceId;
             Port = port;
             Weight = weight;

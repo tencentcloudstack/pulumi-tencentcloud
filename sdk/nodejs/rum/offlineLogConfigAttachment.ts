@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const offlineLogConfigAttachment = new tencentcloud.Rum.OfflineLogConfigAttachment("offline_log_config_attachment", {
+ * const offlineLogConfigAttachment = new tencentcloud.rum.OfflineLogConfigAttachment("offlineLogConfigAttachment", {
  *     projectKey: "ZEYrYfvaYQ30jRdmPx",
  *     uniqueId: "100027012454",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * rum offline_log_config_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Rum/offlineLogConfigAttachment:OfflineLogConfigAttachment offline_log_config_attachment ZEYrYfvaYQ30jRdmPx#100027012454
+ * $ pulumi import tencentcloud:Rum/offlineLogConfigAttachment:OfflineLogConfigAttachment offline_log_config_attachment ZEYrYfvaYQ30jRdmPx#100027012454
  * ```
  */
 export class OfflineLogConfigAttachment extends pulumi.CustomResource {

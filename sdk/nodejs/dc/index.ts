@@ -5,29 +5,76 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./gateway";
-export * from "./gatewayAttachment";
-export * from "./gatewayCcnRoute";
-export * from "./getAccessPoints";
-export * from "./getGatewayCcnRoutes";
-export * from "./getGatewayInstances";
-export * from "./getInstances";
-export * from "./getInternetAddressQuota";
-export * from "./getInternetAddressStatistics";
-export * from "./getPublicDirectConnectTunnelRoutes";
-export * from "./instance";
-export * from "./internetAddress";
-export * from "./internetAddressConfig";
-export * from "./shareDcxConfig";
+export { GatewayArgs, GatewayState } from "./gateway";
+export type Gateway = import("./gateway").Gateway;
+export const Gateway: typeof import("./gateway").Gateway = null as any;
+utilities.lazyLoad(exports, ["Gateway"], () => require("./gateway"));
 
-// Import resources to register:
-import { Gateway } from "./gateway";
-import { GatewayAttachment } from "./gatewayAttachment";
-import { GatewayCcnRoute } from "./gatewayCcnRoute";
-import { Instance } from "./instance";
-import { InternetAddress } from "./internetAddress";
-import { InternetAddressConfig } from "./internetAddressConfig";
-import { ShareDcxConfig } from "./shareDcxConfig";
+export { GatewayAttachmentArgs, GatewayAttachmentState } from "./gatewayAttachment";
+export type GatewayAttachment = import("./gatewayAttachment").GatewayAttachment;
+export const GatewayAttachment: typeof import("./gatewayAttachment").GatewayAttachment = null as any;
+utilities.lazyLoad(exports, ["GatewayAttachment"], () => require("./gatewayAttachment"));
+
+export { GatewayCcnRouteArgs, GatewayCcnRouteState } from "./gatewayCcnRoute";
+export type GatewayCcnRoute = import("./gatewayCcnRoute").GatewayCcnRoute;
+export const GatewayCcnRoute: typeof import("./gatewayCcnRoute").GatewayCcnRoute = null as any;
+utilities.lazyLoad(exports, ["GatewayCcnRoute"], () => require("./gatewayCcnRoute"));
+
+export { GetAccessPointsArgs, GetAccessPointsResult, GetAccessPointsOutputArgs } from "./getAccessPoints";
+export const getAccessPoints: typeof import("./getAccessPoints").getAccessPoints = null as any;
+export const getAccessPointsOutput: typeof import("./getAccessPoints").getAccessPointsOutput = null as any;
+utilities.lazyLoad(exports, ["getAccessPoints","getAccessPointsOutput"], () => require("./getAccessPoints"));
+
+export { GetGatewayCcnRoutesArgs, GetGatewayCcnRoutesResult, GetGatewayCcnRoutesOutputArgs } from "./getGatewayCcnRoutes";
+export const getGatewayCcnRoutes: typeof import("./getGatewayCcnRoutes").getGatewayCcnRoutes = null as any;
+export const getGatewayCcnRoutesOutput: typeof import("./getGatewayCcnRoutes").getGatewayCcnRoutesOutput = null as any;
+utilities.lazyLoad(exports, ["getGatewayCcnRoutes","getGatewayCcnRoutesOutput"], () => require("./getGatewayCcnRoutes"));
+
+export { GetGatewayInstancesArgs, GetGatewayInstancesResult, GetGatewayInstancesOutputArgs } from "./getGatewayInstances";
+export const getGatewayInstances: typeof import("./getGatewayInstances").getGatewayInstances = null as any;
+export const getGatewayInstancesOutput: typeof import("./getGatewayInstances").getGatewayInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getGatewayInstances","getGatewayInstancesOutput"], () => require("./getGatewayInstances"));
+
+export { GetInstancesArgs, GetInstancesResult, GetInstancesOutputArgs } from "./getInstances";
+export const getInstances: typeof import("./getInstances").getInstances = null as any;
+export const getInstancesOutput: typeof import("./getInstances").getInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstances","getInstancesOutput"], () => require("./getInstances"));
+
+export { GetInternetAddressQuotaArgs, GetInternetAddressQuotaResult, GetInternetAddressQuotaOutputArgs } from "./getInternetAddressQuota";
+export const getInternetAddressQuota: typeof import("./getInternetAddressQuota").getInternetAddressQuota = null as any;
+export const getInternetAddressQuotaOutput: typeof import("./getInternetAddressQuota").getInternetAddressQuotaOutput = null as any;
+utilities.lazyLoad(exports, ["getInternetAddressQuota","getInternetAddressQuotaOutput"], () => require("./getInternetAddressQuota"));
+
+export { GetInternetAddressStatisticsArgs, GetInternetAddressStatisticsResult, GetInternetAddressStatisticsOutputArgs } from "./getInternetAddressStatistics";
+export const getInternetAddressStatistics: typeof import("./getInternetAddressStatistics").getInternetAddressStatistics = null as any;
+export const getInternetAddressStatisticsOutput: typeof import("./getInternetAddressStatistics").getInternetAddressStatisticsOutput = null as any;
+utilities.lazyLoad(exports, ["getInternetAddressStatistics","getInternetAddressStatisticsOutput"], () => require("./getInternetAddressStatistics"));
+
+export { GetPublicDirectConnectTunnelRoutesArgs, GetPublicDirectConnectTunnelRoutesResult, GetPublicDirectConnectTunnelRoutesOutputArgs } from "./getPublicDirectConnectTunnelRoutes";
+export const getPublicDirectConnectTunnelRoutes: typeof import("./getPublicDirectConnectTunnelRoutes").getPublicDirectConnectTunnelRoutes = null as any;
+export const getPublicDirectConnectTunnelRoutesOutput: typeof import("./getPublicDirectConnectTunnelRoutes").getPublicDirectConnectTunnelRoutesOutput = null as any;
+utilities.lazyLoad(exports, ["getPublicDirectConnectTunnelRoutes","getPublicDirectConnectTunnelRoutesOutput"], () => require("./getPublicDirectConnectTunnelRoutes"));
+
+export { InstanceArgs, InstanceState } from "./instance";
+export type Instance = import("./instance").Instance;
+export const Instance: typeof import("./instance").Instance = null as any;
+utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { InternetAddressArgs, InternetAddressState } from "./internetAddress";
+export type InternetAddress = import("./internetAddress").InternetAddress;
+export const InternetAddress: typeof import("./internetAddress").InternetAddress = null as any;
+utilities.lazyLoad(exports, ["InternetAddress"], () => require("./internetAddress"));
+
+export { InternetAddressConfigArgs, InternetAddressConfigState } from "./internetAddressConfig";
+export type InternetAddressConfig = import("./internetAddressConfig").InternetAddressConfig;
+export const InternetAddressConfig: typeof import("./internetAddressConfig").InternetAddressConfig = null as any;
+utilities.lazyLoad(exports, ["InternetAddressConfig"], () => require("./internetAddressConfig"));
+
+export { ShareDcxConfigArgs, ShareDcxConfigState } from "./shareDcxConfig";
+export type ShareDcxConfig = import("./shareDcxConfig").ShareDcxConfig;
+export const ShareDcxConfig: typeof import("./shareDcxConfig").ShareDcxConfig = null as any;
+utilities.lazyLoad(exports, ["ShareDcxConfig"], () => require("./shareDcxConfig"));
+
 
 const _module = {
     version: utilities.getVersion(),

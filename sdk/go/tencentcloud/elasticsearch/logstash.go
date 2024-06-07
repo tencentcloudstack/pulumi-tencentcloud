@@ -7,69 +7,74 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a elasticsearch logstash
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.NewLogstash(ctx, "logstash", &Elasticsearch.LogstashArgs{
-// 			ChargeType:      pulumi.String("POSTPAID_BY_HOUR"),
-// 			DiskSize:        pulumi.Int(20),
-// 			DiskType:        pulumi.String("CLOUD_SSD"),
-// 			InstanceName:    pulumi.String("logstash-test"),
-// 			LicenseType:     pulumi.String("xpack"),
-// 			LogstashVersion: pulumi.String("7.14.2"),
-// 			NodeNum:         pulumi.Int(1),
-// 			NodeType:        pulumi.String("LOGSTASH.SA2.MEDIUM4"),
-// 			OperationDuration: &elasticsearch.LogstashOperationDurationArgs{
-// 				Periods: pulumi.IntArray{
-// 					pulumi.Int(1),
-// 					pulumi.Int(2),
-// 					pulumi.Int(3),
-// 					pulumi.Int(4),
-// 					pulumi.Int(5),
-// 					pulumi.Int(6),
-// 					pulumi.Int(0),
-// 				},
-// 				TimeEnd:   pulumi.String("06:00"),
-// 				TimeStart: pulumi.String("02:00"),
-// 				TimeZone:  pulumi.String("UTC+8"),
-// 			},
-// 			SubnetId: pulumi.String("subnet-4o0zd840"),
-// 			Tags: pulumi.AnyMap{
-// 				"tagKey": pulumi.Any("tagValue"),
-// 			},
-// 			VpcId: pulumi.String("vpc-4owdpnwr"),
-// 			Zone:  pulumi.String("ap-guangzhou-6"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.NewLogstash(ctx, "logstash", &Elasticsearch.LogstashArgs{
+//				ChargeType:      pulumi.String("POSTPAID_BY_HOUR"),
+//				DiskSize:        pulumi.Int(20),
+//				DiskType:        pulumi.String("CLOUD_SSD"),
+//				InstanceName:    pulumi.String("logstash-test"),
+//				LicenseType:     pulumi.String("xpack"),
+//				LogstashVersion: pulumi.String("7.14.2"),
+//				NodeNum:         pulumi.Int(1),
+//				NodeType:        pulumi.String("LOGSTASH.SA2.MEDIUM4"),
+//				OperationDuration: &elasticsearch.LogstashOperationDurationArgs{
+//					Periods: pulumi.IntArray{
+//						pulumi.Int(1),
+//						pulumi.Int(2),
+//						pulumi.Int(3),
+//						pulumi.Int(4),
+//						pulumi.Int(5),
+//						pulumi.Int(6),
+//						pulumi.Int(0),
+//					},
+//					TimeEnd:   pulumi.String("06:00"),
+//					TimeStart: pulumi.String("02:00"),
+//					TimeZone:  pulumi.String("UTC+8"),
+//				},
+//				SubnetId: pulumi.String("subnet-4o0zd840"),
+//				Tags: pulumi.Map{
+//					"tagKey": pulumi.Any("tagValue"),
+//				},
+//				VpcId: pulumi.String("vpc-4owdpnwr"),
+//				Zone:  pulumi.String("ap-guangzhou-6"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // elasticsearch logstash can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Elasticsearch/logstash:Logstash logstash logstash_id
+// $ pulumi import tencentcloud:Elasticsearch/logstash:Logstash logstash logstash_id
 // ```
 type Logstash struct {
 	pulumi.CustomResourceState
@@ -141,7 +146,7 @@ func NewLogstash(ctx *pulumi.Context,
 	if args.Zone == nil {
 		return nil, errors.New("invalid value for required argument 'Zone'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Logstash
 	err := ctx.RegisterResource("tencentcloud:Elasticsearch/logstash:Logstash", name, args, &resource, opts...)
 	if err != nil {
@@ -378,7 +383,7 @@ func (i *Logstash) ToLogstashOutputWithContext(ctx context.Context) LogstashOutp
 // LogstashArrayInput is an input type that accepts LogstashArray and LogstashArrayOutput values.
 // You can construct a concrete instance of `LogstashArrayInput` via:
 //
-//          LogstashArray{ LogstashArgs{...} }
+//	LogstashArray{ LogstashArgs{...} }
 type LogstashArrayInput interface {
 	pulumi.Input
 
@@ -403,7 +408,7 @@ func (i LogstashArray) ToLogstashArrayOutputWithContext(ctx context.Context) Log
 // LogstashMapInput is an input type that accepts LogstashMap and LogstashMapOutput values.
 // You can construct a concrete instance of `LogstashMapInput` via:
 //
-//          LogstashMap{ "key": LogstashArgs{...} }
+//	LogstashMap{ "key": LogstashArgs{...} }
 type LogstashMapInput interface {
 	pulumi.Input
 

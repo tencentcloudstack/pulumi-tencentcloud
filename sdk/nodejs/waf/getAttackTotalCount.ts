@@ -8,39 +8,42 @@ import * as utilities from "../utilities";
  * Use this data source to query detailed information of waf attackTotalCount
  *
  * ## Example Usage
+ *
  * ### Obtain the specified domain name attack log
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getAttackTotalCount({
+ * const example = tencentcloud.Waf.getAttackTotalCount({
  *     domain: "domain.com",
  *     endTime: "2023-09-07 00:00:00",
  *     queryString: "method:GET",
  *     startTime: "2023-09-01 00:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Obtain all domain name attack log
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getAttackTotalCount({
+ * const example = tencentcloud.Waf.getAttackTotalCount({
  *     domain: "all",
  *     endTime: "2023-09-07 00:00:00",
  *     queryString: "method:GET",
  *     startTime: "2023-09-01 00:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAttackTotalCount(args: GetAttackTotalCountArgs, opts?: pulumi.InvokeOptions): Promise<GetAttackTotalCountResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Waf/getAttackTotalCount:getAttackTotalCount", {
         "domain": args.domain,
         "endTime": args.endTime,
@@ -94,9 +97,45 @@ export interface GetAttackTotalCountResult {
      */
     readonly totalCount: number;
 }
-
+/**
+ * Use this data source to query detailed information of waf attackTotalCount
+ *
+ * ## Example Usage
+ *
+ * ### Obtain the specified domain name attack log
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getAttackTotalCount({
+ *     domain: "domain.com",
+ *     endTime: "2023-09-07 00:00:00",
+ *     queryString: "method:GET",
+ *     startTime: "2023-09-01 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Obtain all domain name attack log
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getAttackTotalCount({
+ *     domain: "all",
+ *     endTime: "2023-09-07 00:00:00",
+ *     queryString: "method:GET",
+ *     startTime: "2023-09-01 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAttackTotalCountOutput(args: GetAttackTotalCountOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAttackTotalCountResult> {
-    return pulumi.output(args).apply(a => getAttackTotalCount(a, opts))
+    return pulumi.output(args).apply((a: any) => getAttackTotalCount(a, opts))
 }
 
 /**

@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const dayuDdosPolicyAttachmentBasic = new tencentcloud.dayu.DdosPolicyAttachment("dayuDdosPolicyAttachmentBasic", {
  *     resourceType: tencentcloud_dayu_ddos_policy.test_policy.resource_type,
@@ -19,6 +20,7 @@ import * as utilities from "../utilities";
  *     policyId: tencentcloud_dayu_ddos_policy.test_policy.policy_id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class DdosPolicyAttachment extends pulumi.CustomResource {
     /**

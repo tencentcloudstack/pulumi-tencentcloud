@@ -2,46 +2,50 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of waf peakPoints
  *
  * ## Example Usage
+ *
  * ### Basic Query
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getPeakPoints({
+ * const example = tencentcloud.Waf.getPeakPoints({
  *     fromTime: "2023-09-01 00:00:00",
  *     toTime: "2023-09-07 00:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Query by filter
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getPeakPoints({
+ * const example = tencentcloud.Waf.getPeakPoints({
  *     domain: "domain.com",
  *     edition: "clb-waf",
  *     fromTime: "2023-09-01 00:00:00",
  *     instanceId: "waf_2kxtlbky00b2v1fn",
  *     metricName: "access",
  *     toTime: "2023-09-07 00:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPeakPoints(args: GetPeakPointsArgs, opts?: pulumi.InvokeOptions): Promise<GetPeakPointsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Waf/getPeakPoints:getPeakPoints", {
         "domain": args.domain,
         "edition": args.edition,
@@ -107,9 +111,45 @@ export interface GetPeakPointsResult {
     readonly resultOutputFile?: string;
     readonly toTime: string;
 }
-
+/**
+ * Use this data source to query detailed information of waf peakPoints
+ *
+ * ## Example Usage
+ *
+ * ### Basic Query
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getPeakPoints({
+ *     fromTime: "2023-09-01 00:00:00",
+ *     toTime: "2023-09-07 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query by filter
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getPeakPoints({
+ *     domain: "domain.com",
+ *     edition: "clb-waf",
+ *     fromTime: "2023-09-01 00:00:00",
+ *     instanceId: "waf_2kxtlbky00b2v1fn",
+ *     metricName: "access",
+ *     toTime: "2023-09-07 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPeakPointsOutput(args: GetPeakPointsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPeakPointsResult> {
-    return pulumi.output(args).apply(a => getPeakPoints(a, opts))
+    return pulumi.output(args).apply((a: any) => getPeakPoints(a, opts))
 }
 
 /**

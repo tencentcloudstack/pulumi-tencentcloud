@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var checkCertificateChain = new Tencentcloud.Ssl.CheckCertificateChainOperation("checkCertificateChain", new()
     ///     {
-    ///         var checkCertificateChain = new Tencentcloud.Ssl.CheckCertificateChainOperation("checkCertificateChain", new Tencentcloud.Ssl.CheckCertificateChainOperationArgs
-    ///         {
-    ///             CertificateChain = "-----BEGIN CERTIFICATE--·····---END CERTIFICATE-----",
-    ///         });
-    ///     }
+    ///         CertificateChain = "-----BEGIN CERTIFICATE--·····---END CERTIFICATE-----",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ssl check_certificate_chain can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ssl/checkCertificateChainOperation:CheckCertificateChainOperation check_certificate_chain check_certificate_chain_id
+    /// $ pulumi import tencentcloud:Ssl/checkCertificateChainOperation:CheckCertificateChainOperation check_certificate_chain check_certificate_chain_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/checkCertificateChainOperation:CheckCertificateChainOperation")]
-    public partial class CheckCertificateChainOperation : Pulumi.CustomResource
+    public partial class CheckCertificateChainOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The certificate chain to check.
@@ -94,7 +95,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         }
     }
 
-    public sealed class CheckCertificateChainOperationArgs : Pulumi.ResourceArgs
+    public sealed class CheckCertificateChainOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The certificate chain to check.
@@ -105,9 +106,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public CheckCertificateChainOperationArgs()
         {
         }
+        public static new CheckCertificateChainOperationArgs Empty => new CheckCertificateChainOperationArgs();
     }
 
-    public sealed class CheckCertificateChainOperationState : Pulumi.ResourceArgs
+    public sealed class CheckCertificateChainOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The certificate chain to check.
@@ -118,5 +120,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public CheckCertificateChainOperationState()
         {
         }
+        public static new CheckCertificateChainOperationState Empty => new CheckCertificateChainOperationState();
     }
 }

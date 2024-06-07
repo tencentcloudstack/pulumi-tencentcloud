@@ -15,98 +15,92 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql slow_log_data
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var slowLogData = Tencentcloud.Mysql.GetSlowLogData.Invoke(new()
         ///     {
-        ///         var slowLogData = Output.Create(Tencentcloud.Mysql.GetSlowLogData.InvokeAsync(new Tencentcloud.Mysql.GetSlowLogDataArgs
+        ///         DataBases = new[]
         ///         {
-        ///             DataBases = 
-        ///             {
-        ///                 "tf_ci_test",
-        ///             },
-        ///             EndTime = 1684392459,
-        ///             InstType = "slave",
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///             OrderBy = "ASC",
-        ///             SortBy = "Timestamp",
-        ///             StartTime = 1682664459,
-        ///             UserHosts = 
-        ///             {
-        ///                 "169.254.128.158",
-        ///             },
-        ///             UserNames = 
-        ///             {
-        ///                 "keep_dts",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "tf_ci_test",
+        ///         },
+        ///         EndTime = 1684392459,
+        ///         InstType = "slave",
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///         OrderBy = "ASC",
+        ///         SortBy = "Timestamp",
+        ///         StartTime = 1682664459,
+        ///         UserHosts = new[]
+        ///         {
+        ///             "169.254.128.158",
+        ///         },
+        ///         UserNames = new[]
+        ///         {
+        ///             "keep_dts",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSlowLogDataResult> InvokeAsync(GetSlowLogDataArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogDataResult>("tencentcloud:Mysql/getSlowLogData:getSlowLogData", args ?? new GetSlowLogDataArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogDataResult>("tencentcloud:Mysql/getSlowLogData:getSlowLogData", args ?? new GetSlowLogDataArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql slow_log_data
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var slowLogData = Tencentcloud.Mysql.GetSlowLogData.Invoke(new()
         ///     {
-        ///         var slowLogData = Output.Create(Tencentcloud.Mysql.GetSlowLogData.InvokeAsync(new Tencentcloud.Mysql.GetSlowLogDataArgs
+        ///         DataBases = new[]
         ///         {
-        ///             DataBases = 
-        ///             {
-        ///                 "tf_ci_test",
-        ///             },
-        ///             EndTime = 1684392459,
-        ///             InstType = "slave",
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///             OrderBy = "ASC",
-        ///             SortBy = "Timestamp",
-        ///             StartTime = 1682664459,
-        ///             UserHosts = 
-        ///             {
-        ///                 "169.254.128.158",
-        ///             },
-        ///             UserNames = 
-        ///             {
-        ///                 "keep_dts",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "tf_ci_test",
+        ///         },
+        ///         EndTime = 1684392459,
+        ///         InstType = "slave",
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///         OrderBy = "ASC",
+        ///         SortBy = "Timestamp",
+        ///         StartTime = 1682664459,
+        ///         UserHosts = new[]
+        ///         {
+        ///             "169.254.128.158",
+        ///         },
+        ///         UserNames = new[]
+        ///         {
+        ///             "keep_dts",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSlowLogDataResult> Invoke(GetSlowLogDataInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSlowLogDataResult>("tencentcloud:Mysql/getSlowLogData:getSlowLogData", args ?? new GetSlowLogDataInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogDataResult>("tencentcloud:Mysql/getSlowLogData:getSlowLogData", args ?? new GetSlowLogDataInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSlowLogDataArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowLogDataArgs : global::Pulumi.InvokeArgs
     {
         [Input("dataBases")]
         private List<string>? _dataBases;
@@ -189,9 +183,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetSlowLogDataArgs()
         {
         }
+        public static new GetSlowLogDataArgs Empty => new GetSlowLogDataArgs();
     }
 
-    public sealed class GetSlowLogDataInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowLogDataInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("dataBases")]
         private InputList<string>? _dataBases;
@@ -274,6 +269,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetSlowLogDataInvokeArgs()
         {
         }
+        public static new GetSlowLogDataInvokeArgs Empty => new GetSlowLogDataInvokeArgs();
     }
 
 

@@ -7,48 +7,54 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a bi userRole
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Bi"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Bi.NewUserRole(ctx, "userRole", &Bi.UserRoleArgs{
-// 			AreaCode:    pulumi.String("+83"),
-// 			Email:       pulumi.String("1055000000@qq.com"),
-// 			PhoneNumber: pulumi.String("13470010000"),
-// 			RoleIdLists: pulumi.IntArray{
-// 				pulumi.Int(10629359),
-// 			},
-// 			UserId:   pulumi.String("100032767426"),
-// 			UserName: pulumi.String("keep-iac-test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Bi.NewUserRole(ctx, "userRole", &Bi.UserRoleArgs{
+//				AreaCode:    pulumi.String("+83"),
+//				Email:       pulumi.String("1055000000@qq.com"),
+//				PhoneNumber: pulumi.String("13470010000"),
+//				RoleIdLists: pulumi.IntArray{
+//					pulumi.Int(10629359),
+//				},
+//				UserId:   pulumi.String("100032767426"),
+//				UserName: pulumi.String("keep-iac-test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // bi user_role can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Bi/userRole:UserRole user_role user_id
+// $ pulumi import tencentcloud:Bi/userRole:UserRole user_role user_id
 // ```
 type UserRole struct {
 	pulumi.CustomResourceState
@@ -92,7 +98,7 @@ func NewUserRole(ctx *pulumi.Context,
 	if args.UserName == nil {
 		return nil, errors.New("invalid value for required argument 'UserName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UserRole
 	err := ctx.RegisterResource("tencentcloud:Bi/userRole:UserRole", name, args, &resource, opts...)
 	if err != nil {
@@ -205,7 +211,7 @@ func (i *UserRole) ToUserRoleOutputWithContext(ctx context.Context) UserRoleOutp
 // UserRoleArrayInput is an input type that accepts UserRoleArray and UserRoleArrayOutput values.
 // You can construct a concrete instance of `UserRoleArrayInput` via:
 //
-//          UserRoleArray{ UserRoleArgs{...} }
+//	UserRoleArray{ UserRoleArgs{...} }
 type UserRoleArrayInput interface {
 	pulumi.Input
 
@@ -230,7 +236,7 @@ func (i UserRoleArray) ToUserRoleArrayOutputWithContext(ctx context.Context) Use
 // UserRoleMapInput is an input type that accepts UserRoleMap and UserRoleMapOutput values.
 // You can construct a concrete instance of `UserRoleMapInput` via:
 //
-//          UserRoleMap{ "key": UserRoleArgs{...} }
+//	UserRoleMap{ "key": UserRoleArgs{...} }
 type UserRoleMapInput interface {
 	pulumi.Input
 

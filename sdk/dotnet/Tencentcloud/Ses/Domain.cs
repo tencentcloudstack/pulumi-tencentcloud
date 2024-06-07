@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var domain = new Tencentcloud.Ses.Domain("domain", new()
     ///     {
-    ///         var domain = new Tencentcloud.Ses.Domain("domain", new Tencentcloud.Ses.DomainArgs
-    ///         {
-    ///             EmailIdentity = "iac.cloud",
-    ///         });
-    ///     }
+    ///         EmailIdentity = "iac.cloud",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ses domain can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ses/domain:Domain domain iac.cloud
+    /// $ pulumi import tencentcloud:Ses/domain:Domain domain iac.cloud
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ses/domain:Domain")]
-    public partial class Domain : Pulumi.CustomResource
+    public partial class Domain : global::Pulumi.CustomResource
     {
         /// <summary>
         /// DNS configuration details.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         }
     }
 
-    public sealed class DomainArgs : Pulumi.ResourceArgs
+    public sealed class DomainArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
@@ -111,9 +112,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public DomainArgs()
         {
         }
+        public static new DomainArgs Empty => new DomainArgs();
     }
 
-    public sealed class DomainState : Pulumi.ResourceArgs
+    public sealed class DomainState : global::Pulumi.ResourceArgs
     {
         [Input("attributes")]
         private InputList<Inputs.DomainAttributeGetArgs>? _attributes;
@@ -136,5 +138,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public DomainState()
         {
         }
+        public static new DomainState Empty => new DomainState();
     }
 }

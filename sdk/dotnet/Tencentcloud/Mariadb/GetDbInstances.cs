@@ -15,82 +15,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// <summary>
         /// Use this data source to query detailed information of mariadb dbInstances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var dbInstances = Tencentcloud.Mariadb.GetDbInstances.Invoke(new()
         ///     {
-        ///         var dbInstances = Output.Create(Tencentcloud.Mariadb.GetDbInstances.InvokeAsync(new Tencentcloud.Mariadb.GetDbInstancesArgs
+        ///         InstanceIds = new[]
         ///         {
-        ///             InstanceIds = 
-        ///             {
-        ///                 "tdsql-ijxtqk5p",
-        ///             },
-        ///             ProjectIds = 
-        ///             {
-        ///                 0,
-        ///             },
-        ///             SubnetId = "3454730",
-        ///             VpcId = "5556791",
-        ///         }));
-        ///     }
+        ///             "tdsql-ijxtqk5p",
+        ///         },
+        ///         ProjectIds = new[]
+        ///         {
+        ///             0,
+        ///         },
+        ///         SubnetId = "3454730",
+        ///         VpcId = "5556791",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDbInstancesResult> InvokeAsync(GetDbInstancesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDbInstancesResult>("tencentcloud:Mariadb/getDbInstances:getDbInstances", args ?? new GetDbInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbInstancesResult>("tencentcloud:Mariadb/getDbInstances:getDbInstances", args ?? new GetDbInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mariadb dbInstances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var dbInstances = Tencentcloud.Mariadb.GetDbInstances.Invoke(new()
         ///     {
-        ///         var dbInstances = Output.Create(Tencentcloud.Mariadb.GetDbInstances.InvokeAsync(new Tencentcloud.Mariadb.GetDbInstancesArgs
+        ///         InstanceIds = new[]
         ///         {
-        ///             InstanceIds = 
-        ///             {
-        ///                 "tdsql-ijxtqk5p",
-        ///             },
-        ///             ProjectIds = 
-        ///             {
-        ///                 0,
-        ///             },
-        ///             SubnetId = "3454730",
-        ///             VpcId = "5556791",
-        ///         }));
-        ///     }
+        ///             "tdsql-ijxtqk5p",
+        ///         },
+        ///         ProjectIds = new[]
+        ///         {
+        ///             0,
+        ///         },
+        ///         SubnetId = "3454730",
+        ///         VpcId = "5556791",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDbInstancesResult> Invoke(GetDbInstancesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDbInstancesResult>("tencentcloud:Mariadb/getDbInstances:getDbInstances", args ?? new GetDbInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDbInstancesResult>("tencentcloud:Mariadb/getDbInstances:getDbInstances", args ?? new GetDbInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDbInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetDbInstancesArgs : global::Pulumi.InvokeArgs
     {
         [Input("instanceIds")]
         private List<string>? _instanceIds;
@@ -143,9 +137,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetDbInstancesArgs()
         {
         }
+        public static new GetDbInstancesArgs Empty => new GetDbInstancesArgs();
     }
 
-    public sealed class GetDbInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDbInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("instanceIds")]
         private InputList<string>? _instanceIds;
@@ -198,6 +193,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetDbInstancesInvokeArgs()
         {
         }
+        public static new GetDbInstancesInvokeArgs Empty => new GetDbInstancesInvokeArgs();
     }
 
 

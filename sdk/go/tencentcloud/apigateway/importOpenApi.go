@@ -7,65 +7,111 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a apiGateway importOpenApi
 //
 // ## Example Usage
+//
 // ### Import open Api by YAML
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewImportOpenApi(ctx, "example", &ApiGateway.ImportOpenApiArgs{
-// 			Content:        pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "info:\n", "  title: keep-service\n", "  version: 1.0.1\n", "openapi: 3.0.0\n", "paths:\n", "  /api/test:\n", "    get:\n", "      description: desc\n", "      operationId: test\n", "      responses:\n", "        '200':\n", "          content:\n", "            text/html:\n", "              example: '200'\n", "          description: '200'\n", "        default:\n", "          content:\n", "            text/html:\n", "              example: '400'\n", "          description: '400'\n", "      x-apigw-api-business-type: NORMAL\n", "      x-apigw-api-type: NORMAL\n", "      x-apigw-backend:\n", "        ServiceConfig:\n", "          Method: GET\n", "          Path: /test\n", "          Url: http://domain.com\n", "        ServiceType: HTTP\n", "      x-apigw-cors: false\n", "      x-apigw-protocol: HTTP\n", "      x-apigw-service-timeout: 15\n", "\n")),
-// 			ContentVersion: pulumi.String("openAPI"),
-// 			EncodeType:     pulumi.String("YAML"),
-// 			ServiceId:      pulumi.String("service-nxz6yync"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.NewImportOpenApi(ctx, "example", &ApiGateway.ImportOpenApiArgs{
+//				Content: pulumi.String(`info:
+//	  title: keep-service
+//	  version: 1.0.1
+//
+// openapi: 3.0.0
+// paths:
+//
+//	/api/test:
+//	  get:
+//	    description: desc
+//	    operationId: test
+//	    responses:
+//	      '200':
+//	        content:
+//	          text/html:
+//	            example: '200'
+//	        description: '200'
+//	      default:
+//	        content:
+//	          text/html:
+//	            example: '400'
+//	        description: '400'
+//	    x-apigw-api-business-type: NORMAL
+//	    x-apigw-api-type: NORMAL
+//	    x-apigw-backend:
+//	      ServiceConfig:
+//	        Method: GET
+//	        Path: /test
+//	        Url: http://domain.com
+//	      ServiceType: HTTP
+//	    x-apigw-cors: false
+//	    x-apigw-protocol: HTTP
+//	    x-apigw-service-timeout: 15
+//
+// `),
+//
+//				ContentVersion: pulumi.String("openAPI"),
+//				EncodeType:     pulumi.String("YAML"),
+//				ServiceId:      pulumi.String("service-nxz6yync"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Import open Api by JSON
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewImportOpenApi(ctx, "example", &ApiGateway.ImportOpenApiArgs{
-// 			Content:        pulumi.String("{\"openapi\": \"3.0.0\", \"info\": {\"title\": \"keep-service\", \"version\": \"1.0.1\"}, \"paths\": {\"/api/test\": {\"get\": {\"operationId\": \"test\", \"description\": \"desc\", \"responses\": {\"200\": {\"description\": \"200\", \"content\": {\"text/html\": {\"example\": \"200\"}}}, \"default\": {\"content\": {\"text/html\": {\"example\": \"400\"}}, \"description\": \"400\"}}, \"x-apigw-api-type\": \"NORMAL\", \"x-apigw-api-business-type\": \"NORMAL\", \"x-apigw-protocol\": \"HTTP\", \"x-apigw-cors\": false, \"x-apigw-service-timeout\": 15, \"x-apigw-backend\": {\"ServiceType\": \"HTTP\", \"ServiceConfig\": {\"Url\": \"http://domain.com\", \"Path\": \"/test\", \"Method\": \"GET\"}}}}}}"),
-// 			ContentVersion: pulumi.String("openAPI"),
-// 			EncodeType:     pulumi.String("JSON"),
-// 			ServiceId:      pulumi.String("service-nxz6yync"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.NewImportOpenApi(ctx, "example", &ApiGateway.ImportOpenApiArgs{
+//				Content:        pulumi.String("{\"openapi\": \"3.0.0\", \"info\": {\"title\": \"keep-service\", \"version\": \"1.0.1\"}, \"paths\": {\"/api/test\": {\"get\": {\"operationId\": \"test\", \"description\": \"desc\", \"responses\": {\"200\": {\"description\": \"200\", \"content\": {\"text/html\": {\"example\": \"200\"}}}, \"default\": {\"content\": {\"text/html\": {\"example\": \"400\"}}, \"description\": \"400\"}}, \"x-apigw-api-type\": \"NORMAL\", \"x-apigw-api-business-type\": \"NORMAL\", \"x-apigw-protocol\": \"HTTP\", \"x-apigw-cors\": false, \"x-apigw-service-timeout\": 15, \"x-apigw-backend\": {\"ServiceType\": \"HTTP\", \"ServiceConfig\": {\"Url\": \"http://domain.com\", \"Path\": \"/test\", \"Method\": \"GET\"}}}}}}"),
+//				ContentVersion: pulumi.String("openAPI"),
+//				EncodeType:     pulumi.String("JSON"),
+//				ServiceId:      pulumi.String("service-nxz6yync"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ImportOpenApi struct {
 	pulumi.CustomResourceState
 
@@ -194,7 +240,7 @@ func NewImportOpenApi(ctx *pulumi.Context,
 	if args.ServiceId == nil {
 		return nil, errors.New("invalid value for required argument 'ServiceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ImportOpenApi
 	err := ctx.RegisterResource("tencentcloud:ApiGateway/importOpenApi:ImportOpenApi", name, args, &resource, opts...)
 	if err != nil {
@@ -495,7 +541,7 @@ func (i *ImportOpenApi) ToImportOpenApiOutputWithContext(ctx context.Context) Im
 // ImportOpenApiArrayInput is an input type that accepts ImportOpenApiArray and ImportOpenApiArrayOutput values.
 // You can construct a concrete instance of `ImportOpenApiArrayInput` via:
 //
-//          ImportOpenApiArray{ ImportOpenApiArgs{...} }
+//	ImportOpenApiArray{ ImportOpenApiArgs{...} }
 type ImportOpenApiArrayInput interface {
 	pulumi.Input
 
@@ -520,7 +566,7 @@ func (i ImportOpenApiArray) ToImportOpenApiArrayOutputWithContext(ctx context.Co
 // ImportOpenApiMapInput is an input type that accepts ImportOpenApiMap and ImportOpenApiMapOutput values.
 // You can construct a concrete instance of `ImportOpenApiMapInput` via:
 //
-//          ImportOpenApiMap{ "key": ImportOpenApiArgs{...} }
+//	ImportOpenApiMap{ "key": ImportOpenApiArgs{...} }
 type ImportOpenApiMapInput interface {
 	pulumi.Input
 

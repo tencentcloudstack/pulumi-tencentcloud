@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Inputs
 {
 
-    public sealed class ParameterTemplateModifyParamEntrySetGetArgs : Pulumi.ResourceArgs
+    public sealed class ParameterTemplateModifyParamEntrySetGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Modify the parameter value. The input parameters are passed in the form of strings, for example: decimal `0.1`, integer `1000`, enumeration `replica`.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Inputs
         public ParameterTemplateModifyParamEntrySetGetArgs()
         {
         }
+        public static new ParameterTemplateModifyParamEntrySetGetArgs Empty => new ParameterTemplateModifyParamEntrySetGetArgs();
     }
 }

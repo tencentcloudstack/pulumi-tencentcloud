@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of rum staticUrl
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Rum.GetStaticUrl(ctx, &rum.GetStaticUrlArgs{
-// 			EndTime:   1625454840,
-// 			ProjectId: 1,
-// 			StartTime: 1625444040,
-// 			Type:      "pagepv",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Rum.GetStaticUrl(ctx, &rum.GetStaticUrlArgs{
+//				EndTime:   1625454840,
+//				ProjectId: 1,
+//				StartTime: 1625444040,
+//				Type:      "pagepv",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetStaticUrl(ctx *pulumi.Context, args *GetStaticUrlArgs, opts ...pulumi.InvokeOption) (*GetStaticUrlResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetStaticUrlResult
 	err := ctx.Invoke("tencentcloud:Rum/getStaticUrl:getStaticUrl", args, &rv, opts...)
 	if err != nil {

@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query detailed information of monitor alarm_metric
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var alarmMetric = Tencentcloud.Monitor.GetAlarmMetric.Invoke(new()
         ///     {
-        ///         var alarmMetric = Output.Create(Tencentcloud.Monitor.GetAlarmMetric.InvokeAsync(new Tencentcloud.Monitor.GetAlarmMetricArgs
-        ///         {
-        ///             Module = "monitor",
-        ///             MonitorType = "Monitoring",
-        ///             Namespace = "cvm_device",
-        ///         }));
-        ///     }
+        ///         Module = "monitor",
+        ///         MonitorType = "Monitoring",
+        ///         Namespace = "cvm_device",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAlarmMetricResult> InvokeAsync(GetAlarmMetricArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAlarmMetricResult>("tencentcloud:Monitor/getAlarmMetric:getAlarmMetric", args ?? new GetAlarmMetricArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmMetricResult>("tencentcloud:Monitor/getAlarmMetric:getAlarmMetric", args ?? new GetAlarmMetricArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of monitor alarm_metric
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var alarmMetric = Tencentcloud.Monitor.GetAlarmMetric.Invoke(new()
         ///     {
-        ///         var alarmMetric = Output.Create(Tencentcloud.Monitor.GetAlarmMetric.InvokeAsync(new Tencentcloud.Monitor.GetAlarmMetricArgs
-        ///         {
-        ///             Module = "monitor",
-        ///             MonitorType = "Monitoring",
-        ///             Namespace = "cvm_device",
-        ///         }));
-        ///     }
+        ///         Module = "monitor",
+        ///         MonitorType = "Monitoring",
+        ///         Namespace = "cvm_device",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAlarmMetricResult> Invoke(GetAlarmMetricInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAlarmMetricResult>("tencentcloud:Monitor/getAlarmMetric:getAlarmMetric", args ?? new GetAlarmMetricInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAlarmMetricResult>("tencentcloud:Monitor/getAlarmMetric:getAlarmMetric", args ?? new GetAlarmMetricInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAlarmMetricArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmMetricArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Fixed value, as `monitor`.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmMetricArgs()
         {
         }
+        public static new GetAlarmMetricArgs Empty => new GetAlarmMetricArgs();
     }
 
-    public sealed class GetAlarmMetricInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmMetricInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Fixed value, as `monitor`.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmMetricInvokeArgs()
         {
         }
+        public static new GetAlarmMetricInvokeArgs Empty => new GetAlarmMetricInvokeArgs();
     }
 
 

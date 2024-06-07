@@ -15,84 +15,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
     /// 
     /// &gt; **Note:** If this resource is used to bind security groups to eni, it cannot be linked to `tentcloud_eni` binding security group for simultaneous use.
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "vpc",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var example1 = new Tencentcloud.Security.Group("example1", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "sg desc.",
-    ///             ProjectId = 0,
-    ///             Tags = 
-    ///             {
-    ///                 { "example", "test" },
-    ///             },
-    ///         });
-    ///         var example2 = new Tencentcloud.Security.Group("example2", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "sg desc.",
-    ///             ProjectId = 0,
-    ///             Tags = 
-    ///             {
-    ///                 { "example", "test" },
-    ///             },
-    ///         });
-    ///         var example = new Tencentcloud.Eni.Instance("example", new Tencentcloud.Eni.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             Description = "eni desc.",
-    ///             Ipv4Count = 1,
-    ///         });
-    ///         var eniSgAttachment = new Tencentcloud.Eni.SgAttachment("eniSgAttachment", new Tencentcloud.Eni.SgAttachmentArgs
-    ///         {
-    ///             NetworkInterfaceIds = 
-    ///             {
-    ///                 example.Id,
-    ///             },
-    ///             SecurityGroupIds = 
-    ///             {
-    ///                 example1.Id,
-    ///                 example2.Id,
-    ///             },
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// vpc eni_sg_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Eni/sgAttachment:SgAttachment eni_sg_attachment eni_sg_attachment_id
+    /// $ pulumi import tencentcloud:Eni/sgAttachment:SgAttachment eni_sg_attachment eni_sg_attachment_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eni/sgAttachment:SgAttachment")]
-    public partial class SgAttachment : Pulumi.CustomResource
+    public partial class SgAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ENI instance ID. Such as:eni-pxir56ns. It Only support set one eni instance now.
@@ -151,7 +83,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
         }
     }
 
-    public sealed class SgAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class SgAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ENI instance ID. Such as:eni-pxir56ns. It Only support set one eni instance now.
@@ -174,9 +106,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
         public SgAttachmentArgs()
         {
         }
+        public static new SgAttachmentArgs Empty => new SgAttachmentArgs();
     }
 
-    public sealed class SgAttachmentState : Pulumi.ResourceArgs
+    public sealed class SgAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ENI instance ID. Such as:eni-pxir56ns. It Only support set one eni instance now.
@@ -199,5 +132,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
         public SgAttachmentState()
         {
         }
+        public static new SgAttachmentState Empty => new SgAttachmentState();
     }
 }

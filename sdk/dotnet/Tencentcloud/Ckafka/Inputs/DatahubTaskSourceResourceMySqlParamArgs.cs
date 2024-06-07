@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskSourceResourceMySqlParamArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskSourceResourceMySqlParamArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the name of the column to be monitored.
@@ -172,5 +172,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskSourceResourceMySqlParamArgs()
         {
         }
+        public static new DatahubTaskSourceResourceMySqlParamArgs Empty => new DatahubTaskSourceResourceMySqlParamArgs();
     }
 }

@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const snapshot = new tencentcloud.Lighthouse.Snapshot("snapshot", {
+ * const snapshot = new tencentcloud.lighthouse.Snapshot("snapshot", {
  *     instanceId: "lhins-acd1234",
  *     snapshotName: "snap_20200903",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class Snapshot extends pulumi.CustomResource {
     /**

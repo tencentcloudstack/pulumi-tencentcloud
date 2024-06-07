@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,26 +11,30 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Cwp.getMachinesSimple({
+ * const example = tencentcloud.Cwp.getMachinesSimple({
  *     machineRegion: "ap-guangzhou",
  *     machineType: "CVM",
  *     projectIds: [
  *         1210293,
  *         1157652,
  *     ],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Query by Keyword filter
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Cwp.getMachinesSimple({
+ * const example = tencentcloud.Cwp.getMachinesSimple({
  *     filters: [{
  *         exactMatch: true,
  *         name: "Keywords",
@@ -38,15 +43,18 @@ import * as utilities from "../utilities";
  *     machineRegion: "ap-guangzhou",
  *     machineType: "CVM",
  *     projectIds: [0],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Query by Version filter
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Cwp.getMachinesSimple({
+ * const example = tencentcloud.Cwp.getMachinesSimple({
  *     filters: [{
  *         exactMatch: true,
  *         name: "Version",
@@ -55,15 +63,18 @@ import * as utilities from "../utilities";
  *     machineRegion: "ap-guangzhou",
  *     machineType: "CVM",
  *     projectIds: [0],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Query by TagId filter
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Cwp.getMachinesSimple({
+ * const example = tencentcloud.Cwp.getMachinesSimple({
  *     filters: [{
  *         exactMatch: true,
  *         name: "TagId",
@@ -71,15 +82,13 @@ import * as utilities from "../utilities";
  *     }],
  *     machineRegion: "all-regions",
  *     machineType: "ALL",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getMachinesSimple(args: GetMachinesSimpleArgs, opts?: pulumi.InvokeOptions): Promise<GetMachinesSimpleResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cwp/getMachinesSimple:getMachinesSimple", {
         "filters": args.filters,
         "machineRegion": args.machineRegion,
@@ -136,9 +145,88 @@ export interface GetMachinesSimpleResult {
     readonly projectIds?: number[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cwp machinesSimple
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Cwp.getMachinesSimple({
+ *     machineRegion: "ap-guangzhou",
+ *     machineType: "CVM",
+ *     projectIds: [
+ *         1210293,
+ *         1157652,
+ *     ],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query by Keyword filter
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Cwp.getMachinesSimple({
+ *     filters: [{
+ *         exactMatch: true,
+ *         name: "Keywords",
+ *         values: ["tf_example"],
+ *     }],
+ *     machineRegion: "ap-guangzhou",
+ *     machineType: "CVM",
+ *     projectIds: [0],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query by Version filter
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Cwp.getMachinesSimple({
+ *     filters: [{
+ *         exactMatch: true,
+ *         name: "Version",
+ *         values: ["BASIC_VERSION"],
+ *     }],
+ *     machineRegion: "ap-guangzhou",
+ *     machineType: "CVM",
+ *     projectIds: [0],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query by TagId filter
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Cwp.getMachinesSimple({
+ *     filters: [{
+ *         exactMatch: true,
+ *         name: "TagId",
+ *         values: ["13771"],
+ *     }],
+ *     machineRegion: "all-regions",
+ *     machineType: "ALL",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getMachinesSimpleOutput(args: GetMachinesSimpleOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetMachinesSimpleResult> {
-    return pulumi.output(args).apply(a => getMachinesSimple(a, opts))
+    return pulumi.output(args).apply((a: any) => getMachinesSimple(a, opts))
 }
 
 /**

@@ -14,6 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css.Outputs
     [OutputType]
     public sealed class RecordTemplateHlsSpecialParam
     {
+        /// <summary>
+        /// HLS freewheeling timeout. Value range [0, 1800].
+        /// </summary>
         public readonly int? FlowContinueDuration;
 
         [OutputConstructor]

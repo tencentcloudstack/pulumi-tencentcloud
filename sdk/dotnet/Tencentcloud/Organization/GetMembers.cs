@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// <summary>
         /// Use this data source to query detailed information of organization members
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var members = Output.Create(Tencentcloud.Organization.GetMembers.InvokeAsync());
-        ///     }
+        ///     var members = Tencentcloud.Organization.GetMembers.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetMembersResult> InvokeAsync(GetMembersArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMembersResult>("tencentcloud:Organization/getMembers:getMembers", args ?? new GetMembersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMembersResult>("tencentcloud:Organization/getMembers:getMembers", args ?? new GetMembersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of organization members
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var members = Output.Create(Tencentcloud.Organization.GetMembers.InvokeAsync());
-        ///     }
+        ///     var members = Tencentcloud.Organization.GetMembers.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetMembersResult> Invoke(GetMembersInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMembersResult>("tencentcloud:Organization/getMembers:getMembers", args ?? new GetMembersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMembersResult>("tencentcloud:Organization/getMembers:getMembers", args ?? new GetMembersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetMembersArgs : Pulumi.InvokeArgs
+    public sealed class GetMembersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Entity name.
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public GetMembersArgs()
         {
         }
+        public static new GetMembersArgs Empty => new GetMembersArgs();
     }
 
-    public sealed class GetMembersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetMembersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Entity name.
@@ -138,6 +133,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public GetMembersInvokeArgs()
         {
         }
+        public static new GetMembersInvokeArgs Empty => new GetMembersInvokeArgs();
     }
 
 

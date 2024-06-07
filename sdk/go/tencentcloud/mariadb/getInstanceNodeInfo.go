@@ -8,10 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 func GetInstanceNodeInfo(ctx *pulumi.Context, args *GetInstanceNodeInfoArgs, opts ...pulumi.InvokeOption) (*GetInstanceNodeInfoResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceNodeInfoResult
 	err := ctx.Invoke("tencentcloud:Mariadb/getInstanceNodeInfo:getInstanceNodeInfo", args, &rv, opts...)
 	if err != nil {

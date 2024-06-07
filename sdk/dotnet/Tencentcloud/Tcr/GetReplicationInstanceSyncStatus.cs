@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// <summary>
         /// Use this data source to query detailed information of tcr replication_instance_sync_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var syncStatus = Tencentcloud.Tcr.GetReplicationInstanceSyncStatus.Invoke(new()
         ///     {
-        ///         var syncStatus = Output.Create(Tencentcloud.Tcr.GetReplicationInstanceSyncStatus.InvokeAsync(new Tencentcloud.Tcr.GetReplicationInstanceSyncStatusArgs
-        ///         {
-        ///             RegistryId = local.Src_registry_id,
-        ///             ReplicationRegistryId = local.Dst_registry_id,
-        ///             ReplicationRegionId = local.Dst_region_id,
-        ///             ShowReplicationLog = false,
-        ///         }));
-        ///     }
+        ///         RegistryId = local.Src_registry_id,
+        ///         ReplicationRegistryId = local.Dst_registry_id,
+        ///         ReplicationRegionId = local.Dst_region_id,
+        ///         ShowReplicationLog = false,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetReplicationInstanceSyncStatusResult> InvokeAsync(GetReplicationInstanceSyncStatusArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetReplicationInstanceSyncStatusResult>("tencentcloud:Tcr/getReplicationInstanceSyncStatus:getReplicationInstanceSyncStatus", args ?? new GetReplicationInstanceSyncStatusArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetReplicationInstanceSyncStatusResult>("tencentcloud:Tcr/getReplicationInstanceSyncStatus:getReplicationInstanceSyncStatus", args ?? new GetReplicationInstanceSyncStatusArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tcr replication_instance_sync_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var syncStatus = Tencentcloud.Tcr.GetReplicationInstanceSyncStatus.Invoke(new()
         ///     {
-        ///         var syncStatus = Output.Create(Tencentcloud.Tcr.GetReplicationInstanceSyncStatus.InvokeAsync(new Tencentcloud.Tcr.GetReplicationInstanceSyncStatusArgs
-        ///         {
-        ///             RegistryId = local.Src_registry_id,
-        ///             ReplicationRegistryId = local.Dst_registry_id,
-        ///             ReplicationRegionId = local.Dst_region_id,
-        ///             ShowReplicationLog = false,
-        ///         }));
-        ///     }
+        ///         RegistryId = local.Src_registry_id,
+        ///         ReplicationRegistryId = local.Dst_registry_id,
+        ///         ReplicationRegionId = local.Dst_region_id,
+        ///         ShowReplicationLog = false,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetReplicationInstanceSyncStatusResult> Invoke(GetReplicationInstanceSyncStatusInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetReplicationInstanceSyncStatusResult>("tencentcloud:Tcr/getReplicationInstanceSyncStatus:getReplicationInstanceSyncStatus", args ?? new GetReplicationInstanceSyncStatusInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetReplicationInstanceSyncStatusResult>("tencentcloud:Tcr/getReplicationInstanceSyncStatus:getReplicationInstanceSyncStatus", args ?? new GetReplicationInstanceSyncStatusInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetReplicationInstanceSyncStatusArgs : Pulumi.InvokeArgs
+    public sealed class GetReplicationInstanceSyncStatusArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// master registry id.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetReplicationInstanceSyncStatusArgs()
         {
         }
+        public static new GetReplicationInstanceSyncStatusArgs Empty => new GetReplicationInstanceSyncStatusArgs();
     }
 
-    public sealed class GetReplicationInstanceSyncStatusInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetReplicationInstanceSyncStatusInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// master registry id.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetReplicationInstanceSyncStatusInvokeArgs()
         {
         }
+        public static new GetReplicationInstanceSyncStatusInvokeArgs Empty => new GetReplicationInstanceSyncStatusInvokeArgs();
     }
 
 

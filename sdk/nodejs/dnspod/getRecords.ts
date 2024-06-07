@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -20,8 +22,11 @@ import * as utilities from "../utilities";
  * });
  * export const result = record.then(record => record.results);
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Use verbose filter
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -36,14 +41,12 @@ import * as utilities from "../utilities";
  * });
  * export const result = record.then(record => record.results);
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRecords(args?: GetRecordsArgs, opts?: pulumi.InvokeOptions): Promise<GetRecordsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dnspod/getRecords:getRecords", {
         "domain": args.domain,
         "domainId": args.domainId,
@@ -149,9 +152,45 @@ export interface GetRecordsResult {
     readonly sortType?: string;
     readonly subdomain?: string;
 }
-
+/**
+ * Use this data source to query dnspod record list.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const record = tencentcloud.Dnspod.getRecords({
+ *     domain: "example.com",
+ *     subdomain: "www",
+ * });
+ * export const result = record.then(record => record.results);
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Use verbose filter
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const record = tencentcloud.Dnspod.getRecords({
+ *     domain: "example.com",
+ *     subdomain: "www",
+ *     limit: 100,
+ *     recordType: "TXT",
+ *     sortField: "updated_on",
+ *     sortType: "DESC",
+ * });
+ * export const result = record.then(record => record.results);
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRecordsOutput(args?: GetRecordsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRecordsResult> {
-    return pulumi.output(args).apply(a => getRecords(a, opts))
+    return pulumi.output(args).apply((a: any) => getRecords(a, opts))
 }
 
 /**

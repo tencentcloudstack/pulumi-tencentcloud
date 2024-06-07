@@ -7,54 +7,62 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create a Mongodb instance.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mongodb.NewInstance(ctx, "mongodb", &Mongodb.InstanceArgs{
-// 			AvailableZone: pulumi.String("ap-guangzhou-2"),
-// 			EngineVersion: pulumi.String("MONGO_36_WT"),
-// 			InstanceName:  pulumi.String("mongodb"),
-// 			MachineType:   pulumi.String("HIO10G"),
-// 			Memory:        pulumi.Int(4),
-// 			Password:      pulumi.String("password1234"),
-// 			ProjectId:     pulumi.Int(0),
-// 			SubnetId:      pulumi.String("subnet-xxxxxx"),
-// 			Volume:        pulumi.Int(100),
-// 			VpcId:         pulumi.String("vpc-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mongodb.NewInstance(ctx, "mongodb", &Mongodb.InstanceArgs{
+//				AvailableZone: pulumi.String("ap-guangzhou-2"),
+//				EngineVersion: pulumi.String("MONGO_36_WT"),
+//				InstanceName:  pulumi.String("mongodb"),
+//				MachineType:   pulumi.String("HIO10G"),
+//				Memory:        pulumi.Int(4),
+//				Password:      pulumi.String("password1234"),
+//				ProjectId:     pulumi.Int(0),
+//				SubnetId:      pulumi.String("subnet-xxxxxx"),
+//				Volume:        pulumi.Int(100),
+//				VpcId:         pulumi.String("vpc-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // Mongodb instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mongodb/instance:Instance mongodb cmgo-41s6jwy4
+// $ pulumi import tencentcloud:Mongodb/instance:Instance mongodb cmgo-41s6jwy4
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
 
+	// Add node attribute list.
+	AddNodeLists InstanceAddNodeListArrayOutput `pulumi:"addNodeLists"`
 	// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
 	AutoRenewFlag pulumi.IntPtrOutput `pulumi:"autoRenewFlag"`
 	// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
@@ -87,6 +95,8 @@ type Instance struct {
 	PrepaidPeriod pulumi.IntPtrOutput `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
+	// Add node attribute list.
+	RemoveNodeLists InstanceRemoveNodeListArrayOutput `pulumi:"removeNodeLists"`
 	// ID of the security group.
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
 	// List of standby instances' info.
@@ -132,7 +142,14 @@ func NewInstance(ctx *pulumi.Context,
 	if args.Volume == nil {
 		return nil, errors.New("invalid value for required argument 'Volume'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Mongodb/instance:Instance", name, args, &resource, opts...)
 	if err != nil {
@@ -155,6 +172,8 @@ func GetInstance(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Instance resources.
 type instanceState struct {
+	// Add node attribute list.
+	AddNodeLists []InstanceAddNodeList `pulumi:"addNodeLists"`
 	// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
@@ -187,6 +206,8 @@ type instanceState struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId *int `pulumi:"projectId"`
+	// Add node attribute list.
+	RemoveNodeLists []InstanceRemoveNodeList `pulumi:"removeNodeLists"`
 	// ID of the security group.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// List of standby instances' info.
@@ -208,6 +229,8 @@ type instanceState struct {
 }
 
 type InstanceState struct {
+	// Add node attribute list.
+	AddNodeLists InstanceAddNodeListArrayInput
 	// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
 	AutoRenewFlag pulumi.IntPtrInput
 	// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
@@ -240,6 +263,8 @@ type InstanceState struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrInput
+	// Add node attribute list.
+	RemoveNodeLists InstanceRemoveNodeListArrayInput
 	// ID of the security group.
 	SecurityGroups pulumi.StringArrayInput
 	// List of standby instances' info.
@@ -265,6 +290,8 @@ func (InstanceState) ElementType() reflect.Type {
 }
 
 type instanceArgs struct {
+	// Add node attribute list.
+	AddNodeLists []InstanceAddNodeList `pulumi:"addNodeLists"`
 	// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
@@ -295,6 +322,8 @@ type instanceArgs struct {
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
 	// ID of the project which the instance belongs.
 	ProjectId *int `pulumi:"projectId"`
+	// Add node attribute list.
+	RemoveNodeLists []InstanceRemoveNodeList `pulumi:"removeNodeLists"`
 	// ID of the security group.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// ID of the subnet within this VPC. The value is required if `vpcId` is set.
@@ -309,6 +338,8 @@ type instanceArgs struct {
 
 // The set of arguments for constructing a Instance resource.
 type InstanceArgs struct {
+	// Add node attribute list.
+	AddNodeLists InstanceAddNodeListArrayInput
 	// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
 	AutoRenewFlag pulumi.IntPtrInput
 	// A list of nodes deployed in multiple availability zones. For more information, please use the API DescribeSpecInfo.
@@ -339,6 +370,8 @@ type InstanceArgs struct {
 	PrepaidPeriod pulumi.IntPtrInput
 	// ID of the project which the instance belongs.
 	ProjectId pulumi.IntPtrInput
+	// Add node attribute list.
+	RemoveNodeLists InstanceRemoveNodeListArrayInput
 	// ID of the security group.
 	SecurityGroups pulumi.StringArrayInput
 	// ID of the subnet within this VPC. The value is required if `vpcId` is set.
@@ -377,7 +410,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -402,7 +435,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -436,6 +469,11 @@ func (o InstanceOutput) ToInstanceOutput() InstanceOutput {
 
 func (o InstanceOutput) ToInstanceOutputWithContext(ctx context.Context) InstanceOutput {
 	return o
+}
+
+// Add node attribute list.
+func (o InstanceOutput) AddNodeLists() InstanceAddNodeListArrayOutput {
+	return o.ApplyT(func(v *Instance) InstanceAddNodeListArrayOutput { return v.AddNodeLists }).(InstanceAddNodeListArrayOutput)
 }
 
 // Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
@@ -510,6 +548,11 @@ func (o InstanceOutput) PrepaidPeriod() pulumi.IntPtrOutput {
 // ID of the project which the instance belongs.
 func (o InstanceOutput) ProjectId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.ProjectId }).(pulumi.IntPtrOutput)
+}
+
+// Add node attribute list.
+func (o InstanceOutput) RemoveNodeLists() InstanceRemoveNodeListArrayOutput {
+	return o.ApplyT(func(v *Instance) InstanceRemoveNodeListArrayOutput { return v.RemoveNodeLists }).(InstanceRemoveNodeListArrayOutput)
 }
 
 // ID of the security group.

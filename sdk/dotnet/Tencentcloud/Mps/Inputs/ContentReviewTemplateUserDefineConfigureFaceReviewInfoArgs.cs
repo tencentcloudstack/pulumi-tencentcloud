@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ContentReviewTemplateUserDefineConfigureFaceReviewInfoArgs : Pulumi.ResourceArgs
+    public sealed class ContentReviewTemplateUserDefineConfigureFaceReviewInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The score threshold for judging suspected violations. When the smart review reaches the score above, it is considered suspected violations. If it is not filled, the default is 100 points. Value range: 0~100.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ContentReviewTemplateUserDefineConfigureFaceReviewInfoArgs()
         {
         }
+        public static new ContentReviewTemplateUserDefineConfigureFaceReviewInfoArgs Empty => new ContentReviewTemplateUserDefineConfigureFaceReviewInfoArgs();
     }
 }

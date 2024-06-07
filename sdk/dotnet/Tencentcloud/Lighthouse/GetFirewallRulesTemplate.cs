@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// <summary>
         /// Use this data source to query detailed information of lighthouse firewall_rules_template
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var firewallRulesTemplate = Output.Create(Tencentcloud.Lighthouse.GetFirewallRulesTemplate.InvokeAsync());
-        ///     }
+        ///     var firewallRulesTemplate = Tencentcloud.Lighthouse.GetFirewallRulesTemplate.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetFirewallRulesTemplateResult> InvokeAsync(GetFirewallRulesTemplateArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetFirewallRulesTemplateResult>("tencentcloud:Lighthouse/getFirewallRulesTemplate:getFirewallRulesTemplate", args ?? new GetFirewallRulesTemplateArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetFirewallRulesTemplateResult>("tencentcloud:Lighthouse/getFirewallRulesTemplate:getFirewallRulesTemplate", args ?? new GetFirewallRulesTemplateArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of lighthouse firewall_rules_template
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var firewallRulesTemplate = Output.Create(Tencentcloud.Lighthouse.GetFirewallRulesTemplate.InvokeAsync());
-        ///     }
+        ///     var firewallRulesTemplate = Tencentcloud.Lighthouse.GetFirewallRulesTemplate.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetFirewallRulesTemplateResult> Invoke(GetFirewallRulesTemplateInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetFirewallRulesTemplateResult>("tencentcloud:Lighthouse/getFirewallRulesTemplate:getFirewallRulesTemplate", args ?? new GetFirewallRulesTemplateInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetFirewallRulesTemplateResult>("tencentcloud:Lighthouse/getFirewallRulesTemplate:getFirewallRulesTemplate", args ?? new GetFirewallRulesTemplateInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetFirewallRulesTemplateArgs : Pulumi.InvokeArgs
+    public sealed class GetFirewallRulesTemplateArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetFirewallRulesTemplateArgs()
         {
         }
+        public static new GetFirewallRulesTemplateArgs Empty => new GetFirewallRulesTemplateArgs();
     }
 
-    public sealed class GetFirewallRulesTemplateInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetFirewallRulesTemplateInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetFirewallRulesTemplateInvokeArgs()
         {
         }
+        public static new GetFirewallRulesTemplateInvokeArgs Empty => new GetFirewallRulesTemplateInvokeArgs();
     }
 
 

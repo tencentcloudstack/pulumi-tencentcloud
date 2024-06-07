@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var rabbitmqUser = new Tencentcloud.Tdmq.RabbitmqUser("rabbitmqUser", new()
     ///     {
-    ///         var rabbitmqUser = new Tencentcloud.Tdmq.RabbitmqUser("rabbitmqUser", new Tencentcloud.Tdmq.RabbitmqUserArgs
+    ///         Description = "test user",
+    ///         InstanceId = "amqp-kzbe8p3n",
+    ///         MaxChannels = 3,
+    ///         MaxConnections = 3,
+    ///         Password = "asdf1234",
+    ///         Tags = new[]
     ///         {
-    ///             Description = "test user",
-    ///             InstanceId = "amqp-kzbe8p3n",
-    ///             MaxChannels = 3,
-    ///             MaxConnections = 3,
-    ///             Password = "asdf1234",
-    ///             Tags = 
-    ///             {
-    ///                 "management",
-    ///                 "monitoring",
-    ///             },
-    ///             User = "keep-user",
-    ///         });
-    ///     }
+    ///             "management",
+    ///             "monitoring",
+    ///         },
+    ///         User = "keep-user",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/rabbitmqUser:RabbitmqUser")]
-    public partial class RabbitmqUser : Pulumi.CustomResource
+    public partial class RabbitmqUser : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Describe.
@@ -111,6 +112,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -132,7 +137,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class RabbitmqUserArgs : Pulumi.ResourceArgs
+    public sealed class RabbitmqUserArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Describe.
@@ -158,11 +163,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         [Input("maxConnections")]
         public Input<int>? MaxConnections { get; set; }
 
+        [Input("password", required: true)]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password, used when logging in.
         /// </summary>
-        [Input("password", required: true)]
-        public Input<string> Password { get; set; } = null!;
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("tags")]
         private InputList<string>? _tags;
@@ -185,9 +200,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RabbitmqUserArgs()
         {
         }
+        public static new RabbitmqUserArgs Empty => new RabbitmqUserArgs();
     }
 
-    public sealed class RabbitmqUserState : Pulumi.ResourceArgs
+    public sealed class RabbitmqUserState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Describe.
@@ -213,11 +229,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         [Input("maxConnections")]
         public Input<int>? MaxConnections { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password, used when logging in.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("tags")]
         private InputList<string>? _tags;
@@ -240,5 +266,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RabbitmqUserState()
         {
         }
+        public static new RabbitmqUserState Empty => new RabbitmqUserState();
     }
 }

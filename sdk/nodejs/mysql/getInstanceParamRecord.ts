@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instanceParamRecord = pulumi.output(tencentcloud.Mysql.getInstanceParamRecord({
+ * const instanceParamRecord = tencentcloud.Mysql.getInstanceParamRecord({
  *     instanceId: "",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceParamRecord(args: GetInstanceParamRecordArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceParamRecordResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getInstanceParamRecord:getInstanceParamRecord", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -63,9 +63,24 @@ export interface GetInstanceParamRecordResult {
     readonly items: outputs.Mysql.GetInstanceParamRecordItem[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mysql instanceParamRecord
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instanceParamRecord = tencentcloud.Mysql.getInstanceParamRecord({
+ *     instanceId: "",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceParamRecordOutput(args: GetInstanceParamRecordOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceParamRecordResult> {
-    return pulumi.output(args).apply(a => getInstanceParamRecord(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceParamRecord(a, opts))
 }
 
 /**

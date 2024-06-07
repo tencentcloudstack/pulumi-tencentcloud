@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat.Inputs
 {
 
-    public sealed class GetInvocationTaskFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetInvocationTaskFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Field to be filtered.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat.Inputs
         public GetInvocationTaskFilterArgs()
         {
         }
+        public static new GetInvocationTaskFilterArgs Empty => new GetInvocationTaskFilterArgs();
     }
 }

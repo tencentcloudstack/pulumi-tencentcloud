@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of antiddos basicDeviceStatus
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Antiddos.GetBasicDeviceStatus(ctx, &antiddos.GetBasicDeviceStatusArgs{
-// 			FilterRegion: pulumi.IntRef(1),
-// 			IpLists: []string{
-// 				"127.0.0.1",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Antiddos.GetBasicDeviceStatus(ctx, &antiddos.GetBasicDeviceStatusArgs{
+//				FilterRegion: pulumi.IntRef(1),
+//				IpLists: []string{
+//					"127.0.0.1",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetBasicDeviceStatus(ctx *pulumi.Context, args *GetBasicDeviceStatusArgs, opts ...pulumi.InvokeOption) (*GetBasicDeviceStatusResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBasicDeviceStatusResult
 	err := ctx.Invoke("tencentcloud:Antiddos/getBasicDeviceStatus:getBasicDeviceStatus", args, &rv, opts...)
 	if err != nil {

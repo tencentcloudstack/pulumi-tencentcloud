@@ -15,45 +15,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var batchSendEmail = new Tencentcloud.Ses.BatchSendEmail("batchSendEmail", new()
     ///     {
-    ///         var batchSendEmail = new Tencentcloud.Ses.BatchSendEmail("batchSendEmail", new Tencentcloud.Ses.BatchSendEmailArgs
+    ///         AdLocation = 0,
+    ///         CycleParam = new Tencentcloud.Ses.Inputs.BatchSendEmailCycleParamArgs
     ///         {
-    ///             AdLocation = 0,
-    ///             CycleParam = new Tencentcloud.Ses.Inputs.BatchSendEmailCycleParamArgs
-    ///             {
-    ///                 BeginTime = "2023-09-07 15:10:00",
-    ///                 IntervalTime = 1,
-    ///             },
-    ///             FromEmailAddress = "aaa@iac-tf.cloud",
-    ///             ReceiverId = 1063742,
-    ///             ReplyToAddresses = "reply@mail.qcloud.com",
-    ///             Subject = "terraform test",
-    ///             TaskType = 1,
-    ///             Template = new Tencentcloud.Ses.Inputs.BatchSendEmailTemplateArgs
-    ///             {
-    ///                 TemplateData = "{\"name\":\"xxx\",\"age\":\"xx\"}",
-    ///                 TemplateId = 99629,
-    ///             },
-    ///             TimedParam = new Tencentcloud.Ses.Inputs.BatchSendEmailTimedParamArgs
-    ///             {
-    ///                 BeginTime = "2023-09-07 15:20:00",
-    ///             },
-    ///             Unsubscribe = "0",
-    ///         });
-    ///     }
+    ///             BeginTime = "2023-09-07 15:10:00",
+    ///             IntervalTime = 1,
+    ///         },
+    ///         FromEmailAddress = "aaa@iac-tf.cloud",
+    ///         ReceiverId = 1063742,
+    ///         ReplyToAddresses = "reply@mail.qcloud.com",
+    ///         Subject = "terraform test",
+    ///         TaskType = 1,
+    ///         Template = new Tencentcloud.Ses.Inputs.BatchSendEmailTemplateArgs
+    ///         {
+    ///             TemplateData = "{\"name\":\"xxx\",\"age\":\"xx\"}",
+    ///             TemplateId = 99629,
+    ///         },
+    ///         TimedParam = new Tencentcloud.Ses.Inputs.BatchSendEmailTimedParamArgs
+    ///         {
+    ///             BeginTime = "2023-09-07 15:20:00",
+    ///         },
+    ///         Unsubscribe = "0",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ses/batchSendEmail:BatchSendEmail")]
-    public partial class BatchSendEmail : Pulumi.CustomResource
+    public partial class BatchSendEmail : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to add an ad tag. 0: Add no tag; 1: Add before the subject; 2: Add after the subject.
@@ -166,7 +167,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         }
     }
 
-    public sealed class BatchSendEmailArgs : Pulumi.ResourceArgs
+    public sealed class BatchSendEmailArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to add an ad tag. 0: Add no tag; 1: Add before the subject; 2: Add after the subject.
@@ -243,9 +244,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public BatchSendEmailArgs()
         {
         }
+        public static new BatchSendEmailArgs Empty => new BatchSendEmailArgs();
     }
 
-    public sealed class BatchSendEmailState : Pulumi.ResourceArgs
+    public sealed class BatchSendEmailState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to add an ad tag. 0: Add no tag; 1: Add before the subject; 2: Add after the subject.
@@ -322,5 +324,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public BatchSendEmailState()
         {
         }
+        public static new BatchSendEmailState Empty => new BatchSendEmailState();
     }
 }

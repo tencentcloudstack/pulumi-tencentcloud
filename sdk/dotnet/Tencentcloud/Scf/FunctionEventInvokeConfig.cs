@@ -15,45 +15,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var functionEventInvokeConfig = new Tencentcloud.Scf.FunctionEventInvokeConfig("functionEventInvokeConfig", new()
     ///     {
-    ///         var functionEventInvokeConfig = new Tencentcloud.Scf.FunctionEventInvokeConfig("functionEventInvokeConfig", new Tencentcloud.Scf.FunctionEventInvokeConfigArgs
+    ///         AsyncTriggerConfig = new Tencentcloud.Scf.Inputs.FunctionEventInvokeConfigAsyncTriggerConfigArgs
     ///         {
-    ///             AsyncTriggerConfig = new Tencentcloud.Scf.Inputs.FunctionEventInvokeConfigAsyncTriggerConfigArgs
+    ///             MsgTtl = 24,
+    ///             RetryConfigs = new[]
     ///             {
-    ///                 MsgTtl = 24,
-    ///                 RetryConfigs = 
+    ///                 new Tencentcloud.Scf.Inputs.FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs
     ///                 {
-    ///                     new Tencentcloud.Scf.Inputs.FunctionEventInvokeConfigAsyncTriggerConfigRetryConfigArgs
-    ///                     {
-    ///                         RetryNum = 2,
-    ///                     },
+    ///                     RetryNum = 2,
     ///                 },
     ///             },
-    ///             FunctionName = "keep-1676351130",
-    ///             Namespace = "default",
-    ///         });
-    ///     }
+    ///         },
+    ///         FunctionName = "keep-1676351130",
+    ///         Namespace = "default",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// scf function_event_invoke_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Scf/functionEventInvokeConfig:FunctionEventInvokeConfig function_event_invoke_config function_name#namespace
+    /// $ pulumi import tencentcloud:Scf/functionEventInvokeConfig:FunctionEventInvokeConfig function_event_invoke_config function_name#namespace
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/functionEventInvokeConfig:FunctionEventInvokeConfig")]
-    public partial class FunctionEventInvokeConfig : Pulumi.CustomResource
+    public partial class FunctionEventInvokeConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Async retry configuration information.
@@ -118,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         }
     }
 
-    public sealed class FunctionEventInvokeConfigArgs : Pulumi.ResourceArgs
+    public sealed class FunctionEventInvokeConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Async retry configuration information.
@@ -141,9 +142,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public FunctionEventInvokeConfigArgs()
         {
         }
+        public static new FunctionEventInvokeConfigArgs Empty => new FunctionEventInvokeConfigArgs();
     }
 
-    public sealed class FunctionEventInvokeConfigState : Pulumi.ResourceArgs
+    public sealed class FunctionEventInvokeConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Async retry configuration information.
@@ -166,5 +168,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public FunctionEventInvokeConfigState()
         {
         }
+        public static new FunctionEventInvokeConfigState Empty => new FunctionEventInvokeConfigState();
     }
 }

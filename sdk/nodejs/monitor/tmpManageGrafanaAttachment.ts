@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
@@ -47,13 +48,14 @@ import * as utilities from "../utilities";
  *     instanceId: fooTmpInstance.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * monitor tmp_manage_grafana_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Monitor/tmpManageGrafanaAttachment:TmpManageGrafanaAttachment manage_grafana_attachment prom-xxxxxxxx
+ * $ pulumi import tencentcloud:Monitor/tmpManageGrafanaAttachment:TmpManageGrafanaAttachment manage_grafana_attachment prom-xxxxxxxx
  * ```
  */
 export class TmpManageGrafanaAttachment extends pulumi.CustomResource {

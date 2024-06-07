@@ -8,40 +8,45 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of CLB redirections
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.GetRedirections(ctx, &clb.GetRedirectionsArgs{
-// 			ClbId:            "lb-p7olt9e5",
-// 			ResultOutputFile: pulumi.StringRef("mytestpath"),
-// 			SourceListenerId: "lbl-jc1dx6ju",
-// 			SourceRuleId:     "loc-ft8fmngv",
-// 			TargetListenerId: pulumi.StringRef("lbl-asj1hzuo"),
-// 			TargetRuleId:     pulumi.StringRef("loc-4xxr2cy7"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.GetRedirections(ctx, &clb.GetRedirectionsArgs{
+//				ClbId:            "lb-p7olt9e5",
+//				ResultOutputFile: pulumi.StringRef("mytestpath"),
+//				SourceListenerId: "lbl-jc1dx6ju",
+//				SourceRuleId:     "loc-ft8fmngv",
+//				TargetListenerId: pulumi.StringRef("lbl-asj1hzuo"),
+//				TargetRuleId:     pulumi.StringRef("loc-4xxr2cy7"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetRedirections(ctx *pulumi.Context, args *GetRedirectionsArgs, opts ...pulumi.InvokeOption) (*GetRedirectionsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRedirectionsResult
 	err := ctx.Invoke("tencentcloud:Clb/getRedirections:getRedirections", args, &rv, opts...)
 	if err != nil {

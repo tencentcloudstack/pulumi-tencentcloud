@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accelerationDomain = new tencentcloud.Teo.AccelerationDomain("acceleration_domain", {
+ * const accelerationDomain = new tencentcloud.teo.AccelerationDomain("accelerationDomain", {
  *     domainName: "aaa.makn.cn",
  *     originInfo: {
  *         origin: "150.109.8.1",
@@ -23,13 +25,14 @@ import * as utilities from "../utilities";
  *     zoneId: "zone-2o0i41pv2h8c",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * teo acceleration_domain can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Teo/accelerationDomain:AccelerationDomain acceleration_domain acceleration_domain_id
+ * $ pulumi import tencentcloud:Teo/accelerationDomain:AccelerationDomain acceleration_domain acceleration_domain_id
  * ```
  */
 export class AccelerationDomain extends pulumi.CustomResource {

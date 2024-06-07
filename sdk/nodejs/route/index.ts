@@ -5,14 +5,21 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./table";
-export * from "./tableAssociation";
-export * from "./tableEntry";
+export { TableArgs, TableState } from "./table";
+export type Table = import("./table").Table;
+export const Table: typeof import("./table").Table = null as any;
+utilities.lazyLoad(exports, ["Table"], () => require("./table"));
 
-// Import resources to register:
-import { Table } from "./table";
-import { TableAssociation } from "./tableAssociation";
-import { TableEntry } from "./tableEntry";
+export { TableAssociationArgs, TableAssociationState } from "./tableAssociation";
+export type TableAssociation = import("./tableAssociation").TableAssociation;
+export const TableAssociation: typeof import("./tableAssociation").TableAssociation = null as any;
+utilities.lazyLoad(exports, ["TableAssociation"], () => require("./tableAssociation"));
+
+export { TableEntryArgs, TableEntryState } from "./tableEntry";
+export type TableEntry = import("./tableEntry").TableEntry;
+export const TableEntry: typeof import("./tableEntry").TableEntry = null as any;
+utilities.lazyLoad(exports, ["TableEntry"], () => require("./tableEntry"));
+
 
 const _module = {
     version: utilities.getVersion(),

@@ -8,40 +8,46 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a CLB target group.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewTargetGroup(ctx, "test", &Clb.TargetGroupArgs{
-// 			Port:            pulumi.Int(33),
-// 			TargetGroupName: pulumi.String("test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewTargetGroup(ctx, "test", &Clb.TargetGroupArgs{
+//				Port:            pulumi.Int(33),
+//				TargetGroupName: pulumi.String("test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // CLB target group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
+// $ pulumi import tencentcloud:Clb/targetGroup:TargetGroup test lbtg-3k3io0i0
 // ```
 type TargetGroup struct {
 	pulumi.CustomResourceState
@@ -50,7 +56,7 @@ type TargetGroup struct {
 	Port pulumi.IntPtrOutput `pulumi:"port"`
 	// It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
 	//
-	// Deprecated: It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
+	// Deprecated: It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead.
 	TargetGroupInstances TargetGroupTargetGroupInstanceArrayOutput `pulumi:"targetGroupInstances"`
 	// Target group name.
 	TargetGroupName pulumi.StringPtrOutput `pulumi:"targetGroupName"`
@@ -65,7 +71,7 @@ func NewTargetGroup(ctx *pulumi.Context,
 		args = &TargetGroupArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TargetGroup
 	err := ctx.RegisterResource("tencentcloud:Clb/targetGroup:TargetGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -92,7 +98,7 @@ type targetGroupState struct {
 	Port *int `pulumi:"port"`
 	// It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
 	//
-	// Deprecated: It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
+	// Deprecated: It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead.
 	TargetGroupInstances []TargetGroupTargetGroupInstance `pulumi:"targetGroupInstances"`
 	// Target group name.
 	TargetGroupName *string `pulumi:"targetGroupName"`
@@ -105,7 +111,7 @@ type TargetGroupState struct {
 	Port pulumi.IntPtrInput
 	// It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
 	//
-	// Deprecated: It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
+	// Deprecated: It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead.
 	TargetGroupInstances TargetGroupTargetGroupInstanceArrayInput
 	// Target group name.
 	TargetGroupName pulumi.StringPtrInput
@@ -122,7 +128,7 @@ type targetGroupArgs struct {
 	Port *int `pulumi:"port"`
 	// It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
 	//
-	// Deprecated: It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
+	// Deprecated: It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead.
 	TargetGroupInstances []TargetGroupTargetGroupInstance `pulumi:"targetGroupInstances"`
 	// Target group name.
 	TargetGroupName *string `pulumi:"targetGroupName"`
@@ -136,7 +142,7 @@ type TargetGroupArgs struct {
 	Port pulumi.IntPtrInput
 	// It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
 	//
-	// Deprecated: It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
+	// Deprecated: It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead.
 	TargetGroupInstances TargetGroupTargetGroupInstanceArrayInput
 	// Target group name.
 	TargetGroupName pulumi.StringPtrInput
@@ -170,7 +176,7 @@ func (i *TargetGroup) ToTargetGroupOutputWithContext(ctx context.Context) Target
 // TargetGroupArrayInput is an input type that accepts TargetGroupArray and TargetGroupArrayOutput values.
 // You can construct a concrete instance of `TargetGroupArrayInput` via:
 //
-//          TargetGroupArray{ TargetGroupArgs{...} }
+//	TargetGroupArray{ TargetGroupArgs{...} }
 type TargetGroupArrayInput interface {
 	pulumi.Input
 
@@ -195,7 +201,7 @@ func (i TargetGroupArray) ToTargetGroupArrayOutputWithContext(ctx context.Contex
 // TargetGroupMapInput is an input type that accepts TargetGroupMap and TargetGroupMapOutput values.
 // You can construct a concrete instance of `TargetGroupMapInput` via:
 //
-//          TargetGroupMap{ "key": TargetGroupArgs{...} }
+//	TargetGroupMap{ "key": TargetGroupArgs{...} }
 type TargetGroupMapInput interface {
 	pulumi.Input
 
@@ -238,7 +244,7 @@ func (o TargetGroupOutput) Port() pulumi.IntPtrOutput {
 
 // It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead. The backend server of target group bind.
 //
-// Deprecated: It has been deprecated from version 1.77.3. please use `tencentcloud_clb_target_group_instance_attachment` instead.
+// Deprecated: It has been deprecated from version 1.77.3. please use `Clb.TargetGroupInstanceAttachment` instead.
 func (o TargetGroupOutput) TargetGroupInstances() TargetGroupTargetGroupInstanceArrayOutput {
 	return o.ApplyT(func(v *TargetGroup) TargetGroupTargetGroupInstanceArrayOutput { return v.TargetGroupInstances }).(TargetGroupTargetGroupInstanceArrayOutput)
 }

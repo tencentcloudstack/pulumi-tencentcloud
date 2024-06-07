@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,19 +11,56 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const renewInstance = new tencentcloud.Cvm.RenewInstance("renew_instance", {
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create vpc subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: "ap-guangzhou-6",
+ *     cidrBlock: "10.0.20.0/28",
+ *     isMulticast: false,
+ * });
+ * // create cvm
+ * const exampleInstance = new tencentcloud.instance.Instance("exampleInstance", {
+ *     instanceName: "tf_example",
+ *     availabilityZone: "ap-guangzhou-6",
+ *     imageId: "img-9qrfy1xt",
+ *     instanceType: "SA3.MEDIUM4",
+ *     systemDiskType: "CLOUD_HSSD",
+ *     systemDiskSize: 100,
+ *     hostname: "example",
+ *     projectId: 0,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     forceDelete: true,
+ *     instanceChargeType: "PREPAID",
+ *     instanceChargeTypePrepaidPeriod: 1,
+ *     instanceChargeTypePrepaidRenewFlag: "NOTIFY_AND_MANUAL_RENEW",
+ *     dataDisks: [{
+ *         dataDiskType: "CLOUD_HSSD",
+ *         dataDiskSize: 50,
+ *         encrypt: false,
+ *     }],
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * // renew instance
+ * const exampleRenewInstance = new tencentcloud.cvm.RenewInstance("exampleRenewInstance", {
+ *     instanceId: exampleInstance.id,
+ *     renewPortableDataDisk: true,
  *     instanceChargePrepaid: {
  *         period: 1,
- *         renewFlag: "NOTIFY_AND_AUTO_RENEW",
+ *         renewFlag: "NOTIFY_AND_MANUAL_RENEW",
  *     },
- *     instanceIds: "",
- *     renewPortableDataDisk: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RenewInstance extends pulumi.CustomResource {
     /**
@@ -62,9 +100,6 @@ export class RenewInstance extends pulumi.CustomResource {
     public readonly instanceId!: pulumi.Output<string>;
     /**
      * Whether to renew the elastic data disk. Valid values:
-     * - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
-     * - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-     * Default value: TRUE.
      */
     public readonly renewPortableDataDisk!: pulumi.Output<boolean | undefined>;
 
@@ -112,9 +147,6 @@ export interface RenewInstanceState {
     instanceId?: pulumi.Input<string>;
     /**
      * Whether to renew the elastic data disk. Valid values:
-     * - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
-     * - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-     * Default value: TRUE.
      */
     renewPortableDataDisk?: pulumi.Input<boolean>;
 }
@@ -133,9 +165,6 @@ export interface RenewInstanceArgs {
     instanceId: pulumi.Input<string>;
     /**
      * Whether to renew the elastic data disk. Valid values:
-     * - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
-     * - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-     * Default value: TRUE.
      */
     renewPortableDataDisk?: pulumi.Input<boolean>;
 }

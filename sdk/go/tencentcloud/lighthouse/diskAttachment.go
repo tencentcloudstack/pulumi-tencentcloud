@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a lighthouse diskAttachment
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewDiskAttachment(ctx, "diskAttachment", &Lighthouse.DiskAttachmentArgs{
-// 			DiskId:     pulumi.String("lhdisk-xxxxxx"),
-// 			InstanceId: pulumi.String("lhins-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewDiskAttachment(ctx, "diskAttachment", &Lighthouse.DiskAttachmentArgs{
+//				DiskId:     pulumi.String("lhdisk-xxxxxx"),
+//				InstanceId: pulumi.String("lhins-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // lighthouse disk_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Lighthouse/diskAttachment:DiskAttachment disk_attachment disk_attachment_id
+// $ pulumi import tencentcloud:Lighthouse/diskAttachment:DiskAttachment disk_attachment disk_attachment_id
 // ```
 type DiskAttachment struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewDiskAttachment(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DiskAttachment
 	err := ctx.RegisterResource("tencentcloud:Lighthouse/diskAttachment:DiskAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *DiskAttachment) ToDiskAttachmentOutputWithContext(ctx context.Context) 
 // DiskAttachmentArrayInput is an input type that accepts DiskAttachmentArray and DiskAttachmentArrayOutput values.
 // You can construct a concrete instance of `DiskAttachmentArrayInput` via:
 //
-//          DiskAttachmentArray{ DiskAttachmentArgs{...} }
+//	DiskAttachmentArray{ DiskAttachmentArgs{...} }
 type DiskAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i DiskAttachmentArray) ToDiskAttachmentArrayOutputWithContext(ctx context.
 // DiskAttachmentMapInput is an input type that accepts DiskAttachmentMap and DiskAttachmentMapOutput values.
 // You can construct a concrete instance of `DiskAttachmentMapInput` via:
 //
-//          DiskAttachmentMap{ "key": DiskAttachmentArgs{...} }
+//	DiskAttachmentMap{ "key": DiskAttachmentArgs{...} }
 type DiskAttachmentMapInput interface {
 	pulumi.Input
 

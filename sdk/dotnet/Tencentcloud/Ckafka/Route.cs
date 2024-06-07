@@ -15,30 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Ckafka.Route("example", new()
     ///     {
-    ///         var route = new Tencentcloud.Ckafka.Route("route", new Tencentcloud.Ckafka.RouteArgs
-    ///         {
-    ///             AccessType = 0,
-    ///             InstanceId = "ckafka-xxxxxx",
-    ///             PublicNetwork = 3,
-    ///             SubnetId = "subnet-xxxxxx",
-    ///             VipType = 3,
-    ///             VpcId = "vpc-xxxxxx",
-    ///         });
-    ///     }
+    ///         AccessType = 0,
+    ///         InstanceId = "ckafka-8j4rodrr",
+    ///         PublicNetwork = 3,
+    ///         SubnetId = "subnet-j5vja918",
+    ///         VipType = 3,
+    ///         VpcId = "vpc-axrsmmrv",
+    ///     });
     /// 
-    /// }
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ## Import
+    /// 
+    /// ckafka route can be imported using the id, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Ckafka/route:Route example ckafka-8j4rodrr#135912
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/route:Route")]
-    public partial class Route : Pulumi.CustomResource
+    public partial class Route : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Access type. Valid values:
@@ -155,7 +164,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
     }
 
-    public sealed class RouteArgs : Pulumi.ResourceArgs
+    public sealed class RouteArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Access type. Valid values:
@@ -218,9 +227,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public RouteArgs()
         {
         }
+        public static new RouteArgs Empty => new RouteArgs();
     }
 
-    public sealed class RouteState : Pulumi.ResourceArgs
+    public sealed class RouteState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Access type. Valid values:
@@ -307,5 +317,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public RouteState()
         {
         }
+        public static new RouteState Empty => new RouteState();
     }
 }

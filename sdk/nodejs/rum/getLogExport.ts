@@ -9,25 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const logExport = pulumi.output(tencentcloud.Rum.getLogExport({
+ * const logExport = tencentcloud.Rum.getLogExport({
  *     endTime: "1692609240000",
  *     name: "log",
  *     projectId: 1,
  *     query: "id:123 AND type: \"log\"",
  *     startTime: "1692594840000",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getLogExport(args: GetLogExportArgs, opts?: pulumi.InvokeOptions): Promise<GetLogExportResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getLogExport:getLogExport", {
         "endTime": args.endTime,
         "fields": args.fields,
@@ -93,9 +92,28 @@ export interface GetLogExportResult {
     readonly resultOutputFile?: string;
     readonly startTime: string;
 }
-
+/**
+ * Use this data source to query detailed information of rum logExport
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const logExport = tencentcloud.Rum.getLogExport({
+ *     endTime: "1692609240000",
+ *     name: "log",
+ *     projectId: 1,
+ *     query: "id:123 AND type: \"log\"",
+ *     startTime: "1692594840000",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getLogExportOutput(args: GetLogExportOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetLogExportResult> {
-    return pulumi.output(args).apply(a => getLogExport(a, opts))
+    return pulumi.output(args).apply((a: any) => getLogExport(a, opts))
 }
 
 /**

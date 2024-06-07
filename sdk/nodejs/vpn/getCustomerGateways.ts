@@ -2,35 +2,17 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of VPN customer gateways.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const foo = pulumi.output(tencentcloud.CustomerGateways({
- *     id: "cgw-xfqag",
- *     name: "main",
- *     publicIpAddress: "1.1.1.1",
- *     tags: [{
- *         test: "tf",
- *     }],
- * }));
- * ```
  */
 export function getCustomerGateways(args?: GetCustomerGatewaysArgs, opts?: pulumi.InvokeOptions): Promise<GetCustomerGatewaysResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpn/getCustomerGateways:getCustomerGateways", {
         "id": args.id,
         "name": args.name,
@@ -92,9 +74,11 @@ export interface GetCustomerGatewaysResult {
      */
     readonly tags?: {[key: string]: any};
 }
-
+/**
+ * Use this data source to query detailed information of VPN customer gateways.
+ */
 export function getCustomerGatewaysOutput(args?: GetCustomerGatewaysOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCustomerGatewaysResult> {
-    return pulumi.output(args).apply(a => getCustomerGateways(a, opts))
+    return pulumi.output(args).apply((a: any) => getCustomerGateways(a, opts))
 }
 
 /**

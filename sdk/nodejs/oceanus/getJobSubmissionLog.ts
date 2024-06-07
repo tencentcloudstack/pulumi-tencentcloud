@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Oceanus.getJobSubmissionLog({
+ * const example = tencentcloud.Oceanus.getJobSubmissionLog({
  *     endTime: 1698118169241,
  *     jobId: "cql-314rw6w0",
  *     orderType: "desc",
  *     runningOrderId: 0,
  *     startTime: 1696130964345,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getJobSubmissionLog(args: GetJobSubmissionLogArgs, opts?: pulumi.InvokeOptions): Promise<GetJobSubmissionLogResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Oceanus/getJobSubmissionLog:getJobSubmissionLog", {
         "cursor": args.cursor,
         "endTime": args.endTime,
@@ -119,9 +119,28 @@ export interface GetJobSubmissionLogResult {
     readonly runningOrderId?: number;
     readonly startTime: number;
 }
-
+/**
+ * Use this data source to query detailed information of oceanus jobSubmissionLog
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Oceanus.getJobSubmissionLog({
+ *     endTime: 1698118169241,
+ *     jobId: "cql-314rw6w0",
+ *     orderType: "desc",
+ *     runningOrderId: 0,
+ *     startTime: 1696130964345,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getJobSubmissionLogOutput(args: GetJobSubmissionLogOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetJobSubmissionLogResult> {
-    return pulumi.output(args).apply(a => getJobSubmissionLog(a, opts))
+    return pulumi.output(args).apply((a: any) => getJobSubmissionLog(a, opts))
 }
 
 /**

@@ -7,45 +7,51 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a css domainReferer
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewDomainReferer(ctx, "domainReferer", &Css.DomainRefererArgs{
-// 			AllowEmpty: pulumi.Int(1),
-// 			DomainName: pulumi.String("test122.jingxhu.top"),
-// 			Enable:     pulumi.Int(0),
-// 			Rules:      pulumi.String("example.com"),
-// 			Type:       pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewDomainReferer(ctx, "domainReferer", &Css.DomainRefererArgs{
+//				AllowEmpty: pulumi.Int(1),
+//				DomainName: pulumi.String("test122.jingxhu.top"),
+//				Enable:     pulumi.Int(0),
+//				Rules:      pulumi.String("example.com"),
+//				Type:       pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // css domain_referer can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/domainReferer:DomainReferer domain_referer domainName
+// $ pulumi import tencentcloud:Css/domainReferer:DomainReferer domain_referer domainName
 // ```
 type DomainReferer struct {
 	pulumi.CustomResourceState
@@ -84,7 +90,7 @@ func NewDomainReferer(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DomainReferer
 	err := ctx.RegisterResource("tencentcloud:Css/domainReferer:DomainReferer", name, args, &resource, opts...)
 	if err != nil {
@@ -189,7 +195,7 @@ func (i *DomainReferer) ToDomainRefererOutputWithContext(ctx context.Context) Do
 // DomainRefererArrayInput is an input type that accepts DomainRefererArray and DomainRefererArrayOutput values.
 // You can construct a concrete instance of `DomainRefererArrayInput` via:
 //
-//          DomainRefererArray{ DomainRefererArgs{...} }
+//	DomainRefererArray{ DomainRefererArgs{...} }
 type DomainRefererArrayInput interface {
 	pulumi.Input
 
@@ -214,7 +220,7 @@ func (i DomainRefererArray) ToDomainRefererArrayOutputWithContext(ctx context.Co
 // DomainRefererMapInput is an input type that accepts DomainRefererMap and DomainRefererMapOutput values.
 // You can construct a concrete instance of `DomainRefererMapInput` via:
 //
-//          DomainRefererMap{ "key": DomainRefererArgs{...} }
+//	DomainRefererMap{ "key": DomainRefererArgs{...} }
 type DomainRefererMapInput interface {
 	pulumi.Input
 

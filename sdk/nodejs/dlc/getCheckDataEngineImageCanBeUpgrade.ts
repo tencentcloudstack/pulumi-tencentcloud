@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const checkDataEngineImageCanBeUpgrade = pulumi.output(tencentcloud.Dlc.getCheckDataEngineImageCanBeUpgrade({
+ * const checkDataEngineImageCanBeUpgrade = tencentcloud.Dlc.getCheckDataEngineImageCanBeUpgrade({
  *     dataEngineId: "DataEngine-cgkvbas6",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCheckDataEngineImageCanBeUpgrade(args: GetCheckDataEngineImageCanBeUpgradeArgs, opts?: pulumi.InvokeOptions): Promise<GetCheckDataEngineImageCanBeUpgradeResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dlc/getCheckDataEngineImageCanBeUpgrade:getCheckDataEngineImageCanBeUpgrade", {
         "dataEngineId": args.dataEngineId,
         "resultOutputFile": args.resultOutputFile,
@@ -63,9 +62,24 @@ export interface GetCheckDataEngineImageCanBeUpgradeResult {
     readonly isUpgrade: boolean;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of dlc checkDataEngineImageCanBeUpgrade
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const checkDataEngineImageCanBeUpgrade = tencentcloud.Dlc.getCheckDataEngineImageCanBeUpgrade({
+ *     dataEngineId: "DataEngine-cgkvbas6",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCheckDataEngineImageCanBeUpgradeOutput(args: GetCheckDataEngineImageCanBeUpgradeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCheckDataEngineImageCanBeUpgradeResult> {
-    return pulumi.output(args).apply(a => getCheckDataEngineImageCanBeUpgrade(a, opts))
+    return pulumi.output(args).apply((a: any) => getCheckDataEngineImageCanBeUpgrade(a, opts))
 }
 
 /**

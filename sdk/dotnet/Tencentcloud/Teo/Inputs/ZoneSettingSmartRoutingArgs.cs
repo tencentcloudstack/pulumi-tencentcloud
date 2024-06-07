@@ -11,10 +11,10 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneSettingSmartRoutingArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingSmartRoutingArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether to enable HTTP2 origin-pull.- `on`: Enable.- `off`: Disable.
+        /// Whether to enable HTTP2 origin-pull.
         /// </summary>
         [Input("switch", required: true)]
         public Input<string> Switch { get; set; } = null!;
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneSettingSmartRoutingArgs()
         {
         }
+        public static new ZoneSettingSmartRoutingArgs Empty => new ZoneSettingSmartRoutingArgs();
     }
 }

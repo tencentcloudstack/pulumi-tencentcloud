@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var updateDataEngineConfigOperation = new Tencentcloud.Dlc.UpdateDataEngineConfigOperation("updateDataEngineConfigOperation", new()
     ///     {
-    ///         var updateDataEngineConfigOperation = new Tencentcloud.Dlc.UpdateDataEngineConfigOperation("updateDataEngineConfigOperation", new Tencentcloud.Dlc.UpdateDataEngineConfigOperationArgs
-    ///         {
-    ///             DataEngineConfigCommand = "UpdateSparkSQLLakefsPath",
-    ///             DataEngineId = "DataEngine-o3lzpqpo",
-    ///         });
-    ///     }
+    ///         DataEngineConfigCommand = "UpdateSparkSQLLakefsPath",
+    ///         DataEngineId = "DataEngine-o3lzpqpo",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/updateDataEngineConfigOperation:UpdateDataEngineConfigOperation")]
-    public partial class UpdateDataEngineConfigOperation : Pulumi.CustomResource
+    public partial class UpdateDataEngineConfigOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Engine configuration command, supports UpdateSparkSQLLakefsPath (update native table configuration), UpdateSparkSQLResultPath (update result path configuration).
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class UpdateDataEngineConfigOperationArgs : Pulumi.ResourceArgs
+    public sealed class UpdateDataEngineConfigOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Engine configuration command, supports UpdateSparkSQLLakefsPath (update native table configuration), UpdateSparkSQLResultPath (update result path configuration).
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public UpdateDataEngineConfigOperationArgs()
         {
         }
+        public static new UpdateDataEngineConfigOperationArgs Empty => new UpdateDataEngineConfigOperationArgs();
     }
 
-    public sealed class UpdateDataEngineConfigOperationState : Pulumi.ResourceArgs
+    public sealed class UpdateDataEngineConfigOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Engine configuration command, supports UpdateSparkSQLLakefsPath (update native table configuration), UpdateSparkSQLResultPath (update result path configuration).
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public UpdateDataEngineConfigOperationState()
         {
         }
+        public static new UpdateDataEngineConfigOperationState Empty => new UpdateDataEngineConfigOperationState();
     }
 }

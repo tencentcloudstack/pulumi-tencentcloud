@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainPostMaxSizeArgs : Pulumi.ResourceArgs
+    public sealed class DomainPostMaxSizeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Maximum size in MB, value range is `[1, 200]`.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainPostMaxSizeArgs()
         {
         }
+        public static new DomainPostMaxSizeArgs Empty => new DomainPostMaxSizeArgs();
     }
 }

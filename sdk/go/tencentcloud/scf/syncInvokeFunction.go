@@ -7,36 +7,42 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a scf syncInvokeFunction
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewSyncInvokeFunction(ctx, "invokeFunction", &Scf.SyncInvokeFunctionArgs{
-// 			FunctionName: pulumi.String("keep-1676351130"),
-// 			Namespace:    pulumi.String("default"),
-// 			Qualifier:    pulumi.String("2"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewSyncInvokeFunction(ctx, "invokeFunction", &Scf.SyncInvokeFunctionArgs{
+//				FunctionName: pulumi.String("keep-1676351130"),
+//				Namespace:    pulumi.String("default"),
+//				Qualifier:    pulumi.String("2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type SyncInvokeFunction struct {
 	pulumi.CustomResourceState
 
@@ -64,7 +70,7 @@ func NewSyncInvokeFunction(ctx *pulumi.Context,
 	if args.FunctionName == nil {
 		return nil, errors.New("invalid value for required argument 'FunctionName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SyncInvokeFunction
 	err := ctx.RegisterResource("tencentcloud:Scf/syncInvokeFunction:SyncInvokeFunction", name, args, &resource, opts...)
 	if err != nil {
@@ -177,7 +183,7 @@ func (i *SyncInvokeFunction) ToSyncInvokeFunctionOutputWithContext(ctx context.C
 // SyncInvokeFunctionArrayInput is an input type that accepts SyncInvokeFunctionArray and SyncInvokeFunctionArrayOutput values.
 // You can construct a concrete instance of `SyncInvokeFunctionArrayInput` via:
 //
-//          SyncInvokeFunctionArray{ SyncInvokeFunctionArgs{...} }
+//	SyncInvokeFunctionArray{ SyncInvokeFunctionArgs{...} }
 type SyncInvokeFunctionArrayInput interface {
 	pulumi.Input
 
@@ -202,7 +208,7 @@ func (i SyncInvokeFunctionArray) ToSyncInvokeFunctionArrayOutputWithContext(ctx 
 // SyncInvokeFunctionMapInput is an input type that accepts SyncInvokeFunctionMap and SyncInvokeFunctionMapOutput values.
 // You can construct a concrete instance of `SyncInvokeFunctionMapInput` via:
 //
-//          SyncInvokeFunctionMap{ "key": SyncInvokeFunctionArgs{...} }
+//	SyncInvokeFunctionMap{ "key": SyncInvokeFunctionArgs{...} }
 type SyncInvokeFunctionMapInput interface {
 	pulumi.Input
 

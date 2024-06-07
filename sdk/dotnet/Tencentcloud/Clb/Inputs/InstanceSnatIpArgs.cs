@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
 {
 
-    public sealed class InstanceSnatIpArgs : Pulumi.ResourceArgs
+    public sealed class InstanceSnatIpArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Snat IP address, If set to empty will auto allocated.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Inputs
         public InstanceSnatIpArgs()
         {
         }
+        public static new InstanceSnatIpArgs Empty => new InstanceSnatIpArgs();
     }
 }

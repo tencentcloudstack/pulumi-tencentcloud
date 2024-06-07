@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainBandWidthAlertStatisticItemGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainBandWidthAlertStatisticItemGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alert percentage.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainBandWidthAlertStatisticItemGetArgs()
         {
         }
+        public static new DomainBandWidthAlertStatisticItemGetArgs Empty => new DomainBandWidthAlertStatisticItemGetArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class AiRecognitionTemplateOcrWordsConfigureGetArgs : Pulumi.ResourceArgs
+    public sealed class AiRecognitionTemplateOcrWordsConfigureGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("labelSets")]
         private InputList<string>? _labelSets;
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public AiRecognitionTemplateOcrWordsConfigureGetArgs()
         {
         }
+        public static new AiRecognitionTemplateOcrWordsConfigureGetArgs Empty => new AiRecognitionTemplateOcrWordsConfigureGetArgs();
     }
 }

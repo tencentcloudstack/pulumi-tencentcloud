@@ -9,25 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const overviewCcTrend = pulumi.output(tencentcloud.Antiddos.getOverviewCcTrend({
+ * const overviewCcTrend = tencentcloud.Antiddos.getOverviewCcTrend({
  *     business: "bgpip",
  *     endTime: "2023-11-21 00:00:00",
  *     metricName: "inqps",
  *     period: 300,
  *     startTime: "2023-11-20 00:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getOverviewCcTrend(args: GetOverviewCcTrendArgs, opts?: pulumi.InvokeOptions): Promise<GetOverviewCcTrendResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Antiddos/getOverviewCcTrend:getOverviewCcTrend", {
         "business": args.business,
         "endTime": args.endTime,
@@ -93,9 +92,28 @@ export interface GetOverviewCcTrendResult {
     readonly resultOutputFile?: string;
     readonly startTime: string;
 }
-
+/**
+ * Use this data source to query detailed information of antiddos overviewCcTrend
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const overviewCcTrend = tencentcloud.Antiddos.getOverviewCcTrend({
+ *     business: "bgpip",
+ *     endTime: "2023-11-21 00:00:00",
+ *     metricName: "inqps",
+ *     period: 300,
+ *     startTime: "2023-11-20 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getOverviewCcTrendOutput(args: GetOverviewCcTrendOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOverviewCcTrendResult> {
-    return pulumi.output(args).apply(a => getOverviewCcTrend(a, opts))
+    return pulumi.output(args).apply((a: any) => getOverviewCcTrend(a, opts))
 }
 
 /**

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class TaskTaskRuleArgs : Pulumi.ResourceArgs
+    public sealed class TaskTaskRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cron type rule, cron expression.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public TaskTaskRuleArgs()
         {
         }
+        public static new TaskTaskRuleArgs Empty => new TaskTaskRuleArgs();
     }
 }

@@ -15,47 +15,48 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var accountPrivileges = new Tencentcloud.Mariadb.AccountPrivileges("accountPrivileges", new()
     ///     {
-    ///         var accountPrivileges = new Tencentcloud.Mariadb.AccountPrivileges("accountPrivileges", new Tencentcloud.Mariadb.AccountPrivilegesArgs
+    ///         Accounts = new Tencentcloud.Mariadb.Inputs.AccountPrivilegesAccountsArgs
     ///         {
-    ///             Accounts = new Tencentcloud.Mariadb.Inputs.AccountPrivilegesAccountsArgs
-    ///             {
-    ///                 Host = "127.0.0.1",
-    ///                 User = "keep-modify-privileges",
-    ///             },
-    ///             GlobalPrivileges = 
-    ///             {
-    ///                 "ALTER",
-    ///                 "CREATE",
-    ///                 "DELETE",
-    ///                 "SELECT",
-    ///                 "UPDATE",
-    ///                 "DROP",
-    ///             },
-    ///             InstanceId = "tdsql-9vqvls95",
-    ///         });
-    ///     }
+    ///             Host = "127.0.0.1",
+    ///             User = "keep-modify-privileges",
+    ///         },
+    ///         GlobalPrivileges = new[]
+    ///         {
+    ///             "ALTER",
+    ///             "CREATE",
+    ///             "DELETE",
+    ///             "SELECT",
+    ///             "UPDATE",
+    ///             "DROP",
+    ///         },
+    ///         InstanceId = "tdsql-9vqvls95",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mariadb account_privileges can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mariadb/accountPrivileges:AccountPrivileges account_privileges account_privileges_id
+    /// $ pulumi import tencentcloud:Mariadb/accountPrivileges:AccountPrivileges account_privileges account_privileges_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/accountPrivileges:AccountPrivileges")]
-    public partial class AccountPrivileges : Pulumi.CustomResource
+    public partial class AccountPrivileges : global::Pulumi.CustomResource
     {
         /// <summary>
         /// account information.
@@ -156,7 +157,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class AccountPrivilegesArgs : Pulumi.ResourceArgs
+    public sealed class AccountPrivilegesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// account information.
@@ -257,9 +258,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public AccountPrivilegesArgs()
         {
         }
+        public static new AccountPrivilegesArgs Empty => new AccountPrivilegesArgs();
     }
 
-    public sealed class AccountPrivilegesState : Pulumi.ResourceArgs
+    public sealed class AccountPrivilegesState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// account information.
@@ -360,5 +362,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public AccountPrivilegesState()
         {
         }
+        public static new AccountPrivilegesState Empty => new AccountPrivilegesState();
     }
 }

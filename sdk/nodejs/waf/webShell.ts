@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.WebShell("example", {
+ * const example = new tencentcloud.waf.WebShell("example", {
  *     domain: "demo.waf.com",
  *     status: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * waf web_shell can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Waf/webShell:WebShell example demo.waf.com
+ * $ pulumi import tencentcloud:Waf/webShell:WebShell example demo.waf.com
  * ```
  */
 export class WebShell extends pulumi.CustomResource {

@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var startBackupFullMigration = new Tencentcloud.Sqlserver.StartBackupFullMigration("startBackupFullMigration", new()
     ///     {
-    ///         var startBackupFullMigration = new Tencentcloud.Sqlserver.StartBackupFullMigration("startBackupFullMigration", new Tencentcloud.Sqlserver.StartBackupFullMigrationArgs
-    ///         {
-    ///             BackupMigrationId = "mssql-backup-migration-kpl74n9l",
-    ///             InstanceId = "mssql-i1z41iwd",
-    ///         });
-    ///     }
+    ///         BackupMigrationId = "mssql-backup-migration-kpl74n9l",
+    ///         InstanceId = "mssql-i1z41iwd",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/startBackupFullMigration:StartBackupFullMigration")]
-    public partial class StartBackupFullMigration : Pulumi.CustomResource
+    public partial class StartBackupFullMigration : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Backup import task ID, returned by the CreateBackupMigration interface.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         }
     }
 
-    public sealed class StartBackupFullMigrationArgs : Pulumi.ResourceArgs
+    public sealed class StartBackupFullMigrationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Backup import task ID, returned by the CreateBackupMigration interface.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public StartBackupFullMigrationArgs()
         {
         }
+        public static new StartBackupFullMigrationArgs Empty => new StartBackupFullMigrationArgs();
     }
 
-    public sealed class StartBackupFullMigrationState : Pulumi.ResourceArgs
+    public sealed class StartBackupFullMigrationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Backup import task ID, returned by the CreateBackupMigration interface.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public StartBackupFullMigrationState()
         {
         }
+        public static new StartBackupFullMigrationState Empty => new StartBackupFullMigrationState();
     }
 }

@@ -5,61 +5,181 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./attachment";
-export * from "./customizedConfig";
-export * from "./functionTargetsAttachment";
-export * from "./getAttachments";
-export * from "./getClusterResources";
-export * from "./getCrossTargets";
-export * from "./getExclusiveClusters";
-export * from "./getIdleInstances";
-export * from "./getInstanceByCertId";
-export * from "./getInstanceDetail";
-export * from "./getInstanceTraffic";
-export * from "./getInstances";
-export * from "./getListenerRules";
-export * from "./getListeners";
-export * from "./getListenersByTargets";
-export * from "./getRedirections";
-export * from "./getResources";
-export * from "./getTargetGroupList";
-export * from "./getTargetGroups";
-export * from "./getTargetHealth";
-export * from "./instance";
-export * from "./instanceMixIpTargetConfig";
-export * from "./instanceSlaConfig";
-export * from "./listener";
-export * from "./listenerRule";
-export * from "./logSet";
-export * from "./logTopic";
-export * from "./redirection";
-export * from "./replaceCertForLbs";
-export * from "./securityGroupAttachment";
-export * from "./snatIp";
-export * from "./targetGroup";
-export * from "./targetGroupAttachment";
-export * from "./targetGroupAttachments";
-export * from "./targetGroupInstanceAttachment";
+export { AttachmentArgs, AttachmentState } from "./attachment";
+export type Attachment = import("./attachment").Attachment;
+export const Attachment: typeof import("./attachment").Attachment = null as any;
+utilities.lazyLoad(exports, ["Attachment"], () => require("./attachment"));
 
-// Import resources to register:
-import { Attachment } from "./attachment";
-import { CustomizedConfig } from "./customizedConfig";
-import { FunctionTargetsAttachment } from "./functionTargetsAttachment";
-import { Instance } from "./instance";
-import { InstanceMixIpTargetConfig } from "./instanceMixIpTargetConfig";
-import { InstanceSlaConfig } from "./instanceSlaConfig";
-import { Listener } from "./listener";
-import { ListenerRule } from "./listenerRule";
-import { LogSet } from "./logSet";
-import { LogTopic } from "./logTopic";
-import { Redirection } from "./redirection";
-import { ReplaceCertForLbs } from "./replaceCertForLbs";
-import { SecurityGroupAttachment } from "./securityGroupAttachment";
-import { SnatIp } from "./snatIp";
-import { TargetGroup } from "./targetGroup";
-import { TargetGroupAttachment } from "./targetGroupAttachment";
-import { TargetGroupAttachments } from "./targetGroupAttachments";
-import { TargetGroupInstanceAttachment } from "./targetGroupInstanceAttachment";
+export { CustomizedConfigArgs, CustomizedConfigState } from "./customizedConfig";
+export type CustomizedConfig = import("./customizedConfig").CustomizedConfig;
+export const CustomizedConfig: typeof import("./customizedConfig").CustomizedConfig = null as any;
+utilities.lazyLoad(exports, ["CustomizedConfig"], () => require("./customizedConfig"));
+
+export { FunctionTargetsAttachmentArgs, FunctionTargetsAttachmentState } from "./functionTargetsAttachment";
+export type FunctionTargetsAttachment = import("./functionTargetsAttachment").FunctionTargetsAttachment;
+export const FunctionTargetsAttachment: typeof import("./functionTargetsAttachment").FunctionTargetsAttachment = null as any;
+utilities.lazyLoad(exports, ["FunctionTargetsAttachment"], () => require("./functionTargetsAttachment"));
+
+export { GetAttachmentsArgs, GetAttachmentsResult, GetAttachmentsOutputArgs } from "./getAttachments";
+export const getAttachments: typeof import("./getAttachments").getAttachments = null as any;
+export const getAttachmentsOutput: typeof import("./getAttachments").getAttachmentsOutput = null as any;
+utilities.lazyLoad(exports, ["getAttachments","getAttachmentsOutput"], () => require("./getAttachments"));
+
+export { GetClusterResourcesArgs, GetClusterResourcesResult, GetClusterResourcesOutputArgs } from "./getClusterResources";
+export const getClusterResources: typeof import("./getClusterResources").getClusterResources = null as any;
+export const getClusterResourcesOutput: typeof import("./getClusterResources").getClusterResourcesOutput = null as any;
+utilities.lazyLoad(exports, ["getClusterResources","getClusterResourcesOutput"], () => require("./getClusterResources"));
+
+export { GetCrossTargetsArgs, GetCrossTargetsResult, GetCrossTargetsOutputArgs } from "./getCrossTargets";
+export const getCrossTargets: typeof import("./getCrossTargets").getCrossTargets = null as any;
+export const getCrossTargetsOutput: typeof import("./getCrossTargets").getCrossTargetsOutput = null as any;
+utilities.lazyLoad(exports, ["getCrossTargets","getCrossTargetsOutput"], () => require("./getCrossTargets"));
+
+export { GetExclusiveClustersArgs, GetExclusiveClustersResult, GetExclusiveClustersOutputArgs } from "./getExclusiveClusters";
+export const getExclusiveClusters: typeof import("./getExclusiveClusters").getExclusiveClusters = null as any;
+export const getExclusiveClustersOutput: typeof import("./getExclusiveClusters").getExclusiveClustersOutput = null as any;
+utilities.lazyLoad(exports, ["getExclusiveClusters","getExclusiveClustersOutput"], () => require("./getExclusiveClusters"));
+
+export { GetIdleInstancesArgs, GetIdleInstancesResult, GetIdleInstancesOutputArgs } from "./getIdleInstances";
+export const getIdleInstances: typeof import("./getIdleInstances").getIdleInstances = null as any;
+export const getIdleInstancesOutput: typeof import("./getIdleInstances").getIdleInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getIdleInstances","getIdleInstancesOutput"], () => require("./getIdleInstances"));
+
+export { GetInstanceByCertIdArgs, GetInstanceByCertIdResult, GetInstanceByCertIdOutputArgs } from "./getInstanceByCertId";
+export const getInstanceByCertId: typeof import("./getInstanceByCertId").getInstanceByCertId = null as any;
+export const getInstanceByCertIdOutput: typeof import("./getInstanceByCertId").getInstanceByCertIdOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceByCertId","getInstanceByCertIdOutput"], () => require("./getInstanceByCertId"));
+
+export { GetInstanceDetailArgs, GetInstanceDetailResult, GetInstanceDetailOutputArgs } from "./getInstanceDetail";
+export const getInstanceDetail: typeof import("./getInstanceDetail").getInstanceDetail = null as any;
+export const getInstanceDetailOutput: typeof import("./getInstanceDetail").getInstanceDetailOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceDetail","getInstanceDetailOutput"], () => require("./getInstanceDetail"));
+
+export { GetInstanceTrafficArgs, GetInstanceTrafficResult, GetInstanceTrafficOutputArgs } from "./getInstanceTraffic";
+export const getInstanceTraffic: typeof import("./getInstanceTraffic").getInstanceTraffic = null as any;
+export const getInstanceTrafficOutput: typeof import("./getInstanceTraffic").getInstanceTrafficOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceTraffic","getInstanceTrafficOutput"], () => require("./getInstanceTraffic"));
+
+export { GetInstancesArgs, GetInstancesResult, GetInstancesOutputArgs } from "./getInstances";
+export const getInstances: typeof import("./getInstances").getInstances = null as any;
+export const getInstancesOutput: typeof import("./getInstances").getInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstances","getInstancesOutput"], () => require("./getInstances"));
+
+export { GetListenerRulesArgs, GetListenerRulesResult, GetListenerRulesOutputArgs } from "./getListenerRules";
+export const getListenerRules: typeof import("./getListenerRules").getListenerRules = null as any;
+export const getListenerRulesOutput: typeof import("./getListenerRules").getListenerRulesOutput = null as any;
+utilities.lazyLoad(exports, ["getListenerRules","getListenerRulesOutput"], () => require("./getListenerRules"));
+
+export { GetListenersArgs, GetListenersResult, GetListenersOutputArgs } from "./getListeners";
+export const getListeners: typeof import("./getListeners").getListeners = null as any;
+export const getListenersOutput: typeof import("./getListeners").getListenersOutput = null as any;
+utilities.lazyLoad(exports, ["getListeners","getListenersOutput"], () => require("./getListeners"));
+
+export { GetListenersByTargetsArgs, GetListenersByTargetsResult, GetListenersByTargetsOutputArgs } from "./getListenersByTargets";
+export const getListenersByTargets: typeof import("./getListenersByTargets").getListenersByTargets = null as any;
+export const getListenersByTargetsOutput: typeof import("./getListenersByTargets").getListenersByTargetsOutput = null as any;
+utilities.lazyLoad(exports, ["getListenersByTargets","getListenersByTargetsOutput"], () => require("./getListenersByTargets"));
+
+export { GetRedirectionsArgs, GetRedirectionsResult, GetRedirectionsOutputArgs } from "./getRedirections";
+export const getRedirections: typeof import("./getRedirections").getRedirections = null as any;
+export const getRedirectionsOutput: typeof import("./getRedirections").getRedirectionsOutput = null as any;
+utilities.lazyLoad(exports, ["getRedirections","getRedirectionsOutput"], () => require("./getRedirections"));
+
+export { GetResourcesArgs, GetResourcesResult, GetResourcesOutputArgs } from "./getResources";
+export const getResources: typeof import("./getResources").getResources = null as any;
+export const getResourcesOutput: typeof import("./getResources").getResourcesOutput = null as any;
+utilities.lazyLoad(exports, ["getResources","getResourcesOutput"], () => require("./getResources"));
+
+export { GetTargetGroupListArgs, GetTargetGroupListResult, GetTargetGroupListOutputArgs } from "./getTargetGroupList";
+export const getTargetGroupList: typeof import("./getTargetGroupList").getTargetGroupList = null as any;
+export const getTargetGroupListOutput: typeof import("./getTargetGroupList").getTargetGroupListOutput = null as any;
+utilities.lazyLoad(exports, ["getTargetGroupList","getTargetGroupListOutput"], () => require("./getTargetGroupList"));
+
+export { GetTargetGroupsArgs, GetTargetGroupsResult, GetTargetGroupsOutputArgs } from "./getTargetGroups";
+export const getTargetGroups: typeof import("./getTargetGroups").getTargetGroups = null as any;
+export const getTargetGroupsOutput: typeof import("./getTargetGroups").getTargetGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getTargetGroups","getTargetGroupsOutput"], () => require("./getTargetGroups"));
+
+export { GetTargetHealthArgs, GetTargetHealthResult, GetTargetHealthOutputArgs } from "./getTargetHealth";
+export const getTargetHealth: typeof import("./getTargetHealth").getTargetHealth = null as any;
+export const getTargetHealthOutput: typeof import("./getTargetHealth").getTargetHealthOutput = null as any;
+utilities.lazyLoad(exports, ["getTargetHealth","getTargetHealthOutput"], () => require("./getTargetHealth"));
+
+export { InstanceArgs, InstanceState } from "./instance";
+export type Instance = import("./instance").Instance;
+export const Instance: typeof import("./instance").Instance = null as any;
+utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { InstanceMixIpTargetConfigArgs, InstanceMixIpTargetConfigState } from "./instanceMixIpTargetConfig";
+export type InstanceMixIpTargetConfig = import("./instanceMixIpTargetConfig").InstanceMixIpTargetConfig;
+export const InstanceMixIpTargetConfig: typeof import("./instanceMixIpTargetConfig").InstanceMixIpTargetConfig = null as any;
+utilities.lazyLoad(exports, ["InstanceMixIpTargetConfig"], () => require("./instanceMixIpTargetConfig"));
+
+export { InstanceSlaConfigArgs, InstanceSlaConfigState } from "./instanceSlaConfig";
+export type InstanceSlaConfig = import("./instanceSlaConfig").InstanceSlaConfig;
+export const InstanceSlaConfig: typeof import("./instanceSlaConfig").InstanceSlaConfig = null as any;
+utilities.lazyLoad(exports, ["InstanceSlaConfig"], () => require("./instanceSlaConfig"));
+
+export { ListenerArgs, ListenerState } from "./listener";
+export type Listener = import("./listener").Listener;
+export const Listener: typeof import("./listener").Listener = null as any;
+utilities.lazyLoad(exports, ["Listener"], () => require("./listener"));
+
+export { ListenerRuleArgs, ListenerRuleState } from "./listenerRule";
+export type ListenerRule = import("./listenerRule").ListenerRule;
+export const ListenerRule: typeof import("./listenerRule").ListenerRule = null as any;
+utilities.lazyLoad(exports, ["ListenerRule"], () => require("./listenerRule"));
+
+export { LogSetArgs, LogSetState } from "./logSet";
+export type LogSet = import("./logSet").LogSet;
+export const LogSet: typeof import("./logSet").LogSet = null as any;
+utilities.lazyLoad(exports, ["LogSet"], () => require("./logSet"));
+
+export { LogTopicArgs, LogTopicState } from "./logTopic";
+export type LogTopic = import("./logTopic").LogTopic;
+export const LogTopic: typeof import("./logTopic").LogTopic = null as any;
+utilities.lazyLoad(exports, ["LogTopic"], () => require("./logTopic"));
+
+export { RedirectionArgs, RedirectionState } from "./redirection";
+export type Redirection = import("./redirection").Redirection;
+export const Redirection: typeof import("./redirection").Redirection = null as any;
+utilities.lazyLoad(exports, ["Redirection"], () => require("./redirection"));
+
+export { ReplaceCertForLbsArgs, ReplaceCertForLbsState } from "./replaceCertForLbs";
+export type ReplaceCertForLbs = import("./replaceCertForLbs").ReplaceCertForLbs;
+export const ReplaceCertForLbs: typeof import("./replaceCertForLbs").ReplaceCertForLbs = null as any;
+utilities.lazyLoad(exports, ["ReplaceCertForLbs"], () => require("./replaceCertForLbs"));
+
+export { SecurityGroupAttachmentArgs, SecurityGroupAttachmentState } from "./securityGroupAttachment";
+export type SecurityGroupAttachment = import("./securityGroupAttachment").SecurityGroupAttachment;
+export const SecurityGroupAttachment: typeof import("./securityGroupAttachment").SecurityGroupAttachment = null as any;
+utilities.lazyLoad(exports, ["SecurityGroupAttachment"], () => require("./securityGroupAttachment"));
+
+export { SnatIpArgs, SnatIpState } from "./snatIp";
+export type SnatIp = import("./snatIp").SnatIp;
+export const SnatIp: typeof import("./snatIp").SnatIp = null as any;
+utilities.lazyLoad(exports, ["SnatIp"], () => require("./snatIp"));
+
+export { TargetGroupArgs, TargetGroupState } from "./targetGroup";
+export type TargetGroup = import("./targetGroup").TargetGroup;
+export const TargetGroup: typeof import("./targetGroup").TargetGroup = null as any;
+utilities.lazyLoad(exports, ["TargetGroup"], () => require("./targetGroup"));
+
+export { TargetGroupAttachmentArgs, TargetGroupAttachmentState } from "./targetGroupAttachment";
+export type TargetGroupAttachment = import("./targetGroupAttachment").TargetGroupAttachment;
+export const TargetGroupAttachment: typeof import("./targetGroupAttachment").TargetGroupAttachment = null as any;
+utilities.lazyLoad(exports, ["TargetGroupAttachment"], () => require("./targetGroupAttachment"));
+
+export { TargetGroupAttachmentsArgs, TargetGroupAttachmentsState } from "./targetGroupAttachments";
+export type TargetGroupAttachments = import("./targetGroupAttachments").TargetGroupAttachments;
+export const TargetGroupAttachments: typeof import("./targetGroupAttachments").TargetGroupAttachments = null as any;
+utilities.lazyLoad(exports, ["TargetGroupAttachments"], () => require("./targetGroupAttachments"));
+
+export { TargetGroupInstanceAttachmentArgs, TargetGroupInstanceAttachmentState } from "./targetGroupInstanceAttachment";
+export type TargetGroupInstanceAttachment = import("./targetGroupInstanceAttachment").TargetGroupInstanceAttachment;
+export const TargetGroupInstanceAttachment: typeof import("./targetGroupInstanceAttachment").TargetGroupInstanceAttachment = null as any;
+utilities.lazyLoad(exports, ["TargetGroupInstanceAttachment"], () => require("./targetGroupInstanceAttachment"));
+
 
 const _module = {
     version: utilities.getVersion(),

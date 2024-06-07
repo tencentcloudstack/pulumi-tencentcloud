@@ -15,120 +15,120 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// <summary>
         /// Used to query the environment list bound by the plan.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var plan = new Tencentcloud.ApiGateway.UsagePlan("plan", new()
         ///     {
-        ///         var plan = new Tencentcloud.ApiGateway.UsagePlan("plan", new Tencentcloud.ApiGateway.UsagePlanArgs
-        ///         {
-        ///             UsagePlanName = "my_plan",
-        ///             UsagePlanDesc = "nice plan",
-        ///             MaxRequestNum = 100,
-        ///             MaxRequestNumPreSec = 10,
-        ///         });
-        ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
-        ///         {
-        ///             ServiceName = "niceservice",
-        ///             Protocol = "http&amp;https",
-        ///             ServiceDesc = "your nice service",
-        ///             NetTypes = 
-        ///             {
-        ///                 "INNER",
-        ///                 "OUTER",
-        ///             },
-        ///             IpVersion = "IPv4",
-        ///         });
-        ///         var attachService = new Tencentcloud.ApiGateway.UsagePlanAttachment("attachService", new Tencentcloud.ApiGateway.UsagePlanAttachmentArgs
-        ///         {
-        ///             UsagePlanId = plan.Id,
-        ///             ServiceId = service.Id,
-        ///             Environment = "test",
-        ///             BindType = "SERVICE",
-        ///         });
-        ///         var environmentTest = Tencentcloud.ApiGateway.GetUsagePlanEnvironments.Invoke(new Tencentcloud.ApiGateway.GetUsagePlanEnvironmentsInvokeArgs
-        ///         {
-        ///             UsagePlanId = attachService.UsagePlanId,
-        ///             BindType = "SERVICE",
-        ///         });
-        ///     }
+        ///         UsagePlanName = "my_plan",
+        ///         UsagePlanDesc = "nice plan",
+        ///         MaxRequestNum = 100,
+        ///         MaxRequestNumPreSec = 10,
+        ///     });
         /// 
-        /// }
+        ///     var service = new Tencentcloud.ApiGateway.Service("service", new()
+        ///     {
+        ///         ServiceName = "niceservice",
+        ///         Protocol = "http&amp;https",
+        ///         ServiceDesc = "your nice service",
+        ///         NetTypes = new[]
+        ///         {
+        ///             "INNER",
+        ///             "OUTER",
+        ///         },
+        ///         IpVersion = "IPv4",
+        ///     });
+        /// 
+        ///     var attachService = new Tencentcloud.ApiGateway.UsagePlanAttachment("attachService", new()
+        ///     {
+        ///         UsagePlanId = plan.Id,
+        ///         ServiceId = service.Id,
+        ///         Environment = "test",
+        ///         BindType = "SERVICE",
+        ///     });
+        /// 
+        ///     var environmentTest = Tencentcloud.ApiGateway.GetUsagePlanEnvironments.Invoke(new()
+        ///     {
+        ///         UsagePlanId = attachService.UsagePlanId,
+        ///         BindType = "SERVICE",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetUsagePlanEnvironmentsResult> InvokeAsync(GetUsagePlanEnvironmentsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetUsagePlanEnvironmentsResult>("tencentcloud:ApiGateway/getUsagePlanEnvironments:getUsagePlanEnvironments", args ?? new GetUsagePlanEnvironmentsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetUsagePlanEnvironmentsResult>("tencentcloud:ApiGateway/getUsagePlanEnvironments:getUsagePlanEnvironments", args ?? new GetUsagePlanEnvironmentsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Used to query the environment list bound by the plan.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var plan = new Tencentcloud.ApiGateway.UsagePlan("plan", new()
         ///     {
-        ///         var plan = new Tencentcloud.ApiGateway.UsagePlan("plan", new Tencentcloud.ApiGateway.UsagePlanArgs
-        ///         {
-        ///             UsagePlanName = "my_plan",
-        ///             UsagePlanDesc = "nice plan",
-        ///             MaxRequestNum = 100,
-        ///             MaxRequestNumPreSec = 10,
-        ///         });
-        ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
-        ///         {
-        ///             ServiceName = "niceservice",
-        ///             Protocol = "http&amp;https",
-        ///             ServiceDesc = "your nice service",
-        ///             NetTypes = 
-        ///             {
-        ///                 "INNER",
-        ///                 "OUTER",
-        ///             },
-        ///             IpVersion = "IPv4",
-        ///         });
-        ///         var attachService = new Tencentcloud.ApiGateway.UsagePlanAttachment("attachService", new Tencentcloud.ApiGateway.UsagePlanAttachmentArgs
-        ///         {
-        ///             UsagePlanId = plan.Id,
-        ///             ServiceId = service.Id,
-        ///             Environment = "test",
-        ///             BindType = "SERVICE",
-        ///         });
-        ///         var environmentTest = Tencentcloud.ApiGateway.GetUsagePlanEnvironments.Invoke(new Tencentcloud.ApiGateway.GetUsagePlanEnvironmentsInvokeArgs
-        ///         {
-        ///             UsagePlanId = attachService.UsagePlanId,
-        ///             BindType = "SERVICE",
-        ///         });
-        ///     }
+        ///         UsagePlanName = "my_plan",
+        ///         UsagePlanDesc = "nice plan",
+        ///         MaxRequestNum = 100,
+        ///         MaxRequestNumPreSec = 10,
+        ///     });
         /// 
-        /// }
+        ///     var service = new Tencentcloud.ApiGateway.Service("service", new()
+        ///     {
+        ///         ServiceName = "niceservice",
+        ///         Protocol = "http&amp;https",
+        ///         ServiceDesc = "your nice service",
+        ///         NetTypes = new[]
+        ///         {
+        ///             "INNER",
+        ///             "OUTER",
+        ///         },
+        ///         IpVersion = "IPv4",
+        ///     });
+        /// 
+        ///     var attachService = new Tencentcloud.ApiGateway.UsagePlanAttachment("attachService", new()
+        ///     {
+        ///         UsagePlanId = plan.Id,
+        ///         ServiceId = service.Id,
+        ///         Environment = "test",
+        ///         BindType = "SERVICE",
+        ///     });
+        /// 
+        ///     var environmentTest = Tencentcloud.ApiGateway.GetUsagePlanEnvironments.Invoke(new()
+        ///     {
+        ///         UsagePlanId = attachService.UsagePlanId,
+        ///         BindType = "SERVICE",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetUsagePlanEnvironmentsResult> Invoke(GetUsagePlanEnvironmentsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetUsagePlanEnvironmentsResult>("tencentcloud:ApiGateway/getUsagePlanEnvironments:getUsagePlanEnvironments", args ?? new GetUsagePlanEnvironmentsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetUsagePlanEnvironmentsResult>("tencentcloud:ApiGateway/getUsagePlanEnvironments:getUsagePlanEnvironments", args ?? new GetUsagePlanEnvironmentsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetUsagePlanEnvironmentsArgs : Pulumi.InvokeArgs
+    public sealed class GetUsagePlanEnvironmentsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Binding type. Valid values: `API`, `SERVICE`. Default value: `SERVICE`.
@@ -151,9 +151,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetUsagePlanEnvironmentsArgs()
         {
         }
+        public static new GetUsagePlanEnvironmentsArgs Empty => new GetUsagePlanEnvironmentsArgs();
     }
 
-    public sealed class GetUsagePlanEnvironmentsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetUsagePlanEnvironmentsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Binding type. Valid values: `API`, `SERVICE`. Default value: `SERVICE`.
@@ -176,6 +177,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetUsagePlanEnvironmentsInvokeArgs()
         {
         }
+        public static new GetUsagePlanEnvironmentsInvokeArgs Empty => new GetUsagePlanEnvironmentsInvokeArgs();
     }
 
 

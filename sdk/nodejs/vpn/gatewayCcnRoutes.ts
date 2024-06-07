@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const vpnGatewayCcnRoutes = new tencentcloud.Vpn.GatewayCcnRoutes("vpn_gateway_ccn_routes", {
+ * const vpnGatewayCcnRoutes = new tencentcloud.vpn.GatewayCcnRoutes("vpnGatewayCcnRoutes", {
  *     destinationCidrBlock: "192.168.1.0/24",
  *     routeId: "vpnr-akdy0757",
  *     status: "DISABLE",
  *     vpnGatewayId: "vpngw-lie1a4u7",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * vpc vpn_gateway_ccn_routes can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpn/gatewayCcnRoutes:GatewayCcnRoutes vpn_gateway_ccn_routes vpn_gateway_id#ccn_routes_id
+ * $ pulumi import tencentcloud:Vpn/gatewayCcnRoutes:GatewayCcnRoutes vpn_gateway_ccn_routes vpn_gateway_id#ccn_routes_id
  * ```
  */
 export class GatewayCcnRoutes extends pulumi.CustomResource {

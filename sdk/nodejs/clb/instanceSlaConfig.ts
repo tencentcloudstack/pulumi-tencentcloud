@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceSlaConfig = new tencentcloud.Clb.InstanceSlaConfig("instance_sla_config", {
+ * const instanceSlaConfig = new tencentcloud.clb.InstanceSlaConfig("instanceSlaConfig", {
  *     loadBalancerId: "lb-5dnrkgry",
  *     slaType: "SLA",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * clb instance_sla_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clb/instanceSlaConfig:InstanceSlaConfig instance_sla_config instance_id
+ * $ pulumi import tencentcloud:Clb/instanceSlaConfig:InstanceSlaConfig instance_sla_config instance_id
  * ```
  */
 export class InstanceSlaConfig extends pulumi.CustomResource {

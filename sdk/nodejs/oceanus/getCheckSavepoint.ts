@@ -9,25 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Oceanus.getCheckSavepoint({
+ * const example = tencentcloud.Oceanus.getCheckSavepoint({
  *     jobId: "cql-314rw6w0",
  *     recordType: 1,
  *     savepointPath: "cosn://52xkpymp-12345/12345/10000/cql-12345/2/flink-savepoints/savepoint-000000-12334",
  *     serialId: "svp-52xkpymp",
  *     workSpaceId: "space-2idq8wbr",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCheckSavepoint(args: GetCheckSavepointArgs, opts?: pulumi.InvokeOptions): Promise<GetCheckSavepointResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Oceanus/getCheckSavepoint:getCheckSavepoint", {
         "jobId": args.jobId,
         "recordType": args.recordType,
@@ -87,9 +86,28 @@ export interface GetCheckSavepointResult {
     readonly serialId: string;
     readonly workSpaceId: string;
 }
-
+/**
+ * Use this data source to query detailed information of oceanus checkSavepoint
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Oceanus.getCheckSavepoint({
+ *     jobId: "cql-314rw6w0",
+ *     recordType: 1,
+ *     savepointPath: "cosn://52xkpymp-12345/12345/10000/cql-12345/2/flink-savepoints/savepoint-000000-12334",
+ *     serialId: "svp-52xkpymp",
+ *     workSpaceId: "space-2idq8wbr",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCheckSavepointOutput(args: GetCheckSavepointOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCheckSavepointResult> {
-    return pulumi.output(args).apply(a => getCheckSavepoint(a, opts))
+    return pulumi.output(args).apply((a: any) => getCheckSavepoint(a, opts))
 }
 
 /**

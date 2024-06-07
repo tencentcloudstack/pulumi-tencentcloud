@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,27 +11,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const containerGroup = pulumi.output(tencentcloud.Tsf.getContainerGroup({
+ * const containerGroup = tencentcloud.Tsf.getContainerGroup({
  *     applicationId: "application-a24x29xv",
  *     clusterId: "cluster-vwgj5e6y",
  *     namespaceId: "namespace-aemrg36v",
  *     orderBy: "createTime",
  *     orderType: 0,
  *     searchWord: "keep",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getContainerGroup(args?: GetContainerGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetContainerGroupResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tsf/getContainerGroup:getContainerGroup", {
         "applicationId": args.applicationId,
         "clusterId": args.clusterId,
@@ -102,9 +102,29 @@ export interface GetContainerGroupResult {
     readonly results: outputs.Tsf.GetContainerGroupResult[];
     readonly searchWord?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tsf containerGroup
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const containerGroup = tencentcloud.Tsf.getContainerGroup({
+ *     applicationId: "application-a24x29xv",
+ *     clusterId: "cluster-vwgj5e6y",
+ *     namespaceId: "namespace-aemrg36v",
+ *     orderBy: "createTime",
+ *     orderType: 0,
+ *     searchWord: "keep",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getContainerGroupOutput(args?: GetContainerGroupOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetContainerGroupResult> {
-    return pulumi.output(args).apply(a => getContainerGroup(a, opts))
+    return pulumi.output(args).apply((a: any) => getContainerGroup(a, opts))
 }
 
 /**

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskTargetResourceEsParamDropDlqArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskTargetResourceEsParamDropDlqArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// dlq type, CKAFKA|TOPIC.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskTargetResourceEsParamDropDlqArgs()
         {
         }
+        public static new DatahubTaskTargetResourceEsParamDropDlqArgs Empty => new DatahubTaskTargetResourceEsParamDropDlqArgs();
     }
 }

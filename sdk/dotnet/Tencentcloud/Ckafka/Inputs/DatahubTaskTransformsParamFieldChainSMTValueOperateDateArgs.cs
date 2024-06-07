@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Time format.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs()
         {
         }
+        public static new DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs Empty => new DatahubTaskTransformsParamFieldChainSMTValueOperateDateArgs();
     }
 }

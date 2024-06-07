@@ -15,42 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cvm.LaunchTemplateVersion("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cvm.LaunchTemplateVersion("foo", new Tencentcloud.Cvm.LaunchTemplateVersionArgs
+    ///         DisableApiTermination = false,
+    ///         ImageId = "img-9qrfy1xt",
+    ///         InstanceType = "S5.MEDIUM4",
+    ///         LaunchTemplateId = "lt-r9ajalbi",
+    ///         LaunchTemplateVersionDescription = "version description",
+    ///         Placement = new Tencentcloud.Cvm.Inputs.LaunchTemplateVersionPlacementArgs
     ///         {
-    ///             DisableApiTermination = false,
-    ///             ImageId = "img-9qrfy1xt",
-    ///             InstanceType = "S5.MEDIUM4",
-    ///             LaunchTemplateId = "lt-r9ajalbi",
-    ///             LaunchTemplateVersionDescription = "version description",
-    ///             Placement = new Tencentcloud.Cvm.Inputs.LaunchTemplateVersionPlacementArgs
-    ///             {
-    ///                 ProjectId = 0,
-    ///                 Zone = "ap-guangzhou-6",
-    ///             },
-    ///         });
-    ///     }
+    ///             ProjectId = 0,
+    ///             Zone = "ap-guangzhou-6",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cvm launch_template_version can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cvm/launchTemplateVersion:LaunchTemplateVersion launch_template_version ${launch_template_id}#${launch_template_version}
+    /// $ pulumi import tencentcloud:Cvm/launchTemplateVersion:LaunchTemplateVersion launch_template_version ${launch_template_id}#${launch_template_version}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cvm/launchTemplateVersion:LaunchTemplateVersion")]
-    public partial class LaunchTemplateVersion : Pulumi.CustomResource
+    public partial class LaunchTemplateVersion : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Scheduled tasks.
@@ -265,7 +266,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         }
     }
 
-    public sealed class LaunchTemplateVersionArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateVersionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Scheduled tasks.
@@ -462,9 +463,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public LaunchTemplateVersionArgs()
         {
         }
+        public static new LaunchTemplateVersionArgs Empty => new LaunchTemplateVersionArgs();
     }
 
-    public sealed class LaunchTemplateVersionState : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateVersionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Scheduled tasks.
@@ -661,5 +663,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public LaunchTemplateVersionState()
         {
         }
+        public static new LaunchTemplateVersionState Empty => new LaunchTemplateVersionState();
     }
 }

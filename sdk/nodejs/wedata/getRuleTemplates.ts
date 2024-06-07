@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const ruleTemplates = pulumi.output(tencentcloud.Wedata.getRuleTemplates({
+ * const ruleTemplates = tencentcloud.Wedata.getRuleTemplates({
  *     projectId: "1840731346428280832",
  *     sourceEngineTypes: [
  *         2,
@@ -23,16 +25,14 @@ import * as utilities from "../utilities";
  *     ],
  *     sourceObjectType: 2,
  *     type: 2,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRuleTemplates(args?: GetRuleTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetRuleTemplatesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Wedata/getRuleTemplates:getRuleTemplates", {
         "projectId": args.projectId,
         "resultOutputFile": args.resultOutputFile,
@@ -95,9 +95,31 @@ export interface GetRuleTemplatesResult {
      */
     readonly type?: number;
 }
-
+/**
+ * Use this data source to query detailed information of wedata rule templates
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const ruleTemplates = tencentcloud.Wedata.getRuleTemplates({
+ *     projectId: "1840731346428280832",
+ *     sourceEngineTypes: [
+ *         2,
+ *         4,
+ *         16,
+ *     ],
+ *     sourceObjectType: 2,
+ *     type: 2,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRuleTemplatesOutput(args?: GetRuleTemplatesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRuleTemplatesResult> {
-    return pulumi.output(args).apply(a => getRuleTemplates(a, opts))
+    return pulumi.output(args).apply((a: any) => getRuleTemplates(a, opts))
 }
 
 /**

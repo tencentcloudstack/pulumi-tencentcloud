@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class ClusterNodePoolGlobalConfigArgs : Pulumi.ResourceArgs
+    public sealed class ClusterNodePoolGlobalConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicates which scale-out method will be used when there are multiple scaling groups. Valid values: `random` - select a random scaling group, `most-pods` - select the scaling group that can schedule the most pods, `least-waste` - select the scaling group that can ensure the fewest remaining resources after Pod scheduling.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public ClusterNodePoolGlobalConfigArgs()
         {
         }
+        public static new ClusterNodePoolGlobalConfigArgs Empty => new ClusterNodePoolGlobalConfigArgs();
     }
 }

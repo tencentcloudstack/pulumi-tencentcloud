@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs.Outputs
     [OutputType]
     public sealed class LifeCycleRuleLifeCycleRule
     {
+        /// <summary>
+        /// rule create time.
+        /// </summary>
         public readonly string? CreateTime;
+        /// <summary>
+        /// single rule id.
+        /// </summary>
         public readonly int? LifeCycleRuleId;
         /// <summary>
         /// rule name.

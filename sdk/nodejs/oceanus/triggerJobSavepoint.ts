@@ -9,16 +9,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Oceanus.TriggerJobSavepoint("example", {
+ * const example = new tencentcloud.oceanus.TriggerJobSavepoint("example", {
  *     description: "description.",
  *     jobId: "cql-4xwincyn",
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class TriggerJobSavepoint extends pulumi.CustomResource {
     /**

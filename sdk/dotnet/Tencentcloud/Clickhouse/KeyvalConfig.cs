@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var keyvalConfig = new Tencentcloud.Clickhouse.KeyvalConfig("keyvalConfig", new()
     ///     {
-    ///         var keyvalConfig = new Tencentcloud.Clickhouse.KeyvalConfig("keyvalConfig", new Tencentcloud.Clickhouse.KeyvalConfigArgs
+    ///         InstanceId = "cdwch-datuhk3z",
+    ///         Items = new Tencentcloud.Clickhouse.Inputs.KeyvalConfigItemsArgs
     ///         {
-    ///             InstanceId = "cdwch-datuhk3z",
-    ///             Items = new Tencentcloud.Clickhouse.Inputs.KeyvalConfigItemsArgs
-    ///             {
-    ///                 ConfKey = "max_open_files",
-    ///                 ConfValue = "50000",
-    ///             },
-    ///         });
-    ///     }
+    ///             ConfKey = "max_open_files",
+    ///             ConfValue = "50000",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// clickhouse config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clickhouse/keyvalConfig:KeyvalConfig config cdwch-datuhk3z#max_open_files#50000
+    /// $ pulumi import tencentcloud:Clickhouse/keyvalConfig:KeyvalConfig config cdwch-datuhk3z#max_open_files#50000
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clickhouse/keyvalConfig:KeyvalConfig")]
-    public partial class KeyvalConfig : Pulumi.CustomResource
+    public partial class KeyvalConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -105,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         }
     }
 
-    public sealed class KeyvalConfigArgs : Pulumi.ResourceArgs
+    public sealed class KeyvalConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -122,9 +123,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public KeyvalConfigArgs()
         {
         }
+        public static new KeyvalConfigArgs Empty => new KeyvalConfigArgs();
     }
 
-    public sealed class KeyvalConfigState : Pulumi.ResourceArgs
+    public sealed class KeyvalConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -141,5 +143,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public KeyvalConfigState()
         {
         }
+        public static new KeyvalConfigState Empty => new KeyvalConfigState();
     }
 }

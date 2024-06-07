@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const recordLineList = pulumi.output(tencentcloud.Dnspod.getRecordLineList({
+ * const recordLineList = tencentcloud.Dnspod.getRecordLineList({
  *     domain: "iac-tf.cloud",
  *     domainGrade: "DP_FREE",
  *     domainId: 123,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRecordLineList(args: GetRecordLineListArgs, opts?: pulumi.InvokeOptions): Promise<GetRecordLineListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dnspod/getRecordLineList:getRecordLineList", {
         "domain": args.domain,
         "domainGrade": args.domainGrade,
@@ -78,9 +78,26 @@ export interface GetRecordLineListResult {
     readonly lineLists: outputs.Dnspod.GetRecordLineListLineList[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of dnspod recordLineList
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const recordLineList = tencentcloud.Dnspod.getRecordLineList({
+ *     domain: "iac-tf.cloud",
+ *     domainGrade: "DP_FREE",
+ *     domainId: 123,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRecordLineListOutput(args: GetRecordLineListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRecordLineListResult> {
-    return pulumi.output(args).apply(a => getRecordLineList(a, opts))
+    return pulumi.output(args).apply((a: any) => getRecordLineList(a, opts))
 }
 
 /**

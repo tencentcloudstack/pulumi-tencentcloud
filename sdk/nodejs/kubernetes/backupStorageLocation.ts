@@ -11,22 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const exampleBackup = new tencentcloud.Kubernetes.BackupStorageLocation("example_backup", {
- *     bucket: "tke-backup-example-1", // bucket name of your pre-created COS bucket
- *     storageRegion: "ap-guangzhou", // region of you pre-created COS bucket
+ * const exampleBackup = new tencentcloud.kubernetes.BackupStorageLocation("exampleBackup", {
+ *     bucket: "tke-backup-example-1",
+ *     storageRegion: "ap-guangzhou",
  * });
+ * // region of you pre-created COS bucket
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tke backup storage location can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Kubernetes/backupStorageLocation:BackupStorageLocation test xxx
+ * $ pulumi import tencentcloud:Kubernetes/backupStorageLocation:BackupStorageLocation test xxx
  * ```
  */
 export class BackupStorageLocation extends pulumi.CustomResource {

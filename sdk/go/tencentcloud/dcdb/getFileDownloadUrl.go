@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dcdb fileDownloadUrl
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dcdb.GetFileDownloadUrl(ctx, &dcdb.GetFileDownloadUrlArgs{
-// 			InstanceId: local.Dcdb_id,
-// 			ShardId:    "shard-1b5r04az",
-// 			FilePath:   "/cos_backup/test.txt",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dcdb.GetFileDownloadUrl(ctx, &dcdb.GetFileDownloadUrlArgs{
+//				InstanceId: local.Dcdb_id,
+//				ShardId:    "shard-1b5r04az",
+//				FilePath:   "/cos_backup/test.txt",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetFileDownloadUrl(ctx *pulumi.Context, args *GetFileDownloadUrlArgs, opts ...pulumi.InvokeOption) (*GetFileDownloadUrlResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetFileDownloadUrlResult
 	err := ctx.Invoke("tencentcloud:Dcdb/getFileDownloadUrl:getFileDownloadUrl", args, &rv, opts...)
 	if err != nil {

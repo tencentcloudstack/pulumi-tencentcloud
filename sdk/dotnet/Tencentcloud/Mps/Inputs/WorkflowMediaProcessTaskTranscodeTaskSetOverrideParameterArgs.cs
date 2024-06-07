@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Audio stream configuration parameters.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterArgs()
         {
         }
+        public static new WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterArgs Empty => new WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterArgs();
     }
 }

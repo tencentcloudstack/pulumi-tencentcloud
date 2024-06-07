@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class ScenarioRequestFileArgs : Pulumi.ResourceArgs
+    public sealed class ScenarioRequestFileArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// File id.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public ScenarioRequestFileArgs()
         {
         }
+        public static new ScenarioRequestFileArgs Empty => new ScenarioRequestFileArgs();
     }
 }

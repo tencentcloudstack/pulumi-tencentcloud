@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class ScenarioDomainNameConfigDnsConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class ScenarioDomainNameConfigDnsConfigGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("nameservers")]
         private InputList<string>? _nameservers;
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public ScenarioDomainNameConfigDnsConfigGetArgs()
         {
         }
+        public static new ScenarioDomainNameConfigDnsConfigGetArgs Empty => new ScenarioDomainNameConfigDnsConfigGetArgs();
     }
 }

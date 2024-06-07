@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tdmqRocketmq cluster
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdmq.NewRocketmqCluster(ctx, "example", &Tdmq.RocketmqClusterArgs{
-// 			ClusterName: pulumi.String("tf_example"),
-// 			Remark:      pulumi.String("remark."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tdmq.NewRocketmqCluster(ctx, "example", &Tdmq.RocketmqClusterArgs{
+//				ClusterName: pulumi.String("tf_example"),
+//				Remark:      pulumi.String("remark."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tdmqRocketmq cluster can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tdmq/rocketmqCluster:RocketmqCluster cluster cluster_id
+// $ pulumi import tencentcloud:Tdmq/rocketmqCluster:RocketmqCluster cluster cluster_id
 // ```
 type RocketmqCluster struct {
 	pulumi.CustomResourceState
@@ -81,7 +87,7 @@ func NewRocketmqCluster(ctx *pulumi.Context,
 	if args.ClusterName == nil {
 		return nil, errors.New("invalid value for required argument 'ClusterName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RocketmqCluster
 	err := ctx.RegisterResource("tencentcloud:Tdmq/rocketmqCluster:RocketmqCluster", name, args, &resource, opts...)
 	if err != nil {
@@ -198,7 +204,7 @@ func (i *RocketmqCluster) ToRocketmqClusterOutputWithContext(ctx context.Context
 // RocketmqClusterArrayInput is an input type that accepts RocketmqClusterArray and RocketmqClusterArrayOutput values.
 // You can construct a concrete instance of `RocketmqClusterArrayInput` via:
 //
-//          RocketmqClusterArray{ RocketmqClusterArgs{...} }
+//	RocketmqClusterArray{ RocketmqClusterArgs{...} }
 type RocketmqClusterArrayInput interface {
 	pulumi.Input
 
@@ -223,7 +229,7 @@ func (i RocketmqClusterArray) ToRocketmqClusterArrayOutputWithContext(ctx contex
 // RocketmqClusterMapInput is an input type that accepts RocketmqClusterMap and RocketmqClusterMapOutput values.
 // You can construct a concrete instance of `RocketmqClusterMapInput` via:
 //
-//          RocketmqClusterMap{ "key": RocketmqClusterArgs{...} }
+//	RocketmqClusterMap{ "key": RocketmqClusterArgs{...} }
 type RocketmqClusterMapInput interface {
 	pulumi.Input
 

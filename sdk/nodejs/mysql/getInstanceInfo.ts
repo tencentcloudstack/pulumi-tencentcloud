@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instanceInfo = pulumi.output(tencentcloud.Mysql.getInstanceInfo({
+ * const instanceInfo = tencentcloud.Mysql.getInstanceInfo({
  *     instanceId: "cdb-fitq5t9h",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceInfo(args: GetInstanceInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceInfoResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getInstanceInfo:getInstanceInfo", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -75,9 +74,24 @@ export interface GetInstanceInfoResult {
     readonly keyRegion: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mysql instanceInfo
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instanceInfo = tencentcloud.Mysql.getInstanceInfo({
+ *     instanceId: "cdb-fitq5t9h",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceInfoOutput(args: GetInstanceInfoOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceInfoResult> {
-    return pulumi.output(args).apply(a => getInstanceInfo(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceInfo(a, opts))
 }
 
 /**

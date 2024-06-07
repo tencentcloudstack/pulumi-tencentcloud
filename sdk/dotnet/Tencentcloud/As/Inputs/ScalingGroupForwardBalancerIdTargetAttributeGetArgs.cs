@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Inputs
 {
 
-    public sealed class ScalingGroupForwardBalancerIdTargetAttributeGetArgs : Pulumi.ResourceArgs
+    public sealed class ScalingGroupForwardBalancerIdTargetAttributeGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Port number.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Inputs
         public ScalingGroupForwardBalancerIdTargetAttributeGetArgs()
         {
         }
+        public static new ScalingGroupForwardBalancerIdTargetAttributeGetArgs Empty => new ScalingGroupForwardBalancerIdTargetAttributeGetArgs();
     }
 }

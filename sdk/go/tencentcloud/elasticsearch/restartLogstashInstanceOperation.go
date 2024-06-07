@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to restart a elasticsearch logstash instance
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.NewRestartLogstashInstanceOperation(ctx, "restartLogstashInstanceOperation", &Elasticsearch.RestartLogstashInstanceOperationArgs{
-// 			InstanceId: pulumi.String("ls-xxxxxx"),
-// 			Type:       pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.NewRestartLogstashInstanceOperation(ctx, "restartLogstashInstanceOperation", &Elasticsearch.RestartLogstashInstanceOperationArgs{
+//				InstanceId: pulumi.String("ls-xxxxxx"),
+//				Type:       pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type RestartLogstashInstanceOperation struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewRestartLogstashInstanceOperation(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RestartLogstashInstanceOperation
 	err := ctx.RegisterResource("tencentcloud:Elasticsearch/restartLogstashInstanceOperation:RestartLogstashInstanceOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *RestartLogstashInstanceOperation) ToRestartLogstashInstanceOperationOut
 // RestartLogstashInstanceOperationArrayInput is an input type that accepts RestartLogstashInstanceOperationArray and RestartLogstashInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `RestartLogstashInstanceOperationArrayInput` via:
 //
-//          RestartLogstashInstanceOperationArray{ RestartLogstashInstanceOperationArgs{...} }
+//	RestartLogstashInstanceOperationArray{ RestartLogstashInstanceOperationArgs{...} }
 type RestartLogstashInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i RestartLogstashInstanceOperationArray) ToRestartLogstashInstanceOperatio
 // RestartLogstashInstanceOperationMapInput is an input type that accepts RestartLogstashInstanceOperationMap and RestartLogstashInstanceOperationMapOutput values.
 // You can construct a concrete instance of `RestartLogstashInstanceOperationMapInput` via:
 //
-//          RestartLogstashInstanceOperationMap{ "key": RestartLogstashInstanceOperationArgs{...} }
+//	RestartLogstashInstanceOperationMap{ "key": RestartLogstashInstanceOperationArgs{...} }
 type RestartLogstashInstanceOperationMapInput interface {
 	pulumi.Input
 

@@ -8,6 +8,7 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // The provider type for the tencentcloud package. By default, resources use package-wide configuration
@@ -49,19 +50,38 @@ func NewProvider(ctx *pulumi.Context,
 		args = &ProviderArgs{}
 	}
 
-	if isZero(args.Region) {
-		args.Region = pulumi.StringPtr(getEnvOrDefault("", nil, "TENCENTCLOUD_REGION").(string))
+	if args.Region == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "TENCENTCLOUD_REGION"); d != nil {
+			args.Region = pulumi.StringPtr(d.(string))
+		}
 	}
-	if isZero(args.SecretId) {
-		args.SecretId = pulumi.StringPtr(getEnvOrDefault("", nil, "TENCENTCLOUD_SECRET_ID").(string))
+	if args.SecretId == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "TENCENTCLOUD_SECRET_ID"); d != nil {
+			args.SecretId = pulumi.StringPtr(d.(string))
+		}
 	}
-	if isZero(args.SecretKey) {
-		args.SecretKey = pulumi.StringPtr(getEnvOrDefault("", nil, "TENCENTCLOUD_SECRET_KEY").(string))
+	if args.SecretKey == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "TENCENTCLOUD_SECRET_KEY"); d != nil {
+			args.SecretKey = pulumi.StringPtr(d.(string))
+		}
 	}
-	if isZero(args.SecurityToken) {
-		args.SecurityToken = pulumi.StringPtr(getEnvOrDefault("", nil, "TENCENTCLOUD_SECURITY_TOKEN").(string))
+	if args.SecurityToken == nil {
+		if d := internal.GetEnvOrDefault(nil, nil, "TENCENTCLOUD_SECURITY_TOKEN"); d != nil {
+			args.SecurityToken = pulumi.StringPtr(d.(string))
+		}
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.SecretKey != nil {
+		args.SecretKey = pulumi.ToSecret(args.SecretKey).(pulumi.StringPtrInput)
+	}
+	if args.SecurityToken != nil {
+		args.SecurityToken = pulumi.ToSecret(args.SecurityToken).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"secretKey",
+		"securityToken",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Provider
 	err := ctx.RegisterResource("pulumi:providers:tencentcloud", name, args, &resource, opts...)
 	if err != nil {

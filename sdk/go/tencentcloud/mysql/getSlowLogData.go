@@ -8,49 +8,54 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of mysql slowLogData
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.GetSlowLogData(ctx, &mysql.GetSlowLogDataArgs{
-// 			DataBases: []string{
-// 				"tf_ci_test",
-// 			},
-// 			EndTime:    1684392459,
-// 			InstType:   pulumi.StringRef("slave"),
-// 			InstanceId: "cdb-fitq5t9h",
-// 			OrderBy:    pulumi.StringRef("ASC"),
-// 			SortBy:     pulumi.StringRef("Timestamp"),
-// 			StartTime:  1682664459,
-// 			UserHosts: []string{
-// 				"169.254.128.158",
-// 			},
-// 			UserNames: []string{
-// 				"keep_dts",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mysql.GetSlowLogData(ctx, &mysql.GetSlowLogDataArgs{
+//				DataBases: []string{
+//					"tf_ci_test",
+//				},
+//				EndTime:    1684392459,
+//				InstType:   pulumi.StringRef("slave"),
+//				InstanceId: "cdb-fitq5t9h",
+//				OrderBy:    pulumi.StringRef("ASC"),
+//				SortBy:     pulumi.StringRef("Timestamp"),
+//				StartTime:  1682664459,
+//				UserHosts: []string{
+//					"169.254.128.158",
+//				},
+//				UserNames: []string{
+//					"keep_dts",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSlowLogData(ctx *pulumi.Context, args *GetSlowLogDataArgs, opts ...pulumi.InvokeOption) (*GetSlowLogDataResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSlowLogDataResult
 	err := ctx.Invoke("tencentcloud:Mysql/getSlowLogData:getSlowLogData", args, &rv, opts...)
 	if err != nil {

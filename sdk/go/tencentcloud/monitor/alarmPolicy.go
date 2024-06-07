@@ -7,345 +7,361 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a alarm policy resource for monitor.
 //
 // ## Example Usage
+//
 // ### cvmDevice alarm policy
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooAlarmNotice, err := Monitor.NewAlarmNotice(ctx, "fooAlarmNotice", &Monitor.AlarmNoticeArgs{
-// 			NoticeType:     pulumi.String("ALL"),
-// 			NoticeLanguage: pulumi.String("zh-CN"),
-// 			UserNotices: monitor.AlarmNoticeUserNoticeArray{
-// 				&monitor.AlarmNoticeUserNoticeArgs{
-// 					ReceiverType: pulumi.String("USER"),
-// 					StartTime:    pulumi.Int(0),
-// 					EndTime:      pulumi.Int(1),
-// 					NoticeWays: pulumi.StringArray{
-// 						pulumi.String("SMS"),
-// 						pulumi.String("EMAIL"),
-// 					},
-// 					UserIds: pulumi.IntArray{
-// 						pulumi.Int(10001),
-// 					},
-// 					GroupIds: pulumi.IntArray{},
-// 					PhoneOrders: pulumi.IntArray{
-// 						pulumi.Int(10001),
-// 					},
-// 					PhoneCircleTimes:      pulumi.Int(2),
-// 					PhoneCircleInterval:   pulumi.Int(50),
-// 					PhoneInnerInterval:    pulumi.Int(60),
-// 					NeedPhoneArriveNotice: pulumi.Int(1),
-// 					PhoneCallType:         pulumi.String("CIRCLE"),
-// 					Weekdays: pulumi.IntArray{
-// 						pulumi.Int(1),
-// 						pulumi.Int(2),
-// 						pulumi.Int(3),
-// 						pulumi.Int(4),
-// 						pulumi.Int(5),
-// 						pulumi.Int(6),
-// 						pulumi.Int(7),
-// 					},
-// 				},
-// 			},
-// 			UrlNotices: monitor.AlarmNoticeUrlNoticeArray{
-// 				&monitor.AlarmNoticeUrlNoticeArgs{
-// 					Url:       pulumi.String("https://www.mytest.com/validate"),
-// 					EndTime:   pulumi.Int(0),
-// 					StartTime: pulumi.Int(1),
-// 					Weekdays: pulumi.IntArray{
-// 						pulumi.Int(1),
-// 						pulumi.Int(2),
-// 						pulumi.Int(3),
-// 						pulumi.Int(4),
-// 						pulumi.Int(5),
-// 						pulumi.Int(6),
-// 						pulumi.Int(7),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Monitor.NewAlarmPolicy(ctx, "fooAlarmPolicy", &Monitor.AlarmPolicyArgs{
-// 			PolicyName:  pulumi.String("tf-policy"),
-// 			MonitorType: pulumi.String("MT_QCE"),
-// 			Enable:      pulumi.Int(1),
-// 			ProjectId:   pulumi.Int(0),
-// 			Namespace:   pulumi.String("cvm_device"),
-// 			Conditions: &monitor.AlarmPolicyConditionsArgs{
-// 				IsUnionRule: pulumi.Int(1),
-// 				Rules: monitor.AlarmPolicyConditionsRuleArray{
-// 					&monitor.AlarmPolicyConditionsRuleArgs{
-// 						MetricName:      pulumi.String("CpuUsage"),
-// 						Period:          pulumi.Int(60),
-// 						Operator:        pulumi.String("ge"),
-// 						Value:           pulumi.String("89.9"),
-// 						ContinuePeriod:  pulumi.Int(1),
-// 						NoticeFrequency: pulumi.Int(3600),
-// 						IsPowerNotice:   pulumi.Int(0),
-// 					},
-// 				},
-// 			},
-// 			EventConditions: monitor.AlarmPolicyEventConditionArray{
-// 				&monitor.AlarmPolicyEventConditionArgs{
-// 					MetricName: pulumi.String("ping_unreachable"),
-// 				},
-// 				&monitor.AlarmPolicyEventConditionArgs{
-// 					MetricName: pulumi.String("guest_reboot"),
-// 				},
-// 			},
-// 			NoticeIds: pulumi.StringArray{
-// 				fooAlarmNotice.ID(),
-// 			},
-// 			TriggerTasks: monitor.AlarmPolicyTriggerTaskArray{
-// 				&monitor.AlarmPolicyTriggerTaskArgs{
-// 					Type:       pulumi.String("AS"),
-// 					TaskConfig: pulumi.String("{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooAlarmNotice, err := Monitor.NewAlarmNotice(ctx, "fooAlarmNotice", &Monitor.AlarmNoticeArgs{
+//				NoticeType:     pulumi.String("ALL"),
+//				NoticeLanguage: pulumi.String("zh-CN"),
+//				UserNotices: monitor.AlarmNoticeUserNoticeArray{
+//					&monitor.AlarmNoticeUserNoticeArgs{
+//						ReceiverType: pulumi.String("USER"),
+//						StartTime:    pulumi.Int(0),
+//						EndTime:      pulumi.Int(1),
+//						NoticeWays: pulumi.StringArray{
+//							pulumi.String("SMS"),
+//							pulumi.String("EMAIL"),
+//						},
+//						UserIds: pulumi.IntArray{
+//							pulumi.Int(10001),
+//						},
+//						GroupIds: pulumi.IntArray{},
+//						PhoneOrders: pulumi.IntArray{
+//							pulumi.Int(10001),
+//						},
+//						PhoneCircleTimes:      pulumi.Int(2),
+//						PhoneCircleInterval:   pulumi.Int(50),
+//						PhoneInnerInterval:    pulumi.Int(60),
+//						NeedPhoneArriveNotice: pulumi.Int(1),
+//						PhoneCallType:         pulumi.String("CIRCLE"),
+//						Weekdays: pulumi.IntArray{
+//							pulumi.Int(1),
+//							pulumi.Int(2),
+//							pulumi.Int(3),
+//							pulumi.Int(4),
+//							pulumi.Int(5),
+//							pulumi.Int(6),
+//							pulumi.Int(7),
+//						},
+//					},
+//				},
+//				UrlNotices: monitor.AlarmNoticeUrlNoticeArray{
+//					&monitor.AlarmNoticeUrlNoticeArgs{
+//						Url:       pulumi.String("https://www.mytest.com/validate"),
+//						EndTime:   pulumi.Int(0),
+//						StartTime: pulumi.Int(1),
+//						Weekdays: pulumi.IntArray{
+//							pulumi.Int(1),
+//							pulumi.Int(2),
+//							pulumi.Int(3),
+//							pulumi.Int(4),
+//							pulumi.Int(5),
+//							pulumi.Int(6),
+//							pulumi.Int(7),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Monitor.NewAlarmPolicy(ctx, "fooAlarmPolicy", &Monitor.AlarmPolicyArgs{
+//				PolicyName:  pulumi.String("tf-policy"),
+//				MonitorType: pulumi.String("MT_QCE"),
+//				Enable:      pulumi.Int(1),
+//				ProjectId:   pulumi.Int(0),
+//				Namespace:   pulumi.String("cvm_device"),
+//				Conditions: &monitor.AlarmPolicyConditionsArgs{
+//					IsUnionRule: pulumi.Int(1),
+//					Rules: monitor.AlarmPolicyConditionsRuleArray{
+//						&monitor.AlarmPolicyConditionsRuleArgs{
+//							MetricName:      pulumi.String("CpuUsage"),
+//							Period:          pulumi.Int(60),
+//							Operator:        pulumi.String("ge"),
+//							Value:           pulumi.String("89.9"),
+//							ContinuePeriod:  pulumi.Int(1),
+//							NoticeFrequency: pulumi.Int(3600),
+//							IsPowerNotice:   pulumi.Int(0),
+//						},
+//					},
+//				},
+//				EventConditions: monitor.AlarmPolicyEventConditionArray{
+//					&monitor.AlarmPolicyEventConditionArgs{
+//						MetricName: pulumi.String("ping_unreachable"),
+//					},
+//					&monitor.AlarmPolicyEventConditionArgs{
+//						MetricName: pulumi.String("guest_reboot"),
+//					},
+//				},
+//				NoticeIds: pulumi.StringArray{
+//					fooAlarmNotice.ID(),
+//				},
+//				TriggerTasks: monitor.AlarmPolicyTriggerTaskArray{
+//					&monitor.AlarmPolicyTriggerTaskArgs{
+//						Type:       pulumi.String("AS"),
+//						TaskConfig: pulumi.String("{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### k8sCluster alarm policy
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"encoding/json"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		tmpJSON0, err := json.Marshal([][]map[string]interface{}{
-// 			[]map[string]interface{}{
-// 				map[string]interface{}{
-// 					"Key":      "region",
-// 					"Operator": "eq",
-// 					"Value": []string{
-// 						"ap-guangzhou",
-// 					},
-// 				},
-// 				map[string]interface{}{
-// 					"Key":      "tke_cluster_instance_id",
-// 					"Operator": "in",
-// 					"Value": []string{
-// 						"cls-czhtobea",
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		tmpJSON1, err := json.Marshal([][]map[string]interface{}{
-// 			[]map[string]interface{}{
-// 				map[string]interface{}{
-// 					"Key":      "region",
-// 					"Operator": "eq",
-// 					"Value": []string{
-// 						"ap-guangzhou",
-// 					},
-// 				},
-// 				map[string]interface{}{
-// 					"Key":      "tke_cluster_instance_id",
-// 					"Operator": "in",
-// 					"Value": []string{
-// 						"cls-czhtobea",
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json1 := string(tmpJSON1)
-// 		_, err := Monitor.NewAlarmPolicy(ctx, "policy", &Monitor.AlarmPolicyArgs{
-// 			Enable:      pulumi.Int(1),
-// 			MonitorType: pulumi.String("MT_QCE"),
-// 			Namespace:   pulumi.String("k8s_cluster"),
-// 			NoticeIds: pulumi.StringArray{
-// 				pulumi.String("notice-l9ziyxw6"),
-// 			},
-// 			PolicyName: pulumi.String("TkeClusterNew"),
-// 			ProjectId:  pulumi.Int(1244035),
-// 			Conditions: &monitor.AlarmPolicyConditionsArgs{
-// 				IsUnionRule: pulumi.Int(0),
-// 				Rules: monitor.AlarmPolicyConditionsRuleArray{
-// 					&monitor.AlarmPolicyConditionsRuleArgs{
-// 						ContinuePeriod:  pulumi.Int(3),
-// 						Description:     pulumi.String("Allocatable Pods"),
-// 						IsPowerNotice:   pulumi.Int(0),
-// 						MetricName:      pulumi.String("K8sClusterAllocatablePodsTotal"),
-// 						NoticeFrequency: pulumi.Int(3600),
-// 						Operator:        pulumi.String("gt"),
-// 						Period:          pulumi.Int(60),
-// 						RuleType:        pulumi.String("STATIC"),
-// 						Unit:            pulumi.String("Count"),
-// 						Value:           pulumi.String("10"),
-// 						Filter: &monitor.AlarmPolicyConditionsRuleFilterArgs{
-// 							Dimensions: pulumi.String(json0),
-// 							Type:       pulumi.String("DIMENSION"),
-// 						},
-// 					},
-// 					&monitor.AlarmPolicyConditionsRuleArgs{
-// 						ContinuePeriod:  pulumi.Int(3),
-// 						Description:     pulumi.String("Total CPU Cores"),
-// 						IsPowerNotice:   pulumi.Int(0),
-// 						MetricName:      pulumi.String("K8sClusterCpuCoreTotal"),
-// 						NoticeFrequency: pulumi.Int(3600),
-// 						Operator:        pulumi.String("gt"),
-// 						Period:          pulumi.Int(60),
-// 						RuleType:        pulumi.String("STATIC"),
-// 						Unit:            pulumi.String("Core"),
-// 						Value:           pulumi.String("2"),
-// 						Filter: &monitor.AlarmPolicyConditionsRuleFilterArgs{
-// 							Dimensions: pulumi.String(json1),
-// 							Type:       pulumi.String("DIMENSION"),
-// 						},
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			tmpJSON0, err := json.Marshal([][]map[string]interface{}{
+//				[]map[string]interface{}{
+//					map[string]interface{}{
+//						"Key":      "region",
+//						"Operator": "eq",
+//						"Value": []string{
+//							"ap-guangzhou",
+//						},
+//					},
+//					map[string]interface{}{
+//						"Key":      "tke_cluster_instance_id",
+//						"Operator": "in",
+//						"Value": []string{
+//							"cls-czhtobea",
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			tmpJSON1, err := json.Marshal([][]map[string]interface{}{
+//				[]map[string]interface{}{
+//					map[string]interface{}{
+//						"Key":      "region",
+//						"Operator": "eq",
+//						"Value": []string{
+//							"ap-guangzhou",
+//						},
+//					},
+//					map[string]interface{}{
+//						"Key":      "tke_cluster_instance_id",
+//						"Operator": "in",
+//						"Value": []string{
+//							"cls-czhtobea",
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json1 := string(tmpJSON1)
+//			_, err = Monitor.NewAlarmPolicy(ctx, "policy", &Monitor.AlarmPolicyArgs{
+//				Enable:      pulumi.Int(1),
+//				MonitorType: pulumi.String("MT_QCE"),
+//				Namespace:   pulumi.String("k8s_cluster"),
+//				NoticeIds: pulumi.StringArray{
+//					pulumi.String("notice-l9ziyxw6"),
+//				},
+//				PolicyName: pulumi.String("TkeClusterNew"),
+//				ProjectId:  pulumi.Int(1244035),
+//				Conditions: &monitor.AlarmPolicyConditionsArgs{
+//					IsUnionRule: pulumi.Int(0),
+//					Rules: monitor.AlarmPolicyConditionsRuleArray{
+//						&monitor.AlarmPolicyConditionsRuleArgs{
+//							ContinuePeriod:  pulumi.Int(3),
+//							Description:     pulumi.String("Allocatable Pods"),
+//							IsPowerNotice:   pulumi.Int(0),
+//							MetricName:      pulumi.String("K8sClusterAllocatablePodsTotal"),
+//							NoticeFrequency: pulumi.Int(3600),
+//							Operator:        pulumi.String("gt"),
+//							Period:          pulumi.Int(60),
+//							RuleType:        pulumi.String("STATIC"),
+//							Unit:            pulumi.String("Count"),
+//							Value:           pulumi.String("10"),
+//							Filter: &monitor.AlarmPolicyConditionsRuleFilterArgs{
+//								Dimensions: pulumi.String(json0),
+//								Type:       pulumi.String("DIMENSION"),
+//							},
+//						},
+//						&monitor.AlarmPolicyConditionsRuleArgs{
+//							ContinuePeriod:  pulumi.Int(3),
+//							Description:     pulumi.String("Total CPU Cores"),
+//							IsPowerNotice:   pulumi.Int(0),
+//							MetricName:      pulumi.String("K8sClusterCpuCoreTotal"),
+//							NoticeFrequency: pulumi.Int(3600),
+//							Operator:        pulumi.String("gt"),
+//							Period:          pulumi.Int(60),
+//							RuleType:        pulumi.String("STATIC"),
+//							Unit:            pulumi.String("Core"),
+//							Value:           pulumi.String("2"),
+//							Filter: &monitor.AlarmPolicyConditionsRuleFilterArgs{
+//								Dimensions: pulumi.String(json1),
+//								Type:       pulumi.String("DIMENSION"),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### cvmDevice alarm policy binding cvm by tag
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewAlarmPolicy(ctx, "policy", &Monitor.AlarmPolicyArgs{
-// 			Conditions: &monitor.AlarmPolicyConditionsArgs{
-// 				IsUnionRule: pulumi.Int(0),
-// 				Rules: monitor.AlarmPolicyConditionsRuleArray{
-// 					&monitor.AlarmPolicyConditionsRuleArgs{
-// 						ContinuePeriod:  pulumi.Int(5),
-// 						Description:     pulumi.String("CPUUtilization"),
-// 						IsPowerNotice:   pulumi.Int(0),
-// 						MetricName:      pulumi.String("CpuUsage"),
-// 						NoticeFrequency: pulumi.Int(7200),
-// 						Operator:        pulumi.String("gt"),
-// 						Period:          pulumi.Int(60),
-// 						RuleType:        pulumi.String("STATIC"),
-// 						Unit:            pulumi.String("%"),
-// 						Value:           pulumi.String("95"),
-// 					},
-// 					&monitor.AlarmPolicyConditionsRuleArgs{
-// 						ContinuePeriod:  pulumi.Int(5),
-// 						Description:     pulumi.String("PublicBandwidthUtilization"),
-// 						IsPowerNotice:   pulumi.Int(0),
-// 						MetricName:      pulumi.String("Outratio"),
-// 						NoticeFrequency: pulumi.Int(7200),
-// 						Operator:        pulumi.String("gt"),
-// 						Period:          pulumi.Int(60),
-// 						RuleType:        pulumi.String("STATIC"),
-// 						Unit:            pulumi.String("%"),
-// 						Value:           pulumi.String("95"),
-// 					},
-// 					&monitor.AlarmPolicyConditionsRuleArgs{
-// 						ContinuePeriod:  pulumi.Int(5),
-// 						Description:     pulumi.String("MemoryUtilization"),
-// 						IsPowerNotice:   pulumi.Int(0),
-// 						MetricName:      pulumi.String("MemUsage"),
-// 						NoticeFrequency: pulumi.Int(7200),
-// 						Operator:        pulumi.String("gt"),
-// 						Period:          pulumi.Int(60),
-// 						RuleType:        pulumi.String("STATIC"),
-// 						Unit:            pulumi.String("%"),
-// 						Value:           pulumi.String("95"),
-// 					},
-// 					&monitor.AlarmPolicyConditionsRuleArgs{
-// 						ContinuePeriod:  pulumi.Int(5),
-// 						Description:     pulumi.String("DiskUtilization"),
-// 						IsPowerNotice:   pulumi.Int(0),
-// 						MetricName:      pulumi.String("CvmDiskUsage"),
-// 						NoticeFrequency: pulumi.Int(7200),
-// 						Operator:        pulumi.String("gt"),
-// 						Period:          pulumi.Int(60),
-// 						RuleType:        pulumi.String("STATIC"),
-// 						Unit:            pulumi.String("%"),
-// 						Value:           pulumi.String("95"),
-// 					},
-// 				},
-// 			},
-// 			Enable: pulumi.Int(1),
-// 			EventConditions: monitor.AlarmPolicyEventConditionArray{
-// 				&monitor.AlarmPolicyEventConditionArgs{
-// 					ContinuePeriod:  pulumi.Int(0),
-// 					Description:     pulumi.String("DiskReadonly"),
-// 					IsPowerNotice:   pulumi.Int(0),
-// 					MetricName:      pulumi.String("disk_readonly"),
-// 					NoticeFrequency: pulumi.Int(0),
-// 					Period:          pulumi.Int(0),
-// 				},
-// 			},
-// 			MonitorType: pulumi.String("MT_QCE"),
-// 			Namespace:   pulumi.String("cvm_device"),
-// 			NoticeIds: pulumi.StringArray{
-// 				pulumi.String("notice-l9ziyxw6"),
-// 			},
-// 			PolicyName: pulumi.String("policy"),
-// 			PolicyTags: monitor.AlarmPolicyPolicyTagArray{
-// 				&monitor.AlarmPolicyPolicyTagArgs{
-// 					Key:   pulumi.String("test-tag"),
-// 					Value: pulumi.String("unit-test"),
-// 				},
-// 			},
-// 			ProjectId: pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.NewAlarmPolicy(ctx, "policy", &Monitor.AlarmPolicyArgs{
+//				Conditions: &monitor.AlarmPolicyConditionsArgs{
+//					IsUnionRule: pulumi.Int(0),
+//					Rules: monitor.AlarmPolicyConditionsRuleArray{
+//						&monitor.AlarmPolicyConditionsRuleArgs{
+//							ContinuePeriod:  pulumi.Int(5),
+//							Description:     pulumi.String("CPUUtilization"),
+//							IsPowerNotice:   pulumi.Int(0),
+//							MetricName:      pulumi.String("CpuUsage"),
+//							NoticeFrequency: pulumi.Int(7200),
+//							Operator:        pulumi.String("gt"),
+//							Period:          pulumi.Int(60),
+//							RuleType:        pulumi.String("STATIC"),
+//							Unit:            pulumi.String("%"),
+//							Value:           pulumi.String("95"),
+//						},
+//						&monitor.AlarmPolicyConditionsRuleArgs{
+//							ContinuePeriod:  pulumi.Int(5),
+//							Description:     pulumi.String("PublicBandwidthUtilization"),
+//							IsPowerNotice:   pulumi.Int(0),
+//							MetricName:      pulumi.String("Outratio"),
+//							NoticeFrequency: pulumi.Int(7200),
+//							Operator:        pulumi.String("gt"),
+//							Period:          pulumi.Int(60),
+//							RuleType:        pulumi.String("STATIC"),
+//							Unit:            pulumi.String("%"),
+//							Value:           pulumi.String("95"),
+//						},
+//						&monitor.AlarmPolicyConditionsRuleArgs{
+//							ContinuePeriod:  pulumi.Int(5),
+//							Description:     pulumi.String("MemoryUtilization"),
+//							IsPowerNotice:   pulumi.Int(0),
+//							MetricName:      pulumi.String("MemUsage"),
+//							NoticeFrequency: pulumi.Int(7200),
+//							Operator:        pulumi.String("gt"),
+//							Period:          pulumi.Int(60),
+//							RuleType:        pulumi.String("STATIC"),
+//							Unit:            pulumi.String("%"),
+//							Value:           pulumi.String("95"),
+//						},
+//						&monitor.AlarmPolicyConditionsRuleArgs{
+//							ContinuePeriod:  pulumi.Int(5),
+//							Description:     pulumi.String("DiskUtilization"),
+//							IsPowerNotice:   pulumi.Int(0),
+//							MetricName:      pulumi.String("CvmDiskUsage"),
+//							NoticeFrequency: pulumi.Int(7200),
+//							Operator:        pulumi.String("gt"),
+//							Period:          pulumi.Int(60),
+//							RuleType:        pulumi.String("STATIC"),
+//							Unit:            pulumi.String("%"),
+//							Value:           pulumi.String("95"),
+//						},
+//					},
+//				},
+//				Enable: pulumi.Int(1),
+//				EventConditions: monitor.AlarmPolicyEventConditionArray{
+//					&monitor.AlarmPolicyEventConditionArgs{
+//						ContinuePeriod:  pulumi.Int(0),
+//						Description:     pulumi.String("DiskReadonly"),
+//						IsPowerNotice:   pulumi.Int(0),
+//						MetricName:      pulumi.String("disk_readonly"),
+//						NoticeFrequency: pulumi.Int(0),
+//						Period:          pulumi.Int(0),
+//					},
+//				},
+//				MonitorType: pulumi.String("MT_QCE"),
+//				Namespace:   pulumi.String("cvm_device"),
+//				NoticeIds: pulumi.StringArray{
+//					pulumi.String("notice-l9ziyxw6"),
+//				},
+//				PolicyName: pulumi.String("policy"),
+//				PolicyTags: monitor.AlarmPolicyPolicyTagArray{
+//					&monitor.AlarmPolicyPolicyTagArgs{
+//						Key:   pulumi.String("test-tag"),
+//						Value: pulumi.String("unit-test"),
+//					},
+//				},
+//				ProjectId: pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // Alarm policy instance can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/alarmPolicy:AlarmPolicy policy policy-id
+// $ pulumi import tencentcloud:Monitor/alarmPolicy:AlarmPolicy policy policy-id
 // ```
 type AlarmPolicy struct {
 	pulumi.CustomResourceState
@@ -400,7 +416,7 @@ func NewAlarmPolicy(ctx *pulumi.Context,
 	if args.PolicyName == nil {
 		return nil, errors.New("invalid value for required argument 'PolicyName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AlarmPolicy
 	err := ctx.RegisterResource("tencentcloud:Monitor/alarmPolicy:AlarmPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -585,7 +601,7 @@ func (i *AlarmPolicy) ToAlarmPolicyOutputWithContext(ctx context.Context) AlarmP
 // AlarmPolicyArrayInput is an input type that accepts AlarmPolicyArray and AlarmPolicyArrayOutput values.
 // You can construct a concrete instance of `AlarmPolicyArrayInput` via:
 //
-//          AlarmPolicyArray{ AlarmPolicyArgs{...} }
+//	AlarmPolicyArray{ AlarmPolicyArgs{...} }
 type AlarmPolicyArrayInput interface {
 	pulumi.Input
 
@@ -610,7 +626,7 @@ func (i AlarmPolicyArray) ToAlarmPolicyArrayOutputWithContext(ctx context.Contex
 // AlarmPolicyMapInput is an input type that accepts AlarmPolicyMap and AlarmPolicyMapOutput values.
 // You can construct a concrete instance of `AlarmPolicyMapInput` via:
 //
-//          AlarmPolicyMap{ "key": AlarmPolicyArgs{...} }
+//	AlarmPolicyMap{ "key": AlarmPolicyArgs{...} }
 type AlarmPolicyMapInput interface {
 	pulumi.Input
 

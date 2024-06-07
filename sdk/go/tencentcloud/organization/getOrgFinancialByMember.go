@@ -8,11 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of organization orgFinancialByMember
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// _, err := Organization.GetOrgFinancialByMember(ctx, &organization.GetOrgFinancialByMemberArgs{
+// EndMonth: pulumi.StringRef("2023-10"),
+// MemberUins: interface{}{
+// 100015591986,
+// 100029796005,
+// },
+// Month: "2023-05",
+// }, nil);
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
 func GetOrgFinancialByMember(ctx *pulumi.Context, args *GetOrgFinancialByMemberArgs, opts ...pulumi.InvokeOption) (*GetOrgFinancialByMemberResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOrgFinancialByMemberResult
 	err := ctx.Invoke("tencentcloud:Organization/getOrgFinancialByMember:getOrgFinancialByMember", args, &rv, opts...)
 	if err != nil {

@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc private_ip_addresses
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var privateIpAddresses = Tencentcloud.Vpc.GetPrivateIpAddresses.Invoke(new()
         ///     {
-        ///         var privateIpAddresses = Output.Create(Tencentcloud.Vpc.GetPrivateIpAddresses.InvokeAsync(new Tencentcloud.Vpc.GetPrivateIpAddressesArgs
+        ///         VpcPrivateIpAddresses = new[]
         ///         {
-        ///             PrivateIpAddresses = 
-        ///             {
-        ///                 "10.0.0.1",
-        ///             },
-        ///             VpcId = "vpc-l0dw94uh",
-        ///         }));
-        ///     }
+        ///             "10.0.0.1",
+        ///         },
+        ///         VpcId = "vpc-l0dw94uh",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPrivateIpAddressesResult> InvokeAsync(GetPrivateIpAddressesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPrivateIpAddressesResult>("tencentcloud:Vpc/getPrivateIpAddresses:getPrivateIpAddresses", args ?? new GetPrivateIpAddressesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPrivateIpAddressesResult>("tencentcloud:Vpc/getPrivateIpAddresses:getPrivateIpAddresses", args ?? new GetPrivateIpAddressesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc private_ip_addresses
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var privateIpAddresses = Tencentcloud.Vpc.GetPrivateIpAddresses.Invoke(new()
         ///     {
-        ///         var privateIpAddresses = Output.Create(Tencentcloud.Vpc.GetPrivateIpAddresses.InvokeAsync(new Tencentcloud.Vpc.GetPrivateIpAddressesArgs
+        ///         VpcPrivateIpAddresses = new[]
         ///         {
-        ///             PrivateIpAddresses = 
-        ///             {
-        ///                 "10.0.0.1",
-        ///             },
-        ///             VpcId = "vpc-l0dw94uh",
-        ///         }));
-        ///     }
+        ///             "10.0.0.1",
+        ///         },
+        ///         VpcId = "vpc-l0dw94uh",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPrivateIpAddressesResult> Invoke(GetPrivateIpAddressesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPrivateIpAddressesResult>("tencentcloud:Vpc/getPrivateIpAddresses:getPrivateIpAddresses", args ?? new GetPrivateIpAddressesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPrivateIpAddressesResult>("tencentcloud:Vpc/getPrivateIpAddresses:getPrivateIpAddresses", args ?? new GetPrivateIpAddressesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPrivateIpAddressesArgs : Pulumi.InvokeArgs
+    public sealed class GetPrivateIpAddressesArgs : global::Pulumi.InvokeArgs
     {
         [Input("privateIpAddresses", required: true)]
         private List<string>? _privateIpAddresses;
@@ -109,9 +103,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetPrivateIpAddressesArgs()
         {
         }
+        public static new GetPrivateIpAddressesArgs Empty => new GetPrivateIpAddressesArgs();
     }
 
-    public sealed class GetPrivateIpAddressesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPrivateIpAddressesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("privateIpAddresses", required: true)]
         private InputList<string>? _privateIpAddresses;
@@ -140,6 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetPrivateIpAddressesInvokeArgs()
         {
         }
+        public static new GetPrivateIpAddressesInvokeArgs Empty => new GetPrivateIpAddressesInvokeArgs();
     }
 
 

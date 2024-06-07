@@ -15,108 +15,104 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         /// <summary>
         /// Use this data source to query detailed information of cfw nat_fw_switches
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Query Nat instance'switch by instance id
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Cfw.GetNatFwSwitches.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Cfw.GetNatFwSwitches.InvokeAsync(new Tencentcloud.Cfw.GetNatFwSwitchesArgs
-        ///         {
-        ///             NatInsId = "cfwnat-18d2ba18",
-        ///         }));
-        ///     }
+        ///         NatInsId = "cfwnat-18d2ba18",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Or filter by switch status
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Cfw.GetNatFwSwitches.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Cfw.GetNatFwSwitches.InvokeAsync(new Tencentcloud.Cfw.GetNatFwSwitchesArgs
-        ///         {
-        ///             NatInsId = "cfwnat-18d2ba18",
-        ///             Status = 1,
-        ///         }));
-        ///     }
+        ///         NatInsId = "cfwnat-18d2ba18",
+        ///         Status = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetNatFwSwitchesResult> InvokeAsync(GetNatFwSwitchesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetNatFwSwitchesResult>("tencentcloud:Cfw/getNatFwSwitches:getNatFwSwitches", args ?? new GetNatFwSwitchesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetNatFwSwitchesResult>("tencentcloud:Cfw/getNatFwSwitches:getNatFwSwitches", args ?? new GetNatFwSwitchesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cfw nat_fw_switches
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Query Nat instance'switch by instance id
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Cfw.GetNatFwSwitches.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Cfw.GetNatFwSwitches.InvokeAsync(new Tencentcloud.Cfw.GetNatFwSwitchesArgs
-        ///         {
-        ///             NatInsId = "cfwnat-18d2ba18",
-        ///         }));
-        ///     }
+        ///         NatInsId = "cfwnat-18d2ba18",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Or filter by switch status
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Cfw.GetNatFwSwitches.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Cfw.GetNatFwSwitches.InvokeAsync(new Tencentcloud.Cfw.GetNatFwSwitchesArgs
-        ///         {
-        ///             NatInsId = "cfwnat-18d2ba18",
-        ///             Status = 1,
-        ///         }));
-        ///     }
+        ///         NatInsId = "cfwnat-18d2ba18",
+        ///         Status = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetNatFwSwitchesResult> Invoke(GetNatFwSwitchesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetNatFwSwitchesResult>("tencentcloud:Cfw/getNatFwSwitches:getNatFwSwitches", args ?? new GetNatFwSwitchesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetNatFwSwitchesResult>("tencentcloud:Cfw/getNatFwSwitches:getNatFwSwitches", args ?? new GetNatFwSwitchesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetNatFwSwitchesArgs : Pulumi.InvokeArgs
+    public sealed class GetNatFwSwitchesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter the NAT firewall instance to which the NAT firewall subnet switch belongs.
@@ -139,9 +135,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public GetNatFwSwitchesArgs()
         {
         }
+        public static new GetNatFwSwitchesArgs Empty => new GetNatFwSwitchesArgs();
     }
 
-    public sealed class GetNatFwSwitchesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetNatFwSwitchesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter the NAT firewall instance to which the NAT firewall subnet switch belongs.
@@ -164,6 +161,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public GetNatFwSwitchesInvokeArgs()
         {
         }
+        public static new GetNatFwSwitchesInvokeArgs Empty => new GetNatFwSwitchesInvokeArgs();
     }
 
 

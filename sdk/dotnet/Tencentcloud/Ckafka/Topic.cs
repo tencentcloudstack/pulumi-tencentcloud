@@ -15,49 +15,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Ckafka.Topic("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Ckafka.Topic("foo", new Tencentcloud.Ckafka.TopicArgs
+    ///         CleanUpPolicy = "delete",
+    ///         EnableWhiteList = true,
+    ///         InstanceId = "ckafka-f9ife4zz",
+    ///         IpWhiteLists = new[]
     ///         {
-    ///             CleanUpPolicy = "delete",
-    ///             EnableWhiteList = true,
-    ///             InstanceId = "ckafka-f9ife4zz",
-    ///             IpWhiteLists = 
-    ///             {
-    ///                 "ip1",
-    ///                 "ip2",
-    ///             },
-    ///             MaxMessageBytes = 0,
-    ///             Note = "topic note",
-    ///             PartitionNum = 1,
-    ///             ReplicaNum = 2,
-    ///             Retention = 60000,
-    ///             Segment = 3600000,
-    ///             SyncReplicaMinNum = 1,
-    ///             TopicName = "example",
-    ///             UncleanLeaderElectionEnable = false,
-    ///         });
-    ///     }
+    ///             "ip1",
+    ///             "ip2",
+    ///         },
+    ///         MaxMessageBytes = 0,
+    ///         Note = "topic note",
+    ///         PartitionNum = 1,
+    ///         ReplicaNum = 2,
+    ///         Retention = 60000,
+    ///         Segment = 3600000,
+    ///         SyncReplicaMinNum = 1,
+    ///         TopicName = "example",
+    ///         UncleanLeaderElectionEnable = false,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ckafka topic can be imported using the instance_id#topic_name, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ckafka/topic:Topic foo ckafka-f9ife4zz#example
+    /// $ pulumi import tencentcloud:Ckafka/topic:Topic foo ckafka-f9ife4zz#example
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/topic:Topic")]
-    public partial class Topic : Pulumi.CustomResource
+    public partial class Topic : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
@@ -218,7 +219,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
     }
 
-    public sealed class TopicArgs : Pulumi.ResourceArgs
+    public sealed class TopicArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
@@ -307,9 +308,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public TopicArgs()
         {
         }
+        public static new TopicArgs Empty => new TopicArgs();
     }
 
-    public sealed class TopicState : Pulumi.ResourceArgs
+    public sealed class TopicState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Clear log policy, log clear mode, default is `delete`. `delete`: logs are deleted according to the storage time. `compact`: logs are compressed according to the key. `compact, delete`: logs are compressed according to the key and will be deleted according to the storage time.
@@ -434,5 +436,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public TopicState()
         {
         }
+        public static new TopicState Empty => new TopicState();
     }
 }

@@ -15,30 +15,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var applicationPublicConfig = new Tencentcloud.Tsf.ApplicationPublicConfig("applicationPublicConfig", new()
     ///     {
-    ///         var applicationPublicConfig = new Tencentcloud.Tsf.ApplicationPublicConfig("applicationPublicConfig", new Tencentcloud.Tsf.ApplicationPublicConfigArgs
-    ///         {
-    ///             ConfigName = "my_config",
-    ///             ConfigType = "P",
-    ///             ConfigValue = "test: 1",
-    ///             ConfigVersion = "1.0",
-    ///             ConfigVersionDesc = "product version",
-    ///             EncodeWithBase64 = true,
-    ///         });
-    ///     }
+    ///         ConfigName = "my_config",
+    ///         ConfigType = "P",
+    ///         ConfigValue = "test: 1",
+    ///         ConfigVersion = "1.0",
+    ///         ConfigVersionDesc = "product version",
+    ///         EncodeWithBase64 = true,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/applicationPublicConfig:ApplicationPublicConfig")]
-    public partial class ApplicationPublicConfig : Pulumi.CustomResource
+    public partial class ApplicationPublicConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Config Name.
@@ -127,7 +128,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class ApplicationPublicConfigArgs : Pulumi.ResourceArgs
+    public sealed class ApplicationPublicConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Config Name.
@@ -180,9 +181,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ApplicationPublicConfigArgs()
         {
         }
+        public static new ApplicationPublicConfigArgs Empty => new ApplicationPublicConfigArgs();
     }
 
-    public sealed class ApplicationPublicConfigState : Pulumi.ResourceArgs
+    public sealed class ApplicationPublicConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Config Name.
@@ -235,5 +237,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ApplicationPublicConfigState()
         {
         }
+        public static new ApplicationPublicConfigState Empty => new ApplicationPublicConfigState();
     }
 }

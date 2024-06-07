@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// <summary>
         /// Use this data source to query detailed information of sqlserver datasource_d_b_charsets
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetDbCharsets.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetDbCharsets.InvokeAsync(new Tencentcloud.Sqlserver.GetDbCharsetsArgs
-        ///         {
-        ///             InstanceId = "mssql-qelbzgwf",
-        ///         }));
-        ///     }
+        ///         InstanceId = "mssql-qelbzgwf",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDbCharsetsResult> InvokeAsync(GetDbCharsetsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDbCharsetsResult>("tencentcloud:Sqlserver/getDbCharsets:getDbCharsets", args ?? new GetDbCharsetsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbCharsetsResult>("tencentcloud:Sqlserver/getDbCharsets:getDbCharsets", args ?? new GetDbCharsetsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of sqlserver datasource_d_b_charsets
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetDbCharsets.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetDbCharsets.InvokeAsync(new Tencentcloud.Sqlserver.GetDbCharsetsArgs
-        ///         {
-        ///             InstanceId = "mssql-qelbzgwf",
-        ///         }));
-        ///     }
+        ///         InstanceId = "mssql-qelbzgwf",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDbCharsetsResult> Invoke(GetDbCharsetsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDbCharsetsResult>("tencentcloud:Sqlserver/getDbCharsets:getDbCharsets", args ?? new GetDbCharsetsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDbCharsetsResult>("tencentcloud:Sqlserver/getDbCharsets:getDbCharsets", args ?? new GetDbCharsetsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDbCharsetsArgs : Pulumi.InvokeArgs
+    public sealed class GetDbCharsetsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID in the format of mssql-j8kv137v.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetDbCharsetsArgs()
         {
         }
+        public static new GetDbCharsetsArgs Empty => new GetDbCharsetsArgs();
     }
 
-    public sealed class GetDbCharsetsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDbCharsetsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID in the format of mssql-j8kv137v.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetDbCharsetsInvokeArgs()
         {
         }
+        public static new GetDbCharsetsInvokeArgs Empty => new GetDbCharsetsInvokeArgs();
     }
 
 

@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap black header
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var blackHeader = Output.Create(Tencentcloud.Gaap.GetBlackHeader.InvokeAsync());
-        ///     }
+        ///     var blackHeader = Tencentcloud.Gaap.GetBlackHeader.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBlackHeaderResult> InvokeAsync(GetBlackHeaderArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBlackHeaderResult>("tencentcloud:Gaap/getBlackHeader:getBlackHeader", args ?? new GetBlackHeaderArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBlackHeaderResult>("tencentcloud:Gaap/getBlackHeader:getBlackHeader", args ?? new GetBlackHeaderArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap black header
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var blackHeader = Output.Create(Tencentcloud.Gaap.GetBlackHeader.InvokeAsync());
-        ///     }
+        ///     var blackHeader = Tencentcloud.Gaap.GetBlackHeader.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBlackHeaderResult> Invoke(GetBlackHeaderInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBlackHeaderResult>("tencentcloud:Gaap/getBlackHeader:getBlackHeader", args ?? new GetBlackHeaderInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBlackHeaderResult>("tencentcloud:Gaap/getBlackHeader:getBlackHeader", args ?? new GetBlackHeaderInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBlackHeaderArgs : Pulumi.InvokeArgs
+    public sealed class GetBlackHeaderArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetBlackHeaderArgs()
         {
         }
+        public static new GetBlackHeaderArgs Empty => new GetBlackHeaderArgs();
     }
 
-    public sealed class GetBlackHeaderInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBlackHeaderInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetBlackHeaderInvokeArgs()
         {
         }
+        public static new GetBlackHeaderInvokeArgs Empty => new GetBlackHeaderInvokeArgs();
     }
 
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx.Inputs
 {
 
-    public sealed class ExtraConfigRouteFilterPrefixesArgs : Pulumi.ResourceArgs
+    public sealed class ExtraConfigRouteFilterPrefixesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// user network prefixes.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx.Inputs
         public ExtraConfigRouteFilterPrefixesArgs()
         {
         }
+        public static new ExtraConfigRouteFilterPrefixesArgs Empty => new ExtraConfigRouteFilterPrefixesArgs();
     }
 }

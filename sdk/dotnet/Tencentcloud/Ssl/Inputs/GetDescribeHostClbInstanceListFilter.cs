@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Inputs
 {
 
-    public sealed class GetDescribeHostClbInstanceListFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeHostClbInstanceListFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter parameter key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Inputs
         public GetDescribeHostClbInstanceListFilterArgs()
         {
         }
+        public static new GetDescribeHostClbInstanceListFilterArgs Empty => new GetDescribeHostClbInstanceListFilterArgs();
     }
 }

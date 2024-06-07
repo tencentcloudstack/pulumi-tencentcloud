@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
 {
 
-    public sealed class WorkloadStorageConfArgs : Pulumi.ResourceArgs
+    public sealed class WorkloadStorageConfArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// volume ip.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
         public WorkloadStorageConfArgs()
         {
         }
+        public static new WorkloadStorageConfArgs Empty => new WorkloadStorageConfArgs();
     }
 }

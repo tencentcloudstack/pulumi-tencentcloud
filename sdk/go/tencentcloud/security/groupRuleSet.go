@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create security group rule. This resource is similar with tencentcloud_security_group_lite_rule, rules can be ordered and configure descriptions.
@@ -17,120 +18,124 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Address"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Address"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		baseGroup, err := Security.NewGroup(ctx, "baseGroup", &Security.GroupArgs{
-// 			Description: pulumi.String("Testing Rule Set Security"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		relative, err := Security.NewGroup(ctx, "relative", &Security.GroupArgs{
-// 			Description: pulumi.String("Used for attach security policy"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooTemplate, err := Address.NewTemplate(ctx, "fooTemplate", &Address.TemplateArgs{
-// 			Addresses: pulumi.StringArray{
-// 				pulumi.String("10.0.0.1"),
-// 				pulumi.String("10.0.1.0/24"),
-// 				pulumi.String("10.0.0.1-10.0.0.100"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooTemplateGroup, err := Address.NewTemplateGroup(ctx, "fooTemplateGroup", &Address.TemplateGroupArgs{
-// 			TemplateIds: pulumi.StringArray{
-// 				fooTemplate.ID(),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Security.NewGroupRuleSet(ctx, "baseGroupRuleSet", &Security.GroupRuleSetArgs{
-// 			SecurityGroupId: baseGroup.ID(),
-// 			Ingresses: security.GroupRuleSetIngressArray{
-// 				&security.GroupRuleSetIngressArgs{
-// 					Action:      pulumi.String("ACCEPT"),
-// 					CidrBlock:   pulumi.String("10.0.0.0/22"),
-// 					Protocol:    pulumi.String("TCP"),
-// 					Port:        pulumi.String("80-90"),
-// 					Description: pulumi.String("A:Allow Ips and 80-90"),
-// 				},
-// 				&security.GroupRuleSetIngressArgs{
-// 					Action:      pulumi.String("ACCEPT"),
-// 					CidrBlock:   pulumi.String("10.0.2.1"),
-// 					Protocol:    pulumi.String("UDP"),
-// 					Port:        pulumi.String("8080"),
-// 					Description: pulumi.String("B:Allow UDP 8080"),
-// 				},
-// 				&security.GroupRuleSetIngressArgs{
-// 					Action:      pulumi.String("ACCEPT"),
-// 					CidrBlock:   pulumi.String("10.0.2.1"),
-// 					Protocol:    pulumi.String("UDP"),
-// 					Port:        pulumi.String("8080"),
-// 					Description: pulumi.String("C:Allow UDP 8080"),
-// 				},
-// 				&security.GroupRuleSetIngressArgs{
-// 					Action:      pulumi.String("ACCEPT"),
-// 					CidrBlock:   pulumi.String("172.18.1.2"),
-// 					Protocol:    pulumi.String("ALL"),
-// 					Port:        pulumi.String("ALL"),
-// 					Description: pulumi.String("D:Allow ALL"),
-// 				},
-// 				&security.GroupRuleSetIngressArgs{
-// 					Action:           pulumi.String("DROP"),
-// 					Protocol:         pulumi.String("TCP"),
-// 					Port:             pulumi.String("80"),
-// 					SourceSecurityId: relative.ID(),
-// 					Description:      pulumi.String("E:Block relative"),
-// 				},
-// 			},
-// 			Egresses: security.GroupRuleSetEgressArray{
-// 				&security.GroupRuleSetEgressArgs{
-// 					Action:      pulumi.String("DROP"),
-// 					CidrBlock:   pulumi.String("10.0.0.0/16"),
-// 					Protocol:    pulumi.String("ICMP"),
-// 					Description: pulumi.String("A:Block ping3"),
-// 				},
-// 				&security.GroupRuleSetEgressArgs{
-// 					Action:            pulumi.String("DROP"),
-// 					AddressTemplateId: fooTemplate.ID(),
-// 					Description:       pulumi.String("B:Allow template"),
-// 				},
-// 				&security.GroupRuleSetEgressArgs{
-// 					Action:               pulumi.String("DROP"),
-// 					AddressTemplateGroup: fooTemplateGroup.ID(),
-// 					Description:          pulumi.String("C:DROP template group"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			baseGroup, err := Security.NewGroup(ctx, "baseGroup", &Security.GroupArgs{
+//				Description: pulumi.String("Testing Rule Set Security"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			relative, err := Security.NewGroup(ctx, "relative", &Security.GroupArgs{
+//				Description: pulumi.String("Used for attach security policy"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooTemplate, err := Address.NewTemplate(ctx, "fooTemplate", &Address.TemplateArgs{
+//				Addresses: pulumi.StringArray{
+//					pulumi.String("10.0.0.1"),
+//					pulumi.String("10.0.1.0/24"),
+//					pulumi.String("10.0.0.1-10.0.0.100"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooTemplateGroup, err := Address.NewTemplateGroup(ctx, "fooTemplateGroup", &Address.TemplateGroupArgs{
+//				TemplateIds: pulumi.StringArray{
+//					fooTemplate.ID(),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Security.NewGroupRuleSet(ctx, "baseGroupRuleSet", &Security.GroupRuleSetArgs{
+//				SecurityGroupId: baseGroup.ID(),
+//				Ingresses: security.GroupRuleSetIngressArray{
+//					&security.GroupRuleSetIngressArgs{
+//						Action:      pulumi.String("ACCEPT"),
+//						CidrBlock:   pulumi.String("10.0.0.0/22"),
+//						Protocol:    pulumi.String("TCP"),
+//						Port:        pulumi.String("80-90"),
+//						Description: pulumi.String("A:Allow Ips and 80-90"),
+//					},
+//					&security.GroupRuleSetIngressArgs{
+//						Action:      pulumi.String("ACCEPT"),
+//						CidrBlock:   pulumi.String("10.0.2.1"),
+//						Protocol:    pulumi.String("UDP"),
+//						Port:        pulumi.String("8080"),
+//						Description: pulumi.String("B:Allow UDP 8080"),
+//					},
+//					&security.GroupRuleSetIngressArgs{
+//						Action:      pulumi.String("ACCEPT"),
+//						CidrBlock:   pulumi.String("10.0.2.1"),
+//						Protocol:    pulumi.String("UDP"),
+//						Port:        pulumi.String("8080"),
+//						Description: pulumi.String("C:Allow UDP 8080"),
+//					},
+//					&security.GroupRuleSetIngressArgs{
+//						Action:      pulumi.String("ACCEPT"),
+//						CidrBlock:   pulumi.String("172.18.1.2"),
+//						Protocol:    pulumi.String("ALL"),
+//						Port:        pulumi.String("ALL"),
+//						Description: pulumi.String("D:Allow ALL"),
+//					},
+//					&security.GroupRuleSetIngressArgs{
+//						Action:           pulumi.String("DROP"),
+//						Protocol:         pulumi.String("TCP"),
+//						Port:             pulumi.String("80"),
+//						SourceSecurityId: relative.ID(),
+//						Description:      pulumi.String("E:Block relative"),
+//					},
+//				},
+//				Egresses: security.GroupRuleSetEgressArray{
+//					&security.GroupRuleSetEgressArgs{
+//						Action:      pulumi.String("DROP"),
+//						CidrBlock:   pulumi.String("10.0.0.0/16"),
+//						Protocol:    pulumi.String("ICMP"),
+//						Description: pulumi.String("A:Block ping3"),
+//					},
+//					&security.GroupRuleSetEgressArgs{
+//						Action:            pulumi.String("DROP"),
+//						AddressTemplateId: fooTemplate.ID(),
+//						Description:       pulumi.String("B:Allow template"),
+//					},
+//					&security.GroupRuleSetEgressArgs{
+//						Action:               pulumi.String("DROP"),
+//						AddressTemplateGroup: fooTemplateGroup.ID(),
+//						Description:          pulumi.String("C:DROP template group"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
-// Resource tencentcloud_security_group_rule_set can be imported by passing security grou id
+// Resource tencentcloud_security_group_rule_set can be imported by passing security grou id:
 //
 // ```sh
-//  $ pulumi import tencentcloud:Security/groupRuleSet:GroupRuleSet sglab_1 sg-xxxxxxxx
+// $ pulumi import tencentcloud:Security/groupRuleSet:GroupRuleSet sglab_1 sg-xxxxxxxx
 // ```
 type GroupRuleSet struct {
 	pulumi.CustomResourceState
@@ -155,7 +160,7 @@ func NewGroupRuleSet(ctx *pulumi.Context,
 	if args.SecurityGroupId == nil {
 		return nil, errors.New("invalid value for required argument 'SecurityGroupId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource GroupRuleSet
 	err := ctx.RegisterResource("tencentcloud:Security/groupRuleSet:GroupRuleSet", name, args, &resource, opts...)
 	if err != nil {
@@ -248,7 +253,7 @@ func (i *GroupRuleSet) ToGroupRuleSetOutputWithContext(ctx context.Context) Grou
 // GroupRuleSetArrayInput is an input type that accepts GroupRuleSetArray and GroupRuleSetArrayOutput values.
 // You can construct a concrete instance of `GroupRuleSetArrayInput` via:
 //
-//          GroupRuleSetArray{ GroupRuleSetArgs{...} }
+//	GroupRuleSetArray{ GroupRuleSetArgs{...} }
 type GroupRuleSetArrayInput interface {
 	pulumi.Input
 
@@ -273,7 +278,7 @@ func (i GroupRuleSetArray) ToGroupRuleSetArrayOutputWithContext(ctx context.Cont
 // GroupRuleSetMapInput is an input type that accepts GroupRuleSetMap and GroupRuleSetMapOutput values.
 // You can construct a concrete instance of `GroupRuleSetMapInput` via:
 //
-//          GroupRuleSetMap{ "key": GroupRuleSetArgs{...} }
+//	GroupRuleSetMap{ "key": GroupRuleSetArgs{...} }
 type GroupRuleSetMapInput interface {
 	pulumi.Input
 

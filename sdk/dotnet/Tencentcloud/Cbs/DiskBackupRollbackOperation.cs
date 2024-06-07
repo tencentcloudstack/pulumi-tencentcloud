@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var operation = new Tencentcloud.Cbs.DiskBackupRollbackOperation("operation", new()
     ///     {
-    ///         var operation = new Tencentcloud.Cbs.DiskBackupRollbackOperation("operation", new Tencentcloud.Cbs.DiskBackupRollbackOperationArgs
-    ///         {
-    ///             DiskBackupId = "dbp-xxx",
-    ///             DiskId = "disk-xxx",
-    ///         });
-    ///     }
+    ///         DiskBackupId = "dbp-xxx",
+    ///         DiskId = "disk-xxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/diskBackupRollbackOperation:DiskBackupRollbackOperation")]
-    public partial class DiskBackupRollbackOperation : Pulumi.CustomResource
+    public partial class DiskBackupRollbackOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cloud disk backup point ID.
@@ -99,7 +100,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         }
     }
 
-    public sealed class DiskBackupRollbackOperationArgs : Pulumi.ResourceArgs
+    public sealed class DiskBackupRollbackOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cloud disk backup point ID.
@@ -116,9 +117,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public DiskBackupRollbackOperationArgs()
         {
         }
+        public static new DiskBackupRollbackOperationArgs Empty => new DiskBackupRollbackOperationArgs();
     }
 
-    public sealed class DiskBackupRollbackOperationState : Pulumi.ResourceArgs
+    public sealed class DiskBackupRollbackOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cloud disk backup point ID.
@@ -141,5 +143,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public DiskBackupRollbackOperationState()
         {
         }
+        public static new DiskBackupRollbackOperationState Empty => new DiskBackupRollbackOperationState();
     }
 }

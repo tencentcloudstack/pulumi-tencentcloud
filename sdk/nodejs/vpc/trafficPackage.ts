@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Vpc.TrafficPackage("example", {
- *     trafficAmount: 10,
- * });
+ * const example = new tencentcloud.vpc.TrafficPackage("example", {trafficAmount: 10});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * vpc traffic_package can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpc/trafficPackage:TrafficPackage traffic_package traffic_package_id
+ * $ pulumi import tencentcloud:Vpc/trafficPackage:TrafficPackage traffic_package traffic_package_id
  * ```
  */
 export class TrafficPackage extends pulumi.CustomResource {

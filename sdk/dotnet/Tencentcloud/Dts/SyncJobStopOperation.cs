@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var syncJobStopOperation = new Tencentcloud.Dts.SyncJobStopOperation("syncJobStopOperation", new()
     ///     {
-    ///         var syncJobStopOperation = new Tencentcloud.Dts.SyncJobStopOperation("syncJobStopOperation", new Tencentcloud.Dts.SyncJobStopOperationArgs
-    ///         {
-    ///             JobId = "sync-werwfs23",
-    ///         });
-    ///     }
+    ///         JobId = "sync-werwfs23",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/syncJobStopOperation:SyncJobStopOperation")]
-    public partial class SyncJobStopOperation : Pulumi.CustomResource
+    public partial class SyncJobStopOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Synchronization instance id (i.e. identifies a synchronization job).
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         }
     }
 
-    public sealed class SyncJobStopOperationArgs : Pulumi.ResourceArgs
+    public sealed class SyncJobStopOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Synchronization instance id (i.e. identifies a synchronization job).
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public SyncJobStopOperationArgs()
         {
         }
+        public static new SyncJobStopOperationArgs Empty => new SyncJobStopOperationArgs();
     }
 
-    public sealed class SyncJobStopOperationState : Pulumi.ResourceArgs
+    public sealed class SyncJobStopOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Synchronization instance id (i.e. identifies a synchronization job).
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public SyncJobStopOperationState()
         {
         }
+        public static new SyncJobStopOperationState Empty => new SyncJobStopOperationState();
     }
 }

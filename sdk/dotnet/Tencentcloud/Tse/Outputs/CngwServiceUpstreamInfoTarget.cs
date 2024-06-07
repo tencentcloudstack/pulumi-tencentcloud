@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Outputs
     [OutputType]
     public sealed class CngwServiceUpstreamInfoTarget
     {
+        /// <summary>
+        /// created time.
+        /// </summary>
         public readonly string? CreatedTime;
+        /// <summary>
+        /// health.
+        /// </summary>
         public readonly string? Health;
         /// <summary>
         /// host.

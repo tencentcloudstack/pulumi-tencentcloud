@@ -16,17 +16,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// Use this data source to query detailed information of tsf public_config_summary
         /// </summary>
         public static Task<GetPublicConfigSummaryResult> InvokeAsync(GetPublicConfigSummaryArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPublicConfigSummaryResult>("tencentcloud:Tsf/getPublicConfigSummary:getPublicConfigSummary", args ?? new GetPublicConfigSummaryArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPublicConfigSummaryResult>("tencentcloud:Tsf/getPublicConfigSummary:getPublicConfigSummary", args ?? new GetPublicConfigSummaryArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf public_config_summary
         /// </summary>
         public static Output<GetPublicConfigSummaryResult> Invoke(GetPublicConfigSummaryInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPublicConfigSummaryResult>("tencentcloud:Tsf/getPublicConfigSummary:getPublicConfigSummary", args ?? new GetPublicConfigSummaryInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPublicConfigSummaryResult>("tencentcloud:Tsf/getPublicConfigSummary:getPublicConfigSummary", args ?? new GetPublicConfigSummaryInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPublicConfigSummaryArgs : Pulumi.InvokeArgs
+    public sealed class GetPublicConfigSummaryArgs : global::Pulumi.InvokeArgs
     {
         [Input("configIdLists")]
         private List<string>? _configIdLists;
@@ -85,9 +85,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetPublicConfigSummaryArgs()
         {
         }
+        public static new GetPublicConfigSummaryArgs Empty => new GetPublicConfigSummaryArgs();
     }
 
-    public sealed class GetPublicConfigSummaryInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPublicConfigSummaryInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("configIdLists")]
         private InputList<string>? _configIdLists;
@@ -146,6 +147,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetPublicConfigSummaryInvokeArgs()
         {
         }
+        public static new GetPublicConfigSummaryInvokeArgs Empty => new GetPublicConfigSummaryInvokeArgs();
     }
 
 

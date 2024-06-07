@@ -5,16 +5,26 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./rocketmqConsumerGroup";
-export * from "./rocketmqInstance";
-export * from "./rocketmqRole";
-export * from "./rocketmqTopic";
+export { RocketmqConsumerGroupArgs, RocketmqConsumerGroupState } from "./rocketmqConsumerGroup";
+export type RocketmqConsumerGroup = import("./rocketmqConsumerGroup").RocketmqConsumerGroup;
+export const RocketmqConsumerGroup: typeof import("./rocketmqConsumerGroup").RocketmqConsumerGroup = null as any;
+utilities.lazyLoad(exports, ["RocketmqConsumerGroup"], () => require("./rocketmqConsumerGroup"));
 
-// Import resources to register:
-import { RocketmqConsumerGroup } from "./rocketmqConsumerGroup";
-import { RocketmqInstance } from "./rocketmqInstance";
-import { RocketmqRole } from "./rocketmqRole";
-import { RocketmqTopic } from "./rocketmqTopic";
+export { RocketmqInstanceArgs, RocketmqInstanceState } from "./rocketmqInstance";
+export type RocketmqInstance = import("./rocketmqInstance").RocketmqInstance;
+export const RocketmqInstance: typeof import("./rocketmqInstance").RocketmqInstance = null as any;
+utilities.lazyLoad(exports, ["RocketmqInstance"], () => require("./rocketmqInstance"));
+
+export { RocketmqRoleArgs, RocketmqRoleState } from "./rocketmqRole";
+export type RocketmqRole = import("./rocketmqRole").RocketmqRole;
+export const RocketmqRole: typeof import("./rocketmqRole").RocketmqRole = null as any;
+utilities.lazyLoad(exports, ["RocketmqRole"], () => require("./rocketmqRole"));
+
+export { RocketmqTopicArgs, RocketmqTopicState } from "./rocketmqTopic";
+export type RocketmqTopic = import("./rocketmqTopic").RocketmqTopic;
+export const RocketmqTopic: typeof import("./rocketmqTopic").RocketmqTopic = null as any;
+utilities.lazyLoad(exports, ["RocketmqTopic"], () => require("./rocketmqTopic"));
+
 
 const _module = {
     version: utilities.getVersion(),

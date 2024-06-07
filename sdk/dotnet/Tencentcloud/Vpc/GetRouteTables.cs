@@ -15,120 +15,124 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query vpc route tables information.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var config = new Config();
+        ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+        ///     var foo = new Tencentcloud.Vpc.Instance("foo", new()
         ///     {
-        ///         var config = new Config();
-        ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-        ///         var foo = new Tencentcloud.Vpc.Instance("foo", new Tencentcloud.Vpc.InstanceArgs
-        ///         {
-        ///             CidrBlock = "10.0.0.0/16",
-        ///         });
-        ///         var routeTable = new Tencentcloud.Route.Table("routeTable", new Tencentcloud.Route.TableArgs
-        ///         {
-        ///             VpcId = foo.Id,
-        ///             Tags = 
-        ///             {
-        ///                 { "test", "test" },
-        ///             },
-        ///         });
-        ///         var idInstances = Tencentcloud.Vpc.GetRouteTables.Invoke(new Tencentcloud.Vpc.GetRouteTablesInvokeArgs
-        ///         {
-        ///             RouteTableId = routeTable.Id,
-        ///         });
-        ///         var nameInstances = Tencentcloud.Vpc.GetRouteTables.Invoke(new Tencentcloud.Vpc.GetRouteTablesInvokeArgs
-        ///         {
-        ///             Name = routeTable.Name,
-        ///         });
-        ///         var vpcDefaultInstance = Tencentcloud.Vpc.GetRouteTables.Invoke(new Tencentcloud.Vpc.GetRouteTablesInvokeArgs
-        ///         {
-        ///             VpcId = foo.Id,
-        ///             AssociationMain = true,
-        ///         });
-        ///         var tagsInstances = routeTable.Tags.Apply(tags =&gt; Tencentcloud.Vpc.GetRouteTables.Invoke(new Tencentcloud.Vpc.GetRouteTablesInvokeArgs
-        ///         {
-        ///             Tags = tags,
-        ///         }));
-        ///     }
+        ///         CidrBlock = "10.0.0.0/16",
+        ///     });
         /// 
-        /// }
+        ///     var routeTable = new Tencentcloud.Route.Table("routeTable", new()
+        ///     {
+        ///         VpcId = foo.Id,
+        ///         Tags = 
+        ///         {
+        ///             { "test", "test" },
+        ///         },
+        ///     });
+        /// 
+        ///     var idInstances = Tencentcloud.Vpc.GetRouteTables.Invoke(new()
+        ///     {
+        ///         RouteTableId = routeTable.Id,
+        ///     });
+        /// 
+        ///     var nameInstances = Tencentcloud.Vpc.GetRouteTables.Invoke(new()
+        ///     {
+        ///         Name = routeTable.Name,
+        ///     });
+        /// 
+        ///     var vpcDefaultInstance = Tencentcloud.Vpc.GetRouteTables.Invoke(new()
+        ///     {
+        ///         VpcId = foo.Id,
+        ///         AssociationMain = true,
+        ///     });
+        /// 
+        ///     var tagsInstances = Tencentcloud.Vpc.GetRouteTables.Invoke(new()
+        ///     {
+        ///         Tags = routeTable.Tags,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRouteTablesResult> InvokeAsync(GetRouteTablesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRouteTablesResult>("tencentcloud:Vpc/getRouteTables:getRouteTables", args ?? new GetRouteTablesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRouteTablesResult>("tencentcloud:Vpc/getRouteTables:getRouteTables", args ?? new GetRouteTablesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query vpc route tables information.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var config = new Config();
+        ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+        ///     var foo = new Tencentcloud.Vpc.Instance("foo", new()
         ///     {
-        ///         var config = new Config();
-        ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-        ///         var foo = new Tencentcloud.Vpc.Instance("foo", new Tencentcloud.Vpc.InstanceArgs
-        ///         {
-        ///             CidrBlock = "10.0.0.0/16",
-        ///         });
-        ///         var routeTable = new Tencentcloud.Route.Table("routeTable", new Tencentcloud.Route.TableArgs
-        ///         {
-        ///             VpcId = foo.Id,
-        ///             Tags = 
-        ///             {
-        ///                 { "test", "test" },
-        ///             },
-        ///         });
-        ///         var idInstances = Tencentcloud.Vpc.GetRouteTables.Invoke(new Tencentcloud.Vpc.GetRouteTablesInvokeArgs
-        ///         {
-        ///             RouteTableId = routeTable.Id,
-        ///         });
-        ///         var nameInstances = Tencentcloud.Vpc.GetRouteTables.Invoke(new Tencentcloud.Vpc.GetRouteTablesInvokeArgs
-        ///         {
-        ///             Name = routeTable.Name,
-        ///         });
-        ///         var vpcDefaultInstance = Tencentcloud.Vpc.GetRouteTables.Invoke(new Tencentcloud.Vpc.GetRouteTablesInvokeArgs
-        ///         {
-        ///             VpcId = foo.Id,
-        ///             AssociationMain = true,
-        ///         });
-        ///         var tagsInstances = routeTable.Tags.Apply(tags =&gt; Tencentcloud.Vpc.GetRouteTables.Invoke(new Tencentcloud.Vpc.GetRouteTablesInvokeArgs
-        ///         {
-        ///             Tags = tags,
-        ///         }));
-        ///     }
+        ///         CidrBlock = "10.0.0.0/16",
+        ///     });
         /// 
-        /// }
+        ///     var routeTable = new Tencentcloud.Route.Table("routeTable", new()
+        ///     {
+        ///         VpcId = foo.Id,
+        ///         Tags = 
+        ///         {
+        ///             { "test", "test" },
+        ///         },
+        ///     });
+        /// 
+        ///     var idInstances = Tencentcloud.Vpc.GetRouteTables.Invoke(new()
+        ///     {
+        ///         RouteTableId = routeTable.Id,
+        ///     });
+        /// 
+        ///     var nameInstances = Tencentcloud.Vpc.GetRouteTables.Invoke(new()
+        ///     {
+        ///         Name = routeTable.Name,
+        ///     });
+        /// 
+        ///     var vpcDefaultInstance = Tencentcloud.Vpc.GetRouteTables.Invoke(new()
+        ///     {
+        ///         VpcId = foo.Id,
+        ///         AssociationMain = true,
+        ///     });
+        /// 
+        ///     var tagsInstances = Tencentcloud.Vpc.GetRouteTables.Invoke(new()
+        ///     {
+        ///         Tags = routeTable.Tags,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRouteTablesResult> Invoke(GetRouteTablesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRouteTablesResult>("tencentcloud:Vpc/getRouteTables:getRouteTables", args ?? new GetRouteTablesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRouteTablesResult>("tencentcloud:Vpc/getRouteTables:getRouteTables", args ?? new GetRouteTablesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRouteTablesArgs : Pulumi.InvokeArgs
+    public sealed class GetRouteTablesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter the main routing table.
@@ -181,9 +185,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetRouteTablesArgs()
         {
         }
+        public static new GetRouteTablesArgs Empty => new GetRouteTablesArgs();
     }
 
-    public sealed class GetRouteTablesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRouteTablesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter the main routing table.
@@ -236,6 +241,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetRouteTablesInvokeArgs()
         {
         }
+        public static new GetRouteTablesInvokeArgs Empty => new GetRouteTablesInvokeArgs();
     }
 
 

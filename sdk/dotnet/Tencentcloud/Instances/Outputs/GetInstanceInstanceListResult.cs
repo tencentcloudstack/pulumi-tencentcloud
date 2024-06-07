@@ -79,6 +79,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
         /// </summary>
         public readonly int Memory;
         /// <summary>
+        /// Instance os name.
+        /// </summary>
+        public readonly string OsName;
+        /// <summary>
         /// Private IP of the instance.
         /// </summary>
         public readonly string PrivateIp;
@@ -157,6 +161,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
 
             int memory,
 
+            string osName,
+
             string privateIp,
 
             int projectId,
@@ -195,6 +201,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
             InternetChargeType = internetChargeType;
             InternetMaxBandwidthOut = internetMaxBandwidthOut;
             Memory = memory;
+            OsName = osName;
             PrivateIp = privateIp;
             ProjectId = projectId;
             PublicIp = publicIp;

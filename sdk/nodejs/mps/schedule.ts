@@ -2,19 +2,22 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a mps schedule
  *
  * ## Example Usage
+ *
  * ### Create a schedule through COS bucket
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const object = tencentcloud.Cos.getBucketObject({
  *     bucket: `keep-bucket-${local.app_id}`,
@@ -26,12 +29,12 @@ import * as utilities from "../utilities";
  *     acl: "public-read",
  * });
  * const schedule = new tencentcloud.mps.Schedule("schedule", {
- *     scheduleName: `tf_test_mps_schedule_%d`,
+ *     scheduleName: "tf_test_mps_schedule_%d",
  *     trigger: {
  *         type: "CosFileUpload",
  *         cosFileUploadTrigger: {
  *             bucket: object.then(object => object.bucket),
- *             region: `%s`,
+ *             region: "%s",
  *             dir: "/upload/",
  *             formats: [
  *                 "flv",
@@ -142,19 +145,20 @@ import * as utilities from "../utilities";
  *         type: "COS",
  *         cosOutputStorage: {
  *             bucket: output.bucket,
- *             region: `%s`,
+ *             region: "%s",
  *         },
  *     },
  *     outputDir: "output/",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mps schedule can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/schedule:Schedule schedule schedule_id
+ * $ pulumi import tencentcloud:Mps/schedule:Schedule schedule schedule_id
  * ```
  */
 export class Schedule extends pulumi.CustomResource {
@@ -198,6 +202,10 @@ export class Schedule extends pulumi.CustomResource {
      */
     public readonly outputStorage!: pulumi.Output<outputs.Mps.ScheduleOutputStorage | undefined>;
     /**
+     * Resource ID, you need to ensure that the corresponding resource is open. The default is the account main resource ID.
+     */
+    public readonly resourceId!: pulumi.Output<string | undefined>;
+    /**
      * The scheme name (max 128 characters). This name should be unique across your account.
      */
     public readonly scheduleName!: pulumi.Output<string>;
@@ -226,6 +234,7 @@ export class Schedule extends pulumi.CustomResource {
             resourceInputs["activities"] = state ? state.activities : undefined;
             resourceInputs["outputDir"] = state ? state.outputDir : undefined;
             resourceInputs["outputStorage"] = state ? state.outputStorage : undefined;
+            resourceInputs["resourceId"] = state ? state.resourceId : undefined;
             resourceInputs["scheduleName"] = state ? state.scheduleName : undefined;
             resourceInputs["taskNotifyConfig"] = state ? state.taskNotifyConfig : undefined;
             resourceInputs["trigger"] = state ? state.trigger : undefined;
@@ -243,6 +252,7 @@ export class Schedule extends pulumi.CustomResource {
             resourceInputs["activities"] = args ? args.activities : undefined;
             resourceInputs["outputDir"] = args ? args.outputDir : undefined;
             resourceInputs["outputStorage"] = args ? args.outputStorage : undefined;
+            resourceInputs["resourceId"] = args ? args.resourceId : undefined;
             resourceInputs["scheduleName"] = args ? args.scheduleName : undefined;
             resourceInputs["taskNotifyConfig"] = args ? args.taskNotifyConfig : undefined;
             resourceInputs["trigger"] = args ? args.trigger : undefined;
@@ -268,6 +278,10 @@ export interface ScheduleState {
      * The bucket to save the output file. If you do not specify this parameter, the bucket in `Trigger` will be used.
      */
     outputStorage?: pulumi.Input<inputs.Mps.ScheduleOutputStorage>;
+    /**
+     * Resource ID, you need to ensure that the corresponding resource is open. The default is the account main resource ID.
+     */
+    resourceId?: pulumi.Input<string>;
     /**
      * The scheme name (max 128 characters). This name should be unique across your account.
      */
@@ -298,6 +312,10 @@ export interface ScheduleArgs {
      * The bucket to save the output file. If you do not specify this parameter, the bucket in `Trigger` will be used.
      */
     outputStorage?: pulumi.Input<inputs.Mps.ScheduleOutputStorage>;
+    /**
+     * Resource ID, you need to ensure that the corresponding resource is open. The default is the account main resource ID.
+     */
+    resourceId?: pulumi.Input<string>;
     /**
      * The scheme name (max 128 characters). This name should be unique across your account.
      */

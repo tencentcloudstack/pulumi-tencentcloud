@@ -46,6 +46,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Outputs
         /// Type of the resource that the CC http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
         /// </summary>
         public readonly string ResourceType;
+        /// <summary>
+        /// Rule list of the CC self-define http policy.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetCcHttpPoliciesListRuleListResult> RuleLists;
         /// <summary>
         /// Match mode.

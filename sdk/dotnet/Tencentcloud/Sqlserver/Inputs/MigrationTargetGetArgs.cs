@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
 {
 
-    public sealed class MigrationTargetGetArgs : Pulumi.ResourceArgs
+    public sealed class MigrationTargetGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of the migration target instance, in the format mssql-si2823jyl.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
         public MigrationTargetGetArgs()
         {
         }
+        public static new MigrationTargetGetArgs Empty => new MigrationTargetGetArgs();
     }
 }

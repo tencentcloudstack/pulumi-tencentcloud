@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain slow_log_user_sql_advice
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var test = Tencentcloud.Dbbrain.GetSlowLogUserSqlAdvice.Invoke(new()
         ///     {
-        ///         var test = Output.Create(Tencentcloud.Dbbrain.GetSlowLogUserSqlAdvice.InvokeAsync(new Tencentcloud.Dbbrain.GetSlowLogUserSqlAdviceArgs
-        ///         {
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             SqlText = "%s",
-        ///         }));
-        ///     }
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         SqlText = "%s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSlowLogUserSqlAdviceResult> InvokeAsync(GetSlowLogUserSqlAdviceArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogUserSqlAdviceResult>("tencentcloud:Dbbrain/getSlowLogUserSqlAdvice:getSlowLogUserSqlAdvice", args ?? new GetSlowLogUserSqlAdviceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogUserSqlAdviceResult>("tencentcloud:Dbbrain/getSlowLogUserSqlAdvice:getSlowLogUserSqlAdvice", args ?? new GetSlowLogUserSqlAdviceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain slow_log_user_sql_advice
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var test = Tencentcloud.Dbbrain.GetSlowLogUserSqlAdvice.Invoke(new()
         ///     {
-        ///         var test = Output.Create(Tencentcloud.Dbbrain.GetSlowLogUserSqlAdvice.InvokeAsync(new Tencentcloud.Dbbrain.GetSlowLogUserSqlAdviceArgs
-        ///         {
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             SqlText = "%s",
-        ///         }));
-        ///     }
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         SqlText = "%s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSlowLogUserSqlAdviceResult> Invoke(GetSlowLogUserSqlAdviceInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSlowLogUserSqlAdviceResult>("tencentcloud:Dbbrain/getSlowLogUserSqlAdvice:getSlowLogUserSqlAdvice", args ?? new GetSlowLogUserSqlAdviceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogUserSqlAdviceResult>("tencentcloud:Dbbrain/getSlowLogUserSqlAdvice:getSlowLogUserSqlAdvice", args ?? new GetSlowLogUserSqlAdviceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSlowLogUserSqlAdviceArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowLogUserSqlAdviceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -111,9 +105,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSlowLogUserSqlAdviceArgs()
         {
         }
+        public static new GetSlowLogUserSqlAdviceArgs Empty => new GetSlowLogUserSqlAdviceArgs();
     }
 
-    public sealed class GetSlowLogUserSqlAdviceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowLogUserSqlAdviceInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -148,6 +143,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSlowLogUserSqlAdviceInvokeArgs()
         {
         }
+        public static new GetSlowLogUserSqlAdviceInvokeArgs Empty => new GetSlowLogUserSqlAdviceInvokeArgs();
     }
 
 

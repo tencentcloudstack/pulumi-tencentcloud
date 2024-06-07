@@ -8,26 +8,31 @@ import * as utilities from "../utilities";
  * Provides a resource to create a CLB listener.
  *
  * ## Example Usage
+ *
  * ### HTTP Listener
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const hTTPListener = new tencentcloud.Clb.Listener("HTTP_listener", {
+ * const hTTPListener = new tencentcloud.clb.Listener("hTTPListener", {
  *     clbId: "lb-0lh5au7v",
  *     listenerName: "test_listener",
  *     port: 80,
  *     protocol: "HTTP",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### TCP/UDP Listener
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tCPListener = new tencentcloud.Clb.Listener("TCP_listener", {
+ * const tCPListener = new tencentcloud.clb.Listener("tCPListener", {
  *     clbId: "lb-0lh5au7v",
  *     healthCheckHealthNum: 3,
  *     healthCheckHttpCode: 2,
@@ -46,11 +51,14 @@ import * as utilities from "../utilities";
  *     sessionExpireTime: 30,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### TCP/UDP Listener with tcp health check
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const listenerTcp = new tencentcloud.clb.Listener("listenerTcp", {
  *     clbId: tencentcloud_clb_instance.clb_basic.id,
@@ -68,11 +76,14 @@ import * as utilities from "../utilities";
  *     healthCheckPort: 200,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### TCP/UDP Listener with http health check
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const listenerTcp = new tencentcloud.clb.Listener("listenerTcp", {
  *     clbId: tencentcloud_clb_instance.clb_basic.id,
@@ -94,11 +105,14 @@ import * as utilities from "../utilities";
  *     healthCheckHttpPath: "/",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### TCP/UDP Listener with customer health check
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const listenerTcp = new tencentcloud.clb.Listener("listenerTcp", {
  *     clbId: tencentcloud_clb_instance.clb_basic.id,
@@ -119,13 +133,16 @@ import * as utilities from "../utilities";
  *     targetType: "TARGETGROUP",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### HTTPS Listener
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const hTTPSListener = new tencentcloud.Clb.Listener("HTTPS_listener", {
+ * const hTTPSListener = new tencentcloud.clb.Listener("hTTPSListener", {
  *     certificateCaId: "VfqO4zkB",
  *     certificateId: "VjANRdz8",
  *     certificateSslMode: "MUTUAL",
@@ -136,13 +153,16 @@ import * as utilities from "../utilities";
  *     sniSwitch: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### TCP SSL Listener
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tCPSSLListener = new tencentcloud.Clb.Listener("TCPSSL_listener", {
+ * const tCPSSLListener = new tencentcloud.clb.Listener("tCPSSLListener", {
  *     certificateCaId: "VfqO4zkB",
  *     certificateId: "VjANRdz8",
  *     certificateSslMode: "MUTUAL",
@@ -159,11 +179,14 @@ import * as utilities from "../utilities";
  *     targetType: "TARGETGROUP",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Port Range Listener
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const clbBasic = new tencentcloud.clb.Instance("clbBasic", {
  *     networkType: "OPEN",
@@ -180,13 +203,14 @@ import * as utilities from "../utilities";
  *     targetType: "NODE",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CLB listener can be imported using the id (version >= 1.47.0), e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clb/listener:Listener foo lb-7a0t6zqb#lbl-hh141sn9
+ * $ pulumi import tencentcloud:Clb/listener:Listener foo lb-7a0t6zqb#lbl-hh141sn9
  * ```
  */
 export class Listener extends pulumi.CustomResource {

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class MachineGroupMachineGroupTypeGetArgs : Pulumi.ResourceArgs
+    public sealed class MachineGroupMachineGroupTypeGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Machine group type. Valid values: ip: the IP addresses of collection machines are stored in Values of the machine group; label: the tags of the machines are stored in Values of the machine group.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public MachineGroupMachineGroupTypeGetArgs()
         {
         }
+        public static new MachineGroupMachineGroupTypeGetArgs Empty => new MachineGroupMachineGroupTypeGetArgs();
     }
 }

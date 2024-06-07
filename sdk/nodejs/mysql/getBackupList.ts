@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const defaultBackupList = pulumi.output(tencentcloud.Mysql.getBackupList({
+ * const default = tencentcloud.Mysql.getBackupList({
  *     maxNumber: 10,
  *     mysqlId: "terraform-test-local-database",
  *     resultOutputFile: "mytestpath",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBackupList(args: GetBackupListArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getBackupList:getBackupList", {
         "maxNumber": args.maxNumber,
         "mysqlId": args.mysqlId,
@@ -68,9 +68,26 @@ export interface GetBackupListResult {
     readonly mysqlId: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query the list of backup databases.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const default = tencentcloud.Mysql.getBackupList({
+ *     maxNumber: 10,
+ *     mysqlId: "terraform-test-local-database",
+ *     resultOutputFile: "mytestpath",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBackupListOutput(args: GetBackupListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBackupListResult> {
-    return pulumi.output(args).apply(a => getBackupList(a, opts))
+    return pulumi.output(args).apply((a: any) => getBackupList(a, opts))
 }
 
 /**

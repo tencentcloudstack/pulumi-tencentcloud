@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class ScenarioLoadArgs : Pulumi.ResourceArgs
+    public sealed class ScenarioLoadArgs : global::Pulumi.ResourceArgs
     {
         [Input("geoRegionsLoadDistributions")]
         private InputList<Inputs.ScenarioLoadGeoRegionsLoadDistributionArgs>? _geoRegionsLoadDistributions;
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public ScenarioLoadArgs()
         {
         }
+        public static new ScenarioLoadArgs Empty => new ScenarioLoadArgs();
     }
 }

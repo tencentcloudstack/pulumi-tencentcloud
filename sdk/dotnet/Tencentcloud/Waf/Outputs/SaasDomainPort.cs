@@ -14,6 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Outputs
     [OutputType]
     public sealed class SaasDomainPort
     {
+        /// <summary>
+        /// Nginx server ID.
+        /// </summary>
         public readonly string? NginxServerId;
         /// <summary>
         /// Listening port.

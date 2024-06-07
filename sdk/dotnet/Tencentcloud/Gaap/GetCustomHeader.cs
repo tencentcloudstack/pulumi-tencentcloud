@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap custom header
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var customHeader = Tencentcloud.Gaap.GetCustomHeader.Invoke(new()
         ///     {
-        ///         var customHeader = Output.Create(Tencentcloud.Gaap.GetCustomHeader.InvokeAsync(new Tencentcloud.Gaap.GetCustomHeaderArgs
-        ///         {
-        ///             RuleId = "rule-9sdhv655",
-        ///         }));
-        ///     }
+        ///         RuleId = "rule-hddrxgpd",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCustomHeaderResult> InvokeAsync(GetCustomHeaderArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCustomHeaderResult>("tencentcloud:Gaap/getCustomHeader:getCustomHeader", args ?? new GetCustomHeaderArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCustomHeaderResult>("tencentcloud:Gaap/getCustomHeader:getCustomHeader", args ?? new GetCustomHeaderArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap custom header
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var customHeader = Tencentcloud.Gaap.GetCustomHeader.Invoke(new()
         ///     {
-        ///         var customHeader = Output.Create(Tencentcloud.Gaap.GetCustomHeader.InvokeAsync(new Tencentcloud.Gaap.GetCustomHeaderArgs
-        ///         {
-        ///             RuleId = "rule-9sdhv655",
-        ///         }));
-        ///     }
+        ///         RuleId = "rule-hddrxgpd",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCustomHeaderResult> Invoke(GetCustomHeaderInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCustomHeaderResult>("tencentcloud:Gaap/getCustomHeader:getCustomHeader", args ?? new GetCustomHeaderInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCustomHeaderResult>("tencentcloud:Gaap/getCustomHeader:getCustomHeader", args ?? new GetCustomHeaderInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCustomHeaderArgs : Pulumi.InvokeArgs
+    public sealed class GetCustomHeaderArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetCustomHeaderArgs()
         {
         }
+        public static new GetCustomHeaderArgs Empty => new GetCustomHeaderArgs();
     }
 
-    public sealed class GetCustomHeaderInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCustomHeaderInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetCustomHeaderInvokeArgs()
         {
         }
+        public static new GetCustomHeaderInvokeArgs Empty => new GetCustomHeaderInvokeArgs();
     }
 
 

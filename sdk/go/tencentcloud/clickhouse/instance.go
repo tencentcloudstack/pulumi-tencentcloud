@@ -7,99 +7,109 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a clickhouse instance.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clickhouse.NewInstance(ctx, "cdwchInstance", &Clickhouse.InstanceArgs{
-// 			ChargeType: pulumi.String("POSTPAID_BY_HOUR"),
-// 			CommonSpec: &clickhouse.InstanceCommonSpecArgs{
-// 				Count:    pulumi.Int(3),
-// 				DiskSize: pulumi.Int(300),
-// 				SpecName: pulumi.String("SCH6"),
-// 			},
-// 			DataSpec: &clickhouse.InstanceDataSpecArgs{
-// 				Count:    pulumi.Int(2),
-// 				DiskSize: pulumi.Int(300),
-// 				SpecName: pulumi.String("SCH6"),
-// 			},
-// 			HaFlag:         pulumi.Bool(true),
-// 			InstanceName:   pulumi.String("tf-test-clickhouse"),
-// 			ProductVersion: pulumi.String("21.8.12.29"),
-// 			SubnetId:       pulumi.String("subnet-xxxxxx"),
-// 			VpcId:          pulumi.String("vpc-xxxxxx"),
-// 			Zone:           pulumi.String("ap-guangzhou-6"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clickhouse.NewInstance(ctx, "cdwchInstance", &Clickhouse.InstanceArgs{
+//				ChargeType: pulumi.String("POSTPAID_BY_HOUR"),
+//				CommonSpec: &clickhouse.InstanceCommonSpecArgs{
+//					Count:    pulumi.Int(3),
+//					DiskSize: pulumi.Int(300),
+//					SpecName: pulumi.String("SCH6"),
+//				},
+//				DataSpec: &clickhouse.InstanceDataSpecArgs{
+//					Count:    pulumi.Int(2),
+//					DiskSize: pulumi.Int(300),
+//					SpecName: pulumi.String("SCH6"),
+//				},
+//				HaFlag:         pulumi.Bool(true),
+//				InstanceName:   pulumi.String("tf-test-clickhouse"),
+//				ProductVersion: pulumi.String("21.8.12.29"),
+//				SubnetId:       pulumi.String("subnet-xxxxxx"),
+//				VpcId:          pulumi.String("vpc-xxxxxx"),
+//				Zone:           pulumi.String("ap-guangzhou-6"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### PREPAID instance
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clickhouse.NewInstance(ctx, "cdwchInstancePrepaid", &Clickhouse.InstanceArgs{
-// 			ChargeType: pulumi.String("PREPAID"),
-// 			CommonSpec: &clickhouse.InstanceCommonSpecArgs{
-// 				Count:    pulumi.Int(3),
-// 				DiskSize: pulumi.Int(300),
-// 				SpecName: pulumi.String("SCH6"),
-// 			},
-// 			DataSpec: &clickhouse.InstanceDataSpecArgs{
-// 				Count:    pulumi.Int(2),
-// 				DiskSize: pulumi.Int(300),
-// 				SpecName: pulumi.String("SCH6"),
-// 			},
-// 			HaFlag:         pulumi.Bool(true),
-// 			InstanceName:   pulumi.String("tf-test-clickhouse-prepaid"),
-// 			ProductVersion: pulumi.String("21.8.12.29"),
-// 			RenewFlag:      pulumi.Int(1),
-// 			SubnetId:       pulumi.String("subnet-xxxxxx"),
-// 			TimeSpan:       pulumi.Int(1),
-// 			VpcId:          pulumi.String("vpc-xxxxxx"),
-// 			Zone:           pulumi.String("ap-guangzhou-6"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clickhouse.NewInstance(ctx, "cdwchInstancePrepaid", &Clickhouse.InstanceArgs{
+//				ChargeType: pulumi.String("PREPAID"),
+//				CommonSpec: &clickhouse.InstanceCommonSpecArgs{
+//					Count:    pulumi.Int(3),
+//					DiskSize: pulumi.Int(300),
+//					SpecName: pulumi.String("SCH6"),
+//				},
+//				DataSpec: &clickhouse.InstanceDataSpecArgs{
+//					Count:    pulumi.Int(2),
+//					DiskSize: pulumi.Int(300),
+//					SpecName: pulumi.String("SCH6"),
+//				},
+//				HaFlag:         pulumi.Bool(true),
+//				InstanceName:   pulumi.String("tf-test-clickhouse-prepaid"),
+//				ProductVersion: pulumi.String("21.8.12.29"),
+//				RenewFlag:      pulumi.Int(1),
+//				SubnetId:       pulumi.String("subnet-xxxxxx"),
+//				TimeSpan:       pulumi.Int(1),
+//				VpcId:          pulumi.String("vpc-xxxxxx"),
+//				Zone:           pulumi.String("ap-guangzhou-6"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // Clickhouse instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clickhouse/instance:Instance foo cdwch-xxxxxx
+// $ pulumi import tencentcloud:Clickhouse/instance:Instance foo cdwch-xxxxxx
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -171,7 +181,7 @@ func NewInstance(ctx *pulumi.Context,
 	if args.Zone == nil {
 		return nil, errors.New("invalid value for required argument 'Zone'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Clickhouse/instance:Instance", name, args, &resource, opts...)
 	if err != nil {
@@ -368,7 +378,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -393,7 +403,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

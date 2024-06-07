@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap and statistics proxy
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groupAndStatisticsProxy = Tencentcloud.Gaap.GetGroupAndStatisticsProxy.Invoke(new()
         ///     {
-        ///         var groupAndStatisticsProxy = Output.Create(Tencentcloud.Gaap.GetGroupAndStatisticsProxy.InvokeAsync(new Tencentcloud.Gaap.GetGroupAndStatisticsProxyArgs
-        ///         {
-        ///             ProjectId = 0,
-        ///         }));
-        ///     }
+        ///         ProjectId = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGroupAndStatisticsProxyResult> InvokeAsync(GetGroupAndStatisticsProxyArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGroupAndStatisticsProxyResult>("tencentcloud:Gaap/getGroupAndStatisticsProxy:getGroupAndStatisticsProxy", args ?? new GetGroupAndStatisticsProxyArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupAndStatisticsProxyResult>("tencentcloud:Gaap/getGroupAndStatisticsProxy:getGroupAndStatisticsProxy", args ?? new GetGroupAndStatisticsProxyArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap and statistics proxy
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groupAndStatisticsProxy = Tencentcloud.Gaap.GetGroupAndStatisticsProxy.Invoke(new()
         ///     {
-        ///         var groupAndStatisticsProxy = Output.Create(Tencentcloud.Gaap.GetGroupAndStatisticsProxy.InvokeAsync(new Tencentcloud.Gaap.GetGroupAndStatisticsProxyArgs
-        ///         {
-        ///             ProjectId = 0,
-        ///         }));
-        ///     }
+        ///         ProjectId = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGroupAndStatisticsProxyResult> Invoke(GetGroupAndStatisticsProxyInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGroupAndStatisticsProxyResult>("tencentcloud:Gaap/getGroupAndStatisticsProxy:getGroupAndStatisticsProxy", args ?? new GetGroupAndStatisticsProxyInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGroupAndStatisticsProxyResult>("tencentcloud:Gaap/getGroupAndStatisticsProxy:getGroupAndStatisticsProxy", args ?? new GetGroupAndStatisticsProxyInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGroupAndStatisticsProxyArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupAndStatisticsProxyArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Project Id.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetGroupAndStatisticsProxyArgs()
         {
         }
+        public static new GetGroupAndStatisticsProxyArgs Empty => new GetGroupAndStatisticsProxyArgs();
     }
 
-    public sealed class GetGroupAndStatisticsProxyInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupAndStatisticsProxyInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Project Id.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetGroupAndStatisticsProxyInvokeArgs()
         {
         }
+        public static new GetGroupAndStatisticsProxyInvokeArgs Empty => new GetGroupAndStatisticsProxyInvokeArgs();
     }
 
 

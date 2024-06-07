@@ -5,41 +5,146 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./dbDiagReportTask";
-export * from "./getDbSpaceStatus";
-export * from "./getDiagDbInstances";
-export * from "./getDiagEvent";
-export * from "./getDiagEvents";
-export * from "./getDiagHistory";
-export * from "./getHealthScores";
-export * from "./getMysqlProcessList";
-export * from "./getNoPrimaryKeyTables";
-export * from "./getRedisTopBigKeys";
-export * from "./getRedisTopKeyPrefixList";
-export * from "./getSecurityAuditLogDownloadUrls";
-export * from "./getSecurityAuditLogExportTasks";
-export * from "./getSlowLogTimeSeriesStats";
-export * from "./getSlowLogTopSqls";
-export * from "./getSlowLogUserHostStats";
-export * from "./getSlowLogUserSqlAdvice";
-export * from "./getSlowLogs";
-export * from "./getSqlFilters";
-export * from "./getSqlTemplates";
-export * from "./getTopSpaceSchemaTimeSeries";
-export * from "./getTopSpaceSchemas";
-export * from "./getTopSpaceTableTimeSeries";
-export * from "./getTopSpaceTables";
-export * from "./modifyDiagDbInstanceOperation";
-export * from "./securityAuditLogExportTask";
-export * from "./sqlFilter";
-export * from "./tdsqlAuditLog";
+export { DbDiagReportTaskArgs, DbDiagReportTaskState } from "./dbDiagReportTask";
+export type DbDiagReportTask = import("./dbDiagReportTask").DbDiagReportTask;
+export const DbDiagReportTask: typeof import("./dbDiagReportTask").DbDiagReportTask = null as any;
+utilities.lazyLoad(exports, ["DbDiagReportTask"], () => require("./dbDiagReportTask"));
 
-// Import resources to register:
-import { DbDiagReportTask } from "./dbDiagReportTask";
-import { ModifyDiagDbInstanceOperation } from "./modifyDiagDbInstanceOperation";
-import { SecurityAuditLogExportTask } from "./securityAuditLogExportTask";
-import { SqlFilter } from "./sqlFilter";
-import { TdsqlAuditLog } from "./tdsqlAuditLog";
+export { GetDbSpaceStatusArgs, GetDbSpaceStatusResult, GetDbSpaceStatusOutputArgs } from "./getDbSpaceStatus";
+export const getDbSpaceStatus: typeof import("./getDbSpaceStatus").getDbSpaceStatus = null as any;
+export const getDbSpaceStatusOutput: typeof import("./getDbSpaceStatus").getDbSpaceStatusOutput = null as any;
+utilities.lazyLoad(exports, ["getDbSpaceStatus","getDbSpaceStatusOutput"], () => require("./getDbSpaceStatus"));
+
+export { GetDiagDbInstancesArgs, GetDiagDbInstancesResult, GetDiagDbInstancesOutputArgs } from "./getDiagDbInstances";
+export const getDiagDbInstances: typeof import("./getDiagDbInstances").getDiagDbInstances = null as any;
+export const getDiagDbInstancesOutput: typeof import("./getDiagDbInstances").getDiagDbInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getDiagDbInstances","getDiagDbInstancesOutput"], () => require("./getDiagDbInstances"));
+
+export { GetDiagEventArgs, GetDiagEventResult, GetDiagEventOutputArgs } from "./getDiagEvent";
+export const getDiagEvent: typeof import("./getDiagEvent").getDiagEvent = null as any;
+export const getDiagEventOutput: typeof import("./getDiagEvent").getDiagEventOutput = null as any;
+utilities.lazyLoad(exports, ["getDiagEvent","getDiagEventOutput"], () => require("./getDiagEvent"));
+
+export { GetDiagEventsArgs, GetDiagEventsResult, GetDiagEventsOutputArgs } from "./getDiagEvents";
+export const getDiagEvents: typeof import("./getDiagEvents").getDiagEvents = null as any;
+export const getDiagEventsOutput: typeof import("./getDiagEvents").getDiagEventsOutput = null as any;
+utilities.lazyLoad(exports, ["getDiagEvents","getDiagEventsOutput"], () => require("./getDiagEvents"));
+
+export { GetDiagHistoryArgs, GetDiagHistoryResult, GetDiagHistoryOutputArgs } from "./getDiagHistory";
+export const getDiagHistory: typeof import("./getDiagHistory").getDiagHistory = null as any;
+export const getDiagHistoryOutput: typeof import("./getDiagHistory").getDiagHistoryOutput = null as any;
+utilities.lazyLoad(exports, ["getDiagHistory","getDiagHistoryOutput"], () => require("./getDiagHistory"));
+
+export { GetHealthScoresArgs, GetHealthScoresResult, GetHealthScoresOutputArgs } from "./getHealthScores";
+export const getHealthScores: typeof import("./getHealthScores").getHealthScores = null as any;
+export const getHealthScoresOutput: typeof import("./getHealthScores").getHealthScoresOutput = null as any;
+utilities.lazyLoad(exports, ["getHealthScores","getHealthScoresOutput"], () => require("./getHealthScores"));
+
+export { GetMysqlProcessListArgs, GetMysqlProcessListResult, GetMysqlProcessListOutputArgs } from "./getMysqlProcessList";
+export const getMysqlProcessList: typeof import("./getMysqlProcessList").getMysqlProcessList = null as any;
+export const getMysqlProcessListOutput: typeof import("./getMysqlProcessList").getMysqlProcessListOutput = null as any;
+utilities.lazyLoad(exports, ["getMysqlProcessList","getMysqlProcessListOutput"], () => require("./getMysqlProcessList"));
+
+export { GetNoPrimaryKeyTablesArgs, GetNoPrimaryKeyTablesResult, GetNoPrimaryKeyTablesOutputArgs } from "./getNoPrimaryKeyTables";
+export const getNoPrimaryKeyTables: typeof import("./getNoPrimaryKeyTables").getNoPrimaryKeyTables = null as any;
+export const getNoPrimaryKeyTablesOutput: typeof import("./getNoPrimaryKeyTables").getNoPrimaryKeyTablesOutput = null as any;
+utilities.lazyLoad(exports, ["getNoPrimaryKeyTables","getNoPrimaryKeyTablesOutput"], () => require("./getNoPrimaryKeyTables"));
+
+export { GetRedisTopBigKeysArgs, GetRedisTopBigKeysResult, GetRedisTopBigKeysOutputArgs } from "./getRedisTopBigKeys";
+export const getRedisTopBigKeys: typeof import("./getRedisTopBigKeys").getRedisTopBigKeys = null as any;
+export const getRedisTopBigKeysOutput: typeof import("./getRedisTopBigKeys").getRedisTopBigKeysOutput = null as any;
+utilities.lazyLoad(exports, ["getRedisTopBigKeys","getRedisTopBigKeysOutput"], () => require("./getRedisTopBigKeys"));
+
+export { GetRedisTopKeyPrefixListArgs, GetRedisTopKeyPrefixListResult, GetRedisTopKeyPrefixListOutputArgs } from "./getRedisTopKeyPrefixList";
+export const getRedisTopKeyPrefixList: typeof import("./getRedisTopKeyPrefixList").getRedisTopKeyPrefixList = null as any;
+export const getRedisTopKeyPrefixListOutput: typeof import("./getRedisTopKeyPrefixList").getRedisTopKeyPrefixListOutput = null as any;
+utilities.lazyLoad(exports, ["getRedisTopKeyPrefixList","getRedisTopKeyPrefixListOutput"], () => require("./getRedisTopKeyPrefixList"));
+
+export { GetSecurityAuditLogDownloadUrlsArgs, GetSecurityAuditLogDownloadUrlsResult, GetSecurityAuditLogDownloadUrlsOutputArgs } from "./getSecurityAuditLogDownloadUrls";
+export const getSecurityAuditLogDownloadUrls: typeof import("./getSecurityAuditLogDownloadUrls").getSecurityAuditLogDownloadUrls = null as any;
+export const getSecurityAuditLogDownloadUrlsOutput: typeof import("./getSecurityAuditLogDownloadUrls").getSecurityAuditLogDownloadUrlsOutput = null as any;
+utilities.lazyLoad(exports, ["getSecurityAuditLogDownloadUrls","getSecurityAuditLogDownloadUrlsOutput"], () => require("./getSecurityAuditLogDownloadUrls"));
+
+export { GetSecurityAuditLogExportTasksArgs, GetSecurityAuditLogExportTasksResult, GetSecurityAuditLogExportTasksOutputArgs } from "./getSecurityAuditLogExportTasks";
+export const getSecurityAuditLogExportTasks: typeof import("./getSecurityAuditLogExportTasks").getSecurityAuditLogExportTasks = null as any;
+export const getSecurityAuditLogExportTasksOutput: typeof import("./getSecurityAuditLogExportTasks").getSecurityAuditLogExportTasksOutput = null as any;
+utilities.lazyLoad(exports, ["getSecurityAuditLogExportTasks","getSecurityAuditLogExportTasksOutput"], () => require("./getSecurityAuditLogExportTasks"));
+
+export { GetSlowLogTimeSeriesStatsArgs, GetSlowLogTimeSeriesStatsResult, GetSlowLogTimeSeriesStatsOutputArgs } from "./getSlowLogTimeSeriesStats";
+export const getSlowLogTimeSeriesStats: typeof import("./getSlowLogTimeSeriesStats").getSlowLogTimeSeriesStats = null as any;
+export const getSlowLogTimeSeriesStatsOutput: typeof import("./getSlowLogTimeSeriesStats").getSlowLogTimeSeriesStatsOutput = null as any;
+utilities.lazyLoad(exports, ["getSlowLogTimeSeriesStats","getSlowLogTimeSeriesStatsOutput"], () => require("./getSlowLogTimeSeriesStats"));
+
+export { GetSlowLogTopSqlsArgs, GetSlowLogTopSqlsResult, GetSlowLogTopSqlsOutputArgs } from "./getSlowLogTopSqls";
+export const getSlowLogTopSqls: typeof import("./getSlowLogTopSqls").getSlowLogTopSqls = null as any;
+export const getSlowLogTopSqlsOutput: typeof import("./getSlowLogTopSqls").getSlowLogTopSqlsOutput = null as any;
+utilities.lazyLoad(exports, ["getSlowLogTopSqls","getSlowLogTopSqlsOutput"], () => require("./getSlowLogTopSqls"));
+
+export { GetSlowLogUserHostStatsArgs, GetSlowLogUserHostStatsResult, GetSlowLogUserHostStatsOutputArgs } from "./getSlowLogUserHostStats";
+export const getSlowLogUserHostStats: typeof import("./getSlowLogUserHostStats").getSlowLogUserHostStats = null as any;
+export const getSlowLogUserHostStatsOutput: typeof import("./getSlowLogUserHostStats").getSlowLogUserHostStatsOutput = null as any;
+utilities.lazyLoad(exports, ["getSlowLogUserHostStats","getSlowLogUserHostStatsOutput"], () => require("./getSlowLogUserHostStats"));
+
+export { GetSlowLogUserSqlAdviceArgs, GetSlowLogUserSqlAdviceResult, GetSlowLogUserSqlAdviceOutputArgs } from "./getSlowLogUserSqlAdvice";
+export const getSlowLogUserSqlAdvice: typeof import("./getSlowLogUserSqlAdvice").getSlowLogUserSqlAdvice = null as any;
+export const getSlowLogUserSqlAdviceOutput: typeof import("./getSlowLogUserSqlAdvice").getSlowLogUserSqlAdviceOutput = null as any;
+utilities.lazyLoad(exports, ["getSlowLogUserSqlAdvice","getSlowLogUserSqlAdviceOutput"], () => require("./getSlowLogUserSqlAdvice"));
+
+export { GetSlowLogsArgs, GetSlowLogsResult, GetSlowLogsOutputArgs } from "./getSlowLogs";
+export const getSlowLogs: typeof import("./getSlowLogs").getSlowLogs = null as any;
+export const getSlowLogsOutput: typeof import("./getSlowLogs").getSlowLogsOutput = null as any;
+utilities.lazyLoad(exports, ["getSlowLogs","getSlowLogsOutput"], () => require("./getSlowLogs"));
+
+export { GetSqlFiltersArgs, GetSqlFiltersResult, GetSqlFiltersOutputArgs } from "./getSqlFilters";
+export const getSqlFilters: typeof import("./getSqlFilters").getSqlFilters = null as any;
+export const getSqlFiltersOutput: typeof import("./getSqlFilters").getSqlFiltersOutput = null as any;
+utilities.lazyLoad(exports, ["getSqlFilters","getSqlFiltersOutput"], () => require("./getSqlFilters"));
+
+export { GetSqlTemplatesArgs, GetSqlTemplatesResult, GetSqlTemplatesOutputArgs } from "./getSqlTemplates";
+export const getSqlTemplates: typeof import("./getSqlTemplates").getSqlTemplates = null as any;
+export const getSqlTemplatesOutput: typeof import("./getSqlTemplates").getSqlTemplatesOutput = null as any;
+utilities.lazyLoad(exports, ["getSqlTemplates","getSqlTemplatesOutput"], () => require("./getSqlTemplates"));
+
+export { GetTopSpaceSchemaTimeSeriesArgs, GetTopSpaceSchemaTimeSeriesResult, GetTopSpaceSchemaTimeSeriesOutputArgs } from "./getTopSpaceSchemaTimeSeries";
+export const getTopSpaceSchemaTimeSeries: typeof import("./getTopSpaceSchemaTimeSeries").getTopSpaceSchemaTimeSeries = null as any;
+export const getTopSpaceSchemaTimeSeriesOutput: typeof import("./getTopSpaceSchemaTimeSeries").getTopSpaceSchemaTimeSeriesOutput = null as any;
+utilities.lazyLoad(exports, ["getTopSpaceSchemaTimeSeries","getTopSpaceSchemaTimeSeriesOutput"], () => require("./getTopSpaceSchemaTimeSeries"));
+
+export { GetTopSpaceSchemasArgs, GetTopSpaceSchemasResult, GetTopSpaceSchemasOutputArgs } from "./getTopSpaceSchemas";
+export const getTopSpaceSchemas: typeof import("./getTopSpaceSchemas").getTopSpaceSchemas = null as any;
+export const getTopSpaceSchemasOutput: typeof import("./getTopSpaceSchemas").getTopSpaceSchemasOutput = null as any;
+utilities.lazyLoad(exports, ["getTopSpaceSchemas","getTopSpaceSchemasOutput"], () => require("./getTopSpaceSchemas"));
+
+export { GetTopSpaceTableTimeSeriesArgs, GetTopSpaceTableTimeSeriesResult, GetTopSpaceTableTimeSeriesOutputArgs } from "./getTopSpaceTableTimeSeries";
+export const getTopSpaceTableTimeSeries: typeof import("./getTopSpaceTableTimeSeries").getTopSpaceTableTimeSeries = null as any;
+export const getTopSpaceTableTimeSeriesOutput: typeof import("./getTopSpaceTableTimeSeries").getTopSpaceTableTimeSeriesOutput = null as any;
+utilities.lazyLoad(exports, ["getTopSpaceTableTimeSeries","getTopSpaceTableTimeSeriesOutput"], () => require("./getTopSpaceTableTimeSeries"));
+
+export { GetTopSpaceTablesArgs, GetTopSpaceTablesResult, GetTopSpaceTablesOutputArgs } from "./getTopSpaceTables";
+export const getTopSpaceTables: typeof import("./getTopSpaceTables").getTopSpaceTables = null as any;
+export const getTopSpaceTablesOutput: typeof import("./getTopSpaceTables").getTopSpaceTablesOutput = null as any;
+utilities.lazyLoad(exports, ["getTopSpaceTables","getTopSpaceTablesOutput"], () => require("./getTopSpaceTables"));
+
+export { ModifyDiagDbInstanceOperationArgs, ModifyDiagDbInstanceOperationState } from "./modifyDiagDbInstanceOperation";
+export type ModifyDiagDbInstanceOperation = import("./modifyDiagDbInstanceOperation").ModifyDiagDbInstanceOperation;
+export const ModifyDiagDbInstanceOperation: typeof import("./modifyDiagDbInstanceOperation").ModifyDiagDbInstanceOperation = null as any;
+utilities.lazyLoad(exports, ["ModifyDiagDbInstanceOperation"], () => require("./modifyDiagDbInstanceOperation"));
+
+export { SecurityAuditLogExportTaskArgs, SecurityAuditLogExportTaskState } from "./securityAuditLogExportTask";
+export type SecurityAuditLogExportTask = import("./securityAuditLogExportTask").SecurityAuditLogExportTask;
+export const SecurityAuditLogExportTask: typeof import("./securityAuditLogExportTask").SecurityAuditLogExportTask = null as any;
+utilities.lazyLoad(exports, ["SecurityAuditLogExportTask"], () => require("./securityAuditLogExportTask"));
+
+export { SqlFilterArgs, SqlFilterState } from "./sqlFilter";
+export type SqlFilter = import("./sqlFilter").SqlFilter;
+export const SqlFilter: typeof import("./sqlFilter").SqlFilter = null as any;
+utilities.lazyLoad(exports, ["SqlFilter"], () => require("./sqlFilter"));
+
+export { TdsqlAuditLogArgs, TdsqlAuditLogState } from "./tdsqlAuditLog";
+export type TdsqlAuditLog = import("./tdsqlAuditLog").TdsqlAuditLog;
+export const TdsqlAuditLog: typeof import("./tdsqlAuditLog").TdsqlAuditLog = null as any;
+utilities.lazyLoad(exports, ["TdsqlAuditLog"], () => require("./tdsqlAuditLog"));
+
 
 const _module = {
     version: utilities.getVersion(),

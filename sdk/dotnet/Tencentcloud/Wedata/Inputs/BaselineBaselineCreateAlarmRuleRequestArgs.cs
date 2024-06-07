@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
 {
 
-    public sealed class BaselineBaselineCreateAlarmRuleRequestArgs : Pulumi.ResourceArgs
+    public sealed class BaselineBaselineCreateAlarmRuleRequestArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alarm Level, 1. Normal, 2. Important, 3. Urgent (default is 1. Normal)Note: This field may return null, indicating no valid value.
@@ -124,5 +124,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         public BaselineBaselineCreateAlarmRuleRequestArgs()
         {
         }
+        public static new BaselineBaselineCreateAlarmRuleRequestArgs Empty => new BaselineBaselineCreateAlarmRuleRequestArgs();
     }
 }

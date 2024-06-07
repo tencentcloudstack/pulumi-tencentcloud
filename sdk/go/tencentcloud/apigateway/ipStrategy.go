@@ -7,57 +7,63 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this resource to create IP strategy of API gateway.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
-// 			ServiceName: pulumi.String("niceservice"),
-// 			Protocol:    pulumi.String("http&https"),
-// 			ServiceDesc: pulumi.String("your nice service"),
-// 			NetTypes: pulumi.StringArray{
-// 				pulumi.String("INNER"),
-// 				pulumi.String("OUTER"),
-// 			},
-// 			IpVersion: pulumi.String("IPv4"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = ApiGateway.NewIpStrategy(ctx, "test", &ApiGateway.IpStrategyArgs{
-// 			ServiceId:    service.ID(),
-// 			StrategyName: pulumi.String("tf_test"),
-// 			StrategyType: pulumi.String("BLACK"),
-// 			StrategyData: pulumi.String("9.9.9.9"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			service, err := ApiGateway.NewService(ctx, "service", &ApiGateway.ServiceArgs{
+//				ServiceName: pulumi.String("niceservice"),
+//				Protocol:    pulumi.String("http&https"),
+//				ServiceDesc: pulumi.String("your nice service"),
+//				NetTypes: pulumi.StringArray{
+//					pulumi.String("INNER"),
+//					pulumi.String("OUTER"),
+//				},
+//				IpVersion: pulumi.String("IPv4"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = ApiGateway.NewIpStrategy(ctx, "test", &ApiGateway.IpStrategyArgs{
+//				ServiceId:    service.ID(),
+//				StrategyName: pulumi.String("tf_test"),
+//				StrategyType: pulumi.String("BLACK"),
+//				StrategyData: pulumi.String("9.9.9.9"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // IP strategy of API gateway can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:ApiGateway/ipStrategy:IpStrategy test service-ohxqslqe#IPStrategy-q1lk8ud2
+// $ pulumi import tencentcloud:ApiGateway/ipStrategy:IpStrategy test service-ohxqslqe#IPStrategy-q1lk8ud2
 // ```
 type IpStrategy struct {
 	pulumi.CustomResourceState
@@ -95,7 +101,7 @@ func NewIpStrategy(ctx *pulumi.Context,
 	if args.StrategyType == nil {
 		return nil, errors.New("invalid value for required argument 'StrategyType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource IpStrategy
 	err := ctx.RegisterResource("tencentcloud:ApiGateway/ipStrategy:IpStrategy", name, args, &resource, opts...)
 	if err != nil {
@@ -200,7 +206,7 @@ func (i *IpStrategy) ToIpStrategyOutputWithContext(ctx context.Context) IpStrate
 // IpStrategyArrayInput is an input type that accepts IpStrategyArray and IpStrategyArrayOutput values.
 // You can construct a concrete instance of `IpStrategyArrayInput` via:
 //
-//          IpStrategyArray{ IpStrategyArgs{...} }
+//	IpStrategyArray{ IpStrategyArgs{...} }
 type IpStrategyArrayInput interface {
 	pulumi.Input
 
@@ -225,7 +231,7 @@ func (i IpStrategyArray) ToIpStrategyArrayOutputWithContext(ctx context.Context)
 // IpStrategyMapInput is an input type that accepts IpStrategyMap and IpStrategyMapOutput values.
 // You can construct a concrete instance of `IpStrategyMapInput` via:
 //
-//          IpStrategyMap{ "key": IpStrategyArgs{...} }
+//	IpStrategyMap{ "key": IpStrategyArgs{...} }
 type IpStrategyMapInput interface {
 	pulumi.Input
 

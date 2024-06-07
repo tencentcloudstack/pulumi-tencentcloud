@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain sql_templates
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var sqlTemplates = Tencentcloud.Dbbrain.GetSqlTemplates.Invoke(new()
         ///     {
-        ///         var sqlTemplates = Output.Create(Tencentcloud.Dbbrain.GetSqlTemplates.InvokeAsync(new Tencentcloud.Dbbrain.GetSqlTemplatesArgs
-        ///         {
-        ///             InstanceId = "",
-        ///             Product = "",
-        ///             Schema = "",
-        ///             SqlText = "",
-        ///         }));
-        ///     }
+        ///         InstanceId = "",
+        ///         Product = "",
+        ///         Schema = "",
+        ///         SqlText = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSqlTemplatesResult> InvokeAsync(GetSqlTemplatesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSqlTemplatesResult>("tencentcloud:Dbbrain/getSqlTemplates:getSqlTemplates", args ?? new GetSqlTemplatesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSqlTemplatesResult>("tencentcloud:Dbbrain/getSqlTemplates:getSqlTemplates", args ?? new GetSqlTemplatesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain sql_templates
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var sqlTemplates = Tencentcloud.Dbbrain.GetSqlTemplates.Invoke(new()
         ///     {
-        ///         var sqlTemplates = Output.Create(Tencentcloud.Dbbrain.GetSqlTemplates.InvokeAsync(new Tencentcloud.Dbbrain.GetSqlTemplatesArgs
-        ///         {
-        ///             InstanceId = "",
-        ///             Product = "",
-        ///             Schema = "",
-        ///             SqlText = "",
-        ///         }));
-        ///     }
+        ///         InstanceId = "",
+        ///         Product = "",
+        ///         Schema = "",
+        ///         SqlText = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSqlTemplatesResult> Invoke(GetSqlTemplatesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSqlTemplatesResult>("tencentcloud:Dbbrain/getSqlTemplates:getSqlTemplates", args ?? new GetSqlTemplatesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSqlTemplatesResult>("tencentcloud:Dbbrain/getSqlTemplates:getSqlTemplates", args ?? new GetSqlTemplatesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSqlTemplatesArgs : Pulumi.InvokeArgs
+    public sealed class GetSqlTemplatesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSqlTemplatesArgs()
         {
         }
+        public static new GetSqlTemplatesArgs Empty => new GetSqlTemplatesArgs();
     }
 
-    public sealed class GetSqlTemplatesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSqlTemplatesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSqlTemplatesInvokeArgs()
         {
         }
+        public static new GetSqlTemplatesInvokeArgs Empty => new GetSqlTemplatesInvokeArgs();
     }
 
 

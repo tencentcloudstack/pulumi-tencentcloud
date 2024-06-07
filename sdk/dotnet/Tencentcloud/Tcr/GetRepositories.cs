@@ -14,65 +14,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     {
         /// <summary>
         /// Use this data source to query detailed information of TCR repositories.
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var name = Output.Create(Tencentcloud.Tcr.GetRepositories.InvokeAsync(new Tencentcloud.Tcr.GetRepositoriesArgs
-        ///         {
-        ///             Name = "test",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Task<GetRepositoriesResult> InvokeAsync(GetRepositoriesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRepositoriesResult>("tencentcloud:Tcr/getRepositories:getRepositories", args ?? new GetRepositoriesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRepositoriesResult>("tencentcloud:Tcr/getRepositories:getRepositories", args ?? new GetRepositoriesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of TCR repositories.
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var name = Output.Create(Tencentcloud.Tcr.GetRepositories.InvokeAsync(new Tencentcloud.Tcr.GetRepositoriesArgs
-        ///         {
-        ///             Name = "test",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Output<GetRepositoriesResult> Invoke(GetRepositoriesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRepositoriesResult>("tencentcloud:Tcr/getRepositories:getRepositories", args ?? new GetRepositoriesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRepositoriesResult>("tencentcloud:Tcr/getRepositories:getRepositories", args ?? new GetRepositoriesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRepositoriesArgs : Pulumi.InvokeArgs
+    public sealed class GetRepositoriesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the TCR instance that the repository belongs to.
@@ -101,9 +55,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetRepositoriesArgs()
         {
         }
+        public static new GetRepositoriesArgs Empty => new GetRepositoriesArgs();
     }
 
-    public sealed class GetRepositoriesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRepositoriesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the TCR instance that the repository belongs to.
@@ -132,6 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetRepositoriesInvokeArgs()
         {
         }
+        public static new GetRepositoriesInvokeArgs Empty => new GetRepositoriesInvokeArgs();
     }
 
 

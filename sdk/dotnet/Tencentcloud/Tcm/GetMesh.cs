@@ -15,94 +15,88 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         /// <summary>
         /// Use this data source to query detailed information of tcm mesh
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var mesh = Tencentcloud.Tcm.GetMesh.Invoke(new()
         ///     {
-        ///         var mesh = Output.Create(Tencentcloud.Tcm.GetMesh.InvokeAsync(new Tencentcloud.Tcm.GetMeshArgs
+        ///         MeshClusters = new[]
         ///         {
-        ///             MeshClusters = 
-        ///             {
-        ///                 "cls-xxxx",
-        ///             },
-        ///             MeshIds = 
-        ///             {
-        ///                 "mesh-xxxxxx",
-        ///             },
-        ///             MeshNames = 
-        ///             {
-        ///                 "KEEP_MASH",
-        ///             },
-        ///             Tags = 
-        ///             {
-        ///                 "key",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "cls-xxxx",
+        ///         },
+        ///         MeshIds = new[]
+        ///         {
+        ///             "mesh-xxxxxx",
+        ///         },
+        ///         MeshNames = new[]
+        ///         {
+        ///             "KEEP_MASH",
+        ///         },
+        ///         Tags = new[]
+        ///         {
+        ///             "key",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetMeshResult> InvokeAsync(GetMeshArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMeshResult>("tencentcloud:Tcm/getMesh:getMesh", args ?? new GetMeshArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMeshResult>("tencentcloud:Tcm/getMesh:getMesh", args ?? new GetMeshArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tcm mesh
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var mesh = Tencentcloud.Tcm.GetMesh.Invoke(new()
         ///     {
-        ///         var mesh = Output.Create(Tencentcloud.Tcm.GetMesh.InvokeAsync(new Tencentcloud.Tcm.GetMeshArgs
+        ///         MeshClusters = new[]
         ///         {
-        ///             MeshClusters = 
-        ///             {
-        ///                 "cls-xxxx",
-        ///             },
-        ///             MeshIds = 
-        ///             {
-        ///                 "mesh-xxxxxx",
-        ///             },
-        ///             MeshNames = 
-        ///             {
-        ///                 "KEEP_MASH",
-        ///             },
-        ///             Tags = 
-        ///             {
-        ///                 "key",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "cls-xxxx",
+        ///         },
+        ///         MeshIds = new[]
+        ///         {
+        ///             "mesh-xxxxxx",
+        ///         },
+        ///         MeshNames = new[]
+        ///         {
+        ///             "KEEP_MASH",
+        ///         },
+        ///         Tags = new[]
+        ///         {
+        ///             "key",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetMeshResult> Invoke(GetMeshInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMeshResult>("tencentcloud:Tcm/getMesh:getMesh", args ?? new GetMeshInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMeshResult>("tencentcloud:Tcm/getMesh:getMesh", args ?? new GetMeshInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetMeshArgs : Pulumi.InvokeArgs
+    public sealed class GetMeshArgs : global::Pulumi.InvokeArgs
     {
         [Input("meshClusters")]
         private List<string>? _meshClusters;
@@ -161,9 +155,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         public GetMeshArgs()
         {
         }
+        public static new GetMeshArgs Empty => new GetMeshArgs();
     }
 
-    public sealed class GetMeshInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetMeshInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("meshClusters")]
         private InputList<string>? _meshClusters;
@@ -222,6 +217,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         public GetMeshInvokeArgs()
         {
         }
+        public static new GetMeshInvokeArgs Empty => new GetMeshInvokeArgs();
     }
 
 

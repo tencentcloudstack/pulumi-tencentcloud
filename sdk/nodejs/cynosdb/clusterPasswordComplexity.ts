@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterPasswordComplexity = new tencentcloud.Cynosdb.ClusterPasswordComplexity("cluster_password_complexity", {
+ * const clusterPasswordComplexity = new tencentcloud.cynosdb.ClusterPasswordComplexity("clusterPasswordComplexity", {
  *     clusterId: "cynosdbmysql-cgd2gpwr",
  *     validatePasswordDictionaries: [
  *         "cccc",
@@ -26,13 +27,14 @@ import * as utilities from "../utilities";
  *     validatePasswordSpecialCharCount: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cynosdb cluster_password_complexity can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cynosdb/clusterPasswordComplexity:ClusterPasswordComplexity cluster_password_complexity cluster_password_complexity_id
+ * $ pulumi import tencentcloud:Cynosdb/clusterPasswordComplexity:ClusterPasswordComplexity cluster_password_complexity cluster_password_complexity_id
  * ```
  */
 export class ClusterPasswordComplexity extends pulumi.CustomResource {

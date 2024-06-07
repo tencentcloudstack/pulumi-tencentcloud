@@ -15,11 +15,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class ZoneSettingForceRedirect
     {
         /// <summary>
-        /// Redirection status code.- 301- 302 Note: This field may return null, indicating that no valid value can be obtained.
+        /// Redirection status code.
+        /// - 301
+        /// - 302 Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         public readonly int? RedirectStatusCode;
         /// <summary>
-        /// Whether to enable force redirect.- `on`: Enable.- `off`: Disable.
+        /// Whether to enable force redirect.
         /// </summary>
         public readonly string Switch;
 

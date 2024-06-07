@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const podInstances = pulumi.output(tencentcloud.Tsf.getPodInstances({
+ * const podInstances = tencentcloud.Tsf.getPodInstances({
  *     groupId: "group-ynd95rea",
  *     podNameLists: ["keep-terraform-6f8f977688-zvphm"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPodInstances(args: GetPodInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetPodInstancesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tsf/getPodInstances:getPodInstances", {
         "groupId": args.groupId,
         "podNameLists": args.podNameLists,
@@ -67,9 +67,25 @@ export interface GetPodInstancesResult {
      */
     readonly results: outputs.Tsf.GetPodInstancesResult[];
 }
-
+/**
+ * Use this data source to query detailed information of tsf podInstances
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const podInstances = tencentcloud.Tsf.getPodInstances({
+ *     groupId: "group-ynd95rea",
+ *     podNameLists: ["keep-terraform-6f8f977688-zvphm"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPodInstancesOutput(args: GetPodInstancesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPodInstancesResult> {
-    return pulumi.output(args).apply(a => getPodInstances(a, opts))
+    return pulumi.output(args).apply((a: any) => getPodInstances(a, opts))
 }
 
 /**

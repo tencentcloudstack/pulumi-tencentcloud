@@ -15,124 +15,134 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "as",
-    ///         }));
-    ///         var image = Output.Create(Tencentcloud.Images.GetInstance.InvokeAsync(new Tencentcloud.Images.GetInstanceArgs
-    ///         {
-    ///             ImageTypes = 
-    ///             {
-    ///                 "PUBLIC_IMAGE",
-    ///             },
-    ///             OsName = "TencentOS Server 3.2 (Final)",
-    ///         }));
-    ///         var instanceTypes = zones.Apply(zones =&gt; Output.Create(Tencentcloud.Instance.GetTypes.InvokeAsync(new Tencentcloud.Instance.GetTypesArgs
-    ///         {
-    ///             Filters = 
-    ///             {
-    ///                 new Tencentcloud.Instance.Inputs.GetTypesFilterArgs
-    ///                 {
-    ///                     Name = "zone",
-    ///                     Values = 
-    ///                     {
-    ///                         zones.Zones?[0]?.Name,
-    ///                     },
-    ///                 },
-    ///                 new Tencentcloud.Instance.Inputs.GetTypesFilterArgs
-    ///                 {
-    ///                     Name = "instance-family",
-    ///                     Values = 
-    ///                     {
-    ///                         "S5",
-    ///                     },
-    ///                 },
-    ///             },
-    ///             CpuCoreCount = 2,
-    ///             ExcludeSoldOut = true,
-    ///         })));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///         });
-    ///         var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new Tencentcloud.As.ScalingConfigArgs
-    ///         {
-    ///             ConfigurationName = "tf-example",
-    ///             ImageId = image.Apply(image =&gt; image.Images?[0]?.ImageId),
-    ///             InstanceTypes = 
-    ///             {
-    ///                 "SA1.SMALL1",
-    ///                 "SA2.SMALL1",
-    ///                 "SA2.SMALL2",
-    ///                 "SA2.SMALL4",
-    ///             },
-    ///             InstanceNameSettings = new Tencentcloud.As.Inputs.ScalingConfigInstanceNameSettingsArgs
-    ///             {
-    ///                 InstanceName = "test-ins-name",
-    ///             },
-    ///         });
-    ///         var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("exampleScalingGroup", new Tencentcloud.As.ScalingGroupArgs
-    ///         {
-    ///             ScalingGroupName = "tf-example",
-    ///             ConfigurationId = exampleScalingConfig.Id,
-    ///             MaxSize = 1,
-    ///             MinSize = 0,
-    ///             VpcId = vpc.Id,
-    ///             SubnetIds = 
-    ///             {
-    ///                 subnet.Id,
-    ///             },
-    ///         });
-    ///         var exampleLifecycleHook = new Tencentcloud.As.LifecycleHook("exampleLifecycleHook", new Tencentcloud.As.LifecycleHookArgs
-    ///         {
-    ///             ScalingGroupId = exampleScalingGroup.Id,
-    ///             LifecycleHookName = "tf-as-lifecycle-hook",
-    ///             LifecycleTransition = "INSTANCE_LAUNCHING",
-    ///             DefaultResult = "CONTINUE",
-    ///             HeartbeatTimeout = 500,
-    ///             NotificationMetadata = "tf test",
-    ///         });
-    ///         var exampleInstance = new Tencentcloud.Instance.Instance("exampleInstance", new Tencentcloud.Instance.InstanceArgs
-    ///         {
-    ///             InstanceName = "tf_example",
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///             ImageId = image.Apply(image =&gt; image.Images?[0]?.ImageId),
-    ///             InstanceType = instanceTypes.Apply(instanceTypes =&gt; instanceTypes.InstanceTypes?[0]?.InstanceType),
-    ///             SystemDiskType = "CLOUD_PREMIUM",
-    ///             SystemDiskSize = 50,
-    ///             Hostname = "user",
-    ///             ProjectId = 0,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///         });
-    ///         var completeLifecycle = new Tencentcloud.As.CompleteLifecycle("completeLifecycle", new Tencentcloud.As.CompleteLifecycleArgs
-    ///         {
-    ///             LifecycleHookId = exampleLifecycleHook.Id,
-    ///             InstanceId = exampleInstance.Id,
-    ///             LifecycleActionResult = "CONTINUE",
-    ///         });
-    ///     }
+    ///         Product = "as",
+    ///     });
     /// 
-    /// }
+    ///     var image = Tencentcloud.Images.GetInstance.Invoke(new()
+    ///     {
+    ///         ImageTypes = new[]
+    ///         {
+    ///             "PUBLIC_IMAGE",
+    ///         },
+    ///         OsName = "TencentOS Server 3.2 (Final)",
+    ///     });
+    /// 
+    ///     var instanceTypes = Tencentcloud.Instance.GetTypes.Invoke(new()
+    ///     {
+    ///         Filters = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
+    ///             {
+    ///                 Name = "zone",
+    ///                 Values = new[]
+    ///                 {
+    ///                     zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///                 },
+    ///             },
+    ///             new Tencentcloud.Instance.Inputs.GetTypesFilterInputArgs
+    ///             {
+    ///                 Name = "instance-family",
+    ///                 Values = new[]
+    ///                 {
+    ///                     "S5",
+    ///                 },
+    ///             },
+    ///         },
+    ///         CpuCoreCount = 2,
+    ///         ExcludeSoldOut = true,
+    ///     });
+    /// 
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///     });
+    /// 
+    ///     var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new()
+    ///     {
+    ///         ConfigurationName = "tf-example",
+    ///         ImageId = image.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
+    ///         InstanceTypes = new[]
+    ///         {
+    ///             "SA1.SMALL1",
+    ///             "SA2.SMALL1",
+    ///             "SA2.SMALL2",
+    ///             "SA2.SMALL4",
+    ///         },
+    ///         InstanceNameSettings = new Tencentcloud.As.Inputs.ScalingConfigInstanceNameSettingsArgs
+    ///         {
+    ///             InstanceName = "test-ins-name",
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("exampleScalingGroup", new()
+    ///     {
+    ///         ScalingGroupName = "tf-example",
+    ///         ConfigurationId = exampleScalingConfig.Id,
+    ///         MaxSize = 1,
+    ///         MinSize = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetIds = new[]
+    ///         {
+    ///             subnet.Id,
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleLifecycleHook = new Tencentcloud.As.LifecycleHook("exampleLifecycleHook", new()
+    ///     {
+    ///         ScalingGroupId = exampleScalingGroup.Id,
+    ///         LifecycleHookName = "tf-as-lifecycle-hook",
+    ///         LifecycleTransition = "INSTANCE_LAUNCHING",
+    ///         DefaultResult = "CONTINUE",
+    ///         HeartbeatTimeout = 500,
+    ///         NotificationMetadata = "tf test",
+    ///     });
+    /// 
+    ///     var exampleInstance = new Tencentcloud.Instance.Instance("exampleInstance", new()
+    ///     {
+    ///         InstanceName = "tf_example",
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         ImageId = image.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
+    ///         InstanceType = instanceTypes.Apply(getTypesResult =&gt; getTypesResult.InstanceTypes[0]?.InstanceType),
+    ///         SystemDiskType = "CLOUD_PREMIUM",
+    ///         SystemDiskSize = 50,
+    ///         Hostname = "user",
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///     });
+    /// 
+    ///     var completeLifecycle = new Tencentcloud.As.CompleteLifecycle("completeLifecycle", new()
+    ///     {
+    ///         LifecycleHookId = exampleLifecycleHook.Id,
+    ///         InstanceId = exampleInstance.Id,
+    ///         LifecycleActionResult = "CONTINUE",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:As/completeLifecycle:CompleteLifecycle")]
-    public partial class CompleteLifecycle : Pulumi.CustomResource
+    public partial class CompleteLifecycle : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID. Either InstanceId or LifecycleActionToken must be specified.
@@ -203,7 +213,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         }
     }
 
-    public sealed class CompleteLifecycleArgs : Pulumi.ResourceArgs
+    public sealed class CompleteLifecycleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID. Either InstanceId or LifecycleActionToken must be specified.
@@ -232,9 +242,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public CompleteLifecycleArgs()
         {
         }
+        public static new CompleteLifecycleArgs Empty => new CompleteLifecycleArgs();
     }
 
-    public sealed class CompleteLifecycleState : Pulumi.ResourceArgs
+    public sealed class CompleteLifecycleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID. Either InstanceId or LifecycleActionToken must be specified.
@@ -263,5 +274,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public CompleteLifecycleState()
         {
         }
+        public static new CompleteLifecycleState Empty => new CompleteLifecycleState();
     }
 }

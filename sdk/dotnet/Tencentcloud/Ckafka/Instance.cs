@@ -14,148 +14,156 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// Use this resource to create ckafka instance.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Basic Instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var vpcId = config.Get("vpcId") ?? "vpc-68vi2d3h";
+    ///     var subnetId = config.Get("subnetId") ?? "subnet-ob6clqwk";
+    ///     var gz = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var config = new Config();
-    ///         var vpcId = config.Get("vpcId") ?? "vpc-68vi2d3h";
-    ///         var subnetId = config.Get("subnetId") ?? "subnet-ob6clqwk";
-    ///         var gz = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Name = "ap-guangzhou-3",
-    ///             Product = "ckafka",
-    ///         }));
-    ///         var kafkaInstancePrepaid = new Tencentcloud.Ckafka.Instance("kafkaInstancePrepaid", new Tencentcloud.Ckafka.InstanceArgs
-    ///         {
-    ///             InstanceName = "ckafka-instance-prepaid",
-    ///             ZoneId = gz.Apply(gz =&gt; gz.Zones?[0]?.Id),
-    ///             Period = 1,
-    ///             VpcId = vpcId,
-    ///             SubnetId = subnetId,
-    ///             MsgRetentionTime = 1300,
-    ///             RenewFlag = 0,
-    ///             KafkaVersion = "2.4.1",
-    ///             DiskSize = 200,
-    ///             DiskType = "CLOUD_BASIC",
-    ///             BandWidth = 20,
-    ///             Partition = 400,
-    ///             SpecificationsType = "standard",
-    ///             InstanceType = 2,
-    ///             Config = new Tencentcloud.Ckafka.Inputs.InstanceConfigArgs
-    ///             {
-    ///                 AutoCreateTopicEnable = true,
-    ///                 DefaultNumPartitions = 3,
-    ///                 DefaultReplicationFactor = 3,
-    ///             },
-    ///             DynamicRetentionConfig = new Tencentcloud.Ckafka.Inputs.InstanceDynamicRetentionConfigArgs
-    ///             {
-    ///                 Enable = 1,
-    ///             },
-    ///         });
-    ///         var kafkaInstancePostpaid = new Tencentcloud.Ckafka.Instance("kafkaInstancePostpaid", new Tencentcloud.Ckafka.InstanceArgs
-    ///         {
-    ///             InstanceName = "ckafka-instance-postpaid",
-    ///             ZoneId = gz.Apply(gz =&gt; gz.Zones?[0]?.Id),
-    ///             VpcId = vpcId,
-    ///             SubnetId = subnetId,
-    ///             MsgRetentionTime = 1300,
-    ///             KafkaVersion = "1.1.1",
-    ///             DiskSize = 200,
-    ///             BandWidth = 20,
-    ///             DiskType = "CLOUD_BASIC",
-    ///             Partition = 400,
-    ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             Config = new Tencentcloud.Ckafka.Inputs.InstanceConfigArgs
-    ///             {
-    ///                 AutoCreateTopicEnable = true,
-    ///                 DefaultNumPartitions = 3,
-    ///                 DefaultReplicationFactor = 3,
-    ///             },
-    ///             DynamicRetentionConfig = new Tencentcloud.Ckafka.Inputs.InstanceDynamicRetentionConfigArgs
-    ///             {
-    ///                 Enable = 1,
-    ///             },
-    ///         });
-    ///     }
+    ///         Name = "ap-guangzhou-3",
+    ///         Product = "ckafka",
+    ///     });
     /// 
-    /// }
+    ///     var kafkaInstancePrepaid = new Tencentcloud.Ckafka.Instance("kafkaInstancePrepaid", new()
+    ///     {
+    ///         InstanceName = "ckafka-instance-prepaid",
+    ///         ZoneId = gz.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Id),
+    ///         Period = 1,
+    ///         VpcId = vpcId,
+    ///         SubnetId = subnetId,
+    ///         MsgRetentionTime = 1300,
+    ///         RenewFlag = 0,
+    ///         KafkaVersion = "2.4.1",
+    ///         DiskSize = 200,
+    ///         DiskType = "CLOUD_BASIC",
+    ///         BandWidth = 20,
+    ///         Partition = 400,
+    ///         SpecificationsType = "standard",
+    ///         InstanceType = 2,
+    ///         Config = new Tencentcloud.Ckafka.Inputs.InstanceConfigArgs
+    ///         {
+    ///             AutoCreateTopicEnable = true,
+    ///             DefaultNumPartitions = 3,
+    ///             DefaultReplicationFactor = 3,
+    ///         },
+    ///         DynamicRetentionConfig = new Tencentcloud.Ckafka.Inputs.InstanceDynamicRetentionConfigArgs
+    ///         {
+    ///             Enable = 1,
+    ///         },
+    ///     });
+    /// 
+    ///     var kafkaInstancePostpaid = new Tencentcloud.Ckafka.Instance("kafkaInstancePostpaid", new()
+    ///     {
+    ///         InstanceName = "ckafka-instance-postpaid",
+    ///         ZoneId = gz.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Id),
+    ///         VpcId = vpcId,
+    ///         SubnetId = subnetId,
+    ///         MsgRetentionTime = 1300,
+    ///         KafkaVersion = "1.1.1",
+    ///         DiskSize = 200,
+    ///         BandWidth = 20,
+    ///         DiskType = "CLOUD_BASIC",
+    ///         Partition = 400,
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         Config = new Tencentcloud.Ckafka.Inputs.InstanceConfigArgs
+    ///         {
+    ///             AutoCreateTopicEnable = true,
+    ///             DefaultNumPartitions = 3,
+    ///             DefaultReplicationFactor = 3,
+    ///         },
+    ///         DynamicRetentionConfig = new Tencentcloud.Ckafka.Inputs.InstanceDynamicRetentionConfigArgs
+    ///         {
+    ///             Enable = 1,
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Multi zone Instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var vpcId = config.Get("vpcId") ?? "vpc-68vi2d3h";
+    ///     var subnetId = config.Get("subnetId") ?? "subnet-ob6clqwk";
+    ///     var gz3 = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var config = new Config();
-    ///         var vpcId = config.Get("vpcId") ?? "vpc-68vi2d3h";
-    ///         var subnetId = config.Get("subnetId") ?? "subnet-ob6clqwk";
-    ///         var gz3 = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Name = "ap-guangzhou-3",
-    ///             Product = "ckafka",
-    ///         }));
-    ///         var gz6 = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Name = "ap-guangzhou-6",
-    ///             Product = "ckafka",
-    ///         }));
-    ///         var kafkaInstance = new Tencentcloud.Ckafka.Instance("kafkaInstance", new Tencentcloud.Ckafka.InstanceArgs
-    ///         {
-    ///             InstanceName = "ckafka-instance-maz-tf-test",
-    ///             ZoneId = gz3.Apply(gz3 =&gt; gz3.Zones?[0]?.Id),
-    ///             MultiZoneFlag = true,
-    ///             ZoneIds = 
-    ///             {
-    ///                 gz3.Apply(gz3 =&gt; gz3.Zones?[0]?.Id),
-    ///                 gz6.Apply(gz6 =&gt; gz6.Zones?[0]?.Id),
-    ///             },
-    ///             Period = 1,
-    ///             VpcId = vpcId,
-    ///             SubnetId = subnetId,
-    ///             MsgRetentionTime = 1300,
-    ///             RenewFlag = 0,
-    ///             KafkaVersion = "1.1.1",
-    ///             DiskSize = 500,
-    ///             DiskType = "CLOUD_BASIC",
-    ///             Config = new Tencentcloud.Ckafka.Inputs.InstanceConfigArgs
-    ///             {
-    ///                 AutoCreateTopicEnable = true,
-    ///                 DefaultNumPartitions = 3,
-    ///                 DefaultReplicationFactor = 3,
-    ///             },
-    ///             DynamicRetentionConfig = new Tencentcloud.Ckafka.Inputs.InstanceDynamicRetentionConfigArgs
-    ///             {
-    ///                 Enable = 1,
-    ///             },
-    ///         });
-    ///     }
+    ///         Name = "ap-guangzhou-3",
+    ///         Product = "ckafka",
+    ///     });
     /// 
-    /// }
+    ///     var gz6 = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
+    ///     {
+    ///         Name = "ap-guangzhou-6",
+    ///         Product = "ckafka",
+    ///     });
+    /// 
+    ///     var kafkaInstance = new Tencentcloud.Ckafka.Instance("kafkaInstance", new()
+    ///     {
+    ///         InstanceName = "ckafka-instance-maz-tf-test",
+    ///         ZoneId = gz3.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Id),
+    ///         MultiZoneFlag = true,
+    ///         ZoneIds = new[]
+    ///         {
+    ///             gz3.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Id),
+    ///             gz6.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Id),
+    ///         },
+    ///         Period = 1,
+    ///         VpcId = vpcId,
+    ///         SubnetId = subnetId,
+    ///         MsgRetentionTime = 1300,
+    ///         RenewFlag = 0,
+    ///         KafkaVersion = "1.1.1",
+    ///         DiskSize = 500,
+    ///         DiskType = "CLOUD_BASIC",
+    ///         Config = new Tencentcloud.Ckafka.Inputs.InstanceConfigArgs
+    ///         {
+    ///             AutoCreateTopicEnable = true,
+    ///             DefaultNumPartitions = 3,
+    ///             DefaultReplicationFactor = 3,
+    ///         },
+    ///         DynamicRetentionConfig = new Tencentcloud.Ckafka.Inputs.InstanceDynamicRetentionConfigArgs
+    ///         {
+    ///             Enable = 1,
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ckafka instance can be imported using the instance_id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ckafka/instance:Instance foo ckafka-f9ife4zz
+    /// $ pulumi import tencentcloud:Ckafka/instance:Instance foo ckafka-f9ife4zz
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance bandwidth in MBps.
@@ -242,7 +250,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Output<int?> Period { get; private set; } = null!;
 
         /// <summary>
-        /// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
+        /// Bandwidth of the public network.
         /// </summary>
         [Output("publicNetwork")]
         public Output<int> PublicNetwork { get; private set; } = null!;
@@ -366,7 +374,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance bandwidth in MBps.
@@ -453,7 +461,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<int>? Period { get; set; }
 
         /// <summary>
-        /// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
+        /// Bandwidth of the public network.
         /// </summary>
         [Input("publicNetwork")]
         public Input<int>? PublicNetwork { get; set; }
@@ -542,9 +550,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance bandwidth in MBps.
@@ -631,7 +640,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public Input<int>? Period { get; set; }
 
         /// <summary>
-        /// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
+        /// Bandwidth of the public network.
         /// </summary>
         [Input("publicNetwork")]
         public Input<int>? PublicNetwork { get; set; }
@@ -732,5 +741,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

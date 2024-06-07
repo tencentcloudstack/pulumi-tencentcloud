@@ -15,70 +15,74 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone,
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var cngwGateway = new Tencentcloud.Tse.CngwGateway("cngwGateway", new Tencentcloud.Tse.CngwGatewayArgs
-    ///         {
-    ///             Description = "terraform test1",
-    ///             EnableCls = true,
-    ///             EngineRegion = "ap-guangzhou",
-    ///             FeatureVersion = "STANDARD",
-    ///             GatewayVersion = "2.5.1",
-    ///             IngressClassName = "tse-nginx-ingress",
-    ///             InternetMaxBandwidthOut = 0,
-    ///             TradeType = 0,
-    ///             Type = "kong",
-    ///             NodeConfig = new Tencentcloud.Tse.Inputs.CngwGatewayNodeConfigArgs
-    ///             {
-    ///                 Number = 2,
-    ///                 Specification = "1c2g",
-    ///             },
-    ///             VpcConfig = new Tencentcloud.Tse.Inputs.CngwGatewayVpcConfigArgs
-    ///             {
-    ///                 SubnetId = subnet.Id,
-    ///                 VpcId = vpc.Id,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var cngwGroup = new Tencentcloud.Tse.CngwGroup("cngwGroup", new Tencentcloud.Tse.CngwGroupArgs
-    ///         {
-    ///             Description = "terraform desc",
-    ///             GatewayId = cngwGateway.Id,
-    ///             SubnetId = subnet.Id,
-    ///             NodeConfig = new Tencentcloud.Tse.Inputs.CngwGroupNodeConfigArgs
-    ///             {
-    ///                 Number = 2,
-    ///                 Specification = "1c2g",
-    ///             },
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var cngwGateway = new Tencentcloud.Tse.CngwGateway("cngwGateway", new()
+    ///     {
+    ///         Description = "terraform test1",
+    ///         EnableCls = true,
+    ///         EngineRegion = "ap-guangzhou",
+    ///         FeatureVersion = "STANDARD",
+    ///         GatewayVersion = "2.5.1",
+    ///         IngressClassName = "tse-nginx-ingress",
+    ///         InternetMaxBandwidthOut = 0,
+    ///         TradeType = 0,
+    ///         Type = "kong",
+    ///         NodeConfig = new Tencentcloud.Tse.Inputs.CngwGatewayNodeConfigArgs
+    ///         {
+    ///             Number = 2,
+    ///             Specification = "1c2g",
+    ///         },
+    ///         VpcConfig = new Tencentcloud.Tse.Inputs.CngwGatewayVpcConfigArgs
+    ///         {
+    ///             SubnetId = subnet.Id,
+    ///             VpcId = vpc.Id,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var cngwGroup = new Tencentcloud.Tse.CngwGroup("cngwGroup", new()
+    ///     {
+    ///         Description = "terraform desc",
+    ///         GatewayId = cngwGateway.Id,
+    ///         SubnetId = subnet.Id,
+    ///         NodeConfig = new Tencentcloud.Tse.Inputs.CngwGroupNodeConfigArgs
+    ///         {
+    ///             Number = 2,
+    ///             Specification = "1c2g",
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tse/cngwGroup:CngwGroup")]
-    public partial class CngwGroup : Pulumi.CustomResource
+    public partial class CngwGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// description information of group.
@@ -91,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// </summary>
         [Output("gatewayId")]
         public Output<string> GatewayId { get; private set; } = null!;
+
+        /// <summary>
+        /// gateway group id.
+        /// </summary>
+        [Output("groupId")]
+        public Output<string> GroupId { get; private set; } = null!;
 
         /// <summary>
         /// internet configration.
@@ -167,7 +177,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         }
     }
 
-    public sealed class CngwGroupArgs : Pulumi.ResourceArgs
+    public sealed class CngwGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// description information of group.
@@ -214,9 +224,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public CngwGroupArgs()
         {
         }
+        public static new CngwGroupArgs Empty => new CngwGroupArgs();
     }
 
-    public sealed class CngwGroupState : Pulumi.ResourceArgs
+    public sealed class CngwGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// description information of group.
@@ -229,6 +240,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// </summary>
         [Input("gatewayId")]
         public Input<string>? GatewayId { get; set; }
+
+        /// <summary>
+        /// gateway group id.
+        /// </summary>
+        [Input("groupId")]
+        public Input<string>? GroupId { get; set; }
 
         /// <summary>
         /// internet configration.
@@ -263,5 +280,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public CngwGroupState()
         {
         }
+        public static new CngwGroupState Empty => new CngwGroupState();
     }
 }

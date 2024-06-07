@@ -16,79 +16,85 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
     /// &gt; **NOTE:**  If you need to bind account A to account B's VPC resources, you need to first grant role authorization to account A.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Append VPC associated with private dns zone
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleZone = new Tencentcloud.PrivateDns.Zone("exampleZone", new()
     ///     {
-    ///         var exampleZone = new Tencentcloud.PrivateDns.Zone("exampleZone", new Tencentcloud.PrivateDns.ZoneArgs
+    ///         Domain = "domain.com",
+    ///         Remark = "remark.",
+    ///         DnsForwardStatus = "DISABLED",
+    ///         CnameSpeedupStatus = "ENABLED",
+    ///         Tags = 
     ///         {
-    ///             Domain = "domain.com",
-    ///             Remark = "remark.",
-    ///             DnsForwardStatus = "DISABLED",
-    ///             CnameSpeedupStatus = "ENABLED",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var exampleZoneVpcAttachment = new Tencentcloud.PrivateDns.ZoneVpcAttachment("exampleZoneVpcAttachment", new Tencentcloud.PrivateDns.ZoneVpcAttachmentArgs
-    ///         {
-    ///             ZoneId = exampleZone.Id,
-    ///             VpcSet = new Tencentcloud.PrivateDns.Inputs.ZoneVpcAttachmentVpcSetArgs
-    ///             {
-    ///                 UniqVpcId = vpc.Id,
-    ///                 Region = "ap-guangzhou",
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var exampleZoneVpcAttachment = new Tencentcloud.PrivateDns.ZoneVpcAttachment("exampleZoneVpcAttachment", new()
+    ///     {
+    ///         ZoneId = exampleZone.Id,
+    ///         VpcSet = new Tencentcloud.PrivateDns.Inputs.ZoneVpcAttachmentVpcSetArgs
+    ///         {
+    ///             UniqVpcId = vpc.Id,
+    ///             Region = "ap-guangzhou",
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Add VPC information for associated accounts in the private dns zone
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.PrivateDns.ZoneVpcAttachment("example", new()
     ///     {
-    ///         var example = new Tencentcloud.PrivateDns.ZoneVpcAttachment("example", new Tencentcloud.PrivateDns.ZoneVpcAttachmentArgs
+    ///         ZoneId = tencentcloud_private_dns_zone.Example.Id,
+    ///         AccountVpcSet = new Tencentcloud.PrivateDns.Inputs.ZoneVpcAttachmentAccountVpcSetArgs
     ///         {
-    ///             ZoneId = tencentcloud_private_dns_zone.Example.Id,
-    ///             AccountVpcSet = new Tencentcloud.PrivateDns.Inputs.ZoneVpcAttachmentAccountVpcSetArgs
-    ///             {
-    ///                 UniqVpcId = "vpc-82znjzn3",
-    ///                 Region = "ap-guangzhou",
-    ///                 Uin = "100017155920",
-    ///             },
-    ///         });
-    ///     }
+    ///             UniqVpcId = "vpc-82znjzn3",
+    ///             Region = "ap-guangzhou",
+    ///             Uin = "100017155920",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// PrivateDns zone_vpc_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:PrivateDns/zoneVpcAttachment:ZoneVpcAttachment example zone-6t11lof0#vpc-jdx11z0t
+    /// $ pulumi import tencentcloud:PrivateDns/zoneVpcAttachment:ZoneVpcAttachment example zone-6t11lof0#vpc-jdx11z0t
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:PrivateDns/zoneVpcAttachment:ZoneVpcAttachment")]
-    public partial class ZoneVpcAttachment : Pulumi.CustomResource
+    public partial class ZoneVpcAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// New add account vpc info.
@@ -153,7 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         }
     }
 
-    public sealed class ZoneVpcAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class ZoneVpcAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// New add account vpc info.
@@ -176,9 +182,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public ZoneVpcAttachmentArgs()
         {
         }
+        public static new ZoneVpcAttachmentArgs Empty => new ZoneVpcAttachmentArgs();
     }
 
-    public sealed class ZoneVpcAttachmentState : Pulumi.ResourceArgs
+    public sealed class ZoneVpcAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// New add account vpc info.
@@ -201,5 +208,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public ZoneVpcAttachmentState()
         {
         }
+        public static new ZoneVpcAttachmentState Empty => new ZoneVpcAttachmentState();
     }
 }

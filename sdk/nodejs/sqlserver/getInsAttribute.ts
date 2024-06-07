@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Sqlserver.getInsAttribute({
+ * const example = tencentcloud.Sqlserver.getInsAttribute({
  *     instanceId: "mssql-gyg9xycl",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInsAttribute(args: GetInsAttributeArgs, opts?: pulumi.InvokeOptions): Promise<GetInsAttributeResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Sqlserver/getInsAttribute:getInsAttribute", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -92,9 +92,24 @@ export interface GetInsAttributeResult {
      */
     readonly tdeConfigs: outputs.Sqlserver.GetInsAttributeTdeConfig[];
 }
-
+/**
+ * Use this data source to query detailed information of sqlserverInsAttribute
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Sqlserver.getInsAttribute({
+ *     instanceId: "mssql-gyg9xycl",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInsAttributeOutput(args: GetInsAttributeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInsAttributeResult> {
-    return pulumi.output(args).apply(a => getInsAttribute(a, opts))
+    return pulumi.output(args).apply((a: any) => getInsAttribute(a, opts))
 }
 
 /**

@@ -8,11 +8,13 @@ import * as utilities from "../utilities";
  * Provides a resource to create a vpc refreshNatDcRoute
  *
  * ## Example Usage
+ *
  * ### is True
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const eipExample = new tencentcloud.eip.Instance("eipExample", {});
@@ -28,11 +30,14 @@ import * as utilities from "../utilities";
  *     dryRun: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### is False
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const refreshNatDcRoute = new tencentcloud.nat.RefreshNatDcRoute("refreshNatDcRoute", {
  *     natGatewayId: tencentcloud_nat_gateway.nat.id,
@@ -40,13 +45,14 @@ import * as utilities from "../utilities";
  *     dryRun: false,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * vpc refresh_nat_dc_route can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Nat/refreshNatDcRoute:RefreshNatDcRoute refresh_nat_dc_route vpc_id#nat_gateway_id
+ * $ pulumi import tencentcloud:Nat/refreshNatDcRoute:RefreshNatDcRoute refresh_nat_dc_route vpc_id#nat_gateway_id
  * ```
  */
 export class RefreshNatDcRoute extends pulumi.CustomResource {

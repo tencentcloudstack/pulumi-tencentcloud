@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskTransformsParamBatchAnalyseGetArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskTransformsParamBatchAnalyseGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ONE BY ONE single output, MERGE combined output.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskTransformsParamBatchAnalyseGetArgs()
         {
         }
+        public static new DatahubTaskTransformsParamBatchAnalyseGetArgs Empty => new DatahubTaskTransformsParamBatchAnalyseGetArgs();
     }
 }

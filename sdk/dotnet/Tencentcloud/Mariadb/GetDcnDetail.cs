@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// <summary>
         /// Use this data source to query detailed information of mariadb dcn_detail
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var dcnDetail = Tencentcloud.Mariadb.GetDcnDetail.Invoke(new()
         ///     {
-        ///         var dcnDetail = Output.Create(Tencentcloud.Mariadb.GetDcnDetail.InvokeAsync(new Tencentcloud.Mariadb.GetDcnDetailArgs
-        ///         {
-        ///             InstanceId = "tdsql-9vqvls95",
-        ///         }));
-        ///     }
+        ///         InstanceId = "tdsql-9vqvls95",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDcnDetailResult> InvokeAsync(GetDcnDetailArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDcnDetailResult>("tencentcloud:Mariadb/getDcnDetail:getDcnDetail", args ?? new GetDcnDetailArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDcnDetailResult>("tencentcloud:Mariadb/getDcnDetail:getDcnDetail", args ?? new GetDcnDetailArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mariadb dcn_detail
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var dcnDetail = Tencentcloud.Mariadb.GetDcnDetail.Invoke(new()
         ///     {
-        ///         var dcnDetail = Output.Create(Tencentcloud.Mariadb.GetDcnDetail.InvokeAsync(new Tencentcloud.Mariadb.GetDcnDetailArgs
-        ///         {
-        ///             InstanceId = "tdsql-9vqvls95",
-        ///         }));
-        ///     }
+        ///         InstanceId = "tdsql-9vqvls95",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDcnDetailResult> Invoke(GetDcnDetailInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDcnDetailResult>("tencentcloud:Mariadb/getDcnDetail:getDcnDetail", args ?? new GetDcnDetailInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDcnDetailResult>("tencentcloud:Mariadb/getDcnDetail:getDcnDetail", args ?? new GetDcnDetailInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDcnDetailArgs : Pulumi.InvokeArgs
+    public sealed class GetDcnDetailArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetDcnDetailArgs()
         {
         }
+        public static new GetDcnDetailArgs Empty => new GetDcnDetailArgs();
     }
 
-    public sealed class GetDcnDetailInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDcnDetailInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetDcnDetailInvokeArgs()
         {
         }
+        public static new GetDcnDetailInvokeArgs Empty => new GetDcnDetailInvokeArgs();
     }
 
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainOriginPullTimeoutGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainOriginPullTimeoutGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The origin-pull connection timeout (in seconds). Valid range: 5-60.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainOriginPullTimeoutGetArgs()
         {
         }
+        public static new DomainOriginPullTimeoutGetArgs Empty => new DomainOriginPullTimeoutGetArgs();
     }
 }

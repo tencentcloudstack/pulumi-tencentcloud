@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class TranscodeTemplateEnhanceConfigVideoEnhanceFrameRateArgs : Pulumi.ResourceArgs
+    public sealed class TranscodeTemplateEnhanceConfigVideoEnhanceFrameRateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Frame rate, value range: [0, 100], unit: Hz.Default value: 0.Note: For transcoding, this parameter will override the Fps inside the VideoTemplate.Note: This field may return null, indicating that no valid value can be obtained.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public TranscodeTemplateEnhanceConfigVideoEnhanceFrameRateArgs()
         {
         }
+        public static new TranscodeTemplateEnhanceConfigVideoEnhanceFrameRateArgs Empty => new TranscodeTemplateEnhanceConfigVideoEnhanceFrameRateArgs();
     }
 }

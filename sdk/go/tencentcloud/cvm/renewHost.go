@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type RenewHost struct {
@@ -35,7 +36,7 @@ func NewRenewHost(ctx *pulumi.Context,
 	if args.HostId == nil {
 		return nil, errors.New("invalid value for required argument 'HostId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RenewHost
 	err := ctx.RegisterResource("tencentcloud:Cvm/renewHost:RenewHost", name, args, &resource, opts...)
 	if err != nil {
@@ -124,7 +125,7 @@ func (i *RenewHost) ToRenewHostOutputWithContext(ctx context.Context) RenewHostO
 // RenewHostArrayInput is an input type that accepts RenewHostArray and RenewHostArrayOutput values.
 // You can construct a concrete instance of `RenewHostArrayInput` via:
 //
-//          RenewHostArray{ RenewHostArgs{...} }
+//	RenewHostArray{ RenewHostArgs{...} }
 type RenewHostArrayInput interface {
 	pulumi.Input
 
@@ -149,7 +150,7 @@ func (i RenewHostArray) ToRenewHostArrayOutputWithContext(ctx context.Context) R
 // RenewHostMapInput is an input type that accepts RenewHostMap and RenewHostMapOutput values.
 // You can construct a concrete instance of `RenewHostMapInput` via:
 //
-//          RenewHostMap{ "key": RenewHostArgs{...} }
+//	RenewHostMap{ "key": RenewHostArgs{...} }
 type RenewHostMapInput interface {
 	pulumi.Input
 

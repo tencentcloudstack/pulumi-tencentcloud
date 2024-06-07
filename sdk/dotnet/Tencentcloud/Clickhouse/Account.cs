@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var account = new Tencentcloud.Clickhouse.Account("account", new()
     ///     {
-    ///         var account = new Tencentcloud.Clickhouse.Account("account", new Tencentcloud.Clickhouse.AccountArgs
-    ///         {
-    ///             Describe = "xxxxxx",
-    ///             InstanceId = "cdwch-xxxxxx",
-    ///             Password = "xxxxxx",
-    ///             UserName = "test",
-    ///         });
-    ///     }
+    ///         Describe = "xxxxxx",
+    ///         InstanceId = "cdwch-xxxxxx",
+    ///         Password = "xxxxxx",
+    ///         UserName = "test",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// clickhouse account can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clickhouse/account:Account account ${instance_id}#${user_name}
+    /// $ pulumi import tencentcloud:Clickhouse/account:Account account ${instance_id}#${user_name}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clickhouse/account:Account")]
-    public partial class Account : Pulumi.CustomResource
+    public partial class Account : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Description.
@@ -94,6 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -115,7 +120,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         }
     }
 
-    public sealed class AccountArgs : Pulumi.ResourceArgs
+    public sealed class AccountArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description.
@@ -129,11 +134,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         [Input("instanceId", required: true)]
         public Input<string> InstanceId { get; set; } = null!;
 
+        [Input("password", required: true)]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password.
         /// </summary>
-        [Input("password", required: true)]
-        public Input<string> Password { get; set; } = null!;
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// User name.
@@ -144,9 +159,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public AccountArgs()
         {
         }
+        public static new AccountArgs Empty => new AccountArgs();
     }
 
-    public sealed class AccountState : Pulumi.ResourceArgs
+    public sealed class AccountState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description.
@@ -160,11 +176,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// User name.
@@ -175,5 +201,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public AccountState()
         {
         }
+        public static new AccountState Empty => new AccountState();
     }
 }

@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// <summary>
         /// Use this data source to query detailed information of tse zookeeper_server_interfaces
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var zookeeperServerInterfaces = Tencentcloud.Tse.GetZookeeperServerInterfaces.Invoke(new()
         ///     {
-        ///         var zookeeperServerInterfaces = Output.Create(Tencentcloud.Tse.GetZookeeperServerInterfaces.InvokeAsync(new Tencentcloud.Tse.GetZookeeperServerInterfacesArgs
-        ///         {
-        ///             InstanceId = "ins-7eb7eea7",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ins-7eb7eea7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetZookeeperServerInterfacesResult> InvokeAsync(GetZookeeperServerInterfacesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetZookeeperServerInterfacesResult>("tencentcloud:Tse/getZookeeperServerInterfaces:getZookeeperServerInterfaces", args ?? new GetZookeeperServerInterfacesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetZookeeperServerInterfacesResult>("tencentcloud:Tse/getZookeeperServerInterfaces:getZookeeperServerInterfaces", args ?? new GetZookeeperServerInterfacesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tse zookeeper_server_interfaces
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var zookeeperServerInterfaces = Tencentcloud.Tse.GetZookeeperServerInterfaces.Invoke(new()
         ///     {
-        ///         var zookeeperServerInterfaces = Output.Create(Tencentcloud.Tse.GetZookeeperServerInterfaces.InvokeAsync(new Tencentcloud.Tse.GetZookeeperServerInterfacesArgs
-        ///         {
-        ///             InstanceId = "ins-7eb7eea7",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ins-7eb7eea7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetZookeeperServerInterfacesResult> Invoke(GetZookeeperServerInterfacesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetZookeeperServerInterfacesResult>("tencentcloud:Tse/getZookeeperServerInterfaces:getZookeeperServerInterfaces", args ?? new GetZookeeperServerInterfacesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetZookeeperServerInterfacesResult>("tencentcloud:Tse/getZookeeperServerInterfaces:getZookeeperServerInterfaces", args ?? new GetZookeeperServerInterfacesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetZookeeperServerInterfacesArgs : Pulumi.InvokeArgs
+    public sealed class GetZookeeperServerInterfacesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// engine instance ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetZookeeperServerInterfacesArgs()
         {
         }
+        public static new GetZookeeperServerInterfacesArgs Empty => new GetZookeeperServerInterfacesArgs();
     }
 
-    public sealed class GetZookeeperServerInterfacesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetZookeeperServerInterfacesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// engine instance ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetZookeeperServerInterfacesInvokeArgs()
         {
         }
+        public static new GetZookeeperServerInterfacesInvokeArgs Empty => new GetZookeeperServerInterfacesInvokeArgs();
     }
 
 

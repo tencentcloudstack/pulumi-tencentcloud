@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// <summary>
         /// Use this data source to query detailed information of css pull_stream_task_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var pullStreamTaskStatus = Tencentcloud.Css.GetPullStreamTaskStatus.Invoke(new()
         ///     {
-        ///         var pullStreamTaskStatus = Output.Create(Tencentcloud.Css.GetPullStreamTaskStatus.InvokeAsync(new Tencentcloud.Css.GetPullStreamTaskStatusArgs
-        ///         {
-        ///             TaskId = "63229997",
-        ///         }));
-        ///     }
+        ///         TaskId = "63229997",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPullStreamTaskStatusResult> InvokeAsync(GetPullStreamTaskStatusArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPullStreamTaskStatusResult>("tencentcloud:Css/getPullStreamTaskStatus:getPullStreamTaskStatus", args ?? new GetPullStreamTaskStatusArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPullStreamTaskStatusResult>("tencentcloud:Css/getPullStreamTaskStatus:getPullStreamTaskStatus", args ?? new GetPullStreamTaskStatusArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of css pull_stream_task_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var pullStreamTaskStatus = Tencentcloud.Css.GetPullStreamTaskStatus.Invoke(new()
         ///     {
-        ///         var pullStreamTaskStatus = Output.Create(Tencentcloud.Css.GetPullStreamTaskStatus.InvokeAsync(new Tencentcloud.Css.GetPullStreamTaskStatusArgs
-        ///         {
-        ///             TaskId = "63229997",
-        ///         }));
-        ///     }
+        ///         TaskId = "63229997",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPullStreamTaskStatusResult> Invoke(GetPullStreamTaskStatusInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPullStreamTaskStatusResult>("tencentcloud:Css/getPullStreamTaskStatus:getPullStreamTaskStatus", args ?? new GetPullStreamTaskStatusInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPullStreamTaskStatusResult>("tencentcloud:Css/getPullStreamTaskStatus:getPullStreamTaskStatus", args ?? new GetPullStreamTaskStatusInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPullStreamTaskStatusArgs : Pulumi.InvokeArgs
+    public sealed class GetPullStreamTaskStatusArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetPullStreamTaskStatusArgs()
         {
         }
+        public static new GetPullStreamTaskStatusArgs Empty => new GetPullStreamTaskStatusArgs();
     }
 
-    public sealed class GetPullStreamTaskStatusInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPullStreamTaskStatusInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetPullStreamTaskStatusInvokeArgs()
         {
         }
+        public static new GetPullStreamTaskStatusInvokeArgs Empty => new GetPullStreamTaskStatusInvokeArgs();
     }
 
 

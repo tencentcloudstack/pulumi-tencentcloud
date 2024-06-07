@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const snapshots = pulumi.output(tencentcloud.Cbs.getSnapshots({
+ * const snapshots = tencentcloud.Cbs.getSnapshots({
  *     resultOutputFile: "mytestpath",
  *     snapshotId: "snap-f3io7adt",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSnapshots(args?: GetSnapshotsArgs, opts?: pulumi.InvokeOptions): Promise<GetSnapshotsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cbs/getSnapshots:getSnapshots", {
         "availabilityZone": args.availabilityZone,
         "projectId": args.projectId,
@@ -110,9 +110,25 @@ export interface GetSnapshotsResult {
      */
     readonly storageUsage?: string;
 }
-
+/**
+ * Use this data source to query detailed information of CBS snapshots.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const snapshots = tencentcloud.Cbs.getSnapshots({
+ *     resultOutputFile: "mytestpath",
+ *     snapshotId: "snap-f3io7adt",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSnapshotsOutput(args?: GetSnapshotsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSnapshotsResult> {
-    return pulumi.output(args).apply(a => getSnapshots(a, opts))
+    return pulumi.output(args).apply((a: any) => getSnapshots(a, opts))
 }
 
 /**

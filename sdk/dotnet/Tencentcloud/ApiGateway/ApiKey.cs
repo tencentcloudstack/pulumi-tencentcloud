@@ -14,58 +14,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// Use this resource to create API gateway access key.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Automatically generate key for API gateway access key.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleAuto = new Tencentcloud.ApiGateway.ApiKey("exampleAuto", new()
     ///     {
-    ///         var exampleAuto = new Tencentcloud.ApiGateway.ApiKey("exampleAuto", new Tencentcloud.ApiGateway.ApiKeyArgs
-    ///         {
-    ///             SecretName = "tf_example_auto",
-    ///             Status = "on",
-    ///         });
-    ///     }
+    ///         SecretName = "tf_example_auto",
+    ///         Status = "on",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Manually generate a secret key for API gateway access key.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleManual = new Tencentcloud.ApiGateway.ApiKey("exampleManual", new()
     ///     {
-    ///         var exampleManual = new Tencentcloud.ApiGateway.ApiKey("exampleManual", new Tencentcloud.ApiGateway.ApiKeyArgs
-    ///         {
-    ///             AccessKeyId = "28e287e340507fa147b2c8284dab542f",
-    ///             AccessKeySecret = "0198a4b8c3105080f4acd9e507599eff",
-    ///             AccessKeyType = "manual",
-    ///             SecretName = "tf_example_manual",
-    ///             Status = "on",
-    ///         });
-    ///     }
+    ///         AccessKeyId = "28e287e340507fa147b2c8284dab542f",
+    ///         AccessKeySecret = "0198a4b8c3105080f4acd9e507599eff",
+    ///         AccessKeyType = "manual",
+    ///         SecretName = "tf_example_manual",
+    ///         Status = "on",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// API gateway access key can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:ApiGateway/apiKey:ApiKey test AKIDMZwceezso9ps5p8jkro8a9fwe1e7nzF2k50B
+    /// $ pulumi import tencentcloud:ApiGateway/apiKey:ApiKey test AKIDMZwceezso9ps5p8jkro8a9fwe1e7nzF2k50B
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/apiKey:ApiKey")]
-    public partial class ApiKey : Pulumi.CustomResource
+    public partial class ApiKey : global::Pulumi.CustomResource
     {
         /// <summary>
         /// User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
@@ -154,7 +158,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         }
     }
 
-    public sealed class ApiKeyArgs : Pulumi.ResourceArgs
+    public sealed class ApiKeyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
@@ -189,9 +193,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ApiKeyArgs()
         {
         }
+        public static new ApiKeyArgs Empty => new ApiKeyArgs();
     }
 
-    public sealed class ApiKeyState : Pulumi.ResourceArgs
+    public sealed class ApiKeyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User defined key ID, required when access_key_type is manual. The length is 5-50 characters, consisting of letters, numbers, and English underscores.
@@ -238,5 +243,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ApiKeyState()
         {
         }
+        public static new ApiKeyState Empty => new ApiKeyState();
     }
 }

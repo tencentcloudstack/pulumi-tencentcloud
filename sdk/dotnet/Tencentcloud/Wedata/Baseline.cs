@@ -15,79 +15,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Wedata.Baseline("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Wedata.Baseline("example", new Tencentcloud.Wedata.BaselineArgs
+    ///         BaselineCreateAlarmRuleRequest = new Tencentcloud.Wedata.Inputs.BaselineBaselineCreateAlarmRuleRequestArgs
     ///         {
-    ///             BaselineCreateAlarmRuleRequest = new Tencentcloud.Wedata.Inputs.BaselineBaselineCreateAlarmRuleRequestArgs
+    ///             AlarmLevel = 2,
+    ///             AlarmRecipientIds = new[]
     ///             {
-    ///                 AlarmLevel = 2,
-    ///                 AlarmRecipientIds = 
-    ///                 {
-    ///                     "100028439226",
-    ///                 },
-    ///                 AlarmRecipientType = 1,
-    ///                 AlarmRecipients = 
-    ///                 {
-    ///                     "tf_user",
-    ///                 },
-    ///                 AlarmTypes = 
-    ///                 {
-    ///                     "baseLineBroken",
-    ///                     "baseLineWarning",
-    ///                     "baseLineTaskFailure",
-    ///                 },
-    ///                 AlarmWays = 
-    ///                 {
-    ///                     "email",
-    ///                     "sms",
-    ///                 },
+    ///                 "100028439226",
     ///             },
-    ///             BaselineName = "tf_example",
-    ///             BaselineType = "D",
-    ///             CreateName = "tf_user",
-    ///             CreateUin = "100028439226",
-    ///             InChargeName = "100028439226",
-    ///             InChargeUin = "tf_user",
-    ///             IsNewAlarm = true,
-    ///             ProjectId = "1927766435649077248",
-    ///             PromiseTasks = 
+    ///             AlarmRecipientType = 1,
+    ///             AlarmRecipients = new[]
     ///             {
-    ///                 new Tencentcloud.Wedata.Inputs.BaselinePromiseTaskArgs
-    ///                 {
-    ///                     ProjectId = "1927766435649077248",
-    ///                     TaskCycle = "D",
-    ///                     TaskId = "20231030145334153",
-    ///                     TaskInChargeName = ";tf_user;",
-    ///                     TaskName = "tf_demo_task",
-    ///                     WorkflowId = "e4dafb2e-76eb-11ee-bfeb-b8cef68a6637",
-    ///                     WorkflowName = "dataflow_mpp",
-    ///                 },
+    ///                 "tf_user",
     ///             },
-    ///             PromiseTime = "00:00:00",
-    ///             WarningMargin = 30,
-    ///         });
-    ///     }
+    ///             AlarmTypes = new[]
+    ///             {
+    ///                 "baseLineBroken",
+    ///                 "baseLineWarning",
+    ///                 "baseLineTaskFailure",
+    ///             },
+    ///             AlarmWays = new[]
+    ///             {
+    ///                 "email",
+    ///                 "sms",
+    ///             },
+    ///         },
+    ///         BaselineName = "tf_example",
+    ///         BaselineType = "D",
+    ///         CreateName = "tf_user",
+    ///         CreateUin = "100028439226",
+    ///         InChargeName = "100028439226",
+    ///         InChargeUin = "tf_user",
+    ///         IsNewAlarm = true,
+    ///         ProjectId = "1927766435649077248",
+    ///         PromiseTasks = new[]
+    ///         {
+    ///             new Tencentcloud.Wedata.Inputs.BaselinePromiseTaskArgs
+    ///             {
+    ///                 ProjectId = "1927766435649077248",
+    ///                 TaskCycle = "D",
+    ///                 TaskId = "20231030145334153",
+    ///                 TaskInChargeName = ";tf_user;",
+    ///                 TaskName = "tf_demo_task",
+    ///                 WorkflowId = "e4dafb2e-76eb-11ee-bfeb-b8cef68a6637",
+    ///                 WorkflowName = "dataflow_mpp",
+    ///             },
+    ///         },
+    ///         PromiseTime = "00:00:00",
+    ///         WarningMargin = 30,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// wedata baseline can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Wedata/baseline:Baseline example 1927766435649077248#2
+    /// $ pulumi import tencentcloud:Wedata/baseline:Baseline example 1927766435649077248#2
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/baseline:Baseline")]
-    public partial class Baseline : Pulumi.CustomResource
+    public partial class Baseline : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Existing Alarm Rule Information.
@@ -218,7 +219,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         }
     }
 
-    public sealed class BaselineArgs : Pulumi.ResourceArgs
+    public sealed class BaselineArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Existing Alarm Rule Information.
@@ -307,9 +308,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public BaselineArgs()
         {
         }
+        public static new BaselineArgs Empty => new BaselineArgs();
     }
 
-    public sealed class BaselineState : Pulumi.ResourceArgs
+    public sealed class BaselineState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Existing Alarm Rule Information.
@@ -404,5 +406,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public BaselineState()
         {
         }
+        public static new BaselineState Empty => new BaselineState();
     }
 }

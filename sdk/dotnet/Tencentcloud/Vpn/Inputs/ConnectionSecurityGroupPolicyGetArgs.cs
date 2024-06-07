@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn.Inputs
 {
 
-    public sealed class ConnectionSecurityGroupPolicyGetArgs : Pulumi.ResourceArgs
+    public sealed class ConnectionSecurityGroupPolicyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Local cidr block.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn.Inputs
         public ConnectionSecurityGroupPolicyGetArgs()
         {
         }
+        public static new ConnectionSecurityGroupPolicyGetArgs Empty => new ConnectionSecurityGroupPolicyGetArgs();
     }
 }

@@ -15,63 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var logstash = new Tencentcloud.Elasticsearch.Logstash("logstash", new()
     ///     {
-    ///         var logstash = new Tencentcloud.Elasticsearch.Logstash("logstash", new Tencentcloud.Elasticsearch.LogstashArgs
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         DiskSize = 20,
+    ///         DiskType = "CLOUD_SSD",
+    ///         InstanceName = "logstash-test",
+    ///         LicenseType = "xpack",
+    ///         LogstashVersion = "7.14.2",
+    ///         NodeNum = 1,
+    ///         NodeType = "LOGSTASH.SA2.MEDIUM4",
+    ///         OperationDuration = new Tencentcloud.Elasticsearch.Inputs.LogstashOperationDurationArgs
     ///         {
-    ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             DiskSize = 20,
-    ///             DiskType = "CLOUD_SSD",
-    ///             InstanceName = "logstash-test",
-    ///             LicenseType = "xpack",
-    ///             LogstashVersion = "7.14.2",
-    ///             NodeNum = 1,
-    ///             NodeType = "LOGSTASH.SA2.MEDIUM4",
-    ///             OperationDuration = new Tencentcloud.Elasticsearch.Inputs.LogstashOperationDurationArgs
+    ///             Periods = new[]
     ///             {
-    ///                 Periods = 
-    ///                 {
-    ///                     1,
-    ///                     2,
-    ///                     3,
-    ///                     4,
-    ///                     5,
-    ///                     6,
-    ///                     0,
-    ///                 },
-    ///                 TimeEnd = "06:00",
-    ///                 TimeStart = "02:00",
-    ///                 TimeZone = "UTC+8",
+    ///                 1,
+    ///                 2,
+    ///                 3,
+    ///                 4,
+    ///                 5,
+    ///                 6,
+    ///                 0,
     ///             },
-    ///             SubnetId = "subnet-4o0zd840",
-    ///             Tags = 
-    ///             {
-    ///                 { "tagKey", "tagValue" },
-    ///             },
-    ///             VpcId = "vpc-4owdpnwr",
-    ///             Zone = "ap-guangzhou-6",
-    ///         });
-    ///     }
+    ///             TimeEnd = "06:00",
+    ///             TimeStart = "02:00",
+    ///             TimeZone = "UTC+8",
+    ///         },
+    ///         SubnetId = "subnet-4o0zd840",
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///         VpcId = "vpc-4owdpnwr",
+    ///         Zone = "ap-guangzhou-6",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// elasticsearch logstash can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Elasticsearch/logstash:Logstash logstash logstash_id
+    /// $ pulumi import tencentcloud:Elasticsearch/logstash:Logstash logstash logstash_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/logstash:Logstash")]
-    public partial class Logstash : Pulumi.CustomResource
+    public partial class Logstash : global::Pulumi.CustomResource
     {
         /// <summary>
         /// whether to use voucher auto, 1 when use, else 0.
@@ -233,7 +234,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         }
     }
 
-    public sealed class LogstashArgs : Pulumi.ResourceArgs
+    public sealed class LogstashArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// whether to use voucher auto, 1 when use, else 0.
@@ -365,9 +366,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public LogstashArgs()
         {
         }
+        public static new LogstashArgs Empty => new LogstashArgs();
     }
 
-    public sealed class LogstashState : Pulumi.ResourceArgs
+    public sealed class LogstashState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// whether to use voucher auto, 1 when use, else 0.
@@ -499,5 +501,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public LogstashState()
         {
         }
+        public static new LogstashState Empty => new LogstashState();
     }
 }

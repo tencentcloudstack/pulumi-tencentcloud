@@ -8,139 +8,17 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mps contentReviewTemplate
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewContentReviewTemplate(ctx, "template", &Mps.ContentReviewTemplateArgs{
-// 			Comment: pulumi.String("tf test content review temp"),
-// 			PoliticalConfigure: &mps.ContentReviewTemplatePoliticalConfigureArgs{
-// 				AsrReviewInfo: &mps.ContentReviewTemplatePoliticalConfigureAsrReviewInfoArgs{
-// 					BlockConfidence:  pulumi.Int(60),
-// 					ReviewConfidence: pulumi.Int(100),
-// 					Switch:           pulumi.String("ON"),
-// 				},
-// 				ImgReviewInfo: &mps.ContentReviewTemplatePoliticalConfigureImgReviewInfoArgs{
-// 					BlockConfidence: pulumi.Int(60),
-// 					LabelSet: []string{
-// 						"violation_photo",
-// 						"politician",
-// 					},
-// 					ReviewConfidence: pulumi.Int(100),
-// 					Switch:           pulumi.String("ON"),
-// 				},
-// 				OcrReviewInfo: &mps.ContentReviewTemplatePoliticalConfigureOcrReviewInfoArgs{
-// 					BlockConfidence:  pulumi.Int(60),
-// 					ReviewConfidence: pulumi.Int(100),
-// 					Switch:           pulumi.String("ON"),
-// 				},
-// 			},
-// 			PornConfigure: &mps.ContentReviewTemplatePornConfigureArgs{
-// 				AsrReviewInfo: &mps.ContentReviewTemplatePornConfigureAsrReviewInfoArgs{
-// 					BlockConfidence:  pulumi.Int(60),
-// 					ReviewConfidence: pulumi.Int(100),
-// 					Switch:           pulumi.String("ON"),
-// 				},
-// 				ImgReviewInfo: &mps.ContentReviewTemplatePornConfigureImgReviewInfoArgs{
-// 					BlockConfidence: pulumi.Int(60),
-// 					LabelSet: []string{
-// 						"porn",
-// 						"vulgar",
-// 					},
-// 					ReviewConfidence: pulumi.Int(100),
-// 					Switch:           pulumi.String("ON"),
-// 				},
-// 				OcrReviewInfo: &mps.ContentReviewTemplatePornConfigureOcrReviewInfoArgs{
-// 					BlockConfidence:  pulumi.Int(60),
-// 					ReviewConfidence: pulumi.Int(100),
-// 					Switch:           pulumi.String("ON"),
-// 				},
-// 			},
-// 			ProhibitedConfigure: &mps.ContentReviewTemplateProhibitedConfigureArgs{
-// 				AsrReviewInfo: &mps.ContentReviewTemplateProhibitedConfigureAsrReviewInfoArgs{
-// 					BlockConfidence:  pulumi.Int(60),
-// 					ReviewConfidence: pulumi.Int(100),
-// 					Switch:           pulumi.String("ON"),
-// 				},
-// 				OcrReviewInfo: &mps.ContentReviewTemplateProhibitedConfigureOcrReviewInfoArgs{
-// 					BlockConfidence:  pulumi.Int(60),
-// 					ReviewConfidence: pulumi.Int(100),
-// 					Switch:           pulumi.String("ON"),
-// 				},
-// 			},
-// 			TerrorismConfigure: &mps.ContentReviewTemplateTerrorismConfigureArgs{
-// 				ImgReviewInfo: &mps.ContentReviewTemplateTerrorismConfigureImgReviewInfoArgs{
-// 					BlockConfidence: pulumi.Int(60),
-// 					LabelSet: []string{
-// 						"guns",
-// 						"crowd",
-// 					},
-// 					ReviewConfidence: pulumi.Int(100),
-// 					Switch:           pulumi.String("ON"),
-// 				},
-// 				OcrReviewInfo: &mps.ContentReviewTemplateTerrorismConfigureOcrReviewInfoArgs{
-// 					BlockConfidence:  pulumi.Int(60),
-// 					ReviewConfidence: pulumi.Int(100),
-// 					Switch:           pulumi.String("ON"),
-// 				},
-// 			},
-// 			UserDefineConfigure: &mps.ContentReviewTemplateUserDefineConfigureArgs{
-// 				AsrReviewInfo: &mps.ContentReviewTemplateUserDefineConfigureAsrReviewInfoArgs{
-// 					BlockConfidence: pulumi.Int(60),
-// 					LabelSet: []string{
-// 						"VOICE_1",
-// 						"VOICE_2",
-// 					},
-// 					ReviewConfidence: pulumi.Int(100),
-// 					Switch:           pulumi.String("ON"),
-// 				},
-// 				FaceReviewInfo: &mps.ContentReviewTemplateUserDefineConfigureFaceReviewInfoArgs{
-// 					BlockConfidence: pulumi.Int(60),
-// 					LabelSet: []string{
-// 						"FACE_1",
-// 						"FACE_2",
-// 					},
-// 					ReviewConfidence: pulumi.Int(100),
-// 					Switch:           pulumi.String("ON"),
-// 				},
-// 				OcrReviewInfo: &mps.ContentReviewTemplateUserDefineConfigureOcrReviewInfoArgs{
-// 					BlockConfidence: pulumi.Int(60),
-// 					LabelSet: []string{
-// 						"VIDEO_1",
-// 						"VIDEO_2",
-// 					},
-// 					ReviewConfidence: pulumi.Int(100),
-// 					Switch:           pulumi.String("ON"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 //
 // ## Import
 //
 // mps content_review_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/contentReviewTemplate:ContentReviewTemplate content_review_template definition
+// $ pulumi import tencentcloud:Mps/contentReviewTemplate:ContentReviewTemplate content_review_template definition
 // ```
 type ContentReviewTemplate struct {
 	pulumi.CustomResourceState
@@ -168,7 +46,7 @@ func NewContentReviewTemplate(ctx *pulumi.Context,
 		args = &ContentReviewTemplateArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ContentReviewTemplate
 	err := ctx.RegisterResource("tencentcloud:Mps/contentReviewTemplate:ContentReviewTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -289,7 +167,7 @@ func (i *ContentReviewTemplate) ToContentReviewTemplateOutputWithContext(ctx con
 // ContentReviewTemplateArrayInput is an input type that accepts ContentReviewTemplateArray and ContentReviewTemplateArrayOutput values.
 // You can construct a concrete instance of `ContentReviewTemplateArrayInput` via:
 //
-//          ContentReviewTemplateArray{ ContentReviewTemplateArgs{...} }
+//	ContentReviewTemplateArray{ ContentReviewTemplateArgs{...} }
 type ContentReviewTemplateArrayInput interface {
 	pulumi.Input
 
@@ -314,7 +192,7 @@ func (i ContentReviewTemplateArray) ToContentReviewTemplateArrayOutputWithContex
 // ContentReviewTemplateMapInput is an input type that accepts ContentReviewTemplateMap and ContentReviewTemplateMapOutput values.
 // You can construct a concrete instance of `ContentReviewTemplateMapInput` via:
 //
-//          ContentReviewTemplateMap{ "key": ContentReviewTemplateArgs{...} }
+//	ContentReviewTemplateMap{ "key": ContentReviewTemplateArgs{...} }
 type ContentReviewTemplateMapInput interface {
 	pulumi.Input
 

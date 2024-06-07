@@ -8,7 +8,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
 {
     public static class Config
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "IDE1006", Justification = 
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "IDE1006", Justification = 
         "Double underscore prefix used to avoid conflicts with variable names.")]
         private sealed class __Value<T>
         {
@@ -30,12 +30,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
             }
         }
 
-        private static readonly Pulumi.Config __config = new Pulumi.Config("tencentcloud");
+        private static readonly global::Pulumi.Config __config = new global::Pulumi.Config("tencentcloud");
 
         private static readonly __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRole?> _assumeRole = new __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRole?>(() => __config.GetObject<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRole>("assumeRole"));
-        /// <summary>
-        /// The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
-        /// </summary>
         public static TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRole? AssumeRole
         {
             get => _assumeRole.Get();
@@ -134,9 +131,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
 
              public class AssumeRole
              {
+            /// <summary>
+            /// A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
+            /// </summary>
                 public string? Policy { get; set; } = null!;
+            /// <summary>
+            /// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+            /// </summary>
                 public string RoleArn { get; set; }
+            /// <summary>
+            /// The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+            /// </summary>
                 public int SessionDuration { get; set; }
+            /// <summary>
+            /// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+            /// </summary>
                 public string SessionName { get; set; }
             }
         }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -25,14 +27,12 @@ import * as utilities from "../utilities";
  *     clusterName: "cluster",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getClusters(args?: GetClustersArgs, opts?: pulumi.InvokeOptions): Promise<GetClustersResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tcaplus/getClusters:getClusters", {
         "clusterId": args.clusterId,
         "clusterName": args.clusterName,
@@ -80,9 +80,31 @@ export interface GetClustersResult {
     readonly lists: outputs.Tcaplus.GetClustersList[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query TcaplusDB clusters.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const name = tencentcloud.Tcaplus.getClusters({
+ *     clusterName: "cluster",
+ * });
+ * const id = tencentcloud.Tcaplus.getClusters({
+ *     clusterId: tencentcloud_tcaplus_cluster.test.id,
+ * });
+ * const idname = tencentcloud.Tcaplus.getClusters({
+ *     clusterId: tencentcloud_tcaplus_cluster.test.id,
+ *     clusterName: "cluster",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getClustersOutput(args?: GetClustersOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetClustersResult> {
-    return pulumi.output(args).apply(a => getClusters(a, opts))
+    return pulumi.output(args).apply((a: any) => getClusters(a, opts))
 }
 
 /**

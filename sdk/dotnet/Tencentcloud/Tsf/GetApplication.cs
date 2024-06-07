@@ -15,74 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf application
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var application = Tencentcloud.Tsf.GetApplication.Invoke(new()
         ///     {
-        ///         var application = Output.Create(Tencentcloud.Tsf.GetApplication.InvokeAsync(new Tencentcloud.Tsf.GetApplicationArgs
+        ///         ApplicationIdLists = new[]
         ///         {
-        ///             ApplicationIdLists = 
-        ///             {
-        ///                 "application-a24x29xv",
-        ///             },
-        ///             ApplicationType = "V",
-        ///             MicroserviceType = "N",
-        ///         }));
-        ///     }
+        ///             "application-a24x29xv",
+        ///         },
+        ///         ApplicationType = "V",
+        ///         MicroserviceType = "N",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetApplicationResult> InvokeAsync(GetApplicationArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApplicationResult>("tencentcloud:Tsf/getApplication:getApplication", args ?? new GetApplicationArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApplicationResult>("tencentcloud:Tsf/getApplication:getApplication", args ?? new GetApplicationArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf application
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var application = Tencentcloud.Tsf.GetApplication.Invoke(new()
         ///     {
-        ///         var application = Output.Create(Tencentcloud.Tsf.GetApplication.InvokeAsync(new Tencentcloud.Tsf.GetApplicationArgs
+        ///         ApplicationIdLists = new[]
         ///         {
-        ///             ApplicationIdLists = 
-        ///             {
-        ///                 "application-a24x29xv",
-        ///             },
-        ///             ApplicationType = "V",
-        ///             MicroserviceType = "N",
-        ///         }));
-        ///     }
+        ///             "application-a24x29xv",
+        ///         },
+        ///         ApplicationType = "V",
+        ///         MicroserviceType = "N",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetApplicationResult> Invoke(GetApplicationInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApplicationResult>("tencentcloud:Tsf/getApplication:getApplication", args ?? new GetApplicationInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApplicationResult>("tencentcloud:Tsf/getApplication:getApplication", args ?? new GetApplicationInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetApplicationArgs : Pulumi.InvokeArgs
+    public sealed class GetApplicationArgs : global::Pulumi.InvokeArgs
     {
         [Input("applicationIdLists")]
         private List<string>? _applicationIdLists;
@@ -129,9 +123,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetApplicationArgs()
         {
         }
+        public static new GetApplicationArgs Empty => new GetApplicationArgs();
     }
 
-    public sealed class GetApplicationInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetApplicationInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("applicationIdLists")]
         private InputList<string>? _applicationIdLists;
@@ -178,6 +173,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetApplicationInvokeArgs()
         {
         }
+        public static new GetApplicationInvokeArgs Empty => new GetApplicationInvokeArgs();
     }
 
 

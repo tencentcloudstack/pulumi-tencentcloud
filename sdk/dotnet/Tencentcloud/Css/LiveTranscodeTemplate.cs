@@ -15,54 +15,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var liveTranscodeTemplate = new Tencentcloud.Css.LiveTranscodeTemplate("liveTranscodeTemplate", new()
     ///     {
-    ///         var liveTranscodeTemplate = new Tencentcloud.Css.LiveTranscodeTemplate("liveTranscodeTemplate", new Tencentcloud.Css.LiveTranscodeTemplateArgs
-    ///         {
-    ///             Acodec = "aac",
-    ///             AdaptBitratePercent = 0,
-    ///             AiTransCode = 0,
-    ///             AudioBitrate = 128,
-    ///             BitrateToOrig = 0,
-    ///             Description = "This_is_a_tf_test_temp.",
-    ///             DrmTracks = "SD",
-    ///             DrmType = "fairplay",
-    ///             Fps = 0,
-    ///             FpsToOrig = 0,
-    ///             Gop = 2,
-    ///             Height = 0,
-    ///             HeightToOrig = 0,
-    ///             NeedAudio = 1,
-    ///             NeedVideo = 1,
-    ///             Profile = "baseline",
-    ///             Rotate = 0,
-    ///             ShortEdgeAsHeight = 0,
-    ///             TemplateName = "template_name",
-    ///             Vcodec = "origin",
-    ///             VideoBitrate = 100,
-    ///             Width = 0,
-    ///         });
-    ///     }
+    ///         Acodec = "aac",
+    ///         AdaptBitratePercent = 0,
+    ///         AiTransCode = 0,
+    ///         AudioBitrate = 128,
+    ///         BitrateToOrig = 0,
+    ///         Description = "This_is_a_tf_test_temp.",
+    ///         DrmTracks = "SD",
+    ///         DrmType = "fairplay",
+    ///         Fps = 0,
+    ///         FpsToOrig = 0,
+    ///         Gop = 2,
+    ///         Height = 0,
+    ///         HeightToOrig = 0,
+    ///         NeedAudio = 1,
+    ///         NeedVideo = 1,
+    ///         Profile = "baseline",
+    ///         Rotate = 0,
+    ///         ShortEdgeAsHeight = 0,
+    ///         TemplateName = "template_name",
+    ///         Vcodec = "origin",
+    ///         VideoBitrate = 100,
+    ///         Width = 0,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css live_transcode_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/liveTranscodeTemplate:LiveTranscodeTemplate live_transcode_template liveTranscodeTemplate_id
+    /// $ pulumi import tencentcloud:Css/liveTranscodeTemplate:LiveTranscodeTemplate live_transcode_template liveTranscodeTemplate_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/liveTranscodeTemplate:LiveTranscodeTemplate")]
-    public partial class LiveTranscodeTemplate : Pulumi.CustomResource
+    public partial class LiveTranscodeTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// default aac, not support now.
@@ -241,7 +242,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class LiveTranscodeTemplateArgs : Pulumi.ResourceArgs
+    public sealed class LiveTranscodeTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// default aac, not support now.
@@ -378,9 +379,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public LiveTranscodeTemplateArgs()
         {
         }
+        public static new LiveTranscodeTemplateArgs Empty => new LiveTranscodeTemplateArgs();
     }
 
-    public sealed class LiveTranscodeTemplateState : Pulumi.ResourceArgs
+    public sealed class LiveTranscodeTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// default aac, not support now.
@@ -517,5 +519,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public LiveTranscodeTemplateState()
         {
         }
+        public static new LiveTranscodeTemplateState Empty => new LiveTranscodeTemplateState();
     }
 }

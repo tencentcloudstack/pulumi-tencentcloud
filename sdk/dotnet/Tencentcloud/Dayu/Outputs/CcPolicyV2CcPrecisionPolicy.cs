@@ -26,6 +26,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Outputs
         /// Policy mode (discard or captcha).
         /// </summary>
         public readonly string PolicyAction;
+        /// <summary>
+        /// Policy Id.
+        /// </summary>
         public readonly string? PolicyId;
         /// <summary>
         /// A list of policies.

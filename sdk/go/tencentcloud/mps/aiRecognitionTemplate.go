@@ -8,63 +8,68 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mps aiRecognitionTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewAiRecognitionTemplate(ctx, "aiRecognitionTemplate", &Mps.AiRecognitionTemplateArgs{
-// 			AsrFullTextConfigure: &mps.AiRecognitionTemplateAsrFullTextConfigureArgs{
-// 				Switch: pulumi.String("OFF"),
-// 			},
-// 			AsrWordsConfigure: &mps.AiRecognitionTemplateAsrWordsConfigureArgs{
-// 				LabelSets: pulumi.StringArray{},
-// 				Switch:    pulumi.String("OFF"),
-// 			},
-// 			FaceConfigure: &mps.AiRecognitionTemplateFaceConfigureArgs{
-// 				DefaultLibraryLabelSets: pulumi.StringArray{
-// 					pulumi.String("entertainment"),
-// 					pulumi.String("sport"),
-// 				},
-// 				FaceLibrary:                pulumi.String("All"),
-// 				Score:                      pulumi.Float64(85),
-// 				Switch:                     pulumi.String("ON"),
-// 				UserDefineLibraryLabelSets: pulumi.StringArray{},
-// 			},
-// 			OcrFullTextConfigure: &mps.AiRecognitionTemplateOcrFullTextConfigureArgs{
-// 				Switch: pulumi.String("OFF"),
-// 			},
-// 			OcrWordsConfigure: &mps.AiRecognitionTemplateOcrWordsConfigureArgs{
-// 				LabelSets: pulumi.StringArray{},
-// 				Switch:    pulumi.String("OFF"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewAiRecognitionTemplate(ctx, "aiRecognitionTemplate", &Mps.AiRecognitionTemplateArgs{
+//				AsrFullTextConfigure: &mps.AiRecognitionTemplateAsrFullTextConfigureArgs{
+//					Switch: pulumi.String("OFF"),
+//				},
+//				AsrWordsConfigure: &mps.AiRecognitionTemplateAsrWordsConfigureArgs{
+//					LabelSets: pulumi.StringArray{},
+//					Switch:    pulumi.String("OFF"),
+//				},
+//				FaceConfigure: &mps.AiRecognitionTemplateFaceConfigureArgs{
+//					DefaultLibraryLabelSets: pulumi.StringArray{
+//						pulumi.String("entertainment"),
+//						pulumi.String("sport"),
+//					},
+//					FaceLibrary:                pulumi.String("All"),
+//					Score:                      pulumi.Float64(85),
+//					Switch:                     pulumi.String("ON"),
+//					UserDefineLibraryLabelSets: pulumi.StringArray{},
+//				},
+//				OcrFullTextConfigure: &mps.AiRecognitionTemplateOcrFullTextConfigureArgs{
+//					Switch: pulumi.String("OFF"),
+//				},
+//				OcrWordsConfigure: &mps.AiRecognitionTemplateOcrWordsConfigureArgs{
+//					LabelSets: pulumi.StringArray{},
+//					Switch:    pulumi.String("OFF"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // mps ai_recognition_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/aiRecognitionTemplate:AiRecognitionTemplate ai_recognition_template ai_recognition_template_id
+// $ pulumi import tencentcloud:Mps/aiRecognitionTemplate:AiRecognitionTemplate ai_recognition_template ai_recognition_template_id
 // ```
 type AiRecognitionTemplate struct {
 	pulumi.CustomResourceState
@@ -92,7 +97,7 @@ func NewAiRecognitionTemplate(ctx *pulumi.Context,
 		args = &AiRecognitionTemplateArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AiRecognitionTemplate
 	err := ctx.RegisterResource("tencentcloud:Mps/aiRecognitionTemplate:AiRecognitionTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -213,7 +218,7 @@ func (i *AiRecognitionTemplate) ToAiRecognitionTemplateOutputWithContext(ctx con
 // AiRecognitionTemplateArrayInput is an input type that accepts AiRecognitionTemplateArray and AiRecognitionTemplateArrayOutput values.
 // You can construct a concrete instance of `AiRecognitionTemplateArrayInput` via:
 //
-//          AiRecognitionTemplateArray{ AiRecognitionTemplateArgs{...} }
+//	AiRecognitionTemplateArray{ AiRecognitionTemplateArgs{...} }
 type AiRecognitionTemplateArrayInput interface {
 	pulumi.Input
 
@@ -238,7 +243,7 @@ func (i AiRecognitionTemplateArray) ToAiRecognitionTemplateArrayOutputWithContex
 // AiRecognitionTemplateMapInput is an input type that accepts AiRecognitionTemplateMap and AiRecognitionTemplateMapOutput values.
 // You can construct a concrete instance of `AiRecognitionTemplateMapInput` via:
 //
-//          AiRecognitionTemplateMap{ "key": AiRecognitionTemplateArgs{...} }
+//	AiRecognitionTemplateMap{ "key": AiRecognitionTemplateArgs{...} }
 type AiRecognitionTemplateMapInput interface {
 	pulumi.Input
 

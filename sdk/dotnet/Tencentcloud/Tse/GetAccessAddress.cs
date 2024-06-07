@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// <summary>
         /// Use this data source to query detailed information of tse access_address
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var accessAddress = Tencentcloud.Tse.GetAccessAddress.Invoke(new()
         ///     {
-        ///         var accessAddress = Output.Create(Tencentcloud.Tse.GetAccessAddress.InvokeAsync(new Tencentcloud.Tse.GetAccessAddressArgs
-        ///         {
-        ///             EngineRegion = "ap-guangzhou",
-        ///             InstanceId = "ins-7eb7eea7",
-        ///         }));
-        ///     }
+        ///         EngineRegion = "ap-guangzhou",
+        ///         InstanceId = "ins-7eb7eea7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAccessAddressResult> InvokeAsync(GetAccessAddressArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAccessAddressResult>("tencentcloud:Tse/getAccessAddress:getAccessAddress", args ?? new GetAccessAddressArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccessAddressResult>("tencentcloud:Tse/getAccessAddress:getAccessAddress", args ?? new GetAccessAddressArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tse access_address
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var accessAddress = Tencentcloud.Tse.GetAccessAddress.Invoke(new()
         ///     {
-        ///         var accessAddress = Output.Create(Tencentcloud.Tse.GetAccessAddress.InvokeAsync(new Tencentcloud.Tse.GetAccessAddressArgs
-        ///         {
-        ///             EngineRegion = "ap-guangzhou",
-        ///             InstanceId = "ins-7eb7eea7",
-        ///         }));
-        ///     }
+        ///         EngineRegion = "ap-guangzhou",
+        ///         InstanceId = "ins-7eb7eea7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAccessAddressResult> Invoke(GetAccessAddressInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAccessAddressResult>("tencentcloud:Tse/getAccessAddress:getAccessAddress", args ?? new GetAccessAddressInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAccessAddressResult>("tencentcloud:Tse/getAccessAddress:getAccessAddress", args ?? new GetAccessAddressInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAccessAddressArgs : Pulumi.InvokeArgs
+    public sealed class GetAccessAddressArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Deploy region.
@@ -115,9 +109,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetAccessAddressArgs()
         {
         }
+        public static new GetAccessAddressArgs Empty => new GetAccessAddressArgs();
     }
 
-    public sealed class GetAccessAddressInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAccessAddressInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Deploy region.
@@ -158,6 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetAccessAddressInvokeArgs()
         {
         }
+        public static new GetAccessAddressInvokeArgs Empty => new GetAccessAddressInvokeArgs();
     }
 
 

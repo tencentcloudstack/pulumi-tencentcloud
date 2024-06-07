@@ -11,13 +11,20 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Inputs
 {
 
-    public sealed class GetRabbitmqNodeListFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetRabbitmqNodeListFilterInputArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// The name of the filter parameter.
+        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
         [Input("values")]
         private InputList<string>? _values;
+
+        /// <summary>
+        /// value.
+        /// </summary>
         public InputList<string> Values
         {
             get => _values ?? (_values = new InputList<string>());
@@ -27,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Inputs
         public GetRabbitmqNodeListFilterInputArgs()
         {
         }
+        public static new GetRabbitmqNodeListFilterInputArgs Empty => new GetRabbitmqNodeListFilterInputArgs();
     }
 }

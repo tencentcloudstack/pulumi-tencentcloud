@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class GetBindApiAppsStatusFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetBindApiAppsStatusFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Field to be filtered.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public GetBindApiAppsStatusFilterArgs()
         {
         }
+        public static new GetBindApiAppsStatusFilterArgs Empty => new GetBindApiAppsStatusFilterArgs();
     }
 }

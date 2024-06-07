@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class DdosPolicyV2WaterPrintConfigListenerArgs : Pulumi.ResourceArgs
+    public sealed class DdosPolicyV2WaterPrintConfigListenerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Forwarding protocol, value [TCP, UDP].
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public DdosPolicyV2WaterPrintConfigListenerArgs()
         {
         }
+        public static new DdosPolicyV2WaterPrintConfigListenerArgs Empty => new DdosPolicyV2WaterPrintConfigListenerArgs();
     }
 }

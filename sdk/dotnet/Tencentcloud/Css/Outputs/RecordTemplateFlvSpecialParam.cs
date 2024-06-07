@@ -14,6 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css.Outputs
     [OutputType]
     public sealed class RecordTemplateFlvSpecialParam
     {
+        /// <summary>
+        /// Whether to enable the transfer while recording is valid only in the flv format.
+        /// </summary>
         public readonly bool? UploadInRecording;
 
         [OutputConstructor]

@@ -8,65 +8,68 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a monitor tmpAlertGroup
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewTmpAlertGroup(ctx, "tmpAlertGroup", &Monitor.TmpAlertGroupArgs{
-// 			AmpReceivers: pulumi.StringArray{
-// 				pulumi.String("notice-om017kc2"),
-// 			},
-// 			CustomReceiver: &monitor.TmpAlertGroupCustomReceiverArgs{
-// 				Type: pulumi.String("amp"),
-// 			},
-// 			GroupName:      pulumi.String("tf-test"),
-// 			InstanceId:     pulumi.String("prom-ip429jis"),
-// 			RepeatInterval: pulumi.String("5m"),
-// 			Rules: monitor.TmpAlertGroupRuleArray{
-// 				&monitor.TmpAlertGroupRuleArgs{
-// 					Annotations: pulumi.AnyMap{
-// 						"description": pulumi.Any(fmt.Sprintf("%v%v%v", "Agent {{", "$", "labels.instance}} is deactivated, please pay attention!")),
-// 						"summary":     pulumi.Any("Agent health check"),
-// 					},
-// 					Duration: pulumi.String("1m"),
-// 					Expr:     pulumi.String("up{job=\"prometheus-agent\"} != 1"),
-// 					Labels: pulumi.AnyMap{
-// 						"severity": pulumi.Any("critical"),
-// 					},
-// 					RuleName: pulumi.String("Agent health check"),
-// 					State:    pulumi.Int(2),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.NewTmpAlertGroup(ctx, "tmpAlertGroup", &Monitor.TmpAlertGroupArgs{
+//				AmpReceivers: pulumi.StringArray{
+//					pulumi.String("notice-om017kc2"),
+//				},
+//				CustomReceiver: &monitor.TmpAlertGroupCustomReceiverArgs{
+//					Type: pulumi.String("amp"),
+//				},
+//				GroupName:      pulumi.String("tf-test"),
+//				InstanceId:     pulumi.String("prom-ip429jis"),
+//				RepeatInterval: pulumi.String("5m"),
+//				Rules: monitor.TmpAlertGroupRuleArray{
+//					&monitor.TmpAlertGroupRuleArgs{
+//						Annotations: pulumi.Map{
+//							"description": pulumi.Any("Agent {{$labels.instance}} is deactivated, please pay attention!"),
+//							"summary":     pulumi.Any("Agent health check"),
+//						},
+//						Duration: pulumi.String("1m"),
+//						Expr:     pulumi.String("up{job=\"prometheus-agent\"} != 1"),
+//						Labels: pulumi.Map{
+//							"severity": pulumi.Any("critical"),
+//						},
+//						RuleName: pulumi.String("Agent health check"),
+//						State:    pulumi.Int(2),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // monitor tmp_alert_group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup tmp_alert_group instance_id#group_id
+// $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup tmp_alert_group instance_id#group_id
 // ```
 type TmpAlertGroup struct {
 	pulumi.CustomResourceState
@@ -94,7 +97,7 @@ func NewTmpAlertGroup(ctx *pulumi.Context,
 		args = &TmpAlertGroupArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TmpAlertGroup
 	err := ctx.RegisterResource("tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -211,7 +214,7 @@ func (i *TmpAlertGroup) ToTmpAlertGroupOutputWithContext(ctx context.Context) Tm
 // TmpAlertGroupArrayInput is an input type that accepts TmpAlertGroupArray and TmpAlertGroupArrayOutput values.
 // You can construct a concrete instance of `TmpAlertGroupArrayInput` via:
 //
-//          TmpAlertGroupArray{ TmpAlertGroupArgs{...} }
+//	TmpAlertGroupArray{ TmpAlertGroupArgs{...} }
 type TmpAlertGroupArrayInput interface {
 	pulumi.Input
 
@@ -236,7 +239,7 @@ func (i TmpAlertGroupArray) ToTmpAlertGroupArrayOutputWithContext(ctx context.Co
 // TmpAlertGroupMapInput is an input type that accepts TmpAlertGroupMap and TmpAlertGroupMapOutput values.
 // You can construct a concrete instance of `TmpAlertGroupMapInput` via:
 //
-//          TmpAlertGroupMap{ "key": TmpAlertGroupArgs{...} }
+//	TmpAlertGroupMap{ "key": TmpAlertGroupArgs{...} }
 type TmpAlertGroupMapInput interface {
 	pulumi.Input
 

@@ -7,82 +7,93 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cfw vpcFirewallSwitch
 //
 // ## Example Usage
+//
 // ### Turn off switch
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleVpcFwSwitches, err := Cfw.GetVpcFwSwitches(ctx, &cfw.GetVpcFwSwitchesArgs{
-// 			VpcInsId: "cfwg-c8c2de41",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cfw.NewVpcFirewallSwitch(ctx, "exampleVpcFirewallSwitch", &Cfw.VpcFirewallSwitchArgs{
-// 			VpcInsId: pulumi.String(exampleVpcFwSwitches.Id),
-// 			SwitchId: pulumi.String(exampleVpcFwSwitches.SwitchLists[0].SwitchId),
-// 			Enable:   pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleVpcFwSwitches, err := Cfw.GetVpcFwSwitches(ctx, &cfw.GetVpcFwSwitchesArgs{
+//				VpcInsId: "cfwg-c8c2de41",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cfw.NewVpcFirewallSwitch(ctx, "exampleVpcFirewallSwitch", &Cfw.VpcFirewallSwitchArgs{
+//				VpcInsId: pulumi.String(exampleVpcFwSwitches.Id),
+//				SwitchId: pulumi.String(exampleVpcFwSwitches.SwitchLists[0].SwitchId),
+//				Enable:   pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Or turn on switch
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleVpcFwSwitches, err := Cfw.GetVpcFwSwitches(ctx, &cfw.GetVpcFwSwitchesArgs{
-// 			VpcInsId: "cfwg-c8c2de41",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cfw.NewVpcFirewallSwitch(ctx, "exampleVpcFirewallSwitch", &Cfw.VpcFirewallSwitchArgs{
-// 			VpcInsId: pulumi.String(exampleVpcFwSwitches.Id),
-// 			SwitchId: pulumi.String(exampleVpcFwSwitches.SwitchLists[0].SwitchId),
-// 			Enable:   pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleVpcFwSwitches, err := Cfw.GetVpcFwSwitches(ctx, &cfw.GetVpcFwSwitchesArgs{
+//				VpcInsId: "cfwg-c8c2de41",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cfw.NewVpcFirewallSwitch(ctx, "exampleVpcFirewallSwitch", &Cfw.VpcFirewallSwitchArgs{
+//				VpcInsId: pulumi.String(exampleVpcFwSwitches.Id),
+//				SwitchId: pulumi.String(exampleVpcFwSwitches.SwitchLists[0].SwitchId),
+//				Enable:   pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cfw vpc_firewall_switch can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfw/vpcFirewallSwitch:VpcFirewallSwitch example cfwg-c8c2de41#cfws-f2c63ded84
+// $ pulumi import tencentcloud:Cfw/vpcFirewallSwitch:VpcFirewallSwitch example cfwg-c8c2de41#cfws-f2c63ded84
 // ```
 type VpcFirewallSwitch struct {
 	pulumi.CustomResourceState
@@ -111,7 +122,7 @@ func NewVpcFirewallSwitch(ctx *pulumi.Context,
 	if args.VpcInsId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcInsId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource VpcFirewallSwitch
 	err := ctx.RegisterResource("tencentcloud:Cfw/vpcFirewallSwitch:VpcFirewallSwitch", name, args, &resource, opts...)
 	if err != nil {
@@ -200,7 +211,7 @@ func (i *VpcFirewallSwitch) ToVpcFirewallSwitchOutputWithContext(ctx context.Con
 // VpcFirewallSwitchArrayInput is an input type that accepts VpcFirewallSwitchArray and VpcFirewallSwitchArrayOutput values.
 // You can construct a concrete instance of `VpcFirewallSwitchArrayInput` via:
 //
-//          VpcFirewallSwitchArray{ VpcFirewallSwitchArgs{...} }
+//	VpcFirewallSwitchArray{ VpcFirewallSwitchArgs{...} }
 type VpcFirewallSwitchArrayInput interface {
 	pulumi.Input
 
@@ -225,7 +236,7 @@ func (i VpcFirewallSwitchArray) ToVpcFirewallSwitchArrayOutputWithContext(ctx co
 // VpcFirewallSwitchMapInput is an input type that accepts VpcFirewallSwitchMap and VpcFirewallSwitchMapOutput values.
 // You can construct a concrete instance of `VpcFirewallSwitchMapInput` via:
 //
-//          VpcFirewallSwitchMap{ "key": VpcFirewallSwitchArgs{...} }
+//	VpcFirewallSwitchMap{ "key": VpcFirewallSwitchArgs{...} }
 type VpcFirewallSwitchMapInput interface {
 	pulumi.Input
 

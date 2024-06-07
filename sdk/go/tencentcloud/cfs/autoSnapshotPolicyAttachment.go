@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cfs autoSnapshotPolicyAttachment
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfs.NewAutoSnapshotPolicyAttachment(ctx, "autoSnapshotPolicyAttachment", &Cfs.AutoSnapshotPolicyAttachmentArgs{
-// 			AutoSnapshotPolicyId: pulumi.String("asp-basic"),
-// 			FileSystemIds:        pulumi.String("cfs-4xzkct19,cfs-iobiaxtj"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfs.NewAutoSnapshotPolicyAttachment(ctx, "autoSnapshotPolicyAttachment", &Cfs.AutoSnapshotPolicyAttachmentArgs{
+//				AutoSnapshotPolicyId: pulumi.String("asp-basic"),
+//				FileSystemIds:        pulumi.String("cfs-4xzkct19,cfs-iobiaxtj"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cfs auto_snapshot_policy_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfs/autoSnapshotPolicyAttachment:AutoSnapshotPolicyAttachment auto_snapshot_policy_attachment auto_snapshot_policy_id#file_system_ids
+// $ pulumi import tencentcloud:Cfs/autoSnapshotPolicyAttachment:AutoSnapshotPolicyAttachment auto_snapshot_policy_attachment auto_snapshot_policy_id#file_system_ids
 // ```
 type AutoSnapshotPolicyAttachment struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewAutoSnapshotPolicyAttachment(ctx *pulumi.Context,
 	if args.FileSystemIds == nil {
 		return nil, errors.New("invalid value for required argument 'FileSystemIds'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AutoSnapshotPolicyAttachment
 	err := ctx.RegisterResource("tencentcloud:Cfs/autoSnapshotPolicyAttachment:AutoSnapshotPolicyAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *AutoSnapshotPolicyAttachment) ToAutoSnapshotPolicyAttachmentOutputWithC
 // AutoSnapshotPolicyAttachmentArrayInput is an input type that accepts AutoSnapshotPolicyAttachmentArray and AutoSnapshotPolicyAttachmentArrayOutput values.
 // You can construct a concrete instance of `AutoSnapshotPolicyAttachmentArrayInput` via:
 //
-//          AutoSnapshotPolicyAttachmentArray{ AutoSnapshotPolicyAttachmentArgs{...} }
+//	AutoSnapshotPolicyAttachmentArray{ AutoSnapshotPolicyAttachmentArgs{...} }
 type AutoSnapshotPolicyAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i AutoSnapshotPolicyAttachmentArray) ToAutoSnapshotPolicyAttachmentArrayOu
 // AutoSnapshotPolicyAttachmentMapInput is an input type that accepts AutoSnapshotPolicyAttachmentMap and AutoSnapshotPolicyAttachmentMapOutput values.
 // You can construct a concrete instance of `AutoSnapshotPolicyAttachmentMapInput` via:
 //
-//          AutoSnapshotPolicyAttachmentMap{ "key": AutoSnapshotPolicyAttachmentArgs{...} }
+//	AutoSnapshotPolicyAttachmentMap{ "key": AutoSnapshotPolicyAttachmentArgs{...} }
 type AutoSnapshotPolicyAttachmentMapInput interface {
 	pulumi.Input
 

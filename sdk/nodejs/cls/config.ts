@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const config = new tencentcloud.Cls.Config("config", {
+ * const config = new tencentcloud.cls.Config("config", {
  *     excludePaths: [
  *         {
  *             type: "Path",
@@ -45,13 +47,14 @@ import * as utilities from "../utilities";
  *     path: "/var/log/kubernetes",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cls config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cls/config:Config config config_id
+ * $ pulumi import tencentcloud:Cls/config:Config config config_id
  * ```
  */
 export class Config extends pulumi.CustomResource {

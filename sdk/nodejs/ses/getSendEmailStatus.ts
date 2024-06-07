@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const sendEmailStatus = pulumi.output(tencentcloud.Ses.getSendEmailStatus({
+ * const sendEmailStatus = tencentcloud.Ses.getSendEmailStatus({
  *     messageId: "qcloudses-30-4123414323-date-20210101094334-syNARhMTbKI1",
  *     requestDate: "2020-09-22",
  *     toEmailAddress: "example@cloud.com",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSendEmailStatus(args: GetSendEmailStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetSendEmailStatusResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ses/getSendEmailStatus:getSendEmailStatus", {
         "messageId": args.messageId,
         "requestDate": args.requestDate,
@@ -80,9 +80,26 @@ export interface GetSendEmailStatusResult {
      */
     readonly toEmailAddress?: string;
 }
-
+/**
+ * Use this data source to query detailed information of ses sendEmailStatus
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const sendEmailStatus = tencentcloud.Ses.getSendEmailStatus({
+ *     messageId: "qcloudses-30-4123414323-date-20210101094334-syNARhMTbKI1",
+ *     requestDate: "2020-09-22",
+ *     toEmailAddress: "example@cloud.com",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSendEmailStatusOutput(args: GetSendEmailStatusOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSendEmailStatusResult> {
-    return pulumi.output(args).apply(a => getSendEmailStatus(a, opts))
+    return pulumi.output(args).apply((a: any) => getSendEmailStatus(a, opts))
 }
 
 /**

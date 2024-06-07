@@ -7,64 +7,70 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to custom error page info for a GAAP HTTP domain.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-// 			Bandwidth:        pulumi.Int(10),
-// 			Concurrent:       pulumi.Int(2),
-// 			AccessRegion:     pulumi.String("SouthChina"),
-// 			RealserverRegion: pulumi.String("NorthChina"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
-// 			Protocol: pulumi.String("HTTP"),
-// 			Port:     pulumi.Int(80),
-// 			ProxyId:  fooProxy.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooHttpDomain, err := Gaap.NewHttpDomain(ctx, "fooHttpDomain", &Gaap.HttpDomainArgs{
-// 			ListenerId: fooLayer7Listener.ID(),
-// 			Domain:     pulumi.String("www.qq.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Gaap.NewDomainErrorPage(ctx, "fooDomainErrorPage", &Gaap.DomainErrorPageArgs{
-// 			ListenerId: fooLayer7Listener.ID(),
-// 			Domain:     fooHttpDomain.Domain,
-// 			ErrorCodes: pulumi.IntArray{
-// 				pulumi.Int(404),
-// 				pulumi.Int(503),
-// 			},
-// 			Body: pulumi.String("bad request"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+//				Bandwidth:        pulumi.Int(10),
+//				Concurrent:       pulumi.Int(2),
+//				AccessRegion:     pulumi.String("SouthChina"),
+//				RealserverRegion: pulumi.String("NorthChina"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
+//				Protocol: pulumi.String("HTTP"),
+//				Port:     pulumi.Int(80),
+//				ProxyId:  fooProxy.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooHttpDomain, err := Gaap.NewHttpDomain(ctx, "fooHttpDomain", &Gaap.HttpDomainArgs{
+//				ListenerId: fooLayer7Listener.ID(),
+//				Domain:     pulumi.String("www.qq.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Gaap.NewDomainErrorPage(ctx, "fooDomainErrorPage", &Gaap.DomainErrorPageArgs{
+//				ListenerId: fooLayer7Listener.ID(),
+//				Domain:     fooHttpDomain.Domain,
+//				ErrorCodes: pulumi.IntArray{
+//					pulumi.Int(404),
+//					pulumi.Int(503),
+//				},
+//				Body: pulumi.String("bad request"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type DomainErrorPage struct {
 	pulumi.CustomResourceState
 
@@ -103,7 +109,7 @@ func NewDomainErrorPage(ctx *pulumi.Context,
 	if args.ListenerId == nil {
 		return nil, errors.New("invalid value for required argument 'ListenerId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DomainErrorPage
 	err := ctx.RegisterResource("tencentcloud:Gaap/domainErrorPage:DomainErrorPage", name, args, &resource, opts...)
 	if err != nil {
@@ -224,7 +230,7 @@ func (i *DomainErrorPage) ToDomainErrorPageOutputWithContext(ctx context.Context
 // DomainErrorPageArrayInput is an input type that accepts DomainErrorPageArray and DomainErrorPageArrayOutput values.
 // You can construct a concrete instance of `DomainErrorPageArrayInput` via:
 //
-//          DomainErrorPageArray{ DomainErrorPageArgs{...} }
+//	DomainErrorPageArray{ DomainErrorPageArgs{...} }
 type DomainErrorPageArrayInput interface {
 	pulumi.Input
 
@@ -249,7 +255,7 @@ func (i DomainErrorPageArray) ToDomainErrorPageArrayOutputWithContext(ctx contex
 // DomainErrorPageMapInput is an input type that accepts DomainErrorPageMap and DomainErrorPageMapOutput values.
 // You can construct a concrete instance of `DomainErrorPageMapInput` via:
 //
-//          DomainErrorPageMap{ "key": DomainErrorPageArgs{...} }
+//	DomainErrorPageMap{ "key": DomainErrorPageArgs{...} }
 type DomainErrorPageMapInput interface {
 	pulumi.Input
 

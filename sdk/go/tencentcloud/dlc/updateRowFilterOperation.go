@@ -7,48 +7,53 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dlc updateRowFilterOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.NewUpdateRowFilterOperation(ctx, "updateRowFilterOperation", &Dlc.UpdateRowFilterOperationArgs{
-// 			Policy: &dlc.UpdateRowFilterOperationPolicyArgs{
-// 				Catalog:    pulumi.String("DataLakeCatalog"),
-// 				Column:     pulumi.String(""),
-// 				Database:   pulumi.String("test_iac_keep"),
-// 				Function:   pulumi.String(""),
-// 				Mode:       pulumi.String("SENIOR"),
-// 				Operation:  pulumi.String("value!=\"0\""),
-// 				PolicyType: pulumi.String("ROWFILTER"),
-// 				ReAuth:     pulumi.Bool(false),
-// 				Source:     pulumi.String("USER"),
-// 				Table:      pulumi.String("test_table"),
-// 				View:       pulumi.String(""),
-// 			},
-// 			PolicyId: pulumi.Int(103704),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.NewUpdateRowFilterOperation(ctx, "updateRowFilterOperation", &Dlc.UpdateRowFilterOperationArgs{
+//				Policy: &dlc.UpdateRowFilterOperationPolicyArgs{
+//					Catalog:    pulumi.String("DataLakeCatalog"),
+//					Column:     pulumi.String(""),
+//					Database:   pulumi.String("test_iac_keep"),
+//					Function:   pulumi.String(""),
+//					Mode:       pulumi.String("SENIOR"),
+//					Operation:  pulumi.String("value!=\"0\""),
+//					PolicyType: pulumi.String("ROWFILTER"),
+//					ReAuth:     pulumi.Bool(false),
+//					Source:     pulumi.String("USER"),
+//					Table:      pulumi.String("test_table"),
+//					View:       pulumi.String(""),
+//				},
+//				PolicyId: pulumi.Int(103704),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type UpdateRowFilterOperation struct {
 	pulumi.CustomResourceState
 
@@ -71,7 +76,7 @@ func NewUpdateRowFilterOperation(ctx *pulumi.Context,
 	if args.PolicyId == nil {
 		return nil, errors.New("invalid value for required argument 'PolicyId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UpdateRowFilterOperation
 	err := ctx.RegisterResource("tencentcloud:Dlc/updateRowFilterOperation:UpdateRowFilterOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -152,7 +157,7 @@ func (i *UpdateRowFilterOperation) ToUpdateRowFilterOperationOutputWithContext(c
 // UpdateRowFilterOperationArrayInput is an input type that accepts UpdateRowFilterOperationArray and UpdateRowFilterOperationArrayOutput values.
 // You can construct a concrete instance of `UpdateRowFilterOperationArrayInput` via:
 //
-//          UpdateRowFilterOperationArray{ UpdateRowFilterOperationArgs{...} }
+//	UpdateRowFilterOperationArray{ UpdateRowFilterOperationArgs{...} }
 type UpdateRowFilterOperationArrayInput interface {
 	pulumi.Input
 
@@ -177,7 +182,7 @@ func (i UpdateRowFilterOperationArray) ToUpdateRowFilterOperationArrayOutputWith
 // UpdateRowFilterOperationMapInput is an input type that accepts UpdateRowFilterOperationMap and UpdateRowFilterOperationMapOutput values.
 // You can construct a concrete instance of `UpdateRowFilterOperationMapInput` via:
 //
-//          UpdateRowFilterOperationMap{ "key": UpdateRowFilterOperationArgs{...} }
+//	UpdateRowFilterOperationMap{ "key": UpdateRowFilterOperationArgs{...} }
 type UpdateRowFilterOperationMapInput interface {
 	pulumi.Input
 

@@ -17,52 +17,53 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var firewallRule = new Tencentcloud.Lighthouse.FirewallRule("firewallRule", new()
     ///     {
-    ///         var firewallRule = new Tencentcloud.Lighthouse.FirewallRule("firewallRule", new Tencentcloud.Lighthouse.FirewallRuleArgs
+    ///         FirewallRules = new[]
     ///         {
-    ///             FirewallRules = 
+    ///             new Tencentcloud.Lighthouse.Inputs.FirewallRuleFirewallRuleArgs
     ///             {
-    ///                 new Tencentcloud.Lighthouse.Inputs.FirewallRuleFirewallRuleArgs
-    ///                 {
-    ///                     Action = "ACCEPT",
-    ///                     CidrBlock = "10.0.0.1",
-    ///                     FirewallRuleDescription = "description 1",
-    ///                     Port = "80",
-    ///                     Protocol = "TCP",
-    ///                 },
-    ///                 new Tencentcloud.Lighthouse.Inputs.FirewallRuleFirewallRuleArgs
-    ///                 {
-    ///                     Action = "ACCEPT",
-    ///                     CidrBlock = "10.0.0.2",
-    ///                     FirewallRuleDescription = "description 2",
-    ///                     Port = "80",
-    ///                     Protocol = "TCP",
-    ///                 },
+    ///                 Action = "ACCEPT",
+    ///                 CidrBlock = "10.0.0.1",
+    ///                 FirewallRuleDescription = "description 1",
+    ///                 Port = "80",
+    ///                 Protocol = "TCP",
     ///             },
-    ///             InstanceId = "lhins-xxxxxxx",
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Lighthouse.Inputs.FirewallRuleFirewallRuleArgs
+    ///             {
+    ///                 Action = "ACCEPT",
+    ///                 CidrBlock = "10.0.0.2",
+    ///                 FirewallRuleDescription = "description 2",
+    ///                 Port = "80",
+    ///                 Protocol = "TCP",
+    ///             },
+    ///         },
+    ///         InstanceId = "lhins-xxxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// lighthouse firewall_rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Lighthouse/firewallRule:FirewallRule firewall_rule lighthouse_instance_id
+    /// $ pulumi import tencentcloud:Lighthouse/firewallRule:FirewallRule firewall_rule lighthouse_instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/firewallRule:FirewallRule")]
-    public partial class FirewallRule : Pulumi.CustomResource
+    public partial class FirewallRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Firewall rule list.
@@ -121,7 +122,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class FirewallRuleArgs : Pulumi.ResourceArgs
+    public sealed class FirewallRuleArgs : global::Pulumi.ResourceArgs
     {
         [Input("firewallRules", required: true)]
         private InputList<Inputs.FirewallRuleFirewallRuleArgs>? _firewallRules;
@@ -144,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public FirewallRuleArgs()
         {
         }
+        public static new FirewallRuleArgs Empty => new FirewallRuleArgs();
     }
 
-    public sealed class FirewallRuleState : Pulumi.ResourceArgs
+    public sealed class FirewallRuleState : global::Pulumi.ResourceArgs
     {
         [Input("firewallRules")]
         private InputList<Inputs.FirewallRuleFirewallRuleGetArgs>? _firewallRules;
@@ -169,5 +171,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public FirewallRuleState()
         {
         }
+        public static new FirewallRuleState Empty => new FirewallRuleState();
     }
 }

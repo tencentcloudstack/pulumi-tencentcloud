@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const domainAlias = new tencentcloud.Dnspod.DomainAlias("domain_alias", {
+ * const domainAlias = new tencentcloud.dnspod.DomainAlias("domainAlias", {
  *     domain: "dnspod.cn",
  *     domainAlias: "dnspod.com",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dnspod domain_alias can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dnspod/domainAlias:DomainAlias domain_alias domain#domain_alias_id
+ * $ pulumi import tencentcloud:Dnspod/domainAlias:DomainAlias domain_alias domain#domain_alias_id
  * ```
  */
 export class DomainAlias extends pulumi.CustomResource {

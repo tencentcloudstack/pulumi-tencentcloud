@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class KafkaRechargeProtocolGetArgs : Pulumi.ResourceArgs
+    public sealed class KafkaRechargeProtocolGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// encryption type.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public KafkaRechargeProtocolGetArgs()
         {
         }
+        public static new KafkaRechargeProtocolGetArgs Empty => new KafkaRechargeProtocolGetArgs();
     }
 }

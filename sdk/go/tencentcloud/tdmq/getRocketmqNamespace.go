@@ -8,48 +8,53 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tdmqRocketmq namespace
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleRocketmqCluster, err := Tdmq.NewRocketmqCluster(ctx, "exampleRocketmqCluster", &Tdmq.RocketmqClusterArgs{
-// 			ClusterName: pulumi.String("tf_example"),
-// 			Remark:      pulumi.String("remark."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Tdmq.GetRocketmqNamespaceOutput(ctx, tdmq.GetRocketmqNamespaceOutputArgs{
-// 			ClusterId:   exampleRocketmqCluster.ClusterId,
-// 			NameKeyword: exampleTdmq / rocketmqNamespaceRocketmqNamespace.NamespaceName,
-// 		}, nil)
-// 		_, err = Tdmq.NewRocketmqNamespace(ctx, "exampleTdmq/rocketmqNamespaceRocketmqNamespace", &Tdmq.RocketmqNamespaceArgs{
-// 			ClusterId:     exampleRocketmqCluster.ClusterId,
-// 			NamespaceName: pulumi.String("tf_example"),
-// 			Remark:        pulumi.String("remark."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleRocketmqCluster, err := Tdmq.NewRocketmqCluster(ctx, "exampleRocketmqCluster", &Tdmq.RocketmqClusterArgs{
+//				ClusterName: pulumi.String("tf_example"),
+//				Remark:      pulumi.String("remark."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Tdmq.GetRocketmqNamespaceOutput(ctx, tdmq.GetRocketmqNamespaceOutputArgs{
+//				ClusterId:   exampleRocketmqCluster.ClusterId,
+//				NameKeyword: exampleTdmq / rocketmqNamespaceRocketmqNamespace.NamespaceName,
+//			}, nil)
+//			_, err = Tdmq.NewRocketmqNamespace(ctx, "exampleTdmq/rocketmqNamespaceRocketmqNamespace", &Tdmq.RocketmqNamespaceArgs{
+//				ClusterId:     exampleRocketmqCluster.ClusterId,
+//				NamespaceName: pulumi.String("tf_example"),
+//				Remark:        pulumi.String("remark."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func LookupRocketmqNamespace(ctx *pulumi.Context, args *LookupRocketmqNamespaceArgs, opts ...pulumi.InvokeOption) (*LookupRocketmqNamespaceResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupRocketmqNamespaceResult
 	err := ctx.Invoke("tencentcloud:Tdmq/getRocketmqNamespace:getRocketmqNamespace", args, &rv, opts...)
 	if err != nil {

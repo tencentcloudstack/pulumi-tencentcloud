@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var microservice = new Tencentcloud.Tsf.Microservice("microservice", new()
     ///     {
-    ///         var microservice = new Tencentcloud.Tsf.Microservice("microservice", new Tencentcloud.Tsf.MicroserviceArgs
+    ///         MicroserviceDesc = "desc-microservice",
+    ///         MicroserviceName = "test-microservice",
+    ///         NamespaceId = "namespace-vjlkzkgy",
+    ///         Tags = 
     ///         {
-    ///             MicroserviceDesc = "desc-microservice",
-    ///             MicroserviceName = "test-microservice",
-    ///             NamespaceId = "namespace-vjlkzkgy",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tsf microservice can be imported using the namespaceId#microserviceId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tsf/microservice:Microservice microservice namespace-vjlkzkgy#ms-vjeb43lw
+    /// $ pulumi import tencentcloud:Tsf/microservice:Microservice microservice namespace-vjlkzkgy#ms-vjeb43lw
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/microservice:Microservice")]
-    public partial class Microservice : Pulumi.CustomResource
+    public partial class Microservice : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Microservice description information.
@@ -118,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class MicroserviceArgs : Pulumi.ResourceArgs
+    public sealed class MicroserviceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Microservice description information.
@@ -153,9 +154,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public MicroserviceArgs()
         {
         }
+        public static new MicroserviceArgs Empty => new MicroserviceArgs();
     }
 
-    public sealed class MicroserviceState : Pulumi.ResourceArgs
+    public sealed class MicroserviceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Microservice description information.
@@ -190,5 +192,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public MicroserviceState()
         {
         }
+        public static new MicroserviceState Empty => new MicroserviceState();
     }
 }

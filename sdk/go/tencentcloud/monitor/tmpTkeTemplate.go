@@ -7,57 +7,128 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tmp tke template
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Monitor.NewTmpTkeTemplate(ctx, "foo", &Monitor.TmpTkeTemplateArgs{
-// 			Template: &monitor.TmpTkeTemplateTemplateArgs{
-// 				Name:     pulumi.String("tf-template"),
-// 				Level:    pulumi.String("cluster"),
-// 				Describe: pulumi.String("template"),
-// 				ServiceMonitors: monitor.TmpTkeTemplateTemplateServiceMonitorArray{
-// 					&monitor.TmpTkeTemplateTemplateServiceMonitorArgs{
-// 						Name:   pulumi.String("tf-ServiceMonitor"),
-// 						Config: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "apiVersion: monitoring.coreos.com/v1\n", "kind: ServiceMonitor\n", "metadata:\n", "  name: example-service-monitor\n", "  namespace: monitoring\n", "  labels:\n", "    k8s-app: example-service\n", "spec:\n", "  selector:\n", "    matchLabels:\n", "      k8s-app: example-service\n", "  namespaceSelector:\n", "    matchNames:\n", "      - default\n", "  endpoints:\n", "  - port: http-metrics\n", "    interval: 30s\n", "    path: /metrics\n", "    scheme: http\n", "    bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token\n", "    tlsConfig:\n", "      insecureSkipVerify: true\n")),
-// 					},
-// 				},
-// 				PodMonitors: monitor.TmpTkeTemplateTemplatePodMonitorArray{
-// 					&monitor.TmpTkeTemplateTemplatePodMonitorArgs{
-// 						Name:   pulumi.String("tf-PodMonitors"),
-// 						Config: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "apiVersion: monitoring.coreos.com/v1\n", "kind: PodMonitor\n", "metadata:\n", "  name: example-pod-monitor\n", "  namespace: monitoring\n", "  labels:\n", "    k8s-app: example-pod\n", "spec:\n", "  selector:\n", "    matchLabels:\n", "      k8s-app: example-pod\n", "  namespaceSelector:\n", "    matchNames:\n", "      - default\n", "  podMetricsEndpoints:\n", "  - port: http-metrics\n", "    interval: 30s\n", "    path: /metrics\n", "    scheme: http\n", "    bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token\n", "    tlsConfig:\n", "      insecureSkipVerify: true\n")),
-// 					},
-// 					&monitor.TmpTkeTemplateTemplatePodMonitorArgs{
-// 						Name:   pulumi.String("tf-RawJobs"),
-// 						Config: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v", "scrape_configs:\n", "  - job_name: 'example-job'\n", "    scrape_interval: 30s\n", "    static_configs:\n", "      - targets: ['example-service.default.svc.cluster.local:8080']\n", "    metrics_path: /metrics\n", "    scheme: http\n", "    bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token\n", "    tls_config:\n", "      insecure_skip_verify: true\n")),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Monitor.NewTmpTkeTemplate(ctx, "foo", &Monitor.TmpTkeTemplateArgs{
+//				Template: &monitor.TmpTkeTemplateTemplateArgs{
+//					Name:     pulumi.String("tf-template"),
+//					Level:    pulumi.String("cluster"),
+//					Describe: pulumi.String("template"),
+//					ServiceMonitors: monitor.TmpTkeTemplateTemplateServiceMonitorArray{
+//						&monitor.TmpTkeTemplateTemplateServiceMonitorArgs{
+//							Name: pulumi.String("tf-ServiceMonitor"),
+//							Config: pulumi.String(`apiVersion: monitoring.coreos.com/v1
+//
+// kind: ServiceMonitor
+// metadata:
+//
+//	name: example-service-monitor
+//	namespace: monitoring
+//	labels:
+//	  k8s-app: example-service
+//
+// spec:
+//
+//	selector:
+//	  matchLabels:
+//	    k8s-app: example-service
+//	namespaceSelector:
+//	  matchNames:
+//	    - default
+//	endpoints:
+//	- port: http-metrics
+//	  interval: 30s
+//	  path: /metrics
+//	  scheme: http
+//	  bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+//	  tlsConfig:
+//	    insecureSkipVerify: true
+//
+// `),
+//
+//		},
+//	},
+//	PodMonitors: monitor.TmpTkeTemplateTemplatePodMonitorArray{
+//		&monitor.TmpTkeTemplateTemplatePodMonitorArgs{
+//			Name: pulumi.String("tf-PodMonitors"),
+//			Config: pulumi.String(`apiVersion: monitoring.coreos.com/v1
+//
+// kind: PodMonitor
+// metadata:
+//
+//	name: example-pod-monitor
+//	namespace: monitoring
+//	labels:
+//	  k8s-app: example-pod
+//
+// spec:
+//
+//	selector:
+//	  matchLabels:
+//	    k8s-app: example-pod
+//	namespaceSelector:
+//	  matchNames:
+//	    - default
+//	podMetricsEndpoints:
+//	- port: http-metrics
+//	  interval: 30s
+//	  path: /metrics
+//	  scheme: http
+//	  bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+//	  tlsConfig:
+//	    insecureSkipVerify: true
+//
+// `),
+//
+//						},
+//						&monitor.TmpTkeTemplateTemplatePodMonitorArgs{
+//							Name: pulumi.String("tf-RawJobs"),
+//							Config: pulumi.String(`scrape_configs:
+//	  - job_name: 'example-job'
+//	    scrape_interval: 30s
+//	    static_configs:
+//	      - targets: ['example-service.default.svc.cluster.local:8080']
+//	    metrics_path: /metrics
+//	    scheme: http
+//	    bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+//	    tls_config:
+//	      insecure_skip_verify: true
+//
+// `),
+//
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type TmpTkeTemplate struct {
 	pulumi.CustomResourceState
 
@@ -75,7 +146,7 @@ func NewTmpTkeTemplate(ctx *pulumi.Context,
 	if args.Template == nil {
 		return nil, errors.New("invalid value for required argument 'Template'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TmpTkeTemplate
 	err := ctx.RegisterResource("tencentcloud:Monitor/tmpTkeTemplate:TmpTkeTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -148,7 +219,7 @@ func (i *TmpTkeTemplate) ToTmpTkeTemplateOutputWithContext(ctx context.Context) 
 // TmpTkeTemplateArrayInput is an input type that accepts TmpTkeTemplateArray and TmpTkeTemplateArrayOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateArrayInput` via:
 //
-//          TmpTkeTemplateArray{ TmpTkeTemplateArgs{...} }
+//	TmpTkeTemplateArray{ TmpTkeTemplateArgs{...} }
 type TmpTkeTemplateArrayInput interface {
 	pulumi.Input
 
@@ -173,7 +244,7 @@ func (i TmpTkeTemplateArray) ToTmpTkeTemplateArrayOutputWithContext(ctx context.
 // TmpTkeTemplateMapInput is an input type that accepts TmpTkeTemplateMap and TmpTkeTemplateMapOutput values.
 // You can construct a concrete instance of `TmpTkeTemplateMapInput` via:
 //
-//          TmpTkeTemplateMap{ "key": TmpTkeTemplateArgs{...} }
+//	TmpTkeTemplateMap{ "key": TmpTkeTemplateArgs{...} }
 type TmpTkeTemplateMapInput interface {
 	pulumi.Input
 

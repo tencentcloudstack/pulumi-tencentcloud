@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cfw syncRoute
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewSyncRoute(ctx, "example", &Cfw.SyncRouteArgs{
-// 			FwType:   pulumi.String("nat"),
-// 			SyncType: pulumi.String("Route"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.NewSyncRoute(ctx, "example", &Cfw.SyncRouteArgs{
+//				FwType:   pulumi.String("nat"),
+//				SyncType: pulumi.String("Route"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type SyncRoute struct {
 	pulumi.CustomResourceState
 
@@ -55,7 +61,7 @@ func NewSyncRoute(ctx *pulumi.Context,
 	if args.SyncType == nil {
 		return nil, errors.New("invalid value for required argument 'SyncType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SyncRoute
 	err := ctx.RegisterResource("tencentcloud:Cfw/syncRoute:SyncRoute", name, args, &resource, opts...)
 	if err != nil {
@@ -136,7 +142,7 @@ func (i *SyncRoute) ToSyncRouteOutputWithContext(ctx context.Context) SyncRouteO
 // SyncRouteArrayInput is an input type that accepts SyncRouteArray and SyncRouteArrayOutput values.
 // You can construct a concrete instance of `SyncRouteArrayInput` via:
 //
-//          SyncRouteArray{ SyncRouteArgs{...} }
+//	SyncRouteArray{ SyncRouteArgs{...} }
 type SyncRouteArrayInput interface {
 	pulumi.Input
 
@@ -161,7 +167,7 @@ func (i SyncRouteArray) ToSyncRouteArrayOutputWithContext(ctx context.Context) S
 // SyncRouteMapInput is an input type that accepts SyncRouteMap and SyncRouteMapOutput values.
 // You can construct a concrete instance of `SyncRouteMapInput` via:
 //
-//          SyncRouteMap{ "key": SyncRouteArgs{...} }
+//	SyncRouteMap{ "key": SyncRouteArgs{...} }
 type SyncRouteMapInput interface {
 	pulumi.Input
 

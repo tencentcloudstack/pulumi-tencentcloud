@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cynosdb binlogSaveDays
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewBinlogSaveDays(ctx, "binlogSaveDays", &Cynosdb.BinlogSaveDaysArgs{
-// 			BinlogSaveDays: pulumi.Int(7),
-// 			ClusterId:      pulumi.String("cynosdbmysql-123"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewBinlogSaveDays(ctx, "binlogSaveDays", &Cynosdb.BinlogSaveDaysArgs{
+//				BinlogSaveDays: pulumi.Int(7),
+//				ClusterId:      pulumi.String("cynosdbmysql-123"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cynosdb binlog_save_days can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cynosdb/binlogSaveDays:BinlogSaveDays binlog_save_days binlog_save_days_id
+// $ pulumi import tencentcloud:Cynosdb/binlogSaveDays:BinlogSaveDays binlog_save_days binlog_save_days_id
 // ```
 type BinlogSaveDays struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewBinlogSaveDays(ctx *pulumi.Context,
 	if args.ClusterId == nil {
 		return nil, errors.New("invalid value for required argument 'ClusterId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BinlogSaveDays
 	err := ctx.RegisterResource("tencentcloud:Cynosdb/binlogSaveDays:BinlogSaveDays", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *BinlogSaveDays) ToBinlogSaveDaysOutputWithContext(ctx context.Context) 
 // BinlogSaveDaysArrayInput is an input type that accepts BinlogSaveDaysArray and BinlogSaveDaysArrayOutput values.
 // You can construct a concrete instance of `BinlogSaveDaysArrayInput` via:
 //
-//          BinlogSaveDaysArray{ BinlogSaveDaysArgs{...} }
+//	BinlogSaveDaysArray{ BinlogSaveDaysArgs{...} }
 type BinlogSaveDaysArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i BinlogSaveDaysArray) ToBinlogSaveDaysArrayOutputWithContext(ctx context.
 // BinlogSaveDaysMapInput is an input type that accepts BinlogSaveDaysMap and BinlogSaveDaysMapOutput values.
 // You can construct a concrete instance of `BinlogSaveDaysMapInput` via:
 //
-//          BinlogSaveDaysMap{ "key": BinlogSaveDaysArgs{...} }
+//	BinlogSaveDaysMap{ "key": BinlogSaveDaysArgs{...} }
 type BinlogSaveDaysMapInput interface {
 	pulumi.Input
 

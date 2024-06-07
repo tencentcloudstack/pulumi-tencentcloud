@@ -15,66 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// <summary>
         /// Use this data source to query detailed information of mps schedules
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Query the enabled schedules.
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var schedules = Tencentcloud.Mps.GetSchedules.Invoke(new()
         ///     {
-        ///         var schedules = Output.Create(Tencentcloud.Mps.GetSchedules.InvokeAsync(new Tencentcloud.Mps.GetSchedulesArgs
-        ///         {
-        ///             Status = "Enabled",
-        ///         }));
-        ///     }
+        ///         Status = "Enabled",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSchedulesResult> InvokeAsync(GetSchedulesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSchedulesResult>("tencentcloud:Mps/getSchedules:getSchedules", args ?? new GetSchedulesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSchedulesResult>("tencentcloud:Mps/getSchedules:getSchedules", args ?? new GetSchedulesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mps schedules
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Query the enabled schedules.
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var schedules = Tencentcloud.Mps.GetSchedules.Invoke(new()
         ///     {
-        ///         var schedules = Output.Create(Tencentcloud.Mps.GetSchedules.InvokeAsync(new Tencentcloud.Mps.GetSchedulesArgs
-        ///         {
-        ///             Status = "Enabled",
-        ///         }));
-        ///     }
+        ///         Status = "Enabled",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSchedulesResult> Invoke(GetSchedulesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSchedulesResult>("tencentcloud:Mps/getSchedules:getSchedules", args ?? new GetSchedulesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSchedulesResult>("tencentcloud:Mps/getSchedules:getSchedules", args ?? new GetSchedulesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSchedulesArgs : Pulumi.InvokeArgs
+    public sealed class GetSchedulesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -109,9 +105,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public GetSchedulesArgs()
         {
         }
+        public static new GetSchedulesArgs Empty => new GetSchedulesArgs();
     }
 
-    public sealed class GetSchedulesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSchedulesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -146,6 +143,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public GetSchedulesInvokeArgs()
         {
         }
+        public static new GetSchedulesInvokeArgs Empty => new GetSchedulesInvokeArgs();
     }
 
 

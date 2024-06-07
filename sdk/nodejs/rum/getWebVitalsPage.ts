@@ -9,24 +9,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const webVitalsPage = pulumi.output(tencentcloud.Rum.getWebVitalsPage({
+ * const webVitalsPage = tencentcloud.Rum.getWebVitalsPage({
  *     endTime: 1625454840,
  *     projectId: 1,
  *     startTime: 1625444040,
  *     type: "from",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getWebVitalsPage(args: GetWebVitalsPageArgs, opts?: pulumi.InvokeOptions): Promise<GetWebVitalsPageResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getWebVitalsPage:getWebVitalsPage", {
         "area": args.area,
         "brand": args.brand,
@@ -188,9 +187,27 @@ export interface GetWebVitalsPageResult {
     readonly type?: string;
     readonly versionNum?: string;
 }
-
+/**
+ * Use this data source to query detailed information of rum webVitalsPage
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const webVitalsPage = tencentcloud.Rum.getWebVitalsPage({
+ *     endTime: 1625454840,
+ *     projectId: 1,
+ *     startTime: 1625444040,
+ *     type: "from",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getWebVitalsPageOutput(args: GetWebVitalsPageOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetWebVitalsPageResult> {
-    return pulumi.output(args).apply(a => getWebVitalsPage(a, opts))
+    return pulumi.output(args).apply((a: any) => getWebVitalsPage(a, opts))
 }
 
 /**

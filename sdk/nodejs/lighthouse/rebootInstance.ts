@@ -9,14 +9,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const rebootInstance = new tencentcloud.Lighthouse.RebootInstance("reboot_instance", {
- *     instanceId: "lhins-xxx",
- * });
+ * const rebootInstance = new tencentcloud.lighthouse.RebootInstance("rebootInstance", {instanceId: "lhins-xxx"});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RebootInstance extends pulumi.CustomResource {
     /**

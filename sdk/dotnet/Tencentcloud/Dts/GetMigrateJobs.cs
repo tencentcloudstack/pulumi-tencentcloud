@@ -16,17 +16,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         /// Use this data source to query detailed information of dts migrateJobs
         /// </summary>
         public static Task<GetMigrateJobsResult> InvokeAsync(GetMigrateJobsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMigrateJobsResult>("tencentcloud:Dts/getMigrateJobs:getMigrateJobs", args ?? new GetMigrateJobsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMigrateJobsResult>("tencentcloud:Dts/getMigrateJobs:getMigrateJobs", args ?? new GetMigrateJobsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dts migrateJobs
         /// </summary>
         public static Output<GetMigrateJobsResult> Invoke(GetMigrateJobsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMigrateJobsResult>("tencentcloud:Dts/getMigrateJobs:getMigrateJobs", args ?? new GetMigrateJobsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMigrateJobsResult>("tencentcloud:Dts/getMigrateJobs:getMigrateJobs", args ?? new GetMigrateJobsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetMigrateJobsArgs : Pulumi.InvokeArgs
+    public sealed class GetMigrateJobsArgs : global::Pulumi.InvokeArgs
     {
         [Input("dstAccessTypes")]
         private List<string>? _dstAccessTypes;
@@ -157,9 +157,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public GetMigrateJobsArgs()
         {
         }
+        public static new GetMigrateJobsArgs Empty => new GetMigrateJobsArgs();
     }
 
-    public sealed class GetMigrateJobsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetMigrateJobsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("dstAccessTypes")]
         private InputList<string>? _dstAccessTypes;
@@ -290,6 +291,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public GetMigrateJobsInvokeArgs()
         {
         }
+        public static new GetMigrateJobsInvokeArgs Empty => new GetMigrateJobsInvokeArgs();
     }
 
 

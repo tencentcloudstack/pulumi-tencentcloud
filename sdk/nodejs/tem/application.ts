@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const application = new tencentcloud.Tem.Application("application", {
+ * const application = new tencentcloud.tem.Application("application", {
  *     applicationName: "demo",
  *     codingLanguage: "JAVA",
  *     description: "demo for test",
@@ -26,6 +27,7 @@ import * as utilities from "../utilities";
  *     useDefaultImageService: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class Application extends pulumi.CustomResource {
     /**

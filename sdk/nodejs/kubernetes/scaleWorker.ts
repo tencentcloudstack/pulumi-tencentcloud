@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -14,9 +15,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
@@ -50,11 +52,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Use Kubelet
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
@@ -88,6 +93,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ScaleWorker extends pulumi.CustomResource {
     /**
@@ -150,9 +156,17 @@ export class ScaleWorker extends pulumi.CustomResource {
      */
     public readonly mountTarget!: pulumi.Output<string | undefined>;
     /**
-     * Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+     * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+     */
+    public readonly preStartUserScript!: pulumi.Output<string | undefined>;
+    /**
+     * Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
      */
     public readonly unschedulable!: pulumi.Output<number | undefined>;
+    /**
+     * Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
+     */
+    public readonly userScript!: pulumi.Output<string | undefined>;
     /**
      * Deploy the machine configuration information of the 'WORK' service, and create <=20 units for common users.
      */
@@ -183,7 +197,9 @@ export class ScaleWorker extends pulumi.CustomResource {
             resourceInputs["gpuArgs"] = state ? state.gpuArgs : undefined;
             resourceInputs["labels"] = state ? state.labels : undefined;
             resourceInputs["mountTarget"] = state ? state.mountTarget : undefined;
+            resourceInputs["preStartUserScript"] = state ? state.preStartUserScript : undefined;
             resourceInputs["unschedulable"] = state ? state.unschedulable : undefined;
+            resourceInputs["userScript"] = state ? state.userScript : undefined;
             resourceInputs["workerConfig"] = state ? state.workerConfig : undefined;
             resourceInputs["workerInstancesLists"] = state ? state.workerInstancesLists : undefined;
         } else {
@@ -202,7 +218,9 @@ export class ScaleWorker extends pulumi.CustomResource {
             resourceInputs["gpuArgs"] = args ? args.gpuArgs : undefined;
             resourceInputs["labels"] = args ? args.labels : undefined;
             resourceInputs["mountTarget"] = args ? args.mountTarget : undefined;
+            resourceInputs["preStartUserScript"] = args ? args.preStartUserScript : undefined;
             resourceInputs["unschedulable"] = args ? args.unschedulable : undefined;
+            resourceInputs["userScript"] = args ? args.userScript : undefined;
             resourceInputs["workerConfig"] = args ? args.workerConfig : undefined;
             resourceInputs["workerInstancesLists"] = undefined /*out*/;
         }
@@ -248,9 +266,17 @@ export interface ScaleWorkerState {
      */
     mountTarget?: pulumi.Input<string>;
     /**
-     * Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+     * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+     */
+    preStartUserScript?: pulumi.Input<string>;
+    /**
+     * Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
      */
     unschedulable?: pulumi.Input<number>;
+    /**
+     * Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
+     */
+    userScript?: pulumi.Input<string>;
     /**
      * Deploy the machine configuration information of the 'WORK' service, and create <=20 units for common users.
      */
@@ -298,9 +324,17 @@ export interface ScaleWorkerArgs {
      */
     mountTarget?: pulumi.Input<string>;
     /**
-     * Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+     * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+     */
+    preStartUserScript?: pulumi.Input<string>;
+    /**
+     * Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
      */
     unschedulable?: pulumi.Input<number>;
+    /**
+     * Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
+     */
+    userScript?: pulumi.Input<string>;
     /**
      * Deploy the machine configuration information of the 'WORK' service, and create <=20 units for common users.
      */

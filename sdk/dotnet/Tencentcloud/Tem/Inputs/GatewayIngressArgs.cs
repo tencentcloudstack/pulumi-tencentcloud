@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
 {
 
-    public sealed class GatewayIngressArgs : Pulumi.ResourceArgs
+    public sealed class GatewayIngressArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ip version, support IPV4.
@@ -25,6 +25,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
         [Input("clbId")]
         public Input<string>? ClbId { get; set; }
 
+        /// <summary>
+        /// creation time.
+        /// </summary>
         [Input("createTime")]
         public Input<string>? CreateTime { get; set; }
 
@@ -76,11 +79,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
             set => _tls = value;
         }
 
+        /// <summary>
+        /// gateway vip.
+        /// </summary>
         [Input("vip")]
         public Input<string>? Vip { get; set; }
 
         public GatewayIngressArgs()
         {
         }
+        public static new GatewayIngressArgs Empty => new GatewayIngressArgs();
     }
 }

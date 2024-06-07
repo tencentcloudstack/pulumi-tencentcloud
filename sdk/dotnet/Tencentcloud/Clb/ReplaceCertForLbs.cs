@@ -14,50 +14,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// Provides a resource to create a clb replace_cert_for_lbs
     /// 
     /// ## Example Usage
+    /// 
     /// ### Replace Server Cert By Cert ID
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var replaceCertForLbs = new Tencentcloud.Clb.ReplaceCertForLbs("replaceCertForLbs", new()
     ///     {
-    ///         var replaceCertForLbs = new Tencentcloud.Clb.ReplaceCertForLbs("replaceCertForLbs", new Tencentcloud.Clb.ReplaceCertForLbsArgs
+    ///         Certificate = new Tencentcloud.Clb.Inputs.ReplaceCertForLbsCertificateArgs
     ///         {
-    ///             Certificate = new Tencentcloud.Clb.Inputs.ReplaceCertForLbsCertificateArgs
-    ///             {
-    ///                 CertId = "6vcK02GC",
-    ///             },
-    ///             OldCertificateId = "zjUMifFK",
-    ///         });
-    ///     }
+    ///             CertId = "6vcK02GC",
+    ///         },
+    ///         OldCertificateId = "zjUMifFK",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Replace Server Cert By Cert Content
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = Tencentcloud.Ssl.GetCertificates.Invoke(new()
     ///     {
-    ///         var foo = Output.Create(Tencentcloud.Ssl.GetCertificates.InvokeAsync(new Tencentcloud.Ssl.GetCertificatesArgs
+    ///         Name = "keep-ssl-ca",
+    ///     });
+    /// 
+    ///     var replaceCertForLbs = new Tencentcloud.Clb.ReplaceCertForLbs("replaceCertForLbs", new()
+    ///     {
+    ///         OldCertificateId = foo.Apply(getCertificatesResult =&gt; getCertificatesResult.Certificates[0]?.Id),
+    ///         Certificate = new Tencentcloud.Clb.Inputs.ReplaceCertForLbsCertificateArgs
     ///         {
-    ///             Name = "keep-ssl-ca",
-    ///         }));
-    ///         var replaceCertForLbs = new Tencentcloud.Clb.ReplaceCertForLbs("replaceCertForLbs", new Tencentcloud.Clb.ReplaceCertForLbsArgs
-    ///         {
-    ///             OldCertificateId = foo.Apply(foo =&gt; foo.Certificates?[0]?.Id),
-    ///             Certificate = new Tencentcloud.Clb.Inputs.ReplaceCertForLbsCertificateArgs
-    ///             {
-    ///                 CertName = "tf-test-cert",
-    ///                 CertContent = @"-----BEGIN CERTIFICATE-----
+    ///             CertName = "tf-test-cert",
+    ///             CertContent = @"-----BEGIN CERTIFICATE-----
     /// xxxxxxxxxxxxxxxxxxxxxxxxxxx
     /// -----END CERTIFICATE-----
     /// EOT,
@@ -66,53 +71,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// xxxxxxxxxxxxxxxxxxxxxxxxxxxx
     /// -----END RSA PRIVATE KEY-----
     /// ",
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Replace Client Cert By Cert Content
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var replaceCertForLbs = new Tencentcloud.Clb.ReplaceCertForLbs("replaceCertForLbs", new()
     ///     {
-    ///         var replaceCertForLbs = new Tencentcloud.Clb.ReplaceCertForLbs("replaceCertForLbs", new Tencentcloud.Clb.ReplaceCertForLbsArgs
+    ///         OldCertificateId = "zjUMifFK",
+    ///         Certificate = new Tencentcloud.Clb.Inputs.ReplaceCertForLbsCertificateArgs
     ///         {
-    ///             OldCertificateId = "zjUMifFK",
-    ///             Certificate = new Tencentcloud.Clb.Inputs.ReplaceCertForLbsCertificateArgs
-    ///             {
-    ///                 CertCaName = "tf-test-cert",
-    ///                 CertCaContent = @"-----BEGIN CERTIFICATE-----
+    ///             CertCaName = "tf-test-cert",
+    ///             CertCaContent = @"-----BEGIN CERTIFICATE-----
     /// xxxxxxxxContentxxxxxxxxxxxxxx
     /// -----END CERTIFICATE-----
     /// ",
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///     }
-    /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/replaceCertForLbs:ReplaceCertForLbs")]
-    public partial class ReplaceCertForLbs : Pulumi.CustomResource
+    public partial class ReplaceCertForLbs : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Information such as the content of the new certificate.
@@ -171,7 +178,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class ReplaceCertForLbsArgs : Pulumi.ResourceArgs
+    public sealed class ReplaceCertForLbsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Information such as the content of the new certificate.
@@ -188,9 +195,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public ReplaceCertForLbsArgs()
         {
         }
+        public static new ReplaceCertForLbsArgs Empty => new ReplaceCertForLbsArgs();
     }
 
-    public sealed class ReplaceCertForLbsState : Pulumi.ResourceArgs
+    public sealed class ReplaceCertForLbsState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Information such as the content of the new certificate.
@@ -207,5 +215,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public ReplaceCertForLbsState()
         {
         }
+        public static new ReplaceCertForLbsState Empty => new ReplaceCertForLbsState();
     }
 }

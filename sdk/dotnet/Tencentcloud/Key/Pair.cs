@@ -15,38 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Key.Pair("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Key.Pair("foo", new Tencentcloud.Key.PairArgs
-    ///         {
-    ///             KeyName = "terraform_test",
-    ///         });
-    ///         var foo1 = new Tencentcloud.Key.Pair("foo1", new Tencentcloud.Key.PairArgs
-    ///         {
-    ///             KeyName = "terraform_test",
-    ///             PublicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==",
-    ///         });
-    ///     }
+    ///         KeyName = "terraform_test",
+    ///     });
     /// 
-    /// }
+    ///     var foo1 = new Tencentcloud.Key.Pair("foo1", new()
+    ///     {
+    ///         KeyName = "terraform_test",
+    ///         PublicKey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Key pair can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Key/pair:Pair foo skey-17634f05
+    /// $ pulumi import tencentcloud:Key/pair:Pair foo skey-17634f05
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Key/pair:Pair")]
-    public partial class Pair : Pulumi.CustomResource
+    public partial class Pair : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The key pair's name. It is the only in one TencentCloud account.
@@ -117,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
         }
     }
 
-    public sealed class PairArgs : Pulumi.ResourceArgs
+    public sealed class PairArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The key pair's name. It is the only in one TencentCloud account.
@@ -152,9 +154,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
         public PairArgs()
         {
         }
+        public static new PairArgs Empty => new PairArgs();
     }
 
-    public sealed class PairState : Pulumi.ResourceArgs
+    public sealed class PairState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The key pair's name. It is the only in one TencentCloud account.
@@ -189,5 +192,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Key
         public PairState()
         {
         }
+        public static new PairState Empty => new PairState();
     }
 }

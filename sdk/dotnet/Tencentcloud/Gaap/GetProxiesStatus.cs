@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap proxies status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var proxiesStatus = Tencentcloud.Gaap.GetProxiesStatus.Invoke(new()
         ///     {
-        ///         var proxiesStatus = Output.Create(Tencentcloud.Gaap.GetProxiesStatus.InvokeAsync(new Tencentcloud.Gaap.GetProxiesStatusArgs
+        ///         ProxyIds = new[]
         ///         {
-        ///             ProxyIds = 
-        ///             {
-        ///                 "link-xxxxxx",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "link-xxxxxx",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProxiesStatusResult> InvokeAsync(GetProxiesStatusArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProxiesStatusResult>("tencentcloud:Gaap/getProxiesStatus:getProxiesStatus", args ?? new GetProxiesStatusArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxiesStatusResult>("tencentcloud:Gaap/getProxiesStatus:getProxiesStatus", args ?? new GetProxiesStatusArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap proxies status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var proxiesStatus = Tencentcloud.Gaap.GetProxiesStatus.Invoke(new()
         ///     {
-        ///         var proxiesStatus = Output.Create(Tencentcloud.Gaap.GetProxiesStatus.InvokeAsync(new Tencentcloud.Gaap.GetProxiesStatusArgs
+        ///         ProxyIds = new[]
         ///         {
-        ///             ProxyIds = 
-        ///             {
-        ///                 "link-xxxxxx",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "link-xxxxxx",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProxiesStatusResult> Invoke(GetProxiesStatusInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProxiesStatusResult>("tencentcloud:Gaap/getProxiesStatus:getProxiesStatus", args ?? new GetProxiesStatusInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProxiesStatusResult>("tencentcloud:Gaap/getProxiesStatus:getProxiesStatus", args ?? new GetProxiesStatusInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProxiesStatusArgs : Pulumi.InvokeArgs
+    public sealed class GetProxiesStatusArgs : global::Pulumi.InvokeArgs
     {
         [Input("proxyIds")]
         private List<string>? _proxyIds;
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetProxiesStatusArgs()
         {
         }
+        public static new GetProxiesStatusArgs Empty => new GetProxiesStatusArgs();
     }
 
-    public sealed class GetProxiesStatusInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProxiesStatusInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("proxyIds")]
         private InputList<string>? _proxyIds;
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetProxiesStatusInvokeArgs()
         {
         }
+        public static new GetProxiesStatusInvokeArgs Empty => new GetProxiesStatusInvokeArgs();
     }
 
 

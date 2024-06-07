@@ -14,159 +14,167 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// Provides a resource to create a waf clb_domain
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a basic waf clb domain
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.ClbDomain("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.ClbDomain("example", new Tencentcloud.Waf.ClbDomainArgs
+    ///         AlbType = "clb",
+    ///         Domain = "test.com",
+    ///         InstanceId = "waf_2kxtlbky00b2v1fn",
+    ///         LoadBalancerSets = new[]
     ///         {
-    ///             AlbType = "clb",
-    ///             Domain = "test.com",
-    ///             InstanceId = "waf_2kxtlbky00b2v1fn",
-    ///             LoadBalancerSets = 
+    ///             new Tencentcloud.Waf.Inputs.ClbDomainLoadBalancerSetArgs
     ///             {
-    ///                 new Tencentcloud.Waf.Inputs.ClbDomainLoadBalancerSetArgs
-    ///                 {
-    ///                     ListenerId = "lbl-nonkgvc2",
-    ///                     ListenerName = "dsadasd",
-    ///                     LoadBalancerId = "lb-5dnrkgry",
-    ///                     LoadBalancerName = "keep-listener-clb",
-    ///                     LoadBalancerType = "OPEN",
-    ///                     NumericalVpcId = 5232945,
-    ///                     Protocol = "HTTP",
-    ///                     Region = "gz",
-    ///                     Vip = "106.55.220.8",
-    ///                     Vport = 80,
-    ///                     Zone = "ap-guangzhou-6",
-    ///                 },
+    ///                 ListenerId = "lbl-nonkgvc2",
+    ///                 ListenerName = "dsadasd",
+    ///                 LoadBalancerId = "lb-5dnrkgry",
+    ///                 LoadBalancerName = "keep-listener-clb",
+    ///                 LoadBalancerType = "OPEN",
+    ///                 NumericalVpcId = 5232945,
+    ///                 Protocol = "HTTP",
+    ///                 Region = "gz",
+    ///                 Vip = "106.55.220.8",
+    ///                 Vport = 80,
+    ///                 Zone = "ap-guangzhou-6",
     ///             },
-    ///             Region = "gz",
-    ///         });
-    ///     }
+    ///         },
+    ///         Region = "gz",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a complete waf clb domain
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.ClbDomain("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.ClbDomain("example", new Tencentcloud.Waf.ClbDomainArgs
+    ///         AlbType = "clb",
+    ///         ApiSafeStatus = 1,
+    ///         BotStatus = 1,
+    ///         Domain = "test.com",
+    ///         Engine = 21,
+    ///         FlowMode = 1,
+    ///         InstanceId = "waf_2kxtlbky00b2v1fn",
+    ///         IpHeaders = new[]
     ///         {
-    ///             AlbType = "clb",
-    ///             ApiSafeStatus = 1,
-    ///             BotStatus = 1,
-    ///             Domain = "test.com",
-    ///             Engine = 21,
-    ///             FlowMode = 1,
-    ///             InstanceId = "waf_2kxtlbky00b2v1fn",
-    ///             IpHeaders = 
+    ///             "headers_1",
+    ///             "headers_2",
+    ///             "headers_3",
+    ///         },
+    ///         IsCdn = 3,
+    ///         LoadBalancerSets = new[]
+    ///         {
+    ///             new Tencentcloud.Waf.Inputs.ClbDomainLoadBalancerSetArgs
     ///             {
-    ///                 "headers_1",
-    ///                 "headers_2",
-    ///                 "headers_3",
+    ///                 ListenerId = "lbl-nonkgvc2",
+    ///                 ListenerName = "dsadasd",
+    ///                 LoadBalancerId = "lb-5dnrkgry",
+    ///                 LoadBalancerName = "keep-listener-clb",
+    ///                 LoadBalancerType = "OPEN",
+    ///                 NumericalVpcId = 5232945,
+    ///                 Protocol = "HTTP",
+    ///                 Region = "gz",
+    ///                 Vip = "106.55.220.8",
+    ///                 Vport = 80,
+    ///                 Zone = "ap-guangzhou-6",
     ///             },
-    ///             IsCdn = 3,
-    ///             LoadBalancerSets = 
-    ///             {
-    ///                 new Tencentcloud.Waf.Inputs.ClbDomainLoadBalancerSetArgs
-    ///                 {
-    ///                     ListenerId = "lbl-nonkgvc2",
-    ///                     ListenerName = "dsadasd",
-    ///                     LoadBalancerId = "lb-5dnrkgry",
-    ///                     LoadBalancerName = "keep-listener-clb",
-    ///                     LoadBalancerType = "OPEN",
-    ///                     NumericalVpcId = 5232945,
-    ///                     Protocol = "HTTP",
-    ///                     Region = "gz",
-    ///                     Vip = "106.55.220.8",
-    ///                     Vport = 80,
-    ///                     Zone = "ap-guangzhou-6",
-    ///                 },
-    ///             },
-    ///             Region = "gz",
-    ///             Status = 1,
-    ///         });
-    ///     }
+    ///         },
+    ///         Region = "gz",
+    ///         Status = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a complete waf tsegw domain
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.ClbDomain("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.ClbDomain("example", new Tencentcloud.Waf.ClbDomainArgs
-    ///         {
-    ///             AlbType = "tsegw",
-    ///             ApiSafeStatus = 0,
-    ///             BotStatus = 0,
-    ///             Domain = "xxx.com",
-    ///             Engine = 12,
-    ///             FlowMode = 0,
-    ///             InstanceId = "waf_2kxtlbky00b2v1fn",
-    ///             IsCdn = 0,
-    ///             Region = "gz",
-    ///             Status = 1,
-    ///         });
-    ///     }
+    ///         AlbType = "tsegw",
+    ///         ApiSafeStatus = 0,
+    ///         BotStatus = 0,
+    ///         Domain = "xxx.com",
+    ///         Engine = 12,
+    ///         FlowMode = 0,
+    ///         InstanceId = "waf_2kxtlbky00b2v1fn",
+    ///         IsCdn = 0,
+    ///         Region = "gz",
+    ///         Status = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a complete waf apisix domain
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.ClbDomain("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.ClbDomain("example", new Tencentcloud.Waf.ClbDomainArgs
-    ///         {
-    ///             AlbType = "apisix",
-    ///             ApiSafeStatus = 0,
-    ///             BotStatus = 0,
-    ///             Domain = "xxx.com",
-    ///             Engine = 12,
-    ///             FlowMode = 0,
-    ///             InstanceId = "waf_2kxtlbky00b2v1fn",
-    ///             IsCdn = 0,
-    ///             Region = "gz",
-    ///             Status = 1,
-    ///         });
-    ///     }
+    ///         AlbType = "apisix",
+    ///         ApiSafeStatus = 0,
+    ///         BotStatus = 0,
+    ///         Domain = "xxx.com",
+    ///         Engine = 12,
+    ///         FlowMode = 0,
+    ///         InstanceId = "waf_2kxtlbky00b2v1fn",
+    ///         IsCdn = 0,
+    ///         Region = "gz",
+    ///         Status = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// waf clb_domain can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Waf/clbDomain:ClbDomain example waf_2kxtlbky00b2v1fn#test.com#waf-0FSehoRU
+    /// $ pulumi import tencentcloud:Waf/clbDomain:ClbDomain example waf_2kxtlbky00b2v1fn#test.com#waf-0FSehoRU
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/clbDomain:ClbDomain")]
-    public partial class ClbDomain : Pulumi.CustomResource
+    public partial class ClbDomain : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Load balancer type: clb, apisix or tsegw, default clb.
@@ -297,7 +305,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class ClbDomainArgs : Pulumi.ResourceArgs
+    public sealed class ClbDomainArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Load balancer type: clb, apisix or tsegw, default clb.
@@ -392,9 +400,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public ClbDomainArgs()
         {
         }
+        public static new ClbDomainArgs Empty => new ClbDomainArgs();
     }
 
-    public sealed class ClbDomainState : Pulumi.ResourceArgs
+    public sealed class ClbDomainState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Load balancer type: clb, apisix or tsegw, default clb.
@@ -495,5 +504,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public ClbDomainState()
         {
         }
+        public static new ClbDomainState Empty => new ClbDomainState();
     }
 }

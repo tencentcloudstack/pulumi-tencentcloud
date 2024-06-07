@@ -11,10 +11,14 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Inputs
 {
 
-    public sealed class NetworkAclQuintupleNetworkAclQuintupleSetArgs : Pulumi.ResourceArgs
+    public sealed class NetworkAclQuintupleNetworkAclQuintupleSetArgs : global::Pulumi.ResourceArgs
     {
         [Input("egresses")]
         private InputList<Inputs.NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs>? _egresses;
+
+        /// <summary>
+        /// Network ACL quintuple outbound rule.
+        /// </summary>
         public InputList<Inputs.NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs> Egresses
         {
             get => _egresses ?? (_egresses = new InputList<Inputs.NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs>());
@@ -23,6 +27,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Inputs
 
         [Input("ingresses")]
         private InputList<Inputs.NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs>? _ingresses;
+
+        /// <summary>
+        /// Network ACL quintuple inbound rule.
+        /// </summary>
         public InputList<Inputs.NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs> Ingresses
         {
             get => _ingresses ?? (_ingresses = new InputList<Inputs.NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs>());
@@ -32,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Inputs
         public NetworkAclQuintupleNetworkAclQuintupleSetArgs()
         {
         }
+        public static new NetworkAclQuintupleNetworkAclQuintupleSetArgs Empty => new NetworkAclQuintupleNetworkAclQuintupleSetArgs();
     }
 }

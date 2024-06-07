@@ -15,80 +15,74 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// <summary>
         /// Use this data source to query detailed information of tse gateway_certificates
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var gatewayCertificates = Tencentcloud.Tse.GetGatewayCertificates.Invoke(new()
         ///     {
-        ///         var gatewayCertificates = Output.Create(Tencentcloud.Tse.GetGatewayCertificates.InvokeAsync(new Tencentcloud.Tse.GetGatewayCertificatesArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Tse.Inputs.GetGatewayCertificatesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Tse.Inputs.GetGatewayCertificatesFilterArgs
-        ///                 {
-        ///                     Key = "BindDomain",
-        ///                     Value = "example.com",
-        ///                 },
+        ///                 Key = "BindDomain",
+        ///                 Value = "example.com",
         ///             },
-        ///             GatewayId = "gateway-ddbb709b",
-        ///         }));
-        ///     }
+        ///         },
+        ///         GatewayId = "gateway-ddbb709b",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGatewayCertificatesResult> InvokeAsync(GetGatewayCertificatesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGatewayCertificatesResult>("tencentcloud:Tse/getGatewayCertificates:getGatewayCertificates", args ?? new GetGatewayCertificatesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayCertificatesResult>("tencentcloud:Tse/getGatewayCertificates:getGatewayCertificates", args ?? new GetGatewayCertificatesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tse gateway_certificates
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var gatewayCertificates = Tencentcloud.Tse.GetGatewayCertificates.Invoke(new()
         ///     {
-        ///         var gatewayCertificates = Output.Create(Tencentcloud.Tse.GetGatewayCertificates.InvokeAsync(new Tencentcloud.Tse.GetGatewayCertificatesArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Tse.Inputs.GetGatewayCertificatesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Tse.Inputs.GetGatewayCertificatesFilterArgs
-        ///                 {
-        ///                     Key = "BindDomain",
-        ///                     Value = "example.com",
-        ///                 },
+        ///                 Key = "BindDomain",
+        ///                 Value = "example.com",
         ///             },
-        ///             GatewayId = "gateway-ddbb709b",
-        ///         }));
-        ///     }
+        ///         },
+        ///         GatewayId = "gateway-ddbb709b",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGatewayCertificatesResult> Invoke(GetGatewayCertificatesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGatewayCertificatesResult>("tencentcloud:Tse/getGatewayCertificates:getGatewayCertificates", args ?? new GetGatewayCertificatesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGatewayCertificatesResult>("tencentcloud:Tse/getGatewayCertificates:getGatewayCertificates", args ?? new GetGatewayCertificatesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGatewayCertificatesArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayCertificatesArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetGatewayCertificatesFilterArgs>? _filters;
@@ -117,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetGatewayCertificatesArgs()
         {
         }
+        public static new GetGatewayCertificatesArgs Empty => new GetGatewayCertificatesArgs();
     }
 
-    public sealed class GetGatewayCertificatesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayCertificatesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetGatewayCertificatesFilterInputArgs>? _filters;
@@ -148,6 +143,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetGatewayCertificatesInvokeArgs()
         {
         }
+        public static new GetGatewayCertificatesInvokeArgs Empty => new GetGatewayCertificatesInvokeArgs();
     }
 
 

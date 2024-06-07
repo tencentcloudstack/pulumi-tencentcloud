@@ -15,84 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// Use this data source to query detailed information of clb target_group_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var targetGroupList = Tencentcloud.Clb.GetTargetGroupList.Invoke(new()
         ///     {
-        ///         var targetGroupList = Output.Create(Tencentcloud.Clb.GetTargetGroupList.InvokeAsync(new Tencentcloud.Clb.GetTargetGroupListArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Clb.Inputs.GetTargetGroupListFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Clb.Inputs.GetTargetGroupListFilterArgs
+        ///                 Name = "TargetGroupName",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "TargetGroupName",
-        ///                     Values = 
-        ///                     {
-        ///                         "keep-tgg",
-        ///                     },
+        ///                     "keep-tgg",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTargetGroupListResult> InvokeAsync(GetTargetGroupListArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTargetGroupListResult>("tencentcloud:Clb/getTargetGroupList:getTargetGroupList", args ?? new GetTargetGroupListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTargetGroupListResult>("tencentcloud:Clb/getTargetGroupList:getTargetGroupList", args ?? new GetTargetGroupListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of clb target_group_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var targetGroupList = Tencentcloud.Clb.GetTargetGroupList.Invoke(new()
         ///     {
-        ///         var targetGroupList = Output.Create(Tencentcloud.Clb.GetTargetGroupList.InvokeAsync(new Tencentcloud.Clb.GetTargetGroupListArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Clb.Inputs.GetTargetGroupListFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Clb.Inputs.GetTargetGroupListFilterArgs
+        ///                 Name = "TargetGroupName",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "TargetGroupName",
-        ///                     Values = 
-        ///                     {
-        ///                         "keep-tgg",
-        ///                     },
+        ///                     "keep-tgg",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTargetGroupListResult> Invoke(GetTargetGroupListInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTargetGroupListResult>("tencentcloud:Clb/getTargetGroupList:getTargetGroupList", args ?? new GetTargetGroupListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTargetGroupListResult>("tencentcloud:Clb/getTargetGroupList:getTargetGroupList", args ?? new GetTargetGroupListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTargetGroupListArgs : Pulumi.InvokeArgs
+    public sealed class GetTargetGroupListArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetTargetGroupListFilterArgs>? _filters;
@@ -127,9 +121,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetTargetGroupListArgs()
         {
         }
+        public static new GetTargetGroupListArgs Empty => new GetTargetGroupListArgs();
     }
 
-    public sealed class GetTargetGroupListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTargetGroupListInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetTargetGroupListFilterInputArgs>? _filters;
@@ -164,6 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetTargetGroupListInvokeArgs()
         {
         }
+        public static new GetTargetGroupListInvokeArgs Empty => new GetTargetGroupListInvokeArgs();
     }
 
 

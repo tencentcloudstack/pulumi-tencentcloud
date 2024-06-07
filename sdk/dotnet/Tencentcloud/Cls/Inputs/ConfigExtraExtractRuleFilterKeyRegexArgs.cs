@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class ConfigExtraExtractRuleFilterKeyRegexArgs : Pulumi.ResourceArgs
+    public sealed class ConfigExtraExtractRuleFilterKeyRegexArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Log key to be filtered.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public ConfigExtraExtractRuleFilterKeyRegexArgs()
         {
         }
+        public static new ConfigExtraExtractRuleFilterKeyRegexArgs Empty => new ConfigExtraExtractRuleFilterKeyRegexArgs();
     }
 }

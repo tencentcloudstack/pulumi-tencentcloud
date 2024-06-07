@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_host_cos_instance_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeHostCosInstanceList = Tencentcloud.Ssl.GetDescribeHostCosInstanceList.Invoke(new()
         ///     {
-        ///         var describeHostCosInstanceList = Output.Create(Tencentcloud.Ssl.GetDescribeHostCosInstanceList.InvokeAsync(new Tencentcloud.Ssl.GetDescribeHostCosInstanceListArgs
-        ///         {
-        ///             CertificateId = "8u8DII0l",
-        ///             ResourceType = "cos",
-        ///         }));
-        ///     }
+        ///         CertificateId = "8u8DII0l",
+        ///         ResourceType = "cos",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeHostCosInstanceListResult> InvokeAsync(GetDescribeHostCosInstanceListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostCosInstanceListResult>("tencentcloud:Ssl/getDescribeHostCosInstanceList:getDescribeHostCosInstanceList", args ?? new GetDescribeHostCosInstanceListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostCosInstanceListResult>("tencentcloud:Ssl/getDescribeHostCosInstanceList:getDescribeHostCosInstanceList", args ?? new GetDescribeHostCosInstanceListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_host_cos_instance_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeHostCosInstanceList = Tencentcloud.Ssl.GetDescribeHostCosInstanceList.Invoke(new()
         ///     {
-        ///         var describeHostCosInstanceList = Output.Create(Tencentcloud.Ssl.GetDescribeHostCosInstanceList.InvokeAsync(new Tencentcloud.Ssl.GetDescribeHostCosInstanceListArgs
-        ///         {
-        ///             CertificateId = "8u8DII0l",
-        ///             ResourceType = "cos",
-        ///         }));
-        ///     }
+        ///         CertificateId = "8u8DII0l",
+        ///         ResourceType = "cos",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeHostCosInstanceListResult> Invoke(GetDescribeHostCosInstanceListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeHostCosInstanceListResult>("tencentcloud:Ssl/getDescribeHostCosInstanceList:getDescribeHostCosInstanceList", args ?? new GetDescribeHostCosInstanceListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostCosInstanceListResult>("tencentcloud:Ssl/getDescribeHostCosInstanceList:getDescribeHostCosInstanceList", args ?? new GetDescribeHostCosInstanceListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeHostCosInstanceListArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeHostCosInstanceListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Certificate ID to be deployed.
@@ -115,9 +109,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeHostCosInstanceListArgs()
         {
         }
+        public static new GetDescribeHostCosInstanceListArgs Empty => new GetDescribeHostCosInstanceListArgs();
     }
 
-    public sealed class GetDescribeHostCosInstanceListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeHostCosInstanceListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Certificate ID to be deployed.
@@ -158,6 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeHostCosInstanceListInvokeArgs()
         {
         }
+        public static new GetDescribeHostCosInstanceListInvokeArgs Empty => new GetDescribeHostCosInstanceListInvokeArgs();
     }
 
 

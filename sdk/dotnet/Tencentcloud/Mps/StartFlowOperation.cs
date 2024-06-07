@@ -14,47 +14,51 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// Provides a resource to create a mps start_flow_operation
     /// 
     /// ## Example Usage
+    /// 
     /// ### Start flow
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var operation = new Tencentcloud.Mps.StartFlowOperation("operation", new()
     ///     {
-    ///         var operation = new Tencentcloud.Mps.StartFlowOperation("operation", new Tencentcloud.Mps.StartFlowOperationArgs
-    ///         {
-    ///             FlowId = tencentcloud_mps_flow.Flow_rtp.Id,
-    ///             Start = true,
-    ///         });
-    ///     }
+    ///         FlowId = tencentcloud_mps_flow.Flow_rtp.Id,
+    ///         Start = true,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Stop flow
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var operation = new Tencentcloud.Mps.StartFlowOperation("operation", new()
     ///     {
-    ///         var operation = new Tencentcloud.Mps.StartFlowOperation("operation", new Tencentcloud.Mps.StartFlowOperationArgs
-    ///         {
-    ///             FlowId = tencentcloud_mps_flow.Flow_rtp.Id,
-    ///             Start = false,
-    ///         });
-    ///     }
+    ///         FlowId = tencentcloud_mps_flow.Flow_rtp.Id,
+    ///         Start = false,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/startFlowOperation:StartFlowOperation")]
-    public partial class StartFlowOperation : Pulumi.CustomResource
+    public partial class StartFlowOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Flow Id.
@@ -113,7 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class StartFlowOperationArgs : Pulumi.ResourceArgs
+    public sealed class StartFlowOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Flow Id.
@@ -130,9 +134,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public StartFlowOperationArgs()
         {
         }
+        public static new StartFlowOperationArgs Empty => new StartFlowOperationArgs();
     }
 
-    public sealed class StartFlowOperationState : Pulumi.ResourceArgs
+    public sealed class StartFlowOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Flow Id.
@@ -149,5 +154,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public StartFlowOperationState()
         {
         }
+        public static new StartFlowOperationState Empty => new StartFlowOperationState();
     }
 }

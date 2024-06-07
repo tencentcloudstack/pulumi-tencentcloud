@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Inputs
 {
 
-    public sealed class Layer4ListenerRealserverBindSetArgs : Pulumi.ResourceArgs
+    public sealed class Layer4ListenerRealserverBindSetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the GAAP realserver.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Inputs
         public Layer4ListenerRealserverBindSetArgs()
         {
         }
+        public static new Layer4ListenerRealserverBindSetArgs Empty => new Layer4ListenerRealserverBindSetArgs();
     }
 }

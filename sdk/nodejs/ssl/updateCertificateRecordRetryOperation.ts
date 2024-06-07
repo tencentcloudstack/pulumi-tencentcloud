@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const updateCertificateRecordRetry = new tencentcloud.Ssl.UpdateCertificateRecordRetryOperation("update_certificate_record_retry", {
- *     deployRecordId: 1603,
- * });
+ * const updateCertificateRecordRetry = new tencentcloud.ssl.UpdateCertificateRecordRetryOperation("updateCertificateRecordRetry", {deployRecordId: 1603});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ssl update_certificate_record_retry can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ssl/updateCertificateRecordRetryOperation:UpdateCertificateRecordRetryOperation update_certificate_record_retry update_certificate_record_retry_id
+ * $ pulumi import tencentcloud:Ssl/updateCertificateRecordRetryOperation:UpdateCertificateRecordRetryOperation update_certificate_record_retry update_certificate_record_retry_id
  * ```
  */
 export class UpdateCertificateRecordRetryOperation extends pulumi.CustomResource {

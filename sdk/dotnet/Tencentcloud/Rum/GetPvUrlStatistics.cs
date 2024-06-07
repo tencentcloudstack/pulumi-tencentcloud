@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum pv_url_statistics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var pvUrlStatistics = Tencentcloud.Rum.GetPvUrlStatistics.Invoke(new()
         ///     {
-        ///         var pvUrlStatistics = Output.Create(Tencentcloud.Rum.GetPvUrlStatistics.InvokeAsync(new Tencentcloud.Rum.GetPvUrlStatisticsArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "allcount",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "allcount",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPvUrlStatisticsResult> InvokeAsync(GetPvUrlStatisticsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPvUrlStatisticsResult>("tencentcloud:Rum/getPvUrlStatistics:getPvUrlStatistics", args ?? new GetPvUrlStatisticsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPvUrlStatisticsResult>("tencentcloud:Rum/getPvUrlStatistics:getPvUrlStatistics", args ?? new GetPvUrlStatisticsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum pv_url_statistics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var pvUrlStatistics = Tencentcloud.Rum.GetPvUrlStatistics.Invoke(new()
         ///     {
-        ///         var pvUrlStatistics = Output.Create(Tencentcloud.Rum.GetPvUrlStatistics.InvokeAsync(new Tencentcloud.Rum.GetPvUrlStatisticsArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "allcount",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "allcount",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPvUrlStatisticsResult> Invoke(GetPvUrlStatisticsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPvUrlStatisticsResult>("tencentcloud:Rum/getPvUrlStatistics:getPvUrlStatistics", args ?? new GetPvUrlStatisticsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPvUrlStatisticsResult>("tencentcloud:Rum/getPvUrlStatistics:getPvUrlStatistics", args ?? new GetPvUrlStatisticsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPvUrlStatisticsArgs : Pulumi.InvokeArgs
+    public sealed class GetPvUrlStatisticsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -221,9 +215,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetPvUrlStatisticsArgs()
         {
         }
+        public static new GetPvUrlStatisticsArgs Empty => new GetPvUrlStatisticsArgs();
     }
 
-    public sealed class GetPvUrlStatisticsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPvUrlStatisticsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -366,6 +361,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetPvUrlStatisticsInvokeArgs()
         {
         }
+        public static new GetPvUrlStatisticsInvokeArgs Empty => new GetPvUrlStatisticsInvokeArgs();
     }
 
 

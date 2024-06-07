@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Cam.User("foo", {
+ * const foo = new tencentcloud.cam.User("foo", {
  *     consoleLogin: true,
  *     countryCode: "86",
  *     email: "hello@test.com",
@@ -28,13 +29,14 @@ import * as utilities from "../utilities";
  *     useApi: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CAM user can be imported using the user name, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cam/user:User foo cam-user-test
+ * $ pulumi import tencentcloud:Cam/user:User foo cam-user-test
  * ```
  */
 export class User extends pulumi.CustomResource {
@@ -162,7 +164,7 @@ export class User extends pulumi.CustomResource {
             resourceInputs["forceDelete"] = args ? args.forceDelete : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["needResetPassword"] = args ? args.needResetPassword : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["phoneNum"] = args ? args.phoneNum : undefined;
             resourceInputs["remark"] = args ? args.remark : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
@@ -173,6 +175,8 @@ export class User extends pulumi.CustomResource {
             resourceInputs["uin"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password", "secretId", "secretKey"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(User.__pulumiType, name, resourceInputs, opts);
     }
 }

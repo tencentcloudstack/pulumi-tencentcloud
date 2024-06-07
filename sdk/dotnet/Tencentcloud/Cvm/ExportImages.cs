@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exportImages = new Tencentcloud.Cvm.ExportImages("exportImages", new()
     ///     {
-    ///         var exportImages = new Tencentcloud.Cvm.ExportImages("exportImages", new Tencentcloud.Cvm.ExportImagesArgs
-    ///         {
-    ///             BucketName = "xxxxxx",
-    ///             FileNamePrefix = "test-",
-    ///             ImageId = "img-xxxxxx",
-    ///         });
-    ///     }
+    ///         BucketName = "xxxxxx",
+    ///         FileNamePrefix = "test-",
+    ///         ImageId = "img-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cvm/exportImages:ExportImages")]
-    public partial class ExportImages : Pulumi.CustomResource
+    public partial class ExportImages : global::Pulumi.CustomResource
     {
         /// <summary>
         /// COS bucket name.
@@ -124,7 +125,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         }
     }
 
-    public sealed class ExportImagesArgs : Pulumi.ResourceArgs
+    public sealed class ExportImagesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// COS bucket name.
@@ -171,9 +172,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public ExportImagesArgs()
         {
         }
+        public static new ExportImagesArgs Empty => new ExportImagesArgs();
     }
 
-    public sealed class ExportImagesState : Pulumi.ResourceArgs
+    public sealed class ExportImagesState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// COS bucket name.
@@ -220,5 +222,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public ExportImagesState()
         {
         }
+        public static new ExportImagesState Empty => new ExportImagesState();
     }
 }

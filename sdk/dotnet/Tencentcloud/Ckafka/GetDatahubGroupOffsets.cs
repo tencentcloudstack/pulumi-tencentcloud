@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// <summary>
         /// Use this data source to query detailed information of ckafka datahub_group_offsets
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var datahubGroupOffsets = Output.Create(Tencentcloud.Ckafka.GetDatahubGroupOffsets.InvokeAsync());
-        ///     }
+        ///     var datahubGroupOffsets = Tencentcloud.Ckafka.GetDatahubGroupOffsets.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDatahubGroupOffsetsResult> InvokeAsync(GetDatahubGroupOffsetsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDatahubGroupOffsetsResult>("tencentcloud:Ckafka/getDatahubGroupOffsets:getDatahubGroupOffsets", args ?? new GetDatahubGroupOffsetsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDatahubGroupOffsetsResult>("tencentcloud:Ckafka/getDatahubGroupOffsets:getDatahubGroupOffsets", args ?? new GetDatahubGroupOffsetsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ckafka datahub_group_offsets
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var datahubGroupOffsets = Output.Create(Tencentcloud.Ckafka.GetDatahubGroupOffsets.InvokeAsync());
-        ///     }
+        ///     var datahubGroupOffsets = Tencentcloud.Ckafka.GetDatahubGroupOffsets.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDatahubGroupOffsetsResult> Invoke(GetDatahubGroupOffsetsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDatahubGroupOffsetsResult>("tencentcloud:Ckafka/getDatahubGroupOffsets:getDatahubGroupOffsets", args ?? new GetDatahubGroupOffsetsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDatahubGroupOffsetsResult>("tencentcloud:Ckafka/getDatahubGroupOffsets:getDatahubGroupOffsets", args ?? new GetDatahubGroupOffsetsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDatahubGroupOffsetsArgs : Pulumi.InvokeArgs
+    public sealed class GetDatahubGroupOffsetsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Kafka consumer group.
@@ -95,9 +89,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetDatahubGroupOffsetsArgs()
         {
         }
+        public static new GetDatahubGroupOffsetsArgs Empty => new GetDatahubGroupOffsetsArgs();
     }
 
-    public sealed class GetDatahubGroupOffsetsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDatahubGroupOffsetsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Kafka consumer group.
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetDatahubGroupOffsetsInvokeArgs()
         {
         }
+        public static new GetDatahubGroupOffsetsInvokeArgs Empty => new GetDatahubGroupOffsetsInvokeArgs();
     }
 
 

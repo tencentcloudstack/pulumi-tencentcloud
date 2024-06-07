@@ -11,16 +11,16 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneSettingCacheKeyQueryStringGetArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingCacheKeyQueryStringGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// - `includeCustom`: Include the specified query strings.- `excludeCustom`: Exclude the specified query strings. Note: This field may return null, indicating that no valid value can be obtained.
+        /// `includeCustom`: Include the specified query strings.
         /// </summary>
         [Input("action")]
         public Input<string>? Action { get; set; }
 
         /// <summary>
-        /// Whether to use QueryString as part of CacheKey.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Whether to use QueryString as part of CacheKey.
         /// </summary>
         [Input("switch", required: true)]
         public Input<string> Switch { get; set; } = null!;
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneSettingCacheKeyQueryStringGetArgs()
         {
         }
+        public static new ZoneSettingCacheKeyQueryStringGetArgs Empty => new ZoneSettingCacheKeyQueryStringGetArgs();
     }
 }

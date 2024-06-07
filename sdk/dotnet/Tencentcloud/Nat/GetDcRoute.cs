@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         /// <summary>
         /// Use this data source to query detailed information of vpc nat_dc_route
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var natDcRoute = Tencentcloud.Nat.GetDcRoute.Invoke(new()
         ///     {
-        ///         var natDcRoute = Output.Create(Tencentcloud.Nat.GetDcRoute.InvokeAsync(new Tencentcloud.Nat.GetDcRouteArgs
-        ///         {
-        ///             NatGatewayId = "nat-gnxkey2e",
-        ///             VpcId = "vpc-pyyv5k3v",
-        ///         }));
-        ///     }
+        ///         NatGatewayId = "nat-gnxkey2e",
+        ///         VpcId = "vpc-pyyv5k3v",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDcRouteResult> InvokeAsync(GetDcRouteArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDcRouteResult>("tencentcloud:Nat/getDcRoute:getDcRoute", args ?? new GetDcRouteArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDcRouteResult>("tencentcloud:Nat/getDcRoute:getDcRoute", args ?? new GetDcRouteArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc nat_dc_route
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var natDcRoute = Tencentcloud.Nat.GetDcRoute.Invoke(new()
         ///     {
-        ///         var natDcRoute = Output.Create(Tencentcloud.Nat.GetDcRoute.InvokeAsync(new Tencentcloud.Nat.GetDcRouteArgs
-        ///         {
-        ///             NatGatewayId = "nat-gnxkey2e",
-        ///             VpcId = "vpc-pyyv5k3v",
-        ///         }));
-        ///     }
+        ///         NatGatewayId = "nat-gnxkey2e",
+        ///         VpcId = "vpc-pyyv5k3v",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDcRouteResult> Invoke(GetDcRouteInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDcRouteResult>("tencentcloud:Nat/getDcRoute:getDcRoute", args ?? new GetDcRouteInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDcRouteResult>("tencentcloud:Nat/getDcRoute:getDcRoute", args ?? new GetDcRouteInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDcRouteArgs : Pulumi.InvokeArgs
+    public sealed class GetDcRouteArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Unique identifier of Nat Gateway.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public GetDcRouteArgs()
         {
         }
+        public static new GetDcRouteArgs Empty => new GetDcRouteArgs();
     }
 
-    public sealed class GetDcRouteInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDcRouteInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Unique identifier of Nat Gateway.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public GetDcRouteInvokeArgs()
         {
         }
+        public static new GetDcRouteInvokeArgs Empty => new GetDcRouteInvokeArgs();
     }
 
 

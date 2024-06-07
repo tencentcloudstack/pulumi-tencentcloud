@@ -8,32 +8,40 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a vpc normalAddressReturn
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eip"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eip.NewNormalAddressReturn(ctx, "normalAddressReturn", &Eip.NormalAddressReturnArgs{
-// 			AddressIps: pulumi.StringArray(""),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Eip.NewNormalAddressReturn(ctx, "example", &Eip.NormalAddressReturnArgs{
+//				AddressIps: pulumi.StringArray{
+//					pulumi.String("172.16.17.32"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type NormalAddressReturn struct {
 	pulumi.CustomResourceState
 
@@ -48,7 +56,7 @@ func NewNormalAddressReturn(ctx *pulumi.Context,
 		args = &NormalAddressReturnArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource NormalAddressReturn
 	err := ctx.RegisterResource("tencentcloud:Eip/normalAddressReturn:NormalAddressReturn", name, args, &resource, opts...)
 	if err != nil {
@@ -121,7 +129,7 @@ func (i *NormalAddressReturn) ToNormalAddressReturnOutputWithContext(ctx context
 // NormalAddressReturnArrayInput is an input type that accepts NormalAddressReturnArray and NormalAddressReturnArrayOutput values.
 // You can construct a concrete instance of `NormalAddressReturnArrayInput` via:
 //
-//          NormalAddressReturnArray{ NormalAddressReturnArgs{...} }
+//	NormalAddressReturnArray{ NormalAddressReturnArgs{...} }
 type NormalAddressReturnArrayInput interface {
 	pulumi.Input
 
@@ -146,7 +154,7 @@ func (i NormalAddressReturnArray) ToNormalAddressReturnArrayOutputWithContext(ct
 // NormalAddressReturnMapInput is an input type that accepts NormalAddressReturnMap and NormalAddressReturnMapOutput values.
 // You can construct a concrete instance of `NormalAddressReturnMapInput` via:
 //
-//          NormalAddressReturnMap{ "key": NormalAddressReturnArgs{...} }
+//	NormalAddressReturnMap{ "key": NormalAddressReturnArgs{...} }
 type NormalAddressReturnMapInput interface {
 	pulumi.Input
 

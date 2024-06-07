@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Reserved
         /// <summary>
         /// Use this data source to query reserved instances configuration.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var config = Tencentcloud.Reserved.GetInstanceConfigs.Invoke(new()
         ///     {
-        ///         var config = Output.Create(Tencentcloud.Reserved.GetInstanceConfigs.InvokeAsync(new Tencentcloud.Reserved.GetInstanceConfigsArgs
-        ///         {
-        ///             AvailabilityZone = "na-siliconvalley-1",
-        ///         }));
-        ///     }
+        ///         AvailabilityZone = "na-siliconvalley-1",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceConfigsResult> InvokeAsync(GetInstanceConfigsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceConfigsResult>("tencentcloud:Reserved/getInstanceConfigs:getInstanceConfigs", args ?? new GetInstanceConfigsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceConfigsResult>("tencentcloud:Reserved/getInstanceConfigs:getInstanceConfigs", args ?? new GetInstanceConfigsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query reserved instances configuration.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var config = Tencentcloud.Reserved.GetInstanceConfigs.Invoke(new()
         ///     {
-        ///         var config = Output.Create(Tencentcloud.Reserved.GetInstanceConfigs.InvokeAsync(new Tencentcloud.Reserved.GetInstanceConfigsArgs
-        ///         {
-        ///             AvailabilityZone = "na-siliconvalley-1",
-        ///         }));
-        ///     }
+        ///         AvailabilityZone = "na-siliconvalley-1",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceConfigsResult> Invoke(GetInstanceConfigsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceConfigsResult>("tencentcloud:Reserved/getInstanceConfigs:getInstanceConfigs", args ?? new GetInstanceConfigsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceConfigsResult>("tencentcloud:Reserved/getInstanceConfigs:getInstanceConfigs", args ?? new GetInstanceConfigsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceConfigsArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceConfigsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The available zone that the reserved instance locates at.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Reserved
         public GetInstanceConfigsArgs()
         {
         }
+        public static new GetInstanceConfigsArgs Empty => new GetInstanceConfigsArgs();
     }
 
-    public sealed class GetInstanceConfigsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceConfigsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The available zone that the reserved instance locates at.
@@ -156,6 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Reserved
         public GetInstanceConfigsInvokeArgs()
         {
         }
+        public static new GetInstanceConfigsInvokeArgs Empty => new GetInstanceConfigsInvokeArgs();
     }
 
 

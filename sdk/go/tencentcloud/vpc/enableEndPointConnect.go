@@ -7,38 +7,44 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a vpc enableEndPointConnect
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.NewEnableEndPointConnect(ctx, "enableEndPointConnect", &Vpc.EnableEndPointConnectArgs{
-// 			AcceptFlag: pulumi.Bool(true),
-// 			EndPointIds: pulumi.StringArray{
-// 				pulumi.String("vpce-6q0ftmke"),
-// 			},
-// 			EndPointServiceId: pulumi.String("vpcsvc-98jddhcz"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.NewEnableEndPointConnect(ctx, "enableEndPointConnect", &Vpc.EnableEndPointConnectArgs{
+//				AcceptFlag: pulumi.Bool(true),
+//				EndPointIds: pulumi.StringArray{
+//					pulumi.String("vpce-6q0ftmke"),
+//				},
+//				EndPointServiceId: pulumi.String("vpcsvc-98jddhcz"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type EnableEndPointConnect struct {
 	pulumi.CustomResourceState
 
@@ -66,7 +72,7 @@ func NewEnableEndPointConnect(ctx *pulumi.Context,
 	if args.EndPointServiceId == nil {
 		return nil, errors.New("invalid value for required argument 'EndPointServiceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource EnableEndPointConnect
 	err := ctx.RegisterResource("tencentcloud:Vpc/enableEndPointConnect:EnableEndPointConnect", name, args, &resource, opts...)
 	if err != nil {
@@ -155,7 +161,7 @@ func (i *EnableEndPointConnect) ToEnableEndPointConnectOutputWithContext(ctx con
 // EnableEndPointConnectArrayInput is an input type that accepts EnableEndPointConnectArray and EnableEndPointConnectArrayOutput values.
 // You can construct a concrete instance of `EnableEndPointConnectArrayInput` via:
 //
-//          EnableEndPointConnectArray{ EnableEndPointConnectArgs{...} }
+//	EnableEndPointConnectArray{ EnableEndPointConnectArgs{...} }
 type EnableEndPointConnectArrayInput interface {
 	pulumi.Input
 
@@ -180,7 +186,7 @@ func (i EnableEndPointConnectArray) ToEnableEndPointConnectArrayOutputWithContex
 // EnableEndPointConnectMapInput is an input type that accepts EnableEndPointConnectMap and EnableEndPointConnectMapOutput values.
 // You can construct a concrete instance of `EnableEndPointConnectMapInput` via:
 //
-//          EnableEndPointConnectMap{ "key": EnableEndPointConnectArgs{...} }
+//	EnableEndPointConnectMap{ "key": EnableEndPointConnectArgs{...} }
 type EnableEndPointConnectMapInput interface {
 	pulumi.Input
 

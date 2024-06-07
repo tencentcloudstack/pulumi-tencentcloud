@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// <summary>
         /// Use this data source to query detailed information of CAM SAML providers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cam.GetSamlProviders.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cam.GetSamlProviders.InvokeAsync(new Tencentcloud.Cam.GetSamlProvidersArgs
-        ///         {
-        ///             Name = "cam-test-provider",
-        ///         }));
-        ///     }
+        ///         Name = "cam-test-provider",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSamlProvidersResult> InvokeAsync(GetSamlProvidersArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSamlProvidersResult>("tencentcloud:Cam/getSamlProviders:getSamlProviders", args ?? new GetSamlProvidersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSamlProvidersResult>("tencentcloud:Cam/getSamlProviders:getSamlProviders", args ?? new GetSamlProvidersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of CAM SAML providers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cam.GetSamlProviders.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cam.GetSamlProviders.InvokeAsync(new Tencentcloud.Cam.GetSamlProvidersArgs
-        ///         {
-        ///             Name = "cam-test-provider",
-        ///         }));
-        ///     }
+        ///         Name = "cam-test-provider",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSamlProvidersResult> Invoke(GetSamlProvidersInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSamlProvidersResult>("tencentcloud:Cam/getSamlProviders:getSamlProviders", args ?? new GetSamlProvidersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSamlProvidersResult>("tencentcloud:Cam/getSamlProviders:getSamlProviders", args ?? new GetSamlProvidersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSamlProvidersArgs : Pulumi.InvokeArgs
+    public sealed class GetSamlProvidersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The description of the CAM SAML provider.
@@ -95,9 +89,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetSamlProvidersArgs()
         {
         }
+        public static new GetSamlProvidersArgs Empty => new GetSamlProvidersArgs();
     }
 
-    public sealed class GetSamlProvidersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSamlProvidersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The description of the CAM SAML provider.
@@ -120,6 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetSamlProvidersInvokeArgs()
         {
         }
+        public static new GetSamlProvidersInvokeArgs Empty => new GetSamlProvidersInvokeArgs();
     }
 
 

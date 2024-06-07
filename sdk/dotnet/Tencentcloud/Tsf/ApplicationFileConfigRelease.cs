@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var applicationFileConfigRelease = new Tencentcloud.Tsf.ApplicationFileConfigRelease("applicationFileConfigRelease", new()
     ///     {
-    ///         var applicationFileConfigRelease = new Tencentcloud.Tsf.ApplicationFileConfigRelease("applicationFileConfigRelease", new Tencentcloud.Tsf.ApplicationFileConfigReleaseArgs
-    ///         {
-    ///             ConfigId = "dcfg-f-123456",
-    ///             GroupId = "group-123456",
-    ///             ReleaseDesc = "product release",
-    ///         });
-    ///     }
+    ///         ConfigId = "dcfg-f-123456",
+    ///         GroupId = "group-123456",
+    ///         ReleaseDesc = "product release",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tsf applicationfile_config_release can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tsf/applicationFileConfigRelease:ApplicationFileConfigRelease application_file_config_release application_file_config_release_id
+    /// $ pulumi import tencentcloud:Tsf/applicationFileConfigRelease:ApplicationFileConfigRelease application_file_config_release application_file_config_release_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/applicationFileConfigRelease:ApplicationFileConfigRelease")]
-    public partial class ApplicationFileConfigRelease : Pulumi.CustomResource
+    public partial class ApplicationFileConfigRelease : global::Pulumi.CustomResource
     {
         /// <summary>
         /// File config id.
@@ -108,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class ApplicationFileConfigReleaseArgs : Pulumi.ResourceArgs
+    public sealed class ApplicationFileConfigReleaseArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// File config id.
@@ -131,9 +132,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ApplicationFileConfigReleaseArgs()
         {
         }
+        public static new ApplicationFileConfigReleaseArgs Empty => new ApplicationFileConfigReleaseArgs();
     }
 
-    public sealed class ApplicationFileConfigReleaseState : Pulumi.ResourceArgs
+    public sealed class ApplicationFileConfigReleaseState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// File config id.
@@ -156,5 +158,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ApplicationFileConfigReleaseState()
         {
         }
+        public static new ApplicationFileConfigReleaseState Empty => new ApplicationFileConfigReleaseState();
     }
 }

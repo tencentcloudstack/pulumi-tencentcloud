@@ -9,22 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const overviewIndex = pulumi.output(tencentcloud.Antiddos.getOverviewIndex({
+ * const overviewIndex = tencentcloud.Antiddos.getOverviewIndex({
  *     endTime: "2023-11-21 12:32:12",
  *     startTime: "2023-11-20 12:32:12",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getOverviewIndex(args: GetOverviewIndexArgs, opts?: pulumi.InvokeOptions): Promise<GetOverviewIndexResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Antiddos/getOverviewIndex:getOverviewIndex", {
         "endTime": args.endTime,
         "resultOutputFile": args.resultOutputFile,
@@ -102,9 +101,25 @@ export interface GetOverviewIndexResult {
     readonly resultOutputFile?: string;
     readonly startTime: string;
 }
-
+/**
+ * Use this data source to query detailed information of antiddos overview index
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const overviewIndex = tencentcloud.Antiddos.getOverviewIndex({
+ *     endTime: "2023-11-21 12:32:12",
+ *     startTime: "2023-11-20 12:32:12",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getOverviewIndexOutput(args: GetOverviewIndexOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOverviewIndexResult> {
-    return pulumi.output(args).apply(a => getOverviewIndex(a, opts))
+    return pulumi.output(args).apply((a: any) => getOverviewIndex(a, opts))
 }
 
 /**

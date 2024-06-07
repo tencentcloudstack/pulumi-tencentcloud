@@ -14,72 +14,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// Provide a resource to create a VPC.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a basic VPC
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         DnsServers = new[]
     ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             DnsServers = 
-    ///             {
-    ///                 "119.29.29.29",
-    ///                 "8.8.8.8",
-    ///             },
-    ///             IsMulticast = false,
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///     }
+    ///             "119.29.29.29",
+    ///             "8.8.8.8",
+    ///         },
+    ///         IsMulticast = false,
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Using Assistant CIDR
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///         AssistantCidrs = new[]
     ///         {
-    ///             AssistantCidrs = 
-    ///             {
-    ///                 "172.16.0.0/24",
-    ///             },
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///     }
+    ///             "172.16.0.0/24",
+    ///         },
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         IsMulticast = false,
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Vpc instance can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/instance:Instance test vpc-id
+    /// $ pulumi import tencentcloud:Vpc/instance:Instance test vpc-id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// List of Assistant CIDR, NOTE: Only `NORMAL` typed CIDRs included, check the Docker CIDR by readonly `assistant_docker_cidrs`.
@@ -186,7 +190,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         [Input("assistantCidrs")]
         private InputList<string>? _assistantCidrs;
@@ -245,9 +249,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         [Input("assistantCidrs")]
         private InputList<string>? _assistantCidrs;
@@ -336,5 +341,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

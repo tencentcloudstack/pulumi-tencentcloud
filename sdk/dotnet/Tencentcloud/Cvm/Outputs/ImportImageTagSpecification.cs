@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Outputs
     [OutputType]
     public sealed class ImportImageTagSpecification
     {
+        /// <summary>
+        /// Resource type. Valid values: instance (CVM), host (CDH), image (for image), and keypair (for key). Note: This field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public readonly string ResourceType;
+        /// <summary>
+        /// Tag pairs Note: This field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public readonly ImmutableArray<Outputs.ImportImageTagSpecificationTag> Tags;
 
         [OutputConstructor]

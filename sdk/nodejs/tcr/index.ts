@@ -5,48 +5,136 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./createImageSignatureOperation";
-export * from "./customizedDomain";
-export * from "./deleteImageOperation";
-export * from "./getImageManifests";
-export * from "./getImages";
-export * from "./getInstances";
-export * from "./getNamespaces";
-export * from "./getReplicationInstanceCreateTasks";
-export * from "./getReplicationInstanceSyncStatus";
-export * from "./getRepositories";
-export * from "./getTagRetentionExecutionTasks";
-export * from "./getTagRetentionExecutions";
-export * from "./getTokens";
-export * from "./getVpcAttachments";
-export * from "./getWebhookTriggerLogs";
-export * from "./immutableTagRule";
-export * from "./instance";
-export * from "./manageReplicationOperation";
-export * from "./namespace";
-export * from "./repository";
-export * from "./serviceAccount";
-export * from "./tagRetentionExecutionConfig";
-export * from "./tagRetentionRule";
-export * from "./token";
-export * from "./vpcAttachment";
-export * from "./webhookTrigger";
+export { CreateImageSignatureOperationArgs, CreateImageSignatureOperationState } from "./createImageSignatureOperation";
+export type CreateImageSignatureOperation = import("./createImageSignatureOperation").CreateImageSignatureOperation;
+export const CreateImageSignatureOperation: typeof import("./createImageSignatureOperation").CreateImageSignatureOperation = null as any;
+utilities.lazyLoad(exports, ["CreateImageSignatureOperation"], () => require("./createImageSignatureOperation"));
 
-// Import resources to register:
-import { CreateImageSignatureOperation } from "./createImageSignatureOperation";
-import { CustomizedDomain } from "./customizedDomain";
-import { DeleteImageOperation } from "./deleteImageOperation";
-import { ImmutableTagRule } from "./immutableTagRule";
-import { Instance } from "./instance";
-import { ManageReplicationOperation } from "./manageReplicationOperation";
-import { Namespace } from "./namespace";
-import { Repository } from "./repository";
-import { ServiceAccount } from "./serviceAccount";
-import { TagRetentionExecutionConfig } from "./tagRetentionExecutionConfig";
-import { TagRetentionRule } from "./tagRetentionRule";
-import { Token } from "./token";
-import { VpcAttachment } from "./vpcAttachment";
-import { WebhookTrigger } from "./webhookTrigger";
+export { CustomizedDomainArgs, CustomizedDomainState } from "./customizedDomain";
+export type CustomizedDomain = import("./customizedDomain").CustomizedDomain;
+export const CustomizedDomain: typeof import("./customizedDomain").CustomizedDomain = null as any;
+utilities.lazyLoad(exports, ["CustomizedDomain"], () => require("./customizedDomain"));
+
+export { DeleteImageOperationArgs, DeleteImageOperationState } from "./deleteImageOperation";
+export type DeleteImageOperation = import("./deleteImageOperation").DeleteImageOperation;
+export const DeleteImageOperation: typeof import("./deleteImageOperation").DeleteImageOperation = null as any;
+utilities.lazyLoad(exports, ["DeleteImageOperation"], () => require("./deleteImageOperation"));
+
+export { GetImageManifestsArgs, GetImageManifestsResult, GetImageManifestsOutputArgs } from "./getImageManifests";
+export const getImageManifests: typeof import("./getImageManifests").getImageManifests = null as any;
+export const getImageManifestsOutput: typeof import("./getImageManifests").getImageManifestsOutput = null as any;
+utilities.lazyLoad(exports, ["getImageManifests","getImageManifestsOutput"], () => require("./getImageManifests"));
+
+export { GetImagesArgs, GetImagesResult, GetImagesOutputArgs } from "./getImages";
+export const getImages: typeof import("./getImages").getImages = null as any;
+export const getImagesOutput: typeof import("./getImages").getImagesOutput = null as any;
+utilities.lazyLoad(exports, ["getImages","getImagesOutput"], () => require("./getImages"));
+
+export { GetInstancesArgs, GetInstancesResult, GetInstancesOutputArgs } from "./getInstances";
+export const getInstances: typeof import("./getInstances").getInstances = null as any;
+export const getInstancesOutput: typeof import("./getInstances").getInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstances","getInstancesOutput"], () => require("./getInstances"));
+
+export { GetNamespacesArgs, GetNamespacesResult, GetNamespacesOutputArgs } from "./getNamespaces";
+export const getNamespaces: typeof import("./getNamespaces").getNamespaces = null as any;
+export const getNamespacesOutput: typeof import("./getNamespaces").getNamespacesOutput = null as any;
+utilities.lazyLoad(exports, ["getNamespaces","getNamespacesOutput"], () => require("./getNamespaces"));
+
+export { GetReplicationInstanceCreateTasksArgs, GetReplicationInstanceCreateTasksResult, GetReplicationInstanceCreateTasksOutputArgs } from "./getReplicationInstanceCreateTasks";
+export const getReplicationInstanceCreateTasks: typeof import("./getReplicationInstanceCreateTasks").getReplicationInstanceCreateTasks = null as any;
+export const getReplicationInstanceCreateTasksOutput: typeof import("./getReplicationInstanceCreateTasks").getReplicationInstanceCreateTasksOutput = null as any;
+utilities.lazyLoad(exports, ["getReplicationInstanceCreateTasks","getReplicationInstanceCreateTasksOutput"], () => require("./getReplicationInstanceCreateTasks"));
+
+export { GetReplicationInstanceSyncStatusArgs, GetReplicationInstanceSyncStatusResult, GetReplicationInstanceSyncStatusOutputArgs } from "./getReplicationInstanceSyncStatus";
+export const getReplicationInstanceSyncStatus: typeof import("./getReplicationInstanceSyncStatus").getReplicationInstanceSyncStatus = null as any;
+export const getReplicationInstanceSyncStatusOutput: typeof import("./getReplicationInstanceSyncStatus").getReplicationInstanceSyncStatusOutput = null as any;
+utilities.lazyLoad(exports, ["getReplicationInstanceSyncStatus","getReplicationInstanceSyncStatusOutput"], () => require("./getReplicationInstanceSyncStatus"));
+
+export { GetRepositoriesArgs, GetRepositoriesResult, GetRepositoriesOutputArgs } from "./getRepositories";
+export const getRepositories: typeof import("./getRepositories").getRepositories = null as any;
+export const getRepositoriesOutput: typeof import("./getRepositories").getRepositoriesOutput = null as any;
+utilities.lazyLoad(exports, ["getRepositories","getRepositoriesOutput"], () => require("./getRepositories"));
+
+export { GetTagRetentionExecutionTasksArgs, GetTagRetentionExecutionTasksResult, GetTagRetentionExecutionTasksOutputArgs } from "./getTagRetentionExecutionTasks";
+export const getTagRetentionExecutionTasks: typeof import("./getTagRetentionExecutionTasks").getTagRetentionExecutionTasks = null as any;
+export const getTagRetentionExecutionTasksOutput: typeof import("./getTagRetentionExecutionTasks").getTagRetentionExecutionTasksOutput = null as any;
+utilities.lazyLoad(exports, ["getTagRetentionExecutionTasks","getTagRetentionExecutionTasksOutput"], () => require("./getTagRetentionExecutionTasks"));
+
+export { GetTagRetentionExecutionsArgs, GetTagRetentionExecutionsResult, GetTagRetentionExecutionsOutputArgs } from "./getTagRetentionExecutions";
+export const getTagRetentionExecutions: typeof import("./getTagRetentionExecutions").getTagRetentionExecutions = null as any;
+export const getTagRetentionExecutionsOutput: typeof import("./getTagRetentionExecutions").getTagRetentionExecutionsOutput = null as any;
+utilities.lazyLoad(exports, ["getTagRetentionExecutions","getTagRetentionExecutionsOutput"], () => require("./getTagRetentionExecutions"));
+
+export { GetTokensArgs, GetTokensResult, GetTokensOutputArgs } from "./getTokens";
+export const getTokens: typeof import("./getTokens").getTokens = null as any;
+export const getTokensOutput: typeof import("./getTokens").getTokensOutput = null as any;
+utilities.lazyLoad(exports, ["getTokens","getTokensOutput"], () => require("./getTokens"));
+
+export { GetVpcAttachmentsArgs, GetVpcAttachmentsResult, GetVpcAttachmentsOutputArgs } from "./getVpcAttachments";
+export const getVpcAttachments: typeof import("./getVpcAttachments").getVpcAttachments = null as any;
+export const getVpcAttachmentsOutput: typeof import("./getVpcAttachments").getVpcAttachmentsOutput = null as any;
+utilities.lazyLoad(exports, ["getVpcAttachments","getVpcAttachmentsOutput"], () => require("./getVpcAttachments"));
+
+export { GetWebhookTriggerLogsArgs, GetWebhookTriggerLogsResult, GetWebhookTriggerLogsOutputArgs } from "./getWebhookTriggerLogs";
+export const getWebhookTriggerLogs: typeof import("./getWebhookTriggerLogs").getWebhookTriggerLogs = null as any;
+export const getWebhookTriggerLogsOutput: typeof import("./getWebhookTriggerLogs").getWebhookTriggerLogsOutput = null as any;
+utilities.lazyLoad(exports, ["getWebhookTriggerLogs","getWebhookTriggerLogsOutput"], () => require("./getWebhookTriggerLogs"));
+
+export { ImmutableTagRuleArgs, ImmutableTagRuleState } from "./immutableTagRule";
+export type ImmutableTagRule = import("./immutableTagRule").ImmutableTagRule;
+export const ImmutableTagRule: typeof import("./immutableTagRule").ImmutableTagRule = null as any;
+utilities.lazyLoad(exports, ["ImmutableTagRule"], () => require("./immutableTagRule"));
+
+export { InstanceArgs, InstanceState } from "./instance";
+export type Instance = import("./instance").Instance;
+export const Instance: typeof import("./instance").Instance = null as any;
+utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { ManageReplicationOperationArgs, ManageReplicationOperationState } from "./manageReplicationOperation";
+export type ManageReplicationOperation = import("./manageReplicationOperation").ManageReplicationOperation;
+export const ManageReplicationOperation: typeof import("./manageReplicationOperation").ManageReplicationOperation = null as any;
+utilities.lazyLoad(exports, ["ManageReplicationOperation"], () => require("./manageReplicationOperation"));
+
+export { NamespaceArgs, NamespaceState } from "./namespace";
+export type Namespace = import("./namespace").Namespace;
+export const Namespace: typeof import("./namespace").Namespace = null as any;
+utilities.lazyLoad(exports, ["Namespace"], () => require("./namespace"));
+
+export { RepositoryArgs, RepositoryState } from "./repository";
+export type Repository = import("./repository").Repository;
+export const Repository: typeof import("./repository").Repository = null as any;
+utilities.lazyLoad(exports, ["Repository"], () => require("./repository"));
+
+export { ServiceAccountArgs, ServiceAccountState } from "./serviceAccount";
+export type ServiceAccount = import("./serviceAccount").ServiceAccount;
+export const ServiceAccount: typeof import("./serviceAccount").ServiceAccount = null as any;
+utilities.lazyLoad(exports, ["ServiceAccount"], () => require("./serviceAccount"));
+
+export { TagRetentionExecutionConfigArgs, TagRetentionExecutionConfigState } from "./tagRetentionExecutionConfig";
+export type TagRetentionExecutionConfig = import("./tagRetentionExecutionConfig").TagRetentionExecutionConfig;
+export const TagRetentionExecutionConfig: typeof import("./tagRetentionExecutionConfig").TagRetentionExecutionConfig = null as any;
+utilities.lazyLoad(exports, ["TagRetentionExecutionConfig"], () => require("./tagRetentionExecutionConfig"));
+
+export { TagRetentionRuleArgs, TagRetentionRuleState } from "./tagRetentionRule";
+export type TagRetentionRule = import("./tagRetentionRule").TagRetentionRule;
+export const TagRetentionRule: typeof import("./tagRetentionRule").TagRetentionRule = null as any;
+utilities.lazyLoad(exports, ["TagRetentionRule"], () => require("./tagRetentionRule"));
+
+export { TokenArgs, TokenState } from "./token";
+export type Token = import("./token").Token;
+export const Token: typeof import("./token").Token = null as any;
+utilities.lazyLoad(exports, ["Token"], () => require("./token"));
+
+export { VpcAttachmentArgs, VpcAttachmentState } from "./vpcAttachment";
+export type VpcAttachment = import("./vpcAttachment").VpcAttachment;
+export const VpcAttachment: typeof import("./vpcAttachment").VpcAttachment = null as any;
+utilities.lazyLoad(exports, ["VpcAttachment"], () => require("./vpcAttachment"));
+
+export { WebhookTriggerArgs, WebhookTriggerState } from "./webhookTrigger";
+export type WebhookTrigger = import("./webhookTrigger").WebhookTrigger;
+export const WebhookTrigger: typeof import("./webhookTrigger").WebhookTrigger = null as any;
+utilities.lazyLoad(exports, ["WebhookTrigger"], () => require("./webhookTrigger"));
+
 
 const _module = {
     version: utilities.getVersion(),

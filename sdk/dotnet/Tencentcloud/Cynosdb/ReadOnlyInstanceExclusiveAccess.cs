@@ -15,45 +15,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var cynosdbClusterId = config.Get("cynosdbClusterId") ?? "default_cynosdb_cluster";
+    ///     var cynosdbClusterInstanceId = config.Get("cynosdbClusterInstanceId") ?? "default_cluster_instance";
+    ///     var cynosdbClusterSecurityGroupId = config.Get("cynosdbClusterSecurityGroupId") ?? "default_security_group_id";
+    ///     var gz3 = Tencentcloud.Vpc.GetSubnets.Invoke(new()
     ///     {
-    ///         var config = new Config();
-    ///         var cynosdbClusterId = config.Get("cynosdbClusterId") ?? "default_cynosdb_cluster";
-    ///         var cynosdbClusterInstanceId = config.Get("cynosdbClusterInstanceId") ?? "default_cluster_instance";
-    ///         var cynosdbClusterSecurityGroupId = config.Get("cynosdbClusterSecurityGroupId") ?? "default_security_group_id";
-    ///         var gz3 = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
-    ///         {
-    ///             AvailabilityZone = @var.Default_az,
-    ///             IsDefault = true,
-    ///         }));
-    ///         var vpcId = gz3.Apply(gz3 =&gt; gz3.InstanceLists?[0]?.VpcId);
-    ///         var subnetId = gz3.Apply(gz3 =&gt; gz3.InstanceLists?[0]?.SubnetId);
-    ///         var readOnlyInstanceExclusiveAccess = new Tencentcloud.Cynosdb.ReadOnlyInstanceExclusiveAccess("readOnlyInstanceExclusiveAccess", new Tencentcloud.Cynosdb.ReadOnlyInstanceExclusiveAccessArgs
-    ///         {
-    ///             ClusterId = cynosdbClusterId,
-    ///             InstanceId = cynosdbClusterInstanceId,
-    ///             VpcId = vpcId,
-    ///             SubnetId = subnetId,
-    ///             Port = 1234,
-    ///             SecurityGroupIds = 
-    ///             {
-    ///                 cynosdbClusterSecurityGroupId,
-    ///             },
-    ///         });
-    ///     }
+    ///         AvailabilityZone = @var.Default_az,
+    ///         IsDefault = true,
+    ///     });
     /// 
-    /// }
+    ///     var vpcId = gz3.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId);
+    /// 
+    ///     var subnetId = gz3.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.SubnetId);
+    /// 
+    ///     var readOnlyInstanceExclusiveAccess = new Tencentcloud.Cynosdb.ReadOnlyInstanceExclusiveAccess("readOnlyInstanceExclusiveAccess", new()
+    ///     {
+    ///         ClusterId = cynosdbClusterId,
+    ///         InstanceId = cynosdbClusterInstanceId,
+    ///         VpcId = vpcId,
+    ///         SubnetId = subnetId,
+    ///         Port = 1234,
+    ///         SecurityGroupIds = new[]
+    ///         {
+    ///             cynosdbClusterSecurityGroupId,
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/readOnlyInstanceExclusiveAccess:ReadOnlyInstanceExclusiveAccess")]
-    public partial class ReadOnlyInstanceExclusiveAccess : Pulumi.CustomResource
+    public partial class ReadOnlyInstanceExclusiveAccess : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster ID.
@@ -136,7 +140,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class ReadOnlyInstanceExclusiveAccessArgs : Pulumi.ResourceArgs
+    public sealed class ReadOnlyInstanceExclusiveAccessArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -183,9 +187,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ReadOnlyInstanceExclusiveAccessArgs()
         {
         }
+        public static new ReadOnlyInstanceExclusiveAccessArgs Empty => new ReadOnlyInstanceExclusiveAccessArgs();
     }
 
-    public sealed class ReadOnlyInstanceExclusiveAccessState : Pulumi.ResourceArgs
+    public sealed class ReadOnlyInstanceExclusiveAccessState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -232,5 +237,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ReadOnlyInstanceExclusiveAccessState()
         {
         }
+        public static new ReadOnlyInstanceExclusiveAccessState Empty => new ReadOnlyInstanceExclusiveAccessState();
     }
 }

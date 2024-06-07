@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// Use this data source to query detailed information of clb instance_traffic
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceTraffic = Tencentcloud.Clb.GetInstanceTraffic.Invoke(new()
         ///     {
-        ///         var instanceTraffic = Output.Create(Tencentcloud.Clb.GetInstanceTraffic.InvokeAsync(new Tencentcloud.Clb.GetInstanceTrafficArgs
-        ///         {
-        ///             LoadBalancerRegion = "ap-guangzhou",
-        ///         }));
-        ///     }
+        ///         LoadBalancerRegion = "ap-guangzhou",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceTrafficResult> InvokeAsync(GetInstanceTrafficArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceTrafficResult>("tencentcloud:Clb/getInstanceTraffic:getInstanceTraffic", args ?? new GetInstanceTrafficArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceTrafficResult>("tencentcloud:Clb/getInstanceTraffic:getInstanceTraffic", args ?? new GetInstanceTrafficArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of clb instance_traffic
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceTraffic = Tencentcloud.Clb.GetInstanceTraffic.Invoke(new()
         ///     {
-        ///         var instanceTraffic = Output.Create(Tencentcloud.Clb.GetInstanceTraffic.InvokeAsync(new Tencentcloud.Clb.GetInstanceTrafficArgs
-        ///         {
-        ///             LoadBalancerRegion = "ap-guangzhou",
-        ///         }));
-        ///     }
+        ///         LoadBalancerRegion = "ap-guangzhou",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceTrafficResult> Invoke(GetInstanceTrafficInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceTrafficResult>("tencentcloud:Clb/getInstanceTraffic:getInstanceTraffic", args ?? new GetInstanceTrafficInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceTrafficResult>("tencentcloud:Clb/getInstanceTraffic:getInstanceTraffic", args ?? new GetInstanceTrafficInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceTrafficArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceTrafficArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// CLB instance region. If this parameter is not passed in, CLB instances in all regions will be returned.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetInstanceTrafficArgs()
         {
         }
+        public static new GetInstanceTrafficArgs Empty => new GetInstanceTrafficArgs();
     }
 
-    public sealed class GetInstanceTrafficInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceTrafficInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// CLB instance region. If this parameter is not passed in, CLB instances in all regions will be returned.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetInstanceTrafficInvokeArgs()
         {
         }
+        public static new GetInstanceTrafficInvokeArgs Empty => new GetInstanceTrafficInvokeArgs();
     }
 
 

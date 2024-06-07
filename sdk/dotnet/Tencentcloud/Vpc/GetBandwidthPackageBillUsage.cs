@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc bandwidth_package_bill_usage
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var bandwidthPackageBillUsage = Tencentcloud.Vpc.GetBandwidthPackageBillUsage.Invoke(new()
         ///     {
-        ///         var bandwidthPackageBillUsage = Output.Create(Tencentcloud.Vpc.GetBandwidthPackageBillUsage.InvokeAsync(new Tencentcloud.Vpc.GetBandwidthPackageBillUsageArgs
-        ///         {
-        ///             BandwidthPackageId = "bwp-234rfgt5",
-        ///         }));
-        ///     }
+        ///         BandwidthPackageId = "bwp-234rfgt5",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBandwidthPackageBillUsageResult> InvokeAsync(GetBandwidthPackageBillUsageArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBandwidthPackageBillUsageResult>("tencentcloud:Vpc/getBandwidthPackageBillUsage:getBandwidthPackageBillUsage", args ?? new GetBandwidthPackageBillUsageArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBandwidthPackageBillUsageResult>("tencentcloud:Vpc/getBandwidthPackageBillUsage:getBandwidthPackageBillUsage", args ?? new GetBandwidthPackageBillUsageArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc bandwidth_package_bill_usage
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var bandwidthPackageBillUsage = Tencentcloud.Vpc.GetBandwidthPackageBillUsage.Invoke(new()
         ///     {
-        ///         var bandwidthPackageBillUsage = Output.Create(Tencentcloud.Vpc.GetBandwidthPackageBillUsage.InvokeAsync(new Tencentcloud.Vpc.GetBandwidthPackageBillUsageArgs
-        ///         {
-        ///             BandwidthPackageId = "bwp-234rfgt5",
-        ///         }));
-        ///     }
+        ///         BandwidthPackageId = "bwp-234rfgt5",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBandwidthPackageBillUsageResult> Invoke(GetBandwidthPackageBillUsageInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBandwidthPackageBillUsageResult>("tencentcloud:Vpc/getBandwidthPackageBillUsage:getBandwidthPackageBillUsage", args ?? new GetBandwidthPackageBillUsageInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBandwidthPackageBillUsageResult>("tencentcloud:Vpc/getBandwidthPackageBillUsage:getBandwidthPackageBillUsage", args ?? new GetBandwidthPackageBillUsageInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBandwidthPackageBillUsageArgs : Pulumi.InvokeArgs
+    public sealed class GetBandwidthPackageBillUsageArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The unique ID of the postpaid bandwidth package.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetBandwidthPackageBillUsageArgs()
         {
         }
+        public static new GetBandwidthPackageBillUsageArgs Empty => new GetBandwidthPackageBillUsageArgs();
     }
 
-    public sealed class GetBandwidthPackageBillUsageInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBandwidthPackageBillUsageInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The unique ID of the postpaid bandwidth package.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetBandwidthPackageBillUsageInvokeArgs()
         {
         }
+        public static new GetBandwidthPackageBillUsageInvokeArgs Empty => new GetBandwidthPackageBillUsageInvokeArgs();
     }
 
 

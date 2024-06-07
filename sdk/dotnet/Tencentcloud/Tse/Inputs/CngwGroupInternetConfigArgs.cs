@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class CngwGroupInternetConfigArgs : Pulumi.ResourceArgs
+    public sealed class CngwGroupInternetConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// description of clb.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public CngwGroupInternetConfigArgs()
         {
         }
+        public static new CngwGroupInternetConfigArgs Empty => new CngwGroupInternetConfigArgs();
     }
 }

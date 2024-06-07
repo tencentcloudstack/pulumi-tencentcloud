@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// <summary>
         /// Use this data source to query detailed information of mps parse_live_stream_process_notification
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var parseLiveStreamProcessNotification = Tencentcloud.Mps.GetParseLiveStreamProcessNotification.Invoke(new()
         ///     {
-        ///         var parseLiveStreamProcessNotification = Output.Create(Tencentcloud.Mps.GetParseLiveStreamProcessNotification.InvokeAsync(new Tencentcloud.Mps.GetParseLiveStreamProcessNotificationArgs
-        ///         {
-        ///             Content = "your_content",
-        ///         }));
-        ///     }
+        ///         Content = "your_content",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetParseLiveStreamProcessNotificationResult> InvokeAsync(GetParseLiveStreamProcessNotificationArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetParseLiveStreamProcessNotificationResult>("tencentcloud:Mps/getParseLiveStreamProcessNotification:getParseLiveStreamProcessNotification", args ?? new GetParseLiveStreamProcessNotificationArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetParseLiveStreamProcessNotificationResult>("tencentcloud:Mps/getParseLiveStreamProcessNotification:getParseLiveStreamProcessNotification", args ?? new GetParseLiveStreamProcessNotificationArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mps parse_live_stream_process_notification
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var parseLiveStreamProcessNotification = Tencentcloud.Mps.GetParseLiveStreamProcessNotification.Invoke(new()
         ///     {
-        ///         var parseLiveStreamProcessNotification = Output.Create(Tencentcloud.Mps.GetParseLiveStreamProcessNotification.InvokeAsync(new Tencentcloud.Mps.GetParseLiveStreamProcessNotificationArgs
-        ///         {
-        ///             Content = "your_content",
-        ///         }));
-        ///     }
+        ///         Content = "your_content",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetParseLiveStreamProcessNotificationResult> Invoke(GetParseLiveStreamProcessNotificationInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetParseLiveStreamProcessNotificationResult>("tencentcloud:Mps/getParseLiveStreamProcessNotification:getParseLiveStreamProcessNotification", args ?? new GetParseLiveStreamProcessNotificationInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetParseLiveStreamProcessNotificationResult>("tencentcloud:Mps/getParseLiveStreamProcessNotification:getParseLiveStreamProcessNotification", args ?? new GetParseLiveStreamProcessNotificationInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetParseLiveStreamProcessNotificationArgs : Pulumi.InvokeArgs
+    public sealed class GetParseLiveStreamProcessNotificationArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Live stream event notification obtained from CMQ.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public GetParseLiveStreamProcessNotificationArgs()
         {
         }
+        public static new GetParseLiveStreamProcessNotificationArgs Empty => new GetParseLiveStreamProcessNotificationArgs();
     }
 
-    public sealed class GetParseLiveStreamProcessNotificationInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetParseLiveStreamProcessNotificationInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Live stream event notification obtained from CMQ.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public GetParseLiveStreamProcessNotificationInvokeArgs()
         {
         }
+        public static new GetParseLiveStreamProcessNotificationInvokeArgs Empty => new GetParseLiveStreamProcessNotificationInvokeArgs();
     }
 
 

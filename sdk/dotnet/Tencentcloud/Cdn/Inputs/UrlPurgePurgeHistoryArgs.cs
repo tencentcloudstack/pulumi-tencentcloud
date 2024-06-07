@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class UrlPurgePurgeHistoryArgs : Pulumi.ResourceArgs
+    public sealed class UrlPurgePurgeHistoryArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Purge task create time.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public UrlPurgePurgeHistoryArgs()
         {
         }
+        public static new UrlPurgePurgeHistoryArgs Empty => new UrlPurgePurgeHistoryArgs();
     }
 }

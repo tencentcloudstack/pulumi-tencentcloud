@@ -15,80 +15,81 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var dbInstance = new Tencentcloud.Dcdb.DbInstance("dbInstance", new()
     ///     {
-    ///         var dbInstance = new Tencentcloud.Dcdb.DbInstance("dbInstance", new Tencentcloud.Dcdb.DbInstanceArgs
+    ///         InstanceName = "test_dcdb_db_instance",
+    ///         Zones = new[]
     ///         {
-    ///             InstanceName = "test_dcdb_db_instance",
-    ///             Zones = 
+    ///             "ap-guangzhou-5",
+    ///         },
+    ///         Period = 1,
+    ///         ShardMemory = 2,
+    ///         ShardStorage = 10,
+    ///         ShardNodeCount = 2,
+    ///         ShardCount = 2,
+    ///         VpcId = local.Vpc_id,
+    ///         SubnetId = local.Subnet_id,
+    ///         DbVersionId = "8.0",
+    ///         ResourceTags = new[]
+    ///         {
+    ///             new Tencentcloud.Dcdb.Inputs.DbInstanceResourceTagArgs
     ///             {
-    ///                 "ap-guangzhou-5",
+    ///                 TagKey = "aaa",
+    ///                 TagValue = "bbb",
     ///             },
-    ///             Period = 1,
-    ///             ShardMemory = 2,
-    ///             ShardStorage = 10,
-    ///             ShardNodeCount = 2,
-    ///             ShardCount = 2,
-    ///             VpcId = local.Vpc_id,
-    ///             SubnetId = local.Subnet_id,
-    ///             DbVersionId = "8.0",
-    ///             ResourceTags = 
+    ///         },
+    ///         InitParams = new[]
+    ///         {
+    ///             new Tencentcloud.Dcdb.Inputs.DbInstanceInitParamArgs
     ///             {
-    ///                 new Tencentcloud.Dcdb.Inputs.DbInstanceResourceTagArgs
-    ///                 {
-    ///                     TagKey = "aaa",
-    ///                     TagValue = "bbb",
-    ///                 },
+    ///                 Param = "character_set_server",
+    ///                 Value = "utf8mb4",
     ///             },
-    ///             InitParams = 
+    ///             new Tencentcloud.Dcdb.Inputs.DbInstanceInitParamArgs
     ///             {
-    ///                 new Tencentcloud.Dcdb.Inputs.DbInstanceInitParamArgs
-    ///                 {
-    ///                     Param = "character_set_server",
-    ///                     Value = "utf8mb4",
-    ///                 },
-    ///                 new Tencentcloud.Dcdb.Inputs.DbInstanceInitParamArgs
-    ///                 {
-    ///                     Param = "lower_case_table_names",
-    ///                     Value = "1",
-    ///                 },
-    ///                 new Tencentcloud.Dcdb.Inputs.DbInstanceInitParamArgs
-    ///                 {
-    ///                     Param = "sync_mode",
-    ///                     Value = "2",
-    ///                 },
-    ///                 new Tencentcloud.Dcdb.Inputs.DbInstanceInitParamArgs
-    ///                 {
-    ///                     Param = "innodb_page_size",
-    ///                     Value = "16384",
-    ///                 },
+    ///                 Param = "lower_case_table_names",
+    ///                 Value = "1",
     ///             },
-    ///             SecurityGroupIds = 
+    ///             new Tencentcloud.Dcdb.Inputs.DbInstanceInitParamArgs
     ///             {
-    ///                 local.Sg_id,
+    ///                 Param = "sync_mode",
+    ///                 Value = "2",
     ///             },
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Dcdb.Inputs.DbInstanceInitParamArgs
+    ///             {
+    ///                 Param = "innodb_page_size",
+    ///                 Value = "16384",
+    ///             },
+    ///         },
+    ///         SecurityGroupIds = new[]
+    ///         {
+    ///             local.Sg_id,
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dcdb db_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dcdb/dbInstance:DbInstance db_instance db_instance_id
+    /// $ pulumi import tencentcloud:Dcdb/dbInstance:DbInstance db_instance db_instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/dbInstance:DbInstance")]
-    public partial class DbInstance : Pulumi.CustomResource
+    public partial class DbInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// &amp;amp;quot;Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).&amp;amp;quot;&amp;amp;quot;1 means automatic renewal, 2 means no automatic renewal (user setting).&amp;amp;quot;&amp;amp;quot;if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.&amp;amp;quot;.
@@ -279,7 +280,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         }
     }
 
-    public sealed class DbInstanceArgs : Pulumi.ResourceArgs
+    public sealed class DbInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// &amp;amp;quot;Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).&amp;amp;quot;&amp;amp;quot;1 means automatic renewal, 2 means no automatic renewal (user setting).&amp;amp;quot;&amp;amp;quot;if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.&amp;amp;quot;.
@@ -452,9 +453,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public DbInstanceArgs()
         {
         }
+        public static new DbInstanceArgs Empty => new DbInstanceArgs();
     }
 
-    public sealed class DbInstanceState : Pulumi.ResourceArgs
+    public sealed class DbInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// &amp;amp;quot;Automatic renewal flag, 0 means the default state (the user has not set it, that is, the initial state is manual renewal, and the user has activated the prepaid non-stop privilege and will also perform automatic renewal).&amp;amp;quot;&amp;amp;quot;1 means automatic renewal, 2 means no automatic renewal (user setting).&amp;amp;quot;&amp;amp;quot;if the business has no concept of renewal or automatic renewal is not required, it needs to be set to 0.&amp;amp;quot;.
@@ -633,5 +635,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public DbInstanceState()
         {
         }
+        public static new DbInstanceState Empty => new DbInstanceState();
     }
 }

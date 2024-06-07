@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var userPermissionBoundary = new Tencentcloud.Cam.UserPermissionBoundaryAttachment("userPermissionBoundary", new()
     ///     {
-    ///         var userPermissionBoundary = new Tencentcloud.Cam.UserPermissionBoundaryAttachment("userPermissionBoundary", new Tencentcloud.Cam.UserPermissionBoundaryAttachmentArgs
-    ///         {
-    ///             PolicyId = 151113272,
-    ///             TargetUin = 100032767426,
-    ///         });
-    ///     }
+    ///         PolicyId = 151113272,
+    ///         TargetUin = 100032767426,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cam user_permission_boundary can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/userPermissionBoundaryAttachment:UserPermissionBoundaryAttachment user_permission_boundary user_permission_boundary_id
+    /// $ pulumi import tencentcloud:Cam/userPermissionBoundaryAttachment:UserPermissionBoundaryAttachment user_permission_boundary user_permission_boundary_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/userPermissionBoundaryAttachment:UserPermissionBoundaryAttachment")]
-    public partial class UserPermissionBoundaryAttachment : Pulumi.CustomResource
+    public partial class UserPermissionBoundaryAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Policy ID.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class UserPermissionBoundaryAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class UserPermissionBoundaryAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Policy ID.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public UserPermissionBoundaryAttachmentArgs()
         {
         }
+        public static new UserPermissionBoundaryAttachmentArgs Empty => new UserPermissionBoundaryAttachmentArgs();
     }
 
-    public sealed class UserPermissionBoundaryAttachmentState : Pulumi.ResourceArgs
+    public sealed class UserPermissionBoundaryAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Policy ID.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public UserPermissionBoundaryAttachmentState()
         {
         }
+        public static new UserPermissionBoundaryAttachmentState Empty => new UserPermissionBoundaryAttachmentState();
     }
 }

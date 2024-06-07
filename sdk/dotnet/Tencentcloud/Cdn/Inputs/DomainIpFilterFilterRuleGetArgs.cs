@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainIpFilterFilterRuleGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainIpFilterFilterRuleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Ip filter `blacklist`/`whitelist` type of filter rules.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainIpFilterFilterRuleGetArgs()
         {
         }
+        public static new DomainIpFilterFilterRuleGetArgs Empty => new DomainIpFilterFilterRuleGetArgs();
     }
 }

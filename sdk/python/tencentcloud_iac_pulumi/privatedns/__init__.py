@@ -5,6 +5,7 @@
 from .. import _utilities
 import typing
 # Export this package's modules as members:
+from .get_private_zone_list import *
 from .get_records import *
 from .record import *
 from .zone import *

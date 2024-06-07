@@ -15,89 +15,94 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var logsetSrc = new Tencentcloud.Cls.Logset("logsetSrc", new()
     ///     {
-    ///         var logsetSrc = new Tencentcloud.Cls.Logset("logsetSrc", new Tencentcloud.Cls.LogsetArgs
+    ///         LogsetName = "tf-example-src",
+    ///         Tags = 
     ///         {
-    ///             LogsetName = "tf-example-src",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var topicSrc = new Tencentcloud.Cls.Topic("topicSrc", new Tencentcloud.Cls.TopicArgs
-    ///         {
-    ///             TopicName = "tf-example_src",
-    ///             LogsetId = logsetSrc.Id,
-    ///             AutoSplit = false,
-    ///             MaxSplitPartitions = 20,
-    ///             PartitionCount = 1,
-    ///             Period = 10,
-    ///             StorageType = "hot",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///         var logsetDst = new Tencentcloud.Cls.Logset("logsetDst", new Tencentcloud.Cls.LogsetArgs
-    ///         {
-    ///             LogsetName = "tf-example-dst",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var topicDst = new Tencentcloud.Cls.Topic("topicDst", new Tencentcloud.Cls.TopicArgs
-    ///         {
-    ///             TopicName = "tf-example-dst",
-    ///             LogsetId = logsetDst.Id,
-    ///             AutoSplit = false,
-    ///             MaxSplitPartitions = 20,
-    ///             PartitionCount = 1,
-    ///             Period = 10,
-    ///             StorageType = "hot",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///         var dataTransform = new Tencentcloud.Cls.DataTransform("dataTransform", new Tencentcloud.Cls.DataTransformArgs
-    ///         {
-    ///             FuncType = 1,
-    ///             SrcTopicId = topicSrc.Id,
-    ///             EtlContent = "ext_sep(\"content\", \"f1, f2, f3\", sep=\",\", quote=\"\", restrict=False, mode=\"overwrite\")fields_drop(\"content\")",
-    ///             TaskType = 3,
-    ///             EnableFlag = 1,
-    ///             DstResources = 
-    ///             {
-    ///                 new Tencentcloud.Cls.Inputs.DataTransformDstResourceArgs
-    ///                 {
-    ///                     TopicId = topicDst.Id,
-    ///                     Alias = "iac-test-dst",
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var topicSrc = new Tencentcloud.Cls.Topic("topicSrc", new()
+    ///     {
+    ///         TopicName = "tf-example_src",
+    ///         LogsetId = logsetSrc.Id,
+    ///         AutoSplit = false,
+    ///         MaxSplitPartitions = 20,
+    ///         PartitionCount = 1,
+    ///         Period = 10,
+    ///         StorageType = "hot",
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var logsetDst = new Tencentcloud.Cls.Logset("logsetDst", new()
+    ///     {
+    ///         LogsetName = "tf-example-dst",
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var topicDst = new Tencentcloud.Cls.Topic("topicDst", new()
+    ///     {
+    ///         TopicName = "tf-example-dst",
+    ///         LogsetId = logsetDst.Id,
+    ///         AutoSplit = false,
+    ///         MaxSplitPartitions = 20,
+    ///         PartitionCount = 1,
+    ///         Period = 10,
+    ///         StorageType = "hot",
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var dataTransform = new Tencentcloud.Cls.DataTransform("dataTransform", new()
+    ///     {
+    ///         FuncType = 1,
+    ///         SrcTopicId = topicSrc.Id,
+    ///         EtlContent = "ext_sep(\"content\", \"f1, f2, f3\", sep=\",\", quote=\"\", restrict=False, mode=\"overwrite\")fields_drop(\"content\")",
+    ///         TaskType = 3,
+    ///         EnableFlag = 1,
+    ///         DstResources = new[]
+    ///         {
+    ///             new Tencentcloud.Cls.Inputs.DataTransformDstResourceArgs
+    ///             {
+    ///                 TopicId = topicDst.Id,
+    ///                 Alias = "iac-test-dst",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cls data_transform can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/dataTransform:DataTransform data_transform data_transform_id
+    /// $ pulumi import tencentcloud:Cls/dataTransform:DataTransform data_transform data_transform_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/dataTransform:DataTransform")]
-    public partial class DataTransform : Pulumi.CustomResource
+    public partial class DataTransform : global::Pulumi.CustomResource
     {
         /// <summary>
         /// data transform des resources.
@@ -186,7 +191,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
     }
 
-    public sealed class DataTransformArgs : Pulumi.ResourceArgs
+    public sealed class DataTransformArgs : global::Pulumi.ResourceArgs
     {
         [Input("dstResources")]
         private InputList<Inputs.DataTransformDstResourceArgs>? _dstResources;
@@ -239,9 +244,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public DataTransformArgs()
         {
         }
+        public static new DataTransformArgs Empty => new DataTransformArgs();
     }
 
-    public sealed class DataTransformState : Pulumi.ResourceArgs
+    public sealed class DataTransformState : global::Pulumi.ResourceArgs
     {
         [Input("dstResources")]
         private InputList<Inputs.DataTransformDstResourceGetArgs>? _dstResources;
@@ -294,5 +300,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public DataTransformState()
         {
         }
+        public static new DataTransformState Empty => new DataTransformState();
     }
 }

@@ -11,11 +11,17 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class JobLoadLoadSpecConcurrencyArgs : Pulumi.ResourceArgs
+    public sealed class JobLoadLoadSpecConcurrencyArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Wait time for graceful termination of the task.
+        /// </summary>
         [Input("gracefulStopSeconds")]
         public Input<int>? GracefulStopSeconds { get; set; }
 
+        /// <summary>
+        /// Number of runs.
+        /// </summary>
         [Input("iterationCount")]
         public Input<int>? IterationCount { get; set; }
 
@@ -27,6 +33,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 
         [Input("stages")]
         private InputList<Inputs.JobLoadLoadSpecConcurrencyStageArgs>? _stages;
+
+        /// <summary>
+        /// Multi-phase configuration array.
+        /// </summary>
         public InputList<Inputs.JobLoadLoadSpecConcurrencyStageArgs> Stages
         {
             get => _stages ?? (_stages = new InputList<Inputs.JobLoadLoadSpecConcurrencyStageArgs>());
@@ -36,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public JobLoadLoadSpecConcurrencyArgs()
         {
         }
+        public static new JobLoadLoadSpecConcurrencyArgs Empty => new JobLoadLoadSpecConcurrencyArgs();
     }
 }

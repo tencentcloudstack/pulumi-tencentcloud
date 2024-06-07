@@ -8,47 +8,52 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of cat probe data
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cat.GetProbeData(ctx, &cat.GetProbeDataArgs{
-// 			Ascending: true,
-// 			BeginTime: 1667923200000,
-// 			EndTime:   1667996208428,
-// 			Limit:     20,
-// 			Offset:    0,
-// 			SelectedFields: []string{
-// 				"terraform",
-// 			},
-// 			SortField: "ProbeTime",
-// 			TaskIds: []string{
-// 				"task-knare1mk",
-// 			},
-// 			TaskType: "AnalyzeTaskType_Network",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cat.GetProbeData(ctx, &cat.GetProbeDataArgs{
+//				Ascending: true,
+//				BeginTime: 1667923200000,
+//				EndTime:   1667996208428,
+//				Limit:     20,
+//				Offset:    0,
+//				SelectedFields: []string{
+//					"terraform",
+//				},
+//				SortField: "ProbeTime",
+//				TaskIds: []string{
+//					"task-knare1mk",
+//				},
+//				TaskType: "AnalyzeTaskType_Network",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetProbeData(ctx *pulumi.Context, args *GetProbeDataArgs, opts ...pulumi.InvokeOption) (*GetProbeDataResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProbeDataResult
 	err := ctx.Invoke("tencentcloud:Cat/getProbeData:getProbeData", args, &rv, opts...)
 	if err != nil {

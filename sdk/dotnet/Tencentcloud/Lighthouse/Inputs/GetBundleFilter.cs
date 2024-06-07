@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
 {
 
-    public sealed class GetBundleFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetBundleFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Field to be filtered.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
         public GetBundleFilterArgs()
         {
         }
+        public static new GetBundleFilterArgs Empty => new GetBundleFilterArgs();
     }
 }

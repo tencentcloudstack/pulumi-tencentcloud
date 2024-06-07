@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var logConfig = new Tencentcloud.Tem.LogConfig("logConfig", new()
     ///     {
-    ///         var logConfig = new Tencentcloud.Tem.LogConfig("logConfig", new Tencentcloud.Tem.LogConfigArgs
-    ///         {
-    ///             EnvironmentId = "en-o5edaepv",
-    ///             ApplicationId = "app-3j29aa2p",
-    ///             WorkloadId = resource.Tencentcloud_tem_workload.Workload.Id,
-    ///             LogsetId = "b5824781-8d5b-4029-a2f7-d03c37f72bdf",
-    ///             TopicId = "5a85bb6d-8e41-4e04-b7bd-c05e04782f94",
-    ///             InputType = "container_stdout",
-    ///             LogType = "minimalist_log",
-    ///         });
-    ///     }
+    ///         EnvironmentId = "en-o5edaepv",
+    ///         ApplicationId = "app-3j29aa2p",
+    ///         WorkloadId = resource.Tencentcloud_tem_workload.Workload.Id,
+    ///         LogsetId = "b5824781-8d5b-4029-a2f7-d03c37f72bdf",
+    ///         TopicId = "5a85bb6d-8e41-4e04-b7bd-c05e04782f94",
+    ///         InputType = "container_stdout",
+    ///         LogType = "minimalist_log",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tem logConfig can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tem/logConfig:LogConfig logConfig environmentId#applicationId#name
+    /// $ pulumi import tencentcloud:Tem/logConfig:LogConfig logConfig environmentId#applicationId#name
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tem/logConfig:LogConfig")]
-    public partial class LogConfig : Pulumi.CustomResource
+    public partial class LogConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// application ID.
@@ -160,7 +161,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         }
     }
 
-    public sealed class LogConfigArgs : Pulumi.ResourceArgs
+    public sealed class LogConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// application ID.
@@ -231,9 +232,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         public LogConfigArgs()
         {
         }
+        public static new LogConfigArgs Empty => new LogConfigArgs();
     }
 
-    public sealed class LogConfigState : Pulumi.ResourceArgs
+    public sealed class LogConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// application ID.
@@ -304,5 +306,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         public LogConfigState()
         {
         }
+        public static new LogConfigState Empty => new LogConfigState();
     }
 }

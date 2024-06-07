@@ -11,22 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const diskBackup = new tencentcloud.Cbs.DiskBackup("disk_backup", {
+ * const diskBackup = new tencentcloud.cbs.DiskBackup("diskBackup", {
  *     diskBackupName: "xxx",
  *     diskId: "disk-xxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cbs disk_backup can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cbs/diskBackup:DiskBackup disk_backup disk_backup_id
+ * $ pulumi import tencentcloud:Cbs/diskBackup:DiskBackup disk_backup disk_backup_id
  * ```
  */
 export class DiskBackup extends pulumi.CustomResource {

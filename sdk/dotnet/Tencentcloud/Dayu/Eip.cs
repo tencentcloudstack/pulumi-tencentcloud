@@ -15,29 +15,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var test = new Tencentcloud.Dayu.Eip("test", new()
     ///     {
-    ///         var test = new Tencentcloud.Dayu.Eip("test", new Tencentcloud.Dayu.EipArgs
-    ///         {
-    ///             BindResourceId = "ins-4m0jvxic",
-    ///             BindResourceRegion = "hk",
-    ///             BindResourceType = "cvm",
-    ///             Eip = "162.62.163.50",
-    ///             ResourceId = "bgpip-000004xg",
-    ///         });
-    ///     }
+    ///         BindResourceId = "ins-4m0jvxic",
+    ///         BindResourceRegion = "hk",
+    ///         BindResourceType = "cvm",
+    ///         DayuEip = "162.62.163.50",
+    ///         ResourceId = "bgpip-000004xg",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/eip:Eip")]
-    public partial class Eip : Pulumi.CustomResource
+    public partial class Eip : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Resource id to bind.
@@ -168,7 +169,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         }
     }
 
-    public sealed class EipArgs : Pulumi.ResourceArgs
+    public sealed class EipArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Resource id to bind.
@@ -203,9 +204,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public EipArgs()
         {
         }
+        public static new EipArgs Empty => new EipArgs();
     }
 
-    public sealed class EipState : Pulumi.ResourceArgs
+    public sealed class EipState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Resource id to bind.
@@ -294,5 +296,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public EipState()
         {
         }
+        public static new EipState Empty => new EipState();
     }
 }

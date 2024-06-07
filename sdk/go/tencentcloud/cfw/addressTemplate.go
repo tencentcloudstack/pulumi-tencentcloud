@@ -7,68 +7,81 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cfw addressTemplate
 //
 // ## Example Usage
+//
 // ### If type is 1
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewAddressTemplate(ctx, "example", &Cfw.AddressTemplateArgs{
-// 			Detail:   pulumi.String("test template"),
-// 			IpString: pulumi.String("1.1.1.1,2.2.2.2"),
-// 			Type:     pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.NewAddressTemplate(ctx, "example", &Cfw.AddressTemplateArgs{
+//				Detail:   pulumi.String("test template"),
+//				IpString: pulumi.String("1.1.1.1,2.2.2.2"),
+//				Type:     pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### If type is 5
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewAddressTemplate(ctx, "example", &Cfw.AddressTemplateArgs{
-// 			Detail:   pulumi.String("test template"),
-// 			IpString: pulumi.String("www.qq.com,www.tencent.com"),
-// 			Type:     pulumi.Int(5),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.NewAddressTemplate(ctx, "example", &Cfw.AddressTemplateArgs{
+//				Detail:   pulumi.String("test template"),
+//				IpString: pulumi.String("www.qq.com,www.tencent.com"),
+//				Type:     pulumi.Int(5),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cfw address_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfw/addressTemplate:AddressTemplate example mb_1300846651_1695611353900
+// $ pulumi import tencentcloud:Cfw/addressTemplate:AddressTemplate example mb_1300846651_1695611353900
 // ```
 type AddressTemplate struct {
 	pulumi.CustomResourceState
@@ -99,7 +112,7 @@ func NewAddressTemplate(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AddressTemplate
 	err := ctx.RegisterResource("tencentcloud:Cfw/addressTemplate:AddressTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -196,7 +209,7 @@ func (i *AddressTemplate) ToAddressTemplateOutputWithContext(ctx context.Context
 // AddressTemplateArrayInput is an input type that accepts AddressTemplateArray and AddressTemplateArrayOutput values.
 // You can construct a concrete instance of `AddressTemplateArrayInput` via:
 //
-//          AddressTemplateArray{ AddressTemplateArgs{...} }
+//	AddressTemplateArray{ AddressTemplateArgs{...} }
 type AddressTemplateArrayInput interface {
 	pulumi.Input
 
@@ -221,7 +234,7 @@ func (i AddressTemplateArray) ToAddressTemplateArrayOutputWithContext(ctx contex
 // AddressTemplateMapInput is an input type that accepts AddressTemplateMap and AddressTemplateMapOutput values.
 // You can construct a concrete instance of `AddressTemplateMapInput` via:
 //
-//          AddressTemplateMap{ "key": AddressTemplateArgs{...} }
+//	AddressTemplateMap{ "key": AddressTemplateArgs{...} }
 type AddressTemplateMapInput interface {
 	pulumi.Input
 

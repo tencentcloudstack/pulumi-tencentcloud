@@ -7,64 +7,69 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cos bucketInventory
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cos.NewBucketInventory(ctx, "bucketInventory", &Cos.BucketInventoryArgs{
-// 			Bucket: pulumi.String("keep-test-xxxxxx"),
-// 			Destination: &cos.BucketInventoryDestinationArgs{
-// 				AccountId: pulumi.String(""),
-// 				Bucket:    pulumi.String("qcs::cos:ap-guangzhou::keep-test-xxxxxx"),
-// 				Format:    pulumi.String("CSV"),
-// 				Prefix:    pulumi.String("cos_bucket_inventory"),
-// 			},
-// 			Filter: &cos.BucketInventoryFilterArgs{
-// 				Period: &cos.BucketInventoryFilterPeriodArgs{
-// 					StartTime: pulumi.String("1687276800"),
-// 				},
-// 			},
-// 			IncludedObjectVersions: pulumi.String("Current"),
-// 			IsEnabled:              pulumi.String("true"),
-// 			OptionalFields: &cos.BucketInventoryOptionalFieldsArgs{
-// 				Fields: pulumi.StringArray{
-// 					pulumi.String("Size"),
-// 					pulumi.String("ETag"),
-// 				},
-// 			},
-// 			Schedule: &cos.BucketInventoryScheduleArgs{
-// 				Frequency: pulumi.String("Weekly"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cos.NewBucketInventory(ctx, "bucketInventory", &Cos.BucketInventoryArgs{
+//				Bucket: pulumi.String("keep-test-xxxxxx"),
+//				Destination: &cos.BucketInventoryDestinationArgs{
+//					AccountId: pulumi.String(""),
+//					Bucket:    pulumi.String("qcs::cos:ap-guangzhou::keep-test-xxxxxx"),
+//					Format:    pulumi.String("CSV"),
+//					Prefix:    pulumi.String("cos_bucket_inventory"),
+//				},
+//				Filter: &cos.BucketInventoryFilterArgs{
+//					Period: &cos.BucketInventoryFilterPeriodArgs{
+//						StartTime: pulumi.String("1687276800"),
+//					},
+//				},
+//				IncludedObjectVersions: pulumi.String("Current"),
+//				IsEnabled:              pulumi.String("true"),
+//				OptionalFields: &cos.BucketInventoryOptionalFieldsArgs{
+//					Fields: pulumi.StringArray{
+//						pulumi.String("Size"),
+//						pulumi.String("ETag"),
+//					},
+//				},
+//				Schedule: &cos.BucketInventoryScheduleArgs{
+//					Frequency: pulumi.String("Weekly"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cos bucket_inventory can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cos/bucketInventory:BucketInventory bucket_inventory bucket_inventory_id
+// $ pulumi import tencentcloud:Cos/bucketInventory:BucketInventory bucket_inventory bucket_inventory_id
 // ```
 type BucketInventory struct {
 	pulumi.CustomResourceState
@@ -109,7 +114,7 @@ func NewBucketInventory(ctx *pulumi.Context,
 	if args.Schedule == nil {
 		return nil, errors.New("invalid value for required argument 'Schedule'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BucketInventory
 	err := ctx.RegisterResource("tencentcloud:Cos/bucketInventory:BucketInventory", name, args, &resource, opts...)
 	if err != nil {
@@ -238,7 +243,7 @@ func (i *BucketInventory) ToBucketInventoryOutputWithContext(ctx context.Context
 // BucketInventoryArrayInput is an input type that accepts BucketInventoryArray and BucketInventoryArrayOutput values.
 // You can construct a concrete instance of `BucketInventoryArrayInput` via:
 //
-//          BucketInventoryArray{ BucketInventoryArgs{...} }
+//	BucketInventoryArray{ BucketInventoryArgs{...} }
 type BucketInventoryArrayInput interface {
 	pulumi.Input
 
@@ -263,7 +268,7 @@ func (i BucketInventoryArray) ToBucketInventoryArrayOutputWithContext(ctx contex
 // BucketInventoryMapInput is an input type that accepts BucketInventoryMap and BucketInventoryMapOutput values.
 // You can construct a concrete instance of `BucketInventoryMapInput` via:
 //
-//          BucketInventoryMap{ "key": BucketInventoryArgs{...} }
+//	BucketInventoryMap{ "key": BucketInventoryArgs{...} }
 type BucketInventoryMapInput interface {
 	pulumi.Input
 

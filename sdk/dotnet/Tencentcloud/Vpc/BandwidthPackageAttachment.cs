@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// Provides a resource to create a vpc bandwidth_package_attachment
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/bandwidthPackageAttachment:BandwidthPackageAttachment")]
-    public partial class BandwidthPackageAttachment : Pulumi.CustomResource
+    public partial class BandwidthPackageAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Bandwidth package unique ID, in the form of `bwp-xxxx`.
@@ -91,7 +91,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class BandwidthPackageAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class BandwidthPackageAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bandwidth package unique ID, in the form of `bwp-xxxx`.
@@ -126,9 +126,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public BandwidthPackageAttachmentArgs()
         {
         }
+        public static new BandwidthPackageAttachmentArgs Empty => new BandwidthPackageAttachmentArgs();
     }
 
-    public sealed class BandwidthPackageAttachmentState : Pulumi.ResourceArgs
+    public sealed class BandwidthPackageAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bandwidth package unique ID, in the form of `bwp-xxxx`.
@@ -163,5 +164,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public BandwidthPackageAttachmentState()
         {
         }
+        public static new BandwidthPackageAttachmentState Empty => new BandwidthPackageAttachmentState();
     }
 }

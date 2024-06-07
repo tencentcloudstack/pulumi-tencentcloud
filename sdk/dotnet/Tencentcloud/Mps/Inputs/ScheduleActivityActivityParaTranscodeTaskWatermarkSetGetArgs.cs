@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityActivityParaTranscodeTaskWatermarkSetGetArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityActivityParaTranscodeTaskWatermarkSetGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of a watermarking template.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityActivityParaTranscodeTaskWatermarkSetGetArgs()
         {
         }
+        public static new ScheduleActivityActivityParaTranscodeTaskWatermarkSetGetArgs Empty => new ScheduleActivityActivityParaTranscodeTaskWatermarkSetGetArgs();
     }
 }

@@ -15,51 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mediaWatermarkTemplate = new Tencentcloud.Ci.MediaWatermarkTemplate("mediaWatermarkTemplate", new()
     ///     {
-    ///         var mediaWatermarkTemplate = new Tencentcloud.Ci.MediaWatermarkTemplate("mediaWatermarkTemplate", new Tencentcloud.Ci.MediaWatermarkTemplateArgs
+    ///         Bucket = "terraform-ci-1308919341",
+    ///         Watermark = new Tencentcloud.Ci.Inputs.MediaWatermarkTemplateWatermarkArgs
     ///         {
-    ///             Bucket = "terraform-ci-1308919341",
-    ///             Watermark = new Tencentcloud.Ci.Inputs.MediaWatermarkTemplateWatermarkArgs
+    ///             Dx = "128",
+    ///             Dy = "128",
+    ///             EndTime = "100.5",
+    ///             LocMode = "Absolute",
+    ///             Pos = "TopRight",
+    ///             StartTime = "0",
+    ///             Text = new Tencentcloud.Ci.Inputs.MediaWatermarkTemplateWatermarkTextArgs
     ///             {
-    ///                 Dx = "128",
-    ///                 Dy = "128",
-    ///                 EndTime = "100.5",
-    ///                 LocMode = "Absolute",
-    ///                 Pos = "TopRight",
-    ///                 StartTime = "0",
-    ///                 Text = new Tencentcloud.Ci.Inputs.MediaWatermarkTemplateWatermarkTextArgs
-    ///                 {
-    ///                     FontColor = "0xF0F8F0",
-    ///                     FontSize = "30",
-    ///                     FontType = "simfang.ttf",
-    ///                     Text = "watermark-content",
-    ///                     Transparency = "30",
-    ///                 },
-    ///                 Type = "Text",
+    ///                 FontColor = "0xF0F8F0",
+    ///                 FontSize = "30",
+    ///                 FontType = "simfang.ttf",
+    ///                 Text = "watermark-content",
+    ///                 Transparency = "30",
     ///             },
-    ///         });
-    ///     }
+    ///             Type = "Text",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ci media_watermark_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/mediaWatermarkTemplate:MediaWatermarkTemplate media_watermark_template media_watermark_template_id
+    /// $ pulumi import tencentcloud:Ci/mediaWatermarkTemplate:MediaWatermarkTemplate media_watermark_template media_watermark_template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/mediaWatermarkTemplate:MediaWatermarkTemplate")]
-    public partial class MediaWatermarkTemplate : Pulumi.CustomResource
+    public partial class MediaWatermarkTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// bucket name.
@@ -124,7 +125,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class MediaWatermarkTemplateArgs : Pulumi.ResourceArgs
+    public sealed class MediaWatermarkTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -147,9 +148,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaWatermarkTemplateArgs()
         {
         }
+        public static new MediaWatermarkTemplateArgs Empty => new MediaWatermarkTemplateArgs();
     }
 
-    public sealed class MediaWatermarkTemplateState : Pulumi.ResourceArgs
+    public sealed class MediaWatermarkTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -172,5 +174,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaWatermarkTemplateState()
         {
         }
+        public static new MediaWatermarkTemplateState Empty => new MediaWatermarkTemplateState();
     }
 }

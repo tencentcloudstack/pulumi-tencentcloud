@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type MfaFlagActionFlag struct {
 	// Phone.
@@ -22,7 +25,7 @@ type MfaFlagActionFlag struct {
 // MfaFlagActionFlagInput is an input type that accepts MfaFlagActionFlagArgs and MfaFlagActionFlagOutput values.
 // You can construct a concrete instance of `MfaFlagActionFlagInput` via:
 //
-//          MfaFlagActionFlagArgs{...}
+//	MfaFlagActionFlagArgs{...}
 type MfaFlagActionFlagInput interface {
 	pulumi.Input
 
@@ -62,11 +65,11 @@ func (i MfaFlagActionFlagArgs) ToMfaFlagActionFlagPtrOutputWithContext(ctx conte
 // MfaFlagActionFlagPtrInput is an input type that accepts MfaFlagActionFlagArgs, MfaFlagActionFlagPtr and MfaFlagActionFlagPtrOutput values.
 // You can construct a concrete instance of `MfaFlagActionFlagPtrInput` via:
 //
-//          MfaFlagActionFlagArgs{...}
+//	        MfaFlagActionFlagArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MfaFlagActionFlagPtrInput interface {
 	pulumi.Input
 
@@ -197,7 +200,7 @@ type MfaFlagLoginFlag struct {
 // MfaFlagLoginFlagInput is an input type that accepts MfaFlagLoginFlagArgs and MfaFlagLoginFlagOutput values.
 // You can construct a concrete instance of `MfaFlagLoginFlagInput` via:
 //
-//          MfaFlagLoginFlagArgs{...}
+//	MfaFlagLoginFlagArgs{...}
 type MfaFlagLoginFlagInput interface {
 	pulumi.Input
 
@@ -237,11 +240,11 @@ func (i MfaFlagLoginFlagArgs) ToMfaFlagLoginFlagPtrOutputWithContext(ctx context
 // MfaFlagLoginFlagPtrInput is an input type that accepts MfaFlagLoginFlagArgs, MfaFlagLoginFlagPtr and MfaFlagLoginFlagPtrOutput values.
 // You can construct a concrete instance of `MfaFlagLoginFlagPtrInput` via:
 //
-//          MfaFlagLoginFlagArgs{...}
+//	        MfaFlagLoginFlagArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type MfaFlagLoginFlagPtrInput interface {
 	pulumi.Input
 
@@ -361,16 +364,20 @@ func (o MfaFlagLoginFlagPtrOutput) Wechat() pulumi.IntPtrOutput {
 }
 
 type PolicyVersionPolicyVersion struct {
-	CreateDate       *string `pulumi:"createDate"`
-	Document         *string `pulumi:"document"`
-	IsDefaultVersion *int    `pulumi:"isDefaultVersion"`
-	VersionId        *int    `pulumi:"versionId"`
+	// Strategic version creation timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CreateDate *string `pulumi:"createDate"`
+	// Strategic grammar textNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Document *string `pulumi:"document"`
+	// Whether it is an effective version.0 means not, 1 means yesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	IsDefaultVersion *int `pulumi:"isDefaultVersion"`
+	// Strategic version numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	VersionId *int `pulumi:"versionId"`
 }
 
 // PolicyVersionPolicyVersionInput is an input type that accepts PolicyVersionPolicyVersionArgs and PolicyVersionPolicyVersionOutput values.
 // You can construct a concrete instance of `PolicyVersionPolicyVersionInput` via:
 //
-//          PolicyVersionPolicyVersionArgs{...}
+//	PolicyVersionPolicyVersionArgs{...}
 type PolicyVersionPolicyVersionInput interface {
 	pulumi.Input
 
@@ -379,10 +386,14 @@ type PolicyVersionPolicyVersionInput interface {
 }
 
 type PolicyVersionPolicyVersionArgs struct {
-	CreateDate       pulumi.StringPtrInput `pulumi:"createDate"`
-	Document         pulumi.StringPtrInput `pulumi:"document"`
-	IsDefaultVersion pulumi.IntPtrInput    `pulumi:"isDefaultVersion"`
-	VersionId        pulumi.IntPtrInput    `pulumi:"versionId"`
+	// Strategic version creation timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	CreateDate pulumi.StringPtrInput `pulumi:"createDate"`
+	// Strategic grammar textNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	Document pulumi.StringPtrInput `pulumi:"document"`
+	// Whether it is an effective version.0 means not, 1 means yesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	IsDefaultVersion pulumi.IntPtrInput `pulumi:"isDefaultVersion"`
+	// Strategic version numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
+	VersionId pulumi.IntPtrInput `pulumi:"versionId"`
 }
 
 func (PolicyVersionPolicyVersionArgs) ElementType() reflect.Type {
@@ -400,7 +411,7 @@ func (i PolicyVersionPolicyVersionArgs) ToPolicyVersionPolicyVersionOutputWithCo
 // PolicyVersionPolicyVersionArrayInput is an input type that accepts PolicyVersionPolicyVersionArray and PolicyVersionPolicyVersionArrayOutput values.
 // You can construct a concrete instance of `PolicyVersionPolicyVersionArrayInput` via:
 //
-//          PolicyVersionPolicyVersionArray{ PolicyVersionPolicyVersionArgs{...} }
+//	PolicyVersionPolicyVersionArray{ PolicyVersionPolicyVersionArgs{...} }
 type PolicyVersionPolicyVersionArrayInput interface {
 	pulumi.Input
 
@@ -436,18 +447,22 @@ func (o PolicyVersionPolicyVersionOutput) ToPolicyVersionPolicyVersionOutputWith
 	return o
 }
 
+// Strategic version creation timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
 func (o PolicyVersionPolicyVersionOutput) CreateDate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v PolicyVersionPolicyVersion) *string { return v.CreateDate }).(pulumi.StringPtrOutput)
 }
 
+// Strategic grammar textNote: This field may return NULL, indicating that the valid value cannot be obtained.
 func (o PolicyVersionPolicyVersionOutput) Document() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v PolicyVersionPolicyVersion) *string { return v.Document }).(pulumi.StringPtrOutput)
 }
 
+// Whether it is an effective version.0 means not, 1 means yesNote: This field may return NULL, indicating that the valid value cannot be obtained.
 func (o PolicyVersionPolicyVersionOutput) IsDefaultVersion() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v PolicyVersionPolicyVersion) *int { return v.IsDefaultVersion }).(pulumi.IntPtrOutput)
 }
 
+// Strategic version numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
 func (o PolicyVersionPolicyVersionOutput) VersionId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v PolicyVersionPolicyVersion) *int { return v.VersionId }).(pulumi.IntPtrOutput)
 }
@@ -482,7 +497,7 @@ type TagRoleAttachmentTag struct {
 // TagRoleAttachmentTagInput is an input type that accepts TagRoleAttachmentTagArgs and TagRoleAttachmentTagOutput values.
 // You can construct a concrete instance of `TagRoleAttachmentTagInput` via:
 //
-//          TagRoleAttachmentTagArgs{...}
+//	TagRoleAttachmentTagArgs{...}
 type TagRoleAttachmentTagInput interface {
 	pulumi.Input
 
@@ -512,7 +527,7 @@ func (i TagRoleAttachmentTagArgs) ToTagRoleAttachmentTagOutputWithContext(ctx co
 // TagRoleAttachmentTagArrayInput is an input type that accepts TagRoleAttachmentTagArray and TagRoleAttachmentTagArrayOutput values.
 // You can construct a concrete instance of `TagRoleAttachmentTagArrayInput` via:
 //
-//          TagRoleAttachmentTagArray{ TagRoleAttachmentTagArgs{...} }
+//	TagRoleAttachmentTagArray{ TagRoleAttachmentTagArgs{...} }
 type TagRoleAttachmentTagArrayInput interface {
 	pulumi.Input
 
@@ -583,7 +598,7 @@ type GetGroupMembershipsMembershipList struct {
 	GroupId string `pulumi:"groupId"`
 	// (**Deprecated**) It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
 	//
-	// Deprecated: It has been deprecated from version 1.59.5. Use `user_names` instead.
+	// Deprecated: It has been deprecated from version 1.59.5. Use `userNames` instead.
 	UserIds []string `pulumi:"userIds"`
 	// ID set of the CAM group members.
 	UserNames []string `pulumi:"userNames"`
@@ -592,7 +607,7 @@ type GetGroupMembershipsMembershipList struct {
 // GetGroupMembershipsMembershipListInput is an input type that accepts GetGroupMembershipsMembershipListArgs and GetGroupMembershipsMembershipListOutput values.
 // You can construct a concrete instance of `GetGroupMembershipsMembershipListInput` via:
 //
-//          GetGroupMembershipsMembershipListArgs{...}
+//	GetGroupMembershipsMembershipListArgs{...}
 type GetGroupMembershipsMembershipListInput interface {
 	pulumi.Input
 
@@ -605,7 +620,7 @@ type GetGroupMembershipsMembershipListArgs struct {
 	GroupId pulumi.StringInput `pulumi:"groupId"`
 	// (**Deprecated**) It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
 	//
-	// Deprecated: It has been deprecated from version 1.59.5. Use `user_names` instead.
+	// Deprecated: It has been deprecated from version 1.59.5. Use `userNames` instead.
 	UserIds pulumi.StringArrayInput `pulumi:"userIds"`
 	// ID set of the CAM group members.
 	UserNames pulumi.StringArrayInput `pulumi:"userNames"`
@@ -626,7 +641,7 @@ func (i GetGroupMembershipsMembershipListArgs) ToGetGroupMembershipsMembershipLi
 // GetGroupMembershipsMembershipListArrayInput is an input type that accepts GetGroupMembershipsMembershipListArray and GetGroupMembershipsMembershipListArrayOutput values.
 // You can construct a concrete instance of `GetGroupMembershipsMembershipListArrayInput` via:
 //
-//          GetGroupMembershipsMembershipListArray{ GetGroupMembershipsMembershipListArgs{...} }
+//	GetGroupMembershipsMembershipListArray{ GetGroupMembershipsMembershipListArgs{...} }
 type GetGroupMembershipsMembershipListArrayInput interface {
 	pulumi.Input
 
@@ -669,7 +684,7 @@ func (o GetGroupMembershipsMembershipListOutput) GroupId() pulumi.StringOutput {
 
 // (**Deprecated**) It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
 //
-// Deprecated: It has been deprecated from version 1.59.5. Use `user_names` instead.
+// Deprecated: It has been deprecated from version 1.59.5. Use `userNames` instead.
 func (o GetGroupMembershipsMembershipListOutput) UserIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetGroupMembershipsMembershipList) []string { return v.UserIds }).(pulumi.StringArrayOutput)
 }
@@ -717,7 +732,7 @@ type GetGroupPolicyAttachmentsGroupPolicyAttachmentList struct {
 // GetGroupPolicyAttachmentsGroupPolicyAttachmentListInput is an input type that accepts GetGroupPolicyAttachmentsGroupPolicyAttachmentListArgs and GetGroupPolicyAttachmentsGroupPolicyAttachmentListOutput values.
 // You can construct a concrete instance of `GetGroupPolicyAttachmentsGroupPolicyAttachmentListInput` via:
 //
-//          GetGroupPolicyAttachmentsGroupPolicyAttachmentListArgs{...}
+//	GetGroupPolicyAttachmentsGroupPolicyAttachmentListArgs{...}
 type GetGroupPolicyAttachmentsGroupPolicyAttachmentListInput interface {
 	pulumi.Input
 
@@ -755,7 +770,7 @@ func (i GetGroupPolicyAttachmentsGroupPolicyAttachmentListArgs) ToGetGroupPolicy
 // GetGroupPolicyAttachmentsGroupPolicyAttachmentListArrayInput is an input type that accepts GetGroupPolicyAttachmentsGroupPolicyAttachmentListArray and GetGroupPolicyAttachmentsGroupPolicyAttachmentListArrayOutput values.
 // You can construct a concrete instance of `GetGroupPolicyAttachmentsGroupPolicyAttachmentListArrayInput` via:
 //
-//          GetGroupPolicyAttachmentsGroupPolicyAttachmentListArray{ GetGroupPolicyAttachmentsGroupPolicyAttachmentListArgs{...} }
+//	GetGroupPolicyAttachmentsGroupPolicyAttachmentListArray{ GetGroupPolicyAttachmentsGroupPolicyAttachmentListArgs{...} }
 type GetGroupPolicyAttachmentsGroupPolicyAttachmentListArrayInput interface {
 	pulumi.Input
 
@@ -855,7 +870,7 @@ type GetGroupUserAccountGroupInfo struct {
 // GetGroupUserAccountGroupInfoInput is an input type that accepts GetGroupUserAccountGroupInfoArgs and GetGroupUserAccountGroupInfoOutput values.
 // You can construct a concrete instance of `GetGroupUserAccountGroupInfoInput` via:
 //
-//          GetGroupUserAccountGroupInfoArgs{...}
+//	GetGroupUserAccountGroupInfoArgs{...}
 type GetGroupUserAccountGroupInfoInput interface {
 	pulumi.Input
 
@@ -889,7 +904,7 @@ func (i GetGroupUserAccountGroupInfoArgs) ToGetGroupUserAccountGroupInfoOutputWi
 // GetGroupUserAccountGroupInfoArrayInput is an input type that accepts GetGroupUserAccountGroupInfoArray and GetGroupUserAccountGroupInfoArrayOutput values.
 // You can construct a concrete instance of `GetGroupUserAccountGroupInfoArrayInput` via:
 //
-//          GetGroupUserAccountGroupInfoArray{ GetGroupUserAccountGroupInfoArgs{...} }
+//	GetGroupUserAccountGroupInfoArray{ GetGroupUserAccountGroupInfoArgs{...} }
 type GetGroupUserAccountGroupInfoArrayInput interface {
 	pulumi.Input
 
@@ -979,7 +994,7 @@ type GetGroupsGroupList struct {
 // GetGroupsGroupListInput is an input type that accepts GetGroupsGroupListArgs and GetGroupsGroupListOutput values.
 // You can construct a concrete instance of `GetGroupsGroupListInput` via:
 //
-//          GetGroupsGroupListArgs{...}
+//	GetGroupsGroupListArgs{...}
 type GetGroupsGroupListInput interface {
 	pulumi.Input
 
@@ -1013,7 +1028,7 @@ func (i GetGroupsGroupListArgs) ToGetGroupsGroupListOutputWithContext(ctx contex
 // GetGroupsGroupListArrayInput is an input type that accepts GetGroupsGroupListArray and GetGroupsGroupListArrayOutput values.
 // You can construct a concrete instance of `GetGroupsGroupListArrayInput` via:
 //
-//          GetGroupsGroupListArray{ GetGroupsGroupListArgs{...} }
+//	GetGroupsGroupListArray{ GetGroupsGroupListArgs{...} }
 type GetGroupsGroupListArrayInput interface {
 	pulumi.Input
 
@@ -1090,21 +1105,30 @@ func (o GetGroupsGroupListArrayOutput) Index(i pulumi.IntInput) GetGroupsGroupLi
 }
 
 type GetListAttachedUserPolicyPolicyList struct {
-	AddTime          string                                     `pulumi:"addTime"`
-	CreateMode       string                                     `pulumi:"createMode"`
-	Deactived        int                                        `pulumi:"deactived"`
-	DeactivedDetails []string                                   `pulumi:"deactivedDetails"`
-	Description      string                                     `pulumi:"description"`
-	Groups           []GetListAttachedUserPolicyPolicyListGroup `pulumi:"groups"`
-	PolicyId         string                                     `pulumi:"policyId"`
-	PolicyName       string                                     `pulumi:"policyName"`
-	StrategyType     string                                     `pulumi:"strategyType"`
+	// Creation time.
+	AddTime string `pulumi:"addTime"`
+	// Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).
+	CreateMode string `pulumi:"createMode"`
+	// Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.
+	Deactived int `pulumi:"deactived"`
+	// List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.
+	DeactivedDetails []string `pulumi:"deactivedDetails"`
+	// Policy Description.
+	Description string `pulumi:"description"`
+	// Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.
+	Groups []GetListAttachedUserPolicyPolicyListGroup `pulumi:"groups"`
+	// Policy ID.
+	PolicyId string `pulumi:"policyId"`
+	// Policy Name.
+	PolicyName string `pulumi:"policyName"`
+	// Policy type (1 represents custom policy, 2 represents preset policy).
+	StrategyType string `pulumi:"strategyType"`
 }
 
 // GetListAttachedUserPolicyPolicyListInput is an input type that accepts GetListAttachedUserPolicyPolicyListArgs and GetListAttachedUserPolicyPolicyListOutput values.
 // You can construct a concrete instance of `GetListAttachedUserPolicyPolicyListInput` via:
 //
-//          GetListAttachedUserPolicyPolicyListArgs{...}
+//	GetListAttachedUserPolicyPolicyListArgs{...}
 type GetListAttachedUserPolicyPolicyListInput interface {
 	pulumi.Input
 
@@ -1113,15 +1137,24 @@ type GetListAttachedUserPolicyPolicyListInput interface {
 }
 
 type GetListAttachedUserPolicyPolicyListArgs struct {
-	AddTime          pulumi.StringInput                                 `pulumi:"addTime"`
-	CreateMode       pulumi.StringInput                                 `pulumi:"createMode"`
-	Deactived        pulumi.IntInput                                    `pulumi:"deactived"`
-	DeactivedDetails pulumi.StringArrayInput                            `pulumi:"deactivedDetails"`
-	Description      pulumi.StringInput                                 `pulumi:"description"`
-	Groups           GetListAttachedUserPolicyPolicyListGroupArrayInput `pulumi:"groups"`
-	PolicyId         pulumi.StringInput                                 `pulumi:"policyId"`
-	PolicyName       pulumi.StringInput                                 `pulumi:"policyName"`
-	StrategyType     pulumi.StringInput                                 `pulumi:"strategyType"`
+	// Creation time.
+	AddTime pulumi.StringInput `pulumi:"addTime"`
+	// Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).
+	CreateMode pulumi.StringInput `pulumi:"createMode"`
+	// Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.
+	Deactived pulumi.IntInput `pulumi:"deactived"`
+	// List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.
+	DeactivedDetails pulumi.StringArrayInput `pulumi:"deactivedDetails"`
+	// Policy Description.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.
+	Groups GetListAttachedUserPolicyPolicyListGroupArrayInput `pulumi:"groups"`
+	// Policy ID.
+	PolicyId pulumi.StringInput `pulumi:"policyId"`
+	// Policy Name.
+	PolicyName pulumi.StringInput `pulumi:"policyName"`
+	// Policy type (1 represents custom policy, 2 represents preset policy).
+	StrategyType pulumi.StringInput `pulumi:"strategyType"`
 }
 
 func (GetListAttachedUserPolicyPolicyListArgs) ElementType() reflect.Type {
@@ -1139,7 +1172,7 @@ func (i GetListAttachedUserPolicyPolicyListArgs) ToGetListAttachedUserPolicyPoli
 // GetListAttachedUserPolicyPolicyListArrayInput is an input type that accepts GetListAttachedUserPolicyPolicyListArray and GetListAttachedUserPolicyPolicyListArrayOutput values.
 // You can construct a concrete instance of `GetListAttachedUserPolicyPolicyListArrayInput` via:
 //
-//          GetListAttachedUserPolicyPolicyListArray{ GetListAttachedUserPolicyPolicyListArgs{...} }
+//	GetListAttachedUserPolicyPolicyListArray{ GetListAttachedUserPolicyPolicyListArgs{...} }
 type GetListAttachedUserPolicyPolicyListArrayInput interface {
 	pulumi.Input
 
@@ -1175,40 +1208,49 @@ func (o GetListAttachedUserPolicyPolicyListOutput) ToGetListAttachedUserPolicyPo
 	return o
 }
 
+// Creation time.
 func (o GetListAttachedUserPolicyPolicyListOutput) AddTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetListAttachedUserPolicyPolicyList) string { return v.AddTime }).(pulumi.StringOutput)
 }
 
+// Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).
 func (o GetListAttachedUserPolicyPolicyListOutput) CreateMode() pulumi.StringOutput {
 	return o.ApplyT(func(v GetListAttachedUserPolicyPolicyList) string { return v.CreateMode }).(pulumi.StringOutput)
 }
 
+// Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.
 func (o GetListAttachedUserPolicyPolicyListOutput) Deactived() pulumi.IntOutput {
 	return o.ApplyT(func(v GetListAttachedUserPolicyPolicyList) int { return v.Deactived }).(pulumi.IntOutput)
 }
 
+// List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.
 func (o GetListAttachedUserPolicyPolicyListOutput) DeactivedDetails() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetListAttachedUserPolicyPolicyList) []string { return v.DeactivedDetails }).(pulumi.StringArrayOutput)
 }
 
+// Policy Description.
 func (o GetListAttachedUserPolicyPolicyListOutput) Description() pulumi.StringOutput {
 	return o.ApplyT(func(v GetListAttachedUserPolicyPolicyList) string { return v.Description }).(pulumi.StringOutput)
 }
 
+// Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.
 func (o GetListAttachedUserPolicyPolicyListOutput) Groups() GetListAttachedUserPolicyPolicyListGroupArrayOutput {
 	return o.ApplyT(func(v GetListAttachedUserPolicyPolicyList) []GetListAttachedUserPolicyPolicyListGroup {
 		return v.Groups
 	}).(GetListAttachedUserPolicyPolicyListGroupArrayOutput)
 }
 
+// Policy ID.
 func (o GetListAttachedUserPolicyPolicyListOutput) PolicyId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetListAttachedUserPolicyPolicyList) string { return v.PolicyId }).(pulumi.StringOutput)
 }
 
+// Policy Name.
 func (o GetListAttachedUserPolicyPolicyListOutput) PolicyName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetListAttachedUserPolicyPolicyList) string { return v.PolicyName }).(pulumi.StringOutput)
 }
 
+// Policy type (1 represents custom policy, 2 represents preset policy).
 func (o GetListAttachedUserPolicyPolicyListOutput) StrategyType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetListAttachedUserPolicyPolicyList) string { return v.StrategyType }).(pulumi.StringOutput)
 }
@@ -1234,14 +1276,16 @@ func (o GetListAttachedUserPolicyPolicyListArrayOutput) Index(i pulumi.IntInput)
 }
 
 type GetListAttachedUserPolicyPolicyListGroup struct {
-	GroupId   int    `pulumi:"groupId"`
+	// Group ID.
+	GroupId int `pulumi:"groupId"`
+	// Group Name.
 	GroupName string `pulumi:"groupName"`
 }
 
 // GetListAttachedUserPolicyPolicyListGroupInput is an input type that accepts GetListAttachedUserPolicyPolicyListGroupArgs and GetListAttachedUserPolicyPolicyListGroupOutput values.
 // You can construct a concrete instance of `GetListAttachedUserPolicyPolicyListGroupInput` via:
 //
-//          GetListAttachedUserPolicyPolicyListGroupArgs{...}
+//	GetListAttachedUserPolicyPolicyListGroupArgs{...}
 type GetListAttachedUserPolicyPolicyListGroupInput interface {
 	pulumi.Input
 
@@ -1250,7 +1294,9 @@ type GetListAttachedUserPolicyPolicyListGroupInput interface {
 }
 
 type GetListAttachedUserPolicyPolicyListGroupArgs struct {
-	GroupId   pulumi.IntInput    `pulumi:"groupId"`
+	// Group ID.
+	GroupId pulumi.IntInput `pulumi:"groupId"`
+	// Group Name.
 	GroupName pulumi.StringInput `pulumi:"groupName"`
 }
 
@@ -1269,7 +1315,7 @@ func (i GetListAttachedUserPolicyPolicyListGroupArgs) ToGetListAttachedUserPolic
 // GetListAttachedUserPolicyPolicyListGroupArrayInput is an input type that accepts GetListAttachedUserPolicyPolicyListGroupArray and GetListAttachedUserPolicyPolicyListGroupArrayOutput values.
 // You can construct a concrete instance of `GetListAttachedUserPolicyPolicyListGroupArrayInput` via:
 //
-//          GetListAttachedUserPolicyPolicyListGroupArray{ GetListAttachedUserPolicyPolicyListGroupArgs{...} }
+//	GetListAttachedUserPolicyPolicyListGroupArray{ GetListAttachedUserPolicyPolicyListGroupArgs{...} }
 type GetListAttachedUserPolicyPolicyListGroupArrayInput interface {
 	pulumi.Input
 
@@ -1305,10 +1351,12 @@ func (o GetListAttachedUserPolicyPolicyListGroupOutput) ToGetListAttachedUserPol
 	return o
 }
 
+// Group ID.
 func (o GetListAttachedUserPolicyPolicyListGroupOutput) GroupId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetListAttachedUserPolicyPolicyListGroup) int { return v.GroupId }).(pulumi.IntOutput)
 }
 
+// Group Name.
 func (o GetListAttachedUserPolicyPolicyListGroupOutput) GroupName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetListAttachedUserPolicyPolicyListGroup) string { return v.GroupName }).(pulumi.StringOutput)
 }
@@ -1349,7 +1397,7 @@ type GetListEntitiesForPolicyList struct {
 // GetListEntitiesForPolicyListInput is an input type that accepts GetListEntitiesForPolicyListArgs and GetListEntitiesForPolicyListOutput values.
 // You can construct a concrete instance of `GetListEntitiesForPolicyListInput` via:
 //
-//          GetListEntitiesForPolicyListArgs{...}
+//	GetListEntitiesForPolicyListArgs{...}
 type GetListEntitiesForPolicyListInput interface {
 	pulumi.Input
 
@@ -1385,7 +1433,7 @@ func (i GetListEntitiesForPolicyListArgs) ToGetListEntitiesForPolicyListOutputWi
 // GetListEntitiesForPolicyListArrayInput is an input type that accepts GetListEntitiesForPolicyListArray and GetListEntitiesForPolicyListArrayOutput values.
 // You can construct a concrete instance of `GetListEntitiesForPolicyListArrayInput` via:
 //
-//          GetListEntitiesForPolicyListArray{ GetListEntitiesForPolicyListArgs{...} }
+//	GetListEntitiesForPolicyListArray{ GetListEntitiesForPolicyListArgs{...} }
 type GetListEntitiesForPolicyListArrayInput interface {
 	pulumi.Input
 
@@ -1488,7 +1536,7 @@ type GetPoliciesPolicyList struct {
 // GetPoliciesPolicyListInput is an input type that accepts GetPoliciesPolicyListArgs and GetPoliciesPolicyListOutput values.
 // You can construct a concrete instance of `GetPoliciesPolicyListInput` via:
 //
-//          GetPoliciesPolicyListArgs{...}
+//	GetPoliciesPolicyListArgs{...}
 type GetPoliciesPolicyListInput interface {
 	pulumi.Input
 
@@ -1530,7 +1578,7 @@ func (i GetPoliciesPolicyListArgs) ToGetPoliciesPolicyListOutputWithContext(ctx 
 // GetPoliciesPolicyListArrayInput is an input type that accepts GetPoliciesPolicyListArray and GetPoliciesPolicyListArrayOutput values.
 // You can construct a concrete instance of `GetPoliciesPolicyListArrayInput` via:
 //
-//          GetPoliciesPolicyListArray{ GetPoliciesPolicyListArgs{...} }
+//	GetPoliciesPolicyListArray{ GetPoliciesPolicyListArgs{...} }
 type GetPoliciesPolicyListArrayInput interface {
 	pulumi.Input
 
@@ -1638,7 +1686,7 @@ type GetPolicyGrantingServiceAccessList struct {
 // GetPolicyGrantingServiceAccessListInput is an input type that accepts GetPolicyGrantingServiceAccessListArgs and GetPolicyGrantingServiceAccessListOutput values.
 // You can construct a concrete instance of `GetPolicyGrantingServiceAccessListInput` via:
 //
-//          GetPolicyGrantingServiceAccessListArgs{...}
+//	GetPolicyGrantingServiceAccessListArgs{...}
 type GetPolicyGrantingServiceAccessListInput interface {
 	pulumi.Input
 
@@ -1670,7 +1718,7 @@ func (i GetPolicyGrantingServiceAccessListArgs) ToGetPolicyGrantingServiceAccess
 // GetPolicyGrantingServiceAccessListArrayInput is an input type that accepts GetPolicyGrantingServiceAccessListArray and GetPolicyGrantingServiceAccessListArrayOutput values.
 // You can construct a concrete instance of `GetPolicyGrantingServiceAccessListArrayInput` via:
 //
-//          GetPolicyGrantingServiceAccessListArray{ GetPolicyGrantingServiceAccessListArgs{...} }
+//	GetPolicyGrantingServiceAccessListArray{ GetPolicyGrantingServiceAccessListArgs{...} }
 type GetPolicyGrantingServiceAccessListArrayInput interface {
 	pulumi.Input
 
@@ -1757,7 +1805,7 @@ type GetPolicyGrantingServiceAccessListAction struct {
 // GetPolicyGrantingServiceAccessListActionInput is an input type that accepts GetPolicyGrantingServiceAccessListActionArgs and GetPolicyGrantingServiceAccessListActionOutput values.
 // You can construct a concrete instance of `GetPolicyGrantingServiceAccessListActionInput` via:
 //
-//          GetPolicyGrantingServiceAccessListActionArgs{...}
+//	GetPolicyGrantingServiceAccessListActionArgs{...}
 type GetPolicyGrantingServiceAccessListActionInput interface {
 	pulumi.Input
 
@@ -1787,7 +1835,7 @@ func (i GetPolicyGrantingServiceAccessListActionArgs) ToGetPolicyGrantingService
 // GetPolicyGrantingServiceAccessListActionArrayInput is an input type that accepts GetPolicyGrantingServiceAccessListActionArray and GetPolicyGrantingServiceAccessListActionArrayOutput values.
 // You can construct a concrete instance of `GetPolicyGrantingServiceAccessListActionArrayInput` via:
 //
-//          GetPolicyGrantingServiceAccessListActionArray{ GetPolicyGrantingServiceAccessListActionArgs{...} }
+//	GetPolicyGrantingServiceAccessListActionArray{ GetPolicyGrantingServiceAccessListActionArgs{...} }
 type GetPolicyGrantingServiceAccessListActionArrayInput interface {
 	pulumi.Input
 
@@ -1867,7 +1915,7 @@ type GetPolicyGrantingServiceAccessListPolicy struct {
 // GetPolicyGrantingServiceAccessListPolicyInput is an input type that accepts GetPolicyGrantingServiceAccessListPolicyArgs and GetPolicyGrantingServiceAccessListPolicyOutput values.
 // You can construct a concrete instance of `GetPolicyGrantingServiceAccessListPolicyInput` via:
 //
-//          GetPolicyGrantingServiceAccessListPolicyArgs{...}
+//	GetPolicyGrantingServiceAccessListPolicyArgs{...}
 type GetPolicyGrantingServiceAccessListPolicyInput interface {
 	pulumi.Input
 
@@ -1901,7 +1949,7 @@ func (i GetPolicyGrantingServiceAccessListPolicyArgs) ToGetPolicyGrantingService
 // GetPolicyGrantingServiceAccessListPolicyArrayInput is an input type that accepts GetPolicyGrantingServiceAccessListPolicyArray and GetPolicyGrantingServiceAccessListPolicyArrayOutput values.
 // You can construct a concrete instance of `GetPolicyGrantingServiceAccessListPolicyArrayInput` via:
 //
-//          GetPolicyGrantingServiceAccessListPolicyArray{ GetPolicyGrantingServiceAccessListPolicyArgs{...} }
+//	GetPolicyGrantingServiceAccessListPolicyArray{ GetPolicyGrantingServiceAccessListPolicyArgs{...} }
 type GetPolicyGrantingServiceAccessListPolicyArrayInput interface {
 	pulumi.Input
 
@@ -1987,7 +2035,7 @@ type GetPolicyGrantingServiceAccessListService struct {
 // GetPolicyGrantingServiceAccessListServiceInput is an input type that accepts GetPolicyGrantingServiceAccessListServiceArgs and GetPolicyGrantingServiceAccessListServiceOutput values.
 // You can construct a concrete instance of `GetPolicyGrantingServiceAccessListServiceInput` via:
 //
-//          GetPolicyGrantingServiceAccessListServiceArgs{...}
+//	GetPolicyGrantingServiceAccessListServiceArgs{...}
 type GetPolicyGrantingServiceAccessListServiceInput interface {
 	pulumi.Input
 
@@ -2017,7 +2065,7 @@ func (i GetPolicyGrantingServiceAccessListServiceArgs) ToGetPolicyGrantingServic
 // GetPolicyGrantingServiceAccessListServiceArrayInput is an input type that accepts GetPolicyGrantingServiceAccessListServiceArray and GetPolicyGrantingServiceAccessListServiceArrayOutput values.
 // You can construct a concrete instance of `GetPolicyGrantingServiceAccessListServiceArrayInput` via:
 //
-//          GetPolicyGrantingServiceAccessListServiceArray{ GetPolicyGrantingServiceAccessListServiceArgs{...} }
+//	GetPolicyGrantingServiceAccessListServiceArray{ GetPolicyGrantingServiceAccessListServiceArgs{...} }
 type GetPolicyGrantingServiceAccessListServiceArrayInput interface {
 	pulumi.Input
 
@@ -2101,7 +2149,7 @@ type GetRolePolicyAttachmentsRolePolicyAttachmentList struct {
 // GetRolePolicyAttachmentsRolePolicyAttachmentListInput is an input type that accepts GetRolePolicyAttachmentsRolePolicyAttachmentListArgs and GetRolePolicyAttachmentsRolePolicyAttachmentListOutput values.
 // You can construct a concrete instance of `GetRolePolicyAttachmentsRolePolicyAttachmentListInput` via:
 //
-//          GetRolePolicyAttachmentsRolePolicyAttachmentListArgs{...}
+//	GetRolePolicyAttachmentsRolePolicyAttachmentListArgs{...}
 type GetRolePolicyAttachmentsRolePolicyAttachmentListInput interface {
 	pulumi.Input
 
@@ -2139,7 +2187,7 @@ func (i GetRolePolicyAttachmentsRolePolicyAttachmentListArgs) ToGetRolePolicyAtt
 // GetRolePolicyAttachmentsRolePolicyAttachmentListArrayInput is an input type that accepts GetRolePolicyAttachmentsRolePolicyAttachmentListArray and GetRolePolicyAttachmentsRolePolicyAttachmentListArrayOutput values.
 // You can construct a concrete instance of `GetRolePolicyAttachmentsRolePolicyAttachmentListArrayInput` via:
 //
-//          GetRolePolicyAttachmentsRolePolicyAttachmentListArray{ GetRolePolicyAttachmentsRolePolicyAttachmentListArgs{...} }
+//	GetRolePolicyAttachmentsRolePolicyAttachmentListArray{ GetRolePolicyAttachmentsRolePolicyAttachmentListArgs{...} }
 type GetRolePolicyAttachmentsRolePolicyAttachmentListArrayInput interface {
 	pulumi.Input
 
@@ -2245,7 +2293,7 @@ type GetRolesRoleList struct {
 // GetRolesRoleListInput is an input type that accepts GetRolesRoleListArgs and GetRolesRoleListOutput values.
 // You can construct a concrete instance of `GetRolesRoleListInput` via:
 //
-//          GetRolesRoleListArgs{...}
+//	GetRolesRoleListArgs{...}
 type GetRolesRoleListInput interface {
 	pulumi.Input
 
@@ -2285,7 +2333,7 @@ func (i GetRolesRoleListArgs) ToGetRolesRoleListOutputWithContext(ctx context.Co
 // GetRolesRoleListArrayInput is an input type that accepts GetRolesRoleListArray and GetRolesRoleListArrayOutput values.
 // You can construct a concrete instance of `GetRolesRoleListArrayInput` via:
 //
-//          GetRolesRoleListArray{ GetRolesRoleListArgs{...} }
+//	GetRolesRoleListArray{ GetRolesRoleListArgs{...} }
 type GetRolesRoleListArrayInput interface {
 	pulumi.Input
 
@@ -2390,7 +2438,7 @@ type GetSamlProvidersProviderList struct {
 // GetSamlProvidersProviderListInput is an input type that accepts GetSamlProvidersProviderListArgs and GetSamlProvidersProviderListOutput values.
 // You can construct a concrete instance of `GetSamlProvidersProviderListInput` via:
 //
-//          GetSamlProvidersProviderListArgs{...}
+//	GetSamlProvidersProviderListArgs{...}
 type GetSamlProvidersProviderListInput interface {
 	pulumi.Input
 
@@ -2424,7 +2472,7 @@ func (i GetSamlProvidersProviderListArgs) ToGetSamlProvidersProviderListOutputWi
 // GetSamlProvidersProviderListArrayInput is an input type that accepts GetSamlProvidersProviderListArray and GetSamlProvidersProviderListArrayOutput values.
 // You can construct a concrete instance of `GetSamlProvidersProviderListArrayInput` via:
 //
-//          GetSamlProvidersProviderListArray{ GetSamlProvidersProviderListArgs{...} }
+//	GetSamlProvidersProviderListArray{ GetSamlProvidersProviderListArgs{...} }
 type GetSamlProvidersProviderListArrayInput interface {
 	pulumi.Input
 
@@ -2512,7 +2560,7 @@ type GetSecretLastUsedTimeSecretIdLastUsedRow struct {
 // GetSecretLastUsedTimeSecretIdLastUsedRowInput is an input type that accepts GetSecretLastUsedTimeSecretIdLastUsedRowArgs and GetSecretLastUsedTimeSecretIdLastUsedRowOutput values.
 // You can construct a concrete instance of `GetSecretLastUsedTimeSecretIdLastUsedRowInput` via:
 //
-//          GetSecretLastUsedTimeSecretIdLastUsedRowArgs{...}
+//	GetSecretLastUsedTimeSecretIdLastUsedRowArgs{...}
 type GetSecretLastUsedTimeSecretIdLastUsedRowInput interface {
 	pulumi.Input
 
@@ -2544,7 +2592,7 @@ func (i GetSecretLastUsedTimeSecretIdLastUsedRowArgs) ToGetSecretLastUsedTimeSec
 // GetSecretLastUsedTimeSecretIdLastUsedRowArrayInput is an input type that accepts GetSecretLastUsedTimeSecretIdLastUsedRowArray and GetSecretLastUsedTimeSecretIdLastUsedRowArrayOutput values.
 // You can construct a concrete instance of `GetSecretLastUsedTimeSecretIdLastUsedRowArrayInput` via:
 //
-//          GetSecretLastUsedTimeSecretIdLastUsedRowArray{ GetSecretLastUsedTimeSecretIdLastUsedRowArgs{...} }
+//	GetSecretLastUsedTimeSecretIdLastUsedRowArray{ GetSecretLastUsedTimeSecretIdLastUsedRowArgs{...} }
 type GetSecretLastUsedTimeSecretIdLastUsedRowArrayInput interface {
 	pulumi.Input
 
@@ -2628,7 +2676,7 @@ type GetUserPolicyAttachmentsUserPolicyAttachmentList struct {
 	PolicyType string `pulumi:"policyType"`
 	// It has been deprecated from version 1.59.6. Use `userName` instead. ID of the attached CAM user to be queried.
 	//
-	// Deprecated: It has been deprecated from version 1.59.6. Use `user_name` instead.
+	// Deprecated: It has been deprecated from version 1.59.6. Use `userName` instead.
 	UserId string `pulumi:"userId"`
 	// Name of the attached CAM user as unique key to be queried.
 	UserName string `pulumi:"userName"`
@@ -2637,7 +2685,7 @@ type GetUserPolicyAttachmentsUserPolicyAttachmentList struct {
 // GetUserPolicyAttachmentsUserPolicyAttachmentListInput is an input type that accepts GetUserPolicyAttachmentsUserPolicyAttachmentListArgs and GetUserPolicyAttachmentsUserPolicyAttachmentListOutput values.
 // You can construct a concrete instance of `GetUserPolicyAttachmentsUserPolicyAttachmentListInput` via:
 //
-//          GetUserPolicyAttachmentsUserPolicyAttachmentListArgs{...}
+//	GetUserPolicyAttachmentsUserPolicyAttachmentListArgs{...}
 type GetUserPolicyAttachmentsUserPolicyAttachmentListInput interface {
 	pulumi.Input
 
@@ -2658,7 +2706,7 @@ type GetUserPolicyAttachmentsUserPolicyAttachmentListArgs struct {
 	PolicyType pulumi.StringInput `pulumi:"policyType"`
 	// It has been deprecated from version 1.59.6. Use `userName` instead. ID of the attached CAM user to be queried.
 	//
-	// Deprecated: It has been deprecated from version 1.59.6. Use `user_name` instead.
+	// Deprecated: It has been deprecated from version 1.59.6. Use `userName` instead.
 	UserId pulumi.StringInput `pulumi:"userId"`
 	// Name of the attached CAM user as unique key to be queried.
 	UserName pulumi.StringInput `pulumi:"userName"`
@@ -2679,7 +2727,7 @@ func (i GetUserPolicyAttachmentsUserPolicyAttachmentListArgs) ToGetUserPolicyAtt
 // GetUserPolicyAttachmentsUserPolicyAttachmentListArrayInput is an input type that accepts GetUserPolicyAttachmentsUserPolicyAttachmentListArray and GetUserPolicyAttachmentsUserPolicyAttachmentListArrayOutput values.
 // You can construct a concrete instance of `GetUserPolicyAttachmentsUserPolicyAttachmentListArrayInput` via:
 //
-//          GetUserPolicyAttachmentsUserPolicyAttachmentListArray{ GetUserPolicyAttachmentsUserPolicyAttachmentListArgs{...} }
+//	GetUserPolicyAttachmentsUserPolicyAttachmentListArray{ GetUserPolicyAttachmentsUserPolicyAttachmentListArgs{...} }
 type GetUserPolicyAttachmentsUserPolicyAttachmentListArrayInput interface {
 	pulumi.Input
 
@@ -2742,7 +2790,7 @@ func (o GetUserPolicyAttachmentsUserPolicyAttachmentListOutput) PolicyType() pul
 
 // It has been deprecated from version 1.59.6. Use `userName` instead. ID of the attached CAM user to be queried.
 //
-// Deprecated: It has been deprecated from version 1.59.6. Use `user_name` instead.
+// Deprecated: It has been deprecated from version 1.59.6. Use `userName` instead.
 func (o GetUserPolicyAttachmentsUserPolicyAttachmentListOutput) UserId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetUserPolicyAttachmentsUserPolicyAttachmentList) string { return v.UserId }).(pulumi.StringOutput)
 }
@@ -2796,7 +2844,7 @@ type GetUsersUserList struct {
 // GetUsersUserListInput is an input type that accepts GetUsersUserListArgs and GetUsersUserListOutput values.
 // You can construct a concrete instance of `GetUsersUserListInput` via:
 //
-//          GetUsersUserListArgs{...}
+//	GetUsersUserListArgs{...}
 type GetUsersUserListInput interface {
 	pulumi.Input
 
@@ -2840,7 +2888,7 @@ func (i GetUsersUserListArgs) ToGetUsersUserListOutputWithContext(ctx context.Co
 // GetUsersUserListArrayInput is an input type that accepts GetUsersUserListArray and GetUsersUserListArrayOutput values.
 // You can construct a concrete instance of `GetUsersUserListArrayInput` via:
 //
-//          GetUsersUserListArray{ GetUsersUserListArgs{...} }
+//	GetUsersUserListArray{ GetUsersUserListArgs{...} }
 type GetUsersUserListArrayInput interface {
 	pulumi.Input
 

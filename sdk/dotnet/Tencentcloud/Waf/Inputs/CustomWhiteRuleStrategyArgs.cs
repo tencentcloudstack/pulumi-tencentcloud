@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Inputs
 {
 
-    public sealed class CustomWhiteRuleStrategyArgs : Pulumi.ResourceArgs
+    public sealed class CustomWhiteRuleStrategyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Matching parameters.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Inputs
         public CustomWhiteRuleStrategyArgs()
         {
         }
+        public static new CustomWhiteRuleStrategyArgs Empty => new CustomWhiteRuleStrategyArgs();
     }
 }

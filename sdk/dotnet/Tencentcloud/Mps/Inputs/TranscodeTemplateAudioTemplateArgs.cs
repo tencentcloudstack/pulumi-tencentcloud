@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class TranscodeTemplateAudioTemplateArgs : Pulumi.ResourceArgs
+    public sealed class TranscodeTemplateAudioTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Audio channel mode, optional values:`1: single channel.2: Dual channel.6: Stereo.When the package format of the media is an audio format (flac, ogg, mp3, m4a), the number of channels is not allowed to be set to stereo.Default: 2.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public TranscodeTemplateAudioTemplateArgs()
         {
         }
+        public static new TranscodeTemplateAudioTemplateArgs Empty => new TranscodeTemplateAudioTemplateArgs();
     }
 }

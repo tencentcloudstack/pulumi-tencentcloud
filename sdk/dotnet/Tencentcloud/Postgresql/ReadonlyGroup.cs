@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var @group = new Tencentcloud.Postgresql.ReadonlyGroup("group", new()
     ///     {
-    ///         var @group = new Tencentcloud.Postgresql.ReadonlyGroup("group", new Tencentcloud.Postgresql.ReadonlyGroupArgs
-    ///         {
-    ///             MasterDbInstanceId = "postgres-gzg9jb2n",
-    ///             MaxReplayLag = 100,
-    ///             MaxReplayLatency = 512,
-    ///             MinDelayEliminateReserve = 1,
-    ///             ProjectId = 0,
-    ///             ReplayLagEliminate = 1,
-    ///             ReplayLatencyEliminate = 1,
-    ///             SubnetId = "subnet-enm92y0m",
-    ///             VpcId = "vpc-86v957zb",
-    ///         });
-    ///     }
+    ///         MasterDbInstanceId = "postgres-gzg9jb2n",
+    ///         MaxReplayLag = 100,
+    ///         MaxReplayLatency = 512,
+    ///         MinDelayEliminateReserve = 1,
+    ///         ProjectId = 0,
+    ///         ReplayLagEliminate = 1,
+    ///         ReplayLatencyEliminate = 1,
+    ///         SubnetId = "subnet-enm92y0m",
+    ///         VpcId = "vpc-86v957zb",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/readonlyGroup:ReadonlyGroup")]
-    public partial class ReadonlyGroup : Pulumi.CustomResource
+    public partial class ReadonlyGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create time of the postgresql instance.
@@ -78,6 +79,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Output("name")]
         public Output<string> Name { get; private set; } = null!;
+
+        /// <summary>
+        /// List of db instance net info.
+        /// </summary>
+        [Output("netInfoLists")]
+        public Output<ImmutableArray<Outputs.ReadonlyGroupNetInfoList>> NetInfoLists { get; private set; } = null!;
 
         /// <summary>
         /// Project ID.
@@ -160,7 +167,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class ReadonlyGroupArgs : Pulumi.ResourceArgs
+    public sealed class ReadonlyGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Primary instance ID.
@@ -237,9 +244,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public ReadonlyGroupArgs()
         {
         }
+        public static new ReadonlyGroupArgs Empty => new ReadonlyGroupArgs();
     }
 
-    public sealed class ReadonlyGroupState : Pulumi.ResourceArgs
+    public sealed class ReadonlyGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create time of the postgresql instance.
@@ -276,6 +284,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
+
+        [Input("netInfoLists")]
+        private InputList<Inputs.ReadonlyGroupNetInfoListGetArgs>? _netInfoLists;
+
+        /// <summary>
+        /// List of db instance net info.
+        /// </summary>
+        public InputList<Inputs.ReadonlyGroupNetInfoListGetArgs> NetInfoLists
+        {
+            get => _netInfoLists ?? (_netInfoLists = new InputList<Inputs.ReadonlyGroupNetInfoListGetArgs>());
+            set => _netInfoLists = value;
+        }
 
         /// <summary>
         /// Project ID.
@@ -322,5 +342,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public ReadonlyGroupState()
         {
         }
+        public static new ReadonlyGroupState Empty => new ReadonlyGroupState();
     }
 }

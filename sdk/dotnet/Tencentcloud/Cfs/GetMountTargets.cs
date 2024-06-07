@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// <summary>
         /// Use this data source to query detailed information of cfs mount_targets
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var mountTargets = Tencentcloud.Cfs.GetMountTargets.Invoke(new()
         ///     {
-        ///         var mountTargets = Output.Create(Tencentcloud.Cfs.GetMountTargets.InvokeAsync(new Tencentcloud.Cfs.GetMountTargetsArgs
-        ///         {
-        ///             FileSystemId = "cfs-iobiaxtj",
-        ///         }));
-        ///     }
+        ///         FileSystemId = "cfs-iobiaxtj",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetMountTargetsResult> InvokeAsync(GetMountTargetsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMountTargetsResult>("tencentcloud:Cfs/getMountTargets:getMountTargets", args ?? new GetMountTargetsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMountTargetsResult>("tencentcloud:Cfs/getMountTargets:getMountTargets", args ?? new GetMountTargetsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cfs mount_targets
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var mountTargets = Tencentcloud.Cfs.GetMountTargets.Invoke(new()
         ///     {
-        ///         var mountTargets = Output.Create(Tencentcloud.Cfs.GetMountTargets.InvokeAsync(new Tencentcloud.Cfs.GetMountTargetsArgs
-        ///         {
-        ///             FileSystemId = "cfs-iobiaxtj",
-        ///         }));
-        ///     }
+        ///         FileSystemId = "cfs-iobiaxtj",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetMountTargetsResult> Invoke(GetMountTargetsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMountTargetsResult>("tencentcloud:Cfs/getMountTargets:getMountTargets", args ?? new GetMountTargetsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMountTargetsResult>("tencentcloud:Cfs/getMountTargets:getMountTargets", args ?? new GetMountTargetsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetMountTargetsArgs : Pulumi.InvokeArgs
+    public sealed class GetMountTargetsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// File system ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public GetMountTargetsArgs()
         {
         }
+        public static new GetMountTargetsArgs Empty => new GetMountTargetsArgs();
     }
 
-    public sealed class GetMountTargetsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetMountTargetsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// File system ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public GetMountTargetsInvokeArgs()
         {
         }
+        public static new GetMountTargetsInvokeArgs Empty => new GetMountTargetsInvokeArgs();
     }
 
 

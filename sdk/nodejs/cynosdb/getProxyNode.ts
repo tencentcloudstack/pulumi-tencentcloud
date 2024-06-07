@@ -2,37 +2,17 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of cynosdb proxyNode
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const proxyNode = pulumi.output(tencentcloud.Cynosdb.getProxyNode({
- *     filters: [{
- *         exactMatch: false,
- *         name: "ClusterId",
- *         names: "ClusterId",
- *         values: "cynosdbmysql-cgd2gpwr",
- *     }],
- *     orderBy: "CREATETIME",
- *     orderByType: "DESC",
- * }));
- * ```
  */
 export function getProxyNode(args?: GetProxyNodeArgs, opts?: pulumi.InvokeOptions): Promise<GetProxyNodeResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cynosdb/getProxyNode:getProxyNode", {
         "filters": args.filters,
         "orderBy": args.orderBy,
@@ -80,9 +60,11 @@ export interface GetProxyNodeResult {
     readonly proxyNodeInfos: outputs.Cynosdb.GetProxyNodeProxyNodeInfo[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cynosdb proxyNode
+ */
 export function getProxyNodeOutput(args?: GetProxyNodeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProxyNodeResult> {
-    return pulumi.output(args).apply(a => getProxyNode(a, opts))
+    return pulumi.output(args).apply((a: any) => getProxyNode(a, opts))
 }
 
 /**

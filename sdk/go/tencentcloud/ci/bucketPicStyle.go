@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ci bucketPicStyle
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewBucketPicStyle(ctx, "bucketPicStyle", &Ci.BucketPicStyleArgs{
-// 			Bucket:    pulumi.String("terraform-ci-xxxxxx"),
-// 			StyleBody: pulumi.String("imageMogr2/thumbnail/20x/crop/20x20/gravity/center/interlace/0/quality/100"),
-// 			StyleName: pulumi.String("rayscale_2"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewBucketPicStyle(ctx, "bucketPicStyle", &Ci.BucketPicStyleArgs{
+//				Bucket:    pulumi.String("terraform-ci-xxxxxx"),
+//				StyleBody: pulumi.String("imageMogr2/thumbnail/20x/crop/20x20/gravity/center/interlace/0/quality/100"),
+//				StyleName: pulumi.String("rayscale_2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ci bucket_pic_style can be imported using the bucket#styleName, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/bucketPicStyle:BucketPicStyle bucket_pic_style terraform-ci-xxxxxx#rayscale_2
+// $ pulumi import tencentcloud:Ci/bucketPicStyle:BucketPicStyle bucket_pic_style terraform-ci-xxxxxx#rayscale_2
 // ```
 type BucketPicStyle struct {
 	pulumi.CustomResourceState
@@ -72,7 +78,7 @@ func NewBucketPicStyle(ctx *pulumi.Context,
 	if args.StyleName == nil {
 		return nil, errors.New("invalid value for required argument 'StyleName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BucketPicStyle
 	err := ctx.RegisterResource("tencentcloud:Ci/bucketPicStyle:BucketPicStyle", name, args, &resource, opts...)
 	if err != nil {
@@ -161,7 +167,7 @@ func (i *BucketPicStyle) ToBucketPicStyleOutputWithContext(ctx context.Context) 
 // BucketPicStyleArrayInput is an input type that accepts BucketPicStyleArray and BucketPicStyleArrayOutput values.
 // You can construct a concrete instance of `BucketPicStyleArrayInput` via:
 //
-//          BucketPicStyleArray{ BucketPicStyleArgs{...} }
+//	BucketPicStyleArray{ BucketPicStyleArgs{...} }
 type BucketPicStyleArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +192,7 @@ func (i BucketPicStyleArray) ToBucketPicStyleArrayOutputWithContext(ctx context.
 // BucketPicStyleMapInput is an input type that accepts BucketPicStyleMap and BucketPicStyleMapOutput values.
 // You can construct a concrete instance of `BucketPicStyleMapInput` via:
 //
-//          BucketPicStyleMap{ "key": BucketPicStyleArgs{...} }
+//	BucketPicStyleMap{ "key": BucketPicStyleArgs{...} }
 type BucketPicStyleMapInput interface {
 	pulumi.Input
 

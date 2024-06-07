@@ -15,91 +15,94 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var instances = Output.Create(Tencentcloud.Instances.GetInstance.InvokeAsync());
-    ///         var policy = new Tencentcloud.Monitor.AlarmPolicy("policy", new Tencentcloud.Monitor.AlarmPolicyArgs
-    ///         {
-    ///             PolicyName = "hello",
-    ///             MonitorType = "MT_QCE",
-    ///             Enable = 1,
-    ///             ProjectId = 1244035,
-    ///             Namespace = "cvm_device",
-    ///             Conditions = new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsArgs
-    ///             {
-    ///                 IsUnionRule = 1,
-    ///                 Rules = 
-    ///                 {
-    ///                     new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleArgs
-    ///                     {
-    ///                         MetricName = "CpuUsage",
-    ///                         Period = 60,
-    ///                         Operator = "ge",
-    ///                         Value = "89.9",
-    ///                         ContinuePeriod = 1,
-    ///                         NoticeFrequency = 3600,
-    ///                         IsPowerNotice = 0,
-    ///                     },
-    ///                 },
-    ///             },
-    ///             EventConditions = 
-    ///             {
-    ///                 new Tencentcloud.Monitor.Inputs.AlarmPolicyEventConditionArgs
-    ///                 {
-    ///                     MetricName = "ping_unreachable",
-    ///                 },
-    ///                 new Tencentcloud.Monitor.Inputs.AlarmPolicyEventConditionArgs
-    ///                 {
-    ///                     MetricName = "guest_reboot",
-    ///                 },
-    ///             },
-    ///             NoticeIds = 
-    ///             {
-    ///                 "notice-l9ziyxw6",
-    ///             },
-    ///             TriggerTasks = 
-    ///             {
-    ///                 new Tencentcloud.Monitor.Inputs.AlarmPolicyTriggerTaskArgs
-    ///                 {
-    ///                     Type = "AS",
-    ///                     TaskConfig = "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
-    ///                 },
-    ///             },
-    ///         });
-    ///         //for cvm
-    ///         var binding = new Tencentcloud.Monitor.PolicyBindingObject("binding", new Tencentcloud.Monitor.PolicyBindingObjectArgs
-    ///         {
-    ///             PolicyId = policy.Id,
-    ///             Dimensions = 
-    ///             {
-    ///                 new Tencentcloud.Monitor.Inputs.PolicyBindingObjectDimensionArgs
-    ///                 {
-    ///                     DimensionsJson = instances.Apply(instances =&gt; $"{{\"unInstanceId\":\"{instances.InstanceLists?[0]?.InstanceId}\"}}"),
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///     var instances = Tencentcloud.Instances.GetInstance.Invoke();
     /// 
-    /// }
+    ///     var policy = new Tencentcloud.Monitor.AlarmPolicy("policy", new()
+    ///     {
+    ///         PolicyName = "hello",
+    ///         MonitorType = "MT_QCE",
+    ///         Enable = 1,
+    ///         ProjectId = 1244035,
+    ///         Namespace = "cvm_device",
+    ///         Conditions = new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsArgs
+    ///         {
+    ///             IsUnionRule = 1,
+    ///             Rules = new[]
+    ///             {
+    ///                 new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleArgs
+    ///                 {
+    ///                     MetricName = "CpuUsage",
+    ///                     Period = 60,
+    ///                     Operator = "ge",
+    ///                     Value = "89.9",
+    ///                     ContinuePeriod = 1,
+    ///                     NoticeFrequency = 3600,
+    ///                     IsPowerNotice = 0,
+    ///                 },
+    ///             },
+    ///         },
+    ///         EventConditions = new[]
+    ///         {
+    ///             new Tencentcloud.Monitor.Inputs.AlarmPolicyEventConditionArgs
+    ///             {
+    ///                 MetricName = "ping_unreachable",
+    ///             },
+    ///             new Tencentcloud.Monitor.Inputs.AlarmPolicyEventConditionArgs
+    ///             {
+    ///                 MetricName = "guest_reboot",
+    ///             },
+    ///         },
+    ///         NoticeIds = new[]
+    ///         {
+    ///             "notice-l9ziyxw6",
+    ///         },
+    ///         TriggerTasks = new[]
+    ///         {
+    ///             new Tencentcloud.Monitor.Inputs.AlarmPolicyTriggerTaskArgs
+    ///             {
+    ///                 Type = "AS",
+    ///                 TaskConfig = "{\"Region\":\"ap-guangzhou\",\"Group\":\"asg-0z312312x\",\"Policy\":\"asp-ganig28\"}",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     //for cvm
+    ///     var binding = new Tencentcloud.Monitor.PolicyBindingObject("binding", new()
+    ///     {
+    ///         PolicyId = policy.Id,
+    ///         Dimensions = new[]
+    ///         {
+    ///             new Tencentcloud.Monitor.Inputs.PolicyBindingObjectDimensionArgs
+    ///             {
+    ///                 DimensionsJson = $"{{\"unInstanceId\":\"{instances.Apply(getInstanceResult =&gt; getInstanceResult.InstanceLists[0]?.InstanceId)}\"}}",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Monitor Policy Binding Object can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/policyBindingObject:PolicyBindingObject binding policyId
+    /// $ pulumi import tencentcloud:Monitor/policyBindingObject:PolicyBindingObject binding policyId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/policyBindingObject:PolicyBindingObject")]
-    public partial class PolicyBindingObject : Pulumi.CustomResource
+    public partial class PolicyBindingObject : global::Pulumi.CustomResource
     {
         /// <summary>
         /// A list objects. Each element contains the following attributes:
@@ -158,7 +161,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class PolicyBindingObjectArgs : Pulumi.ResourceArgs
+    public sealed class PolicyBindingObjectArgs : global::Pulumi.ResourceArgs
     {
         [Input("dimensions", required: true)]
         private InputList<Inputs.PolicyBindingObjectDimensionArgs>? _dimensions;
@@ -181,9 +184,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public PolicyBindingObjectArgs()
         {
         }
+        public static new PolicyBindingObjectArgs Empty => new PolicyBindingObjectArgs();
     }
 
-    public sealed class PolicyBindingObjectState : Pulumi.ResourceArgs
+    public sealed class PolicyBindingObjectState : global::Pulumi.ResourceArgs
     {
         [Input("dimensions")]
         private InputList<Inputs.PolicyBindingObjectDimensionGetArgs>? _dimensions;
@@ -206,5 +210,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public PolicyBindingObjectState()
         {
         }
+        public static new PolicyBindingObjectState Empty => new PolicyBindingObjectState();
     }
 }

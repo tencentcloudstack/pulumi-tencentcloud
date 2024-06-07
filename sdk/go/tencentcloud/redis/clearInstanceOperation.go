@@ -7,79 +7,85 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a redis clearInstanceOperation
 //
 // ## Example Usage
+//
 // ### Clear the instance data of the Redis instance
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		password := "test12345789"
-// 		if param := cfg.Get("password"); param != "" {
-// 			password = param
-// 		}
-// 		zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
-// 			TypeId: pulumi.IntRef(7),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		foo, err := Redis.NewInstance(ctx, "foo", &Redis.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
-// 			TypeId:           pulumi.Int(zone.Lists[1].TypeId),
-// 			Password:         pulumi.String(password),
-// 			MemSize:          pulumi.Int(8192),
-// 			RedisShardNum:    pulumi.Int(zone.Lists[1].RedisShardNums[0]),
-// 			RedisReplicasNum: pulumi.Int(zone.Lists[1].RedisReplicasNums[0]),
-// 			Port:             pulumi.Int(6379),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Redis.NewClearInstanceOperation(ctx, "clearInstanceOperation", &Redis.ClearInstanceOperationArgs{
-// 			InstanceId: foo.ID(),
-// 			Password:   pulumi.String(password),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			password := "test12345789"
+//			if param := cfg.Get("password"); param != "" {
+//				password = param
+//			}
+//			zone, err := Redis.GetZoneConfig(ctx, &redis.GetZoneConfigArgs{
+//				TypeId: pulumi.IntRef(7),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			foo, err := Redis.NewInstance(ctx, "foo", &Redis.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zone.Lists[1].Zone),
+//				TypeId:           pulumi.Int(zone.Lists[1].TypeId),
+//				Password:         pulumi.String(password),
+//				MemSize:          pulumi.Int(8192),
+//				RedisShardNum:    pulumi.Int(zone.Lists[1].RedisShardNums[0]),
+//				RedisReplicasNum: pulumi.Int(zone.Lists[1].RedisReplicasNums[0]),
+//				Port:             pulumi.Int(6379),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Redis.NewClearInstanceOperation(ctx, "clearInstanceOperation", &Redis.ClearInstanceOperationArgs{
+//				InstanceId: foo.ID(),
+//				Password:   pulumi.String(password),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ClearInstanceOperation struct {
 	pulumi.CustomResourceState
 
@@ -99,7 +105,14 @@ func NewClearInstanceOperation(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ClearInstanceOperation
 	err := ctx.RegisterResource("tencentcloud:Redis/clearInstanceOperation:ClearInstanceOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -180,7 +193,7 @@ func (i *ClearInstanceOperation) ToClearInstanceOperationOutputWithContext(ctx c
 // ClearInstanceOperationArrayInput is an input type that accepts ClearInstanceOperationArray and ClearInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `ClearInstanceOperationArrayInput` via:
 //
-//          ClearInstanceOperationArray{ ClearInstanceOperationArgs{...} }
+//	ClearInstanceOperationArray{ ClearInstanceOperationArgs{...} }
 type ClearInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -205,7 +218,7 @@ func (i ClearInstanceOperationArray) ToClearInstanceOperationArrayOutputWithCont
 // ClearInstanceOperationMapInput is an input type that accepts ClearInstanceOperationMap and ClearInstanceOperationMapOutput values.
 // You can construct a concrete instance of `ClearInstanceOperationMapInput` via:
 //
-//          ClearInstanceOperationMap{ "key": ClearInstanceOperationArgs{...} }
+//	ClearInstanceOperationMap{ "key": ClearInstanceOperationArgs{...} }
 type ClearInstanceOperationMapInput interface {
 	pulumi.Input
 

@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.AutoDenyRules("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.AutoDenyRules("example", new Tencentcloud.Waf.AutoDenyRulesArgs
-    ///         {
-    ///             AttackThreshold = 20,
-    ///             DenyTimeThreshold = 5,
-    ///             Domain = "demo.waf.com",
-    ///             TimeThreshold = 12,
-    ///         });
-    ///     }
+    ///         AttackThreshold = 20,
+    ///         DenyTimeThreshold = 5,
+    ///         Domain = "demo.waf.com",
+    ///         TimeThreshold = 12,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// waf auto_deny_rules can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Waf/autoDenyRules:AutoDenyRules example demo.waf.com
+    /// $ pulumi import tencentcloud:Waf/autoDenyRules:AutoDenyRules example demo.waf.com
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/autoDenyRules:AutoDenyRules")]
-    public partial class AutoDenyRules : Pulumi.CustomResource
+    public partial class AutoDenyRules : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The threshold number of attacks that triggers IP autodeny, ranging from 2 to 100 times.
@@ -115,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class AutoDenyRulesArgs : Pulumi.ResourceArgs
+    public sealed class AutoDenyRulesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The threshold number of attacks that triggers IP autodeny, ranging from 2 to 100 times.
@@ -144,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public AutoDenyRulesArgs()
         {
         }
+        public static new AutoDenyRulesArgs Empty => new AutoDenyRulesArgs();
     }
 
-    public sealed class AutoDenyRulesState : Pulumi.ResourceArgs
+    public sealed class AutoDenyRulesState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The threshold number of attacks that triggers IP autodeny, ranging from 2 to 100 times.
@@ -175,5 +177,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public AutoDenyRulesState()
         {
         }
+        public static new AutoDenyRulesState Empty => new AutoDenyRulesState();
     }
 }

@@ -15,44 +15,45 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var wordSample = new Tencentcloud.Mps.WordSample("wordSample", new()
     ///     {
-    ///         var wordSample = new Tencentcloud.Mps.WordSample("wordSample", new Tencentcloud.Mps.WordSampleArgs
+    ///         Keyword = "tf_test_kw_1",
+    ///         Tags = new[]
     ///         {
-    ///             Keyword = "tf_test_kw_1",
-    ///             Tags = 
-    ///             {
-    ///                 "tags_1",
-    ///                 "tags_2",
-    ///             },
-    ///             Usages = 
-    ///             {
-    ///                 "Recognition.Ocr",
-    ///                 "Review.Ocr",
-    ///                 "Review.Asr",
-    ///             },
-    ///         });
-    ///     }
+    ///             "tags_1",
+    ///             "tags_2",
+    ///         },
+    ///         Usages = new[]
+    ///         {
+    ///             "Recognition.Ocr",
+    ///             "Review.Ocr",
+    ///             "Review.Asr",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mps word_sample can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/wordSample:WordSample word_sample keyword
+    /// $ pulumi import tencentcloud:Mps/wordSample:WordSample word_sample keyword
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/wordSample:WordSample")]
-    public partial class WordSample : Pulumi.CustomResource
+    public partial class WordSample : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Keyword. Length limit: 20 characters.
@@ -117,7 +118,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class WordSampleArgs : Pulumi.ResourceArgs
+    public sealed class WordSampleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Keyword. Length limit: 20 characters.
@@ -152,9 +153,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public WordSampleArgs()
         {
         }
+        public static new WordSampleArgs Empty => new WordSampleArgs();
     }
 
-    public sealed class WordSampleState : Pulumi.ResourceArgs
+    public sealed class WordSampleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Keyword. Length limit: 20 characters.
@@ -189,5 +191,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public WordSampleState()
         {
         }
+        public static new WordSampleState Empty => new WordSampleState();
     }
 }

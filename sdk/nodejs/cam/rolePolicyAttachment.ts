@@ -9,10 +9,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const camPolicyBasic = config.get("camPolicyBasic") || "keep-cam-policy";
@@ -24,17 +25,18 @@ import * as utilities from "../utilities";
  *     name: camRoleBasic,
  * });
  * const rolePolicyAttachmentBasic = new tencentcloud.cam.RolePolicyAttachment("rolePolicyAttachmentBasic", {
- *     roleId: roles.then(roles => roles.roleLists?[0]?.roleId),
- *     policyId: policy.then(policy => policy.policyLists?[0]?.policyId),
+ *     roleId: roles.then(roles => roles.roleLists?.[0]?.roleId),
+ *     policyId: policy.then(policy => policy.policyLists?.[0]?.policyId),
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CAM role policy attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cam/rolePolicyAttachment:RolePolicyAttachment foo 4611686018427922725#26800353
+ * $ pulumi import tencentcloud:Cam/rolePolicyAttachment:RolePolicyAttachment foo 4611686018427922725#26800353
  * ```
  */
 export class RolePolicyAttachment extends pulumi.CustomResource {

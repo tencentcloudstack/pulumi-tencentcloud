@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -20,7 +22,7 @@ import * as utilities from "../utilities";
  *     metricName: "CPUUsage",
  *     dimensions: [{
  *         name: "InstanceId",
- *         value: instances.instanceLists?[0]?.instanceId,
+ *         value: instances.instanceLists?.[0]?.instanceId,
  *     }],
  *     period: 300,
  *     startTime: "2020-04-28T18:45:00+08:00",
@@ -44,13 +46,11 @@ import * as utilities from "../utilities";
  *     endTime: "2020-04-28T19:00:00+08:00",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getData(args: GetDataArgs, opts?: pulumi.InvokeOptions): Promise<GetDataResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Monitor/getData:getData", {
         "dimensions": args.dimensions,
         "endTime": args.endTime,
@@ -116,9 +116,50 @@ export interface GetDataResult {
     readonly resultOutputFile?: string;
     readonly startTime: string;
 }
-
+/**
+ * Use this data source to query monitor data. for complex queries, use (https://github.com/tencentyun/tencentcloud-exporter)
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instances = tencentcloud.Instances.getInstance({});
+ * const cvmMonitorData = instances.then(instances => tencentcloud.Monitor.getData({
+ *     namespace: "QCE/CVM",
+ *     metricName: "CPUUsage",
+ *     dimensions: [{
+ *         name: "InstanceId",
+ *         value: instances.instanceLists?.[0]?.instanceId,
+ *     }],
+ *     period: 300,
+ *     startTime: "2020-04-28T18:45:00+08:00",
+ *     endTime: "2020-04-28T19:00:00+08:00",
+ * }));
+ * const cosMonitorData = tencentcloud.Monitor.getData({
+ *     namespace: "QCE/COS",
+ *     metricName: "InternetTraffic",
+ *     dimensions: [
+ *         {
+ *             name: "appid",
+ *             value: "1258798060",
+ *         },
+ *         {
+ *             name: "bucket",
+ *             value: "test-1258798060",
+ *         },
+ *     ],
+ *     period: 300,
+ *     startTime: "2020-04-28T18:30:00+08:00",
+ *     endTime: "2020-04-28T19:00:00+08:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDataOutput(args: GetDataOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDataResult> {
-    return pulumi.output(args).apply(a => getData(a, opts))
+    return pulumi.output(args).apply((a: any) => getData(a, opts))
 }
 
 /**

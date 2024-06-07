@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpTkeAlertPolicyAlertRuleGetArgs : Pulumi.ResourceArgs
+    public sealed class TmpTkeAlertPolicyAlertRuleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// If the alarm policy is derived from the CRD resource definition of the user cluster, the ClusterId is the cluster ID to which it belongs.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public TmpTkeAlertPolicyAlertRuleGetArgs()
         {
         }
+        public static new TmpTkeAlertPolicyAlertRuleGetArgs Empty => new TmpTkeAlertPolicyAlertRuleGetArgs();
     }
 }

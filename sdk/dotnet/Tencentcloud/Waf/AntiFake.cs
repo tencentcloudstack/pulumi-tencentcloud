@@ -17,35 +17,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.AntiFake("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.AntiFake("example", new Tencentcloud.Waf.AntiFakeArgs
-    ///         {
-    ///             Domain = "www.waf.com",
-    ///             Status = 1,
-    ///             Uri = "/anti_fake_url.html",
-    ///         });
-    ///     }
+    ///         Domain = "www.waf.com",
+    ///         Status = 1,
+    ///         Uri = "/anti_fake_url.html",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// waf anti_fake can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Waf/antiFake:AntiFake example 3200035516#www.waf.com
+    /// $ pulumi import tencentcloud:Waf/antiFake:AntiFake example 3200035516#www.waf.com
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/antiFake:AntiFake")]
-    public partial class AntiFake : Pulumi.CustomResource
+    public partial class AntiFake : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Domain.
@@ -128,7 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class AntiFakeArgs : Pulumi.ResourceArgs
+    public sealed class AntiFakeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -157,9 +158,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public AntiFakeArgs()
         {
         }
+        public static new AntiFakeArgs Empty => new AntiFakeArgs();
     }
 
-    public sealed class AntiFakeState : Pulumi.ResourceArgs
+    public sealed class AntiFakeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -200,5 +202,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public AntiFakeState()
         {
         }
+        public static new AntiFakeState Empty => new AntiFakeState();
     }
 }

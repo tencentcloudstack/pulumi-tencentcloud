@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a pts tmpKey
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Pts.NewTmpKeyGenerate(ctx, "tmpKey", &Pts.TmpKeyGenerateArgs{
-// 			ProjectId:  pulumi.String("project-1b0zqmhg"),
-// 			ScenarioId: pulumi.String("scenario-abc"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Pts.NewTmpKeyGenerate(ctx, "tmpKey", &Pts.TmpKeyGenerateArgs{
+//				ProjectId:  pulumi.String("project-1b0zqmhg"),
+//				ScenarioId: pulumi.String("scenario-abc"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type TmpKeyGenerate struct {
 	pulumi.CustomResourceState
 
@@ -61,7 +67,7 @@ func NewTmpKeyGenerate(ctx *pulumi.Context,
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TmpKeyGenerate
 	err := ctx.RegisterResource("tencentcloud:Pts/tmpKeyGenerate:TmpKeyGenerate", name, args, &resource, opts...)
 	if err != nil {
@@ -154,7 +160,7 @@ func (i *TmpKeyGenerate) ToTmpKeyGenerateOutputWithContext(ctx context.Context) 
 // TmpKeyGenerateArrayInput is an input type that accepts TmpKeyGenerateArray and TmpKeyGenerateArrayOutput values.
 // You can construct a concrete instance of `TmpKeyGenerateArrayInput` via:
 //
-//          TmpKeyGenerateArray{ TmpKeyGenerateArgs{...} }
+//	TmpKeyGenerateArray{ TmpKeyGenerateArgs{...} }
 type TmpKeyGenerateArrayInput interface {
 	pulumi.Input
 
@@ -179,7 +185,7 @@ func (i TmpKeyGenerateArray) ToTmpKeyGenerateArrayOutputWithContext(ctx context.
 // TmpKeyGenerateMapInput is an input type that accepts TmpKeyGenerateMap and TmpKeyGenerateMapOutput values.
 // You can construct a concrete instance of `TmpKeyGenerateMapInput` via:
 //
-//          TmpKeyGenerateMap{ "key": TmpKeyGenerateArgs{...} }
+//	TmpKeyGenerateMap{ "key": TmpKeyGenerateArgs{...} }
 type TmpKeyGenerateMapInput interface {
 	pulumi.Input
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
 {
 
-    public sealed class MeshConfigInjectGetArgs : Pulumi.ResourceArgs
+    public sealed class MeshConfigInjectGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("excludeIpRanges")]
         private InputList<string>? _excludeIpRanges;
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         public MeshConfigInjectGetArgs()
         {
         }
+        public static new MeshConfigInjectGetArgs Empty => new MeshConfigInjectGetArgs();
     }
 }

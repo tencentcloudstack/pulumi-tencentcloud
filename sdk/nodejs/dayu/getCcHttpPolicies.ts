@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -25,13 +27,11 @@ import * as utilities from "../utilities";
  *     name: tencentcloud_dayu_cc_http_policy.test_policy.name,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCcHttpPolicies(args: GetCcHttpPoliciesArgs, opts?: pulumi.InvokeOptions): Promise<GetCcHttpPoliciesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dayu/getCcHttpPolicies:getCcHttpPolicies", {
         "name": args.name,
         "policyId": args.policyId,
@@ -97,9 +97,31 @@ export interface GetCcHttpPoliciesResult {
     readonly resourceType: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query dayu CC http policies
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const idTest = tencentcloud.Dayu.getCcHttpPolicies({
+ *     resourceType: tencentcloud_dayu_cc_http_policy.test_policy.resource_type,
+ *     resourceId: tencentcloud_dayu_cc_http_policy.test_policy.resource_id,
+ *     policyId: tencentcloud_dayu_cc_http_policy.test_policy.policy_id,
+ * });
+ * const nameTest = tencentcloud.Dayu.getCcHttpPolicies({
+ *     resourceType: tencentcloud_dayu_cc_http_policy.test_policy.resource_type,
+ *     resourceId: tencentcloud_dayu_cc_http_policy.test_policy.resource_id,
+ *     name: tencentcloud_dayu_cc_http_policy.test_policy.name,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCcHttpPoliciesOutput(args: GetCcHttpPoliciesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCcHttpPoliciesResult> {
-    return pulumi.output(args).apply(a => getCcHttpPolicies(a, opts))
+    return pulumi.output(args).apply((a: any) => getCcHttpPolicies(a, opts))
 }
 
 /**

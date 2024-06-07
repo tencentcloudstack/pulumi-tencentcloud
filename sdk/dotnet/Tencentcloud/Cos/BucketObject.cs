@@ -14,54 +14,59 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// Provides a COS object resource to put an object(content or file) to the bucket.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Uploading a file to a bucket
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var myobject = new Tencentcloud.Cos.BucketObject("myobject", new()
     ///     {
-    ///         var myobject = new Tencentcloud.Cos.BucketObject("myobject", new Tencentcloud.Cos.BucketObjectArgs
-    ///         {
-    ///             Bucket = "mycos-1258798060",
-    ///             Key = "new_object_key",
-    ///             Source = "path/to/file",
-    ///         });
-    ///     }
+    ///         Bucket = "mycos-1258798060",
+    ///         Key = "new_object_key",
+    ///         Source = "path/to/file",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Uploading a content to a bucket
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mycos = new Tencentcloud.Cos.Bucket("mycos", new()
     ///     {
-    ///         var mycos = new Tencentcloud.Cos.Bucket("mycos", new Tencentcloud.Cos.BucketArgs
-    ///         {
-    ///             Bucket = "mycos-1258798060",
-    ///             Acl = "public-read",
-    ///         });
-    ///         var myobject = new Tencentcloud.Cos.BucketObject("myobject", new Tencentcloud.Cos.BucketObjectArgs
-    ///         {
-    ///             Bucket = mycos.CosBucket,
-    ///             Key = "new_object_key",
-    ///             Content = "the content that you want to upload.",
-    ///         });
-    ///     }
+    ///         CosBucket = "mycos-1258798060",
+    ///         Acl = "public-read",
+    ///     });
     /// 
-    /// }
+    ///     var myobject = new Tencentcloud.Cos.BucketObject("myobject", new()
+    ///     {
+    ///         Bucket = mycos.CosBucket,
+    ///         Key = "new_object_key",
+    ///         Content = "the content that you want to upload.",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cos/bucketObject:BucketObject")]
-    public partial class BucketObject : Pulumi.CustomResource
+    public partial class BucketObject : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
@@ -180,7 +185,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         }
     }
 
-    public sealed class BucketObjectArgs : Pulumi.ResourceArgs
+    public sealed class BucketObjectArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
@@ -263,9 +268,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public BucketObjectArgs()
         {
         }
+        public static new BucketObjectArgs Empty => new BucketObjectArgs();
     }
 
-    public sealed class BucketObjectState : Pulumi.ResourceArgs
+    public sealed class BucketObjectState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The canned ACL to apply. Available values include `private`, `public-read`, and `public-read-write`. Defaults to `private`.
@@ -348,5 +354,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public BucketObjectState()
         {
         }
+        public static new BucketObjectState Empty => new BucketObjectState();
     }
 }

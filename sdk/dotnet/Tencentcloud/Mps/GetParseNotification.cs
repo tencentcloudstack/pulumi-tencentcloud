@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         /// <summary>
         /// Use this data source to query detailed information of mps parse_notification
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var parseNotification = Tencentcloud.Mps.GetParseNotification.Invoke(new()
         ///     {
-        ///         var parseNotification = Output.Create(Tencentcloud.Mps.GetParseNotification.InvokeAsync(new Tencentcloud.Mps.GetParseNotificationArgs
-        ///         {
-        ///             Content = "your_content",
-        ///         }));
-        ///     }
+        ///         Content = "your_content",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetParseNotificationResult> InvokeAsync(GetParseNotificationArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetParseNotificationResult>("tencentcloud:Mps/getParseNotification:getParseNotification", args ?? new GetParseNotificationArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetParseNotificationResult>("tencentcloud:Mps/getParseNotification:getParseNotification", args ?? new GetParseNotificationArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mps parse_notification
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var parseNotification = Tencentcloud.Mps.GetParseNotification.Invoke(new()
         ///     {
-        ///         var parseNotification = Output.Create(Tencentcloud.Mps.GetParseNotification.InvokeAsync(new Tencentcloud.Mps.GetParseNotificationArgs
-        ///         {
-        ///             Content = "your_content",
-        ///         }));
-        ///     }
+        ///         Content = "your_content",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetParseNotificationResult> Invoke(GetParseNotificationInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetParseNotificationResult>("tencentcloud:Mps/getParseNotification:getParseNotification", args ?? new GetParseNotificationInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetParseNotificationResult>("tencentcloud:Mps/getParseNotification:getParseNotification", args ?? new GetParseNotificationInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetParseNotificationArgs : Pulumi.InvokeArgs
+    public sealed class GetParseNotificationArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Event notification obtained from CMQ.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public GetParseNotificationArgs()
         {
         }
+        public static new GetParseNotificationArgs Empty => new GetParseNotificationArgs();
     }
 
-    public sealed class GetParseNotificationInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetParseNotificationInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Event notification obtained from CMQ.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public GetParseNotificationInvokeArgs()
         {
         }
+        public static new GetParseNotificationInvokeArgs Empty => new GetParseNotificationInvokeArgs();
     }
 
 

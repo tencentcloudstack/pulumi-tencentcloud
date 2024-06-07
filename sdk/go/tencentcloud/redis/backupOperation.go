@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a redis backupOperation
 //
 // ## Example Usage
+//
 // ### Manually back up the Redis instance, and the backup data is kept for 7 days
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Mysql.GetInstance(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Redis.NewBackupOperation(ctx, "backupOperation", &Redis.BackupOperationArgs{
-// 			InstanceId:  pulumi.String(foo.InstanceLists[0].MysqlId),
-// 			Remark:      pulumi.String("manually back"),
-// 			StorageDays: pulumi.Int(7),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			foo, err := Mysql.GetInstance(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Redis.NewBackupOperation(ctx, "backupOperation", &Redis.BackupOperationArgs{
+//				InstanceId:  pulumi.String(foo.InstanceLists[0].MysqlId),
+//				Remark:      pulumi.String("manually back"),
+//				StorageDays: pulumi.Int(7),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type BackupOperation struct {
 	pulumi.CustomResourceState
 
@@ -65,7 +71,7 @@ func NewBackupOperation(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BackupOperation
 	err := ctx.RegisterResource("tencentcloud:Redis/backupOperation:BackupOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -154,7 +160,7 @@ func (i *BackupOperation) ToBackupOperationOutputWithContext(ctx context.Context
 // BackupOperationArrayInput is an input type that accepts BackupOperationArray and BackupOperationArrayOutput values.
 // You can construct a concrete instance of `BackupOperationArrayInput` via:
 //
-//          BackupOperationArray{ BackupOperationArgs{...} }
+//	BackupOperationArray{ BackupOperationArgs{...} }
 type BackupOperationArrayInput interface {
 	pulumi.Input
 
@@ -179,7 +185,7 @@ func (i BackupOperationArray) ToBackupOperationArrayOutputWithContext(ctx contex
 // BackupOperationMapInput is an input type that accepts BackupOperationMap and BackupOperationMapOutput values.
 // You can construct a concrete instance of `BackupOperationMapInput` via:
 //
-//          BackupOperationMap{ "key": BackupOperationArgs{...} }
+//	BackupOperationMap{ "key": BackupOperationArgs{...} }
 type BackupOperationMapInput interface {
 	pulumi.Input
 

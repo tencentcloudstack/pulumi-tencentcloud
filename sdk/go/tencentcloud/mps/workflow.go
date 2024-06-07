@@ -7,117 +7,19 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mps workflow
-//
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewWorkflow(ctx, "workflow", &Mps.WorkflowArgs{
-// 			AiAnalysisTask: &mps.WorkflowAiAnalysisTaskArgs{
-// 				Definition: pulumi.Int(20),
-// 			},
-// 			AiContentReviewTask: &mps.WorkflowAiContentReviewTaskArgs{
-// 				Definition: pulumi.Int(20),
-// 			},
-// 			AiRecognitionTask: &mps.WorkflowAiRecognitionTaskArgs{
-// 				Definition: pulumi.Int(20),
-// 			},
-// 			MediaProcessTask: &mps.WorkflowMediaProcessTaskArgs{
-// 				AdaptiveDynamicStreamingTaskSets: mps.WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetArray{
-// 					&mps.WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetArgs{
-// 						Definition:       pulumi.Int(12),
-// 						OutputObjectPath: pulumi.String("/out"),
-// 						OutputStorage: &mps.WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageArgs{
-// 							CosOutputStorage: &mps.WorkflowMediaProcessTaskAdaptiveDynamicStreamingTaskSetOutputStorageCosOutputStorageArgs{
-// 								Bucket: pulumi.String("cos-lock-1308919341"),
-// 								Region: pulumi.String("ap-guangzhou"),
-// 							},
-// 							Type: pulumi.String("COS"),
-// 						},
-// 						SegmentObjectName:   pulumi.String("/out"),
-// 						SubStreamObjectName: pulumi.String("/out/out/"),
-// 					},
-// 				},
-// 				AnimatedGraphicTaskSets: mps.WorkflowMediaProcessTaskAnimatedGraphicTaskSetArray{
-// 					&mps.WorkflowMediaProcessTaskAnimatedGraphicTaskSetArgs{
-// 						Definition:       pulumi.Int(20000),
-// 						EndTimeOffset:    pulumi.Float64(0),
-// 						OutputObjectPath: pulumi.String("/test/"),
-// 						OutputStorage: &mps.WorkflowMediaProcessTaskAnimatedGraphicTaskSetOutputStorageArgs{
-// 							CosOutputStorage: &mps.WorkflowMediaProcessTaskAnimatedGraphicTaskSetOutputStorageCosOutputStorageArgs{
-// 								Bucket: pulumi.String("cos-lock-1308919341"),
-// 								Region: pulumi.String("ap-guangzhou"),
-// 							},
-// 							Type: pulumi.String("COS"),
-// 						},
-// 						StartTimeOffset: pulumi.Float64(0),
-// 					},
-// 				},
-// 				SnapshotByTimeOffsetTaskSets: mps.WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetArray{
-// 					&mps.WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetArgs{
-// 						Definition: pulumi.Int(10),
-// 						ExtTimeOffsetSet: []string{
-// 							"1s",
-// 						},
-// 						OutputObjectPath: pulumi.String("/snapshot/"),
-// 						OutputStorage: &mps.WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageArgs{
-// 							CosOutputStorage: &mps.WorkflowMediaProcessTaskSnapshotByTimeOffsetTaskSetOutputStorageCosOutputStorageArgs{
-// 								Bucket: pulumi.String("cos-lock-1308919341"),
-// 								Region: pulumi.String("ap-guangzhou"),
-// 							},
-// 							Type: pulumi.String("COS"),
-// 						},
-// 						TimeOffsetSet: []interface{}{},
-// 					},
-// 				},
-// 			},
-// 			OutputDir: pulumi.String("/"),
-// 			OutputStorage: &mps.WorkflowOutputStorageArgs{
-// 				CosOutputStorage: &mps.WorkflowOutputStorageCosOutputStorageArgs{
-// 					Bucket: pulumi.String("cos-lock-1308919341"),
-// 					Region: pulumi.String("ap-guangzhou"),
-// 				},
-// 				Type: pulumi.String("COS"),
-// 			},
-// 			TaskPriority: pulumi.Int(0),
-// 			Trigger: &mps.WorkflowTriggerArgs{
-// 				CosFileUploadTrigger: &mps.WorkflowTriggerCosFileUploadTriggerArgs{
-// 					Bucket: pulumi.String("cos-lock-1308919341"),
-// 					Dir:    pulumi.String("/"),
-// 					Region: pulumi.String("ap-guangzhou"),
-// 				},
-// 				Type: pulumi.String("CosFileUpload"),
-// 			},
-// 			WorkflowName: pulumi.String("tf-workflow"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 //
 // ## Import
 //
 // mps workflow can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/workflow:Workflow workflow workflow_id
+// $ pulumi import tencentcloud:Mps/workflow:Workflow workflow workflow_id
 // ```
 type Workflow struct {
 	pulumi.CustomResourceState
@@ -157,7 +59,7 @@ func NewWorkflow(ctx *pulumi.Context,
 	if args.WorkflowName == nil {
 		return nil, errors.New("invalid value for required argument 'WorkflowName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Workflow
 	err := ctx.RegisterResource("tencentcloud:Mps/workflow:Workflow", name, args, &resource, opts...)
 	if err != nil {
@@ -302,7 +204,7 @@ func (i *Workflow) ToWorkflowOutputWithContext(ctx context.Context) WorkflowOutp
 // WorkflowArrayInput is an input type that accepts WorkflowArray and WorkflowArrayOutput values.
 // You can construct a concrete instance of `WorkflowArrayInput` via:
 //
-//          WorkflowArray{ WorkflowArgs{...} }
+//	WorkflowArray{ WorkflowArgs{...} }
 type WorkflowArrayInput interface {
 	pulumi.Input
 
@@ -327,7 +229,7 @@ func (i WorkflowArray) ToWorkflowArrayOutputWithContext(ctx context.Context) Wor
 // WorkflowMapInput is an input type that accepts WorkflowMap and WorkflowMapOutput values.
 // You can construct a concrete instance of `WorkflowMapInput` via:
 //
-//          WorkflowMap{ "key": WorkflowArgs{...} }
+//	WorkflowMap{ "key": WorkflowArgs{...} }
 type WorkflowMapInput interface {
 	pulumi.Input
 

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -13,7 +14,7 @@ import * as utilities from "../utilities";
  * dlc add_users_to_work_group_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dlc/addUsersToWorkGroupAttachment:AddUsersToWorkGroupAttachment add_users_to_work_group_attachment add_users_to_work_group_attachment_id
+ * $ pulumi import tencentcloud:Dlc/addUsersToWorkGroupAttachment:AddUsersToWorkGroupAttachment add_users_to_work_group_attachment add_users_to_work_group_attachment_id
  * ```
  */
 export class AddUsersToWorkGroupAttachment extends pulumi.CustomResource {

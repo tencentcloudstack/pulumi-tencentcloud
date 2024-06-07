@@ -2,28 +2,34 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of oceanus clusters
  *
  * ## Example Usage
+ *
  * ### Query all clusters
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Oceanus.getClusters());
+ * const example = tencentcloud.Oceanus.getClusters({});
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Query the specified cluster
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Oceanus.getClusters({
+ * const example = tencentcloud.Oceanus.getClusters({
  *     clusterIds: ["cluster-5c42n3a5"],
  *     filters: [{
  *         name: "name",
@@ -31,16 +37,14 @@ import * as utilities from "../utilities";
  *     }],
  *     orderType: 1,
  *     workSpaceId: "space-2idq8wbr",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getClusters(args?: GetClustersArgs, opts?: pulumi.InvokeOptions): Promise<GetClustersResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Oceanus/getClusters:getClusters", {
         "clusterIds": args.clusterIds,
         "filters": args.filters,
@@ -97,9 +101,43 @@ export interface GetClustersResult {
      */
     readonly workSpaceId?: string;
 }
-
+/**
+ * Use this data source to query detailed information of oceanus clusters
+ *
+ * ## Example Usage
+ *
+ * ### Query all clusters
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Oceanus.getClusters({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query the specified cluster
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Oceanus.getClusters({
+ *     clusterIds: ["cluster-5c42n3a5"],
+ *     filters: [{
+ *         name: "name",
+ *         values: ["tf_example"],
+ *     }],
+ *     orderType: 1,
+ *     workSpaceId: "space-2idq8wbr",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getClustersOutput(args?: GetClustersOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetClustersResult> {
-    return pulumi.output(args).apply(a => getClusters(a, opts))
+    return pulumi.output(args).apply((a: any) => getClusters(a, opts))
 }
 
 /**

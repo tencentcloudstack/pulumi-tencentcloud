@@ -9,15 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Dasb.BindDeviceAccountPassword("example", {
- *     deviceAccountId: 16,
+ * const exampleDevice = new tencentcloud.dasb.Device("exampleDevice", {
+ *     osName: "Linux",
+ *     ip: "192.168.0.1",
+ *     port: 80,
+ * });
+ * const exampleDeviceAccount = new tencentcloud.dasb.DeviceAccount("exampleDeviceAccount", {
+ *     deviceId: exampleDevice.id,
+ *     account: "root",
+ * });
+ * const exampleBindDeviceAccountPassword = new tencentcloud.dasb.BindDeviceAccountPassword("exampleBindDeviceAccountPassword", {
+ *     deviceAccountId: exampleDeviceAccount.id,
  *     password: "TerraformPassword",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class BindDeviceAccountPassword extends pulumi.CustomResource {
     /**

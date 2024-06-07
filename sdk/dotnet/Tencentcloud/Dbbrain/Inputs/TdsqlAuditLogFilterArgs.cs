@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain.Inputs
 {
 
-    public sealed class TdsqlAuditLogFilterArgs : Pulumi.ResourceArgs
+    public sealed class TdsqlAuditLogFilterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Number of affected rows. Indicates filtering audit logs whose affected rows are greater than this value.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain.Inputs
         public TdsqlAuditLogFilterArgs()
         {
         }
+        public static new TdsqlAuditLogFilterArgs Empty => new TdsqlAuditLogFilterArgs();
     }
 }

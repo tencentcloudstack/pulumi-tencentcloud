@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const config = pulumi.output(tencentcloud.Reserved.getInstanceConfigs({
+ * const config = tencentcloud.Reserved.getInstanceConfigs({
  *     availabilityZone: "na-siliconvalley-1",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceConfigs(args?: GetInstanceConfigsArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceConfigsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Reserved/getInstanceConfigs:getInstanceConfigs", {
         "availabilityZone": args.availabilityZone,
         "duration": args.duration,
@@ -97,9 +97,24 @@ export interface GetInstanceConfigsResult {
     readonly productDescription?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query reserved instances configuration.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const config = tencentcloud.Reserved.getInstanceConfigs({
+ *     availabilityZone: "na-siliconvalley-1",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceConfigsOutput(args?: GetInstanceConfigsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceConfigsResult> {
-    return pulumi.output(args).apply(a => getInstanceConfigs(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceConfigs(a, opts))
 }
 
 /**

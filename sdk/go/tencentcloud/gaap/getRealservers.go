@@ -8,35 +8,45 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query gaap realservers.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooRealserver, err := Gaap.NewRealserver(ctx, "fooRealserver", &Gaap.RealserverArgs{
-// 			Ip: pulumi.String("1.1.1.1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooRealserver, err := Gaap.NewRealserver(ctx, "fooRealserver", &Gaap.RealserverArgs{
+//				Ip: pulumi.String("1.1.1.1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = fooRealserver.Ip.ApplyT(func(ip *string) (gaap.GetRealserversResult, error) {
+//				return Gaap.GetRealserversOutput(ctx, gaap.GetRealserversOutputArgs{
+//					Ip: ip,
+//				}, nil), nil
+//			}).(gaap.GetRealserversResultOutput)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetRealservers(ctx *pulumi.Context, args *GetRealserversArgs, opts ...pulumi.InvokeOption) (*GetRealserversResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRealserversResult
 	err := ctx.Invoke("tencentcloud:Gaap/getRealservers:getRealservers", args, &rv, opts...)
 	if err != nil {

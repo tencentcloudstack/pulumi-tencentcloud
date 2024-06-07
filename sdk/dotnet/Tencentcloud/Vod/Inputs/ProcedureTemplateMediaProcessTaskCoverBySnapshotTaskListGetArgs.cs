@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
 {
 
-    public sealed class ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListGetArgs : Pulumi.ResourceArgs
+    public sealed class ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Time point screen capturing template ID.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
         public ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListGetArgs()
         {
         }
+        public static new ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListGetArgs Empty => new ProcedureTemplateMediaProcessTaskCoverBySnapshotTaskListGetArgs();
     }
 }

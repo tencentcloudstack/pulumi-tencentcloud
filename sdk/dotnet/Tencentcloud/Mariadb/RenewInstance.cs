@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var renewInstance = new Tencentcloud.Mariadb.RenewInstance("renewInstance", new()
     ///     {
-    ///         var renewInstance = new Tencentcloud.Mariadb.RenewInstance("renewInstance", new Tencentcloud.Mariadb.RenewInstanceArgs
-    ///         {
-    ///             InstanceId = "tdsql-9vqvls95",
-    ///             Period = 1,
-    ///         });
-    ///     }
+    ///         InstanceId = "tdsql-9vqvls95",
+    ///         Period = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/renewInstance:RenewInstance")]
-    public partial class RenewInstance : Pulumi.CustomResource
+    public partial class RenewInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class RenewInstanceArgs : Pulumi.ResourceArgs
+    public sealed class RenewInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public RenewInstanceArgs()
         {
         }
+        public static new RenewInstanceArgs Empty => new RenewInstanceArgs();
     }
 
-    public sealed class RenewInstanceState : Pulumi.ResourceArgs
+    public sealed class RenewInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public RenewInstanceState()
         {
         }
+        public static new RenewInstanceState Empty => new RenewInstanceState();
     }
 }

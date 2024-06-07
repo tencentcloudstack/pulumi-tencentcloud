@@ -17,111 +17,123 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var @internal = Tencentcloud.Security.GetGroups.Invoke(new()
     ///     {
-    ///         var @internal = Output.Create(Tencentcloud.Security.GetGroups.InvokeAsync(new Tencentcloud.Security.GetGroupsArgs
-    ///         {
-    ///             Name = "default",
-    ///         }));
-    ///         var vpc = Output.Create(Tencentcloud.Vpc.GetInstances.InvokeAsync(new Tencentcloud.Vpc.GetInstancesArgs
-    ///         {
-    ///             Name = "Default-VPC",
-    ///         }));
-    ///         var subnet = vpc.Apply(vpc =&gt; Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
-    ///         {
-    ///             VpcId = vpc.InstanceLists?[0]?.VpcId,
-    ///         })));
-    ///         var vpcId = subnet.Apply(subnet =&gt; subnet.InstanceLists?[0]?.VpcId);
-    ///         var subnetId = subnet.Apply(subnet =&gt; subnet.InstanceLists?[0]?.SubnetId);
-    ///         var sgId = @internal.Apply(@internal =&gt; @internal.SecurityGroups?[0]?.SecurityGroupId);
-    ///         var prepaidInstance = new Tencentcloud.Dcdb.DbInstance("prepaidInstance", new Tencentcloud.Dcdb.DbInstanceArgs
-    ///         {
-    ///             InstanceName = "test_dcdb_db_post_instance",
-    ///             Zones = 
-    ///             {
-    ///                 @var.Default_az,
-    ///             },
-    ///             Period = 1,
-    ///             ShardMemory = 2,
-    ///             ShardStorage = 10,
-    ///             ShardNodeCount = 2,
-    ///             ShardCount = 2,
-    ///             VpcId = vpcId,
-    ///             SubnetId = subnetId,
-    ///             DbVersionId = "8.0",
-    ///             ResourceTags = 
-    ///             {
-    ///                 new Tencentcloud.Dcdb.Inputs.DbInstanceResourceTagArgs
-    ///                 {
-    ///                     TagKey = "aaa",
-    ///                     TagValue = "bbb",
-    ///                 },
-    ///             },
-    ///             SecurityGroupIds = 
-    ///             {
-    ///                 sgId,
-    ///             },
-    ///         });
-    ///         var hourdbInstance = new Tencentcloud.Dcdb.HourdbInstance("hourdbInstance", new Tencentcloud.Dcdb.HourdbInstanceArgs
-    ///         {
-    ///             InstanceName = "test_dcdb_db_hourdb_instance",
-    ///             Zones = 
-    ///             {
-    ///                 @var.Default_az,
-    ///             },
-    ///             ShardMemory = 2,
-    ///             ShardStorage = 10,
-    ///             ShardNodeCount = 2,
-    ///             ShardCount = 2,
-    ///             VpcId = vpcId,
-    ///             SubnetId = subnetId,
-    ///             SecurityGroupId = sgId,
-    ///             DbVersionId = "8.0",
-    ///             ResourceTags = 
-    ///             {
-    ///                 new Tencentcloud.Dcdb.Inputs.HourdbInstanceResourceTagArgs
-    ///                 {
-    ///                     TagKey = "aaa",
-    ///                     TagValue = "bbb",
-    ///                 },
-    ///             },
-    ///         });
-    ///         var prepaidDcdbId = prepaidInstance.Id;
-    ///         var hourdbDcdbId = hourdbInstance.Id;
-    ///         // for postpaid instance
-    ///         var configHourdb = new Tencentcloud.Dcdb.EncryptAttributesConfig("configHourdb", new Tencentcloud.Dcdb.EncryptAttributesConfigArgs
-    ///         {
-    ///             InstanceId = hourdbDcdbId,
-    ///             EncryptEnabled = 1,
-    ///         });
-    ///         // for prepaid instance
-    ///         var configPrepaid = new Tencentcloud.Dcdb.EncryptAttributesConfig("configPrepaid", new Tencentcloud.Dcdb.EncryptAttributesConfigArgs
-    ///         {
-    ///             InstanceId = prepaidDcdbId,
-    ///             EncryptEnabled = 1,
-    ///         });
-    ///     }
+    ///         Name = "default",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = Tencentcloud.Vpc.GetInstances.Invoke(new()
+    ///     {
+    ///         Name = "Default-VPC",
+    ///     });
+    /// 
+    ///     var subnet = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+    ///     {
+    ///         VpcId = vpc.Apply(getInstancesResult =&gt; getInstancesResult.InstanceLists[0]?.VpcId),
+    ///     });
+    /// 
+    ///     var vpcId = subnet.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId);
+    /// 
+    ///     var subnetId = subnet.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.SubnetId);
+    /// 
+    ///     var sgId = @internal.Apply(@internal =&gt; @internal.Apply(getGroupsResult =&gt; getGroupsResult.SecurityGroups[0]?.SecurityGroupId));
+    /// 
+    ///     var prepaidInstance = new Tencentcloud.Dcdb.DbInstance("prepaidInstance", new()
+    ///     {
+    ///         InstanceName = "test_dcdb_db_post_instance",
+    ///         Zones = new[]
+    ///         {
+    ///             @var.Default_az,
+    ///         },
+    ///         Period = 1,
+    ///         ShardMemory = 2,
+    ///         ShardStorage = 10,
+    ///         ShardNodeCount = 2,
+    ///         ShardCount = 2,
+    ///         VpcId = vpcId,
+    ///         SubnetId = subnetId,
+    ///         DbVersionId = "8.0",
+    ///         ResourceTags = new[]
+    ///         {
+    ///             new Tencentcloud.Dcdb.Inputs.DbInstanceResourceTagArgs
+    ///             {
+    ///                 TagKey = "aaa",
+    ///                 TagValue = "bbb",
+    ///             },
+    ///         },
+    ///         SecurityGroupIds = new[]
+    ///         {
+    ///             sgId,
+    ///         },
+    ///     });
+    /// 
+    ///     var hourdbInstance = new Tencentcloud.Dcdb.HourdbInstance("hourdbInstance", new()
+    ///     {
+    ///         InstanceName = "test_dcdb_db_hourdb_instance",
+    ///         Zones = new[]
+    ///         {
+    ///             @var.Default_az,
+    ///         },
+    ///         ShardMemory = 2,
+    ///         ShardStorage = 10,
+    ///         ShardNodeCount = 2,
+    ///         ShardCount = 2,
+    ///         VpcId = vpcId,
+    ///         SubnetId = subnetId,
+    ///         SecurityGroupId = sgId,
+    ///         DbVersionId = "8.0",
+    ///         ResourceTags = new[]
+    ///         {
+    ///             new Tencentcloud.Dcdb.Inputs.HourdbInstanceResourceTagArgs
+    ///             {
+    ///                 TagKey = "aaa",
+    ///                 TagValue = "bbb",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var prepaidDcdbId = prepaidInstance.Id;
+    /// 
+    ///     var hourdbDcdbId = hourdbInstance.Id;
+    /// 
+    ///     // for postpaid instance
+    ///     var configHourdb = new Tencentcloud.Dcdb.EncryptAttributesConfig("configHourdb", new()
+    ///     {
+    ///         InstanceId = hourdbDcdbId,
+    ///         EncryptEnabled = 1,
+    ///     });
+    /// 
+    ///     // for prepaid instance
+    ///     var configPrepaid = new Tencentcloud.Dcdb.EncryptAttributesConfig("configPrepaid", new()
+    ///     {
+    ///         InstanceId = prepaidDcdbId,
+    ///         EncryptEnabled = 1,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dcdb encrypt_attributes_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dcdb/encryptAttributesConfig:EncryptAttributesConfig encrypt_attributes_config encrypt_attributes_config_id
+    /// $ pulumi import tencentcloud:Dcdb/encryptAttributesConfig:EncryptAttributesConfig encrypt_attributes_config encrypt_attributes_config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/encryptAttributesConfig:EncryptAttributesConfig")]
-    public partial class EncryptAttributesConfig : Pulumi.CustomResource
+    public partial class EncryptAttributesConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// whether to enable data encryption. Notice: it is not supported to turn it off after it is turned on. The optional values: 0-disable, 1-enable.
@@ -180,7 +192,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         }
     }
 
-    public sealed class EncryptAttributesConfigArgs : Pulumi.ResourceArgs
+    public sealed class EncryptAttributesConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// whether to enable data encryption. Notice: it is not supported to turn it off after it is turned on. The optional values: 0-disable, 1-enable.
@@ -197,9 +209,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public EncryptAttributesConfigArgs()
         {
         }
+        public static new EncryptAttributesConfigArgs Empty => new EncryptAttributesConfigArgs();
     }
 
-    public sealed class EncryptAttributesConfigState : Pulumi.ResourceArgs
+    public sealed class EncryptAttributesConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// whether to enable data encryption. Notice: it is not supported to turn it off after it is turned on. The optional values: 0-disable, 1-enable.
@@ -216,5 +229,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public EncryptAttributesConfigState()
         {
         }
+        public static new EncryptAttributesConfigState Empty => new EncryptAttributesConfigState();
     }
 }

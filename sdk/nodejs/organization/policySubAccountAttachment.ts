@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const policySubAccountAttachment = new tencentcloud.Organization.PolicySubAccountAttachment("policy_sub_account_attachment", {
+ * const policySubAccountAttachment = new tencentcloud.organization.PolicySubAccountAttachment("policySubAccountAttachment", {
  *     memberUin: 100028582828,
  *     orgSubAccountUin: 100028223737,
  *     policyId: 144256499,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * organization policy_sub_account_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Organization/policySubAccountAttachment:PolicySubAccountAttachment policy_sub_account_attachment policyId#memberUin#orgSubAccountUin
+ * $ pulumi import tencentcloud:Organization/policySubAccountAttachment:PolicySubAccountAttachment policy_sub_account_attachment policyId#memberUin#orgSubAccountUin
  * ```
  */
 export class PolicySubAccountAttachment extends pulumi.CustomResource {

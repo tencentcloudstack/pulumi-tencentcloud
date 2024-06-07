@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum log_export_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var logExportList = Tencentcloud.Rum.GetLogExportList.Invoke(new()
         ///     {
-        ///         var logExportList = Output.Create(Tencentcloud.Rum.GetLogExportList.InvokeAsync(new Tencentcloud.Rum.GetLogExportListArgs
-        ///         {
-        ///             ProjectId = 1,
-        ///         }));
-        ///     }
+        ///         ProjectId = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetLogExportListResult> InvokeAsync(GetLogExportListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetLogExportListResult>("tencentcloud:Rum/getLogExportList:getLogExportList", args ?? new GetLogExportListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogExportListResult>("tencentcloud:Rum/getLogExportList:getLogExportList", args ?? new GetLogExportListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum log_export_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var logExportList = Tencentcloud.Rum.GetLogExportList.Invoke(new()
         ///     {
-        ///         var logExportList = Output.Create(Tencentcloud.Rum.GetLogExportList.InvokeAsync(new Tencentcloud.Rum.GetLogExportListArgs
-        ///         {
-        ///             ProjectId = 1,
-        ///         }));
-        ///     }
+        ///         ProjectId = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetLogExportListResult> Invoke(GetLogExportListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetLogExportListResult>("tencentcloud:Rum/getLogExportList:getLogExportList", args ?? new GetLogExportListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetLogExportListResult>("tencentcloud:Rum/getLogExportList:getLogExportList", args ?? new GetLogExportListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetLogExportListArgs : Pulumi.InvokeArgs
+    public sealed class GetLogExportListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Project ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetLogExportListArgs()
         {
         }
+        public static new GetLogExportListArgs Empty => new GetLogExportListArgs();
     }
 
-    public sealed class GetLogExportListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetLogExportListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Project ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetLogExportListInvokeArgs()
         {
         }
+        public static new GetLogExportListInvokeArgs Empty => new GetLogExportListInvokeArgs();
     }
 
 

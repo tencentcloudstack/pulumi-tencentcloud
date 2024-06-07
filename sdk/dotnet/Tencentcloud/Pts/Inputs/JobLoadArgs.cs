@@ -11,24 +11,35 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class JobLoadArgs : Pulumi.ResourceArgs
+    public sealed class JobLoadArgs : global::Pulumi.ResourceArgs
     {
         [Input("geoRegionsLoadDistributions")]
         private InputList<Inputs.JobLoadGeoRegionsLoadDistributionArgs>? _geoRegionsLoadDistributions;
+
+        /// <summary>
+        /// Pressure distribution.
+        /// </summary>
         public InputList<Inputs.JobLoadGeoRegionsLoadDistributionArgs> GeoRegionsLoadDistributions
         {
             get => _geoRegionsLoadDistributions ?? (_geoRegionsLoadDistributions = new InputList<Inputs.JobLoadGeoRegionsLoadDistributionArgs>());
             set => _geoRegionsLoadDistributions = value;
         }
 
+        /// <summary>
+        /// Pressure allocation.
+        /// </summary>
         [Input("loadSpec")]
         public Input<Inputs.JobLoadLoadSpecArgs>? LoadSpec { get; set; }
 
+        /// <summary>
+        /// Source of stress.
+        /// </summary>
         [Input("vpcLoadDistribution")]
         public Input<Inputs.JobLoadVpcLoadDistributionArgs>? VpcLoadDistribution { get; set; }
 
         public JobLoadArgs()
         {
         }
+        public static new JobLoadArgs Empty => new JobLoadArgs();
     }
 }

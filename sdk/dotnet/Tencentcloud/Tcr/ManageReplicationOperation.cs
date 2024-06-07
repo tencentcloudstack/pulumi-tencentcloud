@@ -14,9 +14,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// Provides a resource to start a tcr instance replication operation
     /// 
     /// ## Example Usage
+    /// 
+    /// ### Sync source tcr instance to target instance
+    /// 
+    /// Synchronize an existing tcr instance to the destination instance. This operation is often used in the cross-multiple region scenario.
+    /// Assume you have had two TCR instances before this operation. This example shows how to sync a tcr instance from ap-guangzhou(gz) to ap-shanghai(sh).
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // tcr instance on ap-guangzhou
+    ///     var exampleGzInstance = new Tencentcloud.Tcr.Instance("exampleGzInstance", new()
+    ///     {
+    ///         InstanceType = "premium",
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleGzNamespace = new Tencentcloud.Tcr.Namespace("exampleGzNamespace", new()
+    ///     {
+    ///         InstanceId = exampleGzInstance.Id,
+    ///         IsPublic = true,
+    ///         IsAutoScan = true,
+    ///         IsPreventVul = true,
+    ///         Severity = "medium",
+    ///         CveWhitelistItems = new[]
+    ///         {
+    ///             new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+    ///             {
+    ///                 CveId = "cve-xxxxx",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     // tcr instance on ap-shanghai
+    ///     var exampleShInstance = new Tencentcloud.Tcr.Instance("exampleShInstance", new()
+    ///     {
+    ///         InstanceType = "premium",
+    ///         DeleteBucket = true,
+    ///     });
+    /// 
+    ///     var exampleShNamespace = new Tencentcloud.Tcr.Namespace("exampleShNamespace", new()
+    ///     {
+    ///         InstanceId = exampleShInstance.Id,
+    ///         IsPublic = true,
+    ///         IsAutoScan = true,
+    ///         IsPreventVul = true,
+    ///         Severity = "medium",
+    ///         CveWhitelistItems = new[]
+    ///         {
+    ///             new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+    ///             {
+    ///                 CveId = "cve-xxxxx",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/manageReplicationOperation:ManageReplicationOperation")]
-    public partial class ManageReplicationOperation : Pulumi.CustomResource
+    public partial class ManageReplicationOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// rule description.
@@ -99,7 +166,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         }
     }
 
-    public sealed class ManageReplicationOperationArgs : Pulumi.ResourceArgs
+    public sealed class ManageReplicationOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// rule description.
@@ -140,9 +207,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public ManageReplicationOperationArgs()
         {
         }
+        public static new ManageReplicationOperationArgs Empty => new ManageReplicationOperationArgs();
     }
 
-    public sealed class ManageReplicationOperationState : Pulumi.ResourceArgs
+    public sealed class ManageReplicationOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// rule description.
@@ -183,5 +251,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public ManageReplicationOperationState()
         {
         }
+        public static new ManageReplicationOperationState Empty => new ManageReplicationOperationState();
     }
 }

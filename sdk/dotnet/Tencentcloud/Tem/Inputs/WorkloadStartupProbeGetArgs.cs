@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
 {
 
-    public sealed class WorkloadStartupProbeGetArgs : Pulumi.ResourceArgs
+    public sealed class WorkloadStartupProbeGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// script.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
         public WorkloadStartupProbeGetArgs()
         {
         }
+        public static new WorkloadStartupProbeGetArgs Empty => new WorkloadStartupProbeGetArgs();
     }
 }

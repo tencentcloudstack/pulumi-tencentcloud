@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class InputInputGroupRtmpPullSettingsSourceAddressArgs : Pulumi.ResourceArgs
+    public sealed class InputInputGroupRtmpPullSettingsSourceAddressArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// StreamKey information of the RTMP source site.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public InputInputGroupRtmpPullSettingsSourceAddressArgs()
         {
         }
+        public static new InputInputGroupRtmpPullSettingsSourceAddressArgs Empty => new InputInputGroupRtmpPullSettingsSourceAddressArgs();
     }
 }

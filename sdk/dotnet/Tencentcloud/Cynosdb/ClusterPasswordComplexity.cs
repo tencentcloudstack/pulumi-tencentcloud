@@ -15,43 +15,44 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var clusterPasswordComplexity = new Tencentcloud.Cynosdb.ClusterPasswordComplexity("clusterPasswordComplexity", new()
     ///     {
-    ///         var clusterPasswordComplexity = new Tencentcloud.Cynosdb.ClusterPasswordComplexity("clusterPasswordComplexity", new Tencentcloud.Cynosdb.ClusterPasswordComplexityArgs
+    ///         ClusterId = "cynosdbmysql-cgd2gpwr",
+    ///         ValidatePasswordDictionaries = new[]
     ///         {
-    ///             ClusterId = "cynosdbmysql-cgd2gpwr",
-    ///             ValidatePasswordDictionaries = 
-    ///             {
-    ///                 "cccc",
-    ///                 "xxxx",
-    ///             },
-    ///             ValidatePasswordLength = 8,
-    ///             ValidatePasswordMixedCaseCount = 1,
-    ///             ValidatePasswordNumberCount = 1,
-    ///             ValidatePasswordPolicy = "STRONG",
-    ///             ValidatePasswordSpecialCharCount = 1,
-    ///         });
-    ///     }
+    ///             "cccc",
+    ///             "xxxx",
+    ///         },
+    ///         ValidatePasswordLength = 8,
+    ///         ValidatePasswordMixedCaseCount = 1,
+    ///         ValidatePasswordNumberCount = 1,
+    ///         ValidatePasswordPolicy = "STRONG",
+    ///         ValidatePasswordSpecialCharCount = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cynosdb cluster_password_complexity can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cynosdb/clusterPasswordComplexity:ClusterPasswordComplexity cluster_password_complexity cluster_password_complexity_id
+    /// $ pulumi import tencentcloud:Cynosdb/clusterPasswordComplexity:ClusterPasswordComplexity cluster_password_complexity cluster_password_complexity_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/clusterPasswordComplexity:ClusterPasswordComplexity")]
-    public partial class ClusterPasswordComplexity : Pulumi.CustomResource
+    public partial class ClusterPasswordComplexity : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster ID.
@@ -140,7 +141,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class ClusterPasswordComplexityArgs : Pulumi.ResourceArgs
+    public sealed class ClusterPasswordComplexityArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -193,9 +194,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ClusterPasswordComplexityArgs()
         {
         }
+        public static new ClusterPasswordComplexityArgs Empty => new ClusterPasswordComplexityArgs();
     }
 
-    public sealed class ClusterPasswordComplexityState : Pulumi.ResourceArgs
+    public sealed class ClusterPasswordComplexityState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -248,5 +250,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ClusterPasswordComplexityState()
         {
         }
+        public static new ClusterPasswordComplexityState Empty => new ClusterPasswordComplexityState();
     }
 }

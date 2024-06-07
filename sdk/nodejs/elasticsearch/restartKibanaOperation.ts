@@ -9,14 +9,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const restartKibanaOperation = new tencentcloud.Elasticsearch.RestartKibanaOperation("restart_kibana_operation", {
- *     instanceId: "es-xxxxxx",
- * });
+ * const restartKibanaOperation = new tencentcloud.elasticsearch.RestartKibanaOperation("restartKibanaOperation", {instanceId: "es-xxxxxx"});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RestartKibanaOperation extends pulumi.CustomResource {
     /**

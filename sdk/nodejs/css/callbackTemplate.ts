@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const callbackTemplate = new tencentcloud.Css.CallbackTemplate("callback_template", {
+ * const callbackTemplate = new tencentcloud.css.CallbackTemplate("callbackTemplate", {
  *     callbackKey: "adasda131312",
  *     description: "this is demo",
  *     pornCensorshipNotifyUrl: "http://www.yourdomain.com/api/notify?action=porn",
@@ -25,13 +26,14 @@ import * as utilities from "../utilities";
  *     templateName: "tf-test",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css callback_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/callbackTemplate:CallbackTemplate callback_template templateId
+ * $ pulumi import tencentcloud:Css/callbackTemplate:CallbackTemplate callback_template templateId
  * ```
  */
 export class CallbackTemplate extends pulumi.CustomResource {

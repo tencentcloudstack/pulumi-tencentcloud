@@ -15,47 +15,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var info = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
-    ///         var mfaFlag = new Tencentcloud.Cam.MfaFlag("mfaFlag", new Tencentcloud.Cam.MfaFlagArgs
-    ///         {
-    ///             OpUin = info.Apply(info =&gt; info.Uin),
-    ///             LoginFlag = new Tencentcloud.Cam.Inputs.MfaFlagLoginFlagArgs
-    ///             {
-    ///                 Phone = 0,
-    ///                 Stoken = 1,
-    ///                 Wechat = 0,
-    ///             },
-    ///             ActionFlag = new Tencentcloud.Cam.Inputs.MfaFlagActionFlagArgs
-    ///             {
-    ///                 Phone = 0,
-    ///                 Stoken = 1,
-    ///                 Wechat = 0,
-    ///             },
-    ///         });
-    ///     }
+    ///     var info = Tencentcloud.User.GetInfo.Invoke();
     /// 
-    /// }
+    ///     var mfaFlag = new Tencentcloud.Cam.MfaFlag("mfaFlag", new()
+    ///     {
+    ///         OpUin = info.Apply(getInfoResult =&gt; getInfoResult.Uin),
+    ///         LoginFlag = new Tencentcloud.Cam.Inputs.MfaFlagLoginFlagArgs
+    ///         {
+    ///             Phone = 0,
+    ///             Stoken = 1,
+    ///             Wechat = 0,
+    ///         },
+    ///         ActionFlag = new Tencentcloud.Cam.Inputs.MfaFlagActionFlagArgs
+    ///         {
+    ///             Phone = 0,
+    ///             Stoken = 1,
+    ///             Wechat = 0,
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cam mfa_flag can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/mfaFlag:MfaFlag mfa_flag mfa_flag_id
+    /// $ pulumi import tencentcloud:Cam/mfaFlag:MfaFlag mfa_flag mfa_flag_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/mfaFlag:MfaFlag")]
-    public partial class MfaFlag : Pulumi.CustomResource
+    public partial class MfaFlag : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Action flag setting.
@@ -120,7 +122,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class MfaFlagArgs : Pulumi.ResourceArgs
+    public sealed class MfaFlagArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action flag setting.
@@ -143,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public MfaFlagArgs()
         {
         }
+        public static new MfaFlagArgs Empty => new MfaFlagArgs();
     }
 
-    public sealed class MfaFlagState : Pulumi.ResourceArgs
+    public sealed class MfaFlagState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action flag setting.
@@ -168,5 +171,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public MfaFlagState()
         {
         }
+        public static new MfaFlagState Empty => new MfaFlagState();
     }
 }

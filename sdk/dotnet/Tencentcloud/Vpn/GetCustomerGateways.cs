@@ -16,17 +16,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// Use this data source to query detailed information of VPN customer gateways.
         /// </summary>
         public static Task<GetCustomerGatewaysResult> InvokeAsync(GetCustomerGatewaysArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCustomerGatewaysResult>("tencentcloud:Vpn/getCustomerGateways:getCustomerGateways", args ?? new GetCustomerGatewaysArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCustomerGatewaysResult>("tencentcloud:Vpn/getCustomerGateways:getCustomerGateways", args ?? new GetCustomerGatewaysArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of VPN customer gateways.
         /// </summary>
         public static Output<GetCustomerGatewaysResult> Invoke(GetCustomerGatewaysInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCustomerGatewaysResult>("tencentcloud:Vpn/getCustomerGateways:getCustomerGateways", args ?? new GetCustomerGatewaysInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCustomerGatewaysResult>("tencentcloud:Vpn/getCustomerGateways:getCustomerGateways", args ?? new GetCustomerGatewaysInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCustomerGatewaysArgs : Pulumi.InvokeArgs
+    public sealed class GetCustomerGatewaysArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the VPN customer gateway.
@@ -67,9 +67,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GetCustomerGatewaysArgs()
         {
         }
+        public static new GetCustomerGatewaysArgs Empty => new GetCustomerGatewaysArgs();
     }
 
-    public sealed class GetCustomerGatewaysInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCustomerGatewaysInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the VPN customer gateway.
@@ -110,6 +111,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GetCustomerGatewaysInvokeArgs()
         {
         }
+        public static new GetCustomerGatewaysInvokeArgs Empty => new GetCustomerGatewaysInvokeArgs();
     }
 
 

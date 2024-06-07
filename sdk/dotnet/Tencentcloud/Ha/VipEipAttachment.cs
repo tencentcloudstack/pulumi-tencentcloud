@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Ha.VipEipAttachment("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Ha.VipEipAttachment("foo", new Tencentcloud.Ha.VipEipAttachmentArgs
-    ///         {
-    ///             AddressIp = "1.1.1.1",
-    ///             HavipId = "havip-kjqwe4ba",
-    ///         });
-    ///     }
+    ///         AddressIp = "1.1.1.1",
+    ///         HavipId = "havip-kjqwe4ba",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// HA VIP EIP attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ha/vipEipAttachment:VipEipAttachment foo havip-kjqwe4ba#1.1.1.1
+    /// $ pulumi import tencentcloud:Ha/vipEipAttachment:VipEipAttachment foo havip-kjqwe4ba#1.1.1.1
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ha/vipEipAttachment:VipEipAttachment")]
-    public partial class VipEipAttachment : Pulumi.CustomResource
+    public partial class VipEipAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Public address of the EIP.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
         }
     }
 
-    public sealed class VipEipAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class VipEipAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Public address of the EIP.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
         public VipEipAttachmentArgs()
         {
         }
+        public static new VipEipAttachmentArgs Empty => new VipEipAttachmentArgs();
     }
 
-    public sealed class VipEipAttachmentState : Pulumi.ResourceArgs
+    public sealed class VipEipAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Public address of the EIP.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
         public VipEipAttachmentState()
         {
         }
+        public static new VipEipAttachmentState Empty => new VipEipAttachmentState();
     }
 }

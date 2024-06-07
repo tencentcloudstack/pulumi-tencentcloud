@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleInstance = new tencentcloud.tdmq.Instance("exampleInstance", {
  *     clusterName: "tf_example",
@@ -26,13 +27,14 @@ import * as utilities from "../utilities";
  *     remark: "remark.",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Tdmq instance can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tdmq/role:Role test tdmq_id
+ * $ pulumi import tencentcloud:Tdmq/role:Role test tdmq_id
  * ```
  */
 export class Role extends pulumi.CustomResource {

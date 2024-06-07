@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// <summary>
         /// Use this data source to query detailed information of lighthouse instance_blueprint
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceBlueprint = Tencentcloud.Lighthouse.GetInstanceBlueprint.Invoke(new()
         ///     {
-        ///         var instanceBlueprint = Output.Create(Tencentcloud.Lighthouse.GetInstanceBlueprint.InvokeAsync(new Tencentcloud.Lighthouse.GetInstanceBlueprintArgs
+        ///         InstanceIds = new[]
         ///         {
-        ///             InstanceIds = 
-        ///             {
-        ///                 "lhins-xxxxxx",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "lhins-xxxxxx",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceBlueprintResult> InvokeAsync(GetInstanceBlueprintArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceBlueprintResult>("tencentcloud:Lighthouse/getInstanceBlueprint:getInstanceBlueprint", args ?? new GetInstanceBlueprintArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceBlueprintResult>("tencentcloud:Lighthouse/getInstanceBlueprint:getInstanceBlueprint", args ?? new GetInstanceBlueprintArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of lighthouse instance_blueprint
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceBlueprint = Tencentcloud.Lighthouse.GetInstanceBlueprint.Invoke(new()
         ///     {
-        ///         var instanceBlueprint = Output.Create(Tencentcloud.Lighthouse.GetInstanceBlueprint.InvokeAsync(new Tencentcloud.Lighthouse.GetInstanceBlueprintArgs
+        ///         InstanceIds = new[]
         ///         {
-        ///             InstanceIds = 
-        ///             {
-        ///                 "lhins-xxxxxx",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "lhins-xxxxxx",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceBlueprintResult> Invoke(GetInstanceBlueprintInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceBlueprintResult>("tencentcloud:Lighthouse/getInstanceBlueprint:getInstanceBlueprint", args ?? new GetInstanceBlueprintInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceBlueprintResult>("tencentcloud:Lighthouse/getInstanceBlueprint:getInstanceBlueprint", args ?? new GetInstanceBlueprintInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceBlueprintArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceBlueprintArgs : global::Pulumi.InvokeArgs
     {
         [Input("instanceIds", required: true)]
         private List<string>? _instanceIds;
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetInstanceBlueprintArgs()
         {
         }
+        public static new GetInstanceBlueprintArgs Empty => new GetInstanceBlueprintArgs();
     }
 
-    public sealed class GetInstanceBlueprintInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceBlueprintInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("instanceIds", required: true)]
         private InputList<string>? _instanceIds;
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetInstanceBlueprintInvokeArgs()
         {
         }
+        public static new GetInstanceBlueprintInvokeArgs Empty => new GetInstanceBlueprintInvokeArgs();
     }
 
 

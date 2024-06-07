@@ -9,15 +9,16 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const task = new tencentcloud.dbbrain.SecurityAuditLogExportTask("task", {
- *     secAuditGroupId: `%s`,
- *     startTime: `%s`,
- *     endTime: `%s`,
+ *     secAuditGroupId: "%s",
+ *     startTime: "%s",
+ *     endTime: "%s",
  *     product: "mysql",
  *     dangerLevels: [
  *         0,
@@ -26,18 +27,16 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * const test = tencentcloud.Dbbrain.getSecurityAuditLogDownloadUrlsOutput({
- *     secAuditGroupId: `%s`,
+ *     secAuditGroupId: "%s",
  *     asyncRequestId: task.asyncRequestId,
  *     product: "mysql",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSecurityAuditLogDownloadUrls(args: GetSecurityAuditLogDownloadUrlsArgs, opts?: pulumi.InvokeOptions): Promise<GetSecurityAuditLogDownloadUrlsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dbbrain/getSecurityAuditLogDownloadUrls:getSecurityAuditLogDownloadUrls", {
         "asyncRequestId": args.asyncRequestId,
         "product": args.product,
@@ -85,9 +84,38 @@ export interface GetSecurityAuditLogDownloadUrlsResult {
      */
     readonly urls: string[];
 }
-
+/**
+ * Use this data source to query detailed information of dbbrain securityAuditLogDownloadUrls
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const task = new tencentcloud.dbbrain.SecurityAuditLogExportTask("task", {
+ *     secAuditGroupId: "%s",
+ *     startTime: "%s",
+ *     endTime: "%s",
+ *     product: "mysql",
+ *     dangerLevels: [
+ *         0,
+ *         1,
+ *         2,
+ *     ],
+ * });
+ * const test = tencentcloud.Dbbrain.getSecurityAuditLogDownloadUrlsOutput({
+ *     secAuditGroupId: "%s",
+ *     asyncRequestId: task.asyncRequestId,
+ *     product: "mysql",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSecurityAuditLogDownloadUrlsOutput(args: GetSecurityAuditLogDownloadUrlsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSecurityAuditLogDownloadUrlsResult> {
-    return pulumi.output(args).apply(a => getSecurityAuditLogDownloadUrls(a, opts))
+    return pulumi.output(args).apply((a: any) => getSecurityAuditLogDownloadUrls(a, opts))
 }
 
 /**

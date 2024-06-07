@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ciam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var userStore = new Tencentcloud.Ciam.UserStore("userStore", new()
     ///     {
-    ///         var userStore = new Tencentcloud.Ciam.UserStore("userStore", new Tencentcloud.Ciam.UserStoreArgs
-    ///         {
-    ///             UserPoolDesc = "for terraform test 123",
-    ///             UserPoolLogo = "https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png",
-    ///             UserPoolName = "tf_user_store",
-    ///         });
-    ///     }
+    ///         UserPoolDesc = "for terraform test 123",
+    ///         UserPoolLogo = "https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png",
+    ///         UserPoolName = "tf_user_store",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ciam user_store can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ciam/userStore:UserStore user_store userStoreId
+    /// $ pulumi import tencentcloud:Ciam/userStore:UserStore user_store userStoreId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ciam/userStore:UserStore")]
-    public partial class UserStore : Pulumi.CustomResource
+    public partial class UserStore : global::Pulumi.CustomResource
     {
         /// <summary>
         /// User Store Description.
@@ -108,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ciam
         }
     }
 
-    public sealed class UserStoreArgs : Pulumi.ResourceArgs
+    public sealed class UserStoreArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User Store Description.
@@ -131,9 +132,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ciam
         public UserStoreArgs()
         {
         }
+        public static new UserStoreArgs Empty => new UserStoreArgs();
     }
 
-    public sealed class UserStoreState : Pulumi.ResourceArgs
+    public sealed class UserStoreState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User Store Description.
@@ -156,5 +158,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ciam
         public UserStoreState()
         {
         }
+        public static new UserStoreState Empty => new UserStoreState();
     }
 }

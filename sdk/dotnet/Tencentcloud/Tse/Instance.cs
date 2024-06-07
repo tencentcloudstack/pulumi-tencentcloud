@@ -14,164 +14,172 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// Provides a resource to create a tse instance
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create zookeeper standard version
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zookeeperStandard = new Tencentcloud.Tse.Instance("zookeeperStandard", new()
     ///     {
-    ///         var zookeeperStandard = new Tencentcloud.Tse.Instance("zookeeperStandard", new Tencentcloud.Tse.InstanceArgs
+    ///         EngineName = "zookeeper-test",
+    ///         EngineNodeNum = 3,
+    ///         EngineProductVersion = "STANDARD",
+    ///         EngineRegion = "ap-guangzhou",
+    ///         EngineResourceSpec = "spec-qvj6k7t4q",
+    ///         EngineType = "zookeeper",
+    ///         EngineVersion = "3.5.9.4",
+    ///         SubnetId = "subnet-dwj7ipnc",
+    ///         Tags = 
     ///         {
-    ///             EngineName = "zookeeper-test",
-    ///             EngineNodeNum = 3,
-    ///             EngineProductVersion = "STANDARD",
-    ///             EngineRegion = "ap-guangzhou",
-    ///             EngineResourceSpec = "spec-qvj6k7t4q",
-    ///             EngineType = "zookeeper",
-    ///             EngineVersion = "3.5.9.4",
-    ///             SubnetId = "subnet-dwj7ipnc",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///             TradeType = 0,
-    ///             VpcId = "vpc-4owdpnwr",
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///         TradeType = 0,
+    ///         VpcId = "vpc-4owdpnwr",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create zookeeper professional version
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zookeeperProfessional = new Tencentcloud.Tse.Instance("zookeeperProfessional", new()
     ///     {
-    ///         var zookeeperProfessional = new Tencentcloud.Tse.Instance("zookeeperProfessional", new Tencentcloud.Tse.InstanceArgs
+    ///         EngineName = "zookeeper-test",
+    ///         EngineNodeNum = 3,
+    ///         EngineProductVersion = "PROFESSIONAL",
+    ///         EngineRegion = "ap-guangzhou",
+    ///         EngineRegionInfos = new[]
     ///         {
-    ///             EngineName = "zookeeper-test",
-    ///             EngineNodeNum = 3,
-    ///             EngineProductVersion = "PROFESSIONAL",
-    ///             EngineRegion = "ap-guangzhou",
-    ///             EngineRegionInfos = 
+    ///             new Tencentcloud.Tse.Inputs.InstanceEngineRegionInfoArgs
     ///             {
-    ///                 new Tencentcloud.Tse.Inputs.InstanceEngineRegionInfoArgs
+    ///                 EngineRegion = "ap-guangzhou",
+    ///                 Replica = 3,
+    ///                 VpcInfos = new[]
     ///                 {
-    ///                     EngineRegion = "ap-guangzhou",
-    ///                     Replica = 3,
-    ///                     VpcInfos = 
+    ///                     new Tencentcloud.Tse.Inputs.InstanceEngineRegionInfoVpcInfoArgs
     ///                     {
-    ///                         new Tencentcloud.Tse.Inputs.InstanceEngineRegionInfoVpcInfoArgs
-    ///                         {
-    ///                             SubnetId = "subnet-dwj7ipnc",
-    ///                             VpcId = "vpc-4owdpnwr",
-    ///                         },
-    ///                         new Tencentcloud.Tse.Inputs.InstanceEngineRegionInfoVpcInfoArgs
-    ///                         {
-    ///                             SubnetId = "subnet-403mgks4",
-    ///                             VpcId = "vpc-b1puef4z",
-    ///                         },
+    ///                         SubnetId = "subnet-dwj7ipnc",
+    ///                         VpcId = "vpc-4owdpnwr",
+    ///                     },
+    ///                     new Tencentcloud.Tse.Inputs.InstanceEngineRegionInfoVpcInfoArgs
+    ///                     {
+    ///                         SubnetId = "subnet-403mgks4",
+    ///                         VpcId = "vpc-b1puef4z",
     ///                     },
     ///                 },
     ///             },
-    ///             EngineResourceSpec = "spec-qvj6k7t4q",
-    ///             EngineType = "zookeeper",
-    ///             EngineVersion = "3.5.9.4",
-    ///             SubnetId = "subnet-dwj7ipnc",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///             TradeType = 0,
-    ///             VpcId = "vpc-4owdpnwr",
-    ///         });
-    ///     }
+    ///         },
+    ///         EngineResourceSpec = "spec-qvj6k7t4q",
+    ///         EngineType = "zookeeper",
+    ///         EngineVersion = "3.5.9.4",
+    ///         SubnetId = "subnet-dwj7ipnc",
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///         TradeType = 0,
+    ///         VpcId = "vpc-4owdpnwr",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create nacos standard version
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var nacos = new Tencentcloud.Tse.Instance("nacos", new()
     ///     {
-    ///         var nacos = new Tencentcloud.Tse.Instance("nacos", new Tencentcloud.Tse.InstanceArgs
+    ///         EnableClientInternetAccess = false,
+    ///         EngineName = "test",
+    ///         EngineNodeNum = 3,
+    ///         EngineProductVersion = "STANDARD",
+    ///         EngineRegion = "ap-guangzhou",
+    ///         EngineResourceSpec = "spec-1160a35a",
+    ///         EngineType = "nacos",
+    ///         EngineVersion = "2.0.3.4",
+    ///         SubnetId = "subnet-5vpegquy",
+    ///         Tags = 
     ///         {
-    ///             EnableClientInternetAccess = false,
-    ///             EngineName = "test",
-    ///             EngineNodeNum = 3,
-    ///             EngineProductVersion = "STANDARD",
-    ///             EngineRegion = "ap-guangzhou",
-    ///             EngineResourceSpec = "spec-1160a35a",
-    ///             EngineType = "nacos",
-    ///             EngineVersion = "2.0.3.4",
-    ///             SubnetId = "subnet-5vpegquy",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///             TradeType = 0,
-    ///             VpcId = "vpc-99xmasf9",
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///         TradeType = 0,
+    ///         VpcId = "vpc-99xmasf9",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create polaris base version
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var polaris = new Tencentcloud.Tse.Instance("polaris", new()
     ///     {
-    ///         var polaris = new Tencentcloud.Tse.Instance("polaris", new Tencentcloud.Tse.InstanceArgs
+    ///         EnableClientInternetAccess = false,
+    ///         EngineName = "test",
+    ///         EngineNodeNum = 2,
+    ///         EngineProductVersion = "BASE",
+    ///         EngineRegion = "ap-guangzhou",
+    ///         EngineResourceSpec = "spec-c160bas1",
+    ///         EngineType = "polaris",
+    ///         EngineVersion = "1.16.0.1",
+    ///         SubnetId = "subnet-5vpegquy",
+    ///         Tags = 
     ///         {
-    ///             EnableClientInternetAccess = false,
-    ///             EngineName = "test",
-    ///             EngineNodeNum = 2,
-    ///             EngineProductVersion = "BASE",
-    ///             EngineRegion = "ap-guangzhou",
-    ///             EngineResourceSpec = "spec-c160bas1",
-    ///             EngineType = "polaris",
-    ///             EngineVersion = "1.16.0.1",
-    ///             SubnetId = "subnet-5vpegquy",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///             TradeType = 0,
-    ///             VpcId = "vpc-99xmasf9",
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///         TradeType = 0,
+    ///         VpcId = "vpc-99xmasf9",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tse instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tse/instance:Instance instance instance_id
+    /// $ pulumi import tencentcloud:Tse/instance:Instance instance instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tse/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Client public network access, `true`: on, `false`: off, default: false.
@@ -308,7 +316,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Client public network access, `true`: on, `false`: off, default: false.
@@ -415,9 +423,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Client public network access, `true`: on, `false`: off, default: false.
@@ -524,5 +533,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

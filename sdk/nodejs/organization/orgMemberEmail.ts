@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orgMemberEmail = new tencentcloud.Organization.OrgMemberEmail("org_member_email", {
+ * const orgMemberEmail = new tencentcloud.organization.OrgMemberEmail("orgMemberEmail", {
  *     countryCode: "86",
  *     email: "iac-example@qq.com",
  *     memberUin: 100033704327,
  *     phone: "12345678901",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * organization org_member_email can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Organization/orgMemberEmail:OrgMemberEmail org_member_email org_member_email_id
+ * $ pulumi import tencentcloud:Organization/orgMemberEmail:OrgMemberEmail org_member_email org_member_email_id
  * ```
  */
 export class OrgMemberEmail extends pulumi.CustomResource {

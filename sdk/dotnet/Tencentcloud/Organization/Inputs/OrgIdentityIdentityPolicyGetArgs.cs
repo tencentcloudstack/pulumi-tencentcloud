@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization.Inputs
 {
 
-    public sealed class OrgIdentityIdentityPolicyGetArgs : Pulumi.ResourceArgs
+    public sealed class OrgIdentityIdentityPolicyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Customize policy content and follow CAM policy syntax. Valid and required when PolicyType is the 1-custom policy.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization.Inputs
         public OrgIdentityIdentityPolicyGetArgs()
         {
         }
+        public static new OrgIdentityIdentityPolicyGetArgs Empty => new OrgIdentityIdentityPolicyGetArgs();
     }
 }

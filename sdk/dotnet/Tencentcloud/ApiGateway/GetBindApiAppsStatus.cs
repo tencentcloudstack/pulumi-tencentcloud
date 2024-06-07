@@ -15,96 +15,90 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// <summary>
         /// Use this data source to query detailed information of apiGateway bind_api_apps_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.ApiGateway.GetBindApiAppsStatus.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.ApiGateway.GetBindApiAppsStatus.InvokeAsync(new Tencentcloud.ApiGateway.GetBindApiAppsStatusArgs
+        ///         ApiIds = new[]
         ///         {
-        ///             ApiIds = 
+        ///             "api-0cvmf4x4",
+        ///             "api-jvqlzolk",
+        ///         },
+        ///         Filters = new[]
+        ///         {
+        ///             new Tencentcloud.ApiGateway.Inputs.GetBindApiAppsStatusFilterInputArgs
         ///             {
-        ///                 "api-0cvmf4x4",
-        ///                 "api-jvqlzolk",
-        ///             },
-        ///             Filters = 
-        ///             {
-        ///                 new Tencentcloud.ApiGateway.Inputs.GetBindApiAppsStatusFilterArgs
+        ///                 Name = "ApiAppId",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "ApiAppId",
-        ///                     Values = 
-        ///                     {
-        ///                         "app-krljp4wn",
-        ///                     },
+        ///                     "app-krljp4wn",
         ///                 },
         ///             },
-        ///             ServiceId = "service-nxz6yync",
-        ///         }));
-        ///     }
+        ///         },
+        ///         ServiceId = "service-nxz6yync",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBindApiAppsStatusResult> InvokeAsync(GetBindApiAppsStatusArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBindApiAppsStatusResult>("tencentcloud:ApiGateway/getBindApiAppsStatus:getBindApiAppsStatus", args ?? new GetBindApiAppsStatusArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBindApiAppsStatusResult>("tencentcloud:ApiGateway/getBindApiAppsStatus:getBindApiAppsStatus", args ?? new GetBindApiAppsStatusArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of apiGateway bind_api_apps_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.ApiGateway.GetBindApiAppsStatus.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.ApiGateway.GetBindApiAppsStatus.InvokeAsync(new Tencentcloud.ApiGateway.GetBindApiAppsStatusArgs
+        ///         ApiIds = new[]
         ///         {
-        ///             ApiIds = 
+        ///             "api-0cvmf4x4",
+        ///             "api-jvqlzolk",
+        ///         },
+        ///         Filters = new[]
+        ///         {
+        ///             new Tencentcloud.ApiGateway.Inputs.GetBindApiAppsStatusFilterInputArgs
         ///             {
-        ///                 "api-0cvmf4x4",
-        ///                 "api-jvqlzolk",
-        ///             },
-        ///             Filters = 
-        ///             {
-        ///                 new Tencentcloud.ApiGateway.Inputs.GetBindApiAppsStatusFilterArgs
+        ///                 Name = "ApiAppId",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "ApiAppId",
-        ///                     Values = 
-        ///                     {
-        ///                         "app-krljp4wn",
-        ///                     },
+        ///                     "app-krljp4wn",
         ///                 },
         ///             },
-        ///             ServiceId = "service-nxz6yync",
-        ///         }));
-        ///     }
+        ///         },
+        ///         ServiceId = "service-nxz6yync",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBindApiAppsStatusResult> Invoke(GetBindApiAppsStatusInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBindApiAppsStatusResult>("tencentcloud:ApiGateway/getBindApiAppsStatus:getBindApiAppsStatus", args ?? new GetBindApiAppsStatusInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBindApiAppsStatusResult>("tencentcloud:ApiGateway/getBindApiAppsStatus:getBindApiAppsStatus", args ?? new GetBindApiAppsStatusInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBindApiAppsStatusArgs : Pulumi.InvokeArgs
+    public sealed class GetBindApiAppsStatusArgs : global::Pulumi.InvokeArgs
     {
         [Input("apiIds", required: true)]
         private List<string>? _apiIds;
@@ -145,9 +139,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetBindApiAppsStatusArgs()
         {
         }
+        public static new GetBindApiAppsStatusArgs Empty => new GetBindApiAppsStatusArgs();
     }
 
-    public sealed class GetBindApiAppsStatusInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBindApiAppsStatusInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("apiIds", required: true)]
         private InputList<string>? _apiIds;
@@ -188,6 +183,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetBindApiAppsStatusInvokeArgs()
         {
         }
+        public static new GetBindApiAppsStatusInvokeArgs Empty => new GetBindApiAppsStatusInvokeArgs();
     }
 
 

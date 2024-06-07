@@ -7,39 +7,45 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cynosdb isolateInstance
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewAccount(ctx, "account", &Cynosdb.AccountArgs{
-// 			AccountName:        pulumi.String("terraform_test"),
-// 			AccountPassword:    pulumi.String("Password@1234"),
-// 			ClusterId:          pulumi.String("cynosdbmysql-bws8h88b"),
-// 			Description:        pulumi.String("testx"),
-// 			Host:               pulumi.String("%"),
-// 			MaxUserConnections: pulumi.Int(2),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewAccount(ctx, "account", &Cynosdb.AccountArgs{
+//				AccountName:        pulumi.String("terraform_test"),
+//				AccountPassword:    pulumi.String("Password@1234"),
+//				ClusterId:          pulumi.String("cynosdbmysql-bws8h88b"),
+//				Description:        pulumi.String("testx"),
+//				Host:               pulumi.String("%"),
+//				MaxUserConnections: pulumi.Int(2),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type IsolateInstance struct {
 	pulumi.CustomResourceState
 
@@ -67,7 +73,7 @@ func NewIsolateInstance(ctx *pulumi.Context,
 	if args.Operate == nil {
 		return nil, errors.New("invalid value for required argument 'Operate'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource IsolateInstance
 	err := ctx.RegisterResource("tencentcloud:Cynosdb/isolateInstance:IsolateInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -156,7 +162,7 @@ func (i *IsolateInstance) ToIsolateInstanceOutputWithContext(ctx context.Context
 // IsolateInstanceArrayInput is an input type that accepts IsolateInstanceArray and IsolateInstanceArrayOutput values.
 // You can construct a concrete instance of `IsolateInstanceArrayInput` via:
 //
-//          IsolateInstanceArray{ IsolateInstanceArgs{...} }
+//	IsolateInstanceArray{ IsolateInstanceArgs{...} }
 type IsolateInstanceArrayInput interface {
 	pulumi.Input
 
@@ -181,7 +187,7 @@ func (i IsolateInstanceArray) ToIsolateInstanceArrayOutputWithContext(ctx contex
 // IsolateInstanceMapInput is an input type that accepts IsolateInstanceMap and IsolateInstanceMapOutput values.
 // You can construct a concrete instance of `IsolateInstanceMapInput` via:
 //
-//          IsolateInstanceMap{ "key": IsolateInstanceArgs{...} }
+//	IsolateInstanceMap{ "key": IsolateInstanceArgs{...} }
 type IsolateInstanceMapInput interface {
 	pulumi.Input
 

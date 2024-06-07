@@ -15,40 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new()
     ///     {
-    ///         var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
-    ///         {
-    ///             ClusterName = "tf_example",
-    ///             Remark = "remark.",
-    ///         });
-    ///         var exampleRocketmqRole = new Tencentcloud.Tdmq.RocketmqRole("exampleRocketmqRole", new Tencentcloud.Tdmq.RocketmqRoleArgs
-    ///         {
-    ///             ClusterId = exampleRocketmqCluster.ClusterId,
-    ///             RoleName = "tf_example",
-    ///             Remark = "remark.",
-    ///         });
-    ///     }
+    ///         ClusterName = "tf_example",
+    ///         Remark = "remark.",
+    ///     });
     /// 
-    /// }
+    ///     var exampleRocketmqRole = new Tencentcloud.Tdmq.RocketmqRole("exampleRocketmqRole", new()
+    ///     {
+    ///         ClusterId = exampleRocketmqCluster.ClusterId,
+    ///         RoleName = "tf_example",
+    ///         Remark = "remark.",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tdmqRocketmq role can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tdmq/rocketmqRole:RocketmqRole role role_id
+    /// $ pulumi import tencentcloud:Tdmq/rocketmqRole:RocketmqRole role role_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/rocketmqRole:RocketmqRole")]
-    public partial class RocketmqRole : Pulumi.CustomResource
+    public partial class RocketmqRole : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster ID (required).
@@ -131,7 +133,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class RocketmqRoleArgs : Pulumi.ResourceArgs
+    public sealed class RocketmqRoleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID (required).
@@ -154,9 +156,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RocketmqRoleArgs()
         {
         }
+        public static new RocketmqRoleArgs Empty => new RocketmqRoleArgs();
     }
 
-    public sealed class RocketmqRoleState : Pulumi.ResourceArgs
+    public sealed class RocketmqRoleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID (required).
@@ -197,5 +200,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RocketmqRoleState()
         {
         }
+        public static new RocketmqRoleState Empty => new RocketmqRoleState();
     }
 }

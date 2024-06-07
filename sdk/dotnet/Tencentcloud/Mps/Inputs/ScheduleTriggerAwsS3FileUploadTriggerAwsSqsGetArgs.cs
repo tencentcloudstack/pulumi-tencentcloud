@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleTriggerAwsS3FileUploadTriggerAwsSqsGetArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleTriggerAwsS3FileUploadTriggerAwsSqsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The key ID required to read from/write to the SQS queue.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleTriggerAwsS3FileUploadTriggerAwsSqsGetArgs()
         {
         }
+        public static new ScheduleTriggerAwsS3FileUploadTriggerAwsSqsGetArgs Empty => new ScheduleTriggerAwsS3FileUploadTriggerAwsSqsGetArgs();
     }
 }

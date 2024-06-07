@@ -15,54 +15,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var transcodeTemplate = new Tencentcloud.Mps.TranscodeTemplate("transcodeTemplate", new()
     ///     {
-    ///         var transcodeTemplate = new Tencentcloud.Mps.TranscodeTemplate("transcodeTemplate", new Tencentcloud.Mps.TranscodeTemplateArgs
+    ///         AudioTemplate = new Tencentcloud.Mps.Inputs.TranscodeTemplateAudioTemplateArgs
     ///         {
-    ///             AudioTemplate = new Tencentcloud.Mps.Inputs.TranscodeTemplateAudioTemplateArgs
-    ///             {
-    ///                 AudioChannel = 2,
-    ///                 Bitrate = 27,
-    ///                 Codec = "libfdk_aac",
-    ///                 SampleRate = 32000,
-    ///             },
-    ///             Container = "mp4",
-    ///             RemoveAudio = 0,
-    ///             RemoveVideo = 0,
-    ///             VideoTemplate = new Tencentcloud.Mps.Inputs.TranscodeTemplateVideoTemplateArgs
-    ///             {
-    ///                 Bitrate = 130,
-    ///                 Codec = "libx264",
-    ///                 FillType = "black",
-    ///                 Fps = 20,
-    ///                 Gop = 0,
-    ///                 Height = 4096,
-    ///                 ResolutionAdaptive = "close",
-    ///                 Vcrf = 0,
-    ///                 Width = 128,
-    ///             },
-    ///         });
-    ///     }
+    ///             AudioChannel = 2,
+    ///             Bitrate = 27,
+    ///             Codec = "libfdk_aac",
+    ///             SampleRate = 32000,
+    ///         },
+    ///         Container = "mp4",
+    ///         RemoveAudio = 0,
+    ///         RemoveVideo = 0,
+    ///         VideoTemplate = new Tencentcloud.Mps.Inputs.TranscodeTemplateVideoTemplateArgs
+    ///         {
+    ///             Bitrate = 130,
+    ///             Codec = "libx264",
+    ///             FillType = "black",
+    ///             Fps = 20,
+    ///             Gop = 0,
+    ///             Height = 4096,
+    ///             ResolutionAdaptive = "close",
+    ///             Vcrf = 0,
+    ///             Width = 128,
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mps transcode_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/transcodeTemplate:TranscodeTemplate transcode_template transcode_template_id
+    /// $ pulumi import tencentcloud:Mps/transcodeTemplate:TranscodeTemplate transcode_template transcode_template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/transcodeTemplate:TranscodeTemplate")]
-    public partial class TranscodeTemplate : Pulumi.CustomResource
+    public partial class TranscodeTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Audio stream configuration parameters, when RemoveAudio is 0, this field is required.
@@ -163,7 +164,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class TranscodeTemplateArgs : Pulumi.ResourceArgs
+    public sealed class TranscodeTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Audio stream configuration parameters, when RemoveAudio is 0, this field is required.
@@ -222,9 +223,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public TranscodeTemplateArgs()
         {
         }
+        public static new TranscodeTemplateArgs Empty => new TranscodeTemplateArgs();
     }
 
-    public sealed class TranscodeTemplateState : Pulumi.ResourceArgs
+    public sealed class TranscodeTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Audio stream configuration parameters, when RemoveAudio is 0, this field is required.
@@ -283,5 +285,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public TranscodeTemplateState()
         {
         }
+        public static new TranscodeTemplateState Empty => new TranscodeTemplateState();
     }
 }

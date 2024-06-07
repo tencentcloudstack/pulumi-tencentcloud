@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// <summary>
         /// Use this data source to query detailed information of cvm import_image_os
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var importImageOs = Output.Create(Tencentcloud.Cvm.GetImportImageOs.InvokeAsync());
-        ///     }
+        ///     var importImageOs = Tencentcloud.Cvm.GetImportImageOs.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetImportImageOsResult> InvokeAsync(GetImportImageOsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetImportImageOsResult>("tencentcloud:Cvm/getImportImageOs:getImportImageOs", args ?? new GetImportImageOsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetImportImageOsResult>("tencentcloud:Cvm/getImportImageOs:getImportImageOs", args ?? new GetImportImageOsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cvm import_image_os
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var importImageOs = Output.Create(Tencentcloud.Cvm.GetImportImageOs.InvokeAsync());
-        ///     }
+        ///     var importImageOs = Tencentcloud.Cvm.GetImportImageOs.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetImportImageOsResult> Invoke(GetImportImageOsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetImportImageOsResult>("tencentcloud:Cvm/getImportImageOs:getImportImageOs", args ?? new GetImportImageOsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetImportImageOsResult>("tencentcloud:Cvm/getImportImageOs:getImportImageOs", args ?? new GetImportImageOsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetImportImageOsArgs : Pulumi.InvokeArgs
+    public sealed class GetImportImageOsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public GetImportImageOsArgs()
         {
         }
+        public static new GetImportImageOsArgs Empty => new GetImportImageOsArgs();
     }
 
-    public sealed class GetImportImageOsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetImportImageOsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public GetImportImageOsInvokeArgs()
         {
         }
+        public static new GetImportImageOsInvokeArgs Empty => new GetImportImageOsInvokeArgs();
     }
 
 

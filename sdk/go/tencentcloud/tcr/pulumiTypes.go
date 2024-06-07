@@ -8,13 +8,17 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type ImmutableTagRuleRule struct {
 	// disable rule.
 	Disabled *bool `pulumi:"disabled"`
 	// ID of the resource.
-	Id     *int    `pulumi:"id"`
+	Id *int `pulumi:"id"`
+	// namespace name.
 	NsName *string `pulumi:"nsName"`
 	// repository decoration type:repoMatches or repoExcludes.
 	RepositoryDecoration string `pulumi:"repositoryDecoration"`
@@ -29,7 +33,7 @@ type ImmutableTagRuleRule struct {
 // ImmutableTagRuleRuleInput is an input type that accepts ImmutableTagRuleRuleArgs and ImmutableTagRuleRuleOutput values.
 // You can construct a concrete instance of `ImmutableTagRuleRuleInput` via:
 //
-//          ImmutableTagRuleRuleArgs{...}
+//	ImmutableTagRuleRuleArgs{...}
 type ImmutableTagRuleRuleInput interface {
 	pulumi.Input
 
@@ -41,7 +45,8 @@ type ImmutableTagRuleRuleArgs struct {
 	// disable rule.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
 	// ID of the resource.
-	Id     pulumi.IntPtrInput    `pulumi:"id"`
+	Id pulumi.IntPtrInput `pulumi:"id"`
+	// namespace name.
 	NsName pulumi.StringPtrInput `pulumi:"nsName"`
 	// repository decoration type:repoMatches or repoExcludes.
 	RepositoryDecoration pulumi.StringInput `pulumi:"repositoryDecoration"`
@@ -76,11 +81,11 @@ func (i ImmutableTagRuleRuleArgs) ToImmutableTagRuleRulePtrOutputWithContext(ctx
 // ImmutableTagRuleRulePtrInput is an input type that accepts ImmutableTagRuleRuleArgs, ImmutableTagRuleRulePtr and ImmutableTagRuleRulePtrOutput values.
 // You can construct a concrete instance of `ImmutableTagRuleRulePtrInput` via:
 //
-//          ImmutableTagRuleRuleArgs{...}
+//	        ImmutableTagRuleRuleArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ImmutableTagRuleRulePtrInput interface {
 	pulumi.Input
 
@@ -140,6 +145,7 @@ func (o ImmutableTagRuleRuleOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ImmutableTagRuleRule) *int { return v.Id }).(pulumi.IntPtrOutput)
 }
 
+// namespace name.
 func (o ImmutableTagRuleRuleOutput) NsName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ImmutableTagRuleRule) *string { return v.NsName }).(pulumi.StringPtrOutput)
 }
@@ -208,6 +214,7 @@ func (o ImmutableTagRuleRulePtrOutput) Id() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// namespace name.
 func (o ImmutableTagRuleRulePtrOutput) NsName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ImmutableTagRuleRule) *string {
 		if v == nil {
@@ -262,6 +269,8 @@ type InstanceReplication struct {
 	Id *string `pulumi:"id"`
 	// Replication region ID, check the example at the top of page to find out id of region.
 	RegionId *int `pulumi:"regionId"`
+	// Replication region name.
+	RegionName *string `pulumi:"regionName"`
 	// Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.
 	SynTag *bool `pulumi:"synTag"`
 }
@@ -269,7 +278,7 @@ type InstanceReplication struct {
 // InstanceReplicationInput is an input type that accepts InstanceReplicationArgs and InstanceReplicationOutput values.
 // You can construct a concrete instance of `InstanceReplicationInput` via:
 //
-//          InstanceReplicationArgs{...}
+//	InstanceReplicationArgs{...}
 type InstanceReplicationInput interface {
 	pulumi.Input
 
@@ -282,6 +291,8 @@ type InstanceReplicationArgs struct {
 	Id pulumi.StringPtrInput `pulumi:"id"`
 	// Replication region ID, check the example at the top of page to find out id of region.
 	RegionId pulumi.IntPtrInput `pulumi:"regionId"`
+	// Replication region name.
+	RegionName pulumi.StringPtrInput `pulumi:"regionName"`
 	// Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.
 	SynTag pulumi.BoolPtrInput `pulumi:"synTag"`
 }
@@ -301,7 +312,7 @@ func (i InstanceReplicationArgs) ToInstanceReplicationOutputWithContext(ctx cont
 // InstanceReplicationArrayInput is an input type that accepts InstanceReplicationArray and InstanceReplicationArrayOutput values.
 // You can construct a concrete instance of `InstanceReplicationArrayInput` via:
 //
-//          InstanceReplicationArray{ InstanceReplicationArgs{...} }
+//	InstanceReplicationArray{ InstanceReplicationArgs{...} }
 type InstanceReplicationArrayInput interface {
 	pulumi.Input
 
@@ -347,6 +358,11 @@ func (o InstanceReplicationOutput) RegionId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v InstanceReplication) *int { return v.RegionId }).(pulumi.IntPtrOutput)
 }
 
+// Replication region name.
+func (o InstanceReplicationOutput) RegionName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstanceReplication) *string { return v.RegionName }).(pulumi.StringPtrOutput)
+}
+
 // Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.
 func (o InstanceReplicationOutput) SynTag() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v InstanceReplication) *bool { return v.SynTag }).(pulumi.BoolPtrOutput)
@@ -377,14 +393,16 @@ type InstanceSecurityPolicy struct {
 	CidrBlock *string `pulumi:"cidrBlock"`
 	// Remarks of policy.
 	Description *string `pulumi:"description"`
-	Index       *int    `pulumi:"index"`
-	Version     *string `pulumi:"version"`
+	// Index of policy.
+	Index *int `pulumi:"index"`
+	// Version of policy.
+	Version *string `pulumi:"version"`
 }
 
 // InstanceSecurityPolicyInput is an input type that accepts InstanceSecurityPolicyArgs and InstanceSecurityPolicyOutput values.
 // You can construct a concrete instance of `InstanceSecurityPolicyInput` via:
 //
-//          InstanceSecurityPolicyArgs{...}
+//	InstanceSecurityPolicyArgs{...}
 type InstanceSecurityPolicyInput interface {
 	pulumi.Input
 
@@ -397,8 +415,10 @@ type InstanceSecurityPolicyArgs struct {
 	CidrBlock pulumi.StringPtrInput `pulumi:"cidrBlock"`
 	// Remarks of policy.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	Index       pulumi.IntPtrInput    `pulumi:"index"`
-	Version     pulumi.StringPtrInput `pulumi:"version"`
+	// Index of policy.
+	Index pulumi.IntPtrInput `pulumi:"index"`
+	// Version of policy.
+	Version pulumi.StringPtrInput `pulumi:"version"`
 }
 
 func (InstanceSecurityPolicyArgs) ElementType() reflect.Type {
@@ -416,7 +436,7 @@ func (i InstanceSecurityPolicyArgs) ToInstanceSecurityPolicyOutputWithContext(ct
 // InstanceSecurityPolicyArrayInput is an input type that accepts InstanceSecurityPolicyArray and InstanceSecurityPolicyArrayOutput values.
 // You can construct a concrete instance of `InstanceSecurityPolicyArrayInput` via:
 //
-//          InstanceSecurityPolicyArray{ InstanceSecurityPolicyArgs{...} }
+//	InstanceSecurityPolicyArray{ InstanceSecurityPolicyArgs{...} }
 type InstanceSecurityPolicyArrayInput interface {
 	pulumi.Input
 
@@ -462,10 +482,12 @@ func (o InstanceSecurityPolicyOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceSecurityPolicy) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Index of policy.
 func (o InstanceSecurityPolicyOutput) Index() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v InstanceSecurityPolicy) *int { return v.Index }).(pulumi.IntPtrOutput)
 }
 
+// Version of policy.
 func (o InstanceSecurityPolicyOutput) Version() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceSecurityPolicy) *string { return v.Version }).(pulumi.StringPtrOutput)
 }
@@ -502,7 +524,7 @@ type ManageReplicationOperationPeerReplicationOption struct {
 // ManageReplicationOperationPeerReplicationOptionInput is an input type that accepts ManageReplicationOperationPeerReplicationOptionArgs and ManageReplicationOperationPeerReplicationOptionOutput values.
 // You can construct a concrete instance of `ManageReplicationOperationPeerReplicationOptionInput` via:
 //
-//          ManageReplicationOperationPeerReplicationOptionArgs{...}
+//	ManageReplicationOperationPeerReplicationOptionArgs{...}
 type ManageReplicationOperationPeerReplicationOptionInput interface {
 	pulumi.Input
 
@@ -542,11 +564,11 @@ func (i ManageReplicationOperationPeerReplicationOptionArgs) ToManageReplication
 // ManageReplicationOperationPeerReplicationOptionPtrInput is an input type that accepts ManageReplicationOperationPeerReplicationOptionArgs, ManageReplicationOperationPeerReplicationOptionPtr and ManageReplicationOperationPeerReplicationOptionPtrOutput values.
 // You can construct a concrete instance of `ManageReplicationOperationPeerReplicationOptionPtrInput` via:
 //
-//          ManageReplicationOperationPeerReplicationOptionArgs{...}
+//	        ManageReplicationOperationPeerReplicationOptionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ManageReplicationOperationPeerReplicationOptionPtrInput interface {
 	pulumi.Input
 
@@ -679,7 +701,7 @@ type ManageReplicationOperationRule struct {
 // ManageReplicationOperationRuleInput is an input type that accepts ManageReplicationOperationRuleArgs and ManageReplicationOperationRuleOutput values.
 // You can construct a concrete instance of `ManageReplicationOperationRuleInput` via:
 //
-//          ManageReplicationOperationRuleArgs{...}
+//	ManageReplicationOperationRuleArgs{...}
 type ManageReplicationOperationRuleInput interface {
 	pulumi.Input
 
@@ -721,11 +743,11 @@ func (i ManageReplicationOperationRuleArgs) ToManageReplicationOperationRulePtrO
 // ManageReplicationOperationRulePtrInput is an input type that accepts ManageReplicationOperationRuleArgs, ManageReplicationOperationRulePtr and ManageReplicationOperationRulePtrOutput values.
 // You can construct a concrete instance of `ManageReplicationOperationRulePtrInput` via:
 //
-//          ManageReplicationOperationRuleArgs{...}
+//	        ManageReplicationOperationRuleArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type ManageReplicationOperationRulePtrInput interface {
 	pulumi.Input
 
@@ -869,7 +891,7 @@ type ManageReplicationOperationRuleFilter struct {
 // ManageReplicationOperationRuleFilterInput is an input type that accepts ManageReplicationOperationRuleFilterArgs and ManageReplicationOperationRuleFilterOutput values.
 // You can construct a concrete instance of `ManageReplicationOperationRuleFilterInput` via:
 //
-//          ManageReplicationOperationRuleFilterArgs{...}
+//	ManageReplicationOperationRuleFilterArgs{...}
 type ManageReplicationOperationRuleFilterInput interface {
 	pulumi.Input
 
@@ -899,7 +921,7 @@ func (i ManageReplicationOperationRuleFilterArgs) ToManageReplicationOperationRu
 // ManageReplicationOperationRuleFilterArrayInput is an input type that accepts ManageReplicationOperationRuleFilterArray and ManageReplicationOperationRuleFilterArrayOutput values.
 // You can construct a concrete instance of `ManageReplicationOperationRuleFilterArrayInput` via:
 //
-//          ManageReplicationOperationRuleFilterArray{ ManageReplicationOperationRuleFilterArgs{...} }
+//	ManageReplicationOperationRuleFilterArray{ ManageReplicationOperationRuleFilterArgs{...} }
 type ManageReplicationOperationRuleFilterArrayInput interface {
 	pulumi.Input
 
@@ -973,7 +995,7 @@ type NamespaceCveWhitelistItem struct {
 // NamespaceCveWhitelistItemInput is an input type that accepts NamespaceCveWhitelistItemArgs and NamespaceCveWhitelistItemOutput values.
 // You can construct a concrete instance of `NamespaceCveWhitelistItemInput` via:
 //
-//          NamespaceCveWhitelistItemArgs{...}
+//	NamespaceCveWhitelistItemArgs{...}
 type NamespaceCveWhitelistItemInput interface {
 	pulumi.Input
 
@@ -1001,7 +1023,7 @@ func (i NamespaceCveWhitelistItemArgs) ToNamespaceCveWhitelistItemOutputWithCont
 // NamespaceCveWhitelistItemArrayInput is an input type that accepts NamespaceCveWhitelistItemArray and NamespaceCveWhitelistItemArrayOutput values.
 // You can construct a concrete instance of `NamespaceCveWhitelistItemArrayInput` via:
 //
-//          NamespaceCveWhitelistItemArray{ NamespaceCveWhitelistItemArgs{...} }
+//	NamespaceCveWhitelistItemArray{ NamespaceCveWhitelistItemArgs{...} }
 type NamespaceCveWhitelistItemArrayInput interface {
 	pulumi.Input
 
@@ -1072,7 +1094,7 @@ type ServiceAccountPermission struct {
 // ServiceAccountPermissionInput is an input type that accepts ServiceAccountPermissionArgs and ServiceAccountPermissionOutput values.
 // You can construct a concrete instance of `ServiceAccountPermissionInput` via:
 //
-//          ServiceAccountPermissionArgs{...}
+//	ServiceAccountPermissionArgs{...}
 type ServiceAccountPermissionInput interface {
 	pulumi.Input
 
@@ -1102,7 +1124,7 @@ func (i ServiceAccountPermissionArgs) ToServiceAccountPermissionOutputWithContex
 // ServiceAccountPermissionArrayInput is an input type that accepts ServiceAccountPermissionArray and ServiceAccountPermissionArrayOutput values.
 // You can construct a concrete instance of `ServiceAccountPermissionArrayInput` via:
 //
-//          ServiceAccountPermissionArray{ ServiceAccountPermissionArgs{...} }
+//	ServiceAccountPermissionArray{ ServiceAccountPermissionArgs{...} }
 type ServiceAccountPermissionArrayInput interface {
 	pulumi.Input
 
@@ -1178,7 +1200,7 @@ type TagRetentionRuleRetentionRule struct {
 // TagRetentionRuleRetentionRuleInput is an input type that accepts TagRetentionRuleRetentionRuleArgs and TagRetentionRuleRetentionRuleOutput values.
 // You can construct a concrete instance of `TagRetentionRuleRetentionRuleInput` via:
 //
-//          TagRetentionRuleRetentionRuleArgs{...}
+//	TagRetentionRuleRetentionRuleArgs{...}
 type TagRetentionRuleRetentionRuleInput interface {
 	pulumi.Input
 
@@ -1216,11 +1238,11 @@ func (i TagRetentionRuleRetentionRuleArgs) ToTagRetentionRuleRetentionRulePtrOut
 // TagRetentionRuleRetentionRulePtrInput is an input type that accepts TagRetentionRuleRetentionRuleArgs, TagRetentionRuleRetentionRulePtr and TagRetentionRuleRetentionRulePtrOutput values.
 // You can construct a concrete instance of `TagRetentionRuleRetentionRulePtrInput` via:
 //
-//          TagRetentionRuleRetentionRuleArgs{...}
+//	        TagRetentionRuleRetentionRuleArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type TagRetentionRuleRetentionRulePtrInput interface {
 	pulumi.Input
 
@@ -1346,7 +1368,7 @@ type WebhookTriggerTrigger struct {
 // WebhookTriggerTriggerInput is an input type that accepts WebhookTriggerTriggerArgs and WebhookTriggerTriggerOutput values.
 // You can construct a concrete instance of `WebhookTriggerTriggerInput` via:
 //
-//          WebhookTriggerTriggerArgs{...}
+//	WebhookTriggerTriggerArgs{...}
 type WebhookTriggerTriggerInput interface {
 	pulumi.Input
 
@@ -1396,11 +1418,11 @@ func (i WebhookTriggerTriggerArgs) ToWebhookTriggerTriggerPtrOutputWithContext(c
 // WebhookTriggerTriggerPtrInput is an input type that accepts WebhookTriggerTriggerArgs, WebhookTriggerTriggerPtr and WebhookTriggerTriggerPtrOutput values.
 // You can construct a concrete instance of `WebhookTriggerTriggerPtrInput` via:
 //
-//          WebhookTriggerTriggerArgs{...}
+//	        WebhookTriggerTriggerArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type WebhookTriggerTriggerPtrInput interface {
 	pulumi.Input
 
@@ -1604,7 +1626,7 @@ type WebhookTriggerTriggerTarget struct {
 // WebhookTriggerTriggerTargetInput is an input type that accepts WebhookTriggerTriggerTargetArgs and WebhookTriggerTriggerTargetOutput values.
 // You can construct a concrete instance of `WebhookTriggerTriggerTargetInput` via:
 //
-//          WebhookTriggerTriggerTargetArgs{...}
+//	WebhookTriggerTriggerTargetArgs{...}
 type WebhookTriggerTriggerTargetInput interface {
 	pulumi.Input
 
@@ -1634,7 +1656,7 @@ func (i WebhookTriggerTriggerTargetArgs) ToWebhookTriggerTriggerTargetOutputWith
 // WebhookTriggerTriggerTargetArrayInput is an input type that accepts WebhookTriggerTriggerTargetArray and WebhookTriggerTriggerTargetArrayOutput values.
 // You can construct a concrete instance of `WebhookTriggerTriggerTargetArrayInput` via:
 //
-//          WebhookTriggerTriggerTargetArray{ WebhookTriggerTriggerTargetArgs{...} }
+//	WebhookTriggerTriggerTargetArray{ WebhookTriggerTriggerTargetArgs{...} }
 type WebhookTriggerTriggerTargetArrayInput interface {
 	pulumi.Input
 
@@ -1710,7 +1732,7 @@ type WebhookTriggerTriggerTargetHeader struct {
 // WebhookTriggerTriggerTargetHeaderInput is an input type that accepts WebhookTriggerTriggerTargetHeaderArgs and WebhookTriggerTriggerTargetHeaderOutput values.
 // You can construct a concrete instance of `WebhookTriggerTriggerTargetHeaderInput` via:
 //
-//          WebhookTriggerTriggerTargetHeaderArgs{...}
+//	WebhookTriggerTriggerTargetHeaderArgs{...}
 type WebhookTriggerTriggerTargetHeaderInput interface {
 	pulumi.Input
 
@@ -1740,7 +1762,7 @@ func (i WebhookTriggerTriggerTargetHeaderArgs) ToWebhookTriggerTriggerTargetHead
 // WebhookTriggerTriggerTargetHeaderArrayInput is an input type that accepts WebhookTriggerTriggerTargetHeaderArray and WebhookTriggerTriggerTargetHeaderArrayOutput values.
 // You can construct a concrete instance of `WebhookTriggerTriggerTargetHeaderArrayInput` via:
 //
-//          WebhookTriggerTriggerTargetHeaderArray{ WebhookTriggerTriggerTargetHeaderArgs{...} }
+//	WebhookTriggerTriggerTargetHeaderArray{ WebhookTriggerTriggerTargetHeaderArgs{...} }
 type WebhookTriggerTriggerTargetHeaderArrayInput interface {
 	pulumi.Input
 
@@ -1824,7 +1846,7 @@ type GetImagesImageInfoList struct {
 // GetImagesImageInfoListInput is an input type that accepts GetImagesImageInfoListArgs and GetImagesImageInfoListOutput values.
 // You can construct a concrete instance of `GetImagesImageInfoListInput` via:
 //
-//          GetImagesImageInfoListArgs{...}
+//	GetImagesImageInfoListArgs{...}
 type GetImagesImageInfoListInput interface {
 	pulumi.Input
 
@@ -1862,7 +1884,7 @@ func (i GetImagesImageInfoListArgs) ToGetImagesImageInfoListOutputWithContext(ct
 // GetImagesImageInfoListArrayInput is an input type that accepts GetImagesImageInfoListArray and GetImagesImageInfoListArrayOutput values.
 // You can construct a concrete instance of `GetImagesImageInfoListArrayInput` via:
 //
-//          GetImagesImageInfoListArray{ GetImagesImageInfoListArgs{...} }
+//	GetImagesImageInfoListArray{ GetImagesImageInfoListArgs{...} }
 type GetImagesImageInfoListArrayInput interface {
 	pulumi.Input
 
@@ -1968,7 +1990,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -2008,7 +2030,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -2111,7 +2133,7 @@ type GetNamespacesNamespaceList struct {
 // GetNamespacesNamespaceListInput is an input type that accepts GetNamespacesNamespaceListArgs and GetNamespacesNamespaceListOutput values.
 // You can construct a concrete instance of `GetNamespacesNamespaceListInput` via:
 //
-//          GetNamespacesNamespaceListArgs{...}
+//	GetNamespacesNamespaceListArgs{...}
 type GetNamespacesNamespaceListInput interface {
 	pulumi.Input
 
@@ -2143,7 +2165,7 @@ func (i GetNamespacesNamespaceListArgs) ToGetNamespacesNamespaceListOutputWithCo
 // GetNamespacesNamespaceListArrayInput is an input type that accepts GetNamespacesNamespaceListArray and GetNamespacesNamespaceListArrayOutput values.
 // You can construct a concrete instance of `GetNamespacesNamespaceListArrayInput` via:
 //
-//          GetNamespacesNamespaceListArray{ GetNamespacesNamespaceListArgs{...} }
+//	GetNamespacesNamespaceListArray{ GetNamespacesNamespaceListArgs{...} }
 type GetNamespacesNamespaceListArrayInput interface {
 	pulumi.Input
 
@@ -2232,7 +2254,7 @@ type GetReplicationInstanceCreateTasksTaskDetail struct {
 // GetReplicationInstanceCreateTasksTaskDetailInput is an input type that accepts GetReplicationInstanceCreateTasksTaskDetailArgs and GetReplicationInstanceCreateTasksTaskDetailOutput values.
 // You can construct a concrete instance of `GetReplicationInstanceCreateTasksTaskDetailInput` via:
 //
-//          GetReplicationInstanceCreateTasksTaskDetailArgs{...}
+//	GetReplicationInstanceCreateTasksTaskDetailArgs{...}
 type GetReplicationInstanceCreateTasksTaskDetailInput interface {
 	pulumi.Input
 
@@ -2270,7 +2292,7 @@ func (i GetReplicationInstanceCreateTasksTaskDetailArgs) ToGetReplicationInstanc
 // GetReplicationInstanceCreateTasksTaskDetailArrayInput is an input type that accepts GetReplicationInstanceCreateTasksTaskDetailArray and GetReplicationInstanceCreateTasksTaskDetailArrayOutput values.
 // You can construct a concrete instance of `GetReplicationInstanceCreateTasksTaskDetailArrayInput` via:
 //
-//          GetReplicationInstanceCreateTasksTaskDetailArray{ GetReplicationInstanceCreateTasksTaskDetailArgs{...} }
+//	GetReplicationInstanceCreateTasksTaskDetailArray{ GetReplicationInstanceCreateTasksTaskDetailArgs{...} }
 type GetReplicationInstanceCreateTasksTaskDetailArrayInput interface {
 	pulumi.Input
 
@@ -2374,7 +2396,7 @@ type GetReplicationInstanceSyncStatusReplicationLog struct {
 // GetReplicationInstanceSyncStatusReplicationLogInput is an input type that accepts GetReplicationInstanceSyncStatusReplicationLogArgs and GetReplicationInstanceSyncStatusReplicationLogOutput values.
 // You can construct a concrete instance of `GetReplicationInstanceSyncStatusReplicationLogInput` via:
 //
-//          GetReplicationInstanceSyncStatusReplicationLogArgs{...}
+//	GetReplicationInstanceSyncStatusReplicationLogArgs{...}
 type GetReplicationInstanceSyncStatusReplicationLogInput interface {
 	pulumi.Input
 
@@ -2412,7 +2434,7 @@ func (i GetReplicationInstanceSyncStatusReplicationLogArgs) ToGetReplicationInst
 // GetReplicationInstanceSyncStatusReplicationLogArrayInput is an input type that accepts GetReplicationInstanceSyncStatusReplicationLogArray and GetReplicationInstanceSyncStatusReplicationLogArrayOutput values.
 // You can construct a concrete instance of `GetReplicationInstanceSyncStatusReplicationLogArrayInput` via:
 //
-//          GetReplicationInstanceSyncStatusReplicationLogArray{ GetReplicationInstanceSyncStatusReplicationLogArgs{...} }
+//	GetReplicationInstanceSyncStatusReplicationLogArray{ GetReplicationInstanceSyncStatusReplicationLogArgs{...} }
 type GetReplicationInstanceSyncStatusReplicationLogArrayInput interface {
 	pulumi.Input
 
@@ -2520,7 +2542,7 @@ type GetRepositoriesRepositoryList struct {
 // GetRepositoriesRepositoryListInput is an input type that accepts GetRepositoriesRepositoryListArgs and GetRepositoriesRepositoryListOutput values.
 // You can construct a concrete instance of `GetRepositoriesRepositoryListInput` via:
 //
-//          GetRepositoriesRepositoryListArgs{...}
+//	GetRepositoriesRepositoryListArgs{...}
 type GetRepositoriesRepositoryListInput interface {
 	pulumi.Input
 
@@ -2562,7 +2584,7 @@ func (i GetRepositoriesRepositoryListArgs) ToGetRepositoriesRepositoryListOutput
 // GetRepositoriesRepositoryListArrayInput is an input type that accepts GetRepositoriesRepositoryListArray and GetRepositoriesRepositoryListArrayOutput values.
 // You can construct a concrete instance of `GetRepositoriesRepositoryListArrayInput` via:
 //
-//          GetRepositoriesRepositoryListArray{ GetRepositoriesRepositoryListArgs{...} }
+//	GetRepositoriesRepositoryListArray{ GetRepositoriesRepositoryListArgs{...} }
 type GetRepositoriesRepositoryListArrayInput interface {
 	pulumi.Input
 
@@ -2680,7 +2702,7 @@ type GetTagRetentionExecutionTasksRetentionTaskList struct {
 // GetTagRetentionExecutionTasksRetentionTaskListInput is an input type that accepts GetTagRetentionExecutionTasksRetentionTaskListArgs and GetTagRetentionExecutionTasksRetentionTaskListOutput values.
 // You can construct a concrete instance of `GetTagRetentionExecutionTasksRetentionTaskListInput` via:
 //
-//          GetTagRetentionExecutionTasksRetentionTaskListArgs{...}
+//	GetTagRetentionExecutionTasksRetentionTaskListArgs{...}
 type GetTagRetentionExecutionTasksRetentionTaskListInput interface {
 	pulumi.Input
 
@@ -2722,7 +2744,7 @@ func (i GetTagRetentionExecutionTasksRetentionTaskListArgs) ToGetTagRetentionExe
 // GetTagRetentionExecutionTasksRetentionTaskListArrayInput is an input type that accepts GetTagRetentionExecutionTasksRetentionTaskListArray and GetTagRetentionExecutionTasksRetentionTaskListArrayOutput values.
 // You can construct a concrete instance of `GetTagRetentionExecutionTasksRetentionTaskListArrayInput` via:
 //
-//          GetTagRetentionExecutionTasksRetentionTaskListArray{ GetTagRetentionExecutionTasksRetentionTaskListArgs{...} }
+//	GetTagRetentionExecutionTasksRetentionTaskListArray{ GetTagRetentionExecutionTasksRetentionTaskListArgs{...} }
 type GetTagRetentionExecutionTasksRetentionTaskListArrayInput interface {
 	pulumi.Input
 
@@ -2834,7 +2856,7 @@ type GetTagRetentionExecutionsRetentionExecutionList struct {
 // GetTagRetentionExecutionsRetentionExecutionListInput is an input type that accepts GetTagRetentionExecutionsRetentionExecutionListArgs and GetTagRetentionExecutionsRetentionExecutionListOutput values.
 // You can construct a concrete instance of `GetTagRetentionExecutionsRetentionExecutionListInput` via:
 //
-//          GetTagRetentionExecutionsRetentionExecutionListArgs{...}
+//	GetTagRetentionExecutionsRetentionExecutionListArgs{...}
 type GetTagRetentionExecutionsRetentionExecutionListInput interface {
 	pulumi.Input
 
@@ -2870,7 +2892,7 @@ func (i GetTagRetentionExecutionsRetentionExecutionListArgs) ToGetTagRetentionEx
 // GetTagRetentionExecutionsRetentionExecutionListArrayInput is an input type that accepts GetTagRetentionExecutionsRetentionExecutionListArray and GetTagRetentionExecutionsRetentionExecutionListArrayOutput values.
 // You can construct a concrete instance of `GetTagRetentionExecutionsRetentionExecutionListArrayInput` via:
 //
-//          GetTagRetentionExecutionsRetentionExecutionListArray{ GetTagRetentionExecutionsRetentionExecutionListArgs{...} }
+//	GetTagRetentionExecutionsRetentionExecutionListArray{ GetTagRetentionExecutionsRetentionExecutionListArgs{...} }
 type GetTagRetentionExecutionsRetentionExecutionListArrayInput interface {
 	pulumi.Input
 
@@ -2965,7 +2987,7 @@ type GetTokensTokenList struct {
 // GetTokensTokenListInput is an input type that accepts GetTokensTokenListArgs and GetTokensTokenListOutput values.
 // You can construct a concrete instance of `GetTokensTokenListInput` via:
 //
-//          GetTokensTokenListArgs{...}
+//	GetTokensTokenListArgs{...}
 type GetTokensTokenListInput interface {
 	pulumi.Input
 
@@ -2999,7 +3021,7 @@ func (i GetTokensTokenListArgs) ToGetTokensTokenListOutputWithContext(ctx contex
 // GetTokensTokenListArrayInput is an input type that accepts GetTokensTokenListArray and GetTokensTokenListArrayOutput values.
 // You can construct a concrete instance of `GetTokensTokenListArrayInput` via:
 //
-//          GetTokensTokenListArray{ GetTokensTokenListArgs{...} }
+//	GetTokensTokenListArray{ GetTokensTokenListArgs{...} }
 type GetTokensTokenListArrayInput interface {
 	pulumi.Input
 
@@ -3093,7 +3115,7 @@ type GetVpcAttachmentsVpcAttachmentList struct {
 // GetVpcAttachmentsVpcAttachmentListInput is an input type that accepts GetVpcAttachmentsVpcAttachmentListArgs and GetVpcAttachmentsVpcAttachmentListOutput values.
 // You can construct a concrete instance of `GetVpcAttachmentsVpcAttachmentListInput` via:
 //
-//          GetVpcAttachmentsVpcAttachmentListArgs{...}
+//	GetVpcAttachmentsVpcAttachmentListArgs{...}
 type GetVpcAttachmentsVpcAttachmentListInput interface {
 	pulumi.Input
 
@@ -3131,7 +3153,7 @@ func (i GetVpcAttachmentsVpcAttachmentListArgs) ToGetVpcAttachmentsVpcAttachment
 // GetVpcAttachmentsVpcAttachmentListArrayInput is an input type that accepts GetVpcAttachmentsVpcAttachmentListArray and GetVpcAttachmentsVpcAttachmentListArrayOutput values.
 // You can construct a concrete instance of `GetVpcAttachmentsVpcAttachmentListArrayInput` via:
 //
-//          GetVpcAttachmentsVpcAttachmentListArray{ GetVpcAttachmentsVpcAttachmentListArgs{...} }
+//	GetVpcAttachmentsVpcAttachmentListArray{ GetVpcAttachmentsVpcAttachmentListArgs{...} }
 type GetVpcAttachmentsVpcAttachmentListArrayInput interface {
 	pulumi.Input
 
@@ -3239,7 +3261,7 @@ type GetWebhookTriggerLogsLog struct {
 // GetWebhookTriggerLogsLogInput is an input type that accepts GetWebhookTriggerLogsLogArgs and GetWebhookTriggerLogsLogOutput values.
 // You can construct a concrete instance of `GetWebhookTriggerLogsLogInput` via:
 //
-//          GetWebhookTriggerLogsLogArgs{...}
+//	GetWebhookTriggerLogsLogArgs{...}
 type GetWebhookTriggerLogsLogInput interface {
 	pulumi.Input
 
@@ -3281,7 +3303,7 @@ func (i GetWebhookTriggerLogsLogArgs) ToGetWebhookTriggerLogsLogOutputWithContex
 // GetWebhookTriggerLogsLogArrayInput is an input type that accepts GetWebhookTriggerLogsLogArray and GetWebhookTriggerLogsLogArrayOutput values.
 // You can construct a concrete instance of `GetWebhookTriggerLogsLogArrayInput` via:
 //
-//          GetWebhookTriggerLogsLogArray{ GetWebhookTriggerLogsLogArgs{...} }
+//	GetWebhookTriggerLogsLogArray{ GetWebhookTriggerLogsLogArgs{...} }
 type GetWebhookTriggerLogsLogArrayInput interface {
 	pulumi.Input
 

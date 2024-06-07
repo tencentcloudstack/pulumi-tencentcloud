@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplatePlacementGetArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplatePlacementGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("hostIds")]
         private InputList<string>? _hostIds;
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplatePlacementGetArgs()
         {
         }
+        public static new LaunchTemplatePlacementGetArgs Empty => new LaunchTemplatePlacementGetArgs();
     }
 }

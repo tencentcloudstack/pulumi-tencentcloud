@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type ModifyInstanceDiskType struct {
@@ -35,7 +36,7 @@ func NewModifyInstanceDiskType(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ModifyInstanceDiskType
 	err := ctx.RegisterResource("tencentcloud:Cvm/modifyInstanceDiskType:ModifyInstanceDiskType", name, args, &resource, opts...)
 	if err != nil {
@@ -136,7 +137,7 @@ func (i *ModifyInstanceDiskType) ToModifyInstanceDiskTypeOutputWithContext(ctx c
 // ModifyInstanceDiskTypeArrayInput is an input type that accepts ModifyInstanceDiskTypeArray and ModifyInstanceDiskTypeArrayOutput values.
 // You can construct a concrete instance of `ModifyInstanceDiskTypeArrayInput` via:
 //
-//          ModifyInstanceDiskTypeArray{ ModifyInstanceDiskTypeArgs{...} }
+//	ModifyInstanceDiskTypeArray{ ModifyInstanceDiskTypeArgs{...} }
 type ModifyInstanceDiskTypeArrayInput interface {
 	pulumi.Input
 
@@ -161,7 +162,7 @@ func (i ModifyInstanceDiskTypeArray) ToModifyInstanceDiskTypeArrayOutputWithCont
 // ModifyInstanceDiskTypeMapInput is an input type that accepts ModifyInstanceDiskTypeMap and ModifyInstanceDiskTypeMapOutput values.
 // You can construct a concrete instance of `ModifyInstanceDiskTypeMapInput` via:
 //
-//          ModifyInstanceDiskTypeMap{ "key": ModifyInstanceDiskTypeArgs{...} }
+//	ModifyInstanceDiskTypeMap{ "key": ModifyInstanceDiskTypeArgs{...} }
 type ModifyInstanceDiskTypeMapInput interface {
 	pulumi.Input
 

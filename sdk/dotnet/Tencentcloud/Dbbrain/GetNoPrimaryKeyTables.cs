@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain no_primary_key_tables
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var noPrimaryKeyTables = Tencentcloud.Dbbrain.GetNoPrimaryKeyTables.Invoke(new()
         ///     {
-        ///         var noPrimaryKeyTables = Output.Create(Tencentcloud.Dbbrain.GetNoPrimaryKeyTables.InvokeAsync(new Tencentcloud.Dbbrain.GetNoPrimaryKeyTablesArgs
-        ///         {
-        ///             Date = "",
-        ///             InstanceId = "",
-        ///             Product = "",
-        ///         }));
-        ///     }
+        ///         Date = "",
+        ///         InstanceId = "",
+        ///         Product = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetNoPrimaryKeyTablesResult> InvokeAsync(GetNoPrimaryKeyTablesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetNoPrimaryKeyTablesResult>("tencentcloud:Dbbrain/getNoPrimaryKeyTables:getNoPrimaryKeyTables", args ?? new GetNoPrimaryKeyTablesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetNoPrimaryKeyTablesResult>("tencentcloud:Dbbrain/getNoPrimaryKeyTables:getNoPrimaryKeyTables", args ?? new GetNoPrimaryKeyTablesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain no_primary_key_tables
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var noPrimaryKeyTables = Tencentcloud.Dbbrain.GetNoPrimaryKeyTables.Invoke(new()
         ///     {
-        ///         var noPrimaryKeyTables = Output.Create(Tencentcloud.Dbbrain.GetNoPrimaryKeyTables.InvokeAsync(new Tencentcloud.Dbbrain.GetNoPrimaryKeyTablesArgs
-        ///         {
-        ///             Date = "",
-        ///             InstanceId = "",
-        ///             Product = "",
-        ///         }));
-        ///     }
+        ///         Date = "",
+        ///         InstanceId = "",
+        ///         Product = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetNoPrimaryKeyTablesResult> Invoke(GetNoPrimaryKeyTablesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetNoPrimaryKeyTablesResult>("tencentcloud:Dbbrain/getNoPrimaryKeyTables:getNoPrimaryKeyTables", args ?? new GetNoPrimaryKeyTablesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetNoPrimaryKeyTablesResult>("tencentcloud:Dbbrain/getNoPrimaryKeyTables:getNoPrimaryKeyTables", args ?? new GetNoPrimaryKeyTablesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetNoPrimaryKeyTablesArgs : Pulumi.InvokeArgs
+    public sealed class GetNoPrimaryKeyTablesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Query date, such as 2021-05-27, the earliest date is 30 days ago.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetNoPrimaryKeyTablesArgs()
         {
         }
+        public static new GetNoPrimaryKeyTablesArgs Empty => new GetNoPrimaryKeyTablesArgs();
     }
 
-    public sealed class GetNoPrimaryKeyTablesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetNoPrimaryKeyTablesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Query date, such as 2021-05-27, the earliest date is 30 days ago.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetNoPrimaryKeyTablesInvokeArgs()
         {
         }
+        public static new GetNoPrimaryKeyTablesInvokeArgs Empty => new GetNoPrimaryKeyTablesInvokeArgs();
     }
 
 

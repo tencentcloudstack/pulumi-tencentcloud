@@ -13,107 +13,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// <summary>
     /// Provides a resource to create a redis replicate_attachment
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
-    ///         {
-    ///             TypeId = 7,
-    ///             Region = "ap-guangzhou",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[2]?.Zone),
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var fooGroup = new Tencentcloud.Security.Group("fooGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///         });
-    ///         var fooGroupLiteRule = new Tencentcloud.Security.GroupLiteRule("fooGroupLiteRule", new Tencentcloud.Security.GroupLiteRuleArgs
-    ///         {
-    ///             SecurityGroupId = fooGroup.Id,
-    ///             Ingresses = 
-    ///             {
-    ///                 "ACCEPT#192.168.1.0/24#80#TCP",
-    ///                 "DROP#8.8.8.8#80,90#UDP",
-    ///                 "DROP#0.0.0.0/0#80-90#TCP",
-    ///             },
-    ///             Egresses = 
-    ///             {
-    ///                 "ACCEPT#192.168.0.0/16#ALL#TCP",
-    ///                 "ACCEPT#10.0.0.0/8#ALL#ICMP",
-    ///                 "DROP#0.0.0.0/0#ALL#ALL",
-    ///             },
-    ///         });
-    ///         var fooInstance = new Tencentcloud.Redis.Instance("fooInstance", new Tencentcloud.Redis.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[2]?.Zone),
-    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[2]?.TypeId),
-    ///             Password = "test12345789",
-    ///             MemSize = 8192,
-    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[2]?.RedisShardNums?[0]),
-    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[2]?.RedisReplicasNums?[0]),
-    ///             Port = 6379,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 fooGroup.Id,
-    ///             },
-    ///         });
-    ///         var instance = new Tencentcloud.Redis.Instance("instance", new Tencentcloud.Redis.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[2]?.Zone),
-    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[2]?.TypeId),
-    ///             Password = "test12345789",
-    ///             MemSize = 8192,
-    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[2]?.RedisShardNums?[0]),
-    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[2]?.RedisReplicasNums?[0]),
-    ///             Port = 6379,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 fooGroup.Id,
-    ///             },
-    ///         });
-    ///         var replicateAttachment = new Tencentcloud.Redis.ReplicateAttachment("replicateAttachment", new Tencentcloud.Redis.ReplicateAttachmentArgs
-    ///         {
-    ///             GroupId = "crs-rpl-orfiwmn5",
-    ///             MasterInstanceId = fooInstance.Id,
-    ///             InstanceIds = 
-    ///             {
-    ///                 instance.Id,
-    ///             },
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// redis replicate_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Redis/replicateAttachment:ReplicateAttachment replicate_attachment replicate_attachment_id
+    /// $ pulumi import tencentcloud:Redis/replicateAttachment:ReplicateAttachment replicate_attachment replicate_attachment_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/replicateAttachment:ReplicateAttachment")]
-    public partial class ReplicateAttachment : Pulumi.CustomResource
+    public partial class ReplicateAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The ID of group.
@@ -178,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class ReplicateAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class ReplicateAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of group.
@@ -207,9 +116,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public ReplicateAttachmentArgs()
         {
         }
+        public static new ReplicateAttachmentArgs Empty => new ReplicateAttachmentArgs();
     }
 
-    public sealed class ReplicateAttachmentState : Pulumi.ResourceArgs
+    public sealed class ReplicateAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of group.
@@ -238,5 +148,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public ReplicateAttachmentState()
         {
         }
+        public static new ReplicateAttachmentState Empty => new ReplicateAttachmentState();
     }
 }

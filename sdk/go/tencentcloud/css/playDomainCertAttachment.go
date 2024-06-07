@@ -7,54 +7,58 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a css play_domain_cert_attachment. This resource is used for binding the play domain and specified certification together.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Ssl.GetCertificates(ctx, &ssl.GetCertificatesArgs{
-// 			Name: pulumi.StringRef("your_ssl_cert"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Css.NewPlayDomainCertAttachment(ctx, "playDomainCertAttachment", &Css.PlayDomainCertAttachmentArgs{
-// 			CloudCertId: pulumi.String(foo.Certificates[0].Id),
-// 			DomainInfo: &css.PlayDomainCertAttachmentDomainInfoArgs{
-// 				DomainName: pulumi.String("your_domain_name"),
-// 				Status:     pulumi.Int(1),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			foo, err := Ssl.GetCertificates(ctx, &ssl.GetCertificatesArgs{
+//				Name: pulumi.StringRef("your_ssl_cert"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Css.NewPlayDomainCertAttachment(ctx, "playDomainCertAttachment", &Css.PlayDomainCertAttachmentArgs{
+//				CloudCertId: pulumi.String(foo.Certificates[0].Id),
+//				DomainInfo: &css.PlayDomainCertAttachmentDomainInfoArgs{
+//					DomainName: pulumi.String("your_domain_name"),
+//					Status:     pulumi.Int(1),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // css play_domain_cert_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/playDomainCertAttachment:PlayDomainCertAttachment play_domain_cert_attachment domainName#cloudCertId
+// $ pulumi import tencentcloud:Css/playDomainCertAttachment:PlayDomainCertAttachment play_domain_cert_attachment domainName#cloudCertId
 // ```
 type PlayDomainCertAttachment struct {
 	pulumi.CustomResourceState
@@ -85,7 +89,7 @@ func NewPlayDomainCertAttachment(ctx *pulumi.Context,
 	if args.DomainInfo == nil {
 		return nil, errors.New("invalid value for required argument 'DomainInfo'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource PlayDomainCertAttachment
 	err := ctx.RegisterResource("tencentcloud:Css/playDomainCertAttachment:PlayDomainCertAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -186,7 +190,7 @@ func (i *PlayDomainCertAttachment) ToPlayDomainCertAttachmentOutputWithContext(c
 // PlayDomainCertAttachmentArrayInput is an input type that accepts PlayDomainCertAttachmentArray and PlayDomainCertAttachmentArrayOutput values.
 // You can construct a concrete instance of `PlayDomainCertAttachmentArrayInput` via:
 //
-//          PlayDomainCertAttachmentArray{ PlayDomainCertAttachmentArgs{...} }
+//	PlayDomainCertAttachmentArray{ PlayDomainCertAttachmentArgs{...} }
 type PlayDomainCertAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -211,7 +215,7 @@ func (i PlayDomainCertAttachmentArray) ToPlayDomainCertAttachmentArrayOutputWith
 // PlayDomainCertAttachmentMapInput is an input type that accepts PlayDomainCertAttachmentMap and PlayDomainCertAttachmentMapOutput values.
 // You can construct a concrete instance of `PlayDomainCertAttachmentMapInput` via:
 //
-//          PlayDomainCertAttachmentMap{ "key": PlayDomainCertAttachmentArgs{...} }
+//	PlayDomainCertAttachmentMap{ "key": PlayDomainCertAttachmentArgs{...} }
 type PlayDomainCertAttachmentMapInput interface {
 	pulumi.Input
 

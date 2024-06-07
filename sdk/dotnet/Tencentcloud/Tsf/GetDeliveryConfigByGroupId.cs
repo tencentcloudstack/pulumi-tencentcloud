@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf delivery_config_by_group_id
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var deliveryConfigByGroupId = Tencentcloud.Tsf.GetDeliveryConfigByGroupId.Invoke(new()
         ///     {
-        ///         var deliveryConfigByGroupId = Output.Create(Tencentcloud.Tsf.GetDeliveryConfigByGroupId.InvokeAsync(new Tencentcloud.Tsf.GetDeliveryConfigByGroupIdArgs
-        ///         {
-        ///             GroupId = "group-yrjkln9v",
-        ///         }));
-        ///     }
+        ///         GroupId = "group-yrjkln9v",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDeliveryConfigByGroupIdResult> InvokeAsync(GetDeliveryConfigByGroupIdArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDeliveryConfigByGroupIdResult>("tencentcloud:Tsf/getDeliveryConfigByGroupId:getDeliveryConfigByGroupId", args ?? new GetDeliveryConfigByGroupIdArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDeliveryConfigByGroupIdResult>("tencentcloud:Tsf/getDeliveryConfigByGroupId:getDeliveryConfigByGroupId", args ?? new GetDeliveryConfigByGroupIdArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf delivery_config_by_group_id
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var deliveryConfigByGroupId = Tencentcloud.Tsf.GetDeliveryConfigByGroupId.Invoke(new()
         ///     {
-        ///         var deliveryConfigByGroupId = Output.Create(Tencentcloud.Tsf.GetDeliveryConfigByGroupId.InvokeAsync(new Tencentcloud.Tsf.GetDeliveryConfigByGroupIdArgs
-        ///         {
-        ///             GroupId = "group-yrjkln9v",
-        ///         }));
-        ///     }
+        ///         GroupId = "group-yrjkln9v",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDeliveryConfigByGroupIdResult> Invoke(GetDeliveryConfigByGroupIdInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDeliveryConfigByGroupIdResult>("tencentcloud:Tsf/getDeliveryConfigByGroupId:getDeliveryConfigByGroupId", args ?? new GetDeliveryConfigByGroupIdInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDeliveryConfigByGroupIdResult>("tencentcloud:Tsf/getDeliveryConfigByGroupId:getDeliveryConfigByGroupId", args ?? new GetDeliveryConfigByGroupIdInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDeliveryConfigByGroupIdArgs : Pulumi.InvokeArgs
+    public sealed class GetDeliveryConfigByGroupIdArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// groupId.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetDeliveryConfigByGroupIdArgs()
         {
         }
+        public static new GetDeliveryConfigByGroupIdArgs Empty => new GetDeliveryConfigByGroupIdArgs();
     }
 
-    public sealed class GetDeliveryConfigByGroupIdInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDeliveryConfigByGroupIdInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// groupId.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetDeliveryConfigByGroupIdInvokeArgs()
         {
         }
+        public static new GetDeliveryConfigByGroupIdInvokeArgs Empty => new GetDeliveryConfigByGroupIdInvokeArgs();
     }
 
 

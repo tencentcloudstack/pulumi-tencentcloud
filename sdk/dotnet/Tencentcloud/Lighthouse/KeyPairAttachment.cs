@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var keyPairAttachment = new Tencentcloud.Lighthouse.KeyPairAttachment("keyPairAttachment", new()
     ///     {
-    ///         var keyPairAttachment = new Tencentcloud.Lighthouse.KeyPairAttachment("keyPairAttachment", new Tencentcloud.Lighthouse.KeyPairAttachmentArgs
-    ///         {
-    ///             InstanceId = "lhins-xxxxxx",
-    ///             KeyId = "lhkp-xxxxxx",
-    ///         });
-    ///     }
+    ///         InstanceId = "lhins-xxxxxx",
+    ///         KeyId = "lhkp-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// lighthouse key_pair_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Lighthouse/keyPairAttachment:KeyPairAttachment key_pair_attachment key_pair_attachment_id
+    /// $ pulumi import tencentcloud:Lighthouse/keyPairAttachment:KeyPairAttachment key_pair_attachment key_pair_attachment_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/keyPairAttachment:KeyPairAttachment")]
-    public partial class KeyPairAttachment : Pulumi.CustomResource
+    public partial class KeyPairAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class KeyPairAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class KeyPairAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public KeyPairAttachmentArgs()
         {
         }
+        public static new KeyPairAttachmentArgs Empty => new KeyPairAttachmentArgs();
     }
 
-    public sealed class KeyPairAttachmentState : Pulumi.ResourceArgs
+    public sealed class KeyPairAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public KeyPairAttachmentState()
         {
         }
+        public static new KeyPairAttachmentState Empty => new KeyPairAttachmentState();
     }
 }

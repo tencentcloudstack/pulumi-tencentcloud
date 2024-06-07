@@ -2,19 +2,22 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a COS resource to create a COS bucket and set its attributes.
  *
  * ## Example Usage
+ *
  * ### Private Bucket
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const info = tencentcloud.User.getInfo({});
  * const appId = info.then(info => info.appId);
@@ -23,12 +26,15 @@ import * as utilities from "../utilities";
  *     acl: "private",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Creation of multiple available zone bucket
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const info = tencentcloud.User.getInfo({});
  * const appId = info.then(info => info.appId);
@@ -40,12 +46,15 @@ import * as utilities from "../utilities";
  *     forceClean: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Using verbose acl
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const info = tencentcloud.User.getInfo({});
  * const appId = info.then(info => info.appId);
@@ -114,12 +123,15 @@ import * as utilities from "../utilities";
  * `,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Static Website
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const info = tencentcloud.User.getInfo({});
  * const appId = info.then(info => info.appId);
@@ -132,12 +144,15 @@ import * as utilities from "../utilities";
  * });
  * export const endpointTest = bucketWithStaticWebsite.website.apply(website => website?.endpoint);
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Using CORS
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const info = tencentcloud.User.getInfo({});
  * const appId = info.then(info => info.appId);
@@ -156,12 +171,15 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Using object lifecycle
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const info = tencentcloud.User.getInfo({});
  * const appId = info.then(info => info.appId);
@@ -180,12 +198,15 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Using replication
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const info = tencentcloud.User.getInfo({});
  * const appId = info.then(info => info.appId);
@@ -210,13 +231,14 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * COS bucket can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cos/bucket:Bucket bucket bucket-name
+ * $ pulumi import tencentcloud:Cos/bucket:Bucket bucket bucket-name
  * ```
  */
 export class Bucket extends pulumi.CustomResource {

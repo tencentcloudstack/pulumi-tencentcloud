@@ -15,33 +15,71 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var addressTransform = new Tencentcloud.Eip.AddressTransform("addressTransform", new Tencentcloud.Eip.AddressTransformArgs
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create vpc subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create cvm
+    ///     var exampleInstance = new Tencentcloud.Instance.Instance("exampleInstance", new()
+    ///     {
+    ///         InstanceName = "tf_example",
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         ImageId = "img-9qrfy1xt",
+    ///         InstanceType = "SA3.MEDIUM4",
+    ///         SystemDiskType = "CLOUD_HSSD",
+    ///         SystemDiskSize = 100,
+    ///         Hostname = "example",
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         AllocatePublicIp = true,
+    ///         InternetMaxBandwidthOut = 10,
+    ///         DataDisks = new[]
     ///         {
-    ///             InstanceId = "",
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Instance.Inputs.InstanceDataDiskArgs
+    ///             {
+    ///                 DataDiskType = "CLOUD_HSSD",
+    ///                 DataDiskSize = 50,
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleAddressTransform = new Tencentcloud.Eip.AddressTransform("exampleAddressTransform", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
-    /// 
-    /// ## Import
-    /// 
-    /// eip address_transform can be imported using the id, e.g.
-    /// 
-    /// ```sh
-    ///  $ pulumi import tencentcloud:Eip/addressTransform:AddressTransform address_transform address_transform_id
-    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eip/addressTransform:AddressTransform")]
-    public partial class AddressTransform : Pulumi.CustomResource
+    public partial class AddressTransform : global::Pulumi.CustomResource
     {
         /// <summary>
         /// the instance ID of a normal public network IP to be operated. eg:ins-23mk45jn.
@@ -94,7 +132,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         }
     }
 
-    public sealed class AddressTransformArgs : Pulumi.ResourceArgs
+    public sealed class AddressTransformArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the instance ID of a normal public network IP to be operated. eg:ins-23mk45jn.
@@ -105,9 +143,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public AddressTransformArgs()
         {
         }
+        public static new AddressTransformArgs Empty => new AddressTransformArgs();
     }
 
-    public sealed class AddressTransformState : Pulumi.ResourceArgs
+    public sealed class AddressTransformState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the instance ID of a normal public network IP to be operated. eg:ins-23mk45jn.
@@ -118,5 +157,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public AddressTransformState()
         {
         }
+        public static new AddressTransformState Empty => new AddressTransformState();
     }
 }

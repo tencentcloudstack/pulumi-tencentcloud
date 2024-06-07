@@ -14,6 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
     [OutputType]
     public sealed class GetBucketInventorysInventoryOptionalFieldResult
     {
+        /// <summary>
+        /// Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.
+        /// </summary>
         public readonly ImmutableArray<string> Fields;
 
         [OutputConstructor]

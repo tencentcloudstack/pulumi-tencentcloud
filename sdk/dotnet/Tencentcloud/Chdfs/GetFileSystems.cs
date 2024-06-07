@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         /// <summary>
         /// Use this data source to query detailed information of chdfs file_systems
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var fileSystems = Output.Create(Tencentcloud.Chdfs.GetFileSystems.InvokeAsync());
-        ///     }
+        ///     var fileSystems = Tencentcloud.Chdfs.GetFileSystems.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetFileSystemsResult> InvokeAsync(GetFileSystemsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetFileSystemsResult>("tencentcloud:Chdfs/getFileSystems:getFileSystems", args ?? new GetFileSystemsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetFileSystemsResult>("tencentcloud:Chdfs/getFileSystems:getFileSystems", args ?? new GetFileSystemsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of chdfs file_systems
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var fileSystems = Output.Create(Tencentcloud.Chdfs.GetFileSystems.InvokeAsync());
-        ///     }
+        ///     var fileSystems = Tencentcloud.Chdfs.GetFileSystems.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetFileSystemsResult> Invoke(GetFileSystemsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetFileSystemsResult>("tencentcloud:Chdfs/getFileSystems:getFileSystems", args ?? new GetFileSystemsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetFileSystemsResult>("tencentcloud:Chdfs/getFileSystems:getFileSystems", args ?? new GetFileSystemsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetFileSystemsArgs : Pulumi.InvokeArgs
+    public sealed class GetFileSystemsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public GetFileSystemsArgs()
         {
         }
+        public static new GetFileSystemsArgs Empty => new GetFileSystemsArgs();
     }
 
-    public sealed class GetFileSystemsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetFileSystemsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs
         public GetFileSystemsInvokeArgs()
         {
         }
+        public static new GetFileSystemsInvokeArgs Empty => new GetFileSystemsInvokeArgs();
     }
 
 

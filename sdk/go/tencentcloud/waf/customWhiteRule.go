@@ -7,54 +7,59 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a waf customWhiteRule
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewCustomWhiteRule(ctx, "example", &Waf.CustomWhiteRuleArgs{
-// 			Bypass:     pulumi.String("geoip,cc,owasp"),
-// 			Domain:     pulumi.String("test.com"),
-// 			ExpireTime: pulumi.String("0"),
-// 			SortId:     pulumi.String("30"),
-// 			Status:     pulumi.String("1"),
-// 			Strategies: waf.CustomWhiteRuleStrategyArray{
-// 				&waf.CustomWhiteRuleStrategyArgs{
-// 					Arg:         pulumi.String(""),
-// 					CompareFunc: pulumi.String("ipmatch"),
-// 					Content:     pulumi.String("1.1.1.1"),
-// 					Field:       pulumi.String("IP"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewCustomWhiteRule(ctx, "example", &Waf.CustomWhiteRuleArgs{
+//				Bypass:     pulumi.String("geoip,cc,owasp"),
+//				Domain:     pulumi.String("test.com"),
+//				ExpireTime: pulumi.String("0"),
+//				SortId:     pulumi.String("30"),
+//				Status:     pulumi.String("1"),
+//				Strategies: waf.CustomWhiteRuleStrategyArray{
+//					&waf.CustomWhiteRuleStrategyArgs{
+//						Arg:         pulumi.String(""),
+//						CompareFunc: pulumi.String("ipmatch"),
+//						Content:     pulumi.String("1.1.1.1"),
+//						Field:       pulumi.String("IP"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // waf custom_white_rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Waf/customWhiteRule:CustomWhiteRule example test.com#1100310837
+// $ pulumi import tencentcloud:Waf/customWhiteRule:CustomWhiteRule example test.com#1100310837
 // ```
 type CustomWhiteRule struct {
 	pulumi.CustomResourceState
@@ -99,7 +104,7 @@ func NewCustomWhiteRule(ctx *pulumi.Context,
 	if args.Strategies == nil {
 		return nil, errors.New("invalid value for required argument 'Strategies'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CustomWhiteRule
 	err := ctx.RegisterResource("tencentcloud:Waf/customWhiteRule:CustomWhiteRule", name, args, &resource, opts...)
 	if err != nil {
@@ -224,7 +229,7 @@ func (i *CustomWhiteRule) ToCustomWhiteRuleOutputWithContext(ctx context.Context
 // CustomWhiteRuleArrayInput is an input type that accepts CustomWhiteRuleArray and CustomWhiteRuleArrayOutput values.
 // You can construct a concrete instance of `CustomWhiteRuleArrayInput` via:
 //
-//          CustomWhiteRuleArray{ CustomWhiteRuleArgs{...} }
+//	CustomWhiteRuleArray{ CustomWhiteRuleArgs{...} }
 type CustomWhiteRuleArrayInput interface {
 	pulumi.Input
 
@@ -249,7 +254,7 @@ func (i CustomWhiteRuleArray) ToCustomWhiteRuleArrayOutputWithContext(ctx contex
 // CustomWhiteRuleMapInput is an input type that accepts CustomWhiteRuleMap and CustomWhiteRuleMapOutput values.
 // You can construct a concrete instance of `CustomWhiteRuleMapInput` via:
 //
-//          CustomWhiteRuleMap{ "key": CustomWhiteRuleArgs{...} }
+//	CustomWhiteRuleMap{ "key": CustomWhiteRuleArgs{...} }
 type CustomWhiteRuleMapInput interface {
 	pulumi.Input
 

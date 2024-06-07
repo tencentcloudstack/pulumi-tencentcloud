@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Tdmq.RocketmqCluster("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Tdmq.RocketmqCluster("example", new Tencentcloud.Tdmq.RocketmqClusterArgs
-    ///         {
-    ///             ClusterName = "tf_example",
-    ///             Remark = "remark.",
-    ///         });
-    ///     }
+    ///         ClusterName = "tf_example",
+    ///         Remark = "remark.",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tdmqRocketmq cluster can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tdmq/rocketmqCluster:RocketmqCluster cluster cluster_id
+    /// $ pulumi import tencentcloud:Tdmq/rocketmqCluster:RocketmqCluster cluster cluster_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/rocketmqCluster:RocketmqCluster")]
-    public partial class RocketmqCluster : Pulumi.CustomResource
+    public partial class RocketmqCluster : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster ID.
@@ -155,7 +156,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class RocketmqClusterArgs : Pulumi.ResourceArgs
+    public sealed class RocketmqClusterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster name, which can contain 3-64 letters, digits, hyphens, and underscores.
@@ -172,9 +173,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RocketmqClusterArgs()
         {
         }
+        public static new RocketmqClusterArgs Empty => new RocketmqClusterArgs();
     }
 
-    public sealed class RocketmqClusterState : Pulumi.ResourceArgs
+    public sealed class RocketmqClusterState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -251,5 +253,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RocketmqClusterState()
         {
         }
+        public static new RocketmqClusterState Empty => new RocketmqClusterState();
     }
 }

@@ -15,47 +15,48 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mongodb = new Tencentcloud.Mongodb.ShardingInstance("mongodb", new()
     ///     {
-    ///         var mongodb = new Tencentcloud.Mongodb.ShardingInstance("mongodb", new Tencentcloud.Mongodb.ShardingInstanceArgs
-    ///         {
-    ///             AvailableZone = "ap-guangzhou-3",
-    ///             EngineVersion = "MONGO_36_WT",
-    ///             InstanceName = "mongodb",
-    ///             MachineType = "HIO10G",
-    ///             Memory = 4,
-    ///             MongosCpu = 1,
-    ///             MongosMemory = 2,
-    ///             MongosNodeNum = 3,
-    ///             NodesPerShard = 3,
-    ///             Password = "password1234",
-    ///             ProjectId = 0,
-    ///             ShardQuantity = 2,
-    ///             SubnetId = "subnet-lk0svi3p",
-    ///             Volume = 100,
-    ///             VpcId = "vpc-mz3efvbw",
-    ///         });
-    ///     }
+    ///         AvailableZone = "ap-guangzhou-3",
+    ///         EngineVersion = "MONGO_36_WT",
+    ///         InstanceName = "mongodb",
+    ///         MachineType = "HIO10G",
+    ///         Memory = 4,
+    ///         MongosCpu = 1,
+    ///         MongosMemory = 2,
+    ///         MongosNodeNum = 3,
+    ///         NodesPerShard = 3,
+    ///         Password = "password1234",
+    ///         ProjectId = 0,
+    ///         ShardQuantity = 2,
+    ///         SubnetId = "subnet-lk0svi3p",
+    ///         Volume = 100,
+    ///         VpcId = "vpc-mz3efvbw",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Mongodb sharding instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance mongodb cmgo-41s6jwy4
+    /// $ pulumi import tencentcloud:Mongodb/shardingInstance:ShardingInstance mongodb cmgo-41s6jwy4
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mongodb/shardingInstance:ShardingInstance")]
-    public partial class ShardingInstance : Pulumi.CustomResource
+    public partial class ShardingInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
@@ -241,6 +242,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -262,7 +267,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         }
     }
 
-    public sealed class ShardingInstanceArgs : Pulumi.ResourceArgs
+    public sealed class ShardingInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
@@ -352,11 +357,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         [Input("nodesPerShard", required: true)]
         public Input<int> NodesPerShard { get; set; } = null!;
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password of this Mongodb account.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
@@ -421,9 +436,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public ShardingInstanceArgs()
         {
         }
+        public static new ShardingInstanceArgs Empty => new ShardingInstanceArgs();
     }
 
-    public sealed class ShardingInstanceState : Pulumi.ResourceArgs
+    public sealed class ShardingInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
@@ -519,11 +535,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         [Input("nodesPerShard")]
         public Input<int>? NodesPerShard { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password of this Mongodb account.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
@@ -606,5 +632,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public ShardingInstanceState()
         {
         }
+        public static new ShardingInstanceState Empty => new ShardingInstanceState();
     }
 }

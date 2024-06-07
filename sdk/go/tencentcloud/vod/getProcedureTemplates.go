@@ -8,59 +8,64 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of VOD procedure templates.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooProcedureTemplate, err := Vod.NewProcedureTemplate(ctx, "fooProcedureTemplate", &Vod.ProcedureTemplateArgs{
-// 			Comment: pulumi.String("test"),
-// 			MediaProcessTask: &vod.ProcedureTemplateMediaProcessTaskArgs{
-// 				AdaptiveDynamicStreamingTaskLists: vod.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArray{
-// 					&vod.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{
-// 						Definition: pulumi.Any(tencentcloud_vod_adaptive_dynamic_streaming_template.Foo.Id),
-// 					},
-// 				},
-// 				SnapshotByTimeOffsetTaskLists: vod.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArray{
-// 					&vod.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{
-// 						Definition: pulumi.Any(tencentcloud_vod_snapshot_by_time_offset_template.Foo.Id),
-// 						ExtTimeOffsetLists: pulumi.StringArray{
-// 							pulumi.String("3.5s"),
-// 						},
-// 					},
-// 				},
-// 				ImageSpriteTaskLists: vod.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArray{
-// 					&vod.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs{
-// 						Definition: pulumi.Any(tencentcloud_vod_image_sprite_template.Foo.Id),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Vod.GetProcedureTemplatesOutput(ctx, vod.GetProcedureTemplatesOutputArgs{
-// 			Type: pulumi.String("Custom"),
-// 			Name: fooProcedureTemplate.ID(),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooProcedureTemplate, err := Vod.NewProcedureTemplate(ctx, "fooProcedureTemplate", &Vod.ProcedureTemplateArgs{
+//				Comment: pulumi.String("test"),
+//				MediaProcessTask: &vod.ProcedureTemplateMediaProcessTaskArgs{
+//					AdaptiveDynamicStreamingTaskLists: vod.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArray{
+//						&vod.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListArgs{
+//							Definition: pulumi.Any(tencentcloud_vod_adaptive_dynamic_streaming_template.Foo.Id),
+//						},
+//					},
+//					SnapshotByTimeOffsetTaskLists: vod.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArray{
+//						&vod.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListArgs{
+//							Definition: pulumi.Any(tencentcloud_vod_snapshot_by_time_offset_template.Foo.Id),
+//							ExtTimeOffsetLists: pulumi.StringArray{
+//								pulumi.String("3.5s"),
+//							},
+//						},
+//					},
+//					ImageSpriteTaskLists: vod.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArray{
+//						&vod.ProcedureTemplateMediaProcessTaskImageSpriteTaskListArgs{
+//							Definition: pulumi.Any(tencentcloud_vod_image_sprite_template.Foo.Id),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Vod.GetProcedureTemplatesOutput(ctx, vod.GetProcedureTemplatesOutputArgs{
+//				Type: pulumi.String("Custom"),
+//				Name: fooProcedureTemplate.ID(),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetProcedureTemplates(ctx *pulumi.Context, args *GetProcedureTemplatesArgs, opts ...pulumi.InvokeOption) (*GetProcedureTemplatesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProcedureTemplatesResult
 	err := ctx.Invoke("tencentcloud:Vod/getProcedureTemplates:getProcedureTemplates", args, &rv, opts...)
 	if err != nil {

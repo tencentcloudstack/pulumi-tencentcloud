@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mountPointAttachment = new tencentcloud.Chdfs.MountPointAttachment("mount_point_attachment", {
+ * const mountPointAttachment = new tencentcloud.chdfs.MountPointAttachment("mountPointAttachment", {
  *     accessGroupIds: [
  *         "ag-bvmzrbsm",
  *         "ag-lairqrgr",
@@ -21,13 +22,14 @@ import * as utilities from "../utilities";
  *     mountPointId: "f14mpfy5lh4e-KuiL",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * chdfs mount_point_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Chdfs/mountPointAttachment:MountPointAttachment mount_point_attachment mount_point_id
+ * $ pulumi import tencentcloud:Chdfs/mountPointAttachment:MountPointAttachment mount_point_attachment mount_point_id
  * ```
  */
 export class MountPointAttachment extends pulumi.CustomResource {

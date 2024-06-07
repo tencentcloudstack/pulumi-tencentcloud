@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var snapshot = new Tencentcloud.Cbs.Snapshot("snapshot", new()
     ///     {
-    ///         var snapshot = new Tencentcloud.Cbs.Snapshot("snapshot", new Tencentcloud.Cbs.SnapshotArgs
-    ///         {
-    ///             SnapshotName = "unnamed",
-    ///             StorageId = "disk-kdt0sq6m",
-    ///         });
-    ///     }
+    ///         SnapshotName = "unnamed",
+    ///         StorageId = "disk-kdt0sq6m",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CBS snapshot can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cbs/snapshot:Snapshot snapshot snap-3sa3f39b
+    /// $ pulumi import tencentcloud:Cbs/snapshot:Snapshot snapshot snap-3sa3f39b
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/snapshot:Snapshot")]
-    public partial class Snapshot : Pulumi.CustomResource
+    public partial class Snapshot : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Creation time of snapshot.
@@ -137,7 +138,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         }
     }
 
-    public sealed class SnapshotArgs : Pulumi.ResourceArgs
+    public sealed class SnapshotArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of the snapshot.
@@ -167,9 +168,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public SnapshotArgs()
         {
         }
+        public static new SnapshotArgs Empty => new SnapshotArgs();
     }
 
-    public sealed class SnapshotState : Pulumi.ResourceArgs
+    public sealed class SnapshotState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Creation time of snapshot.
@@ -229,5 +231,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public SnapshotState()
         {
         }
+        public static new SnapshotState Empty => new SnapshotState();
     }
 }

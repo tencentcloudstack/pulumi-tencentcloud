@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tcmq subscribe
@@ -18,7 +19,7 @@ import (
 // tcmq subscribe can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcmq/subscribe:Subscribe subscribe subscribe_id
+// $ pulumi import tencentcloud:Tcmq/subscribe:Subscribe subscribe subscribe_id
 // ```
 type Subscribe struct {
 	pulumi.CustomResourceState
@@ -62,7 +63,7 @@ func NewSubscribe(ctx *pulumi.Context,
 	if args.TopicName == nil {
 		return nil, errors.New("invalid value for required argument 'TopicName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Subscribe
 	err := ctx.RegisterResource("tencentcloud:Tcmq/subscribe:Subscribe", name, args, &resource, opts...)
 	if err != nil {
@@ -199,7 +200,7 @@ func (i *Subscribe) ToSubscribeOutputWithContext(ctx context.Context) SubscribeO
 // SubscribeArrayInput is an input type that accepts SubscribeArray and SubscribeArrayOutput values.
 // You can construct a concrete instance of `SubscribeArrayInput` via:
 //
-//          SubscribeArray{ SubscribeArgs{...} }
+//	SubscribeArray{ SubscribeArgs{...} }
 type SubscribeArrayInput interface {
 	pulumi.Input
 
@@ -224,7 +225,7 @@ func (i SubscribeArray) ToSubscribeArrayOutputWithContext(ctx context.Context) S
 // SubscribeMapInput is an input type that accepts SubscribeMap and SubscribeMapOutput values.
 // You can construct a concrete instance of `SubscribeMapInput` via:
 //
-//          SubscribeMap{ "key": SubscribeArgs{...} }
+//	SubscribeMap{ "key": SubscribeArgs{...} }
 type SubscribeMapInput interface {
 	pulumi.Input
 

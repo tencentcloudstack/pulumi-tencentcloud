@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// <summary>
         /// Use this data source to query detailed information of scaling policy.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var asScalingPolicies = Tencentcloud.As.GetScalingPolicies.Invoke(new()
         ///     {
-        ///         var asScalingPolicies = Output.Create(Tencentcloud.As.GetScalingPolicies.InvokeAsync(new Tencentcloud.As.GetScalingPoliciesArgs
-        ///         {
-        ///             ResultOutputFile = "mytestpath",
-        ///             ScalingPolicyId = "asg-mvyghxu7",
-        ///         }));
-        ///     }
+        ///         ResultOutputFile = "mytestpath",
+        ///         ScalingPolicyId = "asg-mvyghxu7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetScalingPoliciesResult> InvokeAsync(GetScalingPoliciesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetScalingPoliciesResult>("tencentcloud:As/getScalingPolicies:getScalingPolicies", args ?? new GetScalingPoliciesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetScalingPoliciesResult>("tencentcloud:As/getScalingPolicies:getScalingPolicies", args ?? new GetScalingPoliciesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of scaling policy.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var asScalingPolicies = Tencentcloud.As.GetScalingPolicies.Invoke(new()
         ///     {
-        ///         var asScalingPolicies = Output.Create(Tencentcloud.As.GetScalingPolicies.InvokeAsync(new Tencentcloud.As.GetScalingPoliciesArgs
-        ///         {
-        ///             ResultOutputFile = "mytestpath",
-        ///             ScalingPolicyId = "asg-mvyghxu7",
-        ///         }));
-        ///     }
+        ///         ResultOutputFile = "mytestpath",
+        ///         ScalingPolicyId = "asg-mvyghxu7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetScalingPoliciesResult> Invoke(GetScalingPoliciesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetScalingPoliciesResult>("tencentcloud:As/getScalingPolicies:getScalingPolicies", args ?? new GetScalingPoliciesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetScalingPoliciesResult>("tencentcloud:As/getScalingPolicies:getScalingPolicies", args ?? new GetScalingPoliciesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetScalingPoliciesArgs : Pulumi.InvokeArgs
+    public sealed class GetScalingPoliciesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Scaling policy name.
@@ -103,9 +97,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public GetScalingPoliciesArgs()
         {
         }
+        public static new GetScalingPoliciesArgs Empty => new GetScalingPoliciesArgs();
     }
 
-    public sealed class GetScalingPoliciesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetScalingPoliciesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Scaling policy name.
@@ -134,6 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public GetScalingPoliciesInvokeArgs()
         {
         }
+        public static new GetScalingPoliciesInvokeArgs Empty => new GetScalingPoliciesInvokeArgs();
     }
 
 

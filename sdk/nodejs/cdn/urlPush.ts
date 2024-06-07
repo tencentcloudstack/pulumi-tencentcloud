@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,28 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Cdn.UrlPush("foo", {
- *     urls: ["https://www.example.com/b"],
- * });
+ * const foo = new tencentcloud.cdn.UrlPush("foo", {urls: ["https://www.example.com/b"]});
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### argument to request new push task with same urls
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Cdn.UrlPush("foo", {
+ * const foo = new tencentcloud.cdn.UrlPush("foo", {
  *     redo: 1,
  *     urls: ["https://www.example.com/a"],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class UrlPush extends pulumi.CustomResource {
     /**

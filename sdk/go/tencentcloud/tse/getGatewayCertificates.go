@@ -8,41 +8,46 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tse gatewayCertificates
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.GetGatewayCertificates(ctx, &tse.GetGatewayCertificatesArgs{
-// 			Filters: []tse.GetGatewayCertificatesFilter{
-// 				tse.GetGatewayCertificatesFilter{
-// 					Key:   pulumi.StringRef("BindDomain"),
-// 					Value: pulumi.StringRef("example.com"),
-// 				},
-// 			},
-// 			GatewayId: "gateway-ddbb709b",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.GetGatewayCertificates(ctx, &tse.GetGatewayCertificatesArgs{
+//				Filters: []tse.GetGatewayCertificatesFilter{
+//					{
+//						Key:   pulumi.StringRef("BindDomain"),
+//						Value: pulumi.StringRef("example.com"),
+//					},
+//				},
+//				GatewayId: "gateway-ddbb709b",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func LookupGatewayCertificates(ctx *pulumi.Context, args *LookupGatewayCertificatesArgs, opts ...pulumi.InvokeOption) (*LookupGatewayCertificatesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupGatewayCertificatesResult
 	err := ctx.Invoke("tencentcloud:Tse/getGatewayCertificates:getGatewayCertificates", args, &rv, opts...)
 	if err != nil {

@@ -15,28 +15,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var embedInterval = new Tencentcloud.Bi.EmbedIntervalApply("embedInterval", new()
     ///     {
-    ///         var embedInterval = new Tencentcloud.Bi.EmbedIntervalApply("embedInterval", new Tencentcloud.Bi.EmbedIntervalApplyArgs
-    ///         {
-    ///             BiToken = "4192d65b-d674-4117-9a59-xxxxxxxxx",
-    ///             PageId = 10520483,
-    ///             ProjectId = 11015030,
-    ///             Scope = "page",
-    ///         });
-    ///     }
+    ///         BiToken = "4192d65b-d674-4117-9a59-xxxxxxxxx",
+    ///         PageId = 10520483,
+    ///         ProjectId = 11015030,
+    ///         Scope = "page",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Bi/embedIntervalApply:EmbedIntervalApply")]
-    public partial class EmbedIntervalApply : Pulumi.CustomResource
+    public partial class EmbedIntervalApply : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Token that needs to be applied for extension.
@@ -107,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         }
     }
 
-    public sealed class EmbedIntervalApplyArgs : Pulumi.ResourceArgs
+    public sealed class EmbedIntervalApplyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Token that needs to be applied for extension.
@@ -136,9 +137,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         public EmbedIntervalApplyArgs()
         {
         }
+        public static new EmbedIntervalApplyArgs Empty => new EmbedIntervalApplyArgs();
     }
 
-    public sealed class EmbedIntervalApplyState : Pulumi.ResourceArgs
+    public sealed class EmbedIntervalApplyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Token that needs to be applied for extension.
@@ -167,5 +169,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         public EmbedIntervalApplyState()
         {
         }
+        public static new EmbedIntervalApplyState Empty => new EmbedIntervalApplyState();
     }
 }

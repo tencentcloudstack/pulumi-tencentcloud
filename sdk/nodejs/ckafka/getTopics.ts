@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,36 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = new tencentcloud.Ckafka.Topic("foo", {
- *     cleanUpPolicy: "delete",
- *     enableWhiteList: true,
- *     instanceId: "ckafka-f9ife4zz",
- *     ipWhiteLists: [
- *         "ip1",
- *         "ip2",
- *     ],
- *     maxMessageBytes: 1024,
- *     note: "topic note",
- *     partitionNum: 1,
- *     replicaNum: 2,
- *     retention: 60000,
- *     segment: 3600000,
- *     syncReplicaMinNum: 1,
- *     topicName: "example",
- *     uncleanLeaderElectionEnable: false,
+ * const example = tencentcloud.Ckafka.getTopics({
+ *     instanceId: "ckafka-vv7wp5nx",
+ *     topicName: "tf_example",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTopics(args: GetTopicsArgs, opts?: pulumi.InvokeOptions): Promise<GetTopicsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ckafka/getTopics:getTopics", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -84,9 +70,25 @@ export interface GetTopicsResult {
      */
     readonly topicName?: string;
 }
-
+/**
+ * Use this data source to query detailed information of ckafka topic.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Ckafka.getTopics({
+ *     instanceId: "ckafka-vv7wp5nx",
+ *     topicName: "tf_example",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTopicsOutput(args: GetTopicsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTopicsResult> {
-    return pulumi.output(args).apply(a => getTopics(a, opts))
+    return pulumi.output(args).apply((a: any) => getTopics(a, opts))
 }
 
 /**

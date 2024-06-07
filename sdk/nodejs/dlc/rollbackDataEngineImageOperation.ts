@@ -9,10 +9,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const checkDataEngineImageCanBeRollback = tencentcloud.Dlc.getCheckDataEngineImageCanBeRollback({
  *     dataEngineId: "DataEngine-cgkvbas6",
@@ -23,13 +24,14 @@ import * as utilities from "../utilities";
  *     toRecordId: checkDataEngineImageCanBeRollback.then(checkDataEngineImageCanBeRollback => checkDataEngineImageCanBeRollback.toRecordId),
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dlc rollback_data_engine_image can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dlc/rollbackDataEngineImageOperation:RollbackDataEngineImageOperation rollback_data_engine_image rollback_data_engine_image_id
+ * $ pulumi import tencentcloud:Dlc/rollbackDataEngineImageOperation:RollbackDataEngineImageOperation rollback_data_engine_image rollback_data_engine_image_id
  * ```
  */
 export class RollbackDataEngineImageOperation extends pulumi.CustomResource {

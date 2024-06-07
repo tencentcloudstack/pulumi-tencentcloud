@@ -15,59 +15,112 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var newRoGroup = new Tencentcloud.Postgresql.ReadonlyGroup("newRoGroup", new Tencentcloud.Postgresql.ReadonlyGroupArgs
-    ///         {
-    ///             MasterDbInstanceId = local.Pgsql_id,
-    ///             ProjectId = 0,
-    ///             VpcId = local.Vpc_id,
-    ///             SubnetId = local.Subnet_id,
-    ///             ReplayLagEliminate = 1,
-    ///             ReplayLatencyEliminate = 1,
-    ///             MaxReplayLag = 100,
-    ///             MaxReplayLatency = 512,
-    ///             MinDelayEliminateReserve = 1,
-    ///         });
-    ///         var foo = new Tencentcloud.Postgresql.ReadonlyInstance("foo", new Tencentcloud.Postgresql.ReadonlyInstanceArgs
-    ///         {
-    ///             AutoRenewFlag = 0,
-    ///             DbVersion = "10.4",
-    ///             InstanceChargeType = "POSTPAID_BY_HOUR",
-    ///             MasterDbInstanceId = "postgres-j4pm65id",
-    ///             Memory = 4,
-    ///             NeedSupportIpv6 = 0,
-    ///             ProjectId = 0,
-    ///             SecurityGroupsIds = 
-    ///             {
-    ///                 "sg-fefj5n6r",
-    ///             },
-    ///             Storage = 250,
-    ///             SubnetId = "subnet-enm92y0m",
-    ///             VpcId = "vpc-86v957zb",
-    ///             ReadOnlyGroupId = newRoGroup.Id,
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     // create vpc subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create postgresql
+    ///     var exampleInstance = new Tencentcloud.Postgresql.Instance("exampleInstance", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         EngineVersion = "10.4",
+    ///         RootUser = "root123",
+    ///         RootPassword = "Root123$",
+    ///         Charset = "UTF8",
+    ///         ProjectId = 0,
+    ///         Memory = 2,
+    ///         Cpu = 1,
+    ///         Storage = 10,
+    ///         Tags = 
+    ///         {
+    ///             { "test", "tf" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleReadonlyGroup = new Tencentcloud.Postgresql.ReadonlyGroup("exampleReadonlyGroup", new()
+    ///     {
+    ///         MasterDbInstanceId = exampleInstance.Id,
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         ReplayLagEliminate = 1,
+    ///         ReplayLatencyEliminate = 1,
+    ///         MaxReplayLag = 100,
+    ///         MaxReplayLatency = 512,
+    ///         MinDelayEliminateReserve = 1,
+    ///     });
+    /// 
+    ///     // create security group
+    ///     var exampleGroup = new Tencentcloud.Security.Group("exampleGroup", new()
+    ///     {
+    ///         Description = "sg desc.",
+    ///         ProjectId = 0,
+    ///         Tags = 
+    ///         {
+    ///             { "example", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleReadonlyInstance = new Tencentcloud.Postgresql.ReadonlyInstance("exampleReadonlyInstance", new()
+    ///     {
+    ///         ReadOnlyGroupId = exampleReadonlyGroup.Id,
+    ///         MasterDbInstanceId = exampleInstance.Id,
+    ///         Zone = availabilityZone,
+    ///         AutoRenewFlag = 0,
+    ///         DbVersion = "10.4",
+    ///         InstanceChargeType = "POSTPAID_BY_HOUR",
+    ///         Memory = 4,
+    ///         Cpu = 2,
+    ///         Storage = 250,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         NeedSupportIpv6 = 0,
+    ///         ProjectId = 0,
+    ///         SecurityGroupsIds = new[]
+    ///         {
+    ///             exampleGroup.Id,
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// postgresql readonly instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo instance_id
+    /// $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance example instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance")]
-    public partial class ReadonlyInstance : Pulumi.CustomResource
+    public partial class ReadonlyInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
@@ -80,6 +133,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Output("autoVoucher")]
         public Output<int?> AutoVoucher { get; private set; } = null!;
+
+        /// <summary>
+        /// Number of CPU cores. Allowed value must be equal `cpu` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
+        /// </summary>
+        [Output("cpu")]
+        public Output<int> Cpu { get; private set; } = null!;
 
         /// <summary>
         /// Create time of the postgresql instance.
@@ -240,7 +299,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class ReadonlyInstanceArgs : Pulumi.ResourceArgs
+    public sealed class ReadonlyInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
@@ -253,6 +312,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Input("autoVoucher")]
         public Input<int>? AutoVoucher { get; set; }
+
+        /// <summary>
+        /// Number of CPU cores. Allowed value must be equal `cpu` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
+        /// </summary>
+        [Input("cpu")]
+        public Input<int>? Cpu { get; set; }
 
         /// <summary>
         /// PostgreSQL kernel version, which must be the same as that of the primary instance.
@@ -359,9 +424,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public ReadonlyInstanceArgs()
         {
         }
+        public static new ReadonlyInstanceArgs Empty => new ReadonlyInstanceArgs();
     }
 
-    public sealed class ReadonlyInstanceState : Pulumi.ResourceArgs
+    public sealed class ReadonlyInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
@@ -374,6 +440,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Input("autoVoucher")]
         public Input<int>? AutoVoucher { get; set; }
+
+        /// <summary>
+        /// Number of CPU cores. Allowed value must be equal `cpu` that data source `tencentcloud.Postgresql.getSpecinfos` provides.
+        /// </summary>
+        [Input("cpu")]
+        public Input<int>? Cpu { get; set; }
 
         /// <summary>
         /// Create time of the postgresql instance.
@@ -504,5 +576,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public ReadonlyInstanceState()
         {
         }
+        public static new ReadonlyInstanceState Empty => new ReadonlyInstanceState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
 {
     [TencentcloudResourceType("tencentcloud:Dlc/attachWorkGroupPolicyOperation:AttachWorkGroupPolicyOperation")]
-    public partial class AttachWorkGroupPolicyOperation : Pulumi.CustomResource
+    public partial class AttachWorkGroupPolicyOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The set of policies to be bound.
@@ -70,7 +70,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class AttachWorkGroupPolicyOperationArgs : Pulumi.ResourceArgs
+    public sealed class AttachWorkGroupPolicyOperationArgs : global::Pulumi.ResourceArgs
     {
         [Input("policySets")]
         private InputList<Inputs.AttachWorkGroupPolicyOperationPolicySetArgs>? _policySets;
@@ -93,9 +93,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public AttachWorkGroupPolicyOperationArgs()
         {
         }
+        public static new AttachWorkGroupPolicyOperationArgs Empty => new AttachWorkGroupPolicyOperationArgs();
     }
 
-    public sealed class AttachWorkGroupPolicyOperationState : Pulumi.ResourceArgs
+    public sealed class AttachWorkGroupPolicyOperationState : global::Pulumi.ResourceArgs
     {
         [Input("policySets")]
         private InputList<Inputs.AttachWorkGroupPolicyOperationPolicySetGetArgs>? _policySets;
@@ -118,5 +119,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public AttachWorkGroupPolicyOperationState()
         {
         }
+        public static new AttachWorkGroupPolicyOperationState Empty => new AttachWorkGroupPolicyOperationState();
     }
 }

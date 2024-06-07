@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const resourceDashboard = pulumi.output(tencentcloud.Vpc.getResourceDashboard({
+ * const resourceDashboard = tencentcloud.Vpc.getResourceDashboard({
  *     vpcIds: ["vpc-4owdpnwr"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getResourceDashboard(args: GetResourceDashboardArgs, opts?: pulumi.InvokeOptions): Promise<GetResourceDashboardResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpc/getResourceDashboard:getResourceDashboard", {
         "resultOutputFile": args.resultOutputFile,
         "vpcIds": args.vpcIds,
@@ -60,9 +60,24 @@ export interface GetResourceDashboardResult {
     readonly resultOutputFile?: string;
     readonly vpcIds: string[];
 }
-
+/**
+ * Use this data source to query detailed information of vpc resourceDashboard
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const resourceDashboard = tencentcloud.Vpc.getResourceDashboard({
+ *     vpcIds: ["vpc-4owdpnwr"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getResourceDashboardOutput(args: GetResourceDashboardOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetResourceDashboardResult> {
-    return pulumi.output(args).apply(a => getResourceDashboard(a, opts))
+    return pulumi.output(args).apply((a: any) => getResourceDashboard(a, opts))
 }
 
 /**

@@ -14,67 +14,73 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// Provides a resource to create a cfw vpc_firewall_switch
     /// 
     /// ## Example Usage
+    /// 
     /// ### Turn off switch
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleVpcFwSwitches = Tencentcloud.Cfw.GetVpcFwSwitches.Invoke(new()
     ///     {
-    ///         var exampleVpcFwSwitches = Output.Create(Tencentcloud.Cfw.GetVpcFwSwitches.InvokeAsync(new Tencentcloud.Cfw.GetVpcFwSwitchesArgs
-    ///         {
-    ///             VpcInsId = "cfwg-c8c2de41",
-    ///         }));
-    ///         var exampleVpcFirewallSwitch = new Tencentcloud.Cfw.VpcFirewallSwitch("exampleVpcFirewallSwitch", new Tencentcloud.Cfw.VpcFirewallSwitchArgs
-    ///         {
-    ///             VpcInsId = exampleVpcFwSwitches.Apply(exampleVpcFwSwitches =&gt; exampleVpcFwSwitches.Id),
-    ///             SwitchId = exampleVpcFwSwitches.Apply(exampleVpcFwSwitches =&gt; exampleVpcFwSwitches.SwitchLists?[0]?.SwitchId),
-    ///             Enable = 0,
-    ///         });
-    ///     }
+    ///         VpcInsId = "cfwg-c8c2de41",
+    ///     });
     /// 
-    /// }
+    ///     var exampleVpcFirewallSwitch = new Tencentcloud.Cfw.VpcFirewallSwitch("exampleVpcFirewallSwitch", new()
+    ///     {
+    ///         VpcInsId = exampleVpcFwSwitches.Apply(getVpcFwSwitchesResult =&gt; getVpcFwSwitchesResult.Id),
+    ///         SwitchId = exampleVpcFwSwitches.Apply(getVpcFwSwitchesResult =&gt; getVpcFwSwitchesResult.SwitchLists[0]?.SwitchId),
+    ///         Enable = 0,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Or turn on switch
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleVpcFwSwitches = Tencentcloud.Cfw.GetVpcFwSwitches.Invoke(new()
     ///     {
-    ///         var exampleVpcFwSwitches = Output.Create(Tencentcloud.Cfw.GetVpcFwSwitches.InvokeAsync(new Tencentcloud.Cfw.GetVpcFwSwitchesArgs
-    ///         {
-    ///             VpcInsId = "cfwg-c8c2de41",
-    ///         }));
-    ///         var exampleVpcFirewallSwitch = new Tencentcloud.Cfw.VpcFirewallSwitch("exampleVpcFirewallSwitch", new Tencentcloud.Cfw.VpcFirewallSwitchArgs
-    ///         {
-    ///             VpcInsId = exampleVpcFwSwitches.Apply(exampleVpcFwSwitches =&gt; exampleVpcFwSwitches.Id),
-    ///             SwitchId = exampleVpcFwSwitches.Apply(exampleVpcFwSwitches =&gt; exampleVpcFwSwitches.SwitchLists?[0]?.SwitchId),
-    ///             Enable = 1,
-    ///         });
-    ///     }
+    ///         VpcInsId = "cfwg-c8c2de41",
+    ///     });
     /// 
-    /// }
+    ///     var exampleVpcFirewallSwitch = new Tencentcloud.Cfw.VpcFirewallSwitch("exampleVpcFirewallSwitch", new()
+    ///     {
+    ///         VpcInsId = exampleVpcFwSwitches.Apply(getVpcFwSwitchesResult =&gt; getVpcFwSwitchesResult.Id),
+    ///         SwitchId = exampleVpcFwSwitches.Apply(getVpcFwSwitchesResult =&gt; getVpcFwSwitchesResult.SwitchLists[0]?.SwitchId),
+    ///         Enable = 1,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cfw vpc_firewall_switch can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfw/vpcFirewallSwitch:VpcFirewallSwitch example cfwg-c8c2de41#cfws-f2c63ded84
+    /// $ pulumi import tencentcloud:Cfw/vpcFirewallSwitch:VpcFirewallSwitch example cfwg-c8c2de41#cfws-f2c63ded84
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/vpcFirewallSwitch:VpcFirewallSwitch")]
-    public partial class VpcFirewallSwitch : Pulumi.CustomResource
+    public partial class VpcFirewallSwitch : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Turn the switch on or off. 0: turn off the switch; 1: Turn on the switch.
@@ -139,7 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         }
     }
 
-    public sealed class VpcFirewallSwitchArgs : Pulumi.ResourceArgs
+    public sealed class VpcFirewallSwitchArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Turn the switch on or off. 0: turn off the switch; 1: Turn on the switch.
@@ -162,9 +168,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public VpcFirewallSwitchArgs()
         {
         }
+        public static new VpcFirewallSwitchArgs Empty => new VpcFirewallSwitchArgs();
     }
 
-    public sealed class VpcFirewallSwitchState : Pulumi.ResourceArgs
+    public sealed class VpcFirewallSwitchState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Turn the switch on or off. 0: turn off the switch; 1: Turn on the switch.
@@ -187,5 +194,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public VpcFirewallSwitchState()
         {
         }
+        public static new VpcFirewallSwitchState Empty => new VpcFirewallSwitchState();
     }
 }

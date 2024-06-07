@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
 {
 
-    public sealed class NamespaceCveWhitelistItemArgs : Pulumi.ResourceArgs
+    public sealed class NamespaceCveWhitelistItemArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Vulnerability Whitelist ID.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
         public NamespaceCveWhitelistItemArgs()
         {
         }
+        public static new NamespaceCveWhitelistItemArgs Empty => new NamespaceCveWhitelistItemArgs();
     }
 }

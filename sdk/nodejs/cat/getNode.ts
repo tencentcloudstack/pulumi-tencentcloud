@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const node = pulumi.output(tencentcloud.Cat.getNode({
+ * const node = tencentcloud.Cat.getNode({
  *     isIpv6: false,
  *     location: 2,
  *     nodeType: 1,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getNode(args?: GetNodeArgs, opts?: pulumi.InvokeOptions): Promise<GetNodeResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cat/getNode:getNode", {
         "isIpv6": args.isIpv6,
         "location": args.location,
@@ -90,9 +90,26 @@ export interface GetNodeResult {
     readonly payMode?: number;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cat node
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const node = tencentcloud.Cat.getNode({
+ *     isIpv6: false,
+ *     location: 2,
+ *     nodeType: 1,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getNodeOutput(args?: GetNodeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetNodeResult> {
-    return pulumi.output(args).apply(a => getNode(a, opts))
+    return pulumi.output(args).apply((a: any) => getNode(a, opts))
 }
 
 /**

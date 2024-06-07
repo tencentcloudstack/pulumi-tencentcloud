@@ -14,58 +14,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// Use this resource to create tcr repository.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a tcr repository instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new()
     ///     {
-    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
-    ///         {
-    ///             InstanceType = "premium",
-    ///             DeleteBucket = true,
-    ///         });
-    ///         var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new Tencentcloud.Tcr.NamespaceArgs
-    ///         {
-    ///             InstanceId = exampleInstance.Id,
-    ///             IsPublic = true,
-    ///             IsAutoScan = true,
-    ///             IsPreventVul = true,
-    ///             Severity = "medium",
-    ///             CveWhitelistItems = 
-    ///             {
-    ///                 new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
-    ///                 {
-    ///                     CveId = "cve-xxxxx",
-    ///                 },
-    ///             },
-    ///         });
-    ///         var exampleRepository = new Tencentcloud.Tcr.Repository("exampleRepository", new Tencentcloud.Tcr.RepositoryArgs
-    ///         {
-    ///             InstanceId = exampleInstance.Id,
-    ///             NamespaceName = exampleNamespace.Name,
-    ///             BriefDesc = "111",
-    ///             Description = "111111111111111111111111111111111111",
-    ///         });
-    ///     }
+    ///         InstanceType = "premium",
+    ///         DeleteBucket = true,
+    ///     });
     /// 
-    /// }
+    ///     var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///         IsPublic = true,
+    ///         IsAutoScan = true,
+    ///         IsPreventVul = true,
+    ///         Severity = "medium",
+    ///         CveWhitelistItems = new[]
+    ///         {
+    ///             new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+    ///             {
+    ///                 CveId = "cve-xxxxx",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleRepository = new Tencentcloud.Tcr.Repository("exampleRepository", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///         NamespaceName = exampleNamespace.Name,
+    ///         BriefDesc = "111",
+    ///         Description = "111111111111111111111111111111111111",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcr repository can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/repository:Repository foo instance_id#namespace_name#repository_name
+    /// $ pulumi import tencentcloud:Tcr/repository:Repository foo instance_id#namespace_name#repository_name
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/repository:Repository")]
-    public partial class Repository : Pulumi.CustomResource
+    public partial class Repository : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Brief description of the repository. Valid length is [1~100].
@@ -166,7 +170,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         }
     }
 
-    public sealed class RepositoryArgs : Pulumi.ResourceArgs
+    public sealed class RepositoryArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Brief description of the repository. Valid length is [1~100].
@@ -201,9 +205,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public RepositoryArgs()
         {
         }
+        public static new RepositoryArgs Empty => new RepositoryArgs();
     }
 
-    public sealed class RepositoryState : Pulumi.ResourceArgs
+    public sealed class RepositoryState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Brief description of the repository. Valid length is [1~100].
@@ -262,5 +267,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public RepositoryState()
         {
         }
+        public static new RepositoryState Empty => new RepositoryState();
     }
 }

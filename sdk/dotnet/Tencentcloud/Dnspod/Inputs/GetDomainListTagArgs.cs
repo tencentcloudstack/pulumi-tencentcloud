@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod.Inputs
 {
 
-    public sealed class GetDomainListTagInputArgs : Pulumi.ResourceArgs
+    public sealed class GetDomainListTagInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Field to be filtered.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod.Inputs
         public GetDomainListTagInputArgs()
         {
         }
+        public static new GetDomainListTagInputArgs Empty => new GetDomainListTagInputArgs();
     }
 }

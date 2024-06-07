@@ -15,48 +15,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var service = new Tencentcloud.ApiGateway.Service("service", new()
     ///     {
-    ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+    ///         ServiceName = "niceservice",
+    ///         Protocol = "http&amp;https",
+    ///         ServiceDesc = "your nice service",
+    ///         NetTypes = new[]
     ///         {
-    ///             ServiceName = "niceservice",
-    ///             Protocol = "http&amp;https",
-    ///             ServiceDesc = "your nice service",
-    ///             NetTypes = 
-    ///             {
-    ///                 "INNER",
-    ///                 "OUTER",
-    ///             },
-    ///             IpVersion = "IPv4",
-    ///         });
-    ///         var test = new Tencentcloud.ApiGateway.IpStrategy("test", new Tencentcloud.ApiGateway.IpStrategyArgs
-    ///         {
-    ///             ServiceId = service.Id,
-    ///             StrategyName = "tf_test",
-    ///             StrategyType = "BLACK",
-    ///             StrategyData = "9.9.9.9",
-    ///         });
-    ///     }
+    ///             "INNER",
+    ///             "OUTER",
+    ///         },
+    ///         IpVersion = "IPv4",
+    ///     });
     /// 
-    /// }
+    ///     var test = new Tencentcloud.ApiGateway.IpStrategy("test", new()
+    ///     {
+    ///         ServiceId = service.Id,
+    ///         StrategyName = "tf_test",
+    ///         StrategyType = "BLACK",
+    ///         StrategyData = "9.9.9.9",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// IP strategy of API gateway can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:ApiGateway/ipStrategy:IpStrategy test service-ohxqslqe#IPStrategy-q1lk8ud2
+    /// $ pulumi import tencentcloud:ApiGateway/ipStrategy:IpStrategy test service-ohxqslqe#IPStrategy-q1lk8ud2
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/ipStrategy:IpStrategy")]
-    public partial class IpStrategy : Pulumi.CustomResource
+    public partial class IpStrategy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
@@ -139,7 +141,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         }
     }
 
-    public sealed class IpStrategyArgs : Pulumi.ResourceArgs
+    public sealed class IpStrategyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of the API gateway service.
@@ -168,9 +170,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public IpStrategyArgs()
         {
         }
+        public static new IpStrategyArgs Empty => new IpStrategyArgs();
     }
 
-    public sealed class IpStrategyState : Pulumi.ResourceArgs
+    public sealed class IpStrategyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used.
@@ -211,5 +214,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public IpStrategyState()
         {
         }
+        public static new IpStrategyState Empty => new IpStrategyState();
     }
 }

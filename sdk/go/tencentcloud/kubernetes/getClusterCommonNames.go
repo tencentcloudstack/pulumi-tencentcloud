@@ -8,39 +8,44 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a datasource to query cluster CommonNames.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kubernetes.GetClusterCommonNames(ctx, &kubernetes.GetClusterCommonNamesArgs{
-// 			ClusterId: pulumi.StringRef("cls-12345678"),
-// 			SubaccountUins: []string{
-// 				"1234567890",
-// 				"0987654321",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kubernetes.GetClusterCommonNames(ctx, &kubernetes.GetClusterCommonNamesArgs{
+//				ClusterId: pulumi.StringRef("cls-12345678"),
+//				SubaccountUins: []string{
+//					"1234567890",
+//					"0987654321",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetClusterCommonNames(ctx *pulumi.Context, args *GetClusterCommonNamesArgs, opts ...pulumi.InvokeOption) (*GetClusterCommonNamesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClusterCommonNamesResult
 	err := ctx.Invoke("tencentcloud:Kubernetes/getClusterCommonNames:getClusterCommonNames", args, &rv, opts...)
 	if err != nil {
@@ -53,7 +58,7 @@ func GetClusterCommonNames(ctx *pulumi.Context, args *GetClusterCommonNamesArgs,
 type GetClusterCommonNamesArgs struct {
 	// Cluster ID.
 	ClusterId *string `pulumi:"clusterId"`
-	// Used for save result.
+	// Used to save results.
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
 	// List of Role ID. Up to 50 sub-accounts can be passed in at a time.
 	RoleIds []string `pulumi:"roleIds"`
@@ -90,7 +95,7 @@ func GetClusterCommonNamesOutput(ctx *pulumi.Context, args GetClusterCommonNames
 type GetClusterCommonNamesOutputArgs struct {
 	// Cluster ID.
 	ClusterId pulumi.StringPtrInput `pulumi:"clusterId"`
-	// Used for save result.
+	// Used to save results.
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
 	// List of Role ID. Up to 50 sub-accounts can be passed in at a time.
 	RoleIds pulumi.StringArrayInput `pulumi:"roleIds"`

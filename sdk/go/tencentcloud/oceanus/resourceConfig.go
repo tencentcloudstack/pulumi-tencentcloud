@@ -7,63 +7,68 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a oceanus resourceConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Oceanus"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleResource, err := Oceanus.NewResource(ctx, "exampleResource", &Oceanus.ResourceArgs{
-// 			ResourceLoc: &oceanus.ResourceResourceLocArgs{
-// 				StorageType: pulumi.Int(1),
-// 				Param: &oceanus.ResourceResourceLocParamArgs{
-// 					Bucket: pulumi.String("keep-terraform-1257058945"),
-// 					Path:   pulumi.String("OceanusResource/junit-4.13.1.jar"),
-// 					Region: pulumi.String("ap-guangzhou"),
-// 				},
-// 			},
-// 			ResourceType:         pulumi.Int(1),
-// 			Remark:               pulumi.String("remark."),
-// 			ResourceConfigRemark: pulumi.String("config remark."),
-// 			FolderId:             pulumi.String("folder-7ctl246z"),
-// 			WorkSpaceId:          pulumi.String("space-2idq8wbr"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Oceanus.NewResourceConfig(ctx, "exampleResourceConfig", &Oceanus.ResourceConfigArgs{
-// 			ResourceId: exampleResource.ResourceId,
-// 			ResourceLoc: &oceanus.ResourceConfigResourceLocArgs{
-// 				StorageType: pulumi.Int(1),
-// 				Param: &oceanus.ResourceConfigResourceLocParamArgs{
-// 					Bucket: pulumi.String("keep-terraform-1257058945"),
-// 					Path:   pulumi.String("OceanusResource/junit-4.13.2.jar"),
-// 					Region: pulumi.String("ap-guangzhou"),
-// 				},
-// 			},
-// 			Remark:      pulumi.String("config remark."),
-// 			WorkSpaceId: pulumi.String("space-2idq8wbr"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleResource, err := Oceanus.NewResource(ctx, "exampleResource", &Oceanus.ResourceArgs{
+//				ResourceLoc: &oceanus.ResourceResourceLocArgs{
+//					StorageType: pulumi.Int(1),
+//					Param: &oceanus.ResourceResourceLocParamArgs{
+//						Bucket: pulumi.String("keep-terraform-1257058945"),
+//						Path:   pulumi.String("OceanusResource/junit-4.13.1.jar"),
+//						Region: pulumi.String("ap-guangzhou"),
+//					},
+//				},
+//				ResourceType:         pulumi.Int(1),
+//				Remark:               pulumi.String("remark."),
+//				ResourceConfigRemark: pulumi.String("config remark."),
+//				FolderId:             pulumi.String("folder-7ctl246z"),
+//				WorkSpaceId:          pulumi.String("space-2idq8wbr"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Oceanus.NewResourceConfig(ctx, "exampleResourceConfig", &Oceanus.ResourceConfigArgs{
+//				ResourceId: exampleResource.ResourceId,
+//				ResourceLoc: &oceanus.ResourceConfigResourceLocArgs{
+//					StorageType: pulumi.Int(1),
+//					Param: &oceanus.ResourceConfigResourceLocParamArgs{
+//						Bucket: pulumi.String("keep-terraform-1257058945"),
+//						Path:   pulumi.String("OceanusResource/junit-4.13.2.jar"),
+//						Region: pulumi.String("ap-guangzhou"),
+//					},
+//				},
+//				Remark:      pulumi.String("config remark."),
+//				WorkSpaceId: pulumi.String("space-2idq8wbr"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ResourceConfig struct {
 	pulumi.CustomResourceState
 
@@ -92,7 +97,7 @@ func NewResourceConfig(ctx *pulumi.Context,
 	if args.ResourceLoc == nil {
 		return nil, errors.New("invalid value for required argument 'ResourceLoc'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ResourceConfig
 	err := ctx.RegisterResource("tencentcloud:Oceanus/resourceConfig:ResourceConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -193,7 +198,7 @@ func (i *ResourceConfig) ToResourceConfigOutputWithContext(ctx context.Context) 
 // ResourceConfigArrayInput is an input type that accepts ResourceConfigArray and ResourceConfigArrayOutput values.
 // You can construct a concrete instance of `ResourceConfigArrayInput` via:
 //
-//          ResourceConfigArray{ ResourceConfigArgs{...} }
+//	ResourceConfigArray{ ResourceConfigArgs{...} }
 type ResourceConfigArrayInput interface {
 	pulumi.Input
 
@@ -218,7 +223,7 @@ func (i ResourceConfigArray) ToResourceConfigArrayOutputWithContext(ctx context.
 // ResourceConfigMapInput is an input type that accepts ResourceConfigMap and ResourceConfigMapOutput values.
 // You can construct a concrete instance of `ResourceConfigMapInput` via:
 //
-//          ResourceConfigMap{ "key": ResourceConfigArgs{...} }
+//	ResourceConfigMap{ "key": ResourceConfigArgs{...} }
 type ResourceConfigMapInput interface {
 	pulumi.Input
 

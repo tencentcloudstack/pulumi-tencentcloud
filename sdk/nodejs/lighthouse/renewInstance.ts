@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const renewInstance = new tencentcloud.Lighthouse.RenewInstance("renew_instance", {
+ * const renewInstance = new tencentcloud.lighthouse.RenewInstance("renewInstance", {
  *     autoVoucher: false,
  *     instanceChargePrepaid: {
  *         period: 1,
  *         renewFlag: "NOTIFY_AND_MANUAL_RENEW",
  *     },
- *     instanceId: "",
+ *     instanceId: "lhins-xxxxxxx",
  *     renewDataDisk: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RenewInstance extends pulumi.CustomResource {
     /**

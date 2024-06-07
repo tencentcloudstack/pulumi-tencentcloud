@@ -15,56 +15,57 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Eb.EventBus("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Eb.EventBus("foo", new Tencentcloud.Eb.EventBusArgs
+    ///         EventBusName = "tf-event_bus",
+    ///         Description = "event bus desc",
+    ///         EnableStore = false,
+    ///         SaveDays = 1,
+    ///         Tags = 
     ///         {
-    ///             EventBusName = "tf-event_bus",
-    ///             Description = "event bus desc",
-    ///             EnableStore = false,
-    ///             SaveDays = 1,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var putEvents = new Tencentcloud.Eb.PutEvents("putEvents", new Tencentcloud.Eb.PutEventsArgs
-    ///         {
-    ///             EventLists = 
-    ///             {
-    ///                 new Tencentcloud.Eb.Inputs.PutEventsEventListArgs
-    ///                 {
-    ///                     Source = "ckafka.cloud.tencent",
-    ///                     Data = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
-    ///                     {
-    ///                         { "topic", "test-topic" },
-    ///                         { "Partition", 1 },
-    ///                         { "offset", 37 },
-    ///                         { "msgKey", "test" },
-    ///                         { "msgBody", "Hello from Ckafka again!" },
-    ///                     }),
-    ///                     Type = "connector:ckafka",
-    ///                     Subject = "qcs::ckafka:ap-guangzhou:uin/1250000000:ckafkaId/uin/1250000000/ckafka-123456",
-    ///                     Time = 1691572461939,
-    ///                 },
-    ///             },
-    ///             EventBusId = foo.Id,
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var putEvents = new Tencentcloud.Eb.PutEvents("putEvents", new()
+    ///     {
+    ///         EventLists = new[]
+    ///         {
+    ///             new Tencentcloud.Eb.Inputs.PutEventsEventListArgs
+    ///             {
+    ///                 Source = "ckafka.cloud.tencent",
+    ///                 Data = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     ["topic"] = "test-topic",
+    ///                     ["Partition"] = 1,
+    ///                     ["offset"] = 37,
+    ///                     ["msgKey"] = "test",
+    ///                     ["msgBody"] = "Hello from Ckafka again!",
+    ///                 }),
+    ///                 Type = "connector:ckafka",
+    ///                 Subject = "qcs::ckafka:ap-guangzhou:uin/1250000000:ckafkaId/uin/1250000000/ckafka-123456",
+    ///                 Time = 1691572461939,
+    ///             },
+    ///         },
+    ///         EventBusId = foo.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eb/putEvents:PutEvents")]
-    public partial class PutEvents : Pulumi.CustomResource
+    public partial class PutEvents : global::Pulumi.CustomResource
     {
         /// <summary>
         /// event bus Id.
@@ -123,7 +124,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         }
     }
 
-    public sealed class PutEventsArgs : Pulumi.ResourceArgs
+    public sealed class PutEventsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// event bus Id.
@@ -146,9 +147,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public PutEventsArgs()
         {
         }
+        public static new PutEventsArgs Empty => new PutEventsArgs();
     }
 
-    public sealed class PutEventsState : Pulumi.ResourceArgs
+    public sealed class PutEventsState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// event bus Id.
@@ -171,5 +173,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public PutEventsState()
         {
         }
+        public static new PutEventsState Empty => new PutEventsState();
     }
 }

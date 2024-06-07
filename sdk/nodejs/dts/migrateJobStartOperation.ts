@@ -9,12 +9,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const start = new tencentcloud.dts.MigrateJobStartOperation("start", {jobId: tencentcloud_dts_migrate_job.job.id});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class MigrateJobStartOperation extends pulumi.CustomResource {
     /**

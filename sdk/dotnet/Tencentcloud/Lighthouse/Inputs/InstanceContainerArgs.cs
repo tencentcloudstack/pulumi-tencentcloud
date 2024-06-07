@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
 {
 
-    public sealed class InstanceContainerArgs : Pulumi.ResourceArgs
+    public sealed class InstanceContainerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The command to run.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
         public InstanceContainerArgs()
         {
         }
+        public static new InstanceContainerArgs Empty => new InstanceContainerArgs();
     }
 }

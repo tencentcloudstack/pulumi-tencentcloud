@@ -15,71 +15,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var accessKey = new Tencentcloud.Cam.AccessKey("accessKey", new()
     ///     {
-    ///         var accessKey = new Tencentcloud.Cam.AccessKey("accessKey", new Tencentcloud.Cam.AccessKeyArgs
-    ///         {
-    ///             TargetUin = 100033690181,
-    ///         });
-    ///     }
+    ///         TargetUin = 100033690181,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Update
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var accessKey = new Tencentcloud.Cam.AccessKey("accessKey", new()
     ///     {
-    ///         var accessKey = new Tencentcloud.Cam.AccessKey("accessKey", new Tencentcloud.Cam.AccessKeyArgs
-    ///         {
-    ///             Status = "Inactive",
-    ///             TargetUin = 100033690181,
-    ///         });
-    ///     }
+    ///         Status = "Inactive",
+    ///         TargetUin = 100033690181,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Encrypted
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var accessKey = new Tencentcloud.Cam.AccessKey("accessKey", new()
     ///     {
-    ///         var accessKey = new Tencentcloud.Cam.AccessKey("accessKey", new Tencentcloud.Cam.AccessKeyArgs
-    ///         {
-    ///             PgpKey = "keybase:some_person_that_exists",
-    ///             TargetUin = 100033690181,
-    ///         });
-    ///     }
+    ///         PgpKey = "keybase:some_person_that_exists",
+    ///         TargetUin = 100033690181,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cam access_key can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/accessKey:AccessKey access_key access_key_id
+    /// $ pulumi import tencentcloud:Cam/accessKey:AccessKey access_key access_key_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/accessKey:AccessKey")]
-    public partial class AccessKey : Pulumi.CustomResource
+    public partial class AccessKey : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Access_key is the access key identification, required when updating.
@@ -149,6 +154,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "secretAccessKey",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -170,7 +179,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class AccessKeyArgs : Pulumi.ResourceArgs
+    public sealed class AccessKeyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Access_key is the access key identification, required when updating.
@@ -199,9 +208,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public AccessKeyArgs()
         {
         }
+        public static new AccessKeyArgs Empty => new AccessKeyArgs();
     }
 
-    public sealed class AccessKeyState : Pulumi.ResourceArgs
+    public sealed class AccessKeyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Access_key is the access key identification, required when updating.
@@ -229,11 +239,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         [Input("pgpKey")]
         public Input<string>? PgpKey { get; set; }
 
+        [Input("secretAccessKey")]
+        private Input<string>? _secretAccessKey;
+
         /// <summary>
         /// Access key (key is only visible when created, please keep it properly).
         /// </summary>
-        [Input("secretAccessKey")]
-        public Input<string>? SecretAccessKey { get; set; }
+        public Input<string>? SecretAccessKey
+        {
+            get => _secretAccessKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _secretAccessKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// Key status, activated (Active) or inactive (Inactive), required when updating.
@@ -250,5 +270,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public AccessKeyState()
         {
         }
+        public static new AccessKeyState Empty => new AccessKeyState();
     }
 }

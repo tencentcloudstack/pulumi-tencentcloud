@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb.Inputs
 {
 
-    public sealed class AccountPrivilegesTablePrivilegeGetArgs : Pulumi.ResourceArgs
+    public sealed class AccountPrivilegesTablePrivilegeGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Database name.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb.Inputs
         public AccountPrivilegesTablePrivilegeGetArgs()
         {
         }
+        public static new AccountPrivilegesTablePrivilegeGetArgs Empty => new AccountPrivilegesTablePrivilegeGetArgs();
     }
 }

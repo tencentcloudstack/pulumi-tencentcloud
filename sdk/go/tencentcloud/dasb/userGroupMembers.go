@@ -7,46 +7,64 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dasb userGroupMembers
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewUserGroupMembers(ctx, "example", &Dasb.UserGroupMembersArgs{
-// 			MemberIdSets: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(2),
-// 				pulumi.Int(3),
-// 			},
-// 			UserGroupId: pulumi.Int(3),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleUser, err := Dasb.NewUser(ctx, "exampleUser", &Dasb.UserArgs{
+//				UserName: pulumi.String("tf_example"),
+//				RealName: pulumi.String("terraform"),
+//				Phone:    pulumi.String("+86|18345678782"),
+//				Email:    pulumi.String("demo@tencent.com"),
+//				AuthType: pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleUserGroup, err := Dasb.NewUserGroup(ctx, "exampleUserGroup", nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dasb.NewUserGroupMembers(ctx, "exampleUserGroupMembers", &Dasb.UserGroupMembersArgs{
+//				UserGroupId: exampleUserGroup.ID(),
+//				MemberIdSets: pulumi.IntArray{
+//					exampleUser.ID(),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dasb user_group_members can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dasb/userGroupMembers:UserGroupMembers example 3#1,2,3
+// $ pulumi import tencentcloud:Dasb/userGroupMembers:UserGroupMembers example 3#14
 // ```
 type UserGroupMembers struct {
 	pulumi.CustomResourceState
@@ -70,7 +88,7 @@ func NewUserGroupMembers(ctx *pulumi.Context,
 	if args.UserGroupId == nil {
 		return nil, errors.New("invalid value for required argument 'UserGroupId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UserGroupMembers
 	err := ctx.RegisterResource("tencentcloud:Dasb/userGroupMembers:UserGroupMembers", name, args, &resource, opts...)
 	if err != nil {
@@ -151,7 +169,7 @@ func (i *UserGroupMembers) ToUserGroupMembersOutputWithContext(ctx context.Conte
 // UserGroupMembersArrayInput is an input type that accepts UserGroupMembersArray and UserGroupMembersArrayOutput values.
 // You can construct a concrete instance of `UserGroupMembersArrayInput` via:
 //
-//          UserGroupMembersArray{ UserGroupMembersArgs{...} }
+//	UserGroupMembersArray{ UserGroupMembersArgs{...} }
 type UserGroupMembersArrayInput interface {
 	pulumi.Input
 
@@ -176,7 +194,7 @@ func (i UserGroupMembersArray) ToUserGroupMembersArrayOutputWithContext(ctx cont
 // UserGroupMembersMapInput is an input type that accepts UserGroupMembersMap and UserGroupMembersMapOutput values.
 // You can construct a concrete instance of `UserGroupMembersMapInput` via:
 //
-//          UserGroupMembersMap{ "key": UserGroupMembersArgs{...} }
+//	UserGroupMembersMap{ "key": UserGroupMembersArgs{...} }
 type UserGroupMembersMapInput interface {
 	pulumi.Input
 

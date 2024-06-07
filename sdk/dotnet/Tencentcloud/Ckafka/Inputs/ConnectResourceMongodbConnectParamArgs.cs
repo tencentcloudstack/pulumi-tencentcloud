@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class ConnectResourceMongodbConnectParamArgs : Pulumi.ResourceArgs
+    public sealed class ConnectResourceMongodbConnectParamArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to update to the associated Datahub task, default: false.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public ConnectResourceMongodbConnectParamArgs()
         {
         }
+        public static new ConnectResourceMongodbConnectParamArgs Empty => new ConnectResourceMongodbConnectParamArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Inputs
 {
 
-    public sealed class RocketmqVipInstanceVpcInfoArgs : Pulumi.ResourceArgs
+    public sealed class RocketmqVipInstanceVpcInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Subnet ID.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Inputs
         public RocketmqVipInstanceVpcInfoArgs()
         {
         }
+        public static new RocketmqVipInstanceVpcInfoArgs Empty => new RocketmqVipInstanceVpcInfoArgs();
     }
 }

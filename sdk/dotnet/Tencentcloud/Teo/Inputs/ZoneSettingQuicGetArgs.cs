@@ -11,10 +11,10 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneSettingQuicGetArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingQuicGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Whether to enable QUIC.- `on`: Enable.- `off`: Disable.
+        /// Whether to enable QUIC.
         /// </summary>
         [Input("switch", required: true)]
         public Input<string> Switch { get; set; } = null!;
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneSettingQuicGetArgs()
         {
         }
+        public static new ZoneSettingQuicGetArgs Empty => new ZoneSettingQuicGetArgs();
     }
 }

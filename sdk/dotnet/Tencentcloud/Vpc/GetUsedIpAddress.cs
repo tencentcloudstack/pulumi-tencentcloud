@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc used_ip_address
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var usedIpAddress = Tencentcloud.Vpc.GetUsedIpAddress.Invoke(new()
         ///     {
-        ///         var usedIpAddress = Output.Create(Tencentcloud.Vpc.GetUsedIpAddress.InvokeAsync(new Tencentcloud.Vpc.GetUsedIpAddressArgs
-        ///         {
-        ///             VpcId = "vpc-4owdpnwr",
-        ///         }));
-        ///     }
+        ///         VpcId = "vpc-4owdpnwr",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetUsedIpAddressResult> InvokeAsync(GetUsedIpAddressArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetUsedIpAddressResult>("tencentcloud:Vpc/getUsedIpAddress:getUsedIpAddress", args ?? new GetUsedIpAddressArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetUsedIpAddressResult>("tencentcloud:Vpc/getUsedIpAddress:getUsedIpAddress", args ?? new GetUsedIpAddressArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc used_ip_address
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var usedIpAddress = Tencentcloud.Vpc.GetUsedIpAddress.Invoke(new()
         ///     {
-        ///         var usedIpAddress = Output.Create(Tencentcloud.Vpc.GetUsedIpAddress.InvokeAsync(new Tencentcloud.Vpc.GetUsedIpAddressArgs
-        ///         {
-        ///             VpcId = "vpc-4owdpnwr",
-        ///         }));
-        ///     }
+        ///         VpcId = "vpc-4owdpnwr",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetUsedIpAddressResult> Invoke(GetUsedIpAddressInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetUsedIpAddressResult>("tencentcloud:Vpc/getUsedIpAddress:getUsedIpAddress", args ?? new GetUsedIpAddressInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetUsedIpAddressResult>("tencentcloud:Vpc/getUsedIpAddress:getUsedIpAddress", args ?? new GetUsedIpAddressInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetUsedIpAddressArgs : Pulumi.InvokeArgs
+    public sealed class GetUsedIpAddressArgs : global::Pulumi.InvokeArgs
     {
         [Input("ipAddresses")]
         private List<string>? _ipAddresses;
@@ -107,9 +101,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetUsedIpAddressArgs()
         {
         }
+        public static new GetUsedIpAddressArgs Empty => new GetUsedIpAddressArgs();
     }
 
-    public sealed class GetUsedIpAddressInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetUsedIpAddressInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("ipAddresses")]
         private InputList<string>? _ipAddresses;
@@ -144,6 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetUsedIpAddressInvokeArgs()
         {
         }
+        public static new GetUsedIpAddressInvokeArgs Empty => new GetUsedIpAddressInvokeArgs();
     }
 
 

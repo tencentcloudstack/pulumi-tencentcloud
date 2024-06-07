@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const service = new tencentcloud.apigateway.Service("service", {
  *     serviceName: "niceservice",
@@ -32,14 +34,12 @@ import * as utilities from "../utilities";
  *     serviceId: service.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getThrottlingServices(args?: GetThrottlingServicesArgs, opts?: pulumi.InvokeOptions): Promise<GetThrottlingServicesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:ApiGateway/getThrottlingServices:getThrottlingServices", {
         "resultOutputFile": args.resultOutputFile,
         "serviceId": args.serviceId,
@@ -78,9 +78,38 @@ export interface GetThrottlingServicesResult {
      */
     readonly serviceId?: string;
 }
-
+/**
+ * Use this data source to query API gateway throttling services.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const service = new tencentcloud.apigateway.Service("service", {
+ *     serviceName: "niceservice",
+ *     protocol: "http&https",
+ *     serviceDesc: "your nice service",
+ *     netTypes: [
+ *         "INNER",
+ *         "OUTER",
+ *     ],
+ *     ipVersion: "IPv4",
+ *     releaseLimit: 100,
+ *     preLimit: 100,
+ *     testLimit: 100,
+ * });
+ * const id = tencentcloud.ApiGateway.getThrottlingServicesOutput({
+ *     serviceId: service.id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getThrottlingServicesOutput(args?: GetThrottlingServicesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetThrottlingServicesResult> {
-    return pulumi.output(args).apply(a => getThrottlingServices(a, opts))
+    return pulumi.output(args).apply((a: any) => getThrottlingServices(a, opts))
 }
 
 /**

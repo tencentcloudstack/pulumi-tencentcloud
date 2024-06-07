@@ -7,45 +7,51 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cynosdb securityGroup
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewSecurityGroup(ctx, "test", &Cynosdb.SecurityGroupArgs{
-// 			ClusterId:         pulumi.String("cynosdbmysql-bws8h88b"),
-// 			InstanceGroupType: pulumi.String("RO"),
-// 			SecurityGroupIds: pulumi.StringArray{
-// 				pulumi.String("sg-baxfiao5"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewSecurityGroup(ctx, "test", &Cynosdb.SecurityGroupArgs{
+//				ClusterId:         pulumi.String("cynosdbmysql-bws8h88b"),
+//				InstanceGroupType: pulumi.String("RO"),
+//				SecurityGroupIds: pulumi.StringArray{
+//					pulumi.String("sg-baxfiao5"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cynosdb security_group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cynosdb/securityGroup:SecurityGroup security_group ${cluster_id}#${instance_group_type}
+// $ pulumi import tencentcloud:Cynosdb/securityGroup:SecurityGroup security_group ${cluster_id}#${instance_group_type}
 // ```
 type SecurityGroup struct {
 	pulumi.CustomResourceState
@@ -53,9 +59,6 @@ type SecurityGroup struct {
 	// Cluster id.
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
 	// Instance group type. Available values:
-	// -`HA` - HA group;
-	// -`RO` - Read-only group;
-	// -`ALL` - HA and RO group.
 	InstanceGroupType pulumi.StringOutput `pulumi:"instanceGroupType"`
 	// A list of security group IDs to be modified, an array of one or more security group IDs.
 	SecurityGroupIds pulumi.StringArrayOutput `pulumi:"securityGroupIds"`
@@ -77,7 +80,7 @@ func NewSecurityGroup(ctx *pulumi.Context,
 	if args.SecurityGroupIds == nil {
 		return nil, errors.New("invalid value for required argument 'SecurityGroupIds'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SecurityGroup
 	err := ctx.RegisterResource("tencentcloud:Cynosdb/securityGroup:SecurityGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -103,9 +106,6 @@ type securityGroupState struct {
 	// Cluster id.
 	ClusterId *string `pulumi:"clusterId"`
 	// Instance group type. Available values:
-	// -`HA` - HA group;
-	// -`RO` - Read-only group;
-	// -`ALL` - HA and RO group.
 	InstanceGroupType *string `pulumi:"instanceGroupType"`
 	// A list of security group IDs to be modified, an array of one or more security group IDs.
 	SecurityGroupIds []string `pulumi:"securityGroupIds"`
@@ -115,9 +115,6 @@ type SecurityGroupState struct {
 	// Cluster id.
 	ClusterId pulumi.StringPtrInput
 	// Instance group type. Available values:
-	// -`HA` - HA group;
-	// -`RO` - Read-only group;
-	// -`ALL` - HA and RO group.
 	InstanceGroupType pulumi.StringPtrInput
 	// A list of security group IDs to be modified, an array of one or more security group IDs.
 	SecurityGroupIds pulumi.StringArrayInput
@@ -131,9 +128,6 @@ type securityGroupArgs struct {
 	// Cluster id.
 	ClusterId string `pulumi:"clusterId"`
 	// Instance group type. Available values:
-	// -`HA` - HA group;
-	// -`RO` - Read-only group;
-	// -`ALL` - HA and RO group.
 	InstanceGroupType string `pulumi:"instanceGroupType"`
 	// A list of security group IDs to be modified, an array of one or more security group IDs.
 	SecurityGroupIds []string `pulumi:"securityGroupIds"`
@@ -144,9 +138,6 @@ type SecurityGroupArgs struct {
 	// Cluster id.
 	ClusterId pulumi.StringInput
 	// Instance group type. Available values:
-	// -`HA` - HA group;
-	// -`RO` - Read-only group;
-	// -`ALL` - HA and RO group.
 	InstanceGroupType pulumi.StringInput
 	// A list of security group IDs to be modified, an array of one or more security group IDs.
 	SecurityGroupIds pulumi.StringArrayInput
@@ -178,7 +169,7 @@ func (i *SecurityGroup) ToSecurityGroupOutputWithContext(ctx context.Context) Se
 // SecurityGroupArrayInput is an input type that accepts SecurityGroupArray and SecurityGroupArrayOutput values.
 // You can construct a concrete instance of `SecurityGroupArrayInput` via:
 //
-//          SecurityGroupArray{ SecurityGroupArgs{...} }
+//	SecurityGroupArray{ SecurityGroupArgs{...} }
 type SecurityGroupArrayInput interface {
 	pulumi.Input
 
@@ -203,7 +194,7 @@ func (i SecurityGroupArray) ToSecurityGroupArrayOutputWithContext(ctx context.Co
 // SecurityGroupMapInput is an input type that accepts SecurityGroupMap and SecurityGroupMapOutput values.
 // You can construct a concrete instance of `SecurityGroupMapInput` via:
 //
-//          SecurityGroupMap{ "key": SecurityGroupArgs{...} }
+//	SecurityGroupMap{ "key": SecurityGroupArgs{...} }
 type SecurityGroupMapInput interface {
 	pulumi.Input
 
@@ -245,9 +236,6 @@ func (o SecurityGroupOutput) ClusterId() pulumi.StringOutput {
 }
 
 // Instance group type. Available values:
-// -`HA` - HA group;
-// -`RO` - Read-only group;
-// -`ALL` - HA and RO group.
 func (o SecurityGroupOutput) InstanceGroupType() pulumi.StringOutput {
 	return o.ApplyT(func(v *SecurityGroup) pulumi.StringOutput { return v.InstanceGroupType }).(pulumi.StringOutput)
 }

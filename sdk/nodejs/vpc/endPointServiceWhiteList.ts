@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const endPointServiceWhiteList = new tencentcloud.Vpc.EndPointServiceWhiteList("end_point_service_white_list", {
+ * const endPointServiceWhiteList = new tencentcloud.vpc.EndPointServiceWhiteList("endPointServiceWhiteList", {
  *     description: "terraform for test",
  *     endPointServiceId: "vpcsvc-69y13tdb",
  *     userUin: "100020512675",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * vpc end_point_service_white_list can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpc/endPointServiceWhiteList:EndPointServiceWhiteList end_point_service_white_list end_point_service_white_list_id
+ * $ pulumi import tencentcloud:Vpc/endPointServiceWhiteList:EndPointServiceWhiteList end_point_service_white_list end_point_service_white_list_id
  * ```
  */
 export class EndPointServiceWhiteList extends pulumi.CustomResource {

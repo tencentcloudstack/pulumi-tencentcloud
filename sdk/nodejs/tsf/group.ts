@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const group = new tencentcloud.Tsf.Group("group", {
+ * const group = new tencentcloud.tsf.Group("group", {
  *     alias: "terraform test",
  *     applicationId: "application-xxx",
  *     clusterId: "cluster-vwgjxxxx",
@@ -25,13 +26,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tsf group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tsf/group:Group group group-axxx
+ * $ pulumi import tencentcloud:Tsf/group:Group group group-axxx
  * ```
  */
 export class Group extends pulumi.CustomResource {

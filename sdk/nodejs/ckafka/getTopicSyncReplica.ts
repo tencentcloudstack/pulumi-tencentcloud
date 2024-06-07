@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const topicSyncReplica = pulumi.output(tencentcloud.Ckafka.getTopicSyncReplica({
+ * const topicSyncReplica = tencentcloud.Ckafka.getTopicSyncReplica({
  *     instanceId: "ckafka-xxxxxx",
  *     topicName: "xxxxxx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTopicSyncReplica(args: GetTopicSyncReplicaArgs, opts?: pulumi.InvokeOptions): Promise<GetTopicSyncReplicaResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ckafka/getTopicSyncReplica:getTopicSyncReplica", {
         "instanceId": args.instanceId,
         "outOfSyncReplicaOnly": args.outOfSyncReplicaOnly,
@@ -73,9 +73,25 @@ export interface GetTopicSyncReplicaResult {
     readonly topicInSyncReplicaLists: outputs.Ckafka.GetTopicSyncReplicaTopicInSyncReplicaList[];
     readonly topicName: string;
 }
-
+/**
+ * Use this data source to query detailed information of ckafka topicSyncReplica
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const topicSyncReplica = tencentcloud.Ckafka.getTopicSyncReplica({
+ *     instanceId: "ckafka-xxxxxx",
+ *     topicName: "xxxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTopicSyncReplicaOutput(args: GetTopicSyncReplicaOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTopicSyncReplicaResult> {
-    return pulumi.output(args).apply(a => getTopicSyncReplica(a, opts))
+    return pulumi.output(args).apply((a: any) => getTopicSyncReplica(a, opts))
 }
 
 /**

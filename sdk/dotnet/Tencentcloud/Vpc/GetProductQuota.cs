@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc product_quota
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var productQuota = Tencentcloud.Vpc.GetProductQuota.Invoke(new()
         ///     {
-        ///         var productQuota = Output.Create(Tencentcloud.Vpc.GetProductQuota.InvokeAsync(new Tencentcloud.Vpc.GetProductQuotaArgs
-        ///         {
-        ///             Product = "vpc",
-        ///         }));
-        ///     }
+        ///         Product = "vpc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProductQuotaResult> InvokeAsync(GetProductQuotaArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProductQuotaResult>("tencentcloud:Vpc/getProductQuota:getProductQuota", args ?? new GetProductQuotaArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProductQuotaResult>("tencentcloud:Vpc/getProductQuota:getProductQuota", args ?? new GetProductQuotaArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc product_quota
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var productQuota = Tencentcloud.Vpc.GetProductQuota.Invoke(new()
         ///     {
-        ///         var productQuota = Output.Create(Tencentcloud.Vpc.GetProductQuota.InvokeAsync(new Tencentcloud.Vpc.GetProductQuotaArgs
-        ///         {
-        ///             Product = "vpc",
-        ///         }));
-        ///     }
+        ///         Product = "vpc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProductQuotaResult> Invoke(GetProductQuotaInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProductQuotaResult>("tencentcloud:Vpc/getProductQuota:getProductQuota", args ?? new GetProductQuotaInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProductQuotaResult>("tencentcloud:Vpc/getProductQuota:getProductQuota", args ?? new GetProductQuotaInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProductQuotaArgs : Pulumi.InvokeArgs
+    public sealed class GetProductQuotaArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The name of the network product to be queried. The products that can be queried are:vpc, ccn, vpn, dc, dfw, clb, eip.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetProductQuotaArgs()
         {
         }
+        public static new GetProductQuotaArgs Empty => new GetProductQuotaArgs();
     }
 
-    public sealed class GetProductQuotaInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProductQuotaInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The name of the network product to be queried. The products that can be queried are:vpc, ccn, vpn, dc, dfw, clb, eip.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetProductQuotaInvokeArgs()
         {
         }
+        public static new GetProductQuotaInvokeArgs Empty => new GetProductQuotaInvokeArgs();
     }
 
 

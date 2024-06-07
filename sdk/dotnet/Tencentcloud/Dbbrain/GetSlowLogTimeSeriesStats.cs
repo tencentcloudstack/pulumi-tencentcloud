@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain slow_log_time_series_stats
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var test = Tencentcloud.Dbbrain.GetSlowLogTimeSeriesStats.Invoke(new()
         ///     {
-        ///         var test = Output.Create(Tencentcloud.Dbbrain.GetSlowLogTimeSeriesStats.InvokeAsync(new Tencentcloud.Dbbrain.GetSlowLogTimeSeriesStatsArgs
-        ///         {
-        ///             EndTime = "%s",
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             StartTime = "%s",
-        ///         }));
-        ///     }
+        ///         EndTime = "%s",
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         StartTime = "%s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSlowLogTimeSeriesStatsResult> InvokeAsync(GetSlowLogTimeSeriesStatsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogTimeSeriesStatsResult>("tencentcloud:Dbbrain/getSlowLogTimeSeriesStats:getSlowLogTimeSeriesStats", args ?? new GetSlowLogTimeSeriesStatsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogTimeSeriesStatsResult>("tencentcloud:Dbbrain/getSlowLogTimeSeriesStats:getSlowLogTimeSeriesStats", args ?? new GetSlowLogTimeSeriesStatsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain slow_log_time_series_stats
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var test = Tencentcloud.Dbbrain.GetSlowLogTimeSeriesStats.Invoke(new()
         ///     {
-        ///         var test = Output.Create(Tencentcloud.Dbbrain.GetSlowLogTimeSeriesStats.InvokeAsync(new Tencentcloud.Dbbrain.GetSlowLogTimeSeriesStatsArgs
-        ///         {
-        ///             EndTime = "%s",
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             StartTime = "%s",
-        ///         }));
-        ///     }
+        ///         EndTime = "%s",
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         StartTime = "%s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSlowLogTimeSeriesStatsResult> Invoke(GetSlowLogTimeSeriesStatsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSlowLogTimeSeriesStatsResult>("tencentcloud:Dbbrain/getSlowLogTimeSeriesStats:getSlowLogTimeSeriesStats", args ?? new GetSlowLogTimeSeriesStatsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogTimeSeriesStatsResult>("tencentcloud:Dbbrain/getSlowLogTimeSeriesStats:getSlowLogTimeSeriesStats", args ?? new GetSlowLogTimeSeriesStatsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSlowLogTimeSeriesStatsArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowLogTimeSeriesStatsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time, such as `2019-09-10 12:13:14`, the interval between the end time and the start time can be up to 7 days.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSlowLogTimeSeriesStatsArgs()
         {
         }
+        public static new GetSlowLogTimeSeriesStatsArgs Empty => new GetSlowLogTimeSeriesStatsArgs();
     }
 
-    public sealed class GetSlowLogTimeSeriesStatsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowLogTimeSeriesStatsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End time, such as `2019-09-10 12:13:14`, the interval between the end time and the start time can be up to 7 days.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSlowLogTimeSeriesStatsInvokeArgs()
         {
         }
+        public static new GetSlowLogTimeSeriesStatsInvokeArgs Empty => new GetSlowLogTimeSeriesStatsInvokeArgs();
     }
 
 

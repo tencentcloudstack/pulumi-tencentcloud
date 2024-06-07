@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of vpc routeConflicts
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.GetRouteConflicts(ctx, &vpc.GetRouteConflictsArgs{
-// 			DestinationCidrBlocks: []string{
-// 				"172.18.111.0/24",
-// 			},
-// 			RouteTableId: "rtb-6xypllqe",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.GetRouteConflicts(ctx, &vpc.GetRouteConflictsArgs{
+//				DestinationCidrBlocks: []string{
+//					"172.18.111.0/24",
+//				},
+//				RouteTableId: "rtb-6xypllqe",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetRouteConflicts(ctx *pulumi.Context, args *GetRouteConflictsArgs, opts ...pulumi.InvokeOption) (*GetRouteConflictsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRouteConflictsResult
 	err := ctx.Invoke("tencentcloud:Vpc/getRouteConflicts:getRouteConflicts", args, &rv, opts...)
 	if err != nil {

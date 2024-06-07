@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainCacheKeyGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainCacheKeyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable full-path cache, values `on` (DEFAULT ON), `off`.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainCacheKeyGetArgs()
         {
         }
+        public static new DomainCacheKeyGetArgs Empty => new DomainCacheKeyGetArgs();
     }
 }

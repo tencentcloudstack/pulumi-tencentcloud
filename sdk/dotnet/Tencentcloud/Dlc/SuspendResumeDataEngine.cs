@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var suspendResumeDataEngine = new Tencentcloud.Dlc.SuspendResumeDataEngine("suspendResumeDataEngine", new()
     ///     {
-    ///         var suspendResumeDataEngine = new Tencentcloud.Dlc.SuspendResumeDataEngine("suspendResumeDataEngine", new Tencentcloud.Dlc.SuspendResumeDataEngineArgs
-    ///         {
-    ///             DataEngineName = "example-iac",
-    ///             Operate = "suspend",
-    ///         });
-    ///     }
+    ///         DataEngineName = "example-iac",
+    ///         Operate = "suspend",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dlc suspend_resume_data_engine can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dlc/suspendResumeDataEngine:SuspendResumeDataEngine suspend_resume_data_engine suspend_resume_data_engine_id
+    /// $ pulumi import tencentcloud:Dlc/suspendResumeDataEngine:SuspendResumeDataEngine suspend_resume_data_engine suspend_resume_data_engine_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/suspendResumeDataEngine:SuspendResumeDataEngine")]
-    public partial class SuspendResumeDataEngine : Pulumi.CustomResource
+    public partial class SuspendResumeDataEngine : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Engine name.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class SuspendResumeDataEngineArgs : Pulumi.ResourceArgs
+    public sealed class SuspendResumeDataEngineArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Engine name.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public SuspendResumeDataEngineArgs()
         {
         }
+        public static new SuspendResumeDataEngineArgs Empty => new SuspendResumeDataEngineArgs();
     }
 
-    public sealed class SuspendResumeDataEngineState : Pulumi.ResourceArgs
+    public sealed class SuspendResumeDataEngineState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Engine name.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public SuspendResumeDataEngineState()
         {
         }
+        public static new SuspendResumeDataEngineState Empty => new SuspendResumeDataEngineState();
     }
 }

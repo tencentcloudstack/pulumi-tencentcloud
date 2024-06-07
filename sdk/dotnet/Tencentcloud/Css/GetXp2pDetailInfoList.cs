@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// <summary>
         /// Use this data source to query detailed information of css xp2p_detail_info_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var xp2pDetailInfoList = Tencentcloud.Css.GetXp2pDetailInfoList.Invoke(new()
         ///     {
-        ///         var xp2pDetailInfoList = Output.Create(Tencentcloud.Css.GetXp2pDetailInfoList.InvokeAsync(new Tencentcloud.Css.GetXp2pDetailInfoListArgs
+        ///         QueryTime = "2023-11-01T14:55:01+08:00",
+        ///         Types = new[]
         ///         {
-        ///             QueryTime = "2023-11-01T14:55:01+08:00",
-        ///             Types = 
-        ///             {
-        ///                 "live",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "live",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetXp2pDetailInfoListResult> InvokeAsync(GetXp2pDetailInfoListArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetXp2pDetailInfoListResult>("tencentcloud:Css/getXp2pDetailInfoList:getXp2pDetailInfoList", args ?? new GetXp2pDetailInfoListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetXp2pDetailInfoListResult>("tencentcloud:Css/getXp2pDetailInfoList:getXp2pDetailInfoList", args ?? new GetXp2pDetailInfoListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of css xp2p_detail_info_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var xp2pDetailInfoList = Tencentcloud.Css.GetXp2pDetailInfoList.Invoke(new()
         ///     {
-        ///         var xp2pDetailInfoList = Output.Create(Tencentcloud.Css.GetXp2pDetailInfoList.InvokeAsync(new Tencentcloud.Css.GetXp2pDetailInfoListArgs
+        ///         QueryTime = "2023-11-01T14:55:01+08:00",
+        ///         Types = new[]
         ///         {
-        ///             QueryTime = "2023-11-01T14:55:01+08:00",
-        ///             Types = 
-        ///             {
-        ///                 "live",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "live",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetXp2pDetailInfoListResult> Invoke(GetXp2pDetailInfoListInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetXp2pDetailInfoListResult>("tencentcloud:Css/getXp2pDetailInfoList:getXp2pDetailInfoList", args ?? new GetXp2pDetailInfoListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetXp2pDetailInfoListResult>("tencentcloud:Css/getXp2pDetailInfoList:getXp2pDetailInfoList", args ?? new GetXp2pDetailInfoListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetXp2pDetailInfoListArgs : Pulumi.InvokeArgs
+    public sealed class GetXp2pDetailInfoListArgs : global::Pulumi.InvokeArgs
     {
         [Input("dimensions")]
         private List<string>? _dimensions;
@@ -133,9 +127,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetXp2pDetailInfoListArgs()
         {
         }
+        public static new GetXp2pDetailInfoListArgs Empty => new GetXp2pDetailInfoListArgs();
     }
 
-    public sealed class GetXp2pDetailInfoListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetXp2pDetailInfoListInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("dimensions")]
         private InputList<string>? _dimensions;
@@ -188,6 +183,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetXp2pDetailInfoListInvokeArgs()
         {
         }
+        public static new GetXp2pDetailInfoListInvokeArgs Empty => new GetXp2pDetailInfoListInvokeArgs();
     }
 
 

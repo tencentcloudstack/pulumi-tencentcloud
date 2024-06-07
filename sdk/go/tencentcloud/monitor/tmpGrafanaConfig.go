@@ -7,93 +7,99 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a monitor tmpGrafanaConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"encoding/json"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-4"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(availabilityZone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooGrafanaInstance, err := Monitor.NewGrafanaInstance(ctx, "fooGrafanaInstance", &Monitor.GrafanaInstanceArgs{
-// 			InstanceName: pulumi.String("tf-grafana"),
-// 			VpcId:        vpc.ID(),
-// 			SubnetIds: pulumi.StringArray{
-// 				subnet.ID(),
-// 			},
-// 			GrafanaInitPassword: pulumi.String("1234567890"),
-// 			EnableInternet:      pulumi.Bool(false),
-// 			IsDestroy:           pulumi.Bool(true),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"server": map[string]interface{}{
-// 				"http_port":           8080,
-// 				"root_url":            "https://cloud-grafana.woa.com/grafana-ffrdnrfa/",
-// 				"serve_from_sub_path": true,
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		_, err = Monitor.NewTmpGrafanaConfig(ctx, "fooTmpGrafanaConfig", &Monitor.TmpGrafanaConfigArgs{
-// 			Config:     pulumi.String(json0),
-// 			InstanceId: fooGrafanaInstance.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-4"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooGrafanaInstance, err := Monitor.NewGrafanaInstance(ctx, "fooGrafanaInstance", &Monitor.GrafanaInstanceArgs{
+//				InstanceName: pulumi.String("tf-grafana"),
+//				VpcId:        vpc.ID(),
+//				SubnetIds: pulumi.StringArray{
+//					subnet.ID(),
+//				},
+//				GrafanaInitPassword: pulumi.String("1234567890"),
+//				EnableInternet:      pulumi.Bool(false),
+//				IsDestroy:           pulumi.Bool(true),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"server": map[string]interface{}{
+//					"http_port":           8080,
+//					"root_url":            "https://cloud-grafana.woa.com/grafana-ffrdnrfa/",
+//					"serve_from_sub_path": true,
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err = Monitor.NewTmpGrafanaConfig(ctx, "fooTmpGrafanaConfig", &Monitor.TmpGrafanaConfigArgs{
+//				Config:     pulumi.String(json0),
+//				InstanceId: fooGrafanaInstance.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // monitor tmp_grafana_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/tmpGrafanaConfig:TmpGrafanaConfig tmp_grafana_config tmp_grafana_config_id
+// $ pulumi import tencentcloud:Monitor/tmpGrafanaConfig:TmpGrafanaConfig tmp_grafana_config tmp_grafana_config_id
 // ```
 type TmpGrafanaConfig struct {
 	pulumi.CustomResourceState
@@ -117,7 +123,7 @@ func NewTmpGrafanaConfig(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TmpGrafanaConfig
 	err := ctx.RegisterResource("tencentcloud:Monitor/tmpGrafanaConfig:TmpGrafanaConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -198,7 +204,7 @@ func (i *TmpGrafanaConfig) ToTmpGrafanaConfigOutputWithContext(ctx context.Conte
 // TmpGrafanaConfigArrayInput is an input type that accepts TmpGrafanaConfigArray and TmpGrafanaConfigArrayOutput values.
 // You can construct a concrete instance of `TmpGrafanaConfigArrayInput` via:
 //
-//          TmpGrafanaConfigArray{ TmpGrafanaConfigArgs{...} }
+//	TmpGrafanaConfigArray{ TmpGrafanaConfigArgs{...} }
 type TmpGrafanaConfigArrayInput interface {
 	pulumi.Input
 
@@ -223,7 +229,7 @@ func (i TmpGrafanaConfigArray) ToTmpGrafanaConfigArrayOutputWithContext(ctx cont
 // TmpGrafanaConfigMapInput is an input type that accepts TmpGrafanaConfigMap and TmpGrafanaConfigMapOutput values.
 // You can construct a concrete instance of `TmpGrafanaConfigMapInput` via:
 //
-//          TmpGrafanaConfigMap{ "key": TmpGrafanaConfigArgs{...} }
+//	TmpGrafanaConfigMap{ "key": TmpGrafanaConfigArgs{...} }
 type TmpGrafanaConfigMapInput interface {
 	pulumi.Input
 

@@ -14,8 +14,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Outputs
     [OutputType]
     public sealed class GetStatisticDataConditionResult
     {
+        /// <summary>
+        /// Dimension.
+        /// </summary>
         public readonly string Key;
+        /// <summary>
+        /// Operator. Valid values: eq (equal to), ne (not equal to), in.
+        /// </summary>
         public readonly string Operator;
+        /// <summary>
+        /// Dimension value. If Operator is eq or ne, only the first element will be used.
+        /// </summary>
         public readonly ImmutableArray<string> Values;
 
         [OutputConstructor]

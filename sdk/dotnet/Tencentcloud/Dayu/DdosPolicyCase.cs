@@ -17,57 +17,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Dayu.DdosPolicyCase("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Dayu.DdosPolicyCase("foo", new Tencentcloud.Dayu.DdosPolicyCaseArgs
+    ///         AppProtocols = new[]
     ///         {
-    ///             AppProtocols = 
-    ///             {
-    ///                 "tcp",
-    ///                 "udp",
-    ///             },
-    ///             AppType = "WEB",
-    ///             HasAbroad = "yes",
-    ///             HasInitiateTcp = "yes",
-    ///             HasInitiateUdp = "yes",
-    ///             HasVpn = "yes",
-    ///             MaxTcpPackageLen = "1200",
-    ///             MaxUdpPackageLen = "1200",
-    ///             MinTcpPackageLen = "1000",
-    ///             MinUdpPackageLen = "1000",
-    ///             PeerTcpPort = "1111",
-    ///             PeerUdpPort = "3333",
-    ///             PlatformTypes = 
-    ///             {
-    ///                 "PC",
-    ///                 "MOBILE",
-    ///             },
-    ///             ResourceType = "bgpip",
-    ///             TcpEndPort = "2000",
-    ///             TcpFootprint = "511",
-    ///             TcpStartPort = "1000",
-    ///             UdpEndPort = "4000",
-    ///             UdpFootprint = "500",
-    ///             UdpStartPort = "3000",
-    ///             WebApiUrls = 
-    ///             {
-    ///                 "abc.com",
-    ///                 "test.cn/aaa.png",
-    ///             },
-    ///         });
-    ///     }
+    ///             "tcp",
+    ///             "udp",
+    ///         },
+    ///         AppType = "WEB",
+    ///         HasAbroad = "yes",
+    ///         HasInitiateTcp = "yes",
+    ///         HasInitiateUdp = "yes",
+    ///         HasVpn = "yes",
+    ///         MaxTcpPackageLen = "1200",
+    ///         MaxUdpPackageLen = "1200",
+    ///         MinTcpPackageLen = "1000",
+    ///         MinUdpPackageLen = "1000",
+    ///         PeerTcpPort = "1111",
+    ///         PeerUdpPort = "3333",
+    ///         PlatformTypes = new[]
+    ///         {
+    ///             "PC",
+    ///             "MOBILE",
+    ///         },
+    ///         ResourceType = "bgpip",
+    ///         TcpEndPort = "2000",
+    ///         TcpFootprint = "511",
+    ///         TcpStartPort = "1000",
+    ///         UdpEndPort = "4000",
+    ///         UdpFootprint = "500",
+    ///         UdpStartPort = "3000",
+    ///         WebApiUrls = new[]
+    ///         {
+    ///             "abc.com",
+    ///             "test.cn/aaa.png",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/ddosPolicyCase:DdosPolicyCase")]
-    public partial class DdosPolicyCase : Pulumi.CustomResource
+    public partial class DdosPolicyCase : global::Pulumi.CustomResource
     {
         /// <summary>
         /// App protocol set of the DDoS policy case.
@@ -258,7 +259,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         }
     }
 
-    public sealed class DdosPolicyCaseArgs : Pulumi.ResourceArgs
+    public sealed class DdosPolicyCaseArgs : global::Pulumi.ResourceArgs
     {
         [Input("appProtocols", required: true)]
         private InputList<string>? _appProtocols;
@@ -413,9 +414,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public DdosPolicyCaseArgs()
         {
         }
+        public static new DdosPolicyCaseArgs Empty => new DdosPolicyCaseArgs();
     }
 
-    public sealed class DdosPolicyCaseState : Pulumi.ResourceArgs
+    public sealed class DdosPolicyCaseState : global::Pulumi.ResourceArgs
     {
         [Input("appProtocols")]
         private InputList<string>? _appProtocols;
@@ -582,5 +584,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public DdosPolicyCaseState()
         {
         }
+        public static new DdosPolicyCaseState Empty => new DdosPolicyCaseState();
     }
 }

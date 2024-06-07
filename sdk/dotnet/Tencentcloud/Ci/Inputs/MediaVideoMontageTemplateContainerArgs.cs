@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaVideoMontageTemplateContainerArgs : Pulumi.ResourceArgs
+    public sealed class MediaVideoMontageTemplateContainerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Container format: mp4, flv, hls, ts, mkv.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaVideoMontageTemplateContainerArgs()
         {
         }
+        public static new MediaVideoMontageTemplateContainerArgs Empty => new MediaVideoMontageTemplateContainerArgs();
     }
 }

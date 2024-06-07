@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// <summary>
         /// Use this data source to query detailed information of scf function_address
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var functionAddress = Tencentcloud.Scf.GetFunctionAddress.Invoke(new()
         ///     {
-        ///         var functionAddress = Output.Create(Tencentcloud.Scf.GetFunctionAddress.InvokeAsync(new Tencentcloud.Scf.GetFunctionAddressArgs
-        ///         {
-        ///             FunctionName = "keep-1676351130",
-        ///             Namespace = "default",
-        ///             Qualifier = "$LATEST",
-        ///         }));
-        ///     }
+        ///         FunctionName = "keep-1676351130",
+        ///         Namespace = "default",
+        ///         Qualifier = "$LATEST",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetFunctionAddressResult> InvokeAsync(GetFunctionAddressArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetFunctionAddressResult>("tencentcloud:Scf/getFunctionAddress:getFunctionAddress", args ?? new GetFunctionAddressArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetFunctionAddressResult>("tencentcloud:Scf/getFunctionAddress:getFunctionAddress", args ?? new GetFunctionAddressArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of scf function_address
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var functionAddress = Tencentcloud.Scf.GetFunctionAddress.Invoke(new()
         ///     {
-        ///         var functionAddress = Output.Create(Tencentcloud.Scf.GetFunctionAddress.InvokeAsync(new Tencentcloud.Scf.GetFunctionAddressArgs
-        ///         {
-        ///             FunctionName = "keep-1676351130",
-        ///             Namespace = "default",
-        ///             Qualifier = "$LATEST",
-        ///         }));
-        ///     }
+        ///         FunctionName = "keep-1676351130",
+        ///         Namespace = "default",
+        ///         Qualifier = "$LATEST",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetFunctionAddressResult> Invoke(GetFunctionAddressInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetFunctionAddressResult>("tencentcloud:Scf/getFunctionAddress:getFunctionAddress", args ?? new GetFunctionAddressInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetFunctionAddressResult>("tencentcloud:Scf/getFunctionAddress:getFunctionAddress", args ?? new GetFunctionAddressInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetFunctionAddressArgs : Pulumi.InvokeArgs
+    public sealed class GetFunctionAddressArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Function name.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetFunctionAddressArgs()
         {
         }
+        public static new GetFunctionAddressArgs Empty => new GetFunctionAddressArgs();
     }
 
-    public sealed class GetFunctionAddressInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetFunctionAddressInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Function name.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetFunctionAddressInvokeArgs()
         {
         }
+        public static new GetFunctionAddressInvokeArgs Empty => new GetFunctionAddressInvokeArgs();
     }
 
 

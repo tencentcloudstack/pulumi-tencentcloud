@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const modifyAccountRemarkOperation = new tencentcloud.postgresql.ModifyAccountRemarkOperation("modifyAccountRemarkOperation", {
  *     dbInstanceId: local.pgsql_id,
@@ -19,6 +20,7 @@ import * as utilities from "../utilities";
  *     remark: "hello_world",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ModifyAccountRemarkOperation extends pulumi.CustomResource {
     /**

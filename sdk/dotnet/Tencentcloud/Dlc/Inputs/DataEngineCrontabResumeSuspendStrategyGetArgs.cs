@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Inputs
 {
 
-    public sealed class DataEngineCrontabResumeSuspendStrategyGetArgs : Pulumi.ResourceArgs
+    public sealed class DataEngineCrontabResumeSuspendStrategyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Scheduled pull-up time: For example: 8 o&amp;amp;#39;clock on Monday is expressed as 1000000-08:00:00.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Inputs
         public DataEngineCrontabResumeSuspendStrategyGetArgs()
         {
         }
+        public static new DataEngineCrontabResumeSuspendStrategyGetArgs Empty => new DataEngineCrontabResumeSuspendStrategyGetArgs();
     }
 }

@@ -2,12 +2,25 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 
 export interface ProviderAssumeRole {
+    /**
+     * A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
+     */
     policy?: pulumi.Input<string>;
+    /**
+     * The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+     */
     roleArn: pulumi.Input<string>;
+    /**
+     * The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+     */
     sessionDuration: pulumi.Input<number>;
+    /**
+     * The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+     */
     sessionName: pulumi.Input<string>;
 }
 export namespace Address {
@@ -490,17 +503,6 @@ export namespace ApiGateway {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetUpstreamsFilterArgs {
-        /**
-         * Fields that need to be filtered.
-         */
-        name: pulumi.Input<string>;
-        /**
-         * The filtering value of the field.
-         */
-        values: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetUpstreamsFilter {
         /**
          * Fields that need to be filtered.
@@ -510,6 +512,17 @@ export namespace ApiGateway {
          * The filtering value of the field.
          */
         values: string[];
+    }
+
+    export interface GetUpstreamsFilterArgs {
+        /**
+         * Fields that need to be filtered.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * The filtering value of the field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface ImportOpenApiConstantParameter {
@@ -784,6 +797,8 @@ export namespace ApiGateway {
         unhealthyHttpStatus: pulumi.Input<string>;
         /**
          * The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.
+         *
+         * The `k8sService` object supports the following:
          */
         unhealthyTimeout?: pulumi.Input<number>;
     }
@@ -793,6 +808,9 @@ export namespace ApiGateway {
          * K8s cluster ID.
          */
         clusterId: pulumi.Input<string>;
+        /**
+         * Additional Selected Pod Label.
+         */
         extraLabels: pulumi.Input<pulumi.Input<inputs.ApiGateway.UpstreamK8sServiceExtraLabel>[]>;
         /**
          * Customized service name, optional.
@@ -934,15 +952,36 @@ export namespace As {
     }
 
     export interface LoadBalancerForwardLoadBalancer {
+        /**
+         * Application load balancer listener ID.
+         */
         listenerId: pulumi.Input<string>;
+        /**
+         * Application load balancer instance ID.
+         */
         loadBalancerId: pulumi.Input<string>;
+        /**
+         * Application load balancer location ID.
+         */
         locationId?: pulumi.Input<string>;
+        /**
+         * Load balancer instance region. Default value is the region of current auto scaling group. The format is the same as the public parameter Region, for example: ap-guangzhou.
+         */
         region?: pulumi.Input<string>;
+        /**
+         * List of TargetAttribute.
+         */
         targetAttributes: pulumi.Input<pulumi.Input<inputs.As.LoadBalancerForwardLoadBalancerTargetAttribute>[]>;
     }
 
     export interface LoadBalancerForwardLoadBalancerTargetAttribute {
+        /**
+         * Target port.
+         */
         port: pulumi.Input<number>;
+        /**
+         * Target weight.
+         */
         weight: pulumi.Input<number>;
     }
 
@@ -1095,9 +1134,21 @@ export namespace Cam {
     }
 
     export interface PolicyVersionPolicyVersion {
+        /**
+         * Strategic version creation timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+         */
         createDate?: pulumi.Input<string>;
+        /**
+         * Strategic grammar textNote: This field may return NULL, indicating that the valid value cannot be obtained.
+         */
         document?: pulumi.Input<string>;
+        /**
+         * Whether it is an effective version.0 means not, 1 means yesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+         */
         isDefaultVersion?: pulumi.Input<number>;
+        /**
+         * Strategic version numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
+         */
         versionId?: pulumi.Input<number>;
     }
 
@@ -1111,7 +1162,6 @@ export namespace Cam {
          */
         value: pulumi.Input<string>;
     }
-
 }
 
 export namespace Cat {
@@ -1221,7 +1271,6 @@ export namespace Ccn {
          */
         routeTableId?: pulumi.Input<string>;
     }
-
 }
 
 export namespace Cdh {
@@ -1429,7 +1478,13 @@ export namespace Cdn {
          * Counter measure.
          */
         counterMeasure?: pulumi.Input<string>;
+        /**
+         * Last trigger time.
+         */
         lastTriggerTime?: pulumi.Input<string>;
+        /**
+         * Last trigger time of overseas.
+         */
         lastTriggerTimeOverseas?: pulumi.Input<string>;
         /**
          * Metric.
@@ -1702,7 +1757,13 @@ export namespace Cdn {
          * Client Certificate PEM format, requires Base64 encoding.
          */
         certificateContent: pulumi.Input<string>;
+        /**
+         * Client certificate name.
+         */
         certificateName?: pulumi.Input<string>;
+        /**
+         * Deploy time of client certificate.
+         */
         deployTime?: pulumi.Input<string>;
         /**
          * Signature expiration time in second. The maximum value is 630720000.
@@ -1738,7 +1799,13 @@ export namespace Cdn {
          * Server certificate ID.
          */
         certificateId?: pulumi.Input<string>;
+        /**
+         * Server certificate name.
+         */
         certificateName?: pulumi.Input<string>;
+        /**
+         * Deploy time of server certificate.
+         */
         deployTime?: pulumi.Input<string>;
         /**
          * Signature expiration time in second. The maximum value is 630720000.
@@ -2271,6 +2338,9 @@ export namespace Cfw {
          * Deploy regional information.
          */
         fwDeploy: pulumi.Input<inputs.Cfw.VpcInstanceVpcFwInstanceFwDeploy>;
+        /**
+         * Firewall instance ID (passed in editing scenario).
+         */
         fwInsId?: pulumi.Input<string>;
         /**
          * Firewall instance name.
@@ -2302,8 +2372,17 @@ export namespace Cfw {
     }
 
     export interface VpcPolicyBetaList {
+        /**
+         * Last execution time. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         lastTime?: pulumi.Input<string>;
+        /**
+         * Task id. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         taskId?: pulumi.Input<number>;
+        /**
+         * Mission name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         taskName?: pulumi.Input<string>;
     }
 }
@@ -2314,11 +2393,17 @@ export namespace Chdfs {
          * rule access mode, 1: read only, 2: read &amp; wirte.
          */
         accessMode?: pulumi.Input<number>;
+        /**
+         * single rule id.
+         */
         accessRuleId?: pulumi.Input<number>;
         /**
          * rule address, IP OR IP SEG.
          */
         address?: pulumi.Input<string>;
+        /**
+         * rule create time.
+         */
         createTime?: pulumi.Input<string>;
         /**
          * rule priority, range 1 - 100, value less higher priority.
@@ -2327,7 +2412,13 @@ export namespace Chdfs {
     }
 
     export interface LifeCycleRuleLifeCycleRule {
+        /**
+         * rule create time.
+         */
         createTime?: pulumi.Input<string>;
+        /**
+         * single rule id.
+         */
         lifeCycleRuleId?: pulumi.Input<number>;
         /**
          * rule name.
@@ -3302,7 +3393,6 @@ export namespace Ci {
          */
         transparency: pulumi.Input<string>;
     }
-
 }
 
 export namespace Ckafka {
@@ -6978,17 +7068,6 @@ export namespace Clb {
         functionQualifierType?: pulumi.Input<string>;
     }
 
-    export interface GetClusterResourcesFilterArgs {
-        /**
-         * Filter name.
-         */
-        name: pulumi.Input<string>;
-        /**
-         * Filter values.
-         */
-        values: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetClusterResourcesFilter {
         /**
          * Filter name.
@@ -7000,7 +7079,7 @@ export namespace Clb {
         values: string[];
     }
 
-    export interface GetCrossTargetsFilterArgs {
+    export interface GetClusterResourcesFilterArgs {
         /**
          * Filter name.
          */
@@ -7020,6 +7099,17 @@ export namespace Clb {
          * Filter values.
          */
         values: string[];
+    }
+
+    export interface GetCrossTargetsFilterArgs {
+        /**
+         * Filter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter values.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetExclusiveClustersFilter {
@@ -7066,17 +7156,6 @@ export namespace Clb {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetListenersByTargetsBackendArgs {
-        /**
-         * Private network IP to be queried, which can be of the CVM or ENI.
-         */
-        privateIp: pulumi.Input<string>;
-        /**
-         * VPC ID.
-         */
-        vpcId: pulumi.Input<string>;
-    }
-
     export interface GetListenersByTargetsBackend {
         /**
          * Private network IP to be queried, which can be of the CVM or ENI.
@@ -7088,15 +7167,15 @@ export namespace Clb {
         vpcId: string;
     }
 
-    export interface GetResourcesFilterArgs {
+    export interface GetListenersByTargetsBackendArgs {
         /**
-         * Filter name.
+         * Private network IP to be queried, which can be of the CVM or ENI.
          */
-        name: pulumi.Input<string>;
+        privateIp: pulumi.Input<string>;
         /**
-         * Filter value array.
+         * VPC ID.
          */
-        values: pulumi.Input<pulumi.Input<string>[]>;
+        vpcId: pulumi.Input<string>;
     }
 
     export interface GetResourcesFilter {
@@ -7108,6 +7187,17 @@ export namespace Clb {
          * Filter value array.
          */
         values: string[];
+    }
+
+    export interface GetResourcesFilterArgs {
+        /**
+         * Filter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter value array.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetTargetGroupListFilter {
@@ -8027,6 +8117,10 @@ export namespace Cls {
 
     export interface IndexRule {
         /**
+         * The key value index is automatically configured. If it is empty, it means that the function is not enabled.
+         */
+        dynamicIndex?: pulumi.Input<inputs.Cls.IndexRuleDynamicIndex>;
+        /**
          * Full-Text index configuration.
          */
         fullText?: pulumi.Input<inputs.Cls.IndexRuleFullText>;
@@ -8038,6 +8132,13 @@ export namespace Cls {
          * Metafield index configuration.
          */
         tag?: pulumi.Input<inputs.Cls.IndexRuleTag>;
+    }
+
+    export interface IndexRuleDynamicIndex {
+        /**
+         * index automatic configuration switch.
+         */
+        status: pulumi.Input<boolean>;
     }
 
     export interface IndexRuleFullText {
@@ -8749,6 +8850,9 @@ export namespace Cos {
     }
 
     export interface BucketWebsite {
+        /**
+         * `Endpoint` of the static website.
+         */
         endpoint?: pulumi.Input<string>;
         /**
          * An absolute path to the document to return in case of a 4XX error.
@@ -8760,6 +8864,110 @@ export namespace Cos {
         indexDocument?: pulumi.Input<string>;
     }
 
+}
+
+export namespace Csip {
+    export interface RiskCenterAsset {
+        /**
+         * Multi-cloud asset unique idNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        arn?: pulumi.Input<string>;
+        /**
+         * Ip/ domain name/asset id, database id, etc.
+         */
+        asset?: pulumi.Input<string>;
+        /**
+         * Asset nameNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        assetName?: pulumi.Input<string>;
+        /**
+         * Asset classificationNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        assetType?: pulumi.Input<string>;
+        /**
+         * Asset typeNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        instanceType?: pulumi.Input<string>;
+        /**
+         * RegionNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        region?: pulumi.Input<string>;
+    }
+
+    export interface RiskCenterTaskAdvanceCfg {
+        /**
+         * Configure advanced risk Settings.
+         */
+        cfgRisks?: pulumi.Input<pulumi.Input<inputs.Csip.RiskCenterTaskAdvanceCfgCfgRisk>[]>;
+        /**
+         * Advanced Port Risk Configuration.
+         */
+        portRisks?: pulumi.Input<pulumi.Input<inputs.Csip.RiskCenterTaskAdvanceCfgPortRisk>[]>;
+        /**
+         * Advanced vulnerability risk configuration.
+         */
+        vulRisks?: pulumi.Input<pulumi.Input<inputs.Csip.RiskCenterTaskAdvanceCfgVulRisk>[]>;
+        /**
+         * Weak password risk advanced configuration.
+         */
+        weakPwdRisks?: pulumi.Input<pulumi.Input<inputs.Csip.RiskCenterTaskAdvanceCfgWeakPwdRisk>[]>;
+    }
+
+    export interface RiskCenterTaskAdvanceCfgCfgRisk {
+        /**
+         * Whether to enable, 0- No, 1- Enable.
+         */
+        enable: pulumi.Input<number>;
+        /**
+         * Detection item ID.
+         */
+        itemId: pulumi.Input<string>;
+        /**
+         * Resource type.
+         */
+        resourceType: pulumi.Input<string>;
+    }
+
+    export interface RiskCenterTaskAdvanceCfgPortRisk {
+        /**
+         * Detection item type, 0-system defined, 1-user-defined.
+         */
+        checkType: pulumi.Input<number>;
+        /**
+         * Description of detection items.
+         */
+        detail: pulumi.Input<string>;
+        /**
+         * Whether to enable, 0- No, 1- Enable.
+         */
+        enable: pulumi.Input<number>;
+        /**
+         * Port collection, separated by commas.
+         */
+        portSets: pulumi.Input<string>;
+    }
+
+    export interface RiskCenterTaskAdvanceCfgVulRisk {
+        /**
+         * Whether to enable, 0- No, 1- Enable.
+         */
+        enable: pulumi.Input<number>;
+        /**
+         * Risk ID.
+         */
+        riskId: pulumi.Input<string>;
+    }
+
+    export interface RiskCenterTaskAdvanceCfgWeakPwdRisk {
+        /**
+         * Detection item ID.
+         */
+        checkItemId: pulumi.Input<number>;
+        /**
+         * Whether to enable, 0- No, 1- Enable.
+         */
+        enable: pulumi.Input<number>;
+    }
 }
 
 export namespace Css {
@@ -8802,65 +9010,191 @@ export namespace Css {
     }
 
     export interface RecordTemplateAacParam {
+        /**
+         * Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.
+         */
         classId?: pulumi.Input<number>;
+        /**
+         * Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+         */
         enable?: pulumi.Input<number>;
+        /**
+         * Task flow. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         procedure?: pulumi.Input<string>;
+        /**
+         * Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+         */
         recordInterval?: pulumi.Input<number>;
+        /**
+         * Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         storageMode?: pulumi.Input<string>;
+        /**
+         * Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
+         */
         storageTime?: pulumi.Input<number>;
+        /**
+         * Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
+         */
         vodFileName?: pulumi.Input<string>;
+        /**
+         * The ID of the on-demand sub app.
+         */
         vodSubAppId?: pulumi.Input<number>;
     }
 
     export interface RecordTemplateFlvParam {
+        /**
+         * Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         classId?: pulumi.Input<number>;
+        /**
+         * Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+         */
         enable?: pulumi.Input<number>;
+        /**
+         * Task flow. This field may return null, indicating that no valid value can be obtained.
+         */
         procedure?: pulumi.Input<string>;
+        /**
+         * Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+         */
         recordInterval?: pulumi.Input<number>;
+        /**
+         * Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.
+         */
         storageMode?: pulumi.Input<string>;
+        /**
+         * Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.
+         */
         storageTime?: pulumi.Input<number>;
+        /**
+         * Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`_ ,`StartYear`-,`StartMonth`-,`StartDay`-,`StartHour`-,`StartMinute`-,`StartSecond`_ ,`EndYear`-,`EndMonth`-,`EndDay`-,`EndHour`-,`EndMinute`-,`EndSecond`.
+         */
         vodFileName?: pulumi.Input<string>;
+        /**
+         * The ID of the vodSub app.
+         */
         vodSubAppId?: pulumi.Input<number>;
     }
 
     export interface RecordTemplateFlvSpecialParam {
+        /**
+         * Whether to enable the transfer while recording is valid only in the flv format.
+         */
         uploadInRecording?: pulumi.Input<boolean>;
     }
 
     export interface RecordTemplateHlsParam {
+        /**
+         * Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         classId?: pulumi.Input<number>;
+        /**
+         * Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+         */
         enable?: pulumi.Input<number>;
+        /**
+         * Task flow. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         procedure?: pulumi.Input<string>;
+        /**
+         * Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+         */
         recordInterval?: pulumi.Input<number>;
+        /**
+         * Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         storageMode?: pulumi.Input<string>;
+        /**
+         * Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
+         */
         storageTime?: pulumi.Input<number>;
+        /**
+         * Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
+         */
         vodFileName?: pulumi.Input<string>;
+        /**
+         * The ID of the vodSub app.
+         */
         vodSubAppId?: pulumi.Input<number>;
     }
 
     export interface RecordTemplateHlsSpecialParam {
+        /**
+         * HLS freewheeling timeout. Value range [0, 1800].
+         */
         flowContinueDuration?: pulumi.Input<number>;
     }
 
     export interface RecordTemplateMp3Param {
+        /**
+         * Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         classId?: pulumi.Input<number>;
+        /**
+         * Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+         */
         enable?: pulumi.Input<number>;
+        /**
+         * Task flow. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         procedure?: pulumi.Input<string>;
+        /**
+         * Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+         */
         recordInterval?: pulumi.Input<number>;
+        /**
+         * Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         storageMode?: pulumi.Input<string>;
+        /**
+         * Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
+         */
         storageTime?: pulumi.Input<number>;
+        /**
+         * Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`, `StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
+         */
         vodFileName?: pulumi.Input<string>;
+        /**
+         * The ID of the on-demand sub app.
+         */
         vodSubAppId?: pulumi.Input<number>;
     }
 
     export interface RecordTemplateMp4Param {
+        /**
+         * Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         classId?: pulumi.Input<number>;
+        /**
+         * Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+         */
         enable?: pulumi.Input<number>;
+        /**
+         * Task flow. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         procedure?: pulumi.Input<string>;
+        /**
+         * Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+         */
         recordInterval?: pulumi.Input<number>;
+        /**
+         * Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         storageMode?: pulumi.Input<string>;
+        /**
+         * Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
+         */
         storageTime?: pulumi.Input<number>;
+        /**
+         * Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
+         */
         vodFileName?: pulumi.Input<string>;
+        /**
+         * The ID of the on-demand sub app.
+         */
         vodSubAppId?: pulumi.Input<number>;
     }
 
@@ -9014,12 +9348,24 @@ export namespace Cvm {
     }
 
     export interface ImportImageTagSpecification {
+        /**
+         * Resource type. Valid values: instance (CVM), host (CDH), image (for image), and keypair (for key). Note: This field may return null, indicating that no valid values can be obtained.
+         */
         resourceType: pulumi.Input<string>;
+        /**
+         * Tag pairs Note: This field may return null, indicating that no valid values can be obtained.
+         */
         tags: pulumi.Input<pulumi.Input<inputs.Cvm.ImportImageTagSpecificationTag>[]>;
     }
 
     export interface ImportImageTagSpecificationTag {
+        /**
+         * Tag key.
+         */
         key: pulumi.Input<string>;
+        /**
+         * Tag value.
+         */
         value: pulumi.Input<string>;
     }
 
@@ -9564,26 +9910,94 @@ export namespace Cvm {
     }
 
     export interface ModifyInstanceDiskTypeDataDisk {
+        /**
+         * ID of the dedicated cluster to which the instance belongs.
+         */
         cdcId?: pulumi.Input<string>;
+        /**
+         * Whether to terminate the data disk when its CVM is terminated. Valid values:
+         * - TRUE: terminate the data disk when its CVM is terminated. This value only supports pay-as-you-go cloud disks billed on an hourly basis.
+         * - FALSE: retain the data disk when its CVM is terminated.
+         * Default value: TRUE.
+         */
         deleteWithInstance?: pulumi.Input<boolean>;
+        /**
+         * Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.
+         */
         diskId?: pulumi.Input<string>;
+        /**
+         * Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
+         */
         diskSize: pulumi.Input<number>;
+        /**
+         * Data disk type. Valid values:
+         * - LOCAL_BASIC: local hard disk;
+         * - LOCAL_SSD: local SSD hard disk;
+         * - LOCAL_NVME: local NVME hard disk, which is strongly related to InstanceType and cannot be specified;
+         * - LOCAL_PRO: local HDD hard disk, which is strongly related to InstanceType and cannot be specified;
+         * - CLOUD_BASIC: ordinary cloud disk;
+         * - CLOUD_PREMIUM: high-performance cloud disk;
+         * - CLOUD_SSD:SSD cloud disk;
+         * - CLOUD_HSSD: enhanced SSD cloud disk;
+         * - CLOUD_TSSD: extremely fast SSD cloud disk;
+         * - CLOUD_BSSD: general-purpose SSD cloud disk;
+         * Default value: LOCAL_BASIC.
+         */
         diskType?: pulumi.Input<string>;
+        /**
+         * Specifies whether the data disk is encrypted. Valid values:
+         * - TRUE: encrypted
+         * - FALSE: not encrypted
+         * Default value: FALSE.
+         */
         encrypt?: pulumi.Input<boolean>;
+        /**
+         * ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.
+         */
         kmsKeyId?: pulumi.Input<string>;
+        /**
+         * Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.
+         */
         snapshotId?: pulumi.Input<string>;
+        /**
+         * Cloud disk performance, in MB/s.
+         */
         throughputPerformance?: pulumi.Input<number>;
     }
 
     export interface ModifyInstanceDiskTypeSystemDisk {
+        /**
+         * ID of the dedicated cluster to which the instance belongs.
+         */
         cdcId?: pulumi.Input<string>;
+        /**
+         * System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.
+         */
         diskId?: pulumi.Input<string>;
+        /**
+         * System disk size; unit: GB; default value: 50 GB.
+         */
         diskSize?: pulumi.Input<number>;
+        /**
+         * System disk type. Valid values:- LOCAL_BASIC: local disk
+         * - LOCAL_SSD: local SSD disk
+         * - CLOUD_BASIC: ordinary cloud disk
+         * - CLOUD_SSD: SSD cloud disk
+         * - CLOUD_PREMIUM: Premium cloud storage
+         * - CLOUD_BSSD: Balanced SSD
+         * The disk currently in stock will be used by default.
+         */
         diskType?: pulumi.Input<string>;
     }
 
     export interface RenewHostHostChargePrepaid {
+        /**
+         * The duration of purchasing an instance, unit: month. Value range: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+         */
         period: pulumi.Input<number>;
+        /**
+         * Auto renewal flag. Valid values:&lt;br&gt;&lt;li&gt;NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically&lt;br&gt;&lt;li&gt;NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically&lt;br&gt;&lt;li&gt;DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically&lt;br&gt;&lt;br&gt;Default value: NOTIFY_AND_AUTO_RENEW。If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
+         */
         renewFlag?: pulumi.Input<string>;
     }
 
@@ -9594,14 +10008,9 @@ export namespace Cvm {
         period: pulumi.Input<number>;
         /**
          * Auto renewal flag. Valid values:
-         * - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
-         * - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
-         * - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
-         * Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
          */
         renewFlag?: pulumi.Input<string>;
     }
-
 }
 
 export namespace Cwp {
@@ -9808,17 +10217,6 @@ export namespace Cynosdb {
         timestamp?: pulumi.Input<string>;
     }
 
-    export interface GetAccountAllGrantPrivilegesAccountArgs {
-        /**
-         * Account.
-         */
-        accountName: pulumi.Input<string>;
-        /**
-         * Host, default `%`.
-         */
-        host?: pulumi.Input<string>;
-    }
-
     export interface GetAccountAllGrantPrivilegesAccount {
         /**
          * Account.
@@ -9830,59 +10228,15 @@ export namespace Cynosdb {
         host?: string;
     }
 
-    export interface GetAuditLogsFilterArgs {
+    export interface GetAccountAllGrantPrivilegesAccountArgs {
         /**
-         * Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
+         * Account.
          */
-        affectRows?: pulumi.Input<number>;
+        accountName: pulumi.Input<string>;
         /**
-         * Database name.
+         * Host, default `%`.
          */
-        dbNames?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * Execution time. Unit: ms. Indicates audit logs with a filter execution time greater than this value.
-         */
-        execTime?: pulumi.Input<number>;
-        /**
-         * Client address.
-         */
-        hosts?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * Audit policy name.
-         */
-        policyNames?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * Returns the number of rows.
-         */
-        sentRows?: pulumi.Input<number>;
-        /**
-         * SQL statement. Supports fuzzy matching.
-         */
-        sql?: pulumi.Input<string>;
-        /**
-         * SQL type. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
-         */
-        sqlType?: pulumi.Input<string>;
-        /**
-         * SQL type. Supports simultaneous querying of multiple types. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
-         */
-        sqlTypes?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * SQL statement. Supports passing multiple SQL statements.
-         */
-        sqls?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * Table name.
-         */
-        tableNames?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * Thread ID.
-         */
-        threadIds?: pulumi.Input<pulumi.Input<string>[]>;
-        /**
-         * User name.
-         */
-        users?: pulumi.Input<pulumi.Input<string>[]>;
+        host?: pulumi.Input<string>;
     }
 
     export interface GetAuditLogsFilter {
@@ -9938,6 +10292,61 @@ export namespace Cynosdb {
          * User name.
          */
         users?: string[];
+    }
+
+    export interface GetAuditLogsFilterArgs {
+        /**
+         * Affects the number of rows. Indicates that filtering affects audit logs with rows greater than this value.
+         */
+        affectRows?: pulumi.Input<number>;
+        /**
+         * Database name.
+         */
+        dbNames?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Execution time. Unit: ms. Indicates audit logs with a filter execution time greater than this value.
+         */
+        execTime?: pulumi.Input<number>;
+        /**
+         * Client address.
+         */
+        hosts?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Audit policy name.
+         */
+        policyNames?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Returns the number of rows.
+         */
+        sentRows?: pulumi.Input<number>;
+        /**
+         * SQL statement. Supports fuzzy matching.
+         */
+        sql?: pulumi.Input<string>;
+        /**
+         * SQL type. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+         */
+        sqlType?: pulumi.Input<string>;
+        /**
+         * SQL type. Supports simultaneous querying of multiple types. Currently supported: SELECT, Insert, UPDATE, DELETE, CREATE, DROP, ALT, SET, REPLACE, EXECUTE.
+         */
+        sqlTypes?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * SQL statement. Supports passing multiple SQL statements.
+         */
+        sqls?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Table name.
+         */
+        tableNames?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Thread ID.
+         */
+        threadIds?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * User name.
+         */
+        users?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetProxyNodeFilter {
@@ -10031,7 +10440,13 @@ export namespace Cynosdb {
     }
 
     export interface ProxyRoInstance {
+        /**
+         * instance id.
+         */
         instanceId?: pulumi.Input<string>;
+        /**
+         * weight.
+         */
         weight?: pulumi.Input<number>;
     }
 
@@ -10171,6 +10586,9 @@ export namespace Dayu {
          * Policy mode (discard or captcha).
          */
         policyAction: pulumi.Input<string>;
+        /**
+         * Policy Id.
+         */
         policyId?: pulumi.Input<string>;
         /**
          * A list of policies.
@@ -10206,6 +10624,9 @@ export namespace Dayu {
          * Domain.
          */
         domain: pulumi.Input<string>;
+        /**
+         * Instance id.
+         */
         instanceId?: pulumi.Input<string>;
         /**
          * Ip address.
@@ -10764,21 +11185,60 @@ export namespace Dayu {
     }
 
     export interface L4RuleV2Rules {
+        /**
+         * session hold switch.
+         */
         keepEnable: pulumi.Input<boolean>;
+        /**
+         * The keeptime of the layer 4 rule.
+         */
         keeptime: pulumi.Input<number>;
+        /**
+         * LB type of the rule, `1` for weight cycling and `2` for IP hash.
+         */
         lbType: pulumi.Input<number>;
+        /**
+         * Protocol of the rule.
+         */
         protocol: pulumi.Input<string>;
+        /**
+         * Corresponding regional information.
+         */
         region: pulumi.Input<number>;
+        /**
+         * Remove the watermark state.
+         */
         removeSwitch: pulumi.Input<boolean>;
+        /**
+         * Name of the rule.
+         */
         ruleName: pulumi.Input<string>;
+        /**
+         * Source list of the rule.
+         */
         sourceLists: pulumi.Input<pulumi.Input<inputs.Dayu.L4RuleV2RulesSourceList>[]>;
+        /**
+         * The source port of the layer 4 rule.
+         */
         sourcePort: pulumi.Input<number>;
+        /**
+         * Source type, `1` for source of host, `2` for source of IP.
+         */
         sourceType: pulumi.Input<number>;
+        /**
+         * The virtual port of the layer 4 rule.
+         */
         virtualPort: pulumi.Input<number>;
     }
 
     export interface L4RuleV2RulesSourceList {
+        /**
+         * Source IP or domain.
+         */
         source: pulumi.Input<string>;
+        /**
+         * Weight of the source.
+         */
         weight: pulumi.Input<number>;
     }
 
@@ -10827,7 +11287,13 @@ export namespace Dayu {
     }
 
     export interface L7RuleV2RuleSourceList {
+        /**
+         * Source IP or domain.
+         */
         source: pulumi.Input<string>;
+        /**
+         * Weight of the source.
+         */
         weight: pulumi.Input<number>;
     }
 }
@@ -11027,21 +11493,6 @@ export namespace Dcdb {
         value: pulumi.Input<string>;
     }
 
-    export interface GetUpgradePriceAddShardConfigArgs {
-        /**
-         * The number of new shards.
-         */
-        shardCount: pulumi.Input<number>;
-        /**
-         * Shard memory size in GB.
-         */
-        shardMemory: pulumi.Input<number>;
-        /**
-         * Shard storage capacity in GB.
-         */
-        shardStorage: pulumi.Input<number>;
-    }
-
     export interface GetUpgradePriceAddShardConfig {
         /**
          * The number of new shards.
@@ -11055,6 +11506,21 @@ export namespace Dcdb {
          * Shard storage capacity in GB.
          */
         shardStorage: number;
+    }
+
+    export interface GetUpgradePriceAddShardConfigArgs {
+        /**
+         * The number of new shards.
+         */
+        shardCount: pulumi.Input<number>;
+        /**
+         * Shard memory size in GB.
+         */
+        shardMemory: pulumi.Input<number>;
+        /**
+         * Shard storage capacity in GB.
+         */
+        shardStorage: pulumi.Input<number>;
     }
 
     export interface GetUpgradePriceExpandShardConfig {
@@ -11205,42 +11671,144 @@ export namespace Dlc {
     }
 
     export interface AttachUserPolicyOperationPolicySet {
+        /**
+         * For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+         */
         catalog: pulumi.Input<string>;
+        /**
+         * For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+         */
         column?: pulumi.Input<string>;
+        /**
+         * The time when the permission was created. Leave the input parameter blank.
+         */
         createTime?: pulumi.Input<string>;
+        /**
+         * Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
+         */
         dataEngine?: pulumi.Input<string>;
+        /**
+         * Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+         */
         database: pulumi.Input<string>;
+        /**
+         * For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+         */
         function?: pulumi.Input<string>;
+        /**
+         * Policy id.
+         */
         id?: pulumi.Input<number>;
+        /**
+         * Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+         */
         mode?: pulumi.Input<string>;
+        /**
+         * Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+         */
         operation: pulumi.Input<string>;
+        /**
+         * Operator, do not fill in the input parameters.
+         */
         operator?: pulumi.Input<string>;
+        /**
+         * Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
+         */
         policyType?: pulumi.Input<string>;
+        /**
+         * Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+         */
         reAuth?: pulumi.Input<boolean>;
+        /**
+         * Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+         */
         source?: pulumi.Input<string>;
+        /**
+         * The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+         */
         sourceId?: pulumi.Input<number>;
+        /**
+         * The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
+         */
         sourceName?: pulumi.Input<string>;
+        /**
+         * For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+         */
         table: pulumi.Input<string>;
+        /**
+         * For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+         */
         view?: pulumi.Input<string>;
     }
 
     export interface AttachWorkGroupPolicyOperationPolicySet {
+        /**
+         * For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+         */
         catalog: pulumi.Input<string>;
+        /**
+         * For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+         */
         column?: pulumi.Input<string>;
+        /**
+         * The time when the permission was created. Leave the input parameter blank.
+         */
         createTime?: pulumi.Input<string>;
+        /**
+         * Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
+         */
         dataEngine?: pulumi.Input<string>;
+        /**
+         * Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+         */
         database: pulumi.Input<string>;
+        /**
+         * For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+         */
         function?: pulumi.Input<string>;
+        /**
+         * Policy id.
+         */
         id?: pulumi.Input<number>;
+        /**
+         * Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+         */
         mode?: pulumi.Input<string>;
+        /**
+         * Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+         */
         operation: pulumi.Input<string>;
+        /**
+         * Operator, do not fill in the input parameters.
+         */
         operator?: pulumi.Input<string>;
+        /**
+         * Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
+         */
         policyType?: pulumi.Input<string>;
+        /**
+         * Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+         */
         reAuth?: pulumi.Input<boolean>;
+        /**
+         * Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+         */
         source?: pulumi.Input<string>;
+        /**
+         * The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+         */
         sourceId?: pulumi.Input<number>;
+        /**
+         * The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
+         */
         sourceName?: pulumi.Input<string>;
+        /**
+         * For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+         */
         table: pulumi.Input<string>;
+        /**
+         * For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+         */
         view?: pulumi.Input<string>;
     }
 
@@ -11301,54 +11869,145 @@ export namespace Dlc {
     }
 
     export interface DetachUserPolicyOperationPolicySet {
+        /**
+         * For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+         */
         catalog: pulumi.Input<string>;
+        /**
+         * For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+         */
         column?: pulumi.Input<string>;
+        /**
+         * The time when the permission was created. Leave the input parameter blank.
+         */
         createTime?: pulumi.Input<string>;
+        /**
+         * Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
+         */
         dataEngine?: pulumi.Input<string>;
+        /**
+         * Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+         */
         database: pulumi.Input<string>;
+        /**
+         * For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+         */
         function?: pulumi.Input<string>;
+        /**
+         * Policy id.
+         */
         id?: pulumi.Input<number>;
+        /**
+         * Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+         */
         mode?: pulumi.Input<string>;
+        /**
+         * Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+         */
         operation: pulumi.Input<string>;
+        /**
+         * Operator, do not fill in the input parameters.
+         */
         operator?: pulumi.Input<string>;
+        /**
+         * Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
+         */
         policyType?: pulumi.Input<string>;
+        /**
+         * Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+         */
         reAuth?: pulumi.Input<boolean>;
+        /**
+         * Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+         */
         source?: pulumi.Input<string>;
+        /**
+         * The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+         */
         sourceId?: pulumi.Input<number>;
+        /**
+         * The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
+         */
         sourceName?: pulumi.Input<string>;
+        /**
+         * For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+         */
         table: pulumi.Input<string>;
+        /**
+         * For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+         */
         view?: pulumi.Input<string>;
     }
 
     export interface DetachWorkGroupPolicyOperationPolicySet {
+        /**
+         * For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+         */
         catalog: pulumi.Input<string>;
+        /**
+         * For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+         */
         column?: pulumi.Input<string>;
+        /**
+         * The time when the permission was created. Leave the input parameter blank.
+         */
         createTime?: pulumi.Input<string>;
+        /**
+         * Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
+         */
         dataEngine?: pulumi.Input<string>;
+        /**
+         * Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+         */
         database: pulumi.Input<string>;
+        /**
+         * For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+         */
         function?: pulumi.Input<string>;
+        /**
+         * Policy id.
+         */
         id?: pulumi.Input<number>;
+        /**
+         * Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+         */
         mode?: pulumi.Input<string>;
+        /**
+         * Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+         */
         operation: pulumi.Input<string>;
+        /**
+         * Operator, do not fill in the input parameters.
+         */
         operator?: pulumi.Input<string>;
+        /**
+         * Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
+         */
         policyType?: pulumi.Input<string>;
+        /**
+         * Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+         */
         reAuth?: pulumi.Input<boolean>;
+        /**
+         * Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+         */
         source?: pulumi.Input<string>;
+        /**
+         * The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+         */
         sourceId?: pulumi.Input<number>;
+        /**
+         * The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
+         */
         sourceName?: pulumi.Input<string>;
+        /**
+         * For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+         */
         table: pulumi.Input<string>;
+        /**
+         * For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+         */
         view?: pulumi.Input<string>;
-    }
-
-    export interface GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArgs {
-        /**
-         * Configuration item.
-         */
-        configItem: pulumi.Input<string>;
-        /**
-         * Configuration value.
-         */
-        configValue: pulumi.Input<string>;
     }
 
     export interface GetCheckDataEngineConfigPairsValidityDataEngineConfigPair {
@@ -11362,15 +12021,15 @@ export namespace Dlc {
         configValue: string;
     }
 
-    export interface GetDescribeUserInfoFilterArgs {
+    export interface GetCheckDataEngineConfigPairsValidityDataEngineConfigPairArgs {
         /**
-         * Attribute name. If there are multiple Filters, the relationship between Filters is a logical OR (OR) relationship.
+         * Configuration item.
          */
-        name: pulumi.Input<string>;
+        configItem: pulumi.Input<string>;
         /**
-         * Attribute value, if there are multiple Values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+         * Configuration value.
          */
-        values: pulumi.Input<pulumi.Input<string>[]>;
+        configValue: pulumi.Input<string>;
     }
 
     export interface GetDescribeUserInfoFilter {
@@ -11382,6 +12041,17 @@ export namespace Dlc {
          * Attribute value, if there are multiple Values in the same filter, the relationship between values under the same filter is a logical OR relationship.
          */
         values: string[];
+    }
+
+    export interface GetDescribeUserInfoFilterArgs {
+        /**
+         * Attribute name. If there are multiple Filters, the relationship between Filters is a logical OR (OR) relationship.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Attribute value, if there are multiple Values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetDescribeWorkGroupInfoFilter {
@@ -11596,17 +12266,6 @@ export namespace Dts {
         viewName?: pulumi.Input<string>;
     }
 
-    export interface GetMigrateJobsTagFilterArgs {
-        /**
-         * tag key.
-         */
-        tagKey?: pulumi.Input<string>;
-        /**
-         * tag value.
-         */
-        tagValue?: pulumi.Input<string>;
-    }
-
     export interface GetMigrateJobsTagFilter {
         /**
          * tag key.
@@ -11616,6 +12275,17 @@ export namespace Dts {
          * tag value.
          */
         tagValue?: string;
+    }
+
+    export interface GetMigrateJobsTagFilterArgs {
+        /**
+         * tag key.
+         */
+        tagKey?: pulumi.Input<string>;
+        /**
+         * tag value.
+         */
+        tagValue?: pulumi.Input<string>;
     }
 
     export interface GetSyncJobsTagFilter {
@@ -12686,17 +13356,6 @@ export namespace Eb {
         valueType: pulumi.Input<string>;
     }
 
-    export interface GetBusFilterArgs {
-        /**
-         * The name of the filter key.
-         */
-        name: pulumi.Input<string>;
-        /**
-         * One or more filter values.
-         */
-        values: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetBusFilter {
         /**
          * The name of the filter key.
@@ -12708,31 +13367,90 @@ export namespace Eb {
         values: string[];
     }
 
+    export interface GetBusFilterArgs {
+        /**
+         * The name of the filter key.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * One or more filter values.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
     export interface GetSearchFilter {
+        /**
+         * LogFilters array.
+         */
         filters?: inputs.Eb.GetSearchFilterFilter[];
+        /**
+         * filter field name.
+         */
         key?: string;
+        /**
+         * operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.
+         */
         operator?: string;
+        /**
+         * The logical relationship of the level filters, the value AND or OR.
+         */
         type?: string;
+        /**
+         * Filter value, range operation needs to enter two values at the same time, separated by commas.
+         */
         value?: string;
     }
 
     export interface GetSearchFilterArgs {
+        /**
+         * LogFilters array.
+         */
         filters?: pulumi.Input<pulumi.Input<inputs.Eb.GetSearchFilterFilterArgs>[]>;
+        /**
+         * filter field name.
+         */
         key?: pulumi.Input<string>;
+        /**
+         * operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.
+         */
         operator?: pulumi.Input<string>;
+        /**
+         * The logical relationship of the level filters, the value AND or OR.
+         */
         type?: pulumi.Input<string>;
+        /**
+         * Filter value, range operation needs to enter two values at the same time, separated by commas.
+         */
         value?: pulumi.Input<string>;
     }
 
     export interface GetSearchFilterFilter {
+        /**
+         * filter field name.
+         */
         key: string;
+        /**
+         * operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.
+         */
         operator: string;
+        /**
+         * Filter values, range operations need to enter two values at the same time, separated by commas.
+         */
         value: string;
     }
 
     export interface GetSearchFilterFilterArgs {
+        /**
+         * filter field name.
+         */
         key: pulumi.Input<string>;
+        /**
+         * operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.
+         */
         operator: pulumi.Input<string>;
+        /**
+         * Filter values, range operations need to enter two values at the same time, separated by commas.
+         */
         value: pulumi.Input<string>;
     }
 
@@ -12899,7 +13617,6 @@ export namespace Elasticsearch {
          */
         workers: pulumi.Input<number>;
     }
-
 }
 
 export namespace Emr {
@@ -13030,6 +13747,68 @@ export namespace Eni {
          * Indicates whether the IP is primary.
          */
         primary?: pulumi.Input<boolean>;
+    }
+
+    export interface Ipv4AddressPrivateIpAddress {
+        /**
+         * EIP instance ID, such as `eip-11112222`.
+         */
+        addressId?: pulumi.Input<string>;
+        /**
+         * Private IP description.
+         */
+        description?: pulumi.Input<string>;
+        /**
+         * Whether the public IP is blocked.
+         */
+        isWanIpBlocked?: pulumi.Input<boolean>;
+        /**
+         * Whether it is a primary IP.
+         */
+        primary?: pulumi.Input<boolean>;
+        /**
+         * Private IP address.
+         */
+        privateIpAddress: pulumi.Input<string>;
+        /**
+         * Public IP address.
+         */
+        publicIpAddress?: pulumi.Input<string>;
+        /**
+         * IP service level. Values: PT` (Gold), `AU` (Silver), `AG `(Bronze) and DEFAULT` (Default).
+         */
+        qosLevel?: pulumi.Input<string>;
+        /**
+         * IP status: `PENDING`: Creating, `MIGRATING`: Migrating, `DELETING`: Deleting, `AVAILABLE`: Available.
+         */
+        state?: pulumi.Input<string>;
+    }
+
+    export interface Ipv6AddressIpv6Address {
+        /**
+         * `IPv6` address, in the form of: `3402:4e00:20:100:0:8cd9:2a67:71f3`.
+         */
+        address: pulumi.Input<string>;
+        /**
+         * `EIP` instance `ID`, such as:`eip-hxlqja90`.
+         */
+        addressId?: pulumi.Input<string>;
+        /**
+         * Description.
+         */
+        description?: pulumi.Input<string>;
+        /**
+         * Whether the public network IP is blocked.
+         */
+        isWanIpBlocked?: pulumi.Input<boolean>;
+        /**
+         * Whether to master `IP`.
+         */
+        primary?: pulumi.Input<boolean>;
+        /**
+         * `IPv6` address status: `PENDING`: pending, `MIGRATING`: migrating, `DELETING`: deleting, `AVAILABLE`: available.
+         */
+        state?: pulumi.Input<string>;
     }
 }
 
@@ -13233,7 +14012,6 @@ export namespace Kms {
          */
         identity: pulumi.Input<string>;
     }
-
 }
 
 export namespace Kubernetes {
@@ -13267,6 +14045,10 @@ export namespace Kubernetes {
          */
         mountTarget?: pulumi.Input<string>;
         /**
+         * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+         */
+        preStartUserScript?: pulumi.Input<string>;
+        /**
          * Base64-encoded User Data text, the length limit is 16KB.
          */
         userData?: pulumi.Input<string>;
@@ -13286,7 +14068,7 @@ export namespace Kubernetes {
          */
         diskSize?: pulumi.Input<number>;
         /**
-         * Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+         * Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
          */
         diskType?: pulumi.Input<string>;
         /**
@@ -13352,6 +14134,10 @@ export namespace Kubernetes {
          */
         mountTarget?: pulumi.Input<string>;
         /**
+         * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+         */
+        preStartUserScript?: pulumi.Input<string>;
+        /**
          * Base64-encoded User Data text, the length limit is 16KB.
          */
         userData?: pulumi.Input<string>;
@@ -13371,7 +14157,7 @@ export namespace Kubernetes {
          */
         diskSize?: pulumi.Input<number>;
         /**
-         * Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+         * Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
          */
         diskType?: pulumi.Input<string>;
         /**
@@ -13629,7 +14415,7 @@ export namespace Kubernetes {
          */
         systemDiskType?: pulumi.Input<string>;
         /**
-         * ase64-encoded User Data text, the length limit is 16KB.
+         * User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
          */
         userData?: pulumi.Input<string>;
     }
@@ -13818,7 +14604,7 @@ export namespace Kubernetes {
          */
         systemDiskType?: pulumi.Input<string>;
         /**
-         * ase64-encoded User Data text, the length limit is 16KB.
+         * User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
          */
         userData?: pulumi.Input<string>;
     }
@@ -14020,7 +14806,7 @@ export namespace Kubernetes {
         /**
          * The order of elements in this field cannot be guaranteed. Use `orderlySecurityGroupIds` instead. Security groups to which a CVM instance belongs.
          *
-         * @deprecated The order of elements in this field cannot be guaranteed. Use `orderly_security_group_ids` instead.
+         * @deprecated The order of elements in this field cannot be guaranteed. Use `orderlySecurityGroupIds` instead.
          */
         securityGroupIds?: pulumi.Input<pulumi.Input<string>[]>;
         /**
@@ -14036,7 +14822,7 @@ export namespace Kubernetes {
          */
         systemDiskSize?: pulumi.Input<number>;
         /**
-         * Type of a CVM disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`.
+         * Type of a CVM disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`. Default is `CLOUD_PREMIUM`.
          */
         systemDiskType?: pulumi.Input<string>;
     }
@@ -14051,7 +14837,7 @@ export namespace Kubernetes {
          */
         diskSize?: pulumi.Input<number>;
         /**
-         * Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+         * Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
          */
         diskType?: pulumi.Input<string>;
         /**
@@ -14098,6 +14884,10 @@ export namespace Kubernetes {
          */
         mountTarget?: pulumi.Input<string>;
         /**
+         * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+         */
+        preStartUserScript?: pulumi.Input<string>;
+        /**
          * Base64-encoded User Data text, the length limit is 16KB.
          */
         userData?: pulumi.Input<string>;
@@ -14117,7 +14907,7 @@ export namespace Kubernetes {
          */
         diskSize?: pulumi.Input<number>;
         /**
-         * Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+         * Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
          */
         diskType?: pulumi.Input<string>;
         /**
@@ -14320,7 +15110,7 @@ export namespace Kubernetes {
          */
         systemDiskType?: pulumi.Input<string>;
         /**
-         * ase64-encoded User Data text, the length limit is 16KB.
+         * User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
          */
         userData?: pulumi.Input<string>;
     }
@@ -14557,17 +15347,6 @@ export namespace Lighthouse {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetModifyInstanceBundleFilterArgs {
-        /**
-         * Field to be filtered.
-         */
-        name: pulumi.Input<string>;
-        /**
-         * Filter value of field.
-         */
-        values: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetModifyInstanceBundleFilter {
         /**
          * Field to be filtered.
@@ -14577,6 +15356,17 @@ export namespace Lighthouse {
          * Filter value of field.
          */
         values: string[];
+    }
+
+    export interface GetModifyInstanceBundleFilterArgs {
+        /**
+         * Field to be filtered.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter value of field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetResetInstanceBlueprintFilter {
@@ -14706,10 +15496,6 @@ export namespace Lighthouse {
         period: pulumi.Input<number>;
         /**
          * Automatic renewal logo. Values:
-         * - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
-         * - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
-         * - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
-         * Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
          */
         renewFlag?: pulumi.Input<string>;
     }
@@ -14893,8 +15679,47 @@ export namespace Mongodb {
         namespace: pulumi.Input<string>;
     }
 
+    export interface InstanceAddNodeList {
+        /**
+         * The node role that needs to be added.
+         * - SECONDARY: Mongod node;
+         * - READONLY: read-only node;
+         * - MONGOS: Mongos node.
+         */
+        role: pulumi.Input<string>;
+        /**
+         * The availability zone corresponding to the node.
+         * - single availability zone, where all nodes are in the same availability zone;
+         * - multiple availability zones: the current standard specification is the distribution of three availability zones, and the master and slave nodes are not in the same availability zone. You should pay attention to configuring the availability zone corresponding to the new node, and the rule that the number of nodes in any two availability zones is greater than the third availability zone must be met after the addition.
+         */
+        zone: pulumi.Input<string>;
+    }
+
     export interface InstanceBackupDownloadTaskBackupSet {
+        /**
+         * Replication Id.
+         */
         replicaSetId: pulumi.Input<string>;
+    }
+
+    export interface InstanceRemoveNodeList {
+        /**
+         * The node ID to delete. The shard cluster must specify the name of the node to be deleted by a group of shards, and the rest of the shards should be grouped and aligned.
+         */
+        nodeName: pulumi.Input<string>;
+        /**
+         * The node role that needs to be deleted.
+         * - SECONDARY: Mongod node;
+         * - READONLY: read-only node;
+         * - MONGOS: Mongos node.
+         */
+        role: pulumi.Input<string>;
+        /**
+         * The availability zone corresponding to the node.
+         * - single availability zone, where all nodes are in the same availability zone;
+         * - multiple availability zones: the current standard specification is the distribution of three availability zones, and the master and slave nodes are not in the same availability zone. You should pay attention to configuring the availability zone corresponding to the new node, and the rule that the number of nodes in any two availability zones is greater than the third availability zone must be met after the addition.
+         */
+        zone: pulumi.Input<string>;
     }
 
     export interface InstanceStandbyInstanceList {
@@ -14907,7 +15732,6 @@ export namespace Mongodb {
          */
         standbyInstanceRegion?: pulumi.Input<string>;
     }
-
 }
 
 export namespace Monitor {
@@ -15203,17 +16027,6 @@ export namespace Monitor {
         startTime?: pulumi.Input<number>;
     }
 
-    export interface GetAlarmHistoryNamespaceArgs {
-        /**
-         * Monitor type.
-         */
-        monitorType: pulumi.Input<string>;
-        /**
-         * Policy type.
-         */
-        namespace: pulumi.Input<string>;
-    }
-
     export interface GetAlarmHistoryNamespace {
         /**
          * Monitor type.
@@ -15225,15 +16038,15 @@ export namespace Monitor {
         namespace: string;
     }
 
-    export interface GetAlarmPolicyTriggerTaskArgs {
+    export interface GetAlarmHistoryNamespaceArgs {
         /**
-         * Configuration information in JSON format, such as {Key1:Value1,Key2:Value2}Note: this field may return null, indicating that no valid values can be obtained.
+         * Monitor type.
          */
-        taskConfig: pulumi.Input<string>;
+        monitorType: pulumi.Input<string>;
         /**
-         * Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
+         * Policy type.
          */
-        type: pulumi.Input<string>;
+        namespace: pulumi.Input<string>;
     }
 
     export interface GetAlarmPolicyTriggerTask {
@@ -15247,15 +16060,15 @@ export namespace Monitor {
         type: string;
     }
 
-    export interface GetDataDimensionArgs {
+    export interface GetAlarmPolicyTriggerTaskArgs {
         /**
-         * Instance dimension name, eg: `InstanceId` for cvm.
+         * Configuration information in JSON format, such as {Key1:Value1,Key2:Value2}Note: this field may return null, indicating that no valid values can be obtained.
          */
-        name: pulumi.Input<string>;
+        taskConfig: pulumi.Input<string>;
         /**
-         * Instance dimension value, eg: `ins-j0hk02zo` for cvm.
+         * Triggered task type. Valid value: AS (auto scaling)Note: this field may return null, indicating that no valid values can be obtained.
          */
-        value: pulumi.Input<string>;
+        type: pulumi.Input<string>;
     }
 
     export interface GetDataDimension {
@@ -15267,6 +16080,17 @@ export namespace Monitor {
          * Instance dimension value, eg: `ins-j0hk02zo` for cvm.
          */
         value: string;
+    }
+
+    export interface GetDataDimensionArgs {
+        /**
+         * Instance dimension name, eg: `InstanceId` for cvm.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Instance dimension value, eg: `ins-j0hk02zo` for cvm.
+         */
+        value: pulumi.Input<string>;
     }
 
     export interface GetProductEventDimension {
@@ -15291,16 +16115,34 @@ export namespace Monitor {
         value?: pulumi.Input<string>;
     }
 
-    export interface GetStatisticDataConditionArgs {
-        key: pulumi.Input<string>;
-        operator: pulumi.Input<string>;
-        values: pulumi.Input<pulumi.Input<string>[]>;
+    export interface GetStatisticDataCondition {
+        /**
+         * Dimension.
+         */
+        key: string;
+        /**
+         * Operator. Valid values: eq (equal to), ne (not equal to), in.
+         */
+        operator: string;
+        /**
+         * Dimension value. If Operator is eq or ne, only the first element will be used.
+         */
+        values: string[];
     }
 
-    export interface GetStatisticDataCondition {
-        key: string;
-        operator: string;
-        values: string[];
+    export interface GetStatisticDataConditionArgs {
+        /**
+         * Dimension.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * Operator. Valid values: eq (equal to), ne (not equal to), in.
+         */
+        operator: pulumi.Input<string>;
+        /**
+         * Dimension value. If Operator is eq or ne, only the first element will be used.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GrafanaSsoAccountRole {
@@ -15319,6 +16161,9 @@ export namespace Monitor {
          * Represents a collection of dimensions of an object instance, json format.eg:'{"unInstanceId":"ins-ot3cq4bi"}'.
          */
         dimensionsJson: pulumi.Input<string>;
+        /**
+         * Object unique ID.
+         */
         uniqueId?: pulumi.Input<string>;
     }
 
@@ -15572,6 +16417,9 @@ export namespace Monitor {
          * An id identify the cluster, like `cls-xxxxxx`.
          */
         clusterId: pulumi.Input<string>;
+        /**
+         * the name of the cluster.
+         */
         clusterName?: pulumi.Input<string>;
         /**
          * Type of cluster.
@@ -15601,6 +16449,9 @@ export namespace Monitor {
          * Limitation of region.
          */
         region: pulumi.Input<string>;
+        /**
+         * agent state, `normal`, `abnormal`.
+         */
         status?: pulumi.Input<string>;
     }
 
@@ -15916,7 +16767,6 @@ export namespace Monitor {
          */
         templateId?: pulumi.Input<string>;
     }
-
 }
 
 export namespace Mps {
@@ -16728,25 +17578,6 @@ export namespace Mps {
         port: pulumi.Input<number>;
     }
 
-    export interface GetMediaMetaDataInputInfoArgs {
-        /**
-         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
-         */
-        cosInputInfo?: pulumi.Input<inputs.Mps.GetMediaMetaDataInputInfoCosInputInfoArgs>;
-        /**
-         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
-         */
-        s3InputInfo?: pulumi.Input<inputs.Mps.GetMediaMetaDataInputInfoS3InputInfoArgs>;
-        /**
-         * The input type. Valid values:`COS`: A COS bucket address.`URL`: A URL.`AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
-         */
-        type: pulumi.Input<string>;
-        /**
-         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
-         */
-        urlInputInfo?: pulumi.Input<inputs.Mps.GetMediaMetaDataInputInfoUrlInputInfoArgs>;
-    }
-
     export interface GetMediaMetaDataInputInfo {
         /**
          * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
@@ -16766,19 +17597,23 @@ export namespace Mps {
         urlInputInfo?: inputs.Mps.GetMediaMetaDataInputInfoUrlInputInfo;
     }
 
-    export interface GetMediaMetaDataInputInfoCosInputInfoArgs {
+    export interface GetMediaMetaDataInputInfoArgs {
         /**
-         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
+         * The information of the COS object to process. This parameter is valid and required when `Type` is `COS`.
          */
-        bucket: pulumi.Input<string>;
+        cosInputInfo?: pulumi.Input<inputs.Mps.GetMediaMetaDataInputInfoCosInputInfoArgs>;
         /**
-         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
+         * The information of the AWS S3 object processed. This parameter is required if `Type` is `AWS-S3`.Note: This field may return null, indicating that no valid value can be obtained.
          */
-        object: pulumi.Input<string>;
+        s3InputInfo?: pulumi.Input<inputs.Mps.GetMediaMetaDataInputInfoS3InputInfoArgs>;
         /**
-         * The region of the COS bucket, such as `ap-chongqing`.
+         * The input type. Valid values:`COS`: A COS bucket address.`URL`: A URL.`AWS-S3`: An AWS S3 bucket address. Currently, this type is only supported for transcoding tasks.
          */
-        region: pulumi.Input<string>;
+        type: pulumi.Input<string>;
+        /**
+         * The URL of the object to process. This parameter is valid and required when `Type` is `URL`.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        urlInputInfo?: pulumi.Input<inputs.Mps.GetMediaMetaDataInputInfoUrlInputInfoArgs>;
     }
 
     export interface GetMediaMetaDataInputInfoCosInputInfo {
@@ -16796,27 +17631,19 @@ export namespace Mps {
         region: string;
     }
 
-    export interface GetMediaMetaDataInputInfoS3InputInfoArgs {
+    export interface GetMediaMetaDataInputInfoCosInputInfoArgs {
         /**
-         * The AWS S3 bucket.
+         * The COS bucket of the object to process, such as `TopRankVideo-125xxx88`.
          */
-        s3Bucket: pulumi.Input<string>;
+        bucket: pulumi.Input<string>;
         /**
-         * The path of the AWS S3 object.
+         * The path of the object to process, such as `/movie/201907/WildAnimal.mov`.
          */
-        s3Object: pulumi.Input<string>;
+        object: pulumi.Input<string>;
         /**
-         * The region of the AWS S3 bucket.
+         * The region of the COS bucket, such as `ap-chongqing`.
          */
-        s3Region: pulumi.Input<string>;
-        /**
-         * The key ID required to access the AWS S3 object.
-         */
-        s3SecretId?: pulumi.Input<string>;
-        /**
-         * The key required to access the AWS S3 object.
-         */
-        s3SecretKey?: pulumi.Input<string>;
+        region: pulumi.Input<string>;
     }
 
     export interface GetMediaMetaDataInputInfoS3InputInfo {
@@ -16840,6 +17667,29 @@ export namespace Mps {
          * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
+    }
+
+    export interface GetMediaMetaDataInputInfoS3InputInfoArgs {
+        /**
+         * The AWS S3 bucket.
+         */
+        s3Bucket: pulumi.Input<string>;
+        /**
+         * The path of the AWS S3 object.
+         */
+        s3Object: pulumi.Input<string>;
+        /**
+         * The region of the AWS S3 bucket.
+         */
+        s3Region: pulumi.Input<string>;
+        /**
+         * The key ID required to access the AWS S3 object.
+         */
+        s3SecretId?: pulumi.Input<string>;
+        /**
+         * The key required to access the AWS S3 object.
+         */
+        s3SecretKey?: pulumi.Input<string>;
     }
 
     export interface GetMediaMetaDataInputInfoUrlInputInfo {
@@ -17350,11 +18200,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -17483,11 +18333,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -17535,11 +18385,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -17661,11 +18511,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -17736,11 +18586,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -17823,11 +18673,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -17910,11 +18760,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -18036,11 +18886,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -18138,11 +18988,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -18264,11 +19114,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -18390,11 +19240,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -18454,11 +19304,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -18556,11 +19406,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -18667,11 +19517,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -18731,11 +19581,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -19064,11 +19914,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -19116,11 +19966,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -19311,7 +20161,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -19323,11 +20173,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -19367,7 +20217,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageS3OutputStorage {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -19375,11 +20225,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -19489,7 +20339,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -19501,11 +20351,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -19593,7 +20443,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageS3OutputStorage {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -19601,11 +20451,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -19680,7 +20530,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaImageSpriteTaskOutputStorageS3OutputStorage {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -19688,11 +20538,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -19767,7 +20617,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageS3OutputStorage {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -19775,11 +20625,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -19889,7 +20739,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -19901,11 +20751,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -19991,7 +20841,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageS3OutputStorage {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -19999,11 +20849,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -20113,7 +20963,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -20125,11 +20975,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -20239,7 +21089,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -20251,11 +21101,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -20303,7 +21153,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -20315,11 +21165,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -20409,7 +21259,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaTranscodeTaskOutputStorageS3OutputStorage {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -20417,11 +21267,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -20516,7 +21366,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -20528,11 +21378,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -20580,7 +21430,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -20592,11 +21442,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -20913,7 +21763,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -20925,11 +21775,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -20969,7 +21819,7 @@ export namespace Mps {
 
     export interface ScheduleOutputStorageS3OutputStorage {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -20977,11 +21827,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -21057,19 +21907,19 @@ export namespace Mps {
 
     export interface ScheduleTriggerAwsS3FileUploadTrigger {
         /**
-         * The SQS queue of the AWS S3 bucket.Note: The queue must be in the same region as the bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
          */
         awsSqs?: pulumi.Input<inputs.Mps.ScheduleTriggerAwsS3FileUploadTriggerAwsSqs>;
         /**
-         * The bucket directory bound. It must be an absolute path that starts and ends with `/`, such as `/movie/201907/`. If you do not specify this, the root directory will be bound.	.
+         * Input path directory bound to a workflow, such as `/movie/201907/`. If this parameter is left empty, the `/` root directory will be used.
          */
         dir?: pulumi.Input<string>;
         /**
-         * The file formats that will trigger the scheme, such as [mp4, flv, mov]. If you do not specify this, the upload of files in any format will trigger the scheme.	.
+         * Format list of files that can trigger a workflow, such as [mp4, flv, mov]. If this parameter is left empty, files in all formats can trigger the workflow.
          */
         formats?: pulumi.Input<pulumi.Input<string>[]>;
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: pulumi.Input<string>;
         /**
@@ -21077,11 +21927,11 @@ export namespace Mps {
          */
         s3Region: pulumi.Input<string>;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: pulumi.Input<string>;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: pulumi.Input<string>;
     }
@@ -23079,17 +23929,6 @@ export namespace Oceanus {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetSystemResourceFilterArgs {
-        /**
-         * Field to be filtered.
-         */
-        name: pulumi.Input<string>;
-        /**
-         * Filter values for the field.
-         */
-        values: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetSystemResourceFilter {
         /**
          * Field to be filtered.
@@ -23101,9 +23940,9 @@ export namespace Oceanus {
         values: string[];
     }
 
-    export interface GetTreeJobsFilterArgs {
+    export interface GetSystemResourceFilterArgs {
         /**
-         * Field to be filtered. Can only be set `Zone` or `JobType` or `JobStatus`.
+         * Field to be filtered.
          */
         name: pulumi.Input<string>;
         /**
@@ -23123,9 +23962,9 @@ export namespace Oceanus {
         values: string[];
     }
 
-    export interface GetWorkSpacesFilterArgs {
+    export interface GetTreeJobsFilterArgs {
         /**
-         * Field to be filtered.
+         * Field to be filtered. Can only be set `Zone` or `JobType` or `JobStatus`.
          */
         name: pulumi.Input<string>;
         /**
@@ -23143,6 +23982,17 @@ export namespace Oceanus {
          * Filter values for the field.
          */
         values: string[];
+    }
+
+    export interface GetWorkSpacesFilterArgs {
+        /**
+         * Field to be filtered.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter values for the field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface JobConfigClazzLevel {
@@ -23403,7 +24253,6 @@ export namespace Oceanus {
          */
         stopType: pulumi.Input<number>;
     }
-
 }
 
 export namespace Organization {
@@ -23448,6 +24297,12 @@ export namespace Organization {
         name?: pulumi.Input<string>;
     }
 
+    export interface OrgShareUnitMemberMember {
+        /**
+         * Member uin.
+         */
+        shareMemberUin: pulumi.Input<number>;
+    }
 }
 
 export namespace Placement {
@@ -23500,17 +24355,6 @@ export namespace Postgresql {
         vpcRestrictionEffect?: pulumi.Input<string>;
     }
 
-    export interface GetBaseBackupsFilterArgs {
-        /**
-         * Filter name.
-         */
-        name?: pulumi.Input<string>;
-        /**
-         * One or more filter values.
-         */
-        values?: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetBaseBackupsFilter {
         /**
          * Filter name.
@@ -23520,6 +24364,17 @@ export namespace Postgresql {
          * One or more filter values.
          */
         values?: string[];
+    }
+
+    export interface GetBaseBackupsFilterArgs {
+        /**
+         * Filter name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * One or more filter values.
+         */
+        values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetLogBackupsFilter {
@@ -23566,17 +24421,6 @@ export namespace Postgresql {
         values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetReadonlyGroupsFilterArgs {
-        /**
-         * Filter name.
-         */
-        name?: pulumi.Input<string>;
-        /**
-         * One or more filter values.
-         */
-        values?: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetReadonlyGroupsFilter {
         /**
          * Filter name.
@@ -23586,6 +24430,17 @@ export namespace Postgresql {
          * One or more filter values.
          */
         values?: string[];
+    }
+
+    export interface GetReadonlyGroupsFilterArgs {
+        /**
+         * Filter name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * One or more filter values.
+         */
+        values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface InstanceBackupPlan {
@@ -23628,16 +24483,38 @@ export namespace Postgresql {
          */
         name: pulumi.Input<string>;
     }
+
+    export interface ReadonlyGroupNetInfoList {
+        /**
+         * Ip address of the net info.
+         */
+        ip?: pulumi.Input<string>;
+        /**
+         * Port of the net info.
+         */
+        port?: pulumi.Input<number>;
+    }
 }
 
 export namespace PrivateDns {
-    export interface GetRecordsFilterArgs {
+    export interface GetPrivateZoneListFilter {
         /**
-         * Parameter name.
+         * name.
+         */
+        name: string;
+        /**
+         * values.
+         */
+        values: string[];
+    }
+
+    export interface GetPrivateZoneListFilterArgs {
+        /**
+         * name.
          */
         name: pulumi.Input<string>;
         /**
-         * Parameter values.
+         * values.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
@@ -23651,6 +24528,17 @@ export namespace PrivateDns {
          * Parameter values.
          */
         values: string[];
+    }
+
+    export interface GetRecordsFilterArgs {
+        /**
+         * Parameter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Parameter values.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface ZoneAccountVpcSet {
@@ -23752,140 +24640,314 @@ export namespace Pts {
     }
 
     export interface JobDataset {
+        /**
+         * File ID.
+         */
         fileId?: pulumi.Input<string>;
+        /**
+         * Header data row.
+         */
         headLines?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Parameter name array.
+         */
         headerColumns?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Whether the first line is the parameter name.
+         */
         headerInFile: pulumi.Input<boolean>;
+        /**
+         * Number of file lines.
+         */
         lineCount?: pulumi.Input<number>;
+        /**
+         * The file name where the test dataset is located.
+         */
         name: pulumi.Input<string>;
+        /**
+         * Number of file bytes.
+         */
         size?: pulumi.Input<number>;
+        /**
+         * Test whether the dataset is fragmented.
+         */
         split: pulumi.Input<boolean>;
+        /**
+         * Trailing data row.
+         */
         tailLines?: pulumi.Input<pulumi.Input<string>[]>;
         /**
          * Scene Type.
          */
         type?: pulumi.Input<string>;
+        /**
+         * Update time.
+         */
         updatedAt?: pulumi.Input<string>;
     }
 
     export interface JobDomainNameConfig {
+        /**
+         * DNS configuration.
+         */
         dnsConfig?: pulumi.Input<inputs.Pts.JobDomainNameConfigDnsConfig>;
+        /**
+         * Domain name binding configuration.
+         */
         hostAliases?: pulumi.Input<pulumi.Input<inputs.Pts.JobDomainNameConfigHostAlias>[]>;
     }
 
     export interface JobDomainNameConfigDnsConfig {
+        /**
+         * DNS IP List.
+         */
         nameservers?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface JobDomainNameConfigHostAlias {
+        /**
+         * List of domain names to be bound.
+         */
         hostNames?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * The IP address to be bound.
+         */
         ip?: pulumi.Input<string>;
     }
 
     export interface JobLoad {
+        /**
+         * Pressure distribution.
+         */
         geoRegionsLoadDistributions?: pulumi.Input<pulumi.Input<inputs.Pts.JobLoadGeoRegionsLoadDistribution>[]>;
+        /**
+         * Pressure allocation.
+         */
         loadSpec?: pulumi.Input<inputs.Pts.JobLoadLoadSpec>;
+        /**
+         * Source of stress.
+         */
         vpcLoadDistribution?: pulumi.Input<inputs.Pts.JobLoadVpcLoadDistribution>;
     }
 
     export interface JobLoadGeoRegionsLoadDistribution {
+        /**
+         * Percentage.
+         */
         percentage?: pulumi.Input<number>;
+        /**
+         * Region.
+         */
         region?: pulumi.Input<string>;
+        /**
+         * Regional ID.
+         */
         regionId: pulumi.Input<number>;
     }
 
     export interface JobLoadLoadSpec {
+        /**
+         * Configuration of concurrent pressure mode.
+         */
         concurrency?: pulumi.Input<inputs.Pts.JobLoadLoadSpecConcurrency>;
         /**
          * Average number of requests per second.
          */
         requestsPerSecond?: pulumi.Input<inputs.Pts.JobLoadLoadSpecRequestsPerSecond>;
+        /**
+         * Built-in stress mode in script.
+         */
         scriptOrigin?: pulumi.Input<inputs.Pts.JobLoadLoadSpecScriptOrigin>;
     }
 
     export interface JobLoadLoadSpecConcurrency {
+        /**
+         * Wait time for graceful termination of the task.
+         */
         gracefulStopSeconds?: pulumi.Input<number>;
+        /**
+         * Number of runs.
+         */
         iterationCount?: pulumi.Input<number>;
         /**
          * Maximum requests per second.
          */
         maxRequestsPerSecond?: pulumi.Input<number>;
+        /**
+         * Multi-phase configuration array.
+         */
         stages?: pulumi.Input<pulumi.Input<inputs.Pts.JobLoadLoadSpecConcurrencyStage>[]>;
     }
 
     export interface JobLoadLoadSpecConcurrencyStage {
+        /**
+         * Pressure time.
+         */
         durationSeconds?: pulumi.Input<number>;
+        /**
+         * Number of virtual users.
+         */
         targetVirtualUsers?: pulumi.Input<number>;
     }
 
     export interface JobLoadLoadSpecRequestsPerSecond {
+        /**
+         * Pressure time.
+         */
         durationSeconds?: pulumi.Input<number>;
+        /**
+         * Elegant shutdown waiting time.
+         */
         gracefulStopSeconds?: pulumi.Input<number>;
         /**
          * Maximum requests per second.
          */
         maxRequestsPerSecond?: pulumi.Input<number>;
+        /**
+         * Number of resources.
+         */
         resources?: pulumi.Input<number>;
+        /**
+         * Initial RPS.
+         */
         startRequestsPerSecond?: pulumi.Input<number>;
+        /**
+         * Target RPS, invalid input parameter.
+         */
         targetRequestsPerSecond?: pulumi.Input<number>;
     }
 
     export interface JobLoadLoadSpecScriptOrigin {
+        /**
+         * Pressure testing time.
+         */
         durationSeconds: pulumi.Input<number>;
+        /**
+         * Number of machines.
+         */
         machineNumber: pulumi.Input<number>;
+        /**
+         * Machine specification.
+         */
         machineSpecification: pulumi.Input<string>;
     }
 
     export interface JobLoadVpcLoadDistribution {
+        /**
+         * Region.
+         */
         region?: pulumi.Input<string>;
+        /**
+         * Regional ID.
+         */
         regionId: pulumi.Input<number>;
+        /**
+         * Subnet ID list.
+         */
         subnetIds?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * VPC ID.
+         */
         vpcId?: pulumi.Input<string>;
     }
 
     export interface JobPlugin {
+        /**
+         * File id.
+         */
         fileId?: pulumi.Input<string>;
+        /**
+         * File name.
+         */
         name?: pulumi.Input<string>;
+        /**
+         * File size.
+         */
         size?: pulumi.Input<number>;
         /**
          * Scene Type.
          */
         type?: pulumi.Input<string>;
+        /**
+         * Update time.
+         */
         updatedAt?: pulumi.Input<string>;
     }
 
     export interface JobProtocol {
+        /**
+         * File ID.
+         */
         fileId?: pulumi.Input<string>;
+        /**
+         * Protocol name.
+         */
         name?: pulumi.Input<string>;
+        /**
+         * File name.
+         */
         size?: pulumi.Input<number>;
         /**
          * Scene Type.
          */
         type?: pulumi.Input<string>;
+        /**
+         * Update time.
+         */
         updatedAt?: pulumi.Input<string>;
     }
 
     export interface JobRequestFile {
+        /**
+         * File id.
+         */
         fileId?: pulumi.Input<string>;
+        /**
+         * File name.
+         */
         name?: pulumi.Input<string>;
+        /**
+         * File size.
+         */
         size?: pulumi.Input<number>;
         /**
          * Scene Type.
          */
         type?: pulumi.Input<string>;
+        /**
+         * Update time.
+         */
         updatedAt?: pulumi.Input<string>;
     }
 
     export interface JobTestScript {
+        /**
+         * Base64 encoded file content.
+         */
         encodedContent?: pulumi.Input<string>;
+        /**
+         * Base64 encoded har structure.
+         */
         encodedHttpArchive?: pulumi.Input<string>;
+        /**
+         * Script weight, range 1-100.
+         */
         loadWeight?: pulumi.Input<number>;
+        /**
+         * File name.
+         */
         name?: pulumi.Input<string>;
+        /**
+         * File size.
+         */
         size?: pulumi.Input<number>;
         /**
          * Scene Type.
          */
         type?: pulumi.Input<string>;
+        /**
+         * Update time.
+         */
         updatedAt?: pulumi.Input<string>;
     }
 
@@ -24290,22 +25352,10 @@ export namespace Pts {
          */
         token?: pulumi.Input<string>;
     }
-
 }
 
 export namespace Redis {
     export interface BackupDownloadRestrictionLimitVpc {
-        /**
-         * Customize the region of the VPC to which the backup file is downloaded.
-         */
-        region: pulumi.Input<string>;
-        /**
-         * Customize the list of VPCs to download backup files.
-         */
-        vpcLists: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
-    export interface GetBackupDownloadInfoLimitVpcArgs {
         /**
          * Customize the region of the VPC to which the backup file is downloaded.
          */
@@ -24325,6 +25375,17 @@ export namespace Redis {
          * Customize the list of VPCs to download backup files.
          */
         vpcLists: string[];
+    }
+
+    export interface GetBackupDownloadInfoLimitVpcArgs {
+        /**
+         * Customize the region of the VPC to which the backup file is downloaded.
+         */
+        region: pulumi.Input<string>;
+        /**
+         * Customize the list of VPCs to download backup files.
+         */
+        vpcLists: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface InstanceNodeInfo {
@@ -24446,6 +25507,9 @@ export namespace Scf {
          * File system instance ID.
          */
         cfsId: pulumi.Input<string>;
+        /**
+         * (Readonly) File system ip address.
+         */
         ipAddress?: pulumi.Input<string>;
         /**
          * Local mount directory.
@@ -24455,7 +25519,13 @@ export namespace Scf {
          * File system mount instance ID.
          */
         mountInsId: pulumi.Input<string>;
+        /**
+         * (Readonly) File system subnet ID.
+         */
         mountSubnetId?: pulumi.Input<string>;
+        /**
+         * (Readonly) File system virtual private network ID.
+         */
         mountVpcId?: pulumi.Input<string>;
         /**
          * Remote mount directory.
@@ -24525,6 +25595,9 @@ export namespace Scf {
     }
 
     export interface FunctionIntranetConfig {
+        /**
+         * If fixed intranet IP is enabled, this field returns the IP list used.
+         */
         ipAddresses?: pulumi.Input<pulumi.Input<string>[]>;
         /**
          * Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.
@@ -24680,6 +25753,9 @@ export namespace Security {
          * An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
          */
         ipv6CidrBlock?: pulumi.Input<string>;
+        /**
+         * The security group rule index number, whose value dynamically changes with changes in security group rules.
+         */
         policyIndex?: pulumi.Input<number>;
         /**
          * Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
@@ -24728,6 +25804,9 @@ export namespace Security {
          * An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
          */
         ipv6CidrBlock?: pulumi.Input<string>;
+        /**
+         * The security group rule index number, whose value dynamically changes with changes in security group rules.
+         */
         policyIndex?: pulumi.Input<number>;
         /**
          * Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
@@ -24855,7 +25934,6 @@ export namespace Ses {
          */
         text?: pulumi.Input<string>;
     }
-
 }
 
 export namespace Sqlserver {
@@ -25084,17 +26162,6 @@ export namespace Ssl {
         filterValue: pulumi.Input<string>;
     }
 
-    export interface GetDescribeHostCdnInstanceListFilterArgs {
-        /**
-         * Filter parameter key.
-         */
-        filterKey: pulumi.Input<string>;
-        /**
-         * Filter parameter value.
-         */
-        filterValue: pulumi.Input<string>;
-    }
-
     export interface GetDescribeHostCdnInstanceListFilter {
         /**
          * Filter parameter key.
@@ -25104,6 +26171,17 @@ export namespace Ssl {
          * Filter parameter value.
          */
         filterValue: string;
+    }
+
+    export interface GetDescribeHostCdnInstanceListFilterArgs {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: pulumi.Input<string>;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: pulumi.Input<string>;
     }
 
     export interface GetDescribeHostClbInstanceListFilter {
@@ -25150,17 +26228,6 @@ export namespace Ssl {
         filterValue: pulumi.Input<string>;
     }
 
-    export interface GetDescribeHostDdosInstanceListFilterArgs {
-        /**
-         * Filter parameter key.
-         */
-        filterKey: pulumi.Input<string>;
-        /**
-         * Filter parameter value.
-         */
-        filterValue: pulumi.Input<string>;
-    }
-
     export interface GetDescribeHostDdosInstanceListFilter {
         /**
          * Filter parameter key.
@@ -25172,7 +26239,7 @@ export namespace Ssl {
         filterValue: string;
     }
 
-    export interface GetDescribeHostLighthouseInstanceListFilterArgs {
+    export interface GetDescribeHostDdosInstanceListFilterArgs {
         /**
          * Filter parameter key.
          */
@@ -25192,6 +26259,17 @@ export namespace Ssl {
          * Filter parameter value.
          */
         filterValue: string;
+    }
+
+    export interface GetDescribeHostLighthouseInstanceListFilterArgs {
+        /**
+         * Filter parameter key.
+         */
+        filterKey: pulumi.Input<string>;
+        /**
+         * Filter parameter value.
+         */
+        filterValue: pulumi.Input<string>;
     }
 
     export interface GetDescribeHostLiveInstanceListFilter {
@@ -25305,8 +26383,17 @@ export namespace Ssl {
     }
 
     export interface PayCertificateDvAuth {
+        /**
+         * DV authentication key.
+         */
         dvAuthKey?: pulumi.Input<string>;
+        /**
+         * DV authentication value.
+         */
         dvAuthValue?: pulumi.Input<string>;
+        /**
+         * DV authentication type.
+         */
         dvAuthVerifyType?: pulumi.Input<string>;
     }
 
@@ -25947,21 +27034,9 @@ export namespace Tcm {
          */
         address: pulumi.Input<string>;
     }
-
 }
 
 export namespace Tcmq {
-    export interface GetQueueFilterArgs {
-        /**
-         * Filter parameter name.
-         */
-        name?: pulumi.Input<string>;
-        /**
-         * Value.
-         */
-        values?: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetQueueFilter {
         /**
          * Filter parameter name.
@@ -25971,6 +27046,17 @@ export namespace Tcmq {
          * Value.
          */
         values?: string[];
+    }
+
+    export interface GetQueueFilterArgs {
+        /**
+         * Filter parameter name.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * Value.
+         */
+        values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetTopicFilter {
@@ -26007,6 +27093,9 @@ export namespace Tcr {
          * ID of the resource.
          */
         id?: pulumi.Input<number>;
+        /**
+         * namespace name.
+         */
         nsName?: pulumi.Input<string>;
         /**
          * repository decoration type:repoMatches or repoExcludes.
@@ -26036,6 +27125,10 @@ export namespace Tcr {
          */
         regionId?: pulumi.Input<number>;
         /**
+         * Replication region name.
+         */
+        regionName?: pulumi.Input<string>;
+        /**
          * Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.
          */
         synTag?: pulumi.Input<boolean>;
@@ -26050,7 +27143,13 @@ export namespace Tcr {
          * Remarks of policy.
          */
         description?: pulumi.Input<string>;
+        /**
+         * Index of policy.
+         */
         index?: pulumi.Input<number>;
+        /**
+         * Version of policy.
+         */
         version?: pulumi.Input<string>;
     }
 
@@ -26190,17 +27289,6 @@ export namespace Tdcpg {
 }
 
 export namespace Tdmq {
-    export interface GetProInstancesFilterArgs {
-        /**
-         * The name of the filter parameter.
-         */
-        name?: pulumi.Input<string>;
-        /**
-         * value.
-         */
-        values?: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetProInstancesFilter {
         /**
          * The name of the filter parameter.
@@ -26210,6 +27298,17 @@ export namespace Tdmq {
          * value.
          */
         values?: string[];
+    }
+
+    export interface GetProInstancesFilterArgs {
+        /**
+         * The name of the filter parameter.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * value.
+         */
+        values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetPublishersFilter {
@@ -26257,23 +27356,47 @@ export namespace Tdmq {
     }
 
     export interface GetRabbitmqNodeListFilter {
+        /**
+         * The name of the filter parameter.
+         */
         name?: string;
+        /**
+         * value.
+         */
         values?: string[];
     }
 
     export interface GetRabbitmqNodeListFilterArgs {
+        /**
+         * The name of the filter parameter.
+         */
         name?: pulumi.Input<string>;
-        values?: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
-    export interface GetRabbitmqVipInstanceFilterArgs {
-        name?: pulumi.Input<string>;
+        /**
+         * value.
+         */
         values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetRabbitmqVipInstanceFilter {
+        /**
+         * The name of the filter parameter.
+         */
         name?: string;
+        /**
+         * value.
+         */
         values?: string[];
+    }
+
+    export interface GetRabbitmqVipInstanceFilterArgs {
+        /**
+         * The name of the filter parameter.
+         */
+        name?: pulumi.Input<string>;
+        /**
+         * value.
+         */
+        values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface NamespaceRetentionPolicy {
@@ -26309,6 +27432,21 @@ export namespace Tdmq {
         vpcId?: pulumi.Input<string>;
     }
 
+    export interface RocketmqVipInstanceIpRule {
+        /**
+         * Whether to allow or deny.
+         */
+        allow: pulumi.Input<boolean>;
+        /**
+         * IP address block information.
+         */
+        ipRule: pulumi.Input<string>;
+        /**
+         * Remark.
+         */
+        remark: pulumi.Input<string>;
+    }
+
     export interface RocketmqVipInstanceVpcInfo {
         /**
          * Subnet ID.
@@ -26319,7 +27457,6 @@ export namespace Tdmq {
          */
         vpcId: pulumi.Input<string>;
     }
-
 }
 
 export namespace Tem {
@@ -26335,6 +27472,9 @@ export namespace Tem {
     }
 
     export interface ApplicationServiceService {
+        /**
+         * ip address of application service.
+         */
         ip?: pulumi.Input<string>;
         /**
          * port mapping item list.
@@ -26382,6 +27522,9 @@ export namespace Tem {
          * related CLB ID, support binding existing clb, does not support modification.
          */
         clbId?: pulumi.Input<string>;
+        /**
+         * creation time.
+         */
         createTime?: pulumi.Input<string>;
         /**
          * environment ID.
@@ -26407,6 +27550,9 @@ export namespace Tem {
          * ingress TLS configurations.
          */
         tls?: pulumi.Input<pulumi.Input<inputs.Tem.GatewayIngressTl>[]>;
+        /**
+         * gateway vip.
+         */
         vip?: pulumi.Input<string>;
     }
 
@@ -26775,6 +27921,9 @@ export namespace Teo {
     }
 
     export interface ApplicationProxyIpv6 {
+        /**
+         * - `on`: Enable.- `off`: Disable.
+         */
         switch: pulumi.Input<string>;
     }
 
@@ -26809,48 +27958,77 @@ export namespace Teo {
         type?: pulumi.Input<string>;
     }
 
-    export interface OriginGroupOriginRecord {
+    export interface L4ProxyDdosProtectionConfig {
         /**
-         * Indicating origin sites area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.
+         * Exclusive DDoS protection specifications in the Chinese mainland. For details, see [Dedicated DDoS Mitigation Fee (Pay-as-You-Go)] (https://intl.cloud.tencent.com/document/product/1552/94162?from_cn_redirect=1). `PLATFORM`: Default protection of the platform, i.e., Exclusive DDoS protection is not enabled; `BASE30_MAX300`: Exclusive DDoS protection enabled, providing a baseline protection bandwidth of 30 Gbps and an elastic protection bandwidth of up to 300 Gbps; `BASE60_MAX600`: Exclusive DDoS protection enabled, providing a baseline protection bandwidth of 60 Gbps and an elastic protection bandwidth of up to 600 Gbps. If no parameters are filled, the default value PLATFORM is used.
          */
-        areas?: pulumi.Input<pulumi.Input<string>[]>;
+        levelMainland?: pulumi.Input<string>;
         /**
-         * Port of the origin site. Valid value range: 1-65535.
+         * Exclusive DDoS protection specifications in the worldwide region (excluding the Chinese mainland). `PLATFORM`: Default protection of the platform, i.e., Exclusive DDoS protection is not enabled; `ANYCAST300`: Exclusive DDoS protection enabled, offering a total maximum protection bandwidth of 300 Gbps; `ANYCAST_ALLIN`: Exclusive DDoS protection enabled, utilizing all available protection resources for protection. When no parameters are filled, the default value PLATFORM is used.
          */
-        port: pulumi.Input<number>;
+        levelOverseas?: pulumi.Input<string>;
         /**
-         * Whether origin site is using private authentication. Only valid when `OriginType` is `thirdParty`.
+         * Configuration of elastic protection bandwidth for exclusive DDoS protection in the Chinese mainland.Valid only when exclusive DDoS protection in the Chinese mainland is enabled (refer to the LevelMainland parameter configuration), and the value has the following limitations: When exclusive DDoS protection is enabled in the Chinese mainland and the 30 Gbps baseline protection bandwidth is used (the LevelMainland parameter value is BASE30_MAX300): the value range is 30 to 300 in Gbps; When exclusive DDoS protection is enabled in the Chinese mainland and the 60 Gbps baseline protection bandwidth is used (the LevelMainland parameter value is BASE60_MAX600): the value range is 60 to 600 in Gbps; When the default protection of the platform is used (the LevelMainland parameter value is PLATFORM): configuration is not supported, and the value of this parameter is invalid.
+         */
+        maxBandwidthMainland?: pulumi.Input<number>;
+    }
+
+    export interface OriginGroupRecord {
+        /**
+         * Whether to use private authentication, it takes effect when the origin site type RecordType=COS/AWS_S3, the values are:
          */
         private?: pulumi.Input<boolean>;
         /**
          * Parameters for private authentication. Only valid when `Private` is `true`.
          */
-        privateParameters?: pulumi.Input<pulumi.Input<inputs.Teo.OriginGroupOriginRecordPrivateParameter>[]>;
+        privateParameters?: pulumi.Input<pulumi.Input<inputs.Teo.OriginGroupRecordPrivateParameter>[]>;
         /**
-         * Record value, which could be an IPv4/IPv6 address or a domain.
+         * Origin site record value, does not include port information, can be: IPv4, IPv6, domain name format.
          */
         record: pulumi.Input<string>;
+        /**
+         * Origin record ID.
+         */
         recordId?: pulumi.Input<string>;
         /**
-         * Indicating origin sites weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
+         * Origin site type, the values are:
+         */
+        type?: pulumi.Input<string>;
+        /**
+         * The weight of the origin site, the value is 0-100. If it is not filled in, it means that the weight will not be set and the system will schedule it freely. If it is filled in with 0, it means that the weight is 0 and the traffic will not be scheduled to this origin site.
          */
         weight?: pulumi.Input<number>;
     }
 
-    export interface OriginGroupOriginRecordPrivateParameter {
+    export interface OriginGroupRecordPrivateParameter {
         /**
-         * Parameter Name. Valid values: `AccessKeyId`: Access Key ID; `SecretAccessKey`: Secret Access Key.
+         * Private authentication parameter name, the values are:
          */
         name: pulumi.Input<string>;
         /**
-         * Parameter value.
+         * Private authentication parameter value.
          */
         value: pulumi.Input<string>;
     }
 
+    export interface OriginGroupReference {
+        /**
+         * The instance ID of the reference type.
+         */
+        instanceId?: pulumi.Input<string>;
+        /**
+         * Instance name of the application type.
+         */
+        instanceName?: pulumi.Input<string>;
+        /**
+         * Reference service type, the values are:
+         */
+        instanceType?: pulumi.Input<string>;
+    }
+
     export interface RuleEngineRule {
         /**
-         * Actions list of the rule. See details in data source `ruleEngineSetting`.
+         * Feature to be executed.
          */
         actions: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRuleAction>[]>;
         /**
@@ -26858,144 +28036,156 @@ export namespace Teo {
          */
         ors: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRuleOr>[]>;
         /**
-         * Actions list of the rule. See details in data source `ruleEngineSetting`.
+         * The nested rule.
          */
         subRules?: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRuleSubRule>[]>;
     }
 
     export interface RuleEngineRuleAction {
         /**
-         * Define a code action.
+         * Feature operation with a status code. Features of this type include:
          */
         codeAction?: pulumi.Input<inputs.Teo.RuleEngineRuleActionCodeAction>;
         /**
-         * Define a normal action.
+         * Common operation. Values:
          */
         normalAction?: pulumi.Input<inputs.Teo.RuleEngineRuleActionNormalAction>;
         /**
-         * Define a rewrite action.
+         * Feature operation with a request/response header. Features of this type include:
          */
         rewriteAction?: pulumi.Input<inputs.Teo.RuleEngineRuleActionRewriteAction>;
     }
 
     export interface RuleEngineRuleActionCodeAction {
         /**
-         * Action name.
+         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
          */
         action: pulumi.Input<string>;
         /**
-         * Action parameters.
+         * Operation parameter.
          */
         parameters: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRuleActionCodeActionParameter>[]>;
     }
 
     export interface RuleEngineRuleActionCodeActionParameter {
         /**
-         * Target HEADER name.
+         * Parameter name.
          */
         name: pulumi.Input<string>;
         /**
-         * HTTP status code to use.
+         * The status code.
          */
         statusCode: pulumi.Input<number>;
         /**
-         * Parameter Value.
+         * Parameter value.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface RuleEngineRuleActionNormalAction {
         /**
-         * Action name.
+         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
          */
         action: pulumi.Input<string>;
         /**
-         * Action parameters.
+         * Parameter.
          */
         parameters: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRuleActionNormalActionParameter>[]>;
     }
 
     export interface RuleEngineRuleActionNormalActionParameter {
         /**
-         * Target HEADER name.
+         * Parameter name.
          */
         name: pulumi.Input<string>;
         /**
-         * Parameter Value.
+         * Parameter value.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface RuleEngineRuleActionRewriteAction {
         /**
-         * Action name.
+         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
          */
         action: pulumi.Input<string>;
         /**
-         * Action parameters.
+         * Parameter.
          */
         parameters: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRuleActionRewriteActionParameter>[]>;
     }
 
     export interface RuleEngineRuleActionRewriteActionParameter {
         /**
-         * Action to take on the HEADER. Valid values: `add`, `del`, `set`.
+         * Feature parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the parameter name, which has three values:
+         * - add: Add the HTTP header.
+         * - set: Rewrite the HTTP header.
+         * - del: Delete the HTTP header.
          */
         action: pulumi.Input<string>;
         /**
-         * Target HEADER name.
+         * Parameter name.
          */
         name: pulumi.Input<string>;
         /**
-         * Parameter Value.
+         * Parameter value.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface RuleEngineRuleOr {
         /**
-         * AND Conditions list of the rule. Rule would be triggered if all conditions are true.
+         * Rule engine condition. This condition will be considered met if all items in the array are met.
          */
         ands: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRuleOrAnd>[]>;
     }
 
     export interface RuleEngineRuleOrAnd {
         /**
-         * Whether to ignore the case of the parameter value, the default value is false.
+         * Whether the parameter value is case insensitive. Default value: false.
          */
         ignoreCase?: pulumi.Input<boolean>;
         /**
-         * The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+         * The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
          */
         name?: pulumi.Input<string>;
         /**
-         * Condition operator. Valid values are `equal`, `notequal`.
+         * Operator. Valid values:
          */
         operator: pulumi.Input<string>;
         /**
-         * Condition target. Valid values:- `host`: Host of the URL.- `filename`: filename of the URL.- `extension`: file extension of the URL.- `fullUrl`: full url.- `url`: path of the URL.
+         * The match type. Values:
          */
         target: pulumi.Input<string>;
         /**
-         * Condition Value.
+         * The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+         * - When `Target=extension`, enter the file extension, such as "jpg" and "txt".
+         * - When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".
+         * - When `Target=all`, it indicates any site request.
+         * - When `Target=host`, enter the host under the current site, such as "www.maxx55.com".
+         * - When `Target=url`, enter the partial URL path under the current site, such as "/example".
+         * - When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".
+         * - When `Target=client_country`, enter the ISO-3166 country/region code.
+         * - When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".
+         * - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
          */
-        values: pulumi.Input<pulumi.Input<string>[]>;
+        values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface RuleEngineRuleSubRule {
         /**
-         * Rule items list.
+         * Nested rule settings.
          */
         rules: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRuleSubRuleRule>[]>;
         /**
-         * rule tag list.
+         * Tag of the rule.
          */
         tags?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface RuleEngineRuleSubRuleRule {
         /**
-         * Actions list of the rule. See details in data source `ruleEngineSetting`.
+         * Feature to be executed.
          */
         actions: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRuleSubRuleRuleAction>[]>;
         /**
@@ -27006,121 +28196,133 @@ export namespace Teo {
 
     export interface RuleEngineRuleSubRuleRuleAction {
         /**
-         * Define a code action.
+         * Feature operation with a status code. Features of this type include:
          */
         codeAction?: pulumi.Input<inputs.Teo.RuleEngineRuleSubRuleRuleActionCodeAction>;
         /**
-         * Define a normal action.
+         * Common operation. Values:
          */
         normalAction?: pulumi.Input<inputs.Teo.RuleEngineRuleSubRuleRuleActionNormalAction>;
         /**
-         * Define a rewrite action.
+         * Feature operation with a request/response header. Features of this type include:
          */
         rewriteAction?: pulumi.Input<inputs.Teo.RuleEngineRuleSubRuleRuleActionRewriteAction>;
     }
 
     export interface RuleEngineRuleSubRuleRuleActionCodeAction {
         /**
-         * Action name.
+         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
          */
         action: pulumi.Input<string>;
         /**
-         * Action parameters.
+         * Operation parameter.
          */
         parameters: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRuleSubRuleRuleActionCodeActionParameter>[]>;
     }
 
     export interface RuleEngineRuleSubRuleRuleActionCodeActionParameter {
         /**
-         * Target HEADER name.
+         * Parameter name.
          */
         name: pulumi.Input<string>;
         /**
-         * HTTP status code to use.
+         * The status code.
          */
         statusCode: pulumi.Input<number>;
         /**
-         * Parameter Value.
+         * Parameter value.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface RuleEngineRuleSubRuleRuleActionNormalAction {
         /**
-         * Action name.
+         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
          */
         action: pulumi.Input<string>;
         /**
-         * Action parameters.
+         * Parameter.
          */
         parameters: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRuleSubRuleRuleActionNormalActionParameter>[]>;
     }
 
     export interface RuleEngineRuleSubRuleRuleActionNormalActionParameter {
         /**
-         * Target HEADER name.
+         * Parameter name.
          */
         name: pulumi.Input<string>;
         /**
-         * Parameter Value.
+         * Parameter value.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface RuleEngineRuleSubRuleRuleActionRewriteAction {
         /**
-         * Action name.
+         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
          */
         action: pulumi.Input<string>;
         /**
-         * Action parameters.
+         * Parameter.
          */
         parameters: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRuleSubRuleRuleActionRewriteActionParameter>[]>;
     }
 
     export interface RuleEngineRuleSubRuleRuleActionRewriteActionParameter {
         /**
-         * Action to take on the HEADER. Valid values: `add`, `del`, `set`.
+         * Feature parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the parameter name, which has three values:
+         * - add: Add the HTTP header.
+         * - set: Rewrite the HTTP header.
+         * - del: Delete the HTTP header.
          */
         action: pulumi.Input<string>;
         /**
-         * Target HEADER name.
+         * Parameter name.
          */
         name: pulumi.Input<string>;
         /**
-         * Parameter Value.
+         * Parameter value.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface RuleEngineRuleSubRuleRuleOr {
         /**
-         * AND Conditions list of the rule. Rule would be triggered if all conditions are true.
+         * Rule engine condition. This condition will be considered met if all items in the array are met.
          */
         ands: pulumi.Input<pulumi.Input<inputs.Teo.RuleEngineRuleSubRuleRuleOrAnd>[]>;
     }
 
     export interface RuleEngineRuleSubRuleRuleOrAnd {
         /**
-         * Whether to ignore the case of the parameter value, the default value is false.
+         * Whether the parameter value is case insensitive. Default value: false.
          */
         ignoreCase?: pulumi.Input<boolean>;
         /**
-         * The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+         * The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
          */
         name?: pulumi.Input<string>;
         /**
-         * Condition operator. Valid values are `equal`, `notequal`.
+         * Operator. Valid values:
          */
         operator: pulumi.Input<string>;
         /**
-         * Condition target. Valid values:- `host`: Host of the URL.- `filename`: filename of the URL.- `extension`: file extension of the URL.- `fullUrl`: full url.- `url`: path of the URL.
+         * The match type. Values:
          */
         target: pulumi.Input<string>;
         /**
-         * Condition Value.
+         * The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+         * - When `Target=extension`, enter the file extension, such as "jpg" and "txt".
+         * - When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".
+         * - When `Target=all`, it indicates any site request.
+         * - When `Target=host`, enter the host under the current site, such as "www.maxx55.com".
+         * - When `Target=url`, enter the partial URL path under the current site, such as "/example".
+         * - When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".
+         * - When `Target=client_country`, enter the ISO-3166 country/region code.
+         * - When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".
+         * - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
          */
-        values: pulumi.Input<pulumi.Input<string>[]>;
+        values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface ZoneOwnershipVerification {
@@ -27162,29 +28364,26 @@ export namespace Teo {
 
     export interface ZoneSettingCacheCache {
         /**
-         * Cache expiration time settings, Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
+         * Cache expiration time settings.
+         * Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
          */
         cacheTime?: pulumi.Input<number>;
         /**
-         * Specifies whether to enable force cache. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
-         */
-        ignoreCacheControl?: pulumi.Input<string>;
-        /**
-         * Cache configuration switch. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+         * Cache configuration switch.
          */
         switch?: pulumi.Input<string>;
     }
 
     export interface ZoneSettingCacheFollowOrigin {
         /**
-         * Specifies whether to follow the origin server configuration.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+         * Specifies whether to follow the origin server configuration.
          */
         switch?: pulumi.Input<string>;
     }
 
     export interface ZoneSettingCacheKey {
         /**
-         * Specifies whether to enable full-path cache.- `on`: Enable full-path cache (i.e., disable Ignore Query String).- `off`: Disable full-path cache (i.e., enable Ignore Query String). Note: This field may return null, indicating that no valid value can be obtained.
+         * Specifies whether to enable full-path cache.
          */
         fullUrlCache?: pulumi.Input<string>;
         /**
@@ -27199,11 +28398,11 @@ export namespace Teo {
 
     export interface ZoneSettingCacheKeyQueryString {
         /**
-         * - `includeCustom`: Include the specified query strings.- `excludeCustom`: Exclude the specified query strings. Note: This field may return null, indicating that no valid value can be obtained.
+         * `includeCustom`: Include the specified query strings.
          */
         action?: pulumi.Input<string>;
         /**
-         * Whether to use QueryString as part of CacheKey.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+         * Whether to use QueryString as part of CacheKey.
          */
         switch: pulumi.Input<string>;
         /**
@@ -27214,7 +28413,7 @@ export namespace Teo {
 
     export interface ZoneSettingCacheNoCache {
         /**
-         * Whether to cache the configuration. Valid values: `on`: Do not cache; `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
+         * Whether to cache the configuration.
          */
         switch?: pulumi.Input<string>;
     }
@@ -27225,7 +28424,7 @@ export namespace Teo {
          */
         percent?: pulumi.Input<number>;
         /**
-         * Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+         * Specifies whether to enable cache prefresh.
          */
         switch: pulumi.Input<string>;
     }
@@ -27236,7 +28435,7 @@ export namespace Teo {
          */
         headerName?: pulumi.Input<string>;
         /**
-         * Specifies whether to enable client IP header.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+         * Specifies whether to enable client IP header.
          */
         switch: pulumi.Input<string>;
     }
@@ -27247,18 +28446,20 @@ export namespace Teo {
          */
         algorithms?: pulumi.Input<pulumi.Input<string>[]>;
         /**
-         * Whether to enable Smart compression.- `on`: Enable.- `off`: Disable.
+         * Whether to enable Smart compression.
          */
         switch: pulumi.Input<string>;
     }
 
     export interface ZoneSettingForceRedirect {
         /**
-         * Redirection status code.- 301- 302 Note: This field may return null, indicating that no valid value can be obtained.
+         * Redirection status code.
+         * - 301
+         * - 302 Note: This field may return null, indicating that no valid value can be obtained.
          */
         redirectStatusCode?: pulumi.Input<number>;
         /**
-         * Whether to enable force redirect.- `on`: Enable.- `off`: Disable.
+         * Whether to enable force redirect.
          */
         switch: pulumi.Input<string>;
     }
@@ -27269,15 +28470,18 @@ export namespace Teo {
          */
         hsts?: pulumi.Input<inputs.Teo.ZoneSettingHttpsHsts>;
         /**
-         * HTTP2 configuration switch.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+         * HTTP2 configuration switch.
          */
         http2?: pulumi.Input<string>;
         /**
-         * OCSP configuration switch.- `on`: Enable.- `off`: Disable.It is disabled by default. Note: This field may return null, indicating that no valid value can be obtained.
+         * OCSP configuration switch.
          */
         ocspStapling?: pulumi.Input<string>;
         /**
-         * TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`.Only consecutive versions can be enabled at the same time. Note: This field may return null, indicating that no valid value can be obtained.
+         * TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`.
+         * Only consecutive versions can be enabled at the same time. Note: This field may return null, indicating that no valid value can be obtained.
+         *
+         * The `ipv6` object supports the following:
          */
         tlsVersions?: pulumi.Input<pulumi.Input<string>[]>;
     }
@@ -27296,21 +28500,21 @@ export namespace Teo {
          */
         preload?: pulumi.Input<string>;
         /**
-         * - `on`: Enable.- `off`: Disable.
+         * `on`: Enable.
          */
         switch: pulumi.Input<string>;
     }
 
     export interface ZoneSettingIpv6 {
         /**
-         * Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+         * Cache configuration switch.
          */
         switch: pulumi.Input<string>;
     }
 
     export interface ZoneSettingMaxAge {
         /**
-         * Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If is on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
+         * Specifies whether to follow the max cache age of the origin server.
          */
         followOrigin?: pulumi.Input<string>;
         /**
@@ -27321,7 +28525,7 @@ export namespace Teo {
 
     export interface ZoneSettingOfflineCache {
         /**
-         * Whether to enable offline cache.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+         * Whether to enable offline cache.
          */
         switch: pulumi.Input<string>;
     }
@@ -27332,11 +28536,7 @@ export namespace Teo {
          */
         backupOrigins?: pulumi.Input<pulumi.Input<string>[]>;
         /**
-         * Whether access private cos bucket is allowed when `OriginType` is cos. Note: This field may return null, indicating that no valid value can be obtained.
-         */
-        cosPrivateAccess?: pulumi.Input<string>;
-        /**
-         * Origin-pull protocol.- `http`: Switch HTTPS requests to HTTP.- `follow`: Follow the protocol of the request.- `https`: Switch HTTP requests to HTTPS. This only supports port 443 on the origin server. Note: This field may return null, indicating that no valid value can be obtained.
+         * Origin-pull protocol.
          */
         originPullProtocol?: pulumi.Input<string>;
         /**
@@ -27351,35 +28551,35 @@ export namespace Teo {
          */
         maxSize?: pulumi.Input<number>;
         /**
-         * Specifies whether to enable custom setting of the maximum file size.- `on`: Enable. You can set a custom max size.- `off`: Disable. In this case, the max size defaults to 32 MB.
+         * Specifies whether to enable custom setting of the maximum file size.
          */
         switch: pulumi.Input<string>;
     }
 
     export interface ZoneSettingQuic {
         /**
-         * Whether to enable QUIC.- `on`: Enable.- `off`: Disable.
+         * Whether to enable QUIC.
          */
         switch: pulumi.Input<string>;
     }
 
     export interface ZoneSettingSmartRouting {
         /**
-         * Whether to enable HTTP2 origin-pull.- `on`: Enable.- `off`: Disable.
+         * Whether to enable HTTP2 origin-pull.
          */
         switch: pulumi.Input<string>;
     }
 
     export interface ZoneSettingUpstreamHttp2 {
         /**
-         * Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+         * Cache configuration switch.
          */
         switch: pulumi.Input<string>;
     }
 
     export interface ZoneSettingWebSocket {
         /**
-         * Whether to enable custom WebSocket timeout setting. When is off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
+         * Whether to enable custom WebSocket timeout setting. When it's off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
          */
         switch: pulumi.Input<string>;
         /**
@@ -27387,7 +28587,6 @@ export namespace Teo {
          */
         timeout?: pulumi.Input<number>;
     }
-
 }
 
 export namespace Trocket {
@@ -27448,6 +28647,9 @@ export namespace Tse {
          * service name, meaningless when used as an input parameter.
          */
         serviceName?: pulumi.Input<string>;
+        /**
+         * upstream name, meaningless when used as an input parameter.
+         */
         upstreamName?: pulumi.Input<string>;
     }
 
@@ -27602,6 +28804,21 @@ export namespace Tse {
          * group specification, 1c2g|2c4g|4c8g|8c16g.
          */
         specification: pulumi.Input<string>;
+    }
+
+    export interface CngwNetworkAccessControlAccessControl {
+        /**
+         * Black list.
+         */
+        cidrBlackLists?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * White list.
+         */
+        cidrWhiteLists?: pulumi.Input<pulumi.Input<string>[]>;
+        /**
+         * Access mode: `Whitelist`, `Blacklist`.
+         */
+        mode?: pulumi.Input<string>;
     }
 
     export interface CngwRouteHeader {
@@ -27917,7 +29134,13 @@ export namespace Tse {
     }
 
     export interface CngwServiceUpstreamInfoTarget {
+        /**
+         * created time.
+         */
         createdTime?: pulumi.Input<string>;
+        /**
+         * health.
+         */
         health?: pulumi.Input<string>;
         /**
          * host.
@@ -27937,15 +29160,181 @@ export namespace Tse {
         weight: pulumi.Input<number>;
     }
 
-    export interface GetGatewayCertificatesFilterArgs {
+    export interface CngwStrategyConfig {
         /**
-         * Filter name.
+         * behavior configuration of metric
+         * Note: This field may return null, indicating that a valid value is not available.
          */
-        key?: pulumi.Input<string>;
+        behavior?: pulumi.Input<inputs.Tse.CngwStrategyConfigBehavior>;
         /**
-         * Filter value.
+         * create time
+         * Note: This field may return null, indicating that a valid value is not available.
          */
-        value?: pulumi.Input<string>;
+        createTime?: pulumi.Input<string>;
+        /**
+         * max number of replica for metric scaling.
+         */
+        maxReplicas?: pulumi.Input<number>;
+        /**
+         * metric list.
+         */
+        metrics?: pulumi.Input<pulumi.Input<inputs.Tse.CngwStrategyConfigMetric>[]>;
+        /**
+         * modify time
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        modifyTime?: pulumi.Input<string>;
+        /**
+         * strategy ID
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        strategyId?: pulumi.Input<string>;
+    }
+
+    export interface CngwStrategyConfigBehavior {
+        /**
+         * configuration of down scale
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        scaleDown?: pulumi.Input<inputs.Tse.CngwStrategyConfigBehaviorScaleDown>;
+        /**
+         * configuration of up scale
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        scaleUp?: pulumi.Input<inputs.Tse.CngwStrategyConfigBehaviorScaleUp>;
+    }
+
+    export interface CngwStrategyConfigBehaviorScaleDown {
+        /**
+         * policies of scale down
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        policies?: pulumi.Input<pulumi.Input<inputs.Tse.CngwStrategyConfigBehaviorScaleDownPolicy>[]>;
+        /**
+         * type of policy, default value: max
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        selectPolicy?: pulumi.Input<string>;
+        /**
+         * stability window time, unit:second, default 300 when scale down
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        stabilizationWindowSeconds?: pulumi.Input<number>;
+    }
+
+    export interface CngwStrategyConfigBehaviorScaleDownPolicy {
+        /**
+         * period of scale up
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        periodSeconds?: pulumi.Input<number>;
+        /**
+         * type, default value: Pods
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        type?: pulumi.Input<string>;
+        /**
+         * value
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        value?: pulumi.Input<number>;
+    }
+
+    export interface CngwStrategyConfigBehaviorScaleUp {
+        /**
+         * policies of scale up
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        policies?: pulumi.Input<pulumi.Input<inputs.Tse.CngwStrategyConfigBehaviorScaleUpPolicy>[]>;
+        /**
+         * type of policy, default value: max
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        selectPolicy?: pulumi.Input<string>;
+        /**
+         * stability window time, unit:second, default 0 when scale up
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        stabilizationWindowSeconds?: pulumi.Input<number>;
+    }
+
+    export interface CngwStrategyConfigBehaviorScaleUpPolicy {
+        /**
+         * period of scale up
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        periodSeconds?: pulumi.Input<number>;
+        /**
+         * type, default value: Pods
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        type?: pulumi.Input<string>;
+        /**
+         * value
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        value?: pulumi.Input<number>;
+    }
+
+    export interface CngwStrategyConfigMetric {
+        /**
+         * metric name. Reference value:
+         * - cpu
+         * - memory
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        resourceName?: pulumi.Input<string>;
+        /**
+         * target type of metric, currently only supports `Utilization`
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        targetType?: pulumi.Input<string>;
+        /**
+         * target value of metric
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        targetValue?: pulumi.Input<number>;
+        /**
+         * metric type. Deafault value
+         * - Resource.
+         */
+        type?: pulumi.Input<string>;
+    }
+
+    export interface CngwStrategyCronConfig {
+        /**
+         * parameter list of timed scaling
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        params?: pulumi.Input<pulumi.Input<inputs.Tse.CngwStrategyCronConfigParam>[]>;
+        /**
+         * strategy ID
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        strategyId?: pulumi.Input<string>;
+    }
+
+    export interface CngwStrategyCronConfigParam {
+        /**
+         * cron expression of timed scaling, no input required
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        crontab?: pulumi.Input<string>;
+        /**
+         * period of timed scaling
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        period?: pulumi.Input<string>;
+        /**
+         * start time of timed scaling
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        startAt?: pulumi.Input<string>;
+        /**
+         * the number of target nodes for the timed scaling. Do not exceed the max number of replica for metric scaling
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        targetReplicas?: pulumi.Input<number>;
     }
 
     export interface GetGatewayCertificatesFilter {
@@ -27957,6 +29346,17 @@ export namespace Tse {
          * Filter value.
          */
         value?: string;
+    }
+
+    export interface GetGatewayCertificatesFilterArgs {
+        /**
+         * Filter name.
+         */
+        key?: pulumi.Input<string>;
+        /**
+         * Filter value.
+         */
+        value?: pulumi.Input<string>;
     }
 
     export interface GetGatewayServicesFilter {
@@ -28003,17 +29403,6 @@ export namespace Tse {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetGroupsFilterArgs {
-        /**
-         * filter name.
-         */
-        name: pulumi.Input<string>;
-        /**
-         * filter values.
-         */
-        values: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetGroupsFilter {
         /**
          * filter name.
@@ -28023,6 +29412,17 @@ export namespace Tse {
          * filter values.
          */
         values: string[];
+    }
+
+    export interface GetGroupsFilterArgs {
+        /**
+         * filter name.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * filter values.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface InstanceEngineRegionInfo {
@@ -28054,7 +29454,6 @@ export namespace Tse {
          */
         vpcId: pulumi.Input<string>;
     }
-
 }
 
 export namespace Tsf {
@@ -28791,6 +30190,14 @@ export namespace Vod {
          */
         removeAudio?: pulumi.Input<boolean>;
         /**
+         * Whether to remove video stream. Valid values: `false`: no, `true`: yes. `false` by default.
+         */
+        removeVideo?: pulumi.Input<boolean>;
+        /**
+         * Extremely fast HD transcoding parameters.
+         */
+        tehdConfig?: pulumi.Input<inputs.Vod.AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig>;
+        /**
          * Video parameter information.
          */
         video: pulumi.Input<inputs.Vod.AdaptiveDynamicStreamingTemplateStreamInfoVideo>;
@@ -28815,6 +30222,19 @@ export namespace Vod {
         sampleRate: pulumi.Input<number>;
     }
 
+    export interface AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig {
+        /**
+         * Video bitrate limit, which is valid when Type specifies extreme speed HD type. If you leave it empty or enter 0, there is no video bitrate limit.
+         */
+        maxVideoBitrate?: pulumi.Input<number>;
+        /**
+         * Extreme high-speed HD type, available values:
+         * - TEHD-100: super high definition-100th;
+         * - OFF: turn off Ultra High definition.
+         */
+        type: pulumi.Input<string>;
+    }
+
     export interface AdaptiveDynamicStreamingTemplateStreamInfoVideo {
         /**
          * Bitrate of video stream in Kbps. Value range: `0` and `[128, 35000]`. If the value is `0`, the bitrate of the video will be the same as that of the source video.
@@ -28825,6 +30245,13 @@ export namespace Vod {
          */
         codec: pulumi.Input<string>;
         /**
+         * Encoding label, valid only if the encoding format of the video stream is H.265 encoding. Available values:
+         * - hvc1: stands for hvc1 tag;
+         * - hev1: stands for the hev1 tag;
+         * Default value: hvc1.
+         */
+        codecTag?: pulumi.Input<string>;
+        /**
          * Fill type. Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: black. Note: this field may return null, indicating that no valid values can be obtained.
          */
         fillType?: pulumi.Input<string>;
@@ -28833,17 +30260,50 @@ export namespace Vod {
          */
         fps: pulumi.Input<number>;
         /**
+         * Interval between Keyframe I frames, value range: 0 and [1, 100000], unit: number of frames. When you fill in 0 or leave it empty, the gop length is automatically set.
+         */
+        gop?: pulumi.Input<number>;
+        /**
          * Maximum value of the height (or short side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
          */
         height?: pulumi.Input<number>;
+        /**
+         * Whether the transcoding output still maintains HDR when the original video is HDR (High Dynamic Range). Value range:
+         * - ON: if the original file is HDR, the transcoding output remains HDR;, otherwise the transcoding output is SDR (Standard Dynamic Range);
+         * - OFF: regardless of whether the original file is HDR or SDR, the transcoding output is SDR;
+         * Default value: OFF.
+         */
+        preserveHdrSwitch?: pulumi.Input<string>;
         /**
          * Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`. Note: this field may return null, indicating that no valid values can be obtained.
          */
         resolutionAdaptive?: pulumi.Input<boolean>;
         /**
+         * Video constant bit rate control factor, value range is [1,51].
+         * Note:
+         * - If this parameter is specified, the bitrate control method of CRF will be used for transcoding (the video bitrate will no longer take effect);
+         * - This field is required when the video stream encoding format is H.266. The recommended value is 28;
+         * - If there are no special requirements, it is not recommended to specify this parameter.
+         */
+        vcrf?: pulumi.Input<number>;
+        /**
          * Maximum value of the width (or long side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
          */
         width?: pulumi.Input<number>;
+    }
+
+    export interface ProcedureTemplateAiAnalysisTask {
+        /**
+         * Video content analysis template ID.
+         */
+        definition?: pulumi.Input<string>;
+    }
+
+    export interface ProcedureTemplateAiRecognitionTask {
+        /**
+         * Intelligent video recognition template ID.
+         */
+        definition?: pulumi.Input<string>;
     }
 
     export interface ProcedureTemplateMediaProcessTask {
@@ -28882,6 +30342,10 @@ export namespace Vod {
          * Adaptive bitrate streaming template ID.
          */
         definition: pulumi.Input<string>;
+        /**
+         * Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.
+         */
+        subtitleLists?: pulumi.Input<pulumi.Input<string>[]>;
         /**
          * List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
          */
@@ -29019,6 +30483,10 @@ export namespace Vod {
          */
         extTimeOffsetLists?: pulumi.Input<pulumi.Input<string>[]>;
         /**
+         * List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        timeOffsetLists?: pulumi.Input<pulumi.Input<number>[]>;
+        /**
          * List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
          */
         watermarkLists?: pulumi.Input<pulumi.Input<inputs.Vod.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkList>[]>;
@@ -29049,17 +30517,51 @@ export namespace Vod {
 
     export interface ProcedureTemplateMediaProcessTaskTranscodeTaskList {
         /**
+         * opyright watermark.
+         */
+        copyRightWatermark?: pulumi.Input<inputs.Vod.ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark>;
+        /**
          * Video transcoding template ID.
          */
         definition: pulumi.Input<string>;
+        /**
+         * End time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will exist till the last video frame; If this value is greater than `0` (e.g., n), the blur will exist till second n; If this value is smaller than `0` (e.g., -n), the blur will exist till second n before the last video frame.
+         */
+        endTimeOffset?: pulumi.Input<number>;
+        /**
+         * List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.
+         */
+        headTailLists?: pulumi.Input<pulumi.Input<inputs.Vod.ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailList>[]>;
         /**
          * List of blurs. Up to 10 ones can be supported.
          */
         mosaicLists?: pulumi.Input<pulumi.Input<inputs.Vod.ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicList>[]>;
         /**
+         * Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
+         */
+        startTimeOffset?: pulumi.Input<number>;
+        /**
+         * Digital watermark.
+         */
+        traceWatermark?: pulumi.Input<inputs.Vod.ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark>;
+        /**
          * List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
          */
         watermarkLists?: pulumi.Input<pulumi.Input<inputs.Vod.ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkList>[]>;
+    }
+
+    export interface ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark {
+        /**
+         * Copyright information, maximum length is 200 characters.
+         */
+        text?: pulumi.Input<string>;
+    }
+
+    export interface ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailList {
+        /**
+         * Video opening/closing credits configuration template ID.
+         */
+        definition?: pulumi.Input<string>;
     }
 
     export interface ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicList {
@@ -29093,6 +30595,13 @@ export namespace Vod {
         yPos?: pulumi.Input<string>;
     }
 
+    export interface ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark {
+        /**
+         * Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.
+         */
+        switch?: pulumi.Input<string>;
+    }
+
     export interface ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkList {
         /**
          * Watermarking template ID.
@@ -29116,6 +30625,17 @@ export namespace Vod {
         textContent?: pulumi.Input<string>;
     }
 
+    export interface ProcedureTemplateReviewAudioVideoTask {
+        /**
+         * Review template.
+         */
+        definition?: pulumi.Input<string>;
+        /**
+         * The type of moderated content. Valid values:
+         */
+        reviewContents?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
     export interface SuperPlayerConfigDrmStreamingInfo {
         /**
          * ID of the adaptive dynamic streaming template whose protection type is `SimpleAES`.
@@ -29134,6 +30654,135 @@ export namespace Vod {
         name: pulumi.Input<string>;
     }
 
+    export interface TranscodeTemplateAudioTemplate {
+        /**
+         * Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.
+         */
+        audioChannel?: pulumi.Input<number>;
+        /**
+         * Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+         */
+        bitrate: pulumi.Input<number>;
+        /**
+         * The audio codec.If `Container` is `mp3`, the valid value is:`libmp3lame`If `Container` is `ogg` or `flac`, the valid value is:`flac`If `Container` is `m4a`, the valid values are:`libfdkAac``libmp3lame``ac3`If `Container` is `mp4` or `flv`, the valid values are:`libfdkAac` (Recommended for MP4)`libmp3lame` (Recommended for FLV)`mp2`If `Container` is `hls`, the valid value is:`libfdkAac`If `Format` is `HLS` or `MPEG-DASH`, the valid value is:`libfdkAac`If `Container` is `wav`, the valid value is:`pcm16`.
+         */
+        codec: pulumi.Input<string>;
+        /**
+         * The audio sample rate. Valid values:`16000` (valid only if `Codec` is `pcm16`)`32000``44100``48000`Unit: Hz.
+         */
+        sampleRate: pulumi.Input<number>;
+    }
+
+    export interface TranscodeTemplateTehdConfig {
+        /**
+         * Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.
+         */
+        maxVideoBitrate?: pulumi.Input<number>;
+        /**
+         * TESHD transcoding type. Valid values: TEHD-100, OFF (default).
+         */
+        type: pulumi.Input<string>;
+    }
+
+    export interface TranscodeTemplateVideoTemplate {
+        /**
+         * Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+         */
+        bitrate: pulumi.Input<number>;
+        /**
+         * The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.
+         */
+        codec: pulumi.Input<string>;
+        /**
+         * The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.
+         */
+        codecTag?: pulumi.Input<string>;
+        /**
+         * Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image&#39;s aspect ratio.white: fills the uncovered area with white color, without changing the image&#39;s aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image&#39;s aspect ratio.Default value: black.
+         */
+        fillType?: pulumi.Input<string>;
+        /**
+         * Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.
+         */
+        fps: pulumi.Input<number>;
+        /**
+         * I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, `Gop` will be automatically set.
+         */
+        gop?: pulumi.Input<number>;
+        /**
+         * The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.If neither `Width` nor `Height` is 0, the specified width and height will be used.Default value: 0.
+         */
+        height?: pulumi.Input<number>;
+        /**
+         * Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.
+         */
+        preserveHdrSwitch?: pulumi.Input<string>;
+        /**
+         * Resolution adaption. Valid values:open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        resolutionAdaptive?: pulumi.Input<string>;
+        /**
+         * The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If `Codec` is `H.266`, this parameter is required (`28` is recommended).We don't recommend using this parameter unless you have special requirements.
+         */
+        vcrf?: pulumi.Input<number>;
+        /**
+         * The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.If neither `Width` nor `Height` is 0, the specified width and height will be used.Default value: 0.
+         */
+        width?: pulumi.Input<number>;
+    }
+
+    export interface WatermarkTemplateImageTemplate {
+        /**
+         * Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;  If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+         */
+        height?: pulumi.Input<string>;
+        /**
+         * The [Base64](https://tools.ietf.org/html/rfc4648) encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.
+         */
+        imageContent: pulumi.Input<string>;
+        /**
+         * Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.
+         */
+        repeatType?: pulumi.Input<string>;
+        /**
+         * Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.
+         */
+        transparency?: pulumi.Input<number>;
+        /**
+         * Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;  If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096]. Default value: 10%.
+         */
+        width?: pulumi.Input<string>;
+    }
+
+    export interface WatermarkTemplateSvgTemplate {
+        /**
+         * Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px; if `0px` is entered and `Width` is not `0px`, the watermark height will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark height will be the height of the source SVG image;  If the string ends in `W%`, the `Height` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Height` is 10% of the video width;  If the string ends in `H%`, the `Height` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Height` is 10% of the video height;  If the string ends in `S%`, the `Height` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Height` is 10% of the short side of the video;  If the string ends in `L%`, the `Height` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Height` is 10% of the long side of the video;  If the string ends in %, the meaning is the same as `H%`. Default value: 0 px.
+         */
+        height?: pulumi.Input<string>;
+        /**
+         * Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px; if `0px` is entered and `Height` is not `0px`, the watermark width will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark width will be the width of the source SVG image;  If the string ends in `W%`, the `Width` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Width` is 10% of the video width;  If the string ends in `H%`, the `Width` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Width` is 10% of the video height;  If the string ends in `S%`, the `Width` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Width` is 10% of the short side of the video;  If the string ends in `L%`, the `Width` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Width` is 10% of the long side of the video;  If the string ends in %, the meaning is the same as `W%`. Default value: 10W%.
+         */
+        width?: pulumi.Input<string>;
+    }
+
+    export interface WatermarkTemplateTextTemplate {
+        /**
+         * Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.
+         */
+        fontAlpha: pulumi.Input<number>;
+        /**
+         * Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
+         */
+        fontColor: pulumi.Input<string>;
+        /**
+         * Font size in Npx format where N is a numeric value.
+         */
+        fontSize: pulumi.Input<string>;
+        /**
+         * Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.
+         */
+        fontType: pulumi.Input<string>;
+    }
 }
 
 export namespace Vpc {
@@ -29170,17 +30819,6 @@ export namespace Vpc {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetCvmInstancesFilterArgs {
-        /**
-         * The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
-         */
-        name: pulumi.Input<string>;
-        /**
-         * Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
-         */
-        values: pulumi.Input<pulumi.Input<string>[]>;
-    }
-
     export interface GetCvmInstancesFilter {
         /**
          * The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
@@ -29192,7 +30830,7 @@ export namespace Vpc {
         values: string[];
     }
 
-    export interface GetNetDetectStatesFilterArgs {
+    export interface GetCvmInstancesFilterArgs {
         /**
          * The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
          */
@@ -29214,31 +30852,15 @@ export namespace Vpc {
         values: string[];
     }
 
-    export interface Ipv6EniAddressIpv6Address {
+    export interface GetNetDetectStatesFilterArgs {
         /**
-         * `IPv6` address, in the form of: `3402:4e00:20:100:0:8cd9:2a67:71f3`.
+         * The attribute name. If more than one Filter exists, the logical relation between these Filters is `AND`.
          */
-        address: pulumi.Input<string>;
+        name: pulumi.Input<string>;
         /**
-         * `EIP` instance `ID`, such as:`eip-hxlqja90`.
+         * Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`. For a `bool` parameter, the valid values include `TRUE` and `FALSE`.
          */
-        addressId?: pulumi.Input<string>;
-        /**
-         * Description.
-         */
-        description?: pulumi.Input<string>;
-        /**
-         * Whether the public network IP is blocked.
-         */
-        isWanIpBlocked?: pulumi.Input<boolean>;
-        /**
-         * Whether to master `IP`.
-         */
-        primary?: pulumi.Input<boolean>;
-        /**
-         * `IPv6` address status: `PENDING`: pending, `MIGRATING`: migrating, `DELETING`: deleting, `AVAILABLE`: available.
-         */
-        state?: pulumi.Input<string>;
+        values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks {
@@ -29253,35 +30875,107 @@ export namespace Vpc {
     }
 
     export interface NetworkAclQuintupleNetworkAclQuintupleSet {
+        /**
+         * Network ACL quintuple outbound rule.
+         */
         egresses?: pulumi.Input<pulumi.Input<inputs.Vpc.NetworkAclQuintupleNetworkAclQuintupleSetEgress>[]>;
+        /**
+         * Network ACL quintuple inbound rule.
+         */
         ingresses?: pulumi.Input<pulumi.Input<inputs.Vpc.NetworkAclQuintupleNetworkAclQuintupleSetIngress>[]>;
     }
 
     export interface NetworkAclQuintupleNetworkAclQuintupleSetEgress {
+        /**
+         * Action, ACCEPT or DROP.
+         */
         action?: pulumi.Input<string>;
+        /**
+         * Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.
+         */
         createTime?: pulumi.Input<string>;
+        /**
+         * Description.
+         */
         description?: pulumi.Input<string>;
+        /**
+         * Destination CIDR.
+         */
         destinationCidr?: pulumi.Input<string>;
+        /**
+         * Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
+         */
         destinationPort?: pulumi.Input<string>;
+        /**
+         * Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.
+         */
         networkAclDirection?: pulumi.Input<string>;
+        /**
+         * Unique ID of a network ACL entry.
+         */
         networkAclQuintupleEntryId?: pulumi.Input<string>;
+        /**
+         * Priority, starting from 1.
+         */
         priority?: pulumi.Input<number>;
+        /**
+         * Protocol, value: TCP,UDP, ICMP, ALL.
+         */
         protocol?: pulumi.Input<string>;
+        /**
+         * Source CIDR.
+         */
         sourceCidr?: pulumi.Input<string>;
+        /**
+         * Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
+         */
         sourcePort?: pulumi.Input<string>;
     }
 
     export interface NetworkAclQuintupleNetworkAclQuintupleSetIngress {
+        /**
+         * Action, ACCEPT or DROP.
+         */
         action?: pulumi.Input<string>;
+        /**
+         * Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.
+         */
         createTime?: pulumi.Input<string>;
+        /**
+         * Description.
+         */
         description?: pulumi.Input<string>;
+        /**
+         * Destination CIDR.
+         */
         destinationCidr?: pulumi.Input<string>;
+        /**
+         * Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
+         */
         destinationPort?: pulumi.Input<string>;
+        /**
+         * Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.
+         */
         networkAclDirection?: pulumi.Input<string>;
+        /**
+         * Unique ID of a network ACL entry.
+         */
         networkAclQuintupleEntryId?: pulumi.Input<string>;
+        /**
+         * Priority, starting from 1.
+         */
         priority?: pulumi.Input<number>;
+        /**
+         * Protocol, value: TCP,UDP, ICMP, ALL.
+         */
         protocol?: pulumi.Input<string>;
+        /**
+         * 源CIDR。.
+         */
         sourceCidr?: pulumi.Input<string>;
+        /**
+         * source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.
+         */
         sourcePort?: pulumi.Input<string>;
     }
 
@@ -29318,7 +31012,6 @@ export namespace Vpc {
          */
         backupTime: pulumi.Input<string>;
     }
-
 }
 
 export namespace Vpn {
@@ -29447,16 +31140,34 @@ export namespace Waf {
         field: pulumi.Input<string>;
     }
 
-    export interface GetWafInfosParamArgs {
-        domainId?: pulumi.Input<string>;
-        listenerId?: pulumi.Input<string>;
-        loadBalancerId: pulumi.Input<string>;
+    export interface GetWafInfosParam {
+        /**
+         * Domain unique ID.
+         */
+        domainId?: string;
+        /**
+         * Listener ID of LoadBalancer.
+         */
+        listenerId?: string;
+        /**
+         * Loadbalancer unique ID.If this parameter is not passed, it will operate all listeners of this appid. If this parameter is not empty, it will operate listeners of the LoadBalancer only.
+         */
+        loadBalancerId: string;
     }
 
-    export interface GetWafInfosParam {
-        domainId?: string;
-        listenerId?: string;
-        loadBalancerId: string;
+    export interface GetWafInfosParamArgs {
+        /**
+         * Domain unique ID.
+         */
+        domainId?: pulumi.Input<string>;
+        /**
+         * Listener ID of LoadBalancer.
+         */
+        listenerId?: pulumi.Input<string>;
+        /**
+         * Loadbalancer unique ID.If this parameter is not passed, it will operate all listeners of this appid. If this parameter is not empty, it will operate listeners of the LoadBalancer only.
+         */
+        loadBalancerId: pulumi.Input<string>;
     }
 
     export interface IpAccessControlItem {
@@ -29476,7 +31187,13 @@ export namespace Waf {
          * Note info.
          */
         note: pulumi.Input<string>;
+        /**
+         * Source.
+         */
         source?: pulumi.Input<string>;
+        /**
+         * Valid status.
+         */
         validStatus?: pulumi.Input<number>;
         /**
          * Effective date, with a second level timestamp value. For example, 1680570420 represents 2023-04-04 09:07:00; 2019571199 means permanently effective.
@@ -29485,6 +31202,9 @@ export namespace Waf {
     }
 
     export interface SaasDomainPort {
+        /**
+         * Nginx server ID.
+         */
         nginxServerId?: pulumi.Input<string>;
         /**
          * Listening port.
@@ -29761,17 +31481,6 @@ export namespace Wedata {
         values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
-    export interface GetDataSourceListOrderFieldArgs {
-        /**
-         * OrderFields rule.
-         */
-        direction: pulumi.Input<string>;
-        /**
-         * OrderFields name.
-         */
-        name: pulumi.Input<string>;
-    }
-
     export interface GetDataSourceListOrderField {
         /**
          * OrderFields rule.
@@ -29783,15 +31492,15 @@ export namespace Wedata {
         name: string;
     }
 
-    export interface GetDataSourceWithoutInfoFilterArgs {
+    export interface GetDataSourceListOrderFieldArgs {
         /**
-         * Filter name.
+         * OrderFields rule.
          */
-        name?: pulumi.Input<string>;
+        direction: pulumi.Input<string>;
         /**
-         * Filter value.
+         * OrderFields name.
          */
-        values?: pulumi.Input<pulumi.Input<string>[]>;
+        name: pulumi.Input<string>;
     }
 
     export interface GetDataSourceWithoutInfoFilter {
@@ -29805,15 +31514,15 @@ export namespace Wedata {
         values?: string[];
     }
 
-    export interface GetDataSourceWithoutInfoOrderFieldArgs {
+    export interface GetDataSourceWithoutInfoFilterArgs {
         /**
-         * OrderFields rule.
+         * Filter name.
          */
-        direction: pulumi.Input<string>;
+        name?: pulumi.Input<string>;
         /**
-         * OrderFields name.
+         * Filter value.
          */
-        name: pulumi.Input<string>;
+        values?: pulumi.Input<pulumi.Input<string>[]>;
     }
 
     export interface GetDataSourceWithoutInfoOrderField {
@@ -29825,6 +31534,17 @@ export namespace Wedata {
          * OrderFields name.
          */
         name: string;
+    }
+
+    export interface GetDataSourceWithoutInfoOrderFieldArgs {
+        /**
+         * OrderFields rule.
+         */
+        direction: pulumi.Input<string>;
+        /**
+         * OrderFields name.
+         */
+        name: pulumi.Input<string>;
     }
 
     export interface IntegrationOfflineTaskTaskInfo {

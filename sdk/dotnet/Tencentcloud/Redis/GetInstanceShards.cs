@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// <summary>
         /// Use this data source to query detailed information of redis instance_shards
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceShards = Tencentcloud.Redis.GetInstanceShards.Invoke(new()
         ///     {
-        ///         var instanceShards = Output.Create(Tencentcloud.Redis.GetInstanceShards.InvokeAsync(new Tencentcloud.Redis.GetInstanceShardsArgs
-        ///         {
-        ///             FilterSlave = false,
-        ///             InstanceId = "crs-c1nl9rpv",
-        ///         }));
-        ///     }
+        ///         FilterSlave = false,
+        ///         InstanceId = "crs-c1nl9rpv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceShardsResult> InvokeAsync(GetInstanceShardsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceShardsResult>("tencentcloud:Redis/getInstanceShards:getInstanceShards", args ?? new GetInstanceShardsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceShardsResult>("tencentcloud:Redis/getInstanceShards:getInstanceShards", args ?? new GetInstanceShardsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of redis instance_shards
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceShards = Tencentcloud.Redis.GetInstanceShards.Invoke(new()
         ///     {
-        ///         var instanceShards = Output.Create(Tencentcloud.Redis.GetInstanceShards.InvokeAsync(new Tencentcloud.Redis.GetInstanceShardsArgs
-        ///         {
-        ///             FilterSlave = false,
-        ///             InstanceId = "crs-c1nl9rpv",
-        ///         }));
-        ///     }
+        ///         FilterSlave = false,
+        ///         InstanceId = "crs-c1nl9rpv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceShardsResult> Invoke(GetInstanceShardsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceShardsResult>("tencentcloud:Redis/getInstanceShards:getInstanceShards", args ?? new GetInstanceShardsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceShardsResult>("tencentcloud:Redis/getInstanceShards:getInstanceShards", args ?? new GetInstanceShardsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceShardsArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceShardsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Whether to filter out slave information.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public GetInstanceShardsArgs()
         {
         }
+        public static new GetInstanceShardsArgs Empty => new GetInstanceShardsArgs();
     }
 
-    public sealed class GetInstanceShardsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceShardsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Whether to filter out slave information.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public GetInstanceShardsInvokeArgs()
         {
         }
+        public static new GetInstanceShardsInvokeArgs Empty => new GetInstanceShardsInvokeArgs();
     }
 
 

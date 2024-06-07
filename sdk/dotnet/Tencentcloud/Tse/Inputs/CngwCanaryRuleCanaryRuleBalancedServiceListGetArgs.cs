@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class CngwCanaryRuleCanaryRuleBalancedServiceListGetArgs : Pulumi.ResourceArgs
+    public sealed class CngwCanaryRuleCanaryRuleBalancedServiceListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// percent, 10 is 10%, valid values:0 to 100.
@@ -31,11 +31,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         [Input("serviceName")]
         public Input<string>? ServiceName { get; set; }
 
+        /// <summary>
+        /// upstream name, meaningless when used as an input parameter.
+        /// </summary>
         [Input("upstreamName")]
         public Input<string>? UpstreamName { get; set; }
 
         public CngwCanaryRuleCanaryRuleBalancedServiceListGetArgs()
         {
         }
+        public static new CngwCanaryRuleCanaryRuleBalancedServiceListGetArgs Empty => new CngwCanaryRuleCanaryRuleBalancedServiceListGetArgs();
     }
 }

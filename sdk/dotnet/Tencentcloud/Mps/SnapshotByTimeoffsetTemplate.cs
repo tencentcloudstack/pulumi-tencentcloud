@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var snapshotByTimeoffsetTemplate = new Tencentcloud.Mps.SnapshotByTimeoffsetTemplate("snapshotByTimeoffsetTemplate", new()
     ///     {
-    ///         var snapshotByTimeoffsetTemplate = new Tencentcloud.Mps.SnapshotByTimeoffsetTemplate("snapshotByTimeoffsetTemplate", new Tencentcloud.Mps.SnapshotByTimeoffsetTemplateArgs
-    ///         {
-    ///             FillType = "stretch",
-    ///             Format = "jpg",
-    ///             Height = 128,
-    ///             ResolutionAdaptive = "open",
-    ///             Width = 140,
-    ///         });
-    ///     }
+    ///         FillType = "stretch",
+    ///         Format = "jpg",
+    ///         Height = 128,
+    ///         ResolutionAdaptive = "open",
+    ///         Width = 140,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mps snapshot_by_timeoffset_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/snapshotByTimeoffsetTemplate:SnapshotByTimeoffsetTemplate snapshot_by_timeoffset_template snapshot_by_timeoffset_template_id
+    /// $ pulumi import tencentcloud:Mps/snapshotByTimeoffsetTemplate:SnapshotByTimeoffsetTemplate snapshot_by_timeoffset_template snapshot_by_timeoffset_template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/snapshotByTimeoffsetTemplate:SnapshotByTimeoffsetTemplate")]
-    public partial class SnapshotByTimeoffsetTemplate : Pulumi.CustomResource
+    public partial class SnapshotByTimeoffsetTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Template description information, length limit: 256 characters.
@@ -134,7 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class SnapshotByTimeoffsetTemplateArgs : Pulumi.ResourceArgs
+    public sealed class SnapshotByTimeoffsetTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template description information, length limit: 256 characters.
@@ -181,9 +182,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public SnapshotByTimeoffsetTemplateArgs()
         {
         }
+        public static new SnapshotByTimeoffsetTemplateArgs Empty => new SnapshotByTimeoffsetTemplateArgs();
     }
 
-    public sealed class SnapshotByTimeoffsetTemplateState : Pulumi.ResourceArgs
+    public sealed class SnapshotByTimeoffsetTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template description information, length limit: 256 characters.
@@ -230,5 +232,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public SnapshotByTimeoffsetTemplateState()
         {
         }
+        public static new SnapshotByTimeoffsetTemplateState Empty => new SnapshotByTimeoffsetTemplateState();
     }
 }

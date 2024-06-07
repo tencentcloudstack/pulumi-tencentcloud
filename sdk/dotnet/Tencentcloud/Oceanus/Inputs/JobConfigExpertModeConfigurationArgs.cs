@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
 {
 
-    public sealed class JobConfigExpertModeConfigurationArgs : Pulumi.ResourceArgs
+    public sealed class JobConfigExpertModeConfigurationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Job graphNote: This field may return null, indicating that no valid value can be obtained.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
         public JobConfigExpertModeConfigurationArgs()
         {
         }
+        public static new JobConfigExpertModeConfigurationArgs Empty => new JobConfigExpertModeConfigurationArgs();
     }
 }

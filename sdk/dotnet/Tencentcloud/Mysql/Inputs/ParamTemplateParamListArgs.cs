@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
 {
 
-    public sealed class ParamTemplateParamListArgs : Pulumi.ResourceArgs
+    public sealed class ParamTemplateParamListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The value of parameter.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
         public ParamTemplateParamListArgs()
         {
         }
+        public static new ParamTemplateParamListArgs Empty => new ParamTemplateParamListArgs();
     }
 }

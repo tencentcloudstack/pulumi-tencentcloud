@@ -7,178 +7,187 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this resource to create ckafka instance.
 //
 // ## Example Usage
+//
 // ### Basic Instance
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		vpcId := "vpc-68vi2d3h"
-// 		if param := cfg.Get("vpcId"); param != "" {
-// 			vpcId = param
-// 		}
-// 		subnetId := "subnet-ob6clqwk"
-// 		if param := cfg.Get("subnetId"); param != "" {
-// 			subnetId = param
-// 		}
-// 		gz, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Name:    pulumi.StringRef("ap-guangzhou-3"),
-// 			Product: "ckafka",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Ckafka.NewInstance(ctx, "kafkaInstancePrepaid", &Ckafka.InstanceArgs{
-// 			InstanceName:       pulumi.String("ckafka-instance-prepaid"),
-// 			ZoneId:             pulumi.String(gz.Zones[0].Id),
-// 			Period:             pulumi.Int(1),
-// 			VpcId:              pulumi.String(vpcId),
-// 			SubnetId:           pulumi.String(subnetId),
-// 			MsgRetentionTime:   pulumi.Int(1300),
-// 			RenewFlag:          pulumi.Int(0),
-// 			KafkaVersion:       pulumi.String("2.4.1"),
-// 			DiskSize:           pulumi.Int(200),
-// 			DiskType:           pulumi.String("CLOUD_BASIC"),
-// 			BandWidth:          pulumi.Int(20),
-// 			Partition:          pulumi.Int(400),
-// 			SpecificationsType: pulumi.String("standard"),
-// 			InstanceType:       pulumi.Int(2),
-// 			Config: &ckafka.InstanceConfigArgs{
-// 				AutoCreateTopicEnable:    pulumi.Bool(true),
-// 				DefaultNumPartitions:     pulumi.Int(3),
-// 				DefaultReplicationFactor: pulumi.Int(3),
-// 			},
-// 			DynamicRetentionConfig: &ckafka.InstanceDynamicRetentionConfigArgs{
-// 				Enable: pulumi.Int(1),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Ckafka.NewInstance(ctx, "kafkaInstancePostpaid", &Ckafka.InstanceArgs{
-// 			InstanceName:     pulumi.String("ckafka-instance-postpaid"),
-// 			ZoneId:           pulumi.String(gz.Zones[0].Id),
-// 			VpcId:            pulumi.String(vpcId),
-// 			SubnetId:         pulumi.String(subnetId),
-// 			MsgRetentionTime: pulumi.Int(1300),
-// 			KafkaVersion:     pulumi.String("1.1.1"),
-// 			DiskSize:         pulumi.Int(200),
-// 			BandWidth:        pulumi.Int(20),
-// 			DiskType:         pulumi.String("CLOUD_BASIC"),
-// 			Partition:        pulumi.Int(400),
-// 			ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
-// 			Config: &ckafka.InstanceConfigArgs{
-// 				AutoCreateTopicEnable:    pulumi.Bool(true),
-// 				DefaultNumPartitions:     pulumi.Int(3),
-// 				DefaultReplicationFactor: pulumi.Int(3),
-// 			},
-// 			DynamicRetentionConfig: &ckafka.InstanceDynamicRetentionConfigArgs{
-// 				Enable: pulumi.Int(1),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			vpcId := "vpc-68vi2d3h"
+//			if param := cfg.Get("vpcId"); param != "" {
+//				vpcId = param
+//			}
+//			subnetId := "subnet-ob6clqwk"
+//			if param := cfg.Get("subnetId"); param != "" {
+//				subnetId = param
+//			}
+//			gz, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Name:    pulumi.StringRef("ap-guangzhou-3"),
+//				Product: "ckafka",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Ckafka.NewInstance(ctx, "kafkaInstancePrepaid", &Ckafka.InstanceArgs{
+//				InstanceName:       pulumi.String("ckafka-instance-prepaid"),
+//				ZoneId:             pulumi.String(gz.Zones[0].Id),
+//				Period:             pulumi.Int(1),
+//				VpcId:              pulumi.String(vpcId),
+//				SubnetId:           pulumi.String(subnetId),
+//				MsgRetentionTime:   pulumi.Int(1300),
+//				RenewFlag:          pulumi.Int(0),
+//				KafkaVersion:       pulumi.String("2.4.1"),
+//				DiskSize:           pulumi.Int(200),
+//				DiskType:           pulumi.String("CLOUD_BASIC"),
+//				BandWidth:          pulumi.Int(20),
+//				Partition:          pulumi.Int(400),
+//				SpecificationsType: pulumi.String("standard"),
+//				InstanceType:       pulumi.Int(2),
+//				Config: &ckafka.InstanceConfigArgs{
+//					AutoCreateTopicEnable:    pulumi.Bool(true),
+//					DefaultNumPartitions:     pulumi.Int(3),
+//					DefaultReplicationFactor: pulumi.Int(3),
+//				},
+//				DynamicRetentionConfig: &ckafka.InstanceDynamicRetentionConfigArgs{
+//					Enable: pulumi.Int(1),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Ckafka.NewInstance(ctx, "kafkaInstancePostpaid", &Ckafka.InstanceArgs{
+//				InstanceName:     pulumi.String("ckafka-instance-postpaid"),
+//				ZoneId:           pulumi.String(gz.Zones[0].Id),
+//				VpcId:            pulumi.String(vpcId),
+//				SubnetId:         pulumi.String(subnetId),
+//				MsgRetentionTime: pulumi.Int(1300),
+//				KafkaVersion:     pulumi.String("1.1.1"),
+//				DiskSize:         pulumi.Int(200),
+//				BandWidth:        pulumi.Int(20),
+//				DiskType:         pulumi.String("CLOUD_BASIC"),
+//				Partition:        pulumi.Int(400),
+//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+//				Config: &ckafka.InstanceConfigArgs{
+//					AutoCreateTopicEnable:    pulumi.Bool(true),
+//					DefaultNumPartitions:     pulumi.Int(3),
+//					DefaultReplicationFactor: pulumi.Int(3),
+//				},
+//				DynamicRetentionConfig: &ckafka.InstanceDynamicRetentionConfigArgs{
+//					Enable: pulumi.Int(1),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Multi zone Instance
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		vpcId := "vpc-68vi2d3h"
-// 		if param := cfg.Get("vpcId"); param != "" {
-// 			vpcId = param
-// 		}
-// 		subnetId := "subnet-ob6clqwk"
-// 		if param := cfg.Get("subnetId"); param != "" {
-// 			subnetId = param
-// 		}
-// 		gz3, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Name:    pulumi.StringRef("ap-guangzhou-3"),
-// 			Product: "ckafka",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		gz6, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Name:    pulumi.StringRef("ap-guangzhou-6"),
-// 			Product: "ckafka",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Ckafka.NewInstance(ctx, "kafkaInstance", &Ckafka.InstanceArgs{
-// 			InstanceName:  pulumi.String("ckafka-instance-maz-tf-test"),
-// 			ZoneId:        pulumi.String(gz3.Zones[0].Id),
-// 			MultiZoneFlag: pulumi.Bool(true),
-// 			ZoneIds: pulumi.IntArray{
-// 				pulumi.String(gz3.Zones[0].Id),
-// 				pulumi.String(gz6.Zones[0].Id),
-// 			},
-// 			Period:           pulumi.Int(1),
-// 			VpcId:            pulumi.String(vpcId),
-// 			SubnetId:         pulumi.String(subnetId),
-// 			MsgRetentionTime: pulumi.Int(1300),
-// 			RenewFlag:        pulumi.Int(0),
-// 			KafkaVersion:     pulumi.String("1.1.1"),
-// 			DiskSize:         pulumi.Int(500),
-// 			DiskType:         pulumi.String("CLOUD_BASIC"),
-// 			Config: &ckafka.InstanceConfigArgs{
-// 				AutoCreateTopicEnable:    pulumi.Bool(true),
-// 				DefaultNumPartitions:     pulumi.Int(3),
-// 				DefaultReplicationFactor: pulumi.Int(3),
-// 			},
-// 			DynamicRetentionConfig: &ckafka.InstanceDynamicRetentionConfigArgs{
-// 				Enable: pulumi.Int(1),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			vpcId := "vpc-68vi2d3h"
+//			if param := cfg.Get("vpcId"); param != "" {
+//				vpcId = param
+//			}
+//			subnetId := "subnet-ob6clqwk"
+//			if param := cfg.Get("subnetId"); param != "" {
+//				subnetId = param
+//			}
+//			gz3, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Name:    pulumi.StringRef("ap-guangzhou-3"),
+//				Product: "ckafka",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			gz6, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Name:    pulumi.StringRef("ap-guangzhou-6"),
+//				Product: "ckafka",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Ckafka.NewInstance(ctx, "kafkaInstance", &Ckafka.InstanceArgs{
+//				InstanceName:  pulumi.String("ckafka-instance-maz-tf-test"),
+//				ZoneId:        pulumi.String(gz3.Zones[0].Id),
+//				MultiZoneFlag: pulumi.Bool(true),
+//				ZoneIds: pulumi.IntArray{
+//					pulumi.String(gz3.Zones[0].Id),
+//					pulumi.String(gz6.Zones[0].Id),
+//				},
+//				Period:           pulumi.Int(1),
+//				VpcId:            pulumi.String(vpcId),
+//				SubnetId:         pulumi.String(subnetId),
+//				MsgRetentionTime: pulumi.Int(1300),
+//				RenewFlag:        pulumi.Int(0),
+//				KafkaVersion:     pulumi.String("1.1.1"),
+//				DiskSize:         pulumi.Int(500),
+//				DiskType:         pulumi.String("CLOUD_BASIC"),
+//				Config: &ckafka.InstanceConfigArgs{
+//					AutoCreateTopicEnable:    pulumi.Bool(true),
+//					DefaultNumPartitions:     pulumi.Int(3),
+//					DefaultReplicationFactor: pulumi.Int(3),
+//				},
+//				DynamicRetentionConfig: &ckafka.InstanceDynamicRetentionConfigArgs{
+//					Enable: pulumi.Int(1),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ckafka instance can be imported using the instance_id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ckafka/instance:Instance foo ckafka-f9ife4zz
+// $ pulumi import tencentcloud:Ckafka/instance:Instance foo ckafka-f9ife4zz
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -211,9 +220,7 @@ type Instance struct {
 	Partition pulumi.IntOutput `pulumi:"partition"`
 	// Prepaid purchase time, such as 1, is one month.
 	Period pulumi.IntPtrOutput `pulumi:"period"`
-	// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
-	//
-	// Deprecated: It has been deprecated from version 1.81.6. If set public network value, it will cause error.
+	// Bandwidth of the public network.
 	PublicNetwork pulumi.IntOutput `pulumi:"publicNetwork"`
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime pulumi.IntPtrOutput `pulumi:"rebalanceTime"`
@@ -227,7 +234,7 @@ type Instance struct {
 	TagSet pulumi.MapOutput `pulumi:"tagSet"`
 	// It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
 	//
-	// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
+	// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead.
 	Tags InstanceTagArrayOutput `pulumi:"tags"`
 	// POSTPAID_BY_HOUR scale-down mode
 	// - 1: stable transformation;
@@ -258,7 +265,7 @@ func NewInstance(ctx *pulumi.Context,
 	if args.ZoneId == nil {
 		return nil, errors.New("invalid value for required argument 'ZoneId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Ckafka/instance:Instance", name, args, &resource, opts...)
 	if err != nil {
@@ -309,9 +316,7 @@ type instanceState struct {
 	Partition *int `pulumi:"partition"`
 	// Prepaid purchase time, such as 1, is one month.
 	Period *int `pulumi:"period"`
-	// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
-	//
-	// Deprecated: It has been deprecated from version 1.81.6. If set public network value, it will cause error.
+	// Bandwidth of the public network.
 	PublicNetwork *int `pulumi:"publicNetwork"`
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime *int `pulumi:"rebalanceTime"`
@@ -325,7 +330,7 @@ type instanceState struct {
 	TagSet map[string]interface{} `pulumi:"tagSet"`
 	// It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
 	//
-	// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
+	// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead.
 	Tags []InstanceTag `pulumi:"tags"`
 	// POSTPAID_BY_HOUR scale-down mode
 	// - 1: stable transformation;
@@ -372,9 +377,7 @@ type InstanceState struct {
 	Partition pulumi.IntPtrInput
 	// Prepaid purchase time, such as 1, is one month.
 	Period pulumi.IntPtrInput
-	// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
-	//
-	// Deprecated: It has been deprecated from version 1.81.6. If set public network value, it will cause error.
+	// Bandwidth of the public network.
 	PublicNetwork pulumi.IntPtrInput
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime pulumi.IntPtrInput
@@ -388,7 +391,7 @@ type InstanceState struct {
 	TagSet pulumi.MapInput
 	// It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
 	//
-	// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
+	// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead.
 	Tags InstanceTagArrayInput
 	// POSTPAID_BY_HOUR scale-down mode
 	// - 1: stable transformation;
@@ -439,9 +442,7 @@ type instanceArgs struct {
 	Partition *int `pulumi:"partition"`
 	// Prepaid purchase time, such as 1, is one month.
 	Period *int `pulumi:"period"`
-	// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
-	//
-	// Deprecated: It has been deprecated from version 1.81.6. If set public network value, it will cause error.
+	// Bandwidth of the public network.
 	PublicNetwork *int `pulumi:"publicNetwork"`
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime *int `pulumi:"rebalanceTime"`
@@ -455,7 +456,7 @@ type instanceArgs struct {
 	TagSet map[string]interface{} `pulumi:"tagSet"`
 	// It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
 	//
-	// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
+	// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead.
 	Tags []InstanceTag `pulumi:"tags"`
 	// POSTPAID_BY_HOUR scale-down mode
 	// - 1: stable transformation;
@@ -499,9 +500,7 @@ type InstanceArgs struct {
 	Partition pulumi.IntPtrInput
 	// Prepaid purchase time, such as 1, is one month.
 	Period pulumi.IntPtrInput
-	// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
-	//
-	// Deprecated: It has been deprecated from version 1.81.6. If set public network value, it will cause error.
+	// Bandwidth of the public network.
 	PublicNetwork pulumi.IntPtrInput
 	// Modification of the rebalancing time after upgrade.
 	RebalanceTime pulumi.IntPtrInput
@@ -515,7 +514,7 @@ type InstanceArgs struct {
 	TagSet pulumi.MapInput
 	// It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
 	//
-	// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
+	// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead.
 	Tags InstanceTagArrayInput
 	// POSTPAID_BY_HOUR scale-down mode
 	// - 1: stable transformation;
@@ -555,7 +554,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -580,7 +579,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -686,9 +685,7 @@ func (o InstanceOutput) Period() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.Period }).(pulumi.IntPtrOutput)
 }
 
-// It has been deprecated from version 1.81.6. If set public network value, it will cause error. Bandwidth of the public network.
-//
-// Deprecated: It has been deprecated from version 1.81.6. If set public network value, it will cause error.
+// Bandwidth of the public network.
 func (o InstanceOutput) PublicNetwork() pulumi.IntOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.PublicNetwork }).(pulumi.IntOutput)
 }
@@ -720,7 +717,7 @@ func (o InstanceOutput) TagSet() pulumi.MapOutput {
 
 // It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead. Tags of instance. Partition size, the professional version does not need tag.
 //
-// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tag_set` instead.
+// Deprecated: It has been deprecated from version 1.78.5, because it do not support change. Use `tagSet` instead.
 func (o InstanceOutput) Tags() InstanceTagArrayOutput {
 	return o.ApplyT(func(v *Instance) InstanceTagArrayOutput { return v.Tags }).(InstanceTagArrayOutput)
 }

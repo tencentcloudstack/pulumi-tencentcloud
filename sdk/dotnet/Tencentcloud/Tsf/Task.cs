@@ -15,52 +15,53 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var task = new Tencentcloud.Tsf.Task("task", new()
     ///     {
-    ///         var task = new Tencentcloud.Tsf.Task("task", new Tencentcloud.Tsf.TaskArgs
+    ///         AdvanceSettings = new Tencentcloud.Tsf.Inputs.TaskAdvanceSettingsArgs
     ///         {
-    ///             AdvanceSettings = new Tencentcloud.Tsf.Inputs.TaskAdvanceSettingsArgs
-    ///             {
-    ///                 SubTaskConcurrency = 2,
-    ///             },
-    ///             ExecuteType = "unicast",
-    ///             GroupId = "group-y8pnmoga",
-    ///             RetryCount = 0,
-    ///             RetryInterval = 0,
-    ///             SuccessOperator = "GTE",
-    ///             SuccessRatio = "100",
-    ///             TaskArgument = "a=c",
-    ///             TaskContent = "/test",
-    ///             TaskName = "terraform-test",
-    ///             TaskRule = new Tencentcloud.Tsf.Inputs.TaskTaskRuleArgs
-    ///             {
-    ///                 Expression = "0 * 1 * * ? ",
-    ///                 RuleType = "Cron",
-    ///             },
-    ///             TaskType = "java",
-    ///             TimeOut = 60000,
-    ///         });
-    ///     }
+    ///             SubTaskConcurrency = 2,
+    ///         },
+    ///         ExecuteType = "unicast",
+    ///         GroupId = "group-y8pnmoga",
+    ///         RetryCount = 0,
+    ///         RetryInterval = 0,
+    ///         SuccessOperator = "GTE",
+    ///         SuccessRatio = "100",
+    ///         TaskArgument = "a=c",
+    ///         TaskContent = "/test",
+    ///         TaskName = "terraform-test",
+    ///         TaskRule = new Tencentcloud.Tsf.Inputs.TaskTaskRuleArgs
+    ///         {
+    ///             Expression = "0 * 1 * * ? ",
+    ///             RuleType = "Cron",
+    ///         },
+    ///         TaskType = "java",
+    ///         TimeOut = 60000,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tsf task can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tsf/task:Task task task-y37eqq95
+    /// $ pulumi import tencentcloud:Tsf/task:Task task task-y37eqq95
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/task:Task")]
-    public partial class Task : Pulumi.CustomResource
+    public partial class Task : global::Pulumi.CustomResource
     {
         /// <summary>
         /// advanced settings.
@@ -233,7 +234,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class TaskArgs : Pulumi.ResourceArgs
+    public sealed class TaskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// advanced settings.
@@ -346,9 +347,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public TaskArgs()
         {
         }
+        public static new TaskArgs Empty => new TaskArgs();
     }
 
-    public sealed class TaskState : Pulumi.ResourceArgs
+    public sealed class TaskState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// advanced settings.
@@ -497,5 +499,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public TaskState()
         {
         }
+        public static new TaskState Empty => new TaskState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class ScenarioTestScriptGetArgs : Pulumi.ResourceArgs
+    public sealed class ScenarioTestScriptGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Base64 encoded file content.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public ScenarioTestScriptGetArgs()
         {
         }
+        public static new ScenarioTestScriptGetArgs Empty => new ScenarioTestScriptGetArgs();
     }
 }

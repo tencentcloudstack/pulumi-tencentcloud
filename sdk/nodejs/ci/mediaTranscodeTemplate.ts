@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mediaTranscodeTemplate = new tencentcloud.Ci.MediaTranscodeTemplate("media_transcode_template", {
+ * const mediaTranscodeTemplate = new tencentcloud.ci.MediaTranscodeTemplate("mediaTranscodeTemplate", {
  *     audio: {
  *         bitrate: "128",
  *         channels: "4",
@@ -60,14 +62,8 @@ import * as utilities from "../utilities";
  *     video: {
  *         bitrate: "1000",
  *         codec: "H.264",
- *         // height = ""
  *         fps: "30",
- *         // bufsize = ""
- *         // maxrate = ""
- *         // pixfmt = ""
  *         longShortMode: "false",
- *         // crf = ""
- *         // gop = ""
  *         preset: "medium",
  *         profile: "high",
  *         remove: "false",
@@ -75,13 +71,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ci media_transcode_template can be imported using the bucket#templateId, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ci/mediaTranscodeTemplate:MediaTranscodeTemplate media_transcode_template media_transcode_template_id
+ * $ pulumi import tencentcloud:Ci/mediaTranscodeTemplate:MediaTranscodeTemplate media_transcode_template media_transcode_template_id
  * ```
  */
 export class MediaTranscodeTemplate extends pulumi.CustomResource {

@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// <summary>
         /// Use this data source to query cvm instances modification.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cvm.GetInstancesModification.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cvm.GetInstancesModification.InvokeAsync(new Tencentcloud.Cvm.GetInstancesModificationArgs
+        ///         InstanceIds = new[]
         ///         {
-        ///             InstanceIds = 
-        ///             {
-        ///                 "ins-xxxxxxx",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "ins-xxxxxxx",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstancesModificationResult> InvokeAsync(GetInstancesModificationArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstancesModificationResult>("tencentcloud:Cvm/getInstancesModification:getInstancesModification", args ?? new GetInstancesModificationArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstancesModificationResult>("tencentcloud:Cvm/getInstancesModification:getInstancesModification", args ?? new GetInstancesModificationArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query cvm instances modification.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cvm.GetInstancesModification.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cvm.GetInstancesModification.InvokeAsync(new Tencentcloud.Cvm.GetInstancesModificationArgs
+        ///         InstanceIds = new[]
         ///         {
-        ///             InstanceIds = 
-        ///             {
-        ///                 "ins-xxxxxxx",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "ins-xxxxxxx",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstancesModificationResult> Invoke(GetInstancesModificationInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstancesModificationResult>("tencentcloud:Cvm/getInstancesModification:getInstancesModification", args ?? new GetInstancesModificationInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstancesModificationResult>("tencentcloud:Cvm/getInstancesModification:getInstancesModification", args ?? new GetInstancesModificationInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstancesModificationArgs : Pulumi.InvokeArgs
+    public sealed class GetInstancesModificationArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetInstancesModificationFilterArgs>? _filters;
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public GetInstancesModificationArgs()
         {
         }
+        public static new GetInstancesModificationArgs Empty => new GetInstancesModificationArgs();
     }
 
-    public sealed class GetInstancesModificationInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstancesModificationInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetInstancesModificationFilterInputArgs>? _filters;
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public GetInstancesModificationInvokeArgs()
         {
         }
+        public static new GetInstancesModificationInvokeArgs Empty => new GetInstancesModificationInvokeArgs();
     }
 
 

@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ssl replaceCertificate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewReplaceCertificateOperation(ctx, "replaceCertificate", &Ssl.ReplaceCertificateOperationArgs{
-// 			CertificateId: pulumi.String("8L6JsWq2"),
-// 			CsrType:       pulumi.String("online"),
-// 			ValidType:     pulumi.String("DNS_AUTO"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.NewReplaceCertificateOperation(ctx, "replaceCertificate", &Ssl.ReplaceCertificateOperationArgs{
+//				CertificateId: pulumi.String("8L6JsWq2"),
+//				CsrType:       pulumi.String("online"),
+//				ValidType:     pulumi.String("DNS_AUTO"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ssl replace_certificate can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssl/replaceCertificateOperation:ReplaceCertificateOperation replace_certificate replace_certificate_id
+// $ pulumi import tencentcloud:Ssl/replaceCertificateOperation:ReplaceCertificateOperation replace_certificate replace_certificate_id
 // ```
 type ReplaceCertificateOperation struct {
 	pulumi.CustomResourceState
@@ -79,7 +85,7 @@ func NewReplaceCertificateOperation(ctx *pulumi.Context,
 	if args.ValidType == nil {
 		return nil, errors.New("invalid value for required argument 'ValidType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ReplaceCertificateOperation
 	err := ctx.RegisterResource("tencentcloud:Ssl/replaceCertificateOperation:ReplaceCertificateOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -208,7 +214,7 @@ func (i *ReplaceCertificateOperation) ToReplaceCertificateOperationOutputWithCon
 // ReplaceCertificateOperationArrayInput is an input type that accepts ReplaceCertificateOperationArray and ReplaceCertificateOperationArrayOutput values.
 // You can construct a concrete instance of `ReplaceCertificateOperationArrayInput` via:
 //
-//          ReplaceCertificateOperationArray{ ReplaceCertificateOperationArgs{...} }
+//	ReplaceCertificateOperationArray{ ReplaceCertificateOperationArgs{...} }
 type ReplaceCertificateOperationArrayInput interface {
 	pulumi.Input
 
@@ -233,7 +239,7 @@ func (i ReplaceCertificateOperationArray) ToReplaceCertificateOperationArrayOutp
 // ReplaceCertificateOperationMapInput is an input type that accepts ReplaceCertificateOperationMap and ReplaceCertificateOperationMapOutput values.
 // You can construct a concrete instance of `ReplaceCertificateOperationMapInput` via:
 //
-//          ReplaceCertificateOperationMap{ "key": ReplaceCertificateOperationArgs{...} }
+//	ReplaceCertificateOperationMap{ "key": ReplaceCertificateOperationArgs{...} }
 type ReplaceCertificateOperationMapInput interface {
 	pulumi.Input
 

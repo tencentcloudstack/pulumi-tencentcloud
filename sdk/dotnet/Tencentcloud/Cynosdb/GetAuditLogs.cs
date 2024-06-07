@@ -15,106 +15,100 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// <summary>
         /// Use this data source to query detailed information of cynosdb audit_logs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var auditLogs = Tencentcloud.Cynosdb.GetAuditLogs.Invoke(new()
         ///     {
-        ///         var auditLogs = Output.Create(Tencentcloud.Cynosdb.GetAuditLogs.InvokeAsync(new Tencentcloud.Cynosdb.GetAuditLogsArgs
+        ///         EndTime = "2023-06-18 10:00:02",
+        ///         Filter = new Tencentcloud.Cynosdb.Inputs.GetAuditLogsFilterInputArgs
         ///         {
-        ///             EndTime = "2023-06-18 10:00:02",
-        ///             Filter = new Tencentcloud.Cynosdb.Inputs.GetAuditLogsFilterArgs
+        ///             Hosts = new[]
         ///             {
-        ///                 Hosts = 
-        ///                 {
-        ///                     "30.50.207.176",
-        ///                 },
-        ///                 PolicyNames = 
-        ///                 {
-        ///                     "default_audit",
-        ///                 },
-        ///                 Sql = "SELECT @@max_allowed_packet",
-        ///                 SqlType = "SELECT",
-        ///                 Users = 
-        ///                 {
-        ///                     "keep_dts",
-        ///                 },
+        ///                 "30.50.207.176",
         ///             },
-        ///             InstanceId = "cynosdbmysql-ins-afqx1hy0",
-        ///             Order = "DESC",
-        ///             OrderBy = "timestamp",
-        ///             StartTime = "2023-06-18 10:00:00",
-        ///         }));
-        ///     }
+        ///             PolicyNames = new[]
+        ///             {
+        ///                 "default_audit",
+        ///             },
+        ///             Sql = "SELECT @@max_allowed_packet",
+        ///             SqlType = "SELECT",
+        ///             Users = new[]
+        ///             {
+        ///                 "keep_dts",
+        ///             },
+        ///         },
+        ///         InstanceId = "cynosdbmysql-ins-afqx1hy0",
+        ///         Order = "DESC",
+        ///         OrderBy = "timestamp",
+        ///         StartTime = "2023-06-18 10:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAuditLogsResult> InvokeAsync(GetAuditLogsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAuditLogsResult>("tencentcloud:Cynosdb/getAuditLogs:getAuditLogs", args ?? new GetAuditLogsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAuditLogsResult>("tencentcloud:Cynosdb/getAuditLogs:getAuditLogs", args ?? new GetAuditLogsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cynosdb audit_logs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var auditLogs = Tencentcloud.Cynosdb.GetAuditLogs.Invoke(new()
         ///     {
-        ///         var auditLogs = Output.Create(Tencentcloud.Cynosdb.GetAuditLogs.InvokeAsync(new Tencentcloud.Cynosdb.GetAuditLogsArgs
+        ///         EndTime = "2023-06-18 10:00:02",
+        ///         Filter = new Tencentcloud.Cynosdb.Inputs.GetAuditLogsFilterInputArgs
         ///         {
-        ///             EndTime = "2023-06-18 10:00:02",
-        ///             Filter = new Tencentcloud.Cynosdb.Inputs.GetAuditLogsFilterArgs
+        ///             Hosts = new[]
         ///             {
-        ///                 Hosts = 
-        ///                 {
-        ///                     "30.50.207.176",
-        ///                 },
-        ///                 PolicyNames = 
-        ///                 {
-        ///                     "default_audit",
-        ///                 },
-        ///                 Sql = "SELECT @@max_allowed_packet",
-        ///                 SqlType = "SELECT",
-        ///                 Users = 
-        ///                 {
-        ///                     "keep_dts",
-        ///                 },
+        ///                 "30.50.207.176",
         ///             },
-        ///             InstanceId = "cynosdbmysql-ins-afqx1hy0",
-        ///             Order = "DESC",
-        ///             OrderBy = "timestamp",
-        ///             StartTime = "2023-06-18 10:00:00",
-        ///         }));
-        ///     }
+        ///             PolicyNames = new[]
+        ///             {
+        ///                 "default_audit",
+        ///             },
+        ///             Sql = "SELECT @@max_allowed_packet",
+        ///             SqlType = "SELECT",
+        ///             Users = new[]
+        ///             {
+        ///                 "keep_dts",
+        ///             },
+        ///         },
+        ///         InstanceId = "cynosdbmysql-ins-afqx1hy0",
+        ///         Order = "DESC",
+        ///         OrderBy = "timestamp",
+        ///         StartTime = "2023-06-18 10:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAuditLogsResult> Invoke(GetAuditLogsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAuditLogsResult>("tencentcloud:Cynosdb/getAuditLogs:getAuditLogs", args ?? new GetAuditLogsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAuditLogsResult>("tencentcloud:Cynosdb/getAuditLogs:getAuditLogs", args ?? new GetAuditLogsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAuditLogsArgs : Pulumi.InvokeArgs
+    public sealed class GetAuditLogsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The end time is in the format of 2017-07-12 10:29:20.
@@ -161,9 +155,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetAuditLogsArgs()
         {
         }
+        public static new GetAuditLogsArgs Empty => new GetAuditLogsArgs();
     }
 
-    public sealed class GetAuditLogsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAuditLogsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The end time is in the format of 2017-07-12 10:29:20.
@@ -210,6 +205,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetAuditLogsInvokeArgs()
         {
         }
+        public static new GetAuditLogsInvokeArgs Empty => new GetAuditLogsInvokeArgs();
     }
 
 

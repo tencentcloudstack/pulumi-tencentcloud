@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class CngwRouteRateLimitLimitDetailRateLimitResponseArgs : Pulumi.ResourceArgs
+    public sealed class CngwRouteRateLimitLimitDetailRateLimitResponseArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// custom response body, maybe bull.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public CngwRouteRateLimitLimitDetailRateLimitResponseArgs()
         {
         }
+        public static new CngwRouteRateLimitLimitDetailRateLimitResponseArgs Empty => new CngwRouteRateLimitLimitDetailRateLimitResponseArgs();
     }
 }

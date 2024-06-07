@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Cfw.SyncRoute("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Cfw.SyncRoute("example", new Tencentcloud.Cfw.SyncRouteArgs
-    ///         {
-    ///             FwType = "nat",
-    ///             SyncType = "Route",
-    ///         });
-    ///     }
+    ///         FwType = "nat",
+    ///         SyncType = "Route",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/syncRoute:SyncRoute")]
-    public partial class SyncRoute : Pulumi.CustomResource
+    public partial class SyncRoute : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Firewall type; nat: nat firewall; ew: inter-vpc firewall.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         }
     }
 
-    public sealed class SyncRouteArgs : Pulumi.ResourceArgs
+    public sealed class SyncRouteArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Firewall type; nat: nat firewall; ew: inter-vpc firewall.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public SyncRouteArgs()
         {
         }
+        public static new SyncRouteArgs Empty => new SyncRouteArgs();
     }
 
-    public sealed class SyncRouteState : Pulumi.ResourceArgs
+    public sealed class SyncRouteState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Firewall type; nat: nat firewall; ew: inter-vpc firewall.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public SyncRouteState()
         {
         }
+        public static new SyncRouteState Empty => new SyncRouteState();
     }
 }

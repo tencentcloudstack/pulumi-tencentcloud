@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainStatusCodeCacheGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainStatusCodeCacheGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("cacheRules")]
         private InputList<Inputs.DomainStatusCodeCacheCacheRuleGetArgs>? _cacheRules;
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainStatusCodeCacheGetArgs()
         {
         }
+        public static new DomainStatusCodeCacheGetArgs Empty => new DomainStatusCodeCacheGetArgs();
     }
 }

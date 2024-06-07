@@ -5,27 +5,71 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./getInstanceBackups";
-export * from "./getInstanceConnections";
-export * from "./getInstanceCurrentOp";
-export * from "./getInstanceParams";
-export * from "./getInstanceSlowLog";
-export * from "./getInstances";
-export * from "./getZoneConfig";
-export * from "./instance";
-export * from "./instanceAccount";
-export * from "./instanceBackup";
-export * from "./instanceBackupDownloadTask";
-export * from "./shardingInstance";
-export * from "./standbyInstance";
+export { GetInstanceBackupsArgs, GetInstanceBackupsResult, GetInstanceBackupsOutputArgs } from "./getInstanceBackups";
+export const getInstanceBackups: typeof import("./getInstanceBackups").getInstanceBackups = null as any;
+export const getInstanceBackupsOutput: typeof import("./getInstanceBackups").getInstanceBackupsOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceBackups","getInstanceBackupsOutput"], () => require("./getInstanceBackups"));
 
-// Import resources to register:
-import { Instance } from "./instance";
-import { InstanceAccount } from "./instanceAccount";
-import { InstanceBackup } from "./instanceBackup";
-import { InstanceBackupDownloadTask } from "./instanceBackupDownloadTask";
-import { ShardingInstance } from "./shardingInstance";
-import { StandbyInstance } from "./standbyInstance";
+export { GetInstanceConnectionsArgs, GetInstanceConnectionsResult, GetInstanceConnectionsOutputArgs } from "./getInstanceConnections";
+export const getInstanceConnections: typeof import("./getInstanceConnections").getInstanceConnections = null as any;
+export const getInstanceConnectionsOutput: typeof import("./getInstanceConnections").getInstanceConnectionsOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceConnections","getInstanceConnectionsOutput"], () => require("./getInstanceConnections"));
+
+export { GetInstanceCurrentOpArgs, GetInstanceCurrentOpResult, GetInstanceCurrentOpOutputArgs } from "./getInstanceCurrentOp";
+export const getInstanceCurrentOp: typeof import("./getInstanceCurrentOp").getInstanceCurrentOp = null as any;
+export const getInstanceCurrentOpOutput: typeof import("./getInstanceCurrentOp").getInstanceCurrentOpOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceCurrentOp","getInstanceCurrentOpOutput"], () => require("./getInstanceCurrentOp"));
+
+export { GetInstanceParamsArgs, GetInstanceParamsResult, GetInstanceParamsOutputArgs } from "./getInstanceParams";
+export const getInstanceParams: typeof import("./getInstanceParams").getInstanceParams = null as any;
+export const getInstanceParamsOutput: typeof import("./getInstanceParams").getInstanceParamsOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceParams","getInstanceParamsOutput"], () => require("./getInstanceParams"));
+
+export { GetInstanceSlowLogArgs, GetInstanceSlowLogResult, GetInstanceSlowLogOutputArgs } from "./getInstanceSlowLog";
+export const getInstanceSlowLog: typeof import("./getInstanceSlowLog").getInstanceSlowLog = null as any;
+export const getInstanceSlowLogOutput: typeof import("./getInstanceSlowLog").getInstanceSlowLogOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceSlowLog","getInstanceSlowLogOutput"], () => require("./getInstanceSlowLog"));
+
+export { GetInstancesArgs, GetInstancesResult, GetInstancesOutputArgs } from "./getInstances";
+export const getInstances: typeof import("./getInstances").getInstances = null as any;
+export const getInstancesOutput: typeof import("./getInstances").getInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getInstances","getInstancesOutput"], () => require("./getInstances"));
+
+export { GetZoneConfigArgs, GetZoneConfigResult, GetZoneConfigOutputArgs } from "./getZoneConfig";
+export const getZoneConfig: typeof import("./getZoneConfig").getZoneConfig = null as any;
+export const getZoneConfigOutput: typeof import("./getZoneConfig").getZoneConfigOutput = null as any;
+utilities.lazyLoad(exports, ["getZoneConfig","getZoneConfigOutput"], () => require("./getZoneConfig"));
+
+export { InstanceArgs, InstanceState } from "./instance";
+export type Instance = import("./instance").Instance;
+export const Instance: typeof import("./instance").Instance = null as any;
+utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { InstanceAccountArgs, InstanceAccountState } from "./instanceAccount";
+export type InstanceAccount = import("./instanceAccount").InstanceAccount;
+export const InstanceAccount: typeof import("./instanceAccount").InstanceAccount = null as any;
+utilities.lazyLoad(exports, ["InstanceAccount"], () => require("./instanceAccount"));
+
+export { InstanceBackupArgs, InstanceBackupState } from "./instanceBackup";
+export type InstanceBackup = import("./instanceBackup").InstanceBackup;
+export const InstanceBackup: typeof import("./instanceBackup").InstanceBackup = null as any;
+utilities.lazyLoad(exports, ["InstanceBackup"], () => require("./instanceBackup"));
+
+export { InstanceBackupDownloadTaskArgs, InstanceBackupDownloadTaskState } from "./instanceBackupDownloadTask";
+export type InstanceBackupDownloadTask = import("./instanceBackupDownloadTask").InstanceBackupDownloadTask;
+export const InstanceBackupDownloadTask: typeof import("./instanceBackupDownloadTask").InstanceBackupDownloadTask = null as any;
+utilities.lazyLoad(exports, ["InstanceBackupDownloadTask"], () => require("./instanceBackupDownloadTask"));
+
+export { ShardingInstanceArgs, ShardingInstanceState } from "./shardingInstance";
+export type ShardingInstance = import("./shardingInstance").ShardingInstance;
+export const ShardingInstance: typeof import("./shardingInstance").ShardingInstance = null as any;
+utilities.lazyLoad(exports, ["ShardingInstance"], () => require("./shardingInstance"));
+
+export { StandbyInstanceArgs, StandbyInstanceState } from "./standbyInstance";
+export type StandbyInstance = import("./standbyInstance").StandbyInstance;
+export const StandbyInstance: typeof import("./standbyInstance").StandbyInstance = null as any;
+utilities.lazyLoad(exports, ["StandbyInstance"], () => require("./standbyInstance"));
+
 
 const _module = {
     version: utilities.getVersion(),

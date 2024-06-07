@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const topSpaceTableTimeSeries = pulumi.output(tencentcloud.Dbbrain.getTopSpaceTableTimeSeries({
+ * const topSpaceTableTimeSeries = tencentcloud.Dbbrain.getTopSpaceTableTimeSeries({
  *     endDate: "%s",
  *     instanceId: "%s",
  *     product: "mysql",
  *     sortBy: "DataLength",
  *     startDate: "%s",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTopSpaceTableTimeSeries(args: GetTopSpaceTableTimeSeriesArgs, opts?: pulumi.InvokeOptions): Promise<GetTopSpaceTableTimeSeriesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dbbrain/getTopSpaceTableTimeSeries:getTopSpaceTableTimeSeries", {
         "endDate": args.endDate,
         "instanceId": args.instanceId,
@@ -94,9 +94,28 @@ export interface GetTopSpaceTableTimeSeriesResult {
      */
     readonly topSpaceTableTimeSeries: outputs.Dbbrain.GetTopSpaceTableTimeSeriesTopSpaceTableTimeSeries[];
 }
-
+/**
+ * Use this data source to query detailed information of dbbrain topSpaceTableTimeSeries
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const topSpaceTableTimeSeries = tencentcloud.Dbbrain.getTopSpaceTableTimeSeries({
+ *     endDate: "%s",
+ *     instanceId: "%s",
+ *     product: "mysql",
+ *     sortBy: "DataLength",
+ *     startDate: "%s",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTopSpaceTableTimeSeriesOutput(args: GetTopSpaceTableTimeSeriesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTopSpaceTableTimeSeriesResult> {
-    return pulumi.output(args).apply(a => getTopSpaceTableTimeSeries(a, opts))
+    return pulumi.output(args).apply((a: any) => getTopSpaceTableTimeSeries(a, opts))
 }
 
 /**

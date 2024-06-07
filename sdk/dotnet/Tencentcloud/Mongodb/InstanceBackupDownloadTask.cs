@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
 {
     [TencentcloudResourceType("tencentcloud:Mongodb/instanceBackupDownloadTask:InstanceBackupDownloadTask")]
-    public partial class InstanceBackupDownloadTask : Pulumi.CustomResource
+    public partial class InstanceBackupDownloadTask : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The name of the backup file to be downloaded can be obtained through the DescribeDBBackups interface.
@@ -80,7 +80,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         }
     }
 
-    public sealed class InstanceBackupDownloadTaskArgs : Pulumi.ResourceArgs
+    public sealed class InstanceBackupDownloadTaskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of the backup file to be downloaded can be obtained through the DescribeDBBackups interface.
@@ -113,9 +113,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public InstanceBackupDownloadTaskArgs()
         {
         }
+        public static new InstanceBackupDownloadTaskArgs Empty => new InstanceBackupDownloadTaskArgs();
     }
 
-    public sealed class InstanceBackupDownloadTaskState : Pulumi.ResourceArgs
+    public sealed class InstanceBackupDownloadTaskState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of the backup file to be downloaded can be obtained through the DescribeDBBackups interface.
@@ -148,5 +149,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public InstanceBackupDownloadTaskState()
         {
         }
+        public static new InstanceBackupDownloadTaskState Empty => new InstanceBackupDownloadTaskState();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
@@ -64,7 +66,7 @@ import * as utilities from "../utilities";
  *             cpu: 4,
  *             diskSize: 100,
  *             diskType: "CLOUD_PREMIUM",
- *             spec: cvm4c8m.then(cvm4c8m => `CVM.${cvm4c8m.instanceTypes?[0]?.family}`),
+ *             spec: cvm4c8m.then(cvm4c8m => `CVM.${cvm4c8m.instanceTypes?.[0]?.family}`),
  *             storageType: 5,
  *             rootSize: 50,
  *         },
@@ -73,7 +75,7 @@ import * as utilities from "../utilities";
  *             cpu: 4,
  *             diskSize: 100,
  *             diskType: "CLOUD_PREMIUM",
- *             spec: cvm4c8m.then(cvm4c8m => `CVM.${cvm4c8m.instanceTypes?[0]?.family}`),
+ *             spec: cvm4c8m.then(cvm4c8m => `CVM.${cvm4c8m.instanceTypes?.[0]?.family}`),
  *             storageType: 5,
  *             rootSize: 50,
  *         },
@@ -93,6 +95,7 @@ import * as utilities from "../utilities";
  *     sgId: emrSg.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class Cluster extends pulumi.CustomResource {
     /**
@@ -141,7 +144,7 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly instanceName!: pulumi.Output<string>;
     /**
-     * Instance login settings.
+     * Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
      */
     public readonly loginSettings!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
@@ -158,7 +161,7 @@ export class Cluster extends pulumi.CustomResource {
     /**
      * It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
      *
-     * @deprecated It will be deprecated in later versions. Use `placement_info` instead.
+     * @deprecated It will be deprecated in later versions. Use `placementInfo` instead.
      */
     public readonly placement!: pulumi.Output<{[key: string]: any}>;
     /**
@@ -269,7 +272,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["displayStrategy"] = args ? args.displayStrategy : undefined;
             resourceInputs["extendFsField"] = args ? args.extendFsField : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
-            resourceInputs["loginSettings"] = args ? args.loginSettings : undefined;
+            resourceInputs["loginSettings"] = args?.loginSettings ? pulumi.secret(args.loginSettings) : undefined;
             resourceInputs["needMasterWan"] = args ? args.needMasterWan : undefined;
             resourceInputs["payMode"] = args ? args.payMode : undefined;
             resourceInputs["placement"] = args ? args.placement : undefined;
@@ -286,6 +289,8 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["instanceId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["loginSettings"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Cluster.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -313,7 +318,7 @@ export interface ClusterState {
      */
     instanceName?: pulumi.Input<string>;
     /**
-     * Instance login settings.
+     * Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
      */
     loginSettings?: pulumi.Input<{[key: string]: any}>;
     /**
@@ -330,7 +335,7 @@ export interface ClusterState {
     /**
      * It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
      *
-     * @deprecated It will be deprecated in later versions. Use `placement_info` instead.
+     * @deprecated It will be deprecated in later versions. Use `placementInfo` instead.
      */
     placement?: pulumi.Input<{[key: string]: any}>;
     /**
@@ -407,7 +412,7 @@ export interface ClusterArgs {
      */
     instanceName: pulumi.Input<string>;
     /**
-     * Instance login settings.
+     * Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
      */
     loginSettings?: pulumi.Input<{[key: string]: any}>;
     /**
@@ -424,7 +429,7 @@ export interface ClusterArgs {
     /**
      * It will be deprecated in later versions. Use `placementInfo` instead. The location of the instance.
      *
-     * @deprecated It will be deprecated in later versions. Use `placement_info` instead.
+     * @deprecated It will be deprecated in later versions. Use `placementInfo` instead.
      */
     placement?: pulumi.Input<{[key: string]: any}>;
     /**

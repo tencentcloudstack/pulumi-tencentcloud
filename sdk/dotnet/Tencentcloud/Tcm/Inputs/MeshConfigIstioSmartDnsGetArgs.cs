@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
 {
 
-    public sealed class MeshConfigIstioSmartDnsGetArgs : Pulumi.ResourceArgs
+    public sealed class MeshConfigIstioSmartDnsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Enable auto allocate address.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         public MeshConfigIstioSmartDnsGetArgs()
         {
         }
+        public static new MeshConfigIstioSmartDnsGetArgs Empty => new MeshConfigIstioSmartDnsGetArgs();
     }
 }

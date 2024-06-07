@@ -10,8 +10,17 @@ using Pulumi;
 
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
 {
+    /// <summary>
+    /// Provides a CVM instance set resource.
+    /// 
+    /// &gt; **NOTE:** You can launch an CVM instance for a VPC network via specifying parameter `vpc_id`. One instance can only belong to one VPC.
+    /// 
+    /// &gt; **NOTE:** This resource is designed to cater for the scenario of creating CVM in large batches.
+    /// 
+    /// &gt; **NOTE:** After run command `pulumi up`, must wait all cvms is ready, then run command `pulumi preview`, either it will cause state change.
+    /// </summary>
     [TencentcloudResourceType("tencentcloud:Instance/set:Set")]
-    public partial class Set : Pulumi.CustomResource
+    public partial class Set : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.
@@ -241,6 +250,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -262,7 +275,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         }
     }
 
-    public sealed class SetArgs : Pulumi.ResourceArgs
+    public sealed class SetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.
@@ -372,11 +385,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         [Input("keyName")]
         public Input<string>? KeyName { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The ID of a placement group.
@@ -453,9 +476,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public SetArgs()
         {
         }
+        public static new SetArgs Empty => new SetArgs();
     }
 
-    public sealed class SetState : Pulumi.ResourceArgs
+    public sealed class SetState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.
@@ -595,11 +619,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         [Input("keyName")]
         public Input<string>? KeyName { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The ID of a placement group.
@@ -682,5 +716,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public SetState()
         {
         }
+        public static new SetState Empty => new SetState();
     }
 }

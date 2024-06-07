@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb.Inputs
 {
 
-    public sealed class GetUpgradePriceAddShardConfigArgs : Pulumi.InvokeArgs
+    public sealed class GetUpgradePriceAddShardConfigArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The number of new shards.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb.Inputs
         public GetUpgradePriceAddShardConfigArgs()
         {
         }
+        public static new GetUpgradePriceAddShardConfigArgs Empty => new GetUpgradePriceAddShardConfigArgs();
     }
 }

@@ -15,72 +15,75 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = availabilityZone,
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var fooGrafanaInstance = new Tencentcloud.Monitor.GrafanaInstance("fooGrafanaInstance", new Tencentcloud.Monitor.GrafanaInstanceArgs
-    ///         {
-    ///             InstanceName = "tf-grafana",
-    ///             VpcId = vpc.Id,
-    ///             SubnetIds = 
-    ///             {
-    ///                 subnet.Id,
-    ///             },
-    ///             GrafanaInitPassword = "1234567890",
-    ///             EnableInternet = false,
-    ///             IsDestroy = true,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "test" },
-    ///             },
-    ///         });
-    ///         var fooTmpGrafanaConfig = new Tencentcloud.Monitor.TmpGrafanaConfig("fooTmpGrafanaConfig", new Tencentcloud.Monitor.TmpGrafanaConfigArgs
-    ///         {
-    ///             Config = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
-    ///             {
-    ///                 { "server", new Dictionary&lt;string, object?&gt;
-    ///                 {
-    ///                     { "http_port", 8080 },
-    ///                     { "root_url", "https://cloud-grafana.woa.com/grafana-ffrdnrfa/" },
-    ///                     { "serve_from_sub_path", true },
-    ///                 } },
-    ///             }),
-    ///             InstanceId = fooGrafanaInstance.Id,
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var fooGrafanaInstance = new Tencentcloud.Monitor.GrafanaInstance("fooGrafanaInstance", new()
+    ///     {
+    ///         InstanceName = "tf-grafana",
+    ///         VpcId = vpc.Id,
+    ///         SubnetIds = new[]
+    ///         {
+    ///             subnet.Id,
+    ///         },
+    ///         GrafanaInitPassword = "1234567890",
+    ///         EnableInternet = false,
+    ///         IsDestroy = true,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var fooTmpGrafanaConfig = new Tencentcloud.Monitor.TmpGrafanaConfig("fooTmpGrafanaConfig", new()
+    ///     {
+    ///         Config = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///         {
+    ///             ["server"] = new Dictionary&lt;string, object?&gt;
+    ///             {
+    ///                 ["http_port"] = 8080,
+    ///                 ["root_url"] = "https://cloud-grafana.woa.com/grafana-ffrdnrfa/",
+    ///                 ["serve_from_sub_path"] = true,
+    ///             },
+    ///         }),
+    ///         InstanceId = fooGrafanaInstance.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor tmp_grafana_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/tmpGrafanaConfig:TmpGrafanaConfig tmp_grafana_config tmp_grafana_config_id
+    /// $ pulumi import tencentcloud:Monitor/tmpGrafanaConfig:TmpGrafanaConfig tmp_grafana_config tmp_grafana_config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpGrafanaConfig:TmpGrafanaConfig")]
-    public partial class TmpGrafanaConfig : Pulumi.CustomResource
+    public partial class TmpGrafanaConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// JSON encoded string.
@@ -139,7 +142,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class TmpGrafanaConfigArgs : Pulumi.ResourceArgs
+    public sealed class TmpGrafanaConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// JSON encoded string.
@@ -156,9 +159,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpGrafanaConfigArgs()
         {
         }
+        public static new TmpGrafanaConfigArgs Empty => new TmpGrafanaConfigArgs();
     }
 
-    public sealed class TmpGrafanaConfigState : Pulumi.ResourceArgs
+    public sealed class TmpGrafanaConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// JSON encoded string.
@@ -175,5 +179,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public TmpGrafanaConfigState()
         {
         }
+        public static new TmpGrafanaConfigState Empty => new TmpGrafanaConfigState();
     }
 }

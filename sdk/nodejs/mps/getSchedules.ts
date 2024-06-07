@@ -2,31 +2,32 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of mps schedules
  *
  * ## Example Usage
+ *
  * ### Query the enabled schedules.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const schedules = pulumi.output(tencentcloud.Mps.getSchedules({
+ * const schedules = tencentcloud.Mps.getSchedules({
  *     status: "Enabled",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSchedules(args?: GetSchedulesArgs, opts?: pulumi.InvokeOptions): Promise<GetSchedulesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mps/getSchedules:getSchedules", {
         "resultOutputFile": args.resultOutputFile,
         "scheduleIds": args.scheduleIds,
@@ -77,9 +78,26 @@ export interface GetSchedulesResult {
     readonly status?: string;
     readonly triggerType?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mps schedules
+ *
+ * ## Example Usage
+ *
+ * ### Query the enabled schedules.
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const schedules = tencentcloud.Mps.getSchedules({
+ *     status: "Enabled",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSchedulesOutput(args?: GetSchedulesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSchedulesResult> {
-    return pulumi.output(args).apply(a => getSchedules(a, opts))
+    return pulumi.output(args).apply((a: any) => getSchedules(a, opts))
 }
 
 /**

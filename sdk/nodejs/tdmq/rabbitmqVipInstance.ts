@@ -6,6 +6,14 @@ import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a tdmq rabbitmqVipInstance
+ *
+ * ## Import
+ *
+ * tdmq rabbitmq_vip_instance can be imported using the id, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Tdmq/rabbitmqVipInstance:RabbitmqVipInstance example amqp-mok52gmn
+ * ```
  */
 export class RabbitmqVipInstance extends pulumi.CustomResource {
     /**

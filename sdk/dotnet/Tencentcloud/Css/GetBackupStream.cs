@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// <summary>
         /// Use this data source to query detailed information of css backup_stream
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var backupStream = Tencentcloud.Css.GetBackupStream.Invoke(new()
         ///     {
-        ///         var backupStream = Output.Create(Tencentcloud.Css.GetBackupStream.InvokeAsync(new Tencentcloud.Css.GetBackupStreamArgs
-        ///         {
-        ///             StreamName = "live",
-        ///         }));
-        ///     }
+        ///         StreamName = "live",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBackupStreamResult> InvokeAsync(GetBackupStreamArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBackupStreamResult>("tencentcloud:Css/getBackupStream:getBackupStream", args ?? new GetBackupStreamArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupStreamResult>("tencentcloud:Css/getBackupStream:getBackupStream", args ?? new GetBackupStreamArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of css backup_stream
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var backupStream = Tencentcloud.Css.GetBackupStream.Invoke(new()
         ///     {
-        ///         var backupStream = Output.Create(Tencentcloud.Css.GetBackupStream.InvokeAsync(new Tencentcloud.Css.GetBackupStreamArgs
-        ///         {
-        ///             StreamName = "live",
-        ///         }));
-        ///     }
+        ///         StreamName = "live",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBackupStreamResult> Invoke(GetBackupStreamInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBackupStreamResult>("tencentcloud:Css/getBackupStream:getBackupStream", args ?? new GetBackupStreamInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBackupStreamResult>("tencentcloud:Css/getBackupStream:getBackupStream", args ?? new GetBackupStreamInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBackupStreamArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupStreamArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetBackupStreamArgs()
         {
         }
+        public static new GetBackupStreamArgs Empty => new GetBackupStreamArgs();
     }
 
-    public sealed class GetBackupStreamInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupStreamInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetBackupStreamInvokeArgs()
         {
         }
+        public static new GetBackupStreamInvokeArgs Empty => new GetBackupStreamInvokeArgs();
     }
 
 

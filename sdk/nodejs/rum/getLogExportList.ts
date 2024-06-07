@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const logExportList = pulumi.output(tencentcloud.Rum.getLogExportList({
+ * const logExportList = tencentcloud.Rum.getLogExportList({
  *     projectId: 1,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getLogExportList(args: GetLogExportListArgs, opts?: pulumi.InvokeOptions): Promise<GetLogExportListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getLogExportList:getLogExportList", {
         "projectId": args.projectId,
         "resultOutputFile": args.resultOutputFile,
@@ -59,9 +58,24 @@ export interface GetLogExportListResult {
     readonly result: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of rum logExportList
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const logExportList = tencentcloud.Rum.getLogExportList({
+ *     projectId: 1,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getLogExportListOutput(args: GetLogExportListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetLogExportListResult> {
-    return pulumi.output(args).apply(a => getLogExportList(a, opts))
+    return pulumi.output(args).apply((a: any) => getLogExportList(a, opts))
 }
 
 /**

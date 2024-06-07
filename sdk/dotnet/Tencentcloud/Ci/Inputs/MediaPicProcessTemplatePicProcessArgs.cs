@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaPicProcessTemplatePicProcessArgs : Pulumi.ResourceArgs
+    public sealed class MediaPicProcessTemplatePicProcessArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to return the original image information.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaPicProcessTemplatePicProcessArgs()
         {
         }
+        public static new MediaPicProcessTemplatePicProcessArgs Empty => new MediaPicProcessTemplatePicProcessArgs();
     }
 }

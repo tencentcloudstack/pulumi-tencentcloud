@@ -18,6 +18,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn.Outputs
         /// Create time.
         /// </summary>
         public readonly string CreateTime;
+        /// <summary>
+        /// Destination IDC IP range.
+        /// </summary>
         public readonly string DestinationCidrBlock;
         /// <summary>
         /// Instance ID of the next hop.
@@ -27,11 +30,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn.Outputs
         /// Next hop type (type of the associated instance). Valid values: VPNCONN (VPN tunnel) and CCN (CCN instance).
         /// </summary>
         public readonly string InstanceType;
+        /// <summary>
+        /// Priority. Valid values: 0 and 100.
+        /// </summary>
         public readonly int Priority;
         /// <summary>
         /// Route ID.
         /// </summary>
         public readonly string RouteId;
+        /// <summary>
+        /// Status. Valid values: ENABLE and DISABLE.
+        /// </summary>
         public readonly string Status;
         /// <summary>
         /// Route type. Default value: Static.

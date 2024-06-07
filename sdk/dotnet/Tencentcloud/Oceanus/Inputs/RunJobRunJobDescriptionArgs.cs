@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
 {
 
-    public sealed class RunJobRunJobDescriptionArgs : Pulumi.ResourceArgs
+    public sealed class RunJobRunJobDescriptionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Custom timestamp.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
         public RunJobRunJobDescriptionArgs()
         {
         }
+        public static new RunJobRunJobDescriptionArgs Empty => new RunJobRunJobDescriptionArgs();
     }
 }

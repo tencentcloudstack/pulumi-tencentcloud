@@ -15,11 +15,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class RuleEngineRuleActionNormalActionParameter
     {
         /// <summary>
-        /// Target HEADER name.
+        /// Parameter name.
         /// </summary>
         public readonly string Name;
         /// <summary>
-        /// Parameter Value.
+        /// Parameter value.
         /// </summary>
         public readonly ImmutableArray<string> Values;
 

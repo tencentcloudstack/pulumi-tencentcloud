@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Cam.OidcSso("foo", {
+ * const foo = new tencentcloud.cam.OidcSso("foo", {
  *     authorizationEndpoint: "https://login.microsoftonline.com/.../oauth2/v2.0/authorize",
  *     clientId: "...",
  *     identityKey: "...",
@@ -27,13 +28,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CAM-OIDC-SSO can be imported using the client_id or any string which can identifier resource, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cam/oidcSso:OidcSso foo xxxxxxxxxxx
+ * $ pulumi import tencentcloud:Cam/oidcSso:OidcSso foo xxxxxxxxxxx
  * ```
  */
 export class OidcSso extends pulumi.CustomResource {

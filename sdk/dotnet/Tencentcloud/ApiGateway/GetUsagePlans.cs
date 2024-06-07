@@ -15,88 +15,86 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// <summary>
         /// Use this data source to query API gateway usage plans.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var plan = new Tencentcloud.ApiGateway.UsagePlan("plan", new()
         ///     {
-        ///         var plan = new Tencentcloud.ApiGateway.UsagePlan("plan", new Tencentcloud.ApiGateway.UsagePlanArgs
-        ///         {
-        ///             UsagePlanName = "my_plan",
-        ///             UsagePlanDesc = "nice plan",
-        ///             MaxRequestNum = 100,
-        ///             MaxRequestNumPreSec = 10,
-        ///         });
-        ///         var name = Tencentcloud.ApiGateway.GetUsagePlans.Invoke(new Tencentcloud.ApiGateway.GetUsagePlansInvokeArgs
-        ///         {
-        ///             UsagePlanName = plan.UsagePlanName,
-        ///         });
-        ///         var id = Tencentcloud.ApiGateway.GetUsagePlans.Invoke(new Tencentcloud.ApiGateway.GetUsagePlansInvokeArgs
-        ///         {
-        ///             UsagePlanId = plan.Id,
-        ///         });
-        ///     }
+        ///         UsagePlanName = "my_plan",
+        ///         UsagePlanDesc = "nice plan",
+        ///         MaxRequestNum = 100,
+        ///         MaxRequestNumPreSec = 10,
+        ///     });
         /// 
-        /// }
+        ///     var name = Tencentcloud.ApiGateway.GetUsagePlans.Invoke(new()
+        ///     {
+        ///         UsagePlanName = plan.UsagePlanName,
+        ///     });
+        /// 
+        ///     var id = Tencentcloud.ApiGateway.GetUsagePlans.Invoke(new()
+        ///     {
+        ///         UsagePlanId = plan.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetUsagePlansResult> InvokeAsync(GetUsagePlansArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetUsagePlansResult>("tencentcloud:ApiGateway/getUsagePlans:getUsagePlans", args ?? new GetUsagePlansArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetUsagePlansResult>("tencentcloud:ApiGateway/getUsagePlans:getUsagePlans", args ?? new GetUsagePlansArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query API gateway usage plans.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var plan = new Tencentcloud.ApiGateway.UsagePlan("plan", new()
         ///     {
-        ///         var plan = new Tencentcloud.ApiGateway.UsagePlan("plan", new Tencentcloud.ApiGateway.UsagePlanArgs
-        ///         {
-        ///             UsagePlanName = "my_plan",
-        ///             UsagePlanDesc = "nice plan",
-        ///             MaxRequestNum = 100,
-        ///             MaxRequestNumPreSec = 10,
-        ///         });
-        ///         var name = Tencentcloud.ApiGateway.GetUsagePlans.Invoke(new Tencentcloud.ApiGateway.GetUsagePlansInvokeArgs
-        ///         {
-        ///             UsagePlanName = plan.UsagePlanName,
-        ///         });
-        ///         var id = Tencentcloud.ApiGateway.GetUsagePlans.Invoke(new Tencentcloud.ApiGateway.GetUsagePlansInvokeArgs
-        ///         {
-        ///             UsagePlanId = plan.Id,
-        ///         });
-        ///     }
+        ///         UsagePlanName = "my_plan",
+        ///         UsagePlanDesc = "nice plan",
+        ///         MaxRequestNum = 100,
+        ///         MaxRequestNumPreSec = 10,
+        ///     });
         /// 
-        /// }
+        ///     var name = Tencentcloud.ApiGateway.GetUsagePlans.Invoke(new()
+        ///     {
+        ///         UsagePlanName = plan.UsagePlanName,
+        ///     });
+        /// 
+        ///     var id = Tencentcloud.ApiGateway.GetUsagePlans.Invoke(new()
+        ///     {
+        ///         UsagePlanId = plan.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetUsagePlansResult> Invoke(GetUsagePlansInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetUsagePlansResult>("tencentcloud:ApiGateway/getUsagePlans:getUsagePlans", args ?? new GetUsagePlansInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetUsagePlansResult>("tencentcloud:ApiGateway/getUsagePlans:getUsagePlans", args ?? new GetUsagePlansInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetUsagePlansArgs : Pulumi.InvokeArgs
+    public sealed class GetUsagePlansArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -119,9 +117,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetUsagePlansArgs()
         {
         }
+        public static new GetUsagePlansArgs Empty => new GetUsagePlansArgs();
     }
 
-    public sealed class GetUsagePlansInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetUsagePlansInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -144,6 +143,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetUsagePlansInvokeArgs()
         {
         }
+        public static new GetUsagePlansInvokeArgs Empty => new GetUsagePlansInvokeArgs();
     }
 
 

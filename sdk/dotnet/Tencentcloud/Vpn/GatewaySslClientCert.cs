@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpnGatewaySslClientCert = new Tencentcloud.Vpn.GatewaySslClientCert("vpnGatewaySslClientCert", new()
     ///     {
-    ///         var vpnGatewaySslClientCert = new Tencentcloud.Vpn.GatewaySslClientCert("vpnGatewaySslClientCert", new Tencentcloud.Vpn.GatewaySslClientCertArgs
-    ///         {
-    ///             SslVpnClientId = "vpnc-123456",
-    ///             Switch = "off",
-    ///         });
-    ///     }
+    ///         SslVpnClientId = "vpnc-123456",
+    ///         Switch = "off",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// vpc vpn_gateway_ssl_client_cert can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpn/gatewaySslClientCert:GatewaySslClientCert vpn_gateway_ssl_client_cert ssl_client_id
+    /// $ pulumi import tencentcloud:Vpn/gatewaySslClientCert:GatewaySslClientCert vpn_gateway_ssl_client_cert ssl_client_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpn/gatewaySslClientCert:GatewaySslClientCert")]
-    public partial class GatewaySslClientCert : Pulumi.CustomResource
+    public partial class GatewaySslClientCert : global::Pulumi.CustomResource
     {
         /// <summary>
         /// SSL-VPN-CLIENT Instance ID.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         }
     }
 
-    public sealed class GatewaySslClientCertArgs : Pulumi.ResourceArgs
+    public sealed class GatewaySslClientCertArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// SSL-VPN-CLIENT Instance ID.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GatewaySslClientCertArgs()
         {
         }
+        public static new GatewaySslClientCertArgs Empty => new GatewaySslClientCertArgs();
     }
 
-    public sealed class GatewaySslClientCertState : Pulumi.ResourceArgs
+    public sealed class GatewaySslClientCertState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// SSL-VPN-CLIENT Instance ID.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GatewaySslClientCertState()
         {
         }
+        public static new GatewaySslClientCertState Empty => new GatewaySslClientCertState();
     }
 }

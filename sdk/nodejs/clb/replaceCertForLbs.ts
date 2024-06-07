@@ -2,38 +2,44 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a clb replaceCertForLbs
  *
  * ## Example Usage
+ *
  * ### Replace Server Cert By Cert ID
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const replaceCertForLbs = new tencentcloud.Clb.ReplaceCertForLbs("replace_cert_for_lbs", {
+ * const replaceCertForLbs = new tencentcloud.clb.ReplaceCertForLbs("replaceCertForLbs", {
  *     certificate: {
  *         certId: "6vcK02GC",
  *     },
  *     oldCertificateId: "zjUMifFK",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Replace Server Cert By Cert Content
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const foo = tencentcloud.Ssl.getCertificates({
  *     name: "keep-ssl-ca",
  * });
  * const replaceCertForLbs = new tencentcloud.clb.ReplaceCertForLbs("replaceCertForLbs", {
- *     oldCertificateId: foo.then(foo => foo.certificates?[0]?.id),
+ *     oldCertificateId: foo.then(foo => foo.certificates?.[0]?.id),
  *     certificate: {
  *         certName: "tf-test-cert",
  *         certContent: `-----BEGIN CERTIFICATE-----
@@ -48,11 +54,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Replace Client Cert By Cert Content
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const replaceCertForLbs = new tencentcloud.clb.ReplaceCertForLbs("replaceCertForLbs", {
  *     oldCertificateId: "zjUMifFK",
@@ -65,10 +74,13 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ReplaceCertForLbs extends pulumi.CustomResource {
     /**

@@ -7,37 +7,43 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tdmq rabbitmqVirtualHost
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdmq.NewRabbitmqVirtualHost(ctx, "rabbitmqVirtualHost", &Tdmq.RabbitmqVirtualHostArgs{
-// 			Description: pulumi.String("desc"),
-// 			InstanceId:  pulumi.String("amqp-kzbe8p3n"),
-// 			TraceFlag:   pulumi.Bool(false),
-// 			VirtualHost: pulumi.String("vh-test-1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tdmq.NewRabbitmqVirtualHost(ctx, "rabbitmqVirtualHost", &Tdmq.RabbitmqVirtualHostArgs{
+//				Description: pulumi.String("desc"),
+//				InstanceId:  pulumi.String("amqp-kzbe8p3n"),
+//				TraceFlag:   pulumi.Bool(false),
+//				VirtualHost: pulumi.String("vh-test-1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type RabbitmqVirtualHost struct {
 	pulumi.CustomResourceState
 
@@ -64,7 +70,7 @@ func NewRabbitmqVirtualHost(ctx *pulumi.Context,
 	if args.VirtualHost == nil {
 		return nil, errors.New("invalid value for required argument 'VirtualHost'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RabbitmqVirtualHost
 	err := ctx.RegisterResource("tencentcloud:Tdmq/rabbitmqVirtualHost:RabbitmqVirtualHost", name, args, &resource, opts...)
 	if err != nil {
@@ -161,7 +167,7 @@ func (i *RabbitmqVirtualHost) ToRabbitmqVirtualHostOutputWithContext(ctx context
 // RabbitmqVirtualHostArrayInput is an input type that accepts RabbitmqVirtualHostArray and RabbitmqVirtualHostArrayOutput values.
 // You can construct a concrete instance of `RabbitmqVirtualHostArrayInput` via:
 //
-//          RabbitmqVirtualHostArray{ RabbitmqVirtualHostArgs{...} }
+//	RabbitmqVirtualHostArray{ RabbitmqVirtualHostArgs{...} }
 type RabbitmqVirtualHostArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +192,7 @@ func (i RabbitmqVirtualHostArray) ToRabbitmqVirtualHostArrayOutputWithContext(ct
 // RabbitmqVirtualHostMapInput is an input type that accepts RabbitmqVirtualHostMap and RabbitmqVirtualHostMapOutput values.
 // You can construct a concrete instance of `RabbitmqVirtualHostMapInput` via:
 //
-//          RabbitmqVirtualHostMap{ "key": RabbitmqVirtualHostArgs{...} }
+//	RabbitmqVirtualHostMap{ "key": RabbitmqVirtualHostArgs{...} }
 type RabbitmqVirtualHostMapInput interface {
 	pulumi.Input
 

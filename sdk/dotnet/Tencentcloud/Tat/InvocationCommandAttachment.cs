@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
     /// Provides a resource to create a tat invocation_command_attachment
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tat/invocationCommandAttachment:InvocationCommandAttachment")]
-    public partial class InvocationCommandAttachment : Pulumi.CustomResource
+    public partial class InvocationCommandAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Command ID.
@@ -151,7 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         }
     }
 
-    public sealed class InvocationCommandAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class InvocationCommandAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
@@ -240,9 +240,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public InvocationCommandAttachmentArgs()
         {
         }
+        public static new InvocationCommandAttachmentArgs Empty => new InvocationCommandAttachmentArgs();
     }
 
-    public sealed class InvocationCommandAttachmentState : Pulumi.ResourceArgs
+    public sealed class InvocationCommandAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Command ID.
@@ -337,5 +338,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public InvocationCommandAttachmentState()
         {
         }
+        public static new InvocationCommandAttachmentState Empty => new InvocationCommandAttachmentState();
     }
 }

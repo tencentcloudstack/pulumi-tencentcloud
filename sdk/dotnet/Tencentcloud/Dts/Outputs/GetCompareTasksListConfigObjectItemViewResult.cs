@@ -14,6 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Outputs
     [OutputType]
     public sealed class GetCompareTasksListConfigObjectItemViewResult
     {
+        /// <summary>
+        /// view name.
+        /// </summary>
         public readonly string? ViewName;
 
         [OutputConstructor]

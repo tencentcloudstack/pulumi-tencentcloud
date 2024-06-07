@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns.Inputs
 {
 
-    public sealed class ZoneTagSetArgs : Pulumi.ResourceArgs
+    public sealed class ZoneTagSetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Key of Tag.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns.Inputs
         public ZoneTagSetArgs()
         {
         }
+        public static new ZoneTagSetArgs Empty => new ZoneTagSetArgs();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -14,417 +15,13 @@ import * as utilities from "../utilities";
  * It's more flexible than managing worker config directly with `tencentcloud.Kubernetes.Cluster`, `tencentcloud.Kubernetes.ScaleWorker`, or existing node management of `tencentcloudKubernetesAttachment`. The reason is that `workerConfig` is unchangeable and may cause the whole cluster resource to `ForceNew`.
  *
  * ## Example Usage
- * ### Create a basic cluster with two worker nodes
  *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const config = new pulumi.Config();
- * const defaultInstanceType = config.get("defaultInstanceType") || "SA2.2XLARGE16";
- * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
- * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
- * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
- * const vpcOne = tencentcloud.Vpc.getSubnets({
- *     isDefault: true,
- *     availabilityZone: availabilityZoneFirst,
- * });
- * const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.vpcId);
- * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.subnetId);
- * const vpcTwo = tencentcloud.Vpc.getSubnets({
- *     isDefault: true,
- *     availabilityZone: availabilityZoneSecond,
- * });
- * const secondVpcId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?[0]?.vpcId);
- * const secondSubnetId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?[0]?.subnetId);
- * const sg = new tencentcloud.security.Group("sg", {});
- * const sgId = sg.id;
- * const default = tencentcloud.Images.getInstance({
- *     imageTypes: ["PUBLIC_IMAGE"],
- *     imageNameRegex: "Final",
- * });
- * const imageId = _default.then(_default => _default.imageId);
- * const sgRule = new tencentcloud.security.GroupLiteRule("sgRule", {
- *     securityGroupId: sg.id,
- *     ingresses: [
- *         "ACCEPT#10.0.0.0/16#ALL#ALL",
- *         "ACCEPT#172.16.0.0/22#ALL#ALL",
- *         "DROP#0.0.0.0/0#ALL#ALL",
- *     ],
- *     egresses: ["ACCEPT#172.16.0.0/22#ALL#ALL"],
- * });
- * const example = new tencentcloud.kubernetes.Cluster("example", {
- *     vpcId: firstVpcId,
- *     clusterCidr: exampleClusterCidr,
- *     clusterMaxPodNum: 32,
- *     clusterName: "tf_example_cluster",
- *     clusterDesc: "example for tke cluster",
- *     clusterMaxServiceNum: 32,
- *     clusterInternet: false,
- *     clusterInternetSecurityGroup: sgId,
- *     clusterVersion: "1.22.5",
- *     clusterDeployType: "MANAGED_CLUSTER",
- *     workerConfigs: [
- *         {
- *             count: 1,
- *             availabilityZone: availabilityZoneFirst,
- *             instanceType: defaultInstanceType,
- *             systemDiskType: "CLOUD_SSD",
- *             systemDiskSize: 60,
- *             internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
- *             internetMaxBandwidthOut: 100,
- *             publicIpAssigned: true,
- *             subnetId: firstSubnetId,
- *             imgId: imageId,
- *             dataDisks: [{
- *                 diskType: "CLOUD_PREMIUM",
- *                 diskSize: 50,
- *             }],
- *             enhancedSecurityService: false,
- *             enhancedMonitorService: false,
- *             userData: "dGVzdA==",
- *             password: "ZZXXccvv1212",
- *         },
- *         {
- *             count: 1,
- *             availabilityZone: availabilityZoneSecond,
- *             instanceType: defaultInstanceType,
- *             systemDiskType: "CLOUD_SSD",
- *             systemDiskSize: 60,
- *             internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
- *             internetMaxBandwidthOut: 100,
- *             publicIpAssigned: true,
- *             subnetId: secondSubnetId,
- *             dataDisks: [{
- *                 diskType: "CLOUD_PREMIUM",
- *                 diskSize: 50,
- *             }],
- *             enhancedSecurityService: false,
- *             enhancedMonitorService: false,
- *             userData: "dGVzdA==",
- *             keyIds: ["skey-11112222"],
- *             camRoleName: "CVM_QcsRole",
- *         },
- *     ],
- *     labels: {
- *         test1: "test1",
- *         test2: "test2",
- *     },
- * });
- * ```
- * ### Create an empty cluster with a node pool
- *
- * The cluster does not have any nodes, nodes will be added through node pool.
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const config = new pulumi.Config();
- * const defaultInstanceType = config.get("defaultInstanceType") || "SA2.2XLARGE16";
- * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
- * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
- * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
- * const vpcOne = tencentcloud.Vpc.getSubnets({
- *     isDefault: true,
- *     availabilityZone: availabilityZoneFirst,
- * });
- * const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.vpcId);
- * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.subnetId);
- * const sg = new tencentcloud.security.Group("sg", {});
- * const sgId = sg.id;
- * const vpcTwo = tencentcloud.Vpc.getSubnets({
- *     isDefault: true,
- *     availabilityZone: availabilityZoneSecond,
- * });
- * const sgRule = new tencentcloud.security.GroupLiteRule("sgRule", {
- *     securityGroupId: sg.id,
- *     ingresses: [
- *         "ACCEPT#10.0.0.0/16#ALL#ALL",
- *         "ACCEPT#172.16.0.0/22#ALL#ALL",
- *         "DROP#0.0.0.0/0#ALL#ALL",
- *     ],
- *     egresses: ["ACCEPT#172.16.0.0/22#ALL#ALL"],
- * });
- * const exampleCluster = new tencentcloud.kubernetes.Cluster("exampleCluster", {
- *     vpcId: firstVpcId,
- *     clusterCidr: exampleClusterCidr,
- *     clusterMaxPodNum: 32,
- *     clusterName: "tf_example_cluster_np",
- *     clusterDesc: "example for tke cluster",
- *     clusterMaxServiceNum: 32,
- *     clusterVersion: "1.22.5",
- *     clusterDeployType: "MANAGED_CLUSTER",
- * });
- * // without any worker config
- * const exampleNodePool = new tencentcloud.kubernetes.NodePool("exampleNodePool", {
- *     clusterId: exampleCluster.id,
- *     maxSize: 6,
- *     minSize: 1,
- *     vpcId: firstVpcId,
- *     subnetIds: [firstSubnetId],
- *     retryPolicy: "INCREMENTAL_INTERVALS",
- *     desiredCapacity: 4,
- *     enableAutoScale: true,
- *     multiZoneSubnetPolicy: "EQUALITY",
- *     autoScalingConfig: {
- *         instanceType: defaultInstanceType,
- *         systemDiskType: "CLOUD_PREMIUM",
- *         systemDiskSize: 50,
- *         orderlySecurityGroupIds: [sgId],
- *         dataDisks: [{
- *             diskType: "CLOUD_PREMIUM",
- *             diskSize: 50,
- *         }],
- *         internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
- *         internetMaxBandwidthOut: 10,
- *         publicIpAssigned: true,
- *         password: "test123#",
- *         enhancedSecurityService: false,
- *         enhancedMonitorService: false,
- *         hostName: "12.123.0.0",
- *         hostNameStyle: "ORIGINAL",
- *     },
- *     labels: {
- *         test1: "test1",
- *         test2: "test2",
- *     },
- *     taints: [
- *         {
- *             key: "test_taint",
- *             value: "taint_value",
- *             effect: "PreferNoSchedule",
- *         },
- *         {
- *             key: "test_taint2",
- *             value: "taint_value2",
- *             effect: "PreferNoSchedule",
- *         },
- *     ],
- *     nodeConfig: {
- *         extraArgs: ["root-dir=/var/lib/kubelet"],
- *     },
- * });
- * ```
- * ### Create a cluster with a node pool and open the network access with cluster endpoint
- *
- * The cluster's internet and intranet access will be opened after nodes are added through node pool.
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const config = new pulumi.Config();
- * const defaultInstanceType = config.get("defaultInstanceType") || "SA2.2XLARGE16";
- * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
- * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
- * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
- * const vpcOne = tencentcloud.Vpc.getSubnets({
- *     isDefault: true,
- *     availabilityZone: availabilityZoneFirst,
- * });
- * const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.vpcId);
- * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.subnetId);
- * const sg = new tencentcloud.security.Group("sg", {});
- * const sgId = sg.id;
- * const vpcTwo = tencentcloud.Vpc.getSubnets({
- *     isDefault: true,
- *     availabilityZone: availabilityZoneSecond,
- * });
- * const sgRule = new tencentcloud.security.GroupLiteRule("sgRule", {
- *     securityGroupId: sg.id,
- *     ingresses: [
- *         "ACCEPT#10.0.0.0/16#ALL#ALL",
- *         "ACCEPT#172.16.0.0/22#ALL#ALL",
- *         "DROP#0.0.0.0/0#ALL#ALL",
- *     ],
- *     egresses: ["ACCEPT#172.16.0.0/22#ALL#ALL"],
- * });
- * const exampleCluster = new tencentcloud.kubernetes.Cluster("exampleCluster", {
- *     vpcId: firstVpcId,
- *     clusterCidr: exampleClusterCidr,
- *     clusterMaxPodNum: 32,
- *     clusterName: "tf_example_cluster",
- *     clusterDesc: "example for tke cluster",
- *     clusterMaxServiceNum: 32,
- *     clusterInternet: false,
- *     clusterVersion: "1.22.5",
- *     clusterDeployType: "MANAGED_CLUSTER",
- * });
- * // without any worker config
- * const exampleNodePool = new tencentcloud.kubernetes.NodePool("exampleNodePool", {
- *     clusterId: exampleCluster.id,
- *     maxSize: 6,
- *     minSize: 1,
- *     vpcId: firstVpcId,
- *     subnetIds: [firstSubnetId],
- *     retryPolicy: "INCREMENTAL_INTERVALS",
- *     desiredCapacity: 4,
- *     enableAutoScale: true,
- *     multiZoneSubnetPolicy: "EQUALITY",
- *     autoScalingConfig: {
- *         instanceType: defaultInstanceType,
- *         systemDiskType: "CLOUD_PREMIUM",
- *         systemDiskSize: 50,
- *         orderlySecurityGroupIds: [sgId],
- *         dataDisks: [{
- *             diskType: "CLOUD_PREMIUM",
- *             diskSize: 50,
- *         }],
- *         internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
- *         internetMaxBandwidthOut: 10,
- *         publicIpAssigned: true,
- *         password: "test123#",
- *         enhancedSecurityService: false,
- *         enhancedMonitorService: false,
- *         hostName: "12.123.0.0",
- *         hostNameStyle: "ORIGINAL",
- *     },
- *     labels: {
- *         test1: "test1",
- *         test2: "test2",
- *     },
- *     taints: [
- *         {
- *             key: "test_taint",
- *             value: "taint_value",
- *             effect: "PreferNoSchedule",
- *         },
- *         {
- *             key: "test_taint2",
- *             value: "taint_value2",
- *             effect: "PreferNoSchedule",
- *         },
- *     ],
- *     nodeConfig: {
- *         extraArgs: ["root-dir=/var/lib/kubelet"],
- *     },
- * });
- * const exampleClusterEndpoint = new tencentcloud.kubernetes.ClusterEndpoint("exampleClusterEndpoint", {
- *     clusterId: exampleCluster.id,
- *     clusterInternet: true,
- *     clusterIntranet: true,
- *     clusterInternetSecurityGroup: sgId,
- *     clusterIntranetSubnetId: firstSubnetId,
- * }, {
- *     dependsOn: [exampleNodePool],
- * });
- * ```
- * ### Use Kubelet
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const config = new pulumi.Config();
- * const defaultInstanceType = config.get("defaultInstanceType") || "SA2.2XLARGE16";
- * const availabilityZoneFirst = config.get("availabilityZoneFirst") || "ap-guangzhou-3";
- * const availabilityZoneSecond = config.get("availabilityZoneSecond") || "ap-guangzhou-4";
- * const exampleClusterCidr = config.get("exampleClusterCidr") || "10.31.0.0/16";
- * const vpcOne = tencentcloud.Vpc.getSubnets({
- *     isDefault: true,
- *     availabilityZone: availabilityZoneFirst,
- * });
- * const firstVpcId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.vpcId);
- * const firstSubnetId = vpcOne.then(vpcOne => vpcOne.instanceLists?[0]?.subnetId);
- * const vpcTwo = tencentcloud.Vpc.getSubnets({
- *     isDefault: true,
- *     availabilityZone: availabilityZoneSecond,
- * });
- * const secondVpcId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?[0]?.vpcId);
- * const secondSubnetId = vpcTwo.then(vpcTwo => vpcTwo.instanceLists?[0]?.subnetId);
- * const sg = new tencentcloud.security.Group("sg", {});
- * const sgId = sg.id;
- * const default = tencentcloud.Images.getInstance({
- *     imageTypes: ["PUBLIC_IMAGE"],
- *     imageNameRegex: "Final",
- * });
- * const imageId = _default.then(_default => _default.imageId);
- * const sgRule = new tencentcloud.security.GroupLiteRule("sgRule", {
- *     securityGroupId: sg.id,
- *     ingresses: [
- *         "ACCEPT#10.0.0.0/16#ALL#ALL",
- *         "ACCEPT#172.16.0.0/22#ALL#ALL",
- *         "DROP#0.0.0.0/0#ALL#ALL",
- *     ],
- *     egresses: ["ACCEPT#172.16.0.0/22#ALL#ALL"],
- * });
- * const example = new tencentcloud.kubernetes.Cluster("example", {
- *     vpcId: firstVpcId,
- *     clusterCidr: exampleClusterCidr,
- *     clusterMaxPodNum: 32,
- *     clusterName: "tf_example_cluster",
- *     clusterDesc: "example for tke cluster",
- *     clusterMaxServiceNum: 32,
- *     clusterInternet: false,
- *     clusterInternetSecurityGroup: sgId,
- *     clusterVersion: "1.22.5",
- *     clusterDeployType: "MANAGED_CLUSTER",
- *     workerConfigs: [
- *         {
- *             count: 1,
- *             availabilityZone: availabilityZoneFirst,
- *             instanceType: defaultInstanceType,
- *             systemDiskType: "CLOUD_SSD",
- *             systemDiskSize: 60,
- *             internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
- *             internetMaxBandwidthOut: 100,
- *             publicIpAssigned: true,
- *             subnetId: firstSubnetId,
- *             imgId: imageId,
- *             dataDisks: [{
- *                 diskType: "CLOUD_PREMIUM",
- *                 diskSize: 50,
- *                 encrypt: false,
- *             }],
- *             enhancedSecurityService: false,
- *             enhancedMonitorService: false,
- *             userData: "dGVzdA==",
- *             disasterRecoverGroupIds: [],
- *             securityGroupIds: [],
- *             keyIds: [],
- *             password: "ZZXXccvv1212",
- *         },
- *         {
- *             count: 1,
- *             availabilityZone: availabilityZoneSecond,
- *             instanceType: defaultInstanceType,
- *             systemDiskType: "CLOUD_SSD",
- *             systemDiskSize: 60,
- *             internetChargeType: "TRAFFIC_POSTPAID_BY_HOUR",
- *             internetMaxBandwidthOut: 100,
- *             publicIpAssigned: true,
- *             subnetId: secondSubnetId,
- *             dataDisks: [{
- *                 diskType: "CLOUD_PREMIUM",
- *                 diskSize: 50,
- *             }],
- *             enhancedSecurityService: false,
- *             enhancedMonitorService: false,
- *             userData: "dGVzdA==",
- *             disasterRecoverGroupIds: [],
- *             securityGroupIds: [],
- *             keyIds: [],
- *             camRoleName: "CVM_QcsRole",
- *             password: "ZZXXccvv1212",
- *         },
- *     ],
- *     labels: {
- *         test1: "test1",
- *         test2: "test2",
- *     },
- *     extraArgs: ["root-dir=/var/lib/kubelet"],
- * });
- * ```
  * ### Use node pool global config
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
@@ -476,11 +73,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Using VPC-CNI network type
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-1";
@@ -522,29 +122,33 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Using ops options
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const managedCluster = new tencentcloud.Kubernetes.Cluster("managed_cluster", {
+ * const managedCluster = new tencentcloud.kubernetes.Cluster("managedCluster", {
  *     clusterAudit: {
  *         enabled: true,
- *         logSetId: "", // optional
- *         topicId: "", // optional
+ *         logSetId: "",
+ *         topicId: "",
  *     },
  *     eventPersistence: {
  *         enabled: true,
- *         logSetId: "", // optional
- *         topicId: "", // optional
+ *         logSetId: "",
+ *         topicId: "",
  *     },
  *     logAgent: {
  *         enabled: true,
- *         kubeletRootDir: "", // optional
+ *         kubeletRootDir: "",
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class Cluster extends pulumi.CustomResource {
     /**
@@ -631,7 +235,7 @@ export class Cluster extends pulumi.CustomResource {
     /**
      * Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
-    public readonly clusterInternet!: pulumi.Output<boolean | undefined>;
+    public readonly clusterInternet!: pulumi.Output<boolean>;
     /**
      * Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
      */
@@ -639,11 +243,11 @@ export class Cluster extends pulumi.CustomResource {
     /**
      * Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
      */
-    public readonly clusterInternetSecurityGroup!: pulumi.Output<string | undefined>;
+    public readonly clusterInternetSecurityGroup!: pulumi.Output<string>;
     /**
      * Open intranet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
-    public readonly clusterIntranet!: pulumi.Output<boolean | undefined>;
+    public readonly clusterIntranet!: pulumi.Output<boolean>;
     /**
      * Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
      */
@@ -651,7 +255,7 @@ export class Cluster extends pulumi.CustomResource {
     /**
      * Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
      */
-    public readonly clusterIntranetSubnetId!: pulumi.Output<string | undefined>;
+    public readonly clusterIntranetSubnetId!: pulumi.Output<string>;
     /**
      * Indicates whether `ipvs` is enabled. Default is true. False means `iptables` is enabled.
      */
@@ -767,7 +371,7 @@ export class Cluster extends pulumi.CustomResource {
     /**
      * this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
      *
-     * @deprecated this argument was deprecated, use `cluster_internet_security_group` instead.
+     * @deprecated this argument was deprecated, use `clusterInternetSecurityGroup` instead.
      */
     public readonly managedClusterInternetSecurityPolicies!: pulumi.Output<string[] | undefined>;
     /**
@@ -1202,7 +806,7 @@ export interface ClusterState {
     /**
      * this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
      *
-     * @deprecated this argument was deprecated, use `cluster_internet_security_group` instead.
+     * @deprecated this argument was deprecated, use `clusterInternetSecurityGroup` instead.
      */
     managedClusterInternetSecurityPolicies?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -1450,7 +1054,7 @@ export interface ClusterArgs {
     /**
      * this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
      *
-     * @deprecated this argument was deprecated, use `cluster_internet_security_group` instead.
+     * @deprecated this argument was deprecated, use `clusterInternetSecurityGroup` instead.
      */
     managedClusterInternetSecurityPolicies?: pulumi.Input<pulumi.Input<string>[]>;
     /**

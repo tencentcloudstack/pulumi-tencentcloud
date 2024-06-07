@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -22,14 +24,12 @@ import * as utilities from "../utilities";
  *     policyId: tencentcloud_cam_policy.foo.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getUserPolicyAttachments(args?: GetUserPolicyAttachmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetUserPolicyAttachmentsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cam/getUserPolicyAttachments:getUserPolicyAttachments", {
         "createMode": args.createMode,
         "policyId": args.policyId,
@@ -63,7 +63,7 @@ export interface GetUserPolicyAttachmentsArgs {
     /**
      * It has been deprecated from version 1.59.6. Use `userName` instead. ID of the attached CAM user to be queried.
      *
-     * @deprecated It has been deprecated from version 1.59.6. Use `user_name` instead.
+     * @deprecated It has been deprecated from version 1.59.6. Use `userName` instead.
      */
     userId?: string;
     /**
@@ -96,7 +96,7 @@ export interface GetUserPolicyAttachmentsResult {
     /**
      * (**Deprecated**) It has been deprecated from version 1.59.6. Use `userName` instead. ID of CAM user.
      *
-     * @deprecated It has been deprecated from version 1.59.6. Use `user_name` instead.
+     * @deprecated It has been deprecated from version 1.59.6. Use `userName` instead.
      */
     readonly userId?: string;
     /**
@@ -108,9 +108,28 @@ export interface GetUserPolicyAttachmentsResult {
      */
     readonly userPolicyAttachmentLists: outputs.Cam.GetUserPolicyAttachmentsUserPolicyAttachmentList[];
 }
-
+/**
+ * Use this data source to query detailed information of CAM user policy attachments
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Cam.getUserPolicyAttachments({
+ *     userId: tencentcloud_cam_user.foo.id,
+ * });
+ * const bar = tencentcloud.Cam.getUserPolicyAttachments({
+ *     userId: tencentcloud_cam_user.foo.id,
+ *     policyId: tencentcloud_cam_policy.foo.id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getUserPolicyAttachmentsOutput(args?: GetUserPolicyAttachmentsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetUserPolicyAttachmentsResult> {
-    return pulumi.output(args).apply(a => getUserPolicyAttachments(a, opts))
+    return pulumi.output(args).apply((a: any) => getUserPolicyAttachments(a, opts))
 }
 
 /**
@@ -136,7 +155,7 @@ export interface GetUserPolicyAttachmentsOutputArgs {
     /**
      * It has been deprecated from version 1.59.6. Use `userName` instead. ID of the attached CAM user to be queried.
      *
-     * @deprecated It has been deprecated from version 1.59.6. Use `user_name` instead.
+     * @deprecated It has been deprecated from version 1.59.6. Use `userName` instead.
      */
     userId?: pulumi.Input<string>;
     /**

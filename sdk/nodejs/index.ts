@@ -5,7 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
-export * from "./provider";
+export { ProviderArgs } from "./provider";
+export type Provider = import("./provider").Provider;
+export const Provider: typeof import("./provider").Provider = null as any;
+utilities.lazyLoad(exports, ["Provider"], () => require("./provider"));
+
 
 // Export sub-modules:
 import * as address from "./address";
@@ -35,6 +39,7 @@ import * as clickhouse from "./clickhouse";
 import * as cls from "./cls";
 import * as config from "./config";
 import * as cos from "./cos";
+import * as csip from "./csip";
 import * as css from "./css";
 import * as cvm from "./cvm";
 import * as cwp from "./cwp";
@@ -147,6 +152,7 @@ export {
     cls,
     config,
     cos,
+    csip,
     css,
     cvm,
     cwp,
@@ -231,9 +237,6 @@ export {
     waf,
     wedata,
 };
-
-import { Provider } from "./provider";
-
 pulumi.runtime.registerResourcePackage("tencentcloud", {
     version: utilities.getVersion(),
     constructProvider: (name: string, type: string, urn: string): pulumi.ProviderResource => {

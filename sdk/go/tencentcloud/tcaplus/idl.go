@@ -7,79 +7,110 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this resource to create TcaplusDB IDL file.
 //
 // ## Example Usage
+//
 // ### Create a tcaplus database idl file
 //
 // The file will be with a specified cluster and tablegroup.
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZone),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpcId := vpc.InstanceLists[0].VpcId
-// 		subnetId := vpc.InstanceLists[0].SubnetId
-// 		exampleCluster, err := Tcaplus.NewCluster(ctx, "exampleCluster", &Tcaplus.ClusterArgs{
-// 			IdlType:               pulumi.String("PROTO"),
-// 			ClusterName:           pulumi.String("tf_example_tcaplus_cluster"),
-// 			VpcId:                 pulumi.String(vpcId),
-// 			SubnetId:              pulumi.String(subnetId),
-// 			Password:              pulumi.String("your_pw_123111"),
-// 			OldPasswordExpireLast: pulumi.Int(3600),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleTablegroup, err := Tcaplus.NewTablegroup(ctx, "exampleTablegroup", &Tcaplus.TablegroupArgs{
-// 			ClusterId:      exampleCluster.ID(),
-// 			TablegroupName: pulumi.String("tf_example_group_name"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tcaplus.NewIdl(ctx, "main", &Tcaplus.IdlArgs{
-// 			ClusterId:    exampleCluster.ID(),
-// 			TablegroupId: exampleTablegroup.ID(),
-// 			FileName:     pulumi.String("tf_example_tcaplus_idl"),
-// 			FileType:     pulumi.String("PROTO"),
-// 			FileExtType:  pulumi.String("proto"),
-// 			FileContent:  pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "    syntax = \"proto2\";\n", "    package myTcaplusTable;\n", "    import \"tcaplusservice.optionv1.proto\";\n", "    message tb_online {\n", "        option(tcaplusservice.tcaplus_primary_key) = \"uin,name,region\";\n", "        required int64 uin = 1;\n", "        required string name = 2;\n", "        required int32 region = 3;\n", "        required int32 gamesvrid = 4;\n", "        optional int32 logintime = 5 [default = 1];\n", "        repeated int64 lockid = 6 [packed = true];\n", "        optional bool is_available = 7 [default = false];\n", "        optional pay_info pay = 8;\n", "    }\n", "\n", "    message pay_info {\n", "        required int64 pay_id = 1;\n", "        optional uint64 total_money = 2;\n", "        optional uint64 pay_times = 3;\n", "        optional pay_auth_info auth = 4;\n", "        message pay_auth_info {\n", "            required string pay_keys = 1;\n", "            optional int64 update_time = 2;\n", "        }\n", "    }\n")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//				IsDefault:        pulumi.BoolRef(true),
+//				AvailabilityZone: pulumi.StringRef(availabilityZone),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpcId := vpc.InstanceLists[0].VpcId
+//			subnetId := vpc.InstanceLists[0].SubnetId
+//			exampleCluster, err := Tcaplus.NewCluster(ctx, "exampleCluster", &Tcaplus.ClusterArgs{
+//				IdlType:               pulumi.String("PROTO"),
+//				ClusterName:           pulumi.String("tf_example_tcaplus_cluster"),
+//				VpcId:                 pulumi.String(vpcId),
+//				SubnetId:              pulumi.String(subnetId),
+//				Password:              pulumi.String("your_pw_123111"),
+//				OldPasswordExpireLast: pulumi.Int(3600),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleTablegroup, err := Tcaplus.NewTablegroup(ctx, "exampleTablegroup", &Tcaplus.TablegroupArgs{
+//				ClusterId:      exampleCluster.ID(),
+//				TablegroupName: pulumi.String("tf_example_group_name"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcaplus.NewIdl(ctx, "main", &Tcaplus.IdlArgs{
+//				ClusterId:    exampleCluster.ID(),
+//				TablegroupId: exampleTablegroup.ID(),
+//				FileName:     pulumi.String("tf_example_tcaplus_idl"),
+//				FileType:     pulumi.String("PROTO"),
+//				FileExtType:  pulumi.String("proto"),
+//				FileContent: pulumi.String(`    syntax = "proto2";
+//	    package myTcaplusTable;
+//	    import "tcaplusservice.optionv1.proto";
+//	    message tb_online {
+//	        option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+//	        required int64 uin = 1;
+//	        required string name = 2;
+//	        required int32 region = 3;
+//	        required int32 gamesvrid = 4;
+//	        optional int32 logintime = 5 [default = 1];
+//	        repeated int64 lockid = 6 [packed = true];
+//	        optional bool is_available = 7 [default = false];
+//	        optional pay_info pay = 8;
+//	    }
+//
+//	    message pay_info {
+//	        required int64 pay_id = 1;
+//	        optional uint64 total_money = 2;
+//	        optional uint64 pay_times = 3;
+//	        optional pay_auth_info auth = 4;
+//	        message pay_auth_info {
+//	            required string pay_keys = 1;
+//	            optional int64 update_time = 2;
+//	        }
+//	    }
+//
+// `),
+//
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type Idl struct {
 	pulumi.CustomResourceState
 
@@ -124,7 +155,7 @@ func NewIdl(ctx *pulumi.Context,
 	if args.TablegroupId == nil {
 		return nil, errors.New("invalid value for required argument 'TablegroupId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Idl
 	err := ctx.RegisterResource("tencentcloud:Tcaplus/idl:Idl", name, args, &resource, opts...)
 	if err != nil {
@@ -241,7 +272,7 @@ func (i *Idl) ToIdlOutputWithContext(ctx context.Context) IdlOutput {
 // IdlArrayInput is an input type that accepts IdlArray and IdlArrayOutput values.
 // You can construct a concrete instance of `IdlArrayInput` via:
 //
-//          IdlArray{ IdlArgs{...} }
+//	IdlArray{ IdlArgs{...} }
 type IdlArrayInput interface {
 	pulumi.Input
 
@@ -266,7 +297,7 @@ func (i IdlArray) ToIdlArrayOutputWithContext(ctx context.Context) IdlArrayOutpu
 // IdlMapInput is an input type that accepts IdlMap and IdlMapOutput values.
 // You can construct a concrete instance of `IdlMapInput` via:
 //
-//          IdlMap{ "key": IdlArgs{...} }
+//	IdlMap{ "key": IdlArgs{...} }
 type IdlMapInput interface {
 	pulumi.Input
 

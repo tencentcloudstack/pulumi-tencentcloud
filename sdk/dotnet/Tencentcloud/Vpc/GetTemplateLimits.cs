@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc template_limits
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var templateLimits = Output.Create(Tencentcloud.Vpc.GetTemplateLimits.InvokeAsync());
-        ///     }
+        ///     var templateLimits = Tencentcloud.Vpc.GetTemplateLimits.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTemplateLimitsResult> InvokeAsync(GetTemplateLimitsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTemplateLimitsResult>("tencentcloud:Vpc/getTemplateLimits:getTemplateLimits", args ?? new GetTemplateLimitsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTemplateLimitsResult>("tencentcloud:Vpc/getTemplateLimits:getTemplateLimits", args ?? new GetTemplateLimitsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc template_limits
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var templateLimits = Output.Create(Tencentcloud.Vpc.GetTemplateLimits.InvokeAsync());
-        ///     }
+        ///     var templateLimits = Tencentcloud.Vpc.GetTemplateLimits.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTemplateLimitsResult> Invoke(GetTemplateLimitsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTemplateLimitsResult>("tencentcloud:Vpc/getTemplateLimits:getTemplateLimits", args ?? new GetTemplateLimitsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTemplateLimitsResult>("tencentcloud:Vpc/getTemplateLimits:getTemplateLimits", args ?? new GetTemplateLimitsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTemplateLimitsArgs : Pulumi.InvokeArgs
+    public sealed class GetTemplateLimitsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetTemplateLimitsArgs()
         {
         }
+        public static new GetTemplateLimitsArgs Empty => new GetTemplateLimitsArgs();
     }
 
-    public sealed class GetTemplateLimitsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTemplateLimitsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetTemplateLimitsInvokeArgs()
         {
         }
+        public static new GetTemplateLimitsInvokeArgs Empty => new GetTemplateLimitsInvokeArgs();
     }
 
 

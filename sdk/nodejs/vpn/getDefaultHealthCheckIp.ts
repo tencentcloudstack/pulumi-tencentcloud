@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const defaultHealthCheckIp = pulumi.output(tencentcloud.Vpn.getDefaultHealthCheckIp({
+ * const defaultHealthCheckIp = tencentcloud.Vpn.getDefaultHealthCheckIp({
  *     vpnGatewayId: "vpngw-gt8bianl",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDefaultHealthCheckIp(args: GetDefaultHealthCheckIpArgs, opts?: pulumi.InvokeOptions): Promise<GetDefaultHealthCheckIpResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpn/getDefaultHealthCheckIp:getDefaultHealthCheckIp", {
         "resultOutputFile": args.resultOutputFile,
         "vpnGatewayId": args.vpnGatewayId,
@@ -63,9 +62,24 @@ export interface GetDefaultHealthCheckIpResult {
     readonly resultOutputFile?: string;
     readonly vpnGatewayId: string;
 }
-
+/**
+ * Use this data source to query detailed information of vpn defaultHealthCheckIp
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const defaultHealthCheckIp = tencentcloud.Vpn.getDefaultHealthCheckIp({
+ *     vpnGatewayId: "vpngw-gt8bianl",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDefaultHealthCheckIpOutput(args: GetDefaultHealthCheckIpOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDefaultHealthCheckIpResult> {
-    return pulumi.output(args).apply(a => getDefaultHealthCheckIp(a, opts))
+    return pulumi.output(args).apply((a: any) => getDefaultHealthCheckIp(a, opts))
 }
 
 /**

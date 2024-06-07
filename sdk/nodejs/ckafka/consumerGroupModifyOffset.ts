@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const consumerGroupModifyOffset = new tencentcloud.Ckafka.ConsumerGroupModifyOffset("consumer_group_modify_offset", {
+ * const consumerGroupModifyOffset = new tencentcloud.ckafka.ConsumerGroupModifyOffset("consumerGroupModifyOffset", {
  *     group: "xxxxxx",
  *     instanceId: "ckafka-xxxxxx",
  *     offset: 0,
@@ -21,6 +22,7 @@ import * as utilities from "../utilities";
  *     topics: ["xxxxxx"],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ConsumerGroupModifyOffset extends pulumi.CustomResource {
     /**

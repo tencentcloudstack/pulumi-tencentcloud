@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class GetInstancesFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetInstancesFilterInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The field that needs to be filtered.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public GetInstancesFilterInputArgs()
         {
         }
+        public static new GetInstancesFilterInputArgs Empty => new GetInstancesFilterInputArgs();
     }
 }

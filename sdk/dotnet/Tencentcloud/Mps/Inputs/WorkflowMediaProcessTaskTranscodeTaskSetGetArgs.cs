@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowMediaProcessTaskTranscodeTaskSetGetArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowMediaProcessTaskTranscodeTaskSetGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Video Transcoding Template ID.
@@ -100,5 +100,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowMediaProcessTaskTranscodeTaskSetGetArgs()
         {
         }
+        public static new WorkflowMediaProcessTaskTranscodeTaskSetGetArgs Empty => new WorkflowMediaProcessTaskTranscodeTaskSetGetArgs();
     }
 }

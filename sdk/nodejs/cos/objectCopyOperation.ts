@@ -9,16 +9,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const objectCopy = new tencentcloud.Cos.ObjectCopyOperation("object_copy", {
+ * const objectCopy = new tencentcloud.cos.ObjectCopyOperation("objectCopy", {
  *     bucket: "keep-copy-xxxxxxx",
  *     key: "copy-acl.txt",
  *     sourceUrl: "keep-test-xxxxxx.cos.ap-guangzhou.myqcloud.com/acl.txt",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ObjectCopyOperation extends pulumi.CustomResource {
     /**

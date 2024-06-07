@@ -14,112 +14,120 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// Provides a resource to create a cloud file system(CFS).
     /// 
     /// ## Example Usage
+    /// 
     /// ### Standard Nfs CFS
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cfs.FileSystem("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cfs.FileSystem("foo", new Tencentcloud.Cfs.FileSystemArgs
-    ///         {
-    ///             AccessGroupId = "pgroup-7nx89k7l",
-    ///             AvailabilityZone = "ap-guangzhou-3",
-    ///             Protocol = "NFS",
-    ///             SubnetId = "subnet-9mu2t9iw",
-    ///             VpcId = "vpc-ah9fbkap",
-    ///         });
-    ///     }
+    ///         AccessGroupId = "pgroup-7nx89k7l",
+    ///         AvailabilityZone = "ap-guangzhou-3",
+    ///         Protocol = "NFS",
+    ///         SubnetId = "subnet-9mu2t9iw",
+    ///         VpcId = "vpc-ah9fbkap",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### High-Performance Nfs CFS
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cfs.FileSystem("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cfs.FileSystem("foo", new Tencentcloud.Cfs.FileSystemArgs
-    ///         {
-    ///             AccessGroupId = "pgroup-drwt29od",
-    ///             AvailabilityZone = "ap-guangzhou-6",
-    ///             Protocol = "NFS",
-    ///             StorageType = "HP",
-    ///             SubnetId = "subnet-enm92y0m",
-    ///             VpcId = "vpc-86v957zb",
-    ///         });
-    ///     }
+    ///         AccessGroupId = "pgroup-drwt29od",
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         Protocol = "NFS",
+    ///         StorageType = "HP",
+    ///         SubnetId = "subnet-enm92y0m",
+    ///         VpcId = "vpc-86v957zb",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Standard Turbo CFS
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cfs.FileSystem("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cfs.FileSystem("foo", new Tencentcloud.Cfs.FileSystemArgs
-    ///         {
-    ///             AccessGroupId = "pgroup-drwt29od",
-    ///             AvailabilityZone = "ap-guangzhou-6",
-    ///             Capacity = 20480,
-    ///             CcnId = "ccn-39lqkygf",
-    ///             CidrBlock = "11.0.0.0/24",
-    ///             NetInterface = "CCN",
-    ///             Protocol = "TURBO",
-    ///             StorageType = "TB",
-    ///         });
-    ///     }
+    ///         AccessGroupId = "pgroup-drwt29od",
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         Capacity = 20480,
+    ///         CcnId = "ccn-39lqkygf",
+    ///         CidrBlock = "11.0.0.0/24",
+    ///         NetInterface = "CCN",
+    ///         Protocol = "TURBO",
+    ///         StorageType = "TB",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### High-Performance Turbo CFS
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cfs.FileSystem("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cfs.FileSystem("foo", new Tencentcloud.Cfs.FileSystemArgs
-    ///         {
-    ///             AccessGroupId = "pgroup-drwt29od",
-    ///             AvailabilityZone = "ap-guangzhou-6",
-    ///             Capacity = 10240,
-    ///             CcnId = "ccn-39lqkygf",
-    ///             CidrBlock = "11.0.0.0/24",
-    ///             NetInterface = "CCN",
-    ///             Protocol = "TURBO",
-    ///             StorageType = "TP",
-    ///         });
-    ///     }
+    ///         AccessGroupId = "pgroup-drwt29od",
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         Capacity = 10240,
+    ///         CcnId = "ccn-39lqkygf",
+    ///         CidrBlock = "11.0.0.0/24",
+    ///         NetInterface = "CCN",
+    ///         Protocol = "TURBO",
+    ///         StorageType = "TP",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Cloud file system can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfs/fileSystem:FileSystem foo cfs-6hgquxmj
+    /// $ pulumi import tencentcloud:Cfs/fileSystem:FileSystem foo cfs-6hgquxmj
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfs/fileSystem:FileSystem")]
-    public partial class FileSystem : Pulumi.CustomResource
+    public partial class FileSystem : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of a access group.
@@ -256,7 +264,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         }
     }
 
-    public sealed class FileSystemArgs : Pulumi.ResourceArgs
+    public sealed class FileSystemArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of a access group.
@@ -345,9 +353,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public FileSystemArgs()
         {
         }
+        public static new FileSystemArgs Empty => new FileSystemArgs();
     }
 
-    public sealed class FileSystemState : Pulumi.ResourceArgs
+    public sealed class FileSystemState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of a access group.
@@ -448,5 +457,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public FileSystemState()
         {
         }
+        public static new FileSystemState Empty => new FileSystemState();
     }
 }

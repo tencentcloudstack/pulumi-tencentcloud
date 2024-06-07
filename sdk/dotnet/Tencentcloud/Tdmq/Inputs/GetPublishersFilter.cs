@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Inputs
 {
 
-    public sealed class GetPublishersFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetPublishersFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The name of the filter parameter.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Inputs
         public GetPublishersFilterArgs()
         {
         }
+        public static new GetPublishersFilterArgs Empty => new GetPublishersFilterArgs();
     }
 }

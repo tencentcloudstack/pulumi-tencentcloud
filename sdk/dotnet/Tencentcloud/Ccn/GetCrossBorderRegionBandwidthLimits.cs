@@ -17,102 +17,96 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// &gt; **NOTE:** This resource is dedicated to Unicom.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var ccnRegionBandwidthLimits = Tencentcloud.Ccn.GetCrossBorderRegionBandwidthLimits.Invoke(new()
         ///     {
-        ///         var ccnRegionBandwidthLimits = Output.Create(Tencentcloud.Ccn.GetCrossBorderRegionBandwidthLimits.InvokeAsync(new Tencentcloud.Ccn.GetCrossBorderRegionBandwidthLimitsArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Ccn.Inputs.GetCrossBorderRegionBandwidthLimitsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Ccn.Inputs.GetCrossBorderRegionBandwidthLimitsFilterArgs
+        ///                 Name = "source-region",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "source-region",
-        ///                     Values = 
-        ///                     {
-        ///                         "ap-guangzhou",
-        ///                     },
-        ///                 },
-        ///                 new Tencentcloud.Ccn.Inputs.GetCrossBorderRegionBandwidthLimitsFilterArgs
-        ///                 {
-        ///                     Name = "destination-region",
-        ///                     Values = 
-        ///                     {
-        ///                         "ap-shanghai",
-        ///                     },
+        ///                     "ap-guangzhou",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///             new Tencentcloud.Ccn.Inputs.GetCrossBorderRegionBandwidthLimitsFilterInputArgs
+        ///             {
+        ///                 Name = "destination-region",
+        ///                 Values = new[]
+        ///                 {
+        ///                     "ap-shanghai",
+        ///                 },
+        ///             },
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCrossBorderRegionBandwidthLimitsResult> InvokeAsync(GetCrossBorderRegionBandwidthLimitsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCrossBorderRegionBandwidthLimitsResult>("tencentcloud:Ccn/getCrossBorderRegionBandwidthLimits:getCrossBorderRegionBandwidthLimits", args ?? new GetCrossBorderRegionBandwidthLimitsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCrossBorderRegionBandwidthLimitsResult>("tencentcloud:Ccn/getCrossBorderRegionBandwidthLimits:getCrossBorderRegionBandwidthLimits", args ?? new GetCrossBorderRegionBandwidthLimitsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ccn_cross_border_region_bandwidth_limits
         /// 
         /// &gt; **NOTE:** This resource is dedicated to Unicom.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var ccnRegionBandwidthLimits = Tencentcloud.Ccn.GetCrossBorderRegionBandwidthLimits.Invoke(new()
         ///     {
-        ///         var ccnRegionBandwidthLimits = Output.Create(Tencentcloud.Ccn.GetCrossBorderRegionBandwidthLimits.InvokeAsync(new Tencentcloud.Ccn.GetCrossBorderRegionBandwidthLimitsArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Ccn.Inputs.GetCrossBorderRegionBandwidthLimitsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Ccn.Inputs.GetCrossBorderRegionBandwidthLimitsFilterArgs
+        ///                 Name = "source-region",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "source-region",
-        ///                     Values = 
-        ///                     {
-        ///                         "ap-guangzhou",
-        ///                     },
-        ///                 },
-        ///                 new Tencentcloud.Ccn.Inputs.GetCrossBorderRegionBandwidthLimitsFilterArgs
-        ///                 {
-        ///                     Name = "destination-region",
-        ///                     Values = 
-        ///                     {
-        ///                         "ap-shanghai",
-        ///                     },
+        ///                     "ap-guangzhou",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///             new Tencentcloud.Ccn.Inputs.GetCrossBorderRegionBandwidthLimitsFilterInputArgs
+        ///             {
+        ///                 Name = "destination-region",
+        ///                 Values = new[]
+        ///                 {
+        ///                     "ap-shanghai",
+        ///                 },
+        ///             },
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCrossBorderRegionBandwidthLimitsResult> Invoke(GetCrossBorderRegionBandwidthLimitsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCrossBorderRegionBandwidthLimitsResult>("tencentcloud:Ccn/getCrossBorderRegionBandwidthLimits:getCrossBorderRegionBandwidthLimits", args ?? new GetCrossBorderRegionBandwidthLimitsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCrossBorderRegionBandwidthLimitsResult>("tencentcloud:Ccn/getCrossBorderRegionBandwidthLimits:getCrossBorderRegionBandwidthLimits", args ?? new GetCrossBorderRegionBandwidthLimitsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCrossBorderRegionBandwidthLimitsArgs : Pulumi.InvokeArgs
+    public sealed class GetCrossBorderRegionBandwidthLimitsArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetCrossBorderRegionBandwidthLimitsFilterArgs>? _filters;
@@ -135,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public GetCrossBorderRegionBandwidthLimitsArgs()
         {
         }
+        public static new GetCrossBorderRegionBandwidthLimitsArgs Empty => new GetCrossBorderRegionBandwidthLimitsArgs();
     }
 
-    public sealed class GetCrossBorderRegionBandwidthLimitsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCrossBorderRegionBandwidthLimitsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetCrossBorderRegionBandwidthLimitsFilterInputArgs>? _filters;
@@ -160,6 +155,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public GetCrossBorderRegionBandwidthLimitsInvokeArgs()
         {
         }
+        public static new GetCrossBorderRegionBandwidthLimitsInvokeArgs Empty => new GetCrossBorderRegionBandwidthLimitsInvokeArgs();
     }
 
 

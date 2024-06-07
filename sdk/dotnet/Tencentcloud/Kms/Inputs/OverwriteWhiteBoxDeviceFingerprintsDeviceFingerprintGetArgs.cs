@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms.Inputs
 {
 
-    public sealed class OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintGetArgs : Pulumi.ResourceArgs
+    public sealed class OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms.Inputs
         public OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintGetArgs()
         {
         }
+        public static new OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintGetArgs Empty => new OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintGetArgs();
     }
 }

@@ -15,86 +15,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         /// <summary>
         /// Use this data source to query detailed information of tat invocation_task
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var invocationTask = Tencentcloud.Tat.GetInvocationTask.Invoke(new()
         ///     {
-        ///         var invocationTask = Output.Create(Tencentcloud.Tat.GetInvocationTask.InvokeAsync(new Tencentcloud.Tat.GetInvocationTaskArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Tat.Inputs.GetInvocationTaskFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Tat.Inputs.GetInvocationTaskFilterArgs
+        ///                 Name = "instance-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "instance-id",
-        ///                     Values = 
-        ///                     {
-        ///                         "ins-p4pq4gaq",
-        ///                     },
+        ///                     "ins-p4pq4gaq",
         ///                 },
         ///             },
-        ///             HideOutput = true,
-        ///         }));
-        ///     }
+        ///         },
+        ///         HideOutput = true,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInvocationTaskResult> InvokeAsync(GetInvocationTaskArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInvocationTaskResult>("tencentcloud:Tat/getInvocationTask:getInvocationTask", args ?? new GetInvocationTaskArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInvocationTaskResult>("tencentcloud:Tat/getInvocationTask:getInvocationTask", args ?? new GetInvocationTaskArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tat invocation_task
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var invocationTask = Tencentcloud.Tat.GetInvocationTask.Invoke(new()
         ///     {
-        ///         var invocationTask = Output.Create(Tencentcloud.Tat.GetInvocationTask.InvokeAsync(new Tencentcloud.Tat.GetInvocationTaskArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Tat.Inputs.GetInvocationTaskFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Tat.Inputs.GetInvocationTaskFilterArgs
+        ///                 Name = "instance-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "instance-id",
-        ///                     Values = 
-        ///                     {
-        ///                         "ins-p4pq4gaq",
-        ///                     },
+        ///                     "ins-p4pq4gaq",
         ///                 },
         ///             },
-        ///             HideOutput = true,
-        ///         }));
-        ///     }
+        ///         },
+        ///         HideOutput = true,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInvocationTaskResult> Invoke(GetInvocationTaskInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInvocationTaskResult>("tencentcloud:Tat/getInvocationTask:getInvocationTask", args ?? new GetInvocationTaskInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInvocationTaskResult>("tencentcloud:Tat/getInvocationTask:getInvocationTask", args ?? new GetInvocationTaskInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInvocationTaskArgs : Pulumi.InvokeArgs
+    public sealed class GetInvocationTaskArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetInvocationTaskFilterArgs>? _filters;
@@ -135,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public GetInvocationTaskArgs()
         {
         }
+        public static new GetInvocationTaskArgs Empty => new GetInvocationTaskArgs();
     }
 
-    public sealed class GetInvocationTaskInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInvocationTaskInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetInvocationTaskFilterInputArgs>? _filters;
@@ -178,6 +173,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public GetInvocationTaskInvokeArgs()
         {
         }
+        public static new GetInvocationTaskInvokeArgs Empty => new GetInvocationTaskInvokeArgs();
     }
 
 

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const shards = pulumi.output(tencentcloud.Dcdb.getShards({
+ * const shards = tencentcloud.Dcdb.getShards({
  *     instanceId: "your_instance_id",
  *     shardInstanceIds: ["shard1_id"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getShards(args: GetShardsArgs, opts?: pulumi.InvokeOptions): Promise<GetShardsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dcdb/getShards:getShards", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -70,9 +70,25 @@ export interface GetShardsResult {
     readonly resultOutputFile?: string;
     readonly shardInstanceIds?: string[];
 }
-
+/**
+ * Use this data source to query detailed information of dcdb shards
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const shards = tencentcloud.Dcdb.getShards({
+ *     instanceId: "your_instance_id",
+ *     shardInstanceIds: ["shard1_id"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getShardsOutput(args: GetShardsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetShardsResult> {
-    return pulumi.output(args).apply(a => getShards(a, opts))
+    return pulumi.output(args).apply((a: any) => getShards(a, opts))
 }
 
 /**

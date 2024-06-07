@@ -9,17 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const terminateAsyncEvent = new tencentcloud.Scf.TerminateAsyncEvent("terminate_async_event", {
+ * const terminateAsyncEvent = new tencentcloud.scf.TerminateAsyncEvent("terminateAsyncEvent", {
  *     functionName: "keep-1676351130",
  *     graceShutdown: true,
  *     invokeRequestId: "9de9405a-e33a-498d-bb59-e80b7bed1191",
  *     namespace: "default",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class TerminateAsyncEvent extends pulumi.CustomResource {
     /**

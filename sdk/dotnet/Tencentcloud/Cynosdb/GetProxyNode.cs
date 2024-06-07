@@ -16,17 +16,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// Use this data source to query detailed information of cynosdb proxy_node
         /// </summary>
         public static Task<GetProxyNodeResult> InvokeAsync(GetProxyNodeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProxyNodeResult>("tencentcloud:Cynosdb/getProxyNode:getProxyNode", args ?? new GetProxyNodeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxyNodeResult>("tencentcloud:Cynosdb/getProxyNode:getProxyNode", args ?? new GetProxyNodeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cynosdb proxy_node
         /// </summary>
         public static Output<GetProxyNodeResult> Invoke(GetProxyNodeInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProxyNodeResult>("tencentcloud:Cynosdb/getProxyNode:getProxyNode", args ?? new GetProxyNodeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProxyNodeResult>("tencentcloud:Cynosdb/getProxyNode:getProxyNode", args ?? new GetProxyNodeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProxyNodeArgs : Pulumi.InvokeArgs
+    public sealed class GetProxyNodeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetProxyNodeFilterArgs>? _filters;
@@ -61,9 +61,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetProxyNodeArgs()
         {
         }
+        public static new GetProxyNodeArgs Empty => new GetProxyNodeArgs();
     }
 
-    public sealed class GetProxyNodeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProxyNodeInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetProxyNodeFilterInputArgs>? _filters;
@@ -98,6 +99,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetProxyNodeInvokeArgs()
         {
         }
+        public static new GetProxyNodeInvokeArgs Empty => new GetProxyNodeInvokeArgs();
     }
 
 

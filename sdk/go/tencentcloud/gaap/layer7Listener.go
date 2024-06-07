@@ -7,52 +7,58 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a layer7 listener of GAAP.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-// 			Bandwidth:        pulumi.Int(10),
-// 			Concurrent:       pulumi.Int(2),
-// 			AccessRegion:     pulumi.String("SouthChina"),
-// 			RealserverRegion: pulumi.String("NorthChina"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
-// 			Protocol: pulumi.String("HTTP"),
-// 			Port:     pulumi.Int(80),
-// 			ProxyId:  fooProxy.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+//				Bandwidth:        pulumi.Int(10),
+//				Concurrent:       pulumi.Int(2),
+//				AccessRegion:     pulumi.String("SouthChina"),
+//				RealserverRegion: pulumi.String("NorthChina"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
+//				Protocol: pulumi.String("HTTP"),
+//				Port:     pulumi.Int(80),
+//				ProxyId:  fooProxy.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // GAAP layer7 listener can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener tencentcloud_gaap_layer7_listener.foo listener-11112222
+// $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener tencentcloud_gaap_layer7_listener.foo listener-11112222
 // ```
 type Layer7Listener struct {
 	pulumi.CustomResourceState
@@ -63,7 +69,7 @@ type Layer7Listener struct {
 	CertificateId pulumi.StringPtrOutput `pulumi:"certificateId"`
 	// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	//
-	// Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
+	// Deprecated: It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead.
 	ClientCertificateId pulumi.StringOutput `pulumi:"clientCertificateId"`
 	// ID list of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	ClientCertificateIds pulumi.StringArrayOutput `pulumi:"clientCertificateIds"`
@@ -99,7 +105,7 @@ func NewLayer7Listener(ctx *pulumi.Context,
 	if args.ProxyId == nil {
 		return nil, errors.New("invalid value for required argument 'ProxyId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Layer7Listener
 	err := ctx.RegisterResource("tencentcloud:Gaap/layer7Listener:Layer7Listener", name, args, &resource, opts...)
 	if err != nil {
@@ -128,7 +134,7 @@ type layer7ListenerState struct {
 	CertificateId *string `pulumi:"certificateId"`
 	// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	//
-	// Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
+	// Deprecated: It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead.
 	ClientCertificateId *string `pulumi:"clientCertificateId"`
 	// ID list of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	ClientCertificateIds []string `pulumi:"clientCertificateIds"`
@@ -155,7 +161,7 @@ type Layer7ListenerState struct {
 	CertificateId pulumi.StringPtrInput
 	// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	//
-	// Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
+	// Deprecated: It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead.
 	ClientCertificateId pulumi.StringPtrInput
 	// ID list of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	ClientCertificateIds pulumi.StringArrayInput
@@ -186,7 +192,7 @@ type layer7ListenerArgs struct {
 	CertificateId *string `pulumi:"certificateId"`
 	// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	//
-	// Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
+	// Deprecated: It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead.
 	ClientCertificateId *string `pulumi:"clientCertificateId"`
 	// ID list of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	ClientCertificateIds []string `pulumi:"clientCertificateIds"`
@@ -210,7 +216,7 @@ type Layer7ListenerArgs struct {
 	CertificateId pulumi.StringPtrInput
 	// It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	//
-	// Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
+	// Deprecated: It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead.
 	ClientCertificateId pulumi.StringPtrInput
 	// ID list of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 	ClientCertificateIds pulumi.StringArrayInput
@@ -252,7 +258,7 @@ func (i *Layer7Listener) ToLayer7ListenerOutputWithContext(ctx context.Context) 
 // Layer7ListenerArrayInput is an input type that accepts Layer7ListenerArray and Layer7ListenerArrayOutput values.
 // You can construct a concrete instance of `Layer7ListenerArrayInput` via:
 //
-//          Layer7ListenerArray{ Layer7ListenerArgs{...} }
+//	Layer7ListenerArray{ Layer7ListenerArgs{...} }
 type Layer7ListenerArrayInput interface {
 	pulumi.Input
 
@@ -277,7 +283,7 @@ func (i Layer7ListenerArray) ToLayer7ListenerArrayOutputWithContext(ctx context.
 // Layer7ListenerMapInput is an input type that accepts Layer7ListenerMap and Layer7ListenerMapOutput values.
 // You can construct a concrete instance of `Layer7ListenerMapInput` via:
 //
-//          Layer7ListenerMap{ "key": Layer7ListenerArgs{...} }
+//	Layer7ListenerMap{ "key": Layer7ListenerArgs{...} }
 type Layer7ListenerMapInput interface {
 	pulumi.Input
 
@@ -325,7 +331,7 @@ func (o Layer7ListenerOutput) CertificateId() pulumi.StringPtrOutput {
 
 // It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead. ID of the client certificate. Set only when `authType` is specified as mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
 //
-// Deprecated: It has been deprecated from version 1.26.0. Set `client_certificate_ids` instead.
+// Deprecated: It has been deprecated from version 1.26.0. Set `clientCertificateIds` instead.
 func (o Layer7ListenerOutput) ClientCertificateId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Layer7Listener) pulumi.StringOutput { return v.ClientCertificateId }).(pulumi.StringOutput)
 }

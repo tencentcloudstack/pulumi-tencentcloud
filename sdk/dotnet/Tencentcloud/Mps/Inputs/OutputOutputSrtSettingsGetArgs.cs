@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class OutputOutputSrtSettingsGetArgs : Pulumi.ResourceArgs
+    public sealed class OutputOutputSrtSettingsGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("destinations", required: true)]
         private InputList<Inputs.OutputOutputSrtSettingsDestinationGetArgs>? _destinations;
@@ -76,5 +76,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public OutputOutputSrtSettingsGetArgs()
         {
         }
+        public static new OutputOutputSrtSettingsGetArgs Empty => new OutputOutputSrtSettingsGetArgs();
     }
 }

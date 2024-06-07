@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const asConfigs = pulumi.output(tencentcloud.As.getScalingConfigs({
+ * const asConfigs = tencentcloud.As.getScalingConfigs({
  *     configurationId: "asc-oqio4yyj",
  *     resultOutputFile: "my_test_path",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getScalingConfigs(args?: GetScalingConfigsArgs, opts?: pulumi.InvokeOptions): Promise<GetScalingConfigsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:As/getScalingConfigs:getScalingConfigs", {
         "configurationId": args.configurationId,
         "configurationName": args.configurationName,
@@ -74,9 +74,25 @@ export interface GetScalingConfigsResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query scaling configuration information.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const asConfigs = tencentcloud.As.getScalingConfigs({
+ *     configurationId: "asc-oqio4yyj",
+ *     resultOutputFile: "my_test_path",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getScalingConfigsOutput(args?: GetScalingConfigsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetScalingConfigsResult> {
-    return pulumi.output(args).apply(a => getScalingConfigs(a, opts))
+    return pulumi.output(args).apply((a: any) => getScalingConfigs(a, opts))
 }
 
 /**

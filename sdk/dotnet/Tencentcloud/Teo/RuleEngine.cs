@@ -15,194 +15,194 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var rule1 = new Tencentcloud.Teo.RuleEngine("rule1", new()
     ///     {
-    ///         var rule1 = new Tencentcloud.Teo.RuleEngine("rule1", new Tencentcloud.Teo.RuleEngineArgs
+    ///         ZoneId = tencentcloud_teo_zone.Example.Id,
+    ///         RuleName = "test-rule",
+    ///         Status = "disable",
+    ///         Rules = new[]
     ///         {
-    ///             ZoneId = tencentcloud_teo_zone.Example.Id,
-    ///             RuleName = "test-rule",
-    ///             Status = "disable",
-    ///             Rules = 
+    ///             new Tencentcloud.Teo.Inputs.RuleEngineRuleArgs
     ///             {
-    ///                 new Tencentcloud.Teo.Inputs.RuleEngineRuleArgs
+    ///                 Actions = new[]
     ///                 {
-    ///                     Actions = 
+    ///                     new Tencentcloud.Teo.Inputs.RuleEngineRuleActionArgs
     ///                     {
-    ///                         new Tencentcloud.Teo.Inputs.RuleEngineRuleActionArgs
+    ///                         NormalAction = new Tencentcloud.Teo.Inputs.RuleEngineRuleActionNormalActionArgs
     ///                         {
-    ///                             NormalAction = new Tencentcloud.Teo.Inputs.RuleEngineRuleActionNormalActionArgs
+    ///                             Action = "UpstreamUrlRedirect",
+    ///                             Parameters = new[]
     ///                             {
-    ///                                 Action = "UpstreamUrlRedirect",
-    ///                                 Parameters = 
+    ///                                 new Tencentcloud.Teo.Inputs.RuleEngineRuleActionNormalActionParameterArgs
     ///                                 {
-    ///                                     new Tencentcloud.Teo.Inputs.RuleEngineRuleActionNormalActionParameterArgs
+    ///                                     Name = "Type",
+    ///                                     Values = new[]
     ///                                     {
-    ///                                         Name = "Type",
-    ///                                         Values = 
-    ///                                         {
-    ///                                             "Path",
-    ///                                         },
+    ///                                         "Path",
     ///                                     },
-    ///                                     new Tencentcloud.Teo.Inputs.RuleEngineRuleActionNormalActionParameterArgs
+    ///                                 },
+    ///                                 new Tencentcloud.Teo.Inputs.RuleEngineRuleActionNormalActionParameterArgs
+    ///                                 {
+    ///                                     Name = "Action",
+    ///                                     Values = new[]
     ///                                     {
-    ///                                         Name = "Action",
-    ///                                         Values = 
-    ///                                         {
-    ///                                             "addPrefix",
-    ///                                         },
+    ///                                         "addPrefix",
     ///                                     },
-    ///                                     new Tencentcloud.Teo.Inputs.RuleEngineRuleActionNormalActionParameterArgs
+    ///                                 },
+    ///                                 new Tencentcloud.Teo.Inputs.RuleEngineRuleActionNormalActionParameterArgs
+    ///                                 {
+    ///                                     Name = "Value",
+    ///                                     Values = new[]
     ///                                     {
-    ///                                         Name = "Value",
-    ///                                         Values = 
-    ///                                         {
-    ///                                             "/sss",
-    ///                                         },
+    ///                                         "/sss",
     ///                                     },
     ///                                 },
     ///                             },
     ///                         },
     ///                     },
-    ///                     Ors = 
+    ///                 },
+    ///                 Ors = new[]
+    ///                 {
+    ///                     new Tencentcloud.Teo.Inputs.RuleEngineRuleOrArgs
     ///                     {
-    ///                         new Tencentcloud.Teo.Inputs.RuleEngineRuleOrArgs
+    ///                         Ands = new[]
     ///                         {
-    ///                             Ands = 
+    ///                             new Tencentcloud.Teo.Inputs.RuleEngineRuleOrAndArgs
     ///                             {
-    ///                                 new Tencentcloud.Teo.Inputs.RuleEngineRuleOrAndArgs
+    ///                                 Operator = "equal",
+    ///                                 Target = "host",
+    ///                                 IgnoreCase = false,
+    ///                                 Values = new[]
     ///                                 {
-    ///                                     Operator = "equal",
-    ///                                     Target = "host",
-    ///                                     IgnoreCase = false,
-    ///                                     Values = 
-    ///                                     {
-    ///                                         "a.tf-teo-t.xyz",
-    ///                                     },
-    ///                                 },
-    ///                                 new Tencentcloud.Teo.Inputs.RuleEngineRuleOrAndArgs
-    ///                                 {
-    ///                                     Operator = "equal",
-    ///                                     Target = "extension",
-    ///                                     IgnoreCase = false,
-    ///                                     Values = 
-    ///                                     {
-    ///                                         "jpg",
-    ///                                     },
+    ///                                     "a.tf-teo-t.xyz",
     ///                                 },
     ///                             },
-    ///                         },
-    ///                         new Tencentcloud.Teo.Inputs.RuleEngineRuleOrArgs
-    ///                         {
-    ///                             Ands = 
+    ///                             new Tencentcloud.Teo.Inputs.RuleEngineRuleOrAndArgs
     ///                             {
-    ///                                 new Tencentcloud.Teo.Inputs.RuleEngineRuleOrAndArgs
+    ///                                 Operator = "equal",
+    ///                                 Target = "extension",
+    ///                                 IgnoreCase = false,
+    ///                                 Values = new[]
     ///                                 {
-    ///                                     Operator = "equal",
-    ///                                     Target = "filename",
-    ///                                     IgnoreCase = false,
-    ///                                     Values = 
-    ///                                     {
-    ///                                         "test.txt",
-    ///                                     },
+    ///                                     "jpg",
     ///                                 },
     ///                             },
     ///                         },
     ///                     },
-    ///                     SubRules = 
+    ///                     new Tencentcloud.Teo.Inputs.RuleEngineRuleOrArgs
     ///                     {
-    ///                         new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleArgs
+    ///                         Ands = new[]
     ///                         {
-    ///                             Tags = 
+    ///                             new Tencentcloud.Teo.Inputs.RuleEngineRuleOrAndArgs
     ///                             {
-    ///                                 "png",
-    ///                             },
-    ///                             Rules = 
-    ///                             {
-    ///                                 new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleArgs
+    ///                                 Operator = "equal",
+    ///                                 Target = "filename",
+    ///                                 IgnoreCase = false,
+    ///                                 Values = new[]
     ///                                 {
-    ///                                     Ors = 
+    ///                                     "test.txt",
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                     },
+    ///                 },
+    ///                 SubRules = new[]
+    ///                 {
+    ///                     new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleArgs
+    ///                     {
+    ///                         Tags = new[]
+    ///                         {
+    ///                             "png",
+    ///                         },
+    ///                         Rules = new[]
+    ///                         {
+    ///                             new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleArgs
+    ///                             {
+    ///                                 Ors = new[]
+    ///                                 {
+    ///                                     new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleOrArgs
     ///                                     {
-    ///                                         new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleOrArgs
+    ///                                         Ands = new[]
     ///                                         {
-    ///                                             Ands = 
+    ///                                             new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleOrAndArgs
     ///                                             {
-    ///                                                 new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleOrAndArgs
+    ///                                                 Operator = "notequal",
+    ///                                                 Target = "host",
+    ///                                                 IgnoreCase = false,
+    ///                                                 Values = new[]
     ///                                                 {
-    ///                                                     Operator = "notequal",
-    ///                                                     Target = "host",
-    ///                                                     IgnoreCase = false,
-    ///                                                     Values = 
-    ///                                                     {
-    ///                                                         "a.tf-teo-t.xyz",
-    ///                                                     },
-    ///                                                 },
-    ///                                                 new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleOrAndArgs
-    ///                                                 {
-    ///                                                     Operator = "equal",
-    ///                                                     Target = "extension",
-    ///                                                     IgnoreCase = false,
-    ///                                                     Values = 
-    ///                                                     {
-    ///                                                         "png",
-    ///                                                     },
+    ///                                                     "a.tf-teo-t.xyz",
     ///                                                 },
     ///                                             },
-    ///                                         },
-    ///                                         new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleOrArgs
-    ///                                         {
-    ///                                             Ands = 
+    ///                                             new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleOrAndArgs
     ///                                             {
-    ///                                                 new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleOrAndArgs
+    ///                                                 Operator = "equal",
+    ///                                                 Target = "extension",
+    ///                                                 IgnoreCase = false,
+    ///                                                 Values = new[]
     ///                                                 {
-    ///                                                     Operator = "notequal",
-    ///                                                     Target = "filename",
-    ///                                                     IgnoreCase = false,
-    ///                                                     Values = 
-    ///                                                     {
-    ///                                                         "test.txt",
-    ///                                                     },
+    ///                                                     "png",
     ///                                                 },
     ///                                             },
     ///                                         },
     ///                                     },
-    ///                                     Actions = 
+    ///                                     new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleOrArgs
     ///                                     {
-    ///                                         new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleActionArgs
+    ///                                         Ands = new[]
     ///                                         {
-    ///                                             NormalAction = new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleActionNormalActionArgs
+    ///                                             new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleOrAndArgs
     ///                                             {
-    ///                                                 Action = "UpstreamUrlRedirect",
-    ///                                                 Parameters = 
+    ///                                                 Operator = "notequal",
+    ///                                                 Target = "filename",
+    ///                                                 IgnoreCase = false,
+    ///                                                 Values = new[]
     ///                                                 {
-    ///                                                     new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs
+    ///                                                     "test.txt",
+    ///                                                 },
+    ///                                             },
+    ///                                         },
+    ///                                     },
+    ///                                 },
+    ///                                 Actions = new[]
+    ///                                 {
+    ///                                     new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleActionArgs
+    ///                                     {
+    ///                                         NormalAction = new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleActionNormalActionArgs
+    ///                                         {
+    ///                                             Action = "UpstreamUrlRedirect",
+    ///                                             Parameters = new[]
+    ///                                             {
+    ///                                                 new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs
+    ///                                                 {
+    ///                                                     Name = "Type",
+    ///                                                     Values = new[]
     ///                                                     {
-    ///                                                         Name = "Type",
-    ///                                                         Values = 
-    ///                                                         {
-    ///                                                             "Path",
-    ///                                                         },
+    ///                                                         "Path",
     ///                                                     },
-    ///                                                     new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs
+    ///                                                 },
+    ///                                                 new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs
+    ///                                                 {
+    ///                                                     Name = "Action",
+    ///                                                     Values = new[]
     ///                                                     {
-    ///                                                         Name = "Action",
-    ///                                                         Values = 
-    ///                                                         {
-    ///                                                             "addPrefix",
-    ///                                                         },
+    ///                                                         "addPrefix",
     ///                                                     },
-    ///                                                     new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs
+    ///                                                 },
+    ///                                                 new Tencentcloud.Teo.Inputs.RuleEngineRuleSubRuleRuleActionNormalActionParameterArgs
+    ///                                                 {
+    ///                                                     Name = "Value",
+    ///                                                     Values = new[]
     ///                                                     {
-    ///                                                         Name = "Value",
-    ///                                                         Values = 
-    ///                                                         {
-    ///                                                             "/www",
-    ///                                                         },
+    ///                                                         "/www",
     ///                                                     },
     ///                                                 },
     ///                                             },
@@ -214,22 +214,23 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///                     },
     ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// teo rule_engine can be imported using the id#rule_id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Teo/ruleEngine:RuleEngine rule_engine zone-297z8rf93cfw#rule-ajol584a
+    /// $ pulumi import tencentcloud:Teo/ruleEngine:RuleEngine rule_engine zone-297z8rf93cfw#rule-ajol584a
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/ruleEngine:RuleEngine")]
-    public partial class RuleEngine : Pulumi.CustomResource
+    public partial class RuleEngine : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Rule ID.
@@ -250,7 +251,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<ImmutableArray<Outputs.RuleEngineRule>> Rules { get; private set; } = null!;
 
         /// <summary>
-        /// Rule status. Values: `enable`: Enabled; `disable`: Disabled.
+        /// Rule status. Values:
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
@@ -312,7 +313,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
     }
 
-    public sealed class RuleEngineArgs : Pulumi.ResourceArgs
+    public sealed class RuleEngineArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The rule name (1 to 255 characters).
@@ -333,7 +334,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
 
         /// <summary>
-        /// Rule status. Values: `enable`: Enabled; `disable`: Disabled.
+        /// Rule status. Values:
         /// </summary>
         [Input("status", required: true)]
         public Input<string> Status { get; set; } = null!;
@@ -359,9 +360,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public RuleEngineArgs()
         {
         }
+        public static new RuleEngineArgs Empty => new RuleEngineArgs();
     }
 
-    public sealed class RuleEngineState : Pulumi.ResourceArgs
+    public sealed class RuleEngineState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Rule ID.
@@ -388,7 +390,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
 
         /// <summary>
-        /// Rule status. Values: `enable`: Enabled; `disable`: Disabled.
+        /// Rule status. Values:
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }
@@ -414,5 +416,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public RuleEngineState()
         {
         }
+        public static new RuleEngineState Empty => new RuleEngineState();
     }
 }

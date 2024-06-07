@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeEngineUsageInfo = pulumi.output(tencentcloud.Dlc.getDescribeEngineUsageInfo({
+ * const describeEngineUsageInfo = tencentcloud.Dlc.getDescribeEngineUsageInfo({
  *     dataEngineId: "DataEngine-g5ds87d8",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeEngineUsageInfo(args: GetDescribeEngineUsageInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeEngineUsageInfoResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dlc/getDescribeEngineUsageInfo:getDescribeEngineUsageInfo", {
         "dataEngineId": args.dataEngineId,
         "resultOutputFile": args.resultOutputFile,
@@ -63,9 +62,24 @@ export interface GetDescribeEngineUsageInfoResult {
      */
     readonly used: number;
 }
-
+/**
+ * Use this data source to query detailed information of dlc describeEngineUsageInfo
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeEngineUsageInfo = tencentcloud.Dlc.getDescribeEngineUsageInfo({
+ *     dataEngineId: "DataEngine-g5ds87d8",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeEngineUsageInfoOutput(args: GetDescribeEngineUsageInfoOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeEngineUsageInfoResult> {
-    return pulumi.output(args).apply(a => getDescribeEngineUsageInfo(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeEngineUsageInfo(a, opts))
 }
 
 /**

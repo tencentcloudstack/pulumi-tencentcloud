@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const migrateDbInstances = pulumi.output(tencentcloud.Dts.getMigrateDbInstances({
+ * const migrateDbInstances = tencentcloud.Dts.getMigrateDbInstances({
  *     accountMode: "self",
  *     databaseType: "mysql",
  *     instanceId: "cdb-ffulb2sg",
@@ -25,15 +27,13 @@ import * as utilities from "../utilities";
  *     tmpSecretId: "AKIDvBDyVmna9TadcS4YzfBZmkU5TbX12345",
  *     tmpSecretKey: "ZswjGWWHm24qMeiX6QUJsELDpC12345",
  *     tmpToken: "JOqqCPVuWdNZvlVDLxxx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getMigrateDbInstances(args: GetMigrateDbInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetMigrateDbInstancesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dts/getMigrateDbInstances:getMigrateDbInstances", {
         "accountMode": args.accountMode,
         "databaseType": args.databaseType,
@@ -133,9 +133,33 @@ export interface GetMigrateDbInstancesResult {
     readonly tmpSecretKey?: string;
     readonly tmpToken?: string;
 }
-
+/**
+ * Use this data source to query detailed information of dts migrateDbInstances
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const migrateDbInstances = tencentcloud.Dts.getMigrateDbInstances({
+ *     accountMode: "self",
+ *     databaseType: "mysql",
+ *     instanceId: "cdb-ffulb2sg",
+ *     instanceName: "cdb_test",
+ *     limit: 10,
+ *     migrateRole: "src",
+ *     offset: 10,
+ *     tmpSecretId: "AKIDvBDyVmna9TadcS4YzfBZmkU5TbX12345",
+ *     tmpSecretKey: "ZswjGWWHm24qMeiX6QUJsELDpC12345",
+ *     tmpToken: "JOqqCPVuWdNZvlVDLxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getMigrateDbInstancesOutput(args: GetMigrateDbInstancesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetMigrateDbInstancesResult> {
-    return pulumi.output(args).apply(a => getMigrateDbInstances(a, opts))
+    return pulumi.output(args).apply((a: any) => getMigrateDbInstances(a, opts))
 }
 
 /**

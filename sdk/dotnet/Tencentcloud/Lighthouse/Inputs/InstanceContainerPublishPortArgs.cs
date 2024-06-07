@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
 {
 
-    public sealed class InstanceContainerPublishPortArgs : Pulumi.ResourceArgs
+    public sealed class InstanceContainerPublishPortArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Container port.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
         public InstanceContainerPublishPortArgs()
         {
         }
+        public static new InstanceContainerPublishPortArgs Empty => new InstanceContainerPublishPortArgs();
     }
 }

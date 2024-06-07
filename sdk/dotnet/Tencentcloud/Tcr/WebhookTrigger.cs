@@ -14,100 +14,106 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// Provides a resource to create a tcr webhook trigger
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a tcr webhook trigger instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new()
     ///     {
-    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
+    ///         InstanceType = "basic",
+    ///         DeleteBucket = true,
+    ///         Tags = 
     ///         {
-    ///             InstanceType = "basic",
-    ///             DeleteBucket = true,
-    ///             Tags = 
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///         IsPublic = true,
+    ///         IsAutoScan = true,
+    ///         IsPreventVul = true,
+    ///         Severity = "medium",
+    ///         CveWhitelistItems = new[]
+    ///         {
+    ///             new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
     ///             {
-    ///                 { "test", "test" },
+    ///                 CveId = "cve-xxxxx",
     ///             },
-    ///         });
-    ///         var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new Tencentcloud.Tcr.NamespaceArgs
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleNamespaces = Tencentcloud.Tcr.GetNamespaces.Invoke(new()
+    ///     {
+    ///         InstanceId = exampleNamespace.InstanceId,
+    ///     });
+    /// 
+    ///     var nsId = exampleNamespaces.Apply(getNamespacesResult =&gt; getNamespacesResult.NamespaceLists[0]?.Id);
+    /// 
+    ///     var exampleWebhookTrigger = new Tencentcloud.Tcr.WebhookTrigger("exampleWebhookTrigger", new()
+    ///     {
+    ///         RegistryId = exampleInstance.Id,
+    ///         Namespace = exampleNamespace.Name,
+    ///         Trigger = new Tencentcloud.Tcr.Inputs.WebhookTriggerTriggerArgs
     ///         {
-    ///             InstanceId = exampleInstance.Id,
-    ///             IsPublic = true,
-    ///             IsAutoScan = true,
-    ///             IsPreventVul = true,
-    ///             Severity = "medium",
-    ///             CveWhitelistItems = 
+    ///             Name = "trigger-example",
+    ///             Targets = new[]
     ///             {
-    ///                 new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+    ///                 new Tencentcloud.Tcr.Inputs.WebhookTriggerTriggerTargetArgs
     ///                 {
-    ///                     CveId = "cve-xxxxx",
-    ///                 },
-    ///             },
-    ///         });
-    ///         var exampleNamespaces = Tencentcloud.Tcr.GetNamespaces.Invoke(new Tencentcloud.Tcr.GetNamespacesInvokeArgs
-    ///         {
-    ///             InstanceId = exampleNamespace.InstanceId,
-    ///         });
-    ///         var nsId = exampleNamespaces.Apply(exampleNamespaces =&gt; exampleNamespaces.NamespaceLists?[0]?.Id);
-    ///         var exampleWebhookTrigger = new Tencentcloud.Tcr.WebhookTrigger("exampleWebhookTrigger", new Tencentcloud.Tcr.WebhookTriggerArgs
-    ///         {
-    ///             RegistryId = exampleInstance.Id,
-    ///             Namespace = exampleNamespace.Name,
-    ///             Trigger = new Tencentcloud.Tcr.Inputs.WebhookTriggerTriggerArgs
-    ///             {
-    ///                 Name = "trigger-example",
-    ///                 Targets = 
-    ///                 {
-    ///                     new Tencentcloud.Tcr.Inputs.WebhookTriggerTriggerTargetArgs
+    ///                     Address = "http://example.org/post",
+    ///                     Headers = new[]
     ///                     {
-    ///                         Address = "http://example.org/post",
-    ///                         Headers = 
+    ///                         new Tencentcloud.Tcr.Inputs.WebhookTriggerTriggerTargetHeaderArgs
     ///                         {
-    ///                             new Tencentcloud.Tcr.Inputs.WebhookTriggerTriggerTargetHeaderArgs
+    ///                             Key = "X-Custom-Header",
+    ///                             Values = new[]
     ///                             {
-    ///                                 Key = "X-Custom-Header",
-    ///                                 Values = 
-    ///                                 {
-    ///                                     "a",
-    ///                                 },
+    ///                                 "a",
     ///                             },
     ///                         },
     ///                     },
     ///                 },
-    ///                 EventTypes = 
-    ///                 {
-    ///                     "pushImage",
-    ///                 },
-    ///                 Condition = ".*",
-    ///                 Enabled = true,
-    ///                 Description = "example for trigger description",
-    ///                 NamespaceId = nsId,
     ///             },
-    ///             Tags = 
+    ///             EventTypes = new[]
     ///             {
-    ///                 { "createdBy", "terraform" },
+    ///                 "pushImage",
     ///             },
-    ///         });
-    ///     }
+    ///             Condition = ".*",
+    ///             Enabled = true,
+    ///             Description = "example for trigger description",
+    ///             NamespaceId = nsId,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcr webhook_trigger can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger example webhook_trigger_id
+    /// $ pulumi import tencentcloud:Tcr/webhookTrigger:WebhookTrigger example webhook_trigger_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/webhookTrigger:WebhookTrigger")]
-    public partial class WebhookTrigger : Pulumi.CustomResource
+    public partial class WebhookTrigger : global::Pulumi.CustomResource
     {
         /// <summary>
         /// namespace name.
@@ -178,7 +184,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         }
     }
 
-    public sealed class WebhookTriggerArgs : Pulumi.ResourceArgs
+    public sealed class WebhookTriggerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// namespace name.
@@ -213,9 +219,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public WebhookTriggerArgs()
         {
         }
+        public static new WebhookTriggerArgs Empty => new WebhookTriggerArgs();
     }
 
-    public sealed class WebhookTriggerState : Pulumi.ResourceArgs
+    public sealed class WebhookTriggerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// namespace name.
@@ -250,5 +257,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public WebhookTriggerState()
         {
         }
+        public static new WebhookTriggerState Empty => new WebhookTriggerState();
     }
 }

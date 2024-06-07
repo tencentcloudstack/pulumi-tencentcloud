@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class TranscodeTemplateEnhanceConfigVideoEnhanceArgs : Pulumi.ResourceArgs
+    public sealed class TranscodeTemplateEnhanceConfigVideoEnhanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// De-artifact (glitch) configuration.Note: This field may return null, indicating that no valid value can be obtained.
@@ -82,5 +82,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public TranscodeTemplateEnhanceConfigVideoEnhanceArgs()
         {
         }
+        public static new TranscodeTemplateEnhanceConfigVideoEnhanceArgs Empty => new TranscodeTemplateEnhanceConfigVideoEnhanceArgs();
     }
 }

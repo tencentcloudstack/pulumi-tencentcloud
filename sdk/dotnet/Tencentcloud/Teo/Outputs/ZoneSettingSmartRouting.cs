@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class ZoneSettingSmartRouting
     {
         /// <summary>
-        /// Whether to enable HTTP2 origin-pull.- `on`: Enable.- `off`: Disable.
+        /// Whether to enable HTTP2 origin-pull.
         /// </summary>
         public readonly string Switch;
 

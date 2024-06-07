@@ -11,8 +11,11 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
 {
 
-    public sealed class ApplicationServiceServiceGetArgs : Pulumi.ResourceArgs
+    public sealed class ApplicationServiceServiceGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// ip address of application service.
+        /// </summary>
         [Input("ip")]
         public Input<string>? Ip { get; set; }
 
@@ -55,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
         public ApplicationServiceServiceGetArgs()
         {
         }
+        public static new ApplicationServiceServiceGetArgs Empty => new ApplicationServiceServiceGetArgs();
     }
 }

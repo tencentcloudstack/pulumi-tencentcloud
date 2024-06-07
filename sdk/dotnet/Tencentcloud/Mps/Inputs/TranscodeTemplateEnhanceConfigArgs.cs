@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class TranscodeTemplateEnhanceConfigArgs : Pulumi.ResourceArgs
+    public sealed class TranscodeTemplateEnhanceConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Video Enhancement Configuration.Note: This field may return null, indicating that no valid value can be obtained.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public TranscodeTemplateEnhanceConfigArgs()
         {
         }
+        public static new TranscodeTemplateEnhanceConfigArgs Empty => new TranscodeTemplateEnhanceConfigArgs();
     }
 }

@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const replaceCertificate = new tencentcloud.Ssl.ReplaceCertificateOperation("replace_certificate", {
+ * const replaceCertificate = new tencentcloud.ssl.ReplaceCertificateOperation("replaceCertificate", {
  *     certificateId: "8L6JsWq2",
  *     csrType: "online",
  *     validType: "DNS_AUTO",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ssl replace_certificate can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ssl/replaceCertificateOperation:ReplaceCertificateOperation replace_certificate replace_certificate_id
+ * $ pulumi import tencentcloud:Ssl/replaceCertificateOperation:ReplaceCertificateOperation replace_certificate replace_certificate_id
  * ```
  */
 export class ReplaceCertificateOperation extends pulumi.CustomResource {

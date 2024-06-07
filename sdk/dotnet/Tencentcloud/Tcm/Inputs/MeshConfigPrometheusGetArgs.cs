@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
 {
 
-    public sealed class MeshConfigPrometheusGetArgs : Pulumi.ResourceArgs
+    public sealed class MeshConfigPrometheusGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Custom prometheus.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         public MeshConfigPrometheusGetArgs()
         {
         }
+        public static new MeshConfigPrometheusGetArgs Empty => new MeshConfigPrometheusGetArgs();
     }
 }

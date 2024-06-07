@@ -2,19 +2,22 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a tke encryptionProtection
  *
  * ## Example Usage
+ *
  * ### Enable tke encryption protection
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const exampleRegion = config.get("exampleRegion") || "ap-guangzhou";
@@ -25,7 +28,7 @@ import * as utilities from "../utilities";
  *     availabilityZone: availabilityZone,
  * });
  * const exampleCluster = new tencentcloud.kubernetes.Cluster("exampleCluster", {
- *     vpcId: vpc.then(vpc => vpc.instanceLists?[0]?.vpcId),
+ *     vpcId: vpc.then(vpc => vpc.instanceLists?.[0]?.vpcId),
  *     clusterCidr: exampleClusterCidr,
  *     clusterMaxPodNum: 32,
  *     clusterName: "tf_example_cluster",
@@ -47,6 +50,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class EncryptionProtection extends pulumi.CustomResource {
     /**

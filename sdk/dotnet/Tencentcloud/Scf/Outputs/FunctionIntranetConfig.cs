@@ -14,6 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Outputs
     [OutputType]
     public sealed class FunctionIntranetConfig
     {
+        /// <summary>
+        /// If fixed intranet IP is enabled, this field returns the IP list used.
+        /// </summary>
         public readonly ImmutableArray<string> IpAddresses;
         /// <summary>
         /// Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.

@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const dbDiagReportTask = new tencentcloud.Dbbrain.DbDiagReportTask("db_diag_report_task", {
+ * const dbDiagReportTask = new tencentcloud.dbbrain.DbDiagReportTask("dbDiagReportTask", {
  *     endTime: "%s",
  *     instanceId: "%s",
  *     product: "mysql",
@@ -21,6 +22,7 @@ import * as utilities from "../utilities";
  *     startTime: "%s",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class DbDiagReportTask extends pulumi.CustomResource {
     /**
@@ -57,7 +59,7 @@ export class DbDiagReportTask extends pulumi.CustomResource {
     /**
      * An array of contact IDs to receive emails from.
      */
-    public readonly contactPeoples!: pulumi.Output<number[] | undefined>;
+    public readonly contactPeople!: pulumi.Output<number[] | undefined>;
     /**
      * End time, such as 2020-11-09T14:00:00+08:00.
      */
@@ -93,7 +95,7 @@ export class DbDiagReportTask extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as DbDiagReportTaskState | undefined;
             resourceInputs["contactGroups"] = state ? state.contactGroups : undefined;
-            resourceInputs["contactPeoples"] = state ? state.contactPeoples : undefined;
+            resourceInputs["contactPeople"] = state ? state.contactPeople : undefined;
             resourceInputs["endTime"] = state ? state.endTime : undefined;
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
             resourceInputs["product"] = state ? state.product : undefined;
@@ -117,7 +119,7 @@ export class DbDiagReportTask extends pulumi.CustomResource {
                 throw new Error("Missing required property 'startTime'");
             }
             resourceInputs["contactGroups"] = args ? args.contactGroups : undefined;
-            resourceInputs["contactPeoples"] = args ? args.contactPeoples : undefined;
+            resourceInputs["contactPeople"] = args ? args.contactPeople : undefined;
             resourceInputs["endTime"] = args ? args.endTime : undefined;
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
             resourceInputs["product"] = args ? args.product : undefined;
@@ -140,7 +142,7 @@ export interface DbDiagReportTaskState {
     /**
      * An array of contact IDs to receive emails from.
      */
-    contactPeoples?: pulumi.Input<pulumi.Input<number>[]>;
+    contactPeople?: pulumi.Input<pulumi.Input<number>[]>;
     /**
      * End time, such as 2020-11-09T14:00:00+08:00.
      */
@@ -174,7 +176,7 @@ export interface DbDiagReportTaskArgs {
     /**
      * An array of contact IDs to receive emails from.
      */
-    contactPeoples?: pulumi.Input<pulumi.Input<number>[]>;
+    contactPeople?: pulumi.Input<pulumi.Input<number>[]>;
     /**
      * End time, such as 2020-11-09T14:00:00+08:00.
      */

@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sts
         /// <summary>
         /// Use this data source to query detailed information of sts callerIdentity
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var callerIdentity = Output.Create(Tencentcloud.Sts.GetCallerIdentity.InvokeAsync());
-        ///     }
+        ///     var callerIdentity = Tencentcloud.Sts.GetCallerIdentity.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCallerIdentityResult> InvokeAsync(GetCallerIdentityArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCallerIdentityResult>("tencentcloud:Sts/getCallerIdentity:getCallerIdentity", args ?? new GetCallerIdentityArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCallerIdentityResult>("tencentcloud:Sts/getCallerIdentity:getCallerIdentity", args ?? new GetCallerIdentityArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of sts callerIdentity
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var callerIdentity = Output.Create(Tencentcloud.Sts.GetCallerIdentity.InvokeAsync());
-        ///     }
+        ///     var callerIdentity = Tencentcloud.Sts.GetCallerIdentity.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCallerIdentityResult> Invoke(GetCallerIdentityInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCallerIdentityResult>("tencentcloud:Sts/getCallerIdentity:getCallerIdentity", args ?? new GetCallerIdentityInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCallerIdentityResult>("tencentcloud:Sts/getCallerIdentity:getCallerIdentity", args ?? new GetCallerIdentityInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCallerIdentityArgs : Pulumi.InvokeArgs
+    public sealed class GetCallerIdentityArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sts
         public GetCallerIdentityArgs()
         {
         }
+        public static new GetCallerIdentityArgs Empty => new GetCallerIdentityArgs();
     }
 
-    public sealed class GetCallerIdentityInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCallerIdentityInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sts
         public GetCallerIdentityInvokeArgs()
         {
         }
+        public static new GetCallerIdentityInvokeArgs Empty => new GetCallerIdentityInvokeArgs();
     }
 
 

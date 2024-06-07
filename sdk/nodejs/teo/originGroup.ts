@@ -2,63 +2,52 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a teo originGroup
  *
+ * > **NOTE:** Please note that `tencentcloud.Teo.OriginGroup` had to undergo incompatible changes in version v1.81.96.
+ *
  * ## Example Usage
+ *
  * ### Self origin group
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const originGroup = new tencentcloud.Teo.OriginGroup("origin_group", {
- *     configurationType: "weight",
- *     originGroupName: "test-group",
- *     originRecords: [{
- *         areas: [],
- *         port: 8080,
- *         private: false,
- *         record: "150.109.8.1",
+ * const basic = new tencentcloud.teo.OriginGroup("basic", {
+ *     records: [{
+ *         "private": true,
+ *         privateParameters: [{
+ *             name: "SecretAccessKey",
+ *             value: "test",
+ *         }],
+ *         record: "tf-teo.xyz",
+ *         type: "IP_DOMAIN",
  *         weight: 100,
  *     }],
- *     originType: "self",
- *     zoneId: "zone-297z8rf93cfw",
+ *     type: "GENERAL",
+ *     zoneId: "zone-197z8rf93cfw",
  * });
  * ```
- * ### Cos origin group
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const originGroup = new tencentcloud.Teo.OriginGroup("origin_group", {
- *     configurationType: "weight",
- *     originGroupName: "test",
- *     originRecords: [{
- *         areas: [],
- *         port: 0,
- *         private: true,
- *         record: "test-ruichaolin-1310708577.cos.ap-nanjing.myqcloud.com",
- *         weight: 100,
- *     }],
- *     originType: "cos",
- *     zoneId: "zone-2o3h21ed8bpu",
- * });
- * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
- * teo origin_group can be imported using the zone_id#originGroup_id, e.g. `
+ * teo origin_group can be imported using the zone_id#originGroup_id, e.g.
+ *
+ * `
  *
  * ```sh
- *  $ pulumi import tencentcloud:Teo/originGroup:OriginGroup origin_group zone-297z8rf93cfw#origin-4f8a30b2-3720-11ed-b66b-525400dceb86
+ * $ pulumi import tencentcloud:Teo/originGroup:OriginGroup origin_group zone-297z8rf93cfw#origin-4f8a30b2-3720-11ed-b66b-525400dceb86
  * ```
  *
- *  `
+ * `
  */
 export class OriginGroup extends pulumi.CustomResource {
     /**
@@ -89,27 +78,35 @@ export class OriginGroup extends pulumi.CustomResource {
     }
 
     /**
-     * Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
+     * Origin site group creation time.
      */
-    public readonly configurationType!: pulumi.Output<string>;
+    public /*out*/ readonly createTime!: pulumi.Output<string>;
+    /**
+     * Back-to-origin Host Header, it only takes effect when type = HTTP is passed in. The rule engine modifies the Host Header configuration priority to be higher than the Host Header of the origin site group.
+     */
+    public readonly hostHeader!: pulumi.Output<string | undefined>;
+    /**
+     * OriginGroup Name.
+     */
+    public readonly name!: pulumi.Output<string>;
     /**
      * OriginGroup ID.
      */
     public /*out*/ readonly originGroupId!: pulumi.Output<string>;
     /**
-     * OriginGroup Name.
-     */
-    public readonly originGroupName!: pulumi.Output<string>;
-    /**
      * Origin site records.
      */
-    public readonly originRecords!: pulumi.Output<outputs.Teo.OriginGroupOriginRecord[]>;
+    public readonly records!: pulumi.Output<outputs.Teo.OriginGroupRecord[]>;
     /**
-     * Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
+     * List of referenced instances of the origin site group.
      */
-    public readonly originType!: pulumi.Output<string>;
+    public /*out*/ readonly references!: pulumi.Output<outputs.Teo.OriginGroupReference[]>;
     /**
-     * Last modification date.
+     * Type of the origin site. Valid values:
+     */
+    public readonly type!: pulumi.Output<string>;
+    /**
+     * Origin site group update time.
      */
     public /*out*/ readonly updateTime!: pulumi.Output<string>;
     /**
@@ -130,36 +127,34 @@ export class OriginGroup extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as OriginGroupState | undefined;
-            resourceInputs["configurationType"] = state ? state.configurationType : undefined;
+            resourceInputs["createTime"] = state ? state.createTime : undefined;
+            resourceInputs["hostHeader"] = state ? state.hostHeader : undefined;
+            resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["originGroupId"] = state ? state.originGroupId : undefined;
-            resourceInputs["originGroupName"] = state ? state.originGroupName : undefined;
-            resourceInputs["originRecords"] = state ? state.originRecords : undefined;
-            resourceInputs["originType"] = state ? state.originType : undefined;
+            resourceInputs["records"] = state ? state.records : undefined;
+            resourceInputs["references"] = state ? state.references : undefined;
+            resourceInputs["type"] = state ? state.type : undefined;
             resourceInputs["updateTime"] = state ? state.updateTime : undefined;
             resourceInputs["zoneId"] = state ? state.zoneId : undefined;
         } else {
             const args = argsOrState as OriginGroupArgs | undefined;
-            if ((!args || args.configurationType === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'configurationType'");
+            if ((!args || args.records === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'records'");
             }
-            if ((!args || args.originGroupName === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'originGroupName'");
-            }
-            if ((!args || args.originRecords === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'originRecords'");
-            }
-            if ((!args || args.originType === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'originType'");
+            if ((!args || args.type === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'type'");
             }
             if ((!args || args.zoneId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'zoneId'");
             }
-            resourceInputs["configurationType"] = args ? args.configurationType : undefined;
-            resourceInputs["originGroupName"] = args ? args.originGroupName : undefined;
-            resourceInputs["originRecords"] = args ? args.originRecords : undefined;
-            resourceInputs["originType"] = args ? args.originType : undefined;
+            resourceInputs["hostHeader"] = args ? args.hostHeader : undefined;
+            resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["records"] = args ? args.records : undefined;
+            resourceInputs["type"] = args ? args.type : undefined;
             resourceInputs["zoneId"] = args ? args.zoneId : undefined;
+            resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["originGroupId"] = undefined /*out*/;
+            resourceInputs["references"] = undefined /*out*/;
             resourceInputs["updateTime"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -172,27 +167,35 @@ export class OriginGroup extends pulumi.CustomResource {
  */
 export interface OriginGroupState {
     /**
-     * Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
+     * Origin site group creation time.
      */
-    configurationType?: pulumi.Input<string>;
+    createTime?: pulumi.Input<string>;
+    /**
+     * Back-to-origin Host Header, it only takes effect when type = HTTP is passed in. The rule engine modifies the Host Header configuration priority to be higher than the Host Header of the origin site group.
+     */
+    hostHeader?: pulumi.Input<string>;
+    /**
+     * OriginGroup Name.
+     */
+    name?: pulumi.Input<string>;
     /**
      * OriginGroup ID.
      */
     originGroupId?: pulumi.Input<string>;
     /**
-     * OriginGroup Name.
-     */
-    originGroupName?: pulumi.Input<string>;
-    /**
      * Origin site records.
      */
-    originRecords?: pulumi.Input<pulumi.Input<inputs.Teo.OriginGroupOriginRecord>[]>;
+    records?: pulumi.Input<pulumi.Input<inputs.Teo.OriginGroupRecord>[]>;
     /**
-     * Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
+     * List of referenced instances of the origin site group.
      */
-    originType?: pulumi.Input<string>;
+    references?: pulumi.Input<pulumi.Input<inputs.Teo.OriginGroupReference>[]>;
     /**
-     * Last modification date.
+     * Type of the origin site. Valid values:
+     */
+    type?: pulumi.Input<string>;
+    /**
+     * Origin site group update time.
      */
     updateTime?: pulumi.Input<string>;
     /**
@@ -206,21 +209,21 @@ export interface OriginGroupState {
  */
 export interface OriginGroupArgs {
     /**
-     * Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
+     * Back-to-origin Host Header, it only takes effect when type = HTTP is passed in. The rule engine modifies the Host Header configuration priority to be higher than the Host Header of the origin site group.
      */
-    configurationType: pulumi.Input<string>;
+    hostHeader?: pulumi.Input<string>;
     /**
      * OriginGroup Name.
      */
-    originGroupName: pulumi.Input<string>;
+    name?: pulumi.Input<string>;
     /**
      * Origin site records.
      */
-    originRecords: pulumi.Input<pulumi.Input<inputs.Teo.OriginGroupOriginRecord>[]>;
+    records: pulumi.Input<pulumi.Input<inputs.Teo.OriginGroupRecord>[]>;
     /**
-     * Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
+     * Type of the origin site. Valid values:
      */
-    originType: pulumi.Input<string>;
+    type: pulumi.Input<string>;
     /**
      * Site ID.
      */

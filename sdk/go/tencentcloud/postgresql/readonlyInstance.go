@@ -7,68 +7,134 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this resource to create postgresql readonly instance.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		newRoGroup, err := Postgresql.NewReadonlyGroup(ctx, "newRoGroup", &Postgresql.ReadonlyGroupArgs{
-// 			MasterDbInstanceId:       pulumi.Any(local.Pgsql_id),
-// 			ProjectId:                pulumi.Int(0),
-// 			VpcId:                    pulumi.Any(local.Vpc_id),
-// 			SubnetId:                 pulumi.Any(local.Subnet_id),
-// 			ReplayLagEliminate:       pulumi.Int(1),
-// 			ReplayLatencyEliminate:   pulumi.Int(1),
-// 			MaxReplayLag:             pulumi.Int(100),
-// 			MaxReplayLatency:         pulumi.Int(512),
-// 			MinDelayEliminateReserve: pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Postgresql.NewReadonlyInstance(ctx, "foo", &Postgresql.ReadonlyInstanceArgs{
-// 			AutoRenewFlag:      pulumi.Int(0),
-// 			DbVersion:          pulumi.String("10.4"),
-// 			InstanceChargeType: pulumi.String("POSTPAID_BY_HOUR"),
-// 			MasterDbInstanceId: pulumi.String("postgres-j4pm65id"),
-// 			Memory:             pulumi.Int(4),
-// 			NeedSupportIpv6:    pulumi.Int(0),
-// 			ProjectId:          pulumi.Int(0),
-// 			SecurityGroupsIds: pulumi.StringArray{
-// 				pulumi.String("sg-fefj5n6r"),
-// 			},
-// 			Storage:         pulumi.Int(250),
-// 			SubnetId:        pulumi.String("subnet-enm92y0m"),
-// 			VpcId:           pulumi.String("vpc-86v957zb"),
-// 			ReadOnlyGroupId: newRoGroup.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			// create vpc
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create vpc subnet
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.20.0/28"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create postgresql
+//			exampleInstance, err := Postgresql.NewInstance(ctx, "exampleInstance", &Postgresql.InstanceArgs{
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				EngineVersion:    pulumi.String("10.4"),
+//				RootUser:         pulumi.String("root123"),
+//				RootPassword:     pulumi.String("Root123$"),
+//				Charset:          pulumi.String("UTF8"),
+//				ProjectId:        pulumi.Int(0),
+//				Memory:           pulumi.Int(2),
+//				Cpu:              pulumi.Int(1),
+//				Storage:          pulumi.Int(10),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("tf"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleReadonlyGroup, err := Postgresql.NewReadonlyGroup(ctx, "exampleReadonlyGroup", &Postgresql.ReadonlyGroupArgs{
+//				MasterDbInstanceId:       exampleInstance.ID(),
+//				ProjectId:                pulumi.Int(0),
+//				VpcId:                    vpc.ID(),
+//				SubnetId:                 subnet.ID(),
+//				ReplayLagEliminate:       pulumi.Int(1),
+//				ReplayLatencyEliminate:   pulumi.Int(1),
+//				MaxReplayLag:             pulumi.Int(100),
+//				MaxReplayLatency:         pulumi.Int(512),
+//				MinDelayEliminateReserve: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create security group
+//			exampleGroup, err := Security.NewGroup(ctx, "exampleGroup", &Security.GroupArgs{
+//				Description: pulumi.String("sg desc."),
+//				ProjectId:   pulumi.Int(0),
+//				Tags: pulumi.Map{
+//					"example": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Postgresql.NewReadonlyInstance(ctx, "exampleReadonlyInstance", &Postgresql.ReadonlyInstanceArgs{
+//				ReadOnlyGroupId:    exampleReadonlyGroup.ID(),
+//				MasterDbInstanceId: exampleInstance.ID(),
+//				Zone:               pulumi.String(availabilityZone),
+//				AutoRenewFlag:      pulumi.Int(0),
+//				DbVersion:          pulumi.String("10.4"),
+//				InstanceChargeType: pulumi.String("POSTPAID_BY_HOUR"),
+//				Memory:             pulumi.Int(4),
+//				Cpu:                pulumi.Int(2),
+//				Storage:            pulumi.Int(250),
+//				VpcId:              vpc.ID(),
+//				SubnetId:           subnet.ID(),
+//				NeedSupportIpv6:    pulumi.Int(0),
+//				ProjectId:          pulumi.Int(0),
+//				SecurityGroupsIds: pulumi.StringArray{
+//					exampleGroup.ID(),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // postgresql readonly instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance foo instance_id
+// $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance example instance_id
 // ```
 type ReadonlyInstance struct {
 	pulumi.CustomResourceState
@@ -77,6 +143,8 @@ type ReadonlyInstance struct {
 	AutoRenewFlag pulumi.IntPtrOutput `pulumi:"autoRenewFlag"`
 	// Whether to use voucher, `1` for enabled.
 	AutoVoucher pulumi.IntPtrOutput `pulumi:"autoVoucher"`
+	// Number of CPU cores. Allowed value must be equal `cpu` that data source `Postgresql.getSpecinfos` provides.
+	Cpu pulumi.IntOutput `pulumi:"cpu"`
 	// Create time of the postgresql instance.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// PostgreSQL kernel version, which must be the same as that of the primary instance.
@@ -151,7 +219,7 @@ func NewReadonlyInstance(ctx *pulumi.Context,
 	if args.Zone == nil {
 		return nil, errors.New("invalid value for required argument 'Zone'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ReadonlyInstance
 	err := ctx.RegisterResource("tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -178,6 +246,8 @@ type readonlyInstanceState struct {
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// Whether to use voucher, `1` for enabled.
 	AutoVoucher *int `pulumi:"autoVoucher"`
+	// Number of CPU cores. Allowed value must be equal `cpu` that data source `Postgresql.getSpecinfos` provides.
+	Cpu *int `pulumi:"cpu"`
 	// Create time of the postgresql instance.
 	CreateTime *string `pulumi:"createTime"`
 	// PostgreSQL kernel version, which must be the same as that of the primary instance.
@@ -223,6 +293,8 @@ type ReadonlyInstanceState struct {
 	AutoRenewFlag pulumi.IntPtrInput
 	// Whether to use voucher, `1` for enabled.
 	AutoVoucher pulumi.IntPtrInput
+	// Number of CPU cores. Allowed value must be equal `cpu` that data source `Postgresql.getSpecinfos` provides.
+	Cpu pulumi.IntPtrInput
 	// Create time of the postgresql instance.
 	CreateTime pulumi.StringPtrInput
 	// PostgreSQL kernel version, which must be the same as that of the primary instance.
@@ -272,6 +344,8 @@ type readonlyInstanceArgs struct {
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// Whether to use voucher, `1` for enabled.
 	AutoVoucher *int `pulumi:"autoVoucher"`
+	// Number of CPU cores. Allowed value must be equal `cpu` that data source `Postgresql.getSpecinfos` provides.
+	Cpu *int `pulumi:"cpu"`
 	// PostgreSQL kernel version, which must be the same as that of the primary instance.
 	DbVersion string `pulumi:"dbVersion"`
 	// instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
@@ -310,6 +384,8 @@ type ReadonlyInstanceArgs struct {
 	AutoRenewFlag pulumi.IntPtrInput
 	// Whether to use voucher, `1` for enabled.
 	AutoVoucher pulumi.IntPtrInput
+	// Number of CPU cores. Allowed value must be equal `cpu` that data source `Postgresql.getSpecinfos` provides.
+	Cpu pulumi.IntPtrInput
 	// PostgreSQL kernel version, which must be the same as that of the primary instance.
 	DbVersion pulumi.StringInput
 	// instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
@@ -368,7 +444,7 @@ func (i *ReadonlyInstance) ToReadonlyInstanceOutputWithContext(ctx context.Conte
 // ReadonlyInstanceArrayInput is an input type that accepts ReadonlyInstanceArray and ReadonlyInstanceArrayOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceArrayInput` via:
 //
-//          ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
+//	ReadonlyInstanceArray{ ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceArrayInput interface {
 	pulumi.Input
 
@@ -393,7 +469,7 @@ func (i ReadonlyInstanceArray) ToReadonlyInstanceArrayOutputWithContext(ctx cont
 // ReadonlyInstanceMapInput is an input type that accepts ReadonlyInstanceMap and ReadonlyInstanceMapOutput values.
 // You can construct a concrete instance of `ReadonlyInstanceMapInput` via:
 //
-//          ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
+//	ReadonlyInstanceMap{ "key": ReadonlyInstanceArgs{...} }
 type ReadonlyInstanceMapInput interface {
 	pulumi.Input
 
@@ -437,6 +513,11 @@ func (o ReadonlyInstanceOutput) AutoRenewFlag() pulumi.IntPtrOutput {
 // Whether to use voucher, `1` for enabled.
 func (o ReadonlyInstanceOutput) AutoVoucher() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntPtrOutput { return v.AutoVoucher }).(pulumi.IntPtrOutput)
+}
+
+// Number of CPU cores. Allowed value must be equal `cpu` that data source `Postgresql.getSpecinfos` provides.
+func (o ReadonlyInstanceOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntOutput { return v.Cpu }).(pulumi.IntOutput)
 }
 
 // Create time of the postgresql instance.

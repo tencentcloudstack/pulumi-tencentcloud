@@ -8,16 +8,17 @@ import * as utilities from "../utilities";
  * Provides a resource to create a mysql rollbackStop
  *
  * ## Example Usage
+ *
  * ### Revoke the ongoing rollback task of the instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Mysql.RollbackStop("example", {
- *     instanceId: "cdb-fitq5t9h",
- * });
+ * const example = new tencentcloud.mysql.RollbackStop("example", {instanceId: "cdb-fitq5t9h"});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RollbackStop extends pulumi.CustomResource {
     /**

@@ -7,225 +7,236 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mps enableScheduleConfig
 //
 // ## Example Usage
+//
 // ### Enable the mps schedule
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		object, err := Cos.GetBucketObject(ctx, &cos.GetBucketObjectArgs{
-// 			Bucket: fmt.Sprintf("%v%v", "keep-bucket-", local.App_id),
-// 			Key:    "/mps-test/test.mov",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		output, err := Cos.NewBucket(ctx, "output", &Cos.BucketArgs{
-// 			Bucket:     pulumi.String(fmt.Sprintf("%v%v", "tf-bucket-mps-schedule-config-output1-", local.App_id)),
-// 			ForceClean: pulumi.Bool(true),
-// 			Acl:        pulumi.String("public-read"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		example, err := Mps.NewSchedule(ctx, "example", &Mps.ScheduleArgs{
-// 			ScheduleName: pulumi.String("tf_test_mps_schedule_config"),
-// 			Trigger: &mps.ScheduleTriggerArgs{
-// 				Type: pulumi.String("CosFileUpload"),
-// 				CosFileUploadTrigger: &mps.ScheduleTriggerCosFileUploadTriggerArgs{
-// 					Bucket: pulumi.String(object.Bucket),
-// 					Region: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 					Dir:    pulumi.String("/upload/"),
-// 					Formats: pulumi.StringArray{
-// 						pulumi.String("flv"),
-// 						pulumi.String("mov"),
-// 					},
-// 				},
-// 			},
-// 			Activities: mps.ScheduleActivityArray{
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("input"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(1),
-// 						pulumi.Int(2),
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(3),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(6),
-// 						pulumi.Int(7),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(4),
-// 						pulumi.Int(5),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(10),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(10),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(10),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(8),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(9),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("action-trans"),
-// 					ReardriveIndices: pulumi.IntArray{
-// 						pulumi.Int(10),
-// 					},
-// 					ActivityPara: &mps.ScheduleActivityActivityParaArgs{
-// 						TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
-// 							Definition: pulumi.Int(10),
-// 						},
-// 					},
-// 				},
-// 				&mps.ScheduleActivityArgs{
-// 					ActivityType: pulumi.String("output"),
-// 				},
-// 			},
-// 			OutputStorage: &mps.ScheduleOutputStorageArgs{
-// 				Type: pulumi.String("COS"),
-// 				CosOutputStorage: &mps.ScheduleOutputStorageCosOutputStorageArgs{
-// 					Bucket: output.Bucket,
-// 					Region: pulumi.String(fmt.Sprintf("%v%v", "%", "s")),
-// 				},
-// 			},
-// 			OutputDir: pulumi.String("output/"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mps.NewEnableScheduleConfig(ctx, "config", &Mps.EnableScheduleConfigArgs{
-// 			ScheduleId: example.ID(),
-// 			Enabled:    pulumi.Bool(true),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			object, err := Cos.GetBucketObject(ctx, &cos.GetBucketObjectArgs{
+//				Bucket: fmt.Sprintf("keep-bucket-%v", local.App_id),
+//				Key:    "/mps-test/test.mov",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			output, err := Cos.NewBucket(ctx, "output", &Cos.BucketArgs{
+//				Bucket:     pulumi.String(fmt.Sprintf("tf-bucket-mps-schedule-config-output1-%v", local.App_id)),
+//				ForceClean: pulumi.Bool(true),
+//				Acl:        pulumi.String("public-read"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			example, err := Mps.NewSchedule(ctx, "example", &Mps.ScheduleArgs{
+//				ScheduleName: pulumi.String("tf_test_mps_schedule_config"),
+//				Trigger: &mps.ScheduleTriggerArgs{
+//					Type: pulumi.String("CosFileUpload"),
+//					CosFileUploadTrigger: &mps.ScheduleTriggerCosFileUploadTriggerArgs{
+//						Bucket: pulumi.String(object.Bucket),
+//						Region: pulumi.String("%s"),
+//						Dir:    pulumi.String("/upload/"),
+//						Formats: pulumi.StringArray{
+//							pulumi.String("flv"),
+//							pulumi.String("mov"),
+//						},
+//					},
+//				},
+//				Activities: mps.ScheduleActivityArray{
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("input"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(1),
+//							pulumi.Int(2),
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(3),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(6),
+//							pulumi.Int(7),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(4),
+//							pulumi.Int(5),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(10),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(10),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(10),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(8),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(9),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("action-trans"),
+//						ReardriveIndices: pulumi.IntArray{
+//							pulumi.Int(10),
+//						},
+//						ActivityPara: &mps.ScheduleActivityActivityParaArgs{
+//							TranscodeTask: &mps.ScheduleActivityActivityParaTranscodeTaskArgs{
+//								Definition: pulumi.Int(10),
+//							},
+//						},
+//					},
+//					&mps.ScheduleActivityArgs{
+//						ActivityType: pulumi.String("output"),
+//					},
+//				},
+//				OutputStorage: &mps.ScheduleOutputStorageArgs{
+//					Type: pulumi.String("COS"),
+//					CosOutputStorage: &mps.ScheduleOutputStorageCosOutputStorageArgs{
+//						Bucket: output.Bucket,
+//						Region: pulumi.String("%s"),
+//					},
+//				},
+//				OutputDir: pulumi.String("output/"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mps.NewEnableScheduleConfig(ctx, "config", &Mps.EnableScheduleConfigArgs{
+//				ScheduleId: example.ID(),
+//				Enabled:    pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Disable the mps schedule
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewEnableScheduleConfig(ctx, "config", &Mps.EnableScheduleConfigArgs{
-// 			ScheduleId: pulumi.Any(tencentcloud_mps_schedule.Example.Id),
-// 			Enabled:    pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewEnableScheduleConfig(ctx, "config", &Mps.EnableScheduleConfigArgs{
+//				ScheduleId: pulumi.Any(tencentcloud_mps_schedule.Example.Id),
+//				Enabled:    pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // mps enable_schedule_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/enableScheduleConfig:EnableScheduleConfig enable_schedule_config enable_schedule_config_id
+// $ pulumi import tencentcloud:Mps/enableScheduleConfig:EnableScheduleConfig enable_schedule_config enable_schedule_config_id
 // ```
 type EnableScheduleConfig struct {
 	pulumi.CustomResourceState
@@ -249,7 +260,7 @@ func NewEnableScheduleConfig(ctx *pulumi.Context,
 	if args.ScheduleId == nil {
 		return nil, errors.New("invalid value for required argument 'ScheduleId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource EnableScheduleConfig
 	err := ctx.RegisterResource("tencentcloud:Mps/enableScheduleConfig:EnableScheduleConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -330,7 +341,7 @@ func (i *EnableScheduleConfig) ToEnableScheduleConfigOutputWithContext(ctx conte
 // EnableScheduleConfigArrayInput is an input type that accepts EnableScheduleConfigArray and EnableScheduleConfigArrayOutput values.
 // You can construct a concrete instance of `EnableScheduleConfigArrayInput` via:
 //
-//          EnableScheduleConfigArray{ EnableScheduleConfigArgs{...} }
+//	EnableScheduleConfigArray{ EnableScheduleConfigArgs{...} }
 type EnableScheduleConfigArrayInput interface {
 	pulumi.Input
 
@@ -355,7 +366,7 @@ func (i EnableScheduleConfigArray) ToEnableScheduleConfigArrayOutputWithContext(
 // EnableScheduleConfigMapInput is an input type that accepts EnableScheduleConfigMap and EnableScheduleConfigMapOutput values.
 // You can construct a concrete instance of `EnableScheduleConfigMapInput` via:
 //
-//          EnableScheduleConfigMap{ "key": EnableScheduleConfigArgs{...} }
+//	EnableScheduleConfigMap{ "key": EnableScheduleConfigArgs{...} }
 type EnableScheduleConfigMapInput interface {
 	pulumi.Input
 

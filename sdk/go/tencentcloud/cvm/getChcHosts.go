@@ -8,45 +8,50 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of cvm chcHosts
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cvm.GetChcHosts(ctx, &cvm.GetChcHostsArgs{
-// 			ChcIds: []string{
-// 				"chc-xxxxxx",
-// 			},
-// 			Filters: []cvm.GetChcHostsFilter{
-// 				cvm.GetChcHostsFilter{
-// 					Name: "zone",
-// 					Values: []string{
-// 						"ap-guangzhou-7",
-// 					},
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cvm.GetChcHosts(ctx, &cvm.GetChcHostsArgs{
+//				ChcIds: []string{
+//					"chc-xxxxxx",
+//				},
+//				Filters: []cvm.GetChcHostsFilter{
+//					{
+//						Name: "zone",
+//						Values: []string{
+//							"ap-guangzhou-7",
+//						},
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetChcHosts(ctx *pulumi.Context, args *GetChcHostsArgs, opts ...pulumi.InvokeOption) (*GetChcHostsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetChcHostsResult
 	err := ctx.Invoke("tencentcloud:Cvm/getChcHosts:getChcHosts", args, &rv, opts...)
 	if err != nil {
@@ -59,7 +64,7 @@ func GetChcHosts(ctx *pulumi.Context, args *GetChcHostsArgs, opts ...pulumi.Invo
 type GetChcHostsArgs struct {
 	// CHC host ID. Up to 100 instances per request is allowed. ChcIds and Filters cannot be specified at the same time.
 	ChcIds []string `pulumi:"chcIds"`
-	// - `zone` Filter by the availability zone, such as ap-guangzhou-1. Valid values: See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/213/6091?from_cn_redirect=1).
+	// `zone` Filter by the availability zone, such as ap-guangzhou-1. Valid values: See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/213/6091?from_cn_redirect=1).
 	// - `instance-name` Filter by the instance name.
 	// - `instance-state` Filter by the instance status. For status details, see [InstanceStatus](https://www.tencentcloud.com/document/api/213/15753?from_cn_redirect=1#InstanceStatus).
 	// - `device-type` Filter by the device type.
@@ -98,7 +103,7 @@ func GetChcHostsOutput(ctx *pulumi.Context, args GetChcHostsOutputArgs, opts ...
 type GetChcHostsOutputArgs struct {
 	// CHC host ID. Up to 100 instances per request is allowed. ChcIds and Filters cannot be specified at the same time.
 	ChcIds pulumi.StringArrayInput `pulumi:"chcIds"`
-	// - `zone` Filter by the availability zone, such as ap-guangzhou-1. Valid values: See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/213/6091?from_cn_redirect=1).
+	// `zone` Filter by the availability zone, such as ap-guangzhou-1. Valid values: See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/213/6091?from_cn_redirect=1).
 	// - `instance-name` Filter by the instance name.
 	// - `instance-state` Filter by the instance status. For status details, see [InstanceStatus](https://www.tencentcloud.com/document/api/213/15753?from_cn_redirect=1#InstanceStatus).
 	// - `device-type` Filter by the device type.

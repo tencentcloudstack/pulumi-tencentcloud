@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
 {
 
-    public sealed class DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs : Pulumi.ResourceArgs
+    public sealed class DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Speed limit value type, value [1 (packet rate pps) 2 (bandwidth bps)].
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
         public DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs()
         {
         }
+        public static new DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs Empty => new DdosSpeedLimitConfigDdosSpeedLimitConfigSpeedValueArgs();
     }
 }

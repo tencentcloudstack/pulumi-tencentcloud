@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of lighthouse resetInstanceBlueprint
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.GetResetInstanceBlueprint(ctx, &lighthouse.GetResetInstanceBlueprintArgs{
-// 			InstanceId: "lhins-123456",
-// 			Limit:      pulumi.IntRef(20),
-// 			Offset:     pulumi.IntRef(0),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.GetResetInstanceBlueprint(ctx, &lighthouse.GetResetInstanceBlueprintArgs{
+//				InstanceId: "lhins-123456",
+//				Limit:      pulumi.IntRef(20),
+//				Offset:     pulumi.IntRef(0),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetResetInstanceBlueprint(ctx *pulumi.Context, args *GetResetInstanceBlueprintArgs, opts ...pulumi.InvokeOption) (*GetResetInstanceBlueprintResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetResetInstanceBlueprintResult
 	err := ctx.Invoke("tencentcloud:Lighthouse/getResetInstanceBlueprint:getResetInstanceBlueprint", args, &rv, opts...)
 	if err != nil {

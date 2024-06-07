@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateVersionInstanceMarketOptionsGetArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateVersionInstanceMarketOptionsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Market option type. Currently spot is the only supported value.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateVersionInstanceMarketOptionsGetArgs()
         {
         }
+        public static new LaunchTemplateVersionInstanceMarketOptionsGetArgs Empty => new LaunchTemplateVersionInstanceMarketOptionsGetArgs();
     }
 }

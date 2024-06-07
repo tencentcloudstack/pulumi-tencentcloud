@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const operation = new tencentcloud.Mps.ManageTaskOperation("operation", {
+ * const operation = new tencentcloud.mps.ManageTaskOperation("operation", {
  *     operationType: "Abort",
  *     taskId: "2600010949-LiveScheduleTask-xxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ManageTaskOperation extends pulumi.CustomResource {
     /**

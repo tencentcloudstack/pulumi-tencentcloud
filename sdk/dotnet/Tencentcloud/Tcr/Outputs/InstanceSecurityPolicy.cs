@@ -22,7 +22,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Outputs
         /// Remarks of policy.
         /// </summary>
         public readonly string? Description;
+        /// <summary>
+        /// Index of policy.
+        /// </summary>
         public readonly int? Index;
+        /// <summary>
+        /// Version of policy.
+        /// </summary>
         public readonly string? Version;
 
         [OutputConstructor]

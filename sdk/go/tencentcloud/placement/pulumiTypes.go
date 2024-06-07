@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type GetGroupsPlacementGroupList struct {
 	// Creation time of the placement group.
@@ -30,7 +33,7 @@ type GetGroupsPlacementGroupList struct {
 // GetGroupsPlacementGroupListInput is an input type that accepts GetGroupsPlacementGroupListArgs and GetGroupsPlacementGroupListOutput values.
 // You can construct a concrete instance of `GetGroupsPlacementGroupListInput` via:
 //
-//          GetGroupsPlacementGroupListArgs{...}
+//	GetGroupsPlacementGroupListArgs{...}
 type GetGroupsPlacementGroupListInput interface {
 	pulumi.Input
 
@@ -70,7 +73,7 @@ func (i GetGroupsPlacementGroupListArgs) ToGetGroupsPlacementGroupListOutputWith
 // GetGroupsPlacementGroupListArrayInput is an input type that accepts GetGroupsPlacementGroupListArray and GetGroupsPlacementGroupListArrayOutput values.
 // You can construct a concrete instance of `GetGroupsPlacementGroupListArrayInput` via:
 //
-//          GetGroupsPlacementGroupListArray{ GetGroupsPlacementGroupListArgs{...} }
+//	GetGroupsPlacementGroupListArray{ GetGroupsPlacementGroupListArgs{...} }
 type GetGroupsPlacementGroupListArrayInput interface {
 	pulumi.Input
 

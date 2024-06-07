@@ -8,59 +8,86 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query instances type.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
-// 			AvailabilityZone: pulumi.StringRef("ap-guangzhou-2"),
-// 			CpuCoreCount:     pulumi.IntRef(2),
-// 			MemorySize:       pulumi.IntRef(4),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Instance.GetTypes(ctx, &instance.GetTypesArgs{
-// 			CpuCoreCount:   pulumi.IntRef(1),
-// 			ExcludeSoldOut: pulumi.BoolRef(true),
-// 			Filters: []instance.GetTypesFilter{
-// 				instance.GetTypesFilter{
-// 					Name: "instance-charge-type",
-// 					Values: []string{
-// 						"POSTPAID_BY_HOUR",
-// 					},
-// 				},
-// 				instance.GetTypesFilter{
-// 					Name: "zone",
-// 					Values: []string{
-// 						"ap-shanghai-2",
-// 					},
-// 				},
-// 			},
-// 			MemorySize: pulumi.IntRef(1),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
+//				AvailabilityZone: pulumi.StringRef("ap-guangzhou-6"),
+//				CpuCoreCount:     pulumi.IntRef(4),
+//				MemorySize:       pulumi.IntRef(8),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Complete Example
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
+//				CpuCoreCount:   pulumi.IntRef(4),
+//				ExcludeSoldOut: pulumi.BoolRef(true),
+//				Filters: []instance.GetTypesFilter{
+//					{
+//						Name: "instance-family",
+//						Values: []string{
+//							"SA2",
+//						},
+//					},
+//					{
+//						Name: "zone",
+//						Values: []string{
+//							"ap-guangzhou-6",
+//						},
+//					},
+//				},
+//				MemorySize: pulumi.IntRef(8),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
 func GetTypes(ctx *pulumi.Context, args *GetTypesArgs, opts ...pulumi.InvokeOption) (*GetTypesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTypesResult
 	err := ctx.Invoke("tencentcloud:Instance/getTypes:getTypes", args, &rv, opts...)
 	if err != nil {

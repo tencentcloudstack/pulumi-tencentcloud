@@ -39,6 +39,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Outputs
         /// </summary>
         public readonly string Namespace;
         /// <summary>
+        /// Cycle.
+        /// </summary>
+        public readonly ImmutableArray<int> Period;
+        /// <summary>
         /// Indicator method within the statistical cycle.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetAlarmBasicMetricMetricSetPeriodResult> Periods;
@@ -65,6 +69,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Outputs
 
             string @namespace,
 
+            ImmutableArray<int> period,
+
             ImmutableArray<Outputs.GetAlarmBasicMetricMetricSetPeriodResult> periods,
 
             string unit,
@@ -77,6 +83,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Outputs
             MetricEName = metricEName;
             MetricName = metricName;
             Namespace = @namespace;
+            Period = period;
             Periods = periods;
             Unit = unit;
             UnitCname = unitCname;

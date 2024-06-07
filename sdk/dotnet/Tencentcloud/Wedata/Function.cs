@@ -15,46 +15,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Wedata.Function("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Wedata.Function("example", new Tencentcloud.Wedata.FunctionArgs
+    ///         ClassName = "tf_class_example",
+    ///         ClusterIdentifier = "emr-m6u3qgk0",
+    ///         Comment = "V1",
+    ///         DbName = "tf_db_example",
+    ///         Description = "description.",
+    ///         Example = "example info.",
+    ///         Kind = "ANALYSIS",
+    ///         ParamDesc = "param info.",
+    ///         ProjectId = "1612982498218618880",
+    ///         ResourceLists = new[]
     ///         {
-    ///             ClassName = "tf_class_example",
-    ///             ClusterIdentifier = "emr-m6u3qgk0",
-    ///             Comment = "V1",
-    ///             DbName = "tf_db_example",
-    ///             Description = "description.",
-    ///             Example = "example info.",
-    ///             Kind = "ANALYSIS",
-    ///             ParamDesc = "param info.",
-    ///             ProjectId = "1612982498218618880",
-    ///             ResourceLists = 
+    ///             new Tencentcloud.Wedata.Inputs.FunctionResourceListArgs
     ///             {
-    ///                 new Tencentcloud.Wedata.Inputs.FunctionResourceListArgs
-    ///                 {
-    ///                     Id = "5b28bcdf-a0e6-4022-927d-927d399c4593",
-    ///                     Name = "untitled3-1.0-SNAPSHOT.jar",
-    ///                     Path = "/wedata-demo-1314991481/untitled3-1.0-SNAPSHOT.jar",
-    ///                     Type = "cos",
-    ///                 },
+    ///                 Id = "5b28bcdf-a0e6-4022-927d-927d399c4593",
+    ///                 Name = "untitled3-1.0-SNAPSHOT.jar",
+    ///                 Path = "/wedata-demo-1314991481/untitled3-1.0-SNAPSHOT.jar",
+    ///                 Type = "cos",
     ///             },
-    ///             ReturnDesc = "return value info.",
-    ///             Type = "HIVE",
-    ///             Usage = "usage info.",
-    ///         });
-    ///     }
+    ///         },
+    ///         ReturnDesc = "return value info.",
+    ///         Type = "HIVE",
+    ///         Usage = "usage info.",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/function:Function")]
-    public partial class Function : Pulumi.CustomResource
+    public partial class Function : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Class name of function entry.
@@ -191,7 +192,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         }
     }
 
-    public sealed class FunctionArgs : Pulumi.ResourceArgs
+    public sealed class FunctionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Class name of function entry.
@@ -286,9 +287,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public FunctionArgs()
         {
         }
+        public static new FunctionArgs Empty => new FunctionArgs();
     }
 
-    public sealed class FunctionState : Pulumi.ResourceArgs
+    public sealed class FunctionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Class name of function entry.
@@ -389,5 +391,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public FunctionState()
         {
         }
+        public static new FunctionState Empty => new FunctionState();
     }
 }

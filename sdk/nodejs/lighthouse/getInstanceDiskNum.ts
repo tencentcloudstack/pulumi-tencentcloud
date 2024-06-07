@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instanceDiskNum = pulumi.output(tencentcloud.Lighthouse.getInstanceDiskNum({
+ * const instanceDiskNum = tencentcloud.Lighthouse.getInstanceDiskNum({
  *     instanceIds: ["lhins-xxxxxx"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceDiskNum(args: GetInstanceDiskNumArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceDiskNumResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Lighthouse/getInstanceDiskNum:getInstanceDiskNum", {
         "instanceIds": args.instanceIds,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetInstanceDiskNumResult {
     readonly instanceIds: string[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of lighthouse instanceDiskNum
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instanceDiskNum = tencentcloud.Lighthouse.getInstanceDiskNum({
+ *     instanceIds: ["lhins-xxxxxx"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceDiskNumOutput(args: GetInstanceDiskNumOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceDiskNumResult> {
-    return pulumi.output(args).apply(a => getInstanceDiskNum(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceDiskNum(a, opts))
 }
 
 /**

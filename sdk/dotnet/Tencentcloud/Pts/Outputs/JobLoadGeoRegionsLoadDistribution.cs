@@ -14,8 +14,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Outputs
     [OutputType]
     public sealed class JobLoadGeoRegionsLoadDistribution
     {
+        /// <summary>
+        /// Percentage.
+        /// </summary>
         public readonly int? Percentage;
+        /// <summary>
+        /// Region.
+        /// </summary>
         public readonly string? Region;
+        /// <summary>
+        /// Regional ID.
+        /// </summary>
         public readonly int RegionId;
 
         [OutputConstructor]

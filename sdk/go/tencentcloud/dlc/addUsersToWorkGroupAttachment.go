@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dlc addUsersToWorkGroupAttachment
@@ -18,7 +19,7 @@ import (
 // dlc add_users_to_work_group_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dlc/addUsersToWorkGroupAttachment:AddUsersToWorkGroupAttachment add_users_to_work_group_attachment add_users_to_work_group_attachment_id
+// $ pulumi import tencentcloud:Dlc/addUsersToWorkGroupAttachment:AddUsersToWorkGroupAttachment add_users_to_work_group_attachment add_users_to_work_group_attachment_id
 // ```
 type AddUsersToWorkGroupAttachment struct {
 	pulumi.CustomResourceState
@@ -37,7 +38,7 @@ func NewAddUsersToWorkGroupAttachment(ctx *pulumi.Context,
 	if args.AddInfo == nil {
 		return nil, errors.New("invalid value for required argument 'AddInfo'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AddUsersToWorkGroupAttachment
 	err := ctx.RegisterResource("tencentcloud:Dlc/addUsersToWorkGroupAttachment:AddUsersToWorkGroupAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -110,7 +111,7 @@ func (i *AddUsersToWorkGroupAttachment) ToAddUsersToWorkGroupAttachmentOutputWit
 // AddUsersToWorkGroupAttachmentArrayInput is an input type that accepts AddUsersToWorkGroupAttachmentArray and AddUsersToWorkGroupAttachmentArrayOutput values.
 // You can construct a concrete instance of `AddUsersToWorkGroupAttachmentArrayInput` via:
 //
-//          AddUsersToWorkGroupAttachmentArray{ AddUsersToWorkGroupAttachmentArgs{...} }
+//	AddUsersToWorkGroupAttachmentArray{ AddUsersToWorkGroupAttachmentArgs{...} }
 type AddUsersToWorkGroupAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -135,7 +136,7 @@ func (i AddUsersToWorkGroupAttachmentArray) ToAddUsersToWorkGroupAttachmentArray
 // AddUsersToWorkGroupAttachmentMapInput is an input type that accepts AddUsersToWorkGroupAttachmentMap and AddUsersToWorkGroupAttachmentMapOutput values.
 // You can construct a concrete instance of `AddUsersToWorkGroupAttachmentMapInput` via:
 //
-//          AddUsersToWorkGroupAttachmentMap{ "key": AddUsersToWorkGroupAttachmentArgs{...} }
+//	AddUsersToWorkGroupAttachmentMap{ "key": AddUsersToWorkGroupAttachmentArgs{...} }
 type AddUsersToWorkGroupAttachmentMapInput interface {
 	pulumi.Input
 

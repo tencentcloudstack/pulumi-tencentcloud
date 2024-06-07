@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type ResourcePackage struct {
@@ -61,7 +62,7 @@ func NewResourcePackage(ctx *pulumi.Context,
 	if args.PackageVersion == nil {
 		return nil, errors.New("invalid value for required argument 'PackageVersion'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ResourcePackage
 	err := ctx.RegisterResource("tencentcloud:Cynosdb/resourcePackage:ResourcePackage", name, args, &resource, opts...)
 	if err != nil {
@@ -194,7 +195,7 @@ func (i *ResourcePackage) ToResourcePackageOutputWithContext(ctx context.Context
 // ResourcePackageArrayInput is an input type that accepts ResourcePackageArray and ResourcePackageArrayOutput values.
 // You can construct a concrete instance of `ResourcePackageArrayInput` via:
 //
-//          ResourcePackageArray{ ResourcePackageArgs{...} }
+//	ResourcePackageArray{ ResourcePackageArgs{...} }
 type ResourcePackageArrayInput interface {
 	pulumi.Input
 
@@ -219,7 +220,7 @@ func (i ResourcePackageArray) ToResourcePackageArrayOutputWithContext(ctx contex
 // ResourcePackageMapInput is an input type that accepts ResourcePackageMap and ResourcePackageMapOutput values.
 // You can construct a concrete instance of `ResourcePackageMapInput` via:
 //
-//          ResourcePackageMap{ "key": ResourcePackageArgs{...} }
+//	ResourcePackageMap{ "key": ResourcePackageArgs{...} }
 type ResourcePackageMapInput interface {
 	pulumi.Input
 

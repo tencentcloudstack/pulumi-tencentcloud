@@ -12,7 +12,7 @@ import * as utilities from "../utilities";
  * Vpc subnet instance can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Subnet/instance:Instance test subnet_id
+ * $ pulumi import tencentcloud:Subnet/instance:Instance test subnet_id
  * ```
  */
 export class Instance extends pulumi.CustomResource {

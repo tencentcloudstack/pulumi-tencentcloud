@@ -14,131 +14,141 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// Provides a resource for an AS (Auto scaling) lifecycle hook.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a basic LifecycleHook
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "as",
-    ///         }));
-    ///         var image = Output.Create(Tencentcloud.Images.GetInstance.InvokeAsync(new Tencentcloud.Images.GetInstanceArgs
-    ///         {
-    ///             ImageTypes = 
-    ///             {
-    ///                 "PUBLIC_IMAGE",
-    ///             },
-    ///             OsName = "TencentOS Server 3.2 (Final)",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///         });
-    ///         var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new Tencentcloud.As.ScalingConfigArgs
-    ///         {
-    ///             ConfigurationName = "tf-example",
-    ///             ImageId = image.Apply(image =&gt; image.Images?[0]?.ImageId),
-    ///             InstanceTypes = 
-    ///             {
-    ///                 "SA1.SMALL1",
-    ///                 "SA2.SMALL1",
-    ///                 "SA2.SMALL2",
-    ///                 "SA2.SMALL4",
-    ///             },
-    ///             InstanceNameSettings = new Tencentcloud.As.Inputs.ScalingConfigInstanceNameSettingsArgs
-    ///             {
-    ///                 InstanceName = "test-ins-name",
-    ///             },
-    ///         });
-    ///         var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("exampleScalingGroup", new Tencentcloud.As.ScalingGroupArgs
-    ///         {
-    ///             ScalingGroupName = "tf-example",
-    ///             ConfigurationId = exampleScalingConfig.Id,
-    ///             MaxSize = 1,
-    ///             MinSize = 0,
-    ///             VpcId = vpc.Id,
-    ///             SubnetIds = 
-    ///             {
-    ///                 subnet.Id,
-    ///             },
-    ///         });
-    ///         var exampleLifecycleHook = new Tencentcloud.As.LifecycleHook("exampleLifecycleHook", new Tencentcloud.As.LifecycleHookArgs
-    ///         {
-    ///             ScalingGroupId = exampleScalingGroup.Id,
-    ///             LifecycleHookName = "tf-as-lifecycle-hook",
-    ///             LifecycleTransition = "INSTANCE_LAUNCHING",
-    ///             DefaultResult = "CONTINUE",
-    ///             HeartbeatTimeout = 500,
-    ///             NotificationMetadata = "tf test",
-    ///         });
-    ///     }
+    ///         Product = "as",
+    ///     });
     /// 
-    /// }
+    ///     var image = Tencentcloud.Images.GetInstance.Invoke(new()
+    ///     {
+    ///         ImageTypes = new[]
+    ///         {
+    ///             "PUBLIC_IMAGE",
+    ///         },
+    ///         OsName = "TencentOS Server 3.2 (Final)",
+    ///     });
+    /// 
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///     });
+    /// 
+    ///     var exampleScalingConfig = new Tencentcloud.As.ScalingConfig("exampleScalingConfig", new()
+    ///     {
+    ///         ConfigurationName = "tf-example",
+    ///         ImageId = image.Apply(getInstanceResult =&gt; getInstanceResult.Images[0]?.ImageId),
+    ///         InstanceTypes = new[]
+    ///         {
+    ///             "SA1.SMALL1",
+    ///             "SA2.SMALL1",
+    ///             "SA2.SMALL2",
+    ///             "SA2.SMALL4",
+    ///         },
+    ///         InstanceNameSettings = new Tencentcloud.As.Inputs.ScalingConfigInstanceNameSettingsArgs
+    ///         {
+    ///             InstanceName = "test-ins-name",
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleScalingGroup = new Tencentcloud.As.ScalingGroup("exampleScalingGroup", new()
+    ///     {
+    ///         ScalingGroupName = "tf-example",
+    ///         ConfigurationId = exampleScalingConfig.Id,
+    ///         MaxSize = 1,
+    ///         MinSize = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetIds = new[]
+    ///         {
+    ///             subnet.Id,
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleLifecycleHook = new Tencentcloud.As.LifecycleHook("exampleLifecycleHook", new()
+    ///     {
+    ///         ScalingGroupId = exampleScalingGroup.Id,
+    ///         LifecycleHookName = "tf-as-lifecycle-hook",
+    ///         LifecycleTransition = "INSTANCE_LAUNCHING",
+    ///         DefaultResult = "CONTINUE",
+    ///         HeartbeatTimeout = 500,
+    ///         NotificationMetadata = "tf test",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.As.LifecycleHook("example", new()
     ///     {
-    ///         var example = new Tencentcloud.As.LifecycleHook("example", new Tencentcloud.As.LifecycleHookArgs
-    ///         {
-    ///             ScalingGroupId = tencentcloud_as_scaling_group.Example.Id,
-    ///             LifecycleHookName = "tf-as-lifecycle-hook",
-    ///             LifecycleTransition = "INSTANCE_LAUNCHING",
-    ///             DefaultResult = "CONTINUE",
-    ///             HeartbeatTimeout = 500,
-    ///             NotificationMetadata = "tf test",
-    ///             NotificationTargetType = "CMQ_QUEUE",
-    ///             NotificationQueueName = "lifcyclehook",
-    ///         });
-    ///     }
+    ///         ScalingGroupId = tencentcloud_as_scaling_group.Example.Id,
+    ///         LifecycleHookName = "tf-as-lifecycle-hook",
+    ///         LifecycleTransition = "INSTANCE_LAUNCHING",
+    ///         DefaultResult = "CONTINUE",
+    ///         HeartbeatTimeout = 500,
+    ///         NotificationMetadata = "tf test",
+    ///         NotificationTargetType = "CMQ_QUEUE",
+    ///         NotificationQueueName = "lifcyclehook",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.As.LifecycleHook("example", new()
     ///     {
-    ///         var example = new Tencentcloud.As.LifecycleHook("example", new Tencentcloud.As.LifecycleHookArgs
-    ///         {
-    ///             ScalingGroupId = tencentcloud_as_scaling_group.Example.Id,
-    ///             LifecycleHookName = "tf-as-lifecycle-hook",
-    ///             LifecycleTransition = "INSTANCE_LAUNCHING",
-    ///             DefaultResult = "CONTINUE",
-    ///             HeartbeatTimeout = 500,
-    ///             NotificationMetadata = "tf test",
-    ///             NotificationTargetType = "CMQ_TOPIC",
-    ///             NotificationTopicName = "lifcyclehook",
-    ///         });
-    ///     }
+    ///         ScalingGroupId = tencentcloud_as_scaling_group.Example.Id,
+    ///         LifecycleHookName = "tf-as-lifecycle-hook",
+    ///         LifecycleTransition = "INSTANCE_LAUNCHING",
+    ///         DefaultResult = "CONTINUE",
+    ///         HeartbeatTimeout = 500,
+    ///         NotificationMetadata = "tf test",
+    ///         NotificationTargetType = "CMQ_TOPIC",
+    ///         NotificationTopicName = "lifcyclehook",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:As/lifecycleHook:LifecycleHook")]
-    public partial class LifecycleHook : Pulumi.CustomResource
+    public partial class LifecycleHook : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
@@ -239,7 +249,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         }
     }
 
-    public sealed class LifecycleHookArgs : Pulumi.ResourceArgs
+    public sealed class LifecycleHookArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
@@ -298,9 +308,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public LifecycleHookArgs()
         {
         }
+        public static new LifecycleHookArgs Empty => new LifecycleHookArgs();
     }
 
-    public sealed class LifecycleHookState : Pulumi.ResourceArgs
+    public sealed class LifecycleHookState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Defines the action the AS group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. Valid values: `CONTINUE` and `ABANDON`. The default value is `CONTINUE`.
@@ -359,5 +370,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public LifecycleHookState()
         {
         }
+        public static new LifecycleHookState Empty => new LifecycleHookState();
     }
 }

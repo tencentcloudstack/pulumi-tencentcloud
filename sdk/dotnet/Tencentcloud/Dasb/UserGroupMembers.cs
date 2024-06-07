@@ -15,39 +15,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleUser = new Tencentcloud.Dasb.User("exampleUser", new()
     ///     {
-    ///         var example = new Tencentcloud.Dasb.UserGroupMembers("example", new Tencentcloud.Dasb.UserGroupMembersArgs
-    ///         {
-    ///             MemberIdSets = 
-    ///             {
-    ///                 1,
-    ///                 2,
-    ///                 3,
-    ///             },
-    ///             UserGroupId = 3,
-    ///         });
-    ///     }
+    ///         UserName = "tf_example",
+    ///         RealName = "terraform",
+    ///         Phone = "+86|18345678782",
+    ///         Email = "demo@tencent.com",
+    ///         AuthType = 0,
+    ///     });
     /// 
-    /// }
+    ///     var exampleUserGroup = new Tencentcloud.Dasb.UserGroup("exampleUserGroup");
+    /// 
+    ///     var exampleUserGroupMembers = new Tencentcloud.Dasb.UserGroupMembers("exampleUserGroupMembers", new()
+    ///     {
+    ///         UserGroupId = exampleUserGroup.Id,
+    ///         MemberIdSets = new[]
+    ///         {
+    ///             exampleUser.Id,
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dasb user_group_members can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dasb/userGroupMembers:UserGroupMembers example 3#1,2,3
+    /// $ pulumi import tencentcloud:Dasb/userGroupMembers:UserGroupMembers example 3#14
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/userGroupMembers:UserGroupMembers")]
-    public partial class UserGroupMembers : Pulumi.CustomResource
+    public partial class UserGroupMembers : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Collection of member user IDs.
@@ -106,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         }
     }
 
-    public sealed class UserGroupMembersArgs : Pulumi.ResourceArgs
+    public sealed class UserGroupMembersArgs : global::Pulumi.ResourceArgs
     {
         [Input("memberIdSets", required: true)]
         private InputList<int>? _memberIdSets;
@@ -129,9 +139,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public UserGroupMembersArgs()
         {
         }
+        public static new UserGroupMembersArgs Empty => new UserGroupMembersArgs();
     }
 
-    public sealed class UserGroupMembersState : Pulumi.ResourceArgs
+    public sealed class UserGroupMembersState : global::Pulumi.ResourceArgs
     {
         [Input("memberIdSets")]
         private InputList<int>? _memberIdSets;
@@ -154,5 +165,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public UserGroupMembersState()
         {
         }
+        public static new UserGroupMembersState Empty => new UserGroupMembersState();
     }
 }

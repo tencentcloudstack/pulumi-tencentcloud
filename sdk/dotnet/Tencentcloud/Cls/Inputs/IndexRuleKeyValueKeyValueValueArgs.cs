@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class IndexRuleKeyValueKeyValueValueArgs : Pulumi.ResourceArgs
+    public sealed class IndexRuleKeyValueKeyValueValueArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether Chinese characters are contained.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public IndexRuleKeyValueKeyValueValueArgs()
         {
         }
+        public static new IndexRuleKeyValueKeyValueValueArgs Empty => new IndexRuleKeyValueKeyValueValueArgs();
     }
 }

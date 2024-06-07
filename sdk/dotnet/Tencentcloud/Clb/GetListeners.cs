@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// Use this data source to query detailed information of CLB listener
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Clb.GetListeners.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Clb.GetListeners.InvokeAsync(new Tencentcloud.Clb.GetListenersArgs
-        ///         {
-        ///             ClbId = "lb-k2zjp9lv",
-        ///             ListenerId = "lbl-mwr6vbtv",
-        ///             Port = 80,
-        ///             Protocol = "TCP",
-        ///         }));
-        ///     }
+        ///         ClbId = "lb-k2zjp9lv",
+        ///         ListenerId = "lbl-mwr6vbtv",
+        ///         Port = 80,
+        ///         Protocol = "TCP",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetListenersResult> InvokeAsync(GetListenersArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetListenersResult>("tencentcloud:Clb/getListeners:getListeners", args ?? new GetListenersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetListenersResult>("tencentcloud:Clb/getListeners:getListeners", args ?? new GetListenersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of CLB listener
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Clb.GetListeners.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Clb.GetListeners.InvokeAsync(new Tencentcloud.Clb.GetListenersArgs
-        ///         {
-        ///             ClbId = "lb-k2zjp9lv",
-        ///             ListenerId = "lbl-mwr6vbtv",
-        ///             Port = 80,
-        ///             Protocol = "TCP",
-        ///         }));
-        ///     }
+        ///         ClbId = "lb-k2zjp9lv",
+        ///         ListenerId = "lbl-mwr6vbtv",
+        ///         Port = 80,
+        ///         Protocol = "TCP",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetListenersResult> Invoke(GetListenersInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetListenersResult>("tencentcloud:Clb/getListeners:getListeners", args ?? new GetListenersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetListenersResult>("tencentcloud:Clb/getListeners:getListeners", args ?? new GetListenersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetListenersArgs : Pulumi.InvokeArgs
+    public sealed class GetListenersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Id of the CLB to be queried.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetListenersArgs()
         {
         }
+        public static new GetListenersArgs Empty => new GetListenersArgs();
     }
 
-    public sealed class GetListenersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetListenersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Id of the CLB to be queried.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetListenersInvokeArgs()
         {
         }
+        public static new GetListenersInvokeArgs Empty => new GetListenersInvokeArgs();
     }
 
 

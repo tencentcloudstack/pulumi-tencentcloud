@@ -8,12 +8,14 @@ import * as utilities from "../utilities";
  * Provides a resource to create a redis account
  *
  * ## Example Usage
+ *
  * ### Create an account with read and write permissions
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zone = tencentcloud.Redis.getZoneConfig({
  *     typeId: 7,
@@ -21,16 +23,16 @@ import * as utilities from "../utilities";
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
  *     vpcId: vpc.id,
- *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
+ *     availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
  *     cidrBlock: "10.0.1.0/24",
  * });
  * const foo = new tencentcloud.redis.Instance("foo", {
- *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
- *     typeId: zone.then(zone => zone.lists?[1]?.typeId),
+ *     availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
+ *     typeId: zone.then(zone => zone.lists?.[1]?.typeId),
  *     password: "test12345789",
  *     memSize: 8192,
- *     redisShardNum: zone.then(zone => zone.lists?[1]?.redisShardNums?[0]),
- *     redisReplicasNum: zone.then(zone => zone.lists?[1]?.redisReplicasNums?[0]),
+ *     redisShardNum: zone.then(zone => zone.lists?.[1]?.redisShardNums?.[0]),
+ *     redisReplicasNum: zone.then(zone => zone.lists?.[1]?.redisReplicasNums?.[0]),
  *     port: 6379,
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
@@ -44,12 +46,15 @@ import * as utilities from "../utilities";
  *     privilege: "rw",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create an account with read-only permissions
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zone = tencentcloud.Redis.getZoneConfig({
  *     typeId: 7,
@@ -57,16 +62,16 @@ import * as utilities from "../utilities";
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
  *     vpcId: vpc.id,
- *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
+ *     availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
  *     cidrBlock: "10.0.1.0/24",
  * });
  * const foo = new tencentcloud.redis.Instance("foo", {
- *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
- *     typeId: zone.then(zone => zone.lists?[1]?.typeId),
+ *     availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
+ *     typeId: zone.then(zone => zone.lists?.[1]?.typeId),
  *     password: "test12345789",
  *     memSize: 8192,
- *     redisShardNum: zone.then(zone => zone.lists?[1]?.redisShardNums?[0]),
- *     redisReplicasNum: zone.then(zone => zone.lists?[1]?.redisReplicasNums?[0]),
+ *     redisShardNum: zone.then(zone => zone.lists?.[1]?.redisShardNums?.[0]),
+ *     redisReplicasNum: zone.then(zone => zone.lists?.[1]?.redisReplicasNums?.[0]),
  *     port: 6379,
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
@@ -80,13 +85,14 @@ import * as utilities from "../utilities";
  *     privilege: "r",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * redis account can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Redis/account:Account account crs-xxxxxx#account_test
+ * $ pulumi import tencentcloud:Redis/account:Account account crs-xxxxxx#account_test
  * ```
  */
 export class Account extends pulumi.CustomResource {
@@ -179,13 +185,15 @@ export class Account extends pulumi.CustomResource {
                 throw new Error("Missing required property 'readonlyPolicies'");
             }
             resourceInputs["accountName"] = args ? args.accountName : undefined;
-            resourceInputs["accountPassword"] = args ? args.accountPassword : undefined;
+            resourceInputs["accountPassword"] = args?.accountPassword ? pulumi.secret(args.accountPassword) : undefined;
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
             resourceInputs["privilege"] = args ? args.privilege : undefined;
             resourceInputs["readonlyPolicies"] = args ? args.readonlyPolicies : undefined;
             resourceInputs["remark"] = args ? args.remark : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["accountPassword"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Account.__pulumiType, name, resourceInputs, opts);
     }
 }

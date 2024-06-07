@@ -15,86 +15,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         /// <summary>
         /// Use this data source to query detailed information of private dns records
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var privateDnsRecord = Tencentcloud.PrivateDns.GetRecords.Invoke(new()
         ///     {
-        ///         var privateDnsRecord = Output.Create(Tencentcloud.PrivateDns.GetRecords.InvokeAsync(new Tencentcloud.PrivateDns.GetRecordsArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.PrivateDns.Inputs.GetRecordsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.PrivateDns.Inputs.GetRecordsFilterArgs
+        ///                 Name = "Value",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "Value",
-        ///                     Values = 
-        ///                     {
-        ///                         "8.8.8.8",
-        ///                     },
+        ///                     "8.8.8.8",
         ///                 },
         ///             },
-        ///             ZoneId = "zone-xxxxxx",
-        ///         }));
-        ///     }
+        ///         },
+        ///         ZoneId = "zone-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRecordsResult> InvokeAsync(GetRecordsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRecordsResult>("tencentcloud:PrivateDns/getRecords:getRecords", args ?? new GetRecordsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRecordsResult>("tencentcloud:PrivateDns/getRecords:getRecords", args ?? new GetRecordsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of private dns records
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var privateDnsRecord = Tencentcloud.PrivateDns.GetRecords.Invoke(new()
         ///     {
-        ///         var privateDnsRecord = Output.Create(Tencentcloud.PrivateDns.GetRecords.InvokeAsync(new Tencentcloud.PrivateDns.GetRecordsArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.PrivateDns.Inputs.GetRecordsFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.PrivateDns.Inputs.GetRecordsFilterArgs
+        ///                 Name = "Value",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "Value",
-        ///                     Values = 
-        ///                     {
-        ///                         "8.8.8.8",
-        ///                     },
+        ///                     "8.8.8.8",
         ///                 },
         ///             },
-        ///             ZoneId = "zone-xxxxxx",
-        ///         }));
-        ///     }
+        ///         },
+        ///         ZoneId = "zone-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRecordsResult> Invoke(GetRecordsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRecordsResult>("tencentcloud:PrivateDns/getRecords:getRecords", args ?? new GetRecordsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRecordsResult>("tencentcloud:PrivateDns/getRecords:getRecords", args ?? new GetRecordsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRecordsArgs : Pulumi.InvokeArgs
+    public sealed class GetRecordsArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetRecordsFilterArgs>? _filters;
@@ -123,9 +117,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public GetRecordsArgs()
         {
         }
+        public static new GetRecordsArgs Empty => new GetRecordsArgs();
     }
 
-    public sealed class GetRecordsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRecordsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetRecordsFilterInputArgs>? _filters;
@@ -154,6 +149,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public GetRecordsInvokeArgs()
         {
         }
+        public static new GetRecordsInvokeArgs Empty => new GetRecordsInvokeArgs();
     }
 
 

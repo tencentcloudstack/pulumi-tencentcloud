@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const checkCertificateChain = new tencentcloud.Ssl.CheckCertificateChainOperation("check_certificate_chain", {
- *     certificateChain: "-----BEGIN CERTIFICATE--·····---END CERTIFICATE-----",
- * });
+ * const checkCertificateChain = new tencentcloud.ssl.CheckCertificateChainOperation("checkCertificateChain", {certificateChain: "-----BEGIN CERTIFICATE--·····---END CERTIFICATE-----"});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ssl check_certificate_chain can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ssl/checkCertificateChainOperation:CheckCertificateChainOperation check_certificate_chain check_certificate_chain_id
+ * $ pulumi import tencentcloud:Ssl/checkCertificateChainOperation:CheckCertificateChainOperation check_certificate_chain check_certificate_chain_id
  * ```
  */
 export class CheckCertificateChainOperation extends pulumi.CustomResource {

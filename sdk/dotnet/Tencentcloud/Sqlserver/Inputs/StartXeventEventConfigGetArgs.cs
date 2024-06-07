@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
 {
 
-    public sealed class StartXeventEventConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class StartXeventEventConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Event type. Valid values: slow (set threshold for slow SQL ), blocked (set threshold for the blocking and deadlock).
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Inputs
         public StartXeventEventConfigGetArgs()
         {
         }
+        public static new StartXeventEventConfigGetArgs Empty => new StartXeventEventConfigGetArgs();
     }
 }

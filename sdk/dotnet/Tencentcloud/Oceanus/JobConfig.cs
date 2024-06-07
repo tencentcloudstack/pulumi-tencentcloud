@@ -14,108 +14,112 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// Provides a resource to create a oceanus job_config
     /// 
     /// ## Example Usage
+    /// 
     /// ### is 2
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Oceanus.JobConfig("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Oceanus.JobConfig("example", new Tencentcloud.Oceanus.JobConfigArgs
+    ///         AutoRecover = 1,
+    ///         ClsLogsetId = "cd9adbb5-6b7d-48d2-9870-77658959c7a4",
+    ///         ClsTopicId = "cec4c2f1-0bf3-470e-b1a5-b1c451e88838",
+    ///         DefaultParallelism = 1,
+    ///         EntrypointClass = "tf_example",
+    ///         ExpertModeOn = false,
+    ///         JobId = "cql-4xwincyn",
+    ///         JobManagerSpec = 1,
+    ///         LogCollect = true,
+    ///         LogCollectType = 2,
+    ///         LogLevel = "INFO",
+    ///         ProgramArgs = "--conf Key=Value",
+    ///         Properties = new[]
     ///         {
-    ///             AutoRecover = 1,
-    ///             ClsLogsetId = "cd9adbb5-6b7d-48d2-9870-77658959c7a4",
-    ///             ClsTopicId = "cec4c2f1-0bf3-470e-b1a5-b1c451e88838",
-    ///             DefaultParallelism = 1,
-    ///             EntrypointClass = "tf_example",
-    ///             ExpertModeOn = false,
-    ///             JobId = "cql-4xwincyn",
-    ///             JobManagerSpec = 1,
-    ///             LogCollect = true,
-    ///             LogCollectType = 2,
-    ///             LogLevel = "INFO",
-    ///             ProgramArgs = "--conf Key=Value",
-    ///             Properties = 
+    ///             new Tencentcloud.Oceanus.Inputs.JobConfigPropertyArgs
     ///             {
-    ///                 new Tencentcloud.Oceanus.Inputs.JobConfigPropertyArgs
-    ///                 {
-    ///                     Key = "pipeline.max-parallelism",
-    ///                     Value = "2048",
-    ///                 },
+    ///                 Key = "pipeline.max-parallelism",
+    ///                 Value = "2048",
     ///             },
-    ///             Remark = "remark.",
-    ///             ResourceRefs = 
+    ///         },
+    ///         Remark = "remark.",
+    ///         ResourceRefs = new[]
+    ///         {
+    ///             new Tencentcloud.Oceanus.Inputs.JobConfigResourceRefArgs
     ///             {
-    ///                 new Tencentcloud.Oceanus.Inputs.JobConfigResourceRefArgs
-    ///                 {
-    ///                     ResourceId = "resource-q22ntswy",
-    ///                     Type = 1,
-    ///                     Version = 1,
-    ///                 },
+    ///                 ResourceId = "resource-q22ntswy",
+    ///                 Type = 1,
+    ///                 Version = 1,
     ///             },
-    ///             TaskManagerSpec = 1,
-    ///             WorkSpaceId = "space-2idq8wbr",
-    ///         });
-    ///     }
+    ///         },
+    ///         TaskManagerSpec = 1,
+    ///         WorkSpaceId = "space-2idq8wbr",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### is 3
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Oceanus.JobConfig("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Oceanus.JobConfig("example", new Tencentcloud.Oceanus.JobConfigArgs
+    ///         AutoRecover = 1,
+    ///         ClsLogsetId = "cd9adbb5-6b7d-48d2-9870-77658959c7a4",
+    ///         ClsTopicId = "cec4c2f1-0bf3-470e-b1a5-b1c451e88838",
+    ///         CosBucket = "autotest-gz-bucket-1257058945",
+    ///         DefaultParallelism = 1,
+    ///         EntrypointClass = "tf_example",
+    ///         ExpertModeOn = false,
+    ///         JobId = "cql-4xwincyn",
+    ///         JobManagerSpec = 1,
+    ///         LogCollect = true,
+    ///         LogCollectType = 3,
+    ///         LogLevel = "INFO",
+    ///         ProgramArgs = "--conf Key=Value",
+    ///         Properties = new[]
     ///         {
-    ///             AutoRecover = 1,
-    ///             ClsLogsetId = "cd9adbb5-6b7d-48d2-9870-77658959c7a4",
-    ///             ClsTopicId = "cec4c2f1-0bf3-470e-b1a5-b1c451e88838",
-    ///             CosBucket = "autotest-gz-bucket-1257058945",
-    ///             DefaultParallelism = 1,
-    ///             EntrypointClass = "tf_example",
-    ///             ExpertModeOn = false,
-    ///             JobId = "cql-4xwincyn",
-    ///             JobManagerSpec = 1,
-    ///             LogCollect = true,
-    ///             LogCollectType = 3,
-    ///             LogLevel = "INFO",
-    ///             ProgramArgs = "--conf Key=Value",
-    ///             Properties = 
+    ///             new Tencentcloud.Oceanus.Inputs.JobConfigPropertyArgs
     ///             {
-    ///                 new Tencentcloud.Oceanus.Inputs.JobConfigPropertyArgs
-    ///                 {
-    ///                     Key = "pipeline.max-parallelism",
-    ///                     Value = "2048",
-    ///                 },
+    ///                 Key = "pipeline.max-parallelism",
+    ///                 Value = "2048",
     ///             },
-    ///             Remark = "remark.",
-    ///             ResourceRefs = 
+    ///         },
+    ///         Remark = "remark.",
+    ///         ResourceRefs = new[]
+    ///         {
+    ///             new Tencentcloud.Oceanus.Inputs.JobConfigResourceRefArgs
     ///             {
-    ///                 new Tencentcloud.Oceanus.Inputs.JobConfigResourceRefArgs
-    ///                 {
-    ///                     ResourceId = "resource-q22ntswy",
-    ///                     Type = 1,
-    ///                     Version = 1,
-    ///                 },
+    ///                 ResourceId = "resource-q22ntswy",
+    ///                 Type = 1,
+    ///                 Version = 1,
     ///             },
-    ///             TaskManagerSpec = 1,
-    ///             WorkSpaceId = "space-2idq8wbr",
-    ///         });
-    ///     }
+    ///         },
+    ///         TaskManagerSpec = 1,
+    ///         WorkSpaceId = "space-2idq8wbr",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Oceanus/jobConfig:JobConfig")]
-    public partial class JobConfig : Pulumi.CustomResource
+    public partial class JobConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Oceanus platform job recovery switch 1: on -1: off.
@@ -288,7 +292,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         }
     }
 
-    public sealed class JobConfigArgs : Pulumi.ResourceArgs
+    public sealed class JobConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Oceanus platform job recovery switch 1: on -1: off.
@@ -437,9 +441,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public JobConfigArgs()
         {
         }
+        public static new JobConfigArgs Empty => new JobConfigArgs();
     }
 
-    public sealed class JobConfigState : Pulumi.ResourceArgs
+    public sealed class JobConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Oceanus platform job recovery switch 1: on -1: off.
@@ -588,5 +593,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public JobConfigState()
         {
         }
+        public static new JobConfigState Empty => new JobConfigState();
     }
 }

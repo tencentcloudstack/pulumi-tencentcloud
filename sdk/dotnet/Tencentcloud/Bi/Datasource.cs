@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var datasource = new Tencentcloud.Bi.Datasource("datasource", new()
     ///     {
-    ///         var datasource = new Tencentcloud.Bi.Datasource("datasource", new Tencentcloud.Bi.DatasourceArgs
-    ///         {
-    ///             Charset = "utf8",
-    ///             DbHost = "bj-cdb-1lxqg5r6.sql.tencentcdb.com",
-    ///             DbName = "tf-test",
-    ///             DbPort = 63694,
-    ///             DbPwd = "ABc123,,,",
-    ///             DbType = "MYSQL",
-    ///             DbUser = "root",
-    ///             ProjectId = 11015030,
-    ///             SourceName = "tf-source-name",
-    ///         });
-    ///     }
+    ///         Charset = "utf8",
+    ///         DbHost = "bj-cdb-1lxqg5r6.sql.tencentcdb.com",
+    ///         DbName = "tf-test",
+    ///         DbPort = 63694,
+    ///         DbPwd = "ABc123,,,",
+    ///         DbType = "MYSQL",
+    ///         DbUser = "root",
+    ///         ProjectId = 11015030,
+    ///         SourceName = "tf-source-name",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// bi datasource can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Bi/datasource:Datasource datasource datasource_id
+    /// $ pulumi import tencentcloud:Bi/datasource:Datasource datasource datasource_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Bi/datasource:Datasource")]
-    public partial class Datasource : Pulumi.CustomResource
+    public partial class Datasource : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Catalog.
@@ -171,6 +172,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "dbPwd",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -192,7 +197,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         }
     }
 
-    public sealed class DatasourceArgs : Pulumi.ResourceArgs
+    public sealed class DatasourceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Catalog.
@@ -242,11 +247,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         [Input("dbPort", required: true)]
         public Input<int> DbPort { get; set; } = null!;
 
+        [Input("dbPwd", required: true)]
+        private Input<string>? _dbPwd;
+
         /// <summary>
         /// Password.
         /// </summary>
-        [Input("dbPwd", required: true)]
-        public Input<string> DbPwd { get; set; } = null!;
+        public Input<string>? DbPwd
+        {
+            get => _dbPwd;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _dbPwd = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// `MYSQL`, `MSSQL`, `POSTGRE`, `ORACLE`, `CLICKHOUSE`, `TIDB`, `HIVE`, `PRESTO`.
@@ -293,9 +308,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         public DatasourceArgs()
         {
         }
+        public static new DatasourceArgs Empty => new DatasourceArgs();
     }
 
-    public sealed class DatasourceState : Pulumi.ResourceArgs
+    public sealed class DatasourceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Catalog.
@@ -345,11 +361,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         [Input("dbPort")]
         public Input<int>? DbPort { get; set; }
 
+        [Input("dbPwd")]
+        private Input<string>? _dbPwd;
+
         /// <summary>
         /// Password.
         /// </summary>
-        [Input("dbPwd")]
-        public Input<string>? DbPwd { get; set; }
+        public Input<string>? DbPwd
+        {
+            get => _dbPwd;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _dbPwd = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// `MYSQL`, `MSSQL`, `POSTGRE`, `ORACLE`, `CLICKHOUSE`, `TIDB`, `HIVE`, `PRESTO`.
@@ -396,5 +422,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         public DatasourceState()
         {
         }
+        public static new DatasourceState Empty => new DatasourceState();
     }
 }

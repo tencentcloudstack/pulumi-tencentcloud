@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Tencentcloud.Dcdb.DbSyncModeConfig("config", new()
     ///     {
-    ///         var config = new Tencentcloud.Dcdb.DbSyncModeConfig("config", new Tencentcloud.Dcdb.DbSyncModeConfigArgs
-    ///         {
-    ///             InstanceId = "%s",
-    ///             SyncMode = 2,
-    ///         });
-    ///     }
+    ///         InstanceId = "%s",
+    ///         SyncMode = 2,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dcdb db_sync_mode_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dcdb/dbSyncModeConfig:DbSyncModeConfig db_sync_mode_config db_sync_mode_config_id
+    /// $ pulumi import tencentcloud:Dcdb/dbSyncModeConfig:DbSyncModeConfig db_sync_mode_config db_sync_mode_config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/dbSyncModeConfig:DbSyncModeConfig")]
-    public partial class DbSyncModeConfig : Pulumi.CustomResource
+    public partial class DbSyncModeConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the instance for which to modify the sync mode. The ID is in the format of `tdsql-ow728lmc`.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         }
     }
 
-    public sealed class DbSyncModeConfigArgs : Pulumi.ResourceArgs
+    public sealed class DbSyncModeConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the instance for which to modify the sync mode. The ID is in the format of `tdsql-ow728lmc`.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public DbSyncModeConfigArgs()
         {
         }
+        public static new DbSyncModeConfigArgs Empty => new DbSyncModeConfigArgs();
     }
 
-    public sealed class DbSyncModeConfigState : Pulumi.ResourceArgs
+    public sealed class DbSyncModeConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the instance for which to modify the sync mode. The ID is in the format of `tdsql-ow728lmc`.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public DbSyncModeConfigState()
         {
         }
+        public static new DbSyncModeConfigState Empty => new DbSyncModeConfigState();
     }
 }

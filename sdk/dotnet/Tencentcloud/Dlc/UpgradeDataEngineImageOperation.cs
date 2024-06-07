@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var upgradeDataEngineImageOperation = new Tencentcloud.Dlc.UpgradeDataEngineImageOperation("upgradeDataEngineImageOperation", new()
     ///     {
-    ///         var upgradeDataEngineImageOperation = new Tencentcloud.Dlc.UpgradeDataEngineImageOperation("upgradeDataEngineImageOperation", new Tencentcloud.Dlc.UpgradeDataEngineImageOperationArgs
-    ///         {
-    ///             DataEngineId = "DataEngine-g5ds87d8",
-    ///         });
-    ///     }
+    ///         DataEngineId = "DataEngine-g5ds87d8",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/upgradeDataEngineImageOperation:UpgradeDataEngineImageOperation")]
-    public partial class UpgradeDataEngineImageOperation : Pulumi.CustomResource
+    public partial class UpgradeDataEngineImageOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Engine unique id.
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class UpgradeDataEngineImageOperationArgs : Pulumi.ResourceArgs
+    public sealed class UpgradeDataEngineImageOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Engine unique id.
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public UpgradeDataEngineImageOperationArgs()
         {
         }
+        public static new UpgradeDataEngineImageOperationArgs Empty => new UpgradeDataEngineImageOperationArgs();
     }
 
-    public sealed class UpgradeDataEngineImageOperationState : Pulumi.ResourceArgs
+    public sealed class UpgradeDataEngineImageOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Engine unique id.
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public UpgradeDataEngineImageOperationState()
         {
         }
+        public static new UpgradeDataEngineImageOperationState Empty => new UpgradeDataEngineImageOperationState();
     }
 }

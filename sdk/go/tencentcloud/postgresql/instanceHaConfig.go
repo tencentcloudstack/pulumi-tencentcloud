@@ -7,63 +7,74 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to set postgresql instance syncMode
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewInstanceHaConfig(ctx, "example", &Postgresql.InstanceHaConfigArgs{
-// 			InstanceId:            pulumi.String("postgres-gzg9jb2n"),
-// 			MaxStandbyLag:         pulumi.Int(10),
-// 			MaxStandbyLatency:     pulumi.Int(10737418240),
-// 			MaxSyncStandbyLag:     pulumi.Int(5),
-// 			MaxSyncStandbyLatency: pulumi.Int(52428800),
-// 			SyncMode:              pulumi.String("Semi-sync"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewInstanceHaConfig(ctx, "example", &Postgresql.InstanceHaConfigArgs{
+//				InstanceId:            pulumi.String("postgres-gzg9jb2n"),
+//				MaxStandbyLag:         pulumi.Int(10),
+//				MaxStandbyLatency:     pulumi.Int(10737418240),
+//				MaxSyncStandbyLag:     pulumi.Int(5),
+//				MaxSyncStandbyLatency: pulumi.Int(52428800),
+//				SyncMode:              pulumi.String("Semi-sync"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
 //
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewInstanceHaConfig(ctx, "example", &Postgresql.InstanceHaConfigArgs{
-// 			InstanceId:        pulumi.String("postgres-gzg9jb2n"),
-// 			MaxStandbyLag:     pulumi.Int(10),
-// 			MaxStandbyLatency: pulumi.Int(10737418240),
-// 			SyncMode:          pulumi.String("Async"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewInstanceHaConfig(ctx, "example", &Postgresql.InstanceHaConfigArgs{
+//				InstanceId:        pulumi.String("postgres-gzg9jb2n"),
+//				MaxStandbyLag:     pulumi.Int(10),
+//				MaxStandbyLatency: pulumi.Int(10737418240),
+//				SyncMode:          pulumi.String("Async"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type InstanceHaConfig struct {
 	pulumi.CustomResourceState
 
@@ -100,7 +111,7 @@ func NewInstanceHaConfig(ctx *pulumi.Context,
 	if args.SyncMode == nil {
 		return nil, errors.New("invalid value for required argument 'SyncMode'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource InstanceHaConfig
 	err := ctx.RegisterResource("tencentcloud:Postgresql/instanceHaConfig:InstanceHaConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -213,7 +224,7 @@ func (i *InstanceHaConfig) ToInstanceHaConfigOutputWithContext(ctx context.Conte
 // InstanceHaConfigArrayInput is an input type that accepts InstanceHaConfigArray and InstanceHaConfigArrayOutput values.
 // You can construct a concrete instance of `InstanceHaConfigArrayInput` via:
 //
-//          InstanceHaConfigArray{ InstanceHaConfigArgs{...} }
+//	InstanceHaConfigArray{ InstanceHaConfigArgs{...} }
 type InstanceHaConfigArrayInput interface {
 	pulumi.Input
 
@@ -238,7 +249,7 @@ func (i InstanceHaConfigArray) ToInstanceHaConfigArrayOutputWithContext(ctx cont
 // InstanceHaConfigMapInput is an input type that accepts InstanceHaConfigMap and InstanceHaConfigMapOutput values.
 // You can construct a concrete instance of `InstanceHaConfigMapInput` via:
 //
-//          InstanceHaConfigMap{ "key": InstanceHaConfigArgs{...} }
+//	InstanceHaConfigMap{ "key": InstanceHaConfigArgs{...} }
 type InstanceHaConfigMapInput interface {
 	pulumi.Input
 

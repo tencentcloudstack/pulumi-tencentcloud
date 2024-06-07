@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const sgSnapshotFileContent = pulumi.output(tencentcloud.Vpc.getSgSnapshotFileContent({
+ * const sgSnapshotFileContent = tencentcloud.Vpc.getSgSnapshotFileContent({
  *     securityGroupId: "sg-ntrgm89v",
  *     snapshotFileId: "ssfile-017gepjxpr",
  *     snapshotPolicyId: "sspolicy-ebjofe71",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSgSnapshotFileContent(args: GetSgSnapshotFileContentArgs, opts?: pulumi.InvokeOptions): Promise<GetSgSnapshotFileContentResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpc/getSgSnapshotFileContent:getSgSnapshotFileContent", {
         "resultOutputFile": args.resultOutputFile,
         "securityGroupId": args.securityGroupId,
@@ -93,9 +93,26 @@ export interface GetSgSnapshotFileContentResult {
     readonly snapshotFileId: string;
     readonly snapshotPolicyId: string;
 }
-
+/**
+ * Use this data source to query detailed information of vpc sgSnapshotFileContent
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const sgSnapshotFileContent = tencentcloud.Vpc.getSgSnapshotFileContent({
+ *     securityGroupId: "sg-ntrgm89v",
+ *     snapshotFileId: "ssfile-017gepjxpr",
+ *     snapshotPolicyId: "sspolicy-ebjofe71",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSgSnapshotFileContentOutput(args: GetSgSnapshotFileContentOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSgSnapshotFileContentResult> {
-    return pulumi.output(args).apply(a => getSgSnapshotFileContent(a, opts))
+    return pulumi.output(args).apply((a: any) => getSgSnapshotFileContent(a, opts))
 }
 
 /**

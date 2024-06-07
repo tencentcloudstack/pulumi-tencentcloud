@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dlc modifyUserTypOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.NewModifyUserTypOperation(ctx, "modifyUserTypOperation", &Dlc.ModifyUserTypOperationArgs{
-// 			UserId:   pulumi.String("127382378"),
-// 			UserType: pulumi.String("ADMIN"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.NewModifyUserTypOperation(ctx, "modifyUserTypOperation", &Dlc.ModifyUserTypOperationArgs{
+//				UserId:   pulumi.String("127382378"),
+//				UserType: pulumi.String("ADMIN"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dlc modify_user_typ_operation can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dlc/modifyUserTypOperation:ModifyUserTypOperation modify_user_typ_operation modify_user_typ_operation_id
+// $ pulumi import tencentcloud:Dlc/modifyUserTypOperation:ModifyUserTypOperation modify_user_typ_operation modify_user_typ_operation_id
 // ```
 type ModifyUserTypOperation struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewModifyUserTypOperation(ctx *pulumi.Context,
 	if args.UserType == nil {
 		return nil, errors.New("invalid value for required argument 'UserType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ModifyUserTypOperation
 	err := ctx.RegisterResource("tencentcloud:Dlc/modifyUserTypOperation:ModifyUserTypOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *ModifyUserTypOperation) ToModifyUserTypOperationOutputWithContext(ctx c
 // ModifyUserTypOperationArrayInput is an input type that accepts ModifyUserTypOperationArray and ModifyUserTypOperationArrayOutput values.
 // You can construct a concrete instance of `ModifyUserTypOperationArrayInput` via:
 //
-//          ModifyUserTypOperationArray{ ModifyUserTypOperationArgs{...} }
+//	ModifyUserTypOperationArray{ ModifyUserTypOperationArgs{...} }
 type ModifyUserTypOperationArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i ModifyUserTypOperationArray) ToModifyUserTypOperationArrayOutputWithCont
 // ModifyUserTypOperationMapInput is an input type that accepts ModifyUserTypOperationMap and ModifyUserTypOperationMapOutput values.
 // You can construct a concrete instance of `ModifyUserTypOperationMapInput` via:
 //
-//          ModifyUserTypOperationMap{ "key": ModifyUserTypOperationArgs{...} }
+//	ModifyUserTypOperationMap{ "key": ModifyUserTypOperationArgs{...} }
 type ModifyUserTypOperationMapInput interface {
 	pulumi.Input
 

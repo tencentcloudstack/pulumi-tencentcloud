@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class DataTransformDstResourceGetArgs : Pulumi.ResourceArgs
+    public sealed class DataTransformDstResourceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// alias.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public DataTransformDstResourceGetArgs()
         {
         }
+        public static new DataTransformDstResourceGetArgs Empty => new DataTransformDstResourceGetArgs();
     }
 }

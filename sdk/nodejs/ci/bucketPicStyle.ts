@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bucketPicStyle = new tencentcloud.Ci.BucketPicStyle("bucket_pic_style", {
+ * const bucketPicStyle = new tencentcloud.ci.BucketPicStyle("bucketPicStyle", {
  *     bucket: "terraform-ci-xxxxxx",
  *     styleBody: "imageMogr2/thumbnail/20x/crop/20x20/gravity/center/interlace/0/quality/100",
  *     styleName: "rayscale_2",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ci bucket_pic_style can be imported using the bucket#styleName, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ci/bucketPicStyle:BucketPicStyle bucket_pic_style terraform-ci-xxxxxx#rayscale_2
+ * $ pulumi import tencentcloud:Ci/bucketPicStyle:BucketPicStyle bucket_pic_style terraform-ci-xxxxxx#rayscale_2
  * ```
  */
 export class BucketPicStyle extends pulumi.CustomResource {

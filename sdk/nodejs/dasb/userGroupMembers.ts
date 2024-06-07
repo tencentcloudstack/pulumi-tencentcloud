@@ -9,26 +9,32 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Dasb.UserGroupMembers("example", {
- *     memberIdSets: [
- *         1,
- *         2,
- *         3,
- *     ],
- *     userGroupId: 3,
+ * const exampleUser = new tencentcloud.dasb.User("exampleUser", {
+ *     userName: "tf_example",
+ *     realName: "terraform",
+ *     phone: "+86|18345678782",
+ *     email: "demo@tencent.com",
+ *     authType: 0,
+ * });
+ * const exampleUserGroup = new tencentcloud.dasb.UserGroup("exampleUserGroup", {});
+ * const exampleUserGroupMembers = new tencentcloud.dasb.UserGroupMembers("exampleUserGroupMembers", {
+ *     userGroupId: exampleUserGroup.id,
+ *     memberIdSets: [exampleUser.id],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dasb user_group_members can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dasb/userGroupMembers:UserGroupMembers example 3#1,2,3
+ * $ pulumi import tencentcloud:Dasb/userGroupMembers:UserGroupMembers example 3#14
  * ```
  */
 export class UserGroupMembers extends pulumi.CustomResource {

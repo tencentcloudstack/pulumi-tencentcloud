@@ -15,42 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var backupPlanConfig = new Tencentcloud.Postgresql.BackupPlanConfig("backupPlanConfig", new()
     ///     {
-    ///         var backupPlanConfig = new Tencentcloud.Postgresql.BackupPlanConfig("backupPlanConfig", new Tencentcloud.Postgresql.BackupPlanConfigArgs
+    ///         DbInstanceId = local.Pgsql_id,
+    ///         MinBackupStartTime = "01:00:00",
+    ///         MaxBackupStartTime = "02:00:00",
+    ///         BaseBackupRetentionPeriod = 7,
+    ///         BackupPeriods = new[]
     ///         {
-    ///             DbInstanceId = local.Pgsql_id,
-    ///             MinBackupStartTime = "01:00:00",
-    ///             MaxBackupStartTime = "02:00:00",
-    ///             BaseBackupRetentionPeriod = 7,
-    ///             BackupPeriods = 
-    ///             {
-    ///                 "monday",
-    ///                 "wednesday",
-    ///                 "friday",
-    ///             },
-    ///         });
-    ///     }
+    ///             "monday",
+    ///             "wednesday",
+    ///             "friday",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// postgres backup_plan_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig backup_plan_config backup_plan_config_id
+    /// $ pulumi import tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig backup_plan_config backup_plan_config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig")]
-    public partial class BackupPlanConfig : Pulumi.CustomResource
+    public partial class BackupPlanConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Backup cycle, which means on which days each week the instance will be backed up. The parameter value should be the lowercase names of the days of the week.
@@ -127,7 +128,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class BackupPlanConfigArgs : Pulumi.ResourceArgs
+    public sealed class BackupPlanConfigArgs : global::Pulumi.ResourceArgs
     {
         [Input("backupPeriods")]
         private InputList<string>? _backupPeriods;
@@ -168,9 +169,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public BackupPlanConfigArgs()
         {
         }
+        public static new BackupPlanConfigArgs Empty => new BackupPlanConfigArgs();
     }
 
-    public sealed class BackupPlanConfigState : Pulumi.ResourceArgs
+    public sealed class BackupPlanConfigState : global::Pulumi.ResourceArgs
     {
         [Input("backupPeriods")]
         private InputList<string>? _backupPeriods;
@@ -211,5 +213,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public BackupPlanConfigState()
         {
         }
+        public static new BackupPlanConfigState Empty => new BackupPlanConfigState();
     }
 }

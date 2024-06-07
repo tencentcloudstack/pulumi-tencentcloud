@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -12,9 +13,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const baseGroup = new tencentcloud.security.Group("baseGroup", {description: "Testing Rule Set Security"});
  * const relative = new tencentcloud.security.Group("relative", {description: "Used for attach security policy"});
@@ -83,13 +85,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
- * Resource tencentcloud_security_group_rule_set can be imported by passing security grou id
+ * Resource tencentcloud_security_group_rule_set can be imported by passing security grou id:
  *
  * ```sh
- *  $ pulumi import tencentcloud:Security/groupRuleSet:GroupRuleSet sglab_1 sg-xxxxxxxx
+ * $ pulumi import tencentcloud:Security/groupRuleSet:GroupRuleSet sglab_1 sg-xxxxxxxx
  * ```
  */
 export class GroupRuleSet extends pulumi.CustomResource {

@@ -22,11 +22,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
     /// CVM instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Instance/instance:Instance foo ins-2qol3a80
+    /// $ pulumi import tencentcloud:Instance/instance:Instance foo ins-2qol3a80
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Instance/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.
@@ -63,6 +63,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// </summary>
         [Output("cdhInstanceType")]
         public Output<string?> CdhInstanceType { get; private set; } = null!;
+
+        /// <summary>
+        /// The number of CPU cores of the instance.
+        /// </summary>
+        [Output("cpu")]
+        public Output<int> Cpu { get; private set; } = null!;
 
         /// <summary>
         /// Create time of the instance.
@@ -119,13 +125,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Output<string> ImageId { get; private set; } = null!;
 
         /// <summary>
-        /// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID` and `CDHPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time. `CDHPAID` instance must set `cdh_instance_type` and `cdh_host_id`.
+        /// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDHPAID` and `CDCPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time. `CDHPAID` instance must set `cdh_instance_type` and `cdh_host_id`.
         /// </summary>
         [Output("instanceChargeType")]
         public Output<string?> InstanceChargeType { get; private set; } = null!;
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60`.
         /// </summary>
         [Output("instanceChargeTypePrepaidPeriod")]
         public Output<int?> InstanceChargeTypePrepaidPeriod { get; private set; } = null!;
@@ -191,10 +197,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Output<string> KeyName { get; private set; } = null!;
 
         /// <summary>
+        /// Instance memory capacity, unit in GB.
+        /// </summary>
+        [Output("memory")]
+        public Output<int> Memory { get; private set; } = null!;
+
+        /// <summary>
         /// A list of orderly security group IDs to associate with.
         /// </summary>
         [Output("orderlySecurityGroups")]
         public Output<ImmutableArray<string>> OrderlySecurityGroups { get; private set; } = null!;
+
+        /// <summary>
+        /// Instance os name.
+        /// </summary>
+        [Output("osName")]
+        public Output<string> OsName { get; private set; } = null!;
 
         /// <summary>
         /// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
@@ -299,6 +317,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Output<string?> UserDataRaw { get; private set; } = null!;
 
         /// <summary>
+        /// Globally unique ID of the instance.
+        /// </summary>
+        [Output("uuid")]
+        public Output<string> Uuid { get; private set; } = null!;
+
+        /// <summary>
         /// The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.
         /// </summary>
         [Output("vpcId")]
@@ -328,6 +352,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -349,7 +377,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.
@@ -436,13 +464,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Input<string> ImageId { get; set; } = null!;
 
         /// <summary>
-        /// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID` and `CDHPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time. `CDHPAID` instance must set `cdh_instance_type` and `cdh_host_id`.
+        /// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDHPAID` and `CDCPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time. `CDHPAID` instance must set `cdh_instance_type` and `cdh_host_id`.
         /// </summary>
         [Input("instanceChargeType")]
         public Input<string>? InstanceChargeType { get; set; }
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60`.
         /// </summary>
         [Input("instanceChargeTypePrepaidPeriod")]
         public Input<int>? InstanceChargeTypePrepaidPeriod { get; set; }
@@ -519,11 +547,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
             set => _orderlySecurityGroups = value;
         }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The ID of a placement group.
@@ -637,9 +675,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.
@@ -676,6 +715,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// </summary>
         [Input("cdhInstanceType")]
         public Input<string>? CdhInstanceType { get; set; }
+
+        /// <summary>
+        /// The number of CPU cores of the instance.
+        /// </summary>
+        [Input("cpu")]
+        public Input<int>? Cpu { get; set; }
 
         /// <summary>
         /// Create time of the instance.
@@ -738,13 +783,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Input<string>? ImageId { get; set; }
 
         /// <summary>
-        /// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID` and `CDHPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time. `CDHPAID` instance must set `cdh_instance_type` and `cdh_host_id`.
+        /// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDHPAID` and `CDCPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spot_instance_type` and `spot_max_price` at the same time. `CDHPAID` instance must set `cdh_instance_type` and `cdh_host_id`.
         /// </summary>
         [Input("instanceChargeType")]
         public Input<string>? InstanceChargeType { get; set; }
 
         /// <summary>
-        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+        /// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60`.
         /// </summary>
         [Input("instanceChargeTypePrepaidPeriod")]
         public Input<int>? InstanceChargeTypePrepaidPeriod { get; set; }
@@ -815,6 +860,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         [Input("keyName")]
         public Input<string>? KeyName { get; set; }
 
+        /// <summary>
+        /// Instance memory capacity, unit in GB.
+        /// </summary>
+        [Input("memory")]
+        public Input<int>? Memory { get; set; }
+
         [Input("orderlySecurityGroups")]
         private InputList<string>? _orderlySecurityGroups;
 
@@ -828,10 +879,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         }
 
         /// <summary>
+        /// Instance os name.
+        /// </summary>
+        [Input("osName")]
+        public Input<string>? OsName { get; set; }
+
+        [Input("password")]
+        private Input<string>? _password;
+
+        /// <summary>
         /// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The ID of a placement group.
@@ -943,6 +1010,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public Input<string>? UserDataRaw { get; set; }
 
         /// <summary>
+        /// Globally unique ID of the instance.
+        /// </summary>
+        [Input("uuid")]
+        public Input<string>? Uuid { get; set; }
+
+        /// <summary>
         /// The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.
         /// </summary>
         [Input("vpcId")]
@@ -951,5 +1024,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const snapshotFiles = pulumi.output(tencentcloud.Vpc.getSnapshotFiles({
+ * const snapshotFiles = tencentcloud.Vpc.getSnapshotFiles({
  *     businessType: "securitygroup",
  *     endDate: "2023-10-30 19:00:00",
  *     instanceId: "sg-902tl7t7",
  *     startDate: "2022-10-10 00:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSnapshotFiles(args: GetSnapshotFilesArgs, opts?: pulumi.InvokeOptions): Promise<GetSnapshotFilesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpc/getSnapshotFiles:getSnapshotFiles", {
         "businessType": args.businessType,
         "endDate": args.endDate,
@@ -84,9 +84,27 @@ export interface GetSnapshotFilesResult {
     readonly snapshotFileSets: outputs.Vpc.GetSnapshotFilesSnapshotFileSet[];
     readonly startDate: string;
 }
-
+/**
+ * Use this data source to query detailed information of vpc snapshotFiles
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const snapshotFiles = tencentcloud.Vpc.getSnapshotFiles({
+ *     businessType: "securitygroup",
+ *     endDate: "2023-10-30 19:00:00",
+ *     instanceId: "sg-902tl7t7",
+ *     startDate: "2022-10-10 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSnapshotFilesOutput(args: GetSnapshotFilesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSnapshotFilesResult> {
-    return pulumi.output(args).apply(a => getSnapshotFiles(a, opts))
+    return pulumi.output(args).apply((a: any) => getSnapshotFiles(a, opts))
 }
 
 /**

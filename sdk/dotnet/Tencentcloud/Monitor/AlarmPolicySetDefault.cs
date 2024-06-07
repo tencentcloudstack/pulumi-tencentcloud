@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var policySetDefault = new Tencentcloud.Monitor.AlarmPolicySetDefault("policySetDefault", new()
     ///     {
-    ///         var policySetDefault = new Tencentcloud.Monitor.AlarmPolicySetDefault("policySetDefault", new Tencentcloud.Monitor.AlarmPolicySetDefaultArgs
-    ///         {
-    ///             Module = "monitor",
-    ///             PolicyId = "policy-u4iykjkt",
-    ///         });
-    ///     }
+    ///         Module = "monitor",
+    ///         PolicyId = "policy-u4iykjkt",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/alarmPolicySetDefault:AlarmPolicySetDefault")]
-    public partial class AlarmPolicySetDefault : Pulumi.CustomResource
+    public partial class AlarmPolicySetDefault : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Fixed value, as `monitor`.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class AlarmPolicySetDefaultArgs : Pulumi.ResourceArgs
+    public sealed class AlarmPolicySetDefaultArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Fixed value, as `monitor`.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public AlarmPolicySetDefaultArgs()
         {
         }
+        public static new AlarmPolicySetDefaultArgs Empty => new AlarmPolicySetDefaultArgs();
     }
 
-    public sealed class AlarmPolicySetDefaultState : Pulumi.ResourceArgs
+    public sealed class AlarmPolicySetDefaultState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Fixed value, as `monitor`.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public AlarmPolicySetDefaultState()
         {
         }
+        public static new AlarmPolicySetDefaultState Empty => new AlarmPolicySetDefaultState();
     }
 }

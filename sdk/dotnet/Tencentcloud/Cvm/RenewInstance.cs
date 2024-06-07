@@ -12,9 +12,83 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
 {
     /// <summary>
     /// Provides a resource to create a cvm renew_instance
+    /// 
+    /// ## Example Usage
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create vpc subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create cvm
+    ///     var exampleInstance = new Tencentcloud.Instance.Instance("exampleInstance", new()
+    ///     {
+    ///         InstanceName = "tf_example",
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         ImageId = "img-9qrfy1xt",
+    ///         InstanceType = "SA3.MEDIUM4",
+    ///         SystemDiskType = "CLOUD_HSSD",
+    ///         SystemDiskSize = 100,
+    ///         Hostname = "example",
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         ForceDelete = true,
+    ///         InstanceChargeType = "PREPAID",
+    ///         InstanceChargeTypePrepaidPeriod = 1,
+    ///         InstanceChargeTypePrepaidRenewFlag = "NOTIFY_AND_MANUAL_RENEW",
+    ///         DataDisks = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.InstanceDataDiskArgs
+    ///             {
+    ///                 DataDiskType = "CLOUD_HSSD",
+    ///                 DataDiskSize = 50,
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    ///     // renew instance
+    ///     var exampleRenewInstance = new Tencentcloud.Cvm.RenewInstance("exampleRenewInstance", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///         RenewPortableDataDisk = true,
+    ///         InstanceChargePrepaid = new Tencentcloud.Cvm.Inputs.RenewInstanceInstanceChargePrepaidArgs
+    ///         {
+    ///             Period = 1,
+    ///             RenewFlag = "NOTIFY_AND_MANUAL_RENEW",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cvm/renewInstance:RenewInstance")]
-    public partial class RenewInstance : Pulumi.CustomResource
+    public partial class RenewInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Prepaid mode, that is, yearly and monthly subscription related parameter settings. Through this parameter, you can specify the renewal duration of the Subscription instance, whether to set automatic renewal, and other attributes. For yearly and monthly subscription instances, this parameter is required.
@@ -30,9 +104,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
 
         /// <summary>
         /// Whether to renew the elastic data disk. Valid values:
-        /// - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
-        /// - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-        /// Default value: TRUE.
         /// </summary>
         [Output("renewPortableDataDisk")]
         public Output<bool?> RenewPortableDataDisk { get; private set; } = null!;
@@ -82,7 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         }
     }
 
-    public sealed class RenewInstanceArgs : Pulumi.ResourceArgs
+    public sealed class RenewInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Prepaid mode, that is, yearly and monthly subscription related parameter settings. Through this parameter, you can specify the renewal duration of the Subscription instance, whether to set automatic renewal, and other attributes. For yearly and monthly subscription instances, this parameter is required.
@@ -98,9 +169,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
 
         /// <summary>
         /// Whether to renew the elastic data disk. Valid values:
-        /// - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
-        /// - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-        /// Default value: TRUE.
         /// </summary>
         [Input("renewPortableDataDisk")]
         public Input<bool>? RenewPortableDataDisk { get; set; }
@@ -108,9 +176,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public RenewInstanceArgs()
         {
         }
+        public static new RenewInstanceArgs Empty => new RenewInstanceArgs();
     }
 
-    public sealed class RenewInstanceState : Pulumi.ResourceArgs
+    public sealed class RenewInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Prepaid mode, that is, yearly and monthly subscription related parameter settings. Through this parameter, you can specify the renewal duration of the Subscription instance, whether to set automatic renewal, and other attributes. For yearly and monthly subscription instances, this parameter is required.
@@ -126,9 +195,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
 
         /// <summary>
         /// Whether to renew the elastic data disk. Valid values:
-        /// - `TRUE`: Indicates to renew the subscription instance and renew the attached elastic data disk at the same time
-        /// - `FALSE`: Indicates that the subscription instance will be renewed and the elastic data disk attached to it will not be renewed
-        /// Default value: TRUE.
         /// </summary>
         [Input("renewPortableDataDisk")]
         public Input<bool>? RenewPortableDataDisk { get; set; }
@@ -136,5 +202,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public RenewInstanceState()
         {
         }
+        public static new RenewInstanceState Empty => new RenewInstanceState();
     }
 }

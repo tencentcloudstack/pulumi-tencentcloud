@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
 {
     [TencentcloudResourceType("tencentcloud:Sqlserver/instanceSsl:InstanceSsl")]
-    public partial class InstanceSsl : Pulumi.CustomResource
+    public partial class InstanceSsl : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -70,7 +70,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         }
     }
 
-    public sealed class InstanceSslArgs : Pulumi.ResourceArgs
+    public sealed class InstanceSslArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -87,9 +87,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public InstanceSslArgs()
         {
         }
+        public static new InstanceSslArgs Empty => new InstanceSslArgs();
     }
 
-    public sealed class InstanceSslState : Pulumi.ResourceArgs
+    public sealed class InstanceSslState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -106,5 +107,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public InstanceSslState()
         {
         }
+        public static new InstanceSslState Empty => new InstanceSslState();
     }
 }

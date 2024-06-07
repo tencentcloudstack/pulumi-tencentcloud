@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,8 @@ import * as utilities from "../utilities";
  */
 export function getAcls(args?: GetAclsArgs, opts?: pulumi.InvokeOptions): Promise<GetAclsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpc/getAcls:getAcls", {
         "id": args.id,
         "name": args.name,
@@ -67,9 +65,11 @@ export interface GetAclsResult {
      */
     readonly vpcId?: string;
 }
-
+/**
+ * Use this data source to query VPC Network ACL information.
+ */
 export function getAclsOutput(args?: GetAclsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAclsResult> {
-    return pulumi.output(args).apply(a => getAcls(a, opts))
+    return pulumi.output(args).apply((a: any) => getAcls(a, opts))
 }
 
 /**

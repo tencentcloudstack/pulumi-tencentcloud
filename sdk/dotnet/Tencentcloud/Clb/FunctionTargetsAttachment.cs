@@ -15,47 +15,48 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var functionTargets = new Tencentcloud.Clb.FunctionTargetsAttachment("functionTargets", new()
     ///     {
-    ///         var functionTargets = new Tencentcloud.Clb.FunctionTargetsAttachment("functionTargets", new Tencentcloud.Clb.FunctionTargetsAttachmentArgs
+    ///         Domain = "xxx.com",
+    ///         FunctionTargets = new Tencentcloud.Clb.Inputs.FunctionTargetsAttachmentFunctionTargetsArgs
     ///         {
-    ///             Domain = "xxx.com",
-    ///             FunctionTargets = new Tencentcloud.Clb.Inputs.FunctionTargetsAttachmentFunctionTargetsArgs
+    ///             Function = new Tencentcloud.Clb.Inputs.FunctionTargetsAttachmentFunctionTargetsFunctionArgs
     ///             {
-    ///                 Function = new Tencentcloud.Clb.Inputs.FunctionTargetsAttachmentFunctionTargetsFunctionArgs
-    ///                 {
-    ///                     FunctionName = "keep-tf-test-1675954233",
-    ///                     FunctionNamespace = "default",
-    ///                     FunctionQualifier = "$LATEST",
-    ///                     FunctionQualifierType = "VERSION",
-    ///                 },
-    ///                 Weight = 10,
+    ///                 FunctionName = "keep-tf-test-1675954233",
+    ///                 FunctionNamespace = "default",
+    ///                 FunctionQualifier = "$LATEST",
+    ///                 FunctionQualifierType = "VERSION",
     ///             },
-    ///             ListenerId = "lbl-nonkgvc2",
-    ///             LoadBalancerId = "lb-5dnrkgry",
-    ///             Url = "/",
-    ///         });
-    ///     }
+    ///             Weight = 10,
+    ///         },
+    ///         ListenerId = "lbl-nonkgvc2",
+    ///         LoadBalancerId = "lb-5dnrkgry",
+    ///         Url = "/",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// clb function_targets_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clb/functionTargetsAttachment:FunctionTargetsAttachment function_targets loadBalancerId#listenerId#locationId or loadBalancerId#listenerId#domain#rule
+    /// $ pulumi import tencentcloud:Clb/functionTargetsAttachment:FunctionTargetsAttachment function_targets loadBalancerId#listenerId#locationId or loadBalancerId#listenerId#domain#rule
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/functionTargetsAttachment:FunctionTargetsAttachment")]
-    public partial class FunctionTargetsAttachment : Pulumi.CustomResource
+    public partial class FunctionTargetsAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The domain name of the target forwarding rule. If the LocationId parameter has been entered, this parameter will not take effect.
@@ -138,7 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class FunctionTargetsAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class FunctionTargetsAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The domain name of the target forwarding rule. If the LocationId parameter has been entered, this parameter will not take effect.
@@ -179,9 +180,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public FunctionTargetsAttachmentArgs()
         {
         }
+        public static new FunctionTargetsAttachmentArgs Empty => new FunctionTargetsAttachmentArgs();
     }
 
-    public sealed class FunctionTargetsAttachmentState : Pulumi.ResourceArgs
+    public sealed class FunctionTargetsAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The domain name of the target forwarding rule. If the LocationId parameter has been entered, this parameter will not take effect.
@@ -222,5 +224,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public FunctionTargetsAttachmentState()
         {
         }
+        public static new FunctionTargetsAttachmentState Empty => new FunctionTargetsAttachmentState();
     }
 }

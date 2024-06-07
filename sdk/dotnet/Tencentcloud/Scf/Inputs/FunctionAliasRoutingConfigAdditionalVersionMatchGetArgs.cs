@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
 {
 
-    public sealed class FunctionAliasRoutingConfigAdditionalVersionMatchGetArgs : Pulumi.ResourceArgs
+    public sealed class FunctionAliasRoutingConfigAdditionalVersionMatchGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Rule requirements for range match:It should be described in an open or closed range, i.e., (a,b) or [a,b], where both a and b are integersRule requirements for exact match:Exact string match.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public FunctionAliasRoutingConfigAdditionalVersionMatchGetArgs()
         {
         }
+        public static new FunctionAliasRoutingConfigAdditionalVersionMatchGetArgs Empty => new FunctionAliasRoutingConfigAdditionalVersionMatchGetArgs();
     }
 }

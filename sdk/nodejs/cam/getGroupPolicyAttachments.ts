@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -22,13 +24,11 @@ import * as utilities from "../utilities";
  *     policyId: tencentcloud_cam_policy.foo.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getGroupPolicyAttachments(args: GetGroupPolicyAttachmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupPolicyAttachmentsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cam/getGroupPolicyAttachments:getGroupPolicyAttachments", {
         "createMode": args.createMode,
         "groupId": args.groupId,
@@ -94,9 +94,28 @@ export interface GetGroupPolicyAttachmentsResult {
     readonly policyType?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of CAM group policy attachments
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Cam.getGroupPolicyAttachments({
+ *     groupId: tencentcloud_cam_group.foo.id,
+ * });
+ * const bar = tencentcloud.Cam.getGroupPolicyAttachments({
+ *     groupId: tencentcloud_cam_group.foo.id,
+ *     policyId: tencentcloud_cam_policy.foo.id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getGroupPolicyAttachmentsOutput(args: GetGroupPolicyAttachmentsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGroupPolicyAttachmentsResult> {
-    return pulumi.output(args).apply(a => getGroupPolicyAttachments(a, opts))
+    return pulumi.output(args).apply((a: any) => getGroupPolicyAttachments(a, opts))
 }
 
 /**

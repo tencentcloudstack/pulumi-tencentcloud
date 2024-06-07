@@ -7,49 +7,19 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create a VOD image sprite template.
 //
-// ## Example Usage
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vod.NewImageSpriteTemplate(ctx, "foo", &Vod.ImageSpriteTemplateArgs{
-// 			ColumnCount:        pulumi.Int(3),
-// 			Comment:            pulumi.String("test"),
-// 			FillType:           pulumi.String("stretch"),
-// 			Height:             pulumi.Int(128),
-// 			ResolutionAdaptive: pulumi.Bool(false),
-// 			RowCount:           pulumi.Int(3),
-// 			SampleInterval:     pulumi.Int(10),
-// 			SampleType:         pulumi.String("Percent"),
-// 			Width:              pulumi.Int(128),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-//
 // ## Import
 //
-// VOD image sprite template can be imported using the id, e.g.
+// VOD image sprite template can be imported using the id($subAppId#$templateId), e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate foo 51156
+// $ pulumi import tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate foo $subAppId#$templateId
 // ```
 type ImageSpriteTemplate struct {
 	pulumi.CustomResourceState
@@ -62,6 +32,12 @@ type ImageSpriteTemplate struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: `black`.
 	FillType pulumi.StringPtrOutput `pulumi:"fillType"`
+	// Image format, Valid values:
+	// - jpg: jpg format;
+	// - png: png format;
+	// - webp: webp format;
+	//   Default value: jpg.
+	Format pulumi.StringOutput `pulumi:"format"`
 	// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Height pulumi.IntPtrOutput `pulumi:"height"`
 	// Name of a time point screen capturing template. Length limit: 64 characters.
@@ -74,8 +50,12 @@ type ImageSpriteTemplate struct {
 	SampleInterval pulumi.IntOutput `pulumi:"sampleInterval"`
 	// Sampling type. Valid values: `Percent`, `Time`. `Percent`: by percent. `Time`: by time interval.
 	SampleType pulumi.StringOutput `pulumi:"sampleType"`
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
 	SubAppId pulumi.IntPtrOutput `pulumi:"subAppId"`
+	// Template type, value range:
+	// - Preset: system preset template;
+	// - Custom: user-defined templates.
+	Type pulumi.StringOutput `pulumi:"type"`
 	// Last modified time of template in ISO date format.
 	UpdateTime pulumi.StringOutput `pulumi:"updateTime"`
 	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
@@ -101,7 +81,7 @@ func NewImageSpriteTemplate(ctx *pulumi.Context,
 	if args.SampleType == nil {
 		return nil, errors.New("invalid value for required argument 'SampleType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ImageSpriteTemplate
 	err := ctx.RegisterResource("tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -132,6 +112,12 @@ type imageSpriteTemplateState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: `black`.
 	FillType *string `pulumi:"fillType"`
+	// Image format, Valid values:
+	// - jpg: jpg format;
+	// - png: png format;
+	// - webp: webp format;
+	//   Default value: jpg.
+	Format *string `pulumi:"format"`
 	// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Height *int `pulumi:"height"`
 	// Name of a time point screen capturing template. Length limit: 64 characters.
@@ -144,8 +130,12 @@ type imageSpriteTemplateState struct {
 	SampleInterval *int `pulumi:"sampleInterval"`
 	// Sampling type. Valid values: `Percent`, `Time`. `Percent`: by percent. `Time`: by time interval.
 	SampleType *string `pulumi:"sampleType"`
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
 	SubAppId *int `pulumi:"subAppId"`
+	// Template type, value range:
+	// - Preset: system preset template;
+	// - Custom: user-defined templates.
+	Type *string `pulumi:"type"`
 	// Last modified time of template in ISO date format.
 	UpdateTime *string `pulumi:"updateTime"`
 	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
@@ -161,6 +151,12 @@ type ImageSpriteTemplateState struct {
 	CreateTime pulumi.StringPtrInput
 	// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: `black`.
 	FillType pulumi.StringPtrInput
+	// Image format, Valid values:
+	// - jpg: jpg format;
+	// - png: png format;
+	// - webp: webp format;
+	//   Default value: jpg.
+	Format pulumi.StringPtrInput
 	// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Height pulumi.IntPtrInput
 	// Name of a time point screen capturing template. Length limit: 64 characters.
@@ -173,8 +169,12 @@ type ImageSpriteTemplateState struct {
 	SampleInterval pulumi.IntPtrInput
 	// Sampling type. Valid values: `Percent`, `Time`. `Percent`: by percent. `Time`: by time interval.
 	SampleType pulumi.StringPtrInput
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
 	SubAppId pulumi.IntPtrInput
+	// Template type, value range:
+	// - Preset: system preset template;
+	// - Custom: user-defined templates.
+	Type pulumi.StringPtrInput
 	// Last modified time of template in ISO date format.
 	UpdateTime pulumi.StringPtrInput
 	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
@@ -192,6 +192,12 @@ type imageSpriteTemplateArgs struct {
 	Comment *string `pulumi:"comment"`
 	// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: `black`.
 	FillType *string `pulumi:"fillType"`
+	// Image format, Valid values:
+	// - jpg: jpg format;
+	// - png: png format;
+	// - webp: webp format;
+	//   Default value: jpg.
+	Format *string `pulumi:"format"`
 	// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Height *int `pulumi:"height"`
 	// Name of a time point screen capturing template. Length limit: 64 characters.
@@ -204,7 +210,7 @@ type imageSpriteTemplateArgs struct {
 	SampleInterval int `pulumi:"sampleInterval"`
 	// Sampling type. Valid values: `Percent`, `Time`. `Percent`: by percent. `Time`: by time interval.
 	SampleType string `pulumi:"sampleType"`
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
 	SubAppId *int `pulumi:"subAppId"`
 	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Width *int `pulumi:"width"`
@@ -218,6 +224,12 @@ type ImageSpriteTemplateArgs struct {
 	Comment pulumi.StringPtrInput
 	// Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: `black`.
 	FillType pulumi.StringPtrInput
+	// Image format, Valid values:
+	// - jpg: jpg format;
+	// - png: png format;
+	// - webp: webp format;
+	//   Default value: jpg.
+	Format pulumi.StringPtrInput
 	// Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Height pulumi.IntPtrInput
 	// Name of a time point screen capturing template. Length limit: 64 characters.
@@ -230,7 +242,7 @@ type ImageSpriteTemplateArgs struct {
 	SampleInterval pulumi.IntInput
 	// Sampling type. Valid values: `Percent`, `Time`. `Percent`: by percent. `Time`: by time interval.
 	SampleType pulumi.StringInput
-	// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
 	SubAppId pulumi.IntPtrInput
 	// Maximum value of the `width` (or long side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, width will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 	Width pulumi.IntPtrInput
@@ -262,7 +274,7 @@ func (i *ImageSpriteTemplate) ToImageSpriteTemplateOutputWithContext(ctx context
 // ImageSpriteTemplateArrayInput is an input type that accepts ImageSpriteTemplateArray and ImageSpriteTemplateArrayOutput values.
 // You can construct a concrete instance of `ImageSpriteTemplateArrayInput` via:
 //
-//          ImageSpriteTemplateArray{ ImageSpriteTemplateArgs{...} }
+//	ImageSpriteTemplateArray{ ImageSpriteTemplateArgs{...} }
 type ImageSpriteTemplateArrayInput interface {
 	pulumi.Input
 
@@ -287,7 +299,7 @@ func (i ImageSpriteTemplateArray) ToImageSpriteTemplateArrayOutputWithContext(ct
 // ImageSpriteTemplateMapInput is an input type that accepts ImageSpriteTemplateMap and ImageSpriteTemplateMapOutput values.
 // You can construct a concrete instance of `ImageSpriteTemplateMapInput` via:
 //
-//          ImageSpriteTemplateMap{ "key": ImageSpriteTemplateArgs{...} }
+//	ImageSpriteTemplateMap{ "key": ImageSpriteTemplateArgs{...} }
 type ImageSpriteTemplateMapInput interface {
 	pulumi.Input
 
@@ -343,6 +355,15 @@ func (o ImageSpriteTemplateOutput) FillType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ImageSpriteTemplate) pulumi.StringPtrOutput { return v.FillType }).(pulumi.StringPtrOutput)
 }
 
+// Image format, Valid values:
+//   - jpg: jpg format;
+//   - png: png format;
+//   - webp: webp format;
+//     Default value: jpg.
+func (o ImageSpriteTemplateOutput) Format() pulumi.StringOutput {
+	return o.ApplyT(func(v *ImageSpriteTemplate) pulumi.StringOutput { return v.Format }).(pulumi.StringOutput)
+}
+
 // Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
 func (o ImageSpriteTemplateOutput) Height() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ImageSpriteTemplate) pulumi.IntPtrOutput { return v.Height }).(pulumi.IntPtrOutput)
@@ -373,9 +394,16 @@ func (o ImageSpriteTemplateOutput) SampleType() pulumi.StringOutput {
 	return o.ApplyT(func(v *ImageSpriteTemplate) pulumi.StringOutput { return v.SampleType }).(pulumi.StringOutput)
 }
 
-// Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+// The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
 func (o ImageSpriteTemplateOutput) SubAppId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ImageSpriteTemplate) pulumi.IntPtrOutput { return v.SubAppId }).(pulumi.IntPtrOutput)
+}
+
+// Template type, value range:
+// - Preset: system preset template;
+// - Custom: user-defined templates.
+func (o ImageSpriteTemplateOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v *ImageSpriteTemplate) pulumi.StringOutput { return v.Type }).(pulumi.StringOutput)
 }
 
 // Last modified time of template in ISO date format.

@@ -14,64 +14,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// Provides a resource to create a redis connection_config
     /// 
     /// ## Example Usage
+    /// 
     /// ### Modify the maximum number of connections and maximum network throughput of an instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
     ///     {
-    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
-    ///         {
-    ///             TypeId = 7,
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[0]?.Zone),
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var foo = new Tencentcloud.Redis.Instance("foo", new Tencentcloud.Redis.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[0]?.Zone),
-    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[0]?.TypeId),
-    ///             Password = "test12345789",
-    ///             MemSize = 8192,
-    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisShardNums?[0]),
-    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[0]?.RedisReplicasNums?[0]),
-    ///             Port = 6379,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///         });
-    ///         var connectionConfig = new Tencentcloud.Redis.ConnectionConfig("connectionConfig", new Tencentcloud.Redis.ConnectionConfigArgs
-    ///         {
-    ///             InstanceId = "crs-fhm9fnv1",
-    ///             ClientLimit = 20000,
-    ///             AddBandwidth = 30,
-    ///         });
-    ///     }
+    ///         TypeId = 7,
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.Zone),
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var foo = new Tencentcloud.Redis.Instance("foo", new()
+    ///     {
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.Zone),
+    ///         TypeId = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.TypeId),
+    ///         Password = "test12345789",
+    ///         MemSize = 8192,
+    ///         RedisShardNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.RedisShardNums[0]),
+    ///         RedisReplicasNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[0]?.RedisReplicasNums[0]),
+    ///         Port = 6379,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///     });
+    /// 
+    ///     var connectionConfig = new Tencentcloud.Redis.ConnectionConfig("connectionConfig", new()
+    ///     {
+    ///         InstanceId = "crs-fhm9fnv1",
+    ///         ClientLimit = 20000,
+    ///         AddBandwidth = 30,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Redis connectionConfig can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Redis/connectionConfig:ConnectionConfig connection_config instance_id
+    /// $ pulumi import tencentcloud:Redis/connectionConfig:ConnectionConfig connection_config instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/connectionConfig:ConnectionConfig")]
-    public partial class ConnectionConfig : Pulumi.CustomResource
+    public partial class ConnectionConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Refers to the additional bandwidth of the instance. When the standard bandwidth does not meet the demand, the user can increase the bandwidth by himself. When the read-only copy is enabled, the total bandwidth of the instance = additional bandwidth * number of fragments + standard bandwidth * number of fragments * Max ([number of read-only replicas, 1] ), the number of shards in the standard architecture = 1, and when read-only replicas are not enabled, the total bandwidth of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards, and the number of shards in the standard architecture = 1.
@@ -160,7 +166,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class ConnectionConfigArgs : Pulumi.ResourceArgs
+    public sealed class ConnectionConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Refers to the additional bandwidth of the instance. When the standard bandwidth does not meet the demand, the user can increase the bandwidth by himself. When the read-only copy is enabled, the total bandwidth of the instance = additional bandwidth * number of fragments + standard bandwidth * number of fragments * Max ([number of read-only replicas, 1] ), the number of shards in the standard architecture = 1, and when read-only replicas are not enabled, the total bandwidth of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards, and the number of shards in the standard architecture = 1.
@@ -183,9 +189,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public ConnectionConfigArgs()
         {
         }
+        public static new ConnectionConfigArgs Empty => new ConnectionConfigArgs();
     }
 
-    public sealed class ConnectionConfigState : Pulumi.ResourceArgs
+    public sealed class ConnectionConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Refers to the additional bandwidth of the instance. When the standard bandwidth does not meet the demand, the user can increase the bandwidth by himself. When the read-only copy is enabled, the total bandwidth of the instance = additional bandwidth * number of fragments + standard bandwidth * number of fragments * Max ([number of read-only replicas, 1] ), the number of shards in the standard architecture = 1, and when read-only replicas are not enabled, the total bandwidth of the instance = additional bandwidth * number of shards + standard bandwidth * number of shards, and the number of shards in the standard architecture = 1.
@@ -232,5 +239,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public ConnectionConfigState()
         {
         }
+        public static new ConnectionConfigState Empty => new ConnectionConfigState();
     }
 }

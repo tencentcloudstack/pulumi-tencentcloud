@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// <summary>
         /// Use this data source to query detailed information of dlc check_data_engine_image_can_be_upgrade
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var checkDataEngineImageCanBeUpgrade = Tencentcloud.Dlc.GetCheckDataEngineImageCanBeUpgrade.Invoke(new()
         ///     {
-        ///         var checkDataEngineImageCanBeUpgrade = Output.Create(Tencentcloud.Dlc.GetCheckDataEngineImageCanBeUpgrade.InvokeAsync(new Tencentcloud.Dlc.GetCheckDataEngineImageCanBeUpgradeArgs
-        ///         {
-        ///             DataEngineId = "DataEngine-cgkvbas6",
-        ///         }));
-        ///     }
+        ///         DataEngineId = "DataEngine-cgkvbas6",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCheckDataEngineImageCanBeUpgradeResult> InvokeAsync(GetCheckDataEngineImageCanBeUpgradeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCheckDataEngineImageCanBeUpgradeResult>("tencentcloud:Dlc/getCheckDataEngineImageCanBeUpgrade:getCheckDataEngineImageCanBeUpgrade", args ?? new GetCheckDataEngineImageCanBeUpgradeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCheckDataEngineImageCanBeUpgradeResult>("tencentcloud:Dlc/getCheckDataEngineImageCanBeUpgrade:getCheckDataEngineImageCanBeUpgrade", args ?? new GetCheckDataEngineImageCanBeUpgradeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dlc check_data_engine_image_can_be_upgrade
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var checkDataEngineImageCanBeUpgrade = Tencentcloud.Dlc.GetCheckDataEngineImageCanBeUpgrade.Invoke(new()
         ///     {
-        ///         var checkDataEngineImageCanBeUpgrade = Output.Create(Tencentcloud.Dlc.GetCheckDataEngineImageCanBeUpgrade.InvokeAsync(new Tencentcloud.Dlc.GetCheckDataEngineImageCanBeUpgradeArgs
-        ///         {
-        ///             DataEngineId = "DataEngine-cgkvbas6",
-        ///         }));
-        ///     }
+        ///         DataEngineId = "DataEngine-cgkvbas6",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCheckDataEngineImageCanBeUpgradeResult> Invoke(GetCheckDataEngineImageCanBeUpgradeInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCheckDataEngineImageCanBeUpgradeResult>("tencentcloud:Dlc/getCheckDataEngineImageCanBeUpgrade:getCheckDataEngineImageCanBeUpgrade", args ?? new GetCheckDataEngineImageCanBeUpgradeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCheckDataEngineImageCanBeUpgradeResult>("tencentcloud:Dlc/getCheckDataEngineImageCanBeUpgrade:getCheckDataEngineImageCanBeUpgrade", args ?? new GetCheckDataEngineImageCanBeUpgradeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCheckDataEngineImageCanBeUpgradeArgs : Pulumi.InvokeArgs
+    public sealed class GetCheckDataEngineImageCanBeUpgradeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Engine unique id.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetCheckDataEngineImageCanBeUpgradeArgs()
         {
         }
+        public static new GetCheckDataEngineImageCanBeUpgradeArgs Empty => new GetCheckDataEngineImageCanBeUpgradeArgs();
     }
 
-    public sealed class GetCheckDataEngineImageCanBeUpgradeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCheckDataEngineImageCanBeUpgradeInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Engine unique id.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public GetCheckDataEngineImageCanBeUpgradeInvokeArgs()
         {
         }
+        public static new GetCheckDataEngineImageCanBeUpgradeInvokeArgs Empty => new GetCheckDataEngineImageCanBeUpgradeInvokeArgs();
     }
 
 

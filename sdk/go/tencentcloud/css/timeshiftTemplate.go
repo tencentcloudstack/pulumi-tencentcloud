@@ -7,47 +7,53 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a css timeshiftTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewTimeshiftTemplate(ctx, "timeshiftTemplate", &Css.TimeshiftTemplateArgs{
-// 			Area:                 pulumi.String("Mainland"),
-// 			Description:          pulumi.String("timeshift template"),
-// 			Duration:             pulumi.Int(604800),
-// 			ItemDuration:         pulumi.Int(5),
-// 			RemoveWatermark:      pulumi.Bool(true),
-// 			TemplateName:         pulumi.String("tf-test"),
-// 			TranscodeTemplateIds: pulumi.IntArray{},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewTimeshiftTemplate(ctx, "timeshiftTemplate", &Css.TimeshiftTemplateArgs{
+//				Area:                 pulumi.String("Mainland"),
+//				Description:          pulumi.String("timeshift template"),
+//				Duration:             pulumi.Int(604800),
+//				ItemDuration:         pulumi.Int(5),
+//				RemoveWatermark:      pulumi.Bool(true),
+//				TemplateName:         pulumi.String("tf-test"),
+//				TranscodeTemplateIds: pulumi.IntArray{},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // css timeshift_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/timeshiftTemplate:TimeshiftTemplate timeshift_template templateId
+// $ pulumi import tencentcloud:Css/timeshiftTemplate:TimeshiftTemplate timeshift_template templateId
 // ```
 type TimeshiftTemplate struct {
 	pulumi.CustomResourceState
@@ -81,7 +87,7 @@ func NewTimeshiftTemplate(ctx *pulumi.Context,
 	if args.TemplateName == nil {
 		return nil, errors.New("invalid value for required argument 'TemplateName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TimeshiftTemplate
 	err := ctx.RegisterResource("tencentcloud:Css/timeshiftTemplate:TimeshiftTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -202,7 +208,7 @@ func (i *TimeshiftTemplate) ToTimeshiftTemplateOutputWithContext(ctx context.Con
 // TimeshiftTemplateArrayInput is an input type that accepts TimeshiftTemplateArray and TimeshiftTemplateArrayOutput values.
 // You can construct a concrete instance of `TimeshiftTemplateArrayInput` via:
 //
-//          TimeshiftTemplateArray{ TimeshiftTemplateArgs{...} }
+//	TimeshiftTemplateArray{ TimeshiftTemplateArgs{...} }
 type TimeshiftTemplateArrayInput interface {
 	pulumi.Input
 
@@ -227,7 +233,7 @@ func (i TimeshiftTemplateArray) ToTimeshiftTemplateArrayOutputWithContext(ctx co
 // TimeshiftTemplateMapInput is an input type that accepts TimeshiftTemplateMap and TimeshiftTemplateMapOutput values.
 // You can construct a concrete instance of `TimeshiftTemplateMapInput` via:
 //
-//          TimeshiftTemplateMap{ "key": TimeshiftTemplateArgs{...} }
+//	TimeshiftTemplateMap{ "key": TimeshiftTemplateArgs{...} }
 type TimeshiftTemplateMapInput interface {
 	pulumi.Input
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketInventoryDestinationEncryptionGetArgs : Pulumi.ResourceArgs
+    public sealed class BucketInventoryDestinationEncryptionGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Encryption with COS-managed key. This field can be left empty.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketInventoryDestinationEncryptionGetArgs()
         {
         }
+        public static new BucketInventoryDestinationEncryptionGetArgs Empty => new BucketInventoryDestinationEncryptionGetArgs();
     }
 }

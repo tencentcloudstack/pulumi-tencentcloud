@@ -14,27 +14,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// Provides a resource to create a redis startup_instance_operation
     /// 
     /// ## Example Usage
+    /// 
     /// ### Recover the redis instance that has been isolated
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Redis.StartupInstanceOperation("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Redis.StartupInstanceOperation("foo", new Tencentcloud.Redis.StartupInstanceOperationArgs
-    ///         {
-    ///             InstanceId = "crs-c1nl9rpv",
-    ///         });
-    ///     }
+    ///         InstanceId = "crs-c1nl9rpv",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/startupInstanceOperation:StartupInstanceOperation")]
-    public partial class StartupInstanceOperation : Pulumi.CustomResource
+    public partial class StartupInstanceOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The ID of instance.
@@ -87,7 +89,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class StartupInstanceOperationArgs : Pulumi.ResourceArgs
+    public sealed class StartupInstanceOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -98,9 +100,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public StartupInstanceOperationArgs()
         {
         }
+        public static new StartupInstanceOperationArgs Empty => new StartupInstanceOperationArgs();
     }
 
-    public sealed class StartupInstanceOperationState : Pulumi.ResourceArgs
+    public sealed class StartupInstanceOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -111,5 +114,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public StartupInstanceOperationState()
         {
         }
+        public static new StartupInstanceOperationState Empty => new StartupInstanceOperationState();
     }
 }

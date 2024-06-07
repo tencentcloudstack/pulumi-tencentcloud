@@ -8,7 +8,7 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type module struct {
@@ -37,6 +37,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &DbImportJobOperation{}
 	case "tencentcloud:Mysql/deployGroup:DeployGroup":
 		r = &DeployGroup{}
+	case "tencentcloud:Mysql/drInstance:DrInstance":
+		r = &DrInstance{}
 	case "tencentcloud:Mysql/drInstanceToMater:DrInstanceToMater":
 		r = &DrInstanceToMater{}
 	case "tencentcloud:Mysql/instance:Instance":
@@ -102,7 +104,7 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 }
 
 func init() {
-	version, err := tencentcloud.PkgVersion()
+	version, err := internal.PkgVersion()
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
@@ -144,6 +146,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Mysql/deployGroup",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/drInstance",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

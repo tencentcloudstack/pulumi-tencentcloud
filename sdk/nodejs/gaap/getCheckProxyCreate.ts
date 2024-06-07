@@ -6,31 +6,10 @@ import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of gaap check proxy create
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const checkProxyCreate = pulumi.output(tencentcloud.Gaap.getCheckProxyCreate({
- *     accessRegion: "Guangzhou",
- *     bandwidth: 10,
- *     concurrent: 2,
- *     http3Supported: 0,
- *     ipAddressVersion: "IPv4",
- *     networkType: "normal",
- *     packageType: "Thunder",
- *     realServerRegion: "Beijing",
- * }));
- * ```
  */
 export function getCheckProxyCreate(args: GetCheckProxyCreateArgs, opts?: pulumi.InvokeOptions): Promise<GetCheckProxyCreateResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getCheckProxyCreate:getCheckProxyCreate", {
         "accessRegion": args.accessRegion,
         "bandwidth": args.bandwidth,
@@ -108,9 +87,11 @@ export interface GetCheckProxyCreateResult {
     readonly realServerRegion: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of gaap check proxy create
+ */
 export function getCheckProxyCreateOutput(args: GetCheckProxyCreateOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCheckProxyCreateResult> {
-    return pulumi.output(args).apply(a => getCheckProxyCreate(a, opts))
+    return pulumi.output(args).apply((a: any) => getCheckProxyCreate(a, opts))
 }
 
 /**

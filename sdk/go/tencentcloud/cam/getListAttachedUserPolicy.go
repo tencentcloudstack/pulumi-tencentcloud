@@ -8,10 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 func GetListAttachedUserPolicy(ctx *pulumi.Context, args *GetListAttachedUserPolicyArgs, opts ...pulumi.InvokeOption) (*GetListAttachedUserPolicyResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetListAttachedUserPolicyResult
 	err := ctx.Invoke("tencentcloud:Cam/getListAttachedUserPolicy:getListAttachedUserPolicy", args, &rv, opts...)
 	if err != nil {

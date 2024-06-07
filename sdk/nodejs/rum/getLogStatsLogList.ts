@@ -5,11 +5,8 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 export function getLogStatsLogList(args: GetLogStatsLogListArgs, opts?: pulumi.InvokeOptions): Promise<GetLogStatsLogListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getLogStatsLogList:getLogStatsLogList", {
         "endTime": args.endTime,
         "projectId": args.projectId,
@@ -45,9 +42,8 @@ export interface GetLogStatsLogListResult {
     readonly resultOutputFile?: string;
     readonly startTime: string;
 }
-
 export function getLogStatsLogListOutput(args: GetLogStatsLogListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetLogStatsLogListResult> {
-    return pulumi.output(args).apply(a => getLogStatsLogList(a, opts))
+    return pulumi.output(args).apply((a: any) => getLogStatsLogList(a, opts))
 }
 
 /**

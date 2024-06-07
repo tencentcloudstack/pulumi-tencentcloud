@@ -7,44 +7,50 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cvm imageSharePermission
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cvm.NewImageSharePermission(ctx, "imageSharePermission", &Cvm.ImageSharePermissionArgs{
-// 			AccountIds: pulumi.StringArray{
-// 				pulumi.String("xxxxxx"),
-// 			},
-// 			ImageId: pulumi.String("img-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cvm.NewImageSharePermission(ctx, "imageSharePermission", &Cvm.ImageSharePermissionArgs{
+//				AccountIds: pulumi.StringArray{
+//					pulumi.String("xxxxxx"),
+//				},
+//				ImageId: pulumi.String("img-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cvm image_share_permission can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cvm/imageSharePermission:ImageSharePermission image_share_permission image_share_permission_id
+// $ pulumi import tencentcloud:Cvm/imageSharePermission:ImageSharePermission image_share_permission image_share_permission_id
 // ```
 type ImageSharePermission struct {
 	pulumi.CustomResourceState
@@ -68,7 +74,7 @@ func NewImageSharePermission(ctx *pulumi.Context,
 	if args.ImageId == nil {
 		return nil, errors.New("invalid value for required argument 'ImageId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ImageSharePermission
 	err := ctx.RegisterResource("tencentcloud:Cvm/imageSharePermission:ImageSharePermission", name, args, &resource, opts...)
 	if err != nil {
@@ -149,7 +155,7 @@ func (i *ImageSharePermission) ToImageSharePermissionOutputWithContext(ctx conte
 // ImageSharePermissionArrayInput is an input type that accepts ImageSharePermissionArray and ImageSharePermissionArrayOutput values.
 // You can construct a concrete instance of `ImageSharePermissionArrayInput` via:
 //
-//          ImageSharePermissionArray{ ImageSharePermissionArgs{...} }
+//	ImageSharePermissionArray{ ImageSharePermissionArgs{...} }
 type ImageSharePermissionArrayInput interface {
 	pulumi.Input
 
@@ -174,7 +180,7 @@ func (i ImageSharePermissionArray) ToImageSharePermissionArrayOutputWithContext(
 // ImageSharePermissionMapInput is an input type that accepts ImageSharePermissionMap and ImageSharePermissionMapOutput values.
 // You can construct a concrete instance of `ImageSharePermissionMapInput` via:
 //
-//          ImageSharePermissionMap{ "key": ImageSharePermissionArgs{...} }
+//	ImageSharePermissionMap{ "key": ImageSharePermissionArgs{...} }
 type ImageSharePermissionMapInput interface {
 	pulumi.Input
 

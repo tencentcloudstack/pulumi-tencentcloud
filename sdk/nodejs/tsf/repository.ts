@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const repository = new tencentcloud.Tsf.Repository("repository", {
+ * const repository = new tencentcloud.tsf.Repository("repository", {
  *     bucketName: "",
  *     bucketRegion: "",
  *     directory: "",
@@ -22,13 +23,14 @@ import * as utilities from "../utilities";
  *     repositoryType: "",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tsf repository can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tsf/repository:Repository repository repository_id
+ * $ pulumi import tencentcloud:Tsf/repository:Repository repository repository_id
  * ```
  */
 export class Repository extends pulumi.CustomResource {

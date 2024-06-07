@@ -8,35 +8,40 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to get information about a MySQL instance.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
-// 			MysqlId: pulumi.StringRef("cdb-fitq5t9h"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mysql.GetInstance(ctx, &mysql.GetInstanceArgs{
+//				MysqlId: pulumi.StringRef("cdb-fitq5t9h"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func LookupInstance(ctx *pulumi.Context, args *LookupInstanceArgs, opts ...pulumi.InvokeOption) (*LookupInstanceResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupInstanceResult
 	err := ctx.Invoke("tencentcloud:Mysql/getInstance:getInstance", args, &rv, opts...)
 	if err != nil {
@@ -65,7 +70,7 @@ type LookupInstanceArgs struct {
 	Offset *int `pulumi:"offset"`
 	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance, `0`: prepay, `1`: postpaid.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `chargeType` instead.
 	PayType *int `pulumi:"payType"`
 	// Used to store results.
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
@@ -103,7 +108,7 @@ type LookupInstanceResult struct {
 	Offset  *int    `pulumi:"offset"`
 	// Pay type of instance, `0`: prepaid, `1`: postpaid.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `chargeType` instead.
 	PayType          *int    `pulumi:"payType"`
 	ResultOutputFile *string `pulumi:"resultOutputFile"`
 	SecurityGroupId  *string `pulumi:"securityGroupId"`
@@ -147,7 +152,7 @@ type LookupInstanceOutputArgs struct {
 	Offset pulumi.IntPtrInput `pulumi:"offset"`
 	// It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance, `0`: prepay, `1`: postpaid.
 	//
-	// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+	// Deprecated: It has been deprecated from version 1.36.0. Please use `chargeType` instead.
 	PayType pulumi.IntPtrInput `pulumi:"payType"`
 	// Used to store results.
 	ResultOutputFile pulumi.StringPtrInput `pulumi:"resultOutputFile"`
@@ -232,7 +237,7 @@ func (o LookupInstanceResultOutput) Offset() pulumi.IntPtrOutput {
 
 // Pay type of instance, `0`: prepaid, `1`: postpaid.
 //
-// Deprecated: It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+// Deprecated: It has been deprecated from version 1.36.0. Please use `chargeType` instead.
 func (o LookupInstanceResultOutput) PayType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v LookupInstanceResult) *int { return v.PayType }).(pulumi.IntPtrOutput)
 }

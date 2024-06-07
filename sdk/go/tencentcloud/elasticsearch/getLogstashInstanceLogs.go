@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of elasticsearch logstashInstanceLogs
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.GetLogstashInstanceLogs(ctx, &elasticsearch.GetLogstashInstanceLogsArgs{
-// 			EndTime:    pulumi.StringRef("2023-10-31 10:30:10"),
-// 			InstanceId: "ls-xxxxxx",
-// 			LogType:    1,
-// 			StartTime:  pulumi.StringRef("2023-10-31 10:30:00"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.GetLogstashInstanceLogs(ctx, &elasticsearch.GetLogstashInstanceLogsArgs{
+//				EndTime:    pulumi.StringRef("2023-10-31 10:30:10"),
+//				InstanceId: "ls-xxxxxx",
+//				LogType:    1,
+//				StartTime:  pulumi.StringRef("2023-10-31 10:30:00"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetLogstashInstanceLogs(ctx *pulumi.Context, args *GetLogstashInstanceLogsArgs, opts ...pulumi.InvokeOption) (*GetLogstashInstanceLogsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetLogstashInstanceLogsResult
 	err := ctx.Invoke("tencentcloud:Elasticsearch/getLogstashInstanceLogs:getLogstashInstanceLogs", args, &rv, opts...)
 	if err != nil {

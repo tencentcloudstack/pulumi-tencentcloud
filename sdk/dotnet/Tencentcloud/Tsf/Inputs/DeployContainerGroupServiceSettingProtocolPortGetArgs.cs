@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class DeployContainerGroupServiceSettingProtocolPortGetArgs : Pulumi.ResourceArgs
+    public sealed class DeployContainerGroupServiceSettingProtocolPortGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// node port.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public DeployContainerGroupServiceSettingProtocolPortGetArgs()
         {
         }
+        public static new DeployContainerGroupServiceSettingProtocolPortGetArgs Empty => new DeployContainerGroupServiceSettingProtocolPortGetArgs();
     }
 }

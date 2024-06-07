@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var padTemplate = new Tencentcloud.Css.PadTemplate("padTemplate", new()
     ///     {
-    ///         var padTemplate = new Tencentcloud.Css.PadTemplate("padTemplate", new Tencentcloud.Css.PadTemplateArgs
-    ///         {
-    ///             Description = "pad template",
-    ///             MaxDuration = 120000,
-    ///             TemplateName = "tf-pad",
-    ///             Type = 1,
-    ///             Url = "https://livewatermark-1251132611.cos.ap-guangzhou.myqcloud.com/1308919341/watermark_img_1698736540399_1441698123618_.pic.jpg",
-    ///             WaitDuration = 2000,
-    ///         });
-    ///     }
+    ///         Description = "pad template",
+    ///         MaxDuration = 120000,
+    ///         TemplateName = "tf-pad",
+    ///         Type = 1,
+    ///         Url = "https://livewatermark-1251132611.cos.ap-guangzhou.myqcloud.com/1308919341/watermark_img_1698736540399_1441698123618_.pic.jpg",
+    ///         WaitDuration = 2000,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css pad_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/padTemplate:PadTemplate pad_template templateId
+    /// $ pulumi import tencentcloud:Css/padTemplate:PadTemplate pad_template templateId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/padTemplate:PadTemplate")]
-    public partial class PadTemplate : Pulumi.CustomResource
+    public partial class PadTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Description content.limit length 1024 bytes.
@@ -129,7 +130,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class PadTemplateArgs : Pulumi.ResourceArgs
+    public sealed class PadTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description content.limit length 1024 bytes.
@@ -170,9 +171,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public PadTemplateArgs()
         {
         }
+        public static new PadTemplateArgs Empty => new PadTemplateArgs();
     }
 
-    public sealed class PadTemplateState : Pulumi.ResourceArgs
+    public sealed class PadTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description content.limit length 1024 bytes.
@@ -213,5 +215,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public PadTemplateState()
         {
         }
+        public static new PadTemplateState Empty => new PadTemplateState();
     }
 }

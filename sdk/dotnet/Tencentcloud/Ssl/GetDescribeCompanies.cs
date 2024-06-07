@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_companies
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeCompanies = Tencentcloud.Ssl.GetDescribeCompanies.Invoke(new()
         ///     {
-        ///         var describeCompanies = Output.Create(Tencentcloud.Ssl.GetDescribeCompanies.InvokeAsync(new Tencentcloud.Ssl.GetDescribeCompaniesArgs
-        ///         {
-        ///             CompanyId = 122,
-        ///         }));
-        ///     }
+        ///         CompanyId = 122,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeCompaniesResult> InvokeAsync(GetDescribeCompaniesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeCompaniesResult>("tencentcloud:Ssl/getDescribeCompanies:getDescribeCompanies", args ?? new GetDescribeCompaniesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeCompaniesResult>("tencentcloud:Ssl/getDescribeCompanies:getDescribeCompanies", args ?? new GetDescribeCompaniesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_companies
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeCompanies = Tencentcloud.Ssl.GetDescribeCompanies.Invoke(new()
         ///     {
-        ///         var describeCompanies = Output.Create(Tencentcloud.Ssl.GetDescribeCompanies.InvokeAsync(new Tencentcloud.Ssl.GetDescribeCompaniesArgs
-        ///         {
-        ///             CompanyId = 122,
-        ///         }));
-        ///     }
+        ///         CompanyId = 122,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeCompaniesResult> Invoke(GetDescribeCompaniesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeCompaniesResult>("tencentcloud:Ssl/getDescribeCompanies:getDescribeCompanies", args ?? new GetDescribeCompaniesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeCompaniesResult>("tencentcloud:Ssl/getDescribeCompanies:getDescribeCompanies", args ?? new GetDescribeCompaniesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeCompaniesArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeCompaniesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Company ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeCompaniesArgs()
         {
         }
+        public static new GetDescribeCompaniesArgs Empty => new GetDescribeCompaniesArgs();
     }
 
-    public sealed class GetDescribeCompaniesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeCompaniesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Company ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeCompaniesInvokeArgs()
         {
         }
+        public static new GetDescribeCompaniesInvokeArgs Empty => new GetDescribeCompaniesInvokeArgs();
     }
 
 

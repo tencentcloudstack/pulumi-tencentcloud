@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpTkeTemplateTemplateGetArgs : Pulumi.ResourceArgs
+    public sealed class TmpTkeTemplateTemplateGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template description.
@@ -106,5 +106,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public TmpTkeTemplateTemplateGetArgs()
         {
         }
+        public static new TmpTkeTemplateTemplateGetArgs Empty => new TmpTkeTemplateTemplateGetArgs();
     }
 }

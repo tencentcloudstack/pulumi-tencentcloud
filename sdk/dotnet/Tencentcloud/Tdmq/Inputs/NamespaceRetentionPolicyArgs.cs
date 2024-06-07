@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Inputs
 {
 
-    public sealed class NamespaceRetentionPolicyArgs : Pulumi.ResourceArgs
+    public sealed class NamespaceRetentionPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the size of message to retain.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Inputs
         public NamespaceRetentionPolicyArgs()
         {
         }
+        public static new NamespaceRetentionPolicyArgs Empty => new NamespaceRetentionPolicyArgs();
     }
 }

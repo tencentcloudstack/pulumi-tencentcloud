@@ -7,51 +7,56 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mysql roGroup
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.NewRoGroup(ctx, "example", &Mysql.RoGroupArgs{
-// 			InstanceId:      pulumi.String("cdb-e8i766hx"),
-// 			IsBalanceRoLoad: pulumi.Int(1),
-// 			RoGroupId:       pulumi.String("cdbrg-f49t0gnj"),
-// 			RoGroupInfo: &mysql.RoGroupRoGroupInfoArgs{
-// 				MinRoInGroup:         pulumi.Int(1),
-// 				ReplicationDelayTime: pulumi.Int(1),
-// 				RoGroupName:          pulumi.String("keep-ro"),
-// 				RoMaxDelayTime:       pulumi.Int(1),
-// 				RoOfflineDelay:       pulumi.Int(1),
-// 				WeightMode:           pulumi.String("custom"),
-// 			},
-// 			RoWeightValues: mysql.RoGroupRoWeightValueArray{
-// 				&mysql.RoGroupRoWeightValueArgs{
-// 					InstanceId: pulumi.String("cdbro-f49t0gnj"),
-// 					Weight:     pulumi.Int(10),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mysql.NewRoGroup(ctx, "example", &Mysql.RoGroupArgs{
+//				InstanceId:      pulumi.String("cdb-e8i766hx"),
+//				IsBalanceRoLoad: pulumi.Int(1),
+//				RoGroupId:       pulumi.String("cdbrg-f49t0gnj"),
+//				RoGroupInfo: &mysql.RoGroupRoGroupInfoArgs{
+//					MinRoInGroup:         pulumi.Int(1),
+//					ReplicationDelayTime: pulumi.Int(1),
+//					RoGroupName:          pulumi.String("keep-ro"),
+//					RoMaxDelayTime:       pulumi.Int(1),
+//					RoOfflineDelay:       pulumi.Int(1),
+//					WeightMode:           pulumi.String("custom"),
+//				},
+//				RoWeightValues: mysql.RoGroupRoWeightValueArray{
+//					&mysql.RoGroupRoWeightValueArgs{
+//						InstanceId: pulumi.String("cdbro-f49t0gnj"),
+//						Weight:     pulumi.Int(10),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type RoGroup struct {
 	pulumi.CustomResourceState
 
@@ -80,7 +85,7 @@ func NewRoGroup(ctx *pulumi.Context,
 	if args.RoGroupId == nil {
 		return nil, errors.New("invalid value for required argument 'RoGroupId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RoGroup
 	err := ctx.RegisterResource("tencentcloud:Mysql/roGroup:RoGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -185,7 +190,7 @@ func (i *RoGroup) ToRoGroupOutputWithContext(ctx context.Context) RoGroupOutput 
 // RoGroupArrayInput is an input type that accepts RoGroupArray and RoGroupArrayOutput values.
 // You can construct a concrete instance of `RoGroupArrayInput` via:
 //
-//          RoGroupArray{ RoGroupArgs{...} }
+//	RoGroupArray{ RoGroupArgs{...} }
 type RoGroupArrayInput interface {
 	pulumi.Input
 
@@ -210,7 +215,7 @@ func (i RoGroupArray) ToRoGroupArrayOutputWithContext(ctx context.Context) RoGro
 // RoGroupMapInput is an input type that accepts RoGroupMap and RoGroupMapOutput values.
 // You can construct a concrete instance of `RoGroupMapInput` via:
 //
-//          RoGroupMap{ "key": RoGroupArgs{...} }
+//	RoGroupMap{ "key": RoGroupArgs{...} }
 type RoGroupMapInput interface {
 	pulumi.Input
 

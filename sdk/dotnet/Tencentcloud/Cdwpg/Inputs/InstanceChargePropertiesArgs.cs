@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwpg.Inputs
 {
 
-    public sealed class InstanceChargePropertiesArgs : Pulumi.ResourceArgs
+    public sealed class InstanceChargePropertiesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Charge type, vaild values: PREPAID, POSTPAID_BY_HOUR.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwpg.Inputs
         public InstanceChargePropertiesArgs()
         {
         }
+        public static new InstanceChargePropertiesArgs Empty => new InstanceChargePropertiesArgs();
     }
 }

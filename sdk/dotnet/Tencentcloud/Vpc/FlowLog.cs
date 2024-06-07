@@ -22,11 +22,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// vpc flow_log can be imported using the flow log Id combine vpc Id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/flowLog:FlowLog flow_log flow_log_id fl-xxxx1234#vpc-yyyy5678
+    /// $ pulumi import tencentcloud:Vpc/flowLog:FlowLog flow_log flow_log_id fl-xxxx1234#vpc-yyyy5678
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/flowLog:FlowLog")]
-    public partial class FlowLog : Pulumi.CustomResource
+    public partial class FlowLog : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Specify flow log storage id, just set cls topic id.
@@ -139,7 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class FlowLogArgs : Pulumi.ResourceArgs
+    public sealed class FlowLogArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specify flow log storage id, just set cls topic id.
@@ -216,9 +216,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public FlowLogArgs()
         {
         }
+        public static new FlowLogArgs Empty => new FlowLogArgs();
     }
 
-    public sealed class FlowLogState : Pulumi.ResourceArgs
+    public sealed class FlowLogState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specify flow log storage id, just set cls topic id.
@@ -295,5 +296,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public FlowLogState()
         {
         }
+        public static new FlowLogState Empty => new FlowLogState();
     }
 }

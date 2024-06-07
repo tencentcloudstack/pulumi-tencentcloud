@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a HA VIP EIP attachment.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ha.NewVipEipAttachment(ctx, "foo", &Ha.VipEipAttachmentArgs{
-// 			AddressIp: pulumi.String("1.1.1.1"),
-// 			HavipId:   pulumi.String("havip-kjqwe4ba"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ha.NewVipEipAttachment(ctx, "foo", &Ha.VipEipAttachmentArgs{
+//				AddressIp: pulumi.String("1.1.1.1"),
+//				HavipId:   pulumi.String("havip-kjqwe4ba"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // HA VIP EIP attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ha/vipEipAttachment:VipEipAttachment foo havip-kjqwe4ba#1.1.1.1
+// $ pulumi import tencentcloud:Ha/vipEipAttachment:VipEipAttachment foo havip-kjqwe4ba#1.1.1.1
 // ```
 type VipEipAttachment struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewVipEipAttachment(ctx *pulumi.Context,
 	if args.HavipId == nil {
 		return nil, errors.New("invalid value for required argument 'HavipId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource VipEipAttachment
 	err := ctx.RegisterResource("tencentcloud:Ha/vipEipAttachment:VipEipAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *VipEipAttachment) ToVipEipAttachmentOutputWithContext(ctx context.Conte
 // VipEipAttachmentArrayInput is an input type that accepts VipEipAttachmentArray and VipEipAttachmentArrayOutput values.
 // You can construct a concrete instance of `VipEipAttachmentArrayInput` via:
 //
-//          VipEipAttachmentArray{ VipEipAttachmentArgs{...} }
+//	VipEipAttachmentArray{ VipEipAttachmentArgs{...} }
 type VipEipAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i VipEipAttachmentArray) ToVipEipAttachmentArrayOutputWithContext(ctx cont
 // VipEipAttachmentMapInput is an input type that accepts VipEipAttachmentMap and VipEipAttachmentMapOutput values.
 // You can construct a concrete instance of `VipEipAttachmentMapInput` via:
 //
-//          VipEipAttachmentMap{ "key": VipEipAttachmentArgs{...} }
+//	VipEipAttachmentMap{ "key": VipEipAttachmentArgs{...} }
 type VipEipAttachmentMapInput interface {
 	pulumi.Input
 

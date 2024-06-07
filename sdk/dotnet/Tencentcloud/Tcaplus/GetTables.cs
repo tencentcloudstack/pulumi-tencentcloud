@@ -16,17 +16,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         /// Use this data source to query TcaplusDB tables.
         /// </summary>
         public static Task<GetTablesResult> InvokeAsync(GetTablesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTablesResult>("tencentcloud:Tcaplus/getTables:getTables", args ?? new GetTablesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTablesResult>("tencentcloud:Tcaplus/getTables:getTables", args ?? new GetTablesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query TcaplusDB tables.
         /// </summary>
         public static Output<GetTablesResult> Invoke(GetTablesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTablesResult>("tencentcloud:Tcaplus/getTables:getTables", args ?? new GetTablesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTablesResult>("tencentcloud:Tcaplus/getTables:getTables", args ?? new GetTablesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTablesArgs : Pulumi.InvokeArgs
+    public sealed class GetTablesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the TcaplusDB cluster to be query.
@@ -61,9 +61,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public GetTablesArgs()
         {
         }
+        public static new GetTablesArgs Empty => new GetTablesArgs();
     }
 
-    public sealed class GetTablesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTablesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the TcaplusDB cluster to be query.
@@ -98,6 +99,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public GetTablesInvokeArgs()
         {
         }
+        public static new GetTablesInvokeArgs Empty => new GetTablesInvokeArgs();
     }
 
 

@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var globalDomain = new Tencentcloud.Gaap.GlobalDomain("globalDomain", new()
     ///     {
-    ///         var globalDomain = new Tencentcloud.Gaap.GlobalDomain("globalDomain", new Tencentcloud.Gaap.GlobalDomainArgs
+    ///         Alias = "demo",
+    ///         DefaultValue = "xxxxxx.com",
+    ///         ProjectId = 0,
+    ///         Tags = 
     ///         {
-    ///             Alias = "demo",
-    ///             DefaultValue = "xxxxxx.com",
-    ///             ProjectId = 0,
-    ///             Tags = 
-    ///             {
-    ///                 { "key", "value" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "key", "value" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// gaap global_domain can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Gaap/globalDomain:GlobalDomain global_domain ${projectId}#${domainId}
+    /// $ pulumi import tencentcloud:Gaap/globalDomain:GlobalDomain global_domain ${projectId}#${domainId}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/globalDomain:GlobalDomain")]
-    public partial class GlobalDomain : Pulumi.CustomResource
+    public partial class GlobalDomain : global::Pulumi.CustomResource
     {
         /// <summary>
         /// alias.
@@ -124,7 +125,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         }
     }
 
-    public sealed class GlobalDomainArgs : Pulumi.ResourceArgs
+    public sealed class GlobalDomainArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// alias.
@@ -165,9 +166,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GlobalDomainArgs()
         {
         }
+        public static new GlobalDomainArgs Empty => new GlobalDomainArgs();
     }
 
-    public sealed class GlobalDomainState : Pulumi.ResourceArgs
+    public sealed class GlobalDomainState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// alias.
@@ -208,5 +210,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GlobalDomainState()
         {
         }
+        public static new GlobalDomainState Empty => new GlobalDomainState();
     }
 }

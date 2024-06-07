@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const domainList = pulumi.output(tencentcloud.Dnspod.getDomainList({
+ * const domainList = tencentcloud.Dnspod.getDomainList({
  *     groupIds: [1],
  *     keyword: "",
  *     packages: [""],
@@ -32,15 +34,13 @@ import * as utilities from "../utilities";
  *     type: "ALL",
  *     updatedAtBegin: "2021-05-01 03:00:00",
  *     updatedAtEnd: "2024-05-10 20:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDomainList(args: GetDomainListArgs, opts?: pulumi.InvokeOptions): Promise<GetDomainListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dnspod/getDomainList:getDomainList", {
         "groupIds": args.groupIds,
         "keyword": args.keyword,
@@ -163,9 +163,40 @@ export interface GetDomainListResult {
     readonly updatedAtBegin?: string;
     readonly updatedAtEnd?: string;
 }
-
+/**
+ * Use this data source to query detailed information of dnspod domainList
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const domainList = tencentcloud.Dnspod.getDomainList({
+ *     groupIds: [1],
+ *     keyword: "",
+ *     packages: [""],
+ *     projectId: -1,
+ *     recordCountBegin: 0,
+ *     recordCountEnd: 100,
+ *     remark: "",
+ *     sortField: "UPDATED_ON",
+ *     sortType: "DESC",
+ *     statuses: ["PAUSE"],
+ *     tags: [{
+ *         tagKey: "created_by",
+ *         tagValues: ["terraform"],
+ *     }],
+ *     type: "ALL",
+ *     updatedAtBegin: "2021-05-01 03:00:00",
+ *     updatedAtEnd: "2024-05-10 20:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDomainListOutput(args: GetDomainListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDomainListResult> {
-    return pulumi.output(args).apply(a => getDomainList(a, opts))
+    return pulumi.output(args).apply((a: any) => getDomainList(a, opts))
 }
 
 /**

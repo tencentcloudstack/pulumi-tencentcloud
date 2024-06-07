@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeCertificate = pulumi.output(tencentcloud.Ssl.getDescribeCertificate({
+ * const describeCertificate = tencentcloud.Ssl.getDescribeCertificate({
  *     certificateId: "8cj4g8h8",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeCertificate(args: GetDescribeCertificateArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeCertificateResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ssl/getDescribeCertificate:getDescribeCertificate", {
         "certificateId": args.certificateId,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetDescribeCertificateResult {
      */
     readonly results: outputs.Ssl.GetDescribeCertificateResult[];
 }
-
+/**
+ * Use this data source to query detailed information of ssl describeCertificate
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeCertificate = tencentcloud.Ssl.getDescribeCertificate({
+ *     certificateId: "8cj4g8h8",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeCertificateOutput(args: GetDescribeCertificateOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeCertificateResult> {
-    return pulumi.output(args).apply(a => getDescribeCertificate(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeCertificate(a, opts))
 }
 
 /**

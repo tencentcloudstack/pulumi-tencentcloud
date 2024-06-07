@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var domainAlias = new Tencentcloud.Dnspod.DomainAlias("domainAlias", new()
     ///     {
-    ///         var domainAlias = new Tencentcloud.Dnspod.DomainAlias("domainAlias", new Tencentcloud.Dnspod.DomainAliasArgs
-    ///         {
-    ///             Domain = "dnspod.cn",
-    ///             DomainAlias = "dnspod.com",
-    ///         });
-    ///     }
+    ///         Domain = "dnspod.cn",
+    ///         DnspodDomainAlias = "dnspod.com",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dnspod domain_alias can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dnspod/domainAlias:DomainAlias domain_alias domain#domain_alias_id
+    /// $ pulumi import tencentcloud:Dnspod/domainAlias:DomainAlias domain_alias domain#domain_alias_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnspod/domainAlias:DomainAlias")]
-    public partial class DomainAlias : Pulumi.CustomResource
+    public partial class DomainAlias : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Domain.
@@ -107,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         }
     }
 
-    public sealed class DomainAliasArgs : Pulumi.ResourceArgs
+    public sealed class DomainAliasArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -124,9 +125,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public DomainAliasArgs()
         {
         }
+        public static new DomainAliasArgs Empty => new DomainAliasArgs();
     }
 
-    public sealed class DomainAliasState : Pulumi.ResourceArgs
+    public sealed class DomainAliasState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain.
@@ -149,5 +151,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public DomainAliasState()
         {
         }
+        public static new DomainAliasState Empty => new DomainAliasState();
     }
 }

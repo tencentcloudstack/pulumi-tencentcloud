@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// <summary>
         /// Use this data source to query the detail information of CFS access rule.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var accessRules = Tencentcloud.Cfs.GetAccessRules.Invoke(new()
         ///     {
-        ///         var accessRules = Output.Create(Tencentcloud.Cfs.GetAccessRules.InvokeAsync(new Tencentcloud.Cfs.GetAccessRulesArgs
-        ///         {
-        ///             AccessGroupId = "pgroup-7nx89k7l",
-        ///             AccessRuleId = "rule-qcndbqzj",
-        ///         }));
-        ///     }
+        ///         AccessGroupId = "pgroup-7nx89k7l",
+        ///         AccessRuleId = "rule-qcndbqzj",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAccessRulesResult> InvokeAsync(GetAccessRulesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAccessRulesResult>("tencentcloud:Cfs/getAccessRules:getAccessRules", args ?? new GetAccessRulesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccessRulesResult>("tencentcloud:Cfs/getAccessRules:getAccessRules", args ?? new GetAccessRulesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the detail information of CFS access rule.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var accessRules = Tencentcloud.Cfs.GetAccessRules.Invoke(new()
         ///     {
-        ///         var accessRules = Output.Create(Tencentcloud.Cfs.GetAccessRules.InvokeAsync(new Tencentcloud.Cfs.GetAccessRulesArgs
-        ///         {
-        ///             AccessGroupId = "pgroup-7nx89k7l",
-        ///             AccessRuleId = "rule-qcndbqzj",
-        ///         }));
-        ///     }
+        ///         AccessGroupId = "pgroup-7nx89k7l",
+        ///         AccessRuleId = "rule-qcndbqzj",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAccessRulesResult> Invoke(GetAccessRulesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAccessRulesResult>("tencentcloud:Cfs/getAccessRules:getAccessRules", args ?? new GetAccessRulesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAccessRulesResult>("tencentcloud:Cfs/getAccessRules:getAccessRules", args ?? new GetAccessRulesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAccessRulesArgs : Pulumi.InvokeArgs
+    public sealed class GetAccessRulesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// A specified access group ID used to query.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public GetAccessRulesArgs()
         {
         }
+        public static new GetAccessRulesArgs Empty => new GetAccessRulesArgs();
     }
 
-    public sealed class GetAccessRulesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAccessRulesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// A specified access group ID used to query.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public GetAccessRulesInvokeArgs()
         {
         }
+        public static new GetAccessRulesInvokeArgs Empty => new GetAccessRulesInvokeArgs();
     }
 
 

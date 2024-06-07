@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const test = pulumi.output(tencentcloud.Dayu.getL7RulesV2({
+ * const test = tencentcloud.Dayu.getL7RulesV2({
  *     business: "bgpip",
  *     domain: "qq.com",
  *     protocol: "https",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getL7RulesV2(args: GetL7RulesV2Args, opts?: pulumi.InvokeOptions): Promise<GetL7RulesV2Result> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dayu/getL7RulesV2:getL7RulesV2", {
         "business": args.business,
         "domain": args.domain,
@@ -111,9 +111,26 @@ export interface GetL7RulesV2Result {
     readonly protocol?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query new dayu layer 7 rules
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const test = tencentcloud.Dayu.getL7RulesV2({
+ *     business: "bgpip",
+ *     domain: "qq.com",
+ *     protocol: "https",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getL7RulesV2Output(args: GetL7RulesV2OutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetL7RulesV2Result> {
-    return pulumi.output(args).apply(a => getL7RulesV2(a, opts))
+    return pulumi.output(args).apply((a: any) => getL7RulesV2(a, opts))
 }
 
 /**

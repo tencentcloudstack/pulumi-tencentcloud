@@ -15,70 +15,71 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var cosBatch = new Tencentcloud.Cos.Batch("cosBatch", new()
     ///     {
-    ///         var cosBatch = new Tencentcloud.Cos.Batch("cosBatch", new Tencentcloud.Cos.BatchArgs
+    ///         Appid = 1308919341,
+    ///         ConfirmationRequired = true,
+    ///         Description = "cos_batch",
+    ///         Manifest = new Tencentcloud.Cos.Inputs.BatchManifestArgs
     ///         {
-    ///             Appid = 1308919341,
-    ///             ConfirmationRequired = true,
-    ///             Description = "cos_batch",
-    ///             Manifest = new Tencentcloud.Cos.Inputs.BatchManifestArgs
+    ///             Location = new Tencentcloud.Cos.Inputs.BatchManifestLocationArgs
     ///             {
-    ///                 Location = new Tencentcloud.Cos.Inputs.BatchManifestLocationArgs
-    ///                 {
-    ///                     Etag = "64357de8fd75a3abae2200135a2c9627",
-    ///                     ObjectArn = "qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341/cos_bucket_inventory/1308919341/keep-test/test/20230621/manifest.json",
-    ///                 },
-    ///                 Spec = new Tencentcloud.Cos.Inputs.BatchManifestSpecArgs
-    ///                 {
-    ///                     Format = "COSInventoryReport_CSV_V1",
-    ///                 },
+    ///                 Etag = "64357de8fd75a3abae2200135a2c9627",
+    ///                 ObjectArn = "qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341/cos_bucket_inventory/1308919341/keep-test/test/20230621/manifest.json",
     ///             },
-    ///             Operation = new Tencentcloud.Cos.Inputs.BatchOperationArgs
+    ///             Spec = new Tencentcloud.Cos.Inputs.BatchManifestSpecArgs
     ///             {
-    ///                 CosPutObjectCopy = new Tencentcloud.Cos.Inputs.BatchOperationCosPutObjectCopyArgs
-    ///                 {
-    ///                     AccessControlDirective = "Copy",
-    ///                     MetadataDirective = "Copy",
-    ///                     PrefixReplace = false,
-    ///                     StorageClass = "STANDARD",
-    ///                     TaggingDirective = "Copy",
-    ///                     TargetResource = "qcs::cos:ap-guangzhou:uid/1308919341:cos-lock-1308919341",
-    ///                 },
+    ///                 Format = "COSInventoryReport_CSV_V1",
     ///             },
-    ///             Priority = 1,
-    ///             Report = new Tencentcloud.Cos.Inputs.BatchReportArgs
+    ///         },
+    ///         Operation = new Tencentcloud.Cos.Inputs.BatchOperationArgs
+    ///         {
+    ///             CosPutObjectCopy = new Tencentcloud.Cos.Inputs.BatchOperationCosPutObjectCopyArgs
     ///             {
-    ///                 Bucket = "qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341",
-    ///                 Enabled = "true",
-    ///                 Format = "Report_CSV_V1",
-    ///                 ReportScope = "AllTasks",
+    ///                 AccessControlDirective = "Copy",
+    ///                 MetadataDirective = "Copy",
+    ///                 PrefixReplace = false,
+    ///                 StorageClass = "STANDARD",
+    ///                 TaggingDirective = "Copy",
+    ///                 TargetResource = "qcs::cos:ap-guangzhou:uid/1308919341:cos-lock-1308919341",
     ///             },
-    ///             RoleArn = "qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole",
-    ///             Status = "Cancelled",
-    ///             Uin = "100022975249",
-    ///         });
-    ///     }
+    ///         },
+    ///         Priority = 1,
+    ///         Report = new Tencentcloud.Cos.Inputs.BatchReportArgs
+    ///         {
+    ///             Bucket = "qcs::cos:ap-guangzhou:uid/1308919341:keep-test-1308919341",
+    ///             Enabled = "true",
+    ///             Format = "Report_CSV_V1",
+    ///             ReportScope = "AllTasks",
+    ///         },
+    ///         RoleArn = "qcs::cam::uin/100022975249:roleName/COSBatch_QCSRole",
+    ///         Status = "Cancelled",
+    ///         Uin = "100022975249",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cos bucket batch can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cos/batch:Batch cos_batch ${uin}#${appid}#{job_id}
+    /// $ pulumi import tencentcloud:Cos/batch:Batch cos_batch ${uin}#${appid}#{job_id}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cos/batch:Batch")]
-    public partial class Batch : Pulumi.CustomResource
+    public partial class Batch : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Appid.
@@ -193,7 +194,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         }
     }
 
-    public sealed class BatchArgs : Pulumi.ResourceArgs
+    public sealed class BatchArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Appid.
@@ -260,9 +261,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public BatchArgs()
         {
         }
+        public static new BatchArgs Empty => new BatchArgs();
     }
 
-    public sealed class BatchState : Pulumi.ResourceArgs
+    public sealed class BatchState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Appid.
@@ -335,5 +337,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public BatchState()
         {
         }
+        public static new BatchState Empty => new BatchState();
     }
 }

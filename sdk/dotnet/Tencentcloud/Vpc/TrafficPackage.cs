@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Vpc.TrafficPackage("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Vpc.TrafficPackage("example", new Tencentcloud.Vpc.TrafficPackageArgs
-    ///         {
-    ///             TrafficAmount = 10,
-    ///         });
-    ///     }
+    ///         TrafficAmount = 10,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// vpc traffic_package can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/trafficPackage:TrafficPackage traffic_package traffic_package_id
+    /// $ pulumi import tencentcloud:Vpc/trafficPackage:TrafficPackage traffic_package traffic_package_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/trafficPackage:TrafficPackage")]
-    public partial class TrafficPackage : Pulumi.CustomResource
+    public partial class TrafficPackage : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Created time.
@@ -112,7 +113,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class TrafficPackageArgs : Pulumi.ResourceArgs
+    public sealed class TrafficPackageArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Traffic Package Amount, eg: 10,20,50,512,1024,5120,51200,60,300,600,3072,6144,30720,61440,307200.
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public TrafficPackageArgs()
         {
         }
+        public static new TrafficPackageArgs Empty => new TrafficPackageArgs();
     }
 
-    public sealed class TrafficPackageState : Pulumi.ResourceArgs
+    public sealed class TrafficPackageState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Created time.
@@ -154,5 +156,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public TrafficPackageState()
         {
         }
+        public static new TrafficPackageState Empty => new TrafficPackageState();
     }
 }

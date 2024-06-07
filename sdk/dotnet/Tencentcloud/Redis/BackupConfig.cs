@@ -14,69 +14,73 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// Use this resource to create a backup config of redis.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Set configuration for automatic backups
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zone = Tencentcloud.Redis.GetZoneConfig.Invoke(new()
     ///     {
-    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
-    ///         {
-    ///             TypeId = 7,
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[1]?.Zone),
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var fooInstance = new Tencentcloud.Redis.Instance("fooInstance", new Tencentcloud.Redis.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[1]?.Zone),
-    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[1]?.TypeId),
-    ///             Password = "test12345789",
-    ///             MemSize = 8192,
-    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[1]?.RedisShardNums?[0]),
-    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[1]?.RedisReplicasNums?[0]),
-    ///             Port = 6379,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///         });
-    ///         var fooBackupConfig = new Tencentcloud.Redis.BackupConfig("fooBackupConfig", new Tencentcloud.Redis.BackupConfigArgs
-    ///         {
-    ///             RedisId = fooInstance.Id,
-    ///             BackupTime = "04:00-05:00",
-    ///             BackupPeriods = 
-    ///             {
-    ///                 "Monday",
-    ///             },
-    ///         });
-    ///     }
+    ///         TypeId = 7,
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.Zone),
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var fooInstance = new Tencentcloud.Redis.Instance("fooInstance", new()
+    ///     {
+    ///         AvailabilityZone = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.Zone),
+    ///         TypeId = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.TypeId),
+    ///         Password = "test12345789",
+    ///         MemSize = 8192,
+    ///         RedisShardNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.RedisShardNums[0]),
+    ///         RedisReplicasNum = zone.Apply(getZoneConfigResult =&gt; getZoneConfigResult.Lists[1]?.RedisReplicasNums[0]),
+    ///         Port = 6379,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///     });
+    /// 
+    ///     var fooBackupConfig = new Tencentcloud.Redis.BackupConfig("fooBackupConfig", new()
+    ///     {
+    ///         RedisId = fooInstance.Id,
+    ///         BackupTime = "04:00-05:00",
+    ///         BackupPeriods = new[]
+    ///         {
+    ///             "Monday",
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
-    /// Redis
-    /// 
-    /// backup config can be imported, e.g.
+    /// Redis  backup config can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig foo redis-id
+    /// $ pulumi import tencentcloud:Redis/backupConfig:BackupConfig foo redis-id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/backupConfig:BackupConfig")]
-    public partial class BackupConfig : Pulumi.CustomResource
+    public partial class BackupConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// It has been deprecated from version 1.58.2. It makes no difference to online config at all Specifys which day the backup action should take place. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday`.
@@ -141,7 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class BackupConfigArgs : Pulumi.ResourceArgs
+    public sealed class BackupConfigArgs : global::Pulumi.ResourceArgs
     {
         [Input("backupPeriods")]
         private InputList<string>? _backupPeriods;
@@ -171,9 +175,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public BackupConfigArgs()
         {
         }
+        public static new BackupConfigArgs Empty => new BackupConfigArgs();
     }
 
-    public sealed class BackupConfigState : Pulumi.ResourceArgs
+    public sealed class BackupConfigState : global::Pulumi.ResourceArgs
     {
         [Input("backupPeriods")]
         private InputList<string>? _backupPeriods;
@@ -203,5 +208,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public BackupConfigState()
         {
         }
+        public static new BackupConfigState Empty => new BackupConfigState();
     }
 }

@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.ModifyAccessPeriod("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.ModifyAccessPeriod("example", new Tencentcloud.Waf.ModifyAccessPeriodArgs
-    ///         {
-    ///             Period = 30,
-    ///             TopicId = "1ae37c76-df99-4e2b-998c-20f39eba6226",
-    ///         });
-    ///     }
+    ///         Period = 30,
+    ///         TopicId = "1ae37c76-df99-4e2b-998c-20f39eba6226",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/modifyAccessPeriod:ModifyAccessPeriod")]
-    public partial class ModifyAccessPeriod : Pulumi.CustomResource
+    public partial class ModifyAccessPeriod : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Access log retention period, range is [1, 180].
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class ModifyAccessPeriodArgs : Pulumi.ResourceArgs
+    public sealed class ModifyAccessPeriodArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Access log retention period, range is [1, 180].
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public ModifyAccessPeriodArgs()
         {
         }
+        public static new ModifyAccessPeriodArgs Empty => new ModifyAccessPeriodArgs();
     }
 
-    public sealed class ModifyAccessPeriodState : Pulumi.ResourceArgs
+    public sealed class ModifyAccessPeriodState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Access log retention period, range is [1, 180].
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public ModifyAccessPeriodState()
         {
         }
+        public static new ModifyAccessPeriodState Empty => new ModifyAccessPeriodState();
     }
 }

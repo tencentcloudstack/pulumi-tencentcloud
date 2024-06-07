@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class DdosPolicyV2DdosSpeedLimitConfigArgs : Pulumi.ResourceArgs
+    public sealed class DdosPolicyV2DdosSpeedLimitConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bandwidth bps.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public DdosPolicyV2DdosSpeedLimitConfigArgs()
         {
         }
+        public static new DdosPolicyV2DdosSpeedLimitConfigArgs Empty => new DdosPolicyV2DdosSpeedLimitConfigArgs();
     }
 }

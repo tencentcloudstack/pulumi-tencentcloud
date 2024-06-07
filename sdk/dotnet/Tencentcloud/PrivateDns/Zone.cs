@@ -14,97 +14,102 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
     /// Provide a resource to create a Private Dns Zone.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a basic Private Dns Zone
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var example = new Tencentcloud.PrivateDns.Zone("example", new Tencentcloud.PrivateDns.ZoneArgs
-    ///         {
-    ///             Domain = "domain.com",
-    ///             Remark = "remark.",
-    ///             VpcSets = 
-    ///             {
-    ///                 new Tencentcloud.PrivateDns.Inputs.ZoneVpcSetArgs
-    ///                 {
-    ///                     Region = "ap-guangzhou",
-    ///                     UniqVpcId = vpc.Id,
-    ///                 },
-    ///             },
-    ///             DnsForwardStatus = "DISABLED",
-    ///             CnameSpeedupStatus = "ENABLED",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var example = new Tencentcloud.PrivateDns.Zone("example", new()
+    ///     {
+    ///         Domain = "domain.com",
+    ///         Remark = "remark.",
+    ///         VpcSets = new[]
+    ///         {
+    ///             new Tencentcloud.PrivateDns.Inputs.ZoneVpcSetArgs
+    ///             {
+    ///                 Region = "ap-guangzhou",
+    ///                 UniqVpcId = vpc.Id,
+    ///             },
+    ///         },
+    ///         DnsForwardStatus = "DISABLED",
+    ///         CnameSpeedupStatus = "ENABLED",
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a Private Dns Zone domain and bind associated accounts'VPC
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.PrivateDns.Zone("example", new()
     ///     {
-    ///         var example = new Tencentcloud.PrivateDns.Zone("example", new Tencentcloud.PrivateDns.ZoneArgs
+    ///         Domain = "domain.com",
+    ///         Remark = "remark.",
+    ///         VpcSets = new[]
     ///         {
-    ///             Domain = "domain.com",
-    ///             Remark = "remark.",
-    ///             VpcSets = 
+    ///             new Tencentcloud.PrivateDns.Inputs.ZoneVpcSetArgs
     ///             {
-    ///                 new Tencentcloud.PrivateDns.Inputs.ZoneVpcSetArgs
-    ///                 {
-    ///                     Region = "ap-guangzhou",
-    ///                     UniqVpcId = tencentcloud_vpc.Vpc.Id,
-    ///                 },
+    ///                 Region = "ap-guangzhou",
+    ///                 UniqVpcId = tencentcloud_vpc.Vpc.Id,
     ///             },
-    ///             AccountVpcSets = 
+    ///         },
+    ///         AccountVpcSets = new[]
+    ///         {
+    ///             new Tencentcloud.PrivateDns.Inputs.ZoneAccountVpcSetArgs
     ///             {
-    ///                 new Tencentcloud.PrivateDns.Inputs.ZoneAccountVpcSetArgs
-    ///                 {
-    ///                     Uin = "123456789",
-    ///                     UniqVpcId = "vpc-adsebmya",
-    ///                     Region = "ap-guangzhou",
-    ///                     VpcName = "vpc-name",
-    ///                 },
+    ///                 Uin = "123456789",
+    ///                 UniqVpcId = "vpc-adsebmya",
+    ///                 Region = "ap-guangzhou",
+    ///                 VpcName = "vpc-name",
     ///             },
-    ///             DnsForwardStatus = "DISABLED",
-    ///             CnameSpeedupStatus = "ENABLED",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         DnsForwardStatus = "DISABLED",
+    ///         CnameSpeedupStatus = "ENABLED",
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Private Dns Zone can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:PrivateDns/zone:Zone foo zone_id
+    /// $ pulumi import tencentcloud:PrivateDns/zone:Zone example zone-6xg5xgky
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:PrivateDns/zone:Zone")]
-    public partial class Zone : Pulumi.CustomResource
+    public partial class Zone : global::Pulumi.CustomResource
     {
         /// <summary>
         /// List of authorized accounts' VPCs to associate with the private domain.
@@ -199,7 +204,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         }
     }
 
-    public sealed class ZoneArgs : Pulumi.ResourceArgs
+    public sealed class ZoneArgs : global::Pulumi.ResourceArgs
     {
         [Input("accountVpcSets")]
         private InputList<Inputs.ZoneAccountVpcSetArgs>? _accountVpcSets;
@@ -277,9 +282,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public ZoneArgs()
         {
         }
+        public static new ZoneArgs Empty => new ZoneArgs();
     }
 
-    public sealed class ZoneState : Pulumi.ResourceArgs
+    public sealed class ZoneState : global::Pulumi.ResourceArgs
     {
         [Input("accountVpcSets")]
         private InputList<Inputs.ZoneAccountVpcSetGetArgs>? _accountVpcSets;
@@ -357,5 +363,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public ZoneState()
         {
         }
+        public static new ZoneState Empty => new ZoneState();
     }
 }

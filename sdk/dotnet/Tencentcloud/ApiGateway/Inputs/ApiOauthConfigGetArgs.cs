@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class ApiOauthConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class ApiOauthConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Redirect address, used to guide users in login operations.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public ApiOauthConfigGetArgs()
         {
         }
+        public static new ApiOauthConfigGetArgs Empty => new ApiOauthConfigGetArgs();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cdwchInstance = new tencentcloud.Clickhouse.Instance("cdwch_instance", {
+ * const cdwchInstance = new tencentcloud.clickhouse.Instance("cdwchInstance", {
  *     chargeType: "POSTPAID_BY_HOUR",
  *     commonSpec: {
  *         count: 3,
@@ -34,13 +36,16 @@ import * as utilities from "../utilities";
  *     zone: "ap-guangzhou-6",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### PREPAID instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cdwchInstancePrepaid = new tencentcloud.Clickhouse.Instance("cdwch_instance_prepaid", {
+ * const cdwchInstancePrepaid = new tencentcloud.clickhouse.Instance("cdwchInstancePrepaid", {
  *     chargeType: "PREPAID",
  *     commonSpec: {
  *         count: 3,
@@ -62,13 +67,14 @@ import * as utilities from "../utilities";
  *     zone: "ap-guangzhou-6",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Clickhouse instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clickhouse/instance:Instance foo cdwch-xxxxxx
+ * $ pulumi import tencentcloud:Clickhouse/instance:Instance foo cdwch-xxxxxx
  * ```
  */
 export class Instance extends pulumi.CustomResource {

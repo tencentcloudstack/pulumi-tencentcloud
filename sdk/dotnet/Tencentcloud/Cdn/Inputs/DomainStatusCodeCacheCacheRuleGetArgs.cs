@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainStatusCodeCacheCacheRuleGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainStatusCodeCacheCacheRuleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Status code cache expiration time (in seconds).
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainStatusCodeCacheCacheRuleGetArgs()
         {
         }
+        public static new DomainStatusCodeCacheCacheRuleGetArgs Empty => new DomainStatusCodeCacheCacheRuleGetArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
 {
 
-    public sealed class GetWorkSpacesFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetWorkSpacesFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Field to be filtered.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
         public GetWorkSpacesFilterArgs()
         {
         }
+        public static new GetWorkSpacesFilterArgs Empty => new GetWorkSpacesFilterArgs();
     }
 }

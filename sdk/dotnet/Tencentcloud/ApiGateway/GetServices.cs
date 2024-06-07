@@ -15,98 +15,96 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// <summary>
         /// Use this data source to query API gateway services.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var service = new Tencentcloud.ApiGateway.Service("service", new()
         ///     {
-        ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+        ///         ServiceName = "niceservice",
+        ///         Protocol = "http&amp;https",
+        ///         ServiceDesc = "your nice service",
+        ///         NetTypes = new[]
         ///         {
-        ///             ServiceName = "niceservice",
-        ///             Protocol = "http&amp;https",
-        ///             ServiceDesc = "your nice service",
-        ///             NetTypes = 
-        ///             {
-        ///                 "INNER",
-        ///                 "OUTER",
-        ///             },
-        ///             IpVersion = "IPv4",
-        ///         });
-        ///         var name = Tencentcloud.ApiGateway.GetServices.Invoke(new Tencentcloud.ApiGateway.GetServicesInvokeArgs
-        ///         {
-        ///             ServiceName = service.ServiceName,
-        ///         });
-        ///         var id = Tencentcloud.ApiGateway.GetServices.Invoke(new Tencentcloud.ApiGateway.GetServicesInvokeArgs
-        ///         {
-        ///             ServiceId = service.Id,
-        ///         });
-        ///     }
+        ///             "INNER",
+        ///             "OUTER",
+        ///         },
+        ///         IpVersion = "IPv4",
+        ///     });
         /// 
-        /// }
+        ///     var name = Tencentcloud.ApiGateway.GetServices.Invoke(new()
+        ///     {
+        ///         ServiceName = service.ServiceName,
+        ///     });
+        /// 
+        ///     var id = Tencentcloud.ApiGateway.GetServices.Invoke(new()
+        ///     {
+        ///         ServiceId = service.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetServicesResult> InvokeAsync(GetServicesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetServicesResult>("tencentcloud:ApiGateway/getServices:getServices", args ?? new GetServicesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetServicesResult>("tencentcloud:ApiGateway/getServices:getServices", args ?? new GetServicesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query API gateway services.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var service = new Tencentcloud.ApiGateway.Service("service", new()
         ///     {
-        ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+        ///         ServiceName = "niceservice",
+        ///         Protocol = "http&amp;https",
+        ///         ServiceDesc = "your nice service",
+        ///         NetTypes = new[]
         ///         {
-        ///             ServiceName = "niceservice",
-        ///             Protocol = "http&amp;https",
-        ///             ServiceDesc = "your nice service",
-        ///             NetTypes = 
-        ///             {
-        ///                 "INNER",
-        ///                 "OUTER",
-        ///             },
-        ///             IpVersion = "IPv4",
-        ///         });
-        ///         var name = Tencentcloud.ApiGateway.GetServices.Invoke(new Tencentcloud.ApiGateway.GetServicesInvokeArgs
-        ///         {
-        ///             ServiceName = service.ServiceName,
-        ///         });
-        ///         var id = Tencentcloud.ApiGateway.GetServices.Invoke(new Tencentcloud.ApiGateway.GetServicesInvokeArgs
-        ///         {
-        ///             ServiceId = service.Id,
-        ///         });
-        ///     }
+        ///             "INNER",
+        ///             "OUTER",
+        ///         },
+        ///         IpVersion = "IPv4",
+        ///     });
         /// 
-        /// }
+        ///     var name = Tencentcloud.ApiGateway.GetServices.Invoke(new()
+        ///     {
+        ///         ServiceName = service.ServiceName,
+        ///     });
+        /// 
+        ///     var id = Tencentcloud.ApiGateway.GetServices.Invoke(new()
+        ///     {
+        ///         ServiceId = service.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetServicesResult> Invoke(GetServicesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetServicesResult>("tencentcloud:ApiGateway/getServices:getServices", args ?? new GetServicesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetServicesResult>("tencentcloud:ApiGateway/getServices:getServices", args ?? new GetServicesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetServicesArgs : Pulumi.InvokeArgs
+    public sealed class GetServicesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -129,9 +127,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetServicesArgs()
         {
         }
+        public static new GetServicesArgs Empty => new GetServicesArgs();
     }
 
-    public sealed class GetServicesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetServicesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -154,6 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetServicesInvokeArgs()
         {
         }
+        public static new GetServicesInvokeArgs Empty => new GetServicesInvokeArgs();
     }
 
 

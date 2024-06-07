@@ -11,13 +11,20 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class ImportImageTagSpecificationGetArgs : Pulumi.ResourceArgs
+    public sealed class ImportImageTagSpecificationGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Resource type. Valid values: instance (CVM), host (CDH), image (for image), and keypair (for key). Note: This field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         [Input("resourceType", required: true)]
         public Input<string> ResourceType { get; set; } = null!;
 
         [Input("tags", required: true)]
         private InputList<Inputs.ImportImageTagSpecificationTagGetArgs>? _tags;
+
+        /// <summary>
+        /// Tag pairs Note: This field may return null, indicating that no valid values can be obtained.
+        /// </summary>
         public InputList<Inputs.ImportImageTagSpecificationTagGetArgs> Tags
         {
             get => _tags ?? (_tags = new InputList<Inputs.ImportImageTagSpecificationTagGetArgs>());
@@ -27,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public ImportImageTagSpecificationGetArgs()
         {
         }
+        public static new ImportImageTagSpecificationGetArgs Empty => new ImportImageTagSpecificationGetArgs();
     }
 }

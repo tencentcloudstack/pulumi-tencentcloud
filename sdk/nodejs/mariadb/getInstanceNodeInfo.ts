@@ -2,15 +2,13 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 export function getInstanceNodeInfo(args: GetInstanceNodeInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceNodeInfoResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mariadb/getInstanceNodeInfo:getInstanceNodeInfo", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -37,9 +35,8 @@ export interface GetInstanceNodeInfoResult {
     readonly nodesInfos: outputs.Mariadb.GetInstanceNodeInfoNodesInfo[];
     readonly resultOutputFile?: string;
 }
-
 export function getInstanceNodeInfoOutput(args: GetInstanceNodeInfoOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceNodeInfoResult> {
-    return pulumi.output(args).apply(a => getInstanceNodeInfo(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceNodeInfo(a, opts))
 }
 
 /**

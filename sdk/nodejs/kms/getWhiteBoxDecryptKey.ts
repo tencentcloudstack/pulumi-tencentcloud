@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Kms.getWhiteBoxDecryptKey({
+ * const example = tencentcloud.Kms.getWhiteBoxDecryptKey({
  *     keyId: "244dab8c-6dad-11ea-80c6-5254006d0810",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getWhiteBoxDecryptKey(args: GetWhiteBoxDecryptKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetWhiteBoxDecryptKeyResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Kms/getWhiteBoxDecryptKey:getWhiteBoxDecryptKey", {
         "keyId": args.keyId,
         "resultOutputFile": args.resultOutputFile,
@@ -59,9 +58,24 @@ export interface GetWhiteBoxDecryptKeyResult {
     readonly keyId: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of kms whiteBoxDecryptKey
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Kms.getWhiteBoxDecryptKey({
+ *     keyId: "244dab8c-6dad-11ea-80c6-5254006d0810",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getWhiteBoxDecryptKeyOutput(args: GetWhiteBoxDecryptKeyOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetWhiteBoxDecryptKeyResult> {
-    return pulumi.output(args).apply(a => getWhiteBoxDecryptKey(a, opts))
+    return pulumi.output(args).apply((a: any) => getWhiteBoxDecryptKey(a, opts))
 }
 
 /**

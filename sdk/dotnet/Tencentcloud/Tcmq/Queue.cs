@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var queue = new Tencentcloud.Tcmq.Queue("queue", new()
     ///     {
-    ///         var queue = new Tencentcloud.Tcmq.Queue("queue", new Tencentcloud.Tcmq.QueueArgs
-    ///         {
-    ///             QueueName = "queue_name",
-    ///         });
-    ///     }
+    ///         QueueName = "queue_name",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcmq queue can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcmq/queue:Queue queue queue_id
+    /// $ pulumi import tencentcloud:Tcmq/queue:Queue queue queue_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcmq/queue:Queue")]
-    public partial class Queue : Pulumi.CustomResource
+    public partial class Queue : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Dead letter queue name.
@@ -184,7 +185,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         }
     }
 
-    public sealed class QueueArgs : Pulumi.ResourceArgs
+    public sealed class QueueArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Dead letter queue name.
@@ -285,9 +286,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         public QueueArgs()
         {
         }
+        public static new QueueArgs Empty => new QueueArgs();
     }
 
-    public sealed class QueueState : Pulumi.ResourceArgs
+    public sealed class QueueState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Dead letter queue name.
@@ -388,5 +390,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         public QueueState()
         {
         }
+        public static new QueueState Empty => new QueueState();
     }
 }

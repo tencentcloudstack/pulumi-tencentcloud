@@ -7,47 +7,53 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a eb eventBus
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Eb.NewEventBus(ctx, "foo", &Eb.EventBusArgs{
-// 			Description:  pulumi.String("event bus desc"),
-// 			EnableStore:  pulumi.Bool(false),
-// 			EventBusName: pulumi.String("tf-event_bus"),
-// 			SaveDays:     pulumi.Int(1),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Eb.NewEventBus(ctx, "foo", &Eb.EventBusArgs{
+//				Description:  pulumi.String("event bus desc"),
+//				EnableStore:  pulumi.Bool(false),
+//				EventBusName: pulumi.String("tf-event_bus"),
+//				SaveDays:     pulumi.Int(1),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // eb event_bus can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Eb/eventBus:EventBus event_bus event_bus_id
+// $ pulumi import tencentcloud:Eb/eventBus:EventBus event_bus event_bus_id
 // ```
 type EventBus struct {
 	pulumi.CustomResourceState
@@ -74,7 +80,7 @@ func NewEventBus(ctx *pulumi.Context,
 	if args.EventBusName == nil {
 		return nil, errors.New("invalid value for required argument 'EventBusName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource EventBus
 	err := ctx.RegisterResource("tencentcloud:Eb/eventBus:EventBus", name, args, &resource, opts...)
 	if err != nil {
@@ -179,7 +185,7 @@ func (i *EventBus) ToEventBusOutputWithContext(ctx context.Context) EventBusOutp
 // EventBusArrayInput is an input type that accepts EventBusArray and EventBusArrayOutput values.
 // You can construct a concrete instance of `EventBusArrayInput` via:
 //
-//          EventBusArray{ EventBusArgs{...} }
+//	EventBusArray{ EventBusArgs{...} }
 type EventBusArrayInput interface {
 	pulumi.Input
 
@@ -204,7 +210,7 @@ func (i EventBusArray) ToEventBusArrayOutputWithContext(ctx context.Context) Eve
 // EventBusMapInput is an input type that accepts EventBusMap and EventBusMapOutput values.
 // You can construct a concrete instance of `EventBusMapInput` via:
 //
-//          EventBusMap{ "key": EventBusArgs{...} }
+//	EventBusMap{ "key": EventBusArgs{...} }
 type EventBusMapInput interface {
 	pulumi.Input
 

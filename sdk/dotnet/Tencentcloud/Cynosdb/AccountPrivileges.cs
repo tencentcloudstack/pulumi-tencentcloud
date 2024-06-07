@@ -15,73 +15,74 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var accountPrivileges = new Tencentcloud.Cynosdb.AccountPrivileges("accountPrivileges", new()
     ///     {
-    ///         var accountPrivileges = new Tencentcloud.Cynosdb.AccountPrivileges("accountPrivileges", new Tencentcloud.Cynosdb.AccountPrivilegesArgs
+    ///         AccountName = "test",
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         DatabasePrivileges = new[]
     ///         {
-    ///             AccountName = "test",
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             DatabasePrivileges = 
+    ///             new Tencentcloud.Cynosdb.Inputs.AccountPrivilegesDatabasePrivilegeArgs
     ///             {
-    ///                 new Tencentcloud.Cynosdb.Inputs.AccountPrivilegesDatabasePrivilegeArgs
+    ///                 Db = "users",
+    ///                 Privileges = new[]
     ///                 {
-    ///                     Db = "users",
-    ///                     Privileges = 
-    ///                     {
-    ///                         "DROP",
-    ///                         "REFERENCES",
-    ///                         "INDEX",
-    ///                         "CREATE VIEW",
-    ///                         "INSERT",
-    ///                         "EVENT",
-    ///                     },
+    ///                     "DROP",
+    ///                     "REFERENCES",
+    ///                     "INDEX",
+    ///                     "CREATE VIEW",
+    ///                     "INSERT",
+    ///                     "EVENT",
     ///                 },
     ///             },
-    ///             GlobalPrivileges = 
+    ///         },
+    ///         GlobalPrivileges = new[]
+    ///         {
+    ///             "CREATE",
+    ///             "DROP",
+    ///             "ALTER",
+    ///             "CREATE TEMPORARY TABLES",
+    ///             "CREATE VIEW",
+    ///         },
+    ///         Host = "%",
+    ///         TablePrivileges = new[]
+    ///         {
+    ///             new Tencentcloud.Cynosdb.Inputs.AccountPrivilegesTablePrivilegeArgs
     ///             {
-    ///                 "CREATE",
-    ///                 "DROP",
-    ///                 "ALTER",
-    ///                 "CREATE TEMPORARY TABLES",
-    ///                 "CREATE VIEW",
-    ///             },
-    ///             Host = "%",
-    ///             TablePrivileges = 
-    ///             {
-    ///                 new Tencentcloud.Cynosdb.Inputs.AccountPrivilegesTablePrivilegeArgs
+    ///                 Db = "users",
+    ///                 Privileges = new[]
     ///                 {
-    ///                     Db = "users",
-    ///                     Privileges = 
-    ///                     {
-    ///                         "ALTER",
-    ///                         "REFERENCES",
-    ///                         "SHOW VIEW",
-    ///                     },
-    ///                     TableName = "tb_user_name",
+    ///                     "ALTER",
+    ///                     "REFERENCES",
+    ///                     "SHOW VIEW",
     ///                 },
+    ///                 TableName = "tb_user_name",
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cynosdb account_privileges can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cynosdb/accountPrivileges:AccountPrivileges account_privileges account_privileges_id
+    /// $ pulumi import tencentcloud:Cynosdb/accountPrivileges:AccountPrivileges account_privileges account_privileges_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/accountPrivileges:AccountPrivileges")]
-    public partial class AccountPrivileges : Pulumi.CustomResource
+    public partial class AccountPrivileges : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Account.
@@ -164,7 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class AccountPrivilegesArgs : Pulumi.ResourceArgs
+    public sealed class AccountPrivilegesArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Account.
@@ -223,9 +224,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public AccountPrivilegesArgs()
         {
         }
+        public static new AccountPrivilegesArgs Empty => new AccountPrivilegesArgs();
     }
 
-    public sealed class AccountPrivilegesState : Pulumi.ResourceArgs
+    public sealed class AccountPrivilegesState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Account.
@@ -284,5 +286,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public AccountPrivilegesState()
         {
         }
+        public static new AccountPrivilegesState Empty => new AccountPrivilegesState();
     }
 }

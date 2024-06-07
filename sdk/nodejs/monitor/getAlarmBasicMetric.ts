@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const alarmMetric = pulumi.output(tencentcloud.Monitor.getAlarmBasicMetric({
+ * const alarmMetric = tencentcloud.Monitor.getAlarmBasicMetric({
  *     dimensions: ["uuid"],
  *     metricName: "WanOuttraffic",
  *     namespace: "qce/cvm",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAlarmBasicMetric(args: GetAlarmBasicMetricArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmBasicMetricResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Monitor/getAlarmBasicMetric:getAlarmBasicMetric", {
         "dimensions": args.dimensions,
         "metricName": args.metricName,
@@ -83,9 +83,26 @@ export interface GetAlarmBasicMetricResult {
     readonly namespace: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of monitor basicMetric
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const alarmMetric = tencentcloud.Monitor.getAlarmBasicMetric({
+ *     dimensions: ["uuid"],
+ *     metricName: "WanOuttraffic",
+ *     namespace: "qce/cvm",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAlarmBasicMetricOutput(args: GetAlarmBasicMetricOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAlarmBasicMetricResult> {
-    return pulumi.output(args).apply(a => getAlarmBasicMetric(a, opts))
+    return pulumi.output(args).apply((a: any) => getAlarmBasicMetric(a, opts))
 }
 
 /**

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
 {
 
-    public sealed class PortAclConfigAclConfigArgs : Pulumi.ResourceArgs
+    public sealed class PortAclConfigAclConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action, can take values: drop, transmit, forward.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos.Inputs
         public PortAclConfigAclConfigArgs()
         {
         }
+        public static new PortAclConfigAclConfigArgs Empty => new PortAclConfigAclConfigArgs();
     }
 }

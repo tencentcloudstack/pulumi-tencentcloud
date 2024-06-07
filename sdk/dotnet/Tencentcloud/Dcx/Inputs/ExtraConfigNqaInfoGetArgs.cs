@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx.Inputs
 {
 
-    public sealed class ExtraConfigNqaInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class ExtraConfigNqaInfoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// detect ip.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx.Inputs
         public ExtraConfigNqaInfoGetArgs()
         {
         }
+        public static new ExtraConfigNqaInfoGetArgs Empty => new ExtraConfigNqaInfoGetArgs();
     }
 }

@@ -5,56 +5,161 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./applyDiskBackup";
-export * from "./applyInstanceSnapshot";
-export * from "./blueprint";
-export * from "./disk";
-export * from "./diskAttachment";
-export * from "./diskBackup";
-export * from "./firewallRule";
-export * from "./firewallTemplate";
-export * from "./getAllScene";
-export * from "./getBundle";
-export * from "./getDiskConfig";
-export * from "./getDisks";
-export * from "./getFirewallRulesTemplate";
-export * from "./getInstanceBlueprint";
-export * from "./getInstanceDiskNum";
-export * from "./getInstanceTrafficPackage";
-export * from "./getInstanceVncUrl";
-export * from "./getModifyInstanceBundle";
-export * from "./getRegion";
-export * from "./getResetInstanceBlueprint";
-export * from "./getScene";
-export * from "./getZone";
-export * from "./instance";
-export * from "./keyPair";
-export * from "./keyPairAttachment";
-export * from "./rebootInstance";
-export * from "./renewDisk";
-export * from "./renewInstance";
-export * from "./snapshot";
-export * from "./startInstance";
-export * from "./stopInstance";
+export { ApplyDiskBackupArgs, ApplyDiskBackupState } from "./applyDiskBackup";
+export type ApplyDiskBackup = import("./applyDiskBackup").ApplyDiskBackup;
+export const ApplyDiskBackup: typeof import("./applyDiskBackup").ApplyDiskBackup = null as any;
+utilities.lazyLoad(exports, ["ApplyDiskBackup"], () => require("./applyDiskBackup"));
 
-// Import resources to register:
-import { ApplyDiskBackup } from "./applyDiskBackup";
-import { ApplyInstanceSnapshot } from "./applyInstanceSnapshot";
-import { Blueprint } from "./blueprint";
-import { Disk } from "./disk";
-import { DiskAttachment } from "./diskAttachment";
-import { DiskBackup } from "./diskBackup";
-import { FirewallRule } from "./firewallRule";
-import { FirewallTemplate } from "./firewallTemplate";
-import { Instance } from "./instance";
-import { KeyPair } from "./keyPair";
-import { KeyPairAttachment } from "./keyPairAttachment";
-import { RebootInstance } from "./rebootInstance";
-import { RenewDisk } from "./renewDisk";
-import { RenewInstance } from "./renewInstance";
-import { Snapshot } from "./snapshot";
-import { StartInstance } from "./startInstance";
-import { StopInstance } from "./stopInstance";
+export { ApplyInstanceSnapshotArgs, ApplyInstanceSnapshotState } from "./applyInstanceSnapshot";
+export type ApplyInstanceSnapshot = import("./applyInstanceSnapshot").ApplyInstanceSnapshot;
+export const ApplyInstanceSnapshot: typeof import("./applyInstanceSnapshot").ApplyInstanceSnapshot = null as any;
+utilities.lazyLoad(exports, ["ApplyInstanceSnapshot"], () => require("./applyInstanceSnapshot"));
+
+export { BlueprintArgs, BlueprintState } from "./blueprint";
+export type Blueprint = import("./blueprint").Blueprint;
+export const Blueprint: typeof import("./blueprint").Blueprint = null as any;
+utilities.lazyLoad(exports, ["Blueprint"], () => require("./blueprint"));
+
+export { DiskArgs, DiskState } from "./disk";
+export type Disk = import("./disk").Disk;
+export const Disk: typeof import("./disk").Disk = null as any;
+utilities.lazyLoad(exports, ["Disk"], () => require("./disk"));
+
+export { DiskAttachmentArgs, DiskAttachmentState } from "./diskAttachment";
+export type DiskAttachment = import("./diskAttachment").DiskAttachment;
+export const DiskAttachment: typeof import("./diskAttachment").DiskAttachment = null as any;
+utilities.lazyLoad(exports, ["DiskAttachment"], () => require("./diskAttachment"));
+
+export { DiskBackupArgs, DiskBackupState } from "./diskBackup";
+export type DiskBackup = import("./diskBackup").DiskBackup;
+export const DiskBackup: typeof import("./diskBackup").DiskBackup = null as any;
+utilities.lazyLoad(exports, ["DiskBackup"], () => require("./diskBackup"));
+
+export { FirewallRuleArgs, FirewallRuleState } from "./firewallRule";
+export type FirewallRule = import("./firewallRule").FirewallRule;
+export const FirewallRule: typeof import("./firewallRule").FirewallRule = null as any;
+utilities.lazyLoad(exports, ["FirewallRule"], () => require("./firewallRule"));
+
+export { FirewallTemplateArgs, FirewallTemplateState } from "./firewallTemplate";
+export type FirewallTemplate = import("./firewallTemplate").FirewallTemplate;
+export const FirewallTemplate: typeof import("./firewallTemplate").FirewallTemplate = null as any;
+utilities.lazyLoad(exports, ["FirewallTemplate"], () => require("./firewallTemplate"));
+
+export { GetAllSceneArgs, GetAllSceneResult, GetAllSceneOutputArgs } from "./getAllScene";
+export const getAllScene: typeof import("./getAllScene").getAllScene = null as any;
+export const getAllSceneOutput: typeof import("./getAllScene").getAllSceneOutput = null as any;
+utilities.lazyLoad(exports, ["getAllScene","getAllSceneOutput"], () => require("./getAllScene"));
+
+export { GetBundleArgs, GetBundleResult, GetBundleOutputArgs } from "./getBundle";
+export const getBundle: typeof import("./getBundle").getBundle = null as any;
+export const getBundleOutput: typeof import("./getBundle").getBundleOutput = null as any;
+utilities.lazyLoad(exports, ["getBundle","getBundleOutput"], () => require("./getBundle"));
+
+export { GetDiskConfigArgs, GetDiskConfigResult, GetDiskConfigOutputArgs } from "./getDiskConfig";
+export const getDiskConfig: typeof import("./getDiskConfig").getDiskConfig = null as any;
+export const getDiskConfigOutput: typeof import("./getDiskConfig").getDiskConfigOutput = null as any;
+utilities.lazyLoad(exports, ["getDiskConfig","getDiskConfigOutput"], () => require("./getDiskConfig"));
+
+export { GetDisksArgs, GetDisksResult, GetDisksOutputArgs } from "./getDisks";
+export const getDisks: typeof import("./getDisks").getDisks = null as any;
+export const getDisksOutput: typeof import("./getDisks").getDisksOutput = null as any;
+utilities.lazyLoad(exports, ["getDisks","getDisksOutput"], () => require("./getDisks"));
+
+export { GetFirewallRulesTemplateArgs, GetFirewallRulesTemplateResult, GetFirewallRulesTemplateOutputArgs } from "./getFirewallRulesTemplate";
+export const getFirewallRulesTemplate: typeof import("./getFirewallRulesTemplate").getFirewallRulesTemplate = null as any;
+export const getFirewallRulesTemplateOutput: typeof import("./getFirewallRulesTemplate").getFirewallRulesTemplateOutput = null as any;
+utilities.lazyLoad(exports, ["getFirewallRulesTemplate","getFirewallRulesTemplateOutput"], () => require("./getFirewallRulesTemplate"));
+
+export { GetInstanceBlueprintArgs, GetInstanceBlueprintResult, GetInstanceBlueprintOutputArgs } from "./getInstanceBlueprint";
+export const getInstanceBlueprint: typeof import("./getInstanceBlueprint").getInstanceBlueprint = null as any;
+export const getInstanceBlueprintOutput: typeof import("./getInstanceBlueprint").getInstanceBlueprintOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceBlueprint","getInstanceBlueprintOutput"], () => require("./getInstanceBlueprint"));
+
+export { GetInstanceDiskNumArgs, GetInstanceDiskNumResult, GetInstanceDiskNumOutputArgs } from "./getInstanceDiskNum";
+export const getInstanceDiskNum: typeof import("./getInstanceDiskNum").getInstanceDiskNum = null as any;
+export const getInstanceDiskNumOutput: typeof import("./getInstanceDiskNum").getInstanceDiskNumOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceDiskNum","getInstanceDiskNumOutput"], () => require("./getInstanceDiskNum"));
+
+export { GetInstanceTrafficPackageArgs, GetInstanceTrafficPackageResult, GetInstanceTrafficPackageOutputArgs } from "./getInstanceTrafficPackage";
+export const getInstanceTrafficPackage: typeof import("./getInstanceTrafficPackage").getInstanceTrafficPackage = null as any;
+export const getInstanceTrafficPackageOutput: typeof import("./getInstanceTrafficPackage").getInstanceTrafficPackageOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceTrafficPackage","getInstanceTrafficPackageOutput"], () => require("./getInstanceTrafficPackage"));
+
+export { GetInstanceVncUrlArgs, GetInstanceVncUrlResult, GetInstanceVncUrlOutputArgs } from "./getInstanceVncUrl";
+export const getInstanceVncUrl: typeof import("./getInstanceVncUrl").getInstanceVncUrl = null as any;
+export const getInstanceVncUrlOutput: typeof import("./getInstanceVncUrl").getInstanceVncUrlOutput = null as any;
+utilities.lazyLoad(exports, ["getInstanceVncUrl","getInstanceVncUrlOutput"], () => require("./getInstanceVncUrl"));
+
+export { GetModifyInstanceBundleArgs, GetModifyInstanceBundleResult, GetModifyInstanceBundleOutputArgs } from "./getModifyInstanceBundle";
+export const getModifyInstanceBundle: typeof import("./getModifyInstanceBundle").getModifyInstanceBundle = null as any;
+export const getModifyInstanceBundleOutput: typeof import("./getModifyInstanceBundle").getModifyInstanceBundleOutput = null as any;
+utilities.lazyLoad(exports, ["getModifyInstanceBundle","getModifyInstanceBundleOutput"], () => require("./getModifyInstanceBundle"));
+
+export { GetRegionArgs, GetRegionResult, GetRegionOutputArgs } from "./getRegion";
+export const getRegion: typeof import("./getRegion").getRegion = null as any;
+export const getRegionOutput: typeof import("./getRegion").getRegionOutput = null as any;
+utilities.lazyLoad(exports, ["getRegion","getRegionOutput"], () => require("./getRegion"));
+
+export { GetResetInstanceBlueprintArgs, GetResetInstanceBlueprintResult, GetResetInstanceBlueprintOutputArgs } from "./getResetInstanceBlueprint";
+export const getResetInstanceBlueprint: typeof import("./getResetInstanceBlueprint").getResetInstanceBlueprint = null as any;
+export const getResetInstanceBlueprintOutput: typeof import("./getResetInstanceBlueprint").getResetInstanceBlueprintOutput = null as any;
+utilities.lazyLoad(exports, ["getResetInstanceBlueprint","getResetInstanceBlueprintOutput"], () => require("./getResetInstanceBlueprint"));
+
+export { GetSceneArgs, GetSceneResult, GetSceneOutputArgs } from "./getScene";
+export const getScene: typeof import("./getScene").getScene = null as any;
+export const getSceneOutput: typeof import("./getScene").getSceneOutput = null as any;
+utilities.lazyLoad(exports, ["getScene","getSceneOutput"], () => require("./getScene"));
+
+export { GetZoneArgs, GetZoneResult, GetZoneOutputArgs } from "./getZone";
+export const getZone: typeof import("./getZone").getZone = null as any;
+export const getZoneOutput: typeof import("./getZone").getZoneOutput = null as any;
+utilities.lazyLoad(exports, ["getZone","getZoneOutput"], () => require("./getZone"));
+
+export { InstanceArgs, InstanceState } from "./instance";
+export type Instance = import("./instance").Instance;
+export const Instance: typeof import("./instance").Instance = null as any;
+utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { KeyPairArgs, KeyPairState } from "./keyPair";
+export type KeyPair = import("./keyPair").KeyPair;
+export const KeyPair: typeof import("./keyPair").KeyPair = null as any;
+utilities.lazyLoad(exports, ["KeyPair"], () => require("./keyPair"));
+
+export { KeyPairAttachmentArgs, KeyPairAttachmentState } from "./keyPairAttachment";
+export type KeyPairAttachment = import("./keyPairAttachment").KeyPairAttachment;
+export const KeyPairAttachment: typeof import("./keyPairAttachment").KeyPairAttachment = null as any;
+utilities.lazyLoad(exports, ["KeyPairAttachment"], () => require("./keyPairAttachment"));
+
+export { RebootInstanceArgs, RebootInstanceState } from "./rebootInstance";
+export type RebootInstance = import("./rebootInstance").RebootInstance;
+export const RebootInstance: typeof import("./rebootInstance").RebootInstance = null as any;
+utilities.lazyLoad(exports, ["RebootInstance"], () => require("./rebootInstance"));
+
+export { RenewDiskArgs, RenewDiskState } from "./renewDisk";
+export type RenewDisk = import("./renewDisk").RenewDisk;
+export const RenewDisk: typeof import("./renewDisk").RenewDisk = null as any;
+utilities.lazyLoad(exports, ["RenewDisk"], () => require("./renewDisk"));
+
+export { RenewInstanceArgs, RenewInstanceState } from "./renewInstance";
+export type RenewInstance = import("./renewInstance").RenewInstance;
+export const RenewInstance: typeof import("./renewInstance").RenewInstance = null as any;
+utilities.lazyLoad(exports, ["RenewInstance"], () => require("./renewInstance"));
+
+export { SnapshotArgs, SnapshotState } from "./snapshot";
+export type Snapshot = import("./snapshot").Snapshot;
+export const Snapshot: typeof import("./snapshot").Snapshot = null as any;
+utilities.lazyLoad(exports, ["Snapshot"], () => require("./snapshot"));
+
+export { StartInstanceArgs, StartInstanceState } from "./startInstance";
+export type StartInstance = import("./startInstance").StartInstance;
+export const StartInstance: typeof import("./startInstance").StartInstance = null as any;
+utilities.lazyLoad(exports, ["StartInstance"], () => require("./startInstance"));
+
+export { StopInstanceArgs, StopInstanceState } from "./stopInstance";
+export type StopInstance = import("./stopInstance").StopInstance;
+export const StopInstance: typeof import("./stopInstance").StopInstance = null as any;
+utilities.lazyLoad(exports, ["StopInstance"], () => require("./stopInstance"));
+
 
 const _module = {
     version: utilities.getVersion(),

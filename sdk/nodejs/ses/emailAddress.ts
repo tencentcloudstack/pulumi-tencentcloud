@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const emailAddress = new tencentcloud.Ses.EmailAddress("email_address", {
+ * const emailAddress = new tencentcloud.ses.EmailAddress("emailAddress", {
  *     emailAddress: "aaa@iac-tf.cloud",
  *     emailSenderName: "aaa",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ses email_address can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ses/emailAddress:EmailAddress email_address aaa@iac-tf.cloud
+ * $ pulumi import tencentcloud:Ses/emailAddress:EmailAddress email_address aaa@iac-tf.cloud
  * ```
  */
 export class EmailAddress extends pulumi.CustomResource {

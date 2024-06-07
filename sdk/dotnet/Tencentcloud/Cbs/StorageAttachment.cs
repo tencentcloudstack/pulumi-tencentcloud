@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var attachment = new Tencentcloud.Cbs.StorageAttachment("attachment", new()
     ///     {
-    ///         var attachment = new Tencentcloud.Cbs.StorageAttachment("attachment", new Tencentcloud.Cbs.StorageAttachmentArgs
-    ///         {
-    ///             InstanceId = "ins-jqlegd42",
-    ///             StorageId = "disk-kdt0sq6m",
-    ///         });
-    ///     }
+    ///         InstanceId = "ins-jqlegd42",
+    ///         StorageId = "disk-kdt0sq6m",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CBS storage attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cbs/storageAttachment:StorageAttachment attachment disk-41s6jwy4
+    /// $ pulumi import tencentcloud:Cbs/storageAttachment:StorageAttachment attachment disk-41s6jwy4
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/storageAttachment:StorageAttachment")]
-    public partial class StorageAttachment : Pulumi.CustomResource
+    public partial class StorageAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the CVM instance.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         }
     }
 
-    public sealed class StorageAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class StorageAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the CVM instance.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public StorageAttachmentArgs()
         {
         }
+        public static new StorageAttachmentArgs Empty => new StorageAttachmentArgs();
     }
 
-    public sealed class StorageAttachmentState : Pulumi.ResourceArgs
+    public sealed class StorageAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the CVM instance.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public StorageAttachmentState()
         {
         }
+        public static new StorageAttachmentState Empty => new StorageAttachmentState();
     }
 }

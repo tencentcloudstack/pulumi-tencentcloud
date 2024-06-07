@@ -8,10 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 func LookupSearch(ctx *pulumi.Context, args *LookupSearchArgs, opts ...pulumi.InvokeOption) (*LookupSearchResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupSearchResult
 	err := ctx.Invoke("tencentcloud:Eb/getSearch:getSearch", args, &rv, opts...)
 	if err != nil {

@@ -15,13 +15,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Outputs
     public sealed class ProcedureTemplateMediaProcessTaskTranscodeTaskList
     {
         /// <summary>
+        /// opyright watermark.
+        /// </summary>
+        public readonly Outputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark? CopyRightWatermark;
+        /// <summary>
         /// Video transcoding template ID.
         /// </summary>
         public readonly string Definition;
         /// <summary>
+        /// End time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will exist till the last video frame; If this value is greater than `0` (e.g., n), the blur will exist till second n; If this value is smaller than `0` (e.g., -n), the blur will exist till second n before the last video frame.
+        /// </summary>
+        public readonly double? EndTimeOffset;
+        /// <summary>
+        /// List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailList> HeadTailLists;
+        /// <summary>
         /// List of blurs. Up to 10 ones can be supported.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicList> MosaicLists;
+        /// <summary>
+        /// Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
+        /// </summary>
+        public readonly double? StartTimeOffset;
+        /// <summary>
+        /// Digital watermark.
+        /// </summary>
+        public readonly Outputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark? TraceWatermark;
         /// <summary>
         /// List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
         /// </summary>
@@ -29,14 +49,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Outputs
 
         [OutputConstructor]
         private ProcedureTemplateMediaProcessTaskTranscodeTaskList(
+            Outputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark? copyRightWatermark,
+
             string definition,
+
+            double? endTimeOffset,
+
+            ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailList> headTailLists,
 
             ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicList> mosaicLists,
 
+            double? startTimeOffset,
+
+            Outputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark? traceWatermark,
+
             ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkList> watermarkLists)
         {
+            CopyRightWatermark = copyRightWatermark;
             Definition = definition;
+            EndTimeOffset = endTimeOffset;
+            HeadTailLists = headTailLists;
             MosaicLists = mosaicLists;
+            StartTimeOffset = startTimeOffset;
+            TraceWatermark = traceWatermark;
             WatermarkLists = watermarkLists;
         }
     }

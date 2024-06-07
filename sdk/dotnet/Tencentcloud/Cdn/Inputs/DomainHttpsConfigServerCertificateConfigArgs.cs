@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainHttpsConfigServerCertificateConfigArgs : Pulumi.ResourceArgs
+    public sealed class DomainHttpsConfigServerCertificateConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Server certificate information. This is required when uploading an external certificate, which should contain the complete certificate chain.
@@ -25,9 +25,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         [Input("certificateId")]
         public Input<string>? CertificateId { get; set; }
 
+        /// <summary>
+        /// Server certificate name.
+        /// </summary>
         [Input("certificateName")]
         public Input<string>? CertificateName { get; set; }
 
+        /// <summary>
+        /// Deploy time of server certificate.
+        /// </summary>
         [Input("deployTime")]
         public Input<string>? DeployTime { get; set; }
 
@@ -52,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainHttpsConfigServerCertificateConfigArgs()
         {
         }
+        public static new DomainHttpsConfigServerCertificateConfigArgs Empty => new DomainHttpsConfigServerCertificateConfigArgs();
     }
 }

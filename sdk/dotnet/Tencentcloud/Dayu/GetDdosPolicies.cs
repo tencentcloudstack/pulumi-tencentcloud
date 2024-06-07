@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// <summary>
         /// Use this data source to query dayu DDoS policies
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var idTest = Tencentcloud.Dayu.GetDdosPolicies.Invoke(new()
         ///     {
-        ///         var idTest = Output.Create(Tencentcloud.Dayu.GetDdosPolicies.InvokeAsync(new Tencentcloud.Dayu.GetDdosPoliciesArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_ddos_policy.Test_policy.Resource_type,
-        ///             PolicyId = tencentcloud_dayu_ddos_policy.Test_policy.Policy_id,
-        ///         }));
-        ///     }
+        ///         ResourceType = tencentcloud_dayu_ddos_policy.Test_policy.Resource_type,
+        ///         PolicyId = tencentcloud_dayu_ddos_policy.Test_policy.Policy_id,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDdosPoliciesResult> InvokeAsync(GetDdosPoliciesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDdosPoliciesResult>("tencentcloud:Dayu/getDdosPolicies:getDdosPolicies", args ?? new GetDdosPoliciesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDdosPoliciesResult>("tencentcloud:Dayu/getDdosPolicies:getDdosPolicies", args ?? new GetDdosPoliciesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query dayu DDoS policies
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var idTest = Tencentcloud.Dayu.GetDdosPolicies.Invoke(new()
         ///     {
-        ///         var idTest = Output.Create(Tencentcloud.Dayu.GetDdosPolicies.InvokeAsync(new Tencentcloud.Dayu.GetDdosPoliciesArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_ddos_policy.Test_policy.Resource_type,
-        ///             PolicyId = tencentcloud_dayu_ddos_policy.Test_policy.Policy_id,
-        ///         }));
-        ///     }
+        ///         ResourceType = tencentcloud_dayu_ddos_policy.Test_policy.Resource_type,
+        ///         PolicyId = tencentcloud_dayu_ddos_policy.Test_policy.Policy_id,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDdosPoliciesResult> Invoke(GetDdosPoliciesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDdosPoliciesResult>("tencentcloud:Dayu/getDdosPolicies:getDdosPolicies", args ?? new GetDdosPoliciesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDdosPoliciesResult>("tencentcloud:Dayu/getDdosPolicies:getDdosPolicies", args ?? new GetDdosPoliciesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDdosPoliciesArgs : Pulumi.InvokeArgs
+    public sealed class GetDdosPoliciesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the DDoS policy to be query.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public GetDdosPoliciesArgs()
         {
         }
+        public static new GetDdosPoliciesArgs Empty => new GetDdosPoliciesArgs();
     }
 
-    public sealed class GetDdosPoliciesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDdosPoliciesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the DDoS policy to be query.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public GetDdosPoliciesInvokeArgs()
         {
         }
+        public static new GetDdosPoliciesInvokeArgs Empty => new GetDdosPoliciesInvokeArgs();
     }
 
 

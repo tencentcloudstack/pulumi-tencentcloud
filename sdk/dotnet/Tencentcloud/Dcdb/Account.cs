@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var account = new Tencentcloud.Dcdb.Account("account", new()
     ///     {
-    ///         var account = new Tencentcloud.Dcdb.Account("account", new Tencentcloud.Dcdb.AccountArgs
-    ///         {
-    ///             Description = "this is a test account",
-    ///             Host = "127.0.0.1",
-    ///             InstanceId = "tdsqlshard-kkpoxvnv",
-    ///             MaxUserConnections = 10,
-    ///             Password = "===password===",
-    ///             ReadOnly = 0,
-    ///             UserName = "mysql",
-    ///         });
-    ///     }
+    ///         Description = "this is a test account",
+    ///         Host = "127.0.0.1",
+    ///         InstanceId = "tdsqlshard-kkpoxvnv",
+    ///         MaxUserConnections = 10,
+    ///         Password = "===password===",
+    ///         ReadOnly = 0,
+    ///         UserName = "mysql",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dcdb account can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dcdb/account:Account account account_id
+    /// $ pulumi import tencentcloud:Dcdb/account:Account account account_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/account:Account")]
-    public partial class Account : Pulumi.CustomResource
+    public partial class Account : global::Pulumi.CustomResource
     {
         /// <summary>
         /// description for account.
@@ -115,6 +116,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -136,7 +141,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         }
     }
 
-    public sealed class AccountArgs : Pulumi.ResourceArgs
+    public sealed class AccountArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// description for account.
@@ -162,11 +167,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         [Input("maxUserConnections")]
         public Input<int>? MaxUserConnections { get; set; }
 
+        [Input("password", required: true)]
+        private Input<string>? _password;
+
         /// <summary>
         /// password.
         /// </summary>
-        [Input("password", required: true)]
-        public Input<string> Password { get; set; } = null!;
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// whether the account is readonly. 0 means not a readonly account.
@@ -183,9 +198,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public AccountArgs()
         {
         }
+        public static new AccountArgs Empty => new AccountArgs();
     }
 
-    public sealed class AccountState : Pulumi.ResourceArgs
+    public sealed class AccountState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// description for account.
@@ -211,11 +227,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         [Input("maxUserConnections")]
         public Input<int>? MaxUserConnections { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// password.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// whether the account is readonly. 0 means not a readonly account.
@@ -232,5 +258,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public AccountState()
         {
         }
+        public static new AccountState Empty => new AccountState();
     }
 }

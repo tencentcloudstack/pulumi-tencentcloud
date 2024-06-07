@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Inputs
 {
 
-    public sealed class SnapshotPolicyAttachmentInstanceGetArgs : Pulumi.ResourceArgs
+    public sealed class SnapshotPolicyAttachmentInstanceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// InstanceId.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Inputs
         public SnapshotPolicyAttachmentInstanceGetArgs()
         {
         }
+        public static new SnapshotPolicyAttachmentInstanceGetArgs Empty => new SnapshotPolicyAttachmentInstanceGetArgs();
     }
 }

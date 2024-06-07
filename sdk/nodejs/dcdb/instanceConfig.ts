@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const instanceConfig = new tencentcloud.dcdb.InstanceConfig("instanceConfig", {
  *     instanceId: local.dcdb_id,
  *     rsAccessStrategy: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dcdb instance_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dcdb/instanceConfig:InstanceConfig instance_config instance_config_id
+ * $ pulumi import tencentcloud:Dcdb/instanceConfig:InstanceConfig instance_config instance_config_id
  * ```
  */
 export class InstanceConfig extends pulumi.CustomResource {

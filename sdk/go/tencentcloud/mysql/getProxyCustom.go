@@ -8,10 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 func GetProxyCustom(ctx *pulumi.Context, args *GetProxyCustomArgs, opts ...pulumi.InvokeOption) (*GetProxyCustomResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProxyCustomResult
 	err := ctx.Invoke("tencentcloud:Mysql/getProxyCustom:getProxyCustom", args, &rv, opts...)
 	if err != nil {

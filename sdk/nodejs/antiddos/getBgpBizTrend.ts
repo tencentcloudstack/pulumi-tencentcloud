@@ -9,26 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const bgpBizTrend = pulumi.output(tencentcloud.Antiddos.getBgpBizTrend({
+ * const bgpBizTrend = tencentcloud.Antiddos.getBgpBizTrend({
  *     business: "bgp-multip",
  *     endTime: "2023-11-22 10:25:00",
  *     flag: 0,
  *     instanceId: "bgp-00000ry7",
  *     metricName: "intraffic",
  *     startTime: "2023-11-22 09:25:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBgpBizTrend(args: GetBgpBizTrendArgs, opts?: pulumi.InvokeOptions): Promise<GetBgpBizTrendResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Antiddos/getBgpBizTrend:getBgpBizTrend", {
         "business": args.business,
         "endTime": args.endTime,
@@ -102,9 +101,29 @@ export interface GetBgpBizTrendResult {
      */
     readonly total: number;
 }
-
+/**
+ * Use this data source to query detailed information of antiddos bgpBizTrend
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const bgpBizTrend = tencentcloud.Antiddos.getBgpBizTrend({
+ *     business: "bgp-multip",
+ *     endTime: "2023-11-22 10:25:00",
+ *     flag: 0,
+ *     instanceId: "bgp-00000ry7",
+ *     metricName: "intraffic",
+ *     startTime: "2023-11-22 09:25:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBgpBizTrendOutput(args: GetBgpBizTrendOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBgpBizTrendResult> {
-    return pulumi.output(args).apply(a => getBgpBizTrend(a, opts))
+    return pulumi.output(args).apply((a: any) => getBgpBizTrend(a, opts))
 }
 
 /**

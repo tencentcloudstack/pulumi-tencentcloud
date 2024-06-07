@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a lighthouse applyDiskBackup
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewApplyDiskBackup(ctx, "applyDiskBackup", &Lighthouse.ApplyDiskBackupArgs{
-// 			DiskBackupId: pulumi.String("lhbak-xxxxxx"),
-// 			DiskId:       pulumi.String("lhdisk-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewApplyDiskBackup(ctx, "applyDiskBackup", &Lighthouse.ApplyDiskBackupArgs{
+//				DiskBackupId: pulumi.String("lhbak-xxxxxx"),
+//				DiskId:       pulumi.String("lhdisk-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ApplyDiskBackup struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewApplyDiskBackup(ctx *pulumi.Context,
 	if args.DiskId == nil {
 		return nil, errors.New("invalid value for required argument 'DiskId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ApplyDiskBackup
 	err := ctx.RegisterResource("tencentcloud:Lighthouse/applyDiskBackup:ApplyDiskBackup", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *ApplyDiskBackup) ToApplyDiskBackupOutputWithContext(ctx context.Context
 // ApplyDiskBackupArrayInput is an input type that accepts ApplyDiskBackupArray and ApplyDiskBackupArrayOutput values.
 // You can construct a concrete instance of `ApplyDiskBackupArrayInput` via:
 //
-//          ApplyDiskBackupArray{ ApplyDiskBackupArgs{...} }
+//	ApplyDiskBackupArray{ ApplyDiskBackupArgs{...} }
 type ApplyDiskBackupArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i ApplyDiskBackupArray) ToApplyDiskBackupArrayOutputWithContext(ctx contex
 // ApplyDiskBackupMapInput is an input type that accepts ApplyDiskBackupMap and ApplyDiskBackupMapOutput values.
 // You can construct a concrete instance of `ApplyDiskBackupMapInput` via:
 //
-//          ApplyDiskBackupMap{ "key": ApplyDiskBackupArgs{...} }
+//	ApplyDiskBackupMap{ "key": ApplyDiskBackupArgs{...} }
 type ApplyDiskBackupMapInput interface {
 	pulumi.Input
 

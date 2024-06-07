@@ -7,91 +7,126 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a pts scenario
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Pts.NewScenario(ctx, "scenario", &Pts.ScenarioArgs{
-// 			DomainNameConfig: nil,
-// 			Load: &pts.ScenarioLoadArgs{
-// 				GeoRegionsLoadDistributions: pts.ScenarioLoadGeoRegionsLoadDistributionArray{
-// 					&pts.ScenarioLoadGeoRegionsLoadDistributionArgs{
-// 						Percentage: pulumi.Int(100),
-// 						Region:     pulumi.String("ap-guangzhou"),
-// 						RegionId:   pulumi.Int(1),
-// 					},
-// 				},
-// 				LoadSpec: &pts.ScenarioLoadLoadSpecArgs{
-// 					Concurrency: &pts.ScenarioLoadLoadSpecConcurrencyArgs{
-// 						GracefulStopSeconds:  pulumi.Int(3),
-// 						IterationCount:       pulumi.Int(0),
-// 						MaxRequestsPerSecond: pulumi.Int(0),
-// 						Stages: pts.ScenarioLoadLoadSpecConcurrencyStageArray{
-// 							&pts.ScenarioLoadLoadSpecConcurrencyStageArgs{
-// 								DurationSeconds:    pulumi.Int(120),
-// 								TargetVirtualUsers: pulumi.Int(2),
-// 							},
-// 							&pts.ScenarioLoadLoadSpecConcurrencyStageArgs{
-// 								DurationSeconds:    pulumi.Int(120),
-// 								TargetVirtualUsers: pulumi.Int(4),
-// 							},
-// 							&pts.ScenarioLoadLoadSpecConcurrencyStageArgs{
-// 								DurationSeconds:    pulumi.Int(120),
-// 								TargetVirtualUsers: pulumi.Int(5),
-// 							},
-// 							&pts.ScenarioLoadLoadSpecConcurrencyStageArgs{
-// 								DurationSeconds:    pulumi.Int(240),
-// 								TargetVirtualUsers: pulumi.Int(5),
-// 							},
-// 						},
-// 					},
-// 				},
-// 			},
-// 			ProjectId: pulumi.String("project-45vw7v82"),
-// 			SlaPolicy: nil,
-// 			TestScripts: pts.ScenarioTestScriptArray{
-// 				&pts.ScenarioTestScriptArgs{
-// 					EncodedContent: pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "            // Send a http get request\n", "            import http from 'pts/http';\n", "            import { check, sleep } from 'pts';\n", "\n", "            export default function () {\n", "              // simple get request\n", "              const resp1 = http.get('http://httpbin.org/get');\n", "              console.log(resp1.body);\n", "              // if resp1.body is a json string, resp1.json() transfer json format body to a json object\n", "              console.log(resp1.json());\n", "              check('status is 200', () => resp1.statusCode === 200);\n", "\n", "              // sleep 1 second\n", "              sleep(1);\n", "\n", "              // get request with headers and parameters\n", "              const resp2 = http.get('http://httpbin.org/get', {\n", "                headers: {\n", "                  Connection: 'keep-alive',\n", "                  'User-Agent': 'pts-engine',\n", "                },\n", "                query: {\n", "                  name1: 'value1',\n", "                  name2: 'value2',\n", "                },\n", "              });\n", "\n", "              console.log(resp2.json().args.name1); // 'value1'\n", "              check('body.args.name1 equals value1', () => resp2.json().args.name1 === 'value1');\n", "            }\n", "\n")),
-// 					LoadWeight:     pulumi.Int(100),
-// 					Name:           pulumi.String("script.js"),
-// 					Size:           pulumi.Int(838),
-// 					Type:           pulumi.String("js"),
-// 					UpdatedAt:      pulumi.String("2022-11-11T16:18:37+08:00"),
-// 				},
-// 			},
-// 			Type: pulumi.String("pts-js"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Pts.NewScenario(ctx, "scenario", &Pts.ScenarioArgs{
+//				DomainNameConfig: nil,
+//				Load: &pts.ScenarioLoadArgs{
+//					GeoRegionsLoadDistributions: pts.ScenarioLoadGeoRegionsLoadDistributionArray{
+//						&pts.ScenarioLoadGeoRegionsLoadDistributionArgs{
+//							Percentage: pulumi.Int(100),
+//							Region:     pulumi.String("ap-guangzhou"),
+//							RegionId:   pulumi.Int(1),
+//						},
+//					},
+//					LoadSpec: &pts.ScenarioLoadLoadSpecArgs{
+//						Concurrency: &pts.ScenarioLoadLoadSpecConcurrencyArgs{
+//							GracefulStopSeconds:  pulumi.Int(3),
+//							IterationCount:       pulumi.Int(0),
+//							MaxRequestsPerSecond: pulumi.Int(0),
+//							Stages: pts.ScenarioLoadLoadSpecConcurrencyStageArray{
+//								&pts.ScenarioLoadLoadSpecConcurrencyStageArgs{
+//									DurationSeconds:    pulumi.Int(120),
+//									TargetVirtualUsers: pulumi.Int(2),
+//								},
+//								&pts.ScenarioLoadLoadSpecConcurrencyStageArgs{
+//									DurationSeconds:    pulumi.Int(120),
+//									TargetVirtualUsers: pulumi.Int(4),
+//								},
+//								&pts.ScenarioLoadLoadSpecConcurrencyStageArgs{
+//									DurationSeconds:    pulumi.Int(120),
+//									TargetVirtualUsers: pulumi.Int(5),
+//								},
+//								&pts.ScenarioLoadLoadSpecConcurrencyStageArgs{
+//									DurationSeconds:    pulumi.Int(240),
+//									TargetVirtualUsers: pulumi.Int(5),
+//								},
+//							},
+//						},
+//					},
+//				},
+//				ProjectId: pulumi.String("project-45vw7v82"),
+//				SlaPolicy: nil,
+//				TestScripts: pts.ScenarioTestScriptArray{
+//					&pts.ScenarioTestScriptArgs{
+//						EncodedContent: pulumi.String(`            // Send a http get request
+//	            import http from 'pts/http';
+//	            import { check, sleep } from 'pts';
+//
+//	            export default function () {
+//	              // simple get request
+//	              const resp1 = http.get('http://httpbin.org/get');
+//	              console.log(resp1.body);
+//	              // if resp1.body is a json string, resp1.json() transfer json format body to a json object
+//	              console.log(resp1.json());
+//	              check('status is 200', () => resp1.statusCode === 200);
+//
+//	              // sleep 1 second
+//	              sleep(1);
+//
+//	              // get request with headers and parameters
+//	              const resp2 = http.get('http://httpbin.org/get', {
+//	                headers: {
+//	                  Connection: 'keep-alive',
+//	                  'User-Agent': 'pts-engine',
+//	                },
+//	                query: {
+//	                  name1: 'value1',
+//	                  name2: 'value2',
+//	                },
+//	              });
+//
+//	              console.log(resp2.json().args.name1); // 'value1'
+//	              check('body.args.name1 equals value1', () => resp2.json().args.name1 === 'value1');
+//	            }
+//
+// `),
+//
+//						LoadWeight: pulumi.Int(100),
+//						Name:       pulumi.String("script.js"),
+//						Size:       pulumi.Int(838),
+//						Type:       pulumi.String("js"),
+//						UpdatedAt:  pulumi.String("2022-11-11T16:18:37+08:00"),
+//					},
+//				},
+//				Type: pulumi.String("pts-js"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // pts scenario can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Pts/scenario:Scenario scenario scenario_id
+// $ pulumi import tencentcloud:Pts/scenario:Scenario scenario scenario_id
 // ```
 type Scenario struct {
 	pulumi.CustomResourceState
@@ -151,7 +186,7 @@ func NewScenario(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Scenario
 	err := ctx.RegisterResource("tencentcloud:Pts/scenario:Scenario", name, args, &resource, opts...)
 	if err != nil {
@@ -352,7 +387,7 @@ func (i *Scenario) ToScenarioOutputWithContext(ctx context.Context) ScenarioOutp
 // ScenarioArrayInput is an input type that accepts ScenarioArray and ScenarioArrayOutput values.
 // You can construct a concrete instance of `ScenarioArrayInput` via:
 //
-//          ScenarioArray{ ScenarioArgs{...} }
+//	ScenarioArray{ ScenarioArgs{...} }
 type ScenarioArrayInput interface {
 	pulumi.Input
 
@@ -377,7 +412,7 @@ func (i ScenarioArray) ToScenarioArrayOutputWithContext(ctx context.Context) Sce
 // ScenarioMapInput is an input type that accepts ScenarioMap and ScenarioMapOutput values.
 // You can construct a concrete instance of `ScenarioMapInput` via:
 //
-//          ScenarioMap{ "key": ScenarioArgs{...} }
+//	ScenarioMap{ "key": ScenarioArgs{...} }
 type ScenarioMapInput interface {
 	pulumi.Input
 

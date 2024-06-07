@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class ClusterAttachmentWorkerConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class ClusterAttachmentWorkerConfigGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("dataDisks")]
         private InputList<Inputs.ClusterAttachmentWorkerConfigDataDiskGetArgs>? _dataDisks;
@@ -68,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<string>? MountTarget { get; set; }
 
         /// <summary>
+        /// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        /// </summary>
+        [Input("preStartUserScript")]
+        public Input<string>? PreStartUserScript { get; set; }
+
+        /// <summary>
         /// Base64-encoded User Data text, the length limit is 16KB.
         /// </summary>
         [Input("userData")]
@@ -76,5 +82,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public ClusterAttachmentWorkerConfigGetArgs()
         {
         }
+        public static new ClusterAttachmentWorkerConfigGetArgs Empty => new ClusterAttachmentWorkerConfigGetArgs();
     }
 }

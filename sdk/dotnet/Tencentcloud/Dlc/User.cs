@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var user = new Tencentcloud.Dlc.User("user", new()
     ///     {
-    ///         var user = new Tencentcloud.Dlc.User("user", new Tencentcloud.Dlc.UserArgs
-    ///         {
-    ///             UserAlias = "terraform-test",
-    ///             UserDescription = "for terraform test",
-    ///             UserId = "100027012454",
-    ///             UserType = "COMMON",
-    ///         });
-    ///     }
+    ///         UserAlias = "terraform-test",
+    ///         UserDescription = "for terraform test",
+    ///         UserId = "100027012454",
+    ///         UserType = "COMMON",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dlc user can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dlc/user:User user user_id
+    /// $ pulumi import tencentcloud:Dlc/user:User user user_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/user:User")]
-    public partial class User : Pulumi.CustomResource
+    public partial class User : global::Pulumi.CustomResource
     {
         /// <summary>
         /// User alias, the character length is less than 50.
@@ -121,7 +122,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class UserArgs : Pulumi.ResourceArgs
+    public sealed class UserArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User alias, the character length is less than 50.
@@ -150,9 +151,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public UserArgs()
         {
         }
+        public static new UserArgs Empty => new UserArgs();
     }
 
-    public sealed class UserState : Pulumi.ResourceArgs
+    public sealed class UserState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User alias, the character length is less than 50.
@@ -193,5 +195,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public UserState()
         {
         }
+        public static new UserState Empty => new UserState();
     }
 }

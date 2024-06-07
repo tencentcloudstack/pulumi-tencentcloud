@@ -9,16 +9,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const diagnoseInstance = new tencentcloud.Elasticsearch.DiagnoseInstance("diagnose_instance", {
+ * const diagnoseInstance = new tencentcloud.elasticsearch.DiagnoseInstance("diagnoseInstance", {
  *     diagnoseIndices: "*",
  *     diagnoseJobs: ["cluster_health"],
  *     instanceId: "es-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class DiagnoseInstance extends pulumi.CustomResource {
     /**

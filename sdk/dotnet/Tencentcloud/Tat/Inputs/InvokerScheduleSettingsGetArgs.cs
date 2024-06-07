@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat.Inputs
 {
 
-    public sealed class InvokerScheduleSettingsGetArgs : Pulumi.ResourceArgs
+    public sealed class InvokerScheduleSettingsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The next execution time of the invoker. This field is required if Policy is ONCE.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat.Inputs
         public InvokerScheduleSettingsGetArgs()
         {
         }
+        public static new InvokerScheduleSettingsGetArgs Empty => new InvokerScheduleSettingsGetArgs();
     }
 }

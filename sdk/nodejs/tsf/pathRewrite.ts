@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const pathRewrite = new tencentcloud.Tsf.PathRewrite("path_rewrite", {
+ * const pathRewrite = new tencentcloud.tsf.PathRewrite("pathRewrite", {
  *     blocked: "N",
  *     gatewayGroupId: "group-a2j9zxpv",
  *     order: 2,
@@ -21,13 +22,14 @@ import * as utilities from "../utilities";
  *     replacement: "/tt",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tsf path_rewrite can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tsf/pathRewrite:PathRewrite path_rewrite rewrite-nygq33v2
+ * $ pulumi import tencentcloud:Tsf/pathRewrite:PathRewrite path_rewrite rewrite-nygq33v2
  * ```
  */
 export class PathRewrite extends pulumi.CustomResource {

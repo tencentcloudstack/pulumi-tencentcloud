@@ -15,42 +15,44 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
     ///     {
-    ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-    ///         {
-    ///             Bandwidth = 10,
-    ///             Concurrent = 2,
-    ///             AccessRegion = "SouthChina",
-    ///             RealserverRegion = "NorthChina",
-    ///         });
-    ///         var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new Tencentcloud.Gaap.Layer7ListenerArgs
-    ///         {
-    ///             Protocol = "HTTP",
-    ///             Port = 80,
-    ///             ProxyId = fooProxy.Id,
-    ///         });
-    ///     }
+    ///         Bandwidth = 10,
+    ///         Concurrent = 2,
+    ///         AccessRegion = "SouthChina",
+    ///         RealserverRegion = "NorthChina",
+    ///     });
     /// 
-    /// }
+    ///     var fooLayer7Listener = new Tencentcloud.Gaap.Layer7Listener("fooLayer7Listener", new()
+    ///     {
+    ///         Protocol = "HTTP",
+    ///         Port = 80,
+    ///         ProxyId = fooProxy.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// GAAP layer7 listener can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener tencentcloud_gaap_layer7_listener.foo listener-11112222
+    /// $ pulumi import tencentcloud:Gaap/layer7Listener:Layer7Listener tencentcloud_gaap_layer7_listener.foo listener-11112222
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/layer7Listener:Layer7Listener")]
-    public partial class Layer7Listener : Pulumi.CustomResource
+    public partial class Layer7Listener : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
@@ -163,7 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         }
     }
 
-    public sealed class Layer7ListenerArgs : Pulumi.ResourceArgs
+    public sealed class Layer7ListenerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
@@ -228,9 +230,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Layer7ListenerArgs()
         {
         }
+        public static new Layer7ListenerArgs Empty => new Layer7ListenerArgs();
     }
 
-    public sealed class Layer7ListenerState : Pulumi.ResourceArgs
+    public sealed class Layer7ListenerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Authentication type of the layer7 listener. `0` is one-way authentication and `1` is mutual authentication. NOTES: Only supports listeners of `HTTPS` protocol.
@@ -307,5 +310,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Layer7ListenerState()
         {
         }
+        public static new Layer7ListenerState Empty => new Layer7ListenerState();
     }
 }

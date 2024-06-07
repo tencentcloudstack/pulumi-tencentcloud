@@ -15,46 +15,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var camPolicyBasic = config.Get("camPolicyBasic") ?? "keep-cam-policy";
+    ///     var camGroupBasic = config.Get("camGroupBasic") ?? "keep-cam-group";
+    ///     var groups = Tencentcloud.Cam.GetGroups.Invoke(new()
     ///     {
-    ///         var config = new Config();
-    ///         var camPolicyBasic = config.Get("camPolicyBasic") ?? "keep-cam-policy";
-    ///         var camGroupBasic = config.Get("camGroupBasic") ?? "keep-cam-group";
-    ///         var groups = Output.Create(Tencentcloud.Cam.GetGroups.InvokeAsync(new Tencentcloud.Cam.GetGroupsArgs
-    ///         {
-    ///             Name = camGroupBasic,
-    ///         }));
-    ///         var policy = Output.Create(Tencentcloud.Cam.GetPolicies.InvokeAsync(new Tencentcloud.Cam.GetPoliciesArgs
-    ///         {
-    ///             Name = camPolicyBasic,
-    ///         }));
-    ///         var groupPolicyAttachmentBasic = new Tencentcloud.Cam.GroupPolicyAttachment("groupPolicyAttachmentBasic", new Tencentcloud.Cam.GroupPolicyAttachmentArgs
-    ///         {
-    ///             GroupId = groups.Apply(groups =&gt; groups.GroupLists?[0]?.GroupId),
-    ///             PolicyId = policy.Apply(policy =&gt; policy.PolicyLists?[0]?.PolicyId),
-    ///         });
-    ///     }
+    ///         Name = camGroupBasic,
+    ///     });
     /// 
-    /// }
+    ///     var policy = Tencentcloud.Cam.GetPolicies.Invoke(new()
+    ///     {
+    ///         Name = camPolicyBasic,
+    ///     });
+    /// 
+    ///     var groupPolicyAttachmentBasic = new Tencentcloud.Cam.GroupPolicyAttachment("groupPolicyAttachmentBasic", new()
+    ///     {
+    ///         GroupId = groups.Apply(getGroupsResult =&gt; getGroupsResult.GroupLists[0]?.GroupId),
+    ///         PolicyId = policy.Apply(getPoliciesResult =&gt; getPoliciesResult.PolicyLists[0]?.PolicyId),
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CAM group policy attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment foo 12515263#26800353
+    /// $ pulumi import tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment foo 12515263#26800353
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/groupPolicyAttachment:GroupPolicyAttachment")]
-    public partial class GroupPolicyAttachment : Pulumi.CustomResource
+    public partial class GroupPolicyAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
@@ -137,7 +140,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class GroupPolicyAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class GroupPolicyAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the attached CAM group.
@@ -154,9 +157,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GroupPolicyAttachmentArgs()
         {
         }
+        public static new GroupPolicyAttachmentArgs Empty => new GroupPolicyAttachmentArgs();
     }
 
-    public sealed class GroupPolicyAttachmentState : Pulumi.ResourceArgs
+    public sealed class GroupPolicyAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Mode of Creation of the CAM group policy attachment. `1` means the cam policy attachment is created by production, and the others indicate syntax strategy ways.
@@ -197,5 +201,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GroupPolicyAttachmentState()
         {
         }
+        public static new GroupPolicyAttachmentState Empty => new GroupPolicyAttachmentState();
     }
 }

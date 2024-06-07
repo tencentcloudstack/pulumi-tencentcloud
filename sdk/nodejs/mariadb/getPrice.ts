@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const price = pulumi.output(tencentcloud.Mariadb.getPrice({
+ * const price = tencentcloud.Mariadb.getPrice({
  *     buyCount: 1,
  *     memory: 2,
  *     nodeCount: 2,
@@ -21,15 +22,13 @@ import * as utilities from "../utilities";
  *     period: 1,
  *     storage: 20,
  *     zone: "ap-guangzhou-3",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPrice(args: GetPriceArgs, opts?: pulumi.InvokeOptions): Promise<GetPriceResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mariadb/getPrice:getPrice", {
         "amountUnit": args.amountUnit,
         "buyCount": args.buyCount,
@@ -111,9 +110,30 @@ export interface GetPriceResult {
     readonly storage: number;
     readonly zone: string;
 }
-
+/**
+ * Use this data source to query detailed information of mariadb price
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const price = tencentcloud.Mariadb.getPrice({
+ *     buyCount: 1,
+ *     memory: 2,
+ *     nodeCount: 2,
+ *     paymode: "prepaid",
+ *     period: 1,
+ *     storage: 20,
+ *     zone: "ap-guangzhou-3",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPriceOutput(args: GetPriceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPriceResult> {
-    return pulumi.output(args).apply(a => getPrice(a, opts))
+    return pulumi.output(args).apply((a: any) => getPrice(a, opts))
 }
 
 /**

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
 {
 
-    public sealed class ClusterDatabasesUserHostPrivilegeArgs : Pulumi.ResourceArgs
+    public sealed class ClusterDatabasesUserHostPrivilegeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// .
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
         public ClusterDatabasesUserHostPrivilegeArgs()
         {
         }
+        public static new ClusterDatabasesUserHostPrivilegeArgs Empty => new ClusterDatabasesUserHostPrivilegeArgs();
     }
 }

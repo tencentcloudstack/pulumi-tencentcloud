@@ -7,72 +7,78 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a eb eventRule
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"encoding/json"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Eb.NewEventBus(ctx, "foo", &Eb.EventBusArgs{
-// 			EventBusName: pulumi.String("tf-event_bus"),
-// 			Description:  pulumi.String("event bus desc"),
-// 			EnableStore:  pulumi.Bool(false),
-// 			SaveDays:     pulumi.Int(1),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"source": "apigw.cloud.tencent",
-// 			"type": []string{
-// 				"connector:apigw",
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		_, err = Eb.NewEventRule(ctx, "eventRule", &Eb.EventRuleArgs{
-// 			EventBusId:   foo.ID(),
-// 			RuleName:     pulumi.String("tf-event_rule"),
-// 			Description:  pulumi.String("event rule desc"),
-// 			Enable:       pulumi.Bool(true),
-// 			EventPattern: pulumi.String(json0),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			foo, err := Eb.NewEventBus(ctx, "foo", &Eb.EventBusArgs{
+//				EventBusName: pulumi.String("tf-event_bus"),
+//				Description:  pulumi.String("event bus desc"),
+//				EnableStore:  pulumi.Bool(false),
+//				SaveDays:     pulumi.Int(1),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"source": "apigw.cloud.tencent",
+//				"type": []string{
+//					"connector:apigw",
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err = Eb.NewEventRule(ctx, "eventRule", &Eb.EventRuleArgs{
+//				EventBusId:   foo.ID(),
+//				RuleName:     pulumi.String("tf-event_rule"),
+//				Description:  pulumi.String("event rule desc"),
+//				Enable:       pulumi.Bool(true),
+//				EventPattern: pulumi.String(json0),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // eb event_rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Eb/eventRule:EventRule event_rule event_rule_id
+// $ pulumi import tencentcloud:Eb/eventRule:EventRule event_rule event_rule_id
 // ```
 type EventRule struct {
 	pulumi.CustomResourceState
@@ -109,7 +115,7 @@ func NewEventRule(ctx *pulumi.Context,
 	if args.RuleName == nil {
 		return nil, errors.New("invalid value for required argument 'RuleName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource EventRule
 	err := ctx.RegisterResource("tencentcloud:Eb/eventRule:EventRule", name, args, &resource, opts...)
 	if err != nil {
@@ -226,7 +232,7 @@ func (i *EventRule) ToEventRuleOutputWithContext(ctx context.Context) EventRuleO
 // EventRuleArrayInput is an input type that accepts EventRuleArray and EventRuleArrayOutput values.
 // You can construct a concrete instance of `EventRuleArrayInput` via:
 //
-//          EventRuleArray{ EventRuleArgs{...} }
+//	EventRuleArray{ EventRuleArgs{...} }
 type EventRuleArrayInput interface {
 	pulumi.Input
 
@@ -251,7 +257,7 @@ func (i EventRuleArray) ToEventRuleArrayOutputWithContext(ctx context.Context) E
 // EventRuleMapInput is an input type that accepts EventRuleMap and EventRuleMapOutput values.
 // You can construct a concrete instance of `EventRuleMapInput` via:
 //
-//          EventRuleMap{ "key": EventRuleArgs{...} }
+//	EventRuleMap{ "key": EventRuleArgs{...} }
 type EventRuleMapInput interface {
 	pulumi.Input
 

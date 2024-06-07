@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var start = new Tencentcloud.Dts.MigrateJobStartOperation("start", new()
     ///     {
-    ///         var start = new Tencentcloud.Dts.MigrateJobStartOperation("start", new Tencentcloud.Dts.MigrateJobStartOperationArgs
-    ///         {
-    ///             JobId = tencentcloud_dts_migrate_job.Job.Id,
-    ///         });
-    ///     }
+    ///         JobId = tencentcloud_dts_migrate_job.Job.Id,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/migrateJobStartOperation:MigrateJobStartOperation")]
-    public partial class MigrateJobStartOperation : Pulumi.CustomResource
+    public partial class MigrateJobStartOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Job Id from `tencentcloud.Dts.MigrateJob`.
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         }
     }
 
-    public sealed class MigrateJobStartOperationArgs : Pulumi.ResourceArgs
+    public sealed class MigrateJobStartOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Job Id from `tencentcloud.Dts.MigrateJob`.
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public MigrateJobStartOperationArgs()
         {
         }
+        public static new MigrateJobStartOperationArgs Empty => new MigrateJobStartOperationArgs();
     }
 
-    public sealed class MigrateJobStartOperationState : Pulumi.ResourceArgs
+    public sealed class MigrateJobStartOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Job Id from `tencentcloud.Dts.MigrateJob`.
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public MigrateJobStartOperationState()
         {
         }
+        public static new MigrateJobStartOperationState Empty => new MigrateJobStartOperationState();
     }
 }

@@ -2,60 +2,19 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provide a resource to create a CynosDB cluster.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const foo = new tencentcloud.Cynosdb.Cluster("foo", {
- *     availableZone: "ap-guangzhou-4",
- *     clusterName: "tf-cynosdb",
- *     dbType: "MYSQL",
- *     dbVersion: "5.7",
- *     forceDelete: false,
- *     instanceCpuCore: 1,
- *     instanceMaintainDuration: 7200,
- *     instanceMaintainStartTime: 10800,
- *     instanceMaintainWeekdays: [
- *         "Fri",
- *         "Mon",
- *         "Sat",
- *         "Sun",
- *         "Thu",
- *         "Wed",
- *         "Tue",
- *     ],
- *     instanceMemorySize: 2,
- *     paramItem: [{
- *         currentValue: "utf8mb4",
- *         name: "character_set_server",
- *     }],
- *     password: "cynos@123",
- *     prarmTemplateId: 12345,
- *     roGroupSgs: ["sg-ibyjkl6r"],
- *     rwGroupSgs: ["sg-ibyjkl6r"],
- *     storageLimit: 1000,
- *     subnetId: "subnet-q6fhy1mi",
- *     tags: {
- *         test: "test",
- *     },
- *     vpcId: "vpc-h70b6b49",
- * });
- * ```
  *
  * ## Import
  *
  * CynosDB cluster can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cynosdb/cluster:Cluster foo cynosdbmysql-dzj5l8gz
+ * $ pulumi import tencentcloud:Cynosdb/cluster:Cluster foo cynosdbmysql-dzj5l8gz
  * ```
  */
 export class Cluster extends pulumi.CustomResource {
@@ -377,7 +336,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["minCpu"] = args ? args.minCpu : undefined;
             resourceInputs["oldIpReserveHours"] = args ? args.oldIpReserveHours : undefined;
             resourceInputs["paramItems"] = args ? args.paramItems : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["prarmTemplateId"] = args ? args.prarmTemplateId : undefined;
             resourceInputs["prepaidPeriod"] = args ? args.prepaidPeriod : undefined;
@@ -407,6 +366,8 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["storageUsed"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Cluster.__pulumiType, name, resourceInputs, opts);
     }
 }

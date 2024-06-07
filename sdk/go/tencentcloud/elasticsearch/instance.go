@@ -7,196 +7,205 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides an elasticsearch instance resource.
 //
 // ## Example Usage
+//
 // ### Create a basic version of elasticsearch instance paid by the hour
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		availabilityZone, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "es",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Elasticsearch.NewInstance(ctx, "example", &Elasticsearch.InstanceArgs{
-// 			InstanceName:      pulumi.String("tf_example_es"),
-// 			AvailabilityZone:  pulumi.String(availabilityZone.Zones[0].Name),
-// 			Version:           pulumi.String("7.10.1"),
-// 			VpcId:             vpc.ID(),
-// 			SubnetId:          subnet.ID(),
-// 			Password:          pulumi.String("Test12345"),
-// 			LicenseType:       pulumi.String("basic"),
-// 			BasicSecurityType: pulumi.Int(2),
-// 			WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
-// 				&elasticsearch.InstanceWebNodeTypeInfoArgs{
-// 					NodeNum:  pulumi.Int(1),
-// 					NodeType: pulumi.String("ES.S1.MEDIUM4"),
-// 				},
-// 			},
-// 			NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
-// 				&elasticsearch.InstanceNodeInfoListArgs{
-// 					NodeNum:  pulumi.Int(2),
-// 					NodeType: pulumi.String("ES.S1.MEDIUM8"),
-// 					Encrypt:  pulumi.Bool(false),
-// 				},
-// 			},
-// 			EsAcl: &elasticsearch.InstanceEsAclArgs{
-// 				WhiteLists: pulumi.StringArray{
-// 					pulumi.String("127.0.0.1"),
-// 				},
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			availabilityZone, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "es",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Elasticsearch.NewInstance(ctx, "example", &Elasticsearch.InstanceArgs{
+//				InstanceName:      pulumi.String("tf_example_es"),
+//				AvailabilityZone:  pulumi.String(availabilityZone.Zones[0].Name),
+//				Version:           pulumi.String("7.10.1"),
+//				VpcId:             vpc.ID(),
+//				SubnetId:          subnet.ID(),
+//				Password:          pulumi.String("Test12345"),
+//				LicenseType:       pulumi.String("basic"),
+//				BasicSecurityType: pulumi.Int(2),
+//				WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
+//					&elasticsearch.InstanceWebNodeTypeInfoArgs{
+//						NodeNum:  pulumi.Int(1),
+//						NodeType: pulumi.String("ES.S1.MEDIUM4"),
+//					},
+//				},
+//				NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
+//					&elasticsearch.InstanceNodeInfoListArgs{
+//						NodeNum:  pulumi.Int(2),
+//						NodeType: pulumi.String("ES.S1.MEDIUM8"),
+//						Encrypt:  pulumi.Bool(false),
+//					},
+//				},
+//				EsAcl: &elasticsearch.InstanceEsAclArgs{
+//					WhiteLists: pulumi.StringArray{
+//						pulumi.String("127.0.0.1"),
+//					},
+//				},
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Create a basic version of elasticsearch instance for multi-availability zone deployment
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		availabilityZone, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "es",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnetMultiZone, err := Subnet.NewInstance(ctx, "subnetMultiZone", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(availabilityZone.Zones[1].Name),
-// 			CidrBlock:        pulumi.String("10.0.2.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Elasticsearch.NewInstance(ctx, "exampleMultiZone", &Elasticsearch.InstanceArgs{
-// 			InstanceName:      pulumi.String("tf_example_es"),
-// 			AvailabilityZone:  pulumi.String("-"),
-// 			Version:           pulumi.String("7.10.1"),
-// 			VpcId:             vpc.ID(),
-// 			SubnetId:          pulumi.String("-"),
-// 			Password:          pulumi.String("Test12345"),
-// 			LicenseType:       pulumi.String("basic"),
-// 			BasicSecurityType: pulumi.Int(2),
-// 			DeployMode:        pulumi.Int(1),
-// 			MultiZoneInfos: elasticsearch.InstanceMultiZoneInfoArray{
-// 				&elasticsearch.InstanceMultiZoneInfoArgs{
-// 					AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
-// 					SubnetId:         subnet.ID(),
-// 				},
-// 				&elasticsearch.InstanceMultiZoneInfoArgs{
-// 					AvailabilityZone: pulumi.String(availabilityZone.Zones[1].Name),
-// 					SubnetId:         subnetMultiZone.ID(),
-// 				},
-// 			},
-// 			WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
-// 				&elasticsearch.InstanceWebNodeTypeInfoArgs{
-// 					NodeNum:  pulumi.Int(1),
-// 					NodeType: pulumi.String("ES.S1.MEDIUM4"),
-// 				},
-// 			},
-// 			NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
-// 				&elasticsearch.InstanceNodeInfoListArgs{
-// 					Type:     pulumi.String("dedicatedMaster"),
-// 					NodeNum:  pulumi.Int(3),
-// 					NodeType: pulumi.String("ES.S1.MEDIUM8"),
-// 					Encrypt:  pulumi.Bool(false),
-// 				},
-// 				&elasticsearch.InstanceNodeInfoListArgs{
-// 					Type:     pulumi.String("hotData"),
-// 					NodeNum:  pulumi.Int(2),
-// 					NodeType: pulumi.String("ES.S1.MEDIUM8"),
-// 					Encrypt:  pulumi.Bool(false),
-// 				},
-// 			},
-// 			EsAcl: &elasticsearch.InstanceEsAclArgs{
-// 				WhiteLists: pulumi.StringArray{
-// 					pulumi.String("127.0.0.1"),
-// 				},
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			availabilityZone, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "es",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnetMultiZone, err := Subnet.NewInstance(ctx, "subnetMultiZone", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone.Zones[1].Name),
+//				CidrBlock:        pulumi.String("10.0.2.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Elasticsearch.NewInstance(ctx, "exampleMultiZone", &Elasticsearch.InstanceArgs{
+//				InstanceName:      pulumi.String("tf_example_es"),
+//				AvailabilityZone:  pulumi.String("-"),
+//				Version:           pulumi.String("7.10.1"),
+//				VpcId:             vpc.ID(),
+//				SubnetId:          pulumi.String("-"),
+//				Password:          pulumi.String("Test12345"),
+//				LicenseType:       pulumi.String("basic"),
+//				BasicSecurityType: pulumi.Int(2),
+//				DeployMode:        pulumi.Int(1),
+//				MultiZoneInfos: elasticsearch.InstanceMultiZoneInfoArray{
+//					&elasticsearch.InstanceMultiZoneInfoArgs{
+//						AvailabilityZone: pulumi.String(availabilityZone.Zones[0].Name),
+//						SubnetId:         subnet.ID(),
+//					},
+//					&elasticsearch.InstanceMultiZoneInfoArgs{
+//						AvailabilityZone: pulumi.String(availabilityZone.Zones[1].Name),
+//						SubnetId:         subnetMultiZone.ID(),
+//					},
+//				},
+//				WebNodeTypeInfos: elasticsearch.InstanceWebNodeTypeInfoArray{
+//					&elasticsearch.InstanceWebNodeTypeInfoArgs{
+//						NodeNum:  pulumi.Int(1),
+//						NodeType: pulumi.String("ES.S1.MEDIUM4"),
+//					},
+//				},
+//				NodeInfoLists: elasticsearch.InstanceNodeInfoListArray{
+//					&elasticsearch.InstanceNodeInfoListArgs{
+//						Type:     pulumi.String("dedicatedMaster"),
+//						NodeNum:  pulumi.Int(3),
+//						NodeType: pulumi.String("ES.S1.MEDIUM8"),
+//						Encrypt:  pulumi.Bool(false),
+//					},
+//					&elasticsearch.InstanceNodeInfoListArgs{
+//						Type:     pulumi.String("hotData"),
+//						NodeNum:  pulumi.Int(2),
+//						NodeType: pulumi.String("ES.S1.MEDIUM8"),
+//						Encrypt:  pulumi.Bool(false),
+//					},
+//				},
+//				EsAcl: &elasticsearch.InstanceEsAclArgs{
+//					WhiteLists: pulumi.StringArray{
+//						pulumi.String("127.0.0.1"),
+//					},
+//				},
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // Elasticsearch instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
+// $ pulumi import tencentcloud:Elasticsearch/instance:Instance foo es-17634f05
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -266,7 +275,14 @@ func NewInstance(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Elasticsearch/instance:Instance", name, args, &resource, opts...)
 	if err != nil {
@@ -487,7 +503,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -512,7 +528,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 

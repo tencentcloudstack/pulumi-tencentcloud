@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = pulumi.output(tencentcloud.Ha.getVipEipAttachments({
+ * const foo = tencentcloud.Ha.getVipEipAttachments({
  *     addressIp: "1.1.1.1",
  *     havipId: "havip-kjqwe4ba",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getVipEipAttachments(args: GetVipEipAttachmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetVipEipAttachmentsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ha/getVipEipAttachments:getVipEipAttachments", {
         "addressIp": args.addressIp,
         "havipId": args.havipId,
@@ -73,9 +73,25 @@ export interface GetVipEipAttachmentsResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of HA VIP EIP attachments
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Ha.getVipEipAttachments({
+ *     addressIp: "1.1.1.1",
+ *     havipId: "havip-kjqwe4ba",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getVipEipAttachmentsOutput(args: GetVipEipAttachmentsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetVipEipAttachmentsResult> {
-    return pulumi.output(args).apply(a => getVipEipAttachments(a, opts))
+    return pulumi.output(args).apply((a: any) => getVipEipAttachments(a, opts))
 }
 
 /**

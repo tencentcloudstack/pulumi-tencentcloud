@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const regionAndPrice = pulumi.output(tencentcloud.Gaap.getRegionAndPrice());
+ * const regionAndPrice = tencentcloud.Gaap.getRegionAndPrice({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRegionAndPrice(args?: GetRegionAndPriceArgs, opts?: pulumi.InvokeOptions): Promise<GetRegionAndPriceResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getRegionAndPrice:getRegionAndPrice", {
         "ipAddressVersion": args.ipAddressVersion,
         "packageType": args.packageType,
@@ -73,9 +73,22 @@ export interface GetRegionAndPriceResult {
     readonly packageType?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of gaap region and price
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const regionAndPrice = tencentcloud.Gaap.getRegionAndPrice({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRegionAndPriceOutput(args?: GetRegionAndPriceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRegionAndPriceResult> {
-    return pulumi.output(args).apply(a => getRegionAndPrice(a, opts))
+    return pulumi.output(args).apply((a: any) => getRegionAndPrice(a, opts))
 }
 
 /**

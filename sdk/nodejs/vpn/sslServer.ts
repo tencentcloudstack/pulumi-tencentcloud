@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const server = new tencentcloud.Vpn.SslServer("server", {
+ * const server = new tencentcloud.vpn.SslServer("server", {
  *     compress: true,
  *     encryptAlgorithm: "AES-128-CBC",
  *     integrityAlgorithm: "MD5",
@@ -25,13 +26,14 @@ import * as utilities from "../utilities";
  *     vpnGatewayId: "vpngw-335lwf7d",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * VPN SSL Server can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vpn/sslServer:SslServer server vpn-server-id
+ * $ pulumi import tencentcloud:Vpn/sslServer:SslServer server vpn-server-id
  * ```
  */
 export class SslServer extends pulumi.CustomResource {

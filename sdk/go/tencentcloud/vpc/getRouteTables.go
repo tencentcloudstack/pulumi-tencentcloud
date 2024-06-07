@@ -8,61 +8,71 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query vpc route tables information.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Route"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Route"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		foo, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		routeTable, err := Route.NewTable(ctx, "routeTable", &Route.TableArgs{
-// 			VpcId: foo.ID(),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Vpc.GetRouteTablesOutput(ctx, vpc.GetRouteTablesOutputArgs{
-// 			RouteTableId: routeTable.ID(),
-// 		}, nil)
-// 		_ = Vpc.GetRouteTablesOutput(ctx, vpc.GetRouteTablesOutputArgs{
-// 			Name: routeTable.Name,
-// 		}, nil)
-// 		_ = Vpc.GetRouteTablesOutput(ctx, vpc.GetRouteTablesOutputArgs{
-// 			VpcId:           foo.ID(),
-// 			AssociationMain: pulumi.Bool(true),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			foo, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			routeTable, err := Route.NewTable(ctx, "routeTable", &Route.TableArgs{
+//				VpcId: foo.ID(),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Vpc.GetRouteTablesOutput(ctx, vpc.GetRouteTablesOutputArgs{
+//				RouteTableId: routeTable.ID(),
+//			}, nil)
+//			_ = Vpc.GetRouteTablesOutput(ctx, vpc.GetRouteTablesOutputArgs{
+//				Name: routeTable.Name,
+//			}, nil)
+//			_ = Vpc.GetRouteTablesOutput(ctx, vpc.GetRouteTablesOutputArgs{
+//				VpcId:           foo.ID(),
+//				AssociationMain: pulumi.Bool(true),
+//			}, nil)
+//			_ = routeTable.Tags.ApplyT(func(tags interface{}) (vpc.GetRouteTablesResult, error) {
+//				return Vpc.GetRouteTablesOutput(ctx, vpc.GetRouteTablesOutputArgs{
+//					Tags: tags,
+//				}, nil), nil
+//			}).(vpc.GetRouteTablesResultOutput)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetRouteTables(ctx *pulumi.Context, args *GetRouteTablesArgs, opts ...pulumi.InvokeOption) (*GetRouteTablesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRouteTablesResult
 	err := ctx.Invoke("tencentcloud:Vpc/getRouteTables:getRouteTables", args, &rv, opts...)
 	if err != nil {

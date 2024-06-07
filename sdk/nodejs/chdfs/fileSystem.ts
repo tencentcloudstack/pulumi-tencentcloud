@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const fileSystem = new tencentcloud.Chdfs.FileSystem("file_system", {
+ * const fileSystem = new tencentcloud.chdfs.FileSystem("fileSystem", {
  *     capacityQuota: 10995116277760,
  *     description: "file system for terraform test",
  *     enableRanger: true,
@@ -29,13 +30,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * chdfs file_system can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Chdfs/fileSystem:FileSystem file_system file_system_id
+ * $ pulumi import tencentcloud:Chdfs/fileSystem:FileSystem file_system file_system_id
  * ```
  */
 export class FileSystem extends pulumi.CustomResource {

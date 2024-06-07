@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type InstanceBackupDownloadTask struct {
@@ -42,7 +43,7 @@ func NewInstanceBackupDownloadTask(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource InstanceBackupDownloadTask
 	err := ctx.RegisterResource("tencentcloud:Mongodb/instanceBackupDownloadTask:InstanceBackupDownloadTask", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +148,7 @@ func (i *InstanceBackupDownloadTask) ToInstanceBackupDownloadTaskOutputWithConte
 // InstanceBackupDownloadTaskArrayInput is an input type that accepts InstanceBackupDownloadTaskArray and InstanceBackupDownloadTaskArrayOutput values.
 // You can construct a concrete instance of `InstanceBackupDownloadTaskArrayInput` via:
 //
-//          InstanceBackupDownloadTaskArray{ InstanceBackupDownloadTaskArgs{...} }
+//	InstanceBackupDownloadTaskArray{ InstanceBackupDownloadTaskArgs{...} }
 type InstanceBackupDownloadTaskArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +173,7 @@ func (i InstanceBackupDownloadTaskArray) ToInstanceBackupDownloadTaskArrayOutput
 // InstanceBackupDownloadTaskMapInput is an input type that accepts InstanceBackupDownloadTaskMap and InstanceBackupDownloadTaskMapOutput values.
 // You can construct a concrete instance of `InstanceBackupDownloadTaskMapInput` via:
 //
-//          InstanceBackupDownloadTaskMap{ "key": InstanceBackupDownloadTaskArgs{...} }
+//	InstanceBackupDownloadTaskMap{ "key": InstanceBackupDownloadTaskArgs{...} }
 type InstanceBackupDownloadTaskMapInput interface {
 	pulumi.Input
 

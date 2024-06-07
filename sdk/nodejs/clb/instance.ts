@@ -2,20 +2,23 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a CLB instance.
  *
  * ## Example Usage
+ *
  * ### INTERNAL CLB
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const internalClb = new tencentcloud.Clb.Instance("internal_clb", {
+ * const internalClb = new tencentcloud.clb.Instance("internalClb", {
  *     clbName: "myclb",
  *     networkType: "INTERNAL",
  *     projectId: 0,
@@ -26,13 +29,16 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-7007ll7q",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### LCU-supported CLB
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const internalClb = new tencentcloud.Clb.Instance("internal_clb", {
+ * const internalClb = new tencentcloud.clb.Instance("internalClb", {
  *     clbName: "myclb",
  *     networkType: "INTERNAL",
  *     projectId: 0,
@@ -44,13 +50,16 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-2hfyray3",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### OPEN CLB
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const openClb = new tencentcloud.Clb.Instance("open_clb", {
+ * const openClb = new tencentcloud.clb.Instance("openClb", {
  *     clbName: "myclb",
  *     networkType: "OPEN",
  *     projectId: 0,
@@ -63,11 +72,14 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-da7ffa61",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### OPNE CLB with VipIsp
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.vpc.BandwidthPackage("example", {
  *     networkType: "SINGLEISP_CMCC",
@@ -92,11 +104,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Dynamic Vip Instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooGroup = new tencentcloud.security.Group("fooGroup", {});
  * const fooInstance = new tencentcloud.vpc.Instance("fooInstance", {cidrBlock: "10.0.0.0/16"});
@@ -115,11 +130,14 @@ import * as utilities from "../utilities";
  * });
  * export const domain = clbOpen.domain;
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Specified  Vip Instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooGroup = new tencentcloud.security.Group("fooGroup", {});
  * const fooInstance = new tencentcloud.vpc.Instance("fooInstance", {cidrBlock: "10.0.0.0/16"});
@@ -136,11 +154,14 @@ import * as utilities from "../utilities";
  * });
  * export const domain = tencentcloud_clb_instance.vip;
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Default enable
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const foo = new tencentcloud.vpc.Instance("foo", {
  *     cidrBlock: "10.0.0.0/16",
@@ -172,44 +193,44 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### CREATE multiple instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const openClb1 = new tencentcloud.Clb.Instance("open_clb1", {
+ * const openClb1 = new tencentcloud.clb.Instance("openClb1", {
  *     clbName: "hello",
  *     masterZoneId: "ap-guangzhou-3",
  *     networkType: "OPEN",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### CREATE instance with log
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const vpcTest = new tencentcloud.Vpc.Instance("vpc_test", {
- *     cidrBlock: "10.0.0.0/16",
- * });
- * const rtbTest = new tencentcloud.Route.Table("rtb_test", {
- *     vpcId: vpcTest.id,
- * });
- * const subnetTest = new tencentcloud.Subnet.Instance("subnet_test", {
+ * const vpcTest = new tencentcloud.vpc.Instance("vpcTest", {cidrBlock: "10.0.0.0/16"});
+ * const rtbTest = new tencentcloud.route.Table("rtbTest", {vpcId: vpcTest.id});
+ * const subnetTest = new tencentcloud.subnet.Instance("subnetTest", {
  *     availabilityZone: "ap-guangzhou-3",
  *     cidrBlock: "10.0.1.0/24",
  *     routeTableId: rtbTest.id,
  *     vpcId: vpcTest.id,
  * });
- * const set = new tencentcloud.Clb.LogSet("set", {
- *     period: 7,
- * });
- * const topic = new tencentcloud.Clb.LogTopic("topic", {
+ * const set = new tencentcloud.clb.LogSet("set", {period: 7});
+ * const topic = new tencentcloud.clb.LogTopic("topic", {
  *     logSetId: set.id,
  *     topicName: "clb-topic",
  * });
- * const internalClb = new tencentcloud.Clb.Instance("internal_clb", {
+ * const internalClb = new tencentcloud.clb.Instance("internalClb", {
  *     clbName: "myclb",
  *     loadBalancerPassToTarget: true,
  *     logSetId: set.id,
@@ -223,13 +244,14 @@ import * as utilities from "../utilities";
  *     vpcId: vpcTest.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CLB instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clb/instance:Instance foo lb-7a0t6zqb
+ * $ pulumi import tencentcloud:Clb/instance:Instance foo lb-7a0t6zqb
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -341,7 +363,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly snatPro!: pulumi.Output<boolean | undefined>;
     /**
-     * Subnet ID of the CLB. Effective only for CLB within the VPC. Only supports `INTERNAL` CLBs. Default is `ipv4`.
+     * In the case of purchasing a `INTERNAL` clb instance, the subnet id must be specified. The VIP of the `INTERNAL` clb instance will be generated from this subnet.
      */
     public readonly subnetId!: pulumi.Output<string | undefined>;
     /**
@@ -541,7 +563,7 @@ export interface InstanceState {
      */
     snatPro?: pulumi.Input<boolean>;
     /**
-     * Subnet ID of the CLB. Effective only for CLB within the VPC. Only supports `INTERNAL` CLBs. Default is `ipv4`.
+     * In the case of purchasing a `INTERNAL` clb instance, the subnet id must be specified. The VIP of the `INTERNAL` clb instance will be generated from this subnet.
      */
     subnetId?: pulumi.Input<string>;
     /**
@@ -651,7 +673,7 @@ export interface InstanceArgs {
      */
     snatPro?: pulumi.Input<boolean>;
     /**
-     * Subnet ID of the CLB. Effective only for CLB within the VPC. Only supports `INTERNAL` CLBs. Default is `ipv4`.
+     * In the case of purchasing a `INTERNAL` clb instance, the subnet id must be specified. The VIP of the `INTERNAL` clb instance will be generated from this subnet.
      */
     subnetId?: pulumi.Input<string>;
     /**

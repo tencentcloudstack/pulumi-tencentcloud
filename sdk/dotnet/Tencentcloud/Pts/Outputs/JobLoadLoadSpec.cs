@@ -14,11 +14,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Outputs
     [OutputType]
     public sealed class JobLoadLoadSpec
     {
+        /// <summary>
+        /// Configuration of concurrent pressure mode.
+        /// </summary>
         public readonly Outputs.JobLoadLoadSpecConcurrency? Concurrency;
         /// <summary>
         /// Average number of requests per second.
         /// </summary>
         public readonly Outputs.JobLoadLoadSpecRequestsPerSecond? RequestsPerSecond;
+        /// <summary>
+        /// Built-in stress mode in script.
+        /// </summary>
         public readonly Outputs.JobLoadLoadSpecScriptOrigin? ScriptOrigin;
 
         [OutputConstructor]

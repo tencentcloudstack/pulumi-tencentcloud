@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap listener real servers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var listenerRealServers = Tencentcloud.Gaap.GetListenerRealServers.Invoke(new()
         ///     {
-        ///         var listenerRealServers = Output.Create(Tencentcloud.Gaap.GetListenerRealServers.InvokeAsync(new Tencentcloud.Gaap.GetListenerRealServersArgs
-        ///         {
-        ///             ListenerId = "listener-xxxxxx",
-        ///         }));
-        ///     }
+        ///         ListenerId = "listener-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetListenerRealServersResult> InvokeAsync(GetListenerRealServersArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetListenerRealServersResult>("tencentcloud:Gaap/getListenerRealServers:getListenerRealServers", args ?? new GetListenerRealServersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetListenerRealServersResult>("tencentcloud:Gaap/getListenerRealServers:getListenerRealServers", args ?? new GetListenerRealServersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap listener real servers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var listenerRealServers = Tencentcloud.Gaap.GetListenerRealServers.Invoke(new()
         ///     {
-        ///         var listenerRealServers = Output.Create(Tencentcloud.Gaap.GetListenerRealServers.InvokeAsync(new Tencentcloud.Gaap.GetListenerRealServersArgs
-        ///         {
-        ///             ListenerId = "listener-xxxxxx",
-        ///         }));
-        ///     }
+        ///         ListenerId = "listener-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetListenerRealServersResult> Invoke(GetListenerRealServersInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetListenerRealServersResult>("tencentcloud:Gaap/getListenerRealServers:getListenerRealServers", args ?? new GetListenerRealServersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetListenerRealServersResult>("tencentcloud:Gaap/getListenerRealServers:getListenerRealServers", args ?? new GetListenerRealServersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetListenerRealServersArgs : Pulumi.InvokeArgs
+    public sealed class GetListenerRealServersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// listener ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetListenerRealServersArgs()
         {
         }
+        public static new GetListenerRealServersArgs Empty => new GetListenerRealServersArgs();
     }
 
-    public sealed class GetListenerRealServersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetListenerRealServersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// listener ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetListenerRealServersInvokeArgs()
         {
         }
+        public static new GetListenerRealServersInvokeArgs Empty => new GetListenerRealServersInvokeArgs();
     }
 
 

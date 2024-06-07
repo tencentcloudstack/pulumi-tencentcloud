@@ -14,50 +14,57 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
     /// Use this resource to create TcaplusDB IDL file.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a tcaplus database idl file
     /// 
     /// The file will be with a specified cluster and tablegroup.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///     var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    ///         var vpc = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
-    ///         {
-    ///             IsDefault = true,
-    ///             AvailabilityZone = availabilityZone,
-    ///         }));
-    ///         var vpcId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.VpcId);
-    ///         var subnetId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.SubnetId);
-    ///         var exampleCluster = new Tencentcloud.Tcaplus.Cluster("exampleCluster", new Tencentcloud.Tcaplus.ClusterArgs
-    ///         {
-    ///             IdlType = "PROTO",
-    ///             ClusterName = "tf_example_tcaplus_cluster",
-    ///             VpcId = vpcId,
-    ///             SubnetId = subnetId,
-    ///             Password = "your_pw_123111",
-    ///             OldPasswordExpireLast = 3600,
-    ///         });
-    ///         var exampleTablegroup = new Tencentcloud.Tcaplus.Tablegroup("exampleTablegroup", new Tencentcloud.Tcaplus.TablegroupArgs
-    ///         {
-    ///             ClusterId = exampleCluster.Id,
-    ///             TablegroupName = "tf_example_group_name",
-    ///         });
-    ///         var main = new Tencentcloud.Tcaplus.Idl("main", new Tencentcloud.Tcaplus.IdlArgs
-    ///         {
-    ///             ClusterId = exampleCluster.Id,
-    ///             TablegroupId = exampleTablegroup.Id,
-    ///             FileName = "tf_example_tcaplus_idl",
-    ///             FileType = "PROTO",
-    ///             FileExtType = "proto",
-    ///             FileContent = @"    syntax = ""proto2"";
+    ///         IsDefault = true,
+    ///         AvailabilityZone = availabilityZone,
+    ///     });
+    /// 
+    ///     var vpcId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId);
+    /// 
+    ///     var subnetId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.SubnetId);
+    /// 
+    ///     var exampleCluster = new Tencentcloud.Tcaplus.Cluster("exampleCluster", new()
+    ///     {
+    ///         IdlType = "PROTO",
+    ///         ClusterName = "tf_example_tcaplus_cluster",
+    ///         VpcId = vpcId,
+    ///         SubnetId = subnetId,
+    ///         Password = "your_pw_123111",
+    ///         OldPasswordExpireLast = 3600,
+    ///     });
+    /// 
+    ///     var exampleTablegroup = new Tencentcloud.Tcaplus.Tablegroup("exampleTablegroup", new()
+    ///     {
+    ///         ClusterId = exampleCluster.Id,
+    ///         TablegroupName = "tf_example_group_name",
+    ///     });
+    /// 
+    ///     var main = new Tencentcloud.Tcaplus.Idl("main", new()
+    ///     {
+    ///         ClusterId = exampleCluster.Id,
+    ///         TablegroupId = exampleTablegroup.Id,
+    ///         FileName = "tf_example_tcaplus_idl",
+    ///         FileType = "PROTO",
+    ///         FileExtType = "proto",
+    ///         FileContent = @"    syntax = ""proto2"";
     ///     package myTcaplusTable;
     ///     import ""tcaplusservice.optionv1.proto"";
     ///     message tb_online {
@@ -83,14 +90,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
     ///         }
     ///     }
     /// ",
-    ///         });
-    ///     }
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcaplus/idl:Idl")]
-    public partial class Idl : Pulumi.CustomResource
+    public partial class Idl : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the TcaplusDB cluster to which the table group belongs.
@@ -179,7 +186,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         }
     }
 
-    public sealed class IdlArgs : Pulumi.ResourceArgs
+    public sealed class IdlArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the TcaplusDB cluster to which the table group belongs.
@@ -220,9 +227,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public IdlArgs()
         {
         }
+        public static new IdlArgs Empty => new IdlArgs();
     }
 
-    public sealed class IdlState : Pulumi.ResourceArgs
+    public sealed class IdlState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the TcaplusDB cluster to which the table group belongs.
@@ -275,5 +283,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         public IdlState()
         {
         }
+        public static new IdlState Empty => new IdlState();
     }
 }

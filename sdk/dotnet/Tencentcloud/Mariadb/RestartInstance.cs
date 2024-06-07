@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var restartInstance = new Tencentcloud.Mariadb.RestartInstance("restartInstance", new()
     ///     {
-    ///         var restartInstance = new Tencentcloud.Mariadb.RestartInstance("restartInstance", new Tencentcloud.Mariadb.RestartInstanceArgs
-    ///         {
-    ///             InstanceId = "tdsql-9vqvls95",
-    ///         });
-    ///     }
+    ///         InstanceId = "tdsql-9vqvls95",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/restartInstance:RestartInstance")]
-    public partial class RestartInstance : Pulumi.CustomResource
+    public partial class RestartInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// instance ID.
@@ -92,7 +93,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class RestartInstanceArgs : Pulumi.ResourceArgs
+    public sealed class RestartInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance ID.
@@ -109,9 +110,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public RestartInstanceArgs()
         {
         }
+        public static new RestartInstanceArgs Empty => new RestartInstanceArgs();
     }
 
-    public sealed class RestartInstanceState : Pulumi.ResourceArgs
+    public sealed class RestartInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance ID.
@@ -128,5 +130,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public RestartInstanceState()
         {
         }
+        public static new RestartInstanceState Empty => new RestartInstanceState();
     }
 }

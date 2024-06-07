@@ -15,42 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var @group = new Tencentcloud.Tsf.Group("group", new()
     ///     {
-    ///         var @group = new Tencentcloud.Tsf.Group("group", new Tencentcloud.Tsf.GroupArgs
+    ///         Alias = "terraform test",
+    ///         ApplicationId = "application-xxx",
+    ///         ClusterId = "cluster-vwgjxxxx",
+    ///         GroupDesc = "terraform desc",
+    ///         GroupName = "terraform-test",
+    ///         NamespaceId = "namespace-aemrxxx",
+    ///         Tags = 
     ///         {
-    ///             Alias = "terraform test",
-    ///             ApplicationId = "application-xxx",
-    ///             ClusterId = "cluster-vwgjxxxx",
-    ///             GroupDesc = "terraform desc",
-    ///             GroupName = "terraform-test",
-    ///             NamespaceId = "namespace-aemrxxx",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tsf group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tsf/group:Group group group-axxx
+    /// $ pulumi import tencentcloud:Tsf/group:Group group group-axxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/group:Group")]
-    public partial class Group : Pulumi.CustomResource
+    public partial class Group : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Deployment Group Notes.
@@ -145,7 +146,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class GroupArgs : Pulumi.ResourceArgs
+    public sealed class GroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Deployment Group Notes.
@@ -198,9 +199,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GroupArgs()
         {
         }
+        public static new GroupArgs Empty => new GroupArgs();
     }
 
-    public sealed class GroupState : Pulumi.ResourceArgs
+    public sealed class GroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Deployment Group Notes.
@@ -259,5 +261,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GroupState()
         {
         }
+        public static new GroupState Empty => new GroupState();
     }
 }

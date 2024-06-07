@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class LaneRuleRuleTagListArgs : Pulumi.ResourceArgs
+    public sealed class LaneRuleRuleTagListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// creation time.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public LaneRuleRuleTagListArgs()
         {
         }
+        public static new LaneRuleRuleTagListArgs Empty => new LaneRuleRuleTagListArgs();
     }
 }

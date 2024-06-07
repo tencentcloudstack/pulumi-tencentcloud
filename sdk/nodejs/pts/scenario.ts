@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const scenario = new tencentcloud.Pts.Scenario("scenario", {
+ * const scenario = new tencentcloud.pts.Scenario("scenario", {
  *     domainNameConfig: {},
  *     load: {
  *         geoRegionsLoadDistributions: [{
@@ -81,6 +83,7 @@ import * as utilities from "../utilities";
  *               console.log(resp2.json().args.name1); // 'value1'
  *               check('body.args.name1 equals value1', () => resp2.json().args.name1 === 'value1');
  *             }
+ *
  * `,
  *         loadWeight: 100,
  *         name: "script.js",
@@ -91,13 +94,14 @@ import * as utilities from "../utilities";
  *     type: "pts-js",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * pts scenario can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Pts/scenario:Scenario scenario scenario_id
+ * $ pulumi import tencentcloud:Pts/scenario:Scenario scenario scenario_id
  * ```
  */
 export class Scenario extends pulumi.CustomResource {

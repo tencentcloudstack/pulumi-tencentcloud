@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaConcatTemplateConcatTemplateContainerGetArgs : Pulumi.ResourceArgs
+    public sealed class MediaConcatTemplateConcatTemplateContainerGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Container format: mp4, flv, hls, ts, mp3, aac.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaConcatTemplateConcatTemplateContainerGetArgs()
         {
         }
+        public static new MediaConcatTemplateConcatTemplateContainerGetArgs Empty => new MediaConcatTemplateConcatTemplateContainerGetArgs();
     }
 }

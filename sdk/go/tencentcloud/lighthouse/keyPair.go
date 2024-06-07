@@ -7,41 +7,47 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a lighthouse keyPair
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewKeyPair(ctx, "keyPair", &Lighthouse.KeyPairArgs{
-// 			KeyName: pulumi.String("key_name_test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewKeyPair(ctx, "keyPair", &Lighthouse.KeyPairArgs{
+//				KeyName: pulumi.String("key_name_test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // lighthouse key_pair can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Lighthouse/keyPair:KeyPair key_pair key_pair_id
+// $ pulumi import tencentcloud:Lighthouse/keyPair:KeyPair key_pair key_pair_id
 // ```
 type KeyPair struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewKeyPair(ctx *pulumi.Context,
 	if args.KeyName == nil {
 		return nil, errors.New("invalid value for required argument 'KeyName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource KeyPair
 	err := ctx.RegisterResource("tencentcloud:Lighthouse/keyPair:KeyPair", name, args, &resource, opts...)
 	if err != nil {
@@ -155,7 +161,7 @@ func (i *KeyPair) ToKeyPairOutputWithContext(ctx context.Context) KeyPairOutput 
 // KeyPairArrayInput is an input type that accepts KeyPairArray and KeyPairArrayOutput values.
 // You can construct a concrete instance of `KeyPairArrayInput` via:
 //
-//          KeyPairArray{ KeyPairArgs{...} }
+//	KeyPairArray{ KeyPairArgs{...} }
 type KeyPairArrayInput interface {
 	pulumi.Input
 
@@ -180,7 +186,7 @@ func (i KeyPairArray) ToKeyPairArrayOutputWithContext(ctx context.Context) KeyPa
 // KeyPairMapInput is an input type that accepts KeyPairMap and KeyPairMapOutput values.
 // You can construct a concrete instance of `KeyPairMapInput` via:
 //
-//          KeyPairMap{ "key": KeyPairArgs{...} }
+//	KeyPairMap{ "key": KeyPairArgs{...} }
 type KeyPairMapInput interface {
 	pulumi.Input
 

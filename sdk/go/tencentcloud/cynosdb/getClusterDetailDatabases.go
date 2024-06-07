@@ -8,36 +8,41 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of cynosdb clusterDetailDatabases
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.GetClusterDetailDatabases(ctx, &cynosdb.GetClusterDetailDatabasesArgs{
-// 			ClusterId: "cynosdbmysql-bws8h88b",
-// 			DbName:    pulumi.StringRef("users"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.GetClusterDetailDatabases(ctx, &cynosdb.GetClusterDetailDatabasesArgs{
+//				ClusterId: "cynosdbmysql-bws8h88b",
+//				DbName:    pulumi.StringRef("users"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetClusterDetailDatabases(ctx *pulumi.Context, args *GetClusterDetailDatabasesArgs, opts ...pulumi.InvokeOption) (*GetClusterDetailDatabasesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClusterDetailDatabasesResult
 	err := ctx.Invoke("tencentcloud:Cynosdb/getClusterDetailDatabases:getClusterDetailDatabases", args, &rv, opts...)
 	if err != nil {

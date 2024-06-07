@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ckafka datahubTopic
@@ -18,7 +19,7 @@ import (
 // ckafka datahub_topic can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ckafka/datahubTopic:DatahubTopic datahub_topic datahub_topic_name
+// $ pulumi import tencentcloud:Ckafka/datahubTopic:DatahubTopic datahub_topic datahub_topic_name
 // ```
 type DatahubTopic struct {
 	pulumi.CustomResourceState
@@ -48,7 +49,7 @@ func NewDatahubTopic(ctx *pulumi.Context,
 	if args.RetentionMs == nil {
 		return nil, errors.New("invalid value for required argument 'RetentionMs'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DatahubTopic
 	err := ctx.RegisterResource("tencentcloud:Ckafka/datahubTopic:DatahubTopic", name, args, &resource, opts...)
 	if err != nil {
@@ -153,7 +154,7 @@ func (i *DatahubTopic) ToDatahubTopicOutputWithContext(ctx context.Context) Data
 // DatahubTopicArrayInput is an input type that accepts DatahubTopicArray and DatahubTopicArrayOutput values.
 // You can construct a concrete instance of `DatahubTopicArrayInput` via:
 //
-//          DatahubTopicArray{ DatahubTopicArgs{...} }
+//	DatahubTopicArray{ DatahubTopicArgs{...} }
 type DatahubTopicArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +179,7 @@ func (i DatahubTopicArray) ToDatahubTopicArrayOutputWithContext(ctx context.Cont
 // DatahubTopicMapInput is an input type that accepts DatahubTopicMap and DatahubTopicMapOutput values.
 // You can construct a concrete instance of `DatahubTopicMapInput` via:
 //
-//          DatahubTopicMap{ "key": DatahubTopicArgs{...} }
+//	DatahubTopicMap{ "key": DatahubTopicArgs{...} }
 type DatahubTopicMapInput interface {
 	pulumi.Input
 

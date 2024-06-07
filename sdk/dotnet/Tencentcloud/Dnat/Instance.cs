@@ -18,11 +18,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnat
     /// NAT forwarding can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dnat/instance:Instance foo tcp://vpc-asg3sfa3:nat-1asg3t63@127.15.2.3:8080
+    /// $ pulumi import tencentcloud:Dnat/instance:Instance foo tcp://vpc-asg3sfa3:nat-1asg3t63@127.15.2.3:8080
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnat/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Description of the NAT forward.
@@ -117,7 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnat
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of the NAT forward.
@@ -170,9 +170,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnat
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of the NAT forward.
@@ -225,5 +226,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnat
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

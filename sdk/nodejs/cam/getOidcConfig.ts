@@ -9,6 +9,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -19,13 +20,11 @@ import * as utilities from "../utilities";
  * export const identityKey = oidcConfig.then(oidcConfig => oidcConfig.identityKey);
  * export const identityUrl = oidcConfig.then(oidcConfig => oidcConfig.identityUrl);
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getOidcConfig(args: GetOidcConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetOidcConfigResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cam/getOidcConfig:getOidcConfig", {
         "name": args.name,
         "resultOutputFile": args.resultOutputFile,
@@ -81,9 +80,26 @@ export interface GetOidcConfigResult {
      */
     readonly status: number;
 }
-
+/**
+ * Use this data source to query detailed information of cam oidcConfig
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const oidcConfig = tencentcloud.Cam.getOidcConfig({
+ *     name: "cls-kzilgv5m",
+ * });
+ * export const identityKey = oidcConfig.then(oidcConfig => oidcConfig.identityKey);
+ * export const identityUrl = oidcConfig.then(oidcConfig => oidcConfig.identityUrl);
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getOidcConfigOutput(args: GetOidcConfigOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOidcConfigResult> {
-    return pulumi.output(args).apply(a => getOidcConfig(a, opts))
+    return pulumi.output(args).apply((a: any) => getOidcConfig(a, opts))
 }
 
 /**

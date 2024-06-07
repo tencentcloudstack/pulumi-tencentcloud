@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// <summary>
         /// Use this data source to query detailed information of ckafka topic_subscribe_group
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topicSubscribeGroup = Tencentcloud.Ckafka.GetTopicSubscribeGroup.Invoke(new()
         ///     {
-        ///         var topicSubscribeGroup = Output.Create(Tencentcloud.Ckafka.GetTopicSubscribeGroup.InvokeAsync(new Tencentcloud.Ckafka.GetTopicSubscribeGroupArgs
-        ///         {
-        ///             InstanceId = "ckafka-xxxxxx",
-        ///             TopicName = "xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ckafka-xxxxxx",
+        ///         TopicName = "xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTopicSubscribeGroupResult> InvokeAsync(GetTopicSubscribeGroupArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTopicSubscribeGroupResult>("tencentcloud:Ckafka/getTopicSubscribeGroup:getTopicSubscribeGroup", args ?? new GetTopicSubscribeGroupArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopicSubscribeGroupResult>("tencentcloud:Ckafka/getTopicSubscribeGroup:getTopicSubscribeGroup", args ?? new GetTopicSubscribeGroupArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ckafka topic_subscribe_group
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topicSubscribeGroup = Tencentcloud.Ckafka.GetTopicSubscribeGroup.Invoke(new()
         ///     {
-        ///         var topicSubscribeGroup = Output.Create(Tencentcloud.Ckafka.GetTopicSubscribeGroup.InvokeAsync(new Tencentcloud.Ckafka.GetTopicSubscribeGroupArgs
-        ///         {
-        ///             InstanceId = "ckafka-xxxxxx",
-        ///             TopicName = "xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ckafka-xxxxxx",
+        ///         TopicName = "xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTopicSubscribeGroupResult> Invoke(GetTopicSubscribeGroupInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTopicSubscribeGroupResult>("tencentcloud:Ckafka/getTopicSubscribeGroup:getTopicSubscribeGroup", args ?? new GetTopicSubscribeGroupInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTopicSubscribeGroupResult>("tencentcloud:Ckafka/getTopicSubscribeGroup:getTopicSubscribeGroup", args ?? new GetTopicSubscribeGroupInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTopicSubscribeGroupArgs : Pulumi.InvokeArgs
+    public sealed class GetTopicSubscribeGroupArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// InstanceId.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetTopicSubscribeGroupArgs()
         {
         }
+        public static new GetTopicSubscribeGroupArgs Empty => new GetTopicSubscribeGroupArgs();
     }
 
-    public sealed class GetTopicSubscribeGroupInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTopicSubscribeGroupInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// InstanceId.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetTopicSubscribeGroupInvokeArgs()
         {
         }
+        public static new GetTopicSubscribeGroupInvokeArgs Empty => new GetTopicSubscribeGroupInvokeArgs();
     }
 
 

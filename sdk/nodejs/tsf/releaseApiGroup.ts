@@ -9,14 +9,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const releaseApiGroup = new tencentcloud.Tsf.ReleaseApiGroup("release_api_group", {
- *     groupId: "grp-qp0rj3zi",
- * });
+ * const releaseApiGroup = new tencentcloud.tsf.ReleaseApiGroup("releaseApiGroup", {groupId: "grp-qp0rj3zi"});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ReleaseApiGroup extends pulumi.CustomResource {
     /**

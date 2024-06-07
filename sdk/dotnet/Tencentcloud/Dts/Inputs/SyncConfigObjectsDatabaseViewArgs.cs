@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class SyncConfigObjectsDatabaseViewArgs : Pulumi.ResourceArgs
+    public sealed class SyncConfigObjectsDatabaseViewArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// New view name. Note: This field may return null, indicating that no valid value can be obtained.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public SyncConfigObjectsDatabaseViewArgs()
         {
         }
+        public static new SyncConfigObjectsDatabaseViewArgs Empty => new SyncConfigObjectsDatabaseViewArgs();
     }
 }

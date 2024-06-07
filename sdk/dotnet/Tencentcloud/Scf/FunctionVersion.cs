@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var functionVersion = new Tencentcloud.Scf.FunctionVersion("functionVersion", new()
     ///     {
-    ///         var functionVersion = new Tencentcloud.Scf.FunctionVersion("functionVersion", new Tencentcloud.Scf.FunctionVersionArgs
-    ///         {
-    ///             Description = "for-terraform-test",
-    ///             FunctionName = "keep-1676351130",
-    ///             Namespace = "default",
-    ///         });
-    ///     }
+    ///         Description = "for-terraform-test",
+    ///         FunctionName = "keep-1676351130",
+    ///         Namespace = "default",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// scf function_version can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Scf/functionVersion:FunctionVersion function_version functionName#namespace#functionVersion
+    /// $ pulumi import tencentcloud:Scf/functionVersion:FunctionVersion function_version functionName#namespace#functionVersion
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/functionVersion:FunctionVersion")]
-    public partial class FunctionVersion : Pulumi.CustomResource
+    public partial class FunctionVersion : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Function description.
@@ -114,7 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         }
     }
 
-    public sealed class FunctionVersionArgs : Pulumi.ResourceArgs
+    public sealed class FunctionVersionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Function description.
@@ -137,9 +138,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public FunctionVersionArgs()
         {
         }
+        public static new FunctionVersionArgs Empty => new FunctionVersionArgs();
     }
 
-    public sealed class FunctionVersionState : Pulumi.ResourceArgs
+    public sealed class FunctionVersionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Function description.
@@ -168,5 +170,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public FunctionVersionState()
         {
         }
+        public static new FunctionVersionState Empty => new FunctionVersionState();
     }
 }

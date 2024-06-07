@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain.Inputs
 {
 
-    public sealed class SqlFilterSessionTokenArgs : Pulumi.ResourceArgs
+    public sealed class SqlFilterSessionTokenArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// password.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain.Inputs
         public SqlFilterSessionTokenArgs()
         {
         }
+        public static new SqlFilterSessionTokenArgs Empty => new SqlFilterSessionTokenArgs();
     }
 }

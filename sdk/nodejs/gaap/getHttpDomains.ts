@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
  *     bandwidth: 10,
@@ -35,13 +37,11 @@ import * as utilities from "../utilities";
  *     domain: fooHttpDomain.domain,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getHttpDomains(args: GetHttpDomainsArgs, opts?: pulumi.InvokeOptions): Promise<GetHttpDomainsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getHttpDomains:getHttpDomains", {
         "domain": args.domain,
         "listenerId": args.listenerId,
@@ -86,9 +86,41 @@ export interface GetHttpDomainsResult {
     readonly listenerId: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query forward domain of layer7 listeners.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+ *     bandwidth: 10,
+ *     concurrent: 2,
+ *     accessRegion: "SouthChina",
+ *     realserverRegion: "NorthChina",
+ * });
+ * const fooLayer7Listener = new tencentcloud.gaap.Layer7Listener("fooLayer7Listener", {
+ *     protocol: "HTTP",
+ *     port: 80,
+ *     proxyId: fooProxy.id,
+ * });
+ * const fooHttpDomain = new tencentcloud.gaap.HttpDomain("fooHttpDomain", {
+ *     listenerId: fooLayer7Listener.id,
+ *     domain: "www.qq.com",
+ * });
+ * const fooHttpDomains = tencentcloud.Gaap.getHttpDomainsOutput({
+ *     listenerId: fooLayer7Listener.id,
+ *     domain: fooHttpDomain.domain,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getHttpDomainsOutput(args: GetHttpDomainsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetHttpDomainsResult> {
-    return pulumi.output(args).apply(a => getHttpDomains(a, opts))
+    return pulumi.output(args).apply((a: any) => getHttpDomains(a, opts))
 }
 
 /**

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const alarmMonitorType = pulumi.output(tencentcloud.Monitor.getAlarmMonitorType());
+ * const alarmMonitorType = tencentcloud.Monitor.getAlarmMonitorType({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAlarmMonitorType(args?: GetAlarmMonitorTypeArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmMonitorTypeResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Monitor/getAlarmMonitorType:getAlarmMonitorType", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -57,9 +57,22 @@ export interface GetAlarmMonitorTypeResult {
     readonly monitorTypes: string[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of monitor alarmMonitorType
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const alarmMonitorType = tencentcloud.Monitor.getAlarmMonitorType({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAlarmMonitorTypeOutput(args?: GetAlarmMonitorTypeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAlarmMonitorTypeResult> {
-    return pulumi.output(args).apply(a => getAlarmMonitorType(a, opts))
+    return pulumi.output(args).apply((a: any) => getAlarmMonitorType(a, opts))
 }
 
 /**

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class OutputOutputRtpSettingsDestinationArgs : Pulumi.ResourceArgs
+    public sealed class OutputOutputRtpSettingsDestinationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Output IP.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public OutputOutputRtpSettingsDestinationArgs()
         {
         }
+        public static new OutputOutputRtpSettingsDestinationArgs Empty => new OutputOutputRtpSettingsDestinationArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpAlertRuleLabelGetArgs : Pulumi.ResourceArgs
+    public sealed class TmpAlertRuleLabelGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public TmpAlertRuleLabelGetArgs()
         {
         }
+        public static new TmpAlertRuleLabelGetArgs Empty => new TmpAlertRuleLabelGetArgs();
     }
 }

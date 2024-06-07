@@ -15,78 +15,72 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// <summary>
         /// Use this data source to query detailed information of redis backup
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var backup = Tencentcloud.Redis.GetBackup.Invoke(new()
         ///     {
-        ///         var backup = Output.Create(Tencentcloud.Redis.GetBackup.InvokeAsync(new Tencentcloud.Redis.GetBackupArgs
+        ///         BeginTime = "2023-04-07 03:57:30",
+        ///         EndTime = "2023-04-07 03:57:56",
+        ///         InstanceId = "crs-c1nl9rpv",
+        ///         InstanceName = "Keep-terraform",
+        ///         Statuses = new[]
         ///         {
-        ///             BeginTime = "2023-04-07 03:57:30",
-        ///             EndTime = "2023-04-07 03:57:56",
-        ///             InstanceId = "crs-c1nl9rpv",
-        ///             InstanceName = "Keep-terraform",
-        ///             Statuses = 
-        ///             {
-        ///                 2,
-        ///             },
-        ///         }));
-        ///     }
+        ///             2,
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBackupResult> InvokeAsync(GetBackupArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBackupResult>("tencentcloud:Redis/getBackup:getBackup", args ?? new GetBackupArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupResult>("tencentcloud:Redis/getBackup:getBackup", args ?? new GetBackupArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of redis backup
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var backup = Tencentcloud.Redis.GetBackup.Invoke(new()
         ///     {
-        ///         var backup = Output.Create(Tencentcloud.Redis.GetBackup.InvokeAsync(new Tencentcloud.Redis.GetBackupArgs
+        ///         BeginTime = "2023-04-07 03:57:30",
+        ///         EndTime = "2023-04-07 03:57:56",
+        ///         InstanceId = "crs-c1nl9rpv",
+        ///         InstanceName = "Keep-terraform",
+        ///         Statuses = new[]
         ///         {
-        ///             BeginTime = "2023-04-07 03:57:30",
-        ///             EndTime = "2023-04-07 03:57:56",
-        ///             InstanceId = "crs-c1nl9rpv",
-        ///             InstanceName = "Keep-terraform",
-        ///             Statuses = 
-        ///             {
-        ///                 2,
-        ///             },
-        ///         }));
-        ///     }
+        ///             2,
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBackupResult> Invoke(GetBackupInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBackupResult>("tencentcloud:Redis/getBackup:getBackup", args ?? new GetBackupInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBackupResult>("tencentcloud:Redis/getBackup:getBackup", args ?? new GetBackupInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBackupArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// start time, such as 2017-02-08 19:09:26.Query the list of backups that the instance started backing up during the [beginTime, endTime] time period.
@@ -133,9 +127,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public GetBackupArgs()
         {
         }
+        public static new GetBackupArgs Empty => new GetBackupArgs();
     }
 
-    public sealed class GetBackupInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// start time, such as 2017-02-08 19:09:26.Query the list of backups that the instance started backing up during the [beginTime, endTime] time period.
@@ -182,6 +177,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public GetBackupInvokeArgs()
         {
         }
+        public static new GetBackupInvokeArgs Empty => new GetBackupInvokeArgs();
     }
 
 

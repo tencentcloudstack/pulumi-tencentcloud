@@ -8,11 +8,13 @@ import * as utilities from "../utilities";
  * Provides a resource to create a Ckafka Acl.
  *
  * ## Example Usage
+ *
  * ### Ckafka Acl
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const foo = new tencentcloud.ckafka.Acl("foo", {
  *     instanceId: "ckafka-f9ife4zz",
@@ -24,13 +26,14 @@ import * as utilities from "../utilities";
  *     principal: tencentcloud_ckafka_user.foo.account_name,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Ckafka acl can be imported using the instance_id#permission_type#principal#host#operation_type#resource_type#resource_name, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ckafka/acl:Acl foo ckafka-f9ife4zz#ALLOW#test#*#WRITE#TOPIC#topic-tf-test
+ * $ pulumi import tencentcloud:Ckafka/acl:Acl foo ckafka-f9ife4zz#ALLOW#test#*#WRITE#TOPIC#topic-tf-test
  * ```
  */
 export class Acl extends pulumi.CustomResource {

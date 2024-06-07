@@ -7,45 +7,51 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a sqlserver configInstanceSecurityGroups
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Sqlserver"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Sqlserver.NewConfigInstanceSecurityGroups(ctx, "configInstanceSecurityGroups", &Sqlserver.ConfigInstanceSecurityGroupsArgs{
-// 			InstanceId: pulumi.String("mssql-qelbzgwf"),
-// 			SecurityGroupIdSets: pulumi.StringArray{
-// 				pulumi.String("sg-mayqdlt1"),
-// 				pulumi.String("sg-5aubsf8n"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Sqlserver.NewConfigInstanceSecurityGroups(ctx, "configInstanceSecurityGroups", &Sqlserver.ConfigInstanceSecurityGroupsArgs{
+//				InstanceId: pulumi.String("mssql-qelbzgwf"),
+//				SecurityGroupIdSets: pulumi.StringArray{
+//					pulumi.String("sg-mayqdlt1"),
+//					pulumi.String("sg-5aubsf8n"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // sqlserver config_instance_security_groups can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Sqlserver/configInstanceSecurityGroups:ConfigInstanceSecurityGroups config_instance_security_groups config_instance_security_groups_id
+// $ pulumi import tencentcloud:Sqlserver/configInstanceSecurityGroups:ConfigInstanceSecurityGroups config_instance_security_groups config_instance_security_groups_id
 // ```
 type ConfigInstanceSecurityGroups struct {
 	pulumi.CustomResourceState
@@ -69,7 +75,7 @@ func NewConfigInstanceSecurityGroups(ctx *pulumi.Context,
 	if args.SecurityGroupIdSets == nil {
 		return nil, errors.New("invalid value for required argument 'SecurityGroupIdSets'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ConfigInstanceSecurityGroups
 	err := ctx.RegisterResource("tencentcloud:Sqlserver/configInstanceSecurityGroups:ConfigInstanceSecurityGroups", name, args, &resource, opts...)
 	if err != nil {
@@ -150,7 +156,7 @@ func (i *ConfigInstanceSecurityGroups) ToConfigInstanceSecurityGroupsOutputWithC
 // ConfigInstanceSecurityGroupsArrayInput is an input type that accepts ConfigInstanceSecurityGroupsArray and ConfigInstanceSecurityGroupsArrayOutput values.
 // You can construct a concrete instance of `ConfigInstanceSecurityGroupsArrayInput` via:
 //
-//          ConfigInstanceSecurityGroupsArray{ ConfigInstanceSecurityGroupsArgs{...} }
+//	ConfigInstanceSecurityGroupsArray{ ConfigInstanceSecurityGroupsArgs{...} }
 type ConfigInstanceSecurityGroupsArrayInput interface {
 	pulumi.Input
 
@@ -175,7 +181,7 @@ func (i ConfigInstanceSecurityGroupsArray) ToConfigInstanceSecurityGroupsArrayOu
 // ConfigInstanceSecurityGroupsMapInput is an input type that accepts ConfigInstanceSecurityGroupsMap and ConfigInstanceSecurityGroupsMapOutput values.
 // You can construct a concrete instance of `ConfigInstanceSecurityGroupsMapInput` via:
 //
-//          ConfigInstanceSecurityGroupsMap{ "key": ConfigInstanceSecurityGroupsArgs{...} }
+//	ConfigInstanceSecurityGroupsMap{ "key": ConfigInstanceSecurityGroupsArgs{...} }
 type ConfigInstanceSecurityGroupsMapInput interface {
 	pulumi.Input
 

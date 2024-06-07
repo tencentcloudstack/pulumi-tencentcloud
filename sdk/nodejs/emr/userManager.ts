@@ -9,28 +9,30 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const myEmr = tencentcloud.Emr.getInstance({
  *     displayStrategy: "clusterList",
  * });
  * const userManager = new tencentcloud.emr.UserManager("userManager", {
- *     instanceId: myEmr.then(myEmr => myEmr.clusters?[0]?.clusterId),
+ *     instanceId: myEmr.then(myEmr => myEmr.clusters?.[0]?.clusterId),
  *     userName: "tf-test",
  *     userGroup: "group1",
  *     password: "tf@123456",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * emr user_manager can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Emr/userManager:UserManager user_manager instanceId#userName
+ * $ pulumi import tencentcloud:Emr/userManager:UserManager user_manager instanceId#userName
  * ```
  */
 export class UserManager extends pulumi.CustomResource {

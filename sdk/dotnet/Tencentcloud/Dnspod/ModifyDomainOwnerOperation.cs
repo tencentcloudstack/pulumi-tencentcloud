@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var modifyDomainOwner = new Tencentcloud.Dnspod.ModifyDomainOwnerOperation("modifyDomainOwner", new()
     ///     {
-    ///         var modifyDomainOwner = new Tencentcloud.Dnspod.ModifyDomainOwnerOperation("modifyDomainOwner", new Tencentcloud.Dnspod.ModifyDomainOwnerOperationArgs
-    ///         {
-    ///             Account = "xxxxxxxxx",
-    ///             Domain = "dnspod.cn",
-    ///             DomainId = 123,
-    ///         });
-    ///     }
+    ///         Account = "xxxxxxxxx",
+    ///         Domain = "dnspod.cn",
+    ///         DomainId = 123,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnspod/modifyDomainOwnerOperation:ModifyDomainOwnerOperation")]
-    public partial class ModifyDomainOwnerOperation : Pulumi.CustomResource
+    public partial class ModifyDomainOwnerOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The account to which the domain needs to be transferred, supporting Uin or email format.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         }
     }
 
-    public sealed class ModifyDomainOwnerOperationArgs : Pulumi.ResourceArgs
+    public sealed class ModifyDomainOwnerOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The account to which the domain needs to be transferred, supporting Uin or email format.
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public ModifyDomainOwnerOperationArgs()
         {
         }
+        public static new ModifyDomainOwnerOperationArgs Empty => new ModifyDomainOwnerOperationArgs();
     }
 
-    public sealed class ModifyDomainOwnerOperationState : Pulumi.ResourceArgs
+    public sealed class ModifyDomainOwnerOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The account to which the domain needs to be transferred, supporting Uin or email format.
@@ -148,5 +150,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public ModifyDomainOwnerOperationState()
         {
         }
+        public static new ModifyDomainOwnerOperationState Empty => new ModifyDomainOwnerOperationState();
     }
 }

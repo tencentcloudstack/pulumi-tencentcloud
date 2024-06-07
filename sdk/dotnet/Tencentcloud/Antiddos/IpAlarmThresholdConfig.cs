@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var ipAlarmThresholdConfig = new Tencentcloud.Antiddos.IpAlarmThresholdConfig("ipAlarmThresholdConfig", new()
     ///     {
-    ///         var ipAlarmThresholdConfig = new Tencentcloud.Antiddos.IpAlarmThresholdConfig("ipAlarmThresholdConfig", new Tencentcloud.Antiddos.IpAlarmThresholdConfigArgs
-    ///         {
-    ///             AlarmThreshold = 2,
-    ///             AlarmType = 1,
-    ///             InstanceId = "bgp-xxxxxx",
-    ///             InstanceIp = "xxx.xxx.xxx.xxx",
-    ///         });
-    ///     }
+    ///         AlarmThreshold = 2,
+    ///         AlarmType = 1,
+    ///         InstanceId = "bgp-xxxxxx",
+    ///         InstanceIp = "xxx.xxx.xxx.xxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// antiddos ip_alarm_threshold_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Antiddos/ipAlarmThresholdConfig:IpAlarmThresholdConfig ip_alarm_threshold_config ${instanceId}#${instanceIp}#${alarmType}
+    /// $ pulumi import tencentcloud:Antiddos/ipAlarmThresholdConfig:IpAlarmThresholdConfig ip_alarm_threshold_config ${instanceId}#${instanceIp}#${alarmType}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Antiddos/ipAlarmThresholdConfig:IpAlarmThresholdConfig")]
-    public partial class IpAlarmThresholdConfig : Pulumi.CustomResource
+    public partial class IpAlarmThresholdConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Alarm threshold, in Mbps, with a value of&amp;gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.
@@ -115,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         }
     }
 
-    public sealed class IpAlarmThresholdConfigArgs : Pulumi.ResourceArgs
+    public sealed class IpAlarmThresholdConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alarm threshold, in Mbps, with a value of&amp;gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.
@@ -144,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public IpAlarmThresholdConfigArgs()
         {
         }
+        public static new IpAlarmThresholdConfigArgs Empty => new IpAlarmThresholdConfigArgs();
     }
 
-    public sealed class IpAlarmThresholdConfigState : Pulumi.ResourceArgs
+    public sealed class IpAlarmThresholdConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alarm threshold, in Mbps, with a value of&amp;gt;=0; When used as an input parameter, setting 0 will delete the alarm threshold configuration;.
@@ -175,5 +177,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public IpAlarmThresholdConfigState()
         {
         }
+        public static new IpAlarmThresholdConfigState Empty => new IpAlarmThresholdConfigState();
     }
 }

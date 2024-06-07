@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
 {
 
-    public sealed class WorkloadStorageMountConfGetArgs : Pulumi.ResourceArgs
+    public sealed class WorkloadStorageMountConfGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// mount path.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
         public WorkloadStorageMountConfGetArgs()
         {
         }
+        public static new WorkloadStorageMountConfGetArgs Empty => new WorkloadStorageMountConfGetArgs();
     }
 }

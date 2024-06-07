@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum performance_page
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var performancePage = Tencentcloud.Rum.GetPerformancePage.Invoke(new()
         ///     {
-        ///         var performancePage = Output.Create(Tencentcloud.Rum.GetPerformancePage.InvokeAsync(new Tencentcloud.Rum.GetPerformancePageArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             Level = "1",
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "pagepv",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         Level = "1",
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "pagepv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPerformancePageResult> InvokeAsync(GetPerformancePageArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPerformancePageResult>("tencentcloud:Rum/getPerformancePage:getPerformancePage", args ?? new GetPerformancePageArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPerformancePageResult>("tencentcloud:Rum/getPerformancePage:getPerformancePage", args ?? new GetPerformancePageArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum performance_page
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var performancePage = Tencentcloud.Rum.GetPerformancePage.Invoke(new()
         ///     {
-        ///         var performancePage = Output.Create(Tencentcloud.Rum.GetPerformancePage.InvokeAsync(new Tencentcloud.Rum.GetPerformancePageArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             Level = "1",
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "pagepv",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         Level = "1",
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "pagepv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPerformancePageResult> Invoke(GetPerformancePageInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPerformancePageResult>("tencentcloud:Rum/getPerformancePage:getPerformancePage", args ?? new GetPerformancePageInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPerformancePageResult>("tencentcloud:Rum/getPerformancePage:getPerformancePage", args ?? new GetPerformancePageInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPerformancePageArgs : Pulumi.InvokeArgs
+    public sealed class GetPerformancePageArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -229,9 +223,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetPerformancePageArgs()
         {
         }
+        public static new GetPerformancePageArgs Empty => new GetPerformancePageArgs();
     }
 
-    public sealed class GetPerformancePageInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPerformancePageInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -380,6 +375,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetPerformancePageInvokeArgs()
         {
         }
+        public static new GetPerformancePageInvokeArgs Empty => new GetPerformancePageInvokeArgs();
     }
 
 

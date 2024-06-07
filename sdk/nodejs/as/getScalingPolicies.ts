@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const asScalingPolicies = pulumi.output(tencentcloud.As.getScalingPolicies({
+ * const asScalingPolicies = tencentcloud.As.getScalingPolicies({
  *     resultOutputFile: "mytestpath",
  *     scalingPolicyId: "asg-mvyghxu7",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getScalingPolicies(args?: GetScalingPoliciesArgs, opts?: pulumi.InvokeOptions): Promise<GetScalingPoliciesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:As/getScalingPolicies:getScalingPolicies", {
         "policyName": args.policyName,
         "resultOutputFile": args.resultOutputFile,
@@ -80,9 +80,25 @@ export interface GetScalingPoliciesResult {
      */
     readonly scalingPolicyLists: outputs.As.GetScalingPoliciesScalingPolicyList[];
 }
-
+/**
+ * Use this data source to query detailed information of scaling policy.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const asScalingPolicies = tencentcloud.As.getScalingPolicies({
+ *     resultOutputFile: "mytestpath",
+ *     scalingPolicyId: "asg-mvyghxu7",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getScalingPoliciesOutput(args?: GetScalingPoliciesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetScalingPoliciesResult> {
-    return pulumi.output(args).apply(a => getScalingPolicies(a, opts))
+    return pulumi.output(args).apply((a: any) => getScalingPolicies(a, opts))
 }
 
 /**

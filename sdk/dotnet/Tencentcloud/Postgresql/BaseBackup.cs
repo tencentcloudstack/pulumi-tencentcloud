@@ -15,29 +15,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var baseBackup = new Tencentcloud.Postgresql.BaseBackup("baseBackup", new()
     ///     {
-    ///         var baseBackup = new Tencentcloud.Postgresql.BaseBackup("baseBackup", new Tencentcloud.Postgresql.BaseBackupArgs
+    ///         DbInstanceId = local.Pgsql_id,
+    ///         Tags = 
     ///         {
-    ///             DbInstanceId = local.Pgsql_id,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/baseBackup:BaseBackup")]
-    public partial class BaseBackup : Pulumi.CustomResource
+    public partial class BaseBackup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Base backup ID.
@@ -108,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class BaseBackupArgs : Pulumi.ResourceArgs
+    public sealed class BaseBackupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -137,9 +138,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public BaseBackupArgs()
         {
         }
+        public static new BaseBackupArgs Empty => new BaseBackupArgs();
     }
 
-    public sealed class BaseBackupState : Pulumi.ResourceArgs
+    public sealed class BaseBackupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Base backup ID.
@@ -174,5 +176,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public BaseBackupState()
         {
         }
+        public static new BaseBackupState Empty => new BaseBackupState();
     }
 }

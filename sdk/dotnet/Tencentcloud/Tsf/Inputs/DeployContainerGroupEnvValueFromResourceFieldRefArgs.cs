@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class DeployContainerGroupEnvValueFromResourceFieldRefArgs : Pulumi.ResourceArgs
+    public sealed class DeployContainerGroupEnvValueFromResourceFieldRefArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The Resource configuration of Kubernetes. Note: This field may return null, indicating that no valid values can be obtained.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public DeployContainerGroupEnvValueFromResourceFieldRefArgs()
         {
         }
+        public static new DeployContainerGroupEnvValueFromResourceFieldRefArgs Empty => new DeployContainerGroupEnvValueFromResourceFieldRefArgs();
     }
 }

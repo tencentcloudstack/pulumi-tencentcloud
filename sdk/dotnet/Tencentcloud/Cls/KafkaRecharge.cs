@@ -15,66 +15,69 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var logset = new Tencentcloud.Cls.Logset("logset", new()
     ///     {
-    ///         var logset = new Tencentcloud.Cls.Logset("logset", new Tencentcloud.Cls.LogsetArgs
+    ///         LogsetName = "tf-example-logset",
+    ///         Tags = 
     ///         {
-    ///             LogsetName = "tf-example-logset",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var topic = new Tencentcloud.Cls.Topic("topic", new Tencentcloud.Cls.TopicArgs
-    ///         {
-    ///             TopicName = "tf-example-topic",
-    ///             LogsetId = logset.Id,
-    ///             AutoSplit = false,
-    ///             MaxSplitPartitions = 20,
-    ///             PartitionCount = 1,
-    ///             Period = 10,
-    ///             StorageType = "hot",
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///         var kafkaRecharge = new Tencentcloud.Cls.KafkaRecharge("kafkaRecharge", new Tencentcloud.Cls.KafkaRechargeArgs
-    ///         {
-    ///             TopicId = topic.Id,
-    ///             KafkaType = 0,
-    ///             Offset = -2,
-    ///             IsEncryptionAddr = true,
-    ///             UserKafkaTopics = "recharge",
-    ///             KafkaInstance = "ckafka-qzoeaqx8",
-    ///             LogRechargeRule = new Tencentcloud.Cls.Inputs.KafkaRechargeLogRechargeRuleArgs
-    ///             {
-    ///                 RechargeType = "json_log",
-    ///                 EncodingFormat = 0,
-    ///                 DefaultTimeSwitch = true,
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var topic = new Tencentcloud.Cls.Topic("topic", new()
+    ///     {
+    ///         TopicName = "tf-example-topic",
+    ///         LogsetId = logset.Id,
+    ///         AutoSplit = false,
+    ///         MaxSplitPartitions = 20,
+    ///         PartitionCount = 1,
+    ///         Period = 10,
+    ///         StorageType = "hot",
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var kafkaRecharge = new Tencentcloud.Cls.KafkaRecharge("kafkaRecharge", new()
+    ///     {
+    ///         TopicId = topic.Id,
+    ///         KafkaType = 0,
+    ///         Offset = -2,
+    ///         IsEncryptionAddr = true,
+    ///         UserKafkaTopics = "recharge",
+    ///         KafkaInstance = "ckafka-qzoeaqx8",
+    ///         LogRechargeRule = new Tencentcloud.Cls.Inputs.KafkaRechargeLogRechargeRuleArgs
+    ///         {
+    ///             RechargeType = "json_log",
+    ///             EncodingFormat = 0,
+    ///             DefaultTimeSwitch = true,
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cls kafka_recharge can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/kafkaRecharge:KafkaRecharge kafka_recharge kafka_recharge_id
+    /// $ pulumi import tencentcloud:Cls/kafkaRecharge:KafkaRecharge kafka_recharge kafka_recharge_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/kafkaRecharge:KafkaRecharge")]
-    public partial class KafkaRecharge : Pulumi.CustomResource
+    public partial class KafkaRecharge : global::Pulumi.CustomResource
     {
         /// <summary>
         /// user consumer group name.
@@ -187,7 +190,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
     }
 
-    public sealed class KafkaRechargeArgs : Pulumi.ResourceArgs
+    public sealed class KafkaRechargeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// user consumer group name.
@@ -258,9 +261,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public KafkaRechargeArgs()
         {
         }
+        public static new KafkaRechargeArgs Empty => new KafkaRechargeArgs();
     }
 
-    public sealed class KafkaRechargeState : Pulumi.ResourceArgs
+    public sealed class KafkaRechargeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// user consumer group name.
@@ -331,5 +335,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public KafkaRechargeState()
         {
         }
+        public static new KafkaRechargeState Empty => new KafkaRechargeState();
     }
 }

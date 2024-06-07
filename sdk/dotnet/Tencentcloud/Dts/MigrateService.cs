@@ -15,46 +15,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var migrateService = new Tencentcloud.Dts.MigrateService("migrateService", new()
     ///     {
-    ///         var migrateService = new Tencentcloud.Dts.MigrateService("migrateService", new Tencentcloud.Dts.MigrateServiceArgs
+    ///         DstDatabaseType = "cynosdbmysql",
+    ///         DstRegion = "ap-guangzhou",
+    ///         InstanceClass = "small",
+    ///         JobName = "tf_test_migration_job",
+    ///         SrcDatabaseType = "mysql",
+    ///         SrcRegion = "ap-guangzhou",
+    ///         Tags = new[]
     ///         {
-    ///             DstDatabaseType = "cynosdbmysql",
-    ///             DstRegion = "ap-guangzhou",
-    ///             InstanceClass = "small",
-    ///             JobName = "tf_test_migration_job",
-    ///             SrcDatabaseType = "mysql",
-    ///             SrcRegion = "ap-guangzhou",
-    ///             Tags = 
+    ///             new Tencentcloud.Dts.Inputs.MigrateServiceTagArgs
     ///             {
-    ///                 new Tencentcloud.Dts.Inputs.MigrateServiceTagArgs
-    ///                 {
-    ///                     TagKey = "aaa",
-    ///                     TagValue = "bbb",
-    ///                 },
+    ///                 TagKey = "aaa",
+    ///                 TagValue = "bbb",
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dts migrate_service can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dts/migrateService:MigrateService migrate_service migrateService_id
+    /// $ pulumi import tencentcloud:Dts/migrateService:MigrateService migrate_service migrateService_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/migrateService:MigrateService")]
-    public partial class MigrateService : Pulumi.CustomResource
+    public partial class MigrateService : global::Pulumi.CustomResource
     {
         /// <summary>
         /// destination database type, optional value is mysql/redis/percona/mongodb/postgresql/sqlserver/mariadb.
@@ -143,7 +144,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         }
     }
 
-    public sealed class MigrateServiceArgs : Pulumi.ResourceArgs
+    public sealed class MigrateServiceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// destination database type, optional value is mysql/redis/percona/mongodb/postgresql/sqlserver/mariadb.
@@ -196,9 +197,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public MigrateServiceArgs()
         {
         }
+        public static new MigrateServiceArgs Empty => new MigrateServiceArgs();
     }
 
-    public sealed class MigrateServiceState : Pulumi.ResourceArgs
+    public sealed class MigrateServiceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// destination database type, optional value is mysql/redis/percona/mongodb/postgresql/sqlserver/mariadb.
@@ -251,5 +253,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public MigrateServiceState()
         {
         }
+        public static new MigrateServiceState Empty => new MigrateServiceState();
     }
 }

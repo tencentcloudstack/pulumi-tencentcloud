@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tsf instancesAttachment
@@ -54,7 +55,14 @@ func NewInstancesAttachment(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource InstancesAttachment
 	err := ctx.RegisterResource("tencentcloud:Tsf/instancesAttachment:InstancesAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -215,7 +223,7 @@ func (i *InstancesAttachment) ToInstancesAttachmentOutputWithContext(ctx context
 // InstancesAttachmentArrayInput is an input type that accepts InstancesAttachmentArray and InstancesAttachmentArrayOutput values.
 // You can construct a concrete instance of `InstancesAttachmentArrayInput` via:
 //
-//          InstancesAttachmentArray{ InstancesAttachmentArgs{...} }
+//	InstancesAttachmentArray{ InstancesAttachmentArgs{...} }
 type InstancesAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -240,7 +248,7 @@ func (i InstancesAttachmentArray) ToInstancesAttachmentArrayOutputWithContext(ct
 // InstancesAttachmentMapInput is an input type that accepts InstancesAttachmentMap and InstancesAttachmentMapOutput values.
 // You can construct a concrete instance of `InstancesAttachmentMapInput` via:
 //
-//          InstancesAttachmentMap{ "key": InstancesAttachmentArgs{...} }
+//	InstancesAttachmentMap{ "key": InstancesAttachmentArgs{...} }
 type InstancesAttachmentMapInput interface {
 	pulumi.Input
 

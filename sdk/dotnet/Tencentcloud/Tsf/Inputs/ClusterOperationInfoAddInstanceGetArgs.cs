@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class ClusterOperationInfoAddInstanceGetArgs : Pulumi.ResourceArgs
+    public sealed class ClusterOperationInfoAddInstanceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Reason for not showing.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public ClusterOperationInfoAddInstanceGetArgs()
         {
         }
+        public static new ClusterOperationInfoAddInstanceGetArgs Empty => new ClusterOperationInfoAddInstanceGetArgs();
     }
 }

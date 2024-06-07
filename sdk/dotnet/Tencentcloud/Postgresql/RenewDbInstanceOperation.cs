@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var renewDbInstanceOperation = new Tencentcloud.Postgresql.RenewDbInstanceOperation("renewDbInstanceOperation", new()
     ///     {
-    ///         var renewDbInstanceOperation = new Tencentcloud.Postgresql.RenewDbInstanceOperation("renewDbInstanceOperation", new Tencentcloud.Postgresql.RenewDbInstanceOperationArgs
-    ///         {
-    ///             DbInstanceId = tencentcloud_postgresql_instance.Oper_test_PREPAID.Id,
-    ///             Period = 1,
-    ///             AutoVoucher = 0,
-    ///         });
-    ///     }
+    ///         DbInstanceId = tencentcloud_postgresql_instance.Oper_test_PREPAID.Id,
+    ///         Period = 1,
+    ///         AutoVoucher = 0,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/renewDbInstanceOperation:RenewDbInstanceOperation")]
-    public partial class RenewDbInstanceOperation : Pulumi.CustomResource
+    public partial class RenewDbInstanceOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to automatically use vouchers. 1:yes, 0:no. Default value:0.
@@ -106,7 +107,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class RenewDbInstanceOperationArgs : Pulumi.ResourceArgs
+    public sealed class RenewDbInstanceOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to automatically use vouchers. 1:yes, 0:no. Default value:0.
@@ -141,9 +142,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public RenewDbInstanceOperationArgs()
         {
         }
+        public static new RenewDbInstanceOperationArgs Empty => new RenewDbInstanceOperationArgs();
     }
 
-    public sealed class RenewDbInstanceOperationState : Pulumi.ResourceArgs
+    public sealed class RenewDbInstanceOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to automatically use vouchers. 1:yes, 0:no. Default value:0.
@@ -178,5 +180,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public RenewDbInstanceOperationState()
         {
         }
+        public static new RenewDbInstanceOperationState Empty => new RenewDbInstanceOperationState();
     }
 }

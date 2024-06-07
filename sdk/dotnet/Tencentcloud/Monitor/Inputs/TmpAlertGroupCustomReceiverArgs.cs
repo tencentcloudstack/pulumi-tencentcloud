@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpAlertGroupCustomReceiverArgs : Pulumi.ResourceArgs
+    public sealed class TmpAlertGroupCustomReceiverArgs : global::Pulumi.ResourceArgs
     {
         [Input("allowedTimeRanges")]
         private InputList<Inputs.TmpAlertGroupCustomReceiverAllowedTimeRangeArgs>? _allowedTimeRanges;
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public TmpAlertGroupCustomReceiverArgs()
         {
         }
+        public static new TmpAlertGroupCustomReceiverArgs Empty => new TmpAlertGroupCustomReceiverArgs();
     }
 }

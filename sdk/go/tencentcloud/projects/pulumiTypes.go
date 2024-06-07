@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type GetInstanceProject struct {
 	// Create time.
@@ -26,7 +29,7 @@ type GetInstanceProject struct {
 // GetInstanceProjectInput is an input type that accepts GetInstanceProjectArgs and GetInstanceProjectOutput values.
 // You can construct a concrete instance of `GetInstanceProjectInput` via:
 //
-//          GetInstanceProjectArgs{...}
+//	GetInstanceProjectArgs{...}
 type GetInstanceProjectInput interface {
 	pulumi.Input
 
@@ -62,7 +65,7 @@ func (i GetInstanceProjectArgs) ToGetInstanceProjectOutputWithContext(ctx contex
 // GetInstanceProjectArrayInput is an input type that accepts GetInstanceProjectArray and GetInstanceProjectArrayOutput values.
 // You can construct a concrete instance of `GetInstanceProjectArrayInput` via:
 //
-//          GetInstanceProjectArray{ GetInstanceProjectArgs{...} }
+//	GetInstanceProjectArray{ GetInstanceProjectArgs{...} }
 type GetInstanceProjectArrayInput interface {
 	pulumi.Input
 

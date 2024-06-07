@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const restartNodesOperation = new tencentcloud.Elasticsearch.RestartNodesOperation("restart_nodes_operation", {
+ * const restartNodesOperation = new tencentcloud.elasticsearch.RestartNodesOperation("restartNodesOperation", {
  *     instanceId: "es-xxxxxx",
  *     nodeNames: ["1648026612002990732"],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RestartNodesOperation extends pulumi.CustomResource {
     /**

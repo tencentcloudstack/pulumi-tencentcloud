@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class ScenarioSlaPolicyAlertChannelArgs : Pulumi.ResourceArgs
+    public sealed class ScenarioSlaPolicyAlertChannelArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// AMP consumer ID.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public ScenarioSlaPolicyAlertChannelArgs()
         {
         }
+        public static new ScenarioSlaPolicyAlertChannelArgs Empty => new ScenarioSlaPolicyAlertChannelArgs();
     }
 }

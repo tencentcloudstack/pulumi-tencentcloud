@@ -9,22 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeUserType = pulumi.output(tencentcloud.Dlc.getDescribeUserType({
+ * const describeUserType = tencentcloud.Dlc.getDescribeUserType({
  *     userId: "127382378",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeUserType(args?: GetDescribeUserTypeArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeUserTypeResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dlc/getDescribeUserType:getDescribeUserType", {
         "resultOutputFile": args.resultOutputFile,
         "userId": args.userId,
@@ -60,9 +59,24 @@ export interface GetDescribeUserTypeResult {
      */
     readonly userType: string;
 }
-
+/**
+ * Use this data source to query detailed information of dlc describeUserType
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeUserType = tencentcloud.Dlc.getDescribeUserType({
+ *     userId: "127382378",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeUserTypeOutput(args?: GetDescribeUserTypeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeUserTypeResult> {
-    return pulumi.output(args).apply(a => getDescribeUserType(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeUserType(a, opts))
 }
 
 /**

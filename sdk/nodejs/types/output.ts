@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 
 export namespace Address {
     export interface GetTemplateGroupsGroupList {
@@ -488,6 +489,7 @@ export namespace Antiddos {
          */
         sPortStart: number;
     }
+
 }
 
 export namespace ApiGateway {
@@ -2393,6 +2395,8 @@ export namespace ApiGateway {
         unhealthyHttpStatus: string;
         /**
          * The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.
+         *
+         * The `k8sService` object supports the following:
          */
         unhealthyTimeout?: number;
     }
@@ -2402,6 +2406,9 @@ export namespace ApiGateway {
          * K8s cluster ID.
          */
         clusterId: string;
+        /**
+         * Additional Selected Pod Label.
+         */
         extraLabels: outputs.ApiGateway.UpstreamK8sServiceExtraLabel[];
         /**
          * Customized service name, optional.
@@ -2517,6 +2524,7 @@ export namespace ApiGateway {
          */
         serviceName: string;
     }
+
 }
 
 export namespace As {
@@ -3046,15 +3054,36 @@ export namespace As {
     }
 
     export interface LoadBalancerForwardLoadBalancer {
+        /**
+         * Application load balancer listener ID.
+         */
         listenerId: string;
+        /**
+         * Application load balancer instance ID.
+         */
         loadBalancerId: string;
+        /**
+         * Application load balancer location ID.
+         */
         locationId?: string;
+        /**
+         * Load balancer instance region. Default value is the region of current auto scaling group. The format is the same as the public parameter Region, for example: ap-guangzhou.
+         */
         region?: string;
+        /**
+         * List of TargetAttribute.
+         */
         targetAttributes: outputs.As.LoadBalancerForwardLoadBalancerTargetAttribute[];
     }
 
     export interface LoadBalancerForwardLoadBalancerTargetAttribute {
+        /**
+         * Target port.
+         */
         port: number;
+        /**
+         * Target weight.
+         */
         weight: number;
     }
 
@@ -3128,6 +3157,7 @@ export namespace As {
          */
         weight: number;
     }
+
 }
 
 export namespace Audit {
@@ -3440,7 +3470,7 @@ export namespace Cam {
         /**
          * (**Deprecated**) It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
          *
-         * @deprecated It has been deprecated from version 1.59.5. Use `user_names` instead.
+         * @deprecated It has been deprecated from version 1.59.5. Use `userNames` instead.
          */
         userIds: string[];
         /**
@@ -3515,19 +3545,52 @@ export namespace Cam {
     }
 
     export interface GetListAttachedUserPolicyPolicyList {
+        /**
+         * Creation time.
+         */
         addTime: string;
+        /**
+         * Creation mode (1 represents policies created by product or project permissions, others represent policies created by policy syntax).
+         */
         createMode: string;
+        /**
+         * Has it been taken offline (0: No 1: Yes)Note: This field may return null, indicating that a valid value cannot be obtained.
+         */
         deactived: number;
+        /**
+         * List of offline productsNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
         deactivedDetails: string[];
+        /**
+         * Policy Description.
+         */
         description: string;
+        /**
+         * Associated information with groupNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
         groups: outputs.Cam.GetListAttachedUserPolicyPolicyListGroup[];
+        /**
+         * Policy ID.
+         */
         policyId: string;
+        /**
+         * Policy Name.
+         */
         policyName: string;
+        /**
+         * Policy type (1 represents custom policy, 2 represents preset policy).
+         */
         strategyType: string;
     }
 
     export interface GetListAttachedUserPolicyPolicyListGroup {
+        /**
+         * Group ID.
+         */
         groupId: number;
+        /**
+         * Group Name.
+         */
         groupName: string;
     }
 
@@ -3761,7 +3824,7 @@ export namespace Cam {
         /**
          * It has been deprecated from version 1.59.6. Use `userName` instead. ID of the attached CAM user to be queried.
          *
-         * @deprecated It has been deprecated from version 1.59.6. Use `user_name` instead.
+         * @deprecated It has been deprecated from version 1.59.6. Use `userName` instead.
          */
         userId: string;
         /**
@@ -3840,9 +3903,21 @@ export namespace Cam {
     }
 
     export interface PolicyVersionPolicyVersion {
+        /**
+         * Strategic version creation timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+         */
         createDate: string;
+        /**
+         * Strategic grammar textNote: This field may return NULL, indicating that the valid value cannot be obtained.
+         */
         document: string;
+        /**
+         * Whether it is an effective version.0 means not, 1 means yesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+         */
         isDefaultVersion: number;
+        /**
+         * Strategic version numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
+         */
         versionId: number;
     }
 
@@ -4426,6 +4501,7 @@ export namespace Ccn {
          */
         routeTableId?: string;
     }
+
 }
 
 export namespace Cdh {
@@ -4720,7 +4796,13 @@ export namespace Cdn {
          * Counter measure.
          */
         counterMeasure?: string;
+        /**
+         * Last trigger time.
+         */
         lastTriggerTime: string;
+        /**
+         * Last trigger time of overseas.
+         */
         lastTriggerTimeOverseas: string;
         /**
          * Metric.
@@ -4993,7 +5075,13 @@ export namespace Cdn {
          * Client Certificate PEM format, requires Base64 encoding.
          */
         certificateContent: string;
+        /**
+         * Client certificate name.
+         */
         certificateName: string;
+        /**
+         * Deploy time of client certificate.
+         */
         deployTime: string;
         /**
          * Signature expiration time in second. The maximum value is 630720000.
@@ -5029,7 +5117,13 @@ export namespace Cdn {
          * Server certificate ID.
          */
         certificateId?: string;
+        /**
+         * Server certificate name.
+         */
         certificateName: string;
+        /**
+         * Deploy time of server certificate.
+         */
         deployTime: string;
         /**
          * Signature expiration time in second. The maximum value is 630720000.
@@ -5588,12 +5682,21 @@ export namespace Cdn {
     }
 
     export interface GetDomainsDomainListRuleCach {
+        /**
+         * Cache expiration time setting, the unit is second.
+         */
         cacheTime: number;
+        /**
+         * Advanced cache expiration configuration.
+         */
         compareMaxAge?: string;
         /**
          * Follow the source station configuration switch.
          */
         followOriginSwitch: string;
+        /**
+         * Force caching. After opening, the no-store and no-cache resources returned by the origin site will also be cached in accordance with the CacheRules rules.
+         */
         ignoreCacheControl?: string;
         /**
          * Ignore the Set-Cookie header of the origin site.
@@ -6137,6 +6240,9 @@ export namespace Cfw {
          * Deploy regional information.
          */
         fwDeploy: outputs.Cfw.VpcInstanceVpcFwInstanceFwDeploy;
+        /**
+         * Firewall instance ID (passed in editing scenario).
+         */
         fwInsId: string;
         /**
          * Firewall instance name.
@@ -6168,8 +6274,17 @@ export namespace Cfw {
     }
 
     export interface VpcPolicyBetaList {
+        /**
+         * Last execution time. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         lastTime?: string;
+        /**
+         * Task id. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         taskId?: number;
+        /**
+         * Mission name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         taskName?: string;
     }
 
@@ -6181,11 +6296,17 @@ export namespace Chdfs {
          * rule access mode, 1: read only, 2: read &amp; wirte.
          */
         accessMode?: number;
+        /**
+         * single rule id.
+         */
         accessRuleId: number;
         /**
          * rule address, IP OR IP SEG.
          */
         address?: string;
+        /**
+         * rule create time.
+         */
         createTime: string;
         /**
          * rule priority, range 1 - 100, value less higher priority.
@@ -6303,7 +6424,13 @@ export namespace Chdfs {
     }
 
     export interface LifeCycleRuleLifeCycleRule {
+        /**
+         * rule create time.
+         */
         createTime: string;
+        /**
+         * single rule id.
+         */
         lifeCycleRuleId: number;
         /**
          * rule name.
@@ -14538,6 +14665,10 @@ export namespace Clb {
 
     export interface GetAttachmentsAttachmentListTarget {
         /**
+         * Elastic network card unique ID.
+         */
+        eniIp: string;
+        /**
          * Id of the backend server.
          */
         instanceId: string;
@@ -16833,6 +16964,7 @@ export namespace Clickhouse {
          */
         newConfValue: string;
     }
+
 }
 
 export namespace Cls {
@@ -17714,6 +17846,10 @@ export namespace Cls {
 
     export interface IndexRule {
         /**
+         * The key value index is automatically configured. If it is empty, it means that the function is not enabled.
+         */
+        dynamicIndex?: outputs.Cls.IndexRuleDynamicIndex;
+        /**
          * Full-Text index configuration.
          */
         fullText?: outputs.Cls.IndexRuleFullText;
@@ -17725,6 +17861,13 @@ export namespace Cls {
          * Metafield index configuration.
          */
         tag?: outputs.Cls.IndexRuleTag;
+    }
+
+    export interface IndexRuleDynamicIndex {
+        /**
+         * index automatic configuration switch.
+         */
+        status: boolean;
     }
 
     export interface IndexRuleFullText {
@@ -18437,6 +18580,9 @@ export namespace Cos {
     }
 
     export interface BucketWebsite {
+        /**
+         * `Endpoint` of the static website.
+         */
         endpoint: string;
         /**
          * An absolute path to the document to return in case of a 4XX error.
@@ -18519,6 +18665,9 @@ export namespace Cos {
          * Whether to enable the inventory. true or false.
          */
         isEnabled: string;
+        /**
+         * Analysis items to include in the inventory result	.
+         */
         optionalFields?: outputs.Cos.GetBucketInventorysInventoryOptionalField[];
         /**
          * Inventory job cycle.
@@ -18579,6 +18728,9 @@ export namespace Cos {
     }
 
     export interface GetBucketInventorysInventoryOptionalField {
+        /**
+         * Optional analysis items to include in the inventory result. The optional fields include Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus, Tag, Crc64, and x-cos-meta-*.
+         */
         fields: string[];
     }
 
@@ -18783,20 +18935,56 @@ export namespace Cos {
     }
 
     export interface GetBucketsBucketListOriginDomainRule {
+        /**
+         * Specify domain host.
+         */
         domain: string;
+        /**
+         * Domain status, default: `ENABLED`.
+         */
         status?: string;
+        /**
+         * Specify origin domain type, available values: `REST`, `WEBSITE`, `ACCELERATE`, default: `REST`.
+         */
         type?: string;
     }
 
     export interface GetBucketsBucketListOriginPullRule {
+        /**
+         * Specifies the custom headers that you can add for COS to access your origin server.
+         */
         customHttpHeaders?: {[key: string]: any};
+        /**
+         * Specifies the pass through headers when accessing the origin server.
+         */
         followHttpHeaders?: string[];
+        /**
+         * Specifies whether to pass through COS request query string when accessing the origin server.
+         */
         followQueryString?: boolean;
+        /**
+         * Specifies whether to follow 3XX redirect to another origin server to pull data from.
+         */
         followRedirection?: boolean;
+        /**
+         * Allows only a domain name or IP address. You can optionally append a port number to the address.
+         */
         host: string;
+        /**
+         * Triggers the origin-pull rule when the requested file name matches this prefix.
+         */
         prefix?: string;
+        /**
+         * Priority of origin-pull rules, do not set the same value for multiple rules.
+         */
         priority: number;
+        /**
+         * the protocol used for COS to access the specified origin server. The available value include `HTTP`, `HTTPS` and `FOLLOW`.
+         */
         protocol?: string;
+        /**
+         * If `true`, COS will not return 3XX status code when pulling data from an origin server. Currently available zone: ap-beijing, ap-shanghai, ap-singapore, ap-mumbai.
+         */
         syncBackToSource?: boolean;
     }
 
@@ -18809,6 +18997,111 @@ export namespace Cos {
          * COS returns this index document when requests are made to the root domain or any of the subfolders.
          */
         indexDocument: string;
+    }
+
+}
+
+export namespace Csip {
+    export interface RiskCenterAsset {
+        /**
+         * Multi-cloud asset unique idNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        arn?: string;
+        /**
+         * Ip/ domain name/asset id, database id, etc.
+         */
+        asset?: string;
+        /**
+         * Asset nameNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        assetName?: string;
+        /**
+         * Asset classificationNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        assetType?: string;
+        /**
+         * Asset typeNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        instanceType?: string;
+        /**
+         * RegionNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
+        region?: string;
+    }
+
+    export interface RiskCenterTaskAdvanceCfg {
+        /**
+         * Configure advanced risk Settings.
+         */
+        cfgRisks?: outputs.Csip.RiskCenterTaskAdvanceCfgCfgRisk[];
+        /**
+         * Advanced Port Risk Configuration.
+         */
+        portRisks?: outputs.Csip.RiskCenterTaskAdvanceCfgPortRisk[];
+        /**
+         * Advanced vulnerability risk configuration.
+         */
+        vulRisks?: outputs.Csip.RiskCenterTaskAdvanceCfgVulRisk[];
+        /**
+         * Weak password risk advanced configuration.
+         */
+        weakPwdRisks?: outputs.Csip.RiskCenterTaskAdvanceCfgWeakPwdRisk[];
+    }
+
+    export interface RiskCenterTaskAdvanceCfgCfgRisk {
+        /**
+         * Whether to enable, 0- No, 1- Enable.
+         */
+        enable: number;
+        /**
+         * Detection item ID.
+         */
+        itemId: string;
+        /**
+         * Resource type.
+         */
+        resourceType: string;
+    }
+
+    export interface RiskCenterTaskAdvanceCfgPortRisk {
+        /**
+         * Detection item type, 0-system defined, 1-user-defined.
+         */
+        checkType: number;
+        /**
+         * Description of detection items.
+         */
+        detail: string;
+        /**
+         * Whether to enable, 0- No, 1- Enable.
+         */
+        enable: number;
+        /**
+         * Port collection, separated by commas.
+         */
+        portSets: string;
+    }
+
+    export interface RiskCenterTaskAdvanceCfgVulRisk {
+        /**
+         * Whether to enable, 0- No, 1- Enable.
+         */
+        enable: number;
+        /**
+         * Risk ID.
+         */
+        riskId: string;
+    }
+
+    export interface RiskCenterTaskAdvanceCfgWeakPwdRisk {
+        /**
+         * Detection item ID.
+         */
+        checkItemId: number;
+        /**
+         * Whether to enable, 0- No, 1- Enable.
+         */
+        enable: number;
     }
 
 }
@@ -18861,9 +19154,21 @@ export namespace Css {
     }
 
     export interface GetDeliverLogDownListLogInfoList {
+        /**
+         * File size, in bytes.
+         */
         fileSize: number;
+        /**
+         * Log name.
+         */
         logName: string;
+        /**
+         * Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.
+         */
         logTime: string;
+        /**
+         * Log download address.
+         */
         logUrl: string;
     }
 
@@ -19329,65 +19634,191 @@ export namespace Css {
     }
 
     export interface RecordTemplateAacParam {
+        /**
+         * Classification of on-demand applications. This field may return null, indicating that no valid value can be obtained.
+         */
         classId?: number;
+        /**
+         * Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+         */
         enable?: number;
+        /**
+         * Task flow. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         procedure?: string;
+        /**
+         * Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+         */
         recordInterval?: number;
+        /**
+         * Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         storageMode?: string;
+        /**
+         * Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
+         */
         storageTime?: number;
+        /**
+         * Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
+         */
         vodFileName?: string;
+        /**
+         * The ID of the on-demand sub app.
+         */
         vodSubAppId?: number;
     }
 
     export interface RecordTemplateFlvParam {
+        /**
+         * Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         classId?: number;
+        /**
+         * Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+         */
         enable?: number;
+        /**
+         * Task flow. This field may return null, indicating that no valid value can be obtained.
+         */
         procedure?: string;
+        /**
+         * Recording interval.  Unit: second, default: 1800.  Value range: 30-7200.  This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+         */
         recordInterval?: number;
+        /**
+         * Video storage strategy. Normal: standard storage. Cold: low frequency storage. This field may return null, indicating that no valid value can be obtained.
+         */
         storageMode?: string;
+        /**
+         * Recording storage duration.  Unit: second. Value range: 0 - 1500 days.  0: indicates permanent storage.
+         */
         storageTime?: number;
+        /**
+         * Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`_ ,`StartYear`-,`StartMonth`-,`StartDay`-,`StartHour`-,`StartMinute`-,`StartSecond`_ ,`EndYear`-,`EndMonth`-,`EndDay`-,`EndHour`-,`EndMinute`-,`EndSecond`.
+         */
         vodFileName?: string;
+        /**
+         * The ID of the vodSub app.
+         */
         vodSubAppId?: number;
     }
 
     export interface RecordTemplateFlvSpecialParam {
+        /**
+         * Whether to enable the transfer while recording is valid only in the flv format.
+         */
         uploadInRecording?: boolean;
     }
 
     export interface RecordTemplateHlsParam {
+        /**
+         * Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         classId?: number;
+        /**
+         * Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+         */
         enable?: number;
+        /**
+         * Task flow. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         procedure?: string;
+        /**
+         * Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+         */
         recordInterval?: number;
+        /**
+         * Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         storageMode?: string;
+        /**
+         * Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
+         */
         storageTime?: number;
+        /**
+         * Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
+         */
         vodFileName?: string;
+        /**
+         * The ID of the vodSub app.
+         */
         vodSubAppId?: number;
     }
 
     export interface RecordTemplateHlsSpecialParam {
+        /**
+         * HLS freewheeling timeout. Value range [0, 1800].
+         */
         flowContinueDuration?: number;
     }
 
     export interface RecordTemplateMp3Param {
+        /**
+         * Classification of vod applications. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         classId?: number;
+        /**
+         * Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+         */
         enable?: number;
+        /**
+         * Task flow. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         procedure?: string;
+        /**
+         * Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+         */
         recordInterval?: number;
+        /**
+         * Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         storageMode?: string;
+        /**
+         * Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
+         */
         storageTime?: number;
+        /**
+         * Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`, `StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
+         */
         vodFileName?: string;
+        /**
+         * The ID of the on-demand sub app.
+         */
         vodSubAppId?: number;
     }
 
     export interface RecordTemplateMp4Param {
+        /**
+         * Classification of on-demand applications. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         classId?: number;
+        /**
+         * Whether to enable recording in the current format. The default value is 0. 0: No, 1: Yes.
+         */
         enable?: number;
+        /**
+         * Task flow. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         procedure?: string;
+        /**
+         * Recording interval. Unit: second, default: 1800. Value range: 30-7200. This parameter is invalid for HLS. When recording HLS, a file is generated from streaming to streaming.
+         */
         recordInterval?: number;
+        /**
+         * Video storage strategy. Normal: standard storage. Cold: low frequency storage. Note: This field may return null, indicating that no valid value can be obtained.
+         */
         storageMode?: string;
+        /**
+         * Recording storage duration. Unit: second. Value range: 0 - 1500 days. 0: indicates permanent storage.
+         */
         storageTime?: number;
+        /**
+         * Record file name.Special placeholders supported are: `StreamID`: Stream ID,`StartYear`: Start time - year,`StartMonth`: Start time - month,`StartDay`: Start time - day,`StartHour`: Start time - hour,`StartMinute`: Start time - minutes,`StartSecond`: Start time - seconds,`StartMillisecond`: Start time - milliseconds,`EndYear`: End time - year,`EndMonth`: End time - month,`EndDay`: End time - day,`EndHour`: End time - hour,`EndMinute`: End time - minutes,`EndSecond`: End time - seconds,`EndMillisecond`: End time - millisecondsIf the default recording file name is not set as ,`StreamID`,`StartYear`,`StartMonth`,`StartDay`,`StartHour`,`StartMinute`,`StartSecond`,`EndYear`,`EndMonth`,`EndDay`,`EndHour`,`EndMinute`,`EndSecond`.
+         */
         vodFileName?: string;
+        /**
+         * The ID of the on-demand sub app.
+         */
         vodSubAppId?: number;
     }
 
@@ -19447,6 +19878,7 @@ export namespace Css {
          */
         outputStreamWidth: number;
     }
+
 }
 
 export namespace Cvm {
@@ -19773,12 +20205,24 @@ export namespace Cvm {
     }
 
     export interface ImportImageTagSpecification {
+        /**
+         * Resource type. Valid values: instance (CVM), host (CDH), image (for image), and keypair (for key). Note: This field may return null, indicating that no valid values can be obtained.
+         */
         resourceType: string;
+        /**
+         * Tag pairs Note: This field may return null, indicating that no valid values can be obtained.
+         */
         tags: outputs.Cvm.ImportImageTagSpecificationTag[];
     }
 
     export interface ImportImageTagSpecificationTag {
+        /**
+         * Tag key.
+         */
         key: string;
+        /**
+         * Tag value.
+         */
         value: string;
     }
 
@@ -20323,26 +20767,94 @@ export namespace Cvm {
     }
 
     export interface ModifyInstanceDiskTypeDataDisk {
+        /**
+         * ID of the dedicated cluster to which the instance belongs.
+         */
         cdcId?: string;
+        /**
+         * Whether to terminate the data disk when its CVM is terminated. Valid values:
+         * - TRUE: terminate the data disk when its CVM is terminated. This value only supports pay-as-you-go cloud disks billed on an hourly basis.
+         * - FALSE: retain the data disk when its CVM is terminated.
+         * Default value: TRUE.
+         */
         deleteWithInstance?: boolean;
+        /**
+         * Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.
+         */
         diskId?: string;
+        /**
+         * Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
+         */
         diskSize: number;
+        /**
+         * Data disk type. Valid values:
+         * - LOCAL_BASIC: local hard disk;
+         * - LOCAL_SSD: local SSD hard disk;
+         * - LOCAL_NVME: local NVME hard disk, which is strongly related to InstanceType and cannot be specified;
+         * - LOCAL_PRO: local HDD hard disk, which is strongly related to InstanceType and cannot be specified;
+         * - CLOUD_BASIC: ordinary cloud disk;
+         * - CLOUD_PREMIUM: high-performance cloud disk;
+         * - CLOUD_SSD:SSD cloud disk;
+         * - CLOUD_HSSD: enhanced SSD cloud disk;
+         * - CLOUD_TSSD: extremely fast SSD cloud disk;
+         * - CLOUD_BSSD: general-purpose SSD cloud disk;
+         * Default value: LOCAL_BASIC.
+         */
         diskType?: string;
+        /**
+         * Specifies whether the data disk is encrypted. Valid values:
+         * - TRUE: encrypted
+         * - FALSE: not encrypted
+         * Default value: FALSE.
+         */
         encrypt?: boolean;
+        /**
+         * ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.
+         */
         kmsKeyId?: string;
+        /**
+         * Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.
+         */
         snapshotId?: string;
+        /**
+         * Cloud disk performance, in MB/s.
+         */
         throughputPerformance?: number;
     }
 
     export interface ModifyInstanceDiskTypeSystemDisk {
+        /**
+         * ID of the dedicated cluster to which the instance belongs.
+         */
         cdcId?: string;
+        /**
+         * System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.
+         */
         diskId?: string;
+        /**
+         * System disk size; unit: GB; default value: 50 GB.
+         */
         diskSize?: number;
+        /**
+         * System disk type. Valid values:- LOCAL_BASIC: local disk
+         * - LOCAL_SSD: local SSD disk
+         * - CLOUD_BASIC: ordinary cloud disk
+         * - CLOUD_SSD: SSD cloud disk
+         * - CLOUD_PREMIUM: Premium cloud storage
+         * - CLOUD_BSSD: Balanced SSD
+         * The disk currently in stock will be used by default.
+         */
         diskType?: string;
     }
 
     export interface RenewHostHostChargePrepaid {
+        /**
+         * The duration of purchasing an instance, unit: month. Value range: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
+         */
         period: number;
+        /**
+         * Auto renewal flag. Valid values:&lt;br&gt;&lt;li&gt;NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically&lt;br&gt;&lt;li&gt;NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically&lt;br&gt;&lt;li&gt;DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically&lt;br&gt;&lt;br&gt;Default value: NOTIFY_AND_AUTO_RENEW。If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
+         */
         renewFlag?: string;
     }
 
@@ -20353,13 +20865,10 @@ export namespace Cvm {
         period: number;
         /**
          * Auto renewal flag. Valid values:
-         * - `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically;
-         * - `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically;
-         * - `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically;
-         * Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. Note: This field may return null, indicating that no valid value is found.
          */
         renewFlag?: string;
     }
+
 }
 
 export namespace Cwp {
@@ -21488,11 +21997,17 @@ export namespace Cynosdb {
          * Creation time of the CynosDB instance.
          */
         createTime: string;
+        /**
+         * The number of CPU cores of the Cynosdb instance.
+         */
         instanceCpuCore: number;
         /**
          * ID of the Cynosdb instance to be queried.
          */
         instanceId?: string;
+        /**
+         * Memory capacity of the Cynosdb instance, unit in GB.
+         */
         instanceMemorySize: number;
         /**
          * Name of the Cynosdb instance to be queried.
@@ -22009,7 +22524,13 @@ export namespace Cynosdb {
     }
 
     export interface ProxyRoInstance {
+        /**
+         * instance id.
+         */
         instanceId?: string;
+        /**
+         * weight.
+         */
         weight?: number;
     }
 
@@ -22150,6 +22671,9 @@ export namespace Dayu {
          * Policy mode (discard or captcha).
          */
         policyAction: string;
+        /**
+         * Policy Id.
+         */
         policyId: string;
         /**
          * A list of policies.
@@ -22185,6 +22709,9 @@ export namespace Dayu {
          * Domain.
          */
         domain: string;
+        /**
+         * Instance id.
+         */
         instanceId: string;
         /**
          * Ip address.
@@ -22764,6 +23291,9 @@ export namespace Dayu {
          * Type of the resource that the CC http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
          */
         resourceType: string;
+        /**
+         * Rule list of the CC self-define http policy.
+         */
         ruleLists: outputs.Dayu.GetCcHttpPoliciesListRuleList[];
         /**
          * Match mode.
@@ -22776,8 +23306,17 @@ export namespace Dayu {
     }
 
     export interface GetCcHttpPoliciesListRuleList {
+        /**
+         * Operator of the rule.
+         */
         operator: string;
+        /**
+         * Key of the rule.
+         */
         skey: string;
+        /**
+         * Rule value.
+         */
         value: string;
     }
 
@@ -22818,6 +23357,9 @@ export namespace Dayu {
          * Rule id of the domain that the CC self-define https policy works for.
          */
         ruleId: string;
+        /**
+         * Rule list of the CC self-define https policy.
+         */
         ruleLists: outputs.Dayu.GetCcHttpsPoliciesListRuleList[];
         /**
          * Indicate the CC self-define https policy takes effect or not.
@@ -22826,12 +23368,24 @@ export namespace Dayu {
     }
 
     export interface GetCcHttpsPoliciesListRuleList {
+        /**
+         * Operator of the rule.
+         */
         operator: string;
+        /**
+         * Key of the rule.
+         */
         skey: string;
+        /**
+         * Rule value.
+         */
         value: string;
     }
 
     export interface GetDdosPoliciesList {
+        /**
+         * Black ip list.
+         */
         blackIps?: string[];
         /**
          * Create time of the DDoS policy.
@@ -22869,6 +23423,9 @@ export namespace Dayu {
          * Watermark content.
          */
         watermarkKeys: outputs.Dayu.GetDdosPoliciesListWatermarkKey[];
+        /**
+         * White ip list.
+         */
         whiteIps?: string[];
     }
 
@@ -22893,6 +23450,9 @@ export namespace Dayu {
          * The limit of new connections based on destination IP.
          */
         dNewLimit: number;
+        /**
+         * Indicate whether to drop abroad traffic or not.
+         */
         dropAbroad: boolean;
         /**
          * Indicate whether to drop ICMP protocol or not.
@@ -23187,16 +23747,46 @@ export namespace Dayu {
     }
 
     export interface GetEipList {
+        /**
+         * The created time of resource.
+         */
         createdTime: string;
+        /**
+         * Eip PUBLIC IP status.
+         */
         eipAddressStatus: string;
+        /**
+         * The ID of the bound ENI.
+         */
         eipBoundRscEni: string;
+        /**
+         * The ID of the resource instance for the binding.
+         */
         eipBoundRscIns?: string;
+        /**
+         * Bind the resource intranet IP.
+         */
         eipBoundRscVip: string;
         eipLists: string[];
+        /**
+         * The expired time of resource.
+         */
         expiredTime: string;
+        /**
+         * ID of the resource instance.
+         */
         instanceId?: string;
+        /**
+         * The modify time of resource.
+         */
         modifyTime: string;
+        /**
+         * The protection status of the asset instance.
+         */
         protectionStatus: string;
+        /**
+         * The region where the asset instance is located.
+         */
         region: string;
     }
 
@@ -23253,6 +23843,9 @@ export namespace Dayu {
          * Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
          */
         sessionTime: number;
+        /**
+         * Source list of the rule.
+         */
         sourceLists: outputs.Dayu.GetL4RulesListSourceList[];
         /**
          * Source type, `1` for source of host, `2` for source of IP.
@@ -23261,7 +23854,13 @@ export namespace Dayu {
     }
 
     export interface GetL4RulesListSourceList {
+        /**
+         * Source IP or domain.
+         */
         source: string;
+        /**
+         * Weight of the source.
+         */
         weight: number;
     }
 
@@ -23310,6 +23909,9 @@ export namespace Dayu {
          * Name of the rule.
          */
         ruleName: string;
+        /**
+         * Source list of the rule.
+         */
         sourceLists: outputs.Dayu.GetL4RulesV2ListSourceList[];
         /**
          * The source port of the layer 4 rule.
@@ -23326,7 +23928,13 @@ export namespace Dayu {
     }
 
     export interface GetL4RulesV2ListSourceList {
+        /**
+         * Source IP or domain.
+         */
         source: string;
+        /**
+         * Weight of the source.
+         */
         weight: number;
     }
 
@@ -23511,21 +24119,60 @@ export namespace Dayu {
     }
 
     export interface L4RuleV2Rules {
+        /**
+         * session hold switch.
+         */
         keepEnable: boolean;
+        /**
+         * The keeptime of the layer 4 rule.
+         */
         keeptime: number;
+        /**
+         * LB type of the rule, `1` for weight cycling and `2` for IP hash.
+         */
         lbType: number;
+        /**
+         * Protocol of the rule.
+         */
         protocol: string;
+        /**
+         * Corresponding regional information.
+         */
         region: number;
+        /**
+         * Remove the watermark state.
+         */
         removeSwitch: boolean;
+        /**
+         * Name of the rule.
+         */
         ruleName: string;
+        /**
+         * Source list of the rule.
+         */
         sourceLists: outputs.Dayu.L4RuleV2RulesSourceList[];
+        /**
+         * The source port of the layer 4 rule.
+         */
         sourcePort: number;
+        /**
+         * Source type, `1` for source of host, `2` for source of IP.
+         */
         sourceType: number;
+        /**
+         * The virtual port of the layer 4 rule.
+         */
         virtualPort: number;
     }
 
     export interface L4RuleV2RulesSourceList {
+        /**
+         * Source IP or domain.
+         */
         source: string;
+        /**
+         * Weight of the source.
+         */
         weight: number;
     }
 
@@ -23574,7 +24221,13 @@ export namespace Dayu {
     }
 
     export interface L7RuleV2RuleSourceList {
+        /**
+         * Source IP or domain.
+         */
         source: string;
+        /**
+         * Weight of the source.
+         */
         weight: number;
     }
 
@@ -25795,6 +26448,7 @@ export namespace Dcdb {
          */
         tagValue: string;
     }
+
 }
 
 export namespace Dcx {
@@ -25928,42 +26582,144 @@ export namespace Dlc {
     }
 
     export interface AttachUserPolicyOperationPolicySet {
+        /**
+         * For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+         */
         catalog: string;
+        /**
+         * For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+         */
         column?: string;
+        /**
+         * The time when the permission was created. Leave the input parameter blank.
+         */
         createTime?: string;
+        /**
+         * Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
+         */
         dataEngine?: string;
+        /**
+         * Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+         */
         database: string;
+        /**
+         * For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+         */
         function?: string;
+        /**
+         * Policy id.
+         */
         id?: number;
+        /**
+         * Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+         */
         mode?: string;
+        /**
+         * Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+         */
         operation: string;
+        /**
+         * Operator, do not fill in the input parameters.
+         */
         operator?: string;
+        /**
+         * Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
+         */
         policyType?: string;
+        /**
+         * Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+         */
         reAuth?: boolean;
+        /**
+         * Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+         */
         source?: string;
+        /**
+         * The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+         */
         sourceId?: number;
+        /**
+         * The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
+         */
         sourceName?: string;
+        /**
+         * For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+         */
         table: string;
+        /**
+         * For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+         */
         view?: string;
     }
 
     export interface AttachWorkGroupPolicyOperationPolicySet {
+        /**
+         * For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+         */
         catalog: string;
+        /**
+         * For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+         */
         column?: string;
+        /**
+         * The time when the permission was created. Leave the input parameter blank.
+         */
         createTime?: string;
+        /**
+         * Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
+         */
         dataEngine?: string;
+        /**
+         * Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+         */
         database: string;
+        /**
+         * For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+         */
         function?: string;
+        /**
+         * Policy id.
+         */
         id?: number;
+        /**
+         * Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+         */
         mode?: string;
+        /**
+         * Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+         */
         operation: string;
+        /**
+         * Operator, do not fill in the input parameters.
+         */
         operator?: string;
+        /**
+         * Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
+         */
         policyType?: string;
+        /**
+         * Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+         */
         reAuth?: boolean;
+        /**
+         * Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+         */
         source?: string;
+        /**
+         * The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+         */
         sourceId?: number;
+        /**
+         * The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
+         */
         sourceName?: string;
+        /**
+         * For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+         */
         table: string;
+        /**
+         * For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+         */
         view?: string;
     }
 
@@ -26024,42 +26780,144 @@ export namespace Dlc {
     }
 
     export interface DetachUserPolicyOperationPolicySet {
+        /**
+         * For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+         */
         catalog: string;
+        /**
+         * For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+         */
         column?: string;
+        /**
+         * The time when the permission was created. Leave the input parameter blank.
+         */
         createTime?: string;
+        /**
+         * Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
+         */
         dataEngine?: string;
+        /**
+         * Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+         */
         database: string;
+        /**
+         * For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+         */
         function?: string;
+        /**
+         * Policy id.
+         */
         id?: number;
+        /**
+         * Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+         */
         mode?: string;
+        /**
+         * Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+         */
         operation: string;
+        /**
+         * Operator, do not fill in the input parameters.
+         */
         operator?: string;
+        /**
+         * Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
+         */
         policyType?: string;
+        /**
+         * Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+         */
         reAuth?: boolean;
+        /**
+         * Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+         */
         source?: string;
+        /**
+         * The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+         */
         sourceId?: number;
+        /**
+         * The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
+         */
         sourceName?: string;
+        /**
+         * For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+         */
         table: string;
+        /**
+         * For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+         */
         view?: string;
     }
 
     export interface DetachWorkGroupPolicyOperationPolicySet {
+        /**
+         * For the data source name that requires authorization, only * (representing all resources at this level) is supported under the administrator level; in the case of data source level and database level authentication, only COSDataCatalog or * is supported; in data table level authentication, it is possible Fill in the user-defined data source. If left blank, it defaults to DataLakeCatalog. note: If a user-defined data source is authenticated, the permissions that dlc can manage are a subset of the accounts provided by the user when accessing the data source.
+         */
         catalog: string;
+        /**
+         * For columns that require authorization, fill in * to represent all current columns. When the authorization type is administrator level, only * is allowed.
+         */
         column?: string;
+        /**
+         * The time when the permission was created. Leave the input parameter blank.
+         */
         createTime?: string;
+        /**
+         * Data engines that require authorization, fill in * to represent all current engines. when the authorization type is administrator level, only * is allowed.
+         */
         dataEngine?: string;
+        /**
+         * Database name that requires authorization, fill in * to represent all databases under the current catalog. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level, only blanks are allowed to be filled in. For other types, the database can be specified arbitrarily.
+         */
         database: string;
+        /**
+         * For the function name that requires authorization, fill in * to represent all functions under the current catalog. when the authorization type is administrator level, only * is allowed to be filled in. When the authorization type is data connection level, only blanks are allowed to be filled in. in other types, functions can be specified arbitrarily.
+         */
         function?: string;
+        /**
+         * Policy id.
+         */
         id?: number;
+        /**
+         * Authorization mode, please leave this parameter blank. COMMON: normal mode; SENIOR: advanced mode.
+         */
         mode?: string;
+        /**
+         * Authorized permission operations provide different operations for different levels of authentication. administrator permissions: ALL, default is ALL if left blank; data connection level authentication: CREATE; database level authentication: ALL, CREATE, ALTER, DROP; data table permissions: ALL, SELECT, INSERT, ALTER, DELETE, DROP, UPDATE. note: under data table permissions, only SELECT operations are supported when the specified data source is not COSDataCatalog.
+         */
         operation: string;
+        /**
+         * Operator, do not fill in the input parameters.
+         */
         operator?: string;
+        /**
+         * Authorization type, currently supports eight authorization types: ADMIN: Administrator level authentication DATASOURCE: data connection level authentication DATABASE: database level authentication TABLE: Table level authentication VIEW: view level authentication FUNCTION: Function level authentication COLUMN: Column level authentication ENGINE: Data engine authentication. if left blank, the default is administrator level authentication.
+         */
         policyType?: string;
+        /**
+         * Whether the user can perform secondary authorization. when it is true, the authorized user can re-authorize the permissions obtained this time to other sub-users. default is false.
+         */
         reAuth?: boolean;
+        /**
+         * Permission source, please leave it blank. USER: permissions come from the user itself; WORKGROUP: permissions come from the bound workgroup.
+         */
         source?: string;
+        /**
+         * The id of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the Source field is WORKGROUP.
+         */
         sourceId?: number;
+        /**
+         * The name of the workgroup to which the permission belongs. this value only exists when the source of the permission is a workgroup. that is, this field has a value only when the value of the source field is WORKGROUP.
+         */
         sourceName?: string;
+        /**
+         * For the table name that requires authorization, fill in * to represent all tables under the current database. when the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. For other types, data tables can be specified arbitrarily.
+         */
         table: string;
+        /**
+         * For views that require authorization, fill in * to represent all views under the current database. When the authorization type is administrator level, only * is allowed to be filled in. when the authorization type is data connection level or database level, only blanks are allowed to be filled in. for other types, the view can be specified arbitrarily.
+         */
         view?: string;
     }
 
@@ -27307,6 +28165,7 @@ export namespace Dlc {
          */
         executorSize?: string;
     }
+
 }
 
 export namespace Dnats {
@@ -27998,38 +28857,71 @@ export namespace Dts {
     }
 
     export interface GetCompareTasksListCheckProcessStep {
+        /**
+         * errors info.
+         */
         errors?: outputs.Dts.GetCompareTasksListCheckProcessStepError[];
         /**
          * progress info.
          */
         percent?: number;
+        /**
+         * start time.
+         */
         startTime?: string;
         /**
          * compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.
          */
         status?: string;
+        /**
+         * step id.
+         */
         stepId?: string;
+        /**
+         * step message.
+         */
         stepMessage?: string;
+        /**
+         * step name.
+         */
         stepName?: string;
+        /**
+         * step number.
+         */
         stepNo?: number;
+        /**
+         * warnings info.
+         */
         warnings?: outputs.Dts.GetCompareTasksListCheckProcessStepWarning[];
     }
 
     export interface GetCompareTasksListCheckProcessStepError {
+        /**
+         * help document.
+         */
         helpDoc?: string;
         /**
          * message.
          */
         message?: string;
+        /**
+         * solution.
+         */
         solution?: string;
     }
 
     export interface GetCompareTasksListCheckProcessStepWarning {
+        /**
+         * help document.
+         */
         helpDoc?: string;
         /**
          * message.
          */
         message?: string;
+        /**
+         * solution.
+         */
         solution?: string;
     }
 
@@ -28061,38 +28953,71 @@ export namespace Dts {
     }
 
     export interface GetCompareTasksListCompareProcessStep {
+        /**
+         * errors info.
+         */
         errors?: outputs.Dts.GetCompareTasksListCompareProcessStepError[];
         /**
          * progress info.
          */
         percent?: number;
+        /**
+         * start time.
+         */
         startTime?: string;
         /**
          * compare task status, optional value is created/readyRun/running/success/stopping/failed/canceled.
          */
         status?: string;
+        /**
+         * step id.
+         */
         stepId?: string;
+        /**
+         * step message.
+         */
         stepMessage?: string;
+        /**
+         * step name.
+         */
         stepName?: string;
+        /**
+         * step number.
+         */
         stepNo?: number;
+        /**
+         * warnings info.
+         */
         warnings?: outputs.Dts.GetCompareTasksListCompareProcessStepWarning[];
     }
 
     export interface GetCompareTasksListCompareProcessStepError {
+        /**
+         * help document.
+         */
         helpDoc?: string;
         /**
          * message.
          */
         message?: string;
+        /**
+         * solution.
+         */
         solution?: string;
     }
 
     export interface GetCompareTasksListCompareProcessStepWarning {
+        /**
+         * help document.
+         */
         helpDoc?: string;
         /**
          * message.
          */
         message?: string;
+        /**
+         * solution.
+         */
         solution?: string;
     }
 
@@ -28108,20 +29033,47 @@ export namespace Dts {
     }
 
     export interface GetCompareTasksListConfigObjectItem {
+        /**
+         * database mode.
+         */
         dbMode?: string;
+        /**
+         * database name.
+         */
         dbName?: string;
+        /**
+         * schema name.
+         */
         schemaName?: string;
+        /**
+         * table mode.
+         */
         tableMode?: string;
+        /**
+         * table list.
+         */
         tables?: outputs.Dts.GetCompareTasksListConfigObjectItemTable[];
+        /**
+         * view mode.
+         */
         viewMode?: string;
+        /**
+         * view list.
+         */
         views?: outputs.Dts.GetCompareTasksListConfigObjectItemView[];
     }
 
     export interface GetCompareTasksListConfigObjectItemTable {
+        /**
+         * table name.
+         */
         tableName?: string;
     }
 
     export interface GetCompareTasksListConfigObjectItemView {
+        /**
+         * view name.
+         */
         viewName?: string;
     }
 
@@ -28646,6 +29598,9 @@ export namespace Dts {
          * tag list.
          */
         details: outputs.Dts.GetSyncJobsListDetail[];
+        /**
+         * destination access type.
+         */
         dstAccessType: string;
         /**
          * destination database type.
@@ -30047,6 +31002,7 @@ export namespace Dts {
          */
         tagValue?: string;
     }
+
 }
 
 export namespace Eb {
@@ -30422,27 +31378,75 @@ export namespace Eb {
     }
 
     export interface GetSearchFilter {
+        /**
+         * LogFilters array.
+         */
         filters?: outputs.Eb.GetSearchFilterFilter[];
+        /**
+         * filter field name.
+         */
         key?: string;
+        /**
+         * operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.
+         */
         operator?: string;
+        /**
+         * The logical relationship of the level filters, the value AND or OR.
+         */
         type?: string;
+        /**
+         * Filter value, range operation needs to enter two values at the same time, separated by commas.
+         */
         value?: string;
     }
 
     export interface GetSearchFilterFilter {
+        /**
+         * filter field name.
+         */
         key: string;
+        /**
+         * operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.
+         */
         operator: string;
+        /**
+         * Filter values, range operations need to enter two values at the same time, separated by commas.
+         */
         value: string;
     }
 
     export interface GetSearchResult {
+        /**
+         * Log content details, note: this field may return null, indicating that no valid value can be obtained.
+         */
         message: string;
+        /**
+         * Region, Note: This field may return null, indicating that no valid value can be obtained.
+         */
         region: string;
+        /**
+         * Event matching rules, note: this field may return null, indicating that no valid value can be obtained.
+         */
         ruleIds: string;
+        /**
+         * Event source, note: this field may return null, indicating that no valid value can be obtained.
+         */
         source: string;
+        /**
+         * Event status, note: this field may return null, indicating that no valid value can be obtained.
+         */
         status: string;
+        /**
+         * Instance ID, note: this field may return null, indicating that no valid value can be obtained.
+         */
         subject: string;
+        /**
+         * The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.
+         */
         timestamp: string;
+        /**
+         * Event type, note: this field may return null, indicating that no valid value can be obtained.
+         */
         type: string;
     }
 
@@ -30468,6 +31472,7 @@ export namespace Eb {
          */
         type: string;
     }
+
 }
 
 export namespace Eip {
@@ -31062,7 +32067,6 @@ export namespace Elasticsearch {
          * Plugin status. Valid values:
          * - `-2` has been uninstalled
          * - `-1` has been installed in
-         * - `0` installation.
          */
         status: number;
     }
@@ -32203,6 +33207,68 @@ export namespace Eni {
         primary: boolean;
     }
 
+    export interface Ipv4AddressPrivateIpAddress {
+        /**
+         * EIP instance ID, such as `eip-11112222`.
+         */
+        addressId: string;
+        /**
+         * Private IP description.
+         */
+        description: string;
+        /**
+         * Whether the public IP is blocked.
+         */
+        isWanIpBlocked: boolean;
+        /**
+         * Whether it is a primary IP.
+         */
+        primary: boolean;
+        /**
+         * Private IP address.
+         */
+        privateIpAddress: string;
+        /**
+         * Public IP address.
+         */
+        publicIpAddress: string;
+        /**
+         * IP service level. Values: PT` (Gold), `AU` (Silver), `AG `(Bronze) and DEFAULT` (Default).
+         */
+        qosLevel: string;
+        /**
+         * IP status: `PENDING`: Creating, `MIGRATING`: Migrating, `DELETING`: Deleting, `AVAILABLE`: Available.
+         */
+        state: string;
+    }
+
+    export interface Ipv6AddressIpv6Address {
+        /**
+         * `IPv6` address, in the form of: `3402:4e00:20:100:0:8cd9:2a67:71f3`.
+         */
+        address: string;
+        /**
+         * `EIP` instance `ID`, such as:`eip-hxlqja90`.
+         */
+        addressId: string;
+        /**
+         * Description.
+         */
+        description?: string;
+        /**
+         * Whether the public network IP is blocked.
+         */
+        isWanIpBlocked: boolean;
+        /**
+         * Whether to master `IP`.
+         */
+        primary: boolean;
+        /**
+         * `IPv6` address status: `PENDING`: pending, `MIGRATING`: migrating, `DELETING`: deleting, `AVAILABLE`: available.
+         */
+        state: string;
+    }
+
 }
 
 export namespace Enis {
@@ -32628,7 +33694,7 @@ export namespace Gaap {
         /**
          * (**Deprecated**) It has been deprecated from version 1.26.0. Use `clientCertificateIds` instead. ID of the client certificate.
          *
-         * @deprecated It has been deprecated from version 1.26.0. Use `client_certificate_ids` instead.
+         * @deprecated It has been deprecated from version 1.26.0. Use `clientCertificateIds` instead.
          */
         clientCertificateId: string;
         /**
@@ -32658,7 +33724,7 @@ export namespace Gaap {
         /**
          * (**Deprecated**) It has been deprecated from version 1.28.0. Use `realserverCertificateIds` instead. CA certificate ID of the realserver.
          *
-         * @deprecated It has been deprecated from version 1.28.0. Use `realserver_certificate_ids` instead.
+         * @deprecated It has been deprecated from version 1.28.0. Use `realserverCertificateIds` instead.
          */
         realserverCertificateId: string;
         /**
@@ -32824,7 +33890,7 @@ export namespace Gaap {
         /**
          * (**Deprecated**) It has been deprecated from version 1.26.0. Use `clientCertificateIds` instead. ID of the client certificate.
          *
-         * @deprecated It has been deprecated from version 1.26.0. Use `client_certificate_ids` instead.
+         * @deprecated It has been deprecated from version 1.26.0. Use `clientCertificateIds` instead.
          */
         clientCertificateId: string;
         /**
@@ -34012,6 +35078,10 @@ export namespace Instances {
          */
         memory: number;
         /**
+         * Instance os name.
+         */
+        osName: string;
+        /**
          * Private IP of the instance.
          */
         privateIp: string;
@@ -34457,6 +35527,7 @@ export namespace Kms {
          */
         identity: string;
     }
+
 }
 
 export namespace Kubernetes {
@@ -34490,6 +35561,10 @@ export namespace Kubernetes {
          */
         mountTarget?: string;
         /**
+         * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+         */
+        preStartUserScript?: string;
+        /**
          * Base64-encoded User Data text, the length limit is 16KB.
          */
         userData?: string;
@@ -34509,7 +35584,7 @@ export namespace Kubernetes {
          */
         diskSize?: number;
         /**
-         * Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+         * Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
          */
         diskType?: string;
         /**
@@ -34575,6 +35650,10 @@ export namespace Kubernetes {
          */
         mountTarget?: string;
         /**
+         * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+         */
+        preStartUserScript?: string;
+        /**
          * Base64-encoded User Data text, the length limit is 16KB.
          */
         userData?: string;
@@ -34594,7 +35673,7 @@ export namespace Kubernetes {
          */
         diskSize?: number;
         /**
-         * Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+         * Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
          */
         diskType?: string;
         /**
@@ -34852,7 +35931,7 @@ export namespace Kubernetes {
          */
         systemDiskType?: string;
         /**
-         * ase64-encoded User Data text, the length limit is 16KB.
+         * User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
          */
         userData?: string;
     }
@@ -35041,7 +36120,7 @@ export namespace Kubernetes {
          */
         systemDiskType?: string;
         /**
-         * ase64-encoded User Data text, the length limit is 16KB.
+         * User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
          */
         userData?: string;
     }
@@ -36037,7 +37116,7 @@ export namespace Kubernetes {
         /**
          * The order of elements in this field cannot be guaranteed. Use `orderlySecurityGroupIds` instead. Security groups to which a CVM instance belongs.
          *
-         * @deprecated The order of elements in this field cannot be guaranteed. Use `orderly_security_group_ids` instead.
+         * @deprecated The order of elements in this field cannot be guaranteed. Use `orderlySecurityGroupIds` instead.
          */
         securityGroupIds: string[];
         /**
@@ -36053,7 +37132,7 @@ export namespace Kubernetes {
          */
         systemDiskSize?: number;
         /**
-         * Type of a CVM disk. Valid value: `CLOUD_PREMIUM` and `CLOUD_SSD`. Default is `CLOUD_PREMIUM`.
+         * Type of a CVM disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`. Default is `CLOUD_PREMIUM`.
          */
         systemDiskType?: string;
     }
@@ -36068,7 +37147,7 @@ export namespace Kubernetes {
          */
         diskSize?: number;
         /**
-         * Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+         * Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
          */
         diskType?: string;
         /**
@@ -36115,6 +37194,10 @@ export namespace Kubernetes {
          */
         mountTarget?: string;
         /**
+         * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+         */
+        preStartUserScript?: string;
+        /**
          * Base64-encoded User Data text, the length limit is 16KB.
          */
         userData?: string;
@@ -36134,7 +37217,7 @@ export namespace Kubernetes {
          */
         diskSize?: number;
         /**
-         * Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD`.
+         * Types of disk. Valid value: `LOCAL_BASIC`, `LOCAL_SSD`, `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, `CLOUD_HSSD`, `CLOUD_TSSD` and `CLOUD_BSSD`.
          */
         diskType?: string;
         /**
@@ -36337,7 +37420,7 @@ export namespace Kubernetes {
          */
         systemDiskType?: string;
         /**
-         * ase64-encoded User Data text, the length limit is 16KB.
+         * User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
          */
         userData?: string;
     }
@@ -36429,6 +37512,7 @@ export namespace Kubernetes {
          */
         value: string;
     }
+
 }
 
 export namespace Lighthouse {
@@ -37402,13 +38486,10 @@ export namespace Lighthouse {
         period: number;
         /**
          * Automatic renewal logo. Values:
-         * - `NOTIFY_AND_AUTO_RENEW`: notify expiration and renew automatically;
-         * - `NOTIFY_AND_MANUAL_RENEW`: notification of expiration does not renew automatically. Users need to renew manually;
-         * - `DISABLE_NOTIFY_AND_AUTO_RENEW`: no automatic renewal and no notification;
-         * Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis after expiration, when the account balance is sufficient.
          */
         renewFlag?: string;
     }
+
 }
 
 export namespace Mariadb {
@@ -37608,6 +38689,18 @@ export namespace Mariadb {
          */
         instanceName: string;
         /**
+         * Public network access domain name.
+         */
+        internetDomain: string;
+        /**
+         * Public IP address.
+         */
+        internetIp: string;
+        /**
+         * Public network port.
+         */
+        internetPort: number;
+        /**
          * meory of instance.
          */
         memory: number;
@@ -37632,9 +38725,17 @@ export namespace Mariadb {
          */
         subnetId: string;
         /**
+         * Intranet IP address.
+         */
+        vip: string;
+        /**
          * vpc id.
          */
         vpcId: string;
+        /**
+         * Intranet port.
+         */
+        vport: number;
         /**
          * available zone.
          */
@@ -37770,7 +38871,13 @@ export namespace Mariadb {
     }
 
     export interface GetInstanceNodeInfoNodesInfo {
+        /**
+         * Node ID.
+         */
         nodeId: string;
+        /**
+         * Node role. Valid values: `master`, `slave`.
+         */
         role: string;
     }
 
@@ -38199,6 +39306,7 @@ export namespace Mariadb {
          */
         value: string;
     }
+
 }
 
 export namespace Mdl {
@@ -38622,8 +39730,47 @@ export namespace Mongodb {
         namespace: string;
     }
 
+    export interface InstanceAddNodeList {
+        /**
+         * The node role that needs to be added.
+         * - SECONDARY: Mongod node;
+         * - READONLY: read-only node;
+         * - MONGOS: Mongos node.
+         */
+        role: string;
+        /**
+         * The availability zone corresponding to the node.
+         * - single availability zone, where all nodes are in the same availability zone;
+         * - multiple availability zones: the current standard specification is the distribution of three availability zones, and the master and slave nodes are not in the same availability zone. You should pay attention to configuring the availability zone corresponding to the new node, and the rule that the number of nodes in any two availability zones is greater than the third availability zone must be met after the addition.
+         */
+        zone: string;
+    }
+
     export interface InstanceBackupDownloadTaskBackupSet {
+        /**
+         * Replication Id.
+         */
         replicaSetId: string;
+    }
+
+    export interface InstanceRemoveNodeList {
+        /**
+         * The node ID to delete. The shard cluster must specify the name of the node to be deleted by a group of shards, and the rest of the shards should be grouped and aligned.
+         */
+        nodeName: string;
+        /**
+         * The node role that needs to be deleted.
+         * - SECONDARY: Mongod node;
+         * - READONLY: read-only node;
+         * - MONGOS: Mongos node.
+         */
+        role: string;
+        /**
+         * The availability zone corresponding to the node.
+         * - single availability zone, where all nodes are in the same availability zone;
+         * - multiple availability zones: the current standard specification is the distribution of three availability zones, and the master and slave nodes are not in the same availability zone. You should pay attention to configuring the availability zone corresponding to the new node, and the rule that the number of nodes in any two availability zones is greater than the third availability zone must be met after the addition.
+         */
+        zone: string;
     }
 
     export interface InstanceStandbyInstanceList {
@@ -38636,6 +39783,7 @@ export namespace Mongodb {
          */
         standbyInstanceRegion: string;
     }
+
 }
 
 export namespace Monitor {
@@ -39209,6 +40357,10 @@ export namespace Monitor {
          * The business namespace is different for each cloud product. To obtain the business namespace, please go to the product monitoring indicator documents, such as the namespace of the cloud server, which can be found in [Cloud Server Monitoring Indicators](https://cloud.tencent.com/document/product/248/6843 ).
          */
         namespace: string;
+        /**
+         * Cycle.
+         */
+        period: number[];
         /**
          * Indicator method within the statistical cycle.
          */
@@ -41291,28 +42443,61 @@ export namespace Monitor {
     }
 
     export interface GetStatisticDataCondition {
+        /**
+         * Dimension.
+         */
         key: string;
+        /**
+         * Operator. Valid values: eq (equal to), ne (not equal to), in.
+         */
         operator: string;
+        /**
+         * Dimension value. If Operator is eq or ne, only the first element will be used.
+         */
         values: string[];
     }
 
     export interface GetStatisticDataData {
+        /**
+         * Metric name.
+         */
         metricName: string;
+        /**
+         * Monitoring data point.
+         */
         points: outputs.Monitor.GetStatisticDataDataPoint[];
     }
 
     export interface GetStatisticDataDataPoint {
+        /**
+         * Combination of instance object dimensions.
+         */
         dimensions: outputs.Monitor.GetStatisticDataDataPointDimension[];
+        /**
+         * Data point list.
+         */
         values: outputs.Monitor.GetStatisticDataDataPointValue[];
     }
 
     export interface GetStatisticDataDataPointDimension {
+        /**
+         * Instance dimension name.
+         */
         name: string;
+        /**
+         * Instance dimension value.
+         */
         value: string;
     }
 
     export interface GetStatisticDataDataPointValue {
+        /**
+         * Time point when this monitoring data point is generated.
+         */
         timestamp: number;
+        /**
+         * Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.
+         */
         value: number;
     }
 
@@ -41363,6 +42548,9 @@ export namespace Monitor {
          * Represents a collection of dimensions of an object instance, json format.eg:'{"unInstanceId":"ins-ot3cq4bi"}'.
          */
         dimensionsJson: string;
+        /**
+         * Object unique ID.
+         */
         uniqueId: string;
     }
 
@@ -41616,6 +42804,9 @@ export namespace Monitor {
          * An id identify the cluster, like `cls-xxxxxx`.
          */
         clusterId: string;
+        /**
+         * the name of the cluster.
+         */
         clusterName: string;
         /**
          * Type of cluster.
@@ -41645,6 +42836,9 @@ export namespace Monitor {
          * Limitation of region.
          */
         region: string;
+        /**
+         * agent state, `normal`, `abnormal`.
+         */
         status: string;
     }
 
@@ -42958,6 +44152,10 @@ export namespace Mps {
          * The bucket to save the output file.Note: This field may return null, indicating that no valid values can be obtained.
          */
         outputStorages: outputs.Mps.GetSchedulesScheduleInfoSetOutputStorage[];
+        /**
+         * The resource ID. If there is no associated resource ID, fill it with the account's main resource ID.
+         */
+        resourceId: string;
         /**
          * The scheme ID.
          */
@@ -45450,11 +46648,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -45583,11 +46781,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -45635,11 +46833,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -45761,11 +46959,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -45836,11 +47034,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -45923,11 +47121,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -46010,11 +47208,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -46136,11 +47334,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -46238,11 +47436,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -46364,11 +47562,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -46490,11 +47688,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -46554,11 +47752,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -46656,11 +47854,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -46767,11 +47965,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -46831,11 +48029,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -47164,11 +48362,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -47216,11 +48414,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID required to read from/write to the SQS queue.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key required to read from/write to the SQS queue.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -47411,7 +48609,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskAddOnSubtitleSubtitleS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -47423,11 +48621,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -47467,7 +48665,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskOutputStorageS3OutputStorage {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -47475,11 +48673,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -47589,7 +48787,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaAdaptiveDynamicStreamingTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -47601,11 +48799,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -47693,7 +48891,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaAnimatedGraphicTaskOutputStorageS3OutputStorage {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -47701,11 +48899,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -47780,7 +48978,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaImageSpriteTaskOutputStorageS3OutputStorage {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -47788,11 +48986,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -47867,7 +49065,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaSampleSnapshotTaskOutputStorageS3OutputStorage {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -47875,11 +49073,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -47989,7 +49187,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -48001,11 +49199,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -48091,7 +49289,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaSnapshotByTimeOffsetTaskOutputStorageS3OutputStorage {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -48099,11 +49297,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -48213,7 +49411,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaSnapshotByTimeOffsetTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -48225,11 +49423,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -48339,7 +49537,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaTranscodeTaskHeadTailParameterHeadSetS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -48351,11 +49549,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -48403,7 +49601,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaTranscodeTaskHeadTailParameterTailSetS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -48415,11 +49613,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -48509,7 +49707,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaTranscodeTaskOutputStorageS3OutputStorage {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -48517,11 +49715,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -48616,7 +49814,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleSubtitleS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -48628,11 +49826,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -48680,7 +49878,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddonAudioStreamS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -48692,11 +49890,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -49013,7 +50211,7 @@ export namespace Mps {
 
     export interface ScheduleActivityActivityParaTranscodeTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -49025,11 +50223,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -49069,7 +50267,7 @@ export namespace Mps {
 
     export interface ScheduleOutputStorageS3OutputStorage {
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -49077,11 +50275,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -49157,19 +50355,19 @@ export namespace Mps {
 
     export interface ScheduleTriggerAwsS3FileUploadTrigger {
         /**
-         * The SQS queue of the AWS S3 bucket.Note: The queue must be in the same region as the bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The AWS SQS queue. This parameter is required if `NotifyType` is `AWS-SQS`.Note: This field may return null, indicating that no valid values can be obtained.
          */
         awsSqs?: outputs.Mps.ScheduleTriggerAwsS3FileUploadTriggerAwsSqs;
         /**
-         * The bucket directory bound. It must be an absolute path that starts and ends with `/`, such as `/movie/201907/`. If you do not specify this, the root directory will be bound.	.
+         * Input path directory bound to a workflow, such as `/movie/201907/`. If this parameter is left empty, the `/` root directory will be used.
          */
         dir?: string;
         /**
-         * The file formats that will trigger the scheme, such as [mp4, flv, mov]. If you do not specify this, the upload of files in any format will trigger the scheme.	.
+         * Format list of files that can trigger a workflow, such as [mp4, flv, mov]. If this parameter is left empty, files in all formats can trigger the workflow.
          */
         formats?: string[];
         /**
-         * The AWS S3 bucket bound to the scheme.
+         * The AWS S3 bucket.
          */
         s3Bucket: string;
         /**
@@ -49177,11 +50375,11 @@ export namespace Mps {
          */
         s3Region: string;
         /**
-         * The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key ID required to access the AWS S3 object.
          */
         s3SecretId?: string;
         /**
-         * The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+         * The key required to access the AWS S3 object.
          */
         s3SecretKey?: string;
     }
@@ -51549,15 +52747,36 @@ export namespace Mysql {
     }
 
     export interface GetProxyCustomCustomConf {
+        /**
+         * number of cores.
+         */
         cpu: number;
+        /**
+         * equipment.
+         */
         device: string;
+        /**
+         * Equipment type.
+         */
         deviceType: string;
+        /**
+         * Memory.
+         */
         memory: number;
+        /**
+         * type.
+         */
         type: string;
     }
 
     export interface GetProxyCustomWeightRule {
+        /**
+         * division ceiling.
+         */
         lessThan: number;
+        /**
+         * weight limit.
+         */
         weight: number;
     }
 
@@ -52007,6 +53226,9 @@ export namespace Nat {
          * Instance ID.
          */
         instanceId?: string;
+        /**
+         * Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
+         */
         instancePrivateIpAddr?: string;
         /**
          * NAT gateway ID.
@@ -52016,11 +53238,17 @@ export namespace Nat {
          * Elastic IP address pool.
          */
         publicIpAddrs: string[];
+        /**
+         * Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+         */
         resourceType: string;
         /**
          * SNAT rule ID.
          */
         snatId: string;
+        /**
+         * The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
+         */
         subnetCidrBlock?: string;
         /**
          * Subnet instance ID.
@@ -53352,6 +54580,21 @@ export namespace Organization {
         totalCost: number;
     }
 
+    export interface GetOrgShareAreaItem {
+        /**
+         * Region identifier.
+         */
+        area: string;
+        /**
+         * Region ID.
+         */
+        areaId: number;
+        /**
+         * Region name.
+         */
+        name: string;
+    }
+
     export interface InstanceOrgPermission {
         /**
          * Permissions ID.
@@ -53392,6 +54635,14 @@ export namespace Organization {
          */
         name: string;
     }
+
+    export interface OrgShareUnitMemberMember {
+        /**
+         * Member uin.
+         */
+        shareMemberUin: number;
+    }
+
 }
 
 export namespace Placement {
@@ -54439,9 +55690,159 @@ export namespace Postgresql {
          */
         name: string;
     }
+
+    export interface ReadonlyGroupNetInfoList {
+        /**
+         * Ip address of the net info.
+         */
+        ip: string;
+        /**
+         * Port of the net info.
+         */
+        port: number;
+    }
+
 }
 
 export namespace PrivateDns {
+    export interface GetPrivateZoneListFilter {
+        /**
+         * name.
+         */
+        name: string;
+        /**
+         * values.
+         */
+        values: string[];
+    }
+
+    export interface GetPrivateZoneListPrivateZoneSet {
+        /**
+         * VPC list of bound associated accounts.
+         */
+        accountVpcSets: outputs.PrivateDns.GetPrivateZoneListPrivateZoneSetAccountVpcSet[];
+        /**
+         * CNAME acceleration status: enabled: ENABLED, off, DISABLED.
+         */
+        cnameSpeedupStatus: string;
+        /**
+         * Create time.
+         */
+        createdOn: string;
+        /**
+         * List of deleted VPCs.
+         */
+        deletedVpcSets: outputs.PrivateDns.GetPrivateZoneListPrivateZoneSetDeletedVpcSet[];
+        /**
+         * Domain name recursive resolution status: enabled: ENABLED, disabled, DISABLED.
+         */
+        dnsForwardStatus: string;
+        /**
+         * Domain.
+         */
+        domain: string;
+        /**
+         * End point name.
+         */
+        endPointName: string;
+        /**
+         * Forwarded address.
+         */
+        forwardAddress: string;
+        /**
+         * Forwarding rule name.
+         */
+        forwardRuleName: string;
+        /**
+         * Forwarding rule type: from cloud to cloud, DOWN; From cloud to cloud, UP, currently only supports DOWN.
+         */
+        forwardRuleType: string;
+        /**
+         * Custom TLD.
+         */
+        isCustomTld: boolean;
+        /**
+         * Owner Uin.
+         */
+        ownerUin: number;
+        /**
+         * Record count.
+         */
+        recordCount: number;
+        /**
+         * Remark.
+         */
+        remark: string;
+        /**
+         * Private domain bound VPC status, not associated with vpc: SUSPEND, associated with VPC: ENABLED, associated with VPC failed: FAILED.
+         */
+        status: string;
+        /**
+         * tags.
+         */
+        tags: outputs.PrivateDns.GetPrivateZoneListPrivateZoneSetTag[];
+        /**
+         * Update time.
+         */
+        updatedOn: string;
+        /**
+         * Vpc list.
+         */
+        vpcSets: outputs.PrivateDns.GetPrivateZoneListPrivateZoneSetVpcSet[];
+        /**
+         * PrivateZone ID.
+         */
+        zoneId: string;
+    }
+
+    export interface GetPrivateZoneListPrivateZoneSetAccountVpcSet {
+        /**
+         * Region.
+         */
+        region: string;
+        /**
+         * uin.
+         */
+        uin: string;
+        /**
+         * Vpc Id.
+         */
+        uniqVpcId: string;
+    }
+
+    export interface GetPrivateZoneListPrivateZoneSetDeletedVpcSet {
+        /**
+         * Region.
+         */
+        region: string;
+        /**
+         * Vpc Id.
+         */
+        uniqVpcId: string;
+    }
+
+    export interface GetPrivateZoneListPrivateZoneSetTag {
+        /**
+         * tag key.
+         */
+        tagKey: string;
+        /**
+         * tag value.
+         */
+        tagValue: string;
+    }
+
+    export interface GetPrivateZoneListPrivateZoneSetVpcSet {
+        /**
+         * Region.
+         */
+        region: string;
+        /**
+         * Vpc Id.
+         */
+        uniqVpcId: string;
+    }
+
     export interface GetRecordsFilter {
         /**
          * Parameter name.
@@ -55722,140 +57123,314 @@ export namespace Pts {
     }
 
     export interface JobDataset {
+        /**
+         * File ID.
+         */
         fileId?: string;
+        /**
+         * Header data row.
+         */
         headLines?: string[];
+        /**
+         * Parameter name array.
+         */
         headerColumns?: string[];
+        /**
+         * Whether the first line is the parameter name.
+         */
         headerInFile: boolean;
+        /**
+         * Number of file lines.
+         */
         lineCount?: number;
+        /**
+         * The file name where the test dataset is located.
+         */
         name: string;
+        /**
+         * Number of file bytes.
+         */
         size?: number;
+        /**
+         * Test whether the dataset is fragmented.
+         */
         split: boolean;
+        /**
+         * Trailing data row.
+         */
         tailLines?: string[];
         /**
          * Scene Type.
          */
         type?: string;
+        /**
+         * Update time.
+         */
         updatedAt?: string;
     }
 
     export interface JobDomainNameConfig {
+        /**
+         * DNS configuration.
+         */
         dnsConfig?: outputs.Pts.JobDomainNameConfigDnsConfig;
+        /**
+         * Domain name binding configuration.
+         */
         hostAliases?: outputs.Pts.JobDomainNameConfigHostAlias[];
     }
 
     export interface JobDomainNameConfigDnsConfig {
+        /**
+         * DNS IP List.
+         */
         nameservers?: string[];
     }
 
     export interface JobDomainNameConfigHostAlias {
+        /**
+         * List of domain names to be bound.
+         */
         hostNames?: string[];
+        /**
+         * The IP address to be bound.
+         */
         ip?: string;
     }
 
     export interface JobLoad {
+        /**
+         * Pressure distribution.
+         */
         geoRegionsLoadDistributions?: outputs.Pts.JobLoadGeoRegionsLoadDistribution[];
+        /**
+         * Pressure allocation.
+         */
         loadSpec?: outputs.Pts.JobLoadLoadSpec;
+        /**
+         * Source of stress.
+         */
         vpcLoadDistribution?: outputs.Pts.JobLoadVpcLoadDistribution;
     }
 
     export interface JobLoadGeoRegionsLoadDistribution {
+        /**
+         * Percentage.
+         */
         percentage?: number;
+        /**
+         * Region.
+         */
         region?: string;
+        /**
+         * Regional ID.
+         */
         regionId: number;
     }
 
     export interface JobLoadLoadSpec {
+        /**
+         * Configuration of concurrent pressure mode.
+         */
         concurrency?: outputs.Pts.JobLoadLoadSpecConcurrency;
         /**
          * Average number of requests per second.
          */
         requestsPerSecond?: outputs.Pts.JobLoadLoadSpecRequestsPerSecond;
+        /**
+         * Built-in stress mode in script.
+         */
         scriptOrigin?: outputs.Pts.JobLoadLoadSpecScriptOrigin;
     }
 
     export interface JobLoadLoadSpecConcurrency {
+        /**
+         * Wait time for graceful termination of the task.
+         */
         gracefulStopSeconds?: number;
+        /**
+         * Number of runs.
+         */
         iterationCount?: number;
         /**
          * Maximum requests per second.
          */
         maxRequestsPerSecond?: number;
+        /**
+         * Multi-phase configuration array.
+         */
         stages?: outputs.Pts.JobLoadLoadSpecConcurrencyStage[];
     }
 
     export interface JobLoadLoadSpecConcurrencyStage {
+        /**
+         * Pressure time.
+         */
         durationSeconds?: number;
+        /**
+         * Number of virtual users.
+         */
         targetVirtualUsers?: number;
     }
 
     export interface JobLoadLoadSpecRequestsPerSecond {
+        /**
+         * Pressure time.
+         */
         durationSeconds?: number;
+        /**
+         * Elegant shutdown waiting time.
+         */
         gracefulStopSeconds?: number;
         /**
          * Maximum requests per second.
          */
         maxRequestsPerSecond?: number;
+        /**
+         * Number of resources.
+         */
         resources?: number;
+        /**
+         * Initial RPS.
+         */
         startRequestsPerSecond?: number;
+        /**
+         * Target RPS, invalid input parameter.
+         */
         targetRequestsPerSecond?: number;
     }
 
     export interface JobLoadLoadSpecScriptOrigin {
+        /**
+         * Pressure testing time.
+         */
         durationSeconds: number;
+        /**
+         * Number of machines.
+         */
         machineNumber: number;
+        /**
+         * Machine specification.
+         */
         machineSpecification: string;
     }
 
     export interface JobLoadVpcLoadDistribution {
+        /**
+         * Region.
+         */
         region?: string;
+        /**
+         * Regional ID.
+         */
         regionId: number;
+        /**
+         * Subnet ID list.
+         */
         subnetIds?: string[];
+        /**
+         * VPC ID.
+         */
         vpcId?: string;
     }
 
     export interface JobPlugin {
+        /**
+         * File id.
+         */
         fileId?: string;
+        /**
+         * File name.
+         */
         name?: string;
+        /**
+         * File size.
+         */
         size?: number;
         /**
          * Scene Type.
          */
         type?: string;
+        /**
+         * Update time.
+         */
         updatedAt?: string;
     }
 
     export interface JobProtocol {
+        /**
+         * File ID.
+         */
         fileId?: string;
+        /**
+         * Protocol name.
+         */
         name?: string;
+        /**
+         * File name.
+         */
         size?: number;
         /**
          * Scene Type.
          */
         type?: string;
+        /**
+         * Update time.
+         */
         updatedAt?: string;
     }
 
     export interface JobRequestFile {
+        /**
+         * File id.
+         */
         fileId?: string;
+        /**
+         * File name.
+         */
         name?: string;
+        /**
+         * File size.
+         */
         size?: number;
         /**
          * Scene Type.
          */
         type?: string;
+        /**
+         * Update time.
+         */
         updatedAt?: string;
     }
 
     export interface JobTestScript {
+        /**
+         * Base64 encoded file content.
+         */
         encodedContent?: string;
+        /**
+         * Base64 encoded har structure.
+         */
         encodedHttpArchive?: string;
+        /**
+         * Script weight, range 1-100.
+         */
         loadWeight?: number;
+        /**
+         * File name.
+         */
         name?: string;
+        /**
+         * File size.
+         */
         size?: number;
         /**
          * Scene Type.
          */
         type?: string;
+        /**
+         * Update time.
+         */
         updatedAt?: string;
     }
 
@@ -56641,7 +58216,7 @@ export namespace Redis {
         /**
          * (**Deprecated**) It has been deprecated from version 1.26.0. Use `shardMemories` instead. The memory volume of an available instance(in MB).
          *
-         * @deprecated It has been deprecated from version 1.26.0. Use `shard_memories` instead.
+         * @deprecated It has been deprecated from version 1.26.0. Use `shardMemories` instead.
          */
         memSizes: number[];
         /**
@@ -56944,12 +58519,33 @@ export namespace Rum {
     }
 
     export interface GetTawAreaAreaSet {
+        /**
+         * Region abbreviation.
+         */
         areaAbbr: string;
+        /**
+         * Area id.
+         */
         areaId: number;
+        /**
+         * Area key.
+         */
         areaKey: string;
+        /**
+         * Area name.
+         */
         areaName: string;
+        /**
+         * Area code.
+         */
         areaRegionCode: string;
+        /**
+         * Area code id.
+         */
         areaRegionId: string;
+        /**
+         * Area status `1`:&amp;#39;valid&amp;#39;; `2`:&amp;#39;invalid&amp;#39;.
+         */
         areaStatus: number;
     }
 
@@ -57095,6 +58691,9 @@ export namespace Scf {
          * File system instance ID.
          */
         cfsId: string;
+        /**
+         * (Readonly) File system ip address.
+         */
         ipAddress: string;
         /**
          * Local mount directory.
@@ -57104,7 +58703,13 @@ export namespace Scf {
          * File system mount instance ID.
          */
         mountInsId: string;
+        /**
+         * (Readonly) File system subnet ID.
+         */
         mountSubnetId: string;
+        /**
+         * (Readonly) File system virtual private network ID.
+         */
         mountVpcId: string;
         /**
          * Remote mount directory.
@@ -57174,6 +58779,9 @@ export namespace Scf {
     }
 
     export interface FunctionIntranetConfig {
+        /**
+         * If fixed intranet IP is enabled, this field returns the IP list used.
+         */
         ipAddresses: string[];
         /**
          * Whether to enable fixed intranet IP, ENABLE is enabled, DISABLE is disabled.
@@ -58028,6 +59636,7 @@ export namespace Scf {
          */
         triggerProvisionedConcurrencyNum: number;
     }
+
 }
 
 export namespace Security {
@@ -58095,6 +59704,9 @@ export namespace Security {
          * An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
          */
         ipv6CidrBlock?: string;
+        /**
+         * The security group rule index number, whose value dynamically changes with changes in security group rules.
+         */
         policyIndex: number;
         /**
          * Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
@@ -58143,6 +59755,9 @@ export namespace Security {
          * An IPV6 address network or CIDR segment, and conflict with `sourceSecurityId` and `address_template_*`.
          */
         ipv6CidrBlock?: string;
+        /**
+         * The security group rule index number, whose value dynamically changes with changes in security group rules.
+         */
         policyIndex: number;
         /**
          * Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.
@@ -58553,6 +60168,7 @@ export namespace Ses {
          */
         text?: string;
     }
+
 }
 
 export namespace Sqlserver {
@@ -58818,10 +60434,25 @@ export namespace Sqlserver {
     }
 
     export interface GetDescHaLogSwitchLog {
+        /**
+         * Switch end time Note: This field may return null, indicating that no valid value can be obtained.
+         */
         endTime: string;
+        /**
+         * Switch event ID Note: This field may return null, indicating that no valid value can be obtained.
+         */
         eventId: string;
+        /**
+         * Machine failure causes automatic switching Note: This field may return null, indicating that no valid value can be obtained.
+         */
         reason: string;
+        /**
+         * Switch start time Note: This field may return null, indicating that no valid value can be obtained.
+         */
         startTime: string;
+        /**
+         * Switching mode 0-system automatic switching, 1-manual switching Note: This field may return null, indicating that no valid value can be obtained.
+         */
         switchType: number;
     }
 
@@ -59443,6 +61074,7 @@ export namespace Sqlserver {
          */
         threshold: number;
     }
+
 }
 
 export namespace Ssl {
@@ -60753,8 +62385,17 @@ export namespace Ssl {
     }
 
     export interface PayCertificateDvAuth {
+        /**
+         * DV authentication key.
+         */
         dvAuthKey: string;
+        /**
+         * DV authentication value.
+         */
         dvAuthValue: string;
+        /**
+         * DV authentication type.
+         */
         dvAuthVerifyType: string;
     }
 
@@ -62656,6 +64297,9 @@ export namespace Tcr {
          * ID of the resource.
          */
         id: number;
+        /**
+         * namespace name.
+         */
         nsName: string;
         /**
          * repository decoration type:repoMatches or repoExcludes.
@@ -62685,6 +64329,10 @@ export namespace Tcr {
          */
         regionId?: number;
         /**
+         * Replication region name.
+         */
+        regionName?: string;
+        /**
          * Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.
          */
         synTag?: boolean;
@@ -62699,7 +64347,13 @@ export namespace Tcr {
          * Remarks of policy.
          */
         description?: string;
+        /**
+         * Index of policy.
+         */
         index: number;
+        /**
+         * Version of policy.
+         */
         version: string;
     }
 
@@ -63304,39 +64958,114 @@ export namespace Tdmq {
     }
 
     export interface GetRabbitmqNodeListFilter {
+        /**
+         * The name of the filter parameter.
+         */
         name?: string;
+        /**
+         * value.
+         */
         values?: string[];
     }
 
     export interface GetRabbitmqNodeListNodeList {
+        /**
+         * CPU usageNote: This field may return null, indicating that no valid value can be obtained.
+         */
         cpuUsage: string;
+        /**
+         * disk usageNote: This field may return null, indicating that no valid value can be obtained.
+         */
         diskUsage: string;
+        /**
+         * Memory usage, in MBNote: This field may return null, indicating that no valid value can be obtained.
+         */
         memory: number;
+        /**
+         * node nameNote: This field may return null, indicating that no valid value can be obtained.
+         */
         nodeName: string;
+        /**
+         * node statusNote: This field may return null, indicating that no valid value can be obtained.
+         */
         nodeStatus: string;
+        /**
+         * Number of Erlang processes for RabbitmqNote: This field may return null, indicating that no valid value can be obtained.
+         */
         processNumber: number;
     }
 
     export interface GetRabbitmqVipInstanceFilter {
+        /**
+         * The name of the filter parameter.
+         */
         name?: string;
+        /**
+         * value.
+         */
         values?: string[];
     }
 
     export interface GetRabbitmqVipInstanceInstance {
+        /**
+         * Automatic renewal mark, 0 indicates the default state (the user has not set it, that is, the initial state is manual renewal), 1 indicates automatic renewal, 2 indicates that the automatic renewal is not specified (user setting).
+         */
         autoRenewFlag: number;
+        /**
+         * Instance configuration specification name.
+         */
         configDisplay: string;
+        /**
+         * The cluster is abnormal.Note: This field may return null, indicating that no valid value can be obtained.
+         */
         exceptionInformation: string;
+        /**
+         * Instance expiration time, in milliseconds.
+         */
         expireTime: number;
+        /**
+         * instance id.
+         */
         instanceId: string;
+        /**
+         * instance name.
+         */
         instanceName: string;
+        /**
+         * instance versionNote: This field may return null, indicating that no valid value can be obtained.
+         */
         instanceVersion: string;
+        /**
+         * Peak bandwidth, in Mbps.
+         */
         maxBandWidth: number;
+        /**
+         * Storage capacity, in GB.
+         */
         maxStorage: number;
+        /**
+         * Peak TPS.
+         */
         maxTps: number;
+        /**
+         * Number of nodes.
+         */
         nodeCount: number;
+        /**
+         * 0-postpaid, 1-prepaid.
+         */
         payMode: number;
+        /**
+         * RemarksNote: This field may return null, indicating that no valid value can be obtained.
+         */
         remark: string;
+        /**
+         * Instance Configuration ID.
+         */
         specName: string;
+        /**
+         * Instance status, 0 means creating, 1 means normal, 2 means isolating, 3 means destroyed, 4 - abnormal, 5 - delivery failed.
+         */
         status: number;
     }
 
@@ -63600,51 +65329,153 @@ export namespace Tdmq {
     }
 
     export interface GetVipInstanceClusterInfo {
+        /**
+         * Cluster ID.
+         */
         clusterId: string;
+        /**
+         * Cluster Name.
+         */
         clusterName: string;
+        /**
+         * Creation time, in milliseconds.
+         */
         createTime: number;
+        /**
+         * HTTP protocol public network access addressNote: This field may return null, indicating that no valid value can be obtained.
+         */
         httpPublicEndpoint: string;
+        /**
+         * HTTP protocol VPC access addressNote: This field may return null, indicating that no valid value can be obtained.
+         */
         httpVpcEndpoint: string;
+        /**
+         * Whether it is a dedicated instanceNote: This field may return null, indicating that no valid value can be obtained.
+         */
         isVip: boolean;
+        /**
+         * Overdue suspension time, in millisecondsNote: This field may return null, indicating that no valid value can be obtained.
+         */
         isolateTime: number;
+        /**
+         * Public network access address.
+         */
         publicEndPoint: string;
+        /**
+         * Region.
+         */
         region: string;
+        /**
+         * Cluster description informationNote: This field may return null, indicating that no valid value can be obtained.
+         */
         remark: string;
+        /**
+         * Rocketmq cluster identificationNote: This field may return null, indicating that no valid value can be obtained.
+         */
         rocketMqFlag: boolean;
+        /**
+         * Billing status, 1 means normal, 2 means stopped, 3 means destroyedNote: This field may return null, indicating that no valid value can be obtained.
+         */
         status: number;
+        /**
+         * Whether namespace access points are supportedNote: This field may return null, indicating that no valid value can be obtained.
+         */
         supportNamespaceEndpoint: boolean;
+        /**
+         * VPC access address.
+         */
         vpcEndPoint: string;
+        /**
+         * VPC informationNote: This field may return null, indicating that no valid value can be obtained.
+         */
         vpcs: outputs.Tdmq.GetVipInstanceClusterInfoVpc[];
     }
 
     export interface GetVipInstanceClusterInfoVpc {
+        /**
+         * Subnet Id.
+         */
         subnetId: string;
+        /**
+         * VPC ID.
+         */
         vpcId: string;
     }
 
     export interface GetVipInstanceInstanceConfig {
+        /**
+         * Cluster type.
+         */
         configDisplay: string;
+        /**
+         * Maximum number of groups.
+         */
         maxGroupNum: number;
+        /**
+         * Maximum number of namespaces.
+         */
         maxNamespaceNum: number;
+        /**
+         * Maximum number of queues per topicNote: This field may return null, indicating that no valid value can be obtained.
+         */
         maxQueuesPerTopic: number;
+        /**
+         * Maximum number of topics.
+         */
         maxTopicNum: number;
+        /**
+         * Single namespace TPS upper limit.
+         */
         maxTpsPerNamespace: number;
+        /**
+         * Number of cluster nodes.
+         */
         nodeCount: number;
+        /**
+         * Node distribution.
+         */
         nodeDistributions: outputs.Tdmq.GetVipInstanceInstanceConfigNodeDistribution[];
+        /**
+         * Topic distribution.
+         */
         topicDistributions: outputs.Tdmq.GetVipInstanceInstanceConfigTopicDistribution[];
+        /**
+         * Number of used groups.
+         */
         usedGroupNum: number;
+        /**
+         * Number of used namespaces.
+         */
         usedNamespaceNum: number;
+        /**
+         * The number of topics used.
+         */
         usedTopicNum: number;
     }
 
     export interface GetVipInstanceInstanceConfigNodeDistribution {
+        /**
+         * Number of nodes.
+         */
         nodeCount: number;
+        /**
+         * Availability zone id.
+         */
         zoneId: string;
+        /**
+         * Availability zone.
+         */
         zoneName: string;
     }
 
     export interface GetVipInstanceInstanceConfigTopicDistribution {
+        /**
+         * Number of topics.
+         */
         count: number;
+        /**
+         * Topic type.
+         */
         topicType: string;
     }
 
@@ -63681,6 +65512,21 @@ export namespace Tdmq {
         vpcId: string;
     }
 
+    export interface RocketmqVipInstanceIpRule {
+        /**
+         * Whether to allow or deny.
+         */
+        allow: boolean;
+        /**
+         * IP address block information.
+         */
+        ipRule: string;
+        /**
+         * Remark.
+         */
+        remark: string;
+    }
+
     export interface RocketmqVipInstanceVpcInfo {
         /**
          * Subnet ID.
@@ -63691,6 +65537,7 @@ export namespace Tdmq {
          */
         vpcId: string;
     }
+
 }
 
 export namespace Tem {
@@ -63706,6 +65553,9 @@ export namespace Tem {
     }
 
     export interface ApplicationServiceService {
+        /**
+         * ip address of application service.
+         */
         ip: string;
         /**
          * port mapping item list.
@@ -63753,6 +65603,9 @@ export namespace Tem {
          * related CLB ID, support binding existing clb, does not support modification.
          */
         clbId: string;
+        /**
+         * creation time.
+         */
         createTime: string;
         /**
          * environment ID.
@@ -63778,6 +65631,9 @@ export namespace Tem {
          * ingress TLS configurations.
          */
         tls?: outputs.Tem.GatewayIngressTl[];
+        /**
+         * gateway vip.
+         */
         vip: string;
     }
 
@@ -64147,6 +66003,9 @@ export namespace Teo {
     }
 
     export interface ApplicationProxyIpv6 {
+        /**
+         * - `on`: Enable.- `off`: Disable.
+         */
         switch: string;
     }
 
@@ -64310,7 +66169,7 @@ export namespace Teo {
          */
         flux: number;
         /**
-         * Billing cycle. Valid values:- `y`: Billed by the year.- `m`: Billed by the month.- `h`: Billed by the hour.- `M`: Billed by the minute.- `s`: Billed by the second.
+         * Billing cycle. Valid values:
          */
         frequency: string;
         /**
@@ -64331,48 +66190,77 @@ export namespace Teo {
         siteNumber: number;
     }
 
-    export interface OriginGroupOriginRecord {
+    export interface L4ProxyDdosProtectionConfig {
         /**
-         * Indicating origin sites area when `Type` field is `area`. An empty List indicate the default area. Valid value:- Asia, Americas, Europe, Africa or Oceania.
+         * Exclusive DDoS protection specifications in the Chinese mainland. For details, see [Dedicated DDoS Mitigation Fee (Pay-as-You-Go)] (https://intl.cloud.tencent.com/document/product/1552/94162?from_cn_redirect=1). `PLATFORM`: Default protection of the platform, i.e., Exclusive DDoS protection is not enabled; `BASE30_MAX300`: Exclusive DDoS protection enabled, providing a baseline protection bandwidth of 30 Gbps and an elastic protection bandwidth of up to 300 Gbps; `BASE60_MAX600`: Exclusive DDoS protection enabled, providing a baseline protection bandwidth of 60 Gbps and an elastic protection bandwidth of up to 600 Gbps. If no parameters are filled, the default value PLATFORM is used.
          */
-        areas?: string[];
+        levelMainland?: string;
         /**
-         * Port of the origin site. Valid value range: 1-65535.
+         * Exclusive DDoS protection specifications in the worldwide region (excluding the Chinese mainland). `PLATFORM`: Default protection of the platform, i.e., Exclusive DDoS protection is not enabled; `ANYCAST300`: Exclusive DDoS protection enabled, offering a total maximum protection bandwidth of 300 Gbps; `ANYCAST_ALLIN`: Exclusive DDoS protection enabled, utilizing all available protection resources for protection. When no parameters are filled, the default value PLATFORM is used.
          */
-        port: number;
+        levelOverseas?: string;
         /**
-         * Whether origin site is using private authentication. Only valid when `OriginType` is `thirdParty`.
+         * Configuration of elastic protection bandwidth for exclusive DDoS protection in the Chinese mainland.Valid only when exclusive DDoS protection in the Chinese mainland is enabled (refer to the LevelMainland parameter configuration), and the value has the following limitations: When exclusive DDoS protection is enabled in the Chinese mainland and the 30 Gbps baseline protection bandwidth is used (the LevelMainland parameter value is BASE30_MAX300): the value range is 30 to 300 in Gbps; When exclusive DDoS protection is enabled in the Chinese mainland and the 60 Gbps baseline protection bandwidth is used (the LevelMainland parameter value is BASE60_MAX600): the value range is 60 to 600 in Gbps; When the default protection of the platform is used (the LevelMainland parameter value is PLATFORM): configuration is not supported, and the value of this parameter is invalid.
+         */
+        maxBandwidthMainland?: number;
+    }
+
+    export interface OriginGroupRecord {
+        /**
+         * Whether to use private authentication, it takes effect when the origin site type RecordType=COS/AWS_S3, the values are:
          */
         private?: boolean;
         /**
          * Parameters for private authentication. Only valid when `Private` is `true`.
          */
-        privateParameters?: outputs.Teo.OriginGroupOriginRecordPrivateParameter[];
+        privateParameters?: outputs.Teo.OriginGroupRecordPrivateParameter[];
         /**
-         * Record value, which could be an IPv4/IPv6 address or a domain.
+         * Origin site record value, does not include port information, can be: IPv4, IPv6, domain name format.
          */
         record: string;
+        /**
+         * Origin record ID.
+         */
         recordId: string;
         /**
-         * Indicating origin sites weight when `Type` field is `weight`. Valid value range: 1-100. Sum of all weights should be 100.
+         * Origin site type, the values are:
+         */
+        type?: string;
+        /**
+         * The weight of the origin site, the value is 0-100. If it is not filled in, it means that the weight will not be set and the system will schedule it freely. If it is filled in with 0, it means that the weight is 0 and the traffic will not be scheduled to this origin site.
          */
         weight?: number;
     }
 
-    export interface OriginGroupOriginRecordPrivateParameter {
+    export interface OriginGroupRecordPrivateParameter {
         /**
-         * Parameter Name. Valid values: `AccessKeyId`: Access Key ID; `SecretAccessKey`: Secret Access Key.
+         * Private authentication parameter name, the values are:
          */
         name: string;
         /**
-         * Parameter value.
+         * Private authentication parameter value.
          */
         value: string;
     }
 
+    export interface OriginGroupReference {
+        /**
+         * The instance ID of the reference type.
+         */
+        instanceId: string;
+        /**
+         * Instance name of the application type.
+         */
+        instanceName: string;
+        /**
+         * Reference service type, the values are:
+         */
+        instanceType: string;
+    }
+
     export interface RuleEngineRule {
         /**
-         * Actions list of the rule. See details in data source `ruleEngineSetting`.
+         * Feature to be executed.
          */
         actions: outputs.Teo.RuleEngineRuleAction[];
         /**
@@ -64380,144 +66268,156 @@ export namespace Teo {
          */
         ors: outputs.Teo.RuleEngineRuleOr[];
         /**
-         * Actions list of the rule. See details in data source `ruleEngineSetting`.
+         * The nested rule.
          */
         subRules?: outputs.Teo.RuleEngineRuleSubRule[];
     }
 
     export interface RuleEngineRuleAction {
         /**
-         * Define a code action.
+         * Feature operation with a status code. Features of this type include:
          */
         codeAction?: outputs.Teo.RuleEngineRuleActionCodeAction;
         /**
-         * Define a normal action.
+         * Common operation. Values:
          */
         normalAction?: outputs.Teo.RuleEngineRuleActionNormalAction;
         /**
-         * Define a rewrite action.
+         * Feature operation with a request/response header. Features of this type include:
          */
         rewriteAction?: outputs.Teo.RuleEngineRuleActionRewriteAction;
     }
 
     export interface RuleEngineRuleActionCodeAction {
         /**
-         * Action name.
+         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
          */
         action: string;
         /**
-         * Action parameters.
+         * Operation parameter.
          */
         parameters: outputs.Teo.RuleEngineRuleActionCodeActionParameter[];
     }
 
     export interface RuleEngineRuleActionCodeActionParameter {
         /**
-         * Target HEADER name.
+         * Parameter name.
          */
         name: string;
         /**
-         * HTTP status code to use.
+         * The status code.
          */
         statusCode: number;
         /**
-         * Parameter Value.
+         * Parameter value.
          */
         values: string[];
     }
 
     export interface RuleEngineRuleActionNormalAction {
         /**
-         * Action name.
+         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
          */
         action: string;
         /**
-         * Action parameters.
+         * Parameter.
          */
         parameters: outputs.Teo.RuleEngineRuleActionNormalActionParameter[];
     }
 
     export interface RuleEngineRuleActionNormalActionParameter {
         /**
-         * Target HEADER name.
+         * Parameter name.
          */
         name: string;
         /**
-         * Parameter Value.
+         * Parameter value.
          */
         values: string[];
     }
 
     export interface RuleEngineRuleActionRewriteAction {
         /**
-         * Action name.
+         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
          */
         action: string;
         /**
-         * Action parameters.
+         * Parameter.
          */
         parameters: outputs.Teo.RuleEngineRuleActionRewriteActionParameter[];
     }
 
     export interface RuleEngineRuleActionRewriteActionParameter {
         /**
-         * Action to take on the HEADER. Valid values: `add`, `del`, `set`.
+         * Feature parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the parameter name, which has three values:
+         * - add: Add the HTTP header.
+         * - set: Rewrite the HTTP header.
+         * - del: Delete the HTTP header.
          */
         action: string;
         /**
-         * Target HEADER name.
+         * Parameter name.
          */
         name: string;
         /**
-         * Parameter Value.
+         * Parameter value.
          */
         values: string[];
     }
 
     export interface RuleEngineRuleOr {
         /**
-         * AND Conditions list of the rule. Rule would be triggered if all conditions are true.
+         * Rule engine condition. This condition will be considered met if all items in the array are met.
          */
         ands: outputs.Teo.RuleEngineRuleOrAnd[];
     }
 
     export interface RuleEngineRuleOrAnd {
         /**
-         * Whether to ignore the case of the parameter value, the default value is false.
+         * Whether the parameter value is case insensitive. Default value: false.
          */
         ignoreCase?: boolean;
         /**
-         * The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+         * The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
          */
         name?: string;
         /**
-         * Condition operator. Valid values are `equal`, `notequal`.
+         * Operator. Valid values:
          */
         operator: string;
         /**
-         * Condition target. Valid values:- `host`: Host of the URL.- `filename`: filename of the URL.- `extension`: file extension of the URL.- `fullUrl`: full url.- `url`: path of the URL.
+         * The match type. Values:
          */
         target: string;
         /**
-         * Condition Value.
+         * The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+         * - When `Target=extension`, enter the file extension, such as "jpg" and "txt".
+         * - When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".
+         * - When `Target=all`, it indicates any site request.
+         * - When `Target=host`, enter the host under the current site, such as "www.maxx55.com".
+         * - When `Target=url`, enter the partial URL path under the current site, such as "/example".
+         * - When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".
+         * - When `Target=client_country`, enter the ISO-3166 country/region code.
+         * - When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".
+         * - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
          */
-        values: string[];
+        values?: string[];
     }
 
     export interface RuleEngineRuleSubRule {
         /**
-         * Rule items list.
+         * Nested rule settings.
          */
         rules: outputs.Teo.RuleEngineRuleSubRuleRule[];
         /**
-         * rule tag list.
+         * Tag of the rule.
          */
         tags?: string[];
     }
 
     export interface RuleEngineRuleSubRuleRule {
         /**
-         * Actions list of the rule. See details in data source `ruleEngineSetting`.
+         * Feature to be executed.
          */
         actions: outputs.Teo.RuleEngineRuleSubRuleRuleAction[];
         /**
@@ -64528,121 +66428,133 @@ export namespace Teo {
 
     export interface RuleEngineRuleSubRuleRuleAction {
         /**
-         * Define a code action.
+         * Feature operation with a status code. Features of this type include:
          */
         codeAction?: outputs.Teo.RuleEngineRuleSubRuleRuleActionCodeAction;
         /**
-         * Define a normal action.
+         * Common operation. Values:
          */
         normalAction?: outputs.Teo.RuleEngineRuleSubRuleRuleActionNormalAction;
         /**
-         * Define a rewrite action.
+         * Feature operation with a request/response header. Features of this type include:
          */
         rewriteAction?: outputs.Teo.RuleEngineRuleSubRuleRuleActionRewriteAction;
     }
 
     export interface RuleEngineRuleSubRuleRuleActionCodeAction {
         /**
-         * Action name.
+         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
          */
         action: string;
         /**
-         * Action parameters.
+         * Operation parameter.
          */
         parameters: outputs.Teo.RuleEngineRuleSubRuleRuleActionCodeActionParameter[];
     }
 
     export interface RuleEngineRuleSubRuleRuleActionCodeActionParameter {
         /**
-         * Target HEADER name.
+         * Parameter name.
          */
         name: string;
         /**
-         * HTTP status code to use.
+         * The status code.
          */
         statusCode: number;
         /**
-         * Parameter Value.
+         * Parameter value.
          */
         values: string[];
     }
 
     export interface RuleEngineRuleSubRuleRuleActionNormalAction {
         /**
-         * Action name.
+         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
          */
         action: string;
         /**
-         * Action parameters.
+         * Parameter.
          */
         parameters: outputs.Teo.RuleEngineRuleSubRuleRuleActionNormalActionParameter[];
     }
 
     export interface RuleEngineRuleSubRuleRuleActionNormalActionParameter {
         /**
-         * Target HEADER name.
+         * Parameter name.
          */
         name: string;
         /**
-         * Parameter Value.
+         * Parameter value.
          */
         values: string[];
     }
 
     export interface RuleEngineRuleSubRuleRuleActionRewriteAction {
         /**
-         * Action name.
+         * Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the feature name.
          */
         action: string;
         /**
-         * Action parameters.
+         * Parameter.
          */
         parameters: outputs.Teo.RuleEngineRuleSubRuleRuleActionRewriteActionParameter[];
     }
 
     export interface RuleEngineRuleSubRuleRuleActionRewriteActionParameter {
         /**
-         * Action to take on the HEADER. Valid values: `add`, `del`, `set`.
+         * Feature parameter name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&!document=1) API to view the requirements for entering the parameter name, which has three values:
+         * - add: Add the HTTP header.
+         * - set: Rewrite the HTTP header.
+         * - del: Delete the HTTP header.
          */
         action: string;
         /**
-         * Target HEADER name.
+         * Parameter name.
          */
         name: string;
         /**
-         * Parameter Value.
+         * Parameter value.
          */
         values: string[];
     }
 
     export interface RuleEngineRuleSubRuleRuleOr {
         /**
-         * AND Conditions list of the rule. Rule would be triggered if all conditions are true.
+         * Rule engine condition. This condition will be considered met if all items in the array are met.
          */
         ands: outputs.Teo.RuleEngineRuleSubRuleRuleOrAnd[];
     }
 
     export interface RuleEngineRuleSubRuleRuleOrAnd {
         /**
-         * Whether to ignore the case of the parameter value, the default value is false.
+         * Whether the parameter value is case insensitive. Default value: false.
          */
         ignoreCase?: boolean;
         /**
-         * The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `queryString` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&version=1; `requestHeader` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+         * The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
          */
         name?: string;
         /**
-         * Condition operator. Valid values are `equal`, `notequal`.
+         * Operator. Valid values:
          */
         operator: string;
         /**
-         * Condition target. Valid values:- `host`: Host of the URL.- `filename`: filename of the URL.- `extension`: file extension of the URL.- `fullUrl`: full url.- `url`: path of the URL.
+         * The match type. Values:
          */
         target: string;
         /**
-         * Condition Value.
+         * The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+         * - When `Target=extension`, enter the file extension, such as "jpg" and "txt".
+         * - When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".
+         * - When `Target=all`, it indicates any site request.
+         * - When `Target=host`, enter the host under the current site, such as "www.maxx55.com".
+         * - When `Target=url`, enter the partial URL path under the current site, such as "/example".
+         * - When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".
+         * - When `Target=client_country`, enter the ISO-3166 country/region code.
+         * - When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".
+         * - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
          */
-        values: string[];
+        values?: string[];
     }
 
     export interface ZoneOwnershipVerification {
@@ -64684,29 +66596,26 @@ export namespace Teo {
 
     export interface ZoneSettingCacheCache {
         /**
-         * Cache expiration time settings, Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
+         * Cache expiration time settings.
+         * Unit: second. The maximum value is 365 days. Note: This field may return null, indicating that no valid value can be obtained.
          */
         cacheTime: number;
         /**
-         * Specifies whether to enable force cache. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
-         */
-        ignoreCacheControl: string;
-        /**
-         * Cache configuration switch. Valid values: `on`: Enable; `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+         * Cache configuration switch.
          */
         switch: string;
     }
 
     export interface ZoneSettingCacheFollowOrigin {
         /**
-         * Specifies whether to follow the origin server configuration.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+         * Specifies whether to follow the origin server configuration.
          */
         switch: string;
     }
 
     export interface ZoneSettingCacheKey {
         /**
-         * Specifies whether to enable full-path cache.- `on`: Enable full-path cache (i.e., disable Ignore Query String).- `off`: Disable full-path cache (i.e., enable Ignore Query String). Note: This field may return null, indicating that no valid value can be obtained.
+         * Specifies whether to enable full-path cache.
          */
         fullUrlCache?: string;
         /**
@@ -64721,11 +66630,11 @@ export namespace Teo {
 
     export interface ZoneSettingCacheKeyQueryString {
         /**
-         * - `includeCustom`: Include the specified query strings.- `excludeCustom`: Exclude the specified query strings. Note: This field may return null, indicating that no valid value can be obtained.
+         * `includeCustom`: Include the specified query strings.
          */
         action?: string;
         /**
-         * Whether to use QueryString as part of CacheKey.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+         * Whether to use QueryString as part of CacheKey.
          */
         switch: string;
         /**
@@ -64736,7 +66645,7 @@ export namespace Teo {
 
     export interface ZoneSettingCacheNoCache {
         /**
-         * Whether to cache the configuration. Valid values: `on`: Do not cache; `off`: Cache. Note: This field may return null, indicating that no valid value can be obtained.
+         * Whether to cache the configuration.
          */
         switch: string;
     }
@@ -64747,7 +66656,7 @@ export namespace Teo {
          */
         percent?: number;
         /**
-         * Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+         * Specifies whether to enable cache prefresh.
          */
         switch: string;
     }
@@ -64758,7 +66667,7 @@ export namespace Teo {
          */
         headerName?: string;
         /**
-         * Specifies whether to enable client IP header.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+         * Specifies whether to enable client IP header.
          */
         switch: string;
     }
@@ -64769,18 +66678,20 @@ export namespace Teo {
          */
         algorithms: string[];
         /**
-         * Whether to enable Smart compression.- `on`: Enable.- `off`: Disable.
+         * Whether to enable Smart compression.
          */
         switch: string;
     }
 
     export interface ZoneSettingForceRedirect {
         /**
-         * Redirection status code.- 301- 302 Note: This field may return null, indicating that no valid value can be obtained.
+         * Redirection status code.
+         * - 301
+         * - 302 Note: This field may return null, indicating that no valid value can be obtained.
          */
         redirectStatusCode?: number;
         /**
-         * Whether to enable force redirect.- `on`: Enable.- `off`: Disable.
+         * Whether to enable force redirect.
          */
         switch: string;
     }
@@ -64791,15 +66702,18 @@ export namespace Teo {
          */
         hsts?: outputs.Teo.ZoneSettingHttpsHsts;
         /**
-         * HTTP2 configuration switch.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+         * HTTP2 configuration switch.
          */
         http2?: string;
         /**
-         * OCSP configuration switch.- `on`: Enable.- `off`: Disable.It is disabled by default. Note: This field may return null, indicating that no valid value can be obtained.
+         * OCSP configuration switch.
          */
         ocspStapling?: string;
         /**
-         * TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`.Only consecutive versions can be enabled at the same time. Note: This field may return null, indicating that no valid value can be obtained.
+         * TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`.
+         * Only consecutive versions can be enabled at the same time. Note: This field may return null, indicating that no valid value can be obtained.
+         *
+         * The `ipv6` object supports the following:
          */
         tlsVersions?: string[];
     }
@@ -64818,21 +66732,21 @@ export namespace Teo {
          */
         preload?: string;
         /**
-         * - `on`: Enable.- `off`: Disable.
+         * `on`: Enable.
          */
         switch: string;
     }
 
     export interface ZoneSettingIpv6 {
         /**
-         * Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+         * Cache configuration switch.
          */
         switch: string;
     }
 
     export interface ZoneSettingMaxAge {
         /**
-         * Specifies whether to follow the max cache age of the origin server.- `on`: Enable.- `off`: Disable.If is on, MaxAgeTime is ignored. Note: This field may return null, indicating that no valid value can be obtained.
+         * Specifies whether to follow the max cache age of the origin server.
          */
         followOrigin?: string;
         /**
@@ -64843,7 +66757,7 @@ export namespace Teo {
 
     export interface ZoneSettingOfflineCache {
         /**
-         * Whether to enable offline cache.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+         * Whether to enable offline cache.
          */
         switch: string;
     }
@@ -64854,11 +66768,7 @@ export namespace Teo {
          */
         backupOrigins: string[];
         /**
-         * Whether access private cos bucket is allowed when `OriginType` is cos. Note: This field may return null, indicating that no valid value can be obtained.
-         */
-        cosPrivateAccess: string;
-        /**
-         * Origin-pull protocol.- `http`: Switch HTTPS requests to HTTP.- `follow`: Follow the protocol of the request.- `https`: Switch HTTP requests to HTTPS. This only supports port 443 on the origin server. Note: This field may return null, indicating that no valid value can be obtained.
+         * Origin-pull protocol.
          */
         originPullProtocol: string;
         /**
@@ -64873,35 +66783,35 @@ export namespace Teo {
          */
         maxSize?: number;
         /**
-         * Specifies whether to enable custom setting of the maximum file size.- `on`: Enable. You can set a custom max size.- `off`: Disable. In this case, the max size defaults to 32 MB.
+         * Specifies whether to enable custom setting of the maximum file size.
          */
         switch: string;
     }
 
     export interface ZoneSettingQuic {
         /**
-         * Whether to enable QUIC.- `on`: Enable.- `off`: Disable.
+         * Whether to enable QUIC.
          */
         switch: string;
     }
 
     export interface ZoneSettingSmartRouting {
         /**
-         * Whether to enable HTTP2 origin-pull.- `on`: Enable.- `off`: Disable.
+         * Whether to enable HTTP2 origin-pull.
          */
         switch: string;
     }
 
     export interface ZoneSettingUpstreamHttp2 {
         /**
-         * Specifies whether to enable cache prefresh.- `on`: Enable.- `off`: Disable.
+         * Cache configuration switch.
          */
         switch: string;
     }
 
     export interface ZoneSettingWebSocket {
         /**
-         * Whether to enable custom WebSocket timeout setting. When is off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
+         * Whether to enable custom WebSocket timeout setting. When it's off: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to on.
          */
         switch: string;
         /**
@@ -64909,6 +66819,7 @@ export namespace Teo {
          */
         timeout?: number;
     }
+
 }
 
 export namespace Trocket {
@@ -64970,6 +66881,9 @@ export namespace Tse {
          * service name, meaningless when used as an input parameter.
          */
         serviceName?: string;
+        /**
+         * upstream name, meaningless when used as an input parameter.
+         */
         upstreamName: string;
     }
 
@@ -65124,6 +67038,21 @@ export namespace Tse {
          * group specification, 1c2g|2c4g|4c8g|8c16g.
          */
         specification: string;
+    }
+
+    export interface CngwNetworkAccessControlAccessControl {
+        /**
+         * Black list.
+         */
+        cidrBlackLists?: string[];
+        /**
+         * White list.
+         */
+        cidrWhiteLists?: string[];
+        /**
+         * Access mode: `Whitelist`, `Blacklist`.
+         */
+        mode: string;
     }
 
     export interface CngwRouteHeader {
@@ -65439,7 +67368,13 @@ export namespace Tse {
     }
 
     export interface CngwServiceUpstreamInfoTarget {
+        /**
+         * created time.
+         */
         createdTime: string;
+        /**
+         * health.
+         */
         health: string;
         /**
          * host.
@@ -65457,6 +67392,183 @@ export namespace Tse {
          * weight.
          */
         weight: number;
+    }
+
+    export interface CngwStrategyConfig {
+        /**
+         * behavior configuration of metric
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        behavior?: outputs.Tse.CngwStrategyConfigBehavior;
+        /**
+         * create time
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        createTime?: string;
+        /**
+         * max number of replica for metric scaling.
+         */
+        maxReplicas?: number;
+        /**
+         * metric list.
+         */
+        metrics?: outputs.Tse.CngwStrategyConfigMetric[];
+        /**
+         * modify time
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        modifyTime?: string;
+        /**
+         * strategy ID
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        strategyId?: string;
+    }
+
+    export interface CngwStrategyConfigBehavior {
+        /**
+         * configuration of down scale
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        scaleDown?: outputs.Tse.CngwStrategyConfigBehaviorScaleDown;
+        /**
+         * configuration of up scale
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        scaleUp?: outputs.Tse.CngwStrategyConfigBehaviorScaleUp;
+    }
+
+    export interface CngwStrategyConfigBehaviorScaleDown {
+        /**
+         * policies of scale down
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        policies?: outputs.Tse.CngwStrategyConfigBehaviorScaleDownPolicy[];
+        /**
+         * type of policy, default value: max
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        selectPolicy?: string;
+        /**
+         * stability window time, unit:second, default 300 when scale down
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        stabilizationWindowSeconds?: number;
+    }
+
+    export interface CngwStrategyConfigBehaviorScaleDownPolicy {
+        /**
+         * period of scale up
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        periodSeconds?: number;
+        /**
+         * type, default value: Pods
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        type?: string;
+        /**
+         * value
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        value?: number;
+    }
+
+    export interface CngwStrategyConfigBehaviorScaleUp {
+        /**
+         * policies of scale up
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        policies?: outputs.Tse.CngwStrategyConfigBehaviorScaleUpPolicy[];
+        /**
+         * type of policy, default value: max
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        selectPolicy?: string;
+        /**
+         * stability window time, unit:second, default 0 when scale up
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        stabilizationWindowSeconds?: number;
+    }
+
+    export interface CngwStrategyConfigBehaviorScaleUpPolicy {
+        /**
+         * period of scale up
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        periodSeconds?: number;
+        /**
+         * type, default value: Pods
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        type?: string;
+        /**
+         * value
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        value?: number;
+    }
+
+    export interface CngwStrategyConfigMetric {
+        /**
+         * metric name. Reference value:
+         * - cpu
+         * - memory
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        resourceName?: string;
+        /**
+         * target type of metric, currently only supports `Utilization`
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        targetType: string;
+        /**
+         * target value of metric
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        targetValue?: number;
+        /**
+         * metric type. Deafault value
+         * - Resource.
+         */
+        type?: string;
+    }
+
+    export interface CngwStrategyCronConfig {
+        /**
+         * parameter list of timed scaling
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        params?: outputs.Tse.CngwStrategyCronConfigParam[];
+        /**
+         * strategy ID
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        strategyId?: string;
+    }
+
+    export interface CngwStrategyCronConfigParam {
+        /**
+         * cron expression of timed scaling, no input required
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        crontab?: string;
+        /**
+         * period of timed scaling
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        period?: string;
+        /**
+         * start time of timed scaling
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        startAt?: string;
+        /**
+         * the number of target nodes for the timed scaling. Do not exceed the max number of replica for metric scaling
+         * Note: This field may return null, indicating that a valid value is not available.
+         */
+        targetReplicas?: number;
     }
 
     export interface GetAccessAddressEnvAddressInfo {
@@ -66418,6 +68530,7 @@ export namespace Tse {
          */
         vpcId: string;
     }
+
 }
 
 export namespace Tsf {
@@ -69349,6 +71462,14 @@ export namespace Vod {
          */
         removeAudio?: boolean;
         /**
+         * Whether to remove video stream. Valid values: `false`: no, `true`: yes. `false` by default.
+         */
+        removeVideo: boolean;
+        /**
+         * Extremely fast HD transcoding parameters.
+         */
+        tehdConfig: outputs.Vod.AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig;
+        /**
          * Video parameter information.
          */
         video: outputs.Vod.AdaptiveDynamicStreamingTemplateStreamInfoVideo;
@@ -69373,6 +71494,19 @@ export namespace Vod {
         sampleRate: number;
     }
 
+    export interface AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig {
+        /**
+         * Video bitrate limit, which is valid when Type specifies extreme speed HD type. If you leave it empty or enter 0, there is no video bitrate limit.
+         */
+        maxVideoBitrate: number;
+        /**
+         * Extreme high-speed HD type, available values:
+         * - TEHD-100: super high definition-100th;
+         * - OFF: turn off Ultra High definition.
+         */
+        type: string;
+    }
+
     export interface AdaptiveDynamicStreamingTemplateStreamInfoVideo {
         /**
          * Bitrate of video stream in Kbps. Value range: `0` and `[128, 35000]`. If the value is `0`, the bitrate of the video will be the same as that of the source video.
@@ -69383,6 +71517,13 @@ export namespace Vod {
          */
         codec: string;
         /**
+         * Encoding label, valid only if the encoding format of the video stream is H.265 encoding. Available values:
+         * - hvc1: stands for hvc1 tag;
+         * - hev1: stands for the hev1 tag;
+         * Default value: hvc1.
+         */
+        codecTag: string;
+        /**
          * Fill type. Fill refers to the way of processing a screenshot when its aspect ratio is different from that of the source video. The following fill types are supported: `stretch`: stretch. The screenshot will be stretched frame by frame to match the aspect ratio of the source video, which may make the screenshot shorter or longer; `black`: fill with black. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with black color blocks. Default value: black. Note: this field may return null, indicating that no valid values can be obtained.
          */
         fillType?: string;
@@ -69391,13 +71532,32 @@ export namespace Vod {
          */
         fps: number;
         /**
+         * Interval between Keyframe I frames, value range: 0 and [1, 100000], unit: number of frames. When you fill in 0 or leave it empty, the gop length is automatically set.
+         */
+        gop: number;
+        /**
          * Maximum value of the height (or short side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
          */
         height?: number;
         /**
+         * Whether the transcoding output still maintains HDR when the original video is HDR (High Dynamic Range). Value range:
+         * - ON: if the original file is HDR, the transcoding output remains HDR;, otherwise the transcoding output is SDR (Standard Dynamic Range);
+         * - OFF: regardless of whether the original file is HDR or SDR, the transcoding output is SDR;
+         * Default value: OFF.
+         */
+        preserveHdrSwitch: string;
+        /**
          * Resolution adaption. Valid values: `true`,`false`. `true`: enabled. In this case, `width` represents the long side of a video, while `height` the short side; `false`: disabled. In this case, `width` represents the width of a video, while `height` the height. Default value: `true`. Note: this field may return null, indicating that no valid values can be obtained.
          */
         resolutionAdaptive?: boolean;
+        /**
+         * Video constant bit rate control factor, value range is [1,51].
+         * Note:
+         * - If this parameter is specified, the bitrate control method of CRF will be used for transcoding (the video bitrate will no longer take effect);
+         * - This field is required when the video stream encoding format is H.266. The recommended value is 28;
+         * - If there are no special requirements, it is not recommended to specify this parameter.
+         */
+        vcrf: number;
         /**
          * Maximum value of the width (or long side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
          */
@@ -69657,7 +71817,13 @@ export namespace Vod {
          * Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
          */
         startTimeOffset?: number;
+        /**
+         * SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+         */
         svgContent?: string;
+        /**
+         * Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+         */
         textContent?: string;
     }
 
@@ -69708,7 +71874,13 @@ export namespace Vod {
          * Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
          */
         startTimeOffset?: number;
+        /**
+         * SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+         */
         svgContent?: string;
+        /**
+         * Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+         */
         textContent?: string;
     }
 
@@ -69743,7 +71915,13 @@ export namespace Vod {
          * Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
          */
         startTimeOffset?: number;
+        /**
+         * SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+         */
         svgContent?: string;
+        /**
+         * Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+         */
         textContent?: string;
     }
 
@@ -69775,7 +71953,13 @@ export namespace Vod {
          * Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
          */
         startTimeOffset?: number;
+        /**
+         * SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+         */
         svgContent?: string;
+        /**
+         * Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+         */
         textContent?: string;
     }
 
@@ -69838,7 +72022,13 @@ export namespace Vod {
          * Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
          */
         startTimeOffset?: number;
+        /**
+         * SVG content of up to `2000000` characters. This needs to be entered only when the watermark type is `SVG`. Note: this field may return null, indicating that no valid values can be obtained.
+         */
         svgContent?: string;
+        /**
+         * Text content of up to `100` characters. This needs to be entered only when the watermark type is text. Note: this field may return null, indicating that no valid values can be obtained.
+         */
         textContent?: string;
     }
 
@@ -69958,6 +72148,20 @@ export namespace Vod {
         name: string;
     }
 
+    export interface ProcedureTemplateAiAnalysisTask {
+        /**
+         * Video content analysis template ID.
+         */
+        definition: string;
+    }
+
+    export interface ProcedureTemplateAiRecognitionTask {
+        /**
+         * Intelligent video recognition template ID.
+         */
+        definition: string;
+    }
+
     export interface ProcedureTemplateMediaProcessTask {
         /**
          * List of adaptive bitrate streaming tasks. Note: this field may return null, indicating that no valid values can be obtained.
@@ -69994,6 +72198,10 @@ export namespace Vod {
          * Adaptive bitrate streaming template ID.
          */
         definition: string;
+        /**
+         * Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.
+         */
+        subtitleLists: string[];
         /**
          * List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
          */
@@ -70131,6 +72339,10 @@ export namespace Vod {
          */
         extTimeOffsetLists?: string[];
         /**
+         * List of time points for screencapturing in milliseconds. Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        timeOffsetLists: number[];
+        /**
          * List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
          */
         watermarkLists?: outputs.Vod.ProcedureTemplateMediaProcessTaskSnapshotByTimeOffsetTaskListWatermarkList[];
@@ -70161,17 +72373,51 @@ export namespace Vod {
 
     export interface ProcedureTemplateMediaProcessTaskTranscodeTaskList {
         /**
+         * opyright watermark.
+         */
+        copyRightWatermark: outputs.Vod.ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark;
+        /**
          * Video transcoding template ID.
          */
         definition: string;
+        /**
+         * End time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will exist till the last video frame; If this value is greater than `0` (e.g., n), the blur will exist till second n; If this value is smaller than `0` (e.g., -n), the blur will exist till second n before the last video frame.
+         */
+        endTimeOffset: number;
+        /**
+         * List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.
+         */
+        headTailLists: outputs.Vod.ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailList[];
         /**
          * List of blurs. Up to 10 ones can be supported.
          */
         mosaicLists?: outputs.Vod.ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicList[];
         /**
+         * Start time offset of blur in seconds. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame. If this parameter is left empty or `0` is entered, the blur will appear upon the first video frame; If this value is greater than `0` (e.g., n), the blur will appear at second n after the first video frame; If this value is smaller than `0` (e.g., -n), the blur will appear at second n before the last video frame.
+         */
+        startTimeOffset: number;
+        /**
+         * Digital watermark.
+         */
+        traceWatermark: outputs.Vod.ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark;
+        /**
          * List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
          */
         watermarkLists?: outputs.Vod.ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkList[];
+    }
+
+    export interface ProcedureTemplateMediaProcessTaskTranscodeTaskListCopyRightWatermark {
+        /**
+         * Copyright information, maximum length is 200 characters.
+         */
+        text: string;
+    }
+
+    export interface ProcedureTemplateMediaProcessTaskTranscodeTaskListHeadTailList {
+        /**
+         * Video opening/closing credits configuration template ID.
+         */
+        definition: string;
     }
 
     export interface ProcedureTemplateMediaProcessTaskTranscodeTaskListMosaicList {
@@ -70205,6 +72451,13 @@ export namespace Vod {
         yPos?: string;
     }
 
+    export interface ProcedureTemplateMediaProcessTaskTranscodeTaskListTraceWatermark {
+        /**
+         * Whether to use digital watermarks. This parameter is required. Valid values: ON, OFF.
+         */
+        switch: string;
+    }
+
     export interface ProcedureTemplateMediaProcessTaskTranscodeTaskListWatermarkList {
         /**
          * Watermarking template ID.
@@ -70228,6 +72481,17 @@ export namespace Vod {
         textContent?: string;
     }
 
+    export interface ProcedureTemplateReviewAudioVideoTask {
+        /**
+         * Review template.
+         */
+        definition: string;
+        /**
+         * The type of moderated content. Valid values:
+         */
+        reviewContents: string[];
+    }
+
     export interface SuperPlayerConfigDrmStreamingInfo {
         /**
          * ID of the adaptive dynamic streaming template whose protection type is `SimpleAES`.
@@ -70244,6 +72508,136 @@ export namespace Vod {
          * Display name.
          */
         name: string;
+    }
+
+    export interface TranscodeTemplateAudioTemplate {
+        /**
+         * Audio channel system. Valid values:1: mono-channel2: dual-channel6: stereoYou cannot set the sound channel as stereo for media files in container formats for audios (FLAC, OGG, MP3, M4A).Default value: 2.
+         */
+        audioChannel?: number;
+        /**
+         * Audio stream bitrate in Kbps. Value range: 0 and [26, 256].If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
+         */
+        bitrate: number;
+        /**
+         * The audio codec.If `Container` is `mp3`, the valid value is:`libmp3lame`If `Container` is `ogg` or `flac`, the valid value is:`flac`If `Container` is `m4a`, the valid values are:`libfdkAac``libmp3lame``ac3`If `Container` is `mp4` or `flv`, the valid values are:`libfdkAac` (Recommended for MP4)`libmp3lame` (Recommended for FLV)`mp2`If `Container` is `hls`, the valid value is:`libfdkAac`If `Format` is `HLS` or `MPEG-DASH`, the valid value is:`libfdkAac`If `Container` is `wav`, the valid value is:`pcm16`.
+         */
+        codec: string;
+        /**
+         * The audio sample rate. Valid values:`16000` (valid only if `Codec` is `pcm16`)`32000``44100``48000`Unit: Hz.
+         */
+        sampleRate: number;
+    }
+
+    export interface TranscodeTemplateTehdConfig {
+        /**
+         * Maximum bitrate, which is valid when `Type` is `TESHD`.If this parameter is left blank or 0 is entered, there will be no upper limit for bitrate.
+         */
+        maxVideoBitrate?: number;
+        /**
+         * TESHD transcoding type. Valid values: TEHD-100, OFF (default).
+         */
+        type: string;
+    }
+
+    export interface TranscodeTemplateVideoTemplate {
+        /**
+         * Bitrate of video stream in Kbps. Value range: 0 and [128, 35,000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+         */
+        bitrate: number;
+        /**
+         * The video codec. Valid values:libx264: H.264; libx265: H.265; av1: AOMedia Video 1; H.266: H.266. The AOMedia Video 1 and H.266 codecs can only be used for MP4 files. Only CRF is supported for H.266 currently.
+         */
+        codec: string;
+        /**
+         * The codec tag. This parameter is valid only if the H.265 codec is used. Valid values:hvc1hev1Default value: hvc1.
+         */
+        codecTag?: string;
+        /**
+         * Fill type, the way of processing a screenshot when the configured aspect ratio is different from that of the source video. Valid values:stretch: stretches the video image frame by frame to fill the screen. The video image may become squashed or stretched after transcoding.black: fills the uncovered area with black color, without changing the image&#39;s aspect ratio.white: fills the uncovered area with white color, without changing the image&#39;s aspect ratio.gauss: applies Gaussian blur to the uncovered area, without changing the image&#39;s aspect ratio.Default value: black.
+         */
+        fillType?: string;
+        /**
+         * Video frame rate in Hz. Value range: [0,100].If the value is 0, the frame rate will be the same as that of the source video.
+         */
+        fps: number;
+        /**
+         * I-frame interval in frames. Valid values: 0 and 1-100000.When this parameter is set to 0 or left empty, `Gop` will be automatically set.
+         */
+        gop?: number;
+        /**
+         * The maximum video height (or short side) in pixels. Value range: 0 and [128, 8192].If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.If neither `Width` nor `Height` is 0, the specified width and height will be used.Default value: 0.
+         */
+        height?: number;
+        /**
+         * Whether to output an HDR (high dynamic range) video if the source video is HDR. Valid values:ON: If the source video is HDR, output an HDR video; if not, output an SDR (standard dynamic range) video.OFF: Output an SDR video regardless of whether the source video is HDR.Default value: OFF.
+         */
+        preserveHdrSwitch?: string;
+        /**
+         * Resolution adaption. Valid values:open: enabled. In this case, `Width` represents the long side of a video, while `Height` the short side;close: disabled. In this case, `Width` represents the width of a video, while `Height` the height.Default value: open.Note: this field may return null, indicating that no valid values can be obtained.
+         */
+        resolutionAdaptive?: string;
+        /**
+         * The video constant rate factor (CRF). Value range: 1-51.If this parameter is specified, CRF encoding will be used and the bitrate parameter will be ignored.If `Codec` is `H.266`, this parameter is required (`28` is recommended).We don't recommend using this parameter unless you have special requirements.
+         */
+        vcrf?: number;
+        /**
+         * The maximum video width (or long side) in pixels. Value range: 0 and [128, 8192].If both `Width` and `Height` are 0, the output resolution will be the same as that of the source video.If `Width` is 0 and `Height` is not, the video width will be proportionally scaled.If `Width` is not 0 and `Height` is, the video height will be proportionally scaled.If neither `Width` nor `Height` is 0, the specified width and height will be used.Default value: 0.
+         */
+        width?: number;
+    }
+
+    export interface WatermarkTemplateImageTemplate {
+        /**
+         * Watermark height. % and px formats are supported: If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height; for example, `10%` means that `Height` is 10% of the video height;  If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px. Valid values: 0 or [8,4096]. Default value: 0 px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+         */
+        height: string;
+        /**
+         * The [Base64](https://tools.ietf.org/html/rfc4648) encoded string of a watermark image. Only JPEG, PNG, and GIF images are supported.
+         */
+        imageContent: string;
+        /**
+         * Repeat type of an animated watermark. Valid values: once: no longer appears after watermark playback ends.  repeat_last_frame: stays on the last frame after watermark playback ends.  repeat (default): repeats the playback until the video ends.
+         */
+        repeatType: string;
+        /**
+         * Image watermark transparency: 0: completely opaque  100: completely transparent Default value: 0.
+         */
+        transparency: number;
+        /**
+         * Watermark width. % and px formats are supported: If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;  If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096]. Default value: 10%.
+         */
+        width: string;
+    }
+
+    export interface WatermarkTemplateSvgTemplate {
+        /**
+         * Watermark height, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the `Height` of the watermark will be in px; for example, `100px` means that `Height` is 100 px; if `0px` is entered and `Width` is not `0px`, the watermark height will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark height will be the height of the source SVG image;  If the string ends in `W%`, the `Height` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Height` is 10% of the video width;  If the string ends in `H%`, the `Height` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Height` is 10% of the video height;  If the string ends in `S%`, the `Height` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Height` is 10% of the short side of the video;  If the string ends in `L%`, the `Height` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Height` is 10% of the long side of the video;  If the string ends in %, the meaning is the same as `H%`. Default value: 0 px.
+         */
+        height: string;
+        /**
+         * Watermark width, which supports six formats of px, %, W%, H%, S%, and L%: If the string ends in px, the `Width` of the watermark will be in px; for example, `100px` means that `Width` is 100 px; if `0px` is entered and `Height` is not `0px`, the watermark width will be proportionally scaled based on the source SVG image; if `0px` is entered for both `Width` and `Height`, the watermark width will be the width of the source SVG image;  If the string ends in `W%`, the `Width` of the watermark will be the specified percentage of the video width; for example, `10W%` means that `Width` is 10% of the video width;  If the string ends in `H%`, the `Width` of the watermark will be the specified percentage of the video height; for example, `10H%` means that `Width` is 10% of the video height;  If the string ends in `S%`, the `Width` of the watermark will be the specified percentage of the short side of the video; for example, `10S%` means that `Width` is 10% of the short side of the video;  If the string ends in `L%`, the `Width` of the watermark will be the specified percentage of the long side of the video; for example, `10L%` means that `Width` is 10% of the long side of the video;  If the string ends in %, the meaning is the same as `W%`. Default value: 10W%.
+         */
+        width: string;
+    }
+
+    export interface WatermarkTemplateTextTemplate {
+        /**
+         * Text transparency. Value range: (0, 1] 0: completely transparent  1: completely opaque Default value: 1.
+         */
+        fontAlpha: number;
+        /**
+         * Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
+         */
+        fontColor: string;
+        /**
+         * Font size in Npx format where N is a numeric value.
+         */
+        fontSize: string;
+        /**
+         * Font type. Currently, two types are supported: simkai.ttf: both Chinese and English are supported;  arial.ttf: only English is supported.
+         */
+        fontType: string;
     }
 
 }
@@ -71296,33 +73690,6 @@ export namespace Vpc {
         vpcId: string;
     }
 
-    export interface Ipv6EniAddressIpv6Address {
-        /**
-         * `IPv6` address, in the form of: `3402:4e00:20:100:0:8cd9:2a67:71f3`.
-         */
-        address: string;
-        /**
-         * `EIP` instance `ID`, such as:`eip-hxlqja90`.
-         */
-        addressId?: string;
-        /**
-         * Description.
-         */
-        description?: string;
-        /**
-         * Whether the public network IP is blocked.
-         */
-        isWanIpBlocked?: boolean;
-        /**
-         * Whether to master `IP`.
-         */
-        primary?: boolean;
-        /**
-         * `IPv6` address status: `PENDING`: pending, `MIGRATING`: migrating, `DELETING`: deleting, `AVAILABLE`: available.
-         */
-        state?: string;
-    }
-
     export interface Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks {
         /**
          * `IPv6` subnet segment. Such as: `3402:4e00:20:1001::/64`.
@@ -71335,35 +73702,107 @@ export namespace Vpc {
     }
 
     export interface NetworkAclQuintupleNetworkAclQuintupleSet {
+        /**
+         * Network ACL quintuple outbound rule.
+         */
         egresses?: outputs.Vpc.NetworkAclQuintupleNetworkAclQuintupleSetEgress[];
+        /**
+         * Network ACL quintuple inbound rule.
+         */
         ingresses?: outputs.Vpc.NetworkAclQuintupleNetworkAclQuintupleSetIngress[];
     }
 
     export interface NetworkAclQuintupleNetworkAclQuintupleSetEgress {
+        /**
+         * Action, ACCEPT or DROP.
+         */
         action?: string;
+        /**
+         * Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.
+         */
         createTime?: string;
+        /**
+         * Description.
+         */
         description?: string;
+        /**
+         * Destination CIDR.
+         */
         destinationCidr?: string;
+        /**
+         * Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
+         */
         destinationPort?: string;
+        /**
+         * Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.
+         */
         networkAclDirection?: string;
+        /**
+         * Unique ID of a network ACL entry.
+         */
         networkAclQuintupleEntryId?: string;
+        /**
+         * Priority, starting from 1.
+         */
         priority?: number;
+        /**
+         * Protocol, value: TCP,UDP, ICMP, ALL.
+         */
         protocol?: string;
+        /**
+         * Source CIDR.
+         */
         sourceCidr?: string;
+        /**
+         * Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
+         */
         sourcePort?: string;
     }
 
     export interface NetworkAclQuintupleNetworkAclQuintupleSetIngress {
+        /**
+         * Action, ACCEPT or DROP.
+         */
         action?: string;
+        /**
+         * Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.
+         */
         createTime?: string;
+        /**
+         * Description.
+         */
         description?: string;
+        /**
+         * Destination CIDR.
+         */
         destinationCidr?: string;
+        /**
+         * Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
+         */
         destinationPort?: string;
+        /**
+         * Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.
+         */
         networkAclDirection?: string;
+        /**
+         * Unique ID of a network ACL entry.
+         */
         networkAclQuintupleEntryId?: string;
+        /**
+         * Priority, starting from 1.
+         */
         priority?: number;
+        /**
+         * Protocol, value: TCP,UDP, ICMP, ALL.
+         */
         protocol?: string;
+        /**
+         * 源CIDR。.
+         */
         sourceCidr?: string;
+        /**
+         * source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.
+         */
         sourcePort?: string;
     }
 
@@ -71611,6 +74050,9 @@ export namespace Vpn {
          * Create time.
          */
         createTime: string;
+        /**
+         * Destination IDC IP range.
+         */
         destinationCidrBlock: string;
         /**
          * Instance ID of the next hop.
@@ -71620,11 +74062,17 @@ export namespace Vpn {
          * Next hop type (type of the associated instance). Valid values: VPNCONN (VPN tunnel) and CCN (CCN instance).
          */
         instanceType: string;
+        /**
+         * Priority. Valid values: 0 and 100.
+         */
         priority: number;
         /**
          * Route ID.
          */
         routeId: string;
+        /**
+         * Status. Valid values: ENABLE and DISABLE.
+         */
         status: string;
         /**
          * Route type. Default value: Static.
@@ -72227,30 +74675,87 @@ export namespace Waf {
     }
 
     export interface GetWafInfosHostList {
+        /**
+         * Domain name.
+         */
         domain: string;
+        /**
+         * Domain unique ID.
+         */
         domainId: string;
+        /**
+         * WAF traffic mode, 1 cleaning mode, 0 mirroring mode.
+         */
         flowMode: number;
+        /**
+         * LoadBalancer info bound by waf.
+         */
         loadBalancers: outputs.Waf.GetWafInfosHostListLoadBalancer[];
+        /**
+         * Waf switch,0 off 1 on.
+         */
         status: number;
     }
 
     export interface GetWafInfosHostListLoadBalancer {
+        /**
+         * Unique ID of listener in LB.
+         */
         listenerId: string;
+        /**
+         * Listener name.
+         */
         listenerName: string;
+        /**
+         * LoadBalancer ID.
+         */
         loadBalancerId: string;
+        /**
+         * LoadBalancer name.
+         */
         loadBalancerName: string;
+        /**
+         * Network type for load balancerNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
         loadBalancerType: string;
+        /**
+         * VPCID for load balancer, public network is -1, and internal network is filled in according to actual conditionsNote: This field may return null, indicating that a valid value cannot be obtained.
+         */
         numericalVpcId: number;
+        /**
+         * Protocol of listener，http or https.
+         */
         protocol: string;
+        /**
+         * LoadBalancer region.
+         */
         region: string;
+        /**
+         * LoadBalancer IP.
+         */
         vip: string;
+        /**
+         * LoadBalancer port.
+         */
         vport: number;
+        /**
+         * LoadBalancer zone.
+         */
         zone: string;
     }
 
     export interface GetWafInfosParam {
+        /**
+         * Domain unique ID.
+         */
         domainId?: string;
+        /**
+         * Listener ID of LoadBalancer.
+         */
         listenerId?: string;
+        /**
+         * Loadbalancer unique ID.If this parameter is not passed, it will operate all listeners of this appid. If this parameter is not empty, it will operate listeners of the LoadBalancer only.
+         */
         loadBalancerId: string;
     }
 
@@ -72271,7 +74776,13 @@ export namespace Waf {
          * Note info.
          */
         note: string;
+        /**
+         * Source.
+         */
         source: string;
+        /**
+         * Valid status.
+         */
         validStatus: number;
         /**
          * Effective date, with a second level timestamp value. For example, 1680570420 represents 2023-04-04 09:07:00; 2019571199 means permanently effective.
@@ -72280,6 +74791,9 @@ export namespace Waf {
     }
 
     export interface SaasDomainPort {
+        /**
+         * Nginx server ID.
+         */
         nginxServerId: string;
         /**
          * Listening port.
@@ -72298,6 +74812,7 @@ export namespace Waf {
          */
         upstreamProtocol: string;
     }
+
 }
 
 export namespace Wedata {
@@ -73931,13 +76446,26 @@ export namespace Wedata {
          */
         value?: string;
     }
+
 }
 
 export namespace config {
     export interface AssumeRole {
+        /**
+         * A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
+         */
         policy?: string;
+        /**
+         * The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+         */
         roleArn: string;
+        /**
+         * The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+         */
         sessionDuration: number;
+        /**
+         * The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+         */
         sessionName: string;
     }
 

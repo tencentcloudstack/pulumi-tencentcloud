@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const proxiesStatus = pulumi.output(tencentcloud.Gaap.getProxiesStatus({
+ * const proxiesStatus = tencentcloud.Gaap.getProxiesStatus({
  *     proxyIds: ["link-xxxxxx"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getProxiesStatus(args?: GetProxiesStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetProxiesStatusResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getProxiesStatus:getProxiesStatus", {
         "proxyIds": args.proxyIds,
         "resultOutputFile": args.resultOutputFile,
@@ -61,9 +61,24 @@ export interface GetProxiesStatusResult {
     readonly proxyIds?: string[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of gaap proxies status
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const proxiesStatus = tencentcloud.Gaap.getProxiesStatus({
+ *     proxyIds: ["link-xxxxxx"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getProxiesStatusOutput(args?: GetProxiesStatusOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProxiesStatusResult> {
-    return pulumi.output(args).apply(a => getProxiesStatus(a, opts))
+    return pulumi.output(args).apply((a: any) => getProxiesStatus(a, opts))
 }
 
 /**

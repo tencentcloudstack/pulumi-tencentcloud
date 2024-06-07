@@ -15,44 +15,45 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var pullStreamTask = new Tencentcloud.Css.PullStreamTask("pullStreamTask", new()
     ///     {
-    ///         var pullStreamTask = new Tencentcloud.Css.PullStreamTask("pullStreamTask", new Tencentcloud.Css.PullStreamTaskArgs
+    ///         AppName = "app_name",
+    ///         Comment = "comment.",
+    ///         DomainName = "domain_name",
+    ///         EndTime = "2022-11-16T22:09:28Z",
+    ///         Operator = "admin",
+    ///         SourceType = "source_type",
+    ///         SourceUrls = new[]
     ///         {
-    ///             AppName = "app_name",
-    ///             Comment = "comment.",
-    ///             DomainName = "domain_name",
-    ///             EndTime = "2022-11-16T22:09:28Z",
-    ///             Operator = "admin",
-    ///             SourceType = "source_type",
-    ///             SourceUrls = 
-    ///             {
-    ///                 "source_urls",
-    ///             },
-    ///             StartTime = "2022-11-16T22:09:28Z",
-    ///             StreamName = "stream_name",
-    ///         });
-    ///     }
+    ///             "source_urls",
+    ///         },
+    ///         StartTime = "2022-11-16T22:09:28Z",
+    ///         StreamName = "stream_name",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css pull_stream_task can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/pullStreamTask:PullStreamTask pull_stream_task pullStreamTask_id
+    /// $ pulumi import tencentcloud:Css/pullStreamTask:PullStreamTask pull_stream_task pullStreamTask_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/pullStreamTask:PullStreamTask")]
-    public partial class PullStreamTask : Pulumi.CustomResource
+    public partial class PullStreamTask : global::Pulumi.CustomResource
     {
         /// <summary>
         /// push app name.
@@ -261,7 +262,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class PullStreamTaskArgs : Pulumi.ResourceArgs
+    public sealed class PullStreamTaskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// push app name.
@@ -416,9 +417,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public PullStreamTaskArgs()
         {
         }
+        public static new PullStreamTaskArgs Empty => new PullStreamTaskArgs();
     }
 
-    public sealed class PullStreamTaskState : Pulumi.ResourceArgs
+    public sealed class PullStreamTaskState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// push app name.
@@ -603,5 +605,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public PullStreamTaskState()
         {
         }
+        public static new PullStreamTaskState Empty => new PullStreamTaskState();
     }
 }

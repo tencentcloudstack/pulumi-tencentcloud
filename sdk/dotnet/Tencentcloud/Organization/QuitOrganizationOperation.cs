@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var quitOrganizationOperation = new Tencentcloud.Organization.QuitOrganizationOperation("quitOrganizationOperation", new()
     ///     {
-    ///         var quitOrganizationOperation = new Tencentcloud.Organization.QuitOrganizationOperation("quitOrganizationOperation", new Tencentcloud.Organization.QuitOrganizationOperationArgs
-    ///         {
-    ///             OrgId = 45155,
-    ///         });
-    ///     }
+    ///         OrgId = 45155,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// organization quit_organization_operation can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Organization/quitOrganizationOperation:QuitOrganizationOperation quit_organization_operation quit_organization_operation_id
+    /// $ pulumi import tencentcloud:Organization/quitOrganizationOperation:QuitOrganizationOperation quit_organization_operation quit_organization_operation_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Organization/quitOrganizationOperation:QuitOrganizationOperation")]
-    public partial class QuitOrganizationOperation : Pulumi.CustomResource
+    public partial class QuitOrganizationOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Organization ID.
@@ -94,7 +95,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         }
     }
 
-    public sealed class QuitOrganizationOperationArgs : Pulumi.ResourceArgs
+    public sealed class QuitOrganizationOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Organization ID.
@@ -105,9 +106,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public QuitOrganizationOperationArgs()
         {
         }
+        public static new QuitOrganizationOperationArgs Empty => new QuitOrganizationOperationArgs();
     }
 
-    public sealed class QuitOrganizationOperationState : Pulumi.ResourceArgs
+    public sealed class QuitOrganizationOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Organization ID.
@@ -118,5 +120,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public QuitOrganizationOperationState()
         {
         }
+        public static new QuitOrganizationOperationState Empty => new QuitOrganizationOperationState();
     }
 }

@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum custom_url
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var customUrl = Tencentcloud.Rum.GetCustomUrl.Invoke(new()
         ///     {
-        ///         var customUrl = Output.Create(Tencentcloud.Rum.GetCustomUrl.InvokeAsync(new Tencentcloud.Rum.GetCustomUrlArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "top",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "top",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCustomUrlResult> InvokeAsync(GetCustomUrlArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCustomUrlResult>("tencentcloud:Rum/getCustomUrl:getCustomUrl", args ?? new GetCustomUrlArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCustomUrlResult>("tencentcloud:Rum/getCustomUrl:getCustomUrl", args ?? new GetCustomUrlArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum custom_url
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var customUrl = Tencentcloud.Rum.GetCustomUrl.Invoke(new()
         ///     {
-        ///         var customUrl = Output.Create(Tencentcloud.Rum.GetCustomUrl.InvokeAsync(new Tencentcloud.Rum.GetCustomUrlArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "top",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "top",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCustomUrlResult> Invoke(GetCustomUrlInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCustomUrlResult>("tencentcloud:Rum/getCustomUrl:getCustomUrl", args ?? new GetCustomUrlInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCustomUrlResult>("tencentcloud:Rum/getCustomUrl:getCustomUrl", args ?? new GetCustomUrlInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCustomUrlArgs : Pulumi.InvokeArgs
+    public sealed class GetCustomUrlArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -227,9 +221,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetCustomUrlArgs()
         {
         }
+        public static new GetCustomUrlArgs Empty => new GetCustomUrlArgs();
     }
 
-    public sealed class GetCustomUrlInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCustomUrlInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -378,6 +373,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetCustomUrlInvokeArgs()
         {
         }
+        public static new GetCustomUrlInvokeArgs Empty => new GetCustomUrlInvokeArgs();
     }
 
 

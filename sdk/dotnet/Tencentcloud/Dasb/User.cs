@@ -15,40 +15,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Dasb.User("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Dasb.User("example", new Tencentcloud.Dasb.UserArgs
-    ///         {
-    ///             AuthType = 0,
-    ///             DepartmentId = "1.2",
-    ///             Email = "demo@tencent.com",
-    ///             Phone = "+86|18345678782",
-    ///             RealName = "terraform",
-    ///             UserName = "tf_example",
-    ///             ValidateFrom = "2023-09-22T02:00:00+08:00",
-    ///             ValidateTo = "2023-09-23T03:00:00+08:00",
-    ///         });
-    ///     }
+    ///         AuthType = 0,
+    ///         DepartmentId = "1.2",
+    ///         Email = "demo@tencent.com",
+    ///         Phone = "+86|18345678782",
+    ///         RealName = "terraform",
+    ///         UserName = "tf_example",
+    ///         ValidateFrom = "2023-09-22T02:00:00+08:00",
+    ///         ValidateTo = "2023-09-23T03:00:00+08:00",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dasb user can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dasb/user:User example 134
+    /// $ pulumi import tencentcloud:Dasb/user:User example 134
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/user:User")]
-    public partial class User : Pulumi.CustomResource
+    public partial class User : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.
@@ -96,7 +97,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         /// User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
         /// </summary>
         [Output("validateFrom")]
-        public Output<string?> ValidateFrom { get; private set; } = null!;
+        public Output<string> ValidateFrom { get; private set; } = null!;
 
         /// <summary>
         /// Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.
@@ -108,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         /// User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
         /// </summary>
         [Output("validateTo")]
-        public Output<string?> ValidateTo { get; private set; } = null!;
+        public Output<string> ValidateTo { get; private set; } = null!;
 
 
         /// <summary>
@@ -155,7 +156,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         }
     }
 
-    public sealed class UserArgs : Pulumi.ResourceArgs
+    public sealed class UserArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.
@@ -226,9 +227,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public UserArgs()
         {
         }
+        public static new UserArgs Empty => new UserArgs();
     }
 
-    public sealed class UserState : Pulumi.ResourceArgs
+    public sealed class UserState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.
@@ -299,5 +301,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public UserState()
         {
         }
+        public static new UserState Empty => new UserState();
     }
 }

@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a antiddos ip. Only support for bgp-multip.
@@ -31,7 +32,7 @@ func NewDdosIpAttachmentV2(ctx *pulumi.Context,
 	if args.BgpInstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'BgpInstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DdosIpAttachmentV2
 	err := ctx.RegisterResource("tencentcloud:Dayu/ddosIpAttachmentV2:DdosIpAttachmentV2", name, args, &resource, opts...)
 	if err != nil {
@@ -112,7 +113,7 @@ func (i *DdosIpAttachmentV2) ToDdosIpAttachmentV2OutputWithContext(ctx context.C
 // DdosIpAttachmentV2ArrayInput is an input type that accepts DdosIpAttachmentV2Array and DdosIpAttachmentV2ArrayOutput values.
 // You can construct a concrete instance of `DdosIpAttachmentV2ArrayInput` via:
 //
-//          DdosIpAttachmentV2Array{ DdosIpAttachmentV2Args{...} }
+//	DdosIpAttachmentV2Array{ DdosIpAttachmentV2Args{...} }
 type DdosIpAttachmentV2ArrayInput interface {
 	pulumi.Input
 
@@ -137,7 +138,7 @@ func (i DdosIpAttachmentV2Array) ToDdosIpAttachmentV2ArrayOutputWithContext(ctx 
 // DdosIpAttachmentV2MapInput is an input type that accepts DdosIpAttachmentV2Map and DdosIpAttachmentV2MapOutput values.
 // You can construct a concrete instance of `DdosIpAttachmentV2MapInput` via:
 //
-//          DdosIpAttachmentV2Map{ "key": DdosIpAttachmentV2Args{...} }
+//	DdosIpAttachmentV2Map{ "key": DdosIpAttachmentV2Args{...} }
 type DdosIpAttachmentV2MapInput interface {
 	pulumi.Input
 

@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// <summary>
         /// Use this data source to query detailed information of tse zookeeper_replicas
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var zookeeperReplicas = Tencentcloud.Tse.GetZookeeperReplicas.Invoke(new()
         ///     {
-        ///         var zookeeperReplicas = Output.Create(Tencentcloud.Tse.GetZookeeperReplicas.InvokeAsync(new Tencentcloud.Tse.GetZookeeperReplicasArgs
-        ///         {
-        ///             InstanceId = "ins-7eb7eea7",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ins-7eb7eea7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetZookeeperReplicasResult> InvokeAsync(GetZookeeperReplicasArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetZookeeperReplicasResult>("tencentcloud:Tse/getZookeeperReplicas:getZookeeperReplicas", args ?? new GetZookeeperReplicasArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetZookeeperReplicasResult>("tencentcloud:Tse/getZookeeperReplicas:getZookeeperReplicas", args ?? new GetZookeeperReplicasArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tse zookeeper_replicas
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var zookeeperReplicas = Tencentcloud.Tse.GetZookeeperReplicas.Invoke(new()
         ///     {
-        ///         var zookeeperReplicas = Output.Create(Tencentcloud.Tse.GetZookeeperReplicas.InvokeAsync(new Tencentcloud.Tse.GetZookeeperReplicasArgs
-        ///         {
-        ///             InstanceId = "ins-7eb7eea7",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ins-7eb7eea7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetZookeeperReplicasResult> Invoke(GetZookeeperReplicasInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetZookeeperReplicasResult>("tencentcloud:Tse/getZookeeperReplicas:getZookeeperReplicas", args ?? new GetZookeeperReplicasInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetZookeeperReplicasResult>("tencentcloud:Tse/getZookeeperReplicas:getZookeeperReplicas", args ?? new GetZookeeperReplicasInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetZookeeperReplicasArgs : Pulumi.InvokeArgs
+    public sealed class GetZookeeperReplicasArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// engine instance ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetZookeeperReplicasArgs()
         {
         }
+        public static new GetZookeeperReplicasArgs Empty => new GetZookeeperReplicasArgs();
     }
 
-    public sealed class GetZookeeperReplicasInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetZookeeperReplicasInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// engine instance ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetZookeeperReplicasInvokeArgs()
         {
         }
+        public static new GetZookeeperReplicasInvokeArgs Empty => new GetZookeeperReplicasInvokeArgs();
     }
 
 

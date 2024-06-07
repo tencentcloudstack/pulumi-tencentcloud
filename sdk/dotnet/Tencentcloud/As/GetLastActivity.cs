@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// <summary>
         /// Use this data source to query detailed information of as last_activity
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var lastActivity = Tencentcloud.As.GetLastActivity.Invoke(new()
         ///     {
-        ///         var lastActivity = Output.Create(Tencentcloud.As.GetLastActivity.InvokeAsync(new Tencentcloud.As.GetLastActivityArgs
+        ///         AutoScalingGroupIds = new[]
         ///         {
-        ///             AutoScalingGroupIds = 
-        ///             {
-        ///                 "asc-lo0b94oy",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "asc-lo0b94oy",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetLastActivityResult> InvokeAsync(GetLastActivityArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetLastActivityResult>("tencentcloud:As/getLastActivity:getLastActivity", args ?? new GetLastActivityArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetLastActivityResult>("tencentcloud:As/getLastActivity:getLastActivity", args ?? new GetLastActivityArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of as last_activity
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var lastActivity = Tencentcloud.As.GetLastActivity.Invoke(new()
         ///     {
-        ///         var lastActivity = Output.Create(Tencentcloud.As.GetLastActivity.InvokeAsync(new Tencentcloud.As.GetLastActivityArgs
+        ///         AutoScalingGroupIds = new[]
         ///         {
-        ///             AutoScalingGroupIds = 
-        ///             {
-        ///                 "asc-lo0b94oy",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "asc-lo0b94oy",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetLastActivityResult> Invoke(GetLastActivityInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetLastActivityResult>("tencentcloud:As/getLastActivity:getLastActivity", args ?? new GetLastActivityInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetLastActivityResult>("tencentcloud:As/getLastActivity:getLastActivity", args ?? new GetLastActivityInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetLastActivityArgs : Pulumi.InvokeArgs
+    public sealed class GetLastActivityArgs : global::Pulumi.InvokeArgs
     {
         [Input("autoScalingGroupIds", required: true)]
         private List<string>? _autoScalingGroupIds;
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public GetLastActivityArgs()
         {
         }
+        public static new GetLastActivityArgs Empty => new GetLastActivityArgs();
     }
 
-    public sealed class GetLastActivityInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetLastActivityInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("autoScalingGroupIds", required: true)]
         private InputList<string>? _autoScalingGroupIds;
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public GetLastActivityInvokeArgs()
         {
         }
+        public static new GetLastActivityInvokeArgs Empty => new GetLastActivityInvokeArgs();
     }
 
 

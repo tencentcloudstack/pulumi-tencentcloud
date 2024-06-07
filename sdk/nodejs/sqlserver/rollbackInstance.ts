@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const rollbackInstance = new tencentcloud.Sqlserver.RollbackInstance("rollback_instance", {
+ * const rollbackInstance = new tencentcloud.sqlserver.RollbackInstance("rollbackInstance", {
  *     instanceId: "mssql-qelbzgwf",
  *     renameRestores: [{
  *         newName: "rollback_pubsub_db3",
@@ -23,13 +25,14 @@ import * as utilities from "../utilities";
  *     time: "2023-05-23 01:00:00",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * sqlserver rollback_instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Sqlserver/rollbackInstance:RollbackInstance rollback_instance mssql-qelbzgwf#2023-05-23 01:00:00#keep_pubsub_db2#rollback_pubsub_db3
+ * $ pulumi import tencentcloud:Sqlserver/rollbackInstance:RollbackInstance rollback_instance mssql-qelbzgwf#2023-05-23 01:00:00#keep_pubsub_db2#rollback_pubsub_db3
  * ```
  */
 export class RollbackInstance extends pulumi.CustomResource {

@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const upgradeProxyVersion = new tencentcloud.Cynosdb.UpgradeProxyVersion("upgrade_proxy_version", {
+ * const upgradeProxyVersion = new tencentcloud.cynosdb.UpgradeProxyVersion("upgradeProxyVersion", {
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     dstProxyVersion: "1.3.7",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class UpgradeProxyVersion extends pulumi.CustomResource {
     /**

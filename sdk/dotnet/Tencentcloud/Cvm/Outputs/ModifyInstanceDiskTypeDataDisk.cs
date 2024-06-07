@@ -14,14 +14,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Outputs
     [OutputType]
     public sealed class ModifyInstanceDiskTypeDataDisk
     {
+        /// <summary>
+        /// ID of the dedicated cluster to which the instance belongs.
+        /// </summary>
         public readonly string? CdcId;
+        /// <summary>
+        /// Whether to terminate the data disk when its CVM is terminated. Valid values:
+        /// - TRUE: terminate the data disk when its CVM is terminated. This value only supports pay-as-you-go cloud disks billed on an hourly basis.
+        /// - FALSE: retain the data disk when its CVM is terminated.
+        /// Default value: TRUE.
+        /// </summary>
         public readonly bool? DeleteWithInstance;
+        /// <summary>
+        /// Data disk ID. Note that it's not available for LOCAL_BASIC and LOCAL_SSD disks.
+        /// </summary>
         public readonly string? DiskId;
+        /// <summary>
+        /// Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
+        /// </summary>
         public readonly int DiskSize;
+        /// <summary>
+        /// Data disk type. Valid values:
+        /// - LOCAL_BASIC: local hard disk;
+        /// - LOCAL_SSD: local SSD hard disk;
+        /// - LOCAL_NVME: local NVME hard disk, which is strongly related to InstanceType and cannot be specified;
+        /// - LOCAL_PRO: local HDD hard disk, which is strongly related to InstanceType and cannot be specified;
+        /// - CLOUD_BASIC: ordinary cloud disk;
+        /// - CLOUD_PREMIUM: high-performance cloud disk;
+        /// - CLOUD_SSD:SSD cloud disk;
+        /// - CLOUD_HSSD: enhanced SSD cloud disk;
+        /// - CLOUD_TSSD: extremely fast SSD cloud disk;
+        /// - CLOUD_BSSD: general-purpose SSD cloud disk;
+        /// Default value: LOCAL_BASIC.
+        /// </summary>
         public readonly string? DiskType;
+        /// <summary>
+        /// Specifies whether the data disk is encrypted. Valid values:
+        /// - TRUE: encrypted
+        /// - FALSE: not encrypted
+        /// Default value: FALSE.
+        /// </summary>
         public readonly bool? Encrypt;
+        /// <summary>
+        /// ID of the custom CMK in the format of UUID or “kms-abcd1234”. This parameter is used to encrypt cloud disks.
+        /// </summary>
         public readonly string? KmsKeyId;
+        /// <summary>
+        /// Data disk snapshot ID. The size of the selected data disk snapshot must be smaller than that of the data disk.
+        /// </summary>
         public readonly string? SnapshotId;
+        /// <summary>
+        /// Cloud disk performance, in MB/s.
+        /// </summary>
         public readonly int? ThroughputPerformance;
 
         [OutputConstructor]

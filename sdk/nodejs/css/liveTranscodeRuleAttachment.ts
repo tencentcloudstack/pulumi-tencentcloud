@@ -9,19 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const task = new tencentcloud.css.PullStreamTask("task", {
- *     sourceType: `%s`,
- *     sourceUrls: [`%s`],
- *     domainName: `%s`,
- *     appName: `%s`,
- *     streamName: `%s`,
- *     startTime: `%s`,
- *     endTime: `%s`,
- *     operator: `%s`,
+ *     sourceType: "%s",
+ *     sourceUrls: ["%s"],
+ *     domainName: "%s",
+ *     appName: "%s",
+ *     streamName: "%s",
+ *     startTime: "%s",
+ *     endTime: "%s",
+ *     operator: "%s",
  *     comment: "This is a demo.",
  * });
  * const temp = new tencentcloud.css.LiveTranscodeTemplate("temp", {
@@ -40,13 +41,14 @@ import * as utilities from "../utilities";
  *     templateId: temp.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css live_transcode_rule_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/liveTranscodeRuleAttachment:LiveTranscodeRuleAttachment live_transcode_rule_attachment liveTranscodeRuleAttachment_id
+ * $ pulumi import tencentcloud:Css/liveTranscodeRuleAttachment:LiveTranscodeRuleAttachment live_transcode_rule_attachment liveTranscodeRuleAttachment_id
  * ```
  */
 export class LiveTranscodeRuleAttachment extends pulumi.CustomResource {

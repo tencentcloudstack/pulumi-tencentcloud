@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var reservedConcurrencyConfig = new Tencentcloud.Scf.ReservedConcurrencyConfig("reservedConcurrencyConfig", new()
     ///     {
-    ///         var reservedConcurrencyConfig = new Tencentcloud.Scf.ReservedConcurrencyConfig("reservedConcurrencyConfig", new Tencentcloud.Scf.ReservedConcurrencyConfigArgs
-    ///         {
-    ///             FunctionName = "keep-1676351130",
-    ///             Namespace = "default",
-    ///             ReservedConcurrencyMem = 128000,
-    ///         });
-    ///     }
+    ///         FunctionName = "keep-1676351130",
+    ///         Namespace = "default",
+    ///         ReservedConcurrencyMem = 128000,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// scf reserved_concurrency_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Scf/reservedConcurrencyConfig:ReservedConcurrencyConfig reserved_concurrency_config reserved_concurrency_config_id
+    /// $ pulumi import tencentcloud:Scf/reservedConcurrencyConfig:ReservedConcurrencyConfig reserved_concurrency_config reserved_concurrency_config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/reservedConcurrencyConfig:ReservedConcurrencyConfig")]
-    public partial class ReservedConcurrencyConfig : Pulumi.CustomResource
+    public partial class ReservedConcurrencyConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Specifies the function of which you want to configure the reserved quota.
@@ -108,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         }
     }
 
-    public sealed class ReservedConcurrencyConfigArgs : Pulumi.ResourceArgs
+    public sealed class ReservedConcurrencyConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specifies the function of which you want to configure the reserved quota.
@@ -131,9 +132,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public ReservedConcurrencyConfigArgs()
         {
         }
+        public static new ReservedConcurrencyConfigArgs Empty => new ReservedConcurrencyConfigArgs();
     }
 
-    public sealed class ReservedConcurrencyConfigState : Pulumi.ResourceArgs
+    public sealed class ReservedConcurrencyConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specifies the function of which you want to configure the reserved quota.
@@ -156,5 +158,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public ReservedConcurrencyConfigState()
         {
         }
+        public static new ReservedConcurrencyConfigState Empty => new ReservedConcurrencyConfigState();
     }
 }

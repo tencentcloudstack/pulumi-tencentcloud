@@ -18,6 +18,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Outputs
         /// File system instance ID.
         /// </summary>
         public readonly string CfsId;
+        /// <summary>
+        /// (Readonly) File system ip address.
+        /// </summary>
         public readonly string? IpAddress;
         /// <summary>
         /// Local mount directory.
@@ -27,7 +30,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Outputs
         /// File system mount instance ID.
         /// </summary>
         public readonly string MountInsId;
+        /// <summary>
+        /// (Readonly) File system subnet ID.
+        /// </summary>
         public readonly string? MountSubnetId;
+        /// <summary>
+        /// (Readonly) File system virtual private network ID.
+        /// </summary>
         public readonly string? MountVpcId;
         /// <summary>
         /// Remote mount directory.

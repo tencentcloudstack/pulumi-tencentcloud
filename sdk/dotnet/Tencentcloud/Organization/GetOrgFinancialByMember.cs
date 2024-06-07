@@ -15,76 +15,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// <summary>
         /// Use this data source to query detailed information of organization org_financial_by_member
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var orgFinancialByMember = Tencentcloud.Organization.GetOrgFinancialByMember.Invoke(new()
         ///     {
-        ///         var orgFinancialByMember = Output.Create(Tencentcloud.Organization.GetOrgFinancialByMember.InvokeAsync(new Tencentcloud.Organization.GetOrgFinancialByMemberArgs
+        ///         EndMonth = "2023-10",
+        ///         MemberUins = new[]
         ///         {
-        ///             EndMonth = "2023-10",
-        ///             MemberUins = 
-        ///             {
-        ///                 100015591986,
-        ///                 100029796005,
-        ///             },
-        ///             Month = "2023-05",
-        ///         }));
-        ///     }
+        ///             100015591986,
+        ///             100029796005,
+        ///         },
+        ///         Month = "2023-05",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetOrgFinancialByMemberResult> InvokeAsync(GetOrgFinancialByMemberArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetOrgFinancialByMemberResult>("tencentcloud:Organization/getOrgFinancialByMember:getOrgFinancialByMember", args ?? new GetOrgFinancialByMemberArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgFinancialByMemberResult>("tencentcloud:Organization/getOrgFinancialByMember:getOrgFinancialByMember", args ?? new GetOrgFinancialByMemberArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of organization org_financial_by_member
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var orgFinancialByMember = Tencentcloud.Organization.GetOrgFinancialByMember.Invoke(new()
         ///     {
-        ///         var orgFinancialByMember = Output.Create(Tencentcloud.Organization.GetOrgFinancialByMember.InvokeAsync(new Tencentcloud.Organization.GetOrgFinancialByMemberArgs
+        ///         EndMonth = "2023-10",
+        ///         MemberUins = new[]
         ///         {
-        ///             EndMonth = "2023-10",
-        ///             MemberUins = 
-        ///             {
-        ///                 100015591986,
-        ///                 100029796005,
-        ///             },
-        ///             Month = "2023-05",
-        ///         }));
-        ///     }
+        ///             100015591986,
+        ///             100029796005,
+        ///         },
+        ///         Month = "2023-05",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetOrgFinancialByMemberResult> Invoke(GetOrgFinancialByMemberInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetOrgFinancialByMemberResult>("tencentcloud:Organization/getOrgFinancialByMember:getOrgFinancialByMember", args ?? new GetOrgFinancialByMemberInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetOrgFinancialByMemberResult>("tencentcloud:Organization/getOrgFinancialByMember:getOrgFinancialByMember", args ?? new GetOrgFinancialByMemberInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetOrgFinancialByMemberArgs : Pulumi.InvokeArgs
+    public sealed class GetOrgFinancialByMemberArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Query for the end month. Format:yyyy-mm, for example:2021-01.The default value is the `Month`.
@@ -131,9 +125,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public GetOrgFinancialByMemberArgs()
         {
         }
+        public static new GetOrgFinancialByMemberArgs Empty => new GetOrgFinancialByMemberArgs();
     }
 
-    public sealed class GetOrgFinancialByMemberInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetOrgFinancialByMemberInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Query for the end month. Format:yyyy-mm, for example:2021-01.The default value is the `Month`.
@@ -180,6 +175,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public GetOrgFinancialByMemberInvokeArgs()
         {
         }
+        public static new GetOrgFinancialByMemberInvokeArgs Empty => new GetOrgFinancialByMemberInvokeArgs();
     }
 
 

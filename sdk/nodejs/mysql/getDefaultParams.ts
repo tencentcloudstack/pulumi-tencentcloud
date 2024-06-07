@@ -2,30 +2,17 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provide a datasource to query default mysql parameters.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const mysql57 = new tencentcloud.MysqlDefaultParams("mysql_57", {
- *     dbVersion: "5.7",
- * });
- * ```
  */
 export function getDefaultParams(args?: GetDefaultParamsArgs, opts?: pulumi.InvokeOptions): Promise<GetDefaultParamsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getDefaultParams:getDefaultParams", {
         "dbVersion": args.dbVersion,
         "resultOutputFile": args.resultOutputFile,
@@ -61,9 +48,11 @@ export interface GetDefaultParamsResult {
     readonly paramLists: outputs.Mysql.GetDefaultParamsParamList[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Provide a datasource to query default mysql parameters.
+ */
 export function getDefaultParamsOutput(args?: GetDefaultParamsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDefaultParamsResult> {
-    return pulumi.output(args).apply(a => getDefaultParams(a, opts))
+    return pulumi.output(args).apply((a: any) => getDefaultParams(a, opts))
 }
 
 /**

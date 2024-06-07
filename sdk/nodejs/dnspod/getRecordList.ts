@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const recordList = pulumi.output(tencentcloud.Dnspod.getRecordList({
+ * const recordList = tencentcloud.Dnspod.getRecordList({
  *     domain: "iac-tf.cloud",
- *     // record_line = [""]
  *     groupIds: [],
  *     isExactSubDomain: true,
  *     keyword: "",
  *     mxBegin: 0,
  *     mxEnd: 10,
  *     recordStatuses: ["ENABLE"],
- *     // domain_id = 123
- *     // sub_domain = "www"
  *     recordTypes: [
  *         "A",
  *         "NS",
@@ -42,15 +41,13 @@ import * as utilities from "../utilities";
  *     updatedAtEnd: "2023-12-07",
  *     weightBegin: 0,
  *     weightEnd: 100,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRecordList(args: GetRecordListArgs, opts?: pulumi.InvokeOptions): Promise<GetRecordListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dnspod/getRecordList:getRecordList", {
         "domain": args.domain,
         "domainId": args.domainId,
@@ -219,9 +216,47 @@ export interface GetRecordListResult {
     readonly weightBegin?: number;
     readonly weightEnd?: number;
 }
-
+/**
+ * Use this data source to query detailed information of dnspod recordList
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const recordList = tencentcloud.Dnspod.getRecordList({
+ *     domain: "iac-tf.cloud",
+ *     groupIds: [],
+ *     isExactSubDomain: true,
+ *     keyword: "",
+ *     mxBegin: 0,
+ *     mxEnd: 10,
+ *     recordStatuses: ["ENABLE"],
+ *     recordTypes: [
+ *         "A",
+ *         "NS",
+ *         "CNAME",
+ *         "NS",
+ *         "AAAA",
+ *     ],
+ *     recordValue: "bicycle.dnspod.net",
+ *     remark: "",
+ *     sortField: "UPDATED_ON",
+ *     sortType: "DESC",
+ *     ttlBegin: 1,
+ *     ttlEnd: 864000,
+ *     updatedAtBegin: "2021-09-07",
+ *     updatedAtEnd: "2023-12-07",
+ *     weightBegin: 0,
+ *     weightEnd: 100,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRecordListOutput(args: GetRecordListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRecordListResult> {
-    return pulumi.output(args).apply(a => getRecordList(a, opts))
+    return pulumi.output(args).apply((a: any) => getRecordList(a, opts))
 }
 
 /**

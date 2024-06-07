@@ -7,39 +7,45 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tse wafProtection
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.NewWafProtection(ctx, "wafProtection", &Tse.WafProtectionArgs{
-// 			GatewayId: pulumi.String("gateway-ed63e957"),
-// 			Lists: pulumi.StringArray{
-// 				pulumi.String("7324a769-9d87-48ce-a904-48c3defc4abd"),
-// 			},
-// 			Operate: pulumi.String("open"),
-// 			Type:    pulumi.String("Route"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.NewWafProtection(ctx, "wafProtection", &Tse.WafProtectionArgs{
+//				GatewayId: pulumi.String("gateway-ed63e957"),
+//				Lists: pulumi.StringArray{
+//					pulumi.String("7324a769-9d87-48ce-a904-48c3defc4abd"),
+//				},
+//				Operate: pulumi.String("open"),
+//				Type:    pulumi.String("Route"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type WafProtection struct {
 	pulumi.CustomResourceState
 
@@ -71,7 +77,7 @@ func NewWafProtection(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource WafProtection
 	err := ctx.RegisterResource("tencentcloud:Tse/wafProtection:WafProtection", name, args, &resource, opts...)
 	if err != nil {
@@ -172,7 +178,7 @@ func (i *WafProtection) ToWafProtectionOutputWithContext(ctx context.Context) Wa
 // WafProtectionArrayInput is an input type that accepts WafProtectionArray and WafProtectionArrayOutput values.
 // You can construct a concrete instance of `WafProtectionArrayInput` via:
 //
-//          WafProtectionArray{ WafProtectionArgs{...} }
+//	WafProtectionArray{ WafProtectionArgs{...} }
 type WafProtectionArrayInput interface {
 	pulumi.Input
 
@@ -197,7 +203,7 @@ func (i WafProtectionArray) ToWafProtectionArrayOutputWithContext(ctx context.Co
 // WafProtectionMapInput is an input type that accepts WafProtectionMap and WafProtectionMapOutput values.
 // You can construct a concrete instance of `WafProtectionMapInput` via:
 //
-//          WafProtectionMap{ "key": WafProtectionArgs{...} }
+//	WafProtectionMap{ "key": WafProtectionArgs{...} }
 type WafProtectionMapInput interface {
 	pulumi.Input
 

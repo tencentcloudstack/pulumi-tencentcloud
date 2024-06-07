@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class ConfigExtraHostFileGetArgs : Pulumi.ResourceArgs
+    public sealed class ConfigExtraHostFileGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("customLabels")]
         private InputList<string>? _customLabels;
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public ConfigExtraHostFileGetArgs()
         {
         }
+        public static new ConfigExtraHostFileGetArgs Empty => new ConfigExtraHostFileGetArgs();
     }
 }

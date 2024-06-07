@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this resource to create dayu layer 4 rule
@@ -17,49 +18,53 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dayu.NewL4Rule(ctx, "testRule", &Dayu.L4RuleArgs{
-// 			DPort:                  pulumi.Int(60),
-// 			HealthCheckHealthNum:   pulumi.Int(5),
-// 			HealthCheckInterval:    pulumi.Int(35),
-// 			HealthCheckSwitch:      pulumi.Bool(true),
-// 			HealthCheckTimeout:     pulumi.Int(30),
-// 			HealthCheckUnhealthNum: pulumi.Int(10),
-// 			Protocol:               pulumi.String("TCP"),
-// 			ResourceId:             pulumi.String("bgpip-00000294"),
-// 			ResourceType:           pulumi.String("bgpip"),
-// 			SPort:                  pulumi.Int(80),
-// 			SessionSwitch:          pulumi.Bool(false),
-// 			SessionTime:            pulumi.Int(300),
-// 			SourceLists: dayu.L4RuleSourceListArray{
-// 				&dayu.L4RuleSourceListArgs{
-// 					Source: pulumi.String("1.1.1.1"),
-// 					Weight: pulumi.Int(100),
-// 				},
-// 				&dayu.L4RuleSourceListArgs{
-// 					Source: pulumi.String("2.2.2.2"),
-// 					Weight: pulumi.Int(50),
-// 				},
-// 			},
-// 			SourceType: pulumi.Int(2),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dayu.NewL4Rule(ctx, "testRule", &Dayu.L4RuleArgs{
+//				DPort:                  pulumi.Int(60),
+//				HealthCheckHealthNum:   pulumi.Int(5),
+//				HealthCheckInterval:    pulumi.Int(35),
+//				HealthCheckSwitch:      pulumi.Bool(true),
+//				HealthCheckTimeout:     pulumi.Int(30),
+//				HealthCheckUnhealthNum: pulumi.Int(10),
+//				Protocol:               pulumi.String("TCP"),
+//				ResourceId:             pulumi.String("bgpip-00000294"),
+//				ResourceType:           pulumi.String("bgpip"),
+//				SPort:                  pulumi.Int(80),
+//				SessionSwitch:          pulumi.Bool(false),
+//				SessionTime:            pulumi.Int(300),
+//				SourceLists: dayu.L4RuleSourceListArray{
+//					&dayu.L4RuleSourceListArgs{
+//						Source: pulumi.String("1.1.1.1"),
+//						Weight: pulumi.Int(100),
+//					},
+//					&dayu.L4RuleSourceListArgs{
+//						Source: pulumi.String("2.2.2.2"),
+//						Weight: pulumi.Int(50),
+//					},
+//				},
+//				SourceType: pulumi.Int(2),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type L4Rule struct {
 	pulumi.CustomResourceState
 
@@ -127,7 +132,7 @@ func NewL4Rule(ctx *pulumi.Context,
 	if args.SourceType == nil {
 		return nil, errors.New("invalid value for required argument 'SourceType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource L4Rule
 	err := ctx.RegisterResource("tencentcloud:Dayu/l4Rule:L4Rule", name, args, &resource, opts...)
 	if err != nil {
@@ -320,7 +325,7 @@ func (i *L4Rule) ToL4RuleOutputWithContext(ctx context.Context) L4RuleOutput {
 // L4RuleArrayInput is an input type that accepts L4RuleArray and L4RuleArrayOutput values.
 // You can construct a concrete instance of `L4RuleArrayInput` via:
 //
-//          L4RuleArray{ L4RuleArgs{...} }
+//	L4RuleArray{ L4RuleArgs{...} }
 type L4RuleArrayInput interface {
 	pulumi.Input
 
@@ -345,7 +350,7 @@ func (i L4RuleArray) ToL4RuleArrayOutputWithContext(ctx context.Context) L4RuleA
 // L4RuleMapInput is an input type that accepts L4RuleMap and L4RuleMapOutput values.
 // You can construct a concrete instance of `L4RuleMapInput` via:
 //
-//          L4RuleMap{ "key": L4RuleArgs{...} }
+//	L4RuleMap{ "key": L4RuleArgs{...} }
 type L4RuleMapInput interface {
 	pulumi.Input
 

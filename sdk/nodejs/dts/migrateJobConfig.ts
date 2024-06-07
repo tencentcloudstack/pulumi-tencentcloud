@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const service = new tencentcloud.dts.MigrateService("service", {
  *     srcDatabaseType: "mysql",
@@ -74,61 +75,77 @@ import * as utilities from "../utilities";
  *     action: "pause",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Continue the a migration job
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new tencentcloud.dts.MigrateJobConfig("config", {
  *     jobId: tencentcloud_dts_migrate_job_start_operation.start.id,
  *     action: "continue",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Complete a migration job when the status is readyComplete
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new tencentcloud.dts.MigrateJobConfig("config", {
  *     jobId: tencentcloud_dts_migrate_job_start_operation.start.id,
  *     action: "continue",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Stop a running migration job
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new tencentcloud.dts.MigrateJobConfig("config", {
  *     jobId: tencentcloud_dts_migrate_job_start_operation.start.id,
  *     action: "stop",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Isolate a stopped/canceled migration job
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new tencentcloud.dts.MigrateJobConfig("config", {
  *     jobId: tencentcloud_dts_migrate_job_start_operation.start.id,
  *     action: "isolate",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Recover a isolated migration job
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new tencentcloud.dts.MigrateJobConfig("config", {
  *     jobId: tencentcloud_dts_migrate_job_start_operation.start.id,
  *     action: "recover",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class MigrateJobConfig extends pulumi.CustomResource {
     /**

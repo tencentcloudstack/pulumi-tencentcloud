@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// <summary>
         /// Use this data source to query purchasable specification configuration for each availability zone in this specific region.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetZoneConfig.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Sqlserver.GetZoneConfig.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetZoneConfigResult> InvokeAsync(GetZoneConfigArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetZoneConfigResult>("tencentcloud:Sqlserver/getZoneConfig:getZoneConfig", args ?? new GetZoneConfigArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetZoneConfigResult>("tencentcloud:Sqlserver/getZoneConfig:getZoneConfig", args ?? new GetZoneConfigArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query purchasable specification configuration for each availability zone in this specific region.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetZoneConfig.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Sqlserver.GetZoneConfig.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetZoneConfigResult> Invoke(GetZoneConfigInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetZoneConfigResult>("tencentcloud:Sqlserver/getZoneConfig:getZoneConfig", args ?? new GetZoneConfigInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetZoneConfigResult>("tencentcloud:Sqlserver/getZoneConfig:getZoneConfig", args ?? new GetZoneConfigInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetZoneConfigArgs : Pulumi.InvokeArgs
+    public sealed class GetZoneConfigArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to store results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetZoneConfigArgs()
         {
         }
+        public static new GetZoneConfigArgs Empty => new GetZoneConfigArgs();
     }
 
-    public sealed class GetZoneConfigInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetZoneConfigInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to store results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetZoneConfigInvokeArgs()
         {
         }
+        public static new GetZoneConfigInvokeArgs Empty => new GetZoneConfigInvokeArgs();
     }
 
 

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,13 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarm = new tencentcloud.Cls.Alarm("alarm", {
+ * const example = new tencentcloud.cls.Alarm("example", {
+ *     alarmLevel: 0,
  *     alarmNoticeIds: ["notice-0850756b-245d-4bc7-bb27-2a58fffc780b"],
  *     alarmPeriod: 15,
  *     alarmTargets: [{
@@ -47,13 +50,14 @@ import * as utilities from "../utilities";
  *     triggerCount: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cls alarm can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cls/alarm:Alarm alarm alarm_id
+ * $ pulumi import tencentcloud:Cls/alarm:Alarm example alarm-d8529662-e10f-440c-ba80-50f3dcf215a3
  * ```
  */
 export class Alarm extends pulumi.CustomResource {
@@ -85,6 +89,10 @@ export class Alarm extends pulumi.CustomResource {
     }
 
     /**
+     * Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
+     */
+    public readonly alarmLevel!: pulumi.Output<number>;
+    /**
      * list of alarm notice id.
      */
     public readonly alarmNoticeIds!: pulumi.Output<string[]>;
@@ -103,7 +111,7 @@ export class Alarm extends pulumi.CustomResource {
     /**
      * user define callback.
      */
-    public readonly callBack!: pulumi.Output<outputs.Cls.AlarmCallBack | undefined>;
+    public readonly callBack!: pulumi.Output<outputs.Cls.AlarmCallBack>;
     /**
      * triggering conditions.
      */
@@ -123,7 +131,7 @@ export class Alarm extends pulumi.CustomResource {
     /**
      * whether to enable the alarm policy.
      */
-    public readonly status!: pulumi.Output<boolean | undefined>;
+    public readonly status!: pulumi.Output<boolean>;
     /**
      * Tag description list.
      */
@@ -146,6 +154,7 @@ export class Alarm extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as AlarmState | undefined;
+            resourceInputs["alarmLevel"] = state ? state.alarmLevel : undefined;
             resourceInputs["alarmNoticeIds"] = state ? state.alarmNoticeIds : undefined;
             resourceInputs["alarmPeriod"] = state ? state.alarmPeriod : undefined;
             resourceInputs["alarmTargets"] = state ? state.alarmTargets : undefined;
@@ -178,6 +187,7 @@ export class Alarm extends pulumi.CustomResource {
             if ((!args || args.triggerCount === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'triggerCount'");
             }
+            resourceInputs["alarmLevel"] = args ? args.alarmLevel : undefined;
             resourceInputs["alarmNoticeIds"] = args ? args.alarmNoticeIds : undefined;
             resourceInputs["alarmPeriod"] = args ? args.alarmPeriod : undefined;
             resourceInputs["alarmTargets"] = args ? args.alarmTargets : undefined;
@@ -200,6 +210,10 @@ export class Alarm extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Alarm resources.
  */
 export interface AlarmState {
+    /**
+     * Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
+     */
+    alarmLevel?: pulumi.Input<number>;
     /**
      * list of alarm notice id.
      */
@@ -254,6 +268,10 @@ export interface AlarmState {
  * The set of arguments for constructing a Alarm resource.
  */
 export interface AlarmArgs {
+    /**
+     * Alarm level. 0: Warning; 1: Info; 2: Critical. Default is 0.
+     */
+    alarmLevel?: pulumi.Input<number>;
     /**
      * list of alarm notice id.
      */

@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tsf unitNamespace
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewUnitNamespace(ctx, "unitNamespace", &Tsf.UnitNamespaceArgs{
-// 			GatewayInstanceId: pulumi.String("gw-ins-lvdypq5k"),
-// 			NamespaceId:       pulumi.String("namespace-vwgo38wy"),
-// 			NamespaceName:     pulumi.String("keep-terraform-cls"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewUnitNamespace(ctx, "unitNamespace", &Tsf.UnitNamespaceArgs{
+//				GatewayInstanceId: pulumi.String("gw-ins-lvdypq5k"),
+//				NamespaceId:       pulumi.String("namespace-vwgo38wy"),
+//				NamespaceName:     pulumi.String("keep-terraform-cls"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tsf unit_namespace can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tsf/unitNamespace:UnitNamespace unit_namespace gw-ins-lvdypq5k#namespace-vwgo38wy
+// $ pulumi import tencentcloud:Tsf/unitNamespace:UnitNamespace unit_namespace gw-ins-lvdypq5k#namespace-vwgo38wy
 // ```
 type UnitNamespace struct {
 	pulumi.CustomResourceState
@@ -76,7 +82,7 @@ func NewUnitNamespace(ctx *pulumi.Context,
 	if args.NamespaceName == nil {
 		return nil, errors.New("invalid value for required argument 'NamespaceName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UnitNamespace
 	err := ctx.RegisterResource("tencentcloud:Tsf/unitNamespace:UnitNamespace", name, args, &resource, opts...)
 	if err != nil {
@@ -173,7 +179,7 @@ func (i *UnitNamespace) ToUnitNamespaceOutputWithContext(ctx context.Context) Un
 // UnitNamespaceArrayInput is an input type that accepts UnitNamespaceArray and UnitNamespaceArrayOutput values.
 // You can construct a concrete instance of `UnitNamespaceArrayInput` via:
 //
-//          UnitNamespaceArray{ UnitNamespaceArgs{...} }
+//	UnitNamespaceArray{ UnitNamespaceArgs{...} }
 type UnitNamespaceArrayInput interface {
 	pulumi.Input
 
@@ -198,7 +204,7 @@ func (i UnitNamespaceArray) ToUnitNamespaceArrayOutputWithContext(ctx context.Co
 // UnitNamespaceMapInput is an input type that accepts UnitNamespaceMap and UnitNamespaceMapOutput values.
 // You can construct a concrete instance of `UnitNamespaceMapInput` via:
 //
-//          UnitNamespaceMap{ "key": UnitNamespaceArgs{...} }
+//	UnitNamespaceMap{ "key": UnitNamespaceArgs{...} }
 type UnitNamespaceMapInput interface {
 	pulumi.Input
 

@@ -7,40 +7,46 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a APIGateway ApiDoc
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := ApiGateway.NewApiDoc(ctx, "myApiDoc", &ApiGateway.ApiDocArgs{
-// 			ApiDocName: pulumi.String("doc_test1"),
-// 			ApiIds: pulumi.StringArray{
-// 				pulumi.String("api-test1"),
-// 				pulumi.String("api-test2"),
-// 			},
-// 			Environment: pulumi.String("release"),
-// 			ServiceId:   pulumi.String("service_test1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ApiGateway.NewApiDoc(ctx, "myApiDoc", &ApiGateway.ApiDocArgs{
+//				ApiDocName: pulumi.String("doc_test1"),
+//				ApiIds: pulumi.StringArray{
+//					pulumi.String("api-test1"),
+//					pulumi.String("api-test2"),
+//				},
+//				Environment: pulumi.String("release"),
+//				ServiceId:   pulumi.String("service_test1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ApiDoc struct {
 	pulumi.CustomResourceState
 
@@ -93,7 +99,7 @@ func NewApiDoc(ctx *pulumi.Context,
 	if args.ServiceId == nil {
 		return nil, errors.New("invalid value for required argument 'ServiceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ApiDoc
 	err := ctx.RegisterResource("tencentcloud:ApiGateway/apiDoc:ApiDoc", name, args, &resource, opts...)
 	if err != nil {
@@ -230,7 +236,7 @@ func (i *ApiDoc) ToApiDocOutputWithContext(ctx context.Context) ApiDocOutput {
 // ApiDocArrayInput is an input type that accepts ApiDocArray and ApiDocArrayOutput values.
 // You can construct a concrete instance of `ApiDocArrayInput` via:
 //
-//          ApiDocArray{ ApiDocArgs{...} }
+//	ApiDocArray{ ApiDocArgs{...} }
 type ApiDocArrayInput interface {
 	pulumi.Input
 
@@ -255,7 +261,7 @@ func (i ApiDocArray) ToApiDocArrayOutputWithContext(ctx context.Context) ApiDocA
 // ApiDocMapInput is an input type that accepts ApiDocMap and ApiDocMapOutput values.
 // You can construct a concrete instance of `ApiDocMapInput` via:
 //
-//          ApiDocMap{ "key": ApiDocArgs{...} }
+//	ApiDocMap{ "key": ApiDocArgs{...} }
 type ApiDocMapInput interface {
 	pulumi.Input
 

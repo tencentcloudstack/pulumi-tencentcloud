@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const internetAddress = new tencentcloud.dc.InternetAddress("internetAddress", {
  *     maskLen: 30,
@@ -23,13 +24,14 @@ import * as utilities from "../utilities";
  *     enable: false,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dc internet_address_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dc/internetAddressConfig:InternetAddressConfig internet_address_config internet_address_id
+ * $ pulumi import tencentcloud:Dc/internetAddressConfig:InternetAddressConfig internet_address_config internet_address_id
  * ```
  */
 export class InternetAddressConfig extends pulumi.CustomResource {

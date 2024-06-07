@@ -7,42 +7,107 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cvm securityGroupAttachment
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cvm.NewSecurityGroupAttachment(ctx, "securityGroupAttachment", &Cvm.SecurityGroupAttachmentArgs{
-// 			InstanceId:      pulumi.String("ins-xxxxxxxx"),
-// 			SecurityGroupId: pulumi.String("sg-xxxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// create vpc
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create vpc subnet
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+//				CidrBlock:        pulumi.String("10.0.20.0/28"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create security group
+//			exampleGroup, err := Security.NewGroup(ctx, "exampleGroup", &Security.GroupArgs{
+//				Description: pulumi.String("sg desc."),
+//				ProjectId:   pulumi.Int(0),
+//				Tags: pulumi.Map{
+//					"example": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create cvm
+//			exampleInstance, err := Instance.NewInstance(ctx, "exampleInstance", &Instance.InstanceArgs{
+//				InstanceName:     pulumi.String("tf_example"),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+//				ImageId:          pulumi.String("img-9qrfy1xt"),
+//				InstanceType:     pulumi.String("SA3.MEDIUM4"),
+//				SystemDiskType:   pulumi.String("CLOUD_HSSD"),
+//				SystemDiskSize:   pulumi.Int(100),
+//				Hostname:         pulumi.String("example"),
+//				ProjectId:        pulumi.Int(0),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				DataDisks: instance.InstanceDataDiskArray{
+//					&instance.InstanceDataDiskArgs{
+//						DataDiskType: pulumi.String("CLOUD_HSSD"),
+//						DataDiskSize: pulumi.Int(50),
+//						Encrypt:      pulumi.Bool(false),
+//					},
+//				},
+//				Tags: pulumi.Map{
+//					"tagKey": pulumi.Any("tagValue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// attachment security group
+//			_, err = Cvm.NewSecurityGroupAttachment(ctx, "exampleSecurityGroupAttachment", &Cvm.SecurityGroupAttachmentArgs{
+//				InstanceId:      exampleInstance.ID(),
+//				SecurityGroupId: exampleGroup.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cvm security_group_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment security_group_attachment ${instance_id}#${security_group_id}
+// $ pulumi import tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment example ins-odl0lrcy#sg-5275dorp
 // ```
 type SecurityGroupAttachment struct {
 	pulumi.CustomResourceState
@@ -66,7 +131,7 @@ func NewSecurityGroupAttachment(ctx *pulumi.Context,
 	if args.SecurityGroupId == nil {
 		return nil, errors.New("invalid value for required argument 'SecurityGroupId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SecurityGroupAttachment
 	err := ctx.RegisterResource("tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +212,7 @@ func (i *SecurityGroupAttachment) ToSecurityGroupAttachmentOutputWithContext(ctx
 // SecurityGroupAttachmentArrayInput is an input type that accepts SecurityGroupAttachmentArray and SecurityGroupAttachmentArrayOutput values.
 // You can construct a concrete instance of `SecurityGroupAttachmentArrayInput` via:
 //
-//          SecurityGroupAttachmentArray{ SecurityGroupAttachmentArgs{...} }
+//	SecurityGroupAttachmentArray{ SecurityGroupAttachmentArgs{...} }
 type SecurityGroupAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +237,7 @@ func (i SecurityGroupAttachmentArray) ToSecurityGroupAttachmentArrayOutputWithCo
 // SecurityGroupAttachmentMapInput is an input type that accepts SecurityGroupAttachmentMap and SecurityGroupAttachmentMapOutput values.
 // You can construct a concrete instance of `SecurityGroupAttachmentMapInput` via:
 //
-//          SecurityGroupAttachmentMap{ "key": SecurityGroupAttachmentArgs{...} }
+//	SecurityGroupAttachmentMap{ "key": SecurityGroupAttachmentArgs{...} }
 type SecurityGroupAttachmentMapInput interface {
 	pulumi.Input
 

@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type CcHttpPolicyRuleList struct {
 	// Operator of the rule. Valid values: `include`, `notInclude`, `equal`.
@@ -22,7 +25,7 @@ type CcHttpPolicyRuleList struct {
 // CcHttpPolicyRuleListInput is an input type that accepts CcHttpPolicyRuleListArgs and CcHttpPolicyRuleListOutput values.
 // You can construct a concrete instance of `CcHttpPolicyRuleListInput` via:
 //
-//          CcHttpPolicyRuleListArgs{...}
+//	CcHttpPolicyRuleListArgs{...}
 type CcHttpPolicyRuleListInput interface {
 	pulumi.Input
 
@@ -54,7 +57,7 @@ func (i CcHttpPolicyRuleListArgs) ToCcHttpPolicyRuleListOutputWithContext(ctx co
 // CcHttpPolicyRuleListArrayInput is an input type that accepts CcHttpPolicyRuleListArray and CcHttpPolicyRuleListArrayOutput values.
 // You can construct a concrete instance of `CcHttpPolicyRuleListArrayInput` via:
 //
-//          CcHttpPolicyRuleListArray{ CcHttpPolicyRuleListArgs{...} }
+//	CcHttpPolicyRuleListArray{ CcHttpPolicyRuleListArgs{...} }
 type CcHttpPolicyRuleListArrayInput interface {
 	pulumi.Input
 
@@ -137,7 +140,7 @@ type CcHttpsPolicyRuleList struct {
 // CcHttpsPolicyRuleListInput is an input type that accepts CcHttpsPolicyRuleListArgs and CcHttpsPolicyRuleListOutput values.
 // You can construct a concrete instance of `CcHttpsPolicyRuleListInput` via:
 //
-//          CcHttpsPolicyRuleListArgs{...}
+//	CcHttpsPolicyRuleListArgs{...}
 type CcHttpsPolicyRuleListInput interface {
 	pulumi.Input
 
@@ -169,7 +172,7 @@ func (i CcHttpsPolicyRuleListArgs) ToCcHttpsPolicyRuleListOutputWithContext(ctx 
 // CcHttpsPolicyRuleListArrayInput is an input type that accepts CcHttpsPolicyRuleListArray and CcHttpsPolicyRuleListArrayOutput values.
 // You can construct a concrete instance of `CcHttpsPolicyRuleListArrayInput` via:
 //
-//          CcHttpsPolicyRuleListArray{ CcHttpsPolicyRuleListArgs{...} }
+//	CcHttpsPolicyRuleListArray{ CcHttpsPolicyRuleListArgs{...} }
 type CcHttpsPolicyRuleListArrayInput interface {
 	pulumi.Input
 
@@ -258,7 +261,7 @@ type CcPolicyV2CcBlackWhiteIp struct {
 // CcPolicyV2CcBlackWhiteIpInput is an input type that accepts CcPolicyV2CcBlackWhiteIpArgs and CcPolicyV2CcBlackWhiteIpOutput values.
 // You can construct a concrete instance of `CcPolicyV2CcBlackWhiteIpInput` via:
 //
-//          CcPolicyV2CcBlackWhiteIpArgs{...}
+//	CcPolicyV2CcBlackWhiteIpArgs{...}
 type CcPolicyV2CcBlackWhiteIpInput interface {
 	pulumi.Input
 
@@ -296,7 +299,7 @@ func (i CcPolicyV2CcBlackWhiteIpArgs) ToCcPolicyV2CcBlackWhiteIpOutputWithContex
 // CcPolicyV2CcBlackWhiteIpArrayInput is an input type that accepts CcPolicyV2CcBlackWhiteIpArray and CcPolicyV2CcBlackWhiteIpArrayOutput values.
 // You can construct a concrete instance of `CcPolicyV2CcBlackWhiteIpArrayInput` via:
 //
-//          CcPolicyV2CcBlackWhiteIpArray{ CcPolicyV2CcBlackWhiteIpArgs{...} }
+//	CcPolicyV2CcBlackWhiteIpArray{ CcPolicyV2CcBlackWhiteIpArgs{...} }
 type CcPolicyV2CcBlackWhiteIpArrayInput interface {
 	pulumi.Input
 
@@ -402,7 +405,7 @@ type CcPolicyV2CcGeoIpPolicy struct {
 // CcPolicyV2CcGeoIpPolicyInput is an input type that accepts CcPolicyV2CcGeoIpPolicyArgs and CcPolicyV2CcGeoIpPolicyOutput values.
 // You can construct a concrete instance of `CcPolicyV2CcGeoIpPolicyInput` via:
 //
-//          CcPolicyV2CcGeoIpPolicyArgs{...}
+//	CcPolicyV2CcGeoIpPolicyArgs{...}
 type CcPolicyV2CcGeoIpPolicyInput interface {
 	pulumi.Input
 
@@ -442,7 +445,7 @@ func (i CcPolicyV2CcGeoIpPolicyArgs) ToCcPolicyV2CcGeoIpPolicyOutputWithContext(
 // CcPolicyV2CcGeoIpPolicyArrayInput is an input type that accepts CcPolicyV2CcGeoIpPolicyArray and CcPolicyV2CcGeoIpPolicyArrayOutput values.
 // You can construct a concrete instance of `CcPolicyV2CcGeoIpPolicyArrayInput` via:
 //
-//          CcPolicyV2CcGeoIpPolicyArray{ CcPolicyV2CcGeoIpPolicyArgs{...} }
+//	CcPolicyV2CcGeoIpPolicyArray{ CcPolicyV2CcGeoIpPolicyArgs{...} }
 type CcPolicyV2CcGeoIpPolicyArrayInput interface {
 	pulumi.Input
 
@@ -539,8 +542,9 @@ type CcPolicyV2CcPrecisionPolicy struct {
 	// Ip address.
 	Ip string `pulumi:"ip"`
 	// Policy mode (discard or captcha).
-	PolicyAction string  `pulumi:"policyAction"`
-	PolicyId     *string `pulumi:"policyId"`
+	PolicyAction string `pulumi:"policyAction"`
+	// Policy Id.
+	PolicyId *string `pulumi:"policyId"`
 	// A list of policies.
 	Policys []CcPolicyV2CcPrecisionPolicyPolicy `pulumi:"policys"`
 	// Protocol.
@@ -550,7 +554,7 @@ type CcPolicyV2CcPrecisionPolicy struct {
 // CcPolicyV2CcPrecisionPolicyInput is an input type that accepts CcPolicyV2CcPrecisionPolicyArgs and CcPolicyV2CcPrecisionPolicyOutput values.
 // You can construct a concrete instance of `CcPolicyV2CcPrecisionPolicyInput` via:
 //
-//          CcPolicyV2CcPrecisionPolicyArgs{...}
+//	CcPolicyV2CcPrecisionPolicyArgs{...}
 type CcPolicyV2CcPrecisionPolicyInput interface {
 	pulumi.Input
 
@@ -564,8 +568,9 @@ type CcPolicyV2CcPrecisionPolicyArgs struct {
 	// Ip address.
 	Ip pulumi.StringInput `pulumi:"ip"`
 	// Policy mode (discard or captcha).
-	PolicyAction pulumi.StringInput    `pulumi:"policyAction"`
-	PolicyId     pulumi.StringPtrInput `pulumi:"policyId"`
+	PolicyAction pulumi.StringInput `pulumi:"policyAction"`
+	// Policy Id.
+	PolicyId pulumi.StringPtrInput `pulumi:"policyId"`
 	// A list of policies.
 	Policys CcPolicyV2CcPrecisionPolicyPolicyArrayInput `pulumi:"policys"`
 	// Protocol.
@@ -587,7 +592,7 @@ func (i CcPolicyV2CcPrecisionPolicyArgs) ToCcPolicyV2CcPrecisionPolicyOutputWith
 // CcPolicyV2CcPrecisionPolicyArrayInput is an input type that accepts CcPolicyV2CcPrecisionPolicyArray and CcPolicyV2CcPrecisionPolicyArrayOutput values.
 // You can construct a concrete instance of `CcPolicyV2CcPrecisionPolicyArrayInput` via:
 //
-//          CcPolicyV2CcPrecisionPolicyArray{ CcPolicyV2CcPrecisionPolicyArgs{...} }
+//	CcPolicyV2CcPrecisionPolicyArray{ CcPolicyV2CcPrecisionPolicyArgs{...} }
 type CcPolicyV2CcPrecisionPolicyArrayInput interface {
 	pulumi.Input
 
@@ -638,6 +643,7 @@ func (o CcPolicyV2CcPrecisionPolicyOutput) PolicyAction() pulumi.StringOutput {
 	return o.ApplyT(func(v CcPolicyV2CcPrecisionPolicy) string { return v.PolicyAction }).(pulumi.StringOutput)
 }
 
+// Policy Id.
 func (o CcPolicyV2CcPrecisionPolicyOutput) PolicyId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CcPolicyV2CcPrecisionPolicy) *string { return v.PolicyId }).(pulumi.StringPtrOutput)
 }
@@ -686,7 +692,7 @@ type CcPolicyV2CcPrecisionPolicyPolicy struct {
 // CcPolicyV2CcPrecisionPolicyPolicyInput is an input type that accepts CcPolicyV2CcPrecisionPolicyPolicyArgs and CcPolicyV2CcPrecisionPolicyPolicyOutput values.
 // You can construct a concrete instance of `CcPolicyV2CcPrecisionPolicyPolicyInput` via:
 //
-//          CcPolicyV2CcPrecisionPolicyPolicyArgs{...}
+//	CcPolicyV2CcPrecisionPolicyPolicyArgs{...}
 type CcPolicyV2CcPrecisionPolicyPolicyInput interface {
 	pulumi.Input
 
@@ -720,7 +726,7 @@ func (i CcPolicyV2CcPrecisionPolicyPolicyArgs) ToCcPolicyV2CcPrecisionPolicyPoli
 // CcPolicyV2CcPrecisionPolicyPolicyArrayInput is an input type that accepts CcPolicyV2CcPrecisionPolicyPolicyArray and CcPolicyV2CcPrecisionPolicyPolicyArrayOutput values.
 // You can construct a concrete instance of `CcPolicyV2CcPrecisionPolicyPolicyArrayInput` via:
 //
-//          CcPolicyV2CcPrecisionPolicyPolicyArray{ CcPolicyV2CcPrecisionPolicyPolicyArgs{...} }
+//	CcPolicyV2CcPrecisionPolicyPolicyArray{ CcPolicyV2CcPrecisionPolicyPolicyArgs{...} }
 type CcPolicyV2CcPrecisionPolicyPolicyArrayInput interface {
 	pulumi.Input
 
@@ -798,7 +804,8 @@ func (o CcPolicyV2CcPrecisionPolicyPolicyArrayOutput) Index(i pulumi.IntInput) C
 
 type CcPolicyV2CcPrecisionReqLimit struct {
 	// Domain.
-	Domain     string  `pulumi:"domain"`
+	Domain string `pulumi:"domain"`
+	// Instance id.
 	InstanceId *string `pulumi:"instanceId"`
 	// Ip address.
 	Ip *string `pulumi:"ip"`
@@ -813,7 +820,7 @@ type CcPolicyV2CcPrecisionReqLimit struct {
 // CcPolicyV2CcPrecisionReqLimitInput is an input type that accepts CcPolicyV2CcPrecisionReqLimitArgs and CcPolicyV2CcPrecisionReqLimitOutput values.
 // You can construct a concrete instance of `CcPolicyV2CcPrecisionReqLimitInput` via:
 //
-//          CcPolicyV2CcPrecisionReqLimitArgs{...}
+//	CcPolicyV2CcPrecisionReqLimitArgs{...}
 type CcPolicyV2CcPrecisionReqLimitInput interface {
 	pulumi.Input
 
@@ -823,7 +830,8 @@ type CcPolicyV2CcPrecisionReqLimitInput interface {
 
 type CcPolicyV2CcPrecisionReqLimitArgs struct {
 	// Domain.
-	Domain     pulumi.StringInput    `pulumi:"domain"`
+	Domain pulumi.StringInput `pulumi:"domain"`
+	// Instance id.
 	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
 	// Ip address.
 	Ip pulumi.StringPtrInput `pulumi:"ip"`
@@ -850,7 +858,7 @@ func (i CcPolicyV2CcPrecisionReqLimitArgs) ToCcPolicyV2CcPrecisionReqLimitOutput
 // CcPolicyV2CcPrecisionReqLimitArrayInput is an input type that accepts CcPolicyV2CcPrecisionReqLimitArray and CcPolicyV2CcPrecisionReqLimitArrayOutput values.
 // You can construct a concrete instance of `CcPolicyV2CcPrecisionReqLimitArrayInput` via:
 //
-//          CcPolicyV2CcPrecisionReqLimitArray{ CcPolicyV2CcPrecisionReqLimitArgs{...} }
+//	CcPolicyV2CcPrecisionReqLimitArray{ CcPolicyV2CcPrecisionReqLimitArgs{...} }
 type CcPolicyV2CcPrecisionReqLimitArrayInput interface {
 	pulumi.Input
 
@@ -891,6 +899,7 @@ func (o CcPolicyV2CcPrecisionReqLimitOutput) Domain() pulumi.StringOutput {
 	return o.ApplyT(func(v CcPolicyV2CcPrecisionReqLimit) string { return v.Domain }).(pulumi.StringOutput)
 }
 
+// Instance id.
 func (o CcPolicyV2CcPrecisionReqLimitOutput) InstanceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CcPolicyV2CcPrecisionReqLimit) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
 }
@@ -957,7 +966,7 @@ type CcPolicyV2CcPrecisionReqLimitPolicy struct {
 // CcPolicyV2CcPrecisionReqLimitPolicyInput is an input type that accepts CcPolicyV2CcPrecisionReqLimitPolicyArgs and CcPolicyV2CcPrecisionReqLimitPolicyOutput values.
 // You can construct a concrete instance of `CcPolicyV2CcPrecisionReqLimitPolicyInput` via:
 //
-//          CcPolicyV2CcPrecisionReqLimitPolicyArgs{...}
+//	CcPolicyV2CcPrecisionReqLimitPolicyArgs{...}
 type CcPolicyV2CcPrecisionReqLimitPolicyInput interface {
 	pulumi.Input
 
@@ -999,7 +1008,7 @@ func (i CcPolicyV2CcPrecisionReqLimitPolicyArgs) ToCcPolicyV2CcPrecisionReqLimit
 // CcPolicyV2CcPrecisionReqLimitPolicyArrayInput is an input type that accepts CcPolicyV2CcPrecisionReqLimitPolicyArray and CcPolicyV2CcPrecisionReqLimitPolicyArrayOutput values.
 // You can construct a concrete instance of `CcPolicyV2CcPrecisionReqLimitPolicyArrayInput` via:
 //
-//          CcPolicyV2CcPrecisionReqLimitPolicyArray{ CcPolicyV2CcPrecisionReqLimitPolicyArgs{...} }
+//	CcPolicyV2CcPrecisionReqLimitPolicyArray{ CcPolicyV2CcPrecisionReqLimitPolicyArgs{...} }
 type CcPolicyV2CcPrecisionReqLimitPolicyArrayInput interface {
 	pulumi.Input
 
@@ -1105,7 +1114,7 @@ type CcPolicyV2Threshold struct {
 // CcPolicyV2ThresholdInput is an input type that accepts CcPolicyV2ThresholdArgs and CcPolicyV2ThresholdOutput values.
 // You can construct a concrete instance of `CcPolicyV2ThresholdInput` via:
 //
-//          CcPolicyV2ThresholdArgs{...}
+//	CcPolicyV2ThresholdArgs{...}
 type CcPolicyV2ThresholdInput interface {
 	pulumi.Input
 
@@ -1135,7 +1144,7 @@ func (i CcPolicyV2ThresholdArgs) ToCcPolicyV2ThresholdOutputWithContext(ctx cont
 // CcPolicyV2ThresholdArrayInput is an input type that accepts CcPolicyV2ThresholdArray and CcPolicyV2ThresholdArrayOutput values.
 // You can construct a concrete instance of `CcPolicyV2ThresholdArrayInput` via:
 //
-//          CcPolicyV2ThresholdArray{ CcPolicyV2ThresholdArgs{...} }
+//	CcPolicyV2ThresholdArray{ CcPolicyV2ThresholdArgs{...} }
 type CcPolicyV2ThresholdArrayInput interface {
 	pulumi.Input
 
@@ -1215,7 +1224,7 @@ type DdosIpAttachmentV2BoundIpList struct {
 // DdosIpAttachmentV2BoundIpListInput is an input type that accepts DdosIpAttachmentV2BoundIpListArgs and DdosIpAttachmentV2BoundIpListOutput values.
 // You can construct a concrete instance of `DdosIpAttachmentV2BoundIpListInput` via:
 //
-//          DdosIpAttachmentV2BoundIpListArgs{...}
+//	DdosIpAttachmentV2BoundIpListArgs{...}
 type DdosIpAttachmentV2BoundIpListInput interface {
 	pulumi.Input
 
@@ -1249,7 +1258,7 @@ func (i DdosIpAttachmentV2BoundIpListArgs) ToDdosIpAttachmentV2BoundIpListOutput
 // DdosIpAttachmentV2BoundIpListArrayInput is an input type that accepts DdosIpAttachmentV2BoundIpListArray and DdosIpAttachmentV2BoundIpListArrayOutput values.
 // You can construct a concrete instance of `DdosIpAttachmentV2BoundIpListArrayInput` via:
 //
-//          DdosIpAttachmentV2BoundIpListArray{ DdosIpAttachmentV2BoundIpListArgs{...} }
+//	DdosIpAttachmentV2BoundIpListArray{ DdosIpAttachmentV2BoundIpListArgs{...} }
 type DdosIpAttachmentV2BoundIpListArrayInput interface {
 	pulumi.Input
 
@@ -1369,7 +1378,7 @@ type DdosPolicyDropOption struct {
 // DdosPolicyDropOptionInput is an input type that accepts DdosPolicyDropOptionArgs and DdosPolicyDropOptionOutput values.
 // You can construct a concrete instance of `DdosPolicyDropOptionInput` via:
 //
-//          DdosPolicyDropOptionArgs{...}
+//	DdosPolicyDropOptionArgs{...}
 type DdosPolicyDropOptionInput interface {
 	pulumi.Input
 
@@ -1433,7 +1442,7 @@ func (i DdosPolicyDropOptionArgs) ToDdosPolicyDropOptionOutputWithContext(ctx co
 // DdosPolicyDropOptionArrayInput is an input type that accepts DdosPolicyDropOptionArray and DdosPolicyDropOptionArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyDropOptionArrayInput` via:
 //
-//          DdosPolicyDropOptionArray{ DdosPolicyDropOptionArgs{...} }
+//	DdosPolicyDropOptionArray{ DdosPolicyDropOptionArgs{...} }
 type DdosPolicyDropOptionArrayInput interface {
 	pulumi.Input
 
@@ -1618,7 +1627,7 @@ type DdosPolicyPacketFilter struct {
 // DdosPolicyPacketFilterInput is an input type that accepts DdosPolicyPacketFilterArgs and DdosPolicyPacketFilterOutput values.
 // You can construct a concrete instance of `DdosPolicyPacketFilterInput` via:
 //
-//          DdosPolicyPacketFilterArgs{...}
+//	DdosPolicyPacketFilterArgs{...}
 type DdosPolicyPacketFilterInput interface {
 	pulumi.Input
 
@@ -1672,7 +1681,7 @@ func (i DdosPolicyPacketFilterArgs) ToDdosPolicyPacketFilterOutputWithContext(ct
 // DdosPolicyPacketFilterArrayInput is an input type that accepts DdosPolicyPacketFilterArray and DdosPolicyPacketFilterArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyPacketFilterArrayInput` via:
 //
-//          DdosPolicyPacketFilterArray{ DdosPolicyPacketFilterArgs{...} }
+//	DdosPolicyPacketFilterArray{ DdosPolicyPacketFilterArgs{...} }
 type DdosPolicyPacketFilterArrayInput interface {
 	pulumi.Input
 
@@ -1814,7 +1823,7 @@ type DdosPolicyPortFilter struct {
 // DdosPolicyPortFilterInput is an input type that accepts DdosPolicyPortFilterArgs and DdosPolicyPortFilterOutput values.
 // You can construct a concrete instance of `DdosPolicyPortFilterInput` via:
 //
-//          DdosPolicyPortFilterArgs{...}
+//	DdosPolicyPortFilterArgs{...}
 type DdosPolicyPortFilterInput interface {
 	pulumi.Input
 
@@ -1850,7 +1859,7 @@ func (i DdosPolicyPortFilterArgs) ToDdosPolicyPortFilterOutputWithContext(ctx co
 // DdosPolicyPortFilterArrayInput is an input type that accepts DdosPolicyPortFilterArray and DdosPolicyPortFilterArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyPortFilterArrayInput` via:
 //
-//          DdosPolicyPortFilterArray{ DdosPolicyPortFilterArgs{...} }
+//	DdosPolicyPortFilterArray{ DdosPolicyPortFilterArgs{...} }
 type DdosPolicyPortFilterArrayInput interface {
 	pulumi.Input
 
@@ -1951,7 +1960,7 @@ type DdosPolicyV2Acl struct {
 // DdosPolicyV2AclInput is an input type that accepts DdosPolicyV2AclArgs and DdosPolicyV2AclOutput values.
 // You can construct a concrete instance of `DdosPolicyV2AclInput` via:
 //
-//          DdosPolicyV2AclArgs{...}
+//	DdosPolicyV2AclArgs{...}
 type DdosPolicyV2AclInput interface {
 	pulumi.Input
 
@@ -1991,7 +2000,7 @@ func (i DdosPolicyV2AclArgs) ToDdosPolicyV2AclOutputWithContext(ctx context.Cont
 // DdosPolicyV2AclArrayInput is an input type that accepts DdosPolicyV2AclArray and DdosPolicyV2AclArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyV2AclArrayInput` via:
 //
-//          DdosPolicyV2AclArray{ DdosPolicyV2AclArgs{...} }
+//	DdosPolicyV2AclArray{ DdosPolicyV2AclArgs{...} }
 type DdosPolicyV2AclArrayInput interface {
 	pulumi.Input
 
@@ -2092,7 +2101,7 @@ type DdosPolicyV2BlackWhiteIp struct {
 // DdosPolicyV2BlackWhiteIpInput is an input type that accepts DdosPolicyV2BlackWhiteIpArgs and DdosPolicyV2BlackWhiteIpOutput values.
 // You can construct a concrete instance of `DdosPolicyV2BlackWhiteIpInput` via:
 //
-//          DdosPolicyV2BlackWhiteIpArgs{...}
+//	DdosPolicyV2BlackWhiteIpArgs{...}
 type DdosPolicyV2BlackWhiteIpInput interface {
 	pulumi.Input
 
@@ -2122,7 +2131,7 @@ func (i DdosPolicyV2BlackWhiteIpArgs) ToDdosPolicyV2BlackWhiteIpOutputWithContex
 // DdosPolicyV2BlackWhiteIpArrayInput is an input type that accepts DdosPolicyV2BlackWhiteIpArray and DdosPolicyV2BlackWhiteIpArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyV2BlackWhiteIpArrayInput` via:
 //
-//          DdosPolicyV2BlackWhiteIpArray{ DdosPolicyV2BlackWhiteIpArgs{...} }
+//	DdosPolicyV2BlackWhiteIpArray{ DdosPolicyV2BlackWhiteIpArgs{...} }
 type DdosPolicyV2BlackWhiteIpArrayInput interface {
 	pulumi.Input
 
@@ -2212,7 +2221,7 @@ type DdosPolicyV2DdosConnectLimit struct {
 // DdosPolicyV2DdosConnectLimitInput is an input type that accepts DdosPolicyV2DdosConnectLimitArgs and DdosPolicyV2DdosConnectLimitOutput values.
 // You can construct a concrete instance of `DdosPolicyV2DdosConnectLimitInput` via:
 //
-//          DdosPolicyV2DdosConnectLimitArgs{...}
+//	DdosPolicyV2DdosConnectLimitArgs{...}
 type DdosPolicyV2DdosConnectLimitInput interface {
 	pulumi.Input
 
@@ -2264,11 +2273,11 @@ func (i DdosPolicyV2DdosConnectLimitArgs) ToDdosPolicyV2DdosConnectLimitPtrOutpu
 // DdosPolicyV2DdosConnectLimitPtrInput is an input type that accepts DdosPolicyV2DdosConnectLimitArgs, DdosPolicyV2DdosConnectLimitPtr and DdosPolicyV2DdosConnectLimitPtrOutput values.
 // You can construct a concrete instance of `DdosPolicyV2DdosConnectLimitPtrInput` via:
 //
-//          DdosPolicyV2DdosConnectLimitArgs{...}
+//	        DdosPolicyV2DdosConnectLimitArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DdosPolicyV2DdosConnectLimitPtrInput interface {
 	pulumi.Input
 
@@ -2489,7 +2498,7 @@ type DdosPolicyV2DdosGeoIpBlockConfig struct {
 // DdosPolicyV2DdosGeoIpBlockConfigInput is an input type that accepts DdosPolicyV2DdosGeoIpBlockConfigArgs and DdosPolicyV2DdosGeoIpBlockConfigOutput values.
 // You can construct a concrete instance of `DdosPolicyV2DdosGeoIpBlockConfigInput` via:
 //
-//          DdosPolicyV2DdosGeoIpBlockConfigArgs{...}
+//	DdosPolicyV2DdosGeoIpBlockConfigArgs{...}
 type DdosPolicyV2DdosGeoIpBlockConfigInput interface {
 	pulumi.Input
 
@@ -2521,7 +2530,7 @@ func (i DdosPolicyV2DdosGeoIpBlockConfigArgs) ToDdosPolicyV2DdosGeoIpBlockConfig
 // DdosPolicyV2DdosGeoIpBlockConfigArrayInput is an input type that accepts DdosPolicyV2DdosGeoIpBlockConfigArray and DdosPolicyV2DdosGeoIpBlockConfigArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyV2DdosGeoIpBlockConfigArrayInput` via:
 //
-//          DdosPolicyV2DdosGeoIpBlockConfigArray{ DdosPolicyV2DdosGeoIpBlockConfigArgs{...} }
+//	DdosPolicyV2DdosGeoIpBlockConfigArray{ DdosPolicyV2DdosGeoIpBlockConfigArgs{...} }
 type DdosPolicyV2DdosGeoIpBlockConfigArrayInput interface {
 	pulumi.Input
 
@@ -2608,7 +2617,7 @@ type DdosPolicyV2DdosSpeedLimitConfig struct {
 // DdosPolicyV2DdosSpeedLimitConfigInput is an input type that accepts DdosPolicyV2DdosSpeedLimitConfigArgs and DdosPolicyV2DdosSpeedLimitConfigOutput values.
 // You can construct a concrete instance of `DdosPolicyV2DdosSpeedLimitConfigInput` via:
 //
-//          DdosPolicyV2DdosSpeedLimitConfigArgs{...}
+//	DdosPolicyV2DdosSpeedLimitConfigArgs{...}
 type DdosPolicyV2DdosSpeedLimitConfigInput interface {
 	pulumi.Input
 
@@ -2644,7 +2653,7 @@ func (i DdosPolicyV2DdosSpeedLimitConfigArgs) ToDdosPolicyV2DdosSpeedLimitConfig
 // DdosPolicyV2DdosSpeedLimitConfigArrayInput is an input type that accepts DdosPolicyV2DdosSpeedLimitConfigArray and DdosPolicyV2DdosSpeedLimitConfigArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyV2DdosSpeedLimitConfigArrayInput` via:
 //
-//          DdosPolicyV2DdosSpeedLimitConfigArray{ DdosPolicyV2DdosSpeedLimitConfigArgs{...} }
+//	DdosPolicyV2DdosSpeedLimitConfigArray{ DdosPolicyV2DdosSpeedLimitConfigArgs{...} }
 type DdosPolicyV2DdosSpeedLimitConfigArrayInput interface {
 	pulumi.Input
 
@@ -2773,7 +2782,7 @@ type DdosPolicyV2PacketFilter struct {
 // DdosPolicyV2PacketFilterInput is an input type that accepts DdosPolicyV2PacketFilterArgs and DdosPolicyV2PacketFilterOutput values.
 // You can construct a concrete instance of `DdosPolicyV2PacketFilterInput` via:
 //
-//          DdosPolicyV2PacketFilterArgs{...}
+//	DdosPolicyV2PacketFilterArgs{...}
 type DdosPolicyV2PacketFilterInput interface {
 	pulumi.Input
 
@@ -2841,7 +2850,7 @@ func (i DdosPolicyV2PacketFilterArgs) ToDdosPolicyV2PacketFilterOutputWithContex
 // DdosPolicyV2PacketFilterArrayInput is an input type that accepts DdosPolicyV2PacketFilterArray and DdosPolicyV2PacketFilterArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyV2PacketFilterArrayInput` via:
 //
-//          DdosPolicyV2PacketFilterArray{ DdosPolicyV2PacketFilterArgs{...} }
+//	DdosPolicyV2PacketFilterArray{ DdosPolicyV2PacketFilterArgs{...} }
 type DdosPolicyV2PacketFilterArrayInput interface {
 	pulumi.Input
 
@@ -3016,7 +3025,7 @@ type DdosPolicyV2ProtocolBlockConfig struct {
 // DdosPolicyV2ProtocolBlockConfigInput is an input type that accepts DdosPolicyV2ProtocolBlockConfigArgs and DdosPolicyV2ProtocolBlockConfigOutput values.
 // You can construct a concrete instance of `DdosPolicyV2ProtocolBlockConfigInput` via:
 //
-//          DdosPolicyV2ProtocolBlockConfigArgs{...}
+//	DdosPolicyV2ProtocolBlockConfigArgs{...}
 type DdosPolicyV2ProtocolBlockConfigInput interface {
 	pulumi.Input
 
@@ -3050,7 +3059,7 @@ func (i DdosPolicyV2ProtocolBlockConfigArgs) ToDdosPolicyV2ProtocolBlockConfigOu
 // DdosPolicyV2ProtocolBlockConfigArrayInput is an input type that accepts DdosPolicyV2ProtocolBlockConfigArray and DdosPolicyV2ProtocolBlockConfigArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyV2ProtocolBlockConfigArrayInput` via:
 //
-//          DdosPolicyV2ProtocolBlockConfigArray{ DdosPolicyV2ProtocolBlockConfigArgs{...} }
+//	DdosPolicyV2ProtocolBlockConfigArray{ DdosPolicyV2ProtocolBlockConfigArgs{...} }
 type DdosPolicyV2ProtocolBlockConfigArrayInput interface {
 	pulumi.Input
 
@@ -3140,7 +3149,7 @@ type DdosPolicyV2WaterPrintConfig struct {
 // DdosPolicyV2WaterPrintConfigInput is an input type that accepts DdosPolicyV2WaterPrintConfigArgs and DdosPolicyV2WaterPrintConfigOutput values.
 // You can construct a concrete instance of `DdosPolicyV2WaterPrintConfigInput` via:
 //
-//          DdosPolicyV2WaterPrintConfigArgs{...}
+//	DdosPolicyV2WaterPrintConfigArgs{...}
 type DdosPolicyV2WaterPrintConfigInput interface {
 	pulumi.Input
 
@@ -3174,7 +3183,7 @@ func (i DdosPolicyV2WaterPrintConfigArgs) ToDdosPolicyV2WaterPrintConfigOutputWi
 // DdosPolicyV2WaterPrintConfigArrayInput is an input type that accepts DdosPolicyV2WaterPrintConfigArray and DdosPolicyV2WaterPrintConfigArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyV2WaterPrintConfigArrayInput` via:
 //
-//          DdosPolicyV2WaterPrintConfigArray{ DdosPolicyV2WaterPrintConfigArgs{...} }
+//	DdosPolicyV2WaterPrintConfigArray{ DdosPolicyV2WaterPrintConfigArgs{...} }
 type DdosPolicyV2WaterPrintConfigArrayInput interface {
 	pulumi.Input
 
@@ -3262,7 +3271,7 @@ type DdosPolicyV2WaterPrintConfigListener struct {
 // DdosPolicyV2WaterPrintConfigListenerInput is an input type that accepts DdosPolicyV2WaterPrintConfigListenerArgs and DdosPolicyV2WaterPrintConfigListenerOutput values.
 // You can construct a concrete instance of `DdosPolicyV2WaterPrintConfigListenerInput` via:
 //
-//          DdosPolicyV2WaterPrintConfigListenerArgs{...}
+//	DdosPolicyV2WaterPrintConfigListenerArgs{...}
 type DdosPolicyV2WaterPrintConfigListenerInput interface {
 	pulumi.Input
 
@@ -3294,7 +3303,7 @@ func (i DdosPolicyV2WaterPrintConfigListenerArgs) ToDdosPolicyV2WaterPrintConfig
 // DdosPolicyV2WaterPrintConfigListenerArrayInput is an input type that accepts DdosPolicyV2WaterPrintConfigListenerArray and DdosPolicyV2WaterPrintConfigListenerArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyV2WaterPrintConfigListenerArrayInput` via:
 //
-//          DdosPolicyV2WaterPrintConfigListenerArray{ DdosPolicyV2WaterPrintConfigListenerArgs{...} }
+//	DdosPolicyV2WaterPrintConfigListenerArray{ DdosPolicyV2WaterPrintConfigListenerArgs{...} }
 type DdosPolicyV2WaterPrintConfigListenerArrayInput interface {
 	pulumi.Input
 
@@ -3381,7 +3390,7 @@ type DdosPolicyWatermarkFilter struct {
 // DdosPolicyWatermarkFilterInput is an input type that accepts DdosPolicyWatermarkFilterArgs and DdosPolicyWatermarkFilterOutput values.
 // You can construct a concrete instance of `DdosPolicyWatermarkFilterInput` via:
 //
-//          DdosPolicyWatermarkFilterArgs{...}
+//	DdosPolicyWatermarkFilterArgs{...}
 type DdosPolicyWatermarkFilterInput interface {
 	pulumi.Input
 
@@ -3417,7 +3426,7 @@ func (i DdosPolicyWatermarkFilterArgs) ToDdosPolicyWatermarkFilterOutputWithCont
 // DdosPolicyWatermarkFilterArrayInput is an input type that accepts DdosPolicyWatermarkFilterArray and DdosPolicyWatermarkFilterArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyWatermarkFilterArrayInput` via:
 //
-//          DdosPolicyWatermarkFilterArray{ DdosPolicyWatermarkFilterArgs{...} }
+//	DdosPolicyWatermarkFilterArray{ DdosPolicyWatermarkFilterArgs{...} }
 type DdosPolicyWatermarkFilterArrayInput interface {
 	pulumi.Input
 
@@ -3512,7 +3521,7 @@ type DdosPolicyWatermarkKey struct {
 // DdosPolicyWatermarkKeyInput is an input type that accepts DdosPolicyWatermarkKeyArgs and DdosPolicyWatermarkKeyOutput values.
 // You can construct a concrete instance of `DdosPolicyWatermarkKeyInput` via:
 //
-//          DdosPolicyWatermarkKeyArgs{...}
+//	DdosPolicyWatermarkKeyArgs{...}
 type DdosPolicyWatermarkKeyInput interface {
 	pulumi.Input
 
@@ -3546,7 +3555,7 @@ func (i DdosPolicyWatermarkKeyArgs) ToDdosPolicyWatermarkKeyOutputWithContext(ct
 // DdosPolicyWatermarkKeyArrayInput is an input type that accepts DdosPolicyWatermarkKeyArray and DdosPolicyWatermarkKeyArrayOutput values.
 // You can construct a concrete instance of `DdosPolicyWatermarkKeyArrayInput` via:
 //
-//          DdosPolicyWatermarkKeyArray{ DdosPolicyWatermarkKeyArgs{...} }
+//	DdosPolicyWatermarkKeyArray{ DdosPolicyWatermarkKeyArgs{...} }
 type DdosPolicyWatermarkKeyArrayInput interface {
 	pulumi.Input
 
@@ -3632,7 +3641,7 @@ type L4RuleSourceList struct {
 // L4RuleSourceListInput is an input type that accepts L4RuleSourceListArgs and L4RuleSourceListOutput values.
 // You can construct a concrete instance of `L4RuleSourceListInput` via:
 //
-//          L4RuleSourceListArgs{...}
+//	L4RuleSourceListArgs{...}
 type L4RuleSourceListInput interface {
 	pulumi.Input
 
@@ -3662,7 +3671,7 @@ func (i L4RuleSourceListArgs) ToL4RuleSourceListOutputWithContext(ctx context.Co
 // L4RuleSourceListArrayInput is an input type that accepts L4RuleSourceListArray and L4RuleSourceListArrayOutput values.
 // You can construct a concrete instance of `L4RuleSourceListArrayInput` via:
 //
-//          L4RuleSourceListArray{ L4RuleSourceListArgs{...} }
+//	L4RuleSourceListArray{ L4RuleSourceListArgs{...} }
 type L4RuleSourceListArrayInput interface {
 	pulumi.Input
 
@@ -3729,23 +3738,34 @@ func (o L4RuleSourceListArrayOutput) Index(i pulumi.IntInput) L4RuleSourceListOu
 }
 
 type L4RuleV2Rules struct {
-	KeepEnable   bool                      `pulumi:"keepEnable"`
-	Keeptime     int                       `pulumi:"keeptime"`
-	LbType       int                       `pulumi:"lbType"`
-	Protocol     string                    `pulumi:"protocol"`
-	Region       int                       `pulumi:"region"`
-	RemoveSwitch bool                      `pulumi:"removeSwitch"`
-	RuleName     string                    `pulumi:"ruleName"`
-	SourceLists  []L4RuleV2RulesSourceList `pulumi:"sourceLists"`
-	SourcePort   int                       `pulumi:"sourcePort"`
-	SourceType   int                       `pulumi:"sourceType"`
-	VirtualPort  int                       `pulumi:"virtualPort"`
+	// session hold switch.
+	KeepEnable bool `pulumi:"keepEnable"`
+	// The keeptime of the layer 4 rule.
+	Keeptime int `pulumi:"keeptime"`
+	// LB type of the rule, `1` for weight cycling and `2` for IP hash.
+	LbType int `pulumi:"lbType"`
+	// Protocol of the rule.
+	Protocol string `pulumi:"protocol"`
+	// Corresponding regional information.
+	Region int `pulumi:"region"`
+	// Remove the watermark state.
+	RemoveSwitch bool `pulumi:"removeSwitch"`
+	// Name of the rule.
+	RuleName string `pulumi:"ruleName"`
+	// Source list of the rule.
+	SourceLists []L4RuleV2RulesSourceList `pulumi:"sourceLists"`
+	// The source port of the layer 4 rule.
+	SourcePort int `pulumi:"sourcePort"`
+	// Source type, `1` for source of host, `2` for source of IP.
+	SourceType int `pulumi:"sourceType"`
+	// The virtual port of the layer 4 rule.
+	VirtualPort int `pulumi:"virtualPort"`
 }
 
 // L4RuleV2RulesInput is an input type that accepts L4RuleV2RulesArgs and L4RuleV2RulesOutput values.
 // You can construct a concrete instance of `L4RuleV2RulesInput` via:
 //
-//          L4RuleV2RulesArgs{...}
+//	L4RuleV2RulesArgs{...}
 type L4RuleV2RulesInput interface {
 	pulumi.Input
 
@@ -3754,17 +3774,28 @@ type L4RuleV2RulesInput interface {
 }
 
 type L4RuleV2RulesArgs struct {
-	KeepEnable   pulumi.BoolInput                  `pulumi:"keepEnable"`
-	Keeptime     pulumi.IntInput                   `pulumi:"keeptime"`
-	LbType       pulumi.IntInput                   `pulumi:"lbType"`
-	Protocol     pulumi.StringInput                `pulumi:"protocol"`
-	Region       pulumi.IntInput                   `pulumi:"region"`
-	RemoveSwitch pulumi.BoolInput                  `pulumi:"removeSwitch"`
-	RuleName     pulumi.StringInput                `pulumi:"ruleName"`
-	SourceLists  L4RuleV2RulesSourceListArrayInput `pulumi:"sourceLists"`
-	SourcePort   pulumi.IntInput                   `pulumi:"sourcePort"`
-	SourceType   pulumi.IntInput                   `pulumi:"sourceType"`
-	VirtualPort  pulumi.IntInput                   `pulumi:"virtualPort"`
+	// session hold switch.
+	KeepEnable pulumi.BoolInput `pulumi:"keepEnable"`
+	// The keeptime of the layer 4 rule.
+	Keeptime pulumi.IntInput `pulumi:"keeptime"`
+	// LB type of the rule, `1` for weight cycling and `2` for IP hash.
+	LbType pulumi.IntInput `pulumi:"lbType"`
+	// Protocol of the rule.
+	Protocol pulumi.StringInput `pulumi:"protocol"`
+	// Corresponding regional information.
+	Region pulumi.IntInput `pulumi:"region"`
+	// Remove the watermark state.
+	RemoveSwitch pulumi.BoolInput `pulumi:"removeSwitch"`
+	// Name of the rule.
+	RuleName pulumi.StringInput `pulumi:"ruleName"`
+	// Source list of the rule.
+	SourceLists L4RuleV2RulesSourceListArrayInput `pulumi:"sourceLists"`
+	// The source port of the layer 4 rule.
+	SourcePort pulumi.IntInput `pulumi:"sourcePort"`
+	// Source type, `1` for source of host, `2` for source of IP.
+	SourceType pulumi.IntInput `pulumi:"sourceType"`
+	// The virtual port of the layer 4 rule.
+	VirtualPort pulumi.IntInput `pulumi:"virtualPort"`
 }
 
 func (L4RuleV2RulesArgs) ElementType() reflect.Type {
@@ -3790,11 +3821,11 @@ func (i L4RuleV2RulesArgs) ToL4RuleV2RulesPtrOutputWithContext(ctx context.Conte
 // L4RuleV2RulesPtrInput is an input type that accepts L4RuleV2RulesArgs, L4RuleV2RulesPtr and L4RuleV2RulesPtrOutput values.
 // You can construct a concrete instance of `L4RuleV2RulesPtrInput` via:
 //
-//          L4RuleV2RulesArgs{...}
+//	        L4RuleV2RulesArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type L4RuleV2RulesPtrInput interface {
 	pulumi.Input
 
@@ -3844,46 +3875,57 @@ func (o L4RuleV2RulesOutput) ToL4RuleV2RulesPtrOutputWithContext(ctx context.Con
 	}).(L4RuleV2RulesPtrOutput)
 }
 
+// session hold switch.
 func (o L4RuleV2RulesOutput) KeepEnable() pulumi.BoolOutput {
 	return o.ApplyT(func(v L4RuleV2Rules) bool { return v.KeepEnable }).(pulumi.BoolOutput)
 }
 
+// The keeptime of the layer 4 rule.
 func (o L4RuleV2RulesOutput) Keeptime() pulumi.IntOutput {
 	return o.ApplyT(func(v L4RuleV2Rules) int { return v.Keeptime }).(pulumi.IntOutput)
 }
 
+// LB type of the rule, `1` for weight cycling and `2` for IP hash.
 func (o L4RuleV2RulesOutput) LbType() pulumi.IntOutput {
 	return o.ApplyT(func(v L4RuleV2Rules) int { return v.LbType }).(pulumi.IntOutput)
 }
 
+// Protocol of the rule.
 func (o L4RuleV2RulesOutput) Protocol() pulumi.StringOutput {
 	return o.ApplyT(func(v L4RuleV2Rules) string { return v.Protocol }).(pulumi.StringOutput)
 }
 
+// Corresponding regional information.
 func (o L4RuleV2RulesOutput) Region() pulumi.IntOutput {
 	return o.ApplyT(func(v L4RuleV2Rules) int { return v.Region }).(pulumi.IntOutput)
 }
 
+// Remove the watermark state.
 func (o L4RuleV2RulesOutput) RemoveSwitch() pulumi.BoolOutput {
 	return o.ApplyT(func(v L4RuleV2Rules) bool { return v.RemoveSwitch }).(pulumi.BoolOutput)
 }
 
+// Name of the rule.
 func (o L4RuleV2RulesOutput) RuleName() pulumi.StringOutput {
 	return o.ApplyT(func(v L4RuleV2Rules) string { return v.RuleName }).(pulumi.StringOutput)
 }
 
+// Source list of the rule.
 func (o L4RuleV2RulesOutput) SourceLists() L4RuleV2RulesSourceListArrayOutput {
 	return o.ApplyT(func(v L4RuleV2Rules) []L4RuleV2RulesSourceList { return v.SourceLists }).(L4RuleV2RulesSourceListArrayOutput)
 }
 
+// The source port of the layer 4 rule.
 func (o L4RuleV2RulesOutput) SourcePort() pulumi.IntOutput {
 	return o.ApplyT(func(v L4RuleV2Rules) int { return v.SourcePort }).(pulumi.IntOutput)
 }
 
+// Source type, `1` for source of host, `2` for source of IP.
 func (o L4RuleV2RulesOutput) SourceType() pulumi.IntOutput {
 	return o.ApplyT(func(v L4RuleV2Rules) int { return v.SourceType }).(pulumi.IntOutput)
 }
 
+// The virtual port of the layer 4 rule.
 func (o L4RuleV2RulesOutput) VirtualPort() pulumi.IntOutput {
 	return o.ApplyT(func(v L4RuleV2Rules) int { return v.VirtualPort }).(pulumi.IntOutput)
 }
@@ -3912,6 +3954,7 @@ func (o L4RuleV2RulesPtrOutput) Elem() L4RuleV2RulesOutput {
 	}).(L4RuleV2RulesOutput)
 }
 
+// session hold switch.
 func (o L4RuleV2RulesPtrOutput) KeepEnable() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *L4RuleV2Rules) *bool {
 		if v == nil {
@@ -3921,6 +3964,7 @@ func (o L4RuleV2RulesPtrOutput) KeepEnable() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+// The keeptime of the layer 4 rule.
 func (o L4RuleV2RulesPtrOutput) Keeptime() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *L4RuleV2Rules) *int {
 		if v == nil {
@@ -3930,6 +3974,7 @@ func (o L4RuleV2RulesPtrOutput) Keeptime() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// LB type of the rule, `1` for weight cycling and `2` for IP hash.
 func (o L4RuleV2RulesPtrOutput) LbType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *L4RuleV2Rules) *int {
 		if v == nil {
@@ -3939,6 +3984,7 @@ func (o L4RuleV2RulesPtrOutput) LbType() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Protocol of the rule.
 func (o L4RuleV2RulesPtrOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *L4RuleV2Rules) *string {
 		if v == nil {
@@ -3948,6 +3994,7 @@ func (o L4RuleV2RulesPtrOutput) Protocol() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Corresponding regional information.
 func (o L4RuleV2RulesPtrOutput) Region() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *L4RuleV2Rules) *int {
 		if v == nil {
@@ -3957,6 +4004,7 @@ func (o L4RuleV2RulesPtrOutput) Region() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Remove the watermark state.
 func (o L4RuleV2RulesPtrOutput) RemoveSwitch() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *L4RuleV2Rules) *bool {
 		if v == nil {
@@ -3966,6 +4014,7 @@ func (o L4RuleV2RulesPtrOutput) RemoveSwitch() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
+// Name of the rule.
 func (o L4RuleV2RulesPtrOutput) RuleName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *L4RuleV2Rules) *string {
 		if v == nil {
@@ -3975,6 +4024,7 @@ func (o L4RuleV2RulesPtrOutput) RuleName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+// Source list of the rule.
 func (o L4RuleV2RulesPtrOutput) SourceLists() L4RuleV2RulesSourceListArrayOutput {
 	return o.ApplyT(func(v *L4RuleV2Rules) []L4RuleV2RulesSourceList {
 		if v == nil {
@@ -3984,6 +4034,7 @@ func (o L4RuleV2RulesPtrOutput) SourceLists() L4RuleV2RulesSourceListArrayOutput
 	}).(L4RuleV2RulesSourceListArrayOutput)
 }
 
+// The source port of the layer 4 rule.
 func (o L4RuleV2RulesPtrOutput) SourcePort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *L4RuleV2Rules) *int {
 		if v == nil {
@@ -3993,6 +4044,7 @@ func (o L4RuleV2RulesPtrOutput) SourcePort() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// Source type, `1` for source of host, `2` for source of IP.
 func (o L4RuleV2RulesPtrOutput) SourceType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *L4RuleV2Rules) *int {
 		if v == nil {
@@ -4002,6 +4054,7 @@ func (o L4RuleV2RulesPtrOutput) SourceType() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// The virtual port of the layer 4 rule.
 func (o L4RuleV2RulesPtrOutput) VirtualPort() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *L4RuleV2Rules) *int {
 		if v == nil {
@@ -4012,14 +4065,16 @@ func (o L4RuleV2RulesPtrOutput) VirtualPort() pulumi.IntPtrOutput {
 }
 
 type L4RuleV2RulesSourceList struct {
+	// Source IP or domain.
 	Source string `pulumi:"source"`
-	Weight int    `pulumi:"weight"`
+	// Weight of the source.
+	Weight int `pulumi:"weight"`
 }
 
 // L4RuleV2RulesSourceListInput is an input type that accepts L4RuleV2RulesSourceListArgs and L4RuleV2RulesSourceListOutput values.
 // You can construct a concrete instance of `L4RuleV2RulesSourceListInput` via:
 //
-//          L4RuleV2RulesSourceListArgs{...}
+//	L4RuleV2RulesSourceListArgs{...}
 type L4RuleV2RulesSourceListInput interface {
 	pulumi.Input
 
@@ -4028,8 +4083,10 @@ type L4RuleV2RulesSourceListInput interface {
 }
 
 type L4RuleV2RulesSourceListArgs struct {
+	// Source IP or domain.
 	Source pulumi.StringInput `pulumi:"source"`
-	Weight pulumi.IntInput    `pulumi:"weight"`
+	// Weight of the source.
+	Weight pulumi.IntInput `pulumi:"weight"`
 }
 
 func (L4RuleV2RulesSourceListArgs) ElementType() reflect.Type {
@@ -4047,7 +4104,7 @@ func (i L4RuleV2RulesSourceListArgs) ToL4RuleV2RulesSourceListOutputWithContext(
 // L4RuleV2RulesSourceListArrayInput is an input type that accepts L4RuleV2RulesSourceListArray and L4RuleV2RulesSourceListArrayOutput values.
 // You can construct a concrete instance of `L4RuleV2RulesSourceListArrayInput` via:
 //
-//          L4RuleV2RulesSourceListArray{ L4RuleV2RulesSourceListArgs{...} }
+//	L4RuleV2RulesSourceListArray{ L4RuleV2RulesSourceListArgs{...} }
 type L4RuleV2RulesSourceListArrayInput interface {
 	pulumi.Input
 
@@ -4083,10 +4140,12 @@ func (o L4RuleV2RulesSourceListOutput) ToL4RuleV2RulesSourceListOutputWithContex
 	return o
 }
 
+// Source IP or domain.
 func (o L4RuleV2RulesSourceListOutput) Source() pulumi.StringOutput {
 	return o.ApplyT(func(v L4RuleV2RulesSourceList) string { return v.Source }).(pulumi.StringOutput)
 }
 
+// Weight of the source.
 func (o L4RuleV2RulesSourceListOutput) Weight() pulumi.IntOutput {
 	return o.ApplyT(func(v L4RuleV2RulesSourceList) int { return v.Weight }).(pulumi.IntOutput)
 }
@@ -4138,7 +4197,7 @@ type L7RuleV2Rule struct {
 // L7RuleV2RuleInput is an input type that accepts L7RuleV2RuleArgs and L7RuleV2RuleOutput values.
 // You can construct a concrete instance of `L7RuleV2RuleInput` via:
 //
-//          L7RuleV2RuleArgs{...}
+//	L7RuleV2RuleArgs{...}
 type L7RuleV2RuleInput interface {
 	pulumi.Input
 
@@ -4193,11 +4252,11 @@ func (i L7RuleV2RuleArgs) ToL7RuleV2RulePtrOutputWithContext(ctx context.Context
 // L7RuleV2RulePtrInput is an input type that accepts L7RuleV2RuleArgs, L7RuleV2RulePtr and L7RuleV2RulePtrOutput values.
 // You can construct a concrete instance of `L7RuleV2RulePtrInput` via:
 //
-//          L7RuleV2RuleArgs{...}
+//	        L7RuleV2RuleArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type L7RuleV2RulePtrInput interface {
 	pulumi.Input
 
@@ -4435,14 +4494,16 @@ func (o L7RuleV2RulePtrOutput) SslId() pulumi.StringPtrOutput {
 }
 
 type L7RuleV2RuleSourceList struct {
+	// Source IP or domain.
 	Source string `pulumi:"source"`
-	Weight int    `pulumi:"weight"`
+	// Weight of the source.
+	Weight int `pulumi:"weight"`
 }
 
 // L7RuleV2RuleSourceListInput is an input type that accepts L7RuleV2RuleSourceListArgs and L7RuleV2RuleSourceListOutput values.
 // You can construct a concrete instance of `L7RuleV2RuleSourceListInput` via:
 //
-//          L7RuleV2RuleSourceListArgs{...}
+//	L7RuleV2RuleSourceListArgs{...}
 type L7RuleV2RuleSourceListInput interface {
 	pulumi.Input
 
@@ -4451,8 +4512,10 @@ type L7RuleV2RuleSourceListInput interface {
 }
 
 type L7RuleV2RuleSourceListArgs struct {
+	// Source IP or domain.
 	Source pulumi.StringInput `pulumi:"source"`
-	Weight pulumi.IntInput    `pulumi:"weight"`
+	// Weight of the source.
+	Weight pulumi.IntInput `pulumi:"weight"`
 }
 
 func (L7RuleV2RuleSourceListArgs) ElementType() reflect.Type {
@@ -4470,7 +4533,7 @@ func (i L7RuleV2RuleSourceListArgs) ToL7RuleV2RuleSourceListOutputWithContext(ct
 // L7RuleV2RuleSourceListArrayInput is an input type that accepts L7RuleV2RuleSourceListArray and L7RuleV2RuleSourceListArrayOutput values.
 // You can construct a concrete instance of `L7RuleV2RuleSourceListArrayInput` via:
 //
-//          L7RuleV2RuleSourceListArray{ L7RuleV2RuleSourceListArgs{...} }
+//	L7RuleV2RuleSourceListArray{ L7RuleV2RuleSourceListArgs{...} }
 type L7RuleV2RuleSourceListArrayInput interface {
 	pulumi.Input
 
@@ -4506,10 +4569,12 @@ func (o L7RuleV2RuleSourceListOutput) ToL7RuleV2RuleSourceListOutputWithContext(
 	return o
 }
 
+// Source IP or domain.
 func (o L7RuleV2RuleSourceListOutput) Source() pulumi.StringOutput {
 	return o.ApplyT(func(v L7RuleV2RuleSourceList) string { return v.Source }).(pulumi.StringOutput)
 }
 
+// Weight of the source.
 func (o L7RuleV2RuleSourceListOutput) Weight() pulumi.IntOutput {
 	return o.ApplyT(func(v L7RuleV2RuleSourceList) int { return v.Weight }).(pulumi.IntOutput)
 }
@@ -4550,8 +4615,9 @@ type GetCcHttpPoliciesList struct {
 	// ID of the resource that the CC http policy works for.
 	ResourceId string `pulumi:"resourceId"`
 	// Type of the resource that the CC http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
-	ResourceType string                          `pulumi:"resourceType"`
-	RuleLists    []GetCcHttpPoliciesListRuleList `pulumi:"ruleLists"`
+	ResourceType string `pulumi:"resourceType"`
+	// Rule list of the CC self-define http policy.
+	RuleLists []GetCcHttpPoliciesListRuleList `pulumi:"ruleLists"`
 	// Match mode.
 	Smode string `pulumi:"smode"`
 	// Indicate the CC self-define http policy takes effect or not.
@@ -4561,7 +4627,7 @@ type GetCcHttpPoliciesList struct {
 // GetCcHttpPoliciesListInput is an input type that accepts GetCcHttpPoliciesListArgs and GetCcHttpPoliciesListOutput values.
 // You can construct a concrete instance of `GetCcHttpPoliciesListInput` via:
 //
-//          GetCcHttpPoliciesListArgs{...}
+//	GetCcHttpPoliciesListArgs{...}
 type GetCcHttpPoliciesListInput interface {
 	pulumi.Input
 
@@ -4585,8 +4651,9 @@ type GetCcHttpPoliciesListArgs struct {
 	// ID of the resource that the CC http policy works for.
 	ResourceId pulumi.StringInput `pulumi:"resourceId"`
 	// Type of the resource that the CC http policy works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
-	ResourceType pulumi.StringInput                      `pulumi:"resourceType"`
-	RuleLists    GetCcHttpPoliciesListRuleListArrayInput `pulumi:"ruleLists"`
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+	// Rule list of the CC self-define http policy.
+	RuleLists GetCcHttpPoliciesListRuleListArrayInput `pulumi:"ruleLists"`
 	// Match mode.
 	Smode pulumi.StringInput `pulumi:"smode"`
 	// Indicate the CC self-define http policy takes effect or not.
@@ -4608,7 +4675,7 @@ func (i GetCcHttpPoliciesListArgs) ToGetCcHttpPoliciesListOutputWithContext(ctx 
 // GetCcHttpPoliciesListArrayInput is an input type that accepts GetCcHttpPoliciesListArray and GetCcHttpPoliciesListArrayOutput values.
 // You can construct a concrete instance of `GetCcHttpPoliciesListArrayInput` via:
 //
-//          GetCcHttpPoliciesListArray{ GetCcHttpPoliciesListArgs{...} }
+//	GetCcHttpPoliciesListArray{ GetCcHttpPoliciesListArgs{...} }
 type GetCcHttpPoliciesListArrayInput interface {
 	pulumi.Input
 
@@ -4684,6 +4751,7 @@ func (o GetCcHttpPoliciesListOutput) ResourceType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCcHttpPoliciesList) string { return v.ResourceType }).(pulumi.StringOutput)
 }
 
+// Rule list of the CC self-define http policy.
 func (o GetCcHttpPoliciesListOutput) RuleLists() GetCcHttpPoliciesListRuleListArrayOutput {
 	return o.ApplyT(func(v GetCcHttpPoliciesList) []GetCcHttpPoliciesListRuleList { return v.RuleLists }).(GetCcHttpPoliciesListRuleListArrayOutput)
 }
@@ -4719,15 +4787,18 @@ func (o GetCcHttpPoliciesListArrayOutput) Index(i pulumi.IntInput) GetCcHttpPoli
 }
 
 type GetCcHttpPoliciesListRuleList struct {
+	// Operator of the rule.
 	Operator string `pulumi:"operator"`
-	Skey     string `pulumi:"skey"`
-	Value    string `pulumi:"value"`
+	// Key of the rule.
+	Skey string `pulumi:"skey"`
+	// Rule value.
+	Value string `pulumi:"value"`
 }
 
 // GetCcHttpPoliciesListRuleListInput is an input type that accepts GetCcHttpPoliciesListRuleListArgs and GetCcHttpPoliciesListRuleListOutput values.
 // You can construct a concrete instance of `GetCcHttpPoliciesListRuleListInput` via:
 //
-//          GetCcHttpPoliciesListRuleListArgs{...}
+//	GetCcHttpPoliciesListRuleListArgs{...}
 type GetCcHttpPoliciesListRuleListInput interface {
 	pulumi.Input
 
@@ -4736,9 +4807,12 @@ type GetCcHttpPoliciesListRuleListInput interface {
 }
 
 type GetCcHttpPoliciesListRuleListArgs struct {
+	// Operator of the rule.
 	Operator pulumi.StringInput `pulumi:"operator"`
-	Skey     pulumi.StringInput `pulumi:"skey"`
-	Value    pulumi.StringInput `pulumi:"value"`
+	// Key of the rule.
+	Skey pulumi.StringInput `pulumi:"skey"`
+	// Rule value.
+	Value pulumi.StringInput `pulumi:"value"`
 }
 
 func (GetCcHttpPoliciesListRuleListArgs) ElementType() reflect.Type {
@@ -4756,7 +4830,7 @@ func (i GetCcHttpPoliciesListRuleListArgs) ToGetCcHttpPoliciesListRuleListOutput
 // GetCcHttpPoliciesListRuleListArrayInput is an input type that accepts GetCcHttpPoliciesListRuleListArray and GetCcHttpPoliciesListRuleListArrayOutput values.
 // You can construct a concrete instance of `GetCcHttpPoliciesListRuleListArrayInput` via:
 //
-//          GetCcHttpPoliciesListRuleListArray{ GetCcHttpPoliciesListRuleListArgs{...} }
+//	GetCcHttpPoliciesListRuleListArray{ GetCcHttpPoliciesListRuleListArgs{...} }
 type GetCcHttpPoliciesListRuleListArrayInput interface {
 	pulumi.Input
 
@@ -4792,14 +4866,17 @@ func (o GetCcHttpPoliciesListRuleListOutput) ToGetCcHttpPoliciesListRuleListOutp
 	return o
 }
 
+// Operator of the rule.
 func (o GetCcHttpPoliciesListRuleListOutput) Operator() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCcHttpPoliciesListRuleList) string { return v.Operator }).(pulumi.StringOutput)
 }
 
+// Key of the rule.
 func (o GetCcHttpPoliciesListRuleListOutput) Skey() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCcHttpPoliciesListRuleList) string { return v.Skey }).(pulumi.StringOutput)
 }
 
+// Rule value.
 func (o GetCcHttpPoliciesListRuleListOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCcHttpPoliciesListRuleList) string { return v.Value }).(pulumi.StringOutput)
 }
@@ -4842,7 +4919,8 @@ type GetCcHttpsPoliciesList struct {
 	// Type of the resource that the CC https policy works for, valid value is `bgpip`.
 	ResourceType string `pulumi:"resourceType"`
 	// Rule id of the domain that the CC self-define https policy works for.
-	RuleId    string                           `pulumi:"ruleId"`
+	RuleId string `pulumi:"ruleId"`
+	// Rule list of the CC self-define https policy.
 	RuleLists []GetCcHttpsPoliciesListRuleList `pulumi:"ruleLists"`
 	// Indicate the CC self-define https policy takes effect or not.
 	Switch bool `pulumi:"switch"`
@@ -4851,7 +4929,7 @@ type GetCcHttpsPoliciesList struct {
 // GetCcHttpsPoliciesListInput is an input type that accepts GetCcHttpsPoliciesListArgs and GetCcHttpsPoliciesListOutput values.
 // You can construct a concrete instance of `GetCcHttpsPoliciesListInput` via:
 //
-//          GetCcHttpsPoliciesListArgs{...}
+//	GetCcHttpsPoliciesListArgs{...}
 type GetCcHttpsPoliciesListInput interface {
 	pulumi.Input
 
@@ -4877,7 +4955,8 @@ type GetCcHttpsPoliciesListArgs struct {
 	// Type of the resource that the CC https policy works for, valid value is `bgpip`.
 	ResourceType pulumi.StringInput `pulumi:"resourceType"`
 	// Rule id of the domain that the CC self-define https policy works for.
-	RuleId    pulumi.StringInput                       `pulumi:"ruleId"`
+	RuleId pulumi.StringInput `pulumi:"ruleId"`
+	// Rule list of the CC self-define https policy.
 	RuleLists GetCcHttpsPoliciesListRuleListArrayInput `pulumi:"ruleLists"`
 	// Indicate the CC self-define https policy takes effect or not.
 	Switch pulumi.BoolInput `pulumi:"switch"`
@@ -4898,7 +4977,7 @@ func (i GetCcHttpsPoliciesListArgs) ToGetCcHttpsPoliciesListOutputWithContext(ct
 // GetCcHttpsPoliciesListArrayInput is an input type that accepts GetCcHttpsPoliciesListArray and GetCcHttpsPoliciesListArrayOutput values.
 // You can construct a concrete instance of `GetCcHttpsPoliciesListArrayInput` via:
 //
-//          GetCcHttpsPoliciesListArray{ GetCcHttpsPoliciesListArgs{...} }
+//	GetCcHttpsPoliciesListArray{ GetCcHttpsPoliciesListArgs{...} }
 type GetCcHttpsPoliciesListArrayInput interface {
 	pulumi.Input
 
@@ -4979,6 +5058,7 @@ func (o GetCcHttpsPoliciesListOutput) RuleId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCcHttpsPoliciesList) string { return v.RuleId }).(pulumi.StringOutput)
 }
 
+// Rule list of the CC self-define https policy.
 func (o GetCcHttpsPoliciesListOutput) RuleLists() GetCcHttpsPoliciesListRuleListArrayOutput {
 	return o.ApplyT(func(v GetCcHttpsPoliciesList) []GetCcHttpsPoliciesListRuleList { return v.RuleLists }).(GetCcHttpsPoliciesListRuleListArrayOutput)
 }
@@ -5009,15 +5089,18 @@ func (o GetCcHttpsPoliciesListArrayOutput) Index(i pulumi.IntInput) GetCcHttpsPo
 }
 
 type GetCcHttpsPoliciesListRuleList struct {
+	// Operator of the rule.
 	Operator string `pulumi:"operator"`
-	Skey     string `pulumi:"skey"`
-	Value    string `pulumi:"value"`
+	// Key of the rule.
+	Skey string `pulumi:"skey"`
+	// Rule value.
+	Value string `pulumi:"value"`
 }
 
 // GetCcHttpsPoliciesListRuleListInput is an input type that accepts GetCcHttpsPoliciesListRuleListArgs and GetCcHttpsPoliciesListRuleListOutput values.
 // You can construct a concrete instance of `GetCcHttpsPoliciesListRuleListInput` via:
 //
-//          GetCcHttpsPoliciesListRuleListArgs{...}
+//	GetCcHttpsPoliciesListRuleListArgs{...}
 type GetCcHttpsPoliciesListRuleListInput interface {
 	pulumi.Input
 
@@ -5026,9 +5109,12 @@ type GetCcHttpsPoliciesListRuleListInput interface {
 }
 
 type GetCcHttpsPoliciesListRuleListArgs struct {
+	// Operator of the rule.
 	Operator pulumi.StringInput `pulumi:"operator"`
-	Skey     pulumi.StringInput `pulumi:"skey"`
-	Value    pulumi.StringInput `pulumi:"value"`
+	// Key of the rule.
+	Skey pulumi.StringInput `pulumi:"skey"`
+	// Rule value.
+	Value pulumi.StringInput `pulumi:"value"`
 }
 
 func (GetCcHttpsPoliciesListRuleListArgs) ElementType() reflect.Type {
@@ -5046,7 +5132,7 @@ func (i GetCcHttpsPoliciesListRuleListArgs) ToGetCcHttpsPoliciesListRuleListOutp
 // GetCcHttpsPoliciesListRuleListArrayInput is an input type that accepts GetCcHttpsPoliciesListRuleListArray and GetCcHttpsPoliciesListRuleListArrayOutput values.
 // You can construct a concrete instance of `GetCcHttpsPoliciesListRuleListArrayInput` via:
 //
-//          GetCcHttpsPoliciesListRuleListArray{ GetCcHttpsPoliciesListRuleListArgs{...} }
+//	GetCcHttpsPoliciesListRuleListArray{ GetCcHttpsPoliciesListRuleListArgs{...} }
 type GetCcHttpsPoliciesListRuleListArrayInput interface {
 	pulumi.Input
 
@@ -5082,14 +5168,17 @@ func (o GetCcHttpsPoliciesListRuleListOutput) ToGetCcHttpsPoliciesListRuleListOu
 	return o
 }
 
+// Operator of the rule.
 func (o GetCcHttpsPoliciesListRuleListOutput) Operator() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCcHttpsPoliciesListRuleList) string { return v.Operator }).(pulumi.StringOutput)
 }
 
+// Key of the rule.
 func (o GetCcHttpsPoliciesListRuleListOutput) Skey() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCcHttpsPoliciesListRuleList) string { return v.Skey }).(pulumi.StringOutput)
 }
 
+// Rule value.
 func (o GetCcHttpsPoliciesListRuleListOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCcHttpsPoliciesListRuleList) string { return v.Value }).(pulumi.StringOutput)
 }
@@ -5115,6 +5204,7 @@ func (o GetCcHttpsPoliciesListRuleListArrayOutput) Index(i pulumi.IntInput) GetC
 }
 
 type GetDdosPoliciesList struct {
+	// Black ip list.
 	BlackIps []string `pulumi:"blackIps"`
 	// Create time of the DDoS policy.
 	CreateTime string `pulumi:"createTime"`
@@ -5134,13 +5224,14 @@ type GetDdosPoliciesList struct {
 	WatermarkFilters []GetDdosPoliciesListWatermarkFilter `pulumi:"watermarkFilters"`
 	// Watermark content.
 	WatermarkKeys []GetDdosPoliciesListWatermarkKey `pulumi:"watermarkKeys"`
-	WhiteIps      []string                          `pulumi:"whiteIps"`
+	// White ip list.
+	WhiteIps []string `pulumi:"whiteIps"`
 }
 
 // GetDdosPoliciesListInput is an input type that accepts GetDdosPoliciesListArgs and GetDdosPoliciesListOutput values.
 // You can construct a concrete instance of `GetDdosPoliciesListInput` via:
 //
-//          GetDdosPoliciesListArgs{...}
+//	GetDdosPoliciesListArgs{...}
 type GetDdosPoliciesListInput interface {
 	pulumi.Input
 
@@ -5149,6 +5240,7 @@ type GetDdosPoliciesListInput interface {
 }
 
 type GetDdosPoliciesListArgs struct {
+	// Black ip list.
 	BlackIps pulumi.StringArrayInput `pulumi:"blackIps"`
 	// Create time of the DDoS policy.
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
@@ -5168,7 +5260,8 @@ type GetDdosPoliciesListArgs struct {
 	WatermarkFilters GetDdosPoliciesListWatermarkFilterArrayInput `pulumi:"watermarkFilters"`
 	// Watermark content.
 	WatermarkKeys GetDdosPoliciesListWatermarkKeyArrayInput `pulumi:"watermarkKeys"`
-	WhiteIps      pulumi.StringArrayInput                   `pulumi:"whiteIps"`
+	// White ip list.
+	WhiteIps pulumi.StringArrayInput `pulumi:"whiteIps"`
 }
 
 func (GetDdosPoliciesListArgs) ElementType() reflect.Type {
@@ -5186,7 +5279,7 @@ func (i GetDdosPoliciesListArgs) ToGetDdosPoliciesListOutputWithContext(ctx cont
 // GetDdosPoliciesListArrayInput is an input type that accepts GetDdosPoliciesListArray and GetDdosPoliciesListArrayOutput values.
 // You can construct a concrete instance of `GetDdosPoliciesListArrayInput` via:
 //
-//          GetDdosPoliciesListArray{ GetDdosPoliciesListArgs{...} }
+//	GetDdosPoliciesListArray{ GetDdosPoliciesListArgs{...} }
 type GetDdosPoliciesListArrayInput interface {
 	pulumi.Input
 
@@ -5222,6 +5315,7 @@ func (o GetDdosPoliciesListOutput) ToGetDdosPoliciesListOutputWithContext(ctx co
 	return o
 }
 
+// Black ip list.
 func (o GetDdosPoliciesListOutput) BlackIps() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetDdosPoliciesList) []string { return v.BlackIps }).(pulumi.StringArrayOutput)
 }
@@ -5271,6 +5365,7 @@ func (o GetDdosPoliciesListOutput) WatermarkKeys() GetDdosPoliciesListWatermarkK
 	return o.ApplyT(func(v GetDdosPoliciesList) []GetDdosPoliciesListWatermarkKey { return v.WatermarkKeys }).(GetDdosPoliciesListWatermarkKeyArrayOutput)
 }
 
+// White ip list.
 func (o GetDdosPoliciesListOutput) WhiteIps() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetDdosPoliciesList) []string { return v.WhiteIps }).(pulumi.StringArrayOutput)
 }
@@ -5305,7 +5400,8 @@ type GetDdosPoliciesListDropOption struct {
 	// The limit of concurrent connections based on destination IP.
 	DConnLimit int `pulumi:"dConnLimit"`
 	// The limit of new connections based on destination IP.
-	DNewLimit  int  `pulumi:"dNewLimit"`
+	DNewLimit int `pulumi:"dNewLimit"`
+	// Indicate whether to drop abroad traffic or not.
 	DropAbroad bool `pulumi:"dropAbroad"`
 	// Indicate whether to drop ICMP protocol or not.
 	DropIcmp bool `pulumi:"dropIcmp"`
@@ -5338,7 +5434,7 @@ type GetDdosPoliciesListDropOption struct {
 // GetDdosPoliciesListDropOptionInput is an input type that accepts GetDdosPoliciesListDropOptionArgs and GetDdosPoliciesListDropOptionOutput values.
 // You can construct a concrete instance of `GetDdosPoliciesListDropOptionInput` via:
 //
-//          GetDdosPoliciesListDropOptionArgs{...}
+//	GetDdosPoliciesListDropOptionArgs{...}
 type GetDdosPoliciesListDropOptionInput interface {
 	pulumi.Input
 
@@ -5356,7 +5452,8 @@ type GetDdosPoliciesListDropOptionArgs struct {
 	// The limit of concurrent connections based on destination IP.
 	DConnLimit pulumi.IntInput `pulumi:"dConnLimit"`
 	// The limit of new connections based on destination IP.
-	DNewLimit  pulumi.IntInput  `pulumi:"dNewLimit"`
+	DNewLimit pulumi.IntInput `pulumi:"dNewLimit"`
+	// Indicate whether to drop abroad traffic or not.
 	DropAbroad pulumi.BoolInput `pulumi:"dropAbroad"`
 	// Indicate whether to drop ICMP protocol or not.
 	DropIcmp pulumi.BoolInput `pulumi:"dropIcmp"`
@@ -5401,7 +5498,7 @@ func (i GetDdosPoliciesListDropOptionArgs) ToGetDdosPoliciesListDropOptionOutput
 // GetDdosPoliciesListDropOptionArrayInput is an input type that accepts GetDdosPoliciesListDropOptionArray and GetDdosPoliciesListDropOptionArrayOutput values.
 // You can construct a concrete instance of `GetDdosPoliciesListDropOptionArrayInput` via:
 //
-//          GetDdosPoliciesListDropOptionArray{ GetDdosPoliciesListDropOptionArgs{...} }
+//	GetDdosPoliciesListDropOptionArray{ GetDdosPoliciesListDropOptionArgs{...} }
 type GetDdosPoliciesListDropOptionArrayInput interface {
 	pulumi.Input
 
@@ -5462,6 +5559,7 @@ func (o GetDdosPoliciesListDropOptionOutput) DNewLimit() pulumi.IntOutput {
 	return o.ApplyT(func(v GetDdosPoliciesListDropOption) int { return v.DNewLimit }).(pulumi.IntOutput)
 }
 
+// Indicate whether to drop abroad traffic or not.
 func (o GetDdosPoliciesListDropOptionOutput) DropAbroad() pulumi.BoolOutput {
 	return o.ApplyT(func(v GetDdosPoliciesListDropOption) bool { return v.DropAbroad }).(pulumi.BoolOutput)
 }
@@ -5585,7 +5683,7 @@ type GetDdosPoliciesListPacketFilter struct {
 // GetDdosPoliciesListPacketFilterInput is an input type that accepts GetDdosPoliciesListPacketFilterArgs and GetDdosPoliciesListPacketFilterOutput values.
 // You can construct a concrete instance of `GetDdosPoliciesListPacketFilterInput` via:
 //
-//          GetDdosPoliciesListPacketFilterArgs{...}
+//	GetDdosPoliciesListPacketFilterArgs{...}
 type GetDdosPoliciesListPacketFilterInput interface {
 	pulumi.Input
 
@@ -5639,7 +5737,7 @@ func (i GetDdosPoliciesListPacketFilterArgs) ToGetDdosPoliciesListPacketFilterOu
 // GetDdosPoliciesListPacketFilterArrayInput is an input type that accepts GetDdosPoliciesListPacketFilterArray and GetDdosPoliciesListPacketFilterArrayOutput values.
 // You can construct a concrete instance of `GetDdosPoliciesListPacketFilterArrayInput` via:
 //
-//          GetDdosPoliciesListPacketFilterArray{ GetDdosPoliciesListPacketFilterArgs{...} }
+//	GetDdosPoliciesListPacketFilterArray{ GetDdosPoliciesListPacketFilterArgs{...} }
 type GetDdosPoliciesListPacketFilterArrayInput interface {
 	pulumi.Input
 
@@ -5781,7 +5879,7 @@ type GetDdosPoliciesListPortFilter struct {
 // GetDdosPoliciesListPortFilterInput is an input type that accepts GetDdosPoliciesListPortFilterArgs and GetDdosPoliciesListPortFilterOutput values.
 // You can construct a concrete instance of `GetDdosPoliciesListPortFilterInput` via:
 //
-//          GetDdosPoliciesListPortFilterArgs{...}
+//	GetDdosPoliciesListPortFilterArgs{...}
 type GetDdosPoliciesListPortFilterInput interface {
 	pulumi.Input
 
@@ -5817,7 +5915,7 @@ func (i GetDdosPoliciesListPortFilterArgs) ToGetDdosPoliciesListPortFilterOutput
 // GetDdosPoliciesListPortFilterArrayInput is an input type that accepts GetDdosPoliciesListPortFilterArray and GetDdosPoliciesListPortFilterArrayOutput values.
 // You can construct a concrete instance of `GetDdosPoliciesListPortFilterArrayInput` via:
 //
-//          GetDdosPoliciesListPortFilterArray{ GetDdosPoliciesListPortFilterArgs{...} }
+//	GetDdosPoliciesListPortFilterArray{ GetDdosPoliciesListPortFilterArgs{...} }
 type GetDdosPoliciesListPortFilterArrayInput interface {
 	pulumi.Input
 
@@ -5914,7 +6012,7 @@ type GetDdosPoliciesListWatermarkFilter struct {
 // GetDdosPoliciesListWatermarkFilterInput is an input type that accepts GetDdosPoliciesListWatermarkFilterArgs and GetDdosPoliciesListWatermarkFilterOutput values.
 // You can construct a concrete instance of `GetDdosPoliciesListWatermarkFilterInput` via:
 //
-//          GetDdosPoliciesListWatermarkFilterArgs{...}
+//	GetDdosPoliciesListWatermarkFilterArgs{...}
 type GetDdosPoliciesListWatermarkFilterInput interface {
 	pulumi.Input
 
@@ -5950,7 +6048,7 @@ func (i GetDdosPoliciesListWatermarkFilterArgs) ToGetDdosPoliciesListWatermarkFi
 // GetDdosPoliciesListWatermarkFilterArrayInput is an input type that accepts GetDdosPoliciesListWatermarkFilterArray and GetDdosPoliciesListWatermarkFilterArrayOutput values.
 // You can construct a concrete instance of `GetDdosPoliciesListWatermarkFilterArrayInput` via:
 //
-//          GetDdosPoliciesListWatermarkFilterArray{ GetDdosPoliciesListWatermarkFilterArgs{...} }
+//	GetDdosPoliciesListWatermarkFilterArray{ GetDdosPoliciesListWatermarkFilterArgs{...} }
 type GetDdosPoliciesListWatermarkFilterArrayInput interface {
 	pulumi.Input
 
@@ -6045,7 +6143,7 @@ type GetDdosPoliciesListWatermarkKey struct {
 // GetDdosPoliciesListWatermarkKeyInput is an input type that accepts GetDdosPoliciesListWatermarkKeyArgs and GetDdosPoliciesListWatermarkKeyOutput values.
 // You can construct a concrete instance of `GetDdosPoliciesListWatermarkKeyInput` via:
 //
-//          GetDdosPoliciesListWatermarkKeyArgs{...}
+//	GetDdosPoliciesListWatermarkKeyArgs{...}
 type GetDdosPoliciesListWatermarkKeyInput interface {
 	pulumi.Input
 
@@ -6079,7 +6177,7 @@ func (i GetDdosPoliciesListWatermarkKeyArgs) ToGetDdosPoliciesListWatermarkKeyOu
 // GetDdosPoliciesListWatermarkKeyArrayInput is an input type that accepts GetDdosPoliciesListWatermarkKeyArray and GetDdosPoliciesListWatermarkKeyArrayOutput values.
 // You can construct a concrete instance of `GetDdosPoliciesListWatermarkKeyArrayInput` via:
 //
-//          GetDdosPoliciesListWatermarkKeyArray{ GetDdosPoliciesListWatermarkKeyArgs{...} }
+//	GetDdosPoliciesListWatermarkKeyArray{ GetDdosPoliciesListWatermarkKeyArgs{...} }
 type GetDdosPoliciesListWatermarkKeyArrayInput interface {
 	pulumi.Input
 
@@ -6167,7 +6265,7 @@ type GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentList struct {
 // GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListInput is an input type that accepts GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs and GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListOutput values.
 // You can construct a concrete instance of `GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListInput` via:
 //
-//          GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs{...}
+//	GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs{...}
 type GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListInput interface {
 	pulumi.Input
 
@@ -6199,7 +6297,7 @@ func (i GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs) ToGetDdosPolic
 // GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayInput is an input type that accepts GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray and GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayOutput values.
 // You can construct a concrete instance of `GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayInput` via:
 //
-//          GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray{ GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs{...} }
+//	GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArray{ GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArgs{...} }
 type GetDdosPolicyAttachmentsDayuDdosPolicyAttachmentListArrayInput interface {
 	pulumi.Input
 
@@ -6324,7 +6422,7 @@ type GetDdosPolicyCasesList struct {
 // GetDdosPolicyCasesListInput is an input type that accepts GetDdosPolicyCasesListArgs and GetDdosPolicyCasesListOutput values.
 // You can construct a concrete instance of `GetDdosPolicyCasesListInput` via:
 //
-//          GetDdosPolicyCasesListArgs{...}
+//	GetDdosPolicyCasesListArgs{...}
 type GetDdosPolicyCasesListInput interface {
 	pulumi.Input
 
@@ -6398,7 +6496,7 @@ func (i GetDdosPolicyCasesListArgs) ToGetDdosPolicyCasesListOutputWithContext(ct
 // GetDdosPolicyCasesListArrayInput is an input type that accepts GetDdosPolicyCasesListArray and GetDdosPolicyCasesListArrayOutput values.
 // You can construct a concrete instance of `GetDdosPolicyCasesListArrayInput` via:
 //
-//          GetDdosPolicyCasesListArray{ GetDdosPolicyCasesListArgs{...} }
+//	GetDdosPolicyCasesListArray{ GetDdosPolicyCasesListArgs{...} }
 type GetDdosPolicyCasesListArrayInput interface {
 	pulumi.Input
 
@@ -6575,23 +6673,33 @@ func (o GetDdosPolicyCasesListArrayOutput) Index(i pulumi.IntInput) GetDdosPolic
 }
 
 type GetEipList struct {
-	CreatedTime      string   `pulumi:"createdTime"`
-	EipAddressStatus string   `pulumi:"eipAddressStatus"`
-	EipBoundRscEni   string   `pulumi:"eipBoundRscEni"`
-	EipBoundRscIns   *string  `pulumi:"eipBoundRscIns"`
-	EipBoundRscVip   string   `pulumi:"eipBoundRscVip"`
-	EipLists         []string `pulumi:"eipLists"`
-	ExpiredTime      string   `pulumi:"expiredTime"`
-	InstanceId       *string  `pulumi:"instanceId"`
-	ModifyTime       string   `pulumi:"modifyTime"`
-	ProtectionStatus string   `pulumi:"protectionStatus"`
-	Region           string   `pulumi:"region"`
+	// The created time of resource.
+	CreatedTime string `pulumi:"createdTime"`
+	// Eip PUBLIC IP status.
+	EipAddressStatus string `pulumi:"eipAddressStatus"`
+	// The ID of the bound ENI.
+	EipBoundRscEni string `pulumi:"eipBoundRscEni"`
+	// The ID of the resource instance for the binding.
+	EipBoundRscIns *string `pulumi:"eipBoundRscIns"`
+	// Bind the resource intranet IP.
+	EipBoundRscVip string   `pulumi:"eipBoundRscVip"`
+	EipLists       []string `pulumi:"eipLists"`
+	// The expired time of resource.
+	ExpiredTime string `pulumi:"expiredTime"`
+	// ID of the resource instance.
+	InstanceId *string `pulumi:"instanceId"`
+	// The modify time of resource.
+	ModifyTime string `pulumi:"modifyTime"`
+	// The protection status of the asset instance.
+	ProtectionStatus string `pulumi:"protectionStatus"`
+	// The region where the asset instance is located.
+	Region string `pulumi:"region"`
 }
 
 // GetEipListInput is an input type that accepts GetEipListArgs and GetEipListOutput values.
 // You can construct a concrete instance of `GetEipListInput` via:
 //
-//          GetEipListArgs{...}
+//	GetEipListArgs{...}
 type GetEipListInput interface {
 	pulumi.Input
 
@@ -6600,17 +6708,27 @@ type GetEipListInput interface {
 }
 
 type GetEipListArgs struct {
-	CreatedTime      pulumi.StringInput      `pulumi:"createdTime"`
-	EipAddressStatus pulumi.StringInput      `pulumi:"eipAddressStatus"`
-	EipBoundRscEni   pulumi.StringInput      `pulumi:"eipBoundRscEni"`
-	EipBoundRscIns   pulumi.StringPtrInput   `pulumi:"eipBoundRscIns"`
-	EipBoundRscVip   pulumi.StringInput      `pulumi:"eipBoundRscVip"`
-	EipLists         pulumi.StringArrayInput `pulumi:"eipLists"`
-	ExpiredTime      pulumi.StringInput      `pulumi:"expiredTime"`
-	InstanceId       pulumi.StringPtrInput   `pulumi:"instanceId"`
-	ModifyTime       pulumi.StringInput      `pulumi:"modifyTime"`
-	ProtectionStatus pulumi.StringInput      `pulumi:"protectionStatus"`
-	Region           pulumi.StringInput      `pulumi:"region"`
+	// The created time of resource.
+	CreatedTime pulumi.StringInput `pulumi:"createdTime"`
+	// Eip PUBLIC IP status.
+	EipAddressStatus pulumi.StringInput `pulumi:"eipAddressStatus"`
+	// The ID of the bound ENI.
+	EipBoundRscEni pulumi.StringInput `pulumi:"eipBoundRscEni"`
+	// The ID of the resource instance for the binding.
+	EipBoundRscIns pulumi.StringPtrInput `pulumi:"eipBoundRscIns"`
+	// Bind the resource intranet IP.
+	EipBoundRscVip pulumi.StringInput      `pulumi:"eipBoundRscVip"`
+	EipLists       pulumi.StringArrayInput `pulumi:"eipLists"`
+	// The expired time of resource.
+	ExpiredTime pulumi.StringInput `pulumi:"expiredTime"`
+	// ID of the resource instance.
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	// The modify time of resource.
+	ModifyTime pulumi.StringInput `pulumi:"modifyTime"`
+	// The protection status of the asset instance.
+	ProtectionStatus pulumi.StringInput `pulumi:"protectionStatus"`
+	// The region where the asset instance is located.
+	Region pulumi.StringInput `pulumi:"region"`
 }
 
 func (GetEipListArgs) ElementType() reflect.Type {
@@ -6628,7 +6746,7 @@ func (i GetEipListArgs) ToGetEipListOutputWithContext(ctx context.Context) GetEi
 // GetEipListArrayInput is an input type that accepts GetEipListArray and GetEipListArrayOutput values.
 // You can construct a concrete instance of `GetEipListArrayInput` via:
 //
-//          GetEipListArray{ GetEipListArgs{...} }
+//	GetEipListArray{ GetEipListArgs{...} }
 type GetEipListArrayInput interface {
 	pulumi.Input
 
@@ -6664,22 +6782,27 @@ func (o GetEipListOutput) ToGetEipListOutputWithContext(ctx context.Context) Get
 	return o
 }
 
+// The created time of resource.
 func (o GetEipListOutput) CreatedTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetEipList) string { return v.CreatedTime }).(pulumi.StringOutput)
 }
 
+// Eip PUBLIC IP status.
 func (o GetEipListOutput) EipAddressStatus() pulumi.StringOutput {
 	return o.ApplyT(func(v GetEipList) string { return v.EipAddressStatus }).(pulumi.StringOutput)
 }
 
+// The ID of the bound ENI.
 func (o GetEipListOutput) EipBoundRscEni() pulumi.StringOutput {
 	return o.ApplyT(func(v GetEipList) string { return v.EipBoundRscEni }).(pulumi.StringOutput)
 }
 
+// The ID of the resource instance for the binding.
 func (o GetEipListOutput) EipBoundRscIns() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetEipList) *string { return v.EipBoundRscIns }).(pulumi.StringPtrOutput)
 }
 
+// Bind the resource intranet IP.
 func (o GetEipListOutput) EipBoundRscVip() pulumi.StringOutput {
 	return o.ApplyT(func(v GetEipList) string { return v.EipBoundRscVip }).(pulumi.StringOutput)
 }
@@ -6688,22 +6811,27 @@ func (o GetEipListOutput) EipLists() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetEipList) []string { return v.EipLists }).(pulumi.StringArrayOutput)
 }
 
+// The expired time of resource.
 func (o GetEipListOutput) ExpiredTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetEipList) string { return v.ExpiredTime }).(pulumi.StringOutput)
 }
 
+// ID of the resource instance.
 func (o GetEipListOutput) InstanceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetEipList) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
 }
 
+// The modify time of resource.
 func (o GetEipListOutput) ModifyTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetEipList) string { return v.ModifyTime }).(pulumi.StringOutput)
 }
 
+// The protection status of the asset instance.
 func (o GetEipListOutput) ProtectionStatus() pulumi.StringOutput {
 	return o.ApplyT(func(v GetEipList) string { return v.ProtectionStatus }).(pulumi.StringOutput)
 }
 
+// The region where the asset instance is located.
 func (o GetEipListOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v GetEipList) string { return v.Region }).(pulumi.StringOutput)
 }
@@ -6754,7 +6882,8 @@ type GetL4RulesList struct {
 	// Indicate that the session will keep or not.
 	SessionSwitch bool `pulumi:"sessionSwitch"`
 	// Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
-	SessionTime int                        `pulumi:"sessionTime"`
+	SessionTime int `pulumi:"sessionTime"`
+	// Source list of the rule.
 	SourceLists []GetL4RulesListSourceList `pulumi:"sourceLists"`
 	// Source type, `1` for source of host, `2` for source of IP.
 	SourceType int `pulumi:"sourceType"`
@@ -6763,7 +6892,7 @@ type GetL4RulesList struct {
 // GetL4RulesListInput is an input type that accepts GetL4RulesListArgs and GetL4RulesListOutput values.
 // You can construct a concrete instance of `GetL4RulesListInput` via:
 //
-//          GetL4RulesListArgs{...}
+//	GetL4RulesListArgs{...}
 type GetL4RulesListInput interface {
 	pulumi.Input
 
@@ -6797,7 +6926,8 @@ type GetL4RulesListArgs struct {
 	// Indicate that the session will keep or not.
 	SessionSwitch pulumi.BoolInput `pulumi:"sessionSwitch"`
 	// Session keep time, only valid when `sessionSwitch` is true, the available value ranges from 1 to 300 and unit is second.
-	SessionTime pulumi.IntInput                    `pulumi:"sessionTime"`
+	SessionTime pulumi.IntInput `pulumi:"sessionTime"`
+	// Source list of the rule.
 	SourceLists GetL4RulesListSourceListArrayInput `pulumi:"sourceLists"`
 	// Source type, `1` for source of host, `2` for source of IP.
 	SourceType pulumi.IntInput `pulumi:"sourceType"`
@@ -6818,7 +6948,7 @@ func (i GetL4RulesListArgs) ToGetL4RulesListOutputWithContext(ctx context.Contex
 // GetL4RulesListArrayInput is an input type that accepts GetL4RulesListArray and GetL4RulesListArrayOutput values.
 // You can construct a concrete instance of `GetL4RulesListArrayInput` via:
 //
-//          GetL4RulesListArray{ GetL4RulesListArgs{...} }
+//	GetL4RulesListArray{ GetL4RulesListArgs{...} }
 type GetL4RulesListArrayInput interface {
 	pulumi.Input
 
@@ -6919,6 +7049,7 @@ func (o GetL4RulesListOutput) SessionTime() pulumi.IntOutput {
 	return o.ApplyT(func(v GetL4RulesList) int { return v.SessionTime }).(pulumi.IntOutput)
 }
 
+// Source list of the rule.
 func (o GetL4RulesListOutput) SourceLists() GetL4RulesListSourceListArrayOutput {
 	return o.ApplyT(func(v GetL4RulesList) []GetL4RulesListSourceList { return v.SourceLists }).(GetL4RulesListSourceListArrayOutput)
 }
@@ -6949,14 +7080,16 @@ func (o GetL4RulesListArrayOutput) Index(i pulumi.IntInput) GetL4RulesListOutput
 }
 
 type GetL4RulesListSourceList struct {
+	// Source IP or domain.
 	Source string `pulumi:"source"`
-	Weight int    `pulumi:"weight"`
+	// Weight of the source.
+	Weight int `pulumi:"weight"`
 }
 
 // GetL4RulesListSourceListInput is an input type that accepts GetL4RulesListSourceListArgs and GetL4RulesListSourceListOutput values.
 // You can construct a concrete instance of `GetL4RulesListSourceListInput` via:
 //
-//          GetL4RulesListSourceListArgs{...}
+//	GetL4RulesListSourceListArgs{...}
 type GetL4RulesListSourceListInput interface {
 	pulumi.Input
 
@@ -6965,8 +7098,10 @@ type GetL4RulesListSourceListInput interface {
 }
 
 type GetL4RulesListSourceListArgs struct {
+	// Source IP or domain.
 	Source pulumi.StringInput `pulumi:"source"`
-	Weight pulumi.IntInput    `pulumi:"weight"`
+	// Weight of the source.
+	Weight pulumi.IntInput `pulumi:"weight"`
 }
 
 func (GetL4RulesListSourceListArgs) ElementType() reflect.Type {
@@ -6984,7 +7119,7 @@ func (i GetL4RulesListSourceListArgs) ToGetL4RulesListSourceListOutputWithContex
 // GetL4RulesListSourceListArrayInput is an input type that accepts GetL4RulesListSourceListArray and GetL4RulesListSourceListArrayOutput values.
 // You can construct a concrete instance of `GetL4RulesListSourceListArrayInput` via:
 //
-//          GetL4RulesListSourceListArray{ GetL4RulesListSourceListArgs{...} }
+//	GetL4RulesListSourceListArray{ GetL4RulesListSourceListArgs{...} }
 type GetL4RulesListSourceListArrayInput interface {
 	pulumi.Input
 
@@ -7020,10 +7155,12 @@ func (o GetL4RulesListSourceListOutput) ToGetL4RulesListSourceListOutputWithCont
 	return o
 }
 
+// Source IP or domain.
 func (o GetL4RulesListSourceListOutput) Source() pulumi.StringOutput {
 	return o.ApplyT(func(v GetL4RulesListSourceList) string { return v.Source }).(pulumi.StringOutput)
 }
 
+// Weight of the source.
 func (o GetL4RulesListSourceListOutput) Weight() pulumi.IntOutput {
 	return o.ApplyT(func(v GetL4RulesListSourceList) int { return v.Weight }).(pulumi.IntOutput)
 }
@@ -7070,7 +7207,8 @@ type GetL4RulesV2List struct {
 	// ID of the 4 layer rule.
 	RuleId string `pulumi:"ruleId"`
 	// Name of the rule.
-	RuleName    string                       `pulumi:"ruleName"`
+	RuleName string `pulumi:"ruleName"`
+	// Source list of the rule.
 	SourceLists []GetL4RulesV2ListSourceList `pulumi:"sourceLists"`
 	// The source port of the layer 4 rule.
 	SourcePort int `pulumi:"sourcePort"`
@@ -7083,7 +7221,7 @@ type GetL4RulesV2List struct {
 // GetL4RulesV2ListInput is an input type that accepts GetL4RulesV2ListArgs and GetL4RulesV2ListOutput values.
 // You can construct a concrete instance of `GetL4RulesV2ListInput` via:
 //
-//          GetL4RulesV2ListArgs{...}
+//	GetL4RulesV2ListArgs{...}
 type GetL4RulesV2ListInput interface {
 	pulumi.Input
 
@@ -7113,7 +7251,8 @@ type GetL4RulesV2ListArgs struct {
 	// ID of the 4 layer rule.
 	RuleId pulumi.StringInput `pulumi:"ruleId"`
 	// Name of the rule.
-	RuleName    pulumi.StringInput                   `pulumi:"ruleName"`
+	RuleName pulumi.StringInput `pulumi:"ruleName"`
+	// Source list of the rule.
 	SourceLists GetL4RulesV2ListSourceListArrayInput `pulumi:"sourceLists"`
 	// The source port of the layer 4 rule.
 	SourcePort pulumi.IntInput `pulumi:"sourcePort"`
@@ -7138,7 +7277,7 @@ func (i GetL4RulesV2ListArgs) ToGetL4RulesV2ListOutputWithContext(ctx context.Co
 // GetL4RulesV2ListArrayInput is an input type that accepts GetL4RulesV2ListArray and GetL4RulesV2ListArrayOutput values.
 // You can construct a concrete instance of `GetL4RulesV2ListArrayInput` via:
 //
-//          GetL4RulesV2ListArray{ GetL4RulesV2ListArgs{...} }
+//	GetL4RulesV2ListArray{ GetL4RulesV2ListArgs{...} }
 type GetL4RulesV2ListArrayInput interface {
 	pulumi.Input
 
@@ -7229,6 +7368,7 @@ func (o GetL4RulesV2ListOutput) RuleName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetL4RulesV2List) string { return v.RuleName }).(pulumi.StringOutput)
 }
 
+// Source list of the rule.
 func (o GetL4RulesV2ListOutput) SourceLists() GetL4RulesV2ListSourceListArrayOutput {
 	return o.ApplyT(func(v GetL4RulesV2List) []GetL4RulesV2ListSourceList { return v.SourceLists }).(GetL4RulesV2ListSourceListArrayOutput)
 }
@@ -7269,14 +7409,16 @@ func (o GetL4RulesV2ListArrayOutput) Index(i pulumi.IntInput) GetL4RulesV2ListOu
 }
 
 type GetL4RulesV2ListSourceList struct {
+	// Source IP or domain.
 	Source string `pulumi:"source"`
-	Weight int    `pulumi:"weight"`
+	// Weight of the source.
+	Weight int `pulumi:"weight"`
 }
 
 // GetL4RulesV2ListSourceListInput is an input type that accepts GetL4RulesV2ListSourceListArgs and GetL4RulesV2ListSourceListOutput values.
 // You can construct a concrete instance of `GetL4RulesV2ListSourceListInput` via:
 //
-//          GetL4RulesV2ListSourceListArgs{...}
+//	GetL4RulesV2ListSourceListArgs{...}
 type GetL4RulesV2ListSourceListInput interface {
 	pulumi.Input
 
@@ -7285,8 +7427,10 @@ type GetL4RulesV2ListSourceListInput interface {
 }
 
 type GetL4RulesV2ListSourceListArgs struct {
+	// Source IP or domain.
 	Source pulumi.StringInput `pulumi:"source"`
-	Weight pulumi.IntInput    `pulumi:"weight"`
+	// Weight of the source.
+	Weight pulumi.IntInput `pulumi:"weight"`
 }
 
 func (GetL4RulesV2ListSourceListArgs) ElementType() reflect.Type {
@@ -7304,7 +7448,7 @@ func (i GetL4RulesV2ListSourceListArgs) ToGetL4RulesV2ListSourceListOutputWithCo
 // GetL4RulesV2ListSourceListArrayInput is an input type that accepts GetL4RulesV2ListSourceListArray and GetL4RulesV2ListSourceListArrayOutput values.
 // You can construct a concrete instance of `GetL4RulesV2ListSourceListArrayInput` via:
 //
-//          GetL4RulesV2ListSourceListArray{ GetL4RulesV2ListSourceListArgs{...} }
+//	GetL4RulesV2ListSourceListArray{ GetL4RulesV2ListSourceListArgs{...} }
 type GetL4RulesV2ListSourceListArrayInput interface {
 	pulumi.Input
 
@@ -7340,10 +7484,12 @@ func (o GetL4RulesV2ListSourceListOutput) ToGetL4RulesV2ListSourceListOutputWith
 	return o
 }
 
+// Source IP or domain.
 func (o GetL4RulesV2ListSourceListOutput) Source() pulumi.StringOutput {
 	return o.ApplyT(func(v GetL4RulesV2ListSourceList) string { return v.Source }).(pulumi.StringOutput)
 }
 
+// Weight of the source.
 func (o GetL4RulesV2ListSourceListOutput) Weight() pulumi.IntOutput {
 	return o.ApplyT(func(v GetL4RulesV2ListSourceList) int { return v.Weight }).(pulumi.IntOutput)
 }
@@ -7408,7 +7554,7 @@ type GetL7RulesList struct {
 // GetL7RulesListInput is an input type that accepts GetL7RulesListArgs and GetL7RulesListOutput values.
 // You can construct a concrete instance of `GetL7RulesListInput` via:
 //
-//          GetL7RulesListArgs{...}
+//	GetL7RulesListArgs{...}
 type GetL7RulesListInput interface {
 	pulumi.Input
 
@@ -7468,7 +7614,7 @@ func (i GetL7RulesListArgs) ToGetL7RulesListOutputWithContext(ctx context.Contex
 // GetL7RulesListArrayInput is an input type that accepts GetL7RulesListArray and GetL7RulesListArrayOutput values.
 // You can construct a concrete instance of `GetL7RulesListArrayInput` via:
 //
-//          GetL7RulesListArray{ GetL7RulesListArgs{...} }
+//	GetL7RulesListArray{ GetL7RulesListArgs{...} }
 type GetL7RulesListArrayInput interface {
 	pulumi.Input
 
@@ -7657,7 +7803,7 @@ type GetL7RulesV2List struct {
 // GetL7RulesV2ListInput is an input type that accepts GetL7RulesV2ListArgs and GetL7RulesV2ListOutput values.
 // You can construct a concrete instance of `GetL7RulesV2ListInput` via:
 //
-//          GetL7RulesV2ListArgs{...}
+//	GetL7RulesV2ListArgs{...}
 type GetL7RulesV2ListInput interface {
 	pulumi.Input
 
@@ -7725,7 +7871,7 @@ func (i GetL7RulesV2ListArgs) ToGetL7RulesV2ListOutputWithContext(ctx context.Co
 // GetL7RulesV2ListArrayInput is an input type that accepts GetL7RulesV2ListArray and GetL7RulesV2ListArrayOutput values.
 // You can construct a concrete instance of `GetL7RulesV2ListArrayInput` via:
 //
-//          GetL7RulesV2ListArray{ GetL7RulesV2ListArgs{...} }
+//	GetL7RulesV2ListArray{ GetL7RulesV2ListArgs{...} }
 type GetL7RulesV2ListArrayInput interface {
 	pulumi.Input
 
@@ -7896,7 +8042,7 @@ type GetL7RulesV2ListSourceList struct {
 // GetL7RulesV2ListSourceListInput is an input type that accepts GetL7RulesV2ListSourceListArgs and GetL7RulesV2ListSourceListOutput values.
 // You can construct a concrete instance of `GetL7RulesV2ListSourceListInput` via:
 //
-//          GetL7RulesV2ListSourceListArgs{...}
+//	GetL7RulesV2ListSourceListArgs{...}
 type GetL7RulesV2ListSourceListInput interface {
 	pulumi.Input
 
@@ -7926,7 +8072,7 @@ func (i GetL7RulesV2ListSourceListArgs) ToGetL7RulesV2ListSourceListOutputWithCo
 // GetL7RulesV2ListSourceListArrayInput is an input type that accepts GetL7RulesV2ListSourceListArray and GetL7RulesV2ListSourceListArrayOutput values.
 // You can construct a concrete instance of `GetL7RulesV2ListSourceListArrayInput` via:
 //
-//          GetL7RulesV2ListSourceListArray{ GetL7RulesV2ListSourceListArgs{...} }
+//	GetL7RulesV2ListSourceListArray{ GetL7RulesV2ListSourceListArgs{...} }
 type GetL7RulesV2ListSourceListArrayInput interface {
 	pulumi.Input
 

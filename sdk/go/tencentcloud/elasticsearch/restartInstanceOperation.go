@@ -7,34 +7,40 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to restart a elasticsearch instance
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.NewRestartInstanceOperation(ctx, "restartInstanceOperation", &Elasticsearch.RestartInstanceOperationArgs{
-// 			InstanceId: pulumi.String("es-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.NewRestartInstanceOperation(ctx, "restartInstanceOperation", &Elasticsearch.RestartInstanceOperationArgs{
+//				InstanceId: pulumi.String("es-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type RestartInstanceOperation struct {
 	pulumi.CustomResourceState
 
@@ -59,7 +65,7 @@ func NewRestartInstanceOperation(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RestartInstanceOperation
 	err := ctx.RegisterResource("tencentcloud:Elasticsearch/restartInstanceOperation:RestartInstanceOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -160,7 +166,7 @@ func (i *RestartInstanceOperation) ToRestartInstanceOperationOutputWithContext(c
 // RestartInstanceOperationArrayInput is an input type that accepts RestartInstanceOperationArray and RestartInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `RestartInstanceOperationArrayInput` via:
 //
-//          RestartInstanceOperationArray{ RestartInstanceOperationArgs{...} }
+//	RestartInstanceOperationArray{ RestartInstanceOperationArgs{...} }
 type RestartInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -185,7 +191,7 @@ func (i RestartInstanceOperationArray) ToRestartInstanceOperationArrayOutputWith
 // RestartInstanceOperationMapInput is an input type that accepts RestartInstanceOperationMap and RestartInstanceOperationMapOutput values.
 // You can construct a concrete instance of `RestartInstanceOperationMapInput` via:
 //
-//          RestartInstanceOperationMap{ "key": RestartInstanceOperationArgs{...} }
+//	RestartInstanceOperationMap{ "key": RestartInstanceOperationArgs{...} }
 type RestartInstanceOperationMapInput interface {
 	pulumi.Input
 
@@ -222,9 +228,9 @@ func (o RestartInstanceOperationOutput) ToRestartInstanceOperationOutputWithCont
 }
 
 // Force restart. Valid values:
-// - true: Forced restart;
-// - false: No forced restart;
-//   default false.
+//   - true: Forced restart;
+//   - false: No forced restart;
+//     default false.
 func (o RestartInstanceOperationOutput) ForceRestart() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *RestartInstanceOperation) pulumi.BoolPtrOutput { return v.ForceRestart }).(pulumi.BoolPtrOutput)
 }

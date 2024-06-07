@@ -15,80 +15,74 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// <summary>
         /// Use this data source to query detailed information of oceanus job_events
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetJobEvents.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetJobEvents.InvokeAsync(new Tencentcloud.Oceanus.GetJobEventsArgs
+        ///         EndTimestamp = 1631232466,
+        ///         JobId = "cql-6w8eab6f",
+        ///         StartTimestamp = 1630932161,
+        ///         Types = new[]
         ///         {
-        ///             EndTimestamp = 1631232466,
-        ///             JobId = "cql-6w8eab6f",
-        ///             StartTimestamp = 1630932161,
-        ///             Types = 
-        ///             {
-        ///                 "1",
-        ///                 "2",
-        ///             },
-        ///             WorkSpaceId = "space-6w8eab6f",
-        ///         }));
-        ///     }
+        ///             "1",
+        ///             "2",
+        ///         },
+        ///         WorkSpaceId = "space-6w8eab6f",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetJobEventsResult> InvokeAsync(GetJobEventsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetJobEventsResult>("tencentcloud:Oceanus/getJobEvents:getJobEvents", args ?? new GetJobEventsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetJobEventsResult>("tencentcloud:Oceanus/getJobEvents:getJobEvents", args ?? new GetJobEventsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of oceanus job_events
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Oceanus.GetJobEvents.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Oceanus.GetJobEvents.InvokeAsync(new Tencentcloud.Oceanus.GetJobEventsArgs
+        ///         EndTimestamp = 1631232466,
+        ///         JobId = "cql-6w8eab6f",
+        ///         StartTimestamp = 1630932161,
+        ///         Types = new[]
         ///         {
-        ///             EndTimestamp = 1631232466,
-        ///             JobId = "cql-6w8eab6f",
-        ///             StartTimestamp = 1630932161,
-        ///             Types = 
-        ///             {
-        ///                 "1",
-        ///                 "2",
-        ///             },
-        ///             WorkSpaceId = "space-6w8eab6f",
-        ///         }));
-        ///     }
+        ///             "1",
+        ///             "2",
+        ///         },
+        ///         WorkSpaceId = "space-6w8eab6f",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetJobEventsResult> Invoke(GetJobEventsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetJobEventsResult>("tencentcloud:Oceanus/getJobEvents:getJobEvents", args ?? new GetJobEventsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetJobEventsResult>("tencentcloud:Oceanus/getJobEvents:getJobEvents", args ?? new GetJobEventsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetJobEventsArgs : Pulumi.InvokeArgs
+    public sealed class GetJobEventsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter condition:End Unix timestamp (seconds).
@@ -135,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetJobEventsArgs()
         {
         }
+        public static new GetJobEventsArgs Empty => new GetJobEventsArgs();
     }
 
-    public sealed class GetJobEventsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetJobEventsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter condition:End Unix timestamp (seconds).
@@ -184,6 +179,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public GetJobEventsInvokeArgs()
         {
         }
+        public static new GetJobEventsInvokeArgs Empty => new GetJobEventsInvokeArgs();
     }
 
 

@@ -15,72 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query policy group binding objects.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var name = Tencentcloud.Monitor.GetPolicyGroups.Invoke(new()
         ///     {
-        ///         var name = Output.Create(Tencentcloud.Monitor.GetPolicyGroups.InvokeAsync(new Tencentcloud.Monitor.GetPolicyGroupsArgs
-        ///         {
-        ///             Name = "test",
-        ///         }));
-        ///         var objects = name.Apply(name =&gt; Output.Create(Tencentcloud.Monitor.GetBindingObjects.InvokeAsync(new Tencentcloud.Monitor.GetBindingObjectsArgs
-        ///         {
-        ///             GroupId = name.Lists?[0]?.GroupId,
-        ///         })));
-        ///     }
+        ///         Name = "test",
+        ///     });
         /// 
-        /// }
+        ///     var objects = Tencentcloud.Monitor.GetBindingObjects.Invoke(new()
+        ///     {
+        ///         GroupId = name.Apply(getPolicyGroupsResult =&gt; getPolicyGroupsResult.Lists[0]?.GroupId),
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBindingObjectsResult> InvokeAsync(GetBindingObjectsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBindingObjectsResult>("tencentcloud:Monitor/getBindingObjects:getBindingObjects", args ?? new GetBindingObjectsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBindingObjectsResult>("tencentcloud:Monitor/getBindingObjects:getBindingObjects", args ?? new GetBindingObjectsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query policy group binding objects.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var name = Tencentcloud.Monitor.GetPolicyGroups.Invoke(new()
         ///     {
-        ///         var name = Output.Create(Tencentcloud.Monitor.GetPolicyGroups.InvokeAsync(new Tencentcloud.Monitor.GetPolicyGroupsArgs
-        ///         {
-        ///             Name = "test",
-        ///         }));
-        ///         var objects = name.Apply(name =&gt; Output.Create(Tencentcloud.Monitor.GetBindingObjects.InvokeAsync(new Tencentcloud.Monitor.GetBindingObjectsArgs
-        ///         {
-        ///             GroupId = name.Lists?[0]?.GroupId,
-        ///         })));
-        ///     }
+        ///         Name = "test",
+        ///     });
         /// 
-        /// }
+        ///     var objects = Tencentcloud.Monitor.GetBindingObjects.Invoke(new()
+        ///     {
+        ///         GroupId = name.Apply(getPolicyGroupsResult =&gt; getPolicyGroupsResult.Lists[0]?.GroupId),
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBindingObjectsResult> Invoke(GetBindingObjectsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBindingObjectsResult>("tencentcloud:Monitor/getBindingObjects:getBindingObjects", args ?? new GetBindingObjectsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBindingObjectsResult>("tencentcloud:Monitor/getBindingObjects:getBindingObjects", args ?? new GetBindingObjectsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBindingObjectsArgs : Pulumi.InvokeArgs
+    public sealed class GetBindingObjectsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Policy group ID for query.
@@ -97,9 +93,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetBindingObjectsArgs()
         {
         }
+        public static new GetBindingObjectsArgs Empty => new GetBindingObjectsArgs();
     }
 
-    public sealed class GetBindingObjectsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBindingObjectsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Policy group ID for query.
@@ -116,6 +113,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetBindingObjectsInvokeArgs()
         {
         }
+        public static new GetBindingObjectsInvokeArgs Empty => new GetBindingObjectsInvokeArgs();
     }
 
 

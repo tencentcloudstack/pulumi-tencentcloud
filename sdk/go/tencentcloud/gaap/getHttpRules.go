@@ -8,73 +8,78 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query forward rule of layer7 listeners.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
-// 			Bandwidth:        pulumi.Int(10),
-// 			Concurrent:       pulumi.Int(2),
-// 			AccessRegion:     pulumi.String("SouthChina"),
-// 			RealserverRegion: pulumi.String("NorthChina"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
-// 			Protocol: pulumi.String("HTTP"),
-// 			Port:     pulumi.Int(80),
-// 			ProxyId:  fooProxy.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooRealserver, err := Gaap.NewRealserver(ctx, "fooRealserver", &Gaap.RealserverArgs{
-// 			Ip: pulumi.String("1.1.1.1"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooHttpRule, err := Gaap.NewHttpRule(ctx, "fooHttpRule", &Gaap.HttpRuleArgs{
-// 			ListenerId:     fooLayer7Listener.ID(),
-// 			Domain:         pulumi.String("www.qq.com"),
-// 			Path:           pulumi.String("/"),
-// 			RealserverType: pulumi.String("IP"),
-// 			HealthCheck:    pulumi.Bool(true),
-// 			Realservers: gaap.HttpRuleRealserverArray{
-// 				&gaap.HttpRuleRealserverArgs{
-// 					Id:   fooRealserver.ID(),
-// 					Ip:   fooRealserver.Ip,
-// 					Port: pulumi.Int(80),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Gaap.GetHttpRulesOutput(ctx, gaap.GetHttpRulesOutputArgs{
-// 			ListenerId: fooLayer7Listener.ID(),
-// 			Domain:     fooHttpRule.Domain,
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooProxy, err := Gaap.NewProxy(ctx, "fooProxy", &Gaap.ProxyArgs{
+//				Bandwidth:        pulumi.Int(10),
+//				Concurrent:       pulumi.Int(2),
+//				AccessRegion:     pulumi.String("SouthChina"),
+//				RealserverRegion: pulumi.String("NorthChina"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooLayer7Listener, err := Gaap.NewLayer7Listener(ctx, "fooLayer7Listener", &Gaap.Layer7ListenerArgs{
+//				Protocol: pulumi.String("HTTP"),
+//				Port:     pulumi.Int(80),
+//				ProxyId:  fooProxy.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooRealserver, err := Gaap.NewRealserver(ctx, "fooRealserver", &Gaap.RealserverArgs{
+//				Ip: pulumi.String("1.1.1.1"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooHttpRule, err := Gaap.NewHttpRule(ctx, "fooHttpRule", &Gaap.HttpRuleArgs{
+//				ListenerId:     fooLayer7Listener.ID(),
+//				Domain:         pulumi.String("www.qq.com"),
+//				Path:           pulumi.String("/"),
+//				RealserverType: pulumi.String("IP"),
+//				HealthCheck:    pulumi.Bool(true),
+//				Realservers: gaap.HttpRuleRealserverArray{
+//					&gaap.HttpRuleRealserverArgs{
+//						Id:   fooRealserver.ID(),
+//						Ip:   fooRealserver.Ip,
+//						Port: pulumi.Int(80),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Gaap.GetHttpRulesOutput(ctx, gaap.GetHttpRulesOutputArgs{
+//				ListenerId: fooLayer7Listener.ID(),
+//				Domain:     fooHttpRule.Domain,
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetHttpRules(ctx *pulumi.Context, args *GetHttpRulesArgs, opts ...pulumi.InvokeOption) (*GetHttpRulesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetHttpRulesResult
 	err := ctx.Invoke("tencentcloud:Gaap/getHttpRules:getHttpRules", args, &rv, opts...)
 	if err != nil {

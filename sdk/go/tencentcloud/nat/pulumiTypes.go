@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type GetDcRouteNatDirectConnectGatewayRouteSet struct {
 	// Create time of route.
@@ -26,7 +29,7 @@ type GetDcRouteNatDirectConnectGatewayRouteSet struct {
 // GetDcRouteNatDirectConnectGatewayRouteSetInput is an input type that accepts GetDcRouteNatDirectConnectGatewayRouteSetArgs and GetDcRouteNatDirectConnectGatewayRouteSetOutput values.
 // You can construct a concrete instance of `GetDcRouteNatDirectConnectGatewayRouteSetInput` via:
 //
-//          GetDcRouteNatDirectConnectGatewayRouteSetArgs{...}
+//	GetDcRouteNatDirectConnectGatewayRouteSetArgs{...}
 type GetDcRouteNatDirectConnectGatewayRouteSetInput interface {
 	pulumi.Input
 
@@ -62,7 +65,7 @@ func (i GetDcRouteNatDirectConnectGatewayRouteSetArgs) ToGetDcRouteNatDirectConn
 // GetDcRouteNatDirectConnectGatewayRouteSetArrayInput is an input type that accepts GetDcRouteNatDirectConnectGatewayRouteSetArray and GetDcRouteNatDirectConnectGatewayRouteSetArrayOutput values.
 // You can construct a concrete instance of `GetDcRouteNatDirectConnectGatewayRouteSetArrayInput` via:
 //
-//          GetDcRouteNatDirectConnectGatewayRouteSetArray{ GetDcRouteNatDirectConnectGatewayRouteSetArgs{...} }
+//	GetDcRouteNatDirectConnectGatewayRouteSetArray{ GetDcRouteNatDirectConnectGatewayRouteSetArgs{...} }
 type GetDcRouteNatDirectConnectGatewayRouteSetArrayInput interface {
 	pulumi.Input
 
@@ -149,15 +152,18 @@ type GetGatewaySnatsSnatList struct {
 	// Description.
 	Description string `pulumi:"description"`
 	// Instance ID.
-	InstanceId            *string `pulumi:"instanceId"`
+	InstanceId *string `pulumi:"instanceId"`
+	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
 	InstancePrivateIpAddr *string `pulumi:"instancePrivateIpAddr"`
 	// NAT gateway ID.
 	NatGatewayId string `pulumi:"natGatewayId"`
 	// Elastic IP address pool.
 	PublicIpAddrs []string `pulumi:"publicIpAddrs"`
-	ResourceType  string   `pulumi:"resourceType"`
+	// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+	ResourceType string `pulumi:"resourceType"`
 	// SNAT rule ID.
-	SnatId          string  `pulumi:"snatId"`
+	SnatId string `pulumi:"snatId"`
+	// The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
 	SubnetCidrBlock *string `pulumi:"subnetCidrBlock"`
 	// Subnet instance ID.
 	SubnetId *string `pulumi:"subnetId"`
@@ -166,7 +172,7 @@ type GetGatewaySnatsSnatList struct {
 // GetGatewaySnatsSnatListInput is an input type that accepts GetGatewaySnatsSnatListArgs and GetGatewaySnatsSnatListOutput values.
 // You can construct a concrete instance of `GetGatewaySnatsSnatListInput` via:
 //
-//          GetGatewaySnatsSnatListArgs{...}
+//	GetGatewaySnatsSnatListArgs{...}
 type GetGatewaySnatsSnatListInput interface {
 	pulumi.Input
 
@@ -180,15 +186,18 @@ type GetGatewaySnatsSnatListArgs struct {
 	// Description.
 	Description pulumi.StringInput `pulumi:"description"`
 	// Instance ID.
-	InstanceId            pulumi.StringPtrInput `pulumi:"instanceId"`
+	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
+	// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
 	InstancePrivateIpAddr pulumi.StringPtrInput `pulumi:"instancePrivateIpAddr"`
 	// NAT gateway ID.
 	NatGatewayId pulumi.StringInput `pulumi:"natGatewayId"`
 	// Elastic IP address pool.
 	PublicIpAddrs pulumi.StringArrayInput `pulumi:"publicIpAddrs"`
-	ResourceType  pulumi.StringInput      `pulumi:"resourceType"`
+	// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
 	// SNAT rule ID.
-	SnatId          pulumi.StringInput    `pulumi:"snatId"`
+	SnatId pulumi.StringInput `pulumi:"snatId"`
+	// The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
 	SubnetCidrBlock pulumi.StringPtrInput `pulumi:"subnetCidrBlock"`
 	// Subnet instance ID.
 	SubnetId pulumi.StringPtrInput `pulumi:"subnetId"`
@@ -209,7 +218,7 @@ func (i GetGatewaySnatsSnatListArgs) ToGetGatewaySnatsSnatListOutputWithContext(
 // GetGatewaySnatsSnatListArrayInput is an input type that accepts GetGatewaySnatsSnatListArray and GetGatewaySnatsSnatListArrayOutput values.
 // You can construct a concrete instance of `GetGatewaySnatsSnatListArrayInput` via:
 //
-//          GetGatewaySnatsSnatListArray{ GetGatewaySnatsSnatListArgs{...} }
+//	GetGatewaySnatsSnatListArray{ GetGatewaySnatsSnatListArgs{...} }
 type GetGatewaySnatsSnatListArrayInput interface {
 	pulumi.Input
 
@@ -260,6 +269,7 @@ func (o GetGatewaySnatsSnatListOutput) InstanceId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetGatewaySnatsSnatList) *string { return v.InstanceId }).(pulumi.StringPtrOutput)
 }
 
+// Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
 func (o GetGatewaySnatsSnatListOutput) InstancePrivateIpAddr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetGatewaySnatsSnatList) *string { return v.InstancePrivateIpAddr }).(pulumi.StringPtrOutput)
 }
@@ -274,6 +284,7 @@ func (o GetGatewaySnatsSnatListOutput) PublicIpAddrs() pulumi.StringArrayOutput 
 	return o.ApplyT(func(v GetGatewaySnatsSnatList) []string { return v.PublicIpAddrs }).(pulumi.StringArrayOutput)
 }
 
+// Resource type. Valid values: SUBNET, NETWORKINTERFACE.
 func (o GetGatewaySnatsSnatListOutput) ResourceType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetGatewaySnatsSnatList) string { return v.ResourceType }).(pulumi.StringOutput)
 }
@@ -283,6 +294,7 @@ func (o GetGatewaySnatsSnatListOutput) SnatId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetGatewaySnatsSnatList) string { return v.SnatId }).(pulumi.StringOutput)
 }
 
+// The IPv4 CIDR of the subnet, required when `resourceType` is SUBNET.
 func (o GetGatewaySnatsSnatListOutput) SubnetCidrBlock() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetGatewaySnatsSnatList) *string { return v.SubnetCidrBlock }).(pulumi.StringPtrOutput)
 }
@@ -336,7 +348,7 @@ type GetGatewaysNat struct {
 // GetGatewaysNatInput is an input type that accepts GetGatewaysNatArgs and GetGatewaysNatOutput values.
 // You can construct a concrete instance of `GetGatewaysNatInput` via:
 //
-//          GetGatewaysNatArgs{...}
+//	GetGatewaysNatArgs{...}
 type GetGatewaysNatInput interface {
 	pulumi.Input
 
@@ -380,7 +392,7 @@ func (i GetGatewaysNatArgs) ToGetGatewaysNatOutputWithContext(ctx context.Contex
 // GetGatewaysNatArrayInput is an input type that accepts GetGatewaysNatArray and GetGatewaysNatArrayOutput values.
 // You can construct a concrete instance of `GetGatewaysNatArrayInput` via:
 //
-//          GetGatewaysNatArray{ GetGatewaysNatArgs{...} }
+//	GetGatewaysNatArray{ GetGatewaysNatArgs{...} }
 type GetGatewaysNatArrayInput interface {
 	pulumi.Input
 

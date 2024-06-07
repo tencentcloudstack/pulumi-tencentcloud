@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const checkDataEngineConfigPairsValidity = pulumi.output(tencentcloud.Dlc.getCheckDataEngineConfigPairsValidity({
+ * const checkDataEngineConfigPairsValidity = tencentcloud.Dlc.getCheckDataEngineConfigPairsValidity({
  *     childImageVersionId: "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCheckDataEngineConfigPairsValidity(args?: GetCheckDataEngineConfigPairsValidityArgs, opts?: pulumi.InvokeOptions): Promise<GetCheckDataEngineConfigPairsValidityResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dlc/getCheckDataEngineConfigPairsValidity:getCheckDataEngineConfigPairsValidity", {
         "childImageVersionId": args.childImageVersionId,
         "dataEngineConfigPairs": args.dataEngineConfigPairs,
@@ -77,9 +77,24 @@ export interface GetCheckDataEngineConfigPairsValidityResult {
      */
     readonly unavailableConfigs: string[];
 }
-
+/**
+ * Use this data source to query detailed information of dlc checkDataEngineConfigPairsValidity
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const checkDataEngineConfigPairsValidity = tencentcloud.Dlc.getCheckDataEngineConfigPairsValidity({
+ *     childImageVersionId: "d3ftghd4-9a7e-4f64-a3f4-f38507c69742",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCheckDataEngineConfigPairsValidityOutput(args?: GetCheckDataEngineConfigPairsValidityOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCheckDataEngineConfigPairsValidityResult> {
-    return pulumi.output(args).apply(a => getCheckDataEngineConfigPairsValidity(a, opts))
+    return pulumi.output(args).apply((a: any) => getCheckDataEngineConfigPairsValidity(a, opts))
 }
 
 /**

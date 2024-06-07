@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Address
         /// <summary>
         /// Use this data source to query detailed information of address templates.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var name = Tencentcloud.Address.GetTemplates.Invoke(new()
         ///     {
-        ///         var name = Output.Create(Tencentcloud.Address.GetTemplates.InvokeAsync(new Tencentcloud.Address.GetTemplatesArgs
-        ///         {
-        ///             Name = "test",
-        ///         }));
-        ///     }
+        ///         Name = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTemplatesResult> InvokeAsync(GetTemplatesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTemplatesResult>("tencentcloud:Address/getTemplates:getTemplates", args ?? new GetTemplatesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTemplatesResult>("tencentcloud:Address/getTemplates:getTemplates", args ?? new GetTemplatesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of address templates.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var name = Tencentcloud.Address.GetTemplates.Invoke(new()
         ///     {
-        ///         var name = Output.Create(Tencentcloud.Address.GetTemplates.InvokeAsync(new Tencentcloud.Address.GetTemplatesArgs
-        ///         {
-        ///             Name = "test",
-        ///         }));
-        ///     }
+        ///         Name = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTemplatesResult> Invoke(GetTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTemplatesResult>("tencentcloud:Address/getTemplates:getTemplates", args ?? new GetTemplatesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTemplatesResult>("tencentcloud:Address/getTemplates:getTemplates", args ?? new GetTemplatesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTemplatesArgs : Pulumi.InvokeArgs
+    public sealed class GetTemplatesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the address template to query.
@@ -95,9 +89,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Address
         public GetTemplatesArgs()
         {
         }
+        public static new GetTemplatesArgs Empty => new GetTemplatesArgs();
     }
 
-    public sealed class GetTemplatesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTemplatesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the address template to query.
@@ -120,6 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Address
         public GetTemplatesInvokeArgs()
         {
         }
+        public static new GetTemplatesInvokeArgs Empty => new GetTemplatesInvokeArgs();
     }
 
 

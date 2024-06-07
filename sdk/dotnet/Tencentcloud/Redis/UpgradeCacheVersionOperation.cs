@@ -15,28 +15,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var upgradeCacheVersionOperation = new Tencentcloud.Redis.UpgradeCacheVersionOperation("upgradeCacheVersionOperation", new()
     ///     {
-    ///         var upgradeCacheVersionOperation = new Tencentcloud.Redis.UpgradeCacheVersionOperation("upgradeCacheVersionOperation", new Tencentcloud.Redis.UpgradeCacheVersionOperationArgs
-    ///         {
-    ///             CurrentRedisVersion = "5.0.0",
-    ///             InstanceId = "crs-c1nl9rpv",
-    ///             InstanceTypeUpgradeNow = 1,
-    ///             UpgradeRedisVersion = "5.0.0",
-    ///         });
-    ///     }
+    ///         CurrentRedisVersion = "5.0.0",
+    ///         InstanceId = "crs-c1nl9rpv",
+    ///         InstanceTypeUpgradeNow = 1,
+    ///         UpgradeRedisVersion = "5.0.0",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/upgradeCacheVersionOperation:UpgradeCacheVersionOperation")]
-    public partial class UpgradeCacheVersionOperation : Pulumi.CustomResource
+    public partial class UpgradeCacheVersionOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Current redis version.
@@ -107,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class UpgradeCacheVersionOperationArgs : Pulumi.ResourceArgs
+    public sealed class UpgradeCacheVersionOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Current redis version.
@@ -136,9 +137,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public UpgradeCacheVersionOperationArgs()
         {
         }
+        public static new UpgradeCacheVersionOperationArgs Empty => new UpgradeCacheVersionOperationArgs();
     }
 
-    public sealed class UpgradeCacheVersionOperationState : Pulumi.ResourceArgs
+    public sealed class UpgradeCacheVersionOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Current redis version.
@@ -167,5 +169,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public UpgradeCacheVersionOperationState()
         {
         }
+        public static new UpgradeCacheVersionOperationState Empty => new UpgradeCacheVersionOperationState();
     }
 }

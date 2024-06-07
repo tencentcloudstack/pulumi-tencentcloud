@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingGetArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// database name.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingGetArgs()
         {
         }
+        public static new DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingGetArgs Empty => new DatahubTaskSourceResourceEsParamDropDlqKafkaParamTableMappingGetArgs();
     }
 }

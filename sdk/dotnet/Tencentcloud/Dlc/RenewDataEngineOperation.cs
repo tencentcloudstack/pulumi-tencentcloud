@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var renewDataEngine = new Tencentcloud.Dlc.RenewDataEngineOperation("renewDataEngine", new()
     ///     {
-    ///         var renewDataEngine = new Tencentcloud.Dlc.RenewDataEngineOperation("renewDataEngine", new Tencentcloud.Dlc.RenewDataEngineOperationArgs
-    ///         {
-    ///             DataEngineName = "testEngine",
-    ///             PayMode = 1,
-    ///             RenewFlag = 1,
-    ///             TimeSpan = 3600,
-    ///             TimeUnit = "m",
-    ///         });
-    ///     }
+    ///         DataEngineName = "testEngine",
+    ///         PayMode = 1,
+    ///         RenewFlag = 1,
+    ///         TimeSpan = 3600,
+    ///         TimeUnit = "m",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dlc renew_data_engine can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dlc/renewDataEngineOperation:RenewDataEngineOperation renew_data_engine renew_data_engine_id
+    /// $ pulumi import tencentcloud:Dlc/renewDataEngineOperation:RenewDataEngineOperation renew_data_engine renew_data_engine_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/renewDataEngineOperation:RenewDataEngineOperation")]
-    public partial class RenewDataEngineOperation : Pulumi.CustomResource
+    public partial class RenewDataEngineOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Data engine name.
@@ -122,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class RenewDataEngineOperationArgs : Pulumi.ResourceArgs
+    public sealed class RenewDataEngineOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Data engine name.
@@ -157,9 +158,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public RenewDataEngineOperationArgs()
         {
         }
+        public static new RenewDataEngineOperationArgs Empty => new RenewDataEngineOperationArgs();
     }
 
-    public sealed class RenewDataEngineOperationState : Pulumi.ResourceArgs
+    public sealed class RenewDataEngineOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Data engine name.
@@ -194,5 +196,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public RenewDataEngineOperationState()
         {
         }
+        public static new RenewDataEngineOperationState Empty => new RenewDataEngineOperationState();
     }
 }

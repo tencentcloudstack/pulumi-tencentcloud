@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const reloadProxyNode = new tencentcloud.Cynosdb.ReloadProxyNode("reload_proxy_node", {
+ * const reloadProxyNode = new tencentcloud.cynosdb.ReloadProxyNode("reloadProxyNode", {
  *     clusterId: "cynosdbmysql-cgd2gpwr",
  *     proxyGroupId: "cynosdbmysql-proxy-8lqtl8pk",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cynosdb reload_proxy_node can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cynosdb/reloadProxyNode:ReloadProxyNode reload_proxy_node reload_proxy_node_id
+ * $ pulumi import tencentcloud:Cynosdb/reloadProxyNode:ReloadProxyNode reload_proxy_node reload_proxy_node_id
  * ```
  */
 export class ReloadProxyNode extends pulumi.CustomResource {

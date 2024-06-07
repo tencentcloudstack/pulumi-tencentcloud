@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to increase instance to cluster
@@ -19,132 +20,141 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		subnet := "subnet-pqfek0t8"
-// 		if param := cfg.Get("subnet"); param != "" {
-// 			subnet = param
-// 		}
-// 		scaleInstanceType := "S2.LARGE16"
-// 		if param := cfg.Get("scaleInstanceType"); param != "" {
-// 			scaleInstanceType = param
-// 		}
-// 		_, err := Kubernetes.NewScaleWorker(ctx, "testScale", &Kubernetes.ScaleWorkerArgs{
-// 			ClusterId:     pulumi.String("cls-godovr32"),
-// 			DesiredPodNum: pulumi.Int(16),
-// 			Labels: pulumi.AnyMap{
-// 				"test1": pulumi.Any("test1"),
-// 				"test2": pulumi.Any("test2"),
-// 			},
-// 			WorkerConfig: &kubernetes.ScaleWorkerWorkerConfigArgs{
-// 				Count:                   pulumi.Int(3),
-// 				AvailabilityZone:        pulumi.String(availabilityZone),
-// 				InstanceType:            pulumi.String(scaleInstanceType),
-// 				SubnetId:                pulumi.String(subnet),
-// 				SystemDiskType:          pulumi.String("CLOUD_SSD"),
-// 				SystemDiskSize:          pulumi.Int(50),
-// 				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 				InternetMaxBandwidthOut: pulumi.Int(100),
-// 				PublicIpAssigned:        pulumi.Bool(true),
-// 				DataDisks: kubernetes.ScaleWorkerWorkerConfigDataDiskArray{
-// 					&kubernetes.ScaleWorkerWorkerConfigDataDiskArgs{
-// 						DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 						DiskSize: pulumi.Int(50),
-// 					},
-// 				},
-// 				EnhancedSecurityService: pulumi.Bool(false),
-// 				EnhancedMonitorService:  pulumi.Bool(false),
-// 				UserData:                pulumi.String("dGVzdA=="),
-// 				Password:                pulumi.String("AABBccdd1122"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			subnet := "subnet-pqfek0t8"
+//			if param := cfg.Get("subnet"); param != "" {
+//				subnet = param
+//			}
+//			scaleInstanceType := "S2.LARGE16"
+//			if param := cfg.Get("scaleInstanceType"); param != "" {
+//				scaleInstanceType = param
+//			}
+//			_, err := Kubernetes.NewScaleWorker(ctx, "testScale", &Kubernetes.ScaleWorkerArgs{
+//				ClusterId:     pulumi.String("cls-godovr32"),
+//				DesiredPodNum: pulumi.Int(16),
+//				Labels: pulumi.Map{
+//					"test1": pulumi.Any("test1"),
+//					"test2": pulumi.Any("test2"),
+//				},
+//				WorkerConfig: &kubernetes.ScaleWorkerWorkerConfigArgs{
+//					Count:                   pulumi.Int(3),
+//					AvailabilityZone:        pulumi.String(availabilityZone),
+//					InstanceType:            pulumi.String(scaleInstanceType),
+//					SubnetId:                pulumi.String(subnet),
+//					SystemDiskType:          pulumi.String("CLOUD_SSD"),
+//					SystemDiskSize:          pulumi.Int(50),
+//					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+//					InternetMaxBandwidthOut: pulumi.Int(100),
+//					PublicIpAssigned:        pulumi.Bool(true),
+//					DataDisks: kubernetes.ScaleWorkerWorkerConfigDataDiskArray{
+//						&kubernetes.ScaleWorkerWorkerConfigDataDiskArgs{
+//							DiskType: pulumi.String("CLOUD_PREMIUM"),
+//							DiskSize: pulumi.Int(50),
+//						},
+//					},
+//					EnhancedSecurityService: pulumi.Bool(false),
+//					EnhancedMonitorService:  pulumi.Bool(false),
+//					UserData:                pulumi.String("dGVzdA=="),
+//					Password:                pulumi.String("AABBccdd1122"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Use Kubelet
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		subnet := "subnet-pqfek0t8"
-// 		if param := cfg.Get("subnet"); param != "" {
-// 			subnet = param
-// 		}
-// 		scaleInstanceType := "S2.LARGE16"
-// 		if param := cfg.Get("scaleInstanceType"); param != "" {
-// 			scaleInstanceType = param
-// 		}
-// 		_, err := Kubernetes.NewScaleWorker(ctx, "testScale", &Kubernetes.ScaleWorkerArgs{
-// 			ClusterId: pulumi.String("cls-godovr32"),
-// 			ExtraArgs: pulumi.StringArray{
-// 				pulumi.String("root-dir=/var/lib/kubelet"),
-// 			},
-// 			Labels: pulumi.AnyMap{
-// 				"test1": pulumi.Any("test1"),
-// 				"test2": pulumi.Any("test2"),
-// 			},
-// 			WorkerConfig: &kubernetes.ScaleWorkerWorkerConfigArgs{
-// 				Count:                   pulumi.Int(3),
-// 				AvailabilityZone:        pulumi.String(availabilityZone),
-// 				InstanceType:            pulumi.String(scaleInstanceType),
-// 				SubnetId:                pulumi.String(subnet),
-// 				SystemDiskType:          pulumi.String("CLOUD_SSD"),
-// 				SystemDiskSize:          pulumi.Int(50),
-// 				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 				InternetMaxBandwidthOut: pulumi.Int(100),
-// 				PublicIpAssigned:        pulumi.Bool(true),
-// 				DataDisks: kubernetes.ScaleWorkerWorkerConfigDataDiskArray{
-// 					&kubernetes.ScaleWorkerWorkerConfigDataDiskArgs{
-// 						DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 						DiskSize: pulumi.Int(50),
-// 					},
-// 				},
-// 				EnhancedSecurityService: pulumi.Bool(false),
-// 				EnhancedMonitorService:  pulumi.Bool(false),
-// 				UserData:                pulumi.String("dGVzdA=="),
-// 				Password:                pulumi.String("AABBccdd1122"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			subnet := "subnet-pqfek0t8"
+//			if param := cfg.Get("subnet"); param != "" {
+//				subnet = param
+//			}
+//			scaleInstanceType := "S2.LARGE16"
+//			if param := cfg.Get("scaleInstanceType"); param != "" {
+//				scaleInstanceType = param
+//			}
+//			_, err := Kubernetes.NewScaleWorker(ctx, "testScale", &Kubernetes.ScaleWorkerArgs{
+//				ClusterId: pulumi.String("cls-godovr32"),
+//				ExtraArgs: pulumi.StringArray{
+//					pulumi.String("root-dir=/var/lib/kubelet"),
+//				},
+//				Labels: pulumi.Map{
+//					"test1": pulumi.Any("test1"),
+//					"test2": pulumi.Any("test2"),
+//				},
+//				WorkerConfig: &kubernetes.ScaleWorkerWorkerConfigArgs{
+//					Count:                   pulumi.Int(3),
+//					AvailabilityZone:        pulumi.String(availabilityZone),
+//					InstanceType:            pulumi.String(scaleInstanceType),
+//					SubnetId:                pulumi.String(subnet),
+//					SystemDiskType:          pulumi.String("CLOUD_SSD"),
+//					SystemDiskSize:          pulumi.Int(50),
+//					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+//					InternetMaxBandwidthOut: pulumi.Int(100),
+//					PublicIpAssigned:        pulumi.Bool(true),
+//					DataDisks: kubernetes.ScaleWorkerWorkerConfigDataDiskArray{
+//						&kubernetes.ScaleWorkerWorkerConfigDataDiskArgs{
+//							DiskType: pulumi.String("CLOUD_PREMIUM"),
+//							DiskSize: pulumi.Int(50),
+//						},
+//					},
+//					EnhancedSecurityService: pulumi.Bool(false),
+//					EnhancedMonitorService:  pulumi.Bool(false),
+//					UserData:                pulumi.String("dGVzdA=="),
+//					Password:                pulumi.String("AABBccdd1122"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ScaleWorker struct {
 	pulumi.CustomResourceState
 
@@ -164,8 +174,12 @@ type ScaleWorker struct {
 	Labels pulumi.MapOutput `pulumi:"labels"`
 	// Mount target. Default is not mounting.
 	MountTarget pulumi.StringPtrOutput `pulumi:"mountTarget"`
-	// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript pulumi.StringPtrOutput `pulumi:"preStartUserScript"`
+	// Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
 	Unschedulable pulumi.IntPtrOutput `pulumi:"unschedulable"`
+	// Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
+	UserScript pulumi.StringPtrOutput `pulumi:"userScript"`
 	// Deploy the machine configuration information of the 'WORK' service, and create <=20 units for common users.
 	WorkerConfig ScaleWorkerWorkerConfigOutput `pulumi:"workerConfig"`
 	// An information list of kubernetes cluster 'WORKER'. Each element contains the following attributes:
@@ -185,7 +199,7 @@ func NewScaleWorker(ctx *pulumi.Context,
 	if args.WorkerConfig == nil {
 		return nil, errors.New("invalid value for required argument 'WorkerConfig'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ScaleWorker
 	err := ctx.RegisterResource("tencentcloud:Kubernetes/scaleWorker:ScaleWorker", name, args, &resource, opts...)
 	if err != nil {
@@ -224,8 +238,12 @@ type scaleWorkerState struct {
 	Labels map[string]interface{} `pulumi:"labels"`
 	// Mount target. Default is not mounting.
 	MountTarget *string `pulumi:"mountTarget"`
-	// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript *string `pulumi:"preStartUserScript"`
+	// Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
 	Unschedulable *int `pulumi:"unschedulable"`
+	// Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
+	UserScript *string `pulumi:"userScript"`
 	// Deploy the machine configuration information of the 'WORK' service, and create <=20 units for common users.
 	WorkerConfig *ScaleWorkerWorkerConfig `pulumi:"workerConfig"`
 	// An information list of kubernetes cluster 'WORKER'. Each element contains the following attributes:
@@ -249,8 +267,12 @@ type ScaleWorkerState struct {
 	Labels pulumi.MapInput
 	// Mount target. Default is not mounting.
 	MountTarget pulumi.StringPtrInput
-	// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript pulumi.StringPtrInput
+	// Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
 	Unschedulable pulumi.IntPtrInput
+	// Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
+	UserScript pulumi.StringPtrInput
 	// Deploy the machine configuration information of the 'WORK' service, and create <=20 units for common users.
 	WorkerConfig ScaleWorkerWorkerConfigPtrInput
 	// An information list of kubernetes cluster 'WORKER'. Each element contains the following attributes:
@@ -278,8 +300,12 @@ type scaleWorkerArgs struct {
 	Labels map[string]interface{} `pulumi:"labels"`
 	// Mount target. Default is not mounting.
 	MountTarget *string `pulumi:"mountTarget"`
-	// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript *string `pulumi:"preStartUserScript"`
+	// Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
 	Unschedulable *int `pulumi:"unschedulable"`
+	// Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
+	UserScript *string `pulumi:"userScript"`
 	// Deploy the machine configuration information of the 'WORK' service, and create <=20 units for common users.
 	WorkerConfig ScaleWorkerWorkerConfig `pulumi:"workerConfig"`
 }
@@ -302,8 +328,12 @@ type ScaleWorkerArgs struct {
 	Labels pulumi.MapInput
 	// Mount target. Default is not mounting.
 	MountTarget pulumi.StringPtrInput
-	// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript pulumi.StringPtrInput
+	// Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
 	Unschedulable pulumi.IntPtrInput
+	// Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
+	UserScript pulumi.StringPtrInput
 	// Deploy the machine configuration information of the 'WORK' service, and create <=20 units for common users.
 	WorkerConfig ScaleWorkerWorkerConfigInput
 }
@@ -334,7 +364,7 @@ func (i *ScaleWorker) ToScaleWorkerOutputWithContext(ctx context.Context) ScaleW
 // ScaleWorkerArrayInput is an input type that accepts ScaleWorkerArray and ScaleWorkerArrayOutput values.
 // You can construct a concrete instance of `ScaleWorkerArrayInput` via:
 //
-//          ScaleWorkerArray{ ScaleWorkerArgs{...} }
+//	ScaleWorkerArray{ ScaleWorkerArgs{...} }
 type ScaleWorkerArrayInput interface {
 	pulumi.Input
 
@@ -359,7 +389,7 @@ func (i ScaleWorkerArray) ToScaleWorkerArrayOutputWithContext(ctx context.Contex
 // ScaleWorkerMapInput is an input type that accepts ScaleWorkerMap and ScaleWorkerMapOutput values.
 // You can construct a concrete instance of `ScaleWorkerMapInput` via:
 //
-//          ScaleWorkerMap{ "key": ScaleWorkerArgs{...} }
+//	ScaleWorkerMap{ "key": ScaleWorkerArgs{...} }
 type ScaleWorkerMapInput interface {
 	pulumi.Input
 
@@ -435,9 +465,19 @@ func (o ScaleWorkerOutput) MountTarget() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ScaleWorker) pulumi.StringPtrOutput { return v.MountTarget }).(pulumi.StringPtrOutput)
 }
 
-// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+func (o ScaleWorkerOutput) PreStartUserScript() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ScaleWorker) pulumi.StringPtrOutput { return v.PreStartUserScript }).(pulumi.StringPtrOutput)
+}
+
+// Set whether the added node participates in scheduling. The default value is 0, which means participating in scheduling; non-0 means not participating in scheduling. After the node initialization is completed, you can execute kubectl uncordon nodename to join the node in scheduling.
 func (o ScaleWorkerOutput) Unschedulable() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ScaleWorker) pulumi.IntPtrOutput { return v.Unschedulable }).(pulumi.IntPtrOutput)
+}
+
+// Base64 encoded user script, this script will be executed after the k8s component is run. The user needs to ensure that the script is reentrant and retry logic. The script and its generated log files can be viewed in the /data/ccs_userscript/ path of the node, if required. The node needs to be initialized before it can be added to the schedule. It can be used with the unschedulable parameter. After the final initialization of userScript is completed, add the kubectl uncordon nodename --kubeconfig=/root/.kube/config command to add the node to the schedule.
+func (o ScaleWorkerOutput) UserScript() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ScaleWorker) pulumi.StringPtrOutput { return v.UserScript }).(pulumi.StringPtrOutput)
 }
 
 // Deploy the machine configuration information of the 'WORK' service, and create <=20 units for common users.

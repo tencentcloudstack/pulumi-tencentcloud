@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The parameters of a subtask.Note: This field may return null, indicating that no valid values can be obtained.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityArgs()
         {
         }
+        public static new ScheduleActivityArgs Empty => new ScheduleActivityArgs();
     }
 }

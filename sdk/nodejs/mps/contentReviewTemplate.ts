@@ -2,128 +2,19 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a mps contentReviewTemplate
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const template = new tencentcloud.Mps.ContentReviewTemplate("template", {
- *     comment: "tf test content review temp",
- *     politicalConfigure: {
- *         asrReviewInfo: {
- *             blockConfidence: 60,
- *             reviewConfidence: 100,
- *             switch: "ON",
- *         },
- *         imgReviewInfo: {
- *             blockConfidence: 60,
- *             labelSets: [
- *                 "violation_photo",
- *                 "politician",
- *             ],
- *             reviewConfidence: 100,
- *             switch: "ON",
- *         },
- *         ocrReviewInfo: {
- *             blockConfidence: 60,
- *             reviewConfidence: 100,
- *             switch: "ON",
- *         },
- *     },
- *     pornConfigure: {
- *         asrReviewInfo: {
- *             blockConfidence: 60,
- *             reviewConfidence: 100,
- *             switch: "ON",
- *         },
- *         imgReviewInfo: {
- *             blockConfidence: 60,
- *             labelSets: [
- *                 "porn",
- *                 "vulgar",
- *             ],
- *             reviewConfidence: 100,
- *             switch: "ON",
- *         },
- *         ocrReviewInfo: {
- *             blockConfidence: 60,
- *             reviewConfidence: 100,
- *             switch: "ON",
- *         },
- *     },
- *     prohibitedConfigure: {
- *         asrReviewInfo: {
- *             blockConfidence: 60,
- *             reviewConfidence: 100,
- *             switch: "ON",
- *         },
- *         ocrReviewInfo: {
- *             blockConfidence: 60,
- *             reviewConfidence: 100,
- *             switch: "ON",
- *         },
- *     },
- *     terrorismConfigure: {
- *         imgReviewInfo: {
- *             blockConfidence: 60,
- *             labelSets: [
- *                 "guns",
- *                 "crowd",
- *             ],
- *             reviewConfidence: 100,
- *             switch: "ON",
- *         },
- *         ocrReviewInfo: {
- *             blockConfidence: 60,
- *             reviewConfidence: 100,
- *             switch: "ON",
- *         },
- *     },
- *     userDefineConfigure: {
- *         asrReviewInfo: {
- *             blockConfidence: 60,
- *             labelSets: [
- *                 "VOICE_1",
- *                 "VOICE_2",
- *             ],
- *             reviewConfidence: 100,
- *             switch: "ON",
- *         },
- *         faceReviewInfo: {
- *             blockConfidence: 60,
- *             labelSets: [
- *                 "FACE_1",
- *                 "FACE_2",
- *             ],
- *             reviewConfidence: 100,
- *             switch: "ON",
- *         },
- *         ocrReviewInfo: {
- *             blockConfidence: 60,
- *             labelSets: [
- *                 "VIDEO_1",
- *                 "VIDEO_2",
- *             ],
- *             reviewConfidence: 100,
- *             switch: "ON",
- *         },
- *     },
- * });
- * ```
  *
  * ## Import
  *
  * mps content_review_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/contentReviewTemplate:ContentReviewTemplate content_review_template definition
+ * $ pulumi import tencentcloud:Mps/contentReviewTemplate:ContentReviewTemplate content_review_template definition
  * ```
  */
 export class ContentReviewTemplate extends pulumi.CustomResource {

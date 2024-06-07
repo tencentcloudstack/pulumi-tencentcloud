@@ -18,11 +18,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// dlc add_users_to_work_group_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dlc/addUsersToWorkGroupAttachment:AddUsersToWorkGroupAttachment add_users_to_work_group_attachment add_users_to_work_group_attachment_id
+    /// $ pulumi import tencentcloud:Dlc/addUsersToWorkGroupAttachment:AddUsersToWorkGroupAttachment add_users_to_work_group_attachment add_users_to_work_group_attachment_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/addUsersToWorkGroupAttachment:AddUsersToWorkGroupAttachment")]
-    public partial class AddUsersToWorkGroupAttachment : Pulumi.CustomResource
+    public partial class AddUsersToWorkGroupAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Work group and user information to operate on.
@@ -75,7 +75,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class AddUsersToWorkGroupAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class AddUsersToWorkGroupAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Work group and user information to operate on.
@@ -86,9 +86,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public AddUsersToWorkGroupAttachmentArgs()
         {
         }
+        public static new AddUsersToWorkGroupAttachmentArgs Empty => new AddUsersToWorkGroupAttachmentArgs();
     }
 
-    public sealed class AddUsersToWorkGroupAttachmentState : Pulumi.ResourceArgs
+    public sealed class AddUsersToWorkGroupAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Work group and user information to operate on.
@@ -99,5 +100,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public AddUsersToWorkGroupAttachmentState()
         {
         }
+        public static new AddUsersToWorkGroupAttachmentState Empty => new AddUsersToWorkGroupAttachmentState();
     }
 }

@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var switchDataEngineImageOperation = new Tencentcloud.Dlc.SwitchDataEngineImageOperation("switchDataEngineImageOperation", new()
     ///     {
-    ///         var switchDataEngineImageOperation = new Tencentcloud.Dlc.SwitchDataEngineImageOperation("switchDataEngineImageOperation", new Tencentcloud.Dlc.SwitchDataEngineImageOperationArgs
-    ///         {
-    ///             DataEngineId = "DataEngine-g5ds87d8",
-    ///             NewImageVersionId = "344ba1c6-b7a9-403a-a255-422fffed6d38",
-    ///         });
-    ///     }
+    ///         DataEngineId = "DataEngine-g5ds87d8",
+    ///         NewImageVersionId = "344ba1c6-b7a9-403a-a255-422fffed6d38",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/switchDataEngineImageOperation:SwitchDataEngineImageOperation")]
-    public partial class SwitchDataEngineImageOperation : Pulumi.CustomResource
+    public partial class SwitchDataEngineImageOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Engine unique id.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class SwitchDataEngineImageOperationArgs : Pulumi.ResourceArgs
+    public sealed class SwitchDataEngineImageOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Engine unique id.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public SwitchDataEngineImageOperationArgs()
         {
         }
+        public static new SwitchDataEngineImageOperationArgs Empty => new SwitchDataEngineImageOperationArgs();
     }
 
-    public sealed class SwitchDataEngineImageOperationState : Pulumi.ResourceArgs
+    public sealed class SwitchDataEngineImageOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Engine unique id.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public SwitchDataEngineImageOperationState()
         {
         }
+        public static new SwitchDataEngineImageOperationState Empty => new SwitchDataEngineImageOperationState();
     }
 }

@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to delete a clickhouse back up data
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clickhouse.NewDeleteBackupData(ctx, "deleteBackUpData", &Clickhouse.DeleteBackupDataArgs{
-// 			BackUpJobId: pulumi.Int(1234),
-// 			InstanceId:  pulumi.String("cdwch-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clickhouse.NewDeleteBackupData(ctx, "deleteBackUpData", &Clickhouse.DeleteBackupDataArgs{
+//				BackUpJobId: pulumi.Int(1234),
+//				InstanceId:  pulumi.String("cdwch-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type DeleteBackupData struct {
 	pulumi.CustomResourceState
 
@@ -55,7 +61,7 @@ func NewDeleteBackupData(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DeleteBackupData
 	err := ctx.RegisterResource("tencentcloud:Clickhouse/deleteBackupData:DeleteBackupData", name, args, &resource, opts...)
 	if err != nil {
@@ -136,7 +142,7 @@ func (i *DeleteBackupData) ToDeleteBackupDataOutputWithContext(ctx context.Conte
 // DeleteBackupDataArrayInput is an input type that accepts DeleteBackupDataArray and DeleteBackupDataArrayOutput values.
 // You can construct a concrete instance of `DeleteBackupDataArrayInput` via:
 //
-//          DeleteBackupDataArray{ DeleteBackupDataArgs{...} }
+//	DeleteBackupDataArray{ DeleteBackupDataArgs{...} }
 type DeleteBackupDataArrayInput interface {
 	pulumi.Input
 
@@ -161,7 +167,7 @@ func (i DeleteBackupDataArray) ToDeleteBackupDataArrayOutputWithContext(ctx cont
 // DeleteBackupDataMapInput is an input type that accepts DeleteBackupDataMap and DeleteBackupDataMapOutput values.
 // You can construct a concrete instance of `DeleteBackupDataMapInput` via:
 //
-//          DeleteBackupDataMap{ "key": DeleteBackupDataArgs{...} }
+//	DeleteBackupDataMap{ "key": DeleteBackupDataArgs{...} }
 type DeleteBackupDataMapInput interface {
 	pulumi.Input
 

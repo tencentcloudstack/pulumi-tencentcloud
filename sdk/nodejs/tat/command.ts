@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const command = new tencentcloud.Tat.Command("command", {
+ * const command = new tencentcloud.tat.Command("command", {
  *     commandName: "ls",
  *     commandType: "SHELL",
  *     content: "bHM=",
@@ -28,13 +30,14 @@ import * as utilities from "../utilities";
  *     workingDirectory: "/root",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tat command can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tat/command:Command command cmd-6fydo27j
+ * $ pulumi import tencentcloud:Tat/command:Command command cmd-6fydo27j
  * ```
  */
 export class Command extends pulumi.CustomResource {

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Kms.getListKeys({
+ * const example = tencentcloud.Kms.getListKeys({
  *     role: 1,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getListKeys(args?: GetListKeysArgs, opts?: pulumi.InvokeOptions): Promise<GetListKeysResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Kms/getListKeys:getListKeys", {
         "hsmClusterId": args.hsmClusterId,
         "resultOutputFile": args.resultOutputFile,
@@ -67,9 +67,24 @@ export interface GetListKeysResult {
     readonly resultOutputFile?: string;
     readonly role?: number;
 }
-
+/**
+ * Use this data source to query detailed information of kms listKeys
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Kms.getListKeys({
+ *     role: 1,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getListKeysOutput(args?: GetListKeysOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetListKeysResult> {
-    return pulumi.output(args).apply(a => getListKeys(a, opts))
+    return pulumi.output(args).apply((a: any) => getListKeys(a, opts))
 }
 
 /**

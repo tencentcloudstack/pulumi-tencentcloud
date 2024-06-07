@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Sqlserver.IncreBackupMigration("example", {
+ * const example = new tencentcloud.sqlserver.IncreBackupMigration("example", {
  *     backupFiles: [],
  *     backupMigrationId: "mssql-backup-migration-9tj0sxnz",
  *     instanceId: "mssql-4gmc5805",
  *     isRecovery: "YES",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * sqlserver incre_backup_migration can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Sqlserver/increBackupMigration:IncreBackupMigration incre_backup_migration incre_backup_migration_id
+ * $ pulumi import tencentcloud:Sqlserver/increBackupMigration:IncreBackupMigration incre_backup_migration incre_backup_migration_id
  * ```
  */
 export class IncreBackupMigration extends pulumi.CustomResource {

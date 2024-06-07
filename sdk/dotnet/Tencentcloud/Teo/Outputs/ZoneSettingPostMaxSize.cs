@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly int? MaxSize;
         /// <summary>
-        /// Specifies whether to enable custom setting of the maximum file size.- `on`: Enable. You can set a custom max size.- `off`: Disable. In this case, the max size defaults to 32 MB.
+        /// Specifies whether to enable custom setting of the maximum file size.
         /// </summary>
         public readonly string Switch;
 

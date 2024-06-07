@@ -7,51 +7,56 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a emr user
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Emr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		myEmr, err := Emr.GetInstance(ctx, &emr.GetInstanceArgs{
-// 			DisplayStrategy: "clusterList",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Emr.NewUserManager(ctx, "userManager", &Emr.UserManagerArgs{
-// 			InstanceId: pulumi.String(myEmr.Clusters[0].ClusterId),
-// 			UserName:   pulumi.String("tf-test"),
-// 			UserGroup:  pulumi.String("group1"),
-// 			Password:   pulumi.String("tf@123456"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			myEmr, err := Emr.GetInstance(ctx, &emr.GetInstanceArgs{
+//				DisplayStrategy: "clusterList",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Emr.NewUserManager(ctx, "userManager", &Emr.UserManagerArgs{
+//				InstanceId: pulumi.String(myEmr.Clusters[0].ClusterId),
+//				UserName:   pulumi.String("tf-test"),
+//				UserGroup:  pulumi.String("group1"),
+//				Password:   pulumi.String("tf@123456"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // emr user_manager can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Emr/userManager:UserManager user_manager instanceId#userName
+// $ pulumi import tencentcloud:Emr/userManager:UserManager user_manager instanceId#userName
 // ```
 type UserManager struct {
 	pulumi.CustomResourceState
@@ -93,7 +98,7 @@ func NewUserManager(ctx *pulumi.Context,
 	if args.UserName == nil {
 		return nil, errors.New("invalid value for required argument 'UserName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UserManager
 	err := ctx.RegisterResource("tencentcloud:Emr/userManager:UserManager", name, args, &resource, opts...)
 	if err != nil {
@@ -206,7 +211,7 @@ func (i *UserManager) ToUserManagerOutputWithContext(ctx context.Context) UserMa
 // UserManagerArrayInput is an input type that accepts UserManagerArray and UserManagerArrayOutput values.
 // You can construct a concrete instance of `UserManagerArrayInput` via:
 //
-//          UserManagerArray{ UserManagerArgs{...} }
+//	UserManagerArray{ UserManagerArgs{...} }
 type UserManagerArrayInput interface {
 	pulumi.Input
 
@@ -231,7 +236,7 @@ func (i UserManagerArray) ToUserManagerArrayOutputWithContext(ctx context.Contex
 // UserManagerMapInput is an input type that accepts UserManagerMap and UserManagerMapOutput values.
 // You can construct a concrete instance of `UserManagerMapInput` via:
 //
-//          UserManagerMap{ "key": UserManagerArgs{...} }
+//	UserManagerMap{ "key": UserManagerArgs{...} }
 type UserManagerMapInput interface {
 	pulumi.Input
 

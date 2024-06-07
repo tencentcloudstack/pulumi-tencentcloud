@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const ruleEngineSettings = pulumi.output(tencentcloud.Teo.getRuleEngineSettings());
+ * const ruleEngineSettings = tencentcloud.Teo.getRuleEngineSettings({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRuleEngineSettings(args?: GetRuleEngineSettingsArgs, opts?: pulumi.InvokeOptions): Promise<GetRuleEngineSettingsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Teo/getRuleEngineSettings:getRuleEngineSettings", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetRuleEngineSettingsResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of teo ruleEngineSettings
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const ruleEngineSettings = tencentcloud.Teo.getRuleEngineSettings({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRuleEngineSettingsOutput(args?: GetRuleEngineSettingsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRuleEngineSettingsResult> {
-    return pulumi.output(args).apply(a => getRuleEngineSettings(a, opts))
+    return pulumi.output(args).apply((a: any) => getRuleEngineSettings(a, opts))
 }
 
 /**

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class AiAnalysisTemplateClassificationConfigureGetArgs : Pulumi.ResourceArgs
+    public sealed class AiAnalysisTemplateClassificationConfigureGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Ai classification task switch, optional value:ON/OFF.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public AiAnalysisTemplateClassificationConfigureGetArgs()
         {
         }
+        public static new AiAnalysisTemplateClassificationConfigureGetArgs Empty => new AiAnalysisTemplateClassificationConfigureGetArgs();
     }
 }

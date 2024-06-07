@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const quitOrganizationOperation = new tencentcloud.Organization.QuitOrganizationOperation("quit_organization_operation", {
- *     orgId: 45155,
- * });
+ * const quitOrganizationOperation = new tencentcloud.organization.QuitOrganizationOperation("quitOrganizationOperation", {orgId: 45155});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * organization quit_organization_operation can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Organization/quitOrganizationOperation:QuitOrganizationOperation quit_organization_operation quit_organization_operation_id
+ * $ pulumi import tencentcloud:Organization/quitOrganizationOperation:QuitOrganizationOperation quit_organization_operation quit_organization_operation_id
  * ```
  */
 export class QuitOrganizationOperation extends pulumi.CustomResource {

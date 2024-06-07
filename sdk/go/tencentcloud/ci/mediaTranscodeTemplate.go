@@ -7,97 +7,100 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ci mediaTranscodeTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewMediaTranscodeTemplate(ctx, "mediaTranscodeTemplate", &Ci.MediaTranscodeTemplateArgs{
-// 			Audio: &ci.MediaTranscodeTemplateAudioArgs{
-// 				Bitrate:       pulumi.String("128"),
-// 				Channels:      pulumi.String("4"),
-// 				Codec:         pulumi.String("aac"),
-// 				KeepTwoTracks: pulumi.String("false"),
-// 				Remove:        pulumi.String("false"),
-// 				SampleFormat:  pulumi.String(""),
-// 				Samplerate:    pulumi.String("44100"),
-// 				SwitchTrack:   pulumi.String("false"),
-// 			},
-// 			AudioMixes: ci.MediaTranscodeTemplateAudioMixArray{
-// 				&ci.MediaTranscodeTemplateAudioMixArgs{
-// 					AudioSource: pulumi.String(fmt.Sprintf("%v%v%v", "https://terraform-ci-1308919341.cos.ap-guangzhou.myqcloud.com/mp3", "%", "2Fnizhan-test.mp3")),
-// 					EffectConfig: &ci.MediaTranscodeTemplateAudioMixEffectConfigArgs{
-// 						BgmFadeTime:       pulumi.String("1.7"),
-// 						EnableBgmFade:     pulumi.String("true"),
-// 						EnableEndFadeout:  pulumi.String("false"),
-// 						EnableStartFadein: pulumi.String("true"),
-// 						EndFadeoutTime:    pulumi.String("0"),
-// 						StartFadeinTime:   pulumi.String("3"),
-// 					},
-// 					MixMode: pulumi.String("Once"),
-// 					Replace: pulumi.String("true"),
-// 				},
-// 			},
-// 			Bucket: pulumi.String("terraform-ci-1308919341"),
-// 			Container: &ci.MediaTranscodeTemplateContainerArgs{
-// 				Format: pulumi.String("mp4"),
-// 			},
-// 			TimeInterval: &ci.MediaTranscodeTemplateTimeIntervalArgs{
-// 				Duration: pulumi.String("60"),
-// 				Start:    pulumi.String("0"),
-// 			},
-// 			TransConfig: &ci.MediaTranscodeTemplateTransConfigArgs{
-// 				AdjDarMethod:          pulumi.String("scale"),
-// 				AudioBitrateAdjMethod: pulumi.String("0"),
-// 				DeleteMetadata:        pulumi.String("false"),
-// 				IsCheckAudioBitrate:   pulumi.String("false"),
-// 				IsCheckReso:           pulumi.String("false"),
-// 				IsCheckVideoBitrate:   pulumi.String("false"),
-// 				IsHdr2Sdr:             pulumi.String("false"),
-// 				ResoAdjMethod:         pulumi.String("1"),
-// 				VideoBitrateAdjMethod: pulumi.String("0"),
-// 			},
-// 			Video: &ci.MediaTranscodeTemplateVideoArgs{
-// 				Bitrate:       pulumi.String("1000"),
-// 				Codec:         pulumi.String("H.264"),
-// 				Fps:           pulumi.String("30"),
-// 				LongShortMode: pulumi.String("false"),
-// 				Preset:        pulumi.String("medium"),
-// 				Profile:       pulumi.String("high"),
-// 				Remove:        pulumi.String("false"),
-// 				Width:         pulumi.String("1280"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewMediaTranscodeTemplate(ctx, "mediaTranscodeTemplate", &Ci.MediaTranscodeTemplateArgs{
+//				Audio: &ci.MediaTranscodeTemplateAudioArgs{
+//					Bitrate:       pulumi.String("128"),
+//					Channels:      pulumi.String("4"),
+//					Codec:         pulumi.String("aac"),
+//					KeepTwoTracks: pulumi.String("false"),
+//					Remove:        pulumi.String("false"),
+//					SampleFormat:  pulumi.String(""),
+//					Samplerate:    pulumi.String("44100"),
+//					SwitchTrack:   pulumi.String("false"),
+//				},
+//				AudioMixes: ci.MediaTranscodeTemplateAudioMixArray{
+//					&ci.MediaTranscodeTemplateAudioMixArgs{
+//						AudioSource: pulumi.String("https://terraform-ci-1308919341.cos.ap-guangzhou.myqcloud.com/mp3%2Fnizhan-test.mp3"),
+//						EffectConfig: &ci.MediaTranscodeTemplateAudioMixEffectConfigArgs{
+//							BgmFadeTime:       pulumi.String("1.7"),
+//							EnableBgmFade:     pulumi.String("true"),
+//							EnableEndFadeout:  pulumi.String("false"),
+//							EnableStartFadein: pulumi.String("true"),
+//							EndFadeoutTime:    pulumi.String("0"),
+//							StartFadeinTime:   pulumi.String("3"),
+//						},
+//						MixMode: pulumi.String("Once"),
+//						Replace: pulumi.String("true"),
+//					},
+//				},
+//				Bucket: pulumi.String("terraform-ci-1308919341"),
+//				Container: &ci.MediaTranscodeTemplateContainerArgs{
+//					Format: pulumi.String("mp4"),
+//				},
+//				TimeInterval: &ci.MediaTranscodeTemplateTimeIntervalArgs{
+//					Duration: pulumi.String("60"),
+//					Start:    pulumi.String("0"),
+//				},
+//				TransConfig: &ci.MediaTranscodeTemplateTransConfigArgs{
+//					AdjDarMethod:          pulumi.String("scale"),
+//					AudioBitrateAdjMethod: pulumi.String("0"),
+//					DeleteMetadata:        pulumi.String("false"),
+//					IsCheckAudioBitrate:   pulumi.String("false"),
+//					IsCheckReso:           pulumi.String("false"),
+//					IsCheckVideoBitrate:   pulumi.String("false"),
+//					IsHdr2Sdr:             pulumi.String("false"),
+//					ResoAdjMethod:         pulumi.String("1"),
+//					VideoBitrateAdjMethod: pulumi.String("0"),
+//				},
+//				Video: &ci.MediaTranscodeTemplateVideoArgs{
+//					Bitrate:       pulumi.String("1000"),
+//					Codec:         pulumi.String("H.264"),
+//					Fps:           pulumi.String("30"),
+//					LongShortMode: pulumi.String("false"),
+//					Preset:        pulumi.String("medium"),
+//					Profile:       pulumi.String("high"),
+//					Remove:        pulumi.String("false"),
+//					Width:         pulumi.String("1280"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ci media_transcode_template can be imported using the bucket#templateId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/mediaTranscodeTemplate:MediaTranscodeTemplate media_transcode_template media_transcode_template_id
+// $ pulumi import tencentcloud:Ci/mediaTranscodeTemplate:MediaTranscodeTemplate media_transcode_template media_transcode_template_id
 // ```
 type MediaTranscodeTemplate struct {
 	pulumi.CustomResourceState
@@ -133,7 +136,7 @@ func NewMediaTranscodeTemplate(ctx *pulumi.Context,
 	if args.Container == nil {
 		return nil, errors.New("invalid value for required argument 'Container'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MediaTranscodeTemplate
 	err := ctx.RegisterResource("tencentcloud:Ci/mediaTranscodeTemplate:MediaTranscodeTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -262,7 +265,7 @@ func (i *MediaTranscodeTemplate) ToMediaTranscodeTemplateOutputWithContext(ctx c
 // MediaTranscodeTemplateArrayInput is an input type that accepts MediaTranscodeTemplateArray and MediaTranscodeTemplateArrayOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateArrayInput` via:
 //
-//          MediaTranscodeTemplateArray{ MediaTranscodeTemplateArgs{...} }
+//	MediaTranscodeTemplateArray{ MediaTranscodeTemplateArgs{...} }
 type MediaTranscodeTemplateArrayInput interface {
 	pulumi.Input
 
@@ -287,7 +290,7 @@ func (i MediaTranscodeTemplateArray) ToMediaTranscodeTemplateArrayOutputWithCont
 // MediaTranscodeTemplateMapInput is an input type that accepts MediaTranscodeTemplateMap and MediaTranscodeTemplateMapOutput values.
 // You can construct a concrete instance of `MediaTranscodeTemplateMapInput` via:
 //
-//          MediaTranscodeTemplateMap{ "key": MediaTranscodeTemplateArgs{...} }
+//	MediaTranscodeTemplateMap{ "key": MediaTranscodeTemplateArgs{...} }
 type MediaTranscodeTemplateMapInput interface {
 	pulumi.Input
 

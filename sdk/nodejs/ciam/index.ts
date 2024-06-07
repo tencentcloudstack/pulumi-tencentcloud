@@ -5,12 +5,16 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./userGroup";
-export * from "./userStore";
+export { UserGroupArgs, UserGroupState } from "./userGroup";
+export type UserGroup = import("./userGroup").UserGroup;
+export const UserGroup: typeof import("./userGroup").UserGroup = null as any;
+utilities.lazyLoad(exports, ["UserGroup"], () => require("./userGroup"));
 
-// Import resources to register:
-import { UserGroup } from "./userGroup";
-import { UserStore } from "./userStore";
+export { UserStoreArgs, UserStoreState } from "./userStore";
+export type UserStore = import("./userStore").UserStore;
+export const UserStore: typeof import("./userStore").UserStore = null as any;
+utilities.lazyLoad(exports, ["UserStore"], () => require("./userStore"));
+
 
 const _module = {
     version: utilities.getVersion(),

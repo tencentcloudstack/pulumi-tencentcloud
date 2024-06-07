@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -13,12 +14,14 @@ import * as utilities from "../utilities";
  * > **NOTE:** Both adding and removing replications in one change is supported but not recommend.
  *
  * ## Example Usage
+ *
  * ### Create a base version of redis
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zone = tencentcloud.Redis.getZoneConfig({
  *     typeId: 7,
@@ -26,123 +29,29 @@ import * as utilities from "../utilities";
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
  *     vpcId: vpc.id,
- *     availabilityZone: zone.then(zone => zone.lists?[0]?.zone),
+ *     availabilityZone: zone.then(zone => zone.lists?.[0]?.zone),
  *     cidrBlock: "10.0.1.0/24",
  * });
  * const foo = new tencentcloud.redis.Instance("foo", {
- *     availabilityZone: zone.then(zone => zone.lists?[0]?.zone),
- *     typeId: zone.then(zone => zone.lists?[0]?.typeId),
+ *     availabilityZone: zone.then(zone => zone.lists?.[0]?.zone),
+ *     typeId: zone.then(zone => zone.lists?.[0]?.typeId),
  *     password: "test12345789",
  *     memSize: 8192,
- *     redisShardNum: zone.then(zone => zone.lists?[0]?.redisShardNums?[0]),
- *     redisReplicasNum: zone.then(zone => zone.lists?[0]?.redisReplicasNums?[0]),
+ *     redisShardNum: zone.then(zone => zone.lists?.[0]?.redisShardNums?.[0]),
+ *     redisReplicasNum: zone.then(zone => zone.lists?.[0]?.redisReplicasNums?.[0]),
  *     port: 6379,
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
  * });
  * ```
- * ### Buy a month of prepaid instances
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const zone = tencentcloud.Redis.getZoneConfig({
- *     typeId: 7,
- * });
- * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
- * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     vpcId: vpc.id,
- *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
- *     cidrBlock: "10.0.1.0/24",
- * });
- * const fooGroup = new tencentcloud.security.Group("fooGroup", {});
- * const fooGroupLiteRule = new tencentcloud.security.GroupLiteRule("fooGroupLiteRule", {
- *     securityGroupId: fooGroup.id,
- *     ingresses: [
- *         "ACCEPT#192.168.1.0/24#80#TCP",
- *         "DROP#8.8.8.8#80,90#UDP",
- *         "DROP#0.0.0.0/0#80-90#TCP",
- *     ],
- *     egresses: [
- *         "ACCEPT#192.168.0.0/16#ALL#TCP",
- *         "ACCEPT#10.0.0.0/8#ALL#ICMP",
- *         "DROP#0.0.0.0/0#ALL#ALL",
- *     ],
- * });
- * const fooInstance = new tencentcloud.redis.Instance("fooInstance", {
- *     availabilityZone: zone.then(zone => zone.lists?[0]?.zone),
- *     typeId: zone.then(zone => zone.lists?[0]?.typeId),
- *     password: "test12345789",
- *     memSize: 8192,
- *     redisShardNum: zone.then(zone => zone.lists?[0]?.redisShardNums?[0]),
- *     redisReplicasNum: zone.then(zone => zone.lists?[0]?.redisReplicasNums?[0]),
- *     port: 6379,
- *     vpcId: vpc.id,
- *     subnetId: subnet.id,
- *     securityGroups: [fooGroup.id],
- *     chargeType: "PREPAID",
- *     prepaidPeriod: 1,
- * });
- * ```
- * ### Create a multi-AZ instance
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const zone = tencentcloud.Redis.getZoneConfig({
- *     typeId: 7,
- *     region: "ap-guangzhou",
- * });
- * const config = new pulumi.Config();
- * const replicaZoneIds = config.getObject("replicaZoneIds") || [
- *     100004,
- *     100006,
- * ];
- * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
- * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     vpcId: vpc.id,
- *     availabilityZone: zone.then(zone => zone.lists?[2]?.zone),
- *     cidrBlock: "10.0.1.0/24",
- * });
- * const fooGroup = new tencentcloud.security.Group("fooGroup", {});
- * const fooGroupLiteRule = new tencentcloud.security.GroupLiteRule("fooGroupLiteRule", {
- *     securityGroupId: fooGroup.id,
- *     ingresses: [
- *         "ACCEPT#192.168.1.0/24#80#TCP",
- *         "DROP#8.8.8.8#80,90#UDP",
- *         "DROP#0.0.0.0/0#80-90#TCP",
- *     ],
- *     egresses: [
- *         "ACCEPT#192.168.0.0/16#ALL#TCP",
- *         "ACCEPT#10.0.0.0/8#ALL#ICMP",
- *         "DROP#0.0.0.0/0#ALL#ALL",
- *     ],
- * });
- * const fooInstance = new tencentcloud.redis.Instance("fooInstance", {
- *     availabilityZone: zone.then(zone => zone.lists?[2]?.zone),
- *     typeId: zone.then(zone => zone.lists?[2]?.typeId),
- *     password: "test12345789",
- *     memSize: 8192,
- *     redisShardNum: zone.then(zone => zone.lists?[2]?.redisShardNums?[0]),
- *     redisReplicasNum: 2,
- *     replicaZoneIds: replicaZoneIds,
- *     port: 6379,
- *     vpcId: vpc.id,
- *     subnetId: subnet.id,
- *     securityGroups: [fooGroup.id],
- * });
- * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Redis instance can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
+ * $ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -198,7 +107,7 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly ip!: pulumi.Output<string>;
     /**
-     * The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
+     * The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. `512MB` is supported only in master-slave instance.
      */
     public readonly memSize!: pulumi.Output<number>;
     /**
@@ -352,7 +261,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["noAuth"] = args ? args.noAuth : undefined;
             resourceInputs["operationNetwork"] = args ? args.operationNetwork : undefined;
             resourceInputs["paramsTemplateId"] = args ? args.paramsTemplateId : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["prepaidPeriod"] = args ? args.prepaidPeriod : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
@@ -373,6 +282,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["status"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Instance.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -406,7 +317,7 @@ export interface InstanceState {
      */
     ip?: pulumi.Input<string>;
     /**
-     * The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
+     * The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. `512MB` is supported only in master-slave instance.
      */
     memSize?: pulumi.Input<number>;
     /**
@@ -526,7 +437,7 @@ export interface InstanceArgs {
      */
     ip?: pulumi.Input<string>;
     /**
-     * The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding.
+     * The memory volume of an available instance(in MB), please refer to `tencentcloud_redis_zone_config.list[zone].shard_memories`. When redis is standard type, it represents total memory size of the instance; when Redis is cluster type, it represents memory size of per sharding. `512MB` is supported only in master-slave instance.
      */
     memSize: pulumi.Input<number>;
     /**

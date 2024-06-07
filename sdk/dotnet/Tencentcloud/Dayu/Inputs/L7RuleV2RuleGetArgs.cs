@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class L7RuleV2RuleGetArgs : Pulumi.ResourceArgs
+    public sealed class L7RuleV2RuleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// HTTPS protocol CC protection status, value [0 (off), 1 (on)], defaule is 0.
@@ -84,5 +84,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public L7RuleV2RuleGetArgs()
         {
         }
+        public static new L7RuleV2RuleGetArgs Empty => new L7RuleV2RuleGetArgs();
     }
 }

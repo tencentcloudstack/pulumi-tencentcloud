@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// <summary>
         /// Use this data source to query detailed information of css pad_templates
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var padTemplates = Output.Create(Tencentcloud.Css.GetPadTemplates.InvokeAsync());
-        ///     }
+        ///     var padTemplates = Tencentcloud.Css.GetPadTemplates.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPadTemplatesResult> InvokeAsync(GetPadTemplatesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPadTemplatesResult>("tencentcloud:Css/getPadTemplates:getPadTemplates", args ?? new GetPadTemplatesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPadTemplatesResult>("tencentcloud:Css/getPadTemplates:getPadTemplates", args ?? new GetPadTemplatesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of css pad_templates
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var padTemplates = Output.Create(Tencentcloud.Css.GetPadTemplates.InvokeAsync());
-        ///     }
+        ///     var padTemplates = Tencentcloud.Css.GetPadTemplates.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPadTemplatesResult> Invoke(GetPadTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPadTemplatesResult>("tencentcloud:Css/getPadTemplates:getPadTemplates", args ?? new GetPadTemplatesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPadTemplatesResult>("tencentcloud:Css/getPadTemplates:getPadTemplates", args ?? new GetPadTemplatesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPadTemplatesArgs : Pulumi.InvokeArgs
+    public sealed class GetPadTemplatesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetPadTemplatesArgs()
         {
         }
+        public static new GetPadTemplatesArgs Empty => new GetPadTemplatesArgs();
     }
 
-    public sealed class GetPadTemplatesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPadTemplatesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetPadTemplatesInvokeArgs()
         {
         }
+        public static new GetPadTemplatesInvokeArgs Empty => new GetPadTemplatesInvokeArgs();
     }
 
 

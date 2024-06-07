@@ -7,47 +7,53 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a waf moduleStatus
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewModuleStatus(ctx, "example", &Waf.ModuleStatusArgs{
-// 			AccessControl: pulumi.Int(0),
-// 			AntiLeakage:   pulumi.Int(0),
-// 			AntiTamper:    pulumi.Int(1),
-// 			ApiProtection: pulumi.Int(1),
-// 			CcProtection:  pulumi.Int(1),
-// 			Domain:        pulumi.String("demo.waf.com"),
-// 			WebSecurity:   pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewModuleStatus(ctx, "example", &Waf.ModuleStatusArgs{
+//				AccessControl: pulumi.Int(0),
+//				AntiLeakage:   pulumi.Int(0),
+//				AntiTamper:    pulumi.Int(1),
+//				ApiProtection: pulumi.Int(1),
+//				CcProtection:  pulumi.Int(1),
+//				Domain:        pulumi.String("demo.waf.com"),
+//				WebSecurity:   pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // waf module_status can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Waf/moduleStatus:ModuleStatus example demo.waf.com
+// $ pulumi import tencentcloud:Waf/moduleStatus:ModuleStatus example demo.waf.com
 // ```
 type ModuleStatus struct {
 	pulumi.CustomResourceState
@@ -90,7 +96,7 @@ func NewModuleStatus(ctx *pulumi.Context,
 	if args.WebSecurity == nil {
 		return nil, errors.New("invalid value for required argument 'WebSecurity'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ModuleStatus
 	err := ctx.RegisterResource("tencentcloud:Waf/moduleStatus:ModuleStatus", name, args, &resource, opts...)
 	if err != nil {
@@ -211,7 +217,7 @@ func (i *ModuleStatus) ToModuleStatusOutputWithContext(ctx context.Context) Modu
 // ModuleStatusArrayInput is an input type that accepts ModuleStatusArray and ModuleStatusArrayOutput values.
 // You can construct a concrete instance of `ModuleStatusArrayInput` via:
 //
-//          ModuleStatusArray{ ModuleStatusArgs{...} }
+//	ModuleStatusArray{ ModuleStatusArgs{...} }
 type ModuleStatusArrayInput interface {
 	pulumi.Input
 
@@ -236,7 +242,7 @@ func (i ModuleStatusArray) ToModuleStatusArrayOutputWithContext(ctx context.Cont
 // ModuleStatusMapInput is an input type that accepts ModuleStatusMap and ModuleStatusMapOutput values.
 // You can construct a concrete instance of `ModuleStatusMapInput` via:
 //
-//          ModuleStatusMap{ "key": ModuleStatusArgs{...} }
+//	ModuleStatusMap{ "key": ModuleStatusArgs{...} }
 type ModuleStatusMapInput interface {
 	pulumi.Input
 

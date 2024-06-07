@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// Use this data source to query detailed information of clb idle_loadbalancers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var idleInstance = Tencentcloud.Clb.GetIdleInstances.Invoke(new()
         ///     {
-        ///         var idleInstance = Output.Create(Tencentcloud.Clb.GetIdleInstances.InvokeAsync(new Tencentcloud.Clb.GetIdleInstancesArgs
-        ///         {
-        ///             LoadBalancerRegion = "ap-guangzhou",
-        ///         }));
-        ///     }
+        ///         LoadBalancerRegion = "ap-guangzhou",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetIdleInstancesResult> InvokeAsync(GetIdleInstancesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetIdleInstancesResult>("tencentcloud:Clb/getIdleInstances:getIdleInstances", args ?? new GetIdleInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetIdleInstancesResult>("tencentcloud:Clb/getIdleInstances:getIdleInstances", args ?? new GetIdleInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of clb idle_loadbalancers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var idleInstance = Tencentcloud.Clb.GetIdleInstances.Invoke(new()
         ///     {
-        ///         var idleInstance = Output.Create(Tencentcloud.Clb.GetIdleInstances.InvokeAsync(new Tencentcloud.Clb.GetIdleInstancesArgs
-        ///         {
-        ///             LoadBalancerRegion = "ap-guangzhou",
-        ///         }));
-        ///     }
+        ///         LoadBalancerRegion = "ap-guangzhou",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetIdleInstancesResult> Invoke(GetIdleInstancesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetIdleInstancesResult>("tencentcloud:Clb/getIdleInstances:getIdleInstances", args ?? new GetIdleInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetIdleInstancesResult>("tencentcloud:Clb/getIdleInstances:getIdleInstances", args ?? new GetIdleInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetIdleInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetIdleInstancesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// CLB instance region.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetIdleInstancesArgs()
         {
         }
+        public static new GetIdleInstancesArgs Empty => new GetIdleInstancesArgs();
     }
 
-    public sealed class GetIdleInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetIdleInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// CLB instance region.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetIdleInstancesInvokeArgs()
         {
         }
+        public static new GetIdleInstancesInvokeArgs Empty => new GetIdleInstancesInvokeArgs();
     }
 
 

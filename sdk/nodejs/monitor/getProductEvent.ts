@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const cvmEventData = pulumi.output(tencentcloud.Monitor.getProductEvent({
+ * const cvmEventData = tencentcloud.Monitor.getProductEvent({
  *     isAlarmConfig: 0,
  *     productNames: ["cvm"],
  *     startTime: 1588700283,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getProductEvent(args?: GetProductEventArgs, opts?: pulumi.InvokeOptions): Promise<GetProductEventResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Monitor/getProductEvent:getProductEvent", {
         "dimensions": args.dimensions,
         "endTime": args.endTime,
@@ -150,9 +150,26 @@ export interface GetProductEventResult {
      */
     readonly types?: string[];
 }
-
+/**
+ * Use this data source to query monitor events(There is a lot of data and it is recommended to output to a file)
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const cvmEventData = tencentcloud.Monitor.getProductEvent({
+ *     isAlarmConfig: 0,
+ *     productNames: ["cvm"],
+ *     startTime: 1588700283,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getProductEventOutput(args?: GetProductEventOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProductEventResult> {
-    return pulumi.output(args).apply(a => getProductEvent(a, opts))
+    return pulumi.output(args).apply((a: any) => getProductEvent(a, opts))
 }
 
 /**

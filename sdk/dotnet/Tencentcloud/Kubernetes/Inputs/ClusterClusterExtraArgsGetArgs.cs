@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class ClusterClusterExtraArgsGetArgs : Pulumi.ResourceArgs
+    public sealed class ClusterClusterExtraArgsGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("kubeApiservers")]
         private InputList<string>? _kubeApiservers;
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public ClusterClusterExtraArgsGetArgs()
         {
         }
+        public static new ClusterClusterExtraArgsGetArgs Empty => new ClusterClusterExtraArgsGetArgs();
     }
 }

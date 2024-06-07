@@ -8,13 +8,15 @@ import * as utilities from "../utilities";
  * Provide a resource to create a KMS external key.
  *
  * ## Example Usage
+ *
  * ### Create a basic instance.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Kms.ExternalKey("example", {
+ * const example = new tencentcloud.kms.ExternalKey("example", {
  *     alias: "tf-example-kms-externalkey",
  *     description: "example of kms external key",
  *     tags: {
@@ -22,13 +24,16 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Specify the encryption algorithm and public key.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Kms.ExternalKey("example", {
+ * const example = new tencentcloud.kms.ExternalKey("example", {
  *     alias: "tf-example-kms-externalkey",
  *     description: "example of kms external key",
  *     isEnabled: true,
@@ -39,13 +44,16 @@ import * as utilities from "../utilities";
  *     wrappingAlgorithm: "RSAES_PKCS1_V1_5",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Disable the external kms key.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Kms.ExternalKey("example", {
+ * const example = new tencentcloud.kms.ExternalKey("example", {
  *     alias: "tf-example-kms-externalkey",
  *     description: "example of kms external key",
  *     isEnabled: false,
@@ -56,13 +64,14 @@ import * as utilities from "../utilities";
  *     wrappingAlgorithm: "RSAES_PKCS1_V1_5",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * KMS external keys can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Kms/externalKey:ExternalKey example 287e8f40-7cbb-11eb-9a3a-xxxxx
+ * $ pulumi import tencentcloud:Kms/externalKey:ExternalKey example 287e8f40-7cbb-11eb-9a3a-xxxxx
  * ```
  */
 export class ExternalKey extends pulumi.CustomResource {
@@ -166,7 +175,7 @@ export class ExternalKey extends pulumi.CustomResource {
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["isArchived"] = args ? args.isArchived : undefined;
             resourceInputs["isEnabled"] = args ? args.isEnabled : undefined;
-            resourceInputs["keyMaterialBase64"] = args ? args.keyMaterialBase64 : undefined;
+            resourceInputs["keyMaterialBase64"] = args?.keyMaterialBase64 ? pulumi.secret(args.keyMaterialBase64) : undefined;
             resourceInputs["pendingDeleteWindowInDays"] = args ? args.pendingDeleteWindowInDays : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["validTo"] = args ? args.validTo : undefined;
@@ -174,6 +183,8 @@ export class ExternalKey extends pulumi.CustomResource {
             resourceInputs["keyState"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["keyMaterialBase64"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(ExternalKey.__pulumiType, name, resourceInputs, opts);
     }
 }

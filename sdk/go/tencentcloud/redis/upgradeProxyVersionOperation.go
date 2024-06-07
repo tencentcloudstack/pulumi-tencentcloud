@@ -7,37 +7,43 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a redis upgradeProxyVersionOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Redis"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Redis.NewUpgradeProxyVersionOperation(ctx, "upgradeProxyVersionOperation", &Redis.UpgradeProxyVersionOperationArgs{
-// 			CurrentProxyVersion:    pulumi.String("5.0.0"),
-// 			InstanceId:             pulumi.String("crs-c1nl9rpv"),
-// 			InstanceTypeUpgradeNow: pulumi.Int(1),
-// 			UpgradeProxyVersion:    pulumi.String("5.0.0"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Redis.NewUpgradeProxyVersionOperation(ctx, "upgradeProxyVersionOperation", &Redis.UpgradeProxyVersionOperationArgs{
+//				CurrentProxyVersion:    pulumi.String("5.0.0"),
+//				InstanceId:             pulumi.String("crs-c1nl9rpv"),
+//				InstanceTypeUpgradeNow: pulumi.Int(1),
+//				UpgradeProxyVersion:    pulumi.String("5.0.0"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type UpgradeProxyVersionOperation struct {
 	pulumi.CustomResourceState
 
@@ -70,7 +76,7 @@ func NewUpgradeProxyVersionOperation(ctx *pulumi.Context,
 	if args.UpgradeProxyVersion == nil {
 		return nil, errors.New("invalid value for required argument 'UpgradeProxyVersion'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UpgradeProxyVersionOperation
 	err := ctx.RegisterResource("tencentcloud:Redis/upgradeProxyVersionOperation:UpgradeProxyVersionOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -167,7 +173,7 @@ func (i *UpgradeProxyVersionOperation) ToUpgradeProxyVersionOperationOutputWithC
 // UpgradeProxyVersionOperationArrayInput is an input type that accepts UpgradeProxyVersionOperationArray and UpgradeProxyVersionOperationArrayOutput values.
 // You can construct a concrete instance of `UpgradeProxyVersionOperationArrayInput` via:
 //
-//          UpgradeProxyVersionOperationArray{ UpgradeProxyVersionOperationArgs{...} }
+//	UpgradeProxyVersionOperationArray{ UpgradeProxyVersionOperationArgs{...} }
 type UpgradeProxyVersionOperationArrayInput interface {
 	pulumi.Input
 
@@ -192,7 +198,7 @@ func (i UpgradeProxyVersionOperationArray) ToUpgradeProxyVersionOperationArrayOu
 // UpgradeProxyVersionOperationMapInput is an input type that accepts UpgradeProxyVersionOperationMap and UpgradeProxyVersionOperationMapOutput values.
 // You can construct a concrete instance of `UpgradeProxyVersionOperationMapInput` via:
 //
-//          UpgradeProxyVersionOperationMap{ "key": UpgradeProxyVersionOperationArgs{...} }
+//	UpgradeProxyVersionOperationMap{ "key": UpgradeProxyVersionOperationArgs{...} }
 type UpgradeProxyVersionOperationMapInput interface {
 	pulumi.Input
 

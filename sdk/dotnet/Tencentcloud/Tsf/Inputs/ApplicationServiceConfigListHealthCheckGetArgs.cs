@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class ApplicationServiceConfigListHealthCheckGetArgs : Pulumi.ResourceArgs
+    public sealed class ApplicationServiceConfigListHealthCheckGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Health check path.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public ApplicationServiceConfigListHealthCheckGetArgs()
         {
         }
+        public static new ApplicationServiceConfigListHealthCheckGetArgs Empty => new ApplicationServiceConfigListHealthCheckGetArgs();
     }
 }

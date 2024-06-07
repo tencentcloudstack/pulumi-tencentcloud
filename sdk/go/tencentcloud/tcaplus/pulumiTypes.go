@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type IdlTableInfo struct {
 	// Error messages for creating IDL file.
@@ -30,7 +33,7 @@ type IdlTableInfo struct {
 // IdlTableInfoInput is an input type that accepts IdlTableInfoArgs and IdlTableInfoOutput values.
 // You can construct a concrete instance of `IdlTableInfoInput` via:
 //
-//          IdlTableInfoArgs{...}
+//	IdlTableInfoArgs{...}
 type IdlTableInfoInput interface {
 	pulumi.Input
 
@@ -70,7 +73,7 @@ func (i IdlTableInfoArgs) ToIdlTableInfoOutputWithContext(ctx context.Context) I
 // IdlTableInfoArrayInput is an input type that accepts IdlTableInfoArray and IdlTableInfoArrayOutput values.
 // You can construct a concrete instance of `IdlTableInfoArrayInput` via:
 //
-//          IdlTableInfoArray{ IdlTableInfoArgs{...} }
+//	IdlTableInfoArray{ IdlTableInfoArgs{...} }
 type IdlTableInfoArrayInput interface {
 	pulumi.Input
 
@@ -193,7 +196,7 @@ type GetClustersList struct {
 // GetClustersListInput is an input type that accepts GetClustersListArgs and GetClustersListOutput values.
 // You can construct a concrete instance of `GetClustersListInput` via:
 //
-//          GetClustersListArgs{...}
+//	GetClustersListArgs{...}
 type GetClustersListInput interface {
 	pulumi.Input
 
@@ -245,7 +248,7 @@ func (i GetClustersListArgs) ToGetClustersListOutputWithContext(ctx context.Cont
 // GetClustersListArrayInput is an input type that accepts GetClustersListArray and GetClustersListArrayOutput values.
 // You can construct a concrete instance of `GetClustersListArrayInput` via:
 //
-//          GetClustersListArray{ GetClustersListArgs{...} }
+//	GetClustersListArray{ GetClustersListArgs{...} }
 type GetClustersListArrayInput interface {
 	pulumi.Input
 
@@ -374,7 +377,7 @@ type GetIdlsList struct {
 // GetIdlsListInput is an input type that accepts GetIdlsListArgs and GetIdlsListOutput values.
 // You can construct a concrete instance of `GetIdlsListInput` via:
 //
-//          GetIdlsListArgs{...}
+//	GetIdlsListArgs{...}
 type GetIdlsListInput interface {
 	pulumi.Input
 
@@ -402,7 +405,7 @@ func (i GetIdlsListArgs) ToGetIdlsListOutputWithContext(ctx context.Context) Get
 // GetIdlsListArrayInput is an input type that accepts GetIdlsListArray and GetIdlsListArrayOutput values.
 // You can construct a concrete instance of `GetIdlsListArrayInput` via:
 //
-//          GetIdlsListArray{ GetIdlsListArgs{...} }
+//	GetIdlsListArray{ GetIdlsListArgs{...} }
 type GetIdlsListArrayInput interface {
 	pulumi.Input
 
@@ -479,7 +482,7 @@ type GetTablegroupsList struct {
 // GetTablegroupsListInput is an input type that accepts GetTablegroupsListArgs and GetTablegroupsListOutput values.
 // You can construct a concrete instance of `GetTablegroupsListInput` via:
 //
-//          GetTablegroupsListArgs{...}
+//	GetTablegroupsListArgs{...}
 type GetTablegroupsListInput interface {
 	pulumi.Input
 
@@ -515,7 +518,7 @@ func (i GetTablegroupsListArgs) ToGetTablegroupsListOutputWithContext(ctx contex
 // GetTablegroupsListArrayInput is an input type that accepts GetTablegroupsListArray and GetTablegroupsListArrayOutput values.
 // You can construct a concrete instance of `GetTablegroupsListArrayInput` via:
 //
-//          GetTablegroupsListArray{ GetTablegroupsListArgs{...} }
+//	GetTablegroupsListArray{ GetTablegroupsListArgs{...} }
 type GetTablegroupsListArrayInput interface {
 	pulumi.Input
 
@@ -630,7 +633,7 @@ type GetTablesList struct {
 // GetTablesListInput is an input type that accepts GetTablesListArgs and GetTablesListOutput values.
 // You can construct a concrete instance of `GetTablesListInput` via:
 //
-//          GetTablesListArgs{...}
+//	GetTablesListArgs{...}
 type GetTablesListInput interface {
 	pulumi.Input
 
@@ -684,7 +687,7 @@ func (i GetTablesListArgs) ToGetTablesListOutputWithContext(ctx context.Context)
 // GetTablesListArrayInput is an input type that accepts GetTablesListArray and GetTablesListArrayOutput values.
 // You can construct a concrete instance of `GetTablesListArrayInput` via:
 //
-//          GetTablesListArray{ GetTablesListArgs{...} }
+//	GetTablesListArray{ GetTablesListArgs{...} }
 type GetTablesListArrayInput interface {
 	pulumi.Input
 

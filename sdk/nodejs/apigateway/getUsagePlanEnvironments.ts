@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const plan = new tencentcloud.apigateway.UsagePlan("plan", {
  *     usagePlanName: "my_plan",
@@ -42,13 +44,11 @@ import * as utilities from "../utilities";
  *     bindType: "SERVICE",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getUsagePlanEnvironments(args: GetUsagePlanEnvironmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetUsagePlanEnvironmentsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:ApiGateway/getUsagePlanEnvironments:getUsagePlanEnvironments", {
         "bindType": args.bindType,
         "resultOutputFile": args.resultOutputFile,
@@ -90,9 +90,48 @@ export interface GetUsagePlanEnvironmentsResult {
     readonly resultOutputFile?: string;
     readonly usagePlanId: string;
 }
-
+/**
+ * Used to query the environment list bound by the plan.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const plan = new tencentcloud.apigateway.UsagePlan("plan", {
+ *     usagePlanName: "my_plan",
+ *     usagePlanDesc: "nice plan",
+ *     maxRequestNum: 100,
+ *     maxRequestNumPreSec: 10,
+ * });
+ * const service = new tencentcloud.apigateway.Service("service", {
+ *     serviceName: "niceservice",
+ *     protocol: "http&https",
+ *     serviceDesc: "your nice service",
+ *     netTypes: [
+ *         "INNER",
+ *         "OUTER",
+ *     ],
+ *     ipVersion: "IPv4",
+ * });
+ * const attachService = new tencentcloud.apigateway.UsagePlanAttachment("attachService", {
+ *     usagePlanId: plan.id,
+ *     serviceId: service.id,
+ *     environment: "test",
+ *     bindType: "SERVICE",
+ * });
+ * const environmentTest = tencentcloud.ApiGateway.getUsagePlanEnvironmentsOutput({
+ *     usagePlanId: attachService.usagePlanId,
+ *     bindType: "SERVICE",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getUsagePlanEnvironmentsOutput(args: GetUsagePlanEnvironmentsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetUsagePlanEnvironmentsResult> {
-    return pulumi.output(args).apply(a => getUsagePlanEnvironments(a, opts))
+    return pulumi.output(args).apply((a: any) => getUsagePlanEnvironments(a, opts))
 }
 
 /**

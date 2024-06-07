@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type GetClustersList struct {
 	// auto renew flag.
@@ -56,7 +59,7 @@ type GetClustersList struct {
 // GetClustersListInput is an input type that accepts GetClustersListArgs and GetClustersListOutput values.
 // You can construct a concrete instance of `GetClustersListInput` via:
 //
-//          GetClustersListArgs{...}
+//	GetClustersListArgs{...}
 type GetClustersListInput interface {
 	pulumi.Input
 
@@ -122,7 +125,7 @@ func (i GetClustersListArgs) ToGetClustersListOutputWithContext(ctx context.Cont
 // GetClustersListArrayInput is an input type that accepts GetClustersListArray and GetClustersListArrayOutput values.
 // You can construct a concrete instance of `GetClustersListArrayInput` via:
 //
-//          GetClustersListArray{ GetClustersListArgs{...} }
+//	GetClustersListArray{ GetClustersListArgs{...} }
 type GetClustersListArrayInput interface {
 	pulumi.Input
 
@@ -306,7 +309,7 @@ type GetClustersListEndpointSet struct {
 // GetClustersListEndpointSetInput is an input type that accepts GetClustersListEndpointSetArgs and GetClustersListEndpointSetOutput values.
 // You can construct a concrete instance of `GetClustersListEndpointSetInput` via:
 //
-//          GetClustersListEndpointSetArgs{...}
+//	GetClustersListEndpointSetArgs{...}
 type GetClustersListEndpointSetInput interface {
 	pulumi.Input
 
@@ -354,7 +357,7 @@ func (i GetClustersListEndpointSetArgs) ToGetClustersListEndpointSetOutputWithCo
 // GetClustersListEndpointSetArrayInput is an input type that accepts GetClustersListEndpointSetArray and GetClustersListEndpointSetArrayOutput values.
 // You can construct a concrete instance of `GetClustersListEndpointSetArrayInput` via:
 //
-//          GetClustersListEndpointSetArray{ GetClustersListEndpointSetArgs{...} }
+//	GetClustersListEndpointSetArray{ GetClustersListEndpointSetArgs{...} }
 type GetClustersListEndpointSetArrayInput interface {
 	pulumi.Input
 
@@ -505,7 +508,7 @@ type GetInstancesList struct {
 // GetInstancesListInput is an input type that accepts GetInstancesListArgs and GetInstancesListOutput values.
 // You can construct a concrete instance of `GetInstancesListInput` via:
 //
-//          GetInstancesListArgs{...}
+//	GetInstancesListArgs{...}
 type GetInstancesListInput interface {
 	pulumi.Input
 
@@ -565,7 +568,7 @@ func (i GetInstancesListArgs) ToGetInstancesListOutputWithContext(ctx context.Co
 // GetInstancesListArrayInput is an input type that accepts GetInstancesListArray and GetInstancesListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesListArrayInput` via:
 //
-//          GetInstancesListArray{ GetInstancesListArgs{...} }
+//	GetInstancesListArray{ GetInstancesListArgs{...} }
 type GetInstancesListArrayInput interface {
 	pulumi.Input
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class ApplicationServiceConfigListPortGetArgs : Pulumi.ResourceArgs
+    public sealed class ApplicationServiceConfigListPortGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Port protocol.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public ApplicationServiceConfigListPortGetArgs()
         {
         }
+        public static new ApplicationServiceConfigListPortGetArgs Empty => new ApplicationServiceConfigListPortGetArgs();
     }
 }

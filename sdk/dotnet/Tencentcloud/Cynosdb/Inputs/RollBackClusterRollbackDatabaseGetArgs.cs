@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
 {
 
-    public sealed class RollBackClusterRollbackDatabaseGetArgs : Pulumi.ResourceArgs
+    public sealed class RollBackClusterRollbackDatabaseGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// New database name.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
         public RollBackClusterRollbackDatabaseGetArgs()
         {
         }
+        public static new RollBackClusterRollbackDatabaseGetArgs Empty => new RollBackClusterRollbackDatabaseGetArgs();
     }
 }

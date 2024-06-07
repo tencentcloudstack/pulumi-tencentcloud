@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const shardSpec = pulumi.output(tencentcloud.Dcdb.getShardSpec());
+ * const shardSpec = tencentcloud.Dcdb.getShardSpec({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getShardSpec(args?: GetShardSpecArgs, opts?: pulumi.InvokeOptions): Promise<GetShardSpecResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dcdb/getShardSpec:getShardSpec", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetShardSpecResult {
      */
     readonly specConfigs: outputs.Dcdb.GetShardSpecSpecConfig[];
 }
-
+/**
+ * Use this data source to query detailed information of dcdb shardSpec
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const shardSpec = tencentcloud.Dcdb.getShardSpec({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getShardSpecOutput(args?: GetShardSpecOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetShardSpecResult> {
-    return pulumi.output(args).apply(a => getShardSpec(a, opts))
+    return pulumi.output(args).apply((a: any) => getShardSpec(a, opts))
 }
 
 /**

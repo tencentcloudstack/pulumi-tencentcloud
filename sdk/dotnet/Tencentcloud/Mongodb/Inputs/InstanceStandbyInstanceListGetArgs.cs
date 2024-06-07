@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb.Inputs
 {
 
-    public sealed class InstanceStandbyInstanceListGetArgs : Pulumi.ResourceArgs
+    public sealed class InstanceStandbyInstanceListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicates the ID of standby instance.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb.Inputs
         public InstanceStandbyInstanceListGetArgs()
         {
         }
+        public static new InstanceStandbyInstanceListGetArgs Empty => new InstanceStandbyInstanceListGetArgs();
     }
 }

@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const applicationPublicConfigRelease = new tencentcloud.Tsf.ApplicationPublicConfigRelease("application_public_config_release", {
+ * const applicationPublicConfigRelease = new tencentcloud.tsf.ApplicationPublicConfigRelease("applicationPublicConfigRelease", {
  *     configId: "dcfg-p-123456",
  *     namespaceId: "namespace-123456",
  *     releaseDesc: "product version",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tsf application_public_config_release can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tsf/applicationPublicConfigRelease:ApplicationPublicConfigRelease application_public_config_release application_public_config_attachment_id
+ * $ pulumi import tencentcloud:Tsf/applicationPublicConfigRelease:ApplicationPublicConfigRelease application_public_config_release application_public_config_attachment_id
  * ```
  */
 export class ApplicationPublicConfigRelease extends pulumi.CustomResource {

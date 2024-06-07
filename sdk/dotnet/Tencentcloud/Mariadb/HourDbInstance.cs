@@ -15,49 +15,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var basic = new Tencentcloud.Mariadb.HourDbInstance("basic", new()
     ///     {
-    ///         var basic = new Tencentcloud.Mariadb.HourDbInstance("basic", new Tencentcloud.Mariadb.HourDbInstanceArgs
+    ///         DbVersionId = "10.0",
+    ///         InstanceName = "db-test-del",
+    ///         Memory = 2,
+    ///         NodeCount = 2,
+    ///         Storage = 10,
+    ///         SubnetId = "subnet-jdi5xn22",
+    ///         Tags = 
     ///         {
-    ///             DbVersionId = "10.0",
-    ///             InstanceName = "db-test-del",
-    ///             Memory = 2,
-    ///             NodeCount = 2,
-    ///             Storage = 10,
-    ///             SubnetId = "subnet-jdi5xn22",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///             Vip = "10.0.0.197",
-    ///             VpcId = "vpc-k1t8ickr",
-    ///             Zones = 
-    ///             {
-    ///                 "ap-guangzhou-6",
-    ///                 "ap-guangzhou-7",
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///         Vip = "10.0.0.197",
+    ///         VpcId = "vpc-k1t8ickr",
+    ///         Zones = new[]
+    ///         {
+    ///             "ap-guangzhou-6",
+    ///             "ap-guangzhou-7",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mariadb hour_db_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mariadb/hourDbInstance:HourDbInstance hour_db_instance tdsql-kjqih9nn
+    /// $ pulumi import tencentcloud:Mariadb/hourDbInstance:HourDbInstance hour_db_instance tdsql-kjqih9nn
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/hourDbInstance:HourDbInstance")]
-    public partial class HourDbInstance : Pulumi.CustomResource
+    public partial class HourDbInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// db engine version, default to 10.1.9.
@@ -170,7 +171,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class HourDbInstanceArgs : Pulumi.ResourceArgs
+    public sealed class HourDbInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// db engine version, default to 10.1.9.
@@ -253,9 +254,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public HourDbInstanceArgs()
         {
         }
+        public static new HourDbInstanceArgs Empty => new HourDbInstanceArgs();
     }
 
-    public sealed class HourDbInstanceState : Pulumi.ResourceArgs
+    public sealed class HourDbInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// db engine version, default to 10.1.9.
@@ -338,5 +340,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public HourDbInstanceState()
         {
         }
+        public static new HourDbInstanceState Empty => new HourDbInstanceState();
     }
 }

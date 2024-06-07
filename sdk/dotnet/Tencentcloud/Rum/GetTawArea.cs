@@ -13,14 +13,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     public static class GetTawArea
     {
         public static Task<GetTawAreaResult> InvokeAsync(GetTawAreaArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTawAreaResult>("tencentcloud:Rum/getTawArea:getTawArea", args ?? new GetTawAreaArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTawAreaResult>("tencentcloud:Rum/getTawArea:getTawArea", args ?? new GetTawAreaArgs(), options.WithDefaults());
 
         public static Output<GetTawAreaResult> Invoke(GetTawAreaInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTawAreaResult>("tencentcloud:Rum/getTawArea:getTawArea", args ?? new GetTawAreaInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTawAreaResult>("tencentcloud:Rum/getTawArea:getTawArea", args ?? new GetTawAreaInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTawAreaArgs : Pulumi.InvokeArgs
+    public sealed class GetTawAreaArgs : global::Pulumi.InvokeArgs
     {
         [Input("areaIds")]
         private List<int>? _areaIds;
@@ -52,9 +52,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetTawAreaArgs()
         {
         }
+        public static new GetTawAreaArgs Empty => new GetTawAreaArgs();
     }
 
-    public sealed class GetTawAreaInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTawAreaInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("areaIds")]
         private InputList<int>? _areaIds;
@@ -86,6 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetTawAreaInvokeArgs()
         {
         }
+        public static new GetTawAreaInvokeArgs Empty => new GetTawAreaInvokeArgs();
     }
 
 

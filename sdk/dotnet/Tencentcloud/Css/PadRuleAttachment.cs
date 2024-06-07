@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var padRuleAttachment = new Tencentcloud.Css.PadRuleAttachment("padRuleAttachment", new()
     ///     {
-    ///         var padRuleAttachment = new Tencentcloud.Css.PadRuleAttachment("padRuleAttachment", new Tencentcloud.Css.PadRuleAttachmentArgs
-    ///         {
-    ///             AppName = "qqq",
-    ///             DomainName = "177154.push.tlivecloud.com",
-    ///             StreamName = "ppp",
-    ///             TemplateId = 17067,
-    ///         });
-    ///     }
+    ///         AppName = "qqq",
+    ///         DomainName = "177154.push.tlivecloud.com",
+    ///         StreamName = "ppp",
+    ///         TemplateId = 17067,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css pad_rule_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/padRuleAttachment:PadRuleAttachment pad_rule_attachment templateId#domainName
+    /// $ pulumi import tencentcloud:Css/padRuleAttachment:PadRuleAttachment pad_rule_attachment templateId#domainName
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/padRuleAttachment:PadRuleAttachment")]
-    public partial class PadRuleAttachment : Pulumi.CustomResource
+    public partial class PadRuleAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Push path, must same with play path, default is live.
@@ -115,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class PadRuleAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class PadRuleAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Push path, must same with play path, default is live.
@@ -144,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public PadRuleAttachmentArgs()
         {
         }
+        public static new PadRuleAttachmentArgs Empty => new PadRuleAttachmentArgs();
     }
 
-    public sealed class PadRuleAttachmentState : Pulumi.ResourceArgs
+    public sealed class PadRuleAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Push path, must same with play path, default is live.
@@ -175,5 +177,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public PadRuleAttachmentState()
         {
         }
+        public static new PadRuleAttachmentState Empty => new PadRuleAttachmentState();
     }
 }

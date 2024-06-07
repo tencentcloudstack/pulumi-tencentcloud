@@ -2,35 +2,17 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of tsf publicConfigSummary
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const describePublicConfigSummary = pulumi.output(tencentcloud.TsfDescribePublicConfigSummary({
- *     configIdList: ["dcfg-p-ygbdw5mv"],
- *     // config_tag_list = [""]
- *     disableProgramAuthCheck: true,
- *     orderBy: "last_update_time",
- *     orderType: 0,
- *     searchWord: "test",
- * }));
- * ```
  */
 export function getPublicConfigSummary(args?: GetPublicConfigSummaryArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicConfigSummaryResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tsf/getPublicConfigSummary:getPublicConfigSummary", {
         "configIdLists": args.configIdLists,
         "configTagLists": args.configTagLists,
@@ -96,9 +78,11 @@ export interface GetPublicConfigSummaryResult {
     readonly results: outputs.Tsf.GetPublicConfigSummaryResult[];
     readonly searchWord?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tsf publicConfigSummary
+ */
 export function getPublicConfigSummaryOutput(args?: GetPublicConfigSummaryOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPublicConfigSummaryResult> {
-    return pulumi.output(args).apply(a => getPublicConfigSummary(a, opts))
+    return pulumi.output(args).apply((a: any) => getPublicConfigSummary(a, opts))
 }
 
 /**

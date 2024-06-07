@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// <summary>
         /// Use this data source to query detailed information of dcdb log_files
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var logFiles = Tencentcloud.Dcdb.GetLogFiles.Invoke(new()
         ///     {
-        ///         var logFiles = Output.Create(Tencentcloud.Dcdb.GetLogFiles.InvokeAsync(new Tencentcloud.Dcdb.GetLogFilesArgs
-        ///         {
-        ///             InstanceId = local.Dcdb_id,
-        ///             ShardId = "shard-1b5r04az",
-        ///             Type = 1,
-        ///         }));
-        ///     }
+        ///         InstanceId = local.Dcdb_id,
+        ///         ShardId = "shard-1b5r04az",
+        ///         Type = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetLogFilesResult> InvokeAsync(GetLogFilesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetLogFilesResult>("tencentcloud:Dcdb/getLogFiles:getLogFiles", args ?? new GetLogFilesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogFilesResult>("tencentcloud:Dcdb/getLogFiles:getLogFiles", args ?? new GetLogFilesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dcdb log_files
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var logFiles = Tencentcloud.Dcdb.GetLogFiles.Invoke(new()
         ///     {
-        ///         var logFiles = Output.Create(Tencentcloud.Dcdb.GetLogFiles.InvokeAsync(new Tencentcloud.Dcdb.GetLogFilesArgs
-        ///         {
-        ///             InstanceId = local.Dcdb_id,
-        ///             ShardId = "shard-1b5r04az",
-        ///             Type = 1,
-        ///         }));
-        ///     }
+        ///         InstanceId = local.Dcdb_id,
+        ///         ShardId = "shard-1b5r04az",
+        ///         Type = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetLogFilesResult> Invoke(GetLogFilesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetLogFilesResult>("tencentcloud:Dcdb/getLogFiles:getLogFiles", args ?? new GetLogFilesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetLogFilesResult>("tencentcloud:Dcdb/getLogFiles:getLogFiles", args ?? new GetLogFilesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetLogFilesArgs : Pulumi.InvokeArgs
+    public sealed class GetLogFilesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID in the format of `tdsqlshard-ow728lmc`.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetLogFilesArgs()
         {
         }
+        public static new GetLogFilesArgs Empty => new GetLogFilesArgs();
     }
 
-    public sealed class GetLogFilesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetLogFilesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID in the format of `tdsqlshard-ow728lmc`.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetLogFilesInvokeArgs()
         {
         }
+        public static new GetLogFilesInvokeArgs Empty => new GetLogFilesInvokeArgs();
     }
 
 

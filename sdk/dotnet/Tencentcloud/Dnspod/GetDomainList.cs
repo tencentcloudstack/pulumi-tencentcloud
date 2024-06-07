@@ -15,128 +15,122 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// <summary>
         /// Use this data source to query detailed information of dnspod domain_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var domainList = Tencentcloud.Dnspod.GetDomainList.Invoke(new()
         ///     {
-        ///         var domainList = Output.Create(Tencentcloud.Dnspod.GetDomainList.InvokeAsync(new Tencentcloud.Dnspod.GetDomainListArgs
+        ///         GroupIds = new[]
         ///         {
-        ///             GroupIds = 
+        ///             1,
+        ///         },
+        ///         Keyword = "",
+        ///         Packages = new[]
+        ///         {
+        ///             "",
+        ///         },
+        ///         ProjectId = -1,
+        ///         RecordCountBegin = 0,
+        ///         RecordCountEnd = 100,
+        ///         Remark = "",
+        ///         SortField = "UPDATED_ON",
+        ///         SortType = "DESC",
+        ///         Statuses = new[]
+        ///         {
+        ///             "PAUSE",
+        ///         },
+        ///         Tags = new[]
+        ///         {
+        ///             new Tencentcloud.Dnspod.Inputs.GetDomainListTagInputArgs
         ///             {
-        ///                 1,
-        ///             },
-        ///             Keyword = "",
-        ///             Packages = 
-        ///             {
-        ///                 "",
-        ///             },
-        ///             ProjectId = -1,
-        ///             RecordCountBegin = 0,
-        ///             RecordCountEnd = 100,
-        ///             Remark = "",
-        ///             SortField = "UPDATED_ON",
-        ///             SortType = "DESC",
-        ///             Statuses = 
-        ///             {
-        ///                 "PAUSE",
-        ///             },
-        ///             Tags = 
-        ///             {
-        ///                 new Tencentcloud.Dnspod.Inputs.GetDomainListTagArgs
+        ///                 TagKey = "created_by",
+        ///                 TagValues = new[]
         ///                 {
-        ///                     TagKey = "created_by",
-        ///                     TagValues = 
-        ///                     {
-        ///                         "terraform",
-        ///                     },
+        ///                     "terraform",
         ///                 },
         ///             },
-        ///             Type = "ALL",
-        ///             UpdatedAtBegin = "2021-05-01 03:00:00",
-        ///             UpdatedAtEnd = "2024-05-10 20:00:00",
-        ///         }));
-        ///     }
+        ///         },
+        ///         Type = "ALL",
+        ///         UpdatedAtBegin = "2021-05-01 03:00:00",
+        ///         UpdatedAtEnd = "2024-05-10 20:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDomainListResult> InvokeAsync(GetDomainListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDomainListResult>("tencentcloud:Dnspod/getDomainList:getDomainList", args ?? new GetDomainListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDomainListResult>("tencentcloud:Dnspod/getDomainList:getDomainList", args ?? new GetDomainListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dnspod domain_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var domainList = Tencentcloud.Dnspod.GetDomainList.Invoke(new()
         ///     {
-        ///         var domainList = Output.Create(Tencentcloud.Dnspod.GetDomainList.InvokeAsync(new Tencentcloud.Dnspod.GetDomainListArgs
+        ///         GroupIds = new[]
         ///         {
-        ///             GroupIds = 
+        ///             1,
+        ///         },
+        ///         Keyword = "",
+        ///         Packages = new[]
+        ///         {
+        ///             "",
+        ///         },
+        ///         ProjectId = -1,
+        ///         RecordCountBegin = 0,
+        ///         RecordCountEnd = 100,
+        ///         Remark = "",
+        ///         SortField = "UPDATED_ON",
+        ///         SortType = "DESC",
+        ///         Statuses = new[]
+        ///         {
+        ///             "PAUSE",
+        ///         },
+        ///         Tags = new[]
+        ///         {
+        ///             new Tencentcloud.Dnspod.Inputs.GetDomainListTagInputArgs
         ///             {
-        ///                 1,
-        ///             },
-        ///             Keyword = "",
-        ///             Packages = 
-        ///             {
-        ///                 "",
-        ///             },
-        ///             ProjectId = -1,
-        ///             RecordCountBegin = 0,
-        ///             RecordCountEnd = 100,
-        ///             Remark = "",
-        ///             SortField = "UPDATED_ON",
-        ///             SortType = "DESC",
-        ///             Statuses = 
-        ///             {
-        ///                 "PAUSE",
-        ///             },
-        ///             Tags = 
-        ///             {
-        ///                 new Tencentcloud.Dnspod.Inputs.GetDomainListTagArgs
+        ///                 TagKey = "created_by",
+        ///                 TagValues = new[]
         ///                 {
-        ///                     TagKey = "created_by",
-        ///                     TagValues = 
-        ///                     {
-        ///                         "terraform",
-        ///                     },
+        ///                     "terraform",
         ///                 },
         ///             },
-        ///             Type = "ALL",
-        ///             UpdatedAtBegin = "2021-05-01 03:00:00",
-        ///             UpdatedAtEnd = "2024-05-10 20:00:00",
-        ///         }));
-        ///     }
+        ///         },
+        ///         Type = "ALL",
+        ///         UpdatedAtBegin = "2021-05-01 03:00:00",
+        ///         UpdatedAtEnd = "2024-05-10 20:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDomainListResult> Invoke(GetDomainListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDomainListResult>("tencentcloud:Dnspod/getDomainList:getDomainList", args ?? new GetDomainListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDomainListResult>("tencentcloud:Dnspod/getDomainList:getDomainList", args ?? new GetDomainListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDomainListArgs : Pulumi.InvokeArgs
+    public sealed class GetDomainListArgs : global::Pulumi.InvokeArgs
     {
         [Input("groupIds")]
         private List<int>? _groupIds;
@@ -255,9 +249,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public GetDomainListArgs()
         {
         }
+        public static new GetDomainListArgs Empty => new GetDomainListArgs();
     }
 
-    public sealed class GetDomainListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDomainListInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("groupIds")]
         private InputList<int>? _groupIds;
@@ -376,6 +371,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public GetDomainListInvokeArgs()
         {
         }
+        public static new GetDomainListInvokeArgs Empty => new GetDomainListInvokeArgs();
     }
 
 

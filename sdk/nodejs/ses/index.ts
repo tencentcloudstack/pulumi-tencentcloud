@@ -5,30 +5,76 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./batchSendEmail";
-export * from "./blackListDelete";
-export * from "./domain";
-export * from "./emailAddress";
-export * from "./getBlackEmailAddress";
-export * from "./getEmailIdentities";
-export * from "./getReceivers";
-export * from "./getSendEmailStatus";
-export * from "./getSendTasks";
-export * from "./getStatisticsReport";
-export * from "./receiver";
-export * from "./sendEmail";
-export * from "./template";
-export * from "./verifyDomain";
+export { BatchSendEmailArgs, BatchSendEmailState } from "./batchSendEmail";
+export type BatchSendEmail = import("./batchSendEmail").BatchSendEmail;
+export const BatchSendEmail: typeof import("./batchSendEmail").BatchSendEmail = null as any;
+utilities.lazyLoad(exports, ["BatchSendEmail"], () => require("./batchSendEmail"));
 
-// Import resources to register:
-import { BatchSendEmail } from "./batchSendEmail";
-import { BlackListDelete } from "./blackListDelete";
-import { Domain } from "./domain";
-import { EmailAddress } from "./emailAddress";
-import { Receiver } from "./receiver";
-import { SendEmail } from "./sendEmail";
-import { Template } from "./template";
-import { VerifyDomain } from "./verifyDomain";
+export { BlackListDeleteArgs, BlackListDeleteState } from "./blackListDelete";
+export type BlackListDelete = import("./blackListDelete").BlackListDelete;
+export const BlackListDelete: typeof import("./blackListDelete").BlackListDelete = null as any;
+utilities.lazyLoad(exports, ["BlackListDelete"], () => require("./blackListDelete"));
+
+export { DomainArgs, DomainState } from "./domain";
+export type Domain = import("./domain").Domain;
+export const Domain: typeof import("./domain").Domain = null as any;
+utilities.lazyLoad(exports, ["Domain"], () => require("./domain"));
+
+export { EmailAddressArgs, EmailAddressState } from "./emailAddress";
+export type EmailAddress = import("./emailAddress").EmailAddress;
+export const EmailAddress: typeof import("./emailAddress").EmailAddress = null as any;
+utilities.lazyLoad(exports, ["EmailAddress"], () => require("./emailAddress"));
+
+export { GetBlackEmailAddressArgs, GetBlackEmailAddressResult, GetBlackEmailAddressOutputArgs } from "./getBlackEmailAddress";
+export const getBlackEmailAddress: typeof import("./getBlackEmailAddress").getBlackEmailAddress = null as any;
+export const getBlackEmailAddressOutput: typeof import("./getBlackEmailAddress").getBlackEmailAddressOutput = null as any;
+utilities.lazyLoad(exports, ["getBlackEmailAddress","getBlackEmailAddressOutput"], () => require("./getBlackEmailAddress"));
+
+export { GetEmailIdentitiesArgs, GetEmailIdentitiesResult, GetEmailIdentitiesOutputArgs } from "./getEmailIdentities";
+export const getEmailIdentities: typeof import("./getEmailIdentities").getEmailIdentities = null as any;
+export const getEmailIdentitiesOutput: typeof import("./getEmailIdentities").getEmailIdentitiesOutput = null as any;
+utilities.lazyLoad(exports, ["getEmailIdentities","getEmailIdentitiesOutput"], () => require("./getEmailIdentities"));
+
+export { GetReceiversArgs, GetReceiversResult, GetReceiversOutputArgs } from "./getReceivers";
+export const getReceivers: typeof import("./getReceivers").getReceivers = null as any;
+export const getReceiversOutput: typeof import("./getReceivers").getReceiversOutput = null as any;
+utilities.lazyLoad(exports, ["getReceivers","getReceiversOutput"], () => require("./getReceivers"));
+
+export { GetSendEmailStatusArgs, GetSendEmailStatusResult, GetSendEmailStatusOutputArgs } from "./getSendEmailStatus";
+export const getSendEmailStatus: typeof import("./getSendEmailStatus").getSendEmailStatus = null as any;
+export const getSendEmailStatusOutput: typeof import("./getSendEmailStatus").getSendEmailStatusOutput = null as any;
+utilities.lazyLoad(exports, ["getSendEmailStatus","getSendEmailStatusOutput"], () => require("./getSendEmailStatus"));
+
+export { GetSendTasksArgs, GetSendTasksResult, GetSendTasksOutputArgs } from "./getSendTasks";
+export const getSendTasks: typeof import("./getSendTasks").getSendTasks = null as any;
+export const getSendTasksOutput: typeof import("./getSendTasks").getSendTasksOutput = null as any;
+utilities.lazyLoad(exports, ["getSendTasks","getSendTasksOutput"], () => require("./getSendTasks"));
+
+export { GetStatisticsReportArgs, GetStatisticsReportResult, GetStatisticsReportOutputArgs } from "./getStatisticsReport";
+export const getStatisticsReport: typeof import("./getStatisticsReport").getStatisticsReport = null as any;
+export const getStatisticsReportOutput: typeof import("./getStatisticsReport").getStatisticsReportOutput = null as any;
+utilities.lazyLoad(exports, ["getStatisticsReport","getStatisticsReportOutput"], () => require("./getStatisticsReport"));
+
+export { ReceiverArgs, ReceiverState } from "./receiver";
+export type Receiver = import("./receiver").Receiver;
+export const Receiver: typeof import("./receiver").Receiver = null as any;
+utilities.lazyLoad(exports, ["Receiver"], () => require("./receiver"));
+
+export { SendEmailArgs, SendEmailState } from "./sendEmail";
+export type SendEmail = import("./sendEmail").SendEmail;
+export const SendEmail: typeof import("./sendEmail").SendEmail = null as any;
+utilities.lazyLoad(exports, ["SendEmail"], () => require("./sendEmail"));
+
+export { TemplateArgs, TemplateState } from "./template";
+export type Template = import("./template").Template;
+export const Template: typeof import("./template").Template = null as any;
+utilities.lazyLoad(exports, ["Template"], () => require("./template"));
+
+export { VerifyDomainArgs, VerifyDomainState } from "./verifyDomain";
+export type VerifyDomain = import("./verifyDomain").VerifyDomain;
+export const VerifyDomain: typeof import("./verifyDomain").VerifyDomain = null as any;
+utilities.lazyLoad(exports, ["VerifyDomain"], () => require("./verifyDomain"));
+
 
 const _module = {
     version: utilities.getVersion(),

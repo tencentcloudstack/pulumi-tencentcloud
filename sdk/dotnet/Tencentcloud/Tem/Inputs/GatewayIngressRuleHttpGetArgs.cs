@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
 {
 
-    public sealed class GatewayIngressRuleHttpGetArgs : Pulumi.ResourceArgs
+    public sealed class GatewayIngressRuleHttpGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("paths", required: true)]
         private InputList<Inputs.GatewayIngressRuleHttpPathGetArgs>? _paths;
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
         public GatewayIngressRuleHttpGetArgs()
         {
         }
+        public static new GatewayIngressRuleHttpGetArgs Empty => new GatewayIngressRuleHttpGetArgs();
     }
 }

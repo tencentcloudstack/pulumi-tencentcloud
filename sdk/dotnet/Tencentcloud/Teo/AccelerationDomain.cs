@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var accelerationDomain = new Tencentcloud.Teo.AccelerationDomain("accelerationDomain", new()
     ///     {
-    ///         var accelerationDomain = new Tencentcloud.Teo.AccelerationDomain("accelerationDomain", new Tencentcloud.Teo.AccelerationDomainArgs
+    ///         DomainName = "aaa.makn.cn",
+    ///         OriginInfo = new Tencentcloud.Teo.Inputs.AccelerationDomainOriginInfoArgs
     ///         {
-    ///             DomainName = "aaa.makn.cn",
-    ///             OriginInfo = new Tencentcloud.Teo.Inputs.AccelerationDomainOriginInfoArgs
-    ///             {
-    ///                 Origin = "150.109.8.1",
-    ///                 OriginType = "IP_DOMAIN",
-    ///             },
-    ///             ZoneId = "zone-2o0i41pv2h8c",
-    ///         });
-    ///     }
+    ///             Origin = "150.109.8.1",
+    ///             OriginType = "IP_DOMAIN",
+    ///         },
+    ///         ZoneId = "zone-2o0i41pv2h8c",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// teo acceleration_domain can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Teo/accelerationDomain:AccelerationDomain acceleration_domain acceleration_domain_id
+    /// $ pulumi import tencentcloud:Teo/accelerationDomain:AccelerationDomain acceleration_domain acceleration_domain_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/accelerationDomain:AccelerationDomain")]
-    public partial class AccelerationDomain : Pulumi.CustomResource
+    public partial class AccelerationDomain : global::Pulumi.CustomResource
     {
         /// <summary>
         /// CNAME address.
@@ -124,7 +125,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         }
     }
 
-    public sealed class AccelerationDomainArgs : Pulumi.ResourceArgs
+    public sealed class AccelerationDomainArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Accelerated domain name.
@@ -153,9 +154,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public AccelerationDomainArgs()
         {
         }
+        public static new AccelerationDomainArgs Empty => new AccelerationDomainArgs();
     }
 
-    public sealed class AccelerationDomainState : Pulumi.ResourceArgs
+    public sealed class AccelerationDomainState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CNAME address.
@@ -190,5 +192,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public AccelerationDomainState()
         {
         }
+        public static new AccelerationDomainState Empty => new AccelerationDomainState();
     }
 }

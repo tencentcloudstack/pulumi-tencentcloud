@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -25,13 +27,11 @@ import * as utilities from "../utilities";
  *     ruleId: tencentcloud_dayu_l7_rule.test_rule.rule_id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getL7Rules(args: GetL7RulesArgs, opts?: pulumi.InvokeOptions): Promise<GetL7RulesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dayu/getL7Rules:getL7Rules", {
         "domain": args.domain,
         "resourceId": args.resourceId,
@@ -91,9 +91,31 @@ export interface GetL7RulesResult {
      */
     readonly ruleId?: string;
 }
-
+/**
+ * Use this data source to query dayu layer 7 rules
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const domainTest = tencentcloud.Dayu.getL7Rules({
+ *     resourceType: tencentcloud_dayu_l7_rule.test_rule.resource_type,
+ *     resourceId: tencentcloud_dayu_l7_rule.test_rule.resource_id,
+ *     domain: tencentcloud_dayu_l7_rule.test_rule.domain,
+ * });
+ * const idTest = tencentcloud.Dayu.getL7Rules({
+ *     resourceType: tencentcloud_dayu_l7_rule.test_rule.resource_type,
+ *     resourceId: tencentcloud_dayu_l7_rule.test_rule.resource_id,
+ *     ruleId: tencentcloud_dayu_l7_rule.test_rule.rule_id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getL7RulesOutput(args: GetL7RulesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetL7RulesResult> {
-    return pulumi.output(args).apply(a => getL7Rules(a, opts))
+    return pulumi.output(args).apply((a: any) => getL7Rules(a, opts))
 }
 
 /**

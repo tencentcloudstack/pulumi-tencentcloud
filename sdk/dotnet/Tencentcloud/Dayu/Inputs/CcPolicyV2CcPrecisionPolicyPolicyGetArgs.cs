@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class CcPolicyV2CcPrecisionPolicyPolicyGetArgs : Pulumi.ResourceArgs
+    public sealed class CcPolicyV2CcPrecisionPolicyPolicyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Configuration item types, currently only support value.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public CcPolicyV2CcPrecisionPolicyPolicyGetArgs()
         {
         }
+        public static new CcPolicyV2CcPrecisionPolicyPolicyGetArgs Empty => new CcPolicyV2CcPrecisionPolicyPolicyGetArgs();
     }
 }

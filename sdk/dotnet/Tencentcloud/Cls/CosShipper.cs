@@ -15,57 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var shipper = new Tencentcloud.Cls.CosShipper("shipper", new()
     ///     {
-    ///         var shipper = new Tencentcloud.Cls.CosShipper("shipper", new Tencentcloud.Cls.CosShipperArgs
+    ///         Bucket = "preset-scf-bucket-1308919341",
+    ///         Compress = new Tencentcloud.Cls.Inputs.CosShipperCompressArgs
     ///         {
-    ///             Bucket = "preset-scf-bucket-1308919341",
-    ///             Compress = new Tencentcloud.Cls.Inputs.CosShipperCompressArgs
+    ///             Format = "lzop",
+    ///         },
+    ///         Content = new Tencentcloud.Cls.Inputs.CosShipperContentArgs
+    ///         {
+    ///             Format = "json",
+    ///             Json = new Tencentcloud.Cls.Inputs.CosShipperContentJsonArgs
     ///             {
-    ///                 Format = "lzop",
-    ///             },
-    ///             Content = new Tencentcloud.Cls.Inputs.CosShipperContentArgs
-    ///             {
-    ///                 Format = "json",
-    ///                 Json = new Tencentcloud.Cls.Inputs.CosShipperContentJsonArgs
+    ///                 EnableTag = true,
+    ///                 MetaFields = new[]
     ///                 {
-    ///                     EnableTag = true,
-    ///                     MetaFields = 
-    ///                     {
-    ///                         "__FILENAME__",
-    ///                         "__SOURCE__",
-    ///                         "__TIMESTAMP__",
-    ///                     },
+    ///                     "__FILENAME__",
+    ///                     "__SOURCE__",
+    ///                     "__TIMESTAMP__",
     ///                 },
     ///             },
-    ///             Interval = 300,
-    ///             MaxSize = 200,
-    ///             Partition = "/%Y/%m/%d/%H/",
-    ///             Prefix = "ap-guangzhou-fffsasad-1649734752",
-    ///             ShipperName = "ap-guangzhou-fffsasad-1649734752",
-    ///             TopicId = "4d07fba0-b93e-4e0b-9a7f-d58542560bbb",
-    ///         });
-    ///     }
+    ///         },
+    ///         Interval = 300,
+    ///         MaxSize = 200,
+    ///         Partition = "/%Y/%m/%d/%H/",
+    ///         Prefix = "ap-guangzhou-fffsasad-1649734752",
+    ///         ShipperName = "ap-guangzhou-fffsasad-1649734752",
+    ///         TopicId = "4d07fba0-b93e-4e0b-9a7f-d58542560bbb",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cls cos shipper can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/cosShipper:CosShipper shipper 5d1b7b2a-c163-4c48-bb01-9ee00584d761
+    /// $ pulumi import tencentcloud:Cls/cosShipper:CosShipper shipper 5d1b7b2a-c163-4c48-bb01-9ee00584d761
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/cosShipper:CosShipper")]
-    public partial class CosShipper : Pulumi.CustomResource
+    public partial class CosShipper : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Destination bucket in the shipping rule to be created.
@@ -172,7 +173,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
     }
 
-    public sealed class CosShipperArgs : Pulumi.ResourceArgs
+    public sealed class CosShipperArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Destination bucket in the shipping rule to be created.
@@ -243,9 +244,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public CosShipperArgs()
         {
         }
+        public static new CosShipperArgs Empty => new CosShipperArgs();
     }
 
-    public sealed class CosShipperState : Pulumi.ResourceArgs
+    public sealed class CosShipperState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Destination bucket in the shipping rule to be created.
@@ -316,5 +318,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public CosShipperState()
         {
         }
+        public static new CosShipperState Empty => new CosShipperState();
     }
 }

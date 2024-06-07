@@ -9,10 +9,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const cynosdbClusterId = config.get("cynosdbClusterId") || "default_cynosdb_cluster";
@@ -22,8 +23,8 @@ import * as utilities from "../utilities";
  *     availabilityZone: _var.default_az,
  *     isDefault: true,
  * });
- * const vpcId = gz3.then(gz3 => gz3.instanceLists?[0]?.vpcId);
- * const subnetId = gz3.then(gz3 => gz3.instanceLists?[0]?.subnetId);
+ * const vpcId = gz3.then(gz3 => gz3.instanceLists?.[0]?.vpcId);
+ * const subnetId = gz3.then(gz3 => gz3.instanceLists?.[0]?.subnetId);
  * const readOnlyInstanceExclusiveAccess = new tencentcloud.cynosdb.ReadOnlyInstanceExclusiveAccess("readOnlyInstanceExclusiveAccess", {
  *     clusterId: cynosdbClusterId,
  *     instanceId: cynosdbClusterInstanceId,
@@ -33,6 +34,7 @@ import * as utilities from "../utilities";
  *     securityGroupIds: [cynosdbClusterSecurityGroupId],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ReadOnlyInstanceExclusiveAccess extends pulumi.CustomResource {
     /**

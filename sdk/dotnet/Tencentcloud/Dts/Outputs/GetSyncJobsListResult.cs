@@ -30,6 +30,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Outputs
         /// tag list.
         /// </summary>
         public readonly ImmutableArray<Outputs.GetSyncJobsListDetailResult> Details;
+        /// <summary>
+        /// destination access type.
+        /// </summary>
         public readonly string DstAccessType;
         /// <summary>
         /// destination database type.

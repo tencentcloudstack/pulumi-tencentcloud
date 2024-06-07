@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Inputs
 {
 
-    public sealed class IpAccessControlItemGetArgs : Pulumi.ResourceArgs
+    public sealed class IpAccessControlItemGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action value 40 is whitelist, 42 is blacklist.
@@ -37,9 +37,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Inputs
         [Input("note", required: true)]
         public Input<string> Note { get; set; } = null!;
 
+        /// <summary>
+        /// Source.
+        /// </summary>
         [Input("source")]
         public Input<string>? Source { get; set; }
 
+        /// <summary>
+        /// Valid status.
+        /// </summary>
         [Input("validStatus")]
         public Input<int>? ValidStatus { get; set; }
 
@@ -52,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Inputs
         public IpAccessControlItemGetArgs()
         {
         }
+        public static new IpAccessControlItemGetArgs Empty => new IpAccessControlItemGetArgs();
     }
 }

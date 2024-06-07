@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class IndexRuleKeyValueKeyValueArgs : Pulumi.ResourceArgs
+    public sealed class IndexRuleKeyValueKeyValueArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// When a key value or metafield index needs to be configured for a field, the metafield Key does not need to be prefixed with __TAG__. and is consistent with the one when logs are uploaded. __TAG__. will be prefixed automatically for display in the console..
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public IndexRuleKeyValueKeyValueArgs()
         {
         }
+        public static new IndexRuleKeyValueKeyValueArgs Empty => new IndexRuleKeyValueKeyValueArgs();
     }
 }

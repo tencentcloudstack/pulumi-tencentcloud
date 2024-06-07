@@ -7,47 +7,52 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a clickhouse xmlConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clickhouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clickhouse.NewXmlConfig(ctx, "xmlConfig", &Clickhouse.XmlConfigArgs{
-// 			InstanceId: pulumi.String("cdwch-datuhk3z"),
-// 			ModifyConfContext: &clickhouse.XmlConfigModifyConfContextArgs{
-// 				FileName:     pulumi.String("metrika.xml"),
-// 				FilePath:     pulumi.String("/etc/clickhouse-server"),
-// 				NewConfValue: pulumi.String("PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHlhbmRleD4KICAgIDx6b29rZWVwZXItc2VydmVycz4KICAgIDwvem9va2VlcGVyLXNlcnZlcnM+CjwveWFuZGV4Pgo="),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clickhouse.NewXmlConfig(ctx, "xmlConfig", &Clickhouse.XmlConfigArgs{
+//				InstanceId: pulumi.String("cdwch-datuhk3z"),
+//				ModifyConfContext: &clickhouse.XmlConfigModifyConfContextArgs{
+//					FileName:     pulumi.String("metrika.xml"),
+//					FilePath:     pulumi.String("/etc/clickhouse-server"),
+//					NewConfValue: pulumi.String("PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHlhbmRleD4KICAgIDx6b29rZWVwZXItc2VydmVycz4KICAgIDwvem9va2VlcGVyLXNlcnZlcnM+CjwveWFuZGV4Pgo="),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // clickhouse xml_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clickhouse/xmlConfig:XmlConfig xml_config cdwch-datuhk3z#metrika.xml
+// $ pulumi import tencentcloud:Clickhouse/xmlConfig:XmlConfig xml_config cdwch-datuhk3z#metrika.xml
 // ```
 type XmlConfig struct {
 	pulumi.CustomResourceState
@@ -71,7 +76,7 @@ func NewXmlConfig(ctx *pulumi.Context,
 	if args.ModifyConfContext == nil {
 		return nil, errors.New("invalid value for required argument 'ModifyConfContext'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource XmlConfig
 	err := ctx.RegisterResource("tencentcloud:Clickhouse/xmlConfig:XmlConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -152,7 +157,7 @@ func (i *XmlConfig) ToXmlConfigOutputWithContext(ctx context.Context) XmlConfigO
 // XmlConfigArrayInput is an input type that accepts XmlConfigArray and XmlConfigArrayOutput values.
 // You can construct a concrete instance of `XmlConfigArrayInput` via:
 //
-//          XmlConfigArray{ XmlConfigArgs{...} }
+//	XmlConfigArray{ XmlConfigArgs{...} }
 type XmlConfigArrayInput interface {
 	pulumi.Input
 
@@ -177,7 +182,7 @@ func (i XmlConfigArray) ToXmlConfigArrayOutputWithContext(ctx context.Context) X
 // XmlConfigMapInput is an input type that accepts XmlConfigMap and XmlConfigMapOutput values.
 // You can construct a concrete instance of `XmlConfigMapInput` via:
 //
-//          XmlConfigMap{ "key": XmlConfigArgs{...} }
+//	XmlConfigMap{ "key": XmlConfigArgs{...} }
 type XmlConfigMapInput interface {
 	pulumi.Input
 

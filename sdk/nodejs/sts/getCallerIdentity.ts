@@ -9,20 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const callerIdentity = pulumi.output(tencentcloud.Sts.getCallerIdentity());
+ * const callerIdentity = tencentcloud.Sts.getCallerIdentity({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCallerIdentity(args?: GetCallerIdentityArgs, opts?: pulumi.InvokeOptions): Promise<GetCallerIdentityResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Sts/getCallerIdentity:getCallerIdentity", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -68,9 +67,22 @@ export interface GetCallerIdentityResult {
      */
     readonly userId: string;
 }
-
+/**
+ * Use this data source to query detailed information of sts callerIdentity
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const callerIdentity = tencentcloud.Sts.getCallerIdentity({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCallerIdentityOutput(args?: GetCallerIdentityOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCallerIdentityResult> {
-    return pulumi.output(args).apply(a => getCallerIdentity(a, opts))
+    return pulumi.output(args).apply((a: any) => getCallerIdentity(a, opts))
 }
 
 /**

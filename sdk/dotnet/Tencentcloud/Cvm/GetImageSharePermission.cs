@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// <summary>
         /// Use this data source to query detailed information of cvm image_share_permission
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var imageSharePermission = Tencentcloud.Cvm.GetImageSharePermission.Invoke(new()
         ///     {
-        ///         var imageSharePermission = Output.Create(Tencentcloud.Cvm.GetImageSharePermission.InvokeAsync(new Tencentcloud.Cvm.GetImageSharePermissionArgs
-        ///         {
-        ///             ImageId = "img-xxxxxx",
-        ///         }));
-        ///     }
+        ///         ImageId = "img-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetImageSharePermissionResult> InvokeAsync(GetImageSharePermissionArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetImageSharePermissionResult>("tencentcloud:Cvm/getImageSharePermission:getImageSharePermission", args ?? new GetImageSharePermissionArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetImageSharePermissionResult>("tencentcloud:Cvm/getImageSharePermission:getImageSharePermission", args ?? new GetImageSharePermissionArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cvm image_share_permission
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var imageSharePermission = Tencentcloud.Cvm.GetImageSharePermission.Invoke(new()
         ///     {
-        ///         var imageSharePermission = Output.Create(Tencentcloud.Cvm.GetImageSharePermission.InvokeAsync(new Tencentcloud.Cvm.GetImageSharePermissionArgs
-        ///         {
-        ///             ImageId = "img-xxxxxx",
-        ///         }));
-        ///     }
+        ///         ImageId = "img-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetImageSharePermissionResult> Invoke(GetImageSharePermissionInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetImageSharePermissionResult>("tencentcloud:Cvm/getImageSharePermission:getImageSharePermission", args ?? new GetImageSharePermissionInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetImageSharePermissionResult>("tencentcloud:Cvm/getImageSharePermission:getImageSharePermission", args ?? new GetImageSharePermissionInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetImageSharePermissionArgs : Pulumi.InvokeArgs
+    public sealed class GetImageSharePermissionArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The ID of the image to be shared.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public GetImageSharePermissionArgs()
         {
         }
+        public static new GetImageSharePermissionArgs Empty => new GetImageSharePermissionArgs();
     }
 
-    public sealed class GetImageSharePermissionInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetImageSharePermissionInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The ID of the image to be shared.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public GetImageSharePermissionInvokeArgs()
         {
         }
+        public static new GetImageSharePermissionInvokeArgs Empty => new GetImageSharePermissionInvokeArgs();
     }
 
 

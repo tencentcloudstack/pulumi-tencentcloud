@@ -9,24 +9,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const fetchUrlInfo = pulumi.output(tencentcloud.Rum.getFetchUrlInfo({
+ * const fetchUrlInfo = tencentcloud.Rum.getFetchUrlInfo({
  *     endTime: 1625454840,
  *     projectId: 1,
  *     startTime: 1625444040,
  *     type: "top",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getFetchUrlInfo(args: GetFetchUrlInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetFetchUrlInfoResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getFetchUrlInfo:getFetchUrlInfo", {
         "area": args.area,
         "brand": args.brand,
@@ -194,9 +193,27 @@ export interface GetFetchUrlInfoResult {
     readonly url?: string;
     readonly versionNum?: string;
 }
-
+/**
+ * Use this data source to query detailed information of rum fetchUrlInfo
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const fetchUrlInfo = tencentcloud.Rum.getFetchUrlInfo({
+ *     endTime: 1625454840,
+ *     projectId: 1,
+ *     startTime: 1625444040,
+ *     type: "top",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getFetchUrlInfoOutput(args: GetFetchUrlInfoOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetFetchUrlInfoResult> {
-    return pulumi.output(args).apply(a => getFetchUrlInfo(a, opts))
+    return pulumi.output(args).apply((a: any) => getFetchUrlInfo(a, opts))
 }
 
 /**

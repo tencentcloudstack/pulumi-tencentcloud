@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Vod.SubApplication("foo", {
+ * const foo = new tencentcloud.vod.SubApplication("foo", {
  *     description: "this is sub application",
  *     status: "On",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * VOD super player config can be imported using the name+, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vod/subApplication:SubApplication foo name+"#"+id
+ * $ pulumi import tencentcloud:Vod/subApplication:SubApplication foo name+"#"+id
  * ```
  */
 export class SubApplication extends pulumi.CustomResource {

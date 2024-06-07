@@ -2,31 +2,17 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query list information of apiGateway api_app
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const test = pulumi.output(tencentcloud.ApiGateway.getApiApps({
- *     apiAppId: ["app-rj8t6zx3"],
- *     apiAppName: ["app_test"],
- * }));
- * ```
  */
 export function getApiApps(args?: GetApiAppsArgs, opts?: pulumi.InvokeOptions): Promise<GetApiAppsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:ApiGateway/getApiApps:getApiApps", {
         "apiAppId": args.apiAppId,
         "apiAppName": args.apiAppName,
@@ -74,9 +60,11 @@ export interface GetApiAppsResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query list information of apiGateway api_app
+ */
 export function getApiAppsOutput(args?: GetApiAppsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetApiAppsResult> {
-    return pulumi.output(args).apply(a => getApiApps(a, opts))
+    return pulumi.output(args).apply((a: any) => getApiApps(a, opts))
 }
 
 /**

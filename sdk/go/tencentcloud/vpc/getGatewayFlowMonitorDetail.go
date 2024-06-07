@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of vpc gatewayFlowMonitorDetail
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.GetGatewayFlowMonitorDetail(ctx, &vpc.GetGatewayFlowMonitorDetailArgs{
-// 			OrderDirection: pulumi.StringRef("DESC"),
-// 			OrderField:     pulumi.StringRef("OutTraffic"),
-// 			TimePoint:      "2023-06-02 12:15:20",
-// 			VpnId:          pulumi.StringRef("vpngw-gt8bianl"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.GetGatewayFlowMonitorDetail(ctx, &vpc.GetGatewayFlowMonitorDetailArgs{
+//				OrderDirection: pulumi.StringRef("DESC"),
+//				OrderField:     pulumi.StringRef("OutTraffic"),
+//				TimePoint:      "2023-06-02 12:15:20",
+//				VpnId:          pulumi.StringRef("vpngw-gt8bianl"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetGatewayFlowMonitorDetail(ctx *pulumi.Context, args *GetGatewayFlowMonitorDetailArgs, opts ...pulumi.InvokeOption) (*GetGatewayFlowMonitorDetailResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGatewayFlowMonitorDetailResult
 	err := ctx.Invoke("tencentcloud:Vpc/getGatewayFlowMonitorDetail:getGatewayFlowMonitorDetail", args, &rv, opts...)
 	if err != nil {

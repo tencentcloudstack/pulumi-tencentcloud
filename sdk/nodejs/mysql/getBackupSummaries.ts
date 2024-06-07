@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const backupSummaries = pulumi.output(tencentcloud.Mysql.getBackupSummaries({
+ * const backupSummaries = tencentcloud.Mysql.getBackupSummaries({
  *     orderBy: "BackupVolume",
  *     orderDirection: "ASC",
  *     product: "mysql",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBackupSummaries(args: GetBackupSummariesArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupSummariesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getBackupSummaries:getBackupSummaries", {
         "orderBy": args.orderBy,
         "orderDirection": args.orderDirection,
@@ -74,9 +74,26 @@ export interface GetBackupSummariesResult {
     readonly product: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mysql backupSummaries
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const backupSummaries = tencentcloud.Mysql.getBackupSummaries({
+ *     orderBy: "BackupVolume",
+ *     orderDirection: "ASC",
+ *     product: "mysql",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBackupSummariesOutput(args: GetBackupSummariesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBackupSummariesResult> {
-    return pulumi.output(args).apply(a => getBackupSummaries(a, opts))
+    return pulumi.output(args).apply((a: any) => getBackupSummaries(a, opts))
 }
 
 /**

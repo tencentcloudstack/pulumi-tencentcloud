@@ -5,10 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./addressBandwidth";
+export { AddressBandwidthArgs, AddressBandwidthState } from "./addressBandwidth";
+export type AddressBandwidth = import("./addressBandwidth").AddressBandwidth;
+export const AddressBandwidth: typeof import("./addressBandwidth").AddressBandwidth = null as any;
+utilities.lazyLoad(exports, ["AddressBandwidth"], () => require("./addressBandwidth"));
 
-// Import resources to register:
-import { AddressBandwidth } from "./addressBandwidth";
 
 const _module = {
     version: utilities.getVersion(),

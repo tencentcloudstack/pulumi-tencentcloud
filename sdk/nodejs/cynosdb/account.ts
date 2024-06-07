@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const account = new tencentcloud.Cynosdb.Account("account", {
+ * const account = new tencentcloud.cynosdb.Account("account", {
  *     accountName: "terraform_test",
  *     accountPassword: "Password@1234",
  *     clusterId: "cynosdbmysql-bws8h88b",
@@ -22,13 +23,14 @@ import * as utilities from "../utilities";
  *     maxUserConnections: 2,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cynosdb account can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cynosdb/account:Account account account_id
+ * $ pulumi import tencentcloud:Cynosdb/account:Account account account_id
  * ```
  */
 export class Account extends pulumi.CustomResource {
@@ -118,13 +120,15 @@ export class Account extends pulumi.CustomResource {
                 throw new Error("Missing required property 'host'");
             }
             resourceInputs["accountName"] = args ? args.accountName : undefined;
-            resourceInputs["accountPassword"] = args ? args.accountPassword : undefined;
+            resourceInputs["accountPassword"] = args?.accountPassword ? pulumi.secret(args.accountPassword) : undefined;
             resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["host"] = args ? args.host : undefined;
             resourceInputs["maxUserConnections"] = args ? args.maxUserConnections : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["accountPassword"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Account.__pulumiType, name, resourceInputs, opts);
     }
 }

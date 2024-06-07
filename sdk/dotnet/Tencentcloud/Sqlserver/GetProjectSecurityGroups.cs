@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// <summary>
         /// Use this data source to query detailed information of sqlserver project_security_groups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetProjectSecurityGroups.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetProjectSecurityGroups.InvokeAsync(new Tencentcloud.Sqlserver.GetProjectSecurityGroupsArgs
-        ///         {
-        ///             ProjectId = 0,
-        ///         }));
-        ///     }
+        ///         ProjectId = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProjectSecurityGroupsResult> InvokeAsync(GetProjectSecurityGroupsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProjectSecurityGroupsResult>("tencentcloud:Sqlserver/getProjectSecurityGroups:getProjectSecurityGroups", args ?? new GetProjectSecurityGroupsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProjectSecurityGroupsResult>("tencentcloud:Sqlserver/getProjectSecurityGroups:getProjectSecurityGroups", args ?? new GetProjectSecurityGroupsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of sqlserver project_security_groups
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetProjectSecurityGroups.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetProjectSecurityGroups.InvokeAsync(new Tencentcloud.Sqlserver.GetProjectSecurityGroupsArgs
-        ///         {
-        ///             ProjectId = 0,
-        ///         }));
-        ///     }
+        ///         ProjectId = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProjectSecurityGroupsResult> Invoke(GetProjectSecurityGroupsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProjectSecurityGroupsResult>("tencentcloud:Sqlserver/getProjectSecurityGroups:getProjectSecurityGroups", args ?? new GetProjectSecurityGroupsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProjectSecurityGroupsResult>("tencentcloud:Sqlserver/getProjectSecurityGroups:getProjectSecurityGroups", args ?? new GetProjectSecurityGroupsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProjectSecurityGroupsArgs : Pulumi.InvokeArgs
+    public sealed class GetProjectSecurityGroupsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Project ID, which can be viewed through the console project management.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetProjectSecurityGroupsArgs()
         {
         }
+        public static new GetProjectSecurityGroupsArgs Empty => new GetProjectSecurityGroupsArgs();
     }
 
-    public sealed class GetProjectSecurityGroupsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProjectSecurityGroupsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Project ID, which can be viewed through the console project management.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetProjectSecurityGroupsInvokeArgs()
         {
         }
+        public static new GetProjectSecurityGroupsInvokeArgs Empty => new GetProjectSecurityGroupsInvokeArgs();
     }
 
 

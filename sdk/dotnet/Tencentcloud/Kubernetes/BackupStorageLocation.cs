@@ -17,35 +17,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleBackup = new Tencentcloud.Kubernetes.BackupStorageLocation("exampleBackup", new()
     ///     {
-    ///         var exampleBackup = new Tencentcloud.Kubernetes.BackupStorageLocation("exampleBackup", new Tencentcloud.Kubernetes.BackupStorageLocationArgs
-    ///         {
-    ///             Bucket = "tke-backup-example-1",
-    ///             StorageRegion = "ap-guangzhou",
-    ///         });
-    ///         // region of you pre-created COS bucket
-    ///     }
+    ///         Bucket = "tke-backup-example-1",
+    ///         StorageRegion = "ap-guangzhou",
+    ///     });
     /// 
-    /// }
+    ///     // region of you pre-created COS bucket
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tke backup storage location can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Kubernetes/backupStorageLocation:BackupStorageLocation test xxx
+    /// $ pulumi import tencentcloud:Kubernetes/backupStorageLocation:BackupStorageLocation test xxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/backupStorageLocation:BackupStorageLocation")]
-    public partial class BackupStorageLocation : Pulumi.CustomResource
+    public partial class BackupStorageLocation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Name of the bucket.
@@ -128,7 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         }
     }
 
-    public sealed class BackupStorageLocationArgs : Pulumi.ResourceArgs
+    public sealed class BackupStorageLocationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of the bucket.
@@ -157,9 +158,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public BackupStorageLocationArgs()
         {
         }
+        public static new BackupStorageLocationArgs Empty => new BackupStorageLocationArgs();
     }
 
-    public sealed class BackupStorageLocationState : Pulumi.ResourceArgs
+    public sealed class BackupStorageLocationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of the bucket.
@@ -200,5 +202,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public BackupStorageLocationState()
         {
         }
+        public static new BackupStorageLocationState Empty => new BackupStorageLocationState();
     }
 }

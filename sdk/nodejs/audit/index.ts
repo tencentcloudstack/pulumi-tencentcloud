@@ -5,12 +5,21 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./getCosRegions";
-export * from "./getKeyAlias";
-export * from "./track";
+export { GetCosRegionsArgs, GetCosRegionsResult, GetCosRegionsOutputArgs } from "./getCosRegions";
+export const getCosRegions: typeof import("./getCosRegions").getCosRegions = null as any;
+export const getCosRegionsOutput: typeof import("./getCosRegions").getCosRegionsOutput = null as any;
+utilities.lazyLoad(exports, ["getCosRegions","getCosRegionsOutput"], () => require("./getCosRegions"));
 
-// Import resources to register:
-import { Track } from "./track";
+export { GetKeyAliasArgs, GetKeyAliasResult, GetKeyAliasOutputArgs } from "./getKeyAlias";
+export const getKeyAlias: typeof import("./getKeyAlias").getKeyAlias = null as any;
+export const getKeyAliasOutput: typeof import("./getKeyAlias").getKeyAliasOutput = null as any;
+utilities.lazyLoad(exports, ["getKeyAlias","getKeyAliasOutput"], () => require("./getKeyAlias"));
+
+export { TrackArgs, TrackState } from "./track";
+export type Track = import("./track").Track;
+export const Track: typeof import("./track").Track = null as any;
+utilities.lazyLoad(exports, ["Track"], () => require("./track"));
+
 
 const _module = {
     version: utilities.getVersion(),

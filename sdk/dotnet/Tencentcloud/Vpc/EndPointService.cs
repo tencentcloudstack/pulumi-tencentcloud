@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var endPointService = new Tencentcloud.Vpc.EndPointService("endPointService", new()
     ///     {
-    ///         var endPointService = new Tencentcloud.Vpc.EndPointService("endPointService", new Tencentcloud.Vpc.EndPointServiceArgs
-    ///         {
-    ///             AutoAcceptFlag = false,
-    ///             EndPointServiceName = "terraform-endpoint-service",
-    ///             ServiceInstanceId = "lb-o5f6x7ke",
-    ///             ServiceType = "CLB",
-    ///             VpcId = "vpc-391sv4w3",
-    ///         });
-    ///     }
+    ///         AutoAcceptFlag = false,
+    ///         EndPointServiceName = "terraform-endpoint-service",
+    ///         ServiceInstanceId = "lb-o5f6x7ke",
+    ///         ServiceType = "CLB",
+    ///         VpcId = "vpc-391sv4w3",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// vpc end_point_service can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/endPointService:EndPointService end_point_service end_point_service_id
+    /// $ pulumi import tencentcloud:Vpc/endPointService:EndPointService end_point_service end_point_service_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/endPointService:EndPointService")]
-    public partial class EndPointService : Pulumi.CustomResource
+    public partial class EndPointService : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to automatically accept.
@@ -146,7 +147,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class EndPointServiceArgs : Pulumi.ResourceArgs
+    public sealed class EndPointServiceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to automatically accept.
@@ -181,9 +182,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public EndPointServiceArgs()
         {
         }
+        public static new EndPointServiceArgs Empty => new EndPointServiceArgs();
     }
 
-    public sealed class EndPointServiceState : Pulumi.ResourceArgs
+    public sealed class EndPointServiceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to automatically accept.
@@ -242,5 +244,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public EndPointServiceState()
         {
         }
+        public static new EndPointServiceState Empty => new EndPointServiceState();
     }
 }

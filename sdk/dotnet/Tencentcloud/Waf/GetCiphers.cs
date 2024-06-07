@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// <summary>
         /// Use this data source to query detailed information of waf ciphers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetCiphers.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Waf.GetCiphers.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCiphersResult> InvokeAsync(GetCiphersArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCiphersResult>("tencentcloud:Waf/getCiphers:getCiphers", args ?? new GetCiphersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCiphersResult>("tencentcloud:Waf/getCiphers:getCiphers", args ?? new GetCiphersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of waf ciphers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetCiphers.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Waf.GetCiphers.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCiphersResult> Invoke(GetCiphersInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCiphersResult>("tencentcloud:Waf/getCiphers:getCiphers", args ?? new GetCiphersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCiphersResult>("tencentcloud:Waf/getCiphers:getCiphers", args ?? new GetCiphersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCiphersArgs : Pulumi.InvokeArgs
+    public sealed class GetCiphersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetCiphersArgs()
         {
         }
+        public static new GetCiphersArgs Empty => new GetCiphersArgs();
     }
 
-    public sealed class GetCiphersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCiphersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetCiphersInvokeArgs()
         {
         }
+        public static new GetCiphersInvokeArgs Empty => new GetCiphersInvokeArgs();
     }
 
 

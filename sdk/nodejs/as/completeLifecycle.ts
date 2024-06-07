@@ -9,10 +9,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "as",
@@ -25,7 +26,7 @@ import * as utilities from "../utilities";
  *     filters: [
  *         {
  *             name: "zone",
- *             values: [zones.zones?[0]?.name],
+ *             values: [zones.zones?.[0]?.name],
  *         },
  *         {
  *             name: "instance-family",
@@ -39,11 +40,11 @@ import * as utilities from "../utilities";
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
- *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
  * });
  * const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
  *     configurationName: "tf-example",
- *     imageId: image.then(image => image.images?[0]?.imageId),
+ *     imageId: image.then(image => image.images?.[0]?.imageId),
  *     instanceTypes: [
  *         "SA1.SMALL1",
  *         "SA2.SMALL1",
@@ -72,9 +73,9 @@ import * as utilities from "../utilities";
  * });
  * const exampleInstance = new tencentcloud.instance.Instance("exampleInstance", {
  *     instanceName: "tf_example",
- *     availabilityZone: zones.then(zones => zones.zones?[0]?.name),
- *     imageId: image.then(image => image.images?[0]?.imageId),
- *     instanceType: instanceTypes.then(instanceTypes => instanceTypes.instanceTypes?[0]?.instanceType),
+ *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
+ *     imageId: image.then(image => image.images?.[0]?.imageId),
+ *     instanceType: instanceTypes.then(instanceTypes => instanceTypes.instanceTypes?.[0]?.instanceType),
  *     systemDiskType: "CLOUD_PREMIUM",
  *     systemDiskSize: 50,
  *     hostname: "user",
@@ -88,6 +89,7 @@ import * as utilities from "../utilities";
  *     lifecycleActionResult: "CONTINUE",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class CompleteLifecycle extends pulumi.CustomResource {
     /**

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const group = new tencentcloud.cls.MachineGroup("group", {
  *     groupName: "tf-describe-mg-test",
@@ -33,13 +35,11 @@ import * as utilities from "../utilities";
  *     groupId: group.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getMachines(args: GetMachinesArgs, opts?: pulumi.InvokeOptions): Promise<GetMachinesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cls/getMachines:getMachines", {
         "groupId": args.groupId,
         "resultOutputFile": args.resultOutputFile,
@@ -75,9 +75,39 @@ export interface GetMachinesResult {
     readonly machines: outputs.Cls.GetMachinesMachine[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cls machines
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const group = new tencentcloud.cls.MachineGroup("group", {
+ *     groupName: "tf-describe-mg-test",
+ *     serviceLogging: true,
+ *     autoUpdate: true,
+ *     updateEndTime: "19:05:00",
+ *     updateStartTime: "17:05:00",
+ *     machineGroupType: {
+ *         type: "ip",
+ *         values: [
+ *             "192.168.1.1",
+ *             "192.168.1.2",
+ *         ],
+ *     },
+ * });
+ * const machines = tencentcloud.Cls.getMachinesOutput({
+ *     groupId: group.id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getMachinesOutput(args: GetMachinesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetMachinesResult> {
-    return pulumi.output(args).apply(a => getMachines(a, opts))
+    return pulumi.output(args).apply((a: any) => getMachines(a, opts))
 }
 
 /**

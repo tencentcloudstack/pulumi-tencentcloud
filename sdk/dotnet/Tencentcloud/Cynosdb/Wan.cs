@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var wan = new Tencentcloud.Cynosdb.Wan("wan", new()
     ///     {
-    ///         var wan = new Tencentcloud.Cynosdb.Wan("wan", new Tencentcloud.Cynosdb.WanArgs
-    ///         {
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             InstanceGrpId = "cynosdbmysql-grp-lxav0p9z",
-    ///         });
-    ///     }
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         InstanceGrpId = "cynosdbmysql-grp-lxav0p9z",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cynosdb wan can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cynosdb/wan:Wan wan cynosdbmysql-bws8h88b#cynosdbmysql-grp-lxav0p9z
+    /// $ pulumi import tencentcloud:Cynosdb/wan:Wan wan cynosdbmysql-bws8h88b#cynosdbmysql-grp-lxav0p9z
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/wan:Wan")]
-    public partial class Wan : Pulumi.CustomResource
+    public partial class Wan : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster ID.
@@ -125,7 +126,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class WanArgs : Pulumi.ResourceArgs
+    public sealed class WanArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -142,9 +143,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public WanArgs()
         {
         }
+        public static new WanArgs Empty => new WanArgs();
     }
 
-    public sealed class WanState : Pulumi.ResourceArgs
+    public sealed class WanState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -185,5 +187,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public WanState()
         {
         }
+        public static new WanState Empty => new WanState();
     }
 }

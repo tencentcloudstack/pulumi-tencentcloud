@@ -8,59 +8,71 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dasb userGroup
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewUserGroup(ctx, "example", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewUserGroup(ctx, "example", nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Or
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewUserGroup(ctx, "example", &Dasb.UserGroupArgs{
-// 			DepartmentId: pulumi.String("1.2"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewUserGroup(ctx, "example", &Dasb.UserGroupArgs{
+//				DepartmentId: pulumi.String("1.2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dasb user_group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dasb/userGroup:UserGroup example 16
+// $ pulumi import tencentcloud:Dasb/userGroup:UserGroup example 16
 // ```
 type UserGroup struct {
 	pulumi.CustomResourceState
@@ -78,7 +90,7 @@ func NewUserGroup(ctx *pulumi.Context,
 		args = &UserGroupArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UserGroup
 	err := ctx.RegisterResource("tencentcloud:Dasb/userGroup:UserGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -159,7 +171,7 @@ func (i *UserGroup) ToUserGroupOutputWithContext(ctx context.Context) UserGroupO
 // UserGroupArrayInput is an input type that accepts UserGroupArray and UserGroupArrayOutput values.
 // You can construct a concrete instance of `UserGroupArrayInput` via:
 //
-//          UserGroupArray{ UserGroupArgs{...} }
+//	UserGroupArray{ UserGroupArgs{...} }
 type UserGroupArrayInput interface {
 	pulumi.Input
 
@@ -184,7 +196,7 @@ func (i UserGroupArray) ToUserGroupArrayOutputWithContext(ctx context.Context) U
 // UserGroupMapInput is an input type that accepts UserGroupMap and UserGroupMapOutput values.
 // You can construct a concrete instance of `UserGroupMapInput` via:
 //
-//          UserGroupMap{ "key": UserGroupArgs{...} }
+//	UserGroupMap{ "key": UserGroupArgs{...} }
 type UserGroupMapInput interface {
 	pulumi.Input
 

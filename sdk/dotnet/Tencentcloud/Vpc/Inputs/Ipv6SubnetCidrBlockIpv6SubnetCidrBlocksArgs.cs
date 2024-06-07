@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Inputs
 {
 
-    public sealed class Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs : Pulumi.ResourceArgs
+    public sealed class Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// `IPv6` subnet segment. Such as: `3402:4e00:20:1001::/64`.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Inputs
         public Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs()
         {
         }
+        public static new Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs Empty => new Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs();
     }
 }

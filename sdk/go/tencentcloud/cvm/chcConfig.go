@@ -7,59 +7,64 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cvm chcConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cvm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cvm.NewChcConfig(ctx, "chcConfig", &Cvm.ChcConfigArgs{
-// 			BmcSecurityGroupIds: pulumi.StringArray{
-// 				pulumi.String("sg-xxxxxx"),
-// 			},
-// 			BmcUser: pulumi.String("admin"),
-// 			BmcVirtualPrivateCloud: &cvm.ChcConfigBmcVirtualPrivateCloudArgs{
-// 				SubnetId: pulumi.String("subnet-xxxxxx"),
-// 				VpcId:    pulumi.String("vpc-xxxxxx"),
-// 			},
-// 			ChcId: pulumi.String("chc-xxxxxx"),
-// 			DeploySecurityGroupIds: pulumi.StringArray{
-// 				pulumi.String("sg-xxxxxx"),
-// 			},
-// 			DeployVirtualPrivateCloud: &cvm.ChcConfigDeployVirtualPrivateCloudArgs{
-// 				SubnetId: pulumi.String("subnet-xxxxxx"),
-// 				VpcId:    pulumi.String("vpc-xxxxxx"),
-// 			},
-// 			InstanceName: pulumi.String("xxxxxx"),
-// 			Password:     pulumi.String("xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cvm.NewChcConfig(ctx, "chcConfig", &Cvm.ChcConfigArgs{
+//				BmcSecurityGroupIds: pulumi.StringArray{
+//					pulumi.String("sg-xxxxxx"),
+//				},
+//				BmcUser: pulumi.String("admin"),
+//				BmcVirtualPrivateCloud: &cvm.ChcConfigBmcVirtualPrivateCloudArgs{
+//					SubnetId: pulumi.String("subnet-xxxxxx"),
+//					VpcId:    pulumi.String("vpc-xxxxxx"),
+//				},
+//				ChcId: pulumi.String("chc-xxxxxx"),
+//				DeploySecurityGroupIds: pulumi.StringArray{
+//					pulumi.String("sg-xxxxxx"),
+//				},
+//				DeployVirtualPrivateCloud: &cvm.ChcConfigDeployVirtualPrivateCloudArgs{
+//					SubnetId: pulumi.String("subnet-xxxxxx"),
+//					VpcId:    pulumi.String("vpc-xxxxxx"),
+//				},
+//				InstanceName: pulumi.String("xxxxxx"),
+//				Password:     pulumi.String("xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cvm chc_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cvm/chcConfig:ChcConfig chc_config chc_config_id
+// $ pulumi import tencentcloud:Cvm/chcConfig:ChcConfig chc_config chc_config_id
 // ```
 type ChcConfig struct {
 	pulumi.CustomResourceState
@@ -94,7 +99,14 @@ func NewChcConfig(ctx *pulumi.Context,
 	if args.ChcId == nil {
 		return nil, errors.New("invalid value for required argument 'ChcId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ChcConfig
 	err := ctx.RegisterResource("tencentcloud:Cvm/chcConfig:ChcConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -231,7 +243,7 @@ func (i *ChcConfig) ToChcConfigOutputWithContext(ctx context.Context) ChcConfigO
 // ChcConfigArrayInput is an input type that accepts ChcConfigArray and ChcConfigArrayOutput values.
 // You can construct a concrete instance of `ChcConfigArrayInput` via:
 //
-//          ChcConfigArray{ ChcConfigArgs{...} }
+//	ChcConfigArray{ ChcConfigArgs{...} }
 type ChcConfigArrayInput interface {
 	pulumi.Input
 
@@ -256,7 +268,7 @@ func (i ChcConfigArray) ToChcConfigArrayOutputWithContext(ctx context.Context) C
 // ChcConfigMapInput is an input type that accepts ChcConfigMap and ChcConfigMapOutput values.
 // You can construct a concrete instance of `ChcConfigMapInput` via:
 //
-//          ChcConfigMap{ "key": ChcConfigArgs{...} }
+//	ChcConfigMap{ "key": ChcConfigArgs{...} }
 type ChcConfigMapInput interface {
 	pulumi.Input
 

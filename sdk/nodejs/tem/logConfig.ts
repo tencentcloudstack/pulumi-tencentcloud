@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const logConfig = new tencentcloud.tem.LogConfig("logConfig", {
  *     environmentId: "en-o5edaepv",
@@ -23,13 +24,14 @@ import * as utilities from "../utilities";
  *     logType: "minimalist_log",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tem logConfig can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tem/logConfig:LogConfig logConfig environmentId#applicationId#name
+ * $ pulumi import tencentcloud:Tem/logConfig:LogConfig logConfig environmentId#applicationId#name
  * ```
  */
 export class LogConfig extends pulumi.CustomResource {

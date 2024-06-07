@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const enableUnitRule = new tencentcloud.Tsf.EnableUnitRule("enable_unit_rule", {
+ * const enableUnitRule = new tencentcloud.tsf.EnableUnitRule("enableUnitRule", {
  *     ruleId: "unit-rl-is9m4nxz",
- *     switch: "enabled",
+ *     "switch": "enabled",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tsf enable_unit_rule can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tsf/enableUnitRule:EnableUnitRule enable_unit_rule enable_unit_rule_id
+ * $ pulumi import tencentcloud:Tsf/enableUnitRule:EnableUnitRule enable_unit_rule enable_unit_rule_id
  * ```
  */
 export class EnableUnitRule extends pulumi.CustomResource {

@@ -15,96 +15,92 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// <summary>
         /// Use this data source to query API gateway throttling services.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var service = new Tencentcloud.ApiGateway.Service("service", new()
         ///     {
-        ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+        ///         ServiceName = "niceservice",
+        ///         Protocol = "http&amp;https",
+        ///         ServiceDesc = "your nice service",
+        ///         NetTypes = new[]
         ///         {
-        ///             ServiceName = "niceservice",
-        ///             Protocol = "http&amp;https",
-        ///             ServiceDesc = "your nice service",
-        ///             NetTypes = 
-        ///             {
-        ///                 "INNER",
-        ///                 "OUTER",
-        ///             },
-        ///             IpVersion = "IPv4",
-        ///             ReleaseLimit = 100,
-        ///             PreLimit = 100,
-        ///             TestLimit = 100,
-        ///         });
-        ///         var id = Tencentcloud.ApiGateway.GetThrottlingServices.Invoke(new Tencentcloud.ApiGateway.GetThrottlingServicesInvokeArgs
-        ///         {
-        ///             ServiceId = service.Id,
-        ///         });
-        ///     }
+        ///             "INNER",
+        ///             "OUTER",
+        ///         },
+        ///         IpVersion = "IPv4",
+        ///         ReleaseLimit = 100,
+        ///         PreLimit = 100,
+        ///         TestLimit = 100,
+        ///     });
         /// 
-        /// }
+        ///     var id = Tencentcloud.ApiGateway.GetThrottlingServices.Invoke(new()
+        ///     {
+        ///         ServiceId = service.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetThrottlingServicesResult> InvokeAsync(GetThrottlingServicesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetThrottlingServicesResult>("tencentcloud:ApiGateway/getThrottlingServices:getThrottlingServices", args ?? new GetThrottlingServicesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetThrottlingServicesResult>("tencentcloud:ApiGateway/getThrottlingServices:getThrottlingServices", args ?? new GetThrottlingServicesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query API gateway throttling services.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var service = new Tencentcloud.ApiGateway.Service("service", new()
         ///     {
-        ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+        ///         ServiceName = "niceservice",
+        ///         Protocol = "http&amp;https",
+        ///         ServiceDesc = "your nice service",
+        ///         NetTypes = new[]
         ///         {
-        ///             ServiceName = "niceservice",
-        ///             Protocol = "http&amp;https",
-        ///             ServiceDesc = "your nice service",
-        ///             NetTypes = 
-        ///             {
-        ///                 "INNER",
-        ///                 "OUTER",
-        ///             },
-        ///             IpVersion = "IPv4",
-        ///             ReleaseLimit = 100,
-        ///             PreLimit = 100,
-        ///             TestLimit = 100,
-        ///         });
-        ///         var id = Tencentcloud.ApiGateway.GetThrottlingServices.Invoke(new Tencentcloud.ApiGateway.GetThrottlingServicesInvokeArgs
-        ///         {
-        ///             ServiceId = service.Id,
-        ///         });
-        ///     }
+        ///             "INNER",
+        ///             "OUTER",
+        ///         },
+        ///         IpVersion = "IPv4",
+        ///         ReleaseLimit = 100,
+        ///         PreLimit = 100,
+        ///         TestLimit = 100,
+        ///     });
         /// 
-        /// }
+        ///     var id = Tencentcloud.ApiGateway.GetThrottlingServices.Invoke(new()
+        ///     {
+        ///         ServiceId = service.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetThrottlingServicesResult> Invoke(GetThrottlingServicesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetThrottlingServicesResult>("tencentcloud:ApiGateway/getThrottlingServices:getThrottlingServices", args ?? new GetThrottlingServicesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetThrottlingServicesResult>("tencentcloud:ApiGateway/getThrottlingServices:getThrottlingServices", args ?? new GetThrottlingServicesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetThrottlingServicesArgs : Pulumi.InvokeArgs
+    public sealed class GetThrottlingServicesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -121,9 +117,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetThrottlingServicesArgs()
         {
         }
+        public static new GetThrottlingServicesArgs Empty => new GetThrottlingServicesArgs();
     }
 
-    public sealed class GetThrottlingServicesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetThrottlingServicesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -140,6 +137,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetThrottlingServicesInvokeArgs()
         {
         }
+        public static new GetThrottlingServicesInvokeArgs Empty => new GetThrottlingServicesInvokeArgs();
     }
 
 

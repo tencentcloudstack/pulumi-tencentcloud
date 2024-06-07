@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// <summary>
         /// Use this data source to query detailed information of postgresql default_parameters
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var defaultParameters = Tencentcloud.Postgresql.GetDefaultParameters.Invoke(new()
         ///     {
-        ///         var defaultParameters = Output.Create(Tencentcloud.Postgresql.GetDefaultParameters.InvokeAsync(new Tencentcloud.Postgresql.GetDefaultParametersArgs
-        ///         {
-        ///             DbEngine = "postgresql",
-        ///             DbMajorVersion = "13",
-        ///         }));
-        ///     }
+        ///         DbEngine = "postgresql",
+        ///         DbMajorVersion = "13",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDefaultParametersResult> InvokeAsync(GetDefaultParametersArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDefaultParametersResult>("tencentcloud:Postgresql/getDefaultParameters:getDefaultParameters", args ?? new GetDefaultParametersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDefaultParametersResult>("tencentcloud:Postgresql/getDefaultParameters:getDefaultParameters", args ?? new GetDefaultParametersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of postgresql default_parameters
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var defaultParameters = Tencentcloud.Postgresql.GetDefaultParameters.Invoke(new()
         ///     {
-        ///         var defaultParameters = Output.Create(Tencentcloud.Postgresql.GetDefaultParameters.InvokeAsync(new Tencentcloud.Postgresql.GetDefaultParametersArgs
-        ///         {
-        ///             DbEngine = "postgresql",
-        ///             DbMajorVersion = "13",
-        ///         }));
-        ///     }
+        ///         DbEngine = "postgresql",
+        ///         DbMajorVersion = "13",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDefaultParametersResult> Invoke(GetDefaultParametersInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDefaultParametersResult>("tencentcloud:Postgresql/getDefaultParameters:getDefaultParameters", args ?? new GetDefaultParametersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDefaultParametersResult>("tencentcloud:Postgresql/getDefaultParameters:getDefaultParameters", args ?? new GetDefaultParametersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDefaultParametersArgs : Pulumi.InvokeArgs
+    public sealed class GetDefaultParametersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Database engine, such as postgresql, mssql_compatible.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetDefaultParametersArgs()
         {
         }
+        public static new GetDefaultParametersArgs Empty => new GetDefaultParametersArgs();
     }
 
-    public sealed class GetDefaultParametersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDefaultParametersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Database engine, such as postgresql, mssql_compatible.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetDefaultParametersInvokeArgs()
         {
         }
+        public static new GetDefaultParametersInvokeArgs Empty => new GetDefaultParametersInvokeArgs();
     }
 
 

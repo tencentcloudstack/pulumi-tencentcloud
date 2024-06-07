@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a vpc routeTable
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Route"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Route"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Route.NewTableAssociation(ctx, "routeTableAssociation", &Route.TableAssociationArgs{
-// 			RouteTableId: pulumi.String("rtb-5toos5sy"),
-// 			SubnetId:     pulumi.String("subnet-2y2omd4k"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Route.NewTableAssociation(ctx, "routeTableAssociation", &Route.TableAssociationArgs{
+//				RouteTableId: pulumi.String("rtb-5toos5sy"),
+//				SubnetId:     pulumi.String("subnet-2y2omd4k"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // vpc route_table can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Route/tableAssociation:TableAssociation route_table_association subnet_id
+// $ pulumi import tencentcloud:Route/tableAssociation:TableAssociation route_table_association subnet_id
 // ```
 type TableAssociation struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewTableAssociation(ctx *pulumi.Context,
 	if args.SubnetId == nil {
 		return nil, errors.New("invalid value for required argument 'SubnetId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TableAssociation
 	err := ctx.RegisterResource("tencentcloud:Route/tableAssociation:TableAssociation", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *TableAssociation) ToTableAssociationOutputWithContext(ctx context.Conte
 // TableAssociationArrayInput is an input type that accepts TableAssociationArray and TableAssociationArrayOutput values.
 // You can construct a concrete instance of `TableAssociationArrayInput` via:
 //
-//          TableAssociationArray{ TableAssociationArgs{...} }
+//	TableAssociationArray{ TableAssociationArgs{...} }
 type TableAssociationArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i TableAssociationArray) ToTableAssociationArrayOutputWithContext(ctx cont
 // TableAssociationMapInput is an input type that accepts TableAssociationMap and TableAssociationMapOutput values.
 // You can construct a concrete instance of `TableAssociationMapInput` via:
 //
-//          TableAssociationMap{ "key": TableAssociationArgs{...} }
+//	TableAssociationMap{ "key": TableAssociationArgs{...} }
 type TableAssociationMapInput interface {
 	pulumi.Input
 

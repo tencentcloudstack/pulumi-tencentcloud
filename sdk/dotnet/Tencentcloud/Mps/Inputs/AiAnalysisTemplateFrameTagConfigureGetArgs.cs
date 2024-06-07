@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class AiAnalysisTemplateFrameTagConfigureGetArgs : Pulumi.ResourceArgs
+    public sealed class AiAnalysisTemplateFrameTagConfigureGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Ai frame tag task switch, optional value:ON/OFF.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public AiAnalysisTemplateFrameTagConfigureGetArgs()
         {
         }
+        public static new AiAnalysisTemplateFrameTagConfigureGetArgs Empty => new AiAnalysisTemplateFrameTagConfigureGetArgs();
     }
 }

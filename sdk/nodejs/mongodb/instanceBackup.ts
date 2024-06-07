@@ -9,16 +9,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceBackup = new tencentcloud.Mongodb.InstanceBackup("instance_backup", {
+ * const instanceBackup = new tencentcloud.mongodb.InstanceBackup("instanceBackup", {
  *     backupMethod: 0,
  *     backupRemark: "my backup",
  *     instanceId: "cmgo-9d0p6umb",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class InstanceBackup extends pulumi.CustomResource {
     /**

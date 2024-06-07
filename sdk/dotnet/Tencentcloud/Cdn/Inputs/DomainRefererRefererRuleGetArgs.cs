@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainRefererRefererRuleGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainRefererRefererRuleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to allow emptpy.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainRefererRefererRuleGetArgs()
         {
         }
+        public static new DomainRefererRefererRuleGetArgs Empty => new DomainRefererRefererRuleGetArgs();
     }
 }

@@ -15,47 +15,48 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var command = new Tencentcloud.Tat.Command("command", new()
     ///     {
-    ///         var command = new Tencentcloud.Tat.Command("command", new Tencentcloud.Tat.CommandArgs
+    ///         CommandName = "ls",
+    ///         CommandType = "SHELL",
+    ///         Content = "bHM=",
+    ///         Description = "xxx",
+    ///         Tags = new[]
     ///         {
-    ///             CommandName = "ls",
-    ///             CommandType = "SHELL",
-    ///             Content = "bHM=",
-    ///             Description = "xxx",
-    ///             Tags = 
+    ///             new Tencentcloud.Tat.Inputs.CommandTagArgs
     ///             {
-    ///                 new Tencentcloud.Tat.Inputs.CommandTagArgs
-    ///                 {
-    ///                     Key = "",
-    ///                     Value = "",
-    ///                 },
+    ///                 Key = "",
+    ///                 Value = "",
     ///             },
-    ///             Timeout = 50,
-    ///             Username = "root",
-    ///             WorkingDirectory = "/root",
-    ///         });
-    ///     }
+    ///         },
+    ///         Timeout = 50,
+    ///         Username = "root",
+    ///         WorkingDirectory = "/root",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tat command can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tat/command:Command command cmd-6fydo27j
+    /// $ pulumi import tencentcloud:Tat/command:Command command cmd-6fydo27j
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tat/command:Command")]
-    public partial class Command : Pulumi.CustomResource
+    public partial class Command : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
@@ -198,7 +199,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         }
     }
 
-    public sealed class CommandArgs : Pulumi.ResourceArgs
+    public sealed class CommandArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
@@ -281,9 +282,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public CommandArgs()
         {
         }
+        public static new CommandArgs Empty => new CommandArgs();
     }
 
-    public sealed class CommandState : Pulumi.ResourceArgs
+    public sealed class CommandState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
@@ -390,5 +392,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public CommandState()
         {
         }
+        public static new CommandState Empty => new CommandState();
     }
 }

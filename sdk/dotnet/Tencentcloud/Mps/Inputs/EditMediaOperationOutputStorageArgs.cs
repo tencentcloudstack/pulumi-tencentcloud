@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class EditMediaOperationOutputStorageArgs : Pulumi.ResourceArgs
+    public sealed class EditMediaOperationOutputStorageArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The location to save the output object in COS. This parameter is valid and required when `Type` is COS.Note: This field may return null, indicating that no valid value can be obtained.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public EditMediaOperationOutputStorageArgs()
         {
         }
+        public static new EditMediaOperationOutputStorageArgs Empty => new EditMediaOperationOutputStorageArgs();
     }
 }

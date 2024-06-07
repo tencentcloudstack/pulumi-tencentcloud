@@ -13,14 +13,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     public static class GetBackupDownloadUrl
     {
         public static Task<GetBackupDownloadUrlResult> InvokeAsync(GetBackupDownloadUrlArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBackupDownloadUrlResult>("tencentcloud:Cynosdb/getBackupDownloadUrl:getBackupDownloadUrl", args ?? new GetBackupDownloadUrlArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupDownloadUrlResult>("tencentcloud:Cynosdb/getBackupDownloadUrl:getBackupDownloadUrl", args ?? new GetBackupDownloadUrlArgs(), options.WithDefaults());
 
         public static Output<GetBackupDownloadUrlResult> Invoke(GetBackupDownloadUrlInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBackupDownloadUrlResult>("tencentcloud:Cynosdb/getBackupDownloadUrl:getBackupDownloadUrl", args ?? new GetBackupDownloadUrlInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBackupDownloadUrlResult>("tencentcloud:Cynosdb/getBackupDownloadUrl:getBackupDownloadUrl", args ?? new GetBackupDownloadUrlInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBackupDownloadUrlArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupDownloadUrlArgs : global::Pulumi.InvokeArgs
     {
         [Input("backupId", required: true)]
         public int BackupId { get; set; }
@@ -34,9 +34,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetBackupDownloadUrlArgs()
         {
         }
+        public static new GetBackupDownloadUrlArgs Empty => new GetBackupDownloadUrlArgs();
     }
 
-    public sealed class GetBackupDownloadUrlInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupDownloadUrlInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("backupId", required: true)]
         public Input<int> BackupId { get; set; } = null!;
@@ -50,6 +51,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetBackupDownloadUrlInvokeArgs()
         {
         }
+        public static new GetBackupDownloadUrlInvokeArgs Empty => new GetBackupDownloadUrlInvokeArgs();
     }
 
 

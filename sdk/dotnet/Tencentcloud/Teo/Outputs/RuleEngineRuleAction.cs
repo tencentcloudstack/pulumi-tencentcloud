@@ -15,15 +15,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class RuleEngineRuleAction
     {
         /// <summary>
-        /// Define a code action.
+        /// Feature operation with a status code. Features of this type include:
         /// </summary>
         public readonly Outputs.RuleEngineRuleActionCodeAction? CodeAction;
         /// <summary>
-        /// Define a normal action.
+        /// Common operation. Values:
         /// </summary>
         public readonly Outputs.RuleEngineRuleActionNormalAction? NormalAction;
         /// <summary>
-        /// Define a rewrite action.
+        /// Feature operation with a request/response header. Features of this type include:
         /// </summary>
         public readonly Outputs.RuleEngineRuleActionRewriteAction? RewriteAction;
 

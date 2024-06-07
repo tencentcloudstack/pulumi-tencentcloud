@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var snapshotConfig = new Tencentcloud.Dnspod.SnapshotConfig("snapshotConfig", new()
     ///     {
-    ///         var snapshotConfig = new Tencentcloud.Dnspod.SnapshotConfig("snapshotConfig", new Tencentcloud.Dnspod.SnapshotConfigArgs
-    ///         {
-    ///             Domain = "dnspod.cn",
-    ///             Period = "hourly",
-    ///         });
-    ///     }
+    ///         Domain = "dnspod.cn",
+    ///         Period = "hourly",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dnspod snapshot_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dnspod/snapshotConfig:SnapshotConfig snapshot_config domain
+    /// $ pulumi import tencentcloud:Dnspod/snapshotConfig:SnapshotConfig snapshot_config domain
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnspod/snapshotConfig:SnapshotConfig")]
-    public partial class SnapshotConfig : Pulumi.CustomResource
+    public partial class SnapshotConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Domain name.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         }
     }
 
-    public sealed class SnapshotConfigArgs : Pulumi.ResourceArgs
+    public sealed class SnapshotConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain name.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public SnapshotConfigArgs()
         {
         }
+        public static new SnapshotConfigArgs Empty => new SnapshotConfigArgs();
     }
 
-    public sealed class SnapshotConfigState : Pulumi.ResourceArgs
+    public sealed class SnapshotConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain name.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public SnapshotConfigState()
         {
         }
+        public static new SnapshotConfigState Empty => new SnapshotConfigState();
     }
 }

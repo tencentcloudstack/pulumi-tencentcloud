@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to generate a cos bucket inventory immediately
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cos.NewBucketGenerateInventoryImmediatelyOperation(ctx, "generateInventoryImmediately", &Cos.BucketGenerateInventoryImmediatelyOperationArgs{
-// 			Bucket:      pulumi.String("keep-test-xxxxxx"),
-// 			InventoryId: pulumi.String("test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cos.NewBucketGenerateInventoryImmediatelyOperation(ctx, "generateInventoryImmediately", &Cos.BucketGenerateInventoryImmediatelyOperationArgs{
+//				Bucket:      pulumi.String("keep-test-xxxxxx"),
+//				InventoryId: pulumi.String("test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type BucketGenerateInventoryImmediatelyOperation struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewBucketGenerateInventoryImmediatelyOperation(ctx *pulumi.Context,
 	if args.InventoryId == nil {
 		return nil, errors.New("invalid value for required argument 'InventoryId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BucketGenerateInventoryImmediatelyOperation
 	err := ctx.RegisterResource("tencentcloud:Cos/bucketGenerateInventoryImmediatelyOperation:BucketGenerateInventoryImmediatelyOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *BucketGenerateInventoryImmediatelyOperation) ToBucketGenerateInventoryI
 // BucketGenerateInventoryImmediatelyOperationArrayInput is an input type that accepts BucketGenerateInventoryImmediatelyOperationArray and BucketGenerateInventoryImmediatelyOperationArrayOutput values.
 // You can construct a concrete instance of `BucketGenerateInventoryImmediatelyOperationArrayInput` via:
 //
-//          BucketGenerateInventoryImmediatelyOperationArray{ BucketGenerateInventoryImmediatelyOperationArgs{...} }
+//	BucketGenerateInventoryImmediatelyOperationArray{ BucketGenerateInventoryImmediatelyOperationArgs{...} }
 type BucketGenerateInventoryImmediatelyOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i BucketGenerateInventoryImmediatelyOperationArray) ToBucketGenerateInvent
 // BucketGenerateInventoryImmediatelyOperationMapInput is an input type that accepts BucketGenerateInventoryImmediatelyOperationMap and BucketGenerateInventoryImmediatelyOperationMapOutput values.
 // You can construct a concrete instance of `BucketGenerateInventoryImmediatelyOperationMapInput` via:
 //
-//          BucketGenerateInventoryImmediatelyOperationMap{ "key": BucketGenerateInventoryImmediatelyOperationArgs{...} }
+//	BucketGenerateInventoryImmediatelyOperationMap{ "key": BucketGenerateInventoryImmediatelyOperationArgs{...} }
 type BucketGenerateInventoryImmediatelyOperationMapInput interface {
 	pulumi.Input
 

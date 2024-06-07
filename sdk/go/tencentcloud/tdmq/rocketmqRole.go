@@ -7,50 +7,56 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tdmqRocketmq role
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleRocketmqCluster, err := Tdmq.NewRocketmqCluster(ctx, "exampleRocketmqCluster", &Tdmq.RocketmqClusterArgs{
-// 			ClusterName: pulumi.String("tf_example"),
-// 			Remark:      pulumi.String("remark."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tdmq.NewRocketmqRole(ctx, "exampleRocketmqRole", &Tdmq.RocketmqRoleArgs{
-// 			ClusterId: exampleRocketmqCluster.ClusterId,
-// 			RoleName:  pulumi.String("tf_example"),
-// 			Remark:    pulumi.String("remark."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleRocketmqCluster, err := Tdmq.NewRocketmqCluster(ctx, "exampleRocketmqCluster", &Tdmq.RocketmqClusterArgs{
+//				ClusterName: pulumi.String("tf_example"),
+//				Remark:      pulumi.String("remark."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tdmq.NewRocketmqRole(ctx, "exampleRocketmqRole", &Tdmq.RocketmqRoleArgs{
+//				ClusterId: exampleRocketmqCluster.ClusterId,
+//				RoleName:  pulumi.String("tf_example"),
+//				Remark:    pulumi.String("remark."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tdmqRocketmq role can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tdmq/rocketmqRole:RocketmqRole role role_id
+// $ pulumi import tencentcloud:Tdmq/rocketmqRole:RocketmqRole role role_id
 // ```
 type RocketmqRole struct {
 	pulumi.CustomResourceState
@@ -82,7 +88,7 @@ func NewRocketmqRole(ctx *pulumi.Context,
 	if args.RoleName == nil {
 		return nil, errors.New("invalid value for required argument 'RoleName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RocketmqRole
 	err := ctx.RegisterResource("tencentcloud:Tdmq/rocketmqRole:RocketmqRole", name, args, &resource, opts...)
 	if err != nil {
@@ -183,7 +189,7 @@ func (i *RocketmqRole) ToRocketmqRoleOutputWithContext(ctx context.Context) Rock
 // RocketmqRoleArrayInput is an input type that accepts RocketmqRoleArray and RocketmqRoleArrayOutput values.
 // You can construct a concrete instance of `RocketmqRoleArrayInput` via:
 //
-//          RocketmqRoleArray{ RocketmqRoleArgs{...} }
+//	RocketmqRoleArray{ RocketmqRoleArgs{...} }
 type RocketmqRoleArrayInput interface {
 	pulumi.Input
 
@@ -208,7 +214,7 @@ func (i RocketmqRoleArray) ToRocketmqRoleArrayOutputWithContext(ctx context.Cont
 // RocketmqRoleMapInput is an input type that accepts RocketmqRoleMap and RocketmqRoleMapOutput values.
 // You can construct a concrete instance of `RocketmqRoleMapInput` via:
 //
-//          RocketmqRoleMap{ "key": RocketmqRoleArgs{...} }
+//	RocketmqRoleMap{ "key": RocketmqRoleArgs{...} }
 type RocketmqRoleMapInput interface {
 	pulumi.Input
 

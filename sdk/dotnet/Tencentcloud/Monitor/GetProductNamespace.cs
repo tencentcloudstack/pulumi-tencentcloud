@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query product namespace in monitor)
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instances = Tencentcloud.Monitor.GetProductNamespace.Invoke(new()
         ///     {
-        ///         var instances = Output.Create(Tencentcloud.Monitor.GetProductNamespace.InvokeAsync(new Tencentcloud.Monitor.GetProductNamespaceArgs
-        ///         {
-        ///             Name = "Redis",
-        ///         }));
-        ///     }
+        ///         Name = "Redis",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProductNamespaceResult> InvokeAsync(GetProductNamespaceArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProductNamespaceResult>("tencentcloud:Monitor/getProductNamespace:getProductNamespace", args ?? new GetProductNamespaceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProductNamespaceResult>("tencentcloud:Monitor/getProductNamespace:getProductNamespace", args ?? new GetProductNamespaceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query product namespace in monitor)
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instances = Tencentcloud.Monitor.GetProductNamespace.Invoke(new()
         ///     {
-        ///         var instances = Output.Create(Tencentcloud.Monitor.GetProductNamespace.InvokeAsync(new Tencentcloud.Monitor.GetProductNamespaceArgs
-        ///         {
-        ///             Name = "Redis",
-        ///         }));
-        ///     }
+        ///         Name = "Redis",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProductNamespaceResult> Invoke(GetProductNamespaceInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProductNamespaceResult>("tencentcloud:Monitor/getProductNamespace:getProductNamespace", args ?? new GetProductNamespaceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProductNamespaceResult>("tencentcloud:Monitor/getProductNamespace:getProductNamespace", args ?? new GetProductNamespaceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProductNamespaceArgs : Pulumi.InvokeArgs
+    public sealed class GetProductNamespaceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name for filter, eg:`Load Banlancer`.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetProductNamespaceArgs()
         {
         }
+        public static new GetProductNamespaceArgs Empty => new GetProductNamespaceArgs();
     }
 
-    public sealed class GetProductNamespaceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProductNamespaceInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name for filter, eg:`Load Banlancer`.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetProductNamespaceInvokeArgs()
         {
         }
+        public static new GetProductNamespaceInvokeArgs Empty => new GetProductNamespaceInvokeArgs();
     }
 
 

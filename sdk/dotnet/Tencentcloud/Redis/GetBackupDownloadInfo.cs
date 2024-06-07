@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// <summary>
         /// Use this data source to query detailed information of redis backup_download_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var backupDownloadInfo = Tencentcloud.Redis.GetBackupDownloadInfo.Invoke(new()
         ///     {
-        ///         var backupDownloadInfo = Output.Create(Tencentcloud.Redis.GetBackupDownloadInfo.InvokeAsync(new Tencentcloud.Redis.GetBackupDownloadInfoArgs
-        ///         {
-        ///             BackupId = "641186639-8362913-1516672770",
-        ///             InstanceId = "crs-iw7d9wdd",
-        ///         }));
-        ///     }
+        ///         BackupId = "641186639-8362913-1516672770",
+        ///         InstanceId = "crs-iw7d9wdd",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBackupDownloadInfoResult> InvokeAsync(GetBackupDownloadInfoArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBackupDownloadInfoResult>("tencentcloud:Redis/getBackupDownloadInfo:getBackupDownloadInfo", args ?? new GetBackupDownloadInfoArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupDownloadInfoResult>("tencentcloud:Redis/getBackupDownloadInfo:getBackupDownloadInfo", args ?? new GetBackupDownloadInfoArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of redis backup_download_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var backupDownloadInfo = Tencentcloud.Redis.GetBackupDownloadInfo.Invoke(new()
         ///     {
-        ///         var backupDownloadInfo = Output.Create(Tencentcloud.Redis.GetBackupDownloadInfo.InvokeAsync(new Tencentcloud.Redis.GetBackupDownloadInfoArgs
-        ///         {
-        ///             BackupId = "641186639-8362913-1516672770",
-        ///             InstanceId = "crs-iw7d9wdd",
-        ///         }));
-        ///     }
+        ///         BackupId = "641186639-8362913-1516672770",
+        ///         InstanceId = "crs-iw7d9wdd",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBackupDownloadInfoResult> Invoke(GetBackupDownloadInfoInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBackupDownloadInfoResult>("tencentcloud:Redis/getBackupDownloadInfo:getBackupDownloadInfo", args ?? new GetBackupDownloadInfoInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBackupDownloadInfoResult>("tencentcloud:Redis/getBackupDownloadInfo:getBackupDownloadInfo", args ?? new GetBackupDownloadInfoInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBackupDownloadInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupDownloadInfoArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The backup ID, which can be accessed via [DescribeInstanceBackups](https://cloud.tencent.com/document/product/239/20011) interface returns the parameter RedisBackupSet to get.
@@ -139,9 +133,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public GetBackupDownloadInfoArgs()
         {
         }
+        public static new GetBackupDownloadInfoArgs Empty => new GetBackupDownloadInfoArgs();
     }
 
-    public sealed class GetBackupDownloadInfoInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupDownloadInfoInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The backup ID, which can be accessed via [DescribeInstanceBackups](https://cloud.tencent.com/document/product/239/20011) interface returns the parameter RedisBackupSet to get.
@@ -206,6 +201,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public GetBackupDownloadInfoInvokeArgs()
         {
         }
+        public static new GetBackupDownloadInfoInvokeArgs Empty => new GetBackupDownloadInfoInvokeArgs();
     }
 
 

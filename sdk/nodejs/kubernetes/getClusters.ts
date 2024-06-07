@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,28 +11,28 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const name = pulumi.output(tencentcloud.Kubernetes.getClusters({
+ * const name = tencentcloud.Kubernetes.getClusters({
  *     clusterName: "terraform",
- * }));
- * const id = pulumi.output(tencentcloud.Kubernetes.getClusters({
+ * });
+ * const id = tencentcloud.Kubernetes.getClusters({
  *     clusterId: "cls-godovr32",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getClusters(args?: GetClustersArgs, opts?: pulumi.InvokeOptions): Promise<GetClustersResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Kubernetes/getClusters:getClusters", {
         "clusterId": args.clusterId,
         "clusterName": args.clusterName,
+        "kubeConfigFilePrefix": args.kubeConfigFilePrefix,
         "resultOutputFile": args.resultOutputFile,
         "tags": args.tags,
     }, opts);
@@ -49,6 +50,10 @@ export interface GetClustersArgs {
      * Name of the cluster. Conflict with cluster_id, can not be set at the same time.
      */
     clusterName?: string;
+    /**
+     * The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.
+     */
+    kubeConfigFilePrefix?: string;
     /**
      * Used to save results.
      */
@@ -75,6 +80,7 @@ export interface GetClustersResult {
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly kubeConfigFilePrefix?: string;
     /**
      * An information list of kubernetes clusters. Each element contains the following attributes:
      */
@@ -85,9 +91,27 @@ export interface GetClustersResult {
      */
     readonly tags?: {[key: string]: any};
 }
-
+/**
+ * Use this data source to query detailed information of kubernetes clusters.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const name = tencentcloud.Kubernetes.getClusters({
+ *     clusterName: "terraform",
+ * });
+ * const id = tencentcloud.Kubernetes.getClusters({
+ *     clusterId: "cls-godovr32",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getClustersOutput(args?: GetClustersOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetClustersResult> {
-    return pulumi.output(args).apply(a => getClusters(a, opts))
+    return pulumi.output(args).apply((a: any) => getClusters(a, opts))
 }
 
 /**
@@ -102,6 +126,10 @@ export interface GetClustersOutputArgs {
      * Name of the cluster. Conflict with cluster_id, can not be set at the same time.
      */
     clusterName?: pulumi.Input<string>;
+    /**
+     * The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.
+     */
+    kubeConfigFilePrefix?: pulumi.Input<string>;
     /**
      * Used to save results.
      */

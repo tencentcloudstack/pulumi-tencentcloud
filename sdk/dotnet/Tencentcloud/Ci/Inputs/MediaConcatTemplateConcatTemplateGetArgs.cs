@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaConcatTemplateConcatTemplateGetArgs : Pulumi.ResourceArgs
+    public sealed class MediaConcatTemplateConcatTemplateGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// audio parameters, the target file does not require Audio information, need to set Audio.Remove to true.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaConcatTemplateConcatTemplateGetArgs()
         {
         }
+        public static new MediaConcatTemplateConcatTemplateGetArgs Empty => new MediaConcatTemplateConcatTemplateGetArgs();
     }
 }

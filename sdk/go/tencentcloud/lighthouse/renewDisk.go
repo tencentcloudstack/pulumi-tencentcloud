@@ -7,41 +7,46 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a lighthouse renewDisk
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewRenewDisk(ctx, "renewDisk", &Lighthouse.RenewDiskArgs{
-// 			AutoVoucher: pulumi.Bool(true),
-// 			DiskId:      pulumi.String("lhdisk-xxxxxx"),
-// 			RenewDiskChargePrepaid: &lighthouse.RenewDiskRenewDiskChargePrepaidArgs{
-// 				Period:    pulumi.Int(1),
-// 				RenewFlag: pulumi.String("NOTIFY_AND_AUTO_RENEW"),
-// 				TimeUnit:  pulumi.String("m"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewRenewDisk(ctx, "renewDisk", &Lighthouse.RenewDiskArgs{
+//				AutoVoucher: pulumi.Bool(true),
+//				DiskId:      pulumi.String("lhdisk-xxxxxx"),
+//				RenewDiskChargePrepaid: &lighthouse.RenewDiskRenewDiskChargePrepaidArgs{
+//					Period:    pulumi.Int(1),
+//					RenewFlag: pulumi.String("NOTIFY_AND_AUTO_RENEW"),
+//					TimeUnit:  pulumi.String("m"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type RenewDisk struct {
 	pulumi.CustomResourceState
 
@@ -66,7 +71,7 @@ func NewRenewDisk(ctx *pulumi.Context,
 	if args.RenewDiskChargePrepaid == nil {
 		return nil, errors.New("invalid value for required argument 'RenewDiskChargePrepaid'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RenewDisk
 	err := ctx.RegisterResource("tencentcloud:Lighthouse/renewDisk:RenewDisk", name, args, &resource, opts...)
 	if err != nil {
@@ -155,7 +160,7 @@ func (i *RenewDisk) ToRenewDiskOutputWithContext(ctx context.Context) RenewDiskO
 // RenewDiskArrayInput is an input type that accepts RenewDiskArray and RenewDiskArrayOutput values.
 // You can construct a concrete instance of `RenewDiskArrayInput` via:
 //
-//          RenewDiskArray{ RenewDiskArgs{...} }
+//	RenewDiskArray{ RenewDiskArgs{...} }
 type RenewDiskArrayInput interface {
 	pulumi.Input
 
@@ -180,7 +185,7 @@ func (i RenewDiskArray) ToRenewDiskArrayOutputWithContext(ctx context.Context) R
 // RenewDiskMapInput is an input type that accepts RenewDiskMap and RenewDiskMapOutput values.
 // You can construct a concrete instance of `RenewDiskMapInput` via:
 //
-//          RenewDiskMap{ "key": RenewDiskArgs{...} }
+//	RenewDiskMap{ "key": RenewDiskArgs{...} }
 type RenewDiskMapInput interface {
 	pulumi.Input
 

@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var rebootInstance = new Tencentcloud.Lighthouse.RebootInstance("rebootInstance", new()
     ///     {
-    ///         var rebootInstance = new Tencentcloud.Lighthouse.RebootInstance("rebootInstance", new Tencentcloud.Lighthouse.RebootInstanceArgs
-    ///         {
-    ///             InstanceId = "lhins-xxx",
-    ///         });
-    ///     }
+    ///         InstanceId = "lhins-xxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/rebootInstance:RebootInstance")]
-    public partial class RebootInstance : Pulumi.CustomResource
+    public partial class RebootInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class RebootInstanceArgs : Pulumi.ResourceArgs
+    public sealed class RebootInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public RebootInstanceArgs()
         {
         }
+        public static new RebootInstanceArgs Empty => new RebootInstanceArgs();
     }
 
-    public sealed class RebootInstanceState : Pulumi.ResourceArgs
+    public sealed class RebootInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public RebootInstanceState()
         {
         }
+        public static new RebootInstanceState Empty => new RebootInstanceState();
     }
 }

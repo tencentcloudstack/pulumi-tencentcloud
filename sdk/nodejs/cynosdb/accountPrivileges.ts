@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const accountPrivileges = new tencentcloud.Cynosdb.AccountPrivileges("account_privileges", {
+ * const accountPrivileges = new tencentcloud.cynosdb.AccountPrivileges("accountPrivileges", {
  *     accountName: "test",
  *     clusterId: "cynosdbmysql-bws8h88b",
  *     databasePrivileges: [{
@@ -47,13 +49,14 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cynosdb account_privileges can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cynosdb/accountPrivileges:AccountPrivileges account_privileges account_privileges_id
+ * $ pulumi import tencentcloud:Cynosdb/accountPrivileges:AccountPrivileges account_privileges account_privileges_id
  * ```
  */
 export class AccountPrivileges extends pulumi.CustomResource {

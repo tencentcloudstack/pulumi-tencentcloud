@@ -15,144 +15,142 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// <summary>
         /// Use this data source to query detailed information of dcdb upgrade_price
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var addUpgradePrice = Tencentcloud.Dcdb.GetUpgradePrice.Invoke(new()
         ///     {
-        ///         var addUpgradePrice = Output.Create(Tencentcloud.Dcdb.GetUpgradePrice.InvokeAsync(new Tencentcloud.Dcdb.GetUpgradePriceArgs
+        ///         InstanceId = local.Dcdb_id,
+        ///         UpgradeType = "ADD",
+        ///         AddShardConfig = new Tencentcloud.Dcdb.Inputs.GetUpgradePriceAddShardConfigInputArgs
         ///         {
-        ///             InstanceId = local.Dcdb_id,
-        ///             UpgradeType = "ADD",
-        ///             AddShardConfig = new Tencentcloud.Dcdb.Inputs.GetUpgradePriceAddShardConfigArgs
-        ///             {
-        ///                 ShardCount = 2,
-        ///                 ShardMemory = 2,
-        ///                 ShardStorage = 100,
-        ///             },
-        ///             AmountUnit = "pent",
-        ///         }));
-        ///         var expandUpgradePrice = Output.Create(Tencentcloud.Dcdb.GetUpgradePrice.InvokeAsync(new Tencentcloud.Dcdb.GetUpgradePriceArgs
-        ///         {
-        ///             InstanceId = local.Dcdb_id,
-        ///             UpgradeType = "EXPAND",
-        ///             ExpandShardConfig = new Tencentcloud.Dcdb.Inputs.GetUpgradePriceExpandShardConfigArgs
-        ///             {
-        ///                 ShardInstanceIds = 
-        ///                 {
-        ///                     "shard-1b5r04az",
-        ///                 },
-        ///                 ShardMemory = 2,
-        ///                 ShardStorage = 40,
-        ///                 ShardNodeCount = 2,
-        ///             },
-        ///             AmountUnit = "pent",
-        ///         }));
-        ///         var splitUpgradePrice = Output.Create(Tencentcloud.Dcdb.GetUpgradePrice.InvokeAsync(new Tencentcloud.Dcdb.GetUpgradePriceArgs
-        ///         {
-        ///             InstanceId = local.Dcdb_id,
-        ///             UpgradeType = "SPLIT",
-        ///             SplitShardConfig = new Tencentcloud.Dcdb.Inputs.GetUpgradePriceSplitShardConfigArgs
-        ///             {
-        ///                 ShardInstanceIds = 
-        ///                 {
-        ///                     "shard-1b5r04az",
-        ///                 },
-        ///                 SplitRate = 50,
-        ///                 ShardMemory = 2,
-        ///                 ShardStorage = 100,
-        ///             },
-        ///             AmountUnit = "pent",
-        ///         }));
-        ///     }
+        ///             ShardCount = 2,
+        ///             ShardMemory = 2,
+        ///             ShardStorage = 100,
+        ///         },
+        ///         AmountUnit = "pent",
+        ///     });
         /// 
-        /// }
+        ///     var expandUpgradePrice = Tencentcloud.Dcdb.GetUpgradePrice.Invoke(new()
+        ///     {
+        ///         InstanceId = local.Dcdb_id,
+        ///         UpgradeType = "EXPAND",
+        ///         ExpandShardConfig = new Tencentcloud.Dcdb.Inputs.GetUpgradePriceExpandShardConfigInputArgs
+        ///         {
+        ///             ShardInstanceIds = new[]
+        ///             {
+        ///                 "shard-1b5r04az",
+        ///             },
+        ///             ShardMemory = 2,
+        ///             ShardStorage = 40,
+        ///             ShardNodeCount = 2,
+        ///         },
+        ///         AmountUnit = "pent",
+        ///     });
+        /// 
+        ///     var splitUpgradePrice = Tencentcloud.Dcdb.GetUpgradePrice.Invoke(new()
+        ///     {
+        ///         InstanceId = local.Dcdb_id,
+        ///         UpgradeType = "SPLIT",
+        ///         SplitShardConfig = new Tencentcloud.Dcdb.Inputs.GetUpgradePriceSplitShardConfigInputArgs
+        ///         {
+        ///             ShardInstanceIds = new[]
+        ///             {
+        ///                 "shard-1b5r04az",
+        ///             },
+        ///             SplitRate = 50,
+        ///             ShardMemory = 2,
+        ///             ShardStorage = 100,
+        ///         },
+        ///         AmountUnit = "pent",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetUpgradePriceResult> InvokeAsync(GetUpgradePriceArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetUpgradePriceResult>("tencentcloud:Dcdb/getUpgradePrice:getUpgradePrice", args ?? new GetUpgradePriceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetUpgradePriceResult>("tencentcloud:Dcdb/getUpgradePrice:getUpgradePrice", args ?? new GetUpgradePriceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dcdb upgrade_price
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var addUpgradePrice = Tencentcloud.Dcdb.GetUpgradePrice.Invoke(new()
         ///     {
-        ///         var addUpgradePrice = Output.Create(Tencentcloud.Dcdb.GetUpgradePrice.InvokeAsync(new Tencentcloud.Dcdb.GetUpgradePriceArgs
+        ///         InstanceId = local.Dcdb_id,
+        ///         UpgradeType = "ADD",
+        ///         AddShardConfig = new Tencentcloud.Dcdb.Inputs.GetUpgradePriceAddShardConfigInputArgs
         ///         {
-        ///             InstanceId = local.Dcdb_id,
-        ///             UpgradeType = "ADD",
-        ///             AddShardConfig = new Tencentcloud.Dcdb.Inputs.GetUpgradePriceAddShardConfigArgs
-        ///             {
-        ///                 ShardCount = 2,
-        ///                 ShardMemory = 2,
-        ///                 ShardStorage = 100,
-        ///             },
-        ///             AmountUnit = "pent",
-        ///         }));
-        ///         var expandUpgradePrice = Output.Create(Tencentcloud.Dcdb.GetUpgradePrice.InvokeAsync(new Tencentcloud.Dcdb.GetUpgradePriceArgs
-        ///         {
-        ///             InstanceId = local.Dcdb_id,
-        ///             UpgradeType = "EXPAND",
-        ///             ExpandShardConfig = new Tencentcloud.Dcdb.Inputs.GetUpgradePriceExpandShardConfigArgs
-        ///             {
-        ///                 ShardInstanceIds = 
-        ///                 {
-        ///                     "shard-1b5r04az",
-        ///                 },
-        ///                 ShardMemory = 2,
-        ///                 ShardStorage = 40,
-        ///                 ShardNodeCount = 2,
-        ///             },
-        ///             AmountUnit = "pent",
-        ///         }));
-        ///         var splitUpgradePrice = Output.Create(Tencentcloud.Dcdb.GetUpgradePrice.InvokeAsync(new Tencentcloud.Dcdb.GetUpgradePriceArgs
-        ///         {
-        ///             InstanceId = local.Dcdb_id,
-        ///             UpgradeType = "SPLIT",
-        ///             SplitShardConfig = new Tencentcloud.Dcdb.Inputs.GetUpgradePriceSplitShardConfigArgs
-        ///             {
-        ///                 ShardInstanceIds = 
-        ///                 {
-        ///                     "shard-1b5r04az",
-        ///                 },
-        ///                 SplitRate = 50,
-        ///                 ShardMemory = 2,
-        ///                 ShardStorage = 100,
-        ///             },
-        ///             AmountUnit = "pent",
-        ///         }));
-        ///     }
+        ///             ShardCount = 2,
+        ///             ShardMemory = 2,
+        ///             ShardStorage = 100,
+        ///         },
+        ///         AmountUnit = "pent",
+        ///     });
         /// 
-        /// }
+        ///     var expandUpgradePrice = Tencentcloud.Dcdb.GetUpgradePrice.Invoke(new()
+        ///     {
+        ///         InstanceId = local.Dcdb_id,
+        ///         UpgradeType = "EXPAND",
+        ///         ExpandShardConfig = new Tencentcloud.Dcdb.Inputs.GetUpgradePriceExpandShardConfigInputArgs
+        ///         {
+        ///             ShardInstanceIds = new[]
+        ///             {
+        ///                 "shard-1b5r04az",
+        ///             },
+        ///             ShardMemory = 2,
+        ///             ShardStorage = 40,
+        ///             ShardNodeCount = 2,
+        ///         },
+        ///         AmountUnit = "pent",
+        ///     });
+        /// 
+        ///     var splitUpgradePrice = Tencentcloud.Dcdb.GetUpgradePrice.Invoke(new()
+        ///     {
+        ///         InstanceId = local.Dcdb_id,
+        ///         UpgradeType = "SPLIT",
+        ///         SplitShardConfig = new Tencentcloud.Dcdb.Inputs.GetUpgradePriceSplitShardConfigInputArgs
+        ///         {
+        ///             ShardInstanceIds = new[]
+        ///             {
+        ///                 "shard-1b5r04az",
+        ///             },
+        ///             SplitRate = 50,
+        ///             ShardMemory = 2,
+        ///             ShardStorage = 100,
+        ///         },
+        ///         AmountUnit = "pent",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetUpgradePriceResult> Invoke(GetUpgradePriceInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetUpgradePriceResult>("tencentcloud:Dcdb/getUpgradePrice:getUpgradePrice", args ?? new GetUpgradePriceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetUpgradePriceResult>("tencentcloud:Dcdb/getUpgradePrice:getUpgradePrice", args ?? new GetUpgradePriceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetUpgradePriceArgs : Pulumi.InvokeArgs
+    public sealed class GetUpgradePriceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Config for adding new shard.
@@ -199,9 +197,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetUpgradePriceArgs()
         {
         }
+        public static new GetUpgradePriceArgs Empty => new GetUpgradePriceArgs();
     }
 
-    public sealed class GetUpgradePriceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetUpgradePriceInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Config for adding new shard.
@@ -248,6 +247,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetUpgradePriceInvokeArgs()
         {
         }
+        public static new GetUpgradePriceInvokeArgs Empty => new GetUpgradePriceInvokeArgs();
     }
 
 

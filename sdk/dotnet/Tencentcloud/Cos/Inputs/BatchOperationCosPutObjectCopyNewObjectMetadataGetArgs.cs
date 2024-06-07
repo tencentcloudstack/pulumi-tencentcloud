@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BatchOperationCosPutObjectCopyNewObjectMetadataGetArgs : Pulumi.ResourceArgs
+    public sealed class BatchOperationCosPutObjectCopyNewObjectMetadataGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The caching instructions defined in RFC 2616 are saved as object metadata.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BatchOperationCosPutObjectCopyNewObjectMetadataGetArgs()
         {
         }
+        public static new BatchOperationCosPutObjectCopyNewObjectMetadataGetArgs Empty => new BatchOperationCosPutObjectCopyNewObjectMetadataGetArgs();
     }
 }

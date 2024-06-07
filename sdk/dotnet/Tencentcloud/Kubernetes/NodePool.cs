@@ -21,175 +21,188 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///     var clusterCidr = config.Get("clusterCidr") ?? "172.31.0.0/16";
+    ///     var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    ///         var clusterCidr = config.Get("clusterCidr") ?? "172.31.0.0/16";
-    ///         var vpc = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
-    ///         {
-    ///             IsDefault = true,
-    ///             AvailabilityZone = availabilityZone,
-    ///         }));
-    ///         var defaultInstanceType = config.Get("defaultInstanceType") ?? "S1.SMALL1";
-    ///         //this is the cluster with empty worker config
-    ///         var managedCluster = new Tencentcloud.Kubernetes.Cluster("managedCluster", new Tencentcloud.Kubernetes.ClusterArgs
-    ///         {
-    ///             VpcId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.VpcId),
-    ///             ClusterCidr = clusterCidr,
-    ///             ClusterMaxPodNum = 32,
-    ///             ClusterName = "tf-tke-unit-test",
-    ///             ClusterDesc = "test cluster desc",
-    ///             ClusterMaxServiceNum = 32,
-    ///             ClusterVersion = "1.18.4",
-    ///             ClusterDeployType = "MANAGED_CLUSTER",
-    ///         });
-    ///         //this is one example of managing node using node pool
-    ///         var mynodepool = new Tencentcloud.Kubernetes.NodePool("mynodepool", new Tencentcloud.Kubernetes.NodePoolArgs
-    ///         {
-    ///             ClusterId = managedCluster.Id,
-    ///             MaxSize = 6,
-    ///             MinSize = 1,
-    ///             VpcId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.VpcId),
-    ///             SubnetIds = 
-    ///             {
-    ///                 vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.SubnetId),
-    ///             },
-    ///             RetryPolicy = "INCREMENTAL_INTERVALS",
-    ///             DesiredCapacity = 4,
-    ///             EnableAutoScale = true,
-    ///             MultiZoneSubnetPolicy = "EQUALITY",
-    ///             AutoScalingConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigArgs
-    ///             {
-    ///                 InstanceType = defaultInstanceType,
-    ///                 SystemDiskType = "CLOUD_PREMIUM",
-    ///                 SystemDiskSize = 50,
-    ///                 OrderlySecurityGroupIds = 
-    ///                 {
-    ///                     "sg-24vswocp",
-    ///                 },
-    ///                 DataDisks = 
-    ///                 {
-    ///                     new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigDataDiskArgs
-    ///                     {
-    ///                         DiskType = "CLOUD_PREMIUM",
-    ///                         DiskSize = 50,
-    ///                     },
-    ///                 },
-    ///                 InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
-    ///                 InternetMaxBandwidthOut = 10,
-    ///                 PublicIpAssigned = true,
-    ///                 Password = "test123#",
-    ///                 EnhancedSecurityService = false,
-    ///                 EnhancedMonitorService = false,
-    ///                 HostName = "12.123.0.0",
-    ///                 HostNameStyle = "ORIGINAL",
-    ///             },
-    ///             Labels = 
-    ///             {
-    ///                 { "test1", "test1" },
-    ///                 { "test2", "test2" },
-    ///             },
-    ///             Taints = 
-    ///             {
-    ///                 new Tencentcloud.Kubernetes.Inputs.NodePoolTaintArgs
-    ///                 {
-    ///                     Key = "test_taint",
-    ///                     Value = "taint_value",
-    ///                     Effect = "PreferNoSchedule",
-    ///                 },
-    ///                 new Tencentcloud.Kubernetes.Inputs.NodePoolTaintArgs
-    ///                 {
-    ///                     Key = "test_taint2",
-    ///                     Value = "taint_value2",
-    ///                     Effect = "PreferNoSchedule",
-    ///                 },
-    ///             },
-    ///             NodeConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolNodeConfigArgs
-    ///             {
-    ///                 ExtraArgs = 
-    ///                 {
-    ///                     "root-dir=/var/lib/kubelet",
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///         IsDefault = true,
+    ///         AvailabilityZone = availabilityZone,
+    ///     });
     /// 
-    /// }
+    ///     var defaultInstanceType = config.Get("defaultInstanceType") ?? "S1.SMALL1";
+    ///     //this is the cluster with empty worker config
+    ///     var managedCluster = new Tencentcloud.Kubernetes.Cluster("managedCluster", new()
+    ///     {
+    ///         VpcId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId),
+    ///         ClusterCidr = clusterCidr,
+    ///         ClusterMaxPodNum = 32,
+    ///         ClusterName = "tf-tke-unit-test",
+    ///         ClusterDesc = "test cluster desc",
+    ///         ClusterMaxServiceNum = 32,
+    ///         ClusterVersion = "1.18.4",
+    ///         ClusterDeployType = "MANAGED_CLUSTER",
+    ///     });
+    /// 
+    ///     //this is one example of managing node using node pool
+    ///     var mynodepool = new Tencentcloud.Kubernetes.NodePool("mynodepool", new()
+    ///     {
+    ///         ClusterId = managedCluster.Id,
+    ///         MaxSize = 6,
+    ///         MinSize = 1,
+    ///         VpcId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId),
+    ///         SubnetIds = new[]
+    ///         {
+    ///             vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.SubnetId),
+    ///         },
+    ///         RetryPolicy = "INCREMENTAL_INTERVALS",
+    ///         DesiredCapacity = 4,
+    ///         EnableAutoScale = true,
+    ///         MultiZoneSubnetPolicy = "EQUALITY",
+    ///         AutoScalingConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigArgs
+    ///         {
+    ///             InstanceType = defaultInstanceType,
+    ///             SystemDiskType = "CLOUD_PREMIUM",
+    ///             SystemDiskSize = 50,
+    ///             OrderlySecurityGroupIds = new[]
+    ///             {
+    ///                 "sg-24vswocp",
+    ///             },
+    ///             DataDisks = new[]
+    ///             {
+    ///                 new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigDataDiskArgs
+    ///                 {
+    ///                     DiskType = "CLOUD_PREMIUM",
+    ///                     DiskSize = 50,
+    ///                 },
+    ///             },
+    ///             InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+    ///             InternetMaxBandwidthOut = 10,
+    ///             PublicIpAssigned = true,
+    ///             Password = "test123#",
+    ///             EnhancedSecurityService = false,
+    ///             EnhancedMonitorService = false,
+    ///             HostName = "12.123.0.0",
+    ///             HostNameStyle = "ORIGINAL",
+    ///         },
+    ///         Labels = 
+    ///         {
+    ///             { "test1", "test1" },
+    ///             { "test2", "test2" },
+    ///         },
+    ///         Taints = new[]
+    ///         {
+    ///             new Tencentcloud.Kubernetes.Inputs.NodePoolTaintArgs
+    ///             {
+    ///                 Key = "test_taint",
+    ///                 Value = "taint_value",
+    ///                 Effect = "PreferNoSchedule",
+    ///             },
+    ///             new Tencentcloud.Kubernetes.Inputs.NodePoolTaintArgs
+    ///             {
+    ///                 Key = "test_taint2",
+    ///                 Value = "taint_value2",
+    ///                 Effect = "PreferNoSchedule",
+    ///             },
+    ///         },
+    ///         NodeConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolNodeConfigArgs
+    ///         {
+    ///             ExtraArgs = new[]
+    ///             {
+    ///                 "root-dir=/var/lib/kubelet",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Using Spot CVM Instance
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mynodepool = new Tencentcloud.Kubernetes.NodePool("mynodepool", new()
     ///     {
-    ///         var mynodepool = new Tencentcloud.Kubernetes.NodePool("mynodepool", new Tencentcloud.Kubernetes.NodePoolArgs
+    ///         ClusterId = tencentcloud_kubernetes_cluster.Managed_cluster.Id,
+    ///         MaxSize = 6,
+    ///         MinSize = 1,
+    ///         VpcId = data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Vpc_id,
+    ///         SubnetIds = new[]
     ///         {
-    ///             ClusterId = tencentcloud_kubernetes_cluster.Managed_cluster.Id,
-    ///             MaxSize = 6,
-    ///             MinSize = 1,
-    ///             VpcId = data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Vpc_id,
-    ///             SubnetIds = 
+    ///             data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Subnet_id,
+    ///         },
+    ///         RetryPolicy = "INCREMENTAL_INTERVALS",
+    ///         DesiredCapacity = 4,
+    ///         EnableAutoScale = true,
+    ///         MultiZoneSubnetPolicy = "EQUALITY",
+    ///         AutoScalingConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigArgs
+    ///         {
+    ///             InstanceType = @var.Default_instance_type,
+    ///             SystemDiskType = "CLOUD_PREMIUM",
+    ///             SystemDiskSize = 50,
+    ///             OrderlySecurityGroupIds = new[]
     ///             {
-    ///                 data.Tencentcloud_vpc_subnets.Vpc.Instance_list[0].Subnet_id,
+    ///                 "sg-24vswocp",
+    ///                 "sg-3qntci2v",
+    ///                 "sg-7y1t2wax",
     ///             },
-    ///             RetryPolicy = "INCREMENTAL_INTERVALS",
-    ///             DesiredCapacity = 4,
-    ///             EnableAutoScale = true,
-    ///             MultiZoneSubnetPolicy = "EQUALITY",
-    ///             AutoScalingConfig = new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigArgs
+    ///             InstanceChargeType = "SPOTPAID",
+    ///             SpotInstanceType = "one-time",
+    ///             SpotMaxPrice = "1000",
+    ///             DataDisks = new[]
     ///             {
-    ///                 InstanceType = @var.Default_instance_type,
-    ///                 SystemDiskType = "CLOUD_PREMIUM",
-    ///                 SystemDiskSize = 50,
-    ///                 OrderlySecurityGroupIds = 
+    ///                 new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigDataDiskArgs
     ///                 {
-    ///                     "sg-24vswocp",
-    ///                     "sg-3qntci2v",
-    ///                     "sg-7y1t2wax",
+    ///                     DiskType = "CLOUD_PREMIUM",
+    ///                     DiskSize = 50,
     ///                 },
-    ///                 InstanceChargeType = "SPOTPAID",
-    ///                 SpotInstanceType = "one-time",
-    ///                 SpotMaxPrice = "1000",
-    ///                 DataDisks = 
-    ///                 {
-    ///                     new Tencentcloud.Kubernetes.Inputs.NodePoolAutoScalingConfigDataDiskArgs
-    ///                     {
-    ///                         DiskType = "CLOUD_PREMIUM",
-    ///                         DiskSize = 50,
-    ///                     },
-    ///                 },
-    ///                 InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
-    ///                 InternetMaxBandwidthOut = 10,
-    ///                 PublicIpAssigned = true,
-    ///                 Password = "test123#",
-    ///                 EnhancedSecurityService = false,
-    ///                 EnhancedMonitorService = false,
     ///             },
-    ///             Labels = 
-    ///             {
-    ///                 { "test1", "test1" },
-    ///                 { "test2", "test2" },
-    ///             },
-    ///         });
-    ///     }
+    ///             InternetChargeType = "TRAFFIC_POSTPAID_BY_HOUR",
+    ///             InternetMaxBandwidthOut = 10,
+    ///             PublicIpAssigned = true,
+    ///             Password = "test123#",
+    ///             EnhancedSecurityService = false,
+    ///             EnhancedMonitorService = false,
+    ///         },
+    ///         Labels = 
+    ///         {
+    ///             { "test1", "test1" },
+    ///             { "test2", "test2" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ## Import
+    /// 
+    /// tke node pool can be imported, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Kubernetes/nodePool:NodePool test cls-xxx#np-xxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/nodePool:NodePool")]
-    public partial class NodePool : Pulumi.CustomResource
+    public partial class NodePool : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Auto scaling config parameters.
@@ -428,7 +441,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         }
     }
 
-    public sealed class NodePoolArgs : Pulumi.ResourceArgs
+    public sealed class NodePoolArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Auto scaling config parameters.
@@ -619,9 +632,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public NodePoolArgs()
         {
         }
+        public static new NodePoolArgs Empty => new NodePoolArgs();
     }
 
-    public sealed class NodePoolState : Pulumi.ResourceArgs
+    public sealed class NodePoolState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Auto scaling config parameters.
@@ -848,5 +862,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public NodePoolState()
         {
         }
+        public static new NodePoolState Empty => new NodePoolState();
     }
 }

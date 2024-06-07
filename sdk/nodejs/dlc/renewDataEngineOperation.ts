@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const renewDataEngine = new tencentcloud.Dlc.RenewDataEngineOperation("renew_data_engine", {
+ * const renewDataEngine = new tencentcloud.dlc.RenewDataEngineOperation("renewDataEngine", {
  *     dataEngineName: "testEngine",
  *     payMode: 1,
  *     renewFlag: 1,
@@ -21,13 +22,14 @@ import * as utilities from "../utilities";
  *     timeUnit: "m",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dlc renew_data_engine can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dlc/renewDataEngineOperation:RenewDataEngineOperation renew_data_engine renew_data_engine_id
+ * $ pulumi import tencentcloud:Dlc/renewDataEngineOperation:RenewDataEngineOperation renew_data_engine renew_data_engine_id
  * ```
  */
 export class RenewDataEngineOperation extends pulumi.CustomResource {

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
 {
 
-    public sealed class GetResetInstanceBlueprintFilterInputArgs : Pulumi.ResourceArgs
+    public sealed class GetResetInstanceBlueprintFilterInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Field to be filtered.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
         public GetResetInstanceBlueprintFilterInputArgs()
         {
         }
+        public static new GetResetInstanceBlueprintFilterInputArgs Empty => new GetResetInstanceBlueprintFilterInputArgs();
     }
 }

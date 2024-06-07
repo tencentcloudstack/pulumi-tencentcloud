@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         /// <summary>
         /// Use this data source to query detailed information of eip network_account_type
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var networkAccountType = Output.Create(Tencentcloud.Eip.GetNetworkAccountType.InvokeAsync());
-        ///     }
+        ///     var networkAccountType = Tencentcloud.Eip.GetNetworkAccountType.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetNetworkAccountTypeResult> InvokeAsync(GetNetworkAccountTypeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetNetworkAccountTypeResult>("tencentcloud:Eip/getNetworkAccountType:getNetworkAccountType", args ?? new GetNetworkAccountTypeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetNetworkAccountTypeResult>("tencentcloud:Eip/getNetworkAccountType:getNetworkAccountType", args ?? new GetNetworkAccountTypeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of eip network_account_type
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var networkAccountType = Output.Create(Tencentcloud.Eip.GetNetworkAccountType.InvokeAsync());
-        ///     }
+        ///     var networkAccountType = Tencentcloud.Eip.GetNetworkAccountType.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetNetworkAccountTypeResult> Invoke(GetNetworkAccountTypeInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetNetworkAccountTypeResult>("tencentcloud:Eip/getNetworkAccountType:getNetworkAccountType", args ?? new GetNetworkAccountTypeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetNetworkAccountTypeResult>("tencentcloud:Eip/getNetworkAccountType:getNetworkAccountType", args ?? new GetNetworkAccountTypeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetNetworkAccountTypeArgs : Pulumi.InvokeArgs
+    public sealed class GetNetworkAccountTypeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public GetNetworkAccountTypeArgs()
         {
         }
+        public static new GetNetworkAccountTypeArgs Empty => new GetNetworkAccountTypeArgs();
     }
 
-    public sealed class GetNetworkAccountTypeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetNetworkAccountTypeInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public GetNetworkAccountTypeInvokeArgs()
         {
         }
+        public static new GetNetworkAccountTypeInvokeArgs Empty => new GetNetworkAccountTypeInvokeArgs();
     }
 
 

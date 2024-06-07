@@ -2,18 +2,21 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a alarm policy resource for monitor.
  *
  * ## Example Usage
+ *
  * ### cvmDevice alarm policy
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooAlarmNotice = new tencentcloud.monitor.AlarmNotice("fooAlarmNotice", {
  *     noticeType: "ALL",
@@ -92,11 +95,14 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### k8sCluster alarm policy
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const policy = new tencentcloud.monitor.AlarmPolicy("policy", {
  *     enable: 1,
@@ -166,13 +172,16 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### cvmDevice alarm policy binding cvm by tag
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const policy = new tencentcloud.Monitor.AlarmPolicy("policy", {
+ * const policy = new tencentcloud.monitor.AlarmPolicy("policy", {
  *     conditions: {
  *         isUnionRule: 0,
  *         rules: [
@@ -246,13 +255,14 @@ import * as utilities from "../utilities";
  *     projectId: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Alarm policy instance can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Monitor/alarmPolicy:AlarmPolicy policy policy-id
+ * $ pulumi import tencentcloud:Monitor/alarmPolicy:AlarmPolicy policy policy-id
  * ```
  */
 export class AlarmPolicy extends pulumi.CustomResource {

@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dnspod domainAlias
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.NewDomainAlias(ctx, "domainAlias", &Dnspod.DomainAliasArgs{
-// 			Domain:      pulumi.String("dnspod.cn"),
-// 			DomainAlias: pulumi.String("dnspod.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.NewDomainAlias(ctx, "domainAlias", &Dnspod.DomainAliasArgs{
+//				Domain:      pulumi.String("dnspod.cn"),
+//				DomainAlias: pulumi.String("dnspod.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dnspod domain_alias can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dnspod/domainAlias:DomainAlias domain_alias domain#domain_alias_id
+// $ pulumi import tencentcloud:Dnspod/domainAlias:DomainAlias domain_alias domain#domain_alias_id
 // ```
 type DomainAlias struct {
 	pulumi.CustomResourceState
@@ -68,7 +74,7 @@ func NewDomainAlias(ctx *pulumi.Context,
 	if args.DomainAlias == nil {
 		return nil, errors.New("invalid value for required argument 'DomainAlias'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DomainAlias
 	err := ctx.RegisterResource("tencentcloud:Dnspod/domainAlias:DomainAlias", name, args, &resource, opts...)
 	if err != nil {
@@ -153,7 +159,7 @@ func (i *DomainAlias) ToDomainAliasOutputWithContext(ctx context.Context) Domain
 // DomainAliasArrayInput is an input type that accepts DomainAliasArray and DomainAliasArrayOutput values.
 // You can construct a concrete instance of `DomainAliasArrayInput` via:
 //
-//          DomainAliasArray{ DomainAliasArgs{...} }
+//	DomainAliasArray{ DomainAliasArgs{...} }
 type DomainAliasArrayInput interface {
 	pulumi.Input
 
@@ -178,7 +184,7 @@ func (i DomainAliasArray) ToDomainAliasArrayOutputWithContext(ctx context.Contex
 // DomainAliasMapInput is an input type that accepts DomainAliasMap and DomainAliasMapOutput values.
 // You can construct a concrete instance of `DomainAliasMapInput` via:
 //
-//          DomainAliasMap{ "key": DomainAliasArgs{...} }
+//	DomainAliasMap{ "key": DomainAliasArgs{...} }
 type DomainAliasMapInput interface {
 	pulumi.Input
 

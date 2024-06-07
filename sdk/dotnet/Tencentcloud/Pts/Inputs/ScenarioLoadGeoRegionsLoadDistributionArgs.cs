@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class ScenarioLoadGeoRegionsLoadDistributionArgs : Pulumi.ResourceArgs
+    public sealed class ScenarioLoadGeoRegionsLoadDistributionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Percentage.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public ScenarioLoadGeoRegionsLoadDistributionArgs()
         {
         }
+        public static new ScenarioLoadGeoRegionsLoadDistributionArgs Empty => new ScenarioLoadGeoRegionsLoadDistributionArgs();
     }
 }

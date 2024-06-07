@@ -15,54 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "na-siliconvalley-1";
+    ///     var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "na-siliconvalley-1";
-    ///         var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var fooTable = new Tencentcloud.Route.Table("fooTable", new Tencentcloud.Route.TableArgs
-    ///         {
-    ///             VpcId = fooInstance.Id,
-    ///         });
-    ///         var fooSubnet_instanceInstance = new Tencentcloud.Subnet.Instance("fooSubnet/instanceInstance", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = fooInstance.Id,
-    ///             CidrBlock = "10.0.12.0/24",
-    ///             AvailabilityZone = availabilityZone,
-    ///             RouteTableId = fooTable.Id,
-    ///         });
-    ///         var instance = new Tencentcloud.Route.TableEntry("instance", new Tencentcloud.Route.TableEntryArgs
-    ///         {
-    ///             RouteTableId = fooTable.Id,
-    ///             DestinationCidrBlock = "10.4.4.0/24",
-    ///             NextType = "EIP",
-    ///             NextHub = "0",
-    ///             Description = "ci-test-route-table-entry",
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var fooTable = new Tencentcloud.Route.Table("fooTable", new()
+    ///     {
+    ///         VpcId = fooInstance.Id,
+    ///     });
+    /// 
+    ///     var fooSubnet_instanceInstance = new Tencentcloud.Subnet.Instance("fooSubnet/instanceInstance", new()
+    ///     {
+    ///         VpcId = fooInstance.Id,
+    ///         CidrBlock = "10.0.12.0/24",
+    ///         AvailabilityZone = availabilityZone,
+    ///         RouteTableId = fooTable.Id,
+    ///     });
+    /// 
+    ///     var instance = new Tencentcloud.Route.TableEntry("instance", new()
+    ///     {
+    ///         RouteTableId = fooTable.Id,
+    ///         DestinationCidrBlock = "10.4.4.0/24",
+    ///         NextType = "EIP",
+    ///         NextHub = "0",
+    ///         Description = "ci-test-route-table-entry",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Route table entry can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Route/tableEntry:TableEntry foo 83517.rtb-mlhpg09u
+    /// $ pulumi import tencentcloud:Route/tableEntry:TableEntry foo 83517.rtb-mlhpg09u
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Route/tableEntry:TableEntry")]
-    public partial class TableEntry : Pulumi.CustomResource
+    public partial class TableEntry : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Description of the routing table entry.
@@ -145,7 +149,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         }
     }
 
-    public sealed class TableEntryArgs : Pulumi.ResourceArgs
+    public sealed class TableEntryArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of the routing table entry.
@@ -186,9 +190,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         public TableEntryArgs()
         {
         }
+        public static new TableEntryArgs Empty => new TableEntryArgs();
     }
 
-    public sealed class TableEntryState : Pulumi.ResourceArgs
+    public sealed class TableEntryState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description of the routing table entry.
@@ -229,5 +234,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         public TableEntryState()
         {
         }
+        public static new TableEntryState Empty => new TableEntryState();
     }
 }

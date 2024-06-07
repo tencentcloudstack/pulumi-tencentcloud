@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// <summary>
         /// Use this data source to query detailed information of scf layer_versions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var layerVersions = Tencentcloud.Scf.GetLayerVersions.Invoke(new()
         ///     {
-        ///         var layerVersions = Output.Create(Tencentcloud.Scf.GetLayerVersions.InvokeAsync(new Tencentcloud.Scf.GetLayerVersionsArgs
-        ///         {
-        ///             LayerName = "tf-test",
-        ///         }));
-        ///     }
+        ///         LayerName = "tf-test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetLayerVersionsResult> InvokeAsync(GetLayerVersionsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetLayerVersionsResult>("tencentcloud:Scf/getLayerVersions:getLayerVersions", args ?? new GetLayerVersionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetLayerVersionsResult>("tencentcloud:Scf/getLayerVersions:getLayerVersions", args ?? new GetLayerVersionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of scf layer_versions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var layerVersions = Tencentcloud.Scf.GetLayerVersions.Invoke(new()
         ///     {
-        ///         var layerVersions = Output.Create(Tencentcloud.Scf.GetLayerVersions.InvokeAsync(new Tencentcloud.Scf.GetLayerVersionsArgs
-        ///         {
-        ///             LayerName = "tf-test",
-        ///         }));
-        ///     }
+        ///         LayerName = "tf-test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetLayerVersionsResult> Invoke(GetLayerVersionsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetLayerVersionsResult>("tencentcloud:Scf/getLayerVersions:getLayerVersions", args ?? new GetLayerVersionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetLayerVersionsResult>("tencentcloud:Scf/getLayerVersions:getLayerVersions", args ?? new GetLayerVersionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetLayerVersionsArgs : Pulumi.InvokeArgs
+    public sealed class GetLayerVersionsArgs : global::Pulumi.InvokeArgs
     {
         [Input("compatibleRuntimes")]
         private List<string>? _compatibleRuntimes;
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetLayerVersionsArgs()
         {
         }
+        public static new GetLayerVersionsArgs Empty => new GetLayerVersionsArgs();
     }
 
-    public sealed class GetLayerVersionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetLayerVersionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("compatibleRuntimes")]
         private InputList<string>? _compatibleRuntimes;
@@ -132,6 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetLayerVersionsInvokeArgs()
         {
         }
+        public static new GetLayerVersionsInvokeArgs Empty => new GetLayerVersionsInvokeArgs();
     }
 
 

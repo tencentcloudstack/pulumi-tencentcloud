@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const streamLiveInput = new tencentcloud.Mdl.StreamLiveInput("stream_live_input", {
+ * const streamLiveInput = new tencentcloud.mdl.StreamLiveInput("streamLiveInput", {
  *     securityGroupIds: ["6405DF9D000007DFB4EC"],
  *     type: "RTP_PUSH",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mdl stream_live_input can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mdl/streamLiveInput:StreamLiveInput stream_live_input id
+ * $ pulumi import tencentcloud:Mdl/streamLiveInput:StreamLiveInput stream_live_input id
  * ```
  */
 export class StreamLiveInput extends pulumi.CustomResource {

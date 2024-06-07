@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class EventConnectorConnectionDescriptionApiGwParamsGetArgs : Pulumi.ResourceArgs
+    public sealed class EventConnectorConnectionDescriptionApiGwParamsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// POST.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
         public EventConnectorConnectionDescriptionApiGwParamsGetArgs()
         {
         }
+        public static new EventConnectorConnectionDescriptionApiGwParamsGetArgs Empty => new EventConnectorConnectionDescriptionApiGwParamsGetArgs();
     }
 }

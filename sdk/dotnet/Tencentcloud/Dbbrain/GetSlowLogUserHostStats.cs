@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain slow_log_user_host_stats
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var test = Tencentcloud.Dbbrain.GetSlowLogUserHostStats.Invoke(new()
         ///     {
-        ///         var test = Output.Create(Tencentcloud.Dbbrain.GetSlowLogUserHostStats.InvokeAsync(new Tencentcloud.Dbbrain.GetSlowLogUserHostStatsArgs
-        ///         {
-        ///             EndTime = "%s",
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             StartTime = "%s",
-        ///         }));
-        ///     }
+        ///         EndTime = "%s",
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         StartTime = "%s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSlowLogUserHostStatsResult> InvokeAsync(GetSlowLogUserHostStatsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogUserHostStatsResult>("tencentcloud:Dbbrain/getSlowLogUserHostStats:getSlowLogUserHostStats", args ?? new GetSlowLogUserHostStatsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogUserHostStatsResult>("tencentcloud:Dbbrain/getSlowLogUserHostStats:getSlowLogUserHostStats", args ?? new GetSlowLogUserHostStatsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain slow_log_user_host_stats
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var test = Tencentcloud.Dbbrain.GetSlowLogUserHostStats.Invoke(new()
         ///     {
-        ///         var test = Output.Create(Tencentcloud.Dbbrain.GetSlowLogUserHostStats.InvokeAsync(new Tencentcloud.Dbbrain.GetSlowLogUserHostStatsArgs
-        ///         {
-        ///             EndTime = "%s",
-        ///             InstanceId = "%s",
-        ///             Product = "mysql",
-        ///             StartTime = "%s",
-        ///         }));
-        ///     }
+        ///         EndTime = "%s",
+        ///         InstanceId = "%s",
+        ///         Product = "mysql",
+        ///         StartTime = "%s",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSlowLogUserHostStatsResult> Invoke(GetSlowLogUserHostStatsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSlowLogUserHostStatsResult>("tencentcloud:Dbbrain/getSlowLogUserHostStats:getSlowLogUserHostStats", args ?? new GetSlowLogUserHostStatsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogUserHostStatsResult>("tencentcloud:Dbbrain/getSlowLogUserHostStats:getSlowLogUserHostStats", args ?? new GetSlowLogUserHostStatsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSlowLogUserHostStatsArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowLogUserHostStatsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// EndTime time of the query range, time format such as: 2019-09-10 12:13:14.
@@ -119,9 +113,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSlowLogUserHostStatsArgs()
         {
         }
+        public static new GetSlowLogUserHostStatsArgs Empty => new GetSlowLogUserHostStatsArgs();
     }
 
-    public sealed class GetSlowLogUserHostStatsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSlowLogUserHostStatsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// EndTime time of the query range, time format such as: 2019-09-10 12:13:14.
@@ -162,6 +157,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSlowLogUserHostStatsInvokeArgs()
         {
         }
+        public static new GetSlowLogUserHostStatsInvokeArgs Empty => new GetSlowLogUserHostStatsInvokeArgs();
     }
 
 

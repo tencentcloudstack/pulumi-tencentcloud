@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const platformEventPatterns = pulumi.output(tencentcloud.Eb.getPlatformEventPatterns({
+ * const platformEventPatterns = tencentcloud.Eb.getPlatformEventPatterns({
  *     productType: "",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPlatformEventPatterns(args: GetPlatformEventPatternsArgs, opts?: pulumi.InvokeOptions): Promise<GetPlatformEventPatternsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Eb/getPlatformEventPatterns:getPlatformEventPatterns", {
         "productType": args.productType,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetPlatformEventPatternsResult {
     readonly productType: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of eb platformEventPatterns
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const platformEventPatterns = tencentcloud.Eb.getPlatformEventPatterns({
+ *     productType: "",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPlatformEventPatternsOutput(args: GetPlatformEventPatternsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPlatformEventPatternsResult> {
-    return pulumi.output(args).apply(a => getPlatformEventPatterns(a, opts))
+    return pulumi.output(args).apply((a: any) => getPlatformEventPatterns(a, opts))
 }
 
 /**

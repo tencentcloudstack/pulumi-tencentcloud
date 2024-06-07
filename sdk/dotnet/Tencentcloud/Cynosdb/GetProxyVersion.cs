@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// <summary>
         /// Use this data source to query detailed information of cynosdb proxy_version
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var proxyVersion = Tencentcloud.Cynosdb.GetProxyVersion.Invoke(new()
         ///     {
-        ///         var proxyVersion = Output.Create(Tencentcloud.Cynosdb.GetProxyVersion.InvokeAsync(new Tencentcloud.Cynosdb.GetProxyVersionArgs
-        ///         {
-        ///             ClusterId = "cynosdbmysql-bws8h88b",
-        ///             ProxyGroupId = "cynosdbmysql-proxy-l6zf9t30",
-        ///         }));
-        ///     }
+        ///         ClusterId = "cynosdbmysql-bws8h88b",
+        ///         ProxyGroupId = "cynosdbmysql-proxy-l6zf9t30",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProxyVersionResult> InvokeAsync(GetProxyVersionArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProxyVersionResult>("tencentcloud:Cynosdb/getProxyVersion:getProxyVersion", args ?? new GetProxyVersionArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxyVersionResult>("tencentcloud:Cynosdb/getProxyVersion:getProxyVersion", args ?? new GetProxyVersionArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cynosdb proxy_version
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var proxyVersion = Tencentcloud.Cynosdb.GetProxyVersion.Invoke(new()
         ///     {
-        ///         var proxyVersion = Output.Create(Tencentcloud.Cynosdb.GetProxyVersion.InvokeAsync(new Tencentcloud.Cynosdb.GetProxyVersionArgs
-        ///         {
-        ///             ClusterId = "cynosdbmysql-bws8h88b",
-        ///             ProxyGroupId = "cynosdbmysql-proxy-l6zf9t30",
-        ///         }));
-        ///     }
+        ///         ClusterId = "cynosdbmysql-bws8h88b",
+        ///         ProxyGroupId = "cynosdbmysql-proxy-l6zf9t30",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProxyVersionResult> Invoke(GetProxyVersionInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProxyVersionResult>("tencentcloud:Cynosdb/getProxyVersion:getProxyVersion", args ?? new GetProxyVersionInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProxyVersionResult>("tencentcloud:Cynosdb/getProxyVersion:getProxyVersion", args ?? new GetProxyVersionInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProxyVersionArgs : Pulumi.InvokeArgs
+    public sealed class GetProxyVersionArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetProxyVersionArgs()
         {
         }
+        public static new GetProxyVersionArgs Empty => new GetProxyVersionArgs();
     }
 
-    public sealed class GetProxyVersionInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProxyVersionInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetProxyVersionInvokeArgs()
         {
         }
+        public static new GetProxyVersionInvokeArgs Empty => new GetProxyVersionInvokeArgs();
     }
 
 

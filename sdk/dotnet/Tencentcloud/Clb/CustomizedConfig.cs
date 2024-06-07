@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Clb.CustomizedConfig("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Clb.CustomizedConfig("foo", new Tencentcloud.Clb.CustomizedConfigArgs
-    ///         {
-    ///             ConfigContent = @"client_max_body_size 224M;
+    ///         ConfigContent = @"client_max_body_size 224M;
     /// client_body_timeout 60s;
     /// ",
-    ///             ConfigName = "helloWorld",
-    ///             LoadBalancerIds = 
-    ///             {
-    ///                 tencentcloud_clb_instance.Internal_clb.Id,
-    ///                 tencentcloud_clb_instance.Internal_clb2.Id,
-    ///             },
-    ///         });
-    ///     }
+    ///         ConfigName = "helloWorld",
+    ///         LoadBalancerIds = new[]
+    ///         {
+    ///             tencentcloud_clb_instance.Internal_clb.Id,
+    ///             tencentcloud_clb_instance.Internal_clb2.Id,
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CLB customized config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clb/customizedConfig:CustomizedConfig foo pz-diowqstq
+    /// $ pulumi import tencentcloud:Clb/customizedConfig:CustomizedConfig foo pz-diowqstq
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/customizedConfig:CustomizedConfig")]
-    public partial class CustomizedConfig : Pulumi.CustomResource
+    public partial class CustomizedConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Content of Customized Config.
@@ -126,7 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class CustomizedConfigArgs : Pulumi.ResourceArgs
+    public sealed class CustomizedConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Content of Customized Config.
@@ -155,9 +156,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public CustomizedConfigArgs()
         {
         }
+        public static new CustomizedConfigArgs Empty => new CustomizedConfigArgs();
     }
 
-    public sealed class CustomizedConfigState : Pulumi.ResourceArgs
+    public sealed class CustomizedConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Content of Customized Config.
@@ -198,5 +200,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public CustomizedConfigState()
         {
         }
+        public static new CustomizedConfigState Empty => new CustomizedConfigState();
     }
 }

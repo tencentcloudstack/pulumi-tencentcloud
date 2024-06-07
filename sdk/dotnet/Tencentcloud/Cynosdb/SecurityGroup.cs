@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var test = new Tencentcloud.Cynosdb.SecurityGroup("test", new()
     ///     {
-    ///         var test = new Tencentcloud.Cynosdb.SecurityGroup("test", new Tencentcloud.Cynosdb.SecurityGroupArgs
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         InstanceGroupType = "RO",
+    ///         SecurityGroupIds = new[]
     ///         {
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             InstanceGroupType = "RO",
-    ///             SecurityGroupIds = 
-    ///             {
-    ///                 "sg-baxfiao5",
-    ///             },
-    ///         });
-    ///     }
+    ///             "sg-baxfiao5",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cynosdb security_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cynosdb/securityGroup:SecurityGroup security_group ${cluster_id}#${instance_group_type}
+    /// $ pulumi import tencentcloud:Cynosdb/securityGroup:SecurityGroup security_group ${cluster_id}#${instance_group_type}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/securityGroup:SecurityGroup")]
-    public partial class SecurityGroup : Pulumi.CustomResource
+    public partial class SecurityGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster id.
@@ -55,10 +56,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<string> ClusterId { get; private set; } = null!;
 
         /// <summary>
-        /// Instance group type. Available values: 
-        /// -`HA` - HA group;
-        /// -`RO` - Read-only group;
-        /// -`ALL` - HA and RO group.
+        /// Instance group type. Available values:
         /// </summary>
         [Output("instanceGroupType")]
         public Output<string> InstanceGroupType { get; private set; } = null!;
@@ -114,7 +112,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class SecurityGroupArgs : Pulumi.ResourceArgs
+    public sealed class SecurityGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster id.
@@ -123,10 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<string> ClusterId { get; set; } = null!;
 
         /// <summary>
-        /// Instance group type. Available values: 
-        /// -`HA` - HA group;
-        /// -`RO` - Read-only group;
-        /// -`ALL` - HA and RO group.
+        /// Instance group type. Available values:
         /// </summary>
         [Input("instanceGroupType", required: true)]
         public Input<string> InstanceGroupType { get; set; } = null!;
@@ -146,9 +141,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public SecurityGroupArgs()
         {
         }
+        public static new SecurityGroupArgs Empty => new SecurityGroupArgs();
     }
 
-    public sealed class SecurityGroupState : Pulumi.ResourceArgs
+    public sealed class SecurityGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster id.
@@ -157,10 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<string>? ClusterId { get; set; }
 
         /// <summary>
-        /// Instance group type. Available values: 
-        /// -`HA` - HA group;
-        /// -`RO` - Read-only group;
-        /// -`ALL` - HA and RO group.
+        /// Instance group type. Available values:
         /// </summary>
         [Input("instanceGroupType")]
         public Input<string>? InstanceGroupType { get; set; }
@@ -180,5 +173,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public SecurityGroupState()
         {
         }
+        public static new SecurityGroupState Empty => new SecurityGroupState();
     }
 }

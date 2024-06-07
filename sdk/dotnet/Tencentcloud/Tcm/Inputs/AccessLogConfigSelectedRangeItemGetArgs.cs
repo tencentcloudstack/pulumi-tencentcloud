@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
 {
 
-    public sealed class AccessLogConfigSelectedRangeItemGetArgs : Pulumi.ResourceArgs
+    public sealed class AccessLogConfigSelectedRangeItemGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("gateways")]
         private InputList<string>? _gateways;
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm.Inputs
         public AccessLogConfigSelectedRangeItemGetArgs()
         {
         }
+        public static new AccessLogConfigSelectedRangeItemGetArgs Empty => new AccessLogConfigSelectedRangeItemGetArgs();
     }
 }

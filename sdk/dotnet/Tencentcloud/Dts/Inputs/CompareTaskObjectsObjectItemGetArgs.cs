@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class CompareTaskObjectsObjectItemGetArgs : Pulumi.ResourceArgs
+    public sealed class CompareTaskObjectsObjectItemGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// database mode.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public CompareTaskObjectsObjectItemGetArgs()
         {
         }
+        public static new CompareTaskObjectsObjectItemGetArgs Empty => new CompareTaskObjectsObjectItemGetArgs();
     }
 }

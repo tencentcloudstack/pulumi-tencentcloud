@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -19,13 +21,11 @@ import * as utilities from "../utilities";
  *     replicationRegionId: local.dst_region_id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getReplicationInstanceCreateTasks(args: GetReplicationInstanceCreateTasksArgs, opts?: pulumi.InvokeOptions): Promise<GetReplicationInstanceCreateTasksResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tcr/getReplicationInstanceCreateTasks:getReplicationInstanceCreateTasks", {
         "replicationRegionId": args.replicationRegionId,
         "replicationRegistryId": args.replicationRegistryId,
@@ -71,9 +71,25 @@ export interface GetReplicationInstanceCreateTasksResult {
      */
     readonly taskDetails: outputs.Tcr.GetReplicationInstanceCreateTasksTaskDetail[];
 }
-
+/**
+ * Use this data source to query detailed information of tcr replicationInstanceCreateTasks
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const createTasks = tencentcloud.Tcr.getReplicationInstanceCreateTasks({
+ *     replicationRegistryId: local.dst_registry_id,
+ *     replicationRegionId: local.dst_region_id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getReplicationInstanceCreateTasksOutput(args: GetReplicationInstanceCreateTasksOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetReplicationInstanceCreateTasksResult> {
-    return pulumi.output(args).apply(a => getReplicationInstanceCreateTasks(a, opts))
+    return pulumi.output(args).apply((a: any) => getReplicationInstanceCreateTasks(a, opts))
 }
 
 /**

@@ -7,22 +7,24 @@ import * as utilities from "../utilities";
 /**
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const project = new tencentcloud.Project.Instance("project", {
+ * const project = new tencentcloud.project.Instance("project", {
  *     info: "for terraform test",
  *     projectName: "terraform-test",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tag project can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Project/instance:Instance project project_id
+ * $ pulumi import tencentcloud:Project/instance:Instance project project_id
  * ```
  */
 export class Instance extends pulumi.CustomResource {

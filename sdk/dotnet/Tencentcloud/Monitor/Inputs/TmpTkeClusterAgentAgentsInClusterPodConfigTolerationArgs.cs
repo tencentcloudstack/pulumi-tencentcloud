@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs : Pulumi.ResourceArgs
+    public sealed class TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// blemish effect to match.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs()
         {
         }
+        public static new TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs Empty => new TmpTkeClusterAgentAgentsInClusterPodConfigTolerationArgs();
     }
 }

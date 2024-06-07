@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zone = new tencentcloud.Teo.Zone("zone", {
+ * const zone = new tencentcloud.teo.Zone("zone", {
  *     aliasZoneName: "teo-test",
  *     area: "overseas",
  *     paused: false,
@@ -26,13 +28,14 @@ import * as utilities from "../utilities";
  *     zoneName: "tf-teo.com",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * teo zone can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Teo/zone:Zone zone zone_id
+ * $ pulumi import tencentcloud:Teo/zone:Zone zone zone_id
  * ```
  */
 export class Zone extends pulumi.CustomResource {
@@ -68,7 +71,10 @@ export class Zone extends pulumi.CustomResource {
      */
     public readonly aliasZoneName!: pulumi.Output<string | undefined>;
     /**
-     * When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
+     * When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:
+     * - global: Global availability zone.
+     * - mainland: Chinese mainland availability zone.
+     * - overseas: Global availability zone (excluding Chinese mainland).
      */
     public readonly area!: pulumi.Output<string>;
     /**
@@ -96,7 +102,7 @@ export class Zone extends pulumi.CustomResource {
      */
     public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
     /**
-     * Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
+     * Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
      */
     public readonly type!: pulumi.Output<string>;
     /**
@@ -166,7 +172,10 @@ export interface ZoneState {
      */
     aliasZoneName?: pulumi.Input<string>;
     /**
-     * When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
+     * When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:
+     * - global: Global availability zone.
+     * - mainland: Chinese mainland availability zone.
+     * - overseas: Global availability zone (excluding Chinese mainland).
      */
     area?: pulumi.Input<string>;
     /**
@@ -194,7 +203,7 @@ export interface ZoneState {
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
-     * Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
+     * Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
      */
     type?: pulumi.Input<string>;
     /**
@@ -212,7 +221,10 @@ export interface ZoneArgs {
      */
     aliasZoneName?: pulumi.Input<string>;
     /**
-     * When the `type` value is `partial` or `full`, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is `overseas` if not filled in. When the `type` value is `noDomainAccess`, please leave this value empty. Valid values: `global`: Global availability zone; `mainland`: Chinese mainland availability zone; `overseas`: Global availability zone (excluding Chinese mainland).
+     * When the Type value is partial/full, the acceleration region of the L7 domain name. The following are the values of this parameter, and the default value is overseas if not filled in. When the Type value is noDomainAccess, please leave this value empty:
+     * - global: Global availability zone.
+     * - mainland: Chinese mainland availability zone.
+     * - overseas: Global availability zone (excluding Chinese mainland).
      */
     area: pulumi.Input<string>;
     /**
@@ -228,7 +240,7 @@ export interface ZoneArgs {
      */
     tags?: pulumi.Input<{[key: string]: any}>;
     /**
-     * Site access type. The value of this parameter is as follows, and the default is `partial` if not filled in. Valid values: `partial`: CNAME access; `full`: NS access; `noDomainAccess`: No domain access.
+     * Site access type. The value of this parameter is as follows, and the default is partial if not filled in:partial: CNAME access; full: NS access; noDomainAccess: No domain access.
      */
     type: pulumi.Input<string>;
     /**

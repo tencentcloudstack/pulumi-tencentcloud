@@ -8,10 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 func GetWafInfos(ctx *pulumi.Context, args *GetWafInfosArgs, opts ...pulumi.InvokeOption) (*GetWafInfosResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetWafInfosResult
 	err := ctx.Invoke("tencentcloud:Waf/getWafInfos:getWafInfos", args, &rv, opts...)
 	if err != nil {

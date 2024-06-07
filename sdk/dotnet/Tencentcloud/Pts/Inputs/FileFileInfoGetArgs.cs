@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class FileFileInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class FileFileInfoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// File id.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public FileFileInfoGetArgs()
         {
         }
+        public static new FileFileInfoGetArgs Empty => new FileFileInfoGetArgs();
     }
 }

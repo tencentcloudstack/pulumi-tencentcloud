@@ -13,87 +13,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// <summary>
     /// Provides a resource to create a redis ssl
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = Pulumi.Tencentcloud;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var zone = Output.Create(Tencentcloud.Redis.GetZoneConfig.InvokeAsync(new Tencentcloud.Redis.GetZoneConfigArgs
-    ///         {
-    ///             TypeId = 7,
-    ///             Region = "ap-guangzhou",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[2]?.Zone),
-    ///             CidrBlock = "10.0.1.0/24",
-    ///         });
-    ///         var fooGroup = new Tencentcloud.Security.Group("fooGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///         });
-    ///         var fooGroupLiteRule = new Tencentcloud.Security.GroupLiteRule("fooGroupLiteRule", new Tencentcloud.Security.GroupLiteRuleArgs
-    ///         {
-    ///             SecurityGroupId = fooGroup.Id,
-    ///             Ingresses = 
-    ///             {
-    ///                 "ACCEPT#192.168.1.0/24#80#TCP",
-    ///                 "DROP#8.8.8.8#80,90#UDP",
-    ///                 "DROP#0.0.0.0/0#80-90#TCP",
-    ///             },
-    ///             Egresses = 
-    ///             {
-    ///                 "ACCEPT#192.168.0.0/16#ALL#TCP",
-    ///                 "ACCEPT#10.0.0.0/8#ALL#ICMP",
-    ///                 "DROP#0.0.0.0/0#ALL#ALL",
-    ///             },
-    ///         });
-    ///         var fooInstance = new Tencentcloud.Redis.Instance("fooInstance", new Tencentcloud.Redis.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zone.Apply(zone =&gt; zone.Lists?[2]?.Zone),
-    ///             TypeId = zone.Apply(zone =&gt; zone.Lists?[2]?.TypeId),
-    ///             Password = "test12345789",
-    ///             MemSize = 8192,
-    ///             RedisShardNum = zone.Apply(zone =&gt; zone.Lists?[2]?.RedisShardNums?[0]),
-    ///             RedisReplicasNum = zone.Apply(zone =&gt; zone.Lists?[2]?.RedisReplicasNums?[0]),
-    ///             Port = 6379,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 fooGroup.Id,
-    ///             },
-    ///         });
-    ///         var ssl = new Tencentcloud.Redis.Ssl("ssl", new Tencentcloud.Redis.SslArgs
-    ///         {
-    ///             InstanceId = fooInstance.Id,
-    ///             SslConfig = "disabled",
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// redis ssl can be imported using the instanceId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Redis/ssl:Ssl ssl crs-c1nl9rpv
+    /// $ pulumi import tencentcloud:Redis/ssl:Ssl ssl crs-c1nl9rpv
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/ssl:Ssl")]
-    public partial class Ssl : Pulumi.CustomResource
+    public partial class Ssl : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The ID of instance.
@@ -152,7 +81,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class SslArgs : Pulumi.ResourceArgs
+    public sealed class SslArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -169,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public SslArgs()
         {
         }
+        public static new SslArgs Empty => new SslArgs();
     }
 
-    public sealed class SslState : Pulumi.ResourceArgs
+    public sealed class SslState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -188,5 +118,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public SslState()
         {
         }
+        public static new SslState Empty => new SslState();
     }
 }

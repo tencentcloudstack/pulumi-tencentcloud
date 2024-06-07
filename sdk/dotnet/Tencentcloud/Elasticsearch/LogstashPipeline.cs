@@ -15,23 +15,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var logstashPipeline = new Tencentcloud.Elasticsearch.LogstashPipeline("logstashPipeline", new()
     ///     {
-    ///         var logstashPipeline = new Tencentcloud.Elasticsearch.LogstashPipeline("logstashPipeline", new Tencentcloud.Elasticsearch.LogstashPipelineArgs
+    ///         InstanceId = "ls-xxxxxx",
+    ///         OpType = 2,
+    ///         Pipeline = new Tencentcloud.Elasticsearch.Inputs.LogstashPipelinePipelineArgs
     ///         {
-    ///             InstanceId = "ls-xxxxxx",
-    ///             OpType = 2,
-    ///             Pipeline = new Tencentcloud.Elasticsearch.Inputs.LogstashPipelinePipelineArgs
-    ///             {
-    ///                 BatchDelay = 50,
-    ///                 BatchSize = 125,
-    ///                 Config = @"input{
+    ///             BatchDelay = 50,
+    ///             BatchSize = 125,
+    ///             Config = @"input{
     /// 
     /// }
     /// filter{
@@ -42,29 +43,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// }
     /// 
     /// ",
-    ///                 PipelineDesc = "",
-    ///                 PipelineId = "logstash-pipeline-test",
-    ///                 QueueCheckPointWrites = 0,
-    ///                 QueueMaxBytes = "",
-    ///                 QueueType = "memory",
-    ///                 Workers = 1,
-    ///             },
-    ///         });
-    ///     }
+    ///             PipelineDesc = "",
+    ///             PipelineId = "logstash-pipeline-test",
+    ///             QueueCheckPointWrites = 0,
+    ///             QueueMaxBytes = "",
+    ///             QueueType = "memory",
+    ///             Workers = 1,
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// elasticsearch logstash_pipeline can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Elasticsearch/logstashPipeline:LogstashPipeline logstash_pipeline ${instance_id}#${pipeline_id}
+    /// $ pulumi import tencentcloud:Elasticsearch/logstashPipeline:LogstashPipeline logstash_pipeline ${instance_id}#${pipeline_id}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/logstashPipeline:LogstashPipeline")]
-    public partial class LogstashPipeline : Pulumi.CustomResource
+    public partial class LogstashPipeline : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Logstash instance id.
@@ -129,7 +130,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         }
     }
 
-    public sealed class LogstashPipelineArgs : Pulumi.ResourceArgs
+    public sealed class LogstashPipelineArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Logstash instance id.
@@ -152,9 +153,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public LogstashPipelineArgs()
         {
         }
+        public static new LogstashPipelineArgs Empty => new LogstashPipelineArgs();
     }
 
-    public sealed class LogstashPipelineState : Pulumi.ResourceArgs
+    public sealed class LogstashPipelineState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Logstash instance id.
@@ -177,5 +179,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public LogstashPipelineState()
         {
         }
+        public static new LogstashPipelineState Empty => new LogstashPipelineState();
     }
 }

@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mediaTtsTemplate = new Tencentcloud.Ci.MediaTtsTemplate("mediaTtsTemplate", new()
     ///     {
-    ///         var mediaTtsTemplate = new Tencentcloud.Ci.MediaTtsTemplate("mediaTtsTemplate", new Tencentcloud.Ci.MediaTtsTemplateArgs
-    ///         {
-    ///             Bucket = "terraform-ci-xxxxxx",
-    ///             Codec = "pcm",
-    ///             Mode = "Asyc",
-    ///             Speed = "100",
-    ///             VoiceType = "ruxue",
-    ///             Volume = "0",
-    ///         });
-    ///     }
+    ///         Bucket = "terraform-ci-xxxxxx",
+    ///         Codec = "pcm",
+    ///         Mode = "Asyc",
+    ///         Speed = "100",
+    ///         VoiceType = "ruxue",
+    ///         Volume = "0",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ci media_tts_template can be imported using the bucket#templateId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/mediaTtsTemplate:MediaTtsTemplate media_tts_template terraform-ci-xxxxxx#t1ed421df8bd2140b6b73474f70f99b0f8
+    /// $ pulumi import tencentcloud:Ci/mediaTtsTemplate:MediaTtsTemplate media_tts_template terraform-ci-xxxxxx#t1ed421df8bd2140b6b73474f70f99b0f8
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/mediaTtsTemplate:MediaTtsTemplate")]
-    public partial class MediaTtsTemplate : Pulumi.CustomResource
+    public partial class MediaTtsTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// bucket name.
@@ -135,7 +136,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class MediaTtsTemplateArgs : Pulumi.ResourceArgs
+    public sealed class MediaTtsTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -182,9 +183,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaTtsTemplateArgs()
         {
         }
+        public static new MediaTtsTemplateArgs Empty => new MediaTtsTemplateArgs();
     }
 
-    public sealed class MediaTtsTemplateState : Pulumi.ResourceArgs
+    public sealed class MediaTtsTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -231,5 +233,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaTtsTemplateState()
         {
         }
+        public static new MediaTtsTemplateState Empty => new MediaTtsTemplateState();
     }
 }

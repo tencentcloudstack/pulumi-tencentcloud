@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// <summary>
         /// Use this data source to query detailed information of cam secret_last_used_time
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var secretLastUsedTime = Tencentcloud.Cam.GetSecretLastUsedTime.Invoke(new()
         ///     {
-        ///         var secretLastUsedTime = Output.Create(Tencentcloud.Cam.GetSecretLastUsedTime.InvokeAsync(new Tencentcloud.Cam.GetSecretLastUsedTimeArgs
+        ///         SecretIdLists = new[]
         ///         {
-        ///             SecretIdLists = 
-        ///             {
-        ///                 "xxxx",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "xxxx",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSecretLastUsedTimeResult> InvokeAsync(GetSecretLastUsedTimeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSecretLastUsedTimeResult>("tencentcloud:Cam/getSecretLastUsedTime:getSecretLastUsedTime", args ?? new GetSecretLastUsedTimeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecretLastUsedTimeResult>("tencentcloud:Cam/getSecretLastUsedTime:getSecretLastUsedTime", args ?? new GetSecretLastUsedTimeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cam secret_last_used_time
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var secretLastUsedTime = Tencentcloud.Cam.GetSecretLastUsedTime.Invoke(new()
         ///     {
-        ///         var secretLastUsedTime = Output.Create(Tencentcloud.Cam.GetSecretLastUsedTime.InvokeAsync(new Tencentcloud.Cam.GetSecretLastUsedTimeArgs
+        ///         SecretIdLists = new[]
         ///         {
-        ///             SecretIdLists = 
-        ///             {
-        ///                 "xxxx",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "xxxx",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSecretLastUsedTimeResult> Invoke(GetSecretLastUsedTimeInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSecretLastUsedTimeResult>("tencentcloud:Cam/getSecretLastUsedTime:getSecretLastUsedTime", args ?? new GetSecretLastUsedTimeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSecretLastUsedTimeResult>("tencentcloud:Cam/getSecretLastUsedTime:getSecretLastUsedTime", args ?? new GetSecretLastUsedTimeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSecretLastUsedTimeArgs : Pulumi.InvokeArgs
+    public sealed class GetSecretLastUsedTimeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetSecretLastUsedTimeArgs()
         {
         }
+        public static new GetSecretLastUsedTimeArgs Empty => new GetSecretLastUsedTimeArgs();
     }
 
-    public sealed class GetSecretLastUsedTimeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSecretLastUsedTimeInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -120,12 +115,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public InputList<string> SecretIdLists
         {
             get => _secretIdLists ?? (_secretIdLists = new InputList<string>());
-            set => _secretIdLists = value;
+            set
+            {
+                var emptySecret = Output.CreateSecret(ImmutableArray.Create<string>());
+                _secretIdLists = Output.All(value, emptySecret).Apply(v => v[0]);
+            }
         }
 
         public GetSecretLastUsedTimeInvokeArgs()
         {
         }
+        public static new GetSecretLastUsedTimeInvokeArgs Empty => new GetSecretLastUsedTimeInvokeArgs();
     }
 
 

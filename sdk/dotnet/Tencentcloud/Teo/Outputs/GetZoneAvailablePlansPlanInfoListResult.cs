@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly int Flux;
         /// <summary>
-        /// Billing cycle. Valid values:- `y`: Billed by the year.- `m`: Billed by the month.- `h`: Billed by the hour.- `M`: Billed by the minute.- `s`: Billed by the second.
+        /// Billing cycle. Valid values:
         /// </summary>
         public readonly string Frequency;
         /// <summary>
@@ -37,7 +37,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// <summary>
         /// Price of the plan. Unit: cent.
         /// </summary>
-        public readonly int Price;
+        public readonly double Price;
         /// <summary>
         /// The number of requests included in the zone plan.
         /// </summary>
@@ -59,7 +59,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
 
             string planType,
 
-            int price,
+            double price,
 
             int request,
 

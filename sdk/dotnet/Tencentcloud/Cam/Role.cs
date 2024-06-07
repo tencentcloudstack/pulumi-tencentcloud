@@ -14,78 +14,85 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// Provides a resource to create a CAM role.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create normally
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var info = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
-    ///         var myUin = info.Apply(info =&gt; info.OwnerUin);
-    ///         this.Uin = myUin;
-    ///         var foo = new Tencentcloud.Cam.Role("foo", new Tencentcloud.Cam.RoleArgs
-    ///         {
-    ///             Document = myUin.Apply(myUin =&gt; JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
-    ///             {
-    ///                 { "statement", new[]
-    ///                     {
-    ///                         new Dictionary&lt;string, object?&gt;
-    ///                         {
-    ///                             { "action", "name/sts:AssumeRole" },
-    ///                             { "effect", "allow" },
-    ///                             { "principal", new Dictionary&lt;string, object?&gt;
-    ///                             {
-    ///                                 { "qcs", new[]
-    ///                                     {
-    ///                                         $"qcs::cam::uin/{myUin}:root",
-    ///                                     }
-    ///                                  },
-    ///                             } },
-    ///                         },
-    ///                     }
-    ///                  },
-    ///                 { "version", "2.0" },
-    ///             })),
-    ///             ConsoleLogin = true,
-    ///             Description = "test",
-    ///             SessionDuration = 7200,
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "tf-cam-role" },
-    ///             },
-    ///         });
-    ///     }
+    ///     var info = Tencentcloud.User.GetInfo.Invoke();
     /// 
-    ///     [Output("uin")]
-    ///     public Output&lt;string&gt; Uin { get; set; }
-    /// }
+    ///     var myUin = info.Apply(getInfoResult =&gt; getInfoResult.OwnerUin);
+    /// 
+    ///     var foo = new Tencentcloud.Cam.Role("foo", new()
+    ///     {
+    ///         Document = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///         {
+    ///             ["statement"] = new[]
+    ///             {
+    ///                 new Dictionary&lt;string, object?&gt;
+    ///                 {
+    ///                     ["action"] = "name/sts:AssumeRole",
+    ///                     ["effect"] = "allow",
+    ///                     ["principal"] = new Dictionary&lt;string, object?&gt;
+    ///                     {
+    ///                         ["qcs"] = new[]
+    ///                         {
+    ///                             myUin.Apply(myUin =&gt; $"qcs::cam::uin/{myUin}:root"),
+    ///                         },
+    ///                     },
+    ///                 },
+    ///             },
+    ///             ["version"] = "2.0",
+    ///         }),
+    ///         ConsoleLogin = true,
+    ///         Description = "test",
+    ///         SessionDuration = 7200,
+    ///         Tags = 
+    ///         {
+    ///             { "test", "tf-cam-role" },
+    ///         },
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["uin"] = myUin,
+    ///     };
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create with SAML provider
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var saml_provider = config.Get("saml-provider") ?? "example";
+    ///     var info = Tencentcloud.User.GetInfo.Invoke();
+    /// 
+    ///     var uin = info.Apply(getInfoResult =&gt; getInfoResult.Uin);
+    /// 
+    ///     var samlProvider = saml_provider;
+    /// 
+    ///     var boo = new Tencentcloud.Cam.Role("boo", new()
     ///     {
-    ///         var config = new Config();
-    ///         var saml-provider = config.Get("saml-provider") ?? "example";
-    ///         var info = Output.Create(Tencentcloud.User.GetInfo.InvokeAsync());
-    ///         var uin = info.Apply(info =&gt; info.Uin);
-    ///         var samlProvider = saml_provider;
-    ///         var boo = new Tencentcloud.Cam.Role("boo", new Tencentcloud.Cam.RoleArgs
-    ///         {
-    ///             Document = uin.Apply(uin =&gt; @$"{{
+    ///         Document = uin.Apply(uin =&gt; @$"{{
     ///   ""version"": ""2.0"",
     ///   ""statement"": [
     ///     {{
@@ -102,24 +109,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     ///   ]
     /// }}
     /// "),
-    ///             Description = "tf_test",
-    ///             ConsoleLogin = true,
-    ///         });
-    ///     }
+    ///         Description = "tf_test",
+    ///         ConsoleLogin = true,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CAM role can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/role:Role foo 4611686018427733635
+    /// $ pulumi import tencentcloud:Cam/role:Role foo 4611686018427733635
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/role:Role")]
-    public partial class Role : Pulumi.CustomResource
+    public partial class Role : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Indicates whether the CAM role can login or not.
@@ -140,10 +147,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public Output<string?> Description { get; private set; } = null!;
 
         /// <summary>
-        /// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604).
-        /// There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string`
-        /// and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be
-        /// replaced with the uin it stands for.
+        /// Document of the CAM role. The syntax refers to CAM POLICY Name of CAM role.
         /// </summary>
         [Output("document")]
         public Output<string> Document { get; private set; } = null!;
@@ -158,7 +162,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// The maximum validity period of the temporary key for creating a role.
         /// </summary>
         [Output("sessionDuration")]
-        public Output<int?> SessionDuration { get; private set; } = null!;
+        public Output<int> SessionDuration { get; private set; } = null!;
 
         /// <summary>
         /// A list of tags used to associate different resources.
@@ -217,7 +221,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class RoleArgs : Pulumi.ResourceArgs
+    public sealed class RoleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicates whether the CAM role can login or not.
@@ -232,10 +236,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604).
-        /// There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string`
-        /// and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be
-        /// replaced with the uin it stands for.
+        /// Document of the CAM role. The syntax refers to CAM POLICY Name of CAM role.
         /// </summary>
         [Input("document", required: true)]
         public Input<string> Document { get; set; } = null!;
@@ -267,9 +268,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public RoleArgs()
         {
         }
+        public static new RoleArgs Empty => new RoleArgs();
     }
 
-    public sealed class RoleState : Pulumi.ResourceArgs
+    public sealed class RoleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicates whether the CAM role can login or not.
@@ -290,10 +292,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public Input<string>? Description { get; set; }
 
         /// <summary>
-        /// Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604).
-        /// There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string`
-        /// and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be
-        /// replaced with the uin it stands for.
+        /// Document of the CAM role. The syntax refers to CAM POLICY Name of CAM role.
         /// </summary>
         [Input("document")]
         public Input<string>? Document { get; set; }
@@ -331,5 +330,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public RoleState()
         {
         }
+        public static new RoleState Empty => new RoleState();
     }
 }

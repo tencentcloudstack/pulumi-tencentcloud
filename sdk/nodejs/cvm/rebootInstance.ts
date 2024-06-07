@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const rebootInstance = new tencentcloud.Cvm.RebootInstance("reboot_instance", {
+ * const rebootInstance = new tencentcloud.cvm.RebootInstance("rebootInstance", {
  *     instanceId: "ins-f9jr4bd2",
  *     stopType: "SOFT_FIRST",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RebootInstance extends pulumi.CustomResource {
     /**
@@ -50,7 +52,7 @@ export class RebootInstance extends pulumi.CustomResource {
     /**
      * It has been deprecated from version 1.81.21. Please use `stopType` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
      *
-     * @deprecated It has been deprecated from version 1.81.21. Please use `stop_type` instead.
+     * @deprecated It has been deprecated from version 1.81.21. Please use `stopType` instead.
      */
     public readonly forceReboot!: pulumi.Output<boolean | undefined>;
     /**
@@ -99,7 +101,7 @@ export interface RebootInstanceState {
     /**
      * It has been deprecated from version 1.81.21. Please use `stopType` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
      *
-     * @deprecated It has been deprecated from version 1.81.21. Please use `stop_type` instead.
+     * @deprecated It has been deprecated from version 1.81.21. Please use `stopType` instead.
      */
     forceReboot?: pulumi.Input<boolean>;
     /**
@@ -119,7 +121,7 @@ export interface RebootInstanceArgs {
     /**
      * It has been deprecated from version 1.81.21. Please use `stopType` instead. This parameter has been disused. We recommend using StopType instead. Note that ForceReboot and StopType parameters cannot be specified at the same time. Whether to forcibly restart an instance after a normal restart fails. Valid values are `TRUE` and `FALSE`. Default value: FALSE.
      *
-     * @deprecated It has been deprecated from version 1.81.21. Please use `stop_type` instead.
+     * @deprecated It has been deprecated from version 1.81.21. Please use `stopType` instead.
      */
     forceReboot?: pulumi.Input<boolean>;
     /**

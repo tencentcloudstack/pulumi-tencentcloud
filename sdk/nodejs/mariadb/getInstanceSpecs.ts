@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instanceSpecs = pulumi.output(tencentcloud.Mariadb.getInstanceSpecs());
+ * const instanceSpecs = tencentcloud.Mariadb.getInstanceSpecs({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceSpecs(args?: GetInstanceSpecsArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceSpecsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mariadb/getInstanceSpecs:getInstanceSpecs", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetInstanceSpecsResult {
      */
     readonly specs: outputs.Mariadb.GetInstanceSpecsSpec[];
 }
-
+/**
+ * Use this data source to query detailed information of mariadb instanceSpecs
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instanceSpecs = tencentcloud.Mariadb.getInstanceSpecs({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceSpecsOutput(args?: GetInstanceSpecsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceSpecsResult> {
-    return pulumi.output(args).apply(a => getInstanceSpecs(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceSpecs(a, opts))
 }
 
 /**

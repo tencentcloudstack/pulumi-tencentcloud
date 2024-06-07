@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class EventTransformTransformationEtlFilterGetArgs : Pulumi.ResourceArgs
+    public sealed class EventTransformTransformationEtlFilterGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Grammatical Rules are consistent.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
         public EventTransformTransformationEtlFilterGetArgs()
         {
         }
+        public static new EventTransformTransformationEtlFilterGetArgs Empty => new EventTransformTransformationEtlFilterGetArgs();
     }
 }

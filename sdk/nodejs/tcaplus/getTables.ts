@@ -2,48 +2,16 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query TcaplusDB tables.
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const nullTables = pulumi.output(tencentcloud.Tcaplus.getTables({
- *     clusterId: "19162256624",
- * }));
- * const tablegroup = pulumi.output(tencentcloud.Tcaplus.getTables({
- *     clusterId: "19162256624",
- *     tablegroupId: "19162256624:3",
- * }));
- * const name = pulumi.output(tencentcloud.Tcaplus.getTables({
- *     clusterId: "19162256624",
- *     tableName: "guagua",
- *     tablegroupId: "19162256624:3",
- * }));
- * const id = pulumi.output(tencentcloud.Tcaplus.getTables({
- *     clusterId: "19162256624",
- *     tableId: "tcaplus-faa65eb7",
- * }));
- * const all = pulumi.output(tencentcloud.Tcaplus.getTables({
- *     clusterId: "19162256624",
- *     tableId: "tcaplus-faa65eb7",
- *     tableName: "guagua",
- *     tablegroupId: "19162256624:3",
- * }));
- * ```
  */
 export function getTables(args: GetTablesArgs, opts?: pulumi.InvokeOptions): Promise<GetTablesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tcaplus/getTables:getTables", {
         "clusterId": args.clusterId,
         "resultOutputFile": args.resultOutputFile,
@@ -106,9 +74,11 @@ export interface GetTablesResult {
      */
     readonly tablegroupId?: string;
 }
-
+/**
+ * Use this data source to query TcaplusDB tables.
+ */
 export function getTablesOutput(args: GetTablesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTablesResult> {
-    return pulumi.output(args).apply(a => getTables(a, opts))
+    return pulumi.output(args).apply((a: any) => getTables(a, opts))
 }
 
 /**

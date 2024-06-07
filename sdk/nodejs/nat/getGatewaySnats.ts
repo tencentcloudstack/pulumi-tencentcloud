@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -22,13 +24,11 @@ import * as utilities from "../utilities";
  *     resultOutputFile: "./snat.txt",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getGatewaySnats(args: GetGatewaySnatsArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewaySnatsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Nat/getGatewaySnats:getGatewaySnats", {
         "description": args.description,
         "instanceId": args.instanceId,
@@ -88,9 +88,28 @@ export interface GetGatewaySnatsResult {
     readonly snatLists: outputs.Nat.GetGatewaySnatsSnatList[];
     readonly subnetId?: string;
 }
-
+/**
+ * Use this data source to query detailed information of VPN gateways.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const snat = tencentcloud.Nat.getGatewaySnats({
+ *     natGatewayId: tencentcloud_nat_gateway.my_nat.id,
+ *     subnetId: tencentcloud_nat_gateway_snat.my_subnet.id,
+ *     publicIpAddrs: ["50.29.23.234"],
+ *     description: "snat demo",
+ *     resultOutputFile: "./snat.txt",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getGatewaySnatsOutput(args: GetGatewaySnatsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGatewaySnatsResult> {
-    return pulumi.output(args).apply(a => getGatewaySnats(a, opts))
+    return pulumi.output(args).apply((a: any) => getGatewaySnats(a, opts))
 }
 
 /**

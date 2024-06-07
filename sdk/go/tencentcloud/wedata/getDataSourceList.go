@@ -8,70 +8,81 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of wedata dataSourceList
 //
 // ## Example Usage
+//
 // ### Query All
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Wedata.GetDataSourceList(ctx, nil, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Wedata.GetDataSourceList(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Query By filter
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Wedata"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Wedata.GetDataSourceList(ctx, &wedata.GetDataSourceListArgs{
-// 			Filters: []wedata.GetDataSourceListFilter{
-// 				wedata.GetDataSourceListFilter{
-// 					Name: pulumi.StringRef("Name"),
-// 					Values: []string{
-// 						"tf_example",
-// 					},
-// 				},
-// 			},
-// 			OrderFields: []wedata.GetDataSourceListOrderField{
-// 				wedata.GetDataSourceListOrderField{
-// 					Direction: "DESC",
-// 					Name:      "create_time",
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Wedata.GetDataSourceList(ctx, &wedata.GetDataSourceListArgs{
+//				Filters: []wedata.GetDataSourceListFilter{
+//					{
+//						Name: pulumi.StringRef("Name"),
+//						Values: []string{
+//							"tf_example",
+//						},
+//					},
+//				},
+//				OrderFields: []wedata.GetDataSourceListOrderField{
+//					{
+//						Direction: "DESC",
+//						Name:      "create_time",
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetDataSourceList(ctx *pulumi.Context, args *GetDataSourceListArgs, opts ...pulumi.InvokeOption) (*GetDataSourceListResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDataSourceListResult
 	err := ctx.Invoke("tencentcloud:Wedata/getDataSourceList:getDataSourceList", args, &rv, opts...)
 	if err != nil {

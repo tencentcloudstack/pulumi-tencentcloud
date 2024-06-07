@@ -15,118 +15,108 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query security policy rule.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
         ///     {
-        ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-        ///         {
-        ///             Bandwidth = 10,
-        ///             Concurrent = 2,
-        ///             AccessRegion = "SouthChina",
-        ///             RealserverRegion = "NorthChina",
-        ///         });
-        ///         var fooSecurityPolicy = new Tencentcloud.Gaap.SecurityPolicy("fooSecurityPolicy", new Tencentcloud.Gaap.SecurityPolicyArgs
-        ///         {
-        ///             ProxyId = fooProxy.Id,
-        ///             Action = "ACCEPT",
-        ///         });
-        ///         var fooSecurityRule = new Tencentcloud.Gaap.SecurityRule("fooSecurityRule", new Tencentcloud.Gaap.SecurityRuleArgs
-        ///         {
-        ///             PolicyId = fooSecurityPolicy.Id,
-        ///             CidrIp = "1.1.1.1",
-        ///             Action = "ACCEPT",
-        ///             Protocol = "TCP",
-        ///             Port = "80",
-        ///         });
-        ///         var protocol = Output.Tuple(fooSecurityPolicy.Id, fooSecurityRule.Protocol).Apply(values =&gt;
-        ///         {
-        ///             var id = values.Item1;
-        ///             var protocol = values.Item2;
-        ///             return Tencentcloud.Gaap.GetSecurityRules.Invoke(new Tencentcloud.Gaap.GetSecurityRulesInvokeArgs
-        ///             {
-        ///                 PolicyId = id,
-        ///                 Protocol = protocol,
-        ///             });
-        ///         });
-        ///     }
+        ///         Bandwidth = 10,
+        ///         Concurrent = 2,
+        ///         AccessRegion = "SouthChina",
+        ///         RealserverRegion = "NorthChina",
+        ///     });
         /// 
-        /// }
+        ///     var fooSecurityPolicy = new Tencentcloud.Gaap.SecurityPolicy("fooSecurityPolicy", new()
+        ///     {
+        ///         ProxyId = fooProxy.Id,
+        ///         Action = "ACCEPT",
+        ///     });
+        /// 
+        ///     var fooSecurityRule = new Tencentcloud.Gaap.SecurityRule("fooSecurityRule", new()
+        ///     {
+        ///         PolicyId = fooSecurityPolicy.Id,
+        ///         CidrIp = "1.1.1.1",
+        ///         Action = "ACCEPT",
+        ///         Protocol = "TCP",
+        ///         Port = "80",
+        ///     });
+        /// 
+        ///     var protocol = Tencentcloud.Gaap.GetSecurityRules.Invoke(new()
+        ///     {
+        ///         PolicyId = fooSecurityPolicy.Id,
+        ///         Protocol = fooSecurityRule.Protocol,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSecurityRulesResult> InvokeAsync(GetSecurityRulesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSecurityRulesResult>("tencentcloud:Gaap/getSecurityRules:getSecurityRules", args ?? new GetSecurityRulesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecurityRulesResult>("tencentcloud:Gaap/getSecurityRules:getSecurityRules", args ?? new GetSecurityRulesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query security policy rule.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
         ///     {
-        ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-        ///         {
-        ///             Bandwidth = 10,
-        ///             Concurrent = 2,
-        ///             AccessRegion = "SouthChina",
-        ///             RealserverRegion = "NorthChina",
-        ///         });
-        ///         var fooSecurityPolicy = new Tencentcloud.Gaap.SecurityPolicy("fooSecurityPolicy", new Tencentcloud.Gaap.SecurityPolicyArgs
-        ///         {
-        ///             ProxyId = fooProxy.Id,
-        ///             Action = "ACCEPT",
-        ///         });
-        ///         var fooSecurityRule = new Tencentcloud.Gaap.SecurityRule("fooSecurityRule", new Tencentcloud.Gaap.SecurityRuleArgs
-        ///         {
-        ///             PolicyId = fooSecurityPolicy.Id,
-        ///             CidrIp = "1.1.1.1",
-        ///             Action = "ACCEPT",
-        ///             Protocol = "TCP",
-        ///             Port = "80",
-        ///         });
-        ///         var protocol = Output.Tuple(fooSecurityPolicy.Id, fooSecurityRule.Protocol).Apply(values =&gt;
-        ///         {
-        ///             var id = values.Item1;
-        ///             var protocol = values.Item2;
-        ///             return Tencentcloud.Gaap.GetSecurityRules.Invoke(new Tencentcloud.Gaap.GetSecurityRulesInvokeArgs
-        ///             {
-        ///                 PolicyId = id,
-        ///                 Protocol = protocol,
-        ///             });
-        ///         });
-        ///     }
+        ///         Bandwidth = 10,
+        ///         Concurrent = 2,
+        ///         AccessRegion = "SouthChina",
+        ///         RealserverRegion = "NorthChina",
+        ///     });
         /// 
-        /// }
+        ///     var fooSecurityPolicy = new Tencentcloud.Gaap.SecurityPolicy("fooSecurityPolicy", new()
+        ///     {
+        ///         ProxyId = fooProxy.Id,
+        ///         Action = "ACCEPT",
+        ///     });
+        /// 
+        ///     var fooSecurityRule = new Tencentcloud.Gaap.SecurityRule("fooSecurityRule", new()
+        ///     {
+        ///         PolicyId = fooSecurityPolicy.Id,
+        ///         CidrIp = "1.1.1.1",
+        ///         Action = "ACCEPT",
+        ///         Protocol = "TCP",
+        ///         Port = "80",
+        ///     });
+        /// 
+        ///     var protocol = Tencentcloud.Gaap.GetSecurityRules.Invoke(new()
+        ///     {
+        ///         PolicyId = fooSecurityPolicy.Id,
+        ///         Protocol = fooSecurityRule.Protocol,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSecurityRulesResult> Invoke(GetSecurityRulesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSecurityRulesResult>("tencentcloud:Gaap/getSecurityRules:getSecurityRules", args ?? new GetSecurityRulesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSecurityRulesResult>("tencentcloud:Gaap/getSecurityRules:getSecurityRules", args ?? new GetSecurityRulesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSecurityRulesArgs : Pulumi.InvokeArgs
+    public sealed class GetSecurityRulesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Policy of the rule to be queried.
@@ -179,9 +169,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetSecurityRulesArgs()
         {
         }
+        public static new GetSecurityRulesArgs Empty => new GetSecurityRulesArgs();
     }
 
-    public sealed class GetSecurityRulesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSecurityRulesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Policy of the rule to be queried.
@@ -234,6 +225,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetSecurityRulesInvokeArgs()
         {
         }
+        public static new GetSecurityRulesInvokeArgs Empty => new GetSecurityRulesInvokeArgs();
     }
 
 

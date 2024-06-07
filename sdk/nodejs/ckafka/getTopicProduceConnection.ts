@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const topicProduceConnection = pulumi.output(tencentcloud.Ckafka.getTopicProduceConnection({
+ * const topicProduceConnection = tencentcloud.Ckafka.getTopicProduceConnection({
  *     instanceId: "ckafka-xxxxxx",
  *     topicName: "topic-xxxxxx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTopicProduceConnection(args: GetTopicProduceConnectionArgs, opts?: pulumi.InvokeOptions): Promise<GetTopicProduceConnectionResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ckafka/getTopicProduceConnection:getTopicProduceConnection", {
         "instanceId": args.instanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -67,9 +67,25 @@ export interface GetTopicProduceConnectionResult {
     readonly results: outputs.Ckafka.GetTopicProduceConnectionResult[];
     readonly topicName: string;
 }
-
+/**
+ * Use this data source to query detailed information of ckafka topicProduceConnection
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const topicProduceConnection = tencentcloud.Ckafka.getTopicProduceConnection({
+ *     instanceId: "ckafka-xxxxxx",
+ *     topicName: "topic-xxxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTopicProduceConnectionOutput(args: GetTopicProduceConnectionOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTopicProduceConnectionResult> {
-    return pulumi.output(args).apply(a => getTopicProduceConnection(a, opts))
+    return pulumi.output(args).apply((a: any) => getTopicProduceConnection(a, opts))
 }
 
 /**

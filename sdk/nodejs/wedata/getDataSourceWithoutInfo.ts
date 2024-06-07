@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Wedata.getDataSourceWithoutInfo({
+ * const example = tencentcloud.Wedata.getDataSourceWithoutInfo({
  *     filters: [{
  *         name: "ownerProjectId",
  *         values: ["1612982498218618880"],
@@ -23,16 +25,14 @@ import * as utilities from "../utilities";
  *         direction: "DESC",
  *         name: "create_time",
  *     }],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDataSourceWithoutInfo(args?: GetDataSourceWithoutInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetDataSourceWithoutInfoResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Wedata/getDataSourceWithoutInfo:getDataSourceWithoutInfo", {
         "filters": args.filters,
         "orderFields": args.orderFields,
@@ -74,9 +74,31 @@ export interface GetDataSourceWithoutInfoResult {
     readonly orderFields?: outputs.Wedata.GetDataSourceWithoutInfoOrderField[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of wedata dataSourceWithoutInfo
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Wedata.getDataSourceWithoutInfo({
+ *     filters: [{
+ *         name: "ownerProjectId",
+ *         values: ["1612982498218618880"],
+ *     }],
+ *     orderFields: [{
+ *         direction: "DESC",
+ *         name: "create_time",
+ *     }],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDataSourceWithoutInfoOutput(args?: GetDataSourceWithoutInfoOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDataSourceWithoutInfoResult> {
-    return pulumi.output(args).apply(a => getDataSourceWithoutInfo(a, opts))
+    return pulumi.output(args).apply((a: any) => getDataSourceWithoutInfo(a, opts))
 }
 
 /**

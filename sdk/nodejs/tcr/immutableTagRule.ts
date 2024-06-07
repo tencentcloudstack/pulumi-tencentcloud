@@ -2,18 +2,21 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a tcr immutable tag rule.
  *
  * ## Example Usage
+ *
  * ### Create a immutable tag rule with specified tags and exclude specified repositories
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
  *     instanceType: "premium",
@@ -44,11 +47,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### With specified repositories and exclude specified version tag
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.tcr.ImmutableTagRule("example", {
  *     registryId: tencentcloud_tcr_instance.example.id,
@@ -65,11 +71,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Disabled the specified rule
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleRuleA = new tencentcloud.tcr.ImmutableTagRule("exampleRuleA", {
  *     registryId: tencentcloud_tcr_instance.example.id,
@@ -100,13 +109,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tcr immutable_tag_rule can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcr/immutableTagRule:ImmutableTagRule immutable_tag_rule immutable_tag_rule_id
+ * $ pulumi import tencentcloud:Tcr/immutableTagRule:ImmutableTagRule immutable_tag_rule immutable_tag_rule_id
  * ```
  */
 export class ImmutableTagRule extends pulumi.CustomResource {

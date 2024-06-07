@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class ApiConstantParameterArgs : Pulumi.ResourceArgs
+    public sealed class ApiConstantParameterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Default value for constant parameters. This parameter is only used when ServiceType is HTTP.Note: This field may return null, indicating that a valid value cannot be obtained.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public ApiConstantParameterArgs()
         {
         }
+        public static new ApiConstantParameterArgs Empty => new ApiConstantParameterArgs();
     }
 }

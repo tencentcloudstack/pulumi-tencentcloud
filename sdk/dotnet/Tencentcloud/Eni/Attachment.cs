@@ -18,11 +18,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
     /// ENI attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Eni/attachment:Attachment tencentcloud_eni_attachment.foo eni-gtlvkjvz+ins-0h3a5new
+    /// $ pulumi import tencentcloud:Eni/attachment:Attachment tencentcloud_eni_attachment.foo eni-gtlvkjvz+ins-0h3a5new
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eni/attachment:Attachment")]
-    public partial class Attachment : Pulumi.CustomResource
+    public partial class Attachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the ENI.
@@ -81,7 +81,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
         }
     }
 
-    public sealed class AttachmentArgs : Pulumi.ResourceArgs
+    public sealed class AttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the ENI.
@@ -98,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
         public AttachmentArgs()
         {
         }
+        public static new AttachmentArgs Empty => new AttachmentArgs();
     }
 
-    public sealed class AttachmentState : Pulumi.ResourceArgs
+    public sealed class AttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the ENI.
@@ -117,5 +118,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eni
         public AttachmentState()
         {
         }
+        public static new AttachmentState Empty => new AttachmentState();
     }
 }

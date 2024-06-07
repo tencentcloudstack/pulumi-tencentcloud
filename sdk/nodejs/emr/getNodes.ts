@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -12,22 +13,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const myEmrNodes = pulumi.output(tencentcloud.Emr.getNodes({
+ * const myEmrNodes = tencentcloud.Emr.getNodes({
  *     instanceId: "emr-rnzqrleq",
  *     nodeFlag: "master",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getNodes(args: GetNodesArgs, opts?: pulumi.InvokeOptions): Promise<GetNodesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Emr/getNodes:getNodes", {
         "hardwareResourceType": args.hardwareResourceType,
         "instanceId": args.instanceId,
@@ -65,6 +65,8 @@ export interface GetNodesArgs {
      * - db: Indicates that the cdb information for the normal state is obtained.
      * - recyle: Indicates that the node information in the Recycle Bin isolation, including the cdb information, is obtained.
      * - renew: Indicates that all node information to be renewed, including cddb information, is obtained, and the auto-renewal node will not be returned.
+     *
+     * Note: Only the above values are now supported, entering other values will cause an error.
      */
     nodeFlag: string;
     /**
@@ -99,9 +101,27 @@ export interface GetNodesResult {
     readonly offset?: number;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Provides an available EMR for the user.
+ *
+ * The EMR data source obtain the hardware node information by using the emr cluster ID.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const myEmrNodes = tencentcloud.Emr.getNodes({
+ *     instanceId: "emr-rnzqrleq",
+ *     nodeFlag: "master",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getNodesOutput(args: GetNodesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetNodesResult> {
-    return pulumi.output(args).apply(a => getNodes(a, opts))
+    return pulumi.output(args).apply((a: any) => getNodes(a, opts))
 }
 
 /**
@@ -131,6 +151,8 @@ export interface GetNodesOutputArgs {
      * - db: Indicates that the cdb information for the normal state is obtained.
      * - recyle: Indicates that the node information in the Recycle Bin isolation, including the cdb information, is obtained.
      * - renew: Indicates that all node information to be renewed, including cddb information, is obtained, and the auto-renewal node will not be returned.
+     *
+     * Note: Only the above values are now supported, entering other values will cause an error.
      */
     nodeFlag: pulumi.Input<string>;
     /**

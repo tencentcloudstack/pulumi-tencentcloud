@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var routeTableAssociation = new Tencentcloud.Route.TableAssociation("routeTableAssociation", new()
     ///     {
-    ///         var routeTableAssociation = new Tencentcloud.Route.TableAssociation("routeTableAssociation", new Tencentcloud.Route.TableAssociationArgs
-    ///         {
-    ///             RouteTableId = "rtb-5toos5sy",
-    ///             SubnetId = "subnet-2y2omd4k",
-    ///         });
-    ///     }
+    ///         RouteTableId = "rtb-5toos5sy",
+    ///         SubnetId = "subnet-2y2omd4k",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// vpc route_table can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Route/tableAssociation:TableAssociation route_table_association subnet_id
+    /// $ pulumi import tencentcloud:Route/tableAssociation:TableAssociation route_table_association subnet_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Route/tableAssociation:TableAssociation")]
-    public partial class TableAssociation : Pulumi.CustomResource
+    public partial class TableAssociation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The route table instance ID, such as `rtb-azd4dt1c`.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         }
     }
 
-    public sealed class TableAssociationArgs : Pulumi.ResourceArgs
+    public sealed class TableAssociationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The route table instance ID, such as `rtb-azd4dt1c`.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         public TableAssociationArgs()
         {
         }
+        public static new TableAssociationArgs Empty => new TableAssociationArgs();
     }
 
-    public sealed class TableAssociationState : Pulumi.ResourceArgs
+    public sealed class TableAssociationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The route table instance ID, such as `rtb-azd4dt1c`.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         public TableAssociationState()
         {
         }
+        public static new TableAssociationState Empty => new TableAssociationState();
     }
 }

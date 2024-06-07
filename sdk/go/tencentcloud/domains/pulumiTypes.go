@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type GetInstanceList struct {
 	// Whether the domain auto renew, 0 - manual renew, 1 - auto renew.
@@ -34,7 +37,7 @@ type GetInstanceList struct {
 // GetInstanceListInput is an input type that accepts GetInstanceListArgs and GetInstanceListOutput values.
 // You can construct a concrete instance of `GetInstanceListInput` via:
 //
-//          GetInstanceListArgs{...}
+//	GetInstanceListArgs{...}
 type GetInstanceListInput interface {
 	pulumi.Input
 
@@ -78,7 +81,7 @@ func (i GetInstanceListArgs) ToGetInstanceListOutputWithContext(ctx context.Cont
 // GetInstanceListArrayInput is an input type that accepts GetInstanceListArray and GetInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstanceListArrayInput` via:
 //
-//          GetInstanceListArray{ GetInstanceListArgs{...} }
+//	GetInstanceListArray{ GetInstanceListArgs{...} }
 type GetInstanceListArrayInput interface {
 	pulumi.Input
 

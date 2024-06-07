@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string? HeaderName;
         /// <summary>
-        /// Specifies whether to enable client IP header.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Specifies whether to enable client IP header.
         /// </summary>
         public readonly string Switch;
 

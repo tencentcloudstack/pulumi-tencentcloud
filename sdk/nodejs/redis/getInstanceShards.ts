@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instanceShards = pulumi.output(tencentcloud.Redis.getInstanceShards({
+ * const instanceShards = tencentcloud.Redis.getInstanceShards({
  *     filterSlave: false,
  *     instanceId: "crs-c1nl9rpv",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceShards(args: GetInstanceShardsArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceShardsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Redis/getInstanceShards:getInstanceShards", {
         "filterSlave": args.filterSlave,
         "instanceId": args.instanceId,
@@ -67,9 +67,25 @@ export interface GetInstanceShardsResult {
     readonly instanceShards: outputs.Redis.GetInstanceShardsInstanceShard[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of redis instanceShards
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instanceShards = tencentcloud.Redis.getInstanceShards({
+ *     filterSlave: false,
+ *     instanceId: "crs-c1nl9rpv",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceShardsOutput(args: GetInstanceShardsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceShardsResult> {
-    return pulumi.output(args).apply(a => getInstanceShards(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceShards(a, opts))
 }
 
 /**

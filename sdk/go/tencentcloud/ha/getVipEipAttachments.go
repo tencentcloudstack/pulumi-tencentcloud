@@ -8,36 +8,41 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of HA VIP EIP attachments
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ha"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ha.GetVipEipAttachments(ctx, &ha.GetVipEipAttachmentsArgs{
-// 			AddressIp: pulumi.StringRef("1.1.1.1"),
-// 			HavipId:   "havip-kjqwe4ba",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ha.GetVipEipAttachments(ctx, &ha.GetVipEipAttachmentsArgs{
+//				AddressIp: pulumi.StringRef("1.1.1.1"),
+//				HavipId:   "havip-kjqwe4ba",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetVipEipAttachments(ctx *pulumi.Context, args *GetVipEipAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetVipEipAttachmentsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetVipEipAttachmentsResult
 	err := ctx.Invoke("tencentcloud:Ha/getVipEipAttachments:getVipEipAttachments", args, &rv, opts...)
 	if err != nil {

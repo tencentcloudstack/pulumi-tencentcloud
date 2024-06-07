@@ -15,30 +15,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var disisolateDbInstanceOperation = new Tencentcloud.Postgresql.DisisolateDbInstanceOperation("disisolateDbInstanceOperation", new()
     ///     {
-    ///         var disisolateDbInstanceOperation = new Tencentcloud.Postgresql.DisisolateDbInstanceOperation("disisolateDbInstanceOperation", new Tencentcloud.Postgresql.DisisolateDbInstanceOperationArgs
+    ///         DbInstanceIdSets = new[]
     ///         {
-    ///             DbInstanceIdSets = 
-    ///             {
-    ///                 local.Pgsql_id,
-    ///             },
-    ///             Period = 1,
-    ///             AutoVoucher = false,
-    ///         });
-    ///     }
+    ///             local.Pgsql_id,
+    ///         },
+    ///         Period = 1,
+    ///         AutoVoucher = false,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/disisolateDbInstanceOperation:DisisolateDbInstanceOperation")]
-    public partial class DisisolateDbInstanceOperation : Pulumi.CustomResource
+    public partial class DisisolateDbInstanceOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to use vouchers. Valid values:true (yes), false (no). Default value:false.
@@ -109,7 +110,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class DisisolateDbInstanceOperationArgs : Pulumi.ResourceArgs
+    public sealed class DisisolateDbInstanceOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to use vouchers. Valid values:true (yes), false (no). Default value:false.
@@ -150,9 +151,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public DisisolateDbInstanceOperationArgs()
         {
         }
+        public static new DisisolateDbInstanceOperationArgs Empty => new DisisolateDbInstanceOperationArgs();
     }
 
-    public sealed class DisisolateDbInstanceOperationState : Pulumi.ResourceArgs
+    public sealed class DisisolateDbInstanceOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to use vouchers. Valid values:true (yes), false (no). Default value:false.
@@ -193,5 +195,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public DisisolateDbInstanceOperationState()
         {
         }
+        public static new DisisolateDbInstanceOperationState Empty => new DisisolateDbInstanceOperationState();
     }
 }

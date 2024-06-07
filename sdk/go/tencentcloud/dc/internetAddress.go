@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dc internetAddress
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dc.NewInternetAddress(ctx, "internetAddress", &Dc.InternetAddressArgs{
-// 			AddrProto: pulumi.Int(0),
-// 			AddrType:  pulumi.Int(2),
-// 			MaskLen:   pulumi.Int(30),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dc.NewInternetAddress(ctx, "internetAddress", &Dc.InternetAddressArgs{
+//				AddrProto: pulumi.Int(0),
+//				AddrType:  pulumi.Int(2),
+//				MaskLen:   pulumi.Int(30),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dc internet_address can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dc/internetAddress:InternetAddress internet_address internet_address_id
+// $ pulumi import tencentcloud:Dc/internetAddress:InternetAddress internet_address internet_address_id
 // ```
 type InternetAddress struct {
 	pulumi.CustomResourceState
@@ -72,7 +78,7 @@ func NewInternetAddress(ctx *pulumi.Context,
 	if args.MaskLen == nil {
 		return nil, errors.New("invalid value for required argument 'MaskLen'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource InternetAddress
 	err := ctx.RegisterResource("tencentcloud:Dc/internetAddress:InternetAddress", name, args, &resource, opts...)
 	if err != nil {
@@ -161,7 +167,7 @@ func (i *InternetAddress) ToInternetAddressOutputWithContext(ctx context.Context
 // InternetAddressArrayInput is an input type that accepts InternetAddressArray and InternetAddressArrayOutput values.
 // You can construct a concrete instance of `InternetAddressArrayInput` via:
 //
-//          InternetAddressArray{ InternetAddressArgs{...} }
+//	InternetAddressArray{ InternetAddressArgs{...} }
 type InternetAddressArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +192,7 @@ func (i InternetAddressArray) ToInternetAddressArrayOutputWithContext(ctx contex
 // InternetAddressMapInput is an input type that accepts InternetAddressMap and InternetAddressMapOutput values.
 // You can construct a concrete instance of `InternetAddressMapInput` via:
 //
-//          InternetAddressMap{ "key": InternetAddressArgs{...} }
+//	InternetAddressMap{ "key": InternetAddressArgs{...} }
 type InternetAddressMapInput interface {
 	pulumi.Input
 

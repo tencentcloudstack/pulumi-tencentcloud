@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc account_attributes
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var accountAttributes = Output.Create(Tencentcloud.Vpc.GetAccountAttributes.InvokeAsync());
-        ///     }
+        ///     var accountAttributes = Tencentcloud.Vpc.GetAccountAttributes.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAccountAttributesResult> InvokeAsync(GetAccountAttributesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAccountAttributesResult>("tencentcloud:Vpc/getAccountAttributes:getAccountAttributes", args ?? new GetAccountAttributesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccountAttributesResult>("tencentcloud:Vpc/getAccountAttributes:getAccountAttributes", args ?? new GetAccountAttributesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc account_attributes
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var accountAttributes = Output.Create(Tencentcloud.Vpc.GetAccountAttributes.InvokeAsync());
-        ///     }
+        ///     var accountAttributes = Tencentcloud.Vpc.GetAccountAttributes.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAccountAttributesResult> Invoke(GetAccountAttributesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAccountAttributesResult>("tencentcloud:Vpc/getAccountAttributes:getAccountAttributes", args ?? new GetAccountAttributesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAccountAttributesResult>("tencentcloud:Vpc/getAccountAttributes:getAccountAttributes", args ?? new GetAccountAttributesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAccountAttributesArgs : Pulumi.InvokeArgs
+    public sealed class GetAccountAttributesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetAccountAttributesArgs()
         {
         }
+        public static new GetAccountAttributesArgs Empty => new GetAccountAttributesArgs();
     }
 
-    public sealed class GetAccountAttributesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAccountAttributesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetAccountAttributesInvokeArgs()
         {
         }
+        public static new GetAccountAttributesInvokeArgs Empty => new GetAccountAttributesInvokeArgs();
     }
 
 

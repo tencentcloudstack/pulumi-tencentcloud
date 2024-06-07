@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
 {
 
-    public sealed class GetDataSourceWithoutInfoOrderFieldInputArgs : Pulumi.ResourceArgs
+    public sealed class GetDataSourceWithoutInfoOrderFieldInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// OrderFields rule.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         public GetDataSourceWithoutInfoOrderFieldInputArgs()
         {
         }
+        public static new GetDataSourceWithoutInfoOrderFieldInputArgs Empty => new GetDataSourceWithoutInfoOrderFieldInputArgs();
     }
 }

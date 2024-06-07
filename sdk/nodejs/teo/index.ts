@@ -5,28 +5,66 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./accelerationDomain";
-export * from "./applicationProxy";
-export * from "./applicationProxyRule";
-export * from "./certificateConfig";
-export * from "./getRuleEngineSettings";
-export * from "./getZoneAvailablePlans";
-export * from "./originGroup";
-export * from "./ownershipVerify";
-export * from "./ruleEngine";
-export * from "./zone";
-export * from "./zoneSetting";
+export { AccelerationDomainArgs, AccelerationDomainState } from "./accelerationDomain";
+export type AccelerationDomain = import("./accelerationDomain").AccelerationDomain;
+export const AccelerationDomain: typeof import("./accelerationDomain").AccelerationDomain = null as any;
+utilities.lazyLoad(exports, ["AccelerationDomain"], () => require("./accelerationDomain"));
 
-// Import resources to register:
-import { AccelerationDomain } from "./accelerationDomain";
-import { ApplicationProxy } from "./applicationProxy";
-import { ApplicationProxyRule } from "./applicationProxyRule";
-import { CertificateConfig } from "./certificateConfig";
-import { OriginGroup } from "./originGroup";
-import { OwnershipVerify } from "./ownershipVerify";
-import { RuleEngine } from "./ruleEngine";
-import { Zone } from "./zone";
-import { ZoneSetting } from "./zoneSetting";
+export { ApplicationProxyArgs, ApplicationProxyState } from "./applicationProxy";
+export type ApplicationProxy = import("./applicationProxy").ApplicationProxy;
+export const ApplicationProxy: typeof import("./applicationProxy").ApplicationProxy = null as any;
+utilities.lazyLoad(exports, ["ApplicationProxy"], () => require("./applicationProxy"));
+
+export { ApplicationProxyRuleArgs, ApplicationProxyRuleState } from "./applicationProxyRule";
+export type ApplicationProxyRule = import("./applicationProxyRule").ApplicationProxyRule;
+export const ApplicationProxyRule: typeof import("./applicationProxyRule").ApplicationProxyRule = null as any;
+utilities.lazyLoad(exports, ["ApplicationProxyRule"], () => require("./applicationProxyRule"));
+
+export { CertificateConfigArgs, CertificateConfigState } from "./certificateConfig";
+export type CertificateConfig = import("./certificateConfig").CertificateConfig;
+export const CertificateConfig: typeof import("./certificateConfig").CertificateConfig = null as any;
+utilities.lazyLoad(exports, ["CertificateConfig"], () => require("./certificateConfig"));
+
+export { GetRuleEngineSettingsArgs, GetRuleEngineSettingsResult, GetRuleEngineSettingsOutputArgs } from "./getRuleEngineSettings";
+export const getRuleEngineSettings: typeof import("./getRuleEngineSettings").getRuleEngineSettings = null as any;
+export const getRuleEngineSettingsOutput: typeof import("./getRuleEngineSettings").getRuleEngineSettingsOutput = null as any;
+utilities.lazyLoad(exports, ["getRuleEngineSettings","getRuleEngineSettingsOutput"], () => require("./getRuleEngineSettings"));
+
+export { GetZoneAvailablePlansArgs, GetZoneAvailablePlansResult, GetZoneAvailablePlansOutputArgs } from "./getZoneAvailablePlans";
+export const getZoneAvailablePlans: typeof import("./getZoneAvailablePlans").getZoneAvailablePlans = null as any;
+export const getZoneAvailablePlansOutput: typeof import("./getZoneAvailablePlans").getZoneAvailablePlansOutput = null as any;
+utilities.lazyLoad(exports, ["getZoneAvailablePlans","getZoneAvailablePlansOutput"], () => require("./getZoneAvailablePlans"));
+
+export { L4ProxyArgs, L4ProxyState } from "./l4proxy";
+export type L4Proxy = import("./l4proxy").L4Proxy;
+export const L4Proxy: typeof import("./l4proxy").L4Proxy = null as any;
+utilities.lazyLoad(exports, ["L4Proxy"], () => require("./l4proxy"));
+
+export { OriginGroupArgs, OriginGroupState } from "./originGroup";
+export type OriginGroup = import("./originGroup").OriginGroup;
+export const OriginGroup: typeof import("./originGroup").OriginGroup = null as any;
+utilities.lazyLoad(exports, ["OriginGroup"], () => require("./originGroup"));
+
+export { OwnershipVerifyArgs, OwnershipVerifyState } from "./ownershipVerify";
+export type OwnershipVerify = import("./ownershipVerify").OwnershipVerify;
+export const OwnershipVerify: typeof import("./ownershipVerify").OwnershipVerify = null as any;
+utilities.lazyLoad(exports, ["OwnershipVerify"], () => require("./ownershipVerify"));
+
+export { RuleEngineArgs, RuleEngineState } from "./ruleEngine";
+export type RuleEngine = import("./ruleEngine").RuleEngine;
+export const RuleEngine: typeof import("./ruleEngine").RuleEngine = null as any;
+utilities.lazyLoad(exports, ["RuleEngine"], () => require("./ruleEngine"));
+
+export { ZoneArgs, ZoneState } from "./zone";
+export type Zone = import("./zone").Zone;
+export const Zone: typeof import("./zone").Zone = null as any;
+utilities.lazyLoad(exports, ["Zone"], () => require("./zone"));
+
+export { ZoneSettingArgs, ZoneSettingState } from "./zoneSetting";
+export type ZoneSetting = import("./zoneSetting").ZoneSetting;
+export const ZoneSetting: typeof import("./zoneSetting").ZoneSetting = null as any;
+utilities.lazyLoad(exports, ["ZoneSetting"], () => require("./zoneSetting"));
+
 
 const _module = {
     version: utilities.getVersion(),
@@ -40,6 +78,8 @@ const _module = {
                 return new ApplicationProxyRule(name, <any>undefined, { urn })
             case "tencentcloud:Teo/certificateConfig:CertificateConfig":
                 return new CertificateConfig(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/l4Proxy:L4Proxy":
+                return new L4Proxy(name, <any>undefined, { urn })
             case "tencentcloud:Teo/originGroup:OriginGroup":
                 return new OriginGroup(name, <any>undefined, { urn })
             case "tencentcloud:Teo/ownershipVerify:OwnershipVerify":
@@ -59,6 +99,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Teo/accelerationDomain", 
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/applicationProxy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/applicationProxyRule", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/certificateConfig", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/l4Proxy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/originGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/ownershipVerify", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/ruleEngine", _module)

@@ -7,69 +7,74 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a eb putEvents
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"encoding/json"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Eb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		foo, err := Eb.NewEventBus(ctx, "foo", &Eb.EventBusArgs{
-// 			EventBusName: pulumi.String("tf-event_bus"),
-// 			Description:  pulumi.String("event bus desc"),
-// 			EnableStore:  pulumi.Bool(false),
-// 			SaveDays:     pulumi.Int(1),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"topic":     "test-topic",
-// 			"Partition": 1,
-// 			"offset":    37,
-// 			"msgKey":    "test",
-// 			"msgBody":   "Hello from Ckafka again!",
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		_, err = Eb.NewPutEvents(ctx, "putEvents", &Eb.PutEventsArgs{
-// 			EventLists: eb.PutEventsEventListArray{
-// 				&eb.PutEventsEventListArgs{
-// 					Source:  pulumi.String("ckafka.cloud.tencent"),
-// 					Data:    pulumi.String(json0),
-// 					Type:    pulumi.String("connector:ckafka"),
-// 					Subject: pulumi.String("qcs::ckafka:ap-guangzhou:uin/1250000000:ckafkaId/uin/1250000000/ckafka-123456"),
-// 					Time:    pulumi.Int(1691572461939),
-// 				},
-// 			},
-// 			EventBusId: foo.ID(),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			foo, err := Eb.NewEventBus(ctx, "foo", &Eb.EventBusArgs{
+//				EventBusName: pulumi.String("tf-event_bus"),
+//				Description:  pulumi.String("event bus desc"),
+//				EnableStore:  pulumi.Bool(false),
+//				SaveDays:     pulumi.Int(1),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"topic":     "test-topic",
+//				"Partition": 1,
+//				"offset":    37,
+//				"msgKey":    "test",
+//				"msgBody":   "Hello from Ckafka again!",
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			_, err = Eb.NewPutEvents(ctx, "putEvents", &Eb.PutEventsArgs{
+//				EventLists: eb.PutEventsEventListArray{
+//					&eb.PutEventsEventListArgs{
+//						Source:  pulumi.String("ckafka.cloud.tencent"),
+//						Data:    pulumi.String(json0),
+//						Type:    pulumi.String("connector:ckafka"),
+//						Subject: pulumi.String("qcs::ckafka:ap-guangzhou:uin/1250000000:ckafkaId/uin/1250000000/ckafka-123456"),
+//						Time:    pulumi.Int(1691572461939),
+//					},
+//				},
+//				EventBusId: foo.ID(),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type PutEvents struct {
 	pulumi.CustomResourceState
 
@@ -92,7 +97,7 @@ func NewPutEvents(ctx *pulumi.Context,
 	if args.EventLists == nil {
 		return nil, errors.New("invalid value for required argument 'EventLists'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource PutEvents
 	err := ctx.RegisterResource("tencentcloud:Eb/putEvents:PutEvents", name, args, &resource, opts...)
 	if err != nil {
@@ -173,7 +178,7 @@ func (i *PutEvents) ToPutEventsOutputWithContext(ctx context.Context) PutEventsO
 // PutEventsArrayInput is an input type that accepts PutEventsArray and PutEventsArrayOutput values.
 // You can construct a concrete instance of `PutEventsArrayInput` via:
 //
-//          PutEventsArray{ PutEventsArgs{...} }
+//	PutEventsArray{ PutEventsArgs{...} }
 type PutEventsArrayInput interface {
 	pulumi.Input
 
@@ -198,7 +203,7 @@ func (i PutEventsArray) ToPutEventsArrayOutputWithContext(ctx context.Context) P
 // PutEventsMapInput is an input type that accepts PutEventsMap and PutEventsMapOutput values.
 // You can construct a concrete instance of `PutEventsMapInput` via:
 //
-//          PutEventsMap{ "key": PutEventsArgs{...} }
+//	PutEventsMap{ "key": PutEventsArgs{...} }
 type PutEventsMapInput interface {
 	pulumi.Input
 

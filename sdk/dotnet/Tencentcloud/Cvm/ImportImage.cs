@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
 {
     [TencentcloudResourceType("tencentcloud:Cvm/importImage:ImportImage")]
-    public partial class ImportImage : Pulumi.CustomResource
+    public partial class ImportImage : global::Pulumi.CustomResource
     {
         /// <summary>
         /// OS architecture of the image to be imported, `x86_64` or `i386`.
@@ -127,7 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         }
     }
 
-    public sealed class ImportImageArgs : Pulumi.ResourceArgs
+    public sealed class ImportImageArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// OS architecture of the image to be imported, `x86_64` or `i386`.
@@ -207,9 +207,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public ImportImageArgs()
         {
         }
+        public static new ImportImageArgs Empty => new ImportImageArgs();
     }
 
-    public sealed class ImportImageState : Pulumi.ResourceArgs
+    public sealed class ImportImageState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// OS architecture of the image to be imported, `x86_64` or `i386`.
@@ -289,5 +290,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         public ImportImageState()
         {
         }
+        public static new ImportImageState Empty => new ImportImageState();
     }
 }

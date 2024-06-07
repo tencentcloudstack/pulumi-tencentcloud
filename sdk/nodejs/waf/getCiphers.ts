@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getCiphers());
+ * const example = tencentcloud.Waf.getCiphers({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCiphers(args?: GetCiphersArgs, opts?: pulumi.InvokeOptions): Promise<GetCiphersResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Waf/getCiphers:getCiphers", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetCiphersResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of waf ciphers
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getCiphers({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCiphersOutput(args?: GetCiphersOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCiphersResult> {
-    return pulumi.output(args).apply(a => getCiphers(a, opts))
+    return pulumi.output(args).apply((a: any) => getCiphers(a, opts))
 }
 
 /**

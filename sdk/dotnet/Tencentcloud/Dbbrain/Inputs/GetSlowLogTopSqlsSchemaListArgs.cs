@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain.Inputs
 {
 
-    public sealed class GetSlowLogTopSqlsSchemaListInputArgs : Pulumi.ResourceArgs
+    public sealed class GetSlowLogTopSqlsSchemaListInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// DB name.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain.Inputs
         public GetSlowLogTopSqlsSchemaListInputArgs()
         {
         }
+        public static new GetSlowLogTopSqlsSchemaListInputArgs Empty => new GetSlowLogTopSqlsSchemaListInputArgs();
     }
 }

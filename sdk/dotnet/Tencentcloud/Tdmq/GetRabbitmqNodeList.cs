@@ -13,14 +13,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     public static class GetRabbitmqNodeList
     {
         public static Task<GetRabbitmqNodeListResult> InvokeAsync(GetRabbitmqNodeListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRabbitmqNodeListResult>("tencentcloud:Tdmq/getRabbitmqNodeList:getRabbitmqNodeList", args ?? new GetRabbitmqNodeListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRabbitmqNodeListResult>("tencentcloud:Tdmq/getRabbitmqNodeList:getRabbitmqNodeList", args ?? new GetRabbitmqNodeListArgs(), options.WithDefaults());
 
         public static Output<GetRabbitmqNodeListResult> Invoke(GetRabbitmqNodeListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRabbitmqNodeListResult>("tencentcloud:Tdmq/getRabbitmqNodeList:getRabbitmqNodeList", args ?? new GetRabbitmqNodeListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRabbitmqNodeListResult>("tencentcloud:Tdmq/getRabbitmqNodeList:getRabbitmqNodeList", args ?? new GetRabbitmqNodeListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRabbitmqNodeListArgs : Pulumi.InvokeArgs
+    public sealed class GetRabbitmqNodeListArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetRabbitmqNodeListFilterArgs>? _filters;
@@ -48,9 +48,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetRabbitmqNodeListArgs()
         {
         }
+        public static new GetRabbitmqNodeListArgs Empty => new GetRabbitmqNodeListArgs();
     }
 
-    public sealed class GetRabbitmqNodeListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRabbitmqNodeListInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetRabbitmqNodeListFilterInputArgs>? _filters;
@@ -78,6 +79,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetRabbitmqNodeListInvokeArgs()
         {
         }
+        public static new GetRabbitmqNodeListInvokeArgs Empty => new GetRabbitmqNodeListInvokeArgs();
     }
 
 

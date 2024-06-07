@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a postgresql modifySwitchTimePeriodOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewModifySwitchTimePeriodOperation(ctx, "modifySwitchTimePeriodOperation", &Postgresql.ModifySwitchTimePeriodOperationArgs{
-// 			DbInstanceId: pulumi.Any(local.Pgsql_id),
-// 			SwitchTag:    pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewModifySwitchTimePeriodOperation(ctx, "modifySwitchTimePeriodOperation", &Postgresql.ModifySwitchTimePeriodOperationArgs{
+//				DbInstanceId: pulumi.Any(local.Pgsql_id),
+//				SwitchTag:    pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ModifySwitchTimePeriodOperation struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewModifySwitchTimePeriodOperation(ctx *pulumi.Context,
 	if args.SwitchTag == nil {
 		return nil, errors.New("invalid value for required argument 'SwitchTag'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ModifySwitchTimePeriodOperation
 	err := ctx.RegisterResource("tencentcloud:Postgresql/modifySwitchTimePeriodOperation:ModifySwitchTimePeriodOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *ModifySwitchTimePeriodOperation) ToModifySwitchTimePeriodOperationOutpu
 // ModifySwitchTimePeriodOperationArrayInput is an input type that accepts ModifySwitchTimePeriodOperationArray and ModifySwitchTimePeriodOperationArrayOutput values.
 // You can construct a concrete instance of `ModifySwitchTimePeriodOperationArrayInput` via:
 //
-//          ModifySwitchTimePeriodOperationArray{ ModifySwitchTimePeriodOperationArgs{...} }
+//	ModifySwitchTimePeriodOperationArray{ ModifySwitchTimePeriodOperationArgs{...} }
 type ModifySwitchTimePeriodOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i ModifySwitchTimePeriodOperationArray) ToModifySwitchTimePeriodOperationA
 // ModifySwitchTimePeriodOperationMapInput is an input type that accepts ModifySwitchTimePeriodOperationMap and ModifySwitchTimePeriodOperationMapOutput values.
 // You can construct a concrete instance of `ModifySwitchTimePeriodOperationMapInput` via:
 //
-//          ModifySwitchTimePeriodOperationMap{ "key": ModifySwitchTimePeriodOperationArgs{...} }
+//	ModifySwitchTimePeriodOperationMap{ "key": ModifySwitchTimePeriodOperationArgs{...} }
 type ModifySwitchTimePeriodOperationMapInput interface {
 	pulumi.Input
 

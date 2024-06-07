@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// <summary>
         /// Use this data source to query detailed information of waf instance_qps_limit
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetInstanceQpsLimit.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetInstanceQpsLimit.InvokeAsync(new Tencentcloud.Waf.GetInstanceQpsLimitArgs
-        ///         {
-        ///             InstanceId = "waf_2kxtlbky00b3b4qz",
-        ///         }));
-        ///     }
+        ///         InstanceId = "waf_2kxtlbky00b3b4qz",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceQpsLimitResult> InvokeAsync(GetInstanceQpsLimitArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceQpsLimitResult>("tencentcloud:Waf/getInstanceQpsLimit:getInstanceQpsLimit", args ?? new GetInstanceQpsLimitArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceQpsLimitResult>("tencentcloud:Waf/getInstanceQpsLimit:getInstanceQpsLimit", args ?? new GetInstanceQpsLimitArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of waf instance_qps_limit
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetInstanceQpsLimit.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetInstanceQpsLimit.InvokeAsync(new Tencentcloud.Waf.GetInstanceQpsLimitArgs
-        ///         {
-        ///             InstanceId = "waf_2kxtlbky00b3b4qz",
-        ///         }));
-        ///     }
+        ///         InstanceId = "waf_2kxtlbky00b3b4qz",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceQpsLimitResult> Invoke(GetInstanceQpsLimitInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceQpsLimitResult>("tencentcloud:Waf/getInstanceQpsLimit:getInstanceQpsLimit", args ?? new GetInstanceQpsLimitInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceQpsLimitResult>("tencentcloud:Waf/getInstanceQpsLimit:getInstanceQpsLimit", args ?? new GetInstanceQpsLimitInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceQpsLimitArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceQpsLimitArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Unique ID of Instance.
@@ -95,9 +89,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetInstanceQpsLimitArgs()
         {
         }
+        public static new GetInstanceQpsLimitArgs Empty => new GetInstanceQpsLimitArgs();
     }
 
-    public sealed class GetInstanceQpsLimitInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceQpsLimitInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Unique ID of Instance.
@@ -120,6 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetInstanceQpsLimitInvokeArgs()
         {
         }
+        public static new GetInstanceQpsLimitInvokeArgs Empty => new GetInstanceQpsLimitInvokeArgs();
     }
 
 

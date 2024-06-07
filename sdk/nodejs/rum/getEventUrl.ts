@@ -9,24 +9,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const eventUrl = pulumi.output(tencentcloud.Rum.getEventUrl({
+ * const eventUrl = tencentcloud.Rum.getEventUrl({
  *     endTime: 1625454840,
  *     projectId: 1,
  *     startTime: 1625444040,
  *     type: "allcount",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getEventUrl(args: GetEventUrlArgs, opts?: pulumi.InvokeOptions): Promise<GetEventUrlResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getEventUrl:getEventUrl", {
         "area": args.area,
         "brand": args.brand,
@@ -188,9 +187,27 @@ export interface GetEventUrlResult {
     readonly type: string;
     readonly versionNum?: string;
 }
-
+/**
+ * Use this data source to query detailed information of rum eventUrl
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const eventUrl = tencentcloud.Rum.getEventUrl({
+ *     endTime: 1625454840,
+ *     projectId: 1,
+ *     startTime: 1625444040,
+ *     type: "allcount",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getEventUrlOutput(args: GetEventUrlOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetEventUrlResult> {
-    return pulumi.output(args).apply(a => getEventUrl(a, opts))
+    return pulumi.output(args).apply((a: any) => getEventUrl(a, opts))
 }
 
 /**

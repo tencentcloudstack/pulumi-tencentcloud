@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const renewDbInstanceOperation = new tencentcloud.postgresql.RenewDbInstanceOperation("renewDbInstanceOperation", {
  *     dbInstanceId: tencentcloud_postgresql_instance.oper_test_PREPAID.id,
@@ -19,6 +20,7 @@ import * as utilities from "../utilities";
  *     autoVoucher: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RenewDbInstanceOperation extends pulumi.CustomResource {
     /**

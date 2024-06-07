@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterSubtitleTemplateGetArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterSubtitleTemplateGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Text transparency, value range: (0, 1].0: fully transparent.1: fully opaque.Default: 1.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterSubtitleTemplateGetArgs()
         {
         }
+        public static new WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterSubtitleTemplateGetArgs Empty => new WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterSubtitleTemplateGetArgs();
     }
 }

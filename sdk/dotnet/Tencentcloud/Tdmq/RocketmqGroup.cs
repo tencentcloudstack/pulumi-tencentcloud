@@ -15,49 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new()
     ///     {
-    ///         var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
-    ///         {
-    ///             ClusterName = "tf_example",
-    ///             Remark = "remark.",
-    ///         });
-    ///         var exampleRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleRocketmqNamespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
-    ///         {
-    ///             ClusterId = exampleRocketmqCluster.ClusterId,
-    ///             NamespaceName = "tf_example",
-    ///             Remark = "remark.",
-    ///         });
-    ///         var exampleRocketmqGroup = new Tencentcloud.Tdmq.RocketmqGroup("exampleRocketmqGroup", new Tencentcloud.Tdmq.RocketmqGroupArgs
-    ///         {
-    ///             GroupName = "tf_example",
-    ///             ClusterId = exampleRocketmqCluster.ClusterId,
-    ///             Namespace = exampleRocketmqNamespace.NamespaceName,
-    ///             ReadEnable = true,
-    ///             BroadcastEnable = true,
-    ///             Remark = "remark.",
-    ///         });
-    ///     }
+    ///         ClusterName = "tf_example",
+    ///         Remark = "remark.",
+    ///     });
     /// 
-    /// }
+    ///     var exampleRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleRocketmqNamespace", new()
+    ///     {
+    ///         ClusterId = exampleRocketmqCluster.ClusterId,
+    ///         NamespaceName = "tf_example",
+    ///         Remark = "remark.",
+    ///     });
+    /// 
+    ///     var exampleRocketmqGroup = new Tencentcloud.Tdmq.RocketmqGroup("exampleRocketmqGroup", new()
+    ///     {
+    ///         GroupName = "tf_example",
+    ///         ClusterId = exampleRocketmqCluster.ClusterId,
+    ///         Namespace = exampleRocketmqNamespace.NamespaceName,
+    ///         ReadEnable = true,
+    ///         BroadcastEnable = true,
+    ///         Remark = "remark.",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tdmqRocketmq group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tdmq/rocketmqGroup:RocketmqGroup group group_id
+    /// $ pulumi import tencentcloud:Tdmq/rocketmqGroup:RocketmqGroup group group_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/rocketmqGroup:RocketmqGroup")]
-    public partial class RocketmqGroup : Pulumi.CustomResource
+    public partial class RocketmqGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to enable broadcast consumption.
@@ -194,7 +197,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class RocketmqGroupArgs : Pulumi.ResourceArgs
+    public sealed class RocketmqGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable broadcast consumption.
@@ -235,9 +238,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RocketmqGroupArgs()
         {
         }
+        public static new RocketmqGroupArgs Empty => new RocketmqGroupArgs();
     }
 
-    public sealed class RocketmqGroupState : Pulumi.ResourceArgs
+    public sealed class RocketmqGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable broadcast consumption.
@@ -332,5 +336,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RocketmqGroupState()
         {
         }
+        public static new RocketmqGroupState Empty => new RocketmqGroupState();
     }
 }

@@ -9,17 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const upgradeCacheVersionOperation = new tencentcloud.Redis.UpgradeCacheVersionOperation("upgrade_cache_version_operation", {
+ * const upgradeCacheVersionOperation = new tencentcloud.redis.UpgradeCacheVersionOperation("upgradeCacheVersionOperation", {
  *     currentRedisVersion: "5.0.0",
  *     instanceId: "crs-c1nl9rpv",
  *     instanceTypeUpgradeNow: 1,
  *     upgradeRedisVersion: "5.0.0",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class UpgradeCacheVersionOperation extends pulumi.CustomResource {
     /**

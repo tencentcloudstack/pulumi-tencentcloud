@@ -7,54 +7,59 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tsf application
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tsf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tsf.NewApplication(ctx, "application", &Tsf.ApplicationArgs{
-// 			ApplicationDesc:             pulumi.String("This is my application"),
-// 			ApplicationName:             pulumi.String("my-app"),
-// 			ApplicationRuntimeType:      pulumi.String("Java"),
-// 			ApplicationType:             pulumi.String("C"),
-// 			IgnoreCreateImageRepository: pulumi.Bool(true),
-// 			MicroserviceType:            pulumi.String("M"),
-// 			ServiceConfigLists: tsf.ApplicationServiceConfigListArray{
-// 				&tsf.ApplicationServiceConfigListArgs{
-// 					HealthCheck: &tsf.ApplicationServiceConfigListHealthCheckArgs{
-// 						Path: pulumi.String("/health"),
-// 					},
-// 					Name: pulumi.String("my-service"),
-// 					Ports: tsf.ApplicationServiceConfigListPortArray{
-// 						&tsf.ApplicationServiceConfigListPortArgs{
-// 							Protocol:   pulumi.String("HTTP"),
-// 							TargetPort: pulumi.Int(8080),
-// 						},
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tsf.NewApplication(ctx, "application", &Tsf.ApplicationArgs{
+//				ApplicationDesc:             pulumi.String("This is my application"),
+//				ApplicationName:             pulumi.String("my-app"),
+//				ApplicationRuntimeType:      pulumi.String("Java"),
+//				ApplicationType:             pulumi.String("C"),
+//				IgnoreCreateImageRepository: pulumi.Bool(true),
+//				MicroserviceType:            pulumi.String("M"),
+//				ServiceConfigLists: tsf.ApplicationServiceConfigListArray{
+//					&tsf.ApplicationServiceConfigListArgs{
+//						HealthCheck: &tsf.ApplicationServiceConfigListHealthCheckArgs{
+//							Path: pulumi.String("/health"),
+//						},
+//						Name: pulumi.String("my-service"),
+//						Ports: tsf.ApplicationServiceConfigListPortArray{
+//							&tsf.ApplicationServiceConfigListPortArgs{
+//								Protocol:   pulumi.String("HTTP"),
+//								TargetPort: pulumi.Int(8080),
+//							},
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type Application struct {
 	pulumi.CustomResourceState
 
@@ -98,7 +103,7 @@ func NewApplication(ctx *pulumi.Context,
 	if args.MicroserviceType == nil {
 		return nil, errors.New("invalid value for required argument 'MicroserviceType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Application
 	err := ctx.RegisterResource("tencentcloud:Tsf/application:Application", name, args, &resource, opts...)
 	if err != nil {
@@ -251,7 +256,7 @@ func (i *Application) ToApplicationOutputWithContext(ctx context.Context) Applic
 // ApplicationArrayInput is an input type that accepts ApplicationArray and ApplicationArrayOutput values.
 // You can construct a concrete instance of `ApplicationArrayInput` via:
 //
-//          ApplicationArray{ ApplicationArgs{...} }
+//	ApplicationArray{ ApplicationArgs{...} }
 type ApplicationArrayInput interface {
 	pulumi.Input
 
@@ -276,7 +281,7 @@ func (i ApplicationArray) ToApplicationArrayOutputWithContext(ctx context.Contex
 // ApplicationMapInput is an input type that accepts ApplicationMap and ApplicationMapOutput values.
 // You can construct a concrete instance of `ApplicationMapInput` via:
 //
-//          ApplicationMap{ "key": ApplicationArgs{...} }
+//	ApplicationMap{ "key": ApplicationArgs{...} }
 type ApplicationMapInput interface {
 	pulumi.Input
 

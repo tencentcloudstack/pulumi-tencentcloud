@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const zones = tencentcloud.Availability.getZonesByProduct({
  *     product: "sqlserver",
  * });
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     availabilityZone: zones.then(zones => zones.zones?[4]?.name),
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
  *     vpcId: vpc.id,
  *     cidrBlock: "10.0.0.0/16",
  *     isMulticast: false,
  * });
  * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
  * const examplePubGeneralCloudInstance = new tencentcloud.sqlserver.GeneralCloudInstance("examplePubGeneralCloudInstance", {
- *     zone: zones.then(zones => zones.zones?[4]?.name),
+ *     zone: zones.then(zones => zones.zones?.[4]?.name),
  *     memory: 4,
  *     storage: 100,
  *     cpu: 2,
@@ -56,7 +58,7 @@ import * as utilities from "../utilities";
  *     timeZone: "China Standard Time",
  * });
  * const exampleSubGeneralCloudInstance = new tencentcloud.sqlserver.GeneralCloudInstance("exampleSubGeneralCloudInstance", {
- *     zone: zones.then(zones => zones.zones?[4]?.name),
+ *     zone: zones.then(zones => zones.zones?.[4]?.name),
  *     memory: 4,
  *     storage: 100,
  *     cpu: 2,
@@ -108,13 +110,11 @@ import * as utilities from "../utilities";
  *     instanceId: examplePublishSubscribe.publishInstanceId,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPublishSubscribes(args: GetPublishSubscribesArgs, opts?: pulumi.InvokeOptions): Promise<GetPublishSubscribesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Sqlserver/getPublishSubscribes:getPublishSubscribes", {
         "instanceId": args.instanceId,
         "pubOrSubInstanceId": args.pubOrSubInstanceId,
@@ -198,9 +198,114 @@ export interface GetPublishSubscribesResult {
      */
     readonly subscribeDatabase?: string;
 }
-
+/**
+ * Use this data source to query Publish Subscribe resources for the specific SQL Server instance.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const zones = tencentcloud.Availability.getZonesByProduct({
+ *     product: "sqlserver",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: zones.then(zones => zones.zones?.[4]?.name),
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     isMulticast: false,
+ * });
+ * const securityGroup = new tencentcloud.security.Group("securityGroup", {description: "desc."});
+ * const examplePubGeneralCloudInstance = new tencentcloud.sqlserver.GeneralCloudInstance("examplePubGeneralCloudInstance", {
+ *     zone: zones.then(zones => zones.zones?.[4]?.name),
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_HSSD",
+ *     instanceChargeType: "POSTPAID",
+ *     projectId: 0,
+ *     subnetId: subnet.id,
+ *     vpcId: vpc.id,
+ *     dbVersion: "2008R2",
+ *     securityGroupLists: [securityGroup.id],
+ *     weeklies: [
+ *         1,
+ *         2,
+ *         3,
+ *         5,
+ *         6,
+ *         7,
+ *     ],
+ *     startTime: "00:00",
+ *     span: 6,
+ *     resourceTags: [{
+ *         tagKey: "test",
+ *         tagValue: "test",
+ *     }],
+ *     collation: "Chinese_PRC_CI_AS",
+ *     timeZone: "China Standard Time",
+ * });
+ * const exampleSubGeneralCloudInstance = new tencentcloud.sqlserver.GeneralCloudInstance("exampleSubGeneralCloudInstance", {
+ *     zone: zones.then(zones => zones.zones?.[4]?.name),
+ *     memory: 4,
+ *     storage: 100,
+ *     cpu: 2,
+ *     machineType: "CLOUD_HSSD",
+ *     instanceChargeType: "POSTPAID",
+ *     projectId: 0,
+ *     subnetId: subnet.id,
+ *     vpcId: vpc.id,
+ *     dbVersion: "2008R2",
+ *     securityGroupLists: [securityGroup.id],
+ *     weeklies: [
+ *         1,
+ *         2,
+ *         3,
+ *         5,
+ *         6,
+ *         7,
+ *     ],
+ *     startTime: "00:00",
+ *     span: 6,
+ *     resourceTags: [{
+ *         tagKey: "test",
+ *         tagValue: "test",
+ *     }],
+ *     collation: "Chinese_PRC_CI_AS",
+ *     timeZone: "China Standard Time",
+ * });
+ * const examplePubDb = new tencentcloud.sqlserver.Db("examplePubDb", {
+ *     instanceId: examplePubGeneralCloudInstance.id,
+ *     charset: "Chinese_PRC_BIN",
+ *     remark: "test-remark",
+ * });
+ * const exampleSubDb = new tencentcloud.sqlserver.Db("exampleSubDb", {
+ *     instanceId: exampleSubGeneralCloudInstance.id,
+ *     charset: "Chinese_PRC_BIN",
+ *     remark: "test-remark",
+ * });
+ * const examplePublishSubscribe = new tencentcloud.sqlserver.PublishSubscribe("examplePublishSubscribe", {
+ *     publishInstanceId: examplePubGeneralCloudInstance.id,
+ *     subscribeInstanceId: exampleSubGeneralCloudInstance.id,
+ *     publishSubscribeName: "example",
+ *     deleteSubscribeDb: false,
+ *     databaseTuples: [{
+ *         publishDatabase: examplePubDb.name,
+ *         subscribeDatabase: exampleSubDb.name,
+ *     }],
+ * });
+ * const examplePublishSubscribes = tencentcloud.Sqlserver.getPublishSubscribesOutput({
+ *     instanceId: examplePublishSubscribe.publishInstanceId,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPublishSubscribesOutput(args: GetPublishSubscribesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPublishSubscribesResult> {
-    return pulumi.output(args).apply(a => getPublishSubscribes(a, opts))
+    return pulumi.output(args).apply((a: any) => getPublishSubscribes(a, opts))
 }
 
 /**

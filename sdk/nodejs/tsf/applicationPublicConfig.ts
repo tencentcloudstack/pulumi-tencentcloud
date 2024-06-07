@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const applicationPublicConfig = new tencentcloud.Tsf.ApplicationPublicConfig("application_public_config", {
+ * const applicationPublicConfig = new tencentcloud.tsf.ApplicationPublicConfig("applicationPublicConfig", {
  *     configName: "my_config",
  *     configType: "P",
  *     configValue: "test: 1",
@@ -22,6 +23,7 @@ import * as utilities from "../utilities";
  *     encodeWithBase64: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ApplicationPublicConfig extends pulumi.CustomResource {
     /**

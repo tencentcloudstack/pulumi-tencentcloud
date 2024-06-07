@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const asyncEventManagement = pulumi.output(tencentcloud.Scf.getAsyncEventManagement({
+ * const asyncEventManagement = tencentcloud.Scf.getAsyncEventManagement({
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  *     order: "ASC",
  *     orderby: "StartTime",
  *     qualifier: "$LATEST",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAsyncEventManagement(args: GetAsyncEventManagementArgs, opts?: pulumi.InvokeOptions): Promise<GetAsyncEventManagementResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Scf/getAsyncEventManagement:getAsyncEventManagement", {
         "functionName": args.functionName,
         "invokeRequestId": args.invokeRequestId,
@@ -118,9 +118,28 @@ export interface GetAsyncEventManagementResult {
      */
     readonly statuses?: string[];
 }
-
+/**
+ * Use this data source to query detailed information of scf asyncEventManagement
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const asyncEventManagement = tencentcloud.Scf.getAsyncEventManagement({
+ *     functionName: "keep-1676351130",
+ *     namespace: "default",
+ *     order: "ASC",
+ *     orderby: "StartTime",
+ *     qualifier: "$LATEST",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAsyncEventManagementOutput(args: GetAsyncEventManagementOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAsyncEventManagementResult> {
-    return pulumi.output(args).apply(a => getAsyncEventManagement(a, opts))
+    return pulumi.output(args).apply((a: any) => getAsyncEventManagement(a, opts))
 }
 
 /**

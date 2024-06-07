@@ -11,16 +11,23 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class L7RuleV2RuleSourceListArgs : Pulumi.ResourceArgs
+    public sealed class L7RuleV2RuleSourceListArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Source IP or domain.
+        /// </summary>
         [Input("source", required: true)]
         public Input<string> Source { get; set; } = null!;
 
+        /// <summary>
+        /// Weight of the source.
+        /// </summary>
         [Input("weight", required: true)]
         public Input<int> Weight { get; set; } = null!;
 
         public L7RuleV2RuleSourceListArgs()
         {
         }
+        public static new L7RuleV2RuleSourceListArgs Empty => new L7RuleV2RuleSourceListArgs();
     }
 }

@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// <summary>
         /// Use this data source to query detailed information of dcdb sale_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var saleInfo = Output.Create(Tencentcloud.Dcdb.GetSaleInfo.InvokeAsync());
-        ///     }
+        ///     var saleInfo = Tencentcloud.Dcdb.GetSaleInfo.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSaleInfoResult> InvokeAsync(GetSaleInfoArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSaleInfoResult>("tencentcloud:Dcdb/getSaleInfo:getSaleInfo", args ?? new GetSaleInfoArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSaleInfoResult>("tencentcloud:Dcdb/getSaleInfo:getSaleInfo", args ?? new GetSaleInfoArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dcdb sale_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var saleInfo = Output.Create(Tencentcloud.Dcdb.GetSaleInfo.InvokeAsync());
-        ///     }
+        ///     var saleInfo = Tencentcloud.Dcdb.GetSaleInfo.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSaleInfoResult> Invoke(GetSaleInfoInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSaleInfoResult>("tencentcloud:Dcdb/getSaleInfo:getSaleInfo", args ?? new GetSaleInfoInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSaleInfoResult>("tencentcloud:Dcdb/getSaleInfo:getSaleInfo", args ?? new GetSaleInfoInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSaleInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetSaleInfoArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetSaleInfoArgs()
         {
         }
+        public static new GetSaleInfoArgs Empty => new GetSaleInfoArgs();
     }
 
-    public sealed class GetSaleInfoInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSaleInfoInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetSaleInfoInvokeArgs()
         {
         }
+        public static new GetSaleInfoInvokeArgs Empty => new GetSaleInfoInvokeArgs();
     }
 
 

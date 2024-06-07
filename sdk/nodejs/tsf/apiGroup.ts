@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,30 +11,30 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const apiGroup = new tencentcloud.Tsf.ApiGroup("api_group", {
+ * const apiGroup = new tencentcloud.tsf.ApiGroup("apiGroup", {
  *     authType: "none",
  *     description: "terraform-test",
  *     gatewayInstanceId: "gw-ins-i6mjpgm8",
  *     groupContext: "/terraform-test",
  *     groupName: "terraform_test_group",
  *     groupType: "ms",
- *     // namespace_name_key = "path"
- *     // service_name_key = "path"
  *     namespaceNameKeyPosition: "path",
  *     serviceNameKeyPosition: "path",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tsf api_group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tsf/apiGroup:ApiGroup api_group api_group_id
+ * $ pulumi import tencentcloud:Tsf/apiGroup:ApiGroup api_group api_group_id
  * ```
  */
 export class ApiGroup extends pulumi.CustomResource {

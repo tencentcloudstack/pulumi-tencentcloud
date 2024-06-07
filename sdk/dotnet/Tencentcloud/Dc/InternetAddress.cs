@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var internetAddress = new Tencentcloud.Dc.InternetAddress("internetAddress", new()
     ///     {
-    ///         var internetAddress = new Tencentcloud.Dc.InternetAddress("internetAddress", new Tencentcloud.Dc.InternetAddressArgs
-    ///         {
-    ///             AddrProto = 0,
-    ///             AddrType = 2,
-    ///             MaskLen = 30,
-    ///         });
-    ///     }
+    ///         AddrProto = 0,
+    ///         AddrType = 2,
+    ///         MaskLen = 30,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dc internet_address can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dc/internetAddress:InternetAddress internet_address internet_address_id
+    /// $ pulumi import tencentcloud:Dc/internetAddress:InternetAddress internet_address internet_address_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dc/internetAddress:InternetAddress")]
-    public partial class InternetAddress : Pulumi.CustomResource
+    public partial class InternetAddress : global::Pulumi.CustomResource
     {
         /// <summary>
         /// 0: IPv4, 1: IPv6.
@@ -108,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         }
     }
 
-    public sealed class InternetAddressArgs : Pulumi.ResourceArgs
+    public sealed class InternetAddressArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// 0: IPv4, 1: IPv6.
@@ -131,9 +132,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public InternetAddressArgs()
         {
         }
+        public static new InternetAddressArgs Empty => new InternetAddressArgs();
     }
 
-    public sealed class InternetAddressState : Pulumi.ResourceArgs
+    public sealed class InternetAddressState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// 0: IPv4, 1: IPv6.
@@ -156,5 +158,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public InternetAddressState()
         {
         }
+        public static new InternetAddressState Empty => new InternetAddressState();
     }
 }

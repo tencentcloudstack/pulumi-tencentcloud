@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var cronJobAbort = new Tencentcloud.Pts.CronJobAbort("cronJobAbort", new()
     ///     {
-    ///         var cronJobAbort = new Tencentcloud.Pts.CronJobAbort("cronJobAbort", new Tencentcloud.Pts.CronJobAbortArgs
-    ///         {
-    ///             CronJobId = "job-dtm93vx0",
-    ///             ProjectId = "project-abc",
-    ///         });
-    ///     }
+    ///         CronJobId = "job-dtm93vx0",
+    ///         ProjectId = "project-abc",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Pts/cronJobAbort:CronJobAbort")]
-    public partial class CronJobAbort : Pulumi.CustomResource
+    public partial class CronJobAbort : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cron job ID.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         }
     }
 
-    public sealed class CronJobAbortArgs : Pulumi.ResourceArgs
+    public sealed class CronJobAbortArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cron job ID.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public CronJobAbortArgs()
         {
         }
+        public static new CronJobAbortArgs Empty => new CronJobAbortArgs();
     }
 
-    public sealed class CronJobAbortState : Pulumi.ResourceArgs
+    public sealed class CronJobAbortState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cron job ID.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public CronJobAbortState()
         {
         }
+        public static new CronJobAbortState Empty => new CronJobAbortState();
     }
 }

@@ -8,39 +8,44 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of css timeShiftStreamList
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.GetTimeShiftStreamList(ctx, &css.GetTimeShiftStreamListArgs{
-// 			Domain:      pulumi.StringRef("177154.push.tlivecloud.com"),
-// 			DomainGroup: pulumi.StringRef("tf-test"),
-// 			EndTime:     1698820641,
-// 			StartTime:   1698768000,
-// 			StreamName:  pulumi.StringRef("live"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.GetTimeShiftStreamList(ctx, &css.GetTimeShiftStreamListArgs{
+//				Domain:      pulumi.StringRef("177154.push.tlivecloud.com"),
+//				DomainGroup: pulumi.StringRef("tf-test"),
+//				EndTime:     1698820641,
+//				StartTime:   1698768000,
+//				StreamName:  pulumi.StringRef("live"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetTimeShiftStreamList(ctx *pulumi.Context, args *GetTimeShiftStreamListArgs, opts ...pulumi.InvokeOption) (*GetTimeShiftStreamListResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTimeShiftStreamListResult
 	err := ctx.Invoke("tencentcloud:Css/getTimeShiftStreamList:getTimeShiftStreamList", args, &rv, opts...)
 	if err != nil {

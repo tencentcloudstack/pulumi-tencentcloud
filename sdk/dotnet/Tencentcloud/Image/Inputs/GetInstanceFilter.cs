@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image.Inputs
 {
 
-    public sealed class GetInstanceFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Key of the filter, valid keys: `image-id`, `image-type`, `image-name`.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image.Inputs
         public GetInstanceFilterArgs()
         {
         }
+        public static new GetInstanceFilterArgs Empty => new GetInstanceFilterArgs();
     }
 }

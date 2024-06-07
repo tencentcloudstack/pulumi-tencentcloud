@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const userStore = new tencentcloud.Ciam.UserStore("user_store", {
+ * const userStore = new tencentcloud.ciam.UserStore("userStore", {
  *     userPoolDesc: "for terraform test 123",
  *     userPoolLogo: "https://ciam-prd-1302490086.cos.ap-guangzhou.myqcloud.com/temporary/92630252a2c5422d9663db5feafd619b.png",
  *     userPoolName: "tf_user_store",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ciam user_store can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ciam/userStore:UserStore user_store userStoreId
+ * $ pulumi import tencentcloud:Ciam/userStore:UserStore user_store userStoreId
  * ```
  */
 export class UserStore extends pulumi.CustomResource {

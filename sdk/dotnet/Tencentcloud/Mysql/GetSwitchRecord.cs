@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql switch_record
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var switchRecord = Tencentcloud.Mysql.GetSwitchRecord.Invoke(new()
         ///     {
-        ///         var switchRecord = Output.Create(Tencentcloud.Mysql.GetSwitchRecord.InvokeAsync(new Tencentcloud.Mysql.GetSwitchRecordArgs
-        ///         {
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSwitchRecordResult> InvokeAsync(GetSwitchRecordArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSwitchRecordResult>("tencentcloud:Mysql/getSwitchRecord:getSwitchRecord", args ?? new GetSwitchRecordArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSwitchRecordResult>("tencentcloud:Mysql/getSwitchRecord:getSwitchRecord", args ?? new GetSwitchRecordArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql switch_record
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var switchRecord = Tencentcloud.Mysql.GetSwitchRecord.Invoke(new()
         ///     {
-        ///         var switchRecord = Output.Create(Tencentcloud.Mysql.GetSwitchRecord.InvokeAsync(new Tencentcloud.Mysql.GetSwitchRecordArgs
-        ///         {
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSwitchRecordResult> Invoke(GetSwitchRecordInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSwitchRecordResult>("tencentcloud:Mysql/getSwitchRecord:getSwitchRecord", args ?? new GetSwitchRecordInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSwitchRecordResult>("tencentcloud:Mysql/getSwitchRecord:getSwitchRecord", args ?? new GetSwitchRecordInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSwitchRecordArgs : Pulumi.InvokeArgs
+    public sealed class GetSwitchRecordArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, the format is: cdb-c1nl9rpv or cdbro-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetSwitchRecordArgs()
         {
         }
+        public static new GetSwitchRecordArgs Empty => new GetSwitchRecordArgs();
     }
 
-    public sealed class GetSwitchRecordInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSwitchRecordInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, the format is: cdb-c1nl9rpv or cdbro-c1nl9rpv, which is the same as the instance ID displayed on the cloud database console page.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetSwitchRecordInvokeArgs()
         {
         }
+        public static new GetSwitchRecordInvokeArgs Empty => new GetSwitchRecordInvokeArgs();
     }
 
 

@@ -15,40 +15,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Eb.EventBus("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Eb.EventBus("foo", new Tencentcloud.Eb.EventBusArgs
+    ///         Description = "event bus desc",
+    ///         EnableStore = false,
+    ///         EventBusName = "tf-event_bus",
+    ///         SaveDays = 1,
+    ///         Tags = 
     ///         {
-    ///             Description = "event bus desc",
-    ///             EnableStore = false,
-    ///             EventBusName = "tf-event_bus",
-    ///             SaveDays = 1,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// eb event_bus can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Eb/eventBus:EventBus event_bus event_bus_id
+    /// $ pulumi import tencentcloud:Eb/eventBus:EventBus event_bus event_bus_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eb/eventBus:EventBus")]
-    public partial class EventBus : Pulumi.CustomResource
+    public partial class EventBus : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Event set description, unlimited character type, description within 200 characters.
@@ -125,7 +126,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         }
     }
 
-    public sealed class EventBusArgs : Pulumi.ResourceArgs
+    public sealed class EventBusArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Event set description, unlimited character type, description within 200 characters.
@@ -166,9 +167,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public EventBusArgs()
         {
         }
+        public static new EventBusArgs Empty => new EventBusArgs();
     }
 
-    public sealed class EventBusState : Pulumi.ResourceArgs
+    public sealed class EventBusState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Event set description, unlimited character type, description within 200 characters.
@@ -209,5 +211,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public EventBusState()
         {
         }
+        public static new EventBusState Empty => new EventBusState();
     }
 }

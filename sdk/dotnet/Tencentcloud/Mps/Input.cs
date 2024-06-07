@@ -14,54 +14,56 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// Provides a resource to create a mps input
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create mps input group with SRT
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var input = new Tencentcloud.Mps.Input("input", new()
     ///     {
-    ///         var input = new Tencentcloud.Mps.Input("input", new Tencentcloud.Mps.InputArgs
+    ///         FlowId = tencentcloud_mps_flow.Flow.Id,
+    ///         InputGroup = new Tencentcloud.Mps.Inputs.InputInputGroupArgs
     ///         {
-    ///             FlowId = tencentcloud_mps_flow.Flow.Id,
-    ///             InputGroup = new Tencentcloud.Mps.Inputs.InputInputGroupArgs
+    ///             InputName = "your_input_name",
+    ///             Protocol = "SRT",
+    ///             Description = "input name Description",
+    ///             AllowIpLists = new[]
     ///             {
-    ///                 InputName = "your_input_name",
-    ///                 Protocol = "SRT",
-    ///                 Description = "input name Description",
-    ///                 AllowIpLists = 
-    ///                 {
-    ///                     "0.0.0.0/0",
-    ///                 },
-    ///                 SrtSettings = new Tencentcloud.Mps.Inputs.InputInputGroupSrtSettingsArgs
-    ///                 {
-    ///                     Mode = "LISTENER",
-    ///                     StreamId = "#!::u=johnny,r=resource,h=xxx.com,t=stream,m=play",
-    ///                     Latency = 1000,
-    ///                     RecvLatency = 1000,
-    ///                     PeerLatency = 1000,
-    ///                     PeerIdleTimeout = 1000,
-    ///                 },
+    ///                 "0.0.0.0/0",
     ///             },
-    ///         });
-    ///     }
+    ///             SrtSettings = new Tencentcloud.Mps.Inputs.InputInputGroupSrtSettingsArgs
+    ///             {
+    ///                 Mode = "LISTENER",
+    ///                 StreamId = "#!::u=johnny,r=resource,h=xxx.com,t=stream,m=play",
+    ///                 Latency = 1000,
+    ///                 RecvLatency = 1000,
+    ///                 PeerLatency = 1000,
+    ///                 PeerIdleTimeout = 1000,
+    ///             },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mps input can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/input:Input input input_id
+    /// $ pulumi import tencentcloud:Mps/input:Input input input_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/input:Input")]
-    public partial class Input : Pulumi.CustomResource
+    public partial class Input : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Flow ID.
@@ -120,7 +122,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class InputArgs : Pulumi.ResourceArgs
+    public sealed class InputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Flow ID.
@@ -137,9 +139,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public InputArgs()
         {
         }
+        public static new InputArgs Empty => new InputArgs();
     }
 
-    public sealed class InputState : Pulumi.ResourceArgs
+    public sealed class InputState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Flow ID.
@@ -156,5 +159,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public InputState()
         {
         }
+        public static new InputState Empty => new InputState();
     }
 }

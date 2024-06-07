@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const mysql = pulumi.output(tencentcloud.Mysql.getInstance({
+ * const mysql = tencentcloud.Mysql.getInstance({
  *     mysqlId: "cdb-fitq5t9h",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstance(args?: GetInstanceArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getInstance:getInstance", {
         "chargeType": args.chargeType,
         "engineVersion": args.engineVersion,
@@ -84,7 +84,7 @@ export interface GetInstanceArgs {
     /**
      * It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance, `0`: prepay, `1`: postpaid.
      *
-     * @deprecated It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+     * @deprecated It has been deprecated from version 1.36.0. Please use `chargeType` instead.
      */
     payType?: number;
     /**
@@ -154,7 +154,7 @@ export interface GetInstanceResult {
     /**
      * Pay type of instance, `0`: prepaid, `1`: postpaid.
      *
-     * @deprecated It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+     * @deprecated It has been deprecated from version 1.36.0. Please use `chargeType` instead.
      */
     readonly payType?: number;
     readonly resultOutputFile?: string;
@@ -167,9 +167,24 @@ export interface GetInstanceResult {
     readonly withMaster?: number;
     readonly withRo?: number;
 }
-
+/**
+ * Use this data source to get information about a MySQL instance.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const mysql = tencentcloud.Mysql.getInstance({
+ *     mysqlId: "cdb-fitq5t9h",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceOutput(args?: GetInstanceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceResult> {
-    return pulumi.output(args).apply(a => getInstance(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstance(a, opts))
 }
 
 /**
@@ -211,7 +226,7 @@ export interface GetInstanceOutputArgs {
     /**
      * It has been deprecated from version 1.36.0. Please use `chargeType` instead. Pay type of instance, `0`: prepay, `1`: postpaid.
      *
-     * @deprecated It has been deprecated from version 1.36.0. Please use `charge_type` instead.
+     * @deprecated It has been deprecated from version 1.36.0. Please use `chargeType` instead.
      */
     payType?: pulumi.Input<number>;
     /**

@@ -15,137 +15,146 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Scf.Function("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Scf.Function("foo", new Tencentcloud.Scf.FunctionArgs
-    ///         {
-    ///             CosBucketName = "scf-code-1234567890",
-    ///             CosBucketRegion = "ap-guangzhou",
-    ///             CosObjectName = "code.zip",
-    ///             Handler = "main.do_it",
-    ///             Runtime = "Python3.6",
-    ///         });
-    ///     }
+    ///         CosBucketName = "scf-code-1234567890",
+    ///         CosBucketRegion = "ap-guangzhou",
+    ///         CosObjectName = "code.zip",
+    ///         Handler = "main.do_it",
+    ///         Runtime = "Python3.6",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Using Zip file
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Scf.Function("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Scf.Function("foo", new Tencentcloud.Scf.FunctionArgs
+    ///         DnsCache = true,
+    ///         EnablePublicNet = true,
+    ///         Handler = "first.do_it_first",
+    ///         IntranetConfig = new Tencentcloud.Scf.Inputs.FunctionIntranetConfigArgs
     ///         {
-    ///             DnsCache = true,
-    ///             EnablePublicNet = true,
-    ///             Handler = "first.do_it_first",
-    ///             IntranetConfig = new Tencentcloud.Scf.Inputs.FunctionIntranetConfigArgs
-    ///             {
-    ///                 IpFixed = "ENABLE",
-    ///             },
-    ///             Runtime = "Python3.6",
-    ///             SubnetId = "subnet-ljyn7h30",
-    ///             Tags = 
-    ///             {
-    ///                 { "env", "test" },
-    ///             },
-    ///             VpcId = "vpc-391sv4w3",
-    ///             ZipFile = "/scf/first.zip",
-    ///         });
-    ///     }
+    ///             IpFixed = "ENABLE",
+    ///         },
+    ///         Runtime = "Python3.6",
+    ///         SubnetId = "subnet-ljyn7h30",
+    ///         Tags = 
+    ///         {
+    ///             { "env", "test" },
+    ///         },
+    ///         VpcId = "vpc-391sv4w3",
+    ///         ZipFile = "/scf/first.zip",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Using CFS config
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Scf.Function("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Scf.Function("foo", new Tencentcloud.Scf.FunctionArgs
+    ///         CfsConfigs = new[]
     ///         {
-    ///             CfsConfigs = 
+    ///             new Tencentcloud.Scf.Inputs.FunctionCfsConfigArgs
     ///             {
-    ///                 new Tencentcloud.Scf.Inputs.FunctionCfsConfigArgs
-    ///                 {
-    ///                     CfsId = "cfs-xxxxxxxx",
-    ///                     LocalMountDir = "/mnt",
-    ///                     MountInsId = "cfs-xxxxxxxx",
-    ///                     RemoteMountDir = "/",
-    ///                     UserGroupId = "10000",
-    ///                     UserId = "10000",
-    ///                 },
+    ///                 CfsId = "cfs-xxxxxxxx",
+    ///                 LocalMountDir = "/mnt",
+    ///                 MountInsId = "cfs-xxxxxxxx",
+    ///                 RemoteMountDir = "/",
+    ///                 UserGroupId = "10000",
+    ///                 UserId = "10000",
     ///             },
-    ///             Handler = "main.do_it",
-    ///             Runtime = "Python3.6",
-    ///         });
-    ///     }
+    ///         },
+    ///         Handler = "main.do_it",
+    ///         Runtime = "Python3.6",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Using triggers
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Scf.Function("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Scf.Function("foo", new Tencentcloud.Scf.FunctionArgs
+    ///         EnablePublicNet = true,
+    ///         Handler = "first.do_it_first",
+    ///         Runtime = "Python3.6",
+    ///         Triggers = new[]
     ///         {
-    ///             EnablePublicNet = true,
-    ///             Handler = "first.do_it_first",
-    ///             Runtime = "Python3.6",
-    ///             Triggers = 
+    ///             new Tencentcloud.Scf.Inputs.FunctionTriggerArgs
     ///             {
-    ///                 new Tencentcloud.Scf.Inputs.FunctionTriggerArgs
-    ///                 {
-    ///                     Name = "tf-test-fn-trigger",
-    ///                     TriggerDesc = "*/5 * * * * * *",
-    ///                     Type = "timer",
-    ///                 },
-    ///                 new Tencentcloud.Scf.Inputs.FunctionTriggerArgs
-    ///                 {
-    ///                     CosRegion = "ap-guangzhou",
-    ///                     Name = "scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com",
-    ///                     TriggerDesc = "{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}",
-    ///                     Type = "cos",
-    ///                 },
+    ///                 Name = "tf-test-fn-trigger",
+    ///                 TriggerDesc = "*/5 * * * * * *",
+    ///                 Type = "timer",
     ///             },
-    ///             ZipFile = "/scf/first.zip",
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Scf.Inputs.FunctionTriggerArgs
+    ///             {
+    ///                 CosRegion = "ap-guangzhou",
+    ///                 Name = "scf-bucket-1308919341.cos.ap-guangzhou.myqcloud.com",
+    ///                 TriggerDesc = "{\"event\":\"cos:ObjectCreated:Put\",\"filter\":{\"Prefix\":\"\",\"Suffix\":\"\"}}",
+    ///                 Type = "cos",
+    ///             },
+    ///         },
+    ///         ZipFile = "/scf/first.zip",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// SCF function can be imported, e.g.
     /// 
+    /// -&gt; __NOTE:__ function id is `&lt;function namespace&gt;+&lt;function name&gt;`
+    /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Scf/function:Function test default+test
+    /// $ pulumi import tencentcloud:Scf/function:Function test default+test
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/function:Function")]
-    public partial class Function : Pulumi.CustomResource
+    public partial class Function : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
@@ -260,6 +269,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// </summary>
         [Output("funcType")]
         public Output<string?> FuncType { get; private set; } = null!;
+
+        /// <summary>
+        /// function ID.
+        /// </summary>
+        [Output("functionId")]
+        public Output<string> FunctionId { get; private set; } = null!;
 
         /// <summary>
         /// Handler of the SCF function. The format of name is `&lt;filename&gt;.&lt;method_name&gt;`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
@@ -444,7 +459,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         }
     }
 
-    public sealed class FunctionArgs : Pulumi.ResourceArgs
+    public sealed class FunctionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
@@ -659,9 +674,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public FunctionArgs()
         {
         }
+        public static new FunctionArgs Empty => new FunctionArgs();
     }
 
-    public sealed class FunctionState : Pulumi.ResourceArgs
+    public sealed class FunctionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether SCF function asynchronous attribute is enabled. `TRUE` is open, `FALSE` is close.
@@ -794,6 +810,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// </summary>
         [Input("funcType")]
         public Input<string>? FuncType { get; set; }
+
+        /// <summary>
+        /// function ID.
+        /// </summary>
+        [Input("functionId")]
+        public Input<string>? FunctionId { get; set; }
 
         /// <summary>
         /// Handler of the SCF function. The format of name is `&lt;filename&gt;.&lt;method_name&gt;`, and it supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
@@ -966,5 +988,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public FunctionState()
         {
         }
+        public static new FunctionState Empty => new FunctionState();
     }
 }

@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const userStore = new tencentcloud.ciam.UserStore("userStore", {
  *     userPoolName: "tf_user_store",
@@ -24,13 +25,14 @@ import * as utilities from "../utilities";
  *     description: "for terrafrom test",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ciam user_group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ciam/userGroup:UserGroup user_group userStoreId#userGroupId
+ * $ pulumi import tencentcloud:Ciam/userGroup:UserGroup user_group userStoreId#userGroupId
  * ```
  */
 export class UserGroup extends pulumi.CustomResource {

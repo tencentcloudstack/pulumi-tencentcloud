@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type GetPairsKeyPairList struct {
 	// Creation time of the key pair.
@@ -26,7 +29,7 @@ type GetPairsKeyPairList struct {
 // GetPairsKeyPairListInput is an input type that accepts GetPairsKeyPairListArgs and GetPairsKeyPairListOutput values.
 // You can construct a concrete instance of `GetPairsKeyPairListInput` via:
 //
-//          GetPairsKeyPairListArgs{...}
+//	GetPairsKeyPairListArgs{...}
 type GetPairsKeyPairListInput interface {
 	pulumi.Input
 
@@ -62,7 +65,7 @@ func (i GetPairsKeyPairListArgs) ToGetPairsKeyPairListOutputWithContext(ctx cont
 // GetPairsKeyPairListArrayInput is an input type that accepts GetPairsKeyPairListArray and GetPairsKeyPairListArrayOutput values.
 // You can construct a concrete instance of `GetPairsKeyPairListArrayInput` via:
 //
-//          GetPairsKeyPairListArray{ GetPairsKeyPairListArgs{...} }
+//	GetPairsKeyPairListArray{ GetPairsKeyPairListArgs{...} }
 type GetPairsKeyPairListArrayInput interface {
 	pulumi.Input
 

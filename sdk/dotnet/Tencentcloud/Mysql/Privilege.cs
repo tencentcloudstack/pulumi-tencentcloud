@@ -15,152 +15,159 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "cdb",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "mysql test",
-    ///         });
-    ///         var exampleInstance = new Tencentcloud.Mysql.Instance("exampleInstance", new Tencentcloud.Mysql.InstanceArgs
-    ///         {
-    ///             InternetService = 1,
-    ///             EngineVersion = "5.7",
-    ///             ChargeType = "POSTPAID",
-    ///             RootPassword = "PassWord123",
-    ///             SlaveDeployMode = 0,
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///             SlaveSyncMode = 1,
-    ///             InstanceName = "tf-example-mysql",
-    ///             MemSize = 4000,
-    ///             VolumeSize = 200,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             IntranetPort = 3306,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 securityGroup.Id,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "name", "test" },
-    ///             },
-    ///             Parameters = 
-    ///             {
-    ///                 { "character_set_server", "utf8" },
-    ///                 { "max_connections", "1000" },
-    ///             },
-    ///         });
-    ///         var exampleAccount = new Tencentcloud.Mysql.Account("exampleAccount", new Tencentcloud.Mysql.AccountArgs
-    ///         {
-    ///             MysqlId = exampleInstance.Id,
-    ///             Password = "Qwer@234",
-    ///             Description = "desc.",
-    ///             MaxUserConnections = 10,
-    ///         });
-    ///         var examplePrivilege = new Tencentcloud.Mysql.Privilege("examplePrivilege", new Tencentcloud.Mysql.PrivilegeArgs
-    ///         {
-    ///             MysqlId = exampleInstance.Id,
-    ///             AccountName = exampleAccount.Name,
-    ///             Globals = 
-    ///             {
-    ///                 "TRIGGER",
-    ///             },
-    ///             Databases = 
-    ///             {
-    ///                 new Tencentcloud.Mysql.Inputs.PrivilegeDatabaseArgs
-    ///                 {
-    ///                     Privileges = 
-    ///                     {
-    ///                         "SELECT",
-    ///                         "INSERT",
-    ///                         "UPDATE",
-    ///                         "DELETE",
-    ///                         "CREATE",
-    ///                     },
-    ///                     DatabaseName = "sys",
-    ///                 },
-    ///                 new Tencentcloud.Mysql.Inputs.PrivilegeDatabaseArgs
-    ///                 {
-    ///                     Privileges = 
-    ///                     {
-    ///                         "SELECT",
-    ///                     },
-    ///                     DatabaseName = "performance_schema",
-    ///                 },
-    ///             },
-    ///             Tables = 
-    ///             {
-    ///                 new Tencentcloud.Mysql.Inputs.PrivilegeTableArgs
-    ///                 {
-    ///                     Privileges = 
-    ///                     {
-    ///                         "SELECT",
-    ///                         "INSERT",
-    ///                         "UPDATE",
-    ///                         "DELETE",
-    ///                         "CREATE",
-    ///                     },
-    ///                     DatabaseName = "mysql",
-    ///                     TableName = "slow_log",
-    ///                 },
-    ///                 new Tencentcloud.Mysql.Inputs.PrivilegeTableArgs
-    ///                 {
-    ///                     Privileges = 
-    ///                     {
-    ///                         "SELECT",
-    ///                         "INSERT",
-    ///                         "UPDATE",
-    ///                     },
-    ///                     DatabaseName = "mysql",
-    ///                     TableName = "user",
-    ///                 },
-    ///             },
-    ///             Columns = 
-    ///             {
-    ///                 new Tencentcloud.Mysql.Inputs.PrivilegeColumnArgs
-    ///                 {
-    ///                     Privileges = 
-    ///                     {
-    ///                         "SELECT",
-    ///                         "INSERT",
-    ///                         "UPDATE",
-    ///                         "REFERENCES",
-    ///                     },
-    ///                     DatabaseName = "mysql",
-    ///                     TableName = "user",
-    ///                     ColumnName = "host",
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///         Product = "cdb",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    ///     {
+    ///         Description = "mysql test",
+    ///     });
+    /// 
+    ///     var exampleInstance = new Tencentcloud.Mysql.Instance("exampleInstance", new()
+    ///     {
+    ///         InternetService = 1,
+    ///         EngineVersion = "5.7",
+    ///         ChargeType = "POSTPAID",
+    ///         RootPassword = "PassWord123",
+    ///         SlaveDeployMode = 0,
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         SlaveSyncMode = 1,
+    ///         InstanceName = "tf-example-mysql",
+    ///         MemSize = 4000,
+    ///         VolumeSize = 200,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         IntranetPort = 3306,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             securityGroup.Id,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "name", "test" },
+    ///         },
+    ///         Parameters = 
+    ///         {
+    ///             { "character_set_server", "utf8" },
+    ///             { "max_connections", "1000" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleAccount = new Tencentcloud.Mysql.Account("exampleAccount", new()
+    ///     {
+    ///         MysqlId = exampleInstance.Id,
+    ///         Password = "Qwer@234",
+    ///         Description = "desc.",
+    ///         MaxUserConnections = 10,
+    ///     });
+    /// 
+    ///     var examplePrivilege = new Tencentcloud.Mysql.Privilege("examplePrivilege", new()
+    ///     {
+    ///         MysqlId = exampleInstance.Id,
+    ///         AccountName = exampleAccount.Name,
+    ///         Globals = new[]
+    ///         {
+    ///             "TRIGGER",
+    ///         },
+    ///         Databases = new[]
+    ///         {
+    ///             new Tencentcloud.Mysql.Inputs.PrivilegeDatabaseArgs
+    ///             {
+    ///                 Privileges = new[]
+    ///                 {
+    ///                     "SELECT",
+    ///                     "INSERT",
+    ///                     "UPDATE",
+    ///                     "DELETE",
+    ///                     "CREATE",
+    ///                 },
+    ///                 DatabaseName = "sys",
+    ///             },
+    ///             new Tencentcloud.Mysql.Inputs.PrivilegeDatabaseArgs
+    ///             {
+    ///                 Privileges = new[]
+    ///                 {
+    ///                     "SELECT",
+    ///                 },
+    ///                 DatabaseName = "performance_schema",
+    ///             },
+    ///         },
+    ///         Tables = new[]
+    ///         {
+    ///             new Tencentcloud.Mysql.Inputs.PrivilegeTableArgs
+    ///             {
+    ///                 Privileges = new[]
+    ///                 {
+    ///                     "SELECT",
+    ///                     "INSERT",
+    ///                     "UPDATE",
+    ///                     "DELETE",
+    ///                     "CREATE",
+    ///                 },
+    ///                 DatabaseName = "mysql",
+    ///                 TableName = "slow_log",
+    ///             },
+    ///             new Tencentcloud.Mysql.Inputs.PrivilegeTableArgs
+    ///             {
+    ///                 Privileges = new[]
+    ///                 {
+    ///                     "SELECT",
+    ///                     "INSERT",
+    ///                     "UPDATE",
+    ///                 },
+    ///                 DatabaseName = "mysql",
+    ///                 TableName = "user",
+    ///             },
+    ///         },
+    ///         Columns = new[]
+    ///         {
+    ///             new Tencentcloud.Mysql.Inputs.PrivilegeColumnArgs
+    ///             {
+    ///                 Privileges = new[]
+    ///                 {
+    ///                     "SELECT",
+    ///                     "INSERT",
+    ///                     "UPDATE",
+    ///                     "REFERENCES",
+    ///                 },
+    ///                 DatabaseName = "mysql",
+    ///                 TableName = "user",
+    ///                 ColumnName = "host",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/privilege:Privilege")]
-    public partial class Privilege : Pulumi.CustomResource
+    public partial class Privilege : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Account host, default is `%`.
@@ -249,7 +256,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         }
     }
 
-    public sealed class PrivilegeArgs : Pulumi.ResourceArgs
+    public sealed class PrivilegeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Account host, default is `%`.
@@ -320,9 +327,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public PrivilegeArgs()
         {
         }
+        public static new PrivilegeArgs Empty => new PrivilegeArgs();
     }
 
-    public sealed class PrivilegeState : Pulumi.ResourceArgs
+    public sealed class PrivilegeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Account host, default is `%`.
@@ -393,5 +401,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public PrivilegeState()
         {
         }
+        public static new PrivilegeState Empty => new PrivilegeState();
     }
 }

@@ -11,8 +11,11 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class JobLoadLoadSpecArgs : Pulumi.ResourceArgs
+    public sealed class JobLoadLoadSpecArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Configuration of concurrent pressure mode.
+        /// </summary>
         [Input("concurrency")]
         public Input<Inputs.JobLoadLoadSpecConcurrencyArgs>? Concurrency { get; set; }
 
@@ -22,11 +25,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         [Input("requestsPerSecond")]
         public Input<Inputs.JobLoadLoadSpecRequestsPerSecondArgs>? RequestsPerSecond { get; set; }
 
+        /// <summary>
+        /// Built-in stress mode in script.
+        /// </summary>
         [Input("scriptOrigin")]
         public Input<Inputs.JobLoadLoadSpecScriptOriginArgs>? ScriptOrigin { get; set; }
 
         public JobLoadLoadSpecArgs()
         {
         }
+        public static new JobLoadLoadSpecArgs Empty => new JobLoadLoadSpecArgs();
     }
 }

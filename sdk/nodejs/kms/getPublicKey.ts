@@ -9,10 +9,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleKey = new tencentcloud.kms.Key("exampleKey", {
  *     alias: "tf-example-kms-key",
@@ -25,13 +26,11 @@ import * as utilities from "../utilities";
  *     keyId: exampleKey.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPublicKey(args: GetPublicKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicKeyResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Kms/getPublicKey:getPublicKey", {
         "keyId": args.keyId,
         "resultOutputFile": args.resultOutputFile,
@@ -71,9 +70,32 @@ export interface GetPublicKeyResult {
     readonly publicKeyPem: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of kms publicKey
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleKey = new tencentcloud.kms.Key("exampleKey", {
+ *     alias: "tf-example-kms-key",
+ *     description: "example of kms key",
+ *     keyUsage: "ASYMMETRIC_DECRYPT_RSA_2048",
+ *     isEnabled: true,
+ *     pendingDeleteWindowInDays: 7,
+ * });
+ * const examplePublicKey = tencentcloud.Kms.getPublicKeyOutput({
+ *     keyId: exampleKey.id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPublicKeyOutput(args: GetPublicKeyOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPublicKeyResult> {
-    return pulumi.output(args).apply(a => getPublicKey(a, opts))
+    return pulumi.output(args).apply((a: any) => getPublicKey(a, opts))
 }
 
 /**

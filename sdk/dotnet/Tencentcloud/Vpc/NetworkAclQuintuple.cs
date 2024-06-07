@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
 {
     [TencentcloudResourceType("tencentcloud:Vpc/networkAclQuintuple:NetworkAclQuintuple")]
-    public partial class NetworkAclQuintuple : Pulumi.CustomResource
+    public partial class NetworkAclQuintuple : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Network ACL instance ID. For example:acl-12345678.
@@ -70,7 +70,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class NetworkAclQuintupleArgs : Pulumi.ResourceArgs
+    public sealed class NetworkAclQuintupleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Network ACL instance ID. For example:acl-12345678.
@@ -87,9 +87,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public NetworkAclQuintupleArgs()
         {
         }
+        public static new NetworkAclQuintupleArgs Empty => new NetworkAclQuintupleArgs();
     }
 
-    public sealed class NetworkAclQuintupleState : Pulumi.ResourceArgs
+    public sealed class NetworkAclQuintupleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Network ACL instance ID. For example:acl-12345678.
@@ -106,5 +107,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public NetworkAclQuintupleState()
         {
         }
+        public static new NetworkAclQuintupleState Empty => new NetworkAclQuintupleState();
     }
 }

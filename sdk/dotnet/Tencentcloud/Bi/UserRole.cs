@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var userRole = new Tencentcloud.Bi.UserRole("userRole", new()
     ///     {
-    ///         var userRole = new Tencentcloud.Bi.UserRole("userRole", new Tencentcloud.Bi.UserRoleArgs
+    ///         AreaCode = "+83",
+    ///         Email = "1055000000@qq.com",
+    ///         PhoneNumber = "13470010000",
+    ///         RoleIdLists = new[]
     ///         {
-    ///             AreaCode = "+83",
-    ///             Email = "1055000000@qq.com",
-    ///             PhoneNumber = "13470010000",
-    ///             RoleIdLists = 
-    ///             {
-    ///                 10629359,
-    ///             },
-    ///             UserId = "100032767426",
-    ///             UserName = "keep-iac-test",
-    ///         });
-    ///     }
+    ///             10629359,
+    ///         },
+    ///         UserId = "100032767426",
+    ///         UserName = "keep-iac-test",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// bi user_role can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Bi/userRole:UserRole user_role user_id
+    /// $ pulumi import tencentcloud:Bi/userRole:UserRole user_role user_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Bi/userRole:UserRole")]
-    public partial class UserRole : Pulumi.CustomResource
+    public partial class UserRole : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Mobile area code(Note: This field may return null, indicating that no valid value can be obtained).
@@ -132,7 +133,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         }
     }
 
-    public sealed class UserRoleArgs : Pulumi.ResourceArgs
+    public sealed class UserRoleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Mobile area code(Note: This field may return null, indicating that no valid value can be obtained).
@@ -179,9 +180,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         public UserRoleArgs()
         {
         }
+        public static new UserRoleArgs Empty => new UserRoleArgs();
     }
 
-    public sealed class UserRoleState : Pulumi.ResourceArgs
+    public sealed class UserRoleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Mobile area code(Note: This field may return null, indicating that no valid value can be obtained).
@@ -228,5 +230,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         public UserRoleState()
         {
         }
+        public static new UserRoleState Empty => new UserRoleState();
     }
 }

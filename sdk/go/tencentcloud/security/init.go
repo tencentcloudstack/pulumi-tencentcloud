@@ -8,7 +8,7 @@ import (
 
 	"github.com/blang/semver"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type module struct {
@@ -23,8 +23,6 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Security/group:Group":
 		r = &Group{}
-	case "tencentcloud:Security/groupLiteRule:GroupLiteRule":
-		r = &GroupLiteRule{}
 	case "tencentcloud:Security/groupRuleSet:GroupRuleSet":
 		r = &GroupRuleSet{}
 	default:
@@ -36,18 +34,13 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 }
 
 func init() {
-	version, err := tencentcloud.PkgVersion()
+	version, err := internal.PkgVersion()
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Security/group",
-		&module{version},
-	)
-	pulumi.RegisterResourceModule(
-		"tencentcloud",
-		"Security/groupLiteRule",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

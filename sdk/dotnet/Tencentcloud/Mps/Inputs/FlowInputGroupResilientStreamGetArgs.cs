@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class FlowInputGroupResilientStreamGetArgs : Pulumi.ResourceArgs
+    public sealed class FlowInputGroupResilientStreamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Delay time, in seconds, currently supports a range of 10 to 300 seconds. Note: This field may return null, indicating that no valid value can be obtained.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public FlowInputGroupResilientStreamGetArgs()
         {
         }
+        public static new FlowInputGroupResilientStreamGetArgs Empty => new FlowInputGroupResilientStreamGetArgs();
     }
 }

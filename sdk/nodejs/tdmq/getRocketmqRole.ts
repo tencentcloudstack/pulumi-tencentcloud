@@ -2,18 +2,16 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of tdmqRocketmq role
  */
 export function getRocketmqRole(args: GetRocketmqRoleArgs, opts?: pulumi.InvokeOptions): Promise<GetRocketmqRoleResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tdmq/getRocketmqRole:getRocketmqRole", {
         "clusterId": args.clusterId,
         "resultOutputFile": args.resultOutputFile,
@@ -58,9 +56,11 @@ export interface GetRocketmqRoleResult {
      */
     readonly roleSets: outputs.Tdmq.GetRocketmqRoleRoleSet[];
 }
-
+/**
+ * Use this data source to query detailed information of tdmqRocketmq role
+ */
 export function getRocketmqRoleOutput(args: GetRocketmqRoleOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRocketmqRoleResult> {
-    return pulumi.output(args).apply(a => getRocketmqRole(a, opts))
+    return pulumi.output(args).apply((a: any) => getRocketmqRole(a, opts))
 }
 
 /**

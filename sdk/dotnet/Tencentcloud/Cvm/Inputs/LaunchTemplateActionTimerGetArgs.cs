@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateActionTimerGetArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateActionTimerGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Execution time.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateActionTimerGetArgs()
         {
         }
+        public static new LaunchTemplateActionTimerGetArgs Empty => new LaunchTemplateActionTimerGetArgs();
     }
 }

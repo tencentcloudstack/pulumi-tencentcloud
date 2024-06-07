@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = pulumi.output(tencentcloud.Sqlserver.getBackups({
+ * const foo = tencentcloud.Sqlserver.getBackups({
  *     endTime: "2020-06-22 00:00:00",
  *     instanceId: "mssql-3cdq7kx5",
  *     startTime: "2020-06-17 00:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBackups(args: GetBackupsArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Sqlserver/getBackups:getBackups", {
         "backupName": args.backupName,
         "endTime": args.endTime,
@@ -86,9 +86,26 @@ export interface GetBackupsResult {
      */
     readonly startTime: string;
 }
-
+/**
+ * Use this data source to query the list of SQL Server backups.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Sqlserver.getBackups({
+ *     endTime: "2020-06-22 00:00:00",
+ *     instanceId: "mssql-3cdq7kx5",
+ *     startTime: "2020-06-17 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBackupsOutput(args: GetBackupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBackupsResult> {
-    return pulumi.output(args).apply(a => getBackups(a, opts))
+    return pulumi.output(args).apply((a: any) => getBackups(a, opts))
 }
 
 /**

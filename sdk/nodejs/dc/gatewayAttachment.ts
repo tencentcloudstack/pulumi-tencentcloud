@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const dcGatewayAttachment = new tencentcloud.Dc.GatewayAttachment("dc_gateway_attachment", {
+ * const dcGatewayAttachment = new tencentcloud.dc.GatewayAttachment("dcGatewayAttachment", {
  *     directConnectGatewayId: "dcg-dmbhf7jf",
  *     natGatewayId: "nat-7kanjc6y",
  *     vpcId: "vpc-4h9v4mo3",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dc_gateway_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dc/gatewayAttachment:GatewayAttachment dc_gateway_attachment vpcId#dcgId#ngId
+ * $ pulumi import tencentcloud:Dc/gatewayAttachment:GatewayAttachment dc_gateway_attachment vpcId#dcgId#ngId
  * ```
  */
 export class GatewayAttachment extends pulumi.CustomResource {

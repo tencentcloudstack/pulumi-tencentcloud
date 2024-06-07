@@ -8,114 +8,119 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create a VOD super player config.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		fooAdaptiveDynamicStreamingTemplate, err := Vod.NewAdaptiveDynamicStreamingTemplate(ctx, "fooAdaptiveDynamicStreamingTemplate", &Vod.AdaptiveDynamicStreamingTemplateArgs{
-// 			Format:                       pulumi.String("HLS"),
-// 			DrmType:                      pulumi.String("SimpleAES"),
-// 			DisableHigherVideoBitrate:    pulumi.Bool(false),
-// 			DisableHigherVideoResolution: pulumi.Bool(false),
-// 			Comment:                      pulumi.String("test"),
-// 			StreamInfos: vod.AdaptiveDynamicStreamingTemplateStreamInfoArray{
-// 				&vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
-// 					Video: &vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
-// 						Codec:              pulumi.String("libx265"),
-// 						Fps:                pulumi.Int(4),
-// 						Bitrate:            pulumi.Int(129),
-// 						ResolutionAdaptive: pulumi.Bool(false),
-// 						Width:              pulumi.Int(128),
-// 						Height:             pulumi.Int(128),
-// 						FillType:           pulumi.String("stretch"),
-// 					},
-// 					Audio: &vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
-// 						Codec:        pulumi.String("libmp3lame"),
-// 						Bitrate:      pulumi.Int(129),
-// 						SampleRate:   pulumi.Int(44100),
-// 						AudioChannel: pulumi.String("dual"),
-// 					},
-// 					RemoveAudio: pulumi.Bool(false),
-// 				},
-// 				&vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
-// 					Video: &vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
-// 						Codec:   pulumi.String("libx264"),
-// 						Fps:     pulumi.Int(4),
-// 						Bitrate: pulumi.Int(256),
-// 					},
-// 					Audio: &vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
-// 						Codec:      pulumi.String("libfdk_aac"),
-// 						Bitrate:    pulumi.Int(256),
-// 						SampleRate: pulumi.Int(44100),
-// 					},
-// 					RemoveAudio: pulumi.Bool(true),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		fooImageSpriteTemplate, err := Vod.NewImageSpriteTemplate(ctx, "fooImageSpriteTemplate", &Vod.ImageSpriteTemplateArgs{
-// 			SampleType:         pulumi.String("Percent"),
-// 			SampleInterval:     pulumi.Int(10),
-// 			RowCount:           pulumi.Int(3),
-// 			ColumnCount:        pulumi.Int(3),
-// 			Comment:            pulumi.String("test"),
-// 			FillType:           pulumi.String("stretch"),
-// 			Width:              pulumi.Int(128),
-// 			Height:             pulumi.Int(128),
-// 			ResolutionAdaptive: pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Vod.NewSuperPlayerConfig(ctx, "fooSuperPlayerConfig", &Vod.SuperPlayerConfigArgs{
-// 			DrmSwitch: pulumi.Bool(true),
-// 			DrmStreamingInfo: &vod.SuperPlayerConfigDrmStreamingInfoArgs{
-// 				SimpleAesDefinition: fooAdaptiveDynamicStreamingTemplate.ID(),
-// 			},
-// 			ImageSpriteDefinition: fooImageSpriteTemplate.ID(),
-// 			ResolutionNames: vod.SuperPlayerConfigResolutionNameArray{
-// 				&vod.SuperPlayerConfigResolutionNameArgs{
-// 					MinEdgeLength: pulumi.Int(889),
-// 					Name:          pulumi.String("test1"),
-// 				},
-// 				&vod.SuperPlayerConfigResolutionNameArgs{
-// 					MinEdgeLength: pulumi.Int(890),
-// 					Name:          pulumi.String("test2"),
-// 				},
-// 			},
-// 			Domain:  pulumi.String("Default"),
-// 			Scheme:  pulumi.String("Default"),
-// 			Comment: pulumi.String("test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			fooAdaptiveDynamicStreamingTemplate, err := Vod.NewAdaptiveDynamicStreamingTemplate(ctx, "fooAdaptiveDynamicStreamingTemplate", &Vod.AdaptiveDynamicStreamingTemplateArgs{
+//				Format:                       pulumi.String("HLS"),
+//				DrmType:                      pulumi.String("SimpleAES"),
+//				DisableHigherVideoBitrate:    pulumi.Bool(false),
+//				DisableHigherVideoResolution: pulumi.Bool(false),
+//				Comment:                      pulumi.String("test"),
+//				StreamInfos: vod.AdaptiveDynamicStreamingTemplateStreamInfoArray{
+//					&vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
+//						Video: &vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
+//							Codec:              pulumi.String("libx265"),
+//							Fps:                pulumi.Int(4),
+//							Bitrate:            pulumi.Int(129),
+//							ResolutionAdaptive: pulumi.Bool(false),
+//							Width:              pulumi.Int(128),
+//							Height:             pulumi.Int(128),
+//							FillType:           pulumi.String("stretch"),
+//						},
+//						Audio: &vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
+//							Codec:        pulumi.String("libmp3lame"),
+//							Bitrate:      pulumi.Int(129),
+//							SampleRate:   pulumi.Int(44100),
+//							AudioChannel: pulumi.String("dual"),
+//						},
+//						RemoveAudio: pulumi.Bool(false),
+//					},
+//					&vod.AdaptiveDynamicStreamingTemplateStreamInfoArgs{
+//						Video: &vod.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{
+//							Codec:   pulumi.String("libx264"),
+//							Fps:     pulumi.Int(4),
+//							Bitrate: pulumi.Int(256),
+//						},
+//						Audio: &vod.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs{
+//							Codec:      pulumi.String("libfdk_aac"),
+//							Bitrate:    pulumi.Int(256),
+//							SampleRate: pulumi.Int(44100),
+//						},
+//						RemoveAudio: pulumi.Bool(true),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			fooImageSpriteTemplate, err := Vod.NewImageSpriteTemplate(ctx, "fooImageSpriteTemplate", &Vod.ImageSpriteTemplateArgs{
+//				SampleType:         pulumi.String("Percent"),
+//				SampleInterval:     pulumi.Int(10),
+//				RowCount:           pulumi.Int(3),
+//				ColumnCount:        pulumi.Int(3),
+//				Comment:            pulumi.String("test"),
+//				FillType:           pulumi.String("stretch"),
+//				Width:              pulumi.Int(128),
+//				Height:             pulumi.Int(128),
+//				ResolutionAdaptive: pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Vod.NewSuperPlayerConfig(ctx, "fooSuperPlayerConfig", &Vod.SuperPlayerConfigArgs{
+//				DrmSwitch: pulumi.Bool(true),
+//				DrmStreamingInfo: &vod.SuperPlayerConfigDrmStreamingInfoArgs{
+//					SimpleAesDefinition: fooAdaptiveDynamicStreamingTemplate.ID(),
+//				},
+//				ImageSpriteDefinition: fooImageSpriteTemplate.ID(),
+//				ResolutionNames: vod.SuperPlayerConfigResolutionNameArray{
+//					&vod.SuperPlayerConfigResolutionNameArgs{
+//						MinEdgeLength: pulumi.Int(889),
+//						Name:          pulumi.String("test1"),
+//					},
+//					&vod.SuperPlayerConfigResolutionNameArgs{
+//						MinEdgeLength: pulumi.Int(890),
+//						Name:          pulumi.String("test2"),
+//					},
+//				},
+//				Domain:  pulumi.String("Default"),
+//				Scheme:  pulumi.String("Default"),
+//				Comment: pulumi.String("test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // VOD super player config can be imported using the name, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vod/superPlayerConfig:SuperPlayerConfig foo tf-super-player
+// $ pulumi import tencentcloud:Vod/superPlayerConfig:SuperPlayerConfig foo tf-super-player
 // ```
 type SuperPlayerConfig struct {
 	pulumi.CustomResourceState
@@ -153,7 +158,7 @@ func NewSuperPlayerConfig(ctx *pulumi.Context,
 		args = &SuperPlayerConfigArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SuperPlayerConfig
 	err := ctx.RegisterResource("tencentcloud:Vod/superPlayerConfig:SuperPlayerConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -306,7 +311,7 @@ func (i *SuperPlayerConfig) ToSuperPlayerConfigOutputWithContext(ctx context.Con
 // SuperPlayerConfigArrayInput is an input type that accepts SuperPlayerConfigArray and SuperPlayerConfigArrayOutput values.
 // You can construct a concrete instance of `SuperPlayerConfigArrayInput` via:
 //
-//          SuperPlayerConfigArray{ SuperPlayerConfigArgs{...} }
+//	SuperPlayerConfigArray{ SuperPlayerConfigArgs{...} }
 type SuperPlayerConfigArrayInput interface {
 	pulumi.Input
 
@@ -331,7 +336,7 @@ func (i SuperPlayerConfigArray) ToSuperPlayerConfigArrayOutputWithContext(ctx co
 // SuperPlayerConfigMapInput is an input type that accepts SuperPlayerConfigMap and SuperPlayerConfigMapOutput values.
 // You can construct a concrete instance of `SuperPlayerConfigMapInput` via:
 //
-//          SuperPlayerConfigMap{ "key": SuperPlayerConfigArgs{...} }
+//	SuperPlayerConfigMap{ "key": SuperPlayerConfigArgs{...} }
 type SuperPlayerConfigMapInput interface {
 	pulumi.Input
 

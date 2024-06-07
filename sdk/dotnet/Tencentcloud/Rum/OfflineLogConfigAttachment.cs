@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var offlineLogConfigAttachment = new Tencentcloud.Rum.OfflineLogConfigAttachment("offlineLogConfigAttachment", new()
     ///     {
-    ///         var offlineLogConfigAttachment = new Tencentcloud.Rum.OfflineLogConfigAttachment("offlineLogConfigAttachment", new Tencentcloud.Rum.OfflineLogConfigAttachmentArgs
-    ///         {
-    ///             ProjectKey = "ZEYrYfvaYQ30jRdmPx",
-    ///             UniqueId = "100027012454",
-    ///         });
-    ///     }
+    ///         ProjectKey = "ZEYrYfvaYQ30jRdmPx",
+    ///         UniqueId = "100027012454",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// rum offline_log_config_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Rum/offlineLogConfigAttachment:OfflineLogConfigAttachment offline_log_config_attachment ZEYrYfvaYQ30jRdmPx#100027012454
+    /// $ pulumi import tencentcloud:Rum/offlineLogConfigAttachment:OfflineLogConfigAttachment offline_log_config_attachment ZEYrYfvaYQ30jRdmPx#100027012454
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Rum/offlineLogConfigAttachment:OfflineLogConfigAttachment")]
-    public partial class OfflineLogConfigAttachment : Pulumi.CustomResource
+    public partial class OfflineLogConfigAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Interface call information.
@@ -107,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         }
     }
 
-    public sealed class OfflineLogConfigAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class OfflineLogConfigAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Unique project key for reporting.
@@ -124,9 +125,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public OfflineLogConfigAttachmentArgs()
         {
         }
+        public static new OfflineLogConfigAttachmentArgs Empty => new OfflineLogConfigAttachmentArgs();
     }
 
-    public sealed class OfflineLogConfigAttachmentState : Pulumi.ResourceArgs
+    public sealed class OfflineLogConfigAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Interface call information.
@@ -149,5 +151,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public OfflineLogConfigAttachmentState()
         {
         }
+        public static new OfflineLogConfigAttachmentState Empty => new OfflineLogConfigAttachmentState();
     }
 }

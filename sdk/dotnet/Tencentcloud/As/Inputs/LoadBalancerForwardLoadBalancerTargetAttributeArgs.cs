@@ -11,16 +11,23 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Inputs
 {
 
-    public sealed class LoadBalancerForwardLoadBalancerTargetAttributeArgs : Pulumi.ResourceArgs
+    public sealed class LoadBalancerForwardLoadBalancerTargetAttributeArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Target port.
+        /// </summary>
         [Input("port", required: true)]
         public Input<int> Port { get; set; } = null!;
 
+        /// <summary>
+        /// Target weight.
+        /// </summary>
         [Input("weight", required: true)]
         public Input<int> Weight { get; set; } = null!;
 
         public LoadBalancerForwardLoadBalancerTargetAttributeArgs()
         {
         }
+        public static new LoadBalancerForwardLoadBalancerTargetAttributeArgs Empty => new LoadBalancerForwardLoadBalancerTargetAttributeArgs();
     }
 }

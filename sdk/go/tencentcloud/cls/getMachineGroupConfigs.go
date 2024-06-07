@@ -8,49 +8,54 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of cls machineGroupConfigs
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		group, err := Cls.NewMachineGroup(ctx, "group", &Cls.MachineGroupArgs{
-// 			GroupName:       pulumi.String("tf-describe-mg-config-test"),
-// 			ServiceLogging:  pulumi.Bool(true),
-// 			AutoUpdate:      pulumi.Bool(true),
-// 			UpdateEndTime:   pulumi.String("19:05:00"),
-// 			UpdateStartTime: pulumi.String("17:05:00"),
-// 			MachineGroupType: &cls.MachineGroupMachineGroupTypeArgs{
-// 				Type: pulumi.String("ip"),
-// 				Values: pulumi.StringArray{
-// 					pulumi.String("192.168.1.1"),
-// 					pulumi.String("192.168.1.2"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Cls.GetMachineGroupConfigsOutput(ctx, cls.GetMachineGroupConfigsOutputArgs{
-// 			GroupId: group.ID(),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			group, err := Cls.NewMachineGroup(ctx, "group", &Cls.MachineGroupArgs{
+//				GroupName:       pulumi.String("tf-describe-mg-config-test"),
+//				ServiceLogging:  pulumi.Bool(true),
+//				AutoUpdate:      pulumi.Bool(true),
+//				UpdateEndTime:   pulumi.String("19:05:00"),
+//				UpdateStartTime: pulumi.String("17:05:00"),
+//				MachineGroupType: &cls.MachineGroupMachineGroupTypeArgs{
+//					Type: pulumi.String("ip"),
+//					Values: pulumi.StringArray{
+//						pulumi.String("192.168.1.1"),
+//						pulumi.String("192.168.1.2"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Cls.GetMachineGroupConfigsOutput(ctx, cls.GetMachineGroupConfigsOutputArgs{
+//				GroupId: group.ID(),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetMachineGroupConfigs(ctx *pulumi.Context, args *GetMachineGroupConfigsArgs, opts ...pulumi.InvokeOption) (*GetMachineGroupConfigsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetMachineGroupConfigsResult
 	err := ctx.Invoke("tencentcloud:Cls/getMachineGroupConfigs:getMachineGroupConfigs", args, &rv, opts...)
 	if err != nil {

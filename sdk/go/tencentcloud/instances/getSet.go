@@ -8,35 +8,48 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query cvm instances in parallel.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Instances"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instances"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instances"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Instances.GetSet(ctx, &instances.GetSetArgs{
-// 			VpcId: pulumi.StringRef("vpc-4owdpnwr"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Instances.GetSet(ctx, &instances.GetSetArgs{
+//				AvailabilityZone: pulumi.StringRef("ap-guangzhou-6"),
+//				InstanceId:       pulumi.StringRef("ins-a81rnm8c"),
+//				InstanceName:     pulumi.StringRef("tf_example"),
+//				ProjectId:        pulumi.IntRef(0),
+//				SubnetId:         pulumi.StringRef("subnet-1to7t9au"),
+//				Tags: map[string]interface{}{
+//					"tagKey": "tagValue",
+//				},
+//				VpcId: pulumi.StringRef("vpc-l040hycv"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSet(ctx *pulumi.Context, args *GetSetArgs, opts ...pulumi.InvokeOption) (*GetSetResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSetResult
 	err := ctx.Invoke("tencentcloud:Instances/getSet:getSet", args, &rv, opts...)
 	if err != nil {

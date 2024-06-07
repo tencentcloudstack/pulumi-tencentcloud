@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const functionVersion = new tencentcloud.Scf.FunctionVersion("function_version", {
+ * const functionVersion = new tencentcloud.scf.FunctionVersion("functionVersion", {
  *     description: "for-terraform-test",
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * scf function_version can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Scf/functionVersion:FunctionVersion function_version functionName#namespace#functionVersion
+ * $ pulumi import tencentcloud:Scf/functionVersion:FunctionVersion function_version functionName#namespace#functionVersion
  * ```
  */
 export class FunctionVersion extends pulumi.CustomResource {

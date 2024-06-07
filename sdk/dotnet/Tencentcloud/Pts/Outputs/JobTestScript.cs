@@ -14,15 +14,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Outputs
     [OutputType]
     public sealed class JobTestScript
     {
+        /// <summary>
+        /// Base64 encoded file content.
+        /// </summary>
         public readonly string? EncodedContent;
+        /// <summary>
+        /// Base64 encoded har structure.
+        /// </summary>
         public readonly string? EncodedHttpArchive;
+        /// <summary>
+        /// Script weight, range 1-100.
+        /// </summary>
         public readonly int? LoadWeight;
+        /// <summary>
+        /// File name.
+        /// </summary>
         public readonly string? Name;
+        /// <summary>
+        /// File size.
+        /// </summary>
         public readonly int? Size;
         /// <summary>
         /// Scene Type.
         /// </summary>
         public readonly string? Type;
+        /// <summary>
+        /// Update time.
+        /// </summary>
         public readonly string? UpdatedAt;
 
         [OutputConstructor]

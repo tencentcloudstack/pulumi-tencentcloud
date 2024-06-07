@@ -17,7 +17,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
     /// [documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.
     /// </summary>
     [TencentcloudResourceType("pulumi:providers:tencentcloud")]
-    public partial class Provider : Pulumi.ProviderResource
+    public partial class Provider : global::Pulumi.ProviderResource
     {
         /// <summary>
         /// The root domain of the API request, Default is `tencentcloudapi.com`.
@@ -93,6 +93,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "secretKey",
+                    "securityToken",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -101,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         }
     }
 
-    public sealed class ProviderArgs : Pulumi.ResourceArgs
+    public sealed class ProviderArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
@@ -142,20 +147,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         [Input("secretId")]
         public Input<string>? SecretId { get; set; }
 
+        [Input("secretKey")]
+        private Input<string>? _secretKey;
+
         /// <summary>
         /// This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
         /// environment variable.
         /// </summary>
-        [Input("secretKey")]
-        public Input<string>? SecretKey { get; set; }
+        public Input<string>? SecretKey
+        {
+            get => _secretKey;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _secretKey = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
+
+        [Input("securityToken")]
+        private Input<string>? _securityToken;
 
         /// <summary>
         /// TencentCloud Security Token of temporary access credentials. It can be sourced from the `TENCENTCLOUD_SECURITY_TOKEN`
         /// environment variable. Notice: for supported products, please refer to: [temporary key supported
         /// products](https://intl.cloud.tencent.com/document/product/598/10588).
         /// </summary>
-        [Input("securityToken")]
-        public Input<string>? SecurityToken { get; set; }
+        public Input<string>? SecurityToken
+        {
+            get => _securityToken;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _securityToken = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         /// <summary>
         /// The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`
@@ -171,5 +196,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
             SecretKey = Utilities.GetEnv("TENCENTCLOUD_SECRET_KEY");
             SecurityToken = Utilities.GetEnv("TENCENTCLOUD_SECURITY_TOKEN");
         }
+        public static new ProviderArgs Empty => new ProviderArgs();
     }
 }

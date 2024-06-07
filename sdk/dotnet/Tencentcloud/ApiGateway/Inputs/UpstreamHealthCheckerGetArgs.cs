@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class UpstreamHealthCheckerGetArgs : Pulumi.ResourceArgs
+    public sealed class UpstreamHealthCheckerGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Detect the requested path during active health checks. The default is&amp;#39;/&amp;#39;.
@@ -75,6 +75,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 
         /// <summary>
         /// The automatic recovery time of abnormal node status, in seconds. When only passive checking is enabled, it must be set to a value&amp;gt;0, otherwise the passive exception node will not be able to recover. The default is 30 seconds.
+        /// 
+        /// The `k8s_service` object supports the following:
         /// </summary>
         [Input("unhealthyTimeout")]
         public Input<int>? UnhealthyTimeout { get; set; }
@@ -82,5 +84,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public UpstreamHealthCheckerGetArgs()
         {
         }
+        public static new UpstreamHealthCheckerGetArgs Empty => new UpstreamHealthCheckerGetArgs();
     }
 }

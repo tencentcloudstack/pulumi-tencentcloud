@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var backup = new Tencentcloud.Clickhouse.Backup("backup", new()
     ///     {
-    ///         var backup = new Tencentcloud.Clickhouse.Backup("backup", new Tencentcloud.Clickhouse.BackupArgs
-    ///         {
-    ///             CosBucketName = "xxxxxx",
-    ///             InstanceId = "cdwch-xxxxxx",
-    ///         });
-    ///     }
+    ///         CosBucketName = "xxxxxx",
+    ///         InstanceId = "cdwch-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// clickhouse backup can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clickhouse/backup:Backup backup instance_id
+    /// $ pulumi import tencentcloud:Clickhouse/backup:Backup backup instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clickhouse/backup:Backup")]
-    public partial class Backup : Pulumi.CustomResource
+    public partial class Backup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// COS bucket name.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         }
     }
 
-    public sealed class BackupArgs : Pulumi.ResourceArgs
+    public sealed class BackupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// COS bucket name.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public BackupArgs()
         {
         }
+        public static new BackupArgs Empty => new BackupArgs();
     }
 
-    public sealed class BackupState : Pulumi.ResourceArgs
+    public sealed class BackupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// COS bucket name.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public BackupState()
         {
         }
+        public static new BackupState Empty => new BackupState();
     }
 }

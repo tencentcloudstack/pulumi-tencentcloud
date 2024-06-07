@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// <summary>
         /// Use this data source to query detailed information of dcdb shards
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var shards = Tencentcloud.Dcdb.GetShards.Invoke(new()
         ///     {
-        ///         var shards = Output.Create(Tencentcloud.Dcdb.GetShards.InvokeAsync(new Tencentcloud.Dcdb.GetShardsArgs
+        ///         InstanceId = "your_instance_id",
+        ///         ShardInstanceIds = new[]
         ///         {
-        ///             InstanceId = "your_instance_id",
-        ///             ShardInstanceIds = 
-        ///             {
-        ///                 "shard1_id",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "shard1_id",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetShardsResult> InvokeAsync(GetShardsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetShardsResult>("tencentcloud:Dcdb/getShards:getShards", args ?? new GetShardsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetShardsResult>("tencentcloud:Dcdb/getShards:getShards", args ?? new GetShardsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dcdb shards
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var shards = Tencentcloud.Dcdb.GetShards.Invoke(new()
         ///     {
-        ///         var shards = Output.Create(Tencentcloud.Dcdb.GetShards.InvokeAsync(new Tencentcloud.Dcdb.GetShardsArgs
+        ///         InstanceId = "your_instance_id",
+        ///         ShardInstanceIds = new[]
         ///         {
-        ///             InstanceId = "your_instance_id",
-        ///             ShardInstanceIds = 
-        ///             {
-        ///                 "shard1_id",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "shard1_id",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetShardsResult> Invoke(GetShardsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetShardsResult>("tencentcloud:Dcdb/getShards:getShards", args ?? new GetShardsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetShardsResult>("tencentcloud:Dcdb/getShards:getShards", args ?? new GetShardsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetShardsArgs : Pulumi.InvokeArgs
+    public sealed class GetShardsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -109,9 +103,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetShardsArgs()
         {
         }
+        public static new GetShardsArgs Empty => new GetShardsArgs();
     }
 
-    public sealed class GetShardsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetShardsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -140,6 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetShardsInvokeArgs()
         {
         }
+        public static new GetShardsInvokeArgs Empty => new GetShardsInvokeArgs();
     }
 
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class ScenarioLoadLoadSpecArgs : Pulumi.ResourceArgs
+    public sealed class ScenarioLoadLoadSpecArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Configuration of concurrent pressure mode.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public ScenarioLoadLoadSpecArgs()
         {
         }
+        public static new ScenarioLoadLoadSpecArgs Empty => new ScenarioLoadLoadSpecArgs();
     }
 }

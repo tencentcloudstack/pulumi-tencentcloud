@@ -15,88 +15,82 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         /// <summary>
         /// Use this data source to query detailed information of pts scenario_with_jobs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var scenarioWithJobs = Tencentcloud.Pts.GetScenarioWithJobs.Invoke(new()
         ///     {
-        ///         var scenarioWithJobs = Output.Create(Tencentcloud.Pts.GetScenarioWithJobs.InvokeAsync(new Tencentcloud.Pts.GetScenarioWithJobsArgs
+        ///         Ascend = true,
+        ///         IgnoreDataset = true,
+        ///         IgnoreScript = true,
+        ///         ProjectIds = new[]
         ///         {
-        ///             Ascend = true,
-        ///             IgnoreDataset = true,
-        ///             IgnoreScript = true,
-        ///             ProjectIds = 
-        ///             {
-        ///                 "project-45vw7v82",
-        ///             },
-        ///             ScenarioIds = 
-        ///             {
-        ///                 "scenario-koakp3h6",
-        ///             },
-        ///             ScenarioName = "pts-jmeter",
-        ///             ScenarioType = "pts-jmeter",
-        ///         }));
-        ///     }
+        ///             "project-45vw7v82",
+        ///         },
+        ///         ScenarioIds = new[]
+        ///         {
+        ///             "scenario-koakp3h6",
+        ///         },
+        ///         ScenarioName = "pts-jmeter",
+        ///         ScenarioType = "pts-jmeter",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetScenarioWithJobsResult> InvokeAsync(GetScenarioWithJobsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetScenarioWithJobsResult>("tencentcloud:Pts/getScenarioWithJobs:getScenarioWithJobs", args ?? new GetScenarioWithJobsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetScenarioWithJobsResult>("tencentcloud:Pts/getScenarioWithJobs:getScenarioWithJobs", args ?? new GetScenarioWithJobsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of pts scenario_with_jobs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var scenarioWithJobs = Tencentcloud.Pts.GetScenarioWithJobs.Invoke(new()
         ///     {
-        ///         var scenarioWithJobs = Output.Create(Tencentcloud.Pts.GetScenarioWithJobs.InvokeAsync(new Tencentcloud.Pts.GetScenarioWithJobsArgs
+        ///         Ascend = true,
+        ///         IgnoreDataset = true,
+        ///         IgnoreScript = true,
+        ///         ProjectIds = new[]
         ///         {
-        ///             Ascend = true,
-        ///             IgnoreDataset = true,
-        ///             IgnoreScript = true,
-        ///             ProjectIds = 
-        ///             {
-        ///                 "project-45vw7v82",
-        ///             },
-        ///             ScenarioIds = 
-        ///             {
-        ///                 "scenario-koakp3h6",
-        ///             },
-        ///             ScenarioName = "pts-jmeter",
-        ///             ScenarioType = "pts-jmeter",
-        ///         }));
-        ///     }
+        ///             "project-45vw7v82",
+        ///         },
+        ///         ScenarioIds = new[]
+        ///         {
+        ///             "scenario-koakp3h6",
+        ///         },
+        ///         ScenarioName = "pts-jmeter",
+        ///         ScenarioType = "pts-jmeter",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetScenarioWithJobsResult> Invoke(GetScenarioWithJobsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetScenarioWithJobsResult>("tencentcloud:Pts/getScenarioWithJobs:getScenarioWithJobs", args ?? new GetScenarioWithJobsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetScenarioWithJobsResult>("tencentcloud:Pts/getScenarioWithJobs:getScenarioWithJobs", args ?? new GetScenarioWithJobsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetScenarioWithJobsArgs : Pulumi.InvokeArgs
+    public sealed class GetScenarioWithJobsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Whether to use ascending order.
@@ -173,9 +167,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public GetScenarioWithJobsArgs()
         {
         }
+        public static new GetScenarioWithJobsArgs Empty => new GetScenarioWithJobsArgs();
     }
 
-    public sealed class GetScenarioWithJobsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetScenarioWithJobsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Whether to use ascending order.
@@ -252,6 +247,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public GetScenarioWithJobsInvokeArgs()
         {
         }
+        public static new GetScenarioWithJobsInvokeArgs Empty => new GetScenarioWithJobsInvokeArgs();
     }
 
 

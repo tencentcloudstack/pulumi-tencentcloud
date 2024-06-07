@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class InstanceDynamicRetentionConfigArgs : Pulumi.ResourceArgs
+    public sealed class InstanceDynamicRetentionConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Minimum retention time, in minutes.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public InstanceDynamicRetentionConfigArgs()
         {
         }
+        public static new InstanceDynamicRetentionConfigArgs Empty => new InstanceDynamicRetentionConfigArgs();
     }
 }

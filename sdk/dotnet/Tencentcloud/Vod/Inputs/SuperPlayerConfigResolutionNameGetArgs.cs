@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
 {
 
-    public sealed class SuperPlayerConfigResolutionNameGetArgs : Pulumi.ResourceArgs
+    public sealed class SuperPlayerConfigResolutionNameGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Length of video short side in px.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
         public SuperPlayerConfigResolutionNameGetArgs()
         {
         }
+        public static new SuperPlayerConfigResolutionNameGetArgs Empty => new SuperPlayerConfigResolutionNameGetArgs();
     }
 }

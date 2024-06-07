@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityActivityParaTranscodeTaskOverrideParameterArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityActivityParaTranscodeTaskOverrideParameterArgs : global::Pulumi.ResourceArgs
     {
         [Input("addOnSubtitles")]
         private InputList<Inputs.ScheduleActivityActivityParaTranscodeTaskOverrideParameterAddOnSubtitleArgs>? _addOnSubtitles;
@@ -88,5 +88,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityActivityParaTranscodeTaskOverrideParameterArgs()
         {
         }
+        public static new ScheduleActivityActivityParaTranscodeTaskOverrideParameterArgs Empty => new ScheduleActivityActivityParaTranscodeTaskOverrideParameterArgs();
     }
 }

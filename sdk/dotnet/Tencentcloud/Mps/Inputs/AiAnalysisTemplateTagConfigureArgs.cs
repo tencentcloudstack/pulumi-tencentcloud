@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class AiAnalysisTemplateTagConfigureArgs : Pulumi.ResourceArgs
+    public sealed class AiAnalysisTemplateTagConfigureArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Ai tag task switch, optional value:ON/OFF.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public AiAnalysisTemplateTagConfigureArgs()
         {
         }
+        public static new AiAnalysisTemplateTagConfigureArgs Empty => new AiAnalysisTemplateTagConfigureArgs();
     }
 }

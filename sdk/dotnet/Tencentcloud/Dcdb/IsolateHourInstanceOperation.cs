@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// Provides a resource to create a dcdb isolate_hour_instance_operation
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/isolateHourInstanceOperation:IsolateHourInstanceOperation")]
-    public partial class IsolateHourInstanceOperation : Pulumi.CustomResource
+    public partial class IsolateHourInstanceOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID list.
@@ -67,7 +67,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         }
     }
 
-    public sealed class IsolateHourInstanceOperationArgs : Pulumi.ResourceArgs
+    public sealed class IsolateHourInstanceOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID list.
@@ -78,9 +78,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public IsolateHourInstanceOperationArgs()
         {
         }
+        public static new IsolateHourInstanceOperationArgs Empty => new IsolateHourInstanceOperationArgs();
     }
 
-    public sealed class IsolateHourInstanceOperationState : Pulumi.ResourceArgs
+    public sealed class IsolateHourInstanceOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID list.
@@ -91,5 +92,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public IsolateHourInstanceOperationState()
         {
         }
+        public static new IsolateHourInstanceOperationState Empty => new IsolateHourInstanceOperationState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class ProjectTagGetArgs : Pulumi.ResourceArgs
+    public sealed class ProjectTagGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// tag key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public ProjectTagGetArgs()
         {
         }
+        public static new ProjectTagGetArgs Empty => new ProjectTagGetArgs();
     }
 }

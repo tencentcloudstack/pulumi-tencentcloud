@@ -8,52 +8,61 @@ import * as utilities from "../utilities";
  * Provides a resource to create a cfs autoSnapshotPolicy
  *
  * ## Example Usage
+ *
  * ### use day of week
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const autoSnapshotPolicy = new tencentcloud.Cfs.AutoSnapshotPolicy("auto_snapshot_policy", {
+ * const autoSnapshotPolicy = new tencentcloud.cfs.AutoSnapshotPolicy("autoSnapshotPolicy", {
  *     aliveDays: 7,
  *     dayOfWeek: "1,2",
  *     hour: "2,3",
  *     policyName: "policy_name",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### use day of month
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const autoSnapshotPolicy = new tencentcloud.Cfs.AutoSnapshotPolicy("auto_snapshot_policy", {
+ * const autoSnapshotPolicy = new tencentcloud.cfs.AutoSnapshotPolicy("autoSnapshotPolicy", {
  *     aliveDays: 7,
  *     dayOfMonth: "2,3,4",
  *     hour: "2,3",
  *     policyName: "policy_name",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### use interval days
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const autoSnapshotPolicy = new tencentcloud.Cfs.AutoSnapshotPolicy("auto_snapshot_policy", {
+ * const autoSnapshotPolicy = new tencentcloud.cfs.AutoSnapshotPolicy("autoSnapshotPolicy", {
  *     aliveDays: 7,
  *     hour: "2,3",
  *     intervalDays: 1,
  *     policyName: "policy_name",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cfs auto_snapshot_policy can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cfs/autoSnapshotPolicy:AutoSnapshotPolicy auto_snapshot_policy auto_snapshot_policy_id
+ * $ pulumi import tencentcloud:Cfs/autoSnapshotPolicy:AutoSnapshotPolicy auto_snapshot_policy auto_snapshot_policy_id
  * ```
  */
 export class AutoSnapshotPolicy extends pulumi.CustomResource {

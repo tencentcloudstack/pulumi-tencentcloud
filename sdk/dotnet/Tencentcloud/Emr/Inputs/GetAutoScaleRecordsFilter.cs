@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Inputs
 {
 
-    public sealed class GetAutoScaleRecordsFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetAutoScaleRecordsFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Key. Note: This field may return null, indicating that no valid value can be obtained.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Inputs
         public GetAutoScaleRecordsFilterArgs()
         {
         }
+        public static new GetAutoScaleRecordsFilterArgs Empty => new GetAutoScaleRecordsFilterArgs();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Kms.getDescribeKeys({
+ * const example = tencentcloud.Kms.getDescribeKeys({
  *     keyIds: [
  *         "9ffacc8b-6461-11ee-a54e-525400dd8a7d",
  *         "bffae4ed-6465-11ee-90b2-5254000ef00e",
  *     ],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeKeys(args: GetDescribeKeysArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeKeysResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Kms/getDescribeKeys:getDescribeKeys", {
         "keyIds": args.keyIds,
         "resultOutputFile": args.resultOutputFile,
@@ -63,9 +63,27 @@ export interface GetDescribeKeysResult {
     readonly keyLists: outputs.Kms.GetDescribeKeysKeyList[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of kms keyLists
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Kms.getDescribeKeys({
+ *     keyIds: [
+ *         "9ffacc8b-6461-11ee-a54e-525400dd8a7d",
+ *         "bffae4ed-6465-11ee-90b2-5254000ef00e",
+ *     ],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeKeysOutput(args: GetDescribeKeysOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeKeysResult> {
-    return pulumi.output(args).apply(a => getDescribeKeys(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeKeys(a, opts))
 }
 
 /**

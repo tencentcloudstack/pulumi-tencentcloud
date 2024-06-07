@@ -8,11 +8,13 @@ import * as utilities from "../utilities";
  * Provides a resource to limit CCN bandwidth.
  *
  * ## Example Usage
+ *
  * ### Set the upper limit of regional outbound bandwidth
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const otherRegion1 = config.get("otherRegion1") || "ap-shanghai";
@@ -26,11 +28,14 @@ import * as utilities from "../utilities";
  *     bandwidthLimit: 500,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Set the upper limit between regions
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const otherRegion1 = config.get("otherRegion1") || "ap-shanghai";
@@ -47,6 +52,7 @@ import * as utilities from "../utilities";
  *     bandwidthLimit: 100,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class BandwidthLimit extends pulumi.CustomResource {
     /**

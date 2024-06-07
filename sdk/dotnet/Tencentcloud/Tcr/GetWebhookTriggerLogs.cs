@@ -15,76 +15,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// <summary>
         /// Use this data source to query detailed information of tencentcloud.Tcr.getWebhookTriggerLogs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var myLogs = Tencentcloud.Tcr.GetWebhookTriggerLogs.Invoke(new()
         ///     {
-        ///         var myLogs = Output.Create(Tencentcloud.Tcr.GetWebhookTriggerLogs.InvokeAsync(new Tencentcloud.Tcr.GetWebhookTriggerLogsArgs
+        ///         RegistryId = local.Tcr_id,
+        ///         Namespace = @var.Tcr_namespace,
+        ///         TriggerId = @var.Trigger_id,
+        ///         Tags = 
         ///         {
-        ///             RegistryId = local.Tcr_id,
-        ///             Namespace = @var.Tcr_namespace,
-        ///             TriggerId = @var.Trigger_id,
-        ///             Tags = 
-        ///             {
-        ///                 { "createdBy", "terraform" },
-        ///             },
-        ///         }));
-        ///     }
+        ///             { "createdBy", "terraform" },
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetWebhookTriggerLogsResult> InvokeAsync(GetWebhookTriggerLogsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetWebhookTriggerLogsResult>("tencentcloud:Tcr/getWebhookTriggerLogs:getWebhookTriggerLogs", args ?? new GetWebhookTriggerLogsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetWebhookTriggerLogsResult>("tencentcloud:Tcr/getWebhookTriggerLogs:getWebhookTriggerLogs", args ?? new GetWebhookTriggerLogsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tencentcloud.Tcr.getWebhookTriggerLogs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var myLogs = Tencentcloud.Tcr.GetWebhookTriggerLogs.Invoke(new()
         ///     {
-        ///         var myLogs = Output.Create(Tencentcloud.Tcr.GetWebhookTriggerLogs.InvokeAsync(new Tencentcloud.Tcr.GetWebhookTriggerLogsArgs
+        ///         RegistryId = local.Tcr_id,
+        ///         Namespace = @var.Tcr_namespace,
+        ///         TriggerId = @var.Trigger_id,
+        ///         Tags = 
         ///         {
-        ///             RegistryId = local.Tcr_id,
-        ///             Namespace = @var.Tcr_namespace,
-        ///             TriggerId = @var.Trigger_id,
-        ///             Tags = 
-        ///             {
-        ///                 { "createdBy", "terraform" },
-        ///             },
-        ///         }));
-        ///     }
+        ///             { "createdBy", "terraform" },
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetWebhookTriggerLogsResult> Invoke(GetWebhookTriggerLogsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetWebhookTriggerLogsResult>("tencentcloud:Tcr/getWebhookTriggerLogs:getWebhookTriggerLogs", args ?? new GetWebhookTriggerLogsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetWebhookTriggerLogsResult>("tencentcloud:Tcr/getWebhookTriggerLogs:getWebhookTriggerLogs", args ?? new GetWebhookTriggerLogsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetWebhookTriggerLogsArgs : Pulumi.InvokeArgs
+    public sealed class GetWebhookTriggerLogsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// namespace.
@@ -125,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetWebhookTriggerLogsArgs()
         {
         }
+        public static new GetWebhookTriggerLogsArgs Empty => new GetWebhookTriggerLogsArgs();
     }
 
-    public sealed class GetWebhookTriggerLogsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetWebhookTriggerLogsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// namespace.
@@ -168,6 +163,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public GetWebhookTriggerLogsInvokeArgs()
         {
         }
+        public static new GetWebhookTriggerLogsInvokeArgs Empty => new GetWebhookTriggerLogsInvokeArgs();
     }
 
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class DeployContainerGroupServiceSettingArgs : Pulumi.ResourceArgs
+    public sealed class DeployContainerGroupServiceSettingArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// 0: Public network, 1: Access within the cluster, 2: NodePort, 3: Access within VPC. Note: This field may return null, indicating that no valid values can be obtained.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public DeployContainerGroupServiceSettingArgs()
         {
         }
+        public static new DeployContainerGroupServiceSettingArgs Empty => new DeployContainerGroupServiceSettingArgs();
     }
 }

@@ -8,42 +8,47 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of vpc classicLinkInstances
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Vpc.GetClassicLinkInstances(ctx, &vpc.GetClassicLinkInstancesArgs{
-// 			Filters: []vpc.GetClassicLinkInstancesFilter{
-// 				vpc.GetClassicLinkInstancesFilter{
-// 					Name: "vpc-id",
-// 					Values: []string{
-// 						"vpc-lh4nqig9",
-// 					},
-// 				},
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.GetClassicLinkInstances(ctx, &vpc.GetClassicLinkInstancesArgs{
+//				Filters: []vpc.GetClassicLinkInstancesFilter{
+//					{
+//						Name: "vpc-id",
+//						Values: []string{
+//							"vpc-lh4nqig9",
+//						},
+//					},
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetClassicLinkInstances(ctx *pulumi.Context, args *GetClassicLinkInstancesArgs, opts ...pulumi.InvokeOption) (*GetClassicLinkInstancesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClassicLinkInstancesResult
 	err := ctx.Invoke("tencentcloud:Vpc/getClassicLinkInstances:getClassicLinkInstances", args, &rv, opts...)
 	if err != nil {

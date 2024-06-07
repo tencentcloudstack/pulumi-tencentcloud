@@ -8,36 +8,41 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query scaling configuration information.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.GetScalingConfigs(ctx, &as.GetScalingConfigsArgs{
-// 			ConfigurationId:  pulumi.StringRef("asc-oqio4yyj"),
-// 			ResultOutputFile: pulumi.StringRef("my_test_path"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := As.GetScalingConfigs(ctx, &as.GetScalingConfigsArgs{
+//				ConfigurationId:  pulumi.StringRef("asc-oqio4yyj"),
+//				ResultOutputFile: pulumi.StringRef("my_test_path"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetScalingConfigs(ctx *pulumi.Context, args *GetScalingConfigsArgs, opts ...pulumi.InvokeOption) (*GetScalingConfigsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetScalingConfigsResult
 	err := ctx.Invoke("tencentcloud:As/getScalingConfigs:getScalingConfigs", args, &rv, opts...)
 	if err != nil {

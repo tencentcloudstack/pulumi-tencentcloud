@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneSettingPostMaxSizeGetArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingPostMaxSizeGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Maximum size. Value range: 1-500 MB. Note: This field may return null, indicating that no valid value can be obtained.
@@ -20,7 +20,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<int>? MaxSize { get; set; }
 
         /// <summary>
-        /// Specifies whether to enable custom setting of the maximum file size.- `on`: Enable. You can set a custom max size.- `off`: Disable. In this case, the max size defaults to 32 MB.
+        /// Specifies whether to enable custom setting of the maximum file size.
         /// </summary>
         [Input("switch", required: true)]
         public Input<string> Switch { get; set; } = null!;
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneSettingPostMaxSizeGetArgs()
         {
         }
+        public static new ZoneSettingPostMaxSizeGetArgs Empty => new ZoneSettingPostMaxSizeGetArgs();
     }
 }

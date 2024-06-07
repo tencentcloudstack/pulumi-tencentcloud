@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const setPolicyVersionConfig = new tencentcloud.Cam.SetPolicyVersionConfig("set_policy_version_config", {
+ * const setPolicyVersionConfig = new tencentcloud.cam.SetPolicyVersionConfig("setPolicyVersionConfig", {
  *     policyId: 171162811,
  *     versionId: 2,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cam set_policy_version_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cam/setPolicyVersionConfig:SetPolicyVersionConfig set_policy_version_config set_policy_version_config_id
+ * $ pulumi import tencentcloud:Cam/setPolicyVersionConfig:SetPolicyVersionConfig set_policy_version_config set_policy_version_config_id
  * ```
  */
 export class SetPolicyVersionConfig extends pulumi.CustomResource {

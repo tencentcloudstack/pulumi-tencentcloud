@@ -9,10 +9,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const camGroupBasic = config.get("camGroupBasic") || "keep-cam-group";
@@ -31,17 +32,18 @@ import * as utilities from "../utilities";
  *     forceDelete: true,
  * });
  * const groupMembershipBasic = new tencentcloud.cam.GroupMembership("groupMembershipBasic", {
- *     groupId: groups.then(groups => groups.groupLists?[0]?.groupId),
+ *     groupId: groups.then(groups => groups.groupLists?.[0]?.groupId),
  *     userNames: [foo.id],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CAM group membership can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cam/groupMembership:GroupMembership foo 12515263
+ * $ pulumi import tencentcloud:Cam/groupMembership:GroupMembership foo 12515263
  * ```
  */
 export class GroupMembership extends pulumi.CustomResource {
@@ -79,7 +81,7 @@ export class GroupMembership extends pulumi.CustomResource {
     /**
      * It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
      *
-     * @deprecated It has been deprecated from version 1.59.5. Use `user_names` instead.
+     * @deprecated It has been deprecated from version 1.59.5. Use `userNames` instead.
      */
     public readonly userIds!: pulumi.Output<string[] | undefined>;
     /**
@@ -128,7 +130,7 @@ export interface GroupMembershipState {
     /**
      * It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
      *
-     * @deprecated It has been deprecated from version 1.59.5. Use `user_names` instead.
+     * @deprecated It has been deprecated from version 1.59.5. Use `userNames` instead.
      */
     userIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
@@ -148,7 +150,7 @@ export interface GroupMembershipArgs {
     /**
      * It has been deprecated from version 1.59.5. Use `userNames` instead. ID set of the CAM group members.
      *
-     * @deprecated It has been deprecated from version 1.59.5. Use `user_names` instead.
+     * @deprecated It has been deprecated from version 1.59.5. Use `userNames` instead.
      */
     userIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**

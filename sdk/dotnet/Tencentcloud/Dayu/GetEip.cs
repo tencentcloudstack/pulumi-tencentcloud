@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// <summary>
         /// Use this data source to query dayu eip rules
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var test = Tencentcloud.Dayu.GetEip.Invoke(new()
         ///     {
-        ///         var test = Output.Create(Tencentcloud.Dayu.GetEip.InvokeAsync(new Tencentcloud.Dayu.GetEipArgs
-        ///         {
-        ///             ResourceId = "bgpip-000004xg",
-        ///         }));
-        ///     }
+        ///         ResourceId = "bgpip-000004xg",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetEipResult> InvokeAsync(GetEipArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetEipResult>("tencentcloud:Dayu/getEip:getEip", args ?? new GetEipArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetEipResult>("tencentcloud:Dayu/getEip:getEip", args ?? new GetEipArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query dayu eip rules
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var test = Tencentcloud.Dayu.GetEip.Invoke(new()
         ///     {
-        ///         var test = Output.Create(Tencentcloud.Dayu.GetEip.InvokeAsync(new Tencentcloud.Dayu.GetEipArgs
-        ///         {
-        ///             ResourceId = "bgpip-000004xg",
-        ///         }));
-        ///     }
+        ///         ResourceId = "bgpip-000004xg",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetEipResult> Invoke(GetEipInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetEipResult>("tencentcloud:Dayu/getEip:getEip", args ?? new GetEipInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetEipResult>("tencentcloud:Dayu/getEip:getEip", args ?? new GetEipInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetEipArgs : Pulumi.InvokeArgs
+    public sealed class GetEipArgs : global::Pulumi.InvokeArgs
     {
         [Input("bindStatuses")]
         private List<string>? _bindStatuses;
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public GetEipArgs()
         {
         }
+        public static new GetEipArgs Empty => new GetEipArgs();
     }
 
-    public sealed class GetEipInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetEipInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("bindStatuses")]
         private InputList<string>? _bindStatuses;
@@ -156,6 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public GetEipInvokeArgs()
         {
         }
+        public static new GetEipInvokeArgs Empty => new GetEipInvokeArgs();
     }
 
 

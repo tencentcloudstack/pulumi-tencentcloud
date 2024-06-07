@@ -17,25 +17,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var blackList = new Tencentcloud.Ses.BlackListDelete("blackList", new()
     ///     {
-    ///         var blackList = new Tencentcloud.Ses.BlackListDelete("blackList", new Tencentcloud.Ses.BlackListDeleteArgs
-    ///         {
-    ///             EmailAddress = "terraform-tf@gmail.com",
-    ///         });
-    ///     }
+    ///         EmailAddress = "terraform-tf@gmail.com",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ses/blackListDelete:BlackListDelete")]
-    public partial class BlackListDelete : Pulumi.CustomResource
+    public partial class BlackListDelete : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Email addresses to be unblocklisted.
@@ -88,7 +89,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         }
     }
 
-    public sealed class BlackListDeleteArgs : Pulumi.ResourceArgs
+    public sealed class BlackListDeleteArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Email addresses to be unblocklisted.
@@ -99,9 +100,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public BlackListDeleteArgs()
         {
         }
+        public static new BlackListDeleteArgs Empty => new BlackListDeleteArgs();
     }
 
-    public sealed class BlackListDeleteState : Pulumi.ResourceArgs
+    public sealed class BlackListDeleteState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Email addresses to be unblocklisted.
@@ -112,5 +114,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public BlackListDeleteState()
         {
         }
+        public static new BlackListDeleteState Empty => new BlackListDeleteState();
     }
 }

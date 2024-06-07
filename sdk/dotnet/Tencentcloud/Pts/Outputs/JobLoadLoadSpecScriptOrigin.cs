@@ -14,8 +14,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Outputs
     [OutputType]
     public sealed class JobLoadLoadSpecScriptOrigin
     {
+        /// <summary>
+        /// Pressure testing time.
+        /// </summary>
         public readonly int DurationSeconds;
+        /// <summary>
+        /// Number of machines.
+        /// </summary>
         public readonly int MachineNumber;
+        /// <summary>
+        /// Machine specification.
+        /// </summary>
         public readonly string MachineSpecification;
 
         [OutputConstructor]

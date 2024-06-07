@@ -14,9 +14,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Outputs
     [OutputType]
     public sealed class ModifyInstanceDiskTypeSystemDisk
     {
+        /// <summary>
+        /// ID of the dedicated cluster to which the instance belongs.
+        /// </summary>
         public readonly string? CdcId;
+        /// <summary>
+        /// System disk ID. System disks whose type is LOCAL_BASIC or LOCAL_SSD do not have an ID and do not support this parameter.
+        /// </summary>
         public readonly string? DiskId;
+        /// <summary>
+        /// System disk size; unit: GB; default value: 50 GB.
+        /// </summary>
         public readonly int? DiskSize;
+        /// <summary>
+        /// System disk type. Valid values:- LOCAL_BASIC: local disk
+        /// - LOCAL_SSD: local SSD disk
+        /// - CLOUD_BASIC: ordinary cloud disk
+        /// - CLOUD_SSD: SSD cloud disk
+        /// - CLOUD_PREMIUM: Premium cloud storage
+        /// - CLOUD_BSSD: Balanced SSD
+        /// The disk currently in stock will be used by default.
+        /// </summary>
         public readonly string? DiskType;
 
         [OutputConstructor]

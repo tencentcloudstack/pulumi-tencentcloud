@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Manage original image protection functionality
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewOriginalImageProtection(ctx, "foo", &Ci.OriginalImageProtectionArgs{
-// 			Bucket: pulumi.String("examplebucket-1250000000"),
-// 			Status: pulumi.String("on"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewOriginalImageProtection(ctx, "foo", &Ci.OriginalImageProtectionArgs{
+//				Bucket: pulumi.String("examplebucket-1250000000"),
+//				Status: pulumi.String("on"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // Resource original image protection can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/originalImageProtection:OriginalImageProtection example examplebucket-1250000000
+// $ pulumi import tencentcloud:Ci/originalImageProtection:OriginalImageProtection example examplebucket-1250000000
 // ```
 type OriginalImageProtection struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewOriginalImageProtection(ctx *pulumi.Context,
 	if args.Status == nil {
 		return nil, errors.New("invalid value for required argument 'Status'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OriginalImageProtection
 	err := ctx.RegisterResource("tencentcloud:Ci/originalImageProtection:OriginalImageProtection", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *OriginalImageProtection) ToOriginalImageProtectionOutputWithContext(ctx
 // OriginalImageProtectionArrayInput is an input type that accepts OriginalImageProtectionArray and OriginalImageProtectionArrayOutput values.
 // You can construct a concrete instance of `OriginalImageProtectionArrayInput` via:
 //
-//          OriginalImageProtectionArray{ OriginalImageProtectionArgs{...} }
+//	OriginalImageProtectionArray{ OriginalImageProtectionArgs{...} }
 type OriginalImageProtectionArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i OriginalImageProtectionArray) ToOriginalImageProtectionArrayOutputWithCo
 // OriginalImageProtectionMapInput is an input type that accepts OriginalImageProtectionMap and OriginalImageProtectionMapOutput values.
 // You can construct a concrete instance of `OriginalImageProtectionMapInput` via:
 //
-//          OriginalImageProtectionMap{ "key": OriginalImageProtectionArgs{...} }
+//	OriginalImageProtectionMap{ "key": OriginalImageProtectionArgs{...} }
 type OriginalImageProtectionMapInput interface {
 	pulumi.Input
 

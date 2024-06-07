@@ -14,6 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Outputs
     [OutputType]
     public sealed class ApplicationServiceService
     {
+        /// <summary>
+        /// ip address of application service.
+        /// </summary>
         public readonly string? Ip;
         /// <summary>
         /// port mapping item list.

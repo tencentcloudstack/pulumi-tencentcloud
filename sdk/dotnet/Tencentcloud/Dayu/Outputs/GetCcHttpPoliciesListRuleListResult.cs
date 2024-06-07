@@ -14,8 +14,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Outputs
     [OutputType]
     public sealed class GetCcHttpPoliciesListRuleListResult
     {
+        /// <summary>
+        /// Operator of the rule.
+        /// </summary>
         public readonly string Operator;
+        /// <summary>
+        /// Key of the rule.
+        /// </summary>
         public readonly string Skey;
+        /// <summary>
+        /// Rule value.
+        /// </summary>
         public readonly string Value;
 
         [OutputConstructor]

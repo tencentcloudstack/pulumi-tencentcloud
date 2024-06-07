@@ -14,80 +14,86 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// Provides a resource to create a CCN instance.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a prepaid CCN
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var main = new Tencentcloud.Ccn.Instance("main", new()
     ///     {
-    ///         var main = new Tencentcloud.Ccn.Instance("main", new Tencentcloud.Ccn.InstanceArgs
-    ///         {
-    ///             BandwidthLimitType = "INTER_REGION_LIMIT",
-    ///             ChargeType = "PREPAID",
-    ///             Description = "ci-temp-test-ccn-des",
-    ///             Qos = "AG",
-    ///         });
-    ///     }
+    ///         BandwidthLimitType = "INTER_REGION_LIMIT",
+    ///         ChargeType = "PREPAID",
+    ///         Description = "ci-temp-test-ccn-des",
+    ///         Qos = "AG",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a post-paid regional export speed limit type CCN
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var main = new Tencentcloud.Ccn.Instance("main", new()
     ///     {
-    ///         var main = new Tencentcloud.Ccn.Instance("main", new Tencentcloud.Ccn.InstanceArgs
-    ///         {
-    ///             BandwidthLimitType = "OUTER_REGION_LIMIT",
-    ///             ChargeType = "POSTPAID",
-    ///             Description = "ci-temp-test-ccn-des",
-    ///             Qos = "AG",
-    ///         });
-    ///     }
+    ///         BandwidthLimitType = "OUTER_REGION_LIMIT",
+    ///         ChargeType = "POSTPAID",
+    ///         Description = "ci-temp-test-ccn-des",
+    ///         Qos = "AG",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a post-paid inter-regional rate limit type CNN
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var main = new Tencentcloud.Ccn.Instance("main", new()
     ///     {
-    ///         var main = new Tencentcloud.Ccn.Instance("main", new Tencentcloud.Ccn.InstanceArgs
-    ///         {
-    ///             BandwidthLimitType = "INTER_REGION_LIMIT",
-    ///             ChargeType = "POSTPAID",
-    ///             Description = "ci-temp-test-ccn-des",
-    ///             Qos = "AG",
-    ///         });
-    ///     }
+    ///         BandwidthLimitType = "INTER_REGION_LIMIT",
+    ///         ChargeType = "POSTPAID",
+    ///         Description = "ci-temp-test-ccn-des",
+    ///         Qos = "AG",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Ccn instance can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ccn/instance:Instance test ccn-id
+    /// $ pulumi import tencentcloud:Ccn/instance:Instance test ccn-id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ccn/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
@@ -188,7 +194,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
@@ -235,9 +241,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The speed limit type. Valid values: `INTER_REGION_LIMIT`, `OUTER_REGION_LIMIT`. `OUTER_REGION_LIMIT` represents the regional export speed limit, `INTER_REGION_LIMIT` is the inter-regional speed limit. The default is `OUTER_REGION_LIMIT`.
@@ -302,5 +309,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

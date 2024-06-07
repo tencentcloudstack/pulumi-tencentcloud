@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Ci.OriginalImageProtection("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Ci.OriginalImageProtection("foo", new Tencentcloud.Ci.OriginalImageProtectionArgs
-    ///         {
-    ///             Bucket = "examplebucket-1250000000",
-    ///             Status = "on",
-    ///         });
-    ///     }
+    ///         Bucket = "examplebucket-1250000000",
+    ///         Status = "on",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Resource original image protection can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/originalImageProtection:OriginalImageProtection example examplebucket-1250000000
+    /// $ pulumi import tencentcloud:Ci/originalImageProtection:OriginalImageProtection example examplebucket-1250000000
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/originalImageProtection:OriginalImageProtection")]
-    public partial class OriginalImageProtection : Pulumi.CustomResource
+    public partial class OriginalImageProtection : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The name of a bucket, the format should be [custom name]-[appid], for example `mycos-1258798060`.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class OriginalImageProtectionArgs : Pulumi.ResourceArgs
+    public sealed class OriginalImageProtectionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of a bucket, the format should be [custom name]-[appid], for example `mycos-1258798060`.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public OriginalImageProtectionArgs()
         {
         }
+        public static new OriginalImageProtectionArgs Empty => new OriginalImageProtectionArgs();
     }
 
-    public sealed class OriginalImageProtectionState : Pulumi.ResourceArgs
+    public sealed class OriginalImageProtectionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of a bucket, the format should be [custom name]-[appid], for example `mycos-1258798060`.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public OriginalImageProtectionState()
         {
         }
+        public static new OriginalImageProtectionState Empty => new OriginalImageProtectionState();
     }
 }

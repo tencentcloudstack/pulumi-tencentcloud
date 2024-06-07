@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class AdaptiveDynamicStreamingTemplateStreamInfoGetArgs : Pulumi.ResourceArgs
+    public sealed class AdaptiveDynamicStreamingTemplateStreamInfoGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Audio parameter information.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public AdaptiveDynamicStreamingTemplateStreamInfoGetArgs()
         {
         }
+        public static new AdaptiveDynamicStreamingTemplateStreamInfoGetArgs Empty => new AdaptiveDynamicStreamingTemplateStreamInfoGetArgs();
     }
 }

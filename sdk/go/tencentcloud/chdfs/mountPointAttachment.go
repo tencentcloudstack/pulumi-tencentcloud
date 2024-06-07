@@ -7,45 +7,51 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a chdfs mountPointAttachment
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Chdfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Chdfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Chdfs.NewMountPointAttachment(ctx, "mountPointAttachment", &Chdfs.MountPointAttachmentArgs{
-// 			AccessGroupIds: pulumi.StringArray{
-// 				pulumi.String("ag-bvmzrbsm"),
-// 				pulumi.String("ag-lairqrgr"),
-// 			},
-// 			MountPointId: pulumi.String("f14mpfy5lh4e-KuiL"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Chdfs.NewMountPointAttachment(ctx, "mountPointAttachment", &Chdfs.MountPointAttachmentArgs{
+//				AccessGroupIds: pulumi.StringArray{
+//					pulumi.String("ag-bvmzrbsm"),
+//					pulumi.String("ag-lairqrgr"),
+//				},
+//				MountPointId: pulumi.String("f14mpfy5lh4e-KuiL"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // chdfs mount_point_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Chdfs/mountPointAttachment:MountPointAttachment mount_point_attachment mount_point_id
+// $ pulumi import tencentcloud:Chdfs/mountPointAttachment:MountPointAttachment mount_point_attachment mount_point_id
 // ```
 type MountPointAttachment struct {
 	pulumi.CustomResourceState
@@ -69,7 +75,7 @@ func NewMountPointAttachment(ctx *pulumi.Context,
 	if args.MountPointId == nil {
 		return nil, errors.New("invalid value for required argument 'MountPointId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MountPointAttachment
 	err := ctx.RegisterResource("tencentcloud:Chdfs/mountPointAttachment:MountPointAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -150,7 +156,7 @@ func (i *MountPointAttachment) ToMountPointAttachmentOutputWithContext(ctx conte
 // MountPointAttachmentArrayInput is an input type that accepts MountPointAttachmentArray and MountPointAttachmentArrayOutput values.
 // You can construct a concrete instance of `MountPointAttachmentArrayInput` via:
 //
-//          MountPointAttachmentArray{ MountPointAttachmentArgs{...} }
+//	MountPointAttachmentArray{ MountPointAttachmentArgs{...} }
 type MountPointAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -175,7 +181,7 @@ func (i MountPointAttachmentArray) ToMountPointAttachmentArrayOutputWithContext(
 // MountPointAttachmentMapInput is an input type that accepts MountPointAttachmentMap and MountPointAttachmentMapOutput values.
 // You can construct a concrete instance of `MountPointAttachmentMapInput` via:
 //
-//          MountPointAttachmentMap{ "key": MountPointAttachmentArgs{...} }
+//	MountPointAttachmentMap{ "key": MountPointAttachmentArgs{...} }
 type MountPointAttachmentMapInput interface {
 	pulumi.Input
 

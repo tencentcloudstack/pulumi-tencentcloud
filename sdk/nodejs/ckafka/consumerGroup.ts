@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const consumerGroup = new tencentcloud.Ckafka.ConsumerGroup("consumer_group", {
+ * const consumerGroup = new tencentcloud.ckafka.ConsumerGroup("consumerGroup", {
  *     groupName: "GroupName",
  *     instanceId: "InstanceId",
  *     topicNameLists: ["xxxxxx"],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ckafka consumer_group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ckafka/consumerGroup:ConsumerGroup consumer_group consumer_group_id
+ * $ pulumi import tencentcloud:Ckafka/consumerGroup:ConsumerGroup consumer_group consumer_group_id
  * ```
  */
 export class ConsumerGroup extends pulumi.CustomResource {

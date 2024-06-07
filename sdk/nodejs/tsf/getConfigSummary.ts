@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,27 +11,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const configSummary = pulumi.output(tencentcloud.Tsf.getConfigSummary({
+ * const configSummary = tencentcloud.Tsf.getConfigSummary({
  *     applicationId: "application-a24x29xv",
  *     configIdLists: ["dcfg-y54wzk3a"],
  *     disableProgramAuthCheck: true,
  *     orderBy: "last_update_time",
  *     orderType: 0,
  *     searchWord: "terraform",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getConfigSummary(args?: GetConfigSummaryArgs, opts?: pulumi.InvokeOptions): Promise<GetConfigSummaryResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tsf/getConfigSummary:getConfigSummary", {
         "applicationId": args.applicationId,
         "configIdLists": args.configIdLists,
@@ -105,9 +105,29 @@ export interface GetConfigSummaryResult {
     readonly results: outputs.Tsf.GetConfigSummaryResult[];
     readonly searchWord?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tsf configSummary
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const configSummary = tencentcloud.Tsf.getConfigSummary({
+ *     applicationId: "application-a24x29xv",
+ *     configIdLists: ["dcfg-y54wzk3a"],
+ *     disableProgramAuthCheck: true,
+ *     orderBy: "last_update_time",
+ *     orderType: 0,
+ *     searchWord: "terraform",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getConfigSummaryOutput(args?: GetConfigSummaryOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetConfigSummaryResult> {
-    return pulumi.output(args).apply(a => getConfigSummary(a, opts))
+    return pulumi.output(args).apply((a: any) => getConfigSummary(a, opts))
 }
 
 /**

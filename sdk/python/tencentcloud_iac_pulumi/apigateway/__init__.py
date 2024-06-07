@@ -40,6 +40,7 @@ from .service import *
 from .service_release import *
 from .strategy_attachment import *
 from .update_api_app_key import *
+from .update_service import *
 from .upstream import *
 from .usage_plan import *
 from .usage_plan_attachment import *

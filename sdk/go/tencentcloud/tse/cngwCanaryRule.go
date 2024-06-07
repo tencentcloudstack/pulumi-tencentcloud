@@ -7,96 +7,101 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tse cngwCanaryRule
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cngwService, err := Tse.NewCngwService(ctx, "cngwService", &Tse.CngwServiceArgs{
-// 			GatewayId: pulumi.String("gateway-ddbb709b"),
-// 			Path:      pulumi.String("/test"),
-// 			Protocol:  pulumi.String("http"),
-// 			Retries:   pulumi.Int(5),
-// 			Tags: pulumi.AnyMap{
-// 				"created": pulumi.Any("terraform"),
-// 			},
-// 			Timeout:      pulumi.Int(6000),
-// 			UpstreamType: pulumi.String("IPList"),
-// 			UpstreamInfo: &tse.CngwServiceUpstreamInfoArgs{
-// 				Algorithm:               pulumi.String("round-robin"),
-// 				AutoScalingCvmPort:      pulumi.Int(80),
-// 				AutoScalingGroupId:      pulumi.String("asg-519acdug"),
-// 				AutoScalingHookStatus:   pulumi.String("Normal"),
-// 				AutoScalingTatCmdStatus: pulumi.String("Normal"),
-// 				Port:                    pulumi.Int(0),
-// 				SlowStart:               pulumi.Int(20),
-// 				Targets: tse.CngwServiceUpstreamInfoTargetArray{
-// 					&tse.CngwServiceUpstreamInfoTargetArgs{
-// 						Health: pulumi.String("HEALTHCHECKS_OFF"),
-// 						Host:   pulumi.String("192.168.0.1"),
-// 						Port:   pulumi.Int(80),
-// 						Weight: pulumi.Int(100),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tse.NewCngwCanaryRule(ctx, "cngwCanaryRule", &Tse.CngwCanaryRuleArgs{
-// 			GatewayId: cngwService.GatewayId,
-// 			ServiceId: cngwService.ServiceId,
-// 			Tags: pulumi.AnyMap{
-// 				"created": pulumi.Any("terraform"),
-// 			},
-// 			CanaryRule: &tse.CngwCanaryRuleCanaryRuleArgs{
-// 				Enabled:  pulumi.Bool(true),
-// 				Priority: pulumi.Int(100),
-// 				BalancedServiceLists: tse.CngwCanaryRuleCanaryRuleBalancedServiceListArray{
-// 					&tse.CngwCanaryRuleCanaryRuleBalancedServiceListArgs{
-// 						Percent:     pulumi.Float64(100),
-// 						ServiceId:   cngwService.ServiceId,
-// 						ServiceName: cngwService.Name,
-// 					},
-// 				},
-// 				ConditionLists: tse.CngwCanaryRuleCanaryRuleConditionListArray{
-// 					&tse.CngwCanaryRuleCanaryRuleConditionListArgs{
-// 						Key:      pulumi.String("test"),
-// 						Operator: pulumi.String("eq"),
-// 						Type:     pulumi.String("query"),
-// 						Value:    pulumi.String("1"),
-// 					},
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cngwService, err := Tse.NewCngwService(ctx, "cngwService", &Tse.CngwServiceArgs{
+//				GatewayId: pulumi.String("gateway-ddbb709b"),
+//				Path:      pulumi.String("/test"),
+//				Protocol:  pulumi.String("http"),
+//				Retries:   pulumi.Int(5),
+//				Tags: pulumi.Map{
+//					"created": pulumi.Any("terraform"),
+//				},
+//				Timeout:      pulumi.Int(6000),
+//				UpstreamType: pulumi.String("IPList"),
+//				UpstreamInfo: &tse.CngwServiceUpstreamInfoArgs{
+//					Algorithm:               pulumi.String("round-robin"),
+//					AutoScalingCvmPort:      pulumi.Int(80),
+//					AutoScalingGroupId:      pulumi.String("asg-519acdug"),
+//					AutoScalingHookStatus:   pulumi.String("Normal"),
+//					AutoScalingTatCmdStatus: pulumi.String("Normal"),
+//					Port:                    pulumi.Int(0),
+//					SlowStart:               pulumi.Int(20),
+//					Targets: tse.CngwServiceUpstreamInfoTargetArray{
+//						&tse.CngwServiceUpstreamInfoTargetArgs{
+//							Health: pulumi.String("HEALTHCHECKS_OFF"),
+//							Host:   pulumi.String("192.168.0.1"),
+//							Port:   pulumi.Int(80),
+//							Weight: pulumi.Int(100),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tse.NewCngwCanaryRule(ctx, "cngwCanaryRule", &Tse.CngwCanaryRuleArgs{
+//				GatewayId: cngwService.GatewayId,
+//				ServiceId: cngwService.ServiceId,
+//				Tags: pulumi.Map{
+//					"created": pulumi.Any("terraform"),
+//				},
+//				CanaryRule: &tse.CngwCanaryRuleCanaryRuleArgs{
+//					Enabled:  pulumi.Bool(true),
+//					Priority: pulumi.Int(100),
+//					BalancedServiceLists: tse.CngwCanaryRuleCanaryRuleBalancedServiceListArray{
+//						&tse.CngwCanaryRuleCanaryRuleBalancedServiceListArgs{
+//							Percent:     pulumi.Float64(100),
+//							ServiceId:   cngwService.ServiceId,
+//							ServiceName: cngwService.Name,
+//						},
+//					},
+//					ConditionLists: tse.CngwCanaryRuleCanaryRuleConditionListArray{
+//						&tse.CngwCanaryRuleCanaryRuleConditionListArgs{
+//							Key:      pulumi.String("test"),
+//							Operator: pulumi.String("eq"),
+//							Type:     pulumi.String("query"),
+//							Value:    pulumi.String("1"),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tse cngw_canary_rule can be imported using the gatewayId#serviceId#priority, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule cngw_canary_rule gateway-ddbb709b#b6017eaf-2363-481e-9e93-8d65aaf498cd#100
+// $ pulumi import tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule cngw_canary_rule gateway-ddbb709b#b6017eaf-2363-481e-9e93-8d65aaf498cd#100
 // ```
 type CngwCanaryRule struct {
 	pulumi.CustomResourceState
@@ -127,7 +132,7 @@ func NewCngwCanaryRule(ctx *pulumi.Context,
 	if args.ServiceId == nil {
 		return nil, errors.New("invalid value for required argument 'ServiceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CngwCanaryRule
 	err := ctx.RegisterResource("tencentcloud:Tse/cngwCanaryRule:CngwCanaryRule", name, args, &resource, opts...)
 	if err != nil {
@@ -224,7 +229,7 @@ func (i *CngwCanaryRule) ToCngwCanaryRuleOutputWithContext(ctx context.Context) 
 // CngwCanaryRuleArrayInput is an input type that accepts CngwCanaryRuleArray and CngwCanaryRuleArrayOutput values.
 // You can construct a concrete instance of `CngwCanaryRuleArrayInput` via:
 //
-//          CngwCanaryRuleArray{ CngwCanaryRuleArgs{...} }
+//	CngwCanaryRuleArray{ CngwCanaryRuleArgs{...} }
 type CngwCanaryRuleArrayInput interface {
 	pulumi.Input
 
@@ -249,7 +254,7 @@ func (i CngwCanaryRuleArray) ToCngwCanaryRuleArrayOutputWithContext(ctx context.
 // CngwCanaryRuleMapInput is an input type that accepts CngwCanaryRuleMap and CngwCanaryRuleMapOutput values.
 // You can construct a concrete instance of `CngwCanaryRuleMapInput` via:
 //
-//          CngwCanaryRuleMap{ "key": CngwCanaryRuleArgs{...} }
+//	CngwCanaryRuleMap{ "key": CngwCanaryRuleArgs{...} }
 type CngwCanaryRuleMapInput interface {
 	pulumi.Input
 

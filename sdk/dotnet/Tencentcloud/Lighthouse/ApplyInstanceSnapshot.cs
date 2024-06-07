@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var applyInstanceSnapshot = new Tencentcloud.Lighthouse.ApplyInstanceSnapshot("applyInstanceSnapshot", new()
     ///     {
-    ///         var applyInstanceSnapshot = new Tencentcloud.Lighthouse.ApplyInstanceSnapshot("applyInstanceSnapshot", new Tencentcloud.Lighthouse.ApplyInstanceSnapshotArgs
-    ///         {
-    ///             InstanceId = "lhins-123456",
-    ///             SnapshotId = "lhsnap-123456",
-    ///         });
-    ///     }
+    ///         InstanceId = "lhins-123456",
+    ///         SnapshotId = "lhsnap-123456",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/applyInstanceSnapshot:ApplyInstanceSnapshot")]
-    public partial class ApplyInstanceSnapshot : Pulumi.CustomResource
+    public partial class ApplyInstanceSnapshot : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         }
     }
 
-    public sealed class ApplyInstanceSnapshotArgs : Pulumi.ResourceArgs
+    public sealed class ApplyInstanceSnapshotArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public ApplyInstanceSnapshotArgs()
         {
         }
+        public static new ApplyInstanceSnapshotArgs Empty => new ApplyInstanceSnapshotArgs();
     }
 
-    public sealed class ApplyInstanceSnapshotState : Pulumi.ResourceArgs
+    public sealed class ApplyInstanceSnapshotState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public ApplyInstanceSnapshotState()
         {
         }
+        public static new ApplyInstanceSnapshotState Empty => new ApplyInstanceSnapshotState();
     }
 }

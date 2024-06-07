@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const securityGroupReferences = pulumi.output(tencentcloud.Vpc.getSecurityGroupReferences({
+ * const securityGroupReferences = tencentcloud.Vpc.getSecurityGroupReferences({
  *     securityGroupIds: ["sg-edmur627"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSecurityGroupReferences(args: GetSecurityGroupReferencesArgs, opts?: pulumi.InvokeOptions): Promise<GetSecurityGroupReferencesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpc/getSecurityGroupReferences:getSecurityGroupReferences", {
         "resultOutputFile": args.resultOutputFile,
         "securityGroupIds": args.securityGroupIds,
@@ -60,9 +60,24 @@ export interface GetSecurityGroupReferencesResult {
     readonly resultOutputFile?: string;
     readonly securityGroupIds: string[];
 }
-
+/**
+ * Use this data source to query detailed information of vpc securityGroupReferences
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const securityGroupReferences = tencentcloud.Vpc.getSecurityGroupReferences({
+ *     securityGroupIds: ["sg-edmur627"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSecurityGroupReferencesOutput(args: GetSecurityGroupReferencesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSecurityGroupReferencesResult> {
-    return pulumi.output(args).apply(a => getSecurityGroupReferences(a, opts))
+    return pulumi.output(args).apply((a: any) => getSecurityGroupReferences(a, opts))
 }
 
 /**

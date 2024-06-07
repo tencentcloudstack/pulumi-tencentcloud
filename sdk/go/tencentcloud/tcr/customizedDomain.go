@@ -7,56 +7,63 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tcr customized domain
 //
 // ## Example Usage
+//
 // ### Create a tcr customized domain
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
-// 			InstanceType: pulumi.String("premium"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tcr.NewCustomizedDomain(ctx, "exampleCustomizedDomain", &Tcr.CustomizedDomainArgs{
-// 			RegistryId:    exampleInstance.ID(),
-// 			DomainName:    pulumi.String("www.test.com"),
-// 			CertificateId: pulumi.String("your_cert_id"),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleInstance, err := Tcr.NewInstance(ctx, "exampleInstance", &Tcr.InstanceArgs{
+//				InstanceType: pulumi.String("premium"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcr.NewCustomizedDomain(ctx, "exampleCustomizedDomain", &Tcr.CustomizedDomainArgs{
+//				RegistryId:    exampleInstance.ID(),
+//				DomainName:    pulumi.String("www.test.com"),
+//				CertificateId: pulumi.String("your_cert_id"),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tcr customized_domain can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tcr/customizedDomain:CustomizedDomain customized_domain customized_domain_id
+// $ pulumi import tencentcloud:Tcr/customizedDomain:CustomizedDomain customized_domain customized_domain_id
 // ```
 type CustomizedDomain struct {
 	pulumi.CustomResourceState
@@ -87,7 +94,7 @@ func NewCustomizedDomain(ctx *pulumi.Context,
 	if args.RegistryId == nil {
 		return nil, errors.New("invalid value for required argument 'RegistryId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CustomizedDomain
 	err := ctx.RegisterResource("tencentcloud:Tcr/customizedDomain:CustomizedDomain", name, args, &resource, opts...)
 	if err != nil {
@@ -184,7 +191,7 @@ func (i *CustomizedDomain) ToCustomizedDomainOutputWithContext(ctx context.Conte
 // CustomizedDomainArrayInput is an input type that accepts CustomizedDomainArray and CustomizedDomainArrayOutput values.
 // You can construct a concrete instance of `CustomizedDomainArrayInput` via:
 //
-//          CustomizedDomainArray{ CustomizedDomainArgs{...} }
+//	CustomizedDomainArray{ CustomizedDomainArgs{...} }
 type CustomizedDomainArrayInput interface {
 	pulumi.Input
 
@@ -209,7 +216,7 @@ func (i CustomizedDomainArray) ToCustomizedDomainArrayOutputWithContext(ctx cont
 // CustomizedDomainMapInput is an input type that accepts CustomizedDomainMap and CustomizedDomainMapOutput values.
 // You can construct a concrete instance of `CustomizedDomainMapInput` via:
 //
-//          CustomizedDomainMap{ "key": CustomizedDomainArgs{...} }
+//	CustomizedDomainMap{ "key": CustomizedDomainArgs{...} }
 type CustomizedDomainMapInput interface {
 	pulumi.Input
 

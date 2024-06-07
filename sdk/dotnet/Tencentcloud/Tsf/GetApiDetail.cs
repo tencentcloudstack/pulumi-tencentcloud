@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf api_detail
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var apiDetail = Tencentcloud.Tsf.GetApiDetail.Invoke(new()
         ///     {
-        ///         var apiDetail = Output.Create(Tencentcloud.Tsf.GetApiDetail.InvokeAsync(new Tencentcloud.Tsf.GetApiDetailArgs
-        ///         {
-        ///             ApplicationId = "application-a24x29xv",
-        ///             Method = "GET",
-        ///             MicroserviceId = "ms-yq3jo6jd",
-        ///             Path = "/printRequest",
-        ///             PkgVersion = "20210625192923",
-        ///         }));
-        ///     }
+        ///         ApplicationId = "application-a24x29xv",
+        ///         Method = "GET",
+        ///         MicroserviceId = "ms-yq3jo6jd",
+        ///         Path = "/printRequest",
+        ///         PkgVersion = "20210625192923",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetApiDetailResult> InvokeAsync(GetApiDetailArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApiDetailResult>("tencentcloud:Tsf/getApiDetail:getApiDetail", args ?? new GetApiDetailArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApiDetailResult>("tencentcloud:Tsf/getApiDetail:getApiDetail", args ?? new GetApiDetailArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf api_detail
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var apiDetail = Tencentcloud.Tsf.GetApiDetail.Invoke(new()
         ///     {
-        ///         var apiDetail = Output.Create(Tencentcloud.Tsf.GetApiDetail.InvokeAsync(new Tencentcloud.Tsf.GetApiDetailArgs
-        ///         {
-        ///             ApplicationId = "application-a24x29xv",
-        ///             Method = "GET",
-        ///             MicroserviceId = "ms-yq3jo6jd",
-        ///             Path = "/printRequest",
-        ///             PkgVersion = "20210625192923",
-        ///         }));
-        ///     }
+        ///         ApplicationId = "application-a24x29xv",
+        ///         Method = "GET",
+        ///         MicroserviceId = "ms-yq3jo6jd",
+        ///         Path = "/printRequest",
+        ///         PkgVersion = "20210625192923",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetApiDetailResult> Invoke(GetApiDetailInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApiDetailResult>("tencentcloud:Tsf/getApiDetail:getApiDetail", args ?? new GetApiDetailInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApiDetailResult>("tencentcloud:Tsf/getApiDetail:getApiDetail", args ?? new GetApiDetailInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetApiDetailArgs : Pulumi.InvokeArgs
+    public sealed class GetApiDetailArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// application id.
@@ -121,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetApiDetailArgs()
         {
         }
+        public static new GetApiDetailArgs Empty => new GetApiDetailArgs();
     }
 
-    public sealed class GetApiDetailInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetApiDetailInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// application id.
@@ -164,6 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetApiDetailInvokeArgs()
         {
         }
+        public static new GetApiDetailInvokeArgs Empty => new GetApiDetailInvokeArgs();
     }
 
 

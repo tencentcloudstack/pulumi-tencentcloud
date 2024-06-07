@@ -15,49 +15,90 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Example Usage
     /// 
+    /// ### Create a standard version instance
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Dasb.Resource("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Dasb.Resource("example", new Tencentcloud.Dasb.ResourceArgs
-    ///         {
-    ///             AutoRenewFlag = 1,
-    ///             DeployRegion = "ap-guangzhou",
-    ///             DeployZone = "ap-guangzhou-6",
-    ///             PackageBandwidth = 10,
-    ///             PackageNode = 50,
-    ///             ResourceEdition = "standard",
-    ///             ResourceNode = 2,
-    ///             SubnetId = "subnet-7uhvm46o",
-    ///             TimeSpan = 1,
-    ///             TimeUnit = "m",
-    ///             VpcId = "vpc-q1of50wz",
-    ///         });
-    ///     }
+    ///         AutoRenewFlag = 1,
+    ///         CidrBlock = "10.35.20.0/24",
+    ///         DeployRegion = "ap-guangzhou",
+    ///         DeployZone = "ap-guangzhou-6",
+    ///         PackageBandwidth = 1,
+    ///         ResourceEdition = "standard",
+    ///         ResourceNode = 50,
+    ///         SubnetId = "subnet-g7jhwhi2",
+    ///         TimeSpan = 1,
+    ///         TimeUnit = "m",
+    ///         VpcCidrBlock = "10.35.0.0/16",
+    ///         VpcId = "vpc-fmz6l9nz",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Create a professional instance
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Dasb.Resource("example", new()
+    ///     {
+    ///         AutoRenewFlag = 1,
+    ///         CidrBlock = "10.35.20.0/24",
+    ///         DeployRegion = "ap-guangzhou",
+    ///         DeployZone = "ap-guangzhou-6",
+    ///         PackageBandwidth = 1,
+    ///         ResourceEdition = "pro",
+    ///         ResourceNode = 50,
+    ///         SubnetId = "subnet-g7jhwhi2",
+    ///         TimeSpan = 1,
+    ///         TimeUnit = "m",
+    ///         VpcCidrBlock = "10.35.0.0/16",
+    ///         VpcId = "vpc-fmz6l9nz",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dasb resource can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dasb/resource:Resource example bh-saas-kk5rabk0
+    /// $ pulumi import tencentcloud:Dasb/resource:Resource example bh-saas-kgckynrt
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/resource:Resource")]
-    public partial class Resource : Pulumi.CustomResource
+    public partial class Resource : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Automatic renewal. 1 is auto renew flag, 0 is not.
         /// </summary>
         [Output("autoRenewFlag")]
         public Output<int> AutoRenewFlag { get; private set; } = null!;
+
+        /// <summary>
+        /// Subnet segments that require service activation.
+        /// </summary>
+        [Output("cidrBlock")]
+        public Output<string> CidrBlock { get; private set; } = null!;
 
         /// <summary>
         /// Deploy region.
@@ -69,19 +110,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         /// Deploy zone.
         /// </summary>
         [Output("deployZone")]
-        public Output<string?> DeployZone { get; private set; } = null!;
+        public Output<string> DeployZone { get; private set; } = null!;
 
         /// <summary>
-        /// Number of bandwidth expansion packets (4M).
+        /// Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.
         /// </summary>
         [Output("packageBandwidth")]
         public Output<int> PackageBandwidth { get; private set; } = null!;
-
-        /// <summary>
-        /// Number of authorized point extension packages (50 points).
-        /// </summary>
-        [Output("packageNode")]
-        public Output<int> PackageNode { get; private set; } = null!;
 
         /// <summary>
         /// Resource type.Value:standard/pro.
@@ -102,16 +137,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public Output<string> SubnetId { get; private set; } = null!;
 
         /// <summary>
-        /// Billing time.
+        /// Billing time. This field is mandatory, with a minimum value of 1.
         /// </summary>
         [Output("timeSpan")]
-        public Output<int> TimeSpan { get; private set; } = null!;
+        public Output<int?> TimeSpan { get; private set; } = null!;
 
         /// <summary>
-        /// Billing cycle, only support m: month.
+        /// Billing cycle, only support m: month. This field is mandatory, fill in m.
         /// </summary>
         [Output("timeUnit")]
-        public Output<string> TimeUnit { get; private set; } = null!;
+        public Output<string?> TimeUnit { get; private set; } = null!;
+
+        /// <summary>
+        /// The network segment corresponding to the VPC that requires service activation.
+        /// </summary>
+        [Output("vpcCidrBlock")]
+        public Output<string> VpcCidrBlock { get; private set; } = null!;
 
         /// <summary>
         /// Deploy resource vpcId.
@@ -164,13 +205,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         }
     }
 
-    public sealed class ResourceArgs : Pulumi.ResourceArgs
+    public sealed class ResourceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Automatic renewal. 1 is auto renew flag, 0 is not.
         /// </summary>
         [Input("autoRenewFlag", required: true)]
         public Input<int> AutoRenewFlag { get; set; } = null!;
+
+        /// <summary>
+        /// Subnet segments that require service activation.
+        /// </summary>
+        [Input("cidrBlock", required: true)]
+        public Input<string> CidrBlock { get; set; } = null!;
 
         /// <summary>
         /// Deploy region.
@@ -181,20 +228,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         /// <summary>
         /// Deploy zone.
         /// </summary>
-        [Input("deployZone")]
-        public Input<string>? DeployZone { get; set; }
+        [Input("deployZone", required: true)]
+        public Input<string> DeployZone { get; set; } = null!;
 
         /// <summary>
-        /// Number of bandwidth expansion packets (4M).
+        /// Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.
         /// </summary>
         [Input("packageBandwidth")]
         public Input<int>? PackageBandwidth { get; set; }
-
-        /// <summary>
-        /// Number of authorized point extension packages (50 points).
-        /// </summary>
-        [Input("packageNode")]
-        public Input<int>? PackageNode { get; set; }
 
         /// <summary>
         /// Resource type.Value:standard/pro.
@@ -215,16 +256,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public Input<string> SubnetId { get; set; } = null!;
 
         /// <summary>
-        /// Billing time.
+        /// Billing time. This field is mandatory, with a minimum value of 1.
         /// </summary>
-        [Input("timeSpan", required: true)]
-        public Input<int> TimeSpan { get; set; } = null!;
+        [Input("timeSpan")]
+        public Input<int>? TimeSpan { get; set; }
 
         /// <summary>
-        /// Billing cycle, only support m: month.
+        /// Billing cycle, only support m: month. This field is mandatory, fill in m.
         /// </summary>
-        [Input("timeUnit", required: true)]
-        public Input<string> TimeUnit { get; set; } = null!;
+        [Input("timeUnit")]
+        public Input<string>? TimeUnit { get; set; }
+
+        /// <summary>
+        /// The network segment corresponding to the VPC that requires service activation.
+        /// </summary>
+        [Input("vpcCidrBlock", required: true)]
+        public Input<string> VpcCidrBlock { get; set; } = null!;
 
         /// <summary>
         /// Deploy resource vpcId.
@@ -235,15 +282,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public ResourceArgs()
         {
         }
+        public static new ResourceArgs Empty => new ResourceArgs();
     }
 
-    public sealed class ResourceState : Pulumi.ResourceArgs
+    public sealed class ResourceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Automatic renewal. 1 is auto renew flag, 0 is not.
         /// </summary>
         [Input("autoRenewFlag")]
         public Input<int>? AutoRenewFlag { get; set; }
+
+        /// <summary>
+        /// Subnet segments that require service activation.
+        /// </summary>
+        [Input("cidrBlock")]
+        public Input<string>? CidrBlock { get; set; }
 
         /// <summary>
         /// Deploy region.
@@ -258,16 +312,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public Input<string>? DeployZone { get; set; }
 
         /// <summary>
-        /// Number of bandwidth expansion packets (4M).
+        /// Number of bandwidth expansion packets (4M), The set value is an integer multiple of 4.
         /// </summary>
         [Input("packageBandwidth")]
         public Input<int>? PackageBandwidth { get; set; }
-
-        /// <summary>
-        /// Number of authorized point extension packages (50 points).
-        /// </summary>
-        [Input("packageNode")]
-        public Input<int>? PackageNode { get; set; }
 
         /// <summary>
         /// Resource type.Value:standard/pro.
@@ -288,16 +336,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public Input<string>? SubnetId { get; set; }
 
         /// <summary>
-        /// Billing time.
+        /// Billing time. This field is mandatory, with a minimum value of 1.
         /// </summary>
         [Input("timeSpan")]
         public Input<int>? TimeSpan { get; set; }
 
         /// <summary>
-        /// Billing cycle, only support m: month.
+        /// Billing cycle, only support m: month. This field is mandatory, fill in m.
         /// </summary>
         [Input("timeUnit")]
         public Input<string>? TimeUnit { get; set; }
+
+        /// <summary>
+        /// The network segment corresponding to the VPC that requires service activation.
+        /// </summary>
+        [Input("vpcCidrBlock")]
+        public Input<string>? VpcCidrBlock { get; set; }
 
         /// <summary>
         /// Deploy resource vpcId.
@@ -308,5 +362,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public ResourceState()
         {
         }
+        public static new ResourceState Empty => new ResourceState();
     }
 }

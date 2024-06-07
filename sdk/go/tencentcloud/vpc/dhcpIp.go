@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a vpc dhcpIp
@@ -18,7 +19,7 @@ import (
 // vpc dhcp_ip can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/dhcpIp:DhcpIp dhcp_ip dhcp_ip_id
+// $ pulumi import tencentcloud:Vpc/dhcpIp:DhcpIp dhcp_ip dhcp_ip_id
 // ```
 type DhcpIp struct {
 	pulumi.CustomResourceState
@@ -47,7 +48,7 @@ func NewDhcpIp(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DhcpIp
 	err := ctx.RegisterResource("tencentcloud:Vpc/dhcpIp:DhcpIp", name, args, &resource, opts...)
 	if err != nil {
@@ -136,7 +137,7 @@ func (i *DhcpIp) ToDhcpIpOutputWithContext(ctx context.Context) DhcpIpOutput {
 // DhcpIpArrayInput is an input type that accepts DhcpIpArray and DhcpIpArrayOutput values.
 // You can construct a concrete instance of `DhcpIpArrayInput` via:
 //
-//          DhcpIpArray{ DhcpIpArgs{...} }
+//	DhcpIpArray{ DhcpIpArgs{...} }
 type DhcpIpArrayInput interface {
 	pulumi.Input
 
@@ -161,7 +162,7 @@ func (i DhcpIpArray) ToDhcpIpArrayOutputWithContext(ctx context.Context) DhcpIpA
 // DhcpIpMapInput is an input type that accepts DhcpIpMap and DhcpIpMapOutput values.
 // You can construct a concrete instance of `DhcpIpMapInput` via:
 //
-//          DhcpIpMap{ "key": DhcpIpArgs{...} }
+//	DhcpIpMap{ "key": DhcpIpArgs{...} }
 type DhcpIpMapInput interface {
 	pulumi.Input
 

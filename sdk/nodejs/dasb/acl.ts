@@ -9,61 +9,64 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Dasb.Acl("example", {
- *     acTemplateIdSets: [],
- *     accountSets: ["root"],
- *     allowAccessCredential: true,
- *     allowAnyAccount: false,
- *     allowClipFileDown: true,
- *     allowClipFileUp: true,
- *     allowClipTextDown: true,
- *     allowClipTextUp: true,
- *     allowDiskFileDown: true,
- *     allowDiskFileUp: true,
+ * const exampleUser = new tencentcloud.dasb.User("exampleUser", {
+ *     userName: "tf_example",
+ *     realName: "terraform",
+ *     phone: "+86|18345678782",
+ *     email: "demo@tencent.com",
+ *     authType: 0,
+ * });
+ * const exampleUserGroup = new tencentcloud.dasb.UserGroup("exampleUserGroup", {});
+ * const exampleDevice = new tencentcloud.dasb.Device("exampleDevice", {
+ *     osName: "Linux",
+ *     ip: "192.168.0.1",
+ *     port: 80,
+ * });
+ * const exampleDeviceGroup = new tencentcloud.dasb.DeviceGroup("exampleDeviceGroup", {});
+ * const exampleDeviceAccount = new tencentcloud.dasb.DeviceAccount("exampleDeviceAccount", {
+ *     deviceId: exampleDevice.id,
+ *     account: "root",
+ * });
+ * const exampleCmdTemplate = new tencentcloud.dasb.CmdTemplate("exampleCmdTemplate", {cmdList: "rm -rf*"});
+ * const exampleAcl = new tencentcloud.dasb.Acl("exampleAcl", {
  *     allowDiskRedirect: true,
- *     allowFileDel: true,
- *     allowFileDown: true,
+ *     allowAnyAccount: false,
+ *     allowClipFileUp: true,
+ *     allowClipFileDown: true,
+ *     allowClipTextUp: true,
+ *     allowClipTextDown: true,
  *     allowFileUp: true,
- *     allowShellFileDown: true,
- *     allowShellFileUp: true,
- *     cmdTemplateIdSets: [
- *         1,
- *         7,
- *     ],
- *     departmentId: "1.2",
- *     deviceGroupIdSets: [
- *         2,
- *         3,
- *     ],
- *     deviceIdSets: [
- *         39,
- *         81,
- *     ],
- *     maxFileDownSize: 0,
+ *     allowFileDown: true,
  *     maxFileUpSize: 0,
- *     userGroupIdSets: [
- *         6,
- *         36,
- *     ],
- *     userIdSets: [
- *         6,
- *         2,
- *     ],
- *     validateFrom: "2023-09-22T00:00:00+08:00",
- *     validateTo: "2024-09-23T00:00:00+08:00",
+ *     maxFileDownSize: 0,
+ *     userIdSets: [exampleUser.id],
+ *     userGroupIdSets: [exampleUserGroup.id],
+ *     deviceIdSets: [exampleDevice.id],
+ *     deviceGroupIdSets: [exampleDeviceGroup.id],
+ *     accountSets: [exampleDeviceAccount.id],
+ *     cmdTemplateIdSets: [exampleCmdTemplate.id],
+ *     acTemplateIdSets: [],
+ *     allowDiskFileUp: true,
+ *     allowDiskFileDown: true,
+ *     allowShellFileUp: true,
+ *     allowShellFileDown: true,
+ *     allowFileDel: true,
+ *     allowAccessCredential: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dasb acl can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dasb/acl:Acl example 132
+ * $ pulumi import tencentcloud:Dasb/acl:Acl example 132
  * ```
  */
 export class Acl extends pulumi.CustomResource {
@@ -197,11 +200,11 @@ export class Acl extends pulumi.CustomResource {
     /**
      * Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.
      */
-    public readonly validateFrom!: pulumi.Output<string | undefined>;
+    public readonly validateFrom!: pulumi.Output<string>;
     /**
      * Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.
      */
-    public readonly validateTo!: pulumi.Output<string | undefined>;
+    public readonly validateTo!: pulumi.Output<string>;
 
     /**
      * Create a Acl resource with the given unique name, arguments, and options.

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaWatermarkTemplateWatermarkImageGetArgs : Pulumi.ResourceArgs
+    public sealed class MediaWatermarkTemplateWatermarkImageGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether the background image.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaWatermarkTemplateWatermarkImageGetArgs()
         {
         }
+        public static new MediaWatermarkTemplateWatermarkImageGetArgs Empty => new MediaWatermarkTemplateWatermarkImageGetArgs();
     }
 }

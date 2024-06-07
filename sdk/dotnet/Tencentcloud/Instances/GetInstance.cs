@@ -15,64 +15,160 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         /// <summary>
         /// Use this data source to query cvm instances.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// ### Query all cvm instances
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var foo = Output.Create(Tencentcloud.Instances.GetInstance.InvokeAsync(new Tencentcloud.Instances.GetInstanceArgs
-        ///         {
-        ///             InstanceId = "ins-da412f5a",
-        ///         }));
-        ///     }
+        ///     var example = Tencentcloud.Instances.GetInstance.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query cvm instances by filters
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Instances.GetInstance.Invoke(new()
+        ///     {
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         InstanceId = "ins-a81rnm8c",
+        ///         InstanceName = "tf_example",
+        ///         ProjectId = 0,
+        ///         SubnetId = "subnet-1to7t9au",
+        ///         Tags = 
+        ///         {
+        ///             { "tagKey", "tagValue" },
+        ///         },
+        ///         VpcId = "vpc-l040hycv",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Or by instance set id list
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Instances.GetInstance.Invoke(new()
+        ///     {
+        ///         InstanceSetIds = new[]
+        ///         {
+        ///             "ins-a81rnm8c",
+        ///         },
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceResult> InvokeAsync(GetInstanceArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceResult>("tencentcloud:Instances/getInstance:getInstance", args ?? new GetInstanceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceResult>("tencentcloud:Instances/getInstance:getInstance", args ?? new GetInstanceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query cvm instances.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// ### Query all cvm instances
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var foo = Output.Create(Tencentcloud.Instances.GetInstance.InvokeAsync(new Tencentcloud.Instances.GetInstanceArgs
-        ///         {
-        ///             InstanceId = "ins-da412f5a",
-        ///         }));
-        ///     }
+        ///     var example = Tencentcloud.Instances.GetInstance.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query cvm instances by filters
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Instances.GetInstance.Invoke(new()
+        ///     {
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         InstanceId = "ins-a81rnm8c",
+        ///         InstanceName = "tf_example",
+        ///         ProjectId = 0,
+        ///         SubnetId = "subnet-1to7t9au",
+        ///         Tags = 
+        ///         {
+        ///             { "tagKey", "tagValue" },
+        ///         },
+        ///         VpcId = "vpc-l040hycv",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Or by instance set id list
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Instances.GetInstance.Invoke(new()
+        ///     {
+        ///         InstanceSetIds = new[]
+        ///         {
+        ///             "ins-a81rnm8c",
+        ///         },
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceResult> Invoke(GetInstanceInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceResult>("tencentcloud:Instances/getInstance:getInstance", args ?? new GetInstanceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceResult>("tencentcloud:Instances/getInstance:getInstance", args ?? new GetInstanceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The available zone that the CVM instance locates at.
@@ -143,9 +239,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         public GetInstanceArgs()
         {
         }
+        public static new GetInstanceArgs Empty => new GetInstanceArgs();
     }
 
-    public sealed class GetInstanceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The available zone that the CVM instance locates at.
@@ -216,6 +313,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         public GetInstanceInvokeArgs()
         {
         }
+        public static new GetInstanceInvokeArgs Empty => new GetInstanceInvokeArgs();
     }
 
 

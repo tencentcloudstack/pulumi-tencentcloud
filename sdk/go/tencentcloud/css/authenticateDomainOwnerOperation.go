@@ -7,59 +7,72 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to verify the domain ownership by specified way when DomainNeedVerifyOwner failed in domain creation.
 //
 // ## Example Usage
+//
 // ### dnsCheck way:
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewAuthenticateDomainOwnerOperation(ctx, "dnsCheck", &Css.AuthenticateDomainOwnerOperationArgs{
-// 			DomainName: pulumi.String("your_domain_name"),
-// 			VerifyType: pulumi.String("dnsCheck"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewAuthenticateDomainOwnerOperation(ctx, "dnsCheck", &Css.AuthenticateDomainOwnerOperationArgs{
+//				DomainName: pulumi.String("your_domain_name"),
+//				VerifyType: pulumi.String("dnsCheck"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### fileCheck way:
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewAuthenticateDomainOwnerOperation(ctx, "fileCheck", &Css.AuthenticateDomainOwnerOperationArgs{
-// 			DomainName: pulumi.String("your_domain_name"),
-// 			VerifyType: pulumi.String("fileCheck"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewAuthenticateDomainOwnerOperation(ctx, "fileCheck", &Css.AuthenticateDomainOwnerOperationArgs{
+//				DomainName: pulumi.String("your_domain_name"),
+//				VerifyType: pulumi.String("fileCheck"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type AuthenticateDomainOwnerOperation struct {
 	pulumi.CustomResourceState
 
@@ -79,7 +92,7 @@ func NewAuthenticateDomainOwnerOperation(ctx *pulumi.Context,
 	if args.DomainName == nil {
 		return nil, errors.New("invalid value for required argument 'DomainName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AuthenticateDomainOwnerOperation
 	err := ctx.RegisterResource("tencentcloud:Css/authenticateDomainOwnerOperation:AuthenticateDomainOwnerOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -160,7 +173,7 @@ func (i *AuthenticateDomainOwnerOperation) ToAuthenticateDomainOwnerOperationOut
 // AuthenticateDomainOwnerOperationArrayInput is an input type that accepts AuthenticateDomainOwnerOperationArray and AuthenticateDomainOwnerOperationArrayOutput values.
 // You can construct a concrete instance of `AuthenticateDomainOwnerOperationArrayInput` via:
 //
-//          AuthenticateDomainOwnerOperationArray{ AuthenticateDomainOwnerOperationArgs{...} }
+//	AuthenticateDomainOwnerOperationArray{ AuthenticateDomainOwnerOperationArgs{...} }
 type AuthenticateDomainOwnerOperationArrayInput interface {
 	pulumi.Input
 
@@ -185,7 +198,7 @@ func (i AuthenticateDomainOwnerOperationArray) ToAuthenticateDomainOwnerOperatio
 // AuthenticateDomainOwnerOperationMapInput is an input type that accepts AuthenticateDomainOwnerOperationMap and AuthenticateDomainOwnerOperationMapOutput values.
 // You can construct a concrete instance of `AuthenticateDomainOwnerOperationMapInput` via:
 //
-//          AuthenticateDomainOwnerOperationMap{ "key": AuthenticateDomainOwnerOperationArgs{...} }
+//	AuthenticateDomainOwnerOperationMap{ "key": AuthenticateDomainOwnerOperationArgs{...} }
 type AuthenticateDomainOwnerOperationMapInput interface {
 	pulumi.Input
 

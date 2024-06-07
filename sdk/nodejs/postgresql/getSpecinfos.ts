@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = pulumi.output(tencentcloud.Postgresql.getSpecinfos({
+ * const foo = tencentcloud.Postgresql.getSpecinfos({
  *     availabilityZone: "ap-shanghai-2",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSpecinfos(args: GetSpecinfosArgs, opts?: pulumi.InvokeOptions): Promise<GetSpecinfosResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Postgresql/getSpecinfos:getSpecinfos", {
         "availabilityZone": args.availabilityZone,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetSpecinfosResult {
     readonly lists: outputs.Postgresql.GetSpecinfosList[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to get the available product configs of the postgresql instance.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Postgresql.getSpecinfos({
+ *     availabilityZone: "ap-shanghai-2",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSpecinfosOutput(args: GetSpecinfosOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSpecinfosResult> {
-    return pulumi.output(args).apply(a => getSpecinfos(a, opts))
+    return pulumi.output(args).apply((a: any) => getSpecinfos(a, opts))
 }
 
 /**

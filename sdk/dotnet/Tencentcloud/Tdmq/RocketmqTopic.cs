@@ -15,48 +15,51 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new()
     ///     {
-    ///         var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
-    ///         {
-    ///             ClusterName = "tf_example",
-    ///             Remark = "remark.",
-    ///         });
-    ///         var exampleRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleRocketmqNamespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
-    ///         {
-    ///             ClusterId = exampleRocketmqCluster.ClusterId,
-    ///             NamespaceName = "tf_example_namespace",
-    ///             Remark = "remark.",
-    ///         });
-    ///         var exampleRocketmqTopic = new Tencentcloud.Tdmq.RocketmqTopic("exampleRocketmqTopic", new Tencentcloud.Tdmq.RocketmqTopicArgs
-    ///         {
-    ///             TopicName = "tf_example",
-    ///             NamespaceName = exampleRocketmqNamespace.NamespaceName,
-    ///             ClusterId = exampleRocketmqCluster.ClusterId,
-    ///             Type = "Normal",
-    ///             Remark = "remark.",
-    ///         });
-    ///     }
+    ///         ClusterName = "tf_example",
+    ///         Remark = "remark.",
+    ///     });
     /// 
-    /// }
+    ///     var exampleRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleRocketmqNamespace", new()
+    ///     {
+    ///         ClusterId = exampleRocketmqCluster.ClusterId,
+    ///         NamespaceName = "tf_example_namespace",
+    ///         Remark = "remark.",
+    ///     });
+    /// 
+    ///     var exampleRocketmqTopic = new Tencentcloud.Tdmq.RocketmqTopic("exampleRocketmqTopic", new()
+    ///     {
+    ///         TopicName = "tf_example",
+    ///         NamespaceName = exampleRocketmqNamespace.NamespaceName,
+    ///         ClusterId = exampleRocketmqCluster.ClusterId,
+    ///         Type = "Normal",
+    ///         Remark = "remark.",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tdmqRocketmq topic can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tdmq/rocketmqTopic:RocketmqTopic topic topic_id
+    /// $ pulumi import tencentcloud:Tdmq/rocketmqTopic:RocketmqTopic topic topic_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/rocketmqTopic:RocketmqTopic")]
-    public partial class RocketmqTopic : Pulumi.CustomResource
+    public partial class RocketmqTopic : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster ID.
@@ -151,7 +154,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class RocketmqTopicArgs : Pulumi.ResourceArgs
+    public sealed class RocketmqTopicArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -192,9 +195,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RocketmqTopicArgs()
         {
         }
+        public static new RocketmqTopicArgs Empty => new RocketmqTopicArgs();
     }
 
-    public sealed class RocketmqTopicState : Pulumi.ResourceArgs
+    public sealed class RocketmqTopicState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -247,5 +251,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RocketmqTopicState()
         {
         }
+        public static new RocketmqTopicState Empty => new RocketmqTopicState();
     }
 }

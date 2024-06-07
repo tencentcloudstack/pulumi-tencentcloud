@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc resource_dashboard
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var resourceDashboard = Tencentcloud.Vpc.GetResourceDashboard.Invoke(new()
         ///     {
-        ///         var resourceDashboard = Output.Create(Tencentcloud.Vpc.GetResourceDashboard.InvokeAsync(new Tencentcloud.Vpc.GetResourceDashboardArgs
+        ///         VpcIds = new[]
         ///         {
-        ///             VpcIds = 
-        ///             {
-        ///                 "vpc-4owdpnwr",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "vpc-4owdpnwr",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetResourceDashboardResult> InvokeAsync(GetResourceDashboardArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetResourceDashboardResult>("tencentcloud:Vpc/getResourceDashboard:getResourceDashboard", args ?? new GetResourceDashboardArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetResourceDashboardResult>("tencentcloud:Vpc/getResourceDashboard:getResourceDashboard", args ?? new GetResourceDashboardArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc resource_dashboard
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var resourceDashboard = Tencentcloud.Vpc.GetResourceDashboard.Invoke(new()
         ///     {
-        ///         var resourceDashboard = Output.Create(Tencentcloud.Vpc.GetResourceDashboard.InvokeAsync(new Tencentcloud.Vpc.GetResourceDashboardArgs
+        ///         VpcIds = new[]
         ///         {
-        ///             VpcIds = 
-        ///             {
-        ///                 "vpc-4owdpnwr",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "vpc-4owdpnwr",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetResourceDashboardResult> Invoke(GetResourceDashboardInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetResourceDashboardResult>("tencentcloud:Vpc/getResourceDashboard:getResourceDashboard", args ?? new GetResourceDashboardInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetResourceDashboardResult>("tencentcloud:Vpc/getResourceDashboard:getResourceDashboard", args ?? new GetResourceDashboardInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetResourceDashboardArgs : Pulumi.InvokeArgs
+    public sealed class GetResourceDashboardArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetResourceDashboardArgs()
         {
         }
+        public static new GetResourceDashboardArgs Empty => new GetResourceDashboardArgs();
     }
 
-    public sealed class GetResourceDashboardInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetResourceDashboardInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetResourceDashboardInvokeArgs()
         {
         }
+        public static new GetResourceDashboardInvokeArgs Empty => new GetResourceDashboardInvokeArgs();
     }
 
 

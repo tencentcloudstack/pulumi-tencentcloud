@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var instanceConfig = new Tencentcloud.Dcdb.InstanceConfig("instanceConfig", new()
     ///     {
-    ///         var instanceConfig = new Tencentcloud.Dcdb.InstanceConfig("instanceConfig", new Tencentcloud.Dcdb.InstanceConfigArgs
-    ///         {
-    ///             InstanceId = local.Dcdb_id,
-    ///             RsAccessStrategy = 0,
-    ///         });
-    ///     }
+    ///         InstanceId = local.Dcdb_id,
+    ///         RsAccessStrategy = 0,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dcdb instance_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dcdb/instanceConfig:InstanceConfig instance_config instance_config_id
+    /// $ pulumi import tencentcloud:Dcdb/instanceConfig:InstanceConfig instance_config instance_config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/instanceConfig:InstanceConfig")]
-    public partial class InstanceConfig : Pulumi.CustomResource
+    public partial class InstanceConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         }
     }
 
-    public sealed class InstanceConfigArgs : Pulumi.ResourceArgs
+    public sealed class InstanceConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public InstanceConfigArgs()
         {
         }
+        public static new InstanceConfigArgs Empty => new InstanceConfigArgs();
     }
 
-    public sealed class InstanceConfigState : Pulumi.ResourceArgs
+    public sealed class InstanceConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public InstanceConfigState()
         {
         }
+        public static new InstanceConfigState Empty => new InstanceConfigState();
     }
 }

@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var releaseApiGroup = new Tencentcloud.Tsf.ReleaseApiGroup("releaseApiGroup", new()
     ///     {
-    ///         var releaseApiGroup = new Tencentcloud.Tsf.ReleaseApiGroup("releaseApiGroup", new Tencentcloud.Tsf.ReleaseApiGroupArgs
-    ///         {
-    ///             GroupId = "grp-qp0rj3zi",
-    ///         });
-    ///     }
+    ///         GroupId = "grp-qp0rj3zi",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/releaseApiGroup:ReleaseApiGroup")]
-    public partial class ReleaseApiGroup : Pulumi.CustomResource
+    public partial class ReleaseApiGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// api group Id.
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class ReleaseApiGroupArgs : Pulumi.ResourceArgs
+    public sealed class ReleaseApiGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// api group Id.
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ReleaseApiGroupArgs()
         {
         }
+        public static new ReleaseApiGroupArgs Empty => new ReleaseApiGroupArgs();
     }
 
-    public sealed class ReleaseApiGroupState : Pulumi.ResourceArgs
+    public sealed class ReleaseApiGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// api group Id.
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ReleaseApiGroupState()
         {
         }
+        public static new ReleaseApiGroupState Empty => new ReleaseApiGroupState();
     }
 }

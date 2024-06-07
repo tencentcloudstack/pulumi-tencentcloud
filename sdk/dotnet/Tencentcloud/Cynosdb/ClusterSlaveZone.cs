@@ -14,111 +14,126 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// Provides a resource to create a cynosdb cluster slave zone.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Set a new slave zone for a cynosdb cluster.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var gz3 = Tencentcloud.Vpc.GetSubnets.Invoke(new()
     ///     {
-    ///         var gz3 = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
-    ///         {
-    ///             AvailabilityZone = @var.Default_az,
-    ///             IsDefault = true,
-    ///         }));
-    ///         var vpcId = gz3.Apply(gz3 =&gt; gz3.InstanceLists?[0]?.VpcId);
-    ///         var subnetId = gz3.Apply(gz3 =&gt; gz3.InstanceLists?[0]?.SubnetId);
-    ///         var config = new Config();
-    ///         var fixedTags = config.GetObject&lt;dynamic&gt;("fixedTags") ?? 
-    ///         {
-    ///             { "fixed_resource", "do_not_remove" },
-    ///         };
-    ///         var @internal = Output.Create(Tencentcloud.Security.GetGroups.InvokeAsync(new Tencentcloud.Security.GetGroupsArgs
-    ///         {
-    ///             Name = "default",
-    ///             Tags = fixedTags,
-    ///         }));
-    ///         var sgId = @internal.Apply(@internal =&gt; @internal.SecurityGroups?[0]?.SecurityGroupId);
-    ///         var exclusive = Output.Create(Tencentcloud.Security.GetGroups.InvokeAsync(new Tencentcloud.Security.GetGroupsArgs
-    ///         {
-    ///             Name = "test_preset_sg",
-    ///         }));
-    ///         var sgId2 = exclusive.Apply(exclusive =&gt; exclusive.SecurityGroups?[0]?.SecurityGroupId);
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
-    ///         var newAvailabilityZone = config.Get("newAvailabilityZone") ?? "ap-guangzhou-6";
-    ///         var myParamTemplate = config.Get("myParamTemplate") ?? "15765";
-    ///         var instance = new Tencentcloud.Cynosdb.Cluster("instance", new Tencentcloud.Cynosdb.ClusterArgs
-    ///         {
-    ///             AvailableZone = availabilityZone,
-    ///             VpcId = vpcId,
-    ///             SubnetId = subnetId,
-    ///             DbType = "MYSQL",
-    ///             DbVersion = "5.7",
-    ///             StorageLimit = 1000,
-    ///             ClusterName = "tf_test_cynosdb_cluster_slave_zone",
-    ///             Password = "cynos@123",
-    ///             InstanceMaintainDuration = 3600,
-    ///             InstanceMaintainStartTime = 10800,
-    ///             InstanceMaintainWeekdays = 
-    ///             {
-    ///                 "Fri",
-    ///                 "Mon",
-    ///                 "Sat",
-    ///                 "Sun",
-    ///                 "Thu",
-    ///                 "Wed",
-    ///                 "Tue",
-    ///             },
-    ///             InstanceCpuCore = 1,
-    ///             InstanceMemorySize = 2,
-    ///             ParamItems = 
-    ///             {
-    ///                 new Tencentcloud.Cynosdb.Inputs.ClusterParamItemArgs
-    ///                 {
-    ///                     Name = "character_set_server",
-    ///                     CurrentValue = "utf8",
-    ///                 },
-    ///                 new Tencentcloud.Cynosdb.Inputs.ClusterParamItemArgs
-    ///                 {
-    ///                     Name = "time_zone",
-    ///                     CurrentValue = "+09:00",
-    ///                 },
-    ///             },
-    ///             ForceDelete = true,
-    ///             RwGroupSgs = 
-    ///             {
-    ///                 sgId,
-    ///             },
-    ///             RoGroupSgs = 
-    ///             {
-    ///                 sgId,
-    ///             },
-    ///             PrarmTemplateId = myParamTemplate,
-    ///         });
-    ///         var clusterSlaveZone = new Tencentcloud.Cynosdb.ClusterSlaveZone("clusterSlaveZone", new Tencentcloud.Cynosdb.ClusterSlaveZoneArgs
-    ///         {
-    ///             ClusterId = instance.Id,
-    ///             SlaveZone = newAvailabilityZone,
-    ///         });
-    ///     }
+    ///         AvailabilityZone = @var.Default_az,
+    ///         IsDefault = true,
+    ///     });
     /// 
+    ///     var vpcId = gz3.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId);
+    /// 
+    ///     var subnetId = gz3.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.SubnetId);
+    /// 
+    ///     var config = new Config();
+    ///     var fixedTags = config.GetObject&lt;FixedTags&gt;("fixedTags") ?? 
+    ///     {
+    ///         { "fixed_resource", "do_not_remove" },
+    ///     };
+    ///     var @internal = Tencentcloud.Security.GetGroups.Invoke(new()
+    ///     {
+    ///         Name = "default",
+    ///         Tags = fixedTags,
+    ///     });
+    /// 
+    ///     var sgId = @internal.Apply(@internal =&gt; @internal.Apply(getGroupsResult =&gt; getGroupsResult.SecurityGroups[0]?.SecurityGroupId));
+    /// 
+    ///     var exclusive = Tencentcloud.Security.GetGroups.Invoke(new()
+    ///     {
+    ///         Name = "test_preset_sg",
+    ///     });
+    /// 
+    ///     var sgId2 = exclusive.Apply(getGroupsResult =&gt; getGroupsResult.SecurityGroups[0]?.SecurityGroupId);
+    /// 
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var newAvailabilityZone = config.Get("newAvailabilityZone") ?? "ap-guangzhou-6";
+    ///     var myParamTemplate = config.Get("myParamTemplate") ?? "15765";
+    ///     var instance = new Tencentcloud.Cynosdb.Cluster("instance", new()
+    ///     {
+    ///         AvailableZone = availabilityZone,
+    ///         VpcId = vpcId,
+    ///         SubnetId = subnetId,
+    ///         DbType = "MYSQL",
+    ///         DbVersion = "5.7",
+    ///         StorageLimit = 1000,
+    ///         ClusterName = "tf_test_cynosdb_cluster_slave_zone",
+    ///         Password = "cynos@123",
+    ///         InstanceMaintainDuration = 3600,
+    ///         InstanceMaintainStartTime = 10800,
+    ///         InstanceMaintainWeekdays = new[]
+    ///         {
+    ///             "Fri",
+    ///             "Mon",
+    ///             "Sat",
+    ///             "Sun",
+    ///             "Thu",
+    ///             "Wed",
+    ///             "Tue",
+    ///         },
+    ///         InstanceCpuCore = 1,
+    ///         InstanceMemorySize = 2,
+    ///         ParamItems = new[]
+    ///         {
+    ///             new Tencentcloud.Cynosdb.Inputs.ClusterParamItemArgs
+    ///             {
+    ///                 Name = "character_set_server",
+    ///                 CurrentValue = "utf8",
+    ///             },
+    ///             new Tencentcloud.Cynosdb.Inputs.ClusterParamItemArgs
+    ///             {
+    ///                 Name = "time_zone",
+    ///                 CurrentValue = "+09:00",
+    ///             },
+    ///         },
+    ///         ForceDelete = true,
+    ///         RwGroupSgs = new[]
+    ///         {
+    ///             sgId,
+    ///         },
+    ///         RoGroupSgs = new[]
+    ///         {
+    ///             sgId,
+    ///         },
+    ///         PrarmTemplateId = myParamTemplate,
+    ///     });
+    /// 
+    ///     var clusterSlaveZone = new Tencentcloud.Cynosdb.ClusterSlaveZone("clusterSlaveZone", new()
+    ///     {
+    ///         ClusterId = instance.Id,
+    ///         SlaveZone = newAvailabilityZone,
+    ///     });
+    /// 
+    /// });
+    /// 
+    /// public class FixedTags
+    /// {
+    ///     public string fixed_resource { get; set; }
     /// }
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cynosdb cluster_slave_zone can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cynosdb/clusterSlaveZone:ClusterSlaveZone cluster_slave_zone cluster_id#slave_zone
+    /// $ pulumi import tencentcloud:Cynosdb/clusterSlaveZone:ClusterSlaveZone cluster_slave_zone cluster_id#slave_zone
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/clusterSlaveZone:ClusterSlaveZone")]
-    public partial class ClusterSlaveZone : Pulumi.CustomResource
+    public partial class ClusterSlaveZone : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The ID of cluster.
@@ -177,7 +192,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class ClusterSlaveZoneArgs : Pulumi.ResourceArgs
+    public sealed class ClusterSlaveZoneArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of cluster.
@@ -194,9 +209,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ClusterSlaveZoneArgs()
         {
         }
+        public static new ClusterSlaveZoneArgs Empty => new ClusterSlaveZoneArgs();
     }
 
-    public sealed class ClusterSlaveZoneState : Pulumi.ResourceArgs
+    public sealed class ClusterSlaveZoneState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of cluster.
@@ -213,5 +229,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ClusterSlaveZoneState()
         {
         }
+        public static new ClusterSlaveZoneState Empty => new ClusterSlaveZoneState();
     }
 }

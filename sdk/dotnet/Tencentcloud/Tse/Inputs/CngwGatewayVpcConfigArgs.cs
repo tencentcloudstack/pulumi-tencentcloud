@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class CngwGatewayVpcConfigArgs : Pulumi.ResourceArgs
+    public sealed class CngwGatewayVpcConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// subnet ID. Assign an IP address to the engine in the VPC subnet. Reference value: subnet-ahde9me9.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public CngwGatewayVpcConfigArgs()
         {
         }
+        public static new CngwGatewayVpcConfigArgs Empty => new CngwGatewayVpcConfigArgs();
     }
 }

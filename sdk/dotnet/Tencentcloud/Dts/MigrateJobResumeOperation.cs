@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var resume = new Tencentcloud.Dts.MigrateJobResumeOperation("resume", new()
     ///     {
-    ///         var resume = new Tencentcloud.Dts.MigrateJobResumeOperation("resume", new Tencentcloud.Dts.MigrateJobResumeOperationArgs
-    ///         {
-    ///             JobId = "job_id",
-    ///             ResumeOption = "normal",
-    ///         });
-    ///     }
+    ///         JobId = "job_id",
+    ///         ResumeOption = "normal",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/migrateJobResumeOperation:MigrateJobResumeOperation")]
-    public partial class MigrateJobResumeOperation : Pulumi.CustomResource
+    public partial class MigrateJobResumeOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// job id.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         }
     }
 
-    public sealed class MigrateJobResumeOperationArgs : Pulumi.ResourceArgs
+    public sealed class MigrateJobResumeOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// job id.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public MigrateJobResumeOperationArgs()
         {
         }
+        public static new MigrateJobResumeOperationArgs Empty => new MigrateJobResumeOperationArgs();
     }
 
-    public sealed class MigrateJobResumeOperationState : Pulumi.ResourceArgs
+    public sealed class MigrateJobResumeOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// job id.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public MigrateJobResumeOperationState()
         {
         }
+        public static new MigrateJobResumeOperationState Empty => new MigrateJobResumeOperationState();
     }
 }

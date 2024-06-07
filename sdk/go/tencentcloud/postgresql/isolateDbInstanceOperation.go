@@ -7,36 +7,42 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a postgresql isolateDbInstanceOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewIsolateDbInstanceOperation(ctx, "isolateDbInstanceOperation", &Postgresql.IsolateDbInstanceOperationArgs{
-// 			DbInstanceIdSets: pulumi.StringArray{
-// 				pulumi.Any(local.Pgsql_id),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewIsolateDbInstanceOperation(ctx, "isolateDbInstanceOperation", &Postgresql.IsolateDbInstanceOperationArgs{
+//				DbInstanceIdSets: pulumi.StringArray{
+//					local.Pgsql_id,
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type IsolateDbInstanceOperation struct {
 	pulumi.CustomResourceState
 
@@ -54,7 +60,7 @@ func NewIsolateDbInstanceOperation(ctx *pulumi.Context,
 	if args.DbInstanceIdSets == nil {
 		return nil, errors.New("invalid value for required argument 'DbInstanceIdSets'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource IsolateDbInstanceOperation
 	err := ctx.RegisterResource("tencentcloud:Postgresql/isolateDbInstanceOperation:IsolateDbInstanceOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -127,7 +133,7 @@ func (i *IsolateDbInstanceOperation) ToIsolateDbInstanceOperationOutputWithConte
 // IsolateDbInstanceOperationArrayInput is an input type that accepts IsolateDbInstanceOperationArray and IsolateDbInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `IsolateDbInstanceOperationArrayInput` via:
 //
-//          IsolateDbInstanceOperationArray{ IsolateDbInstanceOperationArgs{...} }
+//	IsolateDbInstanceOperationArray{ IsolateDbInstanceOperationArgs{...} }
 type IsolateDbInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -152,7 +158,7 @@ func (i IsolateDbInstanceOperationArray) ToIsolateDbInstanceOperationArrayOutput
 // IsolateDbInstanceOperationMapInput is an input type that accepts IsolateDbInstanceOperationMap and IsolateDbInstanceOperationMapOutput values.
 // You can construct a concrete instance of `IsolateDbInstanceOperationMapInput` via:
 //
-//          IsolateDbInstanceOperationMap{ "key": IsolateDbInstanceOperationArgs{...} }
+//	IsolateDbInstanceOperationMap{ "key": IsolateDbInstanceOperationArgs{...} }
 type IsolateDbInstanceOperationMapInput interface {
 	pulumi.Input
 

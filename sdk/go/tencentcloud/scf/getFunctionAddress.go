@@ -8,39 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of scf functionAddress
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.GetFunctionAddress(ctx, &scf.GetFunctionAddressArgs{
-// 			FunctionName: "keep-1676351130",
-// 			Namespace:    pulumi.StringRef("default"),
-// 			Qualifier:    pulumi.StringRef(fmt.Sprintf("%v%v", "$", "LATEST")),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.GetFunctionAddress(ctx, &scf.GetFunctionAddressArgs{
+//				FunctionName: "keep-1676351130",
+//				Namespace:    pulumi.StringRef("default"),
+//				Qualifier:    pulumi.StringRef("$LATEST"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetFunctionAddress(ctx *pulumi.Context, args *GetFunctionAddressArgs, opts ...pulumi.InvokeOption) (*GetFunctionAddressResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetFunctionAddressResult
 	err := ctx.Invoke("tencentcloud:Scf/getFunctionAddress:getFunctionAddress", args, &rv, opts...)
 	if err != nil {

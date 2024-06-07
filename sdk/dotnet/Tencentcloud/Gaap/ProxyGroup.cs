@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var proxyGroup = new Tencentcloud.Gaap.ProxyGroup("proxyGroup", new()
     ///     {
-    ///         var proxyGroup = new Tencentcloud.Gaap.ProxyGroup("proxyGroup", new Tencentcloud.Gaap.ProxyGroupArgs
-    ///         {
-    ///             GroupName = "tf-test-update",
-    ///             IpAddressVersion = "IPv4",
-    ///             PackageType = "Thunder",
-    ///             ProjectId = 0,
-    ///             RealServerRegion = "Beijing",
-    ///         });
-    ///     }
+    ///         GroupName = "tf-test-update",
+    ///         IpAddressVersion = "IPv4",
+    ///         PackageType = "Thunder",
+    ///         ProjectId = 0,
+    ///         RealServerRegion = "Beijing",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// gaap proxy_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Gaap/proxyGroup:ProxyGroup proxy_group proxy_group_id
+    /// $ pulumi import tencentcloud:Gaap/proxyGroup:ProxyGroup proxy_group proxy_group_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/proxyGroup:ProxyGroup")]
-    public partial class ProxyGroup : Pulumi.CustomResource
+    public partial class ProxyGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Channel group alias.
@@ -122,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         }
     }
 
-    public sealed class ProxyGroupArgs : Pulumi.ResourceArgs
+    public sealed class ProxyGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Channel group alias.
@@ -157,9 +158,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public ProxyGroupArgs()
         {
         }
+        public static new ProxyGroupArgs Empty => new ProxyGroupArgs();
     }
 
-    public sealed class ProxyGroupState : Pulumi.ResourceArgs
+    public sealed class ProxyGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Channel group alias.
@@ -194,5 +196,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public ProxyGroupState()
         {
         }
+        public static new ProxyGroupState Empty => new ProxyGroupState();
     }
 }

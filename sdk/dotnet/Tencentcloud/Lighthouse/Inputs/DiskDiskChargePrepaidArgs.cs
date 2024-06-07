@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
 {
 
-    public sealed class DiskDiskChargePrepaidArgs : Pulumi.ResourceArgs
+    public sealed class DiskDiskChargePrepaidArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// new purchase cycle.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
         public DiskDiskChargePrepaidArgs()
         {
         }
+        public static new DiskDiskChargePrepaidArgs Empty => new DiskDiskChargePrepaidArgs();
     }
 }

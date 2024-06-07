@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Mysql.DeployGroup("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Mysql.DeployGroup("example", new Tencentcloud.Mysql.DeployGroupArgs
+    ///         DeployGroupName = "tf-example",
+    ///         Description = "desc.",
+    ///         DevClasses = new[]
     ///         {
-    ///             DeployGroupName = "tf-example",
-    ///             Description = "desc.",
-    ///             DevClasses = 
-    ///             {
-    ///                 "TS85",
-    ///             },
-    ///             LimitNum = 1,
-    ///         });
-    ///     }
+    ///             "TS85",
+    ///         },
+    ///         LimitNum = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mysql deploy_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mysql/deployGroup:DeployGroup deploy_group deploy_group_id
+    /// $ pulumi import tencentcloud:Mysql/deployGroup:DeployGroup deploy_group deploy_group_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/deployGroup:DeployGroup")]
-    public partial class DeployGroup : Pulumi.CustomResource
+    public partial class DeployGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The name of deploy group. the maximum length cannot exceed 60 characters.
@@ -118,7 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         }
     }
 
-    public sealed class DeployGroupArgs : Pulumi.ResourceArgs
+    public sealed class DeployGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of deploy group. the maximum length cannot exceed 60 characters.
@@ -153,9 +154,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public DeployGroupArgs()
         {
         }
+        public static new DeployGroupArgs Empty => new DeployGroupArgs();
     }
 
-    public sealed class DeployGroupState : Pulumi.ResourceArgs
+    public sealed class DeployGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of deploy group. the maximum length cannot exceed 60 characters.
@@ -190,5 +192,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public DeployGroupState()
         {
         }
+        public static new DeployGroupState Empty => new DeployGroupState();
     }
 }

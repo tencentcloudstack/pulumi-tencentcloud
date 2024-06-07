@@ -8,55 +8,60 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of as instances
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		scalingGroup, err := As.NewScalingGroup(ctx, "scalingGroup", &As.ScalingGroupArgs{
-// 			ScalingGroupName: pulumi.String("tf-as-group-ds-ins-basic"),
-// 			ConfigurationId:  pulumi.String("your_launch_configuration_id"),
-// 			MaxSize:          pulumi.Int(1),
-// 			MinSize:          pulumi.Int(1),
-// 			VpcId:            pulumi.String("your_vpc_id"),
-// 			SubnetIds: pulumi.StringArray{
-// 				pulumi.String("your_subnet_id"),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("test"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = As.GetInstancesOutput(ctx, as.GetInstancesOutputArgs{
-// 			Filters: as.GetInstancesFilterArray{
-// 				&as.GetInstancesFilterArgs{
-// 					Name: pulumi.String("auto-scaling-group-id"),
-// 					Values: pulumi.StringArray{
-// 						scalingGroup.ID(),
-// 					},
-// 				},
-// 			},
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			scalingGroup, err := As.NewScalingGroup(ctx, "scalingGroup", &As.ScalingGroupArgs{
+//				ScalingGroupName: pulumi.String("tf-as-group-ds-ins-basic"),
+//				ConfigurationId:  pulumi.String("your_launch_configuration_id"),
+//				MaxSize:          pulumi.Int(1),
+//				MinSize:          pulumi.Int(1),
+//				VpcId:            pulumi.String("your_vpc_id"),
+//				SubnetIds: pulumi.StringArray{
+//					pulumi.String("your_subnet_id"),
+//				},
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = As.GetInstancesOutput(ctx, as.GetInstancesOutputArgs{
+//				Filters: as.GetInstancesFilterArray{
+//					&as.GetInstancesFilterArgs{
+//						Name: pulumi.String("auto-scaling-group-id"),
+//						Values: pulumi.StringArray{
+//							scalingGroup.ID(),
+//						},
+//					},
+//				},
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetInstances(ctx *pulumi.Context, args *GetInstancesArgs, opts ...pulumi.InvokeOption) (*GetInstancesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstancesResult
 	err := ctx.Invoke("tencentcloud:As/getInstances:getInstances", args, &rv, opts...)
 	if err != nil {

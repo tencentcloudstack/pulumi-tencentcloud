@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const clusterAttachment = new tencentcloud.Tcm.ClusterAttachment("cluster_attachment", {
+ * const clusterAttachment = new tencentcloud.tcm.ClusterAttachment("clusterAttachment", {
  *     clusterLists: [{
  *         clusterId: "cls-rc5uy6dy",
  *         region: "ap-guangzhou",
@@ -26,13 +28,14 @@ import * as utilities from "../utilities";
  *     meshId: "mesh-b9q6vf9l",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tcm cluster_attachment can be imported using the mesh_id#cluster_id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcm/clusterAttachment:ClusterAttachment cluster_attachment mesh-b9q6vf9l#cls-rc5uy6dy
+ * $ pulumi import tencentcloud:Tcm/clusterAttachment:ClusterAttachment cluster_attachment mesh-b9q6vf9l#cls-rc5uy6dy
  * ```
  */
 export class ClusterAttachment extends pulumi.CustomResource {

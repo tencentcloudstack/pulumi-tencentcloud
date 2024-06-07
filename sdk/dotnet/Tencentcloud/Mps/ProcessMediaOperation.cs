@@ -14,74 +14,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// Provides a resource to create a mps process_media_operation
     /// 
     /// ## Example Usage
+    /// 
     /// ### Process mps media through CMQ
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var output = new Tencentcloud.Cos.Bucket("output", new()
     ///     {
-    ///         var output = new Tencentcloud.Cos.Bucket("output", new Tencentcloud.Cos.BucketArgs
-    ///         {
-    ///             Bucket = $"tf-bucket-mps-edit-media-output-{local.App_id}",
-    ///             ForceClean = true,
-    ///             Acl = "public-read",
-    ///         });
-    ///         var @object = Output.Create(Tencentcloud.Cos.GetBucketObject.InvokeAsync(new Tencentcloud.Cos.GetBucketObjectArgs
-    ///         {
-    ///             Bucket = $"keep-bucket-{local.App_id}",
-    ///             Key = "/mps-test/test.mov",
-    ///         }));
-    ///         var operation = new Tencentcloud.Mps.ProcessMediaOperation("operation", new Tencentcloud.Mps.ProcessMediaOperationArgs
-    ///         {
-    ///             InputInfo = new Tencentcloud.Mps.Inputs.ProcessMediaOperationInputInfoArgs
-    ///             {
-    ///                 Type = "COS",
-    ///                 CosInputInfo = new Tencentcloud.Mps.Inputs.ProcessMediaOperationInputInfoCosInputInfoArgs
-    ///                 {
-    ///                     Bucket = @object.Apply(@object =&gt; @object.Bucket),
-    ///                     Region = "%s",
-    ///                     Object = @object.Apply(@object =&gt; @object.Key),
-    ///                 },
-    ///             },
-    ///             OutputStorage = new Tencentcloud.Mps.Inputs.ProcessMediaOperationOutputStorageArgs
-    ///             {
-    ///                 Type = "COS",
-    ///                 CosOutputStorage = new Tencentcloud.Mps.Inputs.ProcessMediaOperationOutputStorageCosOutputStorageArgs
-    ///                 {
-    ///                     Bucket = output.CosBucket,
-    ///                     Region = "%s",
-    ///                 },
-    ///             },
-    ///             OutputDir = "output/",
-    ///             AiContentReviewTask = new Tencentcloud.Mps.Inputs.ProcessMediaOperationAiContentReviewTaskArgs
-    ///             {
-    ///                 Definition = 10,
-    ///             },
-    ///             AiRecognitionTask = new Tencentcloud.Mps.Inputs.ProcessMediaOperationAiRecognitionTaskArgs
-    ///             {
-    ///                 Definition = 10,
-    ///             },
-    ///             TaskNotifyConfig = new Tencentcloud.Mps.Inputs.ProcessMediaOperationTaskNotifyConfigArgs
-    ///             {
-    ///                 CmqModel = "Queue",
-    ///                 CmqRegion = "gz",
-    ///                 QueueName = "test",
-    ///                 TopicName = "test",
-    ///                 NotifyType = "CMQ",
-    ///             },
-    ///         });
-    ///     }
+    ///         CosBucket = $"tf-bucket-mps-edit-media-output-{local.App_id}",
+    ///         ForceClean = true,
+    ///         Acl = "public-read",
+    ///     });
     /// 
-    /// }
+    ///     var @object = Tencentcloud.Cos.GetBucketObject.Invoke(new()
+    ///     {
+    ///         Bucket = $"keep-bucket-{local.App_id}",
+    ///         Key = "/mps-test/test.mov",
+    ///     });
+    /// 
+    ///     var operation = new Tencentcloud.Mps.ProcessMediaOperation("operation", new()
+    ///     {
+    ///         InputInfo = new Tencentcloud.Mps.Inputs.ProcessMediaOperationInputInfoArgs
+    ///         {
+    ///             Type = "COS",
+    ///             CosInputInfo = new Tencentcloud.Mps.Inputs.ProcessMediaOperationInputInfoCosInputInfoArgs
+    ///             {
+    ///                 Bucket = @object.Apply(@object =&gt; @object.Apply(getBucketObjectResult =&gt; getBucketObjectResult.Bucket)),
+    ///                 Region = "%s",
+    ///                 Object = @object.Apply(@object =&gt; @object.Apply(getBucketObjectResult =&gt; getBucketObjectResult.Key)),
+    ///             },
+    ///         },
+    ///         OutputStorage = new Tencentcloud.Mps.Inputs.ProcessMediaOperationOutputStorageArgs
+    ///         {
+    ///             Type = "COS",
+    ///             CosOutputStorage = new Tencentcloud.Mps.Inputs.ProcessMediaOperationOutputStorageCosOutputStorageArgs
+    ///             {
+    ///                 Bucket = output.CosBucket,
+    ///                 Region = "%s",
+    ///             },
+    ///         },
+    ///         OutputDir = "output/",
+    ///         AiContentReviewTask = new Tencentcloud.Mps.Inputs.ProcessMediaOperationAiContentReviewTaskArgs
+    ///         {
+    ///             Definition = 10,
+    ///         },
+    ///         AiRecognitionTask = new Tencentcloud.Mps.Inputs.ProcessMediaOperationAiRecognitionTaskArgs
+    ///         {
+    ///             Definition = 10,
+    ///         },
+    ///         TaskNotifyConfig = new Tencentcloud.Mps.Inputs.ProcessMediaOperationTaskNotifyConfigArgs
+    ///         {
+    ///             CmqModel = "Queue",
+    ///             CmqRegion = "gz",
+    ///             QueueName = "test",
+    ///             TopicName = "test",
+    ///             NotifyType = "CMQ",
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/processMediaOperation:ProcessMediaOperation")]
-    public partial class ProcessMediaOperation : Pulumi.CustomResource
+    public partial class ProcessMediaOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Video content analysis task parameter.
@@ -212,7 +216,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class ProcessMediaOperationArgs : Pulumi.ResourceArgs
+    public sealed class ProcessMediaOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Video content analysis task parameter.
@@ -301,9 +305,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public ProcessMediaOperationArgs()
         {
         }
+        public static new ProcessMediaOperationArgs Empty => new ProcessMediaOperationArgs();
     }
 
-    public sealed class ProcessMediaOperationState : Pulumi.ResourceArgs
+    public sealed class ProcessMediaOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Video content analysis task parameter.
@@ -392,5 +397,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public ProcessMediaOperationState()
         {
         }
+        public static new ProcessMediaOperationState Empty => new ProcessMediaOperationState();
     }
 }

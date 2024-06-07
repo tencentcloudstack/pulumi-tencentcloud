@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// Provides a resource to create a tsf instances_attachment
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/instancesAttachment:InstancesAttachment")]
-    public partial class InstancesAttachment : Pulumi.CustomResource
+    public partial class InstancesAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster ID.
@@ -112,6 +112,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -133,7 +137,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class InstancesAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class InstancesAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -195,11 +199,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         [Input("osName")]
         public Input<string>? OsName { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Reset system password.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("securityGroupIds")]
         private InputList<string>? _securityGroupIds;
@@ -222,9 +236,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public InstancesAttachmentArgs()
         {
         }
+        public static new InstancesAttachmentArgs Empty => new InstancesAttachmentArgs();
     }
 
-    public sealed class InstancesAttachmentState : Pulumi.ResourceArgs
+    public sealed class InstancesAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -286,11 +301,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         [Input("osName")]
         public Input<string>? OsName { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// Reset system password.
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         [Input("securityGroupIds")]
         private InputList<string>? _securityGroupIds;
@@ -313,5 +338,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public InstancesAttachmentState()
         {
         }
+        public static new InstancesAttachmentState Empty => new InstancesAttachmentState();
     }
 }

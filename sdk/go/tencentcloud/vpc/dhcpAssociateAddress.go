@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type DhcpAssociateAddress struct {
@@ -33,7 +34,7 @@ func NewDhcpAssociateAddress(ctx *pulumi.Context,
 	if args.DhcpIpId == nil {
 		return nil, errors.New("invalid value for required argument 'DhcpIpId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DhcpAssociateAddress
 	err := ctx.RegisterResource("tencentcloud:Vpc/dhcpAssociateAddress:DhcpAssociateAddress", name, args, &resource, opts...)
 	if err != nil {
@@ -114,7 +115,7 @@ func (i *DhcpAssociateAddress) ToDhcpAssociateAddressOutputWithContext(ctx conte
 // DhcpAssociateAddressArrayInput is an input type that accepts DhcpAssociateAddressArray and DhcpAssociateAddressArrayOutput values.
 // You can construct a concrete instance of `DhcpAssociateAddressArrayInput` via:
 //
-//          DhcpAssociateAddressArray{ DhcpAssociateAddressArgs{...} }
+//	DhcpAssociateAddressArray{ DhcpAssociateAddressArgs{...} }
 type DhcpAssociateAddressArrayInput interface {
 	pulumi.Input
 
@@ -139,7 +140,7 @@ func (i DhcpAssociateAddressArray) ToDhcpAssociateAddressArrayOutputWithContext(
 // DhcpAssociateAddressMapInput is an input type that accepts DhcpAssociateAddressMap and DhcpAssociateAddressMapOutput values.
 // You can construct a concrete instance of `DhcpAssociateAddressMapInput` via:
 //
-//          DhcpAssociateAddressMap{ "key": DhcpAssociateAddressArgs{...} }
+//	DhcpAssociateAddressMap{ "key": DhcpAssociateAddressArgs{...} }
 type DhcpAssociateAddressMapInput interface {
 	pulumi.Input
 

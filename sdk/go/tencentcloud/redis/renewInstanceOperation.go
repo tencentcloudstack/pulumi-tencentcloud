@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a redis renewInstanceOperation
@@ -38,7 +39,7 @@ func NewRenewInstanceOperation(ctx *pulumi.Context,
 	if args.Period == nil {
 		return nil, errors.New("invalid value for required argument 'Period'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RenewInstanceOperation
 	err := ctx.RegisterResource("tencentcloud:Redis/renewInstanceOperation:RenewInstanceOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -127,7 +128,7 @@ func (i *RenewInstanceOperation) ToRenewInstanceOperationOutputWithContext(ctx c
 // RenewInstanceOperationArrayInput is an input type that accepts RenewInstanceOperationArray and RenewInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `RenewInstanceOperationArrayInput` via:
 //
-//          RenewInstanceOperationArray{ RenewInstanceOperationArgs{...} }
+//	RenewInstanceOperationArray{ RenewInstanceOperationArgs{...} }
 type RenewInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -152,7 +153,7 @@ func (i RenewInstanceOperationArray) ToRenewInstanceOperationArrayOutputWithCont
 // RenewInstanceOperationMapInput is an input type that accepts RenewInstanceOperationMap and RenewInstanceOperationMapOutput values.
 // You can construct a concrete instance of `RenewInstanceOperationMapInput` via:
 //
-//          RenewInstanceOperationMap{ "key": RenewInstanceOperationArgs{...} }
+//	RenewInstanceOperationMap{ "key": RenewInstanceOperationArgs{...} }
 type RenewInstanceOperationMapInput interface {
 	pulumi.Input
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class ConnectResourceMysqlConnectParamGetArgs : Pulumi.ResourceArgs
+    public sealed class ConnectResourceMysqlConnectParamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Required when type is TDSQL C_MYSQL.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public ConnectResourceMysqlConnectParamGetArgs()
         {
         }
+        public static new ConnectResourceMysqlConnectParamGetArgs Empty => new ConnectResourceMysqlConnectParamGetArgs();
     }
 }

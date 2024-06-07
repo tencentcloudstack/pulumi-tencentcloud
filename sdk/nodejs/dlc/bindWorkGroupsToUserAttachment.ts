@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,27 +11,27 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const bindWorkGroupsToUser = new tencentcloud.Dlc.BindWorkGroupsToUserAttachment("bind_work_groups_to_user", {
- *     addInfo: {
- *         userId: "100032772113",
- *         workGroupIds: [
- *             23184,
- *             23181,
- *         ],
- *     },
- * });
+ * const bindWorkGroupsToUser = new tencentcloud.dlc.BindWorkGroupsToUserAttachment("bindWorkGroupsToUser", {addInfo: {
+ *     userId: "100032772113",
+ *     workGroupIds: [
+ *         23184,
+ *         23181,
+ *     ],
+ * }});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dlc bind_work_groups_to_user can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dlc/bindWorkGroupsToUserAttachment:BindWorkGroupsToUserAttachment bind_work_groups_to_user bind_work_groups_to_user_id
+ * $ pulumi import tencentcloud:Dlc/bindWorkGroupsToUserAttachment:BindWorkGroupsToUserAttachment bind_work_groups_to_user bind_work_groups_to_user_id
  * ```
  */
 export class BindWorkGroupsToUserAttachment extends pulumi.CustomResource {

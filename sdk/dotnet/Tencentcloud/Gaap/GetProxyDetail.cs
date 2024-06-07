@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap proxy detail
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var proxyDetail = Tencentcloud.Gaap.GetProxyDetail.Invoke(new()
         ///     {
-        ///         var proxyDetail = Output.Create(Tencentcloud.Gaap.GetProxyDetail.InvokeAsync(new Tencentcloud.Gaap.GetProxyDetailArgs
-        ///         {
-        ///             ProxyId = "link-8lpyo88p",
-        ///         }));
-        ///     }
+        ///         ProxyId = "link-m9t4yho9",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProxyDetailResult> InvokeAsync(GetProxyDetailArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProxyDetailResult>("tencentcloud:Gaap/getProxyDetail:getProxyDetail", args ?? new GetProxyDetailArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxyDetailResult>("tencentcloud:Gaap/getProxyDetail:getProxyDetail", args ?? new GetProxyDetailArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap proxy detail
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var proxyDetail = Tencentcloud.Gaap.GetProxyDetail.Invoke(new()
         ///     {
-        ///         var proxyDetail = Output.Create(Tencentcloud.Gaap.GetProxyDetail.InvokeAsync(new Tencentcloud.Gaap.GetProxyDetailArgs
-        ///         {
-        ///             ProxyId = "link-8lpyo88p",
-        ///         }));
-        ///     }
+        ///         ProxyId = "link-m9t4yho9",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProxyDetailResult> Invoke(GetProxyDetailInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProxyDetailResult>("tencentcloud:Gaap/getProxyDetail:getProxyDetail", args ?? new GetProxyDetailInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProxyDetailResult>("tencentcloud:Gaap/getProxyDetail:getProxyDetail", args ?? new GetProxyDetailInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProxyDetailArgs : Pulumi.InvokeArgs
+    public sealed class GetProxyDetailArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Proxy Id.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetProxyDetailArgs()
         {
         }
+        public static new GetProxyDetailArgs Empty => new GetProxyDetailArgs();
     }
 
-    public sealed class GetProxyDetailInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProxyDetailInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Proxy Id.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetProxyDetailInvokeArgs()
         {
         }
+        public static new GetProxyDetailInvokeArgs Empty => new GetProxyDetailInvokeArgs();
     }
 
 

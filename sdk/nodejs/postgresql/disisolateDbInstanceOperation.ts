@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const disisolateDbInstanceOperation = new tencentcloud.postgresql.DisisolateDbInstanceOperation("disisolateDbInstanceOperation", {
  *     dbInstanceIdSets: [local.pgsql_id],
@@ -19,6 +20,7 @@ import * as utilities from "../utilities";
  *     autoVoucher: false,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class DisisolateDbInstanceOperation extends pulumi.CustomResource {
     /**

@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a scf reservedConcurrencyConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.NewReservedConcurrencyConfig(ctx, "reservedConcurrencyConfig", &Scf.ReservedConcurrencyConfigArgs{
-// 			FunctionName:           pulumi.String("keep-1676351130"),
-// 			Namespace:              pulumi.String("default"),
-// 			ReservedConcurrencyMem: pulumi.Int(128000),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.NewReservedConcurrencyConfig(ctx, "reservedConcurrencyConfig", &Scf.ReservedConcurrencyConfigArgs{
+//				FunctionName:           pulumi.String("keep-1676351130"),
+//				Namespace:              pulumi.String("default"),
+//				ReservedConcurrencyMem: pulumi.Int(128000),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // scf reserved_concurrency_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Scf/reservedConcurrencyConfig:ReservedConcurrencyConfig reserved_concurrency_config reserved_concurrency_config_id
+// $ pulumi import tencentcloud:Scf/reservedConcurrencyConfig:ReservedConcurrencyConfig reserved_concurrency_config reserved_concurrency_config_id
 // ```
 type ReservedConcurrencyConfig struct {
 	pulumi.CustomResourceState
@@ -69,7 +75,7 @@ func NewReservedConcurrencyConfig(ctx *pulumi.Context,
 	if args.ReservedConcurrencyMem == nil {
 		return nil, errors.New("invalid value for required argument 'ReservedConcurrencyMem'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ReservedConcurrencyConfig
 	err := ctx.RegisterResource("tencentcloud:Scf/reservedConcurrencyConfig:ReservedConcurrencyConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -158,7 +164,7 @@ func (i *ReservedConcurrencyConfig) ToReservedConcurrencyConfigOutputWithContext
 // ReservedConcurrencyConfigArrayInput is an input type that accepts ReservedConcurrencyConfigArray and ReservedConcurrencyConfigArrayOutput values.
 // You can construct a concrete instance of `ReservedConcurrencyConfigArrayInput` via:
 //
-//          ReservedConcurrencyConfigArray{ ReservedConcurrencyConfigArgs{...} }
+//	ReservedConcurrencyConfigArray{ ReservedConcurrencyConfigArgs{...} }
 type ReservedConcurrencyConfigArrayInput interface {
 	pulumi.Input
 
@@ -183,7 +189,7 @@ func (i ReservedConcurrencyConfigArray) ToReservedConcurrencyConfigArrayOutputWi
 // ReservedConcurrencyConfigMapInput is an input type that accepts ReservedConcurrencyConfigMap and ReservedConcurrencyConfigMapOutput values.
 // You can construct a concrete instance of `ReservedConcurrencyConfigMapInput` via:
 //
-//          ReservedConcurrencyConfigMap{ "key": ReservedConcurrencyConfigArgs{...} }
+//	ReservedConcurrencyConfigMap{ "key": ReservedConcurrencyConfigArgs{...} }
 type ReservedConcurrencyConfigMapInput interface {
 	pulumi.Input
 

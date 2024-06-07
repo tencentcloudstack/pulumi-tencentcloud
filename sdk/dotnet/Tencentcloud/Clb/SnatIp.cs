@@ -18,51 +18,53 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var snatTest = new Tencentcloud.Clb.Instance("snatTest", new()
     ///     {
-    ///         var snatTest = new Tencentcloud.Clb.Instance("snatTest", new Tencentcloud.Clb.InstanceArgs
-    ///         {
-    ///             NetworkType = "OPEN",
-    ///             ClbName = "tf-clb-snat-test",
-    ///         });
-    ///         var foo = new Tencentcloud.Clb.SnatIp("foo", new Tencentcloud.Clb.SnatIpArgs
-    ///         {
-    ///             ClbId = snatTest.Id,
-    ///             Ips = 
-    ///             {
-    ///                 new Tencentcloud.Clb.Inputs.SnatIpIpArgs
-    ///                 {
-    ///                     SubnetId = "subnet-12345678",
-    ///                     Ip = "172.16.0.1",
-    ///                 },
-    ///                 new Tencentcloud.Clb.Inputs.SnatIpIpArgs
-    ///                 {
-    ///                     SubnetId = "subnet-12345678",
-    ///                     Ip = "172.16.0.2",
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///         NetworkType = "OPEN",
+    ///         ClbName = "tf-clb-snat-test",
+    ///     });
     /// 
-    /// }
+    ///     var foo = new Tencentcloud.Clb.SnatIp("foo", new()
+    ///     {
+    ///         ClbId = snatTest.Id,
+    ///         Ips = new[]
+    ///         {
+    ///             new Tencentcloud.Clb.Inputs.SnatIpIpArgs
+    ///             {
+    ///                 SubnetId = "subnet-12345678",
+    ///                 Ip = "172.16.0.1",
+    ///             },
+    ///             new Tencentcloud.Clb.Inputs.SnatIpIpArgs
+    ///             {
+    ///                 SubnetId = "subnet-12345678",
+    ///                 Ip = "172.16.0.2",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ClbSnatIp instance can be imported by clb instance id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clb/snatIp:SnatIp test clb_id
+    /// $ pulumi import tencentcloud:Clb/snatIp:SnatIp test clb_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/snatIp:SnatIp")]
-    public partial class SnatIp : Pulumi.CustomResource
+    public partial class SnatIp : global::Pulumi.CustomResource
     {
         /// <summary>
         /// CLB instance ID.
@@ -121,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class SnatIpArgs : Pulumi.ResourceArgs
+    public sealed class SnatIpArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CLB instance ID.
@@ -144,9 +146,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public SnatIpArgs()
         {
         }
+        public static new SnatIpArgs Empty => new SnatIpArgs();
     }
 
-    public sealed class SnatIpState : Pulumi.ResourceArgs
+    public sealed class SnatIpState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CLB instance ID.
@@ -169,5 +172,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public SnatIpState()
         {
         }
+        public static new SnatIpState Empty => new SnatIpState();
     }
 }

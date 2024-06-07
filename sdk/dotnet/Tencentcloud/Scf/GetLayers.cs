@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// <summary>
         /// Use this data source to query detailed information of scf layers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var layers = Output.Create(Tencentcloud.Scf.GetLayers.InvokeAsync());
-        ///     }
+        ///     var layers = Tencentcloud.Scf.GetLayers.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetLayersResult> InvokeAsync(GetLayersArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetLayersResult>("tencentcloud:Scf/getLayers:getLayers", args ?? new GetLayersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetLayersResult>("tencentcloud:Scf/getLayers:getLayers", args ?? new GetLayersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of scf layers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var layers = Output.Create(Tencentcloud.Scf.GetLayers.InvokeAsync());
-        ///     }
+        ///     var layers = Tencentcloud.Scf.GetLayers.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetLayersResult> Invoke(GetLayersInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetLayersResult>("tencentcloud:Scf/getLayers:getLayers", args ?? new GetLayersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetLayersResult>("tencentcloud:Scf/getLayers:getLayers", args ?? new GetLayersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetLayersArgs : Pulumi.InvokeArgs
+    public sealed class GetLayersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Compatible runtimes.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetLayersArgs()
         {
         }
+        public static new GetLayersArgs Empty => new GetLayersArgs();
     }
 
-    public sealed class GetLayersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetLayersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Compatible runtimes.
@@ -114,6 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetLayersInvokeArgs()
         {
         }
+        public static new GetLayersInvokeArgs Empty => new GetLayersInvokeArgs();
     }
 
 

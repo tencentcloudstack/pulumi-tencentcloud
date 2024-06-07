@@ -9,16 +9,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const invokeFunction = new tencentcloud.Scf.SyncInvokeFunction("invoke_function", {
+ * const invokeFunction = new tencentcloud.scf.SyncInvokeFunction("invokeFunction", {
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  *     qualifier: "2",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class SyncInvokeFunction extends pulumi.CustomResource {
     /**

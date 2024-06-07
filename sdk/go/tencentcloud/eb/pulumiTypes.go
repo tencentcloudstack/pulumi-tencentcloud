@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type EventConnectorConnectionDescription struct {
 	// apigw parameter,Note: This field may return null, indicating that no valid value can be obtained.
@@ -22,7 +25,7 @@ type EventConnectorConnectionDescription struct {
 // EventConnectorConnectionDescriptionInput is an input type that accepts EventConnectorConnectionDescriptionArgs and EventConnectorConnectionDescriptionOutput values.
 // You can construct a concrete instance of `EventConnectorConnectionDescriptionInput` via:
 //
-//          EventConnectorConnectionDescriptionArgs{...}
+//	EventConnectorConnectionDescriptionArgs{...}
 type EventConnectorConnectionDescriptionInput interface {
 	pulumi.Input
 
@@ -62,11 +65,11 @@ func (i EventConnectorConnectionDescriptionArgs) ToEventConnectorConnectionDescr
 // EventConnectorConnectionDescriptionPtrInput is an input type that accepts EventConnectorConnectionDescriptionArgs, EventConnectorConnectionDescriptionPtr and EventConnectorConnectionDescriptionPtrOutput values.
 // You can construct a concrete instance of `EventConnectorConnectionDescriptionPtrInput` via:
 //
-//          EventConnectorConnectionDescriptionArgs{...}
+//	        EventConnectorConnectionDescriptionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventConnectorConnectionDescriptionPtrInput interface {
 	pulumi.Input
 
@@ -199,7 +202,7 @@ type EventConnectorConnectionDescriptionApiGwParams struct {
 // EventConnectorConnectionDescriptionApiGwParamsInput is an input type that accepts EventConnectorConnectionDescriptionApiGwParamsArgs and EventConnectorConnectionDescriptionApiGwParamsOutput values.
 // You can construct a concrete instance of `EventConnectorConnectionDescriptionApiGwParamsInput` via:
 //
-//          EventConnectorConnectionDescriptionApiGwParamsArgs{...}
+//	EventConnectorConnectionDescriptionApiGwParamsArgs{...}
 type EventConnectorConnectionDescriptionApiGwParamsInput interface {
 	pulumi.Input
 
@@ -237,11 +240,11 @@ func (i EventConnectorConnectionDescriptionApiGwParamsArgs) ToEventConnectorConn
 // EventConnectorConnectionDescriptionApiGwParamsPtrInput is an input type that accepts EventConnectorConnectionDescriptionApiGwParamsArgs, EventConnectorConnectionDescriptionApiGwParamsPtr and EventConnectorConnectionDescriptionApiGwParamsPtrOutput values.
 // You can construct a concrete instance of `EventConnectorConnectionDescriptionApiGwParamsPtrInput` via:
 //
-//          EventConnectorConnectionDescriptionApiGwParamsArgs{...}
+//	        EventConnectorConnectionDescriptionApiGwParamsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventConnectorConnectionDescriptionApiGwParamsPtrInput interface {
 	pulumi.Input
 
@@ -355,7 +358,7 @@ type EventConnectorConnectionDescriptionCkafkaParams struct {
 // EventConnectorConnectionDescriptionCkafkaParamsInput is an input type that accepts EventConnectorConnectionDescriptionCkafkaParamsArgs and EventConnectorConnectionDescriptionCkafkaParamsOutput values.
 // You can construct a concrete instance of `EventConnectorConnectionDescriptionCkafkaParamsInput` via:
 //
-//          EventConnectorConnectionDescriptionCkafkaParamsArgs{...}
+//	EventConnectorConnectionDescriptionCkafkaParamsArgs{...}
 type EventConnectorConnectionDescriptionCkafkaParamsInput interface {
 	pulumi.Input
 
@@ -393,11 +396,11 @@ func (i EventConnectorConnectionDescriptionCkafkaParamsArgs) ToEventConnectorCon
 // EventConnectorConnectionDescriptionCkafkaParamsPtrInput is an input type that accepts EventConnectorConnectionDescriptionCkafkaParamsArgs, EventConnectorConnectionDescriptionCkafkaParamsPtr and EventConnectorConnectionDescriptionCkafkaParamsPtrOutput values.
 // You can construct a concrete instance of `EventConnectorConnectionDescriptionCkafkaParamsPtrInput` via:
 //
-//          EventConnectorConnectionDescriptionCkafkaParamsArgs{...}
+//	        EventConnectorConnectionDescriptionCkafkaParamsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventConnectorConnectionDescriptionCkafkaParamsPtrInput interface {
 	pulumi.Input
 
@@ -515,7 +518,7 @@ type EventTargetTargetDescription struct {
 // EventTargetTargetDescriptionInput is an input type that accepts EventTargetTargetDescriptionArgs and EventTargetTargetDescriptionOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionInput` via:
 //
-//          EventTargetTargetDescriptionArgs{...}
+//	EventTargetTargetDescriptionArgs{...}
 type EventTargetTargetDescriptionInput interface {
 	pulumi.Input
 
@@ -557,11 +560,11 @@ func (i EventTargetTargetDescriptionArgs) ToEventTargetTargetDescriptionPtrOutpu
 // EventTargetTargetDescriptionPtrInput is an input type that accepts EventTargetTargetDescriptionArgs, EventTargetTargetDescriptionPtr and EventTargetTargetDescriptionPtrOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionPtrInput` via:
 //
-//          EventTargetTargetDescriptionArgs{...}
+//	        EventTargetTargetDescriptionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTargetTargetDescriptionPtrInput interface {
 	pulumi.Input
 
@@ -709,7 +712,7 @@ type EventTargetTargetDescriptionCkafkaTargetParams struct {
 // EventTargetTargetDescriptionCkafkaTargetParamsInput is an input type that accepts EventTargetTargetDescriptionCkafkaTargetParamsArgs and EventTargetTargetDescriptionCkafkaTargetParamsOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionCkafkaTargetParamsInput` via:
 //
-//          EventTargetTargetDescriptionCkafkaTargetParamsArgs{...}
+//	EventTargetTargetDescriptionCkafkaTargetParamsArgs{...}
 type EventTargetTargetDescriptionCkafkaTargetParamsInput interface {
 	pulumi.Input
 
@@ -747,11 +750,11 @@ func (i EventTargetTargetDescriptionCkafkaTargetParamsArgs) ToEventTargetTargetD
 // EventTargetTargetDescriptionCkafkaTargetParamsPtrInput is an input type that accepts EventTargetTargetDescriptionCkafkaTargetParamsArgs, EventTargetTargetDescriptionCkafkaTargetParamsPtr and EventTargetTargetDescriptionCkafkaTargetParamsPtrOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionCkafkaTargetParamsPtrInput` via:
 //
-//          EventTargetTargetDescriptionCkafkaTargetParamsArgs{...}
+//	        EventTargetTargetDescriptionCkafkaTargetParamsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTargetTargetDescriptionCkafkaTargetParamsPtrInput interface {
 	pulumi.Input
 
@@ -867,7 +870,7 @@ type EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicy struct {
 // EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyInput is an input type that accepts EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs and EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyInput` via:
 //
-//          EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs{...}
+//	EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs{...}
 type EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyInput interface {
 	pulumi.Input
 
@@ -905,11 +908,11 @@ func (i EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs) ToEventTa
 // EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyPtrInput is an input type that accepts EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs, EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyPtr and EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyPtrOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyPtrInput` via:
 //
-//          EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs{...}
+//	        EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyPtrInput interface {
 	pulumi.Input
 
@@ -1031,7 +1034,7 @@ type EventTargetTargetDescriptionEsTargetParams struct {
 // EventTargetTargetDescriptionEsTargetParamsInput is an input type that accepts EventTargetTargetDescriptionEsTargetParamsArgs and EventTargetTargetDescriptionEsTargetParamsOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionEsTargetParamsInput` via:
 //
-//          EventTargetTargetDescriptionEsTargetParamsArgs{...}
+//	EventTargetTargetDescriptionEsTargetParamsArgs{...}
 type EventTargetTargetDescriptionEsTargetParamsInput interface {
 	pulumi.Input
 
@@ -1077,11 +1080,11 @@ func (i EventTargetTargetDescriptionEsTargetParamsArgs) ToEventTargetTargetDescr
 // EventTargetTargetDescriptionEsTargetParamsPtrInput is an input type that accepts EventTargetTargetDescriptionEsTargetParamsArgs, EventTargetTargetDescriptionEsTargetParamsPtr and EventTargetTargetDescriptionEsTargetParamsPtrOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionEsTargetParamsPtrInput` via:
 //
-//          EventTargetTargetDescriptionEsTargetParamsArgs{...}
+//	        EventTargetTargetDescriptionEsTargetParamsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTargetTargetDescriptionEsTargetParamsPtrInput interface {
 	pulumi.Input
 
@@ -1257,7 +1260,7 @@ type EventTargetTargetDescriptionScfParams struct {
 // EventTargetTargetDescriptionScfParamsInput is an input type that accepts EventTargetTargetDescriptionScfParamsArgs and EventTargetTargetDescriptionScfParamsOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionScfParamsInput` via:
 //
-//          EventTargetTargetDescriptionScfParamsArgs{...}
+//	EventTargetTargetDescriptionScfParamsArgs{...}
 type EventTargetTargetDescriptionScfParamsInput interface {
 	pulumi.Input
 
@@ -1297,11 +1300,11 @@ func (i EventTargetTargetDescriptionScfParamsArgs) ToEventTargetTargetDescriptio
 // EventTargetTargetDescriptionScfParamsPtrInput is an input type that accepts EventTargetTargetDescriptionScfParamsArgs, EventTargetTargetDescriptionScfParamsPtr and EventTargetTargetDescriptionScfParamsPtrOutput values.
 // You can construct a concrete instance of `EventTargetTargetDescriptionScfParamsPtrInput` via:
 //
-//          EventTargetTargetDescriptionScfParamsArgs{...}
+//	        EventTargetTargetDescriptionScfParamsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTargetTargetDescriptionScfParamsPtrInput interface {
 	pulumi.Input
 
@@ -1432,7 +1435,7 @@ type EventTransformTransformation struct {
 // EventTransformTransformationInput is an input type that accepts EventTransformTransformationArgs and EventTransformTransformationOutput values.
 // You can construct a concrete instance of `EventTransformTransformationInput` via:
 //
-//          EventTransformTransformationArgs{...}
+//	EventTransformTransformationArgs{...}
 type EventTransformTransformationInput interface {
 	pulumi.Input
 
@@ -1464,7 +1467,7 @@ func (i EventTransformTransformationArgs) ToEventTransformTransformationOutputWi
 // EventTransformTransformationArrayInput is an input type that accepts EventTransformTransformationArray and EventTransformTransformationArrayOutput values.
 // You can construct a concrete instance of `EventTransformTransformationArrayInput` via:
 //
-//          EventTransformTransformationArray{ EventTransformTransformationArgs{...} }
+//	EventTransformTransformationArray{ EventTransformTransformationArgs{...} }
 type EventTransformTransformationArrayInput interface {
 	pulumi.Input
 
@@ -1543,7 +1546,7 @@ type EventTransformTransformationEtlFilter struct {
 // EventTransformTransformationEtlFilterInput is an input type that accepts EventTransformTransformationEtlFilterArgs and EventTransformTransformationEtlFilterOutput values.
 // You can construct a concrete instance of `EventTransformTransformationEtlFilterInput` via:
 //
-//          EventTransformTransformationEtlFilterArgs{...}
+//	EventTransformTransformationEtlFilterArgs{...}
 type EventTransformTransformationEtlFilterInput interface {
 	pulumi.Input
 
@@ -1579,11 +1582,11 @@ func (i EventTransformTransformationEtlFilterArgs) ToEventTransformTransformatio
 // EventTransformTransformationEtlFilterPtrInput is an input type that accepts EventTransformTransformationEtlFilterArgs, EventTransformTransformationEtlFilterPtr and EventTransformTransformationEtlFilterPtrOutput values.
 // You can construct a concrete instance of `EventTransformTransformationEtlFilterPtrInput` via:
 //
-//          EventTransformTransformationEtlFilterArgs{...}
+//	        EventTransformTransformationEtlFilterArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTransformTransformationEtlFilterPtrInput interface {
 	pulumi.Input
 
@@ -1684,7 +1687,7 @@ type EventTransformTransformationExtraction struct {
 // EventTransformTransformationExtractionInput is an input type that accepts EventTransformTransformationExtractionArgs and EventTransformTransformationExtractionOutput values.
 // You can construct a concrete instance of `EventTransformTransformationExtractionInput` via:
 //
-//          EventTransformTransformationExtractionArgs{...}
+//	EventTransformTransformationExtractionArgs{...}
 type EventTransformTransformationExtractionInput interface {
 	pulumi.Input
 
@@ -1724,11 +1727,11 @@ func (i EventTransformTransformationExtractionArgs) ToEventTransformTransformati
 // EventTransformTransformationExtractionPtrInput is an input type that accepts EventTransformTransformationExtractionArgs, EventTransformTransformationExtractionPtr and EventTransformTransformationExtractionPtrOutput values.
 // You can construct a concrete instance of `EventTransformTransformationExtractionPtrInput` via:
 //
-//          EventTransformTransformationExtractionArgs{...}
+//	        EventTransformTransformationExtractionArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTransformTransformationExtractionPtrInput interface {
 	pulumi.Input
 
@@ -1859,7 +1862,7 @@ type EventTransformTransformationExtractionTextParams struct {
 // EventTransformTransformationExtractionTextParamsInput is an input type that accepts EventTransformTransformationExtractionTextParamsArgs and EventTransformTransformationExtractionTextParamsOutput values.
 // You can construct a concrete instance of `EventTransformTransformationExtractionTextParamsInput` via:
 //
-//          EventTransformTransformationExtractionTextParamsArgs{...}
+//	EventTransformTransformationExtractionTextParamsArgs{...}
 type EventTransformTransformationExtractionTextParamsInput interface {
 	pulumi.Input
 
@@ -1897,11 +1900,11 @@ func (i EventTransformTransformationExtractionTextParamsArgs) ToEventTransformTr
 // EventTransformTransformationExtractionTextParamsPtrInput is an input type that accepts EventTransformTransformationExtractionTextParamsArgs, EventTransformTransformationExtractionTextParamsPtr and EventTransformTransformationExtractionTextParamsPtrOutput values.
 // You can construct a concrete instance of `EventTransformTransformationExtractionTextParamsPtrInput` via:
 //
-//          EventTransformTransformationExtractionTextParamsArgs{...}
+//	        EventTransformTransformationExtractionTextParamsArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTransformTransformationExtractionTextParamsPtrInput interface {
 	pulumi.Input
 
@@ -2013,7 +2016,7 @@ type EventTransformTransformationTransform struct {
 // EventTransformTransformationTransformInput is an input type that accepts EventTransformTransformationTransformArgs and EventTransformTransformationTransformOutput values.
 // You can construct a concrete instance of `EventTransformTransformationTransformInput` via:
 //
-//          EventTransformTransformationTransformArgs{...}
+//	EventTransformTransformationTransformArgs{...}
 type EventTransformTransformationTransformInput interface {
 	pulumi.Input
 
@@ -2049,11 +2052,11 @@ func (i EventTransformTransformationTransformArgs) ToEventTransformTransformatio
 // EventTransformTransformationTransformPtrInput is an input type that accepts EventTransformTransformationTransformArgs, EventTransformTransformationTransformPtr and EventTransformTransformationTransformPtrOutput values.
 // You can construct a concrete instance of `EventTransformTransformationTransformPtrInput` via:
 //
-//          EventTransformTransformationTransformArgs{...}
+//	        EventTransformTransformationTransformArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type EventTransformTransformationTransformPtrInput interface {
 	pulumi.Input
 
@@ -2156,7 +2159,7 @@ type EventTransformTransformationTransformOutputStruct struct {
 // EventTransformTransformationTransformOutputStructInput is an input type that accepts EventTransformTransformationTransformOutputStructArgs and EventTransformTransformationTransformOutputStructOutput values.
 // You can construct a concrete instance of `EventTransformTransformationTransformOutputStructInput` via:
 //
-//          EventTransformTransformationTransformOutputStructArgs{...}
+//	EventTransformTransformationTransformOutputStructArgs{...}
 type EventTransformTransformationTransformOutputStructInput interface {
 	pulumi.Input
 
@@ -2188,7 +2191,7 @@ func (i EventTransformTransformationTransformOutputStructArgs) ToEventTransformT
 // EventTransformTransformationTransformOutputStructArrayInput is an input type that accepts EventTransformTransformationTransformOutputStructArray and EventTransformTransformationTransformOutputStructArrayOutput values.
 // You can construct a concrete instance of `EventTransformTransformationTransformOutputStructArrayInput` via:
 //
-//          EventTransformTransformationTransformOutputStructArray{ EventTransformTransformationTransformOutputStructArgs{...} }
+//	EventTransformTransformationTransformOutputStructArray{ EventTransformTransformationTransformOutputStructArgs{...} }
 type EventTransformTransformationTransformOutputStructArrayInput interface {
 	pulumi.Input
 
@@ -2275,7 +2278,7 @@ type PutEventsEventList struct {
 // PutEventsEventListInput is an input type that accepts PutEventsEventListArgs and PutEventsEventListOutput values.
 // You can construct a concrete instance of `PutEventsEventListInput` via:
 //
-//          PutEventsEventListArgs{...}
+//	PutEventsEventListArgs{...}
 type PutEventsEventListInput interface {
 	pulumi.Input
 
@@ -2311,7 +2314,7 @@ func (i PutEventsEventListArgs) ToPutEventsEventListOutputWithContext(ctx contex
 // PutEventsEventListArrayInput is an input type that accepts PutEventsEventListArray and PutEventsEventListArrayOutput values.
 // You can construct a concrete instance of `PutEventsEventListArrayInput` via:
 //
-//          PutEventsEventListArray{ PutEventsEventListArgs{...} }
+//	PutEventsEventListArray{ PutEventsEventListArgs{...} }
 type PutEventsEventListArrayInput interface {
 	pulumi.Input
 
@@ -2416,7 +2419,7 @@ type GetBusEventBus struct {
 // GetBusEventBusInput is an input type that accepts GetBusEventBusArgs and GetBusEventBusOutput values.
 // You can construct a concrete instance of `GetBusEventBusInput` via:
 //
-//          GetBusEventBusArgs{...}
+//	GetBusEventBusArgs{...}
 type GetBusEventBusInput interface {
 	pulumi.Input
 
@@ -2460,7 +2463,7 @@ func (i GetBusEventBusArgs) ToGetBusEventBusOutputWithContext(ctx context.Contex
 // GetBusEventBusArrayInput is an input type that accepts GetBusEventBusArray and GetBusEventBusArrayOutput values.
 // You can construct a concrete instance of `GetBusEventBusArrayInput` via:
 //
-//          GetBusEventBusArray{ GetBusEventBusArgs{...} }
+//	GetBusEventBusArray{ GetBusEventBusArgs{...} }
 type GetBusEventBusArrayInput interface {
 	pulumi.Input
 
@@ -2571,7 +2574,7 @@ type GetBusEventBusConnectionBrief struct {
 // GetBusEventBusConnectionBriefInput is an input type that accepts GetBusEventBusConnectionBriefArgs and GetBusEventBusConnectionBriefOutput values.
 // You can construct a concrete instance of `GetBusEventBusConnectionBriefInput` via:
 //
-//          GetBusEventBusConnectionBriefArgs{...}
+//	GetBusEventBusConnectionBriefArgs{...}
 type GetBusEventBusConnectionBriefInput interface {
 	pulumi.Input
 
@@ -2601,7 +2604,7 @@ func (i GetBusEventBusConnectionBriefArgs) ToGetBusEventBusConnectionBriefOutput
 // GetBusEventBusConnectionBriefArrayInput is an input type that accepts GetBusEventBusConnectionBriefArray and GetBusEventBusConnectionBriefArrayOutput values.
 // You can construct a concrete instance of `GetBusEventBusConnectionBriefArrayInput` via:
 //
-//          GetBusEventBusConnectionBriefArray{ GetBusEventBusConnectionBriefArgs{...} }
+//	GetBusEventBusConnectionBriefArray{ GetBusEventBusConnectionBriefArgs{...} }
 type GetBusEventBusConnectionBriefArrayInput interface {
 	pulumi.Input
 
@@ -2677,7 +2680,7 @@ type GetBusEventBusTargetBrief struct {
 // GetBusEventBusTargetBriefInput is an input type that accepts GetBusEventBusTargetBriefArgs and GetBusEventBusTargetBriefOutput values.
 // You can construct a concrete instance of `GetBusEventBusTargetBriefInput` via:
 //
-//          GetBusEventBusTargetBriefArgs{...}
+//	GetBusEventBusTargetBriefArgs{...}
 type GetBusEventBusTargetBriefInput interface {
 	pulumi.Input
 
@@ -2707,7 +2710,7 @@ func (i GetBusEventBusTargetBriefArgs) ToGetBusEventBusTargetBriefOutputWithCont
 // GetBusEventBusTargetBriefArrayInput is an input type that accepts GetBusEventBusTargetBriefArray and GetBusEventBusTargetBriefArrayOutput values.
 // You can construct a concrete instance of `GetBusEventBusTargetBriefArrayInput` via:
 //
-//          GetBusEventBusTargetBriefArray{ GetBusEventBusTargetBriefArgs{...} }
+//	GetBusEventBusTargetBriefArray{ GetBusEventBusTargetBriefArgs{...} }
 type GetBusEventBusTargetBriefArrayInput interface {
 	pulumi.Input
 
@@ -2783,7 +2786,7 @@ type GetBusFilter struct {
 // GetBusFilterInput is an input type that accepts GetBusFilterArgs and GetBusFilterOutput values.
 // You can construct a concrete instance of `GetBusFilterInput` via:
 //
-//          GetBusFilterArgs{...}
+//	GetBusFilterArgs{...}
 type GetBusFilterInput interface {
 	pulumi.Input
 
@@ -2813,7 +2816,7 @@ func (i GetBusFilterArgs) ToGetBusFilterOutputWithContext(ctx context.Context) G
 // GetBusFilterArrayInput is an input type that accepts GetBusFilterArray and GetBusFilterArrayOutput values.
 // You can construct a concrete instance of `GetBusFilterArrayInput` via:
 //
-//          GetBusFilterArray{ GetBusFilterArgs{...} }
+//	GetBusFilterArray{ GetBusFilterArgs{...} }
 type GetBusFilterArrayInput interface {
 	pulumi.Input
 
@@ -2905,7 +2908,7 @@ type GetEventRulesRule struct {
 // GetEventRulesRuleInput is an input type that accepts GetEventRulesRuleArgs and GetEventRulesRuleOutput values.
 // You can construct a concrete instance of `GetEventRulesRuleInput` via:
 //
-//          GetEventRulesRuleArgs{...}
+//	GetEventRulesRuleArgs{...}
 type GetEventRulesRuleInput interface {
 	pulumi.Input
 
@@ -2951,7 +2954,7 @@ func (i GetEventRulesRuleArgs) ToGetEventRulesRuleOutputWithContext(ctx context.
 // GetEventRulesRuleArrayInput is an input type that accepts GetEventRulesRuleArray and GetEventRulesRuleArrayOutput values.
 // You can construct a concrete instance of `GetEventRulesRuleArrayInput` via:
 //
-//          GetEventRulesRuleArray{ GetEventRulesRuleArgs{...} }
+//	GetEventRulesRuleArray{ GetEventRulesRuleArgs{...} }
 type GetEventRulesRuleArrayInput interface {
 	pulumi.Input
 
@@ -3067,7 +3070,7 @@ type GetEventRulesRuleDeadLetterConfig struct {
 // GetEventRulesRuleDeadLetterConfigInput is an input type that accepts GetEventRulesRuleDeadLetterConfigArgs and GetEventRulesRuleDeadLetterConfigOutput values.
 // You can construct a concrete instance of `GetEventRulesRuleDeadLetterConfigInput` via:
 //
-//          GetEventRulesRuleDeadLetterConfigArgs{...}
+//	GetEventRulesRuleDeadLetterConfigArgs{...}
 type GetEventRulesRuleDeadLetterConfigInput interface {
 	pulumi.Input
 
@@ -3097,7 +3100,7 @@ func (i GetEventRulesRuleDeadLetterConfigArgs) ToGetEventRulesRuleDeadLetterConf
 // GetEventRulesRuleDeadLetterConfigArrayInput is an input type that accepts GetEventRulesRuleDeadLetterConfigArray and GetEventRulesRuleDeadLetterConfigArrayOutput values.
 // You can construct a concrete instance of `GetEventRulesRuleDeadLetterConfigArrayInput` via:
 //
-//          GetEventRulesRuleDeadLetterConfigArray{ GetEventRulesRuleDeadLetterConfigArgs{...} }
+//	GetEventRulesRuleDeadLetterConfigArray{ GetEventRulesRuleDeadLetterConfigArgs{...} }
 type GetEventRulesRuleDeadLetterConfigArrayInput interface {
 	pulumi.Input
 
@@ -3175,7 +3178,7 @@ type GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParam struct {
 // GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamInput is an input type that accepts GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArgs and GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamOutput values.
 // You can construct a concrete instance of `GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamInput` via:
 //
-//          GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArgs{...}
+//	GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArgs{...}
 type GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamInput interface {
 	pulumi.Input
 
@@ -3205,7 +3208,7 @@ func (i GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArgs) ToGetEventRule
 // GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayInput is an input type that accepts GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArray and GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayOutput values.
 // You can construct a concrete instance of `GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayInput` via:
 //
-//          GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArray{ GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArgs{...} }
+//	GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArray{ GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArgs{...} }
 type GetEventRulesRuleDeadLetterConfigCkafkaDeliveryParamArrayInput interface {
 	pulumi.Input
 
@@ -3281,7 +3284,7 @@ type GetEventRulesRuleTarget struct {
 // GetEventRulesRuleTargetInput is an input type that accepts GetEventRulesRuleTargetArgs and GetEventRulesRuleTargetOutput values.
 // You can construct a concrete instance of `GetEventRulesRuleTargetInput` via:
 //
-//          GetEventRulesRuleTargetArgs{...}
+//	GetEventRulesRuleTargetArgs{...}
 type GetEventRulesRuleTargetInput interface {
 	pulumi.Input
 
@@ -3311,7 +3314,7 @@ func (i GetEventRulesRuleTargetArgs) ToGetEventRulesRuleTargetOutputWithContext(
 // GetEventRulesRuleTargetArrayInput is an input type that accepts GetEventRulesRuleTargetArray and GetEventRulesRuleTargetArrayOutput values.
 // You can construct a concrete instance of `GetEventRulesRuleTargetArrayInput` via:
 //
-//          GetEventRulesRuleTargetArray{ GetEventRulesRuleTargetArgs{...} }
+//	GetEventRulesRuleTargetArray{ GetEventRulesRuleTargetArgs{...} }
 type GetEventRulesRuleTargetArrayInput interface {
 	pulumi.Input
 
@@ -3387,7 +3390,7 @@ type GetPlatformEventNamesEventName struct {
 // GetPlatformEventNamesEventNameInput is an input type that accepts GetPlatformEventNamesEventNameArgs and GetPlatformEventNamesEventNameOutput values.
 // You can construct a concrete instance of `GetPlatformEventNamesEventNameInput` via:
 //
-//          GetPlatformEventNamesEventNameArgs{...}
+//	GetPlatformEventNamesEventNameArgs{...}
 type GetPlatformEventNamesEventNameInput interface {
 	pulumi.Input
 
@@ -3417,7 +3420,7 @@ func (i GetPlatformEventNamesEventNameArgs) ToGetPlatformEventNamesEventNameOutp
 // GetPlatformEventNamesEventNameArrayInput is an input type that accepts GetPlatformEventNamesEventNameArray and GetPlatformEventNamesEventNameArrayOutput values.
 // You can construct a concrete instance of `GetPlatformEventNamesEventNameArrayInput` via:
 //
-//          GetPlatformEventNamesEventNameArray{ GetPlatformEventNamesEventNameArgs{...} }
+//	GetPlatformEventNamesEventNameArray{ GetPlatformEventNamesEventNameArgs{...} }
 type GetPlatformEventNamesEventNameArrayInput interface {
 	pulumi.Input
 
@@ -3493,7 +3496,7 @@ type GetPlatformEventPatternsEventPattern struct {
 // GetPlatformEventPatternsEventPatternInput is an input type that accepts GetPlatformEventPatternsEventPatternArgs and GetPlatformEventPatternsEventPatternOutput values.
 // You can construct a concrete instance of `GetPlatformEventPatternsEventPatternInput` via:
 //
-//          GetPlatformEventPatternsEventPatternArgs{...}
+//	GetPlatformEventPatternsEventPatternArgs{...}
 type GetPlatformEventPatternsEventPatternInput interface {
 	pulumi.Input
 
@@ -3523,7 +3526,7 @@ func (i GetPlatformEventPatternsEventPatternArgs) ToGetPlatformEventPatternsEven
 // GetPlatformEventPatternsEventPatternArrayInput is an input type that accepts GetPlatformEventPatternsEventPatternArray and GetPlatformEventPatternsEventPatternArrayOutput values.
 // You can construct a concrete instance of `GetPlatformEventPatternsEventPatternArrayInput` via:
 //
-//          GetPlatformEventPatternsEventPatternArray{ GetPlatformEventPatternsEventPatternArgs{...} }
+//	GetPlatformEventPatternsEventPatternArray{ GetPlatformEventPatternsEventPatternArgs{...} }
 type GetPlatformEventPatternsEventPatternArrayInput interface {
 	pulumi.Input
 
@@ -3599,7 +3602,7 @@ type GetPlatformProductsPlatformProduct struct {
 // GetPlatformProductsPlatformProductInput is an input type that accepts GetPlatformProductsPlatformProductArgs and GetPlatformProductsPlatformProductOutput values.
 // You can construct a concrete instance of `GetPlatformProductsPlatformProductInput` via:
 //
-//          GetPlatformProductsPlatformProductArgs{...}
+//	GetPlatformProductsPlatformProductArgs{...}
 type GetPlatformProductsPlatformProductInput interface {
 	pulumi.Input
 
@@ -3629,7 +3632,7 @@ func (i GetPlatformProductsPlatformProductArgs) ToGetPlatformProductsPlatformPro
 // GetPlatformProductsPlatformProductArrayInput is an input type that accepts GetPlatformProductsPlatformProductArray and GetPlatformProductsPlatformProductArrayOutput values.
 // You can construct a concrete instance of `GetPlatformProductsPlatformProductArrayInput` via:
 //
-//          GetPlatformProductsPlatformProductArray{ GetPlatformProductsPlatformProductArgs{...} }
+//	GetPlatformProductsPlatformProductArray{ GetPlatformProductsPlatformProductArgs{...} }
 type GetPlatformProductsPlatformProductArrayInput interface {
 	pulumi.Input
 
@@ -3696,17 +3699,22 @@ func (o GetPlatformProductsPlatformProductArrayOutput) Index(i pulumi.IntInput) 
 }
 
 type GetSearchFilter struct {
-	Filters  []GetSearchFilterFilter `pulumi:"filters"`
-	Key      *string                 `pulumi:"key"`
-	Operator *string                 `pulumi:"operator"`
-	Type     *string                 `pulumi:"type"`
-	Value    *string                 `pulumi:"value"`
+	// LogFilters array.
+	Filters []GetSearchFilterFilter `pulumi:"filters"`
+	// filter field name.
+	Key *string `pulumi:"key"`
+	// operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.
+	Operator *string `pulumi:"operator"`
+	// The logical relationship of the level filters, the value AND or OR.
+	Type *string `pulumi:"type"`
+	// Filter value, range operation needs to enter two values at the same time, separated by commas.
+	Value *string `pulumi:"value"`
 }
 
 // GetSearchFilterInput is an input type that accepts GetSearchFilterArgs and GetSearchFilterOutput values.
 // You can construct a concrete instance of `GetSearchFilterInput` via:
 //
-//          GetSearchFilterArgs{...}
+//	GetSearchFilterArgs{...}
 type GetSearchFilterInput interface {
 	pulumi.Input
 
@@ -3715,11 +3723,16 @@ type GetSearchFilterInput interface {
 }
 
 type GetSearchFilterArgs struct {
-	Filters  GetSearchFilterFilterArrayInput `pulumi:"filters"`
-	Key      pulumi.StringPtrInput           `pulumi:"key"`
-	Operator pulumi.StringPtrInput           `pulumi:"operator"`
-	Type     pulumi.StringPtrInput           `pulumi:"type"`
-	Value    pulumi.StringPtrInput           `pulumi:"value"`
+	// LogFilters array.
+	Filters GetSearchFilterFilterArrayInput `pulumi:"filters"`
+	// filter field name.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.
+	Operator pulumi.StringPtrInput `pulumi:"operator"`
+	// The logical relationship of the level filters, the value AND or OR.
+	Type pulumi.StringPtrInput `pulumi:"type"`
+	// Filter value, range operation needs to enter two values at the same time, separated by commas.
+	Value pulumi.StringPtrInput `pulumi:"value"`
 }
 
 func (GetSearchFilterArgs) ElementType() reflect.Type {
@@ -3737,7 +3750,7 @@ func (i GetSearchFilterArgs) ToGetSearchFilterOutputWithContext(ctx context.Cont
 // GetSearchFilterArrayInput is an input type that accepts GetSearchFilterArray and GetSearchFilterArrayOutput values.
 // You can construct a concrete instance of `GetSearchFilterArrayInput` via:
 //
-//          GetSearchFilterArray{ GetSearchFilterArgs{...} }
+//	GetSearchFilterArray{ GetSearchFilterArgs{...} }
 type GetSearchFilterArrayInput interface {
 	pulumi.Input
 
@@ -3773,22 +3786,27 @@ func (o GetSearchFilterOutput) ToGetSearchFilterOutputWithContext(ctx context.Co
 	return o
 }
 
+// LogFilters array.
 func (o GetSearchFilterOutput) Filters() GetSearchFilterFilterArrayOutput {
 	return o.ApplyT(func(v GetSearchFilter) []GetSearchFilterFilter { return v.Filters }).(GetSearchFilterFilterArrayOutput)
 }
 
+// filter field name.
 func (o GetSearchFilterOutput) Key() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetSearchFilter) *string { return v.Key }).(pulumi.StringPtrOutput)
 }
 
+// operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, in range range, not in range norange.
 func (o GetSearchFilterOutput) Operator() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetSearchFilter) *string { return v.Operator }).(pulumi.StringPtrOutput)
 }
 
+// The logical relationship of the level filters, the value AND or OR.
 func (o GetSearchFilterOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetSearchFilter) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
 
+// Filter value, range operation needs to enter two values at the same time, separated by commas.
 func (o GetSearchFilterOutput) Value() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetSearchFilter) *string { return v.Value }).(pulumi.StringPtrOutput)
 }
@@ -3814,15 +3832,18 @@ func (o GetSearchFilterArrayOutput) Index(i pulumi.IntInput) GetSearchFilterOutp
 }
 
 type GetSearchFilterFilter struct {
-	Key      string `pulumi:"key"`
+	// filter field name.
+	Key string `pulumi:"key"`
+	// operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.
 	Operator string `pulumi:"operator"`
-	Value    string `pulumi:"value"`
+	// Filter values, range operations need to enter two values at the same time, separated by commas.
+	Value string `pulumi:"value"`
 }
 
 // GetSearchFilterFilterInput is an input type that accepts GetSearchFilterFilterArgs and GetSearchFilterFilterOutput values.
 // You can construct a concrete instance of `GetSearchFilterFilterInput` via:
 //
-//          GetSearchFilterFilterArgs{...}
+//	GetSearchFilterFilterArgs{...}
 type GetSearchFilterFilterInput interface {
 	pulumi.Input
 
@@ -3831,9 +3852,12 @@ type GetSearchFilterFilterInput interface {
 }
 
 type GetSearchFilterFilterArgs struct {
-	Key      pulumi.StringInput `pulumi:"key"`
+	// filter field name.
+	Key pulumi.StringInput `pulumi:"key"`
+	// operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.
 	Operator pulumi.StringInput `pulumi:"operator"`
-	Value    pulumi.StringInput `pulumi:"value"`
+	// Filter values, range operations need to enter two values at the same time, separated by commas.
+	Value pulumi.StringInput `pulumi:"value"`
 }
 
 func (GetSearchFilterFilterArgs) ElementType() reflect.Type {
@@ -3851,7 +3875,7 @@ func (i GetSearchFilterFilterArgs) ToGetSearchFilterFilterOutputWithContext(ctx 
 // GetSearchFilterFilterArrayInput is an input type that accepts GetSearchFilterFilterArray and GetSearchFilterFilterArrayOutput values.
 // You can construct a concrete instance of `GetSearchFilterFilterArrayInput` via:
 //
-//          GetSearchFilterFilterArray{ GetSearchFilterFilterArgs{...} }
+//	GetSearchFilterFilterArray{ GetSearchFilterFilterArgs{...} }
 type GetSearchFilterFilterArrayInput interface {
 	pulumi.Input
 
@@ -3887,14 +3911,17 @@ func (o GetSearchFilterFilterOutput) ToGetSearchFilterFilterOutputWithContext(ct
 	return o
 }
 
+// filter field name.
 func (o GetSearchFilterFilterOutput) Key() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSearchFilterFilter) string { return v.Key }).(pulumi.StringOutput)
 }
 
+// operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.
 func (o GetSearchFilterFilterOutput) Operator() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSearchFilterFilter) string { return v.Operator }).(pulumi.StringOutput)
 }
 
+// Filter values, range operations need to enter two values at the same time, separated by commas.
 func (o GetSearchFilterFilterOutput) Value() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSearchFilterFilter) string { return v.Value }).(pulumi.StringOutput)
 }
@@ -3920,20 +3947,28 @@ func (o GetSearchFilterFilterArrayOutput) Index(i pulumi.IntInput) GetSearchFilt
 }
 
 type GetSearchResult struct {
-	Message   string `pulumi:"message"`
-	Region    string `pulumi:"region"`
-	RuleIds   string `pulumi:"ruleIds"`
-	Source    string `pulumi:"source"`
-	Status    string `pulumi:"status"`
-	Subject   string `pulumi:"subject"`
+	// Log content details, note: this field may return null, indicating that no valid value can be obtained.
+	Message string `pulumi:"message"`
+	// Region, Note: This field may return null, indicating that no valid value can be obtained.
+	Region string `pulumi:"region"`
+	// Event matching rules, note: this field may return null, indicating that no valid value can be obtained.
+	RuleIds string `pulumi:"ruleIds"`
+	// Event source, note: this field may return null, indicating that no valid value can be obtained.
+	Source string `pulumi:"source"`
+	// Event status, note: this field may return null, indicating that no valid value can be obtained.
+	Status string `pulumi:"status"`
+	// Instance ID, note: this field may return null, indicating that no valid value can be obtained.
+	Subject string `pulumi:"subject"`
+	// The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.
 	Timestamp string `pulumi:"timestamp"`
-	Type      string `pulumi:"type"`
+	// Event type, note: this field may return null, indicating that no valid value can be obtained.
+	Type string `pulumi:"type"`
 }
 
 // GetSearchResultInput is an input type that accepts GetSearchResultArgs and GetSearchResultOutput values.
 // You can construct a concrete instance of `GetSearchResultInput` via:
 //
-//          GetSearchResultArgs{...}
+//	GetSearchResultArgs{...}
 type GetSearchResultInput interface {
 	pulumi.Input
 
@@ -3942,14 +3977,22 @@ type GetSearchResultInput interface {
 }
 
 type GetSearchResultArgs struct {
-	Message   pulumi.StringInput `pulumi:"message"`
-	Region    pulumi.StringInput `pulumi:"region"`
-	RuleIds   pulumi.StringInput `pulumi:"ruleIds"`
-	Source    pulumi.StringInput `pulumi:"source"`
-	Status    pulumi.StringInput `pulumi:"status"`
-	Subject   pulumi.StringInput `pulumi:"subject"`
+	// Log content details, note: this field may return null, indicating that no valid value can be obtained.
+	Message pulumi.StringInput `pulumi:"message"`
+	// Region, Note: This field may return null, indicating that no valid value can be obtained.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Event matching rules, note: this field may return null, indicating that no valid value can be obtained.
+	RuleIds pulumi.StringInput `pulumi:"ruleIds"`
+	// Event source, note: this field may return null, indicating that no valid value can be obtained.
+	Source pulumi.StringInput `pulumi:"source"`
+	// Event status, note: this field may return null, indicating that no valid value can be obtained.
+	Status pulumi.StringInput `pulumi:"status"`
+	// Instance ID, note: this field may return null, indicating that no valid value can be obtained.
+	Subject pulumi.StringInput `pulumi:"subject"`
+	// The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.
 	Timestamp pulumi.StringInput `pulumi:"timestamp"`
-	Type      pulumi.StringInput `pulumi:"type"`
+	// Event type, note: this field may return null, indicating that no valid value can be obtained.
+	Type pulumi.StringInput `pulumi:"type"`
 }
 
 func (GetSearchResultArgs) ElementType() reflect.Type {
@@ -3967,7 +4010,7 @@ func (i GetSearchResultArgs) ToGetSearchResultOutputWithContext(ctx context.Cont
 // GetSearchResultArrayInput is an input type that accepts GetSearchResultArray and GetSearchResultArrayOutput values.
 // You can construct a concrete instance of `GetSearchResultArrayInput` via:
 //
-//          GetSearchResultArray{ GetSearchResultArgs{...} }
+//	GetSearchResultArray{ GetSearchResultArgs{...} }
 type GetSearchResultArrayInput interface {
 	pulumi.Input
 
@@ -4003,34 +4046,42 @@ func (o GetSearchResultOutput) ToGetSearchResultOutputWithContext(ctx context.Co
 	return o
 }
 
+// Log content details, note: this field may return null, indicating that no valid value can be obtained.
 func (o GetSearchResultOutput) Message() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSearchResult) string { return v.Message }).(pulumi.StringOutput)
 }
 
+// Region, Note: This field may return null, indicating that no valid value can be obtained.
 func (o GetSearchResultOutput) Region() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSearchResult) string { return v.Region }).(pulumi.StringOutput)
 }
 
+// Event matching rules, note: this field may return null, indicating that no valid value can be obtained.
 func (o GetSearchResultOutput) RuleIds() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSearchResult) string { return v.RuleIds }).(pulumi.StringOutput)
 }
 
+// Event source, note: this field may return null, indicating that no valid value can be obtained.
 func (o GetSearchResultOutput) Source() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSearchResult) string { return v.Source }).(pulumi.StringOutput)
 }
 
+// Event status, note: this field may return null, indicating that no valid value can be obtained.
 func (o GetSearchResultOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSearchResult) string { return v.Status }).(pulumi.StringOutput)
 }
 
+// Instance ID, note: this field may return null, indicating that no valid value can be obtained.
 func (o GetSearchResultOutput) Subject() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSearchResult) string { return v.Subject }).(pulumi.StringOutput)
 }
 
+// The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.
 func (o GetSearchResultOutput) Timestamp() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSearchResult) string { return v.Timestamp }).(pulumi.StringOutput)
 }
 
+// Event type, note: this field may return null, indicating that no valid value can be obtained.
 func (o GetSearchResultOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v GetSearchResult) string { return v.Type }).(pulumi.StringOutput)
 }

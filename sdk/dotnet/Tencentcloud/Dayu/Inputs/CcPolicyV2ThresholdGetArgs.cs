@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class CcPolicyV2ThresholdGetArgs : Pulumi.ResourceArgs
+    public sealed class CcPolicyV2ThresholdGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// domain.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public CcPolicyV2ThresholdGetArgs()
         {
         }
+        public static new CcPolicyV2ThresholdGetArgs Empty => new CcPolicyV2ThresholdGetArgs();
     }
 }

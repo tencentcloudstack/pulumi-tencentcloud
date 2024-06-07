@@ -15,77 +15,79 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.ApiGateway.Service("example", new()
     ///     {
-    ///         var example = new Tencentcloud.ApiGateway.Service("example", new Tencentcloud.ApiGateway.ServiceArgs
+    ///         ServiceName = "tf-example",
+    ///         Protocol = "http&amp;https",
+    ///         NetTypes = new[]
     ///         {
-    ///             ServiceName = "tf-example",
-    ///             Protocol = "http&amp;https",
-    ///             NetTypes = 
-    ///             {
-    ///                 "INNER",
-    ///                 "OUTER",
-    ///             },
-    ///             IpVersion = "IPv4",
-    ///         });
-    ///         var api = new Tencentcloud.ApiGateway.Api("api", new Tencentcloud.ApiGateway.ApiArgs
-    ///         {
-    ///             ServiceId = example.Id,
-    ///             ApiName = "tf-example",
-    ///             ApiDesc = "desc.",
-    ///             AuthType = "NONE",
-    ///             Protocol = "HTTP",
-    ///             EnableCors = true,
-    ///             RequestConfigPath = "/user/info",
-    ///             RequestConfigMethod = "GET",
-    ///             RequestParameters = 
-    ///             {
-    ///                 new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
-    ///                 {
-    ///                     Name = "name",
-    ///                     Position = "QUERY",
-    ///                     Type = "string",
-    ///                     Desc = "who are you?",
-    ///                     DefaultValue = "tom",
-    ///                     Required = true,
-    ///                 },
-    ///             },
-    ///             ServiceConfigType = "HTTP",
-    ///             ServiceConfigTimeout = 15,
-    ///             ServiceConfigUrl = "http://www.qq.com",
-    ///             ServiceConfigPath = "/user",
-    ///             ServiceConfigMethod = "GET",
-    ///             ResponseType = "HTML",
-    ///             ResponseSuccessExample = "success",
-    ///             ResponseFailExample = "fail",
-    ///             ResponseErrorCodes = 
-    ///             {
-    ///                 new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
-    ///                 {
-    ///                     Code = 500,
-    ///                     Msg = "system error",
-    ///                     Desc = "system error code",
-    ///                     ConvertedCode = 5000,
-    ///                     NeedConvert = true,
-    ///                 },
-    ///             },
-    ///             ReleaseLimit = 500,
-    ///             PreLimit = 500,
-    ///             TestLimit = 500,
-    ///         });
-    ///     }
+    ///             "INNER",
+    ///             "OUTER",
+    ///         },
+    ///         IpVersion = "IPv4",
+    ///     });
     /// 
-    /// }
+    ///     var api = new Tencentcloud.ApiGateway.Api("api", new()
+    ///     {
+    ///         ServiceId = example.Id,
+    ///         ApiName = "tf-example",
+    ///         ApiDesc = "desc.",
+    ///         AuthType = "NONE",
+    ///         Protocol = "HTTP",
+    ///         EnableCors = true,
+    ///         RequestConfigPath = "/user/info",
+    ///         RequestConfigMethod = "GET",
+    ///         RequestParameters = new[]
+    ///         {
+    ///             new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
+    ///             {
+    ///                 Name = "name",
+    ///                 Position = "QUERY",
+    ///                 Type = "string",
+    ///                 Desc = "who are you?",
+    ///                 DefaultValue = "tom",
+    ///                 Required = true,
+    ///             },
+    ///         },
+    ///         ServiceConfigType = "HTTP",
+    ///         ServiceConfigTimeout = 15,
+    ///         ServiceConfigUrl = "http://www.qq.com",
+    ///         ServiceConfigPath = "/user",
+    ///         ServiceConfigMethod = "GET",
+    ///         ResponseType = "HTML",
+    ///         ResponseSuccessExample = "success",
+    ///         ResponseFailExample = "fail",
+    ///         ResponseErrorCodes = new[]
+    ///         {
+    ///             new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
+    ///             {
+    ///                 Code = 500,
+    ///                 Msg = "system error",
+    ///                 Desc = "system error code",
+    ///                 ConvertedCode = 5000,
+    ///                 NeedConvert = true,
+    ///             },
+    ///         },
+    ///         ReleaseLimit = 500,
+    ///         PreLimit = 500,
+    ///         TestLimit = 500,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/api:Api")]
-    public partial class Api : Pulumi.CustomResource
+    public partial class Api : global::Pulumi.CustomResource
     {
         /// <summary>
         /// When `auth_type` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
@@ -522,7 +524,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         }
     }
 
-    public sealed class ApiArgs : Pulumi.ResourceArgs
+    public sealed class ApiArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// When `auth_type` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
@@ -941,9 +943,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ApiArgs()
         {
         }
+        public static new ApiArgs Empty => new ApiArgs();
     }
 
-    public sealed class ApiState : Pulumi.ResourceArgs
+    public sealed class ApiState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// When `auth_type` is OAUTH, this field is valid, NORMAL: Business API, OAUTH: Authorization API.
@@ -1374,5 +1377,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public ApiState()
         {
         }
+        public static new ApiState Empty => new ApiState();
     }
 }

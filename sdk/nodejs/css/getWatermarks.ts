@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const watermarks = pulumi.output(tencentcloud.Css.getWatermarks());
+ * const watermarks = tencentcloud.Css.getWatermarks({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getWatermarks(args?: GetWatermarksArgs, opts?: pulumi.InvokeOptions): Promise<GetWatermarksResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Css/getWatermarks:getWatermarks", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetWatermarksResult {
      */
     readonly watermarkLists: outputs.Css.GetWatermarksWatermarkList[];
 }
-
+/**
+ * Use this data source to query detailed information of css watermarks
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const watermarks = tencentcloud.Css.getWatermarks({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getWatermarksOutput(args?: GetWatermarksOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetWatermarksResult> {
-    return pulumi.output(args).apply(a => getWatermarks(a, opts))
+    return pulumi.output(args).apply((a: any) => getWatermarks(a, opts))
 }
 
 /**

@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// <summary>
         /// Use this data source to query detailed information of waf tls_versions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetTlsVersions.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Waf.GetTlsVersions.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTlsVersionsResult> InvokeAsync(GetTlsVersionsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTlsVersionsResult>("tencentcloud:Waf/getTlsVersions:getTlsVersions", args ?? new GetTlsVersionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTlsVersionsResult>("tencentcloud:Waf/getTlsVersions:getTlsVersions", args ?? new GetTlsVersionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of waf tls_versions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetTlsVersions.InvokeAsync());
-        ///     }
+        ///     var example = Tencentcloud.Waf.GetTlsVersions.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTlsVersionsResult> Invoke(GetTlsVersionsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTlsVersionsResult>("tencentcloud:Waf/getTlsVersions:getTlsVersions", args ?? new GetTlsVersionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTlsVersionsResult>("tencentcloud:Waf/getTlsVersions:getTlsVersions", args ?? new GetTlsVersionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTlsVersionsArgs : Pulumi.InvokeArgs
+    public sealed class GetTlsVersionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetTlsVersionsArgs()
         {
         }
+        public static new GetTlsVersionsArgs Empty => new GetTlsVersionsArgs();
     }
 
-    public sealed class GetTlsVersionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTlsVersionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetTlsVersionsInvokeArgs()
         {
         }
+        public static new GetTlsVersionsInvokeArgs Empty => new GetTlsVersionsInvokeArgs();
     }
 
 

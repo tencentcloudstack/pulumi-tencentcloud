@@ -15,67 +15,69 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var backup = new Tencentcloud.Clickhouse.Backup("backup", new()
     ///     {
-    ///         var backup = new Tencentcloud.Clickhouse.Backup("backup", new Tencentcloud.Clickhouse.BackupArgs
-    ///         {
-    ///             CosBucketName = "xxxxxx",
-    ///             InstanceId = "cdwch-xxxxxx",
-    ///         });
-    ///         var backupStrategy = new Tencentcloud.Clickhouse.BackupStrategy("backupStrategy", new Tencentcloud.Clickhouse.BackupStrategyArgs
-    ///         {
-    ///             DataBackupStrategies = 
-    ///             {
-    ///                 new Tencentcloud.Clickhouse.Inputs.BackupStrategyDataBackupStrategyArgs
-    ///                 {
-    ///                     BackUpTables = 
-    ///                     {
-    ///                         new Tencentcloud.Clickhouse.Inputs.BackupStrategyDataBackupStrategyBackUpTableArgs
-    ///                         {
-    ///                             Database = "iac",
-    ///                             Ips = "10.0.0.35",
-    ///                             Table = "my_table",
-    ///                             TotalBytes = 0,
-    ///                             VCluster = "default_cluster",
-    ///                         },
-    ///                     },
-    ///                     ExecuteHour = 1,
-    ///                     RetainDays = 2,
-    ///                     WeekDays = "3",
-    ///                 },
-    ///             },
-    ///             InstanceId = "cdwch-xxxxxx",
-    ///             MetaBackupStrategies = 
-    ///             {
-    ///                 new Tencentcloud.Clickhouse.Inputs.BackupStrategyMetaBackupStrategyArgs
-    ///                 {
-    ///                     ExecuteHour = 3,
-    ///                     RetainDays = 2,
-    ///                     WeekDays = "1",
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///         CosBucketName = "xxxxxx",
+    ///         InstanceId = "cdwch-xxxxxx",
+    ///     });
     /// 
-    /// }
+    ///     var backupStrategy = new Tencentcloud.Clickhouse.BackupStrategy("backupStrategy", new()
+    ///     {
+    ///         DataBackupStrategies = new[]
+    ///         {
+    ///             new Tencentcloud.Clickhouse.Inputs.BackupStrategyDataBackupStrategyArgs
+    ///             {
+    ///                 BackUpTables = new[]
+    ///                 {
+    ///                     new Tencentcloud.Clickhouse.Inputs.BackupStrategyDataBackupStrategyBackUpTableArgs
+    ///                     {
+    ///                         Database = "iac",
+    ///                         Ips = "10.0.0.35",
+    ///                         Table = "my_table",
+    ///                         TotalBytes = 0,
+    ///                         VCluster = "default_cluster",
+    ///                     },
+    ///                 },
+    ///                 ExecuteHour = 1,
+    ///                 RetainDays = 2,
+    ///                 WeekDays = "3",
+    ///             },
+    ///         },
+    ///         InstanceId = "cdwch-xxxxxx",
+    ///         MetaBackupStrategies = new[]
+    ///         {
+    ///             new Tencentcloud.Clickhouse.Inputs.BackupStrategyMetaBackupStrategyArgs
+    ///             {
+    ///                 ExecuteHour = 3,
+    ///                 RetainDays = 2,
+    ///                 WeekDays = "1",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// clickhouse backup_strategy can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clickhouse/backupStrategy:BackupStrategy backup_strategy instance_id
+    /// $ pulumi import tencentcloud:Clickhouse/backupStrategy:BackupStrategy backup_strategy instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clickhouse/backupStrategy:BackupStrategy")]
-    public partial class BackupStrategy : Pulumi.CustomResource
+    public partial class BackupStrategy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Data backup strategy.
@@ -140,7 +142,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         }
     }
 
-    public sealed class BackupStrategyArgs : Pulumi.ResourceArgs
+    public sealed class BackupStrategyArgs : global::Pulumi.ResourceArgs
     {
         [Input("dataBackupStrategies", required: true)]
         private InputList<Inputs.BackupStrategyDataBackupStrategyArgs>? _dataBackupStrategies;
@@ -175,9 +177,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public BackupStrategyArgs()
         {
         }
+        public static new BackupStrategyArgs Empty => new BackupStrategyArgs();
     }
 
-    public sealed class BackupStrategyState : Pulumi.ResourceArgs
+    public sealed class BackupStrategyState : global::Pulumi.ResourceArgs
     {
         [Input("dataBackupStrategies")]
         private InputList<Inputs.BackupStrategyDataBackupStrategyGetArgs>? _dataBackupStrategies;
@@ -212,5 +215,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public BackupStrategyState()
         {
         }
+        public static new BackupStrategyState Empty => new BackupStrategyState();
     }
 }

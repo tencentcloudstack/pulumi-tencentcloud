@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskSourceResourcePostgreSqlParamGetArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskSourceResourcePostgreSqlParamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Upstream data format (JSON|Debezium), required when the database synchronization mode matches the default field.
@@ -100,5 +100,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskSourceResourcePostgreSqlParamGetArgs()
         {
         }
+        public static new DatahubTaskSourceResourcePostgreSqlParamGetArgs Empty => new DatahubTaskSourceResourcePostgreSqlParamGetArgs();
     }
 }

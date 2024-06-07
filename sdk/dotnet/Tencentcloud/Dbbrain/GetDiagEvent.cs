@@ -15,82 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain diag_event
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var diagHistory = Tencentcloud.Dbbrain.GetDiagHistory.Invoke(new()
         ///     {
-        ///         var diagHistory = Output.Create(Tencentcloud.Dbbrain.GetDiagHistory.InvokeAsync(new Tencentcloud.Dbbrain.GetDiagHistoryArgs
-        ///         {
-        ///             InstanceId = "%s",
-        ///             StartTime = "%s",
-        ///             EndTime = "%s",
-        ///             Product = "mysql",
-        ///         }));
-        ///         var diagEvent = diagHistory.Apply(diagHistory =&gt; Output.Create(Tencentcloud.Dbbrain.GetDiagEvent.InvokeAsync(new Tencentcloud.Dbbrain.GetDiagEventArgs
-        ///         {
-        ///             InstanceId = "%s",
-        ///             EventId = diagHistory.Events?[0]?.EventId,
-        ///             Product = "mysql",
-        ///         })));
-        ///     }
+        ///         InstanceId = "%s",
+        ///         StartTime = "%s",
+        ///         EndTime = "%s",
+        ///         Product = "mysql",
+        ///     });
         /// 
-        /// }
+        ///     var diagEvent = Tencentcloud.Dbbrain.GetDiagEvent.Invoke(new()
+        ///     {
+        ///         InstanceId = "%s",
+        ///         EventId = diagHistory.Apply(getDiagHistoryResult =&gt; getDiagHistoryResult.Events[0]?.EventId),
+        ///         Product = "mysql",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDiagEventResult> InvokeAsync(GetDiagEventArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDiagEventResult>("tencentcloud:Dbbrain/getDiagEvent:getDiagEvent", args ?? new GetDiagEventArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDiagEventResult>("tencentcloud:Dbbrain/getDiagEvent:getDiagEvent", args ?? new GetDiagEventArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain diag_event
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var diagHistory = Tencentcloud.Dbbrain.GetDiagHistory.Invoke(new()
         ///     {
-        ///         var diagHistory = Output.Create(Tencentcloud.Dbbrain.GetDiagHistory.InvokeAsync(new Tencentcloud.Dbbrain.GetDiagHistoryArgs
-        ///         {
-        ///             InstanceId = "%s",
-        ///             StartTime = "%s",
-        ///             EndTime = "%s",
-        ///             Product = "mysql",
-        ///         }));
-        ///         var diagEvent = diagHistory.Apply(diagHistory =&gt; Output.Create(Tencentcloud.Dbbrain.GetDiagEvent.InvokeAsync(new Tencentcloud.Dbbrain.GetDiagEventArgs
-        ///         {
-        ///             InstanceId = "%s",
-        ///             EventId = diagHistory.Events?[0]?.EventId,
-        ///             Product = "mysql",
-        ///         })));
-        ///     }
+        ///         InstanceId = "%s",
+        ///         StartTime = "%s",
+        ///         EndTime = "%s",
+        ///         Product = "mysql",
+        ///     });
         /// 
-        /// }
+        ///     var diagEvent = Tencentcloud.Dbbrain.GetDiagEvent.Invoke(new()
+        ///     {
+        ///         InstanceId = "%s",
+        ///         EventId = diagHistory.Apply(getDiagHistoryResult =&gt; getDiagHistoryResult.Events[0]?.EventId),
+        ///         Product = "mysql",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDiagEventResult> Invoke(GetDiagEventInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDiagEventResult>("tencentcloud:Dbbrain/getDiagEvent:getDiagEvent", args ?? new GetDiagEventInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDiagEventResult>("tencentcloud:Dbbrain/getDiagEvent:getDiagEvent", args ?? new GetDiagEventInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDiagEventArgs : Pulumi.InvokeArgs
+    public sealed class GetDiagEventArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Event ID. Obtain it through `Get Instance Diagnosis History DescribeDBDiagHistory`.
@@ -119,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetDiagEventArgs()
         {
         }
+        public static new GetDiagEventArgs Empty => new GetDiagEventArgs();
     }
 
-    public sealed class GetDiagEventInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDiagEventInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Event ID. Obtain it through `Get Instance Diagnosis History DescribeDBDiagHistory`.
@@ -150,6 +147,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetDiagEventInvokeArgs()
         {
         }
+        public static new GetDiagEventInvokeArgs Empty => new GetDiagEventInvokeArgs();
     }
 
 

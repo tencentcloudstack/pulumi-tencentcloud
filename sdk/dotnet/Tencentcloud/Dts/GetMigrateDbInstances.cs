@@ -15,82 +15,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         /// <summary>
         /// Use this data source to query detailed information of dts migrate_db_instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var migrateDbInstances = Tencentcloud.Dts.GetMigrateDbInstances.Invoke(new()
         ///     {
-        ///         var migrateDbInstances = Output.Create(Tencentcloud.Dts.GetMigrateDbInstances.InvokeAsync(new Tencentcloud.Dts.GetMigrateDbInstancesArgs
-        ///         {
-        ///             AccountMode = "self",
-        ///             DatabaseType = "mysql",
-        ///             InstanceId = "cdb-ffulb2sg",
-        ///             InstanceName = "cdb_test",
-        ///             Limit = 10,
-        ///             MigrateRole = "src",
-        ///             Offset = 10,
-        ///             TmpSecretId = "AKIDvBDyVmna9TadcS4YzfBZmkU5TbX12345",
-        ///             TmpSecretKey = "ZswjGWWHm24qMeiX6QUJsELDpC12345",
-        ///             TmpToken = "JOqqCPVuWdNZvlVDLxxx",
-        ///         }));
-        ///     }
+        ///         AccountMode = "self",
+        ///         DatabaseType = "mysql",
+        ///         InstanceId = "cdb-ffulb2sg",
+        ///         InstanceName = "cdb_test",
+        ///         Limit = 10,
+        ///         MigrateRole = "src",
+        ///         Offset = 10,
+        ///         TmpSecretId = "AKIDvBDyVmna9TadcS4YzfBZmkU5TbX12345",
+        ///         TmpSecretKey = "ZswjGWWHm24qMeiX6QUJsELDpC12345",
+        ///         TmpToken = "JOqqCPVuWdNZvlVDLxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetMigrateDbInstancesResult> InvokeAsync(GetMigrateDbInstancesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMigrateDbInstancesResult>("tencentcloud:Dts/getMigrateDbInstances:getMigrateDbInstances", args ?? new GetMigrateDbInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMigrateDbInstancesResult>("tencentcloud:Dts/getMigrateDbInstances:getMigrateDbInstances", args ?? new GetMigrateDbInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dts migrate_db_instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var migrateDbInstances = Tencentcloud.Dts.GetMigrateDbInstances.Invoke(new()
         ///     {
-        ///         var migrateDbInstances = Output.Create(Tencentcloud.Dts.GetMigrateDbInstances.InvokeAsync(new Tencentcloud.Dts.GetMigrateDbInstancesArgs
-        ///         {
-        ///             AccountMode = "self",
-        ///             DatabaseType = "mysql",
-        ///             InstanceId = "cdb-ffulb2sg",
-        ///             InstanceName = "cdb_test",
-        ///             Limit = 10,
-        ///             MigrateRole = "src",
-        ///             Offset = 10,
-        ///             TmpSecretId = "AKIDvBDyVmna9TadcS4YzfBZmkU5TbX12345",
-        ///             TmpSecretKey = "ZswjGWWHm24qMeiX6QUJsELDpC12345",
-        ///             TmpToken = "JOqqCPVuWdNZvlVDLxxx",
-        ///         }));
-        ///     }
+        ///         AccountMode = "self",
+        ///         DatabaseType = "mysql",
+        ///         InstanceId = "cdb-ffulb2sg",
+        ///         InstanceName = "cdb_test",
+        ///         Limit = 10,
+        ///         MigrateRole = "src",
+        ///         Offset = 10,
+        ///         TmpSecretId = "AKIDvBDyVmna9TadcS4YzfBZmkU5TbX12345",
+        ///         TmpSecretKey = "ZswjGWWHm24qMeiX6QUJsELDpC12345",
+        ///         TmpToken = "JOqqCPVuWdNZvlVDLxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetMigrateDbInstancesResult> Invoke(GetMigrateDbInstancesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMigrateDbInstancesResult>("tencentcloud:Dts/getMigrateDbInstances:getMigrateDbInstances", args ?? new GetMigrateDbInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMigrateDbInstancesResult>("tencentcloud:Dts/getMigrateDbInstances:getMigrateDbInstances", args ?? new GetMigrateDbInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetMigrateDbInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetMigrateDbInstancesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The owning account of the resource is null or self(resources in the self account), other(resources in the other account).
@@ -161,9 +155,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public GetMigrateDbInstancesArgs()
         {
         }
+        public static new GetMigrateDbInstancesArgs Empty => new GetMigrateDbInstancesArgs();
     }
 
-    public sealed class GetMigrateDbInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetMigrateDbInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The owning account of the resource is null or self(resources in the self account), other(resources in the other account).
@@ -234,6 +229,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public GetMigrateDbInstancesInvokeArgs()
         {
         }
+        public static new GetMigrateDbInstancesInvokeArgs Empty => new GetMigrateDbInstancesInvokeArgs();
     }
 
 

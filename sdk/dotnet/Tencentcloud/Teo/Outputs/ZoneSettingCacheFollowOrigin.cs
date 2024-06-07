@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class ZoneSettingCacheFollowOrigin
     {
         /// <summary>
-        /// Specifies whether to follow the origin server configuration.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Specifies whether to follow the origin server configuration.
         /// </summary>
         public readonly string? Switch;
 

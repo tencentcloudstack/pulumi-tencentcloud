@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css.Inputs
 {
 
-    public sealed class PlayDomainCertAttachmentDomainInfoArgs : Pulumi.ResourceArgs
+    public sealed class PlayDomainCertAttachmentDomainInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// domain name.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css.Inputs
         public PlayDomainCertAttachmentDomainInfoArgs()
         {
         }
+        public static new PlayDomainCertAttachmentDomainInfoArgs Empty => new PlayDomainCertAttachmentDomainInfoArgs();
     }
 }

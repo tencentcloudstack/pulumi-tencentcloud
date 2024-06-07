@@ -14,9 +14,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css.Outputs
     [OutputType]
     public sealed class GetDeliverLogDownListLogInfoListResult
     {
+        /// <summary>
+        /// File size, in bytes.
+        /// </summary>
         public readonly int FileSize;
+        /// <summary>
+        /// Log name.
+        /// </summary>
         public readonly string LogName;
+        /// <summary>
+        /// Log time. UTC format, for example: 2018-11-29T19:00:00Z.Note:Beijing time is UTC time + 8 hours, formatted according to the ISO 8601 standard, see ISO date format description for details.
+        /// </summary>
         public readonly string LogTime;
+        /// <summary>
+        /// Log download address.
+        /// </summary>
         public readonly string LogUrl;
 
         [OutputConstructor]

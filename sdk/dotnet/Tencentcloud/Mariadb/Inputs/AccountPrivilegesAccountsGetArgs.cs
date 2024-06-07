@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb.Inputs
 {
 
-    public sealed class AccountPrivilegesAccountsGetArgs : Pulumi.ResourceArgs
+    public sealed class AccountPrivilegesAccountsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// user host.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb.Inputs
         public AccountPrivilegesAccountsGetArgs()
         {
         }
+        public static new AccountPrivilegesAccountsGetArgs Empty => new AccountPrivilegesAccountsGetArgs();
     }
 }

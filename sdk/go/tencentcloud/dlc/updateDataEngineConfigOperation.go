@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dlc updateDataEngineConfigOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.NewUpdateDataEngineConfigOperation(ctx, "updateDataEngineConfigOperation", &Dlc.UpdateDataEngineConfigOperationArgs{
-// 			DataEngineConfigCommand: pulumi.String("UpdateSparkSQLLakefsPath"),
-// 			DataEngineId:            pulumi.String("DataEngine-o3lzpqpo"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.NewUpdateDataEngineConfigOperation(ctx, "updateDataEngineConfigOperation", &Dlc.UpdateDataEngineConfigOperationArgs{
+//				DataEngineConfigCommand: pulumi.String("UpdateSparkSQLLakefsPath"),
+//				DataEngineId:            pulumi.String("DataEngine-o3lzpqpo"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type UpdateDataEngineConfigOperation struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewUpdateDataEngineConfigOperation(ctx *pulumi.Context,
 	if args.DataEngineId == nil {
 		return nil, errors.New("invalid value for required argument 'DataEngineId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UpdateDataEngineConfigOperation
 	err := ctx.RegisterResource("tencentcloud:Dlc/updateDataEngineConfigOperation:UpdateDataEngineConfigOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *UpdateDataEngineConfigOperation) ToUpdateDataEngineConfigOperationOutpu
 // UpdateDataEngineConfigOperationArrayInput is an input type that accepts UpdateDataEngineConfigOperationArray and UpdateDataEngineConfigOperationArrayOutput values.
 // You can construct a concrete instance of `UpdateDataEngineConfigOperationArrayInput` via:
 //
-//          UpdateDataEngineConfigOperationArray{ UpdateDataEngineConfigOperationArgs{...} }
+//	UpdateDataEngineConfigOperationArray{ UpdateDataEngineConfigOperationArgs{...} }
 type UpdateDataEngineConfigOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i UpdateDataEngineConfigOperationArray) ToUpdateDataEngineConfigOperationA
 // UpdateDataEngineConfigOperationMapInput is an input type that accepts UpdateDataEngineConfigOperationMap and UpdateDataEngineConfigOperationMapOutput values.
 // You can construct a concrete instance of `UpdateDataEngineConfigOperationMapInput` via:
 //
-//          UpdateDataEngineConfigOperationMap{ "key": UpdateDataEngineConfigOperationArgs{...} }
+//	UpdateDataEngineConfigOperationMap{ "key": UpdateDataEngineConfigOperationArgs{...} }
 type UpdateDataEngineConfigOperationMapInput interface {
 	pulumi.Input
 

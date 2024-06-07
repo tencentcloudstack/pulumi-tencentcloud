@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to detailed information of attached backend server to an ENI.
@@ -18,7 +19,7 @@ import (
 // ENI attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Eni/attachment:Attachment tencentcloud_eni_attachment.foo eni-gtlvkjvz+ins-0h3a5new
+// $ pulumi import tencentcloud:Eni/attachment:Attachment tencentcloud_eni_attachment.foo eni-gtlvkjvz+ins-0h3a5new
 // ```
 type Attachment struct {
 	pulumi.CustomResourceState
@@ -42,7 +43,7 @@ func NewAttachment(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Attachment
 	err := ctx.RegisterResource("tencentcloud:Eni/attachment:Attachment", name, args, &resource, opts...)
 	if err != nil {
@@ -123,7 +124,7 @@ func (i *Attachment) ToAttachmentOutputWithContext(ctx context.Context) Attachme
 // AttachmentArrayInput is an input type that accepts AttachmentArray and AttachmentArrayOutput values.
 // You can construct a concrete instance of `AttachmentArrayInput` via:
 //
-//          AttachmentArray{ AttachmentArgs{...} }
+//	AttachmentArray{ AttachmentArgs{...} }
 type AttachmentArrayInput interface {
 	pulumi.Input
 
@@ -148,7 +149,7 @@ func (i AttachmentArray) ToAttachmentArrayOutputWithContext(ctx context.Context)
 // AttachmentMapInput is an input type that accepts AttachmentMap and AttachmentMapOutput values.
 // You can construct a concrete instance of `AttachmentMapInput` via:
 //
-//          AttachmentMap{ "key": AttachmentArgs{...} }
+//	AttachmentMap{ "key": AttachmentArgs{...} }
 type AttachmentMapInput interface {
 	pulumi.Input
 

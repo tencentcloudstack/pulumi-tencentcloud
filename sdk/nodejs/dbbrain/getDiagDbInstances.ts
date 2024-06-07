@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const diagDbInstances = pulumi.output(tencentcloud.Dbbrain.getDiagDbInstances({
+ * const diagDbInstances = tencentcloud.Dbbrain.getDiagDbInstances({
  *     instanceNames: ["keep_preset_mysql"],
  *     isSupported: true,
  *     product: "mysql",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDiagDbInstances(args: GetDiagDbInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetDiagDbInstancesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dbbrain/getDiagDbInstances:getDiagDbInstances", {
         "instanceIds": args.instanceIds,
         "instanceNames": args.instanceNames,
@@ -96,9 +96,26 @@ export interface GetDiagDbInstancesResult {
     readonly regions?: string[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of dbbrain diagDbInstances
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const diagDbInstances = tencentcloud.Dbbrain.getDiagDbInstances({
+ *     instanceNames: ["keep_preset_mysql"],
+ *     isSupported: true,
+ *     product: "mysql",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDiagDbInstancesOutput(args: GetDiagDbInstancesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDiagDbInstancesResult> {
-    return pulumi.output(args).apply(a => getDiagDbInstances(a, opts))
+    return pulumi.output(args).apply((a: any) => getDiagDbInstances(a, opts))
 }
 
 /**

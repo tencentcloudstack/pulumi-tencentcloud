@@ -15,40 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new()
     ///     {
-    ///         var exampleRocketmqCluster = new Tencentcloud.Tdmq.RocketmqCluster("exampleRocketmqCluster", new Tencentcloud.Tdmq.RocketmqClusterArgs
-    ///         {
-    ///             ClusterName = "tf_example",
-    ///             Remark = "remark.",
-    ///         });
-    ///         var exampleRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleRocketmqNamespace", new Tencentcloud.Tdmq.RocketmqNamespaceArgs
-    ///         {
-    ///             ClusterId = exampleRocketmqCluster.ClusterId,
-    ///             NamespaceName = "tf_example_namespace",
-    ///             Remark = "remark.",
-    ///         });
-    ///     }
+    ///         ClusterName = "tf_example",
+    ///         Remark = "remark.",
+    ///     });
     /// 
-    /// }
+    ///     var exampleRocketmqNamespace = new Tencentcloud.Tdmq.RocketmqNamespace("exampleRocketmqNamespace", new()
+    ///     {
+    ///         ClusterId = exampleRocketmqCluster.ClusterId,
+    ///         NamespaceName = "tf_example_namespace",
+    ///         Remark = "remark.",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tdmqRocketmq namespace can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tdmq/rocketmqNamespace:RocketmqNamespace namespace namespace_id
+    /// $ pulumi import tencentcloud:Tdmq/rocketmqNamespace:RocketmqNamespace namespace namespace_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/rocketmqNamespace:RocketmqNamespace")]
-    public partial class RocketmqNamespace : Pulumi.CustomResource
+    public partial class RocketmqNamespace : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster ID.
@@ -137,7 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class RocketmqNamespaceArgs : Pulumi.ResourceArgs
+    public sealed class RocketmqNamespaceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -172,9 +174,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RocketmqNamespaceArgs()
         {
         }
+        public static new RocketmqNamespaceArgs Empty => new RocketmqNamespaceArgs();
     }
 
-    public sealed class RocketmqNamespaceState : Pulumi.ResourceArgs
+    public sealed class RocketmqNamespaceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -221,5 +224,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public RocketmqNamespaceState()
         {
         }
+        public static new RocketmqNamespaceState Empty => new RocketmqNamespaceState();
     }
 }

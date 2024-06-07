@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const storage = new tencentcloud.Cbs.StorageSet("storage", {
+ * const storage = new tencentcloud.cbs.StorageSet("storage", {
  *     availabilityZone: "ap-guangzhou-3",
  *     diskCount: 10,
  *     encrypt: false,
@@ -23,6 +24,7 @@ import * as utilities from "../utilities";
  *     storageType: "CLOUD_SSD",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class StorageSet extends pulumi.CustomResource {
     /**

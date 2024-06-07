@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const gatewayRoutes = pulumi.output(tencentcloud.Tse.getGatewayRoutes({
+ * const gatewayRoutes = tencentcloud.Tse.getGatewayRoutes({
  *     gatewayId: "gateway-ddbb709b",
  *     routeName: "keep-routes",
  *     serviceName: "test",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getGatewayRoutes(args: GetGatewayRoutesArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewayRoutesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tse/getGatewayRoutes:getGatewayRoutes", {
         "gatewayId": args.gatewayId,
         "resultOutputFile": args.resultOutputFile,
@@ -77,9 +77,26 @@ export interface GetGatewayRoutesResult {
      */
     readonly serviceName?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tse gatewayRoutes
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const gatewayRoutes = tencentcloud.Tse.getGatewayRoutes({
+ *     gatewayId: "gateway-ddbb709b",
+ *     routeName: "keep-routes",
+ *     serviceName: "test",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getGatewayRoutesOutput(args: GetGatewayRoutesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGatewayRoutesResult> {
-    return pulumi.output(args).apply(a => getGatewayRoutes(a, opts))
+    return pulumi.output(args).apply((a: any) => getGatewayRoutes(a, opts))
 }
 
 /**

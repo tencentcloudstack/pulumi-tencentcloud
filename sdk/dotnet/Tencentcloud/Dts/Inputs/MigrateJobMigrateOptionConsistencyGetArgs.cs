@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class MigrateJobMigrateOptionConsistencyGetArgs : Pulumi.ResourceArgs
+    public sealed class MigrateJobMigrateOptionConsistencyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ConsistencyOption.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public MigrateJobMigrateOptionConsistencyGetArgs()
         {
         }
+        public static new MigrateJobMigrateOptionConsistencyGetArgs Empty => new MigrateJobMigrateOptionConsistencyGetArgs();
     }
 }

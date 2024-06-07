@@ -5,67 +5,231 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./certificate";
-export * from "./customHeader";
-export * from "./domainErrorPage";
-export * from "./getAccessRegions";
-export * from "./getAccessRegionsByDestRegion";
-export * from "./getBlackHeader";
-export * from "./getCertificates";
-export * from "./getCheckProxyCreate";
-export * from "./getCountryAreaMapping";
-export * from "./getCustomHeader";
-export * from "./getDestRegions";
-export * from "./getDomainErrorPageInfos";
-export * from "./getDomainErrorPages";
-export * from "./getGroupAndStatisticsProxy";
-export * from "./getHttpDomains";
-export * from "./getHttpRules";
-export * from "./getLayer4Listeners";
-export * from "./getLayer7Listeners";
-export * from "./getListenerRealServers";
-export * from "./getListenerStatistics";
-export * from "./getProxies";
-export * from "./getProxiesStatus";
-export * from "./getProxyAndStatisticsListeners";
-export * from "./getProxyDetail";
-export * from "./getProxyGroupStatistics";
-export * from "./getProxyGroups";
-export * from "./getProxyStatistics";
-export * from "./getRealServersStatus";
-export * from "./getRealservers";
-export * from "./getRegionAndPrice";
-export * from "./getResourcesByTag";
-export * from "./getRuleRealServers";
-export * from "./getSecurityPolicies";
-export * from "./getSecurityRules";
-export * from "./globalDomain";
-export * from "./globalDomainDns";
-export * from "./httpDomain";
-export * from "./httpRule";
-export * from "./layer4Listener";
-export * from "./layer7Listener";
-export * from "./proxy";
-export * from "./proxyGroup";
-export * from "./realserver";
-export * from "./securityPolicy";
-export * from "./securityRule";
+export { CertificateArgs, CertificateState } from "./certificate";
+export type Certificate = import("./certificate").Certificate;
+export const Certificate: typeof import("./certificate").Certificate = null as any;
+utilities.lazyLoad(exports, ["Certificate"], () => require("./certificate"));
 
-// Import resources to register:
-import { Certificate } from "./certificate";
-import { CustomHeader } from "./customHeader";
-import { DomainErrorPage } from "./domainErrorPage";
-import { GlobalDomain } from "./globalDomain";
-import { GlobalDomainDns } from "./globalDomainDns";
-import { HttpDomain } from "./httpDomain";
-import { HttpRule } from "./httpRule";
-import { Layer4Listener } from "./layer4Listener";
-import { Layer7Listener } from "./layer7Listener";
-import { Proxy } from "./proxy";
-import { ProxyGroup } from "./proxyGroup";
-import { Realserver } from "./realserver";
-import { SecurityPolicy } from "./securityPolicy";
-import { SecurityRule } from "./securityRule";
+export { CustomHeaderArgs, CustomHeaderState } from "./customHeader";
+export type CustomHeader = import("./customHeader").CustomHeader;
+export const CustomHeader: typeof import("./customHeader").CustomHeader = null as any;
+utilities.lazyLoad(exports, ["CustomHeader"], () => require("./customHeader"));
+
+export { DomainErrorPageArgs, DomainErrorPageState } from "./domainErrorPage";
+export type DomainErrorPage = import("./domainErrorPage").DomainErrorPage;
+export const DomainErrorPage: typeof import("./domainErrorPage").DomainErrorPage = null as any;
+utilities.lazyLoad(exports, ["DomainErrorPage"], () => require("./domainErrorPage"));
+
+export { GetAccessRegionsArgs, GetAccessRegionsResult, GetAccessRegionsOutputArgs } from "./getAccessRegions";
+export const getAccessRegions: typeof import("./getAccessRegions").getAccessRegions = null as any;
+export const getAccessRegionsOutput: typeof import("./getAccessRegions").getAccessRegionsOutput = null as any;
+utilities.lazyLoad(exports, ["getAccessRegions","getAccessRegionsOutput"], () => require("./getAccessRegions"));
+
+export { GetAccessRegionsByDestRegionArgs, GetAccessRegionsByDestRegionResult, GetAccessRegionsByDestRegionOutputArgs } from "./getAccessRegionsByDestRegion";
+export const getAccessRegionsByDestRegion: typeof import("./getAccessRegionsByDestRegion").getAccessRegionsByDestRegion = null as any;
+export const getAccessRegionsByDestRegionOutput: typeof import("./getAccessRegionsByDestRegion").getAccessRegionsByDestRegionOutput = null as any;
+utilities.lazyLoad(exports, ["getAccessRegionsByDestRegion","getAccessRegionsByDestRegionOutput"], () => require("./getAccessRegionsByDestRegion"));
+
+export { GetBlackHeaderArgs, GetBlackHeaderResult, GetBlackHeaderOutputArgs } from "./getBlackHeader";
+export const getBlackHeader: typeof import("./getBlackHeader").getBlackHeader = null as any;
+export const getBlackHeaderOutput: typeof import("./getBlackHeader").getBlackHeaderOutput = null as any;
+utilities.lazyLoad(exports, ["getBlackHeader","getBlackHeaderOutput"], () => require("./getBlackHeader"));
+
+export { GetCertificatesArgs, GetCertificatesResult, GetCertificatesOutputArgs } from "./getCertificates";
+export const getCertificates: typeof import("./getCertificates").getCertificates = null as any;
+export const getCertificatesOutput: typeof import("./getCertificates").getCertificatesOutput = null as any;
+utilities.lazyLoad(exports, ["getCertificates","getCertificatesOutput"], () => require("./getCertificates"));
+
+export { GetCheckProxyCreateArgs, GetCheckProxyCreateResult, GetCheckProxyCreateOutputArgs } from "./getCheckProxyCreate";
+export const getCheckProxyCreate: typeof import("./getCheckProxyCreate").getCheckProxyCreate = null as any;
+export const getCheckProxyCreateOutput: typeof import("./getCheckProxyCreate").getCheckProxyCreateOutput = null as any;
+utilities.lazyLoad(exports, ["getCheckProxyCreate","getCheckProxyCreateOutput"], () => require("./getCheckProxyCreate"));
+
+export { GetCountryAreaMappingArgs, GetCountryAreaMappingResult, GetCountryAreaMappingOutputArgs } from "./getCountryAreaMapping";
+export const getCountryAreaMapping: typeof import("./getCountryAreaMapping").getCountryAreaMapping = null as any;
+export const getCountryAreaMappingOutput: typeof import("./getCountryAreaMapping").getCountryAreaMappingOutput = null as any;
+utilities.lazyLoad(exports, ["getCountryAreaMapping","getCountryAreaMappingOutput"], () => require("./getCountryAreaMapping"));
+
+export { GetCustomHeaderArgs, GetCustomHeaderResult, GetCustomHeaderOutputArgs } from "./getCustomHeader";
+export const getCustomHeader: typeof import("./getCustomHeader").getCustomHeader = null as any;
+export const getCustomHeaderOutput: typeof import("./getCustomHeader").getCustomHeaderOutput = null as any;
+utilities.lazyLoad(exports, ["getCustomHeader","getCustomHeaderOutput"], () => require("./getCustomHeader"));
+
+export { GetDestRegionsArgs, GetDestRegionsResult, GetDestRegionsOutputArgs } from "./getDestRegions";
+export const getDestRegions: typeof import("./getDestRegions").getDestRegions = null as any;
+export const getDestRegionsOutput: typeof import("./getDestRegions").getDestRegionsOutput = null as any;
+utilities.lazyLoad(exports, ["getDestRegions","getDestRegionsOutput"], () => require("./getDestRegions"));
+
+export { GetDomainErrorPageInfosArgs, GetDomainErrorPageInfosResult, GetDomainErrorPageInfosOutputArgs } from "./getDomainErrorPageInfos";
+export const getDomainErrorPageInfos: typeof import("./getDomainErrorPageInfos").getDomainErrorPageInfos = null as any;
+export const getDomainErrorPageInfosOutput: typeof import("./getDomainErrorPageInfos").getDomainErrorPageInfosOutput = null as any;
+utilities.lazyLoad(exports, ["getDomainErrorPageInfos","getDomainErrorPageInfosOutput"], () => require("./getDomainErrorPageInfos"));
+
+export { GetDomainErrorPagesArgs, GetDomainErrorPagesResult, GetDomainErrorPagesOutputArgs } from "./getDomainErrorPages";
+export const getDomainErrorPages: typeof import("./getDomainErrorPages").getDomainErrorPages = null as any;
+export const getDomainErrorPagesOutput: typeof import("./getDomainErrorPages").getDomainErrorPagesOutput = null as any;
+utilities.lazyLoad(exports, ["getDomainErrorPages","getDomainErrorPagesOutput"], () => require("./getDomainErrorPages"));
+
+export { GetGroupAndStatisticsProxyArgs, GetGroupAndStatisticsProxyResult, GetGroupAndStatisticsProxyOutputArgs } from "./getGroupAndStatisticsProxy";
+export const getGroupAndStatisticsProxy: typeof import("./getGroupAndStatisticsProxy").getGroupAndStatisticsProxy = null as any;
+export const getGroupAndStatisticsProxyOutput: typeof import("./getGroupAndStatisticsProxy").getGroupAndStatisticsProxyOutput = null as any;
+utilities.lazyLoad(exports, ["getGroupAndStatisticsProxy","getGroupAndStatisticsProxyOutput"], () => require("./getGroupAndStatisticsProxy"));
+
+export { GetHttpDomainsArgs, GetHttpDomainsResult, GetHttpDomainsOutputArgs } from "./getHttpDomains";
+export const getHttpDomains: typeof import("./getHttpDomains").getHttpDomains = null as any;
+export const getHttpDomainsOutput: typeof import("./getHttpDomains").getHttpDomainsOutput = null as any;
+utilities.lazyLoad(exports, ["getHttpDomains","getHttpDomainsOutput"], () => require("./getHttpDomains"));
+
+export { GetHttpRulesArgs, GetHttpRulesResult, GetHttpRulesOutputArgs } from "./getHttpRules";
+export const getHttpRules: typeof import("./getHttpRules").getHttpRules = null as any;
+export const getHttpRulesOutput: typeof import("./getHttpRules").getHttpRulesOutput = null as any;
+utilities.lazyLoad(exports, ["getHttpRules","getHttpRulesOutput"], () => require("./getHttpRules"));
+
+export { GetLayer4ListenersArgs, GetLayer4ListenersResult, GetLayer4ListenersOutputArgs } from "./getLayer4Listeners";
+export const getLayer4Listeners: typeof import("./getLayer4Listeners").getLayer4Listeners = null as any;
+export const getLayer4ListenersOutput: typeof import("./getLayer4Listeners").getLayer4ListenersOutput = null as any;
+utilities.lazyLoad(exports, ["getLayer4Listeners","getLayer4ListenersOutput"], () => require("./getLayer4Listeners"));
+
+export { GetLayer7ListenersArgs, GetLayer7ListenersResult, GetLayer7ListenersOutputArgs } from "./getLayer7Listeners";
+export const getLayer7Listeners: typeof import("./getLayer7Listeners").getLayer7Listeners = null as any;
+export const getLayer7ListenersOutput: typeof import("./getLayer7Listeners").getLayer7ListenersOutput = null as any;
+utilities.lazyLoad(exports, ["getLayer7Listeners","getLayer7ListenersOutput"], () => require("./getLayer7Listeners"));
+
+export { GetListenerRealServersArgs, GetListenerRealServersResult, GetListenerRealServersOutputArgs } from "./getListenerRealServers";
+export const getListenerRealServers: typeof import("./getListenerRealServers").getListenerRealServers = null as any;
+export const getListenerRealServersOutput: typeof import("./getListenerRealServers").getListenerRealServersOutput = null as any;
+utilities.lazyLoad(exports, ["getListenerRealServers","getListenerRealServersOutput"], () => require("./getListenerRealServers"));
+
+export { GetListenerStatisticsArgs, GetListenerStatisticsResult, GetListenerStatisticsOutputArgs } from "./getListenerStatistics";
+export const getListenerStatistics: typeof import("./getListenerStatistics").getListenerStatistics = null as any;
+export const getListenerStatisticsOutput: typeof import("./getListenerStatistics").getListenerStatisticsOutput = null as any;
+utilities.lazyLoad(exports, ["getListenerStatistics","getListenerStatisticsOutput"], () => require("./getListenerStatistics"));
+
+export { GetProxiesArgs, GetProxiesResult, GetProxiesOutputArgs } from "./getProxies";
+export const getProxies: typeof import("./getProxies").getProxies = null as any;
+export const getProxiesOutput: typeof import("./getProxies").getProxiesOutput = null as any;
+utilities.lazyLoad(exports, ["getProxies","getProxiesOutput"], () => require("./getProxies"));
+
+export { GetProxiesStatusArgs, GetProxiesStatusResult, GetProxiesStatusOutputArgs } from "./getProxiesStatus";
+export const getProxiesStatus: typeof import("./getProxiesStatus").getProxiesStatus = null as any;
+export const getProxiesStatusOutput: typeof import("./getProxiesStatus").getProxiesStatusOutput = null as any;
+utilities.lazyLoad(exports, ["getProxiesStatus","getProxiesStatusOutput"], () => require("./getProxiesStatus"));
+
+export { GetProxyAndStatisticsListenersArgs, GetProxyAndStatisticsListenersResult, GetProxyAndStatisticsListenersOutputArgs } from "./getProxyAndStatisticsListeners";
+export const getProxyAndStatisticsListeners: typeof import("./getProxyAndStatisticsListeners").getProxyAndStatisticsListeners = null as any;
+export const getProxyAndStatisticsListenersOutput: typeof import("./getProxyAndStatisticsListeners").getProxyAndStatisticsListenersOutput = null as any;
+utilities.lazyLoad(exports, ["getProxyAndStatisticsListeners","getProxyAndStatisticsListenersOutput"], () => require("./getProxyAndStatisticsListeners"));
+
+export { GetProxyDetailArgs, GetProxyDetailResult, GetProxyDetailOutputArgs } from "./getProxyDetail";
+export const getProxyDetail: typeof import("./getProxyDetail").getProxyDetail = null as any;
+export const getProxyDetailOutput: typeof import("./getProxyDetail").getProxyDetailOutput = null as any;
+utilities.lazyLoad(exports, ["getProxyDetail","getProxyDetailOutput"], () => require("./getProxyDetail"));
+
+export { GetProxyGroupStatisticsArgs, GetProxyGroupStatisticsResult, GetProxyGroupStatisticsOutputArgs } from "./getProxyGroupStatistics";
+export const getProxyGroupStatistics: typeof import("./getProxyGroupStatistics").getProxyGroupStatistics = null as any;
+export const getProxyGroupStatisticsOutput: typeof import("./getProxyGroupStatistics").getProxyGroupStatisticsOutput = null as any;
+utilities.lazyLoad(exports, ["getProxyGroupStatistics","getProxyGroupStatisticsOutput"], () => require("./getProxyGroupStatistics"));
+
+export { GetProxyGroupsArgs, GetProxyGroupsResult, GetProxyGroupsOutputArgs } from "./getProxyGroups";
+export const getProxyGroups: typeof import("./getProxyGroups").getProxyGroups = null as any;
+export const getProxyGroupsOutput: typeof import("./getProxyGroups").getProxyGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getProxyGroups","getProxyGroupsOutput"], () => require("./getProxyGroups"));
+
+export { GetProxyStatisticsArgs, GetProxyStatisticsResult, GetProxyStatisticsOutputArgs } from "./getProxyStatistics";
+export const getProxyStatistics: typeof import("./getProxyStatistics").getProxyStatistics = null as any;
+export const getProxyStatisticsOutput: typeof import("./getProxyStatistics").getProxyStatisticsOutput = null as any;
+utilities.lazyLoad(exports, ["getProxyStatistics","getProxyStatisticsOutput"], () => require("./getProxyStatistics"));
+
+export { GetRealServersStatusArgs, GetRealServersStatusResult, GetRealServersStatusOutputArgs } from "./getRealServersStatus";
+export const getRealServersStatus: typeof import("./getRealServersStatus").getRealServersStatus = null as any;
+export const getRealServersStatusOutput: typeof import("./getRealServersStatus").getRealServersStatusOutput = null as any;
+utilities.lazyLoad(exports, ["getRealServersStatus","getRealServersStatusOutput"], () => require("./getRealServersStatus"));
+
+export { GetRealserversArgs, GetRealserversResult, GetRealserversOutputArgs } from "./getRealservers";
+export const getRealservers: typeof import("./getRealservers").getRealservers = null as any;
+export const getRealserversOutput: typeof import("./getRealservers").getRealserversOutput = null as any;
+utilities.lazyLoad(exports, ["getRealservers","getRealserversOutput"], () => require("./getRealservers"));
+
+export { GetRegionAndPriceArgs, GetRegionAndPriceResult, GetRegionAndPriceOutputArgs } from "./getRegionAndPrice";
+export const getRegionAndPrice: typeof import("./getRegionAndPrice").getRegionAndPrice = null as any;
+export const getRegionAndPriceOutput: typeof import("./getRegionAndPrice").getRegionAndPriceOutput = null as any;
+utilities.lazyLoad(exports, ["getRegionAndPrice","getRegionAndPriceOutput"], () => require("./getRegionAndPrice"));
+
+export { GetResourcesByTagArgs, GetResourcesByTagResult, GetResourcesByTagOutputArgs } from "./getResourcesByTag";
+export const getResourcesByTag: typeof import("./getResourcesByTag").getResourcesByTag = null as any;
+export const getResourcesByTagOutput: typeof import("./getResourcesByTag").getResourcesByTagOutput = null as any;
+utilities.lazyLoad(exports, ["getResourcesByTag","getResourcesByTagOutput"], () => require("./getResourcesByTag"));
+
+export { GetRuleRealServersArgs, GetRuleRealServersResult, GetRuleRealServersOutputArgs } from "./getRuleRealServers";
+export const getRuleRealServers: typeof import("./getRuleRealServers").getRuleRealServers = null as any;
+export const getRuleRealServersOutput: typeof import("./getRuleRealServers").getRuleRealServersOutput = null as any;
+utilities.lazyLoad(exports, ["getRuleRealServers","getRuleRealServersOutput"], () => require("./getRuleRealServers"));
+
+export { GetSecurityPoliciesArgs, GetSecurityPoliciesResult, GetSecurityPoliciesOutputArgs } from "./getSecurityPolicies";
+export const getSecurityPolicies: typeof import("./getSecurityPolicies").getSecurityPolicies = null as any;
+export const getSecurityPoliciesOutput: typeof import("./getSecurityPolicies").getSecurityPoliciesOutput = null as any;
+utilities.lazyLoad(exports, ["getSecurityPolicies","getSecurityPoliciesOutput"], () => require("./getSecurityPolicies"));
+
+export { GetSecurityRulesArgs, GetSecurityRulesResult, GetSecurityRulesOutputArgs } from "./getSecurityRules";
+export const getSecurityRules: typeof import("./getSecurityRules").getSecurityRules = null as any;
+export const getSecurityRulesOutput: typeof import("./getSecurityRules").getSecurityRulesOutput = null as any;
+utilities.lazyLoad(exports, ["getSecurityRules","getSecurityRulesOutput"], () => require("./getSecurityRules"));
+
+export { GlobalDomainArgs, GlobalDomainState } from "./globalDomain";
+export type GlobalDomain = import("./globalDomain").GlobalDomain;
+export const GlobalDomain: typeof import("./globalDomain").GlobalDomain = null as any;
+utilities.lazyLoad(exports, ["GlobalDomain"], () => require("./globalDomain"));
+
+export { GlobalDomainDnsArgs, GlobalDomainDnsState } from "./globalDomainDns";
+export type GlobalDomainDns = import("./globalDomainDns").GlobalDomainDns;
+export const GlobalDomainDns: typeof import("./globalDomainDns").GlobalDomainDns = null as any;
+utilities.lazyLoad(exports, ["GlobalDomainDns"], () => require("./globalDomainDns"));
+
+export { HttpDomainArgs, HttpDomainState } from "./httpDomain";
+export type HttpDomain = import("./httpDomain").HttpDomain;
+export const HttpDomain: typeof import("./httpDomain").HttpDomain = null as any;
+utilities.lazyLoad(exports, ["HttpDomain"], () => require("./httpDomain"));
+
+export { HttpRuleArgs, HttpRuleState } from "./httpRule";
+export type HttpRule = import("./httpRule").HttpRule;
+export const HttpRule: typeof import("./httpRule").HttpRule = null as any;
+utilities.lazyLoad(exports, ["HttpRule"], () => require("./httpRule"));
+
+export { Layer4ListenerArgs, Layer4ListenerState } from "./layer4Listener";
+export type Layer4Listener = import("./layer4Listener").Layer4Listener;
+export const Layer4Listener: typeof import("./layer4Listener").Layer4Listener = null as any;
+utilities.lazyLoad(exports, ["Layer4Listener"], () => require("./layer4Listener"));
+
+export { Layer7ListenerArgs, Layer7ListenerState } from "./layer7Listener";
+export type Layer7Listener = import("./layer7Listener").Layer7Listener;
+export const Layer7Listener: typeof import("./layer7Listener").Layer7Listener = null as any;
+utilities.lazyLoad(exports, ["Layer7Listener"], () => require("./layer7Listener"));
+
+export { ProxyArgs, ProxyState } from "./proxy";
+export type Proxy = import("./proxy").Proxy;
+export const Proxy: typeof import("./proxy").Proxy = null as any;
+utilities.lazyLoad(exports, ["Proxy"], () => require("./proxy"));
+
+export { ProxyGroupArgs, ProxyGroupState } from "./proxyGroup";
+export type ProxyGroup = import("./proxyGroup").ProxyGroup;
+export const ProxyGroup: typeof import("./proxyGroup").ProxyGroup = null as any;
+utilities.lazyLoad(exports, ["ProxyGroup"], () => require("./proxyGroup"));
+
+export { RealserverArgs, RealserverState } from "./realserver";
+export type Realserver = import("./realserver").Realserver;
+export const Realserver: typeof import("./realserver").Realserver = null as any;
+utilities.lazyLoad(exports, ["Realserver"], () => require("./realserver"));
+
+export { SecurityPolicyArgs, SecurityPolicyState } from "./securityPolicy";
+export type SecurityPolicy = import("./securityPolicy").SecurityPolicy;
+export const SecurityPolicy: typeof import("./securityPolicy").SecurityPolicy = null as any;
+utilities.lazyLoad(exports, ["SecurityPolicy"], () => require("./securityPolicy"));
+
+export { SecurityRuleArgs, SecurityRuleState } from "./securityRule";
+export type SecurityRule = import("./securityRule").SecurityRule;
+export const SecurityRule: typeof import("./securityRule").SecurityRule = null as any;
+utilities.lazyLoad(exports, ["SecurityRule"], () => require("./securityRule"));
+
 
 const _module = {
     version: utilities.getVersion(),

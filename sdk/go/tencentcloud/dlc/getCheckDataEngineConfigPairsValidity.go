@@ -8,35 +8,40 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dlc checkDataEngineConfigPairsValidity
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.GetCheckDataEngineConfigPairsValidity(ctx, &dlc.GetCheckDataEngineConfigPairsValidityArgs{
-// 			ChildImageVersionId: pulumi.StringRef("d3ftghd4-9a7e-4f64-a3f4-f38507c69742"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.GetCheckDataEngineConfigPairsValidity(ctx, &dlc.GetCheckDataEngineConfigPairsValidityArgs{
+//				ChildImageVersionId: pulumi.StringRef("d3ftghd4-9a7e-4f64-a3f4-f38507c69742"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetCheckDataEngineConfigPairsValidity(ctx *pulumi.Context, args *GetCheckDataEngineConfigPairsValidityArgs, opts ...pulumi.InvokeOption) (*GetCheckDataEngineConfigPairsValidityResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCheckDataEngineConfigPairsValidityResult
 	err := ctx.Invoke("tencentcloud:Dlc/getCheckDataEngineConfigPairsValidity:getCheckDataEngineConfigPairsValidity", args, &rv, opts...)
 	if err != nil {

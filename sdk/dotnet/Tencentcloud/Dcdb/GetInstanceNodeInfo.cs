@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// <summary>
         /// Use this data source to query detailed information of dcdb instance_node_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceNodeInfo = Tencentcloud.Dcdb.GetInstanceNodeInfo.Invoke(new()
         ///     {
-        ///         var instanceNodeInfo = Output.Create(Tencentcloud.Dcdb.GetInstanceNodeInfo.InvokeAsync(new Tencentcloud.Dcdb.GetInstanceNodeInfoArgs
-        ///         {
-        ///             InstanceId = local.Dcdb_id,
-        ///         }));
-        ///     }
+        ///         InstanceId = local.Dcdb_id,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceNodeInfoResult> InvokeAsync(GetInstanceNodeInfoArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceNodeInfoResult>("tencentcloud:Dcdb/getInstanceNodeInfo:getInstanceNodeInfo", args ?? new GetInstanceNodeInfoArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceNodeInfoResult>("tencentcloud:Dcdb/getInstanceNodeInfo:getInstanceNodeInfo", args ?? new GetInstanceNodeInfoArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dcdb instance_node_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceNodeInfo = Tencentcloud.Dcdb.GetInstanceNodeInfo.Invoke(new()
         ///     {
-        ///         var instanceNodeInfo = Output.Create(Tencentcloud.Dcdb.GetInstanceNodeInfo.InvokeAsync(new Tencentcloud.Dcdb.GetInstanceNodeInfoArgs
-        ///         {
-        ///             InstanceId = local.Dcdb_id,
-        ///         }));
-        ///     }
+        ///         InstanceId = local.Dcdb_id,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceNodeInfoResult> Invoke(GetInstanceNodeInfoInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceNodeInfoResult>("tencentcloud:Dcdb/getInstanceNodeInfo:getInstanceNodeInfo", args ?? new GetInstanceNodeInfoInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceNodeInfoResult>("tencentcloud:Dcdb/getInstanceNodeInfo:getInstanceNodeInfo", args ?? new GetInstanceNodeInfoInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceNodeInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceNodeInfoArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, such as tdsqlshard-6ltok4u9.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetInstanceNodeInfoArgs()
         {
         }
+        public static new GetInstanceNodeInfoArgs Empty => new GetInstanceNodeInfoArgs();
     }
 
-    public sealed class GetInstanceNodeInfoInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceNodeInfoInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, such as tdsqlshard-6ltok4u9.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetInstanceNodeInfoInvokeArgs()
         {
         }
+        public static new GetInstanceNodeInfoInvokeArgs Empty => new GetInstanceNodeInfoInvokeArgs();
     }
 
 

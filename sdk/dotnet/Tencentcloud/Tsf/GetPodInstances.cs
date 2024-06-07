@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf pod_instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var podInstances = Tencentcloud.Tsf.GetPodInstances.Invoke(new()
         ///     {
-        ///         var podInstances = Output.Create(Tencentcloud.Tsf.GetPodInstances.InvokeAsync(new Tencentcloud.Tsf.GetPodInstancesArgs
+        ///         GroupId = "group-ynd95rea",
+        ///         PodNameLists = new[]
         ///         {
-        ///             GroupId = "group-ynd95rea",
-        ///             PodNameLists = 
-        ///             {
-        ///                 "keep-terraform-6f8f977688-zvphm",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "keep-terraform-6f8f977688-zvphm",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPodInstancesResult> InvokeAsync(GetPodInstancesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPodInstancesResult>("tencentcloud:Tsf/getPodInstances:getPodInstances", args ?? new GetPodInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPodInstancesResult>("tencentcloud:Tsf/getPodInstances:getPodInstances", args ?? new GetPodInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf pod_instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var podInstances = Tencentcloud.Tsf.GetPodInstances.Invoke(new()
         ///     {
-        ///         var podInstances = Output.Create(Tencentcloud.Tsf.GetPodInstances.InvokeAsync(new Tencentcloud.Tsf.GetPodInstancesArgs
+        ///         GroupId = "group-ynd95rea",
+        ///         PodNameLists = new[]
         ///         {
-        ///             GroupId = "group-ynd95rea",
-        ///             PodNameLists = 
-        ///             {
-        ///                 "keep-terraform-6f8f977688-zvphm",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "keep-terraform-6f8f977688-zvphm",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPodInstancesResult> Invoke(GetPodInstancesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPodInstancesResult>("tencentcloud:Tsf/getPodInstances:getPodInstances", args ?? new GetPodInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPodInstancesResult>("tencentcloud:Tsf/getPodInstances:getPodInstances", args ?? new GetPodInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPodInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetPodInstancesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance&amp;amp;#39;s group ID.
@@ -109,9 +103,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetPodInstancesArgs()
         {
         }
+        public static new GetPodInstancesArgs Empty => new GetPodInstancesArgs();
     }
 
-    public sealed class GetPodInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPodInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance&amp;amp;#39;s group ID.
@@ -140,6 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetPodInstancesInvokeArgs()
         {
         }
+        public static new GetPodInstancesInvokeArgs Empty => new GetPodInstancesInvokeArgs();
     }
 
 

@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// <summary>
         /// Use this data source to query detailed information of tdmq publisher_summary
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var publisherSummary = Tencentcloud.Tdmq.GetPublisherSummary.Invoke(new()
         ///     {
-        ///         var publisherSummary = Output.Create(Tencentcloud.Tdmq.GetPublisherSummary.InvokeAsync(new Tencentcloud.Tdmq.GetPublisherSummaryArgs
-        ///         {
-        ///             ClusterId = "pulsar-9n95ax58b9vn",
-        ///             Namespace = "keep-ns",
-        ///             Topic = "keep-topic",
-        ///         }));
-        ///     }
+        ///         ClusterId = "pulsar-9n95ax58b9vn",
+        ///         Namespace = "keep-ns",
+        ///         Topic = "keep-topic",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPublisherSummaryResult> InvokeAsync(GetPublisherSummaryArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPublisherSummaryResult>("tencentcloud:Tdmq/getPublisherSummary:getPublisherSummary", args ?? new GetPublisherSummaryArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPublisherSummaryResult>("tencentcloud:Tdmq/getPublisherSummary:getPublisherSummary", args ?? new GetPublisherSummaryArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tdmq publisher_summary
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var publisherSummary = Tencentcloud.Tdmq.GetPublisherSummary.Invoke(new()
         ///     {
-        ///         var publisherSummary = Output.Create(Tencentcloud.Tdmq.GetPublisherSummary.InvokeAsync(new Tencentcloud.Tdmq.GetPublisherSummaryArgs
-        ///         {
-        ///             ClusterId = "pulsar-9n95ax58b9vn",
-        ///             Namespace = "keep-ns",
-        ///             Topic = "keep-topic",
-        ///         }));
-        ///     }
+        ///         ClusterId = "pulsar-9n95ax58b9vn",
+        ///         Namespace = "keep-ns",
+        ///         Topic = "keep-topic",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPublisherSummaryResult> Invoke(GetPublisherSummaryInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPublisherSummaryResult>("tencentcloud:Tdmq/getPublisherSummary:getPublisherSummary", args ?? new GetPublisherSummaryInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPublisherSummaryResult>("tencentcloud:Tdmq/getPublisherSummary:getPublisherSummary", args ?? new GetPublisherSummaryInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPublisherSummaryArgs : Pulumi.InvokeArgs
+    public sealed class GetPublisherSummaryArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetPublisherSummaryArgs()
         {
         }
+        public static new GetPublisherSummaryArgs Empty => new GetPublisherSummaryArgs();
     }
 
-    public sealed class GetPublisherSummaryInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPublisherSummaryInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetPublisherSummaryInvokeArgs()
         {
         }
+        public static new GetPublisherSummaryInvokeArgs Empty => new GetPublisherSummaryInvokeArgs();
     }
 
 

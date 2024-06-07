@@ -11,22 +11,35 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam.Inputs
 {
 
-    public sealed class PolicyVersionPolicyVersionGetArgs : Pulumi.ResourceArgs
+    public sealed class PolicyVersionPolicyVersionGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Strategic version creation timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        /// </summary>
         [Input("createDate")]
         public Input<string>? CreateDate { get; set; }
 
+        /// <summary>
+        /// Strategic grammar textNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        /// </summary>
         [Input("document")]
         public Input<string>? Document { get; set; }
 
+        /// <summary>
+        /// Whether it is an effective version.0 means not, 1 means yesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        /// </summary>
         [Input("isDefaultVersion")]
         public Input<int>? IsDefaultVersion { get; set; }
 
+        /// <summary>
+        /// Strategic version numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        /// </summary>
         [Input("versionId")]
         public Input<int>? VersionId { get; set; }
 
         public PolicyVersionPolicyVersionGetArgs()
         {
         }
+        public static new PolicyVersionPolicyVersionGetArgs Empty => new PolicyVersionPolicyVersionGetArgs();
     }
 }

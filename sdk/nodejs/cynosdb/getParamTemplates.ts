@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const paramTemplates = pulumi.output(tencentcloud.Cynosdb.getParamTemplates());
+ * const paramTemplates = tencentcloud.Cynosdb.getParamTemplates({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getParamTemplates(args?: GetParamTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetParamTemplatesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cynosdb/getParamTemplates:getParamTemplates", {
         "dbModes": args.dbModes,
         "engineTypes": args.engineTypes,
@@ -119,9 +119,22 @@ export interface GetParamTemplatesResult {
     readonly templateNames?: string[];
     readonly templateTypes?: string[];
 }
-
+/**
+ * Use this data source to query detailed information of cynosdb paramTemplates
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const paramTemplates = tencentcloud.Cynosdb.getParamTemplates({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getParamTemplatesOutput(args?: GetParamTemplatesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetParamTemplatesResult> {
-    return pulumi.output(args).apply(a => getParamTemplates(a, opts))
+    return pulumi.output(args).apply((a: any) => getParamTemplates(a, opts))
 }
 
 /**

@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var completeCertificate = new Tencentcloud.Ssl.CompleteCertificateOperation("completeCertificate", new()
     ///     {
-    ///         var completeCertificate = new Tencentcloud.Ssl.CompleteCertificateOperation("completeCertificate", new Tencentcloud.Ssl.CompleteCertificateOperationArgs
-    ///         {
-    ///             CertificateId = "9Bfe1IBR",
-    ///         });
-    ///     }
+    ///         CertificateId = "9Bfe1IBR",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ssl complete_certificate can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ssl/completeCertificateOperation:CompleteCertificateOperation complete_certificate complete_certificate_id
+    /// $ pulumi import tencentcloud:Ssl/completeCertificateOperation:CompleteCertificateOperation complete_certificate complete_certificate_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/completeCertificateOperation:CompleteCertificateOperation")]
-    public partial class CompleteCertificateOperation : Pulumi.CustomResource
+    public partial class CompleteCertificateOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Certificate ID.
@@ -94,7 +95,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         }
     }
 
-    public sealed class CompleteCertificateOperationArgs : Pulumi.ResourceArgs
+    public sealed class CompleteCertificateOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Certificate ID.
@@ -105,9 +106,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public CompleteCertificateOperationArgs()
         {
         }
+        public static new CompleteCertificateOperationArgs Empty => new CompleteCertificateOperationArgs();
     }
 
-    public sealed class CompleteCertificateOperationState : Pulumi.ResourceArgs
+    public sealed class CompleteCertificateOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Certificate ID.
@@ -118,5 +120,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public CompleteCertificateOperationState()
         {
         }
+        public static new CompleteCertificateOperationState Empty => new CompleteCertificateOperationState();
     }
 }

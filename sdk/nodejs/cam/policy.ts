@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Cam.Policy("foo", {
+ * const foo = new tencentcloud.cam.Policy("foo", {
  *     description: "tf_test",
  *     document: `{
  *   "version": "2.0",
@@ -29,16 +30,18 @@ import * as utilities from "../utilities";
  *     }
  *   ]
  * }
+ *
  * `,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CAM policy can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cam/policy:Policy foo 26655801
+ * $ pulumi import tencentcloud:Cam/policy:Policy foo 26655801
  * ```
  */
 export class Policy extends pulumi.CustomResource {
@@ -78,10 +81,7 @@ export class Policy extends pulumi.CustomResource {
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * Document of the CAM policy. The syntax refers to [CAM
-     * POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in
-     * terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2.
-     * Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+     * Document of the CAM policy. The syntax refers to CAM POLICY Name of CAM policy.
      */
     public readonly document!: pulumi.Output<string>;
     /**
@@ -146,10 +146,7 @@ export interface PolicyState {
      */
     description?: pulumi.Input<string>;
     /**
-     * Document of the CAM policy. The syntax refers to [CAM
-     * POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in
-     * terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2.
-     * Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+     * Document of the CAM policy. The syntax refers to CAM POLICY Name of CAM policy.
      */
     document?: pulumi.Input<string>;
     /**
@@ -175,10 +172,7 @@ export interface PolicyArgs {
      */
     description?: pulumi.Input<string>;
     /**
-     * Document of the CAM policy. The syntax refers to [CAM
-     * POLICY](https://intl.cloud.tencent.com/document/product/598/10604). There are some notes when using this para in
-     * terraform: 1. The elements in JSON claimed supporting two types as `string` and `array` only support type `array`; 2.
-     * Terraform does not support the `root` syntax, when it appears, it must be replaced with the uin it stands for.
+     * Document of the CAM policy. The syntax refers to CAM POLICY Name of CAM policy.
      */
     document: pulumi.Input<string>;
     /**

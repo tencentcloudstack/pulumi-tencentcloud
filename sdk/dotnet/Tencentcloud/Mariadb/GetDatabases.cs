@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// <summary>
         /// Use this data source to query detailed information of mariadb databases
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var databases = Tencentcloud.Mariadb.GetDatabases.Invoke(new()
         ///     {
-        ///         var databases = Output.Create(Tencentcloud.Mariadb.GetDatabases.InvokeAsync(new Tencentcloud.Mariadb.GetDatabasesArgs
-        ///         {
-        ///             InstanceId = "tdsql-e9tklsgz",
-        ///         }));
-        ///     }
+        ///         InstanceId = "tdsql-e9tklsgz",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDatabasesResult> InvokeAsync(GetDatabasesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDatabasesResult>("tencentcloud:Mariadb/getDatabases:getDatabases", args ?? new GetDatabasesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDatabasesResult>("tencentcloud:Mariadb/getDatabases:getDatabases", args ?? new GetDatabasesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mariadb databases
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var databases = Tencentcloud.Mariadb.GetDatabases.Invoke(new()
         ///     {
-        ///         var databases = Output.Create(Tencentcloud.Mariadb.GetDatabases.InvokeAsync(new Tencentcloud.Mariadb.GetDatabasesArgs
-        ///         {
-        ///             InstanceId = "tdsql-e9tklsgz",
-        ///         }));
-        ///     }
+        ///         InstanceId = "tdsql-e9tklsgz",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDatabasesResult> Invoke(GetDatabasesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDatabasesResult>("tencentcloud:Mariadb/getDatabases:getDatabases", args ?? new GetDatabasesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDatabasesResult>("tencentcloud:Mariadb/getDatabases:getDatabases", args ?? new GetDatabasesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDatabasesArgs : Pulumi.InvokeArgs
+    public sealed class GetDatabasesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetDatabasesArgs()
         {
         }
+        public static new GetDatabasesArgs Empty => new GetDatabasesArgs();
     }
 
-    public sealed class GetDatabasesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDatabasesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// instance id.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetDatabasesInvokeArgs()
         {
         }
+        public static new GetDatabasesInvokeArgs Empty => new GetDatabasesInvokeArgs();
     }
 
 

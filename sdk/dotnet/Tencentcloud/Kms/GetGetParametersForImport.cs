@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// <summary>
         /// Use this data source to query detailed information of kms get_parameters_for_import
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Kms.GetGetParametersForImport.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Kms.GetGetParametersForImport.InvokeAsync(new Tencentcloud.Kms.GetGetParametersForImportArgs
-        ///         {
-        ///             KeyId = "786aea8c-4aec-11ee-b601-525400281a45",
-        ///             WrappingAlgorithm = "RSAES_OAEP_SHA_1",
-        ///             WrappingKeySpec = "RSA_2048",
-        ///         }));
-        ///     }
+        ///         KeyId = "786aea8c-4aec-11ee-b601-525400281a45",
+        ///         WrappingAlgorithm = "RSAES_OAEP_SHA_1",
+        ///         WrappingKeySpec = "RSA_2048",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGetParametersForImportResult> InvokeAsync(GetGetParametersForImportArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGetParametersForImportResult>("tencentcloud:Kms/getGetParametersForImport:getGetParametersForImport", args ?? new GetGetParametersForImportArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGetParametersForImportResult>("tencentcloud:Kms/getGetParametersForImport:getGetParametersForImport", args ?? new GetGetParametersForImportArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of kms get_parameters_for_import
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Kms.GetGetParametersForImport.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Kms.GetGetParametersForImport.InvokeAsync(new Tencentcloud.Kms.GetGetParametersForImportArgs
-        ///         {
-        ///             KeyId = "786aea8c-4aec-11ee-b601-525400281a45",
-        ///             WrappingAlgorithm = "RSAES_OAEP_SHA_1",
-        ///             WrappingKeySpec = "RSA_2048",
-        ///         }));
-        ///     }
+        ///         KeyId = "786aea8c-4aec-11ee-b601-525400281a45",
+        ///         WrappingAlgorithm = "RSAES_OAEP_SHA_1",
+        ///         WrappingKeySpec = "RSA_2048",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGetParametersForImportResult> Invoke(GetGetParametersForImportInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGetParametersForImportResult>("tencentcloud:Kms/getGetParametersForImport:getGetParametersForImport", args ?? new GetGetParametersForImportInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGetParametersForImportResult>("tencentcloud:Kms/getGetParametersForImport:getGetParametersForImport", args ?? new GetGetParametersForImportInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGetParametersForImportArgs : Pulumi.InvokeArgs
+    public sealed class GetGetParametersForImportArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// CMK unique identifier.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public GetGetParametersForImportArgs()
         {
         }
+        public static new GetGetParametersForImportArgs Empty => new GetGetParametersForImportArgs();
     }
 
-    public sealed class GetGetParametersForImportInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGetParametersForImportInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// CMK unique identifier.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public GetGetParametersForImportInvokeArgs()
         {
         }
+        public static new GetGetParametersForImportInvokeArgs Empty => new GetGetParametersForImportInvokeArgs();
     }
 
 

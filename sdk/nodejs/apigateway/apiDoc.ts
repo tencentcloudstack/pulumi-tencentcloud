@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const myApiDoc = new tencentcloud.ApiGateway.ApiDoc("my_api_doc", {
+ * const myApiDoc = new tencentcloud.apigateway.ApiDoc("myApiDoc", {
  *     apiDocName: "doc_test1",
  *     apiIds: [
  *         "api-test1",
@@ -23,6 +24,7 @@ import * as utilities from "../utilities";
  *     serviceId: "service_test1",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ApiDoc extends pulumi.CustomResource {
     /**

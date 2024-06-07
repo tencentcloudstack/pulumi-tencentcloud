@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateVirtualPrivateCloudArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateVirtualPrivateCloudArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Is it used as a Public network gateway, TRUE or FALSE.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateVirtualPrivateCloudArgs()
         {
         }
+        public static new LaunchTemplateVirtualPrivateCloudArgs Empty => new LaunchTemplateVirtualPrivateCloudArgs();
     }
 }

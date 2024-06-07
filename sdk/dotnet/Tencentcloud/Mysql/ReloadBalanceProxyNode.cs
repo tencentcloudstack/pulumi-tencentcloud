@@ -15,101 +15,108 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "cdb",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "mysql test",
-    ///         });
-    ///         var exampleInstance = new Tencentcloud.Mysql.Instance("exampleInstance", new Tencentcloud.Mysql.InstanceArgs
-    ///         {
-    ///             InternetService = 1,
-    ///             EngineVersion = "5.7",
-    ///             ChargeType = "POSTPAID",
-    ///             RootPassword = "PassWord123",
-    ///             SlaveDeployMode = 1,
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///             FirstSlaveZone = zones.Apply(zones =&gt; zones.Zones?[1]?.Name),
-    ///             SlaveSyncMode = 1,
-    ///             InstanceName = "tf-example-mysql",
-    ///             MemSize = 4000,
-    ///             VolumeSize = 200,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             IntranetPort = 3306,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 securityGroup.Id,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "name", "test" },
-    ///             },
-    ///             Parameters = 
-    ///             {
-    ///                 { "character_set_server", "utf8" },
-    ///                 { "max_connections", "1000" },
-    ///             },
-    ///         });
-    ///         var exampleProxy = new Tencentcloud.Mysql.Proxy("exampleProxy", new Tencentcloud.Mysql.ProxyArgs
-    ///         {
-    ///             InstanceId = exampleInstance.Id,
-    ///             UniqVpcId = vpc.Id,
-    ///             UniqSubnetId = subnet.Id,
-    ///             ProxyNodeCustoms = 
-    ///             {
-    ///                 new Tencentcloud.Mysql.Inputs.ProxyProxyNodeCustomArgs
-    ///                 {
-    ///                     NodeCount = 1,
-    ///                     Cpu = 2,
-    ///                     Mem = 4000,
-    ///                     Region = "ap-guangzhou",
-    ///                     Zone = "ap-guangzhou-3",
-    ///                 },
-    ///             },
-    ///             SecurityGroups = 
-    ///             {
-    ///                 securityGroup.Id,
-    ///             },
-    ///             Desc = "desc.",
-    ///             ConnectionPoolLimit = 2,
-    ///             Vip = "10.0.0.120",
-    ///             Vport = 3306,
-    ///         });
-    ///         var exampleReloadBalanceProxyNode = new Tencentcloud.Mysql.ReloadBalanceProxyNode("exampleReloadBalanceProxyNode", new Tencentcloud.Mysql.ReloadBalanceProxyNodeArgs
-    ///         {
-    ///             ProxyGroupId = exampleProxy.ProxyGroupId,
-    ///             ProxyAddressId = exampleProxy.ProxyAddressId,
-    ///         });
-    ///     }
+    ///         Product = "cdb",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    ///     {
+    ///         Description = "mysql test",
+    ///     });
+    /// 
+    ///     var exampleInstance = new Tencentcloud.Mysql.Instance("exampleInstance", new()
+    ///     {
+    ///         InternetService = 1,
+    ///         EngineVersion = "5.7",
+    ///         ChargeType = "POSTPAID",
+    ///         RootPassword = "PassWord123",
+    ///         SlaveDeployMode = 1,
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         FirstSlaveZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[1]?.Name),
+    ///         SlaveSyncMode = 1,
+    ///         InstanceName = "tf-example-mysql",
+    ///         MemSize = 4000,
+    ///         VolumeSize = 200,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         IntranetPort = 3306,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             securityGroup.Id,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "name", "test" },
+    ///         },
+    ///         Parameters = 
+    ///         {
+    ///             { "character_set_server", "utf8" },
+    ///             { "max_connections", "1000" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleProxy = new Tencentcloud.Mysql.Proxy("exampleProxy", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///         UniqVpcId = vpc.Id,
+    ///         UniqSubnetId = subnet.Id,
+    ///         ProxyNodeCustoms = new[]
+    ///         {
+    ///             new Tencentcloud.Mysql.Inputs.ProxyProxyNodeCustomArgs
+    ///             {
+    ///                 NodeCount = 1,
+    ///                 Cpu = 2,
+    ///                 Mem = 4000,
+    ///                 Region = "ap-guangzhou",
+    ///                 Zone = "ap-guangzhou-3",
+    ///             },
+    ///         },
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             securityGroup.Id,
+    ///         },
+    ///         Desc = "desc.",
+    ///         ConnectionPoolLimit = 2,
+    ///         Vip = "10.0.0.120",
+    ///         Vport = 3306,
+    ///     });
+    /// 
+    ///     var exampleReloadBalanceProxyNode = new Tencentcloud.Mysql.ReloadBalanceProxyNode("exampleReloadBalanceProxyNode", new()
+    ///     {
+    ///         ProxyGroupId = exampleProxy.ProxyGroupId,
+    ///         ProxyAddressId = exampleProxy.ProxyAddressId,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/reloadBalanceProxyNode:ReloadBalanceProxyNode")]
-    public partial class ReloadBalanceProxyNode : Pulumi.CustomResource
+    public partial class ReloadBalanceProxyNode : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Proxy address id.
@@ -168,7 +175,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         }
     }
 
-    public sealed class ReloadBalanceProxyNodeArgs : Pulumi.ResourceArgs
+    public sealed class ReloadBalanceProxyNodeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Proxy address id.
@@ -185,9 +192,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public ReloadBalanceProxyNodeArgs()
         {
         }
+        public static new ReloadBalanceProxyNodeArgs Empty => new ReloadBalanceProxyNodeArgs();
     }
 
-    public sealed class ReloadBalanceProxyNodeState : Pulumi.ResourceArgs
+    public sealed class ReloadBalanceProxyNodeState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Proxy address id.
@@ -204,5 +212,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public ReloadBalanceProxyNodeState()
         {
         }
+        public static new ReloadBalanceProxyNodeState Empty => new ReloadBalanceProxyNodeState();
     }
 }

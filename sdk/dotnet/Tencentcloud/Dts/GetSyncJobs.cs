@@ -15,106 +15,102 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         /// <summary>
         /// Use this data source to query detailed information of dts syncJobs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var job = new Tencentcloud.Dts.SyncJob("job", new()
         ///     {
-        ///         var job = new Tencentcloud.Dts.SyncJob("job", new Tencentcloud.Dts.SyncJobArgs
+        ///         JobName = "tf_dts_test",
+        ///         PayMode = "PostPay",
+        ///         SrcDatabaseType = "mysql",
+        ///         SrcRegion = "ap-guangzhou",
+        ///         DstDatabaseType = "cynosdbmysql",
+        ///         DstRegion = "ap-guangzhou",
+        ///         Tags = new[]
         ///         {
-        ///             JobName = "tf_dts_test",
-        ///             PayMode = "PostPay",
-        ///             SrcDatabaseType = "mysql",
-        ///             SrcRegion = "ap-guangzhou",
-        ///             DstDatabaseType = "cynosdbmysql",
-        ///             DstRegion = "ap-guangzhou",
-        ///             Tags = 
+        ///             new Tencentcloud.Dts.Inputs.SyncJobTagArgs
         ///             {
-        ///                 new Tencentcloud.Dts.Inputs.SyncJobTagArgs
-        ///                 {
-        ///                     TagKey = "aaa",
-        ///                     TagValue = "bbb",
-        ///                 },
+        ///                 TagKey = "aaa",
+        ///                 TagValue = "bbb",
         ///             },
-        ///             AutoRenew = 0,
-        ///             InstanceClass = "micro",
-        ///         });
-        ///         var syncJobs = Tencentcloud.Dts.GetSyncJobs.Invoke(new Tencentcloud.Dts.GetSyncJobsInvokeArgs
-        ///         {
-        ///             JobId = job.Id,
-        ///             JobName = "tf_dts_test",
-        ///         });
-        ///     }
+        ///         },
+        ///         AutoRenew = 0,
+        ///         InstanceClass = "micro",
+        ///     });
         /// 
-        /// }
+        ///     var syncJobs = Tencentcloud.Dts.GetSyncJobs.Invoke(new()
+        ///     {
+        ///         JobId = job.Id,
+        ///         JobName = "tf_dts_test",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSyncJobsResult> InvokeAsync(GetSyncJobsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSyncJobsResult>("tencentcloud:Dts/getSyncJobs:getSyncJobs", args ?? new GetSyncJobsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSyncJobsResult>("tencentcloud:Dts/getSyncJobs:getSyncJobs", args ?? new GetSyncJobsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dts syncJobs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var job = new Tencentcloud.Dts.SyncJob("job", new()
         ///     {
-        ///         var job = new Tencentcloud.Dts.SyncJob("job", new Tencentcloud.Dts.SyncJobArgs
+        ///         JobName = "tf_dts_test",
+        ///         PayMode = "PostPay",
+        ///         SrcDatabaseType = "mysql",
+        ///         SrcRegion = "ap-guangzhou",
+        ///         DstDatabaseType = "cynosdbmysql",
+        ///         DstRegion = "ap-guangzhou",
+        ///         Tags = new[]
         ///         {
-        ///             JobName = "tf_dts_test",
-        ///             PayMode = "PostPay",
-        ///             SrcDatabaseType = "mysql",
-        ///             SrcRegion = "ap-guangzhou",
-        ///             DstDatabaseType = "cynosdbmysql",
-        ///             DstRegion = "ap-guangzhou",
-        ///             Tags = 
+        ///             new Tencentcloud.Dts.Inputs.SyncJobTagArgs
         ///             {
-        ///                 new Tencentcloud.Dts.Inputs.SyncJobTagArgs
-        ///                 {
-        ///                     TagKey = "aaa",
-        ///                     TagValue = "bbb",
-        ///                 },
+        ///                 TagKey = "aaa",
+        ///                 TagValue = "bbb",
         ///             },
-        ///             AutoRenew = 0,
-        ///             InstanceClass = "micro",
-        ///         });
-        ///         var syncJobs = Tencentcloud.Dts.GetSyncJobs.Invoke(new Tencentcloud.Dts.GetSyncJobsInvokeArgs
-        ///         {
-        ///             JobId = job.Id,
-        ///             JobName = "tf_dts_test",
-        ///         });
-        ///     }
+        ///         },
+        ///         AutoRenew = 0,
+        ///         InstanceClass = "micro",
+        ///     });
         /// 
-        /// }
+        ///     var syncJobs = Tencentcloud.Dts.GetSyncJobs.Invoke(new()
+        ///     {
+        ///         JobId = job.Id,
+        ///         JobName = "tf_dts_test",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSyncJobsResult> Invoke(GetSyncJobsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSyncJobsResult>("tencentcloud:Dts/getSyncJobs:getSyncJobs", args ?? new GetSyncJobsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSyncJobsResult>("tencentcloud:Dts/getSyncJobs:getSyncJobs", args ?? new GetSyncJobsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSyncJobsArgs : Pulumi.InvokeArgs
+    public sealed class GetSyncJobsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// job id.
@@ -191,9 +187,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public GetSyncJobsArgs()
         {
         }
+        public static new GetSyncJobsArgs Empty => new GetSyncJobsArgs();
     }
 
-    public sealed class GetSyncJobsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSyncJobsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// job id.
@@ -270,6 +267,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
         public GetSyncJobsInvokeArgs()
         {
         }
+        public static new GetSyncJobsInvokeArgs Empty => new GetSyncJobsInvokeArgs();
     }
 
 

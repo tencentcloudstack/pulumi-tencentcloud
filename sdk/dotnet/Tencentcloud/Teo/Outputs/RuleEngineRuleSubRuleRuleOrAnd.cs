@@ -15,23 +15,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class RuleEngineRuleSubRuleRuleOrAnd
     {
         /// <summary>
-        /// Whether to ignore the case of the parameter value, the default value is false.
+        /// Whether the parameter value is case insensitive. Default value: false.
         /// </summary>
         public readonly bool? IgnoreCase;
         /// <summary>
-        /// The parameter name corresponding to the matching type is valid when the Target value is the following, and the valid value cannot be empty:- `query_string` (query string): The parameter name of the query string in the URL request under the current site, such as lang and version in lang=cn&amp;version=1; `request_header` (HTTP request header): HTTP request header field name, such as Accept-Language in Accept-Language:zh-CN,zh;q=0.9.
+        /// The parameter name of the match type. This field is required only when `Target=query_string/request_header`.
         /// </summary>
         public readonly string? Name;
         /// <summary>
-        /// Condition operator. Valid values are `equal`, `notequal`.
+        /// Operator. Valid values:
         /// </summary>
         public readonly string Operator;
         /// <summary>
-        /// Condition target. Valid values:- `host`: Host of the URL.- `filename`: filename of the URL.- `extension`: file extension of the URL.- `full_url`: full url.- `url`: path of the URL.
+        /// The match type. Values:
         /// </summary>
         public readonly string Target;
         /// <summary>
-        /// Condition Value.
+        /// The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
+        /// - When `Target=extension`, enter the file extension, such as "jpg" and "txt".
+        /// - When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".
+        /// - When `Target=all`, it indicates any site request.
+        /// - When `Target=host`, enter the host under the current site, such as "www.maxx55.com".
+        /// - When `Target=url`, enter the partial URL path under the current site, such as "/example".
+        /// - When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".
+        /// - When `Target=client_country`, enter the ISO-3166 country/region code.
+        /// - When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&amp;version=1".
+        /// - When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.
         /// </summary>
         public readonly ImmutableArray<string> Values;
 

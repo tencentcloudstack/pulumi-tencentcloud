@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// <summary>
         /// Use this data source to query detailed information of dc public_direct_connect_tunnel_routes
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var publicDirectConnectTunnelRoutes = Tencentcloud.Dc.GetPublicDirectConnectTunnelRoutes.Invoke(new()
         ///     {
-        ///         var publicDirectConnectTunnelRoutes = Output.Create(Tencentcloud.Dc.GetPublicDirectConnectTunnelRoutes.InvokeAsync(new Tencentcloud.Dc.GetPublicDirectConnectTunnelRoutesArgs
-        ///         {
-        ///             DirectConnectTunnelId = "dcx-4z49tnws",
-        ///         }));
-        ///     }
+        ///         DirectConnectTunnelId = "dcx-4z49tnws",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetPublicDirectConnectTunnelRoutesResult> InvokeAsync(GetPublicDirectConnectTunnelRoutesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetPublicDirectConnectTunnelRoutesResult>("tencentcloud:Dc/getPublicDirectConnectTunnelRoutes:getPublicDirectConnectTunnelRoutes", args ?? new GetPublicDirectConnectTunnelRoutesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetPublicDirectConnectTunnelRoutesResult>("tencentcloud:Dc/getPublicDirectConnectTunnelRoutes:getPublicDirectConnectTunnelRoutes", args ?? new GetPublicDirectConnectTunnelRoutesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dc public_direct_connect_tunnel_routes
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var publicDirectConnectTunnelRoutes = Tencentcloud.Dc.GetPublicDirectConnectTunnelRoutes.Invoke(new()
         ///     {
-        ///         var publicDirectConnectTunnelRoutes = Output.Create(Tencentcloud.Dc.GetPublicDirectConnectTunnelRoutes.InvokeAsync(new Tencentcloud.Dc.GetPublicDirectConnectTunnelRoutesArgs
-        ///         {
-        ///             DirectConnectTunnelId = "dcx-4z49tnws",
-        ///         }));
-        ///     }
+        ///         DirectConnectTunnelId = "dcx-4z49tnws",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetPublicDirectConnectTunnelRoutesResult> Invoke(GetPublicDirectConnectTunnelRoutesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetPublicDirectConnectTunnelRoutesResult>("tencentcloud:Dc/getPublicDirectConnectTunnelRoutes:getPublicDirectConnectTunnelRoutes", args ?? new GetPublicDirectConnectTunnelRoutesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetPublicDirectConnectTunnelRoutesResult>("tencentcloud:Dc/getPublicDirectConnectTunnelRoutes:getPublicDirectConnectTunnelRoutes", args ?? new GetPublicDirectConnectTunnelRoutesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetPublicDirectConnectTunnelRoutesArgs : Pulumi.InvokeArgs
+    public sealed class GetPublicDirectConnectTunnelRoutesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// direct connect tunnel id.
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GetPublicDirectConnectTunnelRoutesArgs()
         {
         }
+        public static new GetPublicDirectConnectTunnelRoutesArgs Empty => new GetPublicDirectConnectTunnelRoutesArgs();
     }
 
-    public sealed class GetPublicDirectConnectTunnelRoutesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetPublicDirectConnectTunnelRoutesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// direct connect tunnel id.
@@ -132,6 +127,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GetPublicDirectConnectTunnelRoutesInvokeArgs()
         {
         }
+        public static new GetPublicDirectConnectTunnelRoutesInvokeArgs Empty => new GetPublicDirectConnectTunnelRoutesInvokeArgs();
     }
 
 

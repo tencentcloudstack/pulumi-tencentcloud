@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw.Inputs
 {
 
-    public sealed class VpcInstanceVpcFwInstanceFwDeployArgs : Pulumi.ResourceArgs
+    public sealed class VpcInstanceVpcFwInstanceFwDeployArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Off-site disaster recovery 1: use off-site disaster recovery; 0: do not use off-site disaster recovery; if it is empty, off-site disaster recovery will not be used by default.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw.Inputs
         public VpcInstanceVpcFwInstanceFwDeployArgs()
         {
         }
+        public static new VpcInstanceVpcFwInstanceFwDeployArgs Empty => new VpcInstanceVpcFwInstanceFwDeployArgs();
     }
 }

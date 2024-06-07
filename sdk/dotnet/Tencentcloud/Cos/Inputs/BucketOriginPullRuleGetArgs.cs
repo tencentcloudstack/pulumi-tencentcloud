@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketOriginPullRuleGetArgs : Pulumi.ResourceArgs
+    public sealed class BucketOriginPullRuleGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("customHttpHeaders")]
         private InputMap<object>? _customHttpHeaders;
@@ -82,5 +82,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketOriginPullRuleGetArgs()
         {
         }
+        public static new BucketOriginPullRuleGetArgs Empty => new BucketOriginPullRuleGetArgs();
     }
 }

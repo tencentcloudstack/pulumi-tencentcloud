@@ -7,41 +7,47 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dasb cmdTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewCmdTemplate(ctx, "example", &Dasb.CmdTemplateArgs{
-// 			CmdList: pulumi.String("rm -rf*"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewCmdTemplate(ctx, "example", &Dasb.CmdTemplateArgs{
+//				CmdList: pulumi.String("rm -rf*"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dasb cmd_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dasb/cmdTemplate:CmdTemplate example 15
+// $ pulumi import tencentcloud:Dasb/cmdTemplate:CmdTemplate example 15
 // ```
 type CmdTemplate struct {
 	pulumi.CustomResourceState
@@ -62,7 +68,7 @@ func NewCmdTemplate(ctx *pulumi.Context,
 	if args.CmdList == nil {
 		return nil, errors.New("invalid value for required argument 'CmdList'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CmdTemplate
 	err := ctx.RegisterResource("tencentcloud:Dasb/cmdTemplate:CmdTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -143,7 +149,7 @@ func (i *CmdTemplate) ToCmdTemplateOutputWithContext(ctx context.Context) CmdTem
 // CmdTemplateArrayInput is an input type that accepts CmdTemplateArray and CmdTemplateArrayOutput values.
 // You can construct a concrete instance of `CmdTemplateArrayInput` via:
 //
-//          CmdTemplateArray{ CmdTemplateArgs{...} }
+//	CmdTemplateArray{ CmdTemplateArgs{...} }
 type CmdTemplateArrayInput interface {
 	pulumi.Input
 
@@ -168,7 +174,7 @@ func (i CmdTemplateArray) ToCmdTemplateArrayOutputWithContext(ctx context.Contex
 // CmdTemplateMapInput is an input type that accepts CmdTemplateMap and CmdTemplateMapOutput values.
 // You can construct a concrete instance of `CmdTemplateMapInput` via:
 //
-//          CmdTemplateMap{ "key": CmdTemplateArgs{...} }
+//	CmdTemplateMap{ "key": CmdTemplateArgs{...} }
 type CmdTemplateMapInput interface {
 	pulumi.Input
 

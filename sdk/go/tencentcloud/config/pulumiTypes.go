@@ -8,19 +8,26 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
+var _ = internal.GetEnvOrDefault
+
 type AssumeRole struct {
-	Policy          *string `pulumi:"policy"`
-	RoleArn         string  `pulumi:"roleArn"`
-	SessionDuration int     `pulumi:"sessionDuration"`
-	SessionName     string  `pulumi:"sessionName"`
+	// A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
+	Policy *string `pulumi:"policy"`
+	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+	RoleArn string `pulumi:"roleArn"`
+	// The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+	SessionDuration int `pulumi:"sessionDuration"`
+	// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+	SessionName string `pulumi:"sessionName"`
 }
 
 // AssumeRoleInput is an input type that accepts AssumeRoleArgs and AssumeRoleOutput values.
 // You can construct a concrete instance of `AssumeRoleInput` via:
 //
-//          AssumeRoleArgs{...}
+//	AssumeRoleArgs{...}
 type AssumeRoleInput interface {
 	pulumi.Input
 
@@ -29,10 +36,14 @@ type AssumeRoleInput interface {
 }
 
 type AssumeRoleArgs struct {
-	Policy          pulumi.StringPtrInput `pulumi:"policy"`
-	RoleArn         pulumi.StringInput    `pulumi:"roleArn"`
-	SessionDuration pulumi.IntInput       `pulumi:"sessionDuration"`
-	SessionName     pulumi.StringInput    `pulumi:"sessionName"`
+	// A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
+	Policy pulumi.StringPtrInput `pulumi:"policy"`
+	// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+	RoleArn pulumi.StringInput `pulumi:"roleArn"`
+	// The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+	SessionDuration pulumi.IntInput `pulumi:"sessionDuration"`
+	// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+	SessionName pulumi.StringInput `pulumi:"sessionName"`
 }
 
 func (AssumeRoleArgs) ElementType() reflect.Type {
@@ -61,18 +72,22 @@ func (o AssumeRoleOutput) ToAssumeRoleOutputWithContext(ctx context.Context) Ass
 	return o
 }
 
+// A more restrictive policy when making the AssumeRole call. Its content must not contains `principal` elements. Notice: more syntax references, please refer to: [policies syntax logic](https://intl.cloud.tencent.com/document/product/598/10603).
 func (o AssumeRoleOutput) Policy() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v AssumeRole) *string { return v.Policy }).(pulumi.StringPtrOutput)
 }
 
+// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
 func (o AssumeRoleOutput) RoleArn() pulumi.StringOutput {
 	return o.ApplyT(func(v AssumeRole) string { return v.RoleArn }).(pulumi.StringOutput)
 }
 
+// The duration of the session when making the AssumeRole call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
 func (o AssumeRoleOutput) SessionDuration() pulumi.IntOutput {
 	return o.ApplyT(func(v AssumeRole) int { return v.SessionDuration }).(pulumi.IntOutput)
 }
 
+// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
 func (o AssumeRoleOutput) SessionName() pulumi.StringOutput {
 	return o.ApplyT(func(v AssumeRole) string { return v.SessionName }).(pulumi.StringOutput)
 }

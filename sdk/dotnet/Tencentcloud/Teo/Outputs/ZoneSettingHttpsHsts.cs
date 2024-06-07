@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string? Preload;
         /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
+        /// `on`: Enable.
         /// </summary>
         public readonly string Switch;
 

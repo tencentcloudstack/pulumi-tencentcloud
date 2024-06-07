@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const attachment = new tencentcloud.Tag.Attachment("attachment", {
+ * const attachment = new tencentcloud.tag.Attachment("attachment", {
  *     resource: "qcs::cvm:ap-guangzhou:uin/100020512675:instance/ins-kfrlvcp4",
  *     tagKey: "test3",
  *     tagValue: "Terraform3",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tag attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tag/attachment:Attachment attachment attachment_id
+ * $ pulumi import tencentcloud:Tag/attachment:Attachment attachment attachment_id
  * ```
  */
 export class Attachment extends pulumi.CustomResource {

@@ -7,49 +7,54 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ci mediaSmartCoverTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewMediaSmartCoverTemplate(ctx, "mediaSmartCoverTemplate", &Ci.MediaSmartCoverTemplateArgs{
-// 			Bucket: pulumi.String("terraform-ci-xxxxxx"),
-// 			SmartCover: &ci.MediaSmartCoverTemplateSmartCoverArgs{
-// 				Count:            pulumi.String("10"),
-// 				DeleteDuplicates: pulumi.String("true"),
-// 				Format:           pulumi.String("jpg"),
-// 				Height:           pulumi.String("960"),
-// 				Width:            pulumi.String("1280"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewMediaSmartCoverTemplate(ctx, "mediaSmartCoverTemplate", &Ci.MediaSmartCoverTemplateArgs{
+//				Bucket: pulumi.String("terraform-ci-xxxxxx"),
+//				SmartCover: &ci.MediaSmartCoverTemplateSmartCoverArgs{
+//					Count:            pulumi.String("10"),
+//					DeleteDuplicates: pulumi.String("true"),
+//					Format:           pulumi.String("jpg"),
+//					Height:           pulumi.String("960"),
+//					Width:            pulumi.String("1280"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ci media_smart_cover_template can be imported using the bucket#templateId, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/mediaSmartCoverTemplate:MediaSmartCoverTemplate media_smart_cover_template terraform-ci-xxxxxx#t1ede83acc305e423799d638044d859fb7
+// $ pulumi import tencentcloud:Ci/mediaSmartCoverTemplate:MediaSmartCoverTemplate media_smart_cover_template terraform-ci-xxxxxx#t1ede83acc305e423799d638044d859fb7
 // ```
 type MediaSmartCoverTemplate struct {
 	pulumi.CustomResourceState
@@ -75,7 +80,7 @@ func NewMediaSmartCoverTemplate(ctx *pulumi.Context,
 	if args.SmartCover == nil {
 		return nil, errors.New("invalid value for required argument 'SmartCover'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MediaSmartCoverTemplate
 	err := ctx.RegisterResource("tencentcloud:Ci/mediaSmartCoverTemplate:MediaSmartCoverTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -164,7 +169,7 @@ func (i *MediaSmartCoverTemplate) ToMediaSmartCoverTemplateOutputWithContext(ctx
 // MediaSmartCoverTemplateArrayInput is an input type that accepts MediaSmartCoverTemplateArray and MediaSmartCoverTemplateArrayOutput values.
 // You can construct a concrete instance of `MediaSmartCoverTemplateArrayInput` via:
 //
-//          MediaSmartCoverTemplateArray{ MediaSmartCoverTemplateArgs{...} }
+//	MediaSmartCoverTemplateArray{ MediaSmartCoverTemplateArgs{...} }
 type MediaSmartCoverTemplateArrayInput interface {
 	pulumi.Input
 
@@ -189,7 +194,7 @@ func (i MediaSmartCoverTemplateArray) ToMediaSmartCoverTemplateArrayOutputWithCo
 // MediaSmartCoverTemplateMapInput is an input type that accepts MediaSmartCoverTemplateMap and MediaSmartCoverTemplateMapOutput values.
 // You can construct a concrete instance of `MediaSmartCoverTemplateMapInput` via:
 //
-//          MediaSmartCoverTemplateMap{ "key": MediaSmartCoverTemplateArgs{...} }
+//	MediaSmartCoverTemplateMap{ "key": MediaSmartCoverTemplateArgs{...} }
 type MediaSmartCoverTemplateMapInput interface {
 	pulumi.Input
 

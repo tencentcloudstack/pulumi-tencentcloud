@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// <summary>
         /// Use this data source to query detailed information of cynosdb rollback_time_range
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var rollbackTimeRange = Tencentcloud.Cynosdb.GetRollbackTimeRange.Invoke(new()
         ///     {
-        ///         var rollbackTimeRange = Output.Create(Tencentcloud.Cynosdb.GetRollbackTimeRange.InvokeAsync(new Tencentcloud.Cynosdb.GetRollbackTimeRangeArgs
-        ///         {
-        ///             ClusterId = "cynosdbmysql-bws8h88b",
-        ///         }));
-        ///     }
+        ///         ClusterId = "cynosdbmysql-bws8h88b",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRollbackTimeRangeResult> InvokeAsync(GetRollbackTimeRangeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRollbackTimeRangeResult>("tencentcloud:Cynosdb/getRollbackTimeRange:getRollbackTimeRange", args ?? new GetRollbackTimeRangeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRollbackTimeRangeResult>("tencentcloud:Cynosdb/getRollbackTimeRange:getRollbackTimeRange", args ?? new GetRollbackTimeRangeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cynosdb rollback_time_range
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var rollbackTimeRange = Tencentcloud.Cynosdb.GetRollbackTimeRange.Invoke(new()
         ///     {
-        ///         var rollbackTimeRange = Output.Create(Tencentcloud.Cynosdb.GetRollbackTimeRange.InvokeAsync(new Tencentcloud.Cynosdb.GetRollbackTimeRangeArgs
-        ///         {
-        ///             ClusterId = "cynosdbmysql-bws8h88b",
-        ///         }));
-        ///     }
+        ///         ClusterId = "cynosdbmysql-bws8h88b",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRollbackTimeRangeResult> Invoke(GetRollbackTimeRangeInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRollbackTimeRangeResult>("tencentcloud:Cynosdb/getRollbackTimeRange:getRollbackTimeRange", args ?? new GetRollbackTimeRangeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRollbackTimeRangeResult>("tencentcloud:Cynosdb/getRollbackTimeRange:getRollbackTimeRange", args ?? new GetRollbackTimeRangeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRollbackTimeRangeArgs : Pulumi.InvokeArgs
+    public sealed class GetRollbackTimeRangeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetRollbackTimeRangeArgs()
         {
         }
+        public static new GetRollbackTimeRangeArgs Empty => new GetRollbackTimeRangeArgs();
     }
 
-    public sealed class GetRollbackTimeRangeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRollbackTimeRangeInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetRollbackTimeRangeInvokeArgs()
         {
         }
+        public static new GetRollbackTimeRangeInvokeArgs Empty => new GetRollbackTimeRangeInvokeArgs();
     }
 
 

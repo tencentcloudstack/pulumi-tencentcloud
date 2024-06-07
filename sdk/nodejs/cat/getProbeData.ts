@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const probeData = pulumi.output(tencentcloud.Cat.getProbeData({
+ * const probeData = tencentcloud.Cat.getProbeData({
  *     ascending: true,
  *     beginTime: 1667923200000,
  *     endTime: 1667996208428,
@@ -24,15 +26,13 @@ import * as utilities from "../utilities";
  *     sortField: "ProbeTime",
  *     taskIds: ["task-knare1mk"],
  *     taskType: "AnalyzeTaskType_Network",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getProbeData(args: GetProbeDataArgs, opts?: pulumi.InvokeOptions): Promise<GetProbeDataResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cat/getProbeData:getProbeData", {
         "ascending": args.ascending,
         "beginTime": args.beginTime,
@@ -146,9 +146,32 @@ export interface GetProbeDataResult {
     readonly taskIds?: string[];
     readonly taskType: string;
 }
-
+/**
+ * Use this data source to query detailed information of cat probe data
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const probeData = tencentcloud.Cat.getProbeData({
+ *     ascending: true,
+ *     beginTime: 1667923200000,
+ *     endTime: 1667996208428,
+ *     limit: 20,
+ *     offset: 0,
+ *     selectedFields: ["terraform"],
+ *     sortField: "ProbeTime",
+ *     taskIds: ["task-knare1mk"],
+ *     taskType: "AnalyzeTaskType_Network",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getProbeDataOutput(args: GetProbeDataOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProbeDataResult> {
-    return pulumi.output(args).apply(a => getProbeData(a, opts))
+    return pulumi.output(args).apply((a: any) => getProbeData(a, opts))
 }
 
 /**

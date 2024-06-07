@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class AlarmNoticeUserNoticeArgs : Pulumi.ResourceArgs
+    public sealed class AlarmNoticeUserNoticeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The number of seconds since the notification end time 00:00:00 (value range 0-86399).
@@ -124,5 +124,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public AlarmNoticeUserNoticeArgs()
         {
         }
+        public static new AlarmNoticeUserNoticeArgs Empty => new AlarmNoticeUserNoticeArgs();
     }
 }

@@ -14,122 +14,127 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     /// Provides a resource to create a eb event_target
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create an event target of type scf
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using System.Text.Json;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
-    ///     {
-    ///         var config = new Config();
-    ///         var zone = config.Get("zone") ?? "ap-guangzhou";
-    ///         var namespace = config.Get("namespace") ?? "default";
-    ///         var function = config.Get("function") ?? "keep-1676351130";
-    ///         var functionVersion = config.Get("functionVersion") ?? "$LATEST";
-    ///         var fooUsers = Output.Create(Tencentcloud.Cam.GetUsers.InvokeAsync());
-    ///         var fooEventBus = new Tencentcloud.Eb.EventBus("fooEventBus", new Tencentcloud.Eb.EventBusArgs
-    ///         {
-    ///             EventBusName = "tf-event_bus",
-    ///             Description = "event bus desc",
-    ///             EnableStore = false,
-    ///             SaveDays = 1,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var fooEventRule = new Tencentcloud.Eb.EventRule("fooEventRule", new Tencentcloud.Eb.EventRuleArgs
-    ///         {
-    ///             EventBusId = fooEventBus.Id,
-    ///             RuleName = "tf-event_rule",
-    ///             Description = "event rule desc",
-    ///             Enable = true,
-    ///             EventPattern = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
-    ///             {
-    ///                 { "source", "apigw.cloud.tencent" },
-    ///                 { "type", new[]
-    ///                     {
-    ///                         "connector:apigw",
-    ///                     }
-    ///                  },
-    ///             }),
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var scfTarget = new Tencentcloud.Eb.EventTarget("scfTarget", new Tencentcloud.Eb.EventTargetArgs
-    ///         {
-    ///             EventBusId = fooEventBus.Id,
-    ///             RuleId = fooEventRule.RuleId,
-    ///             Type = "scf",
-    ///             TargetDescription = new Tencentcloud.Eb.Inputs.EventTargetTargetDescriptionArgs
-    ///             {
-    ///                 ResourceDescription = fooUsers.Apply(fooUsers =&gt; $"qcs::scf:{zone}:uin/{fooUsers.UserLists?[0]?.Uin}:namespace/{@namespace}/function/{function}/{functionVersion}"),
-    ///                 ScfParams = new Tencentcloud.Eb.Inputs.EventTargetTargetDescriptionScfParamsArgs
-    ///                 {
-    ///                     BatchEventCount = 1,
-    ///                     BatchTimeout = 1,
-    ///                     EnableBatchDelivery = true,
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///     var config = new Config();
+    ///     var zone = config.Get("zone") ?? "ap-guangzhou";
+    ///     var @namespace = config.Get("namespace") ?? "default";
+    ///     var function = config.Get("function") ?? "keep-1676351130";
+    ///     var functionVersion = config.Get("functionVersion") ?? "$LATEST";
+    ///     var fooUsers = Tencentcloud.Cam.GetUsers.Invoke();
     /// 
-    /// }
+    ///     var fooEventBus = new Tencentcloud.Eb.EventBus("fooEventBus", new()
+    ///     {
+    ///         EventBusName = "tf-event_bus",
+    ///         Description = "event bus desc",
+    ///         EnableStore = false,
+    ///         SaveDays = 1,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var fooEventRule = new Tencentcloud.Eb.EventRule("fooEventRule", new()
+    ///     {
+    ///         EventBusId = fooEventBus.Id,
+    ///         RuleName = "tf-event_rule",
+    ///         Description = "event rule desc",
+    ///         Enable = true,
+    ///         EventPattern = JsonSerializer.Serialize(new Dictionary&lt;string, object?&gt;
+    ///         {
+    ///             ["source"] = "apigw.cloud.tencent",
+    ///             ["type"] = new[]
+    ///             {
+    ///                 "connector:apigw",
+    ///             },
+    ///         }),
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var scfTarget = new Tencentcloud.Eb.EventTarget("scfTarget", new()
+    ///     {
+    ///         EventBusId = fooEventBus.Id,
+    ///         RuleId = fooEventRule.RuleId,
+    ///         Type = "scf",
+    ///         TargetDescription = new Tencentcloud.Eb.Inputs.EventTargetTargetDescriptionArgs
+    ///         {
+    ///             ResourceDescription = $"qcs::scf:{zone}:uin/{fooUsers.Apply(getUsersResult =&gt; getUsersResult.UserLists[0]?.Uin)}:namespace/{@namespace}/function/{function}/{functionVersion}",
+    ///             ScfParams = new Tencentcloud.Eb.Inputs.EventTargetTargetDescriptionScfParamsArgs
+    ///             {
+    ///                 BatchEventCount = 1,
+    ///                 BatchTimeout = 1,
+    ///                 EnableBatchDelivery = true,
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create an event target of type ckafka
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var ckafka = config.Get("ckafka") ?? "ckafka-qzoeaqx8";
+    ///     var ckafkaTarget = new Tencentcloud.Eb.EventTarget("ckafkaTarget", new()
     ///     {
-    ///         var config = new Config();
-    ///         var ckafka = config.Get("ckafka") ?? "ckafka-qzoeaqx8";
-    ///         var ckafkaTarget = new Tencentcloud.Eb.EventTarget("ckafkaTarget", new Tencentcloud.Eb.EventTargetArgs
+    ///         EventBusId = tencentcloud_eb_event_bus.Foo.Id,
+    ///         RuleId = tencentcloud_eb_event_rule.Foo.Rule_id,
+    ///         Type = "ckafka",
+    ///         TargetDescription = new Tencentcloud.Eb.Inputs.EventTargetTargetDescriptionArgs
     ///         {
-    ///             EventBusId = tencentcloud_eb_event_bus.Foo.Id,
-    ///             RuleId = tencentcloud_eb_event_rule.Foo.Rule_id,
-    ///             Type = "ckafka",
-    ///             TargetDescription = new Tencentcloud.Eb.Inputs.EventTargetTargetDescriptionArgs
+    ///             ResourceDescription = $"qcs::scf:{@var.Zone}:uin/{data.Tencentcloud_cam_users.Foo.User_list[0].Uin}:ckafkaId/uin/{data.Tencentcloud_cam_users.Foo.User_list[0].Uin}/{ckafka}",
+    ///             CkafkaTargetParams = new Tencentcloud.Eb.Inputs.EventTargetTargetDescriptionCkafkaTargetParamsArgs
     ///             {
-    ///                 ResourceDescription = $"qcs::scf:{@var.Zone}:uin/{data.Tencentcloud_cam_users.Foo.User_list[0].Uin}:ckafkaId/uin/{data.Tencentcloud_cam_users.Foo.User_list[0].Uin}/{ckafka}",
-    ///                 CkafkaTargetParams = new Tencentcloud.Eb.Inputs.EventTargetTargetDescriptionCkafkaTargetParamsArgs
+    ///                 TopicName = "dasdasd",
+    ///                 RetryPolicy = new Tencentcloud.Eb.Inputs.EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs
     ///                 {
-    ///                     TopicName = "dasdasd",
-    ///                     RetryPolicy = new Tencentcloud.Eb.Inputs.EventTargetTargetDescriptionCkafkaTargetParamsRetryPolicyArgs
-    ///                     {
-    ///                         MaxRetryAttempts = 360,
-    ///                         RetryInterval = 60,
-    ///                     },
+    ///                     MaxRetryAttempts = 360,
+    ///                     RetryInterval = 60,
     ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// eb event_target can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Eb/eventTarget:EventTarget event_target event_target_id
+    /// $ pulumi import tencentcloud:Eb/eventTarget:EventTarget event_target event_target_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eb/eventTarget:EventTarget")]
-    public partial class EventTarget : Pulumi.CustomResource
+    public partial class EventTarget : global::Pulumi.CustomResource
     {
         /// <summary>
         /// event bus id.
@@ -200,7 +205,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         }
     }
 
-    public sealed class EventTargetArgs : Pulumi.ResourceArgs
+    public sealed class EventTargetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// event bus id.
@@ -229,9 +234,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public EventTargetArgs()
         {
         }
+        public static new EventTargetArgs Empty => new EventTargetArgs();
     }
 
-    public sealed class EventTargetState : Pulumi.ResourceArgs
+    public sealed class EventTargetState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// event bus id.
@@ -260,5 +266,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         public EventTargetState()
         {
         }
+        public static new EventTargetState Empty => new EventTargetState();
     }
 }

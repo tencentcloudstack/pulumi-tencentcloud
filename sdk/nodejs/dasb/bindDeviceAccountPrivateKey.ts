@@ -9,16 +9,27 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Dasb.BindDeviceAccountPrivateKey("example", {
- *     deviceAccountId: 16,
+ * const exampleDevice = new tencentcloud.dasb.Device("exampleDevice", {
+ *     osName: "Linux",
+ *     ip: "192.168.0.1",
+ *     port: 80,
+ * });
+ * const exampleDeviceAccount = new tencentcloud.dasb.DeviceAccount("exampleDeviceAccount", {
+ *     deviceId: exampleDevice.id,
+ *     account: "root",
+ * });
+ * const exampleBindDeviceAccountPrivateKey = new tencentcloud.dasb.BindDeviceAccountPrivateKey("exampleBindDeviceAccountPrivateKey", {
+ *     deviceAccountId: exampleDeviceAccount.id,
  *     privateKey: "MIICXAIBAAKBgQCqGKukO1De7zhZj6+H0qtjTkVxwTCpvKe4eCZ0FPqri0cb2JZfXJ/DgYSF6vUpwmJG8wVQZKjeGcjDOL5UlsuusFncCzWBQ7RKNUSesmQRMSGkVb1/3j+skZ6UtW+5u09lHNsj6tQ51s1SPrCBkedbNf0Tp0GbMJDyR4e9T04ZZwIDAQABAoGAFijko56+qGyN8M0RVyaRAXz++xTqHBLh",
  *     privateKeyPassword: "TerraformPassword",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class BindDeviceAccountPrivateKey extends pulumi.CustomResource {
     /**

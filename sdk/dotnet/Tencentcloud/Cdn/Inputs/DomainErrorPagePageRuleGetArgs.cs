@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainErrorPagePageRuleGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainErrorPagePageRuleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Redirect code of error page rules.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainErrorPagePageRuleGetArgs()
         {
         }
+        public static new DomainErrorPagePageRuleGetArgs Empty => new DomainErrorPagePageRuleGetArgs();
     }
 }

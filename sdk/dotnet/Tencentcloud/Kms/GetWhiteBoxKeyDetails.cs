@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// <summary>
         /// Use this data source to query detailed information of kms white_box_key_details
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Kms.GetWhiteBoxKeyDetails.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Kms.GetWhiteBoxKeyDetails.InvokeAsync(new Tencentcloud.Kms.GetWhiteBoxKeyDetailsArgs
-        ///         {
-        ///             KeyStatus = 0,
-        ///         }));
-        ///     }
+        ///         KeyStatus = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetWhiteBoxKeyDetailsResult> InvokeAsync(GetWhiteBoxKeyDetailsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetWhiteBoxKeyDetailsResult>("tencentcloud:Kms/getWhiteBoxKeyDetails:getWhiteBoxKeyDetails", args ?? new GetWhiteBoxKeyDetailsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetWhiteBoxKeyDetailsResult>("tencentcloud:Kms/getWhiteBoxKeyDetails:getWhiteBoxKeyDetails", args ?? new GetWhiteBoxKeyDetailsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of kms white_box_key_details
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Kms.GetWhiteBoxKeyDetails.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Kms.GetWhiteBoxKeyDetails.InvokeAsync(new Tencentcloud.Kms.GetWhiteBoxKeyDetailsArgs
-        ///         {
-        ///             KeyStatus = 0,
-        ///         }));
-        ///     }
+        ///         KeyStatus = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetWhiteBoxKeyDetailsResult> Invoke(GetWhiteBoxKeyDetailsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetWhiteBoxKeyDetailsResult>("tencentcloud:Kms/getWhiteBoxKeyDetails:getWhiteBoxKeyDetails", args ?? new GetWhiteBoxKeyDetailsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetWhiteBoxKeyDetailsResult>("tencentcloud:Kms/getWhiteBoxKeyDetails:getWhiteBoxKeyDetails", args ?? new GetWhiteBoxKeyDetailsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetWhiteBoxKeyDetailsArgs : Pulumi.InvokeArgs
+    public sealed class GetWhiteBoxKeyDetailsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter condition: status of the key, 0: disabled, 1: enabled.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public GetWhiteBoxKeyDetailsArgs()
         {
         }
+        public static new GetWhiteBoxKeyDetailsArgs Empty => new GetWhiteBoxKeyDetailsArgs();
     }
 
-    public sealed class GetWhiteBoxKeyDetailsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetWhiteBoxKeyDetailsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter condition: status of the key, 0: disabled, 1: enabled.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public GetWhiteBoxKeyDetailsInvokeArgs()
         {
         }
+        public static new GetWhiteBoxKeyDetailsInvokeArgs Empty => new GetWhiteBoxKeyDetailsInvokeArgs();
     }
 
 

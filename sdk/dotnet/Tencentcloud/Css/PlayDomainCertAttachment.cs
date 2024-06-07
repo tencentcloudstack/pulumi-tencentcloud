@@ -15,43 +15,45 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = Tencentcloud.Ssl.GetCertificates.Invoke(new()
     ///     {
-    ///         var foo = Output.Create(Tencentcloud.Ssl.GetCertificates.InvokeAsync(new Tencentcloud.Ssl.GetCertificatesArgs
-    ///         {
-    ///             Name = "your_ssl_cert",
-    ///         }));
-    ///         var playDomainCertAttachment = new Tencentcloud.Css.PlayDomainCertAttachment("playDomainCertAttachment", new Tencentcloud.Css.PlayDomainCertAttachmentArgs
-    ///         {
-    ///             CloudCertId = foo.Apply(foo =&gt; foo.Certificates?[0]?.Id),
-    ///             DomainInfo = new Tencentcloud.Css.Inputs.PlayDomainCertAttachmentDomainInfoArgs
-    ///             {
-    ///                 DomainName = "your_domain_name",
-    ///                 Status = 1,
-    ///             },
-    ///         });
-    ///     }
+    ///         Name = "your_ssl_cert",
+    ///     });
     /// 
-    /// }
+    ///     var playDomainCertAttachment = new Tencentcloud.Css.PlayDomainCertAttachment("playDomainCertAttachment", new()
+    ///     {
+    ///         CloudCertId = foo.Apply(getCertificatesResult =&gt; getCertificatesResult.Certificates[0]?.Id),
+    ///         DomainInfo = new Tencentcloud.Css.Inputs.PlayDomainCertAttachmentDomainInfoArgs
+    ///         {
+    ///             DomainName = "your_domain_name",
+    ///             Status = 1,
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css play_domain_cert_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/playDomainCertAttachment:PlayDomainCertAttachment play_domain_cert_attachment domainName#cloudCertId
+    /// $ pulumi import tencentcloud:Css/playDomainCertAttachment:PlayDomainCertAttachment play_domain_cert_attachment domainName#cloudCertId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/playDomainCertAttachment:PlayDomainCertAttachment")]
-    public partial class PlayDomainCertAttachment : Pulumi.CustomResource
+    public partial class PlayDomainCertAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// certificate expiration time.
@@ -140,7 +142,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class PlayDomainCertAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class PlayDomainCertAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Tencent cloud ssl certificate Id. Refer to `tencentcloud.Ssl.Certificate` to create or obtain the resource ID.
@@ -157,9 +159,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public PlayDomainCertAttachmentArgs()
         {
         }
+        public static new PlayDomainCertAttachmentArgs Empty => new PlayDomainCertAttachmentArgs();
     }
 
-    public sealed class PlayDomainCertAttachmentState : Pulumi.ResourceArgs
+    public sealed class PlayDomainCertAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// certificate expiration time.
@@ -206,5 +209,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public PlayDomainCertAttachmentState()
         {
         }
+        public static new PlayDomainCertAttachmentState Empty => new PlayDomainCertAttachmentState();
     }
 }

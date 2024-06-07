@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const diagnose = pulumi.output(tencentcloud.Elasticsearch.getDiagnose({
+ * const diagnose = tencentcloud.Elasticsearch.getDiagnose({
  *     date: "20231030",
  *     instanceId: "es-xxxxxx",
  *     limit: 1,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDiagnose(args: GetDiagnoseArgs, opts?: pulumi.InvokeOptions): Promise<GetDiagnoseResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Elasticsearch/getDiagnose:getDiagnose", {
         "date": args.date,
         "instanceId": args.instanceId,
@@ -77,9 +77,26 @@ export interface GetDiagnoseResult {
     readonly limit?: number;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of elasticsearch diagnose
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const diagnose = tencentcloud.Elasticsearch.getDiagnose({
+ *     date: "20231030",
+ *     instanceId: "es-xxxxxx",
+ *     limit: 1,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDiagnoseOutput(args: GetDiagnoseOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDiagnoseResult> {
-    return pulumi.output(args).apply(a => getDiagnose(a, opts))
+    return pulumi.output(args).apply((a: any) => getDiagnose(a, opts))
 }
 
 /**

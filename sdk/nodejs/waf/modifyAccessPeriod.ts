@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.ModifyAccessPeriod("example", {
+ * const example = new tencentcloud.waf.ModifyAccessPeriod("example", {
  *     period: 30,
  *     topicId: "1ae37c76-df99-4e2b-998c-20f39eba6226",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ModifyAccessPeriod extends pulumi.CustomResource {
     /**

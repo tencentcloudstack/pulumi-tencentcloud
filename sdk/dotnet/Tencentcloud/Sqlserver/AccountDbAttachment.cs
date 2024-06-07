@@ -15,96 +15,104 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "sqlserver",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "desc.",
-    ///         });
-    ///         var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new Tencentcloud.Sqlserver.BasicInstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
-    ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             ProjectId = 0,
-    ///             Memory = 4,
-    ///             Storage = 100,
-    ///             Cpu = 2,
-    ///             MachineType = "CLOUD_PREMIUM",
-    ///             MaintenanceWeekSets = 
-    ///             {
-    ///                 1,
-    ///                 2,
-    ///                 3,
-    ///             },
-    ///             MaintenanceStartTime = "09:00",
-    ///             MaintenanceTimeSpan = 3,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 securityGroup.Id,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///         var exampleDb = new Tencentcloud.Sqlserver.Db("exampleDb", new Tencentcloud.Sqlserver.DbArgs
-    ///         {
-    ///             InstanceId = exampleBasicInstance.Id,
-    ///             Charset = "Chinese_PRC_BIN",
-    ///             Remark = "test-remark",
-    ///         });
-    ///         var exampleAccount = new Tencentcloud.Sqlserver.Account("exampleAccount", new Tencentcloud.Sqlserver.AccountArgs
-    ///         {
-    ///             InstanceId = exampleBasicInstance.Id,
-    ///             Password = "Qwer@234",
-    ///             Remark = "test-remark",
-    ///         });
-    ///         var exampleAccountDbAttachment = new Tencentcloud.Sqlserver.AccountDbAttachment("exampleAccountDbAttachment", new Tencentcloud.Sqlserver.AccountDbAttachmentArgs
-    ///         {
-    ///             InstanceId = exampleBasicInstance.Id,
-    ///             AccountName = exampleAccount.Name,
-    ///             DbName = exampleDb.Name,
-    ///             Privilege = "ReadWrite",
-    ///         });
-    ///     }
+    ///         Product = "sqlserver",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[4]?.Name),
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    ///     {
+    ///         Description = "desc.",
+    ///     });
+    /// 
+    ///     var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[4]?.Name),
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         ProjectId = 0,
+    ///         Memory = 4,
+    ///         Storage = 100,
+    ///         Cpu = 2,
+    ///         MachineType = "CLOUD_PREMIUM",
+    ///         MaintenanceWeekSets = new[]
+    ///         {
+    ///             1,
+    ///             2,
+    ///             3,
+    ///         },
+    ///         MaintenanceStartTime = "09:00",
+    ///         MaintenanceTimeSpan = 3,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             securityGroup.Id,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleDb = new Tencentcloud.Sqlserver.Db("exampleDb", new()
+    ///     {
+    ///         InstanceId = exampleBasicInstance.Id,
+    ///         Charset = "Chinese_PRC_BIN",
+    ///         Remark = "test-remark",
+    ///     });
+    /// 
+    ///     var exampleAccount = new Tencentcloud.Sqlserver.Account("exampleAccount", new()
+    ///     {
+    ///         InstanceId = exampleBasicInstance.Id,
+    ///         Password = "Qwer@234",
+    ///         Remark = "test-remark",
+    ///     });
+    /// 
+    ///     var exampleAccountDbAttachment = new Tencentcloud.Sqlserver.AccountDbAttachment("exampleAccountDbAttachment", new()
+    ///     {
+    ///         InstanceId = exampleBasicInstance.Id,
+    ///         AccountName = exampleAccount.Name,
+    ///         DbName = exampleDb.Name,
+    ///         Privilege = "ReadWrite",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// SQL Server account DB attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment example mssql-3cdq7kx5#tf_example_account#tf_example_db
+    /// $ pulumi import tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment example mssql-3cdq7kx5#tf_example_account#tf_example_db
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/accountDbAttachment:AccountDbAttachment")]
-    public partial class AccountDbAttachment : Pulumi.CustomResource
+    public partial class AccountDbAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// SQL Server account name.
@@ -175,7 +183,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         }
     }
 
-    public sealed class AccountDbAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class AccountDbAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// SQL Server account name.
@@ -204,9 +212,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public AccountDbAttachmentArgs()
         {
         }
+        public static new AccountDbAttachmentArgs Empty => new AccountDbAttachmentArgs();
     }
 
-    public sealed class AccountDbAttachmentState : Pulumi.ResourceArgs
+    public sealed class AccountDbAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// SQL Server account name.
@@ -235,5 +244,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public AccountDbAttachmentState()
         {
         }
+        public static new AccountDbAttachmentState Empty => new AccountDbAttachmentState();
     }
 }

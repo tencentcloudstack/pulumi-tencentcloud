@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instanceMixIpTargetConfig = new tencentcloud.Clb.InstanceMixIpTargetConfig("instance_mix_ip_target_config", {
+ * const instanceMixIpTargetConfig = new tencentcloud.clb.InstanceMixIpTargetConfig("instanceMixIpTargetConfig", {
  *     loadBalancerId: "lb-5dnrkgry",
  *     mixIpTarget: false,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * clb instance_mix_ip_target_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Clb/instanceMixIpTargetConfig:InstanceMixIpTargetConfig instance_mix_ip_target_config instance_id
+ * $ pulumi import tencentcloud:Clb/instanceMixIpTargetConfig:InstanceMixIpTargetConfig instance_mix_ip_target_config instance_id
  * ```
  */
 export class InstanceMixIpTargetConfig extends pulumi.CustomResource {

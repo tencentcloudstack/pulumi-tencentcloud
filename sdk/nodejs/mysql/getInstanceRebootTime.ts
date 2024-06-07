@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const instanceRebootTime = pulumi.output(tencentcloud.Mysql.getInstanceRebootTime({
+ * const instanceRebootTime = tencentcloud.Mysql.getInstanceRebootTime({
  *     instanceIds: ["cdb-fitq5t9h"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getInstanceRebootTime(args: GetInstanceRebootTimeArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceRebootTimeResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getInstanceRebootTime:getInstanceRebootTime", {
         "instanceIds": args.instanceIds,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetInstanceRebootTimeResult {
     readonly items: outputs.Mysql.GetInstanceRebootTimeItem[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mysql instanceRebootTime
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const instanceRebootTime = tencentcloud.Mysql.getInstanceRebootTime({
+ *     instanceIds: ["cdb-fitq5t9h"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getInstanceRebootTimeOutput(args: GetInstanceRebootTimeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInstanceRebootTimeResult> {
-    return pulumi.output(args).apply(a => getInstanceRebootTime(a, opts))
+    return pulumi.output(args).apply((a: any) => getInstanceRebootTime(a, opts))
 }
 
 /**

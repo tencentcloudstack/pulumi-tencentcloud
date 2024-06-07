@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class InputInputGroupHlsPullSettingsSourceAddressArgs : Pulumi.ResourceArgs
+    public sealed class InputInputGroupHlsPullSettingsSourceAddressArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The URL address of the RTSP source site.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public InputInputGroupHlsPullSettingsSourceAddressArgs()
         {
         }
+        public static new InputInputGroupHlsPullSettingsSourceAddressArgs Empty => new InputInputGroupHlsPullSettingsSourceAddressArgs();
     }
 }

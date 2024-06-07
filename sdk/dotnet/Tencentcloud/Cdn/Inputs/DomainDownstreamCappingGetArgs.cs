@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainDownstreamCappingGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainDownstreamCappingGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("cappingRules")]
         private InputList<Inputs.DomainDownstreamCappingCappingRuleGetArgs>? _cappingRules;
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainDownstreamCappingGetArgs()
         {
         }
+        public static new DomainDownstreamCappingGetArgs Empty => new DomainDownstreamCappingGetArgs();
     }
 }

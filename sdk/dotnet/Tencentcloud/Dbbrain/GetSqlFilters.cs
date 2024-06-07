@@ -15,100 +15,96 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain sqlFilters
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var sqlFilter = new Tencentcloud.Dbbrain.SqlFilter("sqlFilter", new()
         ///     {
-        ///         var sqlFilter = new Tencentcloud.Dbbrain.SqlFilter("sqlFilter", new Tencentcloud.Dbbrain.SqlFilterArgs
+        ///         InstanceId = "mysql_ins_id",
+        ///         SessionToken = new Tencentcloud.Dbbrain.Inputs.SqlFilterSessionTokenArgs
         ///         {
-        ///             InstanceId = "mysql_ins_id",
-        ///             SessionToken = new Tencentcloud.Dbbrain.Inputs.SqlFilterSessionTokenArgs
-        ///             {
-        ///                 User = "user",
-        ///                 Password = "password",
-        ///             },
-        ///             SqlType = "SELECT",
-        ///             FilterKey = "test",
-        ///             MaxConcurrency = 10,
-        ///             Duration = 3600,
-        ///         });
-        ///         var sqlFilters = Tencentcloud.Dbbrain.GetSqlFilters.Invoke(new Tencentcloud.Dbbrain.GetSqlFiltersInvokeArgs
-        ///         {
-        ///             InstanceId = "mysql_ins_id",
-        ///             FilterIds = 
-        ///             {
-        ///                 sqlFilter.FilterId,
-        ///             },
-        ///         });
-        ///     }
+        ///             User = "user",
+        ///             Password = "password",
+        ///         },
+        ///         SqlType = "SELECT",
+        ///         FilterKey = "test",
+        ///         MaxConcurrency = 10,
+        ///         Duration = 3600,
+        ///     });
         /// 
-        /// }
+        ///     var sqlFilters = Tencentcloud.Dbbrain.GetSqlFilters.Invoke(new()
+        ///     {
+        ///         InstanceId = "mysql_ins_id",
+        ///         FilterIds = new[]
+        ///         {
+        ///             sqlFilter.FilterId,
+        ///         },
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSqlFiltersResult> InvokeAsync(GetSqlFiltersArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSqlFiltersResult>("tencentcloud:Dbbrain/getSqlFilters:getSqlFilters", args ?? new GetSqlFiltersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSqlFiltersResult>("tencentcloud:Dbbrain/getSqlFilters:getSqlFilters", args ?? new GetSqlFiltersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain sqlFilters
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var sqlFilter = new Tencentcloud.Dbbrain.SqlFilter("sqlFilter", new()
         ///     {
-        ///         var sqlFilter = new Tencentcloud.Dbbrain.SqlFilter("sqlFilter", new Tencentcloud.Dbbrain.SqlFilterArgs
+        ///         InstanceId = "mysql_ins_id",
+        ///         SessionToken = new Tencentcloud.Dbbrain.Inputs.SqlFilterSessionTokenArgs
         ///         {
-        ///             InstanceId = "mysql_ins_id",
-        ///             SessionToken = new Tencentcloud.Dbbrain.Inputs.SqlFilterSessionTokenArgs
-        ///             {
-        ///                 User = "user",
-        ///                 Password = "password",
-        ///             },
-        ///             SqlType = "SELECT",
-        ///             FilterKey = "test",
-        ///             MaxConcurrency = 10,
-        ///             Duration = 3600,
-        ///         });
-        ///         var sqlFilters = Tencentcloud.Dbbrain.GetSqlFilters.Invoke(new Tencentcloud.Dbbrain.GetSqlFiltersInvokeArgs
-        ///         {
-        ///             InstanceId = "mysql_ins_id",
-        ///             FilterIds = 
-        ///             {
-        ///                 sqlFilter.FilterId,
-        ///             },
-        ///         });
-        ///     }
+        ///             User = "user",
+        ///             Password = "password",
+        ///         },
+        ///         SqlType = "SELECT",
+        ///         FilterKey = "test",
+        ///         MaxConcurrency = 10,
+        ///         Duration = 3600,
+        ///     });
         /// 
-        /// }
+        ///     var sqlFilters = Tencentcloud.Dbbrain.GetSqlFilters.Invoke(new()
+        ///     {
+        ///         InstanceId = "mysql_ins_id",
+        ///         FilterIds = new[]
+        ///         {
+        ///             sqlFilter.FilterId,
+        ///         },
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSqlFiltersResult> Invoke(GetSqlFiltersInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSqlFiltersResult>("tencentcloud:Dbbrain/getSqlFilters:getSqlFilters", args ?? new GetSqlFiltersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSqlFiltersResult>("tencentcloud:Dbbrain/getSqlFilters:getSqlFilters", args ?? new GetSqlFiltersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSqlFiltersArgs : Pulumi.InvokeArgs
+    public sealed class GetSqlFiltersArgs : global::Pulumi.InvokeArgs
     {
         [Input("filterIds")]
         private List<int>? _filterIds;
@@ -149,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSqlFiltersArgs()
         {
         }
+        public static new GetSqlFiltersArgs Empty => new GetSqlFiltersArgs();
     }
 
-    public sealed class GetSqlFiltersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSqlFiltersInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filterIds")]
         private InputList<int>? _filterIds;
@@ -192,6 +189,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetSqlFiltersInvokeArgs()
         {
         }
+        public static new GetSqlFiltersInvokeArgs Empty => new GetSqlFiltersInvokeArgs();
     }
 
 

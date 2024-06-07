@@ -7,53 +7,58 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cynosdb clusterDatabases
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewClusterDatabases(ctx, "clusterDatabases", &Cynosdb.ClusterDatabasesArgs{
-// 			CharacterSet: pulumi.String("utf8"),
-// 			ClusterId:    pulumi.String("cynosdbmysql-bws8h88b"),
-// 			CollateRule:  pulumi.String("utf8_general_ci"),
-// 			DbName:       pulumi.String("terraform-test"),
-// 			Description:  pulumi.String("terraform test"),
-// 			UserHostPrivileges: cynosdb.ClusterDatabasesUserHostPrivilegeArray{
-// 				&cynosdb.ClusterDatabasesUserHostPrivilegeArgs{
-// 					DbHost:      pulumi.String("%"),
-// 					DbPrivilege: pulumi.String("READ_ONLY"),
-// 					DbUserName:  pulumi.String("root"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewClusterDatabases(ctx, "clusterDatabases", &Cynosdb.ClusterDatabasesArgs{
+//				CharacterSet: pulumi.String("utf8"),
+//				ClusterId:    pulumi.String("cynosdbmysql-bws8h88b"),
+//				CollateRule:  pulumi.String("utf8_general_ci"),
+//				DbName:       pulumi.String("terraform-test"),
+//				Description:  pulumi.String("terraform test"),
+//				UserHostPrivileges: cynosdb.ClusterDatabasesUserHostPrivilegeArray{
+//					&cynosdb.ClusterDatabasesUserHostPrivilegeArgs{
+//						DbHost:      pulumi.String("%"),
+//						DbPrivilege: pulumi.String("READ_ONLY"),
+//						DbUserName:  pulumi.String("root"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cynosdb cluster_databases can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cynosdb/clusterDatabases:ClusterDatabases cluster_databases cluster_databases_id
+// $ pulumi import tencentcloud:Cynosdb/clusterDatabases:ClusterDatabases cluster_databases cluster_databases_id
 // ```
 type ClusterDatabases struct {
 	pulumi.CustomResourceState
@@ -91,7 +96,7 @@ func NewClusterDatabases(ctx *pulumi.Context,
 	if args.DbName == nil {
 		return nil, errors.New("invalid value for required argument 'DbName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ClusterDatabases
 	err := ctx.RegisterResource("tencentcloud:Cynosdb/clusterDatabases:ClusterDatabases", name, args, &resource, opts...)
 	if err != nil {
@@ -204,7 +209,7 @@ func (i *ClusterDatabases) ToClusterDatabasesOutputWithContext(ctx context.Conte
 // ClusterDatabasesArrayInput is an input type that accepts ClusterDatabasesArray and ClusterDatabasesArrayOutput values.
 // You can construct a concrete instance of `ClusterDatabasesArrayInput` via:
 //
-//          ClusterDatabasesArray{ ClusterDatabasesArgs{...} }
+//	ClusterDatabasesArray{ ClusterDatabasesArgs{...} }
 type ClusterDatabasesArrayInput interface {
 	pulumi.Input
 
@@ -229,7 +234,7 @@ func (i ClusterDatabasesArray) ToClusterDatabasesArrayOutputWithContext(ctx cont
 // ClusterDatabasesMapInput is an input type that accepts ClusterDatabasesMap and ClusterDatabasesMapOutput values.
 // You can construct a concrete instance of `ClusterDatabasesMapInput` via:
 //
-//          ClusterDatabasesMap{ "key": ClusterDatabasesArgs{...} }
+//	ClusterDatabasesMap{ "key": ClusterDatabasesArgs{...} }
 type ClusterDatabasesMapInput interface {
 	pulumi.Input
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class CosShipperContentJsonGetArgs : Pulumi.ResourceArgs
+    public sealed class CosShipperContentJsonGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Enablement flag.
@@ -35,5 +35,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public CosShipperContentJsonGetArgs()
         {
         }
+        public static new CosShipperContentJsonGetArgs Empty => new CosShipperContentJsonGetArgs();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeCompanies = pulumi.output(tencentcloud.Ssl.getDescribeCompanies({
+ * const describeCompanies = tencentcloud.Ssl.getDescribeCompanies({
  *     companyId: 122,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeCompanies(args?: GetDescribeCompaniesArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeCompaniesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ssl/getDescribeCompanies:getDescribeCompanies", {
         "companyId": args.companyId,
         "resultOutputFile": args.resultOutputFile,
@@ -64,9 +64,24 @@ export interface GetDescribeCompaniesResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of ssl describeCompanies
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeCompanies = tencentcloud.Ssl.getDescribeCompanies({
+ *     companyId: 122,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeCompaniesOutput(args?: GetDescribeCompaniesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeCompaniesResult> {
-    return pulumi.output(args).apply(a => getDescribeCompanies(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeCompanies(a, opts))
 }
 
 /**

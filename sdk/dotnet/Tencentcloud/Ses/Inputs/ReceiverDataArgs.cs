@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses.Inputs
 {
 
-    public sealed class ReceiverDataArgs : Pulumi.ResourceArgs
+    public sealed class ReceiverDataArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Recipient email addresses.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses.Inputs
         public ReceiverDataArgs()
         {
         }
+        public static new ReceiverDataArgs Empty => new ReceiverDataArgs();
     }
 }

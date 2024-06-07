@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc net_detect_states
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var netDetectStates = Tencentcloud.Vpc.GetNetDetectStates.Invoke(new()
         ///     {
-        ///         var netDetectStates = Output.Create(Tencentcloud.Vpc.GetNetDetectStates.InvokeAsync(new Tencentcloud.Vpc.GetNetDetectStatesArgs
+        ///         NetDetectIds = new[]
         ///         {
-        ///             NetDetectIds = 
-        ///             {
-        ///                 "netd-12345678",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "netd-12345678",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetNetDetectStatesResult> InvokeAsync(GetNetDetectStatesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetNetDetectStatesResult>("tencentcloud:Vpc/getNetDetectStates:getNetDetectStates", args ?? new GetNetDetectStatesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetNetDetectStatesResult>("tencentcloud:Vpc/getNetDetectStates:getNetDetectStates", args ?? new GetNetDetectStatesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc net_detect_states
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var netDetectStates = Tencentcloud.Vpc.GetNetDetectStates.Invoke(new()
         ///     {
-        ///         var netDetectStates = Output.Create(Tencentcloud.Vpc.GetNetDetectStates.InvokeAsync(new Tencentcloud.Vpc.GetNetDetectStatesArgs
+        ///         NetDetectIds = new[]
         ///         {
-        ///             NetDetectIds = 
-        ///             {
-        ///                 "netd-12345678",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "netd-12345678",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetNetDetectStatesResult> Invoke(GetNetDetectStatesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetNetDetectStatesResult>("tencentcloud:Vpc/getNetDetectStates:getNetDetectStates", args ?? new GetNetDetectStatesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetNetDetectStatesResult>("tencentcloud:Vpc/getNetDetectStates:getNetDetectStates", args ?? new GetNetDetectStatesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetNetDetectStatesArgs : Pulumi.InvokeArgs
+    public sealed class GetNetDetectStatesArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetNetDetectStatesFilterArgs>? _filters;
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetNetDetectStatesArgs()
         {
         }
+        public static new GetNetDetectStatesArgs Empty => new GetNetDetectStatesArgs();
     }
 
-    public sealed class GetNetDetectStatesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetNetDetectStatesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetNetDetectStatesFilterInputArgs>? _filters;
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetNetDetectStatesInvokeArgs()
         {
         }
+        public static new GetNetDetectStatesInvokeArgs Empty => new GetNetDetectStatesInvokeArgs();
     }
 
 

@@ -9,17 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const embedInterval = new tencentcloud.Bi.EmbedIntervalApply("embed_interval", {
+ * const embedInterval = new tencentcloud.bi.EmbedIntervalApply("embedInterval", {
  *     biToken: "4192d65b-d674-4117-9a59-xxxxxxxxx",
  *     pageId: 10520483,
  *     projectId: 11015030,
  *     scope: "page",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class EmbedIntervalApply extends pulumi.CustomResource {
     /**

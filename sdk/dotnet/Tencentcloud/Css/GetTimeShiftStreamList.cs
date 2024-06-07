@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// <summary>
         /// Use this data source to query detailed information of css time_shift_stream_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var timeShiftStreamList = Tencentcloud.Css.GetTimeShiftStreamList.Invoke(new()
         ///     {
-        ///         var timeShiftStreamList = Output.Create(Tencentcloud.Css.GetTimeShiftStreamList.InvokeAsync(new Tencentcloud.Css.GetTimeShiftStreamListArgs
-        ///         {
-        ///             Domain = "177154.push.tlivecloud.com",
-        ///             DomainGroup = "tf-test",
-        ///             EndTime = 1698820641,
-        ///             StartTime = 1698768000,
-        ///             StreamName = "live",
-        ///         }));
-        ///     }
+        ///         Domain = "177154.push.tlivecloud.com",
+        ///         DomainGroup = "tf-test",
+        ///         EndTime = 1698820641,
+        ///         StartTime = 1698768000,
+        ///         StreamName = "live",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTimeShiftStreamListResult> InvokeAsync(GetTimeShiftStreamListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTimeShiftStreamListResult>("tencentcloud:Css/getTimeShiftStreamList:getTimeShiftStreamList", args ?? new GetTimeShiftStreamListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTimeShiftStreamListResult>("tencentcloud:Css/getTimeShiftStreamList:getTimeShiftStreamList", args ?? new GetTimeShiftStreamListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of css time_shift_stream_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var timeShiftStreamList = Tencentcloud.Css.GetTimeShiftStreamList.Invoke(new()
         ///     {
-        ///         var timeShiftStreamList = Output.Create(Tencentcloud.Css.GetTimeShiftStreamList.InvokeAsync(new Tencentcloud.Css.GetTimeShiftStreamListArgs
-        ///         {
-        ///             Domain = "177154.push.tlivecloud.com",
-        ///             DomainGroup = "tf-test",
-        ///             EndTime = 1698820641,
-        ///             StartTime = 1698768000,
-        ///             StreamName = "live",
-        ///         }));
-        ///     }
+        ///         Domain = "177154.push.tlivecloud.com",
+        ///         DomainGroup = "tf-test",
+        ///         EndTime = 1698820641,
+        ///         StartTime = 1698768000,
+        ///         StreamName = "live",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTimeShiftStreamListResult> Invoke(GetTimeShiftStreamListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTimeShiftStreamListResult>("tencentcloud:Css/getTimeShiftStreamList:getTimeShiftStreamList", args ?? new GetTimeShiftStreamListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTimeShiftStreamListResult>("tencentcloud:Css/getTimeShiftStreamList:getTimeShiftStreamList", args ?? new GetTimeShiftStreamListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTimeShiftStreamListArgs : Pulumi.InvokeArgs
+    public sealed class GetTimeShiftStreamListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The push domain.
@@ -121,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetTimeShiftStreamListArgs()
         {
         }
+        public static new GetTimeShiftStreamListArgs Empty => new GetTimeShiftStreamListArgs();
     }
 
-    public sealed class GetTimeShiftStreamListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTimeShiftStreamListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The push domain.
@@ -164,6 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public GetTimeShiftStreamListInvokeArgs()
         {
         }
+        public static new GetTimeShiftStreamListInvokeArgs Empty => new GetTimeShiftStreamListInvokeArgs();
     }
 
 

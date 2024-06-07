@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var apiRateLimitRule = new Tencentcloud.Tsf.ApiRateLimitRule("apiRateLimitRule", new()
     ///     {
-    ///         var apiRateLimitRule = new Tencentcloud.Tsf.ApiRateLimitRule("apiRateLimitRule", new Tencentcloud.Tsf.ApiRateLimitRuleArgs
-    ///         {
-    ///             ApiId = "api-xxxxxx",
-    ///             MaxQps = 10,
-    ///             UsableStatus = "enable",
-    ///         });
-    ///     }
+    ///         ApiId = "api-xxxxxx",
+    ///         MaxQps = 10,
+    ///         UsableStatus = "enable",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tsf api_rate_limit_rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tsf/apiRateLimitRule:ApiRateLimitRule api_rate_limit_rule api_rate_limit_rule_id
+    /// $ pulumi import tencentcloud:Tsf/apiRateLimitRule:ApiRateLimitRule api_rate_limit_rule api_rate_limit_rule_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/apiRateLimitRule:ApiRateLimitRule")]
-    public partial class ApiRateLimitRule : Pulumi.CustomResource
+    public partial class ApiRateLimitRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Api Id.
@@ -150,7 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class ApiRateLimitRuleArgs : Pulumi.ResourceArgs
+    public sealed class ApiRateLimitRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Api Id.
@@ -173,9 +174,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ApiRateLimitRuleArgs()
         {
         }
+        public static new ApiRateLimitRuleArgs Empty => new ApiRateLimitRuleArgs();
     }
 
-    public sealed class ApiRateLimitRuleState : Pulumi.ResourceArgs
+    public sealed class ApiRateLimitRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Api Id.
@@ -240,5 +242,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ApiRateLimitRuleState()
         {
         }
+        public static new ApiRateLimitRuleState Empty => new ApiRateLimitRuleState();
     }
 }

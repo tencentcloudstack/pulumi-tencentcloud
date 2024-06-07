@@ -22,11 +22,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
     /// Eip association can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Eip/association:Association bar eip-41s6jwy4::ins-34jwj3
+    /// $ pulumi import tencentcloud:Eip/association:Association bar eip-41s6jwy4::ins-34jwj3
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eip/association:Association")]
-    public partial class Association : Pulumi.CustomResource
+    public partial class Association : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The ID of EIP.
@@ -97,7 +97,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         }
     }
 
-    public sealed class AssociationArgs : Pulumi.ResourceArgs
+    public sealed class AssociationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of EIP.
@@ -126,9 +126,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public AssociationArgs()
         {
         }
+        public static new AssociationArgs Empty => new AssociationArgs();
     }
 
-    public sealed class AssociationState : Pulumi.ResourceArgs
+    public sealed class AssociationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of EIP.
@@ -157,5 +158,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eip
         public AssociationState()
         {
         }
+        public static new AssociationState Empty => new AssociationState();
     }
 }

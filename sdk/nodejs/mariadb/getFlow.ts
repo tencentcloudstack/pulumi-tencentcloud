@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const flow = pulumi.output(tencentcloud.Mariadb.getFlow({
+ * const flow = tencentcloud.Mariadb.getFlow({
  *     flowId: 1307,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getFlow(args: GetFlowArgs, opts?: pulumi.InvokeOptions): Promise<GetFlowResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mariadb/getFlow:getFlow", {
         "flowId": args.flowId,
         "resultOutputFile": args.resultOutputFile,
@@ -59,9 +58,24 @@ export interface GetFlowResult {
      */
     readonly status: number;
 }
-
+/**
+ * Use this data source to query detailed information of mariadb flow
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const flow = tencentcloud.Mariadb.getFlow({
+ *     flowId: 1307,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getFlowOutput(args: GetFlowOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetFlowResult> {
-    return pulumi.output(args).apply(a => getFlow(a, opts))
+    return pulumi.output(args).apply((a: any) => getFlow(a, opts))
 }
 
 /**

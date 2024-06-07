@@ -8,120 +8,125 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of apigateway plugin
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"encoding/json"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//	"encoding/json"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ApiGateway"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleService, err := ApiGateway.NewService(ctx, "exampleService", &ApiGateway.ServiceArgs{
-// 			ServiceName: pulumi.String("tf_example"),
-// 			Protocol:    pulumi.String("http&https"),
-// 			ServiceDesc: pulumi.String("desc."),
-// 			NetTypes: pulumi.StringArray{
-// 				pulumi.String("INNER"),
-// 				pulumi.String("OUTER"),
-// 			},
-// 			IpVersion: pulumi.String("IPv4"),
-// 			Tags: pulumi.AnyMap{
-// 				"testKey": pulumi.Any("testValue"),
-// 			},
-// 			ReleaseLimit: pulumi.Int(500),
-// 			PreLimit:     pulumi.Int(500),
-// 			TestLimit:    pulumi.Int(500),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleApi, err := ApiGateway.NewApi(ctx, "exampleApi", &ApiGateway.ApiArgs{
-// 			ServiceId:           exampleService.ID(),
-// 			ApiName:             pulumi.String("hello"),
-// 			ApiDesc:             pulumi.String("my hello api"),
-// 			AuthType:            pulumi.String("NONE"),
-// 			Protocol:            pulumi.String("HTTP"),
-// 			EnableCors:          pulumi.Bool(true),
-// 			RequestConfigPath:   pulumi.String("/user/info"),
-// 			RequestConfigMethod: pulumi.String("GET"),
-// 			RequestParameters: apigateway.ApiRequestParameterArray{
-// 				&apigateway.ApiRequestParameterArgs{
-// 					Name:         pulumi.String("name"),
-// 					Position:     pulumi.String("QUERY"),
-// 					Type:         pulumi.String("string"),
-// 					Desc:         pulumi.String("who are you?"),
-// 					DefaultValue: pulumi.String("tom"),
-// 					Required:     pulumi.Bool(true),
-// 				},
-// 			},
-// 			ServiceConfigType:      pulumi.String("HTTP"),
-// 			ServiceConfigTimeout:   pulumi.Int(15),
-// 			ServiceConfigUrl:       pulumi.String("http://www.qq.com"),
-// 			ServiceConfigPath:      pulumi.String("/user"),
-// 			ServiceConfigMethod:    pulumi.String("GET"),
-// 			ResponseType:           pulumi.String("HTML"),
-// 			ResponseSuccessExample: pulumi.String("success"),
-// 			ResponseFailExample:    pulumi.String("fail"),
-// 			ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
-// 				&apigateway.ApiResponseErrorCodeArgs{
-// 					Code:          pulumi.Int(500),
-// 					Msg:           pulumi.String("system error"),
-// 					Desc:          pulumi.String("system error code"),
-// 					ConvertedCode: pulumi.Int(5000),
-// 					NeedConvert:   pulumi.Bool(true),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleServiceRelease, err := ApiGateway.NewServiceRelease(ctx, "exampleServiceRelease", &ApiGateway.ServiceReleaseArgs{
-// 			ServiceId:       exampleApi.ServiceId,
-// 			EnvironmentName: pulumi.String("release"),
-// 			ReleaseDesc:     pulumi.String("desc."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		tmpJSON0, err := json.Marshal(map[string]interface{}{
-// 			"type":   "white_list",
-// 			"blocks": "1.1.1.1",
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		json0 := string(tmpJSON0)
-// 		examplePlugin, err := ApiGateway.NewPlugin(ctx, "examplePlugin", &ApiGateway.PluginArgs{
-// 			PluginName:  pulumi.String("tf-example"),
-// 			PluginType:  pulumi.String("IPControl"),
-// 			PluginData:  pulumi.String(json0),
-// 			Description: pulumi.String("desc."),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = ApiGateway.GetPluginsOutput(ctx, apigateway.GetPluginsOutputArgs{
-// 			ServiceId:       exampleServiceRelease.ServiceId,
-// 			PluginId:        examplePlugin.ID(),
-// 			EnvironmentName: pulumi.String("release"),
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleService, err := ApiGateway.NewService(ctx, "exampleService", &ApiGateway.ServiceArgs{
+//				ServiceName: pulumi.String("tf_example"),
+//				Protocol:    pulumi.String("http&https"),
+//				ServiceDesc: pulumi.String("desc."),
+//				NetTypes: pulumi.StringArray{
+//					pulumi.String("INNER"),
+//					pulumi.String("OUTER"),
+//				},
+//				IpVersion: pulumi.String("IPv4"),
+//				Tags: pulumi.Map{
+//					"testKey": pulumi.Any("testValue"),
+//				},
+//				ReleaseLimit: pulumi.Int(500),
+//				PreLimit:     pulumi.Int(500),
+//				TestLimit:    pulumi.Int(500),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleApi, err := ApiGateway.NewApi(ctx, "exampleApi", &ApiGateway.ApiArgs{
+//				ServiceId:           exampleService.ID(),
+//				ApiName:             pulumi.String("hello"),
+//				ApiDesc:             pulumi.String("my hello api"),
+//				AuthType:            pulumi.String("NONE"),
+//				Protocol:            pulumi.String("HTTP"),
+//				EnableCors:          pulumi.Bool(true),
+//				RequestConfigPath:   pulumi.String("/user/info"),
+//				RequestConfigMethod: pulumi.String("GET"),
+//				RequestParameters: apigateway.ApiRequestParameterArray{
+//					&apigateway.ApiRequestParameterArgs{
+//						Name:         pulumi.String("name"),
+//						Position:     pulumi.String("QUERY"),
+//						Type:         pulumi.String("string"),
+//						Desc:         pulumi.String("who are you?"),
+//						DefaultValue: pulumi.String("tom"),
+//						Required:     pulumi.Bool(true),
+//					},
+//				},
+//				ServiceConfigType:      pulumi.String("HTTP"),
+//				ServiceConfigTimeout:   pulumi.Int(15),
+//				ServiceConfigUrl:       pulumi.String("http://www.qq.com"),
+//				ServiceConfigPath:      pulumi.String("/user"),
+//				ServiceConfigMethod:    pulumi.String("GET"),
+//				ResponseType:           pulumi.String("HTML"),
+//				ResponseSuccessExample: pulumi.String("success"),
+//				ResponseFailExample:    pulumi.String("fail"),
+//				ResponseErrorCodes: apigateway.ApiResponseErrorCodeArray{
+//					&apigateway.ApiResponseErrorCodeArgs{
+//						Code:          pulumi.Int(500),
+//						Msg:           pulumi.String("system error"),
+//						Desc:          pulumi.String("system error code"),
+//						ConvertedCode: pulumi.Int(5000),
+//						NeedConvert:   pulumi.Bool(true),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleServiceRelease, err := ApiGateway.NewServiceRelease(ctx, "exampleServiceRelease", &ApiGateway.ServiceReleaseArgs{
+//				ServiceId:       exampleApi.ServiceId,
+//				EnvironmentName: pulumi.String("release"),
+//				ReleaseDesc:     pulumi.String("desc."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			tmpJSON0, err := json.Marshal(map[string]interface{}{
+//				"type":   "white_list",
+//				"blocks": "1.1.1.1",
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			json0 := string(tmpJSON0)
+//			examplePlugin, err := ApiGateway.NewPlugin(ctx, "examplePlugin", &ApiGateway.PluginArgs{
+//				PluginName:  pulumi.String("tf-example"),
+//				PluginType:  pulumi.String("IPControl"),
+//				PluginData:  pulumi.String(json0),
+//				Description: pulumi.String("desc."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = ApiGateway.GetPluginsOutput(ctx, apigateway.GetPluginsOutputArgs{
+//				ServiceId:       exampleServiceRelease.ServiceId,
+//				PluginId:        examplePlugin.ID(),
+//				EnvironmentName: pulumi.String("release"),
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func LookupPlugins(ctx *pulumi.Context, args *LookupPluginsArgs, opts ...pulumi.InvokeOption) (*LookupPluginsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupPluginsResult
 	err := ctx.Invoke("tencentcloud:ApiGateway/getPlugins:getPlugins", args, &rv, opts...)
 	if err != nil {

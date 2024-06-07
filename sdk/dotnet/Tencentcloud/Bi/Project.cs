@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var project = new Tencentcloud.Bi.Project("project", new()
     ///     {
-    ///         var project = new Tencentcloud.Bi.Project("project", new Tencentcloud.Bi.ProjectArgs
-    ///         {
-    ///             ColorCode = "#7BD936",
-    ///             Logo = "TF-test",
-    ///             Mark = "project mark",
-    ///         });
-    ///     }
+    ///         ColorCode = "#7BD936",
+    ///         Logo = "TF-test",
+    ///         Mark = "project mark",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// bi project can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Bi/project:Project project project_id
+    /// $ pulumi import tencentcloud:Bi/project:Project project project_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Bi/project:Project")]
-    public partial class Project : Pulumi.CustomResource
+    public partial class Project : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Logo background color.
@@ -114,7 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         }
     }
 
-    public sealed class ProjectArgs : Pulumi.ResourceArgs
+    public sealed class ProjectArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Logo background color.
@@ -143,9 +144,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         public ProjectArgs()
         {
         }
+        public static new ProjectArgs Empty => new ProjectArgs();
     }
 
-    public sealed class ProjectState : Pulumi.ResourceArgs
+    public sealed class ProjectState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Logo background color.
@@ -174,5 +176,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         public ProjectState()
         {
         }
+        public static new ProjectState Empty => new ProjectState();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,28 +11,27 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const groups = pulumi.output(tencentcloud.Monitor.getPolicyGroups({
+ * const groups = tencentcloud.Monitor.getPolicyGroups({
  *     policyViewNames: [
  *         "REDIS-CLUSTER",
  *         "cvm_device",
  *     ],
- * }));
- * const name = pulumi.output(tencentcloud.Monitor.getPolicyGroups({
+ * });
+ * const name = tencentcloud.Monitor.getPolicyGroups({
  *     name: "test",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPolicyGroups(args?: GetPolicyGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetPolicyGroupsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Monitor/getPolicyGroups:getPolicyGroups", {
         "name": args.name,
         "policyViewNames": args.policyViewNames,
@@ -73,9 +73,30 @@ export interface GetPolicyGroupsResult {
     readonly policyViewNames?: string[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query monitor policy groups (There is a lot of data and it is recommended to output to a file)
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const groups = tencentcloud.Monitor.getPolicyGroups({
+ *     policyViewNames: [
+ *         "REDIS-CLUSTER",
+ *         "cvm_device",
+ *     ],
+ * });
+ * const name = tencentcloud.Monitor.getPolicyGroups({
+ *     name: "test",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPolicyGroupsOutput(args?: GetPolicyGroupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPolicyGroupsResult> {
-    return pulumi.output(args).apply(a => getPolicyGroups(a, opts))
+    return pulumi.output(args).apply((a: any) => getPolicyGroups(a, opts))
 }
 
 /**

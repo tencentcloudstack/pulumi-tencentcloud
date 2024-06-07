@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class TranscodeTemplateEnhanceConfigVideoEnhanceSuperResolutionGetArgs : Pulumi.ResourceArgs
+    public sealed class TranscodeTemplateEnhanceConfigVideoEnhanceSuperResolutionGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Super resolution multiple, optional value:2: currently only supports 2x super resolution.Default value: 2.Note: This field may return null, indicating that no valid value can be obtained.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public TranscodeTemplateEnhanceConfigVideoEnhanceSuperResolutionGetArgs()
         {
         }
+        public static new TranscodeTemplateEnhanceConfigVideoEnhanceSuperResolutionGetArgs Empty => new TranscodeTemplateEnhanceConfigVideoEnhanceSuperResolutionGetArgs();
     }
 }

@@ -7,35 +7,56 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dasb bindDeviceAccountPassword
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewBindDeviceAccountPassword(ctx, "example", &Dasb.BindDeviceAccountPasswordArgs{
-// 			DeviceAccountId: pulumi.Int(16),
-// 			Password:        pulumi.String("TerraformPassword"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleDevice, err := Dasb.NewDevice(ctx, "exampleDevice", &Dasb.DeviceArgs{
+//				OsName: pulumi.String("Linux"),
+//				Ip:     pulumi.String("192.168.0.1"),
+//				Port:   pulumi.Int(80),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleDeviceAccount, err := Dasb.NewDeviceAccount(ctx, "exampleDeviceAccount", &Dasb.DeviceAccountArgs{
+//				DeviceId: exampleDevice.ID(),
+//				Account:  pulumi.String("root"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Dasb.NewBindDeviceAccountPassword(ctx, "exampleBindDeviceAccountPassword", &Dasb.BindDeviceAccountPasswordArgs{
+//				DeviceAccountId: exampleDeviceAccount.ID(),
+//				Password:        pulumi.String("TerraformPassword"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type BindDeviceAccountPassword struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +79,7 @@ func NewBindDeviceAccountPassword(ctx *pulumi.Context,
 	if args.Password == nil {
 		return nil, errors.New("invalid value for required argument 'Password'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BindDeviceAccountPassword
 	err := ctx.RegisterResource("tencentcloud:Dasb/bindDeviceAccountPassword:BindDeviceAccountPassword", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +160,7 @@ func (i *BindDeviceAccountPassword) ToBindDeviceAccountPasswordOutputWithContext
 // BindDeviceAccountPasswordArrayInput is an input type that accepts BindDeviceAccountPasswordArray and BindDeviceAccountPasswordArrayOutput values.
 // You can construct a concrete instance of `BindDeviceAccountPasswordArrayInput` via:
 //
-//          BindDeviceAccountPasswordArray{ BindDeviceAccountPasswordArgs{...} }
+//	BindDeviceAccountPasswordArray{ BindDeviceAccountPasswordArgs{...} }
 type BindDeviceAccountPasswordArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +185,7 @@ func (i BindDeviceAccountPasswordArray) ToBindDeviceAccountPasswordArrayOutputWi
 // BindDeviceAccountPasswordMapInput is an input type that accepts BindDeviceAccountPasswordMap and BindDeviceAccountPasswordMapOutput values.
 // You can construct a concrete instance of `BindDeviceAccountPasswordMapInput` via:
 //
-//          BindDeviceAccountPasswordMap{ "key": BindDeviceAccountPasswordArgs{...} }
+//	BindDeviceAccountPasswordMap{ "key": BindDeviceAccountPasswordArgs{...} }
 type BindDeviceAccountPasswordMapInput interface {
 	pulumi.Input
 

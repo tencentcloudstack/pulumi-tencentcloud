@@ -8,40 +8,45 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of Tcr.getWebhookTriggerLogs
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcr"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tcr.GetWebhookTriggerLogs(ctx, &tcr.GetWebhookTriggerLogsArgs{
-// 			RegistryId: local.Tcr_id,
-// 			Namespace:  _var.Tcr_namespace,
-// 			TriggerId:  _var.Trigger_id,
-// 			Tags: map[string]interface{}{
-// 				"createdBy": "terraform",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tcr.GetWebhookTriggerLogs(ctx, &tcr.GetWebhookTriggerLogsArgs{
+//				RegistryId: local.Tcr_id,
+//				Namespace:  _var.Tcr_namespace,
+//				TriggerId:  _var.Trigger_id,
+//				Tags: map[string]interface{}{
+//					"createdBy": "terraform",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetWebhookTriggerLogs(ctx *pulumi.Context, args *GetWebhookTriggerLogsArgs, opts ...pulumi.InvokeOption) (*GetWebhookTriggerLogsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetWebhookTriggerLogsResult
 	err := ctx.Invoke("tencentcloud:Tcr/getWebhookTriggerLogs:getWebhookTriggerLogs", args, &rv, opts...)
 	if err != nil {

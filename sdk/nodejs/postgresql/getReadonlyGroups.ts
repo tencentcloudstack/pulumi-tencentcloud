@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const group = new tencentcloud.postgresql.ReadonlyGroup("group", {
  *     masterDbInstanceId: "postgres-gzg9jb2n",
@@ -35,14 +37,12 @@ import * as utilities from "../utilities";
  *     orderByType: "asc",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getReadonlyGroups(args?: GetReadonlyGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetReadonlyGroupsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Postgresql/getReadonlyGroups:getReadonlyGroups", {
         "filters": args.filters,
         "orderBy": args.orderBy,
@@ -90,9 +90,41 @@ export interface GetReadonlyGroupsResult {
     readonly readOnlyGroupLists: outputs.Postgresql.GetReadonlyGroupsReadOnlyGroupList[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of postgresql readOnlyGroups
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const group = new tencentcloud.postgresql.ReadonlyGroup("group", {
+ *     masterDbInstanceId: "postgres-gzg9jb2n",
+ *     projectId: 0,
+ *     vpcId: "vpc-86v957zb",
+ *     subnetId: "subnet-enm92y0m",
+ *     replayLagEliminate: 1,
+ *     replayLatencyEliminate: 1,
+ *     maxReplayLag: 100,
+ *     maxReplayLatency: 512,
+ *     minDelayEliminateReserve: 1,
+ * });
+ * const readOnlyGroups = tencentcloud.Postgresql.getReadonlyGroupsOutput({
+ *     filters: [{
+ *         name: "db-master-instance-id",
+ *         values: [group.masterDbInstanceId],
+ *     }],
+ *     orderBy: "CreateTime",
+ *     orderByType: "asc",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getReadonlyGroupsOutput(args?: GetReadonlyGroupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetReadonlyGroupsResult> {
-    return pulumi.output(args).apply(a => getReadonlyGroups(a, opts))
+    return pulumi.output(args).apply((a: any) => getReadonlyGroups(a, opts))
 }
 
 /**

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const crossBorderFlowMonitor = pulumi.output(tencentcloud.Ccn.getCrossBorderFlowMonitor({
+ * const crossBorderFlowMonitor = tencentcloud.Ccn.getCrossBorderFlowMonitor({
  *     ccnId: "ccn-39lqkygf",
  *     ccnUin: "979137",
  *     destinationRegion: "ap-singapore",
@@ -22,15 +24,13 @@ import * as utilities from "../utilities";
  *     period: 60,
  *     sourceRegion: "ap-guangzhou",
  *     startTime: "2023-01-01 00:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCrossBorderFlowMonitor(args: GetCrossBorderFlowMonitorArgs, opts?: pulumi.InvokeOptions): Promise<GetCrossBorderFlowMonitorResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ccn/getCrossBorderFlowMonitor:getCrossBorderFlowMonitor", {
         "ccnId": args.ccnId,
         "ccnUin": args.ccnUin,
@@ -102,9 +102,30 @@ export interface GetCrossBorderFlowMonitorResult {
     readonly sourceRegion: string;
     readonly startTime: string;
 }
-
+/**
+ * Use this data source to query detailed information of vpc crossBorderFlowMonitor
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const crossBorderFlowMonitor = tencentcloud.Ccn.getCrossBorderFlowMonitor({
+ *     ccnId: "ccn-39lqkygf",
+ *     ccnUin: "979137",
+ *     destinationRegion: "ap-singapore",
+ *     endTime: "2023-01-01 01:00:00",
+ *     period: 60,
+ *     sourceRegion: "ap-guangzhou",
+ *     startTime: "2023-01-01 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCrossBorderFlowMonitorOutput(args: GetCrossBorderFlowMonitorOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCrossBorderFlowMonitorResult> {
-    return pulumi.output(args).apply(a => getCrossBorderFlowMonitor(a, opts))
+    return pulumi.output(args).apply((a: any) => getCrossBorderFlowMonitor(a, opts))
 }
 
 /**

@@ -22,11 +22,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Outputs
         /// Creation time of the CynosDB instance.
         /// </summary>
         public readonly string CreateTime;
+        /// <summary>
+        /// The number of CPU cores of the Cynosdb instance.
+        /// </summary>
         public readonly int InstanceCpuCore;
         /// <summary>
         /// ID of the Cynosdb instance to be queried.
         /// </summary>
         public readonly string? InstanceId;
+        /// <summary>
+        /// Memory capacity of the Cynosdb instance, unit in GB.
+        /// </summary>
         public readonly int InstanceMemorySize;
         /// <summary>
         /// Name of the Cynosdb instance to be queried.

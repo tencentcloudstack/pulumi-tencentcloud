@@ -14,13 +14,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Outputs
     [OutputType]
     public sealed class GetSearchResultResult
     {
+        /// <summary>
+        /// Log content details, note: this field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string Message;
+        /// <summary>
+        /// Region, Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string Region;
+        /// <summary>
+        /// Event matching rules, note: this field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string RuleIds;
+        /// <summary>
+        /// Event source, note: this field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string Source;
+        /// <summary>
+        /// Event status, note: this field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string Status;
+        /// <summary>
+        /// Instance ID, note: this field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string Subject;
+        /// <summary>
+        /// The reporting time of a single log, note: this field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string Timestamp;
+        /// <summary>
+        /// Event type, note: this field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string Type;
 
         [OutputConstructor]

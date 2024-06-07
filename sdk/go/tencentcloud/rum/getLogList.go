@@ -8,10 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 func GetLogList(ctx *pulumi.Context, args *GetLogListArgs, opts ...pulumi.InvokeOption) (*GetLogListResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetLogListResult
 	err := ctx.Invoke("tencentcloud:Rum/getLogList:getLogList", args, &rv, opts...)
 	if err != nil {

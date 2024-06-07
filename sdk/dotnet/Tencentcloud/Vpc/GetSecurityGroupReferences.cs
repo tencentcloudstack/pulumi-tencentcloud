@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc security_group_references
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var securityGroupReferences = Tencentcloud.Vpc.GetSecurityGroupReferences.Invoke(new()
         ///     {
-        ///         var securityGroupReferences = Output.Create(Tencentcloud.Vpc.GetSecurityGroupReferences.InvokeAsync(new Tencentcloud.Vpc.GetSecurityGroupReferencesArgs
+        ///         SecurityGroupIds = new[]
         ///         {
-        ///             SecurityGroupIds = 
-        ///             {
-        ///                 "sg-edmur627",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "sg-edmur627",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSecurityGroupReferencesResult> InvokeAsync(GetSecurityGroupReferencesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSecurityGroupReferencesResult>("tencentcloud:Vpc/getSecurityGroupReferences:getSecurityGroupReferences", args ?? new GetSecurityGroupReferencesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecurityGroupReferencesResult>("tencentcloud:Vpc/getSecurityGroupReferences:getSecurityGroupReferences", args ?? new GetSecurityGroupReferencesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc security_group_references
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var securityGroupReferences = Tencentcloud.Vpc.GetSecurityGroupReferences.Invoke(new()
         ///     {
-        ///         var securityGroupReferences = Output.Create(Tencentcloud.Vpc.GetSecurityGroupReferences.InvokeAsync(new Tencentcloud.Vpc.GetSecurityGroupReferencesArgs
+        ///         SecurityGroupIds = new[]
         ///         {
-        ///             SecurityGroupIds = 
-        ///             {
-        ///                 "sg-edmur627",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "sg-edmur627",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSecurityGroupReferencesResult> Invoke(GetSecurityGroupReferencesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSecurityGroupReferencesResult>("tencentcloud:Vpc/getSecurityGroupReferences:getSecurityGroupReferences", args ?? new GetSecurityGroupReferencesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSecurityGroupReferencesResult>("tencentcloud:Vpc/getSecurityGroupReferences:getSecurityGroupReferences", args ?? new GetSecurityGroupReferencesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSecurityGroupReferencesArgs : Pulumi.InvokeArgs
+    public sealed class GetSecurityGroupReferencesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetSecurityGroupReferencesArgs()
         {
         }
+        public static new GetSecurityGroupReferencesArgs Empty => new GetSecurityGroupReferencesArgs();
     }
 
-    public sealed class GetSecurityGroupReferencesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSecurityGroupReferencesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetSecurityGroupReferencesInvokeArgs()
         {
         }
+        public static new GetSecurityGroupReferencesInvokeArgs Empty => new GetSecurityGroupReferencesInvokeArgs();
     }
 
 

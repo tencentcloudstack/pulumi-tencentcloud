@@ -26,6 +26,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Outputs
         /// service name, meaningless when used as an input parameter.
         /// </summary>
         public readonly string? ServiceName;
+        /// <summary>
+        /// upstream name, meaningless when used as an input parameter.
+        /// </summary>
         public readonly string? UpstreamName;
 
         [OutputConstructor]

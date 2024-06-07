@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
 {
 
-    public sealed class BackupDownloadRestrictionLimitVpcArgs : Pulumi.ResourceArgs
+    public sealed class BackupDownloadRestrictionLimitVpcArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Restrict downloads from regions. Currently only the current region is supported.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql.Inputs
         public BackupDownloadRestrictionLimitVpcArgs()
         {
         }
+        public static new BackupDownloadRestrictionLimitVpcArgs Empty => new BackupDownloadRestrictionLimitVpcArgs();
     }
 }

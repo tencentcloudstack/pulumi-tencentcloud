@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const embedToken = new tencentcloud.Bi.EmbedTokenApply("embed_token", {
+ * const embedToken = new tencentcloud.bi.EmbedTokenApply("embedToken", {
  *     expireTime: "240",
  *     pageId: 10520483,
  *     projectId: 11015030,
@@ -22,6 +23,7 @@ import * as utilities from "../utilities";
  *     userId: "100024664626",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class EmbedTokenApply extends pulumi.CustomResource {
     /**

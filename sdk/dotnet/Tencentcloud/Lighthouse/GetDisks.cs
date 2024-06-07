@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// <summary>
         /// Use this data source to query detailed information of lighthouse disk
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var disks = Tencentcloud.Lighthouse.GetDisks.Invoke(new()
         ///     {
-        ///         var disks = Output.Create(Tencentcloud.Lighthouse.GetDisks.InvokeAsync(new Tencentcloud.Lighthouse.GetDisksArgs
+        ///         DiskIds = new[]
         ///         {
-        ///             DiskIds = 
-        ///             {
-        ///                 "lhdisk-xxxxxx",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "lhdisk-xxxxxx",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDisksResult> InvokeAsync(GetDisksArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDisksResult>("tencentcloud:Lighthouse/getDisks:getDisks", args ?? new GetDisksArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDisksResult>("tencentcloud:Lighthouse/getDisks:getDisks", args ?? new GetDisksArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of lighthouse disk
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var disks = Tencentcloud.Lighthouse.GetDisks.Invoke(new()
         ///     {
-        ///         var disks = Output.Create(Tencentcloud.Lighthouse.GetDisks.InvokeAsync(new Tencentcloud.Lighthouse.GetDisksArgs
+        ///         DiskIds = new[]
         ///         {
-        ///             DiskIds = 
-        ///             {
-        ///                 "lhdisk-xxxxxx",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "lhdisk-xxxxxx",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDisksResult> Invoke(GetDisksInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDisksResult>("tencentcloud:Lighthouse/getDisks:getDisks", args ?? new GetDisksInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDisksResult>("tencentcloud:Lighthouse/getDisks:getDisks", args ?? new GetDisksInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDisksArgs : Pulumi.InvokeArgs
+    public sealed class GetDisksArgs : global::Pulumi.InvokeArgs
     {
         [Input("diskIds")]
         private List<string>? _diskIds;
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetDisksArgs()
         {
         }
+        public static new GetDisksArgs Empty => new GetDisksArgs();
     }
 
-    public sealed class GetDisksInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDisksInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("diskIds")]
         private InputList<string>? _diskIds;
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetDisksInvokeArgs()
         {
         }
+        public static new GetDisksInvokeArgs Empty => new GetDisksInvokeArgs();
     }
 
 

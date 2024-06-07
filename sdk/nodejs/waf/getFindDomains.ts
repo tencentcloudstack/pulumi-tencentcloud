@@ -2,42 +2,46 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of waf findDomains
  *
  * ## Example Usage
+ *
  * ### Find all domains
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getFindDomains());
+ * const example = tencentcloud.Waf.getFindDomains({});
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Find domains by filter
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getFindDomains({
+ * const example = tencentcloud.Waf.getFindDomains({
  *     by: "FindTime",
  *     isWafDomain: "1",
  *     key: "keyWord",
  *     order: "asc",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getFindDomains(args?: GetFindDomainsArgs, opts?: pulumi.InvokeOptions): Promise<GetFindDomainsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Waf/getFindDomains:getFindDomains", {
         "by": args.by,
         "isWafDomain": args.isWafDomain,
@@ -94,9 +98,40 @@ export interface GetFindDomainsResult {
     readonly order?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of waf findDomains
+ *
+ * ## Example Usage
+ *
+ * ### Find all domains
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getFindDomains({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Find domains by filter
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getFindDomains({
+ *     by: "FindTime",
+ *     isWafDomain: "1",
+ *     key: "keyWord",
+ *     order: "asc",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getFindDomainsOutput(args?: GetFindDomainsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetFindDomainsResult> {
-    return pulumi.output(args).apply(a => getFindDomains(a, opts))
+    return pulumi.output(args).apply((a: any) => getFindDomains(a, opts))
 }
 
 /**

@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var paramTemplate = new Tencentcloud.Cynosdb.ParamTemplate("paramTemplate", new()
     ///     {
-    ///         var paramTemplate = new Tencentcloud.Cynosdb.ParamTemplate("paramTemplate", new Tencentcloud.Cynosdb.ParamTemplateArgs
+    ///         DbMode = "SERVERLESS",
+    ///         EngineVersion = "5.7",
+    ///         ParamLists = new[]
     ///         {
-    ///             DbMode = "SERVERLESS",
-    ///             EngineVersion = "5.7",
-    ///             ParamLists = 
+    ///             new Tencentcloud.Cynosdb.Inputs.ParamTemplateParamListArgs
     ///             {
-    ///                 new Tencentcloud.Cynosdb.Inputs.ParamTemplateParamListArgs
-    ///                 {
-    ///                     CurrentValue = "-1",
-    ///                     ParamName = "optimizer_trace_offset",
-    ///                 },
+    ///                 CurrentValue = "-1",
+    ///                 ParamName = "optimizer_trace_offset",
     ///             },
-    ///             TemplateDescription = "terraform-template",
-    ///             TemplateName = "terraform-template",
-    ///         });
-    ///     }
+    ///         },
+    ///         TemplateDescription = "terraform-template",
+    ///         TemplateName = "terraform-template",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/paramTemplate:ParamTemplate")]
-    public partial class ParamTemplate : Pulumi.CustomResource
+    public partial class ParamTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Database type, optional values: NORMAL (default), SERVERLESS.
@@ -127,7 +128,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class ParamTemplateArgs : Pulumi.ResourceArgs
+    public sealed class ParamTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Database type, optional values: NORMAL (default), SERVERLESS.
@@ -174,9 +175,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ParamTemplateArgs()
         {
         }
+        public static new ParamTemplateArgs Empty => new ParamTemplateArgs();
     }
 
-    public sealed class ParamTemplateState : Pulumi.ResourceArgs
+    public sealed class ParamTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Database type, optional values: NORMAL (default), SERVERLESS.
@@ -223,5 +225,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ParamTemplateState()
         {
         }
+        public static new ParamTemplateState Empty => new ParamTemplateState();
     }
 }

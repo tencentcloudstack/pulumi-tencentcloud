@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// <summary>
         /// Use this data source to get the available product configs of the postgresql instance.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Postgresql.GetSpecinfos.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Postgresql.GetSpecinfos.InvokeAsync(new Tencentcloud.Postgresql.GetSpecinfosArgs
-        ///         {
-        ///             AvailabilityZone = "ap-shanghai-2",
-        ///         }));
-        ///     }
+        ///         AvailabilityZone = "ap-shanghai-2",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSpecinfosResult> InvokeAsync(GetSpecinfosArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSpecinfosResult>("tencentcloud:Postgresql/getSpecinfos:getSpecinfos", args ?? new GetSpecinfosArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSpecinfosResult>("tencentcloud:Postgresql/getSpecinfos:getSpecinfos", args ?? new GetSpecinfosArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to get the available product configs of the postgresql instance.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Postgresql.GetSpecinfos.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Postgresql.GetSpecinfos.InvokeAsync(new Tencentcloud.Postgresql.GetSpecinfosArgs
-        ///         {
-        ///             AvailabilityZone = "ap-shanghai-2",
-        ///         }));
-        ///     }
+        ///         AvailabilityZone = "ap-shanghai-2",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSpecinfosResult> Invoke(GetSpecinfosInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSpecinfosResult>("tencentcloud:Postgresql/getSpecinfos:getSpecinfos", args ?? new GetSpecinfosInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSpecinfosResult>("tencentcloud:Postgresql/getSpecinfos:getSpecinfos", args ?? new GetSpecinfosInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSpecinfosArgs : Pulumi.InvokeArgs
+    public sealed class GetSpecinfosArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The zone of the postgresql instance to query.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetSpecinfosArgs()
         {
         }
+        public static new GetSpecinfosArgs Empty => new GetSpecinfosArgs();
     }
 
-    public sealed class GetSpecinfosInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSpecinfosInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The zone of the postgresql instance to query.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public GetSpecinfosInvokeArgs()
         {
         }
+        public static new GetSpecinfosInvokeArgs Empty => new GetSpecinfosInvokeArgs();
     }
 
 

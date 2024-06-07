@@ -7,43 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a lighthouse disk
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewDisk(ctx, "disk", &Lighthouse.DiskArgs{
-// 			DiskChargePrepaid: &lighthouse.DiskDiskChargePrepaidArgs{
-// 				Period:    pulumi.Int(1),
-// 				RenewFlag: pulumi.String("NOTIFY_AND_AUTO_RENEW"),
-// 				TimeUnit:  pulumi.String("m"),
-// 			},
-// 			DiskName: pulumi.String("test"),
-// 			DiskSize: pulumi.Int(20),
-// 			DiskType: pulumi.String("CLOUD_SSD"),
-// 			Zone:     pulumi.String("ap-hongkong-2"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewDisk(ctx, "disk", &Lighthouse.DiskArgs{
+//				DiskChargePrepaid: &lighthouse.DiskDiskChargePrepaidArgs{
+//					Period:    pulumi.Int(1),
+//					RenewFlag: pulumi.String("NOTIFY_AND_AUTO_RENEW"),
+//					TimeUnit:  pulumi.String("m"),
+//				},
+//				DiskName: pulumi.String("test"),
+//				DiskSize: pulumi.Int(20),
+//				DiskType: pulumi.String("CLOUD_SSD"),
+//				Zone:     pulumi.String("ap-hongkong-2"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type Disk struct {
 	pulumi.CustomResourceState
 
@@ -86,7 +91,7 @@ func NewDisk(ctx *pulumi.Context,
 	if args.Zone == nil {
 		return nil, errors.New("invalid value for required argument 'Zone'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Disk
 	err := ctx.RegisterResource("tencentcloud:Lighthouse/disk:Disk", name, args, &resource, opts...)
 	if err != nil {
@@ -223,7 +228,7 @@ func (i *Disk) ToDiskOutputWithContext(ctx context.Context) DiskOutput {
 // DiskArrayInput is an input type that accepts DiskArray and DiskArrayOutput values.
 // You can construct a concrete instance of `DiskArrayInput` via:
 //
-//          DiskArray{ DiskArgs{...} }
+//	DiskArray{ DiskArgs{...} }
 type DiskArrayInput interface {
 	pulumi.Input
 
@@ -248,7 +253,7 @@ func (i DiskArray) ToDiskArrayOutputWithContext(ctx context.Context) DiskArrayOu
 // DiskMapInput is an input type that accepts DiskMap and DiskMapOutput values.
 // You can construct a concrete instance of `DiskMapInput` via:
 //
-//          DiskMap{ "key": DiskArgs{...} }
+//	DiskMap{ "key": DiskArgs{...} }
 type DiskMapInput interface {
 	pulumi.Input
 

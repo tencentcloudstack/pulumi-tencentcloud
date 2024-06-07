@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const orgMemberAuthIdentity = new tencentcloud.Organization.OrgMemberAuthIdentityAttachment("org_member_auth_identity", {
+ * const orgMemberAuthIdentity = new tencentcloud.organization.OrgMemberAuthIdentityAttachment("orgMemberAuthIdentity", {
  *     identityIds: [1657],
  *     memberUin: 100033704327,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * organization org_member_auth_identity can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Organization/orgMemberAuthIdentityAttachment:OrgMemberAuthIdentityAttachment org_member_auth_identity org_member_auth_identity_id
+ * $ pulumi import tencentcloud:Organization/orgMemberAuthIdentityAttachment:OrgMemberAuthIdentityAttachment org_member_auth_identity org_member_auth_identity_id
  * ```
  */
 export class OrgMemberAuthIdentityAttachment extends pulumi.CustomResource {

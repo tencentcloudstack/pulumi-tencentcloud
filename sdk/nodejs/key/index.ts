@@ -5,11 +5,16 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./getPairs";
-export * from "./pair";
+export { GetPairsArgs, GetPairsResult, GetPairsOutputArgs } from "./getPairs";
+export const getPairs: typeof import("./getPairs").getPairs = null as any;
+export const getPairsOutput: typeof import("./getPairs").getPairsOutput = null as any;
+utilities.lazyLoad(exports, ["getPairs","getPairsOutput"], () => require("./getPairs"));
 
-// Import resources to register:
-import { Pair } from "./pair";
+export { PairArgs, PairState } from "./pair";
+export type Pair = import("./pair").Pair;
+export const Pair: typeof import("./pair").Pair = null as any;
+utilities.lazyLoad(exports, ["Pair"], () => require("./pair"));
+
 
 const _module = {
     version: utilities.getVersion(),

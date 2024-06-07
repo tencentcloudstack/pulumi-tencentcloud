@@ -14,175 +14,185 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// Provides a resource to create a ssm product_secret
     /// 
     /// ## Example Usage
+    /// 
     /// ### Ssm secret for mysql
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
+    ///         Product = "cdb",
+    ///     });
+    /// 
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    ///     {
+    ///         Description = "desc.",
+    ///     });
+    /// 
+    ///     var exampleInstance = new Tencentcloud.Mysql.Instance("exampleInstance", new()
+    ///     {
+    ///         InternetService = 1,
+    ///         EngineVersion = "5.7",
+    ///         ChargeType = "POSTPAID",
+    ///         RootPassword = "PassWord123",
+    ///         SlaveDeployMode = 0,
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[0]?.Name),
+    ///         SlaveSyncMode = 1,
+    ///         InstanceName = "tf-example",
+    ///         MemSize = 4000,
+    ///         VolumeSize = 200,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         IntranetPort = 3306,
+    ///         SecurityGroups = new[]
     ///         {
-    ///             Product = "cdb",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
+    ///             securityGroup.Id,
+    ///         },
+    ///         Tags = 
     ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
+    ///             { "createBy", "terraform" },
+    ///         },
+    ///         Parameters = 
     ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
+    ///             { "character_set_server", "utf8" },
+    ///             { "max_connections", "1000" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleKey = new Tencentcloud.Kms.Key("exampleKey", new()
+    ///     {
+    ///         Alias = "tf-example-kms-key",
+    ///         Description = "example of kms key",
+    ///         KeyRotationEnabled = false,
+    ///         IsEnabled = true,
+    ///         Tags = 
     ///         {
-    ///             Description = "desc.",
-    ///         });
-    ///         var exampleInstance = new Tencentcloud.Mysql.Instance("exampleInstance", new Tencentcloud.Mysql.InstanceArgs
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleProductSecret = new Tencentcloud.Ssm.ProductSecret("exampleProductSecret", new()
+    ///     {
+    ///         SecretName = "tf-example",
+    ///         UserNamePrefix = "prefix",
+    ///         ProductName = "Mysql",
+    ///         InstanceId = exampleInstance.Id,
+    ///         Domains = new[]
     ///         {
-    ///             InternetService = 1,
-    ///             EngineVersion = "5.7",
-    ///             ChargeType = "POSTPAID",
-    ///             RootPassword = "PassWord123",
-    ///             SlaveDeployMode = 0,
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[0]?.Name),
-    ///             SlaveSyncMode = 1,
-    ///             InstanceName = "tf-example",
-    ///             MemSize = 4000,
-    ///             VolumeSize = 200,
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             IntranetPort = 3306,
-    ///             SecurityGroups = 
+    ///             "10.0.0.0",
+    ///         },
+    ///         PrivilegesLists = new[]
+    ///         {
+    ///             new Tencentcloud.Ssm.Inputs.ProductSecretPrivilegesListArgs
     ///             {
-    ///                 securityGroup.Id,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "createBy", "terraform" },
-    ///             },
-    ///             Parameters = 
-    ///             {
-    ///                 { "character_set_server", "utf8" },
-    ///                 { "max_connections", "1000" },
-    ///             },
-    ///         });
-    ///         var exampleKey = new Tencentcloud.Kms.Key("exampleKey", new Tencentcloud.Kms.KeyArgs
-    ///         {
-    ///             Alias = "tf-example-kms-key",
-    ///             Description = "example of kms key",
-    ///             KeyRotationEnabled = false,
-    ///             IsEnabled = true,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var exampleProductSecret = new Tencentcloud.Ssm.ProductSecret("exampleProductSecret", new Tencentcloud.Ssm.ProductSecretArgs
-    ///         {
-    ///             SecretName = "tf-example",
-    ///             UserNamePrefix = "prefix",
-    ///             ProductName = "Mysql",
-    ///             InstanceId = exampleInstance.Id,
-    ///             Domains = 
-    ///             {
-    ///                 "10.0.0.0",
-    ///             },
-    ///             PrivilegesLists = 
-    ///             {
-    ///                 new Tencentcloud.Ssm.Inputs.ProductSecretPrivilegesListArgs
+    ///                 PrivilegeName = "GlobalPrivileges",
+    ///                 Privileges = new[]
     ///                 {
-    ///                     PrivilegeName = "GlobalPrivileges",
-    ///                     Privileges = 
-    ///                     {
-    ///                         "ALTER ROUTINE",
-    ///                     },
+    ///                     "ALTER ROUTINE",
     ///                 },
     ///             },
-    ///             Description = "for ssm product test",
-    ///             KmsKeyId = exampleKey.Id,
-    ///             Status = "Enabled",
-    ///             EnableRotation = true,
-    ///             RotationBeginTime = "2023-08-05 20:54:33",
-    ///             RotationFrequency = 30,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         Description = "for ssm product test",
+    ///         KmsKeyId = exampleKey.Id,
+    ///         Status = "Enabled",
+    ///         EnableRotation = true,
+    ///         RotationBeginTime = "2023-08-05 20:54:33",
+    ///         RotationFrequency = 30,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Ssm secret for tdsql-c-mysql
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Ssm.ProductSecret("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Ssm.ProductSecret("example", new Tencentcloud.Ssm.ProductSecretArgs
+    ///         SecretName = "tf-tdsql-c-example",
+    ///         UserNamePrefix = "prefix",
+    ///         ProductName = "Tdsql_C_Mysql",
+    ///         InstanceId = "cynosdbmysql-xxxxxx",
+    ///         Domains = new[]
     ///         {
-    ///             SecretName = "tf-tdsql-c-example",
-    ///             UserNamePrefix = "prefix",
-    ///             ProductName = "Tdsql_C_Mysql",
-    ///             InstanceId = "cynosdbmysql-xxxxxx",
-    ///             Domains = 
+    ///             "%",
+    ///         },
+    ///         PrivilegesLists = new[]
+    ///         {
+    ///             new Tencentcloud.Ssm.Inputs.ProductSecretPrivilegesListArgs
     ///             {
-    ///                 "%",
-    ///             },
-    ///             PrivilegesLists = 
-    ///             {
-    ///                 new Tencentcloud.Ssm.Inputs.ProductSecretPrivilegesListArgs
+    ///                 PrivilegeName = "GlobalPrivileges",
+    ///                 Privileges = new[]
     ///                 {
-    ///                     PrivilegeName = "GlobalPrivileges",
-    ///                     Privileges = 
-    ///                     {
-    ///                         "ALTER",
-    ///                         "CREATE",
-    ///                         "DELETE",
-    ///                     },
-    ///                 },
-    ///                 new Tencentcloud.Ssm.Inputs.ProductSecretPrivilegesListArgs
-    ///                 {
-    ///                     PrivilegeName = "DatabasePrivileges",
-    ///                     Database = "test",
-    ///                     Privileges = 
-    ///                     {
-    ///                         "ALTER",
-    ///                         "CREATE",
-    ///                         "DELETE",
-    ///                         "SELECT",
-    ///                     },
+    ///                     "ALTER",
+    ///                     "CREATE",
+    ///                     "DELETE",
     ///                 },
     ///             },
-    ///             Description = "test tdsql-c",
-    ///             KmsKeyId = null,
-    ///             Status = "Enabled",
-    ///             EnableRotation = false,
-    ///             RotationBeginTime = "2023-08-05 20:54:33",
-    ///             RotationFrequency = 30,
-    ///             Tags = 
+    ///             new Tencentcloud.Ssm.Inputs.ProductSecretPrivilegesListArgs
     ///             {
-    ///                 { "createdBy", "terraform" },
+    ///                 PrivilegeName = "DatabasePrivileges",
+    ///                 Database = "test",
+    ///                 Privileges = new[]
+    ///                 {
+    ///                     "ALTER",
+    ///                     "CREATE",
+    ///                     "DELETE",
+    ///                     "SELECT",
+    ///                 },
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         Description = "test tdsql-c",
+    ///         KmsKeyId = null,
+    ///         Status = "Enabled",
+    ///         EnableRotation = false,
+    ///         RotationBeginTime = "2023-08-05 20:54:33",
+    ///         RotationFrequency = 30,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssm/productSecret:ProductSecret")]
-    public partial class ProductSecret : Pulumi.CustomResource
+    public partial class ProductSecret : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Credential creation time in UNIX timestamp format.
@@ -319,7 +329,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         }
     }
 
-    public sealed class ProductSecretArgs : Pulumi.ResourceArgs
+    public sealed class ProductSecretArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description, which is used to describe the purpose in detail and can contain up to 2,048 bytes.
@@ -420,9 +430,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public ProductSecretArgs()
         {
         }
+        public static new ProductSecretArgs Empty => new ProductSecretArgs();
     }
 
-    public sealed class ProductSecretState : Pulumi.ResourceArgs
+    public sealed class ProductSecretState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Credential creation time in UNIX timestamp format.
@@ -535,5 +546,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public ProductSecretState()
         {
         }
+        public static new ProductSecretState Empty => new ProductSecretState();
     }
 }

@@ -8,40 +8,45 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of ccn crossBorderCompliance
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ccn.GetCrossBorderCompliance(ctx, &ccn.GetCrossBorderComplianceArgs{
-// 			ComplianceId:     pulumi.IntRef(10002),
-// 			Email:            pulumi.StringRef("test@tencent.com"),
-// 			ServiceEndDate:   pulumi.StringRef("2021-07-29"),
-// 			ServiceProvider:  pulumi.StringRef("UNICOM"),
-// 			ServiceStartDate: pulumi.StringRef("2020-07-29"),
-// 			State:            pulumi.StringRef("APPROVED"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ccn.GetCrossBorderCompliance(ctx, &ccn.GetCrossBorderComplianceArgs{
+//				ComplianceId:     pulumi.IntRef(10002),
+//				Email:            pulumi.StringRef("test@tencent.com"),
+//				ServiceEndDate:   pulumi.StringRef("2021-07-29"),
+//				ServiceProvider:  pulumi.StringRef("UNICOM"),
+//				ServiceStartDate: pulumi.StringRef("2020-07-29"),
+//				State:            pulumi.StringRef("APPROVED"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetCrossBorderCompliance(ctx *pulumi.Context, args *GetCrossBorderComplianceArgs, opts ...pulumi.InvokeOption) (*GetCrossBorderComplianceResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCrossBorderComplianceResult
 	err := ctx.Invoke("tencentcloud:Ccn/getCrossBorderCompliance:getCrossBorderCompliance", args, &rv, opts...)
 	if err != nil {

@@ -15,46 +15,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var appConfig = new Tencentcloud.Tem.AppConfig("appConfig", new()
     ///     {
-    ///         var appConfig = new Tencentcloud.Tem.AppConfig("appConfig", new Tencentcloud.Tem.AppConfigArgs
+    ///         ConfigDatas = new[]
     ///         {
-    ///             ConfigDatas = 
+    ///             new Tencentcloud.Tem.Inputs.AppConfigConfigDataArgs
     ///             {
-    ///                 new Tencentcloud.Tem.Inputs.AppConfigConfigDataArgs
-    ///                 {
-    ///                     Key = "key",
-    ///                     Value = "value",
-    ///                 },
-    ///                 new Tencentcloud.Tem.Inputs.AppConfigConfigDataArgs
-    ///                 {
-    ///                     Key = "key1",
-    ///                     Value = "value1",
-    ///                 },
+    ///                 Key = "key",
+    ///                 Value = "value",
     ///             },
-    ///             EnvironmentId = "en-o5edaepv",
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Tem.Inputs.AppConfigConfigDataArgs
+    ///             {
+    ///                 Key = "key1",
+    ///                 Value = "value1",
+    ///             },
+    ///         },
+    ///         EnvironmentId = "en-o5edaepv",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tem appConfig can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tem/appConfig:AppConfig appConfig environmentId#name
+    /// $ pulumi import tencentcloud:Tem/appConfig:AppConfig appConfig environmentId#name
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tem/appConfig:AppConfig")]
-    public partial class AppConfig : Pulumi.CustomResource
+    public partial class AppConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// payload.
@@ -119,7 +120,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         }
     }
 
-    public sealed class AppConfigArgs : Pulumi.ResourceArgs
+    public sealed class AppConfigArgs : global::Pulumi.ResourceArgs
     {
         [Input("configDatas", required: true)]
         private InputList<Inputs.AppConfigConfigDataArgs>? _configDatas;
@@ -148,9 +149,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         public AppConfigArgs()
         {
         }
+        public static new AppConfigArgs Empty => new AppConfigArgs();
     }
 
-    public sealed class AppConfigState : Pulumi.ResourceArgs
+    public sealed class AppConfigState : global::Pulumi.ResourceArgs
     {
         [Input("configDatas")]
         private InputList<Inputs.AppConfigConfigDataGetArgs>? _configDatas;
@@ -179,5 +181,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem
         public AppConfigState()
         {
         }
+        public static new AppConfigState Empty => new AppConfigState();
     }
 }

@@ -8,41 +8,46 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of mysql errorLog
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.GetErrorLog(ctx, &mysql.GetErrorLogArgs{
-// 			EndTime:    1686043908,
-// 			InstType:   pulumi.StringRef("slave"),
-// 			InstanceId: "cdb-fitq5t9h",
-// 			KeyWords: []string{
-// 				"Shutting",
-// 			},
-// 			StartTime: 1683538307,
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mysql.GetErrorLog(ctx, &mysql.GetErrorLogArgs{
+//				EndTime:    1686043908,
+//				InstType:   pulumi.StringRef("slave"),
+//				InstanceId: "cdb-fitq5t9h",
+//				KeyWords: []string{
+//					"Shutting",
+//				},
+//				StartTime: 1683538307,
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetErrorLog(ctx *pulumi.Context, args *GetErrorLogArgs, opts ...pulumi.InvokeOption) (*GetErrorLogResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetErrorLogResult
 	err := ctx.Invoke("tencentcloud:Mysql/getErrorLog:getErrorLog", args, &rv, opts...)
 	if err != nil {

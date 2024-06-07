@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dlc modifyDataEngineDescriptionOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dlc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dlc.NewModifyDataEngineDescriptionOperation(ctx, "modifyDataEngineDescriptionOperation", &Dlc.ModifyDataEngineDescriptionOperationArgs{
-// 			DataEngineName: pulumi.String("testEngine"),
-// 			Message:        pulumi.String("test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dlc.NewModifyDataEngineDescriptionOperation(ctx, "modifyDataEngineDescriptionOperation", &Dlc.ModifyDataEngineDescriptionOperationArgs{
+//				DataEngineName: pulumi.String("testEngine"),
+//				Message:        pulumi.String("test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dlc modify_data_engine_description_operation can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dlc/modifyDataEngineDescriptionOperation:ModifyDataEngineDescriptionOperation modify_data_engine_description_operation modify_data_engine_description_operation_id
+// $ pulumi import tencentcloud:Dlc/modifyDataEngineDescriptionOperation:ModifyDataEngineDescriptionOperation modify_data_engine_description_operation modify_data_engine_description_operation_id
 // ```
 type ModifyDataEngineDescriptionOperation struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewModifyDataEngineDescriptionOperation(ctx *pulumi.Context,
 	if args.Message == nil {
 		return nil, errors.New("invalid value for required argument 'Message'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ModifyDataEngineDescriptionOperation
 	err := ctx.RegisterResource("tencentcloud:Dlc/modifyDataEngineDescriptionOperation:ModifyDataEngineDescriptionOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *ModifyDataEngineDescriptionOperation) ToModifyDataEngineDescriptionOper
 // ModifyDataEngineDescriptionOperationArrayInput is an input type that accepts ModifyDataEngineDescriptionOperationArray and ModifyDataEngineDescriptionOperationArrayOutput values.
 // You can construct a concrete instance of `ModifyDataEngineDescriptionOperationArrayInput` via:
 //
-//          ModifyDataEngineDescriptionOperationArray{ ModifyDataEngineDescriptionOperationArgs{...} }
+//	ModifyDataEngineDescriptionOperationArray{ ModifyDataEngineDescriptionOperationArgs{...} }
 type ModifyDataEngineDescriptionOperationArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i ModifyDataEngineDescriptionOperationArray) ToModifyDataEngineDescription
 // ModifyDataEngineDescriptionOperationMapInput is an input type that accepts ModifyDataEngineDescriptionOperationMap and ModifyDataEngineDescriptionOperationMapOutput values.
 // You can construct a concrete instance of `ModifyDataEngineDescriptionOperationMapInput` via:
 //
-//          ModifyDataEngineDescriptionOperationMap{ "key": ModifyDataEngineDescriptionOperationArgs{...} }
+//	ModifyDataEngineDescriptionOperationMap{ "key": ModifyDataEngineDescriptionOperationArgs{...} }
 type ModifyDataEngineDescriptionOperationMapInput interface {
 	pulumi.Input
 

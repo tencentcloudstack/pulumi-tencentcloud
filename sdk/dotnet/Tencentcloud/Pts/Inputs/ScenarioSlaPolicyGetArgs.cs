@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class ScenarioSlaPolicyGetArgs : Pulumi.ResourceArgs
+    public sealed class ScenarioSlaPolicyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alarm notification channel.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public ScenarioSlaPolicyGetArgs()
         {
         }
+        public static new ScenarioSlaPolicyGetArgs Empty => new ScenarioSlaPolicyGetArgs();
     }
 }

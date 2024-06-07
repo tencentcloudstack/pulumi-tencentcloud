@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain redis_top_big_keys
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var redisTopBigKeys = Tencentcloud.Dbbrain.GetRedisTopBigKeys.Invoke(new()
         ///     {
-        ///         var redisTopBigKeys = Output.Create(Tencentcloud.Dbbrain.GetRedisTopBigKeys.InvokeAsync(new Tencentcloud.Dbbrain.GetRedisTopBigKeysArgs
-        ///         {
-        ///             InstanceId = local.Redis_id,
-        ///             Date = "%s",
-        ///             Product = "redis",
-        ///             SortBy = "Capacity",
-        ///             KeyType = "string",
-        ///         }));
-        ///     }
+        ///         InstanceId = local.Redis_id,
+        ///         Date = "%s",
+        ///         Product = "redis",
+        ///         SortBy = "Capacity",
+        ///         KeyType = "string",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRedisTopBigKeysResult> InvokeAsync(GetRedisTopBigKeysArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRedisTopBigKeysResult>("tencentcloud:Dbbrain/getRedisTopBigKeys:getRedisTopBigKeys", args ?? new GetRedisTopBigKeysArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRedisTopBigKeysResult>("tencentcloud:Dbbrain/getRedisTopBigKeys:getRedisTopBigKeys", args ?? new GetRedisTopBigKeysArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain redis_top_big_keys
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var redisTopBigKeys = Tencentcloud.Dbbrain.GetRedisTopBigKeys.Invoke(new()
         ///     {
-        ///         var redisTopBigKeys = Output.Create(Tencentcloud.Dbbrain.GetRedisTopBigKeys.InvokeAsync(new Tencentcloud.Dbbrain.GetRedisTopBigKeysArgs
-        ///         {
-        ///             InstanceId = local.Redis_id,
-        ///             Date = "%s",
-        ///             Product = "redis",
-        ///             SortBy = "Capacity",
-        ///             KeyType = "string",
-        ///         }));
-        ///     }
+        ///         InstanceId = local.Redis_id,
+        ///         Date = "%s",
+        ///         Product = "redis",
+        ///         SortBy = "Capacity",
+        ///         KeyType = "string",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRedisTopBigKeysResult> Invoke(GetRedisTopBigKeysInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRedisTopBigKeysResult>("tencentcloud:Dbbrain/getRedisTopBigKeys:getRedisTopBigKeys", args ?? new GetRedisTopBigKeysInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRedisTopBigKeysResult>("tencentcloud:Dbbrain/getRedisTopBigKeys:getRedisTopBigKeys", args ?? new GetRedisTopBigKeysInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRedisTopBigKeysArgs : Pulumi.InvokeArgs
+    public sealed class GetRedisTopBigKeysArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Query date, such as 2021-05-27, the earliest date can be the previous 30 days.
@@ -121,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetRedisTopBigKeysArgs()
         {
         }
+        public static new GetRedisTopBigKeysArgs Empty => new GetRedisTopBigKeysArgs();
     }
 
-    public sealed class GetRedisTopBigKeysInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRedisTopBigKeysInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Query date, such as 2021-05-27, the earliest date can be the previous 30 days.
@@ -164,6 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetRedisTopBigKeysInvokeArgs()
         {
         }
+        public static new GetRedisTopBigKeysInvokeArgs Empty => new GetRedisTopBigKeysInvokeArgs();
     }
 
 

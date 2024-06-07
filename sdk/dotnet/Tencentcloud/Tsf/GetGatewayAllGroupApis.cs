@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf gateway_all_group_apis
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var gatewayAllGroupApis = Tencentcloud.Tsf.GetGatewayAllGroupApis.Invoke(new()
         ///     {
-        ///         var gatewayAllGroupApis = Output.Create(Tencentcloud.Tsf.GetGatewayAllGroupApis.InvokeAsync(new Tencentcloud.Tsf.GetGatewayAllGroupApisArgs
-        ///         {
-        ///             GatewayDeployGroupId = "group-aeoej4qy",
-        ///             SearchWord = "user",
-        ///         }));
-        ///     }
+        ///         GatewayDeployGroupId = "group-aeoej4qy",
+        ///         SearchWord = "user",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGatewayAllGroupApisResult> InvokeAsync(GetGatewayAllGroupApisArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGatewayAllGroupApisResult>("tencentcloud:Tsf/getGatewayAllGroupApis:getGatewayAllGroupApis", args ?? new GetGatewayAllGroupApisArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayAllGroupApisResult>("tencentcloud:Tsf/getGatewayAllGroupApis:getGatewayAllGroupApis", args ?? new GetGatewayAllGroupApisArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf gateway_all_group_apis
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var gatewayAllGroupApis = Tencentcloud.Tsf.GetGatewayAllGroupApis.Invoke(new()
         ///     {
-        ///         var gatewayAllGroupApis = Output.Create(Tencentcloud.Tsf.GetGatewayAllGroupApis.InvokeAsync(new Tencentcloud.Tsf.GetGatewayAllGroupApisArgs
-        ///         {
-        ///             GatewayDeployGroupId = "group-aeoej4qy",
-        ///             SearchWord = "user",
-        ///         }));
-        ///     }
+        ///         GatewayDeployGroupId = "group-aeoej4qy",
+        ///         SearchWord = "user",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGatewayAllGroupApisResult> Invoke(GetGatewayAllGroupApisInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGatewayAllGroupApisResult>("tencentcloud:Tsf/getGatewayAllGroupApis:getGatewayAllGroupApis", args ?? new GetGatewayAllGroupApisInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGatewayAllGroupApisResult>("tencentcloud:Tsf/getGatewayAllGroupApis:getGatewayAllGroupApis", args ?? new GetGatewayAllGroupApisInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGatewayAllGroupApisArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayAllGroupApisArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// gateway group Id.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetGatewayAllGroupApisArgs()
         {
         }
+        public static new GetGatewayAllGroupApisArgs Empty => new GetGatewayAllGroupApisArgs();
     }
 
-    public sealed class GetGatewayAllGroupApisInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGatewayAllGroupApisInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// gateway group Id.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetGatewayAllGroupApisInvokeArgs()
         {
         }
+        public static new GetGatewayAllGroupApisInvokeArgs Empty => new GetGatewayAllGroupApisInvokeArgs();
     }
 
 

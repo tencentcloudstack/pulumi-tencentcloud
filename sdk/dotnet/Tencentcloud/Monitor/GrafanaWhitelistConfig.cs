@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var grafanaWhitelistConfig = new Tencentcloud.Monitor.GrafanaWhitelistConfig("grafanaWhitelistConfig", new()
     ///     {
-    ///         var grafanaWhitelistConfig = new Tencentcloud.Monitor.GrafanaWhitelistConfig("grafanaWhitelistConfig", new Tencentcloud.Monitor.GrafanaWhitelistConfigArgs
+    ///         InstanceId = "grafana-dp2hnnfa",
+    ///         Whitelists = new[]
     ///         {
-    ///             InstanceId = "grafana-dp2hnnfa",
-    ///             Whitelists = 
-    ///             {
-    ///                 "10.1.1.1",
-    ///                 "10.1.1.2",
-    ///                 "10.1.1.3",
-    ///             },
-    ///         });
-    ///     }
+    ///             "10.1.1.1",
+    ///             "10.1.1.2",
+    ///             "10.1.1.3",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor grafana_whitelist_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/grafanaWhitelistConfig:GrafanaWhitelistConfig grafana_whitelist_config instance_id
+    /// $ pulumi import tencentcloud:Monitor/grafanaWhitelistConfig:GrafanaWhitelistConfig grafana_whitelist_config instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/grafanaWhitelistConfig:GrafanaWhitelistConfig")]
-    public partial class GrafanaWhitelistConfig : Pulumi.CustomResource
+    public partial class GrafanaWhitelistConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Grafana instance ID.
@@ -106,7 +107,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class GrafanaWhitelistConfigArgs : Pulumi.ResourceArgs
+    public sealed class GrafanaWhitelistConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Grafana instance ID.
@@ -129,9 +130,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaWhitelistConfigArgs()
         {
         }
+        public static new GrafanaWhitelistConfigArgs Empty => new GrafanaWhitelistConfigArgs();
     }
 
-    public sealed class GrafanaWhitelistConfigState : Pulumi.ResourceArgs
+    public sealed class GrafanaWhitelistConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Grafana instance ID.
@@ -154,5 +156,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaWhitelistConfigState()
         {
         }
+        public static new GrafanaWhitelistConfigState Empty => new GrafanaWhitelistConfigState();
     }
 }

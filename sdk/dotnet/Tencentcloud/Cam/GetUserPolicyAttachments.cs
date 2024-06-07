@@ -15,74 +15,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// <summary>
         /// Use this data source to query detailed information of CAM user policy attachments
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cam.GetUserPolicyAttachments.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cam.GetUserPolicyAttachments.InvokeAsync(new Tencentcloud.Cam.GetUserPolicyAttachmentsArgs
-        ///         {
-        ///             UserId = tencentcloud_cam_user.Foo.Id,
-        ///         }));
-        ///         var bar = Output.Create(Tencentcloud.Cam.GetUserPolicyAttachments.InvokeAsync(new Tencentcloud.Cam.GetUserPolicyAttachmentsArgs
-        ///         {
-        ///             UserId = tencentcloud_cam_user.Foo.Id,
-        ///             PolicyId = tencentcloud_cam_policy.Foo.Id,
-        ///         }));
-        ///     }
+        ///         UserId = tencentcloud_cam_user.Foo.Id,
+        ///     });
         /// 
-        /// }
+        ///     var bar = Tencentcloud.Cam.GetUserPolicyAttachments.Invoke(new()
+        ///     {
+        ///         UserId = tencentcloud_cam_user.Foo.Id,
+        ///         PolicyId = tencentcloud_cam_policy.Foo.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetUserPolicyAttachmentsResult> InvokeAsync(GetUserPolicyAttachmentsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetUserPolicyAttachmentsResult>("tencentcloud:Cam/getUserPolicyAttachments:getUserPolicyAttachments", args ?? new GetUserPolicyAttachmentsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetUserPolicyAttachmentsResult>("tencentcloud:Cam/getUserPolicyAttachments:getUserPolicyAttachments", args ?? new GetUserPolicyAttachmentsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of CAM user policy attachments
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cam.GetUserPolicyAttachments.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cam.GetUserPolicyAttachments.InvokeAsync(new Tencentcloud.Cam.GetUserPolicyAttachmentsArgs
-        ///         {
-        ///             UserId = tencentcloud_cam_user.Foo.Id,
-        ///         }));
-        ///         var bar = Output.Create(Tencentcloud.Cam.GetUserPolicyAttachments.InvokeAsync(new Tencentcloud.Cam.GetUserPolicyAttachmentsArgs
-        ///         {
-        ///             UserId = tencentcloud_cam_user.Foo.Id,
-        ///             PolicyId = tencentcloud_cam_policy.Foo.Id,
-        ///         }));
-        ///     }
+        ///         UserId = tencentcloud_cam_user.Foo.Id,
+        ///     });
         /// 
-        /// }
+        ///     var bar = Tencentcloud.Cam.GetUserPolicyAttachments.Invoke(new()
+        ///     {
+        ///         UserId = tencentcloud_cam_user.Foo.Id,
+        ///         PolicyId = tencentcloud_cam_policy.Foo.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetUserPolicyAttachmentsResult> Invoke(GetUserPolicyAttachmentsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetUserPolicyAttachmentsResult>("tencentcloud:Cam/getUserPolicyAttachments:getUserPolicyAttachments", args ?? new GetUserPolicyAttachmentsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetUserPolicyAttachmentsResult>("tencentcloud:Cam/getUserPolicyAttachments:getUserPolicyAttachments", args ?? new GetUserPolicyAttachmentsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetUserPolicyAttachmentsArgs : Pulumi.InvokeArgs
+    public sealed class GetUserPolicyAttachmentsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
@@ -123,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetUserPolicyAttachmentsArgs()
         {
         }
+        public static new GetUserPolicyAttachmentsArgs Empty => new GetUserPolicyAttachmentsArgs();
     }
 
-    public sealed class GetUserPolicyAttachmentsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetUserPolicyAttachmentsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
@@ -166,6 +163,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetUserPolicyAttachmentsInvokeArgs()
         {
         }
+        public static new GetUserPolicyAttachmentsInvokeArgs Empty => new GetUserPolicyAttachmentsInvokeArgs();
     }
 
 

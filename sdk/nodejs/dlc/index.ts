@@ -5,63 +5,176 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./addUsersToWorkGroupAttachment";
-export * from "./attachUserPolicyOperation";
-export * from "./attachWorkGroupPolicyOperation";
-export * from "./bindWorkGroupsToUserAttachment";
-export * from "./dataEngine";
-export * from "./detachUserPolicyOperation";
-export * from "./detachWorkGroupPolicyOperation";
-export * from "./getCheckDataEngineConfigPairsValidity";
-export * from "./getCheckDataEngineImageCanBeRollback";
-export * from "./getCheckDataEngineImageCanBeUpgrade";
-export * from "./getDescribeDataEngine";
-export * from "./getDescribeDataEngineEvents";
-export * from "./getDescribeDataEngineImageVersions";
-export * from "./getDescribeDataEnginePythonSparkImages";
-export * from "./getDescribeEngineUsageInfo";
-export * from "./getDescribeUpdatableDataEngines";
-export * from "./getDescribeUserInfo";
-export * from "./getDescribeUserRoles";
-export * from "./getDescribeUserType";
-export * from "./getDescribeWorkGroupInfo";
-export * from "./modifyDataEngineDescriptionOperation";
-export * from "./modifyUserTypOperation";
-export * from "./renewDataEngineOperation";
-export * from "./restartDataEngineOperation";
-export * from "./rollbackDataEngineImageOperation";
-export * from "./storeLocationConfig";
-export * from "./suspendResumeDataEngine";
-export * from "./switchDataEngineImageOperation";
-export * from "./updateDataEngineConfigOperation";
-export * from "./updateRowFilterOperation";
-export * from "./upgradeDataEngineImageOperation";
-export * from "./user";
-export * from "./userDataEngineConfig";
-export * from "./workGroup";
+export { AddUsersToWorkGroupAttachmentArgs, AddUsersToWorkGroupAttachmentState } from "./addUsersToWorkGroupAttachment";
+export type AddUsersToWorkGroupAttachment = import("./addUsersToWorkGroupAttachment").AddUsersToWorkGroupAttachment;
+export const AddUsersToWorkGroupAttachment: typeof import("./addUsersToWorkGroupAttachment").AddUsersToWorkGroupAttachment = null as any;
+utilities.lazyLoad(exports, ["AddUsersToWorkGroupAttachment"], () => require("./addUsersToWorkGroupAttachment"));
 
-// Import resources to register:
-import { AddUsersToWorkGroupAttachment } from "./addUsersToWorkGroupAttachment";
-import { AttachUserPolicyOperation } from "./attachUserPolicyOperation";
-import { AttachWorkGroupPolicyOperation } from "./attachWorkGroupPolicyOperation";
-import { BindWorkGroupsToUserAttachment } from "./bindWorkGroupsToUserAttachment";
-import { DataEngine } from "./dataEngine";
-import { DetachUserPolicyOperation } from "./detachUserPolicyOperation";
-import { DetachWorkGroupPolicyOperation } from "./detachWorkGroupPolicyOperation";
-import { ModifyDataEngineDescriptionOperation } from "./modifyDataEngineDescriptionOperation";
-import { ModifyUserTypOperation } from "./modifyUserTypOperation";
-import { RenewDataEngineOperation } from "./renewDataEngineOperation";
-import { RestartDataEngineOperation } from "./restartDataEngineOperation";
-import { RollbackDataEngineImageOperation } from "./rollbackDataEngineImageOperation";
-import { StoreLocationConfig } from "./storeLocationConfig";
-import { SuspendResumeDataEngine } from "./suspendResumeDataEngine";
-import { SwitchDataEngineImageOperation } from "./switchDataEngineImageOperation";
-import { UpdateDataEngineConfigOperation } from "./updateDataEngineConfigOperation";
-import { UpdateRowFilterOperation } from "./updateRowFilterOperation";
-import { UpgradeDataEngineImageOperation } from "./upgradeDataEngineImageOperation";
-import { User } from "./user";
-import { UserDataEngineConfig } from "./userDataEngineConfig";
-import { WorkGroup } from "./workGroup";
+export { AttachUserPolicyOperationArgs, AttachUserPolicyOperationState } from "./attachUserPolicyOperation";
+export type AttachUserPolicyOperation = import("./attachUserPolicyOperation").AttachUserPolicyOperation;
+export const AttachUserPolicyOperation: typeof import("./attachUserPolicyOperation").AttachUserPolicyOperation = null as any;
+utilities.lazyLoad(exports, ["AttachUserPolicyOperation"], () => require("./attachUserPolicyOperation"));
+
+export { AttachWorkGroupPolicyOperationArgs, AttachWorkGroupPolicyOperationState } from "./attachWorkGroupPolicyOperation";
+export type AttachWorkGroupPolicyOperation = import("./attachWorkGroupPolicyOperation").AttachWorkGroupPolicyOperation;
+export const AttachWorkGroupPolicyOperation: typeof import("./attachWorkGroupPolicyOperation").AttachWorkGroupPolicyOperation = null as any;
+utilities.lazyLoad(exports, ["AttachWorkGroupPolicyOperation"], () => require("./attachWorkGroupPolicyOperation"));
+
+export { BindWorkGroupsToUserAttachmentArgs, BindWorkGroupsToUserAttachmentState } from "./bindWorkGroupsToUserAttachment";
+export type BindWorkGroupsToUserAttachment = import("./bindWorkGroupsToUserAttachment").BindWorkGroupsToUserAttachment;
+export const BindWorkGroupsToUserAttachment: typeof import("./bindWorkGroupsToUserAttachment").BindWorkGroupsToUserAttachment = null as any;
+utilities.lazyLoad(exports, ["BindWorkGroupsToUserAttachment"], () => require("./bindWorkGroupsToUserAttachment"));
+
+export { DataEngineArgs, DataEngineState } from "./dataEngine";
+export type DataEngine = import("./dataEngine").DataEngine;
+export const DataEngine: typeof import("./dataEngine").DataEngine = null as any;
+utilities.lazyLoad(exports, ["DataEngine"], () => require("./dataEngine"));
+
+export { DetachUserPolicyOperationArgs, DetachUserPolicyOperationState } from "./detachUserPolicyOperation";
+export type DetachUserPolicyOperation = import("./detachUserPolicyOperation").DetachUserPolicyOperation;
+export const DetachUserPolicyOperation: typeof import("./detachUserPolicyOperation").DetachUserPolicyOperation = null as any;
+utilities.lazyLoad(exports, ["DetachUserPolicyOperation"], () => require("./detachUserPolicyOperation"));
+
+export { DetachWorkGroupPolicyOperationArgs, DetachWorkGroupPolicyOperationState } from "./detachWorkGroupPolicyOperation";
+export type DetachWorkGroupPolicyOperation = import("./detachWorkGroupPolicyOperation").DetachWorkGroupPolicyOperation;
+export const DetachWorkGroupPolicyOperation: typeof import("./detachWorkGroupPolicyOperation").DetachWorkGroupPolicyOperation = null as any;
+utilities.lazyLoad(exports, ["DetachWorkGroupPolicyOperation"], () => require("./detachWorkGroupPolicyOperation"));
+
+export { GetCheckDataEngineConfigPairsValidityArgs, GetCheckDataEngineConfigPairsValidityResult, GetCheckDataEngineConfigPairsValidityOutputArgs } from "./getCheckDataEngineConfigPairsValidity";
+export const getCheckDataEngineConfigPairsValidity: typeof import("./getCheckDataEngineConfigPairsValidity").getCheckDataEngineConfigPairsValidity = null as any;
+export const getCheckDataEngineConfigPairsValidityOutput: typeof import("./getCheckDataEngineConfigPairsValidity").getCheckDataEngineConfigPairsValidityOutput = null as any;
+utilities.lazyLoad(exports, ["getCheckDataEngineConfigPairsValidity","getCheckDataEngineConfigPairsValidityOutput"], () => require("./getCheckDataEngineConfigPairsValidity"));
+
+export { GetCheckDataEngineImageCanBeRollbackArgs, GetCheckDataEngineImageCanBeRollbackResult, GetCheckDataEngineImageCanBeRollbackOutputArgs } from "./getCheckDataEngineImageCanBeRollback";
+export const getCheckDataEngineImageCanBeRollback: typeof import("./getCheckDataEngineImageCanBeRollback").getCheckDataEngineImageCanBeRollback = null as any;
+export const getCheckDataEngineImageCanBeRollbackOutput: typeof import("./getCheckDataEngineImageCanBeRollback").getCheckDataEngineImageCanBeRollbackOutput = null as any;
+utilities.lazyLoad(exports, ["getCheckDataEngineImageCanBeRollback","getCheckDataEngineImageCanBeRollbackOutput"], () => require("./getCheckDataEngineImageCanBeRollback"));
+
+export { GetCheckDataEngineImageCanBeUpgradeArgs, GetCheckDataEngineImageCanBeUpgradeResult, GetCheckDataEngineImageCanBeUpgradeOutputArgs } from "./getCheckDataEngineImageCanBeUpgrade";
+export const getCheckDataEngineImageCanBeUpgrade: typeof import("./getCheckDataEngineImageCanBeUpgrade").getCheckDataEngineImageCanBeUpgrade = null as any;
+export const getCheckDataEngineImageCanBeUpgradeOutput: typeof import("./getCheckDataEngineImageCanBeUpgrade").getCheckDataEngineImageCanBeUpgradeOutput = null as any;
+utilities.lazyLoad(exports, ["getCheckDataEngineImageCanBeUpgrade","getCheckDataEngineImageCanBeUpgradeOutput"], () => require("./getCheckDataEngineImageCanBeUpgrade"));
+
+export { GetDescribeDataEngineArgs, GetDescribeDataEngineResult, GetDescribeDataEngineOutputArgs } from "./getDescribeDataEngine";
+export const getDescribeDataEngine: typeof import("./getDescribeDataEngine").getDescribeDataEngine = null as any;
+export const getDescribeDataEngineOutput: typeof import("./getDescribeDataEngine").getDescribeDataEngineOutput = null as any;
+utilities.lazyLoad(exports, ["getDescribeDataEngine","getDescribeDataEngineOutput"], () => require("./getDescribeDataEngine"));
+
+export { GetDescribeDataEngineEventsArgs, GetDescribeDataEngineEventsResult, GetDescribeDataEngineEventsOutputArgs } from "./getDescribeDataEngineEvents";
+export const getDescribeDataEngineEvents: typeof import("./getDescribeDataEngineEvents").getDescribeDataEngineEvents = null as any;
+export const getDescribeDataEngineEventsOutput: typeof import("./getDescribeDataEngineEvents").getDescribeDataEngineEventsOutput = null as any;
+utilities.lazyLoad(exports, ["getDescribeDataEngineEvents","getDescribeDataEngineEventsOutput"], () => require("./getDescribeDataEngineEvents"));
+
+export { GetDescribeDataEngineImageVersionsArgs, GetDescribeDataEngineImageVersionsResult, GetDescribeDataEngineImageVersionsOutputArgs } from "./getDescribeDataEngineImageVersions";
+export const getDescribeDataEngineImageVersions: typeof import("./getDescribeDataEngineImageVersions").getDescribeDataEngineImageVersions = null as any;
+export const getDescribeDataEngineImageVersionsOutput: typeof import("./getDescribeDataEngineImageVersions").getDescribeDataEngineImageVersionsOutput = null as any;
+utilities.lazyLoad(exports, ["getDescribeDataEngineImageVersions","getDescribeDataEngineImageVersionsOutput"], () => require("./getDescribeDataEngineImageVersions"));
+
+export { GetDescribeDataEnginePythonSparkImagesArgs, GetDescribeDataEnginePythonSparkImagesResult, GetDescribeDataEnginePythonSparkImagesOutputArgs } from "./getDescribeDataEnginePythonSparkImages";
+export const getDescribeDataEnginePythonSparkImages: typeof import("./getDescribeDataEnginePythonSparkImages").getDescribeDataEnginePythonSparkImages = null as any;
+export const getDescribeDataEnginePythonSparkImagesOutput: typeof import("./getDescribeDataEnginePythonSparkImages").getDescribeDataEnginePythonSparkImagesOutput = null as any;
+utilities.lazyLoad(exports, ["getDescribeDataEnginePythonSparkImages","getDescribeDataEnginePythonSparkImagesOutput"], () => require("./getDescribeDataEnginePythonSparkImages"));
+
+export { GetDescribeEngineUsageInfoArgs, GetDescribeEngineUsageInfoResult, GetDescribeEngineUsageInfoOutputArgs } from "./getDescribeEngineUsageInfo";
+export const getDescribeEngineUsageInfo: typeof import("./getDescribeEngineUsageInfo").getDescribeEngineUsageInfo = null as any;
+export const getDescribeEngineUsageInfoOutput: typeof import("./getDescribeEngineUsageInfo").getDescribeEngineUsageInfoOutput = null as any;
+utilities.lazyLoad(exports, ["getDescribeEngineUsageInfo","getDescribeEngineUsageInfoOutput"], () => require("./getDescribeEngineUsageInfo"));
+
+export { GetDescribeUpdatableDataEnginesArgs, GetDescribeUpdatableDataEnginesResult, GetDescribeUpdatableDataEnginesOutputArgs } from "./getDescribeUpdatableDataEngines";
+export const getDescribeUpdatableDataEngines: typeof import("./getDescribeUpdatableDataEngines").getDescribeUpdatableDataEngines = null as any;
+export const getDescribeUpdatableDataEnginesOutput: typeof import("./getDescribeUpdatableDataEngines").getDescribeUpdatableDataEnginesOutput = null as any;
+utilities.lazyLoad(exports, ["getDescribeUpdatableDataEngines","getDescribeUpdatableDataEnginesOutput"], () => require("./getDescribeUpdatableDataEngines"));
+
+export { GetDescribeUserInfoArgs, GetDescribeUserInfoResult, GetDescribeUserInfoOutputArgs } from "./getDescribeUserInfo";
+export const getDescribeUserInfo: typeof import("./getDescribeUserInfo").getDescribeUserInfo = null as any;
+export const getDescribeUserInfoOutput: typeof import("./getDescribeUserInfo").getDescribeUserInfoOutput = null as any;
+utilities.lazyLoad(exports, ["getDescribeUserInfo","getDescribeUserInfoOutput"], () => require("./getDescribeUserInfo"));
+
+export { GetDescribeUserRolesArgs, GetDescribeUserRolesResult, GetDescribeUserRolesOutputArgs } from "./getDescribeUserRoles";
+export const getDescribeUserRoles: typeof import("./getDescribeUserRoles").getDescribeUserRoles = null as any;
+export const getDescribeUserRolesOutput: typeof import("./getDescribeUserRoles").getDescribeUserRolesOutput = null as any;
+utilities.lazyLoad(exports, ["getDescribeUserRoles","getDescribeUserRolesOutput"], () => require("./getDescribeUserRoles"));
+
+export { GetDescribeUserTypeArgs, GetDescribeUserTypeResult, GetDescribeUserTypeOutputArgs } from "./getDescribeUserType";
+export const getDescribeUserType: typeof import("./getDescribeUserType").getDescribeUserType = null as any;
+export const getDescribeUserTypeOutput: typeof import("./getDescribeUserType").getDescribeUserTypeOutput = null as any;
+utilities.lazyLoad(exports, ["getDescribeUserType","getDescribeUserTypeOutput"], () => require("./getDescribeUserType"));
+
+export { GetDescribeWorkGroupInfoArgs, GetDescribeWorkGroupInfoResult, GetDescribeWorkGroupInfoOutputArgs } from "./getDescribeWorkGroupInfo";
+export const getDescribeWorkGroupInfo: typeof import("./getDescribeWorkGroupInfo").getDescribeWorkGroupInfo = null as any;
+export const getDescribeWorkGroupInfoOutput: typeof import("./getDescribeWorkGroupInfo").getDescribeWorkGroupInfoOutput = null as any;
+utilities.lazyLoad(exports, ["getDescribeWorkGroupInfo","getDescribeWorkGroupInfoOutput"], () => require("./getDescribeWorkGroupInfo"));
+
+export { ModifyDataEngineDescriptionOperationArgs, ModifyDataEngineDescriptionOperationState } from "./modifyDataEngineDescriptionOperation";
+export type ModifyDataEngineDescriptionOperation = import("./modifyDataEngineDescriptionOperation").ModifyDataEngineDescriptionOperation;
+export const ModifyDataEngineDescriptionOperation: typeof import("./modifyDataEngineDescriptionOperation").ModifyDataEngineDescriptionOperation = null as any;
+utilities.lazyLoad(exports, ["ModifyDataEngineDescriptionOperation"], () => require("./modifyDataEngineDescriptionOperation"));
+
+export { ModifyUserTypOperationArgs, ModifyUserTypOperationState } from "./modifyUserTypOperation";
+export type ModifyUserTypOperation = import("./modifyUserTypOperation").ModifyUserTypOperation;
+export const ModifyUserTypOperation: typeof import("./modifyUserTypOperation").ModifyUserTypOperation = null as any;
+utilities.lazyLoad(exports, ["ModifyUserTypOperation"], () => require("./modifyUserTypOperation"));
+
+export { RenewDataEngineOperationArgs, RenewDataEngineOperationState } from "./renewDataEngineOperation";
+export type RenewDataEngineOperation = import("./renewDataEngineOperation").RenewDataEngineOperation;
+export const RenewDataEngineOperation: typeof import("./renewDataEngineOperation").RenewDataEngineOperation = null as any;
+utilities.lazyLoad(exports, ["RenewDataEngineOperation"], () => require("./renewDataEngineOperation"));
+
+export { RestartDataEngineOperationArgs, RestartDataEngineOperationState } from "./restartDataEngineOperation";
+export type RestartDataEngineOperation = import("./restartDataEngineOperation").RestartDataEngineOperation;
+export const RestartDataEngineOperation: typeof import("./restartDataEngineOperation").RestartDataEngineOperation = null as any;
+utilities.lazyLoad(exports, ["RestartDataEngineOperation"], () => require("./restartDataEngineOperation"));
+
+export { RollbackDataEngineImageOperationArgs, RollbackDataEngineImageOperationState } from "./rollbackDataEngineImageOperation";
+export type RollbackDataEngineImageOperation = import("./rollbackDataEngineImageOperation").RollbackDataEngineImageOperation;
+export const RollbackDataEngineImageOperation: typeof import("./rollbackDataEngineImageOperation").RollbackDataEngineImageOperation = null as any;
+utilities.lazyLoad(exports, ["RollbackDataEngineImageOperation"], () => require("./rollbackDataEngineImageOperation"));
+
+export { StoreLocationConfigArgs, StoreLocationConfigState } from "./storeLocationConfig";
+export type StoreLocationConfig = import("./storeLocationConfig").StoreLocationConfig;
+export const StoreLocationConfig: typeof import("./storeLocationConfig").StoreLocationConfig = null as any;
+utilities.lazyLoad(exports, ["StoreLocationConfig"], () => require("./storeLocationConfig"));
+
+export { SuspendResumeDataEngineArgs, SuspendResumeDataEngineState } from "./suspendResumeDataEngine";
+export type SuspendResumeDataEngine = import("./suspendResumeDataEngine").SuspendResumeDataEngine;
+export const SuspendResumeDataEngine: typeof import("./suspendResumeDataEngine").SuspendResumeDataEngine = null as any;
+utilities.lazyLoad(exports, ["SuspendResumeDataEngine"], () => require("./suspendResumeDataEngine"));
+
+export { SwitchDataEngineImageOperationArgs, SwitchDataEngineImageOperationState } from "./switchDataEngineImageOperation";
+export type SwitchDataEngineImageOperation = import("./switchDataEngineImageOperation").SwitchDataEngineImageOperation;
+export const SwitchDataEngineImageOperation: typeof import("./switchDataEngineImageOperation").SwitchDataEngineImageOperation = null as any;
+utilities.lazyLoad(exports, ["SwitchDataEngineImageOperation"], () => require("./switchDataEngineImageOperation"));
+
+export { UpdateDataEngineConfigOperationArgs, UpdateDataEngineConfigOperationState } from "./updateDataEngineConfigOperation";
+export type UpdateDataEngineConfigOperation = import("./updateDataEngineConfigOperation").UpdateDataEngineConfigOperation;
+export const UpdateDataEngineConfigOperation: typeof import("./updateDataEngineConfigOperation").UpdateDataEngineConfigOperation = null as any;
+utilities.lazyLoad(exports, ["UpdateDataEngineConfigOperation"], () => require("./updateDataEngineConfigOperation"));
+
+export { UpdateRowFilterOperationArgs, UpdateRowFilterOperationState } from "./updateRowFilterOperation";
+export type UpdateRowFilterOperation = import("./updateRowFilterOperation").UpdateRowFilterOperation;
+export const UpdateRowFilterOperation: typeof import("./updateRowFilterOperation").UpdateRowFilterOperation = null as any;
+utilities.lazyLoad(exports, ["UpdateRowFilterOperation"], () => require("./updateRowFilterOperation"));
+
+export { UpgradeDataEngineImageOperationArgs, UpgradeDataEngineImageOperationState } from "./upgradeDataEngineImageOperation";
+export type UpgradeDataEngineImageOperation = import("./upgradeDataEngineImageOperation").UpgradeDataEngineImageOperation;
+export const UpgradeDataEngineImageOperation: typeof import("./upgradeDataEngineImageOperation").UpgradeDataEngineImageOperation = null as any;
+utilities.lazyLoad(exports, ["UpgradeDataEngineImageOperation"], () => require("./upgradeDataEngineImageOperation"));
+
+export { UserArgs, UserState } from "./user";
+export type User = import("./user").User;
+export const User: typeof import("./user").User = null as any;
+utilities.lazyLoad(exports, ["User"], () => require("./user"));
+
+export { UserDataEngineConfigArgs, UserDataEngineConfigState } from "./userDataEngineConfig";
+export type UserDataEngineConfig = import("./userDataEngineConfig").UserDataEngineConfig;
+export const UserDataEngineConfig: typeof import("./userDataEngineConfig").UserDataEngineConfig = null as any;
+utilities.lazyLoad(exports, ["UserDataEngineConfig"], () => require("./userDataEngineConfig"));
+
+export { WorkGroupArgs, WorkGroupState } from "./workGroup";
+export type WorkGroup = import("./workGroup").WorkGroup;
+export const WorkGroup: typeof import("./workGroup").WorkGroup = null as any;
+utilities.lazyLoad(exports, ["WorkGroup"], () => require("./workGroup"));
+
 
 const _module = {
     version: utilities.getVersion(),

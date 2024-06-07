@@ -15,37 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var example = new Tencentcloud.Vpc.Ipv6CidrBlock("example", new Tencentcloud.Vpc.Ipv6CidrBlockArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var example = new Tencentcloud.Vpc.Ipv6CidrBlock("example", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// vpc ipv6_cidr_block can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/ipv6CidrBlock:Ipv6CidrBlock ipv6_cidr_block vpc_id
+    /// $ pulumi import tencentcloud:Vpc/ipv6CidrBlock:Ipv6CidrBlock ipv6_cidr_block vpc_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/ipv6CidrBlock:Ipv6CidrBlock")]
-    public partial class Ipv6CidrBlock : Pulumi.CustomResource
+    public partial class Ipv6CidrBlock : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ipv6 cidr block.
@@ -104,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class Ipv6CidrBlockArgs : Pulumi.ResourceArgs
+    public sealed class Ipv6CidrBlockArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// `VPC` instance `ID`, in the form of `vpc-f49l6u0z`.
@@ -115,9 +117,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Ipv6CidrBlockArgs()
         {
         }
+        public static new Ipv6CidrBlockArgs Empty => new Ipv6CidrBlockArgs();
     }
 
-    public sealed class Ipv6CidrBlockState : Pulumi.ResourceArgs
+    public sealed class Ipv6CidrBlockState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ipv6 cidr block.
@@ -134,5 +137,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Ipv6CidrBlockState()
         {
         }
+        public static new Ipv6CidrBlockState Empty => new Ipv6CidrBlockState();
     }
 }

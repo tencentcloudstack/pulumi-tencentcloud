@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var configTemplate = new Tencentcloud.Tsf.ConfigTemplate("configTemplate", new()
     ///     {
-    ///         var configTemplate = new Tencentcloud.Tsf.ConfigTemplate("configTemplate", new Tencentcloud.Tsf.ConfigTemplateArgs
-    ///         {
-    ///             ConfigTemplateDesc = "terraform-test",
-    ///             ConfigTemplateName = "terraform-template-name",
-    ///             ConfigTemplateType = "Ribbon",
-    ///             ConfigTemplateValue = @"  ribbon.ReadTimeout: 5000
+    ///         ConfigTemplateDesc = "terraform-test",
+    ///         ConfigTemplateName = "terraform-template-name",
+    ///         ConfigTemplateType = "Ribbon",
+    ///         ConfigTemplateValue = @"  ribbon.ReadTimeout: 5000
     ///   ribbon.ConnectTimeout: 2000
     ///   ribbon.MaxAutoRetries: 0
     ///   ribbon.MaxAutoRetriesNextServer: 1
     ///   ribbon.OkToRetryOnAllOperations: true
     /// 
     /// ",
-    ///         });
-    ///     }
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/configTemplate:ConfigTemplate")]
-    public partial class ConfigTemplate : Pulumi.CustomResource
+    public partial class ConfigTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Configuration template description.
@@ -137,7 +138,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class ConfigTemplateArgs : Pulumi.ResourceArgs
+    public sealed class ConfigTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Configuration template description.
@@ -178,9 +179,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ConfigTemplateArgs()
         {
         }
+        public static new ConfigTemplateArgs Empty => new ConfigTemplateArgs();
     }
 
-    public sealed class ConfigTemplateState : Pulumi.ResourceArgs
+    public sealed class ConfigTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Configuration template description.
@@ -239,5 +241,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ConfigTemplateState()
         {
         }
+        public static new ConfigTemplateState Empty => new ConfigTemplateState();
     }
 }

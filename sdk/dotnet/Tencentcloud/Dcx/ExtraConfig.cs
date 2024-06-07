@@ -15,63 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var dcxExtraConfig = new Tencentcloud.Dcx.ExtraConfig("dcxExtraConfig", new()
     ///     {
-    ///         var dcxExtraConfig = new Tencentcloud.Dcx.ExtraConfig("dcxExtraConfig", new Tencentcloud.Dcx.ExtraConfigArgs
+    ///         Bandwidth = 10,
+    ///         BfdEnable = 0,
+    ///         BfdInfo = new Tencentcloud.Dcx.Inputs.ExtraConfigBfdInfoArgs
     ///         {
-    ///             Bandwidth = 10,
-    ///             BfdEnable = 0,
-    ///             BfdInfo = new Tencentcloud.Dcx.Inputs.ExtraConfigBfdInfoArgs
-    ///             {
-    ///                 Interval = 100,
-    ///                 ProbeFailedTimes = 3,
-    ///             },
-    ///             BgpPeer = new Tencentcloud.Dcx.Inputs.ExtraConfigBgpPeerArgs
-    ///             {
-    ///                 Asn = 65101,
-    ///                 AuthKey = "test123",
-    ///             },
-    ///             CustomerAddress = "192.168.1.4",
-    ///             DirectConnectTunnelId = "dcx-4z49tnws",
-    ///             EnableBgpCommunity = false,
-    ///             Ipv6Enable = 0,
-    ///             JumboEnable = 0,
-    ///             NqaEnable = 1,
-    ///             NqaInfo = new Tencentcloud.Dcx.Inputs.ExtraConfigNqaInfoArgs
-    ///             {
-    ///                 DestinationIp = "192.168.2.2",
-    ///                 Interval = 100,
-    ///                 ProbeFailedTimes = 3,
-    ///             },
-    ///             RouteFilterPrefixes = new Tencentcloud.Dcx.Inputs.ExtraConfigRouteFilterPrefixesArgs
-    ///             {
-    ///                 Cidr = "192.168.0.0/24",
-    ///             },
-    ///             TencentAddress = "192.168.1.1",
-    ///             TencentBackupAddress = "192.168.1.2",
-    ///             Vlan = 123,
-    ///         });
-    ///     }
+    ///             Interval = 100,
+    ///             ProbeFailedTimes = 3,
+    ///         },
+    ///         BgpPeer = new Tencentcloud.Dcx.Inputs.ExtraConfigBgpPeerArgs
+    ///         {
+    ///             Asn = 65101,
+    ///             AuthKey = "test123",
+    ///         },
+    ///         CustomerAddress = "192.168.1.4",
+    ///         DirectConnectTunnelId = "dcx-4z49tnws",
+    ///         EnableBgpCommunity = false,
+    ///         Ipv6Enable = 0,
+    ///         JumboEnable = 0,
+    ///         NqaEnable = 1,
+    ///         NqaInfo = new Tencentcloud.Dcx.Inputs.ExtraConfigNqaInfoArgs
+    ///         {
+    ///             DestinationIp = "192.168.2.2",
+    ///             Interval = 100,
+    ///             ProbeFailedTimes = 3,
+    ///         },
+    ///         RouteFilterPrefixes = new Tencentcloud.Dcx.Inputs.ExtraConfigRouteFilterPrefixesArgs
+    ///         {
+    ///             Cidr = "192.168.0.0/24",
+    ///         },
+    ///         TencentAddress = "192.168.1.1",
+    ///         TencentBackupAddress = "192.168.1.2",
+    ///         Vlan = 123,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dc dcx_extra_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dcx/extraConfig:ExtraConfig dcx_extra_config dcx_id
+    /// $ pulumi import tencentcloud:Dcx/extraConfig:ExtraConfig dcx_extra_config dcx_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcx/extraConfig:ExtraConfig")]
-    public partial class ExtraConfig : Pulumi.CustomResource
+    public partial class ExtraConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// direct connect tunnel bandwidth.
@@ -208,7 +209,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
         }
     }
 
-    public sealed class ExtraConfigArgs : Pulumi.ResourceArgs
+    public sealed class ExtraConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// direct connect tunnel bandwidth.
@@ -303,9 +304,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
         public ExtraConfigArgs()
         {
         }
+        public static new ExtraConfigArgs Empty => new ExtraConfigArgs();
     }
 
-    public sealed class ExtraConfigState : Pulumi.ResourceArgs
+    public sealed class ExtraConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// direct connect tunnel bandwidth.
@@ -400,5 +402,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
         public ExtraConfigState()
         {
         }
+        public static new ExtraConfigState Empty => new ExtraConfigState();
     }
 }

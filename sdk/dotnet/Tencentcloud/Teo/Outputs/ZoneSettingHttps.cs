@@ -19,15 +19,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly Outputs.ZoneSettingHttpsHsts? Hsts;
         /// <summary>
-        /// HTTP2 configuration switch.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+        /// HTTP2 configuration switch.
         /// </summary>
         public readonly string? Http2;
         /// <summary>
-        /// OCSP configuration switch.- `on`: Enable.- `off`: Disable.It is disabled by default. Note: This field may return null, indicating that no valid value can be obtained.
+        /// OCSP configuration switch.
         /// </summary>
         public readonly string? OcspStapling;
         /// <summary>
-        /// TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`.Only consecutive versions can be enabled at the same time. Note: This field may return null, indicating that no valid value can be obtained.
+        /// TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`.
+        /// Only consecutive versions can be enabled at the same time. Note: This field may return null, indicating that no valid value can be obtained.
+        /// 
+        /// The `ipv6` object supports the following:
         /// </summary>
         public readonly ImmutableArray<string> TlsVersions;
 

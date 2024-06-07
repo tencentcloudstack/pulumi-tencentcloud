@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// <summary>
         /// Use this data source to query detailed information of cam list_entities_for_policy
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var listEntitiesForPolicy = Tencentcloud.Cam.GetListEntitiesForPolicy.Invoke(new()
         ///     {
-        ///         var listEntitiesForPolicy = Output.Create(Tencentcloud.Cam.GetListEntitiesForPolicy.InvokeAsync(new Tencentcloud.Cam.GetListEntitiesForPolicyArgs
-        ///         {
-        ///             EntityFilter = "All",
-        ///             PolicyId = 1,
-        ///         }));
-        ///     }
+        ///         EntityFilter = "All",
+        ///         PolicyId = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetListEntitiesForPolicyResult> InvokeAsync(GetListEntitiesForPolicyArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetListEntitiesForPolicyResult>("tencentcloud:Cam/getListEntitiesForPolicy:getListEntitiesForPolicy", args ?? new GetListEntitiesForPolicyArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetListEntitiesForPolicyResult>("tencentcloud:Cam/getListEntitiesForPolicy:getListEntitiesForPolicy", args ?? new GetListEntitiesForPolicyArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cam list_entities_for_policy
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var listEntitiesForPolicy = Tencentcloud.Cam.GetListEntitiesForPolicy.Invoke(new()
         ///     {
-        ///         var listEntitiesForPolicy = Output.Create(Tencentcloud.Cam.GetListEntitiesForPolicy.InvokeAsync(new Tencentcloud.Cam.GetListEntitiesForPolicyArgs
-        ///         {
-        ///             EntityFilter = "All",
-        ///             PolicyId = 1,
-        ///         }));
-        ///     }
+        ///         EntityFilter = "All",
+        ///         PolicyId = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetListEntitiesForPolicyResult> Invoke(GetListEntitiesForPolicyInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetListEntitiesForPolicyResult>("tencentcloud:Cam/getListEntitiesForPolicy:getListEntitiesForPolicy", args ?? new GetListEntitiesForPolicyInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetListEntitiesForPolicyResult>("tencentcloud:Cam/getListEntitiesForPolicy:getListEntitiesForPolicy", args ?? new GetListEntitiesForPolicyInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetListEntitiesForPolicyArgs : Pulumi.InvokeArgs
+    public sealed class GetListEntitiesForPolicyArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Can take values of &amp;amp;amp;#39;All&amp;amp;amp;#39;, &amp;amp;amp;#39;User&amp;amp;amp;#39;, &amp;amp;amp;#39;Group&amp;amp;amp;#39;, and &amp;amp;amp;#39;Role&amp;amp;amp;#39;. &amp;amp;amp;#39;All&amp;amp;amp;#39; represents obtaining all entity types, &amp;amp;amp;#39;User&amp;amp;amp;#39; represents only obtaining sub accounts, &amp;amp;amp;#39;Group&amp;amp;amp;#39; represents only obtaining user groups, and &amp;amp;amp;#39;Role&amp;amp;amp;#39; represents only obtaining roles. The default value is&amp;amp;amp;#39; All &amp;amp;amp;#39;.
@@ -103,9 +97,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetListEntitiesForPolicyArgs()
         {
         }
+        public static new GetListEntitiesForPolicyArgs Empty => new GetListEntitiesForPolicyArgs();
     }
 
-    public sealed class GetListEntitiesForPolicyInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetListEntitiesForPolicyInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Can take values of &amp;amp;amp;#39;All&amp;amp;amp;#39;, &amp;amp;amp;#39;User&amp;amp;amp;#39;, &amp;amp;amp;#39;Group&amp;amp;amp;#39;, and &amp;amp;amp;#39;Role&amp;amp;amp;#39;. &amp;amp;amp;#39;All&amp;amp;amp;#39; represents obtaining all entity types, &amp;amp;amp;#39;User&amp;amp;amp;#39; represents only obtaining sub accounts, &amp;amp;amp;#39;Group&amp;amp;amp;#39; represents only obtaining user groups, and &amp;amp;amp;#39;Role&amp;amp;amp;#39; represents only obtaining roles. The default value is&amp;amp;amp;#39; All &amp;amp;amp;#39;.
@@ -134,6 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetListEntitiesForPolicyInvokeArgs()
         {
         }
+        public static new GetListEntitiesForPolicyInvokeArgs Empty => new GetListEntitiesForPolicyInvokeArgs();
     }
 
 

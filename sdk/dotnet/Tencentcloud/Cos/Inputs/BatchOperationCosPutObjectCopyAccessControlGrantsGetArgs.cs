@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BatchOperationCosPutObjectCopyAccessControlGrantsGetArgs : Pulumi.ResourceArgs
+    public sealed class BatchOperationCosPutObjectCopyAccessControlGrantsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User name.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BatchOperationCosPutObjectCopyAccessControlGrantsGetArgs()
         {
         }
+        public static new BatchOperationCosPutObjectCopyAccessControlGrantsGetArgs Empty => new BatchOperationCosPutObjectCopyAccessControlGrantsGetArgs();
     }
 }

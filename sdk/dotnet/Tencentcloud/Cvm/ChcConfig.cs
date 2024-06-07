@@ -15,54 +15,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var chcConfig = new Tencentcloud.Cvm.ChcConfig("chcConfig", new()
     ///     {
-    ///         var chcConfig = new Tencentcloud.Cvm.ChcConfig("chcConfig", new Tencentcloud.Cvm.ChcConfigArgs
+    ///         BmcSecurityGroupIds = new[]
     ///         {
-    ///             BmcSecurityGroupIds = 
-    ///             {
-    ///                 "sg-xxxxxx",
-    ///             },
-    ///             BmcUser = "admin",
-    ///             BmcVirtualPrivateCloud = new Tencentcloud.Cvm.Inputs.ChcConfigBmcVirtualPrivateCloudArgs
-    ///             {
-    ///                 SubnetId = "subnet-xxxxxx",
-    ///                 VpcId = "vpc-xxxxxx",
-    ///             },
-    ///             ChcId = "chc-xxxxxx",
-    ///             DeploySecurityGroupIds = 
-    ///             {
-    ///                 "sg-xxxxxx",
-    ///             },
-    ///             DeployVirtualPrivateCloud = new Tencentcloud.Cvm.Inputs.ChcConfigDeployVirtualPrivateCloudArgs
-    ///             {
-    ///                 SubnetId = "subnet-xxxxxx",
-    ///                 VpcId = "vpc-xxxxxx",
-    ///             },
-    ///             InstanceName = "xxxxxx",
-    ///             Password = "xxxxxx",
-    ///         });
-    ///     }
+    ///             "sg-xxxxxx",
+    ///         },
+    ///         BmcUser = "admin",
+    ///         BmcVirtualPrivateCloud = new Tencentcloud.Cvm.Inputs.ChcConfigBmcVirtualPrivateCloudArgs
+    ///         {
+    ///             SubnetId = "subnet-xxxxxx",
+    ///             VpcId = "vpc-xxxxxx",
+    ///         },
+    ///         ChcId = "chc-xxxxxx",
+    ///         DeploySecurityGroupIds = new[]
+    ///         {
+    ///             "sg-xxxxxx",
+    ///         },
+    ///         DeployVirtualPrivateCloud = new Tencentcloud.Cvm.Inputs.ChcConfigDeployVirtualPrivateCloudArgs
+    ///         {
+    ///             SubnetId = "subnet-xxxxxx",
+    ///             VpcId = "vpc-xxxxxx",
+    ///         },
+    ///         InstanceName = "xxxxxx",
+    ///         Password = "xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cvm chc_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cvm/chcConfig:ChcConfig chc_config chc_config_id
+    /// $ pulumi import tencentcloud:Cvm/chcConfig:ChcConfig chc_config chc_config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cvm/chcConfig:ChcConfig")]
-    public partial class ChcConfig : Pulumi.CustomResource
+    public partial class ChcConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Out-of-band network security group list.
@@ -142,6 +143,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
             {
                 Version = Utilities.Version,
                 PluginDownloadURL = "github://api.github.com/tencentcloudstack",
+                AdditionalSecretOutputs =
+                {
+                    "password",
+                },
             };
             var merged = CustomResourceOptions.Merge(defaultOptions, options);
             // Override the ID if one was specified for consistency with other language SDKs.
@@ -163,7 +168,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         }
     }
 
-    public sealed class ChcConfigArgs : Pulumi.ResourceArgs
+    public sealed class ChcConfigArgs : global::Pulumi.ResourceArgs
     {
         [Input("bmcSecurityGroupIds")]
         private InputList<string>? _bmcSecurityGroupIds;
@@ -225,18 +230,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// The password can contain 8 to 16 characters, including letters, numbers and special symbols (()`~!@#$%^&amp;amp;amp;*-+=_|{}).
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public ChcConfigArgs()
         {
         }
+        public static new ChcConfigArgs Empty => new ChcConfigArgs();
     }
 
-    public sealed class ChcConfigState : Pulumi.ResourceArgs
+    public sealed class ChcConfigState : global::Pulumi.ResourceArgs
     {
         [Input("bmcSecurityGroupIds")]
         private InputList<string>? _bmcSecurityGroupIds;
@@ -298,14 +314,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
 
+        [Input("password")]
+        private Input<string>? _password;
+
         /// <summary>
         /// The password can contain 8 to 16 characters, including letters, numbers and special symbols (()`~!@#$%^&amp;amp;amp;*-+=_|{}).
         /// </summary>
-        [Input("password")]
-        public Input<string>? Password { get; set; }
+        public Input<string>? Password
+        {
+            get => _password;
+            set
+            {
+                var emptySecret = Output.CreateSecret(0);
+                _password = Output.Tuple<Input<string>?, int>(value, emptySecret).Apply(t => t.Item1);
+            }
+        }
 
         public ChcConfigState()
         {
         }
+        public static new ChcConfigState Empty => new ChcConfigState();
     }
 }

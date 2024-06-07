@@ -9,22 +9,63 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const securityGroupAttachment = new tencentcloud.Cvm.SecurityGroupAttachment("security_group_attachment", {
- *     instanceId: "ins-xxxxxxxx",
- *     securityGroupId: "sg-xxxxxxx",
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create vpc subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: "ap-guangzhou-6",
+ *     cidrBlock: "10.0.20.0/28",
+ *     isMulticast: false,
+ * });
+ * // create security group
+ * const exampleGroup = new tencentcloud.security.Group("exampleGroup", {
+ *     description: "sg desc.",
+ *     projectId: 0,
+ *     tags: {
+ *         example: "test",
+ *     },
+ * });
+ * // create cvm
+ * const exampleInstance = new tencentcloud.instance.Instance("exampleInstance", {
+ *     instanceName: "tf_example",
+ *     availabilityZone: "ap-guangzhou-6",
+ *     imageId: "img-9qrfy1xt",
+ *     instanceType: "SA3.MEDIUM4",
+ *     systemDiskType: "CLOUD_HSSD",
+ *     systemDiskSize: 100,
+ *     hostname: "example",
+ *     projectId: 0,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     dataDisks: [{
+ *         dataDiskType: "CLOUD_HSSD",
+ *         dataDiskSize: 50,
+ *         encrypt: false,
+ *     }],
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * // attachment security group
+ * const exampleSecurityGroupAttachment = new tencentcloud.cvm.SecurityGroupAttachment("exampleSecurityGroupAttachment", {
+ *     instanceId: exampleInstance.id,
+ *     securityGroupId: exampleGroup.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cvm security_group_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment security_group_attachment ${instance_id}#${security_group_id}
+ * $ pulumi import tencentcloud:Cvm/securityGroupAttachment:SecurityGroupAttachment example ins-odl0lrcy#sg-5275dorp
  * ```
  */
 export class SecurityGroupAttachment extends pulumi.CustomResource {

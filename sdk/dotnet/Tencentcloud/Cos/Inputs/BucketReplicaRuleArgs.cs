@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketReplicaRuleArgs : Pulumi.ResourceArgs
+    public sealed class BucketReplicaRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Destination bucket identifier, format: `qcs::cos:&lt;region&gt;::&lt;bucketname-appid&gt;`. NOTE: destination bucket must enable versioning.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketReplicaRuleArgs()
         {
         }
+        public static new BucketReplicaRuleArgs Empty => new BucketReplicaRuleArgs();
     }
 }

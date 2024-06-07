@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var bucketAttachment = new Tencentcloud.Ci.BucketAttachment("bucketAttachment", new()
     ///     {
-    ///         var bucketAttachment = new Tencentcloud.Ci.BucketAttachment("bucketAttachment", new Tencentcloud.Ci.BucketAttachmentArgs
-    ///         {
-    ///             Bucket = "terraform-ci-xxxxxx",
-    ///         });
-    ///     }
+    ///         Bucket = "terraform-ci-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ci bucket can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/bucketAttachment:BucketAttachment bucket_attachment terraform-ci-xxxxxx
+    /// $ pulumi import tencentcloud:Ci/bucketAttachment:BucketAttachment bucket_attachment terraform-ci-xxxxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/bucketAttachment:BucketAttachment")]
-    public partial class BucketAttachment : Pulumi.CustomResource
+    public partial class BucketAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// bucket name.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class BucketAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class BucketAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -111,9 +112,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public BucketAttachmentArgs()
         {
         }
+        public static new BucketAttachmentArgs Empty => new BucketAttachmentArgs();
     }
 
-    public sealed class BucketAttachmentState : Pulumi.ResourceArgs
+    public sealed class BucketAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// bucket name.
@@ -130,5 +132,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public BucketAttachmentState()
         {
         }
+        public static new BucketAttachmentState Empty => new BucketAttachmentState();
     }
 }

@@ -15,54 +15,56 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleKey = new Tencentcloud.Kms.Key("exampleKey", new()
     ///     {
-    ///         var exampleKey = new Tencentcloud.Kms.Key("exampleKey", new Tencentcloud.Kms.KeyArgs
+    ///         Alias = "tf-example-kms-key",
+    ///         Description = "example of kms key",
+    ///         KeyRotationEnabled = false,
+    ///         IsEnabled = true,
+    ///         Tags = 
     ///         {
-    ///             Alias = "tf-example-kms-key",
-    ///             Description = "example of kms key",
-    ///             KeyRotationEnabled = false,
-    ///             IsEnabled = true,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var exampleSshKeyPairSecret = new Tencentcloud.Ssm.SshKeyPairSecret("exampleSshKeyPairSecret", new Tencentcloud.Ssm.SshKeyPairSecretArgs
-    ///         {
-    ///             SecretName = "tf-example",
-    ///             ProjectId = 0,
-    ///             Description = "desc.",
-    ///             KmsKeyId = exampleKey.Id,
-    ///             SshKeyName = "tf_example_ssh",
-    ///             Status = "Enabled",
-    ///             CleanSshKey = true,
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleSshKeyPairSecret = new Tencentcloud.Ssm.SshKeyPairSecret("exampleSshKeyPairSecret", new()
+    ///     {
+    ///         SecretName = "tf-example",
+    ///         ProjectId = 0,
+    ///         Description = "desc.",
+    ///         KmsKeyId = exampleKey.Id,
+    ///         SshKeyName = "tf_example_ssh",
+    ///         Status = "Enabled",
+    ///         CleanSshKey = true,
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ssm ssh_key_pair_secret can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ssm/sshKeyPairSecret:SshKeyPairSecret ssh_key_pair_secret ssh_key_pair_secret_name
+    /// $ pulumi import tencentcloud:Ssm/sshKeyPairSecret:SshKeyPairSecret ssh_key_pair_secret ssh_key_pair_secret_name
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssm/sshKeyPairSecret:SshKeyPairSecret")]
-    public partial class SshKeyPairSecret : Pulumi.CustomResource
+    public partial class SshKeyPairSecret : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: `True`: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.`False`: only deletes the SSH key information in the secret.
@@ -169,7 +171,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         }
     }
 
-    public sealed class SshKeyPairSecretArgs : Pulumi.ResourceArgs
+    public sealed class SshKeyPairSecretArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: `True`: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.`False`: only deletes the SSH key information in the secret.
@@ -228,9 +230,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public SshKeyPairSecretArgs()
         {
         }
+        public static new SshKeyPairSecretArgs Empty => new SshKeyPairSecretArgs();
     }
 
-    public sealed class SshKeyPairSecretState : Pulumi.ResourceArgs
+    public sealed class SshKeyPairSecretState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specifies whether to delete the SSH key from both the secret and the SSH key list in the CVM console. This field is only take effect when delete SSH key secrets. Valid values: `True`: deletes SSH key from both the secret and SSH key list in the CVM console. Note that the deletion will fail if the SSH key is already bound to a CVM instance.`False`: only deletes the SSH key information in the secret.
@@ -301,5 +304,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public SshKeyPairSecretState()
         {
         }
+        public static new SshKeyPairSecretState Empty => new SshKeyPairSecretState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class DeployContainerGroupWarmupSettingArgs : Pulumi.ResourceArgs
+    public sealed class DeployContainerGroupWarmupSettingArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Preheating curvature, with a value between 1 and 5.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public DeployContainerGroupWarmupSettingArgs()
         {
         }
+        public static new DeployContainerGroupWarmupSettingArgs Empty => new DeployContainerGroupWarmupSettingArgs();
     }
 }

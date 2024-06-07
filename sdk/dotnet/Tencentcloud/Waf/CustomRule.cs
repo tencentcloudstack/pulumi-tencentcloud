@@ -15,48 +15,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.CustomRule("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.CustomRule("example", new Tencentcloud.Waf.CustomRuleArgs
+    ///         ActionType = "1",
+    ///         Domain = "test.com",
+    ///         ExpireTime = "0",
+    ///         Redirect = "/",
+    ///         SortId = "50",
+    ///         Status = "1",
+    ///         Strategies = new[]
     ///         {
-    ///             ActionType = "1",
-    ///             Domain = "test.com",
-    ///             ExpireTime = "0",
-    ///             Redirect = "/",
-    ///             SortId = "50",
-    ///             Status = "1",
-    ///             Strategies = 
+    ///             new Tencentcloud.Waf.Inputs.CustomRuleStrategyArgs
     ///             {
-    ///                 new Tencentcloud.Waf.Inputs.CustomRuleStrategyArgs
-    ///                 {
-    ///                     Arg = "",
-    ///                     CompareFunc = "ipmatch",
-    ///                     Content = "2.2.2.2",
-    ///                     Field = "IP",
-    ///                 },
+    ///                 Arg = "",
+    ///                 CompareFunc = "ipmatch",
+    ///                 Content = "2.2.2.2",
+    ///                 Field = "IP",
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// waf custom_rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Waf/customRule:CustomRule example test.com#1100310609
+    /// $ pulumi import tencentcloud:Waf/customRule:CustomRule example test.com#1100310609
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/customRule:CustomRule")]
-    public partial class CustomRule : Pulumi.CustomResource
+    public partial class CustomRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Action type, 1 represents blocking, 2 represents captcha, 3 represents observation, and 4 represents redirection.
@@ -157,7 +158,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class CustomRuleArgs : Pulumi.ResourceArgs
+    public sealed class CustomRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action type, 1 represents blocking, 2 represents captcha, 3 represents observation, and 4 represents redirection.
@@ -216,9 +217,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public CustomRuleArgs()
         {
         }
+        public static new CustomRuleArgs Empty => new CustomRuleArgs();
     }
 
-    public sealed class CustomRuleState : Pulumi.ResourceArgs
+    public sealed class CustomRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action type, 1 represents blocking, 2 represents captcha, 3 represents observation, and 4 represents redirection.
@@ -283,5 +285,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public CustomRuleState()
         {
         }
+        public static new CustomRuleState Empty => new CustomRuleState();
     }
 }

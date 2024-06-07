@@ -11,13 +11,17 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css.Inputs
 {
 
-    public sealed class RecordTemplateHlsSpecialParamGetArgs : Pulumi.ResourceArgs
+    public sealed class RecordTemplateHlsSpecialParamGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// HLS freewheeling timeout. Value range [0, 1800].
+        /// </summary>
         [Input("flowContinueDuration")]
         public Input<int>? FlowContinueDuration { get; set; }
 
         public RecordTemplateHlsSpecialParamGetArgs()
         {
         }
+        public static new RecordTemplateHlsSpecialParamGetArgs Empty => new RecordTemplateHlsSpecialParamGetArgs();
     }
 }

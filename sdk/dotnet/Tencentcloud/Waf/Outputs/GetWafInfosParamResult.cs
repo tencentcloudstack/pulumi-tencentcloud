@@ -14,8 +14,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Outputs
     [OutputType]
     public sealed class GetWafInfosParamResult
     {
+        /// <summary>
+        /// Domain unique ID.
+        /// </summary>
         public readonly string? DomainId;
+        /// <summary>
+        /// Listener ID of LoadBalancer.
+        /// </summary>
         public readonly string? ListenerId;
+        /// <summary>
+        /// Loadbalancer unique ID.If this parameter is not passed, it will operate all listeners of this appid. If this parameter is not empty, it will operate listeners of the LoadBalancer only.
+        /// </summary>
         public readonly string LoadBalancerId;
 
         [OutputConstructor]

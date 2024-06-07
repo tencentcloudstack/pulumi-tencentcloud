@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var snapshotRule = new Tencentcloud.Css.SnapshotRuleAttachment("snapshotRule", new()
     ///     {
-    ///         var snapshotRule = new Tencentcloud.Css.SnapshotRuleAttachment("snapshotRule", new Tencentcloud.Css.SnapshotRuleAttachmentArgs
-    ///         {
-    ///             AppName = "qqq",
-    ///             DomainName = "177154.push.tlivecloud.com",
-    ///             StreamName = "ppp",
-    ///             TemplateId = 12838073,
-    ///         });
-    ///     }
+    ///         AppName = "qqq",
+    ///         DomainName = "177154.push.tlivecloud.com",
+    ///         StreamName = "ppp",
+    ///         TemplateId = 12838073,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css snapshot_rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/snapshotRuleAttachment:SnapshotRuleAttachment snapshot_rule templateId#domainName
+    /// $ pulumi import tencentcloud:Css/snapshotRuleAttachment:SnapshotRuleAttachment snapshot_rule templateId#domainName
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/snapshotRuleAttachment:SnapshotRuleAttachment")]
-    public partial class SnapshotRuleAttachment : Pulumi.CustomResource
+    public partial class SnapshotRuleAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The streaming path is consistent with the AppName in the streaming and playback addresses. The default is live.
@@ -115,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class SnapshotRuleAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class SnapshotRuleAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The streaming path is consistent with the AppName in the streaming and playback addresses. The default is live.
@@ -144,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public SnapshotRuleAttachmentArgs()
         {
         }
+        public static new SnapshotRuleAttachmentArgs Empty => new SnapshotRuleAttachmentArgs();
     }
 
-    public sealed class SnapshotRuleAttachmentState : Pulumi.ResourceArgs
+    public sealed class SnapshotRuleAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The streaming path is consistent with the AppName in the streaming and playback addresses. The default is live.
@@ -175,5 +177,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public SnapshotRuleAttachmentState()
         {
         }
+        public static new SnapshotRuleAttachmentState Empty => new SnapshotRuleAttachmentState();
     }
 }

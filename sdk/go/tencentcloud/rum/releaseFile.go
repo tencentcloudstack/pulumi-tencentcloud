@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type ReleaseFile struct {
@@ -53,7 +54,7 @@ func NewReleaseFile(ctx *pulumi.Context,
 	if args.Version == nil {
 		return nil, errors.New("invalid value for required argument 'Version'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ReleaseFile
 	err := ctx.RegisterResource("tencentcloud:Rum/releaseFile:ReleaseFile", name, args, &resource, opts...)
 	if err != nil {
@@ -166,7 +167,7 @@ func (i *ReleaseFile) ToReleaseFileOutputWithContext(ctx context.Context) Releas
 // ReleaseFileArrayInput is an input type that accepts ReleaseFileArray and ReleaseFileArrayOutput values.
 // You can construct a concrete instance of `ReleaseFileArrayInput` via:
 //
-//          ReleaseFileArray{ ReleaseFileArgs{...} }
+//	ReleaseFileArray{ ReleaseFileArgs{...} }
 type ReleaseFileArrayInput interface {
 	pulumi.Input
 
@@ -191,7 +192,7 @@ func (i ReleaseFileArray) ToReleaseFileArrayOutputWithContext(ctx context.Contex
 // ReleaseFileMapInput is an input type that accepts ReleaseFileMap and ReleaseFileMapOutput values.
 // You can construct a concrete instance of `ReleaseFileMapInput` via:
 //
-//          ReleaseFileMap{ "key": ReleaseFileArgs{...} }
+//	ReleaseFileMap{ "key": ReleaseFileArgs{...} }
 type ReleaseFileMapInput interface {
 	pulumi.Input
 

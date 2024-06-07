@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class TmpAlertGroupRuleArgs : Pulumi.ResourceArgs
+    public sealed class TmpAlertGroupRuleArgs : global::Pulumi.ResourceArgs
     {
         [Input("annotations")]
         private InputMap<object>? _annotations;
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public TmpAlertGroupRuleArgs()
         {
         }
+        public static new TmpAlertGroupRuleArgs Empty => new TmpAlertGroupRuleArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
 {
 
-    public sealed class ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs : Pulumi.ResourceArgs
+    public sealed class ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Animated image generating template ID.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Inputs
         public ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs()
         {
         }
+        public static new ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs Empty => new ProcedureTemplateMediaProcessTaskAnimatedGraphicTaskListArgs();
     }
 }

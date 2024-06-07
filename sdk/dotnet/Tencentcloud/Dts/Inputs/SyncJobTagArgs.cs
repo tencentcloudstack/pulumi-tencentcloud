@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class SyncJobTagArgs : Pulumi.ResourceArgs
+    public sealed class SyncJobTagArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// tag key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public SyncJobTagArgs()
         {
         }
+        public static new SyncJobTagArgs Empty => new SyncJobTagArgs();
     }
 }

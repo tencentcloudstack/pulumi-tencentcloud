@@ -8,45 +8,50 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of gaap listener statistics
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Gaap"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Gaap.GetListenerStatistics(ctx, &gaap.GetListenerStatisticsArgs{
-// 			EndTime:     "2023-10-19 23:59:59",
-// 			Granularity: 300,
-// 			ListenerId:  "listener-xxxxxx",
-// 			MetricNames: []string{
-// 				"InBandwidth",
-// 				"OutBandwidth",
-// 				"InPackets",
-// 				"OutPackets",
-// 				"Concurrent",
-// 			},
-// 			StartTime: "2023-10-19 00:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Gaap.GetListenerStatistics(ctx, &gaap.GetListenerStatisticsArgs{
+//				EndTime:     "2023-10-19 23:59:59",
+//				Granularity: 300,
+//				ListenerId:  "listener-xxxxxx",
+//				MetricNames: []string{
+//					"InBandwidth",
+//					"OutBandwidth",
+//					"InPackets",
+//					"OutPackets",
+//					"Concurrent",
+//				},
+//				StartTime: "2023-10-19 00:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetListenerStatistics(ctx *pulumi.Context, args *GetListenerStatisticsArgs, opts ...pulumi.InvokeOption) (*GetListenerStatisticsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetListenerStatisticsResult
 	err := ctx.Invoke("tencentcloud:Gaap/getListenerStatistics:getListenerStatistics", args, &rv, opts...)
 	if err != nil {

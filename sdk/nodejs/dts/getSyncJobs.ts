@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const job = new tencentcloud.dts.SyncJob("job", {
  *     jobName: "tf_dts_test",
@@ -34,14 +36,12 @@ import * as utilities from "../utilities";
  *     jobName: "tf_dts_test",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSyncJobs(args?: GetSyncJobsArgs, opts?: pulumi.InvokeOptions): Promise<GetSyncJobsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dts/getSyncJobs:getSyncJobs", {
         "jobId": args.jobId,
         "jobName": args.jobName,
@@ -140,9 +140,40 @@ export interface GetSyncJobsResult {
     readonly statuses?: string[];
     readonly tagFilters?: outputs.Dts.GetSyncJobsTagFilter[];
 }
-
+/**
+ * Use this data source to query detailed information of dts syncJobs
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const job = new tencentcloud.dts.SyncJob("job", {
+ *     jobName: "tf_dts_test",
+ *     payMode: "PostPay",
+ *     srcDatabaseType: "mysql",
+ *     srcRegion: "ap-guangzhou",
+ *     dstDatabaseType: "cynosdbmysql",
+ *     dstRegion: "ap-guangzhou",
+ *     tags: [{
+ *         tagKey: "aaa",
+ *         tagValue: "bbb",
+ *     }],
+ *     autoRenew: 0,
+ *     instanceClass: "micro",
+ * });
+ * const syncJobs = tencentcloud.Dts.getSyncJobsOutput({
+ *     jobId: job.id,
+ *     jobName: "tf_dts_test",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSyncJobsOutput(args?: GetSyncJobsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSyncJobsResult> {
-    return pulumi.output(args).apply(a => getSyncJobs(a, opts))
+    return pulumi.output(args).apply((a: any) => getSyncJobs(a, opts))
 }
 
 /**

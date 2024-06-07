@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const blueprint = new tencentcloud.Lighthouse.Blueprint("blueprint", {
+ * const blueprint = new tencentcloud.lighthouse.Blueprint("blueprint", {
  *     blueprintName: "blueprint_name_test",
  *     description: "blueprint_description_test",
  *     instanceId: "lhins-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * lighthouse blueprint can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Lighthouse/blueprint:Blueprint blueprint blueprint_id
+ * $ pulumi import tencentcloud:Lighthouse/blueprint:Blueprint blueprint blueprint_id
  * ```
  */
 export class Blueprint extends pulumi.CustomResource {

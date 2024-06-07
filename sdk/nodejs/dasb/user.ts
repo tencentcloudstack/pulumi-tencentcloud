@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Dasb.User("example", {
+ * const example = new tencentcloud.dasb.User("example", {
  *     authType: 0,
  *     departmentId: "1.2",
  *     email: "demo@tencent.com",
@@ -24,13 +25,14 @@ import * as utilities from "../utilities";
  *     validateTo: "2023-09-23T03:00:00+08:00",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dasb user can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dasb/user:User example 134
+ * $ pulumi import tencentcloud:Dasb/user:User example 134
  * ```
  */
 export class User extends pulumi.CustomResource {
@@ -76,7 +78,7 @@ export class User extends pulumi.CustomResource {
     /**
      * The set of user group IDs to which it belongs.
      */
-    public readonly groupIdSets!: pulumi.Output<number[] | undefined>;
+    public readonly groupIdSets!: pulumi.Output<number[]>;
     /**
      * Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
      */
@@ -92,7 +94,7 @@ export class User extends pulumi.CustomResource {
     /**
      * User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
      */
-    public readonly validateFrom!: pulumi.Output<string | undefined>;
+    public readonly validateFrom!: pulumi.Output<string>;
     /**
      * Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.
      */
@@ -100,7 +102,7 @@ export class User extends pulumi.CustomResource {
     /**
      * User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
      */
-    public readonly validateTo!: pulumi.Output<string | undefined>;
+    public readonly validateTo!: pulumi.Output<string>;
 
     /**
      * Create a User resource with the given unique name, arguments, and options.

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
  *     bandwidth: 10,
@@ -25,14 +27,12 @@ import * as utilities from "../utilities";
  *     ids: [fooProxy.id],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getProxies(args?: GetProxiesArgs, opts?: pulumi.InvokeOptions): Promise<GetProxiesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getProxies:getProxies", {
         "accessRegion": args.accessRegion,
         "ids": args.ids,
@@ -104,9 +104,31 @@ export interface GetProxiesResult {
      */
     readonly tags?: {[key: string]: any};
 }
-
+/**
+ * Use this data source to query gaap proxies.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+ *     bandwidth: 10,
+ *     concurrent: 2,
+ *     accessRegion: "SouthChina",
+ *     realserverRegion: "NorthChina",
+ * });
+ * const fooProxies = tencentcloud.Gaap.getProxiesOutput({
+ *     ids: [fooProxy.id],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getProxiesOutput(args?: GetProxiesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProxiesResult> {
-    return pulumi.output(args).apply(a => getProxies(a, opts))
+    return pulumi.output(args).apply((a: any) => getProxies(a, opts))
 }
 
 /**

@@ -14,6 +14,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     [OutputType]
     public sealed class ApplicationProxyIpv6
     {
+        /// <summary>
+        /// - `on`: Enable.- `off`: Disable.
+        /// </summary>
         public readonly string Switch;
 
         [OutputConstructor]

@@ -11,17 +11,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instance1 = new tencentcloud.Tdcpg.Instance("instance1", {
+ * const instance1 = new tencentcloud.tdcpg.Instance("instance1", {
  *     clusterId: "cluster_id",
  *     cpu: 1,
  *     instanceName: "instance_name",
  *     memory: 1,
  * });
- * const instance2 = new tencentcloud.Tdcpg.Instance("instance2", {
+ * const instance2 = new tencentcloud.tdcpg.Instance("instance2", {
  *     clusterId: "cluster_id",
  *     cpu: 1,
  *     instanceName: "instance_name",
@@ -29,13 +30,14 @@ import * as utilities from "../utilities";
  *     operationTiming: "IMMEDIATE",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tdcpg instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tdcpg/instance:Instance instance cluster_id#instance_id
+ * $ pulumi import tencentcloud:Tdcpg/instance:Instance instance cluster_id#instance_id
  * ```
  */
 export class Instance extends pulumi.CustomResource {

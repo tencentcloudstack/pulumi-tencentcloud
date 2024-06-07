@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         /// <summary>
         /// Use this data source to query the cos region list supported by the audit.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var foo = Output.Create(Tencentcloud.Audit.GetCosRegions.InvokeAsync());
-        ///     }
+        ///     var foo = Tencentcloud.Audit.GetCosRegions.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCosRegionsResult> InvokeAsync(GetCosRegionsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCosRegionsResult>("tencentcloud:Audit/getCosRegions:getCosRegions", args ?? new GetCosRegionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCosRegionsResult>("tencentcloud:Audit/getCosRegions:getCosRegions", args ?? new GetCosRegionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the cos region list supported by the audit.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var foo = Output.Create(Tencentcloud.Audit.GetCosRegions.InvokeAsync());
-        ///     }
+        ///     var foo = Tencentcloud.Audit.GetCosRegions.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCosRegionsResult> Invoke(GetCosRegionsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCosRegionsResult>("tencentcloud:Audit/getCosRegions:getCosRegions", args ?? new GetCosRegionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCosRegionsResult>("tencentcloud:Audit/getCosRegions:getCosRegions", args ?? new GetCosRegionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCosRegionsArgs : Pulumi.InvokeArgs
+    public sealed class GetCosRegionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         public GetCosRegionsArgs()
         {
         }
+        public static new GetCosRegionsArgs Empty => new GetCosRegionsArgs();
     }
 
-    public sealed class GetCosRegionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCosRegionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         public GetCosRegionsInvokeArgs()
         {
         }
+        public static new GetCosRegionsInvokeArgs Empty => new GetCosRegionsInvokeArgs();
     }
 
 

@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var orgMemberAuthIdentity = new Tencentcloud.Organization.OrgMemberAuthIdentityAttachment("orgMemberAuthIdentity", new()
     ///     {
-    ///         var orgMemberAuthIdentity = new Tencentcloud.Organization.OrgMemberAuthIdentityAttachment("orgMemberAuthIdentity", new Tencentcloud.Organization.OrgMemberAuthIdentityAttachmentArgs
+    ///         IdentityIds = new[]
     ///         {
-    ///             IdentityIds = 
-    ///             {
-    ///                 1657,
-    ///             },
-    ///             MemberUin = 100033704327,
-    ///         });
-    ///     }
+    ///             1657,
+    ///         },
+    ///         MemberUin = 100033704327,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// organization org_member_auth_identity can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Organization/orgMemberAuthIdentityAttachment:OrgMemberAuthIdentityAttachment org_member_auth_identity org_member_auth_identity_id
+    /// $ pulumi import tencentcloud:Organization/orgMemberAuthIdentityAttachment:OrgMemberAuthIdentityAttachment org_member_auth_identity org_member_auth_identity_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Organization/orgMemberAuthIdentityAttachment:OrgMemberAuthIdentityAttachment")]
-    public partial class OrgMemberAuthIdentityAttachment : Pulumi.CustomResource
+    public partial class OrgMemberAuthIdentityAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Identity Id list. Up to 5.
@@ -104,7 +105,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         }
     }
 
-    public sealed class OrgMemberAuthIdentityAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class OrgMemberAuthIdentityAttachmentArgs : global::Pulumi.ResourceArgs
     {
         [Input("identityIds", required: true)]
         private InputList<int>? _identityIds;
@@ -127,9 +128,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public OrgMemberAuthIdentityAttachmentArgs()
         {
         }
+        public static new OrgMemberAuthIdentityAttachmentArgs Empty => new OrgMemberAuthIdentityAttachmentArgs();
     }
 
-    public sealed class OrgMemberAuthIdentityAttachmentState : Pulumi.ResourceArgs
+    public sealed class OrgMemberAuthIdentityAttachmentState : global::Pulumi.ResourceArgs
     {
         [Input("identityIds")]
         private InputList<int>? _identityIds;
@@ -152,5 +154,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public OrgMemberAuthIdentityAttachmentState()
         {
         }
+        public static new OrgMemberAuthIdentityAttachmentState Empty => new OrgMemberAuthIdentityAttachmentState();
     }
 }

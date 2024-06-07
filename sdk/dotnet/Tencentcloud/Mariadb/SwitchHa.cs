@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var switchHa = new Tencentcloud.Mariadb.SwitchHa("switchHa", new()
     ///     {
-    ///         var switchHa = new Tencentcloud.Mariadb.SwitchHa("switchHa", new Tencentcloud.Mariadb.SwitchHaArgs
-    ///         {
-    ///             InstanceId = "tdsql-9vqvls95",
-    ///             Zone = "ap-guangzhou-2",
-    ///         });
-    ///     }
+    ///         InstanceId = "tdsql-9vqvls95",
+    ///         Zone = "ap-guangzhou-2",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/switchHa:SwitchHa")]
-    public partial class SwitchHa : Pulumi.CustomResource
+    public partial class SwitchHa : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID in the format of tdsql-ow728lmc.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         }
     }
 
-    public sealed class SwitchHaArgs : Pulumi.ResourceArgs
+    public sealed class SwitchHaArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID in the format of tdsql-ow728lmc.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public SwitchHaArgs()
         {
         }
+        public static new SwitchHaArgs Empty => new SwitchHaArgs();
     }
 
-    public sealed class SwitchHaState : Pulumi.ResourceArgs
+    public sealed class SwitchHaState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID in the format of tdsql-ow728lmc.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public SwitchHaState()
         {
         }
+        public static new SwitchHaState Empty => new SwitchHaState();
     }
 }

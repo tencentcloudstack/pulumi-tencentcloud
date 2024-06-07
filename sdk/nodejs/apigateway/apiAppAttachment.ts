@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleApiApp = new tencentcloud.apigateway.ApiApp("exampleApiApp", {
  *     apiAppName: "tf_example",
@@ -67,13 +68,14 @@ import * as utilities from "../utilities";
  *     apiId: exampleApi.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * apigateway api_app_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:ApiGateway/apiAppAttachment:ApiAppAttachment example app-f2dxx0lv#test#service-h0trno8e#api-grsomg0w
+ * $ pulumi import tencentcloud:ApiGateway/apiAppAttachment:ApiAppAttachment example app-f2dxx0lv#test#service-h0trno8e#api-grsomg0w
  * ```
  */
 export class ApiAppAttachment extends pulumi.CustomResource {

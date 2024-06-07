@@ -15,90 +15,91 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Wedata.IntegrationRealtimeTask("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Wedata.IntegrationRealtimeTask("example", new Tencentcloud.Wedata.IntegrationRealtimeTaskArgs
+    ///         Description = "description.",
+    ///         ProjectId = "1612982498218618880",
+    ///         SyncType = 1,
+    ///         TaskInfo = new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoArgs
     ///         {
-    ///             Description = "description.",
-    ///             ProjectId = "1612982498218618880",
-    ///             SyncType = 1,
-    ///             TaskInfo = new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoArgs
+    ///             Configs = new[]
     ///             {
-    ///                 Configs = 
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
     ///                 {
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
-    ///                     {
-    ///                         Name = "concurrency",
-    ///                         Value = "1",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
-    ///                     {
-    ///                         Name = "TaskManager",
-    ///                         Value = "1",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
-    ///                     {
-    ///                         Name = "JobManager",
-    ///                         Value = "1",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
-    ///                     {
-    ///                         Name = "TolerateDirtyData",
-    ///                         Value = "0",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
-    ///                     {
-    ///                         Name = "CheckpointingInterval",
-    ///                         Value = "1",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
-    ///                     {
-    ///                         Name = "CheckpointingIntervalUnit",
-    ///                         Value = "min",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
-    ///                     {
-    ///                         Name = "RestartStrategyFixedDelayAttempts",
-    ///                         Value = "-1",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
-    ///                     {
-    ///                         Name = "ResourceAllocationType",
-    ///                         Value = "0",
-    ///                     },
-    ///                     new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
-    ///                     {
-    ///                         Name = "TaskAlarmRegularList",
-    ///                         Value = "35",
-    ///                     },
+    ///                     Name = "concurrency",
+    ///                     Value = "1",
     ///                 },
-    ///                 ExecutorId = "20230313175748567418",
-    ///                 Incharge = "100028439226",
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
+    ///                 {
+    ///                     Name = "TaskManager",
+    ///                     Value = "1",
+    ///                 },
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
+    ///                 {
+    ///                     Name = "JobManager",
+    ///                     Value = "1",
+    ///                 },
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
+    ///                 {
+    ///                     Name = "TolerateDirtyData",
+    ///                     Value = "0",
+    ///                 },
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
+    ///                 {
+    ///                     Name = "CheckpointingInterval",
+    ///                     Value = "1",
+    ///                 },
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
+    ///                 {
+    ///                     Name = "CheckpointingIntervalUnit",
+    ///                     Value = "min",
+    ///                 },
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
+    ///                 {
+    ///                     Name = "RestartStrategyFixedDelayAttempts",
+    ///                     Value = "-1",
+    ///                 },
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
+    ///                 {
+    ///                     Name = "ResourceAllocationType",
+    ///                     Value = "0",
+    ///                 },
+    ///                 new Tencentcloud.Wedata.Inputs.IntegrationRealtimeTaskTaskInfoConfigArgs
+    ///                 {
+    ///                     Name = "TaskAlarmRegularList",
+    ///                     Value = "35",
+    ///                 },
     ///             },
-    ///             TaskMode = "1",
-    ///             TaskName = "tf_example",
-    ///         });
-    ///     }
+    ///             ExecutorId = "20230313175748567418",
+    ///             Incharge = "100028439226",
+    ///         },
+    ///         TaskMode = "1",
+    ///         TaskName = "tf_example",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// wedata integration_realtime_task can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Wedata/integrationRealtimeTask:IntegrationRealtimeTask example 1776563389209296896#h9d39630a-ae45-4460-90b2-0b093cbfef5d
+    /// $ pulumi import tencentcloud:Wedata/integrationRealtimeTask:IntegrationRealtimeTask example 1776563389209296896#h9d39630a-ae45-4460-90b2-0b093cbfef5d
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/integrationRealtimeTask:IntegrationRealtimeTask")]
-    public partial class IntegrationRealtimeTask : Pulumi.CustomResource
+    public partial class IntegrationRealtimeTask : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Description information.
@@ -187,7 +188,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         }
     }
 
-    public sealed class IntegrationRealtimeTaskArgs : Pulumi.ResourceArgs
+    public sealed class IntegrationRealtimeTaskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description information.
@@ -228,9 +229,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public IntegrationRealtimeTaskArgs()
         {
         }
+        public static new IntegrationRealtimeTaskArgs Empty => new IntegrationRealtimeTaskArgs();
     }
 
-    public sealed class IntegrationRealtimeTaskState : Pulumi.ResourceArgs
+    public sealed class IntegrationRealtimeTaskState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Description information.
@@ -277,5 +279,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public IntegrationRealtimeTaskState()
         {
         }
+        public static new IntegrationRealtimeTaskState Empty => new IntegrationRealtimeTaskState();
     }
 }

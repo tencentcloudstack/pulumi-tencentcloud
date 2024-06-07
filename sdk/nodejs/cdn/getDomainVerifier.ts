@@ -11,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -23,13 +24,11 @@ import * as utilities from "../utilities";
  * const recordValue = data.tencentcloud_cdn_domain_verifier.record;
  * const recordType = data.tencentcloud_cdn_domain_verifier.record_type;
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDomainVerifier(args: GetDomainVerifierArgs, opts?: pulumi.InvokeOptions): Promise<GetDomainVerifierResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cdn/getDomainVerifier:getDomainVerifier", {
         "autoVerify": args.autoVerify,
         "domain": args.domain,
@@ -113,9 +112,30 @@ export interface GetDomainVerifierResult {
     readonly verifyResult: boolean;
     readonly verifyType?: string;
 }
-
+/**
+ * Provides a resource to check or create a cdn Domain Verify Record
+ *
+ * > **NOTE:**
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const vr = tencentcloud.Cdn.getDomainVerifier({
+ *     domain: "www.examplexxx123.com",
+ *     autoVerify: true,
+ *     freezeRecord: true,
+ * });
+ * const recordValue = data.tencentcloud_cdn_domain_verifier.record;
+ * const recordType = data.tencentcloud_cdn_domain_verifier.record_type;
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDomainVerifierOutput(args: GetDomainVerifierOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDomainVerifierResult> {
-    return pulumi.output(args).apply(a => getDomainVerifier(a, opts))
+    return pulumi.output(args).apply((a: any) => getDomainVerifier(a, opts))
 }
 
 /**

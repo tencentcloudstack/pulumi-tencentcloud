@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_managers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeManagers = Tencentcloud.Ssl.GetDescribeManagers.Invoke(new()
         ///     {
-        ///         var describeManagers = Output.Create(Tencentcloud.Ssl.GetDescribeManagers.InvokeAsync(new Tencentcloud.Ssl.GetDescribeManagersArgs
-        ///         {
-        ///             CompanyId = 11772,
-        ///         }));
-        ///     }
+        ///         CompanyId = 11772,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDescribeManagersResult> InvokeAsync(GetDescribeManagersArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDescribeManagersResult>("tencentcloud:Ssl/getDescribeManagers:getDescribeManagers", args ?? new GetDescribeManagersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeManagersResult>("tencentcloud:Ssl/getDescribeManagers:getDescribeManagers", args ?? new GetDescribeManagersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ssl describe_managers
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var describeManagers = Tencentcloud.Ssl.GetDescribeManagers.Invoke(new()
         ///     {
-        ///         var describeManagers = Output.Create(Tencentcloud.Ssl.GetDescribeManagers.InvokeAsync(new Tencentcloud.Ssl.GetDescribeManagersArgs
-        ///         {
-        ///             CompanyId = 11772,
-        ///         }));
-        ///     }
+        ///         CompanyId = 11772,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDescribeManagersResult> Invoke(GetDescribeManagersInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDescribeManagersResult>("tencentcloud:Ssl/getDescribeManagers:getDescribeManagers", args ?? new GetDescribeManagersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDescribeManagersResult>("tencentcloud:Ssl/getDescribeManagers:getDescribeManagers", args ?? new GetDescribeManagersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDescribeManagersArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeManagersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Company ID.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeManagersArgs()
         {
         }
+        public static new GetDescribeManagersArgs Empty => new GetDescribeManagersArgs();
     }
 
-    public sealed class GetDescribeManagersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDescribeManagersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Company ID.
@@ -156,6 +151,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public GetDescribeManagersInvokeArgs()
         {
         }
+        public static new GetDescribeManagersInvokeArgs Empty => new GetDescribeManagersInvokeArgs();
     }
 
 

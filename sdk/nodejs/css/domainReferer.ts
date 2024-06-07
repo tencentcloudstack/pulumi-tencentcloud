@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const domainReferer = new tencentcloud.Css.DomainReferer("domain_referer", {
+ * const domainReferer = new tencentcloud.css.DomainReferer("domainReferer", {
  *     allowEmpty: 1,
  *     domainName: "test122.jingxhu.top",
  *     enable: 0,
@@ -21,13 +22,14 @@ import * as utilities from "../utilities";
  *     type: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css domain_referer can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/domainReferer:DomainReferer domain_referer domainName
+ * $ pulumi import tencentcloud:Css/domainReferer:DomainReferer domain_referer domainName
  * ```
  */
 export class DomainReferer extends pulumi.CustomResource {

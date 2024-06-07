@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -11,12 +12,14 @@ import * as utilities from "../utilities";
  * > **NOTE:** When the type is `apigw`, the import function is not supported.
  *
  * ## Example Usage
+ *
  * ### Create ckafka event connector
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooInfo = tencentcloud.User.getInfo({});
  * const fooEventBus = new tencentcloud.eb.EventBus("fooEventBus", {
@@ -70,12 +73,15 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create apiGateway event connector
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooInfo = tencentcloud.User.getInfo({});
  * const fooEventBus = new tencentcloud.eb.EventBus("fooEventBus", {
@@ -114,13 +120,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * eb event_connector can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Eb/eventConnector:EventConnector event_connector eventBusId#connectionId
+ * $ pulumi import tencentcloud:Eb/eventConnector:EventConnector event_connector eventBusId#connectionId
  * ```
  */
 export class EventConnector extends pulumi.CustomResource {

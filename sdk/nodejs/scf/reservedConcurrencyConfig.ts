@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const reservedConcurrencyConfig = new tencentcloud.Scf.ReservedConcurrencyConfig("reserved_concurrency_config", {
+ * const reservedConcurrencyConfig = new tencentcloud.scf.ReservedConcurrencyConfig("reservedConcurrencyConfig", {
  *     functionName: "keep-1676351130",
  *     namespace: "default",
  *     reservedConcurrencyMem: 128000,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * scf reserved_concurrency_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Scf/reservedConcurrencyConfig:ReservedConcurrencyConfig reserved_concurrency_config reserved_concurrency_config_id
+ * $ pulumi import tencentcloud:Scf/reservedConcurrencyConfig:ReservedConcurrencyConfig reserved_concurrency_config reserved_concurrency_config_id
  * ```
  */
 export class ReservedConcurrencyConfig extends pulumi.CustomResource {

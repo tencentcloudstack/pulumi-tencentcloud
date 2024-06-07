@@ -11,14 +11,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const blackList = new tencentcloud.Ses.BlackListDelete("black_list", {
- *     emailAddress: "terraform-tf@gmail.com",
- * });
+ * const blackList = new tencentcloud.ses.BlackListDelete("blackList", {emailAddress: "terraform-tf@gmail.com"});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class BlackListDelete extends pulumi.CustomResource {
     /**

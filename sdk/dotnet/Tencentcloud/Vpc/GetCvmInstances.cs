@@ -15,84 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc cvm_instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var cvmInstances = Tencentcloud.Vpc.GetCvmInstances.Invoke(new()
         ///     {
-        ///         var cvmInstances = Output.Create(Tencentcloud.Vpc.GetCvmInstances.InvokeAsync(new Tencentcloud.Vpc.GetCvmInstancesArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Vpc.Inputs.GetCvmInstancesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Vpc.Inputs.GetCvmInstancesFilterArgs
+        ///                 Name = "vpc-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "vpc-id",
-        ///                     Values = 
-        ///                     {
-        ///                         "vpc-lh4nqig9",
-        ///                     },
+        ///                     "vpc-lh4nqig9",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetCvmInstancesResult> InvokeAsync(GetCvmInstancesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetCvmInstancesResult>("tencentcloud:Vpc/getCvmInstances:getCvmInstances", args ?? new GetCvmInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetCvmInstancesResult>("tencentcloud:Vpc/getCvmInstances:getCvmInstances", args ?? new GetCvmInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc cvm_instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var cvmInstances = Tencentcloud.Vpc.GetCvmInstances.Invoke(new()
         ///     {
-        ///         var cvmInstances = Output.Create(Tencentcloud.Vpc.GetCvmInstances.InvokeAsync(new Tencentcloud.Vpc.GetCvmInstancesArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Vpc.Inputs.GetCvmInstancesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Vpc.Inputs.GetCvmInstancesFilterArgs
+        ///                 Name = "vpc-id",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "vpc-id",
-        ///                     Values = 
-        ///                     {
-        ///                         "vpc-lh4nqig9",
-        ///                     },
+        ///                     "vpc-lh4nqig9",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetCvmInstancesResult> Invoke(GetCvmInstancesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetCvmInstancesResult>("tencentcloud:Vpc/getCvmInstances:getCvmInstances", args ?? new GetCvmInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetCvmInstancesResult>("tencentcloud:Vpc/getCvmInstances:getCvmInstances", args ?? new GetCvmInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetCvmInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetCvmInstancesArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters", required: true)]
         private List<Inputs.GetCvmInstancesFilterArgs>? _filters;
@@ -115,9 +109,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetCvmInstancesArgs()
         {
         }
+        public static new GetCvmInstancesArgs Empty => new GetCvmInstancesArgs();
     }
 
-    public sealed class GetCvmInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetCvmInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters", required: true)]
         private InputList<Inputs.GetCvmInstancesFilterInputArgs>? _filters;
@@ -140,6 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetCvmInstancesInvokeArgs()
         {
         }
+        public static new GetCvmInstancesInvokeArgs Empty => new GetCvmInstancesInvokeArgs();
     }
 
 

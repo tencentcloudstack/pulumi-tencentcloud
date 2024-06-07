@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const foo = pulumi.output(tencentcloud.Vpn.getConnections({
+ * const foo = tencentcloud.Vpn.getConnections({
  *     customerGatewayId: "",
  *     id: "vpnx-xfqag",
  *     name: "main",
@@ -23,16 +25,14 @@ import * as utilities from "../utilities";
  *     },
  *     vpcId: "cgw-xfqag",
  *     vpnGatewayId: "vpngw-8ccsnclt",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getConnections(args?: GetConnectionsArgs, opts?: pulumi.InvokeOptions): Promise<GetConnectionsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpn/getConnections:getConnections", {
         "customerGatewayId": args.customerGatewayId,
         "id": args.id,
@@ -112,9 +112,31 @@ export interface GetConnectionsResult {
      */
     readonly vpnGatewayId?: string;
 }
-
+/**
+ * Use this data source to query detailed information of VPN connections.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Vpn.getConnections({
+ *     customerGatewayId: "",
+ *     id: "vpnx-xfqag",
+ *     name: "main",
+ *     tags: {
+ *         test: "tf",
+ *     },
+ *     vpcId: "cgw-xfqag",
+ *     vpnGatewayId: "vpngw-8ccsnclt",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getConnectionsOutput(args?: GetConnectionsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetConnectionsResult> {
-    return pulumi.output(args).apply(a => getConnections(a, opts))
+    return pulumi.output(args).apply((a: any) => getConnections(a, opts))
 }
 
 /**

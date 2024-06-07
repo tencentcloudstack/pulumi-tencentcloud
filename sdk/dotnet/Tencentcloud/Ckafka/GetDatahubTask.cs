@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// <summary>
         /// Use this data source to query detailed information of ckafka datahub_task
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var datahubTask = Output.Create(Tencentcloud.Ckafka.GetDatahubTask.InvokeAsync());
-        ///     }
+        ///     var datahubTask = Tencentcloud.Ckafka.GetDatahubTask.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDatahubTaskResult> InvokeAsync(GetDatahubTaskArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDatahubTaskResult>("tencentcloud:Ckafka/getDatahubTask:getDatahubTask", args ?? new GetDatahubTaskArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDatahubTaskResult>("tencentcloud:Ckafka/getDatahubTask:getDatahubTask", args ?? new GetDatahubTaskArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ckafka datahub_task
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var datahubTask = Output.Create(Tencentcloud.Ckafka.GetDatahubTask.InvokeAsync());
-        ///     }
+        ///     var datahubTask = Tencentcloud.Ckafka.GetDatahubTask.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDatahubTaskResult> Invoke(GetDatahubTaskInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDatahubTaskResult>("tencentcloud:Ckafka/getDatahubTask:getDatahubTask", args ?? new GetDatahubTaskInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDatahubTaskResult>("tencentcloud:Ckafka/getDatahubTask:getDatahubTask", args ?? new GetDatahubTaskInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDatahubTaskArgs : Pulumi.InvokeArgs
+    public sealed class GetDatahubTaskArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Resource.
@@ -107,9 +101,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetDatahubTaskArgs()
         {
         }
+        public static new GetDatahubTaskArgs Empty => new GetDatahubTaskArgs();
     }
 
-    public sealed class GetDatahubTaskInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDatahubTaskInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Resource.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetDatahubTaskInvokeArgs()
         {
         }
+        public static new GetDatahubTaskInvokeArgs Empty => new GetDatahubTaskInvokeArgs();
     }
 
 

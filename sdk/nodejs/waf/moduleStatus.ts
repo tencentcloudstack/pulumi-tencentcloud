@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Waf.ModuleStatus("example", {
+ * const example = new tencentcloud.waf.ModuleStatus("example", {
  *     accessControl: 0,
  *     antiLeakage: 0,
  *     antiTamper: 1,
@@ -23,13 +24,14 @@ import * as utilities from "../utilities";
  *     webSecurity: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * waf module_status can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Waf/moduleStatus:ModuleStatus example demo.waf.com
+ * $ pulumi import tencentcloud:Waf/moduleStatus:ModuleStatus example demo.waf.com
  * ```
  */
 export class ModuleStatus extends pulumi.CustomResource {

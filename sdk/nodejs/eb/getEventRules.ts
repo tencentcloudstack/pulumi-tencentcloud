@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const foo = new tencentcloud.eb.EventBus("foo", {
  *     eventBusName: "tf-event_bus_rule",
@@ -43,13 +45,11 @@ import * as utilities from "../utilities";
  *     order: "DESC",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getEventRules(args: GetEventRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetEventRulesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Eb/getEventRules:getEventRules", {
         "eventBusId": args.eventBusId,
         "order": args.order,
@@ -100,9 +100,49 @@ export interface GetEventRulesResult {
      */
     readonly rules: outputs.Eb.GetEventRulesRule[];
 }
-
+/**
+ * Use this data source to query detailed information of eb eventRules
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const foo = new tencentcloud.eb.EventBus("foo", {
+ *     eventBusName: "tf-event_bus_rule",
+ *     description: "event bus desc",
+ *     enableStore: false,
+ *     saveDays: 1,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const eventRule = new tencentcloud.eb.EventRule("eventRule", {
+ *     eventBusId: foo.id,
+ *     ruleName: "tf-event_rule",
+ *     description: "event rule desc",
+ *     enable: true,
+ *     eventPattern: JSON.stringify({
+ *         source: "apigw.cloud.tencent",
+ *         type: ["connector:apigw"],
+ *     }),
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const eventRules = tencentcloud.Eb.getEventRulesOutput({
+ *     eventBusId: foo.id,
+ *     orderBy: "AddTime",
+ *     order: "DESC",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getEventRulesOutput(args: GetEventRulesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetEventRulesResult> {
-    return pulumi.output(args).apply(a => getEventRules(a, opts))
+    return pulumi.output(args).apply((a: any) => getEventRules(a, opts))
 }
 
 /**

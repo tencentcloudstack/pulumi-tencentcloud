@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class IndexRuleTagArgs : Pulumi.ResourceArgs
+    public sealed class IndexRuleTagArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Case sensitivity.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public IndexRuleTagArgs()
         {
         }
+        public static new IndexRuleTagArgs Empty => new IndexRuleTagArgs();
     }
 }

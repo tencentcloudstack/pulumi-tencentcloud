@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mongodb = new tencentcloud.Mongodb.Instance("mongodb", {
+ * const mongodb = new tencentcloud.mongodb.Instance("mongodb", {
  *     availableZone: "ap-guangzhou-2",
  *     engineVersion: "MONGO_36_WT",
  *     instanceName: "mongodb",
@@ -27,13 +29,14 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Mongodb instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mongodb/instance:Instance mongodb cmgo-41s6jwy4
+ * $ pulumi import tencentcloud:Mongodb/instance:Instance mongodb cmgo-41s6jwy4
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -64,6 +67,10 @@ export class Instance extends pulumi.CustomResource {
         return obj['__pulumiType'] === Instance.__pulumiType;
     }
 
+    /**
+     * Add node attribute list.
+     */
+    public readonly addNodeLists!: pulumi.Output<outputs.Mongodb.InstanceAddNodeList[] | undefined>;
     /**
      * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
      */
@@ -125,6 +132,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly projectId!: pulumi.Output<number | undefined>;
     /**
+     * Add node attribute list.
+     */
+    public readonly removeNodeLists!: pulumi.Output<outputs.Mongodb.InstanceRemoveNodeList[] | undefined>;
+    /**
      * ID of the security group.
      */
     public readonly securityGroups!: pulumi.Output<string[] | undefined>;
@@ -174,6 +185,7 @@ export class Instance extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as InstanceState | undefined;
+            resourceInputs["addNodeLists"] = state ? state.addNodeLists : undefined;
             resourceInputs["autoRenewFlag"] = state ? state.autoRenewFlag : undefined;
             resourceInputs["availabilityZoneLists"] = state ? state.availabilityZoneLists : undefined;
             resourceInputs["availableZone"] = state ? state.availableZone : undefined;
@@ -188,6 +200,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["prepaidPeriod"] = state ? state.prepaidPeriod : undefined;
             resourceInputs["projectId"] = state ? state.projectId : undefined;
+            resourceInputs["removeNodeLists"] = state ? state.removeNodeLists : undefined;
             resourceInputs["securityGroups"] = state ? state.securityGroups : undefined;
             resourceInputs["standbyInstanceLists"] = state ? state.standbyInstanceLists : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
@@ -217,6 +230,7 @@ export class Instance extends pulumi.CustomResource {
             if ((!args || args.volume === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'volume'");
             }
+            resourceInputs["addNodeLists"] = args ? args.addNodeLists : undefined;
             resourceInputs["autoRenewFlag"] = args ? args.autoRenewFlag : undefined;
             resourceInputs["availabilityZoneLists"] = args ? args.availabilityZoneLists : undefined;
             resourceInputs["availableZone"] = args ? args.availableZone : undefined;
@@ -227,9 +241,10 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["machineType"] = args ? args.machineType : undefined;
             resourceInputs["memory"] = args ? args.memory : undefined;
             resourceInputs["nodeNum"] = args ? args.nodeNum : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["prepaidPeriod"] = args ? args.prepaidPeriod : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
+            resourceInputs["removeNodeLists"] = args ? args.removeNodeLists : undefined;
             resourceInputs["securityGroups"] = args ? args.securityGroups : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
@@ -242,6 +257,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["vport"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Instance.__pulumiType, name, resourceInputs, opts);
     }
 }
@@ -250,6 +267,10 @@ export class Instance extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Instance resources.
  */
 export interface InstanceState {
+    /**
+     * Add node attribute list.
+     */
+    addNodeLists?: pulumi.Input<pulumi.Input<inputs.Mongodb.InstanceAddNodeList>[]>;
     /**
      * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
      */
@@ -311,6 +332,10 @@ export interface InstanceState {
      */
     projectId?: pulumi.Input<number>;
     /**
+     * Add node attribute list.
+     */
+    removeNodeLists?: pulumi.Input<pulumi.Input<inputs.Mongodb.InstanceRemoveNodeList>[]>;
+    /**
      * ID of the security group.
      */
     securityGroups?: pulumi.Input<pulumi.Input<string>[]>;
@@ -352,6 +377,10 @@ export interface InstanceState {
  * The set of arguments for constructing a Instance resource.
  */
 export interface InstanceArgs {
+    /**
+     * Add node attribute list.
+     */
+    addNodeLists?: pulumi.Input<pulumi.Input<inputs.Mongodb.InstanceAddNodeList>[]>;
     /**
      * Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
      */
@@ -408,6 +437,10 @@ export interface InstanceArgs {
      * ID of the project which the instance belongs.
      */
     projectId?: pulumi.Input<number>;
+    /**
+     * Add node attribute list.
+     */
+    removeNodeLists?: pulumi.Input<pulumi.Input<inputs.Mongodb.InstanceRemoveNodeList>[]>;
     /**
      * ID of the security group.
      */

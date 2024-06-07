@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Outputs
     public sealed class ScheduleActivityActivityParaSampleSnapshotTaskWatermarkSetRawParameterImageTemplateImageContentS3InputInfo
     {
         /// <summary>
-        /// The AWS S3 bucket bound to the scheme.
+        /// The AWS S3 bucket.
         /// </summary>
         public readonly string S3Bucket;
         /// <summary>
@@ -27,11 +27,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Outputs
         /// </summary>
         public readonly string S3Region;
         /// <summary>
-        /// The key ID of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        /// The key ID required to access the AWS S3 object.
         /// </summary>
         public readonly string? S3SecretId;
         /// <summary>
-        /// The key of the AWS S3 bucket.Note: This field may return null, indicating that no valid values can be obtained.
+        /// The key required to access the AWS S3 object.
         /// </summary>
         public readonly string? S3SecretKey;
 

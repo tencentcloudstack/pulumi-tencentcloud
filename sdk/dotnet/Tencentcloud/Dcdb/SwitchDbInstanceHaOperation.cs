@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var switchOperation = new Tencentcloud.Dcdb.SwitchDbInstanceHaOperation("switchOperation", new()
     ///     {
-    ///         var switchOperation = new Tencentcloud.Dcdb.SwitchDbInstanceHaOperation("switchOperation", new Tencentcloud.Dcdb.SwitchDbInstanceHaOperationArgs
-    ///         {
-    ///             InstanceId = local.Dcdb_id,
-    ///             Zone = "ap-guangzhou-4",
-    ///         });
-    ///         //3 to 4
-    ///     }
+    ///         InstanceId = local.Dcdb_id,
+    ///         Zone = "ap-guangzhou-4",
+    ///     });
     /// 
-    /// }
+    ///     //3 to 4
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/switchDbInstanceHaOperation:SwitchDbInstanceHaOperation")]
-    public partial class SwitchDbInstanceHaOperation : Pulumi.CustomResource
+    public partial class SwitchDbInstanceHaOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID in the format of tdsqlshard-ow728lmc.
@@ -94,7 +95,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         }
     }
 
-    public sealed class SwitchDbInstanceHaOperationArgs : Pulumi.ResourceArgs
+    public sealed class SwitchDbInstanceHaOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID in the format of tdsqlshard-ow728lmc.
@@ -111,9 +112,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public SwitchDbInstanceHaOperationArgs()
         {
         }
+        public static new SwitchDbInstanceHaOperationArgs Empty => new SwitchDbInstanceHaOperationArgs();
     }
 
-    public sealed class SwitchDbInstanceHaOperationState : Pulumi.ResourceArgs
+    public sealed class SwitchDbInstanceHaOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID in the format of tdsqlshard-ow728lmc.
@@ -130,5 +132,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public SwitchDbInstanceHaOperationState()
         {
         }
+        public static new SwitchDbInstanceHaOperationState Empty => new SwitchDbInstanceHaOperationState();
     }
 }

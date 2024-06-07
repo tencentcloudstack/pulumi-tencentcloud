@@ -16,17 +16,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         /// Use this data source to query detailed information of tcmq subscribe
         /// </summary>
         public static Task<GetSubscribeResult> InvokeAsync(GetSubscribeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSubscribeResult>("tencentcloud:Tcmq/getSubscribe:getSubscribe", args ?? new GetSubscribeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSubscribeResult>("tencentcloud:Tcmq/getSubscribe:getSubscribe", args ?? new GetSubscribeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tcmq subscribe
         /// </summary>
         public static Output<GetSubscribeResult> Invoke(GetSubscribeInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSubscribeResult>("tencentcloud:Tcmq/getSubscribe:getSubscribe", args ?? new GetSubscribeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSubscribeResult>("tencentcloud:Tcmq/getSubscribe:getSubscribe", args ?? new GetSubscribeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSubscribeArgs : Pulumi.InvokeArgs
+    public sealed class GetSubscribeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
@@ -61,9 +61,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         public GetSubscribeArgs()
         {
         }
+        public static new GetSubscribeArgs Empty => new GetSubscribeArgs();
     }
 
-    public sealed class GetSubscribeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSubscribeInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Number of topics to be returned per page in case of paginated return. If this parameter is not passed in, 20 will be used by default. Maximum value: 50.
@@ -98,6 +99,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         public GetSubscribeInvokeArgs()
         {
         }
+        public static new GetSubscribeInvokeArgs Empty => new GetSubscribeInvokeArgs();
     }
 
 

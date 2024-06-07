@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type InstanceDataDisk struct {
 	// Data disk ID used to initialize the data disk. When data disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
@@ -30,7 +33,7 @@ type InstanceDataDisk struct {
 // InstanceDataDiskInput is an input type that accepts InstanceDataDiskArgs and InstanceDataDiskOutput values.
 // You can construct a concrete instance of `InstanceDataDiskInput` via:
 //
-//          InstanceDataDiskArgs{...}
+//	InstanceDataDiskArgs{...}
 type InstanceDataDiskInput interface {
 	pulumi.Input
 
@@ -70,7 +73,7 @@ func (i InstanceDataDiskArgs) ToInstanceDataDiskOutputWithContext(ctx context.Co
 // InstanceDataDiskArrayInput is an input type that accepts InstanceDataDiskArray and InstanceDataDiskArrayOutput values.
 // You can construct a concrete instance of `InstanceDataDiskArrayInput` via:
 //
-//          InstanceDataDiskArray{ InstanceDataDiskArgs{...} }
+//	InstanceDataDiskArray{ InstanceDataDiskArgs{...} }
 type InstanceDataDiskArrayInput interface {
 	pulumi.Input
 
@@ -171,7 +174,7 @@ type GetTypesFilter struct {
 // GetTypesFilterInput is an input type that accepts GetTypesFilterArgs and GetTypesFilterOutput values.
 // You can construct a concrete instance of `GetTypesFilterInput` via:
 //
-//          GetTypesFilterArgs{...}
+//	GetTypesFilterArgs{...}
 type GetTypesFilterInput interface {
 	pulumi.Input
 
@@ -201,7 +204,7 @@ func (i GetTypesFilterArgs) ToGetTypesFilterOutputWithContext(ctx context.Contex
 // GetTypesFilterArrayInput is an input type that accepts GetTypesFilterArray and GetTypesFilterArrayOutput values.
 // You can construct a concrete instance of `GetTypesFilterArrayInput` via:
 //
-//          GetTypesFilterArray{ GetTypesFilterArgs{...} }
+//	GetTypesFilterArray{ GetTypesFilterArgs{...} }
 type GetTypesFilterArrayInput interface {
 	pulumi.Input
 
@@ -289,7 +292,7 @@ type GetTypesInstanceType struct {
 // GetTypesInstanceTypeInput is an input type that accepts GetTypesInstanceTypeArgs and GetTypesInstanceTypeOutput values.
 // You can construct a concrete instance of `GetTypesInstanceTypeInput` via:
 //
-//          GetTypesInstanceTypeArgs{...}
+//	GetTypesInstanceTypeArgs{...}
 type GetTypesInstanceTypeInput interface {
 	pulumi.Input
 
@@ -331,7 +334,7 @@ func (i GetTypesInstanceTypeArgs) ToGetTypesInstanceTypeOutputWithContext(ctx co
 // GetTypesInstanceTypeArrayInput is an input type that accepts GetTypesInstanceTypeArray and GetTypesInstanceTypeArrayOutput values.
 // You can construct a concrete instance of `GetTypesInstanceTypeArrayInput` via:
 //
-//          GetTypesInstanceTypeArray{ GetTypesInstanceTypeArgs{...} }
+//	GetTypesInstanceTypeArray{ GetTypesInstanceTypeArgs{...} }
 type GetTypesInstanceTypeArrayInput interface {
 	pulumi.Input
 

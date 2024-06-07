@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
 {
 
-    public sealed class GetAccountAllGrantPrivilegesAccountInputArgs : Pulumi.ResourceArgs
+    public sealed class GetAccountAllGrantPrivilegesAccountInputArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Account.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
         public GetAccountAllGrantPrivilegesAccountInputArgs()
         {
         }
+        public static new GetAccountAllGrantPrivilegesAccountInputArgs Empty => new GetAccountAllGrantPrivilegesAccountInputArgs();
     }
 }

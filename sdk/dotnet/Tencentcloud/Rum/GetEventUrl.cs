@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum event_url
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var eventUrl = Tencentcloud.Rum.GetEventUrl.Invoke(new()
         ///     {
-        ///         var eventUrl = Output.Create(Tencentcloud.Rum.GetEventUrl.InvokeAsync(new Tencentcloud.Rum.GetEventUrlArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "allcount",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "allcount",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetEventUrlResult> InvokeAsync(GetEventUrlArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetEventUrlResult>("tencentcloud:Rum/getEventUrl:getEventUrl", args ?? new GetEventUrlArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetEventUrlResult>("tencentcloud:Rum/getEventUrl:getEventUrl", args ?? new GetEventUrlArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum event_url
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var eventUrl = Tencentcloud.Rum.GetEventUrl.Invoke(new()
         ///     {
-        ///         var eventUrl = Output.Create(Tencentcloud.Rum.GetEventUrl.InvokeAsync(new Tencentcloud.Rum.GetEventUrlArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "allcount",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "allcount",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetEventUrlResult> Invoke(GetEventUrlInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetEventUrlResult>("tencentcloud:Rum/getEventUrl:getEventUrl", args ?? new GetEventUrlInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetEventUrlResult>("tencentcloud:Rum/getEventUrl:getEventUrl", args ?? new GetEventUrlInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetEventUrlArgs : Pulumi.InvokeArgs
+    public sealed class GetEventUrlArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -221,9 +215,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetEventUrlArgs()
         {
         }
+        public static new GetEventUrlArgs Empty => new GetEventUrlArgs();
     }
 
-    public sealed class GetEventUrlInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetEventUrlInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -366,6 +361,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetEventUrlInvokeArgs()
         {
         }
+        public static new GetEventUrlInvokeArgs Empty => new GetEventUrlInvokeArgs();
     }
 
 

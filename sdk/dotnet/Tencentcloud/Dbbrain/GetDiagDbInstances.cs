@@ -15,74 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// <summary>
         /// Use this data source to query detailed information of dbbrain diag_db_instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var diagDbInstances = Tencentcloud.Dbbrain.GetDiagDbInstances.Invoke(new()
         ///     {
-        ///         var diagDbInstances = Output.Create(Tencentcloud.Dbbrain.GetDiagDbInstances.InvokeAsync(new Tencentcloud.Dbbrain.GetDiagDbInstancesArgs
+        ///         InstanceNames = new[]
         ///         {
-        ///             InstanceNames = 
-        ///             {
-        ///                 "keep_preset_mysql",
-        ///             },
-        ///             IsSupported = true,
-        ///             Product = "mysql",
-        ///         }));
-        ///     }
+        ///             "keep_preset_mysql",
+        ///         },
+        ///         IsSupported = true,
+        ///         Product = "mysql",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDiagDbInstancesResult> InvokeAsync(GetDiagDbInstancesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDiagDbInstancesResult>("tencentcloud:Dbbrain/getDiagDbInstances:getDiagDbInstances", args ?? new GetDiagDbInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDiagDbInstancesResult>("tencentcloud:Dbbrain/getDiagDbInstances:getDiagDbInstances", args ?? new GetDiagDbInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dbbrain diag_db_instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var diagDbInstances = Tencentcloud.Dbbrain.GetDiagDbInstances.Invoke(new()
         ///     {
-        ///         var diagDbInstances = Output.Create(Tencentcloud.Dbbrain.GetDiagDbInstances.InvokeAsync(new Tencentcloud.Dbbrain.GetDiagDbInstancesArgs
+        ///         InstanceNames = new[]
         ///         {
-        ///             InstanceNames = 
-        ///             {
-        ///                 "keep_preset_mysql",
-        ///             },
-        ///             IsSupported = true,
-        ///             Product = "mysql",
-        ///         }));
-        ///     }
+        ///             "keep_preset_mysql",
+        ///         },
+        ///         IsSupported = true,
+        ///         Product = "mysql",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDiagDbInstancesResult> Invoke(GetDiagDbInstancesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDiagDbInstancesResult>("tencentcloud:Dbbrain/getDiagDbInstances:getDiagDbInstances", args ?? new GetDiagDbInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDiagDbInstancesResult>("tencentcloud:Dbbrain/getDiagDbInstances:getDiagDbInstances", args ?? new GetDiagDbInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDiagDbInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetDiagDbInstancesArgs : global::Pulumi.InvokeArgs
     {
         [Input("instanceIds")]
         private List<string>? _instanceIds;
@@ -141,9 +135,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetDiagDbInstancesArgs()
         {
         }
+        public static new GetDiagDbInstancesArgs Empty => new GetDiagDbInstancesArgs();
     }
 
-    public sealed class GetDiagDbInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDiagDbInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("instanceIds")]
         private InputList<string>? _instanceIds;
@@ -202,6 +197,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public GetDiagDbInstancesInvokeArgs()
         {
         }
+        public static new GetDiagDbInstancesInvokeArgs Empty => new GetDiagDbInstancesInvokeArgs();
     }
 
 

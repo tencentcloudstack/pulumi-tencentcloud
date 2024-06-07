@@ -16,63 +16,67 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// This resource supports bidirectional binding (target group binding to the load balancer, load balancer binding to the target group). When choosing either the load balancer or the target group as the binding target, up to 20 combinations can be bound at most.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Load balancer binding to the target group
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var targetGroupAttachments = new Tencentcloud.Clb.TargetGroupAttachments("targetGroupAttachments", new()
     ///     {
-    ///         var targetGroupAttachments = new Tencentcloud.Clb.TargetGroupAttachments("targetGroupAttachments", new Tencentcloud.Clb.TargetGroupAttachmentsArgs
+    ///         Associations = new[]
     ///         {
-    ///             Associations = 
+    ///             new Tencentcloud.Clb.Inputs.TargetGroupAttachmentsAssociationArgs
     ///             {
-    ///                 new Tencentcloud.Clb.Inputs.TargetGroupAttachmentsAssociationArgs
-    ///                 {
-    ///                     ListenerId = "lbl-m2q6sp9m",
-    ///                     LocationId = "loc-jjqr0ric",
-    ///                     TargetGroupId = "lbtg-5xunivs0",
-    ///                 },
+    ///                 ListenerId = "lbl-m2q6sp9m",
+    ///                 LocationId = "loc-jjqr0ric",
+    ///                 TargetGroupId = "lbtg-5xunivs0",
     ///             },
-    ///             LoadBalancerId = "lb-phbx2420",
-    ///         });
-    ///     }
+    ///         },
+    ///         LoadBalancerId = "lb-phbx2420",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Target group binding to the load balancer
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var targetGroupAttachments = new Tencentcloud.Clb.TargetGroupAttachments("targetGroupAttachments", new()
     ///     {
-    ///         var targetGroupAttachments = new Tencentcloud.Clb.TargetGroupAttachments("targetGroupAttachments", new Tencentcloud.Clb.TargetGroupAttachmentsArgs
+    ///         Associations = new[]
     ///         {
-    ///             Associations = 
+    ///             new Tencentcloud.Clb.Inputs.TargetGroupAttachmentsAssociationArgs
     ///             {
-    ///                 new Tencentcloud.Clb.Inputs.TargetGroupAttachmentsAssociationArgs
-    ///                 {
-    ///                     ListenerId = "lbl-m2q6sp9m",
-    ///                     LoadBalancerId = "lb-phbx2420",
-    ///                     LocationId = "loc-jjqr0ric",
-    ///                 },
+    ///                 ListenerId = "lbl-m2q6sp9m",
+    ///                 LoadBalancerId = "lb-phbx2420",
+    ///                 LocationId = "loc-jjqr0ric",
     ///             },
-    ///             TargetGroupId = "lbtg-5xunivs0",
-    ///         });
-    ///     }
+    ///         },
+    ///         TargetGroupId = "lbtg-5xunivs0",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/targetGroupAttachments:TargetGroupAttachments")]
-    public partial class TargetGroupAttachments : Pulumi.CustomResource
+    public partial class TargetGroupAttachments : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Association array, the combination cannot exceed 20.
@@ -137,7 +141,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class TargetGroupAttachmentsArgs : Pulumi.ResourceArgs
+    public sealed class TargetGroupAttachmentsArgs : global::Pulumi.ResourceArgs
     {
         [Input("associations", required: true)]
         private InputList<Inputs.TargetGroupAttachmentsAssociationArgs>? _associations;
@@ -166,9 +170,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public TargetGroupAttachmentsArgs()
         {
         }
+        public static new TargetGroupAttachmentsArgs Empty => new TargetGroupAttachmentsArgs();
     }
 
-    public sealed class TargetGroupAttachmentsState : Pulumi.ResourceArgs
+    public sealed class TargetGroupAttachmentsState : global::Pulumi.ResourceArgs
     {
         [Input("associations")]
         private InputList<Inputs.TargetGroupAttachmentsAssociationGetArgs>? _associations;
@@ -197,5 +202,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public TargetGroupAttachmentsState()
         {
         }
+        public static new TargetGroupAttachmentsState Empty => new TargetGroupAttachmentsState();
     }
 }

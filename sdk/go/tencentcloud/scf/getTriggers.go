@@ -8,38 +8,43 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of scf triggers
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Scf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Scf.GetTriggers(ctx, &scf.GetTriggersArgs{
-// 			FunctionName: "keep-1676351130",
-// 			Namespace:    pulumi.StringRef("default"),
-// 			Order:        pulumi.StringRef("DESC"),
-// 			OrderBy:      pulumi.StringRef("add_time"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Scf.GetTriggers(ctx, &scf.GetTriggersArgs{
+//				FunctionName: "keep-1676351130",
+//				Namespace:    pulumi.StringRef("default"),
+//				Order:        pulumi.StringRef("DESC"),
+//				OrderBy:      pulumi.StringRef("add_time"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetTriggers(ctx *pulumi.Context, args *GetTriggersArgs, opts ...pulumi.InvokeOption) (*GetTriggersResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTriggersResult
 	err := ctx.Invoke("tencentcloud:Scf/getTriggers:getTriggers", args, &rv, opts...)
 	if err != nil {

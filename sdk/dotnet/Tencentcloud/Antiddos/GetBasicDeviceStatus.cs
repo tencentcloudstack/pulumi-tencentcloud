@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// <summary>
         /// Use this data source to query detailed information of antiddos basic_device_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var basicDeviceStatus = Tencentcloud.Antiddos.GetBasicDeviceStatus.Invoke(new()
         ///     {
-        ///         var basicDeviceStatus = Output.Create(Tencentcloud.Antiddos.GetBasicDeviceStatus.InvokeAsync(new Tencentcloud.Antiddos.GetBasicDeviceStatusArgs
+        ///         FilterRegion = 1,
+        ///         IpLists = new[]
         ///         {
-        ///             FilterRegion = 1,
-        ///             IpLists = 
-        ///             {
-        ///                 "127.0.0.1",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "127.0.0.1",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBasicDeviceStatusResult> InvokeAsync(GetBasicDeviceStatusArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBasicDeviceStatusResult>("tencentcloud:Antiddos/getBasicDeviceStatus:getBasicDeviceStatus", args ?? new GetBasicDeviceStatusArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBasicDeviceStatusResult>("tencentcloud:Antiddos/getBasicDeviceStatus:getBasicDeviceStatus", args ?? new GetBasicDeviceStatusArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of antiddos basic_device_status
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var basicDeviceStatus = Tencentcloud.Antiddos.GetBasicDeviceStatus.Invoke(new()
         ///     {
-        ///         var basicDeviceStatus = Output.Create(Tencentcloud.Antiddos.GetBasicDeviceStatus.InvokeAsync(new Tencentcloud.Antiddos.GetBasicDeviceStatusArgs
+        ///         FilterRegion = 1,
+        ///         IpLists = new[]
         ///         {
-        ///             FilterRegion = 1,
-        ///             IpLists = 
-        ///             {
-        ///                 "127.0.0.1",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "127.0.0.1",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBasicDeviceStatusResult> Invoke(GetBasicDeviceStatusInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBasicDeviceStatusResult>("tencentcloud:Antiddos/getBasicDeviceStatus:getBasicDeviceStatus", args ?? new GetBasicDeviceStatusInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBasicDeviceStatusResult>("tencentcloud:Antiddos/getBasicDeviceStatus:getBasicDeviceStatus", args ?? new GetBasicDeviceStatusInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBasicDeviceStatusArgs : Pulumi.InvokeArgs
+    public sealed class GetBasicDeviceStatusArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Region Id.
@@ -121,9 +115,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public GetBasicDeviceStatusArgs()
         {
         }
+        public static new GetBasicDeviceStatusArgs Empty => new GetBasicDeviceStatusArgs();
     }
 
-    public sealed class GetBasicDeviceStatusInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBasicDeviceStatusInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Region Id.
@@ -164,6 +159,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public GetBasicDeviceStatusInvokeArgs()
         {
         }
+        public static new GetBasicDeviceStatusInvokeArgs Empty => new GetBasicDeviceStatusInvokeArgs();
     }
 
 

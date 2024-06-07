@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
 {
 
-    public sealed class DiskAutoMountConfigurationGetArgs : Pulumi.ResourceArgs
+    public sealed class DiskAutoMountConfigurationGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The file system type. Value: ext4, xfs. Only instances of the Linux operating system can pass in this parameter, and if it is not passed, it defaults to ext4.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse.Inputs
         public DiskAutoMountConfigurationGetArgs()
         {
         }
+        public static new DiskAutoMountConfigurationGetArgs Empty => new DiskAutoMountConfigurationGetArgs();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse.Inputs
 {
 
-    public sealed class KeyvalConfigItemsGetArgs : Pulumi.ResourceArgs
+    public sealed class KeyvalConfigItemsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance config key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse.Inputs
         public KeyvalConfigItemsGetArgs()
         {
         }
+        public static new KeyvalConfigItemsGetArgs Empty => new KeyvalConfigItemsGetArgs();
     }
 }

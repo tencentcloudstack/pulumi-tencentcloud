@@ -15,74 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf container_group
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var containerGroup = Tencentcloud.Tsf.GetContainerGroup.Invoke(new()
         ///     {
-        ///         var containerGroup = Output.Create(Tencentcloud.Tsf.GetContainerGroup.InvokeAsync(new Tencentcloud.Tsf.GetContainerGroupArgs
-        ///         {
-        ///             ApplicationId = "application-a24x29xv",
-        ///             ClusterId = "cluster-vwgj5e6y",
-        ///             NamespaceId = "namespace-aemrg36v",
-        ///             OrderBy = "createTime",
-        ///             OrderType = 0,
-        ///             SearchWord = "keep",
-        ///         }));
-        ///     }
+        ///         ApplicationId = "application-a24x29xv",
+        ///         ClusterId = "cluster-vwgj5e6y",
+        ///         NamespaceId = "namespace-aemrg36v",
+        ///         OrderBy = "createTime",
+        ///         OrderType = 0,
+        ///         SearchWord = "keep",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetContainerGroupResult> InvokeAsync(GetContainerGroupArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetContainerGroupResult>("tencentcloud:Tsf/getContainerGroup:getContainerGroup", args ?? new GetContainerGroupArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetContainerGroupResult>("tencentcloud:Tsf/getContainerGroup:getContainerGroup", args ?? new GetContainerGroupArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf container_group
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var containerGroup = Tencentcloud.Tsf.GetContainerGroup.Invoke(new()
         ///     {
-        ///         var containerGroup = Output.Create(Tencentcloud.Tsf.GetContainerGroup.InvokeAsync(new Tencentcloud.Tsf.GetContainerGroupArgs
-        ///         {
-        ///             ApplicationId = "application-a24x29xv",
-        ///             ClusterId = "cluster-vwgj5e6y",
-        ///             NamespaceId = "namespace-aemrg36v",
-        ///             OrderBy = "createTime",
-        ///             OrderType = 0,
-        ///             SearchWord = "keep",
-        ///         }));
-        ///     }
+        ///         ApplicationId = "application-a24x29xv",
+        ///         ClusterId = "cluster-vwgj5e6y",
+        ///         NamespaceId = "namespace-aemrg36v",
+        ///         OrderBy = "createTime",
+        ///         OrderType = 0,
+        ///         SearchWord = "keep",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetContainerGroupResult> Invoke(GetContainerGroupInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetContainerGroupResult>("tencentcloud:Tsf/getContainerGroup:getContainerGroup", args ?? new GetContainerGroupInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetContainerGroupResult>("tencentcloud:Tsf/getContainerGroup:getContainerGroup", args ?? new GetContainerGroupInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetContainerGroupArgs : Pulumi.InvokeArgs
+    public sealed class GetContainerGroupArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ApplicationId, required.
@@ -129,9 +123,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetContainerGroupArgs()
         {
         }
+        public static new GetContainerGroupArgs Empty => new GetContainerGroupArgs();
     }
 
-    public sealed class GetContainerGroupInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetContainerGroupInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ApplicationId, required.
@@ -178,6 +173,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetContainerGroupInvokeArgs()
         {
         }
+        public static new GetContainerGroupInvokeArgs Empty => new GetContainerGroupInvokeArgs();
     }
 
 

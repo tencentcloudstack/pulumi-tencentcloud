@@ -14,21 +14,23 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// Provides a resource to create a ses template.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a ses html template
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Ses.Template("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Ses.Template("example", new Tencentcloud.Ses.TemplateArgs
+    ///         TemplateContent = new Tencentcloud.Ses.Inputs.TemplateTemplateContentArgs
     ///         {
-    ///             TemplateContent = new Tencentcloud.Ses.Inputs.TemplateTemplateContentArgs
-    ///             {
-    ///                 Html = @"&lt;!DOCTYPE html&gt;
+    ///             Html = @"&lt;!DOCTYPE html&gt;
     /// &lt;html lang=""en""&gt;
     /// &lt;head&gt;
     ///   &lt;meta charset=""UTF-8""&gt;
@@ -48,24 +50,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// &lt;/html&gt;
     /// 
     /// ",
-    ///             },
-    ///             TemplateName = "tf_example_ses_temp",
-    ///         });
-    ///     }
+    ///         },
+    ///         TemplateName = "tf_example_ses_temp",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ses template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ses/template:Template example template_id
+    /// $ pulumi import tencentcloud:Ses/template:Template example template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ses/template:Template")]
-    public partial class Template : Pulumi.CustomResource
+    public partial class Template : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Sms Template Content.
@@ -124,7 +126,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         }
     }
 
-    public sealed class TemplateArgs : Pulumi.ResourceArgs
+    public sealed class TemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Sms Template Content.
@@ -141,9 +143,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public TemplateArgs()
         {
         }
+        public static new TemplateArgs Empty => new TemplateArgs();
     }
 
-    public sealed class TemplateState : Pulumi.ResourceArgs
+    public sealed class TemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Sms Template Content.
@@ -160,5 +163,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public TemplateState()
         {
         }
+        public static new TemplateState Empty => new TemplateState();
     }
 }

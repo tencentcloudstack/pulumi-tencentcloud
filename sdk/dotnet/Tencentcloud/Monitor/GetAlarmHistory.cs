@@ -15,114 +15,108 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query detailed information of monitor alarm_history
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var alarmHistory = Tencentcloud.Monitor.GetAlarmHistory.Invoke(new()
         ///     {
-        ///         var alarmHistory = Output.Create(Tencentcloud.Monitor.GetAlarmHistory.InvokeAsync(new Tencentcloud.Monitor.GetAlarmHistoryArgs
+        ///         Content = "CPU利用率 &gt; 3%",
+        ///         EndTime = 1697212799,
+        ///         Module = "monitor",
+        ///         MonitorTypes = new[]
         ///         {
-        ///             Content = "CPU利用率 &gt; 3%",
-        ///             EndTime = 1697212799,
-        ///             Module = "monitor",
-        ///             MonitorTypes = 
+        ///             "MT_QCE",
+        ///         },
+        ///         Namespaces = new[]
+        ///         {
+        ///             new Tencentcloud.Monitor.Inputs.GetAlarmHistoryNamespaceInputArgs
         ///             {
-        ///                 "MT_QCE",
+        ///                 MonitorType = "CpuUsage",
+        ///                 Namespace = "cvm_device",
         ///             },
-        ///             Namespaces = 
-        ///             {
-        ///                 new Tencentcloud.Monitor.Inputs.GetAlarmHistoryNamespaceArgs
-        ///                 {
-        ///                     MonitorType = "CpuUsage",
-        ///                     Namespace = "cvm_device",
-        ///                 },
-        ///             },
-        ///             Order = "DESC",
-        ///             PolicyIds = 
-        ///             {
-        ///                 "policy-iejtp4ue",
-        ///             },
-        ///             PolicyName = "terraform_test",
-        ///             ProjectIds = 
-        ///             {
-        ///                 0,
-        ///             },
-        ///             StartTime = 1696608000,
-        ///         }));
-        ///     }
+        ///         },
+        ///         Order = "DESC",
+        ///         PolicyIds = new[]
+        ///         {
+        ///             "policy-iejtp4ue",
+        ///         },
+        ///         PolicyName = "terraform_test",
+        ///         ProjectIds = new[]
+        ///         {
+        ///             0,
+        ///         },
+        ///         StartTime = 1696608000,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAlarmHistoryResult> InvokeAsync(GetAlarmHistoryArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAlarmHistoryResult>("tencentcloud:Monitor/getAlarmHistory:getAlarmHistory", args ?? new GetAlarmHistoryArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmHistoryResult>("tencentcloud:Monitor/getAlarmHistory:getAlarmHistory", args ?? new GetAlarmHistoryArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of monitor alarm_history
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var alarmHistory = Tencentcloud.Monitor.GetAlarmHistory.Invoke(new()
         ///     {
-        ///         var alarmHistory = Output.Create(Tencentcloud.Monitor.GetAlarmHistory.InvokeAsync(new Tencentcloud.Monitor.GetAlarmHistoryArgs
+        ///         Content = "CPU利用率 &gt; 3%",
+        ///         EndTime = 1697212799,
+        ///         Module = "monitor",
+        ///         MonitorTypes = new[]
         ///         {
-        ///             Content = "CPU利用率 &gt; 3%",
-        ///             EndTime = 1697212799,
-        ///             Module = "monitor",
-        ///             MonitorTypes = 
+        ///             "MT_QCE",
+        ///         },
+        ///         Namespaces = new[]
+        ///         {
+        ///             new Tencentcloud.Monitor.Inputs.GetAlarmHistoryNamespaceInputArgs
         ///             {
-        ///                 "MT_QCE",
+        ///                 MonitorType = "CpuUsage",
+        ///                 Namespace = "cvm_device",
         ///             },
-        ///             Namespaces = 
-        ///             {
-        ///                 new Tencentcloud.Monitor.Inputs.GetAlarmHistoryNamespaceArgs
-        ///                 {
-        ///                     MonitorType = "CpuUsage",
-        ///                     Namespace = "cvm_device",
-        ///                 },
-        ///             },
-        ///             Order = "DESC",
-        ///             PolicyIds = 
-        ///             {
-        ///                 "policy-iejtp4ue",
-        ///             },
-        ///             PolicyName = "terraform_test",
-        ///             ProjectIds = 
-        ///             {
-        ///                 0,
-        ///             },
-        ///             StartTime = 1696608000,
-        ///         }));
-        ///     }
+        ///         },
+        ///         Order = "DESC",
+        ///         PolicyIds = new[]
+        ///         {
+        ///             "policy-iejtp4ue",
+        ///         },
+        ///         PolicyName = "terraform_test",
+        ///         ProjectIds = new[]
+        ///         {
+        ///             0,
+        ///         },
+        ///         StartTime = 1696608000,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAlarmHistoryResult> Invoke(GetAlarmHistoryInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAlarmHistoryResult>("tencentcloud:Monitor/getAlarmHistory:getAlarmHistory", args ?? new GetAlarmHistoryInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAlarmHistoryResult>("tencentcloud:Monitor/getAlarmHistory:getAlarmHistory", args ?? new GetAlarmHistoryInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAlarmHistoryArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmHistoryArgs : global::Pulumi.InvokeArgs
     {
         [Input("alarmLevels")]
         private List<string>? _alarmLevels;
@@ -295,9 +289,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmHistoryArgs()
         {
         }
+        public static new GetAlarmHistoryArgs Empty => new GetAlarmHistoryArgs();
     }
 
-    public sealed class GetAlarmHistoryInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmHistoryInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("alarmLevels")]
         private InputList<string>? _alarmLevels;
@@ -470,6 +465,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmHistoryInvokeArgs()
         {
         }
+        public static new GetAlarmHistoryInvokeArgs Empty => new GetAlarmHistoryInvokeArgs();
     }
 
 

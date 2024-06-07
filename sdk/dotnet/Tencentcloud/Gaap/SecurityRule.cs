@@ -15,48 +15,51 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new()
     ///     {
-    ///         var fooProxy = new Tencentcloud.Gaap.Proxy("fooProxy", new Tencentcloud.Gaap.ProxyArgs
-    ///         {
-    ///             Bandwidth = 10,
-    ///             Concurrent = 2,
-    ///             AccessRegion = "SouthChina",
-    ///             RealserverRegion = "NorthChina",
-    ///         });
-    ///         var fooSecurityPolicy = new Tencentcloud.Gaap.SecurityPolicy("fooSecurityPolicy", new Tencentcloud.Gaap.SecurityPolicyArgs
-    ///         {
-    ///             ProxyId = fooProxy.Id,
-    ///             Action = "ACCEPT",
-    ///         });
-    ///         var fooSecurityRule = new Tencentcloud.Gaap.SecurityRule("fooSecurityRule", new Tencentcloud.Gaap.SecurityRuleArgs
-    ///         {
-    ///             PolicyId = fooSecurityPolicy.Id,
-    ///             CidrIp = "1.1.1.1",
-    ///             Action = "ACCEPT",
-    ///             Protocol = "TCP",
-    ///         });
-    ///     }
+    ///         Bandwidth = 10,
+    ///         Concurrent = 2,
+    ///         AccessRegion = "SouthChina",
+    ///         RealserverRegion = "NorthChina",
+    ///     });
     /// 
-    /// }
+    ///     var fooSecurityPolicy = new Tencentcloud.Gaap.SecurityPolicy("fooSecurityPolicy", new()
+    ///     {
+    ///         ProxyId = fooProxy.Id,
+    ///         Action = "ACCEPT",
+    ///     });
+    /// 
+    ///     var fooSecurityRule = new Tencentcloud.Gaap.SecurityRule("fooSecurityRule", new()
+    ///     {
+    ///         PolicyId = fooSecurityPolicy.Id,
+    ///         CidrIp = "1.1.1.1",
+    ///         Action = "ACCEPT",
+    ///         Protocol = "TCP",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// GAAP security rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Gaap/securityRule:SecurityRule tencentcloud_gaap_security_rule.foo sr-xxxxxxxx
+    /// $ pulumi import tencentcloud:Gaap/securityRule:SecurityRule tencentcloud_gaap_security_rule.foo sr-xxxxxxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Gaap/securityRule:SecurityRule")]
-    public partial class SecurityRule : Pulumi.CustomResource
+    public partial class SecurityRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Policy of the rule. Valid value: `ACCEPT` and `DROP`.
@@ -139,7 +142,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         }
     }
 
-    public sealed class SecurityRuleArgs : Pulumi.ResourceArgs
+    public sealed class SecurityRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Policy of the rule. Valid value: `ACCEPT` and `DROP`.
@@ -180,9 +183,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public SecurityRuleArgs()
         {
         }
+        public static new SecurityRuleArgs Empty => new SecurityRuleArgs();
     }
 
-    public sealed class SecurityRuleState : Pulumi.ResourceArgs
+    public sealed class SecurityRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Policy of the rule. Valid value: `ACCEPT` and `DROP`.
@@ -223,5 +227,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public SecurityRuleState()
         {
         }
+        public static new SecurityRuleState Empty => new SecurityRuleState();
     }
 }

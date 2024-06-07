@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ProcessLiveStreamOperationTaskNotifyConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class ProcessLiveStreamOperationTaskNotifyConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CMQ model. There are two types: `Queue` and `Topic`. Currently, only `Queue` is supported.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ProcessLiveStreamOperationTaskNotifyConfigGetArgs()
         {
         }
+        public static new ProcessLiveStreamOperationTaskNotifyConfigGetArgs Empty => new ProcessLiveStreamOperationTaskNotifyConfigGetArgs();
     }
 }

@@ -15,41 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var myEmr = Tencentcloud.Emr.GetInstance.Invoke(new()
     ///     {
-    ///         var myEmr = Output.Create(Tencentcloud.Emr.GetInstance.InvokeAsync(new Tencentcloud.Emr.GetInstanceArgs
-    ///         {
-    ///             DisplayStrategy = "clusterList",
-    ///         }));
-    ///         var userManager = new Tencentcloud.Emr.UserManager("userManager", new Tencentcloud.Emr.UserManagerArgs
-    ///         {
-    ///             InstanceId = myEmr.Apply(myEmr =&gt; myEmr.Clusters?[0]?.ClusterId),
-    ///             UserName = "tf-test",
-    ///             UserGroup = "group1",
-    ///             Password = "tf@123456",
-    ///         });
-    ///     }
+    ///         DisplayStrategy = "clusterList",
+    ///     });
     /// 
-    /// }
+    ///     var userManager = new Tencentcloud.Emr.UserManager("userManager", new()
+    ///     {
+    ///         InstanceId = myEmr.Apply(getInstanceResult =&gt; getInstanceResult.Clusters[0]?.ClusterId),
+    ///         UserName = "tf-test",
+    ///         UserGroup = "group1",
+    ///         Password = "tf@123456",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// emr user_manager can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Emr/userManager:UserManager user_manager instanceId#userName
+    /// $ pulumi import tencentcloud:Emr/userManager:UserManager user_manager instanceId#userName
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Emr/userManager:UserManager")]
-    public partial class UserManager : Pulumi.CustomResource
+    public partial class UserManager : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create time.
@@ -144,7 +146,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         }
     }
 
-    public sealed class UserManagerArgs : Pulumi.ResourceArgs
+    public sealed class UserManagerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster string ID.
@@ -173,9 +175,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public UserManagerArgs()
         {
         }
+        public static new UserManagerArgs Empty => new UserManagerArgs();
     }
 
-    public sealed class UserManagerState : Pulumi.ResourceArgs
+    public sealed class UserManagerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create time.
@@ -228,5 +231,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         public UserManagerState()
         {
         }
+        public static new UserManagerState Empty => new UserManagerState();
     }
 }

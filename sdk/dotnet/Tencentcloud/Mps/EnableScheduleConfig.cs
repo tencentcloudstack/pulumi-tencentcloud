@@ -14,249 +14,256 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// Provides a resource to create a mps enable_schedule_config
     /// 
     /// ## Example Usage
+    /// 
     /// ### Enable the mps schedule
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var @object = Tencentcloud.Cos.GetBucketObject.Invoke(new()
     ///     {
-    ///         var @object = Output.Create(Tencentcloud.Cos.GetBucketObject.InvokeAsync(new Tencentcloud.Cos.GetBucketObjectArgs
-    ///         {
-    ///             Bucket = $"keep-bucket-{local.App_id}",
-    ///             Key = "/mps-test/test.mov",
-    ///         }));
-    ///         var output = new Tencentcloud.Cos.Bucket("output", new Tencentcloud.Cos.BucketArgs
-    ///         {
-    ///             Bucket = $"tf-bucket-mps-schedule-config-output1-{local.App_id}",
-    ///             ForceClean = true,
-    ///             Acl = "public-read",
-    ///         });
-    ///         var example = new Tencentcloud.Mps.Schedule("example", new Tencentcloud.Mps.ScheduleArgs
-    ///         {
-    ///             ScheduleName = "tf_test_mps_schedule_config",
-    ///             Trigger = new Tencentcloud.Mps.Inputs.ScheduleTriggerArgs
-    ///             {
-    ///                 Type = "CosFileUpload",
-    ///                 CosFileUploadTrigger = new Tencentcloud.Mps.Inputs.ScheduleTriggerCosFileUploadTriggerArgs
-    ///                 {
-    ///                     Bucket = @object.Apply(@object =&gt; @object.Bucket),
-    ///                     Region = "%s",
-    ///                     Dir = "/upload/",
-    ///                     Formats = 
-    ///                     {
-    ///                         "flv",
-    ///                         "mov",
-    ///                     },
-    ///                 },
-    ///             },
-    ///             Activities = 
-    ///             {
-    ///                 new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
-    ///                 {
-    ///                     ActivityType = "input",
-    ///                     ReardriveIndices = 
-    ///                     {
-    ///                         1,
-    ///                         2,
-    ///                     },
-    ///                 },
-    ///                 new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
-    ///                 {
-    ///                     ActivityType = "action-trans",
-    ///                     ReardriveIndices = 
-    ///                     {
-    ///                         3,
-    ///                     },
-    ///                     ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
-    ///                     {
-    ///                         TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
-    ///                         {
-    ///                             Definition = 10,
-    ///                         },
-    ///                     },
-    ///                 },
-    ///                 new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
-    ///                 {
-    ///                     ActivityType = "action-trans",
-    ///                     ReardriveIndices = 
-    ///                     {
-    ///                         6,
-    ///                         7,
-    ///                     },
-    ///                     ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
-    ///                     {
-    ///                         TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
-    ///                         {
-    ///                             Definition = 10,
-    ///                         },
-    ///                     },
-    ///                 },
-    ///                 new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
-    ///                 {
-    ///                     ActivityType = "action-trans",
-    ///                     ReardriveIndices = 
-    ///                     {
-    ///                         4,
-    ///                         5,
-    ///                     },
-    ///                     ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
-    ///                     {
-    ///                         TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
-    ///                         {
-    ///                             Definition = 10,
-    ///                         },
-    ///                     },
-    ///                 },
-    ///                 new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
-    ///                 {
-    ///                     ActivityType = "action-trans",
-    ///                     ReardriveIndices = 
-    ///                     {
-    ///                         10,
-    ///                     },
-    ///                     ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
-    ///                     {
-    ///                         TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
-    ///                         {
-    ///                             Definition = 10,
-    ///                         },
-    ///                     },
-    ///                 },
-    ///                 new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
-    ///                 {
-    ///                     ActivityType = "action-trans",
-    ///                     ReardriveIndices = 
-    ///                     {
-    ///                         10,
-    ///                     },
-    ///                     ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
-    ///                     {
-    ///                         TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
-    ///                         {
-    ///                             Definition = 10,
-    ///                         },
-    ///                     },
-    ///                 },
-    ///                 new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
-    ///                 {
-    ///                     ActivityType = "action-trans",
-    ///                     ReardriveIndices = 
-    ///                     {
-    ///                         10,
-    ///                     },
-    ///                     ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
-    ///                     {
-    ///                         TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
-    ///                         {
-    ///                             Definition = 10,
-    ///                         },
-    ///                     },
-    ///                 },
-    ///                 new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
-    ///                 {
-    ///                     ActivityType = "action-trans",
-    ///                     ReardriveIndices = 
-    ///                     {
-    ///                         8,
-    ///                     },
-    ///                     ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
-    ///                     {
-    ///                         TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
-    ///                         {
-    ///                             Definition = 10,
-    ///                         },
-    ///                     },
-    ///                 },
-    ///                 new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
-    ///                 {
-    ///                     ActivityType = "action-trans",
-    ///                     ReardriveIndices = 
-    ///                     {
-    ///                         9,
-    ///                     },
-    ///                     ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
-    ///                     {
-    ///                         TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
-    ///                         {
-    ///                             Definition = 10,
-    ///                         },
-    ///                     },
-    ///                 },
-    ///                 new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
-    ///                 {
-    ///                     ActivityType = "action-trans",
-    ///                     ReardriveIndices = 
-    ///                     {
-    ///                         10,
-    ///                     },
-    ///                     ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
-    ///                     {
-    ///                         TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
-    ///                         {
-    ///                             Definition = 10,
-    ///                         },
-    ///                     },
-    ///                 },
-    ///                 new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
-    ///                 {
-    ///                     ActivityType = "output",
-    ///                 },
-    ///             },
-    ///             OutputStorage = new Tencentcloud.Mps.Inputs.ScheduleOutputStorageArgs
-    ///             {
-    ///                 Type = "COS",
-    ///                 CosOutputStorage = new Tencentcloud.Mps.Inputs.ScheduleOutputStorageCosOutputStorageArgs
-    ///                 {
-    ///                     Bucket = output.CosBucket,
-    ///                     Region = "%s",
-    ///                 },
-    ///             },
-    ///             OutputDir = "output/",
-    ///         });
-    ///         var config = new Tencentcloud.Mps.EnableScheduleConfig("config", new Tencentcloud.Mps.EnableScheduleConfigArgs
-    ///         {
-    ///             ScheduleId = example.Id,
-    ///             Enabled = true,
-    ///         });
-    ///     }
+    ///         Bucket = $"keep-bucket-{local.App_id}",
+    ///         Key = "/mps-test/test.mov",
+    ///     });
     /// 
-    /// }
+    ///     var output = new Tencentcloud.Cos.Bucket("output", new()
+    ///     {
+    ///         CosBucket = $"tf-bucket-mps-schedule-config-output1-{local.App_id}",
+    ///         ForceClean = true,
+    ///         Acl = "public-read",
+    ///     });
+    /// 
+    ///     var example = new Tencentcloud.Mps.Schedule("example", new()
+    ///     {
+    ///         ScheduleName = "tf_test_mps_schedule_config",
+    ///         Trigger = new Tencentcloud.Mps.Inputs.ScheduleTriggerArgs
+    ///         {
+    ///             Type = "CosFileUpload",
+    ///             CosFileUploadTrigger = new Tencentcloud.Mps.Inputs.ScheduleTriggerCosFileUploadTriggerArgs
+    ///             {
+    ///                 Bucket = @object.Apply(@object =&gt; @object.Apply(getBucketObjectResult =&gt; getBucketObjectResult.Bucket)),
+    ///                 Region = "%s",
+    ///                 Dir = "/upload/",
+    ///                 Formats = new[]
+    ///                 {
+    ///                     "flv",
+    ///                     "mov",
+    ///                 },
+    ///             },
+    ///         },
+    ///         Activities = new[]
+    ///         {
+    ///             new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
+    ///             {
+    ///                 ActivityType = "input",
+    ///                 ReardriveIndices = new[]
+    ///                 {
+    ///                     1,
+    ///                     2,
+    ///                 },
+    ///             },
+    ///             new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
+    ///             {
+    ///                 ActivityType = "action-trans",
+    ///                 ReardriveIndices = new[]
+    ///                 {
+    ///                     3,
+    ///                 },
+    ///                 ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
+    ///                 {
+    ///                     TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
+    ///                     {
+    ///                         Definition = 10,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
+    ///             {
+    ///                 ActivityType = "action-trans",
+    ///                 ReardriveIndices = new[]
+    ///                 {
+    ///                     6,
+    ///                     7,
+    ///                 },
+    ///                 ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
+    ///                 {
+    ///                     TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
+    ///                     {
+    ///                         Definition = 10,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
+    ///             {
+    ///                 ActivityType = "action-trans",
+    ///                 ReardriveIndices = new[]
+    ///                 {
+    ///                     4,
+    ///                     5,
+    ///                 },
+    ///                 ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
+    ///                 {
+    ///                     TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
+    ///                     {
+    ///                         Definition = 10,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
+    ///             {
+    ///                 ActivityType = "action-trans",
+    ///                 ReardriveIndices = new[]
+    ///                 {
+    ///                     10,
+    ///                 },
+    ///                 ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
+    ///                 {
+    ///                     TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
+    ///                     {
+    ///                         Definition = 10,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
+    ///             {
+    ///                 ActivityType = "action-trans",
+    ///                 ReardriveIndices = new[]
+    ///                 {
+    ///                     10,
+    ///                 },
+    ///                 ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
+    ///                 {
+    ///                     TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
+    ///                     {
+    ///                         Definition = 10,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
+    ///             {
+    ///                 ActivityType = "action-trans",
+    ///                 ReardriveIndices = new[]
+    ///                 {
+    ///                     10,
+    ///                 },
+    ///                 ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
+    ///                 {
+    ///                     TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
+    ///                     {
+    ///                         Definition = 10,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
+    ///             {
+    ///                 ActivityType = "action-trans",
+    ///                 ReardriveIndices = new[]
+    ///                 {
+    ///                     8,
+    ///                 },
+    ///                 ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
+    ///                 {
+    ///                     TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
+    ///                     {
+    ///                         Definition = 10,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
+    ///             {
+    ///                 ActivityType = "action-trans",
+    ///                 ReardriveIndices = new[]
+    ///                 {
+    ///                     9,
+    ///                 },
+    ///                 ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
+    ///                 {
+    ///                     TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
+    ///                     {
+    ///                         Definition = 10,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
+    ///             {
+    ///                 ActivityType = "action-trans",
+    ///                 ReardriveIndices = new[]
+    ///                 {
+    ///                     10,
+    ///                 },
+    ///                 ActivityPara = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaArgs
+    ///                 {
+    ///                     TranscodeTask = new Tencentcloud.Mps.Inputs.ScheduleActivityActivityParaTranscodeTaskArgs
+    ///                     {
+    ///                         Definition = 10,
+    ///                     },
+    ///                 },
+    ///             },
+    ///             new Tencentcloud.Mps.Inputs.ScheduleActivityArgs
+    ///             {
+    ///                 ActivityType = "output",
+    ///             },
+    ///         },
+    ///         OutputStorage = new Tencentcloud.Mps.Inputs.ScheduleOutputStorageArgs
+    ///         {
+    ///             Type = "COS",
+    ///             CosOutputStorage = new Tencentcloud.Mps.Inputs.ScheduleOutputStorageCosOutputStorageArgs
+    ///             {
+    ///                 Bucket = output.CosBucket,
+    ///                 Region = "%s",
+    ///             },
+    ///         },
+    ///         OutputDir = "output/",
+    ///     });
+    /// 
+    ///     var config = new Tencentcloud.Mps.EnableScheduleConfig("config", new()
+    ///     {
+    ///         ScheduleId = example.Id,
+    ///         Enabled = true,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Disable the mps schedule
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Tencentcloud.Mps.EnableScheduleConfig("config", new()
     ///     {
-    ///         var config = new Tencentcloud.Mps.EnableScheduleConfig("config", new Tencentcloud.Mps.EnableScheduleConfigArgs
-    ///         {
-    ///             ScheduleId = tencentcloud_mps_schedule.Example.Id,
-    ///             Enabled = false,
-    ///         });
-    ///     }
+    ///         ScheduleId = tencentcloud_mps_schedule.Example.Id,
+    ///         Enabled = false,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mps enable_schedule_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/enableScheduleConfig:EnableScheduleConfig enable_schedule_config enable_schedule_config_id
+    /// $ pulumi import tencentcloud:Mps/enableScheduleConfig:EnableScheduleConfig enable_schedule_config enable_schedule_config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/enableScheduleConfig:EnableScheduleConfig")]
-    public partial class EnableScheduleConfig : Pulumi.CustomResource
+    public partial class EnableScheduleConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// true: enable; false: disable.
@@ -315,7 +322,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class EnableScheduleConfigArgs : Pulumi.ResourceArgs
+    public sealed class EnableScheduleConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// true: enable; false: disable.
@@ -332,9 +339,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public EnableScheduleConfigArgs()
         {
         }
+        public static new EnableScheduleConfigArgs Empty => new EnableScheduleConfigArgs();
     }
 
-    public sealed class EnableScheduleConfigState : Pulumi.ResourceArgs
+    public sealed class EnableScheduleConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// true: enable; false: disable.
@@ -351,5 +359,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public EnableScheduleConfigState()
         {
         }
+        public static new EnableScheduleConfigState Empty => new EnableScheduleConfigState();
     }
 }

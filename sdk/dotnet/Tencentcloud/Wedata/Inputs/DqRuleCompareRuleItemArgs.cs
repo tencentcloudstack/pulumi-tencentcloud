@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
 {
 
-    public sealed class DqRuleCompareRuleItemArgs : Pulumi.ResourceArgs
+    public sealed class DqRuleCompareRuleItemArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Comparison type 1. Fixed value 2. Fluctuating value 3. Comparison of value range 4. Enumeration range comparison 5. Do not compareNote: This field may return null, indicating that a valid value cannot be obtained.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         public DqRuleCompareRuleItemArgs()
         {
         }
+        public static new DqRuleCompareRuleItemArgs Empty => new DqRuleCompareRuleItemArgs();
     }
 }

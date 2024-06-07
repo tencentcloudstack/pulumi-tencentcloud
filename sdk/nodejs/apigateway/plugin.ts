@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.apigateway.Plugin("example", {
  *     pluginName: "tf-example",
@@ -23,13 +24,14 @@ import * as utilities from "../utilities";
  *     description: "desc.",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * apiGateway plugin can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:ApiGateway/plugin:Plugin plugin plugin_id
+ * $ pulumi import tencentcloud:ApiGateway/plugin:Plugin plugin plugin_id
  * ```
  */
 export class Plugin extends pulumi.CustomResource {

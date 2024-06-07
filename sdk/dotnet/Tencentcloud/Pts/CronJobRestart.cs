@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var cronJobRestart = new Tencentcloud.Pts.CronJobRestart("cronJobRestart", new()
     ///     {
-    ///         var cronJobRestart = new Tencentcloud.Pts.CronJobRestart("cronJobRestart", new Tencentcloud.Pts.CronJobRestartArgs
-    ///         {
-    ///             CronJobId = "job-dtm93vx0",
-    ///             ProjectId = "project-abc",
-    ///         });
-    ///     }
+    ///         CronJobId = "job-dtm93vx0",
+    ///         ProjectId = "project-abc",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Pts/cronJobRestart:CronJobRestart")]
-    public partial class CronJobRestart : Pulumi.CustomResource
+    public partial class CronJobRestart : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cron job ID.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         }
     }
 
-    public sealed class CronJobRestartArgs : Pulumi.ResourceArgs
+    public sealed class CronJobRestartArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cron job ID.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public CronJobRestartArgs()
         {
         }
+        public static new CronJobRestartArgs Empty => new CronJobRestartArgs();
     }
 
-    public sealed class CronJobRestartState : Pulumi.ResourceArgs
+    public sealed class CronJobRestartState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cron job ID.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
         public CronJobRestartState()
         {
         }
+        public static new CronJobRestartState Empty => new CronJobRestartState();
     }
 }

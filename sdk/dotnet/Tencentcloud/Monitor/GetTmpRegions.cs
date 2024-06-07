@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query detailed information of monitor tmp_regions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var tmpRegions = Tencentcloud.Monitor.GetTmpRegions.Invoke(new()
         ///     {
-        ///         var tmpRegions = Output.Create(Tencentcloud.Monitor.GetTmpRegions.InvokeAsync(new Tencentcloud.Monitor.GetTmpRegionsArgs
-        ///         {
-        ///             PayMode = 1,
-        ///         }));
-        ///     }
+        ///         PayMode = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTmpRegionsResult> InvokeAsync(GetTmpRegionsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTmpRegionsResult>("tencentcloud:Monitor/getTmpRegions:getTmpRegions", args ?? new GetTmpRegionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTmpRegionsResult>("tencentcloud:Monitor/getTmpRegions:getTmpRegions", args ?? new GetTmpRegionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of monitor tmp_regions
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var tmpRegions = Tencentcloud.Monitor.GetTmpRegions.Invoke(new()
         ///     {
-        ///         var tmpRegions = Output.Create(Tencentcloud.Monitor.GetTmpRegions.InvokeAsync(new Tencentcloud.Monitor.GetTmpRegionsArgs
-        ///         {
-        ///             PayMode = 1,
-        ///         }));
-        ///     }
+        ///         PayMode = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTmpRegionsResult> Invoke(GetTmpRegionsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTmpRegionsResult>("tencentcloud:Monitor/getTmpRegions:getTmpRegions", args ?? new GetTmpRegionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTmpRegionsResult>("tencentcloud:Monitor/getTmpRegions:getTmpRegions", args ?? new GetTmpRegionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTmpRegionsArgs : Pulumi.InvokeArgs
+    public sealed class GetTmpRegionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Pay mode. `1`-Prepaid, `2`-Postpaid, `3`-All regions (default is all regions if not filled in).
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetTmpRegionsArgs()
         {
         }
+        public static new GetTmpRegionsArgs Empty => new GetTmpRegionsArgs();
     }
 
-    public sealed class GetTmpRegionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTmpRegionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Pay mode. `1`-Prepaid, `2`-Postpaid, `3`-All regions (default is all regions if not filled in).
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetTmpRegionsInvokeArgs()
         {
         }
+        public static new GetTmpRegionsInvokeArgs Empty => new GetTmpRegionsInvokeArgs();
     }
 
 

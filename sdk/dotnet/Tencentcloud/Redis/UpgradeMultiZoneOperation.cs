@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var upgradeMultiZoneOperation = new Tencentcloud.Redis.UpgradeMultiZoneOperation("upgradeMultiZoneOperation", new()
     ///     {
-    ///         var upgradeMultiZoneOperation = new Tencentcloud.Redis.UpgradeMultiZoneOperation("upgradeMultiZoneOperation", new Tencentcloud.Redis.UpgradeMultiZoneOperationArgs
-    ///         {
-    ///             InstanceId = "crs-c1nl9rpv",
-    ///             UpgradeProxyAndRedisServer = true,
-    ///         });
-    ///     }
+    ///         InstanceId = "crs-c1nl9rpv",
+    ///         UpgradeProxyAndRedisServer = true,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/upgradeMultiZoneOperation:UpgradeMultiZoneOperation")]
-    public partial class UpgradeMultiZoneOperation : Pulumi.CustomResource
+    public partial class UpgradeMultiZoneOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The ID of instance.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class UpgradeMultiZoneOperationArgs : Pulumi.ResourceArgs
+    public sealed class UpgradeMultiZoneOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public UpgradeMultiZoneOperationArgs()
         {
         }
+        public static new UpgradeMultiZoneOperationArgs Empty => new UpgradeMultiZoneOperationArgs();
     }
 
-    public sealed class UpgradeMultiZoneOperationState : Pulumi.ResourceArgs
+    public sealed class UpgradeMultiZoneOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public UpgradeMultiZoneOperationState()
         {
         }
+        public static new UpgradeMultiZoneOperationState Empty => new UpgradeMultiZoneOperationState();
     }
 }

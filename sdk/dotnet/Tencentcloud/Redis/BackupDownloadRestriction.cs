@@ -14,53 +14,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// Provides a resource to create a redis backup_download_restriction
     /// 
     /// ## Example Usage
+    /// 
     /// ### Modify the network information and address of the current region backup file download
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Redis.BackupDownloadRestriction("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Redis.BackupDownloadRestriction("foo", new Tencentcloud.Redis.BackupDownloadRestrictionArgs
+    ///         LimitType = "Customize",
+    ///         VpcComparisonSymbol = "In",
+    ///         IpComparisonSymbol = "In",
+    ///         LimitVpcs = new[]
     ///         {
-    ///             LimitType = "Customize",
-    ///             VpcComparisonSymbol = "In",
-    ///             IpComparisonSymbol = "In",
-    ///             LimitVpcs = 
+    ///             new Tencentcloud.Redis.Inputs.BackupDownloadRestrictionLimitVpcArgs
     ///             {
-    ///                 new Tencentcloud.Redis.Inputs.BackupDownloadRestrictionLimitVpcArgs
+    ///                 Region = "ap-guangzhou",
+    ///                 VpcLists = new[]
     ///                 {
-    ///                     Region = "ap-guangzhou",
-    ///                     VpcLists = 
-    ///                     {
-    ///                         @var.Vpc_id,
-    ///                     },
+    ///                     @var.Vpc_id,
     ///                 },
     ///             },
-    ///             LimitIps = 
-    ///             {
-    ///                 "10.1.1.12",
-    ///                 "10.1.1.13",
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         LimitIps = new[]
+    ///         {
+    ///             "10.1.1.12",
+    ///             "10.1.1.13",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// redis backup_download_restriction can be imported using the region, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction foo ap-guangzhou
+    /// $ pulumi import tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction foo ap-guangzhou
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction")]
-    public partial class BackupDownloadRestriction : Pulumi.CustomResource
+    public partial class BackupDownloadRestriction : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Identifies whether the customized LimitIP address can download the backup file.- In: Custom IP addresses are available for download.- NotIn: Custom IPs are not available for download.
@@ -137,7 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class BackupDownloadRestrictionArgs : Pulumi.ResourceArgs
+    public sealed class BackupDownloadRestrictionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Identifies whether the customized LimitIP address can download the backup file.- In: Custom IP addresses are available for download.- NotIn: Custom IPs are not available for download.
@@ -184,9 +186,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public BackupDownloadRestrictionArgs()
         {
         }
+        public static new BackupDownloadRestrictionArgs Empty => new BackupDownloadRestrictionArgs();
     }
 
-    public sealed class BackupDownloadRestrictionState : Pulumi.ResourceArgs
+    public sealed class BackupDownloadRestrictionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Identifies whether the customized LimitIP address can download the backup file.- In: Custom IP addresses are available for download.- NotIn: Custom IPs are not available for download.
@@ -233,5 +236,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public BackupDownloadRestrictionState()
         {
         }
+        public static new BackupDownloadRestrictionState Empty => new BackupDownloadRestrictionState();
     }
 }

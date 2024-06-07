@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var grafanaSsoCamConfig = new Tencentcloud.Monitor.GrafanaSsoCamConfig("grafanaSsoCamConfig", new()
     ///     {
-    ///         var grafanaSsoCamConfig = new Tencentcloud.Monitor.GrafanaSsoCamConfig("grafanaSsoCamConfig", new Tencentcloud.Monitor.GrafanaSsoCamConfigArgs
-    ///         {
-    ///             EnableSsoCamCheck = false,
-    ///             InstanceId = "grafana-dp2hnnfa",
-    ///         });
-    ///     }
+    ///         EnableSsoCamCheck = false,
+    ///         InstanceId = "grafana-dp2hnnfa",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor grafana_sso_cam_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/grafanaSsoCamConfig:GrafanaSsoCamConfig grafana_sso_cam_config instance_id
+    /// $ pulumi import tencentcloud:Monitor/grafanaSsoCamConfig:GrafanaSsoCamConfig grafana_sso_cam_config instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/grafanaSsoCamConfig:GrafanaSsoCamConfig")]
-    public partial class GrafanaSsoCamConfig : Pulumi.CustomResource
+    public partial class GrafanaSsoCamConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Whether to enable the CAM authorization: `true` for enabling; `false` for disabling.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class GrafanaSsoCamConfigArgs : Pulumi.ResourceArgs
+    public sealed class GrafanaSsoCamConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable the CAM authorization: `true` for enabling; `false` for disabling.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaSsoCamConfigArgs()
         {
         }
+        public static new GrafanaSsoCamConfigArgs Empty => new GrafanaSsoCamConfigArgs();
     }
 
-    public sealed class GrafanaSsoCamConfigState : Pulumi.ResourceArgs
+    public sealed class GrafanaSsoCamConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable the CAM authorization: `true` for enabling; `false` for disabling.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaSsoCamConfigState()
         {
         }
+        public static new GrafanaSsoCamConfigState Empty => new GrafanaSsoCamConfigState();
     }
 }

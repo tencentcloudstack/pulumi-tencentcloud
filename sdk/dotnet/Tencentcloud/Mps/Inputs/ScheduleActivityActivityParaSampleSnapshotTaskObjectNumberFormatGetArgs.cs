@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleActivityActivityParaSampleSnapshotTaskObjectNumberFormatGetArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleActivityActivityParaSampleSnapshotTaskObjectNumberFormatGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Increment of the `{number}` variable. Default value: 1.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleActivityActivityParaSampleSnapshotTaskObjectNumberFormatGetArgs()
         {
         }
+        public static new ScheduleActivityActivityParaSampleSnapshotTaskObjectNumberFormatGetArgs Empty => new ScheduleActivityActivityParaSampleSnapshotTaskObjectNumberFormatGetArgs();
     }
 }

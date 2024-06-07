@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Oceanus.WorkSpace("example", {
+ * const example = new tencentcloud.oceanus.WorkSpace("example", {
  *     description: "example description.",
  *     workSpaceName: "tf_example",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * oceanus work_space can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Oceanus/workSpace:WorkSpace example space-0dan3yux#tf_example
+ * $ pulumi import tencentcloud:Oceanus/workSpace:WorkSpace example space-0dan3yux#tf_example
  * ```
  */
 export class WorkSpace extends pulumi.CustomResource {

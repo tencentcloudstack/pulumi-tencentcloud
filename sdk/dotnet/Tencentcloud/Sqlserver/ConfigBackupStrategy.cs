@@ -14,159 +14,170 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// Provides a resource to create a sqlserver config_backup_strategy
     /// 
     /// ## Example Usage
+    /// 
     /// ### Daily backup
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "sqlserver",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "desc.",
-    ///         });
-    ///         var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new Tencentcloud.Sqlserver.BasicInstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
-    ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             ProjectId = 0,
-    ///             Memory = 4,
-    ///             Storage = 100,
-    ///             Cpu = 2,
-    ///             MachineType = "CLOUD_PREMIUM",
-    ///             MaintenanceWeekSets = 
-    ///             {
-    ///                 1,
-    ///                 2,
-    ///                 3,
-    ///             },
-    ///             MaintenanceStartTime = "09:00",
-    ///             MaintenanceTimeSpan = 3,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 securityGroup.Id,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///         var exampleConfigBackupStrategy = new Tencentcloud.Sqlserver.ConfigBackupStrategy("exampleConfigBackupStrategy", new Tencentcloud.Sqlserver.ConfigBackupStrategyArgs
-    ///         {
-    ///             InstanceId = exampleBasicInstance.Id,
-    ///             BackupType = "daily",
-    ///             BackupTime = 0,
-    ///             BackupDay = 1,
-    ///             BackupModel = "master_no_pkg",
-    ///             BackupCycles = 
-    ///             {
-    ///                 1,
-    ///             },
-    ///             BackupSaveDays = 7,
-    ///             RegularBackupEnable = "disable",
-    ///             RegularBackupSaveDays = 90,
-    ///             RegularBackupStrategy = "months",
-    ///             RegularBackupCounts = 1,
-    ///         });
-    ///     }
+    ///         Product = "sqlserver",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[4]?.Name),
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    ///     {
+    ///         Description = "desc.",
+    ///     });
+    /// 
+    ///     var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[4]?.Name),
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         ProjectId = 0,
+    ///         Memory = 4,
+    ///         Storage = 100,
+    ///         Cpu = 2,
+    ///         MachineType = "CLOUD_PREMIUM",
+    ///         MaintenanceWeekSets = new[]
+    ///         {
+    ///             1,
+    ///             2,
+    ///             3,
+    ///         },
+    ///         MaintenanceStartTime = "09:00",
+    ///         MaintenanceTimeSpan = 3,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             securityGroup.Id,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleConfigBackupStrategy = new Tencentcloud.Sqlserver.ConfigBackupStrategy("exampleConfigBackupStrategy", new()
+    ///     {
+    ///         InstanceId = exampleBasicInstance.Id,
+    ///         BackupType = "daily",
+    ///         BackupTime = 0,
+    ///         BackupDay = 1,
+    ///         BackupModel = "master_no_pkg",
+    ///         BackupCycles = new[]
+    ///         {
+    ///             1,
+    ///         },
+    ///         BackupSaveDays = 7,
+    ///         RegularBackupEnable = "disable",
+    ///         RegularBackupSaveDays = 90,
+    ///         RegularBackupStrategy = "months",
+    ///         RegularBackupCounts = 1,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Weekly backup
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Sqlserver.ConfigBackupStrategy("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Sqlserver.ConfigBackupStrategy("example", new Tencentcloud.Sqlserver.ConfigBackupStrategyArgs
+    ///         InstanceId = tencentcloud_sqlserver_basic_instance.Example.Id,
+    ///         BackupType = "weekly",
+    ///         BackupTime = 0,
+    ///         BackupModel = "master_no_pkg",
+    ///         BackupCycles = new[]
     ///         {
-    ///             InstanceId = tencentcloud_sqlserver_basic_instance.Example.Id,
-    ///             BackupType = "weekly",
-    ///             BackupTime = 0,
-    ///             BackupModel = "master_no_pkg",
-    ///             BackupCycles = 
-    ///             {
-    ///                 1,
-    ///                 3,
-    ///                 5,
-    ///             },
-    ///             BackupSaveDays = 7,
-    ///             RegularBackupEnable = "disable",
-    ///             RegularBackupSaveDays = 90,
-    ///             RegularBackupStrategy = "months",
-    ///             RegularBackupCounts = 1,
-    ///         });
-    ///     }
+    ///             1,
+    ///             3,
+    ///             5,
+    ///         },
+    ///         BackupSaveDays = 7,
+    ///         RegularBackupEnable = "disable",
+    ///         RegularBackupSaveDays = 90,
+    ///         RegularBackupStrategy = "months",
+    ///         RegularBackupCounts = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Regular backup
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Sqlserver.ConfigBackupStrategy("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Sqlserver.ConfigBackupStrategy("example", new Tencentcloud.Sqlserver.ConfigBackupStrategyArgs
+    ///         InstanceId = tencentcloud_sqlserver_basic_instance.Example.Id,
+    ///         BackupTime = 0,
+    ///         BackupModel = "master_no_pkg",
+    ///         BackupCycles = new[]
     ///         {
-    ///             InstanceId = tencentcloud_sqlserver_basic_instance.Example.Id,
-    ///             BackupTime = 0,
-    ///             BackupModel = "master_no_pkg",
-    ///             BackupCycles = 
-    ///             {
-    ///                 1,
-    ///                 3,
-    ///             },
-    ///             BackupSaveDays = 7,
-    ///             RegularBackupEnable = "enable",
-    ///             RegularBackupSaveDays = 120,
-    ///             RegularBackupStrategy = "months",
-    ///             RegularBackupCounts = 1,
-    ///             RegularBackupStartTime = "%s",
-    ///         });
-    ///     }
+    ///             1,
+    ///             3,
+    ///         },
+    ///         BackupSaveDays = 7,
+    ///         RegularBackupEnable = "enable",
+    ///         RegularBackupSaveDays = 120,
+    ///         RegularBackupStrategy = "months",
+    ///         RegularBackupCounts = 1,
+    ///         RegularBackupStartTime = "%s",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// sqlserver config_backup_strategy can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/configBackupStrategy:ConfigBackupStrategy example mssql-si2823jyl
+    /// $ pulumi import tencentcloud:Sqlserver/configBackupStrategy:ConfigBackupStrategy example mssql-si2823jyl
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/configBackupStrategy:ConfigBackupStrategy")]
-    public partial class ConfigBackupStrategy : Pulumi.CustomResource
+    public partial class ConfigBackupStrategy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The days of the week on which backup will be performed when `BackupType` is weekly. If data backup retention period is less than 7 days, the values will be 1-7, indicating that backup will be performed everyday by default; if data backup retention period is greater than or equal to 7 days, the values will be at least any two days, indicating that backup will be performed at least twice in a week by default.
@@ -285,7 +296,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         }
     }
 
-    public sealed class ConfigBackupStrategyArgs : Pulumi.ResourceArgs
+    public sealed class ConfigBackupStrategyArgs : global::Pulumi.ResourceArgs
     {
         [Input("backupCycles")]
         private InputList<int>? _backupCycles;
@@ -368,9 +379,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public ConfigBackupStrategyArgs()
         {
         }
+        public static new ConfigBackupStrategyArgs Empty => new ConfigBackupStrategyArgs();
     }
 
-    public sealed class ConfigBackupStrategyState : Pulumi.ResourceArgs
+    public sealed class ConfigBackupStrategyState : global::Pulumi.ResourceArgs
     {
         [Input("backupCycles")]
         private InputList<int>? _backupCycles;
@@ -453,5 +465,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public ConfigBackupStrategyState()
         {
         }
+        public static new ConfigBackupStrategyState Empty => new ConfigBackupStrategyState();
     }
 }

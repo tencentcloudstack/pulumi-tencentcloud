@@ -11,16 +11,23 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class ImportImageTagSpecificationTagGetArgs : Pulumi.ResourceArgs
+    public sealed class ImportImageTagSpecificationTagGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Tag key.
+        /// </summary>
         [Input("key", required: true)]
         public Input<string> Key { get; set; } = null!;
 
+        /// <summary>
+        /// Tag value.
+        /// </summary>
         [Input("value", required: true)]
         public Input<string> Value { get; set; } = null!;
 
         public ImportImageTagSpecificationTagGetArgs()
         {
         }
+        public static new ImportImageTagSpecificationTagGetArgs Empty => new ImportImageTagSpecificationTagGetArgs();
     }
 }

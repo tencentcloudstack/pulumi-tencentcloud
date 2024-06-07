@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// <summary>
         /// Use this data source to query detailed information of mongodb instance_current_op
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceCurrentOp = Tencentcloud.Mongodb.GetInstanceCurrentOp.Invoke(new()
         ///     {
-        ///         var instanceCurrentOp = Output.Create(Tencentcloud.Mongodb.GetInstanceCurrentOp.InvokeAsync(new Tencentcloud.Mongodb.GetInstanceCurrentOpArgs
-        ///         {
-        ///             InstanceId = "cmgo-b43i3wkj",
-        ///             Op = "command",
-        ///             OrderByType = "desc",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cmgo-b43i3wkj",
+        ///         Op = "command",
+        ///         OrderByType = "desc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceCurrentOpResult> InvokeAsync(GetInstanceCurrentOpArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceCurrentOpResult>("tencentcloud:Mongodb/getInstanceCurrentOp:getInstanceCurrentOp", args ?? new GetInstanceCurrentOpArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceCurrentOpResult>("tencentcloud:Mongodb/getInstanceCurrentOp:getInstanceCurrentOp", args ?? new GetInstanceCurrentOpArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mongodb instance_current_op
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instanceCurrentOp = Tencentcloud.Mongodb.GetInstanceCurrentOp.Invoke(new()
         ///     {
-        ///         var instanceCurrentOp = Output.Create(Tencentcloud.Mongodb.GetInstanceCurrentOp.InvokeAsync(new Tencentcloud.Mongodb.GetInstanceCurrentOpArgs
-        ///         {
-        ///             InstanceId = "cmgo-b43i3wkj",
-        ///             Op = "command",
-        ///             OrderByType = "desc",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cmgo-b43i3wkj",
+        ///         Op = "command",
+        ///         OrderByType = "desc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceCurrentOpResult> Invoke(GetInstanceCurrentOpInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceCurrentOpResult>("tencentcloud:Mongodb/getInstanceCurrentOp:getInstanceCurrentOp", args ?? new GetInstanceCurrentOpInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceCurrentOpResult>("tencentcloud:Mongodb/getInstanceCurrentOp:getInstanceCurrentOp", args ?? new GetInstanceCurrentOpInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceCurrentOpArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceCurrentOpArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
@@ -135,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public GetInstanceCurrentOpArgs()
         {
         }
+        public static new GetInstanceCurrentOpArgs Empty => new GetInstanceCurrentOpArgs();
     }
 
-    public sealed class GetInstanceCurrentOpInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceCurrentOpInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
@@ -196,6 +191,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public GetInstanceCurrentOpInvokeArgs()
         {
         }
+        public static new GetInstanceCurrentOpInvokeArgs Empty => new GetInstanceCurrentOpInvokeArgs();
     }
 
 

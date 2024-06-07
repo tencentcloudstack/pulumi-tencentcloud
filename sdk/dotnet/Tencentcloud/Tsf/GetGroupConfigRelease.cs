@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf group_config_release
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groupConfigRelease = Tencentcloud.Tsf.GetGroupConfigRelease.Invoke(new()
         ///     {
-        ///         var groupConfigRelease = Output.Create(Tencentcloud.Tsf.GetGroupConfigRelease.InvokeAsync(new Tencentcloud.Tsf.GetGroupConfigReleaseArgs
-        ///         {
-        ///             GroupId = "group-yrjkln9v",
-        ///         }));
-        ///     }
+        ///         GroupId = "group-yrjkln9v",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGroupConfigReleaseResult> InvokeAsync(GetGroupConfigReleaseArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGroupConfigReleaseResult>("tencentcloud:Tsf/getGroupConfigRelease:getGroupConfigRelease", args ?? new GetGroupConfigReleaseArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupConfigReleaseResult>("tencentcloud:Tsf/getGroupConfigRelease:getGroupConfigRelease", args ?? new GetGroupConfigReleaseArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf group_config_release
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groupConfigRelease = Tencentcloud.Tsf.GetGroupConfigRelease.Invoke(new()
         ///     {
-        ///         var groupConfigRelease = Output.Create(Tencentcloud.Tsf.GetGroupConfigRelease.InvokeAsync(new Tencentcloud.Tsf.GetGroupConfigReleaseArgs
-        ///         {
-        ///             GroupId = "group-yrjkln9v",
-        ///         }));
-        ///     }
+        ///         GroupId = "group-yrjkln9v",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGroupConfigReleaseResult> Invoke(GetGroupConfigReleaseInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGroupConfigReleaseResult>("tencentcloud:Tsf/getGroupConfigRelease:getGroupConfigRelease", args ?? new GetGroupConfigReleaseInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGroupConfigReleaseResult>("tencentcloud:Tsf/getGroupConfigRelease:getGroupConfigRelease", args ?? new GetGroupConfigReleaseInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGroupConfigReleaseArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupConfigReleaseArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// groupId.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetGroupConfigReleaseArgs()
         {
         }
+        public static new GetGroupConfigReleaseArgs Empty => new GetGroupConfigReleaseArgs();
     }
 
-    public sealed class GetGroupConfigReleaseInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupConfigReleaseInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// groupId.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetGroupConfigReleaseInvokeArgs()
         {
         }
+        public static new GetGroupConfigReleaseInvokeArgs Empty => new GetGroupConfigReleaseInvokeArgs();
     }
 
 

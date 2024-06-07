@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
 {
 
-    public sealed class FunctionCfsConfigArgs : Pulumi.ResourceArgs
+    public sealed class FunctionCfsConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// File system instance ID.
@@ -19,6 +19,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         [Input("cfsId", required: true)]
         public Input<string> CfsId { get; set; } = null!;
 
+        /// <summary>
+        /// (Readonly) File system ip address.
+        /// </summary>
         [Input("ipAddress")]
         public Input<string>? IpAddress { get; set; }
 
@@ -34,9 +37,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         [Input("mountInsId", required: true)]
         public Input<string> MountInsId { get; set; } = null!;
 
+        /// <summary>
+        /// (Readonly) File system subnet ID.
+        /// </summary>
         [Input("mountSubnetId")]
         public Input<string>? MountSubnetId { get; set; }
 
+        /// <summary>
+        /// (Readonly) File system virtual private network ID.
+        /// </summary>
         [Input("mountVpcId")]
         public Input<string>? MountVpcId { get; set; }
 
@@ -61,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public FunctionCfsConfigArgs()
         {
         }
+        public static new FunctionCfsConfigArgs Empty => new FunctionCfsConfigArgs();
     }
 }

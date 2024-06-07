@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class UnitRuleUnitRuleItemListUnitRuleTagListArgs : Pulumi.ResourceArgs
+    public sealed class UnitRuleUnitRuleItemListUnitRuleTagListArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// rule ID.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public UnitRuleUnitRuleItemListUnitRuleTagListArgs()
         {
         }
+        public static new UnitRuleUnitRuleItemListUnitRuleTagListArgs Empty => new UnitRuleUnitRuleItemListUnitRuleTagListArgs();
     }
 }

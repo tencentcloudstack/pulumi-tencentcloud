@@ -15,42 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var orgMember = new Tencentcloud.Organization.OrgMember("orgMember", new()
     ///     {
-    ///         var orgMember = new Tencentcloud.Organization.OrgMember("orgMember", new Tencentcloud.Organization.OrgMemberArgs
+    ///         NodeId = 2003721,
+    ///         PermissionIds = new[]
     ///         {
-    ///             NodeId = 2003721,
-    ///             PermissionIds = 
-    ///             {
-    ///                 1,
-    ///                 2,
-    ///                 3,
-    ///                 4,
-    ///             },
-    ///             PolicyType = "Financial",
-    ///             Remark = "for terraform test",
-    ///         });
-    ///     }
+    ///             1,
+    ///             2,
+    ///             3,
+    ///             4,
+    ///         },
+    ///         PolicyType = "Financial",
+    ///         Remark = "for terraform test",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// organization org_member can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Organization/orgMember:OrgMember org_member orgMember_id
+    /// $ pulumi import tencentcloud:Organization/orgMember:OrgMember org_member orgMember_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Organization/orgMember:OrgMember")]
-    public partial class OrgMember : Pulumi.CustomResource
+    public partial class OrgMember : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Member creation time.
@@ -187,7 +188,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         }
     }
 
-    public sealed class OrgMemberArgs : Pulumi.ResourceArgs
+    public sealed class OrgMemberArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Member name.
@@ -240,9 +241,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public OrgMemberArgs()
         {
         }
+        public static new OrgMemberArgs Empty => new OrgMemberArgs();
     }
 
-    public sealed class OrgMemberState : Pulumi.ResourceArgs
+    public sealed class OrgMemberState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Member creation time.
@@ -349,5 +351,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public OrgMemberState()
         {
         }
+        public static new OrgMemberState Empty => new OrgMemberState();
     }
 }

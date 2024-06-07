@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const applicationFileConfig = new tencentcloud.Tsf.ApplicationFileConfig("application_file_config", {
+ * const applicationFileConfig = new tencentcloud.tsf.ApplicationFileConfig("applicationFileConfig", {
  *     applicationId: "application-a24x29xv",
  *     configFileCode: "UTF-8",
  *     configFileName: "application.yaml",
@@ -26,6 +27,7 @@ import * as utilities from "../utilities";
  *     encodeWithBase64: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ApplicationFileConfig extends pulumi.CustomResource {
     /**

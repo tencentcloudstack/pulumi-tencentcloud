@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var domain = new Tencentcloud.Css.Domain("domain", new()
     ///     {
-    ///         var domain = new Tencentcloud.Css.Domain("domain", new Tencentcloud.Css.DomainArgs
-    ///         {
-    ///             DomainName = "iac-tf.cloud",
-    ///             DomainType = 0,
-    ///             IsDelayLive = 0,
-    ///             IsMiniProgramLive = 0,
-    ///             PlayType = 1,
-    ///             VerifyOwnerType = "dbCheck",
-    ///         });
-    ///     }
+    ///         DomainName = "iac-tf.cloud",
+    ///         DomainType = 0,
+    ///         IsDelayLive = 0,
+    ///         IsMiniProgramLive = 0,
+    ///         PlayType = 1,
+    ///         VerifyOwnerType = "dbCheck",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css domain can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/domain:Domain domain domain_name
+    /// $ pulumi import tencentcloud:Css/domain:Domain domain domain_name
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/domain:Domain")]
-    public partial class Domain : Pulumi.CustomResource
+    public partial class Domain : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Domain Name.
@@ -135,7 +136,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class DomainArgs : Pulumi.ResourceArgs
+    public sealed class DomainArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain Name.
@@ -182,9 +183,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public DomainArgs()
         {
         }
+        public static new DomainArgs Empty => new DomainArgs();
     }
 
-    public sealed class DomainState : Pulumi.ResourceArgs
+    public sealed class DomainState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain Name.
@@ -231,5 +233,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public DomainState()
         {
         }
+        public static new DomainState Empty => new DomainState();
     }
 }

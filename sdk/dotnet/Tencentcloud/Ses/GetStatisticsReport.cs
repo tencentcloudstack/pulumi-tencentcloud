@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// <summary>
         /// Use this data source to query detailed information of ses statistics_report
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var statisticsReport = Tencentcloud.Ses.GetStatisticsReport.Invoke(new()
         ///     {
-        ///         var statisticsReport = Output.Create(Tencentcloud.Ses.GetStatisticsReport.InvokeAsync(new Tencentcloud.Ses.GetStatisticsReportArgs
-        ///         {
-        ///             Domain = "iac-tf.cloud",
-        ///             EndDate = "2023-09-05",
-        ///             ReceivingMailboxType = "gmail.com",
-        ///             StartDate = "2020-10-01",
-        ///         }));
-        ///     }
+        ///         Domain = "iac-tf.cloud",
+        ///         EndDate = "2023-09-05",
+        ///         ReceivingMailboxType = "gmail.com",
+        ///         StartDate = "2020-10-01",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetStatisticsReportResult> InvokeAsync(GetStatisticsReportArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetStatisticsReportResult>("tencentcloud:Ses/getStatisticsReport:getStatisticsReport", args ?? new GetStatisticsReportArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetStatisticsReportResult>("tencentcloud:Ses/getStatisticsReport:getStatisticsReport", args ?? new GetStatisticsReportArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ses statistics_report
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var statisticsReport = Tencentcloud.Ses.GetStatisticsReport.Invoke(new()
         ///     {
-        ///         var statisticsReport = Output.Create(Tencentcloud.Ses.GetStatisticsReport.InvokeAsync(new Tencentcloud.Ses.GetStatisticsReportArgs
-        ///         {
-        ///             Domain = "iac-tf.cloud",
-        ///             EndDate = "2023-09-05",
-        ///             ReceivingMailboxType = "gmail.com",
-        ///             StartDate = "2020-10-01",
-        ///         }));
-        ///     }
+        ///         Domain = "iac-tf.cloud",
+        ///         EndDate = "2023-09-05",
+        ///         ReceivingMailboxType = "gmail.com",
+        ///         StartDate = "2020-10-01",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetStatisticsReportResult> Invoke(GetStatisticsReportInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetStatisticsReportResult>("tencentcloud:Ses/getStatisticsReport:getStatisticsReport", args ?? new GetStatisticsReportInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetStatisticsReportResult>("tencentcloud:Ses/getStatisticsReport:getStatisticsReport", args ?? new GetStatisticsReportInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetStatisticsReportArgs : Pulumi.InvokeArgs
+    public sealed class GetStatisticsReportArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Sender domain.
@@ -113,9 +107,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public GetStatisticsReportArgs()
         {
         }
+        public static new GetStatisticsReportArgs Empty => new GetStatisticsReportArgs();
     }
 
-    public sealed class GetStatisticsReportInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetStatisticsReportInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Sender domain.
@@ -150,6 +145,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public GetStatisticsReportInvokeArgs()
         {
         }
+        public static new GetStatisticsReportInvokeArgs Empty => new GetStatisticsReportInvokeArgs();
     }
 
 

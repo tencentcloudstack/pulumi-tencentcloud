@@ -15,198 +15,198 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// <summary>
         /// Use this data source to query API gateway throttling APIs.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var service = new Tencentcloud.ApiGateway.Service("service", new()
         ///     {
-        ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+        ///         ServiceName = "niceservice",
+        ///         Protocol = "http&amp;https",
+        ///         ServiceDesc = "your nice service",
+        ///         NetTypes = new[]
         ///         {
-        ///             ServiceName = "niceservice",
-        ///             Protocol = "http&amp;https",
-        ///             ServiceDesc = "your nice service",
-        ///             NetTypes = 
-        ///             {
-        ///                 "INNER",
-        ///                 "OUTER",
-        ///             },
-        ///             IpVersion = "IPv4",
-        ///         });
-        ///         var api = new Tencentcloud.ApiGateway.Api("api", new Tencentcloud.ApiGateway.ApiArgs
-        ///         {
-        ///             ServiceId = service.Id,
-        ///             ApiName = "tf_example",
-        ///             ApiDesc = "my hello api update",
-        ///             AuthType = "SECRET",
-        ///             Protocol = "HTTP",
-        ///             EnableCors = true,
-        ///             RequestConfigPath = "/user/info",
-        ///             RequestConfigMethod = "POST",
-        ///             RequestParameters = 
-        ///             {
-        ///                 new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
-        ///                 {
-        ///                     Name = "email",
-        ///                     Position = "QUERY",
-        ///                     Type = "string",
-        ///                     Desc = "your email please?",
-        ///                     DefaultValue = "tom@qq.com",
-        ///                     Required = true,
-        ///                 },
-        ///             },
-        ///             ServiceConfigType = "HTTP",
-        ///             ServiceConfigTimeout = 10,
-        ///             ServiceConfigUrl = "http://www.tencent.com",
-        ///             ServiceConfigPath = "/user",
-        ///             ServiceConfigMethod = "POST",
-        ///             ResponseType = "XML",
-        ///             ResponseSuccessExample = "&lt;note&gt;success&lt;/note&gt;",
-        ///             ResponseFailExample = "&lt;note&gt;fail&lt;/note&gt;",
-        ///             ResponseErrorCodes = 
-        ///             {
-        ///                 new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
-        ///                 {
-        ///                     Code = 10,
-        ///                     Msg = "system error",
-        ///                     Desc = "system error code",
-        ///                     ConvertedCode = -10,
-        ///                     NeedConvert = true,
-        ///                 },
-        ///             },
-        ///             ReleaseLimit = 100,
-        ///             PreLimit = 100,
-        ///             TestLimit = 100,
-        ///         });
-        ///         var id = Output.Create(Tencentcloud.ApiGateway.GetThrottlingApis.InvokeAsync(new Tencentcloud.ApiGateway.GetThrottlingApisArgs
-        ///         {
-        ///             ServiceId = tencentcloud_api_gateway_api.Service_id,
-        ///         }));
-        ///         var foo = Output.Create(Tencentcloud.ApiGateway.GetThrottlingApis.InvokeAsync(new Tencentcloud.ApiGateway.GetThrottlingApisArgs
-        ///         {
-        ///             ServiceId = tencentcloud_api_gateway_api.Service.Service_id,
-        ///             EnvironmentNames = 
-        ///             {
-        ///                 "release",
-        ///                 "test",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "INNER",
+        ///             "OUTER",
+        ///         },
+        ///         IpVersion = "IPv4",
+        ///     });
         /// 
-        /// }
+        ///     var api = new Tencentcloud.ApiGateway.Api("api", new()
+        ///     {
+        ///         ServiceId = service.Id,
+        ///         ApiName = "tf_example",
+        ///         ApiDesc = "my hello api update",
+        ///         AuthType = "SECRET",
+        ///         Protocol = "HTTP",
+        ///         EnableCors = true,
+        ///         RequestConfigPath = "/user/info",
+        ///         RequestConfigMethod = "POST",
+        ///         RequestParameters = new[]
+        ///         {
+        ///             new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
+        ///             {
+        ///                 Name = "email",
+        ///                 Position = "QUERY",
+        ///                 Type = "string",
+        ///                 Desc = "your email please?",
+        ///                 DefaultValue = "tom@qq.com",
+        ///                 Required = true,
+        ///             },
+        ///         },
+        ///         ServiceConfigType = "HTTP",
+        ///         ServiceConfigTimeout = 10,
+        ///         ServiceConfigUrl = "http://www.tencent.com",
+        ///         ServiceConfigPath = "/user",
+        ///         ServiceConfigMethod = "POST",
+        ///         ResponseType = "XML",
+        ///         ResponseSuccessExample = "&lt;note&gt;success&lt;/note&gt;",
+        ///         ResponseFailExample = "&lt;note&gt;fail&lt;/note&gt;",
+        ///         ResponseErrorCodes = new[]
+        ///         {
+        ///             new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
+        ///             {
+        ///                 Code = 10,
+        ///                 Msg = "system error",
+        ///                 Desc = "system error code",
+        ///                 ConvertedCode = -10,
+        ///                 NeedConvert = true,
+        ///             },
+        ///         },
+        ///         ReleaseLimit = 100,
+        ///         PreLimit = 100,
+        ///         TestLimit = 100,
+        ///     });
+        /// 
+        ///     var id = Tencentcloud.ApiGateway.GetThrottlingApis.Invoke(new()
+        ///     {
+        ///         ServiceId = tencentcloud_api_gateway_api.Service_id,
+        ///     });
+        /// 
+        ///     var foo = Tencentcloud.ApiGateway.GetThrottlingApis.Invoke(new()
+        ///     {
+        ///         ServiceId = tencentcloud_api_gateway_api.Service.Service_id,
+        ///         EnvironmentNames = new[]
+        ///         {
+        ///             "release",
+        ///             "test",
+        ///         },
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetThrottlingApisResult> InvokeAsync(GetThrottlingApisArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetThrottlingApisResult>("tencentcloud:ApiGateway/getThrottlingApis:getThrottlingApis", args ?? new GetThrottlingApisArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetThrottlingApisResult>("tencentcloud:ApiGateway/getThrottlingApis:getThrottlingApis", args ?? new GetThrottlingApisArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query API gateway throttling APIs.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var service = new Tencentcloud.ApiGateway.Service("service", new()
         ///     {
-        ///         var service = new Tencentcloud.ApiGateway.Service("service", new Tencentcloud.ApiGateway.ServiceArgs
+        ///         ServiceName = "niceservice",
+        ///         Protocol = "http&amp;https",
+        ///         ServiceDesc = "your nice service",
+        ///         NetTypes = new[]
         ///         {
-        ///             ServiceName = "niceservice",
-        ///             Protocol = "http&amp;https",
-        ///             ServiceDesc = "your nice service",
-        ///             NetTypes = 
-        ///             {
-        ///                 "INNER",
-        ///                 "OUTER",
-        ///             },
-        ///             IpVersion = "IPv4",
-        ///         });
-        ///         var api = new Tencentcloud.ApiGateway.Api("api", new Tencentcloud.ApiGateway.ApiArgs
-        ///         {
-        ///             ServiceId = service.Id,
-        ///             ApiName = "tf_example",
-        ///             ApiDesc = "my hello api update",
-        ///             AuthType = "SECRET",
-        ///             Protocol = "HTTP",
-        ///             EnableCors = true,
-        ///             RequestConfigPath = "/user/info",
-        ///             RequestConfigMethod = "POST",
-        ///             RequestParameters = 
-        ///             {
-        ///                 new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
-        ///                 {
-        ///                     Name = "email",
-        ///                     Position = "QUERY",
-        ///                     Type = "string",
-        ///                     Desc = "your email please?",
-        ///                     DefaultValue = "tom@qq.com",
-        ///                     Required = true,
-        ///                 },
-        ///             },
-        ///             ServiceConfigType = "HTTP",
-        ///             ServiceConfigTimeout = 10,
-        ///             ServiceConfigUrl = "http://www.tencent.com",
-        ///             ServiceConfigPath = "/user",
-        ///             ServiceConfigMethod = "POST",
-        ///             ResponseType = "XML",
-        ///             ResponseSuccessExample = "&lt;note&gt;success&lt;/note&gt;",
-        ///             ResponseFailExample = "&lt;note&gt;fail&lt;/note&gt;",
-        ///             ResponseErrorCodes = 
-        ///             {
-        ///                 new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
-        ///                 {
-        ///                     Code = 10,
-        ///                     Msg = "system error",
-        ///                     Desc = "system error code",
-        ///                     ConvertedCode = -10,
-        ///                     NeedConvert = true,
-        ///                 },
-        ///             },
-        ///             ReleaseLimit = 100,
-        ///             PreLimit = 100,
-        ///             TestLimit = 100,
-        ///         });
-        ///         var id = Output.Create(Tencentcloud.ApiGateway.GetThrottlingApis.InvokeAsync(new Tencentcloud.ApiGateway.GetThrottlingApisArgs
-        ///         {
-        ///             ServiceId = tencentcloud_api_gateway_api.Service_id,
-        ///         }));
-        ///         var foo = Output.Create(Tencentcloud.ApiGateway.GetThrottlingApis.InvokeAsync(new Tencentcloud.ApiGateway.GetThrottlingApisArgs
-        ///         {
-        ///             ServiceId = tencentcloud_api_gateway_api.Service.Service_id,
-        ///             EnvironmentNames = 
-        ///             {
-        ///                 "release",
-        ///                 "test",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "INNER",
+        ///             "OUTER",
+        ///         },
+        ///         IpVersion = "IPv4",
+        ///     });
         /// 
-        /// }
+        ///     var api = new Tencentcloud.ApiGateway.Api("api", new()
+        ///     {
+        ///         ServiceId = service.Id,
+        ///         ApiName = "tf_example",
+        ///         ApiDesc = "my hello api update",
+        ///         AuthType = "SECRET",
+        ///         Protocol = "HTTP",
+        ///         EnableCors = true,
+        ///         RequestConfigPath = "/user/info",
+        ///         RequestConfigMethod = "POST",
+        ///         RequestParameters = new[]
+        ///         {
+        ///             new Tencentcloud.ApiGateway.Inputs.ApiRequestParameterArgs
+        ///             {
+        ///                 Name = "email",
+        ///                 Position = "QUERY",
+        ///                 Type = "string",
+        ///                 Desc = "your email please?",
+        ///                 DefaultValue = "tom@qq.com",
+        ///                 Required = true,
+        ///             },
+        ///         },
+        ///         ServiceConfigType = "HTTP",
+        ///         ServiceConfigTimeout = 10,
+        ///         ServiceConfigUrl = "http://www.tencent.com",
+        ///         ServiceConfigPath = "/user",
+        ///         ServiceConfigMethod = "POST",
+        ///         ResponseType = "XML",
+        ///         ResponseSuccessExample = "&lt;note&gt;success&lt;/note&gt;",
+        ///         ResponseFailExample = "&lt;note&gt;fail&lt;/note&gt;",
+        ///         ResponseErrorCodes = new[]
+        ///         {
+        ///             new Tencentcloud.ApiGateway.Inputs.ApiResponseErrorCodeArgs
+        ///             {
+        ///                 Code = 10,
+        ///                 Msg = "system error",
+        ///                 Desc = "system error code",
+        ///                 ConvertedCode = -10,
+        ///                 NeedConvert = true,
+        ///             },
+        ///         },
+        ///         ReleaseLimit = 100,
+        ///         PreLimit = 100,
+        ///         TestLimit = 100,
+        ///     });
+        /// 
+        ///     var id = Tencentcloud.ApiGateway.GetThrottlingApis.Invoke(new()
+        ///     {
+        ///         ServiceId = tencentcloud_api_gateway_api.Service_id,
+        ///     });
+        /// 
+        ///     var foo = Tencentcloud.ApiGateway.GetThrottlingApis.Invoke(new()
+        ///     {
+        ///         ServiceId = tencentcloud_api_gateway_api.Service.Service_id,
+        ///         EnvironmentNames = new[]
+        ///         {
+        ///             "release",
+        ///             "test",
+        ///         },
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetThrottlingApisResult> Invoke(GetThrottlingApisInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetThrottlingApisResult>("tencentcloud:ApiGateway/getThrottlingApis:getThrottlingApis", args ?? new GetThrottlingApisInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetThrottlingApisResult>("tencentcloud:ApiGateway/getThrottlingApis:getThrottlingApis", args ?? new GetThrottlingApisInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetThrottlingApisArgs : Pulumi.InvokeArgs
+    public sealed class GetThrottlingApisArgs : global::Pulumi.InvokeArgs
     {
         [Input("environmentNames")]
         private List<string>? _environmentNames;
@@ -235,9 +235,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetThrottlingApisArgs()
         {
         }
+        public static new GetThrottlingApisArgs Empty => new GetThrottlingApisArgs();
     }
 
-    public sealed class GetThrottlingApisInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetThrottlingApisInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("environmentNames")]
         private InputList<string>? _environmentNames;
@@ -266,6 +267,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetThrottlingApisInvokeArgs()
         {
         }
+        public static new GetThrottlingApisInvokeArgs Empty => new GetThrottlingApisInvokeArgs();
     }
 
 

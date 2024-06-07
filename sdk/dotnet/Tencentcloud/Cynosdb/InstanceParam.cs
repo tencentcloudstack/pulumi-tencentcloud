@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var instanceParam = new Tencentcloud.Cynosdb.InstanceParam("instanceParam", new()
     ///     {
-    ///         var instanceParam = new Tencentcloud.Cynosdb.InstanceParam("instanceParam", new Tencentcloud.Cynosdb.InstanceParamArgs
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         InstanceId = "cynosdbmysql-ins-rikr6z4o",
+    ///         InstanceParamLists = new[]
     ///         {
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             InstanceId = "cynosdbmysql-ins-rikr6z4o",
-    ///             InstanceParamLists = 
+    ///             new Tencentcloud.Cynosdb.Inputs.InstanceParamInstanceParamListArgs
     ///             {
-    ///                 new Tencentcloud.Cynosdb.Inputs.InstanceParamInstanceParamListArgs
-    ///                 {
-    ///                     CurrentValue = "0",
-    ///                     ParamName = "init_connect",
-    ///                 },
+    ///                 CurrentValue = "0",
+    ///                 ParamName = "init_connect",
     ///             },
-    ///             IsInMaintainPeriod = "no",
-    ///         });
-    ///     }
+    ///         },
+    ///         IsInMaintainPeriod = "no",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/instanceParam:InstanceParam")]
-    public partial class InstanceParam : Pulumi.CustomResource
+    public partial class InstanceParam : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Cluster ID.
@@ -114,7 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class InstanceParamArgs : Pulumi.ResourceArgs
+    public sealed class InstanceParamArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -149,9 +150,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public InstanceParamArgs()
         {
         }
+        public static new InstanceParamArgs Empty => new InstanceParamArgs();
     }
 
-    public sealed class InstanceParamState : Pulumi.ResourceArgs
+    public sealed class InstanceParamState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -186,5 +188,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public InstanceParamState()
         {
         }
+        public static new InstanceParamState Empty => new InstanceParamState();
     }
 }

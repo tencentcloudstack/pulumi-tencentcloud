@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var auditLogFile = new Tencentcloud.Cynosdb.AuditLogFile("auditLogFile", new()
     ///     {
-    ///         var auditLogFile = new Tencentcloud.Cynosdb.AuditLogFile("auditLogFile", new Tencentcloud.Cynosdb.AuditLogFileArgs
-    ///         {
-    ///             EndTime = "2022-08-12 10:29:20",
-    ///             InstanceId = "cynosdbmysql-ins-afqx1hy0",
-    ///             StartTime = "2022-07-12 10:29:20",
-    ///         });
-    ///     }
+    ///         EndTime = "2022-08-12 10:29:20",
+    ///         InstanceId = "cynosdbmysql-ins-afqx1hy0",
+    ///         StartTime = "2022-07-12 10:29:20",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/auditLogFile:AuditLogFile")]
-    public partial class AuditLogFile : Pulumi.CustomResource
+    public partial class AuditLogFile : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Audit log file creation time. The format is 2019-03-20 17:09:13.
@@ -151,7 +152,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class AuditLogFileArgs : Pulumi.ResourceArgs
+    public sealed class AuditLogFileArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// End time.
@@ -195,9 +196,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public AuditLogFileArgs()
         {
         }
+        public static new AuditLogFileArgs Empty => new AuditLogFileArgs();
     }
 
-    public sealed class AuditLogFileState : Pulumi.ResourceArgs
+    public sealed class AuditLogFileState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Audit log file creation time. The format is 2019-03-20 17:09:13.
@@ -271,5 +273,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public AuditLogFileState()
         {
         }
+        public static new AuditLogFileState Empty => new AuditLogFileState();
     }
 }

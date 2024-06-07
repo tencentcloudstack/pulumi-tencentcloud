@@ -11,19 +11,29 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class JobLoadGeoRegionsLoadDistributionGetArgs : Pulumi.ResourceArgs
+    public sealed class JobLoadGeoRegionsLoadDistributionGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Percentage.
+        /// </summary>
         [Input("percentage")]
         public Input<int>? Percentage { get; set; }
 
+        /// <summary>
+        /// Region.
+        /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
 
+        /// <summary>
+        /// Regional ID.
+        /// </summary>
         [Input("regionId", required: true)]
         public Input<int> RegionId { get; set; } = null!;
 
         public JobLoadGeoRegionsLoadDistributionGetArgs()
         {
         }
+        public static new JobLoadGeoRegionsLoadDistributionGetArgs Empty => new JobLoadGeoRegionsLoadDistributionGetArgs();
     }
 }

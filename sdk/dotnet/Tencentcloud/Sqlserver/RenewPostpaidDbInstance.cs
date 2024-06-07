@@ -15,85 +15,92 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "sqlserver",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "desc.",
-    ///         });
-    ///         var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new Tencentcloud.Sqlserver.BasicInstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
-    ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             ProjectId = 0,
-    ///             Memory = 4,
-    ///             Storage = 100,
-    ///             Cpu = 2,
-    ///             MachineType = "CLOUD_PREMIUM",
-    ///             MaintenanceWeekSets = 
-    ///             {
-    ///                 1,
-    ///                 2,
-    ///                 3,
-    ///             },
-    ///             MaintenanceStartTime = "09:00",
-    ///             MaintenanceTimeSpan = 3,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 securityGroup.Id,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///         var exampleConfigTerminateDbInstance = new Tencentcloud.Sqlserver.ConfigTerminateDbInstance("exampleConfigTerminateDbInstance", new Tencentcloud.Sqlserver.ConfigTerminateDbInstanceArgs
-    ///         {
-    ///             InstanceId = exampleBasicInstance.Id,
-    ///         });
-    ///         var exampleRenewPostpaidDbInstance = new Tencentcloud.Sqlserver.RenewPostpaidDbInstance("exampleRenewPostpaidDbInstance", new Tencentcloud.Sqlserver.RenewPostpaidDbInstanceArgs
-    ///         {
-    ///             InstanceId = exampleConfigTerminateDbInstance.Id,
-    ///         });
-    ///     }
+    ///         Product = "sqlserver",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[4]?.Name),
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    ///     {
+    ///         Description = "desc.",
+    ///     });
+    /// 
+    ///     var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[4]?.Name),
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         ProjectId = 0,
+    ///         Memory = 4,
+    ///         Storage = 100,
+    ///         Cpu = 2,
+    ///         MachineType = "CLOUD_PREMIUM",
+    ///         MaintenanceWeekSets = new[]
+    ///         {
+    ///             1,
+    ///             2,
+    ///             3,
+    ///         },
+    ///         MaintenanceStartTime = "09:00",
+    ///         MaintenanceTimeSpan = 3,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             securityGroup.Id,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleConfigTerminateDbInstance = new Tencentcloud.Sqlserver.ConfigTerminateDbInstance("exampleConfigTerminateDbInstance", new()
+    ///     {
+    ///         InstanceId = exampleBasicInstance.Id,
+    ///     });
+    /// 
+    ///     var exampleRenewPostpaidDbInstance = new Tencentcloud.Sqlserver.RenewPostpaidDbInstance("exampleRenewPostpaidDbInstance", new()
+    ///     {
+    ///         InstanceId = exampleConfigTerminateDbInstance.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// sqlserver renew_postpaid_db_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/renewPostpaidDbInstance:RenewPostpaidDbInstance example mssql-i9ma6oy7
+    /// $ pulumi import tencentcloud:Sqlserver/renewPostpaidDbInstance:RenewPostpaidDbInstance example mssql-i9ma6oy7
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/renewPostpaidDbInstance:RenewPostpaidDbInstance")]
-    public partial class RenewPostpaidDbInstance : Pulumi.CustomResource
+    public partial class RenewPostpaidDbInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -146,7 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         }
     }
 
-    public sealed class RenewPostpaidDbInstanceArgs : Pulumi.ResourceArgs
+    public sealed class RenewPostpaidDbInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -157,9 +164,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public RenewPostpaidDbInstanceArgs()
         {
         }
+        public static new RenewPostpaidDbInstanceArgs Empty => new RenewPostpaidDbInstanceArgs();
     }
 
-    public sealed class RenewPostpaidDbInstanceState : Pulumi.ResourceArgs
+    public sealed class RenewPostpaidDbInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -170,5 +178,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public RenewPostpaidDbInstanceState()
         {
         }
+        public static new RenewPostpaidDbInstanceState Empty => new RenewPostpaidDbInstanceState();
     }
 }

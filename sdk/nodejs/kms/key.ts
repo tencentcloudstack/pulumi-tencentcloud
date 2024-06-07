@@ -8,13 +8,15 @@ import * as utilities from "../utilities";
  * Provide a resource to create a KMS key.
  *
  * ## Example Usage
+ *
  * ### Create and enable a instance.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Kms.Key("example", {
+ * const example = new tencentcloud.kms.Key("example", {
  *     alias: "tf-example-kms-key",
  *     description: "example of kms key",
  *     isEnabled: true,
@@ -24,26 +26,32 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Specify the Key Usage as an asymmetry method.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example2 = new tencentcloud.Kms.Key("example2", {
+ * const example2 = new tencentcloud.kms.Key("example2", {
  *     alias: "tf-example-kms-key",
  *     description: "example of kms key",
  *     isEnabled: false,
  *     keyUsage: "ASYMMETRIC_DECRYPT_RSA_2048",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Disable the kms key instance.
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example3 = new tencentcloud.Kms.Key("example3", {
+ * const example3 = new tencentcloud.kms.Key("example3", {
  *     alias: "tf-example-kms-key",
  *     description: "example of kms key",
  *     isEnabled: false,
@@ -53,13 +61,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * KMS keys can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Kms/key:Key foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
+ * $ pulumi import tencentcloud:Kms/key:Key foo 287e8f40-7cbb-11eb-9a3a-5254004f7f94
  * ```
  */
 export class Key extends pulumi.CustomResource {

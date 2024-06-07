@@ -5,31 +5,71 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./baseline";
-export * from "./datasource";
-export * from "./dqRule";
-export * from "./function";
-export * from "./getDataSourceList";
-export * from "./getDataSourceWithoutInfo";
-export * from "./getRuleTemplates";
-export * from "./integrationOfflineTask";
-export * from "./integrationRealtimeTask";
-export * from "./integrationTaskNode";
-export * from "./resource";
-export * from "./ruleTemplate";
-export * from "./script";
+export { BaselineArgs, BaselineState } from "./baseline";
+export type Baseline = import("./baseline").Baseline;
+export const Baseline: typeof import("./baseline").Baseline = null as any;
+utilities.lazyLoad(exports, ["Baseline"], () => require("./baseline"));
 
-// Import resources to register:
-import { Baseline } from "./baseline";
-import { Datasource } from "./datasource";
-import { DqRule } from "./dqRule";
-import { Function } from "./function";
-import { IntegrationOfflineTask } from "./integrationOfflineTask";
-import { IntegrationRealtimeTask } from "./integrationRealtimeTask";
-import { IntegrationTaskNode } from "./integrationTaskNode";
-import { Resource } from "./resource";
-import { RuleTemplate } from "./ruleTemplate";
-import { Script } from "./script";
+export { DatasourceArgs, DatasourceState } from "./datasource";
+export type Datasource = import("./datasource").Datasource;
+export const Datasource: typeof import("./datasource").Datasource = null as any;
+utilities.lazyLoad(exports, ["Datasource"], () => require("./datasource"));
+
+export { DqRuleArgs, DqRuleState } from "./dqRule";
+export type DqRule = import("./dqRule").DqRule;
+export const DqRule: typeof import("./dqRule").DqRule = null as any;
+utilities.lazyLoad(exports, ["DqRule"], () => require("./dqRule"));
+
+export { FunctionArgs, FunctionState } from "./function";
+export type Function = import("./function").Function;
+export const Function: typeof import("./function").Function = null as any;
+utilities.lazyLoad(exports, ["Function"], () => require("./function"));
+
+export { GetDataSourceListArgs, GetDataSourceListResult, GetDataSourceListOutputArgs } from "./getDataSourceList";
+export const getDataSourceList: typeof import("./getDataSourceList").getDataSourceList = null as any;
+export const getDataSourceListOutput: typeof import("./getDataSourceList").getDataSourceListOutput = null as any;
+utilities.lazyLoad(exports, ["getDataSourceList","getDataSourceListOutput"], () => require("./getDataSourceList"));
+
+export { GetDataSourceWithoutInfoArgs, GetDataSourceWithoutInfoResult, GetDataSourceWithoutInfoOutputArgs } from "./getDataSourceWithoutInfo";
+export const getDataSourceWithoutInfo: typeof import("./getDataSourceWithoutInfo").getDataSourceWithoutInfo = null as any;
+export const getDataSourceWithoutInfoOutput: typeof import("./getDataSourceWithoutInfo").getDataSourceWithoutInfoOutput = null as any;
+utilities.lazyLoad(exports, ["getDataSourceWithoutInfo","getDataSourceWithoutInfoOutput"], () => require("./getDataSourceWithoutInfo"));
+
+export { GetRuleTemplatesArgs, GetRuleTemplatesResult, GetRuleTemplatesOutputArgs } from "./getRuleTemplates";
+export const getRuleTemplates: typeof import("./getRuleTemplates").getRuleTemplates = null as any;
+export const getRuleTemplatesOutput: typeof import("./getRuleTemplates").getRuleTemplatesOutput = null as any;
+utilities.lazyLoad(exports, ["getRuleTemplates","getRuleTemplatesOutput"], () => require("./getRuleTemplates"));
+
+export { IntegrationOfflineTaskArgs, IntegrationOfflineTaskState } from "./integrationOfflineTask";
+export type IntegrationOfflineTask = import("./integrationOfflineTask").IntegrationOfflineTask;
+export const IntegrationOfflineTask: typeof import("./integrationOfflineTask").IntegrationOfflineTask = null as any;
+utilities.lazyLoad(exports, ["IntegrationOfflineTask"], () => require("./integrationOfflineTask"));
+
+export { IntegrationRealtimeTaskArgs, IntegrationRealtimeTaskState } from "./integrationRealtimeTask";
+export type IntegrationRealtimeTask = import("./integrationRealtimeTask").IntegrationRealtimeTask;
+export const IntegrationRealtimeTask: typeof import("./integrationRealtimeTask").IntegrationRealtimeTask = null as any;
+utilities.lazyLoad(exports, ["IntegrationRealtimeTask"], () => require("./integrationRealtimeTask"));
+
+export { IntegrationTaskNodeArgs, IntegrationTaskNodeState } from "./integrationTaskNode";
+export type IntegrationTaskNode = import("./integrationTaskNode").IntegrationTaskNode;
+export const IntegrationTaskNode: typeof import("./integrationTaskNode").IntegrationTaskNode = null as any;
+utilities.lazyLoad(exports, ["IntegrationTaskNode"], () => require("./integrationTaskNode"));
+
+export { ResourceArgs, ResourceState } from "./resource";
+export type Resource = import("./resource").Resource;
+export const Resource: typeof import("./resource").Resource = null as any;
+utilities.lazyLoad(exports, ["Resource"], () => require("./resource"));
+
+export { RuleTemplateArgs, RuleTemplateState } from "./ruleTemplate";
+export type RuleTemplate = import("./ruleTemplate").RuleTemplate;
+export const RuleTemplate: typeof import("./ruleTemplate").RuleTemplate = null as any;
+utilities.lazyLoad(exports, ["RuleTemplate"], () => require("./ruleTemplate"));
+
+export { ScriptArgs, ScriptState } from "./script";
+export type Script = import("./script").Script;
+export const Script: typeof import("./script").Script = null as any;
+utilities.lazyLoad(exports, ["Script"], () => require("./script"));
+
 
 const _module = {
     version: utilities.getVersion(),

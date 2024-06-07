@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaVoiceSeparateTemplateAudioConfigArgs : Pulumi.ResourceArgs
+    public sealed class MediaVoiceSeparateTemplateAudioConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Original audio bit rate, unit: Kbps, Value range: [8, 1000].
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaVoiceSeparateTemplateAudioConfigArgs()
         {
         }
+        public static new MediaVoiceSeparateTemplateAudioConfigArgs Empty => new MediaVoiceSeparateTemplateAudioConfigArgs();
     }
 }

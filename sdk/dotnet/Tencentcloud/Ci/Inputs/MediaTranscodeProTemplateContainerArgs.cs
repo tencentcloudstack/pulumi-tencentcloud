@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaTranscodeProTemplateContainerArgs : Pulumi.ResourceArgs
+    public sealed class MediaTranscodeProTemplateContainerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Fragment configuration, valid when format is hls and dash.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaTranscodeProTemplateContainerArgs()
         {
         }
+        public static new MediaTranscodeProTemplateContainerArgs Empty => new MediaTranscodeProTemplateContainerArgs();
     }
 }

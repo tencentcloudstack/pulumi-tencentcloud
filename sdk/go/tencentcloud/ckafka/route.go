@@ -7,38 +7,52 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ckafka route
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ckafka"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ckafka.NewRoute(ctx, "route", &Ckafka.RouteArgs{
-// 			AccessType:    pulumi.Int(0),
-// 			InstanceId:    pulumi.String("ckafka-xxxxxx"),
-// 			PublicNetwork: pulumi.Int(3),
-// 			SubnetId:      pulumi.String("subnet-xxxxxx"),
-// 			VipType:       pulumi.Int(3),
-// 			VpcId:         pulumi.String("vpc-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ckafka.NewRoute(ctx, "example", &Ckafka.RouteArgs{
+//				AccessType:    pulumi.Int(0),
+//				InstanceId:    pulumi.String("ckafka-8j4rodrr"),
+//				PublicNetwork: pulumi.Int(3),
+//				SubnetId:      pulumi.String("subnet-j5vja918"),
+//				VipType:       pulumi.Int(3),
+//				VpcId:         pulumi.String("vpc-axrsmmrv"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ## Import
+//
+// ckafka route can be imported using the id, e.g.
+//
+// ```sh
+// $ pulumi import tencentcloud:Ckafka/route:Route example ckafka-8j4rodrr#135912
 // ```
 type Route struct {
 	pulumi.CustomResourceState
@@ -84,7 +98,7 @@ func NewRoute(ctx *pulumi.Context,
 	if args.VipType == nil {
 		return nil, errors.New("invalid value for required argument 'VipType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Route
 	err := ctx.RegisterResource("tencentcloud:Ckafka/route:Route", name, args, &resource, opts...)
 	if err != nil {
@@ -245,7 +259,7 @@ func (i *Route) ToRouteOutputWithContext(ctx context.Context) RouteOutput {
 // RouteArrayInput is an input type that accepts RouteArray and RouteArrayOutput values.
 // You can construct a concrete instance of `RouteArrayInput` via:
 //
-//          RouteArray{ RouteArgs{...} }
+//	RouteArray{ RouteArgs{...} }
 type RouteArrayInput interface {
 	pulumi.Input
 
@@ -270,7 +284,7 @@ func (i RouteArray) ToRouteArrayOutputWithContext(ctx context.Context) RouteArra
 // RouteMapInput is an input type that accepts RouteMap and RouteMapOutput values.
 // You can construct a concrete instance of `RouteMapInput` via:
 //
-//          RouteMap{ "key": RouteArgs{...} }
+//	RouteMap{ "key": RouteArgs{...} }
 type RouteMapInput interface {
 	pulumi.Input
 

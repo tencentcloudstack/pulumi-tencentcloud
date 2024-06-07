@@ -5,23 +5,51 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./accessGroup";
-export * from "./accessRule";
-export * from "./fileSystem";
-export * from "./getAccessGroups";
-export * from "./getFileSystems";
-export * from "./getMountPoints";
-export * from "./lifeCycleRule";
-export * from "./mountPoint";
-export * from "./mountPointAttachment";
+export { AccessGroupArgs, AccessGroupState } from "./accessGroup";
+export type AccessGroup = import("./accessGroup").AccessGroup;
+export const AccessGroup: typeof import("./accessGroup").AccessGroup = null as any;
+utilities.lazyLoad(exports, ["AccessGroup"], () => require("./accessGroup"));
 
-// Import resources to register:
-import { AccessGroup } from "./accessGroup";
-import { AccessRule } from "./accessRule";
-import { FileSystem } from "./fileSystem";
-import { LifeCycleRule } from "./lifeCycleRule";
-import { MountPoint } from "./mountPoint";
-import { MountPointAttachment } from "./mountPointAttachment";
+export { AccessRuleArgs, AccessRuleState } from "./accessRule";
+export type AccessRule = import("./accessRule").AccessRule;
+export const AccessRule: typeof import("./accessRule").AccessRule = null as any;
+utilities.lazyLoad(exports, ["AccessRule"], () => require("./accessRule"));
+
+export { FileSystemArgs, FileSystemState } from "./fileSystem";
+export type FileSystem = import("./fileSystem").FileSystem;
+export const FileSystem: typeof import("./fileSystem").FileSystem = null as any;
+utilities.lazyLoad(exports, ["FileSystem"], () => require("./fileSystem"));
+
+export { GetAccessGroupsArgs, GetAccessGroupsResult, GetAccessGroupsOutputArgs } from "./getAccessGroups";
+export const getAccessGroups: typeof import("./getAccessGroups").getAccessGroups = null as any;
+export const getAccessGroupsOutput: typeof import("./getAccessGroups").getAccessGroupsOutput = null as any;
+utilities.lazyLoad(exports, ["getAccessGroups","getAccessGroupsOutput"], () => require("./getAccessGroups"));
+
+export { GetFileSystemsArgs, GetFileSystemsResult, GetFileSystemsOutputArgs } from "./getFileSystems";
+export const getFileSystems: typeof import("./getFileSystems").getFileSystems = null as any;
+export const getFileSystemsOutput: typeof import("./getFileSystems").getFileSystemsOutput = null as any;
+utilities.lazyLoad(exports, ["getFileSystems","getFileSystemsOutput"], () => require("./getFileSystems"));
+
+export { GetMountPointsArgs, GetMountPointsResult, GetMountPointsOutputArgs } from "./getMountPoints";
+export const getMountPoints: typeof import("./getMountPoints").getMountPoints = null as any;
+export const getMountPointsOutput: typeof import("./getMountPoints").getMountPointsOutput = null as any;
+utilities.lazyLoad(exports, ["getMountPoints","getMountPointsOutput"], () => require("./getMountPoints"));
+
+export { LifeCycleRuleArgs, LifeCycleRuleState } from "./lifeCycleRule";
+export type LifeCycleRule = import("./lifeCycleRule").LifeCycleRule;
+export const LifeCycleRule: typeof import("./lifeCycleRule").LifeCycleRule = null as any;
+utilities.lazyLoad(exports, ["LifeCycleRule"], () => require("./lifeCycleRule"));
+
+export { MountPointArgs, MountPointState } from "./mountPoint";
+export type MountPoint = import("./mountPoint").MountPoint;
+export const MountPoint: typeof import("./mountPoint").MountPoint = null as any;
+utilities.lazyLoad(exports, ["MountPoint"], () => require("./mountPoint"));
+
+export { MountPointAttachmentArgs, MountPointAttachmentState } from "./mountPointAttachment";
+export type MountPointAttachment = import("./mountPointAttachment").MountPointAttachment;
+export const MountPointAttachment: typeof import("./mountPointAttachment").MountPointAttachment = null as any;
+utilities.lazyLoad(exports, ["MountPointAttachment"], () => require("./mountPointAttachment"));
+
 
 const _module = {
     version: utilities.getVersion(),

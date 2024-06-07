@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// <summary>
         /// Use this data source to query detailed information of elasticsearch instance plugin list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instancePluginList = Tencentcloud.Elasticsearch.GetInstancePluginList.Invoke(new()
         ///     {
-        ///         var instancePluginList = Output.Create(Tencentcloud.Elasticsearch.GetInstancePluginList.InvokeAsync(new Tencentcloud.Elasticsearch.GetInstancePluginListArgs
-        ///         {
-        ///             InstanceId = "es-xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "es-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstancePluginListResult> InvokeAsync(GetInstancePluginListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstancePluginListResult>("tencentcloud:Elasticsearch/getInstancePluginList:getInstancePluginList", args ?? new GetInstancePluginListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstancePluginListResult>("tencentcloud:Elasticsearch/getInstancePluginList:getInstancePluginList", args ?? new GetInstancePluginListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of elasticsearch instance plugin list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var instancePluginList = Tencentcloud.Elasticsearch.GetInstancePluginList.Invoke(new()
         ///     {
-        ///         var instancePluginList = Output.Create(Tencentcloud.Elasticsearch.GetInstancePluginList.InvokeAsync(new Tencentcloud.Elasticsearch.GetInstancePluginListArgs
-        ///         {
-        ///             InstanceId = "es-xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "es-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstancePluginListResult> Invoke(GetInstancePluginListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstancePluginListResult>("tencentcloud:Elasticsearch/getInstancePluginList:getInstancePluginList", args ?? new GetInstancePluginListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstancePluginListResult>("tencentcloud:Elasticsearch/getInstancePluginList:getInstancePluginList", args ?? new GetInstancePluginListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstancePluginListArgs : Pulumi.InvokeArgs
+    public sealed class GetInstancePluginListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance id.
@@ -109,9 +103,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public GetInstancePluginListArgs()
         {
         }
+        public static new GetInstancePluginListArgs Empty => new GetInstancePluginListArgs();
     }
 
-    public sealed class GetInstancePluginListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstancePluginListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance id.
@@ -148,6 +143,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public GetInstancePluginListInvokeArgs()
         {
         }
+        public static new GetInstancePluginListInvokeArgs Empty => new GetInstancePluginListInvokeArgs();
     }
 
 

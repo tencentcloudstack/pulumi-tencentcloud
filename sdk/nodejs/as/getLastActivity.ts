@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const lastActivity = pulumi.output(tencentcloud.As.getLastActivity({
+ * const lastActivity = tencentcloud.As.getLastActivity({
  *     autoScalingGroupIds: ["asc-lo0b94oy"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getLastActivity(args: GetLastActivityArgs, opts?: pulumi.InvokeOptions): Promise<GetLastActivityResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:As/getLastActivity:getLastActivity", {
         "autoScalingGroupIds": args.autoScalingGroupIds,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetLastActivityResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of as lastActivity
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const lastActivity = tencentcloud.As.getLastActivity({
+ *     autoScalingGroupIds: ["asc-lo0b94oy"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getLastActivityOutput(args: GetLastActivityOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetLastActivityResult> {
-    return pulumi.output(args).apply(a => getLastActivity(a, opts))
+    return pulumi.output(args).apply((a: any) => getLastActivity(a, opts))
 }
 
 /**

@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var operateGroup = new Tencentcloud.Tsf.OperateGroup("operateGroup", new()
     ///     {
-    ///         var operateGroup = new Tencentcloud.Tsf.OperateGroup("operateGroup", new Tencentcloud.Tsf.OperateGroupArgs
-    ///         {
-    ///             GroupId = "group-ynd95rea",
-    ///             Operate = "start",
-    ///         });
-    ///     }
+    ///         GroupId = "group-ynd95rea",
+    ///         Operate = "start",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/operateGroup:OperateGroup")]
-    public partial class OperateGroup : Pulumi.CustomResource
+    public partial class OperateGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// group id.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class OperateGroupArgs : Pulumi.ResourceArgs
+    public sealed class OperateGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// group id.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public OperateGroupArgs()
         {
         }
+        public static new OperateGroupArgs Empty => new OperateGroupArgs();
     }
 
-    public sealed class OperateGroupState : Pulumi.ResourceArgs
+    public sealed class OperateGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// group id.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public OperateGroupState()
         {
         }
+        public static new OperateGroupState Empty => new OperateGroupState();
     }
 }

@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var restartPushTask = new Tencentcloud.Css.PullStreamTaskRestart("restartPushTask", new()
     ///     {
-    ///         var restartPushTask = new Tencentcloud.Css.PullStreamTaskRestart("restartPushTask", new Tencentcloud.Css.PullStreamTaskRestartArgs
-    ///         {
-    ///             Operator = "tf-test",
-    ///             TaskId = "3573",
-    ///         });
-    ///     }
+    ///         Operator = "tf-test",
+    ///         TaskId = "3573",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/pullStreamTaskRestart:PullStreamTaskRestart")]
-    public partial class PullStreamTaskRestart : Pulumi.CustomResource
+    public partial class PullStreamTaskRestart : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Task operator.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class PullStreamTaskRestartArgs : Pulumi.ResourceArgs
+    public sealed class PullStreamTaskRestartArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Task operator.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public PullStreamTaskRestartArgs()
         {
         }
+        public static new PullStreamTaskRestartArgs Empty => new PullStreamTaskRestartArgs();
     }
 
-    public sealed class PullStreamTaskRestartState : Pulumi.ResourceArgs
+    public sealed class PullStreamTaskRestartState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Task operator.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public PullStreamTaskRestartState()
         {
         }
+        public static new PullStreamTaskRestartState Empty => new PullStreamTaskRestartState();
     }
 }

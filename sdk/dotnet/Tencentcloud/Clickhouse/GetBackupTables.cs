@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// <summary>
         /// Use this data source to query detailed information of clickhouse backup tables
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var backupTables = Tencentcloud.Clickhouse.GetBackupTables.Invoke(new()
         ///     {
-        ///         var backupTables = Output.Create(Tencentcloud.Clickhouse.GetBackupTables.InvokeAsync(new Tencentcloud.Clickhouse.GetBackupTablesArgs
-        ///         {
-        ///             InstanceId = "cdwch-xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdwch-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBackupTablesResult> InvokeAsync(GetBackupTablesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBackupTablesResult>("tencentcloud:Clickhouse/getBackupTables:getBackupTables", args ?? new GetBackupTablesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupTablesResult>("tencentcloud:Clickhouse/getBackupTables:getBackupTables", args ?? new GetBackupTablesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of clickhouse backup tables
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var backupTables = Tencentcloud.Clickhouse.GetBackupTables.Invoke(new()
         ///     {
-        ///         var backupTables = Output.Create(Tencentcloud.Clickhouse.GetBackupTables.InvokeAsync(new Tencentcloud.Clickhouse.GetBackupTablesArgs
-        ///         {
-        ///             InstanceId = "cdwch-xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdwch-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBackupTablesResult> Invoke(GetBackupTablesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBackupTablesResult>("tencentcloud:Clickhouse/getBackupTables:getBackupTables", args ?? new GetBackupTablesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBackupTablesResult>("tencentcloud:Clickhouse/getBackupTables:getBackupTables", args ?? new GetBackupTablesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBackupTablesArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupTablesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance id.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public GetBackupTablesArgs()
         {
         }
+        public static new GetBackupTablesArgs Empty => new GetBackupTablesArgs();
     }
 
-    public sealed class GetBackupTablesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupTablesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance id.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         public GetBackupTablesInvokeArgs()
         {
         }
+        public static new GetBackupTablesInvokeArgs Empty => new GetBackupTablesInvokeArgs();
     }
 
 

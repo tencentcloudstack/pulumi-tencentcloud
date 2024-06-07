@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeHostDeployRecord = pulumi.output(tencentcloud.Ssl.getDescribeHostDeployRecord({
+ * const describeHostDeployRecord = tencentcloud.Ssl.getDescribeHostDeployRecord({
  *     certificateId: "8u8DII0l",
  *     resourceType: "ddos",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeHostDeployRecord(args: GetDescribeHostDeployRecordArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostDeployRecordResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ssl/getDescribeHostDeployRecord:getDescribeHostDeployRecord", {
         "certificateId": args.certificateId,
         "resourceType": args.resourceType,
@@ -70,9 +70,25 @@ export interface GetDescribeHostDeployRecordResult {
     readonly resourceType?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of ssl describeHostDeployRecord
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeHostDeployRecord = tencentcloud.Ssl.getDescribeHostDeployRecord({
+ *     certificateId: "8u8DII0l",
+ *     resourceType: "ddos",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeHostDeployRecordOutput(args: GetDescribeHostDeployRecordOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeHostDeployRecordResult> {
-    return pulumi.output(args).apply(a => getDescribeHostDeployRecord(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeHostDeployRecord(a, opts))
 }
 
 /**

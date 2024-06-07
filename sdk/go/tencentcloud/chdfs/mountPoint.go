@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a chdfs mountPoint
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Chdfs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Chdfs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Chdfs.NewMountPoint(ctx, "mountPoint", &Chdfs.MountPointArgs{
-// 			FileSystemId:     pulumi.String("f14mpfy5lh4e"),
-// 			MountPointName:   pulumi.String("terraform-test"),
-// 			MountPointStatus: pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Chdfs.NewMountPoint(ctx, "mountPoint", &Chdfs.MountPointArgs{
+//				FileSystemId:     pulumi.String("f14mpfy5lh4e"),
+//				MountPointName:   pulumi.String("terraform-test"),
+//				MountPointStatus: pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // chdfs mount_point can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Chdfs/mountPoint:MountPoint mount_point mount_point_id
+// $ pulumi import tencentcloud:Chdfs/mountPoint:MountPoint mount_point mount_point_id
 // ```
 type MountPoint struct {
 	pulumi.CustomResourceState
@@ -72,7 +78,7 @@ func NewMountPoint(ctx *pulumi.Context,
 	if args.MountPointStatus == nil {
 		return nil, errors.New("invalid value for required argument 'MountPointStatus'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MountPoint
 	err := ctx.RegisterResource("tencentcloud:Chdfs/mountPoint:MountPoint", name, args, &resource, opts...)
 	if err != nil {
@@ -161,7 +167,7 @@ func (i *MountPoint) ToMountPointOutputWithContext(ctx context.Context) MountPoi
 // MountPointArrayInput is an input type that accepts MountPointArray and MountPointArrayOutput values.
 // You can construct a concrete instance of `MountPointArrayInput` via:
 //
-//          MountPointArray{ MountPointArgs{...} }
+//	MountPointArray{ MountPointArgs{...} }
 type MountPointArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +192,7 @@ func (i MountPointArray) ToMountPointArrayOutputWithContext(ctx context.Context)
 // MountPointMapInput is an input type that accepts MountPointMap and MountPointMapOutput values.
 // You can construct a concrete instance of `MountPointMapInput` via:
 //
-//          MountPointMap{ "key": MountPointArgs{...} }
+//	MountPointMap{ "key": MountPointArgs{...} }
 type MountPointMapInput interface {
 	pulumi.Input
 

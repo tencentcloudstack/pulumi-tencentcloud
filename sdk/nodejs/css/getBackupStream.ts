@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const backupStream = pulumi.output(tencentcloud.Css.getBackupStream({
+ * const backupStream = tencentcloud.Css.getBackupStream({
  *     streamName: "live",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBackupStream(args?: GetBackupStreamArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupStreamResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Css/getBackupStream:getBackupStream", {
         "resultOutputFile": args.resultOutputFile,
         "streamName": args.streamName,
@@ -64,9 +64,24 @@ export interface GetBackupStreamResult {
      */
     readonly streamName?: string;
 }
-
+/**
+ * Use this data source to query detailed information of css backupStream
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const backupStream = tencentcloud.Css.getBackupStream({
+ *     streamName: "live",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBackupStreamOutput(args?: GetBackupStreamOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBackupStreamResult> {
-    return pulumi.output(args).apply(a => getBackupStream(a, opts))
+    return pulumi.output(args).apply((a: any) => getBackupStream(a, opts))
 }
 
 /**

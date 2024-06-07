@@ -7,38 +7,44 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dasb bindDeviceResource
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dasb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dasb.NewBindDeviceResource(ctx, "example", &Dasb.BindDeviceResourceArgs{
-// 			DeviceIdSets: pulumi.IntArray{
-// 				pulumi.Int(17),
-// 				pulumi.Int(18),
-// 			},
-// 			ResourceId: pulumi.String("bh-saas-ocmzo6lgxiv"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dasb.NewBindDeviceResource(ctx, "example", &Dasb.BindDeviceResourceArgs{
+//				DeviceIdSets: pulumi.IntArray{
+//					pulumi.Int(17),
+//					pulumi.Int(18),
+//				},
+//				ResourceId: pulumi.String("bh-saas-weyosfym"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type BindDeviceResource struct {
 	pulumi.CustomResourceState
 
@@ -61,7 +67,7 @@ func NewBindDeviceResource(ctx *pulumi.Context,
 	if args.ResourceId == nil {
 		return nil, errors.New("invalid value for required argument 'ResourceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BindDeviceResource
 	err := ctx.RegisterResource("tencentcloud:Dasb/bindDeviceResource:BindDeviceResource", name, args, &resource, opts...)
 	if err != nil {
@@ -142,7 +148,7 @@ func (i *BindDeviceResource) ToBindDeviceResourceOutputWithContext(ctx context.C
 // BindDeviceResourceArrayInput is an input type that accepts BindDeviceResourceArray and BindDeviceResourceArrayOutput values.
 // You can construct a concrete instance of `BindDeviceResourceArrayInput` via:
 //
-//          BindDeviceResourceArray{ BindDeviceResourceArgs{...} }
+//	BindDeviceResourceArray{ BindDeviceResourceArgs{...} }
 type BindDeviceResourceArrayInput interface {
 	pulumi.Input
 
@@ -167,7 +173,7 @@ func (i BindDeviceResourceArray) ToBindDeviceResourceArrayOutputWithContext(ctx 
 // BindDeviceResourceMapInput is an input type that accepts BindDeviceResourceMap and BindDeviceResourceMapOutput values.
 // You can construct a concrete instance of `BindDeviceResourceMapInput` via:
 //
-//          BindDeviceResourceMap{ "key": BindDeviceResourceArgs{...} }
+//	BindDeviceResourceMap{ "key": BindDeviceResourceArgs{...} }
 type BindDeviceResourceMapInput interface {
 	pulumi.Input
 

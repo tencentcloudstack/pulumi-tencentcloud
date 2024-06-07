@@ -2,18 +2,21 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a mps processLiveStreamOperation
  *
  * ## Example Usage
+ *
  * ### Process mps live stream through CMQ
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const output = new tencentcloud.cos.Bucket("output", {
  *     bucket: `tf-bucket-mps-process-live-stream-output-${local.app_id}`,
@@ -33,7 +36,7 @@ import * as utilities from "../utilities";
  *         type: "COS",
  *         cosOutputStorage: {
  *             bucket: output.bucket,
- *             region: `%s`,
+ *             region: "%s",
  *         },
  *     },
  *     outputDir: "/output/",
@@ -45,6 +48,7 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ProcessLiveStreamOperation extends pulumi.CustomResource {
     /**

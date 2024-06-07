@@ -2,15 +2,18 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of mps mediaMetaData
  *
  * ## Example Usage
+ *
  * ### Query the mps media meta data through COS
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -24,19 +27,17 @@ import * as utilities from "../utilities";
  *         type: "COS",
  *         cosInputInfo: {
  *             bucket: object.bucket,
- *             region: `%s`,
+ *             region: "%s",
  *             object: object1.key,
  *         },
  *     },
  * }));
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getMediaMetaData(args: GetMediaMetaDataArgs, opts?: pulumi.InvokeOptions): Promise<GetMediaMetaDataResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mps/getMediaMetaData:getMediaMetaData", {
         "inputInfo": args.inputInfo,
         "resultOutputFile": args.resultOutputFile,
@@ -72,9 +73,37 @@ export interface GetMediaMetaDataResult {
     readonly metaDatas: outputs.Mps.GetMediaMetaDataMetaData[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mps mediaMetaData
+ *
+ * ## Example Usage
+ *
+ * ### Query the mps media meta data through COS
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const object = tencentcloud.Cos.getBucketObject({
+ *     bucket: `keep-bucket-${local.app_id}`,
+ *     key: "/mps-test/test.mov",
+ * });
+ * const metadata = Promise.all([object, object]).then(([object, object1]) => tencentcloud.Mps.getMediaMetaData({
+ *     inputInfo: {
+ *         type: "COS",
+ *         cosInputInfo: {
+ *             bucket: object.bucket,
+ *             region: "%s",
+ *             object: object1.key,
+ *         },
+ *     },
+ * }));
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getMediaMetaDataOutput(args: GetMediaMetaDataOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetMediaMetaDataResult> {
-    return pulumi.output(args).apply(a => getMediaMetaData(a, opts))
+    return pulumi.output(args).apply((a: any) => getMediaMetaData(a, opts))
 }
 
 /**

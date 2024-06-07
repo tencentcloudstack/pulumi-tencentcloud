@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class ClusterExistInstanceInstancesParaArgs : Pulumi.ResourceArgs
+    public sealed class ClusterExistInstanceInstancesParaArgs : global::Pulumi.ResourceArgs
     {
         [Input("instanceIds", required: true)]
         private InputList<string>? _instanceIds;
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public ClusterExistInstanceInstancesParaArgs()
         {
         }
+        public static new ClusterExistInstanceInstancesParaArgs Empty => new ClusterExistInstanceInstancesParaArgs();
     }
 }

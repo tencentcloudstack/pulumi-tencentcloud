@@ -9,15 +9,51 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const publicAddressAdjust = new tencentcloud.Eip.PublicAddressAdjust("public_address_adjust", {
- *     addressId: "eip-erft45fu",
- *     instanceId: "ins-cr2rfq78",
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create vpc subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: "ap-guangzhou-6",
+ *     cidrBlock: "10.0.20.0/28",
+ *     isMulticast: false,
+ * });
+ * // create cvm
+ * const exampleInstance = new tencentcloud.instance.Instance("exampleInstance", {
+ *     instanceName: "tf_example",
+ *     availabilityZone: "ap-guangzhou-6",
+ *     imageId: "img-9qrfy1xt",
+ *     instanceType: "SA3.MEDIUM4",
+ *     systemDiskType: "CLOUD_HSSD",
+ *     systemDiskSize: 100,
+ *     hostname: "example",
+ *     projectId: 0,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     allocatePublicIp: true,
+ *     internetMaxBandwidthOut: 10,
+ *     dataDisks: [{
+ *         dataDiskType: "CLOUD_HSSD",
+ *         dataDiskSize: 50,
+ *         encrypt: false,
+ *     }],
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * // create eip
+ * const exampleEip_instanceInstance = new tencentcloud.eip.Instance("exampleEip/instanceInstance", {});
+ * const examplePublicAddressAdjust = new tencentcloud.eip.PublicAddressAdjust("examplePublicAddressAdjust", {
+ *     instanceId: exampleInstance.id,
+ *     addressId: exampleEip / instanceInstance.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class PublicAddressAdjust extends pulumi.CustomResource {
     /**

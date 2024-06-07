@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var tawInstance = new Tencentcloud.Rum.TawInstance("tawInstance", new()
     ///     {
-    ///         var tawInstance = new Tencentcloud.Rum.TawInstance("tawInstance", new Tencentcloud.Rum.TawInstanceArgs
+    ///         AreaId = 1,
+    ///         ChargeType = 1,
+    ///         DataRetentionDays = 30,
+    ///         InstanceDesc = "instanceDesc-1",
+    ///         InstanceName = "instanceName-1",
+    ///         Tags = 
     ///         {
-    ///             AreaId = 1,
-    ///             ChargeType = 1,
-    ///             DataRetentionDays = 30,
-    ///             InstanceDesc = "instanceDesc-1",
-    ///             InstanceName = "instanceName-1",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// rum taw_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Rum/tawInstance:TawInstance taw_instance tawInstance_id
+    /// $ pulumi import tencentcloud:Rum/tawInstance:TawInstance taw_instance tawInstance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Rum/tawInstance:TawInstance")]
-    public partial class TawInstance : Pulumi.CustomResource
+    public partial class TawInstance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Region ID (at least greater than 0).
@@ -162,7 +163,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         }
     }
 
-    public sealed class TawInstanceArgs : Pulumi.ResourceArgs
+    public sealed class TawInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Region ID (at least greater than 0).
@@ -209,9 +210,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public TawInstanceArgs()
         {
         }
+        public static new TawInstanceArgs Empty => new TawInstanceArgs();
     }
 
-    public sealed class TawInstanceState : Pulumi.ResourceArgs
+    public sealed class TawInstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Region ID (at least greater than 0).
@@ -288,5 +290,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public TawInstanceState()
         {
         }
+        public static new TawInstanceState Empty => new TawInstanceState();
     }
 }

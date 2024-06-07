@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// <summary>
         /// Use this data source to query detailed information of ckafka topic_produce_connection
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topicProduceConnection = Tencentcloud.Ckafka.GetTopicProduceConnection.Invoke(new()
         ///     {
-        ///         var topicProduceConnection = Output.Create(Tencentcloud.Ckafka.GetTopicProduceConnection.InvokeAsync(new Tencentcloud.Ckafka.GetTopicProduceConnectionArgs
-        ///         {
-        ///             InstanceId = "ckafka-xxxxxx",
-        ///             TopicName = "topic-xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ckafka-xxxxxx",
+        ///         TopicName = "topic-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTopicProduceConnectionResult> InvokeAsync(GetTopicProduceConnectionArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTopicProduceConnectionResult>("tencentcloud:Ckafka/getTopicProduceConnection:getTopicProduceConnection", args ?? new GetTopicProduceConnectionArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopicProduceConnectionResult>("tencentcloud:Ckafka/getTopicProduceConnection:getTopicProduceConnection", args ?? new GetTopicProduceConnectionArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ckafka topic_produce_connection
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topicProduceConnection = Tencentcloud.Ckafka.GetTopicProduceConnection.Invoke(new()
         ///     {
-        ///         var topicProduceConnection = Output.Create(Tencentcloud.Ckafka.GetTopicProduceConnection.InvokeAsync(new Tencentcloud.Ckafka.GetTopicProduceConnectionArgs
-        ///         {
-        ///             InstanceId = "ckafka-xxxxxx",
-        ///             TopicName = "topic-xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ckafka-xxxxxx",
+        ///         TopicName = "topic-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTopicProduceConnectionResult> Invoke(GetTopicProduceConnectionInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTopicProduceConnectionResult>("tencentcloud:Ckafka/getTopicProduceConnection:getTopicProduceConnection", args ?? new GetTopicProduceConnectionInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTopicProduceConnectionResult>("tencentcloud:Ckafka/getTopicProduceConnection:getTopicProduceConnection", args ?? new GetTopicProduceConnectionInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTopicProduceConnectionArgs : Pulumi.InvokeArgs
+    public sealed class GetTopicProduceConnectionArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// InstanceId.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetTopicProduceConnectionArgs()
         {
         }
+        public static new GetTopicProduceConnectionArgs Empty => new GetTopicProduceConnectionArgs();
     }
 
-    public sealed class GetTopicProduceConnectionInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTopicProduceConnectionInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// InstanceId.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetTopicProduceConnectionInvokeArgs()
         {
         }
+        public static new GetTopicProduceConnectionInvokeArgs Empty => new GetTopicProduceConnectionInvokeArgs();
     }
 
 

@@ -9,30 +9,40 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const topic = new tencentcloud.Cls.Topic("topic", {
+ * const exampleLogset = new tencentcloud.cls.Logset("exampleLogset", {
+ *     logsetName: "tf_example",
+ *     tags: {
+ *         demo: "test",
+ *     },
+ * });
+ * const exampleTopic = new tencentcloud.cls.Topic("exampleTopic", {
+ *     topicName: "tf_example",
+ *     logsetId: exampleLogset.id,
  *     autoSplit: false,
- *     logsetId: "5cd3a17e-fb0b-418c-afd7-77b365397426",
  *     maxSplitPartitions: 20,
  *     partitionCount: 1,
- *     period: 10,
+ *     period: 30,
  *     storageType: "hot",
+ *     describes: "Test Demo.",
+ *     hotPeriod: 10,
  *     tags: {
  *         test: "test",
  *     },
- *     topicName: "topic",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cls topic can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cls/topic:Topic topic 2f5764c1-c833-44c5-84c7-950979b2a278
+ * $ pulumi import tencentcloud:Cls/topic:Topic example 2f5764c1-c833-44c5-84c7-950979b2a278
  * ```
  */
 export class Topic extends pulumi.CustomResource {
@@ -68,6 +78,14 @@ export class Topic extends pulumi.CustomResource {
      */
     public readonly autoSplit!: pulumi.Output<boolean>;
     /**
+     * Log Topic Description.
+     */
+    public readonly describes!: pulumi.Output<string | undefined>;
+    /**
+     * 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+     */
+    public readonly hotPeriod!: pulumi.Output<number>;
+    /**
      * Logset ID.
      */
     public readonly logsetId!: pulumi.Output<string>;
@@ -84,7 +102,7 @@ export class Topic extends pulumi.CustomResource {
      */
     public readonly period!: pulumi.Output<number>;
     /**
-     * Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
+     * Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
      */
     public readonly storageType!: pulumi.Output<string>;
     /**
@@ -110,6 +128,8 @@ export class Topic extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as TopicState | undefined;
             resourceInputs["autoSplit"] = state ? state.autoSplit : undefined;
+            resourceInputs["describes"] = state ? state.describes : undefined;
+            resourceInputs["hotPeriod"] = state ? state.hotPeriod : undefined;
             resourceInputs["logsetId"] = state ? state.logsetId : undefined;
             resourceInputs["maxSplitPartitions"] = state ? state.maxSplitPartitions : undefined;
             resourceInputs["partitionCount"] = state ? state.partitionCount : undefined;
@@ -126,6 +146,8 @@ export class Topic extends pulumi.CustomResource {
                 throw new Error("Missing required property 'topicName'");
             }
             resourceInputs["autoSplit"] = args ? args.autoSplit : undefined;
+            resourceInputs["describes"] = args ? args.describes : undefined;
+            resourceInputs["hotPeriod"] = args ? args.hotPeriod : undefined;
             resourceInputs["logsetId"] = args ? args.logsetId : undefined;
             resourceInputs["maxSplitPartitions"] = args ? args.maxSplitPartitions : undefined;
             resourceInputs["partitionCount"] = args ? args.partitionCount : undefined;
@@ -148,6 +170,14 @@ export interface TopicState {
      */
     autoSplit?: pulumi.Input<boolean>;
     /**
+     * Log Topic Description.
+     */
+    describes?: pulumi.Input<string>;
+    /**
+     * 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+     */
+    hotPeriod?: pulumi.Input<number>;
+    /**
      * Logset ID.
      */
     logsetId?: pulumi.Input<string>;
@@ -164,7 +194,7 @@ export interface TopicState {
      */
     period?: pulumi.Input<number>;
     /**
-     * Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
+     * Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
      */
     storageType?: pulumi.Input<string>;
     /**
@@ -186,6 +216,14 @@ export interface TopicArgs {
      */
     autoSplit?: pulumi.Input<boolean>;
     /**
+     * Log Topic Description.
+     */
+    describes?: pulumi.Input<string>;
+    /**
+     * 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+     */
+    hotPeriod?: pulumi.Input<number>;
+    /**
      * Logset ID.
      */
     logsetId: pulumi.Input<string>;
@@ -202,7 +240,7 @@ export interface TopicArgs {
      */
     period?: pulumi.Input<number>;
     /**
-     * Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first..
+     * Log topic storage class. Valid values: hot: real-time storage; cold: offline storage. Default value: hot. If cold is passed in, please contact the customer service to add the log topic to the allowlist first.
      */
     storageType?: pulumi.Input<string>;
     /**

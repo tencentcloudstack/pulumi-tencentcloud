@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// <summary>
         /// Use this data source to query detailed information of cam account_summary
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var accountSummary = Output.Create(Tencentcloud.Cam.GetAccountSummary.InvokeAsync());
-        ///     }
+        ///     var accountSummary = Tencentcloud.Cam.GetAccountSummary.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAccountSummaryResult> InvokeAsync(GetAccountSummaryArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAccountSummaryResult>("tencentcloud:Cam/getAccountSummary:getAccountSummary", args ?? new GetAccountSummaryArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccountSummaryResult>("tencentcloud:Cam/getAccountSummary:getAccountSummary", args ?? new GetAccountSummaryArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cam account_summary
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var accountSummary = Output.Create(Tencentcloud.Cam.GetAccountSummary.InvokeAsync());
-        ///     }
+        ///     var accountSummary = Tencentcloud.Cam.GetAccountSummary.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAccountSummaryResult> Invoke(GetAccountSummaryInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAccountSummaryResult>("tencentcloud:Cam/getAccountSummary:getAccountSummary", args ?? new GetAccountSummaryInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAccountSummaryResult>("tencentcloud:Cam/getAccountSummary:getAccountSummary", args ?? new GetAccountSummaryInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAccountSummaryArgs : Pulumi.InvokeArgs
+    public sealed class GetAccountSummaryArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetAccountSummaryArgs()
         {
         }
+        public static new GetAccountSummaryArgs Empty => new GetAccountSummaryArgs();
     }
 
-    public sealed class GetAccountSummaryInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAccountSummaryInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetAccountSummaryInvokeArgs()
         {
         }
+        public static new GetAccountSummaryInvokeArgs Empty => new GetAccountSummaryInvokeArgs();
     }
 
 

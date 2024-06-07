@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const datahubTask = pulumi.output(tencentcloud.Ckafka.getDatahubTask());
+ * const datahubTask = tencentcloud.Ckafka.getDatahubTask({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDatahubTask(args?: GetDatahubTaskArgs, opts?: pulumi.InvokeOptions): Promise<GetDatahubTaskResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ckafka/getDatahubTask:getDatahubTask", {
         "resource": args.resource,
         "resultOutputFile": args.resultOutputFile,
@@ -89,9 +89,22 @@ export interface GetDatahubTaskResult {
      */
     readonly taskType?: string;
 }
-
+/**
+ * Use this data source to query detailed information of ckafka datahubTask
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const datahubTask = tencentcloud.Ckafka.getDatahubTask({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDatahubTaskOutput(args?: GetDatahubTaskOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDatahubTaskResult> {
-    return pulumi.output(args).apply(a => getDatahubTask(a, opts))
+    return pulumi.output(args).apply((a: any) => getDatahubTask(a, opts))
 }
 
 /**

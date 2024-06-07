@@ -7,44 +7,50 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to manage address template group.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Address"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Address"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Address.NewTemplateGroup(ctx, "foo", &Address.TemplateGroupArgs{
-// 			TemplateIds: pulumi.StringArray{
-// 				pulumi.String("ipl-axaf24151"),
-// 				pulumi.String("ipl-axaf24152"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Address.NewTemplateGroup(ctx, "foo", &Address.TemplateGroupArgs{
+//				TemplateIds: pulumi.StringArray{
+//					pulumi.String("ipl-axaf24151"),
+//					pulumi.String("ipl-axaf24152"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // Address template group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Address/templateGroup:TemplateGroup foo ipmg-0np3u974
+// $ pulumi import tencentcloud:Address/templateGroup:TemplateGroup foo ipmg-0np3u974
 // ```
 type TemplateGroup struct {
 	pulumi.CustomResourceState
@@ -65,7 +71,7 @@ func NewTemplateGroup(ctx *pulumi.Context,
 	if args.TemplateIds == nil {
 		return nil, errors.New("invalid value for required argument 'TemplateIds'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TemplateGroup
 	err := ctx.RegisterResource("tencentcloud:Address/templateGroup:TemplateGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -146,7 +152,7 @@ func (i *TemplateGroup) ToTemplateGroupOutputWithContext(ctx context.Context) Te
 // TemplateGroupArrayInput is an input type that accepts TemplateGroupArray and TemplateGroupArrayOutput values.
 // You can construct a concrete instance of `TemplateGroupArrayInput` via:
 //
-//          TemplateGroupArray{ TemplateGroupArgs{...} }
+//	TemplateGroupArray{ TemplateGroupArgs{...} }
 type TemplateGroupArrayInput interface {
 	pulumi.Input
 
@@ -171,7 +177,7 @@ func (i TemplateGroupArray) ToTemplateGroupArrayOutputWithContext(ctx context.Co
 // TemplateGroupMapInput is an input type that accepts TemplateGroupMap and TemplateGroupMapOutput values.
 // You can construct a concrete instance of `TemplateGroupMapInput` via:
 //
-//          TemplateGroupMap{ "key": TemplateGroupArgs{...} }
+//	TemplateGroupMap{ "key": TemplateGroupArgs{...} }
 type TemplateGroupMapInput interface {
 	pulumi.Input
 

@@ -15,118 +15,114 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// <summary>
         /// Use this data source to query detailed information of waf attack_log_histogram
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Obtain the specified domain name log information
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetAttackLogHistogram.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetAttackLogHistogram.InvokeAsync(new Tencentcloud.Waf.GetAttackLogHistogramArgs
-        ///         {
-        ///             Domain = "domain.com",
-        ///             EndTime = "2023-09-29 00:00:00",
-        ///             QueryString = "method:GET",
-        ///             StartTime = "2023-09-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         Domain = "domain.com",
+        ///         EndTime = "2023-09-29 00:00:00",
+        ///         QueryString = "method:GET",
+        ///         StartTime = "2023-09-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Obtain all domain name log information
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetAttackLogHistogram.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetAttackLogHistogram.InvokeAsync(new Tencentcloud.Waf.GetAttackLogHistogramArgs
-        ///         {
-        ///             Domain = "all",
-        ///             EndTime = "2023-09-29 00:00:00",
-        ///             QueryString = "method:GET",
-        ///             StartTime = "2023-09-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         Domain = "all",
+        ///         EndTime = "2023-09-29 00:00:00",
+        ///         QueryString = "method:GET",
+        ///         StartTime = "2023-09-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAttackLogHistogramResult> InvokeAsync(GetAttackLogHistogramArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAttackLogHistogramResult>("tencentcloud:Waf/getAttackLogHistogram:getAttackLogHistogram", args ?? new GetAttackLogHistogramArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAttackLogHistogramResult>("tencentcloud:Waf/getAttackLogHistogram:getAttackLogHistogram", args ?? new GetAttackLogHistogramArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of waf attack_log_histogram
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Obtain the specified domain name log information
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetAttackLogHistogram.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetAttackLogHistogram.InvokeAsync(new Tencentcloud.Waf.GetAttackLogHistogramArgs
-        ///         {
-        ///             Domain = "domain.com",
-        ///             EndTime = "2023-09-29 00:00:00",
-        ///             QueryString = "method:GET",
-        ///             StartTime = "2023-09-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         Domain = "domain.com",
+        ///         EndTime = "2023-09-29 00:00:00",
+        ///         QueryString = "method:GET",
+        ///         StartTime = "2023-09-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Obtain all domain name log information
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetAttackLogHistogram.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetAttackLogHistogram.InvokeAsync(new Tencentcloud.Waf.GetAttackLogHistogramArgs
-        ///         {
-        ///             Domain = "all",
-        ///             EndTime = "2023-09-29 00:00:00",
-        ///             QueryString = "method:GET",
-        ///             StartTime = "2023-09-01 00:00:00",
-        ///         }));
-        ///     }
+        ///         Domain = "all",
+        ///         EndTime = "2023-09-29 00:00:00",
+        ///         QueryString = "method:GET",
+        ///         StartTime = "2023-09-01 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAttackLogHistogramResult> Invoke(GetAttackLogHistogramInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAttackLogHistogramResult>("tencentcloud:Waf/getAttackLogHistogram:getAttackLogHistogram", args ?? new GetAttackLogHistogramInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAttackLogHistogramResult>("tencentcloud:Waf/getAttackLogHistogram:getAttackLogHistogram", args ?? new GetAttackLogHistogramInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAttackLogHistogramArgs : Pulumi.InvokeArgs
+    public sealed class GetAttackLogHistogramArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Domain for query, all domain use all.
@@ -161,9 +157,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetAttackLogHistogramArgs()
         {
         }
+        public static new GetAttackLogHistogramArgs Empty => new GetAttackLogHistogramArgs();
     }
 
-    public sealed class GetAttackLogHistogramInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAttackLogHistogramInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Domain for query, all domain use all.
@@ -198,6 +195,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetAttackLogHistogramInvokeArgs()
         {
         }
+        public static new GetAttackLogHistogramInvokeArgs Empty => new GetAttackLogHistogramInvokeArgs();
     }
 
 

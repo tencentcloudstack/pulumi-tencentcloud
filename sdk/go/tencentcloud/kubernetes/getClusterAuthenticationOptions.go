@@ -8,35 +8,40 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of kubernetes clusterAuthenticationOptions
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kubernetes.GetClusterAuthenticationOptions(ctx, &kubernetes.GetClusterAuthenticationOptionsArgs{
-// 			ClusterId: "cls-kzilgv5m",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kubernetes.GetClusterAuthenticationOptions(ctx, &kubernetes.GetClusterAuthenticationOptionsArgs{
+//				ClusterId: "cls-kzilgv5m",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetClusterAuthenticationOptions(ctx *pulumi.Context, args *GetClusterAuthenticationOptionsArgs, opts ...pulumi.InvokeOption) (*GetClusterAuthenticationOptionsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClusterAuthenticationOptionsResult
 	err := ctx.Invoke("tencentcloud:Kubernetes/getClusterAuthenticationOptions:getClusterAuthenticationOptions", args, &rv, opts...)
 	if err != nil {

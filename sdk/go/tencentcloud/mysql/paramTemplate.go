@@ -8,117 +8,121 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mysql param template
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Availability"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
-// 			Product: "cdb",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// 			VpcId:            vpc.ID(),
-// 			CidrBlock:        pulumi.String("10.0.0.0/16"),
-// 			IsMulticast:      pulumi.Bool(false),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
-// 			Description: pulumi.String("mysql test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mysql.NewInstance(ctx, "exampleInstance", &Mysql.InstanceArgs{
-// 			InternetService:  pulumi.Int(1),
-// 			EngineVersion:    pulumi.String("5.7"),
-// 			ChargeType:       pulumi.String("POSTPAID"),
-// 			RootPassword:     pulumi.String("PassWord123"),
-// 			SlaveDeployMode:  pulumi.Int(0),
-// 			AvailabilityZone: pulumi.String(zones.Zones[0].Name),
-// 			SlaveSyncMode:    pulumi.Int(1),
-// 			InstanceName:     pulumi.String("tf-example-mysql"),
-// 			MemSize:          pulumi.Int(4000),
-// 			VolumeSize:       pulumi.Int(200),
-// 			VpcId:            vpc.ID(),
-// 			SubnetId:         subnet.ID(),
-// 			IntranetPort:     pulumi.Int(3306),
-// 			SecurityGroups: pulumi.StringArray{
-// 				securityGroup.ID(),
-// 			},
-// 			Tags: pulumi.AnyMap{
-// 				"name": pulumi.Any("test"),
-// 			},
-// 			Parameters: pulumi.AnyMap{
-// 				"character_set_server": pulumi.Any("utf8"),
-// 				"max_connections":      pulumi.Any("1000"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Mysql.NewParamTemplate(ctx, "exampleParamTemplate", &Mysql.ParamTemplateArgs{
-// 			Description:   pulumi.String("desc."),
-// 			EngineVersion: pulumi.String("8.0"),
-// 			ParamLists: mysql.ParamTemplateParamListArray{
-// 				&mysql.ParamTemplateParamListArgs{
-// 					CurrentValue: pulumi.String("1"),
-// 					Name:         pulumi.String("auto_increment_increment"),
-// 				},
-// 				&mysql.ParamTemplateParamListArgs{
-// 					CurrentValue: pulumi.String("1"),
-// 					Name:         pulumi.String("auto_increment_offset"),
-// 				},
-// 				&mysql.ParamTemplateParamListArgs{
-// 					CurrentValue: pulumi.String("ON"),
-// 					Name:         pulumi.String("automatic_sp_privileges"),
-// 				},
-// 			},
-// 			TemplateType: pulumi.String("HIGH_STABILITY"),
-// 			EngineType:   pulumi.String("InnoDB"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			zones, err := Availability.GetZonesByProduct(ctx, &availability.GetZonesByProductArgs{
+//				Product: "cdb",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			securityGroup, err := Security.NewGroup(ctx, "securityGroup", &Security.GroupArgs{
+//				Description: pulumi.String("mysql test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mysql.NewInstance(ctx, "exampleInstance", &Mysql.InstanceArgs{
+//				InternetService:  pulumi.Int(1),
+//				EngineVersion:    pulumi.String("5.7"),
+//				ChargeType:       pulumi.String("POSTPAID"),
+//				RootPassword:     pulumi.String("PassWord123"),
+//				SlaveDeployMode:  pulumi.Int(0),
+//				AvailabilityZone: pulumi.String(zones.Zones[0].Name),
+//				SlaveSyncMode:    pulumi.Int(1),
+//				InstanceName:     pulumi.String("tf-example-mysql"),
+//				MemSize:          pulumi.Int(4000),
+//				VolumeSize:       pulumi.Int(200),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				IntranetPort:     pulumi.Int(3306),
+//				SecurityGroups: pulumi.StringArray{
+//					securityGroup.ID(),
+//				},
+//				Tags: pulumi.Map{
+//					"name": pulumi.Any("test"),
+//				},
+//				Parameters: pulumi.Map{
+//					"character_set_server": pulumi.Any("utf8"),
+//					"max_connections":      pulumi.Any("1000"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Mysql.NewParamTemplate(ctx, "exampleParamTemplate", &Mysql.ParamTemplateArgs{
+//				Description:   pulumi.String("desc."),
+//				EngineVersion: pulumi.String("8.0"),
+//				ParamLists: mysql.ParamTemplateParamListArray{
+//					&mysql.ParamTemplateParamListArgs{
+//						CurrentValue: pulumi.String("1"),
+//						Name:         pulumi.String("auto_increment_increment"),
+//					},
+//					&mysql.ParamTemplateParamListArgs{
+//						CurrentValue: pulumi.String("1"),
+//						Name:         pulumi.String("auto_increment_offset"),
+//					},
+//					&mysql.ParamTemplateParamListArgs{
+//						CurrentValue: pulumi.String("ON"),
+//						Name:         pulumi.String("automatic_sp_privileges"),
+//					},
+//				},
+//				TemplateType: pulumi.String("HIGH_STABILITY"),
+//				EngineType:   pulumi.String("InnoDB"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // mysql param template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mysql/paramTemplate:ParamTemplate param_template template_id
+// $ pulumi import tencentcloud:Mysql/paramTemplate:ParamTemplate param_template template_id
 // ```
 type ParamTemplate struct {
 	pulumi.CustomResourceState
@@ -146,7 +150,7 @@ func NewParamTemplate(ctx *pulumi.Context,
 		args = &ParamTemplateArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ParamTemplate
 	err := ctx.RegisterResource("tencentcloud:Mysql/paramTemplate:ParamTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -267,7 +271,7 @@ func (i *ParamTemplate) ToParamTemplateOutputWithContext(ctx context.Context) Pa
 // ParamTemplateArrayInput is an input type that accepts ParamTemplateArray and ParamTemplateArrayOutput values.
 // You can construct a concrete instance of `ParamTemplateArrayInput` via:
 //
-//          ParamTemplateArray{ ParamTemplateArgs{...} }
+//	ParamTemplateArray{ ParamTemplateArgs{...} }
 type ParamTemplateArrayInput interface {
 	pulumi.Input
 
@@ -292,7 +296,7 @@ func (i ParamTemplateArray) ToParamTemplateArrayOutputWithContext(ctx context.Co
 // ParamTemplateMapInput is an input type that accepts ParamTemplateMap and ParamTemplateMapOutput values.
 // You can construct a concrete instance of `ParamTemplateMapInput` via:
 //
-//          ParamTemplateMap{ "key": ParamTemplateArgs{...} }
+//	ParamTemplateMap{ "key": ParamTemplateArgs{...} }
 type ParamTemplateMapInput interface {
 	pulumi.Input
 

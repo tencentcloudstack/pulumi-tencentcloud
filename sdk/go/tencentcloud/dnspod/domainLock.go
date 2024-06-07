@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dnspod domainLock
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.NewDomainLock(ctx, "domainLock", &Dnspod.DomainLockArgs{
-// 			Domain:   pulumi.String("dnspod.cn"),
-// 			LockDays: pulumi.Int(30),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.NewDomainLock(ctx, "domainLock", &Dnspod.DomainLockArgs{
+//				Domain:   pulumi.String("dnspod.cn"),
+//				LockDays: pulumi.Int(30),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type DomainLock struct {
 	pulumi.CustomResourceState
 
@@ -60,7 +66,7 @@ func NewDomainLock(ctx *pulumi.Context,
 	if args.LockDays == nil {
 		return nil, errors.New("invalid value for required argument 'LockDays'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DomainLock
 	err := ctx.RegisterResource("tencentcloud:Dnspod/domainLock:DomainLock", name, args, &resource, opts...)
 	if err != nil {
@@ -145,7 +151,7 @@ func (i *DomainLock) ToDomainLockOutputWithContext(ctx context.Context) DomainLo
 // DomainLockArrayInput is an input type that accepts DomainLockArray and DomainLockArrayOutput values.
 // You can construct a concrete instance of `DomainLockArrayInput` via:
 //
-//          DomainLockArray{ DomainLockArgs{...} }
+//	DomainLockArray{ DomainLockArgs{...} }
 type DomainLockArrayInput interface {
 	pulumi.Input
 
@@ -170,7 +176,7 @@ func (i DomainLockArray) ToDomainLockArrayOutputWithContext(ctx context.Context)
 // DomainLockMapInput is an input type that accepts DomainLockMap and DomainLockMapOutput values.
 // You can construct a concrete instance of `DomainLockMapInput` via:
 //
-//          DomainLockMap{ "key": DomainLockArgs{...} }
+//	DomainLockMap{ "key": DomainLockArgs{...} }
 type DomainLockMapInput interface {
 	pulumi.Input
 

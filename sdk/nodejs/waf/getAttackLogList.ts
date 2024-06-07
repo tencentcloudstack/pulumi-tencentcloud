@@ -2,20 +2,23 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of waf attackLogList
  *
  * ## Example Usage
+ *
  * ### Obtain the specified domain name attack log list
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getAttackLogList({
+ * const example = tencentcloud.Waf.getAttackLogList({
  *     domain: "domain.com",
  *     endTime: "2023-09-07 00:00:00",
  *     page: 0,
@@ -23,15 +26,18 @@ import * as utilities from "../utilities";
  *     queryString: "method:GET",
  *     sort: "desc",
  *     startTime: "2023-09-01 00:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Obtain all domain name attack log list
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Waf.getAttackLogList({
+ * const example = tencentcloud.Waf.getAttackLogList({
  *     domain: "all",
  *     endTime: "2023-09-07 00:00:00",
  *     page: 1,
@@ -39,15 +45,13 @@ import * as utilities from "../utilities";
  *     queryString: "method:GET",
  *     sort: "asc",
  *     startTime: "2023-09-01 00:00:00",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAttackLogList(args: GetAttackLogListArgs, opts?: pulumi.InvokeOptions): Promise<GetAttackLogListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Waf/getAttackLogList:getAttackLogList", {
         "domain": args.domain,
         "endTime": args.endTime,
@@ -119,9 +123,51 @@ export interface GetAttackLogListResult {
     readonly sort?: string;
     readonly startTime: string;
 }
-
+/**
+ * Use this data source to query detailed information of waf attackLogList
+ *
+ * ## Example Usage
+ *
+ * ### Obtain the specified domain name attack log list
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getAttackLogList({
+ *     domain: "domain.com",
+ *     endTime: "2023-09-07 00:00:00",
+ *     page: 0,
+ *     queryCount: 10,
+ *     queryString: "method:GET",
+ *     sort: "desc",
+ *     startTime: "2023-09-01 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Obtain all domain name attack log list
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Waf.getAttackLogList({
+ *     domain: "all",
+ *     endTime: "2023-09-07 00:00:00",
+ *     page: 1,
+ *     queryCount: 20,
+ *     queryString: "method:GET",
+ *     sort: "asc",
+ *     startTime: "2023-09-01 00:00:00",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAttackLogListOutput(args: GetAttackLogListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAttackLogListResult> {
-    return pulumi.output(args).apply(a => getAttackLogList(a, opts))
+    return pulumi.output(args).apply((a: any) => getAttackLogList(a, opts))
 }
 
 /**

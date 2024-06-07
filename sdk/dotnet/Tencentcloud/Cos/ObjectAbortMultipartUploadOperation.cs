@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var abortMultipartUpload = new Tencentcloud.Cos.ObjectAbortMultipartUploadOperation("abortMultipartUpload", new()
     ///     {
-    ///         var abortMultipartUpload = new Tencentcloud.Cos.ObjectAbortMultipartUploadOperation("abortMultipartUpload", new Tencentcloud.Cos.ObjectAbortMultipartUploadOperationArgs
-    ///         {
-    ///             Bucket = "keep-test-xxxxxx",
-    ///             Key = "object",
-    ///             UploadId = "xxxxxx",
-    ///         });
-    ///     }
+    ///         Bucket = "keep-test-xxxxxx",
+    ///         Key = "object",
+    ///         UploadId = "xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cos/objectAbortMultipartUploadOperation:ObjectAbortMultipartUploadOperation")]
-    public partial class ObjectAbortMultipartUploadOperation : Pulumi.CustomResource
+    public partial class ObjectAbortMultipartUploadOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Bucket.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         }
     }
 
-    public sealed class ObjectAbortMultipartUploadOperationArgs : Pulumi.ResourceArgs
+    public sealed class ObjectAbortMultipartUploadOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket.
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public ObjectAbortMultipartUploadOperationArgs()
         {
         }
+        public static new ObjectAbortMultipartUploadOperationArgs Empty => new ObjectAbortMultipartUploadOperationArgs();
     }
 
-    public sealed class ObjectAbortMultipartUploadOperationState : Pulumi.ResourceArgs
+    public sealed class ObjectAbortMultipartUploadOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket.
@@ -148,5 +150,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public ObjectAbortMultipartUploadOperationState()
         {
         }
+        public static new ObjectAbortMultipartUploadOperationState Empty => new ObjectAbortMultipartUploadOperationState();
     }
 }

@@ -8,20 +8,23 @@ import * as utilities from "../utilities";
  * Provides a resource to create a sms template
  *
  * ## Example Usage
+ *
  * ### Create a sms template
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const template = new tencentcloud.Sms.Template("template", {
- *     international: 0, // Mainland China SMS
+ * const template = new tencentcloud.sms.Template("template", {
+ *     international: 0,
  *     remark: "terraform example",
- *     smsType: 0, // regular SMS
+ *     smsType: 0,
  *     templateContent: "example for sms template",
  *     templateName: "tf_example_sms_template",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class Template extends pulumi.CustomResource {
     /**

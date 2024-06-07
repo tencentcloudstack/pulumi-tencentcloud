@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// <summary>
         /// Use this data source to query detailed information of ckafka group_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groupInfo = Tencentcloud.Ckafka.GetGroupInfo.Invoke(new()
         ///     {
-        ///         var groupInfo = Output.Create(Tencentcloud.Ckafka.GetGroupInfo.InvokeAsync(new Tencentcloud.Ckafka.GetGroupInfoArgs
+        ///         GroupLists = new[]
         ///         {
-        ///             GroupLists = 
-        ///             {
-        ///                 "xxxxxx",
-        ///             },
-        ///             InstanceId = "ckafka-xxxxxx",
-        ///         }));
-        ///     }
+        ///             "xxxxxx",
+        ///         },
+        ///         InstanceId = "ckafka-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGroupInfoResult> InvokeAsync(GetGroupInfoArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGroupInfoResult>("tencentcloud:Ckafka/getGroupInfo:getGroupInfo", args ?? new GetGroupInfoArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupInfoResult>("tencentcloud:Ckafka/getGroupInfo:getGroupInfo", args ?? new GetGroupInfoArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of ckafka group_info
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var groupInfo = Tencentcloud.Ckafka.GetGroupInfo.Invoke(new()
         ///     {
-        ///         var groupInfo = Output.Create(Tencentcloud.Ckafka.GetGroupInfo.InvokeAsync(new Tencentcloud.Ckafka.GetGroupInfoArgs
+        ///         GroupLists = new[]
         ///         {
-        ///             GroupLists = 
-        ///             {
-        ///                 "xxxxxx",
-        ///             },
-        ///             InstanceId = "ckafka-xxxxxx",
-        ///         }));
-        ///     }
+        ///             "xxxxxx",
+        ///         },
+        ///         InstanceId = "ckafka-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGroupInfoResult> Invoke(GetGroupInfoInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGroupInfoResult>("tencentcloud:Ckafka/getGroupInfo:getGroupInfo", args ?? new GetGroupInfoInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGroupInfoResult>("tencentcloud:Ckafka/getGroupInfo:getGroupInfo", args ?? new GetGroupInfoInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGroupInfoArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupInfoArgs : global::Pulumi.InvokeArgs
     {
         [Input("groupLists", required: true)]
         private List<string>? _groupLists;
@@ -109,9 +103,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetGroupInfoArgs()
         {
         }
+        public static new GetGroupInfoArgs Empty => new GetGroupInfoArgs();
     }
 
-    public sealed class GetGroupInfoInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupInfoInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("groupLists", required: true)]
         private InputList<string>? _groupLists;
@@ -140,6 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public GetGroupInfoInvokeArgs()
         {
         }
+        public static new GetGroupInfoInvokeArgs Empty => new GetGroupInfoInvokeArgs();
     }
 
 

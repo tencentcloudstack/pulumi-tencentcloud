@@ -15,42 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var myLog = new Tencentcloud.Dbbrain.TdsqlAuditLog("myLog", new()
     ///     {
-    ///         var myLog = new Tencentcloud.Dbbrain.TdsqlAuditLog("myLog", new Tencentcloud.Dbbrain.TdsqlAuditLogArgs
+    ///         EndTime = "%s",
+    ///         Filter = new Tencentcloud.Dbbrain.Inputs.TdsqlAuditLogFilterArgs
     ///         {
-    ///             EndTime = "%s",
-    ///             Filter = new Tencentcloud.Dbbrain.Inputs.TdsqlAuditLogFilterArgs
+    ///             Hosts = new[]
     ///             {
-    ///                 Hosts = 
-    ///                 {
-    ///                     "%%",
-    ///                     "127.0.0.1",
-    ///                 },
-    ///                 Users = 
-    ///                 {
-    ///                     "tf_test",
-    ///                     "mysql",
-    ///                 },
+    ///                 "%%",
+    ///                 "127.0.0.1",
     ///             },
-    ///             InstanceId = "%s",
-    ///             NodeRequestType = "dcdb",
-    ///             Product = "dcdb",
-    ///             StartTime = "%s",
-    ///         });
-    ///     }
+    ///             Users = new[]
+    ///             {
+    ///                 "tf_test",
+    ///                 "mysql",
+    ///             },
+    ///         },
+    ///         InstanceId = "%s",
+    ///         NodeRequestType = "dcdb",
+    ///         Product = "dcdb",
+    ///         StartTime = "%s",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dbbrain/tdsqlAuditLog:TdsqlAuditLog")]
-    public partial class TdsqlAuditLog : Pulumi.CustomResource
+    public partial class TdsqlAuditLog : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Deadline time, such as `2019-09-11 10:13:14`.
@@ -133,7 +134,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         }
     }
 
-    public sealed class TdsqlAuditLogArgs : Pulumi.ResourceArgs
+    public sealed class TdsqlAuditLogArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Deadline time, such as `2019-09-11 10:13:14`.
@@ -174,9 +175,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public TdsqlAuditLogArgs()
         {
         }
+        public static new TdsqlAuditLogArgs Empty => new TdsqlAuditLogArgs();
     }
 
-    public sealed class TdsqlAuditLogState : Pulumi.ResourceArgs
+    public sealed class TdsqlAuditLogState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Deadline time, such as `2019-09-11 10:13:14`.
@@ -217,5 +219,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         public TdsqlAuditLogState()
         {
         }
+        public static new TdsqlAuditLogState Empty => new TdsqlAuditLogState();
     }
 }

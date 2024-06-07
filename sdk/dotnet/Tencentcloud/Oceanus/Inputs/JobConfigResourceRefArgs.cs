@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
 {
 
-    public sealed class JobConfigResourceRefArgs : Pulumi.ResourceArgs
+    public sealed class JobConfigResourceRefArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Resource ID.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
         public JobConfigResourceRefArgs()
         {
         }
+        public static new JobConfigResourceRefArgs Empty => new JobConfigResourceRefArgs();
     }
 }

@@ -13,16 +13,127 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// <summary>
     /// Provides a resource to create a cls index.
     /// 
+    /// ## Example Usage
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var exampleLogset = new Tencentcloud.Cls.Logset("exampleLogset", new()
+    ///     {
+    ///         LogsetName = "tf_example",
+    ///         Tags = 
+    ///         {
+    ///             { "demo", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleTopic = new Tencentcloud.Cls.Topic("exampleTopic", new()
+    ///     {
+    ///         TopicName = "tf_example",
+    ///         LogsetId = exampleLogset.Id,
+    ///         AutoSplit = false,
+    ///         MaxSplitPartitions = 20,
+    ///         PartitionCount = 1,
+    ///         Period = 30,
+    ///         StorageType = "hot",
+    ///         Describes = "Test Demo.",
+    ///         HotPeriod = 10,
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var tokenizerValue = "@&amp;?|#()='\",;:&lt;&gt;[]{}";
+    /// 
+    ///     var exampleIndex = new Tencentcloud.Cls.Index("exampleIndex", new()
+    ///     {
+    ///         TopicId = exampleTopic.Id,
+    ///         Rule = new Tencentcloud.Cls.Inputs.IndexRuleArgs
+    ///         {
+    ///             FullText = new Tencentcloud.Cls.Inputs.IndexRuleFullTextArgs
+    ///             {
+    ///                 CaseSensitive = true,
+    ///                 Tokenizer = tokenizerValue,
+    ///                 ContainZH = true,
+    ///             },
+    ///             KeyValue = new Tencentcloud.Cls.Inputs.IndexRuleKeyValueArgs
+    ///             {
+    ///                 CaseSensitive = true,
+    ///                 KeyValues = new[]
+    ///                 {
+    ///                     new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueArgs
+    ///                     {
+    ///                         Key = "hello",
+    ///                         Value = new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueArgs
+    ///                         {
+    ///                             ContainZH = true,
+    ///                             SqlFlag = true,
+    ///                             Tokenizer = tokenizerValue,
+    ///                             Type = "text",
+    ///                         },
+    ///                     },
+    ///                     new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueArgs
+    ///                     {
+    ///                         Key = "world",
+    ///                         Value = new Tencentcloud.Cls.Inputs.IndexRuleKeyValueKeyValueValueArgs
+    ///                         {
+    ///                             ContainZH = true,
+    ///                             SqlFlag = true,
+    ///                             Tokenizer = tokenizerValue,
+    ///                             Type = "text",
+    ///                         },
+    ///                     },
+    ///                 },
+    ///             },
+    ///             Tag = new Tencentcloud.Cls.Inputs.IndexRuleTagArgs
+    ///             {
+    ///                 CaseSensitive = true,
+    ///                 KeyValues = new[]
+    ///                 {
+    ///                     new Tencentcloud.Cls.Inputs.IndexRuleTagKeyValueArgs
+    ///                     {
+    ///                         Key = "terraform",
+    ///                         Value = new Tencentcloud.Cls.Inputs.IndexRuleTagKeyValueValueArgs
+    ///                         {
+    ///                             ContainZH = true,
+    ///                             SqlFlag = true,
+    ///                             Tokenizer = tokenizerValue,
+    ///                             Type = "text",
+    ///                         },
+    ///                     },
+    ///                 },
+    ///             },
+    ///             DynamicIndex = new Tencentcloud.Cls.Inputs.IndexRuleDynamicIndexArgs
+    ///             {
+    ///                 Status = true,
+    ///             },
+    ///         },
+    ///         Status = true,
+    ///         IncludeInternalFields = true,
+    ///         MetadataFlag = 1,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ## Import
     /// 
     /// cls cos index can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/index:Index index 0937e56f-4008-49d2-ad2d-69c52a9f11cc
+    /// $ pulumi import tencentcloud:Cls/index:Index example 0937e56f-4008-49d2-ad2d-69c52a9f11cc
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/index:Index")]
-    public partial class Index : Pulumi.CustomResource
+    public partial class Index : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.
@@ -99,7 +210,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
     }
 
-    public sealed class IndexArgs : Pulumi.ResourceArgs
+    public sealed class IndexArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.
@@ -134,9 +245,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public IndexArgs()
         {
         }
+        public static new IndexArgs Empty => new IndexArgs();
     }
 
-    public sealed class IndexState : Pulumi.ResourceArgs
+    public sealed class IndexState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Internal field marker of full-text index. Default value: false. Valid value: false: excluding internal fields; true: including internal fields.
@@ -171,5 +283,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public IndexState()
         {
         }
+        public static new IndexState Empty => new IndexState();
     }
 }

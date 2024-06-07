@@ -9,16 +9,18 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const objectDownload = new tencentcloud.Cos.ObjectDownloadOperation("object_download", {
+ * const objectDownload = new tencentcloud.cos.ObjectDownloadOperation("objectDownload", {
  *     bucket: "xxxxxxx",
  *     downloadPath: "/tmp/test.txt",
  *     key: "test.txt",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ObjectDownloadOperation extends pulumi.CustomResource {
     /**

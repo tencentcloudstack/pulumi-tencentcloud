@@ -15,58 +15,59 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var ckafkaConsumer = new Tencentcloud.Cls.CkafkaConsumer("ckafkaConsumer", new()
     ///     {
-    ///         var ckafkaConsumer = new Tencentcloud.Cls.CkafkaConsumer("ckafkaConsumer", new Tencentcloud.Cls.CkafkaConsumerArgs
+    ///         Ckafka = new Tencentcloud.Cls.Inputs.CkafkaConsumerCkafkaArgs
     ///         {
-    ///             Ckafka = new Tencentcloud.Cls.Inputs.CkafkaConsumerCkafkaArgs
+    ///             InstanceId = "ckafka-qzoeaqx8",
+    ///             InstanceName = "ckafka-instance",
+    ///             TopicId = "topic-c6tm4kpm",
+    ///             TopicName = "name",
+    ///             Vip = "172.16.112.23",
+    ///             Vport = "9092",
+    ///         },
+    ///         Compression = 1,
+    ///         Content = new Tencentcloud.Cls.Inputs.CkafkaConsumerContentArgs
+    ///         {
+    ///             EnableTag = true,
+    ///             MetaFields = new[]
     ///             {
-    ///                 InstanceId = "ckafka-qzoeaqx8",
-    ///                 InstanceName = "ckafka-instance",
-    ///                 TopicId = "topic-c6tm4kpm",
-    ///                 TopicName = "name",
-    ///                 Vip = "172.16.112.23",
-    ///                 Vport = "9092",
+    ///                 "__FILENAME__",
+    ///                 "__HOSTNAME__",
+    ///                 "__PKGID__",
+    ///                 "__SOURCE__",
+    ///                 "__TIMESTAMP__",
     ///             },
-    ///             Compression = 1,
-    ///             Content = new Tencentcloud.Cls.Inputs.CkafkaConsumerContentArgs
-    ///             {
-    ///                 EnableTag = true,
-    ///                 MetaFields = 
-    ///                 {
-    ///                     "__FILENAME__",
-    ///                     "__HOSTNAME__",
-    ///                     "__PKGID__",
-    ///                     "__SOURCE__",
-    ///                     "__TIMESTAMP__",
-    ///                 },
-    ///                 TagJsonNotTiled = true,
-    ///                 TimestampAccuracy = 2,
-    ///             },
-    ///             NeedContent = true,
-    ///             TopicId = "7e34a3a7-635e-4da8-9005-88106c1fde69",
-    ///         });
-    ///     }
+    ///             TagJsonNotTiled = true,
+    ///             TimestampAccuracy = 2,
+    ///         },
+    ///         NeedContent = true,
+    ///         TopicId = "7e34a3a7-635e-4da8-9005-88106c1fde69",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cls ckafka_consumer can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cls/ckafkaConsumer:CkafkaConsumer ckafka_consumer topic_id
+    /// $ pulumi import tencentcloud:Cls/ckafkaConsumer:CkafkaConsumer ckafka_consumer topic_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cls/ckafkaConsumer:CkafkaConsumer")]
-    public partial class CkafkaConsumer : Pulumi.CustomResource
+    public partial class CkafkaConsumer : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ckafka info.
@@ -143,7 +144,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         }
     }
 
-    public sealed class CkafkaConsumerArgs : Pulumi.ResourceArgs
+    public sealed class CkafkaConsumerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ckafka info.
@@ -178,9 +179,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public CkafkaConsumerArgs()
         {
         }
+        public static new CkafkaConsumerArgs Empty => new CkafkaConsumerArgs();
     }
 
-    public sealed class CkafkaConsumerState : Pulumi.ResourceArgs
+    public sealed class CkafkaConsumerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ckafka info.
@@ -215,5 +217,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public CkafkaConsumerState()
         {
         }
+        public static new CkafkaConsumerState Empty => new CkafkaConsumerState();
     }
 }

@@ -9,10 +9,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
  *     bandwidth: 10,
@@ -28,13 +29,11 @@ import * as utilities from "../utilities";
  *     id: fooSecurityPolicy.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSecurityPolicies(args: GetSecurityPoliciesArgs, opts?: pulumi.InvokeOptions): Promise<GetSecurityPoliciesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Gaap/getSecurityPolicies:getSecurityPolicies", {
         "id": args.id,
         "resultOutputFile": args.resultOutputFile,
@@ -74,9 +73,35 @@ export interface GetSecurityPoliciesResult {
      */
     readonly status: string;
 }
-
+/**
+ * Use this data source to query security policies of GAAP proxy.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const fooProxy = new tencentcloud.gaap.Proxy("fooProxy", {
+ *     bandwidth: 10,
+ *     concurrent: 2,
+ *     accessRegion: "SouthChina",
+ *     realserverRegion: "NorthChina",
+ * });
+ * const fooSecurityPolicy = new tencentcloud.gaap.SecurityPolicy("fooSecurityPolicy", {
+ *     proxyId: fooProxy.id,
+ *     action: "ACCEPT",
+ * });
+ * const fooSecurityPolicies = tencentcloud.Gaap.getSecurityPoliciesOutput({
+ *     id: fooSecurityPolicy.id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSecurityPoliciesOutput(args: GetSecurityPoliciesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSecurityPoliciesResult> {
-    return pulumi.output(args).apply(a => getSecurityPolicies(a, opts))
+    return pulumi.output(args).apply((a: any) => getSecurityPolicies(a, opts))
 }
 
 /**

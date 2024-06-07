@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketInventoryDestinationArgs : Pulumi.ResourceArgs
+    public sealed class BucketInventoryDestinationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the bucket owner.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketInventoryDestinationArgs()
         {
         }
+        public static new BucketInventoryDestinationArgs Empty => new BucketInventoryDestinationArgs();
     }
 }

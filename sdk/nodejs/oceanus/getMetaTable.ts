@@ -9,24 +9,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Oceanus.getMetaTable({
+ * const example = tencentcloud.Oceanus.getMetaTable({
  *     catalog: "_dc",
  *     database: "_db",
  *     table: "tf_table",
  *     workSpaceId: "space-6w8eab6f",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getMetaTable(args: GetMetaTableArgs, opts?: pulumi.InvokeOptions): Promise<GetMetaTableResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Oceanus/getMetaTable:getMetaTable", {
         "catalog": args.catalog,
         "database": args.database,
@@ -88,9 +87,27 @@ export interface GetMetaTableResult {
     readonly table: string;
     readonly workSpaceId: string;
 }
-
+/**
+ * Use this data source to query detailed information of oceanus metaTable
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Oceanus.getMetaTable({
+ *     catalog: "_dc",
+ *     database: "_db",
+ *     table: "tf_table",
+ *     workSpaceId: "space-6w8eab6f",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getMetaTableOutput(args: GetMetaTableOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetMetaTableResult> {
-    return pulumi.output(args).apply(a => getMetaTable(a, opts))
+    return pulumi.output(args).apply((a: any) => getMetaTable(a, opts))
 }
 
 /**

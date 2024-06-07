@@ -8,51 +8,56 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of SSM secret version
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssm"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleSecret, err := Ssm.NewSecret(ctx, "exampleSecret", &Ssm.SecretArgs{
-// 			SecretName:  pulumi.String("tf-example"),
-// 			Description: pulumi.String("desc."),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		v1, err := Ssm.NewSecretVersion(ctx, "v1", &Ssm.SecretVersionArgs{
-// 			SecretName:   exampleSecret.SecretName,
-// 			VersionId:    pulumi.String("v1"),
-// 			SecretBinary: pulumi.String("MTIzMTIzMTIzMTIzMTIzQQ=="),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Ssm.GetSecretVersionsOutput(ctx, ssm.GetSecretVersionsOutputArgs{
-// 			SecretName: v1.SecretName,
-// 			VersionId:  v1.VersionId,
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleSecret, err := Ssm.NewSecret(ctx, "exampleSecret", &Ssm.SecretArgs{
+//				SecretName:  pulumi.String("tf-example"),
+//				Description: pulumi.String("desc."),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			v1, err := Ssm.NewSecretVersion(ctx, "v1", &Ssm.SecretVersionArgs{
+//				SecretName:   exampleSecret.SecretName,
+//				VersionId:    pulumi.String("v1"),
+//				SecretBinary: pulumi.String("MTIzMTIzMTIzMTIzMTIzQQ=="),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Ssm.GetSecretVersionsOutput(ctx, ssm.GetSecretVersionsOutputArgs{
+//				SecretName: v1.SecretName,
+//				VersionId:  v1.VersionId,
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSecretVersions(ctx *pulumi.Context, args *GetSecretVersionsArgs, opts ...pulumi.InvokeOption) (*GetSecretVersionsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSecretVersionsResult
 	err := ctx.Invoke("tencentcloud:Ssm/getSecretVersions:getSecretVersions", args, &rv, opts...)
 	if err != nil {

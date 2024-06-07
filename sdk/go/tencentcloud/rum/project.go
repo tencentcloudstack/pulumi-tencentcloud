@@ -7,47 +7,53 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a rum project
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Rum.NewProject(ctx, "project", &Rum.ProjectArgs{
-// 			Desc:           pulumi.String("projectDesc-1"),
-// 			EnableUrlGroup: pulumi.Int(0),
-// 			InstanceId:     pulumi.String("rum-pasZKEI3RLgakj"),
-// 			Rate:           pulumi.String("100"),
-// 			Repo:           pulumi.String(""),
-// 			Type:           pulumi.String("web"),
-// 			Url:            pulumi.String("iac-tf.com"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Rum.NewProject(ctx, "project", &Rum.ProjectArgs{
+//				Desc:           pulumi.String("projectDesc-1"),
+//				EnableUrlGroup: pulumi.Int(0),
+//				InstanceId:     pulumi.String("rum-pasZKEI3RLgakj"),
+//				Rate:           pulumi.String("100"),
+//				Repo:           pulumi.String(""),
+//				Type:           pulumi.String("web"),
+//				Url:            pulumi.String("iac-tf.com"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // rum project can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Rum/project:Project project project_id
+// $ pulumi import tencentcloud:Rum/project:Project project project_id
 // ```
 type Project struct {
 	pulumi.CustomResourceState
@@ -103,7 +109,7 @@ func NewProject(ctx *pulumi.Context,
 	if args.Type == nil {
 		return nil, errors.New("invalid value for required argument 'Type'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Project
 	err := ctx.RegisterResource("tencentcloud:Rum/project:Project", name, args, &resource, opts...)
 	if err != nil {
@@ -260,7 +266,7 @@ func (i *Project) ToProjectOutputWithContext(ctx context.Context) ProjectOutput 
 // ProjectArrayInput is an input type that accepts ProjectArray and ProjectArrayOutput values.
 // You can construct a concrete instance of `ProjectArrayInput` via:
 //
-//          ProjectArray{ ProjectArgs{...} }
+//	ProjectArray{ ProjectArgs{...} }
 type ProjectArrayInput interface {
 	pulumi.Input
 
@@ -285,7 +291,7 @@ func (i ProjectArray) ToProjectArrayOutputWithContext(ctx context.Context) Proje
 // ProjectMapInput is an input type that accepts ProjectMap and ProjectMapOutput values.
 // You can construct a concrete instance of `ProjectMapInput` via:
 //
-//          ProjectMap{ "key": ProjectArgs{...} }
+//	ProjectMap{ "key": ProjectArgs{...} }
 type ProjectMapInput interface {
 	pulumi.Input
 

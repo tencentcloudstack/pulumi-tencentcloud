@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const securityGroup = new tencentcloud.Elasticsearch.SecurityGroup("security_group", {
+ * const securityGroup = new tencentcloud.elasticsearch.SecurityGroup("securityGroup", {
  *     instanceId: "es-5wn36he6",
  *     securityGroupIds: [
  *         "sg-mayqdlt1",
@@ -21,13 +22,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * elasticsearch security_group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Elasticsearch/securityGroup:SecurityGroup security_group instance_id
+ * $ pulumi import tencentcloud:Elasticsearch/securityGroup:SecurityGroup security_group instance_id
  * ```
  */
 export class SecurityGroup extends pulumi.CustomResource {

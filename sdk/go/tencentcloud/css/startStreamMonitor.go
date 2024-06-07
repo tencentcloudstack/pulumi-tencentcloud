@@ -7,44 +7,50 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a css startStreamMonitor
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewStartStreamMonitor(ctx, "startStreamMonitor", &Css.StartStreamMonitorArgs{
-// 			AudibleInputIndexLists: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 			},
-// 			MonitorId: pulumi.String("3d5738dd-1ca2-4601-a6e9-004c5ec75c0b"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewStartStreamMonitor(ctx, "startStreamMonitor", &Css.StartStreamMonitorArgs{
+//				AudibleInputIndexLists: pulumi.IntArray{
+//					pulumi.Int(1),
+//				},
+//				MonitorId: pulumi.String("3d5738dd-1ca2-4601-a6e9-004c5ec75c0b"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // css start_stream_monitor can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/startStreamMonitor:StartStreamMonitor start_stream_monitor start_stream_monitor_id
+// $ pulumi import tencentcloud:Css/startStreamMonitor:StartStreamMonitor start_stream_monitor start_stream_monitor_id
 // ```
 type StartStreamMonitor struct {
 	pulumi.CustomResourceState
@@ -65,7 +71,7 @@ func NewStartStreamMonitor(ctx *pulumi.Context,
 	if args.MonitorId == nil {
 		return nil, errors.New("invalid value for required argument 'MonitorId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource StartStreamMonitor
 	err := ctx.RegisterResource("tencentcloud:Css/startStreamMonitor:StartStreamMonitor", name, args, &resource, opts...)
 	if err != nil {
@@ -146,7 +152,7 @@ func (i *StartStreamMonitor) ToStartStreamMonitorOutputWithContext(ctx context.C
 // StartStreamMonitorArrayInput is an input type that accepts StartStreamMonitorArray and StartStreamMonitorArrayOutput values.
 // You can construct a concrete instance of `StartStreamMonitorArrayInput` via:
 //
-//          StartStreamMonitorArray{ StartStreamMonitorArgs{...} }
+//	StartStreamMonitorArray{ StartStreamMonitorArgs{...} }
 type StartStreamMonitorArrayInput interface {
 	pulumi.Input
 
@@ -171,7 +177,7 @@ func (i StartStreamMonitorArray) ToStartStreamMonitorArrayOutputWithContext(ctx 
 // StartStreamMonitorMapInput is an input type that accepts StartStreamMonitorMap and StartStreamMonitorMapOutput values.
 // You can construct a concrete instance of `StartStreamMonitorMapInput` via:
 //
-//          StartStreamMonitorMap{ "key": StartStreamMonitorArgs{...} }
+//	StartStreamMonitorMap{ "key": StartStreamMonitorArgs{...} }
 type StartStreamMonitorMapInput interface {
 	pulumi.Input
 

@@ -14,10 +14,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Outputs
     [OutputType]
     public sealed class GetWafInfosHostListResult
     {
+        /// <summary>
+        /// Domain name.
+        /// </summary>
         public readonly string Domain;
+        /// <summary>
+        /// Domain unique ID.
+        /// </summary>
         public readonly string DomainId;
+        /// <summary>
+        /// WAF traffic mode, 1 cleaning mode, 0 mirroring mode.
+        /// </summary>
         public readonly int FlowMode;
+        /// <summary>
+        /// LoadBalancer info bound by waf.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetWafInfosHostListLoadBalancerResult> LoadBalancers;
+        /// <summary>
+        /// Waf switch,0 off 1 on.
+        /// </summary>
         public readonly int Status;
 
         [OutputConstructor]

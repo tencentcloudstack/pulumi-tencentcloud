@@ -7,18 +7,80 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cwp licenseBindAttachment
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cwp"
+//
+// )
+// func main() {
+// pulumi.Run(func(ctx *pulumi.Context) error {
+// exampleMachinesSimple, err := Cwp.GetMachinesSimple(ctx, &cwp.GetMachinesSimpleArgs{
+// MachineType: "CVM",
+// MachineRegion: "ap-guangzhou",
+// ProjectIds: interface{}{
+// 1210293,
+// },
+// Filters: []cwp.GetMachinesSimpleFilter{
+// {
+// Name: "Version",
+// Values: []string{
+// "BASIC_VERSION",
+// },
+// ExactMatch: pulumi.BoolRef(true),
+// },
+// },
+// }, nil);
+// if err != nil {
+// return err
+// }
+// exampleLicenseOrder, err := Cwp.NewLicenseOrder(ctx, "exampleLicenseOrder", &Cwp.LicenseOrderArgs{
+// Alias: pulumi.String("tf_example"),
+// LicenseType: pulumi.Int(0),
+// LicenseNum: pulumi.Int(1),
+// RegionId: pulumi.Int(1),
+// ProjectId: pulumi.Int(0),
+// Tags: pulumi.Map{
+// "createdBy": pulumi.Any("terraform"),
+// },
+// })
+// if err != nil {
+// return err
+// }
+// _, err = Cwp.NewLicenseBindAttachment(ctx, "exampleLicenseBindAttachment", &Cwp.LicenseBindAttachmentArgs{
+// ResourceId: exampleLicenseOrder.ResourceId,
+// LicenseId: exampleLicenseOrder.LicenseId,
+// LicenseType: pulumi.Int(0),
+// Quuid: pulumi.String(exampleMachinesSimple.Machines[0].Quuid),
+// })
+// if err != nil {
+// return err
+// }
+// return nil
+// })
+// }
+// ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cwp license_bind_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cwp/licenseBindAttachment:LicenseBindAttachment example cwplic-ab3edffa#44#2c7e5cce-1cec-4456-8d18-018f160dd987#0
+// $ pulumi import tencentcloud:Cwp/licenseBindAttachment:LicenseBindAttachment example cwplic-ab3edffa#44#2c7e5cce-1cec-4456-8d18-018f160dd987#0
 // ```
 type LicenseBindAttachment struct {
 	pulumi.CustomResourceState
@@ -66,7 +128,7 @@ func NewLicenseBindAttachment(ctx *pulumi.Context,
 	if args.ResourceId == nil {
 		return nil, errors.New("invalid value for required argument 'ResourceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource LicenseBindAttachment
 	err := ctx.RegisterResource("tencentcloud:Cwp/licenseBindAttachment:LicenseBindAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -191,7 +253,7 @@ func (i *LicenseBindAttachment) ToLicenseBindAttachmentOutputWithContext(ctx con
 // LicenseBindAttachmentArrayInput is an input type that accepts LicenseBindAttachmentArray and LicenseBindAttachmentArrayOutput values.
 // You can construct a concrete instance of `LicenseBindAttachmentArrayInput` via:
 //
-//          LicenseBindAttachmentArray{ LicenseBindAttachmentArgs{...} }
+//	LicenseBindAttachmentArray{ LicenseBindAttachmentArgs{...} }
 type LicenseBindAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -216,7 +278,7 @@ func (i LicenseBindAttachmentArray) ToLicenseBindAttachmentArrayOutputWithContex
 // LicenseBindAttachmentMapInput is an input type that accepts LicenseBindAttachmentMap and LicenseBindAttachmentMapOutput values.
 // You can construct a concrete instance of `LicenseBindAttachmentMapInput` via:
 //
-//          LicenseBindAttachmentMap{ "key": LicenseBindAttachmentArgs{...} }
+//	LicenseBindAttachmentMap{ "key": LicenseBindAttachmentArgs{...} }
 type LicenseBindAttachmentMapInput interface {
 	pulumi.Input
 

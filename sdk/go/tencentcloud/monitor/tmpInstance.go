@@ -7,70 +7,76 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a monitor tmpInstance
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-4"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-// 			CidrBlock: pulumi.String("10.0.0.0/16"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
-// 			VpcId:            vpc.ID(),
-// 			AvailabilityZone: pulumi.String(availabilityZone),
-// 			CidrBlock:        pulumi.String("10.0.1.0/24"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Monitor.NewTmpInstance(ctx, "foo", &Monitor.TmpInstanceArgs{
-// 			InstanceName:      pulumi.String("tf-tmp-instance"),
-// 			VpcId:             vpc.ID(),
-// 			SubnetId:          subnet.ID(),
-// 			DataRetentionTime: pulumi.Int(30),
-// 			Zone:              pulumi.String(availabilityZone),
-// 			Tags: pulumi.AnyMap{
-// 				"createdBy": pulumi.Any("terraform"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-4"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Monitor.NewTmpInstance(ctx, "foo", &Monitor.TmpInstanceArgs{
+//				InstanceName:      pulumi.String("tf-tmp-instance"),
+//				VpcId:             vpc.ID(),
+//				SubnetId:          subnet.ID(),
+//				DataRetentionTime: pulumi.Int(30),
+//				Zone:              pulumi.String(availabilityZone),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // monitor tmpInstance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance tmpInstance tmpInstance_id
+// $ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance tmpInstance tmpInstance_id
 // ```
 type TmpInstance struct {
 	pulumi.CustomResourceState
@@ -119,7 +125,7 @@ func NewTmpInstance(ctx *pulumi.Context,
 	if args.Zone == nil {
 		return nil, errors.New("invalid value for required argument 'Zone'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TmpInstance
 	err := ctx.RegisterResource("tencentcloud:Monitor/tmpInstance:TmpInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -248,7 +254,7 @@ func (i *TmpInstance) ToTmpInstanceOutputWithContext(ctx context.Context) TmpIns
 // TmpInstanceArrayInput is an input type that accepts TmpInstanceArray and TmpInstanceArrayOutput values.
 // You can construct a concrete instance of `TmpInstanceArrayInput` via:
 //
-//          TmpInstanceArray{ TmpInstanceArgs{...} }
+//	TmpInstanceArray{ TmpInstanceArgs{...} }
 type TmpInstanceArrayInput interface {
 	pulumi.Input
 
@@ -273,7 +279,7 @@ func (i TmpInstanceArray) ToTmpInstanceArrayOutputWithContext(ctx context.Contex
 // TmpInstanceMapInput is an input type that accepts TmpInstanceMap and TmpInstanceMapOutput values.
 // You can construct a concrete instance of `TmpInstanceMapInput` via:
 //
-//          TmpInstanceMap{ "key": TmpInstanceArgs{...} }
+//	TmpInstanceMap{ "key": TmpInstanceArgs{...} }
 type TmpInstanceMapInput interface {
 	pulumi.Input
 

@@ -15,48 +15,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var aclRule = new Tencentcloud.Ckafka.AclRule("aclRule", new()
     ///     {
-    ///         var aclRule = new Tencentcloud.Ckafka.AclRule("aclRule", new Tencentcloud.Ckafka.AclRuleArgs
+    ///         InstanceId = "ckafka-xxx",
+    ///         IsApplied = 1,
+    ///         Pattern = "prefix",
+    ///         PatternType = "PREFIXED",
+    ///         ResourceType = "Topic",
+    ///         RuleLists = new[]
     ///         {
-    ///             InstanceId = "ckafka-xxx",
-    ///             IsApplied = 1,
-    ///             Pattern = "prefix",
-    ///             PatternType = "PREFIXED",
-    ///             ResourceType = "Topic",
-    ///             RuleLists = 
+    ///             new Tencentcloud.Ckafka.Inputs.AclRuleRuleListArgs
     ///             {
-    ///                 new Tencentcloud.Ckafka.Inputs.AclRuleRuleListArgs
-    ///                 {
-    ///                     Host = "*",
-    ///                     Operation = "All",
-    ///                     PermissionType = "Deny",
-    ///                     Principal = "User:*",
-    ///                 },
+    ///                 Host = "*",
+    ///                 Operation = "All",
+    ///                 PermissionType = "Deny",
+    ///                 Principal = "User:*",
     ///             },
-    ///             RuleName = "RuleName",
-    ///         });
-    ///     }
+    ///         },
+    ///         RuleName = "RuleName",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ckafka acl_rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ckafka/aclRule:AclRule acl_rule acl_rule_id
+    /// $ pulumi import tencentcloud:Ckafka/aclRule:AclRule acl_rule acl_rule_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/aclRule:AclRule")]
-    public partial class AclRule : Pulumi.CustomResource
+    public partial class AclRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// instance id.
@@ -145,7 +146,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         }
     }
 
-    public sealed class AclRuleArgs : Pulumi.ResourceArgs
+    public sealed class AclRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance id.
@@ -198,9 +199,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public AclRuleArgs()
         {
         }
+        public static new AclRuleArgs Empty => new AclRuleArgs();
     }
 
-    public sealed class AclRuleState : Pulumi.ResourceArgs
+    public sealed class AclRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance id.
@@ -253,5 +255,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         public AclRuleState()
         {
         }
+        public static new AclRuleState Empty => new AclRuleState();
     }
 }

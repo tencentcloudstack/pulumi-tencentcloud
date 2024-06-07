@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,26 +11,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const chcHosts = pulumi.output(tencentcloud.Cvm.getChcHosts({
+ * const chcHosts = tencentcloud.Cvm.getChcHosts({
  *     chcIds: ["chc-xxxxxx"],
  *     filters: [{
  *         name: "zone",
  *         values: ["ap-guangzhou-7"],
  *     }],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getChcHosts(args?: GetChcHostsArgs, opts?: pulumi.InvokeOptions): Promise<GetChcHostsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cvm/getChcHosts:getChcHosts", {
         "chcIds": args.chcIds,
         "filters": args.filters,
@@ -46,7 +46,7 @@ export interface GetChcHostsArgs {
      */
     chcIds?: string[];
     /**
-     * - `zone` Filter by the availability zone, such as ap-guangzhou-1. Valid values: See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/213/6091?from_cn_redirect=1).
+     * `zone` Filter by the availability zone, such as ap-guangzhou-1. Valid values: See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/213/6091?from_cn_redirect=1).
      * - `instance-name` Filter by the instance name.
      * - `instance-state` Filter by the instance status. For status details, see [InstanceStatus](https://www.tencentcloud.com/document/api/213/15753?from_cn_redirect=1#InstanceStatus).
      * - `device-type` Filter by the device type.
@@ -76,9 +76,28 @@ export interface GetChcHostsResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cvm chcHosts
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const chcHosts = tencentcloud.Cvm.getChcHosts({
+ *     chcIds: ["chc-xxxxxx"],
+ *     filters: [{
+ *         name: "zone",
+ *         values: ["ap-guangzhou-7"],
+ *     }],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getChcHostsOutput(args?: GetChcHostsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetChcHostsResult> {
-    return pulumi.output(args).apply(a => getChcHosts(a, opts))
+    return pulumi.output(args).apply((a: any) => getChcHosts(a, opts))
 }
 
 /**
@@ -90,7 +109,7 @@ export interface GetChcHostsOutputArgs {
      */
     chcIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * - `zone` Filter by the availability zone, such as ap-guangzhou-1. Valid values: See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/213/6091?from_cn_redirect=1).
+     * `zone` Filter by the availability zone, such as ap-guangzhou-1. Valid values: See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/213/6091?from_cn_redirect=1).
      * - `instance-name` Filter by the instance name.
      * - `instance-state` Filter by the instance status. For status details, see [InstanceStatus](https://www.tencentcloud.com/document/api/213/15753?from_cn_redirect=1#InstanceStatus).
      * - `device-type` Filter by the device type.

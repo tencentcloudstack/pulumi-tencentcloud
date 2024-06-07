@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const parseLiveStreamProcessNotification = pulumi.output(tencentcloud.Mps.getParseLiveStreamProcessNotification({
+ * const parseLiveStreamProcessNotification = tencentcloud.Mps.getParseLiveStreamProcessNotification({
  *     content: "your_content",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getParseLiveStreamProcessNotification(args: GetParseLiveStreamProcessNotificationArgs, opts?: pulumi.InvokeOptions): Promise<GetParseLiveStreamProcessNotificationResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mps/getParseLiveStreamProcessNotification:getParseLiveStreamProcessNotification", {
         "content": args.content,
         "resultOutputFile": args.resultOutputFile,
@@ -55,9 +54,24 @@ export interface GetParseLiveStreamProcessNotificationResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mps parseLiveStreamProcessNotification
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const parseLiveStreamProcessNotification = tencentcloud.Mps.getParseLiveStreamProcessNotification({
+ *     content: "your_content",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getParseLiveStreamProcessNotificationOutput(args: GetParseLiveStreamProcessNotificationOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetParseLiveStreamProcessNotificationResult> {
-    return pulumi.output(args).apply(a => getParseLiveStreamProcessNotification(a, opts))
+    return pulumi.output(args).apply((a: any) => getParseLiveStreamProcessNotification(a, opts))
 }
 
 /**

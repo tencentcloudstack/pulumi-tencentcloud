@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type DatasourceCloudServiceType struct {
 	// Instance Id.
@@ -22,7 +25,7 @@ type DatasourceCloudServiceType struct {
 // DatasourceCloudServiceTypeInput is an input type that accepts DatasourceCloudServiceTypeArgs and DatasourceCloudServiceTypeOutput values.
 // You can construct a concrete instance of `DatasourceCloudServiceTypeInput` via:
 //
-//          DatasourceCloudServiceTypeArgs{...}
+//	DatasourceCloudServiceTypeArgs{...}
 type DatasourceCloudServiceTypeInput interface {
 	pulumi.Input
 
@@ -62,11 +65,11 @@ func (i DatasourceCloudServiceTypeArgs) ToDatasourceCloudServiceTypePtrOutputWit
 // DatasourceCloudServiceTypePtrInput is an input type that accepts DatasourceCloudServiceTypeArgs, DatasourceCloudServiceTypePtr and DatasourceCloudServiceTypePtrOutput values.
 // You can construct a concrete instance of `DatasourceCloudServiceTypePtrInput` via:
 //
-//          DatasourceCloudServiceTypeArgs{...}
+//	        DatasourceCloudServiceTypeArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type DatasourceCloudServiceTypePtrInput interface {
 	pulumi.Input
 
@@ -233,7 +236,7 @@ type GetProjectList struct {
 // GetProjectListInput is an input type that accepts GetProjectListArgs and GetProjectListOutput values.
 // You can construct a concrete instance of `GetProjectListInput` via:
 //
-//          GetProjectListArgs{...}
+//	GetProjectListArgs{...}
 type GetProjectListInput interface {
 	pulumi.Input
 
@@ -301,7 +304,7 @@ func (i GetProjectListArgs) ToGetProjectListOutputWithContext(ctx context.Contex
 // GetProjectListArrayInput is an input type that accepts GetProjectListArray and GetProjectListArrayOutput values.
 // You can construct a concrete instance of `GetProjectListArrayInput` via:
 //
-//          GetProjectListArray{ GetProjectListArgs{...} }
+//	GetProjectListArray{ GetProjectListArgs{...} }
 type GetProjectListArrayInput interface {
 	pulumi.Input
 
@@ -472,7 +475,7 @@ type GetProjectListConfigList struct {
 // GetProjectListConfigListInput is an input type that accepts GetProjectListConfigListArgs and GetProjectListConfigListOutput values.
 // You can construct a concrete instance of `GetProjectListConfigListInput` via:
 //
-//          GetProjectListConfigListArgs{...}
+//	GetProjectListConfigListArgs{...}
 type GetProjectListConfigListInput interface {
 	pulumi.Input
 
@@ -502,7 +505,7 @@ func (i GetProjectListConfigListArgs) ToGetProjectListConfigListOutputWithContex
 // GetProjectListConfigListArrayInput is an input type that accepts GetProjectListConfigListArray and GetProjectListConfigListArrayOutput values.
 // You can construct a concrete instance of `GetProjectListConfigListArrayInput` via:
 //
-//          GetProjectListConfigListArray{ GetProjectListConfigListArgs{...} }
+//	GetProjectListConfigListArray{ GetProjectListConfigListArgs{...} }
 type GetProjectListConfigListArrayInput interface {
 	pulumi.Input
 
@@ -580,7 +583,7 @@ type GetProjectListConfigListComponent struct {
 // GetProjectListConfigListComponentInput is an input type that accepts GetProjectListConfigListComponentArgs and GetProjectListConfigListComponentOutput values.
 // You can construct a concrete instance of `GetProjectListConfigListComponentInput` via:
 //
-//          GetProjectListConfigListComponentArgs{...}
+//	GetProjectListConfigListComponentArgs{...}
 type GetProjectListConfigListComponentInput interface {
 	pulumi.Input
 
@@ -612,7 +615,7 @@ func (i GetProjectListConfigListComponentArgs) ToGetProjectListConfigListCompone
 // GetProjectListConfigListComponentArrayInput is an input type that accepts GetProjectListConfigListComponentArray and GetProjectListConfigListComponentArrayOutput values.
 // You can construct a concrete instance of `GetProjectListConfigListComponentArrayInput` via:
 //
-//          GetProjectListConfigListComponentArray{ GetProjectListConfigListComponentArgs{...} }
+//	GetProjectListConfigListComponentArray{ GetProjectListConfigListComponentArgs{...} }
 type GetProjectListConfigListComponentArrayInput interface {
 	pulumi.Input
 
@@ -719,7 +722,7 @@ type GetUserProjectList struct {
 // GetUserProjectListInput is an input type that accepts GetUserProjectListArgs and GetUserProjectListOutput values.
 // You can construct a concrete instance of `GetUserProjectListInput` via:
 //
-//          GetUserProjectListArgs{...}
+//	GetUserProjectListArgs{...}
 type GetUserProjectListInput interface {
 	pulumi.Input
 
@@ -775,7 +778,7 @@ func (i GetUserProjectListArgs) ToGetUserProjectListOutputWithContext(ctx contex
 // GetUserProjectListArrayInput is an input type that accepts GetUserProjectListArray and GetUserProjectListArrayOutput values.
 // You can construct a concrete instance of `GetUserProjectListArrayInput` via:
 //
-//          GetUserProjectListArray{ GetUserProjectListArgs{...} }
+//	GetUserProjectListArray{ GetUserProjectListArgs{...} }
 type GetUserProjectListArrayInput interface {
 	pulumi.Input
 

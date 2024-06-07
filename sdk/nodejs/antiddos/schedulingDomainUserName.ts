@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const schedulingDomainUserName = new tencentcloud.Antiddos.SchedulingDomainUserName("scheduling_domain_user_name", {
+ * const schedulingDomainUserName = new tencentcloud.antiddos.SchedulingDomainUserName("schedulingDomainUserName", {
  *     domainName: "test.com",
  *     domainUserName: "",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * antiddos scheduling_domain_user_name can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Antiddos/schedulingDomainUserName:SchedulingDomainUserName scheduling_domain_user_name ${domainName}
+ * $ pulumi import tencentcloud:Antiddos/schedulingDomainUserName:SchedulingDomainUserName scheduling_domain_user_name ${domainName}
  * ```
  */
 export class SchedulingDomainUserName extends pulumi.CustomResource {

@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const storeLocationConfig = new tencentcloud.Dlc.StoreLocationConfig("store_location_config", {
+ * const storeLocationConfig = new tencentcloud.dlc.StoreLocationConfig("storeLocationConfig", {
  *     enable: 1,
  *     storeLocation: "cosn://bucketname/",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dlc store_location_config can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dlc/storeLocationConfig:StoreLocationConfig store_location_config store_location_config_id
+ * $ pulumi import tencentcloud:Dlc/storeLocationConfig:StoreLocationConfig store_location_config store_location_config_id
  * ```
  */
 export class StoreLocationConfig extends pulumi.CustomResource {

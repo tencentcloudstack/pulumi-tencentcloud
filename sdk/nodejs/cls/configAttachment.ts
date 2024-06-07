@@ -12,7 +12,7 @@ import * as utilities from "../utilities";
  * cls config_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cls/configAttachment:ConfigAttachment attach config_id#group_id
+ * $ pulumi import tencentcloud:Cls/configAttachment:ConfigAttachment attach config_id#group_id
  * ```
  */
 export class ConfigAttachment extends pulumi.CustomResource {

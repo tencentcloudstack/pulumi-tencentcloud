@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleInstance = new tencentcloud.tcr.Instance("exampleInstance", {
  *     instanceType: "premium",
@@ -42,13 +43,14 @@ import * as utilities from "../utilities";
  *     imageVersion: "v1",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tcr image_signature_operation can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tcr/createImageSignatureOperation:CreateImageSignatureOperation image_signature_operation image_signature_operation_id
+ * $ pulumi import tencentcloud:Tcr/createImageSignatureOperation:CreateImageSignatureOperation image_signature_operation image_signature_operation_id
  * ```
  */
 export class CreateImageSignatureOperation extends pulumi.CustomResource {

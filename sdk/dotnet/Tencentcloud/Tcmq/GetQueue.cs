@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         /// <summary>
         /// Use this data source to query detailed information of tcmq queue
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var queue = Tencentcloud.Tcmq.GetQueue.Invoke(new()
         ///     {
-        ///         var queue = Output.Create(Tencentcloud.Tcmq.GetQueue.InvokeAsync(new Tencentcloud.Tcmq.GetQueueArgs
-        ///         {
-        ///             QueueName = "queue_name",
-        ///         }));
-        ///     }
+        ///         QueueName = "queue_name",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetQueueResult> InvokeAsync(GetQueueArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetQueueResult>("tencentcloud:Tcmq/getQueue:getQueue", args ?? new GetQueueArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetQueueResult>("tencentcloud:Tcmq/getQueue:getQueue", args ?? new GetQueueArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tcmq queue
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var queue = Tencentcloud.Tcmq.GetQueue.Invoke(new()
         ///     {
-        ///         var queue = Output.Create(Tencentcloud.Tcmq.GetQueue.InvokeAsync(new Tencentcloud.Tcmq.GetQueueArgs
-        ///         {
-        ///             QueueName = "queue_name",
-        ///         }));
-        ///     }
+        ///         QueueName = "queue_name",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetQueueResult> Invoke(GetQueueInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetQueueResult>("tencentcloud:Tcmq/getQueue:getQueue", args ?? new GetQueueInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetQueueResult>("tencentcloud:Tcmq/getQueue:getQueue", args ?? new GetQueueInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetQueueArgs : Pulumi.InvokeArgs
+    public sealed class GetQueueArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetQueueFilterArgs>? _filters;
@@ -131,9 +125,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         public GetQueueArgs()
         {
         }
+        public static new GetQueueArgs Empty => new GetQueueArgs();
     }
 
-    public sealed class GetQueueInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetQueueInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetQueueFilterInputArgs>? _filters;
@@ -192,6 +187,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         public GetQueueInvokeArgs()
         {
         }
+        public static new GetQueueInvokeArgs Empty => new GetQueueInvokeArgs();
     }
 
 

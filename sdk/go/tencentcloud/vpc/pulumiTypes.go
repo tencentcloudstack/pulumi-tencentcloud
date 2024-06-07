@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type FlowLogFlowLogStorage struct {
 	// Specify storage instance id, required while `storageType` is `ckafka`.
@@ -20,7 +23,7 @@ type FlowLogFlowLogStorage struct {
 // FlowLogFlowLogStorageInput is an input type that accepts FlowLogFlowLogStorageArgs and FlowLogFlowLogStorageOutput values.
 // You can construct a concrete instance of `FlowLogFlowLogStorageInput` via:
 //
-//          FlowLogFlowLogStorageArgs{...}
+//	FlowLogFlowLogStorageArgs{...}
 type FlowLogFlowLogStorageInput interface {
 	pulumi.Input
 
@@ -58,11 +61,11 @@ func (i FlowLogFlowLogStorageArgs) ToFlowLogFlowLogStoragePtrOutputWithContext(c
 // FlowLogFlowLogStoragePtrInput is an input type that accepts FlowLogFlowLogStorageArgs, FlowLogFlowLogStoragePtr and FlowLogFlowLogStoragePtrOutput values.
 // You can construct a concrete instance of `FlowLogFlowLogStoragePtrInput` via:
 //
-//          FlowLogFlowLogStorageArgs{...}
+//	        FlowLogFlowLogStorageArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type FlowLogFlowLogStoragePtrInput interface {
 	pulumi.Input
 
@@ -166,148 +169,6 @@ func (o FlowLogFlowLogStoragePtrOutput) StorageTopic() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-type Ipv6EniAddressIpv6Address struct {
-	// `IPv6` address, in the form of: `3402:4e00:20:100:0:8cd9:2a67:71f3`.
-	Address string `pulumi:"address"`
-	// `EIP` instance `ID`, such as:`eip-hxlqja90`.
-	AddressId *string `pulumi:"addressId"`
-	// Description.
-	Description *string `pulumi:"description"`
-	// Whether the public network IP is blocked.
-	IsWanIpBlocked *bool `pulumi:"isWanIpBlocked"`
-	// Whether to master `IP`.
-	Primary *bool `pulumi:"primary"`
-	// `IPv6` address status: `PENDING`: pending, `MIGRATING`: migrating, `DELETING`: deleting, `AVAILABLE`: available.
-	State *string `pulumi:"state"`
-}
-
-// Ipv6EniAddressIpv6AddressInput is an input type that accepts Ipv6EniAddressIpv6AddressArgs and Ipv6EniAddressIpv6AddressOutput values.
-// You can construct a concrete instance of `Ipv6EniAddressIpv6AddressInput` via:
-//
-//          Ipv6EniAddressIpv6AddressArgs{...}
-type Ipv6EniAddressIpv6AddressInput interface {
-	pulumi.Input
-
-	ToIpv6EniAddressIpv6AddressOutput() Ipv6EniAddressIpv6AddressOutput
-	ToIpv6EniAddressIpv6AddressOutputWithContext(context.Context) Ipv6EniAddressIpv6AddressOutput
-}
-
-type Ipv6EniAddressIpv6AddressArgs struct {
-	// `IPv6` address, in the form of: `3402:4e00:20:100:0:8cd9:2a67:71f3`.
-	Address pulumi.StringInput `pulumi:"address"`
-	// `EIP` instance `ID`, such as:`eip-hxlqja90`.
-	AddressId pulumi.StringPtrInput `pulumi:"addressId"`
-	// Description.
-	Description pulumi.StringPtrInput `pulumi:"description"`
-	// Whether the public network IP is blocked.
-	IsWanIpBlocked pulumi.BoolPtrInput `pulumi:"isWanIpBlocked"`
-	// Whether to master `IP`.
-	Primary pulumi.BoolPtrInput `pulumi:"primary"`
-	// `IPv6` address status: `PENDING`: pending, `MIGRATING`: migrating, `DELETING`: deleting, `AVAILABLE`: available.
-	State pulumi.StringPtrInput `pulumi:"state"`
-}
-
-func (Ipv6EniAddressIpv6AddressArgs) ElementType() reflect.Type {
-	return reflect.TypeOf((*Ipv6EniAddressIpv6Address)(nil)).Elem()
-}
-
-func (i Ipv6EniAddressIpv6AddressArgs) ToIpv6EniAddressIpv6AddressOutput() Ipv6EniAddressIpv6AddressOutput {
-	return i.ToIpv6EniAddressIpv6AddressOutputWithContext(context.Background())
-}
-
-func (i Ipv6EniAddressIpv6AddressArgs) ToIpv6EniAddressIpv6AddressOutputWithContext(ctx context.Context) Ipv6EniAddressIpv6AddressOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(Ipv6EniAddressIpv6AddressOutput)
-}
-
-// Ipv6EniAddressIpv6AddressArrayInput is an input type that accepts Ipv6EniAddressIpv6AddressArray and Ipv6EniAddressIpv6AddressArrayOutput values.
-// You can construct a concrete instance of `Ipv6EniAddressIpv6AddressArrayInput` via:
-//
-//          Ipv6EniAddressIpv6AddressArray{ Ipv6EniAddressIpv6AddressArgs{...} }
-type Ipv6EniAddressIpv6AddressArrayInput interface {
-	pulumi.Input
-
-	ToIpv6EniAddressIpv6AddressArrayOutput() Ipv6EniAddressIpv6AddressArrayOutput
-	ToIpv6EniAddressIpv6AddressArrayOutputWithContext(context.Context) Ipv6EniAddressIpv6AddressArrayOutput
-}
-
-type Ipv6EniAddressIpv6AddressArray []Ipv6EniAddressIpv6AddressInput
-
-func (Ipv6EniAddressIpv6AddressArray) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]Ipv6EniAddressIpv6Address)(nil)).Elem()
-}
-
-func (i Ipv6EniAddressIpv6AddressArray) ToIpv6EniAddressIpv6AddressArrayOutput() Ipv6EniAddressIpv6AddressArrayOutput {
-	return i.ToIpv6EniAddressIpv6AddressArrayOutputWithContext(context.Background())
-}
-
-func (i Ipv6EniAddressIpv6AddressArray) ToIpv6EniAddressIpv6AddressArrayOutputWithContext(ctx context.Context) Ipv6EniAddressIpv6AddressArrayOutput {
-	return pulumi.ToOutputWithContext(ctx, i).(Ipv6EniAddressIpv6AddressArrayOutput)
-}
-
-type Ipv6EniAddressIpv6AddressOutput struct{ *pulumi.OutputState }
-
-func (Ipv6EniAddressIpv6AddressOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*Ipv6EniAddressIpv6Address)(nil)).Elem()
-}
-
-func (o Ipv6EniAddressIpv6AddressOutput) ToIpv6EniAddressIpv6AddressOutput() Ipv6EniAddressIpv6AddressOutput {
-	return o
-}
-
-func (o Ipv6EniAddressIpv6AddressOutput) ToIpv6EniAddressIpv6AddressOutputWithContext(ctx context.Context) Ipv6EniAddressIpv6AddressOutput {
-	return o
-}
-
-// `IPv6` address, in the form of: `3402:4e00:20:100:0:8cd9:2a67:71f3`.
-func (o Ipv6EniAddressIpv6AddressOutput) Address() pulumi.StringOutput {
-	return o.ApplyT(func(v Ipv6EniAddressIpv6Address) string { return v.Address }).(pulumi.StringOutput)
-}
-
-// `EIP` instance `ID`, such as:`eip-hxlqja90`.
-func (o Ipv6EniAddressIpv6AddressOutput) AddressId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v Ipv6EniAddressIpv6Address) *string { return v.AddressId }).(pulumi.StringPtrOutput)
-}
-
-// Description.
-func (o Ipv6EniAddressIpv6AddressOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v Ipv6EniAddressIpv6Address) *string { return v.Description }).(pulumi.StringPtrOutput)
-}
-
-// Whether the public network IP is blocked.
-func (o Ipv6EniAddressIpv6AddressOutput) IsWanIpBlocked() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v Ipv6EniAddressIpv6Address) *bool { return v.IsWanIpBlocked }).(pulumi.BoolPtrOutput)
-}
-
-// Whether to master `IP`.
-func (o Ipv6EniAddressIpv6AddressOutput) Primary() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v Ipv6EniAddressIpv6Address) *bool { return v.Primary }).(pulumi.BoolPtrOutput)
-}
-
-// `IPv6` address status: `PENDING`: pending, `MIGRATING`: migrating, `DELETING`: deleting, `AVAILABLE`: available.
-func (o Ipv6EniAddressIpv6AddressOutput) State() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v Ipv6EniAddressIpv6Address) *string { return v.State }).(pulumi.StringPtrOutput)
-}
-
-type Ipv6EniAddressIpv6AddressArrayOutput struct{ *pulumi.OutputState }
-
-func (Ipv6EniAddressIpv6AddressArrayOutput) ElementType() reflect.Type {
-	return reflect.TypeOf((*[]Ipv6EniAddressIpv6Address)(nil)).Elem()
-}
-
-func (o Ipv6EniAddressIpv6AddressArrayOutput) ToIpv6EniAddressIpv6AddressArrayOutput() Ipv6EniAddressIpv6AddressArrayOutput {
-	return o
-}
-
-func (o Ipv6EniAddressIpv6AddressArrayOutput) ToIpv6EniAddressIpv6AddressArrayOutputWithContext(ctx context.Context) Ipv6EniAddressIpv6AddressArrayOutput {
-	return o
-}
-
-func (o Ipv6EniAddressIpv6AddressArrayOutput) Index(i pulumi.IntInput) Ipv6EniAddressIpv6AddressOutput {
-	return pulumi.All(o, i).ApplyT(func(vs []interface{}) Ipv6EniAddressIpv6Address {
-		return vs[0].([]Ipv6EniAddressIpv6Address)[vs[1].(int)]
-	}).(Ipv6EniAddressIpv6AddressOutput)
-}
-
 type Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks struct {
 	// `IPv6` subnet segment. Such as: `3402:4e00:20:1001::/64`.
 	Ipv6CidrBlock string `pulumi:"ipv6CidrBlock"`
@@ -318,7 +179,7 @@ type Ipv6SubnetCidrBlockIpv6SubnetCidrBlocks struct {
 // Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksInput is an input type that accepts Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs and Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput values.
 // You can construct a concrete instance of `Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksInput` via:
 //
-//          Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs{...}
+//	Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs{...}
 type Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksInput interface {
 	pulumi.Input
 
@@ -356,11 +217,11 @@ func (i Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs) ToIpv6SubnetCidrBlockIpv6Su
 // Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrInput is an input type that accepts Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs, Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtr and Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput values.
 // You can construct a concrete instance of `Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrInput` via:
 //
-//          Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs{...}
+//	        Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrInput interface {
 	pulumi.Input
 
@@ -465,14 +326,16 @@ func (o Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput) SubnetId() pulumi.Stri
 }
 
 type NetworkAclQuintupleNetworkAclQuintupleSet struct {
-	Egresses  []NetworkAclQuintupleNetworkAclQuintupleSetEgress  `pulumi:"egresses"`
+	// Network ACL quintuple outbound rule.
+	Egresses []NetworkAclQuintupleNetworkAclQuintupleSetEgress `pulumi:"egresses"`
+	// Network ACL quintuple inbound rule.
 	Ingresses []NetworkAclQuintupleNetworkAclQuintupleSetIngress `pulumi:"ingresses"`
 }
 
 // NetworkAclQuintupleNetworkAclQuintupleSetInput is an input type that accepts NetworkAclQuintupleNetworkAclQuintupleSetArgs and NetworkAclQuintupleNetworkAclQuintupleSetOutput values.
 // You can construct a concrete instance of `NetworkAclQuintupleNetworkAclQuintupleSetInput` via:
 //
-//          NetworkAclQuintupleNetworkAclQuintupleSetArgs{...}
+//	NetworkAclQuintupleNetworkAclQuintupleSetArgs{...}
 type NetworkAclQuintupleNetworkAclQuintupleSetInput interface {
 	pulumi.Input
 
@@ -481,7 +344,9 @@ type NetworkAclQuintupleNetworkAclQuintupleSetInput interface {
 }
 
 type NetworkAclQuintupleNetworkAclQuintupleSetArgs struct {
-	Egresses  NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayInput  `pulumi:"egresses"`
+	// Network ACL quintuple outbound rule.
+	Egresses NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayInput `pulumi:"egresses"`
+	// Network ACL quintuple inbound rule.
 	Ingresses NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayInput `pulumi:"ingresses"`
 }
 
@@ -508,11 +373,11 @@ func (i NetworkAclQuintupleNetworkAclQuintupleSetArgs) ToNetworkAclQuintupleNetw
 // NetworkAclQuintupleNetworkAclQuintupleSetPtrInput is an input type that accepts NetworkAclQuintupleNetworkAclQuintupleSetArgs, NetworkAclQuintupleNetworkAclQuintupleSetPtr and NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput values.
 // You can construct a concrete instance of `NetworkAclQuintupleNetworkAclQuintupleSetPtrInput` via:
 //
-//          NetworkAclQuintupleNetworkAclQuintupleSetArgs{...}
+//	        NetworkAclQuintupleNetworkAclQuintupleSetArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type NetworkAclQuintupleNetworkAclQuintupleSetPtrInput interface {
 	pulumi.Input
 
@@ -562,12 +427,14 @@ func (o NetworkAclQuintupleNetworkAclQuintupleSetOutput) ToNetworkAclQuintupleNe
 	}).(NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput)
 }
 
+// Network ACL quintuple outbound rule.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetOutput) Egresses() NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSet) []NetworkAclQuintupleNetworkAclQuintupleSetEgress {
 		return v.Egresses
 	}).(NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput)
 }
 
+// Network ACL quintuple inbound rule.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetOutput) Ingresses() NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSet) []NetworkAclQuintupleNetworkAclQuintupleSetIngress {
 		return v.Ingresses
@@ -598,6 +465,7 @@ func (o NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput) Elem() NetworkAclQui
 	}).(NetworkAclQuintupleNetworkAclQuintupleSetOutput)
 }
 
+// Network ACL quintuple outbound rule.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput) Egresses() NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput {
 	return o.ApplyT(func(v *NetworkAclQuintupleNetworkAclQuintupleSet) []NetworkAclQuintupleNetworkAclQuintupleSetEgress {
 		if v == nil {
@@ -607,6 +475,7 @@ func (o NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput) Egresses() NetworkAc
 	}).(NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput)
 }
 
+// Network ACL quintuple inbound rule.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput) Ingresses() NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput {
 	return o.ApplyT(func(v *NetworkAclQuintupleNetworkAclQuintupleSet) []NetworkAclQuintupleNetworkAclQuintupleSetIngress {
 		if v == nil {
@@ -617,23 +486,34 @@ func (o NetworkAclQuintupleNetworkAclQuintupleSetPtrOutput) Ingresses() NetworkA
 }
 
 type NetworkAclQuintupleNetworkAclQuintupleSetEgress struct {
-	Action                     *string `pulumi:"action"`
-	CreateTime                 *string `pulumi:"createTime"`
-	Description                *string `pulumi:"description"`
-	DestinationCidr            *string `pulumi:"destinationCidr"`
-	DestinationPort            *string `pulumi:"destinationPort"`
-	NetworkAclDirection        *string `pulumi:"networkAclDirection"`
+	// Action, ACCEPT or DROP.
+	Action *string `pulumi:"action"`
+	// Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.
+	CreateTime *string `pulumi:"createTime"`
+	// Description.
+	Description *string `pulumi:"description"`
+	// Destination CIDR.
+	DestinationCidr *string `pulumi:"destinationCidr"`
+	// Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
+	DestinationPort *string `pulumi:"destinationPort"`
+	// Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.
+	NetworkAclDirection *string `pulumi:"networkAclDirection"`
+	// Unique ID of a network ACL entry.
 	NetworkAclQuintupleEntryId *string `pulumi:"networkAclQuintupleEntryId"`
-	Priority                   *int    `pulumi:"priority"`
-	Protocol                   *string `pulumi:"protocol"`
-	SourceCidr                 *string `pulumi:"sourceCidr"`
-	SourcePort                 *string `pulumi:"sourcePort"`
+	// Priority, starting from 1.
+	Priority *int `pulumi:"priority"`
+	// Protocol, value: TCP,UDP, ICMP, ALL.
+	Protocol *string `pulumi:"protocol"`
+	// Source CIDR.
+	SourceCidr *string `pulumi:"sourceCidr"`
+	// Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
+	SourcePort *string `pulumi:"sourcePort"`
 }
 
 // NetworkAclQuintupleNetworkAclQuintupleSetEgressInput is an input type that accepts NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs and NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput values.
 // You can construct a concrete instance of `NetworkAclQuintupleNetworkAclQuintupleSetEgressInput` via:
 //
-//          NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs{...}
+//	NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs{...}
 type NetworkAclQuintupleNetworkAclQuintupleSetEgressInput interface {
 	pulumi.Input
 
@@ -642,17 +522,28 @@ type NetworkAclQuintupleNetworkAclQuintupleSetEgressInput interface {
 }
 
 type NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs struct {
-	Action                     pulumi.StringPtrInput `pulumi:"action"`
-	CreateTime                 pulumi.StringPtrInput `pulumi:"createTime"`
-	Description                pulumi.StringPtrInput `pulumi:"description"`
-	DestinationCidr            pulumi.StringPtrInput `pulumi:"destinationCidr"`
-	DestinationPort            pulumi.StringPtrInput `pulumi:"destinationPort"`
-	NetworkAclDirection        pulumi.StringPtrInput `pulumi:"networkAclDirection"`
+	// Action, ACCEPT or DROP.
+	Action pulumi.StringPtrInput `pulumi:"action"`
+	// Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.
+	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// Description.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Destination CIDR.
+	DestinationCidr pulumi.StringPtrInput `pulumi:"destinationCidr"`
+	// Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
+	DestinationPort pulumi.StringPtrInput `pulumi:"destinationPort"`
+	// Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.
+	NetworkAclDirection pulumi.StringPtrInput `pulumi:"networkAclDirection"`
+	// Unique ID of a network ACL entry.
 	NetworkAclQuintupleEntryId pulumi.StringPtrInput `pulumi:"networkAclQuintupleEntryId"`
-	Priority                   pulumi.IntPtrInput    `pulumi:"priority"`
-	Protocol                   pulumi.StringPtrInput `pulumi:"protocol"`
-	SourceCidr                 pulumi.StringPtrInput `pulumi:"sourceCidr"`
-	SourcePort                 pulumi.StringPtrInput `pulumi:"sourcePort"`
+	// Priority, starting from 1.
+	Priority pulumi.IntPtrInput `pulumi:"priority"`
+	// Protocol, value: TCP,UDP, ICMP, ALL.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// Source CIDR.
+	SourceCidr pulumi.StringPtrInput `pulumi:"sourceCidr"`
+	// Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
+	SourcePort pulumi.StringPtrInput `pulumi:"sourcePort"`
 }
 
 func (NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs) ElementType() reflect.Type {
@@ -670,7 +561,7 @@ func (i NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs) ToNetworkAclQuintup
 // NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayInput is an input type that accepts NetworkAclQuintupleNetworkAclQuintupleSetEgressArray and NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput values.
 // You can construct a concrete instance of `NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayInput` via:
 //
-//          NetworkAclQuintupleNetworkAclQuintupleSetEgressArray{ NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs{...} }
+//	NetworkAclQuintupleNetworkAclQuintupleSetEgressArray{ NetworkAclQuintupleNetworkAclQuintupleSetEgressArgs{...} }
 type NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayInput interface {
 	pulumi.Input
 
@@ -706,46 +597,57 @@ func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) ToNetworkAclQuint
 	return o
 }
 
+// Action, ACCEPT or DROP.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.Action }).(pulumi.StringPtrOutput)
 }
 
+// Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) CreateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
 }
 
+// Description.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Destination CIDR.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) DestinationCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.DestinationCidr }).(pulumi.StringPtrOutput)
 }
 
+// Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) DestinationPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.DestinationPort }).(pulumi.StringPtrOutput)
 }
 
+// Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) NetworkAclDirection() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.NetworkAclDirection }).(pulumi.StringPtrOutput)
 }
 
+// Unique ID of a network ACL entry.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) NetworkAclQuintupleEntryId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.NetworkAclQuintupleEntryId }).(pulumi.StringPtrOutput)
 }
 
+// Priority, starting from 1.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) Priority() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *int { return v.Priority }).(pulumi.IntPtrOutput)
 }
 
+// Protocol, value: TCP,UDP, ICMP, ALL.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
+// Source CIDR.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) SourceCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.SourceCidr }).(pulumi.StringPtrOutput)
 }
 
+// Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressOutput) SourcePort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetEgress) *string { return v.SourcePort }).(pulumi.StringPtrOutput)
 }
@@ -771,23 +673,34 @@ func (o NetworkAclQuintupleNetworkAclQuintupleSetEgressArrayOutput) Index(i pulu
 }
 
 type NetworkAclQuintupleNetworkAclQuintupleSetIngress struct {
-	Action                     *string `pulumi:"action"`
-	CreateTime                 *string `pulumi:"createTime"`
-	Description                *string `pulumi:"description"`
-	DestinationCidr            *string `pulumi:"destinationCidr"`
-	DestinationPort            *string `pulumi:"destinationPort"`
-	NetworkAclDirection        *string `pulumi:"networkAclDirection"`
+	// Action, ACCEPT or DROP.
+	Action *string `pulumi:"action"`
+	// Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.
+	CreateTime *string `pulumi:"createTime"`
+	// Description.
+	Description *string `pulumi:"description"`
+	// Destination CIDR.
+	DestinationCidr *string `pulumi:"destinationCidr"`
+	// Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
+	DestinationPort *string `pulumi:"destinationPort"`
+	// Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.
+	NetworkAclDirection *string `pulumi:"networkAclDirection"`
+	// Unique ID of a network ACL entry.
 	NetworkAclQuintupleEntryId *string `pulumi:"networkAclQuintupleEntryId"`
-	Priority                   *int    `pulumi:"priority"`
-	Protocol                   *string `pulumi:"protocol"`
-	SourceCidr                 *string `pulumi:"sourceCidr"`
-	SourcePort                 *string `pulumi:"sourcePort"`
+	// Priority, starting from 1.
+	Priority *int `pulumi:"priority"`
+	// Protocol, value: TCP,UDP, ICMP, ALL.
+	Protocol *string `pulumi:"protocol"`
+	// 源CIDR。.
+	SourceCidr *string `pulumi:"sourceCidr"`
+	// source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.
+	SourcePort *string `pulumi:"sourcePort"`
 }
 
 // NetworkAclQuintupleNetworkAclQuintupleSetIngressInput is an input type that accepts NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs and NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput values.
 // You can construct a concrete instance of `NetworkAclQuintupleNetworkAclQuintupleSetIngressInput` via:
 //
-//          NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs{...}
+//	NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs{...}
 type NetworkAclQuintupleNetworkAclQuintupleSetIngressInput interface {
 	pulumi.Input
 
@@ -796,17 +709,28 @@ type NetworkAclQuintupleNetworkAclQuintupleSetIngressInput interface {
 }
 
 type NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs struct {
-	Action                     pulumi.StringPtrInput `pulumi:"action"`
-	CreateTime                 pulumi.StringPtrInput `pulumi:"createTime"`
-	Description                pulumi.StringPtrInput `pulumi:"description"`
-	DestinationCidr            pulumi.StringPtrInput `pulumi:"destinationCidr"`
-	DestinationPort            pulumi.StringPtrInput `pulumi:"destinationPort"`
-	NetworkAclDirection        pulumi.StringPtrInput `pulumi:"networkAclDirection"`
+	// Action, ACCEPT or DROP.
+	Action pulumi.StringPtrInput `pulumi:"action"`
+	// Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.
+	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// Description.
+	Description pulumi.StringPtrInput `pulumi:"description"`
+	// Destination CIDR.
+	DestinationCidr pulumi.StringPtrInput `pulumi:"destinationCidr"`
+	// Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
+	DestinationPort pulumi.StringPtrInput `pulumi:"destinationPort"`
+	// Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.
+	NetworkAclDirection pulumi.StringPtrInput `pulumi:"networkAclDirection"`
+	// Unique ID of a network ACL entry.
 	NetworkAclQuintupleEntryId pulumi.StringPtrInput `pulumi:"networkAclQuintupleEntryId"`
-	Priority                   pulumi.IntPtrInput    `pulumi:"priority"`
-	Protocol                   pulumi.StringPtrInput `pulumi:"protocol"`
-	SourceCidr                 pulumi.StringPtrInput `pulumi:"sourceCidr"`
-	SourcePort                 pulumi.StringPtrInput `pulumi:"sourcePort"`
+	// Priority, starting from 1.
+	Priority pulumi.IntPtrInput `pulumi:"priority"`
+	// Protocol, value: TCP,UDP, ICMP, ALL.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// 源CIDR。.
+	SourceCidr pulumi.StringPtrInput `pulumi:"sourceCidr"`
+	// source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.
+	SourcePort pulumi.StringPtrInput `pulumi:"sourcePort"`
 }
 
 func (NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs) ElementType() reflect.Type {
@@ -824,7 +748,7 @@ func (i NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs) ToNetworkAclQuintu
 // NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayInput is an input type that accepts NetworkAclQuintupleNetworkAclQuintupleSetIngressArray and NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayOutput values.
 // You can construct a concrete instance of `NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayInput` via:
 //
-//          NetworkAclQuintupleNetworkAclQuintupleSetIngressArray{ NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs{...} }
+//	NetworkAclQuintupleNetworkAclQuintupleSetIngressArray{ NetworkAclQuintupleNetworkAclQuintupleSetIngressArgs{...} }
 type NetworkAclQuintupleNetworkAclQuintupleSetIngressArrayInput interface {
 	pulumi.Input
 
@@ -860,46 +784,57 @@ func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) ToNetworkAclQuin
 	return o
 }
 
+// Action, ACCEPT or DROP.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) Action() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.Action }).(pulumi.StringPtrOutput)
 }
 
+// Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) CreateTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
 }
 
+// Description.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Destination CIDR.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) DestinationCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.DestinationCidr }).(pulumi.StringPtrOutput)
 }
 
+// Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) DestinationPort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.DestinationPort }).(pulumi.StringPtrOutput)
 }
 
+// Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) NetworkAclDirection() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.NetworkAclDirection }).(pulumi.StringPtrOutput)
 }
 
+// Unique ID of a network ACL entry.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) NetworkAclQuintupleEntryId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.NetworkAclQuintupleEntryId }).(pulumi.StringPtrOutput)
 }
 
+// Priority, starting from 1.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) Priority() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *int { return v.Priority }).(pulumi.IntPtrOutput)
 }
 
+// Protocol, value: TCP,UDP, ICMP, ALL.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
+// 源CIDR。.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) SourceCidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.SourceCidr }).(pulumi.StringPtrOutput)
 }
 
+// source port (all, single port, range). When the protocol is ALL or ICMP, the port cannot be specified.
 func (o NetworkAclQuintupleNetworkAclQuintupleSetIngressOutput) SourcePort() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NetworkAclQuintupleNetworkAclQuintupleSetIngress) *string { return v.SourcePort }).(pulumi.StringPtrOutput)
 }
@@ -940,7 +875,7 @@ type SnapshotPolicyAttachmentInstance struct {
 // SnapshotPolicyAttachmentInstanceInput is an input type that accepts SnapshotPolicyAttachmentInstanceArgs and SnapshotPolicyAttachmentInstanceOutput values.
 // You can construct a concrete instance of `SnapshotPolicyAttachmentInstanceInput` via:
 //
-//          SnapshotPolicyAttachmentInstanceArgs{...}
+//	SnapshotPolicyAttachmentInstanceArgs{...}
 type SnapshotPolicyAttachmentInstanceInput interface {
 	pulumi.Input
 
@@ -976,7 +911,7 @@ func (i SnapshotPolicyAttachmentInstanceArgs) ToSnapshotPolicyAttachmentInstance
 // SnapshotPolicyAttachmentInstanceArrayInput is an input type that accepts SnapshotPolicyAttachmentInstanceArray and SnapshotPolicyAttachmentInstanceArrayOutput values.
 // You can construct a concrete instance of `SnapshotPolicyAttachmentInstanceArrayInput` via:
 //
-//          SnapshotPolicyAttachmentInstanceArray{ SnapshotPolicyAttachmentInstanceArgs{...} }
+//	SnapshotPolicyAttachmentInstanceArray{ SnapshotPolicyAttachmentInstanceArgs{...} }
 type SnapshotPolicyAttachmentInstanceArrayInput interface {
 	pulumi.Input
 
@@ -1067,7 +1002,7 @@ type SnapshotPolicyBackupPolicy struct {
 // SnapshotPolicyBackupPolicyInput is an input type that accepts SnapshotPolicyBackupPolicyArgs and SnapshotPolicyBackupPolicyOutput values.
 // You can construct a concrete instance of `SnapshotPolicyBackupPolicyInput` via:
 //
-//          SnapshotPolicyBackupPolicyArgs{...}
+//	SnapshotPolicyBackupPolicyArgs{...}
 type SnapshotPolicyBackupPolicyInput interface {
 	pulumi.Input
 
@@ -1097,7 +1032,7 @@ func (i SnapshotPolicyBackupPolicyArgs) ToSnapshotPolicyBackupPolicyOutputWithCo
 // SnapshotPolicyBackupPolicyArrayInput is an input type that accepts SnapshotPolicyBackupPolicyArray and SnapshotPolicyBackupPolicyArrayOutput values.
 // You can construct a concrete instance of `SnapshotPolicyBackupPolicyArrayInput` via:
 //
-//          SnapshotPolicyBackupPolicyArray{ SnapshotPolicyBackupPolicyArgs{...} }
+//	SnapshotPolicyBackupPolicyArray{ SnapshotPolicyBackupPolicyArgs{...} }
 type SnapshotPolicyBackupPolicyArrayInput interface {
 	pulumi.Input
 
@@ -1173,7 +1108,7 @@ type GetAccountAttributesAccountAttributeSet struct {
 // GetAccountAttributesAccountAttributeSetInput is an input type that accepts GetAccountAttributesAccountAttributeSetArgs and GetAccountAttributesAccountAttributeSetOutput values.
 // You can construct a concrete instance of `GetAccountAttributesAccountAttributeSetInput` via:
 //
-//          GetAccountAttributesAccountAttributeSetArgs{...}
+//	GetAccountAttributesAccountAttributeSetArgs{...}
 type GetAccountAttributesAccountAttributeSetInput interface {
 	pulumi.Input
 
@@ -1203,7 +1138,7 @@ func (i GetAccountAttributesAccountAttributeSetArgs) ToGetAccountAttributesAccou
 // GetAccountAttributesAccountAttributeSetArrayInput is an input type that accepts GetAccountAttributesAccountAttributeSetArray and GetAccountAttributesAccountAttributeSetArrayOutput values.
 // You can construct a concrete instance of `GetAccountAttributesAccountAttributeSetArrayInput` via:
 //
-//          GetAccountAttributesAccountAttributeSetArray{ GetAccountAttributesAccountAttributeSetArgs{...} }
+//	GetAccountAttributesAccountAttributeSetArray{ GetAccountAttributesAccountAttributeSetArgs{...} }
 type GetAccountAttributesAccountAttributeSetArrayInput interface {
 	pulumi.Input
 
@@ -1289,7 +1224,7 @@ type GetAclsAclList struct {
 // GetAclsAclListInput is an input type that accepts GetAclsAclListArgs and GetAclsAclListOutput values.
 // You can construct a concrete instance of `GetAclsAclListInput` via:
 //
-//          GetAclsAclListArgs{...}
+//	GetAclsAclListArgs{...}
 type GetAclsAclListInput interface {
 	pulumi.Input
 
@@ -1329,7 +1264,7 @@ func (i GetAclsAclListArgs) ToGetAclsAclListOutputWithContext(ctx context.Contex
 // GetAclsAclListArrayInput is an input type that accepts GetAclsAclListArray and GetAclsAclListArrayOutput values.
 // You can construct a concrete instance of `GetAclsAclListArrayInput` via:
 //
-//          GetAclsAclListArray{ GetAclsAclListArgs{...} }
+//	GetAclsAclListArray{ GetAclsAclListArgs{...} }
 type GetAclsAclListArrayInput interface {
 	pulumi.Input
 
@@ -1436,7 +1371,7 @@ type GetAclsAclListEgress struct {
 // GetAclsAclListEgressInput is an input type that accepts GetAclsAclListEgressArgs and GetAclsAclListEgressOutput values.
 // You can construct a concrete instance of `GetAclsAclListEgressInput` via:
 //
-//          GetAclsAclListEgressArgs{...}
+//	GetAclsAclListEgressArgs{...}
 type GetAclsAclListEgressInput interface {
 	pulumi.Input
 
@@ -1472,7 +1407,7 @@ func (i GetAclsAclListEgressArgs) ToGetAclsAclListEgressOutputWithContext(ctx co
 // GetAclsAclListEgressArrayInput is an input type that accepts GetAclsAclListEgressArray and GetAclsAclListEgressArrayOutput values.
 // You can construct a concrete instance of `GetAclsAclListEgressArrayInput` via:
 //
-//          GetAclsAclListEgressArray{ GetAclsAclListEgressArgs{...} }
+//	GetAclsAclListEgressArray{ GetAclsAclListEgressArgs{...} }
 type GetAclsAclListEgressArrayInput interface {
 	pulumi.Input
 
@@ -1569,7 +1504,7 @@ type GetAclsAclListIngress struct {
 // GetAclsAclListIngressInput is an input type that accepts GetAclsAclListIngressArgs and GetAclsAclListIngressOutput values.
 // You can construct a concrete instance of `GetAclsAclListIngressInput` via:
 //
-//          GetAclsAclListIngressArgs{...}
+//	GetAclsAclListIngressArgs{...}
 type GetAclsAclListIngressInput interface {
 	pulumi.Input
 
@@ -1605,7 +1540,7 @@ func (i GetAclsAclListIngressArgs) ToGetAclsAclListIngressOutputWithContext(ctx 
 // GetAclsAclListIngressArrayInput is an input type that accepts GetAclsAclListIngressArray and GetAclsAclListIngressArrayOutput values.
 // You can construct a concrete instance of `GetAclsAclListIngressArrayInput` via:
 //
-//          GetAclsAclListIngressArray{ GetAclsAclListIngressArgs{...} }
+//	GetAclsAclListIngressArray{ GetAclsAclListIngressArgs{...} }
 type GetAclsAclListIngressArrayInput interface {
 	pulumi.Input
 
@@ -1702,7 +1637,7 @@ type GetAclsAclListSubnet struct {
 // GetAclsAclListSubnetInput is an input type that accepts GetAclsAclListSubnetArgs and GetAclsAclListSubnetOutput values.
 // You can construct a concrete instance of `GetAclsAclListSubnetInput` via:
 //
-//          GetAclsAclListSubnetArgs{...}
+//	GetAclsAclListSubnetArgs{...}
 type GetAclsAclListSubnetInput interface {
 	pulumi.Input
 
@@ -1738,7 +1673,7 @@ func (i GetAclsAclListSubnetArgs) ToGetAclsAclListSubnetOutputWithContext(ctx co
 // GetAclsAclListSubnetArrayInput is an input type that accepts GetAclsAclListSubnetArray and GetAclsAclListSubnetArrayOutput values.
 // You can construct a concrete instance of `GetAclsAclListSubnetArrayInput` via:
 //
-//          GetAclsAclListSubnetArray{ GetAclsAclListSubnetArgs{...} }
+//	GetAclsAclListSubnetArray{ GetAclsAclListSubnetArgs{...} }
 type GetAclsAclListSubnetArrayInput interface {
 	pulumi.Input
 
@@ -1827,7 +1762,7 @@ type GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSet struct {
 // GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetInput is an input type that accepts GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArgs and GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetOutput values.
 // You can construct a concrete instance of `GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetInput` via:
 //
-//          GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArgs{...}
+//	GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArgs{...}
 type GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetInput interface {
 	pulumi.Input
 
@@ -1855,7 +1790,7 @@ func (i GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArgs) ToGetB
 // GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayInput is an input type that accepts GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArray and GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayOutput values.
 // You can construct a concrete instance of `GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayInput` via:
 //
-//          GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArray{ GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArgs{...} }
+//	GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArray{ GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArgs{...} }
 type GetBandwidthPackageBillUsageBandwidthPackageBillBandwidthSetArrayInput interface {
 	pulumi.Input
 
@@ -1928,7 +1863,7 @@ type GetBandwidthPackageQuotaQuotaSet struct {
 // GetBandwidthPackageQuotaQuotaSetInput is an input type that accepts GetBandwidthPackageQuotaQuotaSetArgs and GetBandwidthPackageQuotaQuotaSetOutput values.
 // You can construct a concrete instance of `GetBandwidthPackageQuotaQuotaSetInput` via:
 //
-//          GetBandwidthPackageQuotaQuotaSetArgs{...}
+//	GetBandwidthPackageQuotaQuotaSetArgs{...}
 type GetBandwidthPackageQuotaQuotaSetInput interface {
 	pulumi.Input
 
@@ -1960,7 +1895,7 @@ func (i GetBandwidthPackageQuotaQuotaSetArgs) ToGetBandwidthPackageQuotaQuotaSet
 // GetBandwidthPackageQuotaQuotaSetArrayInput is an input type that accepts GetBandwidthPackageQuotaQuotaSetArray and GetBandwidthPackageQuotaQuotaSetArrayOutput values.
 // You can construct a concrete instance of `GetBandwidthPackageQuotaQuotaSetArrayInput` via:
 //
-//          GetBandwidthPackageQuotaQuotaSetArray{ GetBandwidthPackageQuotaQuotaSetArgs{...} }
+//	GetBandwidthPackageQuotaQuotaSetArray{ GetBandwidthPackageQuotaQuotaSetArgs{...} }
 type GetBandwidthPackageQuotaQuotaSetArrayInput interface {
 	pulumi.Input
 
@@ -2041,7 +1976,7 @@ type GetClassicLinkInstancesClassicLinkInstanceSet struct {
 // GetClassicLinkInstancesClassicLinkInstanceSetInput is an input type that accepts GetClassicLinkInstancesClassicLinkInstanceSetArgs and GetClassicLinkInstancesClassicLinkInstanceSetOutput values.
 // You can construct a concrete instance of `GetClassicLinkInstancesClassicLinkInstanceSetInput` via:
 //
-//          GetClassicLinkInstancesClassicLinkInstanceSetArgs{...}
+//	GetClassicLinkInstancesClassicLinkInstanceSetArgs{...}
 type GetClassicLinkInstancesClassicLinkInstanceSetInput interface {
 	pulumi.Input
 
@@ -2071,7 +2006,7 @@ func (i GetClassicLinkInstancesClassicLinkInstanceSetArgs) ToGetClassicLinkInsta
 // GetClassicLinkInstancesClassicLinkInstanceSetArrayInput is an input type that accepts GetClassicLinkInstancesClassicLinkInstanceSetArray and GetClassicLinkInstancesClassicLinkInstanceSetArrayOutput values.
 // You can construct a concrete instance of `GetClassicLinkInstancesClassicLinkInstanceSetArrayInput` via:
 //
-//          GetClassicLinkInstancesClassicLinkInstanceSetArray{ GetClassicLinkInstancesClassicLinkInstanceSetArgs{...} }
+//	GetClassicLinkInstancesClassicLinkInstanceSetArray{ GetClassicLinkInstancesClassicLinkInstanceSetArgs{...} }
 type GetClassicLinkInstancesClassicLinkInstanceSetArrayInput interface {
 	pulumi.Input
 
@@ -2147,7 +2082,7 @@ type GetClassicLinkInstancesFilter struct {
 // GetClassicLinkInstancesFilterInput is an input type that accepts GetClassicLinkInstancesFilterArgs and GetClassicLinkInstancesFilterOutput values.
 // You can construct a concrete instance of `GetClassicLinkInstancesFilterInput` via:
 //
-//          GetClassicLinkInstancesFilterArgs{...}
+//	GetClassicLinkInstancesFilterArgs{...}
 type GetClassicLinkInstancesFilterInput interface {
 	pulumi.Input
 
@@ -2177,7 +2112,7 @@ func (i GetClassicLinkInstancesFilterArgs) ToGetClassicLinkInstancesFilterOutput
 // GetClassicLinkInstancesFilterArrayInput is an input type that accepts GetClassicLinkInstancesFilterArray and GetClassicLinkInstancesFilterArrayOutput values.
 // You can construct a concrete instance of `GetClassicLinkInstancesFilterArrayInput` via:
 //
-//          GetClassicLinkInstancesFilterArray{ GetClassicLinkInstancesFilterArgs{...} }
+//	GetClassicLinkInstancesFilterArray{ GetClassicLinkInstancesFilterArgs{...} }
 type GetClassicLinkInstancesFilterArrayInput interface {
 	pulumi.Input
 
@@ -2253,7 +2188,7 @@ type GetCvmInstancesFilter struct {
 // GetCvmInstancesFilterInput is an input type that accepts GetCvmInstancesFilterArgs and GetCvmInstancesFilterOutput values.
 // You can construct a concrete instance of `GetCvmInstancesFilterInput` via:
 //
-//          GetCvmInstancesFilterArgs{...}
+//	GetCvmInstancesFilterArgs{...}
 type GetCvmInstancesFilterInput interface {
 	pulumi.Input
 
@@ -2283,7 +2218,7 @@ func (i GetCvmInstancesFilterArgs) ToGetCvmInstancesFilterOutputWithContext(ctx 
 // GetCvmInstancesFilterArrayInput is an input type that accepts GetCvmInstancesFilterArray and GetCvmInstancesFilterArrayOutput values.
 // You can construct a concrete instance of `GetCvmInstancesFilterArrayInput` via:
 //
-//          GetCvmInstancesFilterArray{ GetCvmInstancesFilterArgs{...} }
+//	GetCvmInstancesFilterArray{ GetCvmInstancesFilterArgs{...} }
 type GetCvmInstancesFilterArrayInput interface {
 	pulumi.Input
 
@@ -2379,7 +2314,7 @@ type GetCvmInstancesInstanceSet struct {
 // GetCvmInstancesInstanceSetInput is an input type that accepts GetCvmInstancesInstanceSetArgs and GetCvmInstancesInstanceSetOutput values.
 // You can construct a concrete instance of `GetCvmInstancesInstanceSetInput` via:
 //
-//          GetCvmInstancesInstanceSetArgs{...}
+//	GetCvmInstancesInstanceSetArgs{...}
 type GetCvmInstancesInstanceSetInput interface {
 	pulumi.Input
 
@@ -2429,7 +2364,7 @@ func (i GetCvmInstancesInstanceSetArgs) ToGetCvmInstancesInstanceSetOutputWithCo
 // GetCvmInstancesInstanceSetArrayInput is an input type that accepts GetCvmInstancesInstanceSetArray and GetCvmInstancesInstanceSetArrayOutput values.
 // You can construct a concrete instance of `GetCvmInstancesInstanceSetArrayInput` via:
 //
-//          GetCvmInstancesInstanceSetArray{ GetCvmInstancesInstanceSetArgs{...} }
+//	GetCvmInstancesInstanceSetArray{ GetCvmInstancesInstanceSetArgs{...} }
 type GetCvmInstancesInstanceSetArrayInput interface {
 	pulumi.Input
 
@@ -2561,7 +2496,7 @@ type GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSet struct {
 // GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetInput is an input type that accepts GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArgs and GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetOutput values.
 // You can construct a concrete instance of `GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetInput` via:
 //
-//          GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArgs{...}
+//	GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArgs{...}
 type GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetInput interface {
 	pulumi.Input
 
@@ -2597,7 +2532,7 @@ func (i GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArgs) ToGetGateway
 // GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayInput is an input type that accepts GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArray and GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayOutput values.
 // You can construct a concrete instance of `GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayInput` via:
 //
-//          GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArray{ GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArgs{...} }
+//	GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArray{ GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArgs{...} }
 type GetGatewayFlowMonitorDetailGatewayFlowMonitorDetailSetArrayInput interface {
 	pulumi.Input
 
@@ -2692,7 +2627,7 @@ type GetGatewayFlowQosGatewayQosSet struct {
 // GetGatewayFlowQosGatewayQosSetInput is an input type that accepts GetGatewayFlowQosGatewayQosSetArgs and GetGatewayFlowQosGatewayQosSetOutput values.
 // You can construct a concrete instance of `GetGatewayFlowQosGatewayQosSetInput` via:
 //
-//          GetGatewayFlowQosGatewayQosSetArgs{...}
+//	GetGatewayFlowQosGatewayQosSetArgs{...}
 type GetGatewayFlowQosGatewayQosSetInput interface {
 	pulumi.Input
 
@@ -2726,7 +2661,7 @@ func (i GetGatewayFlowQosGatewayQosSetArgs) ToGetGatewayFlowQosGatewayQosSetOutp
 // GetGatewayFlowQosGatewayQosSetArrayInput is an input type that accepts GetGatewayFlowQosGatewayQosSetArray and GetGatewayFlowQosGatewayQosSetArrayOutput values.
 // You can construct a concrete instance of `GetGatewayFlowQosGatewayQosSetArrayInput` via:
 //
-//          GetGatewayFlowQosGatewayQosSetArray{ GetGatewayFlowQosGatewayQosSetArgs{...} }
+//	GetGatewayFlowQosGatewayQosSetArray{ GetGatewayFlowQosGatewayQosSetArgs{...} }
 type GetGatewayFlowQosGatewayQosSetArrayInput interface {
 	pulumi.Input
 
@@ -2826,7 +2761,7 @@ type GetInstancesInstanceList struct {
 // GetInstancesInstanceListInput is an input type that accepts GetInstancesInstanceListArgs and GetInstancesInstanceListOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListInput` via:
 //
-//          GetInstancesInstanceListArgs{...}
+//	GetInstancesInstanceListArgs{...}
 type GetInstancesInstanceListInput interface {
 	pulumi.Input
 
@@ -2870,7 +2805,7 @@ func (i GetInstancesInstanceListArgs) ToGetInstancesInstanceListOutputWithContex
 // GetInstancesInstanceListArrayInput is an input type that accepts GetInstancesInstanceListArray and GetInstancesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetInstancesInstanceListArrayInput` via:
 //
-//          GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
+//	GetInstancesInstanceListArray{ GetInstancesInstanceListArgs{...} }
 type GetInstancesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -2981,7 +2916,7 @@ type GetLimitsVpcLimitSet struct {
 // GetLimitsVpcLimitSetInput is an input type that accepts GetLimitsVpcLimitSetArgs and GetLimitsVpcLimitSetOutput values.
 // You can construct a concrete instance of `GetLimitsVpcLimitSetInput` via:
 //
-//          GetLimitsVpcLimitSetArgs{...}
+//	GetLimitsVpcLimitSetArgs{...}
 type GetLimitsVpcLimitSetInput interface {
 	pulumi.Input
 
@@ -3011,7 +2946,7 @@ func (i GetLimitsVpcLimitSetArgs) ToGetLimitsVpcLimitSetOutputWithContext(ctx co
 // GetLimitsVpcLimitSetArrayInput is an input type that accepts GetLimitsVpcLimitSetArray and GetLimitsVpcLimitSetArrayOutput values.
 // You can construct a concrete instance of `GetLimitsVpcLimitSetArrayInput` via:
 //
-//          GetLimitsVpcLimitSetArray{ GetLimitsVpcLimitSetArgs{...} }
+//	GetLimitsVpcLimitSetArray{ GetLimitsVpcLimitSetArgs{...} }
 type GetLimitsVpcLimitSetArrayInput interface {
 	pulumi.Input
 
@@ -3091,7 +3026,7 @@ type GetNetDetectStateCheckNetDetectIpStateSet struct {
 // GetNetDetectStateCheckNetDetectIpStateSetInput is an input type that accepts GetNetDetectStateCheckNetDetectIpStateSetArgs and GetNetDetectStateCheckNetDetectIpStateSetOutput values.
 // You can construct a concrete instance of `GetNetDetectStateCheckNetDetectIpStateSetInput` via:
 //
-//          GetNetDetectStateCheckNetDetectIpStateSetArgs{...}
+//	GetNetDetectStateCheckNetDetectIpStateSetArgs{...}
 type GetNetDetectStateCheckNetDetectIpStateSetInput interface {
 	pulumi.Input
 
@@ -3125,7 +3060,7 @@ func (i GetNetDetectStateCheckNetDetectIpStateSetArgs) ToGetNetDetectStateCheckN
 // GetNetDetectStateCheckNetDetectIpStateSetArrayInput is an input type that accepts GetNetDetectStateCheckNetDetectIpStateSetArray and GetNetDetectStateCheckNetDetectIpStateSetArrayOutput values.
 // You can construct a concrete instance of `GetNetDetectStateCheckNetDetectIpStateSetArrayInput` via:
 //
-//          GetNetDetectStateCheckNetDetectIpStateSetArray{ GetNetDetectStateCheckNetDetectIpStateSetArgs{...} }
+//	GetNetDetectStateCheckNetDetectIpStateSetArray{ GetNetDetectStateCheckNetDetectIpStateSetArgs{...} }
 type GetNetDetectStateCheckNetDetectIpStateSetArrayInput interface {
 	pulumi.Input
 
@@ -3211,7 +3146,7 @@ type GetNetDetectStatesFilter struct {
 // GetNetDetectStatesFilterInput is an input type that accepts GetNetDetectStatesFilterArgs and GetNetDetectStatesFilterOutput values.
 // You can construct a concrete instance of `GetNetDetectStatesFilterInput` via:
 //
-//          GetNetDetectStatesFilterArgs{...}
+//	GetNetDetectStatesFilterArgs{...}
 type GetNetDetectStatesFilterInput interface {
 	pulumi.Input
 
@@ -3241,7 +3176,7 @@ func (i GetNetDetectStatesFilterArgs) ToGetNetDetectStatesFilterOutputWithContex
 // GetNetDetectStatesFilterArrayInput is an input type that accepts GetNetDetectStatesFilterArray and GetNetDetectStatesFilterArrayOutput values.
 // You can construct a concrete instance of `GetNetDetectStatesFilterArrayInput` via:
 //
-//          GetNetDetectStatesFilterArray{ GetNetDetectStatesFilterArgs{...} }
+//	GetNetDetectStatesFilterArray{ GetNetDetectStatesFilterArgs{...} }
 type GetNetDetectStatesFilterArrayInput interface {
 	pulumi.Input
 
@@ -3317,7 +3252,7 @@ type GetNetDetectStatesNetDetectStateSet struct {
 // GetNetDetectStatesNetDetectStateSetInput is an input type that accepts GetNetDetectStatesNetDetectStateSetArgs and GetNetDetectStatesNetDetectStateSetOutput values.
 // You can construct a concrete instance of `GetNetDetectStatesNetDetectStateSetInput` via:
 //
-//          GetNetDetectStatesNetDetectStateSetArgs{...}
+//	GetNetDetectStatesNetDetectStateSetArgs{...}
 type GetNetDetectStatesNetDetectStateSetInput interface {
 	pulumi.Input
 
@@ -3347,7 +3282,7 @@ func (i GetNetDetectStatesNetDetectStateSetArgs) ToGetNetDetectStatesNetDetectSt
 // GetNetDetectStatesNetDetectStateSetArrayInput is an input type that accepts GetNetDetectStatesNetDetectStateSetArray and GetNetDetectStatesNetDetectStateSetArrayOutput values.
 // You can construct a concrete instance of `GetNetDetectStatesNetDetectStateSetArrayInput` via:
 //
-//          GetNetDetectStatesNetDetectStateSetArray{ GetNetDetectStatesNetDetectStateSetArgs{...} }
+//	GetNetDetectStatesNetDetectStateSetArray{ GetNetDetectStatesNetDetectStateSetArgs{...} }
 type GetNetDetectStatesNetDetectStateSetArrayInput interface {
 	pulumi.Input
 
@@ -3429,7 +3364,7 @@ type GetNetDetectStatesNetDetectStateSetNetDetectIpStateSet struct {
 // GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetInput is an input type that accepts GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArgs and GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetOutput values.
 // You can construct a concrete instance of `GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetInput` via:
 //
-//          GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArgs{...}
+//	GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArgs{...}
 type GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetInput interface {
 	pulumi.Input
 
@@ -3463,7 +3398,7 @@ func (i GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArgs) ToGetNetDete
 // GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayInput is an input type that accepts GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArray and GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayOutput values.
 // You can construct a concrete instance of `GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayInput` via:
 //
-//          GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArray{ GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArgs{...} }
+//	GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArray{ GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArgs{...} }
 type GetNetDetectStatesNetDetectStateSetNetDetectIpStateSetArrayInput interface {
 	pulumi.Input
 
@@ -3553,7 +3488,7 @@ type GetPrivateIpAddressesVpcPrivateIpAddressSet struct {
 // GetPrivateIpAddressesVpcPrivateIpAddressSetInput is an input type that accepts GetPrivateIpAddressesVpcPrivateIpAddressSetArgs and GetPrivateIpAddressesVpcPrivateIpAddressSetOutput values.
 // You can construct a concrete instance of `GetPrivateIpAddressesVpcPrivateIpAddressSetInput` via:
 //
-//          GetPrivateIpAddressesVpcPrivateIpAddressSetArgs{...}
+//	GetPrivateIpAddressesVpcPrivateIpAddressSetArgs{...}
 type GetPrivateIpAddressesVpcPrivateIpAddressSetInput interface {
 	pulumi.Input
 
@@ -3587,7 +3522,7 @@ func (i GetPrivateIpAddressesVpcPrivateIpAddressSetArgs) ToGetPrivateIpAddresses
 // GetPrivateIpAddressesVpcPrivateIpAddressSetArrayInput is an input type that accepts GetPrivateIpAddressesVpcPrivateIpAddressSetArray and GetPrivateIpAddressesVpcPrivateIpAddressSetArrayOutput values.
 // You can construct a concrete instance of `GetPrivateIpAddressesVpcPrivateIpAddressSetArrayInput` via:
 //
-//          GetPrivateIpAddressesVpcPrivateIpAddressSetArray{ GetPrivateIpAddressesVpcPrivateIpAddressSetArgs{...} }
+//	GetPrivateIpAddressesVpcPrivateIpAddressSetArray{ GetPrivateIpAddressesVpcPrivateIpAddressSetArgs{...} }
 type GetPrivateIpAddressesVpcPrivateIpAddressSetArrayInput interface {
 	pulumi.Input
 
@@ -3679,7 +3614,7 @@ type GetProductQuotaProductQuotaSet struct {
 // GetProductQuotaProductQuotaSetInput is an input type that accepts GetProductQuotaProductQuotaSetArgs and GetProductQuotaProductQuotaSetOutput values.
 // You can construct a concrete instance of `GetProductQuotaProductQuotaSetInput` via:
 //
-//          GetProductQuotaProductQuotaSetArgs{...}
+//	GetProductQuotaProductQuotaSetArgs{...}
 type GetProductQuotaProductQuotaSetInput interface {
 	pulumi.Input
 
@@ -3715,7 +3650,7 @@ func (i GetProductQuotaProductQuotaSetArgs) ToGetProductQuotaProductQuotaSetOutp
 // GetProductQuotaProductQuotaSetArrayInput is an input type that accepts GetProductQuotaProductQuotaSetArray and GetProductQuotaProductQuotaSetArrayOutput values.
 // You can construct a concrete instance of `GetProductQuotaProductQuotaSetArrayInput` via:
 //
-//          GetProductQuotaProductQuotaSetArray{ GetProductQuotaProductQuotaSetArgs{...} }
+//	GetProductQuotaProductQuotaSetArray{ GetProductQuotaProductQuotaSetArgs{...} }
 type GetProductQuotaProductQuotaSetArrayInput interface {
 	pulumi.Input
 
@@ -3886,7 +3821,7 @@ type GetResourceDashboardResourceDashboardSet struct {
 // GetResourceDashboardResourceDashboardSetInput is an input type that accepts GetResourceDashboardResourceDashboardSetArgs and GetResourceDashboardResourceDashboardSetOutput values.
 // You can construct a concrete instance of `GetResourceDashboardResourceDashboardSetInput` via:
 //
-//          GetResourceDashboardResourceDashboardSetArgs{...}
+//	GetResourceDashboardResourceDashboardSetArgs{...}
 type GetResourceDashboardResourceDashboardSetInput interface {
 	pulumi.Input
 
@@ -3996,7 +3931,7 @@ func (i GetResourceDashboardResourceDashboardSetArgs) ToGetResourceDashboardReso
 // GetResourceDashboardResourceDashboardSetArrayInput is an input type that accepts GetResourceDashboardResourceDashboardSetArray and GetResourceDashboardResourceDashboardSetArrayOutput values.
 // You can construct a concrete instance of `GetResourceDashboardResourceDashboardSetArrayInput` via:
 //
-//          GetResourceDashboardResourceDashboardSetArray{ GetResourceDashboardResourceDashboardSetArgs{...} }
+//	GetResourceDashboardResourceDashboardSetArray{ GetResourceDashboardResourceDashboardSetArgs{...} }
 type GetResourceDashboardResourceDashboardSetArrayInput interface {
 	pulumi.Input
 
@@ -4274,7 +4209,7 @@ type GetRouteConflictsRouteConflictSet struct {
 // GetRouteConflictsRouteConflictSetInput is an input type that accepts GetRouteConflictsRouteConflictSetArgs and GetRouteConflictsRouteConflictSetOutput values.
 // You can construct a concrete instance of `GetRouteConflictsRouteConflictSetInput` via:
 //
-//          GetRouteConflictsRouteConflictSetArgs{...}
+//	GetRouteConflictsRouteConflictSetArgs{...}
 type GetRouteConflictsRouteConflictSetInput interface {
 	pulumi.Input
 
@@ -4306,7 +4241,7 @@ func (i GetRouteConflictsRouteConflictSetArgs) ToGetRouteConflictsRouteConflictS
 // GetRouteConflictsRouteConflictSetArrayInput is an input type that accepts GetRouteConflictsRouteConflictSetArray and GetRouteConflictsRouteConflictSetArrayOutput values.
 // You can construct a concrete instance of `GetRouteConflictsRouteConflictSetArrayInput` via:
 //
-//          GetRouteConflictsRouteConflictSetArray{ GetRouteConflictsRouteConflictSetArgs{...} }
+//	GetRouteConflictsRouteConflictSetArray{ GetRouteConflictsRouteConflictSetArgs{...} }
 type GetRouteConflictsRouteConflictSetArrayInput interface {
 	pulumi.Input
 
@@ -4409,7 +4344,7 @@ type GetRouteConflictsRouteConflictSetConflictSet struct {
 // GetRouteConflictsRouteConflictSetConflictSetInput is an input type that accepts GetRouteConflictsRouteConflictSetConflictSetArgs and GetRouteConflictsRouteConflictSetConflictSetOutput values.
 // You can construct a concrete instance of `GetRouteConflictsRouteConflictSetConflictSetInput` via:
 //
-//          GetRouteConflictsRouteConflictSetConflictSetArgs{...}
+//	GetRouteConflictsRouteConflictSetConflictSetArgs{...}
 type GetRouteConflictsRouteConflictSetConflictSetInput interface {
 	pulumi.Input
 
@@ -4459,7 +4394,7 @@ func (i GetRouteConflictsRouteConflictSetConflictSetArgs) ToGetRouteConflictsRou
 // GetRouteConflictsRouteConflictSetConflictSetArrayInput is an input type that accepts GetRouteConflictsRouteConflictSetConflictSetArray and GetRouteConflictsRouteConflictSetConflictSetArrayOutput values.
 // You can construct a concrete instance of `GetRouteConflictsRouteConflictSetConflictSetArrayInput` via:
 //
-//          GetRouteConflictsRouteConflictSetConflictSetArray{ GetRouteConflictsRouteConflictSetConflictSetArgs{...} }
+//	GetRouteConflictsRouteConflictSetConflictSetArray{ GetRouteConflictsRouteConflictSetConflictSetArgs{...} }
 type GetRouteConflictsRouteConflictSetConflictSetArrayInput interface {
 	pulumi.Input
 
@@ -4597,7 +4532,7 @@ type GetRouteTablesInstanceList struct {
 // GetRouteTablesInstanceListInput is an input type that accepts GetRouteTablesInstanceListArgs and GetRouteTablesInstanceListOutput values.
 // You can construct a concrete instance of `GetRouteTablesInstanceListInput` via:
 //
-//          GetRouteTablesInstanceListArgs{...}
+//	GetRouteTablesInstanceListArgs{...}
 type GetRouteTablesInstanceListInput interface {
 	pulumi.Input
 
@@ -4639,7 +4574,7 @@ func (i GetRouteTablesInstanceListArgs) ToGetRouteTablesInstanceListOutputWithCo
 // GetRouteTablesInstanceListArrayInput is an input type that accepts GetRouteTablesInstanceListArray and GetRouteTablesInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetRouteTablesInstanceListArrayInput` via:
 //
-//          GetRouteTablesInstanceListArray{ GetRouteTablesInstanceListArgs{...} }
+//	GetRouteTablesInstanceListArray{ GetRouteTablesInstanceListArgs{...} }
 type GetRouteTablesInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -4753,7 +4688,7 @@ type GetRouteTablesInstanceListRouteEntryInfo struct {
 // GetRouteTablesInstanceListRouteEntryInfoInput is an input type that accepts GetRouteTablesInstanceListRouteEntryInfoArgs and GetRouteTablesInstanceListRouteEntryInfoOutput values.
 // You can construct a concrete instance of `GetRouteTablesInstanceListRouteEntryInfoInput` via:
 //
-//          GetRouteTablesInstanceListRouteEntryInfoArgs{...}
+//	GetRouteTablesInstanceListRouteEntryInfoArgs{...}
 type GetRouteTablesInstanceListRouteEntryInfoInput interface {
 	pulumi.Input
 
@@ -4789,7 +4724,7 @@ func (i GetRouteTablesInstanceListRouteEntryInfoArgs) ToGetRouteTablesInstanceLi
 // GetRouteTablesInstanceListRouteEntryInfoArrayInput is an input type that accepts GetRouteTablesInstanceListRouteEntryInfoArray and GetRouteTablesInstanceListRouteEntryInfoArrayOutput values.
 // You can construct a concrete instance of `GetRouteTablesInstanceListRouteEntryInfoArrayInput` via:
 //
-//          GetRouteTablesInstanceListRouteEntryInfoArray{ GetRouteTablesInstanceListRouteEntryInfoArgs{...} }
+//	GetRouteTablesInstanceListRouteEntryInfoArray{ GetRouteTablesInstanceListRouteEntryInfoArgs{...} }
 type GetRouteTablesInstanceListRouteEntryInfoArrayInput interface {
 	pulumi.Input
 
@@ -4892,7 +4827,7 @@ type GetSecurityGroupLimitsSecurityGroupLimitSet struct {
 // GetSecurityGroupLimitsSecurityGroupLimitSetInput is an input type that accepts GetSecurityGroupLimitsSecurityGroupLimitSetArgs and GetSecurityGroupLimitsSecurityGroupLimitSetOutput values.
 // You can construct a concrete instance of `GetSecurityGroupLimitsSecurityGroupLimitSetInput` via:
 //
-//          GetSecurityGroupLimitsSecurityGroupLimitSetArgs{...}
+//	GetSecurityGroupLimitsSecurityGroupLimitSetArgs{...}
 type GetSecurityGroupLimitsSecurityGroupLimitSetInput interface {
 	pulumi.Input
 
@@ -4934,7 +4869,7 @@ func (i GetSecurityGroupLimitsSecurityGroupLimitSetArgs) ToGetSecurityGroupLimit
 // GetSecurityGroupLimitsSecurityGroupLimitSetArrayInput is an input type that accepts GetSecurityGroupLimitsSecurityGroupLimitSetArray and GetSecurityGroupLimitsSecurityGroupLimitSetArrayOutput values.
 // You can construct a concrete instance of `GetSecurityGroupLimitsSecurityGroupLimitSetArrayInput` via:
 //
-//          GetSecurityGroupLimitsSecurityGroupLimitSetArray{ GetSecurityGroupLimitsSecurityGroupLimitSetArgs{...} }
+//	GetSecurityGroupLimitsSecurityGroupLimitSetArray{ GetSecurityGroupLimitsSecurityGroupLimitSetArgs{...} }
 type GetSecurityGroupLimitsSecurityGroupLimitSetArrayInput interface {
 	pulumi.Input
 
@@ -5040,7 +4975,7 @@ type GetSecurityGroupReferencesReferredSecurityGroupSet struct {
 // GetSecurityGroupReferencesReferredSecurityGroupSetInput is an input type that accepts GetSecurityGroupReferencesReferredSecurityGroupSetArgs and GetSecurityGroupReferencesReferredSecurityGroupSetOutput values.
 // You can construct a concrete instance of `GetSecurityGroupReferencesReferredSecurityGroupSetInput` via:
 //
-//          GetSecurityGroupReferencesReferredSecurityGroupSetArgs{...}
+//	GetSecurityGroupReferencesReferredSecurityGroupSetArgs{...}
 type GetSecurityGroupReferencesReferredSecurityGroupSetInput interface {
 	pulumi.Input
 
@@ -5070,7 +5005,7 @@ func (i GetSecurityGroupReferencesReferredSecurityGroupSetArgs) ToGetSecurityGro
 // GetSecurityGroupReferencesReferredSecurityGroupSetArrayInput is an input type that accepts GetSecurityGroupReferencesReferredSecurityGroupSetArray and GetSecurityGroupReferencesReferredSecurityGroupSetArrayOutput values.
 // You can construct a concrete instance of `GetSecurityGroupReferencesReferredSecurityGroupSetArrayInput` via:
 //
-//          GetSecurityGroupReferencesReferredSecurityGroupSetArray{ GetSecurityGroupReferencesReferredSecurityGroupSetArgs{...} }
+//	GetSecurityGroupReferencesReferredSecurityGroupSetArray{ GetSecurityGroupReferencesReferredSecurityGroupSetArgs{...} }
 type GetSecurityGroupReferencesReferredSecurityGroupSetArrayInput interface {
 	pulumi.Input
 
@@ -5164,7 +5099,7 @@ type GetSgSnapshotFileContentBackupData struct {
 // GetSgSnapshotFileContentBackupDataInput is an input type that accepts GetSgSnapshotFileContentBackupDataArgs and GetSgSnapshotFileContentBackupDataOutput values.
 // You can construct a concrete instance of `GetSgSnapshotFileContentBackupDataInput` via:
 //
-//          GetSgSnapshotFileContentBackupDataArgs{...}
+//	GetSgSnapshotFileContentBackupDataArgs{...}
 type GetSgSnapshotFileContentBackupDataInput interface {
 	pulumi.Input
 
@@ -5212,7 +5147,7 @@ func (i GetSgSnapshotFileContentBackupDataArgs) ToGetSgSnapshotFileContentBackup
 // GetSgSnapshotFileContentBackupDataArrayInput is an input type that accepts GetSgSnapshotFileContentBackupDataArray and GetSgSnapshotFileContentBackupDataArrayOutput values.
 // You can construct a concrete instance of `GetSgSnapshotFileContentBackupDataArrayInput` via:
 //
-//          GetSgSnapshotFileContentBackupDataArray{ GetSgSnapshotFileContentBackupDataArgs{...} }
+//	GetSgSnapshotFileContentBackupDataArray{ GetSgSnapshotFileContentBackupDataArgs{...} }
 type GetSgSnapshotFileContentBackupDataArrayInput interface {
 	pulumi.Input
 
@@ -5337,7 +5272,7 @@ type GetSgSnapshotFileContentBackupDataAddressTemplate struct {
 // GetSgSnapshotFileContentBackupDataAddressTemplateInput is an input type that accepts GetSgSnapshotFileContentBackupDataAddressTemplateArgs and GetSgSnapshotFileContentBackupDataAddressTemplateOutput values.
 // You can construct a concrete instance of `GetSgSnapshotFileContentBackupDataAddressTemplateInput` via:
 //
-//          GetSgSnapshotFileContentBackupDataAddressTemplateArgs{...}
+//	GetSgSnapshotFileContentBackupDataAddressTemplateArgs{...}
 type GetSgSnapshotFileContentBackupDataAddressTemplateInput interface {
 	pulumi.Input
 
@@ -5367,7 +5302,7 @@ func (i GetSgSnapshotFileContentBackupDataAddressTemplateArgs) ToGetSgSnapshotFi
 // GetSgSnapshotFileContentBackupDataAddressTemplateArrayInput is an input type that accepts GetSgSnapshotFileContentBackupDataAddressTemplateArray and GetSgSnapshotFileContentBackupDataAddressTemplateArrayOutput values.
 // You can construct a concrete instance of `GetSgSnapshotFileContentBackupDataAddressTemplateArrayInput` via:
 //
-//          GetSgSnapshotFileContentBackupDataAddressTemplateArray{ GetSgSnapshotFileContentBackupDataAddressTemplateArgs{...} }
+//	GetSgSnapshotFileContentBackupDataAddressTemplateArray{ GetSgSnapshotFileContentBackupDataAddressTemplateArgs{...} }
 type GetSgSnapshotFileContentBackupDataAddressTemplateArrayInput interface {
 	pulumi.Input
 
@@ -5443,7 +5378,7 @@ type GetSgSnapshotFileContentBackupDataServiceTemplate struct {
 // GetSgSnapshotFileContentBackupDataServiceTemplateInput is an input type that accepts GetSgSnapshotFileContentBackupDataServiceTemplateArgs and GetSgSnapshotFileContentBackupDataServiceTemplateOutput values.
 // You can construct a concrete instance of `GetSgSnapshotFileContentBackupDataServiceTemplateInput` via:
 //
-//          GetSgSnapshotFileContentBackupDataServiceTemplateArgs{...}
+//	GetSgSnapshotFileContentBackupDataServiceTemplateArgs{...}
 type GetSgSnapshotFileContentBackupDataServiceTemplateInput interface {
 	pulumi.Input
 
@@ -5473,7 +5408,7 @@ func (i GetSgSnapshotFileContentBackupDataServiceTemplateArgs) ToGetSgSnapshotFi
 // GetSgSnapshotFileContentBackupDataServiceTemplateArrayInput is an input type that accepts GetSgSnapshotFileContentBackupDataServiceTemplateArray and GetSgSnapshotFileContentBackupDataServiceTemplateArrayOutput values.
 // You can construct a concrete instance of `GetSgSnapshotFileContentBackupDataServiceTemplateArrayInput` via:
 //
-//          GetSgSnapshotFileContentBackupDataServiceTemplateArray{ GetSgSnapshotFileContentBackupDataServiceTemplateArgs{...} }
+//	GetSgSnapshotFileContentBackupDataServiceTemplateArray{ GetSgSnapshotFileContentBackupDataServiceTemplateArgs{...} }
 type GetSgSnapshotFileContentBackupDataServiceTemplateArrayInput interface {
 	pulumi.Input
 
@@ -5567,7 +5502,7 @@ type GetSgSnapshotFileContentOriginalData struct {
 // GetSgSnapshotFileContentOriginalDataInput is an input type that accepts GetSgSnapshotFileContentOriginalDataArgs and GetSgSnapshotFileContentOriginalDataOutput values.
 // You can construct a concrete instance of `GetSgSnapshotFileContentOriginalDataInput` via:
 //
-//          GetSgSnapshotFileContentOriginalDataArgs{...}
+//	GetSgSnapshotFileContentOriginalDataArgs{...}
 type GetSgSnapshotFileContentOriginalDataInput interface {
 	pulumi.Input
 
@@ -5615,7 +5550,7 @@ func (i GetSgSnapshotFileContentOriginalDataArgs) ToGetSgSnapshotFileContentOrig
 // GetSgSnapshotFileContentOriginalDataArrayInput is an input type that accepts GetSgSnapshotFileContentOriginalDataArray and GetSgSnapshotFileContentOriginalDataArrayOutput values.
 // You can construct a concrete instance of `GetSgSnapshotFileContentOriginalDataArrayInput` via:
 //
-//          GetSgSnapshotFileContentOriginalDataArray{ GetSgSnapshotFileContentOriginalDataArgs{...} }
+//	GetSgSnapshotFileContentOriginalDataArray{ GetSgSnapshotFileContentOriginalDataArgs{...} }
 type GetSgSnapshotFileContentOriginalDataArrayInput interface {
 	pulumi.Input
 
@@ -5740,7 +5675,7 @@ type GetSgSnapshotFileContentOriginalDataAddressTemplate struct {
 // GetSgSnapshotFileContentOriginalDataAddressTemplateInput is an input type that accepts GetSgSnapshotFileContentOriginalDataAddressTemplateArgs and GetSgSnapshotFileContentOriginalDataAddressTemplateOutput values.
 // You can construct a concrete instance of `GetSgSnapshotFileContentOriginalDataAddressTemplateInput` via:
 //
-//          GetSgSnapshotFileContentOriginalDataAddressTemplateArgs{...}
+//	GetSgSnapshotFileContentOriginalDataAddressTemplateArgs{...}
 type GetSgSnapshotFileContentOriginalDataAddressTemplateInput interface {
 	pulumi.Input
 
@@ -5770,7 +5705,7 @@ func (i GetSgSnapshotFileContentOriginalDataAddressTemplateArgs) ToGetSgSnapshot
 // GetSgSnapshotFileContentOriginalDataAddressTemplateArrayInput is an input type that accepts GetSgSnapshotFileContentOriginalDataAddressTemplateArray and GetSgSnapshotFileContentOriginalDataAddressTemplateArrayOutput values.
 // You can construct a concrete instance of `GetSgSnapshotFileContentOriginalDataAddressTemplateArrayInput` via:
 //
-//          GetSgSnapshotFileContentOriginalDataAddressTemplateArray{ GetSgSnapshotFileContentOriginalDataAddressTemplateArgs{...} }
+//	GetSgSnapshotFileContentOriginalDataAddressTemplateArray{ GetSgSnapshotFileContentOriginalDataAddressTemplateArgs{...} }
 type GetSgSnapshotFileContentOriginalDataAddressTemplateArrayInput interface {
 	pulumi.Input
 
@@ -5846,7 +5781,7 @@ type GetSgSnapshotFileContentOriginalDataServiceTemplate struct {
 // GetSgSnapshotFileContentOriginalDataServiceTemplateInput is an input type that accepts GetSgSnapshotFileContentOriginalDataServiceTemplateArgs and GetSgSnapshotFileContentOriginalDataServiceTemplateOutput values.
 // You can construct a concrete instance of `GetSgSnapshotFileContentOriginalDataServiceTemplateInput` via:
 //
-//          GetSgSnapshotFileContentOriginalDataServiceTemplateArgs{...}
+//	GetSgSnapshotFileContentOriginalDataServiceTemplateArgs{...}
 type GetSgSnapshotFileContentOriginalDataServiceTemplateInput interface {
 	pulumi.Input
 
@@ -5876,7 +5811,7 @@ func (i GetSgSnapshotFileContentOriginalDataServiceTemplateArgs) ToGetSgSnapshot
 // GetSgSnapshotFileContentOriginalDataServiceTemplateArrayInput is an input type that accepts GetSgSnapshotFileContentOriginalDataServiceTemplateArray and GetSgSnapshotFileContentOriginalDataServiceTemplateArrayOutput values.
 // You can construct a concrete instance of `GetSgSnapshotFileContentOriginalDataServiceTemplateArrayInput` via:
 //
-//          GetSgSnapshotFileContentOriginalDataServiceTemplateArray{ GetSgSnapshotFileContentOriginalDataServiceTemplateArgs{...} }
+//	GetSgSnapshotFileContentOriginalDataServiceTemplateArray{ GetSgSnapshotFileContentOriginalDataServiceTemplateArgs{...} }
 type GetSgSnapshotFileContentOriginalDataServiceTemplateArrayInput interface {
 	pulumi.Input
 
@@ -5958,7 +5893,7 @@ type GetSnapshotFilesSnapshotFileSet struct {
 // GetSnapshotFilesSnapshotFileSetInput is an input type that accepts GetSnapshotFilesSnapshotFileSetArgs and GetSnapshotFilesSnapshotFileSetOutput values.
 // You can construct a concrete instance of `GetSnapshotFilesSnapshotFileSetInput` via:
 //
-//          GetSnapshotFilesSnapshotFileSetArgs{...}
+//	GetSnapshotFilesSnapshotFileSetArgs{...}
 type GetSnapshotFilesSnapshotFileSetInput interface {
 	pulumi.Input
 
@@ -5994,7 +5929,7 @@ func (i GetSnapshotFilesSnapshotFileSetArgs) ToGetSnapshotFilesSnapshotFileSetOu
 // GetSnapshotFilesSnapshotFileSetArrayInput is an input type that accepts GetSnapshotFilesSnapshotFileSetArray and GetSnapshotFilesSnapshotFileSetArrayOutput values.
 // You can construct a concrete instance of `GetSnapshotFilesSnapshotFileSetArrayInput` via:
 //
-//          GetSnapshotFilesSnapshotFileSetArray{ GetSnapshotFilesSnapshotFileSetArgs{...} }
+//	GetSnapshotFilesSnapshotFileSetArray{ GetSnapshotFilesSnapshotFileSetArgs{...} }
 type GetSnapshotFilesSnapshotFileSetArrayInput interface {
 	pulumi.Input
 
@@ -6089,7 +6024,7 @@ type GetSubnetResourceDashboardResourceStatisticsSet struct {
 // GetSubnetResourceDashboardResourceStatisticsSetInput is an input type that accepts GetSubnetResourceDashboardResourceStatisticsSetArgs and GetSubnetResourceDashboardResourceStatisticsSetOutput values.
 // You can construct a concrete instance of `GetSubnetResourceDashboardResourceStatisticsSetInput` via:
 //
-//          GetSubnetResourceDashboardResourceStatisticsSetArgs{...}
+//	GetSubnetResourceDashboardResourceStatisticsSetArgs{...}
 type GetSubnetResourceDashboardResourceStatisticsSetInput interface {
 	pulumi.Input
 
@@ -6123,7 +6058,7 @@ func (i GetSubnetResourceDashboardResourceStatisticsSetArgs) ToGetSubnetResource
 // GetSubnetResourceDashboardResourceStatisticsSetArrayInput is an input type that accepts GetSubnetResourceDashboardResourceStatisticsSetArray and GetSubnetResourceDashboardResourceStatisticsSetArrayOutput values.
 // You can construct a concrete instance of `GetSubnetResourceDashboardResourceStatisticsSetArrayInput` via:
 //
-//          GetSubnetResourceDashboardResourceStatisticsSetArray{ GetSubnetResourceDashboardResourceStatisticsSetArgs{...} }
+//	GetSubnetResourceDashboardResourceStatisticsSetArray{ GetSubnetResourceDashboardResourceStatisticsSetArgs{...} }
 type GetSubnetResourceDashboardResourceStatisticsSetArrayInput interface {
 	pulumi.Input
 
@@ -6213,7 +6148,7 @@ type GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSet st
 // GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetInput is an input type that accepts GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArgs and GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetOutput values.
 // You can construct a concrete instance of `GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetInput` via:
 //
-//          GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArgs{...}
+//	GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArgs{...}
 type GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetInput interface {
 	pulumi.Input
 
@@ -6245,7 +6180,7 @@ func (i GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSet
 // GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayInput is an input type that accepts GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArray and GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayOutput values.
 // You can construct a concrete instance of `GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayInput` via:
 //
-//          GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArray{ GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArgs{...} }
+//	GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArray{ GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArgs{...} }
 type GetSubnetResourceDashboardResourceStatisticsSetResourceStatisticsItemSetArrayInput interface {
 	pulumi.Input
 
@@ -6350,7 +6285,7 @@ type GetSubnetsInstanceList struct {
 // GetSubnetsInstanceListInput is an input type that accepts GetSubnetsInstanceListArgs and GetSubnetsInstanceListOutput values.
 // You can construct a concrete instance of `GetSubnetsInstanceListInput` via:
 //
-//          GetSubnetsInstanceListArgs{...}
+//	GetSubnetsInstanceListArgs{...}
 type GetSubnetsInstanceListInput interface {
 	pulumi.Input
 
@@ -6398,7 +6333,7 @@ func (i GetSubnetsInstanceListArgs) ToGetSubnetsInstanceListOutputWithContext(ct
 // GetSubnetsInstanceListArrayInput is an input type that accepts GetSubnetsInstanceListArray and GetSubnetsInstanceListArrayOutput values.
 // You can construct a concrete instance of `GetSubnetsInstanceListArrayInput` via:
 //
-//          GetSubnetsInstanceListArray{ GetSubnetsInstanceListArgs{...} }
+//	GetSubnetsInstanceListArray{ GetSubnetsInstanceListArgs{...} }
 type GetSubnetsInstanceListArrayInput interface {
 	pulumi.Input
 
@@ -6523,7 +6458,7 @@ type GetTemplateLimitsTemplateLimit struct {
 // GetTemplateLimitsTemplateLimitInput is an input type that accepts GetTemplateLimitsTemplateLimitArgs and GetTemplateLimitsTemplateLimitOutput values.
 // You can construct a concrete instance of `GetTemplateLimitsTemplateLimitInput` via:
 //
-//          GetTemplateLimitsTemplateLimitArgs{...}
+//	GetTemplateLimitsTemplateLimitArgs{...}
 type GetTemplateLimitsTemplateLimitInput interface {
 	pulumi.Input
 
@@ -6557,7 +6492,7 @@ func (i GetTemplateLimitsTemplateLimitArgs) ToGetTemplateLimitsTemplateLimitOutp
 // GetTemplateLimitsTemplateLimitArrayInput is an input type that accepts GetTemplateLimitsTemplateLimitArray and GetTemplateLimitsTemplateLimitArrayOutput values.
 // You can construct a concrete instance of `GetTemplateLimitsTemplateLimitArrayInput` via:
 //
-//          GetTemplateLimitsTemplateLimitArray{ GetTemplateLimitsTemplateLimitArgs{...} }
+//	GetTemplateLimitsTemplateLimitArray{ GetTemplateLimitsTemplateLimitArgs{...} }
 type GetTemplateLimitsTemplateLimitArrayInput interface {
 	pulumi.Input
 
@@ -6649,7 +6584,7 @@ type GetUsedIpAddressIpAddressState struct {
 // GetUsedIpAddressIpAddressStateInput is an input type that accepts GetUsedIpAddressIpAddressStateArgs and GetUsedIpAddressIpAddressStateOutput values.
 // You can construct a concrete instance of `GetUsedIpAddressIpAddressStateInput` via:
 //
-//          GetUsedIpAddressIpAddressStateArgs{...}
+//	GetUsedIpAddressIpAddressStateArgs{...}
 type GetUsedIpAddressIpAddressStateInput interface {
 	pulumi.Input
 
@@ -6685,7 +6620,7 @@ func (i GetUsedIpAddressIpAddressStateArgs) ToGetUsedIpAddressIpAddressStateOutp
 // GetUsedIpAddressIpAddressStateArrayInput is an input type that accepts GetUsedIpAddressIpAddressStateArray and GetUsedIpAddressIpAddressStateArrayOutput values.
 // You can construct a concrete instance of `GetUsedIpAddressIpAddressStateArrayInput` via:
 //
-//          GetUsedIpAddressIpAddressStateArray{ GetUsedIpAddressIpAddressStateArgs{...} }
+//	GetUsedIpAddressIpAddressStateArray{ GetUsedIpAddressIpAddressStateArgs{...} }
 type GetUsedIpAddressIpAddressStateArrayInput interface {
 	pulumi.Input
 
@@ -6769,8 +6704,6 @@ func (o GetUsedIpAddressIpAddressStateArrayOutput) Index(i pulumi.IntInput) GetU
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*FlowLogFlowLogStorageInput)(nil)).Elem(), FlowLogFlowLogStorageArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*FlowLogFlowLogStoragePtrInput)(nil)).Elem(), FlowLogFlowLogStorageArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*Ipv6EniAddressIpv6AddressInput)(nil)).Elem(), Ipv6EniAddressIpv6AddressArgs{})
-	pulumi.RegisterInputType(reflect.TypeOf((*Ipv6EniAddressIpv6AddressArrayInput)(nil)).Elem(), Ipv6EniAddressIpv6AddressArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksInput)(nil)).Elem(), Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrInput)(nil)).Elem(), Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NetworkAclQuintupleNetworkAclQuintupleSetInput)(nil)).Elem(), NetworkAclQuintupleNetworkAclQuintupleSetArgs{})
@@ -6865,8 +6798,6 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetUsedIpAddressIpAddressStateArrayInput)(nil)).Elem(), GetUsedIpAddressIpAddressStateArray{})
 	pulumi.RegisterOutputType(FlowLogFlowLogStorageOutput{})
 	pulumi.RegisterOutputType(FlowLogFlowLogStoragePtrOutput{})
-	pulumi.RegisterOutputType(Ipv6EniAddressIpv6AddressOutput{})
-	pulumi.RegisterOutputType(Ipv6EniAddressIpv6AddressArrayOutput{})
 	pulumi.RegisterOutputType(Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksOutput{})
 	pulumi.RegisterOutputType(Ipv6SubnetCidrBlockIpv6SubnetCidrBlocksPtrOutput{})
 	pulumi.RegisterOutputType(NetworkAclQuintupleNetworkAclQuintupleSetOutput{})

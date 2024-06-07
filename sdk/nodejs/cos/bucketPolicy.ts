@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cosPolicy = new tencentcloud.Cos.BucketPolicy("cos_policy", {
+ * const cosPolicy = new tencentcloud.cos.BucketPolicy("cosPolicy", {
  *     bucket: "mycos-1258798060",
  *     policy: `{
  *   "version": "2.0",
@@ -35,16 +36,18 @@ import * as utilities from "../utilities";
  *     }
  *   ]
  * }
+ *
  * `,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * COS bucket policy can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cos/bucketPolicy:BucketPolicy bucket bucket-name
+ * $ pulumi import tencentcloud:Cos/bucketPolicy:BucketPolicy bucket bucket-name
  * ```
  */
 export class BucketPolicy extends pulumi.CustomResource {

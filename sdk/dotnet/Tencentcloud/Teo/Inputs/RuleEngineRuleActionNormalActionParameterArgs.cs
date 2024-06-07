@@ -11,10 +11,10 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class RuleEngineRuleActionNormalActionParameterArgs : Pulumi.ResourceArgs
+    public sealed class RuleEngineRuleActionNormalActionParameterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Target HEADER name.
+        /// Parameter name.
         /// </summary>
         [Input("name", required: true)]
         public Input<string> Name { get; set; } = null!;
@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         private InputList<string>? _values;
 
         /// <summary>
-        /// Parameter Value.
+        /// Parameter value.
         /// </summary>
         public InputList<string> Values
         {
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public RuleEngineRuleActionNormalActionParameterArgs()
         {
         }
+        public static new RuleEngineRuleActionNormalActionParameterArgs Empty => new RuleEngineRuleActionNormalActionParameterArgs();
     }
 }

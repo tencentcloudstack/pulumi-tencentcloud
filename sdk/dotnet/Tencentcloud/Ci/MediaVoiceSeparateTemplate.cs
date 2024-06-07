@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var mediaVoiceSeparateTemplate = new Tencentcloud.Ci.MediaVoiceSeparateTemplate("mediaVoiceSeparateTemplate", new()
     ///     {
-    ///         var mediaVoiceSeparateTemplate = new Tencentcloud.Ci.MediaVoiceSeparateTemplate("mediaVoiceSeparateTemplate", new Tencentcloud.Ci.MediaVoiceSeparateTemplateArgs
+    ///         AudioConfig = new Tencentcloud.Ci.Inputs.MediaVoiceSeparateTemplateAudioConfigArgs
     ///         {
-    ///             AudioConfig = new Tencentcloud.Ci.Inputs.MediaVoiceSeparateTemplateAudioConfigArgs
-    ///             {
-    ///                 Bitrate = "128",
-    ///                 Channels = "4",
-    ///                 Codec = "aac",
-    ///                 Samplerate = "44100",
-    ///             },
-    ///             AudioMode = "IsAudio",
-    ///             Bucket = "terraform-ci-xxxxx",
-    ///         });
-    ///     }
+    ///             Bitrate = "128",
+    ///             Channels = "4",
+    ///             Codec = "aac",
+    ///             Samplerate = "44100",
+    ///         },
+    ///         AudioMode = "IsAudio",
+    ///         Bucket = "terraform-ci-xxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ci media_voice_separate_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ci/mediaVoiceSeparateTemplate:MediaVoiceSeparateTemplate media_voice_separate_template terraform-ci-xxxxxx#t1c95566664530460d9bc2b6265feb7c32
+    /// $ pulumi import tencentcloud:Ci/mediaVoiceSeparateTemplate:MediaVoiceSeparateTemplate media_voice_separate_template terraform-ci-xxxxxx#t1c95566664530460d9bc2b6265feb7c32
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ci/mediaVoiceSeparateTemplate:MediaVoiceSeparateTemplate")]
-    public partial class MediaVoiceSeparateTemplate : Pulumi.CustomResource
+    public partial class MediaVoiceSeparateTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// audio configuration.
@@ -120,7 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         }
     }
 
-    public sealed class MediaVoiceSeparateTemplateArgs : Pulumi.ResourceArgs
+    public sealed class MediaVoiceSeparateTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// audio configuration.
@@ -149,9 +150,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaVoiceSeparateTemplateArgs()
         {
         }
+        public static new MediaVoiceSeparateTemplateArgs Empty => new MediaVoiceSeparateTemplateArgs();
     }
 
-    public sealed class MediaVoiceSeparateTemplateState : Pulumi.ResourceArgs
+    public sealed class MediaVoiceSeparateTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// audio configuration.
@@ -180,5 +182,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci
         public MediaVoiceSeparateTemplateState()
         {
         }
+        public static new MediaVoiceSeparateTemplateState Empty => new MediaVoiceSeparateTemplateState();
     }
 }

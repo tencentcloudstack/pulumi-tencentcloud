@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// <summary>
         /// Use this data source to query detailed information of sqlserver datasource_backup_upload_size
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetBackupUploadSize.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetBackupUploadSize.InvokeAsync(new Tencentcloud.Sqlserver.GetBackupUploadSizeArgs
-        ///         {
-        ///             BackupMigrationId = "mssql-backup-migration-9tj0sxnz",
-        ///             InstanceId = "mssql-4gmc5805",
-        ///         }));
-        ///     }
+        ///         BackupMigrationId = "mssql-backup-migration-9tj0sxnz",
+        ///         InstanceId = "mssql-4gmc5805",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBackupUploadSizeResult> InvokeAsync(GetBackupUploadSizeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBackupUploadSizeResult>("tencentcloud:Sqlserver/getBackupUploadSize:getBackupUploadSize", args ?? new GetBackupUploadSizeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupUploadSizeResult>("tencentcloud:Sqlserver/getBackupUploadSize:getBackupUploadSize", args ?? new GetBackupUploadSizeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of sqlserver datasource_backup_upload_size
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetBackupUploadSize.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetBackupUploadSize.InvokeAsync(new Tencentcloud.Sqlserver.GetBackupUploadSizeArgs
-        ///         {
-        ///             BackupMigrationId = "mssql-backup-migration-9tj0sxnz",
-        ///             InstanceId = "mssql-4gmc5805",
-        ///         }));
-        ///     }
+        ///         BackupMigrationId = "mssql-backup-migration-9tj0sxnz",
+        ///         InstanceId = "mssql-4gmc5805",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBackupUploadSizeResult> Invoke(GetBackupUploadSizeInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBackupUploadSizeResult>("tencentcloud:Sqlserver/getBackupUploadSize:getBackupUploadSize", args ?? new GetBackupUploadSizeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBackupUploadSizeResult>("tencentcloud:Sqlserver/getBackupUploadSize:getBackupUploadSize", args ?? new GetBackupUploadSizeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBackupUploadSizeArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupUploadSizeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Backup import task ID, which is returned through the API CreateBackupMigration.
@@ -103,9 +97,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetBackupUploadSizeArgs()
         {
         }
+        public static new GetBackupUploadSizeArgs Empty => new GetBackupUploadSizeArgs();
     }
 
-    public sealed class GetBackupUploadSizeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupUploadSizeInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Backup import task ID, which is returned through the API CreateBackupMigration.
@@ -134,6 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetBackupUploadSizeInvokeArgs()
         {
         }
+        public static new GetBackupUploadSizeInvokeArgs Empty => new GetBackupUploadSizeInvokeArgs();
     }
 
 

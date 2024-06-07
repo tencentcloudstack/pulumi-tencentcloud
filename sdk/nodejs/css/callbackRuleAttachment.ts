@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const callbackRule = new tencentcloud.Css.CallbackRuleAttachment("callback_rule", {
+ * const callbackRule = new tencentcloud.css.CallbackRuleAttachment("callbackRule", {
  *     appName: "live",
  *     domainName: "177154.push.tlivecloud.com",
  *     templateId: 434039,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css callback_rule can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/callbackRuleAttachment:CallbackRuleAttachment callback_rule templateId#domainName
+ * $ pulumi import tencentcloud:Css/callbackRuleAttachment:CallbackRuleAttachment callback_rule templateId#domainName
  * ```
  */
 export class CallbackRuleAttachment extends pulumi.CustomResource {

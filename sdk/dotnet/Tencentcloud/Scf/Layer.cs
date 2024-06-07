@@ -15,45 +15,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Scf.Layer("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Scf.Layer("foo", new Tencentcloud.Scf.LayerArgs
+    ///         CompatibleRuntimes = new[]
     ///         {
-    ///             CompatibleRuntimes = 
-    ///             {
-    ///                 "Python3.6",
-    ///             },
-    ///             Content = new Tencentcloud.Scf.Inputs.LayerContentArgs
-    ///             {
-    ///                 CosBucketName = "test-bucket",
-    ///                 CosBucketRegion = "ap-guangzhou",
-    ///                 CosObjectName = "/foo.zip",
-    ///             },
-    ///             Description = "foo",
-    ///             LayerName = "foo",
-    ///             LicenseInfo = "foo",
-    ///         });
-    ///     }
+    ///             "Python3.6",
+    ///         },
+    ///         Content = new Tencentcloud.Scf.Inputs.LayerContentArgs
+    ///         {
+    ///             CosBucketName = "test-bucket",
+    ///             CosBucketRegion = "ap-guangzhou",
+    ///             CosObjectName = "/foo.zip",
+    ///         },
+    ///         Description = "foo",
+    ///         LayerName = "foo",
+    ///         LicenseInfo = "foo",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// Scf layer can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Scf/layer:Layer layer layerId#layerVersion
+    /// $ pulumi import tencentcloud:Scf/layer:Layer layer layerId#layerVersion
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/layer:Layer")]
-    public partial class Layer : Pulumi.CustomResource
+    public partial class Layer : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The code type of layer.
@@ -160,7 +161,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         }
     }
 
-    public sealed class LayerArgs : Pulumi.ResourceArgs
+    public sealed class LayerArgs : global::Pulumi.ResourceArgs
     {
         [Input("compatibleRuntimes", required: true)]
         private InputList<string>? _compatibleRuntimes;
@@ -201,9 +202,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public LayerArgs()
         {
         }
+        public static new LayerArgs Empty => new LayerArgs();
     }
 
-    public sealed class LayerState : Pulumi.ResourceArgs
+    public sealed class LayerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The code type of layer.
@@ -274,5 +276,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public LayerState()
         {
         }
+        public static new LayerState Empty => new LayerState();
     }
 }

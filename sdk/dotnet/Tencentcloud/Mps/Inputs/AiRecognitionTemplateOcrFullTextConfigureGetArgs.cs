@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class AiRecognitionTemplateOcrFullTextConfigureGetArgs : Pulumi.ResourceArgs
+    public sealed class AiRecognitionTemplateOcrFullTextConfigureGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Ocr full text recognition task switch, optional value:ON/OFF.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public AiRecognitionTemplateOcrFullTextConfigureGetArgs()
         {
         }
+        public static new AiRecognitionTemplateOcrFullTextConfigureGetArgs Empty => new AiRecognitionTemplateOcrFullTextConfigureGetArgs();
     }
 }

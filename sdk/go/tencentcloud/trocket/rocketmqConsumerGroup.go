@@ -7,60 +7,66 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a trocket rocketmqConsumerGroup
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Trocket"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Trocket"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		rocketmqInstance, err := Trocket.NewRocketmqInstance(ctx, "rocketmqInstance", &Trocket.RocketmqInstanceArgs{
-// 			InstanceType: pulumi.String("EXPERIMENT"),
-// 			SkuCode:      pulumi.String("experiment_500"),
-// 			Remark:       pulumi.String("test"),
-// 			VpcId:        pulumi.String("vpc-xxxxxx"),
-// 			SubnetId:     pulumi.String("subnet-xxxxx"),
-// 			Tags: pulumi.AnyMap{
-// 				"tag_key":   pulumi.Any("rocketmq"),
-// 				"tag_value": pulumi.Any("5.x"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Trocket.NewRocketmqConsumerGroup(ctx, "rocketmqConsumerGroup", &Trocket.RocketmqConsumerGroupArgs{
-// 			InstanceId:            rocketmqInstance.ID(),
-// 			ConsumerGroup:         pulumi.String("test_consumer_group"),
-// 			MaxRetryTimes:         pulumi.Int(20),
-// 			ConsumeEnable:         pulumi.Bool(false),
-// 			ConsumeMessageOrderly: pulumi.Bool(true),
-// 			Remark:                pulumi.String("test for terraform"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			rocketmqInstance, err := Trocket.NewRocketmqInstance(ctx, "rocketmqInstance", &Trocket.RocketmqInstanceArgs{
+//				InstanceType: pulumi.String("EXPERIMENT"),
+//				SkuCode:      pulumi.String("experiment_500"),
+//				Remark:       pulumi.String("test"),
+//				VpcId:        pulumi.String("vpc-xxxxxx"),
+//				SubnetId:     pulumi.String("subnet-xxxxx"),
+//				Tags: pulumi.Map{
+//					"tag_key":   pulumi.Any("rocketmq"),
+//					"tag_value": pulumi.Any("5.x"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Trocket.NewRocketmqConsumerGroup(ctx, "rocketmqConsumerGroup", &Trocket.RocketmqConsumerGroupArgs{
+//				InstanceId:            rocketmqInstance.ID(),
+//				ConsumerGroup:         pulumi.String("test_consumer_group"),
+//				MaxRetryTimes:         pulumi.Int(20),
+//				ConsumeEnable:         pulumi.Bool(false),
+//				ConsumeMessageOrderly: pulumi.Bool(true),
+//				Remark:                pulumi.String("test for terraform"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // trocket rocketmq_consumer_group can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Trocket/rocketmqConsumerGroup:RocketmqConsumerGroup rocketmq_consumer_group instanceId#consumerGroup
+// $ pulumi import tencentcloud:Trocket/rocketmqConsumerGroup:RocketmqConsumerGroup rocketmq_consumer_group instanceId#consumerGroup
 // ```
 type RocketmqConsumerGroup struct {
 	pulumi.CustomResourceState
@@ -101,7 +107,7 @@ func NewRocketmqConsumerGroup(ctx *pulumi.Context,
 	if args.MaxRetryTimes == nil {
 		return nil, errors.New("invalid value for required argument 'MaxRetryTimes'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RocketmqConsumerGroup
 	err := ctx.RegisterResource("tencentcloud:Trocket/rocketmqConsumerGroup:RocketmqConsumerGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -214,7 +220,7 @@ func (i *RocketmqConsumerGroup) ToRocketmqConsumerGroupOutputWithContext(ctx con
 // RocketmqConsumerGroupArrayInput is an input type that accepts RocketmqConsumerGroupArray and RocketmqConsumerGroupArrayOutput values.
 // You can construct a concrete instance of `RocketmqConsumerGroupArrayInput` via:
 //
-//          RocketmqConsumerGroupArray{ RocketmqConsumerGroupArgs{...} }
+//	RocketmqConsumerGroupArray{ RocketmqConsumerGroupArgs{...} }
 type RocketmqConsumerGroupArrayInput interface {
 	pulumi.Input
 
@@ -239,7 +245,7 @@ func (i RocketmqConsumerGroupArray) ToRocketmqConsumerGroupArrayOutputWithContex
 // RocketmqConsumerGroupMapInput is an input type that accepts RocketmqConsumerGroupMap and RocketmqConsumerGroupMapOutput values.
 // You can construct a concrete instance of `RocketmqConsumerGroupMapInput` via:
 //
-//          RocketmqConsumerGroupMap{ "key": RocketmqConsumerGroupArgs{...} }
+//	RocketmqConsumerGroupMap{ "key": RocketmqConsumerGroupArgs{...} }
 type RocketmqConsumerGroupMapInput interface {
 	pulumi.Input
 

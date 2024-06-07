@@ -15,31 +15,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Oceanus.JobCopy("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Oceanus.JobCopy("example", new Tencentcloud.Oceanus.JobCopyArgs
-    ///         {
-    ///             JobType = 2,
-    ///             SourceId = "cql-0nob2hx8",
-    ///             SourceName = "keep_jar",
-    ///             TargetClusterId = "cluster-1kcd524h",
-    ///             TargetFolderId = "folder-7ctl246z",
-    ///             TargetName = "tf_copy_example",
-    ///             WorkSpaceId = "space-2idq8wbr",
-    ///         });
-    ///     }
+    ///         JobType = 2,
+    ///         SourceId = "cql-0nob2hx8",
+    ///         SourceName = "keep_jar",
+    ///         TargetClusterId = "cluster-1kcd524h",
+    ///         TargetFolderId = "folder-7ctl246z",
+    ///         TargetName = "tf_copy_example",
+    ///         WorkSpaceId = "space-2idq8wbr",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Oceanus/jobCopy:JobCopy")]
-    public partial class JobCopy : Pulumi.CustomResource
+    public partial class JobCopy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Copy Job ID.
@@ -134,7 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         }
     }
 
-    public sealed class JobCopyArgs : Pulumi.ResourceArgs
+    public sealed class JobCopyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The type of the source job.
@@ -181,9 +182,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public JobCopyArgs()
         {
         }
+        public static new JobCopyArgs Empty => new JobCopyArgs();
     }
 
-    public sealed class JobCopyState : Pulumi.ResourceArgs
+    public sealed class JobCopyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Copy Job ID.
@@ -236,5 +238,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public JobCopyState()
         {
         }
+        public static new JobCopyState Empty => new JobCopyState();
     }
 }

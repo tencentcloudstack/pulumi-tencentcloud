@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var bindApiGroup = new Tencentcloud.Tsf.BindApiGroup("bindApiGroup", new()
     ///     {
-    ///         var bindApiGroup = new Tencentcloud.Tsf.BindApiGroup("bindApiGroup", new Tencentcloud.Tsf.BindApiGroupArgs
-    ///         {
-    ///             GatewayDeployGroupId = "group-vzd97zpy",
-    ///             GroupId = "grp-qp0rj3zi",
-    ///         });
-    ///     }
+    ///         GatewayDeployGroupId = "group-vzd97zpy",
+    ///         GroupId = "grp-qp0rj3zi",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tsf bind_api_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tsf/bindApiGroup:BindApiGroup bind_api_group bind_api_group_id
+    /// $ pulumi import tencentcloud:Tsf/bindApiGroup:BindApiGroup bind_api_group bind_api_group_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/bindApiGroup:BindApiGroup")]
-    public partial class BindApiGroup : Pulumi.CustomResource
+    public partial class BindApiGroup : global::Pulumi.CustomResource
     {
         /// <summary>
         /// gateway group id.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class BindApiGroupArgs : Pulumi.ResourceArgs
+    public sealed class BindApiGroupArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// gateway group id.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public BindApiGroupArgs()
         {
         }
+        public static new BindApiGroupArgs Empty => new BindApiGroupArgs();
     }
 
-    public sealed class BindApiGroupState : Pulumi.ResourceArgs
+    public sealed class BindApiGroupState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// gateway group id.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public BindApiGroupState()
         {
         }
+        public static new BindApiGroupState Empty => new BindApiGroupState();
     }
 }

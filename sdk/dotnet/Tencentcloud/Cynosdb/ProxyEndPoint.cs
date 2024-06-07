@@ -15,239 +15,249 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxyEndPoint", new()
     ///     {
-    ///         var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxyEndPoint", new Tencentcloud.Cynosdb.ProxyEndPointArgs
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         InstanceWeights = new[]
     ///         {
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             InstanceWeights = 
+    ///             new Tencentcloud.Cynosdb.Inputs.ProxyEndPointInstanceWeightArgs
     ///             {
-    ///                 new Tencentcloud.Cynosdb.Inputs.ProxyEndPointInstanceWeightArgs
-    ///                 {
-    ///                     InstanceId = "cynosdbmysql-ins-afqx1hy0",
-    ///                     Weight = 1,
-    ///                 },
+    ///                 InstanceId = "cynosdbmysql-ins-afqx1hy0",
+    ///                 Weight = 1,
     ///             },
-    ///             UniqueSubnetId = "subnet-dwj7ipnc",
-    ///             UniqueVpcId = "vpc-4owdpnwr",
-    ///         });
-    ///     }
+    ///         },
+    ///         UniqueSubnetId = "subnet-dwj7ipnc",
+    ///         UniqueVpcId = "vpc-4owdpnwr",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxyEndPoint", new()
     ///     {
-    ///         var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxyEndPoint", new Tencentcloud.Cynosdb.ProxyEndPointArgs
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         InstanceWeights = new[]
     ///         {
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             InstanceWeights = 
+    ///             new Tencentcloud.Cynosdb.Inputs.ProxyEndPointInstanceWeightArgs
     ///             {
-    ///                 new Tencentcloud.Cynosdb.Inputs.ProxyEndPointInstanceWeightArgs
-    ///                 {
-    ///                     InstanceId = "cynosdbmysql-ins-afqx1hy0",
-    ///                     Weight = 1,
-    ///                 },
+    ///                 InstanceId = "cynosdbmysql-ins-afqx1hy0",
+    ///                 Weight = 1,
     ///             },
-    ///             UniqueSubnetId = "subnet-dwj7ipnc",
-    ///             UniqueVpcId = "vpc-4owdpnwr",
-    ///             Vip = "172.16.112.108",
-    ///             Vport = 3306,
-    ///         });
-    ///     }
+    ///         },
+    ///         UniqueSubnetId = "subnet-dwj7ipnc",
+    ///         UniqueVpcId = "vpc-4owdpnwr",
+    ///         Vip = "172.16.112.108",
+    ///         Vport = 3306,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Open connection pool
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxyEndPoint", new()
     ///     {
-    ///         var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxyEndPoint", new Tencentcloud.Cynosdb.ProxyEndPointArgs
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         ConnectionPoolTimeOut = 30,
+    ///         ConnectionPoolType = "SessionConnectionPool",
+    ///         InstanceWeights = new[]
     ///         {
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             ConnectionPoolTimeOut = 30,
-    ///             ConnectionPoolType = "SessionConnectionPool",
-    ///             InstanceWeights = 
+    ///             new Tencentcloud.Cynosdb.Inputs.ProxyEndPointInstanceWeightArgs
     ///             {
-    ///                 new Tencentcloud.Cynosdb.Inputs.ProxyEndPointInstanceWeightArgs
-    ///                 {
-    ///                     InstanceId = "cynosdbmysql-ins-afqx1hy0",
-    ///                     Weight = 1,
-    ///                 },
+    ///                 InstanceId = "cynosdbmysql-ins-afqx1hy0",
+    ///                 Weight = 1,
     ///             },
-    ///             OpenConnectionPool = "yes",
-    ///             UniqueSubnetId = "subnet-dwj7ipnc",
-    ///             UniqueVpcId = "vpc-4owdpnwr",
-    ///             Vip = "172.16.112.108",
-    ///             Vport = 3306,
-    ///         });
-    ///     }
+    ///         },
+    ///         OpenConnectionPool = "yes",
+    ///         UniqueSubnetId = "subnet-dwj7ipnc",
+    ///         UniqueVpcId = "vpc-4owdpnwr",
+    ///         Vip = "172.16.112.108",
+    ///         Vport = 3306,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Close connection pool
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxyEndPoint", new()
     ///     {
-    ///         var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxyEndPoint", new Tencentcloud.Cynosdb.ProxyEndPointArgs
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         InstanceWeights = new[]
     ///         {
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             InstanceWeights = 
+    ///             new Tencentcloud.Cynosdb.Inputs.ProxyEndPointInstanceWeightArgs
     ///             {
-    ///                 new Tencentcloud.Cynosdb.Inputs.ProxyEndPointInstanceWeightArgs
-    ///                 {
-    ///                     InstanceId = "cynosdbmysql-ins-afqx1hy0",
-    ///                     Weight = 1,
-    ///                 },
+    ///                 InstanceId = "cynosdbmysql-ins-afqx1hy0",
+    ///                 Weight = 1,
     ///             },
-    ///             OpenConnectionPool = "no",
-    ///             UniqueSubnetId = "subnet-dwj7ipnc",
-    ///             UniqueVpcId = "vpc-4owdpnwr",
-    ///             Vip = "172.16.112.108",
-    ///             Vport = 3306,
-    ///         });
-    ///     }
+    ///         },
+    ///         OpenConnectionPool = "no",
+    ///         UniqueSubnetId = "subnet-dwj7ipnc",
+    ///         UniqueVpcId = "vpc-4owdpnwr",
+    ///         Vip = "172.16.112.108",
+    ///         Vport = 3306,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxyEndPoint", new()
     ///     {
-    ///         var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxyEndPoint", new Tencentcloud.Cynosdb.ProxyEndPointArgs
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         ConsistencyTimeOut = 30,
+    ///         ConsistencyType = "global",
+    ///         FailOver = "yes",
+    ///         InstanceWeights = new[]
     ///         {
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             ConsistencyTimeOut = 30,
-    ///             ConsistencyType = "global",
-    ///             FailOver = "yes",
-    ///             InstanceWeights = 
+    ///             new Tencentcloud.Cynosdb.Inputs.ProxyEndPointInstanceWeightArgs
     ///             {
-    ///                 new Tencentcloud.Cynosdb.Inputs.ProxyEndPointInstanceWeightArgs
-    ///                 {
-    ///                     InstanceId = "cynosdbmysql-ins-afqx1hy0",
-    ///                     Weight = 1,
-    ///                 },
+    ///                 InstanceId = "cynosdbmysql-ins-afqx1hy0",
+    ///                 Weight = 1,
     ///             },
-    ///             OpenConnectionPool = "no",
-    ///             RwType = "READWRITE",
-    ///             UniqueSubnetId = "subnet-dwj7ipnc",
-    ///             UniqueVpcId = "vpc-4owdpnwr",
-    ///             Vip = "172.16.112.108",
-    ///             Vport = 3306,
-    ///         });
-    ///     }
+    ///         },
+    ///         OpenConnectionPool = "no",
+    ///         RwType = "READWRITE",
+    ///         UniqueSubnetId = "subnet-dwj7ipnc",
+    ///         UniqueVpcId = "vpc-4owdpnwr",
+    ///         Vip = "172.16.112.108",
+    ///         Vport = 3306,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxyEndPoint", new()
     ///     {
-    ///         var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxyEndPoint", new Tencentcloud.Cynosdb.ProxyEndPointArgs
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         InstanceWeights = new[]
     ///         {
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             InstanceWeights = 
+    ///             new Tencentcloud.Cynosdb.Inputs.ProxyEndPointInstanceWeightArgs
     ///             {
-    ///                 new Tencentcloud.Cynosdb.Inputs.ProxyEndPointInstanceWeightArgs
-    ///                 {
-    ///                     InstanceId = "cynosdbmysql-ins-rikr6z4o",
-    ///                     Weight = 1,
-    ///                 },
+    ///                 InstanceId = "cynosdbmysql-ins-rikr6z4o",
+    ///                 Weight = 1,
     ///             },
-    ///             OpenConnectionPool = "no",
-    ///             RwType = "READONLY",
-    ///             UniqueSubnetId = "subnet-dwj7ipnc",
-    ///             UniqueVpcId = "vpc-4owdpnwr",
-    ///             Vip = "172.16.112.108",
-    ///             Vport = 3306,
-    ///         });
-    ///     }
+    ///         },
+    ///         OpenConnectionPool = "no",
+    ///         RwType = "READONLY",
+    ///         UniqueSubnetId = "subnet-dwj7ipnc",
+    ///         UniqueVpcId = "vpc-4owdpnwr",
+    ///         Vip = "172.16.112.108",
+    ///         Vport = 3306,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Comprehensive parameter examples
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxyEndPoint", new()
     ///     {
-    ///         var proxyEndPoint = new Tencentcloud.Cynosdb.ProxyEndPoint("proxyEndPoint", new Tencentcloud.Cynosdb.ProxyEndPointArgs
+    ///         AccessMode = "nearby",
+    ///         AutoAddRo = "yes",
+    ///         ClusterId = "cynosdbmysql-bws8h88b",
+    ///         ConnectionPoolTimeOut = 30,
+    ///         ConnectionPoolType = "SessionConnectionPool",
+    ///         ConsistencyTimeOut = 30,
+    ///         ConsistencyType = "global",
+    ///         Description = "desc value",
+    ///         FailOver = "yes",
+    ///         InstanceWeights = new[]
     ///         {
-    ///             AccessMode = "nearby",
-    ///             AutoAddRo = "yes",
-    ///             ClusterId = "cynosdbmysql-bws8h88b",
-    ///             ConnectionPoolTimeOut = 30,
-    ///             ConnectionPoolType = "SessionConnectionPool",
-    ///             ConsistencyTimeOut = 30,
-    ///             ConsistencyType = "global",
-    ///             Description = "desc value",
-    ///             FailOver = "yes",
-    ///             InstanceWeights = 
+    ///             new Tencentcloud.Cynosdb.Inputs.ProxyEndPointInstanceWeightArgs
     ///             {
-    ///                 new Tencentcloud.Cynosdb.Inputs.ProxyEndPointInstanceWeightArgs
-    ///                 {
-    ///                     InstanceId = "cynosdbmysql-ins-afqx1hy0",
-    ///                     Weight = 1,
-    ///                 },
+    ///                 InstanceId = "cynosdbmysql-ins-afqx1hy0",
+    ///                 Weight = 1,
     ///             },
-    ///             OpenConnectionPool = "yes",
-    ///             RwType = "READWRITE",
-    ///             SecurityGroupIds = 
-    ///             {
-    ///                 "sg-7kpsbxdb",
-    ///             },
-    ///             TransSplit = true,
-    ///             UniqueSubnetId = "subnet-dwj7ipnc",
-    ///             UniqueVpcId = "vpc-4owdpnwr",
-    ///             Vip = "172.16.112.118",
-    ///             Vport = 3306,
-    ///             WeightMode = "system",
-    ///         });
-    ///     }
+    ///         },
+    ///         OpenConnectionPool = "yes",
+    ///         RwType = "READWRITE",
+    ///         SecurityGroupIds = new[]
+    ///         {
+    ///             "sg-7kpsbxdb",
+    ///         },
+    ///         TransSplit = true,
+    ///         UniqueSubnetId = "subnet-dwj7ipnc",
+    ///         UniqueVpcId = "vpc-4owdpnwr",
+    ///         Vip = "172.16.112.118",
+    ///         Vport = 3306,
+    ///         WeightMode = "system",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/proxyEndPoint:ProxyEndPoint")]
-    public partial class ProxyEndPoint : Pulumi.CustomResource
+    public partial class ProxyEndPoint : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Connection mode: nearby, balance.
@@ -420,7 +430,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         }
     }
 
-    public sealed class ProxyEndPointArgs : Pulumi.ResourceArgs
+    public sealed class ProxyEndPointArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Connection mode: nearby, balance.
@@ -551,9 +561,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ProxyEndPointArgs()
         {
         }
+        public static new ProxyEndPointArgs Empty => new ProxyEndPointArgs();
     }
 
-    public sealed class ProxyEndPointState : Pulumi.ResourceArgs
+    public sealed class ProxyEndPointState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Connection mode: nearby, balance.
@@ -696,5 +707,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public ProxyEndPointState()
         {
         }
+        public static new ProxyEndPointState Empty => new ProxyEndPointState();
     }
 }

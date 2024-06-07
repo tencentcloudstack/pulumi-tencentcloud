@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var userSamlConfig = new Tencentcloud.Cam.UserSamlConfig("userSamlConfig", new()
     ///     {
-    ///         var userSamlConfig = new Tencentcloud.Cam.UserSamlConfig("userSamlConfig", new Tencentcloud.Cam.UserSamlConfigArgs
-    ///         {
-    ///             SamlMetadataDocument = "./metadataDocument.xml",
-    ///         });
-    ///     }
+    ///         SamlMetadataDocument = "./metadataDocument.xml",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cam user_saml_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/userSamlConfig:UserSamlConfig user_saml_config user_id
+    /// $ pulumi import tencentcloud:Cam/userSamlConfig:UserSamlConfig user_saml_config user_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/userSamlConfig:UserSamlConfig")]
-    public partial class UserSamlConfig : Pulumi.CustomResource
+    public partial class UserSamlConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The path used to save the samlMetadat file.
@@ -106,7 +107,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class UserSamlConfigArgs : Pulumi.ResourceArgs
+    public sealed class UserSamlConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The path used to save the samlMetadat file.
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public UserSamlConfigArgs()
         {
         }
+        public static new UserSamlConfigArgs Empty => new UserSamlConfigArgs();
     }
 
-    public sealed class UserSamlConfigState : Pulumi.ResourceArgs
+    public sealed class UserSamlConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The path used to save the samlMetadat file.
@@ -148,5 +150,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public UserSamlConfigState()
         {
         }
+        public static new UserSamlConfigState Empty => new UserSamlConfigState();
     }
 }

@@ -15,48 +15,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var aiAnalysisTemplate = new Tencentcloud.Mps.AiAnalysisTemplate("aiAnalysisTemplate", new()
     ///     {
-    ///         var aiAnalysisTemplate = new Tencentcloud.Mps.AiAnalysisTemplate("aiAnalysisTemplate", new Tencentcloud.Mps.AiAnalysisTemplateArgs
+    ///         ClassificationConfigure = new Tencentcloud.Mps.Inputs.AiAnalysisTemplateClassificationConfigureArgs
     ///         {
-    ///             ClassificationConfigure = new Tencentcloud.Mps.Inputs.AiAnalysisTemplateClassificationConfigureArgs
-    ///             {
-    ///                 Switch = "OFF",
-    ///             },
-    ///             CoverConfigure = new Tencentcloud.Mps.Inputs.AiAnalysisTemplateCoverConfigureArgs
-    ///             {
-    ///                 Switch = "ON",
-    ///             },
-    ///             FrameTagConfigure = new Tencentcloud.Mps.Inputs.AiAnalysisTemplateFrameTagConfigureArgs
-    ///             {
-    ///                 Switch = "ON",
-    ///             },
-    ///             TagConfigure = new Tencentcloud.Mps.Inputs.AiAnalysisTemplateTagConfigureArgs
-    ///             {
-    ///                 Switch = "ON",
-    ///             },
-    ///         });
-    ///     }
+    ///             Switch = "OFF",
+    ///         },
+    ///         CoverConfigure = new Tencentcloud.Mps.Inputs.AiAnalysisTemplateCoverConfigureArgs
+    ///         {
+    ///             Switch = "ON",
+    ///         },
+    ///         FrameTagConfigure = new Tencentcloud.Mps.Inputs.AiAnalysisTemplateFrameTagConfigureArgs
+    ///         {
+    ///             Switch = "ON",
+    ///         },
+    ///         TagConfigure = new Tencentcloud.Mps.Inputs.AiAnalysisTemplateTagConfigureArgs
+    ///         {
+    ///             Switch = "ON",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// mps ai_analysis_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Mps/aiAnalysisTemplate:AiAnalysisTemplate ai_analysis_template ai_analysis_template_id
+    /// $ pulumi import tencentcloud:Mps/aiAnalysisTemplate:AiAnalysisTemplate ai_analysis_template ai_analysis_template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/aiAnalysisTemplate:AiAnalysisTemplate")]
-    public partial class AiAnalysisTemplate : Pulumi.CustomResource
+    public partial class AiAnalysisTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Ai classification task control parameters.
@@ -139,7 +140,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class AiAnalysisTemplateArgs : Pulumi.ResourceArgs
+    public sealed class AiAnalysisTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Ai classification task control parameters.
@@ -180,9 +181,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public AiAnalysisTemplateArgs()
         {
         }
+        public static new AiAnalysisTemplateArgs Empty => new AiAnalysisTemplateArgs();
     }
 
-    public sealed class AiAnalysisTemplateState : Pulumi.ResourceArgs
+    public sealed class AiAnalysisTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Ai classification task control parameters.
@@ -223,5 +225,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public AiAnalysisTemplateState()
         {
         }
+        public static new AiAnalysisTemplateState Empty => new AiAnalysisTemplateState();
     }
 }

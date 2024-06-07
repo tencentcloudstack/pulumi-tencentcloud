@@ -15,59 +15,63 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new()
     ///     {
-    ///         var exampleInstance = new Tencentcloud.Tdmq.Instance("exampleInstance", new Tencentcloud.Tdmq.InstanceArgs
+    ///         ClusterName = "tf_example",
+    ///         Remark = "remark.",
+    ///         Tags = 
     ///         {
-    ///             ClusterName = "tf_example",
-    ///             Remark = "remark.",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new Tencentcloud.Tdmq.NamespaceArgs
-    ///         {
-    ///             EnvironName = "tf_example",
-    ///             MsgTtl = 300,
-    ///             ClusterId = exampleInstance.Id,
-    ///             RetentionPolicy = new Tencentcloud.Tdmq.Inputs.NamespaceRetentionPolicyArgs
-    ///             {
-    ///                 TimeInMinutes = 60,
-    ///                 SizeInMb = 10,
-    ///             },
-    ///             Remark = "remark.",
-    ///         });
-    ///         var exampleRole = new Tencentcloud.Tdmq.Role("exampleRole", new Tencentcloud.Tdmq.RoleArgs
-    ///         {
-    ///             RoleName = "tf_example",
-    ///             ClusterId = exampleInstance.Id,
-    ///             Remark = "remark.",
-    ///         });
-    ///         var exampleNamespaceRoleAttachment = new Tencentcloud.Tdmq.NamespaceRoleAttachment("exampleNamespaceRoleAttachment", new Tencentcloud.Tdmq.NamespaceRoleAttachmentArgs
-    ///         {
-    ///             EnvironId = exampleNamespace.EnvironName,
-    ///             RoleName = exampleRole.RoleName,
-    ///             Permissions = 
-    ///             {
-    ///                 "produce",
-    ///                 "consume",
-    ///             },
-    ///             ClusterId = exampleInstance.Id,
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleNamespace = new Tencentcloud.Tdmq.Namespace("exampleNamespace", new()
+    ///     {
+    ///         EnvironName = "tf_example",
+    ///         MsgTtl = 300,
+    ///         ClusterId = exampleInstance.Id,
+    ///         RetentionPolicy = new Tencentcloud.Tdmq.Inputs.NamespaceRetentionPolicyArgs
+    ///         {
+    ///             TimeInMinutes = 60,
+    ///             SizeInMb = 10,
+    ///         },
+    ///         Remark = "remark.",
+    ///     });
+    /// 
+    ///     var exampleRole = new Tencentcloud.Tdmq.Role("exampleRole", new()
+    ///     {
+    ///         RoleName = "tf_example",
+    ///         ClusterId = exampleInstance.Id,
+    ///         Remark = "remark.",
+    ///     });
+    /// 
+    ///     var exampleNamespaceRoleAttachment = new Tencentcloud.Tdmq.NamespaceRoleAttachment("exampleNamespaceRoleAttachment", new()
+    ///     {
+    ///         EnvironId = exampleNamespace.EnvironName,
+    ///         RoleName = exampleRole.RoleName,
+    ///         Permissions = new[]
+    ///         {
+    ///             "produce",
+    ///             "consume",
+    ///         },
+    ///         ClusterId = exampleInstance.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/namespaceRoleAttachment:NamespaceRoleAttachment")]
-    public partial class NamespaceRoleAttachment : Pulumi.CustomResource
+    public partial class NamespaceRoleAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The id of tdmq cluster.
@@ -144,7 +148,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         }
     }
 
-    public sealed class NamespaceRoleAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class NamespaceRoleAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The id of tdmq cluster.
@@ -179,9 +183,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public NamespaceRoleAttachmentArgs()
         {
         }
+        public static new NamespaceRoleAttachmentArgs Empty => new NamespaceRoleAttachmentArgs();
     }
 
-    public sealed class NamespaceRoleAttachmentState : Pulumi.ResourceArgs
+    public sealed class NamespaceRoleAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The id of tdmq cluster.
@@ -222,5 +227,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public NamespaceRoleAttachmentState()
         {
         }
+        public static new NamespaceRoleAttachmentState Empty => new NamespaceRoleAttachmentState();
     }
 }

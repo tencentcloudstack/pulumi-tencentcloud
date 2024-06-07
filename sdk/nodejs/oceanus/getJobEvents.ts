@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Oceanus.getJobEvents({
+ * const example = tencentcloud.Oceanus.getJobEvents({
  *     endTimestamp: 1631232466,
  *     jobId: "cql-6w8eab6f",
  *     startTimestamp: 1630932161,
@@ -23,15 +25,13 @@ import * as utilities from "../utilities";
  *         "2",
  *     ],
  *     workSpaceId: "space-6w8eab6f",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getJobEvents(args: GetJobEventsArgs, opts?: pulumi.InvokeOptions): Promise<GetJobEventsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Oceanus/getJobEvents:getJobEvents", {
         "endTimestamp": args.endTimestamp,
         "jobId": args.jobId,
@@ -95,9 +95,31 @@ export interface GetJobEventsResult {
     readonly types?: string[];
     readonly workSpaceId: string;
 }
-
+/**
+ * Use this data source to query detailed information of oceanus jobEvents
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Oceanus.getJobEvents({
+ *     endTimestamp: 1631232466,
+ *     jobId: "cql-6w8eab6f",
+ *     startTimestamp: 1630932161,
+ *     types: [
+ *         "1",
+ *         "2",
+ *     ],
+ *     workSpaceId: "space-6w8eab6f",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getJobEventsOutput(args: GetJobEventsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetJobEventsResult> {
-    return pulumi.output(args).apply(a => getJobEvents(a, opts))
+    return pulumi.output(args).apply((a: any) => getJobEvents(a, opts))
 }
 
 /**

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const cvmQuota = pulumi.output(tencentcloud.Emr.getCvmQuota({
+ * const cvmQuota = tencentcloud.Emr.getCvmQuota({
  *     clusterId: "emr-0ze36vnp",
  *     zoneId: 100003,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCvmQuota(args: GetCvmQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetCvmQuotaResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Emr/getCvmQuota:getCvmQuota", {
         "clusterId": args.clusterId,
         "resultOutputFile": args.resultOutputFile,
@@ -75,9 +75,25 @@ export interface GetCvmQuotaResult {
     readonly spotPaidQuotaSets: outputs.Emr.GetCvmQuotaSpotPaidQuotaSet[];
     readonly zoneId?: number;
 }
-
+/**
+ * Use this data source to query detailed information of emr cvmQuota
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const cvmQuota = tencentcloud.Emr.getCvmQuota({
+ *     clusterId: "emr-0ze36vnp",
+ *     zoneId: 100003,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCvmQuotaOutput(args: GetCvmQuotaOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCvmQuotaResult> {
-    return pulumi.output(args).apply(a => getCvmQuota(a, opts))
+    return pulumi.output(args).apply((a: any) => getCvmQuota(a, opts))
 }
 
 /**

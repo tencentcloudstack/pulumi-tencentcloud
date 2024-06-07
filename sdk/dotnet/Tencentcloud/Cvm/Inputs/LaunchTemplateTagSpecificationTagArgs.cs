@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateTagSpecificationTagArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateTagSpecificationTagArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The key of tag.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateTagSpecificationTagArgs()
         {
         }
+        public static new LaunchTemplateTagSpecificationTagArgs Empty => new LaunchTemplateTagSpecificationTagArgs();
     }
 }

@@ -24,61 +24,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Ssl.PayCertificate("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Ssl.PayCertificate("example", new Tencentcloud.Ssl.PayCertificateArgs
+    ///         Alias = "ssl desc.",
+    ///         DomainNum = 1,
+    ///         Information = new Tencentcloud.Ssl.Inputs.PayCertificateInformationArgs
     ///         {
-    ///             Alias = "ssl desc.",
-    ///             DomainNum = 1,
-    ///             Information = new Tencentcloud.Ssl.Inputs.PayCertificateInformationArgs
-    ///             {
-    ///                 AdminEmail = "test@tencent.com",
-    ///                 AdminFirstName = "test",
-    ///                 AdminLastName = "test",
-    ///                 AdminPhoneNum = "12345678901",
-    ///                 AdminPosition = "developer",
-    ///                 CertificateDomain = "www.example.com",
-    ///                 ContactEmail = "test@tencent.com",
-    ///                 ContactFirstName = "test",
-    ///                 ContactLastName = "test",
-    ///                 ContactNumber = "12345678901",
-    ///                 ContactPosition = "developer",
-    ///                 CsrType = "online",
-    ///                 OrganizationAddress = "广东省深圳市南山区腾讯大厦1000号",
-    ///                 OrganizationCity = "深圳市",
-    ///                 OrganizationCountry = "CN",
-    ///                 OrganizationDivision = "Qcloud",
-    ///                 OrganizationName = "Tencent",
-    ///                 OrganizationRegion = "广东省",
-    ///                 PhoneAreaCode = "0755",
-    ///                 PhoneNumber = "86013388",
-    ///                 PostalCode = "0755",
-    ///                 VerifyType = "DNS",
-    ///             },
-    ///             ProductId = 33,
-    ///             ProjectId = 0,
-    ///         });
-    ///     }
+    ///             AdminEmail = "test@tencent.com",
+    ///             AdminFirstName = "test",
+    ///             AdminLastName = "test",
+    ///             AdminPhoneNum = "12345678901",
+    ///             AdminPosition = "developer",
+    ///             CertificateDomain = "www.example.com",
+    ///             ContactEmail = "test@tencent.com",
+    ///             ContactFirstName = "test",
+    ///             ContactLastName = "test",
+    ///             ContactNumber = "12345678901",
+    ///             ContactPosition = "developer",
+    ///             CsrType = "online",
+    ///             OrganizationAddress = "广东省深圳市南山区腾讯大厦1000号",
+    ///             OrganizationCity = "深圳市",
+    ///             OrganizationCountry = "CN",
+    ///             OrganizationDivision = "Qcloud",
+    ///             OrganizationName = "Tencent",
+    ///             OrganizationRegion = "广东省",
+    ///             PhoneAreaCode = "0755",
+    ///             PhoneNumber = "86013388",
+    ///             PostalCode = "0755",
+    ///             VerifyType = "DNS",
+    ///         },
+    ///         ProductId = 33,
+    ///         ProjectId = 0,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// payment SSL instance can be imported, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ssl/payCertificate:PayCertificate ssl iPQNn61x#33#1#1
+    /// $ pulumi import tencentcloud:Ssl/payCertificate:PayCertificate ssl iPQNn61x#33#1#1
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/payCertificate:PayCertificate")]
-    public partial class PayCertificate : Pulumi.CustomResource
+    public partial class PayCertificate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Remark name.
@@ -191,7 +192,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         }
     }
 
-    public sealed class PayCertificateArgs : Pulumi.ResourceArgs
+    public sealed class PayCertificateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Remark name.
@@ -250,9 +251,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public PayCertificateArgs()
         {
         }
+        public static new PayCertificateArgs Empty => new PayCertificateArgs();
     }
 
-    public sealed class PayCertificateState : Pulumi.ResourceArgs
+    public sealed class PayCertificateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Remark name.
@@ -329,5 +331,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public PayCertificateState()
         {
         }
+        public static new PayCertificateState Empty => new PayCertificateState();
     }
 }

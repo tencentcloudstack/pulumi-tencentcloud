@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap domain error page infos
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var domainErrorPageInfos = Tencentcloud.Gaap.GetDomainErrorPageInfos.Invoke(new()
         ///     {
-        ///         var domainErrorPageInfos = Output.Create(Tencentcloud.Gaap.GetDomainErrorPageInfos.InvokeAsync(new Tencentcloud.Gaap.GetDomainErrorPageInfosArgs
+        ///         ErrorPageIds = new[]
         ///         {
-        ///             ErrorPageIds = 
-        ///             {
-        ///                 "errorPage-xxxxxx",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "errorPage-xxxxxx",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDomainErrorPageInfosResult> InvokeAsync(GetDomainErrorPageInfosArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDomainErrorPageInfosResult>("tencentcloud:Gaap/getDomainErrorPageInfos:getDomainErrorPageInfos", args ?? new GetDomainErrorPageInfosArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDomainErrorPageInfosResult>("tencentcloud:Gaap/getDomainErrorPageInfos:getDomainErrorPageInfos", args ?? new GetDomainErrorPageInfosArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap domain error page infos
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var domainErrorPageInfos = Tencentcloud.Gaap.GetDomainErrorPageInfos.Invoke(new()
         ///     {
-        ///         var domainErrorPageInfos = Output.Create(Tencentcloud.Gaap.GetDomainErrorPageInfos.InvokeAsync(new Tencentcloud.Gaap.GetDomainErrorPageInfosArgs
+        ///         ErrorPageIds = new[]
         ///         {
-        ///             ErrorPageIds = 
-        ///             {
-        ///                 "errorPage-xxxxxx",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "errorPage-xxxxxx",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDomainErrorPageInfosResult> Invoke(GetDomainErrorPageInfosInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDomainErrorPageInfosResult>("tencentcloud:Gaap/getDomainErrorPageInfos:getDomainErrorPageInfos", args ?? new GetDomainErrorPageInfosInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDomainErrorPageInfosResult>("tencentcloud:Gaap/getDomainErrorPageInfos:getDomainErrorPageInfos", args ?? new GetDomainErrorPageInfosInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDomainErrorPageInfosArgs : Pulumi.InvokeArgs
+    public sealed class GetDomainErrorPageInfosArgs : global::Pulumi.InvokeArgs
     {
         [Input("errorPageIds", required: true)]
         private List<string>? _errorPageIds;
@@ -101,9 +95,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetDomainErrorPageInfosArgs()
         {
         }
+        public static new GetDomainErrorPageInfosArgs Empty => new GetDomainErrorPageInfosArgs();
     }
 
-    public sealed class GetDomainErrorPageInfosInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDomainErrorPageInfosInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("errorPageIds", required: true)]
         private InputList<string>? _errorPageIds;
@@ -126,6 +121,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetDomainErrorPageInfosInvokeArgs()
         {
         }
+        public static new GetDomainErrorPageInfosInvokeArgs Empty => new GetDomainErrorPageInfosInvokeArgs();
     }
 
 

@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf delivery_configs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var deliveryConfigs = Tencentcloud.Tsf.GetDeliveryConfigs.Invoke(new()
         ///     {
-        ///         var deliveryConfigs = Output.Create(Tencentcloud.Tsf.GetDeliveryConfigs.InvokeAsync(new Tencentcloud.Tsf.GetDeliveryConfigsArgs
-        ///         {
-        ///             SearchWord = "test",
-        ///         }));
-        ///     }
+        ///         SearchWord = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDeliveryConfigsResult> InvokeAsync(GetDeliveryConfigsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDeliveryConfigsResult>("tencentcloud:Tsf/getDeliveryConfigs:getDeliveryConfigs", args ?? new GetDeliveryConfigsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDeliveryConfigsResult>("tencentcloud:Tsf/getDeliveryConfigs:getDeliveryConfigs", args ?? new GetDeliveryConfigsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf delivery_configs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var deliveryConfigs = Tencentcloud.Tsf.GetDeliveryConfigs.Invoke(new()
         ///     {
-        ///         var deliveryConfigs = Output.Create(Tencentcloud.Tsf.GetDeliveryConfigs.InvokeAsync(new Tencentcloud.Tsf.GetDeliveryConfigsArgs
-        ///         {
-        ///             SearchWord = "test",
-        ///         }));
-        ///     }
+        ///         SearchWord = "test",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDeliveryConfigsResult> Invoke(GetDeliveryConfigsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDeliveryConfigsResult>("tencentcloud:Tsf/getDeliveryConfigs:getDeliveryConfigs", args ?? new GetDeliveryConfigsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDeliveryConfigsResult>("tencentcloud:Tsf/getDeliveryConfigs:getDeliveryConfigs", args ?? new GetDeliveryConfigsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDeliveryConfigsArgs : Pulumi.InvokeArgs
+    public sealed class GetDeliveryConfigsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetDeliveryConfigsArgs()
         {
         }
+        public static new GetDeliveryConfigsArgs Empty => new GetDeliveryConfigsArgs();
     }
 
-    public sealed class GetDeliveryConfigsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDeliveryConfigsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetDeliveryConfigsInvokeArgs()
         {
         }
+        public static new GetDeliveryConfigsInvokeArgs Empty => new GetDeliveryConfigsInvokeArgs();
     }
 
 

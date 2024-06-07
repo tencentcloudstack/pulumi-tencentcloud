@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const parameterTemplate = new tencentcloud.Postgresql.ParameterTemplate("parameter_template", {
+ * const parameterTemplate = new tencentcloud.postgresql.ParameterTemplate("parameterTemplate", {
  *     dbEngine: "postgresql",
  *     dbMajorVersion: "13",
  *     deleteParamSets: ["lc_time"],
@@ -32,13 +34,16 @@ import * as utilities from "../utilities";
  *     templateName: "your_temp_name",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
- * postgresql parameter_template can be imported using the id, e.g. Notice`modify_param_entry_set` and `delete_param_set` do not support import.
+ * postgresql parameter_template can be imported using the id, e.g.
+ *
+ * Notice: `modify_param_entry_set` and `delete_param_set` do not support import.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Postgresql/parameterTemplate:ParameterTemplate parameter_template parameter_template_id
+ * $ pulumi import tencentcloud:Postgresql/parameterTemplate:ParameterTemplate parameter_template parameter_template_id
  * ```
  */
 export class ParameterTemplate extends pulumi.CustomResource {

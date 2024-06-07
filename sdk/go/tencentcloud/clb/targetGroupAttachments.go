@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a clb targetGroupAttachments
@@ -16,66 +17,76 @@ import (
 // This resource supports bidirectional binding (target group binding to the load balancer, load balancer binding to the target group). When choosing either the load balancer or the target group as the binding target, up to 20 combinations can be bound at most.
 //
 // ## Example Usage
+//
 // ### Load balancer binding to the target group
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewTargetGroupAttachments(ctx, "targetGroupAttachments", &Clb.TargetGroupAttachmentsArgs{
-// 			Associations: clb.TargetGroupAttachmentsAssociationArray{
-// 				&clb.TargetGroupAttachmentsAssociationArgs{
-// 					ListenerId:    pulumi.String("lbl-m2q6sp9m"),
-// 					LocationId:    pulumi.String("loc-jjqr0ric"),
-// 					TargetGroupId: pulumi.String("lbtg-5xunivs0"),
-// 				},
-// 			},
-// 			LoadBalancerId: pulumi.String("lb-phbx2420"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewTargetGroupAttachments(ctx, "targetGroupAttachments", &Clb.TargetGroupAttachmentsArgs{
+//				Associations: clb.TargetGroupAttachmentsAssociationArray{
+//					&clb.TargetGroupAttachmentsAssociationArgs{
+//						ListenerId:    pulumi.String("lbl-m2q6sp9m"),
+//						LocationId:    pulumi.String("loc-jjqr0ric"),
+//						TargetGroupId: pulumi.String("lbtg-5xunivs0"),
+//					},
+//				},
+//				LoadBalancerId: pulumi.String("lb-phbx2420"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Target group binding to the load balancer
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewTargetGroupAttachments(ctx, "targetGroupAttachments", &Clb.TargetGroupAttachmentsArgs{
-// 			Associations: clb.TargetGroupAttachmentsAssociationArray{
-// 				&clb.TargetGroupAttachmentsAssociationArgs{
-// 					ListenerId:     pulumi.String("lbl-m2q6sp9m"),
-// 					LoadBalancerId: pulumi.String("lb-phbx2420"),
-// 					LocationId:     pulumi.String("loc-jjqr0ric"),
-// 				},
-// 			},
-// 			TargetGroupId: pulumi.String("lbtg-5xunivs0"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewTargetGroupAttachments(ctx, "targetGroupAttachments", &Clb.TargetGroupAttachmentsArgs{
+//				Associations: clb.TargetGroupAttachmentsAssociationArray{
+//					&clb.TargetGroupAttachmentsAssociationArgs{
+//						ListenerId:     pulumi.String("lbl-m2q6sp9m"),
+//						LoadBalancerId: pulumi.String("lb-phbx2420"),
+//						LocationId:     pulumi.String("loc-jjqr0ric"),
+//					},
+//				},
+//				TargetGroupId: pulumi.String("lbtg-5xunivs0"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type TargetGroupAttachments struct {
 	pulumi.CustomResourceState
 
@@ -97,7 +108,7 @@ func NewTargetGroupAttachments(ctx *pulumi.Context,
 	if args.Associations == nil {
 		return nil, errors.New("invalid value for required argument 'Associations'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource TargetGroupAttachments
 	err := ctx.RegisterResource("tencentcloud:Clb/targetGroupAttachments:TargetGroupAttachments", name, args, &resource, opts...)
 	if err != nil {
@@ -186,7 +197,7 @@ func (i *TargetGroupAttachments) ToTargetGroupAttachmentsOutputWithContext(ctx c
 // TargetGroupAttachmentsArrayInput is an input type that accepts TargetGroupAttachmentsArray and TargetGroupAttachmentsArrayOutput values.
 // You can construct a concrete instance of `TargetGroupAttachmentsArrayInput` via:
 //
-//          TargetGroupAttachmentsArray{ TargetGroupAttachmentsArgs{...} }
+//	TargetGroupAttachmentsArray{ TargetGroupAttachmentsArgs{...} }
 type TargetGroupAttachmentsArrayInput interface {
 	pulumi.Input
 
@@ -211,7 +222,7 @@ func (i TargetGroupAttachmentsArray) ToTargetGroupAttachmentsArrayOutputWithCont
 // TargetGroupAttachmentsMapInput is an input type that accepts TargetGroupAttachmentsMap and TargetGroupAttachmentsMapOutput values.
 // You can construct a concrete instance of `TargetGroupAttachmentsMapInput` via:
 //
-//          TargetGroupAttachmentsMap{ "key": TargetGroupAttachmentsArgs{...} }
+//	TargetGroupAttachmentsMap{ "key": TargetGroupAttachmentsArgs{...} }
 type TargetGroupAttachmentsMapInput interface {
 	pulumi.Input
 

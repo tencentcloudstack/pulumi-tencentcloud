@@ -2,48 +2,19 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a wedata dqRule
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const example = new tencentcloud.Wedata.DqRule("example", {
- *     alarmLevel: 1,
- *     compareRule: {
- *         items: [{
- *             compareType: 1,
- *             operator: "==",
- *             valueLists: [{
- *                 value: "100",
- *                 valueType: 3,
- *             }],
- *         }],
- *     },
- *     conditionType: 1,
- *     description: "description.",
- *     projectId: "1948767646355341312",
- *     ruleGroupId: 312,
- *     ruleTemplateId: 1,
- *     sourceObjectDataTypeName: "table",
- *     sourceObjectValue: "表",
- *     tableId: "N85hbsh5QQ2VLHL2iOUVeQ",
- *     type: 1,
- * });
- * ```
  *
  * ## Import
  *
  * wedata dq_rule can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Wedata/dqRule:DqRule example 1948767646355341312#894
+ * $ pulumi import tencentcloud:Wedata/dqRule:DqRule example 1948767646355341312#894
  * ```
  */
 export class DqRule extends pulumi.CustomResource {

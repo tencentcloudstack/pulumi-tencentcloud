@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const unitNamespace = new tencentcloud.Tsf.UnitNamespace("unit_namespace", {
+ * const unitNamespace = new tencentcloud.tsf.UnitNamespace("unitNamespace", {
  *     gatewayInstanceId: "gw-ins-lvdypq5k",
  *     namespaceId: "namespace-vwgo38wy",
  *     namespaceName: "keep-terraform-cls",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tsf unit_namespace can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tsf/unitNamespace:UnitNamespace unit_namespace gw-ins-lvdypq5k#namespace-vwgo38wy
+ * $ pulumi import tencentcloud:Tsf/unitNamespace:UnitNamespace unit_namespace gw-ins-lvdypq5k#namespace-vwgo38wy
  * ```
  */
 export class UnitNamespace extends pulumi.CustomResource {

@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Cfw.EdgePolicy("example", {
+ * const example = new tencentcloud.cfw.EdgePolicy("example", {
  *     description: "policy description.",
  *     direction: 1,
  *     enable: "true",
@@ -27,11 +28,14 @@ import * as utilities from "../utilities";
  *     targetType: "net",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### If targetType is tag
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.cfw.EdgePolicy("example", {
  *     sourceContent: "0.0.0.0/0",
@@ -50,13 +54,14 @@ import * as utilities from "../utilities";
  *     scope: "all",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cfw edge_policy can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cfw/edgePolicy:EdgePolicy example edge_policy_id
+ * $ pulumi import tencentcloud:Cfw/edgePolicy:EdgePolicy example edge_policy_id
  * ```
  */
 export class EdgePolicy extends pulumi.CustomResource {

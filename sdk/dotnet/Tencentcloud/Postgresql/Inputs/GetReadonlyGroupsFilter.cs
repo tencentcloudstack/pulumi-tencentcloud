@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Inputs
 {
 
-    public sealed class GetReadonlyGroupsFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetReadonlyGroupsFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter name.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Inputs
         public GetReadonlyGroupsFilterArgs()
         {
         }
+        public static new GetReadonlyGroupsFilterArgs Empty => new GetReadonlyGroupsFilterArgs();
     }
 }

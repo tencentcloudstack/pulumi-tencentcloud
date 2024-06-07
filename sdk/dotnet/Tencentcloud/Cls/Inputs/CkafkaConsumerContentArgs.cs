@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class CkafkaConsumerContentArgs : Pulumi.ResourceArgs
+    public sealed class CkafkaConsumerContentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// whether to deliver the TAG info.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public CkafkaConsumerContentArgs()
         {
         }
+        public static new CkafkaConsumerContentArgs Empty => new CkafkaConsumerContentArgs();
     }
 }

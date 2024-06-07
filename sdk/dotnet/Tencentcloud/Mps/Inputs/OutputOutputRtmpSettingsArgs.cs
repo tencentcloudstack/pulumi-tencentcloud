@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class OutputOutputRtmpSettingsArgs : Pulumi.ResourceArgs
+    public sealed class OutputOutputRtmpSettingsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// RTMP Chunk size, range is [4096, 40960].
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public OutputOutputRtmpSettingsArgs()
         {
         }
+        public static new OutputOutputRtmpSettingsArgs Empty => new OutputOutputRtmpSettingsArgs();
     }
 }

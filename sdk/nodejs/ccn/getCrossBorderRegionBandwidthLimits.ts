@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -12,11 +13,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const ccnRegionBandwidthLimits = pulumi.output(tencentcloud.Ccn.getCrossBorderRegionBandwidthLimits({
+ * const ccnRegionBandwidthLimits = tencentcloud.Ccn.getCrossBorderRegionBandwidthLimits({
  *     filters: [
  *         {
  *             name: "source-region",
@@ -27,16 +29,14 @@ import * as utilities from "../utilities";
  *             values: ["ap-shanghai"],
  *         },
  *     ],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCrossBorderRegionBandwidthLimits(args?: GetCrossBorderRegionBandwidthLimitsArgs, opts?: pulumi.InvokeOptions): Promise<GetCrossBorderRegionBandwidthLimitsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ccn/getCrossBorderRegionBandwidthLimits:getCrossBorderRegionBandwidthLimits", {
         "filters": args.filters,
         "resultOutputFile": args.resultOutputFile,
@@ -72,9 +72,35 @@ export interface GetCrossBorderRegionBandwidthLimitsResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of ccnCrossBorderRegionBandwidthLimits
+ *
+ * > **NOTE:** This resource is dedicated to Unicom.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const ccnRegionBandwidthLimits = tencentcloud.Ccn.getCrossBorderRegionBandwidthLimits({
+ *     filters: [
+ *         {
+ *             name: "source-region",
+ *             values: ["ap-guangzhou"],
+ *         },
+ *         {
+ *             name: "destination-region",
+ *             values: ["ap-shanghai"],
+ *         },
+ *     ],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCrossBorderRegionBandwidthLimitsOutput(args?: GetCrossBorderRegionBandwidthLimitsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCrossBorderRegionBandwidthLimitsResult> {
-    return pulumi.output(args).apply(a => getCrossBorderRegionBandwidthLimits(a, opts))
+    return pulumi.output(args).apply((a: any) => getCrossBorderRegionBandwidthLimits(a, opts))
 }
 
 /**

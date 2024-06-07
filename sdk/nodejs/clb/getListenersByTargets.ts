@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const listenersByTargets = pulumi.output(tencentcloud.Clb.getListenersByTargets({
+ * const listenersByTargets = tencentcloud.Clb.getListenersByTargets({
  *     backends: [{
  *         privateIp: "106.52.160.211",
  *         vpcId: "vpc-4owdpnwr",
  *     }],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getListenersByTargets(args: GetListenersByTargetsArgs, opts?: pulumi.InvokeOptions): Promise<GetListenersByTargetsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Clb/getListenersByTargets:getListenersByTargets", {
         "backends": args.backends,
         "resultOutputFile": args.resultOutputFile,
@@ -63,9 +63,27 @@ export interface GetListenersByTargetsResult {
     readonly loadBalancers: outputs.Clb.GetListenersByTargetsLoadBalancer[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of clb listenersByTargets
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const listenersByTargets = tencentcloud.Clb.getListenersByTargets({
+ *     backends: [{
+ *         privateIp: "106.52.160.211",
+ *         vpcId: "vpc-4owdpnwr",
+ *     }],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getListenersByTargetsOutput(args: GetListenersByTargetsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetListenersByTargetsResult> {
-    return pulumi.output(args).apply(a => getListenersByTargets(a, opts))
+    return pulumi.output(args).apply((a: any) => getListenersByTargets(a, opts))
 }
 
 /**

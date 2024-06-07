@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         /// <summary>
         /// Use this data source to query detailed information of bi user_project
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var userProject = Tencentcloud.Bi.GetUserProject.Invoke(new()
         ///     {
-        ///         var userProject = Output.Create(Tencentcloud.Bi.GetUserProject.InvokeAsync(new Tencentcloud.Bi.GetUserProjectArgs
-        ///         {
-        ///             AllPage = true,
-        ///             ProjectId = 123,
-        ///         }));
-        ///     }
+        ///         AllPage = true,
+        ///         ProjectId = 123,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetUserProjectResult> InvokeAsync(GetUserProjectArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetUserProjectResult>("tencentcloud:Bi/getUserProject:getUserProject", args ?? new GetUserProjectArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetUserProjectResult>("tencentcloud:Bi/getUserProject:getUserProject", args ?? new GetUserProjectArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of bi user_project
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var userProject = Tencentcloud.Bi.GetUserProject.Invoke(new()
         ///     {
-        ///         var userProject = Output.Create(Tencentcloud.Bi.GetUserProject.InvokeAsync(new Tencentcloud.Bi.GetUserProjectArgs
-        ///         {
-        ///             AllPage = true,
-        ///             ProjectId = 123,
-        ///         }));
-        ///     }
+        ///         AllPage = true,
+        ///         ProjectId = 123,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetUserProjectResult> Invoke(GetUserProjectInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetUserProjectResult>("tencentcloud:Bi/getUserProject:getUserProject", args ?? new GetUserProjectInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetUserProjectResult>("tencentcloud:Bi/getUserProject:getUserProject", args ?? new GetUserProjectInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetUserProjectArgs : Pulumi.InvokeArgs
+    public sealed class GetUserProjectArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Whether to display all, if true, ignore paging.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         public GetUserProjectArgs()
         {
         }
+        public static new GetUserProjectArgs Empty => new GetUserProjectArgs();
     }
 
-    public sealed class GetUserProjectInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetUserProjectInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Whether to display all, if true, ignore paging.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         public GetUserProjectInvokeArgs()
         {
         }
+        public static new GetUserProjectInvokeArgs Empty => new GetUserProjectInvokeArgs();
     }
 
 

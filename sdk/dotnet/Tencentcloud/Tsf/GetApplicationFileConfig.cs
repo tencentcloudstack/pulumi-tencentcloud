@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf application_file_config
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var applicationFileConfig = Tencentcloud.Tsf.GetApplicationFileConfig.Invoke(new()
         ///     {
-        ///         var applicationFileConfig = Output.Create(Tencentcloud.Tsf.GetApplicationFileConfig.InvokeAsync(new Tencentcloud.Tsf.GetApplicationFileConfigArgs
-        ///         {
-        ///             ApplicationId = "application-2vzk6n3v",
-        ///             ConfigId = "dcfg-f-4y4ekzqv",
-        ///             ConfigName = "file-log1",
-        ///             ConfigVersion = "1.2",
-        ///         }));
-        ///     }
+        ///         ApplicationId = "application-2vzk6n3v",
+        ///         ConfigId = "dcfg-f-4y4ekzqv",
+        ///         ConfigName = "file-log1",
+        ///         ConfigVersion = "1.2",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetApplicationFileConfigResult> InvokeAsync(GetApplicationFileConfigArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApplicationFileConfigResult>("tencentcloud:Tsf/getApplicationFileConfig:getApplicationFileConfig", args ?? new GetApplicationFileConfigArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApplicationFileConfigResult>("tencentcloud:Tsf/getApplicationFileConfig:getApplicationFileConfig", args ?? new GetApplicationFileConfigArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf application_file_config
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var applicationFileConfig = Tencentcloud.Tsf.GetApplicationFileConfig.Invoke(new()
         ///     {
-        ///         var applicationFileConfig = Output.Create(Tencentcloud.Tsf.GetApplicationFileConfig.InvokeAsync(new Tencentcloud.Tsf.GetApplicationFileConfigArgs
-        ///         {
-        ///             ApplicationId = "application-2vzk6n3v",
-        ///             ConfigId = "dcfg-f-4y4ekzqv",
-        ///             ConfigName = "file-log1",
-        ///             ConfigVersion = "1.2",
-        ///         }));
-        ///     }
+        ///         ApplicationId = "application-2vzk6n3v",
+        ///         ConfigId = "dcfg-f-4y4ekzqv",
+        ///         ConfigName = "file-log1",
+        ///         ConfigVersion = "1.2",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetApplicationFileConfigResult> Invoke(GetApplicationFileConfigInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApplicationFileConfigResult>("tencentcloud:Tsf/getApplicationFileConfig:getApplicationFileConfig", args ?? new GetApplicationFileConfigInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApplicationFileConfigResult>("tencentcloud:Tsf/getApplicationFileConfig:getApplicationFileConfig", args ?? new GetApplicationFileConfigInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetApplicationFileConfigArgs : Pulumi.InvokeArgs
+    public sealed class GetApplicationFileConfigArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Application ID.
@@ -125,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetApplicationFileConfigArgs()
         {
         }
+        public static new GetApplicationFileConfigArgs Empty => new GetApplicationFileConfigArgs();
     }
 
-    public sealed class GetApplicationFileConfigInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetApplicationFileConfigInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Application ID.
@@ -174,6 +169,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetApplicationFileConfigInvokeArgs()
         {
         }
+        public static new GetApplicationFileConfigInvokeArgs Empty => new GetApplicationFileConfigInvokeArgs();
     }
 
 

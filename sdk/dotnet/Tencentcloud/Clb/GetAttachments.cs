@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// Use this data source to query detailed information of CLB attachments
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clblab = Tencentcloud.Clb.GetAttachments.Invoke(new()
         ///     {
-        ///         var clblab = Output.Create(Tencentcloud.Clb.GetAttachments.InvokeAsync(new Tencentcloud.Clb.GetAttachmentsArgs
-        ///         {
-        ///             ClbId = "lb-k2zjp9lv",
-        ///             ListenerId = "lbl-hh141sn9",
-        ///             RuleId = "loc-4xxr2cy7",
-        ///         }));
-        ///     }
+        ///         ClbId = "lb-k2zjp9lv",
+        ///         ListenerId = "lbl-hh141sn9",
+        ///         RuleId = "loc-4xxr2cy7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAttachmentsResult> InvokeAsync(GetAttachmentsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAttachmentsResult>("tencentcloud:Clb/getAttachments:getAttachments", args ?? new GetAttachmentsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAttachmentsResult>("tencentcloud:Clb/getAttachments:getAttachments", args ?? new GetAttachmentsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of CLB attachments
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clblab = Tencentcloud.Clb.GetAttachments.Invoke(new()
         ///     {
-        ///         var clblab = Output.Create(Tencentcloud.Clb.GetAttachments.InvokeAsync(new Tencentcloud.Clb.GetAttachmentsArgs
-        ///         {
-        ///             ClbId = "lb-k2zjp9lv",
-        ///             ListenerId = "lbl-hh141sn9",
-        ///             RuleId = "loc-4xxr2cy7",
-        ///         }));
-        ///     }
+        ///         ClbId = "lb-k2zjp9lv",
+        ///         ListenerId = "lbl-hh141sn9",
+        ///         RuleId = "loc-4xxr2cy7",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAttachmentsResult> Invoke(GetAttachmentsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAttachmentsResult>("tencentcloud:Clb/getAttachments:getAttachments", args ?? new GetAttachmentsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAttachmentsResult>("tencentcloud:Clb/getAttachments:getAttachments", args ?? new GetAttachmentsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAttachmentsArgs : Pulumi.InvokeArgs
+    public sealed class GetAttachmentsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the CLB to be queried.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetAttachmentsArgs()
         {
         }
+        public static new GetAttachmentsArgs Empty => new GetAttachmentsArgs();
     }
 
-    public sealed class GetAttachmentsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAttachmentsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the CLB to be queried.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetAttachmentsInvokeArgs()
         {
         }
+        public static new GetAttachmentsInvokeArgs Empty => new GetAttachmentsInvokeArgs();
     }
 
 

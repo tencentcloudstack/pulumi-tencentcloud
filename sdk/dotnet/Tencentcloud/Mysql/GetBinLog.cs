@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql bin_log
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var binLog = Tencentcloud.Mysql.GetBinLog.Invoke(new()
         ///     {
-        ///         var binLog = Output.Create(Tencentcloud.Mysql.GetBinLog.InvokeAsync(new Tencentcloud.Mysql.GetBinLogArgs
-        ///         {
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBinLogResult> InvokeAsync(GetBinLogArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBinLogResult>("tencentcloud:Mysql/getBinLog:getBinLog", args ?? new GetBinLogArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBinLogResult>("tencentcloud:Mysql/getBinLog:getBinLog", args ?? new GetBinLogArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql bin_log
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var binLog = Tencentcloud.Mysql.GetBinLog.Invoke(new()
         ///     {
-        ///         var binLog = Output.Create(Tencentcloud.Mysql.GetBinLog.InvokeAsync(new Tencentcloud.Mysql.GetBinLogArgs
-        ///         {
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBinLogResult> Invoke(GetBinLogInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBinLogResult>("tencentcloud:Mysql/getBinLog:getBinLog", args ?? new GetBinLogInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBinLogResult>("tencentcloud:Mysql/getBinLog:getBinLog", args ?? new GetBinLogInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBinLogArgs : Pulumi.InvokeArgs
+    public sealed class GetBinLogArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, in the format: cdb-c1nl9rpv. Same instance ID as displayed in the ApsaraDB for Console page.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetBinLogArgs()
         {
         }
+        public static new GetBinLogArgs Empty => new GetBinLogArgs();
     }
 
-    public sealed class GetBinLogInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBinLogInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID, in the format: cdb-c1nl9rpv. Same instance ID as displayed in the ApsaraDB for Console page.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetBinLogInvokeArgs()
         {
         }
+        public static new GetBinLogInvokeArgs Empty => new GetBinLogInvokeArgs();
     }
 
 

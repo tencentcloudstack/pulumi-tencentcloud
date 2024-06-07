@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskSourceResourceClickHouseParamSchemaGetArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskSourceResourceClickHouseParamSchemaGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether the column item is allowed to be empty.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskSourceResourceClickHouseParamSchemaGetArgs()
         {
         }
+        public static new DatahubTaskSourceResourceClickHouseParamSchemaGetArgs Empty => new DatahubTaskSourceResourceClickHouseParamSchemaGetArgs();
     }
 }

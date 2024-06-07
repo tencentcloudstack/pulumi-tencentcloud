@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mps event
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewEvent(ctx, "event", &Mps.EventArgs{
-// 			Description: pulumi.String("event description"),
-// 			EventName:   pulumi.String("you-event-name"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewEvent(ctx, "event", &Mps.EventArgs{
+//				Description: pulumi.String("event description"),
+//				EventName:   pulumi.String("you-event-name"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // mps event can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Mps/event:Event event event_id
+// $ pulumi import tencentcloud:Mps/event:Event event event_id
 // ```
 type Event struct {
 	pulumi.CustomResourceState
@@ -63,7 +69,7 @@ func NewEvent(ctx *pulumi.Context,
 	if args.EventName == nil {
 		return nil, errors.New("invalid value for required argument 'EventName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Event
 	err := ctx.RegisterResource("tencentcloud:Mps/event:Event", name, args, &resource, opts...)
 	if err != nil {
@@ -144,7 +150,7 @@ func (i *Event) ToEventOutputWithContext(ctx context.Context) EventOutput {
 // EventArrayInput is an input type that accepts EventArray and EventArrayOutput values.
 // You can construct a concrete instance of `EventArrayInput` via:
 //
-//          EventArray{ EventArgs{...} }
+//	EventArray{ EventArgs{...} }
 type EventArrayInput interface {
 	pulumi.Input
 
@@ -169,7 +175,7 @@ func (i EventArray) ToEventArrayOutputWithContext(ctx context.Context) EventArra
 // EventMapInput is an input type that accepts EventMap and EventMapOutput values.
 // You can construct a concrete instance of `EventMapInput` via:
 //
-//          EventMap{ "key": EventArgs{...} }
+//	EventMap{ "key": EventArgs{...} }
 type EventMapInput interface {
 	pulumi.Input
 

@@ -14,8 +14,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Outputs
     [OutputType]
     public sealed class GetSearchFilterFilterResult
     {
+        /// <summary>
+        /// filter field name.
+        /// </summary>
         public readonly string Key;
+        /// <summary>
+        /// operator, congruent eq, not equal neq, similar like, exclude similar not like, less than lt, less than and equal to lte, greater than gt, greater than and equal to gte, within range range, not within range norange.
+        /// </summary>
         public readonly string Operator;
+        /// <summary>
+        /// Filter values, range operations need to enter two values at the same time, separated by commas.
+        /// </summary>
         public readonly string Value;
 
         [OutputConstructor]

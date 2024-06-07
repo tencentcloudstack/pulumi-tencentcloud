@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
 {
 
-    public sealed class ServiceAccountPermissionArgs : Pulumi.ResourceArgs
+    public sealed class ServiceAccountPermissionArgs : global::Pulumi.ResourceArgs
     {
         [Input("actions", required: true)]
         private InputList<string>? _actions;
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
         public ServiceAccountPermissionArgs()
         {
         }
+        public static new ServiceAccountPermissionArgs Empty => new ServiceAccountPermissionArgs();
     }
 }

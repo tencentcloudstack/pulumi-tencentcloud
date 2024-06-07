@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse.Inputs
 {
 
-    public sealed class InstanceCommonSpecArgs : Pulumi.ResourceArgs
+    public sealed class InstanceCommonSpecArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Node count. NOTE: Only support value 3.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse.Inputs
         public InstanceCommonSpecArgs()
         {
         }
+        public static new InstanceCommonSpecArgs Empty => new InstanceCommonSpecArgs();
     }
 }

@@ -15,40 +15,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdh
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///     var foo = new Tencentcloud.Cdh.Instance("foo", new()
     ///     {
-    ///         var config = new Config();
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    ///         var foo = new Tencentcloud.Cdh.Instance("foo", new Tencentcloud.Cdh.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = availabilityZone,
-    ///             HostType = "HC20",
-    ///             ChargeType = "PREPAID",
-    ///             PrepaidPeriod = 1,
-    ///             HostName = "test",
-    ///             PrepaidRenewFlag = "NOTIFY_AND_MANUAL_RENEW",
-    ///         });
-    ///     }
+    ///         AvailabilityZone = availabilityZone,
+    ///         HostType = "HC20",
+    ///         ChargeType = "PREPAID",
+    ///         PrepaidPeriod = 1,
+    ///         HostName = "test",
+    ///         PrepaidRenewFlag = "NOTIFY_AND_MANUAL_RENEW",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CDH instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cdh/instance:Instance foo host-d6s7i5q4
+    /// $ pulumi import tencentcloud:Cdh/instance:Instance foo host-d6s7i5q4
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cdh/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The available zone for the CDH instance.
@@ -167,7 +168,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdh
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The available zone for the CDH instance.
@@ -214,9 +215,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdh
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The available zone for the CDH instance.
@@ -305,5 +307,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdh
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

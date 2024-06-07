@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mediaVideoProcessTemplate = new tencentcloud.Ci.MediaVideoProcessTemplate("media_video_process_template", {
+ * const mediaVideoProcessTemplate = new tencentcloud.ci.MediaVideoProcessTemplate("mediaVideoProcessTemplate", {
  *     bucket: "terraform-ci-xxxxxx",
  *     colorEnhance: {
  *         contrast: "",
@@ -28,13 +30,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ci media_video_process_template can be imported using the bucket#templateId, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ci/mediaVideoProcessTemplate:MediaVideoProcessTemplate media_video_process_template terraform-ci-xxxxxx#t1d5694d87639a4593a9fd7e9025d26f52
+ * $ pulumi import tencentcloud:Ci/mediaVideoProcessTemplate:MediaVideoProcessTemplate media_video_process_template terraform-ci-xxxxxx#t1d5694d87639a4593a9fd7e9025d26f52
  * ```
  */
 export class MediaVideoProcessTemplate extends pulumi.CustomResource {

@@ -15,136 +15,132 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// <summary>
         /// Use this data source to query detailed information of SSM secret
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new()
         ///     {
-        ///         var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new Tencentcloud.Ssm.SecretArgs
+        ///         SecretName = "tf_example",
+        ///         Description = "desc.",
+        ///         Tags = 
         ///         {
-        ///             SecretName = "tf_example",
-        ///             Description = "desc.",
-        ///             Tags = 
-        ///             {
-        ///                 { "createdBy", "terraform" },
-        ///             },
-        ///         });
-        ///         var exampleSecrets = exampleSecret.SecretName.Apply(secretName =&gt; Tencentcloud.Ssm.GetSecrets.Invoke(new Tencentcloud.Ssm.GetSecretsInvokeArgs
-        ///         {
-        ///             SecretName = secretName,
-        ///             State = 1,
-        ///         }));
-        ///     }
+        ///             { "createdBy", "terraform" },
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var exampleSecrets = Tencentcloud.Ssm.GetSecrets.Invoke(new()
+        ///     {
+        ///         SecretName = exampleSecret.SecretName,
+        ///         State = 1,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### OR you can filter by tags
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Ssm.GetSecrets.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Ssm.GetSecrets.InvokeAsync(new Tencentcloud.Ssm.GetSecretsArgs
+        ///         SecretName = tencentcloud_ssm_secret.Example.Secret_name,
+        ///         State = 1,
+        ///         Tags = 
         ///         {
-        ///             SecretName = tencentcloud_ssm_secret.Example.Secret_name,
-        ///             State = 1,
-        ///             Tags = 
-        ///             {
-        ///                 { "createdBy", "terraform" },
-        ///             },
-        ///         }));
-        ///     }
+        ///             { "createdBy", "terraform" },
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSecretsResult> InvokeAsync(GetSecretsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSecretsResult>("tencentcloud:Ssm/getSecrets:getSecrets", args ?? new GetSecretsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecretsResult>("tencentcloud:Ssm/getSecrets:getSecrets", args ?? new GetSecretsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of SSM secret
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new()
         ///     {
-        ///         var exampleSecret = new Tencentcloud.Ssm.Secret("exampleSecret", new Tencentcloud.Ssm.SecretArgs
+        ///         SecretName = "tf_example",
+        ///         Description = "desc.",
+        ///         Tags = 
         ///         {
-        ///             SecretName = "tf_example",
-        ///             Description = "desc.",
-        ///             Tags = 
-        ///             {
-        ///                 { "createdBy", "terraform" },
-        ///             },
-        ///         });
-        ///         var exampleSecrets = exampleSecret.SecretName.Apply(secretName =&gt; Tencentcloud.Ssm.GetSecrets.Invoke(new Tencentcloud.Ssm.GetSecretsInvokeArgs
-        ///         {
-        ///             SecretName = secretName,
-        ///             State = 1,
-        ///         }));
-        ///     }
+        ///             { "createdBy", "terraform" },
+        ///         },
+        ///     });
         /// 
-        /// }
+        ///     var exampleSecrets = Tencentcloud.Ssm.GetSecrets.Invoke(new()
+        ///     {
+        ///         SecretName = exampleSecret.SecretName,
+        ///         State = 1,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### OR you can filter by tags
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Ssm.GetSecrets.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Ssm.GetSecrets.InvokeAsync(new Tencentcloud.Ssm.GetSecretsArgs
+        ///         SecretName = tencentcloud_ssm_secret.Example.Secret_name,
+        ///         State = 1,
+        ///         Tags = 
         ///         {
-        ///             SecretName = tencentcloud_ssm_secret.Example.Secret_name,
-        ///             State = 1,
-        ///             Tags = 
-        ///             {
-        ///                 { "createdBy", "terraform" },
-        ///             },
-        ///         }));
-        ///     }
+        ///             { "createdBy", "terraform" },
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSecretsResult> Invoke(GetSecretsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSecretsResult>("tencentcloud:Ssm/getSecrets:getSecrets", args ?? new GetSecretsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSecretsResult>("tencentcloud:Ssm/getSecrets:getSecrets", args ?? new GetSecretsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSecretsArgs : Pulumi.InvokeArgs
+    public sealed class GetSecretsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The order to sort the create time of secret. `0` - desc, `1` - asc. Default value is `0`.
@@ -197,9 +193,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public GetSecretsArgs()
         {
         }
+        public static new GetSecretsArgs Empty => new GetSecretsArgs();
     }
 
-    public sealed class GetSecretsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSecretsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The order to sort the create time of secret. `0` - desc, `1` - asc. Default value is `0`.
@@ -252,6 +249,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         public GetSecretsInvokeArgs()
         {
         }
+        public static new GetSecretsInvokeArgs Empty => new GetSecretsInvokeArgs();
     }
 
 

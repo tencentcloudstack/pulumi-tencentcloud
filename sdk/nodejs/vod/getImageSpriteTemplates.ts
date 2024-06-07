@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const fooImageSpriteTemplate = new tencentcloud.vod.ImageSpriteTemplate("fooImageSpriteTemplate", {
  *     sampleType: "Percent",
@@ -31,14 +33,12 @@ import * as utilities from "../utilities";
  *     definition: fooImageSpriteTemplate.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getImageSpriteTemplates(args?: GetImageSpriteTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetImageSpriteTemplatesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vod/getImageSpriteTemplates:getImageSpriteTemplates", {
         "definition": args.definition,
         "resultOutputFile": args.resultOutputFile,
@@ -92,9 +92,37 @@ export interface GetImageSpriteTemplatesResult {
      */
     readonly type?: string;
 }
-
+/**
+ * Use this data source to query detailed information of VOD image sprite templates.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const fooImageSpriteTemplate = new tencentcloud.vod.ImageSpriteTemplate("fooImageSpriteTemplate", {
+ *     sampleType: "Percent",
+ *     sampleInterval: 10,
+ *     rowCount: 3,
+ *     columnCount: 3,
+ *     comment: "test",
+ *     fillType: "stretch",
+ *     width: 128,
+ *     height: 128,
+ *     resolutionAdaptive: false,
+ * });
+ * const fooImageSpriteTemplates = tencentcloud.Vod.getImageSpriteTemplatesOutput({
+ *     type: "Custom",
+ *     definition: fooImageSpriteTemplate.id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getImageSpriteTemplatesOutput(args?: GetImageSpriteTemplatesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetImageSpriteTemplatesResult> {
-    return pulumi.output(args).apply(a => getImageSpriteTemplates(a, opts))
+    return pulumi.output(args).apply((a: any) => getImageSpriteTemplates(a, opts))
 }
 
 /**

@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Oceanus.JobCopy("example", {
+ * const example = new tencentcloud.oceanus.JobCopy("example", {
  *     jobType: 2,
  *     sourceId: "cql-0nob2hx8",
  *     sourceName: "keep_jar",
@@ -23,6 +24,7 @@ import * as utilities from "../utilities";
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class JobCopy extends pulumi.CustomResource {
     /**

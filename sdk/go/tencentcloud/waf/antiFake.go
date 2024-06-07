@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a waf antiFake
@@ -17,35 +18,40 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewAntiFake(ctx, "example", &Waf.AntiFakeArgs{
-// 			Domain: pulumi.String("www.waf.com"),
-// 			Status: pulumi.Int(1),
-// 			Uri:    pulumi.String("/anti_fake_url.html"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewAntiFake(ctx, "example", &Waf.AntiFakeArgs{
+//				Domain: pulumi.String("www.waf.com"),
+//				Status: pulumi.Int(1),
+//				Uri:    pulumi.String("/anti_fake_url.html"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // waf anti_fake can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Waf/antiFake:AntiFake example 3200035516#www.waf.com
+// $ pulumi import tencentcloud:Waf/antiFake:AntiFake example 3200035516#www.waf.com
 // ```
 type AntiFake struct {
 	pulumi.CustomResourceState
@@ -77,7 +83,7 @@ func NewAntiFake(ctx *pulumi.Context,
 	if args.Uri == nil {
 		return nil, errors.New("invalid value for required argument 'Uri'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AntiFake
 	err := ctx.RegisterResource("tencentcloud:Waf/antiFake:AntiFake", name, args, &resource, opts...)
 	if err != nil {
@@ -182,7 +188,7 @@ func (i *AntiFake) ToAntiFakeOutputWithContext(ctx context.Context) AntiFakeOutp
 // AntiFakeArrayInput is an input type that accepts AntiFakeArray and AntiFakeArrayOutput values.
 // You can construct a concrete instance of `AntiFakeArrayInput` via:
 //
-//          AntiFakeArray{ AntiFakeArgs{...} }
+//	AntiFakeArray{ AntiFakeArgs{...} }
 type AntiFakeArrayInput interface {
 	pulumi.Input
 
@@ -207,7 +213,7 @@ func (i AntiFakeArray) ToAntiFakeArrayOutputWithContext(ctx context.Context) Ant
 // AntiFakeMapInput is an input type that accepts AntiFakeMap and AntiFakeMapOutput values.
 // You can construct a concrete instance of `AntiFakeMapInput` via:
 //
-//          AntiFakeMap{ "key": AntiFakeArgs{...} }
+//	AntiFakeMap{ "key": AntiFakeArgs{...} }
 type AntiFakeMapInput interface {
 	pulumi.Input
 

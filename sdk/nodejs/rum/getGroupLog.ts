@@ -9,26 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const groupLog = pulumi.output(tencentcloud.Rum.getGroupLog({
- *     endTime: "1.62545484e+12",
+ * const groupLog = tencentcloud.Rum.getGroupLog({
+ *     endTime: "1625454840000",
  *     groupField: "level",
  *     orderBy: "desc",
  *     projectId: 1,
  *     query: "id:123 AND type:\"log\"",
- *     startTime: "1.62544404e+12",
- * }));
+ *     startTime: "1625444040000",
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getGroupLog(args: GetGroupLogArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupLogResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getGroupLog:getGroupLog", {
         "endTime": args.endTime,
         "groupField": args.groupField,
@@ -94,9 +93,29 @@ export interface GetGroupLogResult {
     readonly resultOutputFile?: string;
     readonly startTime: string;
 }
-
+/**
+ * Use this data source to query detailed information of rum groupLog
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const groupLog = tencentcloud.Rum.getGroupLog({
+ *     endTime: "1625454840000",
+ *     groupField: "level",
+ *     orderBy: "desc",
+ *     projectId: 1,
+ *     query: "id:123 AND type:\"log\"",
+ *     startTime: "1625444040000",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getGroupLogOutput(args: GetGroupLogOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGroupLogResult> {
-    return pulumi.output(args).apply(a => getGroupLog(a, opts))
+    return pulumi.output(args).apply((a: any) => getGroupLog(a, opts))
 }
 
 /**

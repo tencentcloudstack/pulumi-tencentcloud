@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// <summary>
         /// Use this data source to query the detail information of redis instance.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var redislab = Tencentcloud.Redis.GetInstances.Invoke(new()
         ///     {
-        ///         var redislab = Output.Create(Tencentcloud.Redis.GetInstances.InvokeAsync(new Tencentcloud.Redis.GetInstancesArgs
-        ///         {
-        ///             Limit = 20,
-        ///             ProjectId = 0,
-        ///             ResultOutputFile = "/tmp/redis_instances",
-        ///             SearchKey = "myredis",
-        ///             Zone = "ap-hongkong-1",
-        ///         }));
-        ///     }
+        ///         Limit = 20,
+        ///         ProjectId = 0,
+        ///         ResultOutputFile = "/tmp/redis_instances",
+        ///         SearchKey = "myredis",
+        ///         Zone = "ap-hongkong-1",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstancesResult> InvokeAsync(GetInstancesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstancesResult>("tencentcloud:Redis/getInstances:getInstances", args ?? new GetInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstancesResult>("tencentcloud:Redis/getInstances:getInstances", args ?? new GetInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the detail information of redis instance.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var redislab = Tencentcloud.Redis.GetInstances.Invoke(new()
         ///     {
-        ///         var redislab = Output.Create(Tencentcloud.Redis.GetInstances.InvokeAsync(new Tencentcloud.Redis.GetInstancesArgs
-        ///         {
-        ///             Limit = 20,
-        ///             ProjectId = 0,
-        ///             ResultOutputFile = "/tmp/redis_instances",
-        ///             SearchKey = "myredis",
-        ///             Zone = "ap-hongkong-1",
-        ///         }));
-        ///     }
+        ///         Limit = 20,
+        ///         ProjectId = 0,
+        ///         ResultOutputFile = "/tmp/redis_instances",
+        ///         SearchKey = "myredis",
+        ///         Zone = "ap-hongkong-1",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstancesResult> Invoke(GetInstancesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstancesResult>("tencentcloud:Redis/getInstances:getInstances", args ?? new GetInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstancesResult>("tencentcloud:Redis/getInstances:getInstances", args ?? new GetInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetInstancesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The number limitation of results for a query.
@@ -127,9 +121,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public GetInstancesArgs()
         {
         }
+        public static new GetInstancesArgs Empty => new GetInstancesArgs();
     }
 
-    public sealed class GetInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The number limitation of results for a query.
@@ -176,6 +171,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public GetInstancesInvokeArgs()
         {
         }
+        public static new GetInstancesInvokeArgs Empty => new GetInstancesInvokeArgs();
     }
 
 

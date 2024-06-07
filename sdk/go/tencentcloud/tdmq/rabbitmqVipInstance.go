@@ -7,11 +7,20 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tdmq rabbitmqVipInstance
+//
+// ## Import
+//
+// tdmq rabbitmq_vip_instance can be imported using the id, e.g.
+//
+// ```sh
+// $ pulumi import tencentcloud:Tdmq/rabbitmqVipInstance:RabbitmqVipInstance example amqp-mok52gmn
+// ```
 type RabbitmqVipInstance struct {
 	pulumi.CustomResourceState
 
@@ -56,7 +65,7 @@ func NewRabbitmqVipInstance(ctx *pulumi.Context,
 	if args.ZoneIds == nil {
 		return nil, errors.New("invalid value for required argument 'ZoneIds'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RabbitmqVipInstance
 	err := ctx.RegisterResource("tencentcloud:Tdmq/rabbitmqVipInstance:RabbitmqVipInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -201,7 +210,7 @@ func (i *RabbitmqVipInstance) ToRabbitmqVipInstanceOutputWithContext(ctx context
 // RabbitmqVipInstanceArrayInput is an input type that accepts RabbitmqVipInstanceArray and RabbitmqVipInstanceArrayOutput values.
 // You can construct a concrete instance of `RabbitmqVipInstanceArrayInput` via:
 //
-//          RabbitmqVipInstanceArray{ RabbitmqVipInstanceArgs{...} }
+//	RabbitmqVipInstanceArray{ RabbitmqVipInstanceArgs{...} }
 type RabbitmqVipInstanceArrayInput interface {
 	pulumi.Input
 
@@ -226,7 +235,7 @@ func (i RabbitmqVipInstanceArray) ToRabbitmqVipInstanceArrayOutputWithContext(ct
 // RabbitmqVipInstanceMapInput is an input type that accepts RabbitmqVipInstanceMap and RabbitmqVipInstanceMapOutput values.
 // You can construct a concrete instance of `RabbitmqVipInstanceMapInput` via:
 //
-//          RabbitmqVipInstanceMap{ "key": RabbitmqVipInstanceArgs{...} }
+//	RabbitmqVipInstanceMap{ "key": RabbitmqVipInstanceArgs{...} }
 type RabbitmqVipInstanceMapInput interface {
 	pulumi.Input
 

@@ -11,13 +11,17 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ApplicationProxyIpv6GetArgs : Pulumi.ResourceArgs
+    public sealed class ApplicationProxyIpv6GetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// - `on`: Enable.- `off`: Disable.
+        /// </summary>
         [Input("switch", required: true)]
         public Input<string> Switch { get; set; } = null!;
 
         public ApplicationProxyIpv6GetArgs()
         {
         }
+        public static new ApplicationProxyIpv6GetArgs Empty => new ApplicationProxyIpv6GetArgs();
     }
 }

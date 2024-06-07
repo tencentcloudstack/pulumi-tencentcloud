@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instance = new tencentcloud.Cdwpg.Instance("instance", {
+ * const instance = new tencentcloud.cdwpg.Instance("instance", {
  *     adminPassword: "xxxxxx",
  *     chargeProperties: {
  *         chargeType: "POSTPAID_BY_HOUR",
@@ -53,13 +55,14 @@ import * as utilities from "../utilities";
  *     zone: "ap-guangzhou-6",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cdwpg instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cdwpg/instance:Instance instance instance_id
+ * $ pulumi import tencentcloud:Cdwpg/instance:Instance instance instance_id
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -167,7 +170,7 @@ export class Instance extends pulumi.CustomResource {
             if ((!args || args.zone === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'zone'");
             }
-            resourceInputs["adminPassword"] = args ? args.adminPassword : undefined;
+            resourceInputs["adminPassword"] = args?.adminPassword ? pulumi.secret(args.adminPassword) : undefined;
             resourceInputs["chargeProperties"] = args ? args.chargeProperties : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
             resourceInputs["resources"] = args ? args.resources : undefined;
@@ -177,6 +180,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["zone"] = args ? args.zone : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["adminPassword"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Instance.__pulumiType, name, resourceInputs, opts);
     }
 }

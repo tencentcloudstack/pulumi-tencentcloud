@@ -15,64 +15,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         /// <summary>
         /// Use this data source to query cvm instances in parallel.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Instances.GetSet.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Instances.GetSet.InvokeAsync(new Tencentcloud.Instances.GetSetArgs
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         InstanceId = "ins-a81rnm8c",
+        ///         InstanceName = "tf_example",
+        ///         ProjectId = 0,
+        ///         SubnetId = "subnet-1to7t9au",
+        ///         Tags = 
         ///         {
-        ///             VpcId = "vpc-4owdpnwr",
-        ///         }));
-        ///     }
+        ///             { "tagKey", "tagValue" },
+        ///         },
+        ///         VpcId = "vpc-l040hycv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSetResult> InvokeAsync(GetSetArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSetResult>("tencentcloud:Instances/getSet:getSet", args ?? new GetSetArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSetResult>("tencentcloud:Instances/getSet:getSet", args ?? new GetSetArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query cvm instances in parallel.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Instances.GetSet.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Instances.GetSet.InvokeAsync(new Tencentcloud.Instances.GetSetArgs
+        ///         AvailabilityZone = "ap-guangzhou-6",
+        ///         InstanceId = "ins-a81rnm8c",
+        ///         InstanceName = "tf_example",
+        ///         ProjectId = 0,
+        ///         SubnetId = "subnet-1to7t9au",
+        ///         Tags = 
         ///         {
-        ///             VpcId = "vpc-4owdpnwr",
-        ///         }));
-        ///     }
+        ///             { "tagKey", "tagValue" },
+        ///         },
+        ///         VpcId = "vpc-l040hycv",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSetResult> Invoke(GetSetInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSetResult>("tencentcloud:Instances/getSet:getSet", args ?? new GetSetInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSetResult>("tencentcloud:Instances/getSet:getSet", args ?? new GetSetInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSetArgs : Pulumi.InvokeArgs
+    public sealed class GetSetArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The available zone that the CVM instance locates at.
@@ -131,9 +143,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         public GetSetArgs()
         {
         }
+        public static new GetSetArgs Empty => new GetSetArgs();
     }
 
-    public sealed class GetSetInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSetInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The available zone that the CVM instance locates at.
@@ -192,6 +205,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances
         public GetSetInvokeArgs()
         {
         }
+        public static new GetSetInvokeArgs Empty => new GetSetInvokeArgs();
     }
 
 

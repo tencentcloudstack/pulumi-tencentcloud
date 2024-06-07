@@ -12,7 +12,7 @@ import * as utilities from "../utilities";
  * ENI attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Eni/attachment:Attachment tencentcloud_eni_attachment.foo eni-gtlvkjvz+ins-0h3a5new
+ * $ pulumi import tencentcloud:Eni/attachment:Attachment tencentcloud_eni_attachment.foo eni-gtlvkjvz+ins-0h3a5new
  * ```
  */
 export class Attachment extends pulumi.CustomResource {

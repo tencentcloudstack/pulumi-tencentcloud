@@ -7,50 +7,56 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cfw vpcPolicy
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cfw"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cfw.NewVpcPolicy(ctx, "example", &Cfw.VpcPolicyArgs{
-// 			Description:   pulumi.String("description."),
-// 			DestContent:   pulumi.String("192.168.0.2"),
-// 			DestType:      pulumi.String("net"),
-// 			Enable:        pulumi.String("true"),
-// 			FwGroupId:     pulumi.String("ALL"),
-// 			Port:          pulumi.String("-1/-1"),
-// 			Protocol:      pulumi.String("ANY"),
-// 			RuleAction:    pulumi.String("log"),
-// 			SourceContent: pulumi.String("0.0.0.0/0"),
-// 			SourceType:    pulumi.String("net"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cfw.NewVpcPolicy(ctx, "example", &Cfw.VpcPolicyArgs{
+//				Description:   pulumi.String("description."),
+//				DestContent:   pulumi.String("192.168.0.2"),
+//				DestType:      pulumi.String("net"),
+//				Enable:        pulumi.String("true"),
+//				FwGroupId:     pulumi.String("ALL"),
+//				Port:          pulumi.String("-1/-1"),
+//				Protocol:      pulumi.String("ANY"),
+//				RuleAction:    pulumi.String("log"),
+//				SourceContent: pulumi.String("0.0.0.0/0"),
+//				SourceType:    pulumi.String("net"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cfw vpc_policy can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cfw/vpcPolicy:VpcPolicy vpc_policy vpc_policy_id
+// $ pulumi import tencentcloud:Cfw/vpcPolicy:VpcPolicy vpc_policy vpc_policy_id
 // ```
 type VpcPolicy struct {
 	pulumi.CustomResourceState
@@ -120,7 +126,7 @@ func NewVpcPolicy(ctx *pulumi.Context,
 	if args.SourceType == nil {
 		return nil, errors.New("invalid value for required argument 'SourceType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource VpcPolicy
 	err := ctx.RegisterResource("tencentcloud:Cfw/vpcPolicy:VpcPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -289,7 +295,7 @@ func (i *VpcPolicy) ToVpcPolicyOutputWithContext(ctx context.Context) VpcPolicyO
 // VpcPolicyArrayInput is an input type that accepts VpcPolicyArray and VpcPolicyArrayOutput values.
 // You can construct a concrete instance of `VpcPolicyArrayInput` via:
 //
-//          VpcPolicyArray{ VpcPolicyArgs{...} }
+//	VpcPolicyArray{ VpcPolicyArgs{...} }
 type VpcPolicyArrayInput interface {
 	pulumi.Input
 
@@ -314,7 +320,7 @@ func (i VpcPolicyArray) ToVpcPolicyArrayOutputWithContext(ctx context.Context) V
 // VpcPolicyMapInput is an input type that accepts VpcPolicyMap and VpcPolicyMapOutput values.
 // You can construct a concrete instance of `VpcPolicyMapInput` via:
 //
-//          VpcPolicyMap{ "key": VpcPolicyArgs{...} }
+//	VpcPolicyMap{ "key": VpcPolicyArgs{...} }
 type VpcPolicyMapInput interface {
 	pulumi.Input
 

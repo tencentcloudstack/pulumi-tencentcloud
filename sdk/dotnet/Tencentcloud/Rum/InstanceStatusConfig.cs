@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var instanceStatusConfig = new Tencentcloud.Rum.InstanceStatusConfig("instanceStatusConfig", new()
     ///     {
-    ///         var instanceStatusConfig = new Tencentcloud.Rum.InstanceStatusConfig("instanceStatusConfig", new Tencentcloud.Rum.InstanceStatusConfigArgs
-    ///         {
-    ///             InstanceId = "rum-pasZKEI3RLgakj",
-    ///             Operate = "stop",
-    ///         });
-    ///     }
+    ///         InstanceId = "rum-pasZKEI3RLgakj",
+    ///         Operate = "stop",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// rum instance_status_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Rum/instanceStatusConfig:InstanceStatusConfig instance_status_config instance_id
+    /// $ pulumi import tencentcloud:Rum/instanceStatusConfig:InstanceStatusConfig instance_status_config instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Rum/instanceStatusConfig:InstanceStatusConfig")]
-    public partial class InstanceStatusConfig : Pulumi.CustomResource
+    public partial class InstanceStatusConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -107,7 +108,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         }
     }
 
-    public sealed class InstanceStatusConfigArgs : Pulumi.ResourceArgs
+    public sealed class InstanceStatusConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -124,9 +125,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public InstanceStatusConfigArgs()
         {
         }
+        public static new InstanceStatusConfigArgs Empty => new InstanceStatusConfigArgs();
     }
 
-    public sealed class InstanceStatusConfigState : Pulumi.ResourceArgs
+    public sealed class InstanceStatusConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -149,5 +151,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public InstanceStatusConfigState()
         {
         }
+        public static new InstanceStatusConfigState Empty => new InstanceStatusConfigState();
     }
 }

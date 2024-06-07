@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class ClusterLogAgentArgs : Pulumi.ResourceArgs
+    public sealed class ClusterLogAgentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether the log agent enabled.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public ClusterLogAgentArgs()
         {
         }
+        public static new ClusterLogAgentArgs Empty => new ClusterLogAgentArgs();
     }
 }

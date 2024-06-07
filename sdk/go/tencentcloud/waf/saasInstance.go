@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a waf saas instance
@@ -16,90 +17,108 @@ import (
 // > **NOTE:** Region only supports `ap-guangzhou` and `ap-seoul`.
 //
 // ## Example Usage
+//
 // ### Create a basic waf premium saas instance
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewSaasInstance(ctx, "example", &Waf.SaasInstanceArgs{
-// 			GoodsCategory: pulumi.String("premium_saas"),
-// 			InstanceName:  pulumi.String("tf-example-saas-waf"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewSaasInstance(ctx, "example", &Waf.SaasInstanceArgs{
+//				GoodsCategory: pulumi.String("premium_saas"),
+//				InstanceName:  pulumi.String("tf-example-saas-waf"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Create a complete waf ultimateSaas instance
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewSaasInstance(ctx, "example", &Waf.SaasInstanceArgs{
-// 			ApiSecurity:   pulumi.Int(1),
-// 			AutoRenewFlag: pulumi.Int(1),
-// 			BotManagement: pulumi.Int(1),
-// 			ElasticMode:   pulumi.Int(1),
-// 			GoodsCategory: pulumi.String("ultimate_saas"),
-// 			InstanceName:  pulumi.String("tf-example-saas-waf"),
-// 			RealRegion:    pulumi.String("gz"),
-// 			TimeSpan:      pulumi.Int(1),
-// 			TimeUnit:      pulumi.String("m"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewSaasInstance(ctx, "example", &Waf.SaasInstanceArgs{
+//				ApiSecurity:   pulumi.Int(1),
+//				AutoRenewFlag: pulumi.Int(1),
+//				BotManagement: pulumi.Int(1),
+//				ElasticMode:   pulumi.Int(1),
+//				GoodsCategory: pulumi.String("ultimate_saas"),
+//				InstanceName:  pulumi.String("tf-example-saas-waf"),
+//				RealRegion:    pulumi.String("gz"),
+//				TimeSpan:      pulumi.Int(1),
+//				TimeUnit:      pulumi.String("m"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Set waf ultimateSaas instance qps limit
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Waf"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Waf.NewSaasInstance(ctx, "example", &Waf.SaasInstanceArgs{
-// 			ApiSecurity:   pulumi.Int(1),
-// 			AutoRenewFlag: pulumi.Int(1),
-// 			BotManagement: pulumi.Int(1),
-// 			ElasticMode:   pulumi.Int(1),
-// 			GoodsCategory: pulumi.String("ultimate_saas"),
-// 			InstanceName:  pulumi.String("tf-example-saas-waf"),
-// 			QpsLimit:      pulumi.Int(200000),
-// 			RealRegion:    pulumi.String("gz"),
-// 			TimeSpan:      pulumi.Int(1),
-// 			TimeUnit:      pulumi.String("m"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Waf.NewSaasInstance(ctx, "example", &Waf.SaasInstanceArgs{
+//				ApiSecurity:   pulumi.Int(1),
+//				AutoRenewFlag: pulumi.Int(1),
+//				BotManagement: pulumi.Int(1),
+//				ElasticMode:   pulumi.Int(1),
+//				GoodsCategory: pulumi.String("ultimate_saas"),
+//				InstanceName:  pulumi.String("tf-example-saas-waf"),
+//				QpsLimit:      pulumi.Int(200000),
+//				RealRegion:    pulumi.String("gz"),
+//				TimeSpan:      pulumi.Int(1),
+//				TimeUnit:      pulumi.String("m"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type SaasInstance struct {
 	pulumi.CustomResourceState
 
@@ -145,7 +164,7 @@ func NewSaasInstance(ctx *pulumi.Context,
 	if args.GoodsCategory == nil {
 		return nil, errors.New("invalid value for required argument 'GoodsCategory'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SaasInstance
 	err := ctx.RegisterResource("tencentcloud:Waf/saasInstance:SaasInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -310,7 +329,7 @@ func (i *SaasInstance) ToSaasInstanceOutputWithContext(ctx context.Context) Saas
 // SaasInstanceArrayInput is an input type that accepts SaasInstanceArray and SaasInstanceArrayOutput values.
 // You can construct a concrete instance of `SaasInstanceArrayInput` via:
 //
-//          SaasInstanceArray{ SaasInstanceArgs{...} }
+//	SaasInstanceArray{ SaasInstanceArgs{...} }
 type SaasInstanceArrayInput interface {
 	pulumi.Input
 
@@ -335,7 +354,7 @@ func (i SaasInstanceArray) ToSaasInstanceArrayOutputWithContext(ctx context.Cont
 // SaasInstanceMapInput is an input type that accepts SaasInstanceMap and SaasInstanceMapOutput values.
 // You can construct a concrete instance of `SaasInstanceMapInput` via:
 //
-//          SaasInstanceMap{ "key": SaasInstanceArgs{...} }
+//	SaasInstanceMap{ "key": SaasInstanceArgs{...} }
 type SaasInstanceMapInput interface {
 	pulumi.Input
 

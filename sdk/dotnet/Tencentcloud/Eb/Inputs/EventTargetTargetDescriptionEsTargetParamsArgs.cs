@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class EventTargetTargetDescriptionEsTargetParamsArgs : Pulumi.ResourceArgs
+    public sealed class EventTargetTargetDescriptionEsTargetParamsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// index prefix.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
         public EventTargetTargetDescriptionEsTargetParamsArgs()
         {
         }
+        public static new EventTargetTargetDescriptionEsTargetParamsArgs Empty => new EventTargetTargetDescriptionEsTargetParamsArgs();
     }
 }

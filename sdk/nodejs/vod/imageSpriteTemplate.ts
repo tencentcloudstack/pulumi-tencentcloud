@@ -7,31 +7,12 @@ import * as utilities from "../utilities";
 /**
  * Provide a resource to create a VOD image sprite template.
  *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const foo = new tencentcloud.Vod.ImageSpriteTemplate("foo", {
- *     columnCount: 3,
- *     comment: "test",
- *     fillType: "stretch",
- *     height: 128,
- *     resolutionAdaptive: false,
- *     rowCount: 3,
- *     sampleInterval: 10,
- *     sampleType: "Percent",
- *     width: 128,
- * });
- * ```
- *
  * ## Import
  *
- * VOD image sprite template can be imported using the id, e.g.
+ * VOD image sprite template can be imported using the id($subAppId#$templateId), e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate foo 51156
+ * $ pulumi import tencentcloud:Vod/imageSpriteTemplate:ImageSpriteTemplate foo $subAppId#$templateId
  * ```
  */
 export class ImageSpriteTemplate extends pulumi.CustomResource {
@@ -79,6 +60,14 @@ export class ImageSpriteTemplate extends pulumi.CustomResource {
      */
     public readonly fillType!: pulumi.Output<string | undefined>;
     /**
+     * Image format, Valid values:
+     * - jpg: jpg format;
+     * - png: png format;
+     * - webp: webp format;
+     * Default value: jpg.
+     */
+    public readonly format!: pulumi.Output<string>;
+    /**
      * Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
      */
     public readonly height!: pulumi.Output<number | undefined>;
@@ -103,9 +92,15 @@ export class ImageSpriteTemplate extends pulumi.CustomResource {
      */
     public readonly sampleType!: pulumi.Output<string>;
     /**
-     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+     * The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
      */
     public readonly subAppId!: pulumi.Output<number | undefined>;
+    /**
+     * Template type, value range:
+     * - Preset: system preset template;
+     * - Custom: user-defined templates.
+     */
+    public /*out*/ readonly type!: pulumi.Output<string>;
     /**
      * Last modified time of template in ISO date format.
      */
@@ -132,6 +127,7 @@ export class ImageSpriteTemplate extends pulumi.CustomResource {
             resourceInputs["comment"] = state ? state.comment : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["fillType"] = state ? state.fillType : undefined;
+            resourceInputs["format"] = state ? state.format : undefined;
             resourceInputs["height"] = state ? state.height : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["resolutionAdaptive"] = state ? state.resolutionAdaptive : undefined;
@@ -139,6 +135,7 @@ export class ImageSpriteTemplate extends pulumi.CustomResource {
             resourceInputs["sampleInterval"] = state ? state.sampleInterval : undefined;
             resourceInputs["sampleType"] = state ? state.sampleType : undefined;
             resourceInputs["subAppId"] = state ? state.subAppId : undefined;
+            resourceInputs["type"] = state ? state.type : undefined;
             resourceInputs["updateTime"] = state ? state.updateTime : undefined;
             resourceInputs["width"] = state ? state.width : undefined;
         } else {
@@ -158,6 +155,7 @@ export class ImageSpriteTemplate extends pulumi.CustomResource {
             resourceInputs["columnCount"] = args ? args.columnCount : undefined;
             resourceInputs["comment"] = args ? args.comment : undefined;
             resourceInputs["fillType"] = args ? args.fillType : undefined;
+            resourceInputs["format"] = args ? args.format : undefined;
             resourceInputs["height"] = args ? args.height : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["resolutionAdaptive"] = args ? args.resolutionAdaptive : undefined;
@@ -167,6 +165,7 @@ export class ImageSpriteTemplate extends pulumi.CustomResource {
             resourceInputs["subAppId"] = args ? args.subAppId : undefined;
             resourceInputs["width"] = args ? args.width : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
+            resourceInputs["type"] = undefined /*out*/;
             resourceInputs["updateTime"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -195,6 +194,14 @@ export interface ImageSpriteTemplateState {
      */
     fillType?: pulumi.Input<string>;
     /**
+     * Image format, Valid values:
+     * - jpg: jpg format;
+     * - png: png format;
+     * - webp: webp format;
+     * Default value: jpg.
+     */
+    format?: pulumi.Input<string>;
+    /**
      * Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
      */
     height?: pulumi.Input<number>;
@@ -219,9 +226,15 @@ export interface ImageSpriteTemplateState {
      */
     sampleType?: pulumi.Input<string>;
     /**
-     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+     * The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
      */
     subAppId?: pulumi.Input<number>;
+    /**
+     * Template type, value range:
+     * - Preset: system preset template;
+     * - Custom: user-defined templates.
+     */
+    type?: pulumi.Input<string>;
     /**
      * Last modified time of template in ISO date format.
      */
@@ -249,6 +262,14 @@ export interface ImageSpriteTemplateArgs {
      */
     fillType?: pulumi.Input<string>;
     /**
+     * Image format, Valid values:
+     * - jpg: jpg format;
+     * - png: png format;
+     * - webp: webp format;
+     * Default value: jpg.
+     */
+    format?: pulumi.Input<string>;
+    /**
      * Maximum value of the `height` (or short side) of a screenshot in px. Value range: 0 and [128, 4,096]. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`.
      */
     height?: pulumi.Input<number>;
@@ -273,7 +294,7 @@ export interface ImageSpriteTemplateArgs {
      */
     sampleType: pulumi.Input<string>;
     /**
-     * Subapplication ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+     * The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.
      */
     subAppId?: pulumi.Input<number>;
     /**

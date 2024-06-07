@@ -15,74 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var paramTemplate = new Tencentcloud.Redis.ParamTemplate("paramTemplate", new()
     ///     {
-    ///         var paramTemplate = new Tencentcloud.Redis.ParamTemplate("paramTemplate", new Tencentcloud.Redis.ParamTemplateArgs
+    ///         Description = "This is an example redis param template.",
+    ///         ParamsOverrides = new[]
     ///         {
-    ///             Description = "This is an example redis param template.",
-    ///             ParamsOverrides = 
+    ///             new Tencentcloud.Redis.Inputs.ParamTemplateParamsOverrideArgs
     ///             {
-    ///                 new Tencentcloud.Redis.Inputs.ParamTemplateParamsOverrideArgs
-    ///                 {
-    ///                     Key = "timeout",
-    ///                     Value = "7200",
-    ///                 },
+    ///                 Key = "timeout",
+    ///                 Value = "7200",
     ///             },
-    ///             ProductType = 6,
-    ///         });
-    ///     }
+    ///         },
+    ///         ProductType = 6,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Copy from another template
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Redis.ParamTemplate("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Redis.ParamTemplate("foo", new Tencentcloud.Redis.ParamTemplateArgs
+    ///         Description = "This is an example redis param template.",
+    ///         ProductType = 6,
+    ///         ParamsOverrides = new[]
     ///         {
-    ///             Description = "This is an example redis param template.",
-    ///             ProductType = 6,
-    ///             ParamsOverrides = 
+    ///             new Tencentcloud.Redis.Inputs.ParamTemplateParamsOverrideArgs
     ///             {
-    ///                 new Tencentcloud.Redis.Inputs.ParamTemplateParamsOverrideArgs
-    ///                 {
-    ///                     Key = "timeout",
-    ///                     Value = "7200",
-    ///                 },
+    ///                 Key = "timeout",
+    ///                 Value = "7200",
     ///             },
-    ///         });
-    ///         var paramTemplate = new Tencentcloud.Redis.ParamTemplate("paramTemplate", new Tencentcloud.Redis.ParamTemplateArgs
-    ///         {
-    ///             Description = "This is an copied redis param template from tf-template.",
-    ///             TemplateId = foo.Id,
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var paramTemplate = new Tencentcloud.Redis.ParamTemplate("paramTemplate", new()
+    ///     {
+    ///         Description = "This is an copied redis param template from tf-template.",
+    ///         TemplateId = foo.Id,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// redis param_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Redis/paramTemplate:ParamTemplate param_template param_template_id
+    /// $ pulumi import tencentcloud:Redis/paramTemplate:ParamTemplate param_template param_template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/paramTemplate:ParamTemplate")]
-    public partial class ParamTemplate : Pulumi.CustomResource
+    public partial class ParamTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Parameter template description.
@@ -165,7 +169,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class ParamTemplateArgs : Pulumi.ResourceArgs
+    public sealed class ParamTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Parameter template description.
@@ -206,9 +210,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public ParamTemplateArgs()
         {
         }
+        public static new ParamTemplateArgs Empty => new ParamTemplateArgs();
     }
 
-    public sealed class ParamTemplateState : Pulumi.ResourceArgs
+    public sealed class ParamTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Parameter template description.
@@ -261,5 +266,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public ParamTemplateState()
         {
         }
+        public static new ParamTemplateState Empty => new ParamTemplateState();
     }
 }

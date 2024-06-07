@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var autoSnapshotPolicyAttachment = new Tencentcloud.Cfs.AutoSnapshotPolicyAttachment("autoSnapshotPolicyAttachment", new()
     ///     {
-    ///         var autoSnapshotPolicyAttachment = new Tencentcloud.Cfs.AutoSnapshotPolicyAttachment("autoSnapshotPolicyAttachment", new Tencentcloud.Cfs.AutoSnapshotPolicyAttachmentArgs
-    ///         {
-    ///             AutoSnapshotPolicyId = "asp-basic",
-    ///             FileSystemIds = "cfs-4xzkct19,cfs-iobiaxtj",
-    ///         });
-    ///     }
+    ///         AutoSnapshotPolicyId = "asp-basic",
+    ///         FileSystemIds = "cfs-4xzkct19,cfs-iobiaxtj",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cfs auto_snapshot_policy_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfs/autoSnapshotPolicyAttachment:AutoSnapshotPolicyAttachment auto_snapshot_policy_attachment auto_snapshot_policy_id#file_system_ids
+    /// $ pulumi import tencentcloud:Cfs/autoSnapshotPolicyAttachment:AutoSnapshotPolicyAttachment auto_snapshot_policy_attachment auto_snapshot_policy_id#file_system_ids
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfs/autoSnapshotPolicyAttachment:AutoSnapshotPolicyAttachment")]
-    public partial class AutoSnapshotPolicyAttachment : Pulumi.CustomResource
+    public partial class AutoSnapshotPolicyAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the snapshot to be unbound.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         }
     }
 
-    public sealed class AutoSnapshotPolicyAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class AutoSnapshotPolicyAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the snapshot to be unbound.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public AutoSnapshotPolicyAttachmentArgs()
         {
         }
+        public static new AutoSnapshotPolicyAttachmentArgs Empty => new AutoSnapshotPolicyAttachmentArgs();
     }
 
-    public sealed class AutoSnapshotPolicyAttachmentState : Pulumi.ResourceArgs
+    public sealed class AutoSnapshotPolicyAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the snapshot to be unbound.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public AutoSnapshotPolicyAttachmentState()
         {
         }
+        public static new AutoSnapshotPolicyAttachmentState Empty => new AutoSnapshotPolicyAttachmentState();
     }
 }

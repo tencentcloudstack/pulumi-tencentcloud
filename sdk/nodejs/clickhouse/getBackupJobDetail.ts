@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const backupJobDetail = pulumi.output(tencentcloud.Clickhouse.getBackupJobDetail({
+ * const backupJobDetail = tencentcloud.Clickhouse.getBackupJobDetail({
  *     backUpJobId: 1234,
  *     instanceId: "cdwch-xxxxxx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBackupJobDetail(args: GetBackupJobDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupJobDetailResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Clickhouse/getBackupJobDetail:getBackupJobDetail", {
         "backUpJobId": args.backUpJobId,
         "instanceId": args.instanceId,
@@ -67,9 +67,25 @@ export interface GetBackupJobDetailResult {
      */
     readonly tableContents: outputs.Clickhouse.GetBackupJobDetailTableContent[];
 }
-
+/**
+ * Use this data source to query detailed information of clickhouse backup job detail
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const backupJobDetail = tencentcloud.Clickhouse.getBackupJobDetail({
+ *     backUpJobId: 1234,
+ *     instanceId: "cdwch-xxxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBackupJobDetailOutput(args: GetBackupJobDetailOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBackupJobDetailResult> {
-    return pulumi.output(args).apply(a => getBackupJobDetail(a, opts))
+    return pulumi.output(args).apply((a: any) => getBackupJobDetail(a, opts))
 }
 
 /**

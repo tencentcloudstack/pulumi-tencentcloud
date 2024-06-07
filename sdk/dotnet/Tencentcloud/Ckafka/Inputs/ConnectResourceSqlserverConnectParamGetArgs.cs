@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class ConnectResourceSqlserverConnectParamGetArgs : Pulumi.ResourceArgs
+    public sealed class ConnectResourceSqlserverConnectParamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to update to the associated Dip task, default: false.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public ConnectResourceSqlserverConnectParamGetArgs()
         {
         }
+        public static new ConnectResourceSqlserverConnectParamGetArgs Empty => new ConnectResourceSqlserverConnectParamGetArgs();
     }
 }

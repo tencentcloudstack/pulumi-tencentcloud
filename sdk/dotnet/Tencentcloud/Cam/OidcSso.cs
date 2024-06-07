@@ -15,44 +15,45 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cam.OidcSso("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cam.OidcSso("foo", new Tencentcloud.Cam.OidcSsoArgs
+    ///         AuthorizationEndpoint = "https://login.microsoftonline.com/.../oauth2/v2.0/authorize",
+    ///         ClientId = "...",
+    ///         IdentityKey = "...",
+    ///         IdentityUrl = "https://login.microsoftonline.com/.../v2.0",
+    ///         MappingFiled = "name",
+    ///         ResponseMode = "form_post",
+    ///         ResponseType = "id_token",
+    ///         Scopes = new[]
     ///         {
-    ///             AuthorizationEndpoint = "https://login.microsoftonline.com/.../oauth2/v2.0/authorize",
-    ///             ClientId = "...",
-    ///             IdentityKey = "...",
-    ///             IdentityUrl = "https://login.microsoftonline.com/.../v2.0",
-    ///             MappingFiled = "name",
-    ///             ResponseMode = "form_post",
-    ///             ResponseType = "id_token",
-    ///             Scopes = 
-    ///             {
-    ///                 "openid",
-    ///                 "email",
-    ///             },
-    ///         });
-    ///     }
+    ///             "openid",
+    ///             "email",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CAM-OIDC-SSO can be imported using the client_id or any string which can identifier resource, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/oidcSso:OidcSso foo xxxxxxxxxxx
+    /// $ pulumi import tencentcloud:Cam/oidcSso:OidcSso foo xxxxxxxxxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/oidcSso:OidcSso")]
-    public partial class OidcSso : Pulumi.CustomResource
+    public partial class OidcSso : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
@@ -147,7 +148,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class OidcSsoArgs : Pulumi.ResourceArgs
+    public sealed class OidcSsoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
@@ -206,9 +207,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public OidcSsoArgs()
         {
         }
+        public static new OidcSsoArgs Empty => new OidcSsoArgs();
     }
 
-    public sealed class OidcSsoState : Pulumi.ResourceArgs
+    public sealed class OidcSsoState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Authorization request Endpoint, OpenID Connect identity provider authorization address. Corresponds to the value of the `authorization_endpoint` field in the Openid-configuration provided by the Enterprise IdP.
@@ -267,5 +269,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public OidcSsoState()
         {
         }
+        public static new OidcSsoState Empty => new OidcSsoState();
     }
 }

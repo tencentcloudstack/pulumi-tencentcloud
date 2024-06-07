@@ -14,85 +14,92 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// Provides a resource to create a postgresql backup_download_restriction_config
     /// 
     /// ## Example Usage
+    /// 
     /// ### Unlimit the restriction of the backup file download.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var backupDownloadRestrictionConfig = new Tencentcloud.Postgresql.BackupDownloadRestrictionConfig("backupDownloadRestrictionConfig", new()
     ///     {
-    ///         var backupDownloadRestrictionConfig = new Tencentcloud.Postgresql.BackupDownloadRestrictionConfig("backupDownloadRestrictionConfig", new Tencentcloud.Postgresql.BackupDownloadRestrictionConfigArgs
-    ///         {
-    ///             RestrictionType = "NONE",
-    ///         });
-    ///     }
+    ///         RestrictionType = "NONE",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Set the download only to allow the intranet downloads.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var backupDownloadRestrictionConfig = new Tencentcloud.Postgresql.BackupDownloadRestrictionConfig("backupDownloadRestrictionConfig", new()
     ///     {
-    ///         var backupDownloadRestrictionConfig = new Tencentcloud.Postgresql.BackupDownloadRestrictionConfig("backupDownloadRestrictionConfig", new Tencentcloud.Postgresql.BackupDownloadRestrictionConfigArgs
-    ///         {
-    ///             RestrictionType = "INTRANET",
-    ///         });
-    ///     }
+    ///         RestrictionType = "INTRANET",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Restrict the backup file download by customizing.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var pgVpc = new Tencentcloud.Vpc.Instance("pgVpc", new()
     ///     {
-    ///         var pgVpc = new Tencentcloud.Vpc.Instance("pgVpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = @var.Vpc_cidr,
-    ///         });
-    ///         var backupDownloadRestrictionConfig = new Tencentcloud.Postgresql.BackupDownloadRestrictionConfig("backupDownloadRestrictionConfig", new Tencentcloud.Postgresql.BackupDownloadRestrictionConfigArgs
-    ///         {
-    ///             RestrictionType = "CUSTOMIZE",
-    ///             VpcRestrictionEffect = "DENY",
-    ///             VpcIdSets = 
-    ///             {
-    ///                 tencentcloud_vpc.Pg_vpc2.Id,
-    ///             },
-    ///             IpRestrictionEffect = "DENY",
-    ///             IpSets = 
-    ///             {
-    ///                 "192.168.0.0",
-    ///             },
-    ///         });
-    ///     }
+    ///         CidrBlock = @var.Vpc_cidr,
+    ///     });
     /// 
-    /// }
+    ///     var backupDownloadRestrictionConfig = new Tencentcloud.Postgresql.BackupDownloadRestrictionConfig("backupDownloadRestrictionConfig", new()
+    ///     {
+    ///         RestrictionType = "CUSTOMIZE",
+    ///         VpcRestrictionEffect = "DENY",
+    ///         VpcIdSets = new[]
+    ///         {
+    ///             tencentcloud_vpc.Pg_vpc2.Id,
+    ///         },
+    ///         IpRestrictionEffect = "DENY",
+    ///         IpSets = new[]
+    ///         {
+    ///             "192.168.0.0",
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// postgresql backup_download_restriction_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Postgresql/backupDownloadRestrictionConfig:BackupDownloadRestrictionConfig backup_download_restriction_config backup_download_restriction_config_id
+    /// $ pulumi import tencentcloud:Postgresql/backupDownloadRestrictionConfig:BackupDownloadRestrictionConfig backup_download_restriction_config backup_download_restriction_config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/backupDownloadRestrictionConfig:BackupDownloadRestrictionConfig")]
-    public partial class BackupDownloadRestrictionConfig : Pulumi.CustomResource
+    public partial class BackupDownloadRestrictionConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ip limit Strategy: ALLOW, DENY.
@@ -169,7 +176,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class BackupDownloadRestrictionConfigArgs : Pulumi.ResourceArgs
+    public sealed class BackupDownloadRestrictionConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ip limit Strategy: ALLOW, DENY.
@@ -216,9 +223,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public BackupDownloadRestrictionConfigArgs()
         {
         }
+        public static new BackupDownloadRestrictionConfigArgs Empty => new BackupDownloadRestrictionConfigArgs();
     }
 
-    public sealed class BackupDownloadRestrictionConfigState : Pulumi.ResourceArgs
+    public sealed class BackupDownloadRestrictionConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ip limit Strategy: ALLOW, DENY.
@@ -265,5 +273,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public BackupDownloadRestrictionConfigState()
         {
         }
+        public static new BackupDownloadRestrictionConfigState Empty => new BackupDownloadRestrictionConfigState();
     }
 }

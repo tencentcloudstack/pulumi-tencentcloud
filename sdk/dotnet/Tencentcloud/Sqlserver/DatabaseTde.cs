@@ -14,117 +14,127 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// Provides a resource to create a sqlserver database_tde
     /// 
     /// ## Example Usage
+    /// 
     /// ### Open database tde encryption
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var zones = Tencentcloud.Availability.GetZonesByProduct.Invoke(new()
     ///     {
-    ///         var zones = Output.Create(Tencentcloud.Availability.GetZonesByProduct.InvokeAsync(new Tencentcloud.Availability.GetZonesByProductArgs
-    ///         {
-    ///             Product = "sqlserver",
-    ///         }));
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var subnet = new Tencentcloud.Subnet.Instance("subnet", new Tencentcloud.Subnet.InstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
-    ///             VpcId = vpc.Id,
-    ///             CidrBlock = "10.0.0.0/16",
-    ///             IsMulticast = false,
-    ///         });
-    ///         var securityGroup = new Tencentcloud.Security.Group("securityGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "desc.",
-    ///         });
-    ///         var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new Tencentcloud.Sqlserver.BasicInstanceArgs
-    ///         {
-    ///             AvailabilityZone = zones.Apply(zones =&gt; zones.Zones?[4]?.Name),
-    ///             ChargeType = "POSTPAID_BY_HOUR",
-    ///             VpcId = vpc.Id,
-    ///             SubnetId = subnet.Id,
-    ///             ProjectId = 0,
-    ///             Memory = 4,
-    ///             Storage = 100,
-    ///             Cpu = 2,
-    ///             MachineType = "CLOUD_PREMIUM",
-    ///             MaintenanceWeekSets = 
-    ///             {
-    ///                 1,
-    ///                 2,
-    ///                 3,
-    ///             },
-    ///             MaintenanceStartTime = "09:00",
-    ///             MaintenanceTimeSpan = 3,
-    ///             SecurityGroups = 
-    ///             {
-    ///                 securityGroup.Id,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "test", "test" },
-    ///             },
-    ///         });
-    ///         var exampleDb = new Tencentcloud.Sqlserver.Db("exampleDb", new Tencentcloud.Sqlserver.DbArgs
-    ///         {
-    ///             InstanceId = exampleBasicInstance.Id,
-    ///             Charset = "Chinese_PRC_BIN",
-    ///             Remark = "test-remark",
-    ///         });
-    ///         var exampleDatabaseTde = new Tencentcloud.Sqlserver.DatabaseTde("exampleDatabaseTde", new Tencentcloud.Sqlserver.DatabaseTdeArgs
-    ///         {
-    ///             InstanceId = exampleBasicInstance.Id,
-    ///             DbNames = 
-    ///             {
-    ///                 exampleDb.Name,
-    ///             },
-    ///             Encryption = "enable",
-    ///         });
-    ///     }
+    ///         Product = "sqlserver",
+    ///     });
     /// 
-    /// }
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[4]?.Name),
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.0.0/16",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     var securityGroup = new Tencentcloud.Security.Group("securityGroup", new()
+    ///     {
+    ///         Description = "desc.",
+    ///     });
+    /// 
+    ///     var exampleBasicInstance = new Tencentcloud.Sqlserver.BasicInstance("exampleBasicInstance", new()
+    ///     {
+    ///         AvailabilityZone = zones.Apply(getZonesByProductResult =&gt; getZonesByProductResult.Zones[4]?.Name),
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         ProjectId = 0,
+    ///         Memory = 4,
+    ///         Storage = 100,
+    ///         Cpu = 2,
+    ///         MachineType = "CLOUD_PREMIUM",
+    ///         MaintenanceWeekSets = new[]
+    ///         {
+    ///             1,
+    ///             2,
+    ///             3,
+    ///         },
+    ///         MaintenanceStartTime = "09:00",
+    ///         MaintenanceTimeSpan = 3,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             securityGroup.Id,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "test", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleDb = new Tencentcloud.Sqlserver.Db("exampleDb", new()
+    ///     {
+    ///         InstanceId = exampleBasicInstance.Id,
+    ///         Charset = "Chinese_PRC_BIN",
+    ///         Remark = "test-remark",
+    ///     });
+    /// 
+    ///     var exampleDatabaseTde = new Tencentcloud.Sqlserver.DatabaseTde("exampleDatabaseTde", new()
+    ///     {
+    ///         InstanceId = exampleBasicInstance.Id,
+    ///         DbNames = new[]
+    ///         {
+    ///             exampleDb.Name,
+    ///         },
+    ///         Encryption = "enable",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Close database tde encryption
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Sqlserver.DatabaseTde("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Sqlserver.DatabaseTde("example", new Tencentcloud.Sqlserver.DatabaseTdeArgs
+    ///         InstanceId = tencentcloud_sqlserver_instance.Example.Id,
+    ///         DbNames = new[]
     ///         {
-    ///             InstanceId = tencentcloud_sqlserver_instance.Example.Id,
-    ///             DbNames = 
-    ///             {
-    ///                 tencentcloud_sqlserver_db.Example.Name,
-    ///             },
-    ///             Encryption = "disable",
-    ///         });
-    ///     }
+    ///             tencentcloud_sqlserver_db.Example.Name,
+    ///         },
+    ///         Encryption = "disable",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// sqlserver database_tde can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Sqlserver/databaseTde:DatabaseTde example mssql-farjz9tz#tf_example_db
+    /// $ pulumi import tencentcloud:Sqlserver/databaseTde:DatabaseTde example mssql-farjz9tz#tf_example_db
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/databaseTde:DatabaseTde")]
-    public partial class DatabaseTde : Pulumi.CustomResource
+    public partial class DatabaseTde : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Database name list.
@@ -189,7 +199,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         }
     }
 
-    public sealed class DatabaseTdeArgs : Pulumi.ResourceArgs
+    public sealed class DatabaseTdeArgs : global::Pulumi.ResourceArgs
     {
         [Input("dbNames", required: true)]
         private InputList<string>? _dbNames;
@@ -218,9 +228,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public DatabaseTdeArgs()
         {
         }
+        public static new DatabaseTdeArgs Empty => new DatabaseTdeArgs();
     }
 
-    public sealed class DatabaseTdeState : Pulumi.ResourceArgs
+    public sealed class DatabaseTdeState : global::Pulumi.ResourceArgs
     {
         [Input("dbNames")]
         private InputList<string>? _dbNames;
@@ -249,5 +260,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public DatabaseTdeState()
         {
         }
+        public static new DatabaseTdeState Empty => new DatabaseTdeState();
     }
 }

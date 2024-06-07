@@ -14,147 +14,156 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// Provides a resource to create a tcr immutable tag rule.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a immutable tag rule with specified tags and exclude specified repositories
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new()
     ///     {
-    ///         var exampleInstance = new Tencentcloud.Tcr.Instance("exampleInstance", new Tencentcloud.Tcr.InstanceArgs
-    ///         {
-    ///             InstanceType = "premium",
-    ///             DeleteBucket = true,
-    ///         });
-    ///         var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new Tencentcloud.Tcr.NamespaceArgs
-    ///         {
-    ///             InstanceId = exampleInstance.Id,
-    ///             IsPublic = true,
-    ///             IsAutoScan = true,
-    ///             IsPreventVul = true,
-    ///             Severity = "medium",
-    ///             CveWhitelistItems = 
-    ///             {
-    ///                 new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
-    ///                 {
-    ///                     CveId = "cve-xxxxx",
-    ///                 },
-    ///             },
-    ///         });
-    ///         var exampleImmutableTagRule = new Tencentcloud.Tcr.ImmutableTagRule("exampleImmutableTagRule", new Tencentcloud.Tcr.ImmutableTagRuleArgs
-    ///         {
-    ///             RegistryId = exampleInstance.Id,
-    ///             NamespaceName = exampleNamespace.Name,
-    ///             Rule = new Tencentcloud.Tcr.Inputs.ImmutableTagRuleRuleArgs
-    ///             {
-    ///                 RepositoryPattern = "deprecated_repo",
-    ///                 TagPattern = "**",
-    ///                 RepositoryDecoration = "repoExcludes",
-    ///                 TagDecoration = "matches",
-    ///                 Disabled = false,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///         InstanceType = "premium",
+    ///         DeleteBucket = true,
+    ///     });
     /// 
-    /// }
+    ///     var exampleNamespace = new Tencentcloud.Tcr.Namespace("exampleNamespace", new()
+    ///     {
+    ///         InstanceId = exampleInstance.Id,
+    ///         IsPublic = true,
+    ///         IsAutoScan = true,
+    ///         IsPreventVul = true,
+    ///         Severity = "medium",
+    ///         CveWhitelistItems = new[]
+    ///         {
+    ///             new Tencentcloud.Tcr.Inputs.NamespaceCveWhitelistItemArgs
+    ///             {
+    ///                 CveId = "cve-xxxxx",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleImmutableTagRule = new Tencentcloud.Tcr.ImmutableTagRule("exampleImmutableTagRule", new()
+    ///     {
+    ///         RegistryId = exampleInstance.Id,
+    ///         NamespaceName = exampleNamespace.Name,
+    ///         Rule = new Tencentcloud.Tcr.Inputs.ImmutableTagRuleRuleArgs
+    ///         {
+    ///             RepositoryPattern = "deprecated_repo",
+    ///             TagPattern = "**",
+    ///             RepositoryDecoration = "repoExcludes",
+    ///             TagDecoration = "matches",
+    ///             Disabled = false,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### With specified repositories and exclude specified version tag
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Tcr.ImmutableTagRule("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Tcr.ImmutableTagRule("example", new Tencentcloud.Tcr.ImmutableTagRuleArgs
+    ///         RegistryId = tencentcloud_tcr_instance.Example.Id,
+    ///         NamespaceName = tencentcloud_tcr_namespace.Example.Name,
+    ///         Rule = new Tencentcloud.Tcr.Inputs.ImmutableTagRuleRuleArgs
     ///         {
-    ///             RegistryId = tencentcloud_tcr_instance.Example.Id,
-    ///             NamespaceName = tencentcloud_tcr_namespace.Example.Name,
-    ///             Rule = new Tencentcloud.Tcr.Inputs.ImmutableTagRuleRuleArgs
-    ///             {
-    ///                 RepositoryPattern = "**",
-    ///                 TagPattern = "v1",
-    ///                 RepositoryDecoration = "repoMatches",
-    ///                 TagDecoration = "excludes",
-    ///                 Disabled = false,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             RepositoryPattern = "**",
+    ///             TagPattern = "v1",
+    ///             RepositoryDecoration = "repoMatches",
+    ///             TagDecoration = "excludes",
+    ///             Disabled = false,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Disabled the specified rule
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleRuleA = new Tencentcloud.Tcr.ImmutableTagRule("exampleRuleA", new()
     ///     {
-    ///         var exampleRuleA = new Tencentcloud.Tcr.ImmutableTagRule("exampleRuleA", new Tencentcloud.Tcr.ImmutableTagRuleArgs
+    ///         RegistryId = tencentcloud_tcr_instance.Example.Id,
+    ///         NamespaceName = tencentcloud_tcr_namespace.Example.Name,
+    ///         Rule = new Tencentcloud.Tcr.Inputs.ImmutableTagRuleRuleArgs
     ///         {
-    ///             RegistryId = tencentcloud_tcr_instance.Example.Id,
-    ///             NamespaceName = tencentcloud_tcr_namespace.Example.Name,
-    ///             Rule = new Tencentcloud.Tcr.Inputs.ImmutableTagRuleRuleArgs
-    ///             {
-    ///                 RepositoryPattern = "deprecated_repo",
-    ///                 TagPattern = "**",
-    ///                 RepositoryDecoration = "repoExcludes",
-    ///                 TagDecoration = "matches",
-    ///                 Disabled = false,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///         var exampleRuleB = new Tencentcloud.Tcr.ImmutableTagRule("exampleRuleB", new Tencentcloud.Tcr.ImmutableTagRuleArgs
+    ///             RepositoryPattern = "deprecated_repo",
+    ///             TagPattern = "**",
+    ///             RepositoryDecoration = "repoExcludes",
+    ///             TagDecoration = "matches",
+    ///             Disabled = false,
+    ///         },
+    ///         Tags = 
     ///         {
-    ///             RegistryId = tencentcloud_tcr_instance.Example.Id,
-    ///             NamespaceName = tencentcloud_tcr_namespace.Example.Name,
-    ///             Rule = new Tencentcloud.Tcr.Inputs.ImmutableTagRuleRuleArgs
-    ///             {
-    ///                 RepositoryPattern = "**",
-    ///                 TagPattern = "v1",
-    ///                 RepositoryDecoration = "repoMatches",
-    ///                 TagDecoration = "excludes",
-    ///                 Disabled = true,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var exampleRuleB = new Tencentcloud.Tcr.ImmutableTagRule("exampleRuleB", new()
+    ///     {
+    ///         RegistryId = tencentcloud_tcr_instance.Example.Id,
+    ///         NamespaceName = tencentcloud_tcr_namespace.Example.Name,
+    ///         Rule = new Tencentcloud.Tcr.Inputs.ImmutableTagRuleRuleArgs
+    ///         {
+    ///             RepositoryPattern = "**",
+    ///             TagPattern = "v1",
+    ///             RepositoryDecoration = "repoMatches",
+    ///             TagDecoration = "excludes",
+    ///             Disabled = true,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcr immutable_tag_rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/immutableTagRule:ImmutableTagRule immutable_tag_rule immutable_tag_rule_id
+    /// $ pulumi import tencentcloud:Tcr/immutableTagRule:ImmutableTagRule immutable_tag_rule immutable_tag_rule_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/immutableTagRule:ImmutableTagRule")]
-    public partial class ImmutableTagRule : Pulumi.CustomResource
+    public partial class ImmutableTagRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// namespace name.
@@ -225,7 +234,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         }
     }
 
-    public sealed class ImmutableTagRuleArgs : Pulumi.ResourceArgs
+    public sealed class ImmutableTagRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// namespace name.
@@ -260,9 +269,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public ImmutableTagRuleArgs()
         {
         }
+        public static new ImmutableTagRuleArgs Empty => new ImmutableTagRuleArgs();
     }
 
-    public sealed class ImmutableTagRuleState : Pulumi.ResourceArgs
+    public sealed class ImmutableTagRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// namespace name.
@@ -297,5 +307,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public ImmutableTagRuleState()
         {
         }
+        public static new ImmutableTagRuleState Empty => new ImmutableTagRuleState();
     }
 }

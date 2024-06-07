@@ -15,11 +15,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class RuleEngineRuleSubRuleRuleActionNormalAction
     {
         /// <summary>
-        /// Action name.
+        /// Feature name. You can call the [DescribeRulesSetting](https://tcloud4api.woa.com/document/product/1657/79433?!preview&amp;!document=1) API to view the requirements for entering the feature name.
         /// </summary>
         public readonly string Action;
         /// <summary>
-        /// Action parameters.
+        /// Parameter.
         /// </summary>
         public readonly ImmutableArray<Outputs.RuleEngineRuleSubRuleRuleActionNormalActionParameter> Parameters;
 

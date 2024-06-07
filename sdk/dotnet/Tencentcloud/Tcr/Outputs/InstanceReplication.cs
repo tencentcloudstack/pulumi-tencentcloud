@@ -23,6 +23,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Outputs
         /// </summary>
         public readonly int? RegionId;
         /// <summary>
+        /// Replication region name.
+        /// </summary>
+        public readonly string? RegionName;
+        /// <summary>
         /// Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.
         /// </summary>
         public readonly bool? SynTag;
@@ -33,10 +37,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Outputs
 
             int? regionId,
 
+            string? regionName,
+
             bool? synTag)
         {
             Id = id;
             RegionId = regionId;
+            RegionName = regionName;
             SynTag = synTag;
         }
     }

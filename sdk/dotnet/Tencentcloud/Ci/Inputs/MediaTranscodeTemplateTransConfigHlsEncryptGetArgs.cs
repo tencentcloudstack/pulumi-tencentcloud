@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaTranscodeTemplateTransConfigHlsEncryptGetArgs : Pulumi.ResourceArgs
+    public sealed class MediaTranscodeTemplateTransConfigHlsEncryptGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Whether to enable HLS encryption, support encryption when Container.Format is hls.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaTranscodeTemplateTransConfigHlsEncryptGetArgs()
         {
         }
+        public static new MediaTranscodeTemplateTransConfigHlsEncryptGetArgs Empty => new MediaTranscodeTemplateTransConfigHlsEncryptGetArgs();
     }
 }

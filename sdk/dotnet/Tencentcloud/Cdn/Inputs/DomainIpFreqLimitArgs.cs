@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainIpFreqLimitArgs : Pulumi.ResourceArgs
+    public sealed class DomainIpFreqLimitArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Sets the limited number of requests per second, 514 will be returned for requests that exceed the limit.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainIpFreqLimitArgs()
         {
         }
+        public static new DomainIpFreqLimitArgs Empty => new DomainIpFreqLimitArgs();
     }
 }

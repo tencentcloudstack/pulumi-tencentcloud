@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a CVM instance resource.
@@ -22,7 +23,7 @@ import (
 // CVM instance can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Instance/instance:Instance foo ins-2qol3a80
+// $ pulumi import tencentcloud:Instance/instance:Instance foo ins-2qol3a80
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -39,6 +40,8 @@ type Instance struct {
 	CdhHostId pulumi.StringPtrOutput `pulumi:"cdhHostId"`
 	// Type of instance created on cdh, the value of this parameter is in the format of CDH_XCXG based on the number of CPU cores and memory capacity. Note: it only works when instanceChargeType is set to `CDHPAID`.
 	CdhInstanceType pulumi.StringPtrOutput `pulumi:"cdhInstanceType"`
+	// The number of CPU cores of the instance.
+	Cpu pulumi.IntOutput `pulumi:"cpu"`
 	// Create time of the instance.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Settings for data disks.
@@ -57,9 +60,9 @@ type Instance struct {
 	Hostname pulumi.StringPtrOutput `pulumi:"hostname"`
 	// The image to use for the instance. Changing `imageId` will cause the instance reset.
 	ImageId pulumi.StringOutput `pulumi:"imageId"`
-	// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID` and `CDHPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
+	// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDHPAID` and `CDCPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
 	InstanceChargeType pulumi.StringPtrOutput `pulumi:"instanceChargeType"`
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60`.
 	InstanceChargeTypePrepaidPeriod pulumi.IntPtrOutput `pulumi:"instanceChargeTypePrepaidPeriod"`
 	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
 	InstanceChargeTypePrepaidRenewFlag pulumi.StringOutput `pulumi:"instanceChargeTypePrepaidRenewFlag"`
@@ -83,10 +86,14 @@ type Instance struct {
 	KeyIds pulumi.StringArrayOutput `pulumi:"keyIds"`
 	// Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
 	//
-	// Deprecated: Please use `key_ids` instead.
+	// Deprecated: Please use `keyIds` instead.
 	KeyName pulumi.StringOutput `pulumi:"keyName"`
+	// Instance memory capacity, unit in GB.
+	Memory pulumi.IntOutput `pulumi:"memory"`
 	// A list of orderly security group IDs to associate with.
 	OrderlySecurityGroups pulumi.StringArrayOutput `pulumi:"orderlySecurityGroups"`
+	// Instance os name.
+	OsName pulumi.StringOutput `pulumi:"osName"`
 	// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
 	Password pulumi.StringPtrOutput `pulumi:"password"`
 	// The ID of a placement group.
@@ -101,7 +108,7 @@ type Instance struct {
 	RunningFlag pulumi.BoolPtrOutput `pulumi:"runningFlag"`
 	// It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
 	//
-	// Deprecated: It will be deprecated. Use `orderly_security_groups` instead.
+	// Deprecated: It will be deprecated. Use `orderlySecurityGroups` instead.
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
 	// Type of spot instance, only support `ONE-TIME` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
 	SpotInstanceType pulumi.StringPtrOutput `pulumi:"spotInstanceType"`
@@ -123,6 +130,8 @@ type Instance struct {
 	UserData pulumi.StringPtrOutput `pulumi:"userData"`
 	// The user data to be injected into this instance, in plain text. Conflicts with `userData`. Up to 16 KB after base64 encoded.
 	UserDataRaw pulumi.StringPtrOutput `pulumi:"userDataRaw"`
+	// Globally unique ID of the instance.
+	Uuid pulumi.StringOutput `pulumi:"uuid"`
 	// The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
 }
@@ -140,7 +149,14 @@ func NewInstance(ctx *pulumi.Context,
 	if args.ImageId == nil {
 		return nil, errors.New("invalid value for required argument 'ImageId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.Password != nil {
+		args.Password = pulumi.ToSecret(args.Password).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"password",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Instance
 	err := ctx.RegisterResource("tencentcloud:Instance/instance:Instance", name, args, &resource, opts...)
 	if err != nil {
@@ -175,6 +191,8 @@ type instanceState struct {
 	CdhHostId *string `pulumi:"cdhHostId"`
 	// Type of instance created on cdh, the value of this parameter is in the format of CDH_XCXG based on the number of CPU cores and memory capacity. Note: it only works when instanceChargeType is set to `CDHPAID`.
 	CdhInstanceType *string `pulumi:"cdhInstanceType"`
+	// The number of CPU cores of the instance.
+	Cpu *int `pulumi:"cpu"`
 	// Create time of the instance.
 	CreateTime *string `pulumi:"createTime"`
 	// Settings for data disks.
@@ -193,9 +211,9 @@ type instanceState struct {
 	Hostname *string `pulumi:"hostname"`
 	// The image to use for the instance. Changing `imageId` will cause the instance reset.
 	ImageId *string `pulumi:"imageId"`
-	// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID` and `CDHPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
+	// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDHPAID` and `CDCPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
 	InstanceChargeType *string `pulumi:"instanceChargeType"`
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60`.
 	InstanceChargeTypePrepaidPeriod *int `pulumi:"instanceChargeTypePrepaidPeriod"`
 	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
 	InstanceChargeTypePrepaidRenewFlag *string `pulumi:"instanceChargeTypePrepaidRenewFlag"`
@@ -219,10 +237,14 @@ type instanceState struct {
 	KeyIds []string `pulumi:"keyIds"`
 	// Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
 	//
-	// Deprecated: Please use `key_ids` instead.
+	// Deprecated: Please use `keyIds` instead.
 	KeyName *string `pulumi:"keyName"`
+	// Instance memory capacity, unit in GB.
+	Memory *int `pulumi:"memory"`
 	// A list of orderly security group IDs to associate with.
 	OrderlySecurityGroups []string `pulumi:"orderlySecurityGroups"`
+	// Instance os name.
+	OsName *string `pulumi:"osName"`
 	// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
 	Password *string `pulumi:"password"`
 	// The ID of a placement group.
@@ -237,7 +259,7 @@ type instanceState struct {
 	RunningFlag *bool `pulumi:"runningFlag"`
 	// It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
 	//
-	// Deprecated: It will be deprecated. Use `orderly_security_groups` instead.
+	// Deprecated: It will be deprecated. Use `orderlySecurityGroups` instead.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Type of spot instance, only support `ONE-TIME` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
 	SpotInstanceType *string `pulumi:"spotInstanceType"`
@@ -259,6 +281,8 @@ type instanceState struct {
 	UserData *string `pulumi:"userData"`
 	// The user data to be injected into this instance, in plain text. Conflicts with `userData`. Up to 16 KB after base64 encoded.
 	UserDataRaw *string `pulumi:"userDataRaw"`
+	// Globally unique ID of the instance.
+	Uuid *string `pulumi:"uuid"`
 	// The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.
 	VpcId *string `pulumi:"vpcId"`
 }
@@ -276,6 +300,8 @@ type InstanceState struct {
 	CdhHostId pulumi.StringPtrInput
 	// Type of instance created on cdh, the value of this parameter is in the format of CDH_XCXG based on the number of CPU cores and memory capacity. Note: it only works when instanceChargeType is set to `CDHPAID`.
 	CdhInstanceType pulumi.StringPtrInput
+	// The number of CPU cores of the instance.
+	Cpu pulumi.IntPtrInput
 	// Create time of the instance.
 	CreateTime pulumi.StringPtrInput
 	// Settings for data disks.
@@ -294,9 +320,9 @@ type InstanceState struct {
 	Hostname pulumi.StringPtrInput
 	// The image to use for the instance. Changing `imageId` will cause the instance reset.
 	ImageId pulumi.StringPtrInput
-	// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID` and `CDHPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
+	// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDHPAID` and `CDCPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
 	InstanceChargeType pulumi.StringPtrInput
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60`.
 	InstanceChargeTypePrepaidPeriod pulumi.IntPtrInput
 	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
 	InstanceChargeTypePrepaidRenewFlag pulumi.StringPtrInput
@@ -320,10 +346,14 @@ type InstanceState struct {
 	KeyIds pulumi.StringArrayInput
 	// Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
 	//
-	// Deprecated: Please use `key_ids` instead.
+	// Deprecated: Please use `keyIds` instead.
 	KeyName pulumi.StringPtrInput
+	// Instance memory capacity, unit in GB.
+	Memory pulumi.IntPtrInput
 	// A list of orderly security group IDs to associate with.
 	OrderlySecurityGroups pulumi.StringArrayInput
+	// Instance os name.
+	OsName pulumi.StringPtrInput
 	// Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
 	Password pulumi.StringPtrInput
 	// The ID of a placement group.
@@ -338,7 +368,7 @@ type InstanceState struct {
 	RunningFlag pulumi.BoolPtrInput
 	// It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
 	//
-	// Deprecated: It will be deprecated. Use `orderly_security_groups` instead.
+	// Deprecated: It will be deprecated. Use `orderlySecurityGroups` instead.
 	SecurityGroups pulumi.StringArrayInput
 	// Type of spot instance, only support `ONE-TIME` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
 	SpotInstanceType pulumi.StringPtrInput
@@ -360,6 +390,8 @@ type InstanceState struct {
 	UserData pulumi.StringPtrInput
 	// The user data to be injected into this instance, in plain text. Conflicts with `userData`. Up to 16 KB after base64 encoded.
 	UserDataRaw pulumi.StringPtrInput
+	// Globally unique ID of the instance.
+	Uuid pulumi.StringPtrInput
 	// The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.
 	VpcId pulumi.StringPtrInput
 }
@@ -395,9 +427,9 @@ type instanceArgs struct {
 	Hostname *string `pulumi:"hostname"`
 	// The image to use for the instance. Changing `imageId` will cause the instance reset.
 	ImageId string `pulumi:"imageId"`
-	// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID` and `CDHPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
+	// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDHPAID` and `CDCPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
 	InstanceChargeType *string `pulumi:"instanceChargeType"`
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60`.
 	InstanceChargeTypePrepaidPeriod *int `pulumi:"instanceChargeTypePrepaidPeriod"`
 	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
 	InstanceChargeTypePrepaidRenewFlag *string `pulumi:"instanceChargeTypePrepaidRenewFlag"`
@@ -419,7 +451,7 @@ type instanceArgs struct {
 	KeyIds []string `pulumi:"keyIds"`
 	// Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
 	//
-	// Deprecated: Please use `key_ids` instead.
+	// Deprecated: Please use `keyIds` instead.
 	KeyName *string `pulumi:"keyName"`
 	// A list of orderly security group IDs to associate with.
 	OrderlySecurityGroups []string `pulumi:"orderlySecurityGroups"`
@@ -435,7 +467,7 @@ type instanceArgs struct {
 	RunningFlag *bool `pulumi:"runningFlag"`
 	// It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
 	//
-	// Deprecated: It will be deprecated. Use `orderly_security_groups` instead.
+	// Deprecated: It will be deprecated. Use `orderlySecurityGroups` instead.
 	SecurityGroups []string `pulumi:"securityGroups"`
 	// Type of spot instance, only support `ONE-TIME` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
 	SpotInstanceType *string `pulumi:"spotInstanceType"`
@@ -489,9 +521,9 @@ type InstanceArgs struct {
 	Hostname pulumi.StringPtrInput
 	// The image to use for the instance. Changing `imageId` will cause the instance reset.
 	ImageId pulumi.StringInput
-	// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID` and `CDHPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
+	// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDHPAID` and `CDCPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
 	InstanceChargeType pulumi.StringPtrInput
-	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60`.
 	InstanceChargeTypePrepaidPeriod pulumi.IntPtrInput
 	// Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
 	InstanceChargeTypePrepaidRenewFlag pulumi.StringPtrInput
@@ -513,7 +545,7 @@ type InstanceArgs struct {
 	KeyIds pulumi.StringArrayInput
 	// Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
 	//
-	// Deprecated: Please use `key_ids` instead.
+	// Deprecated: Please use `keyIds` instead.
 	KeyName pulumi.StringPtrInput
 	// A list of orderly security group IDs to associate with.
 	OrderlySecurityGroups pulumi.StringArrayInput
@@ -529,7 +561,7 @@ type InstanceArgs struct {
 	RunningFlag pulumi.BoolPtrInput
 	// It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
 	//
-	// Deprecated: It will be deprecated. Use `orderly_security_groups` instead.
+	// Deprecated: It will be deprecated. Use `orderlySecurityGroups` instead.
 	SecurityGroups pulumi.StringArrayInput
 	// Type of spot instance, only support `ONE-TIME` now. Note: it only works when instanceChargeType is set to `SPOTPAID`.
 	SpotInstanceType pulumi.StringPtrInput
@@ -581,7 +613,7 @@ func (i *Instance) ToInstanceOutputWithContext(ctx context.Context) InstanceOutp
 // InstanceArrayInput is an input type that accepts InstanceArray and InstanceArrayOutput values.
 // You can construct a concrete instance of `InstanceArrayInput` via:
 //
-//          InstanceArray{ InstanceArgs{...} }
+//	InstanceArray{ InstanceArgs{...} }
 type InstanceArrayInput interface {
 	pulumi.Input
 
@@ -606,7 +638,7 @@ func (i InstanceArray) ToInstanceArrayOutputWithContext(ctx context.Context) Ins
 // InstanceMapInput is an input type that accepts InstanceMap and InstanceMapOutput values.
 // You can construct a concrete instance of `InstanceMapInput` via:
 //
-//          InstanceMap{ "key": InstanceArgs{...} }
+//	InstanceMap{ "key": InstanceArgs{...} }
 type InstanceMapInput interface {
 	pulumi.Input
 
@@ -672,6 +704,11 @@ func (o InstanceOutput) CdhInstanceType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.CdhInstanceType }).(pulumi.StringPtrOutput)
 }
 
+// The number of CPU cores of the instance.
+func (o InstanceOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.Cpu }).(pulumi.IntOutput)
+}
+
 // Create time of the instance.
 func (o InstanceOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
@@ -717,12 +754,12 @@ func (o InstanceOutput) ImageId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.ImageId }).(pulumi.StringOutput)
 }
 
-// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID` and `CDHPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
+// The charge type of instance. Valid values are `PREPAID`, `POSTPAID_BY_HOUR`, `SPOTPAID`, `CDHPAID` and `CDCPAID`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR` and `CDHPAID`. `PREPAID` instance may not allow to delete before expired. `SPOTPAID` instance must set `spotInstanceType` and `spotMaxPrice` at the same time. `CDHPAID` instance must set `cdhInstanceType` and `cdhHostId`.
 func (o InstanceOutput) InstanceChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.InstanceChargeType }).(pulumi.StringPtrOutput)
 }
 
-// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60`.
 func (o InstanceOutput) InstanceChargeTypePrepaidPeriod() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.IntPtrOutput { return v.InstanceChargeTypePrepaidPeriod }).(pulumi.IntPtrOutput)
 }
@@ -776,14 +813,24 @@ func (o InstanceOutput) KeyIds() pulumi.StringArrayOutput {
 
 // Please use `keyIds` instead. The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
 //
-// Deprecated: Please use `key_ids` instead.
+// Deprecated: Please use `keyIds` instead.
 func (o InstanceOutput) KeyName() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.KeyName }).(pulumi.StringOutput)
+}
+
+// Instance memory capacity, unit in GB.
+func (o InstanceOutput) Memory() pulumi.IntOutput {
+	return o.ApplyT(func(v *Instance) pulumi.IntOutput { return v.Memory }).(pulumi.IntOutput)
 }
 
 // A list of orderly security group IDs to associate with.
 func (o InstanceOutput) OrderlySecurityGroups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.OrderlySecurityGroups }).(pulumi.StringArrayOutput)
+}
+
+// Instance os name.
+func (o InstanceOutput) OsName() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.OsName }).(pulumi.StringOutput)
 }
 
 // Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
@@ -818,7 +865,7 @@ func (o InstanceOutput) RunningFlag() pulumi.BoolPtrOutput {
 
 // It will be deprecated. Use `orderlySecurityGroups` instead. A list of security group IDs to associate with.
 //
-// Deprecated: It will be deprecated. Use `orderly_security_groups` instead.
+// Deprecated: It will be deprecated. Use `orderlySecurityGroups` instead.
 func (o InstanceOutput) SecurityGroups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringArrayOutput { return v.SecurityGroups }).(pulumi.StringArrayOutput)
 }
@@ -871,6 +918,11 @@ func (o InstanceOutput) UserData() pulumi.StringPtrOutput {
 // The user data to be injected into this instance, in plain text. Conflicts with `userData`. Up to 16 KB after base64 encoded.
 func (o InstanceOutput) UserDataRaw() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.UserDataRaw }).(pulumi.StringPtrOutput)
+}
+
+// Globally unique ID of the instance.
+func (o InstanceOutput) Uuid() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Uuid }).(pulumi.StringOutput)
 }
 
 // The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const service = new tencentcloud.apigateway.Service("service", {
  *     serviceName: "ck",
@@ -39,13 +41,11 @@ import * as utilities from "../utilities";
  *     strategyName: test.strategyName,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getIpStrategies(args: GetIpStrategiesArgs, opts?: pulumi.InvokeOptions): Promise<GetIpStrategiesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:ApiGateway/getIpStrategies:getIpStrategies", {
         "resultOutputFile": args.resultOutputFile,
         "serviceId": args.serviceId,
@@ -93,9 +93,45 @@ export interface GetIpStrategiesResult {
      */
     readonly strategyName?: string;
 }
-
+/**
+ * Use this data source to query API gateway IP strategy.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const service = new tencentcloud.apigateway.Service("service", {
+ *     serviceName: "ck",
+ *     protocol: "http&https",
+ *     serviceDesc: "your nice service",
+ *     netTypes: [
+ *         "INNER",
+ *         "OUTER",
+ *     ],
+ *     ipVersion: "IPv4",
+ * });
+ * const test = new tencentcloud.apigateway.IpStrategy("test", {
+ *     serviceId: service.id,
+ *     strategyName: "tf_test",
+ *     strategyType: "BLACK",
+ *     strategyData: "9.9.9.9",
+ * });
+ * const id = tencentcloud.ApiGateway.getIpStrategiesOutput({
+ *     serviceId: test.serviceId,
+ * });
+ * const name = tencentcloud.ApiGateway.getIpStrategiesOutput({
+ *     serviceId: test.serviceId,
+ *     strategyName: test.strategyName,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getIpStrategiesOutput(args: GetIpStrategiesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetIpStrategiesResult> {
-    return pulumi.output(args).apply(a => getIpStrategies(a, opts))
+    return pulumi.output(args).apply((a: any) => getIpStrategies(a, opts))
 }
 
 /**

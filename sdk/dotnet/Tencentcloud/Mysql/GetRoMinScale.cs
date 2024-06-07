@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql ro_min_scale
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var roMinScale = Tencentcloud.Mysql.GetRoMinScale.Invoke(new()
         ///     {
-        ///         var roMinScale = Output.Create(Tencentcloud.Mysql.GetRoMinScale.InvokeAsync(new Tencentcloud.Mysql.GetRoMinScaleArgs
-        ///         {
-        ///             MasterInstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         MasterInstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRoMinScaleResult> InvokeAsync(GetRoMinScaleArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRoMinScaleResult>("tencentcloud:Mysql/getRoMinScale:getRoMinScale", args ?? new GetRoMinScaleArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRoMinScaleResult>("tencentcloud:Mysql/getRoMinScale:getRoMinScale", args ?? new GetRoMinScaleArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql ro_min_scale
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var roMinScale = Tencentcloud.Mysql.GetRoMinScale.Invoke(new()
         ///     {
-        ///         var roMinScale = Output.Create(Tencentcloud.Mysql.GetRoMinScale.InvokeAsync(new Tencentcloud.Mysql.GetRoMinScaleArgs
-        ///         {
-        ///             MasterInstanceId = "cdb-fitq5t9h",
-        ///         }));
-        ///     }
+        ///         MasterInstanceId = "cdb-fitq5t9h",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRoMinScaleResult> Invoke(GetRoMinScaleInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRoMinScaleResult>("tencentcloud:Mysql/getRoMinScale:getRoMinScale", args ?? new GetRoMinScaleInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRoMinScaleResult>("tencentcloud:Mysql/getRoMinScale:getRoMinScale", args ?? new GetRoMinScaleInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRoMinScaleArgs : Pulumi.InvokeArgs
+    public sealed class GetRoMinScaleArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The primary instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page. This parameter and the RoInstanceId parameter cannot be empty at the same time. Note that when the input parameter contains RoInstanceId, the return value is the minimum specification when the read-only instance is upgraded; when the input parameter only contains MasterInstanceId, the return value is the minimum specification when the read-only instance is purchased.
@@ -95,9 +89,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetRoMinScaleArgs()
         {
         }
+        public static new GetRoMinScaleArgs Empty => new GetRoMinScaleArgs();
     }
 
-    public sealed class GetRoMinScaleInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRoMinScaleInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The primary instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page. This parameter and the RoInstanceId parameter cannot be empty at the same time. Note that when the input parameter contains RoInstanceId, the return value is the minimum specification when the read-only instance is upgraded; when the input parameter only contains MasterInstanceId, the return value is the minimum specification when the read-only instance is purchased.
@@ -120,6 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetRoMinScaleInvokeArgs()
         {
         }
+        public static new GetRoMinScaleInvokeArgs Empty => new GetRoMinScaleInvokeArgs();
     }
 
 

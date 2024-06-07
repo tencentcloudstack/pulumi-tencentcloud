@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a rum projectStatusConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Rum"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Rum.NewProjectStatusConfig(ctx, "projectStatusConfig", &Rum.ProjectStatusConfigArgs{
-// 			Operate:   pulumi.String("stop"),
-// 			ProjectId: pulumi.Int(131407),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Rum.NewProjectStatusConfig(ctx, "projectStatusConfig", &Rum.ProjectStatusConfigArgs{
+//				Operate:   pulumi.String("stop"),
+//				ProjectId: pulumi.Int(131407),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // rum project_status_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Rum/projectStatusConfig:ProjectStatusConfig project_status_config project_id
+// $ pulumi import tencentcloud:Rum/projectStatusConfig:ProjectStatusConfig project_status_config project_id
 // ```
 type ProjectStatusConfig struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewProjectStatusConfig(ctx *pulumi.Context,
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ProjectStatusConfig
 	err := ctx.RegisterResource("tencentcloud:Rum/projectStatusConfig:ProjectStatusConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *ProjectStatusConfig) ToProjectStatusConfigOutputWithContext(ctx context
 // ProjectStatusConfigArrayInput is an input type that accepts ProjectStatusConfigArray and ProjectStatusConfigArrayOutput values.
 // You can construct a concrete instance of `ProjectStatusConfigArrayInput` via:
 //
-//          ProjectStatusConfigArray{ ProjectStatusConfigArgs{...} }
+//	ProjectStatusConfigArray{ ProjectStatusConfigArgs{...} }
 type ProjectStatusConfigArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i ProjectStatusConfigArray) ToProjectStatusConfigArrayOutputWithContext(ct
 // ProjectStatusConfigMapInput is an input type that accepts ProjectStatusConfigMap and ProjectStatusConfigMapOutput values.
 // You can construct a concrete instance of `ProjectStatusConfigMapInput` via:
 //
-//          ProjectStatusConfigMap{ "key": ProjectStatusConfigArgs{...} }
+//	ProjectStatusConfigMap{ "key": ProjectStatusConfigArgs{...} }
 type ProjectStatusConfigMapInput interface {
 	pulumi.Input
 

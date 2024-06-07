@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type ProgramFpgaImage struct {
@@ -38,7 +39,7 @@ func NewProgramFpgaImage(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ProgramFpgaImage
 	err := ctx.RegisterResource("tencentcloud:Cvm/programFpgaImage:ProgramFpgaImage", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +140,7 @@ func (i *ProgramFpgaImage) ToProgramFpgaImageOutputWithContext(ctx context.Conte
 // ProgramFpgaImageArrayInput is an input type that accepts ProgramFpgaImageArray and ProgramFpgaImageArrayOutput values.
 // You can construct a concrete instance of `ProgramFpgaImageArrayInput` via:
 //
-//          ProgramFpgaImageArray{ ProgramFpgaImageArgs{...} }
+//	ProgramFpgaImageArray{ ProgramFpgaImageArgs{...} }
 type ProgramFpgaImageArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +165,7 @@ func (i ProgramFpgaImageArray) ToProgramFpgaImageArrayOutputWithContext(ctx cont
 // ProgramFpgaImageMapInput is an input type that accepts ProgramFpgaImageMap and ProgramFpgaImageMapOutput values.
 // You can construct a concrete instance of `ProgramFpgaImageMapInput` via:
 //
-//          ProgramFpgaImageMap{ "key": ProgramFpgaImageArgs{...} }
+//	ProgramFpgaImageMap{ "key": ProgramFpgaImageArgs{...} }
 type ProgramFpgaImageMapInput interface {
 	pulumi.Input
 

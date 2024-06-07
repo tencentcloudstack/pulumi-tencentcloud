@@ -14,9 +14,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam.Outputs
     [OutputType]
     public sealed class PolicyVersionPolicyVersion
     {
+        /// <summary>
+        /// Strategic version creation timeNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        /// </summary>
         public readonly string? CreateDate;
+        /// <summary>
+        /// Strategic grammar textNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        /// </summary>
         public readonly string? Document;
+        /// <summary>
+        /// Whether it is an effective version.0 means not, 1 means yesNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        /// </summary>
         public readonly int? IsDefaultVersion;
+        /// <summary>
+        /// Strategic version numberNote: This field may return NULL, indicating that the valid value cannot be obtained.
+        /// </summary>
         public readonly int? VersionId;
 
         [OutputConstructor]

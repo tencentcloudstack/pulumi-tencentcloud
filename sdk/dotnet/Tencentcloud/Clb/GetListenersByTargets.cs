@@ -15,78 +15,72 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// <summary>
         /// Use this data source to query detailed information of clb listeners_by_targets
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var listenersByTargets = Tencentcloud.Clb.GetListenersByTargets.Invoke(new()
         ///     {
-        ///         var listenersByTargets = Output.Create(Tencentcloud.Clb.GetListenersByTargets.InvokeAsync(new Tencentcloud.Clb.GetListenersByTargetsArgs
+        ///         Backends = new[]
         ///         {
-        ///             Backends = 
+        ///             new Tencentcloud.Clb.Inputs.GetListenersByTargetsBackendInputArgs
         ///             {
-        ///                 new Tencentcloud.Clb.Inputs.GetListenersByTargetsBackendArgs
-        ///                 {
-        ///                     PrivateIp = "106.52.160.211",
-        ///                     VpcId = "vpc-4owdpnwr",
-        ///                 },
+        ///                 PrivateIp = "106.52.160.211",
+        ///                 VpcId = "vpc-4owdpnwr",
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetListenersByTargetsResult> InvokeAsync(GetListenersByTargetsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetListenersByTargetsResult>("tencentcloud:Clb/getListenersByTargets:getListenersByTargets", args ?? new GetListenersByTargetsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetListenersByTargetsResult>("tencentcloud:Clb/getListenersByTargets:getListenersByTargets", args ?? new GetListenersByTargetsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of clb listeners_by_targets
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var listenersByTargets = Tencentcloud.Clb.GetListenersByTargets.Invoke(new()
         ///     {
-        ///         var listenersByTargets = Output.Create(Tencentcloud.Clb.GetListenersByTargets.InvokeAsync(new Tencentcloud.Clb.GetListenersByTargetsArgs
+        ///         Backends = new[]
         ///         {
-        ///             Backends = 
+        ///             new Tencentcloud.Clb.Inputs.GetListenersByTargetsBackendInputArgs
         ///             {
-        ///                 new Tencentcloud.Clb.Inputs.GetListenersByTargetsBackendArgs
-        ///                 {
-        ///                     PrivateIp = "106.52.160.211",
-        ///                     VpcId = "vpc-4owdpnwr",
-        ///                 },
+        ///                 PrivateIp = "106.52.160.211",
+        ///                 VpcId = "vpc-4owdpnwr",
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetListenersByTargetsResult> Invoke(GetListenersByTargetsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetListenersByTargetsResult>("tencentcloud:Clb/getListenersByTargets:getListenersByTargets", args ?? new GetListenersByTargetsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetListenersByTargetsResult>("tencentcloud:Clb/getListenersByTargets:getListenersByTargets", args ?? new GetListenersByTargetsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetListenersByTargetsArgs : Pulumi.InvokeArgs
+    public sealed class GetListenersByTargetsArgs : global::Pulumi.InvokeArgs
     {
         [Input("backends", required: true)]
         private List<Inputs.GetListenersByTargetsBackendArgs>? _backends;
@@ -109,9 +103,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetListenersByTargetsArgs()
         {
         }
+        public static new GetListenersByTargetsArgs Empty => new GetListenersByTargetsArgs();
     }
 
-    public sealed class GetListenersByTargetsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetListenersByTargetsInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("backends", required: true)]
         private InputList<Inputs.GetListenersByTargetsBackendInputArgs>? _backends;
@@ -134,6 +129,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public GetListenersByTargetsInvokeArgs()
         {
         }
+        public static new GetListenersByTargetsInvokeArgs Empty => new GetListenersByTargetsInvokeArgs();
     }
 
 

@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a pts cronJobAbort
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Pts"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Pts.NewCronJobAbort(ctx, "cronJobAbort", &Pts.CronJobAbortArgs{
-// 			CronJobId: pulumi.String("job-dtm93vx0"),
-// 			ProjectId: pulumi.String("project-abc"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Pts.NewCronJobAbort(ctx, "cronJobAbort", &Pts.CronJobAbortArgs{
+//				CronJobId: pulumi.String("job-dtm93vx0"),
+//				ProjectId: pulumi.String("project-abc"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type CronJobAbort struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewCronJobAbort(ctx *pulumi.Context,
 	if args.ProjectId == nil {
 		return nil, errors.New("invalid value for required argument 'ProjectId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CronJobAbort
 	err := ctx.RegisterResource("tencentcloud:Pts/cronJobAbort:CronJobAbort", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *CronJobAbort) ToCronJobAbortOutputWithContext(ctx context.Context) Cron
 // CronJobAbortArrayInput is an input type that accepts CronJobAbortArray and CronJobAbortArrayOutput values.
 // You can construct a concrete instance of `CronJobAbortArrayInput` via:
 //
-//          CronJobAbortArray{ CronJobAbortArgs{...} }
+//	CronJobAbortArray{ CronJobAbortArgs{...} }
 type CronJobAbortArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i CronJobAbortArray) ToCronJobAbortArrayOutputWithContext(ctx context.Cont
 // CronJobAbortMapInput is an input type that accepts CronJobAbortMap and CronJobAbortMapOutput values.
 // You can construct a concrete instance of `CronJobAbortMapInput` via:
 //
-//          CronJobAbortMap{ "key": CronJobAbortArgs{...} }
+//	CronJobAbortMap{ "key": CronJobAbortArgs{...} }
 type CronJobAbortMapInput interface {
 	pulumi.Input
 

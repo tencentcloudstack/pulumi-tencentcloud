@@ -7,86 +7,89 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dcdb cancelDcnJobOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dcdb"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		internal, err := Security.GetGroups(ctx, &security.GetGroupsArgs{
-// 			Name: pulumi.StringRef("default"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpc, err := Vpc.GetInstances(ctx, &vpc.GetInstancesArgs{
-// 			Name: pulumi.StringRef("Default-VPC"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		subnet, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			VpcId: pulumi.StringRef(vpc.InstanceLists[0].VpcId),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpcId := subnet.InstanceLists[0].VpcId
-// 		subnetId := subnet.InstanceLists[0].SubnetId
-// 		sgId := internal.SecurityGroups[0].SecurityGroupId
-// 		hourdbInstanceDcn, err := Dcdb.NewHourdbInstance(ctx, "hourdbInstanceDcn", &Dcdb.HourdbInstanceArgs{
-// 			InstanceName: pulumi.String("test_dcdb_db_hourdb_instance_dcn"),
-// 			Zones: pulumi.StringArray{
-// 				pulumi.Any(_var.Default_az),
-// 			},
-// 			ShardMemory:     pulumi.Int(2),
-// 			ShardStorage:    pulumi.Int(10),
-// 			ShardNodeCount:  pulumi.Int(2),
-// 			ShardCount:      pulumi.Int(2),
-// 			VpcId:           pulumi.String(vpcId),
-// 			SubnetId:        pulumi.String(subnetId),
-// 			SecurityGroupId: pulumi.String(sgId),
-// 			DbVersionId:     pulumi.String("8.0"),
-// 			DcnRegion:       pulumi.String("ap-guangzhou"),
-// 			DcnInstanceId:   pulumi.Any(local.Dcdb_id),
-// 			ResourceTags: dcdb.HourdbInstanceResourceTagArray{
-// 				&dcdb.HourdbInstanceResourceTagArgs{
-// 					TagKey:   pulumi.String("aaa"),
-// 					TagValue: pulumi.String("bbb"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		dcnDcdbId := hourdbInstanceDcn.ID()
-// 		_, err = Dcdb.NewCancelDcnJobOperation(ctx, "cancelOperation", &Dcdb.CancelDcnJobOperationArgs{
-// 			InstanceId: pulumi.String(dcnDcdbId),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			internal, err := Security.GetGroups(ctx, &security.GetGroupsArgs{
+//				Name: pulumi.StringRef("default"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpc, err := Vpc.GetInstances(ctx, &vpc.GetInstancesArgs{
+//				Name: pulumi.StringRef("Default-VPC"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//				VpcId: pulumi.StringRef(vpc.InstanceLists[0].VpcId),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpcId := subnet.InstanceLists[0].VpcId
+//			subnetId := subnet.InstanceLists[0].SubnetId
+//			sgId := internal.SecurityGroups[0].SecurityGroupId
+//			hourdbInstanceDcn, err := Dcdb.NewHourdbInstance(ctx, "hourdbInstanceDcn", &Dcdb.HourdbInstanceArgs{
+//				InstanceName: pulumi.String("test_dcdb_db_hourdb_instance_dcn"),
+//				Zones: pulumi.StringArray{
+//					_var.Default_az,
+//				},
+//				ShardMemory:     pulumi.Int(2),
+//				ShardStorage:    pulumi.Int(10),
+//				ShardNodeCount:  pulumi.Int(2),
+//				ShardCount:      pulumi.Int(2),
+//				VpcId:           pulumi.String(vpcId),
+//				SubnetId:        pulumi.String(subnetId),
+//				SecurityGroupId: pulumi.String(sgId),
+//				DbVersionId:     pulumi.String("8.0"),
+//				DcnRegion:       pulumi.String("ap-guangzhou"),
+//				DcnInstanceId:   pulumi.Any(local.Dcdb_id),
+//				ResourceTags: dcdb.HourdbInstanceResourceTagArray{
+//					&dcdb.HourdbInstanceResourceTagArgs{
+//						TagKey:   pulumi.String("aaa"),
+//						TagValue: pulumi.String("bbb"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			dcnDcdbId := hourdbInstanceDcn.ID()
+//			_, err = Dcdb.NewCancelDcnJobOperation(ctx, "cancelOperation", &Dcdb.CancelDcnJobOperationArgs{
+//				InstanceId: pulumi.String(dcnDcdbId),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type CancelDcnJobOperation struct {
 	pulumi.CustomResourceState
 
@@ -104,7 +107,7 @@ func NewCancelDcnJobOperation(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CancelDcnJobOperation
 	err := ctx.RegisterResource("tencentcloud:Dcdb/cancelDcnJobOperation:CancelDcnJobOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -177,7 +180,7 @@ func (i *CancelDcnJobOperation) ToCancelDcnJobOperationOutputWithContext(ctx con
 // CancelDcnJobOperationArrayInput is an input type that accepts CancelDcnJobOperationArray and CancelDcnJobOperationArrayOutput values.
 // You can construct a concrete instance of `CancelDcnJobOperationArrayInput` via:
 //
-//          CancelDcnJobOperationArray{ CancelDcnJobOperationArgs{...} }
+//	CancelDcnJobOperationArray{ CancelDcnJobOperationArgs{...} }
 type CancelDcnJobOperationArrayInput interface {
 	pulumi.Input
 
@@ -202,7 +205,7 @@ func (i CancelDcnJobOperationArray) ToCancelDcnJobOperationArrayOutputWithContex
 // CancelDcnJobOperationMapInput is an input type that accepts CancelDcnJobOperationMap and CancelDcnJobOperationMapOutput values.
 // You can construct a concrete instance of `CancelDcnJobOperationMapInput` via:
 //
-//          CancelDcnJobOperationMap{ "key": CancelDcnJobOperationArgs{...} }
+//	CancelDcnJobOperationMap{ "key": CancelDcnJobOperationArgs{...} }
 type CancelDcnJobOperationMapInput interface {
 	pulumi.Input
 

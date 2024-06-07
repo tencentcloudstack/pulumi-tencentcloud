@@ -14,16 +14,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Outputs
     [OutputType]
     public sealed class NetworkAclQuintupleNetworkAclQuintupleSetEgress
     {
+        /// <summary>
+        /// Action, ACCEPT or DROP.
+        /// </summary>
         public readonly string? Action;
+        /// <summary>
+        /// Creation time, used as an output parameter of DescribeNetworkAclQuintupleEntries.
+        /// </summary>
         public readonly string? CreateTime;
+        /// <summary>
+        /// Description.
+        /// </summary>
         public readonly string? Description;
+        /// <summary>
+        /// Destination CIDR.
+        /// </summary>
         public readonly string? DestinationCidr;
+        /// <summary>
+        /// Destination port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
+        /// </summary>
         public readonly string? DestinationPort;
+        /// <summary>
+        /// Direction, INGRESS or EGRESS, is used as an output parameter of DescribeNetworkAclQuintupleEntries.
+        /// </summary>
         public readonly string? NetworkAclDirection;
+        /// <summary>
+        /// Unique ID of a network ACL entry.
+        /// </summary>
         public readonly string? NetworkAclQuintupleEntryId;
+        /// <summary>
+        /// Priority, starting from 1.
+        /// </summary>
         public readonly int? Priority;
+        /// <summary>
+        /// Protocol, value: TCP,UDP, ICMP, ALL.
+        /// </summary>
         public readonly string? Protocol;
+        /// <summary>
+        /// Source CIDR.
+        /// </summary>
         public readonly string? SourceCidr;
+        /// <summary>
+        /// Source port (all, single port, range). When Protocol is ALL or ICMP, Port cannot be specified.
+        /// </summary>
         public readonly string? SourcePort;
 
         [OutputConstructor]

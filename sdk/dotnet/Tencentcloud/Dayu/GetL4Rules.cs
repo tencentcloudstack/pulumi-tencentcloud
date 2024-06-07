@@ -15,80 +15,76 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// <summary>
         /// Use this data source to query dayu layer 4 rules
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var nameTest = Tencentcloud.Dayu.GetL4Rules.Invoke(new()
         ///     {
-        ///         var nameTest = Output.Create(Tencentcloud.Dayu.GetL4Rules.InvokeAsync(new Tencentcloud.Dayu.GetL4RulesArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_l4_rule.Test_rule.Resource_type,
-        ///             ResourceId = tencentcloud_dayu_l4_rule.Test_rule.Resource_id,
-        ///             Name = tencentcloud_dayu_l4_rule.Test_rule.Name,
-        ///         }));
-        ///         var idTest = Output.Create(Tencentcloud.Dayu.GetL4Rules.InvokeAsync(new Tencentcloud.Dayu.GetL4RulesArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_l4_rule.Test_rule.Resource_type,
-        ///             ResourceId = tencentcloud_dayu_l4_rule.Test_rule.Resource_id,
-        ///             RuleId = tencentcloud_dayu_l4_rule.Test_rule.Rule_id,
-        ///         }));
-        ///     }
+        ///         ResourceType = tencentcloud_dayu_l4_rule.Test_rule.Resource_type,
+        ///         ResourceId = tencentcloud_dayu_l4_rule.Test_rule.Resource_id,
+        ///         Name = tencentcloud_dayu_l4_rule.Test_rule.Name,
+        ///     });
         /// 
-        /// }
+        ///     var idTest = Tencentcloud.Dayu.GetL4Rules.Invoke(new()
+        ///     {
+        ///         ResourceType = tencentcloud_dayu_l4_rule.Test_rule.Resource_type,
+        ///         ResourceId = tencentcloud_dayu_l4_rule.Test_rule.Resource_id,
+        ///         RuleId = tencentcloud_dayu_l4_rule.Test_rule.Rule_id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetL4RulesResult> InvokeAsync(GetL4RulesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetL4RulesResult>("tencentcloud:Dayu/getL4Rules:getL4Rules", args ?? new GetL4RulesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetL4RulesResult>("tencentcloud:Dayu/getL4Rules:getL4Rules", args ?? new GetL4RulesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query dayu layer 4 rules
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var nameTest = Tencentcloud.Dayu.GetL4Rules.Invoke(new()
         ///     {
-        ///         var nameTest = Output.Create(Tencentcloud.Dayu.GetL4Rules.InvokeAsync(new Tencentcloud.Dayu.GetL4RulesArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_l4_rule.Test_rule.Resource_type,
-        ///             ResourceId = tencentcloud_dayu_l4_rule.Test_rule.Resource_id,
-        ///             Name = tencentcloud_dayu_l4_rule.Test_rule.Name,
-        ///         }));
-        ///         var idTest = Output.Create(Tencentcloud.Dayu.GetL4Rules.InvokeAsync(new Tencentcloud.Dayu.GetL4RulesArgs
-        ///         {
-        ///             ResourceType = tencentcloud_dayu_l4_rule.Test_rule.Resource_type,
-        ///             ResourceId = tencentcloud_dayu_l4_rule.Test_rule.Resource_id,
-        ///             RuleId = tencentcloud_dayu_l4_rule.Test_rule.Rule_id,
-        ///         }));
-        ///     }
+        ///         ResourceType = tencentcloud_dayu_l4_rule.Test_rule.Resource_type,
+        ///         ResourceId = tencentcloud_dayu_l4_rule.Test_rule.Resource_id,
+        ///         Name = tencentcloud_dayu_l4_rule.Test_rule.Name,
+        ///     });
         /// 
-        /// }
+        ///     var idTest = Tencentcloud.Dayu.GetL4Rules.Invoke(new()
+        ///     {
+        ///         ResourceType = tencentcloud_dayu_l4_rule.Test_rule.Resource_type,
+        ///         ResourceId = tencentcloud_dayu_l4_rule.Test_rule.Resource_id,
+        ///         RuleId = tencentcloud_dayu_l4_rule.Test_rule.Rule_id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetL4RulesResult> Invoke(GetL4RulesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetL4RulesResult>("tencentcloud:Dayu/getL4Rules:getL4Rules", args ?? new GetL4RulesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetL4RulesResult>("tencentcloud:Dayu/getL4Rules:getL4Rules", args ?? new GetL4RulesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetL4RulesArgs : Pulumi.InvokeArgs
+    public sealed class GetL4RulesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name of the layer 4 rule to be queried.
@@ -123,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public GetL4RulesArgs()
         {
         }
+        public static new GetL4RulesArgs Empty => new GetL4RulesArgs();
     }
 
-    public sealed class GetL4RulesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetL4RulesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Name of the layer 4 rule to be queried.
@@ -160,6 +157,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public GetL4RulesInvokeArgs()
         {
         }
+        public static new GetL4RulesInvokeArgs Empty => new GetL4RulesInvokeArgs();
     }
 
 

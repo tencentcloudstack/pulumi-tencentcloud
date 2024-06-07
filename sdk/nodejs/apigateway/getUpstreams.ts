@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,35 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.ApiGateway.getUpstreams({
+ * const example = tencentcloud.ApiGateway.getUpstreams({
  *     upstreamId: "upstream-4n5bfklc",
- * }));
+ * });
  * ```
- * ### Filtered Queries
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const example = pulumi.output(tencentcloud.ApiGateway.getUpstreams({
- *     filters: [{
- *         name: "ServiceId",
- *         values: "service-hvg0uueg",
- *     }],
- *     upstreamId: "upstream-4n5bfklc",
- * }));
- * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getUpstreams(args: GetUpstreamsArgs, opts?: pulumi.InvokeOptions): Promise<GetUpstreamsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:ApiGateway/getUpstreams:getUpstreams", {
         "filters": args.filters,
         "resultOutputFile": args.resultOutputFile,
@@ -80,9 +66,24 @@ export interface GetUpstreamsResult {
     readonly results: outputs.ApiGateway.GetUpstreamsResult[];
     readonly upstreamId: string;
 }
-
+/**
+ * Use this data source to query detailed information of apigateway upstream
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.ApiGateway.getUpstreams({
+ *     upstreamId: "upstream-4n5bfklc",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getUpstreamsOutput(args: GetUpstreamsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetUpstreamsResult> {
-    return pulumi.output(args).apply(a => getUpstreams(a, opts))
+    return pulumi.output(args).apply((a: any) => getUpstreams(a, opts))
 }
 
 /**

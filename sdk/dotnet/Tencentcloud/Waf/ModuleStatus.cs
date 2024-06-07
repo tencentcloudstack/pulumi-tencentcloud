@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.ModuleStatus("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.ModuleStatus("example", new Tencentcloud.Waf.ModuleStatusArgs
-    ///         {
-    ///             AccessControl = 0,
-    ///             AntiLeakage = 0,
-    ///             AntiTamper = 1,
-    ///             ApiProtection = 1,
-    ///             CcProtection = 1,
-    ///             Domain = "demo.waf.com",
-    ///             WebSecurity = 1,
-    ///         });
-    ///     }
+    ///         AccessControl = 0,
+    ///         AntiLeakage = 0,
+    ///         AntiTamper = 1,
+    ///         ApiProtection = 1,
+    ///         CcProtection = 1,
+    ///         Domain = "demo.waf.com",
+    ///         WebSecurity = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// waf module_status can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Waf/moduleStatus:ModuleStatus example demo.waf.com
+    /// $ pulumi import tencentcloud:Waf/moduleStatus:ModuleStatus example demo.waf.com
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/moduleStatus:ModuleStatus")]
-    public partial class ModuleStatus : Pulumi.CustomResource
+    public partial class ModuleStatus : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ACL module status, 0:closed, 1:opened.
@@ -136,7 +137,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class ModuleStatusArgs : Pulumi.ResourceArgs
+    public sealed class ModuleStatusArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ACL module status, 0:closed, 1:opened.
@@ -183,9 +184,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public ModuleStatusArgs()
         {
         }
+        public static new ModuleStatusArgs Empty => new ModuleStatusArgs();
     }
 
-    public sealed class ModuleStatusState : Pulumi.ResourceArgs
+    public sealed class ModuleStatusState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ACL module status, 0:closed, 1:opened.
@@ -232,5 +234,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public ModuleStatusState()
         {
         }
+        public static new ModuleStatusState Empty => new ModuleStatusState();
     }
 }

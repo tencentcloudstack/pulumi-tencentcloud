@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class ConnectResourceKafkaConnectParamGetArgs : Pulumi.ResourceArgs
+    public sealed class ConnectResourceKafkaConnectParamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Kafka broker ip, Mandatory when self-built.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public ConnectResourceKafkaConnectParamGetArgs()
         {
         }
+        public static new ConnectResourceKafkaConnectParamGetArgs Empty => new ConnectResourceKafkaConnectParamGetArgs();
     }
 }

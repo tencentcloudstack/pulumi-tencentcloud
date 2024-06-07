@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Inputs
 {
 
-    public sealed class InstanceBackupPlanArgs : Pulumi.ResourceArgs
+    public sealed class InstanceBackupPlanArgs : global::Pulumi.ResourceArgs
     {
         [Input("backupPeriods")]
         private InputList<string>? _backupPeriods;
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql.Inputs
         public InstanceBackupPlanArgs()
         {
         }
+        public static new InstanceBackupPlanArgs Empty => new InstanceBackupPlanArgs();
     }
 }

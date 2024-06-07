@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var userQuota = new Tencentcloud.Cfs.UserQuota("userQuota", new()
     ///     {
-    ///         var userQuota = new Tencentcloud.Cfs.UserQuota("userQuota", new Tencentcloud.Cfs.UserQuotaArgs
-    ///         {
-    ///             CapacityHardLimit = 10,
-    ///             FileHardLimit = 10000,
-    ///             FileSystemId = "cfs-4636029bc",
-    ///             UserId = "2159973417",
-    ///             UserType = "Uid",
-    ///         });
-    ///     }
+    ///         CapacityHardLimit = 10,
+    ///         FileHardLimit = 10000,
+    ///         FileSystemId = "cfs-4636029bc",
+    ///         UserId = "2159973417",
+    ///         UserType = "Uid",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cfs user_quota can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfs/userQuota:UserQuota user_quota user_quota_id
+    /// $ pulumi import tencentcloud:Cfs/userQuota:UserQuota user_quota user_quota_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfs/userQuota:UserQuota")]
-    public partial class UserQuota : Pulumi.CustomResource
+    public partial class UserQuota : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Capacity Limit(GB).
@@ -122,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         }
     }
 
-    public sealed class UserQuotaArgs : Pulumi.ResourceArgs
+    public sealed class UserQuotaArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Capacity Limit(GB).
@@ -157,9 +158,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public UserQuotaArgs()
         {
         }
+        public static new UserQuotaArgs Empty => new UserQuotaArgs();
     }
 
-    public sealed class UserQuotaState : Pulumi.ResourceArgs
+    public sealed class UserQuotaState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Capacity Limit(GB).
@@ -194,5 +196,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public UserQuotaState()
         {
         }
+        public static new UserQuotaState Empty => new UserQuotaState();
     }
 }

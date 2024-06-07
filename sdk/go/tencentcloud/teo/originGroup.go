@@ -7,107 +7,89 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a teo originGroup
 //
+// > **NOTE:** Please note that `Teo.OriginGroup` had to undergo incompatible changes in version v1.81.96.
+//
 // ## Example Usage
+//
 // ### Self origin group
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.NewOriginGroup(ctx, "originGroup", &Teo.OriginGroupArgs{
-// 			ConfigurationType: pulumi.String("weight"),
-// 			OriginGroupName:   pulumi.String("test-group"),
-// 			OriginRecords: teo.OriginGroupOriginRecordArray{
-// 				&teo.OriginGroupOriginRecordArgs{
-// 					Areas:   pulumi.StringArray{},
-// 					Port:    pulumi.Int(8080),
-// 					Private: pulumi.Bool(false),
-// 					Record:  pulumi.String("150.109.8.1"),
-// 					Weight:  pulumi.Int(100),
-// 				},
-// 			},
-// 			OriginType: pulumi.String("self"),
-// 			ZoneId:     pulumi.String("zone-297z8rf93cfw"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Teo.NewOriginGroup(ctx, "basic", &Teo.OriginGroupArgs{
+//				Records: teo.OriginGroupRecordArray{
+//					&teo.OriginGroupRecordArgs{
+//						Private: pulumi.Bool(true),
+//						PrivateParameters: teo.OriginGroupRecordPrivateParameterArray{
+//							&teo.OriginGroupRecordPrivateParameterArgs{
+//								Name:  pulumi.String("SecretAccessKey"),
+//								Value: pulumi.String("test"),
+//							},
+//						},
+//						Record: pulumi.String("tf-teo.xyz"),
+//						Type:   pulumi.String("IP_DOMAIN"),
+//						Weight: pulumi.Int(100),
+//					},
+//				},
+//				Type:   pulumi.String("GENERAL"),
+//				ZoneId: pulumi.String("zone-197z8rf93cfw"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
-// ### Cos origin group
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Teo"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Teo.NewOriginGroup(ctx, "originGroup", &Teo.OriginGroupArgs{
-// 			ConfigurationType: pulumi.String("weight"),
-// 			OriginGroupName:   pulumi.String("test"),
-// 			OriginRecords: teo.OriginGroupOriginRecordArray{
-// 				&teo.OriginGroupOriginRecordArgs{
-// 					Areas:   pulumi.StringArray{},
-// 					Port:    pulumi.Int(0),
-// 					Private: pulumi.Bool(true),
-// 					Record:  pulumi.String("test-ruichaolin-1310708577.cos.ap-nanjing.myqcloud.com"),
-// 					Weight:  pulumi.Int(100),
-// 				},
-// 			},
-// 			OriginType: pulumi.String("cos"),
-// 			ZoneId:     pulumi.String("zone-2o3h21ed8bpu"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
-// teo origin_group can be imported using the zone_id#originGroup_id, e.g. `
+// teo origin_group can be imported using the zone_id#originGroup_id, e.g.
+//
+// `
 //
 // ```sh
-//  $ pulumi import tencentcloud:Teo/originGroup:OriginGroup origin_group zone-297z8rf93cfw#origin-4f8a30b2-3720-11ed-b66b-525400dceb86
+// $ pulumi import tencentcloud:Teo/originGroup:OriginGroup origin_group zone-297z8rf93cfw#origin-4f8a30b2-3720-11ed-b66b-525400dceb86
 // ```
 //
-//  `
+// `
 type OriginGroup struct {
 	pulumi.CustomResourceState
 
-	// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
-	ConfigurationType pulumi.StringOutput `pulumi:"configurationType"`
+	// Origin site group creation time.
+	CreateTime pulumi.StringOutput `pulumi:"createTime"`
+	// Back-to-origin Host Header, it only takes effect when type = HTTP is passed in. The rule engine modifies the Host Header configuration priority to be higher than the Host Header of the origin site group.
+	HostHeader pulumi.StringPtrOutput `pulumi:"hostHeader"`
+	// OriginGroup Name.
+	Name pulumi.StringOutput `pulumi:"name"`
 	// OriginGroup ID.
 	OriginGroupId pulumi.StringOutput `pulumi:"originGroupId"`
-	// OriginGroup Name.
-	OriginGroupName pulumi.StringOutput `pulumi:"originGroupName"`
 	// Origin site records.
-	OriginRecords OriginGroupOriginRecordArrayOutput `pulumi:"originRecords"`
-	// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
-	OriginType pulumi.StringOutput `pulumi:"originType"`
-	// Last modification date.
+	Records OriginGroupRecordArrayOutput `pulumi:"records"`
+	// List of referenced instances of the origin site group.
+	References OriginGroupReferenceArrayOutput `pulumi:"references"`
+	// Type of the origin site. Valid values:
+	Type pulumi.StringOutput `pulumi:"type"`
+	// Origin site group update time.
 	UpdateTime pulumi.StringOutput `pulumi:"updateTime"`
 	// Site ID.
 	ZoneId pulumi.StringOutput `pulumi:"zoneId"`
@@ -120,22 +102,16 @@ func NewOriginGroup(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.ConfigurationType == nil {
-		return nil, errors.New("invalid value for required argument 'ConfigurationType'")
+	if args.Records == nil {
+		return nil, errors.New("invalid value for required argument 'Records'")
 	}
-	if args.OriginGroupName == nil {
-		return nil, errors.New("invalid value for required argument 'OriginGroupName'")
-	}
-	if args.OriginRecords == nil {
-		return nil, errors.New("invalid value for required argument 'OriginRecords'")
-	}
-	if args.OriginType == nil {
-		return nil, errors.New("invalid value for required argument 'OriginType'")
+	if args.Type == nil {
+		return nil, errors.New("invalid value for required argument 'Type'")
 	}
 	if args.ZoneId == nil {
 		return nil, errors.New("invalid value for required argument 'ZoneId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OriginGroup
 	err := ctx.RegisterResource("tencentcloud:Teo/originGroup:OriginGroup", name, args, &resource, opts...)
 	if err != nil {
@@ -158,34 +134,42 @@ func GetOriginGroup(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering OriginGroup resources.
 type originGroupState struct {
-	// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
-	ConfigurationType *string `pulumi:"configurationType"`
+	// Origin site group creation time.
+	CreateTime *string `pulumi:"createTime"`
+	// Back-to-origin Host Header, it only takes effect when type = HTTP is passed in. The rule engine modifies the Host Header configuration priority to be higher than the Host Header of the origin site group.
+	HostHeader *string `pulumi:"hostHeader"`
+	// OriginGroup Name.
+	Name *string `pulumi:"name"`
 	// OriginGroup ID.
 	OriginGroupId *string `pulumi:"originGroupId"`
-	// OriginGroup Name.
-	OriginGroupName *string `pulumi:"originGroupName"`
 	// Origin site records.
-	OriginRecords []OriginGroupOriginRecord `pulumi:"originRecords"`
-	// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
-	OriginType *string `pulumi:"originType"`
-	// Last modification date.
+	Records []OriginGroupRecord `pulumi:"records"`
+	// List of referenced instances of the origin site group.
+	References []OriginGroupReference `pulumi:"references"`
+	// Type of the origin site. Valid values:
+	Type *string `pulumi:"type"`
+	// Origin site group update time.
 	UpdateTime *string `pulumi:"updateTime"`
 	// Site ID.
 	ZoneId *string `pulumi:"zoneId"`
 }
 
 type OriginGroupState struct {
-	// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
-	ConfigurationType pulumi.StringPtrInput
+	// Origin site group creation time.
+	CreateTime pulumi.StringPtrInput
+	// Back-to-origin Host Header, it only takes effect when type = HTTP is passed in. The rule engine modifies the Host Header configuration priority to be higher than the Host Header of the origin site group.
+	HostHeader pulumi.StringPtrInput
+	// OriginGroup Name.
+	Name pulumi.StringPtrInput
 	// OriginGroup ID.
 	OriginGroupId pulumi.StringPtrInput
-	// OriginGroup Name.
-	OriginGroupName pulumi.StringPtrInput
 	// Origin site records.
-	OriginRecords OriginGroupOriginRecordArrayInput
-	// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
-	OriginType pulumi.StringPtrInput
-	// Last modification date.
+	Records OriginGroupRecordArrayInput
+	// List of referenced instances of the origin site group.
+	References OriginGroupReferenceArrayInput
+	// Type of the origin site. Valid values:
+	Type pulumi.StringPtrInput
+	// Origin site group update time.
 	UpdateTime pulumi.StringPtrInput
 	// Site ID.
 	ZoneId pulumi.StringPtrInput
@@ -196,28 +180,28 @@ func (OriginGroupState) ElementType() reflect.Type {
 }
 
 type originGroupArgs struct {
-	// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
-	ConfigurationType string `pulumi:"configurationType"`
+	// Back-to-origin Host Header, it only takes effect when type = HTTP is passed in. The rule engine modifies the Host Header configuration priority to be higher than the Host Header of the origin site group.
+	HostHeader *string `pulumi:"hostHeader"`
 	// OriginGroup Name.
-	OriginGroupName string `pulumi:"originGroupName"`
+	Name *string `pulumi:"name"`
 	// Origin site records.
-	OriginRecords []OriginGroupOriginRecord `pulumi:"originRecords"`
-	// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
-	OriginType string `pulumi:"originType"`
+	Records []OriginGroupRecord `pulumi:"records"`
+	// Type of the origin site. Valid values:
+	Type string `pulumi:"type"`
 	// Site ID.
 	ZoneId string `pulumi:"zoneId"`
 }
 
 // The set of arguments for constructing a OriginGroup resource.
 type OriginGroupArgs struct {
-	// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
-	ConfigurationType pulumi.StringInput
+	// Back-to-origin Host Header, it only takes effect when type = HTTP is passed in. The rule engine modifies the Host Header configuration priority to be higher than the Host Header of the origin site group.
+	HostHeader pulumi.StringPtrInput
 	// OriginGroup Name.
-	OriginGroupName pulumi.StringInput
+	Name pulumi.StringPtrInput
 	// Origin site records.
-	OriginRecords OriginGroupOriginRecordArrayInput
-	// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
-	OriginType pulumi.StringInput
+	Records OriginGroupRecordArrayInput
+	// Type of the origin site. Valid values:
+	Type pulumi.StringInput
 	// Site ID.
 	ZoneId pulumi.StringInput
 }
@@ -248,7 +232,7 @@ func (i *OriginGroup) ToOriginGroupOutputWithContext(ctx context.Context) Origin
 // OriginGroupArrayInput is an input type that accepts OriginGroupArray and OriginGroupArrayOutput values.
 // You can construct a concrete instance of `OriginGroupArrayInput` via:
 //
-//          OriginGroupArray{ OriginGroupArgs{...} }
+//	OriginGroupArray{ OriginGroupArgs{...} }
 type OriginGroupArrayInput interface {
 	pulumi.Input
 
@@ -273,7 +257,7 @@ func (i OriginGroupArray) ToOriginGroupArrayOutputWithContext(ctx context.Contex
 // OriginGroupMapInput is an input type that accepts OriginGroupMap and OriginGroupMapOutput values.
 // You can construct a concrete instance of `OriginGroupMapInput` via:
 //
-//          OriginGroupMap{ "key": OriginGroupArgs{...} }
+//	OriginGroupMap{ "key": OriginGroupArgs{...} }
 type OriginGroupMapInput interface {
 	pulumi.Input
 
@@ -309,9 +293,19 @@ func (o OriginGroupOutput) ToOriginGroupOutputWithContext(ctx context.Context) O
 	return o
 }
 
-// Type of the origin group, this field should be set when `OriginType` is self, otherwise leave it empty. Valid values: `area`: select an origin by using Geo info of the client IP and `Area` field in Records; `weight`: weighted select an origin by using `Weight` field in Records; `proto`: config by HTTP protocol.
-func (o OriginGroupOutput) ConfigurationType() pulumi.StringOutput {
-	return o.ApplyT(func(v *OriginGroup) pulumi.StringOutput { return v.ConfigurationType }).(pulumi.StringOutput)
+// Origin site group creation time.
+func (o OriginGroupOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v *OriginGroup) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Back-to-origin Host Header, it only takes effect when type = HTTP is passed in. The rule engine modifies the Host Header configuration priority to be higher than the Host Header of the origin site group.
+func (o OriginGroupOutput) HostHeader() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *OriginGroup) pulumi.StringPtrOutput { return v.HostHeader }).(pulumi.StringPtrOutput)
+}
+
+// OriginGroup Name.
+func (o OriginGroupOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v *OriginGroup) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
 // OriginGroup ID.
@@ -319,22 +313,22 @@ func (o OriginGroupOutput) OriginGroupId() pulumi.StringOutput {
 	return o.ApplyT(func(v *OriginGroup) pulumi.StringOutput { return v.OriginGroupId }).(pulumi.StringOutput)
 }
 
-// OriginGroup Name.
-func (o OriginGroupOutput) OriginGroupName() pulumi.StringOutput {
-	return o.ApplyT(func(v *OriginGroup) pulumi.StringOutput { return v.OriginGroupName }).(pulumi.StringOutput)
-}
-
 // Origin site records.
-func (o OriginGroupOutput) OriginRecords() OriginGroupOriginRecordArrayOutput {
-	return o.ApplyT(func(v *OriginGroup) OriginGroupOriginRecordArrayOutput { return v.OriginRecords }).(OriginGroupOriginRecordArrayOutput)
+func (o OriginGroupOutput) Records() OriginGroupRecordArrayOutput {
+	return o.ApplyT(func(v *OriginGroup) OriginGroupRecordArrayOutput { return v.Records }).(OriginGroupRecordArrayOutput)
 }
 
-// Type of the origin site. Valid values: `self`: self-build website; `cos`: tencent cos; `thirdParty`: third party cos.
-func (o OriginGroupOutput) OriginType() pulumi.StringOutput {
-	return o.ApplyT(func(v *OriginGroup) pulumi.StringOutput { return v.OriginType }).(pulumi.StringOutput)
+// List of referenced instances of the origin site group.
+func (o OriginGroupOutput) References() OriginGroupReferenceArrayOutput {
+	return o.ApplyT(func(v *OriginGroup) OriginGroupReferenceArrayOutput { return v.References }).(OriginGroupReferenceArrayOutput)
 }
 
-// Last modification date.
+// Type of the origin site. Valid values:
+func (o OriginGroupOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v *OriginGroup) pulumi.StringOutput { return v.Type }).(pulumi.StringOutput)
+}
+
+// Origin site group update time.
 func (o OriginGroupOutput) UpdateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *OriginGroup) pulumi.StringOutput { return v.UpdateTime }).(pulumi.StringOutput)
 }

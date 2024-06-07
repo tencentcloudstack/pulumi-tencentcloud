@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
 {
 
-    public sealed class ManageReplicationOperationRuleFilterArgs : Pulumi.ResourceArgs
+    public sealed class ManageReplicationOperationRuleFilterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// type (name, tag, and resource).
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
         public ManageReplicationOperationRuleFilterArgs()
         {
         }
+        public static new ManageReplicationOperationRuleFilterArgs Empty => new ManageReplicationOperationRuleFilterArgs();
     }
 }

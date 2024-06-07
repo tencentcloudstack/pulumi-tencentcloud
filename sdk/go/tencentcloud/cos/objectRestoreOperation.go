@@ -7,37 +7,43 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to restore object
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cos.NewObjectRestoreOperation(ctx, "objectRestore", &Cos.ObjectRestoreOperationArgs{
-// 			Bucket: pulumi.String("keep-test-1308919341"),
-// 			Days:   pulumi.Int(2),
-// 			Key:    pulumi.String("test-restore.txt"),
-// 			Tier:   pulumi.String("Expedited"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cos.NewObjectRestoreOperation(ctx, "objectRestore", &Cos.ObjectRestoreOperationArgs{
+//				Bucket: pulumi.String("keep-test-1308919341"),
+//				Days:   pulumi.Int(2),
+//				Key:    pulumi.String("test-restore.txt"),
+//				Tier:   pulumi.String("Expedited"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ObjectRestoreOperation struct {
 	pulumi.CustomResourceState
 
@@ -77,7 +83,7 @@ func NewObjectRestoreOperation(ctx *pulumi.Context,
 	if args.Tier == nil {
 		return nil, errors.New("invalid value for required argument 'Tier'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ObjectRestoreOperation
 	err := ctx.RegisterResource("tencentcloud:Cos/objectRestoreOperation:ObjectRestoreOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -202,7 +208,7 @@ func (i *ObjectRestoreOperation) ToObjectRestoreOperationOutputWithContext(ctx c
 // ObjectRestoreOperationArrayInput is an input type that accepts ObjectRestoreOperationArray and ObjectRestoreOperationArrayOutput values.
 // You can construct a concrete instance of `ObjectRestoreOperationArrayInput` via:
 //
-//          ObjectRestoreOperationArray{ ObjectRestoreOperationArgs{...} }
+//	ObjectRestoreOperationArray{ ObjectRestoreOperationArgs{...} }
 type ObjectRestoreOperationArrayInput interface {
 	pulumi.Input
 
@@ -227,7 +233,7 @@ func (i ObjectRestoreOperationArray) ToObjectRestoreOperationArrayOutputWithCont
 // ObjectRestoreOperationMapInput is an input type that accepts ObjectRestoreOperationMap and ObjectRestoreOperationMapOutput values.
 // You can construct a concrete instance of `ObjectRestoreOperationMapInput` via:
 //
-//          ObjectRestoreOperationMap{ "key": ObjectRestoreOperationArgs{...} }
+//	ObjectRestoreOperationMap{ "key": ObjectRestoreOperationArgs{...} }
 type ObjectRestoreOperationMapInput interface {
 	pulumi.Input
 
@@ -280,12 +286,12 @@ func (o ObjectRestoreOperationOutput) Key() pulumi.StringOutput {
 
 // when restoring, Tier can be specified as the supported recovery model.
 // There are three recovery models for recovering archived storage type data, which are:
-// - Expedited: quick retrieval mode, and the recovery task can be completed in 1-5 minutes.
-// - Standard: standard retrieval mode. Recovery task is completed within 3-5 hours.
-// - Bulk: batch retrieval mode, and the recovery task is completed within 5-12 hours.
-//   For deep recovery archive storage type data, there are two recovery models, which are:
-// - Standard: standard retrieval mode, recovery time is 12-24 hours.
-// - Bulk: batch retrieval mode, recovery time is 24-48 hours.
+//   - Expedited: quick retrieval mode, and the recovery task can be completed in 1-5 minutes.
+//   - Standard: standard retrieval mode. Recovery task is completed within 3-5 hours.
+//   - Bulk: batch retrieval mode, and the recovery task is completed within 5-12 hours.
+//     For deep recovery archive storage type data, there are two recovery models, which are:
+//   - Standard: standard retrieval mode, recovery time is 12-24 hours.
+//   - Bulk: batch retrieval mode, recovery time is 24-48 hours.
 func (o ObjectRestoreOperationOutput) Tier() pulumi.StringOutput {
 	return o.ApplyT(func(v *ObjectRestoreOperation) pulumi.StringOutput { return v.Tier }).(pulumi.StringOutput)
 }

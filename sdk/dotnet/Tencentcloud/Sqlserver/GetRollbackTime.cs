@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// <summary>
         /// Use this data source to query detailed information of sqlserver rollback_time
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetRollbackTime.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetRollbackTime.InvokeAsync(new Tencentcloud.Sqlserver.GetRollbackTimeArgs
+        ///         Dbs = new[]
         ///         {
-        ///             Dbs = 
-        ///             {
-        ///                 "keep_pubsub_db",
-        ///             },
-        ///             InstanceId = "mssql-qelbzgwf",
-        ///         }));
-        ///     }
+        ///             "keep_pubsub_db",
+        ///         },
+        ///         InstanceId = "mssql-qelbzgwf",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRollbackTimeResult> InvokeAsync(GetRollbackTimeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRollbackTimeResult>("tencentcloud:Sqlserver/getRollbackTime:getRollbackTime", args ?? new GetRollbackTimeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRollbackTimeResult>("tencentcloud:Sqlserver/getRollbackTime:getRollbackTime", args ?? new GetRollbackTimeArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of sqlserver rollback_time
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Sqlserver.GetRollbackTime.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Sqlserver.GetRollbackTime.InvokeAsync(new Tencentcloud.Sqlserver.GetRollbackTimeArgs
+        ///         Dbs = new[]
         ///         {
-        ///             Dbs = 
-        ///             {
-        ///                 "keep_pubsub_db",
-        ///             },
-        ///             InstanceId = "mssql-qelbzgwf",
-        ///         }));
-        ///     }
+        ///             "keep_pubsub_db",
+        ///         },
+        ///         InstanceId = "mssql-qelbzgwf",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRollbackTimeResult> Invoke(GetRollbackTimeInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRollbackTimeResult>("tencentcloud:Sqlserver/getRollbackTime:getRollbackTime", args ?? new GetRollbackTimeInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRollbackTimeResult>("tencentcloud:Sqlserver/getRollbackTime:getRollbackTime", args ?? new GetRollbackTimeInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRollbackTimeArgs : Pulumi.InvokeArgs
+    public sealed class GetRollbackTimeArgs : global::Pulumi.InvokeArgs
     {
         [Input("dbs", required: true)]
         private List<string>? _dbs;
@@ -109,9 +103,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetRollbackTimeArgs()
         {
         }
+        public static new GetRollbackTimeArgs Empty => new GetRollbackTimeArgs();
     }
 
-    public sealed class GetRollbackTimeInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRollbackTimeInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("dbs", required: true)]
         private InputList<string>? _dbs;
@@ -140,6 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public GetRollbackTimeInvokeArgs()
         {
         }
+        public static new GetRollbackTimeInvokeArgs Empty => new GetRollbackTimeInvokeArgs();
     }
 
 

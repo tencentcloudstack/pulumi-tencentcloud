@@ -14,151 +14,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     {
         /// <summary>
         /// Use this data source to query detailed information of dcdb database_tables
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var databaseTables = Output.Create(Tencentcloud.Dcdb.GetDatabaseTables.InvokeAsync(new Tencentcloud.Dcdb.GetDatabaseTablesArgs
-        ///         {
-        ///             Cols = 
-        ///             {
-        ///                 
-        ///                 {
-        ///                     { "col", "" },
-        ///                     { "gt", 
-        ///                     {
-        ///                         ,
-        ///                         ,
-        ///                     } },
-        ///                     { "lt", 
-        ///                     {
-        ///                         ,
-        ///                         ,
-        ///                     } },
-        ///                     { "nil", 
-        ///                     {
-        ///                         ,
-        ///                         ,
-        ///                     } },
-        ///                     { "type", "" },
-        ///                 },
-        ///             },
-        ///             DbName = "",
-        ///             Gt = 
-        ///             {
-        ///                 ,
-        ///                 ,
-        ///                 ,
-        ///             },
-        ///             InstanceId = "dcdbt-ow7t8lmc",
-        ///             Lt = 
-        ///             {
-        ///                 ,
-        ///                 ,
-        ///                 ,
-        ///             },
-        ///             Nil = 
-        ///             {
-        ///                 ,
-        ///                 ,
-        ///                 ,
-        ///             },
-        ///             Table = "",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Task<GetDatabaseTablesResult> InvokeAsync(GetDatabaseTablesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDatabaseTablesResult>("tencentcloud:Dcdb/getDatabaseTables:getDatabaseTables", args ?? new GetDatabaseTablesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDatabaseTablesResult>("tencentcloud:Dcdb/getDatabaseTables:getDatabaseTables", args ?? new GetDatabaseTablesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dcdb database_tables
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var databaseTables = Output.Create(Tencentcloud.Dcdb.GetDatabaseTables.InvokeAsync(new Tencentcloud.Dcdb.GetDatabaseTablesArgs
-        ///         {
-        ///             Cols = 
-        ///             {
-        ///                 
-        ///                 {
-        ///                     { "col", "" },
-        ///                     { "gt", 
-        ///                     {
-        ///                         ,
-        ///                         ,
-        ///                     } },
-        ///                     { "lt", 
-        ///                     {
-        ///                         ,
-        ///                         ,
-        ///                     } },
-        ///                     { "nil", 
-        ///                     {
-        ///                         ,
-        ///                         ,
-        ///                     } },
-        ///                     { "type", "" },
-        ///                 },
-        ///             },
-        ///             DbName = "",
-        ///             Gt = 
-        ///             {
-        ///                 ,
-        ///                 ,
-        ///                 ,
-        ///             },
-        ///             InstanceId = "dcdbt-ow7t8lmc",
-        ///             Lt = 
-        ///             {
-        ///                 ,
-        ///                 ,
-        ///                 ,
-        ///             },
-        ///             Nil = 
-        ///             {
-        ///                 ,
-        ///                 ,
-        ///                 ,
-        ///             },
-        ///             Table = "",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Output<GetDatabaseTablesResult> Invoke(GetDatabaseTablesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDatabaseTablesResult>("tencentcloud:Dcdb/getDatabaseTables:getDatabaseTables", args ?? new GetDatabaseTablesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDatabaseTablesResult>("tencentcloud:Dcdb/getDatabaseTables:getDatabaseTables", args ?? new GetDatabaseTablesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDatabaseTablesArgs : Pulumi.InvokeArgs
+    public sealed class GetDatabaseTablesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Database name, obtained through the DescribeDatabases api.
@@ -187,9 +55,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetDatabaseTablesArgs()
         {
         }
+        public static new GetDatabaseTablesArgs Empty => new GetDatabaseTablesArgs();
     }
 
-    public sealed class GetDatabaseTablesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDatabaseTablesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Database name, obtained through the DescribeDatabases api.
@@ -218,6 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetDatabaseTablesInvokeArgs()
         {
         }
+        public static new GetDatabaseTablesInvokeArgs Empty => new GetDatabaseTablesInvokeArgs();
     }
 
 

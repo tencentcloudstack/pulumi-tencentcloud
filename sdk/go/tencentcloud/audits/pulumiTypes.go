@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type GetInstanceAuditList struct {
 	// Indicate whether audit start logging or not.
@@ -26,7 +29,7 @@ type GetInstanceAuditList struct {
 // GetInstanceAuditListInput is an input type that accepts GetInstanceAuditListArgs and GetInstanceAuditListOutput values.
 // You can construct a concrete instance of `GetInstanceAuditListInput` via:
 //
-//          GetInstanceAuditListArgs{...}
+//	GetInstanceAuditListArgs{...}
 type GetInstanceAuditListInput interface {
 	pulumi.Input
 
@@ -62,7 +65,7 @@ func (i GetInstanceAuditListArgs) ToGetInstanceAuditListOutputWithContext(ctx co
 // GetInstanceAuditListArrayInput is an input type that accepts GetInstanceAuditListArray and GetInstanceAuditListArrayOutput values.
 // You can construct a concrete instance of `GetInstanceAuditListArrayInput` via:
 //
-//          GetInstanceAuditListArray{ GetInstanceAuditListArgs{...} }
+//	GetInstanceAuditListArray{ GetInstanceAuditListArgs{...} }
 type GetInstanceAuditListArrayInput interface {
 	pulumi.Input
 

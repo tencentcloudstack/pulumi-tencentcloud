@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query the list of backup databases.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var @default = Tencentcloud.Mysql.GetBackupList.Invoke(new()
         ///     {
-        ///         var @default = Output.Create(Tencentcloud.Mysql.GetBackupList.InvokeAsync(new Tencentcloud.Mysql.GetBackupListArgs
-        ///         {
-        ///             MaxNumber = 10,
-        ///             MysqlId = "terraform-test-local-database",
-        ///             ResultOutputFile = "mytestpath",
-        ///         }));
-        ///     }
+        ///         MaxNumber = 10,
+        ///         MysqlId = "terraform-test-local-database",
+        ///         ResultOutputFile = "mytestpath",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBackupListResult> InvokeAsync(GetBackupListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBackupListResult>("tencentcloud:Mysql/getBackupList:getBackupList", args ?? new GetBackupListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupListResult>("tencentcloud:Mysql/getBackupList:getBackupList", args ?? new GetBackupListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query the list of backup databases.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var @default = Tencentcloud.Mysql.GetBackupList.Invoke(new()
         ///     {
-        ///         var @default = Output.Create(Tencentcloud.Mysql.GetBackupList.InvokeAsync(new Tencentcloud.Mysql.GetBackupListArgs
-        ///         {
-        ///             MaxNumber = 10,
-        ///             MysqlId = "terraform-test-local-database",
-        ///             ResultOutputFile = "mytestpath",
-        ///         }));
-        ///     }
+        ///         MaxNumber = 10,
+        ///         MysqlId = "terraform-test-local-database",
+        ///         ResultOutputFile = "mytestpath",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBackupListResult> Invoke(GetBackupListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBackupListResult>("tencentcloud:Mysql/getBackupList:getBackupList", args ?? new GetBackupListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBackupListResult>("tencentcloud:Mysql/getBackupList:getBackupList", args ?? new GetBackupListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBackupListArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The latest files to list, rang from 1 to 10000. And the default value is `10`.
@@ -99,9 +93,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetBackupListArgs()
         {
         }
+        public static new GetBackupListArgs Empty => new GetBackupListArgs();
     }
 
-    public sealed class GetBackupListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBackupListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The latest files to list, rang from 1 to 10000. And the default value is `10`.
@@ -124,6 +119,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetBackupListInvokeArgs()
         {
         }
+        public static new GetBackupListInvokeArgs Empty => new GetBackupListInvokeArgs();
     }
 
 

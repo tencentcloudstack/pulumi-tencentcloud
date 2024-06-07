@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
 {
 
-    public sealed class ApiResponseErrorCodeGetArgs : Pulumi.ResourceArgs
+    public sealed class ApiResponseErrorCodeGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Custom response configuration error code.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Inputs
         public ApiResponseErrorCodeGetArgs()
         {
         }
+        public static new ApiResponseErrorCodeGetArgs Empty => new ApiResponseErrorCodeGetArgs();
     }
 }

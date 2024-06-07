@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const pullStreamTask = new tencentcloud.Css.PullStreamTask("pull_stream_task", {
+ * const pullStreamTask = new tencentcloud.css.PullStreamTask("pullStreamTask", {
  *     appName: "app_name",
  *     comment: "comment.",
  *     domainName: "domain_name",
@@ -26,13 +28,14 @@ import * as utilities from "../utilities";
  *     streamName: "stream_name",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css pull_stream_task can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/pullStreamTask:PullStreamTask pull_stream_task pullStreamTask_id
+ * $ pulumi import tencentcloud:Css/pullStreamTask:PullStreamTask pull_stream_task pullStreamTask_id
  * ```
  */
 export class PullStreamTask extends pulumi.CustomResource {

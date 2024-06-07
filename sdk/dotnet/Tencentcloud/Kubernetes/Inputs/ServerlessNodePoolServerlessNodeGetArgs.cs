@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class ServerlessNodePoolServerlessNodeGetArgs : Pulumi.ResourceArgs
+    public sealed class ServerlessNodePoolServerlessNodeGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// display name of serverless node.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public ServerlessNodePoolServerlessNodeGetArgs()
         {
         }
+        public static new ServerlessNodePoolServerlessNodeGetArgs Empty => new ServerlessNodePoolServerlessNodeGetArgs();
     }
 }

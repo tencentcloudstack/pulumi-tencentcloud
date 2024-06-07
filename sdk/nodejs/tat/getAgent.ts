@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,26 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const agent = pulumi.output(tencentcloud.Tat.getAgent({
- *     // instance_ids = ["ins-f9jr4bd2"]
+ * const agent = tencentcloud.Tat.getAgent({
  *     filters: [{
  *         name: "environment",
  *         values: ["Linux"],
  *     }],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAgent(args?: GetAgentArgs, opts?: pulumi.InvokeOptions): Promise<GetAgentResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tat/getAgent:getAgent", {
         "filters": args.filters,
         "instanceIds": args.instanceIds,
@@ -71,9 +70,27 @@ export interface GetAgentResult {
     readonly instanceIds?: string[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of tat agent
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const agent = tencentcloud.Tat.getAgent({
+ *     filters: [{
+ *         name: "environment",
+ *         values: ["Linux"],
+ *     }],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAgentOutput(args?: GetAgentOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAgentResult> {
-    return pulumi.output(args).apply(a => getAgent(a, opts))
+    return pulumi.output(args).apply((a: any) => getAgent(a, opts))
 }
 
 /**

@@ -2,15 +2,13 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 export function getVipInstance(args: GetVipInstanceArgs, opts?: pulumi.InvokeOptions): Promise<GetVipInstanceResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tdmq/getVipInstance:getVipInstance", {
         "clusterId": args.clusterId,
         "resultOutputFile": args.resultOutputFile,
@@ -38,9 +36,8 @@ export interface GetVipInstanceResult {
     readonly instanceConfigs: outputs.Tdmq.GetVipInstanceInstanceConfig[];
     readonly resultOutputFile?: string;
 }
-
 export function getVipInstanceOutput(args: GetVipInstanceOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetVipInstanceResult> {
-    return pulumi.output(args).apply(a => getVipInstance(a, opts))
+    return pulumi.output(args).apply((a: any) => getVipInstance(a, opts))
 }
 
 /**

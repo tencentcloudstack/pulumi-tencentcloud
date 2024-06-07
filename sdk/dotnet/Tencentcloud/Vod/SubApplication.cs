@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Vod.SubApplication("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Vod.SubApplication("foo", new Tencentcloud.Vod.SubApplicationArgs
-    ///         {
-    ///             Description = "this is sub application",
-    ///             Status = "On",
-    ///         });
-    ///     }
+    ///         Description = "this is sub application",
+    ///         Status = "On",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// VOD super player config can be imported using the name+, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vod/subApplication:SubApplication foo name+"#"+id
+    /// $ pulumi import tencentcloud:Vod/subApplication:SubApplication foo name+"#"+id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vod/subApplication:SubApplication")]
-    public partial class SubApplication : Pulumi.CustomResource
+    public partial class SubApplication : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The time when the sub application was created.
@@ -113,7 +114,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         }
     }
 
-    public sealed class SubApplicationArgs : Pulumi.ResourceArgs
+    public sealed class SubApplicationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Sub application description.
@@ -136,9 +137,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public SubApplicationArgs()
         {
         }
+        public static new SubApplicationArgs Empty => new SubApplicationArgs();
     }
 
-    public sealed class SubApplicationState : Pulumi.ResourceArgs
+    public sealed class SubApplicationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The time when the sub application was created.
@@ -167,5 +169,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public SubApplicationState()
         {
         }
+        public static new SubApplicationState Empty => new SubApplicationState();
     }
 }

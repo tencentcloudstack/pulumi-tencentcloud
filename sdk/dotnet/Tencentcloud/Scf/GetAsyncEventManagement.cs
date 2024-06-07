@@ -15,72 +15,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// <summary>
         /// Use this data source to query detailed information of scf async_event_management
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var asyncEventManagement = Tencentcloud.Scf.GetAsyncEventManagement.Invoke(new()
         ///     {
-        ///         var asyncEventManagement = Output.Create(Tencentcloud.Scf.GetAsyncEventManagement.InvokeAsync(new Tencentcloud.Scf.GetAsyncEventManagementArgs
-        ///         {
-        ///             FunctionName = "keep-1676351130",
-        ///             Namespace = "default",
-        ///             Order = "ASC",
-        ///             Orderby = "StartTime",
-        ///             Qualifier = "$LATEST",
-        ///         }));
-        ///     }
+        ///         FunctionName = "keep-1676351130",
+        ///         Namespace = "default",
+        ///         Order = "ASC",
+        ///         Orderby = "StartTime",
+        ///         Qualifier = "$LATEST",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAsyncEventManagementResult> InvokeAsync(GetAsyncEventManagementArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAsyncEventManagementResult>("tencentcloud:Scf/getAsyncEventManagement:getAsyncEventManagement", args ?? new GetAsyncEventManagementArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAsyncEventManagementResult>("tencentcloud:Scf/getAsyncEventManagement:getAsyncEventManagement", args ?? new GetAsyncEventManagementArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of scf async_event_management
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var asyncEventManagement = Tencentcloud.Scf.GetAsyncEventManagement.Invoke(new()
         ///     {
-        ///         var asyncEventManagement = Output.Create(Tencentcloud.Scf.GetAsyncEventManagement.InvokeAsync(new Tencentcloud.Scf.GetAsyncEventManagementArgs
-        ///         {
-        ///             FunctionName = "keep-1676351130",
-        ///             Namespace = "default",
-        ///             Order = "ASC",
-        ///             Orderby = "StartTime",
-        ///             Qualifier = "$LATEST",
-        ///         }));
-        ///     }
+        ///         FunctionName = "keep-1676351130",
+        ///         Namespace = "default",
+        ///         Order = "ASC",
+        ///         Orderby = "StartTime",
+        ///         Qualifier = "$LATEST",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAsyncEventManagementResult> Invoke(GetAsyncEventManagementInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAsyncEventManagementResult>("tencentcloud:Scf/getAsyncEventManagement:getAsyncEventManagement", args ?? new GetAsyncEventManagementInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAsyncEventManagementResult>("tencentcloud:Scf/getAsyncEventManagement:getAsyncEventManagement", args ?? new GetAsyncEventManagementInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAsyncEventManagementArgs : Pulumi.InvokeArgs
+    public sealed class GetAsyncEventManagementArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Function name.
@@ -151,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetAsyncEventManagementArgs()
         {
         }
+        public static new GetAsyncEventManagementArgs Empty => new GetAsyncEventManagementArgs();
     }
 
-    public sealed class GetAsyncEventManagementInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAsyncEventManagementInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Function name.
@@ -224,6 +219,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public GetAsyncEventManagementInvokeArgs()
         {
         }
+        public static new GetAsyncEventManagementInvokeArgs Empty => new GetAsyncEventManagementInvokeArgs();
     }
 
 

@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type NotifyRoutes struct {
@@ -35,7 +36,7 @@ func NewNotifyRoutes(ctx *pulumi.Context,
 	if args.RouteTableId == nil {
 		return nil, errors.New("invalid value for required argument 'RouteTableId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource NotifyRoutes
 	err := ctx.RegisterResource("tencentcloud:Vpc/notifyRoutes:NotifyRoutes", name, args, &resource, opts...)
 	if err != nil {
@@ -120,7 +121,7 @@ func (i *NotifyRoutes) ToNotifyRoutesOutputWithContext(ctx context.Context) Noti
 // NotifyRoutesArrayInput is an input type that accepts NotifyRoutesArray and NotifyRoutesArrayOutput values.
 // You can construct a concrete instance of `NotifyRoutesArrayInput` via:
 //
-//          NotifyRoutesArray{ NotifyRoutesArgs{...} }
+//	NotifyRoutesArray{ NotifyRoutesArgs{...} }
 type NotifyRoutesArrayInput interface {
 	pulumi.Input
 
@@ -145,7 +146,7 @@ func (i NotifyRoutesArray) ToNotifyRoutesArrayOutputWithContext(ctx context.Cont
 // NotifyRoutesMapInput is an input type that accepts NotifyRoutesMap and NotifyRoutesMapOutput values.
 // You can construct a concrete instance of `NotifyRoutesMapInput` via:
 //
-//          NotifyRoutesMap{ "key": NotifyRoutesArgs{...} }
+//	NotifyRoutesMap{ "key": NotifyRoutesArgs{...} }
 type NotifyRoutesMapInput interface {
 	pulumi.Input
 

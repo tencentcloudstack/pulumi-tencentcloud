@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const groupOffsets = pulumi.output(tencentcloud.Ckafka.getGroupOffsets({
+ * const groupOffsets = tencentcloud.Ckafka.getGroupOffsets({
  *     group: "xxxxxx",
  *     instanceId: "ckafka-xxxxxx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getGroupOffsets(args: GetGroupOffsetsArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupOffsetsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ckafka/getGroupOffsets:getGroupOffsets", {
         "group": args.group,
         "instanceId": args.instanceId,
@@ -79,9 +79,25 @@ export interface GetGroupOffsetsResult {
     readonly topicLists: outputs.Ckafka.GetGroupOffsetsTopicList[];
     readonly topics?: string[];
 }
-
+/**
+ * Use this data source to query detailed information of ckafka groupOffsets
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const groupOffsets = tencentcloud.Ckafka.getGroupOffsets({
+ *     group: "xxxxxx",
+ *     instanceId: "ckafka-xxxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getGroupOffsetsOutput(args: GetGroupOffsetsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGroupOffsetsResult> {
-    return pulumi.output(args).apply(a => getGroupOffsets(a, opts))
+    return pulumi.output(args).apply((a: any) => getGroupOffsets(a, opts))
 }
 
 /**

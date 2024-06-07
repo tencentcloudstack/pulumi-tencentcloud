@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Inputs
 {
 
-    public sealed class GetProxyGroupsTagSetArgs : Pulumi.InvokeArgs
+    public sealed class GetProxyGroupsTagSetArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Tag Key.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap.Inputs
         public GetProxyGroupsTagSetArgs()
         {
         }
+        public static new GetProxyGroupsTagSetArgs Empty => new GetProxyGroupsTagSetArgs();
     }
 }

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,13 +11,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
  * const logBackups = tencentcloud.Postgresql.getLogBackups({
- *     minFinishTime: `%s`,
- *     maxFinishTime: `%s`,
+ *     minFinishTime: "%s",
+ *     maxFinishTime: "%s",
  *     filters: [{
  *         name: "db-instance-id",
  *         values: [local.pgsql_id],
@@ -25,14 +27,12 @@ import * as utilities from "../utilities";
  *     orderByType: "desc",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getLogBackups(args?: GetLogBackupsArgs, opts?: pulumi.InvokeOptions): Promise<GetLogBackupsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Postgresql/getLogBackups:getLogBackups", {
         "filters": args.filters,
         "maxFinishTime": args.maxFinishTime,
@@ -92,9 +92,31 @@ export interface GetLogBackupsResult {
     readonly orderByType?: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of postgresql logBackups
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const logBackups = tencentcloud.Postgresql.getLogBackups({
+ *     minFinishTime: "%s",
+ *     maxFinishTime: "%s",
+ *     filters: [{
+ *         name: "db-instance-id",
+ *         values: [local.pgsql_id],
+ *     }],
+ *     orderBy: "StartTime",
+ *     orderByType: "desc",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getLogBackupsOutput(args?: GetLogBackupsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetLogBackupsResult> {
-    return pulumi.output(args).apply(a => getLogBackups(a, opts))
+    return pulumi.output(args).apply((a: any) => getLogBackups(a, opts))
 }
 
 /**

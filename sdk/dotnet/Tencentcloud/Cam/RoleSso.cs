@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var foo = new Tencentcloud.Cam.RoleSso("foo", new()
     ///     {
-    ///         var foo = new Tencentcloud.Cam.RoleSso("foo", new Tencentcloud.Cam.RoleSsoArgs
+    ///         ClientIds = new[]
     ///         {
-    ///             ClientIds = 
-    ///             {
-    ///                 "...",
-    ///             },
-    ///             Description = "this is a description",
-    ///             IdentityKey = "...",
-    ///             IdentityUrl = "https://login.microsoftonline.com/.../v2.0",
-    ///         });
-    ///     }
+    ///             "...",
+    ///         },
+    ///         Description = "this is a description",
+    ///         IdentityKey = "...",
+    ///         IdentityUrl = "https://login.microsoftonline.com/.../v2.0",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// CAM-ROLE-SSO can be imported using the `name`, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/roleSso:RoleSso foo "test"
+    /// $ pulumi import tencentcloud:Cam/roleSso:RoleSso foo "test"
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/roleSso:RoleSso")]
-    public partial class RoleSso : Pulumi.CustomResource
+    public partial class RoleSso : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Client ids.
@@ -124,7 +125,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class RoleSsoArgs : Pulumi.ResourceArgs
+    public sealed class RoleSsoArgs : global::Pulumi.ResourceArgs
     {
         [Input("clientIds", required: true)]
         private InputList<string>? _clientIds;
@@ -165,9 +166,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public RoleSsoArgs()
         {
         }
+        public static new RoleSsoArgs Empty => new RoleSsoArgs();
     }
 
-    public sealed class RoleSsoState : Pulumi.ResourceArgs
+    public sealed class RoleSsoState : global::Pulumi.ResourceArgs
     {
         [Input("clientIds")]
         private InputList<string>? _clientIds;
@@ -208,5 +210,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public RoleSsoState()
         {
         }
+        public static new RoleSsoState Empty => new RoleSsoState();
     }
 }

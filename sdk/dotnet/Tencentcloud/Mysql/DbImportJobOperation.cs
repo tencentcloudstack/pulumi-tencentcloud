@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
 {
     [TencentcloudResourceType("tencentcloud:Mysql/dbImportJobOperation:DbImportJobOperation")]
-    public partial class DbImportJobOperation : Pulumi.CustomResource
+    public partial class DbImportJobOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The request ID of the asynchronous task.
@@ -101,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         }
     }
 
-    public sealed class DbImportJobOperationArgs : Pulumi.ResourceArgs
+    public sealed class DbImportJobOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The name of the imported target database, if it is not passed, it means that no database is specified.
@@ -143,9 +143,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public DbImportJobOperationArgs()
         {
         }
+        public static new DbImportJobOperationArgs Empty => new DbImportJobOperationArgs();
     }
 
-    public sealed class DbImportJobOperationState : Pulumi.ResourceArgs
+    public sealed class DbImportJobOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The request ID of the asynchronous task.
@@ -193,5 +194,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public DbImportJobOperationState()
         {
         }
+        public static new DbImportJobOperationState Empty => new DbImportJobOperationState();
     }
 }

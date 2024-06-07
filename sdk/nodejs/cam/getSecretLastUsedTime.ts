@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const secretLastUsedTime = pulumi.output(tencentcloud.Cam.getSecretLastUsedTime({
+ * const secretLastUsedTime = tencentcloud.Cam.getSecretLastUsedTime({
  *     secretIdLists: ["xxxx"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getSecretLastUsedTime(args: GetSecretLastUsedTimeArgs, opts?: pulumi.InvokeOptions): Promise<GetSecretLastUsedTimeResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cam/getSecretLastUsedTime:getSecretLastUsedTime", {
         "resultOutputFile": args.resultOutputFile,
         "secretIdLists": args.secretIdLists,
@@ -60,9 +60,24 @@ export interface GetSecretLastUsedTimeResult {
     readonly secretIdLastUsedRows: outputs.Cam.GetSecretLastUsedTimeSecretIdLastUsedRow[];
     readonly secretIdLists: string[];
 }
-
+/**
+ * Use this data source to query detailed information of cam secretLastUsedTime
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const secretLastUsedTime = tencentcloud.Cam.getSecretLastUsedTime({
+ *     secretIdLists: ["xxxx"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getSecretLastUsedTimeOutput(args: GetSecretLastUsedTimeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSecretLastUsedTimeResult> {
-    return pulumi.output(args).apply(a => getSecretLastUsedTime(a, opts))
+    return pulumi.output(args).apply((a: any) => getSecretLastUsedTime(a, opts))
 }
 
 /**

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneOwnershipVerificationDnsVerificationGetArgs : Pulumi.ResourceArgs
+    public sealed class ZoneOwnershipVerificationDnsVerificationGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Record type.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneOwnershipVerificationDnsVerificationGetArgs()
         {
         }
+        public static new ZoneOwnershipVerificationDnsVerificationGetArgs Empty => new ZoneOwnershipVerificationDnsVerificationGetArgs();
     }
 }

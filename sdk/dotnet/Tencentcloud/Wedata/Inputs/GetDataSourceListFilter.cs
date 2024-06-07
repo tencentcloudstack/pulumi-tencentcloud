@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
 {
 
-    public sealed class GetDataSourceListFilterArgs : Pulumi.InvokeArgs
+    public sealed class GetDataSourceListFilterArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Filter name.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         public GetDataSourceListFilterArgs()
         {
         }
+        public static new GetDataSourceListFilterArgs Empty => new GetDataSourceListFilterArgs();
     }
 }

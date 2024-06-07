@@ -14,8 +14,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq.Outputs
     [OutputType]
     public sealed class GetVipInstanceInstanceConfigNodeDistributionResult
     {
+        /// <summary>
+        /// Number of nodes.
+        /// </summary>
         public readonly int NodeCount;
+        /// <summary>
+        /// Availability zone id.
+        /// </summary>
         public readonly string ZoneId;
+        /// <summary>
+        /// Availability zone.
+        /// </summary>
         public readonly string ZoneName;
 
         [OutputConstructor]

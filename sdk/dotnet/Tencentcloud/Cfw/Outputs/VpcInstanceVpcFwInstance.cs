@@ -18,6 +18,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw.Outputs
         /// Deploy regional information.
         /// </summary>
         public readonly Outputs.VpcInstanceVpcFwInstanceFwDeploy FwDeploy;
+        /// <summary>
+        /// Firewall instance ID (passed in editing scenario).
+        /// </summary>
         public readonly string? FwInsId;
         /// <summary>
         /// Firewall instance name.

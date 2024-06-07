@@ -34,6 +34,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
         /// Whether to enable the inventory. true or false.
         /// </summary>
         public readonly string IsEnabled;
+        /// <summary>
+        /// Analysis items to include in the inventory result	.
+        /// </summary>
         public readonly ImmutableArray<Outputs.GetBucketInventorysInventoryOptionalFieldResult> OptionalFields;
         /// <summary>
         /// Inventory job cycle.

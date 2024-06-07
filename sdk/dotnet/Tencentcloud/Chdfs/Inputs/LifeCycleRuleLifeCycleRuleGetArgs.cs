@@ -11,11 +11,17 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs.Inputs
 {
 
-    public sealed class LifeCycleRuleLifeCycleRuleGetArgs : Pulumi.ResourceArgs
+    public sealed class LifeCycleRuleLifeCycleRuleGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// rule create time.
+        /// </summary>
         [Input("createTime")]
         public Input<string>? CreateTime { get; set; }
 
+        /// <summary>
+        /// single rule id.
+        /// </summary>
         [Input("lifeCycleRuleId")]
         public Input<int>? LifeCycleRuleId { get; set; }
 
@@ -52,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs.Inputs
         public LifeCycleRuleLifeCycleRuleGetArgs()
         {
         }
+        public static new LifeCycleRuleLifeCycleRuleGetArgs Empty => new LifeCycleRuleLifeCycleRuleGetArgs();
     }
 }

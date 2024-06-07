@@ -9,23 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const whitelist = new tencentcloud.Rum.Whitelist("whitelist", {
+ * const whitelist = new tencentcloud.rum.Whitelist("whitelist", {
  *     instanceId: "rum-pasZKEI3RLgakj",
  *     remark: "white list remark",
  *     whitelistUin: "20221122",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * rum whitelist can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Rum/whitelist:Whitelist whitelist whitelist_id
+ * $ pulumi import tencentcloud:Rum/whitelist:Whitelist whitelist whitelist_id
  * ```
  */
 export class Whitelist extends pulumi.CustomResource {

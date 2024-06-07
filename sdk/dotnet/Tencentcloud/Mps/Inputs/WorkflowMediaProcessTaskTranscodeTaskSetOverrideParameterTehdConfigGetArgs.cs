@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterTehdConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterTehdConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The upper limit of the video bit rate, which is valid when the Type specifies the ultra-fast HD type.Do not fill in or fill in 0 means that there is no upper limit on the video bit rate.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterTehdConfigGetArgs()
         {
         }
+        public static new WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterTehdConfigGetArgs Empty => new WorkflowMediaProcessTaskTranscodeTaskSetOverrideParameterTehdConfigGetArgs();
     }
 }

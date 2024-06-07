@@ -22,9 +22,12 @@ REQ_CLIENT_LDFLAG := github.com/tencentcloudstack/terraform-provider-tencentclou
 OS := $(shell uname)
 EMPTY_TO_AVOID_SED := ""
 
+PULUMI_SKIP_ERROR := true
+
 prepare::
 	@if test -z "${NAME}"; then echo "NAME not set"; exit 1; fi
 	@if test -z "${REPOSITORY}"; then echo "REPOSITORY not set"; exit 1; fi
+	@if test -z "${ORG}"; then echo "ORG not set"; exit 1; fi
 	@if test ! -d "provider/cmd/pulumi-tfgen-x${EMPTY_TO_AVOID_SED}yz"; then "Project already prepared"; exit 1; fi
 
 	mv "provider/cmd/pulumi-tfgen-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-tfgen-${NAME}
@@ -33,12 +36,14 @@ prepare::
 	if [[ "${OS}" != "Darwin" ]]; then \
 		sed -i 's,github.com/tencentcloudstack/pulumi-tencentcloud,${REPOSITORY},g' provider/go.mod; \
 		find ./ ! -path './.git/*' -type f -exec sed -i 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
+		find ./ ! -path './.git/*' -type f -exec sed -i 's/[a]bc/${ORG}/g' {} \; &> /dev/null; \
 	fi
 
 	# In MacOS the -i parameter needs an empty string to execute in place.
 	if [[ "${OS}" == "Darwin" ]]; then \
 		sed -i '' 's,github.com/tencentcloudstack/pulumi-tencentcloud,${REPOSITORY},g' provider/go.mod; \
 		find ./ ! -path './.git/*' -type f -exec sed -i '' 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
+		find ./ ! -path './.git/*' -type f -exec sed -i '' 's/[a]bc/${ORG}/g' {} \; &> /dev/null; \
 	fi
 
 .PHONY: development provider build_sdks build_nodejs build_dotnet build_go build_python cleanup
@@ -49,27 +54,32 @@ development:: install_plugins provider lint_provider build_sdks install_sdks cle
 build:: install_plugins provider build_sdks install_sdks
 only_build:: build
 
+tfgen:: export PULUMI_SKIP_MISSING_MAPPING_ERROR := ${PULUMI_SKIP_ERROR}
 tfgen:: install_plugins
 	(cd provider && go build -o $(WORKING_DIR)/bin/${TFGEN} -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION}" ${PROJECT}/${PROVIDER_PATH}/cmd/${TFGEN})
 	$(WORKING_DIR)/bin/${TFGEN} schema --out provider/cmd/${PROVIDER}
 	(cd provider && VERSION=$(VERSION) go generate cmd/${PROVIDER}/main.go)
 
+provider:: export PULUMI_SKIP_MISSING_MAPPING_ERROR := ${PULUMI_SKIP_ERROR}
 provider:: tfgen install_plugins # build the provider binary
 	(cd provider && go build -o $(WORKING_DIR)/bin/${PROVIDER} -ldflags "-X ${PROJECT}/${VERSION_PATH}=${VERSION} -X ${REQ_CLIENT_LDFLAG}" ${PROJECT}/${PROVIDER_PATH}/cmd/${PROVIDER})
 
+build_sdks:: export PULUMI_SKIP_MISSING_MAPPING_ERROR := ${PULUMI_SKIP_ERROR}
 build_sdks:: install_plugins provider build_nodejs build_python build_go build_dotnet # build all the sdks
 
 build_nodejs:: VERSION := $(shell pulumictl get version --language javascript)
+build_nodejs:: export PULUMI_SKIP_MISSING_MAPPING_ERROR := ${PULUMI_SKIP_ERROR}
 build_nodejs:: install_plugins tfgen # build the node sdk
+	rm -rf sdk/nodejs/node_modules # clean node_modules before building
 	$(WORKING_DIR)/bin/$(TFGEN) nodejs --overlays provider/overlays/nodejs --out sdk/nodejs/
 	cd sdk/nodejs/ && \
         yarn install && \
         yarn run tsc && \
-		cp -R scripts/ bin && \
         cp ../../README.md ../../LICENSE package.json yarn.lock ./bin/ && \
 		sed -i.bak -e "s/\$${VERSION}/$(VERSION)/g" ./bin/package.json
 
 build_python:: PYPI_VERSION := $(shell pulumictl get version --language python)
+build_python:: export PULUMI_SKIP_MISSING_MAPPING_ERROR := ${PULUMI_SKIP_ERROR}
 build_python:: install_plugins tfgen # build the python sdk
 	$(WORKING_DIR)/bin/$(TFGEN) python --overlays provider/overlays/python --out sdk/python/
 	cd sdk/python/ && \
@@ -81,13 +91,16 @@ build_python:: install_plugins tfgen # build the python sdk
         cd ./bin && python3 setup.py build sdist
 
 build_dotnet:: DOTNET_VERSION := $(shell pulumictl get version --language dotnet)
+build_dotnet:: export PULUMI_SKIP_MISSING_MAPPING_ERROR := ${PULUMI_SKIP_ERROR}
 build_dotnet:: install_plugins tfgen # build the dotnet sdk
+	@echo "PULUMI_SKIP_MISSING_MAPPING_ERROR: ${PULUMI_SKIP_MISSING_MAPPING_ERROR}"
 	pulumictl get version --language dotnet
 	$(WORKING_DIR)/bin/$(TFGEN) dotnet --overlays provider/overlays/dotnet --out sdk/dotnet/
 	cd sdk/dotnet/ && \
 		echo "${DOTNET_VERSION}" >version.txt && \
         dotnet build /p:Version=${DOTNET_VERSION}
 
+build_go:: export PULUMI_SKIP_MISSING_MAPPING_ERROR := ${PULUMI_SKIP_ERROR}
 build_go:: install_plugins tfgen # build the go sdk
 	$(WORKING_DIR)/bin/$(TFGEN) go --overlays provider/overlays/go --out sdk/go/
 
@@ -100,8 +113,8 @@ cleanup:: # cleans up the temporary directory
 
 help::
 	@grep '^[^.#]\+:\s\+.*#' Makefile | \
- 	sed "s/\(.\+\):\s*\(.*\) #\s*\(.*\)/`printf "\033[93m"`\1`printf "\033[0m"`	\3 [\2]/" | \
- 	expand -t20
+		sed "s/\(.\+\):\s*\(.*\) #\s*\(.*\)/`printf "\033[93m"`\1`printf "\033[0m"`	\3 [\2]/" | \
+		expand -t20
 
 clean::
 	rm -rf sdk/{dotnet,nodejs,go,python}

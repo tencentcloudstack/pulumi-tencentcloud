@@ -18,11 +18,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
     /// tcmq subscribe can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcmq/subscribe:Subscribe subscribe subscribe_id
+    /// $ pulumi import tencentcloud:Tcmq/subscribe:Subscribe subscribe subscribe_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcmq/subscribe:Subscribe")]
-    public partial class Subscribe : Pulumi.CustomResource
+    public partial class Subscribe : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The number of `BindingKey` cannot exceed 5, and the length of each `BindingKey` cannot exceed 64 bytes. This field indicates the filtering policy for subscribing to and receiving messages. Each `BindingKey` includes up to 15 dots (namely up to 16 segments).
@@ -123,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         }
     }
 
-    public sealed class SubscribeArgs : Pulumi.ResourceArgs
+    public sealed class SubscribeArgs : global::Pulumi.ResourceArgs
     {
         [Input("bindingKeys")]
         private InputList<string>? _bindingKeys;
@@ -200,9 +200,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         public SubscribeArgs()
         {
         }
+        public static new SubscribeArgs Empty => new SubscribeArgs();
     }
 
-    public sealed class SubscribeState : Pulumi.ResourceArgs
+    public sealed class SubscribeState : global::Pulumi.ResourceArgs
     {
         [Input("bindingKeys")]
         private InputList<string>? _bindingKeys;
@@ -279,5 +280,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         public SubscribeState()
         {
         }
+        public static new SubscribeState Empty => new SubscribeState();
     }
 }

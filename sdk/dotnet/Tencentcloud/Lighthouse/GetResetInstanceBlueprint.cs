@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// <summary>
         /// Use this data source to query detailed information of lighthouse reset_instance_blueprint
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var resetInstanceBlueprint = Tencentcloud.Lighthouse.GetResetInstanceBlueprint.Invoke(new()
         ///     {
-        ///         var resetInstanceBlueprint = Output.Create(Tencentcloud.Lighthouse.GetResetInstanceBlueprint.InvokeAsync(new Tencentcloud.Lighthouse.GetResetInstanceBlueprintArgs
-        ///         {
-        ///             InstanceId = "lhins-123456",
-        ///             Limit = 20,
-        ///             Offset = 0,
-        ///         }));
-        ///     }
+        ///         InstanceId = "lhins-123456",
+        ///         Limit = 20,
+        ///         Offset = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetResetInstanceBlueprintResult> InvokeAsync(GetResetInstanceBlueprintArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetResetInstanceBlueprintResult>("tencentcloud:Lighthouse/getResetInstanceBlueprint:getResetInstanceBlueprint", args ?? new GetResetInstanceBlueprintArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetResetInstanceBlueprintResult>("tencentcloud:Lighthouse/getResetInstanceBlueprint:getResetInstanceBlueprint", args ?? new GetResetInstanceBlueprintArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of lighthouse reset_instance_blueprint
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var resetInstanceBlueprint = Tencentcloud.Lighthouse.GetResetInstanceBlueprint.Invoke(new()
         ///     {
-        ///         var resetInstanceBlueprint = Output.Create(Tencentcloud.Lighthouse.GetResetInstanceBlueprint.InvokeAsync(new Tencentcloud.Lighthouse.GetResetInstanceBlueprintArgs
-        ///         {
-        ///             InstanceId = "lhins-123456",
-        ///             Limit = 20,
-        ///             Offset = 0,
-        ///         }));
-        ///     }
+        ///         InstanceId = "lhins-123456",
+        ///         Limit = 20,
+        ///         Offset = 0,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetResetInstanceBlueprintResult> Invoke(GetResetInstanceBlueprintInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetResetInstanceBlueprintResult>("tencentcloud:Lighthouse/getResetInstanceBlueprint:getResetInstanceBlueprint", args ?? new GetResetInstanceBlueprintInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetResetInstanceBlueprintResult>("tencentcloud:Lighthouse/getResetInstanceBlueprint:getResetInstanceBlueprint", args ?? new GetResetInstanceBlueprintInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetResetInstanceBlueprintArgs : Pulumi.InvokeArgs
+    public sealed class GetResetInstanceBlueprintArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetResetInstanceBlueprintFilterArgs>? _filters;
@@ -117,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetResetInstanceBlueprintArgs()
         {
         }
+        public static new GetResetInstanceBlueprintArgs Empty => new GetResetInstanceBlueprintArgs();
     }
 
-    public sealed class GetResetInstanceBlueprintInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetResetInstanceBlueprintInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetResetInstanceBlueprintFilterInputArgs>? _filters;
@@ -160,6 +155,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         public GetResetInstanceBlueprintInvokeArgs()
         {
         }
+        public static new GetResetInstanceBlueprintInvokeArgs Empty => new GetResetInstanceBlueprintInvokeArgs();
     }
 
 

@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Kms.OverwriteWhiteBoxDeviceFingerprints("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Kms.OverwriteWhiteBoxDeviceFingerprints("example", new Tencentcloud.Kms.OverwriteWhiteBoxDeviceFingerprintsArgs
-    ///         {
-    ///             KeyId = "23e80852-1e38-11e9-b129-5cb9019b4b01",
-    ///         });
-    ///     }
+    ///         KeyId = "23e80852-1e38-11e9-b129-5cb9019b4b01",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kms/overwriteWhiteBoxDeviceFingerprints:OverwriteWhiteBoxDeviceFingerprints")]
-    public partial class OverwriteWhiteBoxDeviceFingerprints : Pulumi.CustomResource
+    public partial class OverwriteWhiteBoxDeviceFingerprints : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Device fingerprint list.
@@ -92,7 +93,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         }
     }
 
-    public sealed class OverwriteWhiteBoxDeviceFingerprintsArgs : Pulumi.ResourceArgs
+    public sealed class OverwriteWhiteBoxDeviceFingerprintsArgs : global::Pulumi.ResourceArgs
     {
         [Input("deviceFingerprints")]
         private InputList<Inputs.OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintArgs>? _deviceFingerprints;
@@ -115,9 +116,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public OverwriteWhiteBoxDeviceFingerprintsArgs()
         {
         }
+        public static new OverwriteWhiteBoxDeviceFingerprintsArgs Empty => new OverwriteWhiteBoxDeviceFingerprintsArgs();
     }
 
-    public sealed class OverwriteWhiteBoxDeviceFingerprintsState : Pulumi.ResourceArgs
+    public sealed class OverwriteWhiteBoxDeviceFingerprintsState : global::Pulumi.ResourceArgs
     {
         [Input("deviceFingerprints")]
         private InputList<Inputs.OverwriteWhiteBoxDeviceFingerprintsDeviceFingerprintGetArgs>? _deviceFingerprints;
@@ -140,5 +142,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         public OverwriteWhiteBoxDeviceFingerprintsState()
         {
         }
+        public static new OverwriteWhiteBoxDeviceFingerprintsState Empty => new OverwriteWhiteBoxDeviceFingerprintsState();
     }
 }

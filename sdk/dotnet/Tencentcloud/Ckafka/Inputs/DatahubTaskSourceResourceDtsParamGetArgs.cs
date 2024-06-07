@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskSourceResourceDtsParamGetArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskSourceResourceDtsParamGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Dts consumer group Id.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskSourceResourceDtsParamGetArgs()
         {
         }
+        public static new DatahubTaskSourceResourceDtsParamGetArgs Empty => new DatahubTaskSourceResourceDtsParamGetArgs();
     }
 }

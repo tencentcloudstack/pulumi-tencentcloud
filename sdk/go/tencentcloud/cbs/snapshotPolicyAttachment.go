@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a CBS snapshot policy attachment resource.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cbs.NewSnapshotPolicyAttachment(ctx, "foo", &Cbs.SnapshotPolicyAttachmentArgs{
-// 			StorageId:        pulumi.Any(tencentcloud_cbs_storage.Foo.Id),
-// 			SnapshotPolicyId: pulumi.Any(tencentcloud_cbs_snapshot_policy.Policy.Id),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cbs.NewSnapshotPolicyAttachment(ctx, "foo", &Cbs.SnapshotPolicyAttachmentArgs{
+//				StorageId:        pulumi.Any(tencentcloud_cbs_storage.Foo.Id),
+//				SnapshotPolicyId: pulumi.Any(tencentcloud_cbs_snapshot_policy.Policy.Id),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type SnapshotPolicyAttachment struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewSnapshotPolicyAttachment(ctx *pulumi.Context,
 	if args.StorageId == nil {
 		return nil, errors.New("invalid value for required argument 'StorageId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SnapshotPolicyAttachment
 	err := ctx.RegisterResource("tencentcloud:Cbs/snapshotPolicyAttachment:SnapshotPolicyAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *SnapshotPolicyAttachment) ToSnapshotPolicyAttachmentOutputWithContext(c
 // SnapshotPolicyAttachmentArrayInput is an input type that accepts SnapshotPolicyAttachmentArray and SnapshotPolicyAttachmentArrayOutput values.
 // You can construct a concrete instance of `SnapshotPolicyAttachmentArrayInput` via:
 //
-//          SnapshotPolicyAttachmentArray{ SnapshotPolicyAttachmentArgs{...} }
+//	SnapshotPolicyAttachmentArray{ SnapshotPolicyAttachmentArgs{...} }
 type SnapshotPolicyAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i SnapshotPolicyAttachmentArray) ToSnapshotPolicyAttachmentArrayOutputWith
 // SnapshotPolicyAttachmentMapInput is an input type that accepts SnapshotPolicyAttachmentMap and SnapshotPolicyAttachmentMapOutput values.
 // You can construct a concrete instance of `SnapshotPolicyAttachmentMapInput` via:
 //
-//          SnapshotPolicyAttachmentMap{ "key": SnapshotPolicyAttachmentArgs{...} }
+//	SnapshotPolicyAttachmentMap{ "key": SnapshotPolicyAttachmentArgs{...} }
 type SnapshotPolicyAttachmentMapInput interface {
 	pulumi.Input
 

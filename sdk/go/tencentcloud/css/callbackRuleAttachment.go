@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a css callbackRule
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewCallbackRuleAttachment(ctx, "callbackRule", &Css.CallbackRuleAttachmentArgs{
-// 			AppName:    pulumi.String("live"),
-// 			DomainName: pulumi.String("177154.push.tlivecloud.com"),
-// 			TemplateId: pulumi.Int(434039),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewCallbackRuleAttachment(ctx, "callbackRule", &Css.CallbackRuleAttachmentArgs{
+//				AppName:    pulumi.String("live"),
+//				DomainName: pulumi.String("177154.push.tlivecloud.com"),
+//				TemplateId: pulumi.Int(434039),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // css callback_rule can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/callbackRuleAttachment:CallbackRuleAttachment callback_rule templateId#domainName
+// $ pulumi import tencentcloud:Css/callbackRuleAttachment:CallbackRuleAttachment callback_rule templateId#domainName
 // ```
 type CallbackRuleAttachment struct {
 	pulumi.CustomResourceState
@@ -72,7 +78,7 @@ func NewCallbackRuleAttachment(ctx *pulumi.Context,
 	if args.TemplateId == nil {
 		return nil, errors.New("invalid value for required argument 'TemplateId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CallbackRuleAttachment
 	err := ctx.RegisterResource("tencentcloud:Css/callbackRuleAttachment:CallbackRuleAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -161,7 +167,7 @@ func (i *CallbackRuleAttachment) ToCallbackRuleAttachmentOutputWithContext(ctx c
 // CallbackRuleAttachmentArrayInput is an input type that accepts CallbackRuleAttachmentArray and CallbackRuleAttachmentArrayOutput values.
 // You can construct a concrete instance of `CallbackRuleAttachmentArrayInput` via:
 //
-//          CallbackRuleAttachmentArray{ CallbackRuleAttachmentArgs{...} }
+//	CallbackRuleAttachmentArray{ CallbackRuleAttachmentArgs{...} }
 type CallbackRuleAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -186,7 +192,7 @@ func (i CallbackRuleAttachmentArray) ToCallbackRuleAttachmentArrayOutputWithCont
 // CallbackRuleAttachmentMapInput is an input type that accepts CallbackRuleAttachmentMap and CallbackRuleAttachmentMapOutput values.
 // You can construct a concrete instance of `CallbackRuleAttachmentMapInput` via:
 //
-//          CallbackRuleAttachmentMap{ "key": CallbackRuleAttachmentArgs{...} }
+//	CallbackRuleAttachmentMap{ "key": CallbackRuleAttachmentArgs{...} }
 type CallbackRuleAttachmentMapInput interface {
 	pulumi.Input
 

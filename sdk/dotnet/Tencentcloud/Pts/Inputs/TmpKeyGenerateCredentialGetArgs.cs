@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class TmpKeyGenerateCredentialGetArgs : Pulumi.ResourceArgs
+    public sealed class TmpKeyGenerateCredentialGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Temporary secret ID.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         public TmpKeyGenerateCredentialGetArgs()
         {
         }
+        public static new TmpKeyGenerateCredentialGetArgs Empty => new TmpKeyGenerateCredentialGetArgs();
     }
 }

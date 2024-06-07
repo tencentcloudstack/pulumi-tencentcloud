@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const productQuota = pulumi.output(tencentcloud.Vpc.getProductQuota({
+ * const productQuota = tencentcloud.Vpc.getProductQuota({
  *     product: "vpc",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getProductQuota(args: GetProductQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetProductQuotaResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpc/getProductQuota:getProductQuota", {
         "product": args.product,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetProductQuotaResult {
     readonly productQuotaSets: outputs.Vpc.GetProductQuotaProductQuotaSet[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of vpc productQuota
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const productQuota = tencentcloud.Vpc.getProductQuota({
+ *     product: "vpc",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getProductQuotaOutput(args: GetProductQuotaOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetProductQuotaResult> {
-    return pulumi.output(args).apply(a => getProductQuota(a, opts))
+    return pulumi.output(args).apply((a: any) => getProductQuota(a, opts))
 }
 
 /**

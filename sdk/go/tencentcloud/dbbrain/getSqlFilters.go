@@ -8,49 +8,54 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of dbbrain sqlFilters
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dbbrain"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		sqlFilter, err := Dbbrain.NewSqlFilter(ctx, "sqlFilter", &Dbbrain.SqlFilterArgs{
-// 			InstanceId: pulumi.String("mysql_ins_id"),
-// 			SessionToken: &dbbrain.SqlFilterSessionTokenArgs{
-// 				User:     pulumi.String("user"),
-// 				Password: pulumi.String("password"),
-// 			},
-// 			SqlType:        pulumi.String("SELECT"),
-// 			FilterKey:      pulumi.String("test"),
-// 			MaxConcurrency: pulumi.Int(10),
-// 			Duration:       pulumi.Int(3600),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ = Dbbrain.GetSqlFiltersOutput(ctx, dbbrain.GetSqlFiltersOutputArgs{
-// 			InstanceId: pulumi.String("mysql_ins_id"),
-// 			FilterIds: pulumi.IntArray{
-// 				sqlFilter.FilterId,
-// 			},
-// 		}, nil)
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			sqlFilter, err := Dbbrain.NewSqlFilter(ctx, "sqlFilter", &Dbbrain.SqlFilterArgs{
+//				InstanceId: pulumi.String("mysql_ins_id"),
+//				SessionToken: &dbbrain.SqlFilterSessionTokenArgs{
+//					User:     pulumi.String("user"),
+//					Password: pulumi.String("password"),
+//				},
+//				SqlType:        pulumi.String("SELECT"),
+//				FilterKey:      pulumi.String("test"),
+//				MaxConcurrency: pulumi.Int(10),
+//				Duration:       pulumi.Int(3600),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_ = Dbbrain.GetSqlFiltersOutput(ctx, dbbrain.GetSqlFiltersOutputArgs{
+//				InstanceId: pulumi.String("mysql_ins_id"),
+//				FilterIds: pulumi.IntArray{
+//					sqlFilter.FilterId,
+//				},
+//			}, nil)
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetSqlFilters(ctx *pulumi.Context, args *GetSqlFiltersArgs, opts ...pulumi.InvokeOption) (*GetSqlFiltersResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSqlFiltersResult
 	err := ctx.Invoke("tencentcloud:Dbbrain/getSqlFilters:getSqlFilters", args, &rv, opts...)
 	if err != nil {

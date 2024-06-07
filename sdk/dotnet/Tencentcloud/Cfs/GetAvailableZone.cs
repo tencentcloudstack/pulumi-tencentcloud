@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// <summary>
         /// Use this data source to query detailed information of cfs available_zone
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var availableZone = Output.Create(Tencentcloud.Cfs.GetAvailableZone.InvokeAsync());
-        ///     }
+        ///     var availableZone = Tencentcloud.Cfs.GetAvailableZone.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAvailableZoneResult> InvokeAsync(GetAvailableZoneArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAvailableZoneResult>("tencentcloud:Cfs/getAvailableZone:getAvailableZone", args ?? new GetAvailableZoneArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAvailableZoneResult>("tencentcloud:Cfs/getAvailableZone:getAvailableZone", args ?? new GetAvailableZoneArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cfs available_zone
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var availableZone = Output.Create(Tencentcloud.Cfs.GetAvailableZone.InvokeAsync());
-        ///     }
+        ///     var availableZone = Tencentcloud.Cfs.GetAvailableZone.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAvailableZoneResult> Invoke(GetAvailableZoneInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAvailableZoneResult>("tencentcloud:Cfs/getAvailableZone:getAvailableZone", args ?? new GetAvailableZoneInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAvailableZoneResult>("tencentcloud:Cfs/getAvailableZone:getAvailableZone", args ?? new GetAvailableZoneInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAvailableZoneArgs : Pulumi.InvokeArgs
+    public sealed class GetAvailableZoneArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public GetAvailableZoneArgs()
         {
         }
+        public static new GetAvailableZoneArgs Empty => new GetAvailableZoneArgs();
     }
 
-    public sealed class GetAvailableZoneInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAvailableZoneInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public GetAvailableZoneInvokeArgs()
         {
         }
+        public static new GetAvailableZoneInvokeArgs Empty => new GetAvailableZoneInvokeArgs();
     }
 
 

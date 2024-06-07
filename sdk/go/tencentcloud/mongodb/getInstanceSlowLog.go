@@ -8,39 +8,44 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of mongodb instanceSlowLog
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mongodb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mongodb.GetInstanceSlowLog(ctx, &mongodb.GetInstanceSlowLogArgs{
-// 			EndTime:    "2019-06-02 12:00:00",
-// 			Format:     pulumi.StringRef("json"),
-// 			InstanceId: "cmgo-9d0p6umb",
-// 			SlowMS:     100,
-// 			StartTime:  "2019-06-01 10:00:00",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mongodb.GetInstanceSlowLog(ctx, &mongodb.GetInstanceSlowLogArgs{
+//				EndTime:    "2019-06-02 12:00:00",
+//				Format:     pulumi.StringRef("json"),
+//				InstanceId: "cmgo-9d0p6umb",
+//				SlowMS:     100,
+//				StartTime:  "2019-06-01 10:00:00",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetInstanceSlowLog(ctx *pulumi.Context, args *GetInstanceSlowLogArgs, opts ...pulumi.InvokeOption) (*GetInstanceSlowLogResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceSlowLogResult
 	err := ctx.Invoke("tencentcloud:Mongodb/getInstanceSlowLog:getInstanceSlowLog", args, &rv, opts...)
 	if err != nil {

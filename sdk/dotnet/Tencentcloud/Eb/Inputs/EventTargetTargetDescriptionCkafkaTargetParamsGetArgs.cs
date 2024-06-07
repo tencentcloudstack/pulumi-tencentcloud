@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
 {
 
-    public sealed class EventTargetTargetDescriptionCkafkaTargetParamsGetArgs : Pulumi.ResourceArgs
+    public sealed class EventTargetTargetDescriptionCkafkaTargetParamsGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// retry strategy.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb.Inputs
         public EventTargetTargetDescriptionCkafkaTargetParamsGetArgs()
         {
         }
+        public static new EventTargetTargetDescriptionCkafkaTargetParamsGetArgs Empty => new EventTargetTargetDescriptionCkafkaTargetParamsGetArgs();
     }
 }

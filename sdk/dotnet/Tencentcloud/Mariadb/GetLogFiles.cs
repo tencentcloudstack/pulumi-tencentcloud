@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// <summary>
         /// Use this data source to query detailed information of mariadb log_files
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var logFiles = Tencentcloud.Mariadb.GetLogFiles.Invoke(new()
         ///     {
-        ///         var logFiles = Output.Create(Tencentcloud.Mariadb.GetLogFiles.InvokeAsync(new Tencentcloud.Mariadb.GetLogFilesArgs
-        ///         {
-        ///             InstanceId = "tdsql-9vqvls95",
-        ///             Type = 1,
-        ///         }));
-        ///     }
+        ///         InstanceId = "tdsql-9vqvls95",
+        ///         Type = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetLogFilesResult> InvokeAsync(GetLogFilesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetLogFilesResult>("tencentcloud:Mariadb/getLogFiles:getLogFiles", args ?? new GetLogFilesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogFilesResult>("tencentcloud:Mariadb/getLogFiles:getLogFiles", args ?? new GetLogFilesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mariadb log_files
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var logFiles = Tencentcloud.Mariadb.GetLogFiles.Invoke(new()
         ///     {
-        ///         var logFiles = Output.Create(Tencentcloud.Mariadb.GetLogFiles.InvokeAsync(new Tencentcloud.Mariadb.GetLogFilesArgs
-        ///         {
-        ///             InstanceId = "tdsql-9vqvls95",
-        ///             Type = 1,
-        ///         }));
-        ///     }
+        ///         InstanceId = "tdsql-9vqvls95",
+        ///         Type = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetLogFilesResult> Invoke(GetLogFilesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetLogFilesResult>("tencentcloud:Mariadb/getLogFiles:getLogFiles", args ?? new GetLogFilesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetLogFilesResult>("tencentcloud:Mariadb/getLogFiles:getLogFiles", args ?? new GetLogFilesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetLogFilesArgs : Pulumi.InvokeArgs
+    public sealed class GetLogFilesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID in the format of `tdsql-ow728lmc`.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetLogFilesArgs()
         {
         }
+        public static new GetLogFilesArgs Empty => new GetLogFilesArgs();
     }
 
-    public sealed class GetLogFilesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetLogFilesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Instance ID in the format of `tdsql-ow728lmc`.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         public GetLogFilesInvokeArgs()
         {
         }
+        public static new GetLogFilesInvokeArgs Empty => new GetLogFilesInvokeArgs();
     }
 
 

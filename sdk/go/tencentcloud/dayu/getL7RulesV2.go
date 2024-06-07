@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query new dayu layer 7 rules
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dayu"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dayu.GetL7RulesV2(ctx, &dayu.GetL7RulesV2Args{
-// 			Business: "bgpip",
-// 			Domain:   pulumi.StringRef("qq.com"),
-// 			Protocol: pulumi.StringRef("https"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dayu.GetL7RulesV2(ctx, &dayu.GetL7RulesV2Args{
+//				Business: "bgpip",
+//				Domain:   pulumi.StringRef("qq.com"),
+//				Protocol: pulumi.StringRef("https"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetL7RulesV2(ctx *pulumi.Context, args *GetL7RulesV2Args, opts ...pulumi.InvokeOption) (*GetL7RulesV2Result, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetL7RulesV2Result
 	err := ctx.Invoke("tencentcloud:Dayu/getL7RulesV2:getL7RulesV2", args, &rv, opts...)
 	if err != nil {

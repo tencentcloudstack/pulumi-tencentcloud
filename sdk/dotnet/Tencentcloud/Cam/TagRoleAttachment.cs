@@ -15,41 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var tagRole = new Tencentcloud.Cam.TagRoleAttachment("tagRole", new()
     ///     {
-    ///         var tagRole = new Tencentcloud.Cam.TagRoleAttachment("tagRole", new Tencentcloud.Cam.TagRoleAttachmentArgs
+    ///         RoleId = "test-cam-tag",
+    ///         Tags = new[]
     ///         {
-    ///             RoleId = "test-cam-tag",
-    ///             Tags = 
+    ///             new Tencentcloud.Cam.Inputs.TagRoleAttachmentTagArgs
     ///             {
-    ///                 new Tencentcloud.Cam.Inputs.TagRoleAttachmentTagArgs
-    ///                 {
-    ///                     Key = "test1",
-    ///                     Value = "test1",
-    ///                 },
+    ///                 Key = "test1",
+    ///                 Value = "test1",
     ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cam tag_role can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cam/tagRoleAttachment:TagRoleAttachment tag_role tag_role_id
+    /// $ pulumi import tencentcloud:Cam/tagRoleAttachment:TagRoleAttachment tag_role tag_role_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cam/tagRoleAttachment:TagRoleAttachment")]
-    public partial class TagRoleAttachment : Pulumi.CustomResource
+    public partial class TagRoleAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Character ID, at least one input with the character name.
@@ -114,7 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         }
     }
 
-    public sealed class TagRoleAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class TagRoleAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Character ID, at least one input with the character name.
@@ -143,9 +144,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public TagRoleAttachmentArgs()
         {
         }
+        public static new TagRoleAttachmentArgs Empty => new TagRoleAttachmentArgs();
     }
 
-    public sealed class TagRoleAttachmentState : Pulumi.ResourceArgs
+    public sealed class TagRoleAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Character ID, at least one input with the character name.
@@ -174,5 +176,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public TagRoleAttachmentState()
         {
         }
+        public static new TagRoleAttachmentState Empty => new TagRoleAttachmentState();
     }
 }

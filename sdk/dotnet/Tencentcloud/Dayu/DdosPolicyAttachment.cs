@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var dayuDdosPolicyAttachmentBasic = new Tencentcloud.Dayu.DdosPolicyAttachment("dayuDdosPolicyAttachmentBasic", new()
     ///     {
-    ///         var dayuDdosPolicyAttachmentBasic = new Tencentcloud.Dayu.DdosPolicyAttachment("dayuDdosPolicyAttachmentBasic", new Tencentcloud.Dayu.DdosPolicyAttachmentArgs
-    ///         {
-    ///             ResourceType = tencentcloud_dayu_ddos_policy.Test_policy.Resource_type,
-    ///             ResourceId = "bgpip-00000294",
-    ///             PolicyId = tencentcloud_dayu_ddos_policy.Test_policy.Policy_id,
-    ///         });
-    ///     }
+    ///         ResourceType = tencentcloud_dayu_ddos_policy.Test_policy.Resource_type,
+    ///         ResourceId = "bgpip-00000294",
+    ///         PolicyId = tencentcloud_dayu_ddos_policy.Test_policy.Policy_id,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/ddosPolicyAttachment:DdosPolicyAttachment")]
-    public partial class DdosPolicyAttachment : Pulumi.CustomResource
+    public partial class DdosPolicyAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the policy.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         }
     }
 
-    public sealed class DdosPolicyAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class DdosPolicyAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the policy.
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public DdosPolicyAttachmentArgs()
         {
         }
+        public static new DdosPolicyAttachmentArgs Empty => new DdosPolicyAttachmentArgs();
     }
 
-    public sealed class DdosPolicyAttachmentState : Pulumi.ResourceArgs
+    public sealed class DdosPolicyAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the policy.
@@ -148,5 +150,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public DdosPolicyAttachmentState()
         {
         }
+        public static new DdosPolicyAttachmentState Empty => new DdosPolicyAttachmentState();
     }
 }

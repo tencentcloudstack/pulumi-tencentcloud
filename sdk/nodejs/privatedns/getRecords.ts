@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const privateDnsRecord = pulumi.output(tencentcloud.PrivateDns.getRecords({
+ * const privateDnsRecord = tencentcloud.PrivateDns.getRecords({
  *     filters: [{
  *         name: "Value",
  *         values: ["8.8.8.8"],
  *     }],
  *     zoneId: "zone-xxxxxx",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRecords(args: GetRecordsArgs, opts?: pulumi.InvokeOptions): Promise<GetRecordsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:PrivateDns/getRecords:getRecords", {
         "filters": args.filters,
         "resultOutputFile": args.resultOutputFile,
@@ -73,9 +73,28 @@ export interface GetRecordsResult {
      */
     readonly zoneId: string;
 }
-
+/**
+ * Use this data source to query detailed information of private dns records
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const privateDnsRecord = tencentcloud.PrivateDns.getRecords({
+ *     filters: [{
+ *         name: "Value",
+ *         values: ["8.8.8.8"],
+ *     }],
+ *     zoneId: "zone-xxxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRecordsOutput(args: GetRecordsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRecordsResult> {
-    return pulumi.output(args).apply(a => getRecords(a, opts))
+    return pulumi.output(args).apply((a: any) => getRecords(a, opts))
 }
 
 /**

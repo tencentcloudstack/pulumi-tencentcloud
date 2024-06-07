@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query the detail information of an existing autoscaling group.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/As"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/As"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := As.GetScalingGroups(ctx, &as.GetScalingGroupsArgs{
-// 			ConfigurationId:  pulumi.StringRef("asc-oqio4yyj"),
-// 			ResultOutputFile: pulumi.StringRef("my_test_path"),
-// 			ScalingGroupName: pulumi.StringRef("myasgroup"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := As.GetScalingGroups(ctx, &as.GetScalingGroupsArgs{
+//				ConfigurationId:  pulumi.StringRef("asc-oqio4yyj"),
+//				ResultOutputFile: pulumi.StringRef("my_test_path"),
+//				ScalingGroupName: pulumi.StringRef("myasgroup"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetScalingGroups(ctx *pulumi.Context, args *GetScalingGroupsArgs, opts ...pulumi.InvokeOption) (*GetScalingGroupsResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetScalingGroupsResult
 	err := ctx.Invoke("tencentcloud:As/getScalingGroups:getScalingGroups", args, &rv, opts...)
 	if err != nil {

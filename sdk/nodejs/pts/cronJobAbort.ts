@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const cronJobAbort = new tencentcloud.Pts.CronJobAbort("cron_job_abort", {
+ * const cronJobAbort = new tencentcloud.pts.CronJobAbort("cronJobAbort", {
  *     cronJobId: "job-dtm93vx0",
  *     projectId: "project-abc",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class CronJobAbort extends pulumi.CustomResource {
     /**

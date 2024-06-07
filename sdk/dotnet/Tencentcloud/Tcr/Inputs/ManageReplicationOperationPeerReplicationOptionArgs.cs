@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
 {
 
-    public sealed class ManageReplicationOperationPeerReplicationOptionArgs : Pulumi.ResourceArgs
+    public sealed class ManageReplicationOperationPeerReplicationOptionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// whether to enable cross-master account instance synchronization.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
         public ManageReplicationOperationPeerReplicationOptionArgs()
         {
         }
+        public static new ManageReplicationOperationPeerReplicationOptionArgs Empty => new ManageReplicationOperationPeerReplicationOptionArgs();
     }
 }

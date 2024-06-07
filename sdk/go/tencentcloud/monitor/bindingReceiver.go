@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource for bind receivers to a policy group resource.
@@ -31,7 +32,7 @@ func NewBindingReceiver(ctx *pulumi.Context,
 	if args.GroupId == nil {
 		return nil, errors.New("invalid value for required argument 'GroupId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BindingReceiver
 	err := ctx.RegisterResource("tencentcloud:Monitor/bindingReceiver:BindingReceiver", name, args, &resource, opts...)
 	if err != nil {
@@ -112,7 +113,7 @@ func (i *BindingReceiver) ToBindingReceiverOutputWithContext(ctx context.Context
 // BindingReceiverArrayInput is an input type that accepts BindingReceiverArray and BindingReceiverArrayOutput values.
 // You can construct a concrete instance of `BindingReceiverArrayInput` via:
 //
-//          BindingReceiverArray{ BindingReceiverArgs{...} }
+//	BindingReceiverArray{ BindingReceiverArgs{...} }
 type BindingReceiverArrayInput interface {
 	pulumi.Input
 
@@ -137,7 +138,7 @@ func (i BindingReceiverArray) ToBindingReceiverArrayOutputWithContext(ctx contex
 // BindingReceiverMapInput is an input type that accepts BindingReceiverMap and BindingReceiverMapOutput values.
 // You can construct a concrete instance of `BindingReceiverMapInput` via:
 //
-//          BindingReceiverMap{ "key": BindingReceiverArgs{...} }
+//	BindingReceiverMap{ "key": BindingReceiverArgs{...} }
 type BindingReceiverMapInput interface {
 	pulumi.Input
 

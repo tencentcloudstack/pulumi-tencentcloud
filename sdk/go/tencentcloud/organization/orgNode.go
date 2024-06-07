@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a organization orgNode
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Organization.NewOrgNode(ctx, "orgNode", &Organization.OrgNodeArgs{
-// 			ParentNodeId: pulumi.Int(2003721),
-// 			Remark:       pulumi.String("for terraform test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Organization.NewOrgNode(ctx, "orgNode", &Organization.OrgNodeArgs{
+//				ParentNodeId: pulumi.Int(2003721),
+//				Remark:       pulumi.String("for terraform test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // organization org_node can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Organization/orgNode:OrgNode org_node orgNode_id
+// $ pulumi import tencentcloud:Organization/orgNode:OrgNode org_node orgNode_id
 // ```
 type OrgNode struct {
 	pulumi.CustomResourceState
@@ -69,7 +75,7 @@ func NewOrgNode(ctx *pulumi.Context,
 	if args.ParentNodeId == nil {
 		return nil, errors.New("invalid value for required argument 'ParentNodeId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OrgNode
 	err := ctx.RegisterResource("tencentcloud:Organization/orgNode:OrgNode", name, args, &resource, opts...)
 	if err != nil {
@@ -166,7 +172,7 @@ func (i *OrgNode) ToOrgNodeOutputWithContext(ctx context.Context) OrgNodeOutput 
 // OrgNodeArrayInput is an input type that accepts OrgNodeArray and OrgNodeArrayOutput values.
 // You can construct a concrete instance of `OrgNodeArrayInput` via:
 //
-//          OrgNodeArray{ OrgNodeArgs{...} }
+//	OrgNodeArray{ OrgNodeArgs{...} }
 type OrgNodeArrayInput interface {
 	pulumi.Input
 
@@ -191,7 +197,7 @@ func (i OrgNodeArray) ToOrgNodeArrayOutputWithContext(ctx context.Context) OrgNo
 // OrgNodeMapInput is an input type that accepts OrgNodeMap and OrgNodeMapOutput values.
 // You can construct a concrete instance of `OrgNodeMapInput` via:
 //
-//          OrgNodeMap{ "key": OrgNodeArgs{...} }
+//	OrgNodeMap{ "key": OrgNodeArgs{...} }
 type OrgNodeMapInput interface {
 	pulumi.Input
 

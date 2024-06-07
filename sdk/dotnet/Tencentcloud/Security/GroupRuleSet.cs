@@ -17,122 +17,127 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var baseGroup = new Tencentcloud.Security.Group("baseGroup", new()
     ///     {
-    ///         var baseGroup = new Tencentcloud.Security.Group("baseGroup", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "Testing Rule Set Security",
-    ///         });
-    ///         var relative = new Tencentcloud.Security.Group("relative", new Tencentcloud.Security.GroupArgs
-    ///         {
-    ///             Description = "Used for attach security policy",
-    ///         });
-    ///         var fooTemplate = new Tencentcloud.Address.Template("fooTemplate", new Tencentcloud.Address.TemplateArgs
-    ///         {
-    ///             Addresses = 
-    ///             {
-    ///                 "10.0.0.1",
-    ///                 "10.0.1.0/24",
-    ///                 "10.0.0.1-10.0.0.100",
-    ///             },
-    ///         });
-    ///         var fooTemplateGroup = new Tencentcloud.Address.TemplateGroup("fooTemplateGroup", new Tencentcloud.Address.TemplateGroupArgs
-    ///         {
-    ///             TemplateIds = 
-    ///             {
-    ///                 fooTemplate.Id,
-    ///             },
-    ///         });
-    ///         var baseGroupRuleSet = new Tencentcloud.Security.GroupRuleSet("baseGroupRuleSet", new Tencentcloud.Security.GroupRuleSetArgs
-    ///         {
-    ///             SecurityGroupId = baseGroup.Id,
-    ///             Ingresses = 
-    ///             {
-    ///                 new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
-    ///                 {
-    ///                     Action = "ACCEPT",
-    ///                     CidrBlock = "10.0.0.0/22",
-    ///                     Protocol = "TCP",
-    ///                     Port = "80-90",
-    ///                     Description = "A:Allow Ips and 80-90",
-    ///                 },
-    ///                 new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
-    ///                 {
-    ///                     Action = "ACCEPT",
-    ///                     CidrBlock = "10.0.2.1",
-    ///                     Protocol = "UDP",
-    ///                     Port = "8080",
-    ///                     Description = "B:Allow UDP 8080",
-    ///                 },
-    ///                 new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
-    ///                 {
-    ///                     Action = "ACCEPT",
-    ///                     CidrBlock = "10.0.2.1",
-    ///                     Protocol = "UDP",
-    ///                     Port = "8080",
-    ///                     Description = "C:Allow UDP 8080",
-    ///                 },
-    ///                 new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
-    ///                 {
-    ///                     Action = "ACCEPT",
-    ///                     CidrBlock = "172.18.1.2",
-    ///                     Protocol = "ALL",
-    ///                     Port = "ALL",
-    ///                     Description = "D:Allow ALL",
-    ///                 },
-    ///                 new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
-    ///                 {
-    ///                     Action = "DROP",
-    ///                     Protocol = "TCP",
-    ///                     Port = "80",
-    ///                     SourceSecurityId = relative.Id,
-    ///                     Description = "E:Block relative",
-    ///                 },
-    ///             },
-    ///             Egresses = 
-    ///             {
-    ///                 new Tencentcloud.Security.Inputs.GroupRuleSetEgressArgs
-    ///                 {
-    ///                     Action = "DROP",
-    ///                     CidrBlock = "10.0.0.0/16",
-    ///                     Protocol = "ICMP",
-    ///                     Description = "A:Block ping3",
-    ///                 },
-    ///                 new Tencentcloud.Security.Inputs.GroupRuleSetEgressArgs
-    ///                 {
-    ///                     Action = "DROP",
-    ///                     AddressTemplateId = fooTemplate.Id,
-    ///                     Description = "B:Allow template",
-    ///                 },
-    ///                 new Tencentcloud.Security.Inputs.GroupRuleSetEgressArgs
-    ///                 {
-    ///                     Action = "DROP",
-    ///                     AddressTemplateGroup = fooTemplateGroup.Id,
-    ///                     Description = "C:DROP template group",
-    ///                 },
-    ///             },
-    ///         });
-    ///     }
+    ///         Description = "Testing Rule Set Security",
+    ///     });
     /// 
-    /// }
+    ///     var relative = new Tencentcloud.Security.Group("relative", new()
+    ///     {
+    ///         Description = "Used for attach security policy",
+    ///     });
+    /// 
+    ///     var fooTemplate = new Tencentcloud.Address.Template("fooTemplate", new()
+    ///     {
+    ///         Addresses = new[]
+    ///         {
+    ///             "10.0.0.1",
+    ///             "10.0.1.0/24",
+    ///             "10.0.0.1-10.0.0.100",
+    ///         },
+    ///     });
+    /// 
+    ///     var fooTemplateGroup = new Tencentcloud.Address.TemplateGroup("fooTemplateGroup", new()
+    ///     {
+    ///         TemplateIds = new[]
+    ///         {
+    ///             fooTemplate.Id,
+    ///         },
+    ///     });
+    /// 
+    ///     var baseGroupRuleSet = new Tencentcloud.Security.GroupRuleSet("baseGroupRuleSet", new()
+    ///     {
+    ///         SecurityGroupId = baseGroup.Id,
+    ///         Ingresses = new[]
+    ///         {
+    ///             new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
+    ///             {
+    ///                 Action = "ACCEPT",
+    ///                 CidrBlock = "10.0.0.0/22",
+    ///                 Protocol = "TCP",
+    ///                 Port = "80-90",
+    ///                 Description = "A:Allow Ips and 80-90",
+    ///             },
+    ///             new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
+    ///             {
+    ///                 Action = "ACCEPT",
+    ///                 CidrBlock = "10.0.2.1",
+    ///                 Protocol = "UDP",
+    ///                 Port = "8080",
+    ///                 Description = "B:Allow UDP 8080",
+    ///             },
+    ///             new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
+    ///             {
+    ///                 Action = "ACCEPT",
+    ///                 CidrBlock = "10.0.2.1",
+    ///                 Protocol = "UDP",
+    ///                 Port = "8080",
+    ///                 Description = "C:Allow UDP 8080",
+    ///             },
+    ///             new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
+    ///             {
+    ///                 Action = "ACCEPT",
+    ///                 CidrBlock = "172.18.1.2",
+    ///                 Protocol = "ALL",
+    ///                 Port = "ALL",
+    ///                 Description = "D:Allow ALL",
+    ///             },
+    ///             new Tencentcloud.Security.Inputs.GroupRuleSetIngressArgs
+    ///             {
+    ///                 Action = "DROP",
+    ///                 Protocol = "TCP",
+    ///                 Port = "80",
+    ///                 SourceSecurityId = relative.Id,
+    ///                 Description = "E:Block relative",
+    ///             },
+    ///         },
+    ///         Egresses = new[]
+    ///         {
+    ///             new Tencentcloud.Security.Inputs.GroupRuleSetEgressArgs
+    ///             {
+    ///                 Action = "DROP",
+    ///                 CidrBlock = "10.0.0.0/16",
+    ///                 Protocol = "ICMP",
+    ///                 Description = "A:Block ping3",
+    ///             },
+    ///             new Tencentcloud.Security.Inputs.GroupRuleSetEgressArgs
+    ///             {
+    ///                 Action = "DROP",
+    ///                 AddressTemplateId = fooTemplate.Id,
+    ///                 Description = "B:Allow template",
+    ///             },
+    ///             new Tencentcloud.Security.Inputs.GroupRuleSetEgressArgs
+    ///             {
+    ///                 Action = "DROP",
+    ///                 AddressTemplateGroup = fooTemplateGroup.Id,
+    ///                 Description = "C:DROP template group",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
-    /// Resource tencentcloud_security_group_rule_set can be imported by passing security grou id
+    /// Resource tencentcloud_security_group_rule_set can be imported by passing security grou id:
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Security/groupRuleSet:GroupRuleSet sglab_1 sg-xxxxxxxx
+    /// $ pulumi import tencentcloud:Security/groupRuleSet:GroupRuleSet sglab_1 sg-xxxxxxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Security/groupRuleSet:GroupRuleSet")]
-    public partial class GroupRuleSet : Pulumi.CustomResource
+    public partial class GroupRuleSet : global::Pulumi.CustomResource
     {
         /// <summary>
         /// List of egress rule. NOTE: this block is ordered, the first rule has the highest priority.
@@ -203,7 +208,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
         }
     }
 
-    public sealed class GroupRuleSetArgs : Pulumi.ResourceArgs
+    public sealed class GroupRuleSetArgs : global::Pulumi.ResourceArgs
     {
         [Input("egresses")]
         private InputList<Inputs.GroupRuleSetEgressArgs>? _egresses;
@@ -238,9 +243,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
         public GroupRuleSetArgs()
         {
         }
+        public static new GroupRuleSetArgs Empty => new GroupRuleSetArgs();
     }
 
-    public sealed class GroupRuleSetState : Pulumi.ResourceArgs
+    public sealed class GroupRuleSetState : global::Pulumi.ResourceArgs
     {
         [Input("egresses")]
         private InputList<Inputs.GroupRuleSetEgressGetArgs>? _egresses;
@@ -281,5 +287,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security
         public GroupRuleSetState()
         {
         }
+        public static new GroupRuleSetState Empty => new GroupRuleSetState();
     }
 }

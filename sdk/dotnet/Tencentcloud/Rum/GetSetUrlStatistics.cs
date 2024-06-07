@@ -15,70 +15,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum set_url_statistics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var setUrlStatistics = Tencentcloud.Rum.GetSetUrlStatistics.Invoke(new()
         ///     {
-        ///         var setUrlStatistics = Output.Create(Tencentcloud.Rum.GetSetUrlStatistics.InvokeAsync(new Tencentcloud.Rum.GetSetUrlStatisticsArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "allcount",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "allcount",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSetUrlStatisticsResult> InvokeAsync(GetSetUrlStatisticsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSetUrlStatisticsResult>("tencentcloud:Rum/getSetUrlStatistics:getSetUrlStatistics", args ?? new GetSetUrlStatisticsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSetUrlStatisticsResult>("tencentcloud:Rum/getSetUrlStatistics:getSetUrlStatistics", args ?? new GetSetUrlStatisticsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum set_url_statistics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var setUrlStatistics = Tencentcloud.Rum.GetSetUrlStatistics.Invoke(new()
         ///     {
-        ///         var setUrlStatistics = Output.Create(Tencentcloud.Rum.GetSetUrlStatistics.InvokeAsync(new Tencentcloud.Rum.GetSetUrlStatisticsArgs
-        ///         {
-        ///             EndTime = 1625454840,
-        ///             ProjectId = 1,
-        ///             StartTime = 1625444040,
-        ///             Type = "allcount",
-        ///         }));
-        ///     }
+        ///         EndTime = 1625454840,
+        ///         ProjectId = 1,
+        ///         StartTime = 1625444040,
+        ///         Type = "allcount",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSetUrlStatisticsResult> Invoke(GetSetUrlStatisticsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSetUrlStatisticsResult>("tencentcloud:Rum/getSetUrlStatistics:getSetUrlStatistics", args ?? new GetSetUrlStatisticsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSetUrlStatisticsResult>("tencentcloud:Rum/getSetUrlStatistics:getSetUrlStatistics", args ?? new GetSetUrlStatisticsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSetUrlStatisticsArgs : Pulumi.InvokeArgs
+    public sealed class GetSetUrlStatisticsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -227,9 +221,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetSetUrlStatisticsArgs()
         {
         }
+        public static new GetSetUrlStatisticsArgs Empty => new GetSetUrlStatisticsArgs();
     }
 
-    public sealed class GetSetUrlStatisticsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSetUrlStatisticsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// The region where the data reporting takes place.
@@ -378,6 +373,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetSetUrlStatisticsInvokeArgs()
         {
         }
+        public static new GetSetUrlStatisticsInvokeArgs Empty => new GetSetUrlStatisticsInvokeArgs();
     }
 
 

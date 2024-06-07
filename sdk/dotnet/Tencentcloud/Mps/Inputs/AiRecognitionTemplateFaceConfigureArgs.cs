@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class AiRecognitionTemplateFaceConfigureArgs : Pulumi.ResourceArgs
+    public sealed class AiRecognitionTemplateFaceConfigureArgs : global::Pulumi.ResourceArgs
     {
         [Input("defaultLibraryLabelSets")]
         private InputList<string>? _defaultLibraryLabelSets;
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public AiRecognitionTemplateFaceConfigureArgs()
         {
         }
+        public static new AiRecognitionTemplateFaceConfigureArgs Empty => new AiRecognitionTemplateFaceConfigureArgs();
     }
 }

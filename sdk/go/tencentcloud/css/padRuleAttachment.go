@@ -7,44 +7,50 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a css padRuleAttachment
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewPadRuleAttachment(ctx, "padRuleAttachment", &Css.PadRuleAttachmentArgs{
-// 			AppName:    pulumi.String("qqq"),
-// 			DomainName: pulumi.String("177154.push.tlivecloud.com"),
-// 			StreamName: pulumi.String("ppp"),
-// 			TemplateId: pulumi.Int(17067),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewPadRuleAttachment(ctx, "padRuleAttachment", &Css.PadRuleAttachmentArgs{
+//				AppName:    pulumi.String("qqq"),
+//				DomainName: pulumi.String("177154.push.tlivecloud.com"),
+//				StreamName: pulumi.String("ppp"),
+//				TemplateId: pulumi.Int(17067),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // css pad_rule_attachment can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/padRuleAttachment:PadRuleAttachment pad_rule_attachment templateId#domainName
+// $ pulumi import tencentcloud:Css/padRuleAttachment:PadRuleAttachment pad_rule_attachment templateId#domainName
 // ```
 type PadRuleAttachment struct {
 	pulumi.CustomResourceState
@@ -72,7 +78,7 @@ func NewPadRuleAttachment(ctx *pulumi.Context,
 	if args.TemplateId == nil {
 		return nil, errors.New("invalid value for required argument 'TemplateId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource PadRuleAttachment
 	err := ctx.RegisterResource("tencentcloud:Css/padRuleAttachment:PadRuleAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -169,7 +175,7 @@ func (i *PadRuleAttachment) ToPadRuleAttachmentOutputWithContext(ctx context.Con
 // PadRuleAttachmentArrayInput is an input type that accepts PadRuleAttachmentArray and PadRuleAttachmentArrayOutput values.
 // You can construct a concrete instance of `PadRuleAttachmentArrayInput` via:
 //
-//          PadRuleAttachmentArray{ PadRuleAttachmentArgs{...} }
+//	PadRuleAttachmentArray{ PadRuleAttachmentArgs{...} }
 type PadRuleAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -194,7 +200,7 @@ func (i PadRuleAttachmentArray) ToPadRuleAttachmentArrayOutputWithContext(ctx co
 // PadRuleAttachmentMapInput is an input type that accepts PadRuleAttachmentMap and PadRuleAttachmentMapOutput values.
 // You can construct a concrete instance of `PadRuleAttachmentMapInput` via:
 //
-//          PadRuleAttachmentMap{ "key": PadRuleAttachmentArgs{...} }
+//	PadRuleAttachmentMap{ "key": PadRuleAttachmentArgs{...} }
 type PadRuleAttachmentMapInput interface {
 	pulumi.Input
 

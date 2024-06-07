@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var instanceSlaConfig = new Tencentcloud.Clb.InstanceSlaConfig("instanceSlaConfig", new()
     ///     {
-    ///         var instanceSlaConfig = new Tencentcloud.Clb.InstanceSlaConfig("instanceSlaConfig", new Tencentcloud.Clb.InstanceSlaConfigArgs
-    ///         {
-    ///             LoadBalancerId = "lb-5dnrkgry",
-    ///             SlaType = "SLA",
-    ///         });
-    ///     }
+    ///         LoadBalancerId = "lb-5dnrkgry",
+    ///         SlaType = "SLA",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// clb instance_sla_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Clb/instanceSlaConfig:InstanceSlaConfig instance_sla_config instance_id
+    /// $ pulumi import tencentcloud:Clb/instanceSlaConfig:InstanceSlaConfig instance_sla_config instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/instanceSlaConfig:InstanceSlaConfig")]
-    public partial class InstanceSlaConfig : Pulumi.CustomResource
+    public partial class InstanceSlaConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the CLB instance.
@@ -101,7 +102,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         }
     }
 
-    public sealed class InstanceSlaConfigArgs : Pulumi.ResourceArgs
+    public sealed class InstanceSlaConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the CLB instance.
@@ -118,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public InstanceSlaConfigArgs()
         {
         }
+        public static new InstanceSlaConfigArgs Empty => new InstanceSlaConfigArgs();
     }
 
-    public sealed class InstanceSlaConfigState : Pulumi.ResourceArgs
+    public sealed class InstanceSlaConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the CLB instance.
@@ -137,5 +139,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public InstanceSlaConfigState()
         {
         }
+        public static new InstanceSlaConfigState Empty => new InstanceSlaConfigState();
     }
 }

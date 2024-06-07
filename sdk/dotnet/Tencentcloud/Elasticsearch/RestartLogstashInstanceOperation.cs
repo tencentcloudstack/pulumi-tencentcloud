@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var restartLogstashInstanceOperation = new Tencentcloud.Elasticsearch.RestartLogstashInstanceOperation("restartLogstashInstanceOperation", new()
     ///     {
-    ///         var restartLogstashInstanceOperation = new Tencentcloud.Elasticsearch.RestartLogstashInstanceOperation("restartLogstashInstanceOperation", new Tencentcloud.Elasticsearch.RestartLogstashInstanceOperationArgs
-    ///         {
-    ///             InstanceId = "ls-xxxxxx",
-    ///             Type = 0,
-    ///         });
-    ///     }
+    ///         InstanceId = "ls-xxxxxx",
+    ///         Type = 0,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/restartLogstashInstanceOperation:RestartLogstashInstanceOperation")]
-    public partial class RestartLogstashInstanceOperation : Pulumi.CustomResource
+    public partial class RestartLogstashInstanceOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance id.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         }
     }
 
-    public sealed class RestartLogstashInstanceOperationArgs : Pulumi.ResourceArgs
+    public sealed class RestartLogstashInstanceOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance id.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public RestartLogstashInstanceOperationArgs()
         {
         }
+        public static new RestartLogstashInstanceOperationArgs Empty => new RestartLogstashInstanceOperationArgs();
     }
 
-    public sealed class RestartLogstashInstanceOperationState : Pulumi.ResourceArgs
+    public sealed class RestartLogstashInstanceOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance id.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public RestartLogstashInstanceOperationState()
         {
         }
+        public static new RestartLogstashInstanceOperationState Empty => new RestartLogstashInstanceOperationState();
     }
 }

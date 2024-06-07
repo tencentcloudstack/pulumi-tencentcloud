@@ -15,34 +15,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Oceanus.WorkSpace("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Oceanus.WorkSpace("example", new Tencentcloud.Oceanus.WorkSpaceArgs
-    ///         {
-    ///             Description = "example description.",
-    ///             WorkSpaceName = "tf_example",
-    ///         });
-    ///     }
+    ///         Description = "example description.",
+    ///         WorkSpaceName = "tf_example",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// oceanus work_space can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Oceanus/workSpace:WorkSpace example space-0dan3yux#tf_example
+    /// $ pulumi import tencentcloud:Oceanus/workSpace:WorkSpace example space-0dan3yux#tf_example
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Oceanus/workSpace:WorkSpace")]
-    public partial class WorkSpace : Pulumi.CustomResource
+    public partial class WorkSpace : global::Pulumi.CustomResource
     {
         /// <summary>
         /// User APPID.
@@ -161,7 +162,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         }
     }
 
-    public sealed class WorkSpaceArgs : Pulumi.ResourceArgs
+    public sealed class WorkSpaceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Workspace description.
@@ -178,9 +179,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public WorkSpaceArgs()
         {
         }
+        public static new WorkSpaceArgs Empty => new WorkSpaceArgs();
     }
 
-    public sealed class WorkSpaceState : Pulumi.ResourceArgs
+    public sealed class WorkSpaceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User APPID.
@@ -257,5 +259,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public WorkSpaceState()
         {
         }
+        public static new WorkSpaceState Empty => new WorkSpaceState();
     }
 }

@@ -7,36 +7,42 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a postgresql renewDbInstanceOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Postgresql.NewRenewDbInstanceOperation(ctx, "renewDbInstanceOperation", &Postgresql.RenewDbInstanceOperationArgs{
-// 			DbInstanceId: pulumi.Any(tencentcloud_postgresql_instance.Oper_test_PREPAID.Id),
-// 			Period:       pulumi.Int(1),
-// 			AutoVoucher:  pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Postgresql.NewRenewDbInstanceOperation(ctx, "renewDbInstanceOperation", &Postgresql.RenewDbInstanceOperationArgs{
+//				DbInstanceId: pulumi.Any(tencentcloud_postgresql_instance.Oper_test_PREPAID.Id),
+//				Period:       pulumi.Int(1),
+//				AutoVoucher:  pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type RenewDbInstanceOperation struct {
 	pulumi.CustomResourceState
 
@@ -63,7 +69,7 @@ func NewRenewDbInstanceOperation(ctx *pulumi.Context,
 	if args.Period == nil {
 		return nil, errors.New("invalid value for required argument 'Period'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource RenewDbInstanceOperation
 	err := ctx.RegisterResource("tencentcloud:Postgresql/renewDbInstanceOperation:RenewDbInstanceOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -160,7 +166,7 @@ func (i *RenewDbInstanceOperation) ToRenewDbInstanceOperationOutputWithContext(c
 // RenewDbInstanceOperationArrayInput is an input type that accepts RenewDbInstanceOperationArray and RenewDbInstanceOperationArrayOutput values.
 // You can construct a concrete instance of `RenewDbInstanceOperationArrayInput` via:
 //
-//          RenewDbInstanceOperationArray{ RenewDbInstanceOperationArgs{...} }
+//	RenewDbInstanceOperationArray{ RenewDbInstanceOperationArgs{...} }
 type RenewDbInstanceOperationArrayInput interface {
 	pulumi.Input
 
@@ -185,7 +191,7 @@ func (i RenewDbInstanceOperationArray) ToRenewDbInstanceOperationArrayOutputWith
 // RenewDbInstanceOperationMapInput is an input type that accepts RenewDbInstanceOperationMap and RenewDbInstanceOperationMapOutput values.
 // You can construct a concrete instance of `RenewDbInstanceOperationMapInput` via:
 //
-//          RenewDbInstanceOperationMap{ "key": RenewDbInstanceOperationArgs{...} }
+//	RenewDbInstanceOperationMap{ "key": RenewDbInstanceOperationArgs{...} }
 type RenewDbInstanceOperationMapInput interface {
 	pulumi.Input
 

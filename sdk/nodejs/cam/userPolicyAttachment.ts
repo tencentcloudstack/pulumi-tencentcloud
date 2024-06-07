@@ -9,10 +9,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const camUserBasic = config.get("camUserBasic") || "keep-cam-user";
@@ -43,17 +44,18 @@ import * as utilities from "../utilities";
  *     name: camUserBasic,
  * });
  * const userPolicyAttachmentBasic = new tencentcloud.cam.UserPolicyAttachment("userPolicyAttachmentBasic", {
- *     userName: users.then(users => users.userLists?[0]?.userId),
+ *     userName: users.then(users => users.userLists?.[0]?.userId),
  *     policyId: policyBasic.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CAM user policy attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment foo cam-test#26800353
+ * $ pulumi import tencentcloud:Cam/userPolicyAttachment:UserPolicyAttachment foo cam-test#26800353
  * ```
  */
 export class UserPolicyAttachment extends pulumi.CustomResource {
@@ -107,7 +109,7 @@ export class UserPolicyAttachment extends pulumi.CustomResource {
     /**
      * It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
      *
-     * @deprecated It has been deprecated from version 1.59.5. Use `user_name` instead.
+     * @deprecated It has been deprecated from version 1.59.5. Use `userName` instead.
      */
     public readonly userId!: pulumi.Output<string | undefined>;
     /**
@@ -180,7 +182,7 @@ export interface UserPolicyAttachmentState {
     /**
      * It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
      *
-     * @deprecated It has been deprecated from version 1.59.5. Use `user_name` instead.
+     * @deprecated It has been deprecated from version 1.59.5. Use `userName` instead.
      */
     userId?: pulumi.Input<string>;
     /**
@@ -200,7 +202,7 @@ export interface UserPolicyAttachmentArgs {
     /**
      * It has been deprecated from version 1.59.5. Use `userName` instead. ID of the attached CAM user.
      *
-     * @deprecated It has been deprecated from version 1.59.5. Use `user_name` instead.
+     * @deprecated It has been deprecated from version 1.59.5. Use `userName` instead.
      */
     userId?: pulumi.Input<string>;
     /**

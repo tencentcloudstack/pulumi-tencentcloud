@@ -8,39 +8,45 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ssl updateCertificateRecordRetry
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewUpdateCertificateRecordRetryOperation(ctx, "updateCertificateRecordRetry", &Ssl.UpdateCertificateRecordRetryOperationArgs{
-// 			DeployRecordId: pulumi.Int(1603),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.NewUpdateCertificateRecordRetryOperation(ctx, "updateCertificateRecordRetry", &Ssl.UpdateCertificateRecordRetryOperationArgs{
+//				DeployRecordId: pulumi.Int(1603),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ssl update_certificate_record_retry can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssl/updateCertificateRecordRetryOperation:UpdateCertificateRecordRetryOperation update_certificate_record_retry update_certificate_record_retry_id
+// $ pulumi import tencentcloud:Ssl/updateCertificateRecordRetryOperation:UpdateCertificateRecordRetryOperation update_certificate_record_retry update_certificate_record_retry_id
 // ```
 type UpdateCertificateRecordRetryOperation struct {
 	pulumi.CustomResourceState
@@ -58,7 +64,7 @@ func NewUpdateCertificateRecordRetryOperation(ctx *pulumi.Context,
 		args = &UpdateCertificateRecordRetryOperationArgs{}
 	}
 
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource UpdateCertificateRecordRetryOperation
 	err := ctx.RegisterResource("tencentcloud:Ssl/updateCertificateRecordRetryOperation:UpdateCertificateRecordRetryOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *UpdateCertificateRecordRetryOperation) ToUpdateCertificateRecordRetryOp
 // UpdateCertificateRecordRetryOperationArrayInput is an input type that accepts UpdateCertificateRecordRetryOperationArray and UpdateCertificateRecordRetryOperationArrayOutput values.
 // You can construct a concrete instance of `UpdateCertificateRecordRetryOperationArrayInput` via:
 //
-//          UpdateCertificateRecordRetryOperationArray{ UpdateCertificateRecordRetryOperationArgs{...} }
+//	UpdateCertificateRecordRetryOperationArray{ UpdateCertificateRecordRetryOperationArgs{...} }
 type UpdateCertificateRecordRetryOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i UpdateCertificateRecordRetryOperationArray) ToUpdateCertificateRecordRet
 // UpdateCertificateRecordRetryOperationMapInput is an input type that accepts UpdateCertificateRecordRetryOperationMap and UpdateCertificateRecordRetryOperationMapOutput values.
 // You can construct a concrete instance of `UpdateCertificateRecordRetryOperationMapInput` via:
 //
-//          UpdateCertificateRecordRetryOperationMap{ "key": UpdateCertificateRecordRetryOperationArgs{...} }
+//	UpdateCertificateRecordRetryOperationMap{ "key": UpdateCertificateRecordRetryOperationArgs{...} }
 type UpdateCertificateRecordRetryOperationMapInput interface {
 	pulumi.Input
 

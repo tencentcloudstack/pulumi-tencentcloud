@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse.Inputs
 {
 
-    public sealed class InstanceDataSpecGetArgs : Pulumi.ResourceArgs
+    public sealed class InstanceDataSpecGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Data spec count.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse.Inputs
         public InstanceDataSpecGetArgs()
         {
         }
+        public static new InstanceDataSpecGetArgs Empty => new InstanceDataSpecGetArgs();
     }
 }

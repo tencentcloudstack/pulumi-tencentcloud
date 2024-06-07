@@ -7,44 +7,50 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a organization orgMemberEmail
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Organization.NewOrgMemberEmail(ctx, "orgMemberEmail", &Organization.OrgMemberEmailArgs{
-// 			CountryCode: pulumi.String("86"),
-// 			Email:       pulumi.String("iac-example@qq.com"),
-// 			MemberUin:   pulumi.Int(100033704327),
-// 			Phone:       pulumi.String("12345678901"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Organization.NewOrgMemberEmail(ctx, "orgMemberEmail", &Organization.OrgMemberEmailArgs{
+//				CountryCode: pulumi.String("86"),
+//				Email:       pulumi.String("iac-example@qq.com"),
+//				MemberUin:   pulumi.Int(100033704327),
+//				Phone:       pulumi.String("12345678901"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // organization org_member_email can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Organization/orgMemberEmail:OrgMemberEmail org_member_email org_member_email_id
+// $ pulumi import tencentcloud:Organization/orgMemberEmail:OrgMemberEmail org_member_email org_member_email_id
 // ```
 type OrgMemberEmail struct {
 	pulumi.CustomResourceState
@@ -90,7 +96,7 @@ func NewOrgMemberEmail(ctx *pulumi.Context,
 	if args.Phone == nil {
 		return nil, errors.New("invalid value for required argument 'Phone'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OrgMemberEmail
 	err := ctx.RegisterResource("tencentcloud:Organization/orgMemberEmail:OrgMemberEmail", name, args, &resource, opts...)
 	if err != nil {
@@ -211,7 +217,7 @@ func (i *OrgMemberEmail) ToOrgMemberEmailOutputWithContext(ctx context.Context) 
 // OrgMemberEmailArrayInput is an input type that accepts OrgMemberEmailArray and OrgMemberEmailArrayOutput values.
 // You can construct a concrete instance of `OrgMemberEmailArrayInput` via:
 //
-//          OrgMemberEmailArray{ OrgMemberEmailArgs{...} }
+//	OrgMemberEmailArray{ OrgMemberEmailArgs{...} }
 type OrgMemberEmailArrayInput interface {
 	pulumi.Input
 
@@ -236,7 +242,7 @@ func (i OrgMemberEmailArray) ToOrgMemberEmailArrayOutputWithContext(ctx context.
 // OrgMemberEmailMapInput is an input type that accepts OrgMemberEmailMap and OrgMemberEmailMapOutput values.
 // You can construct a concrete instance of `OrgMemberEmailMapInput` via:
 //
-//          OrgMemberEmailMap{ "key": OrgMemberEmailArgs{...} }
+//	OrgMemberEmailMap{ "key": OrgMemberEmailArgs{...} }
 type OrgMemberEmailMapInput interface {
 	pulumi.Input
 

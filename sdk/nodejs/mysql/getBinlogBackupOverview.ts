@@ -9,21 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const binlogBackupOverview = pulumi.output(tencentcloud.Mysql.getBinlogBackupOverview({
+ * const binlogBackupOverview = tencentcloud.Mysql.getBinlogBackupOverview({
  *     product: "mysql",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getBinlogBackupOverview(args: GetBinlogBackupOverviewArgs, opts?: pulumi.InvokeOptions): Promise<GetBinlogBackupOverviewResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Mysql/getBinlogBackupOverview:getBinlogBackupOverview", {
         "product": args.product,
         "resultOutputFile": args.resultOutputFile,
@@ -87,9 +86,24 @@ export interface GetBinlogBackupOverviewResult {
     readonly remoteBinlogVolume: number;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of mysql binlogBackupOverview
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const binlogBackupOverview = tencentcloud.Mysql.getBinlogBackupOverview({
+ *     product: "mysql",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getBinlogBackupOverviewOutput(args: GetBinlogBackupOverviewOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetBinlogBackupOverviewResult> {
-    return pulumi.output(args).apply(a => getBinlogBackupOverview(a, opts))
+    return pulumi.output(args).apply((a: any) => getBinlogBackupOverview(a, opts))
 }
 
 /**

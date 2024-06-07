@@ -7,18 +7,124 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cls index.
+//
+// ## Example Usage
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleLogset, err := Cls.NewLogset(ctx, "exampleLogset", &Cls.LogsetArgs{
+//				LogsetName: pulumi.String("tf_example"),
+//				Tags: pulumi.Map{
+//					"demo": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleTopic, err := Cls.NewTopic(ctx, "exampleTopic", &Cls.TopicArgs{
+//				TopicName:          pulumi.String("tf_example"),
+//				LogsetId:           exampleLogset.ID(),
+//				AutoSplit:          pulumi.Bool(false),
+//				MaxSplitPartitions: pulumi.Int(20),
+//				PartitionCount:     pulumi.Int(1),
+//				Period:             pulumi.Int(30),
+//				StorageType:        pulumi.String("hot"),
+//				Describes:          pulumi.String("Test Demo."),
+//				HotPeriod:          pulumi.Int(10),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			tokenizerValue := "@&?|#()='\",;:<>[]{}"
+//			_, err = Cls.NewIndex(ctx, "exampleIndex", &Cls.IndexArgs{
+//				TopicId: exampleTopic.ID(),
+//				Rule: &cls.IndexRuleArgs{
+//					FullText: &cls.IndexRuleFullTextArgs{
+//						CaseSensitive: pulumi.Bool(true),
+//						Tokenizer:     pulumi.String(tokenizerValue),
+//						ContainZH:     pulumi.Bool(true),
+//					},
+//					KeyValue: &cls.IndexRuleKeyValueArgs{
+//						CaseSensitive: pulumi.Bool(true),
+//						KeyValues: cls.IndexRuleKeyValueKeyValueArray{
+//							&cls.IndexRuleKeyValueKeyValueArgs{
+//								Key: pulumi.String("hello"),
+//								Value: &cls.IndexRuleKeyValueKeyValueValueArgs{
+//									ContainZH: pulumi.Bool(true),
+//									SqlFlag:   pulumi.Bool(true),
+//									Tokenizer: pulumi.String(tokenizerValue),
+//									Type:      pulumi.String("text"),
+//								},
+//							},
+//							&cls.IndexRuleKeyValueKeyValueArgs{
+//								Key: pulumi.String("world"),
+//								Value: &cls.IndexRuleKeyValueKeyValueValueArgs{
+//									ContainZH: pulumi.Bool(true),
+//									SqlFlag:   pulumi.Bool(true),
+//									Tokenizer: pulumi.String(tokenizerValue),
+//									Type:      pulumi.String("text"),
+//								},
+//							},
+//						},
+//					},
+//					Tag: &cls.IndexRuleTagArgs{
+//						CaseSensitive: pulumi.Bool(true),
+//						KeyValues: cls.IndexRuleTagKeyValueArray{
+//							&cls.IndexRuleTagKeyValueArgs{
+//								Key: pulumi.String("terraform"),
+//								Value: &cls.IndexRuleTagKeyValueValueArgs{
+//									ContainZH: pulumi.Bool(true),
+//									SqlFlag:   pulumi.Bool(true),
+//									Tokenizer: pulumi.String(tokenizerValue),
+//									Type:      pulumi.String("text"),
+//								},
+//							},
+//						},
+//					},
+//					DynamicIndex: &cls.IndexRuleDynamicIndexArgs{
+//						Status: pulumi.Bool(true),
+//					},
+//				},
+//				Status:                pulumi.Bool(true),
+//				IncludeInternalFields: pulumi.Bool(true),
+//				MetadataFlag:          pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cls cos index can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cls/index:Index index 0937e56f-4008-49d2-ad2d-69c52a9f11cc
+// $ pulumi import tencentcloud:Cls/index:Index example 0937e56f-4008-49d2-ad2d-69c52a9f11cc
 // ```
 type Index struct {
 	pulumi.CustomResourceState
@@ -45,7 +151,7 @@ func NewIndex(ctx *pulumi.Context,
 	if args.TopicId == nil {
 		return nil, errors.New("invalid value for required argument 'TopicId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Index
 	err := ctx.RegisterResource("tencentcloud:Cls/index:Index", name, args, &resource, opts...)
 	if err != nil {
@@ -150,7 +256,7 @@ func (i *Index) ToIndexOutputWithContext(ctx context.Context) IndexOutput {
 // IndexArrayInput is an input type that accepts IndexArray and IndexArrayOutput values.
 // You can construct a concrete instance of `IndexArrayInput` via:
 //
-//          IndexArray{ IndexArgs{...} }
+//	IndexArray{ IndexArgs{...} }
 type IndexArrayInput interface {
 	pulumi.Input
 
@@ -175,7 +281,7 @@ func (i IndexArray) ToIndexArrayOutputWithContext(ctx context.Context) IndexArra
 // IndexMapInput is an input type that accepts IndexMap and IndexMapOutput values.
 // You can construct a concrete instance of `IndexMapInput` via:
 //
-//          IndexMap{ "key": IndexArgs{...} }
+//	IndexMap{ "key": IndexArgs{...} }
 type IndexMapInput interface {
 	pulumi.Input
 

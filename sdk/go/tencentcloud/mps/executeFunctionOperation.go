@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mps executeFunctionOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewExecuteFunctionOperation(ctx, "operation", &Mps.ExecuteFunctionOperationArgs{
-// 			FunctionArg:  pulumi.String("arg1"),
-// 			FunctionName: pulumi.String("ExampleFunc"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewExecuteFunctionOperation(ctx, "operation", &Mps.ExecuteFunctionOperationArgs{
+//				FunctionArg:  pulumi.String("arg1"),
+//				FunctionName: pulumi.String("ExampleFunc"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ExecuteFunctionOperation struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewExecuteFunctionOperation(ctx *pulumi.Context,
 	if args.FunctionName == nil {
 		return nil, errors.New("invalid value for required argument 'FunctionName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ExecuteFunctionOperation
 	err := ctx.RegisterResource("tencentcloud:Mps/executeFunctionOperation:ExecuteFunctionOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *ExecuteFunctionOperation) ToExecuteFunctionOperationOutputWithContext(c
 // ExecuteFunctionOperationArrayInput is an input type that accepts ExecuteFunctionOperationArray and ExecuteFunctionOperationArrayOutput values.
 // You can construct a concrete instance of `ExecuteFunctionOperationArrayInput` via:
 //
-//          ExecuteFunctionOperationArray{ ExecuteFunctionOperationArgs{...} }
+//	ExecuteFunctionOperationArray{ ExecuteFunctionOperationArgs{...} }
 type ExecuteFunctionOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i ExecuteFunctionOperationArray) ToExecuteFunctionOperationArrayOutputWith
 // ExecuteFunctionOperationMapInput is an input type that accepts ExecuteFunctionOperationMap and ExecuteFunctionOperationMapOutput values.
 // You can construct a concrete instance of `ExecuteFunctionOperationMapInput` via:
 //
-//          ExecuteFunctionOperationMap{ "key": ExecuteFunctionOperationArgs{...} }
+//	ExecuteFunctionOperationMap{ "key": ExecuteFunctionOperationArgs{...} }
 type ExecuteFunctionOperationMapInput interface {
 	pulumi.Input
 

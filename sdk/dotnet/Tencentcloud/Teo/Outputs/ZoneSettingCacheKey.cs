@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class ZoneSettingCacheKey
     {
         /// <summary>
-        /// Specifies whether to enable full-path cache.- `on`: Enable full-path cache (i.e., disable Ignore Query String).- `off`: Disable full-path cache (i.e., enable Ignore Query String). Note: This field may return null, indicating that no valid value can be obtained.
+        /// Specifies whether to enable full-path cache.
         /// </summary>
         public readonly string? FullUrlCache;
         /// <summary>

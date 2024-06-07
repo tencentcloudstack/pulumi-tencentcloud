@@ -15,84 +15,82 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// <summary>
         /// Use this data source to query API gateway access keys.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var test = new Tencentcloud.ApiGateway.ApiKey("test", new()
         ///     {
-        ///         var test = new Tencentcloud.ApiGateway.ApiKey("test", new Tencentcloud.ApiGateway.ApiKeyArgs
-        ///         {
-        ///             SecretName = "my_api_key",
-        ///             Status = "on",
-        ///         });
-        ///         var name = Tencentcloud.ApiGateway.GetApiKeys.Invoke(new Tencentcloud.ApiGateway.GetApiKeysInvokeArgs
-        ///         {
-        ///             SecretName = test.SecretName,
-        ///         });
-        ///         var id = Tencentcloud.ApiGateway.GetApiKeys.Invoke(new Tencentcloud.ApiGateway.GetApiKeysInvokeArgs
-        ///         {
-        ///             ApiKeyId = test.Id,
-        ///         });
-        ///     }
+        ///         SecretName = "my_api_key",
+        ///         Status = "on",
+        ///     });
         /// 
-        /// }
+        ///     var name = Tencentcloud.ApiGateway.GetApiKeys.Invoke(new()
+        ///     {
+        ///         SecretName = test.SecretName,
+        ///     });
+        /// 
+        ///     var id = Tencentcloud.ApiGateway.GetApiKeys.Invoke(new()
+        ///     {
+        ///         ApiKeyId = test.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetApiKeysResult> InvokeAsync(GetApiKeysArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetApiKeysResult>("tencentcloud:ApiGateway/getApiKeys:getApiKeys", args ?? new GetApiKeysArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetApiKeysResult>("tencentcloud:ApiGateway/getApiKeys:getApiKeys", args ?? new GetApiKeysArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query API gateway access keys.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var test = new Tencentcloud.ApiGateway.ApiKey("test", new()
         ///     {
-        ///         var test = new Tencentcloud.ApiGateway.ApiKey("test", new Tencentcloud.ApiGateway.ApiKeyArgs
-        ///         {
-        ///             SecretName = "my_api_key",
-        ///             Status = "on",
-        ///         });
-        ///         var name = Tencentcloud.ApiGateway.GetApiKeys.Invoke(new Tencentcloud.ApiGateway.GetApiKeysInvokeArgs
-        ///         {
-        ///             SecretName = test.SecretName,
-        ///         });
-        ///         var id = Tencentcloud.ApiGateway.GetApiKeys.Invoke(new Tencentcloud.ApiGateway.GetApiKeysInvokeArgs
-        ///         {
-        ///             ApiKeyId = test.Id,
-        ///         });
-        ///     }
+        ///         SecretName = "my_api_key",
+        ///         Status = "on",
+        ///     });
         /// 
-        /// }
+        ///     var name = Tencentcloud.ApiGateway.GetApiKeys.Invoke(new()
+        ///     {
+        ///         SecretName = test.SecretName,
+        ///     });
+        /// 
+        ///     var id = Tencentcloud.ApiGateway.GetApiKeys.Invoke(new()
+        ///     {
+        ///         ApiKeyId = test.Id,
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetApiKeysResult> Invoke(GetApiKeysInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetApiKeysResult>("tencentcloud:ApiGateway/getApiKeys:getApiKeys", args ?? new GetApiKeysInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetApiKeysResult>("tencentcloud:ApiGateway/getApiKeys:getApiKeys", args ?? new GetApiKeysInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetApiKeysArgs : Pulumi.InvokeArgs
+    public sealed class GetApiKeysArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Created API key ID, this field is exactly the same as ID.
@@ -115,9 +113,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetApiKeysArgs()
         {
         }
+        public static new GetApiKeysArgs Empty => new GetApiKeysArgs();
     }
 
-    public sealed class GetApiKeysInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetApiKeysInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Created API key ID, this field is exactly the same as ID.
@@ -140,6 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         public GetApiKeysInvokeArgs()
         {
         }
+        public static new GetApiKeysInvokeArgs Empty => new GetApiKeysInvokeArgs();
     }
 
 

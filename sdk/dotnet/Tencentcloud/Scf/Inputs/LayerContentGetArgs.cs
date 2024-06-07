@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
 {
 
-    public sealed class LayerContentGetArgs : Pulumi.ResourceArgs
+    public sealed class LayerContentGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cos bucket name of the SCF layer, such as `cos-1234567890`, conflict with `zip_file`.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public LayerContentGetArgs()
         {
         }
+        public static new LayerContentGetArgs Empty => new LayerContentGetArgs();
     }
 }

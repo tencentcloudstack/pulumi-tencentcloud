@@ -17,74 +17,72 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// 
         /// &gt; **NOTE:**
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var vr = Tencentcloud.Cdn.GetDomainVerifier.Invoke(new()
         ///     {
-        ///         var vr = Output.Create(Tencentcloud.Cdn.GetDomainVerifier.InvokeAsync(new Tencentcloud.Cdn.GetDomainVerifierArgs
-        ///         {
-        ///             Domain = "www.examplexxx123.com",
-        ///             AutoVerify = true,
-        ///             FreezeRecord = true,
-        ///         }));
-        ///         var recordValue = data.Tencentcloud_cdn_domain_verifier.Record;
-        ///         var recordType = data.Tencentcloud_cdn_domain_verifier.Record_type;
-        ///     }
+        ///         Domain = "www.examplexxx123.com",
+        ///         AutoVerify = true,
+        ///         FreezeRecord = true,
+        ///     });
         /// 
-        /// }
+        ///     var recordValue = data.Tencentcloud_cdn_domain_verifier.Record;
+        /// 
+        ///     var recordType = data.Tencentcloud_cdn_domain_verifier.Record_type;
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDomainVerifierResult> InvokeAsync(GetDomainVerifierArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDomainVerifierResult>("tencentcloud:Cdn/getDomainVerifier:getDomainVerifier", args ?? new GetDomainVerifierArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDomainVerifierResult>("tencentcloud:Cdn/getDomainVerifier:getDomainVerifier", args ?? new GetDomainVerifierArgs(), options.WithDefaults());
 
         /// <summary>
         /// Provides a resource to check or create a cdn Domain Verify Record
         /// 
         /// &gt; **NOTE:**
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var vr = Tencentcloud.Cdn.GetDomainVerifier.Invoke(new()
         ///     {
-        ///         var vr = Output.Create(Tencentcloud.Cdn.GetDomainVerifier.InvokeAsync(new Tencentcloud.Cdn.GetDomainVerifierArgs
-        ///         {
-        ///             Domain = "www.examplexxx123.com",
-        ///             AutoVerify = true,
-        ///             FreezeRecord = true,
-        ///         }));
-        ///         var recordValue = data.Tencentcloud_cdn_domain_verifier.Record;
-        ///         var recordType = data.Tencentcloud_cdn_domain_verifier.Record_type;
-        ///     }
+        ///         Domain = "www.examplexxx123.com",
+        ///         AutoVerify = true,
+        ///         FreezeRecord = true,
+        ///     });
         /// 
-        /// }
+        ///     var recordValue = data.Tencentcloud_cdn_domain_verifier.Record;
+        /// 
+        ///     var recordType = data.Tencentcloud_cdn_domain_verifier.Record_type;
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDomainVerifierResult> Invoke(GetDomainVerifierInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDomainVerifierResult>("tencentcloud:Cdn/getDomainVerifier:getDomainVerifier", args ?? new GetDomainVerifierInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDomainVerifierResult>("tencentcloud:Cdn/getDomainVerifier:getDomainVerifier", args ?? new GetDomainVerifierInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDomainVerifierArgs : Pulumi.InvokeArgs
+    public sealed class GetDomainVerifierArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Specify whether to keep first create result instead of re-create again.
@@ -125,9 +123,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public GetDomainVerifierArgs()
         {
         }
+        public static new GetDomainVerifierArgs Empty => new GetDomainVerifierArgs();
     }
 
-    public sealed class GetDomainVerifierInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDomainVerifierInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Specify whether to keep first create result instead of re-create again.
@@ -168,6 +167,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public GetDomainVerifierInvokeArgs()
         {
         }
+        public static new GetDomainVerifierInvokeArgs Empty => new GetDomainVerifierInvokeArgs();
     }
 
 

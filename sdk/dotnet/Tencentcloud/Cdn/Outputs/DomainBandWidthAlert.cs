@@ -30,7 +30,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
         /// Counter measure.
         /// </summary>
         public readonly string? CounterMeasure;
+        /// <summary>
+        /// Last trigger time.
+        /// </summary>
         public readonly string? LastTriggerTime;
+        /// <summary>
+        /// Last trigger time of overseas.
+        /// </summary>
         public readonly string? LastTriggerTimeOverseas;
         /// <summary>
         /// Metric.

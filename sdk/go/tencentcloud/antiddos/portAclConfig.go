@@ -7,51 +7,56 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a antiddos port acl config
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Antiddos"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Antiddos.NewPortAclConfig(ctx, "portAclConfig", &Antiddos.PortAclConfigArgs{
-// 			AclConfig: &antiddos.PortAclConfigAclConfigArgs{
-// 				Action:          pulumi.String("drop"),
-// 				DPortEnd:        pulumi.Int(23),
-// 				DPortStart:      pulumi.Int(22),
-// 				ForwardProtocol: pulumi.String("all"),
-// 				Priority:        pulumi.Int(2),
-// 				SPortEnd:        pulumi.Int(23),
-// 				SPortStart:      pulumi.Int(22),
-// 			},
-// 			InstanceId: pulumi.String("bgp-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Antiddos.NewPortAclConfig(ctx, "portAclConfig", &Antiddos.PortAclConfigArgs{
+//				AclConfig: &antiddos.PortAclConfigAclConfigArgs{
+//					Action:          pulumi.String("drop"),
+//					DPortEnd:        pulumi.Int(23),
+//					DPortStart:      pulumi.Int(22),
+//					ForwardProtocol: pulumi.String("all"),
+//					Priority:        pulumi.Int(2),
+//					SPortEnd:        pulumi.Int(23),
+//					SPortStart:      pulumi.Int(22),
+//				},
+//				InstanceId: pulumi.String("bgp-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // antiddos port_acl_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Antiddos/portAclConfig:PortAclConfig port_acl_config ${instanceId}#${configJson}
+// $ pulumi import tencentcloud:Antiddos/portAclConfig:PortAclConfig port_acl_config ${instanceId}#${configJson}
 // ```
 type PortAclConfig struct {
 	pulumi.CustomResourceState
@@ -75,7 +80,7 @@ func NewPortAclConfig(ctx *pulumi.Context,
 	if args.InstanceId == nil {
 		return nil, errors.New("invalid value for required argument 'InstanceId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource PortAclConfig
 	err := ctx.RegisterResource("tencentcloud:Antiddos/portAclConfig:PortAclConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -156,7 +161,7 @@ func (i *PortAclConfig) ToPortAclConfigOutputWithContext(ctx context.Context) Po
 // PortAclConfigArrayInput is an input type that accepts PortAclConfigArray and PortAclConfigArrayOutput values.
 // You can construct a concrete instance of `PortAclConfigArrayInput` via:
 //
-//          PortAclConfigArray{ PortAclConfigArgs{...} }
+//	PortAclConfigArray{ PortAclConfigArgs{...} }
 type PortAclConfigArrayInput interface {
 	pulumi.Input
 
@@ -181,7 +186,7 @@ func (i PortAclConfigArray) ToPortAclConfigArrayOutputWithContext(ctx context.Co
 // PortAclConfigMapInput is an input type that accepts PortAclConfigMap and PortAclConfigMapOutput values.
 // You can construct a concrete instance of `PortAclConfigMapInput` via:
 //
-//          PortAclConfigMap{ "key": PortAclConfigArgs{...} }
+//	PortAclConfigMap{ "key": PortAclConfigArgs{...} }
 type PortAclConfigMapInput interface {
 	pulumi.Input
 

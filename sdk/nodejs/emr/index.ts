@@ -5,16 +5,36 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./cluster";
-export * from "./getAutoScaleRecords";
-export * from "./getCvmQuota";
-export * from "./getInstance";
-export * from "./getNodes";
-export * from "./userManager";
+export { ClusterArgs, ClusterState } from "./cluster";
+export type Cluster = import("./cluster").Cluster;
+export const Cluster: typeof import("./cluster").Cluster = null as any;
+utilities.lazyLoad(exports, ["Cluster"], () => require("./cluster"));
 
-// Import resources to register:
-import { Cluster } from "./cluster";
-import { UserManager } from "./userManager";
+export { GetAutoScaleRecordsArgs, GetAutoScaleRecordsResult, GetAutoScaleRecordsOutputArgs } from "./getAutoScaleRecords";
+export const getAutoScaleRecords: typeof import("./getAutoScaleRecords").getAutoScaleRecords = null as any;
+export const getAutoScaleRecordsOutput: typeof import("./getAutoScaleRecords").getAutoScaleRecordsOutput = null as any;
+utilities.lazyLoad(exports, ["getAutoScaleRecords","getAutoScaleRecordsOutput"], () => require("./getAutoScaleRecords"));
+
+export { GetCvmQuotaArgs, GetCvmQuotaResult, GetCvmQuotaOutputArgs } from "./getCvmQuota";
+export const getCvmQuota: typeof import("./getCvmQuota").getCvmQuota = null as any;
+export const getCvmQuotaOutput: typeof import("./getCvmQuota").getCvmQuotaOutput = null as any;
+utilities.lazyLoad(exports, ["getCvmQuota","getCvmQuotaOutput"], () => require("./getCvmQuota"));
+
+export { GetInstanceArgs, GetInstanceResult, GetInstanceOutputArgs } from "./getInstance";
+export const getInstance: typeof import("./getInstance").getInstance = null as any;
+export const getInstanceOutput: typeof import("./getInstance").getInstanceOutput = null as any;
+utilities.lazyLoad(exports, ["getInstance","getInstanceOutput"], () => require("./getInstance"));
+
+export { GetNodesArgs, GetNodesResult, GetNodesOutputArgs } from "./getNodes";
+export const getNodes: typeof import("./getNodes").getNodes = null as any;
+export const getNodesOutput: typeof import("./getNodes").getNodesOutput = null as any;
+utilities.lazyLoad(exports, ["getNodes","getNodesOutput"], () => require("./getNodes"));
+
+export { UserManagerArgs, UserManagerState } from "./userManager";
+export type UserManager = import("./userManager").UserManager;
+export const UserManager: typeof import("./userManager").UserManager = null as any;
+utilities.lazyLoad(exports, ["UserManager"], () => require("./userManager"));
+
 
 const _module = {
     version: utilities.getVersion(),

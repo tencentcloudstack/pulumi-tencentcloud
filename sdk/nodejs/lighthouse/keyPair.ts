@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const keyPair = new tencentcloud.Lighthouse.KeyPair("key_pair", {
- *     keyName: "key_name_test",
- * });
+ * const keyPair = new tencentcloud.lighthouse.KeyPair("keyPair", {keyName: "key_name_test"});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * lighthouse key_pair can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Lighthouse/keyPair:KeyPair key_pair key_pair_id
+ * $ pulumi import tencentcloud:Lighthouse/keyPair:KeyPair key_pair key_pair_id
  * ```
  */
 export class KeyPair extends pulumi.CustomResource {

@@ -14,36 +14,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// Provides a resource to create a vpc flow_log_config
     /// 
     /// ## Example Usage
+    /// 
     /// ### If enable FlowLogs
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Tencentcloud.Vpc.FlowLogConfig("config", new()
     ///     {
-    ///         var config = new Tencentcloud.Vpc.FlowLogConfig("config", new Tencentcloud.Vpc.FlowLogConfigArgs
-    ///         {
-    ///             FlowLogId = tencentcloud_vpc_flow_log.Example.Id,
-    ///             Enable = true,
-    ///         });
-    ///     }
+    ///         FlowLogId = tencentcloud_vpc_flow_log.Example.Id,
+    ///         Enable = true,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// vpc flow_log_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/flowLogConfig:FlowLogConfig flow_log_config flow_log_id
+    /// $ pulumi import tencentcloud:Vpc/flowLogConfig:FlowLogConfig flow_log_config flow_log_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/flowLogConfig:FlowLogConfig")]
-    public partial class FlowLogConfig : Pulumi.CustomResource
+    public partial class FlowLogConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// If enable snapshot policy.
@@ -102,7 +104,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class FlowLogConfigArgs : Pulumi.ResourceArgs
+    public sealed class FlowLogConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// If enable snapshot policy.
@@ -119,9 +121,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public FlowLogConfigArgs()
         {
         }
+        public static new FlowLogConfigArgs Empty => new FlowLogConfigArgs();
     }
 
-    public sealed class FlowLogConfigState : Pulumi.ResourceArgs
+    public sealed class FlowLogConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// If enable snapshot policy.
@@ -138,5 +141,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public FlowLogConfigState()
         {
         }
+        public static new FlowLogConfigState Empty => new FlowLogConfigState();
     }
 }

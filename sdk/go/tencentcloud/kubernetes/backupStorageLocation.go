@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create tke backup storage location.
@@ -17,34 +18,39 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kubernetes.NewBackupStorageLocation(ctx, "exampleBackup", &Kubernetes.BackupStorageLocationArgs{
-// 			Bucket:        pulumi.String("tke-backup-example-1"),
-// 			StorageRegion: pulumi.String("ap-guangzhou"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kubernetes.NewBackupStorageLocation(ctx, "exampleBackup", &Kubernetes.BackupStorageLocationArgs{
+//				Bucket:        pulumi.String("tke-backup-example-1"),
+//				StorageRegion: pulumi.String("ap-guangzhou"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tke backup storage location can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Kubernetes/backupStorageLocation:BackupStorageLocation test xxx
+// $ pulumi import tencentcloud:Kubernetes/backupStorageLocation:BackupStorageLocation test xxx
 // ```
 type BackupStorageLocation struct {
 	pulumi.CustomResourceState
@@ -76,7 +82,7 @@ func NewBackupStorageLocation(ctx *pulumi.Context,
 	if args.StorageRegion == nil {
 		return nil, errors.New("invalid value for required argument 'StorageRegion'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BackupStorageLocation
 	err := ctx.RegisterResource("tencentcloud:Kubernetes/backupStorageLocation:BackupStorageLocation", name, args, &resource, opts...)
 	if err != nil {
@@ -181,7 +187,7 @@ func (i *BackupStorageLocation) ToBackupStorageLocationOutputWithContext(ctx con
 // BackupStorageLocationArrayInput is an input type that accepts BackupStorageLocationArray and BackupStorageLocationArrayOutput values.
 // You can construct a concrete instance of `BackupStorageLocationArrayInput` via:
 //
-//          BackupStorageLocationArray{ BackupStorageLocationArgs{...} }
+//	BackupStorageLocationArray{ BackupStorageLocationArgs{...} }
 type BackupStorageLocationArrayInput interface {
 	pulumi.Input
 
@@ -206,7 +212,7 @@ func (i BackupStorageLocationArray) ToBackupStorageLocationArrayOutputWithContex
 // BackupStorageLocationMapInput is an input type that accepts BackupStorageLocationMap and BackupStorageLocationMapOutput values.
 // You can construct a concrete instance of `BackupStorageLocationMapInput` via:
 //
-//          BackupStorageLocationMap{ "key": BackupStorageLocationArgs{...} }
+//	BackupStorageLocationMap{ "key": BackupStorageLocationArgs{...} }
 type BackupStorageLocationMapInput interface {
 	pulumi.Input
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
 {
 
-    public sealed class ApplicationServiceConfigListGetArgs : Pulumi.ResourceArgs
+    public sealed class ApplicationServiceConfigListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Health check configuration.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf.Inputs
         public ApplicationServiceConfigListGetArgs()
         {
         }
+        public static new ApplicationServiceConfigListGetArgs Empty => new ApplicationServiceConfigListGetArgs();
     }
 }

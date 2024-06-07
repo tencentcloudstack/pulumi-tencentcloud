@@ -15,84 +15,78 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// <summary>
         /// Use this data source to query detailed information of tdmq pro_instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var proInstancesFilter = Tencentcloud.Tdmq.GetProInstances.Invoke(new()
         ///     {
-        ///         var proInstancesFilter = Output.Create(Tencentcloud.Tdmq.GetProInstances.InvokeAsync(new Tencentcloud.Tdmq.GetProInstancesArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Tdmq.Inputs.GetProInstancesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Tdmq.Inputs.GetProInstancesFilterArgs
+        ///                 Name = "InstanceName",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "InstanceName",
-        ///                     Values = 
-        ///                     {
-        ///                         "keep",
-        ///                     },
+        ///                     "keep",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetProInstancesResult> InvokeAsync(GetProInstancesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetProInstancesResult>("tencentcloud:Tdmq/getProInstances:getProInstances", args ?? new GetProInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetProInstancesResult>("tencentcloud:Tdmq/getProInstances:getProInstances", args ?? new GetProInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tdmq pro_instances
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var proInstancesFilter = Tencentcloud.Tdmq.GetProInstances.Invoke(new()
         ///     {
-        ///         var proInstancesFilter = Output.Create(Tencentcloud.Tdmq.GetProInstances.InvokeAsync(new Tencentcloud.Tdmq.GetProInstancesArgs
+        ///         Filters = new[]
         ///         {
-        ///             Filters = 
+        ///             new Tencentcloud.Tdmq.Inputs.GetProInstancesFilterInputArgs
         ///             {
-        ///                 new Tencentcloud.Tdmq.Inputs.GetProInstancesFilterArgs
+        ///                 Name = "InstanceName",
+        ///                 Values = new[]
         ///                 {
-        ///                     Name = "InstanceName",
-        ///                     Values = 
-        ///                     {
-        ///                         "keep",
-        ///                     },
+        ///                     "keep",
         ///                 },
         ///             },
-        ///         }));
-        ///     }
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetProInstancesResult> Invoke(GetProInstancesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetProInstancesResult>("tencentcloud:Tdmq/getProInstances:getProInstances", args ?? new GetProInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetProInstancesResult>("tencentcloud:Tdmq/getProInstances:getProInstances", args ?? new GetProInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetProInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetProInstancesArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetProInstancesFilterArgs>? _filters;
@@ -115,9 +109,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetProInstancesArgs()
         {
         }
+        public static new GetProInstancesArgs Empty => new GetProInstancesArgs();
     }
 
-    public sealed class GetProInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetProInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetProInstancesFilterInputArgs>? _filters;
@@ -140,6 +135,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public GetProInstancesInvokeArgs()
         {
         }
+        public static new GetProInstancesInvokeArgs Empty => new GetProInstancesInvokeArgs();
     }
 
 

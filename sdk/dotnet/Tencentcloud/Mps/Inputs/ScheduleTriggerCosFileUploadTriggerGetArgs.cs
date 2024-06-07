@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ScheduleTriggerCosFileUploadTriggerGetArgs : Pulumi.ResourceArgs
+    public sealed class ScheduleTriggerCosFileUploadTriggerGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of the COS bucket bound to a workflow, such as `TopRankVideo-125xxx88`.
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ScheduleTriggerCosFileUploadTriggerGetArgs()
         {
         }
+        public static new ScheduleTriggerCosFileUploadTriggerGetArgs Empty => new ScheduleTriggerCosFileUploadTriggerGetArgs();
     }
 }

@@ -15,68 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// <summary>
         /// Use this data source to query detailed information of elasticsearch diagnose
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var diagnose = Tencentcloud.Elasticsearch.GetDiagnose.Invoke(new()
         ///     {
-        ///         var diagnose = Output.Create(Tencentcloud.Elasticsearch.GetDiagnose.InvokeAsync(new Tencentcloud.Elasticsearch.GetDiagnoseArgs
-        ///         {
-        ///             Date = "20231030",
-        ///             InstanceId = "es-xxxxxx",
-        ///             Limit = 1,
-        ///         }));
-        ///     }
+        ///         Date = "20231030",
+        ///         InstanceId = "es-xxxxxx",
+        ///         Limit = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetDiagnoseResult> InvokeAsync(GetDiagnoseArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDiagnoseResult>("tencentcloud:Elasticsearch/getDiagnose:getDiagnose", args ?? new GetDiagnoseArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDiagnoseResult>("tencentcloud:Elasticsearch/getDiagnose:getDiagnose", args ?? new GetDiagnoseArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of elasticsearch diagnose
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var diagnose = Tencentcloud.Elasticsearch.GetDiagnose.Invoke(new()
         ///     {
-        ///         var diagnose = Output.Create(Tencentcloud.Elasticsearch.GetDiagnose.InvokeAsync(new Tencentcloud.Elasticsearch.GetDiagnoseArgs
-        ///         {
-        ///             Date = "20231030",
-        ///             InstanceId = "es-xxxxxx",
-        ///             Limit = 1,
-        ///         }));
-        ///     }
+        ///         Date = "20231030",
+        ///         InstanceId = "es-xxxxxx",
+        ///         Limit = 1,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetDiagnoseResult> Invoke(GetDiagnoseInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDiagnoseResult>("tencentcloud:Elasticsearch/getDiagnose:getDiagnose", args ?? new GetDiagnoseInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDiagnoseResult>("tencentcloud:Elasticsearch/getDiagnose:getDiagnose", args ?? new GetDiagnoseInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDiagnoseArgs : Pulumi.InvokeArgs
+    public sealed class GetDiagnoseArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Report date, format 20210301.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public GetDiagnoseArgs()
         {
         }
+        public static new GetDiagnoseArgs Empty => new GetDiagnoseArgs();
     }
 
-    public sealed class GetDiagnoseInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDiagnoseInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Report date, format 20210301.
@@ -136,6 +131,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public GetDiagnoseInvokeArgs()
         {
         }
+        public static new GetDiagnoseInvokeArgs Empty => new GetDiagnoseInvokeArgs();
     }
 
 

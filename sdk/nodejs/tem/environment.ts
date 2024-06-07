@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const environment = new tencentcloud.Tem.Environment("environment", {
+ * const environment = new tencentcloud.tem.Environment("environment", {
  *     description: "demo for test",
  *     environmentName: "demo",
  *     subnetIds: [
@@ -27,13 +28,14 @@ import * as utilities from "../utilities";
  *     vpc: "vpc-2hfyray3",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * tem environment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Tem/environment:Environment environment environment_id
+ * $ pulumi import tencentcloud:Tem/environment:Environment environment environment_id
  * ```
  */
 export class Environment extends pulumi.CustomResource {

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const diagEvents = pulumi.output(tencentcloud.Dbbrain.getDiagEvents({
+ * const diagEvents = tencentcloud.Dbbrain.getDiagEvents({
  *     endTime: "%s",
  *     instanceIds: ["%s"],
  *     severities: [
@@ -23,15 +25,13 @@ import * as utilities from "../utilities";
  *         5,
  *     ],
  *     startTime: "%s",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDiagEvents(args: GetDiagEventsArgs, opts?: pulumi.InvokeOptions): Promise<GetDiagEventsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dbbrain/getDiagEvents:getDiagEvents", {
         "endTime": args.endTime,
         "instanceIds": args.instanceIds,
@@ -91,9 +91,31 @@ export interface GetDiagEventsResult {
      */
     readonly startTime: string;
 }
-
+/**
+ * Use this data source to query detailed information of dbbrain diagEvents
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const diagEvents = tencentcloud.Dbbrain.getDiagEvents({
+ *     endTime: "%s",
+ *     instanceIds: ["%s"],
+ *     severities: [
+ *         1,
+ *         4,
+ *         5,
+ *     ],
+ *     startTime: "%s",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDiagEventsOutput(args: GetDiagEventsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDiagEventsResult> {
-    return pulumi.output(args).apply(a => getDiagEvents(a, opts))
+    return pulumi.output(args).apply((a: any) => getDiagEvents(a, opts))
 }
 
 /**

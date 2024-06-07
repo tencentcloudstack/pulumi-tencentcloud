@@ -9,24 +9,26 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
- * import * from "fs";
+ * import * as fs from "fs";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const personSample = new tencentcloud.mps.PersonSample("personSample", {
  *     usages: ["Review.Face"],
  *     description: "test",
- *     faceContents: [Buffer.from(fs.readFileSync("./person.png"), 'binary').toString('base64')],
+ *     faceContents: [fs.readFileSync("./person.png", { encoding: "base64" })],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mps person_sample can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/personSample:PersonSample person_sample person_sample_id
+ * $ pulumi import tencentcloud:Mps/personSample:PersonSample person_sample person_sample_id
  * ```
  */
 export class PersonSample extends pulumi.CustomResource {

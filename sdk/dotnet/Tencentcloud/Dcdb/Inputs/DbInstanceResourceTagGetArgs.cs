@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb.Inputs
 {
 
-    public sealed class DbInstanceResourceTagGetArgs : Pulumi.ResourceArgs
+    public sealed class DbInstanceResourceTagGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The key of tag.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb.Inputs
         public DbInstanceResourceTagGetArgs()
         {
         }
+        public static new DbInstanceResourceTagGetArgs Empty => new DbInstanceResourceTagGetArgs();
     }
 }

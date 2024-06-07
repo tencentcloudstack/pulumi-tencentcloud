@@ -7,94 +7,125 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this resource to create TcaplusDB table.
 //
 // ## Example Usage
+//
 // ### Create a tcaplus database table
 //
 // The tcaplus database table should be pre-defined in the idl file.
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tcaplus"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZone),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		vpcId := vpc.InstanceLists[0].VpcId
-// 		subnetId := vpc.InstanceLists[0].SubnetId
-// 		exampleCluster, err := Tcaplus.NewCluster(ctx, "exampleCluster", &Tcaplus.ClusterArgs{
-// 			IdlType:               pulumi.String("PROTO"),
-// 			ClusterName:           pulumi.String("tf_example_tcaplus_cluster"),
-// 			VpcId:                 pulumi.String(vpcId),
-// 			SubnetId:              pulumi.String(subnetId),
-// 			Password:              pulumi.String("your_pw_123111"),
-// 			OldPasswordExpireLast: pulumi.Int(3600),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleTablegroup, err := Tcaplus.NewTablegroup(ctx, "exampleTablegroup", &Tcaplus.TablegroupArgs{
-// 			ClusterId:      exampleCluster.ID(),
-// 			TablegroupName: pulumi.String("tf_example_group_name"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleIdl, err := Tcaplus.NewIdl(ctx, "exampleIdl", &Tcaplus.IdlArgs{
-// 			ClusterId:    exampleCluster.ID(),
-// 			TablegroupId: exampleTablegroup.ID(),
-// 			FileName:     pulumi.String("tf_example_tcaplus_idl"),
-// 			FileType:     pulumi.String("PROTO"),
-// 			FileExtType:  pulumi.String("proto"),
-// 			FileContent:  pulumi.String(fmt.Sprintf("%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v%v", "    syntax = \"proto2\";\n", "    package myTcaplusTable;\n", "    import \"tcaplusservice.optionv1.proto\";\n", "    message example_table { # refer the table name\n", "        option(tcaplusservice.tcaplus_primary_key) = \"uin,name,region\";\n", "        required int64 uin = 1;\n", "        required string name = 2;\n", "        required int32 region = 3;\n", "        required int32 gamesvrid = 4;\n", "        optional int32 logintime = 5 [default = 1];\n", "        repeated int64 lockid = 6 [packed = true];\n", "        optional bool is_available = 7 [default = false];\n", "        optional pay_info pay = 8;\n", "    }\n", "\n", "    message pay_info {\n", "        required int64 pay_id = 1;\n", "        optional uint64 total_money = 2;\n", "        optional uint64 pay_times = 3;\n", "        optional pay_auth_info auth = 4;\n", "        message pay_auth_info {\n", "            required string pay_keys = 1;\n", "            optional int64 update_time = 2;\n", "        }\n", "    }\n")),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Tcaplus.NewTable(ctx, "exampleTable", &Tcaplus.TableArgs{
-// 			ClusterId:       exampleCluster.ID(),
-// 			TablegroupId:    exampleTablegroup.ID(),
-// 			TableName:       pulumi.String("example_table"),
-// 			TableType:       pulumi.String("GENERIC"),
-// 			Description:     pulumi.String("test"),
-// 			IdlId:           exampleIdl.ID(),
-// 			TableIdlType:    pulumi.String("PROTO"),
-// 			ReservedReadCu:  pulumi.Int(1000),
-// 			ReservedWriteCu: pulumi.Int(20),
-// 			ReservedVolume:  pulumi.Int(1),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
+//				IsDefault:        pulumi.BoolRef(true),
+//				AvailabilityZone: pulumi.StringRef(availabilityZone),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			vpcId := vpc.InstanceLists[0].VpcId
+//			subnetId := vpc.InstanceLists[0].SubnetId
+//			exampleCluster, err := Tcaplus.NewCluster(ctx, "exampleCluster", &Tcaplus.ClusterArgs{
+//				IdlType:               pulumi.String("PROTO"),
+//				ClusterName:           pulumi.String("tf_example_tcaplus_cluster"),
+//				VpcId:                 pulumi.String(vpcId),
+//				SubnetId:              pulumi.String(subnetId),
+//				Password:              pulumi.String("your_pw_123111"),
+//				OldPasswordExpireLast: pulumi.Int(3600),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleTablegroup, err := Tcaplus.NewTablegroup(ctx, "exampleTablegroup", &Tcaplus.TablegroupArgs{
+//				ClusterId:      exampleCluster.ID(),
+//				TablegroupName: pulumi.String("tf_example_group_name"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleIdl, err := Tcaplus.NewIdl(ctx, "exampleIdl", &Tcaplus.IdlArgs{
+//				ClusterId:    exampleCluster.ID(),
+//				TablegroupId: exampleTablegroup.ID(),
+//				FileName:     pulumi.String("tf_example_tcaplus_idl"),
+//				FileType:     pulumi.String("PROTO"),
+//				FileExtType:  pulumi.String("proto"),
+//				FileContent: pulumi.String(`    syntax = "proto2";
+//	    package myTcaplusTable;
+//	    import "tcaplusservice.optionv1.proto";
+//	    message example_table { # refer the table name
+//	        option(tcaplusservice.tcaplus_primary_key) = "uin,name,region";
+//	        required int64 uin = 1;
+//	        required string name = 2;
+//	        required int32 region = 3;
+//	        required int32 gamesvrid = 4;
+//	        optional int32 logintime = 5 [default = 1];
+//	        repeated int64 lockid = 6 [packed = true];
+//	        optional bool is_available = 7 [default = false];
+//	        optional pay_info pay = 8;
+//	    }
+//
+//	    message pay_info {
+//	        required int64 pay_id = 1;
+//	        optional uint64 total_money = 2;
+//	        optional uint64 pay_times = 3;
+//	        optional pay_auth_info auth = 4;
+//	        message pay_auth_info {
+//	            required string pay_keys = 1;
+//	            optional int64 update_time = 2;
+//	        }
+//	    }
+//
+// `),
+//
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Tcaplus.NewTable(ctx, "exampleTable", &Tcaplus.TableArgs{
+//				ClusterId:       exampleCluster.ID(),
+//				TablegroupId:    exampleTablegroup.ID(),
+//				TableName:       pulumi.String("example_table"),
+//				TableType:       pulumi.String("GENERIC"),
+//				Description:     pulumi.String("test"),
+//				IdlId:           exampleIdl.ID(),
+//				TableIdlType:    pulumi.String("PROTO"),
+//				ReservedReadCu:  pulumi.Int(1000),
+//				ReservedWriteCu: pulumi.Int(20),
+//				ReservedVolume:  pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type Table struct {
 	pulumi.CustomResourceState
 
@@ -162,7 +193,7 @@ func NewTable(ctx *pulumi.Context,
 	if args.TablegroupId == nil {
 		return nil, errors.New("invalid value for required argument 'TablegroupId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Table
 	err := ctx.RegisterResource("tencentcloud:Tcaplus/table:Table", name, args, &resource, opts...)
 	if err != nil {
@@ -323,7 +354,7 @@ func (i *Table) ToTableOutputWithContext(ctx context.Context) TableOutput {
 // TableArrayInput is an input type that accepts TableArray and TableArrayOutput values.
 // You can construct a concrete instance of `TableArrayInput` via:
 //
-//          TableArray{ TableArgs{...} }
+//	TableArray{ TableArgs{...} }
 type TableArrayInput interface {
 	pulumi.Input
 
@@ -348,7 +379,7 @@ func (i TableArray) ToTableArrayOutputWithContext(ctx context.Context) TableArra
 // TableMapInput is an input type that accepts TableMap and TableMapOutput values.
 // You can construct a concrete instance of `TableMapInput` via:
 //
-//          TableMap{ "key": TableArgs{...} }
+//	TableMap{ "key": TableArgs{...} }
 type TableMapInput interface {
 	pulumi.Input
 

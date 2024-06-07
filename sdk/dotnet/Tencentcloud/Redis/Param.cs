@@ -15,54 +15,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var param = new Tencentcloud.Redis.Param("param", new()
     ///     {
-    ///         var param = new Tencentcloud.Redis.Param("param", new Tencentcloud.Redis.ParamArgs
+    ///         InstanceId = "crs-c1nl9rpv",
+    ///         InstanceParams = 
     ///         {
-    ///             InstanceId = "crs-c1nl9rpv",
-    ///             InstanceParams = 
-    ///             {
-    ///                 { "cluster-node-timeout", "15000" },
-    ///                 { "disable-command-list", "\"\"" },
-    ///                 { "hash-max-ziplist-entries", "512" },
-    ///                 { "hash-max-ziplist-value", "64" },
-    ///                 { "hz", "10" },
-    ///                 { "lazyfree-lazy-eviction", "yes" },
-    ///                 { "lazyfree-lazy-expire", "yes" },
-    ///                 { "lazyfree-lazy-server-del", "yes" },
-    ///                 { "maxmemory-policy", "noeviction" },
-    ///                 { "notify-keyspace-events", "\"\"" },
-    ///                 { "proxy-slowlog-log-slower-than", "500" },
-    ///                 { "replica-lazy-flush", "yes" },
-    ///                 { "sentineauth", "no" },
-    ///                 { "set-max-intset-entries", "512" },
-    ///                 { "slowlog-log-slower-than", "10" },
-    ///                 { "timeout", "31536000" },
-    ///                 { "zset-max-ziplist-entries", "128" },
-    ///                 { "zset-max-ziplist-value", "64" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "cluster-node-timeout", "15000" },
+    ///             { "disable-command-list", "\"\"" },
+    ///             { "hash-max-ziplist-entries", "512" },
+    ///             { "hash-max-ziplist-value", "64" },
+    ///             { "hz", "10" },
+    ///             { "lazyfree-lazy-eviction", "yes" },
+    ///             { "lazyfree-lazy-expire", "yes" },
+    ///             { "lazyfree-lazy-server-del", "yes" },
+    ///             { "maxmemory-policy", "noeviction" },
+    ///             { "notify-keyspace-events", "\"\"" },
+    ///             { "proxy-slowlog-log-slower-than", "500" },
+    ///             { "replica-lazy-flush", "yes" },
+    ///             { "sentineauth", "no" },
+    ///             { "set-max-intset-entries", "512" },
+    ///             { "slowlog-log-slower-than", "10" },
+    ///             { "timeout", "31536000" },
+    ///             { "zset-max-ziplist-entries", "128" },
+    ///             { "zset-max-ziplist-value", "64" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// redis param can be imported using the instanceId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Redis/param:Param param crs-c1nl9rpv
+    /// $ pulumi import tencentcloud:Redis/param:Param param crs-c1nl9rpv
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/param:Param")]
-    public partial class Param : Pulumi.CustomResource
+    public partial class Param : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The ID of instance.
@@ -121,7 +122,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         }
     }
 
-    public sealed class ParamArgs : Pulumi.ResourceArgs
+    public sealed class ParamArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -144,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public ParamArgs()
         {
         }
+        public static new ParamArgs Empty => new ParamArgs();
     }
 
-    public sealed class ParamState : Pulumi.ResourceArgs
+    public sealed class ParamState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The ID of instance.
@@ -169,5 +171,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         public ParamState()
         {
         }
+        public static new ParamState Empty => new ParamState();
     }
 }

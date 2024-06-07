@@ -15,42 +15,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Cfw.VpcPolicy("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Cfw.VpcPolicy("example", new Tencentcloud.Cfw.VpcPolicyArgs
-    ///         {
-    ///             Description = "description.",
-    ///             DestContent = "192.168.0.2",
-    ///             DestType = "net",
-    ///             Enable = "true",
-    ///             FwGroupId = "ALL",
-    ///             Port = "-1/-1",
-    ///             Protocol = "ANY",
-    ///             RuleAction = "log",
-    ///             SourceContent = "0.0.0.0/0",
-    ///             SourceType = "net",
-    ///         });
-    ///     }
+    ///         Description = "description.",
+    ///         DestContent = "192.168.0.2",
+    ///         DestType = "net",
+    ///         Enable = "true",
+    ///         FwGroupId = "ALL",
+    ///         Port = "-1/-1",
+    ///         Protocol = "ANY",
+    ///         RuleAction = "log",
+    ///         SourceContent = "0.0.0.0/0",
+    ///         SourceType = "net",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cfw vpc_policy can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfw/vpcPolicy:VpcPolicy vpc_policy vpc_policy_id
+    /// $ pulumi import tencentcloud:Cfw/vpcPolicy:VpcPolicy vpc_policy vpc_policy_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/vpcPolicy:VpcPolicy")]
-    public partial class VpcPolicy : Pulumi.CustomResource
+    public partial class VpcPolicy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Beta mission details. Note: This field may return null, indicating that no valid value can be obtained.
@@ -193,7 +194,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         }
     }
 
-    public sealed class VpcPolicyArgs : Pulumi.ResourceArgs
+    public sealed class VpcPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Describe.
@@ -258,9 +259,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public VpcPolicyArgs()
         {
         }
+        public static new VpcPolicyArgs Empty => new VpcPolicyArgs();
     }
 
-    public sealed class VpcPolicyState : Pulumi.ResourceArgs
+    public sealed class VpcPolicyState : global::Pulumi.ResourceArgs
     {
         [Input("betaLists")]
         private InputList<Inputs.VpcPolicyBetaListGetArgs>? _betaLists;
@@ -367,5 +369,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public VpcPolicyState()
         {
         }
+        public static new VpcPolicyState Empty => new VpcPolicyState();
     }
 }

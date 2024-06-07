@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var callbackRule = new Tencentcloud.Css.CallbackRuleAttachment("callbackRule", new()
     ///     {
-    ///         var callbackRule = new Tencentcloud.Css.CallbackRuleAttachment("callbackRule", new Tencentcloud.Css.CallbackRuleAttachmentArgs
-    ///         {
-    ///             AppName = "live",
-    ///             DomainName = "177154.push.tlivecloud.com",
-    ///             TemplateId = 434039,
-    ///         });
-    ///     }
+    ///         AppName = "live",
+    ///         DomainName = "177154.push.tlivecloud.com",
+    ///         TemplateId = 434039,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css callback_rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/callbackRuleAttachment:CallbackRuleAttachment callback_rule templateId#domainName
+    /// $ pulumi import tencentcloud:Css/callbackRuleAttachment:CallbackRuleAttachment callback_rule templateId#domainName
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/callbackRuleAttachment:CallbackRuleAttachment")]
-    public partial class CallbackRuleAttachment : Pulumi.CustomResource
+    public partial class CallbackRuleAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The streaming path is consistent with the AppName in the streaming and playback addresses. The default is live.
@@ -108,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class CallbackRuleAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class CallbackRuleAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The streaming path is consistent with the AppName in the streaming and playback addresses. The default is live.
@@ -131,9 +132,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public CallbackRuleAttachmentArgs()
         {
         }
+        public static new CallbackRuleAttachmentArgs Empty => new CallbackRuleAttachmentArgs();
     }
 
-    public sealed class CallbackRuleAttachmentState : Pulumi.ResourceArgs
+    public sealed class CallbackRuleAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The streaming path is consistent with the AppName in the streaming and playback addresses. The default is live.
@@ -156,5 +158,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public CallbackRuleAttachmentState()
         {
         }
+        public static new CallbackRuleAttachmentState Empty => new CallbackRuleAttachmentState();
     }
 }

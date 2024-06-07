@@ -14,59 +14,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// Provides a resource to create a tke encryption_protection
     /// 
     /// ## Example Usage
+    /// 
     /// ### Enable tke encryption protection
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var exampleRegion = config.Get("exampleRegion") ?? "ap-guangzhou";
+    ///     var exampleClusterCidr = config.Get("exampleClusterCidr") ?? "10.32.0.0/16";
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///     var vpc = Tencentcloud.Vpc.GetSubnets.Invoke(new()
     ///     {
-    ///         var config = new Config();
-    ///         var exampleRegion = config.Get("exampleRegion") ?? "ap-guangzhou";
-    ///         var exampleClusterCidr = config.Get("exampleClusterCidr") ?? "10.32.0.0/16";
-    ///         var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-    ///         var vpc = Output.Create(Tencentcloud.Vpc.GetSubnets.InvokeAsync(new Tencentcloud.Vpc.GetSubnetsArgs
-    ///         {
-    ///             IsDefault = true,
-    ///             AvailabilityZone = availabilityZone,
-    ///         }));
-    ///         var exampleCluster = new Tencentcloud.Kubernetes.Cluster("exampleCluster", new Tencentcloud.Kubernetes.ClusterArgs
-    ///         {
-    ///             VpcId = vpc.Apply(vpc =&gt; vpc.InstanceLists?[0]?.VpcId),
-    ///             ClusterCidr = exampleClusterCidr,
-    ///             ClusterMaxPodNum = 32,
-    ///             ClusterName = "tf_example_cluster",
-    ///             ClusterDesc = "a tf example cluster for the kms test",
-    ///             ClusterMaxServiceNum = 32,
-    ///             ClusterDeployType = "MANAGED_CLUSTER",
-    ///         });
-    ///         var exampleKey = new Tencentcloud.Kms.Key("exampleKey", new Tencentcloud.Kms.KeyArgs
-    ///         {
-    ///             Alias = "tf-example-kms-key",
-    ///             Description = "example of kms key instance",
-    ///             KeyUsage = "ENCRYPT_DECRYPT",
-    ///             IsEnabled = true,
-    ///         });
-    ///         var exampleEncryptionProtection = new Tencentcloud.Kubernetes.EncryptionProtection("exampleEncryptionProtection", new Tencentcloud.Kubernetes.EncryptionProtectionArgs
-    ///         {
-    ///             ClusterId = exampleCluster.Id,
-    ///             KmsConfiguration = new Tencentcloud.Kubernetes.Inputs.EncryptionProtectionKmsConfigurationArgs
-    ///             {
-    ///                 KeyId = exampleKey.Id,
-    ///                 KmsRegion = exampleRegion,
-    ///             },
-    ///         });
-    ///     }
+    ///         IsDefault = true,
+    ///         AvailabilityZone = availabilityZone,
+    ///     });
     /// 
-    /// }
+    ///     var exampleCluster = new Tencentcloud.Kubernetes.Cluster("exampleCluster", new()
+    ///     {
+    ///         VpcId = vpc.Apply(getSubnetsResult =&gt; getSubnetsResult.InstanceLists[0]?.VpcId),
+    ///         ClusterCidr = exampleClusterCidr,
+    ///         ClusterMaxPodNum = 32,
+    ///         ClusterName = "tf_example_cluster",
+    ///         ClusterDesc = "a tf example cluster for the kms test",
+    ///         ClusterMaxServiceNum = 32,
+    ///         ClusterDeployType = "MANAGED_CLUSTER",
+    ///     });
+    /// 
+    ///     var exampleKey = new Tencentcloud.Kms.Key("exampleKey", new()
+    ///     {
+    ///         Alias = "tf-example-kms-key",
+    ///         Description = "example of kms key instance",
+    ///         KeyUsage = "ENCRYPT_DECRYPT",
+    ///         IsEnabled = true,
+    ///     });
+    /// 
+    ///     var exampleEncryptionProtection = new Tencentcloud.Kubernetes.EncryptionProtection("exampleEncryptionProtection", new()
+    ///     {
+    ///         ClusterId = exampleCluster.Id,
+    ///         KmsConfiguration = new Tencentcloud.Kubernetes.Inputs.EncryptionProtectionKmsConfigurationArgs
+    ///         {
+    ///             KeyId = exampleKey.Id,
+    ///             KmsRegion = exampleRegion,
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/encryptionProtection:EncryptionProtection")]
-    public partial class EncryptionProtection : Pulumi.CustomResource
+    public partial class EncryptionProtection : global::Pulumi.CustomResource
     {
         /// <summary>
         /// cluster id.
@@ -131,7 +136,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         }
     }
 
-    public sealed class EncryptionProtectionArgs : Pulumi.ResourceArgs
+    public sealed class EncryptionProtectionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// cluster id.
@@ -148,9 +153,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public EncryptionProtectionArgs()
         {
         }
+        public static new EncryptionProtectionArgs Empty => new EncryptionProtectionArgs();
     }
 
-    public sealed class EncryptionProtectionState : Pulumi.ResourceArgs
+    public sealed class EncryptionProtectionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// cluster id.
@@ -173,5 +179,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public EncryptionProtectionState()
         {
         }
+        public static new EncryptionProtectionState Empty => new EncryptionProtectionState();
     }
 }

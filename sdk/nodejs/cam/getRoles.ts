@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,6 +11,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -21,14 +23,12 @@ import * as utilities from "../utilities";
  *     name: "cam-role-test",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRoles(args?: GetRolesArgs, opts?: pulumi.InvokeOptions): Promise<GetRolesResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cam/getRoles:getRoles", {
         "description": args.description,
         "name": args.name,
@@ -85,9 +85,27 @@ export interface GetRolesResult {
      */
     readonly roleLists: outputs.Cam.GetRolesRoleList[];
 }
-
+/**
+ * Use this data source to query detailed information of CAM roles
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const foo = tencentcloud.Cam.getRoles({
+ *     roleId: tencentcloud_cam_role.foo.id,
+ * });
+ * const bar = tencentcloud.Cam.getRoles({
+ *     name: "cam-role-test",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRolesOutput(args?: GetRolesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRolesResult> {
-    return pulumi.output(args).apply(a => getRoles(a, opts))
+    return pulumi.output(args).apply((a: any) => getRoles(a, opts))
 }
 
 /**

@@ -18,6 +18,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway.Outputs
         /// K8s cluster ID.
         /// </summary>
         public readonly string ClusterId;
+        /// <summary>
+        /// Additional Selected Pod Label.
+        /// </summary>
         public readonly ImmutableArray<Outputs.UpstreamK8sServiceExtraLabel> ExtraLabels;
         /// <summary>
         /// Customized service name, optional.

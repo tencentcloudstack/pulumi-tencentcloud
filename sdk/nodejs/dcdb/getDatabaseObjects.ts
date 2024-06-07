@@ -2,33 +2,16 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Use this data source to query detailed information of dcdb databaseObjects
- *
- * ## Example Usage
- *
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
- *
- * const databaseObjects = pulumi.output(tencentcloud.Dcdb.getDatabaseObjects({
- *     dbName: "",
- *     gt: [{}],
- *     instanceId: "dcdbt-ow7t8lmc",
- *     lt: [{}],
- *     nil: [{}],
- * }));
- * ```
  */
 export function getDatabaseObjects(args: GetDatabaseObjectsArgs, opts?: pulumi.InvokeOptions): Promise<GetDatabaseObjectsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dcdb/getDatabaseObjects:getDatabaseObjects", {
         "dbName": args.dbName,
         "instanceId": args.instanceId,
@@ -82,9 +65,11 @@ export interface GetDatabaseObjectsResult {
      */
     readonly views: outputs.Dcdb.GetDatabaseObjectsView[];
 }
-
+/**
+ * Use this data source to query detailed information of dcdb databaseObjects
+ */
 export function getDatabaseObjectsOutput(args: GetDatabaseObjectsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDatabaseObjectsResult> {
-    return pulumi.output(args).apply(a => getDatabaseObjects(a, opts))
+    return pulumi.output(args).apply((a: any) => getDatabaseObjects(a, opts))
 }
 
 /**

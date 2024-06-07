@@ -15,86 +15,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// <summary>
         /// Use this data source to query detailed information of mysql user_task
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var userTask = Tencentcloud.Mysql.GetUserTask.Invoke(new()
         ///     {
-        ///         var userTask = Output.Create(Tencentcloud.Mysql.GetUserTask.InvokeAsync(new Tencentcloud.Mysql.GetUserTaskArgs
+        ///         AsyncRequestId = "f2fe828c-773af816-0a08f542-94bb2a9c",
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///         StartTimeBegin = "2017-12-31 10:40:01",
+        ///         StartTimeEnd = "2017-12-31 10:40:01",
+        ///         TaskStatuses = new[]
         ///         {
-        ///             AsyncRequestId = "f2fe828c-773af816-0a08f542-94bb2a9c",
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///             StartTimeBegin = "2017-12-31 10:40:01",
-        ///             StartTimeEnd = "2017-12-31 10:40:01",
-        ///             TaskStatuses = 
-        ///             {
-        ///                 "2",
-        ///             },
-        ///             TaskTypes = 
-        ///             {
-        ///                 "5",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "2",
+        ///         },
+        ///         TaskTypes = new[]
+        ///         {
+        ///             "5",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetUserTaskResult> InvokeAsync(GetUserTaskArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetUserTaskResult>("tencentcloud:Mysql/getUserTask:getUserTask", args ?? new GetUserTaskArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetUserTaskResult>("tencentcloud:Mysql/getUserTask:getUserTask", args ?? new GetUserTaskArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of mysql user_task
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var userTask = Tencentcloud.Mysql.GetUserTask.Invoke(new()
         ///     {
-        ///         var userTask = Output.Create(Tencentcloud.Mysql.GetUserTask.InvokeAsync(new Tencentcloud.Mysql.GetUserTaskArgs
+        ///         AsyncRequestId = "f2fe828c-773af816-0a08f542-94bb2a9c",
+        ///         InstanceId = "cdb-fitq5t9h",
+        ///         StartTimeBegin = "2017-12-31 10:40:01",
+        ///         StartTimeEnd = "2017-12-31 10:40:01",
+        ///         TaskStatuses = new[]
         ///         {
-        ///             AsyncRequestId = "f2fe828c-773af816-0a08f542-94bb2a9c",
-        ///             InstanceId = "cdb-fitq5t9h",
-        ///             StartTimeBegin = "2017-12-31 10:40:01",
-        ///             StartTimeEnd = "2017-12-31 10:40:01",
-        ///             TaskStatuses = 
-        ///             {
-        ///                 "2",
-        ///             },
-        ///             TaskTypes = 
-        ///             {
-        ///                 "5",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "2",
+        ///         },
+        ///         TaskTypes = new[]
+        ///         {
+        ///             "5",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetUserTaskResult> Invoke(GetUserTaskInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetUserTaskResult>("tencentcloud:Mysql/getUserTask:getUserTask", args ?? new GetUserTaskInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetUserTaskResult>("tencentcloud:Mysql/getUserTask:getUserTask", args ?? new GetUserTaskInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetUserTaskArgs : Pulumi.InvokeArgs
+    public sealed class GetUserTaskArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Asynchronous task request ID, the AsyncRequestId returned by executing cloud database-related operations.
@@ -153,9 +147,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetUserTaskArgs()
         {
         }
+        public static new GetUserTaskArgs Empty => new GetUserTaskArgs();
     }
 
-    public sealed class GetUserTaskInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetUserTaskInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Asynchronous task request ID, the AsyncRequestId returned by executing cloud database-related operations.
@@ -214,6 +209,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public GetUserTaskInvokeArgs()
         {
         }
+        public static new GetUserTaskInvokeArgs Empty => new GetUserTaskInvokeArgs();
     }
 
 

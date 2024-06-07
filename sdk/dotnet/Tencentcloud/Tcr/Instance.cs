@@ -14,120 +14,148 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// Use this resource to create tcr instance.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a basic tcr instance.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Tcr.Instance("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Tcr.Instance("example", new Tencentcloud.Tcr.InstanceArgs
+    ///         InstanceType = "basic",
+    ///         Tags = 
     ///         {
-    ///             InstanceType = "basic",
-    ///             Tags = 
-    ///             {
-    ///                 { "createdBy", "terraform" },
-    ///             },
-    ///         });
-    ///     }
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create instance with the public network access whitelist.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Tcr.Instance("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Tcr.Instance("example", new Tencentcloud.Tcr.InstanceArgs
+    ///         InstanceType = "basic",
+    ///         OpenPublicOperation = true,
+    ///         SecurityPolicies = new[]
     ///         {
-    ///             InstanceType = "basic",
-    ///             OpenPublicOperation = true,
-    ///             SecurityPolicies = 
+    ///             new Tencentcloud.Tcr.Inputs.InstanceSecurityPolicyArgs
     ///             {
-    ///                 new Tencentcloud.Tcr.Inputs.InstanceSecurityPolicyArgs
-    ///                 {
-    ///                     CidrBlock = "10.0.0.1/24",
-    ///                 },
-    ///                 new Tencentcloud.Tcr.Inputs.InstanceSecurityPolicyArgs
-    ///                 {
-    ///                     CidrBlock = "192.168.1.1",
-    ///                 },
+    ///                 CidrBlock = "10.0.0.1/24",
     ///             },
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Tcr.Inputs.InstanceSecurityPolicyArgs
+    ///             {
+    ///                 CidrBlock = "192.168.1.1",
+    ///             },
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create instance with Replications.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var config = new Config();
+    ///     var tcrRegionMap = config.GetObject&lt;TcrRegionMap&gt;("tcrRegionMap") ?? 
     ///     {
-    ///         var config = new Config();
-    ///         var tcrRegionMap = config.GetObject&lt;dynamic&gt;("tcrRegionMap") ?? 
+    ///         { "ap-guangzhou", 1 },
+    ///         { "ap-shanghai", 4 },
+    ///         { "ap-hongkong", 5 },
+    ///         { "ap-beijing", 8 },
+    ///         { "ap-singapore", 9 },
+    ///         { "na-siliconvalley", 15 },
+    ///         { "ap-chengdu", 16 },
+    ///         { "eu-frankfurt", 17 },
+    ///         { "ap-seoul", 18 },
+    ///         { "ap-chongqing", 19 },
+    ///         { "ap-mumbai", 21 },
+    ///         { "na-ashburn", 22 },
+    ///         { "ap-bangkok", 23 },
+    ///         { "eu-moscow", 24 },
+    ///         { "ap-tokyo", 25 },
+    ///         { "ap-nanjing", 33 },
+    ///         { "ap-taipei", 39 },
+    ///         { "ap-jakarta", 72 },
+    ///     };
+    ///     var example = new Tencentcloud.Tcr.Instance("example", new()
+    ///     {
+    ///         InstanceType = "premium",
+    ///         Replications = new[]
     ///         {
-    ///             { "ap-guangzhou", 1 },
-    ///             { "ap-shanghai", 4 },
-    ///             { "ap-hongkong", 5 },
-    ///             { "ap-beijing", 8 },
-    ///             { "ap-singapore", 9 },
-    ///             { "na-siliconvalley", 15 },
-    ///             { "ap-chengdu", 16 },
-    ///             { "eu-frankfurt", 17 },
-    ///             { "ap-seoul", 18 },
-    ///             { "ap-chongqing", 19 },
-    ///             { "ap-mumbai", 21 },
-    ///             { "na-ashburn", 22 },
-    ///             { "ap-bangkok", 23 },
-    ///             { "eu-moscow", 24 },
-    ///             { "ap-tokyo", 25 },
-    ///             { "ap-nanjing", 33 },
-    ///             { "ap-taipei", 39 },
-    ///             { "ap-jakarta", 72 },
-    ///         };
-    ///         var example = new Tencentcloud.Tcr.Instance("example", new Tencentcloud.Tcr.InstanceArgs
-    ///         {
-    ///             InstanceType = "premium",
-    ///             Replications = 
+    ///             new Tencentcloud.Tcr.Inputs.InstanceReplicationArgs
     ///             {
-    ///                 new Tencentcloud.Tcr.Inputs.InstanceReplicationArgs
-    ///                 {
-    ///                     RegionId = tcrRegionMap.Ap_guangzhou,
-    ///                 },
-    ///                 new Tencentcloud.Tcr.Inputs.InstanceReplicationArgs
-    ///                 {
-    ///                     RegionId = tcrRegionMap.Ap_singapore,
-    ///                 },
+    ///                 RegionId = tcrRegionMap.Ap_guangzhou,
     ///             },
-    ///         });
-    ///     }
+    ///             new Tencentcloud.Tcr.Inputs.InstanceReplicationArgs
+    ///             {
+    ///                 RegionId = tcrRegionMap.Ap_singapore,
+    ///             },
+    ///         },
+    ///     });
     /// 
+    /// });
+    /// 
+    /// public class TcrRegionMap
+    /// {
+    ///     public double ap-bangkok { get; set; }
+    ///     public double ap-beijing { get; set; }
+    ///     public double ap-chengdu { get; set; }
+    ///     public double ap-chongqing { get; set; }
+    ///     public double ap-guangzhou { get; set; }
+    ///     public double ap-hongkong { get; set; }
+    ///     public double ap-jakarta { get; set; }
+    ///     public double ap-mumbai { get; set; }
+    ///     public double ap-nanjing { get; set; }
+    ///     public double ap-seoul { get; set; }
+    ///     public double ap-shanghai { get; set; }
+    ///     public double ap-singapore { get; set; }
+    ///     public double ap-taipei { get; set; }
+    ///     public double ap-tokyo { get; set; }
+    ///     public double eu-frankfurt { get; set; }
+    ///     public double eu-moscow { get; set; }
+    ///     public double na-ashburn { get; set; }
+    ///     public double na-siliconvalley { get; set; }
     /// }
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcr instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcr/instance:Instance foo instance_id
+    /// $ pulumi import tencentcloud:Tcr/instance:Instance foo instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/instance:Instance")]
-    public partial class Instance : Pulumi.CustomResource
+    public partial class Instance : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Indicate to delete the COS bucket which is auto-created with the instance or not.
@@ -264,7 +292,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         }
     }
 
-    public sealed class InstanceArgs : Pulumi.ResourceArgs
+    public sealed class InstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicate to delete the COS bucket which is auto-created with the instance or not.
@@ -347,9 +375,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public InstanceArgs()
         {
         }
+        public static new InstanceArgs Empty => new InstanceArgs();
     }
 
-    public sealed class InstanceState : Pulumi.ResourceArgs
+    public sealed class InstanceState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicate to delete the COS bucket which is auto-created with the instance or not.
@@ -462,5 +491,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         public InstanceState()
         {
         }
+        public static new InstanceState Empty => new InstanceState();
     }
 }

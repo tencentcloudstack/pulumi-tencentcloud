@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class AlarmMonitorTimeGetArgs : Pulumi.ResourceArgs
+    public sealed class AlarmMonitorTimeGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// time period or point in time.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public AlarmMonitorTimeGetArgs()
         {
         }
+        public static new AlarmMonitorTimeGetArgs Empty => new AlarmMonitorTimeGetArgs();
     }
 }

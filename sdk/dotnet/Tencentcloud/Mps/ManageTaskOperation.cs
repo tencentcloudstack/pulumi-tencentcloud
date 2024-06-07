@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var operation = new Tencentcloud.Mps.ManageTaskOperation("operation", new()
     ///     {
-    ///         var operation = new Tencentcloud.Mps.ManageTaskOperation("operation", new Tencentcloud.Mps.ManageTaskOperationArgs
-    ///         {
-    ///             OperationType = "Abort",
-    ///             TaskId = "2600010949-LiveScheduleTask-xxxx",
-    ///         });
-    ///     }
+    ///         OperationType = "Abort",
+    ///         TaskId = "2600010949-LiveScheduleTask-xxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/manageTaskOperation:ManageTaskOperation")]
-    public partial class ManageTaskOperation : Pulumi.CustomResource
+    public partial class ManageTaskOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Operation type. Valid values:`Abort`: task termination. Notice: If the task type is live stream processing (LiveStreamProcessTask), tasks whose task status is `WAITING` or `PROCESSING` can be terminated.For other task types, only tasks whose task status is `WAITING` can be terminated.
@@ -93,7 +94,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         }
     }
 
-    public sealed class ManageTaskOperationArgs : Pulumi.ResourceArgs
+    public sealed class ManageTaskOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Operation type. Valid values:`Abort`: task termination. Notice: If the task type is live stream processing (LiveStreamProcessTask), tasks whose task status is `WAITING` or `PROCESSING` can be terminated.For other task types, only tasks whose task status is `WAITING` can be terminated.
@@ -110,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public ManageTaskOperationArgs()
         {
         }
+        public static new ManageTaskOperationArgs Empty => new ManageTaskOperationArgs();
     }
 
-    public sealed class ManageTaskOperationState : Pulumi.ResourceArgs
+    public sealed class ManageTaskOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Operation type. Valid values:`Abort`: task termination. Notice: If the task type is live stream processing (LiveStreamProcessTask), tasks whose task status is `WAITING` or `PROCESSING` can be terminated.For other task types, only tasks whose task status is `WAITING` can be terminated.
@@ -129,5 +131,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
         public ManageTaskOperationState()
         {
         }
+        public static new ManageTaskOperationState Empty => new ManageTaskOperationState();
     }
 }

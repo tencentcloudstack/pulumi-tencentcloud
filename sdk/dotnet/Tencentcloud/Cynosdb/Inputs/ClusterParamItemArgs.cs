@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
 {
 
-    public sealed class ClusterParamItemArgs : Pulumi.ResourceArgs
+    public sealed class ClusterParamItemArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Param expected value to set.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
         public ClusterParamItemArgs()
         {
         }
+        public static new ClusterParamItemArgs Empty => new ClusterParamItemArgs();
     }
 }

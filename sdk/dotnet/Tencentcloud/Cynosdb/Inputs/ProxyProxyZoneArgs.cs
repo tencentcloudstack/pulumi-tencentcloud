@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
 {
 
-    public sealed class ProxyProxyZoneArgs : Pulumi.ResourceArgs
+    public sealed class ProxyProxyZoneArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Number of proxy nodes.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
         public ProxyProxyZoneArgs()
         {
         }
+        public static new ProxyProxyZoneArgs Empty => new ProxyProxyZoneArgs();
     }
 }

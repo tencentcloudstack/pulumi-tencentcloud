@@ -9,20 +9,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const disasterRecoverGroupQuota = pulumi.output(tencentcloud.Cvm.getDisasterRecoverGroupQuota());
+ * const disasterRecoverGroupQuota = tencentcloud.Cvm.getDisasterRecoverGroupQuota({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDisasterRecoverGroupQuota(args?: GetDisasterRecoverGroupQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetDisasterRecoverGroupQuotaResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cvm/getDisasterRecoverGroupQuota:getDisasterRecoverGroupQuota", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -68,9 +67,22 @@ export interface GetDisasterRecoverGroupQuotaResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cvm disasterRecoverGroupQuota
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const disasterRecoverGroupQuota = tencentcloud.Cvm.getDisasterRecoverGroupQuota({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDisasterRecoverGroupQuotaOutput(args?: GetDisasterRecoverGroupQuotaOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDisasterRecoverGroupQuotaResult> {
-    return pulumi.output(args).apply(a => getDisasterRecoverGroupQuota(a, opts))
+    return pulumi.output(args).apply((a: any) => getDisasterRecoverGroupQuota(a, opts))
 }
 
 /**

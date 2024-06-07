@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc security_group_limits
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var securityGroupLimits = Output.Create(Tencentcloud.Vpc.GetSecurityGroupLimits.InvokeAsync());
-        ///     }
+        ///     var securityGroupLimits = Tencentcloud.Vpc.GetSecurityGroupLimits.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSecurityGroupLimitsResult> InvokeAsync(GetSecurityGroupLimitsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSecurityGroupLimitsResult>("tencentcloud:Vpc/getSecurityGroupLimits:getSecurityGroupLimits", args ?? new GetSecurityGroupLimitsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecurityGroupLimitsResult>("tencentcloud:Vpc/getSecurityGroupLimits:getSecurityGroupLimits", args ?? new GetSecurityGroupLimitsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc security_group_limits
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var securityGroupLimits = Output.Create(Tencentcloud.Vpc.GetSecurityGroupLimits.InvokeAsync());
-        ///     }
+        ///     var securityGroupLimits = Tencentcloud.Vpc.GetSecurityGroupLimits.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSecurityGroupLimitsResult> Invoke(GetSecurityGroupLimitsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSecurityGroupLimitsResult>("tencentcloud:Vpc/getSecurityGroupLimits:getSecurityGroupLimits", args ?? new GetSecurityGroupLimitsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSecurityGroupLimitsResult>("tencentcloud:Vpc/getSecurityGroupLimits:getSecurityGroupLimits", args ?? new GetSecurityGroupLimitsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSecurityGroupLimitsArgs : Pulumi.InvokeArgs
+    public sealed class GetSecurityGroupLimitsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetSecurityGroupLimitsArgs()
         {
         }
+        public static new GetSecurityGroupLimitsArgs Empty => new GetSecurityGroupLimitsArgs();
     }
 
-    public sealed class GetSecurityGroupLimitsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSecurityGroupLimitsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetSecurityGroupLimitsInvokeArgs()
         {
         }
+        public static new GetSecurityGroupLimitsInvokeArgs Empty => new GetSecurityGroupLimitsInvokeArgs();
     }
 
 

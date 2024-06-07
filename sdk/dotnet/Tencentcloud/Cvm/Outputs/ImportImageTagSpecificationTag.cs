@@ -14,7 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Outputs
     [OutputType]
     public sealed class ImportImageTagSpecificationTag
     {
+        /// <summary>
+        /// Tag key.
+        /// </summary>
         public readonly string Key;
+        /// <summary>
+        /// Tag value.
+        /// </summary>
         public readonly string Value;
 
         [OutputConstructor]

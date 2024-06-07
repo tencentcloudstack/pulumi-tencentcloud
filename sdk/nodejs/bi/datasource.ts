@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const datasource = new tencentcloud.Bi.Datasource("datasource", {
+ * const datasource = new tencentcloud.bi.Datasource("datasource", {
  *     charset: "utf8",
  *     dbHost: "bj-cdb-1lxqg5r6.sql.tencentcdb.com",
  *     dbName: "tf-test",
@@ -25,13 +26,14 @@ import * as utilities from "../utilities";
  *     sourceName: "tf-source-name",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * bi datasource can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Bi/datasource:Datasource datasource datasource_id
+ * $ pulumi import tencentcloud:Bi/datasource:Datasource datasource datasource_id
  * ```
  */
 export class Datasource extends pulumi.CustomResource {
@@ -193,7 +195,7 @@ export class Datasource extends pulumi.CustomResource {
             resourceInputs["dbHost"] = args ? args.dbHost : undefined;
             resourceInputs["dbName"] = args ? args.dbName : undefined;
             resourceInputs["dbPort"] = args ? args.dbPort : undefined;
-            resourceInputs["dbPwd"] = args ? args.dbPwd : undefined;
+            resourceInputs["dbPwd"] = args?.dbPwd ? pulumi.secret(args.dbPwd) : undefined;
             resourceInputs["dbType"] = args ? args.dbType : undefined;
             resourceInputs["dbUser"] = args ? args.dbUser : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
@@ -203,6 +205,8 @@ export class Datasource extends pulumi.CustomResource {
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["dbPwd"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(Datasource.__pulumiType, name, resourceInputs, opts);
     }
 }

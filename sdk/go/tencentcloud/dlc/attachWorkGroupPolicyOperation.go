@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 type AttachWorkGroupPolicyOperation struct {
@@ -30,7 +31,7 @@ func NewAttachWorkGroupPolicyOperation(ctx *pulumi.Context,
 	if args.WorkGroupId == nil {
 		return nil, errors.New("invalid value for required argument 'WorkGroupId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AttachWorkGroupPolicyOperation
 	err := ctx.RegisterResource("tencentcloud:Dlc/attachWorkGroupPolicyOperation:AttachWorkGroupPolicyOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -111,7 +112,7 @@ func (i *AttachWorkGroupPolicyOperation) ToAttachWorkGroupPolicyOperationOutputW
 // AttachWorkGroupPolicyOperationArrayInput is an input type that accepts AttachWorkGroupPolicyOperationArray and AttachWorkGroupPolicyOperationArrayOutput values.
 // You can construct a concrete instance of `AttachWorkGroupPolicyOperationArrayInput` via:
 //
-//          AttachWorkGroupPolicyOperationArray{ AttachWorkGroupPolicyOperationArgs{...} }
+//	AttachWorkGroupPolicyOperationArray{ AttachWorkGroupPolicyOperationArgs{...} }
 type AttachWorkGroupPolicyOperationArrayInput interface {
 	pulumi.Input
 
@@ -136,7 +137,7 @@ func (i AttachWorkGroupPolicyOperationArray) ToAttachWorkGroupPolicyOperationArr
 // AttachWorkGroupPolicyOperationMapInput is an input type that accepts AttachWorkGroupPolicyOperationMap and AttachWorkGroupPolicyOperationMapOutput values.
 // You can construct a concrete instance of `AttachWorkGroupPolicyOperationMapInput` via:
 //
-//          AttachWorkGroupPolicyOperationMap{ "key": AttachWorkGroupPolicyOperationArgs{...} }
+//	AttachWorkGroupPolicyOperationMap{ "key": AttachWorkGroupPolicyOperationArgs{...} }
 type AttachWorkGroupPolicyOperationMapInput interface {
 	pulumi.Input
 

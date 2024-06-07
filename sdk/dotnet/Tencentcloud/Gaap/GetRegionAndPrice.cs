@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap region and price
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var regionAndPrice = Output.Create(Tencentcloud.Gaap.GetRegionAndPrice.InvokeAsync());
-        ///     }
+        ///     var regionAndPrice = Tencentcloud.Gaap.GetRegionAndPrice.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetRegionAndPriceResult> InvokeAsync(GetRegionAndPriceArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetRegionAndPriceResult>("tencentcloud:Gaap/getRegionAndPrice:getRegionAndPrice", args ?? new GetRegionAndPriceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetRegionAndPriceResult>("tencentcloud:Gaap/getRegionAndPrice:getRegionAndPrice", args ?? new GetRegionAndPriceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap region and price
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var regionAndPrice = Output.Create(Tencentcloud.Gaap.GetRegionAndPrice.InvokeAsync());
-        ///     }
+        ///     var regionAndPrice = Tencentcloud.Gaap.GetRegionAndPrice.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetRegionAndPriceResult> Invoke(GetRegionAndPriceInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetRegionAndPriceResult>("tencentcloud:Gaap/getRegionAndPrice:getRegionAndPrice", args ?? new GetRegionAndPriceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetRegionAndPriceResult>("tencentcloud:Gaap/getRegionAndPrice:getRegionAndPrice", args ?? new GetRegionAndPriceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetRegionAndPriceArgs : Pulumi.InvokeArgs
+    public sealed class GetRegionAndPriceArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// IP version. Available values: IPv4, IPv6. Default is IPv4.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetRegionAndPriceArgs()
         {
         }
+        public static new GetRegionAndPriceArgs Empty => new GetRegionAndPriceArgs();
     }
 
-    public sealed class GetRegionAndPriceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetRegionAndPriceInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// IP version. Available values: IPv4, IPv6. Default is IPv4.
@@ -114,6 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetRegionAndPriceInvokeArgs()
         {
         }
+        public static new GetRegionAndPriceInvokeArgs Empty => new GetRegionAndPriceInvokeArgs();
     }
 
 

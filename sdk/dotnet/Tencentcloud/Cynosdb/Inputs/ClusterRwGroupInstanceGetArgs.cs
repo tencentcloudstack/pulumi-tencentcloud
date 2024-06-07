@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
 {
 
-    public sealed class ClusterRwGroupInstanceGetArgs : Pulumi.ResourceArgs
+    public sealed class ClusterRwGroupInstanceGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of instance.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
         public ClusterRwGroupInstanceGetArgs()
         {
         }
+        public static new ClusterRwGroupInstanceGetArgs Empty => new ClusterRwGroupInstanceGetArgs();
     }
 }

@@ -15,80 +15,74 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf microservice
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var microservice = Tencentcloud.Tsf.GetMicroservice.Invoke(new()
         ///     {
-        ///         var microservice = Output.Create(Tencentcloud.Tsf.GetMicroservice.InvokeAsync(new Tencentcloud.Tsf.GetMicroserviceArgs
+        ///         NamespaceId = @var.Namespace_id,
+        ///         MicroserviceIdLists = new[]
         ///         {
-        ///             NamespaceId = @var.Namespace_id,
-        ///             MicroserviceIdLists = 
-        ///             {
-        ///                 "ms-yq3jo6jd",
-        ///             },
-        ///             MicroserviceNameLists = 
-        ///             {
-        ///                 "provider-demo",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "ms-yq3jo6jd",
+        ///         },
+        ///         MicroserviceNameLists = new[]
+        ///         {
+        ///             "provider-demo",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetMicroserviceResult> InvokeAsync(GetMicroserviceArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMicroserviceResult>("tencentcloud:Tsf/getMicroservice:getMicroservice", args ?? new GetMicroserviceArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMicroserviceResult>("tencentcloud:Tsf/getMicroservice:getMicroservice", args ?? new GetMicroserviceArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf microservice
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var microservice = Tencentcloud.Tsf.GetMicroservice.Invoke(new()
         ///     {
-        ///         var microservice = Output.Create(Tencentcloud.Tsf.GetMicroservice.InvokeAsync(new Tencentcloud.Tsf.GetMicroserviceArgs
+        ///         NamespaceId = @var.Namespace_id,
+        ///         MicroserviceIdLists = new[]
         ///         {
-        ///             NamespaceId = @var.Namespace_id,
-        ///             MicroserviceIdLists = 
-        ///             {
-        ///                 "ms-yq3jo6jd",
-        ///             },
-        ///             MicroserviceNameLists = 
-        ///             {
-        ///                 "provider-demo",
-        ///             },
-        ///         }));
-        ///     }
+        ///             "ms-yq3jo6jd",
+        ///         },
+        ///         MicroserviceNameLists = new[]
+        ///         {
+        ///             "provider-demo",
+        ///         },
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetMicroserviceResult> Invoke(GetMicroserviceInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMicroserviceResult>("tencentcloud:Tsf/getMicroservice:getMicroservice", args ?? new GetMicroserviceInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMicroserviceResult>("tencentcloud:Tsf/getMicroservice:getMicroservice", args ?? new GetMicroserviceInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetMicroserviceArgs : Pulumi.InvokeArgs
+    public sealed class GetMicroserviceArgs : global::Pulumi.InvokeArgs
     {
         [Input("microserviceIdLists")]
         private List<string>? _microserviceIdLists;
@@ -141,9 +135,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetMicroserviceArgs()
         {
         }
+        public static new GetMicroserviceArgs Empty => new GetMicroserviceArgs();
     }
 
-    public sealed class GetMicroserviceInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetMicroserviceInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("microserviceIdLists")]
         private InputList<string>? _microserviceIdLists;
@@ -196,6 +191,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetMicroserviceInvokeArgs()
         {
         }
+        public static new GetMicroserviceInvokeArgs Empty => new GetMicroserviceInvokeArgs();
     }
 
 

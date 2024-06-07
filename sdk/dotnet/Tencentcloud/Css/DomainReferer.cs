@@ -15,37 +15,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var domainReferer = new Tencentcloud.Css.DomainReferer("domainReferer", new()
     ///     {
-    ///         var domainReferer = new Tencentcloud.Css.DomainReferer("domainReferer", new Tencentcloud.Css.DomainRefererArgs
-    ///         {
-    ///             AllowEmpty = 1,
-    ///             DomainName = "test122.jingxhu.top",
-    ///             Enable = 0,
-    ///             Rules = "example.com",
-    ///             Type = 1,
-    ///         });
-    ///     }
+    ///         AllowEmpty = 1,
+    ///         DomainName = "test122.jingxhu.top",
+    ///         Enable = 0,
+    ///         Rules = "example.com",
+    ///         Type = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css domain_referer can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/domainReferer:DomainReferer domain_referer domainName
+    /// $ pulumi import tencentcloud:Css/domainReferer:DomainReferer domain_referer domainName
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/domainReferer:DomainReferer")]
-    public partial class DomainReferer : Pulumi.CustomResource
+    public partial class DomainReferer : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Allow blank referers, 0: not allowed, 1: allowed.
@@ -122,7 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class DomainRefererArgs : Pulumi.ResourceArgs
+    public sealed class DomainRefererArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Allow blank referers, 0: not allowed, 1: allowed.
@@ -157,9 +158,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public DomainRefererArgs()
         {
         }
+        public static new DomainRefererArgs Empty => new DomainRefererArgs();
     }
 
-    public sealed class DomainRefererState : Pulumi.ResourceArgs
+    public sealed class DomainRefererState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Allow blank referers, 0: not allowed, 1: allowed.
@@ -194,5 +196,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public DomainRefererState()
         {
         }
+        public static new DomainRefererState Empty => new DomainRefererState();
     }
 }

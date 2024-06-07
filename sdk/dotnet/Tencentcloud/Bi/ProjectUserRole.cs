@@ -17,42 +17,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var projectUserRole = new Tencentcloud.Bi.ProjectUserRole("projectUserRole", new()
     ///     {
-    ///         var projectUserRole = new Tencentcloud.Bi.ProjectUserRole("projectUserRole", new Tencentcloud.Bi.ProjectUserRoleArgs
+    ///         AreaCode = "+86",
+    ///         Email = "123456@qq.com",
+    ///         PhoneNumber = "13130001000",
+    ///         ProjectId = 11015030,
+    ///         RoleIdLists = new[]
     ///         {
-    ///             AreaCode = "+86",
-    ///             Email = "123456@qq.com",
-    ///             PhoneNumber = "13130001000",
-    ///             ProjectId = 11015030,
-    ///             RoleIdLists = 
-    ///             {
-    ///                 10629453,
-    ///             },
-    ///             UserId = "100024664626",
-    ///             UserName = "keep-cam-user",
-    ///         });
-    ///     }
+    ///             10629453,
+    ///         },
+    ///         UserId = "100024664626",
+    ///         UserName = "keep-cam-user",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// bi project_user_role can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Bi/projectUserRole:ProjectUserRole project_user_role projectId#userId
+    /// $ pulumi import tencentcloud:Bi/projectUserRole:ProjectUserRole project_user_role projectId#userId
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Bi/projectUserRole:ProjectUserRole")]
-    public partial class ProjectUserRole : Pulumi.CustomResource
+    public partial class ProjectUserRole : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Mobile area code(Note: This field may return null, indicating that no valid value can be obtained).
@@ -141,7 +142,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         }
     }
 
-    public sealed class ProjectUserRoleArgs : Pulumi.ResourceArgs
+    public sealed class ProjectUserRoleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Mobile area code(Note: This field may return null, indicating that no valid value can be obtained).
@@ -194,9 +195,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         public ProjectUserRoleArgs()
         {
         }
+        public static new ProjectUserRoleArgs Empty => new ProjectUserRoleArgs();
     }
 
-    public sealed class ProjectUserRoleState : Pulumi.ResourceArgs
+    public sealed class ProjectUserRoleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Mobile area code(Note: This field may return null, indicating that no valid value can be obtained).
@@ -249,5 +251,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         public ProjectUserRoleState()
         {
         }
+        public static new ProjectUserRoleState Empty => new ProjectUserRoleState();
     }
 }

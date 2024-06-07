@@ -8,52 +8,61 @@ import * as utilities from "../utilities";
  * Provides a resource to create a CCN instance.
  *
  * ## Example Usage
+ *
  * ### Create a prepaid CCN
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const main = new tencentcloud.Ccn.Instance("main", {
+ * const main = new tencentcloud.ccn.Instance("main", {
  *     bandwidthLimitType: "INTER_REGION_LIMIT",
  *     chargeType: "PREPAID",
  *     description: "ci-temp-test-ccn-des",
  *     qos: "AG",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a post-paid regional export speed limit type CCN
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const main = new tencentcloud.Ccn.Instance("main", {
+ * const main = new tencentcloud.ccn.Instance("main", {
  *     bandwidthLimitType: "OUTER_REGION_LIMIT",
  *     chargeType: "POSTPAID",
  *     description: "ci-temp-test-ccn-des",
  *     qos: "AG",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create a post-paid inter-regional rate limit type CNN
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const main = new tencentcloud.Ccn.Instance("main", {
+ * const main = new tencentcloud.ccn.Instance("main", {
  *     bandwidthLimitType: "INTER_REGION_LIMIT",
  *     chargeType: "POSTPAID",
  *     description: "ci-temp-test-ccn-des",
  *     qos: "AG",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Ccn instance can be imported, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ccn/instance:Instance test ccn-id
+ * $ pulumi import tencentcloud:Ccn/instance:Instance test ccn-id
  * ```
  */
 export class Instance extends pulumi.CustomResource {

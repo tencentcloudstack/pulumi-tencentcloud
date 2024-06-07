@@ -15,81 +15,105 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var exampleUser = new Tencentcloud.Dasb.User("exampleUser", new()
     ///     {
-    ///         var example = new Tencentcloud.Dasb.Acl("example", new Tencentcloud.Dasb.AclArgs
-    ///         {
-    ///             AcTemplateIdSets = {},
-    ///             AccountSets = 
-    ///             {
-    ///                 "root",
-    ///             },
-    ///             AllowAccessCredential = true,
-    ///             AllowAnyAccount = false,
-    ///             AllowClipFileDown = true,
-    ///             AllowClipFileUp = true,
-    ///             AllowClipTextDown = true,
-    ///             AllowClipTextUp = true,
-    ///             AllowDiskFileDown = true,
-    ///             AllowDiskFileUp = true,
-    ///             AllowDiskRedirect = true,
-    ///             AllowFileDel = true,
-    ///             AllowFileDown = true,
-    ///             AllowFileUp = true,
-    ///             AllowShellFileDown = true,
-    ///             AllowShellFileUp = true,
-    ///             CmdTemplateIdSets = 
-    ///             {
-    ///                 1,
-    ///                 7,
-    ///             },
-    ///             DepartmentId = "1.2",
-    ///             DeviceGroupIdSets = 
-    ///             {
-    ///                 2,
-    ///                 3,
-    ///             },
-    ///             DeviceIdSets = 
-    ///             {
-    ///                 39,
-    ///                 81,
-    ///             },
-    ///             MaxFileDownSize = 0,
-    ///             MaxFileUpSize = 0,
-    ///             UserGroupIdSets = 
-    ///             {
-    ///                 6,
-    ///                 36,
-    ///             },
-    ///             UserIdSets = 
-    ///             {
-    ///                 6,
-    ///                 2,
-    ///             },
-    ///             ValidateFrom = "2023-09-22T00:00:00+08:00",
-    ///             ValidateTo = "2024-09-23T00:00:00+08:00",
-    ///         });
-    ///     }
+    ///         UserName = "tf_example",
+    ///         RealName = "terraform",
+    ///         Phone = "+86|18345678782",
+    ///         Email = "demo@tencent.com",
+    ///         AuthType = 0,
+    ///     });
     /// 
-    /// }
+    ///     var exampleUserGroup = new Tencentcloud.Dasb.UserGroup("exampleUserGroup");
+    /// 
+    ///     var exampleDevice = new Tencentcloud.Dasb.Device("exampleDevice", new()
+    ///     {
+    ///         OsName = "Linux",
+    ///         Ip = "192.168.0.1",
+    ///         Port = 80,
+    ///     });
+    /// 
+    ///     var exampleDeviceGroup = new Tencentcloud.Dasb.DeviceGroup("exampleDeviceGroup");
+    /// 
+    ///     var exampleDeviceAccount = new Tencentcloud.Dasb.DeviceAccount("exampleDeviceAccount", new()
+    ///     {
+    ///         DeviceId = exampleDevice.Id,
+    ///         Account = "root",
+    ///     });
+    /// 
+    ///     var exampleCmdTemplate = new Tencentcloud.Dasb.CmdTemplate("exampleCmdTemplate", new()
+    ///     {
+    ///         CmdList = "rm -rf*",
+    ///     });
+    /// 
+    ///     var exampleAcl = new Tencentcloud.Dasb.Acl("exampleAcl", new()
+    ///     {
+    ///         AllowDiskRedirect = true,
+    ///         AllowAnyAccount = false,
+    ///         AllowClipFileUp = true,
+    ///         AllowClipFileDown = true,
+    ///         AllowClipTextUp = true,
+    ///         AllowClipTextDown = true,
+    ///         AllowFileUp = true,
+    ///         AllowFileDown = true,
+    ///         MaxFileUpSize = 0,
+    ///         MaxFileDownSize = 0,
+    ///         UserIdSets = new[]
+    ///         {
+    ///             exampleUser.Id,
+    ///         },
+    ///         UserGroupIdSets = new[]
+    ///         {
+    ///             exampleUserGroup.Id,
+    ///         },
+    ///         DeviceIdSets = new[]
+    ///         {
+    ///             exampleDevice.Id,
+    ///         },
+    ///         DeviceGroupIdSets = new[]
+    ///         {
+    ///             exampleDeviceGroup.Id,
+    ///         },
+    ///         AccountSets = new[]
+    ///         {
+    ///             exampleDeviceAccount.Id,
+    ///         },
+    ///         CmdTemplateIdSets = new[]
+    ///         {
+    ///             exampleCmdTemplate.Id,
+    ///         },
+    ///         AcTemplateIdSets = new[] {},
+    ///         AllowDiskFileUp = true,
+    ///         AllowDiskFileDown = true,
+    ///         AllowShellFileUp = true,
+    ///         AllowShellFileDown = true,
+    ///         AllowFileDel = true,
+    ///         AllowAccessCredential = true,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dasb acl can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dasb/acl:Acl example 132
+    /// $ pulumi import tencentcloud:Dasb/acl:Acl example 132
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/acl:Acl")]
-    public partial class Acl : Pulumi.CustomResource
+    public partial class Acl : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Associate high-risk DB template IDs.
@@ -245,13 +269,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         /// Access permission effective time, such as: 2021-09-22T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.
         /// </summary>
         [Output("validateFrom")]
-        public Output<string?> ValidateFrom { get; private set; } = null!;
+        public Output<string> ValidateFrom { get; private set; } = null!;
 
         /// <summary>
         /// Access permission expiration time, such as: 2021-09-23T00:00:00+08:00If the effective and expiry time are not filled in, the access rights will be valid for a long time.
         /// </summary>
         [Output("validateTo")]
-        public Output<string?> ValidateTo { get; private set; } = null!;
+        public Output<string> ValidateTo { get; private set; } = null!;
 
 
         /// <summary>
@@ -298,7 +322,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         }
     }
 
-    public sealed class AclArgs : Pulumi.ResourceArgs
+    public sealed class AclArgs : global::Pulumi.ResourceArgs
     {
         [Input("acTemplateIdSets")]
         private InputList<string>? _acTemplateIdSets;
@@ -507,9 +531,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public AclArgs()
         {
         }
+        public static new AclArgs Empty => new AclArgs();
     }
 
-    public sealed class AclState : Pulumi.ResourceArgs
+    public sealed class AclState : global::Pulumi.ResourceArgs
     {
         [Input("acTemplateIdSets")]
         private InputList<string>? _acTemplateIdSets;
@@ -718,5 +743,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
         public AclState()
         {
         }
+        public static new AclState Empty => new AclState();
     }
 }

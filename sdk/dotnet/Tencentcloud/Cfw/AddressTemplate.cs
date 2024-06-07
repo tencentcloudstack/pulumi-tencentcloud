@@ -14,57 +14,61 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// Provides a resource to create a cfw address_template
     /// 
     /// ## Example Usage
+    /// 
     /// ### If type is 1
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Cfw.AddressTemplate("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Cfw.AddressTemplate("example", new Tencentcloud.Cfw.AddressTemplateArgs
-    ///         {
-    ///             Detail = "test template",
-    ///             IpString = "1.1.1.1,2.2.2.2",
-    ///             Type = 1,
-    ///         });
-    ///     }
+    ///         Detail = "test template",
+    ///         IpString = "1.1.1.1,2.2.2.2",
+    ///         Type = 1,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### If type is 5
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Cfw.AddressTemplate("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Cfw.AddressTemplate("example", new Tencentcloud.Cfw.AddressTemplateArgs
-    ///         {
-    ///             Detail = "test template",
-    ///             IpString = "www.qq.com,www.tencent.com",
-    ///             Type = 5,
-    ///         });
-    ///     }
+    ///         Detail = "test template",
+    ///         IpString = "www.qq.com,www.tencent.com",
+    ///         Type = 5,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cfw address_template can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cfw/addressTemplate:AddressTemplate example mb_1300846651_1695611353900
+    /// $ pulumi import tencentcloud:Cfw/addressTemplate:AddressTemplate example mb_1300846651_1695611353900
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/addressTemplate:AddressTemplate")]
-    public partial class AddressTemplate : Pulumi.CustomResource
+    public partial class AddressTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Template Detail.
@@ -135,7 +139,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         }
     }
 
-    public sealed class AddressTemplateArgs : Pulumi.ResourceArgs
+    public sealed class AddressTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template Detail.
@@ -164,9 +168,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public AddressTemplateArgs()
         {
         }
+        public static new AddressTemplateArgs Empty => new AddressTemplateArgs();
     }
 
-    public sealed class AddressTemplateState : Pulumi.ResourceArgs
+    public sealed class AddressTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Template Detail.
@@ -195,5 +200,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
         public AddressTemplateState()
         {
         }
+        public static new AddressTemplateState Empty => new AddressTemplateState();
     }
 }

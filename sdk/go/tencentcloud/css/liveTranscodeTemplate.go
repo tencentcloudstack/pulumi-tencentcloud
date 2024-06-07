@@ -7,62 +7,68 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a css liveTranscodeTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Css"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Css.NewLiveTranscodeTemplate(ctx, "liveTranscodeTemplate", &Css.LiveTranscodeTemplateArgs{
-// 			Acodec:              pulumi.String("aac"),
-// 			AdaptBitratePercent: pulumi.Float64(0),
-// 			AiTransCode:         pulumi.Int(0),
-// 			AudioBitrate:        pulumi.Int(128),
-// 			BitrateToOrig:       pulumi.Int(0),
-// 			Description:         pulumi.String("This_is_a_tf_test_temp."),
-// 			DrmTracks:           pulumi.String("SD"),
-// 			DrmType:             pulumi.String("fairplay"),
-// 			Fps:                 pulumi.Int(0),
-// 			FpsToOrig:           pulumi.Int(0),
-// 			Gop:                 pulumi.Int(2),
-// 			Height:              pulumi.Int(0),
-// 			HeightToOrig:        pulumi.Int(0),
-// 			NeedAudio:           pulumi.Int(1),
-// 			NeedVideo:           pulumi.Int(1),
-// 			Profile:             pulumi.String("baseline"),
-// 			Rotate:              pulumi.Int(0),
-// 			ShortEdgeAsHeight:   pulumi.Int(0),
-// 			TemplateName:        pulumi.String("template_name"),
-// 			Vcodec:              pulumi.String("origin"),
-// 			VideoBitrate:        pulumi.Int(100),
-// 			Width:               pulumi.Int(0),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Css.NewLiveTranscodeTemplate(ctx, "liveTranscodeTemplate", &Css.LiveTranscodeTemplateArgs{
+//				Acodec:              pulumi.String("aac"),
+//				AdaptBitratePercent: pulumi.Float64(0),
+//				AiTransCode:         pulumi.Int(0),
+//				AudioBitrate:        pulumi.Int(128),
+//				BitrateToOrig:       pulumi.Int(0),
+//				Description:         pulumi.String("This_is_a_tf_test_temp."),
+//				DrmTracks:           pulumi.String("SD"),
+//				DrmType:             pulumi.String("fairplay"),
+//				Fps:                 pulumi.Int(0),
+//				FpsToOrig:           pulumi.Int(0),
+//				Gop:                 pulumi.Int(2),
+//				Height:              pulumi.Int(0),
+//				HeightToOrig:        pulumi.Int(0),
+//				NeedAudio:           pulumi.Int(1),
+//				NeedVideo:           pulumi.Int(1),
+//				Profile:             pulumi.String("baseline"),
+//				Rotate:              pulumi.Int(0),
+//				ShortEdgeAsHeight:   pulumi.Int(0),
+//				TemplateName:        pulumi.String("template_name"),
+//				Vcodec:              pulumi.String("origin"),
+//				VideoBitrate:        pulumi.Int(100),
+//				Width:               pulumi.Int(0),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // css live_transcode_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Css/liveTranscodeTemplate:LiveTranscodeTemplate live_transcode_template liveTranscodeTemplate_id
+// $ pulumi import tencentcloud:Css/liveTranscodeTemplate:LiveTranscodeTemplate live_transcode_template liveTranscodeTemplate_id
 // ```
 type LiveTranscodeTemplate struct {
 	pulumi.CustomResourceState
@@ -126,7 +132,7 @@ func NewLiveTranscodeTemplate(ctx *pulumi.Context,
 	if args.VideoBitrate == nil {
 		return nil, errors.New("invalid value for required argument 'VideoBitrate'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource LiveTranscodeTemplate
 	err := ctx.RegisterResource("tencentcloud:Css/liveTranscodeTemplate:LiveTranscodeTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -367,7 +373,7 @@ func (i *LiveTranscodeTemplate) ToLiveTranscodeTemplateOutputWithContext(ctx con
 // LiveTranscodeTemplateArrayInput is an input type that accepts LiveTranscodeTemplateArray and LiveTranscodeTemplateArrayOutput values.
 // You can construct a concrete instance of `LiveTranscodeTemplateArrayInput` via:
 //
-//          LiveTranscodeTemplateArray{ LiveTranscodeTemplateArgs{...} }
+//	LiveTranscodeTemplateArray{ LiveTranscodeTemplateArgs{...} }
 type LiveTranscodeTemplateArrayInput interface {
 	pulumi.Input
 
@@ -392,7 +398,7 @@ func (i LiveTranscodeTemplateArray) ToLiveTranscodeTemplateArrayOutputWithContex
 // LiveTranscodeTemplateMapInput is an input type that accepts LiveTranscodeTemplateMap and LiveTranscodeTemplateMapOutput values.
 // You can construct a concrete instance of `LiveTranscodeTemplateMapInput` via:
 //
-//          LiveTranscodeTemplateMap{ "key": LiveTranscodeTemplateArgs{...} }
+//	LiveTranscodeTemplateMap{ "key": LiveTranscodeTemplateArgs{...} }
 type LiveTranscodeTemplateMapInput interface {
 	pulumi.Input
 

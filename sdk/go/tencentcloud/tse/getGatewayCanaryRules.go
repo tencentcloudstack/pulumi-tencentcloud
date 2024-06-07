@@ -8,36 +8,41 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tse gatewayCanaryRules
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tse.GetGatewayCanaryRules(ctx, &tse.GetGatewayCanaryRulesArgs{
-// 			GatewayId: "gateway-xxxxxx",
-// 			ServiceId: "451a9920-e67a-4519-af41-fccac0e72005",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tse.GetGatewayCanaryRules(ctx, &tse.GetGatewayCanaryRulesArgs{
+//				GatewayId: "gateway-xxxxxx",
+//				ServiceId: "451a9920-e67a-4519-af41-fccac0e72005",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func LookupGatewayCanaryRules(ctx *pulumi.Context, args *LookupGatewayCanaryRulesArgs, opts ...pulumi.InvokeOption) (*LookupGatewayCanaryRulesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupGatewayCanaryRulesResult
 	err := ctx.Invoke("tencentcloud:Tse/getGatewayCanaryRules:getGatewayCanaryRules", args, &rv, opts...)
 	if err != nil {

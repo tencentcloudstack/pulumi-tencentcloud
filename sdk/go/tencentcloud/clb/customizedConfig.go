@@ -7,48 +7,52 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a CLB customized config.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"fmt"
 //
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Clb.NewCustomizedConfig(ctx, "foo", &Clb.CustomizedConfigArgs{
-// 			ConfigContent: pulumi.String(fmt.Sprintf("%v%v", "client_max_body_size 224M;\n", "client_body_timeout 60s;\n")),
-// 			ConfigName: pulumi.String("helloWorld"),
-// 			LoadBalancerIds: pulumi.StringArray{
-// 				pulumi.Any(tencentcloud_clb_instance.Internal_clb.Id),
-// 				pulumi.Any(tencentcloud_clb_instance.Internal_clb2.Id),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewCustomizedConfig(ctx, "foo", &Clb.CustomizedConfigArgs{
+//				ConfigContent: pulumi.String("client_max_body_size 224M;\nclient_body_timeout 60s;\n"),
+//				ConfigName:    pulumi.String("helloWorld"),
+//				LoadBalancerIds: pulumi.StringArray{
+//					tencentcloud_clb_instance.Internal_clb.Id,
+//					tencentcloud_clb_instance.Internal_clb2.Id,
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // CLB customized config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clb/customizedConfig:CustomizedConfig foo pz-diowqstq
+// $ pulumi import tencentcloud:Clb/customizedConfig:CustomizedConfig foo pz-diowqstq
 // ```
 type CustomizedConfig struct {
 	pulumi.CustomResourceState
@@ -78,7 +82,7 @@ func NewCustomizedConfig(ctx *pulumi.Context,
 	if args.ConfigName == nil {
 		return nil, errors.New("invalid value for required argument 'ConfigName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource CustomizedConfig
 	err := ctx.RegisterResource("tencentcloud:Clb/customizedConfig:CustomizedConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -175,7 +179,7 @@ func (i *CustomizedConfig) ToCustomizedConfigOutputWithContext(ctx context.Conte
 // CustomizedConfigArrayInput is an input type that accepts CustomizedConfigArray and CustomizedConfigArrayOutput values.
 // You can construct a concrete instance of `CustomizedConfigArrayInput` via:
 //
-//          CustomizedConfigArray{ CustomizedConfigArgs{...} }
+//	CustomizedConfigArray{ CustomizedConfigArgs{...} }
 type CustomizedConfigArrayInput interface {
 	pulumi.Input
 
@@ -200,7 +204,7 @@ func (i CustomizedConfigArray) ToCustomizedConfigArrayOutputWithContext(ctx cont
 // CustomizedConfigMapInput is an input type that accepts CustomizedConfigMap and CustomizedConfigMapOutput values.
 // You can construct a concrete instance of `CustomizedConfigMapInput` via:
 //
-//          CustomizedConfigMap{ "key": CustomizedConfigArgs{...} }
+//	CustomizedConfigMap{ "key": CustomizedConfigArgs{...} }
 type CustomizedConfigMapInput interface {
 	pulumi.Input
 

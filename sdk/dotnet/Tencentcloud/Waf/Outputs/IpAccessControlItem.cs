@@ -30,7 +30,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Outputs
         /// Note info.
         /// </summary>
         public readonly string Note;
+        /// <summary>
+        /// Source.
+        /// </summary>
         public readonly string? Source;
+        /// <summary>
+        /// Valid status.
+        /// </summary>
         public readonly int? ValidStatus;
         /// <summary>
         /// Effective date, with a second level timestamp value. For example, 1680570420 represents 2023-04-04 09:07:00; 2019571199 means permanently effective.

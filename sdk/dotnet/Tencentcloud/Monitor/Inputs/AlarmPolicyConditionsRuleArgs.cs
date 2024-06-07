@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class AlarmPolicyConditionsRuleArgs : Pulumi.ResourceArgs
+    public sealed class AlarmPolicyConditionsRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Number of periods.
@@ -82,5 +82,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public AlarmPolicyConditionsRuleArgs()
         {
         }
+        public static new AlarmPolicyConditionsRuleArgs Empty => new AlarmPolicyConditionsRuleArgs();
     }
 }

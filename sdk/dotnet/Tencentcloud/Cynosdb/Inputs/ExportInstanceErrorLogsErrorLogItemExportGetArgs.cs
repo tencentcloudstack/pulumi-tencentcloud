@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
 {
 
-    public sealed class ExportInstanceErrorLogsErrorLogItemExportGetArgs : Pulumi.ResourceArgs
+    public sealed class ExportInstanceErrorLogsErrorLogItemExportGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// log content.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
         public ExportInstanceErrorLogsErrorLogItemExportGetArgs()
         {
         }
+        public static new ExportInstanceErrorLogsErrorLogItemExportGetArgs Empty => new ExportInstanceErrorLogsErrorLogItemExportGetArgs();
     }
 }

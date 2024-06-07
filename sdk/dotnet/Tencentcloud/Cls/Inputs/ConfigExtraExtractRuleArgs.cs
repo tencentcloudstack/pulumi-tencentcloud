@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
 {
 
-    public sealed class ConfigExtraExtractRuleArgs : Pulumi.ResourceArgs
+    public sealed class ConfigExtraExtractRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Size of the data to be rewound in incremental collection mode. Default value: -1 (full collection).
@@ -88,5 +88,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public ConfigExtraExtractRuleArgs()
         {
         }
+        public static new ConfigExtraExtractRuleArgs Empty => new ConfigExtraExtractRuleArgs();
     }
 }

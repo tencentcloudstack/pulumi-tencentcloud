@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Inputs
 {
 
-    public sealed class LogstashOperationDurationArgs : Pulumi.ResourceArgs
+    public sealed class LogstashOperationDurationArgs : global::Pulumi.ResourceArgs
     {
         [Input("periods", required: true)]
         private InputList<int>? _periods;
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Inputs
         public LogstashOperationDurationArgs()
         {
         }
+        public static new LogstashOperationDurationArgs Empty => new LogstashOperationDurationArgs();
     }
 }

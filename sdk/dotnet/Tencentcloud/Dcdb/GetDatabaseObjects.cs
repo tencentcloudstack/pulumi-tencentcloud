@@ -14,91 +14,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     {
         /// <summary>
         /// Use this data source to query detailed information of dcdb database_objects
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var databaseObjects = Output.Create(Tencentcloud.Dcdb.GetDatabaseObjects.InvokeAsync(new Tencentcloud.Dcdb.GetDatabaseObjectsArgs
-        ///         {
-        ///             DbName = "",
-        ///             Gt = 
-        ///             {
-        ///                 ,
-        ///             },
-        ///             InstanceId = "dcdbt-ow7t8lmc",
-        ///             Lt = 
-        ///             {
-        ///                 ,
-        ///             },
-        ///             Nil = 
-        ///             {
-        ///                 ,
-        ///             },
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Task<GetDatabaseObjectsResult> InvokeAsync(GetDatabaseObjectsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetDatabaseObjectsResult>("tencentcloud:Dcdb/getDatabaseObjects:getDatabaseObjects", args ?? new GetDatabaseObjectsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetDatabaseObjectsResult>("tencentcloud:Dcdb/getDatabaseObjects:getDatabaseObjects", args ?? new GetDatabaseObjectsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of dcdb database_objects
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var databaseObjects = Output.Create(Tencentcloud.Dcdb.GetDatabaseObjects.InvokeAsync(new Tencentcloud.Dcdb.GetDatabaseObjectsArgs
-        ///         {
-        ///             DbName = "",
-        ///             Gt = 
-        ///             {
-        ///                 ,
-        ///             },
-        ///             InstanceId = "dcdbt-ow7t8lmc",
-        ///             Lt = 
-        ///             {
-        ///                 ,
-        ///             },
-        ///             Nil = 
-        ///             {
-        ///                 ,
-        ///             },
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Output<GetDatabaseObjectsResult> Invoke(GetDatabaseObjectsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetDatabaseObjectsResult>("tencentcloud:Dcdb/getDatabaseObjects:getDatabaseObjects", args ?? new GetDatabaseObjectsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetDatabaseObjectsResult>("tencentcloud:Dcdb/getDatabaseObjects:getDatabaseObjects", args ?? new GetDatabaseObjectsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetDatabaseObjectsArgs : Pulumi.InvokeArgs
+    public sealed class GetDatabaseObjectsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Database name, obtained through the DescribeDatabases api.
@@ -121,9 +49,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetDatabaseObjectsArgs()
         {
         }
+        public static new GetDatabaseObjectsArgs Empty => new GetDatabaseObjectsArgs();
     }
 
-    public sealed class GetDatabaseObjectsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetDatabaseObjectsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Database name, obtained through the DescribeDatabases api.
@@ -146,6 +75,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public GetDatabaseObjectsInvokeArgs()
         {
         }
+        public static new GetDatabaseObjectsInvokeArgs Empty => new GetDatabaseObjectsInvokeArgs();
     }
 
 

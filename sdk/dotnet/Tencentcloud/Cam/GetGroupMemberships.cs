@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// <summary>
         /// Use this data source to query detailed information of CAM group memberships
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cam.GetGroupMemberships.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cam.GetGroupMemberships.InvokeAsync(new Tencentcloud.Cam.GetGroupMembershipsArgs
-        ///         {
-        ///             GroupId = tencentcloud_cam_group.Foo.Id,
-        ///         }));
-        ///     }
+        ///         GroupId = tencentcloud_cam_group.Foo.Id,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetGroupMembershipsResult> InvokeAsync(GetGroupMembershipsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetGroupMembershipsResult>("tencentcloud:Cam/getGroupMemberships:getGroupMemberships", args ?? new GetGroupMembershipsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupMembershipsResult>("tencentcloud:Cam/getGroupMemberships:getGroupMemberships", args ?? new GetGroupMembershipsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of CAM group memberships
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Cam.GetGroupMemberships.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Cam.GetGroupMemberships.InvokeAsync(new Tencentcloud.Cam.GetGroupMembershipsArgs
-        ///         {
-        ///             GroupId = tencentcloud_cam_group.Foo.Id,
-        ///         }));
-        ///     }
+        ///         GroupId = tencentcloud_cam_group.Foo.Id,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetGroupMembershipsResult> Invoke(GetGroupMembershipsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetGroupMembershipsResult>("tencentcloud:Cam/getGroupMemberships:getGroupMemberships", args ?? new GetGroupMembershipsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetGroupMembershipsResult>("tencentcloud:Cam/getGroupMemberships:getGroupMemberships", args ?? new GetGroupMembershipsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetGroupMembershipsArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupMembershipsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of CAM group to be queried.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetGroupMembershipsArgs()
         {
         }
+        public static new GetGroupMembershipsArgs Empty => new GetGroupMembershipsArgs();
     }
 
-    public sealed class GetGroupMembershipsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetGroupMembershipsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of CAM group to be queried.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         public GetGroupMembershipsInvokeArgs()
         {
         }
+        public static new GetGroupMembershipsInvokeArgs Empty => new GetGroupMembershipsInvokeArgs();
     }
 
 

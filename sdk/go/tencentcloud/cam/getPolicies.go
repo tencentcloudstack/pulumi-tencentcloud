@@ -8,42 +8,47 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of CAM policies
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cam"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
-// 			PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
-// 			PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
-// 			Name:     pulumi.StringRef("tf-auto-test"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
+//				PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cam.GetPolicies(ctx, &cam.GetPoliciesArgs{
+//				PolicyId: pulumi.StringRef(tencentcloud_cam_policy.Foo.Id),
+//				Name:     pulumi.StringRef("tf-auto-test"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetPolicies(ctx *pulumi.Context, args *GetPoliciesArgs, opts ...pulumi.InvokeOption) (*GetPoliciesResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPoliciesResult
 	err := ctx.Invoke("tencentcloud:Cam/getPolicies:getPolicies", args, &rv, opts...)
 	if err != nil {

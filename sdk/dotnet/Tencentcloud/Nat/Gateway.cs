@@ -14,94 +14,96 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
     /// Provides a resource to create a NAT gateway.
     /// 
     /// ## Example Usage
+    /// 
     /// ### Create a traditional NAT gateway.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var eipExample1 = new Tencentcloud.Eip.Instance("eipExample1", new Tencentcloud.Eip.InstanceArgs
-    ///         {
-    ///         });
-    ///         var eipExample2 = new Tencentcloud.Eip.Instance("eipExample2", new Tencentcloud.Eip.InstanceArgs
-    ///         {
-    ///         });
-    ///         var example = new Tencentcloud.Nat.Gateway("example", new Tencentcloud.Nat.GatewayArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             Bandwidth = 100,
-    ///             MaxConcurrent = 1000000,
-    ///             AssignedEipSets = 
-    ///             {
-    ///                 eipExample1.PublicIp,
-    ///                 eipExample2.PublicIp,
-    ///             },
-    ///             Tags = 
-    ///             {
-    ///                 { "tf_tag_key", "tf_tag_value" },
-    ///             },
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var eipExample1 = new Tencentcloud.Eip.Instance("eipExample1");
+    /// 
+    ///     var eipExample2 = new Tencentcloud.Eip.Instance("eipExample2");
+    /// 
+    ///     var example = new Tencentcloud.Nat.Gateway("example", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         Bandwidth = 100,
+    ///         MaxConcurrent = 1000000,
+    ///         AssignedEipSets = new[]
+    ///         {
+    ///             eipExample1.PublicIp,
+    ///             eipExample2.PublicIp,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tf_tag_key", "tf_tag_value" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### Create a standard NAT gateway.
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         var vpc = new Tencentcloud.Vpc.Instance("vpc", new Tencentcloud.Vpc.InstanceArgs
-    ///         {
-    ///             CidrBlock = "10.0.0.0/16",
-    ///         });
-    ///         var eipExample1 = new Tencentcloud.Eip.Instance("eipExample1", new Tencentcloud.Eip.InstanceArgs
-    ///         {
-    ///         });
-    ///         var eipExample2 = new Tencentcloud.Eip.Instance("eipExample2", new Tencentcloud.Eip.InstanceArgs
-    ///         {
-    ///         });
-    ///         var example = new Tencentcloud.Nat.Gateway("example", new Tencentcloud.Nat.GatewayArgs
-    ///         {
-    ///             VpcId = vpc.Id,
-    ///             AssignedEipSets = 
-    ///             {
-    ///                 eipExample1.PublicIp,
-    ///                 eipExample2.PublicIp,
-    ///             },
-    ///             NatProductVersion = 2,
-    ///             Tags = 
-    ///             {
-    ///                 { "tf_tag_key", "tf_tag_value" },
-    ///             },
-    ///         });
-    ///     }
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
     /// 
-    /// }
+    ///     var eipExample1 = new Tencentcloud.Eip.Instance("eipExample1");
+    /// 
+    ///     var eipExample2 = new Tencentcloud.Eip.Instance("eipExample2");
+    /// 
+    ///     var example = new Tencentcloud.Nat.Gateway("example", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AssignedEipSets = new[]
+    ///         {
+    ///             eipExample1.PublicIp,
+    ///             eipExample2.PublicIp,
+    ///         },
+    ///         NatProductVersion = 2,
+    ///         Tags = 
+    ///         {
+    ///             { "tf_tag_key", "tf_tag_value" },
+    ///         },
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// NAT gateway can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
+    /// $ pulumi import tencentcloud:Nat/gateway:Gateway foo nat-1asg3t63
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Nat/gateway:Gateway")]
-    public partial class Gateway : Pulumi.CustomResource
+    public partial class Gateway : global::Pulumi.CustomResource
     {
         /// <summary>
         /// EIP IP address set bound to the gateway. The value of at least 1 and at most 10.
@@ -208,7 +210,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         }
     }
 
-    public sealed class GatewayArgs : Pulumi.ResourceArgs
+    public sealed class GatewayArgs : global::Pulumi.ResourceArgs
     {
         [Input("assignedEipSets", required: true)]
         private InputList<string>? _assignedEipSets;
@@ -279,9 +281,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public GatewayArgs()
         {
         }
+        public static new GatewayArgs Empty => new GatewayArgs();
     }
 
-    public sealed class GatewayState : Pulumi.ResourceArgs
+    public sealed class GatewayState : global::Pulumi.ResourceArgs
     {
         [Input("assignedEipSets")]
         private InputList<string>? _assignedEipSets;
@@ -358,5 +361,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         public GatewayState()
         {
         }
+        public static new GatewayState Empty => new GatewayState();
     }
 }

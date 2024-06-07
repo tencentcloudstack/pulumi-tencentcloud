@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const groupConfigRelease = pulumi.output(tencentcloud.Tsf.getGroupConfigRelease({
+ * const groupConfigRelease = tencentcloud.Tsf.getGroupConfigRelease({
  *     groupId: "group-yrjkln9v",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getGroupConfigRelease(args: GetGroupConfigReleaseArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupConfigReleaseResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tsf/getGroupConfigRelease:getGroupConfigRelease", {
         "groupId": args.groupId,
         "resultOutputFile": args.resultOutputFile,
@@ -63,9 +63,24 @@ export interface GetGroupConfigReleaseResult {
      */
     readonly results: outputs.Tsf.GetGroupConfigReleaseResult[];
 }
-
+/**
+ * Use this data source to query detailed information of tsf groupConfigRelease
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const groupConfigRelease = tencentcloud.Tsf.getGroupConfigRelease({
+ *     groupId: "group-yrjkln9v",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getGroupConfigReleaseOutput(args: GetGroupConfigReleaseOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGroupConfigReleaseResult> {
-    return pulumi.output(args).apply(a => getGroupConfigRelease(a, opts))
+    return pulumi.output(args).apply((a: any) => getGroupConfigRelease(a, opts))
 }
 
 /**

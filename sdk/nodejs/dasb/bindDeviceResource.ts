@@ -9,18 +9,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Dasb.BindDeviceResource("example", {
+ * const example = new tencentcloud.dasb.BindDeviceResource("example", {
  *     deviceIdSets: [
  *         17,
  *         18,
  *     ],
- *     resourceId: "bh-saas-ocmzo6lgxiv",
+ *     resourceId: "bh-saas-weyosfym",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class BindDeviceResource extends pulumi.CustomResource {
     /**

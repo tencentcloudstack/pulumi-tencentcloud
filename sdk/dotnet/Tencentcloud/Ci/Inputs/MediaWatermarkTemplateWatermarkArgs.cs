@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaWatermarkTemplateWatermarkArgs : Pulumi.ResourceArgs
+    public sealed class MediaWatermarkTemplateWatermarkArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Horizontal offset, 1: In the picture watermark, if Background is true, when locMode is Relativity, it is %, value range: [-300 0]; when locMode is Absolute, it is px, value range: [-4096 0] ], 2: In the picture watermark, if Background is false, when locMode is Relativity, it is %, value range: [0 100]; when locMode is Absolute, it is px, value range: [0 4096], 3: In text watermark, when locMode is Relativity, it is %, value range: [0 100]; when locMode is Absolute, it is px, value range: [0 4096], 4: When Pos is Top, Bottom and Center, the parameter is invalid.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaWatermarkTemplateWatermarkArgs()
         {
         }
+        public static new MediaWatermarkTemplateWatermarkArgs Empty => new MediaWatermarkTemplateWatermarkArgs();
     }
 }

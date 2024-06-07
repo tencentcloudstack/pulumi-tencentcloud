@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.ApiGateway.getApiPlugins({
+ * const example = tencentcloud.ApiGateway.getApiPlugins({
  *     apiId: "api-0cvmf4x4",
  *     environmentName: "test",
  *     serviceId: "service-nxz6yync",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getApiPlugins(args: GetApiPluginsArgs, opts?: pulumi.InvokeOptions): Promise<GetApiPluginsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:ApiGateway/getApiPlugins:getApiPlugins", {
         "apiId": args.apiId,
         "environmentName": args.environmentName,
@@ -74,9 +74,26 @@ export interface GetApiPluginsResult {
     readonly results: outputs.ApiGateway.GetApiPluginsResult[];
     readonly serviceId: string;
 }
-
+/**
+ * Use this data source to query detailed information of apiGateway apiPlugins
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.ApiGateway.getApiPlugins({
+ *     apiId: "api-0cvmf4x4",
+ *     environmentName: "test",
+ *     serviceId: "service-nxz6yync",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getApiPluginsOutput(args: GetApiPluginsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetApiPluginsResult> {
-    return pulumi.output(args).apply(a => getApiPlugins(a, opts))
+    return pulumi.output(args).apply((a: any) => getApiPlugins(a, opts))
 }
 
 /**

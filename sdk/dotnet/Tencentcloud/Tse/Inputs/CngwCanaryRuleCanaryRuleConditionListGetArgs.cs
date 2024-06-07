@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class CngwCanaryRuleCanaryRuleConditionListGetArgs : Pulumi.ResourceArgs
+    public sealed class CngwCanaryRuleCanaryRuleConditionListGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// delimiter. valid when operator is in or not in, reference value:`,`, `;`,`\n`.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public CngwCanaryRuleCanaryRuleConditionListGetArgs()
         {
         }
+        public static new CngwCanaryRuleCanaryRuleConditionListGetArgs Empty => new CngwCanaryRuleCanaryRuleConditionListGetArgs();
     }
 }

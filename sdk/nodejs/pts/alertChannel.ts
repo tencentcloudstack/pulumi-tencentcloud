@@ -11,9 +11,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.monitor.AlarmNotice("example", {
  *     noticeType: "ALL",
@@ -73,13 +74,14 @@ import * as utilities from "../utilities";
  *     ampConsumerId: "Consumer-vvy1xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * pts alert_channel can be imported using the project_id#notice_id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Pts/alertChannel:AlertChannel alert_channel project-kww5v8se#notice-kl66t6y9
+ * $ pulumi import tencentcloud:Pts/alertChannel:AlertChannel alert_channel project-kww5v8se#notice-kl66t6y9
  * ```
  */
 export class AlertChannel extends pulumi.CustomResource {

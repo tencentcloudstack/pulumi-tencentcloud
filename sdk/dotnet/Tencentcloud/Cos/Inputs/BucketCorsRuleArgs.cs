@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketCorsRuleArgs : Pulumi.ResourceArgs
+    public sealed class BucketCorsRuleArgs : global::Pulumi.ResourceArgs
     {
         [Input("allowedHeaders", required: true)]
         private InputList<string>? _allowedHeaders;
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketCorsRuleArgs()
         {
         }
+        public static new BucketCorsRuleArgs Empty => new BucketCorsRuleArgs();
     }
 }

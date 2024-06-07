@@ -15,80 +15,74 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// <summary>
         /// Use this data source to query detailed information of VPN connections.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Vpn.GetConnections.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Vpn.GetConnections.InvokeAsync(new Tencentcloud.Vpn.GetConnectionsArgs
+        ///         CustomerGatewayId = "",
+        ///         Id = "vpnx-xfqag",
+        ///         Name = "main",
+        ///         Tags = 
         ///         {
-        ///             CustomerGatewayId = "",
-        ///             Id = "vpnx-xfqag",
-        ///             Name = "main",
-        ///             Tags = 
-        ///             {
-        ///                 { "test", "tf" },
-        ///             },
-        ///             VpcId = "cgw-xfqag",
-        ///             VpnGatewayId = "vpngw-8ccsnclt",
-        ///         }));
-        ///     }
+        ///             { "test", "tf" },
+        ///         },
+        ///         VpcId = "cgw-xfqag",
+        ///         VpnGatewayId = "vpngw-8ccsnclt",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetConnectionsResult> InvokeAsync(GetConnectionsArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetConnectionsResult>("tencentcloud:Vpn/getConnections:getConnections", args ?? new GetConnectionsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetConnectionsResult>("tencentcloud:Vpn/getConnections:getConnections", args ?? new GetConnectionsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of VPN connections.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var foo = Tencentcloud.Vpn.GetConnections.Invoke(new()
         ///     {
-        ///         var foo = Output.Create(Tencentcloud.Vpn.GetConnections.InvokeAsync(new Tencentcloud.Vpn.GetConnectionsArgs
+        ///         CustomerGatewayId = "",
+        ///         Id = "vpnx-xfqag",
+        ///         Name = "main",
+        ///         Tags = 
         ///         {
-        ///             CustomerGatewayId = "",
-        ///             Id = "vpnx-xfqag",
-        ///             Name = "main",
-        ///             Tags = 
-        ///             {
-        ///                 { "test", "tf" },
-        ///             },
-        ///             VpcId = "cgw-xfqag",
-        ///             VpnGatewayId = "vpngw-8ccsnclt",
-        ///         }));
-        ///     }
+        ///             { "test", "tf" },
+        ///         },
+        ///         VpcId = "cgw-xfqag",
+        ///         VpnGatewayId = "vpngw-8ccsnclt",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetConnectionsResult> Invoke(GetConnectionsInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetConnectionsResult>("tencentcloud:Vpn/getConnections:getConnections", args ?? new GetConnectionsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetConnectionsResult>("tencentcloud:Vpn/getConnections:getConnections", args ?? new GetConnectionsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetConnectionsArgs : Pulumi.InvokeArgs
+    public sealed class GetConnectionsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Customer gateway ID of the VPN connection.
@@ -141,9 +135,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GetConnectionsArgs()
         {
         }
+        public static new GetConnectionsArgs Empty => new GetConnectionsArgs();
     }
 
-    public sealed class GetConnectionsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetConnectionsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Customer gateway ID of the VPN connection.
@@ -196,6 +191,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         public GetConnectionsInvokeArgs()
         {
         }
+        public static new GetConnectionsInvokeArgs Empty => new GetConnectionsInvokeArgs();
     }
 
 

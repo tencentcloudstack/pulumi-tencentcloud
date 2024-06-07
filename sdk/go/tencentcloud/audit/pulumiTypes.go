@@ -8,7 +8,10 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
+
+var _ = internal.GetEnvOrDefault
 
 type TrackStorage struct {
 	// Track Storage name:- when StorageType is `cls`, StorageName is cls topicId- when StorageType is `cos`, StorageName is cos bucket name that does not contain `-APPID`.
@@ -24,7 +27,7 @@ type TrackStorage struct {
 // TrackStorageInput is an input type that accepts TrackStorageArgs and TrackStorageOutput values.
 // You can construct a concrete instance of `TrackStorageInput` via:
 //
-//          TrackStorageArgs{...}
+//	TrackStorageArgs{...}
 type TrackStorageInput interface {
 	pulumi.Input
 
@@ -66,11 +69,11 @@ func (i TrackStorageArgs) ToTrackStoragePtrOutputWithContext(ctx context.Context
 // TrackStoragePtrInput is an input type that accepts TrackStorageArgs, TrackStoragePtr and TrackStoragePtrOutput values.
 // You can construct a concrete instance of `TrackStoragePtrInput` via:
 //
-//          TrackStorageArgs{...}
+//	        TrackStorageArgs{...}
 //
-//  or:
+//	or:
 //
-//          nil
+//	        nil
 type TrackStoragePtrInput interface {
 	pulumi.Input
 
@@ -214,7 +217,7 @@ type GetCosRegionsAuditCosRegionList struct {
 // GetCosRegionsAuditCosRegionListInput is an input type that accepts GetCosRegionsAuditCosRegionListArgs and GetCosRegionsAuditCosRegionListOutput values.
 // You can construct a concrete instance of `GetCosRegionsAuditCosRegionListInput` via:
 //
-//          GetCosRegionsAuditCosRegionListArgs{...}
+//	GetCosRegionsAuditCosRegionListArgs{...}
 type GetCosRegionsAuditCosRegionListInput interface {
 	pulumi.Input
 
@@ -244,7 +247,7 @@ func (i GetCosRegionsAuditCosRegionListArgs) ToGetCosRegionsAuditCosRegionListOu
 // GetCosRegionsAuditCosRegionListArrayInput is an input type that accepts GetCosRegionsAuditCosRegionListArray and GetCosRegionsAuditCosRegionListArrayOutput values.
 // You can construct a concrete instance of `GetCosRegionsAuditCosRegionListArrayInput` via:
 //
-//          GetCosRegionsAuditCosRegionListArray{ GetCosRegionsAuditCosRegionListArgs{...} }
+//	GetCosRegionsAuditCosRegionListArray{ GetCosRegionsAuditCosRegionListArgs{...} }
 type GetCosRegionsAuditCosRegionListArrayInput interface {
 	pulumi.Input
 
@@ -320,7 +323,7 @@ type GetKeyAliasAuditKeyAliasList struct {
 // GetKeyAliasAuditKeyAliasListInput is an input type that accepts GetKeyAliasAuditKeyAliasListArgs and GetKeyAliasAuditKeyAliasListOutput values.
 // You can construct a concrete instance of `GetKeyAliasAuditKeyAliasListInput` via:
 //
-//          GetKeyAliasAuditKeyAliasListArgs{...}
+//	GetKeyAliasAuditKeyAliasListArgs{...}
 type GetKeyAliasAuditKeyAliasListInput interface {
 	pulumi.Input
 
@@ -350,7 +353,7 @@ func (i GetKeyAliasAuditKeyAliasListArgs) ToGetKeyAliasAuditKeyAliasListOutputWi
 // GetKeyAliasAuditKeyAliasListArrayInput is an input type that accepts GetKeyAliasAuditKeyAliasListArray and GetKeyAliasAuditKeyAliasListArrayOutput values.
 // You can construct a concrete instance of `GetKeyAliasAuditKeyAliasListArrayInput` via:
 //
-//          GetKeyAliasAuditKeyAliasListArray{ GetKeyAliasAuditKeyAliasListArgs{...} }
+//	GetKeyAliasAuditKeyAliasListArray{ GetKeyAliasAuditKeyAliasListArgs{...} }
 type GetKeyAliasAuditKeyAliasListArrayInput interface {
 	pulumi.Input
 

@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var deployCertificateRecordRollback = new Tencentcloud.Ssl.DeployCertificateRecordRollbackOperation("deployCertificateRecordRollback", new()
     ///     {
-    ///         var deployCertificateRecordRollback = new Tencentcloud.Ssl.DeployCertificateRecordRollbackOperation("deployCertificateRecordRollback", new Tencentcloud.Ssl.DeployCertificateRecordRollbackOperationArgs
-    ///         {
-    ///             DeployRecordId = 35471,
-    ///         });
-    ///     }
+    ///         DeployRecordId = 35471,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// ssl deploy_certificate_record_rollback can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Ssl/deployCertificateRecordRollbackOperation:DeployCertificateRecordRollbackOperation deploy_certificate_record_rollback deploy_certificate_record_rollback_id
+    /// $ pulumi import tencentcloud:Ssl/deployCertificateRecordRollbackOperation:DeployCertificateRecordRollbackOperation deploy_certificate_record_rollback deploy_certificate_record_rollback_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssl/deployCertificateRecordRollbackOperation:DeployCertificateRecordRollbackOperation")]
-    public partial class DeployCertificateRecordRollbackOperation : Pulumi.CustomResource
+    public partial class DeployCertificateRecordRollbackOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Deployment record ID to be rollback.
@@ -94,7 +95,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         }
     }
 
-    public sealed class DeployCertificateRecordRollbackOperationArgs : Pulumi.ResourceArgs
+    public sealed class DeployCertificateRecordRollbackOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Deployment record ID to be rollback.
@@ -105,9 +106,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public DeployCertificateRecordRollbackOperationArgs()
         {
         }
+        public static new DeployCertificateRecordRollbackOperationArgs Empty => new DeployCertificateRecordRollbackOperationArgs();
     }
 
-    public sealed class DeployCertificateRecordRollbackOperationState : Pulumi.ResourceArgs
+    public sealed class DeployCertificateRecordRollbackOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Deployment record ID to be rollback.
@@ -118,5 +120,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public DeployCertificateRecordRollbackOperationState()
         {
         }
+        public static new DeployCertificateRecordRollbackOperationState Empty => new DeployCertificateRecordRollbackOperationState();
     }
 }

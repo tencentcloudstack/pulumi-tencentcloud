@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class ZoneSettingOfflineCache
     {
         /// <summary>
-        /// Whether to enable offline cache.- `on`: Enable.- `off`: Disable. Note: This field may return null, indicating that no valid value can be obtained.
+        /// Whether to enable offline cache.
         /// </summary>
         public readonly string Switch;
 

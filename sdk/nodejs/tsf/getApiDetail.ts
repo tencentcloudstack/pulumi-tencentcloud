@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const apiDetail = pulumi.output(tencentcloud.Tsf.getApiDetail({
+ * const apiDetail = tencentcloud.Tsf.getApiDetail({
  *     applicationId: "application-a24x29xv",
  *     method: "GET",
  *     microserviceId: "ms-yq3jo6jd",
  *     path: "/printRequest",
  *     pkgVersion: "20210625192923",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getApiDetail(args: GetApiDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetApiDetailResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tsf/getApiDetail:getApiDetail", {
         "applicationId": args.applicationId,
         "method": args.method,
@@ -88,9 +88,28 @@ export interface GetApiDetailResult {
      */
     readonly results: outputs.Tsf.GetApiDetailResult[];
 }
-
+/**
+ * Use this data source to query detailed information of tsf apiDetail
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const apiDetail = tencentcloud.Tsf.getApiDetail({
+ *     applicationId: "application-a24x29xv",
+ *     method: "GET",
+ *     microserviceId: "ms-yq3jo6jd",
+ *     path: "/printRequest",
+ *     pkgVersion: "20210625192923",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getApiDetailOutput(args: GetApiDetailOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetApiDetailResult> {
-    return pulumi.output(args).apply(a => getApiDetail(a, opts))
+    return pulumi.output(args).apply((a: any) => getApiDetail(a, opts))
 }
 
 /**

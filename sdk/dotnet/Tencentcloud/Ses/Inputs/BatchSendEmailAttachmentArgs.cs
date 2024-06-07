@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses.Inputs
 {
 
-    public sealed class BatchSendEmailAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class BatchSendEmailAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Base64-encoded attachment content. You can send attachments of up to 4 MB in the total size.Note: The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachmentcontent will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of allattachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses.Inputs
         public BatchSendEmailAttachmentArgs()
         {
         }
+        public static new BatchSendEmailAttachmentArgs Empty => new BatchSendEmailAttachmentArgs();
     }
 }

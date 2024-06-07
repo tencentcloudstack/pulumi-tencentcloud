@@ -8,37 +8,42 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of tdmq publisherSummary
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tdmq.GetPublisherSummary(ctx, &tdmq.GetPublisherSummaryArgs{
-// 			ClusterId: "pulsar-9n95ax58b9vn",
-// 			Namespace: "keep-ns",
-// 			Topic:     "keep-topic",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tdmq.GetPublisherSummary(ctx, &tdmq.GetPublisherSummaryArgs{
+//				ClusterId: "pulsar-9n95ax58b9vn",
+//				Namespace: "keep-ns",
+//				Topic:     "keep-topic",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetPublisherSummary(ctx *pulumi.Context, args *GetPublisherSummaryArgs, opts ...pulumi.InvokeOption) (*GetPublisherSummaryResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPublisherSummaryResult
 	err := ctx.Invoke("tencentcloud:Tdmq/getPublisherSummary:getPublisherSummary", args, &rv, opts...)
 	if err != nil {

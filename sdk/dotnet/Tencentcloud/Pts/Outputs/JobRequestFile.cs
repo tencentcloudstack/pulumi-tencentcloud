@@ -14,13 +14,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Outputs
     [OutputType]
     public sealed class JobRequestFile
     {
+        /// <summary>
+        /// File id.
+        /// </summary>
         public readonly string? FileId;
+        /// <summary>
+        /// File name.
+        /// </summary>
         public readonly string? Name;
+        /// <summary>
+        /// File size.
+        /// </summary>
         public readonly int? Size;
         /// <summary>
         /// Scene Type.
         /// </summary>
         public readonly string? Type;
+        /// <summary>
+        /// Update time.
+        /// </summary>
         public readonly string? UpdatedAt;
 
         [OutputConstructor]

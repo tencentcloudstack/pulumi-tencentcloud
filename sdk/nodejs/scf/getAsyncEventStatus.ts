@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const asyncEventStatus = pulumi.output(tencentcloud.Scf.getAsyncEventStatus({
+ * const asyncEventStatus = tencentcloud.Scf.getAsyncEventStatus({
  *     invokeRequestId: "9de9405a-e33a-498d-bb59-e80b7bed1191",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAsyncEventStatus(args: GetAsyncEventStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetAsyncEventStatusResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Scf/getAsyncEventStatus:getAsyncEventStatus", {
         "invokeRequestId": args.invokeRequestId,
         "resultOutputFile": args.resultOutputFile,
@@ -63,9 +63,24 @@ export interface GetAsyncEventStatusResult {
      */
     readonly results: outputs.Scf.GetAsyncEventStatusResult[];
 }
-
+/**
+ * Use this data source to query detailed information of scf asyncEventStatus
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const asyncEventStatus = tencentcloud.Scf.getAsyncEventStatus({
+ *     invokeRequestId: "9de9405a-e33a-498d-bb59-e80b7bed1191",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAsyncEventStatusOutput(args: GetAsyncEventStatusOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAsyncEventStatusResult> {
-    return pulumi.output(args).apply(a => getAsyncEventStatus(a, opts))
+    return pulumi.output(args).apply((a: any) => getAsyncEventStatus(a, opts))
 }
 
 /**

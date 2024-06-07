@@ -7,58 +7,63 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ci mediaWatermarkTemplate
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewMediaWatermarkTemplate(ctx, "mediaWatermarkTemplate", &Ci.MediaWatermarkTemplateArgs{
-// 			Bucket: pulumi.String("terraform-ci-1308919341"),
-// 			Watermark: &ci.MediaWatermarkTemplateWatermarkArgs{
-// 				Dx:        pulumi.String("128"),
-// 				Dy:        pulumi.String("128"),
-// 				EndTime:   pulumi.String("100.5"),
-// 				LocMode:   pulumi.String("Absolute"),
-// 				Pos:       pulumi.String("TopRight"),
-// 				StartTime: pulumi.String("0"),
-// 				Text: &ci.MediaWatermarkTemplateWatermarkTextArgs{
-// 					FontColor:    pulumi.String("0xF0F8F0"),
-// 					FontSize:     pulumi.String("30"),
-// 					FontType:     pulumi.String("simfang.ttf"),
-// 					Text:         pulumi.String("watermark-content"),
-// 					Transparency: pulumi.String("30"),
-// 				},
-// 				Type: pulumi.String("Text"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewMediaWatermarkTemplate(ctx, "mediaWatermarkTemplate", &Ci.MediaWatermarkTemplateArgs{
+//				Bucket: pulumi.String("terraform-ci-1308919341"),
+//				Watermark: &ci.MediaWatermarkTemplateWatermarkArgs{
+//					Dx:        pulumi.String("128"),
+//					Dy:        pulumi.String("128"),
+//					EndTime:   pulumi.String("100.5"),
+//					LocMode:   pulumi.String("Absolute"),
+//					Pos:       pulumi.String("TopRight"),
+//					StartTime: pulumi.String("0"),
+//					Text: &ci.MediaWatermarkTemplateWatermarkTextArgs{
+//						FontColor:    pulumi.String("0xF0F8F0"),
+//						FontSize:     pulumi.String("30"),
+//						FontType:     pulumi.String("simfang.ttf"),
+//						Text:         pulumi.String("watermark-content"),
+//						Transparency: pulumi.String("30"),
+//					},
+//					Type: pulumi.String("Text"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ci media_watermark_template can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/mediaWatermarkTemplate:MediaWatermarkTemplate media_watermark_template media_watermark_template_id
+// $ pulumi import tencentcloud:Ci/mediaWatermarkTemplate:MediaWatermarkTemplate media_watermark_template media_watermark_template_id
 // ```
 type MediaWatermarkTemplate struct {
 	pulumi.CustomResourceState
@@ -84,7 +89,7 @@ func NewMediaWatermarkTemplate(ctx *pulumi.Context,
 	if args.Watermark == nil {
 		return nil, errors.New("invalid value for required argument 'Watermark'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource MediaWatermarkTemplate
 	err := ctx.RegisterResource("tencentcloud:Ci/mediaWatermarkTemplate:MediaWatermarkTemplate", name, args, &resource, opts...)
 	if err != nil {
@@ -173,7 +178,7 @@ func (i *MediaWatermarkTemplate) ToMediaWatermarkTemplateOutputWithContext(ctx c
 // MediaWatermarkTemplateArrayInput is an input type that accepts MediaWatermarkTemplateArray and MediaWatermarkTemplateArrayOutput values.
 // You can construct a concrete instance of `MediaWatermarkTemplateArrayInput` via:
 //
-//          MediaWatermarkTemplateArray{ MediaWatermarkTemplateArgs{...} }
+//	MediaWatermarkTemplateArray{ MediaWatermarkTemplateArgs{...} }
 type MediaWatermarkTemplateArrayInput interface {
 	pulumi.Input
 
@@ -198,7 +203,7 @@ func (i MediaWatermarkTemplateArray) ToMediaWatermarkTemplateArrayOutputWithCont
 // MediaWatermarkTemplateMapInput is an input type that accepts MediaWatermarkTemplateMap and MediaWatermarkTemplateMapOutput values.
 // You can construct a concrete instance of `MediaWatermarkTemplateMapInput` via:
 //
-//          MediaWatermarkTemplateMap{ "key": MediaWatermarkTemplateArgs{...} }
+//	MediaWatermarkTemplateMap{ "key": MediaWatermarkTemplateArgs{...} }
 type MediaWatermarkTemplateMapInput interface {
 	pulumi.Input
 

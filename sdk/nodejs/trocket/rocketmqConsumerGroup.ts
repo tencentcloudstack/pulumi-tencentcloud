@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const rocketmqInstance = new tencentcloud.trocket.RocketmqInstance("rocketmqInstance", {
  *     instanceType: "EXPERIMENT",
@@ -33,13 +34,14 @@ import * as utilities from "../utilities";
  *     remark: "test for terraform",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * trocket rocketmq_consumer_group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Trocket/rocketmqConsumerGroup:RocketmqConsumerGroup rocketmq_consumer_group instanceId#consumerGroup
+ * $ pulumi import tencentcloud:Trocket/rocketmqConsumerGroup:RocketmqConsumerGroup rocketmq_consumer_group instanceId#consumerGroup
  * ```
  */
 export class RocketmqConsumerGroup extends pulumi.CustomResource {

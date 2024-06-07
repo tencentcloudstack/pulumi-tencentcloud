@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const revokeCertificate = new tencentcloud.Ssl.RevokeCertificateOperation("revoke_certificate", {
- *     certificateId: "7zUGkVab",
- * });
+ * const revokeCertificate = new tencentcloud.ssl.RevokeCertificateOperation("revokeCertificate", {certificateId: "7zUGkVab"});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ssl revoke_certificate can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ssl/revokeCertificateOperation:RevokeCertificateOperation revoke_certificate revoke_certificate_id
+ * $ pulumi import tencentcloud:Ssl/revokeCertificateOperation:RevokeCertificateOperation revoke_certificate revoke_certificate_id
  * ```
  */
 export class RevokeCertificateOperation extends pulumi.CustomResource {

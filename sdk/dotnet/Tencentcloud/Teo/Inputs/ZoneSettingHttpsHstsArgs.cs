@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 {
 
-    public sealed class ZoneSettingHttpsHstsArgs : Pulumi.ResourceArgs
+    public sealed class ZoneSettingHttpsHstsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Specifies whether to include subdomain names. Valid values: `on` and `off`. Note: This field may return null, indicating that no valid value can be obtained.
@@ -32,7 +32,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<string>? Preload { get; set; }
 
         /// <summary>
-        /// - `on`: Enable.- `off`: Disable.
+        /// `on`: Enable.
         /// </summary>
         [Input("switch", required: true)]
         public Input<string> Switch { get; set; } = null!;
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public ZoneSettingHttpsHstsArgs()
         {
         }
+        public static new ZoneSettingHttpsHstsArgs Empty => new ZoneSettingHttpsHstsArgs();
     }
 }

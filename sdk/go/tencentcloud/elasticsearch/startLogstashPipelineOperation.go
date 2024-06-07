@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to start a elasticsearch logstash pipeline
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Elasticsearch"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Elasticsearch.NewStartLogstashPipelineOperation(ctx, "startLogstashPipelineOperation", &Elasticsearch.StartLogstashPipelineOperationArgs{
-// 			InstanceId: pulumi.String("ls-xxxxxx"),
-// 			PipelineId: pulumi.String("xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Elasticsearch.NewStartLogstashPipelineOperation(ctx, "startLogstashPipelineOperation", &Elasticsearch.StartLogstashPipelineOperationArgs{
+//				InstanceId: pulumi.String("ls-xxxxxx"),
+//				PipelineId: pulumi.String("xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type StartLogstashPipelineOperation struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewStartLogstashPipelineOperation(ctx *pulumi.Context,
 	if args.PipelineId == nil {
 		return nil, errors.New("invalid value for required argument 'PipelineId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource StartLogstashPipelineOperation
 	err := ctx.RegisterResource("tencentcloud:Elasticsearch/startLogstashPipelineOperation:StartLogstashPipelineOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *StartLogstashPipelineOperation) ToStartLogstashPipelineOperationOutputW
 // StartLogstashPipelineOperationArrayInput is an input type that accepts StartLogstashPipelineOperationArray and StartLogstashPipelineOperationArrayOutput values.
 // You can construct a concrete instance of `StartLogstashPipelineOperationArrayInput` via:
 //
-//          StartLogstashPipelineOperationArray{ StartLogstashPipelineOperationArgs{...} }
+//	StartLogstashPipelineOperationArray{ StartLogstashPipelineOperationArgs{...} }
 type StartLogstashPipelineOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i StartLogstashPipelineOperationArray) ToStartLogstashPipelineOperationArr
 // StartLogstashPipelineOperationMapInput is an input type that accepts StartLogstashPipelineOperationMap and StartLogstashPipelineOperationMapOutput values.
 // You can construct a concrete instance of `StartLogstashPipelineOperationMapInput` via:
 //
-//          StartLogstashPipelineOperationMap{ "key": StartLogstashPipelineOperationArgs{...} }
+//	StartLogstashPipelineOperationMap{ "key": StartLogstashPipelineOperationArgs{...} }
 type StartLogstashPipelineOperationMapInput interface {
 	pulumi.Input
 

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
 {
     [TencentcloudResourceType("tencentcloud:Mysql/switchProxy:SwitchProxy")]
-    public partial class SwitchProxy : Pulumi.CustomResource
+    public partial class SwitchProxy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance id.
@@ -70,7 +70,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         }
     }
 
-    public sealed class SwitchProxyArgs : Pulumi.ResourceArgs
+    public sealed class SwitchProxyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance id.
@@ -87,9 +87,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public SwitchProxyArgs()
         {
         }
+        public static new SwitchProxyArgs Empty => new SwitchProxyArgs();
     }
 
-    public sealed class SwitchProxyState : Pulumi.ResourceArgs
+    public sealed class SwitchProxyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance id.
@@ -106,5 +107,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public SwitchProxyState()
         {
         }
+        public static new SwitchProxyState Empty => new SwitchProxyState();
     }
 }

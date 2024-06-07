@@ -5,43 +5,101 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./alarm";
-export * from "./alarmNotice";
-export * from "./ckafkaConsumer";
-export * from "./config";
-export * from "./configAttachment";
-export * from "./configExtra";
-export * from "./cosRecharge";
-export * from "./cosShipper";
-export * from "./dataTransform";
-export * from "./export";
-export * from "./getMachineGroupConfigs";
-export * from "./getMachines";
-export * from "./getShipperTasks";
-export * from "./index_";
-export * from "./kafkaRecharge";
-export * from "./logset";
-export * from "./machineGroup";
-export * from "./scheduledSql";
-export * from "./topic";
+export { AlarmArgs, AlarmState } from "./alarm";
+export type Alarm = import("./alarm").Alarm;
+export const Alarm: typeof import("./alarm").Alarm = null as any;
+utilities.lazyLoad(exports, ["Alarm"], () => require("./alarm"));
 
-// Import resources to register:
-import { Alarm } from "./alarm";
-import { AlarmNotice } from "./alarmNotice";
-import { CkafkaConsumer } from "./ckafkaConsumer";
-import { Config } from "./config";
-import { ConfigAttachment } from "./configAttachment";
-import { ConfigExtra } from "./configExtra";
-import { CosRecharge } from "./cosRecharge";
-import { CosShipper } from "./cosShipper";
-import { DataTransform } from "./dataTransform";
-import { Export } from "./export";
-import { Index } from "./index_";
-import { KafkaRecharge } from "./kafkaRecharge";
-import { Logset } from "./logset";
-import { MachineGroup } from "./machineGroup";
-import { ScheduledSql } from "./scheduledSql";
-import { Topic } from "./topic";
+export { AlarmNoticeArgs, AlarmNoticeState } from "./alarmNotice";
+export type AlarmNotice = import("./alarmNotice").AlarmNotice;
+export const AlarmNotice: typeof import("./alarmNotice").AlarmNotice = null as any;
+utilities.lazyLoad(exports, ["AlarmNotice"], () => require("./alarmNotice"));
+
+export { CkafkaConsumerArgs, CkafkaConsumerState } from "./ckafkaConsumer";
+export type CkafkaConsumer = import("./ckafkaConsumer").CkafkaConsumer;
+export const CkafkaConsumer: typeof import("./ckafkaConsumer").CkafkaConsumer = null as any;
+utilities.lazyLoad(exports, ["CkafkaConsumer"], () => require("./ckafkaConsumer"));
+
+export { ConfigArgs, ConfigState } from "./config";
+export type Config = import("./config").Config;
+export const Config: typeof import("./config").Config = null as any;
+utilities.lazyLoad(exports, ["Config"], () => require("./config"));
+
+export { ConfigAttachmentArgs, ConfigAttachmentState } from "./configAttachment";
+export type ConfigAttachment = import("./configAttachment").ConfigAttachment;
+export const ConfigAttachment: typeof import("./configAttachment").ConfigAttachment = null as any;
+utilities.lazyLoad(exports, ["ConfigAttachment"], () => require("./configAttachment"));
+
+export { ConfigExtraArgs, ConfigExtraState } from "./configExtra";
+export type ConfigExtra = import("./configExtra").ConfigExtra;
+export const ConfigExtra: typeof import("./configExtra").ConfigExtra = null as any;
+utilities.lazyLoad(exports, ["ConfigExtra"], () => require("./configExtra"));
+
+export { CosRechargeArgs, CosRechargeState } from "./cosRecharge";
+export type CosRecharge = import("./cosRecharge").CosRecharge;
+export const CosRecharge: typeof import("./cosRecharge").CosRecharge = null as any;
+utilities.lazyLoad(exports, ["CosRecharge"], () => require("./cosRecharge"));
+
+export { CosShipperArgs, CosShipperState } from "./cosShipper";
+export type CosShipper = import("./cosShipper").CosShipper;
+export const CosShipper: typeof import("./cosShipper").CosShipper = null as any;
+utilities.lazyLoad(exports, ["CosShipper"], () => require("./cosShipper"));
+
+export { DataTransformArgs, DataTransformState } from "./dataTransform";
+export type DataTransform = import("./dataTransform").DataTransform;
+export const DataTransform: typeof import("./dataTransform").DataTransform = null as any;
+utilities.lazyLoad(exports, ["DataTransform"], () => require("./dataTransform"));
+
+export { ExportArgs, ExportState } from "./export";
+export type Export = import("./export").Export;
+export const Export: typeof import("./export").Export = null as any;
+utilities.lazyLoad(exports, ["Export"], () => require("./export"));
+
+export { GetMachineGroupConfigsArgs, GetMachineGroupConfigsResult, GetMachineGroupConfigsOutputArgs } from "./getMachineGroupConfigs";
+export const getMachineGroupConfigs: typeof import("./getMachineGroupConfigs").getMachineGroupConfigs = null as any;
+export const getMachineGroupConfigsOutput: typeof import("./getMachineGroupConfigs").getMachineGroupConfigsOutput = null as any;
+utilities.lazyLoad(exports, ["getMachineGroupConfigs","getMachineGroupConfigsOutput"], () => require("./getMachineGroupConfigs"));
+
+export { GetMachinesArgs, GetMachinesResult, GetMachinesOutputArgs } from "./getMachines";
+export const getMachines: typeof import("./getMachines").getMachines = null as any;
+export const getMachinesOutput: typeof import("./getMachines").getMachinesOutput = null as any;
+utilities.lazyLoad(exports, ["getMachines","getMachinesOutput"], () => require("./getMachines"));
+
+export { GetShipperTasksArgs, GetShipperTasksResult, GetShipperTasksOutputArgs } from "./getShipperTasks";
+export const getShipperTasks: typeof import("./getShipperTasks").getShipperTasks = null as any;
+export const getShipperTasksOutput: typeof import("./getShipperTasks").getShipperTasksOutput = null as any;
+utilities.lazyLoad(exports, ["getShipperTasks","getShipperTasksOutput"], () => require("./getShipperTasks"));
+
+export { IndexArgs, IndexState } from "./index_";
+export type Index = import("./index_").Index;
+export const Index: typeof import("./index_").Index = null as any;
+utilities.lazyLoad(exports, ["Index"], () => require("./index_"));
+
+export { KafkaRechargeArgs, KafkaRechargeState } from "./kafkaRecharge";
+export type KafkaRecharge = import("./kafkaRecharge").KafkaRecharge;
+export const KafkaRecharge: typeof import("./kafkaRecharge").KafkaRecharge = null as any;
+utilities.lazyLoad(exports, ["KafkaRecharge"], () => require("./kafkaRecharge"));
+
+export { LogsetArgs, LogsetState } from "./logset";
+export type Logset = import("./logset").Logset;
+export const Logset: typeof import("./logset").Logset = null as any;
+utilities.lazyLoad(exports, ["Logset"], () => require("./logset"));
+
+export { MachineGroupArgs, MachineGroupState } from "./machineGroup";
+export type MachineGroup = import("./machineGroup").MachineGroup;
+export const MachineGroup: typeof import("./machineGroup").MachineGroup = null as any;
+utilities.lazyLoad(exports, ["MachineGroup"], () => require("./machineGroup"));
+
+export { ScheduledSqlArgs, ScheduledSqlState } from "./scheduledSql";
+export type ScheduledSql = import("./scheduledSql").ScheduledSql;
+export const ScheduledSql: typeof import("./scheduledSql").ScheduledSql = null as any;
+utilities.lazyLoad(exports, ["ScheduledSql"], () => require("./scheduledSql"));
+
+export { TopicArgs, TopicState } from "./topic";
+export type Topic = import("./topic").Topic;
+export const Topic: typeof import("./topic").Topic = null as any;
+utilities.lazyLoad(exports, ["Topic"], () => require("./topic"));
+
 
 const _module = {
     version: utilities.getVersion(),

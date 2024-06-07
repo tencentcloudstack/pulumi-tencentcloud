@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         /// <summary>
         /// Use this data source to query detailed information of tcmq topic
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topic = Tencentcloud.Tcmq.GetTopic.Invoke(new()
         ///     {
-        ///         var topic = Output.Create(Tencentcloud.Tcmq.GetTopic.InvokeAsync(new Tencentcloud.Tcmq.GetTopicArgs
-        ///         {
-        ///             TopicName = "topic_name",
-        ///         }));
-        ///     }
+        ///         TopicName = "topic_name",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetTopicResult> InvokeAsync(GetTopicArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetTopicResult>("tencentcloud:Tcmq/getTopic:getTopic", args ?? new GetTopicArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopicResult>("tencentcloud:Tcmq/getTopic:getTopic", args ?? new GetTopicArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tcmq topic
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var topic = Tencentcloud.Tcmq.GetTopic.Invoke(new()
         ///     {
-        ///         var topic = Output.Create(Tencentcloud.Tcmq.GetTopic.InvokeAsync(new Tencentcloud.Tcmq.GetTopicArgs
-        ///         {
-        ///             TopicName = "topic_name",
-        ///         }));
-        ///     }
+        ///         TopicName = "topic_name",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetTopicResult> Invoke(GetTopicInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetTopicResult>("tencentcloud:Tcmq/getTopic:getTopic", args ?? new GetTopicInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetTopicResult>("tencentcloud:Tcmq/getTopic:getTopic", args ?? new GetTopicInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetTopicArgs : Pulumi.InvokeArgs
+    public sealed class GetTopicArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private List<Inputs.GetTopicFilterArgs>? _filters;
@@ -131,9 +125,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         public GetTopicArgs()
         {
         }
+        public static new GetTopicArgs Empty => new GetTopicArgs();
     }
 
-    public sealed class GetTopicInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetTopicInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("filters")]
         private InputList<Inputs.GetTopicFilterInputArgs>? _filters;
@@ -192,6 +187,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         public GetTopicInvokeArgs()
         {
         }
+        public static new GetTopicInvokeArgs Empty => new GetTopicInvokeArgs();
     }
 
 

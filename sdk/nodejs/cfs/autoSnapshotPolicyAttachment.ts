@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const autoSnapshotPolicyAttachment = new tencentcloud.Cfs.AutoSnapshotPolicyAttachment("auto_snapshot_policy_attachment", {
+ * const autoSnapshotPolicyAttachment = new tencentcloud.cfs.AutoSnapshotPolicyAttachment("autoSnapshotPolicyAttachment", {
  *     autoSnapshotPolicyId: "asp-basic",
  *     fileSystemIds: "cfs-4xzkct19,cfs-iobiaxtj",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cfs auto_snapshot_policy_attachment can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cfs/autoSnapshotPolicyAttachment:AutoSnapshotPolicyAttachment auto_snapshot_policy_attachment auto_snapshot_policy_id#file_system_ids
+ * $ pulumi import tencentcloud:Cfs/autoSnapshotPolicyAttachment:AutoSnapshotPolicyAttachment auto_snapshot_policy_attachment auto_snapshot_policy_id#file_system_ids
  * ```
  */
 export class AutoSnapshotPolicyAttachment extends pulumi.CustomResource {

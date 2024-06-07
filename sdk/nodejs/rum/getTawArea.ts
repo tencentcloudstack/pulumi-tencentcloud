@@ -2,16 +2,14 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 export function getTawArea(args?: GetTawAreaArgs, opts?: pulumi.InvokeOptions): Promise<GetTawAreaResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getTawArea:getTawArea", {
         "areaIds": args.areaIds,
         "areaKeys": args.areaKeys,
@@ -44,9 +42,8 @@ export interface GetTawAreaResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
 export function getTawAreaOutput(args?: GetTawAreaOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTawAreaResult> {
-    return pulumi.output(args).apply(a => getTawArea(a, opts))
+    return pulumi.output(args).apply((a: any) => getTawArea(a, opts))
 }
 
 /**

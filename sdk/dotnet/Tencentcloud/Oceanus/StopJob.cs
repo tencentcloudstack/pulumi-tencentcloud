@@ -15,33 +15,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Oceanus.StopJob("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Oceanus.StopJob("example", new Tencentcloud.Oceanus.StopJobArgs
+    ///         StopJobDescriptions = new[]
     ///         {
-    ///             StopJobDescriptions = 
+    ///             new Tencentcloud.Oceanus.Inputs.StopJobStopJobDescriptionArgs
     ///             {
-    ///                 new Tencentcloud.Oceanus.Inputs.StopJobStopJobDescriptionArgs
-    ///                 {
-    ///                     JobId = "cql-4xwincyn",
-    ///                     StopType = 1,
-    ///                 },
+    ///                 JobId = "cql-4xwincyn",
+    ///                 StopType = 1,
     ///             },
-    ///             WorkSpaceId = "space-2idq8wbr",
-    ///         });
-    ///     }
+    ///         },
+    ///         WorkSpaceId = "space-2idq8wbr",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Oceanus/stopJob:StopJob")]
-    public partial class StopJob : Pulumi.CustomResource
+    public partial class StopJob : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The description information for batch job stop.
@@ -100,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         }
     }
 
-    public sealed class StopJobArgs : Pulumi.ResourceArgs
+    public sealed class StopJobArgs : global::Pulumi.ResourceArgs
     {
         [Input("stopJobDescriptions", required: true)]
         private InputList<Inputs.StopJobStopJobDescriptionArgs>? _stopJobDescriptions;
@@ -123,9 +124,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public StopJobArgs()
         {
         }
+        public static new StopJobArgs Empty => new StopJobArgs();
     }
 
-    public sealed class StopJobState : Pulumi.ResourceArgs
+    public sealed class StopJobState : global::Pulumi.ResourceArgs
     {
         [Input("stopJobDescriptions")]
         private InputList<Inputs.StopJobStopJobDescriptionGetArgs>? _stopJobDescriptions;
@@ -148,5 +150,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         public StopJobState()
         {
         }
+        public static new StopJobState Empty => new StopJobState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainCompressionGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainCompressionGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("compressionRules")]
         private InputList<Inputs.DomainCompressionCompressionRuleGetArgs>? _compressionRules;
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainCompressionGetArgs()
         {
         }
+        public static new DomainCompressionGetArgs Empty => new DomainCompressionGetArgs();
     }
 }

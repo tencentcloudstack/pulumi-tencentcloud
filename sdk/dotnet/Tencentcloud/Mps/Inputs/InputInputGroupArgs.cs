@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class InputInputGroupArgs : Pulumi.ResourceArgs
+    public sealed class InputInputGroupArgs : global::Pulumi.ResourceArgs
     {
         [Input("allowIpLists")]
         private InputList<string>? _allowIpLists;
@@ -88,5 +88,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public InputInputGroupArgs()
         {
         }
+        public static new InputInputGroupArgs Empty => new InputInputGroupArgs();
     }
 }

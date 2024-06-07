@@ -15,26 +15,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var domainLock = new Tencentcloud.Dnspod.DomainLock("domainLock", new()
     ///     {
-    ///         var domainLock = new Tencentcloud.Dnspod.DomainLock("domainLock", new Tencentcloud.Dnspod.DomainLockArgs
-    ///         {
-    ///             Domain = "dnspod.cn",
-    ///             LockDays = 30,
-    ///         });
-    ///     }
+    ///         Domain = "dnspod.cn",
+    ///         LockDays = 30,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnspod/domainLock:DomainLock")]
-    public partial class DomainLock : Pulumi.CustomResource
+    public partial class DomainLock : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Domain name.
@@ -99,7 +100,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         }
     }
 
-    public sealed class DomainLockArgs : Pulumi.ResourceArgs
+    public sealed class DomainLockArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain name.
@@ -116,9 +117,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public DomainLockArgs()
         {
         }
+        public static new DomainLockArgs Empty => new DomainLockArgs();
     }
 
-    public sealed class DomainLockState : Pulumi.ResourceArgs
+    public sealed class DomainLockState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Domain name.
@@ -141,5 +143,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         public DomainLockState()
         {
         }
+        public static new DomainLockState Empty => new DomainLockState();
     }
 }

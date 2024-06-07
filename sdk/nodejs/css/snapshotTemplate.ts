@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const snapshotTemplate = new tencentcloud.Css.SnapshotTemplate("snapshot_template", {
+ * const snapshotTemplate = new tencentcloud.css.SnapshotTemplate("snapshotTemplate", {
  *     cosAppId: 1308919341,
  *     cosBucket: "keep-bucket",
  *     cosRegion: "ap-guangzhou",
@@ -25,13 +26,14 @@ import * as utilities from "../utilities";
  *     width: 0,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * css snapshot_template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Css/snapshotTemplate:SnapshotTemplate snapshot_template templateId
+ * $ pulumi import tencentcloud:Css/snapshotTemplate:SnapshotTemplate snapshot_template templateId
  * ```
  */
 export class SnapshotTemplate extends pulumi.CustomResource {

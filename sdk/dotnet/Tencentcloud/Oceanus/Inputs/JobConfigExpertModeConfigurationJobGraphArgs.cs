@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
 {
 
-    public sealed class JobConfigExpertModeConfigurationJobGraphArgs : Pulumi.ResourceArgs
+    public sealed class JobConfigExpertModeConfigurationJobGraphArgs : global::Pulumi.ResourceArgs
     {
         [Input("edges")]
         private InputList<Inputs.JobConfigExpertModeConfigurationJobGraphEdgeArgs>? _edges;
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
         public JobConfigExpertModeConfigurationJobGraphArgs()
         {
         }
+        public static new JobConfigExpertModeConfigurationJobGraphArgs Empty => new JobConfigExpertModeConfigurationJobGraphArgs();
     }
 }

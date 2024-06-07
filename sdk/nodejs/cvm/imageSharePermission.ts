@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const imageSharePermission = new tencentcloud.Cvm.ImageSharePermission("image_share_permission", {
+ * const imageSharePermission = new tencentcloud.cvm.ImageSharePermission("imageSharePermission", {
  *     accountIds: ["xxxxxx"],
  *     imageId: "img-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cvm image_share_permission can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cvm/imageSharePermission:ImageSharePermission image_share_permission image_share_permission_id
+ * $ pulumi import tencentcloud:Cvm/imageSharePermission:ImageSharePermission image_share_permission image_share_permission_id
  * ```
  */
 export class ImageSharePermission extends pulumi.CustomResource {

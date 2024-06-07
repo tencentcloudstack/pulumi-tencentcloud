@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const renewInstance = new tencentcloud.Mariadb.RenewInstance("renew_instance", {
+ * const renewInstance = new tencentcloud.mariadb.RenewInstance("renewInstance", {
  *     instanceId: "tdsql-9vqvls95",
  *     period: 1,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RenewInstance extends pulumi.CustomResource {
     /**

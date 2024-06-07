@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class TranscodeTemplateVideoTemplateGetArgs : Pulumi.ResourceArgs
+    public sealed class TranscodeTemplateVideoTemplateGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bit rate of the video stream, value range: 0 and [128, 35000], unit: kbps.When the value is 0, it means that the video bit rate is consistent with the original video.
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public TranscodeTemplateVideoTemplateGetArgs()
         {
         }
+        public static new TranscodeTemplateVideoTemplateGetArgs Empty => new TranscodeTemplateVideoTemplateGetArgs();
     }
 }

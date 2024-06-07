@@ -9,21 +9,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const example = new tencentcloud.Dasb.DeviceGroup("example", {
- *     departmentId: "1.2",
- * });
+ * const example = new tencentcloud.dasb.DeviceGroup("example", {departmentId: "1.2"});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dasb device_group can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dasb/deviceGroup:DeviceGroup example 36
+ * $ pulumi import tencentcloud:Dasb/deviceGroup:DeviceGroup example 36
  * ```
  */
 export class DeviceGroup extends pulumi.CustomResource {

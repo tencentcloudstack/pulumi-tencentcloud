@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainAuthenticationTypeCGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainAuthenticationTypeCGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Used for calculate a signature. 6-32 characters. Only digits and letters are allowed.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainAuthenticationTypeCGetArgs()
         {
         }
+        public static new DomainAuthenticationTypeCGetArgs Empty => new DomainAuthenticationTypeCGetArgs();
     }
 }

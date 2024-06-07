@@ -11,16 +11,23 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb.Inputs
 {
 
-    public sealed class ProxyRoInstanceArgs : Pulumi.ResourceArgs
+    public sealed class ProxyRoInstanceArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// instance id.
+        /// </summary>
         [Input("instanceId")]
         public Input<string>? InstanceId { get; set; }
 
+        /// <summary>
+        /// weight.
+        /// </summary>
         [Input("weight")]
         public Input<int>? Weight { get; set; }
 
         public ProxyRoInstanceArgs()
         {
         }
+        public static new ProxyRoInstanceArgs Empty => new ProxyRoInstanceArgs();
     }
 }

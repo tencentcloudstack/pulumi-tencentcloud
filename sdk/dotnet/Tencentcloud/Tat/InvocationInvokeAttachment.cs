@@ -15,39 +15,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var invocationInvokeAttachment = new Tencentcloud.Tat.InvocationInvokeAttachment("invocationInvokeAttachment", new()
     ///     {
-    ///         var invocationInvokeAttachment = new Tencentcloud.Tat.InvocationInvokeAttachment("invocationInvokeAttachment", new Tencentcloud.Tat.InvocationInvokeAttachmentArgs
-    ///         {
-    ///             CommandId = "cmd-rxbs7f5z",
-    ///             InstanceId = "ins-881b1c8w",
-    ///             OutputCosBucketUrl = "https://BucketName-123454321.cos.ap-beijing.myqcloud.com",
-    ///             OutputCosKeyPrefix = "log",
-    ///             Timeout = 100,
-    ///             Username = "root",
-    ///             WorkingDirectory = "/root",
-    ///         });
-    ///     }
+    ///         CommandId = "cmd-rxbs7f5z",
+    ///         InstanceId = "ins-881b1c8w",
+    ///         OutputCosBucketUrl = "https://BucketName-123454321.cos.ap-beijing.myqcloud.com",
+    ///         OutputCosKeyPrefix = "log",
+    ///         Timeout = 100,
+    ///         Username = "root",
+    ///         WorkingDirectory = "/root",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tat invocation can be imported using the invocation_id#instance_id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tat/invocationInvokeAttachment:InvocationInvokeAttachment invocation_invoke_attachment inv-mhs6ca8z#ins-881b1c8w
+    /// $ pulumi import tencentcloud:Tat/invocationInvokeAttachment:InvocationInvokeAttachment invocation_invoke_attachment inv-mhs6ca8z#ins-881b1c8w
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tat/invocationInvokeAttachment:InvocationInvokeAttachment")]
-    public partial class InvocationInvokeAttachment : Pulumi.CustomResource
+    public partial class InvocationInvokeAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Command ID.
@@ -142,7 +143,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         }
     }
 
-    public sealed class InvocationInvokeAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class InvocationInvokeAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Command ID.
@@ -195,9 +196,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public InvocationInvokeAttachmentArgs()
         {
         }
+        public static new InvocationInvokeAttachmentArgs Empty => new InvocationInvokeAttachmentArgs();
     }
 
-    public sealed class InvocationInvokeAttachmentState : Pulumi.ResourceArgs
+    public sealed class InvocationInvokeAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Command ID.
@@ -250,5 +252,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
         public InvocationInvokeAttachmentState()
         {
         }
+        public static new InvocationInvokeAttachmentState Empty => new InvocationInvokeAttachmentState();
     }
 }

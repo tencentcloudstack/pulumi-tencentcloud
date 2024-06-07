@@ -14,73 +14,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     {
         /// <summary>
         /// Use this data source to query detailed information of DC instances.
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var nameSelect = Output.Create(Tencentcloud.Dc.GetInstances.InvokeAsync(new Tencentcloud.Dc.GetInstancesArgs
-        ///         {
-        ///             Name = "t",
-        ///         }));
-        ///         var id = Output.Create(Tencentcloud.Dc.GetInstances.InvokeAsync(new Tencentcloud.Dc.GetInstancesArgs
-        ///         {
-        ///             DcxId = "dc-kax48sg7",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Task<GetInstancesResult> InvokeAsync(GetInstancesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstancesResult>("tencentcloud:Dc/getInstances:getInstances", args ?? new GetInstancesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstancesResult>("tencentcloud:Dc/getInstances:getInstances", args ?? new GetInstancesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of DC instances.
-        /// 
-        /// {{% examples %}}
-        /// ## Example Usage
-        /// {{% example %}}
-        /// 
-        /// ```csharp
-        /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
-        /// 
-        /// class MyStack : Stack
-        /// {
-        ///     public MyStack()
-        ///     {
-        ///         var nameSelect = Output.Create(Tencentcloud.Dc.GetInstances.InvokeAsync(new Tencentcloud.Dc.GetInstancesArgs
-        ///         {
-        ///             Name = "t",
-        ///         }));
-        ///         var id = Output.Create(Tencentcloud.Dc.GetInstances.InvokeAsync(new Tencentcloud.Dc.GetInstancesArgs
-        ///         {
-        ///             DcxId = "dc-kax48sg7",
-        ///         }));
-        ///     }
-        /// 
-        /// }
-        /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
         /// </summary>
         public static Output<GetInstancesResult> Invoke(GetInstancesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstancesResult>("tencentcloud:Dc/getInstances:getInstances", args ?? new GetInstancesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstancesResult>("tencentcloud:Dc/getInstances:getInstances", args ?? new GetInstancesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstancesArgs : Pulumi.InvokeArgs
+    public sealed class GetInstancesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the DC to be queried.
@@ -103,9 +49,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GetInstancesArgs()
         {
         }
+        public static new GetInstancesArgs Empty => new GetInstancesArgs();
     }
 
-    public sealed class GetInstancesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstancesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the DC to be queried.
@@ -128,6 +75,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         public GetInstancesInvokeArgs()
         {
         }
+        public static new GetInstancesInvokeArgs Empty => new GetInstancesInvokeArgs();
     }
 
 

@@ -15,86 +15,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// <summary>
         /// Use this data source to query detailed information of gaap listener statistics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var listenerStatistics = Tencentcloud.Gaap.GetListenerStatistics.Invoke(new()
         ///     {
-        ///         var listenerStatistics = Output.Create(Tencentcloud.Gaap.GetListenerStatistics.InvokeAsync(new Tencentcloud.Gaap.GetListenerStatisticsArgs
+        ///         EndTime = "2023-10-19 23:59:59",
+        ///         Granularity = 300,
+        ///         ListenerId = "listener-xxxxxx",
+        ///         MetricNames = new[]
         ///         {
-        ///             EndTime = "2023-10-19 23:59:59",
-        ///             Granularity = 300,
-        ///             ListenerId = "listener-xxxxxx",
-        ///             MetricNames = 
-        ///             {
-        ///                 "InBandwidth",
-        ///                 "OutBandwidth",
-        ///                 "InPackets",
-        ///                 "OutPackets",
-        ///                 "Concurrent",
-        ///             },
-        ///             StartTime = "2023-10-19 00:00:00",
-        ///         }));
-        ///     }
+        ///             "InBandwidth",
+        ///             "OutBandwidth",
+        ///             "InPackets",
+        ///             "OutPackets",
+        ///             "Concurrent",
+        ///         },
+        ///         StartTime = "2023-10-19 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetListenerStatisticsResult> InvokeAsync(GetListenerStatisticsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetListenerStatisticsResult>("tencentcloud:Gaap/getListenerStatistics:getListenerStatistics", args ?? new GetListenerStatisticsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetListenerStatisticsResult>("tencentcloud:Gaap/getListenerStatistics:getListenerStatistics", args ?? new GetListenerStatisticsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of gaap listener statistics
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var listenerStatistics = Tencentcloud.Gaap.GetListenerStatistics.Invoke(new()
         ///     {
-        ///         var listenerStatistics = Output.Create(Tencentcloud.Gaap.GetListenerStatistics.InvokeAsync(new Tencentcloud.Gaap.GetListenerStatisticsArgs
+        ///         EndTime = "2023-10-19 23:59:59",
+        ///         Granularity = 300,
+        ///         ListenerId = "listener-xxxxxx",
+        ///         MetricNames = new[]
         ///         {
-        ///             EndTime = "2023-10-19 23:59:59",
-        ///             Granularity = 300,
-        ///             ListenerId = "listener-xxxxxx",
-        ///             MetricNames = 
-        ///             {
-        ///                 "InBandwidth",
-        ///                 "OutBandwidth",
-        ///                 "InPackets",
-        ///                 "OutPackets",
-        ///                 "Concurrent",
-        ///             },
-        ///             StartTime = "2023-10-19 00:00:00",
-        ///         }));
-        ///     }
+        ///             "InBandwidth",
+        ///             "OutBandwidth",
+        ///             "InPackets",
+        ///             "OutPackets",
+        ///             "Concurrent",
+        ///         },
+        ///         StartTime = "2023-10-19 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetListenerStatisticsResult> Invoke(GetListenerStatisticsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetListenerStatisticsResult>("tencentcloud:Gaap/getListenerStatistics:getListenerStatistics", args ?? new GetListenerStatisticsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetListenerStatisticsResult>("tencentcloud:Gaap/getListenerStatistics:getListenerStatistics", args ?? new GetListenerStatisticsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetListenerStatisticsArgs : Pulumi.InvokeArgs
+    public sealed class GetListenerStatisticsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End Time.
@@ -141,9 +135,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetListenerStatisticsArgs()
         {
         }
+        public static new GetListenerStatisticsArgs Empty => new GetListenerStatisticsArgs();
     }
 
-    public sealed class GetListenerStatisticsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetListenerStatisticsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// End Time.
@@ -190,6 +185,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public GetListenerStatisticsInvokeArgs()
         {
         }
+        public static new GetListenerStatisticsInvokeArgs Empty => new GetListenerStatisticsInvokeArgs();
     }
 
 

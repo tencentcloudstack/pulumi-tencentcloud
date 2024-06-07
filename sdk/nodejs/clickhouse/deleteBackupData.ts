@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const deleteBackUpData = new tencentcloud.Clickhouse.DeleteBackupData("delete_back_up_data", {
+ * const deleteBackUpData = new tencentcloud.clickhouse.DeleteBackupData("deleteBackUpData", {
  *     backUpJobId: 1234,
  *     instanceId: "cdwch-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class DeleteBackupData extends pulumi.CustomResource {
     /**

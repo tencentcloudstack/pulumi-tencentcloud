@@ -15,40 +15,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = Pulumi.Tencentcloud;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var checkDataEngineImageCanBeRollback = Tencentcloud.Dlc.GetCheckDataEngineImageCanBeRollback.Invoke(new()
     ///     {
-    ///         var checkDataEngineImageCanBeRollback = Output.Create(Tencentcloud.Dlc.GetCheckDataEngineImageCanBeRollback.InvokeAsync(new Tencentcloud.Dlc.GetCheckDataEngineImageCanBeRollbackArgs
-    ///         {
-    ///             DataEngineId = "DataEngine-cgkvbas6",
-    ///         }));
-    ///         var rollbackDataEngineImage = new Tencentcloud.Dlc.RollbackDataEngineImageOperation("rollbackDataEngineImage", new Tencentcloud.Dlc.RollbackDataEngineImageOperationArgs
-    ///         {
-    ///             DataEngineId = "DataEngine-cgkvbas6",
-    ///             FromRecordId = checkDataEngineImageCanBeRollback.Apply(checkDataEngineImageCanBeRollback =&gt; checkDataEngineImageCanBeRollback.FromRecordId),
-    ///             ToRecordId = checkDataEngineImageCanBeRollback.Apply(checkDataEngineImageCanBeRollback =&gt; checkDataEngineImageCanBeRollback.ToRecordId),
-    ///         });
-    ///     }
+    ///         DataEngineId = "DataEngine-cgkvbas6",
+    ///     });
     /// 
-    /// }
+    ///     var rollbackDataEngineImage = new Tencentcloud.Dlc.RollbackDataEngineImageOperation("rollbackDataEngineImage", new()
+    ///     {
+    ///         DataEngineId = "DataEngine-cgkvbas6",
+    ///         FromRecordId = checkDataEngineImageCanBeRollback.Apply(getCheckDataEngineImageCanBeRollbackResult =&gt; getCheckDataEngineImageCanBeRollbackResult.FromRecordId),
+    ///         ToRecordId = checkDataEngineImageCanBeRollback.Apply(getCheckDataEngineImageCanBeRollbackResult =&gt; getCheckDataEngineImageCanBeRollbackResult.ToRecordId),
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dlc rollback_data_engine_image can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dlc/rollbackDataEngineImageOperation:RollbackDataEngineImageOperation rollback_data_engine_image rollback_data_engine_image_id
+    /// $ pulumi import tencentcloud:Dlc/rollbackDataEngineImageOperation:RollbackDataEngineImageOperation rollback_data_engine_image rollback_data_engine_image_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/rollbackDataEngineImageOperation:RollbackDataEngineImageOperation")]
-    public partial class RollbackDataEngineImageOperation : Pulumi.CustomResource
+    public partial class RollbackDataEngineImageOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Engine unique id.
@@ -113,7 +115,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class RollbackDataEngineImageOperationArgs : Pulumi.ResourceArgs
+    public sealed class RollbackDataEngineImageOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Engine unique id.
@@ -136,9 +138,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public RollbackDataEngineImageOperationArgs()
         {
         }
+        public static new RollbackDataEngineImageOperationArgs Empty => new RollbackDataEngineImageOperationArgs();
     }
 
-    public sealed class RollbackDataEngineImageOperationState : Pulumi.ResourceArgs
+    public sealed class RollbackDataEngineImageOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Engine unique id.
@@ -161,5 +164,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public RollbackDataEngineImageOperationState()
         {
         }
+        public static new RollbackDataEngineImageOperationState Empty => new RollbackDataEngineImageOperationState();
     }
 }

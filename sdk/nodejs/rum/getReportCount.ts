@@ -9,24 +9,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const reportCount = pulumi.output(tencentcloud.Rum.getReportCount({
+ * const reportCount = tencentcloud.Rum.getReportCount({
  *     endTime: 1625454840,
  *     projectId: 1,
  *     reportType: "log",
  *     startTime: 1625444040,
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getReportCount(args: GetReportCountArgs, opts?: pulumi.InvokeOptions): Promise<GetReportCountResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Rum/getReportCount:getReportCount", {
         "endTime": args.endTime,
         "instanceId": args.instanceId,
@@ -86,9 +85,27 @@ export interface GetReportCountResult {
     readonly resultOutputFile?: string;
     readonly startTime: number;
 }
-
+/**
+ * Use this data source to query detailed information of rum reportCount
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const reportCount = tencentcloud.Rum.getReportCount({
+ *     endTime: 1625454840,
+ *     projectId: 1,
+ *     reportType: "log",
+ *     startTime: 1625444040,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getReportCountOutput(args: GetReportCountOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetReportCountResult> {
-    return pulumi.output(args).apply(a => getReportCount(a, opts))
+    return pulumi.output(args).apply((a: any) => getReportCount(a, opts))
 }
 
 /**

@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,25 +11,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const crossTargets = pulumi.output(tencentcloud.Clb.getCrossTargets({
+ * const crossTargets = tencentcloud.Clb.getCrossTargets({
  *     filters: [{
  *         name: "vpc-id",
  *         values: ["vpc-4owdpnwr"],
  *     }],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getCrossTargets(args?: GetCrossTargetsArgs, opts?: pulumi.InvokeOptions): Promise<GetCrossTargetsResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Clb/getCrossTargets:getCrossTargets", {
         "filters": args.filters,
         "resultOutputFile": args.resultOutputFile,
@@ -64,9 +64,27 @@ export interface GetCrossTargetsResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of clb crossTargets
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const crossTargets = tencentcloud.Clb.getCrossTargets({
+ *     filters: [{
+ *         name: "vpc-id",
+ *         values: ["vpc-4owdpnwr"],
+ *     }],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getCrossTargetsOutput(args?: GetCrossTargetsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetCrossTargetsResult> {
-    return pulumi.output(args).apply(a => getCrossTargets(a, opts))
+    return pulumi.output(args).apply((a: any) => getCrossTargets(a, opts))
 }
 
 /**

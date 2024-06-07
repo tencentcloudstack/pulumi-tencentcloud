@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Inputs
 {
 
-    public sealed class ClusterResourceSpecGetArgs : Pulumi.ResourceArgs
+    public sealed class ClusterResourceSpecGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The number of common node.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Inputs
         public ClusterResourceSpecGetArgs()
         {
         }
+        public static new ClusterResourceSpecGetArgs Empty => new ClusterResourceSpecGetArgs();
     }
 }

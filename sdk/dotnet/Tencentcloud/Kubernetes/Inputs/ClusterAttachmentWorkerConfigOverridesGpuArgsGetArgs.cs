@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
 {
 
-    public sealed class ClusterAttachmentWorkerConfigOverridesGpuArgsGetArgs : Pulumi.ResourceArgs
+    public sealed class ClusterAttachmentWorkerConfigOverridesGpuArgsGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("cuda")]
         private InputMap<object>? _cuda;
@@ -70,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public ClusterAttachmentWorkerConfigOverridesGpuArgsGetArgs()
         {
         }
+        public static new ClusterAttachmentWorkerConfigOverridesGpuArgsGetArgs Empty => new ClusterAttachmentWorkerConfigOverridesGpuArgsGetArgs();
     }
 }

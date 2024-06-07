@@ -15,43 +15,44 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var endPoint = new Tencentcloud.Vpc.EndPoint("endPoint", new()
     ///     {
-    ///         var endPoint = new Tencentcloud.Vpc.EndPoint("endPoint", new Tencentcloud.Vpc.EndPointArgs
+    ///         EndPointName = "terraform-test",
+    ///         EndPointServiceId = "vpcsvc-69y13tdb",
+    ///         EndPointVip = "10.0.2.1",
+    ///         SecurityGroupsIds = new[]
     ///         {
-    ///             EndPointName = "terraform-test",
-    ///             EndPointServiceId = "vpcsvc-69y13tdb",
-    ///             EndPointVip = "10.0.2.1",
-    ///             SecurityGroupsIds = 
-    ///             {
-    ///                 "sg-ghvp9djf",
-    ///                 "sg-if748odn",
-    ///                 "sg-3k7vtgf7",
-    ///             },
-    ///             SubnetId = "subnet-ljyn7h30",
-    ///             VpcId = "vpc-391sv4w3",
-    ///         });
-    ///     }
+    ///             "sg-ghvp9djf",
+    ///             "sg-if748odn",
+    ///             "sg-3k7vtgf7",
+    ///         },
+    ///         SubnetId = "subnet-ljyn7h30",
+    ///         VpcId = "vpc-391sv4w3",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// vpc end_point can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/endPoint:EndPoint end_point end_point_id
+    /// $ pulumi import tencentcloud:Vpc/endPoint:EndPoint end_point end_point_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/endPoint:EndPoint")]
-    public partial class EndPoint : Pulumi.CustomResource
+    public partial class EndPoint : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Create Time.
@@ -152,7 +153,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class EndPointArgs : Pulumi.ResourceArgs
+    public sealed class EndPointArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Name of endpoint.
@@ -199,9 +200,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public EndPointArgs()
         {
         }
+        public static new EndPointArgs Empty => new EndPointArgs();
     }
 
-    public sealed class EndPointState : Pulumi.ResourceArgs
+    public sealed class EndPointState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Create Time.
@@ -266,5 +268,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public EndPointState()
         {
         }
+        public static new EndPointState Empty => new EndPointState();
     }
 }

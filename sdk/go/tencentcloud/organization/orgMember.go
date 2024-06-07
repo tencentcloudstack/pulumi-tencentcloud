@@ -7,49 +7,55 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a organization orgMember
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Organization"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Organization.NewOrgMember(ctx, "orgMember", &Organization.OrgMemberArgs{
-// 			NodeId: pulumi.Int(2003721),
-// 			PermissionIds: pulumi.IntArray{
-// 				pulumi.Int(1),
-// 				pulumi.Int(2),
-// 				pulumi.Int(3),
-// 				pulumi.Int(4),
-// 			},
-// 			PolicyType: pulumi.String("Financial"),
-// 			Remark:     pulumi.String("for terraform test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Organization.NewOrgMember(ctx, "orgMember", &Organization.OrgMemberArgs{
+//				NodeId: pulumi.Int(2003721),
+//				PermissionIds: pulumi.IntArray{
+//					pulumi.Int(1),
+//					pulumi.Int(2),
+//					pulumi.Int(3),
+//					pulumi.Int(4),
+//				},
+//				PolicyType: pulumi.String("Financial"),
+//				Remark:     pulumi.String("for terraform test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // organization org_member can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Organization/orgMember:OrgMember org_member orgMember_id
+// $ pulumi import tencentcloud:Organization/orgMember:OrgMember org_member orgMember_id
 // ```
 type OrgMember struct {
 	pulumi.CustomResourceState
@@ -102,7 +108,7 @@ func NewOrgMember(ctx *pulumi.Context,
 	if args.PolicyType == nil {
 		return nil, errors.New("invalid value for required argument 'PolicyType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource OrgMember
 	err := ctx.RegisterResource("tencentcloud:Organization/orgMember:OrgMember", name, args, &resource, opts...)
 	if err != nil {
@@ -255,7 +261,7 @@ func (i *OrgMember) ToOrgMemberOutputWithContext(ctx context.Context) OrgMemberO
 // OrgMemberArrayInput is an input type that accepts OrgMemberArray and OrgMemberArrayOutput values.
 // You can construct a concrete instance of `OrgMemberArrayInput` via:
 //
-//          OrgMemberArray{ OrgMemberArgs{...} }
+//	OrgMemberArray{ OrgMemberArgs{...} }
 type OrgMemberArrayInput interface {
 	pulumi.Input
 
@@ -280,7 +286,7 @@ func (i OrgMemberArray) ToOrgMemberArrayOutputWithContext(ctx context.Context) O
 // OrgMemberMapInput is an input type that accepts OrgMemberMap and OrgMemberMapOutput values.
 // You can construct a concrete instance of `OrgMemberMapInput` via:
 //
-//          OrgMemberMap{ "key": OrgMemberArgs{...} }
+//	OrgMemberMap{ "key": OrgMemberArgs{...} }
 type OrgMemberMapInput interface {
 	pulumi.Input
 

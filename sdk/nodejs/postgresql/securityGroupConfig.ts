@@ -8,11 +8,13 @@ import * as utilities from "../utilities";
  * Provides a resource to create a postgresql securityGroupConfig
  *
  * ## Example Usage
+ *
  * ### Set security group for the sepcified postgres instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const securityGroupConfig = new tencentcloud.postgresql.SecurityGroupConfig("securityGroupConfig", {
  *     securityGroupIdSets: [
@@ -22,11 +24,14 @@ import * as utilities from "../utilities";
  *     dbInstanceId: local.pgsql_id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Set security group for the specified readonly group
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const group = new tencentcloud.postgresql.ReadonlyGroup("group", {
  *     masterDbInstanceId: local.pgsql_id,
@@ -47,6 +52,7 @@ import * as utilities from "../utilities";
  *     readOnlyGroupId: group.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class SecurityGroupConfig extends pulumi.CustomResource {
     /**

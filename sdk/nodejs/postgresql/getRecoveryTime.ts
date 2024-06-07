@@ -9,6 +9,7 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
@@ -17,13 +18,11 @@ import * as utilities from "../utilities";
  *     dbInstanceId: local.pgsql_id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRecoveryTime(args: GetRecoveryTimeArgs, opts?: pulumi.InvokeOptions): Promise<GetRecoveryTimeResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Postgresql/getRecoveryTime:getRecoveryTime", {
         "dbInstanceId": args.dbInstanceId,
         "resultOutputFile": args.resultOutputFile,
@@ -63,9 +62,24 @@ export interface GetRecoveryTimeResult {
     readonly recoveryEndTime: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of postgresql recoveryTime
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const recoveryTime = tencentcloud.Postgresql.getRecoveryTime({
+ *     dbInstanceId: local.pgsql_id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRecoveryTimeOutput(args: GetRecoveryTimeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRecoveryTimeResult> {
-    return pulumi.output(args).apply(a => getRecoveryTime(a, opts))
+    return pulumi.output(args).apply((a: any) => getRecoveryTime(a, opts))
 }
 
 /**

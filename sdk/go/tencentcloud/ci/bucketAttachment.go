@@ -7,41 +7,47 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a ci bucket
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ci"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ci.NewBucketAttachment(ctx, "bucketAttachment", &Ci.BucketAttachmentArgs{
-// 			Bucket: pulumi.String("terraform-ci-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ci.NewBucketAttachment(ctx, "bucketAttachment", &Ci.BucketAttachmentArgs{
+//				Bucket: pulumi.String("terraform-ci-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ci bucket can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ci/bucketAttachment:BucketAttachment bucket_attachment terraform-ci-xxxxxx
+// $ pulumi import tencentcloud:Ci/bucketAttachment:BucketAttachment bucket_attachment terraform-ci-xxxxxx
 // ```
 type BucketAttachment struct {
 	pulumi.CustomResourceState
@@ -62,7 +68,7 @@ func NewBucketAttachment(ctx *pulumi.Context,
 	if args.Bucket == nil {
 		return nil, errors.New("invalid value for required argument 'Bucket'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource BucketAttachment
 	err := ctx.RegisterResource("tencentcloud:Ci/bucketAttachment:BucketAttachment", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *BucketAttachment) ToBucketAttachmentOutputWithContext(ctx context.Conte
 // BucketAttachmentArrayInput is an input type that accepts BucketAttachmentArray and BucketAttachmentArrayOutput values.
 // You can construct a concrete instance of `BucketAttachmentArrayInput` via:
 //
-//          BucketAttachmentArray{ BucketAttachmentArgs{...} }
+//	BucketAttachmentArray{ BucketAttachmentArgs{...} }
 type BucketAttachmentArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i BucketAttachmentArray) ToBucketAttachmentArrayOutputWithContext(ctx cont
 // BucketAttachmentMapInput is an input type that accepts BucketAttachmentMap and BucketAttachmentMapOutput values.
 // You can construct a concrete instance of `BucketAttachmentMapInput` via:
 //
-//          BucketAttachmentMap{ "key": BucketAttachmentArgs{...} }
+//	BucketAttachmentMap{ "key": BucketAttachmentArgs{...} }
 type BucketAttachmentMapInput interface {
 	pulumi.Input
 

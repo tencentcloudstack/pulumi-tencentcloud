@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var timeshiftRuleAttachment = new Tencentcloud.Css.TimeshiftRuleAttachment("timeshiftRuleAttachment", new()
     ///     {
-    ///         var timeshiftRuleAttachment = new Tencentcloud.Css.TimeshiftRuleAttachment("timeshiftRuleAttachment", new Tencentcloud.Css.TimeshiftRuleAttachmentArgs
-    ///         {
-    ///             AppName = "qqq",
-    ///             DomainName = "177154.push.tlivecloud.com",
-    ///             StreamName = "ppp",
-    ///             TemplateId = 252586,
-    ///         });
-    ///     }
+    ///         AppName = "qqq",
+    ///         DomainName = "177154.push.tlivecloud.com",
+    ///         StreamName = "ppp",
+    ///         TemplateId = 252586,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// css timeshift_rule_attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Css/timeshiftRuleAttachment:TimeshiftRuleAttachment timeshift_rule_attachment templateId#domainName
+    /// $ pulumi import tencentcloud:Css/timeshiftRuleAttachment:TimeshiftRuleAttachment timeshift_rule_attachment templateId#domainName
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/timeshiftRuleAttachment:TimeshiftRuleAttachment")]
-    public partial class TimeshiftRuleAttachment : Pulumi.CustomResource
+    public partial class TimeshiftRuleAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The push path, which should be the same as `AppName` in the push and playback URLs. The default value is `live`.
@@ -115,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class TimeshiftRuleAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class TimeshiftRuleAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The push path, which should be the same as `AppName` in the push and playback URLs. The default value is `live`.
@@ -144,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public TimeshiftRuleAttachmentArgs()
         {
         }
+        public static new TimeshiftRuleAttachmentArgs Empty => new TimeshiftRuleAttachmentArgs();
     }
 
-    public sealed class TimeshiftRuleAttachmentState : Pulumi.ResourceArgs
+    public sealed class TimeshiftRuleAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The push path, which should be the same as `AppName` in the push and playback URLs. The default value is `live`.
@@ -175,5 +177,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public TimeshiftRuleAttachmentState()
         {
         }
+        public static new TimeshiftRuleAttachmentState Empty => new TimeshiftRuleAttachmentState();
     }
 }

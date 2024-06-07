@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis.Inputs
 {
 
-    public sealed class ParamTemplateParamsOverrideGetArgs : Pulumi.ResourceArgs
+    public sealed class ParamTemplateParamsOverrideGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Parameter key e.g. `timeout`, check https://www.tencentcloud.com/document/product/239/39796 for more reference.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis.Inputs
         public ParamTemplateParamsOverrideGetArgs()
         {
         }
+        public static new ParamTemplateParamsOverrideGetArgs Empty => new ParamTemplateParamsOverrideGetArgs();
     }
 }

@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var flushOperation = new Tencentcloud.Dcdb.FlushBinlogOperation("flushOperation", new()
     ///     {
-    ///         var flushOperation = new Tencentcloud.Dcdb.FlushBinlogOperation("flushOperation", new Tencentcloud.Dcdb.FlushBinlogOperationArgs
-    ///         {
-    ///             InstanceId = local.Dcdb_id,
-    ///         });
-    ///     }
+    ///         InstanceId = local.Dcdb_id,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/flushBinlogOperation:FlushBinlogOperation")]
-    public partial class FlushBinlogOperation : Pulumi.CustomResource
+    public partial class FlushBinlogOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance ID.
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         }
     }
 
-    public sealed class FlushBinlogOperationArgs : Pulumi.ResourceArgs
+    public sealed class FlushBinlogOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public FlushBinlogOperationArgs()
         {
         }
+        public static new FlushBinlogOperationArgs Empty => new FlushBinlogOperationArgs();
     }
 
-    public sealed class FlushBinlogOperationState : Pulumi.ResourceArgs
+    public sealed class FlushBinlogOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance ID.
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         public FlushBinlogOperationState()
         {
         }
+        public static new FlushBinlogOperationState Empty => new FlushBinlogOperationState();
     }
 }

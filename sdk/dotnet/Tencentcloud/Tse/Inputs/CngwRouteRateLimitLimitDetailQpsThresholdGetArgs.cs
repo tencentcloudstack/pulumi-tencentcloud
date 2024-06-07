@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
 {
 
-    public sealed class CngwRouteRateLimitLimitDetailQpsThresholdGetArgs : Pulumi.ResourceArgs
+    public sealed class CngwRouteRateLimitLimitDetailQpsThresholdGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// the max threshold.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse.Inputs
         public CngwRouteRateLimitLimitDetailQpsThresholdGetArgs()
         {
         }
+        public static new CngwRouteRateLimitLimitDetailQpsThresholdGetArgs Empty => new CngwRouteRateLimitLimitDetailQpsThresholdGetArgs();
     }
 }

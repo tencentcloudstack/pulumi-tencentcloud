@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
 {
 
-    public sealed class DatahubTaskSourceResourceCosParamArgs : Pulumi.ResourceArgs
+    public sealed class DatahubTaskSourceResourceCosParamArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The size of aggregated messages MB.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka.Inputs
         public DatahubTaskSourceResourceCosParamArgs()
         {
         }
+        public static new DatahubTaskSourceResourceCosParamArgs Empty => new DatahubTaskSourceResourceCosParamArgs();
     }
 }

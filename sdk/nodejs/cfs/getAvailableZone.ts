@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,20 +11,19 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const availableZone = pulumi.output(tencentcloud.Cfs.getAvailableZone());
+ * const availableZone = tencentcloud.Cfs.getAvailableZone({});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getAvailableZone(args?: GetAvailableZoneArgs, opts?: pulumi.InvokeOptions): Promise<GetAvailableZoneResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Cfs/getAvailableZone:getAvailableZone", {
         "resultOutputFile": args.resultOutputFile,
     }, opts);
@@ -53,9 +53,22 @@ export interface GetAvailableZoneResult {
     readonly regionZones: outputs.Cfs.GetAvailableZoneRegionZone[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of cfs availableZone
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const availableZone = tencentcloud.Cfs.getAvailableZone({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getAvailableZoneOutput(args?: GetAvailableZoneOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAvailableZoneResult> {
-    return pulumi.output(args).apply(a => getAvailableZone(a, opts))
+    return pulumi.output(args).apply((a: any) => getAvailableZone(a, opts))
 }
 
 /**

@@ -8,27 +8,29 @@ import * as utilities from "../utilities";
  * Provides a resource to create a CAM role.
  *
  * ## Example Usage
+ *
  * ### Create normally
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const info = tencentcloud.User.getInfo({});
  * const myUin = info.then(info => info.ownerUin);
  * export const uin = myUin;
  * const foo = new tencentcloud.cam.Role("foo", {
- *     document: myUin.then(myUin => JSON.stringify({
+ *     document: JSON.stringify({
  *         statement: [{
  *             action: "name/sts:AssumeRole",
  *             effect: "allow",
  *             principal: {
- *                 qcs: [`qcs::cam::uin/${myUin}:root`],
+ *                 qcs: [myUin.then(myUin => `qcs::cam::uin/${myUin}:root`)],
  *             },
  *         }],
  *         version: "2.0",
- *     })),
+ *     }),
  *     consoleLogin: true,
  *     description: "test",
  *     sessionDuration: 7200,
@@ -37,15 +39,18 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Create with SAML provider
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
- * const saml-provider = config.get("saml-provider") || "example";
+ * const saml_provider = config.get("saml-provider") || "example";
  * const info = tencentcloud.User.getInfo({});
  * const uin = info.then(info => info.uin);
  * const samlProvider = saml_provider;
@@ -71,13 +76,14 @@ import * as utilities from "../utilities";
  *     consoleLogin: true,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * CAM role can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cam/role:Role foo 4611686018427733635
+ * $ pulumi import tencentcloud:Cam/role:Role foo 4611686018427733635
  * ```
  */
 export class Role extends pulumi.CustomResource {
@@ -121,10 +127,7 @@ export class Role extends pulumi.CustomResource {
      */
     public readonly description!: pulumi.Output<string | undefined>;
     /**
-     * Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604).
-     * There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string`
-     * and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be
-     * replaced with the uin it stands for.
+     * Document of the CAM role. The syntax refers to CAM POLICY Name of CAM role.
      */
     public readonly document!: pulumi.Output<string>;
     /**
@@ -134,7 +137,7 @@ export class Role extends pulumi.CustomResource {
     /**
      * The maximum validity period of the temporary key for creating a role.
      */
-    public readonly sessionDuration!: pulumi.Output<number | undefined>;
+    public readonly sessionDuration!: pulumi.Output<number>;
     /**
      * A list of tags used to associate different resources.
      */
@@ -201,10 +204,7 @@ export interface RoleState {
      */
     description?: pulumi.Input<string>;
     /**
-     * Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604).
-     * There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string`
-     * and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be
-     * replaced with the uin it stands for.
+     * Document of the CAM role. The syntax refers to CAM POLICY Name of CAM role.
      */
     document?: pulumi.Input<string>;
     /**
@@ -238,10 +238,7 @@ export interface RoleArgs {
      */
     description?: pulumi.Input<string>;
     /**
-     * Document of the CAM role. The syntax refers to [CAM POLICY](https://intl.cloud.tencent.com/document/product/598/10604).
-     * There are some notes when using this para in terraform: 1. The elements in json claimed supporting two types as `string`
-     * and `array` only support type `array`; 2. Terraform does not support the `root` syntax, when appears, it must be
-     * replaced with the uin it stands for.
+     * Document of the CAM role. The syntax refers to CAM POLICY Name of CAM role.
      */
     document: pulumi.Input<string>;
     /**

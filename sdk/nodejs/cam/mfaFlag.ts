@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const info = tencentcloud.User.getInfo({});
  * const mfaFlag = new tencentcloud.cam.MfaFlag("mfaFlag", {
@@ -30,13 +32,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cam mfa_flag can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cam/mfaFlag:MfaFlag mfa_flag mfa_flag_id
+ * $ pulumi import tencentcloud:Cam/mfaFlag:MfaFlag mfa_flag mfa_flag_id
  * ```
  */
 export class MfaFlag extends pulumi.CustomResource {

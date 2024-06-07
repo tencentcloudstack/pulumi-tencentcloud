@@ -2,18 +2,21 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a mps input
  *
  * ## Example Usage
+ *
  * ### Create mps input group with SRT
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const input = new tencentcloud.mps.Input("input", {
  *     flowId: tencentcloud_mps_flow.flow.id,
@@ -33,13 +36,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * mps input can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Mps/input:Input input input_id
+ * $ pulumi import tencentcloud:Mps/input:Input input input_id
  * ```
  */
 export class Input extends pulumi.CustomResource {

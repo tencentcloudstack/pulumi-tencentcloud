@@ -9,9 +9,10 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const foo = new tencentcloud.eb.EventBus("foo", {
  *     eventBusName: "tf-event_bus",
@@ -36,13 +37,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * eb event_rule can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Eb/eventRule:EventRule event_rule event_rule_id
+ * $ pulumi import tencentcloud:Eb/eventRule:EventRule event_rule event_rule_id
  * ```
  */
 export class EventRule extends pulumi.CustomResource {

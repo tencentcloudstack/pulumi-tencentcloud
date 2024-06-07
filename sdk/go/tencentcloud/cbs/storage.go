@@ -7,49 +7,55 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a CBS.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cbs.NewStorage(ctx, "storage", &Cbs.StorageArgs{
-// 			AvailabilityZone: pulumi.String("ap-guangzhou-3"),
-// 			Encrypt:          pulumi.Bool(false),
-// 			ProjectId:        pulumi.Int(0),
-// 			StorageName:      pulumi.String("mystorage"),
-// 			StorageSize:      pulumi.Int(100),
-// 			StorageType:      pulumi.String("CLOUD_SSD"),
-// 			Tags: pulumi.AnyMap{
-// 				"test": pulumi.Any("tf"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cbs.NewStorage(ctx, "storage", &Cbs.StorageArgs{
+//				AvailabilityZone: pulumi.String("ap-guangzhou-3"),
+//				Encrypt:          pulumi.Bool(false),
+//				ProjectId:        pulumi.Int(0),
+//				StorageName:      pulumi.String("mystorage"),
+//				StorageSize:      pulumi.Int(100),
+//				StorageType:      pulumi.String("CLOUD_SSD"),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("tf"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // CBS storage can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cbs/storage:Storage storage disk-41s6jwy4
+// $ pulumi import tencentcloud:Cbs/storage:Storage storage disk-41s6jwy4
 // ```
 type Storage struct {
 	pulumi.CustomResourceState
@@ -68,7 +74,7 @@ type Storage struct {
 	ForceDelete pulumi.BoolPtrOutput `pulumi:"forceDelete"`
 	// It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
 	//
-	// Deprecated: It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
+	// Deprecated: It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead.
 	Period pulumi.IntPtrOutput `pulumi:"period"`
 	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 	PrepaidPeriod pulumi.IntOutput `pulumi:"prepaidPeriod"`
@@ -111,7 +117,7 @@ func NewStorage(ctx *pulumi.Context,
 	if args.StorageType == nil {
 		return nil, errors.New("invalid value for required argument 'StorageType'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Storage
 	err := ctx.RegisterResource("tencentcloud:Cbs/storage:Storage", name, args, &resource, opts...)
 	if err != nil {
@@ -148,7 +154,7 @@ type storageState struct {
 	ForceDelete *bool `pulumi:"forceDelete"`
 	// It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
 	//
-	// Deprecated: It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
+	// Deprecated: It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead.
 	Period *int `pulumi:"period"`
 	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
@@ -187,7 +193,7 @@ type StorageState struct {
 	ForceDelete pulumi.BoolPtrInput
 	// It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
 	//
-	// Deprecated: It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
+	// Deprecated: It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead.
 	Period pulumi.IntPtrInput
 	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 	PrepaidPeriod pulumi.IntPtrInput
@@ -228,7 +234,7 @@ type storageArgs struct {
 	ForceDelete *bool `pulumi:"forceDelete"`
 	// It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
 	//
-	// Deprecated: It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
+	// Deprecated: It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead.
 	Period *int `pulumi:"period"`
 	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 	PrepaidPeriod *int `pulumi:"prepaidPeriod"`
@@ -264,7 +270,7 @@ type StorageArgs struct {
 	ForceDelete pulumi.BoolPtrInput
 	// It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
 	//
-	// Deprecated: It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
+	// Deprecated: It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead.
 	Period pulumi.IntPtrInput
 	// The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when chargeType is set to `PREPAID`. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 	PrepaidPeriod pulumi.IntPtrInput
@@ -312,7 +318,7 @@ func (i *Storage) ToStorageOutputWithContext(ctx context.Context) StorageOutput 
 // StorageArrayInput is an input type that accepts StorageArray and StorageArrayOutput values.
 // You can construct a concrete instance of `StorageArrayInput` via:
 //
-//          StorageArray{ StorageArgs{...} }
+//	StorageArray{ StorageArgs{...} }
 type StorageArrayInput interface {
 	pulumi.Input
 
@@ -337,7 +343,7 @@ func (i StorageArray) ToStorageArrayOutputWithContext(ctx context.Context) Stora
 // StorageMapInput is an input type that accepts StorageMap and StorageMapOutput values.
 // You can construct a concrete instance of `StorageMapInput` via:
 //
-//          StorageMap{ "key": StorageArgs{...} }
+//	StorageMap{ "key": StorageArgs{...} }
 type StorageMapInput interface {
 	pulumi.Input
 
@@ -405,7 +411,7 @@ func (o StorageOutput) ForceDelete() pulumi.BoolPtrOutput {
 
 // It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead. The purchased usage period of CBS. Valid values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36].
 //
-// Deprecated: It has been deprecated from version 1.33.0. Set `prepaid_period` instead.
+// Deprecated: It has been deprecated from version 1.33.0. Set `prepaidPeriod` instead.
 func (o StorageOutput) Period() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Storage) pulumi.IntPtrOutput { return v.Period }).(pulumi.IntPtrOutput)
 }

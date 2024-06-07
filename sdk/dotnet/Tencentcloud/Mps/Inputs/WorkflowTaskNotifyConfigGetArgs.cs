@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WorkflowTaskNotifyConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class WorkflowTaskNotifyConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// CMQ or TDMQ-CMQ model, there are two kinds of Queue and Topic.
@@ -58,5 +58,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WorkflowTaskNotifyConfigGetArgs()
         {
         }
+        public static new WorkflowTaskNotifyConfigGetArgs Empty => new WorkflowTaskNotifyConfigGetArgs();
     }
 }

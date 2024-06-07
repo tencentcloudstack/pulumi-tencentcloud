@@ -15,50 +15,51 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var packetFilterConfig = new Tencentcloud.Antiddos.PacketFilterConfig("packetFilterConfig", new()
     ///     {
-    ///         var packetFilterConfig = new Tencentcloud.Antiddos.PacketFilterConfig("packetFilterConfig", new Tencentcloud.Antiddos.PacketFilterConfigArgs
+    ///         InstanceId = "bgp-00000ry7",
+    ///         AntiddosPacketFilterConfig = new Tencentcloud.Antiddos.Inputs.PacketFilterConfigPacketFilterConfigArgs
     ///         {
-    ///             InstanceId = "bgp-00000ry7",
-    ///             PacketFilterConfig = new Tencentcloud.Antiddos.Inputs.PacketFilterConfigPacketFilterConfigArgs
-    ///             {
-    ///                 Action = "drop",
-    ///                 Depth = 1,
-    ///                 DportEnd = 80,
-    ///                 DportStart = 80,
-    ///                 IsNot = 0,
-    ///                 MatchBegin = "begin_l5",
-    ///                 MatchType = "pcre",
-    ///                 Offset = 1,
-    ///                 PktlenMax = 1400,
-    ///                 PktlenMin = 1400,
-    ///                 Protocol = "all",
-    ///                 SportEnd = 8080,
-    ///                 SportStart = 8080,
-    ///                 Str = "a",
-    ///             },
-    ///         });
-    ///     }
+    ///             Action = "drop",
+    ///             Depth = 1,
+    ///             DportEnd = 80,
+    ///             DportStart = 80,
+    ///             IsNot = 0,
+    ///             MatchBegin = "begin_l5",
+    ///             MatchType = "pcre",
+    ///             Offset = 1,
+    ///             PktlenMax = 1400,
+    ///             PktlenMin = 1400,
+    ///             Protocol = "all",
+    ///             SportEnd = 8080,
+    ///             SportStart = 8080,
+    ///             Str = "a",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// antiddos packet_filter_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Antiddos/packetFilterConfig:PacketFilterConfig packet_filter_config packet_filter_config_id
+    /// $ pulumi import tencentcloud:Antiddos/packetFilterConfig:PacketFilterConfig packet_filter_config packet_filter_config_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Antiddos/packetFilterConfig:PacketFilterConfig")]
-    public partial class PacketFilterConfig : Pulumi.CustomResource
+    public partial class PacketFilterConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// resource id.
@@ -117,7 +118,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         }
     }
 
-    public sealed class PacketFilterConfigArgs : Pulumi.ResourceArgs
+    public sealed class PacketFilterConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// resource id.
@@ -134,9 +135,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public PacketFilterConfigArgs()
         {
         }
+        public static new PacketFilterConfigArgs Empty => new PacketFilterConfigArgs();
     }
 
-    public sealed class PacketFilterConfigState : Pulumi.ResourceArgs
+    public sealed class PacketFilterConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// resource id.
@@ -153,5 +155,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public PacketFilterConfigState()
         {
         }
+        public static new PacketFilterConfigState Empty => new PacketFilterConfigState();
     }
 }

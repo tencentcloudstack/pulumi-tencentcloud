@@ -8,12 +8,14 @@ import * as utilities from "../utilities";
  * Provides a resource to create a redis clearInstanceOperation
  *
  * ## Example Usage
+ *
  * ### Clear the instance data of the Redis instance
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const password = config.get("password") || "test12345789";
@@ -23,16 +25,16 @@ import * as utilities from "../utilities";
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
  *     vpcId: vpc.id,
- *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
+ *     availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
  *     cidrBlock: "10.0.1.0/24",
  * });
  * const foo = new tencentcloud.redis.Instance("foo", {
- *     availabilityZone: zone.then(zone => zone.lists?[1]?.zone),
- *     typeId: zone.then(zone => zone.lists?[1]?.typeId),
+ *     availabilityZone: zone.then(zone => zone.lists?.[1]?.zone),
+ *     typeId: zone.then(zone => zone.lists?.[1]?.typeId),
  *     password: password,
  *     memSize: 8192,
- *     redisShardNum: zone.then(zone => zone.lists?[1]?.redisShardNums?[0]),
- *     redisReplicasNum: zone.then(zone => zone.lists?[1]?.redisReplicasNums?[0]),
+ *     redisShardNum: zone.then(zone => zone.lists?.[1]?.redisShardNums?.[0]),
+ *     redisReplicasNum: zone.then(zone => zone.lists?.[1]?.redisReplicasNums?.[0]),
  *     port: 6379,
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
@@ -42,6 +44,7 @@ import * as utilities from "../utilities";
  *     password: password,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class ClearInstanceOperation extends pulumi.CustomResource {
     /**
@@ -101,9 +104,11 @@ export class ClearInstanceOperation extends pulumi.CustomResource {
                 throw new Error("Missing required property 'instanceId'");
             }
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(ClearInstanceOperation.__pulumiType, name, resourceInputs, opts);
     }
 }

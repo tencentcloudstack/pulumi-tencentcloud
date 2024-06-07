@@ -18,11 +18,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// vpc dhcp_ip can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vpc/dhcpIp:DhcpIp dhcp_ip dhcp_ip_id
+    /// $ pulumi import tencentcloud:Vpc/dhcpIp:DhcpIp dhcp_ip dhcp_ip_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/dhcpIp:DhcpIp")]
-    public partial class DhcpIp : Pulumi.CustomResource
+    public partial class DhcpIp : global::Pulumi.CustomResource
     {
         /// <summary>
         /// `DhcpIp` name.
@@ -87,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         }
     }
 
-    public sealed class DhcpIpArgs : Pulumi.ResourceArgs
+    public sealed class DhcpIpArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// `DhcpIp` name.
@@ -110,9 +110,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public DhcpIpArgs()
         {
         }
+        public static new DhcpIpArgs Empty => new DhcpIpArgs();
     }
 
-    public sealed class DhcpIpState : Pulumi.ResourceArgs
+    public sealed class DhcpIpState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// `DhcpIp` name.
@@ -135,5 +136,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public DhcpIpState()
         {
         }
+        public static new DhcpIpState Empty => new DhcpIpState();
     }
 }

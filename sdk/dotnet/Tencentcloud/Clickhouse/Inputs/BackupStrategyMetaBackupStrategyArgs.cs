@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse.Inputs
 {
 
-    public sealed class BackupStrategyMetaBackupStrategyArgs : Pulumi.ResourceArgs
+    public sealed class BackupStrategyMetaBackupStrategyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Execution hour.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse.Inputs
         public BackupStrategyMetaBackupStrategyArgs()
         {
         }
+        public static new BackupStrategyMetaBackupStrategyArgs Empty => new BackupStrategyMetaBackupStrategyArgs();
     }
 }

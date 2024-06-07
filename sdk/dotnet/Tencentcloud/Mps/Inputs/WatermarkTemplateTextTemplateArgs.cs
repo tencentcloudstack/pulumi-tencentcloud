@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class WatermarkTemplateTextTemplateArgs : Pulumi.ResourceArgs
+    public sealed class WatermarkTemplateTextTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Text transparency, value range: (0, 1].0: fully transparent.1: fully opaque.Default value: 1.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public WatermarkTemplateTextTemplateArgs()
         {
         }
+        public static new WatermarkTemplateTextTemplateArgs Empty => new WatermarkTemplateTextTemplateArgs();
     }
 }

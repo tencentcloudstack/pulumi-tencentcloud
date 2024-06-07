@@ -5,39 +5,96 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./batch";
-export * from "./bucket";
-export * from "./bucketDomainCertificateAttachment";
-export * from "./bucketGenerateInventoryImmediatelyOperation";
-export * from "./bucketInventory";
-export * from "./bucketObject";
-export * from "./bucketPolicy";
-export * from "./bucketReferer";
-export * from "./bucketVersion";
-export * from "./getBatchs";
-export * from "./getBucketInventorys";
-export * from "./getBucketMultipartUploads";
-export * from "./getBucketObject";
-export * from "./getBuckets";
-export * from "./objectAbortMultipartUploadOperation";
-export * from "./objectCopyOperation";
-export * from "./objectDownloadOperation";
-export * from "./objectRestoreOperation";
+export { BatchArgs, BatchState } from "./batch";
+export type Batch = import("./batch").Batch;
+export const Batch: typeof import("./batch").Batch = null as any;
+utilities.lazyLoad(exports, ["Batch"], () => require("./batch"));
 
-// Import resources to register:
-import { Batch } from "./batch";
-import { Bucket } from "./bucket";
-import { BucketDomainCertificateAttachment } from "./bucketDomainCertificateAttachment";
-import { BucketGenerateInventoryImmediatelyOperation } from "./bucketGenerateInventoryImmediatelyOperation";
-import { BucketInventory } from "./bucketInventory";
-import { BucketObject } from "./bucketObject";
-import { BucketPolicy } from "./bucketPolicy";
-import { BucketReferer } from "./bucketReferer";
-import { BucketVersion } from "./bucketVersion";
-import { ObjectAbortMultipartUploadOperation } from "./objectAbortMultipartUploadOperation";
-import { ObjectCopyOperation } from "./objectCopyOperation";
-import { ObjectDownloadOperation } from "./objectDownloadOperation";
-import { ObjectRestoreOperation } from "./objectRestoreOperation";
+export { BucketArgs, BucketState } from "./bucket";
+export type Bucket = import("./bucket").Bucket;
+export const Bucket: typeof import("./bucket").Bucket = null as any;
+utilities.lazyLoad(exports, ["Bucket"], () => require("./bucket"));
+
+export { BucketDomainCertificateAttachmentArgs, BucketDomainCertificateAttachmentState } from "./bucketDomainCertificateAttachment";
+export type BucketDomainCertificateAttachment = import("./bucketDomainCertificateAttachment").BucketDomainCertificateAttachment;
+export const BucketDomainCertificateAttachment: typeof import("./bucketDomainCertificateAttachment").BucketDomainCertificateAttachment = null as any;
+utilities.lazyLoad(exports, ["BucketDomainCertificateAttachment"], () => require("./bucketDomainCertificateAttachment"));
+
+export { BucketGenerateInventoryImmediatelyOperationArgs, BucketGenerateInventoryImmediatelyOperationState } from "./bucketGenerateInventoryImmediatelyOperation";
+export type BucketGenerateInventoryImmediatelyOperation = import("./bucketGenerateInventoryImmediatelyOperation").BucketGenerateInventoryImmediatelyOperation;
+export const BucketGenerateInventoryImmediatelyOperation: typeof import("./bucketGenerateInventoryImmediatelyOperation").BucketGenerateInventoryImmediatelyOperation = null as any;
+utilities.lazyLoad(exports, ["BucketGenerateInventoryImmediatelyOperation"], () => require("./bucketGenerateInventoryImmediatelyOperation"));
+
+export { BucketInventoryArgs, BucketInventoryState } from "./bucketInventory";
+export type BucketInventory = import("./bucketInventory").BucketInventory;
+export const BucketInventory: typeof import("./bucketInventory").BucketInventory = null as any;
+utilities.lazyLoad(exports, ["BucketInventory"], () => require("./bucketInventory"));
+
+export { BucketObjectArgs, BucketObjectState } from "./bucketObject";
+export type BucketObject = import("./bucketObject").BucketObject;
+export const BucketObject: typeof import("./bucketObject").BucketObject = null as any;
+utilities.lazyLoad(exports, ["BucketObject"], () => require("./bucketObject"));
+
+export { BucketPolicyArgs, BucketPolicyState } from "./bucketPolicy";
+export type BucketPolicy = import("./bucketPolicy").BucketPolicy;
+export const BucketPolicy: typeof import("./bucketPolicy").BucketPolicy = null as any;
+utilities.lazyLoad(exports, ["BucketPolicy"], () => require("./bucketPolicy"));
+
+export { BucketRefererArgs, BucketRefererState } from "./bucketReferer";
+export type BucketReferer = import("./bucketReferer").BucketReferer;
+export const BucketReferer: typeof import("./bucketReferer").BucketReferer = null as any;
+utilities.lazyLoad(exports, ["BucketReferer"], () => require("./bucketReferer"));
+
+export { BucketVersionArgs, BucketVersionState } from "./bucketVersion";
+export type BucketVersion = import("./bucketVersion").BucketVersion;
+export const BucketVersion: typeof import("./bucketVersion").BucketVersion = null as any;
+utilities.lazyLoad(exports, ["BucketVersion"], () => require("./bucketVersion"));
+
+export { GetBatchsArgs, GetBatchsResult, GetBatchsOutputArgs } from "./getBatchs";
+export const getBatchs: typeof import("./getBatchs").getBatchs = null as any;
+export const getBatchsOutput: typeof import("./getBatchs").getBatchsOutput = null as any;
+utilities.lazyLoad(exports, ["getBatchs","getBatchsOutput"], () => require("./getBatchs"));
+
+export { GetBucketInventorysArgs, GetBucketInventorysResult, GetBucketInventorysOutputArgs } from "./getBucketInventorys";
+export const getBucketInventorys: typeof import("./getBucketInventorys").getBucketInventorys = null as any;
+export const getBucketInventorysOutput: typeof import("./getBucketInventorys").getBucketInventorysOutput = null as any;
+utilities.lazyLoad(exports, ["getBucketInventorys","getBucketInventorysOutput"], () => require("./getBucketInventorys"));
+
+export { GetBucketMultipartUploadsArgs, GetBucketMultipartUploadsResult, GetBucketMultipartUploadsOutputArgs } from "./getBucketMultipartUploads";
+export const getBucketMultipartUploads: typeof import("./getBucketMultipartUploads").getBucketMultipartUploads = null as any;
+export const getBucketMultipartUploadsOutput: typeof import("./getBucketMultipartUploads").getBucketMultipartUploadsOutput = null as any;
+utilities.lazyLoad(exports, ["getBucketMultipartUploads","getBucketMultipartUploadsOutput"], () => require("./getBucketMultipartUploads"));
+
+export { GetBucketObjectArgs, GetBucketObjectResult, GetBucketObjectOutputArgs } from "./getBucketObject";
+export const getBucketObject: typeof import("./getBucketObject").getBucketObject = null as any;
+export const getBucketObjectOutput: typeof import("./getBucketObject").getBucketObjectOutput = null as any;
+utilities.lazyLoad(exports, ["getBucketObject","getBucketObjectOutput"], () => require("./getBucketObject"));
+
+export { GetBucketsArgs, GetBucketsResult, GetBucketsOutputArgs } from "./getBuckets";
+export const getBuckets: typeof import("./getBuckets").getBuckets = null as any;
+export const getBucketsOutput: typeof import("./getBuckets").getBucketsOutput = null as any;
+utilities.lazyLoad(exports, ["getBuckets","getBucketsOutput"], () => require("./getBuckets"));
+
+export { ObjectAbortMultipartUploadOperationArgs, ObjectAbortMultipartUploadOperationState } from "./objectAbortMultipartUploadOperation";
+export type ObjectAbortMultipartUploadOperation = import("./objectAbortMultipartUploadOperation").ObjectAbortMultipartUploadOperation;
+export const ObjectAbortMultipartUploadOperation: typeof import("./objectAbortMultipartUploadOperation").ObjectAbortMultipartUploadOperation = null as any;
+utilities.lazyLoad(exports, ["ObjectAbortMultipartUploadOperation"], () => require("./objectAbortMultipartUploadOperation"));
+
+export { ObjectCopyOperationArgs, ObjectCopyOperationState } from "./objectCopyOperation";
+export type ObjectCopyOperation = import("./objectCopyOperation").ObjectCopyOperation;
+export const ObjectCopyOperation: typeof import("./objectCopyOperation").ObjectCopyOperation = null as any;
+utilities.lazyLoad(exports, ["ObjectCopyOperation"], () => require("./objectCopyOperation"));
+
+export { ObjectDownloadOperationArgs, ObjectDownloadOperationState } from "./objectDownloadOperation";
+export type ObjectDownloadOperation = import("./objectDownloadOperation").ObjectDownloadOperation;
+export const ObjectDownloadOperation: typeof import("./objectDownloadOperation").ObjectDownloadOperation = null as any;
+utilities.lazyLoad(exports, ["ObjectDownloadOperation"], () => require("./objectDownloadOperation"));
+
+export { ObjectRestoreOperationArgs, ObjectRestoreOperationState } from "./objectRestoreOperation";
+export type ObjectRestoreOperation = import("./objectRestoreOperation").ObjectRestoreOperation;
+export const ObjectRestoreOperation: typeof import("./objectRestoreOperation").ObjectRestoreOperation = null as any;
+utilities.lazyLoad(exports, ["ObjectRestoreOperation"], () => require("./objectRestoreOperation"));
+
 
 const _module = {
     version: utilities.getVersion(),

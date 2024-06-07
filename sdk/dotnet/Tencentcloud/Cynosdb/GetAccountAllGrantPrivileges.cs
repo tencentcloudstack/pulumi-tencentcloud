@@ -15,74 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// <summary>
         /// Use this data source to query detailed information of cynosdb account_all_grant_privileges
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var accountAllGrantPrivileges = Tencentcloud.Cynosdb.GetAccountAllGrantPrivileges.Invoke(new()
         ///     {
-        ///         var accountAllGrantPrivileges = Output.Create(Tencentcloud.Cynosdb.GetAccountAllGrantPrivileges.InvokeAsync(new Tencentcloud.Cynosdb.GetAccountAllGrantPrivilegesArgs
+        ///         Account = new Tencentcloud.Cynosdb.Inputs.GetAccountAllGrantPrivilegesAccountInputArgs
         ///         {
-        ///             Account = new Tencentcloud.Cynosdb.Inputs.GetAccountAllGrantPrivilegesAccountArgs
-        ///             {
-        ///                 AccountName = "keep_dts",
-        ///                 Host = "%",
-        ///             },
-        ///             ClusterId = "cynosdbmysql-bws8h88b",
-        ///         }));
-        ///     }
+        ///             AccountName = "keep_dts",
+        ///             Host = "%",
+        ///         },
+        ///         ClusterId = "cynosdbmysql-bws8h88b",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAccountAllGrantPrivilegesResult> InvokeAsync(GetAccountAllGrantPrivilegesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAccountAllGrantPrivilegesResult>("tencentcloud:Cynosdb/getAccountAllGrantPrivileges:getAccountAllGrantPrivileges", args ?? new GetAccountAllGrantPrivilegesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccountAllGrantPrivilegesResult>("tencentcloud:Cynosdb/getAccountAllGrantPrivileges:getAccountAllGrantPrivileges", args ?? new GetAccountAllGrantPrivilegesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cynosdb account_all_grant_privileges
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var accountAllGrantPrivileges = Tencentcloud.Cynosdb.GetAccountAllGrantPrivileges.Invoke(new()
         ///     {
-        ///         var accountAllGrantPrivileges = Output.Create(Tencentcloud.Cynosdb.GetAccountAllGrantPrivileges.InvokeAsync(new Tencentcloud.Cynosdb.GetAccountAllGrantPrivilegesArgs
+        ///         Account = new Tencentcloud.Cynosdb.Inputs.GetAccountAllGrantPrivilegesAccountInputArgs
         ///         {
-        ///             Account = new Tencentcloud.Cynosdb.Inputs.GetAccountAllGrantPrivilegesAccountArgs
-        ///             {
-        ///                 AccountName = "keep_dts",
-        ///                 Host = "%",
-        ///             },
-        ///             ClusterId = "cynosdbmysql-bws8h88b",
-        ///         }));
-        ///     }
+        ///             AccountName = "keep_dts",
+        ///             Host = "%",
+        ///         },
+        ///         ClusterId = "cynosdbmysql-bws8h88b",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAccountAllGrantPrivilegesResult> Invoke(GetAccountAllGrantPrivilegesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAccountAllGrantPrivilegesResult>("tencentcloud:Cynosdb/getAccountAllGrantPrivileges:getAccountAllGrantPrivileges", args ?? new GetAccountAllGrantPrivilegesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAccountAllGrantPrivilegesResult>("tencentcloud:Cynosdb/getAccountAllGrantPrivileges:getAccountAllGrantPrivileges", args ?? new GetAccountAllGrantPrivilegesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAccountAllGrantPrivilegesArgs : Pulumi.InvokeArgs
+    public sealed class GetAccountAllGrantPrivilegesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// account information.
@@ -105,9 +99,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetAccountAllGrantPrivilegesArgs()
         {
         }
+        public static new GetAccountAllGrantPrivilegesArgs Empty => new GetAccountAllGrantPrivilegesArgs();
     }
 
-    public sealed class GetAccountAllGrantPrivilegesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAccountAllGrantPrivilegesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// account information.
@@ -130,6 +125,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetAccountAllGrantPrivilegesInvokeArgs()
         {
         }
+        public static new GetAccountAllGrantPrivilegesInvokeArgs Empty => new GetAccountAllGrantPrivilegesInvokeArgs();
     }
 
 

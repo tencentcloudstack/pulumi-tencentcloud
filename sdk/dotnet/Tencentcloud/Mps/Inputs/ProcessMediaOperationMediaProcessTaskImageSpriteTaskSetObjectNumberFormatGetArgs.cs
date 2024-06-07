@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetObjectNumberFormatGetArgs : Pulumi.ResourceArgs
+    public sealed class ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetObjectNumberFormatGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Increment of the `{number}` variable. Default value: 1.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetObjectNumberFormatGetArgs()
         {
         }
+        public static new ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetObjectNumberFormatGetArgs Empty => new ProcessMediaOperationMediaProcessTaskImageSpriteTaskSetObjectNumberFormatGetArgs();
     }
 }

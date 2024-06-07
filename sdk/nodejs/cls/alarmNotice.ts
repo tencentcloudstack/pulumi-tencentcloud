@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,11 +11,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const alarmNotice = new tencentcloud.Cls.AlarmNotice("alarm_notice", {
+ * const alarmNotice = new tencentcloud.cls.AlarmNotice("alarmNotice", {
  *     noticeReceivers: [{
  *         endTime: "23:59:59",
  *         index: 0,
@@ -32,13 +34,14 @@ import * as utilities from "../utilities";
  *     type: "All",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * cls alarm_notice can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Cls/alarmNotice:AlarmNotice alarm_notice alarm_notice_id
+ * $ pulumi import tencentcloud:Cls/alarmNotice:AlarmNotice alarm_notice alarm_notice_id
  * ```
  */
 export class AlarmNotice extends pulumi.CustomResource {

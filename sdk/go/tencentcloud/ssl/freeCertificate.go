@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create a Free Certificate.
@@ -16,44 +17,50 @@ import (
 // > **NOTE:** Once certificat created, it cannot be removed within 1 hours.
 //
 // ## Example Usage
+//
 // ### only support type 2. 2=TrustAsia TLS RSA CA.
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ssl"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Ssl.NewFreeCertificate(ctx, "example", &Ssl.FreeCertificateArgs{
-// 			Alias:           pulumi.String("example_free_cert"),
-// 			ContactEmail:    pulumi.String("test@example.com"),
-// 			ContactPhone:    pulumi.String("18352458901"),
-// 			CsrEncryptAlgo:  pulumi.String("RSA"),
-// 			CsrKeyParameter: pulumi.String("2048"),
-// 			CsrKeyPassword:  pulumi.String("csr_pwd"),
-// 			Domain:          pulumi.String("example.com"),
-// 			DvAuthMethod:    pulumi.String("DNS_AUTO"),
-// 			PackageType:     pulumi.String("2"),
-// 			ValidityPeriod:  pulumi.String("12"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Ssl.NewFreeCertificate(ctx, "example", &Ssl.FreeCertificateArgs{
+//				Alias:           pulumi.String("example_free_cert"),
+//				ContactEmail:    pulumi.String("test@example.com"),
+//				ContactPhone:    pulumi.String("18352458901"),
+//				CsrEncryptAlgo:  pulumi.String("RSA"),
+//				CsrKeyParameter: pulumi.String("2048"),
+//				CsrKeyPassword:  pulumi.String("csr_pwd"),
+//				Domain:          pulumi.String("example.com"),
+//				DvAuthMethod:    pulumi.String("DNS_AUTO"),
+//				PackageType:     pulumi.String("2"),
+//				ValidityPeriod:  pulumi.String("12"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // FreeCertificate instance can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Ssl/freeCertificate:FreeCertificate test free_certificate-id
+// $ pulumi import tencentcloud:Ssl/freeCertificate:FreeCertificate test free_certificate-id
 // ```
 type FreeCertificate struct {
 	pulumi.CustomResourceState
@@ -123,7 +130,14 @@ func NewFreeCertificate(ctx *pulumi.Context,
 	if args.DvAuthMethod == nil {
 		return nil, errors.New("invalid value for required argument 'DvAuthMethod'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	if args.CsrKeyPassword != nil {
+		args.CsrKeyPassword = pulumi.ToSecret(args.CsrKeyPassword).(pulumi.StringPtrInput)
+	}
+	secrets := pulumi.AdditionalSecretOutputs([]string{
+		"csrKeyPassword",
+	})
+	opts = append(opts, secrets)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource FreeCertificate
 	err := ctx.RegisterResource("tencentcloud:Ssl/freeCertificate:FreeCertificate", name, args, &resource, opts...)
 	if err != nil {
@@ -336,7 +350,7 @@ func (i *FreeCertificate) ToFreeCertificateOutputWithContext(ctx context.Context
 // FreeCertificateArrayInput is an input type that accepts FreeCertificateArray and FreeCertificateArrayOutput values.
 // You can construct a concrete instance of `FreeCertificateArrayInput` via:
 //
-//          FreeCertificateArray{ FreeCertificateArgs{...} }
+//	FreeCertificateArray{ FreeCertificateArgs{...} }
 type FreeCertificateArrayInput interface {
 	pulumi.Input
 
@@ -361,7 +375,7 @@ func (i FreeCertificateArray) ToFreeCertificateArrayOutputWithContext(ctx contex
 // FreeCertificateMapInput is an input type that accepts FreeCertificateMap and FreeCertificateMapOutput values.
 // You can construct a concrete instance of `FreeCertificateMapInput` via:
 //
-//          FreeCertificateMap{ "key": FreeCertificateArgs{...} }
+//	FreeCertificateMap{ "key": FreeCertificateArgs{...} }
 type FreeCertificateMapInput interface {
 	pulumi.Input
 

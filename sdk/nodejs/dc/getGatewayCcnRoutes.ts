@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,10 +11,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const main = new tencentcloud.ccn.Instance("main", {
  *     description: "ci-temp-test-ccn-des",
@@ -36,13 +38,11 @@ import * as utilities from "../utilities";
  *     dcgId: ccnMain.id,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getGatewayCcnRoutes(args: GetGatewayCcnRoutesArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewayCcnRoutesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Dc/getGatewayCcnRoutes:getGatewayCcnRoutes", {
         "dcgId": args.dcgId,
         "resultOutputFile": args.resultOutputFile,
@@ -81,9 +81,42 @@ export interface GetGatewayCcnRoutesResult {
     readonly instanceLists: outputs.Dc.GetGatewayCcnRoutesInstanceList[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of direct connect gateway route entries.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const main = new tencentcloud.ccn.Instance("main", {
+ *     description: "ci-temp-test-ccn-des",
+ *     qos: "AG",
+ * });
+ * const ccnMain = new tencentcloud.dc.Gateway("ccnMain", {
+ *     networkInstanceId: main.id,
+ *     networkType: "CCN",
+ *     gatewayType: "NORMAL",
+ * });
+ * const route1 = new tencentcloud.dc.GatewayCcnRoute("route1", {
+ *     dcgId: ccnMain.id,
+ *     cidrBlock: "10.1.1.0/32",
+ * });
+ * const route2 = new tencentcloud.dc.GatewayCcnRoute("route2", {
+ *     dcgId: ccnMain.id,
+ *     cidrBlock: "192.1.1.0/32",
+ * });
+ * const test = tencentcloud.Dc.getGatewayCcnRoutesOutput({
+ *     dcgId: ccnMain.id,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getGatewayCcnRoutesOutput(args: GetGatewayCcnRoutesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetGatewayCcnRoutesResult> {
-    return pulumi.output(args).apply(a => getGatewayCcnRoutes(a, opts))
+    return pulumi.output(args).apply((a: any) => getGatewayCcnRoutes(a, opts))
 }
 
 /**

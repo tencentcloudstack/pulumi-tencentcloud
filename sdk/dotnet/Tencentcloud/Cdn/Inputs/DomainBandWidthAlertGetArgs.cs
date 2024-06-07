@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
 {
 
-    public sealed class DomainBandWidthAlertGetArgs : Pulumi.ResourceArgs
+    public sealed class DomainBandWidthAlertGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alert percentage.
@@ -37,9 +37,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         [Input("counterMeasure")]
         public Input<string>? CounterMeasure { get; set; }
 
+        /// <summary>
+        /// Last trigger time.
+        /// </summary>
         [Input("lastTriggerTime")]
         public Input<string>? LastTriggerTime { get; set; }
 
+        /// <summary>
+        /// Last trigger time of overseas.
+        /// </summary>
         [Input("lastTriggerTimeOverseas")]
         public Input<string>? LastTriggerTimeOverseas { get; set; }
 
@@ -64,5 +70,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         public DomainBandWidthAlertGetArgs()
         {
         }
+        public static new DomainBandWidthAlertGetArgs Empty => new DomainBandWidthAlertGetArgs();
     }
 }

@@ -15,90 +15,94 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var testBgpip = new Tencentcloud.Dayu.CcHttpPolicy("testBgpip", new()
     ///     {
-    ///         var testBgpip = new Tencentcloud.Dayu.CcHttpPolicy("testBgpip", new Tencentcloud.Dayu.CcHttpPolicyArgs
+    ///         Action = "drop",
+    ///         ResourceId = "bgpip-00000294",
+    ///         ResourceType = "bgpip",
+    ///         RuleLists = new[]
     ///         {
-    ///             Action = "drop",
-    ///             ResourceId = "bgpip-00000294",
-    ///             ResourceType = "bgpip",
-    ///             RuleLists = 
+    ///             new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
     ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
-    ///                 {
-    ///                     Operator = "include",
-    ///                     Skey = "host",
-    ///                     Value = "123",
-    ///                 },
+    ///                 Operator = "include",
+    ///                 Skey = "host",
+    ///                 Value = "123",
     ///             },
-    ///             Smode = "matching",
-    ///             Switch = true,
-    ///         });
-    ///         var testNet = new Tencentcloud.Dayu.CcHttpPolicy("testNet", new Tencentcloud.Dayu.CcHttpPolicyArgs
-    ///         {
-    ///             Action = "drop",
-    ///             ResourceId = "net-0000007e",
-    ///             ResourceType = "net",
-    ///             RuleLists = 
-    ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
-    ///                 {
-    ///                     Operator = "equal",
-    ///                     Skey = "cgi",
-    ///                     Value = "123",
-    ///                 },
-    ///             },
-    ///             Smode = "matching",
-    ///             Switch = true,
-    ///         });
-    ///         var testBgpmultip = new Tencentcloud.Dayu.CcHttpPolicy("testBgpmultip", new Tencentcloud.Dayu.CcHttpPolicyArgs
-    ///         {
-    ///             Action = "alg",
-    ///             Ip = "111.230.178.25",
-    ///             ResourceId = "bgp-0000008o",
-    ///             ResourceType = "bgp-multip",
-    ///             RuleLists = 
-    ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
-    ///                 {
-    ///                     Operator = "not_include",
-    ///                     Skey = "referer",
-    ///                     Value = "123",
-    ///                 },
-    ///             },
-    ///             Smode = "matching",
-    ///             Switch = true,
-    ///         });
-    ///         var testBgp = new Tencentcloud.Dayu.CcHttpPolicy("testBgp", new Tencentcloud.Dayu.CcHttpPolicyArgs
-    ///         {
-    ///             Action = "alg",
-    ///             ResourceId = "bgp-000006mq",
-    ///             ResourceType = "bgp",
-    ///             RuleLists = 
-    ///             {
-    ///                 new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
-    ///                 {
-    ///                     Operator = "not_include",
-    ///                     Skey = "ua",
-    ///                     Value = "123",
-    ///                 },
-    ///             },
-    ///             Smode = "matching",
-    ///             Switch = true,
-    ///         });
-    ///     }
+    ///         },
+    ///         Smode = "matching",
+    ///         Switch = true,
+    ///     });
     /// 
-    /// }
+    ///     var testNet = new Tencentcloud.Dayu.CcHttpPolicy("testNet", new()
+    ///     {
+    ///         Action = "drop",
+    ///         ResourceId = "net-0000007e",
+    ///         ResourceType = "net",
+    ///         RuleLists = new[]
+    ///         {
+    ///             new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
+    ///             {
+    ///                 Operator = "equal",
+    ///                 Skey = "cgi",
+    ///                 Value = "123",
+    ///             },
+    ///         },
+    ///         Smode = "matching",
+    ///         Switch = true,
+    ///     });
+    /// 
+    ///     var testBgpmultip = new Tencentcloud.Dayu.CcHttpPolicy("testBgpmultip", new()
+    ///     {
+    ///         Action = "alg",
+    ///         Ip = "111.230.178.25",
+    ///         ResourceId = "bgp-0000008o",
+    ///         ResourceType = "bgp-multip",
+    ///         RuleLists = new[]
+    ///         {
+    ///             new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
+    ///             {
+    ///                 Operator = "not_include",
+    ///                 Skey = "referer",
+    ///                 Value = "123",
+    ///             },
+    ///         },
+    ///         Smode = "matching",
+    ///         Switch = true,
+    ///     });
+    /// 
+    ///     var testBgp = new Tencentcloud.Dayu.CcHttpPolicy("testBgp", new()
+    ///     {
+    ///         Action = "alg",
+    ///         ResourceId = "bgp-000006mq",
+    ///         ResourceType = "bgp",
+    ///         RuleLists = new[]
+    ///         {
+    ///             new Tencentcloud.Dayu.Inputs.CcHttpPolicyRuleListArgs
+    ///             {
+    ///                 Operator = "not_include",
+    ///                 Skey = "ua",
+    ///                 Value = "123",
+    ///             },
+    ///         },
+    ///         Smode = "matching",
+    ///         Switch = true,
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/ccHttpPolicy:CcHttpPolicy")]
-    public partial class CcHttpPolicy : Pulumi.CustomResource
+    public partial class CcHttpPolicy : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Action mode, only valid when `smode` is `matching`. Valid values are `alg` and `drop`.
@@ -211,7 +215,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         }
     }
 
-    public sealed class CcHttpPolicyArgs : Pulumi.ResourceArgs
+    public sealed class CcHttpPolicyArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action mode, only valid when `smode` is `matching`. Valid values are `alg` and `drop`.
@@ -276,9 +280,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public CcHttpPolicyArgs()
         {
         }
+        public static new CcHttpPolicyArgs Empty => new CcHttpPolicyArgs();
     }
 
-    public sealed class CcHttpPolicyState : Pulumi.ResourceArgs
+    public sealed class CcHttpPolicyState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Action mode, only valid when `smode` is `matching`. Valid values are `alg` and `drop`.
@@ -355,5 +360,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         public CcHttpPolicyState()
         {
         }
+        public static new CcHttpPolicyState Empty => new CcHttpPolicyState();
     }
 }

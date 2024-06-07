@@ -9,15 +9,17 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const recoverBackupJob = new tencentcloud.Clickhouse.RecoverBackupJob("recover_backup_job", {
+ * const recoverBackupJob = new tencentcloud.clickhouse.RecoverBackupJob("recoverBackupJob", {
  *     backUpJobId: 1234,
  *     instanceId: "cdwch-xxxxxx",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class RecoverBackupJob extends pulumi.CustomResource {
     /**

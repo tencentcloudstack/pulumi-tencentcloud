@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var example = new Tencentcloud.Waf.Cc("example", new()
     ///     {
-    ///         var example = new Tencentcloud.Waf.Cc("example", new Tencentcloud.Waf.CcArgs
-    ///         {
-    ///             ActionType = "22",
-    ///             Advance = "0",
-    ///             Domain = "www.demo.com",
-    ///             Edition = "sparta-waf",
-    ///             Interval = "60",
-    ///             Limit = "60",
-    ///             MatchFunc = 0,
-    ///             Priority = 50,
-    ///             Status = 1,
-    ///             Type = 1,
-    ///             Url = "/cc_demo",
-    ///             ValidTime = 600,
-    ///         });
-    ///     }
+    ///         ActionType = "22",
+    ///         Advance = "0",
+    ///         Domain = "www.demo.com",
+    ///         Edition = "sparta-waf",
+    ///         Interval = "60",
+    ///         Limit = "60",
+    ///         MatchFunc = 0,
+    ///         Priority = 50,
+    ///         Status = 1,
+    ///         Type = 1,
+    ///         Url = "/cc_demo",
+    ///         ValidTime = 600,
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/cc:Cc")]
-    public partial class Cc : Pulumi.CustomResource
+    public partial class Cc : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Rule Action, 20 log, 21 captcha, 22 deny, 23 accurate deny.
@@ -187,7 +188,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         }
     }
 
-    public sealed class CcArgs : Pulumi.ResourceArgs
+    public sealed class CcArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Rule Action, 20 log, 21 captcha, 22 deny, 23 accurate deny.
@@ -288,9 +289,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public CcArgs()
         {
         }
+        public static new CcArgs Empty => new CcArgs();
     }
 
-    public sealed class CcState : Pulumi.ResourceArgs
+    public sealed class CcState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Rule Action, 20 log, 21 captcha, 22 deny, 23 accurate deny.
@@ -397,5 +399,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public CcState()
         {
         }
+        public static new CcState Empty => new CcState();
     }
 }

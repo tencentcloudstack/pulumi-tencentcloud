@@ -8,44 +8,49 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of mysql userTask
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mysql"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mysql.GetUserTask(ctx, &mysql.GetUserTaskArgs{
-// 			AsyncRequestId: pulumi.StringRef("f2fe828c-773af816-0a08f542-94bb2a9c"),
-// 			InstanceId:     pulumi.StringRef("cdb-fitq5t9h"),
-// 			StartTimeBegin: pulumi.StringRef("2017-12-31 10:40:01"),
-// 			StartTimeEnd:   pulumi.StringRef("2017-12-31 10:40:01"),
-// 			TaskStatuses: []string{
-// 				"2",
-// 			},
-// 			TaskTypes: []string{
-// 				"5",
-// 			},
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mysql.GetUserTask(ctx, &mysql.GetUserTaskArgs{
+//				AsyncRequestId: pulumi.StringRef("f2fe828c-773af816-0a08f542-94bb2a9c"),
+//				InstanceId:     pulumi.StringRef("cdb-fitq5t9h"),
+//				StartTimeBegin: pulumi.StringRef("2017-12-31 10:40:01"),
+//				StartTimeEnd:   pulumi.StringRef("2017-12-31 10:40:01"),
+//				TaskStatuses: []string{
+//					"2",
+//				},
+//				TaskTypes: []string{
+//					"5",
+//				},
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetUserTask(ctx *pulumi.Context, args *GetUserTaskArgs, opts ...pulumi.InvokeOption) (*GetUserTaskResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUserTaskResult
 	err := ctx.Invoke("tencentcloud:Mysql/getUserTask:getUserTask", args, &rv, opts...)
 	if err != nil {

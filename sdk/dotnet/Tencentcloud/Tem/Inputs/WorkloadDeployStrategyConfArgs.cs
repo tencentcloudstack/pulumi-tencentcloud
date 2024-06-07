@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
 {
 
-    public sealed class WorkloadDeployStrategyConfArgs : Pulumi.ResourceArgs
+    public sealed class WorkloadDeployStrategyConfArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// interval between batches.
@@ -52,5 +52,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tem.Inputs
         public WorkloadDeployStrategyConfArgs()
         {
         }
+        public static new WorkloadDeployStrategyConfArgs Empty => new WorkloadDeployStrategyConfArgs();
     }
 }

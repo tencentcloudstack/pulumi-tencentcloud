@@ -15,38 +15,39 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var grafanaEnvConfig = new Tencentcloud.Monitor.GrafanaEnvConfig("grafanaEnvConfig", new()
     ///     {
-    ///         var grafanaEnvConfig = new Tencentcloud.Monitor.GrafanaEnvConfig("grafanaEnvConfig", new Tencentcloud.Monitor.GrafanaEnvConfigArgs
+    ///         Envs = 
     ///         {
-    ///             Envs = 
-    ///             {
-    ///                 { "aaa", "ccc" },
-    ///                 { "bbb", "ccc" },
-    ///             },
-    ///             InstanceId = "grafana-dp2hnnfa",
-    ///         });
-    ///     }
+    ///             { "aaa", "ccc" },
+    ///             { "bbb", "ccc" },
+    ///         },
+    ///         InstanceId = "grafana-dp2hnnfa",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// monitor grafana_env_config can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Monitor/grafanaEnvConfig:GrafanaEnvConfig grafana_env_config instance_id
+    /// $ pulumi import tencentcloud:Monitor/grafanaEnvConfig:GrafanaEnvConfig grafana_env_config instance_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/grafanaEnvConfig:GrafanaEnvConfig")]
-    public partial class GrafanaEnvConfig : Pulumi.CustomResource
+    public partial class GrafanaEnvConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Environment variables.
@@ -105,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
     }
 
-    public sealed class GrafanaEnvConfigArgs : Pulumi.ResourceArgs
+    public sealed class GrafanaEnvConfigArgs : global::Pulumi.ResourceArgs
     {
         [Input("envs")]
         private InputMap<object>? _envs;
@@ -128,9 +129,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaEnvConfigArgs()
         {
         }
+        public static new GrafanaEnvConfigArgs Empty => new GrafanaEnvConfigArgs();
     }
 
-    public sealed class GrafanaEnvConfigState : Pulumi.ResourceArgs
+    public sealed class GrafanaEnvConfigState : global::Pulumi.ResourceArgs
     {
         [Input("envs")]
         private InputMap<object>? _envs;
@@ -153,5 +155,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GrafanaEnvConfigState()
         {
         }
+        public static new GrafanaEnvConfigState Empty => new GrafanaEnvConfigState();
     }
 }

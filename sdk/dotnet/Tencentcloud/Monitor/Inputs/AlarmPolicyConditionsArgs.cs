@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class AlarmPolicyConditionsArgs : Pulumi.ResourceArgs
+    public sealed class AlarmPolicyConditionsArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The and or relation of indicator alarm rule.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public AlarmPolicyConditionsArgs()
         {
         }
+        public static new AlarmPolicyConditionsArgs Empty => new AlarmPolicyConditionsArgs();
     }
 }

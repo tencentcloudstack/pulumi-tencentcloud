@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse.Inputs
 {
 
-    public sealed class BackupStrategyDataBackupStrategyGetArgs : Pulumi.ResourceArgs
+    public sealed class BackupStrategyDataBackupStrategyGetArgs : global::Pulumi.ResourceArgs
     {
         [Input("backUpTables", required: true)]
         private InputList<Inputs.BackupStrategyDataBackupStrategyBackUpTableGetArgs>? _backUpTables;
@@ -46,5 +46,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse.Inputs
         public BackupStrategyDataBackupStrategyGetArgs()
         {
         }
+        public static new BackupStrategyDataBackupStrategyGetArgs Empty => new BackupStrategyDataBackupStrategyGetArgs();
     }
 }

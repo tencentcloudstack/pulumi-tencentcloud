@@ -15,58 +15,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// <summary>
         /// Use this data source to query detailed information of vpc bandwidth_package_quota
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var bandwidthPackageQuota = Output.Create(Tencentcloud.Vpc.GetBandwidthPackageQuota.InvokeAsync());
-        ///     }
+        ///     var bandwidthPackageQuota = Tencentcloud.Vpc.GetBandwidthPackageQuota.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetBandwidthPackageQuotaResult> InvokeAsync(GetBandwidthPackageQuotaArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetBandwidthPackageQuotaResult>("tencentcloud:Vpc/getBandwidthPackageQuota:getBandwidthPackageQuota", args ?? new GetBandwidthPackageQuotaArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetBandwidthPackageQuotaResult>("tencentcloud:Vpc/getBandwidthPackageQuota:getBandwidthPackageQuota", args ?? new GetBandwidthPackageQuotaArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of vpc bandwidth_package_quota
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
-        ///     {
-        ///         var bandwidthPackageQuota = Output.Create(Tencentcloud.Vpc.GetBandwidthPackageQuota.InvokeAsync());
-        ///     }
+        ///     var bandwidthPackageQuota = Tencentcloud.Vpc.GetBandwidthPackageQuota.Invoke();
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetBandwidthPackageQuotaResult> Invoke(GetBandwidthPackageQuotaInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetBandwidthPackageQuotaResult>("tencentcloud:Vpc/getBandwidthPackageQuota:getBandwidthPackageQuota", args ?? new GetBandwidthPackageQuotaInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetBandwidthPackageQuotaResult>("tencentcloud:Vpc/getBandwidthPackageQuota:getBandwidthPackageQuota", args ?? new GetBandwidthPackageQuotaInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetBandwidthPackageQuotaArgs : Pulumi.InvokeArgs
+    public sealed class GetBandwidthPackageQuotaArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -77,9 +71,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetBandwidthPackageQuotaArgs()
         {
         }
+        public static new GetBandwidthPackageQuotaArgs Empty => new GetBandwidthPackageQuotaArgs();
     }
 
-    public sealed class GetBandwidthPackageQuotaInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetBandwidthPackageQuotaInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Used to save results.
@@ -90,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public GetBandwidthPackageQuotaInvokeArgs()
         {
         }
+        public static new GetBandwidthPackageQuotaInvokeArgs Empty => new GetBandwidthPackageQuotaInvokeArgs();
     }
 
 

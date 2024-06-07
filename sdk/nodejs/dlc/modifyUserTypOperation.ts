@@ -9,22 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const modifyUserTypOperation = new tencentcloud.Dlc.ModifyUserTypOperation("modify_user_typ_operation", {
+ * const modifyUserTypOperation = new tencentcloud.dlc.ModifyUserTypOperation("modifyUserTypOperation", {
  *     userId: "127382378",
  *     userType: "ADMIN",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * dlc modify_user_typ_operation can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Dlc/modifyUserTypOperation:ModifyUserTypOperation modify_user_typ_operation modify_user_typ_operation_id
+ * $ pulumi import tencentcloud:Dlc/modifyUserTypOperation:ModifyUserTypOperation modify_user_typ_operation modify_user_typ_operation_id
  * ```
  */
 export class ModifyUserTypOperation extends pulumi.CustomResource {

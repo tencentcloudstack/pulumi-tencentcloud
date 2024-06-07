@@ -15,118 +15,114 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// <summary>
         /// Use this data source to query detailed information of waf attack_overview
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Basic Query
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetAttackOverview.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetAttackOverview.InvokeAsync(new Tencentcloud.Waf.GetAttackOverviewArgs
-        ///         {
-        ///             FromTime = "2023-09-01 00:00:00",
-        ///             ToTime = "2023-09-07 00:00:00",
-        ///         }));
-        ///     }
+        ///         FromTime = "2023-09-01 00:00:00",
+        ///         ToTime = "2023-09-07 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Query by filter
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetAttackOverview.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetAttackOverview.InvokeAsync(new Tencentcloud.Waf.GetAttackOverviewArgs
-        ///         {
-        ///             Appid = 1304251372,
-        ///             Domain = "test.com",
-        ///             Edition = "clb-waf",
-        ///             FromTime = "2023-09-01 00:00:00",
-        ///             InstanceId = "waf_2kxtlbky00b2v1fn",
-        ///             ToTime = "2023-09-07 00:00:00",
-        ///         }));
-        ///     }
+        ///         Appid = 1304251372,
+        ///         Domain = "test.com",
+        ///         Edition = "clb-waf",
+        ///         FromTime = "2023-09-01 00:00:00",
+        ///         InstanceId = "waf_2kxtlbky00b2v1fn",
+        ///         ToTime = "2023-09-07 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAttackOverviewResult> InvokeAsync(GetAttackOverviewArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAttackOverviewResult>("tencentcloud:Waf/getAttackOverview:getAttackOverview", args ?? new GetAttackOverviewArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAttackOverviewResult>("tencentcloud:Waf/getAttackOverview:getAttackOverview", args ?? new GetAttackOverviewArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of waf attack_overview
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Basic Query
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetAttackOverview.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetAttackOverview.InvokeAsync(new Tencentcloud.Waf.GetAttackOverviewArgs
-        ///         {
-        ///             FromTime = "2023-09-01 00:00:00",
-        ///             ToTime = "2023-09-07 00:00:00",
-        ///         }));
-        ///     }
+        ///         FromTime = "2023-09-01 00:00:00",
+        ///         ToTime = "2023-09-07 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Query by filter
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var example = Tencentcloud.Waf.GetAttackOverview.Invoke(new()
         ///     {
-        ///         var example = Output.Create(Tencentcloud.Waf.GetAttackOverview.InvokeAsync(new Tencentcloud.Waf.GetAttackOverviewArgs
-        ///         {
-        ///             Appid = 1304251372,
-        ///             Domain = "test.com",
-        ///             Edition = "clb-waf",
-        ///             FromTime = "2023-09-01 00:00:00",
-        ///             InstanceId = "waf_2kxtlbky00b2v1fn",
-        ///             ToTime = "2023-09-07 00:00:00",
-        ///         }));
-        ///     }
+        ///         Appid = 1304251372,
+        ///         Domain = "test.com",
+        ///         Edition = "clb-waf",
+        ///         FromTime = "2023-09-01 00:00:00",
+        ///         InstanceId = "waf_2kxtlbky00b2v1fn",
+        ///         ToTime = "2023-09-07 00:00:00",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAttackOverviewResult> Invoke(GetAttackOverviewInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAttackOverviewResult>("tencentcloud:Waf/getAttackOverview:getAttackOverview", args ?? new GetAttackOverviewInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAttackOverviewResult>("tencentcloud:Waf/getAttackOverview:getAttackOverview", args ?? new GetAttackOverviewInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAttackOverviewArgs : Pulumi.InvokeArgs
+    public sealed class GetAttackOverviewArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// App id.
@@ -173,9 +169,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetAttackOverviewArgs()
         {
         }
+        public static new GetAttackOverviewArgs Empty => new GetAttackOverviewArgs();
     }
 
-    public sealed class GetAttackOverviewInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAttackOverviewInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// App id.
@@ -222,6 +219,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         public GetAttackOverviewInvokeArgs()
         {
         }
+        public static new GetAttackOverviewInvokeArgs Empty => new GetAttackOverviewInvokeArgs();
     }
 
 

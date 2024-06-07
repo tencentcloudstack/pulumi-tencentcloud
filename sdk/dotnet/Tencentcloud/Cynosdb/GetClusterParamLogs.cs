@@ -15,76 +15,70 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// <summary>
         /// Use this data source to query detailed information of cynosdb cluster_param_logs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clusterParamLogs = Tencentcloud.Cynosdb.GetClusterParamLogs.Invoke(new()
         ///     {
-        ///         var clusterParamLogs = Output.Create(Tencentcloud.Cynosdb.GetClusterParamLogs.InvokeAsync(new Tencentcloud.Cynosdb.GetClusterParamLogsArgs
+        ///         ClusterId = "cynosdbmysql-bws8h88b",
+        ///         InstanceIds = new[]
         ///         {
-        ///             ClusterId = "cynosdbmysql-bws8h88b",
-        ///             InstanceIds = 
-        ///             {
-        ///                 "cynosdbmysql-ins-afqx1hy0",
-        ///             },
-        ///             OrderBy = "CreateTime",
-        ///             OrderByType = "DESC",
-        ///         }));
-        ///     }
+        ///             "cynosdbmysql-ins-afqx1hy0",
+        ///         },
+        ///         OrderBy = "CreateTime",
+        ///         OrderByType = "DESC",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetClusterParamLogsResult> InvokeAsync(GetClusterParamLogsArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetClusterParamLogsResult>("tencentcloud:Cynosdb/getClusterParamLogs:getClusterParamLogs", args ?? new GetClusterParamLogsArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterParamLogsResult>("tencentcloud:Cynosdb/getClusterParamLogs:getClusterParamLogs", args ?? new GetClusterParamLogsArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cynosdb cluster_param_logs
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clusterParamLogs = Tencentcloud.Cynosdb.GetClusterParamLogs.Invoke(new()
         ///     {
-        ///         var clusterParamLogs = Output.Create(Tencentcloud.Cynosdb.GetClusterParamLogs.InvokeAsync(new Tencentcloud.Cynosdb.GetClusterParamLogsArgs
+        ///         ClusterId = "cynosdbmysql-bws8h88b",
+        ///         InstanceIds = new[]
         ///         {
-        ///             ClusterId = "cynosdbmysql-bws8h88b",
-        ///             InstanceIds = 
-        ///             {
-        ///                 "cynosdbmysql-ins-afqx1hy0",
-        ///             },
-        ///             OrderBy = "CreateTime",
-        ///             OrderByType = "DESC",
-        ///         }));
-        ///     }
+        ///             "cynosdbmysql-ins-afqx1hy0",
+        ///         },
+        ///         OrderBy = "CreateTime",
+        ///         OrderByType = "DESC",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetClusterParamLogsResult> Invoke(GetClusterParamLogsInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetClusterParamLogsResult>("tencentcloud:Cynosdb/getClusterParamLogs:getClusterParamLogs", args ?? new GetClusterParamLogsInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetClusterParamLogsResult>("tencentcloud:Cynosdb/getClusterParamLogs:getClusterParamLogs", args ?? new GetClusterParamLogsInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetClusterParamLogsArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterParamLogsArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -125,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetClusterParamLogsArgs()
         {
         }
+        public static new GetClusterParamLogsArgs Empty => new GetClusterParamLogsArgs();
     }
 
-    public sealed class GetClusterParamLogsInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetClusterParamLogsInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Cluster ID.
@@ -168,6 +163,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetClusterParamLogsInvokeArgs()
         {
         }
+        public static new GetClusterParamLogsInvokeArgs Empty => new GetClusterParamLogsInvokeArgs();
     }
 
 

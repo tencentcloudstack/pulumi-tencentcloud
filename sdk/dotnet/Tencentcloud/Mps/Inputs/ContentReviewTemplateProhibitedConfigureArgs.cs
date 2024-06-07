@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ContentReviewTemplateProhibitedConfigureArgs : Pulumi.ResourceArgs
+    public sealed class ContentReviewTemplateProhibitedConfigureArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Voice Prohibition Control Parameters.Note: This field may return null, indicating that no valid value can be obtained.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ContentReviewTemplateProhibitedConfigureArgs()
         {
         }
+        public static new ContentReviewTemplateProhibitedConfigureArgs Empty => new ContentReviewTemplateProhibitedConfigureArgs();
     }
 }

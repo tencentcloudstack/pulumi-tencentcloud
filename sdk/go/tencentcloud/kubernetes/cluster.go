@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create a kubernetes cluster.
@@ -19,828 +20,220 @@ import (
 // It's more flexible than managing worker config directly with `Kubernetes.Cluster`, `Kubernetes.ScaleWorker`, or existing node management of `tencentcloudKubernetesAttachment`. The reason is that `workerConfig` is unchangeable and may cause the whole cluster resource to `ForceNew`.
 //
 // ## Example Usage
-// ### Create a basic cluster with two worker nodes
 //
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		defaultInstanceType := "SA2.2XLARGE16"
-// 		if param := cfg.Get("defaultInstanceType"); param != "" {
-// 			defaultInstanceType = param
-// 		}
-// 		availabilityZoneFirst := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZoneFirst"); param != "" {
-// 			availabilityZoneFirst = param
-// 		}
-// 		availabilityZoneSecond := "ap-guangzhou-4"
-// 		if param := cfg.Get("availabilityZoneSecond"); param != "" {
-// 			availabilityZoneSecond = param
-// 		}
-// 		exampleClusterCidr := "10.31.0.0/16"
-// 		if param := cfg.Get("exampleClusterCidr"); param != "" {
-// 			exampleClusterCidr = param
-// 		}
-// 		vpcOne, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZoneFirst),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		firstVpcId := vpcOne.InstanceLists[0].VpcId
-// 		firstSubnetId := vpcOne.InstanceLists[0].SubnetId
-// 		vpcTwo, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZoneSecond),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ := vpcTwo.InstanceLists[0].VpcId
-// 		secondSubnetId := vpcTwo.InstanceLists[0].SubnetId
-// 		sg, err := Security.NewGroup(ctx, "sg", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		sgId := sg.ID()
-// 		_default, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-// 			ImageTypes: []string{
-// 				"PUBLIC_IMAGE",
-// 			},
-// 			ImageNameRegex: pulumi.StringRef("Final"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		imageId := _default.ImageId
-// 		_, err = Security.NewGroupLiteRule(ctx, "sgRule", &Security.GroupLiteRuleArgs{
-// 			SecurityGroupId: sg.ID(),
-// 			Ingresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#10.0.0.0/16#ALL#ALL"),
-// 				pulumi.String("ACCEPT#172.16.0.0/22#ALL#ALL"),
-// 				pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
-// 			},
-// 			Egresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#172.16.0.0/22#ALL#ALL"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Kubernetes.NewCluster(ctx, "example", &Kubernetes.ClusterArgs{
-// 			VpcId:                        pulumi.String(firstVpcId),
-// 			ClusterCidr:                  pulumi.String(exampleClusterCidr),
-// 			ClusterMaxPodNum:             pulumi.Int(32),
-// 			ClusterName:                  pulumi.String("tf_example_cluster"),
-// 			ClusterDesc:                  pulumi.String("example for tke cluster"),
-// 			ClusterMaxServiceNum:         pulumi.Int(32),
-// 			ClusterInternet:              pulumi.Bool(false),
-// 			ClusterInternetSecurityGroup: pulumi.String(sgId),
-// 			ClusterVersion:               pulumi.String("1.22.5"),
-// 			ClusterDeployType:            pulumi.String("MANAGED_CLUSTER"),
-// 			WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
-// 				&kubernetes.ClusterWorkerConfigArgs{
-// 					Count:                   pulumi.Int(1),
-// 					AvailabilityZone:        pulumi.String(availabilityZoneFirst),
-// 					InstanceType:            pulumi.String(defaultInstanceType),
-// 					SystemDiskType:          pulumi.String("CLOUD_SSD"),
-// 					SystemDiskSize:          pulumi.Int(60),
-// 					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 					InternetMaxBandwidthOut: pulumi.Int(100),
-// 					PublicIpAssigned:        pulumi.Bool(true),
-// 					SubnetId:                pulumi.String(firstSubnetId),
-// 					ImgId:                   pulumi.String(imageId),
-// 					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
-// 						&kubernetes.ClusterWorkerConfigDataDiskArgs{
-// 							DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 							DiskSize: pulumi.Int(50),
-// 						},
-// 					},
-// 					EnhancedSecurityService: pulumi.Bool(false),
-// 					EnhancedMonitorService:  pulumi.Bool(false),
-// 					UserData:                pulumi.String("dGVzdA=="),
-// 					Password:                pulumi.String("ZZXXccvv1212"),
-// 				},
-// 				&kubernetes.ClusterWorkerConfigArgs{
-// 					Count:                   pulumi.Int(1),
-// 					AvailabilityZone:        pulumi.String(availabilityZoneSecond),
-// 					InstanceType:            pulumi.String(defaultInstanceType),
-// 					SystemDiskType:          pulumi.String("CLOUD_SSD"),
-// 					SystemDiskSize:          pulumi.Int(60),
-// 					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 					InternetMaxBandwidthOut: pulumi.Int(100),
-// 					PublicIpAssigned:        pulumi.Bool(true),
-// 					SubnetId:                pulumi.String(secondSubnetId),
-// 					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
-// 						&kubernetes.ClusterWorkerConfigDataDiskArgs{
-// 							DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 							DiskSize: pulumi.Int(50),
-// 						},
-// 					},
-// 					EnhancedSecurityService: pulumi.Bool(false),
-// 					EnhancedMonitorService:  pulumi.Bool(false),
-// 					UserData:                pulumi.String("dGVzdA=="),
-// 					KeyIds: pulumi.String{
-// 						"skey-11112222",
-// 					},
-// 					CamRoleName: pulumi.String("CVM_QcsRole"),
-// 				},
-// 			},
-// 			Labels: pulumi.AnyMap{
-// 				"test1": pulumi.Any("test1"),
-// 				"test2": pulumi.Any("test2"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-// ### Create an empty cluster with a node pool
-//
-// The cluster does not have any nodes, nodes will be added through node pool.
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		defaultInstanceType := "SA2.2XLARGE16"
-// 		if param := cfg.Get("defaultInstanceType"); param != "" {
-// 			defaultInstanceType = param
-// 		}
-// 		availabilityZoneFirst := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZoneFirst"); param != "" {
-// 			availabilityZoneFirst = param
-// 		}
-// 		availabilityZoneSecond := "ap-guangzhou-4"
-// 		if param := cfg.Get("availabilityZoneSecond"); param != "" {
-// 			availabilityZoneSecond = param
-// 		}
-// 		exampleClusterCidr := "10.31.0.0/16"
-// 		if param := cfg.Get("exampleClusterCidr"); param != "" {
-// 			exampleClusterCidr = param
-// 		}
-// 		vpcOne, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZoneFirst),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		firstVpcId := vpcOne.InstanceLists[0].VpcId
-// 		firstSubnetId := vpcOne.InstanceLists[0].SubnetId
-// 		sg, err := Security.NewGroup(ctx, "sg", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		sgId := sg.ID()
-// 		_, err = Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZoneSecond),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Security.NewGroupLiteRule(ctx, "sgRule", &Security.GroupLiteRuleArgs{
-// 			SecurityGroupId: sg.ID(),
-// 			Ingresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#10.0.0.0/16#ALL#ALL"),
-// 				pulumi.String("ACCEPT#172.16.0.0/22#ALL#ALL"),
-// 				pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
-// 			},
-// 			Egresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#172.16.0.0/22#ALL#ALL"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleCluster, err := Kubernetes.NewCluster(ctx, "exampleCluster", &Kubernetes.ClusterArgs{
-// 			VpcId:                pulumi.String(firstVpcId),
-// 			ClusterCidr:          pulumi.String(exampleClusterCidr),
-// 			ClusterMaxPodNum:     pulumi.Int(32),
-// 			ClusterName:          pulumi.String("tf_example_cluster_np"),
-// 			ClusterDesc:          pulumi.String("example for tke cluster"),
-// 			ClusterMaxServiceNum: pulumi.Int(32),
-// 			ClusterVersion:       pulumi.String("1.22.5"),
-// 			ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Kubernetes.NewNodePool(ctx, "exampleNodePool", &Kubernetes.NodePoolArgs{
-// 			ClusterId: exampleCluster.ID(),
-// 			MaxSize:   pulumi.Int(6),
-// 			MinSize:   pulumi.Int(1),
-// 			VpcId:     pulumi.String(firstVpcId),
-// 			SubnetIds: pulumi.StringArray{
-// 				pulumi.String(firstSubnetId),
-// 			},
-// 			RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
-// 			DesiredCapacity:       pulumi.Int(4),
-// 			EnableAutoScale:       pulumi.Bool(true),
-// 			MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
-// 			AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
-// 				InstanceType:   pulumi.String(defaultInstanceType),
-// 				SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
-// 				SystemDiskSize: pulumi.Int(50),
-// 				OrderlySecurityGroupIds: pulumi.StringArray{
-// 					pulumi.String(sgId),
-// 				},
-// 				DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
-// 					&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
-// 						DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 						DiskSize: pulumi.Int(50),
-// 					},
-// 				},
-// 				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 				InternetMaxBandwidthOut: pulumi.Int(10),
-// 				PublicIpAssigned:        pulumi.Bool(true),
-// 				Password:                pulumi.String("test123#"),
-// 				EnhancedSecurityService: pulumi.Bool(false),
-// 				EnhancedMonitorService:  pulumi.Bool(false),
-// 				HostName:                pulumi.String("12.123.0.0"),
-// 				HostNameStyle:           pulumi.String("ORIGINAL"),
-// 			},
-// 			Labels: pulumi.AnyMap{
-// 				"test1": pulumi.Any("test1"),
-// 				"test2": pulumi.Any("test2"),
-// 			},
-// 			Taints: kubernetes.NodePoolTaintArray{
-// 				&kubernetes.NodePoolTaintArgs{
-// 					Key:    pulumi.String("test_taint"),
-// 					Value:  pulumi.String("taint_value"),
-// 					Effect: pulumi.String("PreferNoSchedule"),
-// 				},
-// 				&kubernetes.NodePoolTaintArgs{
-// 					Key:    pulumi.String("test_taint2"),
-// 					Value:  pulumi.String("taint_value2"),
-// 					Effect: pulumi.String("PreferNoSchedule"),
-// 				},
-// 			},
-// 			NodeConfig: &kubernetes.NodePoolNodeConfigArgs{
-// 				ExtraArgs: pulumi.StringArray{
-// 					pulumi.String("root-dir=/var/lib/kubelet"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-// ### Create a cluster with a node pool and open the network access with cluster endpoint
-//
-// The cluster's internet and intranet access will be opened after nodes are added through node pool.
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		defaultInstanceType := "SA2.2XLARGE16"
-// 		if param := cfg.Get("defaultInstanceType"); param != "" {
-// 			defaultInstanceType = param
-// 		}
-// 		availabilityZoneFirst := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZoneFirst"); param != "" {
-// 			availabilityZoneFirst = param
-// 		}
-// 		availabilityZoneSecond := "ap-guangzhou-4"
-// 		if param := cfg.Get("availabilityZoneSecond"); param != "" {
-// 			availabilityZoneSecond = param
-// 		}
-// 		exampleClusterCidr := "10.31.0.0/16"
-// 		if param := cfg.Get("exampleClusterCidr"); param != "" {
-// 			exampleClusterCidr = param
-// 		}
-// 		vpcOne, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZoneFirst),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		firstVpcId := vpcOne.InstanceLists[0].VpcId
-// 		firstSubnetId := vpcOne.InstanceLists[0].SubnetId
-// 		sg, err := Security.NewGroup(ctx, "sg", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		sgId := sg.ID()
-// 		_, err = Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZoneSecond),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Security.NewGroupLiteRule(ctx, "sgRule", &Security.GroupLiteRuleArgs{
-// 			SecurityGroupId: sg.ID(),
-// 			Ingresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#10.0.0.0/16#ALL#ALL"),
-// 				pulumi.String("ACCEPT#172.16.0.0/22#ALL#ALL"),
-// 				pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
-// 			},
-// 			Egresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#172.16.0.0/22#ALL#ALL"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleCluster, err := Kubernetes.NewCluster(ctx, "exampleCluster", &Kubernetes.ClusterArgs{
-// 			VpcId:                pulumi.String(firstVpcId),
-// 			ClusterCidr:          pulumi.String(exampleClusterCidr),
-// 			ClusterMaxPodNum:     pulumi.Int(32),
-// 			ClusterName:          pulumi.String("tf_example_cluster"),
-// 			ClusterDesc:          pulumi.String("example for tke cluster"),
-// 			ClusterMaxServiceNum: pulumi.Int(32),
-// 			ClusterInternet:      pulumi.Bool(false),
-// 			ClusterVersion:       pulumi.String("1.22.5"),
-// 			ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		exampleNodePool, err := Kubernetes.NewNodePool(ctx, "exampleNodePool", &Kubernetes.NodePoolArgs{
-// 			ClusterId: exampleCluster.ID(),
-// 			MaxSize:   pulumi.Int(6),
-// 			MinSize:   pulumi.Int(1),
-// 			VpcId:     pulumi.String(firstVpcId),
-// 			SubnetIds: pulumi.StringArray{
-// 				pulumi.String(firstSubnetId),
-// 			},
-// 			RetryPolicy:           pulumi.String("INCREMENTAL_INTERVALS"),
-// 			DesiredCapacity:       pulumi.Int(4),
-// 			EnableAutoScale:       pulumi.Bool(true),
-// 			MultiZoneSubnetPolicy: pulumi.String("EQUALITY"),
-// 			AutoScalingConfig: &kubernetes.NodePoolAutoScalingConfigArgs{
-// 				InstanceType:   pulumi.String(defaultInstanceType),
-// 				SystemDiskType: pulumi.String("CLOUD_PREMIUM"),
-// 				SystemDiskSize: pulumi.Int(50),
-// 				OrderlySecurityGroupIds: pulumi.StringArray{
-// 					pulumi.String(sgId),
-// 				},
-// 				DataDisks: kubernetes.NodePoolAutoScalingConfigDataDiskArray{
-// 					&kubernetes.NodePoolAutoScalingConfigDataDiskArgs{
-// 						DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 						DiskSize: pulumi.Int(50),
-// 					},
-// 				},
-// 				InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 				InternetMaxBandwidthOut: pulumi.Int(10),
-// 				PublicIpAssigned:        pulumi.Bool(true),
-// 				Password:                pulumi.String("test123#"),
-// 				EnhancedSecurityService: pulumi.Bool(false),
-// 				EnhancedMonitorService:  pulumi.Bool(false),
-// 				HostName:                pulumi.String("12.123.0.0"),
-// 				HostNameStyle:           pulumi.String("ORIGINAL"),
-// 			},
-// 			Labels: pulumi.AnyMap{
-// 				"test1": pulumi.Any("test1"),
-// 				"test2": pulumi.Any("test2"),
-// 			},
-// 			Taints: kubernetes.NodePoolTaintArray{
-// 				&kubernetes.NodePoolTaintArgs{
-// 					Key:    pulumi.String("test_taint"),
-// 					Value:  pulumi.String("taint_value"),
-// 					Effect: pulumi.String("PreferNoSchedule"),
-// 				},
-// 				&kubernetes.NodePoolTaintArgs{
-// 					Key:    pulumi.String("test_taint2"),
-// 					Value:  pulumi.String("taint_value2"),
-// 					Effect: pulumi.String("PreferNoSchedule"),
-// 				},
-// 			},
-// 			NodeConfig: &kubernetes.NodePoolNodeConfigArgs{
-// 				ExtraArgs: pulumi.StringArray{
-// 					pulumi.String("root-dir=/var/lib/kubelet"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Kubernetes.NewClusterEndpoint(ctx, "exampleClusterEndpoint", &Kubernetes.ClusterEndpointArgs{
-// 			ClusterId:                    exampleCluster.ID(),
-// 			ClusterInternet:              pulumi.Bool(true),
-// 			ClusterIntranet:              pulumi.Bool(true),
-// 			ClusterInternetSecurityGroup: pulumi.String(sgId),
-// 			ClusterIntranetSubnetId:      pulumi.String(firstSubnetId),
-// 		}, pulumi.DependsOn([]pulumi.Resource{
-// 			exampleNodePool,
-// 		}))
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
-// ### Use Kubelet
-//
-// ```go
-// package main
-//
-// import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// )
-//
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		defaultInstanceType := "SA2.2XLARGE16"
-// 		if param := cfg.Get("defaultInstanceType"); param != "" {
-// 			defaultInstanceType = param
-// 		}
-// 		availabilityZoneFirst := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZoneFirst"); param != "" {
-// 			availabilityZoneFirst = param
-// 		}
-// 		availabilityZoneSecond := "ap-guangzhou-4"
-// 		if param := cfg.Get("availabilityZoneSecond"); param != "" {
-// 			availabilityZoneSecond = param
-// 		}
-// 		exampleClusterCidr := "10.31.0.0/16"
-// 		if param := cfg.Get("exampleClusterCidr"); param != "" {
-// 			exampleClusterCidr = param
-// 		}
-// 		vpcOne, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZoneFirst),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		firstVpcId := vpcOne.InstanceLists[0].VpcId
-// 		firstSubnetId := vpcOne.InstanceLists[0].SubnetId
-// 		vpcTwo, err := Vpc.GetSubnets(ctx, &vpc.GetSubnetsArgs{
-// 			IsDefault:        pulumi.BoolRef(true),
-// 			AvailabilityZone: pulumi.StringRef(availabilityZoneSecond),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_ := vpcTwo.InstanceLists[0].VpcId
-// 		secondSubnetId := vpcTwo.InstanceLists[0].SubnetId
-// 		sg, err := Security.NewGroup(ctx, "sg", nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		sgId := sg.ID()
-// 		_default, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
-// 			ImageTypes: []string{
-// 				"PUBLIC_IMAGE",
-// 			},
-// 			ImageNameRegex: pulumi.StringRef("Final"),
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		imageId := _default.ImageId
-// 		_, err = Security.NewGroupLiteRule(ctx, "sgRule", &Security.GroupLiteRuleArgs{
-// 			SecurityGroupId: sg.ID(),
-// 			Ingresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#10.0.0.0/16#ALL#ALL"),
-// 				pulumi.String("ACCEPT#172.16.0.0/22#ALL#ALL"),
-// 				pulumi.String("DROP#0.0.0.0/0#ALL#ALL"),
-// 			},
-// 			Egresses: pulumi.StringArray{
-// 				pulumi.String("ACCEPT#172.16.0.0/22#ALL#ALL"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Kubernetes.NewCluster(ctx, "example", &Kubernetes.ClusterArgs{
-// 			VpcId:                        pulumi.String(firstVpcId),
-// 			ClusterCidr:                  pulumi.String(exampleClusterCidr),
-// 			ClusterMaxPodNum:             pulumi.Int(32),
-// 			ClusterName:                  pulumi.String("tf_example_cluster"),
-// 			ClusterDesc:                  pulumi.String("example for tke cluster"),
-// 			ClusterMaxServiceNum:         pulumi.Int(32),
-// 			ClusterInternet:              pulumi.Bool(false),
-// 			ClusterInternetSecurityGroup: pulumi.String(sgId),
-// 			ClusterVersion:               pulumi.String("1.22.5"),
-// 			ClusterDeployType:            pulumi.String("MANAGED_CLUSTER"),
-// 			WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
-// 				&kubernetes.ClusterWorkerConfigArgs{
-// 					Count:                   pulumi.Int(1),
-// 					AvailabilityZone:        pulumi.String(availabilityZoneFirst),
-// 					InstanceType:            pulumi.String(defaultInstanceType),
-// 					SystemDiskType:          pulumi.String("CLOUD_SSD"),
-// 					SystemDiskSize:          pulumi.Int(60),
-// 					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 					InternetMaxBandwidthOut: pulumi.Int(100),
-// 					PublicIpAssigned:        pulumi.Bool(true),
-// 					SubnetId:                pulumi.String(firstSubnetId),
-// 					ImgId:                   pulumi.String(imageId),
-// 					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
-// 						&kubernetes.ClusterWorkerConfigDataDiskArgs{
-// 							DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 							DiskSize: pulumi.Int(50),
-// 							Encrypt:  pulumi.Bool(false),
-// 						},
-// 					},
-// 					EnhancedSecurityService: pulumi.Bool(false),
-// 					EnhancedMonitorService:  pulumi.Bool(false),
-// 					UserData:                pulumi.String("dGVzdA=="),
-// 					DisasterRecoverGroupIds: pulumi.String{},
-// 					SecurityGroupIds:        pulumi.StringArray{},
-// 					KeyIds:                  pulumi.String{},
-// 					Password:                pulumi.String("ZZXXccvv1212"),
-// 				},
-// 				&kubernetes.ClusterWorkerConfigArgs{
-// 					Count:                   pulumi.Int(1),
-// 					AvailabilityZone:        pulumi.String(availabilityZoneSecond),
-// 					InstanceType:            pulumi.String(defaultInstanceType),
-// 					SystemDiskType:          pulumi.String("CLOUD_SSD"),
-// 					SystemDiskSize:          pulumi.Int(60),
-// 					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 					InternetMaxBandwidthOut: pulumi.Int(100),
-// 					PublicIpAssigned:        pulumi.Bool(true),
-// 					SubnetId:                pulumi.String(secondSubnetId),
-// 					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
-// 						&kubernetes.ClusterWorkerConfigDataDiskArgs{
-// 							DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 							DiskSize: pulumi.Int(50),
-// 						},
-// 					},
-// 					EnhancedSecurityService: pulumi.Bool(false),
-// 					EnhancedMonitorService:  pulumi.Bool(false),
-// 					UserData:                pulumi.String("dGVzdA=="),
-// 					DisasterRecoverGroupIds: pulumi.String{},
-// 					SecurityGroupIds:        pulumi.StringArray{},
-// 					KeyIds:                  pulumi.String{},
-// 					CamRoleName:             pulumi.String("CVM_QcsRole"),
-// 					Password:                pulumi.String("ZZXXccvv1212"),
-// 				},
-// 			},
-// 			Labels: pulumi.AnyMap{
-// 				"test1": pulumi.Any("test1"),
-// 				"test2": pulumi.Any("test2"),
-// 			},
-// 			ExtraArgs: pulumi.StringArray{
-// 				pulumi.String("root-dir=/var/lib/kubelet"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
-// ```
 // ### Use node pool global config
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-3"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc := "vpc-dk8zmwuf"
-// 		if param := cfg.Get("vpc"); param != "" {
-// 			vpc = param
-// 		}
-// 		subnet := "subnet-pqfek0t8"
-// 		if param := cfg.Get("subnet"); param != "" {
-// 			subnet = param
-// 		}
-// 		defaultInstanceType := "SA1.LARGE8"
-// 		if param := cfg.Get("defaultInstanceType"); param != "" {
-// 			defaultInstanceType = param
-// 		}
-// 		_, err := Kubernetes.NewCluster(ctx, "testNodePoolGlobalConfig", &Kubernetes.ClusterArgs{
-// 			VpcId:                pulumi.String(vpc),
-// 			ClusterCidr:          pulumi.String("10.1.0.0/16"),
-// 			ClusterMaxPodNum:     pulumi.Int(32),
-// 			ClusterName:          pulumi.String("test"),
-// 			ClusterDesc:          pulumi.String("test cluster desc"),
-// 			ClusterMaxServiceNum: pulumi.Int(32),
-// 			ClusterInternet:      pulumi.Bool(true),
-// 			ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
-// 			WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
-// 				&kubernetes.ClusterWorkerConfigArgs{
-// 					Count:                   pulumi.Int(1),
-// 					AvailabilityZone:        pulumi.String(availabilityZone),
-// 					InstanceType:            pulumi.String(defaultInstanceType),
-// 					SystemDiskType:          pulumi.String("CLOUD_SSD"),
-// 					SystemDiskSize:          pulumi.Int(60),
-// 					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 					InternetMaxBandwidthOut: pulumi.Int(100),
-// 					PublicIpAssigned:        pulumi.Bool(true),
-// 					SubnetId:                pulumi.String(subnet),
-// 					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
-// 						&kubernetes.ClusterWorkerConfigDataDiskArgs{
-// 							DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 							DiskSize: pulumi.Int(50),
-// 						},
-// 					},
-// 					EnhancedSecurityService: pulumi.Bool(false),
-// 					EnhancedMonitorService:  pulumi.Bool(false),
-// 					UserData:                pulumi.String("dGVzdA=="),
-// 					KeyIds:                  pulumi.String("skey-11112222"),
-// 				},
-// 			},
-// 			NodePoolGlobalConfigs: kubernetes.ClusterNodePoolGlobalConfigArray{
-// 				&kubernetes.ClusterNodePoolGlobalConfigArgs{
-// 					IsScaleInEnabled:            pulumi.Bool(true),
-// 					Expander:                    pulumi.String("random"),
-// 					IgnoreDaemonSetsUtilization: pulumi.Bool(true),
-// 					MaxConcurrentScaleIn:        pulumi.Int(5),
-// 					ScaleInDelay:                pulumi.Int(15),
-// 					ScaleInUnneededTime:         pulumi.Int(15),
-// 					ScaleInUtilizationThreshold: pulumi.Int(30),
-// 					SkipNodesWithLocalStorage:   pulumi.Bool(false),
-// 					SkipNodesWithSystemPods:     pulumi.Bool(true),
-// 				},
-// 			},
-// 			Labels: pulumi.AnyMap{
-// 				"test1": pulumi.Any("test1"),
-// 				"test2": pulumi.Any("test2"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc := "vpc-dk8zmwuf"
+//			if param := cfg.Get("vpc"); param != "" {
+//				vpc = param
+//			}
+//			subnet := "subnet-pqfek0t8"
+//			if param := cfg.Get("subnet"); param != "" {
+//				subnet = param
+//			}
+//			defaultInstanceType := "SA1.LARGE8"
+//			if param := cfg.Get("defaultInstanceType"); param != "" {
+//				defaultInstanceType = param
+//			}
+//			_, err := Kubernetes.NewCluster(ctx, "testNodePoolGlobalConfig", &Kubernetes.ClusterArgs{
+//				VpcId:                pulumi.String(vpc),
+//				ClusterCidr:          pulumi.String("10.1.0.0/16"),
+//				ClusterMaxPodNum:     pulumi.Int(32),
+//				ClusterName:          pulumi.String("test"),
+//				ClusterDesc:          pulumi.String("test cluster desc"),
+//				ClusterMaxServiceNum: pulumi.Int(32),
+//				ClusterInternet:      pulumi.Bool(true),
+//				ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
+//				WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
+//					&kubernetes.ClusterWorkerConfigArgs{
+//						Count:                   pulumi.Int(1),
+//						AvailabilityZone:        pulumi.String(availabilityZone),
+//						InstanceType:            pulumi.String(defaultInstanceType),
+//						SystemDiskType:          pulumi.String("CLOUD_SSD"),
+//						SystemDiskSize:          pulumi.Int(60),
+//						InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+//						InternetMaxBandwidthOut: pulumi.Int(100),
+//						PublicIpAssigned:        pulumi.Bool(true),
+//						SubnetId:                pulumi.String(subnet),
+//						DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
+//							&kubernetes.ClusterWorkerConfigDataDiskArgs{
+//								DiskType: pulumi.String("CLOUD_PREMIUM"),
+//								DiskSize: pulumi.Int(50),
+//							},
+//						},
+//						EnhancedSecurityService: pulumi.Bool(false),
+//						EnhancedMonitorService:  pulumi.Bool(false),
+//						UserData:                pulumi.String("dGVzdA=="),
+//						KeyIds:                  pulumi.String("skey-11112222"),
+//					},
+//				},
+//				NodePoolGlobalConfigs: kubernetes.ClusterNodePoolGlobalConfigArray{
+//					&kubernetes.ClusterNodePoolGlobalConfigArgs{
+//						IsScaleInEnabled:            pulumi.Bool(true),
+//						Expander:                    pulumi.String("random"),
+//						IgnoreDaemonSetsUtilization: pulumi.Bool(true),
+//						MaxConcurrentScaleIn:        pulumi.Int(5),
+//						ScaleInDelay:                pulumi.Int(15),
+//						ScaleInUnneededTime:         pulumi.Int(15),
+//						ScaleInUtilizationThreshold: pulumi.Int(30),
+//						SkipNodesWithLocalStorage:   pulumi.Bool(false),
+//						SkipNodesWithSystemPods:     pulumi.Bool(true),
+//					},
+//				},
+//				Labels: pulumi.Map{
+//					"test1": pulumi.Any("test1"),
+//					"test2": pulumi.Any("test2"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Using VPC-CNI network type
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		cfg := config.New(ctx, "")
-// 		availabilityZone := "ap-guangzhou-1"
-// 		if param := cfg.Get("availabilityZone"); param != "" {
-// 			availabilityZone = param
-// 		}
-// 		vpc := "vpc-r1m1fyx5"
-// 		if param := cfg.Get("vpc"); param != "" {
-// 			vpc = param
-// 		}
-// 		defaultInstanceType := "SA2.SMALL2"
-// 		if param := cfg.Get("defaultInstanceType"); param != "" {
-// 			defaultInstanceType = param
-// 		}
-// 		_, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
-// 			VpcId:                pulumi.String(vpc),
-// 			ClusterMaxPodNum:     pulumi.Int(32),
-// 			ClusterName:          pulumi.String("test"),
-// 			ClusterDesc:          pulumi.String("test cluster desc"),
-// 			ClusterMaxServiceNum: pulumi.Int(256),
-// 			ClusterInternet:      pulumi.Bool(true),
-// 			ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
-// 			NetworkType:          pulumi.String("VPC-CNI"),
-// 			EniSubnetIds: pulumi.StringArray{
-// 				pulumi.String("subnet-bk1etlyu"),
-// 			},
-// 			ServiceCidr: pulumi.String("10.1.0.0/24"),
-// 			WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
-// 				&kubernetes.ClusterWorkerConfigArgs{
-// 					Count:                   pulumi.Int(1),
-// 					AvailabilityZone:        pulumi.String(availabilityZone),
-// 					InstanceType:            pulumi.String(defaultInstanceType),
-// 					SystemDiskType:          pulumi.String("CLOUD_PREMIUM"),
-// 					SystemDiskSize:          pulumi.Int(60),
-// 					InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
-// 					InternetMaxBandwidthOut: pulumi.Int(100),
-// 					PublicIpAssigned:        pulumi.Bool(true),
-// 					SubnetId:                pulumi.String("subnet-t5dv27rs"),
-// 					DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
-// 						&kubernetes.ClusterWorkerConfigDataDiskArgs{
-// 							DiskType: pulumi.String("CLOUD_PREMIUM"),
-// 							DiskSize: pulumi.Int(50),
-// 						},
-// 					},
-// 					EnhancedSecurityService: pulumi.Bool(false),
-// 					EnhancedMonitorService:  pulumi.Bool(false),
-// 					UserData:                pulumi.String("dGVzdA=="),
-// 					KeyIds:                  pulumi.String("skey-11112222"),
-// 				},
-// 			},
-// 			Labels: pulumi.AnyMap{
-// 				"test1": pulumi.Any("test1"),
-// 				"test2": pulumi.Any("test2"),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-1"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc := "vpc-r1m1fyx5"
+//			if param := cfg.Get("vpc"); param != "" {
+//				vpc = param
+//			}
+//			defaultInstanceType := "SA2.SMALL2"
+//			if param := cfg.Get("defaultInstanceType"); param != "" {
+//				defaultInstanceType = param
+//			}
+//			_, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
+//				VpcId:                pulumi.String(vpc),
+//				ClusterMaxPodNum:     pulumi.Int(32),
+//				ClusterName:          pulumi.String("test"),
+//				ClusterDesc:          pulumi.String("test cluster desc"),
+//				ClusterMaxServiceNum: pulumi.Int(256),
+//				ClusterInternet:      pulumi.Bool(true),
+//				ClusterDeployType:    pulumi.String("MANAGED_CLUSTER"),
+//				NetworkType:          pulumi.String("VPC-CNI"),
+//				EniSubnetIds: pulumi.StringArray{
+//					pulumi.String("subnet-bk1etlyu"),
+//				},
+//				ServiceCidr: pulumi.String("10.1.0.0/24"),
+//				WorkerConfigs: kubernetes.ClusterWorkerConfigArray{
+//					&kubernetes.ClusterWorkerConfigArgs{
+//						Count:                   pulumi.Int(1),
+//						AvailabilityZone:        pulumi.String(availabilityZone),
+//						InstanceType:            pulumi.String(defaultInstanceType),
+//						SystemDiskType:          pulumi.String("CLOUD_PREMIUM"),
+//						SystemDiskSize:          pulumi.Int(60),
+//						InternetChargeType:      pulumi.String("TRAFFIC_POSTPAID_BY_HOUR"),
+//						InternetMaxBandwidthOut: pulumi.Int(100),
+//						PublicIpAssigned:        pulumi.Bool(true),
+//						SubnetId:                pulumi.String("subnet-t5dv27rs"),
+//						DataDisks: kubernetes.ClusterWorkerConfigDataDiskArray{
+//							&kubernetes.ClusterWorkerConfigDataDiskArgs{
+//								DiskType: pulumi.String("CLOUD_PREMIUM"),
+//								DiskSize: pulumi.Int(50),
+//							},
+//						},
+//						EnhancedSecurityService: pulumi.Bool(false),
+//						EnhancedMonitorService:  pulumi.Bool(false),
+//						UserData:                pulumi.String("dGVzdA=="),
+//						KeyIds:                  pulumi.String("skey-11112222"),
+//					},
+//				},
+//				Labels: pulumi.Map{
+//					"test1": pulumi.Any("test1"),
+//					"test2": pulumi.Any("test2"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Using ops options
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
-// 			ClusterAudit: &kubernetes.ClusterClusterAuditArgs{
-// 				Enabled:  pulumi.Bool(true),
-// 				LogSetId: pulumi.String(""),
-// 				TopicId:  pulumi.String(""),
-// 			},
-// 			EventPersistence: &kubernetes.ClusterEventPersistenceArgs{
-// 				Enabled:  pulumi.Bool(true),
-// 				LogSetId: pulumi.String(""),
-// 				TopicId:  pulumi.String(""),
-// 			},
-// 			LogAgent: &kubernetes.ClusterLogAgentArgs{
-// 				Enabled:        pulumi.Bool(true),
-// 				KubeletRootDir: pulumi.String(""),
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kubernetes.NewCluster(ctx, "managedCluster", &Kubernetes.ClusterArgs{
+//				ClusterAudit: &kubernetes.ClusterClusterAuditArgs{
+//					Enabled:  pulumi.Bool(true),
+//					LogSetId: pulumi.String(""),
+//					TopicId:  pulumi.String(""),
+//				},
+//				EventPersistence: &kubernetes.ClusterEventPersistenceArgs{
+//					Enabled:  pulumi.Bool(true),
+//					LogSetId: pulumi.String(""),
+//					TopicId:  pulumi.String(""),
+//				},
+//				LogAgent: &kubernetes.ClusterLogAgentArgs{
+//					Enabled:        pulumi.Bool(true),
+//					KubeletRootDir: pulumi.String(""),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type Cluster struct {
 	pulumi.CustomResourceState
 
@@ -873,17 +266,17 @@ type Cluster struct {
 	// Customized parameters for master component,such as kube-apiserver, kube-controller-manager, kube-scheduler.
 	ClusterExtraArgs ClusterClusterExtraArgsPtrOutput `pulumi:"clusterExtraArgs"`
 	// Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
-	ClusterInternet pulumi.BoolPtrOutput `pulumi:"clusterInternet"`
+	ClusterInternet pulumi.BoolOutput `pulumi:"clusterInternet"`
 	// Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
 	ClusterInternetDomain pulumi.StringPtrOutput `pulumi:"clusterInternetDomain"`
 	// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
-	ClusterInternetSecurityGroup pulumi.StringPtrOutput `pulumi:"clusterInternetSecurityGroup"`
+	ClusterInternetSecurityGroup pulumi.StringOutput `pulumi:"clusterInternetSecurityGroup"`
 	// Open intranet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
-	ClusterIntranet pulumi.BoolPtrOutput `pulumi:"clusterIntranet"`
+	ClusterIntranet pulumi.BoolOutput `pulumi:"clusterIntranet"`
 	// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
 	ClusterIntranetDomain pulumi.StringPtrOutput `pulumi:"clusterIntranetDomain"`
 	// Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
-	ClusterIntranetSubnetId pulumi.StringPtrOutput `pulumi:"clusterIntranetSubnetId"`
+	ClusterIntranetSubnetId pulumi.StringOutput `pulumi:"clusterIntranetSubnetId"`
 	// Indicates whether `ipvs` is enabled. Default is true. False means `iptables` is enabled.
 	ClusterIpvs pulumi.BoolPtrOutput `pulumi:"clusterIpvs"`
 	// Specify cluster level, valid for managed cluster, use data source `Kubernetes.getClusterLevels` to query available levels. Available value examples `L5`, `L20`, `L50`, `L100`, etc.
@@ -942,7 +335,7 @@ type Cluster struct {
 	LogAgent ClusterLogAgentPtrOutput `pulumi:"logAgent"`
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 	//
-	// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
+	// Deprecated: this argument was deprecated, use `clusterInternetSecurityGroup` instead.
 	ManagedClusterInternetSecurityPolicies pulumi.StringArrayOutput `pulumi:"managedClusterInternetSecurityPolicies"`
 	// Deploy the machine configuration information of the 'MASTER_ETCD' service, and create <=7 units for common users.
 	MasterConfigs ClusterMasterConfigArrayOutput `pulumi:"masterConfigs"`
@@ -994,7 +387,7 @@ func NewCluster(ctx *pulumi.Context,
 	if args.VpcId == nil {
 		return nil, errors.New("invalid value for required argument 'VpcId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Cluster
 	err := ctx.RegisterResource("tencentcloud:Kubernetes/cluster:Cluster", name, args, &resource, opts...)
 	if err != nil {
@@ -1115,7 +508,7 @@ type clusterState struct {
 	LogAgent *ClusterLogAgent `pulumi:"logAgent"`
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 	//
-	// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
+	// Deprecated: this argument was deprecated, use `clusterInternetSecurityGroup` instead.
 	ManagedClusterInternetSecurityPolicies []string `pulumi:"managedClusterInternetSecurityPolicies"`
 	// Deploy the machine configuration information of the 'MASTER_ETCD' service, and create <=7 units for common users.
 	MasterConfigs []ClusterMasterConfig `pulumi:"masterConfigs"`
@@ -1256,7 +649,7 @@ type ClusterState struct {
 	LogAgent ClusterLogAgentPtrInput
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 	//
-	// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
+	// Deprecated: this argument was deprecated, use `clusterInternetSecurityGroup` instead.
 	ManagedClusterInternetSecurityPolicies pulumi.StringArrayInput
 	// Deploy the machine configuration information of the 'MASTER_ETCD' service, and create <=7 units for common users.
 	MasterConfigs ClusterMasterConfigArrayInput
@@ -1385,7 +778,7 @@ type clusterArgs struct {
 	LogAgent *ClusterLogAgent `pulumi:"logAgent"`
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 	//
-	// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
+	// Deprecated: this argument was deprecated, use `clusterInternetSecurityGroup` instead.
 	ManagedClusterInternetSecurityPolicies []string `pulumi:"managedClusterInternetSecurityPolicies"`
 	// Deploy the machine configuration information of the 'MASTER_ETCD' service, and create <=7 units for common users.
 	MasterConfigs []ClusterMasterConfig `pulumi:"masterConfigs"`
@@ -1501,7 +894,7 @@ type ClusterArgs struct {
 	LogAgent ClusterLogAgentPtrInput
 	// this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 	//
-	// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
+	// Deprecated: this argument was deprecated, use `clusterInternetSecurityGroup` instead.
 	ManagedClusterInternetSecurityPolicies pulumi.StringArrayInput
 	// Deploy the machine configuration information of the 'MASTER_ETCD' service, and create <=7 units for common users.
 	MasterConfigs ClusterMasterConfigArrayInput
@@ -1559,7 +952,7 @@ func (i *Cluster) ToClusterOutputWithContext(ctx context.Context) ClusterOutput 
 // ClusterArrayInput is an input type that accepts ClusterArray and ClusterArrayOutput values.
 // You can construct a concrete instance of `ClusterArrayInput` via:
 //
-//          ClusterArray{ ClusterArgs{...} }
+//	ClusterArray{ ClusterArgs{...} }
 type ClusterArrayInput interface {
 	pulumi.Input
 
@@ -1584,7 +977,7 @@ func (i ClusterArray) ToClusterArrayOutputWithContext(ctx context.Context) Clust
 // ClusterMapInput is an input type that accepts ClusterMap and ClusterMapOutput values.
 // You can construct a concrete instance of `ClusterMapInput` via:
 //
-//          ClusterMap{ "key": ClusterArgs{...} }
+//	ClusterMap{ "key": ClusterArgs{...} }
 type ClusterMapInput interface {
 	pulumi.Input
 
@@ -1688,8 +1081,8 @@ func (o ClusterOutput) ClusterExtraArgs() ClusterClusterExtraArgsPtrOutput {
 }
 
 // Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
-func (o ClusterOutput) ClusterInternet() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *Cluster) pulumi.BoolPtrOutput { return v.ClusterInternet }).(pulumi.BoolPtrOutput)
+func (o ClusterOutput) ClusterInternet() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.BoolOutput { return v.ClusterInternet }).(pulumi.BoolOutput)
 }
 
 // Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
@@ -1698,13 +1091,13 @@ func (o ClusterOutput) ClusterInternetDomain() pulumi.StringPtrOutput {
 }
 
 // Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
-func (o ClusterOutput) ClusterInternetSecurityGroup() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.ClusterInternetSecurityGroup }).(pulumi.StringPtrOutput)
+func (o ClusterOutput) ClusterInternetSecurityGroup() pulumi.StringOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.ClusterInternetSecurityGroup }).(pulumi.StringOutput)
 }
 
 // Open intranet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
-func (o ClusterOutput) ClusterIntranet() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *Cluster) pulumi.BoolPtrOutput { return v.ClusterIntranet }).(pulumi.BoolPtrOutput)
+func (o ClusterOutput) ClusterIntranet() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.BoolOutput { return v.ClusterIntranet }).(pulumi.BoolOutput)
 }
 
 // Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
@@ -1713,8 +1106,8 @@ func (o ClusterOutput) ClusterIntranetDomain() pulumi.StringPtrOutput {
 }
 
 // Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
-func (o ClusterOutput) ClusterIntranetSubnetId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.ClusterIntranetSubnetId }).(pulumi.StringPtrOutput)
+func (o ClusterOutput) ClusterIntranetSubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.ClusterIntranetSubnetId }).(pulumi.StringOutput)
 }
 
 // Indicates whether `ipvs` is enabled. Default is true. False means `iptables` is enabled.
@@ -1859,7 +1252,7 @@ func (o ClusterOutput) LogAgent() ClusterLogAgentPtrOutput {
 
 // this argument was deprecated, use `clusterInternetSecurityGroup` instead. Security policies for managed cluster internet, like:'192.168.1.0/24' or '113.116.51.27', '0.0.0.0/0' means all. This field can only set when field `clusterDeployType` is 'MANAGED_CLUSTER' and `clusterInternet` is true. `managedClusterInternetSecurityPolicies` can not delete or empty once be set.
 //
-// Deprecated: this argument was deprecated, use `cluster_internet_security_group` instead.
+// Deprecated: this argument was deprecated, use `clusterInternetSecurityGroup` instead.
 func (o ClusterOutput) ManagedClusterInternetSecurityPolicies() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringArrayOutput { return v.ManagedClusterInternetSecurityPolicies }).(pulumi.StringArrayOutput)
 }

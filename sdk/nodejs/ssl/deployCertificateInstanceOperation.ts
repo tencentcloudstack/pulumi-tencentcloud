@@ -9,11 +9,12 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const deployCertificateInstance = new tencentcloud.Ssl.DeployCertificateInstanceOperation("deploy_certificate_instance", {
+ * const deployCertificateInstance = new tencentcloud.ssl.DeployCertificateInstanceOperation("deployCertificateInstance", {
  *     certificateId: "8x1eUSSl",
  *     instanceIdLists: [
  *         "cdndomain1.example.com|on",
@@ -22,13 +23,14 @@ import * as utilities from "../utilities";
  *     resourceType: "cdn",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * ssl deploy_certificate_instance can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ssl/deployCertificateInstanceOperation:DeployCertificateInstanceOperation deploy_certificate_instance deploy_certificate_instance_id
+ * $ pulumi import tencentcloud:Ssl/deployCertificateInstanceOperation:DeployCertificateInstanceOperation deploy_certificate_instance deploy_certificate_instance_id
  * ```
  */
 export class DeployCertificateInstanceOperation extends pulumi.CustomResource {

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BatchManifestArgs : Pulumi.ResourceArgs
+    public sealed class BatchManifestArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The location information of the list of objects.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BatchManifestArgs()
         {
         }
+        public static new BatchManifestArgs Empty => new BatchManifestArgs();
     }
 }

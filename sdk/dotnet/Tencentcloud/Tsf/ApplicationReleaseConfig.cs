@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var applicationReleaseConfig = new Tencentcloud.Tsf.ApplicationReleaseConfig("applicationReleaseConfig", new()
     ///     {
-    ///         var applicationReleaseConfig = new Tencentcloud.Tsf.ApplicationReleaseConfig("applicationReleaseConfig", new Tencentcloud.Tsf.ApplicationReleaseConfigArgs
-    ///         {
-    ///             ConfigId = "dcfg-nalqbqwv",
-    ///             GroupId = "group-yxmz72gv",
-    ///             ReleaseDesc = "terraform-test",
-    ///         });
-    ///     }
+    ///         ConfigId = "dcfg-nalqbqwv",
+    ///         GroupId = "group-yxmz72gv",
+    ///         ReleaseDesc = "terraform-test",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tsf application_release_config can be imported using the configId#groupId#configReleaseId, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tsf/applicationReleaseConfig:ApplicationReleaseConfig application_release_config dcfg-nalqbqwv#group-yxmz72gv#dcfgr-maeeq2ea
+    /// $ pulumi import tencentcloud:Tsf/applicationReleaseConfig:ApplicationReleaseConfig application_release_config dcfg-nalqbqwv#group-yxmz72gv#dcfgr-maeeq2ea
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/applicationReleaseConfig:ApplicationReleaseConfig")]
-    public partial class ApplicationReleaseConfig : Pulumi.CustomResource
+    public partial class ApplicationReleaseConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Application ID.
@@ -168,7 +169,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         }
     }
 
-    public sealed class ApplicationReleaseConfigArgs : Pulumi.ResourceArgs
+    public sealed class ApplicationReleaseConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Configuration ID.
@@ -191,9 +192,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ApplicationReleaseConfigArgs()
         {
         }
+        public static new ApplicationReleaseConfigArgs Empty => new ApplicationReleaseConfigArgs();
     }
 
-    public sealed class ApplicationReleaseConfigState : Pulumi.ResourceArgs
+    public sealed class ApplicationReleaseConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Application ID.
@@ -276,5 +278,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public ApplicationReleaseConfigState()
         {
         }
+        public static new ApplicationReleaseConfigState Empty => new ApplicationReleaseConfigState();
     }
 }

@@ -15,64 +15,58 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// <summary>
         /// Use this data source to query detailed information of tse nacos_server_interfaces
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var nacosServerInterfaces = Tencentcloud.Tse.GetNacosServerInterfaces.Invoke(new()
         ///     {
-        ///         var nacosServerInterfaces = Output.Create(Tencentcloud.Tse.GetNacosServerInterfaces.InvokeAsync(new Tencentcloud.Tse.GetNacosServerInterfacesArgs
-        ///         {
-        ///             InstanceId = "ins-xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ins-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetNacosServerInterfacesResult> InvokeAsync(GetNacosServerInterfacesArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetNacosServerInterfacesResult>("tencentcloud:Tse/getNacosServerInterfaces:getNacosServerInterfaces", args ?? new GetNacosServerInterfacesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetNacosServerInterfacesResult>("tencentcloud:Tse/getNacosServerInterfaces:getNacosServerInterfaces", args ?? new GetNacosServerInterfacesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tse nacos_server_interfaces
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var nacosServerInterfaces = Tencentcloud.Tse.GetNacosServerInterfaces.Invoke(new()
         ///     {
-        ///         var nacosServerInterfaces = Output.Create(Tencentcloud.Tse.GetNacosServerInterfaces.InvokeAsync(new Tencentcloud.Tse.GetNacosServerInterfacesArgs
-        ///         {
-        ///             InstanceId = "ins-xxxxxx",
-        ///         }));
-        ///     }
+        ///         InstanceId = "ins-xxxxxx",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetNacosServerInterfacesResult> Invoke(GetNacosServerInterfacesInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetNacosServerInterfacesResult>("tencentcloud:Tse/getNacosServerInterfaces:getNacosServerInterfaces", args ?? new GetNacosServerInterfacesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetNacosServerInterfacesResult>("tencentcloud:Tse/getNacosServerInterfaces:getNacosServerInterfaces", args ?? new GetNacosServerInterfacesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetNacosServerInterfacesArgs : Pulumi.InvokeArgs
+    public sealed class GetNacosServerInterfacesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// engine instance ID.
@@ -89,9 +83,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetNacosServerInterfacesArgs()
         {
         }
+        public static new GetNacosServerInterfacesArgs Empty => new GetNacosServerInterfacesArgs();
     }
 
-    public sealed class GetNacosServerInterfacesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetNacosServerInterfacesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// engine instance ID.
@@ -108,6 +103,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         public GetNacosServerInterfacesInvokeArgs()
         {
         }
+        public static new GetNacosServerInterfacesInvokeArgs Empty => new GetNacosServerInterfacesInvokeArgs();
     }
 
 

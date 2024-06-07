@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class ProcessMediaOperationInputInfoUrlInputInfoArgs : Pulumi.ResourceArgs
+    public sealed class ProcessMediaOperationInputInfoUrlInputInfoArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// URL of a video.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public ProcessMediaOperationInputInfoUrlInputInfoArgs()
         {
         }
+        public static new ProcessMediaOperationInputInfoUrlInputInfoArgs Empty => new ProcessMediaOperationInputInfoUrlInputInfoArgs();
     }
 }

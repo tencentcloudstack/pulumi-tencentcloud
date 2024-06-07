@@ -8,10 +8,11 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 func LookupRabbitmqVipInstance(ctx *pulumi.Context, args *LookupRabbitmqVipInstanceArgs, opts ...pulumi.InvokeOption) (*LookupRabbitmqVipInstanceResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupRabbitmqVipInstanceResult
 	err := ctx.Invoke("tencentcloud:Tdmq/getRabbitmqVipInstance:getRabbitmqVipInstance", args, &rv, opts...)
 	if err != nil {

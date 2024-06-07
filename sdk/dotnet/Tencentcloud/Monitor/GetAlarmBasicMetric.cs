@@ -15,74 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// <summary>
         /// Use this data source to query detailed information of monitor basic_metric
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var alarmMetric = Tencentcloud.Monitor.GetAlarmBasicMetric.Invoke(new()
         ///     {
-        ///         var alarmMetric = Output.Create(Tencentcloud.Monitor.GetAlarmBasicMetric.InvokeAsync(new Tencentcloud.Monitor.GetAlarmBasicMetricArgs
+        ///         Dimensions = new[]
         ///         {
-        ///             Dimensions = 
-        ///             {
-        ///                 "uuid",
-        ///             },
-        ///             MetricName = "WanOuttraffic",
-        ///             Namespace = "qce/cvm",
-        ///         }));
-        ///     }
+        ///             "uuid",
+        ///         },
+        ///         MetricName = "WanOuttraffic",
+        ///         Namespace = "qce/cvm",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetAlarmBasicMetricResult> InvokeAsync(GetAlarmBasicMetricArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetAlarmBasicMetricResult>("tencentcloud:Monitor/getAlarmBasicMetric:getAlarmBasicMetric", args ?? new GetAlarmBasicMetricArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmBasicMetricResult>("tencentcloud:Monitor/getAlarmBasicMetric:getAlarmBasicMetric", args ?? new GetAlarmBasicMetricArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of monitor basic_metric
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var alarmMetric = Tencentcloud.Monitor.GetAlarmBasicMetric.Invoke(new()
         ///     {
-        ///         var alarmMetric = Output.Create(Tencentcloud.Monitor.GetAlarmBasicMetric.InvokeAsync(new Tencentcloud.Monitor.GetAlarmBasicMetricArgs
+        ///         Dimensions = new[]
         ///         {
-        ///             Dimensions = 
-        ///             {
-        ///                 "uuid",
-        ///             },
-        ///             MetricName = "WanOuttraffic",
-        ///             Namespace = "qce/cvm",
-        ///         }));
-        ///     }
+        ///             "uuid",
+        ///         },
+        ///         MetricName = "WanOuttraffic",
+        ///         Namespace = "qce/cvm",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetAlarmBasicMetricResult> Invoke(GetAlarmBasicMetricInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetAlarmBasicMetricResult>("tencentcloud:Monitor/getAlarmBasicMetric:getAlarmBasicMetric", args ?? new GetAlarmBasicMetricInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetAlarmBasicMetricResult>("tencentcloud:Monitor/getAlarmBasicMetric:getAlarmBasicMetric", args ?? new GetAlarmBasicMetricInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetAlarmBasicMetricArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmBasicMetricArgs : global::Pulumi.InvokeArgs
     {
         [Input("dimensions")]
         private List<string>? _dimensions;
@@ -117,9 +111,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmBasicMetricArgs()
         {
         }
+        public static new GetAlarmBasicMetricArgs Empty => new GetAlarmBasicMetricArgs();
     }
 
-    public sealed class GetAlarmBasicMetricInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetAlarmBasicMetricInvokeArgs : global::Pulumi.InvokeArgs
     {
         [Input("dimensions")]
         private InputList<string>? _dimensions;
@@ -154,6 +149,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public GetAlarmBasicMetricInvokeArgs()
         {
         }
+        public static new GetAlarmBasicMetricInvokeArgs Empty => new GetAlarmBasicMetricInvokeArgs();
     }
 
 

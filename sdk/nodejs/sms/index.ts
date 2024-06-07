@@ -5,12 +5,16 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./sign";
-export * from "./template";
+export { SignArgs, SignState } from "./sign";
+export type Sign = import("./sign").Sign;
+export const Sign: typeof import("./sign").Sign = null as any;
+utilities.lazyLoad(exports, ["Sign"], () => require("./sign"));
 
-// Import resources to register:
-import { Sign } from "./sign";
-import { Template } from "./template";
+export { TemplateArgs, TemplateState } from "./template";
+export type Template = import("./template").Template;
+export const Template: typeof import("./template").Template = null as any;
+utilities.lazyLoad(exports, ["Template"], () => require("./template"));
+
 
 const _module = {
     version: utilities.getVersion(),

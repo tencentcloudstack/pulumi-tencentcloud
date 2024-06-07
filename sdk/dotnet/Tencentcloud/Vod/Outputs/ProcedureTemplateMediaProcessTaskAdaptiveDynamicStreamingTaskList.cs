@@ -19,6 +19,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Outputs
         /// </summary>
         public readonly string Definition;
         /// <summary>
+        /// Subtitle list, element is subtitle ID, support multiple subtitles, up to 16.
+        /// </summary>
+        public readonly ImmutableArray<string> SubtitleLists;
+        /// <summary>
         /// List of up to `10` image or text watermarks. Note: this field may return null, indicating that no valid values can be obtained.
         /// </summary>
         public readonly ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkList> WatermarkLists;
@@ -27,9 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod.Outputs
         private ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskList(
             string definition,
 
+            ImmutableArray<string> subtitleLists,
+
             ImmutableArray<Outputs.ProcedureTemplateMediaProcessTaskAdaptiveDynamicStreamingTaskListWatermarkList> watermarkLists)
         {
             Definition = definition;
+            SubtitleLists = subtitleLists;
             WatermarkLists = watermarkLists;
         }
     }

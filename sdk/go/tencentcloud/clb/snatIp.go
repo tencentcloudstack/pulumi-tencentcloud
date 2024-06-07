@@ -7,8 +7,9 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create a SnatIp of CLB instance.
@@ -18,51 +19,55 @@ import (
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		snatTest, err := Clb.NewInstance(ctx, "snatTest", &Clb.InstanceArgs{
-// 			NetworkType: pulumi.String("OPEN"),
-// 			ClbName:     pulumi.String("tf-clb-snat-test"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Clb.NewSnatIp(ctx, "foo", &Clb.SnatIpArgs{
-// 			ClbId: snatTest.ID(),
-// 			Ips: clb.SnatIpIpArray{
-// 				&clb.SnatIpIpArgs{
-// 					SubnetId: pulumi.String("subnet-12345678"),
-// 					Ip:       pulumi.String("172.16.0.1"),
-// 				},
-// 				&clb.SnatIpIpArgs{
-// 					SubnetId: pulumi.String("subnet-12345678"),
-// 					Ip:       pulumi.String("172.16.0.2"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			snatTest, err := Clb.NewInstance(ctx, "snatTest", &Clb.InstanceArgs{
+//				NetworkType: pulumi.String("OPEN"),
+//				ClbName:     pulumi.String("tf-clb-snat-test"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Clb.NewSnatIp(ctx, "foo", &Clb.SnatIpArgs{
+//				ClbId: snatTest.ID(),
+//				Ips: clb.SnatIpIpArray{
+//					&clb.SnatIpIpArgs{
+//						SubnetId: pulumi.String("subnet-12345678"),
+//						Ip:       pulumi.String("172.16.0.1"),
+//					},
+//					&clb.SnatIpIpArgs{
+//						SubnetId: pulumi.String("subnet-12345678"),
+//						Ip:       pulumi.String("172.16.0.2"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // ClbSnatIp instance can be imported by clb instance id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Clb/snatIp:SnatIp test clb_id
+// $ pulumi import tencentcloud:Clb/snatIp:SnatIp test clb_id
 // ```
 type SnatIp struct {
 	pulumi.CustomResourceState
@@ -83,7 +88,7 @@ func NewSnatIp(ctx *pulumi.Context,
 	if args.ClbId == nil {
 		return nil, errors.New("invalid value for required argument 'ClbId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SnatIp
 	err := ctx.RegisterResource("tencentcloud:Clb/snatIp:SnatIp", name, args, &resource, opts...)
 	if err != nil {
@@ -164,7 +169,7 @@ func (i *SnatIp) ToSnatIpOutputWithContext(ctx context.Context) SnatIpOutput {
 // SnatIpArrayInput is an input type that accepts SnatIpArray and SnatIpArrayOutput values.
 // You can construct a concrete instance of `SnatIpArrayInput` via:
 //
-//          SnatIpArray{ SnatIpArgs{...} }
+//	SnatIpArray{ SnatIpArgs{...} }
 type SnatIpArrayInput interface {
 	pulumi.Input
 
@@ -189,7 +194,7 @@ func (i SnatIpArray) ToSnatIpArrayOutputWithContext(ctx context.Context) SnatIpA
 // SnatIpMapInput is an input type that accepts SnatIpMap and SnatIpMapOutput values.
 // You can construct a concrete instance of `SnatIpMapInput` via:
 //
-//          SnatIpMap{ "key": SnatIpArgs{...} }
+//	SnatIpMap{ "key": SnatIpArgs{...} }
 type SnatIpMapInput interface {
 	pulumi.Input
 

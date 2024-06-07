@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const targetHealth = pulumi.output(tencentcloud.Clb.getTargetHealth({
+ * const targetHealth = tencentcloud.Clb.getTargetHealth({
  *     loadBalancerIds: ["lb-5dnrkgry"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getTargetHealth(args: GetTargetHealthArgs, opts?: pulumi.InvokeOptions): Promise<GetTargetHealthResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Clb/getTargetHealth:getTargetHealth", {
         "loadBalancerIds": args.loadBalancerIds,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetTargetHealthResult {
     readonly loadBalancers: outputs.Clb.GetTargetHealthLoadBalancer[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of clb targetHealth
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const targetHealth = tencentcloud.Clb.getTargetHealth({
+ *     loadBalancerIds: ["lb-5dnrkgry"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getTargetHealthOutput(args: GetTargetHealthOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTargetHealthResult> {
-    return pulumi.output(args).apply(a => getTargetHealth(a, opts))
+    return pulumi.output(args).apply((a: any) => getTargetHealth(a, opts))
 }
 
 /**

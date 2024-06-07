@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const idTest = pulumi.output(tencentcloud.Tcaplus.getIdls({
+ * const idTest = tencentcloud.Tcaplus.getIdls({
  *     clusterId: "19162256624",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getIdls(args: GetIdlsArgs, opts?: pulumi.InvokeOptions): Promise<GetIdlsResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Tcaplus/getIdls:getIdls", {
         "clusterId": args.clusterId,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetIdlsResult {
     readonly lists: outputs.Tcaplus.GetIdlsList[];
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query  IDL information of the TcaplusDB table.
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const idTest = tencentcloud.Tcaplus.getIdls({
+ *     clusterId: "19162256624",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getIdlsOutput(args: GetIdlsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetIdlsResult> {
-    return pulumi.output(args).apply(a => getIdls(a, opts))
+    return pulumi.output(args).apply((a: any) => getIdls(a, opts))
 }
 
 /**

@@ -7,75 +7,80 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a cynosdb accountPrivileges
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cynosdb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Cynosdb.NewAccountPrivileges(ctx, "accountPrivileges", &Cynosdb.AccountPrivilegesArgs{
-// 			AccountName: pulumi.String("test"),
-// 			ClusterId:   pulumi.String("cynosdbmysql-bws8h88b"),
-// 			DatabasePrivileges: cynosdb.AccountPrivilegesDatabasePrivilegeArray{
-// 				&cynosdb.AccountPrivilegesDatabasePrivilegeArgs{
-// 					Db: pulumi.String("users"),
-// 					Privileges: pulumi.StringArray{
-// 						pulumi.String("DROP"),
-// 						pulumi.String("REFERENCES"),
-// 						pulumi.String("INDEX"),
-// 						pulumi.String("CREATE VIEW"),
-// 						pulumi.String("INSERT"),
-// 						pulumi.String("EVENT"),
-// 					},
-// 				},
-// 			},
-// 			GlobalPrivileges: pulumi.StringArray{
-// 				pulumi.String("CREATE"),
-// 				pulumi.String("DROP"),
-// 				pulumi.String("ALTER"),
-// 				pulumi.String("CREATE TEMPORARY TABLES"),
-// 				pulumi.String("CREATE VIEW"),
-// 			},
-// 			Host: pulumi.String("%"),
-// 			TablePrivileges: cynosdb.AccountPrivilegesTablePrivilegeArray{
-// 				&cynosdb.AccountPrivilegesTablePrivilegeArgs{
-// 					Db: pulumi.String("users"),
-// 					Privileges: pulumi.StringArray{
-// 						pulumi.String("ALTER"),
-// 						pulumi.String("REFERENCES"),
-// 						pulumi.String("SHOW VIEW"),
-// 					},
-// 					TableName: pulumi.String("tb_user_name"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cynosdb.NewAccountPrivileges(ctx, "accountPrivileges", &Cynosdb.AccountPrivilegesArgs{
+//				AccountName: pulumi.String("test"),
+//				ClusterId:   pulumi.String("cynosdbmysql-bws8h88b"),
+//				DatabasePrivileges: cynosdb.AccountPrivilegesDatabasePrivilegeArray{
+//					&cynosdb.AccountPrivilegesDatabasePrivilegeArgs{
+//						Db: pulumi.String("users"),
+//						Privileges: pulumi.StringArray{
+//							pulumi.String("DROP"),
+//							pulumi.String("REFERENCES"),
+//							pulumi.String("INDEX"),
+//							pulumi.String("CREATE VIEW"),
+//							pulumi.String("INSERT"),
+//							pulumi.String("EVENT"),
+//						},
+//					},
+//				},
+//				GlobalPrivileges: pulumi.StringArray{
+//					pulumi.String("CREATE"),
+//					pulumi.String("DROP"),
+//					pulumi.String("ALTER"),
+//					pulumi.String("CREATE TEMPORARY TABLES"),
+//					pulumi.String("CREATE VIEW"),
+//				},
+//				Host: pulumi.String("%"),
+//				TablePrivileges: cynosdb.AccountPrivilegesTablePrivilegeArray{
+//					&cynosdb.AccountPrivilegesTablePrivilegeArgs{
+//						Db: pulumi.String("users"),
+//						Privileges: pulumi.StringArray{
+//							pulumi.String("ALTER"),
+//							pulumi.String("REFERENCES"),
+//							pulumi.String("SHOW VIEW"),
+//						},
+//						TableName: pulumi.String("tb_user_name"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // cynosdb account_privileges can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Cynosdb/accountPrivileges:AccountPrivileges account_privileges account_privileges_id
+// $ pulumi import tencentcloud:Cynosdb/accountPrivileges:AccountPrivileges account_privileges account_privileges_id
 // ```
 type AccountPrivileges struct {
 	pulumi.CustomResourceState
@@ -110,7 +115,7 @@ func NewAccountPrivileges(ctx *pulumi.Context,
 	if args.GlobalPrivileges == nil {
 		return nil, errors.New("invalid value for required argument 'GlobalPrivileges'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource AccountPrivileges
 	err := ctx.RegisterResource("tencentcloud:Cynosdb/accountPrivileges:AccountPrivileges", name, args, &resource, opts...)
 	if err != nil {
@@ -223,7 +228,7 @@ func (i *AccountPrivileges) ToAccountPrivilegesOutputWithContext(ctx context.Con
 // AccountPrivilegesArrayInput is an input type that accepts AccountPrivilegesArray and AccountPrivilegesArrayOutput values.
 // You can construct a concrete instance of `AccountPrivilegesArrayInput` via:
 //
-//          AccountPrivilegesArray{ AccountPrivilegesArgs{...} }
+//	AccountPrivilegesArray{ AccountPrivilegesArgs{...} }
 type AccountPrivilegesArrayInput interface {
 	pulumi.Input
 
@@ -248,7 +253,7 @@ func (i AccountPrivilegesArray) ToAccountPrivilegesArrayOutputWithContext(ctx co
 // AccountPrivilegesMapInput is an input type that accepts AccountPrivilegesMap and AccountPrivilegesMapOutput values.
 // You can construct a concrete instance of `AccountPrivilegesMapInput` via:
 //
-//          AccountPrivilegesMap{ "key": AccountPrivilegesArgs{...} }
+//	AccountPrivilegesMap{ "key": AccountPrivilegesArgs{...} }
 type AccountPrivilegesMapInput interface {
 	pulumi.Input
 

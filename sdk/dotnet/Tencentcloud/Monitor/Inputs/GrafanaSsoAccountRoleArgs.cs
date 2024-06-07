@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class GrafanaSsoAccountRoleArgs : Pulumi.ResourceArgs
+    public sealed class GrafanaSsoAccountRoleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Grafana organization id string.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public GrafanaSsoAccountRoleArgs()
         {
         }
+        public static new GrafanaSsoAccountRoleArgs Empty => new GrafanaSsoAccountRoleArgs();
     }
 }

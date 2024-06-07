@@ -15,49 +15,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var dataEngine = new Tencentcloud.Dlc.DataEngine("dataEngine", new()
     ///     {
-    ///         var dataEngine = new Tencentcloud.Dlc.DataEngine("dataEngine", new Tencentcloud.Dlc.DataEngineArgs
-    ///         {
-    ///             AutoResume = false,
-    ///             AutoSuspend = false,
-    ///             CidrBlock = "10.255.0.0/16",
-    ///             ClusterType = "spark_cu",
-    ///             CrontabResumeSuspend = 0,
-    ///             DataEngineName = "testSpark",
-    ///             DefaultDataEngine = false,
-    ///             EngineExecType = "BATCH",
-    ///             EngineType = "spark",
-    ///             MaxClusters = 1,
-    ///             Message = "test spark1",
-    ///             MinClusters = 1,
-    ///             Mode = 1,
-    ///             PayMode = 0,
-    ///             Size = 16,
-    ///             TimeSpan = 1,
-    ///             TimeUnit = "h",
-    ///         });
-    ///     }
+    ///         AutoResume = false,
+    ///         AutoSuspend = false,
+    ///         CidrBlock = "10.255.0.0/16",
+    ///         ClusterType = "spark_cu",
+    ///         CrontabResumeSuspend = 0,
+    ///         DataEngineName = "testSpark",
+    ///         DefaultDataEngine = false,
+    ///         EngineExecType = "BATCH",
+    ///         EngineType = "spark",
+    ///         MaxClusters = 1,
+    ///         Message = "test spark1",
+    ///         MinClusters = 1,
+    ///         Mode = 1,
+    ///         PayMode = 0,
+    ///         Size = 16,
+    ///         TimeSpan = 1,
+    ///         TimeUnit = "h",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// dlc data_engine can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Dlc/dataEngine:DataEngine data_engine data_engine_id
+    /// $ pulumi import tencentcloud:Dlc/dataEngine:DataEngine data_engine data_engine_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/dataEngine:DataEngine")]
-    public partial class DataEngine : Pulumi.CustomResource
+    public partial class DataEngine : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Engine auto renew, only support 0: Default, 1: AutoRenewON, 2: AutoRenewOFF.
@@ -278,7 +279,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         }
     }
 
-    public sealed class DataEngineArgs : Pulumi.ResourceArgs
+    public sealed class DataEngineArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Engine auto renew, only support 0: Default, 1: AutoRenewON, 2: AutoRenewOFF.
@@ -463,9 +464,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public DataEngineArgs()
         {
         }
+        public static new DataEngineArgs Empty => new DataEngineArgs();
     }
 
-    public sealed class DataEngineState : Pulumi.ResourceArgs
+    public sealed class DataEngineState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Engine auto renew, only support 0: Default, 1: AutoRenewON, 2: AutoRenewOFF.
@@ -650,5 +652,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         public DataEngineState()
         {
         }
+        public static new DataEngineState Empty => new DataEngineState();
     }
 }

@@ -15,53 +15,56 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var parameterTemplate = new Tencentcloud.Postgresql.ParameterTemplate("parameterTemplate", new()
     ///     {
-    ///         var parameterTemplate = new Tencentcloud.Postgresql.ParameterTemplate("parameterTemplate", new Tencentcloud.Postgresql.ParameterTemplateArgs
+    ///         DbEngine = "postgresql",
+    ///         DbMajorVersion = "13",
+    ///         DeleteParamSets = new[]
     ///         {
-    ///             DbEngine = "postgresql",
-    ///             DbMajorVersion = "13",
-    ///             DeleteParamSets = 
+    ///             "lc_time",
+    ///         },
+    ///         ModifyParamEntrySets = new[]
+    ///         {
+    ///             new Tencentcloud.Postgresql.Inputs.ParameterTemplateModifyParamEntrySetArgs
     ///             {
-    ///                 "lc_time",
+    ///                 ExpectedValue = "UTC",
+    ///                 Name = "timezone",
     ///             },
-    ///             ModifyParamEntrySets = 
+    ///             new Tencentcloud.Postgresql.Inputs.ParameterTemplateModifyParamEntrySetArgs
     ///             {
-    ///                 new Tencentcloud.Postgresql.Inputs.ParameterTemplateModifyParamEntrySetArgs
-    ///                 {
-    ///                     ExpectedValue = "UTC",
-    ///                     Name = "timezone",
-    ///                 },
-    ///                 new Tencentcloud.Postgresql.Inputs.ParameterTemplateModifyParamEntrySetArgs
-    ///                 {
-    ///                     ExpectedValue = "123",
-    ///                     Name = "lock_timeout",
-    ///                 },
+    ///                 ExpectedValue = "123",
+    ///                 Name = "lock_timeout",
     ///             },
-    ///             TemplateDescription = "For_tf_test",
-    ///             TemplateName = "your_temp_name",
-    ///         });
-    ///     }
+    ///         },
+    ///         TemplateDescription = "For_tf_test",
+    ///         TemplateName = "your_temp_name",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
-    /// postgresql parameter_template can be imported using the id, e.g. Notice`modify_param_entry_set` and `delete_param_set` do not support import.
+    /// postgresql parameter_template can be imported using the id, e.g.
+    /// 
+    /// Notice: `modify_param_entry_set` and `delete_param_set` do not support import.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Postgresql/parameterTemplate:ParameterTemplate parameter_template parameter_template_id
+    /// $ pulumi import tencentcloud:Postgresql/parameterTemplate:ParameterTemplate parameter_template parameter_template_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/parameterTemplate:ParameterTemplate")]
-    public partial class ParameterTemplate : Pulumi.CustomResource
+    public partial class ParameterTemplate : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Database engine, such as postgresql, mssql_compatible.
@@ -144,7 +147,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
     }
 
-    public sealed class ParameterTemplateArgs : Pulumi.ResourceArgs
+    public sealed class ParameterTemplateArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Database engine, such as postgresql, mssql_compatible.
@@ -197,9 +200,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public ParameterTemplateArgs()
         {
         }
+        public static new ParameterTemplateArgs Empty => new ParameterTemplateArgs();
     }
 
-    public sealed class ParameterTemplateState : Pulumi.ResourceArgs
+    public sealed class ParameterTemplateState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Database engine, such as postgresql, mssql_compatible.
@@ -252,5 +256,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public ParameterTemplateState()
         {
         }
+        public static new ParameterTemplateState Empty => new ParameterTemplateState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Inputs
 {
 
-    public sealed class FreeCertificateDvAuthArgs : Pulumi.ResourceArgs
+    public sealed class FreeCertificateDvAuthArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// DV authentication key.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Inputs
         public FreeCertificateDvAuthArgs()
         {
         }
+        public static new FreeCertificateDvAuthArgs Empty => new FreeCertificateDvAuthArgs();
     }
 }

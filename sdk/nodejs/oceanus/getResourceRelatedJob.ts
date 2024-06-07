@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,24 +11,23 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const example = pulumi.output(tencentcloud.Oceanus.getResourceRelatedJob({
+ * const example = tencentcloud.Oceanus.getResourceRelatedJob({
  *     descByJobConfigCreateTime: 0,
  *     resourceConfigVersion: 1,
  *     resourceId: "resource-8y9lzcuz",
  *     workSpaceId: "space-2idq8wbr",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getResourceRelatedJob(args: GetResourceRelatedJobArgs, opts?: pulumi.InvokeOptions): Promise<GetResourceRelatedJobResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Oceanus/getResourceRelatedJob:getResourceRelatedJob", {
         "descByJobConfigCreateTime": args.descByJobConfigCreateTime,
         "resourceConfigVersion": args.resourceConfigVersion,
@@ -81,9 +81,27 @@ export interface GetResourceRelatedJobResult {
     readonly resultOutputFile?: string;
     readonly workSpaceId?: string;
 }
-
+/**
+ * Use this data source to query detailed information of oceanus resourceRelatedJob
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Oceanus.getResourceRelatedJob({
+ *     descByJobConfigCreateTime: 0,
+ *     resourceConfigVersion: 1,
+ *     resourceId: "resource-8y9lzcuz",
+ *     workSpaceId: "space-2idq8wbr",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getResourceRelatedJobOutput(args: GetResourceRelatedJobOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetResourceRelatedJobResult> {
-    return pulumi.output(args).apply(a => getResourceRelatedJob(a, opts))
+    return pulumi.output(args).apply((a: any) => getResourceRelatedJob(a, opts))
 }
 
 /**

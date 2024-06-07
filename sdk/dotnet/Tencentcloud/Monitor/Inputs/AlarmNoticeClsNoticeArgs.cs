@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
 {
 
-    public sealed class AlarmNoticeClsNoticeArgs : Pulumi.ResourceArgs
+    public sealed class AlarmNoticeClsNoticeArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Start-stop status, can not be transmitted, default enabled. 0= Disabled, 1= enabled.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor.Inputs
         public AlarmNoticeClsNoticeArgs()
         {
         }
+        public static new AlarmNoticeClsNoticeArgs Empty => new AlarmNoticeClsNoticeArgs();
     }
 }

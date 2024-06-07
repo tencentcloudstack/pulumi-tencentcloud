@@ -16,14 +16,15 @@ package main
 
 import (
 	"encoding/json"
+	"log"
+	"os"
+	"regexp"
+	"strings"
+
 	"github.com/pulumi/pulumi-terraform-bridge/v3/pkg/tfgen"
 	"github.com/pulumi/pulumi/pkg/v3/codegen/schema"
 	tencentcloud "github.com/tencentcloudstack/pulumi-tencentcloud/provider"
 	"github.com/tencentcloudstack/pulumi-tencentcloud/provider/pkg/version"
-	"io/ioutil"
-	"log"
-	"regexp"
-	"strings"
 )
 
 func main() {
@@ -33,9 +34,9 @@ func main() {
 
 // Hacking import statement replacement '@pulumi/tencentcloud' -> '@tencentcloud_iac/pulumi'
 // This function takes NO effect to example of `sdk/nodejs`
-func temporaryReplaceCodeExampleImportStatement()  {
+func temporaryReplaceCodeExampleImportStatement() {
 	schemaPath := "./provider/cmd/pulumi-resource-tencentcloud/schema.json"
-	schemaContents, err := ioutil.ReadFile(schemaPath)
+	schemaContents, err := os.ReadFile(schemaPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -52,7 +53,9 @@ func temporaryReplaceCodeExampleImportStatement()  {
 		f := packageSpec.Functions[i]
 		desc := f.Description
 		f.Description = mismatchImportPathRE.ReplaceAllString(desc, "")
-		f.Description = strings.ReplaceAll(desc, "\nimport * as tencentcloud from \"@pulumi/tencentcloud\";", "\nimport * as tencentcloud from \"@tencentcloud_iac/pulumi\";")
+		f.Description = strings.ReplaceAll(desc,
+			"\nimport * as tencentcloud from \"@pulumi/tencentcloud\";",
+			"\nimport * as tencentcloud from \"@tencentcloud_iac/pulumi\";")
 		packageSpec.Functions[i] = f
 	}
 
@@ -60,12 +63,18 @@ func temporaryReplaceCodeExampleImportStatement()  {
 		r := packageSpec.Resources[i]
 		desc := r.Description
 		r.Description = mismatchImportPathRE.ReplaceAllString(desc, "")
-		r.Description = strings.ReplaceAll(desc, "\nimport * as tencentcloud from \"@pulumi/tencentcloud\";", "\nimport * as tencentcloud from \"@tencentcloud_iac/pulumi\";")
+		r.Description = strings.ReplaceAll(desc,
+			"\nimport * as tencentcloud from \"@pulumi/tencentcloud\";",
+			"\nimport * as tencentcloud from \"@tencentcloud_iac/pulumi\";")
 		packageSpec.Resources[i] = r
 	}
 
 	b, err := json.MarshalIndent(packageSpec, "", "    ")
-	if err := ioutil.WriteFile(schemaPath, b, 0600); err != nil {
+	if err != nil {
+		log.Fatal(err) // Check the error returned by json.MarshalIndent
+	}
+
+	if err := os.WriteFile(schemaPath, b, 0600); err != nil {
 		log.Fatal(err)
 	}
 }

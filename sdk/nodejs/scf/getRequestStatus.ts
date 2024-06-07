@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,23 +11,22 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const requestStatus = pulumi.output(tencentcloud.Scf.getRequestStatus({
+ * const requestStatus = tencentcloud.Scf.getRequestStatus({
  *     functionName: "keep-1676351130",
  *     functionRequestId: "9de9405a-e33a-498d-bb59-e80b7bed1191",
  *     namespace: "default",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getRequestStatus(args: GetRequestStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetRequestStatusResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Scf/getRequestStatus:getRequestStatus", {
         "endTime": args.endTime,
         "functionName": args.functionName,
@@ -92,9 +92,26 @@ export interface GetRequestStatusResult {
      */
     readonly startTime?: string;
 }
-
+/**
+ * Use this data source to query detailed information of scf requestStatus
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const requestStatus = tencentcloud.Scf.getRequestStatus({
+ *     functionName: "keep-1676351130",
+ *     functionRequestId: "9de9405a-e33a-498d-bb59-e80b7bed1191",
+ *     namespace: "default",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getRequestStatusOutput(args: GetRequestStatusOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRequestStatusResult> {
-    return pulumi.output(args).apply(a => getRequestStatus(a, opts))
+    return pulumi.output(args).apply((a: any) => getRequestStatus(a, opts))
 }
 
 /**

@@ -15,36 +15,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var ddosBlackWhiteIp = new Tencentcloud.Antiddos.DdosBlackWhiteIp("ddosBlackWhiteIp", new()
     ///     {
-    ///         var ddosBlackWhiteIp = new Tencentcloud.Antiddos.DdosBlackWhiteIp("ddosBlackWhiteIp", new Tencentcloud.Antiddos.DdosBlackWhiteIpArgs
-    ///         {
-    ///             InstanceId = "bgp-xxxxxx",
-    ///             Ip = "1.2.3.5",
-    ///             Mask = 0,
-    ///             Type = "black",
-    ///         });
-    ///     }
+    ///         InstanceId = "bgp-xxxxxx",
+    ///         Ip = "1.2.3.5",
+    ///         Mask = 0,
+    ///         Type = "black",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// antiddos ddos_black_white_ip can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Antiddos/ddosBlackWhiteIp:DdosBlackWhiteIp ddos_black_white_ip ${instanceId}#${ip}
+    /// $ pulumi import tencentcloud:Antiddos/ddosBlackWhiteIp:DdosBlackWhiteIp ddos_black_white_ip ${instanceId}#${ip}
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Antiddos/ddosBlackWhiteIp:DdosBlackWhiteIp")]
-    public partial class DdosBlackWhiteIp : Pulumi.CustomResource
+    public partial class DdosBlackWhiteIp : global::Pulumi.CustomResource
     {
         /// <summary>
         /// instance id.
@@ -115,7 +116,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         }
     }
 
-    public sealed class DdosBlackWhiteIpArgs : Pulumi.ResourceArgs
+    public sealed class DdosBlackWhiteIpArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance id.
@@ -144,9 +145,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public DdosBlackWhiteIpArgs()
         {
         }
+        public static new DdosBlackWhiteIpArgs Empty => new DdosBlackWhiteIpArgs();
     }
 
-    public sealed class DdosBlackWhiteIpState : Pulumi.ResourceArgs
+    public sealed class DdosBlackWhiteIpState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// instance id.
@@ -175,5 +177,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         public DdosBlackWhiteIpState()
         {
         }
+        public static new DdosBlackWhiteIpState Empty => new DdosBlackWhiteIpState();
     }
 }

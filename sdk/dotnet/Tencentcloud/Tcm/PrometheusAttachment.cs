@@ -18,40 +18,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var prometheusAttachment = new Tencentcloud.Tcm.PrometheusAttachment("prometheusAttachment", new()
     ///     {
-    ///         var prometheusAttachment = new Tencentcloud.Tcm.PrometheusAttachment("prometheusAttachment", new Tencentcloud.Tcm.PrometheusAttachmentArgs
+    ///         MeshId = "mesh-rofjmxxx",
+    ///         Prometheus = new Tencentcloud.Tcm.Inputs.PrometheusAttachmentPrometheusArgs
     ///         {
-    ///             MeshId = "mesh-rofjmxxx",
-    ///             Prometheus = new Tencentcloud.Tcm.Inputs.PrometheusAttachmentPrometheusArgs
-    ///             {
-    ///                 InstanceId = "",
-    ///                 Region = "ap-guangzhou",
-    ///                 SubnetId = "subnet-driddxxx",
-    ///                 VpcId = "vpc-pewdpxxx",
-    ///             },
-    ///         });
-    ///     }
+    ///             InstanceId = "",
+    ///             Region = "ap-guangzhou",
+    ///             SubnetId = "subnet-driddxxx",
+    ///             VpcId = "vpc-pewdpxxx",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tcm prometheus_attachment can be imported using the mesh_id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tcm/prometheusAttachment:PrometheusAttachment prometheus_attachment mesh-rofjmxxx
+    /// $ pulumi import tencentcloud:Tcm/prometheusAttachment:PrometheusAttachment prometheus_attachment mesh-rofjmxxx
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcm/prometheusAttachment:PrometheusAttachment")]
-    public partial class PrometheusAttachment : Pulumi.CustomResource
+    public partial class PrometheusAttachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Mesh ID.
@@ -110,7 +111,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         }
     }
 
-    public sealed class PrometheusAttachmentArgs : Pulumi.ResourceArgs
+    public sealed class PrometheusAttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Mesh ID.
@@ -127,9 +128,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         public PrometheusAttachmentArgs()
         {
         }
+        public static new PrometheusAttachmentArgs Empty => new PrometheusAttachmentArgs();
     }
 
-    public sealed class PrometheusAttachmentState : Pulumi.ResourceArgs
+    public sealed class PrometheusAttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Mesh ID.
@@ -146,5 +148,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         public PrometheusAttachmentState()
         {
         }
+        public static new PrometheusAttachmentState Empty => new PrometheusAttachmentState();
     }
 }

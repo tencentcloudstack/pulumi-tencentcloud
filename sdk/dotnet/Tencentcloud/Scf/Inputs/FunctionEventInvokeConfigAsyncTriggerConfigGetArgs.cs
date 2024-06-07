@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
 {
 
-    public sealed class FunctionEventInvokeConfigAsyncTriggerConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class FunctionEventInvokeConfigAsyncTriggerConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Message retention period.
@@ -34,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf.Inputs
         public FunctionEventInvokeConfigAsyncTriggerConfigGetArgs()
         {
         }
+        public static new FunctionEventInvokeConfigAsyncTriggerConfigGetArgs Empty => new FunctionEventInvokeConfigAsyncTriggerConfigGetArgs();
     }
 }

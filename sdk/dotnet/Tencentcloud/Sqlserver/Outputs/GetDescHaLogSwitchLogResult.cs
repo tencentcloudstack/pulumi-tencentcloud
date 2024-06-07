@@ -14,10 +14,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver.Outputs
     [OutputType]
     public sealed class GetDescHaLogSwitchLogResult
     {
+        /// <summary>
+        /// Switch end time Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string EndTime;
+        /// <summary>
+        /// Switch event ID Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string EventId;
+        /// <summary>
+        /// Machine failure causes automatic switching Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string Reason;
+        /// <summary>
+        /// Switch start time Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly string StartTime;
+        /// <summary>
+        /// Switching mode 0-system automatic switching, 1-manual switching Note: This field may return null, indicating that no valid value can be obtained.
+        /// </summary>
         public readonly int SwitchType;
 
         [OutputConstructor]

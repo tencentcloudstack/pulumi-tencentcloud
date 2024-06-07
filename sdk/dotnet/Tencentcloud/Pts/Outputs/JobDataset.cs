@@ -14,19 +14,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Outputs
     [OutputType]
     public sealed class JobDataset
     {
+        /// <summary>
+        /// File ID.
+        /// </summary>
         public readonly string? FileId;
+        /// <summary>
+        /// Header data row.
+        /// </summary>
         public readonly ImmutableArray<string> HeadLines;
+        /// <summary>
+        /// Parameter name array.
+        /// </summary>
         public readonly ImmutableArray<string> HeaderColumns;
+        /// <summary>
+        /// Whether the first line is the parameter name.
+        /// </summary>
         public readonly bool HeaderInFile;
+        /// <summary>
+        /// Number of file lines.
+        /// </summary>
         public readonly int? LineCount;
+        /// <summary>
+        /// The file name where the test dataset is located.
+        /// </summary>
         public readonly string Name;
+        /// <summary>
+        /// Number of file bytes.
+        /// </summary>
         public readonly int? Size;
+        /// <summary>
+        /// Test whether the dataset is fragmented.
+        /// </summary>
         public readonly bool Split;
+        /// <summary>
+        /// Trailing data row.
+        /// </summary>
         public readonly ImmutableArray<string> TailLines;
         /// <summary>
         /// Scene Type.
         /// </summary>
         public readonly string? Type;
+        /// <summary>
+        /// Update time.
+        /// </summary>
         public readonly string? UpdatedAt;
 
         [OutputConstructor]

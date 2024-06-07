@@ -15,27 +15,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var invokeFunction = new Tencentcloud.Scf.InvokeFunction("invokeFunction", new()
     ///     {
-    ///         var invokeFunction = new Tencentcloud.Scf.InvokeFunction("invokeFunction", new Tencentcloud.Scf.InvokeFunctionArgs
-    ///         {
-    ///             FunctionName = "keep-1676351130",
-    ///             Namespace = "default",
-    ///             Qualifier = "2",
-    ///         });
-    ///     }
+    ///         FunctionName = "keep-1676351130",
+    ///         Namespace = "default",
+    ///         Qualifier = "2",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/invokeFunction:InvokeFunction")]
-    public partial class InvokeFunction : Pulumi.CustomResource
+    public partial class InvokeFunction : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Function running parameter, which is in the JSON format. The maximum parameter size is 6 MB for synchronized invocations and 128KB for asynchronized invocations. This field corresponds to event input parameter.
@@ -124,7 +125,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         }
     }
 
-    public sealed class InvokeFunctionArgs : Pulumi.ResourceArgs
+    public sealed class InvokeFunctionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Function running parameter, which is in the JSON format. The maximum parameter size is 6 MB for synchronized invocations and 128KB for asynchronized invocations. This field corresponds to event input parameter.
@@ -171,9 +172,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public InvokeFunctionArgs()
         {
         }
+        public static new InvokeFunctionArgs Empty => new InvokeFunctionArgs();
     }
 
-    public sealed class InvokeFunctionState : Pulumi.ResourceArgs
+    public sealed class InvokeFunctionState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Function running parameter, which is in the JSON format. The maximum parameter size is 6 MB for synchronized invocations and 128KB for asynchronized invocations. This field corresponds to event input parameter.
@@ -220,5 +222,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public InvokeFunctionState()
         {
         }
+        public static new InvokeFunctionState Empty => new InvokeFunctionState();
     }
 }

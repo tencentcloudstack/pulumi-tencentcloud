@@ -8,36 +8,41 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of mariadb fileDownloadUrl
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mariadb"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mariadb.GetFileDownloadUrl(ctx, &mariadb.GetFileDownloadUrlArgs{
-// 			FilePath:   "/cos_backup/test.txt",
-// 			InstanceId: "tdsql-9vqvls95",
-// 		}, nil)
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mariadb.GetFileDownloadUrl(ctx, &mariadb.GetFileDownloadUrlArgs{
+//				FilePath:   "/cos_backup/test.txt",
+//				InstanceId: "tdsql-9vqvls95",
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 func GetFileDownloadUrl(ctx *pulumi.Context, args *GetFileDownloadUrlArgs, opts ...pulumi.InvokeOption) (*GetFileDownloadUrlResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetFileDownloadUrlResult
 	err := ctx.Invoke("tencentcloud:Mariadb/getFileDownloadUrl:getFileDownloadUrl", args, &rv, opts...)
 	if err != nil {

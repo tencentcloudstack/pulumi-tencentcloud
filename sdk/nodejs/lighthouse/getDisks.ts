@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const disks = pulumi.output(tencentcloud.Lighthouse.getDisks({
+ * const disks = tencentcloud.Lighthouse.getDisks({
  *     diskIds: ["lhdisk-xxxxxx"],
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDisks(args?: GetDisksArgs, opts?: pulumi.InvokeOptions): Promise<GetDisksResult> {
     args = args || {};
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Lighthouse/getDisks:getDisks", {
         "diskIds": args.diskIds,
         "filters": args.filters,
@@ -67,9 +67,24 @@ export interface GetDisksResult {
     readonly id: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of lighthouse disk
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const disks = tencentcloud.Lighthouse.getDisks({
+ *     diskIds: ["lhdisk-xxxxxx"],
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDisksOutput(args?: GetDisksOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDisksResult> {
-    return pulumi.output(args).apply(a => getDisks(a, opts))
+    return pulumi.output(args).apply((a: any) => getDisks(a, opts))
 }
 
 /**

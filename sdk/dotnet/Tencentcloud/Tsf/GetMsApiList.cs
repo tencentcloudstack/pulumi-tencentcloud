@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// <summary>
         /// Use this data source to query detailed information of tsf ms_api_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var msApiList = Tencentcloud.Tsf.GetMsApiList.Invoke(new()
         ///     {
-        ///         var msApiList = Output.Create(Tencentcloud.Tsf.GetMsApiList.InvokeAsync(new Tencentcloud.Tsf.GetMsApiListArgs
-        ///         {
-        ///             MicroserviceId = "ms-yq3jo6jd",
-        ///             SearchWord = "echo",
-        ///         }));
-        ///     }
+        ///         MicroserviceId = "ms-yq3jo6jd",
+        ///         SearchWord = "echo",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetMsApiListResult> InvokeAsync(GetMsApiListArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetMsApiListResult>("tencentcloud:Tsf/getMsApiList:getMsApiList", args ?? new GetMsApiListArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetMsApiListResult>("tencentcloud:Tsf/getMsApiList:getMsApiList", args ?? new GetMsApiListArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tsf ms_api_list
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var msApiList = Tencentcloud.Tsf.GetMsApiList.Invoke(new()
         ///     {
-        ///         var msApiList = Output.Create(Tencentcloud.Tsf.GetMsApiList.InvokeAsync(new Tencentcloud.Tsf.GetMsApiListArgs
-        ///         {
-        ///             MicroserviceId = "ms-yq3jo6jd",
-        ///             SearchWord = "echo",
-        ///         }));
-        ///     }
+        ///         MicroserviceId = "ms-yq3jo6jd",
+        ///         SearchWord = "echo",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetMsApiListResult> Invoke(GetMsApiListInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetMsApiListResult>("tencentcloud:Tsf/getMsApiList:getMsApiList", args ?? new GetMsApiListInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetMsApiListResult>("tencentcloud:Tsf/getMsApiList:getMsApiList", args ?? new GetMsApiListInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetMsApiListArgs : Pulumi.InvokeArgs
+    public sealed class GetMsApiListArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Microservice Id.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetMsApiListArgs()
         {
         }
+        public static new GetMsApiListArgs Empty => new GetMsApiListArgs();
     }
 
-    public sealed class GetMsApiListInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetMsApiListInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Microservice Id.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         public GetMsApiListInvokeArgs()
         {
         }
+        public static new GetMsApiListInvokeArgs Empty => new GetMsApiListInvokeArgs();
     }
 
 

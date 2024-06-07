@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
 {
 
-    public sealed class JobConfigExpertModeConfigurationSlotSharingGroupSpecGetArgs : Pulumi.ResourceArgs
+    public sealed class JobConfigExpertModeConfigurationSlotSharingGroupSpecGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Applicable CPUNote: This field may return null, indicating that no valid value can be obtained.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus.Inputs
         public JobConfigExpertModeConfigurationSlotSharingGroupSpecGetArgs()
         {
         }
+        public static new JobConfigExpertModeConfigurationSlotSharingGroupSpecGetArgs Empty => new JobConfigExpertModeConfigurationSlotSharingGroupSpecGetArgs();
     }
 }

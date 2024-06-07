@@ -7,43 +7,49 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a lighthouse blueprint
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Lighthouse"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Lighthouse.NewBlueprint(ctx, "blueprint", &Lighthouse.BlueprintArgs{
-// 			BlueprintName: pulumi.String("blueprint_name_test"),
-// 			Description:   pulumi.String("blueprint_description_test"),
-// 			InstanceId:    pulumi.String("lhins-xxxxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Lighthouse.NewBlueprint(ctx, "blueprint", &Lighthouse.BlueprintArgs{
+//				BlueprintName: pulumi.String("blueprint_name_test"),
+//				Description:   pulumi.String("blueprint_description_test"),
+//				InstanceId:    pulumi.String("lhins-xxxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // lighthouse blueprint can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Lighthouse/blueprint:Blueprint blueprint blueprint_id
+// $ pulumi import tencentcloud:Lighthouse/blueprint:Blueprint blueprint blueprint_id
 // ```
 type Blueprint struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewBlueprint(ctx *pulumi.Context,
 	if args.BlueprintName == nil {
 		return nil, errors.New("invalid value for required argument 'BlueprintName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Blueprint
 	err := ctx.RegisterResource("tencentcloud:Lighthouse/blueprint:Blueprint", name, args, &resource, opts...)
 	if err != nil {
@@ -155,7 +161,7 @@ func (i *Blueprint) ToBlueprintOutputWithContext(ctx context.Context) BlueprintO
 // BlueprintArrayInput is an input type that accepts BlueprintArray and BlueprintArrayOutput values.
 // You can construct a concrete instance of `BlueprintArrayInput` via:
 //
-//          BlueprintArray{ BlueprintArgs{...} }
+//	BlueprintArray{ BlueprintArgs{...} }
 type BlueprintArrayInput interface {
 	pulumi.Input
 
@@ -180,7 +186,7 @@ func (i BlueprintArray) ToBlueprintArrayOutputWithContext(ctx context.Context) B
 // BlueprintMapInput is an input type that accepts BlueprintMap and BlueprintMapOutput values.
 // You can construct a concrete instance of `BlueprintMapInput` via:
 //
-//          BlueprintMap{ "key": BlueprintArgs{...} }
+//	BlueprintMap{ "key": BlueprintArgs{...} }
 type BlueprintMapInput interface {
 	pulumi.Input
 

@@ -15,35 +15,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tag
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var attachment = new Tencentcloud.Tag.Attachment("attachment", new()
     ///     {
-    ///         var attachment = new Tencentcloud.Tag.Attachment("attachment", new Tencentcloud.Tag.AttachmentArgs
-    ///         {
-    ///             Resource = "qcs::cvm:ap-guangzhou:uin/100020512675:instance/ins-kfrlvcp4",
-    ///             TagKey = "test3",
-    ///             TagValue = "Terraform3",
-    ///         });
-    ///     }
+    ///         Resource = "qcs::cvm:ap-guangzhou:uin/100020512675:instance/ins-kfrlvcp4",
+    ///         TagKey = "test3",
+    ///         TagValue = "Terraform3",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// tag attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Tag/attachment:Attachment attachment attachment_id
+    /// $ pulumi import tencentcloud:Tag/attachment:Attachment attachment attachment_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tag/attachment:Attachment")]
-    public partial class Attachment : Pulumi.CustomResource
+    public partial class Attachment : global::Pulumi.CustomResource
     {
         /// <summary>
         /// [Six-segment description of resources](https://cloud.tencent.com/document/product/598/10606).
@@ -108,7 +109,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tag
         }
     }
 
-    public sealed class AttachmentArgs : Pulumi.ResourceArgs
+    public sealed class AttachmentArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// [Six-segment description of resources](https://cloud.tencent.com/document/product/598/10606).
@@ -131,9 +132,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tag
         public AttachmentArgs()
         {
         }
+        public static new AttachmentArgs Empty => new AttachmentArgs();
     }
 
-    public sealed class AttachmentState : Pulumi.ResourceArgs
+    public sealed class AttachmentState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// [Six-segment description of resources](https://cloud.tencent.com/document/product/598/10606).
@@ -156,5 +158,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tag
         public AttachmentState()
         {
         }
+        public static new AttachmentState Empty => new AttachmentState();
     }
 }

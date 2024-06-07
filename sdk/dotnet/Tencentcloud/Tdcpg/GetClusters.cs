@@ -17,74 +17,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
         /// 
         /// &gt; **NOTE:** This data source is still in internal testing. To experience its functions, you need to apply for a whitelist from Tencent Cloud.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clusters = Tencentcloud.Tdcpg.GetClusters.Invoke(new()
         ///     {
-        ///         var clusters = Output.Create(Tencentcloud.Tdcpg.GetClusters.InvokeAsync(new Tencentcloud.Tdcpg.GetClustersArgs
-        ///         {
-        ///             ClusterId = "",
-        ///             ClusterName = "",
-        ///             PayMode = "",
-        ///             ProjectId = "",
-        ///             Status = "",
-        ///         }));
-        ///     }
+        ///         ClusterId = "",
+        ///         ClusterName = "",
+        ///         PayMode = "",
+        ///         ProjectId = "",
+        ///         Status = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetClustersResult> InvokeAsync(GetClustersArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetClustersResult>("tencentcloud:Tdcpg/getClusters:getClusters", args ?? new GetClustersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetClustersResult>("tencentcloud:Tdcpg/getClusters:getClusters", args ?? new GetClustersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of tdcpg clusters.
         /// 
         /// &gt; **NOTE:** This data source is still in internal testing. To experience its functions, you need to apply for a whitelist from Tencent Cloud.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var clusters = Tencentcloud.Tdcpg.GetClusters.Invoke(new()
         ///     {
-        ///         var clusters = Output.Create(Tencentcloud.Tdcpg.GetClusters.InvokeAsync(new Tencentcloud.Tdcpg.GetClustersArgs
-        ///         {
-        ///             ClusterId = "",
-        ///             ClusterName = "",
-        ///             PayMode = "",
-        ///             ProjectId = "",
-        ///             Status = "",
-        ///         }));
-        ///     }
+        ///         ClusterId = "",
+        ///         ClusterName = "",
+        ///         PayMode = "",
+        ///         ProjectId = "",
+        ///         Status = "",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetClustersResult> Invoke(GetClustersInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetClustersResult>("tencentcloud:Tdcpg/getClusters:getClusters", args ?? new GetClustersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetClustersResult>("tencentcloud:Tdcpg/getClusters:getClusters", args ?? new GetClustersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetClustersArgs : Pulumi.InvokeArgs
+    public sealed class GetClustersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// cluster id.
@@ -125,9 +119,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
         public GetClustersArgs()
         {
         }
+        public static new GetClustersArgs Empty => new GetClustersArgs();
     }
 
-    public sealed class GetClustersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetClustersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// cluster id.
@@ -168,6 +163,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdcpg
         public GetClustersInvokeArgs()
         {
         }
+        public static new GetClustersInvokeArgs Empty => new GetClustersInvokeArgs();
     }
 
 

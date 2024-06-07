@@ -9,25 +9,24 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const overviewAttackTrend = pulumi.output(tencentcloud.Antiddos.getOverviewAttackTrend({
+ * const overviewAttackTrend = tencentcloud.Antiddos.getOverviewAttackTrend({
  *     dimension: "attackcount",
  *     endTime: "2023-11-22 10:28:31",
  *     period: 86400,
  *     startTime: "2023-11-21 10:28:31",
  *     type: "ddos",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getOverviewAttackTrend(args: GetOverviewAttackTrendArgs, opts?: pulumi.InvokeOptions): Promise<GetOverviewAttackTrendResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Antiddos/getOverviewAttackTrend:getOverviewAttackTrend", {
         "dimension": args.dimension,
         "endTime": args.endTime,
@@ -91,9 +90,28 @@ export interface GetOverviewAttackTrendResult {
     readonly startTime: string;
     readonly type: string;
 }
-
+/**
+ * Use this data source to query detailed information of antiddos overviewAttackTrend
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const overviewAttackTrend = tencentcloud.Antiddos.getOverviewAttackTrend({
+ *     dimension: "attackcount",
+ *     endTime: "2023-11-22 10:28:31",
+ *     period: 86400,
+ *     startTime: "2023-11-21 10:28:31",
+ *     type: "ddos",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getOverviewAttackTrendOutput(args: GetOverviewAttackTrendOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetOverviewAttackTrendResult> {
-    return pulumi.output(args).apply(a => getOverviewAttackTrend(a, opts))
+    return pulumi.output(args).apply((a: any) => getOverviewAttackTrend(a, opts))
 }
 
 /**

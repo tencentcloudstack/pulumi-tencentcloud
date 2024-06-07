@@ -9,25 +9,25 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.Address.Template("foo", {
- *     addresses: [
- *         "10.0.0.1",
- *         "10.0.1.0/24",
- *         "10.0.0.1-10.0.0.100",
- *     ],
- * });
+ * const foo = new tencentcloud.address.Template("foo", {addresses: [
+ *     "10.0.0.1",
+ *     "10.0.1.0/24",
+ *     "10.0.0.1-10.0.0.100",
+ * ]});
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Address template can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Address/template:Template foo ipm-makf7k9e"
+ * $ pulumi import tencentcloud:Address/template:Template foo ipm-makf7k9e"
  * ```
  */
 export class Template extends pulumi.CustomResource {

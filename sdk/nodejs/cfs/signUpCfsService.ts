@@ -9,12 +9,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const signUpCfsService = new tencentcloud.Cfs.SignUpCfsService("sign_up_cfs_service", {});
+ * const signUpCfsService = new tencentcloud.cfs.SignUpCfsService("signUpCfsService", {});
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export class SignUpCfsService extends pulumi.CustomResource {
     /**

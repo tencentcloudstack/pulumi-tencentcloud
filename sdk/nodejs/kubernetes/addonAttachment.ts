@@ -10,24 +10,28 @@ import * as utilities from "../utilities";
  * > **NOTE**: Avoid to using legacy "1.0.0" version, leave the versions empty so we can fetch the latest while creating.
  *
  * ## Example Usage
+ *
  * ### Install cbs addon by passing values
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const addonCbs = new tencentcloud.Kubernetes.AddonAttachment("addon_cbs", {
+ * const addonCbs = new tencentcloud.kubernetes.AddonAttachment("addonCbs", {
  *     clusterId: "cls-xxxxxxxx",
- *     // version = "1.0.5"
  *     values: ["rootdir=/var/lib/kubelet"],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Install tcr addon by passing values
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const mytcr = new tencentcloud.tcr.Instance("mytcr", {
  *     instanceType: "basic",
@@ -58,7 +62,7 @@ import * as utilities from "../utilities";
  * const myIns = tencentcloud.Tcr.getInstancesOutput({
  *     instanceId: tcrId,
  * });
- * const endPoint = myIns.apply(myIns => myIns.instanceLists?[0]?.internalEndPoint);
+ * const endPoint = myIns.apply(myIns => myIns.instanceLists?.[0]?.internalEndPoint);
  * const addonTcr = new tencentcloud.kubernetes.AddonAttachment("addonTcr", {
  *     clusterId: "cls-xxxxxxxx",
  *     version: "1.0.0",
@@ -88,13 +92,16 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Install new addon by passing spec json to reqBody directly
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const addonCbs = new tencentcloud.Kubernetes.AddonAttachment("addon_cbs", {
+ * const addonCbs = new tencentcloud.kubernetes.AddonAttachment("addonCbs", {
  *     clusterId: "cls-xxxxxxxx",
  *     requestBody: `  {
  *     "spec":{
@@ -110,16 +117,18 @@ import * as utilities from "../utilities";
  *         }
  *     }
  *   }
+ *
  * `,
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * Addon can be imported by using cluster_id#addon_name
  *
  * ```sh
- *  $ pulumi import tencentcloud:Kubernetes/addonAttachment:AddonAttachment addon_cos cls-xxxxxxxx#cos
+ * $ pulumi import tencentcloud:Kubernetes/addonAttachment:AddonAttachment addon_cos cls-xxxxxxxx#cos
  * ```
  */
 export class AddonAttachment extends pulumi.CustomResource {

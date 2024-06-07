@@ -7,69 +7,74 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a vpc snapshotPolicy
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		exampleBucket, err := Cos.NewBucket(ctx, "exampleBucket", &Cos.BucketArgs{
-// 			Bucket: pulumi.String("tf-example-1308919341"),
-// 			Acl:    pulumi.String("private"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		_, err = Vpc.NewSnapshotPolicy(ctx, "exampleSnapshotPolicy", &Vpc.SnapshotPolicyArgs{
-// 			SnapshotPolicyName: pulumi.String("tf-example"),
-// 			BackupType:         pulumi.String("time"),
-// 			CosBucket:          exampleBucket.Bucket,
-// 			CosRegion:          pulumi.String("ap-guangzhou"),
-// 			CreateNewCos:       pulumi.Bool(false),
-// 			KeepTime:           pulumi.Int(2),
-// 			BackupPolicies: vpc.SnapshotPolicyBackupPolicyArray{
-// 				&vpc.SnapshotPolicyBackupPolicyArgs{
-// 					BackupDay:  pulumi.String("monday"),
-// 					BackupTime: pulumi.String("00:00:00"),
-// 				},
-// 				&vpc.SnapshotPolicyBackupPolicyArgs{
-// 					BackupDay:  pulumi.String("tuesday"),
-// 					BackupTime: pulumi.String("01:00:00"),
-// 				},
-// 				&vpc.SnapshotPolicyBackupPolicyArgs{
-// 					BackupDay:  pulumi.String("wednesday"),
-// 					BackupTime: pulumi.String("02:00:00"),
-// 				},
-// 			},
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleBucket, err := Cos.NewBucket(ctx, "exampleBucket", &Cos.BucketArgs{
+//				Bucket: pulumi.String("tf-example-1308919341"),
+//				Acl:    pulumi.String("private"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Vpc.NewSnapshotPolicy(ctx, "exampleSnapshotPolicy", &Vpc.SnapshotPolicyArgs{
+//				SnapshotPolicyName: pulumi.String("tf-example"),
+//				BackupType:         pulumi.String("time"),
+//				CosBucket:          exampleBucket.Bucket,
+//				CosRegion:          pulumi.String("ap-guangzhou"),
+//				CreateNewCos:       pulumi.Bool(false),
+//				KeepTime:           pulumi.Int(2),
+//				BackupPolicies: vpc.SnapshotPolicyBackupPolicyArray{
+//					&vpc.SnapshotPolicyBackupPolicyArgs{
+//						BackupDay:  pulumi.String("monday"),
+//						BackupTime: pulumi.String("00:00:00"),
+//					},
+//					&vpc.SnapshotPolicyBackupPolicyArgs{
+//						BackupDay:  pulumi.String("tuesday"),
+//						BackupTime: pulumi.String("01:00:00"),
+//					},
+//					&vpc.SnapshotPolicyBackupPolicyArgs{
+//						BackupDay:  pulumi.String("wednesday"),
+//						BackupTime: pulumi.String("02:00:00"),
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // vpc snapshot_policy can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Vpc/snapshotPolicy:SnapshotPolicy snapshot_policy snapshot_policy_id
+// $ pulumi import tencentcloud:Vpc/snapshotPolicy:SnapshotPolicy snapshot_policy snapshot_policy_id
 // ```
 type SnapshotPolicy struct {
 	pulumi.CustomResourceState
@@ -121,7 +126,7 @@ func NewSnapshotPolicy(ctx *pulumi.Context,
 	if args.SnapshotPolicyName == nil {
 		return nil, errors.New("invalid value for required argument 'SnapshotPolicyName'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SnapshotPolicy
 	err := ctx.RegisterResource("tencentcloud:Vpc/snapshotPolicy:SnapshotPolicy", name, args, &resource, opts...)
 	if err != nil {
@@ -254,7 +259,7 @@ func (i *SnapshotPolicy) ToSnapshotPolicyOutputWithContext(ctx context.Context) 
 // SnapshotPolicyArrayInput is an input type that accepts SnapshotPolicyArray and SnapshotPolicyArrayOutput values.
 // You can construct a concrete instance of `SnapshotPolicyArrayInput` via:
 //
-//          SnapshotPolicyArray{ SnapshotPolicyArgs{...} }
+//	SnapshotPolicyArray{ SnapshotPolicyArgs{...} }
 type SnapshotPolicyArrayInput interface {
 	pulumi.Input
 
@@ -279,7 +284,7 @@ func (i SnapshotPolicyArray) ToSnapshotPolicyArrayOutputWithContext(ctx context.
 // SnapshotPolicyMapInput is an input type that accepts SnapshotPolicyMap and SnapshotPolicyMapOutput values.
 // You can construct a concrete instance of `SnapshotPolicyMapInput` via:
 //
-//          SnapshotPolicyMap{ "key": SnapshotPolicyArgs{...} }
+//	SnapshotPolicyMap{ "key": SnapshotPolicyArgs{...} }
 type SnapshotPolicyMapInput interface {
 	pulumi.Input
 

@@ -5,23 +5,56 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
-export * from "./command";
-export * from "./getAgent";
-export * from "./getCommand";
-export * from "./getInvocationTask";
-export * from "./getInvoker";
-export * from "./getInvokerRecords";
-export * from "./invocationCommandAttachment";
-export * from "./invocationInvokeAttachment";
-export * from "./invoker";
-export * from "./invokerConfig";
+export { CommandArgs, CommandState } from "./command";
+export type Command = import("./command").Command;
+export const Command: typeof import("./command").Command = null as any;
+utilities.lazyLoad(exports, ["Command"], () => require("./command"));
 
-// Import resources to register:
-import { Command } from "./command";
-import { InvocationCommandAttachment } from "./invocationCommandAttachment";
-import { InvocationInvokeAttachment } from "./invocationInvokeAttachment";
-import { Invoker } from "./invoker";
-import { InvokerConfig } from "./invokerConfig";
+export { GetAgentArgs, GetAgentResult, GetAgentOutputArgs } from "./getAgent";
+export const getAgent: typeof import("./getAgent").getAgent = null as any;
+export const getAgentOutput: typeof import("./getAgent").getAgentOutput = null as any;
+utilities.lazyLoad(exports, ["getAgent","getAgentOutput"], () => require("./getAgent"));
+
+export { GetCommandArgs, GetCommandResult, GetCommandOutputArgs } from "./getCommand";
+export const getCommand: typeof import("./getCommand").getCommand = null as any;
+export const getCommandOutput: typeof import("./getCommand").getCommandOutput = null as any;
+utilities.lazyLoad(exports, ["getCommand","getCommandOutput"], () => require("./getCommand"));
+
+export { GetInvocationTaskArgs, GetInvocationTaskResult, GetInvocationTaskOutputArgs } from "./getInvocationTask";
+export const getInvocationTask: typeof import("./getInvocationTask").getInvocationTask = null as any;
+export const getInvocationTaskOutput: typeof import("./getInvocationTask").getInvocationTaskOutput = null as any;
+utilities.lazyLoad(exports, ["getInvocationTask","getInvocationTaskOutput"], () => require("./getInvocationTask"));
+
+export { GetInvokerArgs, GetInvokerResult, GetInvokerOutputArgs } from "./getInvoker";
+export const getInvoker: typeof import("./getInvoker").getInvoker = null as any;
+export const getInvokerOutput: typeof import("./getInvoker").getInvokerOutput = null as any;
+utilities.lazyLoad(exports, ["getInvoker","getInvokerOutput"], () => require("./getInvoker"));
+
+export { GetInvokerRecordsArgs, GetInvokerRecordsResult, GetInvokerRecordsOutputArgs } from "./getInvokerRecords";
+export const getInvokerRecords: typeof import("./getInvokerRecords").getInvokerRecords = null as any;
+export const getInvokerRecordsOutput: typeof import("./getInvokerRecords").getInvokerRecordsOutput = null as any;
+utilities.lazyLoad(exports, ["getInvokerRecords","getInvokerRecordsOutput"], () => require("./getInvokerRecords"));
+
+export { InvocationCommandAttachmentArgs, InvocationCommandAttachmentState } from "./invocationCommandAttachment";
+export type InvocationCommandAttachment = import("./invocationCommandAttachment").InvocationCommandAttachment;
+export const InvocationCommandAttachment: typeof import("./invocationCommandAttachment").InvocationCommandAttachment = null as any;
+utilities.lazyLoad(exports, ["InvocationCommandAttachment"], () => require("./invocationCommandAttachment"));
+
+export { InvocationInvokeAttachmentArgs, InvocationInvokeAttachmentState } from "./invocationInvokeAttachment";
+export type InvocationInvokeAttachment = import("./invocationInvokeAttachment").InvocationInvokeAttachment;
+export const InvocationInvokeAttachment: typeof import("./invocationInvokeAttachment").InvocationInvokeAttachment = null as any;
+utilities.lazyLoad(exports, ["InvocationInvokeAttachment"], () => require("./invocationInvokeAttachment"));
+
+export { InvokerArgs, InvokerState } from "./invoker";
+export type Invoker = import("./invoker").Invoker;
+export const Invoker: typeof import("./invoker").Invoker = null as any;
+utilities.lazyLoad(exports, ["Invoker"], () => require("./invoker"));
+
+export { InvokerConfigArgs, InvokerConfigState } from "./invokerConfig";
+export type InvokerConfig = import("./invokerConfig").InvokerConfig;
+export const InvokerConfig: typeof import("./invokerConfig").InvokerConfig = null as any;
+utilities.lazyLoad(exports, ["InvokerConfig"], () => require("./invokerConfig"));
+
 
 const _module = {
     version: utilities.getVersion(),

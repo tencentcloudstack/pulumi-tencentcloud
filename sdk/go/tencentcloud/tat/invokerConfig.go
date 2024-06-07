@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a tat invokerConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tat"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Tat.NewInvokerConfig(ctx, "invokerConfig", &Tat.InvokerConfigArgs{
-// 			InvokerId:     pulumi.String("ivk-cas4upyf"),
-// 			InvokerStatus: pulumi.String("on"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Tat.NewInvokerConfig(ctx, "invokerConfig", &Tat.InvokerConfigArgs{
+//				InvokerId:     pulumi.String("ivk-cas4upyf"),
+//				InvokerStatus: pulumi.String("on"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // tat invoker_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Tat/invokerConfig:InvokerConfig invoker_config invoker_config_id
+// $ pulumi import tencentcloud:Tat/invokerConfig:InvokerConfig invoker_config invoker_config_id
 // ```
 type InvokerConfig struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewInvokerConfig(ctx *pulumi.Context,
 	if args.InvokerStatus == nil {
 		return nil, errors.New("invalid value for required argument 'InvokerStatus'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource InvokerConfig
 	err := ctx.RegisterResource("tencentcloud:Tat/invokerConfig:InvokerConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *InvokerConfig) ToInvokerConfigOutputWithContext(ctx context.Context) In
 // InvokerConfigArrayInput is an input type that accepts InvokerConfigArray and InvokerConfigArrayOutput values.
 // You can construct a concrete instance of `InvokerConfigArrayInput` via:
 //
-//          InvokerConfigArray{ InvokerConfigArgs{...} }
+//	InvokerConfigArray{ InvokerConfigArgs{...} }
 type InvokerConfigArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i InvokerConfigArray) ToInvokerConfigArrayOutputWithContext(ctx context.Co
 // InvokerConfigMapInput is an input type that accepts InvokerConfigMap and InvokerConfigMapOutput values.
 // You can construct a concrete instance of `InvokerConfigMapInput` via:
 //
-//          InvokerConfigMap{ "key": InvokerConfigArgs{...} }
+//	InvokerConfigMap{ "key": InvokerConfigArgs{...} }
 type InvokerConfigMapInput interface {
 	pulumi.Input
 

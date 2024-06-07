@@ -10,11 +10,13 @@ import * as utilities from "../utilities";
  * > **Note:** A maximum of 10 versions can be supported under one credential. Only new versions can be added to credentials in the enabled and disabled states.
  *
  * ## Example Usage
+ *
  * ### Text type credential information plaintext
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.ssm.Secret("example", {
  *     secretName: "tf-example",
@@ -31,11 +33,14 @@ import * as utilities from "../utilities";
  *     secretString: "this is secret string",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### Binary credential information, encoded using base64
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const v2 = new tencentcloud.ssm.SecretVersion("v2", {
  *     secretName: tencentcloud_ssm_secret.example.secret_name,
@@ -43,13 +48,14 @@ import * as utilities from "../utilities";
  *     secretBinary: "MTIzMTIzMTIzMTIzMTIzQQ==",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * SSM secret version can be imported using the secretName#versionId, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:Ssm/secretVersion:SecretVersion v1 test#v1
+ * $ pulumi import tencentcloud:Ssm/secretVersion:SecretVersion v1 test#v1
  * ```
  */
 export class SecretVersion extends pulumi.CustomResource {

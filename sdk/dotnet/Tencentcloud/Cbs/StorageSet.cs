@@ -15,31 +15,32 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var storage = new Tencentcloud.Cbs.StorageSet("storage", new()
     ///     {
-    ///         var storage = new Tencentcloud.Cbs.StorageSet("storage", new Tencentcloud.Cbs.StorageSetArgs
-    ///         {
-    ///             AvailabilityZone = "ap-guangzhou-3",
-    ///             DiskCount = 10,
-    ///             Encrypt = false,
-    ///             ProjectId = 0,
-    ///             StorageName = "mystorage",
-    ///             StorageSize = 100,
-    ///             StorageType = "CLOUD_SSD",
-    ///         });
-    ///     }
+    ///         AvailabilityZone = "ap-guangzhou-3",
+    ///         DiskCount = 10,
+    ///         Encrypt = false,
+    ///         ProjectId = 0,
+    ///         StorageName = "mystorage",
+    ///         StorageSize = 100,
+    ///         StorageType = "CLOUD_SSD",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/storageSet:StorageSet")]
-    public partial class StorageSet : Pulumi.CustomResource
+    public partial class StorageSet : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Indicates whether the CBS is mounted the CVM.
@@ -164,7 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         }
     }
 
-    public sealed class StorageSetArgs : Pulumi.ResourceArgs
+    public sealed class StorageSetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The available zone that the CBS instance locates at.
@@ -229,9 +230,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public StorageSetArgs()
         {
         }
+        public static new StorageSetArgs Empty => new StorageSetArgs();
     }
 
-    public sealed class StorageSetState : Pulumi.ResourceArgs
+    public sealed class StorageSetState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Indicates whether the CBS is mounted the CVM.
@@ -320,5 +322,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         public StorageSetState()
         {
         }
+        public static new StorageSetState Empty => new StorageSetState();
     }
 }

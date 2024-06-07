@@ -14,47 +14,51 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// Provides a resource to verify the domain ownership by specified way when DomainNeedVerifyOwner failed in domain creation.
     /// 
     /// ## Example Usage
+    /// 
     /// ### dnsCheck way:
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var dnsCheck = new Tencentcloud.Css.AuthenticateDomainOwnerOperation("dnsCheck", new()
     ///     {
-    ///         var dnsCheck = new Tencentcloud.Css.AuthenticateDomainOwnerOperation("dnsCheck", new Tencentcloud.Css.AuthenticateDomainOwnerOperationArgs
-    ///         {
-    ///             DomainName = "your_domain_name",
-    ///             VerifyType = "dnsCheck",
-    ///         });
-    ///     }
+    ///         DomainName = "your_domain_name",
+    ///         VerifyType = "dnsCheck",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ### fileCheck way:
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var fileCheck = new Tencentcloud.Css.AuthenticateDomainOwnerOperation("fileCheck", new()
     ///     {
-    ///         var fileCheck = new Tencentcloud.Css.AuthenticateDomainOwnerOperation("fileCheck", new Tencentcloud.Css.AuthenticateDomainOwnerOperationArgs
-    ///         {
-    ///             DomainName = "your_domain_name",
-    ///             VerifyType = "fileCheck",
-    ///         });
-    ///     }
+    ///         DomainName = "your_domain_name",
+    ///         VerifyType = "fileCheck",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/authenticateDomainOwnerOperation:AuthenticateDomainOwnerOperation")]
-    public partial class AuthenticateDomainOwnerOperation : Pulumi.CustomResource
+    public partial class AuthenticateDomainOwnerOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// The domain name to verify.
@@ -113,7 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         }
     }
 
-    public sealed class AuthenticateDomainOwnerOperationArgs : Pulumi.ResourceArgs
+    public sealed class AuthenticateDomainOwnerOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The domain name to verify.
@@ -130,9 +134,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public AuthenticateDomainOwnerOperationArgs()
         {
         }
+        public static new AuthenticateDomainOwnerOperationArgs Empty => new AuthenticateDomainOwnerOperationArgs();
     }
 
-    public sealed class AuthenticateDomainOwnerOperationState : Pulumi.ResourceArgs
+    public sealed class AuthenticateDomainOwnerOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// The domain name to verify.
@@ -149,5 +154,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         public AuthenticateDomainOwnerOperationState()
         {
         }
+        public static new AuthenticateDomainOwnerOperationState Empty => new AuthenticateDomainOwnerOperationState();
     }
 }

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
 {
 
-    public sealed class CcPolicyV2CcGeoIpPolicyGetArgs : Pulumi.ResourceArgs
+    public sealed class CcPolicyV2CcGeoIpPolicyGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// User action, drop or arg.
@@ -64,5 +64,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu.Inputs
         public CcPolicyV2CcGeoIpPolicyGetArgs()
         {
         }
+        public static new CcPolicyV2CcGeoIpPolicyGetArgs Empty => new CcPolicyV2CcGeoIpPolicyGetArgs();
     }
 }

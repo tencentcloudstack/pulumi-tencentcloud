@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provide a resource to create a DnsPod Domain instance.
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.NewDomainInstance(ctx, "foo", &Dnspod.DomainInstanceArgs{
-// 			Domain: pulumi.String("hello.com"),
-// 			Remark: pulumi.String("this is demo"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.NewDomainInstance(ctx, "foo", &Dnspod.DomainInstanceArgs{
+//				Domain: pulumi.String("hello.com"),
+//				Remark: pulumi.String("this is demo"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // DnsPod Domain instance can be imported, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dnspod/domainInstance:DomainInstance foo domain
+// $ pulumi import tencentcloud:Dnspod/domainInstance:DomainInstance foo domain
 // ```
 type DomainInstance struct {
 	pulumi.CustomResourceState
@@ -73,7 +79,7 @@ func NewDomainInstance(ctx *pulumi.Context,
 	if args.Domain == nil {
 		return nil, errors.New("invalid value for required argument 'Domain'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource DomainInstance
 	err := ctx.RegisterResource("tencentcloud:Dnspod/domainInstance:DomainInstance", name, args, &resource, opts...)
 	if err != nil {
@@ -186,7 +192,7 @@ func (i *DomainInstance) ToDomainInstanceOutputWithContext(ctx context.Context) 
 // DomainInstanceArrayInput is an input type that accepts DomainInstanceArray and DomainInstanceArrayOutput values.
 // You can construct a concrete instance of `DomainInstanceArrayInput` via:
 //
-//          DomainInstanceArray{ DomainInstanceArgs{...} }
+//	DomainInstanceArray{ DomainInstanceArgs{...} }
 type DomainInstanceArrayInput interface {
 	pulumi.Input
 
@@ -211,7 +217,7 @@ func (i DomainInstanceArray) ToDomainInstanceArrayOutputWithContext(ctx context.
 // DomainInstanceMapInput is an input type that accepts DomainInstanceMap and DomainInstanceMapOutput values.
 // You can construct a concrete instance of `DomainInstanceMapInput` via:
 //
-//          DomainInstanceMap{ "key": DomainInstanceArgs{...} }
+//	DomainInstanceMap{ "key": DomainInstanceArgs{...} }
 type DomainInstanceMapInput interface {
 	pulumi.Input
 

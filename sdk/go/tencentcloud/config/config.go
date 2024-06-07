@@ -6,9 +6,11 @@ package config
 import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+var _ = internal.GetEnvOrDefault
+
 func GetAssumeRole(ctx *pulumi.Context) string {
 	return config.Get(ctx, "tencentcloud:assumeRole")
 }
@@ -36,7 +38,11 @@ func GetRegion(ctx *pulumi.Context) string {
 	if err == nil {
 		return v
 	}
-	return getEnvOrDefault("", nil, "TENCENTCLOUD_REGION").(string)
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "TENCENTCLOUD_REGION"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
@@ -46,7 +52,11 @@ func GetSecretId(ctx *pulumi.Context) string {
 	if err == nil {
 		return v
 	}
-	return getEnvOrDefault("", nil, "TENCENTCLOUD_SECRET_ID").(string)
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "TENCENTCLOUD_SECRET_ID"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
@@ -56,7 +66,11 @@ func GetSecretKey(ctx *pulumi.Context) string {
 	if err == nil {
 		return v
 	}
-	return getEnvOrDefault("", nil, "TENCENTCLOUD_SECRET_KEY").(string)
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "TENCENTCLOUD_SECRET_KEY"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // TencentCloud Security Token of temporary access credentials. It can be sourced from the `TENCENTCLOUD_SECURITY_TOKEN`
@@ -67,7 +81,11 @@ func GetSecurityToken(ctx *pulumi.Context) string {
 	if err == nil {
 		return v
 	}
-	return getEnvOrDefault("", nil, "TENCENTCLOUD_SECURITY_TOKEN").(string)
+	var value string
+	if d := internal.GetEnvOrDefault(nil, nil, "TENCENTCLOUD_SECURITY_TOKEN"); d != nil {
+		value = d.(string)
+	}
+	return value
 }
 
 // The directory of the shared credentials. It can also be sourced from the `TENCENTCLOUD_SHARED_CREDENTIALS_DIR`

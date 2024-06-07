@@ -15,66 +15,60 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// <summary>
         /// Use this data source to query detailed information of rum sign
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var sign = Tencentcloud.Rum.GetSign.Invoke(new()
         ///     {
-        ///         var sign = Output.Create(Tencentcloud.Rum.GetSign.InvokeAsync(new Tencentcloud.Rum.GetSignArgs
-        ///         {
-        ///             FileType = 1,
-        ///             Timeout = 1800,
-        ///         }));
-        ///     }
+        ///         FileType = 1,
+        ///         Timeout = 1800,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetSignResult> InvokeAsync(GetSignArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetSignResult>("tencentcloud:Rum/getSign:getSign", args ?? new GetSignArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetSignResult>("tencentcloud:Rum/getSign:getSign", args ?? new GetSignArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of rum sign
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var sign = Tencentcloud.Rum.GetSign.Invoke(new()
         ///     {
-        ///         var sign = Output.Create(Tencentcloud.Rum.GetSign.InvokeAsync(new Tencentcloud.Rum.GetSignArgs
-        ///         {
-        ///             FileType = 1,
-        ///             Timeout = 1800,
-        ///         }));
-        ///     }
+        ///         FileType = 1,
+        ///         Timeout = 1800,
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetSignResult> Invoke(GetSignInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetSignResult>("tencentcloud:Rum/getSign:getSign", args ?? new GetSignInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetSignResult>("tencentcloud:Rum/getSign:getSign", args ?? new GetSignInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetSignArgs : Pulumi.InvokeArgs
+    public sealed class GetSignArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Bucket type. `1`:web project; `2`:app project.
@@ -97,9 +91,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetSignArgs()
         {
         }
+        public static new GetSignArgs Empty => new GetSignArgs();
     }
 
-    public sealed class GetSignInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetSignInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Bucket type. `1`:web project; `2`:app project.
@@ -122,6 +117,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         public GetSignInvokeArgs()
         {
         }
+        public static new GetSignInvokeArgs Empty => new GetSignInvokeArgs();
     }
 
 

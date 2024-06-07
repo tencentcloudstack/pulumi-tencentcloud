@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -12,10 +13,11 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleInstance = tencentcloud.Images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
@@ -23,7 +25,7 @@ import * as utilities from "../utilities";
  * });
  * const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
  *     configurationName: "example-launch-configuration",
- *     imageId: exampleInstance.then(exampleInstance => exampleInstance.images?[0]?.imageId),
+ *     imageId: exampleInstance.then(exampleInstance => exampleInstance.images?.[0]?.imageId),
  *     instanceTypes: ["SA1.SMALL1"],
  *     projectId: 0,
  *     systemDiskType: "CLOUD_PREMIUM",
@@ -48,12 +50,15 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ### charge type
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as pulumi from "@tencentcloud_iac/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const exampleInstance = tencentcloud.Images.getInstance({
  *     imageTypes: ["PUBLIC_IMAGE"],
@@ -61,20 +66,21 @@ import * as utilities from "../utilities";
  * });
  * const exampleScalingConfig = new tencentcloud.as.ScalingConfig("exampleScalingConfig", {
  *     configurationName: "launch-configuration",
- *     imageId: exampleInstance.then(exampleInstance => exampleInstance.images?[0]?.imageId),
+ *     imageId: exampleInstance.then(exampleInstance => exampleInstance.images?.[0]?.imageId),
  *     instanceTypes: ["SA1.SMALL1"],
  *     instanceChargeType: "SPOTPAID",
  *     spotInstanceType: "one-time",
  *     spotMaxPrice: "1000",
  * });
  * ```
+ * <!--End PulumiCodeChooser -->
  *
  * ## Import
  *
  * AutoScaling Configuration can be imported using the id, e.g.
  *
  * ```sh
- *  $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig example asc-n32ymck2
+ * $ pulumi import tencentcloud:As/scalingConfig:ScalingConfig example asc-n32ymck2
  * ```
  */
 export class ScalingConfig extends pulumi.CustomResource {
@@ -293,7 +299,7 @@ export class ScalingConfig extends pulumi.CustomResource {
             resourceInputs["internetMaxBandwidthOut"] = args ? args.internetMaxBandwidthOut : undefined;
             resourceInputs["keepImageLogin"] = args ? args.keepImageLogin : undefined;
             resourceInputs["keyIds"] = args ? args.keyIds : undefined;
-            resourceInputs["password"] = args ? args.password : undefined;
+            resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["publicIpAssigned"] = args ? args.publicIpAssigned : undefined;
             resourceInputs["securityGroupIds"] = args ? args.securityGroupIds : undefined;
@@ -306,6 +312,8 @@ export class ScalingConfig extends pulumi.CustomResource {
             resourceInputs["status"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+        const secretOpts = { additionalSecretOutputs: ["password"] };
+        opts = pulumi.mergeOptions(opts, secretOpts);
         super(ScalingConfig.__pulumiType, name, resourceInputs, opts);
     }
 }

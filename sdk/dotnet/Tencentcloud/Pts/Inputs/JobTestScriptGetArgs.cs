@@ -11,20 +11,35 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
 {
 
-    public sealed class JobTestScriptGetArgs : Pulumi.ResourceArgs
+    public sealed class JobTestScriptGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Base64 encoded file content.
+        /// </summary>
         [Input("encodedContent")]
         public Input<string>? EncodedContent { get; set; }
 
+        /// <summary>
+        /// Base64 encoded har structure.
+        /// </summary>
         [Input("encodedHttpArchive")]
         public Input<string>? EncodedHttpArchive { get; set; }
 
+        /// <summary>
+        /// Script weight, range 1-100.
+        /// </summary>
         [Input("loadWeight")]
         public Input<int>? LoadWeight { get; set; }
 
+        /// <summary>
+        /// File name.
+        /// </summary>
         [Input("name")]
         public Input<string>? Name { get; set; }
 
+        /// <summary>
+        /// File size.
+        /// </summary>
         [Input("size")]
         public Input<int>? Size { get; set; }
 
@@ -34,11 +49,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts.Inputs
         [Input("type")]
         public Input<string>? Type { get; set; }
 
+        /// <summary>
+        /// Update time.
+        /// </summary>
         [Input("updatedAt")]
         public Input<string>? UpdatedAt { get; set; }
 
         public JobTestScriptGetArgs()
         {
         }
+        public static new JobTestScriptGetArgs Empty => new JobTestScriptGetArgs();
     }
 }

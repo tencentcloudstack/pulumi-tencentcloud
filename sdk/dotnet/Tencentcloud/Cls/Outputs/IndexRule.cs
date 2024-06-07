@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Outputs
     public sealed class IndexRule
     {
         /// <summary>
+        /// The key value index is automatically configured. If it is empty, it means that the function is not enabled.
+        /// </summary>
+        public readonly Outputs.IndexRuleDynamicIndex? DynamicIndex;
+        /// <summary>
         /// Full-Text index configuration.
         /// </summary>
         public readonly Outputs.IndexRuleFullText? FullText;
@@ -29,12 +33,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Outputs
 
         [OutputConstructor]
         private IndexRule(
+            Outputs.IndexRuleDynamicIndex? dynamicIndex,
+
             Outputs.IndexRuleFullText? fullText,
 
             Outputs.IndexRuleKeyValue? keyValue,
 
             Outputs.IndexRuleTag? tag)
         {
+            DynamicIndex = dynamicIndex;
             FullText = fullText;
             KeyValue = keyValue;
             Tag = tag;

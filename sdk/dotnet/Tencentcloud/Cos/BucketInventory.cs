@@ -15,61 +15,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var bucketInventory = new Tencentcloud.Cos.BucketInventory("bucketInventory", new()
     ///     {
-    ///         var bucketInventory = new Tencentcloud.Cos.BucketInventory("bucketInventory", new Tencentcloud.Cos.BucketInventoryArgs
+    ///         Bucket = "keep-test-xxxxxx",
+    ///         Destination = new Tencentcloud.Cos.Inputs.BucketInventoryDestinationArgs
     ///         {
-    ///             Bucket = "keep-test-xxxxxx",
-    ///             Destination = new Tencentcloud.Cos.Inputs.BucketInventoryDestinationArgs
+    ///             AccountId = "",
+    ///             Bucket = "qcs::cos:ap-guangzhou::keep-test-xxxxxx",
+    ///             Format = "CSV",
+    ///             Prefix = "cos_bucket_inventory",
+    ///         },
+    ///         Filter = new Tencentcloud.Cos.Inputs.BucketInventoryFilterArgs
+    ///         {
+    ///             Period = new Tencentcloud.Cos.Inputs.BucketInventoryFilterPeriodArgs
     ///             {
-    ///                 AccountId = "",
-    ///                 Bucket = "qcs::cos:ap-guangzhou::keep-test-xxxxxx",
-    ///                 Format = "CSV",
-    ///                 Prefix = "cos_bucket_inventory",
+    ///                 StartTime = "1687276800",
     ///             },
-    ///             Filter = new Tencentcloud.Cos.Inputs.BucketInventoryFilterArgs
+    ///         },
+    ///         IncludedObjectVersions = "Current",
+    ///         IsEnabled = "true",
+    ///         OptionalFields = new Tencentcloud.Cos.Inputs.BucketInventoryOptionalFieldsArgs
+    ///         {
+    ///             Fields = new[]
     ///             {
-    ///                 Period = new Tencentcloud.Cos.Inputs.BucketInventoryFilterPeriodArgs
-    ///                 {
-    ///                     StartTime = "1687276800",
-    ///                 },
+    ///                 "Size",
+    ///                 "ETag",
     ///             },
-    ///             IncludedObjectVersions = "Current",
-    ///             IsEnabled = "true",
-    ///             OptionalFields = new Tencentcloud.Cos.Inputs.BucketInventoryOptionalFieldsArgs
-    ///             {
-    ///                 Fields = 
-    ///                 {
-    ///                     "Size",
-    ///                     "ETag",
-    ///                 },
-    ///             },
-    ///             Schedule = new Tencentcloud.Cos.Inputs.BucketInventoryScheduleArgs
-    ///             {
-    ///                 Frequency = "Weekly",
-    ///             },
-    ///         });
-    ///     }
+    ///         },
+    ///         Schedule = new Tencentcloud.Cos.Inputs.BucketInventoryScheduleArgs
+    ///         {
+    ///             Frequency = "Weekly",
+    ///         },
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// cos bucket_inventory can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Cos/bucketInventory:BucketInventory bucket_inventory bucket_inventory_id
+    /// $ pulumi import tencentcloud:Cos/bucketInventory:BucketInventory bucket_inventory bucket_inventory_id
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cos/bucketInventory:BucketInventory")]
-    public partial class BucketInventory : Pulumi.CustomResource
+    public partial class BucketInventory : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Bucket name.
@@ -164,7 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         }
     }
 
-    public sealed class BucketInventoryArgs : Pulumi.ResourceArgs
+    public sealed class BucketInventoryArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket name.
@@ -217,9 +218,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public BucketInventoryArgs()
         {
         }
+        public static new BucketInventoryArgs Empty => new BucketInventoryArgs();
     }
 
-    public sealed class BucketInventoryState : Pulumi.ResourceArgs
+    public sealed class BucketInventoryState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Bucket name.
@@ -272,5 +274,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
         public BucketInventoryState()
         {
         }
+        public static new BucketInventoryState Empty => new BucketInventoryState();
     }
 }

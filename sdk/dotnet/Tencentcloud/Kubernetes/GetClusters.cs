@@ -15,72 +15,68 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// <summary>
         /// Use this data source to query detailed information of kubernetes clusters.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var name = Tencentcloud.Kubernetes.GetClusters.Invoke(new()
         ///     {
-        ///         var name = Output.Create(Tencentcloud.Kubernetes.GetClusters.InvokeAsync(new Tencentcloud.Kubernetes.GetClustersArgs
-        ///         {
-        ///             ClusterName = "terraform",
-        ///         }));
-        ///         var id = Output.Create(Tencentcloud.Kubernetes.GetClusters.InvokeAsync(new Tencentcloud.Kubernetes.GetClustersArgs
-        ///         {
-        ///             ClusterId = "cls-godovr32",
-        ///         }));
-        ///     }
+        ///         ClusterName = "terraform",
+        ///     });
         /// 
-        /// }
+        ///     var id = Tencentcloud.Kubernetes.GetClusters.Invoke(new()
+        ///     {
+        ///         ClusterId = "cls-godovr32",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetClustersResult> InvokeAsync(GetClustersArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetClustersResult>("tencentcloud:Kubernetes/getClusters:getClusters", args ?? new GetClustersArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetClustersResult>("tencentcloud:Kubernetes/getClusters:getClusters", args ?? new GetClustersArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of kubernetes clusters.
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var name = Tencentcloud.Kubernetes.GetClusters.Invoke(new()
         ///     {
-        ///         var name = Output.Create(Tencentcloud.Kubernetes.GetClusters.InvokeAsync(new Tencentcloud.Kubernetes.GetClustersArgs
-        ///         {
-        ///             ClusterName = "terraform",
-        ///         }));
-        ///         var id = Output.Create(Tencentcloud.Kubernetes.GetClusters.InvokeAsync(new Tencentcloud.Kubernetes.GetClustersArgs
-        ///         {
-        ///             ClusterId = "cls-godovr32",
-        ///         }));
-        ///     }
+        ///         ClusterName = "terraform",
+        ///     });
         /// 
-        /// }
+        ///     var id = Tencentcloud.Kubernetes.GetClusters.Invoke(new()
+        ///     {
+        ///         ClusterId = "cls-godovr32",
+        ///     });
+        /// 
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetClustersResult> Invoke(GetClustersInvokeArgs? args = null, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetClustersResult>("tencentcloud:Kubernetes/getClusters:getClusters", args ?? new GetClustersInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetClustersResult>("tencentcloud:Kubernetes/getClusters:getClusters", args ?? new GetClustersInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetClustersArgs : Pulumi.InvokeArgs
+    public sealed class GetClustersArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the cluster. Conflict with cluster_name, can not be set at the same time.
@@ -93,6 +89,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("clusterName")]
         public string? ClusterName { get; set; }
+
+        /// <summary>
+        /// The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.
+        /// </summary>
+        [Input("kubeConfigFilePrefix")]
+        public string? KubeConfigFilePrefix { get; set; }
 
         /// <summary>
         /// Used to save results.
@@ -115,9 +117,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public GetClustersArgs()
         {
         }
+        public static new GetClustersArgs Empty => new GetClustersArgs();
     }
 
-    public sealed class GetClustersInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetClustersInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// ID of the cluster. Conflict with cluster_name, can not be set at the same time.
@@ -130,6 +133,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("clusterName")]
         public Input<string>? ClusterName { get; set; }
+
+        /// <summary>
+        /// The path prefix of kube config. You can store KubeConfig in a specified directory by specifying this field, such as ~/.kube/k8s, then public network access will use ~/.kube/k8s-clusterID-kubeconfig naming, and intranet access will use ~/.kube /k8s-clusterID-kubeconfig-intranet naming. If this field is not set, the KubeConfig will not be exported.
+        /// </summary>
+        [Input("kubeConfigFilePrefix")]
+        public Input<string>? KubeConfigFilePrefix { get; set; }
 
         /// <summary>
         /// Used to save results.
@@ -152,6 +161,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public GetClustersInvokeArgs()
         {
         }
+        public static new GetClustersInvokeArgs Empty => new GetClustersInvokeArgs();
     }
 
 
@@ -170,6 +180,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
+        public readonly string? KubeConfigFilePrefix;
         /// <summary>
         /// An information list of kubernetes clusters. Each element contains the following attributes:
         /// </summary>
@@ -188,6 +199,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
 
             string id,
 
+            string? kubeConfigFilePrefix,
+
             ImmutableArray<Outputs.GetClustersListResult> lists,
 
             string? resultOutputFile,
@@ -197,6 +210,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
             ClusterId = clusterId;
             ClusterName = clusterName;
             Id = id;
+            KubeConfigFilePrefix = kubeConfigFilePrefix;
             Lists = lists;
             ResultOutputFile = resultOutputFile;
             Tags = tags;

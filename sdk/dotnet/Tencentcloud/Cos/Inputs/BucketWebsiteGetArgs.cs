@@ -11,8 +11,11 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
 {
 
-    public sealed class BucketWebsiteGetArgs : Pulumi.ResourceArgs
+    public sealed class BucketWebsiteGetArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// `Endpoint` of the static website.
+        /// </summary>
         [Input("endpoint")]
         public Input<string>? Endpoint { get; set; }
 
@@ -31,5 +34,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         public BucketWebsiteGetArgs()
         {
         }
+        public static new BucketWebsiteGetArgs Empty => new BucketWebsiteGetArgs();
     }
 }

@@ -8,11 +8,12 @@ import (
 	"reflect"
 
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Use this data source to query detailed information of cynosdb proxyNode
 func GetProxyNode(ctx *pulumi.Context, args *GetProxyNodeArgs, opts ...pulumi.InvokeOption) (*GetProxyNodeResult, error) {
-	opts = pkgInvokeDefaultOpts(opts)
+	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProxyNodeResult
 	err := ctx.Invoke("tencentcloud:Cynosdb/getProxyNode:getProxyNode", args, &rv, opts...)
 	if err != nil {

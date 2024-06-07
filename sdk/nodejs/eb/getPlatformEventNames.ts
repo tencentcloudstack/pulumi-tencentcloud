@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,21 +11,20 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const platformEventNames = pulumi.output(tencentcloud.Eb.getPlatformEventNames({
+ * const platformEventNames = tencentcloud.Eb.getPlatformEventNames({
  *     productType: "",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getPlatformEventNames(args: GetPlatformEventNamesArgs, opts?: pulumi.InvokeOptions): Promise<GetPlatformEventNamesResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Eb/getPlatformEventNames:getPlatformEventNames", {
         "productType": args.productType,
         "resultOutputFile": args.resultOutputFile,
@@ -60,9 +60,24 @@ export interface GetPlatformEventNamesResult {
     readonly productType: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of eb platformEventNames
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const platformEventNames = tencentcloud.Eb.getPlatformEventNames({
+ *     productType: "",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getPlatformEventNamesOutput(args: GetPlatformEventNamesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPlatformEventNamesResult> {
-    return pulumi.output(args).apply(a => getPlatformEventNames(a, opts))
+    return pulumi.output(args).apply((a: any) => getPlatformEventNames(a, opts))
 }
 
 /**

@@ -46,7 +46,6 @@ from .get_template_limits import *
 from .get_used_ip_address import *
 from .instance import *
 from .ipv6_cidr_block import *
-from .ipv6_eni_address import *
 from .ipv6_subnet_cidr_block import *
 from .local_gateway import *
 from .net_detect import *

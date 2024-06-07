@@ -15,56 +15,57 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var rocketmqInstance = new Tencentcloud.Trocket.RocketmqInstance("rocketmqInstance", new()
     ///     {
-    ///         var rocketmqInstance = new Tencentcloud.Trocket.RocketmqInstance("rocketmqInstance", new Tencentcloud.Trocket.RocketmqInstanceArgs
+    ///         InstanceType = "EXPERIMENT",
+    ///         SkuCode = "experiment_500",
+    ///         Remark = "test",
+    ///         VpcId = "vpc-xxxxx",
+    ///         SubnetId = "subnet-xxxxx",
+    ///         Tags = 
     ///         {
-    ///             InstanceType = "EXPERIMENT",
-    ///             SkuCode = "experiment_500",
-    ///             Remark = "test",
-    ///             VpcId = "vpc-xxxxx",
-    ///             SubnetId = "subnet-xxxxx",
-    ///             Tags = 
-    ///             {
-    ///                 { "tag_key", "rocketmq" },
-    ///                 { "tag_value", "5.x" },
-    ///             },
-    ///         });
-    ///         var rocketmqRole = new Tencentcloud.Trocket.RocketmqRole("rocketmqRole", new Tencentcloud.Trocket.RocketmqRoleArgs
-    ///         {
-    ///             InstanceId = rocketmqInstance.Id,
-    ///             Role = "test_role",
-    ///             Remark = "test for terraform",
-    ///             PermWrite = false,
-    ///             PermRead = true,
-    ///         });
-    ///         this.AccessKey = rocketmqRole.AccessKey;
-    ///         this.SecretKey = rocketmqRole.SecretKey;
-    ///     }
+    ///             { "tag_key", "rocketmq" },
+    ///             { "tag_value", "5.x" },
+    ///         },
+    ///     });
     /// 
-    ///     [Output("accessKey")]
-    ///     public Output&lt;string&gt; AccessKey { get; set; }
-    ///     [Output("secretKey")]
-    ///     public Output&lt;string&gt; SecretKey { get; set; }
-    /// }
+    ///     var rocketmqRole = new Tencentcloud.Trocket.RocketmqRole("rocketmqRole", new()
+    ///     {
+    ///         InstanceId = rocketmqInstance.Id,
+    ///         Role = "test_role",
+    ///         Remark = "test for terraform",
+    ///         PermWrite = false,
+    ///         PermRead = true,
+    ///     });
+    /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["accessKey"] = rocketmqRole.AccessKey,
+    ///         ["secretKey"] = rocketmqRole.SecretKey,
+    ///     };
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// trocket rocketmq_role can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Trocket/rocketmqRole:RocketmqRole rocketmq_role instanceId#role
+    /// $ pulumi import tencentcloud:Trocket/rocketmqRole:RocketmqRole rocketmq_role instanceId#role
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Trocket/rocketmqRole:RocketmqRole")]
-    public partial class RocketmqRole : Pulumi.CustomResource
+    public partial class RocketmqRole : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Access key.
@@ -165,7 +166,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         }
     }
 
-    public sealed class RocketmqRoleArgs : Pulumi.ResourceArgs
+    public sealed class RocketmqRoleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of instance.
@@ -200,9 +201,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         public RocketmqRoleArgs()
         {
         }
+        public static new RocketmqRoleArgs Empty => new RocketmqRoleArgs();
     }
 
-    public sealed class RocketmqRoleState : Pulumi.ResourceArgs
+    public sealed class RocketmqRoleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Access key.
@@ -261,5 +263,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         public RocketmqRoleState()
         {
         }
+        public static new RocketmqRoleState Empty => new RocketmqRoleState();
     }
 }

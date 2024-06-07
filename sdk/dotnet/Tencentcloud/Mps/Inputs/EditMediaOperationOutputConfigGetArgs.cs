@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
 {
 
-    public sealed class EditMediaOperationOutputConfigGetArgs : Pulumi.ResourceArgs
+    public sealed class EditMediaOperationOutputConfigGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Format. Valid values: `mp4` (default), `hls`, `mov`, `flv`, `avi`.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public EditMediaOperationOutputConfigGetArgs()
         {
         }
+        public static new EditMediaOperationOutputConfigGetArgs Empty => new EditMediaOperationOutputConfigGetArgs();
     }
 }

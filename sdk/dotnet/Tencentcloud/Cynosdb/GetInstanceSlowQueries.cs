@@ -15,190 +15,186 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// <summary>
         /// Use this data source to query detailed information of cynosdb instance_slow_queries
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Query slow queries of instance
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var config = new Config();
+        ///     var cynosdbClusterId = config.Get("cynosdbClusterId") ?? "default_cynosdb_cluster";
+        ///     var instanceSlowQueries = Tencentcloud.Cynosdb.GetInstanceSlowQueries.Invoke(new()
         ///     {
-        ///         var config = new Config();
-        ///         var cynosdbClusterId = config.Get("cynosdbClusterId") ?? "default_cynosdb_cluster";
-        ///         var instanceSlowQueries = Output.Create(Tencentcloud.Cynosdb.GetInstanceSlowQueries.InvokeAsync(new Tencentcloud.Cynosdb.GetInstanceSlowQueriesArgs
-        ///         {
-        ///             InstanceId = cynosdbClusterId,
-        ///             StartTime = "2023-06-20 23:19:03",
-        ///             EndTime = "2023-06-30 23:19:03",
-        ///             Username = "keep_dts",
-        ///             Host = "%%",
-        ///             Database = "tf_ci_test",
-        ///             OrderBy = "QueryTime",
-        ///             OrderByType = "desc",
-        ///         }));
-        ///     }
+        ///         InstanceId = cynosdbClusterId,
+        ///         StartTime = "2023-06-20 23:19:03",
+        ///         EndTime = "2023-06-30 23:19:03",
+        ///         Username = "keep_dts",
+        ///         Host = "%%",
+        ///         Database = "tf_ci_test",
+        ///         OrderBy = "QueryTime",
+        ///         OrderByType = "desc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Query slow queries by time range
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var config = new Config();
+        ///     var cynosdbClusterId = config.Get("cynosdbClusterId") ?? "default_cynosdb_cluster";
+        ///     var instanceSlowQueries = Tencentcloud.Cynosdb.GetInstanceSlowQueries.Invoke(new()
         ///     {
-        ///         var config = new Config();
-        ///         var cynosdbClusterId = config.Get("cynosdbClusterId") ?? "default_cynosdb_cluster";
-        ///         var instanceSlowQueries = Output.Create(Tencentcloud.Cynosdb.GetInstanceSlowQueries.InvokeAsync(new Tencentcloud.Cynosdb.GetInstanceSlowQueriesArgs
-        ///         {
-        ///             InstanceId = cynosdbClusterId,
-        ///             StartTime = "2023-06-20 23:19:03",
-        ///             EndTime = "2023-06-30 23:19:03",
-        ///             OrderBy = "QueryTime",
-        ///             OrderByType = "desc",
-        ///         }));
-        ///     }
+        ///         InstanceId = cynosdbClusterId,
+        ///         StartTime = "2023-06-20 23:19:03",
+        ///         EndTime = "2023-06-30 23:19:03",
+        ///         OrderBy = "QueryTime",
+        ///         OrderByType = "desc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Query slow queries by user and db name
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var config = new Config();
+        ///     var cynosdbClusterId = config.Get("cynosdbClusterId") ?? "default_cynosdb_cluster";
+        ///     var instanceSlowQueries = Tencentcloud.Cynosdb.GetInstanceSlowQueries.Invoke(new()
         ///     {
-        ///         var config = new Config();
-        ///         var cynosdbClusterId = config.Get("cynosdbClusterId") ?? "default_cynosdb_cluster";
-        ///         var instanceSlowQueries = Output.Create(Tencentcloud.Cynosdb.GetInstanceSlowQueries.InvokeAsync(new Tencentcloud.Cynosdb.GetInstanceSlowQueriesArgs
-        ///         {
-        ///             InstanceId = cynosdbClusterId,
-        ///             Username = "keep_dts",
-        ///             Host = "%%",
-        ///             Database = "tf_ci_test",
-        ///             OrderBy = "QueryTime",
-        ///             OrderByType = "desc",
-        ///         }));
-        ///     }
+        ///         InstanceId = cynosdbClusterId,
+        ///         Username = "keep_dts",
+        ///         Host = "%%",
+        ///         Database = "tf_ci_test",
+        ///         OrderBy = "QueryTime",
+        ///         OrderByType = "desc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Task<GetInstanceSlowQueriesResult> InvokeAsync(GetInstanceSlowQueriesArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.InvokeAsync<GetInstanceSlowQueriesResult>("tencentcloud:Cynosdb/getInstanceSlowQueries:getInstanceSlowQueries", args ?? new GetInstanceSlowQueriesArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceSlowQueriesResult>("tencentcloud:Cynosdb/getInstanceSlowQueries:getInstanceSlowQueries", args ?? new GetInstanceSlowQueriesArgs(), options.WithDefaults());
 
         /// <summary>
         /// Use this data source to query detailed information of cynosdb instance_slow_queries
         /// 
-        /// {{% examples %}}
         /// ## Example Usage
-        /// {{% example %}}
+        /// 
         /// ### Query slow queries of instance
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var config = new Config();
+        ///     var cynosdbClusterId = config.Get("cynosdbClusterId") ?? "default_cynosdb_cluster";
+        ///     var instanceSlowQueries = Tencentcloud.Cynosdb.GetInstanceSlowQueries.Invoke(new()
         ///     {
-        ///         var config = new Config();
-        ///         var cynosdbClusterId = config.Get("cynosdbClusterId") ?? "default_cynosdb_cluster";
-        ///         var instanceSlowQueries = Output.Create(Tencentcloud.Cynosdb.GetInstanceSlowQueries.InvokeAsync(new Tencentcloud.Cynosdb.GetInstanceSlowQueriesArgs
-        ///         {
-        ///             InstanceId = cynosdbClusterId,
-        ///             StartTime = "2023-06-20 23:19:03",
-        ///             EndTime = "2023-06-30 23:19:03",
-        ///             Username = "keep_dts",
-        ///             Host = "%%",
-        ///             Database = "tf_ci_test",
-        ///             OrderBy = "QueryTime",
-        ///             OrderByType = "desc",
-        ///         }));
-        ///     }
+        ///         InstanceId = cynosdbClusterId,
+        ///         StartTime = "2023-06-20 23:19:03",
+        ///         EndTime = "2023-06-30 23:19:03",
+        ///         Username = "keep_dts",
+        ///         Host = "%%",
+        ///         Database = "tf_ci_test",
+        ///         OrderBy = "QueryTime",
+        ///         OrderByType = "desc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Query slow queries by time range
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var config = new Config();
+        ///     var cynosdbClusterId = config.Get("cynosdbClusterId") ?? "default_cynosdb_cluster";
+        ///     var instanceSlowQueries = Tencentcloud.Cynosdb.GetInstanceSlowQueries.Invoke(new()
         ///     {
-        ///         var config = new Config();
-        ///         var cynosdbClusterId = config.Get("cynosdbClusterId") ?? "default_cynosdb_cluster";
-        ///         var instanceSlowQueries = Output.Create(Tencentcloud.Cynosdb.GetInstanceSlowQueries.InvokeAsync(new Tencentcloud.Cynosdb.GetInstanceSlowQueriesArgs
-        ///         {
-        ///             InstanceId = cynosdbClusterId,
-        ///             StartTime = "2023-06-20 23:19:03",
-        ///             EndTime = "2023-06-30 23:19:03",
-        ///             OrderBy = "QueryTime",
-        ///             OrderByType = "desc",
-        ///         }));
-        ///     }
+        ///         InstanceId = cynosdbClusterId,
+        ///         StartTime = "2023-06-20 23:19:03",
+        ///         EndTime = "2023-06-30 23:19:03",
+        ///         OrderBy = "QueryTime",
+        ///         OrderByType = "desc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% example %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
         /// ### Query slow queries by user and db name
         /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
         /// using Pulumi;
         /// using Tencentcloud = Pulumi.Tencentcloud;
         /// 
-        /// class MyStack : Stack
+        /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     public MyStack()
+        ///     var config = new Config();
+        ///     var cynosdbClusterId = config.Get("cynosdbClusterId") ?? "default_cynosdb_cluster";
+        ///     var instanceSlowQueries = Tencentcloud.Cynosdb.GetInstanceSlowQueries.Invoke(new()
         ///     {
-        ///         var config = new Config();
-        ///         var cynosdbClusterId = config.Get("cynosdbClusterId") ?? "default_cynosdb_cluster";
-        ///         var instanceSlowQueries = Output.Create(Tencentcloud.Cynosdb.GetInstanceSlowQueries.InvokeAsync(new Tencentcloud.Cynosdb.GetInstanceSlowQueriesArgs
-        ///         {
-        ///             InstanceId = cynosdbClusterId,
-        ///             Username = "keep_dts",
-        ///             Host = "%%",
-        ///             Database = "tf_ci_test",
-        ///             OrderBy = "QueryTime",
-        ///             OrderByType = "desc",
-        ///         }));
-        ///     }
+        ///         InstanceId = cynosdbClusterId,
+        ///         Username = "keep_dts",
+        ///         Host = "%%",
+        ///         Database = "tf_ci_test",
+        ///         OrderBy = "QueryTime",
+        ///         OrderByType = "desc",
+        ///     });
         /// 
-        /// }
+        /// });
         /// ```
-        /// {{% /example %}}
-        /// {{% /examples %}}
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// </summary>
         public static Output<GetInstanceSlowQueriesResult> Invoke(GetInstanceSlowQueriesInvokeArgs args, InvokeOptions? options = null)
-            => Pulumi.Deployment.Instance.Invoke<GetInstanceSlowQueriesResult>("tencentcloud:Cynosdb/getInstanceSlowQueries:getInstanceSlowQueries", args ?? new GetInstanceSlowQueriesInvokeArgs(), options.WithDefaults());
+            => global::Pulumi.Deployment.Instance.Invoke<GetInstanceSlowQueriesResult>("tencentcloud:Cynosdb/getInstanceSlowQueries:getInstanceSlowQueries", args ?? new GetInstanceSlowQueriesInvokeArgs(), options.WithDefaults());
     }
 
 
-    public sealed class GetInstanceSlowQueriesArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceSlowQueriesArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Database name.
@@ -257,9 +253,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetInstanceSlowQueriesArgs()
         {
         }
+        public static new GetInstanceSlowQueriesArgs Empty => new GetInstanceSlowQueriesArgs();
     }
 
-    public sealed class GetInstanceSlowQueriesInvokeArgs : Pulumi.InvokeArgs
+    public sealed class GetInstanceSlowQueriesInvokeArgs : global::Pulumi.InvokeArgs
     {
         /// <summary>
         /// Database name.
@@ -318,6 +315,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public GetInstanceSlowQueriesInvokeArgs()
         {
         }
+        public static new GetInstanceSlowQueriesInvokeArgs Empty => new GetInstanceSlowQueriesInvokeArgs();
     }
 
 

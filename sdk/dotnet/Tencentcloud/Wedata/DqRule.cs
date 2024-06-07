@@ -13,63 +13,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// <summary>
     /// Provides a resource to create a wedata dq_rule
     /// 
-    /// ## Example Usage
-    /// 
-    /// ```csharp
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
-    /// 
-    /// class MyStack : Stack
-    /// {
-    ///     public MyStack()
-    ///     {
-    ///         var example = new Tencentcloud.Wedata.DqRule("example", new Tencentcloud.Wedata.DqRuleArgs
-    ///         {
-    ///             AlarmLevel = 1,
-    ///             CompareRule = new Tencentcloud.Wedata.Inputs.DqRuleCompareRuleArgs
-    ///             {
-    ///                 Items = 
-    ///                 {
-    ///                     new Tencentcloud.Wedata.Inputs.DqRuleCompareRuleItemArgs
-    ///                     {
-    ///                         CompareType = 1,
-    ///                         Operator = "==",
-    ///                         ValueList = 
-    ///                         {
-    ///                             
-    ///                             {
-    ///                                 { "value", "100" },
-    ///                                 { "valueType", 3 },
-    ///                             },
-    ///                         },
-    ///                     },
-    ///                 },
-    ///             },
-    ///             ConditionType = 1,
-    ///             Description = "description.",
-    ///             ProjectId = "1948767646355341312",
-    ///             RuleGroupId = 312,
-    ///             RuleTemplateId = 1,
-    ///             SourceObjectDataTypeName = "table",
-    ///             SourceObjectValue = "表",
-    ///             TableId = "N85hbsh5QQ2VLHL2iOUVeQ",
-    ///             Type = 1,
-    ///         });
-    ///     }
-    /// 
-    /// }
-    /// ```
-    /// 
     /// ## Import
     /// 
     /// wedata dq_rule can be imported using the id, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Wedata/dqRule:DqRule example 1948767646355341312#894
+    /// $ pulumi import tencentcloud:Wedata/dqRule:DqRule example 1948767646355341312#894
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/dqRule:DqRule")]
-    public partial class DqRule : Pulumi.CustomResource
+    public partial class DqRule : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Alarm trigger levels 1. Low, 2. Medium, 3. High.
@@ -254,7 +207,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         }
     }
 
-    public sealed class DqRuleArgs : Pulumi.ResourceArgs
+    public sealed class DqRuleArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alarm trigger levels 1. Low, 2. Medium, 3. High.
@@ -397,9 +350,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public DqRuleArgs()
         {
         }
+        public static new DqRuleArgs Empty => new DqRuleArgs();
     }
 
-    public sealed class DqRuleState : Pulumi.ResourceArgs
+    public sealed class DqRuleState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Alarm trigger levels 1. Low, 2. Medium, 3. High.
@@ -548,5 +502,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         public DqRuleState()
         {
         }
+        public static new DqRuleState Empty => new DqRuleState();
     }
 }

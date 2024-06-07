@@ -15,114 +15,117 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var fooAdaptiveDynamicStreamingTemplate = new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplate("fooAdaptiveDynamicStreamingTemplate", new()
     ///     {
-    ///         var fooAdaptiveDynamicStreamingTemplate = new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplate("fooAdaptiveDynamicStreamingTemplate", new Tencentcloud.Vod.AdaptiveDynamicStreamingTemplateArgs
+    ///         Format = "HLS",
+    ///         DrmType = "SimpleAES",
+    ///         DisableHigherVideoBitrate = false,
+    ///         DisableHigherVideoResolution = false,
+    ///         Comment = "test",
+    ///         StreamInfos = new[]
     ///         {
-    ///             Format = "HLS",
-    ///             DrmType = "SimpleAES",
-    ///             DisableHigherVideoBitrate = false,
-    ///             DisableHigherVideoResolution = false,
-    ///             Comment = "test",
-    ///             StreamInfos = 
+    ///             new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
     ///             {
-    ///                 new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
+    ///                 Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
     ///                 {
-    ///                     Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
-    ///                     {
-    ///                         Codec = "libx265",
-    ///                         Fps = 4,
-    ///                         Bitrate = 129,
-    ///                         ResolutionAdaptive = false,
-    ///                         Width = 128,
-    ///                         Height = 128,
-    ///                         FillType = "stretch",
-    ///                     },
-    ///                     Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
-    ///                     {
-    ///                         Codec = "libmp3lame",
-    ///                         Bitrate = 129,
-    ///                         SampleRate = 44100,
-    ///                         AudioChannel = "dual",
-    ///                     },
-    ///                     RemoveAudio = false,
+    ///                     Codec = "libx265",
+    ///                     Fps = 4,
+    ///                     Bitrate = 129,
+    ///                     ResolutionAdaptive = false,
+    ///                     Width = 128,
+    ///                     Height = 128,
+    ///                     FillType = "stretch",
     ///                 },
-    ///                 new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
+    ///                 Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
     ///                 {
-    ///                     Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
-    ///                     {
-    ///                         Codec = "libx264",
-    ///                         Fps = 4,
-    ///                         Bitrate = 256,
-    ///                     },
-    ///                     Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
-    ///                     {
-    ///                         Codec = "libfdk_aac",
-    ///                         Bitrate = 256,
-    ///                         SampleRate = 44100,
-    ///                     },
-    ///                     RemoveAudio = true,
+    ///                     Codec = "libmp3lame",
+    ///                     Bitrate = 129,
+    ///                     SampleRate = 44100,
+    ///                     AudioChannel = "dual",
     ///                 },
+    ///                 RemoveAudio = false,
     ///             },
-    ///         });
-    ///         var fooImageSpriteTemplate = new Tencentcloud.Vod.ImageSpriteTemplate("fooImageSpriteTemplate", new Tencentcloud.Vod.ImageSpriteTemplateArgs
-    ///         {
-    ///             SampleType = "Percent",
-    ///             SampleInterval = 10,
-    ///             RowCount = 3,
-    ///             ColumnCount = 3,
-    ///             Comment = "test",
-    ///             FillType = "stretch",
-    ///             Width = 128,
-    ///             Height = 128,
-    ///             ResolutionAdaptive = false,
-    ///         });
-    ///         var fooSuperPlayerConfig = new Tencentcloud.Vod.SuperPlayerConfig("fooSuperPlayerConfig", new Tencentcloud.Vod.SuperPlayerConfigArgs
-    ///         {
-    ///             DrmSwitch = true,
-    ///             DrmStreamingInfo = new Tencentcloud.Vod.Inputs.SuperPlayerConfigDrmStreamingInfoArgs
+    ///             new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoArgs
     ///             {
-    ///                 SimpleAesDefinition = fooAdaptiveDynamicStreamingTemplate.Id,
-    ///             },
-    ///             ImageSpriteDefinition = fooImageSpriteTemplate.Id,
-    ///             ResolutionNames = 
-    ///             {
-    ///                 new Tencentcloud.Vod.Inputs.SuperPlayerConfigResolutionNameArgs
+    ///                 Video = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs
     ///                 {
-    ///                     MinEdgeLength = 889,
-    ///                     Name = "test1",
+    ///                     Codec = "libx264",
+    ///                     Fps = 4,
+    ///                     Bitrate = 256,
     ///                 },
-    ///                 new Tencentcloud.Vod.Inputs.SuperPlayerConfigResolutionNameArgs
+    ///                 Audio = new Tencentcloud.Vod.Inputs.AdaptiveDynamicStreamingTemplateStreamInfoAudioArgs
     ///                 {
-    ///                     MinEdgeLength = 890,
-    ///                     Name = "test2",
+    ///                     Codec = "libfdk_aac",
+    ///                     Bitrate = 256,
+    ///                     SampleRate = 44100,
     ///                 },
+    ///                 RemoveAudio = true,
     ///             },
-    ///             Domain = "Default",
-    ///             Scheme = "Default",
-    ///             Comment = "test",
-    ///         });
-    ///     }
+    ///         },
+    ///     });
     /// 
-    /// }
+    ///     var fooImageSpriteTemplate = new Tencentcloud.Vod.ImageSpriteTemplate("fooImageSpriteTemplate", new()
+    ///     {
+    ///         SampleType = "Percent",
+    ///         SampleInterval = 10,
+    ///         RowCount = 3,
+    ///         ColumnCount = 3,
+    ///         Comment = "test",
+    ///         FillType = "stretch",
+    ///         Width = 128,
+    ///         Height = 128,
+    ///         ResolutionAdaptive = false,
+    ///     });
+    /// 
+    ///     var fooSuperPlayerConfig = new Tencentcloud.Vod.SuperPlayerConfig("fooSuperPlayerConfig", new()
+    ///     {
+    ///         DrmSwitch = true,
+    ///         DrmStreamingInfo = new Tencentcloud.Vod.Inputs.SuperPlayerConfigDrmStreamingInfoArgs
+    ///         {
+    ///             SimpleAesDefinition = fooAdaptiveDynamicStreamingTemplate.Id,
+    ///         },
+    ///         ImageSpriteDefinition = fooImageSpriteTemplate.Id,
+    ///         ResolutionNames = new[]
+    ///         {
+    ///             new Tencentcloud.Vod.Inputs.SuperPlayerConfigResolutionNameArgs
+    ///             {
+    ///                 MinEdgeLength = 889,
+    ///                 Name = "test1",
+    ///             },
+    ///             new Tencentcloud.Vod.Inputs.SuperPlayerConfigResolutionNameArgs
+    ///             {
+    ///                 MinEdgeLength = 890,
+    ///                 Name = "test2",
+    ///             },
+    ///         },
+    ///         Domain = "Default",
+    ///         Scheme = "Default",
+    ///         Comment = "test",
+    ///     });
+    /// 
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// ## Import
     /// 
     /// VOD super player config can be imported using the name, e.g.
     /// 
     /// ```sh
-    ///  $ pulumi import tencentcloud:Vod/superPlayerConfig:SuperPlayerConfig foo tf-super-player
+    /// $ pulumi import tencentcloud:Vod/superPlayerConfig:SuperPlayerConfig foo tf-super-player
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vod/superPlayerConfig:SuperPlayerConfig")]
-    public partial class SuperPlayerConfig : Pulumi.CustomResource
+    public partial class SuperPlayerConfig : global::Pulumi.CustomResource
     {
         /// <summary>
         /// ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if `drm_switch` is `false`.
@@ -241,7 +244,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         }
     }
 
-    public sealed class SuperPlayerConfigArgs : Pulumi.ResourceArgs
+    public sealed class SuperPlayerConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if `drm_switch` is `false`.
@@ -312,9 +315,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public SuperPlayerConfigArgs()
         {
         }
+        public static new SuperPlayerConfigArgs Empty => new SuperPlayerConfigArgs();
     }
 
-    public sealed class SuperPlayerConfigState : Pulumi.ResourceArgs
+    public sealed class SuperPlayerConfigState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// ID of the unencrypted adaptive bitrate streaming template that allows output, which is required if `drm_switch` is `false`.
@@ -397,5 +401,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public SuperPlayerConfigState()
         {
         }
+        public static new SuperPlayerConfigState Empty => new SuperPlayerConfigState();
     }
 }

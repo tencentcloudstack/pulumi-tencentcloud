@@ -38,6 +38,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Security.Outputs
         /// An IPV6 address network or CIDR segment, and conflict with `source_security_id` and `address_template_*`.
         /// </summary>
         public readonly string? Ipv6CidrBlock;
+        /// <summary>
+        /// The security group rule index number, whose value dynamically changes with changes in security group rules.
+        /// </summary>
         public readonly int? PolicyIndex;
         /// <summary>
         /// Range of the port. The available value can be one, multiple or one segment. E.g. `80`, `80,90` and `80-90`. Default to all ports, and conflicts with `service_template_*`.

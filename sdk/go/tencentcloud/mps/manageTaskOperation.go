@@ -7,35 +7,41 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a mps manageTaskOperation
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Mps"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Mps.NewManageTaskOperation(ctx, "operation", &Mps.ManageTaskOperationArgs{
-// 			OperationType: pulumi.String("Abort"),
-// 			TaskId:        pulumi.String("2600010949-LiveScheduleTask-xxxx"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Mps.NewManageTaskOperation(ctx, "operation", &Mps.ManageTaskOperationArgs{
+//				OperationType: pulumi.String("Abort"),
+//				TaskId:        pulumi.String("2600010949-LiveScheduleTask-xxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 type ManageTaskOperation struct {
 	pulumi.CustomResourceState
 
@@ -58,7 +64,7 @@ func NewManageTaskOperation(ctx *pulumi.Context,
 	if args.TaskId == nil {
 		return nil, errors.New("invalid value for required argument 'TaskId'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource ManageTaskOperation
 	err := ctx.RegisterResource("tencentcloud:Mps/manageTaskOperation:ManageTaskOperation", name, args, &resource, opts...)
 	if err != nil {
@@ -139,7 +145,7 @@ func (i *ManageTaskOperation) ToManageTaskOperationOutputWithContext(ctx context
 // ManageTaskOperationArrayInput is an input type that accepts ManageTaskOperationArray and ManageTaskOperationArrayOutput values.
 // You can construct a concrete instance of `ManageTaskOperationArrayInput` via:
 //
-//          ManageTaskOperationArray{ ManageTaskOperationArgs{...} }
+//	ManageTaskOperationArray{ ManageTaskOperationArgs{...} }
 type ManageTaskOperationArrayInput interface {
 	pulumi.Input
 
@@ -164,7 +170,7 @@ func (i ManageTaskOperationArray) ToManageTaskOperationArrayOutputWithContext(ct
 // ManageTaskOperationMapInput is an input type that accepts ManageTaskOperationMap and ManageTaskOperationMapOutput values.
 // You can construct a concrete instance of `ManageTaskOperationMapInput` via:
 //
-//          ManageTaskOperationMap{ "key": ManageTaskOperationArgs{...} }
+//	ManageTaskOperationMap{ "key": ManageTaskOperationArgs{...} }
 type ManageTaskOperationMapInput interface {
 	pulumi.Input
 

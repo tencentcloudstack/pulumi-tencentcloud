@@ -15,25 +15,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// 
     /// ## Example Usage
     /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
     /// using Pulumi;
     /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
     /// 
-    /// class MyStack : Stack
+    /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     public MyStack()
+    ///     var restartKibanaOperation = new Tencentcloud.Elasticsearch.RestartKibanaOperation("restartKibanaOperation", new()
     ///     {
-    ///         var restartKibanaOperation = new Tencentcloud.Elasticsearch.RestartKibanaOperation("restartKibanaOperation", new Tencentcloud.Elasticsearch.RestartKibanaOperationArgs
-    ///         {
-    ///             InstanceId = "es-xxxxxx",
-    ///         });
-    ///     }
+    ///         InstanceId = "es-xxxxxx",
+    ///     });
     /// 
-    /// }
+    /// });
     /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/restartKibanaOperation:RestartKibanaOperation")]
-    public partial class RestartKibanaOperation : Pulumi.CustomResource
+    public partial class RestartKibanaOperation : global::Pulumi.CustomResource
     {
         /// <summary>
         /// Instance id.
@@ -86,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         }
     }
 
-    public sealed class RestartKibanaOperationArgs : Pulumi.ResourceArgs
+    public sealed class RestartKibanaOperationArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance id.
@@ -97,9 +98,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public RestartKibanaOperationArgs()
         {
         }
+        public static new RestartKibanaOperationArgs Empty => new RestartKibanaOperationArgs();
     }
 
-    public sealed class RestartKibanaOperationState : Pulumi.ResourceArgs
+    public sealed class RestartKibanaOperationState : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Instance id.
@@ -110,5 +112,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public RestartKibanaOperationState()
         {
         }
+        public static new RestartKibanaOperationState Empty => new RestartKibanaOperationState();
     }
 }

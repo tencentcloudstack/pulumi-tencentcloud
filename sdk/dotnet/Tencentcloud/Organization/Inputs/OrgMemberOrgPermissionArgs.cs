@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization.Inputs
 {
 
-    public sealed class OrgMemberOrgPermissionArgs : Pulumi.ResourceArgs
+    public sealed class OrgMemberOrgPermissionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Permissions ID.
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization.Inputs
         public OrgMemberOrgPermissionArgs()
         {
         }
+        public static new OrgMemberOrgPermissionArgs Empty => new OrgMemberOrgPermissionArgs();
     }
 }

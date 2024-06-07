@@ -2,7 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
-import { input as inputs, output as outputs } from "../types";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -10,22 +11,21 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const describeHostVodInstanceList = pulumi.output(tencentcloud.Ssl.getDescribeHostVodInstanceList({
+ * const describeHostVodInstanceList = tencentcloud.Ssl.getDescribeHostVodInstanceList({
  *     certificateId: "8u8DII0l",
  *     resourceType: "vod",
- * }));
+ * });
  * ```
+ * <!--End PulumiCodeChooser -->
  */
 export function getDescribeHostVodInstanceList(args: GetDescribeHostVodInstanceListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostVodInstanceListResult> {
-    if (!opts) {
-        opts = {}
-    }
 
-    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Ssl/getDescribeHostVodInstanceList:getDescribeHostVodInstanceList", {
         "certificateId": args.certificateId,
         "filters": args.filters,
@@ -85,9 +85,25 @@ export interface GetDescribeHostVodInstanceListResult {
     readonly resourceType: string;
     readonly resultOutputFile?: string;
 }
-
+/**
+ * Use this data source to query detailed information of ssl describeHostVodInstanceList
+ *
+ * ## Example Usage
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const describeHostVodInstanceList = tencentcloud.Ssl.getDescribeHostVodInstanceList({
+ *     certificateId: "8u8DII0l",
+ *     resourceType: "vod",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ */
 export function getDescribeHostVodInstanceListOutput(args: GetDescribeHostVodInstanceListOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDescribeHostVodInstanceListResult> {
-    return pulumi.output(args).apply(a => getDescribeHostVodInstanceList(a, opts))
+    return pulumi.output(args).apply((a: any) => getDescribeHostVodInstanceList(a, opts))
 }
 
 /**

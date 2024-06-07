@@ -7,42 +7,48 @@ import (
 	"context"
 	"reflect"
 
-	"github.com/pkg/errors"
+	"errors"
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
 // Provides a resource to create a dnspod snapshotConfig
 //
 // ## Example Usage
 //
+// <!--Start PulumiCodeChooser -->
 // ```go
 // package main
 //
 // import (
-// 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-// 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Dnspod"
+//
 // )
 //
-// func main() {
-// 	pulumi.Run(func(ctx *pulumi.Context) error {
-// 		_, err := Dnspod.NewSnapshotConfig(ctx, "snapshotConfig", &Dnspod.SnapshotConfigArgs{
-// 			Domain: pulumi.String("dnspod.cn"),
-// 			Period: pulumi.String("hourly"),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 		return nil
-// 	})
-// }
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Dnspod.NewSnapshotConfig(ctx, "snapshotConfig", &Dnspod.SnapshotConfigArgs{
+//				Domain: pulumi.String("dnspod.cn"),
+//				Period: pulumi.String("hourly"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
 // ```
+// <!--End PulumiCodeChooser -->
 //
 // ## Import
 //
 // dnspod snapshot_config can be imported using the id, e.g.
 //
 // ```sh
-//  $ pulumi import tencentcloud:Dnspod/snapshotConfig:SnapshotConfig snapshot_config domain
+// $ pulumi import tencentcloud:Dnspod/snapshotConfig:SnapshotConfig snapshot_config domain
 // ```
 type SnapshotConfig struct {
 	pulumi.CustomResourceState
@@ -66,7 +72,7 @@ func NewSnapshotConfig(ctx *pulumi.Context,
 	if args.Period == nil {
 		return nil, errors.New("invalid value for required argument 'Period'")
 	}
-	opts = pkgResourceDefaultOpts(opts)
+	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource SnapshotConfig
 	err := ctx.RegisterResource("tencentcloud:Dnspod/snapshotConfig:SnapshotConfig", name, args, &resource, opts...)
 	if err != nil {
@@ -147,7 +153,7 @@ func (i *SnapshotConfig) ToSnapshotConfigOutputWithContext(ctx context.Context) 
 // SnapshotConfigArrayInput is an input type that accepts SnapshotConfigArray and SnapshotConfigArrayOutput values.
 // You can construct a concrete instance of `SnapshotConfigArrayInput` via:
 //
-//          SnapshotConfigArray{ SnapshotConfigArgs{...} }
+//	SnapshotConfigArray{ SnapshotConfigArgs{...} }
 type SnapshotConfigArrayInput interface {
 	pulumi.Input
 
@@ -172,7 +178,7 @@ func (i SnapshotConfigArray) ToSnapshotConfigArrayOutputWithContext(ctx context.
 // SnapshotConfigMapInput is an input type that accepts SnapshotConfigMap and SnapshotConfigMapOutput values.
 // You can construct a concrete instance of `SnapshotConfigMapInput` via:
 //
-//          SnapshotConfigMap{ "key": SnapshotConfigArgs{...} }
+//	SnapshotConfigMap{ "key": SnapshotConfigArgs{...} }
 type SnapshotConfigMapInput interface {
 	pulumi.Input
 

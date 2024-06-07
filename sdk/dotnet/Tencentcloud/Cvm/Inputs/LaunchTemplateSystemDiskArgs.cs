@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
 {
 
-    public sealed class LaunchTemplateSystemDiskArgs : Pulumi.ResourceArgs
+    public sealed class LaunchTemplateSystemDiskArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Cloud Dedicated Cluster(CDC) ID.
@@ -40,5 +40,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public LaunchTemplateSystemDiskArgs()
         {
         }
+        public static new LaunchTemplateSystemDiskArgs Empty => new LaunchTemplateSystemDiskArgs();
     }
 }

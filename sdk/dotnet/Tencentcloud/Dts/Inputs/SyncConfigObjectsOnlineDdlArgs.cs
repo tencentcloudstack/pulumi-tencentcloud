@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
 {
 
-    public sealed class SyncConfigObjectsOnlineDdlArgs : Pulumi.ResourceArgs
+    public sealed class SyncConfigObjectsOnlineDdlArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// status.
@@ -22,5 +22,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts.Inputs
         public SyncConfigObjectsOnlineDdlArgs()
         {
         }
+        public static new SyncConfigObjectsOnlineDdlArgs Empty => new SyncConfigObjectsOnlineDdlArgs();
     }
 }

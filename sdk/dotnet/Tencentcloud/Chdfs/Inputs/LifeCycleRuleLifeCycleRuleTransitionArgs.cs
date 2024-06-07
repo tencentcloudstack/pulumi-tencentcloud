@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs.Inputs
 {
 
-    public sealed class LifeCycleRuleLifeCycleRuleTransitionArgs : Pulumi.ResourceArgs
+    public sealed class LifeCycleRuleLifeCycleRuleTransitionArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// trigger days(n day).
@@ -28,5 +28,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Chdfs.Inputs
         public LifeCycleRuleLifeCycleRuleTransitionArgs()
         {
         }
+        public static new LifeCycleRuleLifeCycleRuleTransitionArgs Empty => new LifeCycleRuleLifeCycleRuleTransitionArgs();
     }
 }

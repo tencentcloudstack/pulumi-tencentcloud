@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
 {
 
-    public sealed class MediaTranscodeTemplateTransConfigArgs : Pulumi.ResourceArgs
+    public sealed class MediaTranscodeTemplateTransConfigArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
         /// Resolution adjustment method, value scale, crop, pad, none, When the aspect ratio of the output video is different from the original video, adjust the resolution accordingly according to this parameter.
@@ -76,5 +76,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ci.Inputs
         public MediaTranscodeTemplateTransConfigArgs()
         {
         }
+        public static new MediaTranscodeTemplateTransConfigArgs Empty => new MediaTranscodeTemplateTransConfigArgs();
     }
 }
