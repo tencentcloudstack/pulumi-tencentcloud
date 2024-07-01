@@ -14,11 +14,11 @@ import (
 
 // Provides a resource to create a rocketmq 5.x instance
 //
-// > **NOTE:** It only support create postpaid rocketmq 5.x instance.
+// > **NOTE:** It only supports create postpaid rocketmq 5.x instance.
 //
 // ## Example Usage
 //
-// ### Basic Instance
+// ### Create Basic Instance
 //
 // <!--Start PulumiCodeChooser -->
 // ```go
@@ -27,22 +27,42 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Trocket"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Trocket.NewRocketmqInstance(ctx, "rocketmqInstance", &Trocket.RocketmqInstanceArgs{
-//				InstanceType: pulumi.String("EXPERIMENT"),
+//			// create vpc
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create vpc subnet
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+//				CidrBlock:        pulumi.String("10.0.20.0/28"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create rocketmq instance
+//			_, err = Trocket.NewRocketmqInstance(ctx, "example", &Trocket.RocketmqInstanceArgs{
+//				InstanceType: pulumi.String("PRO"),
+//				SkuCode:      pulumi.String("pro_4k"),
 //				Remark:       pulumi.String("remark"),
-//				SkuCode:      pulumi.String("experiment_500"),
-//				SubnetId:     pulumi.String("subnet-xxxxxx"),
+//				VpcId:        vpc.ID(),
+//				SubnetId:     subnet.ID(),
 //				Tags: pulumi.Map{
 //					"tag_key":   pulumi.Any("rocketmq"),
 //					"tag_value": pulumi.Any("5.x"),
 //				},
-//				VpcId: pulumi.String("vpc-xxxxxx"),
 //			})
 //			if err != nil {
 //				return err
@@ -54,7 +74,7 @@ import (
 // ```
 // <!--End PulumiCodeChooser -->
 //
-// ### Enable Public Instance
+// ### Create Enable Public Network Instance
 //
 // <!--Start PulumiCodeChooser -->
 // ```go
@@ -63,24 +83,44 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Trocket"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Trocket.NewRocketmqInstance(ctx, "rocketmqInstancePublic", &Trocket.RocketmqInstanceArgs{
-//				Bandwidth:    pulumi.Int(1),
-//				EnablePublic: pulumi.Bool(true),
-//				InstanceType: pulumi.String("EXPERIMENT"),
+//			// create vpc
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create vpc subnet
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+//				CidrBlock:        pulumi.String("10.0.20.0/28"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create rocketmq instance
+//			_, err = Trocket.NewRocketmqInstance(ctx, "example", &Trocket.RocketmqInstanceArgs{
+//				InstanceType: pulumi.String("PRO"),
+//				SkuCode:      pulumi.String("pro_4k"),
 //				Remark:       pulumi.String("remark"),
-//				SkuCode:      pulumi.String("experiment_500"),
-//				SubnetId:     pulumi.String("subnet-xxxxxx"),
+//				VpcId:        vpc.ID(),
+//				SubnetId:     subnet.ID(),
+//				EnablePublic: pulumi.Bool(true),
+//				Bandwidth:    pulumi.Int(10),
 //				Tags: pulumi.Map{
 //					"tag_key":   pulumi.Any("rocketmq"),
 //					"tag_value": pulumi.Any("5.x"),
 //				},
-//				VpcId: pulumi.String("vpc-xxxxxx"),
 //			})
 //			if err != nil {
 //				return err
@@ -97,7 +137,7 @@ import (
 // trocket rocketmq_instance can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Trocket/rocketmqInstance:RocketmqInstance rocketmq_instance rocketmq_instance_id
+// $ pulumi import tencentcloud:Trocket/rocketmqInstance:RocketmqInstance rocketmq_instance rmq-n5qado7m
 // ```
 type RocketmqInstance struct {
 	pulumi.CustomResourceState
@@ -118,7 +158,7 @@ type RocketmqInstance struct {
 	PublicEndPoint pulumi.StringOutput `pulumi:"publicEndPoint"`
 	// Remark.
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
-	// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_4k, basic_6k.
+	// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
 	SkuCode pulumi.StringOutput `pulumi:"skuCode"`
 	// Subnet id.
 	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
@@ -188,7 +228,7 @@ type rocketmqInstanceState struct {
 	PublicEndPoint *string `pulumi:"publicEndPoint"`
 	// Remark.
 	Remark *string `pulumi:"remark"`
-	// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_4k, basic_6k.
+	// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
 	SkuCode *string `pulumi:"skuCode"`
 	// Subnet id.
 	SubnetId *string `pulumi:"subnetId"`
@@ -217,7 +257,7 @@ type RocketmqInstanceState struct {
 	PublicEndPoint pulumi.StringPtrInput
 	// Remark.
 	Remark pulumi.StringPtrInput
-	// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_4k, basic_6k.
+	// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
 	SkuCode pulumi.StringPtrInput
 	// Subnet id.
 	SubnetId pulumi.StringPtrInput
@@ -248,7 +288,7 @@ type rocketmqInstanceArgs struct {
 	Name *string `pulumi:"name"`
 	// Remark.
 	Remark *string `pulumi:"remark"`
-	// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_4k, basic_6k.
+	// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
 	SkuCode string `pulumi:"skuCode"`
 	// Subnet id.
 	SubnetId string `pulumi:"subnetId"`
@@ -274,7 +314,7 @@ type RocketmqInstanceArgs struct {
 	Name pulumi.StringPtrInput
 	// Remark.
 	Remark pulumi.StringPtrInput
-	// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_4k, basic_6k.
+	// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
 	SkuCode pulumi.StringInput
 	// Subnet id.
 	SubnetId pulumi.StringInput
@@ -411,7 +451,7 @@ func (o RocketmqInstanceOutput) Remark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *RocketmqInstance) pulumi.StringPtrOutput { return v.Remark }).(pulumi.StringPtrOutput)
 }
 
-// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_4k, basic_6k.
+// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
 func (o RocketmqInstanceOutput) SkuCode() pulumi.StringOutput {
 	return o.ApplyT(func(v *RocketmqInstance) pulumi.StringOutput { return v.SkuCode }).(pulumi.StringOutput)
 }

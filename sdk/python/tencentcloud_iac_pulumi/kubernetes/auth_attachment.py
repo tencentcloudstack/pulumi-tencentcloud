@@ -469,6 +469,14 @@ class AuthAttachment(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
+        ## Import
+
+        tke cluster authentication can be imported, e.g.
+
+        ```sh
+        $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment test cls-xxx
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] auto_create_client_ids: Creating ClientId of the identity provider.
@@ -626,6 +634,14 @@ class AuthAttachment(pulumi.CustomResource):
         pulumi.export("identityUrl", oidc_config.identity_url)
         ```
         <!--End PulumiCodeChooser -->
+
+        ## Import
+
+        tke cluster authentication can be imported, e.g.
+
+        ```sh
+        $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment test cls-xxx
+        ```
 
         :param str resource_name: The name of the resource.
         :param AuthAttachmentArgs args: The arguments to use to populate this resource's properties.

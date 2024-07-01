@@ -96,6 +96,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     ///         {
     ///             { "test", "tf" },
     ///         },
+    ///         VpcId = "vpc-da7ffa61",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### SUPPORT CORS
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var openClb = new Tencentcloud.Clb.Instance("openClb", new()
+    ///     {
+    ///         ClbName = "myclb",
+    ///         NetworkType = "OPEN",
+    ///         ProjectId = 0,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             "sg-o0ek7r93",
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "test", "tf" },
+    ///         },
     ///         TargetRegionInfoRegion = "ap-guangzhou",
     ///         TargetRegionInfoVpcId = "vpc-da7ffa61",
     ///         VpcId = "vpc-da7ffa61",
@@ -393,6 +424,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<string> AddressIpVersion { get; private set; } = null!;
 
         /// <summary>
+        /// The IPv6 address of the load balancing instance.
+        /// </summary>
+        [Output("addressIpv6")]
+        public Output<string> AddressIpv6 { get; private set; } = null!;
+
+        /// <summary>
         /// Bandwidth package id. If set, the `internet_charge_type` must be `BANDWIDTH_PACKAGE`.
         /// </summary>
         [Output("bandwidthPackageId")]
@@ -439,6 +476,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Output("internetChargeType")]
         public Output<string> InternetChargeType { get; private set; } = null!;
+
+        /// <summary>
+        /// This field is meaningful when the IP address version is ipv6, `IPv6Nat64` | `IPv6FullChain`.
+        /// </summary>
+        [Output("ipv6Mode")]
+        public Output<string> Ipv6Mode { get; private set; } = null!;
 
         /// <summary>
         /// Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
@@ -790,6 +833,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? AddressIpVersion { get; set; }
 
         /// <summary>
+        /// The IPv6 address of the load balancing instance.
+        /// </summary>
+        [Input("addressIpv6")]
+        public Input<string>? AddressIpv6 { get; set; }
+
+        /// <summary>
         /// Bandwidth package id. If set, the `internet_charge_type` must be `BANDWIDTH_PACKAGE`.
         /// </summary>
         [Input("bandwidthPackageId")]
@@ -842,6 +891,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Input("internetChargeType")]
         public Input<string>? InternetChargeType { get; set; }
+
+        /// <summary>
+        /// This field is meaningful when the IP address version is ipv6, `IPv6Nat64` | `IPv6FullChain`.
+        /// </summary>
+        [Input("ipv6Mode")]
+        public Input<string>? Ipv6Mode { get; set; }
 
         /// <summary>
         /// Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.

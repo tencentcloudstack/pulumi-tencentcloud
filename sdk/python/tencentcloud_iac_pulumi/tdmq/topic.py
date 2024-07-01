@@ -323,14 +323,6 @@ class Topic(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
-        ## Import
-
-        Tdmq Topic can be imported, e.g.
-
-        ```sh
-        $ pulumi import tencentcloud:Tdmq/topic:Topic test topic_id
-        ```
-
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: The Dedicated Cluster Id.
@@ -381,14 +373,6 @@ class Topic(pulumi.CustomResource):
             remark="remark.")
         ```
         <!--End PulumiCodeChooser -->
-
-        ## Import
-
-        Tdmq Topic can be imported, e.g.
-
-        ```sh
-        $ pulumi import tencentcloud:Tdmq/topic:Topic test topic_id
-        ```
 
         :param str resource_name: The name of the resource.
         :param TopicArgs args: The arguments to use to populate this resource's properties.

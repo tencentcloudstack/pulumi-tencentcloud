@@ -174,9 +174,9 @@ class Instance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tdmq.Instance("foo",
-            cluster_name="example",
-            remark="this is description.",
+        example = tencentcloud.tdmq.Instance("example",
+            cluster_name="tf_example",
+            remark="remark.",
             tags={
                 "createdBy": "terraform",
             })
@@ -188,7 +188,7 @@ class Instance(pulumi.CustomResource):
         Tdmq instance can be imported, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Tdmq/instance:Instance test tdmq_id
+        $ pulumi import tencentcloud:Tdmq/instance:Instance example pulsar-78bwjaj8epxv
         ```
 
         :param str resource_name: The name of the resource.
@@ -214,9 +214,9 @@ class Instance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.tdmq.Instance("foo",
-            cluster_name="example",
-            remark="this is description.",
+        example = tencentcloud.tdmq.Instance("example",
+            cluster_name="tf_example",
+            remark="remark.",
             tags={
                 "createdBy": "terraform",
             })
@@ -228,7 +228,7 @@ class Instance(pulumi.CustomResource):
         Tdmq instance can be imported, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Tdmq/instance:Instance test tdmq_id
+        $ pulumi import tencentcloud:Tdmq/instance:Instance example pulsar-78bwjaj8epxv
         ```
 
         :param str resource_name: The name of the resource.

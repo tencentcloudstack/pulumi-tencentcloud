@@ -63,7 +63,8 @@ class AlarmAlarmTargetArgs:
                  number: pulumi.Input[int],
                  query: pulumi.Input[str],
                  start_time_offset: pulumi.Input[int],
-                 topic_id: pulumi.Input[str]):
+                 topic_id: pulumi.Input[str],
+                 syntax_rule: Optional[pulumi.Input[int]] = None):
         """
         :param pulumi.Input[int] end_time_offset: search end time of offset.
         :param pulumi.Input[str] logset_id: logset id.
@@ -71,6 +72,7 @@ class AlarmAlarmTargetArgs:
         :param pulumi.Input[str] query: query rules.
         :param pulumi.Input[int] start_time_offset: search start time of offset.
         :param pulumi.Input[str] topic_id: topic id.
+        :param pulumi.Input[int] syntax_rule: Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.
         """
         pulumi.set(__self__, "end_time_offset", end_time_offset)
         pulumi.set(__self__, "logset_id", logset_id)
@@ -78,6 +80,8 @@ class AlarmAlarmTargetArgs:
         pulumi.set(__self__, "query", query)
         pulumi.set(__self__, "start_time_offset", start_time_offset)
         pulumi.set(__self__, "topic_id", topic_id)
+        if syntax_rule is not None:
+            pulumi.set(__self__, "syntax_rule", syntax_rule)
 
     @property
     @pulumi.getter(name="endTimeOffset")
@@ -150,6 +154,18 @@ class AlarmAlarmTargetArgs:
     @topic_id.setter
     def topic_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "topic_id", value)
+
+    @property
+    @pulumi.getter(name="syntaxRule")
+    def syntax_rule(self) -> Optional[pulumi.Input[int]]:
+        """
+        Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.
+        """
+        return pulumi.get(self, "syntax_rule")
+
+    @syntax_rule.setter
+    def syntax_rule(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "syntax_rule", value)
 
 
 @pulumi.input_type

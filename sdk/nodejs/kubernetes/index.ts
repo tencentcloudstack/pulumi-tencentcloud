@@ -75,6 +75,11 @@ export const getClusterLevels: typeof import("./getClusterLevels").getClusterLev
 export const getClusterLevelsOutput: typeof import("./getClusterLevels").getClusterLevelsOutput = null as any;
 utilities.lazyLoad(exports, ["getClusterLevels","getClusterLevelsOutput"], () => require("./getClusterLevels"));
 
+export { GetClusterNativeNodePoolsArgs, GetClusterNativeNodePoolsResult, GetClusterNativeNodePoolsOutputArgs } from "./getClusterNativeNodePools";
+export const getClusterNativeNodePools: typeof import("./getClusterNativeNodePools").getClusterNativeNodePools = null as any;
+export const getClusterNativeNodePoolsOutput: typeof import("./getClusterNativeNodePools").getClusterNativeNodePoolsOutput = null as any;
+utilities.lazyLoad(exports, ["getClusterNativeNodePools","getClusterNativeNodePoolsOutput"], () => require("./getClusterNativeNodePools"));
+
 export { GetClusterNodePoolsArgs, GetClusterNodePoolsResult, GetClusterNodePoolsOutputArgs } from "./getClusterNodePools";
 export const getClusterNodePools: typeof import("./getClusterNodePools").getClusterNodePools = null as any;
 export const getClusterNodePoolsOutput: typeof import("./getClusterNodePools").getClusterNodePoolsOutput = null as any;
@@ -84,6 +89,11 @@ export { GetClustersArgs, GetClustersResult, GetClustersOutputArgs } from "./get
 export const getClusters: typeof import("./getClusters").getClusters = null as any;
 export const getClustersOutput: typeof import("./getClusters").getClustersOutput = null as any;
 utilities.lazyLoad(exports, ["getClusters","getClustersOutput"], () => require("./getClusters"));
+
+export { NativeNodePoolArgs, NativeNodePoolState } from "./nativeNodePool";
+export type NativeNodePool = import("./nativeNodePool").NativeNodePool;
+export const NativeNodePool: typeof import("./nativeNodePool").NativeNodePool = null as any;
+utilities.lazyLoad(exports, ["NativeNodePool"], () => require("./nativeNodePool"));
 
 export { NodePoolArgs, NodePoolState } from "./nodePool";
 export type NodePool = import("./nodePool").NodePool;
@@ -121,6 +131,8 @@ const _module = {
                 return new ClusterEndpoint(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/encryptionProtection:EncryptionProtection":
                 return new EncryptionProtection(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/nativeNodePool:NativeNodePool":
+                return new NativeNodePool(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/nodePool:NodePool":
                 return new NodePool(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/scaleWorker:ScaleWorker":
@@ -140,6 +152,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/cluster", _mod
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/clusterAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/clusterEndpoint", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/encryptionProtection", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/nativeNodePool", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/nodePool", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/scaleWorker", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/serverlessNodePool", _module)

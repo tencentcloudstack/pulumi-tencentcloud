@@ -37,6 +37,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ClusterEndpoint{}
 	case "tencentcloud:Kubernetes/encryptionProtection:EncryptionProtection":
 		r = &EncryptionProtection{}
+	case "tencentcloud:Kubernetes/nativeNodePool:NativeNodePool":
+		r = &NativeNodePool{}
 	case "tencentcloud:Kubernetes/nodePool:NodePool":
 		r = &NodePool{}
 	case "tencentcloud:Kubernetes/scaleWorker:ScaleWorker":
@@ -94,6 +96,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Kubernetes/encryptionProtection",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Kubernetes/nativeNodePool",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

@@ -112,6 +112,43 @@ import (
 //				Tags: pulumi.Map{
 //					"test": pulumi.Any("tf"),
 //				},
+//				VpcId: pulumi.String("vpc-da7ffa61"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### SUPPORT CORS
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewInstance(ctx, "openClb", &Clb.InstanceArgs{
+//				ClbName:     pulumi.String("myclb"),
+//				NetworkType: pulumi.String("OPEN"),
+//				ProjectId:   pulumi.Int(0),
+//				SecurityGroups: pulumi.StringArray{
+//					pulumi.String("sg-o0ek7r93"),
+//				},
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("tf"),
+//				},
 //				TargetRegionInfoRegion: pulumi.String("ap-guangzhou"),
 //				TargetRegionInfoVpcId:  pulumi.String("vpc-da7ffa61"),
 //				VpcId:                  pulumi.String("vpc-da7ffa61"),
@@ -466,6 +503,8 @@ type Instance struct {
 
 	// IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
 	AddressIpVersion pulumi.StringOutput `pulumi:"addressIpVersion"`
+	// The IPv6 address of the load balancing instance.
+	AddressIpv6 pulumi.StringOutput `pulumi:"addressIpv6"`
 	// Bandwidth package id. If set, the `internetChargeType` must be `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId pulumi.StringPtrOutput `pulumi:"bandwidthPackageId"`
 	// Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
@@ -482,6 +521,8 @@ type Instance struct {
 	InternetBandwidthMaxOut pulumi.IntOutput `pulumi:"internetBandwidthMaxOut"`
 	// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType pulumi.StringOutput `pulumi:"internetChargeType"`
+	// This field is meaningful when the IP address version is ipv6, `IPv6Nat64` | `IPv6FullChain`.
+	Ipv6Mode pulumi.StringOutput `pulumi:"ipv6Mode"`
 	// Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
 	LoadBalancerPassToTarget pulumi.BoolPtrOutput `pulumi:"loadBalancerPassToTarget"`
 	// The id of log set.
@@ -560,6 +601,8 @@ func GetInstance(ctx *pulumi.Context,
 type instanceState struct {
 	// IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
 	AddressIpVersion *string `pulumi:"addressIpVersion"`
+	// The IPv6 address of the load balancing instance.
+	AddressIpv6 *string `pulumi:"addressIpv6"`
 	// Bandwidth package id. If set, the `internetChargeType` must be `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId *string `pulumi:"bandwidthPackageId"`
 	// Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
@@ -576,6 +619,8 @@ type instanceState struct {
 	InternetBandwidthMaxOut *int `pulumi:"internetBandwidthMaxOut"`
 	// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType *string `pulumi:"internetChargeType"`
+	// This field is meaningful when the IP address version is ipv6, `IPv6Nat64` | `IPv6FullChain`.
+	Ipv6Mode *string `pulumi:"ipv6Mode"`
 	// Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
 	LoadBalancerPassToTarget *bool `pulumi:"loadBalancerPassToTarget"`
 	// The id of log set.
@@ -619,6 +664,8 @@ type instanceState struct {
 type InstanceState struct {
 	// IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
 	AddressIpVersion pulumi.StringPtrInput
+	// The IPv6 address of the load balancing instance.
+	AddressIpv6 pulumi.StringPtrInput
 	// Bandwidth package id. If set, the `internetChargeType` must be `BANDWIDTH_PACKAGE`.
 	BandwidthPackageId pulumi.StringPtrInput
 	// Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
@@ -635,6 +682,8 @@ type InstanceState struct {
 	InternetBandwidthMaxOut pulumi.IntPtrInput
 	// Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 	InternetChargeType pulumi.StringPtrInput
+	// This field is meaningful when the IP address version is ipv6, `IPv6Nat64` | `IPv6FullChain`.
+	Ipv6Mode pulumi.StringPtrInput
 	// Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
 	LoadBalancerPassToTarget pulumi.BoolPtrInput
 	// The id of log set.
@@ -882,6 +931,11 @@ func (o InstanceOutput) AddressIpVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.AddressIpVersion }).(pulumi.StringOutput)
 }
 
+// The IPv6 address of the load balancing instance.
+func (o InstanceOutput) AddressIpv6() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.AddressIpv6 }).(pulumi.StringOutput)
+}
+
 // Bandwidth package id. If set, the `internetChargeType` must be `BANDWIDTH_PACKAGE`.
 func (o InstanceOutput) BandwidthPackageId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.BandwidthPackageId }).(pulumi.StringPtrOutput)
@@ -920,6 +974,11 @@ func (o InstanceOutput) InternetBandwidthMaxOut() pulumi.IntOutput {
 // Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
 func (o InstanceOutput) InternetChargeType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.InternetChargeType }).(pulumi.StringOutput)
+}
+
+// This field is meaningful when the IP address version is ipv6, `IPv6Nat64` | `IPv6FullChain`.
+func (o InstanceOutput) Ipv6Mode() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.Ipv6Mode }).(pulumi.StringOutput)
 }
 
 // Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.

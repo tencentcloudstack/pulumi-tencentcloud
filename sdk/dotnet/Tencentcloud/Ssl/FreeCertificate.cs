@@ -154,7 +154,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public Output<string?> OldCertificateId { get; private set; } = null!;
 
         /// <summary>
-        /// Type of package. Only support `"2"` (TrustAsia TLS RSA CA).
+        /// Type of package. Only support `"83"` (TrustAsia TLS RSA CA).
         /// </summary>
         [Output("packageType")]
         public Output<string?> PackageType { get; private set; } = null!;
@@ -196,7 +196,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public Output<string> StatusName { get; private set; } = null!;
 
         /// <summary>
-        /// Specify validity period in month, only support `"12"` months for now.
+        /// Specify validity period in month, only support `"3"` months for now.
         /// </summary>
         [Output("validityPeriod")]
         public Output<string?> ValidityPeriod { get; private set; } = null!;
@@ -323,7 +323,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public Input<string>? OldCertificateId { get; set; }
 
         /// <summary>
-        /// Type of package. Only support `"2"` (TrustAsia TLS RSA CA).
+        /// Type of package. Only support `"83"` (TrustAsia TLS RSA CA).
         /// </summary>
         [Input("packageType")]
         public Input<string>? PackageType { get; set; }
@@ -335,7 +335,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public Input<int>? ProjectId { get; set; }
 
         /// <summary>
-        /// Specify validity period in month, only support `"12"` months for now.
+        /// Specify validity period in month, only support `"3"` months for now.
         /// </summary>
         [Input("validityPeriod")]
         public Input<string>? ValidityPeriod { get; set; }
@@ -461,7 +461,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public Input<string>? OldCertificateId { get; set; }
 
         /// <summary>
-        /// Type of package. Only support `"2"` (TrustAsia TLS RSA CA).
+        /// Type of package. Only support `"83"` (TrustAsia TLS RSA CA).
         /// </summary>
         [Input("packageType")]
         public Input<string>? PackageType { get; set; }
@@ -503,7 +503,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         public Input<string>? StatusName { get; set; }
 
         /// <summary>
-        /// Specify validity period in month, only support `"12"` months for now.
+        /// Specify validity period in month, only support `"3"` months for now.
         /// </summary>
         [Input("validityPeriod")]
         public Input<string>? ValidityPeriod { get; set; }

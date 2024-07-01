@@ -15,6 +15,7 @@ __all__ = [
     'InstanceBackupDownloadTaskBackupSetArgs',
     'InstanceRemoveNodeListArgs',
     'InstanceStandbyInstanceListArgs',
+    'InstanceTransparentDataEncryptionKeyInfoListArgs',
 ]
 
 @pulumi.input_type
@@ -222,5 +223,108 @@ class InstanceStandbyInstanceListArgs:
     @standby_instance_region.setter
     def standby_instance_region(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "standby_instance_region", value)
+
+
+@pulumi.input_type
+class InstanceTransparentDataEncryptionKeyInfoListArgs:
+    def __init__(__self__, *,
+                 create_time: Optional[pulumi.Input[str]] = None,
+                 key_id: Optional[pulumi.Input[str]] = None,
+                 key_name: Optional[pulumi.Input[str]] = None,
+                 key_origin: Optional[pulumi.Input[str]] = None,
+                 key_usage: Optional[pulumi.Input[str]] = None,
+                 status: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] create_time: Instance and key binding time.
+        :param pulumi.Input[str] key_id: Master Key ID.
+        :param pulumi.Input[str] key_name: Master key name.
+        :param pulumi.Input[str] key_origin: Key origin.
+        :param pulumi.Input[str] key_usage: Purpose of the key.
+        :param pulumi.Input[str] status: Key status.
+        """
+        if create_time is not None:
+            pulumi.set(__self__, "create_time", create_time)
+        if key_id is not None:
+            pulumi.set(__self__, "key_id", key_id)
+        if key_name is not None:
+            pulumi.set(__self__, "key_name", key_name)
+        if key_origin is not None:
+            pulumi.set(__self__, "key_origin", key_origin)
+        if key_usage is not None:
+            pulumi.set(__self__, "key_usage", key_usage)
+        if status is not None:
+            pulumi.set(__self__, "status", status)
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> Optional[pulumi.Input[str]]:
+        """
+        Instance and key binding time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @create_time.setter
+    def create_time(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "create_time", value)
+
+    @property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Master Key ID.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key_id", value)
+
+    @property
+    @pulumi.getter(name="keyName")
+    def key_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Master key name.
+        """
+        return pulumi.get(self, "key_name")
+
+    @key_name.setter
+    def key_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key_name", value)
+
+    @property
+    @pulumi.getter(name="keyOrigin")
+    def key_origin(self) -> Optional[pulumi.Input[str]]:
+        """
+        Key origin.
+        """
+        return pulumi.get(self, "key_origin")
+
+    @key_origin.setter
+    def key_origin(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key_origin", value)
+
+    @property
+    @pulumi.getter(name="keyUsage")
+    def key_usage(self) -> Optional[pulumi.Input[str]]:
+        """
+        Purpose of the key.
+        """
+        return pulumi.get(self, "key_usage")
+
+    @key_usage.setter
+    def key_usage(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "key_usage", value)
+
+    @property
+    @pulumi.getter
+    def status(self) -> Optional[pulumi.Input[str]]:
+        """
+        Key status.
+        """
+        return pulumi.get(self, "status")
+
+    @status.setter
+    def status(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "status", value)
 
 

@@ -234,6 +234,14 @@ import (
 //
 // ```
 // <!--End PulumiCodeChooser -->
+//
+// ## Import
+//
+// tke cluster can be imported, e.g.
+//
+// ```sh
+// $ pulumi import tencentcloud:Kubernetes/cluster:Cluster test cls-xxx
+// ```
 type Cluster struct {
 	pulumi.CustomResourceState
 
@@ -266,13 +274,13 @@ type Cluster struct {
 	// Customized parameters for master component,such as kube-apiserver, kube-controller-manager, kube-scheduler.
 	ClusterExtraArgs ClusterClusterExtraArgsPtrOutput `pulumi:"clusterExtraArgs"`
 	// Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
-	ClusterInternet pulumi.BoolOutput `pulumi:"clusterInternet"`
+	ClusterInternet pulumi.BoolPtrOutput `pulumi:"clusterInternet"`
 	// Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
 	ClusterInternetDomain pulumi.StringPtrOutput `pulumi:"clusterInternetDomain"`
 	// Specify security group, NOTE: This argument must not be empty if cluster internet enabled.
 	ClusterInternetSecurityGroup pulumi.StringOutput `pulumi:"clusterInternetSecurityGroup"`
 	// Open intranet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
-	ClusterIntranet pulumi.BoolOutput `pulumi:"clusterIntranet"`
+	ClusterIntranet pulumi.BoolPtrOutput `pulumi:"clusterIntranet"`
 	// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
 	ClusterIntranetDomain pulumi.StringPtrOutput `pulumi:"clusterIntranetDomain"`
 	// Subnet id who can access this independent cluster, this field must and can only set  when `clusterIntranet` is true. `clusterIntranetSubnetId` can not modify once be set.
@@ -289,7 +297,7 @@ type Cluster struct {
 	ClusterName pulumi.StringPtrOutput `pulumi:"clusterName"`
 	// Number of nodes in the cluster.
 	ClusterNodeNum pulumi.IntOutput `pulumi:"clusterNodeNum"`
-	// Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+	// Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
 	ClusterOs pulumi.StringPtrOutput `pulumi:"clusterOs"`
 	// Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
 	ClusterOsType pulumi.StringPtrOutput `pulumi:"clusterOsType"`
@@ -371,7 +379,7 @@ type Cluster struct {
 	VpcCniType pulumi.StringOutput `pulumi:"vpcCniType"`
 	// Vpc Id of the cluster.
 	VpcId pulumi.StringOutput `pulumi:"vpcId"`
-	// Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+	// Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
 	WorkerConfigs ClusterWorkerConfigArrayOutput `pulumi:"workerConfigs"`
 	// An information list of cvm within the 'WORKER' clusters. Each element contains the following attributes:
 	WorkerInstancesLists ClusterWorkerInstancesListArrayOutput `pulumi:"workerInstancesLists"`
@@ -462,7 +470,7 @@ type clusterState struct {
 	ClusterName *string `pulumi:"clusterName"`
 	// Number of nodes in the cluster.
 	ClusterNodeNum *int `pulumi:"clusterNodeNum"`
-	// Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+	// Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
 	ClusterOs *string `pulumi:"clusterOs"`
 	// Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
 	ClusterOsType *string `pulumi:"clusterOsType"`
@@ -544,7 +552,7 @@ type clusterState struct {
 	VpcCniType *string `pulumi:"vpcCniType"`
 	// Vpc Id of the cluster.
 	VpcId *string `pulumi:"vpcId"`
-	// Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+	// Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
 	WorkerConfigs []ClusterWorkerConfig `pulumi:"workerConfigs"`
 	// An information list of cvm within the 'WORKER' clusters. Each element contains the following attributes:
 	WorkerInstancesLists []ClusterWorkerInstancesList `pulumi:"workerInstancesLists"`
@@ -603,7 +611,7 @@ type ClusterState struct {
 	ClusterName pulumi.StringPtrInput
 	// Number of nodes in the cluster.
 	ClusterNodeNum pulumi.IntPtrInput
-	// Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+	// Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
 	ClusterOs pulumi.StringPtrInput
 	// Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
 	ClusterOsType pulumi.StringPtrInput
@@ -685,7 +693,7 @@ type ClusterState struct {
 	VpcCniType pulumi.StringPtrInput
 	// Vpc Id of the cluster.
 	VpcId pulumi.StringPtrInput
-	// Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+	// Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
 	WorkerConfigs ClusterWorkerConfigArrayInput
 	// An information list of cvm within the 'WORKER' clusters. Each element contains the following attributes:
 	WorkerInstancesLists ClusterWorkerInstancesListArrayInput
@@ -738,7 +746,7 @@ type clusterArgs struct {
 	ClusterMaxServiceNum *int `pulumi:"clusterMaxServiceNum"`
 	// Name of the cluster.
 	ClusterName *string `pulumi:"clusterName"`
-	// Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+	// Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
 	ClusterOs *string `pulumi:"clusterOs"`
 	// Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
 	ClusterOsType *string `pulumi:"clusterOsType"`
@@ -806,7 +814,7 @@ type clusterArgs struct {
 	VpcCniType *string `pulumi:"vpcCniType"`
 	// Vpc Id of the cluster.
 	VpcId string `pulumi:"vpcId"`
-	// Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+	// Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
 	WorkerConfigs []ClusterWorkerConfig `pulumi:"workerConfigs"`
 }
 
@@ -854,7 +862,7 @@ type ClusterArgs struct {
 	ClusterMaxServiceNum pulumi.IntPtrInput
 	// Name of the cluster.
 	ClusterName pulumi.StringPtrInput
-	// Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+	// Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
 	ClusterOs pulumi.StringPtrInput
 	// Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
 	ClusterOsType pulumi.StringPtrInput
@@ -922,7 +930,7 @@ type ClusterArgs struct {
 	VpcCniType pulumi.StringPtrInput
 	// Vpc Id of the cluster.
 	VpcId pulumi.StringInput
-	// Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+	// Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
 	WorkerConfigs ClusterWorkerConfigArrayInput
 }
 
@@ -1081,8 +1089,8 @@ func (o ClusterOutput) ClusterExtraArgs() ClusterClusterExtraArgsPtrOutput {
 }
 
 // Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
-func (o ClusterOutput) ClusterInternet() pulumi.BoolOutput {
-	return o.ApplyT(func(v *Cluster) pulumi.BoolOutput { return v.ClusterInternet }).(pulumi.BoolOutput)
+func (o ClusterOutput) ClusterInternet() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.BoolPtrOutput { return v.ClusterInternet }).(pulumi.BoolPtrOutput)
 }
 
 // Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
@@ -1096,8 +1104,8 @@ func (o ClusterOutput) ClusterInternetSecurityGroup() pulumi.StringOutput {
 }
 
 // Open intranet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
-func (o ClusterOutput) ClusterIntranet() pulumi.BoolOutput {
-	return o.ApplyT(func(v *Cluster) pulumi.BoolOutput { return v.ClusterIntranet }).(pulumi.BoolOutput)
+func (o ClusterOutput) ClusterIntranet() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.BoolPtrOutput { return v.ClusterIntranet }).(pulumi.BoolPtrOutput)
 }
 
 // Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
@@ -1140,7 +1148,7 @@ func (o ClusterOutput) ClusterNodeNum() pulumi.IntOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.IntOutput { return v.ClusterNodeNum }).(pulumi.IntOutput)
 }
 
-// Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+// Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
 func (o ClusterOutput) ClusterOs() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.ClusterOs }).(pulumi.StringPtrOutput)
 }
@@ -1342,7 +1350,7 @@ func (o ClusterOutput) VpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.VpcId }).(pulumi.StringOutput)
 }
 
-// Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+// Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
 func (o ClusterOutput) WorkerConfigs() ClusterWorkerConfigArrayOutput {
 	return o.ApplyT(func(v *Cluster) ClusterWorkerConfigArrayOutput { return v.WorkerConfigs }).(ClusterWorkerConfigArrayOutput)
 }

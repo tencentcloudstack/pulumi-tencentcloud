@@ -42,6 +42,7 @@ import (
 //						Number:          pulumi.Int(1),
 //						Query:           pulumi.String("status:>500 | select count(*) as errorCounts"),
 //						StartTimeOffset: -15,
+//						SyntaxRule:      pulumi.Int(1),
 //						TopicId:         pulumi.String("88735a07-bea4-4985-8763-e9deb6da4fad"),
 //					},
 //				},

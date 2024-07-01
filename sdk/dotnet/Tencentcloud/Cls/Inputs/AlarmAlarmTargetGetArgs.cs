@@ -44,6 +44,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public Input<int> StartTimeOffset { get; set; } = null!;
 
         /// <summary>
+        /// Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.
+        /// </summary>
+        [Input("syntaxRule")]
+        public Input<int>? SyntaxRule { get; set; }
+
+        /// <summary>
         /// topic id.
         /// </summary>
         [Input("topicId", required: true)]

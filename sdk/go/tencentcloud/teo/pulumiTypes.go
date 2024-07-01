@@ -1160,6 +1160,1339 @@ func (o OriginGroupReferenceArrayOutput) Index(i pulumi.IntInput) OriginGroupRef
 	}).(OriginGroupReferenceOutput)
 }
 
+type RealtimeLogDeliveryCls struct {
+	// Tencent Cloud CLS log set ID.
+	LogSetId string `pulumi:"logSetId"`
+	// The region where the Tencent Cloud CLS log set is located.
+	LogSetRegion string `pulumi:"logSetRegion"`
+	// Tencent Cloud CLS log topic ID.
+	TopicId string `pulumi:"topicId"`
+}
+
+// RealtimeLogDeliveryClsInput is an input type that accepts RealtimeLogDeliveryClsArgs and RealtimeLogDeliveryClsOutput values.
+// You can construct a concrete instance of `RealtimeLogDeliveryClsInput` via:
+//
+//	RealtimeLogDeliveryClsArgs{...}
+type RealtimeLogDeliveryClsInput interface {
+	pulumi.Input
+
+	ToRealtimeLogDeliveryClsOutput() RealtimeLogDeliveryClsOutput
+	ToRealtimeLogDeliveryClsOutputWithContext(context.Context) RealtimeLogDeliveryClsOutput
+}
+
+type RealtimeLogDeliveryClsArgs struct {
+	// Tencent Cloud CLS log set ID.
+	LogSetId pulumi.StringInput `pulumi:"logSetId"`
+	// The region where the Tencent Cloud CLS log set is located.
+	LogSetRegion pulumi.StringInput `pulumi:"logSetRegion"`
+	// Tencent Cloud CLS log topic ID.
+	TopicId pulumi.StringInput `pulumi:"topicId"`
+}
+
+func (RealtimeLogDeliveryClsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RealtimeLogDeliveryCls)(nil)).Elem()
+}
+
+func (i RealtimeLogDeliveryClsArgs) ToRealtimeLogDeliveryClsOutput() RealtimeLogDeliveryClsOutput {
+	return i.ToRealtimeLogDeliveryClsOutputWithContext(context.Background())
+}
+
+func (i RealtimeLogDeliveryClsArgs) ToRealtimeLogDeliveryClsOutputWithContext(ctx context.Context) RealtimeLogDeliveryClsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryClsOutput)
+}
+
+func (i RealtimeLogDeliveryClsArgs) ToRealtimeLogDeliveryClsPtrOutput() RealtimeLogDeliveryClsPtrOutput {
+	return i.ToRealtimeLogDeliveryClsPtrOutputWithContext(context.Background())
+}
+
+func (i RealtimeLogDeliveryClsArgs) ToRealtimeLogDeliveryClsPtrOutputWithContext(ctx context.Context) RealtimeLogDeliveryClsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryClsOutput).ToRealtimeLogDeliveryClsPtrOutputWithContext(ctx)
+}
+
+// RealtimeLogDeliveryClsPtrInput is an input type that accepts RealtimeLogDeliveryClsArgs, RealtimeLogDeliveryClsPtr and RealtimeLogDeliveryClsPtrOutput values.
+// You can construct a concrete instance of `RealtimeLogDeliveryClsPtrInput` via:
+//
+//	        RealtimeLogDeliveryClsArgs{...}
+//
+//	or:
+//
+//	        nil
+type RealtimeLogDeliveryClsPtrInput interface {
+	pulumi.Input
+
+	ToRealtimeLogDeliveryClsPtrOutput() RealtimeLogDeliveryClsPtrOutput
+	ToRealtimeLogDeliveryClsPtrOutputWithContext(context.Context) RealtimeLogDeliveryClsPtrOutput
+}
+
+type realtimeLogDeliveryClsPtrType RealtimeLogDeliveryClsArgs
+
+func RealtimeLogDeliveryClsPtr(v *RealtimeLogDeliveryClsArgs) RealtimeLogDeliveryClsPtrInput {
+	return (*realtimeLogDeliveryClsPtrType)(v)
+}
+
+func (*realtimeLogDeliveryClsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RealtimeLogDeliveryCls)(nil)).Elem()
+}
+
+func (i *realtimeLogDeliveryClsPtrType) ToRealtimeLogDeliveryClsPtrOutput() RealtimeLogDeliveryClsPtrOutput {
+	return i.ToRealtimeLogDeliveryClsPtrOutputWithContext(context.Background())
+}
+
+func (i *realtimeLogDeliveryClsPtrType) ToRealtimeLogDeliveryClsPtrOutputWithContext(ctx context.Context) RealtimeLogDeliveryClsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryClsPtrOutput)
+}
+
+type RealtimeLogDeliveryClsOutput struct{ *pulumi.OutputState }
+
+func (RealtimeLogDeliveryClsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RealtimeLogDeliveryCls)(nil)).Elem()
+}
+
+func (o RealtimeLogDeliveryClsOutput) ToRealtimeLogDeliveryClsOutput() RealtimeLogDeliveryClsOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryClsOutput) ToRealtimeLogDeliveryClsOutputWithContext(ctx context.Context) RealtimeLogDeliveryClsOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryClsOutput) ToRealtimeLogDeliveryClsPtrOutput() RealtimeLogDeliveryClsPtrOutput {
+	return o.ToRealtimeLogDeliveryClsPtrOutputWithContext(context.Background())
+}
+
+func (o RealtimeLogDeliveryClsOutput) ToRealtimeLogDeliveryClsPtrOutputWithContext(ctx context.Context) RealtimeLogDeliveryClsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RealtimeLogDeliveryCls) *RealtimeLogDeliveryCls {
+		return &v
+	}).(RealtimeLogDeliveryClsPtrOutput)
+}
+
+// Tencent Cloud CLS log set ID.
+func (o RealtimeLogDeliveryClsOutput) LogSetId() pulumi.StringOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryCls) string { return v.LogSetId }).(pulumi.StringOutput)
+}
+
+// The region where the Tencent Cloud CLS log set is located.
+func (o RealtimeLogDeliveryClsOutput) LogSetRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryCls) string { return v.LogSetRegion }).(pulumi.StringOutput)
+}
+
+// Tencent Cloud CLS log topic ID.
+func (o RealtimeLogDeliveryClsOutput) TopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryCls) string { return v.TopicId }).(pulumi.StringOutput)
+}
+
+type RealtimeLogDeliveryClsPtrOutput struct{ *pulumi.OutputState }
+
+func (RealtimeLogDeliveryClsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RealtimeLogDeliveryCls)(nil)).Elem()
+}
+
+func (o RealtimeLogDeliveryClsPtrOutput) ToRealtimeLogDeliveryClsPtrOutput() RealtimeLogDeliveryClsPtrOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryClsPtrOutput) ToRealtimeLogDeliveryClsPtrOutputWithContext(ctx context.Context) RealtimeLogDeliveryClsPtrOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryClsPtrOutput) Elem() RealtimeLogDeliveryClsOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryCls) RealtimeLogDeliveryCls {
+		if v != nil {
+			return *v
+		}
+		var ret RealtimeLogDeliveryCls
+		return ret
+	}).(RealtimeLogDeliveryClsOutput)
+}
+
+// Tencent Cloud CLS log set ID.
+func (o RealtimeLogDeliveryClsPtrOutput) LogSetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryCls) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.LogSetId
+	}).(pulumi.StringPtrOutput)
+}
+
+// The region where the Tencent Cloud CLS log set is located.
+func (o RealtimeLogDeliveryClsPtrOutput) LogSetRegion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryCls) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.LogSetRegion
+	}).(pulumi.StringPtrOutput)
+}
+
+// Tencent Cloud CLS log topic ID.
+func (o RealtimeLogDeliveryClsPtrOutput) TopicId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryCls) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TopicId
+	}).(pulumi.StringPtrOutput)
+}
+
+type RealtimeLogDeliveryCustomEndpoint struct {
+	// Fill in a custom SecretId to generate an encrypted signature. This parameter is required if the source site requires authentication.
+	AccessId *string `pulumi:"accessId"`
+	// Fill in the custom SecretKey to generate the encrypted signature. This parameter is required if the source site requires authentication.
+	AccessKey *string `pulumi:"accessKey"`
+	// Data compression type, the possible values are: `gzip`: use gzip compression. If it is not filled in, compression is not enabled.
+	CompressType *string `pulumi:"compressType"`
+	// The custom request header carried when delivering logs. If the header name you fill in is the default header carried by EdgeOne log push, such as Content-Type, then the header value you fill in will overwrite the default value. The header value references a single variable ${batchSize} to obtain the number of logs included in each POST request.
+	Headers []RealtimeLogDeliveryCustomEndpointHeader `pulumi:"headers"`
+	// When sending logs via POST request, the application layer protocol type used can be: `http`: HTTP protocol; `https`: HTTPS protocol. If not filled in, the protocol type will be parsed according to the filled in URL address.
+	Protocol *string `pulumi:"protocol"`
+	// The custom HTTP interface address for real-time log delivery. Currently, only HTTP/HTTPS protocols are supported.
+	Url string `pulumi:"url"`
+}
+
+// RealtimeLogDeliveryCustomEndpointInput is an input type that accepts RealtimeLogDeliveryCustomEndpointArgs and RealtimeLogDeliveryCustomEndpointOutput values.
+// You can construct a concrete instance of `RealtimeLogDeliveryCustomEndpointInput` via:
+//
+//	RealtimeLogDeliveryCustomEndpointArgs{...}
+type RealtimeLogDeliveryCustomEndpointInput interface {
+	pulumi.Input
+
+	ToRealtimeLogDeliveryCustomEndpointOutput() RealtimeLogDeliveryCustomEndpointOutput
+	ToRealtimeLogDeliveryCustomEndpointOutputWithContext(context.Context) RealtimeLogDeliveryCustomEndpointOutput
+}
+
+type RealtimeLogDeliveryCustomEndpointArgs struct {
+	// Fill in a custom SecretId to generate an encrypted signature. This parameter is required if the source site requires authentication.
+	AccessId pulumi.StringPtrInput `pulumi:"accessId"`
+	// Fill in the custom SecretKey to generate the encrypted signature. This parameter is required if the source site requires authentication.
+	AccessKey pulumi.StringPtrInput `pulumi:"accessKey"`
+	// Data compression type, the possible values are: `gzip`: use gzip compression. If it is not filled in, compression is not enabled.
+	CompressType pulumi.StringPtrInput `pulumi:"compressType"`
+	// The custom request header carried when delivering logs. If the header name you fill in is the default header carried by EdgeOne log push, such as Content-Type, then the header value you fill in will overwrite the default value. The header value references a single variable ${batchSize} to obtain the number of logs included in each POST request.
+	Headers RealtimeLogDeliveryCustomEndpointHeaderArrayInput `pulumi:"headers"`
+	// When sending logs via POST request, the application layer protocol type used can be: `http`: HTTP protocol; `https`: HTTPS protocol. If not filled in, the protocol type will be parsed according to the filled in URL address.
+	Protocol pulumi.StringPtrInput `pulumi:"protocol"`
+	// The custom HTTP interface address for real-time log delivery. Currently, only HTTP/HTTPS protocols are supported.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (RealtimeLogDeliveryCustomEndpointArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RealtimeLogDeliveryCustomEndpoint)(nil)).Elem()
+}
+
+func (i RealtimeLogDeliveryCustomEndpointArgs) ToRealtimeLogDeliveryCustomEndpointOutput() RealtimeLogDeliveryCustomEndpointOutput {
+	return i.ToRealtimeLogDeliveryCustomEndpointOutputWithContext(context.Background())
+}
+
+func (i RealtimeLogDeliveryCustomEndpointArgs) ToRealtimeLogDeliveryCustomEndpointOutputWithContext(ctx context.Context) RealtimeLogDeliveryCustomEndpointOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryCustomEndpointOutput)
+}
+
+func (i RealtimeLogDeliveryCustomEndpointArgs) ToRealtimeLogDeliveryCustomEndpointPtrOutput() RealtimeLogDeliveryCustomEndpointPtrOutput {
+	return i.ToRealtimeLogDeliveryCustomEndpointPtrOutputWithContext(context.Background())
+}
+
+func (i RealtimeLogDeliveryCustomEndpointArgs) ToRealtimeLogDeliveryCustomEndpointPtrOutputWithContext(ctx context.Context) RealtimeLogDeliveryCustomEndpointPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryCustomEndpointOutput).ToRealtimeLogDeliveryCustomEndpointPtrOutputWithContext(ctx)
+}
+
+// RealtimeLogDeliveryCustomEndpointPtrInput is an input type that accepts RealtimeLogDeliveryCustomEndpointArgs, RealtimeLogDeliveryCustomEndpointPtr and RealtimeLogDeliveryCustomEndpointPtrOutput values.
+// You can construct a concrete instance of `RealtimeLogDeliveryCustomEndpointPtrInput` via:
+//
+//	        RealtimeLogDeliveryCustomEndpointArgs{...}
+//
+//	or:
+//
+//	        nil
+type RealtimeLogDeliveryCustomEndpointPtrInput interface {
+	pulumi.Input
+
+	ToRealtimeLogDeliveryCustomEndpointPtrOutput() RealtimeLogDeliveryCustomEndpointPtrOutput
+	ToRealtimeLogDeliveryCustomEndpointPtrOutputWithContext(context.Context) RealtimeLogDeliveryCustomEndpointPtrOutput
+}
+
+type realtimeLogDeliveryCustomEndpointPtrType RealtimeLogDeliveryCustomEndpointArgs
+
+func RealtimeLogDeliveryCustomEndpointPtr(v *RealtimeLogDeliveryCustomEndpointArgs) RealtimeLogDeliveryCustomEndpointPtrInput {
+	return (*realtimeLogDeliveryCustomEndpointPtrType)(v)
+}
+
+func (*realtimeLogDeliveryCustomEndpointPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RealtimeLogDeliveryCustomEndpoint)(nil)).Elem()
+}
+
+func (i *realtimeLogDeliveryCustomEndpointPtrType) ToRealtimeLogDeliveryCustomEndpointPtrOutput() RealtimeLogDeliveryCustomEndpointPtrOutput {
+	return i.ToRealtimeLogDeliveryCustomEndpointPtrOutputWithContext(context.Background())
+}
+
+func (i *realtimeLogDeliveryCustomEndpointPtrType) ToRealtimeLogDeliveryCustomEndpointPtrOutputWithContext(ctx context.Context) RealtimeLogDeliveryCustomEndpointPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryCustomEndpointPtrOutput)
+}
+
+type RealtimeLogDeliveryCustomEndpointOutput struct{ *pulumi.OutputState }
+
+func (RealtimeLogDeliveryCustomEndpointOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RealtimeLogDeliveryCustomEndpoint)(nil)).Elem()
+}
+
+func (o RealtimeLogDeliveryCustomEndpointOutput) ToRealtimeLogDeliveryCustomEndpointOutput() RealtimeLogDeliveryCustomEndpointOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryCustomEndpointOutput) ToRealtimeLogDeliveryCustomEndpointOutputWithContext(ctx context.Context) RealtimeLogDeliveryCustomEndpointOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryCustomEndpointOutput) ToRealtimeLogDeliveryCustomEndpointPtrOutput() RealtimeLogDeliveryCustomEndpointPtrOutput {
+	return o.ToRealtimeLogDeliveryCustomEndpointPtrOutputWithContext(context.Background())
+}
+
+func (o RealtimeLogDeliveryCustomEndpointOutput) ToRealtimeLogDeliveryCustomEndpointPtrOutputWithContext(ctx context.Context) RealtimeLogDeliveryCustomEndpointPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RealtimeLogDeliveryCustomEndpoint) *RealtimeLogDeliveryCustomEndpoint {
+		return &v
+	}).(RealtimeLogDeliveryCustomEndpointPtrOutput)
+}
+
+// Fill in a custom SecretId to generate an encrypted signature. This parameter is required if the source site requires authentication.
+func (o RealtimeLogDeliveryCustomEndpointOutput) AccessId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryCustomEndpoint) *string { return v.AccessId }).(pulumi.StringPtrOutput)
+}
+
+// Fill in the custom SecretKey to generate the encrypted signature. This parameter is required if the source site requires authentication.
+func (o RealtimeLogDeliveryCustomEndpointOutput) AccessKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryCustomEndpoint) *string { return v.AccessKey }).(pulumi.StringPtrOutput)
+}
+
+// Data compression type, the possible values are: `gzip`: use gzip compression. If it is not filled in, compression is not enabled.
+func (o RealtimeLogDeliveryCustomEndpointOutput) CompressType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryCustomEndpoint) *string { return v.CompressType }).(pulumi.StringPtrOutput)
+}
+
+// The custom request header carried when delivering logs. If the header name you fill in is the default header carried by EdgeOne log push, such as Content-Type, then the header value you fill in will overwrite the default value. The header value references a single variable ${batchSize} to obtain the number of logs included in each POST request.
+func (o RealtimeLogDeliveryCustomEndpointOutput) Headers() RealtimeLogDeliveryCustomEndpointHeaderArrayOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryCustomEndpoint) []RealtimeLogDeliveryCustomEndpointHeader { return v.Headers }).(RealtimeLogDeliveryCustomEndpointHeaderArrayOutput)
+}
+
+// When sending logs via POST request, the application layer protocol type used can be: `http`: HTTP protocol; `https`: HTTPS protocol. If not filled in, the protocol type will be parsed according to the filled in URL address.
+func (o RealtimeLogDeliveryCustomEndpointOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryCustomEndpoint) *string { return v.Protocol }).(pulumi.StringPtrOutput)
+}
+
+// The custom HTTP interface address for real-time log delivery. Currently, only HTTP/HTTPS protocols are supported.
+func (o RealtimeLogDeliveryCustomEndpointOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryCustomEndpoint) string { return v.Url }).(pulumi.StringOutput)
+}
+
+type RealtimeLogDeliveryCustomEndpointPtrOutput struct{ *pulumi.OutputState }
+
+func (RealtimeLogDeliveryCustomEndpointPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RealtimeLogDeliveryCustomEndpoint)(nil)).Elem()
+}
+
+func (o RealtimeLogDeliveryCustomEndpointPtrOutput) ToRealtimeLogDeliveryCustomEndpointPtrOutput() RealtimeLogDeliveryCustomEndpointPtrOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryCustomEndpointPtrOutput) ToRealtimeLogDeliveryCustomEndpointPtrOutputWithContext(ctx context.Context) RealtimeLogDeliveryCustomEndpointPtrOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryCustomEndpointPtrOutput) Elem() RealtimeLogDeliveryCustomEndpointOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryCustomEndpoint) RealtimeLogDeliveryCustomEndpoint {
+		if v != nil {
+			return *v
+		}
+		var ret RealtimeLogDeliveryCustomEndpoint
+		return ret
+	}).(RealtimeLogDeliveryCustomEndpointOutput)
+}
+
+// Fill in a custom SecretId to generate an encrypted signature. This parameter is required if the source site requires authentication.
+func (o RealtimeLogDeliveryCustomEndpointPtrOutput) AccessId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryCustomEndpoint) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AccessId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Fill in the custom SecretKey to generate the encrypted signature. This parameter is required if the source site requires authentication.
+func (o RealtimeLogDeliveryCustomEndpointPtrOutput) AccessKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryCustomEndpoint) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AccessKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Data compression type, the possible values are: `gzip`: use gzip compression. If it is not filled in, compression is not enabled.
+func (o RealtimeLogDeliveryCustomEndpointPtrOutput) CompressType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryCustomEndpoint) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CompressType
+	}).(pulumi.StringPtrOutput)
+}
+
+// The custom request header carried when delivering logs. If the header name you fill in is the default header carried by EdgeOne log push, such as Content-Type, then the header value you fill in will overwrite the default value. The header value references a single variable ${batchSize} to obtain the number of logs included in each POST request.
+func (o RealtimeLogDeliveryCustomEndpointPtrOutput) Headers() RealtimeLogDeliveryCustomEndpointHeaderArrayOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryCustomEndpoint) []RealtimeLogDeliveryCustomEndpointHeader {
+		if v == nil {
+			return nil
+		}
+		return v.Headers
+	}).(RealtimeLogDeliveryCustomEndpointHeaderArrayOutput)
+}
+
+// When sending logs via POST request, the application layer protocol type used can be: `http`: HTTP protocol; `https`: HTTPS protocol. If not filled in, the protocol type will be parsed according to the filled in URL address.
+func (o RealtimeLogDeliveryCustomEndpointPtrOutput) Protocol() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryCustomEndpoint) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Protocol
+	}).(pulumi.StringPtrOutput)
+}
+
+// The custom HTTP interface address for real-time log delivery. Currently, only HTTP/HTTPS protocols are supported.
+func (o RealtimeLogDeliveryCustomEndpointPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryCustomEndpoint) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type RealtimeLogDeliveryCustomEndpointHeader struct {
+	// HTTP header name.
+	Name string `pulumi:"name"`
+	// HTTP header value.
+	Value string `pulumi:"value"`
+}
+
+// RealtimeLogDeliveryCustomEndpointHeaderInput is an input type that accepts RealtimeLogDeliveryCustomEndpointHeaderArgs and RealtimeLogDeliveryCustomEndpointHeaderOutput values.
+// You can construct a concrete instance of `RealtimeLogDeliveryCustomEndpointHeaderInput` via:
+//
+//	RealtimeLogDeliveryCustomEndpointHeaderArgs{...}
+type RealtimeLogDeliveryCustomEndpointHeaderInput interface {
+	pulumi.Input
+
+	ToRealtimeLogDeliveryCustomEndpointHeaderOutput() RealtimeLogDeliveryCustomEndpointHeaderOutput
+	ToRealtimeLogDeliveryCustomEndpointHeaderOutputWithContext(context.Context) RealtimeLogDeliveryCustomEndpointHeaderOutput
+}
+
+type RealtimeLogDeliveryCustomEndpointHeaderArgs struct {
+	// HTTP header name.
+	Name pulumi.StringInput `pulumi:"name"`
+	// HTTP header value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (RealtimeLogDeliveryCustomEndpointHeaderArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RealtimeLogDeliveryCustomEndpointHeader)(nil)).Elem()
+}
+
+func (i RealtimeLogDeliveryCustomEndpointHeaderArgs) ToRealtimeLogDeliveryCustomEndpointHeaderOutput() RealtimeLogDeliveryCustomEndpointHeaderOutput {
+	return i.ToRealtimeLogDeliveryCustomEndpointHeaderOutputWithContext(context.Background())
+}
+
+func (i RealtimeLogDeliveryCustomEndpointHeaderArgs) ToRealtimeLogDeliveryCustomEndpointHeaderOutputWithContext(ctx context.Context) RealtimeLogDeliveryCustomEndpointHeaderOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryCustomEndpointHeaderOutput)
+}
+
+// RealtimeLogDeliveryCustomEndpointHeaderArrayInput is an input type that accepts RealtimeLogDeliveryCustomEndpointHeaderArray and RealtimeLogDeliveryCustomEndpointHeaderArrayOutput values.
+// You can construct a concrete instance of `RealtimeLogDeliveryCustomEndpointHeaderArrayInput` via:
+//
+//	RealtimeLogDeliveryCustomEndpointHeaderArray{ RealtimeLogDeliveryCustomEndpointHeaderArgs{...} }
+type RealtimeLogDeliveryCustomEndpointHeaderArrayInput interface {
+	pulumi.Input
+
+	ToRealtimeLogDeliveryCustomEndpointHeaderArrayOutput() RealtimeLogDeliveryCustomEndpointHeaderArrayOutput
+	ToRealtimeLogDeliveryCustomEndpointHeaderArrayOutputWithContext(context.Context) RealtimeLogDeliveryCustomEndpointHeaderArrayOutput
+}
+
+type RealtimeLogDeliveryCustomEndpointHeaderArray []RealtimeLogDeliveryCustomEndpointHeaderInput
+
+func (RealtimeLogDeliveryCustomEndpointHeaderArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RealtimeLogDeliveryCustomEndpointHeader)(nil)).Elem()
+}
+
+func (i RealtimeLogDeliveryCustomEndpointHeaderArray) ToRealtimeLogDeliveryCustomEndpointHeaderArrayOutput() RealtimeLogDeliveryCustomEndpointHeaderArrayOutput {
+	return i.ToRealtimeLogDeliveryCustomEndpointHeaderArrayOutputWithContext(context.Background())
+}
+
+func (i RealtimeLogDeliveryCustomEndpointHeaderArray) ToRealtimeLogDeliveryCustomEndpointHeaderArrayOutputWithContext(ctx context.Context) RealtimeLogDeliveryCustomEndpointHeaderArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryCustomEndpointHeaderArrayOutput)
+}
+
+type RealtimeLogDeliveryCustomEndpointHeaderOutput struct{ *pulumi.OutputState }
+
+func (RealtimeLogDeliveryCustomEndpointHeaderOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RealtimeLogDeliveryCustomEndpointHeader)(nil)).Elem()
+}
+
+func (o RealtimeLogDeliveryCustomEndpointHeaderOutput) ToRealtimeLogDeliveryCustomEndpointHeaderOutput() RealtimeLogDeliveryCustomEndpointHeaderOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryCustomEndpointHeaderOutput) ToRealtimeLogDeliveryCustomEndpointHeaderOutputWithContext(ctx context.Context) RealtimeLogDeliveryCustomEndpointHeaderOutput {
+	return o
+}
+
+// HTTP header name.
+func (o RealtimeLogDeliveryCustomEndpointHeaderOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryCustomEndpointHeader) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// HTTP header value.
+func (o RealtimeLogDeliveryCustomEndpointHeaderOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryCustomEndpointHeader) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type RealtimeLogDeliveryCustomEndpointHeaderArrayOutput struct{ *pulumi.OutputState }
+
+func (RealtimeLogDeliveryCustomEndpointHeaderArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RealtimeLogDeliveryCustomEndpointHeader)(nil)).Elem()
+}
+
+func (o RealtimeLogDeliveryCustomEndpointHeaderArrayOutput) ToRealtimeLogDeliveryCustomEndpointHeaderArrayOutput() RealtimeLogDeliveryCustomEndpointHeaderArrayOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryCustomEndpointHeaderArrayOutput) ToRealtimeLogDeliveryCustomEndpointHeaderArrayOutputWithContext(ctx context.Context) RealtimeLogDeliveryCustomEndpointHeaderArrayOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryCustomEndpointHeaderArrayOutput) Index(i pulumi.IntInput) RealtimeLogDeliveryCustomEndpointHeaderOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RealtimeLogDeliveryCustomEndpointHeader {
+		return vs[0].([]RealtimeLogDeliveryCustomEndpointHeader)[vs[1].(int)]
+	}).(RealtimeLogDeliveryCustomEndpointHeaderOutput)
+}
+
+type RealtimeLogDeliveryCustomField struct {
+	// Whether to deliver this field. If left blank, this field will not be delivered.
+	Enabled *bool `pulumi:"enabled"`
+	// Extract data from the specified location in the HTTP request and response. The values are: `ReqHeader`: extract the specified field value from the HTTP request header; `RspHeader`: extract the specified field value from the HTTP response header; `Cookie`: extract the specified field value from the Cookie.
+	Name string `pulumi:"name"`
+	// The name of the parameter whose value needs to be extracted, for example: Accept-Language.
+	Value string `pulumi:"value"`
+}
+
+// RealtimeLogDeliveryCustomFieldInput is an input type that accepts RealtimeLogDeliveryCustomFieldArgs and RealtimeLogDeliveryCustomFieldOutput values.
+// You can construct a concrete instance of `RealtimeLogDeliveryCustomFieldInput` via:
+//
+//	RealtimeLogDeliveryCustomFieldArgs{...}
+type RealtimeLogDeliveryCustomFieldInput interface {
+	pulumi.Input
+
+	ToRealtimeLogDeliveryCustomFieldOutput() RealtimeLogDeliveryCustomFieldOutput
+	ToRealtimeLogDeliveryCustomFieldOutputWithContext(context.Context) RealtimeLogDeliveryCustomFieldOutput
+}
+
+type RealtimeLogDeliveryCustomFieldArgs struct {
+	// Whether to deliver this field. If left blank, this field will not be delivered.
+	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
+	// Extract data from the specified location in the HTTP request and response. The values are: `ReqHeader`: extract the specified field value from the HTTP request header; `RspHeader`: extract the specified field value from the HTTP response header; `Cookie`: extract the specified field value from the Cookie.
+	Name pulumi.StringInput `pulumi:"name"`
+	// The name of the parameter whose value needs to be extracted, for example: Accept-Language.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (RealtimeLogDeliveryCustomFieldArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RealtimeLogDeliveryCustomField)(nil)).Elem()
+}
+
+func (i RealtimeLogDeliveryCustomFieldArgs) ToRealtimeLogDeliveryCustomFieldOutput() RealtimeLogDeliveryCustomFieldOutput {
+	return i.ToRealtimeLogDeliveryCustomFieldOutputWithContext(context.Background())
+}
+
+func (i RealtimeLogDeliveryCustomFieldArgs) ToRealtimeLogDeliveryCustomFieldOutputWithContext(ctx context.Context) RealtimeLogDeliveryCustomFieldOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryCustomFieldOutput)
+}
+
+// RealtimeLogDeliveryCustomFieldArrayInput is an input type that accepts RealtimeLogDeliveryCustomFieldArray and RealtimeLogDeliveryCustomFieldArrayOutput values.
+// You can construct a concrete instance of `RealtimeLogDeliveryCustomFieldArrayInput` via:
+//
+//	RealtimeLogDeliveryCustomFieldArray{ RealtimeLogDeliveryCustomFieldArgs{...} }
+type RealtimeLogDeliveryCustomFieldArrayInput interface {
+	pulumi.Input
+
+	ToRealtimeLogDeliveryCustomFieldArrayOutput() RealtimeLogDeliveryCustomFieldArrayOutput
+	ToRealtimeLogDeliveryCustomFieldArrayOutputWithContext(context.Context) RealtimeLogDeliveryCustomFieldArrayOutput
+}
+
+type RealtimeLogDeliveryCustomFieldArray []RealtimeLogDeliveryCustomFieldInput
+
+func (RealtimeLogDeliveryCustomFieldArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RealtimeLogDeliveryCustomField)(nil)).Elem()
+}
+
+func (i RealtimeLogDeliveryCustomFieldArray) ToRealtimeLogDeliveryCustomFieldArrayOutput() RealtimeLogDeliveryCustomFieldArrayOutput {
+	return i.ToRealtimeLogDeliveryCustomFieldArrayOutputWithContext(context.Background())
+}
+
+func (i RealtimeLogDeliveryCustomFieldArray) ToRealtimeLogDeliveryCustomFieldArrayOutputWithContext(ctx context.Context) RealtimeLogDeliveryCustomFieldArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryCustomFieldArrayOutput)
+}
+
+type RealtimeLogDeliveryCustomFieldOutput struct{ *pulumi.OutputState }
+
+func (RealtimeLogDeliveryCustomFieldOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RealtimeLogDeliveryCustomField)(nil)).Elem()
+}
+
+func (o RealtimeLogDeliveryCustomFieldOutput) ToRealtimeLogDeliveryCustomFieldOutput() RealtimeLogDeliveryCustomFieldOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryCustomFieldOutput) ToRealtimeLogDeliveryCustomFieldOutputWithContext(ctx context.Context) RealtimeLogDeliveryCustomFieldOutput {
+	return o
+}
+
+// Whether to deliver this field. If left blank, this field will not be delivered.
+func (o RealtimeLogDeliveryCustomFieldOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryCustomField) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+}
+
+// Extract data from the specified location in the HTTP request and response. The values are: `ReqHeader`: extract the specified field value from the HTTP request header; `RspHeader`: extract the specified field value from the HTTP response header; `Cookie`: extract the specified field value from the Cookie.
+func (o RealtimeLogDeliveryCustomFieldOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryCustomField) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// The name of the parameter whose value needs to be extracted, for example: Accept-Language.
+func (o RealtimeLogDeliveryCustomFieldOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryCustomField) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type RealtimeLogDeliveryCustomFieldArrayOutput struct{ *pulumi.OutputState }
+
+func (RealtimeLogDeliveryCustomFieldArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RealtimeLogDeliveryCustomField)(nil)).Elem()
+}
+
+func (o RealtimeLogDeliveryCustomFieldArrayOutput) ToRealtimeLogDeliveryCustomFieldArrayOutput() RealtimeLogDeliveryCustomFieldArrayOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryCustomFieldArrayOutput) ToRealtimeLogDeliveryCustomFieldArrayOutputWithContext(ctx context.Context) RealtimeLogDeliveryCustomFieldArrayOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryCustomFieldArrayOutput) Index(i pulumi.IntInput) RealtimeLogDeliveryCustomFieldOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RealtimeLogDeliveryCustomField {
+		return vs[0].([]RealtimeLogDeliveryCustomField)[vs[1].(int)]
+	}).(RealtimeLogDeliveryCustomFieldOutput)
+}
+
+type RealtimeLogDeliveryDeliveryCondition struct {
+	// Log filtering conditions, the detailed filtering conditions are as follows: - `EdgeResponseStatusCode`: filter according to the status code returned by the EdgeOne node to the client. Supported operators: `equal`, `great`, `less`, `greatEqual`, `lessEqual`; Value range: any integer greater than or equal to 0; - `OriginResponseStatusCode`: filter according to the origin response status code. Supported operators: `equal`, `great`, `less`, `greatEqual`, `lessEqual`; Value range: any integer greater than or equal to -1; - `SecurityAction`: filter according to the final disposal action after the request hits the security rule. Supported operators: `equal`; Optional options are as follows: `-`: unknown/miss; `Monitor`: observe; `JSChallenge`: JavaScript challenge; `Deny`: intercept; `Allow`: allow; `BlockIP`: IP ban; `Redirect`: redirect; `ReturnCustomPage`: return to a custom page; `ManagedChallenge`: managed challenge; `Silence`: silent; `LongDelay`: respond after a long wait; `ShortDelay`: respond after a short wait; -`SecurityModule`: filter according to the name of the security module that finally handles the request. Supported operators: `equal`; Optional options: `-`: unknown/missed; `CustomRule`: Web Protection - Custom Rules; `RateLimitingCustomRule`: Web Protection - Rate Limiting Rules; `ManagedRule`: Web Protection - Managed Rules; `L7DDoS`: Web Protection - CC Attack Protection; `BotManagement`: Bot Management - Bot Basic Management; `BotClientReputation`: Bot Management - Client Profile Analysis; `BotBehaviorAnalysis`: Bot Management - Bot Intelligent Analysis; `BotCustomRule`: Bot Management - Custom Bot Rules; `BotActiveDetection`: Bot Management - Active Feature Recognition.
+	Conditions []RealtimeLogDeliveryDeliveryConditionCondition `pulumi:"conditions"`
+}
+
+// RealtimeLogDeliveryDeliveryConditionInput is an input type that accepts RealtimeLogDeliveryDeliveryConditionArgs and RealtimeLogDeliveryDeliveryConditionOutput values.
+// You can construct a concrete instance of `RealtimeLogDeliveryDeliveryConditionInput` via:
+//
+//	RealtimeLogDeliveryDeliveryConditionArgs{...}
+type RealtimeLogDeliveryDeliveryConditionInput interface {
+	pulumi.Input
+
+	ToRealtimeLogDeliveryDeliveryConditionOutput() RealtimeLogDeliveryDeliveryConditionOutput
+	ToRealtimeLogDeliveryDeliveryConditionOutputWithContext(context.Context) RealtimeLogDeliveryDeliveryConditionOutput
+}
+
+type RealtimeLogDeliveryDeliveryConditionArgs struct {
+	// Log filtering conditions, the detailed filtering conditions are as follows: - `EdgeResponseStatusCode`: filter according to the status code returned by the EdgeOne node to the client. Supported operators: `equal`, `great`, `less`, `greatEqual`, `lessEqual`; Value range: any integer greater than or equal to 0; - `OriginResponseStatusCode`: filter according to the origin response status code. Supported operators: `equal`, `great`, `less`, `greatEqual`, `lessEqual`; Value range: any integer greater than or equal to -1; - `SecurityAction`: filter according to the final disposal action after the request hits the security rule. Supported operators: `equal`; Optional options are as follows: `-`: unknown/miss; `Monitor`: observe; `JSChallenge`: JavaScript challenge; `Deny`: intercept; `Allow`: allow; `BlockIP`: IP ban; `Redirect`: redirect; `ReturnCustomPage`: return to a custom page; `ManagedChallenge`: managed challenge; `Silence`: silent; `LongDelay`: respond after a long wait; `ShortDelay`: respond after a short wait; -`SecurityModule`: filter according to the name of the security module that finally handles the request. Supported operators: `equal`; Optional options: `-`: unknown/missed; `CustomRule`: Web Protection - Custom Rules; `RateLimitingCustomRule`: Web Protection - Rate Limiting Rules; `ManagedRule`: Web Protection - Managed Rules; `L7DDoS`: Web Protection - CC Attack Protection; `BotManagement`: Bot Management - Bot Basic Management; `BotClientReputation`: Bot Management - Client Profile Analysis; `BotBehaviorAnalysis`: Bot Management - Bot Intelligent Analysis; `BotCustomRule`: Bot Management - Custom Bot Rules; `BotActiveDetection`: Bot Management - Active Feature Recognition.
+	Conditions RealtimeLogDeliveryDeliveryConditionConditionArrayInput `pulumi:"conditions"`
+}
+
+func (RealtimeLogDeliveryDeliveryConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RealtimeLogDeliveryDeliveryCondition)(nil)).Elem()
+}
+
+func (i RealtimeLogDeliveryDeliveryConditionArgs) ToRealtimeLogDeliveryDeliveryConditionOutput() RealtimeLogDeliveryDeliveryConditionOutput {
+	return i.ToRealtimeLogDeliveryDeliveryConditionOutputWithContext(context.Background())
+}
+
+func (i RealtimeLogDeliveryDeliveryConditionArgs) ToRealtimeLogDeliveryDeliveryConditionOutputWithContext(ctx context.Context) RealtimeLogDeliveryDeliveryConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryDeliveryConditionOutput)
+}
+
+// RealtimeLogDeliveryDeliveryConditionArrayInput is an input type that accepts RealtimeLogDeliveryDeliveryConditionArray and RealtimeLogDeliveryDeliveryConditionArrayOutput values.
+// You can construct a concrete instance of `RealtimeLogDeliveryDeliveryConditionArrayInput` via:
+//
+//	RealtimeLogDeliveryDeliveryConditionArray{ RealtimeLogDeliveryDeliveryConditionArgs{...} }
+type RealtimeLogDeliveryDeliveryConditionArrayInput interface {
+	pulumi.Input
+
+	ToRealtimeLogDeliveryDeliveryConditionArrayOutput() RealtimeLogDeliveryDeliveryConditionArrayOutput
+	ToRealtimeLogDeliveryDeliveryConditionArrayOutputWithContext(context.Context) RealtimeLogDeliveryDeliveryConditionArrayOutput
+}
+
+type RealtimeLogDeliveryDeliveryConditionArray []RealtimeLogDeliveryDeliveryConditionInput
+
+func (RealtimeLogDeliveryDeliveryConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RealtimeLogDeliveryDeliveryCondition)(nil)).Elem()
+}
+
+func (i RealtimeLogDeliveryDeliveryConditionArray) ToRealtimeLogDeliveryDeliveryConditionArrayOutput() RealtimeLogDeliveryDeliveryConditionArrayOutput {
+	return i.ToRealtimeLogDeliveryDeliveryConditionArrayOutputWithContext(context.Background())
+}
+
+func (i RealtimeLogDeliveryDeliveryConditionArray) ToRealtimeLogDeliveryDeliveryConditionArrayOutputWithContext(ctx context.Context) RealtimeLogDeliveryDeliveryConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryDeliveryConditionArrayOutput)
+}
+
+type RealtimeLogDeliveryDeliveryConditionOutput struct{ *pulumi.OutputState }
+
+func (RealtimeLogDeliveryDeliveryConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RealtimeLogDeliveryDeliveryCondition)(nil)).Elem()
+}
+
+func (o RealtimeLogDeliveryDeliveryConditionOutput) ToRealtimeLogDeliveryDeliveryConditionOutput() RealtimeLogDeliveryDeliveryConditionOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryDeliveryConditionOutput) ToRealtimeLogDeliveryDeliveryConditionOutputWithContext(ctx context.Context) RealtimeLogDeliveryDeliveryConditionOutput {
+	return o
+}
+
+// Log filtering conditions, the detailed filtering conditions are as follows: - `EdgeResponseStatusCode`: filter according to the status code returned by the EdgeOne node to the client. Supported operators: `equal`, `great`, `less`, `greatEqual`, `lessEqual`; Value range: any integer greater than or equal to 0; - `OriginResponseStatusCode`: filter according to the origin response status code. Supported operators: `equal`, `great`, `less`, `greatEqual`, `lessEqual`; Value range: any integer greater than or equal to -1; - `SecurityAction`: filter according to the final disposal action after the request hits the security rule. Supported operators: `equal`; Optional options are as follows: `-`: unknown/miss; `Monitor`: observe; `JSChallenge`: JavaScript challenge; `Deny`: intercept; `Allow`: allow; `BlockIP`: IP ban; `Redirect`: redirect; `ReturnCustomPage`: return to a custom page; `ManagedChallenge`: managed challenge; `Silence`: silent; `LongDelay`: respond after a long wait; `ShortDelay`: respond after a short wait; -`SecurityModule`: filter according to the name of the security module that finally handles the request. Supported operators: `equal`; Optional options: `-`: unknown/missed; `CustomRule`: Web Protection - Custom Rules; `RateLimitingCustomRule`: Web Protection - Rate Limiting Rules; `ManagedRule`: Web Protection - Managed Rules; `L7DDoS`: Web Protection - CC Attack Protection; `BotManagement`: Bot Management - Bot Basic Management; `BotClientReputation`: Bot Management - Client Profile Analysis; `BotBehaviorAnalysis`: Bot Management - Bot Intelligent Analysis; `BotCustomRule`: Bot Management - Custom Bot Rules; `BotActiveDetection`: Bot Management - Active Feature Recognition.
+func (o RealtimeLogDeliveryDeliveryConditionOutput) Conditions() RealtimeLogDeliveryDeliveryConditionConditionArrayOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryDeliveryCondition) []RealtimeLogDeliveryDeliveryConditionCondition {
+		return v.Conditions
+	}).(RealtimeLogDeliveryDeliveryConditionConditionArrayOutput)
+}
+
+type RealtimeLogDeliveryDeliveryConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (RealtimeLogDeliveryDeliveryConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RealtimeLogDeliveryDeliveryCondition)(nil)).Elem()
+}
+
+func (o RealtimeLogDeliveryDeliveryConditionArrayOutput) ToRealtimeLogDeliveryDeliveryConditionArrayOutput() RealtimeLogDeliveryDeliveryConditionArrayOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryDeliveryConditionArrayOutput) ToRealtimeLogDeliveryDeliveryConditionArrayOutputWithContext(ctx context.Context) RealtimeLogDeliveryDeliveryConditionArrayOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryDeliveryConditionArrayOutput) Index(i pulumi.IntInput) RealtimeLogDeliveryDeliveryConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RealtimeLogDeliveryDeliveryCondition {
+		return vs[0].([]RealtimeLogDeliveryDeliveryCondition)[vs[1].(int)]
+	}).(RealtimeLogDeliveryDeliveryConditionOutput)
+}
+
+type RealtimeLogDeliveryDeliveryConditionCondition struct {
+	// The key of the filter condition.
+	Key string `pulumi:"key"`
+	// Query condition operator, operation types are: `equals`: equal; `notEquals`: not equal; `include`: include; `notInclude`: not include; `startWith`: start with value; `notStartWith`: not start with value; `endWith`: end with value; `notEndWith`: not end with value.
+	Operator string `pulumi:"operator"`
+	// The value of the filter condition.
+	Values []string `pulumi:"values"`
+}
+
+// RealtimeLogDeliveryDeliveryConditionConditionInput is an input type that accepts RealtimeLogDeliveryDeliveryConditionConditionArgs and RealtimeLogDeliveryDeliveryConditionConditionOutput values.
+// You can construct a concrete instance of `RealtimeLogDeliveryDeliveryConditionConditionInput` via:
+//
+//	RealtimeLogDeliveryDeliveryConditionConditionArgs{...}
+type RealtimeLogDeliveryDeliveryConditionConditionInput interface {
+	pulumi.Input
+
+	ToRealtimeLogDeliveryDeliveryConditionConditionOutput() RealtimeLogDeliveryDeliveryConditionConditionOutput
+	ToRealtimeLogDeliveryDeliveryConditionConditionOutputWithContext(context.Context) RealtimeLogDeliveryDeliveryConditionConditionOutput
+}
+
+type RealtimeLogDeliveryDeliveryConditionConditionArgs struct {
+	// The key of the filter condition.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Query condition operator, operation types are: `equals`: equal; `notEquals`: not equal; `include`: include; `notInclude`: not include; `startWith`: start with value; `notStartWith`: not start with value; `endWith`: end with value; `notEndWith`: not end with value.
+	Operator pulumi.StringInput `pulumi:"operator"`
+	// The value of the filter condition.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (RealtimeLogDeliveryDeliveryConditionConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RealtimeLogDeliveryDeliveryConditionCondition)(nil)).Elem()
+}
+
+func (i RealtimeLogDeliveryDeliveryConditionConditionArgs) ToRealtimeLogDeliveryDeliveryConditionConditionOutput() RealtimeLogDeliveryDeliveryConditionConditionOutput {
+	return i.ToRealtimeLogDeliveryDeliveryConditionConditionOutputWithContext(context.Background())
+}
+
+func (i RealtimeLogDeliveryDeliveryConditionConditionArgs) ToRealtimeLogDeliveryDeliveryConditionConditionOutputWithContext(ctx context.Context) RealtimeLogDeliveryDeliveryConditionConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryDeliveryConditionConditionOutput)
+}
+
+// RealtimeLogDeliveryDeliveryConditionConditionArrayInput is an input type that accepts RealtimeLogDeliveryDeliveryConditionConditionArray and RealtimeLogDeliveryDeliveryConditionConditionArrayOutput values.
+// You can construct a concrete instance of `RealtimeLogDeliveryDeliveryConditionConditionArrayInput` via:
+//
+//	RealtimeLogDeliveryDeliveryConditionConditionArray{ RealtimeLogDeliveryDeliveryConditionConditionArgs{...} }
+type RealtimeLogDeliveryDeliveryConditionConditionArrayInput interface {
+	pulumi.Input
+
+	ToRealtimeLogDeliveryDeliveryConditionConditionArrayOutput() RealtimeLogDeliveryDeliveryConditionConditionArrayOutput
+	ToRealtimeLogDeliveryDeliveryConditionConditionArrayOutputWithContext(context.Context) RealtimeLogDeliveryDeliveryConditionConditionArrayOutput
+}
+
+type RealtimeLogDeliveryDeliveryConditionConditionArray []RealtimeLogDeliveryDeliveryConditionConditionInput
+
+func (RealtimeLogDeliveryDeliveryConditionConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RealtimeLogDeliveryDeliveryConditionCondition)(nil)).Elem()
+}
+
+func (i RealtimeLogDeliveryDeliveryConditionConditionArray) ToRealtimeLogDeliveryDeliveryConditionConditionArrayOutput() RealtimeLogDeliveryDeliveryConditionConditionArrayOutput {
+	return i.ToRealtimeLogDeliveryDeliveryConditionConditionArrayOutputWithContext(context.Background())
+}
+
+func (i RealtimeLogDeliveryDeliveryConditionConditionArray) ToRealtimeLogDeliveryDeliveryConditionConditionArrayOutputWithContext(ctx context.Context) RealtimeLogDeliveryDeliveryConditionConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryDeliveryConditionConditionArrayOutput)
+}
+
+type RealtimeLogDeliveryDeliveryConditionConditionOutput struct{ *pulumi.OutputState }
+
+func (RealtimeLogDeliveryDeliveryConditionConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RealtimeLogDeliveryDeliveryConditionCondition)(nil)).Elem()
+}
+
+func (o RealtimeLogDeliveryDeliveryConditionConditionOutput) ToRealtimeLogDeliveryDeliveryConditionConditionOutput() RealtimeLogDeliveryDeliveryConditionConditionOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryDeliveryConditionConditionOutput) ToRealtimeLogDeliveryDeliveryConditionConditionOutputWithContext(ctx context.Context) RealtimeLogDeliveryDeliveryConditionConditionOutput {
+	return o
+}
+
+// The key of the filter condition.
+func (o RealtimeLogDeliveryDeliveryConditionConditionOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryDeliveryConditionCondition) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Query condition operator, operation types are: `equals`: equal; `notEquals`: not equal; `include`: include; `notInclude`: not include; `startWith`: start with value; `notStartWith`: not start with value; `endWith`: end with value; `notEndWith`: not end with value.
+func (o RealtimeLogDeliveryDeliveryConditionConditionOutput) Operator() pulumi.StringOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryDeliveryConditionCondition) string { return v.Operator }).(pulumi.StringOutput)
+}
+
+// The value of the filter condition.
+func (o RealtimeLogDeliveryDeliveryConditionConditionOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryDeliveryConditionCondition) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type RealtimeLogDeliveryDeliveryConditionConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (RealtimeLogDeliveryDeliveryConditionConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]RealtimeLogDeliveryDeliveryConditionCondition)(nil)).Elem()
+}
+
+func (o RealtimeLogDeliveryDeliveryConditionConditionArrayOutput) ToRealtimeLogDeliveryDeliveryConditionConditionArrayOutput() RealtimeLogDeliveryDeliveryConditionConditionArrayOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryDeliveryConditionConditionArrayOutput) ToRealtimeLogDeliveryDeliveryConditionConditionArrayOutputWithContext(ctx context.Context) RealtimeLogDeliveryDeliveryConditionConditionArrayOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryDeliveryConditionConditionArrayOutput) Index(i pulumi.IntInput) RealtimeLogDeliveryDeliveryConditionConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) RealtimeLogDeliveryDeliveryConditionCondition {
+		return vs[0].([]RealtimeLogDeliveryDeliveryConditionCondition)[vs[1].(int)]
+	}).(RealtimeLogDeliveryDeliveryConditionConditionOutput)
+}
+
+type RealtimeLogDeliveryLogFormat struct {
+	// A string to be added before each log delivery batch. Each log delivery batch may contain multiple log records.
+	BatchPrefix *string `pulumi:"batchPrefix"`
+	// A string to append after each log delivery batch.
+	BatchSuffix *string `pulumi:"batchSuffix"`
+	// In a single log record, a string is inserted between fields as a separator. The possible values are: `	`: tab character; `,`: comma; `;`: semicolon.
+	FieldDelimiter *string `pulumi:"fieldDelimiter"`
+	// The default output format type for log delivery. The possible values are: `json`: Use the default log output format JSON Lines. The fields in a single log are presented as key-value pairs; `csv`: Use the default log output format csv. Only field values are presented in a single log, without field names.
+	FormatType string `pulumi:"formatType"`
+	// The string inserted between log records as a separator. The possible values are: ``: newline character; `	`: tab character; `,`: comma.
+	RecordDelimiter *string `pulumi:"recordDelimiter"`
+	// A string to prepend to each log record.
+	RecordPrefix *string `pulumi:"recordPrefix"`
+	// A string to append to each log record.
+	//
+	// The `s3` object supports the following:
+	RecordSuffix *string `pulumi:"recordSuffix"`
+}
+
+// RealtimeLogDeliveryLogFormatInput is an input type that accepts RealtimeLogDeliveryLogFormatArgs and RealtimeLogDeliveryLogFormatOutput values.
+// You can construct a concrete instance of `RealtimeLogDeliveryLogFormatInput` via:
+//
+//	RealtimeLogDeliveryLogFormatArgs{...}
+type RealtimeLogDeliveryLogFormatInput interface {
+	pulumi.Input
+
+	ToRealtimeLogDeliveryLogFormatOutput() RealtimeLogDeliveryLogFormatOutput
+	ToRealtimeLogDeliveryLogFormatOutputWithContext(context.Context) RealtimeLogDeliveryLogFormatOutput
+}
+
+type RealtimeLogDeliveryLogFormatArgs struct {
+	// A string to be added before each log delivery batch. Each log delivery batch may contain multiple log records.
+	BatchPrefix pulumi.StringPtrInput `pulumi:"batchPrefix"`
+	// A string to append after each log delivery batch.
+	BatchSuffix pulumi.StringPtrInput `pulumi:"batchSuffix"`
+	// In a single log record, a string is inserted between fields as a separator. The possible values are: `	`: tab character; `,`: comma; `;`: semicolon.
+	FieldDelimiter pulumi.StringPtrInput `pulumi:"fieldDelimiter"`
+	// The default output format type for log delivery. The possible values are: `json`: Use the default log output format JSON Lines. The fields in a single log are presented as key-value pairs; `csv`: Use the default log output format csv. Only field values are presented in a single log, without field names.
+	FormatType pulumi.StringInput `pulumi:"formatType"`
+	// The string inserted between log records as a separator. The possible values are: ``: newline character; `	`: tab character; `,`: comma.
+	RecordDelimiter pulumi.StringPtrInput `pulumi:"recordDelimiter"`
+	// A string to prepend to each log record.
+	RecordPrefix pulumi.StringPtrInput `pulumi:"recordPrefix"`
+	// A string to append to each log record.
+	//
+	// The `s3` object supports the following:
+	RecordSuffix pulumi.StringPtrInput `pulumi:"recordSuffix"`
+}
+
+func (RealtimeLogDeliveryLogFormatArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RealtimeLogDeliveryLogFormat)(nil)).Elem()
+}
+
+func (i RealtimeLogDeliveryLogFormatArgs) ToRealtimeLogDeliveryLogFormatOutput() RealtimeLogDeliveryLogFormatOutput {
+	return i.ToRealtimeLogDeliveryLogFormatOutputWithContext(context.Background())
+}
+
+func (i RealtimeLogDeliveryLogFormatArgs) ToRealtimeLogDeliveryLogFormatOutputWithContext(ctx context.Context) RealtimeLogDeliveryLogFormatOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryLogFormatOutput)
+}
+
+func (i RealtimeLogDeliveryLogFormatArgs) ToRealtimeLogDeliveryLogFormatPtrOutput() RealtimeLogDeliveryLogFormatPtrOutput {
+	return i.ToRealtimeLogDeliveryLogFormatPtrOutputWithContext(context.Background())
+}
+
+func (i RealtimeLogDeliveryLogFormatArgs) ToRealtimeLogDeliveryLogFormatPtrOutputWithContext(ctx context.Context) RealtimeLogDeliveryLogFormatPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryLogFormatOutput).ToRealtimeLogDeliveryLogFormatPtrOutputWithContext(ctx)
+}
+
+// RealtimeLogDeliveryLogFormatPtrInput is an input type that accepts RealtimeLogDeliveryLogFormatArgs, RealtimeLogDeliveryLogFormatPtr and RealtimeLogDeliveryLogFormatPtrOutput values.
+// You can construct a concrete instance of `RealtimeLogDeliveryLogFormatPtrInput` via:
+//
+//	        RealtimeLogDeliveryLogFormatArgs{...}
+//
+//	or:
+//
+//	        nil
+type RealtimeLogDeliveryLogFormatPtrInput interface {
+	pulumi.Input
+
+	ToRealtimeLogDeliveryLogFormatPtrOutput() RealtimeLogDeliveryLogFormatPtrOutput
+	ToRealtimeLogDeliveryLogFormatPtrOutputWithContext(context.Context) RealtimeLogDeliveryLogFormatPtrOutput
+}
+
+type realtimeLogDeliveryLogFormatPtrType RealtimeLogDeliveryLogFormatArgs
+
+func RealtimeLogDeliveryLogFormatPtr(v *RealtimeLogDeliveryLogFormatArgs) RealtimeLogDeliveryLogFormatPtrInput {
+	return (*realtimeLogDeliveryLogFormatPtrType)(v)
+}
+
+func (*realtimeLogDeliveryLogFormatPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RealtimeLogDeliveryLogFormat)(nil)).Elem()
+}
+
+func (i *realtimeLogDeliveryLogFormatPtrType) ToRealtimeLogDeliveryLogFormatPtrOutput() RealtimeLogDeliveryLogFormatPtrOutput {
+	return i.ToRealtimeLogDeliveryLogFormatPtrOutputWithContext(context.Background())
+}
+
+func (i *realtimeLogDeliveryLogFormatPtrType) ToRealtimeLogDeliveryLogFormatPtrOutputWithContext(ctx context.Context) RealtimeLogDeliveryLogFormatPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryLogFormatPtrOutput)
+}
+
+type RealtimeLogDeliveryLogFormatOutput struct{ *pulumi.OutputState }
+
+func (RealtimeLogDeliveryLogFormatOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RealtimeLogDeliveryLogFormat)(nil)).Elem()
+}
+
+func (o RealtimeLogDeliveryLogFormatOutput) ToRealtimeLogDeliveryLogFormatOutput() RealtimeLogDeliveryLogFormatOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryLogFormatOutput) ToRealtimeLogDeliveryLogFormatOutputWithContext(ctx context.Context) RealtimeLogDeliveryLogFormatOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryLogFormatOutput) ToRealtimeLogDeliveryLogFormatPtrOutput() RealtimeLogDeliveryLogFormatPtrOutput {
+	return o.ToRealtimeLogDeliveryLogFormatPtrOutputWithContext(context.Background())
+}
+
+func (o RealtimeLogDeliveryLogFormatOutput) ToRealtimeLogDeliveryLogFormatPtrOutputWithContext(ctx context.Context) RealtimeLogDeliveryLogFormatPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RealtimeLogDeliveryLogFormat) *RealtimeLogDeliveryLogFormat {
+		return &v
+	}).(RealtimeLogDeliveryLogFormatPtrOutput)
+}
+
+// A string to be added before each log delivery batch. Each log delivery batch may contain multiple log records.
+func (o RealtimeLogDeliveryLogFormatOutput) BatchPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryLogFormat) *string { return v.BatchPrefix }).(pulumi.StringPtrOutput)
+}
+
+// A string to append after each log delivery batch.
+func (o RealtimeLogDeliveryLogFormatOutput) BatchSuffix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryLogFormat) *string { return v.BatchSuffix }).(pulumi.StringPtrOutput)
+}
+
+// In a single log record, a string is inserted between fields as a separator. The possible values are: `	`: tab character; `,`: comma; `;`: semicolon.
+func (o RealtimeLogDeliveryLogFormatOutput) FieldDelimiter() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryLogFormat) *string { return v.FieldDelimiter }).(pulumi.StringPtrOutput)
+}
+
+// The default output format type for log delivery. The possible values are: `json`: Use the default log output format JSON Lines. The fields in a single log are presented as key-value pairs; `csv`: Use the default log output format csv. Only field values are presented in a single log, without field names.
+func (o RealtimeLogDeliveryLogFormatOutput) FormatType() pulumi.StringOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryLogFormat) string { return v.FormatType }).(pulumi.StringOutput)
+}
+
+// The string inserted between log records as a separator. The possible values are: “: newline character; `	`: tab character; `,`: comma.
+func (o RealtimeLogDeliveryLogFormatOutput) RecordDelimiter() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryLogFormat) *string { return v.RecordDelimiter }).(pulumi.StringPtrOutput)
+}
+
+// A string to prepend to each log record.
+func (o RealtimeLogDeliveryLogFormatOutput) RecordPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryLogFormat) *string { return v.RecordPrefix }).(pulumi.StringPtrOutput)
+}
+
+// A string to append to each log record.
+//
+// The `s3` object supports the following:
+func (o RealtimeLogDeliveryLogFormatOutput) RecordSuffix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryLogFormat) *string { return v.RecordSuffix }).(pulumi.StringPtrOutput)
+}
+
+type RealtimeLogDeliveryLogFormatPtrOutput struct{ *pulumi.OutputState }
+
+func (RealtimeLogDeliveryLogFormatPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RealtimeLogDeliveryLogFormat)(nil)).Elem()
+}
+
+func (o RealtimeLogDeliveryLogFormatPtrOutput) ToRealtimeLogDeliveryLogFormatPtrOutput() RealtimeLogDeliveryLogFormatPtrOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryLogFormatPtrOutput) ToRealtimeLogDeliveryLogFormatPtrOutputWithContext(ctx context.Context) RealtimeLogDeliveryLogFormatPtrOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryLogFormatPtrOutput) Elem() RealtimeLogDeliveryLogFormatOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryLogFormat) RealtimeLogDeliveryLogFormat {
+		if v != nil {
+			return *v
+		}
+		var ret RealtimeLogDeliveryLogFormat
+		return ret
+	}).(RealtimeLogDeliveryLogFormatOutput)
+}
+
+// A string to be added before each log delivery batch. Each log delivery batch may contain multiple log records.
+func (o RealtimeLogDeliveryLogFormatPtrOutput) BatchPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryLogFormat) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BatchPrefix
+	}).(pulumi.StringPtrOutput)
+}
+
+// A string to append after each log delivery batch.
+func (o RealtimeLogDeliveryLogFormatPtrOutput) BatchSuffix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryLogFormat) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BatchSuffix
+	}).(pulumi.StringPtrOutput)
+}
+
+// In a single log record, a string is inserted between fields as a separator. The possible values are: `	`: tab character; `,`: comma; `;`: semicolon.
+func (o RealtimeLogDeliveryLogFormatPtrOutput) FieldDelimiter() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryLogFormat) *string {
+		if v == nil {
+			return nil
+		}
+		return v.FieldDelimiter
+	}).(pulumi.StringPtrOutput)
+}
+
+// The default output format type for log delivery. The possible values are: `json`: Use the default log output format JSON Lines. The fields in a single log are presented as key-value pairs; `csv`: Use the default log output format csv. Only field values are presented in a single log, without field names.
+func (o RealtimeLogDeliveryLogFormatPtrOutput) FormatType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryLogFormat) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.FormatType
+	}).(pulumi.StringPtrOutput)
+}
+
+// The string inserted between log records as a separator. The possible values are: “: newline character; `	`: tab character; `,`: comma.
+func (o RealtimeLogDeliveryLogFormatPtrOutput) RecordDelimiter() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryLogFormat) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RecordDelimiter
+	}).(pulumi.StringPtrOutput)
+}
+
+// A string to prepend to each log record.
+func (o RealtimeLogDeliveryLogFormatPtrOutput) RecordPrefix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryLogFormat) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RecordPrefix
+	}).(pulumi.StringPtrOutput)
+}
+
+// A string to append to each log record.
+//
+// The `s3` object supports the following:
+func (o RealtimeLogDeliveryLogFormatPtrOutput) RecordSuffix() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryLogFormat) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RecordSuffix
+	}).(pulumi.StringPtrOutput)
+}
+
+type RealtimeLogDeliveryS3 struct {
+	// Fill in a custom SecretId to generate an encrypted signature. This parameter is required if the source site requires authentication.
+	AccessId string `pulumi:"accessId"`
+	// Fill in the custom SecretKey to generate the encrypted signature. This parameter is required if the source site requires authentication.
+	AccessKey string `pulumi:"accessKey"`
+	// Bucket name and log storage directory, for example: `your_bucket_name/EO-logs/`. If this directory does not exist in the bucket, it will be created automatically.
+	Bucket string `pulumi:"bucket"`
+	// Data compression type, the possible values are: `gzip`: use gzip compression. If it is not filled in, compression is not enabled.
+	CompressType *string `pulumi:"compressType"`
+	// URLs that do not include bucket names or paths, for example: `https://storage.googleapis.com`, `https://s3.ap-northeast-2.amazonaws.com`, `https://cos.ap-nanjing.myqcloud.com`.
+	Endpoint string `pulumi:"endpoint"`
+	// The region where the bucket is located, for example: ap-northeast-2.
+	Region string `pulumi:"region"`
+}
+
+// RealtimeLogDeliveryS3Input is an input type that accepts RealtimeLogDeliveryS3Args and RealtimeLogDeliveryS3Output values.
+// You can construct a concrete instance of `RealtimeLogDeliveryS3Input` via:
+//
+//	RealtimeLogDeliveryS3Args{...}
+type RealtimeLogDeliveryS3Input interface {
+	pulumi.Input
+
+	ToRealtimeLogDeliveryS3Output() RealtimeLogDeliveryS3Output
+	ToRealtimeLogDeliveryS3OutputWithContext(context.Context) RealtimeLogDeliveryS3Output
+}
+
+type RealtimeLogDeliveryS3Args struct {
+	// Fill in a custom SecretId to generate an encrypted signature. This parameter is required if the source site requires authentication.
+	AccessId pulumi.StringInput `pulumi:"accessId"`
+	// Fill in the custom SecretKey to generate the encrypted signature. This parameter is required if the source site requires authentication.
+	AccessKey pulumi.StringInput `pulumi:"accessKey"`
+	// Bucket name and log storage directory, for example: `your_bucket_name/EO-logs/`. If this directory does not exist in the bucket, it will be created automatically.
+	Bucket pulumi.StringInput `pulumi:"bucket"`
+	// Data compression type, the possible values are: `gzip`: use gzip compression. If it is not filled in, compression is not enabled.
+	CompressType pulumi.StringPtrInput `pulumi:"compressType"`
+	// URLs that do not include bucket names or paths, for example: `https://storage.googleapis.com`, `https://s3.ap-northeast-2.amazonaws.com`, `https://cos.ap-nanjing.myqcloud.com`.
+	Endpoint pulumi.StringInput `pulumi:"endpoint"`
+	// The region where the bucket is located, for example: ap-northeast-2.
+	Region pulumi.StringInput `pulumi:"region"`
+}
+
+func (RealtimeLogDeliveryS3Args) ElementType() reflect.Type {
+	return reflect.TypeOf((*RealtimeLogDeliveryS3)(nil)).Elem()
+}
+
+func (i RealtimeLogDeliveryS3Args) ToRealtimeLogDeliveryS3Output() RealtimeLogDeliveryS3Output {
+	return i.ToRealtimeLogDeliveryS3OutputWithContext(context.Background())
+}
+
+func (i RealtimeLogDeliveryS3Args) ToRealtimeLogDeliveryS3OutputWithContext(ctx context.Context) RealtimeLogDeliveryS3Output {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryS3Output)
+}
+
+func (i RealtimeLogDeliveryS3Args) ToRealtimeLogDeliveryS3PtrOutput() RealtimeLogDeliveryS3PtrOutput {
+	return i.ToRealtimeLogDeliveryS3PtrOutputWithContext(context.Background())
+}
+
+func (i RealtimeLogDeliveryS3Args) ToRealtimeLogDeliveryS3PtrOutputWithContext(ctx context.Context) RealtimeLogDeliveryS3PtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryS3Output).ToRealtimeLogDeliveryS3PtrOutputWithContext(ctx)
+}
+
+// RealtimeLogDeliveryS3PtrInput is an input type that accepts RealtimeLogDeliveryS3Args, RealtimeLogDeliveryS3Ptr and RealtimeLogDeliveryS3PtrOutput values.
+// You can construct a concrete instance of `RealtimeLogDeliveryS3PtrInput` via:
+//
+//	        RealtimeLogDeliveryS3Args{...}
+//
+//	or:
+//
+//	        nil
+type RealtimeLogDeliveryS3PtrInput interface {
+	pulumi.Input
+
+	ToRealtimeLogDeliveryS3PtrOutput() RealtimeLogDeliveryS3PtrOutput
+	ToRealtimeLogDeliveryS3PtrOutputWithContext(context.Context) RealtimeLogDeliveryS3PtrOutput
+}
+
+type realtimeLogDeliveryS3PtrType RealtimeLogDeliveryS3Args
+
+func RealtimeLogDeliveryS3Ptr(v *RealtimeLogDeliveryS3Args) RealtimeLogDeliveryS3PtrInput {
+	return (*realtimeLogDeliveryS3PtrType)(v)
+}
+
+func (*realtimeLogDeliveryS3PtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RealtimeLogDeliveryS3)(nil)).Elem()
+}
+
+func (i *realtimeLogDeliveryS3PtrType) ToRealtimeLogDeliveryS3PtrOutput() RealtimeLogDeliveryS3PtrOutput {
+	return i.ToRealtimeLogDeliveryS3PtrOutputWithContext(context.Background())
+}
+
+func (i *realtimeLogDeliveryS3PtrType) ToRealtimeLogDeliveryS3PtrOutputWithContext(ctx context.Context) RealtimeLogDeliveryS3PtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RealtimeLogDeliveryS3PtrOutput)
+}
+
+type RealtimeLogDeliveryS3Output struct{ *pulumi.OutputState }
+
+func (RealtimeLogDeliveryS3Output) ElementType() reflect.Type {
+	return reflect.TypeOf((*RealtimeLogDeliveryS3)(nil)).Elem()
+}
+
+func (o RealtimeLogDeliveryS3Output) ToRealtimeLogDeliveryS3Output() RealtimeLogDeliveryS3Output {
+	return o
+}
+
+func (o RealtimeLogDeliveryS3Output) ToRealtimeLogDeliveryS3OutputWithContext(ctx context.Context) RealtimeLogDeliveryS3Output {
+	return o
+}
+
+func (o RealtimeLogDeliveryS3Output) ToRealtimeLogDeliveryS3PtrOutput() RealtimeLogDeliveryS3PtrOutput {
+	return o.ToRealtimeLogDeliveryS3PtrOutputWithContext(context.Background())
+}
+
+func (o RealtimeLogDeliveryS3Output) ToRealtimeLogDeliveryS3PtrOutputWithContext(ctx context.Context) RealtimeLogDeliveryS3PtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RealtimeLogDeliveryS3) *RealtimeLogDeliveryS3 {
+		return &v
+	}).(RealtimeLogDeliveryS3PtrOutput)
+}
+
+// Fill in a custom SecretId to generate an encrypted signature. This parameter is required if the source site requires authentication.
+func (o RealtimeLogDeliveryS3Output) AccessId() pulumi.StringOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryS3) string { return v.AccessId }).(pulumi.StringOutput)
+}
+
+// Fill in the custom SecretKey to generate the encrypted signature. This parameter is required if the source site requires authentication.
+func (o RealtimeLogDeliveryS3Output) AccessKey() pulumi.StringOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryS3) string { return v.AccessKey }).(pulumi.StringOutput)
+}
+
+// Bucket name and log storage directory, for example: `your_bucket_name/EO-logs/`. If this directory does not exist in the bucket, it will be created automatically.
+func (o RealtimeLogDeliveryS3Output) Bucket() pulumi.StringOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryS3) string { return v.Bucket }).(pulumi.StringOutput)
+}
+
+// Data compression type, the possible values are: `gzip`: use gzip compression. If it is not filled in, compression is not enabled.
+func (o RealtimeLogDeliveryS3Output) CompressType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryS3) *string { return v.CompressType }).(pulumi.StringPtrOutput)
+}
+
+// URLs that do not include bucket names or paths, for example: `https://storage.googleapis.com`, `https://s3.ap-northeast-2.amazonaws.com`, `https://cos.ap-nanjing.myqcloud.com`.
+func (o RealtimeLogDeliveryS3Output) Endpoint() pulumi.StringOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryS3) string { return v.Endpoint }).(pulumi.StringOutput)
+}
+
+// The region where the bucket is located, for example: ap-northeast-2.
+func (o RealtimeLogDeliveryS3Output) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v RealtimeLogDeliveryS3) string { return v.Region }).(pulumi.StringOutput)
+}
+
+type RealtimeLogDeliveryS3PtrOutput struct{ *pulumi.OutputState }
+
+func (RealtimeLogDeliveryS3PtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RealtimeLogDeliveryS3)(nil)).Elem()
+}
+
+func (o RealtimeLogDeliveryS3PtrOutput) ToRealtimeLogDeliveryS3PtrOutput() RealtimeLogDeliveryS3PtrOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryS3PtrOutput) ToRealtimeLogDeliveryS3PtrOutputWithContext(ctx context.Context) RealtimeLogDeliveryS3PtrOutput {
+	return o
+}
+
+func (o RealtimeLogDeliveryS3PtrOutput) Elem() RealtimeLogDeliveryS3Output {
+	return o.ApplyT(func(v *RealtimeLogDeliveryS3) RealtimeLogDeliveryS3 {
+		if v != nil {
+			return *v
+		}
+		var ret RealtimeLogDeliveryS3
+		return ret
+	}).(RealtimeLogDeliveryS3Output)
+}
+
+// Fill in a custom SecretId to generate an encrypted signature. This parameter is required if the source site requires authentication.
+func (o RealtimeLogDeliveryS3PtrOutput) AccessId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryS3) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.AccessId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Fill in the custom SecretKey to generate the encrypted signature. This parameter is required if the source site requires authentication.
+func (o RealtimeLogDeliveryS3PtrOutput) AccessKey() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryS3) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.AccessKey
+	}).(pulumi.StringPtrOutput)
+}
+
+// Bucket name and log storage directory, for example: `your_bucket_name/EO-logs/`. If this directory does not exist in the bucket, it will be created automatically.
+func (o RealtimeLogDeliveryS3PtrOutput) Bucket() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryS3) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Bucket
+	}).(pulumi.StringPtrOutput)
+}
+
+// Data compression type, the possible values are: `gzip`: use gzip compression. If it is not filled in, compression is not enabled.
+func (o RealtimeLogDeliveryS3PtrOutput) CompressType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryS3) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CompressType
+	}).(pulumi.StringPtrOutput)
+}
+
+// URLs that do not include bucket names or paths, for example: `https://storage.googleapis.com`, `https://s3.ap-northeast-2.amazonaws.com`, `https://cos.ap-nanjing.myqcloud.com`.
+func (o RealtimeLogDeliveryS3PtrOutput) Endpoint() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryS3) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Endpoint
+	}).(pulumi.StringPtrOutput)
+}
+
+// The region where the bucket is located, for example: ap-northeast-2.
+func (o RealtimeLogDeliveryS3PtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RealtimeLogDeliveryS3) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
 type RuleEngineRule struct {
 	// Feature to be executed.
 	Actions []RuleEngineRuleAction `pulumi:"actions"`
@@ -8254,6 +9587,22 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupRecordPrivateParameterArrayInput)(nil)).Elem(), OriginGroupRecordPrivateParameterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupReferenceInput)(nil)).Elem(), OriginGroupReferenceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*OriginGroupReferenceArrayInput)(nil)).Elem(), OriginGroupReferenceArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RealtimeLogDeliveryClsInput)(nil)).Elem(), RealtimeLogDeliveryClsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RealtimeLogDeliveryClsPtrInput)(nil)).Elem(), RealtimeLogDeliveryClsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RealtimeLogDeliveryCustomEndpointInput)(nil)).Elem(), RealtimeLogDeliveryCustomEndpointArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RealtimeLogDeliveryCustomEndpointPtrInput)(nil)).Elem(), RealtimeLogDeliveryCustomEndpointArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RealtimeLogDeliveryCustomEndpointHeaderInput)(nil)).Elem(), RealtimeLogDeliveryCustomEndpointHeaderArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RealtimeLogDeliveryCustomEndpointHeaderArrayInput)(nil)).Elem(), RealtimeLogDeliveryCustomEndpointHeaderArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RealtimeLogDeliveryCustomFieldInput)(nil)).Elem(), RealtimeLogDeliveryCustomFieldArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RealtimeLogDeliveryCustomFieldArrayInput)(nil)).Elem(), RealtimeLogDeliveryCustomFieldArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RealtimeLogDeliveryDeliveryConditionInput)(nil)).Elem(), RealtimeLogDeliveryDeliveryConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RealtimeLogDeliveryDeliveryConditionArrayInput)(nil)).Elem(), RealtimeLogDeliveryDeliveryConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RealtimeLogDeliveryDeliveryConditionConditionInput)(nil)).Elem(), RealtimeLogDeliveryDeliveryConditionConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RealtimeLogDeliveryDeliveryConditionConditionArrayInput)(nil)).Elem(), RealtimeLogDeliveryDeliveryConditionConditionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RealtimeLogDeliveryLogFormatInput)(nil)).Elem(), RealtimeLogDeliveryLogFormatArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RealtimeLogDeliveryLogFormatPtrInput)(nil)).Elem(), RealtimeLogDeliveryLogFormatArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RealtimeLogDeliveryS3Input)(nil)).Elem(), RealtimeLogDeliveryS3Args{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RealtimeLogDeliveryS3PtrInput)(nil)).Elem(), RealtimeLogDeliveryS3Args{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RuleEngineRuleInput)(nil)).Elem(), RuleEngineRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RuleEngineRuleArrayInput)(nil)).Elem(), RuleEngineRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*RuleEngineRuleActionInput)(nil)).Elem(), RuleEngineRuleActionArgs{})
@@ -8370,6 +9719,22 @@ func init() {
 	pulumi.RegisterOutputType(OriginGroupRecordPrivateParameterArrayOutput{})
 	pulumi.RegisterOutputType(OriginGroupReferenceOutput{})
 	pulumi.RegisterOutputType(OriginGroupReferenceArrayOutput{})
+	pulumi.RegisterOutputType(RealtimeLogDeliveryClsOutput{})
+	pulumi.RegisterOutputType(RealtimeLogDeliveryClsPtrOutput{})
+	pulumi.RegisterOutputType(RealtimeLogDeliveryCustomEndpointOutput{})
+	pulumi.RegisterOutputType(RealtimeLogDeliveryCustomEndpointPtrOutput{})
+	pulumi.RegisterOutputType(RealtimeLogDeliveryCustomEndpointHeaderOutput{})
+	pulumi.RegisterOutputType(RealtimeLogDeliveryCustomEndpointHeaderArrayOutput{})
+	pulumi.RegisterOutputType(RealtimeLogDeliveryCustomFieldOutput{})
+	pulumi.RegisterOutputType(RealtimeLogDeliveryCustomFieldArrayOutput{})
+	pulumi.RegisterOutputType(RealtimeLogDeliveryDeliveryConditionOutput{})
+	pulumi.RegisterOutputType(RealtimeLogDeliveryDeliveryConditionArrayOutput{})
+	pulumi.RegisterOutputType(RealtimeLogDeliveryDeliveryConditionConditionOutput{})
+	pulumi.RegisterOutputType(RealtimeLogDeliveryDeliveryConditionConditionArrayOutput{})
+	pulumi.RegisterOutputType(RealtimeLogDeliveryLogFormatOutput{})
+	pulumi.RegisterOutputType(RealtimeLogDeliveryLogFormatPtrOutput{})
+	pulumi.RegisterOutputType(RealtimeLogDeliveryS3Output{})
+	pulumi.RegisterOutputType(RealtimeLogDeliveryS3PtrOutput{})
 	pulumi.RegisterOutputType(RuleEngineRuleOutput{})
 	pulumi.RegisterOutputType(RuleEngineRuleArrayOutput{})
 	pulumi.RegisterOutputType(RuleEngineRuleActionOutput{})

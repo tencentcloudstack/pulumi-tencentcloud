@@ -15,6 +15,7 @@ import (
 // Use this resource to create postgresql instance.
 //
 // > **Note:** To update the charge type, please update the `chargeType` and specify the `period` for the charging period. It only supports updating from `POSTPAID_BY_HOUR` to `PREPAID`, and the `period` field only valid in that upgrading case.
+// **Note:** If no values are set for the two parameters: `dbMajorVersion` and `engineVersion`, then `engineVersion` is set to `10.4` by default. Suggest using parameter `dbMajorVersion` to create an instance
 //
 // ## Example Usage
 //
@@ -35,7 +36,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			cfg := config.New(ctx, "")
-//			availabilityZone := "ap-guangzhou-1"
+//			availabilityZone := "ap-guangzhou-3"
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
@@ -57,16 +58,18 @@ import (
 //				return err
 //			}
 //			// create postgresql
-//			_, err = Postgresql.NewInstance(ctx, "foo", &Postgresql.InstanceArgs{
+//			_, err = Postgresql.NewInstance(ctx, "example", &Postgresql.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
 //				VpcId:            vpc.ID(),
 //				SubnetId:         subnet.ID(),
-//				EngineVersion:    pulumi.String("10.4"),
+//				DbMajorVersion:   pulumi.String("10"),
+//				EngineVersion:    pulumi.String("10.23"),
 //				RootUser:         pulumi.String("root123"),
 //				RootPassword:     pulumi.String("Root123$"),
 //				Charset:          pulumi.String("UTF8"),
 //				ProjectId:        pulumi.Int(0),
+//				Cpu:              pulumi.Int(1),
 //				Memory:           pulumi.Int(2),
 //				Storage:          pulumi.Int(10),
 //				Tags: pulumi.Map{
@@ -128,12 +131,12 @@ import (
 //				return err
 //			}
 //			// create postgresql
-//			_, err = Postgresql.NewInstance(ctx, "foo", &Postgresql.InstanceArgs{
+//			_, err = Postgresql.NewInstance(ctx, "example", &Postgresql.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
 //				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
 //				VpcId:            vpc.ID(),
 //				SubnetId:         subnet.ID(),
-//				EngineVersion:    pulumi.String("10.4"),
+//				DbMajorVersion:   pulumi.String("10"),
 //				RootUser:         pulumi.String("root123"),
 //				RootPassword:     pulumi.String("Root123$"),
 //				Charset:          pulumi.String("UTF8"),
@@ -173,39 +176,46 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Postgresql.NewInstance(ctx, "pg", &Postgresql.InstanceArgs{
-//				AvailabilityZone: pulumi.String("ap-guangzhou-6"),
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-6"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			_, err := Postgresql.NewInstance(ctx, "example", &Postgresql.InstanceArgs{
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+//				VpcId:            pulumi.String("vpc-86v957zb"),
+//				SubnetId:         pulumi.String("subnet-enm92y0m"),
+//				DbMajorVersion:   pulumi.String("11"),
+//				EngineVersion:    pulumi.String("11.12"),
+//				DbKernelVersion:  pulumi.String("v11.12_r1.3"),
+//				NeedSupportTde:   pulumi.Int(1),
+//				KmsKeyId:         pulumi.String("788c606a-c7b7-11ec-82d1-5254001e5c4e"),
+//				KmsRegion:        pulumi.String("ap-guangzhou"),
+//				RootPassword:     pulumi.String("Root123$"),
+//				Charset:          pulumi.String("LATIN1"),
+//				ProjectId:        pulumi.Int(0),
+//				Memory:           pulumi.Int(4),
+//				Storage:          pulumi.Int(100),
 //				BackupPlan: &postgresql.InstanceBackupPlanArgs{
+//					MinBackupStartTime:        pulumi.String("00:10:11"),
+//					MaxBackupStartTime:        pulumi.String("01:10:11"),
+//					BaseBackupRetentionPeriod: pulumi.Int(7),
 //					BackupPeriods: pulumi.StringArray{
 //						pulumi.String("tuesday"),
 //						pulumi.String("wednesday"),
 //					},
-//					BaseBackupRetentionPeriod: pulumi.Int(7),
-//					MaxBackupStartTime:        pulumi.String("01:10:11"),
-//					MinBackupStartTime:        pulumi.String("00:10:11"),
 //				},
-//				ChargeType:      pulumi.String("POSTPAID_BY_HOUR"),
-//				Charset:         pulumi.String("LATIN1"),
-//				DbKernelVersion: pulumi.String("v11.12_r1.3"),
-//				EngineVersion:   pulumi.String("11.12"),
-//				KmsKeyId:        pulumi.String("788c606a-c7b7-11ec-82d1-5254001e5c4e"),
-//				KmsRegion:       pulumi.String("ap-guangzhou"),
-//				Memory:          pulumi.Int(4),
-//				NeedSupportTde:  pulumi.Int(1),
-//				ProjectId:       pulumi.Int(0),
-//				RootPassword:    pulumi.String("xxxxxxxxxx"),
-//				Storage:         pulumi.Int(100),
-//				SubnetId:        pulumi.String("subnet-enm92y0m"),
 //				Tags: pulumi.Map{
 //					"tf": pulumi.Any("test"),
 //				},
-//				VpcId: pulumi.String("vpc-86v957zb"),
 //			})
 //			if err != nil {
 //				return err
@@ -226,24 +236,30 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Postgresql.NewInstance(ctx, "test", &Postgresql.InstanceArgs{
-//				AvailabilityZone:   pulumi.Any(data.Tencentcloud_availability_zones_by_product.Zone.Zones[5].Name),
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-6"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			_, err := Postgresql.NewInstance(ctx, "example", &Postgresql.InstanceArgs{
+//				AvailabilityZone:   pulumi.String(availabilityZone),
 //				ChargeType:         pulumi.String("POSTPAID_BY_HOUR"),
-//				VpcId:              pulumi.Any(local.Vpc_id),
-//				SubnetId:           pulumi.Any(local.Subnet_id),
+//				VpcId:              pulumi.String("vpc-86v957zb"),
+//				SubnetId:           pulumi.String("subnet-enm92y0m"),
 //				EngineVersion:      pulumi.String("13.3"),
-//				RootPassword:       pulumi.String("*"),
+//				RootPassword:       pulumi.String("Root123$"),
 //				Charset:            pulumi.String("LATIN1"),
 //				ProjectId:          pulumi.Int(0),
 //				PublicAccessSwitch: pulumi.Bool(false),
 //				SecurityGroups: pulumi.StringArray{
-//					local.Sg_id,
+//					pulumi.String("sg-cm7fbbf3"),
 //				},
 //				Memory:  pulumi.Int(4),
 //				Storage: pulumi.Int(250),
@@ -259,7 +275,7 @@ import (
 //				},
 //				DbKernelVersion: pulumi.String("v13.3_r1.4"),
 //				Tags: pulumi.Map{
-//					"tf": pulumi.Any("teest"),
+//					"tf": pulumi.Any("test"),
 //				},
 //			})
 //			if err != nil {
@@ -277,7 +293,7 @@ import (
 // postgresql instance can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Postgresql/instance:Instance foo postgres-cda1iex1
+// $ pulumi import tencentcloud:Postgresql/instance:Instance example postgres-cda1iex1
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -300,16 +316,16 @@ type Instance struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
 	DbKernelVersion pulumi.StringOutput `pulumi:"dbKernelVersion"`
-	// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+	// PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 	DbMajorVersion pulumi.StringOutput `pulumi:"dbMajorVersion"`
-	// `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+	// `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 	//
 	// Deprecated: `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead.
 	DbMajorVesion pulumi.StringOutput `pulumi:"dbMajorVesion"`
 	// Specify instance node info for disaster migration.
 	DbNodeSets InstanceDbNodeSetArrayOutput `pulumi:"dbNodeSets"`
-	// Version of the postgresql database engine. Valid values: `10.4`, `11.8`, `12.4`.
-	EngineVersion pulumi.StringPtrOutput `pulumi:"engineVersion"`
+	// Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
+	EngineVersion pulumi.StringOutput `pulumi:"engineVersion"`
 	// KeyId of the custom key.
 	KmsKeyId pulumi.StringOutput `pulumi:"kmsKeyId"`
 	// Region of the custom key.
@@ -431,15 +447,15 @@ type instanceState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
 	DbKernelVersion *string `pulumi:"dbKernelVersion"`
-	// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+	// PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 	DbMajorVersion *string `pulumi:"dbMajorVersion"`
-	// `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+	// `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 	//
 	// Deprecated: `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead.
 	DbMajorVesion *string `pulumi:"dbMajorVesion"`
 	// Specify instance node info for disaster migration.
 	DbNodeSets []InstanceDbNodeSet `pulumi:"dbNodeSets"`
-	// Version of the postgresql database engine. Valid values: `10.4`, `11.8`, `12.4`.
+	// Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
 	EngineVersion *string `pulumi:"engineVersion"`
 	// KeyId of the custom key.
 	KmsKeyId *string `pulumi:"kmsKeyId"`
@@ -508,15 +524,15 @@ type InstanceState struct {
 	CreateTime pulumi.StringPtrInput
 	// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
 	DbKernelVersion pulumi.StringPtrInput
-	// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+	// PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 	DbMajorVersion pulumi.StringPtrInput
-	// `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+	// `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 	//
 	// Deprecated: `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead.
 	DbMajorVesion pulumi.StringPtrInput
 	// Specify instance node info for disaster migration.
 	DbNodeSets InstanceDbNodeSetArrayInput
-	// Version of the postgresql database engine. Valid values: `10.4`, `11.8`, `12.4`.
+	// Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
 	EngineVersion pulumi.StringPtrInput
 	// KeyId of the custom key.
 	KmsKeyId pulumi.StringPtrInput
@@ -587,15 +603,15 @@ type instanceArgs struct {
 	Cpu *int `pulumi:"cpu"`
 	// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
 	DbKernelVersion *string `pulumi:"dbKernelVersion"`
-	// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+	// PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 	DbMajorVersion *string `pulumi:"dbMajorVersion"`
-	// `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+	// `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 	//
 	// Deprecated: `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead.
 	DbMajorVesion *string `pulumi:"dbMajorVesion"`
 	// Specify instance node info for disaster migration.
 	DbNodeSets []InstanceDbNodeSet `pulumi:"dbNodeSets"`
-	// Version of the postgresql database engine. Valid values: `10.4`, `11.8`, `12.4`.
+	// Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
 	EngineVersion *string `pulumi:"engineVersion"`
 	// KeyId of the custom key.
 	KmsKeyId *string `pulumi:"kmsKeyId"`
@@ -653,15 +669,15 @@ type InstanceArgs struct {
 	Cpu pulumi.IntPtrInput
 	// PostgreSQL kernel version number. If it is specified, an instance running kernel DBKernelVersion will be created. It supports updating the minor kernel version immediately.
 	DbKernelVersion pulumi.StringPtrInput
-	// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+	// PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 	DbMajorVersion pulumi.StringPtrInput
-	// `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+	// `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 	//
 	// Deprecated: `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead.
 	DbMajorVesion pulumi.StringPtrInput
 	// Specify instance node info for disaster migration.
 	DbNodeSets InstanceDbNodeSetArrayInput
-	// Version of the postgresql database engine. Valid values: `10.4`, `11.8`, `12.4`.
+	// Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
 	EngineVersion pulumi.StringPtrInput
 	// KeyId of the custom key.
 	KmsKeyId pulumi.StringPtrInput
@@ -833,12 +849,12 @@ func (o InstanceOutput) DbKernelVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.DbKernelVersion }).(pulumi.StringOutput)
 }
 
-// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+// PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 func (o InstanceOutput) DbMajorVersion() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.DbMajorVersion }).(pulumi.StringOutput)
 }
 
-// `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+// `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
 //
 // Deprecated: `dbMajorVesion` will be deprecated, use `dbMajorVersion` instead.
 func (o InstanceOutput) DbMajorVesion() pulumi.StringOutput {
@@ -850,9 +866,9 @@ func (o InstanceOutput) DbNodeSets() InstanceDbNodeSetArrayOutput {
 	return o.ApplyT(func(v *Instance) InstanceDbNodeSetArrayOutput { return v.DbNodeSets }).(InstanceDbNodeSetArrayOutput)
 }
 
-// Version of the postgresql database engine. Valid values: `10.4`, `11.8`, `12.4`.
-func (o InstanceOutput) EngineVersion() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.EngineVersion }).(pulumi.StringPtrOutput)
+// Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
+func (o InstanceOutput) EngineVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.EngineVersion }).(pulumi.StringOutput)
 }
 
 // KeyId of the custom key.

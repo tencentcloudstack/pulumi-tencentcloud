@@ -14,6 +14,7 @@ from .get_zone_available_plans import *
 from .l4_proxy import *
 from .origin_group import *
 from .ownership_verify import *
+from .realtime_log_delivery import *
 from .rule_engine import *
 from .zone import *
 from .zone_setting import *

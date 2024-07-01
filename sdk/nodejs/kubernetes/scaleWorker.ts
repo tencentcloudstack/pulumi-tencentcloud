@@ -94,6 +94,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  * <!--End PulumiCodeChooser -->
+ *
+ * ## Import
+ *
+ * tke scale worker can be imported, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker test cls-xxx#ins-xxx
+ * ```
  */
 export class ScaleWorker extends pulumi.CustomResource {
     /**

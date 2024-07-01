@@ -35,6 +35,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Outputs
         /// </summary>
         public readonly int StartTimeOffset;
         /// <summary>
+        /// Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.
+        /// </summary>
+        public readonly int? SyntaxRule;
+        /// <summary>
         /// topic id.
         /// </summary>
         public readonly string TopicId;
@@ -51,6 +55,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Outputs
 
             int startTimeOffset,
 
+            int? syntaxRule,
+
             string topicId)
         {
             EndTimeOffset = endTimeOffset;
@@ -58,6 +64,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Outputs
             Number = number;
             Query = query;
             StartTimeOffset = startTimeOffset;
+            SyntaxRule = syntaxRule;
             TopicId = topicId;
         }
     }

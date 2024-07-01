@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
 {
     /// <summary>
-    /// Provide a resource to create a tdmq namespace.
+    /// Provide a resource to create a TDMQ namespace.
     /// 
     /// ## Example Usage
     /// 
@@ -56,7 +56,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// Tdmq namespace can be imported, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
+    /// $ pulumi import tencentcloud:Tdmq/namespace:Namespace example tf_example#pulsar-78bwjaj8epxv
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/namespace:Namespace")]

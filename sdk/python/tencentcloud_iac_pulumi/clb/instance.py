@@ -439,6 +439,7 @@ class InstanceArgs:
 class _InstanceState:
     def __init__(__self__, *,
                  address_ip_version: Optional[pulumi.Input[str]] = None,
+                 address_ipv6: Optional[pulumi.Input[str]] = None,
                  bandwidth_package_id: Optional[pulumi.Input[str]] = None,
                  clb_name: Optional[pulumi.Input[str]] = None,
                  clb_vips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -447,6 +448,7 @@ class _InstanceState:
                  dynamic_vip: Optional[pulumi.Input[bool]] = None,
                  internet_bandwidth_max_out: Optional[pulumi.Input[int]] = None,
                  internet_charge_type: Optional[pulumi.Input[str]] = None,
+                 ipv6_mode: Optional[pulumi.Input[str]] = None,
                  load_balancer_pass_to_target: Optional[pulumi.Input[bool]] = None,
                  log_set_id: Optional[pulumi.Input[str]] = None,
                  log_topic_id: Optional[pulumi.Input[str]] = None,
@@ -469,6 +471,7 @@ class _InstanceState:
         """
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[str] address_ip_version: IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
+        :param pulumi.Input[str] address_ipv6: The IPv6 address of the load balancing instance.
         :param pulumi.Input[str] bandwidth_package_id: Bandwidth package id. If set, the `internet_charge_type` must be `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[str] clb_name: Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] clb_vips: The virtual service address table of the CLB.
@@ -477,6 +480,7 @@ class _InstanceState:
         :param pulumi.Input[bool] dynamic_vip: If create dynamic vip CLB instance, `true` or `false`.
         :param pulumi.Input[int] internet_bandwidth_max_out: Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
         :param pulumi.Input[str] internet_charge_type: Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[str] ipv6_mode: This field is meaningful when the IP address version is ipv6, `IPv6Nat64` | `IPv6FullChain`.
         :param pulumi.Input[bool] load_balancer_pass_to_target: Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
         :param pulumi.Input[str] log_set_id: The id of log set.
         :param pulumi.Input[str] log_topic_id: The id of log topic.
@@ -499,6 +503,8 @@ class _InstanceState:
         """
         if address_ip_version is not None:
             pulumi.set(__self__, "address_ip_version", address_ip_version)
+        if address_ipv6 is not None:
+            pulumi.set(__self__, "address_ipv6", address_ipv6)
         if bandwidth_package_id is not None:
             pulumi.set(__self__, "bandwidth_package_id", bandwidth_package_id)
         if clb_name is not None:
@@ -515,6 +521,8 @@ class _InstanceState:
             pulumi.set(__self__, "internet_bandwidth_max_out", internet_bandwidth_max_out)
         if internet_charge_type is not None:
             pulumi.set(__self__, "internet_charge_type", internet_charge_type)
+        if ipv6_mode is not None:
+            pulumi.set(__self__, "ipv6_mode", ipv6_mode)
         if load_balancer_pass_to_target is not None:
             pulumi.set(__self__, "load_balancer_pass_to_target", load_balancer_pass_to_target)
         if log_set_id is not None:
@@ -565,6 +573,18 @@ class _InstanceState:
     @address_ip_version.setter
     def address_ip_version(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "address_ip_version", value)
+
+    @property
+    @pulumi.getter(name="addressIpv6")
+    def address_ipv6(self) -> Optional[pulumi.Input[str]]:
+        """
+        The IPv6 address of the load balancing instance.
+        """
+        return pulumi.get(self, "address_ipv6")
+
+    @address_ipv6.setter
+    def address_ipv6(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "address_ipv6", value)
 
     @property
     @pulumi.getter(name="bandwidthPackageId")
@@ -661,6 +681,18 @@ class _InstanceState:
     @internet_charge_type.setter
     def internet_charge_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "internet_charge_type", value)
+
+    @property
+    @pulumi.getter(name="ipv6Mode")
+    def ipv6_mode(self) -> Optional[pulumi.Input[str]]:
+        """
+        This field is meaningful when the IP address version is ipv6, `IPv6Nat64` | `IPv6FullChain`.
+        """
+        return pulumi.get(self, "ipv6_mode")
+
+    @ipv6_mode.setter
+    def ipv6_mode(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ipv6_mode", value)
 
     @property
     @pulumi.getter(name="loadBalancerPassToTarget")
@@ -982,6 +1014,25 @@ class Instance(pulumi.CustomResource):
             tags={
                 "test": "tf",
             },
+            vpc_id="vpc-da7ffa61")
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### SUPPORT CORS
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        open_clb = tencentcloud.clb.Instance("openClb",
+            clb_name="myclb",
+            network_type="OPEN",
+            project_id=0,
+            security_groups=["sg-o0ek7r93"],
+            tags={
+                "test": "tf",
+            },
             target_region_info_region="ap-guangzhou",
             target_region_info_vpc_id="vpc-da7ffa61",
             vpc_id="vpc-da7ffa61")
@@ -1250,6 +1301,25 @@ class Instance(pulumi.CustomResource):
             tags={
                 "test": "tf",
             },
+            vpc_id="vpc-da7ffa61")
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### SUPPORT CORS
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        open_clb = tencentcloud.clb.Instance("openClb",
+            clb_name="myclb",
+            network_type="OPEN",
+            project_id=0,
+            security_groups=["sg-o0ek7r93"],
+            tags={
+                "test": "tf",
+            },
             target_region_info_region="ap-guangzhou",
             target_region_info_vpc_id="vpc-da7ffa61",
             vpc_id="vpc-da7ffa61")
@@ -1504,8 +1574,10 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["vip_isp"] = vip_isp
             __props__.__dict__["vpc_id"] = vpc_id
             __props__.__dict__["zone_id"] = zone_id
+            __props__.__dict__["address_ipv6"] = None
             __props__.__dict__["clb_vips"] = None
             __props__.__dict__["domain"] = None
+            __props__.__dict__["ipv6_mode"] = None
         super(Instance, __self__).__init__(
             'tencentcloud:Clb/instance:Instance',
             resource_name,
@@ -1517,6 +1589,7 @@ class Instance(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             address_ip_version: Optional[pulumi.Input[str]] = None,
+            address_ipv6: Optional[pulumi.Input[str]] = None,
             bandwidth_package_id: Optional[pulumi.Input[str]] = None,
             clb_name: Optional[pulumi.Input[str]] = None,
             clb_vips: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -1525,6 +1598,7 @@ class Instance(pulumi.CustomResource):
             dynamic_vip: Optional[pulumi.Input[bool]] = None,
             internet_bandwidth_max_out: Optional[pulumi.Input[int]] = None,
             internet_charge_type: Optional[pulumi.Input[str]] = None,
+            ipv6_mode: Optional[pulumi.Input[str]] = None,
             load_balancer_pass_to_target: Optional[pulumi.Input[bool]] = None,
             log_set_id: Optional[pulumi.Input[str]] = None,
             log_topic_id: Optional[pulumi.Input[str]] = None,
@@ -1552,6 +1626,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] address_ip_version: IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
+        :param pulumi.Input[str] address_ipv6: The IPv6 address of the load balancing instance.
         :param pulumi.Input[str] bandwidth_package_id: Bandwidth package id. If set, the `internet_charge_type` must be `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[str] clb_name: Name of the CLB. The name can only contain Chinese characters, English letters, numbers, underscore and hyphen '-'.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] clb_vips: The virtual service address table of the CLB.
@@ -1560,6 +1635,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[bool] dynamic_vip: If create dynamic vip CLB instance, `true` or `false`.
         :param pulumi.Input[int] internet_bandwidth_max_out: Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
         :param pulumi.Input[str] internet_charge_type: Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param pulumi.Input[str] ipv6_mode: This field is meaningful when the IP address version is ipv6, `IPv6Nat64` | `IPv6FullChain`.
         :param pulumi.Input[bool] load_balancer_pass_to_target: Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
         :param pulumi.Input[str] log_set_id: The id of log set.
         :param pulumi.Input[str] log_topic_id: The id of log topic.
@@ -1585,6 +1661,7 @@ class Instance(pulumi.CustomResource):
         __props__ = _InstanceState.__new__(_InstanceState)
 
         __props__.__dict__["address_ip_version"] = address_ip_version
+        __props__.__dict__["address_ipv6"] = address_ipv6
         __props__.__dict__["bandwidth_package_id"] = bandwidth_package_id
         __props__.__dict__["clb_name"] = clb_name
         __props__.__dict__["clb_vips"] = clb_vips
@@ -1593,6 +1670,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["dynamic_vip"] = dynamic_vip
         __props__.__dict__["internet_bandwidth_max_out"] = internet_bandwidth_max_out
         __props__.__dict__["internet_charge_type"] = internet_charge_type
+        __props__.__dict__["ipv6_mode"] = ipv6_mode
         __props__.__dict__["load_balancer_pass_to_target"] = load_balancer_pass_to_target
         __props__.__dict__["log_set_id"] = log_set_id
         __props__.__dict__["log_topic_id"] = log_topic_id
@@ -1621,6 +1699,14 @@ class Instance(pulumi.CustomResource):
         IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
         """
         return pulumi.get(self, "address_ip_version")
+
+    @property
+    @pulumi.getter(name="addressIpv6")
+    def address_ipv6(self) -> pulumi.Output[str]:
+        """
+        The IPv6 address of the load balancing instance.
+        """
+        return pulumi.get(self, "address_ipv6")
 
     @property
     @pulumi.getter(name="bandwidthPackageId")
@@ -1685,6 +1771,14 @@ class Instance(pulumi.CustomResource):
         Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         """
         return pulumi.get(self, "internet_charge_type")
+
+    @property
+    @pulumi.getter(name="ipv6Mode")
+    def ipv6_mode(self) -> pulumi.Output[str]:
+        """
+        This field is meaningful when the IP address version is ipv6, `IPv6Nat64` | `IPv6FullChain`.
+        """
+        return pulumi.get(self, "ipv6_mode")
 
     @property
     @pulumi.getter(name="loadBalancerPassToTarget")

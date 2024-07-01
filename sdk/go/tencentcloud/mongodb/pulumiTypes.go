@@ -573,6 +573,148 @@ func (o InstanceStandbyInstanceListArrayOutput) Index(i pulumi.IntInput) Instanc
 	}).(InstanceStandbyInstanceListOutput)
 }
 
+type InstanceTransparentDataEncryptionKeyInfoList struct {
+	// Instance and key binding time.
+	CreateTime *string `pulumi:"createTime"`
+	// Master Key ID.
+	KeyId *string `pulumi:"keyId"`
+	// Master key name.
+	KeyName *string `pulumi:"keyName"`
+	// Key origin.
+	KeyOrigin *string `pulumi:"keyOrigin"`
+	// Purpose of the key.
+	KeyUsage *string `pulumi:"keyUsage"`
+	// Key status.
+	Status *string `pulumi:"status"`
+}
+
+// InstanceTransparentDataEncryptionKeyInfoListInput is an input type that accepts InstanceTransparentDataEncryptionKeyInfoListArgs and InstanceTransparentDataEncryptionKeyInfoListOutput values.
+// You can construct a concrete instance of `InstanceTransparentDataEncryptionKeyInfoListInput` via:
+//
+//	InstanceTransparentDataEncryptionKeyInfoListArgs{...}
+type InstanceTransparentDataEncryptionKeyInfoListInput interface {
+	pulumi.Input
+
+	ToInstanceTransparentDataEncryptionKeyInfoListOutput() InstanceTransparentDataEncryptionKeyInfoListOutput
+	ToInstanceTransparentDataEncryptionKeyInfoListOutputWithContext(context.Context) InstanceTransparentDataEncryptionKeyInfoListOutput
+}
+
+type InstanceTransparentDataEncryptionKeyInfoListArgs struct {
+	// Instance and key binding time.
+	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	// Master Key ID.
+	KeyId pulumi.StringPtrInput `pulumi:"keyId"`
+	// Master key name.
+	KeyName pulumi.StringPtrInput `pulumi:"keyName"`
+	// Key origin.
+	KeyOrigin pulumi.StringPtrInput `pulumi:"keyOrigin"`
+	// Purpose of the key.
+	KeyUsage pulumi.StringPtrInput `pulumi:"keyUsage"`
+	// Key status.
+	Status pulumi.StringPtrInput `pulumi:"status"`
+}
+
+func (InstanceTransparentDataEncryptionKeyInfoListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceTransparentDataEncryptionKeyInfoList)(nil)).Elem()
+}
+
+func (i InstanceTransparentDataEncryptionKeyInfoListArgs) ToInstanceTransparentDataEncryptionKeyInfoListOutput() InstanceTransparentDataEncryptionKeyInfoListOutput {
+	return i.ToInstanceTransparentDataEncryptionKeyInfoListOutputWithContext(context.Background())
+}
+
+func (i InstanceTransparentDataEncryptionKeyInfoListArgs) ToInstanceTransparentDataEncryptionKeyInfoListOutputWithContext(ctx context.Context) InstanceTransparentDataEncryptionKeyInfoListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceTransparentDataEncryptionKeyInfoListOutput)
+}
+
+// InstanceTransparentDataEncryptionKeyInfoListArrayInput is an input type that accepts InstanceTransparentDataEncryptionKeyInfoListArray and InstanceTransparentDataEncryptionKeyInfoListArrayOutput values.
+// You can construct a concrete instance of `InstanceTransparentDataEncryptionKeyInfoListArrayInput` via:
+//
+//	InstanceTransparentDataEncryptionKeyInfoListArray{ InstanceTransparentDataEncryptionKeyInfoListArgs{...} }
+type InstanceTransparentDataEncryptionKeyInfoListArrayInput interface {
+	pulumi.Input
+
+	ToInstanceTransparentDataEncryptionKeyInfoListArrayOutput() InstanceTransparentDataEncryptionKeyInfoListArrayOutput
+	ToInstanceTransparentDataEncryptionKeyInfoListArrayOutputWithContext(context.Context) InstanceTransparentDataEncryptionKeyInfoListArrayOutput
+}
+
+type InstanceTransparentDataEncryptionKeyInfoListArray []InstanceTransparentDataEncryptionKeyInfoListInput
+
+func (InstanceTransparentDataEncryptionKeyInfoListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceTransparentDataEncryptionKeyInfoList)(nil)).Elem()
+}
+
+func (i InstanceTransparentDataEncryptionKeyInfoListArray) ToInstanceTransparentDataEncryptionKeyInfoListArrayOutput() InstanceTransparentDataEncryptionKeyInfoListArrayOutput {
+	return i.ToInstanceTransparentDataEncryptionKeyInfoListArrayOutputWithContext(context.Background())
+}
+
+func (i InstanceTransparentDataEncryptionKeyInfoListArray) ToInstanceTransparentDataEncryptionKeyInfoListArrayOutputWithContext(ctx context.Context) InstanceTransparentDataEncryptionKeyInfoListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(InstanceTransparentDataEncryptionKeyInfoListArrayOutput)
+}
+
+type InstanceTransparentDataEncryptionKeyInfoListOutput struct{ *pulumi.OutputState }
+
+func (InstanceTransparentDataEncryptionKeyInfoListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*InstanceTransparentDataEncryptionKeyInfoList)(nil)).Elem()
+}
+
+func (o InstanceTransparentDataEncryptionKeyInfoListOutput) ToInstanceTransparentDataEncryptionKeyInfoListOutput() InstanceTransparentDataEncryptionKeyInfoListOutput {
+	return o
+}
+
+func (o InstanceTransparentDataEncryptionKeyInfoListOutput) ToInstanceTransparentDataEncryptionKeyInfoListOutputWithContext(ctx context.Context) InstanceTransparentDataEncryptionKeyInfoListOutput {
+	return o
+}
+
+// Instance and key binding time.
+func (o InstanceTransparentDataEncryptionKeyInfoListOutput) CreateTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstanceTransparentDataEncryptionKeyInfoList) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
+}
+
+// Master Key ID.
+func (o InstanceTransparentDataEncryptionKeyInfoListOutput) KeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstanceTransparentDataEncryptionKeyInfoList) *string { return v.KeyId }).(pulumi.StringPtrOutput)
+}
+
+// Master key name.
+func (o InstanceTransparentDataEncryptionKeyInfoListOutput) KeyName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstanceTransparentDataEncryptionKeyInfoList) *string { return v.KeyName }).(pulumi.StringPtrOutput)
+}
+
+// Key origin.
+func (o InstanceTransparentDataEncryptionKeyInfoListOutput) KeyOrigin() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstanceTransparentDataEncryptionKeyInfoList) *string { return v.KeyOrigin }).(pulumi.StringPtrOutput)
+}
+
+// Purpose of the key.
+func (o InstanceTransparentDataEncryptionKeyInfoListOutput) KeyUsage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstanceTransparentDataEncryptionKeyInfoList) *string { return v.KeyUsage }).(pulumi.StringPtrOutput)
+}
+
+// Key status.
+func (o InstanceTransparentDataEncryptionKeyInfoListOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstanceTransparentDataEncryptionKeyInfoList) *string { return v.Status }).(pulumi.StringPtrOutput)
+}
+
+type InstanceTransparentDataEncryptionKeyInfoListArrayOutput struct{ *pulumi.OutputState }
+
+func (InstanceTransparentDataEncryptionKeyInfoListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]InstanceTransparentDataEncryptionKeyInfoList)(nil)).Elem()
+}
+
+func (o InstanceTransparentDataEncryptionKeyInfoListArrayOutput) ToInstanceTransparentDataEncryptionKeyInfoListArrayOutput() InstanceTransparentDataEncryptionKeyInfoListArrayOutput {
+	return o
+}
+
+func (o InstanceTransparentDataEncryptionKeyInfoListArrayOutput) ToInstanceTransparentDataEncryptionKeyInfoListArrayOutputWithContext(ctx context.Context) InstanceTransparentDataEncryptionKeyInfoListArrayOutput {
+	return o
+}
+
+func (o InstanceTransparentDataEncryptionKeyInfoListArrayOutput) Index(i pulumi.IntInput) InstanceTransparentDataEncryptionKeyInfoListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) InstanceTransparentDataEncryptionKeyInfoList {
+		return vs[0].([]InstanceTransparentDataEncryptionKeyInfoList)[vs[1].(int)]
+	}).(InstanceTransparentDataEncryptionKeyInfoListOutput)
+}
+
 type GetInstanceBackupsBackupList struct {
 	// Remark of backup.
 	BackupDesc string `pulumi:"backupDesc"`
@@ -2141,6 +2283,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceRemoveNodeListArrayInput)(nil)).Elem(), InstanceRemoveNodeListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceStandbyInstanceListInput)(nil)).Elem(), InstanceStandbyInstanceListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceStandbyInstanceListArrayInput)(nil)).Elem(), InstanceStandbyInstanceListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceTransparentDataEncryptionKeyInfoListInput)(nil)).Elem(), InstanceTransparentDataEncryptionKeyInfoListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*InstanceTransparentDataEncryptionKeyInfoListArrayInput)(nil)).Elem(), InstanceTransparentDataEncryptionKeyInfoListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceBackupsBackupListInput)(nil)).Elem(), GetInstanceBackupsBackupListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceBackupsBackupListArrayInput)(nil)).Elem(), GetInstanceBackupsBackupListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetInstanceConnectionsClientInput)(nil)).Elem(), GetInstanceConnectionsClientArgs{})
@@ -2169,6 +2313,8 @@ func init() {
 	pulumi.RegisterOutputType(InstanceRemoveNodeListArrayOutput{})
 	pulumi.RegisterOutputType(InstanceStandbyInstanceListOutput{})
 	pulumi.RegisterOutputType(InstanceStandbyInstanceListArrayOutput{})
+	pulumi.RegisterOutputType(InstanceTransparentDataEncryptionKeyInfoListOutput{})
+	pulumi.RegisterOutputType(InstanceTransparentDataEncryptionKeyInfoListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstanceBackupsBackupListOutput{})
 	pulumi.RegisterOutputType(GetInstanceBackupsBackupListArrayOutput{})
 	pulumi.RegisterOutputType(GetInstanceConnectionsClientOutput{})

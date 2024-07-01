@@ -26,6 +26,7 @@ import * as utilities from "../utilities";
  *         number: 1,
  *         query: "status:>500 | select count(*) as errorCounts",
  *         startTimeOffset: -15,
+ *         syntaxRule: 1,
  *         topicId: "88735a07-bea4-4985-8763-e9deb6da4fad",
  *     }],
  *     analyses: [{

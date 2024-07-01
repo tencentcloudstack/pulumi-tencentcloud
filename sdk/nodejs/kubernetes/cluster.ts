@@ -149,6 +149,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  * <!--End PulumiCodeChooser -->
+ *
+ * ## Import
+ *
+ * tke cluster can be imported, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Kubernetes/cluster:Cluster test cls-xxx
+ * ```
  */
 export class Cluster extends pulumi.CustomResource {
     /**
@@ -235,7 +243,7 @@ export class Cluster extends pulumi.CustomResource {
     /**
      * Open internet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
-    public readonly clusterInternet!: pulumi.Output<boolean>;
+    public readonly clusterInternet!: pulumi.Output<boolean | undefined>;
     /**
      * Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the clusterExternalEndpoint value may be changed automatically too.
      */
@@ -247,7 +255,7 @@ export class Cluster extends pulumi.CustomResource {
     /**
      * Open intranet access or not. If this field is set 'true', the field below `workerConfig` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
      */
-    public readonly clusterIntranet!: pulumi.Output<boolean>;
+    public readonly clusterIntranet!: pulumi.Output<boolean | undefined>;
     /**
      * Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgwEndpoint value may be changed automatically too.
      */
@@ -281,7 +289,7 @@ export class Cluster extends pulumi.CustomResource {
      */
     public /*out*/ readonly clusterNodeNum!: pulumi.Output<number>;
     /**
-     * Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+     * Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
      */
     public readonly clusterOs!: pulumi.Output<string | undefined>;
     /**
@@ -443,7 +451,7 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly vpcId!: pulumi.Output<string>;
     /**
-     * Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+     * Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
      */
     public readonly workerConfigs!: pulumi.Output<outputs.Kubernetes.ClusterWorkerConfig[] | undefined>;
     /**
@@ -716,7 +724,7 @@ export interface ClusterState {
      */
     clusterNodeNum?: pulumi.Input<number>;
     /**
-     * Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+     * Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
      */
     clusterOs?: pulumi.Input<string>;
     /**
@@ -878,7 +886,7 @@ export interface ClusterState {
      */
     vpcId?: pulumi.Input<string>;
     /**
-     * Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+     * Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
      */
     workerConfigs?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterWorkerConfig>[]>;
     /**
@@ -976,7 +984,7 @@ export interface ClusterArgs {
      */
     clusterName?: pulumi.Input<string>;
     /**
-     * Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+     * Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
      */
     clusterOs?: pulumi.Input<string>;
     /**
@@ -1110,7 +1118,7 @@ export interface ClusterArgs {
      */
     vpcId: pulumi.Input<string>;
     /**
-     * Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+     * Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
      */
     workerConfigs?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterWorkerConfig>[]>;
 }

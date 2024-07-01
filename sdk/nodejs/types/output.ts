@@ -16990,6 +16990,10 @@ export namespace Cls {
          */
         startTimeOffset: number;
         /**
+         * Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.
+         */
+        syntaxRule: number;
+        /**
          * topic id.
          */
         topicId: string;
@@ -35871,7 +35875,7 @@ export namespace Kubernetes {
          */
         hpcClusterId?: string;
         /**
-         * The valid image id, format of img-xxx.
+         * The valid image id, format of img-xxx. Note: `imgId` will be replaced with the image corresponding to TKE `clusterOs`.
          */
         imgId?: string;
         /**
@@ -35931,7 +35935,7 @@ export namespace Kubernetes {
          */
         systemDiskType?: string;
         /**
-         * User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
+         * ase64-encoded User Data text, the length limit is 16KB.
          */
         userData?: string;
     }
@@ -36060,7 +36064,7 @@ export namespace Kubernetes {
          */
         hpcClusterId?: string;
         /**
-         * The valid image id, format of img-xxx.
+         * The valid image id, format of img-xxx. Note: `imgId` will be replaced with the image corresponding to TKE `clusterOs`.
          */
         imgId?: string;
         /**
@@ -36120,7 +36124,7 @@ export namespace Kubernetes {
          */
         systemDiskType?: string;
         /**
-         * User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
+         * ase64-encoded User Data text, the length limit is 16KB.
          */
         userData?: string;
     }
@@ -36534,6 +36538,331 @@ export namespace Kubernetes {
          * Number of pods.
          */
         podCount: number;
+    }
+
+    export interface GetClusterNativeNodePoolsFilter {
+        /**
+         * The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+         */
+        name: string;
+        /**
+         * Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+         */
+        values: string[];
+    }
+
+    export interface GetClusterNativeNodePoolsNodePool {
+        /**
+         * Node Annotation List.
+         */
+        annotations: outputs.Kubernetes.GetClusterNativeNodePoolsNodePoolAnnotation[];
+        /**
+         * ID of the cluster.
+         */
+        clusterId: string;
+        /**
+         * Creation time.
+         */
+        createdAt: string;
+        /**
+         * Whether to enable deletion protection.
+         */
+        deletionProtection: boolean;
+        /**
+         * Node Labels.
+         */
+        labels: outputs.Kubernetes.GetClusterNativeNodePoolsNodePoolLabel[];
+        /**
+         * Node pool status.
+         */
+        lifeState: string;
+        /**
+         * The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+         */
+        name: string;
+        /**
+         * Native node pool creation parameters.
+         */
+        natives: outputs.Kubernetes.GetClusterNativeNodePoolsNodePoolNative[];
+        /**
+         * ID of the node pool.
+         */
+        nodePoolId: string;
+        /**
+         * Tag pair list.
+         */
+        tags: outputs.Kubernetes.GetClusterNativeNodePoolsNodePoolTag[];
+        /**
+         * node taint.
+         */
+        taints: outputs.Kubernetes.GetClusterNativeNodePoolsNodePoolTaint[];
+        /**
+         * Node pool type. Optional value is `Native`.
+         */
+        type: string;
+        /**
+         * Whether the node is not schedulable by default.
+         */
+        unschedulable: boolean;
+    }
+
+    export interface GetClusterNativeNodePoolsNodePoolAnnotation {
+        /**
+         * The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+         */
+        name: string;
+        /**
+         * Value of the taint.
+         */
+        value: string;
+    }
+
+    export interface GetClusterNativeNodePoolsNodePoolLabel {
+        /**
+         * The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+         */
+        name: string;
+        /**
+         * Value of the taint.
+         */
+        value: string;
+    }
+
+    export interface GetClusterNativeNodePoolsNodePoolNative {
+        /**
+         * Whether to enable self-healing ability.
+         */
+        autoRepair: boolean;
+        /**
+         * Native node pool data disk list.
+         */
+        dataDisks: outputs.Kubernetes.GetClusterNativeNodePoolsNodePoolNativeDataDisk[];
+        /**
+         * Whether to enable elastic scaling.
+         */
+        enableAutoscaling: boolean;
+        /**
+         * Fault self-healing rule name.
+         */
+        healthCheckPolicyName: string;
+        /**
+         * Native node pool hostName pattern string.
+         */
+        hostNamePattern: string;
+        /**
+         * Billing configuration for yearly and monthly models.
+         */
+        instanceChargePrepaids: outputs.Kubernetes.GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaid[];
+        /**
+         * Node billing type. `PREPAID` is a yearly and monthly subscription, `POSTPAID_BY_HOUR` is a pay-as-you-go plan. The default is `POSTPAID_BY_HOUR`.
+         */
+        instanceChargeType: string;
+        /**
+         * Model list.
+         */
+        instanceTypes: string[];
+        /**
+         * Public network bandwidth settings.
+         */
+        internetAccessibles: outputs.Kubernetes.GetClusterNativeNodePoolsNodePoolNativeInternetAccessible[];
+        /**
+         * Node pool ssh public key id array.
+         */
+        keyIds: string[];
+        /**
+         * Kubelet custom parameters.
+         */
+        kubeletArgs: string[];
+        /**
+         * Predefined scripts.
+         */
+        lifecycles: outputs.Kubernetes.GetClusterNativeNodePoolsNodePoolNativeLifecycle[];
+        /**
+         * Node pool management parameter settings.
+         */
+        managements: outputs.Kubernetes.GetClusterNativeNodePoolsNodePoolNativeManagement[];
+        /**
+         * Desired number of nodes.
+         */
+        replicas: number;
+        /**
+         * Runtime root directory.
+         */
+        runtimeRootDir: string;
+        /**
+         * Node pool scaling configuration.
+         */
+        scalings: outputs.Kubernetes.GetClusterNativeNodePoolsNodePoolNativeScaling[];
+        /**
+         * Security group list.
+         */
+        securityGroupIds: string[];
+        /**
+         * Subnet list.
+         */
+        subnetIds: string[];
+        /**
+         * System disk configuration.
+         */
+        systemDisks: outputs.Kubernetes.GetClusterNativeNodePoolsNodePoolNativeSystemDisk[];
+    }
+
+    export interface GetClusterNativeNodePoolsNodePoolNativeDataDisk {
+        /**
+         * Whether to automatically format the disk and mount it.
+         */
+        autoFormatAndMount: boolean;
+        /**
+         * Mount device name or partition name.
+         */
+        diskPartition: string;
+        /**
+         * Cloud disk size (G).
+         */
+        diskSize: number;
+        /**
+         * Cloud disk type.
+         */
+        diskType: string;
+        /**
+         * Pass in this parameter to create an encrypted cloud disk. The value is fixed to `ENCRYPT`.
+         */
+        encrypt: string;
+        /**
+         * File system (ext3/ext4/xfs).
+         */
+        fileSystem: string;
+        /**
+         * Customize the key when purchasing an encrypted disk. When this parameter is passed in, the Encrypt parameter is not empty.
+         */
+        kmsKeyId: string;
+        /**
+         * Mount directory.
+         */
+        mountTarget: string;
+        /**
+         * Snapshot ID. If passed in, the cloud disk will be created based on this snapshot. The snapshot type must be a data disk snapshot.
+         */
+        snapshotId: string;
+        /**
+         * Cloud disk performance, unit: MB/s. Use this parameter to purchase additional performance for the cloud disk.
+         */
+        throughputPerformance: number;
+    }
+
+    export interface GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaid {
+        /**
+         * Postpaid billing cycle, unit (month): 1, 2, 3, 4, 5,, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+         */
+        period: number;
+        /**
+         * Prepaid renewal method:
+         */
+        renewFlag: string;
+    }
+
+    export interface GetClusterNativeNodePoolsNodePoolNativeInternetAccessible {
+        /**
+         * Bandwidth package ID. Note: When ChargeType is BANDWIDTH_PACKAG, the value cannot be empty; otherwise, the value must be empty.
+         */
+        bandwidthPackageId: string;
+        /**
+         * Network billing method. Optional value is `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+         */
+        chargeType: string;
+        /**
+         * Maximum bandwidth output. Note: When chargeType is `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_POSTPAID_BY_HOUR`, the valid range is 1~100. When chargeType is `BANDWIDTH_PACKAG`, the valid range is 1~2000.
+         */
+        maxBandwidthOut: number;
+    }
+
+    export interface GetClusterNativeNodePoolsNodePoolNativeLifecycle {
+        /**
+         * Custom script after node initialization.
+         */
+        postInit: string;
+        /**
+         * Custom script before node initialization.
+         */
+        preInit: string;
+    }
+
+    export interface GetClusterNativeNodePoolsNodePoolNativeManagement {
+        /**
+         * Hosts configuration.
+         */
+        hosts: string[];
+        /**
+         * Kernel parameter configuration.
+         */
+        kernelArgs: string[];
+        /**
+         * Dns configuration.
+         */
+        nameservers: string[];
+    }
+
+    export interface GetClusterNativeNodePoolsNodePoolNativeScaling {
+        /**
+         * Node pool expansion strategy. `ZoneEquality`: multiple availability zones are broken up; `ZonePriority`: the preferred availability zone takes precedence.
+         */
+        createPolicy: string;
+        /**
+         * Maximum number of replicas in node pool.
+         */
+        maxReplicas: number;
+        /**
+         * Minimum number of replicas in node pool.
+         */
+        minReplicas: number;
+    }
+
+    export interface GetClusterNativeNodePoolsNodePoolNativeSystemDisk {
+        /**
+         * Cloud disk size (G).
+         */
+        diskSize: number;
+        /**
+         * Cloud disk type.
+         */
+        diskType: string;
+    }
+
+    export interface GetClusterNativeNodePoolsNodePoolTag {
+        /**
+         * The resource type bound to the label.
+         */
+        resourceType: string;
+        /**
+         * Tag pair list.
+         */
+        tags: outputs.Kubernetes.GetClusterNativeNodePoolsNodePoolTagTag[];
+    }
+
+    export interface GetClusterNativeNodePoolsNodePoolTagTag {
+        /**
+         * Key of the taint.
+         */
+        key: string;
+        /**
+         * Value of the taint.
+         */
+        value: string;
+    }
+
+    export interface GetClusterNativeNodePoolsNodePoolTaint {
+        /**
+         * Effect of the taint.
+         */
+        effect: string;
+        /**
+         * Key of the taint.
+         */
+        key: string;
+        /**
+         * Value of the taint.
+         */
+        value: string;
     }
 
     export interface GetClusterNodePoolsFilter {
@@ -37034,6 +37363,265 @@ export namespace Kubernetes {
          * LAN IP of the cvm.
          */
         lanIp: string;
+    }
+
+    export interface NativeNodePoolAnnotation {
+        /**
+         * Name in the map table.
+         */
+        name: string;
+        /**
+         * Value in the map table.
+         */
+        value: string;
+    }
+
+    export interface NativeNodePoolLabel {
+        /**
+         * Name in the map table.
+         */
+        name: string;
+        /**
+         * Value in map table.
+         */
+        value: string;
+    }
+
+    export interface NativeNodePoolNative {
+        /**
+         * Whether to enable self-healing ability.
+         */
+        autoRepair?: boolean;
+        /**
+         * Native node pool data disk list.
+         */
+        dataDisks?: outputs.Kubernetes.NativeNodePoolNativeDataDisk[];
+        /**
+         * Whether to enable elastic scaling.
+         */
+        enableAutoscaling?: boolean;
+        /**
+         * Fault self-healing rule name.
+         */
+        healthCheckPolicyName?: string;
+        /**
+         * Native node pool hostName pattern string.
+         */
+        hostNamePattern?: string;
+        /**
+         * Billing configuration for yearly and monthly models.
+         */
+        instanceChargePrepaid: outputs.Kubernetes.NativeNodePoolNativeInstanceChargePrepaid;
+        /**
+         * Node billing type. `PREPAID` is a yearly and monthly subscription, `POSTPAID_BY_HOUR` is a pay-as-you-go plan. The default is `POSTPAID_BY_HOUR`.
+         */
+        instanceChargeType: string;
+        /**
+         * Model list.
+         */
+        instanceTypes: string[];
+        /**
+         * Public network bandwidth settings.
+         */
+        internetAccessible: outputs.Kubernetes.NativeNodePoolNativeInternetAccessible;
+        /**
+         * Node pool ssh public key id array.
+         */
+        keyIds?: string[];
+        /**
+         * Kubelet custom parameters.
+         */
+        kubeletArgs?: string[];
+        /**
+         * Predefined scripts.
+         */
+        lifecycle: outputs.Kubernetes.NativeNodePoolNativeLifecycle;
+        /**
+         * Node pool management parameter settings.
+         */
+        management: outputs.Kubernetes.NativeNodePoolNativeManagement;
+        /**
+         * Desired number of nodes.
+         */
+        replicas: number;
+        /**
+         * Runtime root directory.
+         */
+        runtimeRootDir: string;
+        /**
+         * Node pool scaling configuration.
+         */
+        scaling: outputs.Kubernetes.NativeNodePoolNativeScaling;
+        /**
+         * Security group list.
+         */
+        securityGroupIds: string[];
+        /**
+         * Subnet list.
+         */
+        subnetIds: string[];
+        /**
+         * System disk configuration.
+         */
+        systemDisk: outputs.Kubernetes.NativeNodePoolNativeSystemDisk;
+    }
+
+    export interface NativeNodePoolNativeDataDisk {
+        /**
+         * Whether to automatically format the disk and mount it.
+         */
+        autoFormatAndMount: boolean;
+        /**
+         * Mount device name or partition name.
+         */
+        diskPartition?: string;
+        /**
+         * Cloud disk size (G).
+         */
+        diskSize: number;
+        /**
+         * Cloud disk type. Valid values: `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: cloud SSD disk, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD, `LOCAL_NVME`: local NVME disk.
+         */
+        diskType: string;
+        /**
+         * Pass in this parameter to create an encrypted cloud disk. The value is fixed to `ENCRYPT`.
+         */
+        encrypt?: string;
+        /**
+         * File system (ext3/ext4/xfs).
+         */
+        fileSystem?: string;
+        /**
+         * Customize the key when purchasing an encrypted disk. When this parameter is passed in, the Encrypt parameter is not empty.
+         */
+        kmsKeyId?: string;
+        /**
+         * Mount directory.
+         */
+        mountTarget?: string;
+        /**
+         * Snapshot ID. If passed in, the cloud disk will be created based on this snapshot. The snapshot type must be a data disk snapshot.
+         */
+        snapshotId?: string;
+        /**
+         * Cloud disk performance, unit: MB/s. Use this parameter to purchase additional performance for the cloud disk.
+         */
+        throughputPerformance?: number;
+    }
+
+    export interface NativeNodePoolNativeInstanceChargePrepaid {
+        /**
+         * Postpaid billing cycle, unit (month): 1, 2, 3, 4, 5,, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+         */
+        period: number;
+        /**
+         * Prepaid renewal method:
+         */
+        renewFlag?: string;
+    }
+
+    export interface NativeNodePoolNativeInternetAccessible {
+        /**
+         * Bandwidth package ID. Note: When ChargeType is BANDWIDTH_PACKAG, the value cannot be empty; otherwise, the value must be empty.
+         */
+        bandwidthPackageId?: string;
+        /**
+         * Network billing method. Optional value is `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+         */
+        chargeType: string;
+        /**
+         * Maximum bandwidth output. Note: When chargeType is `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_POSTPAID_BY_HOUR`, the valid range is 1~100. When chargeType is `BANDWIDTH_PACKAG`, the valid range is 1~2000.
+         */
+        maxBandwidthOut: number;
+    }
+
+    export interface NativeNodePoolNativeLifecycle {
+        /**
+         * Custom script after node initialization.
+         */
+        postInit?: string;
+        /**
+         * Custom script before node initialization.
+         */
+        preInit?: string;
+    }
+
+    export interface NativeNodePoolNativeManagement {
+        /**
+         * Hosts configuration.
+         */
+        hosts?: string[];
+        /**
+         * Kernel parameter configuration.
+         */
+        kernelArgs?: string[];
+        /**
+         * Dns configuration.
+         */
+        nameservers: string[];
+    }
+
+    export interface NativeNodePoolNativeScaling {
+        /**
+         * Node pool expansion strategy. `ZoneEquality`: multiple availability zones are broken up; `ZonePriority`: the preferred availability zone takes precedence.
+         */
+        createPolicy: string;
+        /**
+         * Maximum number of replicas in node pool.
+         */
+        maxReplicas: number;
+        /**
+         * Minimum number of replicas in node pool.
+         */
+        minReplicas: number;
+    }
+
+    export interface NativeNodePoolNativeSystemDisk {
+        /**
+         * Cloud disk size (G).
+         */
+        diskSize: number;
+        /**
+         * Cloud disk type. Valid values: `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: cloud SSD disk, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD.
+         */
+        diskType: string;
+    }
+
+    export interface NativeNodePoolTag {
+        /**
+         * The resource type bound to the label.
+         */
+        resourceType?: string;
+        /**
+         * Tag pair list.
+         */
+        tags?: outputs.Kubernetes.NativeNodePoolTagTag[];
+    }
+
+    export interface NativeNodePoolTagTag {
+        /**
+         * Tag Key.
+         */
+        key?: string;
+        /**
+         * Tag Value.
+         */
+        value?: string;
+    }
+
+    export interface NativeNodePoolTaint {
+        /**
+         * Effect of the taint.
+         */
+        effect?: string;
+        /**
+         * Key of the taint.
+         */
+        key?: string;
+        /**
+         * Value of the taint.
+         */
+        value?: string;
     }
 
     export interface NodePoolAutoScalingConfig {
@@ -39782,6 +40370,33 @@ export namespace Mongodb {
          * Indicates the region of standby instance.
          */
         standbyInstanceRegion: string;
+    }
+
+    export interface InstanceTransparentDataEncryptionKeyInfoList {
+        /**
+         * Instance and key binding time.
+         */
+        createTime: string;
+        /**
+         * Master Key ID.
+         */
+        keyId: string;
+        /**
+         * Master key name.
+         */
+        keyName: string;
+        /**
+         * Key origin.
+         */
+        keyOrigin: string;
+        /**
+         * Purpose of the key.
+         */
+        keyUsage: string;
+        /**
+         * Key status.
+         */
+        status: string;
     }
 
 }
@@ -66258,11 +66873,162 @@ export namespace Teo {
         instanceType: string;
     }
 
+    export interface RealtimeLogDeliveryCls {
+        /**
+         * Tencent Cloud CLS log set ID.
+         */
+        logSetId: string;
+        /**
+         * The region where the Tencent Cloud CLS log set is located.
+         */
+        logSetRegion: string;
+        /**
+         * Tencent Cloud CLS log topic ID.
+         */
+        topicId: string;
+    }
+
+    export interface RealtimeLogDeliveryCustomEndpoint {
+        /**
+         * Fill in a custom SecretId to generate an encrypted signature. This parameter is required if the source site requires authentication.
+         */
+        accessId?: string;
+        /**
+         * Fill in the custom SecretKey to generate the encrypted signature. This parameter is required if the source site requires authentication.
+         */
+        accessKey?: string;
+        /**
+         * Data compression type, the possible values are: `gzip`: use gzip compression. If it is not filled in, compression is not enabled.
+         */
+        compressType?: string;
+        /**
+         * The custom request header carried when delivering logs. If the header name you fill in is the default header carried by EdgeOne log push, such as Content-Type, then the header value you fill in will overwrite the default value. The header value references a single variable ${batchSize} to obtain the number of logs included in each POST request.
+         */
+        headers?: outputs.Teo.RealtimeLogDeliveryCustomEndpointHeader[];
+        /**
+         * When sending logs via POST request, the application layer protocol type used can be: `http`: HTTP protocol; `https`: HTTPS protocol. If not filled in, the protocol type will be parsed according to the filled in URL address.
+         */
+        protocol?: string;
+        /**
+         * The custom HTTP interface address for real-time log delivery. Currently, only HTTP/HTTPS protocols are supported.
+         */
+        url: string;
+    }
+
+    export interface RealtimeLogDeliveryCustomEndpointHeader {
+        /**
+         * HTTP header name.
+         */
+        name: string;
+        /**
+         * HTTP header value.
+         */
+        value: string;
+    }
+
+    export interface RealtimeLogDeliveryCustomField {
+        /**
+         * Whether to deliver this field. If left blank, this field will not be delivered.
+         */
+        enabled?: boolean;
+        /**
+         * Extract data from the specified location in the HTTP request and response. The values are: `ReqHeader`: extract the specified field value from the HTTP request header; `RspHeader`: extract the specified field value from the HTTP response header; `Cookie`: extract the specified field value from the Cookie.
+         */
+        name: string;
+        /**
+         * The name of the parameter whose value needs to be extracted, for example: Accept-Language.
+         */
+        value: string;
+    }
+
+    export interface RealtimeLogDeliveryDeliveryCondition {
+        /**
+         * Log filtering conditions, the detailed filtering conditions are as follows: - `EdgeResponseStatusCode`: filter according to the status code returned by the EdgeOne node to the client. Supported operators: `equal`, `great`, `less`, `greatEqual`, `lessEqual`; Value range: any integer greater than or equal to 0; - `OriginResponseStatusCode`: filter according to the origin response status code. Supported operators: `equal`, `great`, `less`, `greatEqual`, `lessEqual`; Value range: any integer greater than or equal to -1; - `SecurityAction`: filter according to the final disposal action after the request hits the security rule. Supported operators: `equal`; Optional options are as follows: `-`: unknown/miss; `Monitor`: observe; `JSChallenge`: JavaScript challenge; `Deny`: intercept; `Allow`: allow; `BlockIP`: IP ban; `Redirect`: redirect; `ReturnCustomPage`: return to a custom page; `ManagedChallenge`: managed challenge; `Silence`: silent; `LongDelay`: respond after a long wait; `ShortDelay`: respond after a short wait; -`SecurityModule`: filter according to the name of the security module that finally handles the request. Supported operators: `equal`; Optional options: `-`: unknown/missed; `CustomRule`: Web Protection - Custom Rules; `RateLimitingCustomRule`: Web Protection - Rate Limiting Rules; `ManagedRule`: Web Protection - Managed Rules; `L7DDoS`: Web Protection - CC Attack Protection; `BotManagement`: Bot Management - Bot Basic Management; `BotClientReputation`: Bot Management - Client Profile Analysis; `BotBehaviorAnalysis`: Bot Management - Bot Intelligent Analysis; `BotCustomRule`: Bot Management - Custom Bot Rules; `BotActiveDetection`: Bot Management - Active Feature Recognition.
+         */
+        conditions?: outputs.Teo.RealtimeLogDeliveryDeliveryConditionCondition[];
+    }
+
+    export interface RealtimeLogDeliveryDeliveryConditionCondition {
+        /**
+         * The key of the filter condition.
+         */
+        key: string;
+        /**
+         * Query condition operator, operation types are: `equals`: equal; `notEquals`: not equal; `include`: include; `notInclude`: not include; `startWith`: start with value; `notStartWith`: not start with value; `endWith`: end with value; `notEndWith`: not end with value.
+         */
+        operator: string;
+        /**
+         * The value of the filter condition.
+         */
+        values: string[];
+    }
+
+    export interface RealtimeLogDeliveryLogFormat {
+        /**
+         * A string to be added before each log delivery batch. Each log delivery batch may contain multiple log records.
+         */
+        batchPrefix?: string;
+        /**
+         * A string to append after each log delivery batch.
+         */
+        batchSuffix?: string;
+        /**
+         * In a single log record, a string is inserted between fields as a separator. The possible values are: `	`: tab character; `,`: comma; `;`: semicolon.
+         */
+        fieldDelimiter?: string;
+        /**
+         * The default output format type for log delivery. The possible values are: `json`: Use the default log output format JSON Lines. The fields in a single log are presented as key-value pairs; `csv`: Use the default log output format csv. Only field values are presented in a single log, without field names.
+         */
+        formatType: string;
+        /**
+         * The string inserted between log records as a separator. The possible values are: `
+         * `: newline character; `	`: tab character; `,`: comma.
+         */
+        recordDelimiter?: string;
+        /**
+         * A string to prepend to each log record.
+         */
+        recordPrefix?: string;
+        /**
+         * A string to append to each log record.
+         *
+         * The `s3` object supports the following:
+         */
+        recordSuffix?: string;
+    }
+
+    export interface RealtimeLogDeliveryS3 {
+        /**
+         * Fill in a custom SecretId to generate an encrypted signature. This parameter is required if the source site requires authentication.
+         */
+        accessId: string;
+        /**
+         * Fill in the custom SecretKey to generate the encrypted signature. This parameter is required if the source site requires authentication.
+         */
+        accessKey: string;
+        /**
+         * Bucket name and log storage directory, for example: `your_bucket_name/EO-logs/`. If this directory does not exist in the bucket, it will be created automatically.
+         */
+        bucket: string;
+        /**
+         * Data compression type, the possible values are: `gzip`: use gzip compression. If it is not filled in, compression is not enabled.
+         */
+        compressType?: string;
+        /**
+         * URLs that do not include bucket names or paths, for example: `https://storage.googleapis.com`, `https://s3.ap-northeast-2.amazonaws.com`, `https://cos.ap-nanjing.myqcloud.com`.
+         */
+        endpoint: string;
+        /**
+         * The region where the bucket is located, for example: ap-northeast-2.
+         */
+        region: string;
+    }
+
     export interface RuleEngineRule {
         /**
          * Feature to be executed.
          */
-        actions: outputs.Teo.RuleEngineRuleAction[];
+        actions?: outputs.Teo.RuleEngineRuleAction[];
         /**
          * OR Conditions list of the rule. Rule would be triggered if any of the condition is true.
          */
@@ -66419,7 +67185,7 @@ export namespace Teo {
         /**
          * Feature to be executed.
          */
-        actions: outputs.Teo.RuleEngineRuleSubRuleRuleAction[];
+        actions?: outputs.Teo.RuleEngineRuleSubRuleRuleAction[];
         /**
          * OR Conditions list of the rule. Rule would be triggered if any of the condition is true.
          */

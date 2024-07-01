@@ -76,6 +76,8 @@ class AlarmAlarmTarget(dict):
             suggest = "start_time_offset"
         elif key == "topicId":
             suggest = "topic_id"
+        elif key == "syntaxRule":
+            suggest = "syntax_rule"
 
         if suggest:
             pulumi.log.warn(f"Key '{key}' not found in AlarmAlarmTarget. Access the value via the '{suggest}' property getter instead.")
@@ -94,7 +96,8 @@ class AlarmAlarmTarget(dict):
                  number: int,
                  query: str,
                  start_time_offset: int,
-                 topic_id: str):
+                 topic_id: str,
+                 syntax_rule: Optional[int] = None):
         """
         :param int end_time_offset: search end time of offset.
         :param str logset_id: logset id.
@@ -102,6 +105,7 @@ class AlarmAlarmTarget(dict):
         :param str query: query rules.
         :param int start_time_offset: search start time of offset.
         :param str topic_id: topic id.
+        :param int syntax_rule: Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.
         """
         pulumi.set(__self__, "end_time_offset", end_time_offset)
         pulumi.set(__self__, "logset_id", logset_id)
@@ -109,6 +113,8 @@ class AlarmAlarmTarget(dict):
         pulumi.set(__self__, "query", query)
         pulumi.set(__self__, "start_time_offset", start_time_offset)
         pulumi.set(__self__, "topic_id", topic_id)
+        if syntax_rule is not None:
+            pulumi.set(__self__, "syntax_rule", syntax_rule)
 
     @property
     @pulumi.getter(name="endTimeOffset")
@@ -157,6 +163,14 @@ class AlarmAlarmTarget(dict):
         topic id.
         """
         return pulumi.get(self, "topic_id")
+
+    @property
+    @pulumi.getter(name="syntaxRule")
+    def syntax_rule(self) -> Optional[int]:
+        """
+        Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.
+        """
+        return pulumi.get(self, "syntax_rule")
 
 
 @pulumi.output_type

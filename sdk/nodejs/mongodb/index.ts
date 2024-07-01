@@ -60,6 +60,16 @@ export type InstanceBackupDownloadTask = import("./instanceBackupDownloadTask").
 export const InstanceBackupDownloadTask: typeof import("./instanceBackupDownloadTask").InstanceBackupDownloadTask = null as any;
 utilities.lazyLoad(exports, ["InstanceBackupDownloadTask"], () => require("./instanceBackupDownloadTask"));
 
+export { InstanceBackupRuleArgs, InstanceBackupRuleState } from "./instanceBackupRule";
+export type InstanceBackupRule = import("./instanceBackupRule").InstanceBackupRule;
+export const InstanceBackupRule: typeof import("./instanceBackupRule").InstanceBackupRule = null as any;
+utilities.lazyLoad(exports, ["InstanceBackupRule"], () => require("./instanceBackupRule"));
+
+export { InstanceTransparentDataEncryptionArgs, InstanceTransparentDataEncryptionState } from "./instanceTransparentDataEncryption";
+export type InstanceTransparentDataEncryption = import("./instanceTransparentDataEncryption").InstanceTransparentDataEncryption;
+export const InstanceTransparentDataEncryption: typeof import("./instanceTransparentDataEncryption").InstanceTransparentDataEncryption = null as any;
+utilities.lazyLoad(exports, ["InstanceTransparentDataEncryption"], () => require("./instanceTransparentDataEncryption"));
+
 export { ShardingInstanceArgs, ShardingInstanceState } from "./shardingInstance";
 export type ShardingInstance = import("./shardingInstance").ShardingInstance;
 export const ShardingInstance: typeof import("./shardingInstance").ShardingInstance = null as any;
@@ -83,6 +93,10 @@ const _module = {
                 return new InstanceBackup(name, <any>undefined, { urn })
             case "tencentcloud:Mongodb/instanceBackupDownloadTask:InstanceBackupDownloadTask":
                 return new InstanceBackupDownloadTask(name, <any>undefined, { urn })
+            case "tencentcloud:Mongodb/instanceBackupRule:InstanceBackupRule":
+                return new InstanceBackupRule(name, <any>undefined, { urn })
+            case "tencentcloud:Mongodb/instanceTransparentDataEncryption:InstanceTransparentDataEncryption":
+                return new InstanceTransparentDataEncryption(name, <any>undefined, { urn })
             case "tencentcloud:Mongodb/shardingInstance:ShardingInstance":
                 return new ShardingInstance(name, <any>undefined, { urn })
             case "tencentcloud:Mongodb/standbyInstance:StandbyInstance":
@@ -96,5 +110,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instance", _modul
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instanceAccount", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instanceBackup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instanceBackupDownloadTask", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instanceBackupRule", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/instanceTransparentDataEncryption", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/shardingInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mongodb/standbyInstance", _module)

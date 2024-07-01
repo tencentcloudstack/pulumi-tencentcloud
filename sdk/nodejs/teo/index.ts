@@ -50,6 +50,11 @@ export type OwnershipVerify = import("./ownershipVerify").OwnershipVerify;
 export const OwnershipVerify: typeof import("./ownershipVerify").OwnershipVerify = null as any;
 utilities.lazyLoad(exports, ["OwnershipVerify"], () => require("./ownershipVerify"));
 
+export { RealtimeLogDeliveryArgs, RealtimeLogDeliveryState } from "./realtimeLogDelivery";
+export type RealtimeLogDelivery = import("./realtimeLogDelivery").RealtimeLogDelivery;
+export const RealtimeLogDelivery: typeof import("./realtimeLogDelivery").RealtimeLogDelivery = null as any;
+utilities.lazyLoad(exports, ["RealtimeLogDelivery"], () => require("./realtimeLogDelivery"));
+
 export { RuleEngineArgs, RuleEngineState } from "./ruleEngine";
 export type RuleEngine = import("./ruleEngine").RuleEngine;
 export const RuleEngine: typeof import("./ruleEngine").RuleEngine = null as any;
@@ -84,6 +89,8 @@ const _module = {
                 return new OriginGroup(name, <any>undefined, { urn })
             case "tencentcloud:Teo/ownershipVerify:OwnershipVerify":
                 return new OwnershipVerify(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/realtimeLogDelivery:RealtimeLogDelivery":
+                return new RealtimeLogDelivery(name, <any>undefined, { urn })
             case "tencentcloud:Teo/ruleEngine:RuleEngine":
                 return new RuleEngine(name, <any>undefined, { urn })
             case "tencentcloud:Teo/zone:Zone":
@@ -102,6 +109,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Teo/certificateConfig", _
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/l4Proxy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/originGroup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/ownershipVerify", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/realtimeLogDelivery", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/ruleEngine", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/zone", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/zoneSetting", _module)

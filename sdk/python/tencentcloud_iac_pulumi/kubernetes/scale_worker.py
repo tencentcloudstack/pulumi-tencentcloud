@@ -544,6 +544,14 @@ class ScaleWorker(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
+        ## Import
+
+        tke scale worker can be imported, e.g.
+
+        ```sh
+        $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker test cls-xxx#ins-xxx
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: ID of the cluster.
@@ -663,6 +671,14 @@ class ScaleWorker(pulumi.CustomResource):
             ))
         ```
         <!--End PulumiCodeChooser -->
+
+        ## Import
+
+        tke scale worker can be imported, e.g.
+
+        ```sh
+        $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker test cls-xxx#ins-xxx
+        ```
 
         :param str resource_name: The name of the resource.
         :param ScaleWorkerArgs args: The arguments to use to populate this resource's properties.

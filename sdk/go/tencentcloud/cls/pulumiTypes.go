@@ -24,6 +24,8 @@ type AlarmAlarmTarget struct {
 	Query string `pulumi:"query"`
 	// search start time of offset.
 	StartTimeOffset int `pulumi:"startTimeOffset"`
+	// Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.
+	SyntaxRule *int `pulumi:"syntaxRule"`
 	// topic id.
 	TopicId string `pulumi:"topicId"`
 }
@@ -50,6 +52,8 @@ type AlarmAlarmTargetArgs struct {
 	Query pulumi.StringInput `pulumi:"query"`
 	// search start time of offset.
 	StartTimeOffset pulumi.IntInput `pulumi:"startTimeOffset"`
+	// Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.
+	SyntaxRule pulumi.IntPtrInput `pulumi:"syntaxRule"`
 	// topic id.
 	TopicId pulumi.StringInput `pulumi:"topicId"`
 }
@@ -128,6 +132,11 @@ func (o AlarmAlarmTargetOutput) Query() pulumi.StringOutput {
 // search start time of offset.
 func (o AlarmAlarmTargetOutput) StartTimeOffset() pulumi.IntOutput {
 	return o.ApplyT(func(v AlarmAlarmTarget) int { return v.StartTimeOffset }).(pulumi.IntOutput)
+}
+
+// Retrieve grammar rules, 0: Lucene syntax, 1: CQL syntax, Default value is 0.
+func (o AlarmAlarmTargetOutput) SyntaxRule() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AlarmAlarmTarget) *int { return v.SyntaxRule }).(pulumi.IntPtrOutput)
 }
 
 // topic id.
