@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provide a resource to create a TDMQ role.
+// Provide a resource to create a TDMQ environment role.
 //
 // ## Example Usage
 //

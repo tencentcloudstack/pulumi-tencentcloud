@@ -67,6 +67,26 @@ import * as utilities from "../utilities";
  *     tags: {
  *         test: "tf",
  *     },
+ *     vpcId: "vpc-da7ffa61",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### SUPPORT CORS
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const openClb = new tencentcloud.clb.Instance("openClb", {
+ *     clbName: "myclb",
+ *     networkType: "OPEN",
+ *     projectId: 0,
+ *     securityGroups: ["sg-o0ek7r93"],
+ *     tags: {
+ *         test: "tf",
+ *     },
  *     targetRegionInfoRegion: "ap-guangzhou",
  *     targetRegionInfoVpcId: "vpc-da7ffa61",
  *     vpcId: "vpc-da7ffa61",
@@ -287,6 +307,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly addressIpVersion!: pulumi.Output<string>;
     /**
+     * The IPv6 address of the load balancing instance.
+     */
+    public /*out*/ readonly addressIpv6!: pulumi.Output<string>;
+    /**
      * Bandwidth package id. If set, the `internetChargeType` must be `BANDWIDTH_PACKAGE`.
      */
     public readonly bandwidthPackageId!: pulumi.Output<string | undefined>;
@@ -318,6 +342,10 @@ export class Instance extends pulumi.CustomResource {
      * Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
      */
     public readonly internetChargeType!: pulumi.Output<string>;
+    /**
+     * This field is meaningful when the IP address version is ipv6, `IPv6Nat64` | `IPv6FullChain`.
+     */
+    public /*out*/ readonly ipv6Mode!: pulumi.Output<string>;
     /**
      * Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
      */
@@ -409,6 +437,7 @@ export class Instance extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as InstanceState | undefined;
             resourceInputs["addressIpVersion"] = state ? state.addressIpVersion : undefined;
+            resourceInputs["addressIpv6"] = state ? state.addressIpv6 : undefined;
             resourceInputs["bandwidthPackageId"] = state ? state.bandwidthPackageId : undefined;
             resourceInputs["clbName"] = state ? state.clbName : undefined;
             resourceInputs["clbVips"] = state ? state.clbVips : undefined;
@@ -417,6 +446,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["dynamicVip"] = state ? state.dynamicVip : undefined;
             resourceInputs["internetBandwidthMaxOut"] = state ? state.internetBandwidthMaxOut : undefined;
             resourceInputs["internetChargeType"] = state ? state.internetChargeType : undefined;
+            resourceInputs["ipv6Mode"] = state ? state.ipv6Mode : undefined;
             resourceInputs["loadBalancerPassToTarget"] = state ? state.loadBalancerPassToTarget : undefined;
             resourceInputs["logSetId"] = state ? state.logSetId : undefined;
             resourceInputs["logTopicId"] = state ? state.logTopicId : undefined;
@@ -470,8 +500,10 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["vipIsp"] = args ? args.vipIsp : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["zoneId"] = args ? args.zoneId : undefined;
+            resourceInputs["addressIpv6"] = undefined /*out*/;
             resourceInputs["clbVips"] = undefined /*out*/;
             resourceInputs["domain"] = undefined /*out*/;
+            resourceInputs["ipv6Mode"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Instance.__pulumiType, name, resourceInputs, opts);
@@ -486,6 +518,10 @@ export interface InstanceState {
      * IP version, only applicable to open CLB. Valid values are `ipv4`, `ipv6` and `IPv6FullChain`.
      */
     addressIpVersion?: pulumi.Input<string>;
+    /**
+     * The IPv6 address of the load balancing instance.
+     */
+    addressIpv6?: pulumi.Input<string>;
     /**
      * Bandwidth package id. If set, the `internetChargeType` must be `BANDWIDTH_PACKAGE`.
      */
@@ -518,6 +554,10 @@ export interface InstanceState {
      * Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
      */
     internetChargeType?: pulumi.Input<string>;
+    /**
+     * This field is meaningful when the IP address version is ipv6, `IPv6Nat64` | `IPv6FullChain`.
+     */
+    ipv6Mode?: pulumi.Input<string>;
     /**
      * Whether the target allow flow come from clb. If value is true, only check security group of clb, or check both clb and backend instance security group.
      */

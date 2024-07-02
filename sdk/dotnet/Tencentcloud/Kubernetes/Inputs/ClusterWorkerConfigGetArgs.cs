@@ -86,7 +86,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<string>? HpcClusterId { get; set; }
 
         /// <summary>
-        /// The valid image id, format of img-xxx.
+        /// The valid image id, format of img-xxx. Note: `img_id` will be replaced with the image corresponding to TKE `cluster_os`.
         /// </summary>
         [Input("imgId")]
         public Input<string>? ImgId { get; set; }
@@ -192,7 +192,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<string>? SystemDiskType { get; set; }
 
         /// <summary>
-        /// User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
+        /// ase64-encoded User Data text, the length limit is 16KB.
         /// </summary>
         [Input("userData")]
         public Input<string>? UserData { get; set; }

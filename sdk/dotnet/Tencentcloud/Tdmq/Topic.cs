@@ -60,14 +60,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// });
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
-    /// 
-    /// ## Import
-    /// 
-    /// Tdmq Topic can be imported, e.g.
-    /// 
-    /// ```sh
-    /// $ pulumi import tencentcloud:Tdmq/topic:Topic test topic_id
-    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/topic:Topic")]
     public partial class Topic : global::Pulumi.CustomResource

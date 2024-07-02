@@ -213,6 +213,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// });
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ## Import
+    /// 
+    /// tke cluster authentication can be imported, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment test cls-xxx
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/authAttachment:AuthAttachment")]
     public partial class AuthAttachment : global::Pulumi.CustomResource

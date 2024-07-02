@@ -2599,7 +2599,7 @@ type ClusterMasterConfig struct {
 	Hostname *string `pulumi:"hostname"`
 	// Id of cvm hpc cluster.
 	HpcClusterId *string `pulumi:"hpcClusterId"`
-	// The valid image id, format of img-xxx.
+	// The valid image id, format of img-xxx. Note: `imgId` will be replaced with the image corresponding to TKE `clusterOs`.
 	ImgId *string `pulumi:"imgId"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`, `PREPAID` instance will not terminated after cluster deleted, and may not allow to delete before expired.
 	InstanceChargeType *string `pulumi:"instanceChargeType"`
@@ -2629,7 +2629,7 @@ type ClusterMasterConfig struct {
 	SystemDiskSize *int `pulumi:"systemDiskSize"`
 	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated.
 	SystemDiskType *string `pulumi:"systemDiskType"`
-	// User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
+	// ase64-encoded User Data text, the length limit is 16KB.
 	UserData *string `pulumi:"userData"`
 }
 
@@ -2667,7 +2667,7 @@ type ClusterMasterConfigArgs struct {
 	Hostname pulumi.StringPtrInput `pulumi:"hostname"`
 	// Id of cvm hpc cluster.
 	HpcClusterId pulumi.StringPtrInput `pulumi:"hpcClusterId"`
-	// The valid image id, format of img-xxx.
+	// The valid image id, format of img-xxx. Note: `imgId` will be replaced with the image corresponding to TKE `clusterOs`.
 	ImgId pulumi.StringPtrInput `pulumi:"imgId"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`, `PREPAID` instance will not terminated after cluster deleted, and may not allow to delete before expired.
 	InstanceChargeType pulumi.StringPtrInput `pulumi:"instanceChargeType"`
@@ -2697,7 +2697,7 @@ type ClusterMasterConfigArgs struct {
 	SystemDiskSize pulumi.IntPtrInput `pulumi:"systemDiskSize"`
 	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated.
 	SystemDiskType pulumi.StringPtrInput `pulumi:"systemDiskType"`
-	// User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
+	// ase64-encoded User Data text, the length limit is 16KB.
 	UserData pulumi.StringPtrInput `pulumi:"userData"`
 }
 
@@ -2807,7 +2807,7 @@ func (o ClusterMasterConfigOutput) HpcClusterId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterMasterConfig) *string { return v.HpcClusterId }).(pulumi.StringPtrOutput)
 }
 
-// The valid image id, format of img-xxx.
+// The valid image id, format of img-xxx. Note: `imgId` will be replaced with the image corresponding to TKE `clusterOs`.
 func (o ClusterMasterConfigOutput) ImgId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterMasterConfig) *string { return v.ImgId }).(pulumi.StringPtrOutput)
 }
@@ -2882,7 +2882,7 @@ func (o ClusterMasterConfigOutput) SystemDiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterMasterConfig) *string { return v.SystemDiskType }).(pulumi.StringPtrOutput)
 }
 
-// User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
+// ase64-encoded User Data text, the length limit is 16KB.
 func (o ClusterMasterConfigOutput) UserData() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterMasterConfig) *string { return v.UserData }).(pulumi.StringPtrOutput)
 }
@@ -3268,7 +3268,7 @@ type ClusterWorkerConfig struct {
 	Hostname *string `pulumi:"hostname"`
 	// Id of cvm hpc cluster.
 	HpcClusterId *string `pulumi:"hpcClusterId"`
-	// The valid image id, format of img-xxx.
+	// The valid image id, format of img-xxx. Note: `imgId` will be replaced with the image corresponding to TKE `clusterOs`.
 	ImgId *string `pulumi:"imgId"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`, `PREPAID` instance will not terminated after cluster deleted, and may not allow to delete before expired.
 	InstanceChargeType *string `pulumi:"instanceChargeType"`
@@ -3298,7 +3298,7 @@ type ClusterWorkerConfig struct {
 	SystemDiskSize *int `pulumi:"systemDiskSize"`
 	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated.
 	SystemDiskType *string `pulumi:"systemDiskType"`
-	// User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
+	// ase64-encoded User Data text, the length limit is 16KB.
 	UserData *string `pulumi:"userData"`
 }
 
@@ -3336,7 +3336,7 @@ type ClusterWorkerConfigArgs struct {
 	Hostname pulumi.StringPtrInput `pulumi:"hostname"`
 	// Id of cvm hpc cluster.
 	HpcClusterId pulumi.StringPtrInput `pulumi:"hpcClusterId"`
-	// The valid image id, format of img-xxx.
+	// The valid image id, format of img-xxx. Note: `imgId` will be replaced with the image corresponding to TKE `clusterOs`.
 	ImgId pulumi.StringPtrInput `pulumi:"imgId"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`, `PREPAID` instance will not terminated after cluster deleted, and may not allow to delete before expired.
 	InstanceChargeType pulumi.StringPtrInput `pulumi:"instanceChargeType"`
@@ -3366,7 +3366,7 @@ type ClusterWorkerConfigArgs struct {
 	SystemDiskSize pulumi.IntPtrInput `pulumi:"systemDiskSize"`
 	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated.
 	SystemDiskType pulumi.StringPtrInput `pulumi:"systemDiskType"`
-	// User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
+	// ase64-encoded User Data text, the length limit is 16KB.
 	UserData pulumi.StringPtrInput `pulumi:"userData"`
 }
 
@@ -3476,7 +3476,7 @@ func (o ClusterWorkerConfigOutput) HpcClusterId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterWorkerConfig) *string { return v.HpcClusterId }).(pulumi.StringPtrOutput)
 }
 
-// The valid image id, format of img-xxx.
+// The valid image id, format of img-xxx. Note: `imgId` will be replaced with the image corresponding to TKE `clusterOs`.
 func (o ClusterWorkerConfigOutput) ImgId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterWorkerConfig) *string { return v.ImgId }).(pulumi.StringPtrOutput)
 }
@@ -3551,7 +3551,7 @@ func (o ClusterWorkerConfigOutput) SystemDiskType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterWorkerConfig) *string { return v.SystemDiskType }).(pulumi.StringPtrOutput)
 }
 
-// User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
+// ase64-encoded User Data text, the length limit is 16KB.
 func (o ClusterWorkerConfigOutput) UserData() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterWorkerConfig) *string { return v.UserData }).(pulumi.StringPtrOutput)
 }
@@ -4032,6 +4032,2197 @@ func (o EncryptionProtectionKmsConfigurationPtrOutput) KmsRegion() pulumi.String
 		}
 		return v.KmsRegion
 	}).(pulumi.StringPtrOutput)
+}
+
+type NativeNodePoolAnnotation struct {
+	// Name in the map table.
+	Name string `pulumi:"name"`
+	// Value in the map table.
+	Value string `pulumi:"value"`
+}
+
+// NativeNodePoolAnnotationInput is an input type that accepts NativeNodePoolAnnotationArgs and NativeNodePoolAnnotationOutput values.
+// You can construct a concrete instance of `NativeNodePoolAnnotationInput` via:
+//
+//	NativeNodePoolAnnotationArgs{...}
+type NativeNodePoolAnnotationInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolAnnotationOutput() NativeNodePoolAnnotationOutput
+	ToNativeNodePoolAnnotationOutputWithContext(context.Context) NativeNodePoolAnnotationOutput
+}
+
+type NativeNodePoolAnnotationArgs struct {
+	// Name in the map table.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Value in the map table.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (NativeNodePoolAnnotationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolAnnotation)(nil)).Elem()
+}
+
+func (i NativeNodePoolAnnotationArgs) ToNativeNodePoolAnnotationOutput() NativeNodePoolAnnotationOutput {
+	return i.ToNativeNodePoolAnnotationOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolAnnotationArgs) ToNativeNodePoolAnnotationOutputWithContext(ctx context.Context) NativeNodePoolAnnotationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolAnnotationOutput)
+}
+
+// NativeNodePoolAnnotationArrayInput is an input type that accepts NativeNodePoolAnnotationArray and NativeNodePoolAnnotationArrayOutput values.
+// You can construct a concrete instance of `NativeNodePoolAnnotationArrayInput` via:
+//
+//	NativeNodePoolAnnotationArray{ NativeNodePoolAnnotationArgs{...} }
+type NativeNodePoolAnnotationArrayInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolAnnotationArrayOutput() NativeNodePoolAnnotationArrayOutput
+	ToNativeNodePoolAnnotationArrayOutputWithContext(context.Context) NativeNodePoolAnnotationArrayOutput
+}
+
+type NativeNodePoolAnnotationArray []NativeNodePoolAnnotationInput
+
+func (NativeNodePoolAnnotationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NativeNodePoolAnnotation)(nil)).Elem()
+}
+
+func (i NativeNodePoolAnnotationArray) ToNativeNodePoolAnnotationArrayOutput() NativeNodePoolAnnotationArrayOutput {
+	return i.ToNativeNodePoolAnnotationArrayOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolAnnotationArray) ToNativeNodePoolAnnotationArrayOutputWithContext(ctx context.Context) NativeNodePoolAnnotationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolAnnotationArrayOutput)
+}
+
+type NativeNodePoolAnnotationOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolAnnotationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolAnnotation)(nil)).Elem()
+}
+
+func (o NativeNodePoolAnnotationOutput) ToNativeNodePoolAnnotationOutput() NativeNodePoolAnnotationOutput {
+	return o
+}
+
+func (o NativeNodePoolAnnotationOutput) ToNativeNodePoolAnnotationOutputWithContext(ctx context.Context) NativeNodePoolAnnotationOutput {
+	return o
+}
+
+// Name in the map table.
+func (o NativeNodePoolAnnotationOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeNodePoolAnnotation) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Value in the map table.
+func (o NativeNodePoolAnnotationOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeNodePoolAnnotation) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type NativeNodePoolAnnotationArrayOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolAnnotationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NativeNodePoolAnnotation)(nil)).Elem()
+}
+
+func (o NativeNodePoolAnnotationArrayOutput) ToNativeNodePoolAnnotationArrayOutput() NativeNodePoolAnnotationArrayOutput {
+	return o
+}
+
+func (o NativeNodePoolAnnotationArrayOutput) ToNativeNodePoolAnnotationArrayOutputWithContext(ctx context.Context) NativeNodePoolAnnotationArrayOutput {
+	return o
+}
+
+func (o NativeNodePoolAnnotationArrayOutput) Index(i pulumi.IntInput) NativeNodePoolAnnotationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NativeNodePoolAnnotation {
+		return vs[0].([]NativeNodePoolAnnotation)[vs[1].(int)]
+	}).(NativeNodePoolAnnotationOutput)
+}
+
+type NativeNodePoolLabel struct {
+	// Name in the map table.
+	Name string `pulumi:"name"`
+	// Value in map table.
+	Value string `pulumi:"value"`
+}
+
+// NativeNodePoolLabelInput is an input type that accepts NativeNodePoolLabelArgs and NativeNodePoolLabelOutput values.
+// You can construct a concrete instance of `NativeNodePoolLabelInput` via:
+//
+//	NativeNodePoolLabelArgs{...}
+type NativeNodePoolLabelInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolLabelOutput() NativeNodePoolLabelOutput
+	ToNativeNodePoolLabelOutputWithContext(context.Context) NativeNodePoolLabelOutput
+}
+
+type NativeNodePoolLabelArgs struct {
+	// Name in the map table.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Value in map table.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (NativeNodePoolLabelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolLabel)(nil)).Elem()
+}
+
+func (i NativeNodePoolLabelArgs) ToNativeNodePoolLabelOutput() NativeNodePoolLabelOutput {
+	return i.ToNativeNodePoolLabelOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolLabelArgs) ToNativeNodePoolLabelOutputWithContext(ctx context.Context) NativeNodePoolLabelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolLabelOutput)
+}
+
+// NativeNodePoolLabelArrayInput is an input type that accepts NativeNodePoolLabelArray and NativeNodePoolLabelArrayOutput values.
+// You can construct a concrete instance of `NativeNodePoolLabelArrayInput` via:
+//
+//	NativeNodePoolLabelArray{ NativeNodePoolLabelArgs{...} }
+type NativeNodePoolLabelArrayInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolLabelArrayOutput() NativeNodePoolLabelArrayOutput
+	ToNativeNodePoolLabelArrayOutputWithContext(context.Context) NativeNodePoolLabelArrayOutput
+}
+
+type NativeNodePoolLabelArray []NativeNodePoolLabelInput
+
+func (NativeNodePoolLabelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NativeNodePoolLabel)(nil)).Elem()
+}
+
+func (i NativeNodePoolLabelArray) ToNativeNodePoolLabelArrayOutput() NativeNodePoolLabelArrayOutput {
+	return i.ToNativeNodePoolLabelArrayOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolLabelArray) ToNativeNodePoolLabelArrayOutputWithContext(ctx context.Context) NativeNodePoolLabelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolLabelArrayOutput)
+}
+
+type NativeNodePoolLabelOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolLabelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolLabel)(nil)).Elem()
+}
+
+func (o NativeNodePoolLabelOutput) ToNativeNodePoolLabelOutput() NativeNodePoolLabelOutput {
+	return o
+}
+
+func (o NativeNodePoolLabelOutput) ToNativeNodePoolLabelOutputWithContext(ctx context.Context) NativeNodePoolLabelOutput {
+	return o
+}
+
+// Name in the map table.
+func (o NativeNodePoolLabelOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeNodePoolLabel) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Value in map table.
+func (o NativeNodePoolLabelOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeNodePoolLabel) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type NativeNodePoolLabelArrayOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolLabelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NativeNodePoolLabel)(nil)).Elem()
+}
+
+func (o NativeNodePoolLabelArrayOutput) ToNativeNodePoolLabelArrayOutput() NativeNodePoolLabelArrayOutput {
+	return o
+}
+
+func (o NativeNodePoolLabelArrayOutput) ToNativeNodePoolLabelArrayOutputWithContext(ctx context.Context) NativeNodePoolLabelArrayOutput {
+	return o
+}
+
+func (o NativeNodePoolLabelArrayOutput) Index(i pulumi.IntInput) NativeNodePoolLabelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NativeNodePoolLabel {
+		return vs[0].([]NativeNodePoolLabel)[vs[1].(int)]
+	}).(NativeNodePoolLabelOutput)
+}
+
+type NativeNodePoolNative struct {
+	// Whether to enable self-healing ability.
+	AutoRepair *bool `pulumi:"autoRepair"`
+	// Native node pool data disk list.
+	DataDisks []NativeNodePoolNativeDataDisk `pulumi:"dataDisks"`
+	// Whether to enable elastic scaling.
+	EnableAutoscaling *bool `pulumi:"enableAutoscaling"`
+	// Fault self-healing rule name.
+	HealthCheckPolicyName *string `pulumi:"healthCheckPolicyName"`
+	// Native node pool hostName pattern string.
+	HostNamePattern *string `pulumi:"hostNamePattern"`
+	// Billing configuration for yearly and monthly models.
+	InstanceChargePrepaid *NativeNodePoolNativeInstanceChargePrepaid `pulumi:"instanceChargePrepaid"`
+	// Node billing type. `PREPAID` is a yearly and monthly subscription, `POSTPAID_BY_HOUR` is a pay-as-you-go plan. The default is `POSTPAID_BY_HOUR`.
+	InstanceChargeType string `pulumi:"instanceChargeType"`
+	// Model list.
+	InstanceTypes []string `pulumi:"instanceTypes"`
+	// Public network bandwidth settings.
+	InternetAccessible *NativeNodePoolNativeInternetAccessible `pulumi:"internetAccessible"`
+	// Node pool ssh public key id array.
+	KeyIds []string `pulumi:"keyIds"`
+	// Kubelet custom parameters.
+	KubeletArgs []string `pulumi:"kubeletArgs"`
+	// Predefined scripts.
+	Lifecycle *NativeNodePoolNativeLifecycle `pulumi:"lifecycle"`
+	// Node pool management parameter settings.
+	Management *NativeNodePoolNativeManagement `pulumi:"management"`
+	// Desired number of nodes.
+	Replicas *int `pulumi:"replicas"`
+	// Runtime root directory.
+	RuntimeRootDir *string `pulumi:"runtimeRootDir"`
+	// Node pool scaling configuration.
+	Scaling *NativeNodePoolNativeScaling `pulumi:"scaling"`
+	// Security group list.
+	SecurityGroupIds []string `pulumi:"securityGroupIds"`
+	// Subnet list.
+	SubnetIds []string `pulumi:"subnetIds"`
+	// System disk configuration.
+	SystemDisk NativeNodePoolNativeSystemDisk `pulumi:"systemDisk"`
+}
+
+// NativeNodePoolNativeInput is an input type that accepts NativeNodePoolNativeArgs and NativeNodePoolNativeOutput values.
+// You can construct a concrete instance of `NativeNodePoolNativeInput` via:
+//
+//	NativeNodePoolNativeArgs{...}
+type NativeNodePoolNativeInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolNativeOutput() NativeNodePoolNativeOutput
+	ToNativeNodePoolNativeOutputWithContext(context.Context) NativeNodePoolNativeOutput
+}
+
+type NativeNodePoolNativeArgs struct {
+	// Whether to enable self-healing ability.
+	AutoRepair pulumi.BoolPtrInput `pulumi:"autoRepair"`
+	// Native node pool data disk list.
+	DataDisks NativeNodePoolNativeDataDiskArrayInput `pulumi:"dataDisks"`
+	// Whether to enable elastic scaling.
+	EnableAutoscaling pulumi.BoolPtrInput `pulumi:"enableAutoscaling"`
+	// Fault self-healing rule name.
+	HealthCheckPolicyName pulumi.StringPtrInput `pulumi:"healthCheckPolicyName"`
+	// Native node pool hostName pattern string.
+	HostNamePattern pulumi.StringPtrInput `pulumi:"hostNamePattern"`
+	// Billing configuration for yearly and monthly models.
+	InstanceChargePrepaid NativeNodePoolNativeInstanceChargePrepaidPtrInput `pulumi:"instanceChargePrepaid"`
+	// Node billing type. `PREPAID` is a yearly and monthly subscription, `POSTPAID_BY_HOUR` is a pay-as-you-go plan. The default is `POSTPAID_BY_HOUR`.
+	InstanceChargeType pulumi.StringInput `pulumi:"instanceChargeType"`
+	// Model list.
+	InstanceTypes pulumi.StringArrayInput `pulumi:"instanceTypes"`
+	// Public network bandwidth settings.
+	InternetAccessible NativeNodePoolNativeInternetAccessiblePtrInput `pulumi:"internetAccessible"`
+	// Node pool ssh public key id array.
+	KeyIds pulumi.StringArrayInput `pulumi:"keyIds"`
+	// Kubelet custom parameters.
+	KubeletArgs pulumi.StringArrayInput `pulumi:"kubeletArgs"`
+	// Predefined scripts.
+	Lifecycle NativeNodePoolNativeLifecyclePtrInput `pulumi:"lifecycle"`
+	// Node pool management parameter settings.
+	Management NativeNodePoolNativeManagementPtrInput `pulumi:"management"`
+	// Desired number of nodes.
+	Replicas pulumi.IntPtrInput `pulumi:"replicas"`
+	// Runtime root directory.
+	RuntimeRootDir pulumi.StringPtrInput `pulumi:"runtimeRootDir"`
+	// Node pool scaling configuration.
+	Scaling NativeNodePoolNativeScalingPtrInput `pulumi:"scaling"`
+	// Security group list.
+	SecurityGroupIds pulumi.StringArrayInput `pulumi:"securityGroupIds"`
+	// Subnet list.
+	SubnetIds pulumi.StringArrayInput `pulumi:"subnetIds"`
+	// System disk configuration.
+	SystemDisk NativeNodePoolNativeSystemDiskInput `pulumi:"systemDisk"`
+}
+
+func (NativeNodePoolNativeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolNative)(nil)).Elem()
+}
+
+func (i NativeNodePoolNativeArgs) ToNativeNodePoolNativeOutput() NativeNodePoolNativeOutput {
+	return i.ToNativeNodePoolNativeOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolNativeArgs) ToNativeNodePoolNativeOutputWithContext(ctx context.Context) NativeNodePoolNativeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeOutput)
+}
+
+func (i NativeNodePoolNativeArgs) ToNativeNodePoolNativePtrOutput() NativeNodePoolNativePtrOutput {
+	return i.ToNativeNodePoolNativePtrOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolNativeArgs) ToNativeNodePoolNativePtrOutputWithContext(ctx context.Context) NativeNodePoolNativePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeOutput).ToNativeNodePoolNativePtrOutputWithContext(ctx)
+}
+
+// NativeNodePoolNativePtrInput is an input type that accepts NativeNodePoolNativeArgs, NativeNodePoolNativePtr and NativeNodePoolNativePtrOutput values.
+// You can construct a concrete instance of `NativeNodePoolNativePtrInput` via:
+//
+//	        NativeNodePoolNativeArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeNodePoolNativePtrInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolNativePtrOutput() NativeNodePoolNativePtrOutput
+	ToNativeNodePoolNativePtrOutputWithContext(context.Context) NativeNodePoolNativePtrOutput
+}
+
+type nativeNodePoolNativePtrType NativeNodePoolNativeArgs
+
+func NativeNodePoolNativePtr(v *NativeNodePoolNativeArgs) NativeNodePoolNativePtrInput {
+	return (*nativeNodePoolNativePtrType)(v)
+}
+
+func (*nativeNodePoolNativePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeNodePoolNative)(nil)).Elem()
+}
+
+func (i *nativeNodePoolNativePtrType) ToNativeNodePoolNativePtrOutput() NativeNodePoolNativePtrOutput {
+	return i.ToNativeNodePoolNativePtrOutputWithContext(context.Background())
+}
+
+func (i *nativeNodePoolNativePtrType) ToNativeNodePoolNativePtrOutputWithContext(ctx context.Context) NativeNodePoolNativePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativePtrOutput)
+}
+
+type NativeNodePoolNativeOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolNativeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolNative)(nil)).Elem()
+}
+
+func (o NativeNodePoolNativeOutput) ToNativeNodePoolNativeOutput() NativeNodePoolNativeOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeOutput) ToNativeNodePoolNativeOutputWithContext(ctx context.Context) NativeNodePoolNativeOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeOutput) ToNativeNodePoolNativePtrOutput() NativeNodePoolNativePtrOutput {
+	return o.ToNativeNodePoolNativePtrOutputWithContext(context.Background())
+}
+
+func (o NativeNodePoolNativeOutput) ToNativeNodePoolNativePtrOutputWithContext(ctx context.Context) NativeNodePoolNativePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeNodePoolNative) *NativeNodePoolNative {
+		return &v
+	}).(NativeNodePoolNativePtrOutput)
+}
+
+// Whether to enable self-healing ability.
+func (o NativeNodePoolNativeOutput) AutoRepair() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) *bool { return v.AutoRepair }).(pulumi.BoolPtrOutput)
+}
+
+// Native node pool data disk list.
+func (o NativeNodePoolNativeOutput) DataDisks() NativeNodePoolNativeDataDiskArrayOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) []NativeNodePoolNativeDataDisk { return v.DataDisks }).(NativeNodePoolNativeDataDiskArrayOutput)
+}
+
+// Whether to enable elastic scaling.
+func (o NativeNodePoolNativeOutput) EnableAutoscaling() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) *bool { return v.EnableAutoscaling }).(pulumi.BoolPtrOutput)
+}
+
+// Fault self-healing rule name.
+func (o NativeNodePoolNativeOutput) HealthCheckPolicyName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) *string { return v.HealthCheckPolicyName }).(pulumi.StringPtrOutput)
+}
+
+// Native node pool hostName pattern string.
+func (o NativeNodePoolNativeOutput) HostNamePattern() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) *string { return v.HostNamePattern }).(pulumi.StringPtrOutput)
+}
+
+// Billing configuration for yearly and monthly models.
+func (o NativeNodePoolNativeOutput) InstanceChargePrepaid() NativeNodePoolNativeInstanceChargePrepaidPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) *NativeNodePoolNativeInstanceChargePrepaid {
+		return v.InstanceChargePrepaid
+	}).(NativeNodePoolNativeInstanceChargePrepaidPtrOutput)
+}
+
+// Node billing type. `PREPAID` is a yearly and monthly subscription, `POSTPAID_BY_HOUR` is a pay-as-you-go plan. The default is `POSTPAID_BY_HOUR`.
+func (o NativeNodePoolNativeOutput) InstanceChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) string { return v.InstanceChargeType }).(pulumi.StringOutput)
+}
+
+// Model list.
+func (o NativeNodePoolNativeOutput) InstanceTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) []string { return v.InstanceTypes }).(pulumi.StringArrayOutput)
+}
+
+// Public network bandwidth settings.
+func (o NativeNodePoolNativeOutput) InternetAccessible() NativeNodePoolNativeInternetAccessiblePtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) *NativeNodePoolNativeInternetAccessible { return v.InternetAccessible }).(NativeNodePoolNativeInternetAccessiblePtrOutput)
+}
+
+// Node pool ssh public key id array.
+func (o NativeNodePoolNativeOutput) KeyIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) []string { return v.KeyIds }).(pulumi.StringArrayOutput)
+}
+
+// Kubelet custom parameters.
+func (o NativeNodePoolNativeOutput) KubeletArgs() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) []string { return v.KubeletArgs }).(pulumi.StringArrayOutput)
+}
+
+// Predefined scripts.
+func (o NativeNodePoolNativeOutput) Lifecycle() NativeNodePoolNativeLifecyclePtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) *NativeNodePoolNativeLifecycle { return v.Lifecycle }).(NativeNodePoolNativeLifecyclePtrOutput)
+}
+
+// Node pool management parameter settings.
+func (o NativeNodePoolNativeOutput) Management() NativeNodePoolNativeManagementPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) *NativeNodePoolNativeManagement { return v.Management }).(NativeNodePoolNativeManagementPtrOutput)
+}
+
+// Desired number of nodes.
+func (o NativeNodePoolNativeOutput) Replicas() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) *int { return v.Replicas }).(pulumi.IntPtrOutput)
+}
+
+// Runtime root directory.
+func (o NativeNodePoolNativeOutput) RuntimeRootDir() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) *string { return v.RuntimeRootDir }).(pulumi.StringPtrOutput)
+}
+
+// Node pool scaling configuration.
+func (o NativeNodePoolNativeOutput) Scaling() NativeNodePoolNativeScalingPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) *NativeNodePoolNativeScaling { return v.Scaling }).(NativeNodePoolNativeScalingPtrOutput)
+}
+
+// Security group list.
+func (o NativeNodePoolNativeOutput) SecurityGroupIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) []string { return v.SecurityGroupIds }).(pulumi.StringArrayOutput)
+}
+
+// Subnet list.
+func (o NativeNodePoolNativeOutput) SubnetIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) []string { return v.SubnetIds }).(pulumi.StringArrayOutput)
+}
+
+// System disk configuration.
+func (o NativeNodePoolNativeOutput) SystemDisk() NativeNodePoolNativeSystemDiskOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) NativeNodePoolNativeSystemDisk { return v.SystemDisk }).(NativeNodePoolNativeSystemDiskOutput)
+}
+
+type NativeNodePoolNativePtrOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolNativePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeNodePoolNative)(nil)).Elem()
+}
+
+func (o NativeNodePoolNativePtrOutput) ToNativeNodePoolNativePtrOutput() NativeNodePoolNativePtrOutput {
+	return o
+}
+
+func (o NativeNodePoolNativePtrOutput) ToNativeNodePoolNativePtrOutputWithContext(ctx context.Context) NativeNodePoolNativePtrOutput {
+	return o
+}
+
+func (o NativeNodePoolNativePtrOutput) Elem() NativeNodePoolNativeOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) NativeNodePoolNative {
+		if v != nil {
+			return *v
+		}
+		var ret NativeNodePoolNative
+		return ret
+	}).(NativeNodePoolNativeOutput)
+}
+
+// Whether to enable self-healing ability.
+func (o NativeNodePoolNativePtrOutput) AutoRepair() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.AutoRepair
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Native node pool data disk list.
+func (o NativeNodePoolNativePtrOutput) DataDisks() NativeNodePoolNativeDataDiskArrayOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) []NativeNodePoolNativeDataDisk {
+		if v == nil {
+			return nil
+		}
+		return v.DataDisks
+	}).(NativeNodePoolNativeDataDiskArrayOutput)
+}
+
+// Whether to enable elastic scaling.
+func (o NativeNodePoolNativePtrOutput) EnableAutoscaling() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.EnableAutoscaling
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Fault self-healing rule name.
+func (o NativeNodePoolNativePtrOutput) HealthCheckPolicyName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HealthCheckPolicyName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Native node pool hostName pattern string.
+func (o NativeNodePoolNativePtrOutput) HostNamePattern() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) *string {
+		if v == nil {
+			return nil
+		}
+		return v.HostNamePattern
+	}).(pulumi.StringPtrOutput)
+}
+
+// Billing configuration for yearly and monthly models.
+func (o NativeNodePoolNativePtrOutput) InstanceChargePrepaid() NativeNodePoolNativeInstanceChargePrepaidPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) *NativeNodePoolNativeInstanceChargePrepaid {
+		if v == nil {
+			return nil
+		}
+		return v.InstanceChargePrepaid
+	}).(NativeNodePoolNativeInstanceChargePrepaidPtrOutput)
+}
+
+// Node billing type. `PREPAID` is a yearly and monthly subscription, `POSTPAID_BY_HOUR` is a pay-as-you-go plan. The default is `POSTPAID_BY_HOUR`.
+func (o NativeNodePoolNativePtrOutput) InstanceChargeType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.InstanceChargeType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Model list.
+func (o NativeNodePoolNativePtrOutput) InstanceTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) []string {
+		if v == nil {
+			return nil
+		}
+		return v.InstanceTypes
+	}).(pulumi.StringArrayOutput)
+}
+
+// Public network bandwidth settings.
+func (o NativeNodePoolNativePtrOutput) InternetAccessible() NativeNodePoolNativeInternetAccessiblePtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) *NativeNodePoolNativeInternetAccessible {
+		if v == nil {
+			return nil
+		}
+		return v.InternetAccessible
+	}).(NativeNodePoolNativeInternetAccessiblePtrOutput)
+}
+
+// Node pool ssh public key id array.
+func (o NativeNodePoolNativePtrOutput) KeyIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) []string {
+		if v == nil {
+			return nil
+		}
+		return v.KeyIds
+	}).(pulumi.StringArrayOutput)
+}
+
+// Kubelet custom parameters.
+func (o NativeNodePoolNativePtrOutput) KubeletArgs() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) []string {
+		if v == nil {
+			return nil
+		}
+		return v.KubeletArgs
+	}).(pulumi.StringArrayOutput)
+}
+
+// Predefined scripts.
+func (o NativeNodePoolNativePtrOutput) Lifecycle() NativeNodePoolNativeLifecyclePtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) *NativeNodePoolNativeLifecycle {
+		if v == nil {
+			return nil
+		}
+		return v.Lifecycle
+	}).(NativeNodePoolNativeLifecyclePtrOutput)
+}
+
+// Node pool management parameter settings.
+func (o NativeNodePoolNativePtrOutput) Management() NativeNodePoolNativeManagementPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) *NativeNodePoolNativeManagement {
+		if v == nil {
+			return nil
+		}
+		return v.Management
+	}).(NativeNodePoolNativeManagementPtrOutput)
+}
+
+// Desired number of nodes.
+func (o NativeNodePoolNativePtrOutput) Replicas() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) *int {
+		if v == nil {
+			return nil
+		}
+		return v.Replicas
+	}).(pulumi.IntPtrOutput)
+}
+
+// Runtime root directory.
+func (o NativeNodePoolNativePtrOutput) RuntimeRootDir() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RuntimeRootDir
+	}).(pulumi.StringPtrOutput)
+}
+
+// Node pool scaling configuration.
+func (o NativeNodePoolNativePtrOutput) Scaling() NativeNodePoolNativeScalingPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) *NativeNodePoolNativeScaling {
+		if v == nil {
+			return nil
+		}
+		return v.Scaling
+	}).(NativeNodePoolNativeScalingPtrOutput)
+}
+
+// Security group list.
+func (o NativeNodePoolNativePtrOutput) SecurityGroupIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) []string {
+		if v == nil {
+			return nil
+		}
+		return v.SecurityGroupIds
+	}).(pulumi.StringArrayOutput)
+}
+
+// Subnet list.
+func (o NativeNodePoolNativePtrOutput) SubnetIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) []string {
+		if v == nil {
+			return nil
+		}
+		return v.SubnetIds
+	}).(pulumi.StringArrayOutput)
+}
+
+// System disk configuration.
+func (o NativeNodePoolNativePtrOutput) SystemDisk() NativeNodePoolNativeSystemDiskPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) *NativeNodePoolNativeSystemDisk {
+		if v == nil {
+			return nil
+		}
+		return &v.SystemDisk
+	}).(NativeNodePoolNativeSystemDiskPtrOutput)
+}
+
+type NativeNodePoolNativeDataDisk struct {
+	// Whether to automatically format the disk and mount it.
+	AutoFormatAndMount bool `pulumi:"autoFormatAndMount"`
+	// Mount device name or partition name.
+	DiskPartition *string `pulumi:"diskPartition"`
+	// Cloud disk size (G).
+	DiskSize int `pulumi:"diskSize"`
+	// Cloud disk type. Valid values: `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: cloud SSD disk, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD, `LOCAL_NVME`: local NVME disk.
+	DiskType string `pulumi:"diskType"`
+	// Pass in this parameter to create an encrypted cloud disk. The value is fixed to `ENCRYPT`.
+	Encrypt *string `pulumi:"encrypt"`
+	// File system (ext3/ext4/xfs).
+	FileSystem *string `pulumi:"fileSystem"`
+	// Customize the key when purchasing an encrypted disk. When this parameter is passed in, the Encrypt parameter is not empty.
+	KmsKeyId *string `pulumi:"kmsKeyId"`
+	// Mount directory.
+	MountTarget *string `pulumi:"mountTarget"`
+	// Snapshot ID. If passed in, the cloud disk will be created based on this snapshot. The snapshot type must be a data disk snapshot.
+	SnapshotId *string `pulumi:"snapshotId"`
+	// Cloud disk performance, unit: MB/s. Use this parameter to purchase additional performance for the cloud disk.
+	ThroughputPerformance *int `pulumi:"throughputPerformance"`
+}
+
+// NativeNodePoolNativeDataDiskInput is an input type that accepts NativeNodePoolNativeDataDiskArgs and NativeNodePoolNativeDataDiskOutput values.
+// You can construct a concrete instance of `NativeNodePoolNativeDataDiskInput` via:
+//
+//	NativeNodePoolNativeDataDiskArgs{...}
+type NativeNodePoolNativeDataDiskInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolNativeDataDiskOutput() NativeNodePoolNativeDataDiskOutput
+	ToNativeNodePoolNativeDataDiskOutputWithContext(context.Context) NativeNodePoolNativeDataDiskOutput
+}
+
+type NativeNodePoolNativeDataDiskArgs struct {
+	// Whether to automatically format the disk and mount it.
+	AutoFormatAndMount pulumi.BoolInput `pulumi:"autoFormatAndMount"`
+	// Mount device name or partition name.
+	DiskPartition pulumi.StringPtrInput `pulumi:"diskPartition"`
+	// Cloud disk size (G).
+	DiskSize pulumi.IntInput `pulumi:"diskSize"`
+	// Cloud disk type. Valid values: `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: cloud SSD disk, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD, `LOCAL_NVME`: local NVME disk.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// Pass in this parameter to create an encrypted cloud disk. The value is fixed to `ENCRYPT`.
+	Encrypt pulumi.StringPtrInput `pulumi:"encrypt"`
+	// File system (ext3/ext4/xfs).
+	FileSystem pulumi.StringPtrInput `pulumi:"fileSystem"`
+	// Customize the key when purchasing an encrypted disk. When this parameter is passed in, the Encrypt parameter is not empty.
+	KmsKeyId pulumi.StringPtrInput `pulumi:"kmsKeyId"`
+	// Mount directory.
+	MountTarget pulumi.StringPtrInput `pulumi:"mountTarget"`
+	// Snapshot ID. If passed in, the cloud disk will be created based on this snapshot. The snapshot type must be a data disk snapshot.
+	SnapshotId pulumi.StringPtrInput `pulumi:"snapshotId"`
+	// Cloud disk performance, unit: MB/s. Use this parameter to purchase additional performance for the cloud disk.
+	ThroughputPerformance pulumi.IntPtrInput `pulumi:"throughputPerformance"`
+}
+
+func (NativeNodePoolNativeDataDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolNativeDataDisk)(nil)).Elem()
+}
+
+func (i NativeNodePoolNativeDataDiskArgs) ToNativeNodePoolNativeDataDiskOutput() NativeNodePoolNativeDataDiskOutput {
+	return i.ToNativeNodePoolNativeDataDiskOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolNativeDataDiskArgs) ToNativeNodePoolNativeDataDiskOutputWithContext(ctx context.Context) NativeNodePoolNativeDataDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeDataDiskOutput)
+}
+
+// NativeNodePoolNativeDataDiskArrayInput is an input type that accepts NativeNodePoolNativeDataDiskArray and NativeNodePoolNativeDataDiskArrayOutput values.
+// You can construct a concrete instance of `NativeNodePoolNativeDataDiskArrayInput` via:
+//
+//	NativeNodePoolNativeDataDiskArray{ NativeNodePoolNativeDataDiskArgs{...} }
+type NativeNodePoolNativeDataDiskArrayInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolNativeDataDiskArrayOutput() NativeNodePoolNativeDataDiskArrayOutput
+	ToNativeNodePoolNativeDataDiskArrayOutputWithContext(context.Context) NativeNodePoolNativeDataDiskArrayOutput
+}
+
+type NativeNodePoolNativeDataDiskArray []NativeNodePoolNativeDataDiskInput
+
+func (NativeNodePoolNativeDataDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NativeNodePoolNativeDataDisk)(nil)).Elem()
+}
+
+func (i NativeNodePoolNativeDataDiskArray) ToNativeNodePoolNativeDataDiskArrayOutput() NativeNodePoolNativeDataDiskArrayOutput {
+	return i.ToNativeNodePoolNativeDataDiskArrayOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolNativeDataDiskArray) ToNativeNodePoolNativeDataDiskArrayOutputWithContext(ctx context.Context) NativeNodePoolNativeDataDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeDataDiskArrayOutput)
+}
+
+type NativeNodePoolNativeDataDiskOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolNativeDataDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolNativeDataDisk)(nil)).Elem()
+}
+
+func (o NativeNodePoolNativeDataDiskOutput) ToNativeNodePoolNativeDataDiskOutput() NativeNodePoolNativeDataDiskOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeDataDiskOutput) ToNativeNodePoolNativeDataDiskOutputWithContext(ctx context.Context) NativeNodePoolNativeDataDiskOutput {
+	return o
+}
+
+// Whether to automatically format the disk and mount it.
+func (o NativeNodePoolNativeDataDiskOutput) AutoFormatAndMount() pulumi.BoolOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeDataDisk) bool { return v.AutoFormatAndMount }).(pulumi.BoolOutput)
+}
+
+// Mount device name or partition name.
+func (o NativeNodePoolNativeDataDiskOutput) DiskPartition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeDataDisk) *string { return v.DiskPartition }).(pulumi.StringPtrOutput)
+}
+
+// Cloud disk size (G).
+func (o NativeNodePoolNativeDataDiskOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeDataDisk) int { return v.DiskSize }).(pulumi.IntOutput)
+}
+
+// Cloud disk type. Valid values: `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: cloud SSD disk, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD, `LOCAL_NVME`: local NVME disk.
+func (o NativeNodePoolNativeDataDiskOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeDataDisk) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+// Pass in this parameter to create an encrypted cloud disk. The value is fixed to `ENCRYPT`.
+func (o NativeNodePoolNativeDataDiskOutput) Encrypt() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeDataDisk) *string { return v.Encrypt }).(pulumi.StringPtrOutput)
+}
+
+// File system (ext3/ext4/xfs).
+func (o NativeNodePoolNativeDataDiskOutput) FileSystem() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeDataDisk) *string { return v.FileSystem }).(pulumi.StringPtrOutput)
+}
+
+// Customize the key when purchasing an encrypted disk. When this parameter is passed in, the Encrypt parameter is not empty.
+func (o NativeNodePoolNativeDataDiskOutput) KmsKeyId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeDataDisk) *string { return v.KmsKeyId }).(pulumi.StringPtrOutput)
+}
+
+// Mount directory.
+func (o NativeNodePoolNativeDataDiskOutput) MountTarget() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeDataDisk) *string { return v.MountTarget }).(pulumi.StringPtrOutput)
+}
+
+// Snapshot ID. If passed in, the cloud disk will be created based on this snapshot. The snapshot type must be a data disk snapshot.
+func (o NativeNodePoolNativeDataDiskOutput) SnapshotId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeDataDisk) *string { return v.SnapshotId }).(pulumi.StringPtrOutput)
+}
+
+// Cloud disk performance, unit: MB/s. Use this parameter to purchase additional performance for the cloud disk.
+func (o NativeNodePoolNativeDataDiskOutput) ThroughputPerformance() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeDataDisk) *int { return v.ThroughputPerformance }).(pulumi.IntPtrOutput)
+}
+
+type NativeNodePoolNativeDataDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolNativeDataDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NativeNodePoolNativeDataDisk)(nil)).Elem()
+}
+
+func (o NativeNodePoolNativeDataDiskArrayOutput) ToNativeNodePoolNativeDataDiskArrayOutput() NativeNodePoolNativeDataDiskArrayOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeDataDiskArrayOutput) ToNativeNodePoolNativeDataDiskArrayOutputWithContext(ctx context.Context) NativeNodePoolNativeDataDiskArrayOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeDataDiskArrayOutput) Index(i pulumi.IntInput) NativeNodePoolNativeDataDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NativeNodePoolNativeDataDisk {
+		return vs[0].([]NativeNodePoolNativeDataDisk)[vs[1].(int)]
+	}).(NativeNodePoolNativeDataDiskOutput)
+}
+
+type NativeNodePoolNativeInstanceChargePrepaid struct {
+	// Postpaid billing cycle, unit (month): 1, 2, 3, 4, 5,, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+	Period int `pulumi:"period"`
+	// Prepaid renewal method:
+	RenewFlag *string `pulumi:"renewFlag"`
+}
+
+// NativeNodePoolNativeInstanceChargePrepaidInput is an input type that accepts NativeNodePoolNativeInstanceChargePrepaidArgs and NativeNodePoolNativeInstanceChargePrepaidOutput values.
+// You can construct a concrete instance of `NativeNodePoolNativeInstanceChargePrepaidInput` via:
+//
+//	NativeNodePoolNativeInstanceChargePrepaidArgs{...}
+type NativeNodePoolNativeInstanceChargePrepaidInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolNativeInstanceChargePrepaidOutput() NativeNodePoolNativeInstanceChargePrepaidOutput
+	ToNativeNodePoolNativeInstanceChargePrepaidOutputWithContext(context.Context) NativeNodePoolNativeInstanceChargePrepaidOutput
+}
+
+type NativeNodePoolNativeInstanceChargePrepaidArgs struct {
+	// Postpaid billing cycle, unit (month): 1, 2, 3, 4, 5,, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+	Period pulumi.IntInput `pulumi:"period"`
+	// Prepaid renewal method:
+	RenewFlag pulumi.StringPtrInput `pulumi:"renewFlag"`
+}
+
+func (NativeNodePoolNativeInstanceChargePrepaidArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolNativeInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (i NativeNodePoolNativeInstanceChargePrepaidArgs) ToNativeNodePoolNativeInstanceChargePrepaidOutput() NativeNodePoolNativeInstanceChargePrepaidOutput {
+	return i.ToNativeNodePoolNativeInstanceChargePrepaidOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolNativeInstanceChargePrepaidArgs) ToNativeNodePoolNativeInstanceChargePrepaidOutputWithContext(ctx context.Context) NativeNodePoolNativeInstanceChargePrepaidOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeInstanceChargePrepaidOutput)
+}
+
+func (i NativeNodePoolNativeInstanceChargePrepaidArgs) ToNativeNodePoolNativeInstanceChargePrepaidPtrOutput() NativeNodePoolNativeInstanceChargePrepaidPtrOutput {
+	return i.ToNativeNodePoolNativeInstanceChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolNativeInstanceChargePrepaidArgs) ToNativeNodePoolNativeInstanceChargePrepaidPtrOutputWithContext(ctx context.Context) NativeNodePoolNativeInstanceChargePrepaidPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeInstanceChargePrepaidOutput).ToNativeNodePoolNativeInstanceChargePrepaidPtrOutputWithContext(ctx)
+}
+
+// NativeNodePoolNativeInstanceChargePrepaidPtrInput is an input type that accepts NativeNodePoolNativeInstanceChargePrepaidArgs, NativeNodePoolNativeInstanceChargePrepaidPtr and NativeNodePoolNativeInstanceChargePrepaidPtrOutput values.
+// You can construct a concrete instance of `NativeNodePoolNativeInstanceChargePrepaidPtrInput` via:
+//
+//	        NativeNodePoolNativeInstanceChargePrepaidArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeNodePoolNativeInstanceChargePrepaidPtrInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolNativeInstanceChargePrepaidPtrOutput() NativeNodePoolNativeInstanceChargePrepaidPtrOutput
+	ToNativeNodePoolNativeInstanceChargePrepaidPtrOutputWithContext(context.Context) NativeNodePoolNativeInstanceChargePrepaidPtrOutput
+}
+
+type nativeNodePoolNativeInstanceChargePrepaidPtrType NativeNodePoolNativeInstanceChargePrepaidArgs
+
+func NativeNodePoolNativeInstanceChargePrepaidPtr(v *NativeNodePoolNativeInstanceChargePrepaidArgs) NativeNodePoolNativeInstanceChargePrepaidPtrInput {
+	return (*nativeNodePoolNativeInstanceChargePrepaidPtrType)(v)
+}
+
+func (*nativeNodePoolNativeInstanceChargePrepaidPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeNodePoolNativeInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (i *nativeNodePoolNativeInstanceChargePrepaidPtrType) ToNativeNodePoolNativeInstanceChargePrepaidPtrOutput() NativeNodePoolNativeInstanceChargePrepaidPtrOutput {
+	return i.ToNativeNodePoolNativeInstanceChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeNodePoolNativeInstanceChargePrepaidPtrType) ToNativeNodePoolNativeInstanceChargePrepaidPtrOutputWithContext(ctx context.Context) NativeNodePoolNativeInstanceChargePrepaidPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeInstanceChargePrepaidPtrOutput)
+}
+
+type NativeNodePoolNativeInstanceChargePrepaidOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolNativeInstanceChargePrepaidOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolNativeInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (o NativeNodePoolNativeInstanceChargePrepaidOutput) ToNativeNodePoolNativeInstanceChargePrepaidOutput() NativeNodePoolNativeInstanceChargePrepaidOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeInstanceChargePrepaidOutput) ToNativeNodePoolNativeInstanceChargePrepaidOutputWithContext(ctx context.Context) NativeNodePoolNativeInstanceChargePrepaidOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeInstanceChargePrepaidOutput) ToNativeNodePoolNativeInstanceChargePrepaidPtrOutput() NativeNodePoolNativeInstanceChargePrepaidPtrOutput {
+	return o.ToNativeNodePoolNativeInstanceChargePrepaidPtrOutputWithContext(context.Background())
+}
+
+func (o NativeNodePoolNativeInstanceChargePrepaidOutput) ToNativeNodePoolNativeInstanceChargePrepaidPtrOutputWithContext(ctx context.Context) NativeNodePoolNativeInstanceChargePrepaidPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeNodePoolNativeInstanceChargePrepaid) *NativeNodePoolNativeInstanceChargePrepaid {
+		return &v
+	}).(NativeNodePoolNativeInstanceChargePrepaidPtrOutput)
+}
+
+// Postpaid billing cycle, unit (month): 1, 2, 3, 4, 5,, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+func (o NativeNodePoolNativeInstanceChargePrepaidOutput) Period() pulumi.IntOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeInstanceChargePrepaid) int { return v.Period }).(pulumi.IntOutput)
+}
+
+// Prepaid renewal method:
+func (o NativeNodePoolNativeInstanceChargePrepaidOutput) RenewFlag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeInstanceChargePrepaid) *string { return v.RenewFlag }).(pulumi.StringPtrOutput)
+}
+
+type NativeNodePoolNativeInstanceChargePrepaidPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolNativeInstanceChargePrepaidPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeNodePoolNativeInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (o NativeNodePoolNativeInstanceChargePrepaidPtrOutput) ToNativeNodePoolNativeInstanceChargePrepaidPtrOutput() NativeNodePoolNativeInstanceChargePrepaidPtrOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeInstanceChargePrepaidPtrOutput) ToNativeNodePoolNativeInstanceChargePrepaidPtrOutputWithContext(ctx context.Context) NativeNodePoolNativeInstanceChargePrepaidPtrOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeInstanceChargePrepaidPtrOutput) Elem() NativeNodePoolNativeInstanceChargePrepaidOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeInstanceChargePrepaid) NativeNodePoolNativeInstanceChargePrepaid {
+		if v != nil {
+			return *v
+		}
+		var ret NativeNodePoolNativeInstanceChargePrepaid
+		return ret
+	}).(NativeNodePoolNativeInstanceChargePrepaidOutput)
+}
+
+// Postpaid billing cycle, unit (month): 1, 2, 3, 4, 5,, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+func (o NativeNodePoolNativeInstanceChargePrepaidPtrOutput) Period() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeInstanceChargePrepaid) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Period
+	}).(pulumi.IntPtrOutput)
+}
+
+// Prepaid renewal method:
+func (o NativeNodePoolNativeInstanceChargePrepaidPtrOutput) RenewFlag() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeInstanceChargePrepaid) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RenewFlag
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeNodePoolNativeInternetAccessible struct {
+	// Bandwidth package ID. Note: When ChargeType is BANDWIDTH_PACKAG, the value cannot be empty; otherwise, the value must be empty.
+	BandwidthPackageId *string `pulumi:"bandwidthPackageId"`
+	// Network billing method. Optional value is `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+	ChargeType string `pulumi:"chargeType"`
+	// Maximum bandwidth output. Note: When chargeType is `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_POSTPAID_BY_HOUR`, the valid range is 1~100. When chargeType is `BANDWIDTH_PACKAG`, the valid range is 1~2000.
+	MaxBandwidthOut int `pulumi:"maxBandwidthOut"`
+}
+
+// NativeNodePoolNativeInternetAccessibleInput is an input type that accepts NativeNodePoolNativeInternetAccessibleArgs and NativeNodePoolNativeInternetAccessibleOutput values.
+// You can construct a concrete instance of `NativeNodePoolNativeInternetAccessibleInput` via:
+//
+//	NativeNodePoolNativeInternetAccessibleArgs{...}
+type NativeNodePoolNativeInternetAccessibleInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolNativeInternetAccessibleOutput() NativeNodePoolNativeInternetAccessibleOutput
+	ToNativeNodePoolNativeInternetAccessibleOutputWithContext(context.Context) NativeNodePoolNativeInternetAccessibleOutput
+}
+
+type NativeNodePoolNativeInternetAccessibleArgs struct {
+	// Bandwidth package ID. Note: When ChargeType is BANDWIDTH_PACKAG, the value cannot be empty; otherwise, the value must be empty.
+	BandwidthPackageId pulumi.StringPtrInput `pulumi:"bandwidthPackageId"`
+	// Network billing method. Optional value is `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+	ChargeType pulumi.StringInput `pulumi:"chargeType"`
+	// Maximum bandwidth output. Note: When chargeType is `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_POSTPAID_BY_HOUR`, the valid range is 1~100. When chargeType is `BANDWIDTH_PACKAG`, the valid range is 1~2000.
+	MaxBandwidthOut pulumi.IntInput `pulumi:"maxBandwidthOut"`
+}
+
+func (NativeNodePoolNativeInternetAccessibleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolNativeInternetAccessible)(nil)).Elem()
+}
+
+func (i NativeNodePoolNativeInternetAccessibleArgs) ToNativeNodePoolNativeInternetAccessibleOutput() NativeNodePoolNativeInternetAccessibleOutput {
+	return i.ToNativeNodePoolNativeInternetAccessibleOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolNativeInternetAccessibleArgs) ToNativeNodePoolNativeInternetAccessibleOutputWithContext(ctx context.Context) NativeNodePoolNativeInternetAccessibleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeInternetAccessibleOutput)
+}
+
+func (i NativeNodePoolNativeInternetAccessibleArgs) ToNativeNodePoolNativeInternetAccessiblePtrOutput() NativeNodePoolNativeInternetAccessiblePtrOutput {
+	return i.ToNativeNodePoolNativeInternetAccessiblePtrOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolNativeInternetAccessibleArgs) ToNativeNodePoolNativeInternetAccessiblePtrOutputWithContext(ctx context.Context) NativeNodePoolNativeInternetAccessiblePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeInternetAccessibleOutput).ToNativeNodePoolNativeInternetAccessiblePtrOutputWithContext(ctx)
+}
+
+// NativeNodePoolNativeInternetAccessiblePtrInput is an input type that accepts NativeNodePoolNativeInternetAccessibleArgs, NativeNodePoolNativeInternetAccessiblePtr and NativeNodePoolNativeInternetAccessiblePtrOutput values.
+// You can construct a concrete instance of `NativeNodePoolNativeInternetAccessiblePtrInput` via:
+//
+//	        NativeNodePoolNativeInternetAccessibleArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeNodePoolNativeInternetAccessiblePtrInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolNativeInternetAccessiblePtrOutput() NativeNodePoolNativeInternetAccessiblePtrOutput
+	ToNativeNodePoolNativeInternetAccessiblePtrOutputWithContext(context.Context) NativeNodePoolNativeInternetAccessiblePtrOutput
+}
+
+type nativeNodePoolNativeInternetAccessiblePtrType NativeNodePoolNativeInternetAccessibleArgs
+
+func NativeNodePoolNativeInternetAccessiblePtr(v *NativeNodePoolNativeInternetAccessibleArgs) NativeNodePoolNativeInternetAccessiblePtrInput {
+	return (*nativeNodePoolNativeInternetAccessiblePtrType)(v)
+}
+
+func (*nativeNodePoolNativeInternetAccessiblePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeNodePoolNativeInternetAccessible)(nil)).Elem()
+}
+
+func (i *nativeNodePoolNativeInternetAccessiblePtrType) ToNativeNodePoolNativeInternetAccessiblePtrOutput() NativeNodePoolNativeInternetAccessiblePtrOutput {
+	return i.ToNativeNodePoolNativeInternetAccessiblePtrOutputWithContext(context.Background())
+}
+
+func (i *nativeNodePoolNativeInternetAccessiblePtrType) ToNativeNodePoolNativeInternetAccessiblePtrOutputWithContext(ctx context.Context) NativeNodePoolNativeInternetAccessiblePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeInternetAccessiblePtrOutput)
+}
+
+type NativeNodePoolNativeInternetAccessibleOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolNativeInternetAccessibleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolNativeInternetAccessible)(nil)).Elem()
+}
+
+func (o NativeNodePoolNativeInternetAccessibleOutput) ToNativeNodePoolNativeInternetAccessibleOutput() NativeNodePoolNativeInternetAccessibleOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeInternetAccessibleOutput) ToNativeNodePoolNativeInternetAccessibleOutputWithContext(ctx context.Context) NativeNodePoolNativeInternetAccessibleOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeInternetAccessibleOutput) ToNativeNodePoolNativeInternetAccessiblePtrOutput() NativeNodePoolNativeInternetAccessiblePtrOutput {
+	return o.ToNativeNodePoolNativeInternetAccessiblePtrOutputWithContext(context.Background())
+}
+
+func (o NativeNodePoolNativeInternetAccessibleOutput) ToNativeNodePoolNativeInternetAccessiblePtrOutputWithContext(ctx context.Context) NativeNodePoolNativeInternetAccessiblePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeNodePoolNativeInternetAccessible) *NativeNodePoolNativeInternetAccessible {
+		return &v
+	}).(NativeNodePoolNativeInternetAccessiblePtrOutput)
+}
+
+// Bandwidth package ID. Note: When ChargeType is BANDWIDTH_PACKAG, the value cannot be empty; otherwise, the value must be empty.
+func (o NativeNodePoolNativeInternetAccessibleOutput) BandwidthPackageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeInternetAccessible) *string { return v.BandwidthPackageId }).(pulumi.StringPtrOutput)
+}
+
+// Network billing method. Optional value is `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+func (o NativeNodePoolNativeInternetAccessibleOutput) ChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeInternetAccessible) string { return v.ChargeType }).(pulumi.StringOutput)
+}
+
+// Maximum bandwidth output. Note: When chargeType is `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_POSTPAID_BY_HOUR`, the valid range is 1~100. When chargeType is `BANDWIDTH_PACKAG`, the valid range is 1~2000.
+func (o NativeNodePoolNativeInternetAccessibleOutput) MaxBandwidthOut() pulumi.IntOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeInternetAccessible) int { return v.MaxBandwidthOut }).(pulumi.IntOutput)
+}
+
+type NativeNodePoolNativeInternetAccessiblePtrOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolNativeInternetAccessiblePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeNodePoolNativeInternetAccessible)(nil)).Elem()
+}
+
+func (o NativeNodePoolNativeInternetAccessiblePtrOutput) ToNativeNodePoolNativeInternetAccessiblePtrOutput() NativeNodePoolNativeInternetAccessiblePtrOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeInternetAccessiblePtrOutput) ToNativeNodePoolNativeInternetAccessiblePtrOutputWithContext(ctx context.Context) NativeNodePoolNativeInternetAccessiblePtrOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeInternetAccessiblePtrOutput) Elem() NativeNodePoolNativeInternetAccessibleOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeInternetAccessible) NativeNodePoolNativeInternetAccessible {
+		if v != nil {
+			return *v
+		}
+		var ret NativeNodePoolNativeInternetAccessible
+		return ret
+	}).(NativeNodePoolNativeInternetAccessibleOutput)
+}
+
+// Bandwidth package ID. Note: When ChargeType is BANDWIDTH_PACKAG, the value cannot be empty; otherwise, the value must be empty.
+func (o NativeNodePoolNativeInternetAccessiblePtrOutput) BandwidthPackageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeInternetAccessible) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BandwidthPackageId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Network billing method. Optional value is `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+func (o NativeNodePoolNativeInternetAccessiblePtrOutput) ChargeType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeInternetAccessible) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ChargeType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Maximum bandwidth output. Note: When chargeType is `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_POSTPAID_BY_HOUR`, the valid range is 1~100. When chargeType is `BANDWIDTH_PACKAG`, the valid range is 1~2000.
+func (o NativeNodePoolNativeInternetAccessiblePtrOutput) MaxBandwidthOut() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeInternetAccessible) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.MaxBandwidthOut
+	}).(pulumi.IntPtrOutput)
+}
+
+type NativeNodePoolNativeLifecycle struct {
+	// Custom script after node initialization.
+	PostInit *string `pulumi:"postInit"`
+	// Custom script before node initialization.
+	PreInit *string `pulumi:"preInit"`
+}
+
+// NativeNodePoolNativeLifecycleInput is an input type that accepts NativeNodePoolNativeLifecycleArgs and NativeNodePoolNativeLifecycleOutput values.
+// You can construct a concrete instance of `NativeNodePoolNativeLifecycleInput` via:
+//
+//	NativeNodePoolNativeLifecycleArgs{...}
+type NativeNodePoolNativeLifecycleInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolNativeLifecycleOutput() NativeNodePoolNativeLifecycleOutput
+	ToNativeNodePoolNativeLifecycleOutputWithContext(context.Context) NativeNodePoolNativeLifecycleOutput
+}
+
+type NativeNodePoolNativeLifecycleArgs struct {
+	// Custom script after node initialization.
+	PostInit pulumi.StringPtrInput `pulumi:"postInit"`
+	// Custom script before node initialization.
+	PreInit pulumi.StringPtrInput `pulumi:"preInit"`
+}
+
+func (NativeNodePoolNativeLifecycleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolNativeLifecycle)(nil)).Elem()
+}
+
+func (i NativeNodePoolNativeLifecycleArgs) ToNativeNodePoolNativeLifecycleOutput() NativeNodePoolNativeLifecycleOutput {
+	return i.ToNativeNodePoolNativeLifecycleOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolNativeLifecycleArgs) ToNativeNodePoolNativeLifecycleOutputWithContext(ctx context.Context) NativeNodePoolNativeLifecycleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeLifecycleOutput)
+}
+
+func (i NativeNodePoolNativeLifecycleArgs) ToNativeNodePoolNativeLifecyclePtrOutput() NativeNodePoolNativeLifecyclePtrOutput {
+	return i.ToNativeNodePoolNativeLifecyclePtrOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolNativeLifecycleArgs) ToNativeNodePoolNativeLifecyclePtrOutputWithContext(ctx context.Context) NativeNodePoolNativeLifecyclePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeLifecycleOutput).ToNativeNodePoolNativeLifecyclePtrOutputWithContext(ctx)
+}
+
+// NativeNodePoolNativeLifecyclePtrInput is an input type that accepts NativeNodePoolNativeLifecycleArgs, NativeNodePoolNativeLifecyclePtr and NativeNodePoolNativeLifecyclePtrOutput values.
+// You can construct a concrete instance of `NativeNodePoolNativeLifecyclePtrInput` via:
+//
+//	        NativeNodePoolNativeLifecycleArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeNodePoolNativeLifecyclePtrInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolNativeLifecyclePtrOutput() NativeNodePoolNativeLifecyclePtrOutput
+	ToNativeNodePoolNativeLifecyclePtrOutputWithContext(context.Context) NativeNodePoolNativeLifecyclePtrOutput
+}
+
+type nativeNodePoolNativeLifecyclePtrType NativeNodePoolNativeLifecycleArgs
+
+func NativeNodePoolNativeLifecyclePtr(v *NativeNodePoolNativeLifecycleArgs) NativeNodePoolNativeLifecyclePtrInput {
+	return (*nativeNodePoolNativeLifecyclePtrType)(v)
+}
+
+func (*nativeNodePoolNativeLifecyclePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeNodePoolNativeLifecycle)(nil)).Elem()
+}
+
+func (i *nativeNodePoolNativeLifecyclePtrType) ToNativeNodePoolNativeLifecyclePtrOutput() NativeNodePoolNativeLifecyclePtrOutput {
+	return i.ToNativeNodePoolNativeLifecyclePtrOutputWithContext(context.Background())
+}
+
+func (i *nativeNodePoolNativeLifecyclePtrType) ToNativeNodePoolNativeLifecyclePtrOutputWithContext(ctx context.Context) NativeNodePoolNativeLifecyclePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeLifecyclePtrOutput)
+}
+
+type NativeNodePoolNativeLifecycleOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolNativeLifecycleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolNativeLifecycle)(nil)).Elem()
+}
+
+func (o NativeNodePoolNativeLifecycleOutput) ToNativeNodePoolNativeLifecycleOutput() NativeNodePoolNativeLifecycleOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeLifecycleOutput) ToNativeNodePoolNativeLifecycleOutputWithContext(ctx context.Context) NativeNodePoolNativeLifecycleOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeLifecycleOutput) ToNativeNodePoolNativeLifecyclePtrOutput() NativeNodePoolNativeLifecyclePtrOutput {
+	return o.ToNativeNodePoolNativeLifecyclePtrOutputWithContext(context.Background())
+}
+
+func (o NativeNodePoolNativeLifecycleOutput) ToNativeNodePoolNativeLifecyclePtrOutputWithContext(ctx context.Context) NativeNodePoolNativeLifecyclePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeNodePoolNativeLifecycle) *NativeNodePoolNativeLifecycle {
+		return &v
+	}).(NativeNodePoolNativeLifecyclePtrOutput)
+}
+
+// Custom script after node initialization.
+func (o NativeNodePoolNativeLifecycleOutput) PostInit() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeLifecycle) *string { return v.PostInit }).(pulumi.StringPtrOutput)
+}
+
+// Custom script before node initialization.
+func (o NativeNodePoolNativeLifecycleOutput) PreInit() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeLifecycle) *string { return v.PreInit }).(pulumi.StringPtrOutput)
+}
+
+type NativeNodePoolNativeLifecyclePtrOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolNativeLifecyclePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeNodePoolNativeLifecycle)(nil)).Elem()
+}
+
+func (o NativeNodePoolNativeLifecyclePtrOutput) ToNativeNodePoolNativeLifecyclePtrOutput() NativeNodePoolNativeLifecyclePtrOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeLifecyclePtrOutput) ToNativeNodePoolNativeLifecyclePtrOutputWithContext(ctx context.Context) NativeNodePoolNativeLifecyclePtrOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeLifecyclePtrOutput) Elem() NativeNodePoolNativeLifecycleOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeLifecycle) NativeNodePoolNativeLifecycle {
+		if v != nil {
+			return *v
+		}
+		var ret NativeNodePoolNativeLifecycle
+		return ret
+	}).(NativeNodePoolNativeLifecycleOutput)
+}
+
+// Custom script after node initialization.
+func (o NativeNodePoolNativeLifecyclePtrOutput) PostInit() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeLifecycle) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PostInit
+	}).(pulumi.StringPtrOutput)
+}
+
+// Custom script before node initialization.
+func (o NativeNodePoolNativeLifecyclePtrOutput) PreInit() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeLifecycle) *string {
+		if v == nil {
+			return nil
+		}
+		return v.PreInit
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeNodePoolNativeManagement struct {
+	// Hosts configuration.
+	Hosts []string `pulumi:"hosts"`
+	// Kernel parameter configuration.
+	KernelArgs []string `pulumi:"kernelArgs"`
+	// Dns configuration.
+	Nameservers []string `pulumi:"nameservers"`
+}
+
+// NativeNodePoolNativeManagementInput is an input type that accepts NativeNodePoolNativeManagementArgs and NativeNodePoolNativeManagementOutput values.
+// You can construct a concrete instance of `NativeNodePoolNativeManagementInput` via:
+//
+//	NativeNodePoolNativeManagementArgs{...}
+type NativeNodePoolNativeManagementInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolNativeManagementOutput() NativeNodePoolNativeManagementOutput
+	ToNativeNodePoolNativeManagementOutputWithContext(context.Context) NativeNodePoolNativeManagementOutput
+}
+
+type NativeNodePoolNativeManagementArgs struct {
+	// Hosts configuration.
+	Hosts pulumi.StringArrayInput `pulumi:"hosts"`
+	// Kernel parameter configuration.
+	KernelArgs pulumi.StringArrayInput `pulumi:"kernelArgs"`
+	// Dns configuration.
+	Nameservers pulumi.StringArrayInput `pulumi:"nameservers"`
+}
+
+func (NativeNodePoolNativeManagementArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolNativeManagement)(nil)).Elem()
+}
+
+func (i NativeNodePoolNativeManagementArgs) ToNativeNodePoolNativeManagementOutput() NativeNodePoolNativeManagementOutput {
+	return i.ToNativeNodePoolNativeManagementOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolNativeManagementArgs) ToNativeNodePoolNativeManagementOutputWithContext(ctx context.Context) NativeNodePoolNativeManagementOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeManagementOutput)
+}
+
+func (i NativeNodePoolNativeManagementArgs) ToNativeNodePoolNativeManagementPtrOutput() NativeNodePoolNativeManagementPtrOutput {
+	return i.ToNativeNodePoolNativeManagementPtrOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolNativeManagementArgs) ToNativeNodePoolNativeManagementPtrOutputWithContext(ctx context.Context) NativeNodePoolNativeManagementPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeManagementOutput).ToNativeNodePoolNativeManagementPtrOutputWithContext(ctx)
+}
+
+// NativeNodePoolNativeManagementPtrInput is an input type that accepts NativeNodePoolNativeManagementArgs, NativeNodePoolNativeManagementPtr and NativeNodePoolNativeManagementPtrOutput values.
+// You can construct a concrete instance of `NativeNodePoolNativeManagementPtrInput` via:
+//
+//	        NativeNodePoolNativeManagementArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeNodePoolNativeManagementPtrInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolNativeManagementPtrOutput() NativeNodePoolNativeManagementPtrOutput
+	ToNativeNodePoolNativeManagementPtrOutputWithContext(context.Context) NativeNodePoolNativeManagementPtrOutput
+}
+
+type nativeNodePoolNativeManagementPtrType NativeNodePoolNativeManagementArgs
+
+func NativeNodePoolNativeManagementPtr(v *NativeNodePoolNativeManagementArgs) NativeNodePoolNativeManagementPtrInput {
+	return (*nativeNodePoolNativeManagementPtrType)(v)
+}
+
+func (*nativeNodePoolNativeManagementPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeNodePoolNativeManagement)(nil)).Elem()
+}
+
+func (i *nativeNodePoolNativeManagementPtrType) ToNativeNodePoolNativeManagementPtrOutput() NativeNodePoolNativeManagementPtrOutput {
+	return i.ToNativeNodePoolNativeManagementPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeNodePoolNativeManagementPtrType) ToNativeNodePoolNativeManagementPtrOutputWithContext(ctx context.Context) NativeNodePoolNativeManagementPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeManagementPtrOutput)
+}
+
+type NativeNodePoolNativeManagementOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolNativeManagementOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolNativeManagement)(nil)).Elem()
+}
+
+func (o NativeNodePoolNativeManagementOutput) ToNativeNodePoolNativeManagementOutput() NativeNodePoolNativeManagementOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeManagementOutput) ToNativeNodePoolNativeManagementOutputWithContext(ctx context.Context) NativeNodePoolNativeManagementOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeManagementOutput) ToNativeNodePoolNativeManagementPtrOutput() NativeNodePoolNativeManagementPtrOutput {
+	return o.ToNativeNodePoolNativeManagementPtrOutputWithContext(context.Background())
+}
+
+func (o NativeNodePoolNativeManagementOutput) ToNativeNodePoolNativeManagementPtrOutputWithContext(ctx context.Context) NativeNodePoolNativeManagementPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeNodePoolNativeManagement) *NativeNodePoolNativeManagement {
+		return &v
+	}).(NativeNodePoolNativeManagementPtrOutput)
+}
+
+// Hosts configuration.
+func (o NativeNodePoolNativeManagementOutput) Hosts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeManagement) []string { return v.Hosts }).(pulumi.StringArrayOutput)
+}
+
+// Kernel parameter configuration.
+func (o NativeNodePoolNativeManagementOutput) KernelArgs() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeManagement) []string { return v.KernelArgs }).(pulumi.StringArrayOutput)
+}
+
+// Dns configuration.
+func (o NativeNodePoolNativeManagementOutput) Nameservers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeManagement) []string { return v.Nameservers }).(pulumi.StringArrayOutput)
+}
+
+type NativeNodePoolNativeManagementPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolNativeManagementPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeNodePoolNativeManagement)(nil)).Elem()
+}
+
+func (o NativeNodePoolNativeManagementPtrOutput) ToNativeNodePoolNativeManagementPtrOutput() NativeNodePoolNativeManagementPtrOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeManagementPtrOutput) ToNativeNodePoolNativeManagementPtrOutputWithContext(ctx context.Context) NativeNodePoolNativeManagementPtrOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeManagementPtrOutput) Elem() NativeNodePoolNativeManagementOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeManagement) NativeNodePoolNativeManagement {
+		if v != nil {
+			return *v
+		}
+		var ret NativeNodePoolNativeManagement
+		return ret
+	}).(NativeNodePoolNativeManagementOutput)
+}
+
+// Hosts configuration.
+func (o NativeNodePoolNativeManagementPtrOutput) Hosts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeManagement) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Hosts
+	}).(pulumi.StringArrayOutput)
+}
+
+// Kernel parameter configuration.
+func (o NativeNodePoolNativeManagementPtrOutput) KernelArgs() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeManagement) []string {
+		if v == nil {
+			return nil
+		}
+		return v.KernelArgs
+	}).(pulumi.StringArrayOutput)
+}
+
+// Dns configuration.
+func (o NativeNodePoolNativeManagementPtrOutput) Nameservers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeManagement) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Nameservers
+	}).(pulumi.StringArrayOutput)
+}
+
+type NativeNodePoolNativeScaling struct {
+	// Node pool expansion strategy. `ZoneEquality`: multiple availability zones are broken up; `ZonePriority`: the preferred availability zone takes precedence.
+	CreatePolicy *string `pulumi:"createPolicy"`
+	// Maximum number of replicas in node pool.
+	MaxReplicas *int `pulumi:"maxReplicas"`
+	// Minimum number of replicas in node pool.
+	MinReplicas *int `pulumi:"minReplicas"`
+}
+
+// NativeNodePoolNativeScalingInput is an input type that accepts NativeNodePoolNativeScalingArgs and NativeNodePoolNativeScalingOutput values.
+// You can construct a concrete instance of `NativeNodePoolNativeScalingInput` via:
+//
+//	NativeNodePoolNativeScalingArgs{...}
+type NativeNodePoolNativeScalingInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolNativeScalingOutput() NativeNodePoolNativeScalingOutput
+	ToNativeNodePoolNativeScalingOutputWithContext(context.Context) NativeNodePoolNativeScalingOutput
+}
+
+type NativeNodePoolNativeScalingArgs struct {
+	// Node pool expansion strategy. `ZoneEquality`: multiple availability zones are broken up; `ZonePriority`: the preferred availability zone takes precedence.
+	CreatePolicy pulumi.StringPtrInput `pulumi:"createPolicy"`
+	// Maximum number of replicas in node pool.
+	MaxReplicas pulumi.IntPtrInput `pulumi:"maxReplicas"`
+	// Minimum number of replicas in node pool.
+	MinReplicas pulumi.IntPtrInput `pulumi:"minReplicas"`
+}
+
+func (NativeNodePoolNativeScalingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolNativeScaling)(nil)).Elem()
+}
+
+func (i NativeNodePoolNativeScalingArgs) ToNativeNodePoolNativeScalingOutput() NativeNodePoolNativeScalingOutput {
+	return i.ToNativeNodePoolNativeScalingOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolNativeScalingArgs) ToNativeNodePoolNativeScalingOutputWithContext(ctx context.Context) NativeNodePoolNativeScalingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeScalingOutput)
+}
+
+func (i NativeNodePoolNativeScalingArgs) ToNativeNodePoolNativeScalingPtrOutput() NativeNodePoolNativeScalingPtrOutput {
+	return i.ToNativeNodePoolNativeScalingPtrOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolNativeScalingArgs) ToNativeNodePoolNativeScalingPtrOutputWithContext(ctx context.Context) NativeNodePoolNativeScalingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeScalingOutput).ToNativeNodePoolNativeScalingPtrOutputWithContext(ctx)
+}
+
+// NativeNodePoolNativeScalingPtrInput is an input type that accepts NativeNodePoolNativeScalingArgs, NativeNodePoolNativeScalingPtr and NativeNodePoolNativeScalingPtrOutput values.
+// You can construct a concrete instance of `NativeNodePoolNativeScalingPtrInput` via:
+//
+//	        NativeNodePoolNativeScalingArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeNodePoolNativeScalingPtrInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolNativeScalingPtrOutput() NativeNodePoolNativeScalingPtrOutput
+	ToNativeNodePoolNativeScalingPtrOutputWithContext(context.Context) NativeNodePoolNativeScalingPtrOutput
+}
+
+type nativeNodePoolNativeScalingPtrType NativeNodePoolNativeScalingArgs
+
+func NativeNodePoolNativeScalingPtr(v *NativeNodePoolNativeScalingArgs) NativeNodePoolNativeScalingPtrInput {
+	return (*nativeNodePoolNativeScalingPtrType)(v)
+}
+
+func (*nativeNodePoolNativeScalingPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeNodePoolNativeScaling)(nil)).Elem()
+}
+
+func (i *nativeNodePoolNativeScalingPtrType) ToNativeNodePoolNativeScalingPtrOutput() NativeNodePoolNativeScalingPtrOutput {
+	return i.ToNativeNodePoolNativeScalingPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeNodePoolNativeScalingPtrType) ToNativeNodePoolNativeScalingPtrOutputWithContext(ctx context.Context) NativeNodePoolNativeScalingPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeScalingPtrOutput)
+}
+
+type NativeNodePoolNativeScalingOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolNativeScalingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolNativeScaling)(nil)).Elem()
+}
+
+func (o NativeNodePoolNativeScalingOutput) ToNativeNodePoolNativeScalingOutput() NativeNodePoolNativeScalingOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeScalingOutput) ToNativeNodePoolNativeScalingOutputWithContext(ctx context.Context) NativeNodePoolNativeScalingOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeScalingOutput) ToNativeNodePoolNativeScalingPtrOutput() NativeNodePoolNativeScalingPtrOutput {
+	return o.ToNativeNodePoolNativeScalingPtrOutputWithContext(context.Background())
+}
+
+func (o NativeNodePoolNativeScalingOutput) ToNativeNodePoolNativeScalingPtrOutputWithContext(ctx context.Context) NativeNodePoolNativeScalingPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeNodePoolNativeScaling) *NativeNodePoolNativeScaling {
+		return &v
+	}).(NativeNodePoolNativeScalingPtrOutput)
+}
+
+// Node pool expansion strategy. `ZoneEquality`: multiple availability zones are broken up; `ZonePriority`: the preferred availability zone takes precedence.
+func (o NativeNodePoolNativeScalingOutput) CreatePolicy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeScaling) *string { return v.CreatePolicy }).(pulumi.StringPtrOutput)
+}
+
+// Maximum number of replicas in node pool.
+func (o NativeNodePoolNativeScalingOutput) MaxReplicas() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeScaling) *int { return v.MaxReplicas }).(pulumi.IntPtrOutput)
+}
+
+// Minimum number of replicas in node pool.
+func (o NativeNodePoolNativeScalingOutput) MinReplicas() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeScaling) *int { return v.MinReplicas }).(pulumi.IntPtrOutput)
+}
+
+type NativeNodePoolNativeScalingPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolNativeScalingPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeNodePoolNativeScaling)(nil)).Elem()
+}
+
+func (o NativeNodePoolNativeScalingPtrOutput) ToNativeNodePoolNativeScalingPtrOutput() NativeNodePoolNativeScalingPtrOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeScalingPtrOutput) ToNativeNodePoolNativeScalingPtrOutputWithContext(ctx context.Context) NativeNodePoolNativeScalingPtrOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeScalingPtrOutput) Elem() NativeNodePoolNativeScalingOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeScaling) NativeNodePoolNativeScaling {
+		if v != nil {
+			return *v
+		}
+		var ret NativeNodePoolNativeScaling
+		return ret
+	}).(NativeNodePoolNativeScalingOutput)
+}
+
+// Node pool expansion strategy. `ZoneEquality`: multiple availability zones are broken up; `ZonePriority`: the preferred availability zone takes precedence.
+func (o NativeNodePoolNativeScalingPtrOutput) CreatePolicy() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeScaling) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CreatePolicy
+	}).(pulumi.StringPtrOutput)
+}
+
+// Maximum number of replicas in node pool.
+func (o NativeNodePoolNativeScalingPtrOutput) MaxReplicas() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeScaling) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MaxReplicas
+	}).(pulumi.IntPtrOutput)
+}
+
+// Minimum number of replicas in node pool.
+func (o NativeNodePoolNativeScalingPtrOutput) MinReplicas() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeScaling) *int {
+		if v == nil {
+			return nil
+		}
+		return v.MinReplicas
+	}).(pulumi.IntPtrOutput)
+}
+
+type NativeNodePoolNativeSystemDisk struct {
+	// Cloud disk size (G).
+	DiskSize int `pulumi:"diskSize"`
+	// Cloud disk type. Valid values: `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: cloud SSD disk, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD.
+	DiskType string `pulumi:"diskType"`
+}
+
+// NativeNodePoolNativeSystemDiskInput is an input type that accepts NativeNodePoolNativeSystemDiskArgs and NativeNodePoolNativeSystemDiskOutput values.
+// You can construct a concrete instance of `NativeNodePoolNativeSystemDiskInput` via:
+//
+//	NativeNodePoolNativeSystemDiskArgs{...}
+type NativeNodePoolNativeSystemDiskInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolNativeSystemDiskOutput() NativeNodePoolNativeSystemDiskOutput
+	ToNativeNodePoolNativeSystemDiskOutputWithContext(context.Context) NativeNodePoolNativeSystemDiskOutput
+}
+
+type NativeNodePoolNativeSystemDiskArgs struct {
+	// Cloud disk size (G).
+	DiskSize pulumi.IntInput `pulumi:"diskSize"`
+	// Cloud disk type. Valid values: `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: cloud SSD disk, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+}
+
+func (NativeNodePoolNativeSystemDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolNativeSystemDisk)(nil)).Elem()
+}
+
+func (i NativeNodePoolNativeSystemDiskArgs) ToNativeNodePoolNativeSystemDiskOutput() NativeNodePoolNativeSystemDiskOutput {
+	return i.ToNativeNodePoolNativeSystemDiskOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolNativeSystemDiskArgs) ToNativeNodePoolNativeSystemDiskOutputWithContext(ctx context.Context) NativeNodePoolNativeSystemDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeSystemDiskOutput)
+}
+
+func (i NativeNodePoolNativeSystemDiskArgs) ToNativeNodePoolNativeSystemDiskPtrOutput() NativeNodePoolNativeSystemDiskPtrOutput {
+	return i.ToNativeNodePoolNativeSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolNativeSystemDiskArgs) ToNativeNodePoolNativeSystemDiskPtrOutputWithContext(ctx context.Context) NativeNodePoolNativeSystemDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeSystemDiskOutput).ToNativeNodePoolNativeSystemDiskPtrOutputWithContext(ctx)
+}
+
+// NativeNodePoolNativeSystemDiskPtrInput is an input type that accepts NativeNodePoolNativeSystemDiskArgs, NativeNodePoolNativeSystemDiskPtr and NativeNodePoolNativeSystemDiskPtrOutput values.
+// You can construct a concrete instance of `NativeNodePoolNativeSystemDiskPtrInput` via:
+//
+//	        NativeNodePoolNativeSystemDiskArgs{...}
+//
+//	or:
+//
+//	        nil
+type NativeNodePoolNativeSystemDiskPtrInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolNativeSystemDiskPtrOutput() NativeNodePoolNativeSystemDiskPtrOutput
+	ToNativeNodePoolNativeSystemDiskPtrOutputWithContext(context.Context) NativeNodePoolNativeSystemDiskPtrOutput
+}
+
+type nativeNodePoolNativeSystemDiskPtrType NativeNodePoolNativeSystemDiskArgs
+
+func NativeNodePoolNativeSystemDiskPtr(v *NativeNodePoolNativeSystemDiskArgs) NativeNodePoolNativeSystemDiskPtrInput {
+	return (*nativeNodePoolNativeSystemDiskPtrType)(v)
+}
+
+func (*nativeNodePoolNativeSystemDiskPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeNodePoolNativeSystemDisk)(nil)).Elem()
+}
+
+func (i *nativeNodePoolNativeSystemDiskPtrType) ToNativeNodePoolNativeSystemDiskPtrOutput() NativeNodePoolNativeSystemDiskPtrOutput {
+	return i.ToNativeNodePoolNativeSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (i *nativeNodePoolNativeSystemDiskPtrType) ToNativeNodePoolNativeSystemDiskPtrOutputWithContext(ctx context.Context) NativeNodePoolNativeSystemDiskPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolNativeSystemDiskPtrOutput)
+}
+
+type NativeNodePoolNativeSystemDiskOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolNativeSystemDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolNativeSystemDisk)(nil)).Elem()
+}
+
+func (o NativeNodePoolNativeSystemDiskOutput) ToNativeNodePoolNativeSystemDiskOutput() NativeNodePoolNativeSystemDiskOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeSystemDiskOutput) ToNativeNodePoolNativeSystemDiskOutputWithContext(ctx context.Context) NativeNodePoolNativeSystemDiskOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeSystemDiskOutput) ToNativeNodePoolNativeSystemDiskPtrOutput() NativeNodePoolNativeSystemDiskPtrOutput {
+	return o.ToNativeNodePoolNativeSystemDiskPtrOutputWithContext(context.Background())
+}
+
+func (o NativeNodePoolNativeSystemDiskOutput) ToNativeNodePoolNativeSystemDiskPtrOutputWithContext(ctx context.Context) NativeNodePoolNativeSystemDiskPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v NativeNodePoolNativeSystemDisk) *NativeNodePoolNativeSystemDisk {
+		return &v
+	}).(NativeNodePoolNativeSystemDiskPtrOutput)
+}
+
+// Cloud disk size (G).
+func (o NativeNodePoolNativeSystemDiskOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeSystemDisk) int { return v.DiskSize }).(pulumi.IntOutput)
+}
+
+// Cloud disk type. Valid values: `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: cloud SSD disk, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD.
+func (o NativeNodePoolNativeSystemDiskOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v NativeNodePoolNativeSystemDisk) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+type NativeNodePoolNativeSystemDiskPtrOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolNativeSystemDiskPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**NativeNodePoolNativeSystemDisk)(nil)).Elem()
+}
+
+func (o NativeNodePoolNativeSystemDiskPtrOutput) ToNativeNodePoolNativeSystemDiskPtrOutput() NativeNodePoolNativeSystemDiskPtrOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeSystemDiskPtrOutput) ToNativeNodePoolNativeSystemDiskPtrOutputWithContext(ctx context.Context) NativeNodePoolNativeSystemDiskPtrOutput {
+	return o
+}
+
+func (o NativeNodePoolNativeSystemDiskPtrOutput) Elem() NativeNodePoolNativeSystemDiskOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeSystemDisk) NativeNodePoolNativeSystemDisk {
+		if v != nil {
+			return *v
+		}
+		var ret NativeNodePoolNativeSystemDisk
+		return ret
+	}).(NativeNodePoolNativeSystemDiskOutput)
+}
+
+// Cloud disk size (G).
+func (o NativeNodePoolNativeSystemDiskPtrOutput) DiskSize() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeSystemDisk) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.DiskSize
+	}).(pulumi.IntPtrOutput)
+}
+
+// Cloud disk type. Valid values: `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: cloud SSD disk, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD.
+func (o NativeNodePoolNativeSystemDiskPtrOutput) DiskType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNativeSystemDisk) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.DiskType
+	}).(pulumi.StringPtrOutput)
+}
+
+type NativeNodePoolTag struct {
+	// The resource type bound to the label.
+	ResourceType *string `pulumi:"resourceType"`
+	// Tag pair list.
+	Tags []NativeNodePoolTagTag `pulumi:"tags"`
+}
+
+// NativeNodePoolTagInput is an input type that accepts NativeNodePoolTagArgs and NativeNodePoolTagOutput values.
+// You can construct a concrete instance of `NativeNodePoolTagInput` via:
+//
+//	NativeNodePoolTagArgs{...}
+type NativeNodePoolTagInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolTagOutput() NativeNodePoolTagOutput
+	ToNativeNodePoolTagOutputWithContext(context.Context) NativeNodePoolTagOutput
+}
+
+type NativeNodePoolTagArgs struct {
+	// The resource type bound to the label.
+	ResourceType pulumi.StringPtrInput `pulumi:"resourceType"`
+	// Tag pair list.
+	Tags NativeNodePoolTagTagArrayInput `pulumi:"tags"`
+}
+
+func (NativeNodePoolTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolTag)(nil)).Elem()
+}
+
+func (i NativeNodePoolTagArgs) ToNativeNodePoolTagOutput() NativeNodePoolTagOutput {
+	return i.ToNativeNodePoolTagOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolTagArgs) ToNativeNodePoolTagOutputWithContext(ctx context.Context) NativeNodePoolTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolTagOutput)
+}
+
+// NativeNodePoolTagArrayInput is an input type that accepts NativeNodePoolTagArray and NativeNodePoolTagArrayOutput values.
+// You can construct a concrete instance of `NativeNodePoolTagArrayInput` via:
+//
+//	NativeNodePoolTagArray{ NativeNodePoolTagArgs{...} }
+type NativeNodePoolTagArrayInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolTagArrayOutput() NativeNodePoolTagArrayOutput
+	ToNativeNodePoolTagArrayOutputWithContext(context.Context) NativeNodePoolTagArrayOutput
+}
+
+type NativeNodePoolTagArray []NativeNodePoolTagInput
+
+func (NativeNodePoolTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NativeNodePoolTag)(nil)).Elem()
+}
+
+func (i NativeNodePoolTagArray) ToNativeNodePoolTagArrayOutput() NativeNodePoolTagArrayOutput {
+	return i.ToNativeNodePoolTagArrayOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolTagArray) ToNativeNodePoolTagArrayOutputWithContext(ctx context.Context) NativeNodePoolTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolTagArrayOutput)
+}
+
+type NativeNodePoolTagOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolTag)(nil)).Elem()
+}
+
+func (o NativeNodePoolTagOutput) ToNativeNodePoolTagOutput() NativeNodePoolTagOutput {
+	return o
+}
+
+func (o NativeNodePoolTagOutput) ToNativeNodePoolTagOutputWithContext(ctx context.Context) NativeNodePoolTagOutput {
+	return o
+}
+
+// The resource type bound to the label.
+func (o NativeNodePoolTagOutput) ResourceType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolTag) *string { return v.ResourceType }).(pulumi.StringPtrOutput)
+}
+
+// Tag pair list.
+func (o NativeNodePoolTagOutput) Tags() NativeNodePoolTagTagArrayOutput {
+	return o.ApplyT(func(v NativeNodePoolTag) []NativeNodePoolTagTag { return v.Tags }).(NativeNodePoolTagTagArrayOutput)
+}
+
+type NativeNodePoolTagArrayOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NativeNodePoolTag)(nil)).Elem()
+}
+
+func (o NativeNodePoolTagArrayOutput) ToNativeNodePoolTagArrayOutput() NativeNodePoolTagArrayOutput {
+	return o
+}
+
+func (o NativeNodePoolTagArrayOutput) ToNativeNodePoolTagArrayOutputWithContext(ctx context.Context) NativeNodePoolTagArrayOutput {
+	return o
+}
+
+func (o NativeNodePoolTagArrayOutput) Index(i pulumi.IntInput) NativeNodePoolTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NativeNodePoolTag {
+		return vs[0].([]NativeNodePoolTag)[vs[1].(int)]
+	}).(NativeNodePoolTagOutput)
+}
+
+type NativeNodePoolTagTag struct {
+	// Tag Key.
+	Key *string `pulumi:"key"`
+	// Tag Value.
+	Value *string `pulumi:"value"`
+}
+
+// NativeNodePoolTagTagInput is an input type that accepts NativeNodePoolTagTagArgs and NativeNodePoolTagTagOutput values.
+// You can construct a concrete instance of `NativeNodePoolTagTagInput` via:
+//
+//	NativeNodePoolTagTagArgs{...}
+type NativeNodePoolTagTagInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolTagTagOutput() NativeNodePoolTagTagOutput
+	ToNativeNodePoolTagTagOutputWithContext(context.Context) NativeNodePoolTagTagOutput
+}
+
+type NativeNodePoolTagTagArgs struct {
+	// Tag Key.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Tag Value.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (NativeNodePoolTagTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolTagTag)(nil)).Elem()
+}
+
+func (i NativeNodePoolTagTagArgs) ToNativeNodePoolTagTagOutput() NativeNodePoolTagTagOutput {
+	return i.ToNativeNodePoolTagTagOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolTagTagArgs) ToNativeNodePoolTagTagOutputWithContext(ctx context.Context) NativeNodePoolTagTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolTagTagOutput)
+}
+
+// NativeNodePoolTagTagArrayInput is an input type that accepts NativeNodePoolTagTagArray and NativeNodePoolTagTagArrayOutput values.
+// You can construct a concrete instance of `NativeNodePoolTagTagArrayInput` via:
+//
+//	NativeNodePoolTagTagArray{ NativeNodePoolTagTagArgs{...} }
+type NativeNodePoolTagTagArrayInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolTagTagArrayOutput() NativeNodePoolTagTagArrayOutput
+	ToNativeNodePoolTagTagArrayOutputWithContext(context.Context) NativeNodePoolTagTagArrayOutput
+}
+
+type NativeNodePoolTagTagArray []NativeNodePoolTagTagInput
+
+func (NativeNodePoolTagTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NativeNodePoolTagTag)(nil)).Elem()
+}
+
+func (i NativeNodePoolTagTagArray) ToNativeNodePoolTagTagArrayOutput() NativeNodePoolTagTagArrayOutput {
+	return i.ToNativeNodePoolTagTagArrayOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolTagTagArray) ToNativeNodePoolTagTagArrayOutputWithContext(ctx context.Context) NativeNodePoolTagTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolTagTagArrayOutput)
+}
+
+type NativeNodePoolTagTagOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolTagTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolTagTag)(nil)).Elem()
+}
+
+func (o NativeNodePoolTagTagOutput) ToNativeNodePoolTagTagOutput() NativeNodePoolTagTagOutput {
+	return o
+}
+
+func (o NativeNodePoolTagTagOutput) ToNativeNodePoolTagTagOutputWithContext(ctx context.Context) NativeNodePoolTagTagOutput {
+	return o
+}
+
+// Tag Key.
+func (o NativeNodePoolTagTagOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolTagTag) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Tag Value.
+func (o NativeNodePoolTagTagOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolTagTag) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type NativeNodePoolTagTagArrayOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolTagTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NativeNodePoolTagTag)(nil)).Elem()
+}
+
+func (o NativeNodePoolTagTagArrayOutput) ToNativeNodePoolTagTagArrayOutput() NativeNodePoolTagTagArrayOutput {
+	return o
+}
+
+func (o NativeNodePoolTagTagArrayOutput) ToNativeNodePoolTagTagArrayOutputWithContext(ctx context.Context) NativeNodePoolTagTagArrayOutput {
+	return o
+}
+
+func (o NativeNodePoolTagTagArrayOutput) Index(i pulumi.IntInput) NativeNodePoolTagTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NativeNodePoolTagTag {
+		return vs[0].([]NativeNodePoolTagTag)[vs[1].(int)]
+	}).(NativeNodePoolTagTagOutput)
+}
+
+type NativeNodePoolTaint struct {
+	// Effect of the taint.
+	Effect *string `pulumi:"effect"`
+	// Key of the taint.
+	Key *string `pulumi:"key"`
+	// Value of the taint.
+	Value *string `pulumi:"value"`
+}
+
+// NativeNodePoolTaintInput is an input type that accepts NativeNodePoolTaintArgs and NativeNodePoolTaintOutput values.
+// You can construct a concrete instance of `NativeNodePoolTaintInput` via:
+//
+//	NativeNodePoolTaintArgs{...}
+type NativeNodePoolTaintInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolTaintOutput() NativeNodePoolTaintOutput
+	ToNativeNodePoolTaintOutputWithContext(context.Context) NativeNodePoolTaintOutput
+}
+
+type NativeNodePoolTaintArgs struct {
+	// Effect of the taint.
+	Effect pulumi.StringPtrInput `pulumi:"effect"`
+	// Key of the taint.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Value of the taint.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (NativeNodePoolTaintArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolTaint)(nil)).Elem()
+}
+
+func (i NativeNodePoolTaintArgs) ToNativeNodePoolTaintOutput() NativeNodePoolTaintOutput {
+	return i.ToNativeNodePoolTaintOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolTaintArgs) ToNativeNodePoolTaintOutputWithContext(ctx context.Context) NativeNodePoolTaintOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolTaintOutput)
+}
+
+// NativeNodePoolTaintArrayInput is an input type that accepts NativeNodePoolTaintArray and NativeNodePoolTaintArrayOutput values.
+// You can construct a concrete instance of `NativeNodePoolTaintArrayInput` via:
+//
+//	NativeNodePoolTaintArray{ NativeNodePoolTaintArgs{...} }
+type NativeNodePoolTaintArrayInput interface {
+	pulumi.Input
+
+	ToNativeNodePoolTaintArrayOutput() NativeNodePoolTaintArrayOutput
+	ToNativeNodePoolTaintArrayOutputWithContext(context.Context) NativeNodePoolTaintArrayOutput
+}
+
+type NativeNodePoolTaintArray []NativeNodePoolTaintInput
+
+func (NativeNodePoolTaintArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NativeNodePoolTaint)(nil)).Elem()
+}
+
+func (i NativeNodePoolTaintArray) ToNativeNodePoolTaintArrayOutput() NativeNodePoolTaintArrayOutput {
+	return i.ToNativeNodePoolTaintArrayOutputWithContext(context.Background())
+}
+
+func (i NativeNodePoolTaintArray) ToNativeNodePoolTaintArrayOutputWithContext(ctx context.Context) NativeNodePoolTaintArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(NativeNodePoolTaintArrayOutput)
+}
+
+type NativeNodePoolTaintOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolTaintOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*NativeNodePoolTaint)(nil)).Elem()
+}
+
+func (o NativeNodePoolTaintOutput) ToNativeNodePoolTaintOutput() NativeNodePoolTaintOutput {
+	return o
+}
+
+func (o NativeNodePoolTaintOutput) ToNativeNodePoolTaintOutputWithContext(ctx context.Context) NativeNodePoolTaintOutput {
+	return o
+}
+
+// Effect of the taint.
+func (o NativeNodePoolTaintOutput) Effect() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolTaint) *string { return v.Effect }).(pulumi.StringPtrOutput)
+}
+
+// Key of the taint.
+func (o NativeNodePoolTaintOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolTaint) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Value of the taint.
+func (o NativeNodePoolTaintOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolTaint) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type NativeNodePoolTaintArrayOutput struct{ *pulumi.OutputState }
+
+func (NativeNodePoolTaintArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]NativeNodePoolTaint)(nil)).Elem()
+}
+
+func (o NativeNodePoolTaintArrayOutput) ToNativeNodePoolTaintArrayOutput() NativeNodePoolTaintArrayOutput {
+	return o
+}
+
+func (o NativeNodePoolTaintArrayOutput) ToNativeNodePoolTaintArrayOutputWithContext(ctx context.Context) NativeNodePoolTaintArrayOutput {
+	return o
+}
+
+func (o NativeNodePoolTaintArrayOutput) Index(i pulumi.IntInput) NativeNodePoolTaintOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) NativeNodePoolTaint {
+		return vs[0].([]NativeNodePoolTaint)[vs[1].(int)]
+	}).(NativeNodePoolTaintOutput)
 }
 
 type NodePoolAutoScalingConfig struct {
@@ -9264,6 +11455,1972 @@ func (o GetClusterLevelsListArrayOutput) Index(i pulumi.IntInput) GetClusterLeve
 	}).(GetClusterLevelsListOutput)
 }
 
+type GetClusterNativeNodePoolsFilter struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name string `pulumi:"name"`
+	// Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+	Values []string `pulumi:"values"`
+}
+
+// GetClusterNativeNodePoolsFilterInput is an input type that accepts GetClusterNativeNodePoolsFilterArgs and GetClusterNativeNodePoolsFilterOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsFilterInput` via:
+//
+//	GetClusterNativeNodePoolsFilterArgs{...}
+type GetClusterNativeNodePoolsFilterInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsFilterOutput() GetClusterNativeNodePoolsFilterOutput
+	ToGetClusterNativeNodePoolsFilterOutputWithContext(context.Context) GetClusterNativeNodePoolsFilterOutput
+}
+
+type GetClusterNativeNodePoolsFilterArgs struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetClusterNativeNodePoolsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsFilter)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsFilterArgs) ToGetClusterNativeNodePoolsFilterOutput() GetClusterNativeNodePoolsFilterOutput {
+	return i.ToGetClusterNativeNodePoolsFilterOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsFilterArgs) ToGetClusterNativeNodePoolsFilterOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsFilterOutput)
+}
+
+// GetClusterNativeNodePoolsFilterArrayInput is an input type that accepts GetClusterNativeNodePoolsFilterArray and GetClusterNativeNodePoolsFilterArrayOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsFilterArrayInput` via:
+//
+//	GetClusterNativeNodePoolsFilterArray{ GetClusterNativeNodePoolsFilterArgs{...} }
+type GetClusterNativeNodePoolsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsFilterArrayOutput() GetClusterNativeNodePoolsFilterArrayOutput
+	ToGetClusterNativeNodePoolsFilterArrayOutputWithContext(context.Context) GetClusterNativeNodePoolsFilterArrayOutput
+}
+
+type GetClusterNativeNodePoolsFilterArray []GetClusterNativeNodePoolsFilterInput
+
+func (GetClusterNativeNodePoolsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsFilter)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsFilterArray) ToGetClusterNativeNodePoolsFilterArrayOutput() GetClusterNativeNodePoolsFilterArrayOutput {
+	return i.ToGetClusterNativeNodePoolsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsFilterArray) ToGetClusterNativeNodePoolsFilterArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsFilterArrayOutput)
+}
+
+type GetClusterNativeNodePoolsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsFilter)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsFilterOutput) ToGetClusterNativeNodePoolsFilterOutput() GetClusterNativeNodePoolsFilterOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsFilterOutput) ToGetClusterNativeNodePoolsFilterOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsFilterOutput {
+	return o
+}
+
+// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+func (o GetClusterNativeNodePoolsFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+func (o GetClusterNativeNodePoolsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetClusterNativeNodePoolsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsFilter)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsFilterArrayOutput) ToGetClusterNativeNodePoolsFilterArrayOutput() GetClusterNativeNodePoolsFilterArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsFilterArrayOutput) ToGetClusterNativeNodePoolsFilterArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsFilterArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsFilterArrayOutput) Index(i pulumi.IntInput) GetClusterNativeNodePoolsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNativeNodePoolsFilter {
+		return vs[0].([]GetClusterNativeNodePoolsFilter)[vs[1].(int)]
+	}).(GetClusterNativeNodePoolsFilterOutput)
+}
+
+type GetClusterNativeNodePoolsNodePool struct {
+	// Node Annotation List.
+	Annotations []GetClusterNativeNodePoolsNodePoolAnnotation `pulumi:"annotations"`
+	// ID of the cluster.
+	ClusterId string `pulumi:"clusterId"`
+	// Creation time.
+	CreatedAt string `pulumi:"createdAt"`
+	// Whether to enable deletion protection.
+	DeletionProtection bool `pulumi:"deletionProtection"`
+	// Node Labels.
+	Labels []GetClusterNativeNodePoolsNodePoolLabel `pulumi:"labels"`
+	// Node pool status.
+	LifeState string `pulumi:"lifeState"`
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name string `pulumi:"name"`
+	// Native node pool creation parameters.
+	Natives []GetClusterNativeNodePoolsNodePoolNative `pulumi:"natives"`
+	// ID of the node pool.
+	NodePoolId string `pulumi:"nodePoolId"`
+	// Tag pair list.
+	Tags []GetClusterNativeNodePoolsNodePoolTag `pulumi:"tags"`
+	// node taint.
+	Taints []GetClusterNativeNodePoolsNodePoolTaint `pulumi:"taints"`
+	// Node pool type. Optional value is `Native`.
+	Type string `pulumi:"type"`
+	// Whether the node is not schedulable by default.
+	Unschedulable bool `pulumi:"unschedulable"`
+}
+
+// GetClusterNativeNodePoolsNodePoolInput is an input type that accepts GetClusterNativeNodePoolsNodePoolArgs and GetClusterNativeNodePoolsNodePoolOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolArgs{...}
+type GetClusterNativeNodePoolsNodePoolInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolOutput() GetClusterNativeNodePoolsNodePoolOutput
+	ToGetClusterNativeNodePoolsNodePoolOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolArgs struct {
+	// Node Annotation List.
+	Annotations GetClusterNativeNodePoolsNodePoolAnnotationArrayInput `pulumi:"annotations"`
+	// ID of the cluster.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
+	// Creation time.
+	CreatedAt pulumi.StringInput `pulumi:"createdAt"`
+	// Whether to enable deletion protection.
+	DeletionProtection pulumi.BoolInput `pulumi:"deletionProtection"`
+	// Node Labels.
+	Labels GetClusterNativeNodePoolsNodePoolLabelArrayInput `pulumi:"labels"`
+	// Node pool status.
+	LifeState pulumi.StringInput `pulumi:"lifeState"`
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Native node pool creation parameters.
+	Natives GetClusterNativeNodePoolsNodePoolNativeArrayInput `pulumi:"natives"`
+	// ID of the node pool.
+	NodePoolId pulumi.StringInput `pulumi:"nodePoolId"`
+	// Tag pair list.
+	Tags GetClusterNativeNodePoolsNodePoolTagArrayInput `pulumi:"tags"`
+	// node taint.
+	Taints GetClusterNativeNodePoolsNodePoolTaintArrayInput `pulumi:"taints"`
+	// Node pool type. Optional value is `Native`.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Whether the node is not schedulable by default.
+	Unschedulable pulumi.BoolInput `pulumi:"unschedulable"`
+}
+
+func (GetClusterNativeNodePoolsNodePoolArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePool)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolArgs) ToGetClusterNativeNodePoolsNodePoolOutput() GetClusterNativeNodePoolsNodePoolOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolArgs) ToGetClusterNativeNodePoolsNodePoolOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolOutput)
+}
+
+// GetClusterNativeNodePoolsNodePoolArrayInput is an input type that accepts GetClusterNativeNodePoolsNodePoolArray and GetClusterNativeNodePoolsNodePoolArrayOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolArrayInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolArray{ GetClusterNativeNodePoolsNodePoolArgs{...} }
+type GetClusterNativeNodePoolsNodePoolArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolArrayOutput() GetClusterNativeNodePoolsNodePoolArrayOutput
+	ToGetClusterNativeNodePoolsNodePoolArrayOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolArrayOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolArray []GetClusterNativeNodePoolsNodePoolInput
+
+func (GetClusterNativeNodePoolsNodePoolArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePool)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolArray) ToGetClusterNativeNodePoolsNodePoolArrayOutput() GetClusterNativeNodePoolsNodePoolArrayOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolArray) ToGetClusterNativeNodePoolsNodePoolArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePool)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolOutput) ToGetClusterNativeNodePoolsNodePoolOutput() GetClusterNativeNodePoolsNodePoolOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolOutput) ToGetClusterNativeNodePoolsNodePoolOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolOutput {
+	return o
+}
+
+// Node Annotation List.
+func (o GetClusterNativeNodePoolsNodePoolOutput) Annotations() GetClusterNativeNodePoolsNodePoolAnnotationArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePool) []GetClusterNativeNodePoolsNodePoolAnnotation {
+		return v.Annotations
+	}).(GetClusterNativeNodePoolsNodePoolAnnotationArrayOutput)
+}
+
+// ID of the cluster.
+func (o GetClusterNativeNodePoolsNodePoolOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePool) string { return v.ClusterId }).(pulumi.StringOutput)
+}
+
+// Creation time.
+func (o GetClusterNativeNodePoolsNodePoolOutput) CreatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePool) string { return v.CreatedAt }).(pulumi.StringOutput)
+}
+
+// Whether to enable deletion protection.
+func (o GetClusterNativeNodePoolsNodePoolOutput) DeletionProtection() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePool) bool { return v.DeletionProtection }).(pulumi.BoolOutput)
+}
+
+// Node Labels.
+func (o GetClusterNativeNodePoolsNodePoolOutput) Labels() GetClusterNativeNodePoolsNodePoolLabelArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePool) []GetClusterNativeNodePoolsNodePoolLabel { return v.Labels }).(GetClusterNativeNodePoolsNodePoolLabelArrayOutput)
+}
+
+// Node pool status.
+func (o GetClusterNativeNodePoolsNodePoolOutput) LifeState() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePool) string { return v.LifeState }).(pulumi.StringOutput)
+}
+
+// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+func (o GetClusterNativeNodePoolsNodePoolOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePool) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Native node pool creation parameters.
+func (o GetClusterNativeNodePoolsNodePoolOutput) Natives() GetClusterNativeNodePoolsNodePoolNativeArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePool) []GetClusterNativeNodePoolsNodePoolNative { return v.Natives }).(GetClusterNativeNodePoolsNodePoolNativeArrayOutput)
+}
+
+// ID of the node pool.
+func (o GetClusterNativeNodePoolsNodePoolOutput) NodePoolId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePool) string { return v.NodePoolId }).(pulumi.StringOutput)
+}
+
+// Tag pair list.
+func (o GetClusterNativeNodePoolsNodePoolOutput) Tags() GetClusterNativeNodePoolsNodePoolTagArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePool) []GetClusterNativeNodePoolsNodePoolTag { return v.Tags }).(GetClusterNativeNodePoolsNodePoolTagArrayOutput)
+}
+
+// node taint.
+func (o GetClusterNativeNodePoolsNodePoolOutput) Taints() GetClusterNativeNodePoolsNodePoolTaintArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePool) []GetClusterNativeNodePoolsNodePoolTaint { return v.Taints }).(GetClusterNativeNodePoolsNodePoolTaintArrayOutput)
+}
+
+// Node pool type. Optional value is `Native`.
+func (o GetClusterNativeNodePoolsNodePoolOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePool) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Whether the node is not schedulable by default.
+func (o GetClusterNativeNodePoolsNodePoolOutput) Unschedulable() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePool) bool { return v.Unschedulable }).(pulumi.BoolOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePool)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolArrayOutput) ToGetClusterNativeNodePoolsNodePoolArrayOutput() GetClusterNativeNodePoolsNodePoolArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolArrayOutput) ToGetClusterNativeNodePoolsNodePoolArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolArrayOutput) Index(i pulumi.IntInput) GetClusterNativeNodePoolsNodePoolOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNativeNodePoolsNodePool {
+		return vs[0].([]GetClusterNativeNodePoolsNodePool)[vs[1].(int)]
+	}).(GetClusterNativeNodePoolsNodePoolOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolAnnotation struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name string `pulumi:"name"`
+	// Value of the taint.
+	Value string `pulumi:"value"`
+}
+
+// GetClusterNativeNodePoolsNodePoolAnnotationInput is an input type that accepts GetClusterNativeNodePoolsNodePoolAnnotationArgs and GetClusterNativeNodePoolsNodePoolAnnotationOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolAnnotationInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolAnnotationArgs{...}
+type GetClusterNativeNodePoolsNodePoolAnnotationInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolAnnotationOutput() GetClusterNativeNodePoolsNodePoolAnnotationOutput
+	ToGetClusterNativeNodePoolsNodePoolAnnotationOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolAnnotationOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolAnnotationArgs struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Value of the taint.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetClusterNativeNodePoolsNodePoolAnnotationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolAnnotation)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolAnnotationArgs) ToGetClusterNativeNodePoolsNodePoolAnnotationOutput() GetClusterNativeNodePoolsNodePoolAnnotationOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolAnnotationOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolAnnotationArgs) ToGetClusterNativeNodePoolsNodePoolAnnotationOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolAnnotationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolAnnotationOutput)
+}
+
+// GetClusterNativeNodePoolsNodePoolAnnotationArrayInput is an input type that accepts GetClusterNativeNodePoolsNodePoolAnnotationArray and GetClusterNativeNodePoolsNodePoolAnnotationArrayOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolAnnotationArrayInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolAnnotationArray{ GetClusterNativeNodePoolsNodePoolAnnotationArgs{...} }
+type GetClusterNativeNodePoolsNodePoolAnnotationArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolAnnotationArrayOutput() GetClusterNativeNodePoolsNodePoolAnnotationArrayOutput
+	ToGetClusterNativeNodePoolsNodePoolAnnotationArrayOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolAnnotationArrayOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolAnnotationArray []GetClusterNativeNodePoolsNodePoolAnnotationInput
+
+func (GetClusterNativeNodePoolsNodePoolAnnotationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolAnnotation)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolAnnotationArray) ToGetClusterNativeNodePoolsNodePoolAnnotationArrayOutput() GetClusterNativeNodePoolsNodePoolAnnotationArrayOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolAnnotationArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolAnnotationArray) ToGetClusterNativeNodePoolsNodePoolAnnotationArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolAnnotationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolAnnotationArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolAnnotationOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolAnnotationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolAnnotation)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolAnnotationOutput) ToGetClusterNativeNodePoolsNodePoolAnnotationOutput() GetClusterNativeNodePoolsNodePoolAnnotationOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolAnnotationOutput) ToGetClusterNativeNodePoolsNodePoolAnnotationOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolAnnotationOutput {
+	return o
+}
+
+// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+func (o GetClusterNativeNodePoolsNodePoolAnnotationOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolAnnotation) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Value of the taint.
+func (o GetClusterNativeNodePoolsNodePoolAnnotationOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolAnnotation) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolAnnotationArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolAnnotationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolAnnotation)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolAnnotationArrayOutput) ToGetClusterNativeNodePoolsNodePoolAnnotationArrayOutput() GetClusterNativeNodePoolsNodePoolAnnotationArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolAnnotationArrayOutput) ToGetClusterNativeNodePoolsNodePoolAnnotationArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolAnnotationArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolAnnotationArrayOutput) Index(i pulumi.IntInput) GetClusterNativeNodePoolsNodePoolAnnotationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNativeNodePoolsNodePoolAnnotation {
+		return vs[0].([]GetClusterNativeNodePoolsNodePoolAnnotation)[vs[1].(int)]
+	}).(GetClusterNativeNodePoolsNodePoolAnnotationOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolLabel struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name string `pulumi:"name"`
+	// Value of the taint.
+	Value string `pulumi:"value"`
+}
+
+// GetClusterNativeNodePoolsNodePoolLabelInput is an input type that accepts GetClusterNativeNodePoolsNodePoolLabelArgs and GetClusterNativeNodePoolsNodePoolLabelOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolLabelInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolLabelArgs{...}
+type GetClusterNativeNodePoolsNodePoolLabelInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolLabelOutput() GetClusterNativeNodePoolsNodePoolLabelOutput
+	ToGetClusterNativeNodePoolsNodePoolLabelOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolLabelOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolLabelArgs struct {
+	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Value of the taint.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetClusterNativeNodePoolsNodePoolLabelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolLabel)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolLabelArgs) ToGetClusterNativeNodePoolsNodePoolLabelOutput() GetClusterNativeNodePoolsNodePoolLabelOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolLabelOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolLabelArgs) ToGetClusterNativeNodePoolsNodePoolLabelOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolLabelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolLabelOutput)
+}
+
+// GetClusterNativeNodePoolsNodePoolLabelArrayInput is an input type that accepts GetClusterNativeNodePoolsNodePoolLabelArray and GetClusterNativeNodePoolsNodePoolLabelArrayOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolLabelArrayInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolLabelArray{ GetClusterNativeNodePoolsNodePoolLabelArgs{...} }
+type GetClusterNativeNodePoolsNodePoolLabelArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolLabelArrayOutput() GetClusterNativeNodePoolsNodePoolLabelArrayOutput
+	ToGetClusterNativeNodePoolsNodePoolLabelArrayOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolLabelArrayOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolLabelArray []GetClusterNativeNodePoolsNodePoolLabelInput
+
+func (GetClusterNativeNodePoolsNodePoolLabelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolLabel)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolLabelArray) ToGetClusterNativeNodePoolsNodePoolLabelArrayOutput() GetClusterNativeNodePoolsNodePoolLabelArrayOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolLabelArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolLabelArray) ToGetClusterNativeNodePoolsNodePoolLabelArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolLabelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolLabelArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolLabelOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolLabelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolLabel)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolLabelOutput) ToGetClusterNativeNodePoolsNodePoolLabelOutput() GetClusterNativeNodePoolsNodePoolLabelOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolLabelOutput) ToGetClusterNativeNodePoolsNodePoolLabelOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolLabelOutput {
+	return o
+}
+
+// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+func (o GetClusterNativeNodePoolsNodePoolLabelOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolLabel) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Value of the taint.
+func (o GetClusterNativeNodePoolsNodePoolLabelOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolLabel) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolLabelArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolLabelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolLabel)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolLabelArrayOutput) ToGetClusterNativeNodePoolsNodePoolLabelArrayOutput() GetClusterNativeNodePoolsNodePoolLabelArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolLabelArrayOutput) ToGetClusterNativeNodePoolsNodePoolLabelArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolLabelArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolLabelArrayOutput) Index(i pulumi.IntInput) GetClusterNativeNodePoolsNodePoolLabelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNativeNodePoolsNodePoolLabel {
+		return vs[0].([]GetClusterNativeNodePoolsNodePoolLabel)[vs[1].(int)]
+	}).(GetClusterNativeNodePoolsNodePoolLabelOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNative struct {
+	// Whether to enable self-healing ability.
+	AutoRepair bool `pulumi:"autoRepair"`
+	// Native node pool data disk list.
+	DataDisks []GetClusterNativeNodePoolsNodePoolNativeDataDisk `pulumi:"dataDisks"`
+	// Whether to enable elastic scaling.
+	EnableAutoscaling bool `pulumi:"enableAutoscaling"`
+	// Fault self-healing rule name.
+	HealthCheckPolicyName string `pulumi:"healthCheckPolicyName"`
+	// Native node pool hostName pattern string.
+	HostNamePattern string `pulumi:"hostNamePattern"`
+	// Billing configuration for yearly and monthly models.
+	InstanceChargePrepaids []GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaid `pulumi:"instanceChargePrepaids"`
+	// Node billing type. `PREPAID` is a yearly and monthly subscription, `POSTPAID_BY_HOUR` is a pay-as-you-go plan. The default is `POSTPAID_BY_HOUR`.
+	InstanceChargeType string `pulumi:"instanceChargeType"`
+	// Model list.
+	InstanceTypes []string `pulumi:"instanceTypes"`
+	// Public network bandwidth settings.
+	InternetAccessibles []GetClusterNativeNodePoolsNodePoolNativeInternetAccessible `pulumi:"internetAccessibles"`
+	// Node pool ssh public key id array.
+	KeyIds []string `pulumi:"keyIds"`
+	// Kubelet custom parameters.
+	KubeletArgs []string `pulumi:"kubeletArgs"`
+	// Predefined scripts.
+	Lifecycles []GetClusterNativeNodePoolsNodePoolNativeLifecycle `pulumi:"lifecycles"`
+	// Node pool management parameter settings.
+	Managements []GetClusterNativeNodePoolsNodePoolNativeManagement `pulumi:"managements"`
+	// Desired number of nodes.
+	Replicas int `pulumi:"replicas"`
+	// Runtime root directory.
+	RuntimeRootDir string `pulumi:"runtimeRootDir"`
+	// Node pool scaling configuration.
+	Scalings []GetClusterNativeNodePoolsNodePoolNativeScaling `pulumi:"scalings"`
+	// Security group list.
+	SecurityGroupIds []string `pulumi:"securityGroupIds"`
+	// Subnet list.
+	SubnetIds []string `pulumi:"subnetIds"`
+	// System disk configuration.
+	SystemDisks []GetClusterNativeNodePoolsNodePoolNativeSystemDisk `pulumi:"systemDisks"`
+}
+
+// GetClusterNativeNodePoolsNodePoolNativeInput is an input type that accepts GetClusterNativeNodePoolsNodePoolNativeArgs and GetClusterNativeNodePoolsNodePoolNativeOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolNativeInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolNativeArgs{...}
+type GetClusterNativeNodePoolsNodePoolNativeInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolNativeOutput() GetClusterNativeNodePoolsNodePoolNativeOutput
+	ToGetClusterNativeNodePoolsNodePoolNativeOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolNativeOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeArgs struct {
+	// Whether to enable self-healing ability.
+	AutoRepair pulumi.BoolInput `pulumi:"autoRepair"`
+	// Native node pool data disk list.
+	DataDisks GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayInput `pulumi:"dataDisks"`
+	// Whether to enable elastic scaling.
+	EnableAutoscaling pulumi.BoolInput `pulumi:"enableAutoscaling"`
+	// Fault self-healing rule name.
+	HealthCheckPolicyName pulumi.StringInput `pulumi:"healthCheckPolicyName"`
+	// Native node pool hostName pattern string.
+	HostNamePattern pulumi.StringInput `pulumi:"hostNamePattern"`
+	// Billing configuration for yearly and monthly models.
+	InstanceChargePrepaids GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayInput `pulumi:"instanceChargePrepaids"`
+	// Node billing type. `PREPAID` is a yearly and monthly subscription, `POSTPAID_BY_HOUR` is a pay-as-you-go plan. The default is `POSTPAID_BY_HOUR`.
+	InstanceChargeType pulumi.StringInput `pulumi:"instanceChargeType"`
+	// Model list.
+	InstanceTypes pulumi.StringArrayInput `pulumi:"instanceTypes"`
+	// Public network bandwidth settings.
+	InternetAccessibles GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayInput `pulumi:"internetAccessibles"`
+	// Node pool ssh public key id array.
+	KeyIds pulumi.StringArrayInput `pulumi:"keyIds"`
+	// Kubelet custom parameters.
+	KubeletArgs pulumi.StringArrayInput `pulumi:"kubeletArgs"`
+	// Predefined scripts.
+	Lifecycles GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayInput `pulumi:"lifecycles"`
+	// Node pool management parameter settings.
+	Managements GetClusterNativeNodePoolsNodePoolNativeManagementArrayInput `pulumi:"managements"`
+	// Desired number of nodes.
+	Replicas pulumi.IntInput `pulumi:"replicas"`
+	// Runtime root directory.
+	RuntimeRootDir pulumi.StringInput `pulumi:"runtimeRootDir"`
+	// Node pool scaling configuration.
+	Scalings GetClusterNativeNodePoolsNodePoolNativeScalingArrayInput `pulumi:"scalings"`
+	// Security group list.
+	SecurityGroupIds pulumi.StringArrayInput `pulumi:"securityGroupIds"`
+	// Subnet list.
+	SubnetIds pulumi.StringArrayInput `pulumi:"subnetIds"`
+	// System disk configuration.
+	SystemDisks GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayInput `pulumi:"systemDisks"`
+}
+
+func (GetClusterNativeNodePoolsNodePoolNativeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNative)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeArgs) ToGetClusterNativeNodePoolsNodePoolNativeOutput() GetClusterNativeNodePoolsNodePoolNativeOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolNativeOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeArgs) ToGetClusterNativeNodePoolsNodePoolNativeOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolNativeOutput)
+}
+
+// GetClusterNativeNodePoolsNodePoolNativeArrayInput is an input type that accepts GetClusterNativeNodePoolsNodePoolNativeArray and GetClusterNativeNodePoolsNodePoolNativeArrayOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolNativeArrayInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolNativeArray{ GetClusterNativeNodePoolsNodePoolNativeArgs{...} }
+type GetClusterNativeNodePoolsNodePoolNativeArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolNativeArrayOutput() GetClusterNativeNodePoolsNodePoolNativeArrayOutput
+	ToGetClusterNativeNodePoolsNodePoolNativeArrayOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolNativeArrayOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeArray []GetClusterNativeNodePoolsNodePoolNativeInput
+
+func (GetClusterNativeNodePoolsNodePoolNativeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolNative)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeArray) ToGetClusterNativeNodePoolsNodePoolNativeArrayOutput() GetClusterNativeNodePoolsNodePoolNativeArrayOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolNativeArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeArray) ToGetClusterNativeNodePoolsNodePoolNativeArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolNativeArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolNativeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNative)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) ToGetClusterNativeNodePoolsNodePoolNativeOutput() GetClusterNativeNodePoolsNodePoolNativeOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) ToGetClusterNativeNodePoolsNodePoolNativeOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeOutput {
+	return o
+}
+
+// Whether to enable self-healing ability.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) AutoRepair() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) bool { return v.AutoRepair }).(pulumi.BoolOutput)
+}
+
+// Native node pool data disk list.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) DataDisks() GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) []GetClusterNativeNodePoolsNodePoolNativeDataDisk {
+		return v.DataDisks
+	}).(GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput)
+}
+
+// Whether to enable elastic scaling.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) EnableAutoscaling() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) bool { return v.EnableAutoscaling }).(pulumi.BoolOutput)
+}
+
+// Fault self-healing rule name.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) HealthCheckPolicyName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) string { return v.HealthCheckPolicyName }).(pulumi.StringOutput)
+}
+
+// Native node pool hostName pattern string.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) HostNamePattern() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) string { return v.HostNamePattern }).(pulumi.StringOutput)
+}
+
+// Billing configuration for yearly and monthly models.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) InstanceChargePrepaids() GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) []GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaid {
+		return v.InstanceChargePrepaids
+	}).(GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput)
+}
+
+// Node billing type. `PREPAID` is a yearly and monthly subscription, `POSTPAID_BY_HOUR` is a pay-as-you-go plan. The default is `POSTPAID_BY_HOUR`.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) InstanceChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) string { return v.InstanceChargeType }).(pulumi.StringOutput)
+}
+
+// Model list.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) InstanceTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) []string { return v.InstanceTypes }).(pulumi.StringArrayOutput)
+}
+
+// Public network bandwidth settings.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) InternetAccessibles() GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) []GetClusterNativeNodePoolsNodePoolNativeInternetAccessible {
+		return v.InternetAccessibles
+	}).(GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput)
+}
+
+// Node pool ssh public key id array.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) KeyIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) []string { return v.KeyIds }).(pulumi.StringArrayOutput)
+}
+
+// Kubelet custom parameters.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) KubeletArgs() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) []string { return v.KubeletArgs }).(pulumi.StringArrayOutput)
+}
+
+// Predefined scripts.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) Lifecycles() GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) []GetClusterNativeNodePoolsNodePoolNativeLifecycle {
+		return v.Lifecycles
+	}).(GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput)
+}
+
+// Node pool management parameter settings.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) Managements() GetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) []GetClusterNativeNodePoolsNodePoolNativeManagement {
+		return v.Managements
+	}).(GetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput)
+}
+
+// Desired number of nodes.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) Replicas() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) int { return v.Replicas }).(pulumi.IntOutput)
+}
+
+// Runtime root directory.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) RuntimeRootDir() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) string { return v.RuntimeRootDir }).(pulumi.StringOutput)
+}
+
+// Node pool scaling configuration.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) Scalings() GetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) []GetClusterNativeNodePoolsNodePoolNativeScaling {
+		return v.Scalings
+	}).(GetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput)
+}
+
+// Security group list.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) SecurityGroupIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) []string { return v.SecurityGroupIds }).(pulumi.StringArrayOutput)
+}
+
+// Subnet list.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) SubnetIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) []string { return v.SubnetIds }).(pulumi.StringArrayOutput)
+}
+
+// System disk configuration.
+func (o GetClusterNativeNodePoolsNodePoolNativeOutput) SystemDisks() GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNative) []GetClusterNativeNodePoolsNodePoolNativeSystemDisk {
+		return v.SystemDisks
+	}).(GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolNativeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolNative)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeArrayOutput) ToGetClusterNativeNodePoolsNodePoolNativeArrayOutput() GetClusterNativeNodePoolsNodePoolNativeArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeArrayOutput) ToGetClusterNativeNodePoolsNodePoolNativeArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeArrayOutput) Index(i pulumi.IntInput) GetClusterNativeNodePoolsNodePoolNativeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNativeNodePoolsNodePoolNative {
+		return vs[0].([]GetClusterNativeNodePoolsNodePoolNative)[vs[1].(int)]
+	}).(GetClusterNativeNodePoolsNodePoolNativeOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeDataDisk struct {
+	// Whether to automatically format the disk and mount it.
+	AutoFormatAndMount bool `pulumi:"autoFormatAndMount"`
+	// Mount device name or partition name.
+	DiskPartition string `pulumi:"diskPartition"`
+	// Cloud disk size (G).
+	DiskSize int `pulumi:"diskSize"`
+	// Cloud disk type.
+	DiskType string `pulumi:"diskType"`
+	// Pass in this parameter to create an encrypted cloud disk. The value is fixed to `ENCRYPT`.
+	Encrypt string `pulumi:"encrypt"`
+	// File system (ext3/ext4/xfs).
+	FileSystem string `pulumi:"fileSystem"`
+	// Customize the key when purchasing an encrypted disk. When this parameter is passed in, the Encrypt parameter is not empty.
+	KmsKeyId string `pulumi:"kmsKeyId"`
+	// Mount directory.
+	MountTarget string `pulumi:"mountTarget"`
+	// Snapshot ID. If passed in, the cloud disk will be created based on this snapshot. The snapshot type must be a data disk snapshot.
+	SnapshotId string `pulumi:"snapshotId"`
+	// Cloud disk performance, unit: MB/s. Use this parameter to purchase additional performance for the cloud disk.
+	ThroughputPerformance int `pulumi:"throughputPerformance"`
+}
+
+// GetClusterNativeNodePoolsNodePoolNativeDataDiskInput is an input type that accepts GetClusterNativeNodePoolsNodePoolNativeDataDiskArgs and GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolNativeDataDiskInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolNativeDataDiskArgs{...}
+type GetClusterNativeNodePoolsNodePoolNativeDataDiskInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolNativeDataDiskOutput() GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput
+	ToGetClusterNativeNodePoolsNodePoolNativeDataDiskOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeDataDiskArgs struct {
+	// Whether to automatically format the disk and mount it.
+	AutoFormatAndMount pulumi.BoolInput `pulumi:"autoFormatAndMount"`
+	// Mount device name or partition name.
+	DiskPartition pulumi.StringInput `pulumi:"diskPartition"`
+	// Cloud disk size (G).
+	DiskSize pulumi.IntInput `pulumi:"diskSize"`
+	// Cloud disk type.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+	// Pass in this parameter to create an encrypted cloud disk. The value is fixed to `ENCRYPT`.
+	Encrypt pulumi.StringInput `pulumi:"encrypt"`
+	// File system (ext3/ext4/xfs).
+	FileSystem pulumi.StringInput `pulumi:"fileSystem"`
+	// Customize the key when purchasing an encrypted disk. When this parameter is passed in, the Encrypt parameter is not empty.
+	KmsKeyId pulumi.StringInput `pulumi:"kmsKeyId"`
+	// Mount directory.
+	MountTarget pulumi.StringInput `pulumi:"mountTarget"`
+	// Snapshot ID. If passed in, the cloud disk will be created based on this snapshot. The snapshot type must be a data disk snapshot.
+	SnapshotId pulumi.StringInput `pulumi:"snapshotId"`
+	// Cloud disk performance, unit: MB/s. Use this parameter to purchase additional performance for the cloud disk.
+	ThroughputPerformance pulumi.IntInput `pulumi:"throughputPerformance"`
+}
+
+func (GetClusterNativeNodePoolsNodePoolNativeDataDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeDataDisk)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeDataDiskArgs) ToGetClusterNativeNodePoolsNodePoolNativeDataDiskOutput() GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolNativeDataDiskOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeDataDiskArgs) ToGetClusterNativeNodePoolsNodePoolNativeDataDiskOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput)
+}
+
+// GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayInput is an input type that accepts GetClusterNativeNodePoolsNodePoolNativeDataDiskArray and GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolNativeDataDiskArray{ GetClusterNativeNodePoolsNodePoolNativeDataDiskArgs{...} }
+type GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput() GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput
+	ToGetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeDataDiskArray []GetClusterNativeNodePoolsNodePoolNativeDataDiskInput
+
+func (GetClusterNativeNodePoolsNodePoolNativeDataDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolNativeDataDisk)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeDataDiskArray) ToGetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput() GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeDataDiskArray) ToGetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeDataDisk)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput) ToGetClusterNativeNodePoolsNodePoolNativeDataDiskOutput() GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput) ToGetClusterNativeNodePoolsNodePoolNativeDataDiskOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput {
+	return o
+}
+
+// Whether to automatically format the disk and mount it.
+func (o GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput) AutoFormatAndMount() pulumi.BoolOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeDataDisk) bool { return v.AutoFormatAndMount }).(pulumi.BoolOutput)
+}
+
+// Mount device name or partition name.
+func (o GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput) DiskPartition() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeDataDisk) string { return v.DiskPartition }).(pulumi.StringOutput)
+}
+
+// Cloud disk size (G).
+func (o GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeDataDisk) int { return v.DiskSize }).(pulumi.IntOutput)
+}
+
+// Cloud disk type.
+func (o GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeDataDisk) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+// Pass in this parameter to create an encrypted cloud disk. The value is fixed to `ENCRYPT`.
+func (o GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput) Encrypt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeDataDisk) string { return v.Encrypt }).(pulumi.StringOutput)
+}
+
+// File system (ext3/ext4/xfs).
+func (o GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput) FileSystem() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeDataDisk) string { return v.FileSystem }).(pulumi.StringOutput)
+}
+
+// Customize the key when purchasing an encrypted disk. When this parameter is passed in, the Encrypt parameter is not empty.
+func (o GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput) KmsKeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeDataDisk) string { return v.KmsKeyId }).(pulumi.StringOutput)
+}
+
+// Mount directory.
+func (o GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput) MountTarget() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeDataDisk) string { return v.MountTarget }).(pulumi.StringOutput)
+}
+
+// Snapshot ID. If passed in, the cloud disk will be created based on this snapshot. The snapshot type must be a data disk snapshot.
+func (o GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput) SnapshotId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeDataDisk) string { return v.SnapshotId }).(pulumi.StringOutput)
+}
+
+// Cloud disk performance, unit: MB/s. Use this parameter to purchase additional performance for the cloud disk.
+func (o GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput) ThroughputPerformance() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeDataDisk) int { return v.ThroughputPerformance }).(pulumi.IntOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolNativeDataDisk)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput) ToGetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput() GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput) ToGetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput) Index(i pulumi.IntInput) GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNativeNodePoolsNodePoolNativeDataDisk {
+		return vs[0].([]GetClusterNativeNodePoolsNodePoolNativeDataDisk)[vs[1].(int)]
+	}).(GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaid struct {
+	// Postpaid billing cycle, unit (month): 1, 2, 3, 4, 5,, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+	Period int `pulumi:"period"`
+	// Prepaid renewal method:
+	RenewFlag string `pulumi:"renewFlag"`
+}
+
+// GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidInput is an input type that accepts GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArgs and GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArgs{...}
+type GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput() GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput
+	ToGetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArgs struct {
+	// Postpaid billing cycle, unit (month): 1, 2, 3, 4, 5,, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+	Period pulumi.IntInput `pulumi:"period"`
+	// Prepaid renewal method:
+	RenewFlag pulumi.StringInput `pulumi:"renewFlag"`
+}
+
+func (GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArgs) ToGetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput() GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArgs) ToGetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput)
+}
+
+// GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayInput is an input type that accepts GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArray and GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArray{ GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArgs{...} }
+type GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput() GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput
+	ToGetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArray []GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidInput
+
+func (GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArray) ToGetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput() GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArray) ToGetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput) ToGetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput() GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput) ToGetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput {
+	return o
+}
+
+// Postpaid billing cycle, unit (month): 1, 2, 3, 4, 5,, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+func (o GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput) Period() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaid) int { return v.Period }).(pulumi.IntOutput)
+}
+
+// Prepaid renewal method:
+func (o GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput) RenewFlag() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaid) string { return v.RenewFlag }).(pulumi.StringOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaid)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput) ToGetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput() GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput) ToGetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput) Index(i pulumi.IntInput) GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaid {
+		return vs[0].([]GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaid)[vs[1].(int)]
+	}).(GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeInternetAccessible struct {
+	// Bandwidth package ID. Note: When ChargeType is BANDWIDTH_PACKAG, the value cannot be empty; otherwise, the value must be empty.
+	BandwidthPackageId string `pulumi:"bandwidthPackageId"`
+	// Network billing method. Optional value is `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+	ChargeType string `pulumi:"chargeType"`
+	// Maximum bandwidth output. Note: When chargeType is `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_POSTPAID_BY_HOUR`, the valid range is 1~100. When chargeType is `BANDWIDTH_PACKAG`, the valid range is 1~2000.
+	MaxBandwidthOut int `pulumi:"maxBandwidthOut"`
+}
+
+// GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleInput is an input type that accepts GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArgs and GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArgs{...}
+type GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput() GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput
+	ToGetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArgs struct {
+	// Bandwidth package ID. Note: When ChargeType is BANDWIDTH_PACKAG, the value cannot be empty; otherwise, the value must be empty.
+	BandwidthPackageId pulumi.StringInput `pulumi:"bandwidthPackageId"`
+	// Network billing method. Optional value is `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+	ChargeType pulumi.StringInput `pulumi:"chargeType"`
+	// Maximum bandwidth output. Note: When chargeType is `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_POSTPAID_BY_HOUR`, the valid range is 1~100. When chargeType is `BANDWIDTH_PACKAG`, the valid range is 1~2000.
+	MaxBandwidthOut pulumi.IntInput `pulumi:"maxBandwidthOut"`
+}
+
+func (GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeInternetAccessible)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArgs) ToGetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput() GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArgs) ToGetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput)
+}
+
+// GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayInput is an input type that accepts GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArray and GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArray{ GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArgs{...} }
+type GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput() GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput
+	ToGetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArray []GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleInput
+
+func (GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolNativeInternetAccessible)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArray) ToGetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput() GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArray) ToGetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeInternetAccessible)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput) ToGetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput() GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput) ToGetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput {
+	return o
+}
+
+// Bandwidth package ID. Note: When ChargeType is BANDWIDTH_PACKAG, the value cannot be empty; otherwise, the value must be empty.
+func (o GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput) BandwidthPackageId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeInternetAccessible) string { return v.BandwidthPackageId }).(pulumi.StringOutput)
+}
+
+// Network billing method. Optional value is `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+func (o GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput) ChargeType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeInternetAccessible) string { return v.ChargeType }).(pulumi.StringOutput)
+}
+
+// Maximum bandwidth output. Note: When chargeType is `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_POSTPAID_BY_HOUR`, the valid range is 1~100. When chargeType is `BANDWIDTH_PACKAG`, the valid range is 1~2000.
+func (o GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput) MaxBandwidthOut() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeInternetAccessible) int { return v.MaxBandwidthOut }).(pulumi.IntOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolNativeInternetAccessible)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput) ToGetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput() GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput) ToGetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput) Index(i pulumi.IntInput) GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNativeNodePoolsNodePoolNativeInternetAccessible {
+		return vs[0].([]GetClusterNativeNodePoolsNodePoolNativeInternetAccessible)[vs[1].(int)]
+	}).(GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeLifecycle struct {
+	// Custom script after node initialization.
+	PostInit string `pulumi:"postInit"`
+	// Custom script before node initialization.
+	PreInit string `pulumi:"preInit"`
+}
+
+// GetClusterNativeNodePoolsNodePoolNativeLifecycleInput is an input type that accepts GetClusterNativeNodePoolsNodePoolNativeLifecycleArgs and GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolNativeLifecycleInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolNativeLifecycleArgs{...}
+type GetClusterNativeNodePoolsNodePoolNativeLifecycleInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolNativeLifecycleOutput() GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput
+	ToGetClusterNativeNodePoolsNodePoolNativeLifecycleOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeLifecycleArgs struct {
+	// Custom script after node initialization.
+	PostInit pulumi.StringInput `pulumi:"postInit"`
+	// Custom script before node initialization.
+	PreInit pulumi.StringInput `pulumi:"preInit"`
+}
+
+func (GetClusterNativeNodePoolsNodePoolNativeLifecycleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeLifecycle)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeLifecycleArgs) ToGetClusterNativeNodePoolsNodePoolNativeLifecycleOutput() GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolNativeLifecycleOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeLifecycleArgs) ToGetClusterNativeNodePoolsNodePoolNativeLifecycleOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput)
+}
+
+// GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayInput is an input type that accepts GetClusterNativeNodePoolsNodePoolNativeLifecycleArray and GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolNativeLifecycleArray{ GetClusterNativeNodePoolsNodePoolNativeLifecycleArgs{...} }
+type GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput() GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput
+	ToGetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeLifecycleArray []GetClusterNativeNodePoolsNodePoolNativeLifecycleInput
+
+func (GetClusterNativeNodePoolsNodePoolNativeLifecycleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolNativeLifecycle)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeLifecycleArray) ToGetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput() GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeLifecycleArray) ToGetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeLifecycle)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput) ToGetClusterNativeNodePoolsNodePoolNativeLifecycleOutput() GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput) ToGetClusterNativeNodePoolsNodePoolNativeLifecycleOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput {
+	return o
+}
+
+// Custom script after node initialization.
+func (o GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput) PostInit() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeLifecycle) string { return v.PostInit }).(pulumi.StringOutput)
+}
+
+// Custom script before node initialization.
+func (o GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput) PreInit() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeLifecycle) string { return v.PreInit }).(pulumi.StringOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolNativeLifecycle)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput) ToGetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput() GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput) ToGetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput) Index(i pulumi.IntInput) GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNativeNodePoolsNodePoolNativeLifecycle {
+		return vs[0].([]GetClusterNativeNodePoolsNodePoolNativeLifecycle)[vs[1].(int)]
+	}).(GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeManagement struct {
+	// Hosts configuration.
+	Hosts []string `pulumi:"hosts"`
+	// Kernel parameter configuration.
+	KernelArgs []string `pulumi:"kernelArgs"`
+	// Dns configuration.
+	Nameservers []string `pulumi:"nameservers"`
+}
+
+// GetClusterNativeNodePoolsNodePoolNativeManagementInput is an input type that accepts GetClusterNativeNodePoolsNodePoolNativeManagementArgs and GetClusterNativeNodePoolsNodePoolNativeManagementOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolNativeManagementInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolNativeManagementArgs{...}
+type GetClusterNativeNodePoolsNodePoolNativeManagementInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolNativeManagementOutput() GetClusterNativeNodePoolsNodePoolNativeManagementOutput
+	ToGetClusterNativeNodePoolsNodePoolNativeManagementOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolNativeManagementOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeManagementArgs struct {
+	// Hosts configuration.
+	Hosts pulumi.StringArrayInput `pulumi:"hosts"`
+	// Kernel parameter configuration.
+	KernelArgs pulumi.StringArrayInput `pulumi:"kernelArgs"`
+	// Dns configuration.
+	Nameservers pulumi.StringArrayInput `pulumi:"nameservers"`
+}
+
+func (GetClusterNativeNodePoolsNodePoolNativeManagementArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeManagement)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeManagementArgs) ToGetClusterNativeNodePoolsNodePoolNativeManagementOutput() GetClusterNativeNodePoolsNodePoolNativeManagementOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolNativeManagementOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeManagementArgs) ToGetClusterNativeNodePoolsNodePoolNativeManagementOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeManagementOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolNativeManagementOutput)
+}
+
+// GetClusterNativeNodePoolsNodePoolNativeManagementArrayInput is an input type that accepts GetClusterNativeNodePoolsNodePoolNativeManagementArray and GetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolNativeManagementArrayInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolNativeManagementArray{ GetClusterNativeNodePoolsNodePoolNativeManagementArgs{...} }
+type GetClusterNativeNodePoolsNodePoolNativeManagementArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput() GetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput
+	ToGetClusterNativeNodePoolsNodePoolNativeManagementArrayOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeManagementArray []GetClusterNativeNodePoolsNodePoolNativeManagementInput
+
+func (GetClusterNativeNodePoolsNodePoolNativeManagementArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolNativeManagement)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeManagementArray) ToGetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput() GetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolNativeManagementArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeManagementArray) ToGetClusterNativeNodePoolsNodePoolNativeManagementArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeManagementOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolNativeManagementOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeManagement)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeManagementOutput) ToGetClusterNativeNodePoolsNodePoolNativeManagementOutput() GetClusterNativeNodePoolsNodePoolNativeManagementOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeManagementOutput) ToGetClusterNativeNodePoolsNodePoolNativeManagementOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeManagementOutput {
+	return o
+}
+
+// Hosts configuration.
+func (o GetClusterNativeNodePoolsNodePoolNativeManagementOutput) Hosts() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeManagement) []string { return v.Hosts }).(pulumi.StringArrayOutput)
+}
+
+// Kernel parameter configuration.
+func (o GetClusterNativeNodePoolsNodePoolNativeManagementOutput) KernelArgs() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeManagement) []string { return v.KernelArgs }).(pulumi.StringArrayOutput)
+}
+
+// Dns configuration.
+func (o GetClusterNativeNodePoolsNodePoolNativeManagementOutput) Nameservers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeManagement) []string { return v.Nameservers }).(pulumi.StringArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolNativeManagement)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput) ToGetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput() GetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput) ToGetClusterNativeNodePoolsNodePoolNativeManagementArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput) Index(i pulumi.IntInput) GetClusterNativeNodePoolsNodePoolNativeManagementOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNativeNodePoolsNodePoolNativeManagement {
+		return vs[0].([]GetClusterNativeNodePoolsNodePoolNativeManagement)[vs[1].(int)]
+	}).(GetClusterNativeNodePoolsNodePoolNativeManagementOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeScaling struct {
+	// Node pool expansion strategy. `ZoneEquality`: multiple availability zones are broken up; `ZonePriority`: the preferred availability zone takes precedence.
+	CreatePolicy string `pulumi:"createPolicy"`
+	// Maximum number of replicas in node pool.
+	MaxReplicas int `pulumi:"maxReplicas"`
+	// Minimum number of replicas in node pool.
+	MinReplicas int `pulumi:"minReplicas"`
+}
+
+// GetClusterNativeNodePoolsNodePoolNativeScalingInput is an input type that accepts GetClusterNativeNodePoolsNodePoolNativeScalingArgs and GetClusterNativeNodePoolsNodePoolNativeScalingOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolNativeScalingInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolNativeScalingArgs{...}
+type GetClusterNativeNodePoolsNodePoolNativeScalingInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolNativeScalingOutput() GetClusterNativeNodePoolsNodePoolNativeScalingOutput
+	ToGetClusterNativeNodePoolsNodePoolNativeScalingOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolNativeScalingOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeScalingArgs struct {
+	// Node pool expansion strategy. `ZoneEquality`: multiple availability zones are broken up; `ZonePriority`: the preferred availability zone takes precedence.
+	CreatePolicy pulumi.StringInput `pulumi:"createPolicy"`
+	// Maximum number of replicas in node pool.
+	MaxReplicas pulumi.IntInput `pulumi:"maxReplicas"`
+	// Minimum number of replicas in node pool.
+	MinReplicas pulumi.IntInput `pulumi:"minReplicas"`
+}
+
+func (GetClusterNativeNodePoolsNodePoolNativeScalingArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeScaling)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeScalingArgs) ToGetClusterNativeNodePoolsNodePoolNativeScalingOutput() GetClusterNativeNodePoolsNodePoolNativeScalingOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolNativeScalingOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeScalingArgs) ToGetClusterNativeNodePoolsNodePoolNativeScalingOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeScalingOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolNativeScalingOutput)
+}
+
+// GetClusterNativeNodePoolsNodePoolNativeScalingArrayInput is an input type that accepts GetClusterNativeNodePoolsNodePoolNativeScalingArray and GetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolNativeScalingArrayInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolNativeScalingArray{ GetClusterNativeNodePoolsNodePoolNativeScalingArgs{...} }
+type GetClusterNativeNodePoolsNodePoolNativeScalingArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput() GetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput
+	ToGetClusterNativeNodePoolsNodePoolNativeScalingArrayOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeScalingArray []GetClusterNativeNodePoolsNodePoolNativeScalingInput
+
+func (GetClusterNativeNodePoolsNodePoolNativeScalingArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolNativeScaling)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeScalingArray) ToGetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput() GetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolNativeScalingArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeScalingArray) ToGetClusterNativeNodePoolsNodePoolNativeScalingArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeScalingOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolNativeScalingOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeScaling)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeScalingOutput) ToGetClusterNativeNodePoolsNodePoolNativeScalingOutput() GetClusterNativeNodePoolsNodePoolNativeScalingOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeScalingOutput) ToGetClusterNativeNodePoolsNodePoolNativeScalingOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeScalingOutput {
+	return o
+}
+
+// Node pool expansion strategy. `ZoneEquality`: multiple availability zones are broken up; `ZonePriority`: the preferred availability zone takes precedence.
+func (o GetClusterNativeNodePoolsNodePoolNativeScalingOutput) CreatePolicy() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeScaling) string { return v.CreatePolicy }).(pulumi.StringOutput)
+}
+
+// Maximum number of replicas in node pool.
+func (o GetClusterNativeNodePoolsNodePoolNativeScalingOutput) MaxReplicas() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeScaling) int { return v.MaxReplicas }).(pulumi.IntOutput)
+}
+
+// Minimum number of replicas in node pool.
+func (o GetClusterNativeNodePoolsNodePoolNativeScalingOutput) MinReplicas() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeScaling) int { return v.MinReplicas }).(pulumi.IntOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolNativeScaling)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput) ToGetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput() GetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput) ToGetClusterNativeNodePoolsNodePoolNativeScalingArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput) Index(i pulumi.IntInput) GetClusterNativeNodePoolsNodePoolNativeScalingOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNativeNodePoolsNodePoolNativeScaling {
+		return vs[0].([]GetClusterNativeNodePoolsNodePoolNativeScaling)[vs[1].(int)]
+	}).(GetClusterNativeNodePoolsNodePoolNativeScalingOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeSystemDisk struct {
+	// Cloud disk size (G).
+	DiskSize int `pulumi:"diskSize"`
+	// Cloud disk type.
+	DiskType string `pulumi:"diskType"`
+}
+
+// GetClusterNativeNodePoolsNodePoolNativeSystemDiskInput is an input type that accepts GetClusterNativeNodePoolsNodePoolNativeSystemDiskArgs and GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolNativeSystemDiskInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolNativeSystemDiskArgs{...}
+type GetClusterNativeNodePoolsNodePoolNativeSystemDiskInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput() GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput
+	ToGetClusterNativeNodePoolsNodePoolNativeSystemDiskOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeSystemDiskArgs struct {
+	// Cloud disk size (G).
+	DiskSize pulumi.IntInput `pulumi:"diskSize"`
+	// Cloud disk type.
+	DiskType pulumi.StringInput `pulumi:"diskType"`
+}
+
+func (GetClusterNativeNodePoolsNodePoolNativeSystemDiskArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeSystemDisk)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeSystemDiskArgs) ToGetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput() GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolNativeSystemDiskOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeSystemDiskArgs) ToGetClusterNativeNodePoolsNodePoolNativeSystemDiskOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput)
+}
+
+// GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayInput is an input type that accepts GetClusterNativeNodePoolsNodePoolNativeSystemDiskArray and GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolNativeSystemDiskArray{ GetClusterNativeNodePoolsNodePoolNativeSystemDiskArgs{...} }
+type GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput() GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput
+	ToGetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeSystemDiskArray []GetClusterNativeNodePoolsNodePoolNativeSystemDiskInput
+
+func (GetClusterNativeNodePoolsNodePoolNativeSystemDiskArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolNativeSystemDisk)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeSystemDiskArray) ToGetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput() GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolNativeSystemDiskArray) ToGetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeSystemDisk)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput) ToGetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput() GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput) ToGetClusterNativeNodePoolsNodePoolNativeSystemDiskOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput {
+	return o
+}
+
+// Cloud disk size (G).
+func (o GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput) DiskSize() pulumi.IntOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeSystemDisk) int { return v.DiskSize }).(pulumi.IntOutput)
+}
+
+// Cloud disk type.
+func (o GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput) DiskType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolNativeSystemDisk) string { return v.DiskType }).(pulumi.StringOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolNativeSystemDisk)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput) ToGetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput() GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput) ToGetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput) Index(i pulumi.IntInput) GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNativeNodePoolsNodePoolNativeSystemDisk {
+		return vs[0].([]GetClusterNativeNodePoolsNodePoolNativeSystemDisk)[vs[1].(int)]
+	}).(GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolTag struct {
+	// The resource type bound to the label.
+	ResourceType string `pulumi:"resourceType"`
+	// Tag pair list.
+	Tags []GetClusterNativeNodePoolsNodePoolTagTag `pulumi:"tags"`
+}
+
+// GetClusterNativeNodePoolsNodePoolTagInput is an input type that accepts GetClusterNativeNodePoolsNodePoolTagArgs and GetClusterNativeNodePoolsNodePoolTagOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolTagInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolTagArgs{...}
+type GetClusterNativeNodePoolsNodePoolTagInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolTagOutput() GetClusterNativeNodePoolsNodePoolTagOutput
+	ToGetClusterNativeNodePoolsNodePoolTagOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolTagOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolTagArgs struct {
+	// The resource type bound to the label.
+	ResourceType pulumi.StringInput `pulumi:"resourceType"`
+	// Tag pair list.
+	Tags GetClusterNativeNodePoolsNodePoolTagTagArrayInput `pulumi:"tags"`
+}
+
+func (GetClusterNativeNodePoolsNodePoolTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolTag)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolTagArgs) ToGetClusterNativeNodePoolsNodePoolTagOutput() GetClusterNativeNodePoolsNodePoolTagOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolTagOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolTagArgs) ToGetClusterNativeNodePoolsNodePoolTagOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolTagOutput)
+}
+
+// GetClusterNativeNodePoolsNodePoolTagArrayInput is an input type that accepts GetClusterNativeNodePoolsNodePoolTagArray and GetClusterNativeNodePoolsNodePoolTagArrayOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolTagArrayInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolTagArray{ GetClusterNativeNodePoolsNodePoolTagArgs{...} }
+type GetClusterNativeNodePoolsNodePoolTagArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolTagArrayOutput() GetClusterNativeNodePoolsNodePoolTagArrayOutput
+	ToGetClusterNativeNodePoolsNodePoolTagArrayOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolTagArrayOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolTagArray []GetClusterNativeNodePoolsNodePoolTagInput
+
+func (GetClusterNativeNodePoolsNodePoolTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolTag)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolTagArray) ToGetClusterNativeNodePoolsNodePoolTagArrayOutput() GetClusterNativeNodePoolsNodePoolTagArrayOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolTagArray) ToGetClusterNativeNodePoolsNodePoolTagArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolTagArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolTagOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolTag)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolTagOutput) ToGetClusterNativeNodePoolsNodePoolTagOutput() GetClusterNativeNodePoolsNodePoolTagOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolTagOutput) ToGetClusterNativeNodePoolsNodePoolTagOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolTagOutput {
+	return o
+}
+
+// The resource type bound to the label.
+func (o GetClusterNativeNodePoolsNodePoolTagOutput) ResourceType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolTag) string { return v.ResourceType }).(pulumi.StringOutput)
+}
+
+// Tag pair list.
+func (o GetClusterNativeNodePoolsNodePoolTagOutput) Tags() GetClusterNativeNodePoolsNodePoolTagTagArrayOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolTag) []GetClusterNativeNodePoolsNodePoolTagTag { return v.Tags }).(GetClusterNativeNodePoolsNodePoolTagTagArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolTag)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolTagArrayOutput) ToGetClusterNativeNodePoolsNodePoolTagArrayOutput() GetClusterNativeNodePoolsNodePoolTagArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolTagArrayOutput) ToGetClusterNativeNodePoolsNodePoolTagArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolTagArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolTagArrayOutput) Index(i pulumi.IntInput) GetClusterNativeNodePoolsNodePoolTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNativeNodePoolsNodePoolTag {
+		return vs[0].([]GetClusterNativeNodePoolsNodePoolTag)[vs[1].(int)]
+	}).(GetClusterNativeNodePoolsNodePoolTagOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolTagTag struct {
+	// Key of the taint.
+	Key string `pulumi:"key"`
+	// Value of the taint.
+	Value string `pulumi:"value"`
+}
+
+// GetClusterNativeNodePoolsNodePoolTagTagInput is an input type that accepts GetClusterNativeNodePoolsNodePoolTagTagArgs and GetClusterNativeNodePoolsNodePoolTagTagOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolTagTagInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolTagTagArgs{...}
+type GetClusterNativeNodePoolsNodePoolTagTagInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolTagTagOutput() GetClusterNativeNodePoolsNodePoolTagTagOutput
+	ToGetClusterNativeNodePoolsNodePoolTagTagOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolTagTagOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolTagTagArgs struct {
+	// Key of the taint.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Value of the taint.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetClusterNativeNodePoolsNodePoolTagTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolTagTag)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolTagTagArgs) ToGetClusterNativeNodePoolsNodePoolTagTagOutput() GetClusterNativeNodePoolsNodePoolTagTagOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolTagTagOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolTagTagArgs) ToGetClusterNativeNodePoolsNodePoolTagTagOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolTagTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolTagTagOutput)
+}
+
+// GetClusterNativeNodePoolsNodePoolTagTagArrayInput is an input type that accepts GetClusterNativeNodePoolsNodePoolTagTagArray and GetClusterNativeNodePoolsNodePoolTagTagArrayOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolTagTagArrayInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolTagTagArray{ GetClusterNativeNodePoolsNodePoolTagTagArgs{...} }
+type GetClusterNativeNodePoolsNodePoolTagTagArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolTagTagArrayOutput() GetClusterNativeNodePoolsNodePoolTagTagArrayOutput
+	ToGetClusterNativeNodePoolsNodePoolTagTagArrayOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolTagTagArrayOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolTagTagArray []GetClusterNativeNodePoolsNodePoolTagTagInput
+
+func (GetClusterNativeNodePoolsNodePoolTagTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolTagTag)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolTagTagArray) ToGetClusterNativeNodePoolsNodePoolTagTagArrayOutput() GetClusterNativeNodePoolsNodePoolTagTagArrayOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolTagTagArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolTagTagArray) ToGetClusterNativeNodePoolsNodePoolTagTagArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolTagTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolTagTagArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolTagTagOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolTagTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolTagTag)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolTagTagOutput) ToGetClusterNativeNodePoolsNodePoolTagTagOutput() GetClusterNativeNodePoolsNodePoolTagTagOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolTagTagOutput) ToGetClusterNativeNodePoolsNodePoolTagTagOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolTagTagOutput {
+	return o
+}
+
+// Key of the taint.
+func (o GetClusterNativeNodePoolsNodePoolTagTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolTagTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Value of the taint.
+func (o GetClusterNativeNodePoolsNodePoolTagTagOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolTagTag) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolTagTagArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolTagTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolTagTag)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolTagTagArrayOutput) ToGetClusterNativeNodePoolsNodePoolTagTagArrayOutput() GetClusterNativeNodePoolsNodePoolTagTagArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolTagTagArrayOutput) ToGetClusterNativeNodePoolsNodePoolTagTagArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolTagTagArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolTagTagArrayOutput) Index(i pulumi.IntInput) GetClusterNativeNodePoolsNodePoolTagTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNativeNodePoolsNodePoolTagTag {
+		return vs[0].([]GetClusterNativeNodePoolsNodePoolTagTag)[vs[1].(int)]
+	}).(GetClusterNativeNodePoolsNodePoolTagTagOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolTaint struct {
+	// Effect of the taint.
+	Effect string `pulumi:"effect"`
+	// Key of the taint.
+	Key string `pulumi:"key"`
+	// Value of the taint.
+	Value string `pulumi:"value"`
+}
+
+// GetClusterNativeNodePoolsNodePoolTaintInput is an input type that accepts GetClusterNativeNodePoolsNodePoolTaintArgs and GetClusterNativeNodePoolsNodePoolTaintOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolTaintInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolTaintArgs{...}
+type GetClusterNativeNodePoolsNodePoolTaintInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolTaintOutput() GetClusterNativeNodePoolsNodePoolTaintOutput
+	ToGetClusterNativeNodePoolsNodePoolTaintOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolTaintOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolTaintArgs struct {
+	// Effect of the taint.
+	Effect pulumi.StringInput `pulumi:"effect"`
+	// Key of the taint.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Value of the taint.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetClusterNativeNodePoolsNodePoolTaintArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolTaint)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolTaintArgs) ToGetClusterNativeNodePoolsNodePoolTaintOutput() GetClusterNativeNodePoolsNodePoolTaintOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolTaintOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolTaintArgs) ToGetClusterNativeNodePoolsNodePoolTaintOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolTaintOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolTaintOutput)
+}
+
+// GetClusterNativeNodePoolsNodePoolTaintArrayInput is an input type that accepts GetClusterNativeNodePoolsNodePoolTaintArray and GetClusterNativeNodePoolsNodePoolTaintArrayOutput values.
+// You can construct a concrete instance of `GetClusterNativeNodePoolsNodePoolTaintArrayInput` via:
+//
+//	GetClusterNativeNodePoolsNodePoolTaintArray{ GetClusterNativeNodePoolsNodePoolTaintArgs{...} }
+type GetClusterNativeNodePoolsNodePoolTaintArrayInput interface {
+	pulumi.Input
+
+	ToGetClusterNativeNodePoolsNodePoolTaintArrayOutput() GetClusterNativeNodePoolsNodePoolTaintArrayOutput
+	ToGetClusterNativeNodePoolsNodePoolTaintArrayOutputWithContext(context.Context) GetClusterNativeNodePoolsNodePoolTaintArrayOutput
+}
+
+type GetClusterNativeNodePoolsNodePoolTaintArray []GetClusterNativeNodePoolsNodePoolTaintInput
+
+func (GetClusterNativeNodePoolsNodePoolTaintArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolTaint)(nil)).Elem()
+}
+
+func (i GetClusterNativeNodePoolsNodePoolTaintArray) ToGetClusterNativeNodePoolsNodePoolTaintArrayOutput() GetClusterNativeNodePoolsNodePoolTaintArrayOutput {
+	return i.ToGetClusterNativeNodePoolsNodePoolTaintArrayOutputWithContext(context.Background())
+}
+
+func (i GetClusterNativeNodePoolsNodePoolTaintArray) ToGetClusterNativeNodePoolsNodePoolTaintArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolTaintArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetClusterNativeNodePoolsNodePoolTaintArrayOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolTaintOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolTaintOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolTaint)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolTaintOutput) ToGetClusterNativeNodePoolsNodePoolTaintOutput() GetClusterNativeNodePoolsNodePoolTaintOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolTaintOutput) ToGetClusterNativeNodePoolsNodePoolTaintOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolTaintOutput {
+	return o
+}
+
+// Effect of the taint.
+func (o GetClusterNativeNodePoolsNodePoolTaintOutput) Effect() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolTaint) string { return v.Effect }).(pulumi.StringOutput)
+}
+
+// Key of the taint.
+func (o GetClusterNativeNodePoolsNodePoolTaintOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolTaint) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Value of the taint.
+func (o GetClusterNativeNodePoolsNodePoolTaintOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClusterNativeNodePoolsNodePoolTaint) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetClusterNativeNodePoolsNodePoolTaintArrayOutput struct{ *pulumi.OutputState }
+
+func (GetClusterNativeNodePoolsNodePoolTaintArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetClusterNativeNodePoolsNodePoolTaint)(nil)).Elem()
+}
+
+func (o GetClusterNativeNodePoolsNodePoolTaintArrayOutput) ToGetClusterNativeNodePoolsNodePoolTaintArrayOutput() GetClusterNativeNodePoolsNodePoolTaintArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolTaintArrayOutput) ToGetClusterNativeNodePoolsNodePoolTaintArrayOutputWithContext(ctx context.Context) GetClusterNativeNodePoolsNodePoolTaintArrayOutput {
+	return o
+}
+
+func (o GetClusterNativeNodePoolsNodePoolTaintArrayOutput) Index(i pulumi.IntInput) GetClusterNativeNodePoolsNodePoolTaintOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetClusterNativeNodePoolsNodePoolTaint {
+		return vs[0].([]GetClusterNativeNodePoolsNodePoolTaint)[vs[1].(int)]
+	}).(GetClusterNativeNodePoolsNodePoolTaintOutput)
+}
+
 type GetClusterNodePoolsFilter struct {
 	// The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
 	Name string `pulumi:"name"`
@@ -11910,6 +16067,32 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterWorkerInstancesListArrayInput)(nil)).Elem(), ClusterWorkerInstancesListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*EncryptionProtectionKmsConfigurationInput)(nil)).Elem(), EncryptionProtectionKmsConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*EncryptionProtectionKmsConfigurationPtrInput)(nil)).Elem(), EncryptionProtectionKmsConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolAnnotationInput)(nil)).Elem(), NativeNodePoolAnnotationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolAnnotationArrayInput)(nil)).Elem(), NativeNodePoolAnnotationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolLabelInput)(nil)).Elem(), NativeNodePoolLabelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolLabelArrayInput)(nil)).Elem(), NativeNodePoolLabelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolNativeInput)(nil)).Elem(), NativeNodePoolNativeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolNativePtrInput)(nil)).Elem(), NativeNodePoolNativeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolNativeDataDiskInput)(nil)).Elem(), NativeNodePoolNativeDataDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolNativeDataDiskArrayInput)(nil)).Elem(), NativeNodePoolNativeDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolNativeInstanceChargePrepaidInput)(nil)).Elem(), NativeNodePoolNativeInstanceChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolNativeInstanceChargePrepaidPtrInput)(nil)).Elem(), NativeNodePoolNativeInstanceChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolNativeInternetAccessibleInput)(nil)).Elem(), NativeNodePoolNativeInternetAccessibleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolNativeInternetAccessiblePtrInput)(nil)).Elem(), NativeNodePoolNativeInternetAccessibleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolNativeLifecycleInput)(nil)).Elem(), NativeNodePoolNativeLifecycleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolNativeLifecyclePtrInput)(nil)).Elem(), NativeNodePoolNativeLifecycleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolNativeManagementInput)(nil)).Elem(), NativeNodePoolNativeManagementArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolNativeManagementPtrInput)(nil)).Elem(), NativeNodePoolNativeManagementArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolNativeScalingInput)(nil)).Elem(), NativeNodePoolNativeScalingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolNativeScalingPtrInput)(nil)).Elem(), NativeNodePoolNativeScalingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolNativeSystemDiskInput)(nil)).Elem(), NativeNodePoolNativeSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolNativeSystemDiskPtrInput)(nil)).Elem(), NativeNodePoolNativeSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolTagInput)(nil)).Elem(), NativeNodePoolTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolTagArrayInput)(nil)).Elem(), NativeNodePoolTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolTagTagInput)(nil)).Elem(), NativeNodePoolTagTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolTagTagArrayInput)(nil)).Elem(), NativeNodePoolTagTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolTaintInput)(nil)).Elem(), NativeNodePoolTaintArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolTaintArrayInput)(nil)).Elem(), NativeNodePoolTaintArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolAutoScalingConfigInput)(nil)).Elem(), NodePoolAutoScalingConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolAutoScalingConfigPtrInput)(nil)).Elem(), NodePoolAutoScalingConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NodePoolAutoScalingConfigDataDiskInput)(nil)).Elem(), NodePoolAutoScalingConfigDataDiskArgs{})
@@ -11972,6 +16155,36 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayInput)(nil)).Elem(), GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterLevelsListInput)(nil)).Elem(), GetClusterLevelsListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterLevelsListArrayInput)(nil)).Elem(), GetClusterLevelsListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsFilterInput)(nil)).Elem(), GetClusterNativeNodePoolsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsFilterArrayInput)(nil)).Elem(), GetClusterNativeNodePoolsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolArrayInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolAnnotationInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolAnnotationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolAnnotationArrayInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolAnnotationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolLabelInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolLabelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolLabelArrayInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolLabelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolNativeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeArrayInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolNativeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeDataDiskInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolNativeDataDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolNativeDataDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeLifecycleInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolNativeLifecycleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolNativeLifecycleArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeManagementInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolNativeManagementArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeManagementArrayInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolNativeManagementArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeScalingInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolNativeScalingArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeScalingArrayInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolNativeScalingArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeSystemDiskInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolNativeSystemDiskArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolNativeSystemDiskArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolTagInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolTagArrayInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolTagTagInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolTagTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolTagTagArrayInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolTagTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolTaintInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolTaintArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNativeNodePoolsNodePoolTaintArrayInput)(nil)).Elem(), GetClusterNativeNodePoolsNodePoolTaintArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsFilterInput)(nil)).Elem(), GetClusterNodePoolsFilterArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsFilterArrayInput)(nil)).Elem(), GetClusterNodePoolsFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetClusterNodePoolsNodePoolSetInput)(nil)).Elem(), GetClusterNodePoolsNodePoolSetArgs{})
@@ -12050,6 +16263,32 @@ func init() {
 	pulumi.RegisterOutputType(ClusterWorkerInstancesListArrayOutput{})
 	pulumi.RegisterOutputType(EncryptionProtectionKmsConfigurationOutput{})
 	pulumi.RegisterOutputType(EncryptionProtectionKmsConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolAnnotationOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolAnnotationArrayOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolLabelOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolLabelArrayOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolNativeOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolNativePtrOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolNativeDataDiskOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolNativeDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolNativeInstanceChargePrepaidOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolNativeInstanceChargePrepaidPtrOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolNativeInternetAccessibleOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolNativeInternetAccessiblePtrOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolNativeLifecycleOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolNativeLifecyclePtrOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolNativeManagementOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolNativeManagementPtrOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolNativeScalingOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolNativeScalingPtrOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolNativeSystemDiskOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolNativeSystemDiskPtrOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolTagOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolTagArrayOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolTagTagOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolTagTagArrayOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolTaintOutput{})
+	pulumi.RegisterOutputType(NativeNodePoolTaintArrayOutput{})
 	pulumi.RegisterOutputType(NodePoolAutoScalingConfigOutput{})
 	pulumi.RegisterOutputType(NodePoolAutoScalingConfigPtrOutput{})
 	pulumi.RegisterOutputType(NodePoolAutoScalingConfigDataDiskOutput{})
@@ -12112,6 +16351,36 @@ func init() {
 	pulumi.RegisterOutputType(GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintArrayOutput{})
 	pulumi.RegisterOutputType(GetClusterLevelsListOutput{})
 	pulumi.RegisterOutputType(GetClusterLevelsListArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsFilterOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolAnnotationOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolAnnotationArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolLabelOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolLabelArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolNativeOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolNativeArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolNativeDataDiskOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolNativeDataDiskArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolNativeLifecycleOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolNativeLifecycleArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolNativeManagementOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolNativeManagementArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolNativeScalingOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolNativeScalingArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolNativeSystemDiskOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolNativeSystemDiskArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolTagOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolTagArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolTagTagOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolTagTagArrayOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolTaintOutput{})
+	pulumi.RegisterOutputType(GetClusterNativeNodePoolsNodePoolTaintArrayOutput{})
 	pulumi.RegisterOutputType(GetClusterNodePoolsFilterOutput{})
 	pulumi.RegisterOutputType(GetClusterNodePoolsFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetClusterNodePoolsNodePoolSetOutput{})

@@ -14,6 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// Use this resource to create postgresql instance.
     /// 
     /// &gt; **Note:** To update the charge type, please update the `charge_type` and specify the `period` for the charging period. It only supports updating from `POSTPAID_BY_HOUR` to `PREPAID`, and the `period` field only valid in that upgrading case.
+    /// **Note:** If no values are set for the two parameters: `db_major_version` and `engine_version`, then `engine_version` is set to `10.4` by default. Suggest using parameter `db_major_version` to create an instance
     /// 
     /// ## Example Usage
     /// 
@@ -27,7 +28,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
     ///     var config = new Config();
-    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-1";
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
     ///     // create vpc
     ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
@@ -44,17 +45,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     ///     });
     /// 
     ///     // create postgresql
-    ///     var foo = new Tencentcloud.Postgresql.Instance("foo", new()
+    ///     var example = new Tencentcloud.Postgresql.Instance("example", new()
     ///     {
     ///         AvailabilityZone = availabilityZone,
     ///         ChargeType = "POSTPAID_BY_HOUR",
     ///         VpcId = vpc.Id,
     ///         SubnetId = subnet.Id,
-    ///         EngineVersion = "10.4",
+    ///         DbMajorVersion = "10",
+    ///         EngineVersion = "10.23",
     ///         RootUser = "root123",
     ///         RootPassword = "Root123$",
     ///         Charset = "UTF8",
     ///         ProjectId = 0,
+    ///         Cpu = 1,
     ///         Memory = 2,
     ///         Storage = 10,
     ///         Tags = 
@@ -97,13 +100,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     ///     });
     /// 
     ///     // create postgresql
-    ///     var foo = new Tencentcloud.Postgresql.Instance("foo", new()
+    ///     var example = new Tencentcloud.Postgresql.Instance("example", new()
     ///     {
     ///         AvailabilityZone = availabilityZone,
     ///         ChargeType = "POSTPAID_BY_HOUR",
     ///         VpcId = vpc.Id,
     ///         SubnetId = subnet.Id,
-    ///         EngineVersion = "10.4",
+    ///         DbMajorVersion = "10",
     ///         RootUser = "root123",
     ///         RootPassword = "Root123$",
     ///         Charset = "UTF8",
@@ -144,37 +147,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var pg = new Tencentcloud.Postgresql.Instance("pg", new()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
+    ///     var example = new Tencentcloud.Postgresql.Instance("example", new()
     ///     {
-    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         AvailabilityZone = availabilityZone,
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = "vpc-86v957zb",
+    ///         SubnetId = "subnet-enm92y0m",
+    ///         DbMajorVersion = "11",
+    ///         EngineVersion = "11.12",
+    ///         DbKernelVersion = "v11.12_r1.3",
+    ///         NeedSupportTde = 1,
+    ///         KmsKeyId = "788c606a-c7b7-11ec-82d1-5254001e5c4e",
+    ///         KmsRegion = "ap-guangzhou",
+    ///         RootPassword = "Root123$",
+    ///         Charset = "LATIN1",
+    ///         ProjectId = 0,
+    ///         Memory = 4,
+    ///         Storage = 100,
     ///         BackupPlan = new Tencentcloud.Postgresql.Inputs.InstanceBackupPlanArgs
     ///         {
+    ///             MinBackupStartTime = "00:10:11",
+    ///             MaxBackupStartTime = "01:10:11",
+    ///             BaseBackupRetentionPeriod = 7,
     ///             BackupPeriods = new[]
     ///             {
     ///                 "tuesday",
     ///                 "wednesday",
     ///             },
-    ///             BaseBackupRetentionPeriod = 7,
-    ///             MaxBackupStartTime = "01:10:11",
-    ///             MinBackupStartTime = "00:10:11",
     ///         },
-    ///         ChargeType = "POSTPAID_BY_HOUR",
-    ///         Charset = "LATIN1",
-    ///         DbKernelVersion = "v11.12_r1.3",
-    ///         EngineVersion = "11.12",
-    ///         KmsKeyId = "788c606a-c7b7-11ec-82d1-5254001e5c4e",
-    ///         KmsRegion = "ap-guangzhou",
-    ///         Memory = 4,
-    ///         NeedSupportTde = 1,
-    ///         ProjectId = 0,
-    ///         RootPassword = "xxxxxxxxxx",
-    ///         Storage = 100,
-    ///         SubnetId = "subnet-enm92y0m",
     ///         Tags = 
     ///         {
     ///             { "tf", "test" },
     ///         },
-    ///         VpcId = "vpc-86v957zb",
     ///     });
     /// 
     /// });
@@ -192,20 +198,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var test = new Tencentcloud.Postgresql.Instance("test", new()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-6";
+    ///     var example = new Tencentcloud.Postgresql.Instance("example", new()
     ///     {
-    ///         AvailabilityZone = data.Tencentcloud_availability_zones_by_product.Zone.Zones[5].Name,
+    ///         AvailabilityZone = availabilityZone,
     ///         ChargeType = "POSTPAID_BY_HOUR",
-    ///         VpcId = local.Vpc_id,
-    ///         SubnetId = local.Subnet_id,
+    ///         VpcId = "vpc-86v957zb",
+    ///         SubnetId = "subnet-enm92y0m",
     ///         EngineVersion = "13.3",
-    ///         RootPassword = "*",
+    ///         RootPassword = "Root123$",
     ///         Charset = "LATIN1",
     ///         ProjectId = 0,
     ///         PublicAccessSwitch = false,
     ///         SecurityGroups = new[]
     ///         {
-    ///             local.Sg_id,
+    ///             "sg-cm7fbbf3",
     ///         },
     ///         Memory = 4,
     ///         Storage = 250,
@@ -224,7 +232,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     ///         DbKernelVersion = "v13.3_r1.4",
     ///         Tags = 
     ///         {
-    ///             { "tf", "teest" },
+    ///             { "tf", "test" },
     ///         },
     ///     });
     /// 
@@ -237,7 +245,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// postgresql instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Postgresql/instance:Instance foo postgres-cda1iex1
+    /// $ pulumi import tencentcloud:Postgresql/instance:Instance example postgres-cda1iex1
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/instance:Instance")]
@@ -298,13 +306,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<string> DbKernelVersion { get; private set; } = null!;
 
         /// <summary>
-        /// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+        /// PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         /// </summary>
         [Output("dbMajorVersion")]
         public Output<string> DbMajorVersion { get; private set; } = null!;
 
         /// <summary>
-        /// `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+        /// `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         /// </summary>
         [Output("dbMajorVesion")]
         public Output<string> DbMajorVesion { get; private set; } = null!;
@@ -316,10 +324,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Output<ImmutableArray<Outputs.InstanceDbNodeSet>> DbNodeSets { get; private set; } = null!;
 
         /// <summary>
-        /// Version of the postgresql database engine. Valid values: `10.4`, `11.8`, `12.4`.
+        /// Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
         /// </summary>
         [Output("engineVersion")]
-        public Output<string?> EngineVersion { get; private set; } = null!;
+        public Output<string> EngineVersion { get; private set; } = null!;
 
         /// <summary>
         /// KeyId of the custom key.
@@ -559,13 +567,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<string>? DbKernelVersion { get; set; }
 
         /// <summary>
-        /// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+        /// PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         /// </summary>
         [Input("dbMajorVersion")]
         public Input<string>? DbMajorVersion { get; set; }
 
         /// <summary>
-        /// `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+        /// `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         /// </summary>
         [Input("dbMajorVesion")]
         public Input<string>? DbMajorVesion { get; set; }
@@ -583,7 +591,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
 
         /// <summary>
-        /// Version of the postgresql database engine. Valid values: `10.4`, `11.8`, `12.4`.
+        /// Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
         /// </summary>
         [Input("engineVersion")]
         public Input<string>? EngineVersion { get; set; }
@@ -787,13 +795,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<string>? DbKernelVersion { get; set; }
 
         /// <summary>
-        /// PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+        /// PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         /// </summary>
         [Input("dbMajorVersion")]
         public Input<string>? DbMajorVersion { get; set; }
 
         /// <summary>
-        /// `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
+        /// `db_major_vesion` will be deprecated, use `db_major_version` instead. PostgreSQL major version number. Valid values: 10, 11, 12, 13, 14, 15, 16. If it is specified, an instance running the latest kernel of PostgreSQL DBMajorVersion will be created.
         /// </summary>
         [Input("dbMajorVesion")]
         public Input<string>? DbMajorVesion { get; set; }
@@ -811,7 +819,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
 
         /// <summary>
-        /// Version of the postgresql database engine. Valid values: `10.4`, `11.8`, `12.4`.
+        /// Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
         /// </summary>
         [Input("engineVersion")]
         public Input<string>? EngineVersion { get; set; }

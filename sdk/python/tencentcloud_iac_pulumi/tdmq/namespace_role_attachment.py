@@ -178,7 +178,7 @@ class NamespaceRoleAttachment(pulumi.CustomResource):
                  role_name: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
-        Provide a resource to create a TDMQ role.
+        Provide a resource to create a TDMQ environment role.
 
         ## Example Usage
 
@@ -231,7 +231,7 @@ class NamespaceRoleAttachment(pulumi.CustomResource):
                  args: NamespaceRoleAttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provide a resource to create a TDMQ role.
+        Provide a resource to create a TDMQ environment role.
 
         ## Example Usage
 

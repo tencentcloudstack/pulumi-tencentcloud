@@ -127,6 +127,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// });
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ## Import
+    /// 
+    /// tke scale worker can be imported, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker test cls-xxx#ins-xxx
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/scaleWorker:ScaleWorker")]
     public partial class ScaleWorker : global::Pulumi.CustomResource

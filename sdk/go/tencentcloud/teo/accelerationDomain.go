@@ -61,8 +61,16 @@ type AccelerationDomain struct {
 	Cname pulumi.StringOutput `pulumi:"cname"`
 	// Accelerated domain name.
 	DomainName pulumi.StringOutput `pulumi:"domainName"`
+	// HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+	HttpOriginPort pulumi.IntOutput `pulumi:"httpOriginPort"`
+	// HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+	HttpsOriginPort pulumi.IntOutput `pulumi:"httpsOriginPort"`
+	// IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
+	Ipv6Status pulumi.StringOutput `pulumi:"ipv6Status"`
 	// Details of the origin.
 	OriginInfo AccelerationDomainOriginInfoOutput `pulumi:"originInfo"`
+	// Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
+	OriginProtocol pulumi.StringOutput `pulumi:"originProtocol"`
 	// Accelerated domain name status, the values are: `online`: enabled; `offline`: disabled.
 	Status pulumi.StringPtrOutput `pulumi:"status"`
 	// ID of the site related with the accelerated domain name.
@@ -112,8 +120,16 @@ type accelerationDomainState struct {
 	Cname *string `pulumi:"cname"`
 	// Accelerated domain name.
 	DomainName *string `pulumi:"domainName"`
+	// HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+	HttpOriginPort *int `pulumi:"httpOriginPort"`
+	// HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+	HttpsOriginPort *int `pulumi:"httpsOriginPort"`
+	// IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
+	Ipv6Status *string `pulumi:"ipv6Status"`
 	// Details of the origin.
 	OriginInfo *AccelerationDomainOriginInfo `pulumi:"originInfo"`
+	// Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
+	OriginProtocol *string `pulumi:"originProtocol"`
 	// Accelerated domain name status, the values are: `online`: enabled; `offline`: disabled.
 	Status *string `pulumi:"status"`
 	// ID of the site related with the accelerated domain name.
@@ -125,8 +141,16 @@ type AccelerationDomainState struct {
 	Cname pulumi.StringPtrInput
 	// Accelerated domain name.
 	DomainName pulumi.StringPtrInput
+	// HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+	HttpOriginPort pulumi.IntPtrInput
+	// HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+	HttpsOriginPort pulumi.IntPtrInput
+	// IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
+	Ipv6Status pulumi.StringPtrInput
 	// Details of the origin.
 	OriginInfo AccelerationDomainOriginInfoPtrInput
+	// Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
+	OriginProtocol pulumi.StringPtrInput
 	// Accelerated domain name status, the values are: `online`: enabled; `offline`: disabled.
 	Status pulumi.StringPtrInput
 	// ID of the site related with the accelerated domain name.
@@ -140,8 +164,16 @@ func (AccelerationDomainState) ElementType() reflect.Type {
 type accelerationDomainArgs struct {
 	// Accelerated domain name.
 	DomainName string `pulumi:"domainName"`
+	// HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+	HttpOriginPort *int `pulumi:"httpOriginPort"`
+	// HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+	HttpsOriginPort *int `pulumi:"httpsOriginPort"`
+	// IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
+	Ipv6Status *string `pulumi:"ipv6Status"`
 	// Details of the origin.
 	OriginInfo AccelerationDomainOriginInfo `pulumi:"originInfo"`
+	// Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
+	OriginProtocol *string `pulumi:"originProtocol"`
 	// Accelerated domain name status, the values are: `online`: enabled; `offline`: disabled.
 	Status *string `pulumi:"status"`
 	// ID of the site related with the accelerated domain name.
@@ -152,8 +184,16 @@ type accelerationDomainArgs struct {
 type AccelerationDomainArgs struct {
 	// Accelerated domain name.
 	DomainName pulumi.StringInput
+	// HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+	HttpOriginPort pulumi.IntPtrInput
+	// HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+	HttpsOriginPort pulumi.IntPtrInput
+	// IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
+	Ipv6Status pulumi.StringPtrInput
 	// Details of the origin.
 	OriginInfo AccelerationDomainOriginInfoInput
+	// Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
+	OriginProtocol pulumi.StringPtrInput
 	// Accelerated domain name status, the values are: `online`: enabled; `offline`: disabled.
 	Status pulumi.StringPtrInput
 	// ID of the site related with the accelerated domain name.
@@ -257,9 +297,29 @@ func (o AccelerationDomainOutput) DomainName() pulumi.StringOutput {
 	return o.ApplyT(func(v *AccelerationDomain) pulumi.StringOutput { return v.DomainName }).(pulumi.StringOutput)
 }
 
+// HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+func (o AccelerationDomainOutput) HttpOriginPort() pulumi.IntOutput {
+	return o.ApplyT(func(v *AccelerationDomain) pulumi.IntOutput { return v.HttpOriginPort }).(pulumi.IntOutput)
+}
+
+// HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+func (o AccelerationDomainOutput) HttpsOriginPort() pulumi.IntOutput {
+	return o.ApplyT(func(v *AccelerationDomain) pulumi.IntOutput { return v.HttpsOriginPort }).(pulumi.IntOutput)
+}
+
+// IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
+func (o AccelerationDomainOutput) Ipv6Status() pulumi.StringOutput {
+	return o.ApplyT(func(v *AccelerationDomain) pulumi.StringOutput { return v.Ipv6Status }).(pulumi.StringOutput)
+}
+
 // Details of the origin.
 func (o AccelerationDomainOutput) OriginInfo() AccelerationDomainOriginInfoOutput {
 	return o.ApplyT(func(v *AccelerationDomain) AccelerationDomainOriginInfoOutput { return v.OriginInfo }).(AccelerationDomainOriginInfoOutput)
+}
+
+// Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
+func (o AccelerationDomainOutput) OriginProtocol() pulumi.StringOutput {
+	return o.ApplyT(func(v *AccelerationDomain) pulumi.StringOutput { return v.OriginProtocol }).(pulumi.StringOutput)
 }
 
 // Accelerated domain name status, the values are: `online`: enabled; `offline`: disabled.

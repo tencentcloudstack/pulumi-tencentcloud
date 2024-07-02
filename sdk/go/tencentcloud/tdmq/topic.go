@@ -69,14 +69,6 @@ import (
 //
 // ```
 // <!--End PulumiCodeChooser -->
-//
-// ## Import
-//
-// Tdmq Topic can be imported, e.g.
-//
-// ```sh
-// $ pulumi import tencentcloud:Tdmq/topic:Topic test topic_id
-// ```
 type Topic struct {
 	pulumi.CustomResourceState
 

@@ -13,7 +13,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
 
     public sealed class RuleEngineRuleSubRuleRuleGetArgs : global::Pulumi.ResourceArgs
     {
-        [Input("actions", required: true)]
+        [Input("actions")]
         private InputList<Inputs.RuleEngineRuleSubRuleRuleActionGetArgs>? _actions;
 
         /// <summary>

@@ -11,7 +11,7 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
 {
     /// <summary>
-    /// Provide a resource to create a TDMQ role.
+    /// Provide a resource to create a TDMQ environment role.
     /// 
     /// ## Example Usage
     /// 

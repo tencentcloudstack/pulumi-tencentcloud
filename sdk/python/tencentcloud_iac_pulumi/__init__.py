@@ -4011,6 +4011,14 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Kubernetes/nativeNodePool",
+  "fqn": "tencentcloud_iac_pulumi.kubernetes",
+  "classes": {
+   "tencentcloud:Kubernetes/nativeNodePool:NativeNodePool": "NativeNodePool"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Kubernetes/nodePool",
   "fqn": "tencentcloud_iac_pulumi.kubernetes",
   "classes": {
@@ -4343,6 +4351,22 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.mongodb",
   "classes": {
    "tencentcloud:Mongodb/instanceBackupDownloadTask:InstanceBackupDownloadTask": "InstanceBackupDownloadTask"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Mongodb/instanceBackupRule",
+  "fqn": "tencentcloud_iac_pulumi.mongodb",
+  "classes": {
+   "tencentcloud:Mongodb/instanceBackupRule:InstanceBackupRule": "InstanceBackupRule"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Mongodb/instanceTransparentDataEncryption",
+  "fqn": "tencentcloud_iac_pulumi.mongodb",
+  "classes": {
+   "tencentcloud:Mongodb/instanceTransparentDataEncryption:InstanceTransparentDataEncryption": "InstanceTransparentDataEncryption"
   }
  },
  {
@@ -7095,6 +7119,14 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.teo",
   "classes": {
    "tencentcloud:Teo/ownershipVerify:OwnershipVerify": "OwnershipVerify"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Teo/realtimeLogDelivery",
+  "fqn": "tencentcloud_iac_pulumi.teo",
+  "classes": {
+   "tencentcloud:Teo/realtimeLogDelivery:RealtimeLogDelivery": "RealtimeLogDelivery"
   }
  },
  {

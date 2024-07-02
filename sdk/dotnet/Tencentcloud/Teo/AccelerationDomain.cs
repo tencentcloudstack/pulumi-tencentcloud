@@ -63,10 +63,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<string> DomainName { get; private set; } = null!;
 
         /// <summary>
+        /// HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+        /// </summary>
+        [Output("httpOriginPort")]
+        public Output<int> HttpOriginPort { get; private set; } = null!;
+
+        /// <summary>
+        /// HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+        /// </summary>
+        [Output("httpsOriginPort")]
+        public Output<int> HttpsOriginPort { get; private set; } = null!;
+
+        /// <summary>
+        /// IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
+        /// </summary>
+        [Output("ipv6Status")]
+        public Output<string> Ipv6Status { get; private set; } = null!;
+
+        /// <summary>
         /// Details of the origin.
         /// </summary>
         [Output("originInfo")]
         public Output<Outputs.AccelerationDomainOriginInfo> OriginInfo { get; private set; } = null!;
+
+        /// <summary>
+        /// Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
+        /// </summary>
+        [Output("originProtocol")]
+        public Output<string> OriginProtocol { get; private set; } = null!;
 
         /// <summary>
         /// Accelerated domain name status, the values are: `online`: enabled; `offline`: disabled.
@@ -134,10 +158,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string> DomainName { get; set; } = null!;
 
         /// <summary>
+        /// HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+        /// </summary>
+        [Input("httpOriginPort")]
+        public Input<int>? HttpOriginPort { get; set; }
+
+        /// <summary>
+        /// HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+        /// </summary>
+        [Input("httpsOriginPort")]
+        public Input<int>? HttpsOriginPort { get; set; }
+
+        /// <summary>
+        /// IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
+        /// </summary>
+        [Input("ipv6Status")]
+        public Input<string>? Ipv6Status { get; set; }
+
+        /// <summary>
         /// Details of the origin.
         /// </summary>
         [Input("originInfo", required: true)]
         public Input<Inputs.AccelerationDomainOriginInfoArgs> OriginInfo { get; set; } = null!;
+
+        /// <summary>
+        /// Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
+        /// </summary>
+        [Input("originProtocol")]
+        public Input<string>? OriginProtocol { get; set; }
 
         /// <summary>
         /// Accelerated domain name status, the values are: `online`: enabled; `offline`: disabled.
@@ -172,10 +220,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string>? DomainName { get; set; }
 
         /// <summary>
+        /// HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+        /// </summary>
+        [Input("httpOriginPort")]
+        public Input<int>? HttpOriginPort { get; set; }
+
+        /// <summary>
+        /// HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+        /// </summary>
+        [Input("httpsOriginPort")]
+        public Input<int>? HttpsOriginPort { get; set; }
+
+        /// <summary>
+        /// IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
+        /// </summary>
+        [Input("ipv6Status")]
+        public Input<string>? Ipv6Status { get; set; }
+
+        /// <summary>
         /// Details of the origin.
         /// </summary>
         [Input("originInfo")]
         public Input<Inputs.AccelerationDomainOriginInfoGetArgs>? OriginInfo { get; set; }
+
+        /// <summary>
+        /// Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
+        /// </summary>
+        [Input("originProtocol")]
+        public Input<string>? OriginProtocol { get; set; }
 
         /// <summary>
         /// Accelerated domain name status, the values are: `online`: enabled; `offline`: disabled.

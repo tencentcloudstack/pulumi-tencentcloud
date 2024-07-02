@@ -19,8 +19,10 @@ from .get_cluster_authentication_options import *
 from .get_cluster_common_names import *
 from .get_cluster_instances import *
 from .get_cluster_levels import *
+from .get_cluster_native_node_pools import *
 from .get_cluster_node_pools import *
 from .get_clusters import *
+from .native_node_pool import *
 from .node_pool import *
 from .scale_worker import *
 from .serverless_node_pool import *

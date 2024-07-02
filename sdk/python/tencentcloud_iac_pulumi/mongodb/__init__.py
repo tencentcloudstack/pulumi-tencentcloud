@@ -16,6 +16,8 @@ from .instance import *
 from .instance_account import *
 from .instance_backup import *
 from .instance_backup_download_task import *
+from .instance_backup_rule import *
+from .instance_transparent_data_encryption import *
 from .sharding_instance import *
 from .standby_instance import *
 from ._inputs import *

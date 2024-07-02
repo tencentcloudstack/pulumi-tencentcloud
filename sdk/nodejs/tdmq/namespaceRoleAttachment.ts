@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provide a resource to create a TDMQ role.
+ * Provide a resource to create a TDMQ environment role.
  *
  * ## Example Usage
  *

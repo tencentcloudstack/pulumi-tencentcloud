@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provide a resource to create a tdmq namespace.
+ * Provide a resource to create a TDMQ namespace.
  *
  * ## Example Usage
  *
@@ -41,7 +41,7 @@ import * as utilities from "../utilities";
  * Tdmq namespace can be imported, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
+ * $ pulumi import tencentcloud:Tdmq/namespace:Namespace example tf_example#pulsar-78bwjaj8epxv
  * ```
  */
 export class Namespace extends pulumi.CustomResource {

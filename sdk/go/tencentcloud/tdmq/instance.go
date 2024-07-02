@@ -29,9 +29,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Tdmq.NewInstance(ctx, "foo", &Tdmq.InstanceArgs{
-//				ClusterName: pulumi.String("example"),
-//				Remark:      pulumi.String("this is description."),
+//			_, err := Tdmq.NewInstance(ctx, "example", &Tdmq.InstanceArgs{
+//				ClusterName: pulumi.String("tf_example"),
+//				Remark:      pulumi.String("remark."),
 //				Tags: pulumi.Map{
 //					"createdBy": pulumi.Any("terraform"),
 //				},
@@ -51,7 +51,7 @@ import (
 // Tdmq instance can be imported, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Tdmq/instance:Instance test tdmq_id
+// $ pulumi import tencentcloud:Tdmq/instance:Instance example pulsar-78bwjaj8epxv
 // ```
 type Instance struct {
 	pulumi.CustomResourceState

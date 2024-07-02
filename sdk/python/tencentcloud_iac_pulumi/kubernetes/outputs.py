@@ -32,6 +32,19 @@ __all__ = [
     'ClusterWorkerConfigDataDisk',
     'ClusterWorkerInstancesList',
     'EncryptionProtectionKmsConfiguration',
+    'NativeNodePoolAnnotation',
+    'NativeNodePoolLabel',
+    'NativeNodePoolNative',
+    'NativeNodePoolNativeDataDisk',
+    'NativeNodePoolNativeInstanceChargePrepaid',
+    'NativeNodePoolNativeInternetAccessible',
+    'NativeNodePoolNativeLifecycle',
+    'NativeNodePoolNativeManagement',
+    'NativeNodePoolNativeScaling',
+    'NativeNodePoolNativeSystemDisk',
+    'NativeNodePoolTag',
+    'NativeNodePoolTagTag',
+    'NativeNodePoolTaint',
     'NodePoolAutoScalingConfig',
     'NodePoolAutoScalingConfigDataDisk',
     'NodePoolNodeConfig',
@@ -63,6 +76,21 @@ __all__ = [
     'GetClusterInstancesInstanceSetInstanceAdvancedSettingLabelResult',
     'GetClusterInstancesInstanceSetInstanceAdvancedSettingTaintResult',
     'GetClusterLevelsListResult',
+    'GetClusterNativeNodePoolsFilterResult',
+    'GetClusterNativeNodePoolsNodePoolResult',
+    'GetClusterNativeNodePoolsNodePoolAnnotationResult',
+    'GetClusterNativeNodePoolsNodePoolLabelResult',
+    'GetClusterNativeNodePoolsNodePoolNativeResult',
+    'GetClusterNativeNodePoolsNodePoolNativeDataDiskResult',
+    'GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidResult',
+    'GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleResult',
+    'GetClusterNativeNodePoolsNodePoolNativeLifecycleResult',
+    'GetClusterNativeNodePoolsNodePoolNativeManagementResult',
+    'GetClusterNativeNodePoolsNodePoolNativeScalingResult',
+    'GetClusterNativeNodePoolsNodePoolNativeSystemDiskResult',
+    'GetClusterNativeNodePoolsNodePoolTagResult',
+    'GetClusterNativeNodePoolsNodePoolTagTagResult',
+    'GetClusterNativeNodePoolsNodePoolTaintResult',
     'GetClusterNodePoolsFilterResult',
     'GetClusterNodePoolsNodePoolSetResult',
     'GetClusterNodePoolsNodePoolSetDataDiskResult',
@@ -1335,7 +1363,7 @@ class ClusterMasterConfig(dict):
         :param bool enhanced_security_service: To specify whether to enable cloud security service. Default is TRUE.
         :param str hostname: The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
         :param str hpc_cluster_id: Id of cvm hpc cluster.
-        :param str img_id: The valid image id, format of img-xxx.
+        :param str img_id: The valid image id, format of img-xxx. Note: `img_id` will be replaced with the image corresponding to TKE `cluster_os`.
         :param str instance_charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`, `PREPAID` instance will not terminated after cluster deleted, and may not allow to delete before expired.
         :param int instance_charge_type_prepaid_period: The tenancy (time unit is month) of the prepaid instance. NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param str instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
@@ -1348,7 +1376,7 @@ class ClusterMasterConfig(dict):
         :param Sequence[str] security_group_ids: Security groups to which a CVM instance belongs.
         :param int system_disk_size: Volume of system disk in GB. Default is `50`.
         :param str system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated.
-        :param str user_data: User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
+        :param str user_data: ase64-encoded User Data text, the length limit is 16KB.
         """
         pulumi.set(__self__, "instance_type", instance_type)
         pulumi.set(__self__, "subnet_id", subnet_id)
@@ -1511,7 +1539,7 @@ class ClusterMasterConfig(dict):
     @pulumi.getter(name="imgId")
     def img_id(self) -> Optional[str]:
         """
-        The valid image id, format of img-xxx.
+        The valid image id, format of img-xxx. Note: `img_id` will be replaced with the image corresponding to TKE `cluster_os`.
         """
         return pulumi.get(self, "img_id")
 
@@ -1615,7 +1643,7 @@ class ClusterMasterConfig(dict):
     @pulumi.getter(name="userData")
     def user_data(self) -> Optional[str]:
         """
-        User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
+        ase64-encoded User Data text, the length limit is 16KB.
         """
         return pulumi.get(self, "user_data")
 
@@ -2019,7 +2047,7 @@ class ClusterWorkerConfig(dict):
         :param bool enhanced_security_service: To specify whether to enable cloud security service. Default is TRUE.
         :param str hostname: The host name of the attached instance. Dot (.) and dash (-) cannot be used as the first and last characters of HostName and cannot be used consecutively. Windows example: The length of the name character is [2, 15], letters (capitalization is not restricted), numbers and dashes (-) are allowed, dots (.) are not supported, and not all numbers are allowed. Examples of other types (Linux, etc.): The character length is [2, 60], and multiple dots are allowed. There is a segment between the dots. Each segment allows letters (with no limitation on capitalization), numbers and dashes (-).
         :param str hpc_cluster_id: Id of cvm hpc cluster.
-        :param str img_id: The valid image id, format of img-xxx.
+        :param str img_id: The valid image id, format of img-xxx. Note: `img_id` will be replaced with the image corresponding to TKE `cluster_os`.
         :param str instance_charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. The default is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`, `PREPAID` instance will not terminated after cluster deleted, and may not allow to delete before expired.
         :param int instance_charge_type_prepaid_period: The tenancy (time unit is month) of the prepaid instance. NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param str instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
@@ -2032,7 +2060,7 @@ class ClusterWorkerConfig(dict):
         :param Sequence[str] security_group_ids: Security groups to which a CVM instance belongs.
         :param int system_disk_size: Volume of system disk in GB. Default is `50`.
         :param str system_disk_type: System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_SSD`: SSD, `CLOUD_PREMIUM`: Premium Cloud Storage. NOTE: `CLOUD_BASIC`, `LOCAL_BASIC` and `LOCAL_SSD` are deprecated.
-        :param str user_data: User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
+        :param str user_data: ase64-encoded User Data text, the length limit is 16KB.
         """
         pulumi.set(__self__, "instance_type", instance_type)
         pulumi.set(__self__, "subnet_id", subnet_id)
@@ -2195,7 +2223,7 @@ class ClusterWorkerConfig(dict):
     @pulumi.getter(name="imgId")
     def img_id(self) -> Optional[str]:
         """
-        The valid image id, format of img-xxx.
+        The valid image id, format of img-xxx. Note: `img_id` will be replaced with the image corresponding to TKE `cluster_os`.
         """
         return pulumi.get(self, "img_id")
 
@@ -2299,7 +2327,7 @@ class ClusterWorkerConfig(dict):
     @pulumi.getter(name="userData")
     def user_data(self) -> Optional[str]:
         """
-        User data provided to instances, needs to be encoded in base64, and the maximum supported data size is 16KB.
+        ase64-encoded User Data text, the length limit is 16KB.
         """
         return pulumi.get(self, "user_data")
 
@@ -2590,6 +2618,949 @@ class EncryptionProtectionKmsConfiguration(dict):
         kms region.
         """
         return pulumi.get(self, "kms_region")
+
+
+@pulumi.output_type
+class NativeNodePoolAnnotation(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 value: str):
+        """
+        :param str name: Name in the map table.
+        :param str value: Value in the map table.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name in the map table.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value in the map table.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class NativeNodePoolLabel(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 value: str):
+        """
+        :param str name: Name in the map table.
+        :param str value: Value in map table.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Name in the map table.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value in map table.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class NativeNodePoolNative(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "instanceChargeType":
+            suggest = "instance_charge_type"
+        elif key == "instanceTypes":
+            suggest = "instance_types"
+        elif key == "securityGroupIds":
+            suggest = "security_group_ids"
+        elif key == "subnetIds":
+            suggest = "subnet_ids"
+        elif key == "systemDisk":
+            suggest = "system_disk"
+        elif key == "autoRepair":
+            suggest = "auto_repair"
+        elif key == "dataDisks":
+            suggest = "data_disks"
+        elif key == "enableAutoscaling":
+            suggest = "enable_autoscaling"
+        elif key == "healthCheckPolicyName":
+            suggest = "health_check_policy_name"
+        elif key == "hostNamePattern":
+            suggest = "host_name_pattern"
+        elif key == "instanceChargePrepaid":
+            suggest = "instance_charge_prepaid"
+        elif key == "internetAccessible":
+            suggest = "internet_accessible"
+        elif key == "keyIds":
+            suggest = "key_ids"
+        elif key == "kubeletArgs":
+            suggest = "kubelet_args"
+        elif key == "runtimeRootDir":
+            suggest = "runtime_root_dir"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeNodePoolNative. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeNodePoolNative.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeNodePoolNative.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 instance_charge_type: str,
+                 instance_types: Sequence[str],
+                 security_group_ids: Sequence[str],
+                 subnet_ids: Sequence[str],
+                 system_disk: 'outputs.NativeNodePoolNativeSystemDisk',
+                 auto_repair: Optional[bool] = None,
+                 data_disks: Optional[Sequence['outputs.NativeNodePoolNativeDataDisk']] = None,
+                 enable_autoscaling: Optional[bool] = None,
+                 health_check_policy_name: Optional[str] = None,
+                 host_name_pattern: Optional[str] = None,
+                 instance_charge_prepaid: Optional['outputs.NativeNodePoolNativeInstanceChargePrepaid'] = None,
+                 internet_accessible: Optional['outputs.NativeNodePoolNativeInternetAccessible'] = None,
+                 key_ids: Optional[Sequence[str]] = None,
+                 kubelet_args: Optional[Sequence[str]] = None,
+                 lifecycle: Optional['outputs.NativeNodePoolNativeLifecycle'] = None,
+                 management: Optional['outputs.NativeNodePoolNativeManagement'] = None,
+                 replicas: Optional[int] = None,
+                 runtime_root_dir: Optional[str] = None,
+                 scaling: Optional['outputs.NativeNodePoolNativeScaling'] = None):
+        """
+        :param str instance_charge_type: Node billing type. `PREPAID` is a yearly and monthly subscription, `POSTPAID_BY_HOUR` is a pay-as-you-go plan. The default is `POSTPAID_BY_HOUR`.
+        :param Sequence[str] instance_types: Model list.
+        :param Sequence[str] security_group_ids: Security group list.
+        :param Sequence[str] subnet_ids: Subnet list.
+        :param 'NativeNodePoolNativeSystemDiskArgs' system_disk: System disk configuration.
+        :param bool auto_repair: Whether to enable self-healing ability.
+        :param Sequence['NativeNodePoolNativeDataDiskArgs'] data_disks: Native node pool data disk list.
+        :param bool enable_autoscaling: Whether to enable elastic scaling.
+        :param str health_check_policy_name: Fault self-healing rule name.
+        :param str host_name_pattern: Native node pool hostName pattern string.
+        :param 'NativeNodePoolNativeInstanceChargePrepaidArgs' instance_charge_prepaid: Billing configuration for yearly and monthly models.
+        :param 'NativeNodePoolNativeInternetAccessibleArgs' internet_accessible: Public network bandwidth settings.
+        :param Sequence[str] key_ids: Node pool ssh public key id array.
+        :param Sequence[str] kubelet_args: Kubelet custom parameters.
+        :param 'NativeNodePoolNativeLifecycleArgs' lifecycle: Predefined scripts.
+        :param 'NativeNodePoolNativeManagementArgs' management: Node pool management parameter settings.
+        :param int replicas: Desired number of nodes.
+        :param str runtime_root_dir: Runtime root directory.
+        :param 'NativeNodePoolNativeScalingArgs' scaling: Node pool scaling configuration.
+        """
+        pulumi.set(__self__, "instance_charge_type", instance_charge_type)
+        pulumi.set(__self__, "instance_types", instance_types)
+        pulumi.set(__self__, "security_group_ids", security_group_ids)
+        pulumi.set(__self__, "subnet_ids", subnet_ids)
+        pulumi.set(__self__, "system_disk", system_disk)
+        if auto_repair is not None:
+            pulumi.set(__self__, "auto_repair", auto_repair)
+        if data_disks is not None:
+            pulumi.set(__self__, "data_disks", data_disks)
+        if enable_autoscaling is not None:
+            pulumi.set(__self__, "enable_autoscaling", enable_autoscaling)
+        if health_check_policy_name is not None:
+            pulumi.set(__self__, "health_check_policy_name", health_check_policy_name)
+        if host_name_pattern is not None:
+            pulumi.set(__self__, "host_name_pattern", host_name_pattern)
+        if instance_charge_prepaid is not None:
+            pulumi.set(__self__, "instance_charge_prepaid", instance_charge_prepaid)
+        if internet_accessible is not None:
+            pulumi.set(__self__, "internet_accessible", internet_accessible)
+        if key_ids is not None:
+            pulumi.set(__self__, "key_ids", key_ids)
+        if kubelet_args is not None:
+            pulumi.set(__self__, "kubelet_args", kubelet_args)
+        if lifecycle is not None:
+            pulumi.set(__self__, "lifecycle", lifecycle)
+        if management is not None:
+            pulumi.set(__self__, "management", management)
+        if replicas is not None:
+            pulumi.set(__self__, "replicas", replicas)
+        if runtime_root_dir is not None:
+            pulumi.set(__self__, "runtime_root_dir", runtime_root_dir)
+        if scaling is not None:
+            pulumi.set(__self__, "scaling", scaling)
+
+    @property
+    @pulumi.getter(name="instanceChargeType")
+    def instance_charge_type(self) -> str:
+        """
+        Node billing type. `PREPAID` is a yearly and monthly subscription, `POSTPAID_BY_HOUR` is a pay-as-you-go plan. The default is `POSTPAID_BY_HOUR`.
+        """
+        return pulumi.get(self, "instance_charge_type")
+
+    @property
+    @pulumi.getter(name="instanceTypes")
+    def instance_types(self) -> Sequence[str]:
+        """
+        Model list.
+        """
+        return pulumi.get(self, "instance_types")
+
+    @property
+    @pulumi.getter(name="securityGroupIds")
+    def security_group_ids(self) -> Sequence[str]:
+        """
+        Security group list.
+        """
+        return pulumi.get(self, "security_group_ids")
+
+    @property
+    @pulumi.getter(name="subnetIds")
+    def subnet_ids(self) -> Sequence[str]:
+        """
+        Subnet list.
+        """
+        return pulumi.get(self, "subnet_ids")
+
+    @property
+    @pulumi.getter(name="systemDisk")
+    def system_disk(self) -> 'outputs.NativeNodePoolNativeSystemDisk':
+        """
+        System disk configuration.
+        """
+        return pulumi.get(self, "system_disk")
+
+    @property
+    @pulumi.getter(name="autoRepair")
+    def auto_repair(self) -> Optional[bool]:
+        """
+        Whether to enable self-healing ability.
+        """
+        return pulumi.get(self, "auto_repair")
+
+    @property
+    @pulumi.getter(name="dataDisks")
+    def data_disks(self) -> Optional[Sequence['outputs.NativeNodePoolNativeDataDisk']]:
+        """
+        Native node pool data disk list.
+        """
+        return pulumi.get(self, "data_disks")
+
+    @property
+    @pulumi.getter(name="enableAutoscaling")
+    def enable_autoscaling(self) -> Optional[bool]:
+        """
+        Whether to enable elastic scaling.
+        """
+        return pulumi.get(self, "enable_autoscaling")
+
+    @property
+    @pulumi.getter(name="healthCheckPolicyName")
+    def health_check_policy_name(self) -> Optional[str]:
+        """
+        Fault self-healing rule name.
+        """
+        return pulumi.get(self, "health_check_policy_name")
+
+    @property
+    @pulumi.getter(name="hostNamePattern")
+    def host_name_pattern(self) -> Optional[str]:
+        """
+        Native node pool hostName pattern string.
+        """
+        return pulumi.get(self, "host_name_pattern")
+
+    @property
+    @pulumi.getter(name="instanceChargePrepaid")
+    def instance_charge_prepaid(self) -> Optional['outputs.NativeNodePoolNativeInstanceChargePrepaid']:
+        """
+        Billing configuration for yearly and monthly models.
+        """
+        return pulumi.get(self, "instance_charge_prepaid")
+
+    @property
+    @pulumi.getter(name="internetAccessible")
+    def internet_accessible(self) -> Optional['outputs.NativeNodePoolNativeInternetAccessible']:
+        """
+        Public network bandwidth settings.
+        """
+        return pulumi.get(self, "internet_accessible")
+
+    @property
+    @pulumi.getter(name="keyIds")
+    def key_ids(self) -> Optional[Sequence[str]]:
+        """
+        Node pool ssh public key id array.
+        """
+        return pulumi.get(self, "key_ids")
+
+    @property
+    @pulumi.getter(name="kubeletArgs")
+    def kubelet_args(self) -> Optional[Sequence[str]]:
+        """
+        Kubelet custom parameters.
+        """
+        return pulumi.get(self, "kubelet_args")
+
+    @property
+    @pulumi.getter
+    def lifecycle(self) -> Optional['outputs.NativeNodePoolNativeLifecycle']:
+        """
+        Predefined scripts.
+        """
+        return pulumi.get(self, "lifecycle")
+
+    @property
+    @pulumi.getter
+    def management(self) -> Optional['outputs.NativeNodePoolNativeManagement']:
+        """
+        Node pool management parameter settings.
+        """
+        return pulumi.get(self, "management")
+
+    @property
+    @pulumi.getter
+    def replicas(self) -> Optional[int]:
+        """
+        Desired number of nodes.
+        """
+        return pulumi.get(self, "replicas")
+
+    @property
+    @pulumi.getter(name="runtimeRootDir")
+    def runtime_root_dir(self) -> Optional[str]:
+        """
+        Runtime root directory.
+        """
+        return pulumi.get(self, "runtime_root_dir")
+
+    @property
+    @pulumi.getter
+    def scaling(self) -> Optional['outputs.NativeNodePoolNativeScaling']:
+        """
+        Node pool scaling configuration.
+        """
+        return pulumi.get(self, "scaling")
+
+
+@pulumi.output_type
+class NativeNodePoolNativeDataDisk(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "autoFormatAndMount":
+            suggest = "auto_format_and_mount"
+        elif key == "diskSize":
+            suggest = "disk_size"
+        elif key == "diskType":
+            suggest = "disk_type"
+        elif key == "diskPartition":
+            suggest = "disk_partition"
+        elif key == "fileSystem":
+            suggest = "file_system"
+        elif key == "kmsKeyId":
+            suggest = "kms_key_id"
+        elif key == "mountTarget":
+            suggest = "mount_target"
+        elif key == "snapshotId":
+            suggest = "snapshot_id"
+        elif key == "throughputPerformance":
+            suggest = "throughput_performance"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeNodePoolNativeDataDisk. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeNodePoolNativeDataDisk.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeNodePoolNativeDataDisk.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 auto_format_and_mount: bool,
+                 disk_size: int,
+                 disk_type: str,
+                 disk_partition: Optional[str] = None,
+                 encrypt: Optional[str] = None,
+                 file_system: Optional[str] = None,
+                 kms_key_id: Optional[str] = None,
+                 mount_target: Optional[str] = None,
+                 snapshot_id: Optional[str] = None,
+                 throughput_performance: Optional[int] = None):
+        """
+        :param bool auto_format_and_mount: Whether to automatically format the disk and mount it.
+        :param int disk_size: Cloud disk size (G).
+        :param str disk_type: Cloud disk type. Valid values: `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: cloud SSD disk, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD, `LOCAL_NVME`: local NVME disk.
+        :param str disk_partition: Mount device name or partition name.
+        :param str encrypt: Pass in this parameter to create an encrypted cloud disk. The value is fixed to `ENCRYPT`.
+        :param str file_system: File system (ext3/ext4/xfs).
+        :param str kms_key_id: Customize the key when purchasing an encrypted disk. When this parameter is passed in, the Encrypt parameter is not empty.
+        :param str mount_target: Mount directory.
+        :param str snapshot_id: Snapshot ID. If passed in, the cloud disk will be created based on this snapshot. The snapshot type must be a data disk snapshot.
+        :param int throughput_performance: Cloud disk performance, unit: MB/s. Use this parameter to purchase additional performance for the cloud disk.
+        """
+        pulumi.set(__self__, "auto_format_and_mount", auto_format_and_mount)
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type", disk_type)
+        if disk_partition is not None:
+            pulumi.set(__self__, "disk_partition", disk_partition)
+        if encrypt is not None:
+            pulumi.set(__self__, "encrypt", encrypt)
+        if file_system is not None:
+            pulumi.set(__self__, "file_system", file_system)
+        if kms_key_id is not None:
+            pulumi.set(__self__, "kms_key_id", kms_key_id)
+        if mount_target is not None:
+            pulumi.set(__self__, "mount_target", mount_target)
+        if snapshot_id is not None:
+            pulumi.set(__self__, "snapshot_id", snapshot_id)
+        if throughput_performance is not None:
+            pulumi.set(__self__, "throughput_performance", throughput_performance)
+
+    @property
+    @pulumi.getter(name="autoFormatAndMount")
+    def auto_format_and_mount(self) -> bool:
+        """
+        Whether to automatically format the disk and mount it.
+        """
+        return pulumi.get(self, "auto_format_and_mount")
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        """
+        Cloud disk size (G).
+        """
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> str:
+        """
+        Cloud disk type. Valid values: `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: cloud SSD disk, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD, `LOCAL_NVME`: local NVME disk.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @property
+    @pulumi.getter(name="diskPartition")
+    def disk_partition(self) -> Optional[str]:
+        """
+        Mount device name or partition name.
+        """
+        return pulumi.get(self, "disk_partition")
+
+    @property
+    @pulumi.getter
+    def encrypt(self) -> Optional[str]:
+        """
+        Pass in this parameter to create an encrypted cloud disk. The value is fixed to `ENCRYPT`.
+        """
+        return pulumi.get(self, "encrypt")
+
+    @property
+    @pulumi.getter(name="fileSystem")
+    def file_system(self) -> Optional[str]:
+        """
+        File system (ext3/ext4/xfs).
+        """
+        return pulumi.get(self, "file_system")
+
+    @property
+    @pulumi.getter(name="kmsKeyId")
+    def kms_key_id(self) -> Optional[str]:
+        """
+        Customize the key when purchasing an encrypted disk. When this parameter is passed in, the Encrypt parameter is not empty.
+        """
+        return pulumi.get(self, "kms_key_id")
+
+    @property
+    @pulumi.getter(name="mountTarget")
+    def mount_target(self) -> Optional[str]:
+        """
+        Mount directory.
+        """
+        return pulumi.get(self, "mount_target")
+
+    @property
+    @pulumi.getter(name="snapshotId")
+    def snapshot_id(self) -> Optional[str]:
+        """
+        Snapshot ID. If passed in, the cloud disk will be created based on this snapshot. The snapshot type must be a data disk snapshot.
+        """
+        return pulumi.get(self, "snapshot_id")
+
+    @property
+    @pulumi.getter(name="throughputPerformance")
+    def throughput_performance(self) -> Optional[int]:
+        """
+        Cloud disk performance, unit: MB/s. Use this parameter to purchase additional performance for the cloud disk.
+        """
+        return pulumi.get(self, "throughput_performance")
+
+
+@pulumi.output_type
+class NativeNodePoolNativeInstanceChargePrepaid(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "renewFlag":
+            suggest = "renew_flag"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeNodePoolNativeInstanceChargePrepaid. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeNodePoolNativeInstanceChargePrepaid.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeNodePoolNativeInstanceChargePrepaid.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 period: int,
+                 renew_flag: Optional[str] = None):
+        """
+        :param int period: Postpaid billing cycle, unit (month): 1, 2, 3, 4, 5,, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+        :param str renew_flag: Prepaid renewal method:
+        """
+        pulumi.set(__self__, "period", period)
+        if renew_flag is not None:
+            pulumi.set(__self__, "renew_flag", renew_flag)
+
+    @property
+    @pulumi.getter
+    def period(self) -> int:
+        """
+        Postpaid billing cycle, unit (month): 1, 2, 3, 4, 5,, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="renewFlag")
+    def renew_flag(self) -> Optional[str]:
+        """
+        Prepaid renewal method:
+        """
+        return pulumi.get(self, "renew_flag")
+
+
+@pulumi.output_type
+class NativeNodePoolNativeInternetAccessible(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "chargeType":
+            suggest = "charge_type"
+        elif key == "maxBandwidthOut":
+            suggest = "max_bandwidth_out"
+        elif key == "bandwidthPackageId":
+            suggest = "bandwidth_package_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeNodePoolNativeInternetAccessible. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeNodePoolNativeInternetAccessible.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeNodePoolNativeInternetAccessible.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 charge_type: str,
+                 max_bandwidth_out: int,
+                 bandwidth_package_id: Optional[str] = None):
+        """
+        :param str charge_type: Network billing method. Optional value is `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param int max_bandwidth_out: Maximum bandwidth output. Note: When chargeType is `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_POSTPAID_BY_HOUR`, the valid range is 1~100. When chargeType is `BANDWIDTH_PACKAG`, the valid range is 1~2000.
+        :param str bandwidth_package_id: Bandwidth package ID. Note: When ChargeType is BANDWIDTH_PACKAG, the value cannot be empty; otherwise, the value must be empty.
+        """
+        pulumi.set(__self__, "charge_type", charge_type)
+        pulumi.set(__self__, "max_bandwidth_out", max_bandwidth_out)
+        if bandwidth_package_id is not None:
+            pulumi.set(__self__, "bandwidth_package_id", bandwidth_package_id)
+
+    @property
+    @pulumi.getter(name="chargeType")
+    def charge_type(self) -> str:
+        """
+        Network billing method. Optional value is `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        """
+        return pulumi.get(self, "charge_type")
+
+    @property
+    @pulumi.getter(name="maxBandwidthOut")
+    def max_bandwidth_out(self) -> int:
+        """
+        Maximum bandwidth output. Note: When chargeType is `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_POSTPAID_BY_HOUR`, the valid range is 1~100. When chargeType is `BANDWIDTH_PACKAG`, the valid range is 1~2000.
+        """
+        return pulumi.get(self, "max_bandwidth_out")
+
+    @property
+    @pulumi.getter(name="bandwidthPackageId")
+    def bandwidth_package_id(self) -> Optional[str]:
+        """
+        Bandwidth package ID. Note: When ChargeType is BANDWIDTH_PACKAG, the value cannot be empty; otherwise, the value must be empty.
+        """
+        return pulumi.get(self, "bandwidth_package_id")
+
+
+@pulumi.output_type
+class NativeNodePoolNativeLifecycle(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "postInit":
+            suggest = "post_init"
+        elif key == "preInit":
+            suggest = "pre_init"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeNodePoolNativeLifecycle. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeNodePoolNativeLifecycle.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeNodePoolNativeLifecycle.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 post_init: Optional[str] = None,
+                 pre_init: Optional[str] = None):
+        """
+        :param str post_init: Custom script after node initialization.
+        :param str pre_init: Custom script before node initialization.
+        """
+        if post_init is not None:
+            pulumi.set(__self__, "post_init", post_init)
+        if pre_init is not None:
+            pulumi.set(__self__, "pre_init", pre_init)
+
+    @property
+    @pulumi.getter(name="postInit")
+    def post_init(self) -> Optional[str]:
+        """
+        Custom script after node initialization.
+        """
+        return pulumi.get(self, "post_init")
+
+    @property
+    @pulumi.getter(name="preInit")
+    def pre_init(self) -> Optional[str]:
+        """
+        Custom script before node initialization.
+        """
+        return pulumi.get(self, "pre_init")
+
+
+@pulumi.output_type
+class NativeNodePoolNativeManagement(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "kernelArgs":
+            suggest = "kernel_args"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeNodePoolNativeManagement. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeNodePoolNativeManagement.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeNodePoolNativeManagement.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 hosts: Optional[Sequence[str]] = None,
+                 kernel_args: Optional[Sequence[str]] = None,
+                 nameservers: Optional[Sequence[str]] = None):
+        """
+        :param Sequence[str] hosts: Hosts configuration.
+        :param Sequence[str] kernel_args: Kernel parameter configuration.
+        :param Sequence[str] nameservers: Dns configuration.
+        """
+        if hosts is not None:
+            pulumi.set(__self__, "hosts", hosts)
+        if kernel_args is not None:
+            pulumi.set(__self__, "kernel_args", kernel_args)
+        if nameservers is not None:
+            pulumi.set(__self__, "nameservers", nameservers)
+
+    @property
+    @pulumi.getter
+    def hosts(self) -> Optional[Sequence[str]]:
+        """
+        Hosts configuration.
+        """
+        return pulumi.get(self, "hosts")
+
+    @property
+    @pulumi.getter(name="kernelArgs")
+    def kernel_args(self) -> Optional[Sequence[str]]:
+        """
+        Kernel parameter configuration.
+        """
+        return pulumi.get(self, "kernel_args")
+
+    @property
+    @pulumi.getter
+    def nameservers(self) -> Optional[Sequence[str]]:
+        """
+        Dns configuration.
+        """
+        return pulumi.get(self, "nameservers")
+
+
+@pulumi.output_type
+class NativeNodePoolNativeScaling(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "createPolicy":
+            suggest = "create_policy"
+        elif key == "maxReplicas":
+            suggest = "max_replicas"
+        elif key == "minReplicas":
+            suggest = "min_replicas"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeNodePoolNativeScaling. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeNodePoolNativeScaling.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeNodePoolNativeScaling.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 create_policy: Optional[str] = None,
+                 max_replicas: Optional[int] = None,
+                 min_replicas: Optional[int] = None):
+        """
+        :param str create_policy: Node pool expansion strategy. `ZoneEquality`: multiple availability zones are broken up; `ZonePriority`: the preferred availability zone takes precedence.
+        :param int max_replicas: Maximum number of replicas in node pool.
+        :param int min_replicas: Minimum number of replicas in node pool.
+        """
+        if create_policy is not None:
+            pulumi.set(__self__, "create_policy", create_policy)
+        if max_replicas is not None:
+            pulumi.set(__self__, "max_replicas", max_replicas)
+        if min_replicas is not None:
+            pulumi.set(__self__, "min_replicas", min_replicas)
+
+    @property
+    @pulumi.getter(name="createPolicy")
+    def create_policy(self) -> Optional[str]:
+        """
+        Node pool expansion strategy. `ZoneEquality`: multiple availability zones are broken up; `ZonePriority`: the preferred availability zone takes precedence.
+        """
+        return pulumi.get(self, "create_policy")
+
+    @property
+    @pulumi.getter(name="maxReplicas")
+    def max_replicas(self) -> Optional[int]:
+        """
+        Maximum number of replicas in node pool.
+        """
+        return pulumi.get(self, "max_replicas")
+
+    @property
+    @pulumi.getter(name="minReplicas")
+    def min_replicas(self) -> Optional[int]:
+        """
+        Minimum number of replicas in node pool.
+        """
+        return pulumi.get(self, "min_replicas")
+
+
+@pulumi.output_type
+class NativeNodePoolNativeSystemDisk(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "diskSize":
+            suggest = "disk_size"
+        elif key == "diskType":
+            suggest = "disk_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeNodePoolNativeSystemDisk. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeNodePoolNativeSystemDisk.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeNodePoolNativeSystemDisk.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 disk_size: int,
+                 disk_type: str):
+        """
+        :param int disk_size: Cloud disk size (G).
+        :param str disk_type: Cloud disk type. Valid values: `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: cloud SSD disk, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD.
+        """
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type", disk_type)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        """
+        Cloud disk size (G).
+        """
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> str:
+        """
+        Cloud disk type. Valid values: `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_SSD`: cloud SSD disk, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD.
+        """
+        return pulumi.get(self, "disk_type")
+
+
+@pulumi.output_type
+class NativeNodePoolTag(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "resourceType":
+            suggest = "resource_type"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in NativeNodePoolTag. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        NativeNodePoolTag.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        NativeNodePoolTag.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 resource_type: Optional[str] = None,
+                 tags: Optional[Sequence['outputs.NativeNodePoolTagTag']] = None):
+        """
+        :param str resource_type: The resource type bound to the label.
+        :param Sequence['NativeNodePoolTagTagArgs'] tags: Tag pair list.
+        """
+        if resource_type is not None:
+            pulumi.set(__self__, "resource_type", resource_type)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> Optional[str]:
+        """
+        The resource type bound to the label.
+        """
+        return pulumi.get(self, "resource_type")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[Sequence['outputs.NativeNodePoolTagTag']]:
+        """
+        Tag pair list.
+        """
+        return pulumi.get(self, "tags")
+
+
+@pulumi.output_type
+class NativeNodePoolTagTag(dict):
+    def __init__(__self__, *,
+                 key: Optional[str] = None,
+                 value: Optional[str] = None):
+        """
+        :param str key: Tag Key.
+        :param str value: Tag Value.
+        """
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[str]:
+        """
+        Tag Key.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[str]:
+        """
+        Tag Value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class NativeNodePoolTaint(dict):
+    def __init__(__self__, *,
+                 effect: Optional[str] = None,
+                 key: Optional[str] = None,
+                 value: Optional[str] = None):
+        """
+        :param str effect: Effect of the taint.
+        :param str key: Key of the taint.
+        :param str value: Value of the taint.
+        """
+        if effect is not None:
+            pulumi.set(__self__, "effect", effect)
+        if key is not None:
+            pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def effect(self) -> Optional[str]:
+        """
+        Effect of the taint.
+        """
+        return pulumi.get(self, "effect")
+
+    @property
+    @pulumi.getter
+    def key(self) -> Optional[str]:
+        """
+        Key of the taint.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> Optional[str]:
+        """
+        Value of the taint.
+        """
+        return pulumi.get(self, "value")
 
 
 @pulumi.output_type
@@ -5236,6 +6207,881 @@ class GetClusterLevelsListResult(dict):
         Number of pods.
         """
         return pulumi.get(self, "pod_count")
+
+
+@pulumi.output_type
+class GetClusterNativeNodePoolsFilterResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param Sequence[str] values: Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Attribute values, if there are multiple values in the same filter, the relationship between values under the same filter is a logical OR relationship.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetClusterNativeNodePoolsNodePoolResult(dict):
+    def __init__(__self__, *,
+                 annotations: Sequence['outputs.GetClusterNativeNodePoolsNodePoolAnnotationResult'],
+                 cluster_id: str,
+                 created_at: str,
+                 deletion_protection: bool,
+                 labels: Sequence['outputs.GetClusterNativeNodePoolsNodePoolLabelResult'],
+                 life_state: str,
+                 name: str,
+                 natives: Sequence['outputs.GetClusterNativeNodePoolsNodePoolNativeResult'],
+                 node_pool_id: str,
+                 tags: Sequence['outputs.GetClusterNativeNodePoolsNodePoolTagResult'],
+                 taints: Sequence['outputs.GetClusterNativeNodePoolsNodePoolTaintResult'],
+                 type: str,
+                 unschedulable: bool):
+        """
+        :param Sequence['GetClusterNativeNodePoolsNodePoolAnnotationArgs'] annotations: Node Annotation List.
+        :param str cluster_id: ID of the cluster.
+        :param str created_at: Creation time.
+        :param bool deletion_protection: Whether to enable deletion protection.
+        :param Sequence['GetClusterNativeNodePoolsNodePoolLabelArgs'] labels: Node Labels.
+        :param str life_state: Node pool status.
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param Sequence['GetClusterNativeNodePoolsNodePoolNativeArgs'] natives: Native node pool creation parameters.
+        :param str node_pool_id: ID of the node pool.
+        :param Sequence['GetClusterNativeNodePoolsNodePoolTagArgs'] tags: Tag pair list.
+        :param Sequence['GetClusterNativeNodePoolsNodePoolTaintArgs'] taints: node taint.
+        :param str type: Node pool type. Optional value is `Native`.
+        :param bool unschedulable: Whether the node is not schedulable by default.
+        """
+        pulumi.set(__self__, "annotations", annotations)
+        pulumi.set(__self__, "cluster_id", cluster_id)
+        pulumi.set(__self__, "created_at", created_at)
+        pulumi.set(__self__, "deletion_protection", deletion_protection)
+        pulumi.set(__self__, "labels", labels)
+        pulumi.set(__self__, "life_state", life_state)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "natives", natives)
+        pulumi.set(__self__, "node_pool_id", node_pool_id)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "taints", taints)
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "unschedulable", unschedulable)
+
+    @property
+    @pulumi.getter
+    def annotations(self) -> Sequence['outputs.GetClusterNativeNodePoolsNodePoolAnnotationResult']:
+        """
+        Node Annotation List.
+        """
+        return pulumi.get(self, "annotations")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        ID of the cluster.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @property
+    @pulumi.getter(name="createdAt")
+    def created_at(self) -> str:
+        """
+        Creation time.
+        """
+        return pulumi.get(self, "created_at")
+
+    @property
+    @pulumi.getter(name="deletionProtection")
+    def deletion_protection(self) -> bool:
+        """
+        Whether to enable deletion protection.
+        """
+        return pulumi.get(self, "deletion_protection")
+
+    @property
+    @pulumi.getter
+    def labels(self) -> Sequence['outputs.GetClusterNativeNodePoolsNodePoolLabelResult']:
+        """
+        Node Labels.
+        """
+        return pulumi.get(self, "labels")
+
+    @property
+    @pulumi.getter(name="lifeState")
+    def life_state(self) -> str:
+        """
+        Node pool status.
+        """
+        return pulumi.get(self, "life_state")
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def natives(self) -> Sequence['outputs.GetClusterNativeNodePoolsNodePoolNativeResult']:
+        """
+        Native node pool creation parameters.
+        """
+        return pulumi.get(self, "natives")
+
+    @property
+    @pulumi.getter(name="nodePoolId")
+    def node_pool_id(self) -> str:
+        """
+        ID of the node pool.
+        """
+        return pulumi.get(self, "node_pool_id")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.GetClusterNativeNodePoolsNodePoolTagResult']:
+        """
+        Tag pair list.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter
+    def taints(self) -> Sequence['outputs.GetClusterNativeNodePoolsNodePoolTaintResult']:
+        """
+        node taint.
+        """
+        return pulumi.get(self, "taints")
+
+    @property
+    @pulumi.getter
+    def type(self) -> str:
+        """
+        Node pool type. Optional value is `Native`.
+        """
+        return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter
+    def unschedulable(self) -> bool:
+        """
+        Whether the node is not schedulable by default.
+        """
+        return pulumi.get(self, "unschedulable")
+
+
+@pulumi.output_type
+class GetClusterNativeNodePoolsNodePoolAnnotationResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 value: str):
+        """
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param str value: Value of the taint.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value of the taint.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetClusterNativeNodePoolsNodePoolLabelResult(dict):
+    def __init__(__self__, *,
+                 name: str,
+                 value: str):
+        """
+        :param str name: The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        :param str value: Value of the taint.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        The attribute name, if there are multiple filters, the relationship between the filters is a logical AND relationship.
+        """
+        return pulumi.get(self, "name")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value of the taint.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetClusterNativeNodePoolsNodePoolNativeResult(dict):
+    def __init__(__self__, *,
+                 auto_repair: bool,
+                 data_disks: Sequence['outputs.GetClusterNativeNodePoolsNodePoolNativeDataDiskResult'],
+                 enable_autoscaling: bool,
+                 health_check_policy_name: str,
+                 host_name_pattern: str,
+                 instance_charge_prepaids: Sequence['outputs.GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidResult'],
+                 instance_charge_type: str,
+                 instance_types: Sequence[str],
+                 internet_accessibles: Sequence['outputs.GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleResult'],
+                 key_ids: Sequence[str],
+                 kubelet_args: Sequence[str],
+                 lifecycles: Sequence['outputs.GetClusterNativeNodePoolsNodePoolNativeLifecycleResult'],
+                 managements: Sequence['outputs.GetClusterNativeNodePoolsNodePoolNativeManagementResult'],
+                 replicas: int,
+                 runtime_root_dir: str,
+                 scalings: Sequence['outputs.GetClusterNativeNodePoolsNodePoolNativeScalingResult'],
+                 security_group_ids: Sequence[str],
+                 subnet_ids: Sequence[str],
+                 system_disks: Sequence['outputs.GetClusterNativeNodePoolsNodePoolNativeSystemDiskResult']):
+        """
+        :param bool auto_repair: Whether to enable self-healing ability.
+        :param Sequence['GetClusterNativeNodePoolsNodePoolNativeDataDiskArgs'] data_disks: Native node pool data disk list.
+        :param bool enable_autoscaling: Whether to enable elastic scaling.
+        :param str health_check_policy_name: Fault self-healing rule name.
+        :param str host_name_pattern: Native node pool hostName pattern string.
+        :param Sequence['GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidArgs'] instance_charge_prepaids: Billing configuration for yearly and monthly models.
+        :param str instance_charge_type: Node billing type. `PREPAID` is a yearly and monthly subscription, `POSTPAID_BY_HOUR` is a pay-as-you-go plan. The default is `POSTPAID_BY_HOUR`.
+        :param Sequence[str] instance_types: Model list.
+        :param Sequence['GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleArgs'] internet_accessibles: Public network bandwidth settings.
+        :param Sequence[str] key_ids: Node pool ssh public key id array.
+        :param Sequence[str] kubelet_args: Kubelet custom parameters.
+        :param Sequence['GetClusterNativeNodePoolsNodePoolNativeLifecycleArgs'] lifecycles: Predefined scripts.
+        :param Sequence['GetClusterNativeNodePoolsNodePoolNativeManagementArgs'] managements: Node pool management parameter settings.
+        :param int replicas: Desired number of nodes.
+        :param str runtime_root_dir: Runtime root directory.
+        :param Sequence['GetClusterNativeNodePoolsNodePoolNativeScalingArgs'] scalings: Node pool scaling configuration.
+        :param Sequence[str] security_group_ids: Security group list.
+        :param Sequence[str] subnet_ids: Subnet list.
+        :param Sequence['GetClusterNativeNodePoolsNodePoolNativeSystemDiskArgs'] system_disks: System disk configuration.
+        """
+        pulumi.set(__self__, "auto_repair", auto_repair)
+        pulumi.set(__self__, "data_disks", data_disks)
+        pulumi.set(__self__, "enable_autoscaling", enable_autoscaling)
+        pulumi.set(__self__, "health_check_policy_name", health_check_policy_name)
+        pulumi.set(__self__, "host_name_pattern", host_name_pattern)
+        pulumi.set(__self__, "instance_charge_prepaids", instance_charge_prepaids)
+        pulumi.set(__self__, "instance_charge_type", instance_charge_type)
+        pulumi.set(__self__, "instance_types", instance_types)
+        pulumi.set(__self__, "internet_accessibles", internet_accessibles)
+        pulumi.set(__self__, "key_ids", key_ids)
+        pulumi.set(__self__, "kubelet_args", kubelet_args)
+        pulumi.set(__self__, "lifecycles", lifecycles)
+        pulumi.set(__self__, "managements", managements)
+        pulumi.set(__self__, "replicas", replicas)
+        pulumi.set(__self__, "runtime_root_dir", runtime_root_dir)
+        pulumi.set(__self__, "scalings", scalings)
+        pulumi.set(__self__, "security_group_ids", security_group_ids)
+        pulumi.set(__self__, "subnet_ids", subnet_ids)
+        pulumi.set(__self__, "system_disks", system_disks)
+
+    @property
+    @pulumi.getter(name="autoRepair")
+    def auto_repair(self) -> bool:
+        """
+        Whether to enable self-healing ability.
+        """
+        return pulumi.get(self, "auto_repair")
+
+    @property
+    @pulumi.getter(name="dataDisks")
+    def data_disks(self) -> Sequence['outputs.GetClusterNativeNodePoolsNodePoolNativeDataDiskResult']:
+        """
+        Native node pool data disk list.
+        """
+        return pulumi.get(self, "data_disks")
+
+    @property
+    @pulumi.getter(name="enableAutoscaling")
+    def enable_autoscaling(self) -> bool:
+        """
+        Whether to enable elastic scaling.
+        """
+        return pulumi.get(self, "enable_autoscaling")
+
+    @property
+    @pulumi.getter(name="healthCheckPolicyName")
+    def health_check_policy_name(self) -> str:
+        """
+        Fault self-healing rule name.
+        """
+        return pulumi.get(self, "health_check_policy_name")
+
+    @property
+    @pulumi.getter(name="hostNamePattern")
+    def host_name_pattern(self) -> str:
+        """
+        Native node pool hostName pattern string.
+        """
+        return pulumi.get(self, "host_name_pattern")
+
+    @property
+    @pulumi.getter(name="instanceChargePrepaids")
+    def instance_charge_prepaids(self) -> Sequence['outputs.GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidResult']:
+        """
+        Billing configuration for yearly and monthly models.
+        """
+        return pulumi.get(self, "instance_charge_prepaids")
+
+    @property
+    @pulumi.getter(name="instanceChargeType")
+    def instance_charge_type(self) -> str:
+        """
+        Node billing type. `PREPAID` is a yearly and monthly subscription, `POSTPAID_BY_HOUR` is a pay-as-you-go plan. The default is `POSTPAID_BY_HOUR`.
+        """
+        return pulumi.get(self, "instance_charge_type")
+
+    @property
+    @pulumi.getter(name="instanceTypes")
+    def instance_types(self) -> Sequence[str]:
+        """
+        Model list.
+        """
+        return pulumi.get(self, "instance_types")
+
+    @property
+    @pulumi.getter(name="internetAccessibles")
+    def internet_accessibles(self) -> Sequence['outputs.GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleResult']:
+        """
+        Public network bandwidth settings.
+        """
+        return pulumi.get(self, "internet_accessibles")
+
+    @property
+    @pulumi.getter(name="keyIds")
+    def key_ids(self) -> Sequence[str]:
+        """
+        Node pool ssh public key id array.
+        """
+        return pulumi.get(self, "key_ids")
+
+    @property
+    @pulumi.getter(name="kubeletArgs")
+    def kubelet_args(self) -> Sequence[str]:
+        """
+        Kubelet custom parameters.
+        """
+        return pulumi.get(self, "kubelet_args")
+
+    @property
+    @pulumi.getter
+    def lifecycles(self) -> Sequence['outputs.GetClusterNativeNodePoolsNodePoolNativeLifecycleResult']:
+        """
+        Predefined scripts.
+        """
+        return pulumi.get(self, "lifecycles")
+
+    @property
+    @pulumi.getter
+    def managements(self) -> Sequence['outputs.GetClusterNativeNodePoolsNodePoolNativeManagementResult']:
+        """
+        Node pool management parameter settings.
+        """
+        return pulumi.get(self, "managements")
+
+    @property
+    @pulumi.getter
+    def replicas(self) -> int:
+        """
+        Desired number of nodes.
+        """
+        return pulumi.get(self, "replicas")
+
+    @property
+    @pulumi.getter(name="runtimeRootDir")
+    def runtime_root_dir(self) -> str:
+        """
+        Runtime root directory.
+        """
+        return pulumi.get(self, "runtime_root_dir")
+
+    @property
+    @pulumi.getter
+    def scalings(self) -> Sequence['outputs.GetClusterNativeNodePoolsNodePoolNativeScalingResult']:
+        """
+        Node pool scaling configuration.
+        """
+        return pulumi.get(self, "scalings")
+
+    @property
+    @pulumi.getter(name="securityGroupIds")
+    def security_group_ids(self) -> Sequence[str]:
+        """
+        Security group list.
+        """
+        return pulumi.get(self, "security_group_ids")
+
+    @property
+    @pulumi.getter(name="subnetIds")
+    def subnet_ids(self) -> Sequence[str]:
+        """
+        Subnet list.
+        """
+        return pulumi.get(self, "subnet_ids")
+
+    @property
+    @pulumi.getter(name="systemDisks")
+    def system_disks(self) -> Sequence['outputs.GetClusterNativeNodePoolsNodePoolNativeSystemDiskResult']:
+        """
+        System disk configuration.
+        """
+        return pulumi.get(self, "system_disks")
+
+
+@pulumi.output_type
+class GetClusterNativeNodePoolsNodePoolNativeDataDiskResult(dict):
+    def __init__(__self__, *,
+                 auto_format_and_mount: bool,
+                 disk_partition: str,
+                 disk_size: int,
+                 disk_type: str,
+                 encrypt: str,
+                 file_system: str,
+                 kms_key_id: str,
+                 mount_target: str,
+                 snapshot_id: str,
+                 throughput_performance: int):
+        """
+        :param bool auto_format_and_mount: Whether to automatically format the disk and mount it.
+        :param str disk_partition: Mount device name or partition name.
+        :param int disk_size: Cloud disk size (G).
+        :param str disk_type: Cloud disk type.
+        :param str encrypt: Pass in this parameter to create an encrypted cloud disk. The value is fixed to `ENCRYPT`.
+        :param str file_system: File system (ext3/ext4/xfs).
+        :param str kms_key_id: Customize the key when purchasing an encrypted disk. When this parameter is passed in, the Encrypt parameter is not empty.
+        :param str mount_target: Mount directory.
+        :param str snapshot_id: Snapshot ID. If passed in, the cloud disk will be created based on this snapshot. The snapshot type must be a data disk snapshot.
+        :param int throughput_performance: Cloud disk performance, unit: MB/s. Use this parameter to purchase additional performance for the cloud disk.
+        """
+        pulumi.set(__self__, "auto_format_and_mount", auto_format_and_mount)
+        pulumi.set(__self__, "disk_partition", disk_partition)
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type", disk_type)
+        pulumi.set(__self__, "encrypt", encrypt)
+        pulumi.set(__self__, "file_system", file_system)
+        pulumi.set(__self__, "kms_key_id", kms_key_id)
+        pulumi.set(__self__, "mount_target", mount_target)
+        pulumi.set(__self__, "snapshot_id", snapshot_id)
+        pulumi.set(__self__, "throughput_performance", throughput_performance)
+
+    @property
+    @pulumi.getter(name="autoFormatAndMount")
+    def auto_format_and_mount(self) -> bool:
+        """
+        Whether to automatically format the disk and mount it.
+        """
+        return pulumi.get(self, "auto_format_and_mount")
+
+    @property
+    @pulumi.getter(name="diskPartition")
+    def disk_partition(self) -> str:
+        """
+        Mount device name or partition name.
+        """
+        return pulumi.get(self, "disk_partition")
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        """
+        Cloud disk size (G).
+        """
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> str:
+        """
+        Cloud disk type.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @property
+    @pulumi.getter
+    def encrypt(self) -> str:
+        """
+        Pass in this parameter to create an encrypted cloud disk. The value is fixed to `ENCRYPT`.
+        """
+        return pulumi.get(self, "encrypt")
+
+    @property
+    @pulumi.getter(name="fileSystem")
+    def file_system(self) -> str:
+        """
+        File system (ext3/ext4/xfs).
+        """
+        return pulumi.get(self, "file_system")
+
+    @property
+    @pulumi.getter(name="kmsKeyId")
+    def kms_key_id(self) -> str:
+        """
+        Customize the key when purchasing an encrypted disk. When this parameter is passed in, the Encrypt parameter is not empty.
+        """
+        return pulumi.get(self, "kms_key_id")
+
+    @property
+    @pulumi.getter(name="mountTarget")
+    def mount_target(self) -> str:
+        """
+        Mount directory.
+        """
+        return pulumi.get(self, "mount_target")
+
+    @property
+    @pulumi.getter(name="snapshotId")
+    def snapshot_id(self) -> str:
+        """
+        Snapshot ID. If passed in, the cloud disk will be created based on this snapshot. The snapshot type must be a data disk snapshot.
+        """
+        return pulumi.get(self, "snapshot_id")
+
+    @property
+    @pulumi.getter(name="throughputPerformance")
+    def throughput_performance(self) -> int:
+        """
+        Cloud disk performance, unit: MB/s. Use this parameter to purchase additional performance for the cloud disk.
+        """
+        return pulumi.get(self, "throughput_performance")
+
+
+@pulumi.output_type
+class GetClusterNativeNodePoolsNodePoolNativeInstanceChargePrepaidResult(dict):
+    def __init__(__self__, *,
+                 period: int,
+                 renew_flag: str):
+        """
+        :param int period: Postpaid billing cycle, unit (month): 1, 2, 3, 4, 5,, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+        :param str renew_flag: Prepaid renewal method:
+        """
+        pulumi.set(__self__, "period", period)
+        pulumi.set(__self__, "renew_flag", renew_flag)
+
+    @property
+    @pulumi.getter
+    def period(self) -> int:
+        """
+        Postpaid billing cycle, unit (month): 1, 2, 3, 4, 5,, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
+        """
+        return pulumi.get(self, "period")
+
+    @property
+    @pulumi.getter(name="renewFlag")
+    def renew_flag(self) -> str:
+        """
+        Prepaid renewal method:
+        """
+        return pulumi.get(self, "renew_flag")
+
+
+@pulumi.output_type
+class GetClusterNativeNodePoolsNodePoolNativeInternetAccessibleResult(dict):
+    def __init__(__self__, *,
+                 bandwidth_package_id: str,
+                 charge_type: str,
+                 max_bandwidth_out: int):
+        """
+        :param str bandwidth_package_id: Bandwidth package ID. Note: When ChargeType is BANDWIDTH_PACKAG, the value cannot be empty; otherwise, the value must be empty.
+        :param str charge_type: Network billing method. Optional value is `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        :param int max_bandwidth_out: Maximum bandwidth output. Note: When chargeType is `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_POSTPAID_BY_HOUR`, the valid range is 1~100. When chargeType is `BANDWIDTH_PACKAG`, the valid range is 1~2000.
+        """
+        pulumi.set(__self__, "bandwidth_package_id", bandwidth_package_id)
+        pulumi.set(__self__, "charge_type", charge_type)
+        pulumi.set(__self__, "max_bandwidth_out", max_bandwidth_out)
+
+    @property
+    @pulumi.getter(name="bandwidthPackageId")
+    def bandwidth_package_id(self) -> str:
+        """
+        Bandwidth package ID. Note: When ChargeType is BANDWIDTH_PACKAG, the value cannot be empty; otherwise, the value must be empty.
+        """
+        return pulumi.get(self, "bandwidth_package_id")
+
+    @property
+    @pulumi.getter(name="chargeType")
+    def charge_type(self) -> str:
+        """
+        Network billing method. Optional value is `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
+        """
+        return pulumi.get(self, "charge_type")
+
+    @property
+    @pulumi.getter(name="maxBandwidthOut")
+    def max_bandwidth_out(self) -> int:
+        """
+        Maximum bandwidth output. Note: When chargeType is `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_POSTPAID_BY_HOUR`, the valid range is 1~100. When chargeType is `BANDWIDTH_PACKAG`, the valid range is 1~2000.
+        """
+        return pulumi.get(self, "max_bandwidth_out")
+
+
+@pulumi.output_type
+class GetClusterNativeNodePoolsNodePoolNativeLifecycleResult(dict):
+    def __init__(__self__, *,
+                 post_init: str,
+                 pre_init: str):
+        """
+        :param str post_init: Custom script after node initialization.
+        :param str pre_init: Custom script before node initialization.
+        """
+        pulumi.set(__self__, "post_init", post_init)
+        pulumi.set(__self__, "pre_init", pre_init)
+
+    @property
+    @pulumi.getter(name="postInit")
+    def post_init(self) -> str:
+        """
+        Custom script after node initialization.
+        """
+        return pulumi.get(self, "post_init")
+
+    @property
+    @pulumi.getter(name="preInit")
+    def pre_init(self) -> str:
+        """
+        Custom script before node initialization.
+        """
+        return pulumi.get(self, "pre_init")
+
+
+@pulumi.output_type
+class GetClusterNativeNodePoolsNodePoolNativeManagementResult(dict):
+    def __init__(__self__, *,
+                 hosts: Sequence[str],
+                 kernel_args: Sequence[str],
+                 nameservers: Sequence[str]):
+        """
+        :param Sequence[str] hosts: Hosts configuration.
+        :param Sequence[str] kernel_args: Kernel parameter configuration.
+        :param Sequence[str] nameservers: Dns configuration.
+        """
+        pulumi.set(__self__, "hosts", hosts)
+        pulumi.set(__self__, "kernel_args", kernel_args)
+        pulumi.set(__self__, "nameservers", nameservers)
+
+    @property
+    @pulumi.getter
+    def hosts(self) -> Sequence[str]:
+        """
+        Hosts configuration.
+        """
+        return pulumi.get(self, "hosts")
+
+    @property
+    @pulumi.getter(name="kernelArgs")
+    def kernel_args(self) -> Sequence[str]:
+        """
+        Kernel parameter configuration.
+        """
+        return pulumi.get(self, "kernel_args")
+
+    @property
+    @pulumi.getter
+    def nameservers(self) -> Sequence[str]:
+        """
+        Dns configuration.
+        """
+        return pulumi.get(self, "nameservers")
+
+
+@pulumi.output_type
+class GetClusterNativeNodePoolsNodePoolNativeScalingResult(dict):
+    def __init__(__self__, *,
+                 create_policy: str,
+                 max_replicas: int,
+                 min_replicas: int):
+        """
+        :param str create_policy: Node pool expansion strategy. `ZoneEquality`: multiple availability zones are broken up; `ZonePriority`: the preferred availability zone takes precedence.
+        :param int max_replicas: Maximum number of replicas in node pool.
+        :param int min_replicas: Minimum number of replicas in node pool.
+        """
+        pulumi.set(__self__, "create_policy", create_policy)
+        pulumi.set(__self__, "max_replicas", max_replicas)
+        pulumi.set(__self__, "min_replicas", min_replicas)
+
+    @property
+    @pulumi.getter(name="createPolicy")
+    def create_policy(self) -> str:
+        """
+        Node pool expansion strategy. `ZoneEquality`: multiple availability zones are broken up; `ZonePriority`: the preferred availability zone takes precedence.
+        """
+        return pulumi.get(self, "create_policy")
+
+    @property
+    @pulumi.getter(name="maxReplicas")
+    def max_replicas(self) -> int:
+        """
+        Maximum number of replicas in node pool.
+        """
+        return pulumi.get(self, "max_replicas")
+
+    @property
+    @pulumi.getter(name="minReplicas")
+    def min_replicas(self) -> int:
+        """
+        Minimum number of replicas in node pool.
+        """
+        return pulumi.get(self, "min_replicas")
+
+
+@pulumi.output_type
+class GetClusterNativeNodePoolsNodePoolNativeSystemDiskResult(dict):
+    def __init__(__self__, *,
+                 disk_size: int,
+                 disk_type: str):
+        """
+        :param int disk_size: Cloud disk size (G).
+        :param str disk_type: Cloud disk type.
+        """
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type", disk_type)
+
+    @property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> int:
+        """
+        Cloud disk size (G).
+        """
+        return pulumi.get(self, "disk_size")
+
+    @property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> str:
+        """
+        Cloud disk type.
+        """
+        return pulumi.get(self, "disk_type")
+
+
+@pulumi.output_type
+class GetClusterNativeNodePoolsNodePoolTagResult(dict):
+    def __init__(__self__, *,
+                 resource_type: str,
+                 tags: Sequence['outputs.GetClusterNativeNodePoolsNodePoolTagTagResult']):
+        """
+        :param str resource_type: The resource type bound to the label.
+        :param Sequence['GetClusterNativeNodePoolsNodePoolTagTagArgs'] tags: Tag pair list.
+        """
+        pulumi.set(__self__, "resource_type", resource_type)
+        pulumi.set(__self__, "tags", tags)
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> str:
+        """
+        The resource type bound to the label.
+        """
+        return pulumi.get(self, "resource_type")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.GetClusterNativeNodePoolsNodePoolTagTagResult']:
+        """
+        Tag pair list.
+        """
+        return pulumi.get(self, "tags")
+
+
+@pulumi.output_type
+class GetClusterNativeNodePoolsNodePoolTagTagResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: Key of the taint.
+        :param str value: Value of the taint.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key of the taint.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value of the taint.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetClusterNativeNodePoolsNodePoolTaintResult(dict):
+    def __init__(__self__, *,
+                 effect: str,
+                 key: str,
+                 value: str):
+        """
+        :param str effect: Effect of the taint.
+        :param str key: Key of the taint.
+        :param str value: Value of the taint.
+        """
+        pulumi.set(__self__, "effect", effect)
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def effect(self) -> str:
+        """
+        Effect of the taint.
+        """
+        return pulumi.get(self, "effect")
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Key of the taint.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Value of the taint.
+        """
+        return pulumi.get(self, "value")
 
 
 @pulumi.output_type

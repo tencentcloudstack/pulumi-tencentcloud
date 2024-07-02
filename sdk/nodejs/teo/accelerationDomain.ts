@@ -72,9 +72,25 @@ export class AccelerationDomain extends pulumi.CustomResource {
      */
     public readonly domainName!: pulumi.Output<string>;
     /**
+     * HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+     */
+    public readonly httpOriginPort!: pulumi.Output<number>;
+    /**
+     * HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+     */
+    public readonly httpsOriginPort!: pulumi.Output<number>;
+    /**
+     * IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
+     */
+    public readonly ipv6Status!: pulumi.Output<string>;
+    /**
      * Details of the origin.
      */
     public readonly originInfo!: pulumi.Output<outputs.Teo.AccelerationDomainOriginInfo>;
+    /**
+     * Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
+     */
+    public readonly originProtocol!: pulumi.Output<string>;
     /**
      * Accelerated domain name status, the values are: `online`: enabled; `offline`: disabled.
      */
@@ -99,7 +115,11 @@ export class AccelerationDomain extends pulumi.CustomResource {
             const state = argsOrState as AccelerationDomainState | undefined;
             resourceInputs["cname"] = state ? state.cname : undefined;
             resourceInputs["domainName"] = state ? state.domainName : undefined;
+            resourceInputs["httpOriginPort"] = state ? state.httpOriginPort : undefined;
+            resourceInputs["httpsOriginPort"] = state ? state.httpsOriginPort : undefined;
+            resourceInputs["ipv6Status"] = state ? state.ipv6Status : undefined;
             resourceInputs["originInfo"] = state ? state.originInfo : undefined;
+            resourceInputs["originProtocol"] = state ? state.originProtocol : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["zoneId"] = state ? state.zoneId : undefined;
         } else {
@@ -114,7 +134,11 @@ export class AccelerationDomain extends pulumi.CustomResource {
                 throw new Error("Missing required property 'zoneId'");
             }
             resourceInputs["domainName"] = args ? args.domainName : undefined;
+            resourceInputs["httpOriginPort"] = args ? args.httpOriginPort : undefined;
+            resourceInputs["httpsOriginPort"] = args ? args.httpsOriginPort : undefined;
+            resourceInputs["ipv6Status"] = args ? args.ipv6Status : undefined;
             resourceInputs["originInfo"] = args ? args.originInfo : undefined;
+            resourceInputs["originProtocol"] = args ? args.originProtocol : undefined;
             resourceInputs["status"] = args ? args.status : undefined;
             resourceInputs["zoneId"] = args ? args.zoneId : undefined;
             resourceInputs["cname"] = undefined /*out*/;
@@ -137,9 +161,25 @@ export interface AccelerationDomainState {
      */
     domainName?: pulumi.Input<string>;
     /**
+     * HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+     */
+    httpOriginPort?: pulumi.Input<number>;
+    /**
+     * HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+     */
+    httpsOriginPort?: pulumi.Input<number>;
+    /**
+     * IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
+     */
+    ipv6Status?: pulumi.Input<string>;
+    /**
      * Details of the origin.
      */
     originInfo?: pulumi.Input<inputs.Teo.AccelerationDomainOriginInfo>;
+    /**
+     * Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
+     */
+    originProtocol?: pulumi.Input<string>;
     /**
      * Accelerated domain name status, the values are: `online`: enabled; `offline`: disabled.
      */
@@ -159,9 +199,25 @@ export interface AccelerationDomainArgs {
      */
     domainName: pulumi.Input<string>;
     /**
+     * HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+     */
+    httpOriginPort?: pulumi.Input<number>;
+    /**
+     * HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+     */
+    httpsOriginPort?: pulumi.Input<number>;
+    /**
+     * IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
+     */
+    ipv6Status?: pulumi.Input<string>;
+    /**
      * Details of the origin.
      */
     originInfo: pulumi.Input<inputs.Teo.AccelerationDomainOriginInfo>;
+    /**
+     * Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
+     */
+    originProtocol?: pulumi.Input<string>;
     /**
      * Accelerated domain name status, the values are: `online`: enabled; `offline`: disabled.
      */

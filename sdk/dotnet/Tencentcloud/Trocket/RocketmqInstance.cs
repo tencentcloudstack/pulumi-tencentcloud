@@ -13,11 +13,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
     /// <summary>
     /// Provides a resource to create a rocketmq 5.x instance
     /// 
-    /// &gt; **NOTE:** It only support create postpaid rocketmq 5.x instance.
+    /// &gt; **NOTE:** It only supports create postpaid rocketmq 5.x instance.
     /// 
     /// ## Example Usage
     /// 
-    /// ### Basic Instance
+    /// ### Create Basic Instance
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -28,25 +28,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var rocketmqInstance = new Tencentcloud.Trocket.RocketmqInstance("rocketmqInstance", new()
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         InstanceType = "EXPERIMENT",
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create vpc subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create rocketmq instance
+    ///     var example = new Tencentcloud.Trocket.RocketmqInstance("example", new()
+    ///     {
+    ///         InstanceType = "PRO",
+    ///         SkuCode = "pro_4k",
     ///         Remark = "remark",
-    ///         SkuCode = "experiment_500",
-    ///         SubnetId = "subnet-xxxxxx",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
     ///         Tags = 
     ///         {
     ///             { "tag_key", "rocketmq" },
     ///             { "tag_value", "5.x" },
     ///         },
-    ///         VpcId = "vpc-xxxxxx",
     ///     });
     /// 
     /// });
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
-    /// ### Enable Public Instance
+    /// ### Create Enable Public Network Instance
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -57,20 +73,36 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var rocketmqInstancePublic = new Tencentcloud.Trocket.RocketmqInstance("rocketmqInstancePublic", new()
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         Bandwidth = 1,
-    ///         EnablePublic = true,
-    ///         InstanceType = "EXPERIMENT",
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create vpc subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create rocketmq instance
+    ///     var example = new Tencentcloud.Trocket.RocketmqInstance("example", new()
+    ///     {
+    ///         InstanceType = "PRO",
+    ///         SkuCode = "pro_4k",
     ///         Remark = "remark",
-    ///         SkuCode = "experiment_500",
-    ///         SubnetId = "subnet-xxxxxx",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         EnablePublic = true,
+    ///         Bandwidth = 10,
     ///         Tags = 
     ///         {
     ///             { "tag_key", "rocketmq" },
     ///             { "tag_value", "5.x" },
     ///         },
-    ///         VpcId = "vpc-xxxxxx",
     ///     });
     /// 
     /// });
@@ -82,7 +114,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
     /// trocket rocketmq_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Trocket/rocketmqInstance:RocketmqInstance rocketmq_instance rocketmq_instance_id
+    /// $ pulumi import tencentcloud:Trocket/rocketmqInstance:RocketmqInstance rocketmq_instance rmq-n5qado7m
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Trocket/rocketmqInstance:RocketmqInstance")]
@@ -137,7 +169,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         public Output<string?> Remark { get; private set; } = null!;
 
         /// <summary>
-        /// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_4k, basic_6k.
+        /// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
         /// </summary>
         [Output("skuCode")]
         public Output<string> SkuCode { get; private set; } = null!;
@@ -262,7 +294,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         public Input<string>? Remark { get; set; }
 
         /// <summary>
-        /// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_4k, basic_6k.
+        /// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
         /// </summary>
         [Input("skuCode", required: true)]
         public Input<string> SkuCode { get; set; } = null!;
@@ -354,7 +386,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         public Input<string>? Remark { get; set; }
 
         /// <summary>
-        /// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_4k, basic_6k.
+        /// SKU code. Available specifications are as follows: experiment_500, basic_1k, basic_2k, basic_3k, basic_4k, basic_5k, basic_6k, basic_7k, basic_8k, basic_9k, basic_10k, pro_4k, pro_6k, pro_8k, pro_1w, pro_15k, pro_2w, pro_25k, pro_3w, pro_35k, pro_4w, pro_45k, pro_5w, pro_55k, pro_60k, pro_65k, pro_70k, pro_75k, pro_80k, pro_85k, pro_90k, pro_95k, pro_100k, platinum_1w, platinum_2w, platinum_3w, platinum_4w, platinum_5w, platinum_6w, platinum_7w, platinum_8w, platinum_9w, platinum_10w, platinum_12w, platinum_14w, platinum_16w, platinum_18w, platinum_20w, platinum_25w, platinum_30w, platinum_35w, platinum_40w, platinum_45w, platinum_50w, platinum_60w, platinum_70w, platinum_80w, platinum_90w, platinum_100w.
         /// </summary>
         [Input("skuCode")]
         public Input<string>? SkuCode { get; set; }

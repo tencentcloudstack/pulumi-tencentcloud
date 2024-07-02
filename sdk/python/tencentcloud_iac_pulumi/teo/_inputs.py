@@ -18,6 +18,14 @@ __all__ = [
     'OriginGroupRecordArgs',
     'OriginGroupRecordPrivateParameterArgs',
     'OriginGroupReferenceArgs',
+    'RealtimeLogDeliveryClsArgs',
+    'RealtimeLogDeliveryCustomEndpointArgs',
+    'RealtimeLogDeliveryCustomEndpointHeaderArgs',
+    'RealtimeLogDeliveryCustomFieldArgs',
+    'RealtimeLogDeliveryDeliveryConditionArgs',
+    'RealtimeLogDeliveryDeliveryConditionConditionArgs',
+    'RealtimeLogDeliveryLogFormatArgs',
+    'RealtimeLogDeliveryS3Args',
     'RuleEngineRuleArgs',
     'RuleEngineRuleActionArgs',
     'RuleEngineRuleActionCodeActionArgs',
@@ -576,32 +584,562 @@ class OriginGroupReferenceArgs:
 
 
 @pulumi.input_type
-class RuleEngineRuleArgs:
+class RealtimeLogDeliveryClsArgs:
     def __init__(__self__, *,
-                 actions: pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleActionArgs']]],
-                 ors: pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleOrArgs']]],
-                 sub_rules: Optional[pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleSubRuleArgs']]]] = None):
+                 log_set_id: pulumi.Input[str],
+                 log_set_region: pulumi.Input[str],
+                 topic_id: pulumi.Input[str]):
         """
-        :param pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleActionArgs']]] actions: Feature to be executed.
-        :param pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleOrArgs']]] ors: OR Conditions list of the rule. Rule would be triggered if any of the condition is true.
-        :param pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleSubRuleArgs']]] sub_rules: The nested rule.
+        :param pulumi.Input[str] log_set_id: Tencent Cloud CLS log set ID.
+        :param pulumi.Input[str] log_set_region: The region where the Tencent Cloud CLS log set is located.
+        :param pulumi.Input[str] topic_id: Tencent Cloud CLS log topic ID.
         """
-        pulumi.set(__self__, "actions", actions)
-        pulumi.set(__self__, "ors", ors)
-        if sub_rules is not None:
-            pulumi.set(__self__, "sub_rules", sub_rules)
+        pulumi.set(__self__, "log_set_id", log_set_id)
+        pulumi.set(__self__, "log_set_region", log_set_region)
+        pulumi.set(__self__, "topic_id", topic_id)
+
+    @property
+    @pulumi.getter(name="logSetId")
+    def log_set_id(self) -> pulumi.Input[str]:
+        """
+        Tencent Cloud CLS log set ID.
+        """
+        return pulumi.get(self, "log_set_id")
+
+    @log_set_id.setter
+    def log_set_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "log_set_id", value)
+
+    @property
+    @pulumi.getter(name="logSetRegion")
+    def log_set_region(self) -> pulumi.Input[str]:
+        """
+        The region where the Tencent Cloud CLS log set is located.
+        """
+        return pulumi.get(self, "log_set_region")
+
+    @log_set_region.setter
+    def log_set_region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "log_set_region", value)
+
+    @property
+    @pulumi.getter(name="topicId")
+    def topic_id(self) -> pulumi.Input[str]:
+        """
+        Tencent Cloud CLS log topic ID.
+        """
+        return pulumi.get(self, "topic_id")
+
+    @topic_id.setter
+    def topic_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "topic_id", value)
+
+
+@pulumi.input_type
+class RealtimeLogDeliveryCustomEndpointArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[str],
+                 access_id: Optional[pulumi.Input[str]] = None,
+                 access_key: Optional[pulumi.Input[str]] = None,
+                 compress_type: Optional[pulumi.Input[str]] = None,
+                 headers: Optional[pulumi.Input[Sequence[pulumi.Input['RealtimeLogDeliveryCustomEndpointHeaderArgs']]]] = None,
+                 protocol: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] url: The custom HTTP interface address for real-time log delivery. Currently, only HTTP/HTTPS protocols are supported.
+        :param pulumi.Input[str] access_id: Fill in a custom SecretId to generate an encrypted signature. This parameter is required if the source site requires authentication.
+        :param pulumi.Input[str] access_key: Fill in the custom SecretKey to generate the encrypted signature. This parameter is required if the source site requires authentication.
+        :param pulumi.Input[str] compress_type: Data compression type, the possible values are: `gzip`: use gzip compression. If it is not filled in, compression is not enabled.
+        :param pulumi.Input[Sequence[pulumi.Input['RealtimeLogDeliveryCustomEndpointHeaderArgs']]] headers: The custom request header carried when delivering logs. If the header name you fill in is the default header carried by EdgeOne log push, such as Content-Type, then the header value you fill in will overwrite the default value. The header value references a single variable ${batchSize} to obtain the number of logs included in each POST request.
+        :param pulumi.Input[str] protocol: When sending logs via POST request, the application layer protocol type used can be: `http`: HTTP protocol; `https`: HTTPS protocol. If not filled in, the protocol type will be parsed according to the filled in URL address.
+        """
+        pulumi.set(__self__, "url", url)
+        if access_id is not None:
+            pulumi.set(__self__, "access_id", access_id)
+        if access_key is not None:
+            pulumi.set(__self__, "access_key", access_key)
+        if compress_type is not None:
+            pulumi.set(__self__, "compress_type", compress_type)
+        if headers is not None:
+            pulumi.set(__self__, "headers", headers)
+        if protocol is not None:
+            pulumi.set(__self__, "protocol", protocol)
 
     @property
     @pulumi.getter
-    def actions(self) -> pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleActionArgs']]]:
+    def url(self) -> pulumi.Input[str]:
         """
-        Feature to be executed.
+        The custom HTTP interface address for real-time log delivery. Currently, only HTTP/HTTPS protocols are supported.
         """
-        return pulumi.get(self, "actions")
+        return pulumi.get(self, "url")
 
-    @actions.setter
-    def actions(self, value: pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleActionArgs']]]):
-        pulumi.set(self, "actions", value)
+    @url.setter
+    def url(self, value: pulumi.Input[str]):
+        pulumi.set(self, "url", value)
+
+    @property
+    @pulumi.getter(name="accessId")
+    def access_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Fill in a custom SecretId to generate an encrypted signature. This parameter is required if the source site requires authentication.
+        """
+        return pulumi.get(self, "access_id")
+
+    @access_id.setter
+    def access_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "access_id", value)
+
+    @property
+    @pulumi.getter(name="accessKey")
+    def access_key(self) -> Optional[pulumi.Input[str]]:
+        """
+        Fill in the custom SecretKey to generate the encrypted signature. This parameter is required if the source site requires authentication.
+        """
+        return pulumi.get(self, "access_key")
+
+    @access_key.setter
+    def access_key(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "access_key", value)
+
+    @property
+    @pulumi.getter(name="compressType")
+    def compress_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Data compression type, the possible values are: `gzip`: use gzip compression. If it is not filled in, compression is not enabled.
+        """
+        return pulumi.get(self, "compress_type")
+
+    @compress_type.setter
+    def compress_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "compress_type", value)
+
+    @property
+    @pulumi.getter
+    def headers(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RealtimeLogDeliveryCustomEndpointHeaderArgs']]]]:
+        """
+        The custom request header carried when delivering logs. If the header name you fill in is the default header carried by EdgeOne log push, such as Content-Type, then the header value you fill in will overwrite the default value. The header value references a single variable ${batchSize} to obtain the number of logs included in each POST request.
+        """
+        return pulumi.get(self, "headers")
+
+    @headers.setter
+    def headers(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['RealtimeLogDeliveryCustomEndpointHeaderArgs']]]]):
+        pulumi.set(self, "headers", value)
+
+    @property
+    @pulumi.getter
+    def protocol(self) -> Optional[pulumi.Input[str]]:
+        """
+        When sending logs via POST request, the application layer protocol type used can be: `http`: HTTP protocol; `https`: HTTPS protocol. If not filled in, the protocol type will be parsed according to the filled in URL address.
+        """
+        return pulumi.get(self, "protocol")
+
+    @protocol.setter
+    def protocol(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "protocol", value)
+
+
+@pulumi.input_type
+class RealtimeLogDeliveryCustomEndpointHeaderArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[str],
+                 value: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] name: HTTP header name.
+        :param pulumi.Input[str] value: HTTP header value.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        HTTP header name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        HTTP header value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+
+@pulumi.input_type
+class RealtimeLogDeliveryCustomFieldArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[str],
+                 value: pulumi.Input[str],
+                 enabled: Optional[pulumi.Input[bool]] = None):
+        """
+        :param pulumi.Input[str] name: Extract data from the specified location in the HTTP request and response. The values are: `ReqHeader`: extract the specified field value from the HTTP request header; `RspHeader`: extract the specified field value from the HTTP response header; `Cookie`: extract the specified field value from the Cookie.
+        :param pulumi.Input[str] value: The name of the parameter whose value needs to be extracted, for example: Accept-Language.
+        :param pulumi.Input[bool] enabled: Whether to deliver this field. If left blank, this field will not be delivered.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Extract data from the specified location in the HTTP request and response. The values are: `ReqHeader`: extract the specified field value from the HTTP request header; `RspHeader`: extract the specified field value from the HTTP response header; `Cookie`: extract the specified field value from the Cookie.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[str]:
+        """
+        The name of the parameter whose value needs to be extracted, for example: Accept-Language.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[str]):
+        pulumi.set(self, "value", value)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to deliver this field. If left blank, this field will not be delivered.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enabled", value)
+
+
+@pulumi.input_type
+class RealtimeLogDeliveryDeliveryConditionArgs:
+    def __init__(__self__, *,
+                 conditions: Optional[pulumi.Input[Sequence[pulumi.Input['RealtimeLogDeliveryDeliveryConditionConditionArgs']]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['RealtimeLogDeliveryDeliveryConditionConditionArgs']]] conditions: Log filtering conditions, the detailed filtering conditions are as follows: - `EdgeResponseStatusCode`: filter according to the status code returned by the EdgeOne node to the client. Supported operators: `equal`, `great`, `less`, `great_equal`, `less_equal`; Value range: any integer greater than or equal to 0; - `OriginResponseStatusCode`: filter according to the origin response status code. Supported operators: `equal`, `great`, `less`, `great_equal`, `less_equal`; Value range: any integer greater than or equal to -1; - `SecurityAction`: filter according to the final disposal action after the request hits the security rule. Supported operators: `equal`; Optional options are as follows: `-`: unknown/miss; `Monitor`: observe; `JSChallenge`: JavaScript challenge; `Deny`: intercept; `Allow`: allow; `BlockIP`: IP ban; `Redirect`: redirect; `ReturnCustomPage`: return to a custom page; `ManagedChallenge`: managed challenge; `Silence`: silent; `LongDelay`: respond after a long wait; `ShortDelay`: respond after a short wait; -`SecurityModule`: filter according to the name of the security module that finally handles the request. Supported operators: `equal`; Optional options: `-`: unknown/missed; `CustomRule`: Web Protection - Custom Rules; `RateLimitingCustomRule`: Web Protection - Rate Limiting Rules; `ManagedRule`: Web Protection - Managed Rules; `L7DDoS`: Web Protection - CC Attack Protection; `BotManagement`: Bot Management - Bot Basic Management; `BotClientReputation`: Bot Management - Client Profile Analysis; `BotBehaviorAnalysis`: Bot Management - Bot Intelligent Analysis; `BotCustomRule`: Bot Management - Custom Bot Rules; `BotActiveDetection`: Bot Management - Active Feature Recognition.
+        """
+        if conditions is not None:
+            pulumi.set(__self__, "conditions", conditions)
+
+    @property
+    @pulumi.getter
+    def conditions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RealtimeLogDeliveryDeliveryConditionConditionArgs']]]]:
+        """
+        Log filtering conditions, the detailed filtering conditions are as follows: - `EdgeResponseStatusCode`: filter according to the status code returned by the EdgeOne node to the client. Supported operators: `equal`, `great`, `less`, `great_equal`, `less_equal`; Value range: any integer greater than or equal to 0; - `OriginResponseStatusCode`: filter according to the origin response status code. Supported operators: `equal`, `great`, `less`, `great_equal`, `less_equal`; Value range: any integer greater than or equal to -1; - `SecurityAction`: filter according to the final disposal action after the request hits the security rule. Supported operators: `equal`; Optional options are as follows: `-`: unknown/miss; `Monitor`: observe; `JSChallenge`: JavaScript challenge; `Deny`: intercept; `Allow`: allow; `BlockIP`: IP ban; `Redirect`: redirect; `ReturnCustomPage`: return to a custom page; `ManagedChallenge`: managed challenge; `Silence`: silent; `LongDelay`: respond after a long wait; `ShortDelay`: respond after a short wait; -`SecurityModule`: filter according to the name of the security module that finally handles the request. Supported operators: `equal`; Optional options: `-`: unknown/missed; `CustomRule`: Web Protection - Custom Rules; `RateLimitingCustomRule`: Web Protection - Rate Limiting Rules; `ManagedRule`: Web Protection - Managed Rules; `L7DDoS`: Web Protection - CC Attack Protection; `BotManagement`: Bot Management - Bot Basic Management; `BotClientReputation`: Bot Management - Client Profile Analysis; `BotBehaviorAnalysis`: Bot Management - Bot Intelligent Analysis; `BotCustomRule`: Bot Management - Custom Bot Rules; `BotActiveDetection`: Bot Management - Active Feature Recognition.
+        """
+        return pulumi.get(self, "conditions")
+
+    @conditions.setter
+    def conditions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['RealtimeLogDeliveryDeliveryConditionConditionArgs']]]]):
+        pulumi.set(self, "conditions", value)
+
+
+@pulumi.input_type
+class RealtimeLogDeliveryDeliveryConditionConditionArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[str],
+                 operator: pulumi.Input[str],
+                 values: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[str] key: The key of the filter condition.
+        :param pulumi.Input[str] operator: Query condition operator, operation types are: `equals`: equal; `notEquals`: not equal; `include`: include; `notInclude`: not include; `startWith`: start with value; `notStartWith`: not start with value; `endWith`: end with value; `notEndWith`: not end with value.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] values: The value of the filter condition.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "operator", operator)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[str]:
+        """
+        The key of the filter condition.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def operator(self) -> pulumi.Input[str]:
+        """
+        Query condition operator, operation types are: `equals`: equal; `notEquals`: not equal; `include`: include; `notInclude`: not include; `startWith`: start with value; `notStartWith`: not start with value; `endWith`: end with value; `notEndWith`: not end with value.
+        """
+        return pulumi.get(self, "operator")
+
+    @operator.setter
+    def operator(self, value: pulumi.Input[str]):
+        pulumi.set(self, "operator", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        The value of the filter condition.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class RealtimeLogDeliveryLogFormatArgs:
+    def __init__(__self__, *,
+                 format_type: pulumi.Input[str],
+                 batch_prefix: Optional[pulumi.Input[str]] = None,
+                 batch_suffix: Optional[pulumi.Input[str]] = None,
+                 field_delimiter: Optional[pulumi.Input[str]] = None,
+                 record_delimiter: Optional[pulumi.Input[str]] = None,
+                 record_prefix: Optional[pulumi.Input[str]] = None,
+                 record_suffix: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] format_type: The default output format type for log delivery. The possible values are: `json`: Use the default log output format JSON Lines. The fields in a single log are presented as key-value pairs; `csv`: Use the default log output format csv. Only field values are presented in a single log, without field names.
+        :param pulumi.Input[str] batch_prefix: A string to be added before each log delivery batch. Each log delivery batch may contain multiple log records.
+        :param pulumi.Input[str] batch_suffix: A string to append after each log delivery batch.
+        :param pulumi.Input[str] field_delimiter: In a single log record, a string is inserted between fields as a separator. The possible values are: `	`: tab character; `,`: comma; `;`: semicolon.
+        :param pulumi.Input[str] record_delimiter: The string inserted between log records as a separator. The possible values are: `
+               `: newline character; `	`: tab character; `,`: comma.
+        :param pulumi.Input[str] record_prefix: A string to prepend to each log record.
+        :param pulumi.Input[str] record_suffix: A string to append to each log record.
+               
+               The `s3` object supports the following:
+        """
+        pulumi.set(__self__, "format_type", format_type)
+        if batch_prefix is not None:
+            pulumi.set(__self__, "batch_prefix", batch_prefix)
+        if batch_suffix is not None:
+            pulumi.set(__self__, "batch_suffix", batch_suffix)
+        if field_delimiter is not None:
+            pulumi.set(__self__, "field_delimiter", field_delimiter)
+        if record_delimiter is not None:
+            pulumi.set(__self__, "record_delimiter", record_delimiter)
+        if record_prefix is not None:
+            pulumi.set(__self__, "record_prefix", record_prefix)
+        if record_suffix is not None:
+            pulumi.set(__self__, "record_suffix", record_suffix)
+
+    @property
+    @pulumi.getter(name="formatType")
+    def format_type(self) -> pulumi.Input[str]:
+        """
+        The default output format type for log delivery. The possible values are: `json`: Use the default log output format JSON Lines. The fields in a single log are presented as key-value pairs; `csv`: Use the default log output format csv. Only field values are presented in a single log, without field names.
+        """
+        return pulumi.get(self, "format_type")
+
+    @format_type.setter
+    def format_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "format_type", value)
+
+    @property
+    @pulumi.getter(name="batchPrefix")
+    def batch_prefix(self) -> Optional[pulumi.Input[str]]:
+        """
+        A string to be added before each log delivery batch. Each log delivery batch may contain multiple log records.
+        """
+        return pulumi.get(self, "batch_prefix")
+
+    @batch_prefix.setter
+    def batch_prefix(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "batch_prefix", value)
+
+    @property
+    @pulumi.getter(name="batchSuffix")
+    def batch_suffix(self) -> Optional[pulumi.Input[str]]:
+        """
+        A string to append after each log delivery batch.
+        """
+        return pulumi.get(self, "batch_suffix")
+
+    @batch_suffix.setter
+    def batch_suffix(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "batch_suffix", value)
+
+    @property
+    @pulumi.getter(name="fieldDelimiter")
+    def field_delimiter(self) -> Optional[pulumi.Input[str]]:
+        """
+        In a single log record, a string is inserted between fields as a separator. The possible values are: `	`: tab character; `,`: comma; `;`: semicolon.
+        """
+        return pulumi.get(self, "field_delimiter")
+
+    @field_delimiter.setter
+    def field_delimiter(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "field_delimiter", value)
+
+    @property
+    @pulumi.getter(name="recordDelimiter")
+    def record_delimiter(self) -> Optional[pulumi.Input[str]]:
+        """
+        The string inserted between log records as a separator. The possible values are: `
+        `: newline character; `	`: tab character; `,`: comma.
+        """
+        return pulumi.get(self, "record_delimiter")
+
+    @record_delimiter.setter
+    def record_delimiter(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "record_delimiter", value)
+
+    @property
+    @pulumi.getter(name="recordPrefix")
+    def record_prefix(self) -> Optional[pulumi.Input[str]]:
+        """
+        A string to prepend to each log record.
+        """
+        return pulumi.get(self, "record_prefix")
+
+    @record_prefix.setter
+    def record_prefix(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "record_prefix", value)
+
+    @property
+    @pulumi.getter(name="recordSuffix")
+    def record_suffix(self) -> Optional[pulumi.Input[str]]:
+        """
+        A string to append to each log record.
+
+        The `s3` object supports the following:
+        """
+        return pulumi.get(self, "record_suffix")
+
+    @record_suffix.setter
+    def record_suffix(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "record_suffix", value)
+
+
+@pulumi.input_type
+class RealtimeLogDeliveryS3Args:
+    def __init__(__self__, *,
+                 access_id: pulumi.Input[str],
+                 access_key: pulumi.Input[str],
+                 bucket: pulumi.Input[str],
+                 endpoint: pulumi.Input[str],
+                 region: pulumi.Input[str],
+                 compress_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] access_id: Fill in a custom SecretId to generate an encrypted signature. This parameter is required if the source site requires authentication.
+        :param pulumi.Input[str] access_key: Fill in the custom SecretKey to generate the encrypted signature. This parameter is required if the source site requires authentication.
+        :param pulumi.Input[str] bucket: Bucket name and log storage directory, for example: `your_bucket_name/EO-logs/`. If this directory does not exist in the bucket, it will be created automatically.
+        :param pulumi.Input[str] endpoint: URLs that do not include bucket names or paths, for example: `https://storage.googleapis.com`, `https://s3.ap-northeast-2.amazonaws.com`, `https://cos.ap-nanjing.myqcloud.com`.
+        :param pulumi.Input[str] region: The region where the bucket is located, for example: ap-northeast-2.
+        :param pulumi.Input[str] compress_type: Data compression type, the possible values are: `gzip`: use gzip compression. If it is not filled in, compression is not enabled.
+        """
+        pulumi.set(__self__, "access_id", access_id)
+        pulumi.set(__self__, "access_key", access_key)
+        pulumi.set(__self__, "bucket", bucket)
+        pulumi.set(__self__, "endpoint", endpoint)
+        pulumi.set(__self__, "region", region)
+        if compress_type is not None:
+            pulumi.set(__self__, "compress_type", compress_type)
+
+    @property
+    @pulumi.getter(name="accessId")
+    def access_id(self) -> pulumi.Input[str]:
+        """
+        Fill in a custom SecretId to generate an encrypted signature. This parameter is required if the source site requires authentication.
+        """
+        return pulumi.get(self, "access_id")
+
+    @access_id.setter
+    def access_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "access_id", value)
+
+    @property
+    @pulumi.getter(name="accessKey")
+    def access_key(self) -> pulumi.Input[str]:
+        """
+        Fill in the custom SecretKey to generate the encrypted signature. This parameter is required if the source site requires authentication.
+        """
+        return pulumi.get(self, "access_key")
+
+    @access_key.setter
+    def access_key(self, value: pulumi.Input[str]):
+        pulumi.set(self, "access_key", value)
+
+    @property
+    @pulumi.getter
+    def bucket(self) -> pulumi.Input[str]:
+        """
+        Bucket name and log storage directory, for example: `your_bucket_name/EO-logs/`. If this directory does not exist in the bucket, it will be created automatically.
+        """
+        return pulumi.get(self, "bucket")
+
+    @bucket.setter
+    def bucket(self, value: pulumi.Input[str]):
+        pulumi.set(self, "bucket", value)
+
+    @property
+    @pulumi.getter
+    def endpoint(self) -> pulumi.Input[str]:
+        """
+        URLs that do not include bucket names or paths, for example: `https://storage.googleapis.com`, `https://s3.ap-northeast-2.amazonaws.com`, `https://cos.ap-nanjing.myqcloud.com`.
+        """
+        return pulumi.get(self, "endpoint")
+
+    @endpoint.setter
+    def endpoint(self, value: pulumi.Input[str]):
+        pulumi.set(self, "endpoint", value)
+
+    @property
+    @pulumi.getter
+    def region(self) -> pulumi.Input[str]:
+        """
+        The region where the bucket is located, for example: ap-northeast-2.
+        """
+        return pulumi.get(self, "region")
+
+    @region.setter
+    def region(self, value: pulumi.Input[str]):
+        pulumi.set(self, "region", value)
+
+    @property
+    @pulumi.getter(name="compressType")
+    def compress_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Data compression type, the possible values are: `gzip`: use gzip compression. If it is not filled in, compression is not enabled.
+        """
+        return pulumi.get(self, "compress_type")
+
+    @compress_type.setter
+    def compress_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "compress_type", value)
+
+
+@pulumi.input_type
+class RuleEngineRuleArgs:
+    def __init__(__self__, *,
+                 ors: pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleOrArgs']]],
+                 actions: Optional[pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleActionArgs']]]] = None,
+                 sub_rules: Optional[pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleSubRuleArgs']]]] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleOrArgs']]] ors: OR Conditions list of the rule. Rule would be triggered if any of the condition is true.
+        :param pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleActionArgs']]] actions: Feature to be executed.
+        :param pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleSubRuleArgs']]] sub_rules: The nested rule.
+        """
+        pulumi.set(__self__, "ors", ors)
+        if actions is not None:
+            pulumi.set(__self__, "actions", actions)
+        if sub_rules is not None:
+            pulumi.set(__self__, "sub_rules", sub_rules)
 
     @property
     @pulumi.getter
@@ -614,6 +1152,18 @@ class RuleEngineRuleArgs:
     @ors.setter
     def ors(self, value: pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleOrArgs']]]):
         pulumi.set(self, "ors", value)
+
+    @property
+    @pulumi.getter
+    def actions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleActionArgs']]]]:
+        """
+        Feature to be executed.
+        """
+        return pulumi.get(self, "actions")
+
+    @actions.setter
+    def actions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleActionArgs']]]]):
+        pulumi.set(self, "actions", value)
 
     @property
     @pulumi.getter(name="subRules")
@@ -1107,26 +1657,15 @@ class RuleEngineRuleSubRuleArgs:
 @pulumi.input_type
 class RuleEngineRuleSubRuleRuleArgs:
     def __init__(__self__, *,
-                 actions: pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleSubRuleRuleActionArgs']]],
-                 ors: pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleSubRuleRuleOrArgs']]]):
+                 ors: pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleSubRuleRuleOrArgs']]],
+                 actions: Optional[pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleSubRuleRuleActionArgs']]]] = None):
         """
-        :param pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleSubRuleRuleActionArgs']]] actions: Feature to be executed.
         :param pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleSubRuleRuleOrArgs']]] ors: OR Conditions list of the rule. Rule would be triggered if any of the condition is true.
+        :param pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleSubRuleRuleActionArgs']]] actions: Feature to be executed.
         """
-        pulumi.set(__self__, "actions", actions)
         pulumi.set(__self__, "ors", ors)
-
-    @property
-    @pulumi.getter
-    def actions(self) -> pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleSubRuleRuleActionArgs']]]:
-        """
-        Feature to be executed.
-        """
-        return pulumi.get(self, "actions")
-
-    @actions.setter
-    def actions(self, value: pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleSubRuleRuleActionArgs']]]):
-        pulumi.set(self, "actions", value)
+        if actions is not None:
+            pulumi.set(__self__, "actions", actions)
 
     @property
     @pulumi.getter
@@ -1139,6 +1678,18 @@ class RuleEngineRuleSubRuleRuleArgs:
     @ors.setter
     def ors(self, value: pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleSubRuleRuleOrArgs']]]):
         pulumi.set(self, "ors", value)
+
+    @property
+    @pulumi.getter
+    def actions(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleSubRuleRuleActionArgs']]]]:
+        """
+        Feature to be executed.
+        """
+        return pulumi.get(self, "actions")
+
+    @actions.setter
+    def actions(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['RuleEngineRuleSubRuleRuleActionArgs']]]]):
+        pulumi.set(self, "actions", value)
 
 
 @pulumi.input_type

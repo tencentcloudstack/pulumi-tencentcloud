@@ -155,6 +155,14 @@ import (
 //
 // ```
 // <!--End PulumiCodeChooser -->
+//
+// ## Import
+//
+// tke scale worker can be imported, e.g.
+//
+// ```sh
+// $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker test cls-xxx#ins-xxx
+// ```
 type ScaleWorker struct {
 	pulumi.CustomResourceState
 

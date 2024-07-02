@@ -35,6 +35,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &OriginGroup{}
 	case "tencentcloud:Teo/ownershipVerify:OwnershipVerify":
 		r = &OwnershipVerify{}
+	case "tencentcloud:Teo/realtimeLogDelivery:RealtimeLogDelivery":
+		r = &RealtimeLogDelivery{}
 	case "tencentcloud:Teo/ruleEngine:RuleEngine":
 		r = &RuleEngine{}
 	case "tencentcloud:Teo/zone:Zone":
@@ -87,6 +89,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Teo/ownershipVerify",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Teo/realtimeLogDelivery",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

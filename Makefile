@@ -17,7 +17,7 @@ TESTPARALLELISM := 4
 
 WORKING_DIR     := $(shell pwd)
 
-REQ_CLIENT_LDFLAG := github.com/tencentcloudstack/terraform-provider-tencentcloud/tencentcloud/connectivity.ReqClient=pulumi-${VERSION}
+REQ_CLIENT_LDFLAG := github.com/tencentcloudstack/terraform-provider-tencentcloud/tencentcloud/connectivity.ReqClient=Pulumi-${VERSION}
 
 OS := $(shell uname)
 EMPTY_TO_AVOID_SED := ""

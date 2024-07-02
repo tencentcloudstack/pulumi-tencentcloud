@@ -147,6 +147,14 @@ import * as utilities from "../utilities";
  * export const identityUrl = oidcConfig.then(oidcConfig => oidcConfig.identityUrl);
  * ```
  * <!--End PulumiCodeChooser -->
+ *
+ * ## Import
+ *
+ * tke cluster authentication can be imported, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment test cls-xxx
+ * ```
  */
 export class AuthAttachment extends pulumi.CustomResource {
     /**

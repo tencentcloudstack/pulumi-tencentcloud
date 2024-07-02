@@ -260,6 +260,14 @@ import (
 //
 // ```
 // <!--End PulumiCodeChooser -->
+//
+// ## Import
+//
+// tke cluster authentication can be imported, e.g.
+//
+// ```sh
+// $ pulumi import tencentcloud:Kubernetes/authAttachment:AuthAttachment test cls-xxx
+// ```
 type AuthAttachment struct {
 	pulumi.CustomResourceState
 

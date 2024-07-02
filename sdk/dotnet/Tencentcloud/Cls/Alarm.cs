@@ -41,6 +41,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///                 Number = 1,
     ///                 Query = "status:&gt;500 | select count(*) as errorCounts",
     ///                 StartTimeOffset = -15,
+    ///                 SyntaxRule = 1,
     ///                 TopicId = "88735a07-bea4-4985-8763-e9deb6da4fad",
     ///             },
     ///         },

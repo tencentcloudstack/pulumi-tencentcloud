@@ -19,17 +19,33 @@ class AccelerationDomainArgs:
                  domain_name: pulumi.Input[str],
                  origin_info: pulumi.Input['AccelerationDomainOriginInfoArgs'],
                  zone_id: pulumi.Input[str],
+                 http_origin_port: Optional[pulumi.Input[int]] = None,
+                 https_origin_port: Optional[pulumi.Input[int]] = None,
+                 ipv6_status: Optional[pulumi.Input[str]] = None,
+                 origin_protocol: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None):
         """
         The set of arguments for constructing a AccelerationDomain resource.
         :param pulumi.Input[str] domain_name: Accelerated domain name.
         :param pulumi.Input['AccelerationDomainOriginInfoArgs'] origin_info: Details of the origin.
         :param pulumi.Input[str] zone_id: ID of the site related with the accelerated domain name.
+        :param pulumi.Input[int] http_origin_port: HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+        :param pulumi.Input[int] https_origin_port: HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+        :param pulumi.Input[str] ipv6_status: IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
+        :param pulumi.Input[str] origin_protocol: Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
         :param pulumi.Input[str] status: Accelerated domain name status, the values are: `online`: enabled; `offline`: disabled.
         """
         pulumi.set(__self__, "domain_name", domain_name)
         pulumi.set(__self__, "origin_info", origin_info)
         pulumi.set(__self__, "zone_id", zone_id)
+        if http_origin_port is not None:
+            pulumi.set(__self__, "http_origin_port", http_origin_port)
+        if https_origin_port is not None:
+            pulumi.set(__self__, "https_origin_port", https_origin_port)
+        if ipv6_status is not None:
+            pulumi.set(__self__, "ipv6_status", ipv6_status)
+        if origin_protocol is not None:
+            pulumi.set(__self__, "origin_protocol", origin_protocol)
         if status is not None:
             pulumi.set(__self__, "status", status)
 
@@ -70,6 +86,54 @@ class AccelerationDomainArgs:
         pulumi.set(self, "zone_id", value)
 
     @property
+    @pulumi.getter(name="httpOriginPort")
+    def http_origin_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+        """
+        return pulumi.get(self, "http_origin_port")
+
+    @http_origin_port.setter
+    def http_origin_port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "http_origin_port", value)
+
+    @property
+    @pulumi.getter(name="httpsOriginPort")
+    def https_origin_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+        """
+        return pulumi.get(self, "https_origin_port")
+
+    @https_origin_port.setter
+    def https_origin_port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "https_origin_port", value)
+
+    @property
+    @pulumi.getter(name="ipv6Status")
+    def ipv6_status(self) -> Optional[pulumi.Input[str]]:
+        """
+        IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
+        """
+        return pulumi.get(self, "ipv6_status")
+
+    @ipv6_status.setter
+    def ipv6_status(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ipv6_status", value)
+
+    @property
+    @pulumi.getter(name="originProtocol")
+    def origin_protocol(self) -> Optional[pulumi.Input[str]]:
+        """
+        Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
+        """
+        return pulumi.get(self, "origin_protocol")
+
+    @origin_protocol.setter
+    def origin_protocol(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "origin_protocol", value)
+
+    @property
     @pulumi.getter
     def status(self) -> Optional[pulumi.Input[str]]:
         """
@@ -87,14 +151,22 @@ class _AccelerationDomainState:
     def __init__(__self__, *,
                  cname: Optional[pulumi.Input[str]] = None,
                  domain_name: Optional[pulumi.Input[str]] = None,
+                 http_origin_port: Optional[pulumi.Input[int]] = None,
+                 https_origin_port: Optional[pulumi.Input[int]] = None,
+                 ipv6_status: Optional[pulumi.Input[str]] = None,
                  origin_info: Optional[pulumi.Input['AccelerationDomainOriginInfoArgs']] = None,
+                 origin_protocol: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  zone_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering AccelerationDomain resources.
         :param pulumi.Input[str] cname: CNAME address.
         :param pulumi.Input[str] domain_name: Accelerated domain name.
+        :param pulumi.Input[int] http_origin_port: HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+        :param pulumi.Input[int] https_origin_port: HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+        :param pulumi.Input[str] ipv6_status: IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
         :param pulumi.Input['AccelerationDomainOriginInfoArgs'] origin_info: Details of the origin.
+        :param pulumi.Input[str] origin_protocol: Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
         :param pulumi.Input[str] status: Accelerated domain name status, the values are: `online`: enabled; `offline`: disabled.
         :param pulumi.Input[str] zone_id: ID of the site related with the accelerated domain name.
         """
@@ -102,8 +174,16 @@ class _AccelerationDomainState:
             pulumi.set(__self__, "cname", cname)
         if domain_name is not None:
             pulumi.set(__self__, "domain_name", domain_name)
+        if http_origin_port is not None:
+            pulumi.set(__self__, "http_origin_port", http_origin_port)
+        if https_origin_port is not None:
+            pulumi.set(__self__, "https_origin_port", https_origin_port)
+        if ipv6_status is not None:
+            pulumi.set(__self__, "ipv6_status", ipv6_status)
         if origin_info is not None:
             pulumi.set(__self__, "origin_info", origin_info)
+        if origin_protocol is not None:
+            pulumi.set(__self__, "origin_protocol", origin_protocol)
         if status is not None:
             pulumi.set(__self__, "status", status)
         if zone_id is not None:
@@ -134,6 +214,42 @@ class _AccelerationDomainState:
         pulumi.set(self, "domain_name", value)
 
     @property
+    @pulumi.getter(name="httpOriginPort")
+    def http_origin_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+        """
+        return pulumi.get(self, "http_origin_port")
+
+    @http_origin_port.setter
+    def http_origin_port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "http_origin_port", value)
+
+    @property
+    @pulumi.getter(name="httpsOriginPort")
+    def https_origin_port(self) -> Optional[pulumi.Input[int]]:
+        """
+        HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+        """
+        return pulumi.get(self, "https_origin_port")
+
+    @https_origin_port.setter
+    def https_origin_port(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "https_origin_port", value)
+
+    @property
+    @pulumi.getter(name="ipv6Status")
+    def ipv6_status(self) -> Optional[pulumi.Input[str]]:
+        """
+        IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
+        """
+        return pulumi.get(self, "ipv6_status")
+
+    @ipv6_status.setter
+    def ipv6_status(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "ipv6_status", value)
+
+    @property
     @pulumi.getter(name="originInfo")
     def origin_info(self) -> Optional[pulumi.Input['AccelerationDomainOriginInfoArgs']]:
         """
@@ -144,6 +260,18 @@ class _AccelerationDomainState:
     @origin_info.setter
     def origin_info(self, value: Optional[pulumi.Input['AccelerationDomainOriginInfoArgs']]):
         pulumi.set(self, "origin_info", value)
+
+    @property
+    @pulumi.getter(name="originProtocol")
+    def origin_protocol(self) -> Optional[pulumi.Input[str]]:
+        """
+        Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
+        """
+        return pulumi.get(self, "origin_protocol")
+
+    @origin_protocol.setter
+    def origin_protocol(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "origin_protocol", value)
 
     @property
     @pulumi.getter
@@ -176,7 +304,11 @@ class AccelerationDomain(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  domain_name: Optional[pulumi.Input[str]] = None,
+                 http_origin_port: Optional[pulumi.Input[int]] = None,
+                 https_origin_port: Optional[pulumi.Input[int]] = None,
+                 ipv6_status: Optional[pulumi.Input[str]] = None,
                  origin_info: Optional[pulumi.Input[pulumi.InputType['AccelerationDomainOriginInfoArgs']]] = None,
+                 origin_protocol: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  zone_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -211,7 +343,11 @@ class AccelerationDomain(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] domain_name: Accelerated domain name.
+        :param pulumi.Input[int] http_origin_port: HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+        :param pulumi.Input[int] https_origin_port: HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+        :param pulumi.Input[str] ipv6_status: IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
         :param pulumi.Input[pulumi.InputType['AccelerationDomainOriginInfoArgs']] origin_info: Details of the origin.
+        :param pulumi.Input[str] origin_protocol: Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
         :param pulumi.Input[str] status: Accelerated domain name status, the values are: `online`: enabled; `offline`: disabled.
         :param pulumi.Input[str] zone_id: ID of the site related with the accelerated domain name.
         """
@@ -265,7 +401,11 @@ class AccelerationDomain(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  domain_name: Optional[pulumi.Input[str]] = None,
+                 http_origin_port: Optional[pulumi.Input[int]] = None,
+                 https_origin_port: Optional[pulumi.Input[int]] = None,
+                 ipv6_status: Optional[pulumi.Input[str]] = None,
                  origin_info: Optional[pulumi.Input[pulumi.InputType['AccelerationDomainOriginInfoArgs']]] = None,
+                 origin_protocol: Optional[pulumi.Input[str]] = None,
                  status: Optional[pulumi.Input[str]] = None,
                  zone_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
@@ -280,9 +420,13 @@ class AccelerationDomain(pulumi.CustomResource):
             if domain_name is None and not opts.urn:
                 raise TypeError("Missing required property 'domain_name'")
             __props__.__dict__["domain_name"] = domain_name
+            __props__.__dict__["http_origin_port"] = http_origin_port
+            __props__.__dict__["https_origin_port"] = https_origin_port
+            __props__.__dict__["ipv6_status"] = ipv6_status
             if origin_info is None and not opts.urn:
                 raise TypeError("Missing required property 'origin_info'")
             __props__.__dict__["origin_info"] = origin_info
+            __props__.__dict__["origin_protocol"] = origin_protocol
             __props__.__dict__["status"] = status
             if zone_id is None and not opts.urn:
                 raise TypeError("Missing required property 'zone_id'")
@@ -300,7 +444,11 @@ class AccelerationDomain(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             cname: Optional[pulumi.Input[str]] = None,
             domain_name: Optional[pulumi.Input[str]] = None,
+            http_origin_port: Optional[pulumi.Input[int]] = None,
+            https_origin_port: Optional[pulumi.Input[int]] = None,
+            ipv6_status: Optional[pulumi.Input[str]] = None,
             origin_info: Optional[pulumi.Input[pulumi.InputType['AccelerationDomainOriginInfoArgs']]] = None,
+            origin_protocol: Optional[pulumi.Input[str]] = None,
             status: Optional[pulumi.Input[str]] = None,
             zone_id: Optional[pulumi.Input[str]] = None) -> 'AccelerationDomain':
         """
@@ -312,7 +460,11 @@ class AccelerationDomain(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cname: CNAME address.
         :param pulumi.Input[str] domain_name: Accelerated domain name.
+        :param pulumi.Input[int] http_origin_port: HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+        :param pulumi.Input[int] https_origin_port: HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+        :param pulumi.Input[str] ipv6_status: IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
         :param pulumi.Input[pulumi.InputType['AccelerationDomainOriginInfoArgs']] origin_info: Details of the origin.
+        :param pulumi.Input[str] origin_protocol: Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
         :param pulumi.Input[str] status: Accelerated domain name status, the values are: `online`: enabled; `offline`: disabled.
         :param pulumi.Input[str] zone_id: ID of the site related with the accelerated domain name.
         """
@@ -322,7 +474,11 @@ class AccelerationDomain(pulumi.CustomResource):
 
         __props__.__dict__["cname"] = cname
         __props__.__dict__["domain_name"] = domain_name
+        __props__.__dict__["http_origin_port"] = http_origin_port
+        __props__.__dict__["https_origin_port"] = https_origin_port
+        __props__.__dict__["ipv6_status"] = ipv6_status
         __props__.__dict__["origin_info"] = origin_info
+        __props__.__dict__["origin_protocol"] = origin_protocol
         __props__.__dict__["status"] = status
         __props__.__dict__["zone_id"] = zone_id
         return AccelerationDomain(resource_name, opts=opts, __props__=__props__)
@@ -344,12 +500,44 @@ class AccelerationDomain(pulumi.CustomResource):
         return pulumi.get(self, "domain_name")
 
     @property
+    @pulumi.getter(name="httpOriginPort")
+    def http_origin_port(self) -> pulumi.Output[int]:
+        """
+        HTTP back-to-origin port, the value is 1-65535, effective when OriginProtocol=FOLLOW/HTTP, if not filled in, the default value is 80.
+        """
+        return pulumi.get(self, "http_origin_port")
+
+    @property
+    @pulumi.getter(name="httpsOriginPort")
+    def https_origin_port(self) -> pulumi.Output[int]:
+        """
+        HTTPS back-to-origin port. The value range is 1-65535. It takes effect when OriginProtocol=FOLLOW/HTTPS. If it is not filled in, the default value is 443.
+        """
+        return pulumi.get(self, "https_origin_port")
+
+    @property
+    @pulumi.getter(name="ipv6Status")
+    def ipv6_status(self) -> pulumi.Output[str]:
+        """
+        IPv6 status, the value is: `follow`: follow the site IPv6 configuration; `on`: on; `off`: off. If not filled in, the default is: `follow`.
+        """
+        return pulumi.get(self, "ipv6_status")
+
+    @property
     @pulumi.getter(name="originInfo")
     def origin_info(self) -> pulumi.Output['outputs.AccelerationDomainOriginInfo']:
         """
         Details of the origin.
         """
         return pulumi.get(self, "origin_info")
+
+    @property
+    @pulumi.getter(name="originProtocol")
+    def origin_protocol(self) -> pulumi.Output[str]:
+        """
+        Origin return protocol, possible values are: `FOLLOW`: protocol follow; `HTTP`: HTTP protocol back to source; `HTTPS`: HTTPS protocol back to source. If not filled in, the default is: `FOLLOW`.
+        """
+        return pulumi.get(self, "origin_protocol")
 
     @property
     @pulumi.getter

@@ -95,7 +95,7 @@ class ClusterArgs:
         :param pulumi.Input[int] cluster_max_pod_num: The maximum number of Pods per node in the cluster. Default is 256. The minimum value is 4. When its power unequal to 2, it will round upward to the closest power of 2.
         :param pulumi.Input[int] cluster_max_service_num: The maximum number of services in the cluster. Default is 256. The range is from 32 to 32768. When its power unequal to 2, it will round upward to the closest power of 2.
         :param pulumi.Input[str] cluster_name: Name of the cluster.
-        :param pulumi.Input[str] cluster_os: Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+        :param pulumi.Input[str] cluster_os: Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
         :param pulumi.Input[str] cluster_os_type: Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
         :param pulumi.Input[str] cluster_subnet_id: Subnet ID of the cluster, such as: subnet-b3p7d7q5.
         :param pulumi.Input[str] cluster_version: Version of the cluster. Use `kubernetes_get_available_cluster_versions` to get the upgradable cluster version.
@@ -127,7 +127,7 @@ class ClusterArgs:
         :param pulumi.Input[int] unschedulable: Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
         :param pulumi.Input[bool] upgrade_instances_follow_cluster: Indicates whether upgrade all instances when cluster_version change. Default is false.
         :param pulumi.Input[str] vpc_cni_type: Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eni_subnet_ids` and `vpc_cni_type` must be set to empty.
-        :param pulumi.Input[Sequence[pulumi.Input['ClusterWorkerConfigArgs']]] worker_configs: Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterWorkerConfigArgs']]] worker_configs: Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
         """
         pulumi.set(__self__, "vpc_id", vpc_id)
         if acquire_cluster_admin_role is not None:
@@ -510,7 +510,7 @@ class ClusterArgs:
     @pulumi.getter(name="clusterOs")
     def cluster_os(self) -> Optional[pulumi.Input[str]]:
         """
-        Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+        Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
         """
         return pulumi.get(self, "cluster_os")
 
@@ -897,7 +897,7 @@ class ClusterArgs:
     @pulumi.getter(name="workerConfigs")
     def worker_configs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterWorkerConfigArgs']]]]:
         """
-        Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+        Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
         """
         return pulumi.get(self, "worker_configs")
 
@@ -1003,7 +1003,7 @@ class _ClusterState:
         :param pulumi.Input[int] cluster_max_service_num: The maximum number of services in the cluster. Default is 256. The range is from 32 to 32768. When its power unequal to 2, it will round upward to the closest power of 2.
         :param pulumi.Input[str] cluster_name: Name of the cluster.
         :param pulumi.Input[int] cluster_node_num: Number of nodes in the cluster.
-        :param pulumi.Input[str] cluster_os: Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+        :param pulumi.Input[str] cluster_os: Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
         :param pulumi.Input[str] cluster_os_type: Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
         :param pulumi.Input[str] cluster_subnet_id: Subnet ID of the cluster, such as: subnet-b3p7d7q5.
         :param pulumi.Input[str] cluster_version: Version of the cluster. Use `kubernetes_get_available_cluster_versions` to get the upgradable cluster version.
@@ -1043,7 +1043,7 @@ class _ClusterState:
         :param pulumi.Input[str] user_name: User name of account.
         :param pulumi.Input[str] vpc_cni_type: Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eni_subnet_ids` and `vpc_cni_type` must be set to empty.
         :param pulumi.Input[str] vpc_id: Vpc Id of the cluster.
-        :param pulumi.Input[Sequence[pulumi.Input['ClusterWorkerConfigArgs']]] worker_configs: Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterWorkerConfigArgs']]] worker_configs: Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
         :param pulumi.Input[Sequence[pulumi.Input['ClusterWorkerInstancesListArgs']]] worker_instances_lists: An information list of cvm within the 'WORKER' clusters. Each element contains the following attributes:
         """
         if acquire_cluster_admin_role is not None:
@@ -1494,7 +1494,7 @@ class _ClusterState:
     @pulumi.getter(name="clusterOs")
     def cluster_os(self) -> Optional[pulumi.Input[str]]:
         """
-        Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+        Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
         """
         return pulumi.get(self, "cluster_os")
 
@@ -1977,7 +1977,7 @@ class _ClusterState:
     @pulumi.getter(name="workerConfigs")
     def worker_configs(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterWorkerConfigArgs']]]]:
         """
-        Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+        Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
         """
         return pulumi.get(self, "worker_configs")
 
@@ -2214,6 +2214,14 @@ class Cluster(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
+        ## Import
+
+        tke cluster can be imported, e.g.
+
+        ```sh
+        $ pulumi import tencentcloud:Kubernetes/cluster:Cluster test cls-xxx
+        ```
+
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] acquire_cluster_admin_role: If set to true, it will acquire the ClusterRole tke:admin. NOTE: this arguments cannot revoke to `false` after acquired.
@@ -2237,7 +2245,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[int] cluster_max_pod_num: The maximum number of Pods per node in the cluster. Default is 256. The minimum value is 4. When its power unequal to 2, it will round upward to the closest power of 2.
         :param pulumi.Input[int] cluster_max_service_num: The maximum number of services in the cluster. Default is 256. The range is from 32 to 32768. When its power unequal to 2, it will round upward to the closest power of 2.
         :param pulumi.Input[str] cluster_name: Name of the cluster.
-        :param pulumi.Input[str] cluster_os: Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+        :param pulumi.Input[str] cluster_os: Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
         :param pulumi.Input[str] cluster_os_type: Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
         :param pulumi.Input[str] cluster_subnet_id: Subnet ID of the cluster, such as: subnet-b3p7d7q5.
         :param pulumi.Input[str] cluster_version: Version of the cluster. Use `kubernetes_get_available_cluster_versions` to get the upgradable cluster version.
@@ -2270,7 +2278,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[bool] upgrade_instances_follow_cluster: Indicates whether upgrade all instances when cluster_version change. Default is false.
         :param pulumi.Input[str] vpc_cni_type: Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eni_subnet_ids` and `vpc_cni_type` must be set to empty.
         :param pulumi.Input[str] vpc_id: Vpc Id of the cluster.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterWorkerConfigArgs']]]] worker_configs: Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterWorkerConfigArgs']]]] worker_configs: Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
         """
         ...
     @overload
@@ -2432,6 +2440,14 @@ class Cluster(pulumi.CustomResource):
             ))
         ```
         <!--End PulumiCodeChooser -->
+
+        ## Import
+
+        tke cluster can be imported, e.g.
+
+        ```sh
+        $ pulumi import tencentcloud:Kubernetes/cluster:Cluster test cls-xxx
+        ```
 
         :param str resource_name: The name of the resource.
         :param ClusterArgs args: The arguments to use to populate this resource's properties.
@@ -2690,7 +2706,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[int] cluster_max_service_num: The maximum number of services in the cluster. Default is 256. The range is from 32 to 32768. When its power unequal to 2, it will round upward to the closest power of 2.
         :param pulumi.Input[str] cluster_name: Name of the cluster.
         :param pulumi.Input[int] cluster_node_num: Number of nodes in the cluster.
-        :param pulumi.Input[str] cluster_os: Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+        :param pulumi.Input[str] cluster_os: Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
         :param pulumi.Input[str] cluster_os_type: Image type of the cluster os, the available values include: 'GENERAL'. Default is 'GENERAL'.
         :param pulumi.Input[str] cluster_subnet_id: Subnet ID of the cluster, such as: subnet-b3p7d7q5.
         :param pulumi.Input[str] cluster_version: Version of the cluster. Use `kubernetes_get_available_cluster_versions` to get the upgradable cluster version.
@@ -2730,7 +2746,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] user_name: User name of account.
         :param pulumi.Input[str] vpc_cni_type: Distinguish between shared network card multi-IP mode and independent network card mode. Fill in `tke-route-eni` for shared network card multi-IP mode and `tke-direct-eni` for independent network card mode. The default is shared network card mode. When it is necessary to turn off the vpc-cni container network capability, both `eni_subnet_ids` and `vpc_cni_type` must be set to empty.
         :param pulumi.Input[str] vpc_id: Vpc Id of the cluster.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterWorkerConfigArgs']]]] worker_configs: Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterWorkerConfigArgs']]]] worker_configs: Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterWorkerInstancesListArgs']]]] worker_instances_lists: An information list of cvm within the 'WORKER' clusters. Each element contains the following attributes:
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -2915,7 +2931,7 @@ class Cluster(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="clusterInternet")
-    def cluster_internet(self) -> pulumi.Output[bool]:
+    def cluster_internet(self) -> pulumi.Output[Optional[bool]]:
         """
         Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
         """
@@ -2939,7 +2955,7 @@ class Cluster(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="clusterIntranet")
-    def cluster_intranet(self) -> pulumi.Output[bool]:
+    def cluster_intranet(self) -> pulumi.Output[Optional[bool]]:
         """
         Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `Kubernetes.ClusterEndpoint`.
         """
@@ -3013,7 +3029,7 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="clusterOs")
     def cluster_os(self) -> pulumi.Output[Optional[str]]:
         """
-        Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+        Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
         """
         return pulumi.get(self, "cluster_os")
 
@@ -3336,7 +3352,7 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="workerConfigs")
     def worker_configs(self) -> pulumi.Output[Optional[Sequence['outputs.ClusterWorkerConfig']]]:
         """
-        Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+        Deploy the machine configuration information of the 'WORKER' service, and create <=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
         """
         return pulumi.get(self, "worker_configs")
 

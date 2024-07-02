@@ -202,6 +202,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// });
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ## Import
+    /// 
+    /// tke cluster can be imported, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Kubernetes/cluster:Cluster test cls-xxx
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/cluster:Cluster")]
     public partial class Cluster : global::Pulumi.CustomResource
@@ -288,7 +296,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// Open internet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
         /// </summary>
         [Output("clusterInternet")]
-        public Output<bool> ClusterInternet { get; private set; } = null!;
+        public Output<bool?> ClusterInternet { get; private set; } = null!;
 
         /// <summary>
         /// Domain name for cluster Kube-apiserver internet access. Be careful if you modify value of this parameter, the cluster_external_endpoint value may be changed automatically too.
@@ -306,7 +314,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// Open intranet access or not. If this field is set 'true', the field below `worker_config` must be set. Because only cluster with node is allowed enable access endpoint. You may open it through `tencentcloud.Kubernetes.ClusterEndpoint`.
         /// </summary>
         [Output("clusterIntranet")]
-        public Output<bool> ClusterIntranet { get; private set; } = null!;
+        public Output<bool?> ClusterIntranet { get; private set; } = null!;
 
         /// <summary>
         /// Domain name for cluster Kube-apiserver intranet access. Be careful if you modify value of this parameter, the pgw_endpoint value may be changed automatically too.
@@ -357,7 +365,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<int> ClusterNodeNum { get; private set; } = null!;
 
         /// <summary>
-        /// Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+        /// Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
         /// </summary>
         [Output("clusterOs")]
         public Output<string?> ClusterOs { get; private set; } = null!;
@@ -597,7 +605,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string> VpcId { get; private set; } = null!;
 
         /// <summary>
-        /// Deploy the machine configuration information of the 'WORKER' service, and create &lt;=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+        /// Deploy the machine configuration information of the 'WORKER' service, and create &lt;=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
         /// </summary>
         [Output("workerConfigs")]
         public Output<ImmutableArray<Outputs.ClusterWorkerConfig>> WorkerConfigs { get; private set; } = null!;
@@ -782,7 +790,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? ClusterName { get; set; }
 
         /// <summary>
-        /// Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+        /// Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
         /// </summary>
         [Input("clusterOs")]
         public Input<string>? ClusterOs { get; set; }
@@ -1038,7 +1046,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         private InputList<Inputs.ClusterWorkerConfigArgs>? _workerConfigs;
 
         /// <summary>
-        /// Deploy the machine configuration information of the 'WORKER' service, and create &lt;=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+        /// Deploy the machine configuration information of the 'WORKER' service, and create &lt;=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
         /// </summary>
         public InputList<Inputs.ClusterWorkerConfigArgs> WorkerConfigs
         {
@@ -1205,7 +1213,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<int>? ClusterNodeNum { get; set; }
 
         /// <summary>
-        /// Operating system of the cluster, the available values include: 'centos7.6.0_x64','ubuntu18.04.1x86_64','tlinux2.4x86_64'. Default is 'tlinux2.4x86_64'.
+        /// Cluster operating system, supports setting public images (the field passes the corresponding image Name) and custom images (the field passes the corresponding image ID). For details, please refer to: https://cloud.tencent.com/document/product/457/68289.
         /// </summary>
         [Input("clusterOs")]
         public Input<string>? ClusterOs { get; set; }
@@ -1509,7 +1517,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         private InputList<Inputs.ClusterWorkerConfigGetArgs>? _workerConfigs;
 
         /// <summary>
-        /// Deploy the machine configuration information of the 'WORKER' service, and create &lt;=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_worker'.
+        /// Deploy the machine configuration information of the 'WORKER' service, and create &lt;=20 units for common users. The other 'WORK' service are added by 'tencentcloud_kubernetes_scale_worker'.
         /// </summary>
         public InputList<Inputs.ClusterWorkerConfigGetArgs> WorkerConfigs
         {

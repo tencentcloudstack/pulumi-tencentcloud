@@ -198,7 +198,7 @@ class Namespace(pulumi.CustomResource):
                  retention_policy: Optional[pulumi.Input[pulumi.InputType['NamespaceRetentionPolicyArgs']]] = None,
                  __props__=None):
         """
-        Provide a resource to create a tdmq namespace.
+        Provide a resource to create a TDMQ namespace.
 
         ## Example Usage
 
@@ -230,7 +230,7 @@ class Namespace(pulumi.CustomResource):
         Tdmq namespace can be imported, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
+        $ pulumi import tencentcloud:Tdmq/namespace:Namespace example tf_example#pulsar-78bwjaj8epxv
         ```
 
         :param str resource_name: The name of the resource.
@@ -248,7 +248,7 @@ class Namespace(pulumi.CustomResource):
                  args: NamespaceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provide a resource to create a tdmq namespace.
+        Provide a resource to create a TDMQ namespace.
 
         ## Example Usage
 
@@ -280,7 +280,7 @@ class Namespace(pulumi.CustomResource):
         Tdmq namespace can be imported, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Tdmq/namespace:Namespace test namespace_id
+        $ pulumi import tencentcloud:Tdmq/namespace:Namespace example tf_example#pulsar-78bwjaj8epxv
         ```
 
         :param str resource_name: The name of the resource.

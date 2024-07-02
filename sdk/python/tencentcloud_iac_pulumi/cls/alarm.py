@@ -478,6 +478,7 @@ class Alarm(pulumi.CustomResource):
                 number=1,
                 query="status:>500 | select count(*) as errorCounts",
                 start_time_offset=-15,
+                syntax_rule=1,
                 topic_id="88735a07-bea4-4985-8763-e9deb6da4fad",
             )],
             analyses=[tencentcloud.cls.AlarmAnalysisArgs(
@@ -553,6 +554,7 @@ class Alarm(pulumi.CustomResource):
                 number=1,
                 query="status:>500 | select count(*) as errorCounts",
                 start_time_offset=-15,
+                syntax_rule=1,
                 topic_id="88735a07-bea4-4985-8763-e9deb6da4fad",
             )],
             analyses=[tencentcloud.cls.AlarmAnalysisArgs(

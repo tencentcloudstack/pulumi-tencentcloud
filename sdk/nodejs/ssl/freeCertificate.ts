@@ -136,7 +136,7 @@ export class FreeCertificate extends pulumi.CustomResource {
      */
     public readonly oldCertificateId!: pulumi.Output<string | undefined>;
     /**
-     * Type of package. Only support `"2"` (TrustAsia TLS RSA CA).
+     * Type of package. Only support `"83"` (TrustAsia TLS RSA CA).
      */
     public readonly packageType!: pulumi.Output<string | undefined>;
     /**
@@ -164,7 +164,7 @@ export class FreeCertificate extends pulumi.CustomResource {
      */
     public /*out*/ readonly statusName!: pulumi.Output<string>;
     /**
-     * Specify validity period in month, only support `"12"` months for now.
+     * Specify validity period in month, only support `"3"` months for now.
      */
     public readonly validityPeriod!: pulumi.Output<string | undefined>;
     /**
@@ -320,7 +320,7 @@ export interface FreeCertificateState {
      */
     oldCertificateId?: pulumi.Input<string>;
     /**
-     * Type of package. Only support `"2"` (TrustAsia TLS RSA CA).
+     * Type of package. Only support `"83"` (TrustAsia TLS RSA CA).
      */
     packageType?: pulumi.Input<string>;
     /**
@@ -348,7 +348,7 @@ export interface FreeCertificateState {
      */
     statusName?: pulumi.Input<string>;
     /**
-     * Specify validity period in month, only support `"12"` months for now.
+     * Specify validity period in month, only support `"3"` months for now.
      */
     validityPeriod?: pulumi.Input<string>;
     /**
@@ -398,7 +398,7 @@ export interface FreeCertificateArgs {
      */
     oldCertificateId?: pulumi.Input<string>;
     /**
-     * Type of package. Only support `"2"` (TrustAsia TLS RSA CA).
+     * Type of package. Only support `"83"` (TrustAsia TLS RSA CA).
      */
     packageType?: pulumi.Input<string>;
     /**
@@ -406,7 +406,7 @@ export interface FreeCertificateArgs {
      */
     projectId?: pulumi.Input<number>;
     /**
-     * Specify validity period in month, only support `"12"` months for now.
+     * Specify validity period in month, only support `"3"` months for now.
      */
     validityPeriod?: pulumi.Input<string>;
 }
