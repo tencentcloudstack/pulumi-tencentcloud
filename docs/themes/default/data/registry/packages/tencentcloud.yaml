@@ -1,0 +1,14 @@
+category: Cloud
+component: false
+description: A Pulumi package for creating and managing Tencent Cloud resources.
+featured: false
+logo_url: https://avatars.githubusercontent.com/u/68363092
+name: tencentcloud
+native: false
+package_status: public_preview
+publisher: TencentCloudStack
+repo_url: https://github.com/tencentcloudstack/pulumi-tencentcloud
+schema_file_path: provider/cmd/pulumi-resource-tencentcloud/schema.json
+title: TencentCloud
+updated_on: -62135596800
+version: v0.2.0
