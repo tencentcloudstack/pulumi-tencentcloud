@@ -1,7 +1,12 @@
 name: Auto Pull Request By Release
+
 on:
   repository_dispatch:
     types: [ webhook ]
+    
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -58,6 +63,7 @@ jobs:
           git add .
           git commit -sm "sync provider"
           git push origin feat/sync_provider_${version}
+          
       - name: create pull request
         run: |
           cd pulumi-tencentcloud
