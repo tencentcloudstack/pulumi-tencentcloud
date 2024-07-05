@@ -1,0 +1,66 @@
+name: Auto Pull Request By Release
+on:
+  repository_dispatch:
+    types: [ webhook ]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Install pulumictl
+        uses: jaxxstorm/action-install-gh-release@v1.5.0
+        with:
+          repo: pulumi/pulumictl
+          tag: v0.0.46
+
+      - name: Install Pulumi CLI
+        uses: pulumi/action-install-pulumi-cli@v2.0.0
+        with:
+          pulumi-version: 3.117.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 21.X
+
+      - name: Setup DotNet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.408
+
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: generate-code
+        id: generate-code
+        run: |
+          version=`curl https://api.github.com/repos/tencentcloudstack/terraform-provider-tencentcloud/releases/latest --header 'Accept: application/vnd.github+json' --header 'Authorization: Bearer ${{secrets.GITHUB_TOKEN}}' | jq .name | tr -d '"' | tr -d 'v'`
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          
+          git clone https://SevenEarth:${{secrets.GITHUB_TOKEN}}@github.com:tencentcloudstack/pulumi-tencentcloud.git
+          cd pulumi-tencentcloud
+          git config --global user.email "391613297@qq.com"
+          git config --global user.name "SevenEarth"
+          git checkout -b "feat/sync_provider_${version}"
+          
+          cd provider && go mod tidy && cd -
+          make tfgen
+          make provider
+          make build_sdks
+          cd sdk && go mod tidy && cd -
+          
+          git add .
+          git commit -sm "sync provider"
+          git push origin feat/sync_provider_${version}
+      - name: create pull request
+        run: |
+          cd pulumi-tencentcloud
+          gh pr create -B main -H feat/sync_provider_${{ steps.generate-code.outputs.version }} --title "sync terraform provider" --body "sync terraform provider version to ${{ steps.update-code.outputs.version }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
