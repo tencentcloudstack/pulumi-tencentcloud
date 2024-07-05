@@ -50,7 +50,7 @@ jobs:
           
           git clone https://hellertang:${{secrets.GITHUB_TOKEN}}@github.com/tencentcloudstack/pulumi-tencentcloud.git
           cd pulumi-tencentcloud
-          git config --global user.email "hellertang@github.com"
+          git config --global user.email "hellertang@tencent.com"
           git config --global user.name "hellertang"
           git checkout -b "feat/sync_provider_v${version}"
 
