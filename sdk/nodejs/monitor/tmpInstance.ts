@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  *     availabilityZone: availabilityZone,
  *     cidrBlock: "10.0.1.0/24",
  * });
- * const foo = new tencentcloud.monitor.TmpInstance("foo", {
+ * const example = new tencentcloud.monitor.TmpInstance("example", {
  *     instanceName: "tf-tmp-instance",
  *     vpcId: vpc.id,
  *     subnetId: subnet.id,
@@ -40,7 +40,7 @@ import * as utilities from "../utilities";
  * monitor tmpInstance can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance tmpInstance tmpInstance_id
+ * $ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance example prom-1uvo0tjm
  * ```
  */
 export class TmpInstance extends pulumi.CustomResource {
@@ -76,7 +76,7 @@ export class TmpInstance extends pulumi.CustomResource {
      */
     public /*out*/ readonly apiRootPath!: pulumi.Output<string>;
     /**
-     * Data retention time.
+     * Data retention time(in days). Value range: 15, 30, 45, 90, 180, 360, 720.
      */
     public readonly dataRetentionTime!: pulumi.Output<number>;
     /**
@@ -177,7 +177,7 @@ export interface TmpInstanceState {
      */
     apiRootPath?: pulumi.Input<string>;
     /**
-     * Data retention time.
+     * Data retention time(in days). Value range: 15, 30, 45, 90, 180, 360, 720.
      */
     dataRetentionTime?: pulumi.Input<number>;
     /**
@@ -219,7 +219,7 @@ export interface TmpInstanceState {
  */
 export interface TmpInstanceArgs {
     /**
-     * Data retention time.
+     * Data retention time(in days). Value range: 15, 30, 45, 90, 180, 360, 720.
      */
     dataRetentionTime: pulumi.Input<number>;
     /**

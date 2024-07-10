@@ -207,6 +207,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly instanceName!: pulumi.Output<string | undefined>;
     /**
+     * Kibana public network access status. Valid values are `OPEN` and `CLOSE`.
+     */
+    public readonly kibanaPublicAccess!: pulumi.Output<string>;
+    /**
      * Kibana access URL.
      */
     public /*out*/ readonly kibanaUrl!: pulumi.Output<string>;
@@ -249,7 +253,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Visual node configuration.
      */
-    public readonly webNodeTypeInfos!: pulumi.Output<outputs.Elasticsearch.InstanceWebNodeTypeInfo[] | undefined>;
+    public readonly webNodeTypeInfos!: pulumi.Output<outputs.Elasticsearch.InstanceWebNodeTypeInfo[]>;
 
     /**
      * Create a Instance resource with the given unique name, arguments, and options.
@@ -275,6 +279,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["elasticsearchVip"] = state ? state.elasticsearchVip : undefined;
             resourceInputs["esAcl"] = state ? state.esAcl : undefined;
             resourceInputs["instanceName"] = state ? state.instanceName : undefined;
+            resourceInputs["kibanaPublicAccess"] = state ? state.kibanaPublicAccess : undefined;
             resourceInputs["kibanaUrl"] = state ? state.kibanaUrl : undefined;
             resourceInputs["licenseType"] = state ? state.licenseType : undefined;
             resourceInputs["multiZoneInfos"] = state ? state.multiZoneInfos : undefined;
@@ -307,6 +312,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["deployMode"] = args ? args.deployMode : undefined;
             resourceInputs["esAcl"] = args ? args.esAcl : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
+            resourceInputs["kibanaPublicAccess"] = args ? args.kibanaPublicAccess : undefined;
             resourceInputs["licenseType"] = args ? args.licenseType : undefined;
             resourceInputs["multiZoneInfos"] = args ? args.multiZoneInfos : undefined;
             resourceInputs["nodeInfoLists"] = args ? args.nodeInfoLists : undefined;
@@ -378,6 +384,10 @@ export interface InstanceState {
      * Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
     instanceName?: pulumi.Input<string>;
+    /**
+     * Kibana public network access status. Valid values are `OPEN` and `CLOSE`.
+     */
+    kibanaPublicAccess?: pulumi.Input<string>;
     /**
      * Kibana access URL.
      */
@@ -456,6 +466,10 @@ export interface InstanceArgs {
      * Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
     instanceName?: pulumi.Input<string>;
+    /**
+     * Kibana public network access status. Valid values are `OPEN` and `CLOSE`.
+     */
+    kibanaPublicAccess?: pulumi.Input<string>;
     /**
      * License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
      */

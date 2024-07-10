@@ -38,7 +38,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     ///         CidrBlock = "10.0.1.0/24",
     ///     });
     /// 
-    ///     var foo = new Tencentcloud.Monitor.TmpInstance("foo", new()
+    ///     var example = new Tencentcloud.Monitor.TmpInstance("example", new()
     ///     {
     ///         InstanceName = "tf-tmp-instance",
     ///         VpcId = vpc.Id,
@@ -60,7 +60,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// monitor tmpInstance can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance tmpInstance tmpInstance_id
+    /// $ pulumi import tencentcloud:Monitor/tmpInstance:TmpInstance example prom-1uvo0tjm
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpInstance:TmpInstance")]
@@ -73,7 +73,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public Output<string> ApiRootPath { get; private set; } = null!;
 
         /// <summary>
-        /// Data retention time.
+        /// Data retention time(in days). Value range: 15, 30, 45, 90, 180, 360, 720.
         /// </summary>
         [Output("dataRetentionTime")]
         public Output<int> DataRetentionTime { get; private set; } = null!;
@@ -174,7 +174,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     public sealed class TmpInstanceArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Data retention time.
+        /// Data retention time(in days). Value range: 15, 30, 45, 90, 180, 360, 720.
         /// </summary>
         [Input("dataRetentionTime", required: true)]
         public Input<int> DataRetentionTime { get; set; } = null!;
@@ -230,7 +230,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         public Input<string>? ApiRootPath { get; set; }
 
         /// <summary>
-        /// Data retention time.
+        /// Data retention time(in days). Value range: 15, 30, 45, 90, 180, 360, 720.
         /// </summary>
         [Input("dataRetentionTime")]
         public Input<int>? DataRetentionTime { get; set; }

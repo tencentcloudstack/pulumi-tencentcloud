@@ -26,10 +26,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var instance = new Tencentcloud.Apm.Instance("instance", new()
+    ///     var example = new Tencentcloud.Apm.Instance("example", new()
     ///     {
-    ///         Description = "for terraform test",
-    ///         SpanDailyCounters = 20,
+    ///         Description = "desc.",
+    ///         SpanDailyCounters = 0,
     ///         Tags = 
     ///         {
     ///             { "createdBy", "terraform" },
@@ -46,7 +46,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Apm
     /// apm instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Apm/instance:Instance instance instance_id
+    /// $ pulumi import tencentcloud:Apm/instance:Instance example apm-IMVrxXl1K
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Apm/instance:Instance")]

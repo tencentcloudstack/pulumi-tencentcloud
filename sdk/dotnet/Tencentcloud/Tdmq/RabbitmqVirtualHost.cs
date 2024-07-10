@@ -13,28 +13,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// <summary>
     /// Provides a resource to create a tdmq rabbitmq_virtual_host
     /// 
-    /// ## Example Usage
+    /// ## Import
     /// 
-    /// &lt;!--Start PulumiCodeChooser --&gt;
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// tdmq rabbitmq_virtual_host can be imported using the id, e.g.
     /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var rabbitmqVirtualHost = new Tencentcloud.Tdmq.RabbitmqVirtualHost("rabbitmqVirtualHost", new()
-    ///     {
-    ///         Description = "desc",
-    ///         InstanceId = "amqp-kzbe8p3n",
-    ///         TraceFlag = false,
-    ///         VirtualHost = "vh-test-1",
-    ///     });
-    /// 
-    /// });
+    /// ```sh
+    /// $ pulumi import tencentcloud:Tdmq/rabbitmqVirtualHost:RabbitmqVirtualHost example amqp-pbavw2wd#tf-example-vhost
     /// ```
-    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/rabbitmqVirtualHost:RabbitmqVirtualHost")]
     public partial class RabbitmqVirtualHost : global::Pulumi.CustomResource
@@ -55,7 +40,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// Message track switch, true is on, false is off, default is off.
         /// </summary>
         [Output("traceFlag")]
-        public Output<bool?> TraceFlag { get; private set; } = null!;
+        public Output<bool> TraceFlag { get; private set; } = null!;
 
         /// <summary>
         /// vhost name.

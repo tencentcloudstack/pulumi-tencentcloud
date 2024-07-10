@@ -16,19 +16,65 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const group = new tencentcloud.postgresql.ReadonlyGroup("group", {
- *     masterDbInstanceId: "postgres-gzg9jb2n",
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create vpc subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: availabilityZone,
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.20.0/28",
+ *     isMulticast: false,
+ * });
+ * // create postgresql
+ * const exampleInstance = new tencentcloud.postgresql.Instance("exampleInstance", {
+ *     availabilityZone: availabilityZone,
+ *     chargeType: "POSTPAID_BY_HOUR",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     engineVersion: "10.4",
+ *     rootUser: "root123",
+ *     rootPassword: "Root123$",
+ *     charset: "UTF8",
+ *     projectId: 0,
+ *     memory: 4,
+ *     cpu: 2,
+ *     storage: 50,
+ *     tags: {
+ *         test: "tf",
+ *     },
+ * });
+ * // create security group
+ * const exampleGroup = new tencentcloud.security.Group("exampleGroup", {
+ *     description: "sg desc.",
+ *     projectId: 0,
+ *     tags: {
+ *         example: "test",
+ *     },
+ * });
+ * const exampleReadonlyGroup = new tencentcloud.postgresql.ReadonlyGroup("exampleReadonlyGroup", {
+ *     masterDbInstanceId: exampleInstance.id,
+ *     projectId: 0,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     securityGroupsIds: [exampleGroup.id],
+ *     replayLagEliminate: 1,
+ *     replayLatencyEliminate: 1,
  *     maxReplayLag: 100,
  *     maxReplayLatency: 512,
  *     minDelayEliminateReserve: 1,
- *     projectId: 0,
- *     replayLagEliminate: 1,
- *     replayLatencyEliminate: 1,
- *     subnetId: "subnet-enm92y0m",
- *     vpcId: "vpc-86v957zb",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
+ *
+ * ## Import
+ *
+ * postgresql readonly group can be imported, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Postgresql/readonlyGroup:ReadonlyGroup example pgrogrp-lckioi2a
+ * ```
  */
 export class ReadonlyGroup extends pulumi.CustomResource {
     /**

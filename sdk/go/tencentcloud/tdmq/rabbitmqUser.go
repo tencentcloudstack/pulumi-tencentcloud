@@ -14,42 +14,13 @@ import (
 
 // Provides a resource to create a tdmq rabbitmqUser
 //
-// ## Example Usage
+// ## Import
 //
-// <!--Start PulumiCodeChooser -->
-// ```go
-// package main
+// tdmq rabbitmq_user can be imported using the id, e.g.
 //
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Tdmq.NewRabbitmqUser(ctx, "rabbitmqUser", &Tdmq.RabbitmqUserArgs{
-//				Description:    pulumi.String("test user"),
-//				InstanceId:     pulumi.String("amqp-kzbe8p3n"),
-//				MaxChannels:    pulumi.Int(3),
-//				MaxConnections: pulumi.Int(3),
-//				Password:       pulumi.String("asdf1234"),
-//				Tags: pulumi.StringArray{
-//					pulumi.String("management"),
-//					pulumi.String("monitoring"),
-//				},
-//				User: pulumi.String("keep-user"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// ```sh
+// $ pulumi import tencentcloud:Tdmq/rabbitmqUser:RabbitmqUser example amqp-8xzx822q#tf-example-user
 // ```
-// <!--End PulumiCodeChooser -->
 type RabbitmqUser struct {
 	pulumi.CustomResourceState
 

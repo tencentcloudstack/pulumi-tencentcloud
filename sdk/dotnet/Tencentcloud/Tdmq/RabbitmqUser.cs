@@ -13,35 +13,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// <summary>
     /// Provides a resource to create a tdmq rabbitmq_user
     /// 
-    /// ## Example Usage
+    /// ## Import
     /// 
-    /// &lt;!--Start PulumiCodeChooser --&gt;
-    /// ```csharp
-    /// using System.Collections.Generic;
-    /// using System.Linq;
-    /// using Pulumi;
-    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// tdmq rabbitmq_user can be imported using the id, e.g.
     /// 
-    /// return await Deployment.RunAsync(() =&gt; 
-    /// {
-    ///     var rabbitmqUser = new Tencentcloud.Tdmq.RabbitmqUser("rabbitmqUser", new()
-    ///     {
-    ///         Description = "test user",
-    ///         InstanceId = "amqp-kzbe8p3n",
-    ///         MaxChannels = 3,
-    ///         MaxConnections = 3,
-    ///         Password = "asdf1234",
-    ///         Tags = new[]
-    ///         {
-    ///             "management",
-    ///             "monitoring",
-    ///         },
-    ///         User = "keep-user",
-    ///     });
-    /// 
-    /// });
+    /// ```sh
+    /// $ pulumi import tencentcloud:Tdmq/rabbitmqUser:RabbitmqUser example amqp-8xzx822q#tf-example-user
     /// ```
-    /// &lt;!--End PulumiCodeChooser --&gt;
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/rabbitmqUser:RabbitmqUser")]
     public partial class RabbitmqUser : global::Pulumi.CustomResource

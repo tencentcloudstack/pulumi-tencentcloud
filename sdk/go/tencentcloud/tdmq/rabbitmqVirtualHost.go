@@ -14,36 +14,13 @@ import (
 
 // Provides a resource to create a tdmq rabbitmqVirtualHost
 //
-// ## Example Usage
+// ## Import
 //
-// <!--Start PulumiCodeChooser -->
-// ```go
-// package main
+// tdmq rabbitmq_virtual_host can be imported using the id, e.g.
 //
-// import (
-//
-//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
-//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Tdmq"
-//
-// )
-//
-//	func main() {
-//		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Tdmq.NewRabbitmqVirtualHost(ctx, "rabbitmqVirtualHost", &Tdmq.RabbitmqVirtualHostArgs{
-//				Description: pulumi.String("desc"),
-//				InstanceId:  pulumi.String("amqp-kzbe8p3n"),
-//				TraceFlag:   pulumi.Bool(false),
-//				VirtualHost: pulumi.String("vh-test-1"),
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			return nil
-//		})
-//	}
-//
+// ```sh
+// $ pulumi import tencentcloud:Tdmq/rabbitmqVirtualHost:RabbitmqVirtualHost example amqp-pbavw2wd#tf-example-vhost
 // ```
-// <!--End PulumiCodeChooser -->
 type RabbitmqVirtualHost struct {
 	pulumi.CustomResourceState
 
@@ -52,7 +29,7 @@ type RabbitmqVirtualHost struct {
 	// Cluster instance ID.
 	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// Message track switch, true is on, false is off, default is off.
-	TraceFlag pulumi.BoolPtrOutput `pulumi:"traceFlag"`
+	TraceFlag pulumi.BoolOutput `pulumi:"traceFlag"`
 	// vhost name.
 	VirtualHost pulumi.StringOutput `pulumi:"virtualHost"`
 }
@@ -239,8 +216,8 @@ func (o RabbitmqVirtualHostOutput) InstanceId() pulumi.StringOutput {
 }
 
 // Message track switch, true is on, false is off, default is off.
-func (o RabbitmqVirtualHostOutput) TraceFlag() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *RabbitmqVirtualHost) pulumi.BoolPtrOutput { return v.TraceFlag }).(pulumi.BoolPtrOutput)
+func (o RabbitmqVirtualHostOutput) TraceFlag() pulumi.BoolOutput {
+	return o.ApplyT(func(v *RabbitmqVirtualHost) pulumi.BoolOutput { return v.TraceFlag }).(pulumi.BoolOutput)
 }
 
 // vhost name.
