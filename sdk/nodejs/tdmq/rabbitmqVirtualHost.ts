@@ -7,21 +7,13 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a tdmq rabbitmqVirtualHost
  *
- * ## Example Usage
+ * ## Import
  *
- * <!--Start PulumiCodeChooser -->
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ * tdmq rabbitmq_virtual_host can be imported using the id, e.g.
  *
- * const rabbitmqVirtualHost = new tencentcloud.tdmq.RabbitmqVirtualHost("rabbitmqVirtualHost", {
- *     description: "desc",
- *     instanceId: "amqp-kzbe8p3n",
- *     traceFlag: false,
- *     virtualHost: "vh-test-1",
- * });
+ * ```sh
+ * $ pulumi import tencentcloud:Tdmq/rabbitmqVirtualHost:RabbitmqVirtualHost example amqp-pbavw2wd#tf-example-vhost
  * ```
- * <!--End PulumiCodeChooser -->
  */
 export class RabbitmqVirtualHost extends pulumi.CustomResource {
     /**
@@ -62,7 +54,7 @@ export class RabbitmqVirtualHost extends pulumi.CustomResource {
     /**
      * Message track switch, true is on, false is off, default is off.
      */
-    public readonly traceFlag!: pulumi.Output<boolean | undefined>;
+    public readonly traceFlag!: pulumi.Output<boolean>;
     /**
      * vhost name.
      */

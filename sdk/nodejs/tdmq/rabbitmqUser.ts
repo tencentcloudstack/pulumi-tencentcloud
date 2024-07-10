@@ -7,27 +7,13 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a tdmq rabbitmqUser
  *
- * ## Example Usage
+ * ## Import
  *
- * <!--Start PulumiCodeChooser -->
- * ```typescript
- * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ * tdmq rabbitmq_user can be imported using the id, e.g.
  *
- * const rabbitmqUser = new tencentcloud.tdmq.RabbitmqUser("rabbitmqUser", {
- *     description: "test user",
- *     instanceId: "amqp-kzbe8p3n",
- *     maxChannels: 3,
- *     maxConnections: 3,
- *     password: "asdf1234",
- *     tags: [
- *         "management",
- *         "monitoring",
- *     ],
- *     user: "keep-user",
- * });
+ * ```sh
+ * $ pulumi import tencentcloud:Tdmq/rabbitmqUser:RabbitmqUser example amqp-8xzx822q#tf-example-user
  * ```
- * <!--End PulumiCodeChooser -->
  */
 export class RabbitmqUser extends pulumi.CustomResource {
     /**

@@ -243,9 +243,9 @@ class Instance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        instance = tencentcloud.apm.Instance("instance",
-            description="for terraform test",
-            span_daily_counters=20,
+        example = tencentcloud.apm.Instance("example",
+            description="desc.",
+            span_daily_counters=0,
             tags={
                 "createdBy": "terraform",
             },
@@ -258,7 +258,7 @@ class Instance(pulumi.CustomResource):
         apm instance can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Apm/instance:Instance instance instance_id
+        $ pulumi import tencentcloud:Apm/instance:Instance example apm-IMVrxXl1K
         ```
 
         :param str resource_name: The name of the resource.
@@ -288,9 +288,9 @@ class Instance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        instance = tencentcloud.apm.Instance("instance",
-            description="for terraform test",
-            span_daily_counters=20,
+        example = tencentcloud.apm.Instance("example",
+            description="desc.",
+            span_daily_counters=0,
             tags={
                 "createdBy": "terraform",
             },
@@ -303,7 +303,7 @@ class Instance(pulumi.CustomResource):
         apm instance can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Apm/instance:Instance instance instance_id
+        $ pulumi import tencentcloud:Apm/instance:Instance example apm-IMVrxXl1K
         ```
 
         :param str resource_name: The name of the resource.

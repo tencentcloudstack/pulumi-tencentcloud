@@ -30,9 +30,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Apm.NewInstance(ctx, "instance", &Apm.InstanceArgs{
-//				Description:       pulumi.String("for terraform test"),
-//				SpanDailyCounters: pulumi.Int(20),
+//			_, err := Apm.NewInstance(ctx, "example", &Apm.InstanceArgs{
+//				Description:       pulumi.String("desc."),
+//				SpanDailyCounters: pulumi.Int(0),
 //				Tags: pulumi.Map{
 //					"createdBy": pulumi.Any("terraform"),
 //				},
@@ -53,7 +53,7 @@ import (
 // apm instance can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Apm/instance:Instance instance instance_id
+// $ pulumi import tencentcloud:Apm/instance:Instance example apm-IMVrxXl1K
 // ```
 type Instance struct {
 	pulumi.CustomResourceState

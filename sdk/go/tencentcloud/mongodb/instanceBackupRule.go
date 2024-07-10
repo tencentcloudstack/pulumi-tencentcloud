@@ -12,11 +12,11 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create mongodb backup rule
+// Provides a resource to create mongodb instance backup rule
 //
 // ## Import
 //
-// mongodb backup_rule can be imported using the id, e.g.
+// mongodb instance backup rule can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Mongodb/instanceBackupRule:InstanceBackupRule backup_rule ${instanceId}

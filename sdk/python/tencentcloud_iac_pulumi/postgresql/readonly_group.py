@@ -431,18 +431,63 @@ class ReadonlyGroup(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        group = tencentcloud.postgresql.ReadonlyGroup("group",
-            master_db_instance_id="postgres-gzg9jb2n",
-            max_replay_lag=100,
-            max_replay_latency=512,
-            min_delay_eliminate_reserve=1,
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create postgresql
+        example_instance = tencentcloud.postgresql.Instance("exampleInstance",
+            availability_zone=availability_zone,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            engine_version="10.4",
+            root_user="root123",
+            root_password="Root123$",
+            charset="UTF8",
             project_id=0,
+            memory=4,
+            cpu=2,
+            storage=50,
+            tags={
+                "test": "tf",
+            })
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
+        example_readonly_group = tencentcloud.postgresql.ReadonlyGroup("exampleReadonlyGroup",
+            master_db_instance_id=example_instance.id,
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            security_groups_ids=[example_group.id],
             replay_lag_eliminate=1,
             replay_latency_eliminate=1,
-            subnet_id="subnet-enm92y0m",
-            vpc_id="vpc-86v957zb")
+            max_replay_lag=100,
+            max_replay_latency=512,
+            min_delay_eliminate_reserve=1)
         ```
         <!--End PulumiCodeChooser -->
+
+        ## Import
+
+        postgresql readonly group can be imported, e.g.
+
+        ```sh
+        $ pulumi import tencentcloud:Postgresql/readonlyGroup:ReadonlyGroup example pgrogrp-lckioi2a
+        ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -474,18 +519,63 @@ class ReadonlyGroup(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        group = tencentcloud.postgresql.ReadonlyGroup("group",
-            master_db_instance_id="postgres-gzg9jb2n",
-            max_replay_lag=100,
-            max_replay_latency=512,
-            min_delay_eliminate_reserve=1,
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create postgresql
+        example_instance = tencentcloud.postgresql.Instance("exampleInstance",
+            availability_zone=availability_zone,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            engine_version="10.4",
+            root_user="root123",
+            root_password="Root123$",
+            charset="UTF8",
             project_id=0,
+            memory=4,
+            cpu=2,
+            storage=50,
+            tags={
+                "test": "tf",
+            })
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
+        example_readonly_group = tencentcloud.postgresql.ReadonlyGroup("exampleReadonlyGroup",
+            master_db_instance_id=example_instance.id,
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            security_groups_ids=[example_group.id],
             replay_lag_eliminate=1,
             replay_latency_eliminate=1,
-            subnet_id="subnet-enm92y0m",
-            vpc_id="vpc-86v957zb")
+            max_replay_lag=100,
+            max_replay_latency=512,
+            min_delay_eliminate_reserve=1)
         ```
         <!--End PulumiCodeChooser -->
+
+        ## Import
+
+        postgresql readonly group can be imported, e.g.
+
+        ```sh
+        $ pulumi import tencentcloud:Postgresql/readonlyGroup:ReadonlyGroup example pgrogrp-lckioi2a
+        ```
 
         :param str resource_name: The name of the resource.
         :param ReadonlyGroupArgs args: The arguments to use to populate this resource's properties.

@@ -264,26 +264,13 @@ class RabbitmqUser(pulumi.CustomResource):
         """
         Provides a resource to create a tdmq rabbitmq_user
 
-        ## Example Usage
+        ## Import
 
-        <!--Start PulumiCodeChooser -->
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
+        tdmq rabbitmq_user can be imported using the id, e.g.
 
-        rabbitmq_user = tencentcloud.tdmq.RabbitmqUser("rabbitmqUser",
-            description="test user",
-            instance_id="amqp-kzbe8p3n",
-            max_channels=3,
-            max_connections=3,
-            password="asdf1234",
-            tags=[
-                "management",
-                "monitoring",
-            ],
-            user="keep-user")
+        ```sh
+        $ pulumi import tencentcloud:Tdmq/rabbitmqUser:RabbitmqUser example amqp-8xzx822q#tf-example-user
         ```
-        <!--End PulumiCodeChooser -->
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -304,26 +291,13 @@ class RabbitmqUser(pulumi.CustomResource):
         """
         Provides a resource to create a tdmq rabbitmq_user
 
-        ## Example Usage
+        ## Import
 
-        <!--Start PulumiCodeChooser -->
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
+        tdmq rabbitmq_user can be imported using the id, e.g.
 
-        rabbitmq_user = tencentcloud.tdmq.RabbitmqUser("rabbitmqUser",
-            description="test user",
-            instance_id="amqp-kzbe8p3n",
-            max_channels=3,
-            max_connections=3,
-            password="asdf1234",
-            tags=[
-                "management",
-                "monitoring",
-            ],
-            user="keep-user")
+        ```sh
+        $ pulumi import tencentcloud:Tdmq/rabbitmqUser:RabbitmqUser example amqp-8xzx822q#tf-example-user
         ```
-        <!--End PulumiCodeChooser -->
 
         :param str resource_name: The name of the resource.
         :param RabbitmqUserArgs args: The arguments to use to populate this resource's properties.

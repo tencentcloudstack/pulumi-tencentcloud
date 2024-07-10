@@ -23,22 +23,83 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Postgresql"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Security"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Postgresql.NewReadonlyGroup(ctx, "group", &Postgresql.ReadonlyGroupArgs{
-//				MasterDbInstanceId:       pulumi.String("postgres-gzg9jb2n"),
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-3"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			// create vpc
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create vpc subnet
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.20.0/28"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create postgresql
+//			exampleInstance, err := Postgresql.NewInstance(ctx, "exampleInstance", &Postgresql.InstanceArgs{
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				ChargeType:       pulumi.String("POSTPAID_BY_HOUR"),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				EngineVersion:    pulumi.String("10.4"),
+//				RootUser:         pulumi.String("root123"),
+//				RootPassword:     pulumi.String("Root123$"),
+//				Charset:          pulumi.String("UTF8"),
+//				ProjectId:        pulumi.Int(0),
+//				Memory:           pulumi.Int(4),
+//				Cpu:              pulumi.Int(2),
+//				Storage:          pulumi.Int(50),
+//				Tags: pulumi.Map{
+//					"test": pulumi.Any("tf"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create security group
+//			exampleGroup, err := Security.NewGroup(ctx, "exampleGroup", &Security.GroupArgs{
+//				Description: pulumi.String("sg desc."),
+//				ProjectId:   pulumi.Int(0),
+//				Tags: pulumi.Map{
+//					"example": pulumi.Any("test"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Postgresql.NewReadonlyGroup(ctx, "exampleReadonlyGroup", &Postgresql.ReadonlyGroupArgs{
+//				MasterDbInstanceId: exampleInstance.ID(),
+//				ProjectId:          pulumi.Int(0),
+//				VpcId:              vpc.ID(),
+//				SubnetId:           subnet.ID(),
+//				SecurityGroupsIds: pulumi.StringArray{
+//					exampleGroup.ID(),
+//				},
+//				ReplayLagEliminate:       pulumi.Int(1),
+//				ReplayLatencyEliminate:   pulumi.Int(1),
 //				MaxReplayLag:             pulumi.Int(100),
 //				MaxReplayLatency:         pulumi.Int(512),
 //				MinDelayEliminateReserve: pulumi.Int(1),
-//				ProjectId:                pulumi.Int(0),
-//				ReplayLagEliminate:       pulumi.Int(1),
-//				ReplayLatencyEliminate:   pulumi.Int(1),
-//				SubnetId:                 pulumi.String("subnet-enm92y0m"),
-//				VpcId:                    pulumi.String("vpc-86v957zb"),
 //			})
 //			if err != nil {
 //				return err
@@ -49,6 +110,14 @@ import (
 //
 // ```
 // <!--End PulumiCodeChooser -->
+//
+// ## Import
+//
+// postgresql readonly group can be imported, e.g.
+//
+// ```sh
+// $ pulumi import tencentcloud:Postgresql/readonlyGroup:ReadonlyGroup example pgrogrp-lckioi2a
+// ```
 type ReadonlyGroup struct {
 	pulumi.CustomResourceState
 

@@ -268,6 +268,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         public Output<string?> InstanceName { get; private set; } = null!;
 
         /// <summary>
+        /// Kibana public network access status. Valid values are `OPEN` and `CLOSE`.
+        /// </summary>
+        [Output("kibanaPublicAccess")]
+        public Output<string> KibanaPublicAccess { get; private set; } = null!;
+
+        /// <summary>
         /// Kibana access URL.
         /// </summary>
         [Output("kibanaUrl")]
@@ -425,6 +431,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
+
+        /// <summary>
+        /// Kibana public network access status. Valid values are `OPEN` and `CLOSE`.
+        /// </summary>
+        [Input("kibanaPublicAccess")]
+        public Input<string>? KibanaPublicAccess { get; set; }
 
         /// <summary>
         /// License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
@@ -593,6 +605,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// </summary>
         [Input("instanceName")]
         public Input<string>? InstanceName { get; set; }
+
+        /// <summary>
+        /// Kibana public network access status. Valid values are `OPEN` and `CLOSE`.
+        /// </summary>
+        [Input("kibanaPublicAccess")]
+        public Input<string>? KibanaPublicAccess { get; set; }
 
         /// <summary>
         /// Kibana access URL.

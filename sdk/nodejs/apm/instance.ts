@@ -16,9 +16,9 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const instance = new tencentcloud.apm.Instance("instance", {
- *     description: "for terraform test",
- *     spanDailyCounters: 20,
+ * const example = new tencentcloud.apm.Instance("example", {
+ *     description: "desc.",
+ *     spanDailyCounters: 0,
  *     tags: {
  *         createdBy: "terraform",
  *     },
@@ -32,7 +32,7 @@ import * as utilities from "../utilities";
  * apm instance can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Apm/instance:Instance instance instance_id
+ * $ pulumi import tencentcloud:Apm/instance:Instance example apm-IMVrxXl1K
  * ```
  */
 export class Instance extends pulumi.CustomResource {

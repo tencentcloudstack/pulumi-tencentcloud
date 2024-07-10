@@ -232,6 +232,8 @@ type Instance struct {
 	EsAcl InstanceEsAclOutput `pulumi:"esAcl"`
 	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName pulumi.StringPtrOutput `pulumi:"instanceName"`
+	// Kibana public network access status. Valid values are `OPEN` and `CLOSE`.
+	KibanaPublicAccess pulumi.StringOutput `pulumi:"kibanaPublicAccess"`
 	// Kibana access URL.
 	KibanaUrl pulumi.StringOutput `pulumi:"kibanaUrl"`
 	// License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
@@ -327,6 +329,8 @@ type instanceState struct {
 	EsAcl *InstanceEsAcl `pulumi:"esAcl"`
 	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName *string `pulumi:"instanceName"`
+	// Kibana public network access status. Valid values are `OPEN` and `CLOSE`.
+	KibanaPublicAccess *string `pulumi:"kibanaPublicAccess"`
 	// Kibana access URL.
 	KibanaUrl *string `pulumi:"kibanaUrl"`
 	// License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
@@ -374,6 +378,8 @@ type InstanceState struct {
 	EsAcl InstanceEsAclPtrInput
 	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName pulumi.StringPtrInput
+	// Kibana public network access status. Valid values are `OPEN` and `CLOSE`.
+	KibanaPublicAccess pulumi.StringPtrInput
 	// Kibana access URL.
 	KibanaUrl pulumi.StringPtrInput
 	// License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
@@ -417,6 +423,8 @@ type instanceArgs struct {
 	EsAcl *InstanceEsAcl `pulumi:"esAcl"`
 	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName *string `pulumi:"instanceName"`
+	// Kibana public network access status. Valid values are `OPEN` and `CLOSE`.
+	KibanaPublicAccess *string `pulumi:"kibanaPublicAccess"`
 	// License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
 	LicenseType *string `pulumi:"licenseType"`
 	// Details of AZs in multi-AZ deployment mode (which is required when deployMode is `1`).
@@ -455,6 +463,8 @@ type InstanceArgs struct {
 	EsAcl InstanceEsAclPtrInput
 	// Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 	InstanceName pulumi.StringPtrInput
+	// Kibana public network access status. Valid values are `OPEN` and `CLOSE`.
+	KibanaPublicAccess pulumi.StringPtrInput
 	// License type. Valid values are `oss`, `basic` and `platinum`. The default value is `platinum`.
 	LicenseType pulumi.StringPtrInput
 	// Details of AZs in multi-AZ deployment mode (which is required when deployMode is `1`).
@@ -617,6 +627,11 @@ func (o InstanceOutput) EsAcl() InstanceEsAclOutput {
 // Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
 func (o InstanceOutput) InstanceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.InstanceName }).(pulumi.StringPtrOutput)
+}
+
+// Kibana public network access status. Valid values are `OPEN` and `CLOSE`.
+func (o InstanceOutput) KibanaPublicAccess() pulumi.StringOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.KibanaPublicAccess }).(pulumi.StringOutput)
 }
 
 // Kibana access URL.

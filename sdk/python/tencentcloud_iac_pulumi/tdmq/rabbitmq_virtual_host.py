@@ -166,20 +166,13 @@ class RabbitmqVirtualHost(pulumi.CustomResource):
         """
         Provides a resource to create a tdmq rabbitmq_virtual_host
 
-        ## Example Usage
+        ## Import
 
-        <!--Start PulumiCodeChooser -->
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
+        tdmq rabbitmq_virtual_host can be imported using the id, e.g.
 
-        rabbitmq_virtual_host = tencentcloud.tdmq.RabbitmqVirtualHost("rabbitmqVirtualHost",
-            description="desc",
-            instance_id="amqp-kzbe8p3n",
-            trace_flag=False,
-            virtual_host="vh-test-1")
+        ```sh
+        $ pulumi import tencentcloud:Tdmq/rabbitmqVirtualHost:RabbitmqVirtualHost example amqp-pbavw2wd#tf-example-vhost
         ```
-        <!--End PulumiCodeChooser -->
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -197,20 +190,13 @@ class RabbitmqVirtualHost(pulumi.CustomResource):
         """
         Provides a resource to create a tdmq rabbitmq_virtual_host
 
-        ## Example Usage
+        ## Import
 
-        <!--Start PulumiCodeChooser -->
-        ```python
-        import pulumi
-        import tencentcloud_iac_pulumi as tencentcloud
+        tdmq rabbitmq_virtual_host can be imported using the id, e.g.
 
-        rabbitmq_virtual_host = tencentcloud.tdmq.RabbitmqVirtualHost("rabbitmqVirtualHost",
-            description="desc",
-            instance_id="amqp-kzbe8p3n",
-            trace_flag=False,
-            virtual_host="vh-test-1")
+        ```sh
+        $ pulumi import tencentcloud:Tdmq/rabbitmqVirtualHost:RabbitmqVirtualHost example amqp-pbavw2wd#tf-example-vhost
         ```
-        <!--End PulumiCodeChooser -->
 
         :param str resource_name: The name of the resource.
         :param RabbitmqVirtualHostArgs args: The arguments to use to populate this resource's properties.
@@ -302,7 +288,7 @@ class RabbitmqVirtualHost(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="traceFlag")
-    def trace_flag(self) -> pulumi.Output[Optional[bool]]:
+    def trace_flag(self) -> pulumi.Output[bool]:
         """
         Message track switch, true is on, false is off, default is off.
         """

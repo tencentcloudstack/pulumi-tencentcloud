@@ -24,22 +24,83 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var @group = new Tencentcloud.Postgresql.ReadonlyGroup("group", new()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         MasterDbInstanceId = "postgres-gzg9jb2n",
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create vpc subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create postgresql
+    ///     var exampleInstance = new Tencentcloud.Postgresql.Instance("exampleInstance", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         EngineVersion = "10.4",
+    ///         RootUser = "root123",
+    ///         RootPassword = "Root123$",
+    ///         Charset = "UTF8",
+    ///         ProjectId = 0,
+    ///         Memory = 4,
+    ///         Cpu = 2,
+    ///         Storage = 50,
+    ///         Tags = 
+    ///         {
+    ///             { "test", "tf" },
+    ///         },
+    ///     });
+    /// 
+    ///     // create security group
+    ///     var exampleGroup = new Tencentcloud.Security.Group("exampleGroup", new()
+    ///     {
+    ///         Description = "sg desc.",
+    ///         ProjectId = 0,
+    ///         Tags = 
+    ///         {
+    ///             { "example", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleReadonlyGroup = new Tencentcloud.Postgresql.ReadonlyGroup("exampleReadonlyGroup", new()
+    ///     {
+    ///         MasterDbInstanceId = exampleInstance.Id,
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         SecurityGroupsIds = new[]
+    ///         {
+    ///             exampleGroup.Id,
+    ///         },
+    ///         ReplayLagEliminate = 1,
+    ///         ReplayLatencyEliminate = 1,
     ///         MaxReplayLag = 100,
     ///         MaxReplayLatency = 512,
     ///         MinDelayEliminateReserve = 1,
-    ///         ProjectId = 0,
-    ///         ReplayLagEliminate = 1,
-    ///         ReplayLatencyEliminate = 1,
-    ///         SubnetId = "subnet-enm92y0m",
-    ///         VpcId = "vpc-86v957zb",
     ///     });
     /// 
     /// });
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ## Import
+    /// 
+    /// postgresql readonly group can be imported, e.g.
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Postgresql/readonlyGroup:ReadonlyGroup example pgrogrp-lckioi2a
+    /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/readonlyGroup:ReadonlyGroup")]
     public partial class ReadonlyGroup : global::Pulumi.CustomResource
