@@ -21,6 +21,14 @@ class _ExportableConfig(types.ModuleType):
         return __config__.get('assumeRole')
 
     @property
+    def assume_role_with_saml(self) -> Optional[str]:
+        return __config__.get('assumeRoleWithSaml')
+
+    @property
+    def assume_role_with_web_identity(self) -> Optional[str]:
+        return __config__.get('assumeRoleWithWebIdentity')
+
+    @property
     def domain(self) -> Optional[str]:
         """
         The root domain of the API request, Default is `tencentcloudapi.com`.

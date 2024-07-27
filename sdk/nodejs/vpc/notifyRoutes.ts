@@ -39,7 +39,7 @@ export class NotifyRoutes extends pulumi.CustomResource {
     /**
      * The unique ID of the routing policy.
      */
-    public readonly routeItemIds!: pulumi.Output<string[]>;
+    public readonly routeItemIds!: pulumi.Output<string>;
     /**
      * The unique ID of the routing table.
      */
@@ -89,7 +89,7 @@ export interface NotifyRoutesState {
     /**
      * The unique ID of the routing policy.
      */
-    routeItemIds?: pulumi.Input<pulumi.Input<string>[]>;
+    routeItemIds?: pulumi.Input<string>;
     /**
      * The unique ID of the routing table.
      */
@@ -103,7 +103,7 @@ export interface NotifyRoutesArgs {
     /**
      * The unique ID of the routing policy.
      */
-    routeItemIds: pulumi.Input<pulumi.Input<string>[]>;
+    routeItemIds: pulumi.Input<string>;
     /**
      * The unique ID of the routing table.
      */

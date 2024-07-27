@@ -14,11 +14,11 @@ __all__ = ['NotifyRoutesArgs', 'NotifyRoutes']
 @pulumi.input_type
 class NotifyRoutesArgs:
     def __init__(__self__, *,
-                 route_item_ids: pulumi.Input[Sequence[pulumi.Input[str]]],
+                 route_item_ids: pulumi.Input[str],
                  route_table_id: pulumi.Input[str]):
         """
         The set of arguments for constructing a NotifyRoutes resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_item_ids: The unique ID of the routing policy.
+        :param pulumi.Input[str] route_item_ids: The unique ID of the routing policy.
         :param pulumi.Input[str] route_table_id: The unique ID of the routing table.
         """
         pulumi.set(__self__, "route_item_ids", route_item_ids)
@@ -26,14 +26,14 @@ class NotifyRoutesArgs:
 
     @property
     @pulumi.getter(name="routeItemIds")
-    def route_item_ids(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+    def route_item_ids(self) -> pulumi.Input[str]:
         """
         The unique ID of the routing policy.
         """
         return pulumi.get(self, "route_item_ids")
 
     @route_item_ids.setter
-    def route_item_ids(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+    def route_item_ids(self, value: pulumi.Input[str]):
         pulumi.set(self, "route_item_ids", value)
 
     @property
@@ -53,12 +53,12 @@ class NotifyRoutesArgs:
 class _NotifyRoutesState:
     def __init__(__self__, *,
                  published_to_vbc: Optional[pulumi.Input[bool]] = None,
-                 route_item_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 route_item_ids: Optional[pulumi.Input[str]] = None,
                  route_table_id: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering NotifyRoutes resources.
         :param pulumi.Input[bool] published_to_vbc: If published to vbc.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_item_ids: The unique ID of the routing policy.
+        :param pulumi.Input[str] route_item_ids: The unique ID of the routing policy.
         :param pulumi.Input[str] route_table_id: The unique ID of the routing table.
         """
         if published_to_vbc is not None:
@@ -82,14 +82,14 @@ class _NotifyRoutesState:
 
     @property
     @pulumi.getter(name="routeItemIds")
-    def route_item_ids(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+    def route_item_ids(self) -> Optional[pulumi.Input[str]]:
         """
         The unique ID of the routing policy.
         """
         return pulumi.get(self, "route_item_ids")
 
     @route_item_ids.setter
-    def route_item_ids(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+    def route_item_ids(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "route_item_ids", value)
 
     @property
@@ -110,14 +110,14 @@ class NotifyRoutes(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 route_item_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 route_item_ids: Optional[pulumi.Input[str]] = None,
                  route_table_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         """
         Create a NotifyRoutes resource with the given unique name, props, and options.
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_item_ids: The unique ID of the routing policy.
+        :param pulumi.Input[str] route_item_ids: The unique ID of the routing policy.
         :param pulumi.Input[str] route_table_id: The unique ID of the routing table.
         """
         ...
@@ -143,7 +143,7 @@ class NotifyRoutes(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
-                 route_item_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+                 route_item_ids: Optional[pulumi.Input[str]] = None,
                  route_table_id: Optional[pulumi.Input[str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -172,7 +172,7 @@ class NotifyRoutes(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             published_to_vbc: Optional[pulumi.Input[bool]] = None,
-            route_item_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
+            route_item_ids: Optional[pulumi.Input[str]] = None,
             route_table_id: Optional[pulumi.Input[str]] = None) -> 'NotifyRoutes':
         """
         Get an existing NotifyRoutes resource's state with the given name, id, and optional extra
@@ -182,7 +182,7 @@ class NotifyRoutes(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] published_to_vbc: If published to vbc.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] route_item_ids: The unique ID of the routing policy.
+        :param pulumi.Input[str] route_item_ids: The unique ID of the routing policy.
         :param pulumi.Input[str] route_table_id: The unique ID of the routing table.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -204,7 +204,7 @@ class NotifyRoutes(pulumi.CustomResource):
 
     @property
     @pulumi.getter(name="routeItemIds")
-    def route_item_ids(self) -> pulumi.Output[Sequence[str]]:
+    def route_item_ids(self) -> pulumi.Output[str]:
         """
         The unique ID of the routing policy.
         """

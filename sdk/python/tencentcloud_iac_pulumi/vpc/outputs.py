@@ -3225,6 +3225,7 @@ class GetSubnetsInstanceListResult(dict):
     def __init__(__self__, *,
                  availability_zone: str,
                  available_ip_count: int,
+                 cdc_id: str,
                  cidr_block: str,
                  create_time: str,
                  is_default: bool,
@@ -3237,6 +3238,7 @@ class GetSubnetsInstanceListResult(dict):
         """
         :param str availability_zone: Zone of the subnet to be queried.
         :param int available_ip_count: The number of available IPs.
+        :param str cdc_id: ID of CDC instance.
         :param str cidr_block: Filter subnet with this CIDR.
         :param str create_time: Creation time of the subnet resource.
         :param bool is_default: Filter default or no default subnets.
@@ -3249,6 +3251,7 @@ class GetSubnetsInstanceListResult(dict):
         """
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "available_ip_count", available_ip_count)
+        pulumi.set(__self__, "cdc_id", cdc_id)
         pulumi.set(__self__, "cidr_block", cidr_block)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "is_default", is_default)
@@ -3274,6 +3277,14 @@ class GetSubnetsInstanceListResult(dict):
         The number of available IPs.
         """
         return pulumi.get(self, "available_ip_count")
+
+    @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> str:
+        """
+        ID of CDC instance.
+        """
+        return pulumi.get(self, "cdc_id")
 
     @property
     @pulumi.getter(name="cidrBlock")

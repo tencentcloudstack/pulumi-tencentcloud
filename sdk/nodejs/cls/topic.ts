@@ -2,12 +2,16 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
  * Provides a resource to create a cls topic.
  *
  * ## Example Usage
+ *
+ * ### Create a standard cls topic
  *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
@@ -17,7 +21,7 @@ import * as utilities from "../utilities";
  * const exampleLogset = new tencentcloud.cls.Logset("exampleLogset", {
  *     logsetName: "tf_example",
  *     tags: {
- *         demo: "test",
+ *         tagKey: "tagValue",
  *     },
  * });
  * const exampleTopic = new tencentcloud.cls.Topic("exampleTopic", {
@@ -31,7 +35,51 @@ import * as utilities from "../utilities";
  *     describes: "Test Demo.",
  *     hotPeriod: 10,
  *     tags: {
- *         test: "test",
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Create a cls topic with web tracking
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const exampleLogset = new tencentcloud.cls.Logset("exampleLogset", {
+ *     logsetName: "tf_example",
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * const exampleTopic = new tencentcloud.cls.Topic("exampleTopic", {
+ *     topicName: "tf_example",
+ *     logsetId: exampleLogset.id,
+ *     autoSplit: false,
+ *     maxSplitPartitions: 20,
+ *     partitionCount: 1,
+ *     period: 30,
+ *     storageType: "hot",
+ *     describes: "Test Demo.",
+ *     hotPeriod: 10,
+ *     isWebTracking: true,
+ *     "extends": {
+ *         anonymousAccess: {
+ *             operations: [
+ *                 "trackLog",
+ *                 "realtimeProducer",
+ *             ],
+ *             conditions: [{
+ *                 attributes: "VpcID",
+ *                 rule: 1,
+ *                 conditionValue: "vpc-ahr3xajx",
+ *             }],
+ *         },
+ *     },
+ *     tags: {
+ *         tagKey: "tagValue",
  *     },
  * });
  * ```
@@ -82,9 +130,17 @@ export class Topic extends pulumi.CustomResource {
      */
     public readonly describes!: pulumi.Output<string | undefined>;
     /**
+     * Log Subject Extension Information.
+     */
+    public readonly extends!: pulumi.Output<outputs.Cls.TopicExtends | undefined>;
+    /**
      * 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
      */
     public readonly hotPeriod!: pulumi.Output<number>;
+    /**
+     * No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+     */
+    public readonly isWebTracking!: pulumi.Output<boolean>;
     /**
      * Logset ID.
      */
@@ -129,7 +185,9 @@ export class Topic extends pulumi.CustomResource {
             const state = argsOrState as TopicState | undefined;
             resourceInputs["autoSplit"] = state ? state.autoSplit : undefined;
             resourceInputs["describes"] = state ? state.describes : undefined;
+            resourceInputs["extends"] = state ? state.extends : undefined;
             resourceInputs["hotPeriod"] = state ? state.hotPeriod : undefined;
+            resourceInputs["isWebTracking"] = state ? state.isWebTracking : undefined;
             resourceInputs["logsetId"] = state ? state.logsetId : undefined;
             resourceInputs["maxSplitPartitions"] = state ? state.maxSplitPartitions : undefined;
             resourceInputs["partitionCount"] = state ? state.partitionCount : undefined;
@@ -147,7 +205,9 @@ export class Topic extends pulumi.CustomResource {
             }
             resourceInputs["autoSplit"] = args ? args.autoSplit : undefined;
             resourceInputs["describes"] = args ? args.describes : undefined;
+            resourceInputs["extends"] = args ? args.extends : undefined;
             resourceInputs["hotPeriod"] = args ? args.hotPeriod : undefined;
+            resourceInputs["isWebTracking"] = args ? args.isWebTracking : undefined;
             resourceInputs["logsetId"] = args ? args.logsetId : undefined;
             resourceInputs["maxSplitPartitions"] = args ? args.maxSplitPartitions : undefined;
             resourceInputs["partitionCount"] = args ? args.partitionCount : undefined;
@@ -174,9 +234,17 @@ export interface TopicState {
      */
     describes?: pulumi.Input<string>;
     /**
+     * Log Subject Extension Information.
+     */
+    extends?: pulumi.Input<inputs.Cls.TopicExtends>;
+    /**
      * 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
      */
     hotPeriod?: pulumi.Input<number>;
+    /**
+     * No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+     */
+    isWebTracking?: pulumi.Input<boolean>;
     /**
      * Logset ID.
      */
@@ -220,9 +288,17 @@ export interface TopicArgs {
      */
     describes?: pulumi.Input<string>;
     /**
+     * Log Subject Extension Information.
+     */
+    extends?: pulumi.Input<inputs.Cls.TopicExtends>;
+    /**
      * 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
      */
     hotPeriod?: pulumi.Input<number>;
+    /**
+     * No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+     */
+    isWebTracking?: pulumi.Input<boolean>;
     /**
      * Logset ID.
      */

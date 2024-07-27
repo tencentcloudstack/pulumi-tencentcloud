@@ -63,11 +63,11 @@ type User struct {
 	AuthType pulumi.IntPtrOutput `pulumi:"authType"`
 	// Department ID, such as: 1.2.3.
 	DepartmentId pulumi.StringPtrOutput `pulumi:"departmentId"`
-	// Email.
+	// Email. Please provide at least one of `phone` or `email`.
 	Email pulumi.StringPtrOutput `pulumi:"email"`
 	// The set of user group IDs to which it belongs.
 	GroupIdSets pulumi.IntArrayOutput `pulumi:"groupIdSets"`
-	// Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+	// Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
 	Phone pulumi.StringPtrOutput `pulumi:"phone"`
 	// Real name, maximum length 20 characters, cannot contain blank characters.
 	RealName pulumi.StringOutput `pulumi:"realName"`
@@ -121,11 +121,11 @@ type userState struct {
 	AuthType *int `pulumi:"authType"`
 	// Department ID, such as: 1.2.3.
 	DepartmentId *string `pulumi:"departmentId"`
-	// Email.
+	// Email. Please provide at least one of `phone` or `email`.
 	Email *string `pulumi:"email"`
 	// The set of user group IDs to which it belongs.
 	GroupIdSets []int `pulumi:"groupIdSets"`
-	// Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+	// Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
 	Phone *string `pulumi:"phone"`
 	// Real name, maximum length 20 characters, cannot contain blank characters.
 	RealName *string `pulumi:"realName"`
@@ -144,11 +144,11 @@ type UserState struct {
 	AuthType pulumi.IntPtrInput
 	// Department ID, such as: 1.2.3.
 	DepartmentId pulumi.StringPtrInput
-	// Email.
+	// Email. Please provide at least one of `phone` or `email`.
 	Email pulumi.StringPtrInput
 	// The set of user group IDs to which it belongs.
 	GroupIdSets pulumi.IntArrayInput
-	// Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+	// Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
 	Phone pulumi.StringPtrInput
 	// Real name, maximum length 20 characters, cannot contain blank characters.
 	RealName pulumi.StringPtrInput
@@ -171,11 +171,11 @@ type userArgs struct {
 	AuthType *int `pulumi:"authType"`
 	// Department ID, such as: 1.2.3.
 	DepartmentId *string `pulumi:"departmentId"`
-	// Email.
+	// Email. Please provide at least one of `phone` or `email`.
 	Email *string `pulumi:"email"`
 	// The set of user group IDs to which it belongs.
 	GroupIdSets []int `pulumi:"groupIdSets"`
-	// Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+	// Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
 	Phone *string `pulumi:"phone"`
 	// Real name, maximum length 20 characters, cannot contain blank characters.
 	RealName string `pulumi:"realName"`
@@ -195,11 +195,11 @@ type UserArgs struct {
 	AuthType pulumi.IntPtrInput
 	// Department ID, such as: 1.2.3.
 	DepartmentId pulumi.StringPtrInput
-	// Email.
+	// Email. Please provide at least one of `phone` or `email`.
 	Email pulumi.StringPtrInput
 	// The set of user group IDs to which it belongs.
 	GroupIdSets pulumi.IntArrayInput
-	// Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+	// Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
 	Phone pulumi.StringPtrInput
 	// Real name, maximum length 20 characters, cannot contain blank characters.
 	RealName pulumi.StringInput
@@ -310,7 +310,7 @@ func (o UserOutput) DepartmentId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.DepartmentId }).(pulumi.StringPtrOutput)
 }
 
-// Email.
+// Email. Please provide at least one of `phone` or `email`.
 func (o UserOutput) Email() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.Email }).(pulumi.StringPtrOutput)
 }
@@ -320,7 +320,7 @@ func (o UserOutput) GroupIdSets() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *User) pulumi.IntArrayOutput { return v.GroupIdSets }).(pulumi.IntArrayOutput)
 }
 
-// Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+// Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
 func (o UserOutput) Phone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.StringPtrOutput { return v.Phone }).(pulumi.StringPtrOutput)
 }

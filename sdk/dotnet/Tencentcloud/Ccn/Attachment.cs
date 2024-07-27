@@ -15,6 +15,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// 
     /// ## Example Usage
     /// 
+    /// ### Only Attachment instance
+    /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
@@ -26,40 +28,117 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// {
     ///     var config = new Config();
     ///     var region = config.Get("region") ?? "ap-guangzhou";
-    ///     var otheruin = config.Get("otheruin") ?? "123353";
-    ///     var otherccn = config.Get("otherccn") ?? "ccn-151ssaga";
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var otherUin = config.Get("otherUin") ?? "100031344528";
+    ///     var otherCcn = config.Get("otherCcn") ?? "ccn-qhgojahx";
+    ///     // create vpc
     ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         CidrBlock = "10.0.0.0/16",
-    ///         DnsServers = new[]
-    ///         {
-    ///             "119.29.29.29",
-    ///             "8.8.8.8",
-    ///         },
+    ///         CidrBlock = "172.16.0.0/16",
+    ///     });
+    /// 
+    ///     // create subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "172.16.0.0/24",
     ///         IsMulticast = false,
     ///     });
     /// 
-    ///     var main = new Tencentcloud.Ccn.Instance("main", new()
+    ///     // create ccn
+    ///     var example = new Tencentcloud.Ccn.Instance("example", new()
     ///     {
-    ///         Description = "ci-temp-test-ccn-des",
+    ///         Description = "desc.",
     ///         Qos = "AG",
+    ///         ChargeType = "PREPAID",
+    ///         BandwidthLimitType = "INTER_REGION_LIMIT",
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "terraform" },
+    ///         },
     ///     });
     /// 
+    ///     // attachment instance
     ///     var attachment = new Tencentcloud.Ccn.Attachment("attachment", new()
     ///     {
-    ///         CcnId = main.Id,
-    ///         InstanceType = "VPC",
+    ///         CcnId = example.Id,
     ///         InstanceId = vpc.Id,
+    ///         InstanceType = "VPC",
     ///         InstanceRegion = region,
     ///     });
     /// 
+    ///     // attachment other instance
     ///     var otherAccount = new Tencentcloud.Ccn.Attachment("otherAccount", new()
     ///     {
-    ///         CcnId = otherccn,
-    ///         InstanceType = "VPC",
+    ///         CcnId = otherCcn,
     ///         InstanceId = vpc.Id,
+    ///         InstanceType = "VPC",
     ///         InstanceRegion = region,
-    ///         CcnUin = otheruin,
+    ///         CcnUin = otherUin,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Attachment instance &amp; route table
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var region = config.Get("region") ?? "ap-guangzhou";
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "172.16.0.0/16",
+    ///     });
+    /// 
+    ///     // create subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "172.16.0.0/24",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create ccn
+    ///     var exampleInstance = new Tencentcloud.Ccn.Instance("exampleInstance", new()
+    ///     {
+    ///         Description = "desc.",
+    ///         Qos = "AG",
+    ///         ChargeType = "PREPAID",
+    ///         BandwidthLimitType = "INTER_REGION_LIMIT",
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     // create ccn route table
+    ///     var exampleRouteTable = new Tencentcloud.Ccn.RouteTable("exampleRouteTable", new()
+    ///     {
+    ///         CcnId = exampleInstance.Id,
+    ///         Description = "desc.",
+    ///     });
+    /// 
+    ///     // attachment instance &amp; route table
+    ///     var attachment = new Tencentcloud.Ccn.Attachment("attachment", new()
+    ///     {
+    ///         CcnId = exampleInstance.Id,
+    ///         InstanceId = vpc.Id,
+    ///         InstanceType = "VPC",
+    ///         InstanceRegion = region,
+    ///         RouteTableId = exampleRouteTable.Id,
     ///     });
     /// 
     /// });
@@ -122,6 +201,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// </summary>
         [Output("routeIds")]
         public Output<ImmutableArray<string>> RouteIds { get; private set; } = null!;
+
+        /// <summary>
+        /// Ccn instance route table ID.
+        /// </summary>
+        [Output("routeTableId")]
+        public Output<string> RouteTableId { get; private set; } = null!;
 
         /// <summary>
         /// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
@@ -212,6 +297,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         [Input("instanceType", required: true)]
         public Input<string> InstanceType { get; set; } = null!;
 
+        /// <summary>
+        /// Ccn instance route table ID.
+        /// </summary>
+        [Input("routeTableId")]
+        public Input<string>? RouteTableId { get; set; }
+
         public AttachmentArgs()
         {
         }
@@ -285,6 +376,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
             get => _routeIds ?? (_routeIds = new InputList<string>());
             set => _routeIds = value;
         }
+
+        /// <summary>
+        /// Ccn instance route table ID.
+        /// </summary>
+        [Input("routeTableId")]
+        public Input<string>? RouteTableId { get; set; }
 
         /// <summary>
         /// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.

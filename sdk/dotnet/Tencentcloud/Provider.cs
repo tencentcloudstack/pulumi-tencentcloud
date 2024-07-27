@@ -115,6 +115,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         public Input<Inputs.ProviderAssumeRoleArgs>? AssumeRole { get; set; }
 
         /// <summary>
+        /// The `assume_role_with_saml` block. If provided, terraform will attempt to assume this role using the supplied
+        /// credentials.
+        /// </summary>
+        [Input("assumeRoleWithSaml", json: true)]
+        public Input<Inputs.ProviderAssumeRoleWithSamlArgs>? AssumeRoleWithSaml { get; set; }
+
+        /// <summary>
+        /// The `assume_role_with_web_identity` block. If provided, terraform will attempt to assume this role using the supplied
+        /// credentials.
+        /// </summary>
+        [Input("assumeRoleWithWebIdentity", json: true)]
+        public Input<Inputs.ProviderAssumeRoleWithWebIdentityArgs>? AssumeRoleWithWebIdentity { get; set; }
+
+        /// <summary>
         /// The root domain of the API request, Default is `tencentcloudapi.com`.
         /// </summary>
         [Input("domain")]

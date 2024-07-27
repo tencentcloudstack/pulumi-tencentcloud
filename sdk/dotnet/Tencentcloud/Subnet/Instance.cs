@@ -13,12 +13,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Subnet
     /// <summary>
     /// Provide a resource to create a VPC subnet.
     /// 
+    /// ## Example Usage
+    /// 
     /// ## Import
     /// 
     /// Vpc subnet instance can be imported, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Subnet/instance:Instance test subnet_id
+    /// $ pulumi import tencentcloud:Subnet/instance:Instance subnet subnet-b8j03v0c
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Subnet/instance:Instance")]
@@ -35,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Subnet
         /// </summary>
         [Output("availableIpCount")]
         public Output<int> AvailableIpCount { get; private set; } = null!;
+
+        /// <summary>
+        /// ID of CDC instance.
+        /// </summary>
+        [Output("cdcId")]
+        public Output<string?> CdcId { get; private set; } = null!;
 
         /// <summary>
         /// A network address block of the subnet.
@@ -138,6 +146,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Subnet
         public Input<string> AvailabilityZone { get; set; } = null!;
 
         /// <summary>
+        /// ID of CDC instance.
+        /// </summary>
+        [Input("cdcId")]
+        public Input<string>? CdcId { get; set; }
+
+        /// <summary>
         /// A network address block of the subnet.
         /// </summary>
         [Input("cidrBlock", required: true)]
@@ -198,6 +212,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Subnet
         /// </summary>
         [Input("availableIpCount")]
         public Input<int>? AvailableIpCount { get; set; }
+
+        /// <summary>
+        /// ID of CDC instance.
+        /// </summary>
+        [Input("cdcId")]
+        public Input<string>? CdcId { get; set; }
 
         /// <summary>
         /// A network address block of the subnet.

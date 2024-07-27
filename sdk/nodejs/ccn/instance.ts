@@ -16,11 +16,16 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const main = new tencentcloud.ccn.Instance("main", {
+ * const example = new tencentcloud.ccn.Instance("example", {
  *     bandwidthLimitType: "INTER_REGION_LIMIT",
  *     chargeType: "PREPAID",
- *     description: "ci-temp-test-ccn-des",
+ *     description: "desc.",
  *     qos: "AG",
+ *     routeEcmpFlag: true,
+ *     routeOverlapFlag: true,
+ *     tags: {
+ *         createBy: "terraform",
+ *     },
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -32,11 +37,16 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const main = new tencentcloud.ccn.Instance("main", {
+ * const example = new tencentcloud.ccn.Instance("example", {
  *     bandwidthLimitType: "OUTER_REGION_LIMIT",
  *     chargeType: "POSTPAID",
- *     description: "ci-temp-test-ccn-des",
+ *     description: "desc.",
  *     qos: "AG",
+ *     routeEcmpFlag: false,
+ *     routeOverlapFlag: false,
+ *     tags: {
+ *         createBy: "terraform",
+ *     },
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -48,10 +58,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const main = new tencentcloud.ccn.Instance("main", {
+ * const example = new tencentcloud.ccn.Instance("example", {
  *     bandwidthLimitType: "INTER_REGION_LIMIT",
  *     chargeType: "POSTPAID",
- *     description: "ci-temp-test-ccn-des",
+ *     description: "desc.",
  *     qos: "AG",
  * });
  * ```
@@ -62,7 +72,7 @@ import * as utilities from "../utilities";
  * Ccn instance can be imported, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Ccn/instance:Instance test ccn-id
+ * $ pulumi import tencentcloud:Ccn/instance:Instance example ccn-al70jo89
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -122,6 +132,14 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly qos!: pulumi.Output<string | undefined>;
     /**
+     * Whether to enable the equivalent routing function. `true`: enabled, `false`: disabled.
+     */
+    public readonly routeEcmpFlag!: pulumi.Output<boolean | undefined>;
+    /**
+     * Whether to enable the routing overlap function. `true`: enabled, `false`: disabled.
+     */
+    public readonly routeOverlapFlag!: pulumi.Output<boolean | undefined>;
+    /**
      * States of instance. Valid values: `ISOLATED`(arrears) and `AVAILABLE`.
      */
     public /*out*/ readonly state!: pulumi.Output<string>;
@@ -150,6 +168,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["instanceCount"] = state ? state.instanceCount : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["qos"] = state ? state.qos : undefined;
+            resourceInputs["routeEcmpFlag"] = state ? state.routeEcmpFlag : undefined;
+            resourceInputs["routeOverlapFlag"] = state ? state.routeOverlapFlag : undefined;
             resourceInputs["state"] = state ? state.state : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
@@ -159,6 +179,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["qos"] = args ? args.qos : undefined;
+            resourceInputs["routeEcmpFlag"] = args ? args.routeEcmpFlag : undefined;
+            resourceInputs["routeOverlapFlag"] = args ? args.routeOverlapFlag : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["instanceCount"] = undefined /*out*/;
@@ -202,6 +224,14 @@ export interface InstanceState {
      */
     qos?: pulumi.Input<string>;
     /**
+     * Whether to enable the equivalent routing function. `true`: enabled, `false`: disabled.
+     */
+    routeEcmpFlag?: pulumi.Input<boolean>;
+    /**
+     * Whether to enable the routing overlap function. `true`: enabled, `false`: disabled.
+     */
+    routeOverlapFlag?: pulumi.Input<boolean>;
+    /**
      * States of instance. Valid values: `ISOLATED`(arrears) and `AVAILABLE`.
      */
     state?: pulumi.Input<string>;
@@ -235,6 +265,14 @@ export interface InstanceArgs {
      * Service quality of CCN. Valid values: `PT`, `AU`, `AG`. The default is `AU`.
      */
     qos?: pulumi.Input<string>;
+    /**
+     * Whether to enable the equivalent routing function. `true`: enabled, `false`: disabled.
+     */
+    routeEcmpFlag?: pulumi.Input<boolean>;
+    /**
+     * Whether to enable the routing overlap function. `true`: enabled, `false`: disabled.
+     */
+    routeOverlapFlag?: pulumi.Input<boolean>;
     /**
      * Instance tag.
      */

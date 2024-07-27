@@ -23,13 +23,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs.Outputs
         /// </summary>
         public readonly string AvailabilityZone;
         /// <summary>
-        /// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+        /// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
         /// </summary>
         public readonly string ChargeType;
         /// <summary>
         /// Creation time of CBS.
         /// </summary>
         public readonly string CreateTime;
+        /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        public readonly string DedicatedClusterId;
         /// <summary>
         /// Indicates whether CBS is encrypted.
         /// </summary>
@@ -89,6 +93,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs.Outputs
 
             string createTime,
 
+            string dedicatedClusterId,
+
             bool encrypt,
 
             string instanceId,
@@ -117,6 +123,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs.Outputs
             AvailabilityZone = availabilityZone;
             ChargeType = chargeType;
             CreateTime = createTime;
+            DedicatedClusterId = dedicatedClusterId;
             Encrypt = encrypt;
             InstanceId = instanceId;
             PrepaidRenewFlag = prepaidRenewFlag;

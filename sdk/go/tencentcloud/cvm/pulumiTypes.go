@@ -2781,7 +2781,9 @@ func (o LaunchTemplateLoginSettingsPtrOutput) Password() pulumi.StringPtrOutput 
 type LaunchTemplatePlacement struct {
 	// The CDH ID list of the instance(input).
 	HostIds []string `pulumi:"hostIds"`
-	// Specify the host machine ip.
+	// It has been deprecated from version 1.81.108. Specify the host machine ip.
+	//
+	// Deprecated: It has been deprecated from version 1.81.108.
 	HostIps []string `pulumi:"hostIps"`
 	// The project ID of the instance.
 	ProjectId *int `pulumi:"projectId"`
@@ -2803,7 +2805,9 @@ type LaunchTemplatePlacementInput interface {
 type LaunchTemplatePlacementArgs struct {
 	// The CDH ID list of the instance(input).
 	HostIds pulumi.StringArrayInput `pulumi:"hostIds"`
-	// Specify the host machine ip.
+	// It has been deprecated from version 1.81.108. Specify the host machine ip.
+	//
+	// Deprecated: It has been deprecated from version 1.81.108.
 	HostIps pulumi.StringArrayInput `pulumi:"hostIps"`
 	// The project ID of the instance.
 	ProjectId pulumi.IntPtrInput `pulumi:"projectId"`
@@ -2893,7 +2897,9 @@ func (o LaunchTemplatePlacementOutput) HostIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LaunchTemplatePlacement) []string { return v.HostIds }).(pulumi.StringArrayOutput)
 }
 
-// Specify the host machine ip.
+// It has been deprecated from version 1.81.108. Specify the host machine ip.
+//
+// Deprecated: It has been deprecated from version 1.81.108.
 func (o LaunchTemplatePlacementOutput) HostIps() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LaunchTemplatePlacement) []string { return v.HostIps }).(pulumi.StringArrayOutput)
 }
@@ -2942,7 +2948,9 @@ func (o LaunchTemplatePlacementPtrOutput) HostIds() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
-// Specify the host machine ip.
+// It has been deprecated from version 1.81.108. Specify the host machine ip.
+//
+// Deprecated: It has been deprecated from version 1.81.108.
 func (o LaunchTemplatePlacementPtrOutput) HostIps() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *LaunchTemplatePlacement) []string {
 		if v == nil {
@@ -7952,7 +7960,9 @@ type GetChcHostsChcHostSetPlacement struct {
 	HostId string `pulumi:"hostId"`
 	// ID list of CDHs from which the instance can be created. If you have purchased CDHs and specify this parameter, the instances you purchase will be randomly deployed on the CDHs.
 	HostIds []string `pulumi:"hostIds"`
-	// IPs of the hosts to create CVMs.
+	// (**Deprecated**) It has been deprecated from version 1.81.108. IPs of the hosts to create CVMs.
+	//
+	// Deprecated: It has been deprecated from version 1.81.108.
 	HostIps []string `pulumi:"hostIps"`
 	// ID of the project to which the instance belongs. This parameter can be obtained from the projectId returned by DescribeProject. If this is left empty, the default project is used.
 	ProjectId int `pulumi:"projectId"`
@@ -7976,7 +7986,9 @@ type GetChcHostsChcHostSetPlacementArgs struct {
 	HostId pulumi.StringInput `pulumi:"hostId"`
 	// ID list of CDHs from which the instance can be created. If you have purchased CDHs and specify this parameter, the instances you purchase will be randomly deployed on the CDHs.
 	HostIds pulumi.StringArrayInput `pulumi:"hostIds"`
-	// IPs of the hosts to create CVMs.
+	// (**Deprecated**) It has been deprecated from version 1.81.108. IPs of the hosts to create CVMs.
+	//
+	// Deprecated: It has been deprecated from version 1.81.108.
 	HostIps pulumi.StringArrayInput `pulumi:"hostIps"`
 	// ID of the project to which the instance belongs. This parameter can be obtained from the projectId returned by DescribeProject. If this is left empty, the default project is used.
 	ProjectId pulumi.IntInput `pulumi:"projectId"`
@@ -8045,7 +8057,9 @@ func (o GetChcHostsChcHostSetPlacementOutput) HostIds() pulumi.StringArrayOutput
 	return o.ApplyT(func(v GetChcHostsChcHostSetPlacement) []string { return v.HostIds }).(pulumi.StringArrayOutput)
 }
 
-// IPs of the hosts to create CVMs.
+// (**Deprecated**) It has been deprecated from version 1.81.108. IPs of the hosts to create CVMs.
+//
+// Deprecated: It has been deprecated from version 1.81.108.
 func (o GetChcHostsChcHostSetPlacementOutput) HostIps() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetChcHostsChcHostSetPlacement) []string { return v.HostIps }).(pulumi.StringArrayOutput)
 }

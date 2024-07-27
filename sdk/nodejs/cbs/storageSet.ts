@@ -9,17 +9,40 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Create 3 standard CBS storages
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const storage = new tencentcloud.cbs.StorageSet("storage", {
+ * const example = new tencentcloud.cbs.StorageSet("example", {
  *     availabilityZone: "ap-guangzhou-3",
- *     diskCount: 10,
+ *     diskCount: 3,
  *     encrypt: false,
  *     projectId: 0,
- *     storageName: "mystorage",
+ *     storageName: "tf-example",
+ *     storageSize: 100,
+ *     storageType: "CLOUD_SSD",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Create 3 dedicated cluster CBS storages
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.cbs.StorageSet("example", {
+ *     availabilityZone: "ap-guangzhou-4",
+ *     chargeType: "DEDICATED_CLUSTER_PAID",
+ *     dedicatedClusterId: "cluster-262n63e8",
+ *     diskCount: 3,
+ *     encrypt: false,
+ *     projectId: 0,
+ *     storageName: "tf-example",
  *     storageSize: 100,
  *     storageType: "CLOUD_SSD",
  * });
@@ -63,9 +86,13 @@ export class StorageSet extends pulumi.CustomResource {
      */
     public readonly availabilityZone!: pulumi.Output<string>;
     /**
-     * The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+     * The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
      */
     public readonly chargeType!: pulumi.Output<string | undefined>;
+    /**
+     * Exclusive cluster id.
+     */
+    public readonly dedicatedClusterId!: pulumi.Output<string | undefined>;
     /**
      * The number of disks to be purchased. Default 1.
      */
@@ -123,6 +150,7 @@ export class StorageSet extends pulumi.CustomResource {
             resourceInputs["attached"] = state ? state.attached : undefined;
             resourceInputs["availabilityZone"] = state ? state.availabilityZone : undefined;
             resourceInputs["chargeType"] = state ? state.chargeType : undefined;
+            resourceInputs["dedicatedClusterId"] = state ? state.dedicatedClusterId : undefined;
             resourceInputs["diskCount"] = state ? state.diskCount : undefined;
             resourceInputs["diskIds"] = state ? state.diskIds : undefined;
             resourceInputs["encrypt"] = state ? state.encrypt : undefined;
@@ -149,6 +177,7 @@ export class StorageSet extends pulumi.CustomResource {
             }
             resourceInputs["availabilityZone"] = args ? args.availabilityZone : undefined;
             resourceInputs["chargeType"] = args ? args.chargeType : undefined;
+            resourceInputs["dedicatedClusterId"] = args ? args.dedicatedClusterId : undefined;
             resourceInputs["diskCount"] = args ? args.diskCount : undefined;
             resourceInputs["encrypt"] = args ? args.encrypt : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
@@ -179,9 +208,13 @@ export interface StorageSetState {
      */
     availabilityZone?: pulumi.Input<string>;
     /**
-     * The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+     * The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
      */
     chargeType?: pulumi.Input<string>;
+    /**
+     * Exclusive cluster id.
+     */
+    dedicatedClusterId?: pulumi.Input<string>;
     /**
      * The number of disks to be purchased. Default 1.
      */
@@ -233,9 +266,13 @@ export interface StorageSetArgs {
      */
     availabilityZone: pulumi.Input<string>;
     /**
-     * The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+     * The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
      */
     chargeType?: pulumi.Input<string>;
+    /**
+     * Exclusive cluster id.
+     */
+    dedicatedClusterId?: pulumi.Input<string>;
     /**
      * The number of disks to be purchased. Default 1.
      */

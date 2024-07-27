@@ -23,6 +23,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Outputs
         /// </summary>
         public readonly int AvailableIpCount;
         /// <summary>
+        /// ID of CDC instance.
+        /// </summary>
+        public readonly string CdcId;
+        /// <summary>
         /// Filter subnet with this CIDR.
         /// </summary>
         public readonly string CidrBlock;
@@ -65,6 +69,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Outputs
 
             int availableIpCount,
 
+            string cdcId,
+
             string cidrBlock,
 
             string createTime,
@@ -85,6 +91,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc.Outputs
         {
             AvailabilityZone = availabilityZone;
             AvailableIpCount = availableIpCount;
+            CdcId = cdcId;
             CidrBlock = cidrBlock;
             CreateTime = createTime;
             IsDefault = isDefault;

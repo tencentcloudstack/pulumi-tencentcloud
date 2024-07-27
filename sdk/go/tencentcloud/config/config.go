@@ -14,6 +14,12 @@ var _ = internal.GetEnvOrDefault
 func GetAssumeRole(ctx *pulumi.Context) string {
 	return config.Get(ctx, "tencentcloud:assumeRole")
 }
+func GetAssumeRoleWithSaml(ctx *pulumi.Context) string {
+	return config.Get(ctx, "tencentcloud:assumeRoleWithSaml")
+}
+func GetAssumeRoleWithWebIdentity(ctx *pulumi.Context) string {
+	return config.Get(ctx, "tencentcloud:assumeRoleWithWebIdentity")
+}
 
 // The root domain of the API request, Default is `tencentcloudapi.com`.
 func GetDomain(ctx *pulumi.Context) string {

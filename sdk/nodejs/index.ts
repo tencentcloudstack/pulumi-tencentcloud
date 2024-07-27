@@ -25,6 +25,7 @@ import * as cam from "./cam";
 import * as cat from "./cat";
 import * as cbs from "./cbs";
 import * as ccn from "./ccn";
+import * as cdc from "./cdc";
 import * as cdh from "./cdh";
 import * as cdn from "./cdn";
 import * as cdwpg from "./cdwpg";
@@ -138,6 +139,7 @@ export {
     cat,
     cbs,
     ccn,
+    cdc,
     cdh,
     cdn,
     cdwpg,

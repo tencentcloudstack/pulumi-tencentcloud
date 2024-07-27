@@ -11,33 +11,43 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Create subnet resource
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
- * const foo = new tencentcloud.vpc.Instance("foo", {cidrBlock: "10.0.0.0/16"});
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
  *     availabilityZone: availabilityZone,
- *     vpcId: foo.id,
+ *     vpcId: vpc.id,
  *     cidrBlock: "10.0.20.0/28",
  *     isMulticast: false,
  *     tags: {
  *         test: "test",
  *     },
  * });
- * const idInstances = tencentcloud.Vpc.getSubnetsOutput({
- *     subnetId: subnet.id,
+ * const subnetCDC = new tencentcloud.subnet.Instance("subnetCDC", {
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     cdcId: "cluster-lchwgxhs",
+ *     availabilityZone: data.tencentcloud_availability_zones.zones.zones[0].name,
+ *     isMulticast: false,
  * });
- * const nameInstances = tencentcloud.Vpc.getSubnetsOutput({
- *     name: subnet.name,
- * });
- * const tagsInstances = subnet.tags.apply(tags => tencentcloud.Vpc.getSubnetsOutput({
- *     tags: tags,
- * }));
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query all subnets
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const subnets = tencentcloud.Vpc.getSubnets({});
  * ```
  * <!--End PulumiCodeChooser -->
  */
@@ -47,6 +57,7 @@ export function getSubnets(args?: GetSubnetsArgs, opts?: pulumi.InvokeOptions): 
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Vpc/getSubnets:getSubnets", {
         "availabilityZone": args.availabilityZone,
+        "cdcId": args.cdcId,
         "cidrBlock": args.cidrBlock,
         "isDefault": args.isDefault,
         "isRemoteVpcSnat": args.isRemoteVpcSnat,
@@ -67,6 +78,10 @@ export interface GetSubnetsArgs {
      * Zone of the subnet to be queried.
      */
     availabilityZone?: string;
+    /**
+     * ID of CDC instance.
+     */
+    cdcId?: string;
     /**
      * Filter subnet with this CIDR.
      */
@@ -114,6 +129,10 @@ export interface GetSubnetsResult {
      */
     readonly availabilityZone?: string;
     /**
+     * ID of CDC instance.
+     */
+    readonly cdcId?: string;
+    /**
      * A network address block of the subnet.
      */
     readonly cidrBlock?: string;
@@ -154,33 +173,43 @@ export interface GetSubnetsResult {
  *
  * ## Example Usage
  *
+ * ### Create subnet resource
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as tencentcloud from "@pulumi/tencentcloud";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const config = new pulumi.Config();
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
- * const foo = new tencentcloud.vpc.Instance("foo", {cidrBlock: "10.0.0.0/16"});
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
  * const subnet = new tencentcloud.subnet.Instance("subnet", {
  *     availabilityZone: availabilityZone,
- *     vpcId: foo.id,
+ *     vpcId: vpc.id,
  *     cidrBlock: "10.0.20.0/28",
  *     isMulticast: false,
  *     tags: {
  *         test: "test",
  *     },
  * });
- * const idInstances = tencentcloud.Vpc.getSubnetsOutput({
- *     subnetId: subnet.id,
+ * const subnetCDC = new tencentcloud.subnet.Instance("subnetCDC", {
+ *     vpcId: vpc.id,
+ *     cidrBlock: "10.0.0.0/16",
+ *     cdcId: "cluster-lchwgxhs",
+ *     availabilityZone: data.tencentcloud_availability_zones.zones.zones[0].name,
+ *     isMulticast: false,
  * });
- * const nameInstances = tencentcloud.Vpc.getSubnetsOutput({
- *     name: subnet.name,
- * });
- * const tagsInstances = subnet.tags.apply(tags => tencentcloud.Vpc.getSubnetsOutput({
- *     tags: tags,
- * }));
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query all subnets
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const subnets = tencentcloud.Vpc.getSubnets({});
  * ```
  * <!--End PulumiCodeChooser -->
  */
@@ -196,6 +225,10 @@ export interface GetSubnetsOutputArgs {
      * Zone of the subnet to be queried.
      */
     availabilityZone?: pulumi.Input<string>;
+    /**
+     * ID of CDC instance.
+     */
+    cdcId?: pulumi.Input<string>;
     /**
      * Filter subnet with this CIDR.
      */

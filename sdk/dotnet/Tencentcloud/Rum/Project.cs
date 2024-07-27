@@ -24,15 +24,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var project = new Tencentcloud.Rum.Project("project", new()
+    ///     var exampleTawInstance = new Tencentcloud.Rum.TawInstance("exampleTawInstance", new()
     ///     {
-    ///         Desc = "projectDesc-1",
-    ///         EnableUrlGroup = 0,
-    ///         InstanceId = "rum-pasZKEI3RLgakj",
+    ///         AreaId = 1,
+    ///         ChargeType = 1,
+    ///         DataRetentionDays = 30,
+    ///         InstanceName = "tf-example",
+    ///         InstanceDesc = "desc.",
+    ///         Tags = 
+    ///         {
+    ///             { "createdBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleProject = new Tencentcloud.Rum.Project("exampleProject", new()
+    ///     {
+    ///         InstanceId = exampleTawInstance.Id,
     ///         Rate = "100",
-    ///         Repo = "",
+    ///         EnableUrlGroup = 0,
     ///         Type = "web",
+    ///         Repo = "https://github.com/xxx",
     ///         Url = "iac-tf.com",
+    ///         Desc = "desc.",
     ///     });
     /// 
     /// });
@@ -44,14 +57,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// rum project can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Rum/project:Project project project_id
+    /// $ pulumi import tencentcloud:Rum/project:Project example 139422
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Rum/project:Project")]
     public partial class Project : global::Pulumi.CustomResource
     {
         /// <summary>
-        /// Creata Time.
+        /// Create Time.
         /// </summary>
         [Output("createTime")]
         public Output<string> CreateTime { get; private set; } = null!;
@@ -244,7 +257,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     public sealed class ProjectState : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Creata Time.
+        /// Create Time.
         /// </summary>
         [Input("createTime")]
         public Input<string>? CreateTime { get; set; }

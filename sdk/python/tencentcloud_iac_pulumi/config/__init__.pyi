@@ -12,6 +12,10 @@ from . import outputs
 
 assumeRole: Optional[str]
 
+assumeRoleWithSaml: Optional[str]
+
+assumeRoleWithWebIdentity: Optional[str]
+
 domain: Optional[str]
 """
 The root domain of the API request, Default is `tencentcloudapi.com`.

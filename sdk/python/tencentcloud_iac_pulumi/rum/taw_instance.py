@@ -317,12 +317,12 @@ class TawInstance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        taw_instance = tencentcloud.rum.TawInstance("tawInstance",
+        example = tencentcloud.rum.TawInstance("example",
             area_id=1,
             charge_type=1,
             data_retention_days=30,
-            instance_desc="instanceDesc-1",
-            instance_name="instanceName-1",
+            instance_desc="desc.",
+            instance_name="tf-example",
             tags={
                 "createdBy": "terraform",
             })
@@ -334,7 +334,7 @@ class TawInstance(pulumi.CustomResource):
         rum taw_instance can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Rum/tawInstance:TawInstance taw_instance tawInstance_id
+        $ pulumi import tencentcloud:Rum/tawInstance:TawInstance example rum-WYsjMaiGOVXBeJ
         ```
 
         :param str resource_name: The name of the resource.
@@ -362,12 +362,12 @@ class TawInstance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        taw_instance = tencentcloud.rum.TawInstance("tawInstance",
+        example = tencentcloud.rum.TawInstance("example",
             area_id=1,
             charge_type=1,
             data_retention_days=30,
-            instance_desc="instanceDesc-1",
-            instance_name="instanceName-1",
+            instance_desc="desc.",
+            instance_name="tf-example",
             tags={
                 "createdBy": "terraform",
             })
@@ -379,7 +379,7 @@ class TawInstance(pulumi.CustomResource):
         rum taw_instance can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Rum/tawInstance:TawInstance taw_instance tawInstance_id
+        $ pulumi import tencentcloud:Rum/tawInstance:TawInstance example rum-WYsjMaiGOVXBeJ
         ```
 
         :param str resource_name: The name of the resource.

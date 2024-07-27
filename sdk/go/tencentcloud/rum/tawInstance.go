@@ -29,12 +29,12 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Rum.NewTawInstance(ctx, "tawInstance", &Rum.TawInstanceArgs{
+//			_, err := Rum.NewTawInstance(ctx, "example", &Rum.TawInstanceArgs{
 //				AreaId:            pulumi.Int(1),
 //				ChargeType:        pulumi.Int(1),
 //				DataRetentionDays: pulumi.Int(30),
-//				InstanceDesc:      pulumi.String("instanceDesc-1"),
-//				InstanceName:      pulumi.String("instanceName-1"),
+//				InstanceDesc:      pulumi.String("desc."),
+//				InstanceName:      pulumi.String("tf-example"),
 //				Tags: pulumi.Map{
 //					"createdBy": pulumi.Any("terraform"),
 //				},
@@ -54,7 +54,7 @@ import (
 // rum taw_instance can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Rum/tawInstance:TawInstance taw_instance tawInstance_id
+// $ pulumi import tencentcloud:Rum/tawInstance:TawInstance example rum-WYsjMaiGOVXBeJ
 // ```
 type TawInstance struct {
 	pulumi.CustomResourceState

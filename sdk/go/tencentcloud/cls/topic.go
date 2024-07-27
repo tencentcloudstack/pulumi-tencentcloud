@@ -16,6 +16,8 @@ import (
 //
 // ## Example Usage
 //
+// ### Create a standard cls topic
+//
 // <!--Start PulumiCodeChooser -->
 // ```go
 // package main
@@ -32,7 +34,7 @@ import (
 //			exampleLogset, err := Cls.NewLogset(ctx, "exampleLogset", &Cls.LogsetArgs{
 //				LogsetName: pulumi.String("tf_example"),
 //				Tags: pulumi.Map{
-//					"demo": pulumi.Any("test"),
+//					"tagKey": pulumi.Any("tagValue"),
 //				},
 //			})
 //			if err != nil {
@@ -49,7 +51,71 @@ import (
 //				Describes:          pulumi.String("Test Demo."),
 //				HotPeriod:          pulumi.Int(10),
 //				Tags: pulumi.Map{
-//					"test": pulumi.Any("test"),
+//					"tagKey": pulumi.Any("tagValue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Create a cls topic with web tracking
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cls"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			exampleLogset, err := Cls.NewLogset(ctx, "exampleLogset", &Cls.LogsetArgs{
+//				LogsetName: pulumi.String("tf_example"),
+//				Tags: pulumi.Map{
+//					"tagKey": pulumi.Any("tagValue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cls.NewTopic(ctx, "exampleTopic", &Cls.TopicArgs{
+//				TopicName:          pulumi.String("tf_example"),
+//				LogsetId:           exampleLogset.ID(),
+//				AutoSplit:          pulumi.Bool(false),
+//				MaxSplitPartitions: pulumi.Int(20),
+//				PartitionCount:     pulumi.Int(1),
+//				Period:             pulumi.Int(30),
+//				StorageType:        pulumi.String("hot"),
+//				Describes:          pulumi.String("Test Demo."),
+//				HotPeriod:          pulumi.Int(10),
+//				IsWebTracking:      pulumi.Bool(true),
+//				Extends: &cls.TopicExtendsArgs{
+//					AnonymousAccess: &cls.TopicExtendsAnonymousAccessArgs{
+//						Operations: pulumi.StringArray{
+//							pulumi.String("trackLog"),
+//							pulumi.String("realtimeProducer"),
+//						},
+//						Conditions: cls.TopicExtendsAnonymousAccessConditionArray{
+//							&cls.TopicExtendsAnonymousAccessConditionArgs{
+//								Attributes:     pulumi.String("VpcID"),
+//								Rule:           pulumi.Int(1),
+//								ConditionValue: pulumi.String("vpc-ahr3xajx"),
+//							},
+//						},
+//					},
+//				},
+//				Tags: pulumi.Map{
+//					"tagKey": pulumi.Any("tagValue"),
 //				},
 //			})
 //			if err != nil {
@@ -76,8 +142,12 @@ type Topic struct {
 	AutoSplit pulumi.BoolOutput `pulumi:"autoSplit"`
 	// Log Topic Description.
 	Describes pulumi.StringPtrOutput `pulumi:"describes"`
+	// Log Subject Extension Information.
+	Extends TopicExtendsPtrOutput `pulumi:"extends"`
 	// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
 	HotPeriod pulumi.IntOutput `pulumi:"hotPeriod"`
+	// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+	IsWebTracking pulumi.BoolOutput `pulumi:"isWebTracking"`
 	// Logset ID.
 	LogsetId pulumi.StringOutput `pulumi:"logsetId"`
 	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
@@ -134,8 +204,12 @@ type topicState struct {
 	AutoSplit *bool `pulumi:"autoSplit"`
 	// Log Topic Description.
 	Describes *string `pulumi:"describes"`
+	// Log Subject Extension Information.
+	Extends *TopicExtends `pulumi:"extends"`
 	// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
 	HotPeriod *int `pulumi:"hotPeriod"`
+	// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+	IsWebTracking *bool `pulumi:"isWebTracking"`
 	// Logset ID.
 	LogsetId *string `pulumi:"logsetId"`
 	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
@@ -157,8 +231,12 @@ type TopicState struct {
 	AutoSplit pulumi.BoolPtrInput
 	// Log Topic Description.
 	Describes pulumi.StringPtrInput
+	// Log Subject Extension Information.
+	Extends TopicExtendsPtrInput
 	// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
 	HotPeriod pulumi.IntPtrInput
+	// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+	IsWebTracking pulumi.BoolPtrInput
 	// Logset ID.
 	LogsetId pulumi.StringPtrInput
 	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
@@ -184,8 +262,12 @@ type topicArgs struct {
 	AutoSplit *bool `pulumi:"autoSplit"`
 	// Log Topic Description.
 	Describes *string `pulumi:"describes"`
+	// Log Subject Extension Information.
+	Extends *TopicExtends `pulumi:"extends"`
 	// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
 	HotPeriod *int `pulumi:"hotPeriod"`
+	// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+	IsWebTracking *bool `pulumi:"isWebTracking"`
 	// Logset ID.
 	LogsetId string `pulumi:"logsetId"`
 	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
@@ -208,8 +290,12 @@ type TopicArgs struct {
 	AutoSplit pulumi.BoolPtrInput
 	// Log Topic Description.
 	Describes pulumi.StringPtrInput
+	// Log Subject Extension Information.
+	Extends TopicExtendsPtrInput
 	// 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
 	HotPeriod pulumi.IntPtrInput
+	// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+	IsWebTracking pulumi.BoolPtrInput
 	// Logset ID.
 	LogsetId pulumi.StringInput
 	// Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
@@ -323,9 +409,19 @@ func (o TopicOutput) Describes() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Topic) pulumi.StringPtrOutput { return v.Describes }).(pulumi.StringPtrOutput)
 }
 
+// Log Subject Extension Information.
+func (o TopicOutput) Extends() TopicExtendsPtrOutput {
+	return o.ApplyT(func(v *Topic) TopicExtendsPtrOutput { return v.Extends }).(TopicExtendsPtrOutput)
+}
+
 // 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
 func (o TopicOutput) HotPeriod() pulumi.IntOutput {
 	return o.ApplyT(func(v *Topic) pulumi.IntOutput { return v.HotPeriod }).(pulumi.IntOutput)
+}
+
+// No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+func (o TopicOutput) IsWebTracking() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Topic) pulumi.BoolOutput { return v.IsWebTracking }).(pulumi.BoolOutput)
 }
 
 // Logset ID.

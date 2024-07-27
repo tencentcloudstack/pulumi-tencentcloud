@@ -23,6 +23,48 @@ export interface ProviderAssumeRole {
      */
     sessionName: pulumi.Input<string>;
 }
+
+export interface ProviderAssumeRoleWithSaml {
+    /**
+     * Player Access Description Name. It can be sourced from the `PROVIDER_ASSUME_ROLE_PRINCIPAL_ARN`.
+     */
+    principalArn: pulumi.Input<string>;
+    /**
+     * The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+     */
+    roleArn: pulumi.Input<string>;
+    /**
+     * SAML assertion information encoded in base64. It can be sourced from the `PROVIDER_ASSUME_ROLE_SAML_ASSERTION`.
+     */
+    samlAssertion: pulumi.Input<string>;
+    /**
+     * The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+     */
+    sessionDuration: pulumi.Input<number>;
+    /**
+     * The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+     */
+    sessionName: pulumi.Input<string>;
+}
+
+export interface ProviderAssumeRoleWithWebIdentity {
+    /**
+     * The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+     */
+    roleArn: pulumi.Input<string>;
+    /**
+     * The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+     */
+    sessionDuration: pulumi.Input<number>;
+    /**
+     * The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+     */
+    sessionName: pulumi.Input<string>;
+    /**
+     * OIDC token issued by IdP. It can be sourced from the `PROVIDER_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
+     */
+    webIdentityToken: pulumi.Input<string>;
+}
 export namespace Address {
 }
 
@@ -1203,6 +1245,28 @@ export namespace Ccn {
         values: pulumi.Input<pulumi.Input<string>[]>;
     }
 
+    export interface GetRoutesFilter {
+        /**
+         * Field to be filtered. Support `route-id`, `cidr-block`, `instance-type`, `instance-region`, `instance-id`, `route-table-id`.
+         */
+        name: string;
+        /**
+         * Filter value of the field.
+         */
+        values: string[];
+    }
+
+    export interface GetRoutesFilterArgs {
+        /**
+         * Field to be filtered. Support `route-id`, `cidr-block`, `instance-type`, `instance-region`, `instance-id`, `route-table-id`.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * Filter value of the field.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
     export interface InstancesAcceptAttachInstance {
         /**
          * Description.
@@ -1271,6 +1335,122 @@ export namespace Ccn {
          */
         routeTableId?: pulumi.Input<string>;
     }
+
+    export interface RouteTableAssociateInstanceConfigInstance {
+        /**
+         * Instances ID.
+         */
+        instanceId: pulumi.Input<string>;
+        /**
+         * Cloud networking supports instance types: VPC, DIRECTCONNECT, BMVPC, EDGE, EDGE_TUNNEL, EDGE_VPNGW, VPNGW.
+         */
+        instanceType: pulumi.Input<string>;
+    }
+
+    export interface RouteTableBroadcastPoliciesPolicy {
+        /**
+         * Routing behavior, `accept` allows, `drop` rejects.
+         */
+        action: pulumi.Input<string>;
+        /**
+         * propagation conditions.
+         */
+        broadcastConditions: pulumi.Input<pulumi.Input<inputs.Ccn.RouteTableBroadcastPoliciesPolicyBroadcastCondition>[]>;
+        /**
+         * Policy description.
+         */
+        description: pulumi.Input<string>;
+        /**
+         * Routing conditions.
+         */
+        routeConditions: pulumi.Input<pulumi.Input<inputs.Ccn.RouteTableBroadcastPoliciesPolicyRouteCondition>[]>;
+    }
+
+    export interface RouteTableBroadcastPoliciesPolicyBroadcastCondition {
+        /**
+         * Matching mode, `1` precise matching, `0` fuzzy matching.
+         */
+        matchPattern: pulumi.Input<number>;
+        /**
+         * condition type.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * List of conditional values.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface RouteTableBroadcastPoliciesPolicyRouteCondition {
+        /**
+         * Matching mode, `1` precise matching, `0` fuzzy matching.
+         */
+        matchPattern: pulumi.Input<number>;
+        /**
+         * condition type.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * List of conditional values.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface RouteTableInputPoliciesPolicy {
+        /**
+         * Routing behavior, `accept` allows, `drop` rejects.
+         */
+        action: pulumi.Input<string>;
+        /**
+         * Policy description.
+         */
+        description: pulumi.Input<string>;
+        /**
+         * Routing conditions.
+         */
+        routeConditions: pulumi.Input<pulumi.Input<inputs.Ccn.RouteTableInputPoliciesPolicyRouteCondition>[]>;
+    }
+
+    export interface RouteTableInputPoliciesPolicyRouteCondition {
+        /**
+         * Matching mode, `1` precise matching, `0` fuzzy matching.
+         */
+        matchPattern: pulumi.Input<number>;
+        /**
+         * condition type.
+         */
+        name: pulumi.Input<string>;
+        /**
+         * List of conditional values.
+         */
+        values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface RouteTableSelectionPoliciesSelectionPolicy {
+        /**
+         * description.
+         */
+        description: pulumi.Input<string>;
+        /**
+         * Instance ID.
+         */
+        instanceId: pulumi.Input<string>;
+        /**
+         * Instance Type: Private Network: VPC, Dedicated Gateway: DIRECTCONNECT, Blackstone Private Network: BMVPC, EDGE Device: EDGE, EDGE Tunnel: EDGE_TUNNEL, EDGE Gateway: EDGE_VPNGW, VPN Gateway: VPNGW.
+         */
+        instanceType: pulumi.Input<string>;
+        /**
+         * route table ID.
+         */
+        routeTableId: pulumi.Input<string>;
+        /**
+         * Source CIDR.
+         */
+        sourceCidrBlock: pulumi.Input<string>;
+    }
+}
+
+export namespace Cdc {
 }
 
 export namespace Cdh {
@@ -8349,6 +8529,39 @@ export namespace Cls {
          */
         topicId: pulumi.Input<string>;
     }
+
+    export interface TopicExtends {
+        /**
+         * Log topic authentication free configuration information.
+         */
+        anonymousAccess?: pulumi.Input<inputs.Cls.TopicExtendsAnonymousAccess>;
+    }
+
+    export interface TopicExtendsAnonymousAccess {
+        /**
+         * Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+         */
+        conditions?: pulumi.Input<pulumi.Input<inputs.Cls.TopicExtendsAnonymousAccessCondition>[]>;
+        /**
+         * Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+         */
+        operations?: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface TopicExtendsAnonymousAccessCondition {
+        /**
+         * Condition attribute, currently only VpcID is supported.
+         */
+        attributes?: pulumi.Input<string>;
+        /**
+         * The value of the corresponding conditional attribute.
+         */
+        conditionValue?: pulumi.Input<string>;
+        /**
+         * Conditional rule, 1: equal, 2: not equal.
+         */
+        rule?: pulumi.Input<number>;
+    }
 }
 
 export namespace Cos {
@@ -9566,7 +9779,9 @@ export namespace Cvm {
          */
         hostIds?: pulumi.Input<pulumi.Input<string>[]>;
         /**
-         * Specify the host machine ip.
+         * It has been deprecated from version 1.81.108. Specify the host machine ip.
+         *
+         * @deprecated It has been deprecated from version 1.81.108.
          */
         hostIps?: pulumi.Input<pulumi.Input<string>[]>;
         /**
@@ -16455,6 +16670,28 @@ export namespace Monitor {
          * Dimension value. If Operator is eq or ne, only the first element will be used.
          */
         values: pulumi.Input<pulumi.Input<string>[]>;
+    }
+
+    export interface GetTmpInstancesTagFilter {
+        /**
+         * The key of the tag.
+         */
+        key: string;
+        /**
+         * The value of the tag.
+         */
+        value: string;
+    }
+
+    export interface GetTmpInstancesTagFilterArgs {
+        /**
+         * The key of the tag.
+         */
+        key: pulumi.Input<string>;
+        /**
+         * The value of the tag.
+         */
+        value: pulumi.Input<string>;
     }
 
     export interface GrafanaSsoAccountRole {

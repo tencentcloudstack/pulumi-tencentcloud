@@ -115,6 +115,11 @@ export const getStatisticData: typeof import("./getStatisticData").getStatisticD
 export const getStatisticDataOutput: typeof import("./getStatisticData").getStatisticDataOutput = null as any;
 utilities.lazyLoad(exports, ["getStatisticData","getStatisticDataOutput"], () => require("./getStatisticData"));
 
+export { GetTmpInstancesArgs, GetTmpInstancesResult, GetTmpInstancesOutputArgs } from "./getTmpInstances";
+export const getTmpInstances: typeof import("./getTmpInstances").getTmpInstances = null as any;
+export const getTmpInstancesOutput: typeof import("./getTmpInstances").getTmpInstancesOutput = null as any;
+utilities.lazyLoad(exports, ["getTmpInstances","getTmpInstancesOutput"], () => require("./getTmpInstances"));
+
 export { GetTmpRegionsArgs, GetTmpRegionsResult, GetTmpRegionsOutputArgs } from "./getTmpRegions";
 export const getTmpRegions: typeof import("./getTmpRegions").getTmpRegions = null as any;
 export const getTmpRegionsOutput: typeof import("./getTmpRegions").getTmpRegionsOutput = null as any;

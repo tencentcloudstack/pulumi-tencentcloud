@@ -6262,6 +6262,8 @@ type GetSubnetsInstanceList struct {
 	AvailabilityZone string `pulumi:"availabilityZone"`
 	// The number of available IPs.
 	AvailableIpCount int `pulumi:"availableIpCount"`
+	// ID of CDC instance.
+	CdcId string `pulumi:"cdcId"`
 	// Filter subnet with this CIDR.
 	CidrBlock string `pulumi:"cidrBlock"`
 	// Creation time of the subnet resource.
@@ -6298,6 +6300,8 @@ type GetSubnetsInstanceListArgs struct {
 	AvailabilityZone pulumi.StringInput `pulumi:"availabilityZone"`
 	// The number of available IPs.
 	AvailableIpCount pulumi.IntInput `pulumi:"availableIpCount"`
+	// ID of CDC instance.
+	CdcId pulumi.StringInput `pulumi:"cdcId"`
 	// Filter subnet with this CIDR.
 	CidrBlock pulumi.StringInput `pulumi:"cidrBlock"`
 	// Creation time of the subnet resource.
@@ -6377,6 +6381,11 @@ func (o GetSubnetsInstanceListOutput) AvailabilityZone() pulumi.StringOutput {
 // The number of available IPs.
 func (o GetSubnetsInstanceListOutput) AvailableIpCount() pulumi.IntOutput {
 	return o.ApplyT(func(v GetSubnetsInstanceList) int { return v.AvailableIpCount }).(pulumi.IntOutput)
+}
+
+// ID of CDC instance.
+func (o GetSubnetsInstanceListOutput) CdcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSubnetsInstanceList) string { return v.CdcId }).(pulumi.StringOutput)
 }
 
 // Filter subnet with this CIDR.

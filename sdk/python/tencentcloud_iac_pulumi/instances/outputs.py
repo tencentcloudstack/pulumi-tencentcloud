@@ -26,6 +26,7 @@ class GetInstanceInstanceListResult(dict):
                  cpu: int,
                  create_time: str,
                  data_disks: Sequence['outputs.GetInstanceInstanceListDataDiskResult'],
+                 dedicated_cluster_id: str,
                  expired_time: str,
                  image_id: str,
                  instance_charge_type: str,
@@ -55,6 +56,7 @@ class GetInstanceInstanceListResult(dict):
         :param int cpu: The number of CPU cores of the instance.
         :param str create_time: Creation time of the instance.
         :param Sequence['GetInstanceInstanceListDataDiskArgs'] data_disks: An information list of data disk. Each element contains the following attributes:
+        :param str dedicated_cluster_id: Exclusive cluster id.
         :param str expired_time: Expired time of the instance.
         :param str image_id: ID of the image.
         :param str instance_charge_type: The charge type of the instance.
@@ -84,6 +86,7 @@ class GetInstanceInstanceListResult(dict):
         pulumi.set(__self__, "cpu", cpu)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "data_disks", data_disks)
+        pulumi.set(__self__, "dedicated_cluster_id", dedicated_cluster_id)
         pulumi.set(__self__, "expired_time", expired_time)
         pulumi.set(__self__, "image_id", image_id)
         pulumi.set(__self__, "instance_charge_type", instance_charge_type)
@@ -154,6 +157,14 @@ class GetInstanceInstanceListResult(dict):
         An information list of data disk. Each element contains the following attributes:
         """
         return pulumi.get(self, "data_disks")
+
+    @property
+    @pulumi.getter(name="dedicatedClusterId")
+    def dedicated_cluster_id(self) -> str:
+        """
+        Exclusive cluster id.
+        """
+        return pulumi.get(self, "dedicated_cluster_id")
 
     @property
     @pulumi.getter(name="expiredTime")

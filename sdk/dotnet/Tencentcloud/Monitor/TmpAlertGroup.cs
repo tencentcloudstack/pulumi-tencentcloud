@@ -24,36 +24,59 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var tmpAlertGroup = new Tencentcloud.Monitor.TmpAlertGroup("tmpAlertGroup", new()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         AmpReceivers = new[]
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///     });
+    /// 
+    ///     var exampleTmpInstance = new Tencentcloud.Monitor.TmpInstance("exampleTmpInstance", new()
+    ///     {
+    ///         InstanceName = "tf-tmp-instance",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DataRetentionTime = 30,
+    ///         Zone = availabilityZone,
+    ///         Tags = 
     ///         {
-    ///             "notice-om017kc2",
+    ///             { "createdBy", "terraform" },
     ///         },
+    ///     });
+    /// 
+    ///     var exampleTmpAlertGroup = new Tencentcloud.Monitor.TmpAlertGroup("exampleTmpAlertGroup", new()
+    ///     {
+    ///         GroupName = "tf-example",
+    ///         InstanceId = exampleTmpInstance.Id,
+    ///         RepeatInterval = "5m",
     ///         CustomReceiver = new Tencentcloud.Monitor.Inputs.TmpAlertGroupCustomReceiverArgs
     ///         {
     ///             Type = "amp",
     ///         },
-    ///         GroupName = "tf-test",
-    ///         InstanceId = "prom-ip429jis",
-    ///         RepeatInterval = "5m",
     ///         Rules = new[]
     ///         {
     ///             new Tencentcloud.Monitor.Inputs.TmpAlertGroupRuleArgs
     ///             {
-    ///                 Annotations = 
-    ///                 {
-    ///                     { "description", "Agent {{$labels.instance}} is deactivated, please pay attention!" },
-    ///                     { "summary", "Agent health check" },
-    ///                 },
     ///                 Duration = "1m",
     ///                 Expr = "up{job=\"prometheus-agent\"} != 1",
+    ///                 RuleName = "Agent health check",
+    ///                 State = 2,
+    ///                 Annotations = 
+    ///                 {
+    ///                     { "summary", "Agent health check" },
+    ///                     { "description", "Agent {{$labels.instance}} is deactivated, please pay attention!" },
+    ///                 },
     ///                 Labels = 
     ///                 {
     ///                     { "severity", "critical" },
     ///                 },
-    ///                 RuleName = "Agent health check",
-    ///                 State = 2,
     ///             },
     ///         },
     ///     });
@@ -67,7 +90,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// monitor tmp_alert_group can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup tmp_alert_group instance_id#group_id
+    /// $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup example prom-34qkzwvs#alert-rfkkr6cw
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup")]

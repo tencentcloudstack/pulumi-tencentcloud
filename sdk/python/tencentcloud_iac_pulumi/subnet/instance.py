@@ -17,6 +17,7 @@ class InstanceArgs:
                  availability_zone: pulumi.Input[str],
                  cidr_block: pulumi.Input[str],
                  vpc_id: pulumi.Input[str],
+                 cdc_id: Optional[pulumi.Input[str]] = None,
                  is_multicast: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  route_table_id: Optional[pulumi.Input[str]] = None,
@@ -26,6 +27,7 @@ class InstanceArgs:
         :param pulumi.Input[str] availability_zone: The availability zone within which the subnet should be created.
         :param pulumi.Input[str] cidr_block: A network address block of the subnet.
         :param pulumi.Input[str] vpc_id: ID of the VPC to be associated.
+        :param pulumi.Input[str] cdc_id: ID of CDC instance.
         :param pulumi.Input[bool] is_multicast: Indicates whether multicast is enabled. The default value is 'true'.
         :param pulumi.Input[str] name: The name of subnet to be created.
         :param pulumi.Input[str] route_table_id: ID of a routing table to which the subnet should be associated.
@@ -34,6 +36,8 @@ class InstanceArgs:
         pulumi.set(__self__, "availability_zone", availability_zone)
         pulumi.set(__self__, "cidr_block", cidr_block)
         pulumi.set(__self__, "vpc_id", vpc_id)
+        if cdc_id is not None:
+            pulumi.set(__self__, "cdc_id", cdc_id)
         if is_multicast is not None:
             pulumi.set(__self__, "is_multicast", is_multicast)
         if name is not None:
@@ -78,6 +82,18 @@ class InstanceArgs:
     @vpc_id.setter
     def vpc_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "vpc_id", value)
+
+    @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of CDC instance.
+        """
+        return pulumi.get(self, "cdc_id")
+
+    @cdc_id.setter
+    def cdc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cdc_id", value)
 
     @property
     @pulumi.getter(name="isMulticast")
@@ -133,6 +149,7 @@ class _InstanceState:
     def __init__(__self__, *,
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  available_ip_count: Optional[pulumi.Input[int]] = None,
+                 cdc_id: Optional[pulumi.Input[str]] = None,
                  cidr_block: Optional[pulumi.Input[str]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
                  is_default: Optional[pulumi.Input[bool]] = None,
@@ -145,6 +162,7 @@ class _InstanceState:
         Input properties used for looking up and filtering Instance resources.
         :param pulumi.Input[str] availability_zone: The availability zone within which the subnet should be created.
         :param pulumi.Input[int] available_ip_count: The number of available IPs.
+        :param pulumi.Input[str] cdc_id: ID of CDC instance.
         :param pulumi.Input[str] cidr_block: A network address block of the subnet.
         :param pulumi.Input[str] create_time: Creation time of subnet resource.
         :param pulumi.Input[bool] is_default: Indicates whether it is the default VPC for this region.
@@ -158,6 +176,8 @@ class _InstanceState:
             pulumi.set(__self__, "availability_zone", availability_zone)
         if available_ip_count is not None:
             pulumi.set(__self__, "available_ip_count", available_ip_count)
+        if cdc_id is not None:
+            pulumi.set(__self__, "cdc_id", cdc_id)
         if cidr_block is not None:
             pulumi.set(__self__, "cidr_block", cidr_block)
         if create_time is not None:
@@ -198,6 +218,18 @@ class _InstanceState:
     @available_ip_count.setter
     def available_ip_count(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "available_ip_count", value)
+
+    @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        ID of CDC instance.
+        """
+        return pulumi.get(self, "cdc_id")
+
+    @cdc_id.setter
+    def cdc_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cdc_id", value)
 
     @property
     @pulumi.getter(name="cidrBlock")
@@ -302,6 +334,7 @@ class Instance(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
+                 cdc_id: Optional[pulumi.Input[str]] = None,
                  cidr_block: Optional[pulumi.Input[str]] = None,
                  is_multicast: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -312,17 +345,20 @@ class Instance(pulumi.CustomResource):
         """
         Provide a resource to create a VPC subnet.
 
+        ## Example Usage
+
         ## Import
 
         Vpc subnet instance can be imported, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Subnet/instance:Instance test subnet_id
+        $ pulumi import tencentcloud:Subnet/instance:Instance subnet subnet-b8j03v0c
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] availability_zone: The availability zone within which the subnet should be created.
+        :param pulumi.Input[str] cdc_id: ID of CDC instance.
         :param pulumi.Input[str] cidr_block: A network address block of the subnet.
         :param pulumi.Input[bool] is_multicast: Indicates whether multicast is enabled. The default value is 'true'.
         :param pulumi.Input[str] name: The name of subnet to be created.
@@ -339,12 +375,14 @@ class Instance(pulumi.CustomResource):
         """
         Provide a resource to create a VPC subnet.
 
+        ## Example Usage
+
         ## Import
 
         Vpc subnet instance can be imported, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Subnet/instance:Instance test subnet_id
+        $ pulumi import tencentcloud:Subnet/instance:Instance subnet subnet-b8j03v0c
         ```
 
         :param str resource_name: The name of the resource.
@@ -363,6 +401,7 @@ class Instance(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
+                 cdc_id: Optional[pulumi.Input[str]] = None,
                  cidr_block: Optional[pulumi.Input[str]] = None,
                  is_multicast: Optional[pulumi.Input[bool]] = None,
                  name: Optional[pulumi.Input[str]] = None,
@@ -381,6 +420,7 @@ class Instance(pulumi.CustomResource):
             if availability_zone is None and not opts.urn:
                 raise TypeError("Missing required property 'availability_zone'")
             __props__.__dict__["availability_zone"] = availability_zone
+            __props__.__dict__["cdc_id"] = cdc_id
             if cidr_block is None and not opts.urn:
                 raise TypeError("Missing required property 'cidr_block'")
             __props__.__dict__["cidr_block"] = cidr_block
@@ -406,6 +446,7 @@ class Instance(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             availability_zone: Optional[pulumi.Input[str]] = None,
             available_ip_count: Optional[pulumi.Input[int]] = None,
+            cdc_id: Optional[pulumi.Input[str]] = None,
             cidr_block: Optional[pulumi.Input[str]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
             is_default: Optional[pulumi.Input[bool]] = None,
@@ -423,6 +464,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] availability_zone: The availability zone within which the subnet should be created.
         :param pulumi.Input[int] available_ip_count: The number of available IPs.
+        :param pulumi.Input[str] cdc_id: ID of CDC instance.
         :param pulumi.Input[str] cidr_block: A network address block of the subnet.
         :param pulumi.Input[str] create_time: Creation time of subnet resource.
         :param pulumi.Input[bool] is_default: Indicates whether it is the default VPC for this region.
@@ -438,6 +480,7 @@ class Instance(pulumi.CustomResource):
 
         __props__.__dict__["availability_zone"] = availability_zone
         __props__.__dict__["available_ip_count"] = available_ip_count
+        __props__.__dict__["cdc_id"] = cdc_id
         __props__.__dict__["cidr_block"] = cidr_block
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["is_default"] = is_default
@@ -463,6 +506,14 @@ class Instance(pulumi.CustomResource):
         The number of available IPs.
         """
         return pulumi.get(self, "available_ip_count")
+
+    @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        ID of CDC instance.
+        """
+        return pulumi.get(self, "cdc_id")
 
     @property
     @pulumi.getter(name="cidrBlock")

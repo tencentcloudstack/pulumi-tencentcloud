@@ -56,6 +56,7 @@ __all__ = [
     'GetDataDimensionArgs',
     'GetProductEventDimensionArgs',
     'GetStatisticDataConditionArgs',
+    'GetTmpInstancesTagFilterArgs',
 ]
 
 @pulumi.input_type
@@ -3650,5 +3651,42 @@ class GetStatisticDataConditionArgs:
     @values.setter
     def values(self, value: Sequence[str]):
         pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetTmpInstancesTagFilterArgs:
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: The key of the tag.
+        :param str value: The value of the tag.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        The key of the tag.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: str):
+        pulumi.set(self, "key", value)
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        The value of the tag.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: str):
+        pulumi.set(self, "value", value)
 
 

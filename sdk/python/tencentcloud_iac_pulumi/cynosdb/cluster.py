@@ -38,6 +38,7 @@ class ClusterArgs:
                  min_cpu: Optional[pulumi.Input[float]] = None,
                  old_ip_reserve_hours: Optional[pulumi.Input[int]] = None,
                  param_items: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]]] = None,
+                 param_template_id: Optional[pulumi.Input[int]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  prarm_template_id: Optional[pulumi.Input[int]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
@@ -45,6 +46,7 @@ class ClusterArgs:
                  ro_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  rw_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  serverless_status_flag: Optional[pulumi.Input[str]] = None,
+                 slave_zone: Optional[pulumi.Input[str]] = None,
                  storage_limit: Optional[pulumi.Input[int]] = None,
                  storage_pay_mode: Optional[pulumi.Input[int]] = None,
                  tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
@@ -53,7 +55,7 @@ class ClusterArgs:
         :param pulumi.Input[str] available_zone: The available zone of the CynosDB Cluster.
         :param pulumi.Input[str] cluster_name: Name of CynosDB cluster.
         :param pulumi.Input[str] db_type: Type of CynosDB, and available values include `MYSQL`.
-        :param pulumi.Input[str] db_version: Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
+        :param pulumi.Input[str] db_version: Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`, `8.0`.
         :param pulumi.Input[str] password: Password of `root` account.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC.
         :param pulumi.Input[str] vpc_id: ID of the VPC.
@@ -71,14 +73,16 @@ class ClusterArgs:
         :param pulumi.Input[float] max_cpu: Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
         :param pulumi.Input[float] min_cpu: Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
         :param pulumi.Input[int] old_ip_reserve_hours: Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
-        :param pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]] param_items: Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]] param_items: Specify parameter list of database. It is valid when `param_template_id` is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        :param pulumi.Input[int] param_template_id: The ID of the parameter template.
         :param pulumi.Input[int] port: Port of CynosDB cluster.
-        :param pulumi.Input[int] prarm_template_id: The ID of the parameter template.
+        :param pulumi.Input[int] prarm_template_id: It will be deprecated. Use `param_template_id` instead. The ID of the parameter template.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project. `0` by default.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ro_group_sgs: IDs of security group for `ro_group`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] rw_group_sgs: IDs of security group for `rw_group`.
         :param pulumi.Input[str] serverless_status_flag: Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
+        :param pulumi.Input[str] slave_zone: Multi zone Addresses of the CynosDB Cluster.
         :param pulumi.Input[int] storage_limit: Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         :param pulumi.Input[int] storage_pay_mode: Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
         :param pulumi.Input[Mapping[str, Any]] tags: The tags of the CynosDB cluster.
@@ -120,8 +124,13 @@ class ClusterArgs:
             pulumi.set(__self__, "old_ip_reserve_hours", old_ip_reserve_hours)
         if param_items is not None:
             pulumi.set(__self__, "param_items", param_items)
+        if param_template_id is not None:
+            pulumi.set(__self__, "param_template_id", param_template_id)
         if port is not None:
             pulumi.set(__self__, "port", port)
+        if prarm_template_id is not None:
+            warnings.warn("""It will be deprecated. Use `param_template_id` instead.""", DeprecationWarning)
+            pulumi.log.warn("""prarm_template_id is deprecated: It will be deprecated. Use `param_template_id` instead.""")
         if prarm_template_id is not None:
             pulumi.set(__self__, "prarm_template_id", prarm_template_id)
         if prepaid_period is not None:
@@ -134,6 +143,8 @@ class ClusterArgs:
             pulumi.set(__self__, "rw_group_sgs", rw_group_sgs)
         if serverless_status_flag is not None:
             pulumi.set(__self__, "serverless_status_flag", serverless_status_flag)
+        if slave_zone is not None:
+            pulumi.set(__self__, "slave_zone", slave_zone)
         if storage_limit is not None:
             pulumi.set(__self__, "storage_limit", storage_limit)
         if storage_pay_mode is not None:
@@ -181,7 +192,7 @@ class ClusterArgs:
     @pulumi.getter(name="dbVersion")
     def db_version(self) -> pulumi.Input[str]:
         """
-        Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
+        Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`, `8.0`.
         """
         return pulumi.get(self, "db_version")
 
@@ -397,13 +408,25 @@ class ClusterArgs:
     @pulumi.getter(name="paramItems")
     def param_items(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]]]:
         """
-        Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        Specify parameter list of database. It is valid when `param_template_id` is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         """
         return pulumi.get(self, "param_items")
 
     @param_items.setter
     def param_items(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]]]):
         pulumi.set(self, "param_items", value)
+
+    @property
+    @pulumi.getter(name="paramTemplateId")
+    def param_template_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        The ID of the parameter template.
+        """
+        return pulumi.get(self, "param_template_id")
+
+    @param_template_id.setter
+    def param_template_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "param_template_id", value)
 
     @property
     @pulumi.getter
@@ -421,8 +444,11 @@ class ClusterArgs:
     @pulumi.getter(name="prarmTemplateId")
     def prarm_template_id(self) -> Optional[pulumi.Input[int]]:
         """
-        The ID of the parameter template.
+        It will be deprecated. Use `param_template_id` instead. The ID of the parameter template.
         """
+        warnings.warn("""It will be deprecated. Use `param_template_id` instead.""", DeprecationWarning)
+        pulumi.log.warn("""prarm_template_id is deprecated: It will be deprecated. Use `param_template_id` instead.""")
+
         return pulumi.get(self, "prarm_template_id")
 
     @prarm_template_id.setter
@@ -490,6 +516,18 @@ class ClusterArgs:
         pulumi.set(self, "serverless_status_flag", value)
 
     @property
+    @pulumi.getter(name="slaveZone")
+    def slave_zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        Multi zone Addresses of the CynosDB Cluster.
+        """
+        return pulumi.get(self, "slave_zone")
+
+    @slave_zone.setter
+    def slave_zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "slave_zone", value)
+
+    @property
     @pulumi.getter(name="storageLimit")
     def storage_limit(self) -> Optional[pulumi.Input[int]]:
         """
@@ -555,6 +593,7 @@ class _ClusterState:
                  min_cpu: Optional[pulumi.Input[float]] = None,
                  old_ip_reserve_hours: Optional[pulumi.Input[int]] = None,
                  param_items: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]]] = None,
+                 param_template_id: Optional[pulumi.Input[int]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  prarm_template_id: Optional[pulumi.Input[int]] = None,
@@ -570,6 +609,7 @@ class _ClusterState:
                  rw_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  serverless_status: Optional[pulumi.Input[str]] = None,
                  serverless_status_flag: Optional[pulumi.Input[str]] = None,
+                 slave_zone: Optional[pulumi.Input[str]] = None,
                  storage_limit: Optional[pulumi.Input[int]] = None,
                  storage_pay_mode: Optional[pulumi.Input[int]] = None,
                  storage_used: Optional[pulumi.Input[int]] = None,
@@ -589,7 +629,7 @@ class _ClusterState:
         :param pulumi.Input[str] create_time: Creation time of the CynosDB cluster.
         :param pulumi.Input[str] db_mode: Specify DB mode, only available when `db_type` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
         :param pulumi.Input[str] db_type: Type of CynosDB, and available values include `MYSQL`.
-        :param pulumi.Input[str] db_version: Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
+        :param pulumi.Input[str] db_version: Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`, `8.0`.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
         :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[str] instance_id: ID of instance.
@@ -603,10 +643,11 @@ class _ClusterState:
         :param pulumi.Input[float] max_cpu: Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
         :param pulumi.Input[float] min_cpu: Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
         :param pulumi.Input[int] old_ip_reserve_hours: Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
-        :param pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]] param_items: Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]] param_items: Specify parameter list of database. It is valid when `param_template_id` is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        :param pulumi.Input[int] param_template_id: The ID of the parameter template.
         :param pulumi.Input[str] password: Password of `root` account.
         :param pulumi.Input[int] port: Port of CynosDB cluster.
-        :param pulumi.Input[int] prarm_template_id: The ID of the parameter template.
+        :param pulumi.Input[int] prarm_template_id: It will be deprecated. Use `param_template_id` instead. The ID of the parameter template.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project. `0` by default.
         :param pulumi.Input[Sequence[pulumi.Input['ClusterRoGroupAddrArgs']]] ro_group_addrs: Readonly addresses. Each element contains the following attributes:
@@ -619,6 +660,7 @@ class _ClusterState:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] rw_group_sgs: IDs of security group for `rw_group`.
         :param pulumi.Input[str] serverless_status: Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `serverless_status_flag`.
         :param pulumi.Input[str] serverless_status_flag: Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
+        :param pulumi.Input[str] slave_zone: Multi zone Addresses of the CynosDB Cluster.
         :param pulumi.Input[int] storage_limit: Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         :param pulumi.Input[int] storage_pay_mode: Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
         :param pulumi.Input[int] storage_used: Used storage of CynosDB cluster, unit in MB.
@@ -678,10 +720,15 @@ class _ClusterState:
             pulumi.set(__self__, "old_ip_reserve_hours", old_ip_reserve_hours)
         if param_items is not None:
             pulumi.set(__self__, "param_items", param_items)
+        if param_template_id is not None:
+            pulumi.set(__self__, "param_template_id", param_template_id)
         if password is not None:
             pulumi.set(__self__, "password", password)
         if port is not None:
             pulumi.set(__self__, "port", port)
+        if prarm_template_id is not None:
+            warnings.warn("""It will be deprecated. Use `param_template_id` instead.""", DeprecationWarning)
+            pulumi.log.warn("""prarm_template_id is deprecated: It will be deprecated. Use `param_template_id` instead.""")
         if prarm_template_id is not None:
             pulumi.set(__self__, "prarm_template_id", prarm_template_id)
         if prepaid_period is not None:
@@ -708,6 +755,8 @@ class _ClusterState:
             pulumi.set(__self__, "serverless_status", serverless_status)
         if serverless_status_flag is not None:
             pulumi.set(__self__, "serverless_status_flag", serverless_status_flag)
+        if slave_zone is not None:
+            pulumi.set(__self__, "slave_zone", slave_zone)
         if storage_limit is not None:
             pulumi.set(__self__, "storage_limit", storage_limit)
         if storage_pay_mode is not None:
@@ -857,7 +906,7 @@ class _ClusterState:
     @pulumi.getter(name="dbVersion")
     def db_version(self) -> Optional[pulumi.Input[str]]:
         """
-        Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
+        Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`, `8.0`.
         """
         return pulumi.get(self, "db_version")
 
@@ -1025,13 +1074,25 @@ class _ClusterState:
     @pulumi.getter(name="paramItems")
     def param_items(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]]]:
         """
-        Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        Specify parameter list of database. It is valid when `param_template_id` is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         """
         return pulumi.get(self, "param_items")
 
     @param_items.setter
     def param_items(self, value: Optional[pulumi.Input[Sequence[pulumi.Input['ClusterParamItemArgs']]]]):
         pulumi.set(self, "param_items", value)
+
+    @property
+    @pulumi.getter(name="paramTemplateId")
+    def param_template_id(self) -> Optional[pulumi.Input[int]]:
+        """
+        The ID of the parameter template.
+        """
+        return pulumi.get(self, "param_template_id")
+
+    @param_template_id.setter
+    def param_template_id(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "param_template_id", value)
 
     @property
     @pulumi.getter
@@ -1061,8 +1122,11 @@ class _ClusterState:
     @pulumi.getter(name="prarmTemplateId")
     def prarm_template_id(self) -> Optional[pulumi.Input[int]]:
         """
-        The ID of the parameter template.
+        It will be deprecated. Use `param_template_id` instead. The ID of the parameter template.
         """
+        warnings.warn("""It will be deprecated. Use `param_template_id` instead.""", DeprecationWarning)
+        pulumi.log.warn("""prarm_template_id is deprecated: It will be deprecated. Use `param_template_id` instead.""")
+
         return pulumi.get(self, "prarm_template_id")
 
     @prarm_template_id.setter
@@ -1214,6 +1278,18 @@ class _ClusterState:
         pulumi.set(self, "serverless_status_flag", value)
 
     @property
+    @pulumi.getter(name="slaveZone")
+    def slave_zone(self) -> Optional[pulumi.Input[str]]:
+        """
+        Multi zone Addresses of the CynosDB Cluster.
+        """
+        return pulumi.get(self, "slave_zone")
+
+    @slave_zone.setter
+    def slave_zone(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "slave_zone", value)
+
+    @property
     @pulumi.getter(name="storageLimit")
     def storage_limit(self) -> Optional[pulumi.Input[int]]:
         """
@@ -1310,6 +1386,7 @@ class Cluster(pulumi.CustomResource):
                  min_cpu: Optional[pulumi.Input[float]] = None,
                  old_ip_reserve_hours: Optional[pulumi.Input[int]] = None,
                  param_items: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]]] = None,
+                 param_template_id: Optional[pulumi.Input[int]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  prarm_template_id: Optional[pulumi.Input[int]] = None,
@@ -1318,6 +1395,7 @@ class Cluster(pulumi.CustomResource):
                  ro_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  rw_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  serverless_status_flag: Optional[pulumi.Input[str]] = None,
+                 slave_zone: Optional[pulumi.Input[str]] = None,
                  storage_limit: Optional[pulumi.Input[int]] = None,
                  storage_pay_mode: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
@@ -1327,12 +1405,159 @@ class Cluster(pulumi.CustomResource):
         """
         Provide a resource to create a CynosDB cluster.
 
+        ## Example Usage
+
+        ### Create a single availability zone NORMAL CynosDB cluster
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
+        # create cynosdb cluster
+        example_cluster = tencentcloud.cynosdb.Cluster("exampleCluster",
+            available_zone=availability_zone,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            db_mode="NORMAL",
+            db_type="MYSQL",
+            db_version="5.7",
+            port=3306,
+            storage_limit=1000,
+            cluster_name="tf-example",
+            password="cynosDB@123",
+            instance_maintain_duration=7200,
+            instance_maintain_start_time=10800,
+            instance_cpu_core=2,
+            instance_memory_size=4,
+            force_delete=False,
+            instance_maintain_weekdays=[
+                "Fri",
+                "Mon",
+                "Sat",
+                "Sun",
+                "Thu",
+                "Wed",
+                "Tue",
+            ],
+            param_items=[
+                tencentcloud.cynosdb.ClusterParamItemArgs(
+                    name="character_set_server",
+                    current_value="utf8mb4",
+                ),
+                tencentcloud.cynosdb.ClusterParamItemArgs(
+                    name="lower_case_table_names",
+                    current_value="0",
+                ),
+            ],
+            rw_group_sgs=[example_group.id],
+            ro_group_sgs=[example_group.id],
+            tags={
+                "createBy": "terraform",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Create a multiple availability zone SERVERLESS CynosDB cluster
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        slave_zone = config.get("slaveZone")
+        if slave_zone is None:
+            slave_zone = "ap-guangzhou-6"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
+        # create param template
+        example_param_template = tencentcloud.cynosdb.ParamTemplate("exampleParamTemplate",
+            db_mode="SERVERLESS",
+            engine_version="8.0",
+            template_name="tf-example",
+            template_description="terraform-template",
+            param_lists=[tencentcloud.cynosdb.ParamTemplateParamListArgs(
+                current_value="-1",
+                param_name="optimizer_trace_offset",
+            )])
+        # create cynosdb cluster
+        example_cluster = tencentcloud.cynosdb.Cluster("exampleCluster",
+            available_zone=availability_zone,
+            slave_zone=slave_zone,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            db_mode="SERVERLESS",
+            db_type="MYSQL",
+            db_version="8.0",
+            port=3306,
+            storage_limit=1000,
+            cluster_name="tf-example",
+            password="cynosDB@123",
+            instance_maintain_duration=7200,
+            instance_maintain_start_time=10800,
+            min_cpu=2,
+            max_cpu=4,
+            param_template_id=example_param_template.template_id,
+            force_delete=False,
+            instance_maintain_weekdays=[
+                "Fri",
+                "Mon",
+                "Sat",
+                "Sun",
+                "Thu",
+                "Wed",
+                "Tue",
+            ],
+            rw_group_sgs=[example_group.id],
+            ro_group_sgs=[example_group.id],
+            tags={
+                "createBy": "terraform",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
         ## Import
 
         CynosDB cluster can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Cynosdb/cluster:Cluster foo cynosdbmysql-dzj5l8gz
+        $ pulumi import tencentcloud:Cynosdb/cluster:Cluster example cynosdbmysql-dzj5l8gz
         ```
 
         :param str resource_name: The name of the resource.
@@ -1345,7 +1570,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] cluster_name: Name of CynosDB cluster.
         :param pulumi.Input[str] db_mode: Specify DB mode, only available when `db_type` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
         :param pulumi.Input[str] db_type: Type of CynosDB, and available values include `MYSQL`.
-        :param pulumi.Input[str] db_version: Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
+        :param pulumi.Input[str] db_version: Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`, `8.0`.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
         :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[int] instance_maintain_duration: Duration time for maintenance, unit in second. `3600` by default.
@@ -1355,15 +1580,17 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[float] max_cpu: Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
         :param pulumi.Input[float] min_cpu: Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
         :param pulumi.Input[int] old_ip_reserve_hours: Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]] param_items: Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]] param_items: Specify parameter list of database. It is valid when `param_template_id` is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        :param pulumi.Input[int] param_template_id: The ID of the parameter template.
         :param pulumi.Input[str] password: Password of `root` account.
         :param pulumi.Input[int] port: Port of CynosDB cluster.
-        :param pulumi.Input[int] prarm_template_id: The ID of the parameter template.
+        :param pulumi.Input[int] prarm_template_id: It will be deprecated. Use `param_template_id` instead. The ID of the parameter template.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project. `0` by default.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] ro_group_sgs: IDs of security group for `ro_group`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] rw_group_sgs: IDs of security group for `rw_group`.
         :param pulumi.Input[str] serverless_status_flag: Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
+        :param pulumi.Input[str] slave_zone: Multi zone Addresses of the CynosDB Cluster.
         :param pulumi.Input[int] storage_limit: Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         :param pulumi.Input[int] storage_pay_mode: Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
         :param pulumi.Input[str] subnet_id: ID of the subnet within this VPC.
@@ -1379,12 +1606,159 @@ class Cluster(pulumi.CustomResource):
         """
         Provide a resource to create a CynosDB cluster.
 
+        ## Example Usage
+
+        ### Create a single availability zone NORMAL CynosDB cluster
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-3"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
+        # create cynosdb cluster
+        example_cluster = tencentcloud.cynosdb.Cluster("exampleCluster",
+            available_zone=availability_zone,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            db_mode="NORMAL",
+            db_type="MYSQL",
+            db_version="5.7",
+            port=3306,
+            storage_limit=1000,
+            cluster_name="tf-example",
+            password="cynosDB@123",
+            instance_maintain_duration=7200,
+            instance_maintain_start_time=10800,
+            instance_cpu_core=2,
+            instance_memory_size=4,
+            force_delete=False,
+            instance_maintain_weekdays=[
+                "Fri",
+                "Mon",
+                "Sat",
+                "Sun",
+                "Thu",
+                "Wed",
+                "Tue",
+            ],
+            param_items=[
+                tencentcloud.cynosdb.ClusterParamItemArgs(
+                    name="character_set_server",
+                    current_value="utf8mb4",
+                ),
+                tencentcloud.cynosdb.ClusterParamItemArgs(
+                    name="lower_case_table_names",
+                    current_value="0",
+                ),
+            ],
+            rw_group_sgs=[example_group.id],
+            ro_group_sgs=[example_group.id],
+            tags={
+                "createBy": "terraform",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Create a multiple availability zone SERVERLESS CynosDB cluster
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        slave_zone = config.get("slaveZone")
+        if slave_zone is None:
+            slave_zone = "ap-guangzhou-6"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "example": "test",
+            })
+        # create param template
+        example_param_template = tencentcloud.cynosdb.ParamTemplate("exampleParamTemplate",
+            db_mode="SERVERLESS",
+            engine_version="8.0",
+            template_name="tf-example",
+            template_description="terraform-template",
+            param_lists=[tencentcloud.cynosdb.ParamTemplateParamListArgs(
+                current_value="-1",
+                param_name="optimizer_trace_offset",
+            )])
+        # create cynosdb cluster
+        example_cluster = tencentcloud.cynosdb.Cluster("exampleCluster",
+            available_zone=availability_zone,
+            slave_zone=slave_zone,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            db_mode="SERVERLESS",
+            db_type="MYSQL",
+            db_version="8.0",
+            port=3306,
+            storage_limit=1000,
+            cluster_name="tf-example",
+            password="cynosDB@123",
+            instance_maintain_duration=7200,
+            instance_maintain_start_time=10800,
+            min_cpu=2,
+            max_cpu=4,
+            param_template_id=example_param_template.template_id,
+            force_delete=False,
+            instance_maintain_weekdays=[
+                "Fri",
+                "Mon",
+                "Sat",
+                "Sun",
+                "Thu",
+                "Wed",
+                "Tue",
+            ],
+            rw_group_sgs=[example_group.id],
+            ro_group_sgs=[example_group.id],
+            tags={
+                "createBy": "terraform",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
         ## Import
 
         CynosDB cluster can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Cynosdb/cluster:Cluster foo cynosdbmysql-dzj5l8gz
+        $ pulumi import tencentcloud:Cynosdb/cluster:Cluster example cynosdbmysql-dzj5l8gz
         ```
 
         :param str resource_name: The name of the resource.
@@ -1421,6 +1795,7 @@ class Cluster(pulumi.CustomResource):
                  min_cpu: Optional[pulumi.Input[float]] = None,
                  old_ip_reserve_hours: Optional[pulumi.Input[int]] = None,
                  param_items: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]]] = None,
+                 param_template_id: Optional[pulumi.Input[int]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  port: Optional[pulumi.Input[int]] = None,
                  prarm_template_id: Optional[pulumi.Input[int]] = None,
@@ -1429,6 +1804,7 @@ class Cluster(pulumi.CustomResource):
                  ro_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  rw_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  serverless_status_flag: Optional[pulumi.Input[str]] = None,
+                 slave_zone: Optional[pulumi.Input[str]] = None,
                  storage_limit: Optional[pulumi.Input[int]] = None,
                  storage_pay_mode: Optional[pulumi.Input[int]] = None,
                  subnet_id: Optional[pulumi.Input[str]] = None,
@@ -1470,6 +1846,7 @@ class Cluster(pulumi.CustomResource):
             __props__.__dict__["min_cpu"] = min_cpu
             __props__.__dict__["old_ip_reserve_hours"] = old_ip_reserve_hours
             __props__.__dict__["param_items"] = param_items
+            __props__.__dict__["param_template_id"] = param_template_id
             if password is None and not opts.urn:
                 raise TypeError("Missing required property 'password'")
             __props__.__dict__["password"] = None if password is None else pulumi.Output.secret(password)
@@ -1480,6 +1857,7 @@ class Cluster(pulumi.CustomResource):
             __props__.__dict__["ro_group_sgs"] = ro_group_sgs
             __props__.__dict__["rw_group_sgs"] = rw_group_sgs
             __props__.__dict__["serverless_status_flag"] = serverless_status_flag
+            __props__.__dict__["slave_zone"] = slave_zone
             __props__.__dict__["storage_limit"] = storage_limit
             __props__.__dict__["storage_pay_mode"] = storage_pay_mode
             if subnet_id is None and not opts.urn:
@@ -1542,6 +1920,7 @@ class Cluster(pulumi.CustomResource):
             min_cpu: Optional[pulumi.Input[float]] = None,
             old_ip_reserve_hours: Optional[pulumi.Input[int]] = None,
             param_items: Optional[pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]]] = None,
+            param_template_id: Optional[pulumi.Input[int]] = None,
             password: Optional[pulumi.Input[str]] = None,
             port: Optional[pulumi.Input[int]] = None,
             prarm_template_id: Optional[pulumi.Input[int]] = None,
@@ -1557,6 +1936,7 @@ class Cluster(pulumi.CustomResource):
             rw_group_sgs: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             serverless_status: Optional[pulumi.Input[str]] = None,
             serverless_status_flag: Optional[pulumi.Input[str]] = None,
+            slave_zone: Optional[pulumi.Input[str]] = None,
             storage_limit: Optional[pulumi.Input[int]] = None,
             storage_pay_mode: Optional[pulumi.Input[int]] = None,
             storage_used: Optional[pulumi.Input[int]] = None,
@@ -1581,7 +1961,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[str] create_time: Creation time of the CynosDB cluster.
         :param pulumi.Input[str] db_mode: Specify DB mode, only available when `db_type` is `MYSQL`. Values: `NORMAL` (Default), `SERVERLESS`.
         :param pulumi.Input[str] db_type: Type of CynosDB, and available values include `MYSQL`.
-        :param pulumi.Input[str] db_version: Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
+        :param pulumi.Input[str] db_version: Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`, `8.0`.
         :param pulumi.Input[bool] force_delete: Indicate whether to delete cluster instance directly or not. Default is false. If set true, the cluster and its `All RELATED INSTANCES` will be deleted instead of staying recycle bin. Note: works for both `PREPAID` and `POSTPAID_BY_HOUR` cluster.
         :param pulumi.Input[int] instance_cpu_core: The number of CPU cores of read-write type instance in the CynosDB cluster. Required while creating normal cluster. Note: modification of this field will take effect immediately, if want to upgrade on maintenance window, please upgrade from console.
         :param pulumi.Input[str] instance_id: ID of instance.
@@ -1595,10 +1975,11 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[float] max_cpu: Maximum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
         :param pulumi.Input[float] min_cpu: Minimum CPU core count, required while `db_mode` is `SERVERLESS`, request DescribeServerlessInstanceSpecs for more reference.
         :param pulumi.Input[int] old_ip_reserve_hours: Recycling time of the old address, must be filled in when modifying the vpcRecycling time of the old address, must be filled in when modifying the vpc.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]] param_items: Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterParamItemArgs']]]] param_items: Specify parameter list of database. It is valid when `param_template_id` is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        :param pulumi.Input[int] param_template_id: The ID of the parameter template.
         :param pulumi.Input[str] password: Password of `root` account.
         :param pulumi.Input[int] port: Port of CynosDB cluster.
-        :param pulumi.Input[int] prarm_template_id: The ID of the parameter template.
+        :param pulumi.Input[int] prarm_template_id: It will be deprecated. Use `param_template_id` instead. The ID of the parameter template.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[int] project_id: ID of the project. `0` by default.
         :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ClusterRoGroupAddrArgs']]]] ro_group_addrs: Readonly addresses. Each element contains the following attributes:
@@ -1611,6 +1992,7 @@ class Cluster(pulumi.CustomResource):
         :param pulumi.Input[Sequence[pulumi.Input[str]]] rw_group_sgs: IDs of security group for `rw_group`.
         :param pulumi.Input[str] serverless_status: Serverless cluster status. NOTE: This is a readonly attribute, to modify, please set `serverless_status_flag`.
         :param pulumi.Input[str] serverless_status_flag: Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
+        :param pulumi.Input[str] slave_zone: Multi zone Addresses of the CynosDB Cluster.
         :param pulumi.Input[int] storage_limit: Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
         :param pulumi.Input[int] storage_pay_mode: Cluster storage billing mode, pay-as-you-go: `0`-yearly/monthly: `1`-The default is pay-as-you-go. When the DbType is MYSQL, when the cluster computing billing mode is post-paid (including DbMode is SERVERLESS), the storage billing mode can only be billing by volume; rollback and cloning do not support yearly subscriptions monthly storage.
         :param pulumi.Input[int] storage_used: Used storage of CynosDB cluster, unit in MB.
@@ -1648,6 +2030,7 @@ class Cluster(pulumi.CustomResource):
         __props__.__dict__["min_cpu"] = min_cpu
         __props__.__dict__["old_ip_reserve_hours"] = old_ip_reserve_hours
         __props__.__dict__["param_items"] = param_items
+        __props__.__dict__["param_template_id"] = param_template_id
         __props__.__dict__["password"] = password
         __props__.__dict__["port"] = port
         __props__.__dict__["prarm_template_id"] = prarm_template_id
@@ -1663,6 +2046,7 @@ class Cluster(pulumi.CustomResource):
         __props__.__dict__["rw_group_sgs"] = rw_group_sgs
         __props__.__dict__["serverless_status"] = serverless_status
         __props__.__dict__["serverless_status_flag"] = serverless_status_flag
+        __props__.__dict__["slave_zone"] = slave_zone
         __props__.__dict__["storage_limit"] = storage_limit
         __props__.__dict__["storage_pay_mode"] = storage_pay_mode
         __props__.__dict__["storage_used"] = storage_used
@@ -1763,7 +2147,7 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="dbVersion")
     def db_version(self) -> pulumi.Output[str]:
         """
-        Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
+        Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`, `8.0`.
         """
         return pulumi.get(self, "db_version")
 
@@ -1875,9 +2259,17 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="paramItems")
     def param_items(self) -> pulumi.Output[Optional[Sequence['outputs.ClusterParamItem']]]:
         """
-        Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        Specify parameter list of database. It is valid when `param_template_id` is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         """
         return pulumi.get(self, "param_items")
+
+    @property
+    @pulumi.getter(name="paramTemplateId")
+    def param_template_id(self) -> pulumi.Output[int]:
+        """
+        The ID of the parameter template.
+        """
+        return pulumi.get(self, "param_template_id")
 
     @property
     @pulumi.getter
@@ -1899,8 +2291,11 @@ class Cluster(pulumi.CustomResource):
     @pulumi.getter(name="prarmTemplateId")
     def prarm_template_id(self) -> pulumi.Output[int]:
         """
-        The ID of the parameter template.
+        It will be deprecated. Use `param_template_id` instead. The ID of the parameter template.
         """
+        warnings.warn("""It will be deprecated. Use `param_template_id` instead.""", DeprecationWarning)
+        pulumi.log.warn("""prarm_template_id is deprecated: It will be deprecated. Use `param_template_id` instead.""")
+
         return pulumi.get(self, "prarm_template_id")
 
     @property
@@ -1998,6 +2393,14 @@ class Cluster(pulumi.CustomResource):
         Specify whether to pause or resume serverless cluster. values: `resume`, `pause`.
         """
         return pulumi.get(self, "serverless_status_flag")
+
+    @property
+    @pulumi.getter(name="slaveZone")
+    def slave_zone(self) -> pulumi.Output[Optional[str]]:
+        """
+        Multi zone Addresses of the CynosDB Cluster.
+        """
+        return pulumi.get(self, "slave_zone")
 
     @property
     @pulumi.getter(name="storageLimit")

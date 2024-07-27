@@ -26,12 +26,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var main = new Tencentcloud.Ccn.Instance("main", new()
+    ///     var example = new Tencentcloud.Ccn.Instance("example", new()
     ///     {
     ///         BandwidthLimitType = "INTER_REGION_LIMIT",
     ///         ChargeType = "PREPAID",
-    ///         Description = "ci-temp-test-ccn-des",
+    ///         Description = "desc.",
     ///         Qos = "AG",
+    ///         RouteEcmpFlag = true,
+    ///         RouteOverlapFlag = true,
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "terraform" },
+    ///         },
     ///     });
     /// 
     /// });
@@ -49,12 +55,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var main = new Tencentcloud.Ccn.Instance("main", new()
+    ///     var example = new Tencentcloud.Ccn.Instance("example", new()
     ///     {
     ///         BandwidthLimitType = "OUTER_REGION_LIMIT",
     ///         ChargeType = "POSTPAID",
-    ///         Description = "ci-temp-test-ccn-des",
+    ///         Description = "desc.",
     ///         Qos = "AG",
+    ///         RouteEcmpFlag = false,
+    ///         RouteOverlapFlag = false,
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "terraform" },
+    ///         },
     ///     });
     /// 
     /// });
@@ -72,11 +84,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var main = new Tencentcloud.Ccn.Instance("main", new()
+    ///     var example = new Tencentcloud.Ccn.Instance("example", new()
     ///     {
     ///         BandwidthLimitType = "INTER_REGION_LIMIT",
     ///         ChargeType = "POSTPAID",
-    ///         Description = "ci-temp-test-ccn-des",
+    ///         Description = "desc.",
     ///         Qos = "AG",
     ///     });
     /// 
@@ -89,7 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// Ccn instance can be imported, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Ccn/instance:Instance test ccn-id
+    /// $ pulumi import tencentcloud:Ccn/instance:Instance example ccn-al70jo89
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ccn/instance:Instance")]
@@ -136,6 +148,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// </summary>
         [Output("qos")]
         public Output<string?> Qos { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable the equivalent routing function. `true`: enabled, `false`: disabled.
+        /// </summary>
+        [Output("routeEcmpFlag")]
+        public Output<bool?> RouteEcmpFlag { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable the routing overlap function. `true`: enabled, `false`: disabled.
+        /// </summary>
+        [Output("routeOverlapFlag")]
+        public Output<bool?> RouteOverlapFlag { get; private set; } = null!;
 
         /// <summary>
         /// States of instance. Valid values: `ISOLATED`(arrears) and `AVAILABLE`.
@@ -226,6 +250,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         [Input("qos")]
         public Input<string>? Qos { get; set; }
 
+        /// <summary>
+        /// Whether to enable the equivalent routing function. `true`: enabled, `false`: disabled.
+        /// </summary>
+        [Input("routeEcmpFlag")]
+        public Input<bool>? RouteEcmpFlag { get; set; }
+
+        /// <summary>
+        /// Whether to enable the routing overlap function. `true`: enabled, `false`: disabled.
+        /// </summary>
+        [Input("routeOverlapFlag")]
+        public Input<bool>? RouteOverlapFlag { get; set; }
+
         [Input("tags")]
         private InputMap<object>? _tags;
 
@@ -287,6 +323,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// </summary>
         [Input("qos")]
         public Input<string>? Qos { get; set; }
+
+        /// <summary>
+        /// Whether to enable the equivalent routing function. `true`: enabled, `false`: disabled.
+        /// </summary>
+        [Input("routeEcmpFlag")]
+        public Input<bool>? RouteEcmpFlag { get; set; }
+
+        /// <summary>
+        /// Whether to enable the routing overlap function. `true`: enabled, `false`: disabled.
+        /// </summary>
+        [Input("routeOverlapFlag")]
+        public Input<bool>? RouteOverlapFlag { get; set; }
 
         /// <summary>
         /// States of instance. Valid values: `ISOLATED`(arrears) and `AVAILABLE`.
