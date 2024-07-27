@@ -7635,6 +7635,414 @@ func (o ScheduledSqlDstResourcePtrOutput) TopicId() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type TopicExtends struct {
+	// Log topic authentication free configuration information.
+	AnonymousAccess *TopicExtendsAnonymousAccess `pulumi:"anonymousAccess"`
+}
+
+// TopicExtendsInput is an input type that accepts TopicExtendsArgs and TopicExtendsOutput values.
+// You can construct a concrete instance of `TopicExtendsInput` via:
+//
+//	TopicExtendsArgs{...}
+type TopicExtendsInput interface {
+	pulumi.Input
+
+	ToTopicExtendsOutput() TopicExtendsOutput
+	ToTopicExtendsOutputWithContext(context.Context) TopicExtendsOutput
+}
+
+type TopicExtendsArgs struct {
+	// Log topic authentication free configuration information.
+	AnonymousAccess TopicExtendsAnonymousAccessPtrInput `pulumi:"anonymousAccess"`
+}
+
+func (TopicExtendsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TopicExtends)(nil)).Elem()
+}
+
+func (i TopicExtendsArgs) ToTopicExtendsOutput() TopicExtendsOutput {
+	return i.ToTopicExtendsOutputWithContext(context.Background())
+}
+
+func (i TopicExtendsArgs) ToTopicExtendsOutputWithContext(ctx context.Context) TopicExtendsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TopicExtendsOutput)
+}
+
+func (i TopicExtendsArgs) ToTopicExtendsPtrOutput() TopicExtendsPtrOutput {
+	return i.ToTopicExtendsPtrOutputWithContext(context.Background())
+}
+
+func (i TopicExtendsArgs) ToTopicExtendsPtrOutputWithContext(ctx context.Context) TopicExtendsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TopicExtendsOutput).ToTopicExtendsPtrOutputWithContext(ctx)
+}
+
+// TopicExtendsPtrInput is an input type that accepts TopicExtendsArgs, TopicExtendsPtr and TopicExtendsPtrOutput values.
+// You can construct a concrete instance of `TopicExtendsPtrInput` via:
+//
+//	        TopicExtendsArgs{...}
+//
+//	or:
+//
+//	        nil
+type TopicExtendsPtrInput interface {
+	pulumi.Input
+
+	ToTopicExtendsPtrOutput() TopicExtendsPtrOutput
+	ToTopicExtendsPtrOutputWithContext(context.Context) TopicExtendsPtrOutput
+}
+
+type topicExtendsPtrType TopicExtendsArgs
+
+func TopicExtendsPtr(v *TopicExtendsArgs) TopicExtendsPtrInput {
+	return (*topicExtendsPtrType)(v)
+}
+
+func (*topicExtendsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TopicExtends)(nil)).Elem()
+}
+
+func (i *topicExtendsPtrType) ToTopicExtendsPtrOutput() TopicExtendsPtrOutput {
+	return i.ToTopicExtendsPtrOutputWithContext(context.Background())
+}
+
+func (i *topicExtendsPtrType) ToTopicExtendsPtrOutputWithContext(ctx context.Context) TopicExtendsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TopicExtendsPtrOutput)
+}
+
+type TopicExtendsOutput struct{ *pulumi.OutputState }
+
+func (TopicExtendsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TopicExtends)(nil)).Elem()
+}
+
+func (o TopicExtendsOutput) ToTopicExtendsOutput() TopicExtendsOutput {
+	return o
+}
+
+func (o TopicExtendsOutput) ToTopicExtendsOutputWithContext(ctx context.Context) TopicExtendsOutput {
+	return o
+}
+
+func (o TopicExtendsOutput) ToTopicExtendsPtrOutput() TopicExtendsPtrOutput {
+	return o.ToTopicExtendsPtrOutputWithContext(context.Background())
+}
+
+func (o TopicExtendsOutput) ToTopicExtendsPtrOutputWithContext(ctx context.Context) TopicExtendsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TopicExtends) *TopicExtends {
+		return &v
+	}).(TopicExtendsPtrOutput)
+}
+
+// Log topic authentication free configuration information.
+func (o TopicExtendsOutput) AnonymousAccess() TopicExtendsAnonymousAccessPtrOutput {
+	return o.ApplyT(func(v TopicExtends) *TopicExtendsAnonymousAccess { return v.AnonymousAccess }).(TopicExtendsAnonymousAccessPtrOutput)
+}
+
+type TopicExtendsPtrOutput struct{ *pulumi.OutputState }
+
+func (TopicExtendsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TopicExtends)(nil)).Elem()
+}
+
+func (o TopicExtendsPtrOutput) ToTopicExtendsPtrOutput() TopicExtendsPtrOutput {
+	return o
+}
+
+func (o TopicExtendsPtrOutput) ToTopicExtendsPtrOutputWithContext(ctx context.Context) TopicExtendsPtrOutput {
+	return o
+}
+
+func (o TopicExtendsPtrOutput) Elem() TopicExtendsOutput {
+	return o.ApplyT(func(v *TopicExtends) TopicExtends {
+		if v != nil {
+			return *v
+		}
+		var ret TopicExtends
+		return ret
+	}).(TopicExtendsOutput)
+}
+
+// Log topic authentication free configuration information.
+func (o TopicExtendsPtrOutput) AnonymousAccess() TopicExtendsAnonymousAccessPtrOutput {
+	return o.ApplyT(func(v *TopicExtends) *TopicExtendsAnonymousAccess {
+		if v == nil {
+			return nil
+		}
+		return v.AnonymousAccess
+	}).(TopicExtendsAnonymousAccessPtrOutput)
+}
+
+type TopicExtendsAnonymousAccess struct {
+	// Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+	Conditions []TopicExtendsAnonymousAccessCondition `pulumi:"conditions"`
+	// Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+	Operations []string `pulumi:"operations"`
+}
+
+// TopicExtendsAnonymousAccessInput is an input type that accepts TopicExtendsAnonymousAccessArgs and TopicExtendsAnonymousAccessOutput values.
+// You can construct a concrete instance of `TopicExtendsAnonymousAccessInput` via:
+//
+//	TopicExtendsAnonymousAccessArgs{...}
+type TopicExtendsAnonymousAccessInput interface {
+	pulumi.Input
+
+	ToTopicExtendsAnonymousAccessOutput() TopicExtendsAnonymousAccessOutput
+	ToTopicExtendsAnonymousAccessOutputWithContext(context.Context) TopicExtendsAnonymousAccessOutput
+}
+
+type TopicExtendsAnonymousAccessArgs struct {
+	// Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+	Conditions TopicExtendsAnonymousAccessConditionArrayInput `pulumi:"conditions"`
+	// Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+	Operations pulumi.StringArrayInput `pulumi:"operations"`
+}
+
+func (TopicExtendsAnonymousAccessArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TopicExtendsAnonymousAccess)(nil)).Elem()
+}
+
+func (i TopicExtendsAnonymousAccessArgs) ToTopicExtendsAnonymousAccessOutput() TopicExtendsAnonymousAccessOutput {
+	return i.ToTopicExtendsAnonymousAccessOutputWithContext(context.Background())
+}
+
+func (i TopicExtendsAnonymousAccessArgs) ToTopicExtendsAnonymousAccessOutputWithContext(ctx context.Context) TopicExtendsAnonymousAccessOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TopicExtendsAnonymousAccessOutput)
+}
+
+func (i TopicExtendsAnonymousAccessArgs) ToTopicExtendsAnonymousAccessPtrOutput() TopicExtendsAnonymousAccessPtrOutput {
+	return i.ToTopicExtendsAnonymousAccessPtrOutputWithContext(context.Background())
+}
+
+func (i TopicExtendsAnonymousAccessArgs) ToTopicExtendsAnonymousAccessPtrOutputWithContext(ctx context.Context) TopicExtendsAnonymousAccessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TopicExtendsAnonymousAccessOutput).ToTopicExtendsAnonymousAccessPtrOutputWithContext(ctx)
+}
+
+// TopicExtendsAnonymousAccessPtrInput is an input type that accepts TopicExtendsAnonymousAccessArgs, TopicExtendsAnonymousAccessPtr and TopicExtendsAnonymousAccessPtrOutput values.
+// You can construct a concrete instance of `TopicExtendsAnonymousAccessPtrInput` via:
+//
+//	        TopicExtendsAnonymousAccessArgs{...}
+//
+//	or:
+//
+//	        nil
+type TopicExtendsAnonymousAccessPtrInput interface {
+	pulumi.Input
+
+	ToTopicExtendsAnonymousAccessPtrOutput() TopicExtendsAnonymousAccessPtrOutput
+	ToTopicExtendsAnonymousAccessPtrOutputWithContext(context.Context) TopicExtendsAnonymousAccessPtrOutput
+}
+
+type topicExtendsAnonymousAccessPtrType TopicExtendsAnonymousAccessArgs
+
+func TopicExtendsAnonymousAccessPtr(v *TopicExtendsAnonymousAccessArgs) TopicExtendsAnonymousAccessPtrInput {
+	return (*topicExtendsAnonymousAccessPtrType)(v)
+}
+
+func (*topicExtendsAnonymousAccessPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**TopicExtendsAnonymousAccess)(nil)).Elem()
+}
+
+func (i *topicExtendsAnonymousAccessPtrType) ToTopicExtendsAnonymousAccessPtrOutput() TopicExtendsAnonymousAccessPtrOutput {
+	return i.ToTopicExtendsAnonymousAccessPtrOutputWithContext(context.Background())
+}
+
+func (i *topicExtendsAnonymousAccessPtrType) ToTopicExtendsAnonymousAccessPtrOutputWithContext(ctx context.Context) TopicExtendsAnonymousAccessPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TopicExtendsAnonymousAccessPtrOutput)
+}
+
+type TopicExtendsAnonymousAccessOutput struct{ *pulumi.OutputState }
+
+func (TopicExtendsAnonymousAccessOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TopicExtendsAnonymousAccess)(nil)).Elem()
+}
+
+func (o TopicExtendsAnonymousAccessOutput) ToTopicExtendsAnonymousAccessOutput() TopicExtendsAnonymousAccessOutput {
+	return o
+}
+
+func (o TopicExtendsAnonymousAccessOutput) ToTopicExtendsAnonymousAccessOutputWithContext(ctx context.Context) TopicExtendsAnonymousAccessOutput {
+	return o
+}
+
+func (o TopicExtendsAnonymousAccessOutput) ToTopicExtendsAnonymousAccessPtrOutput() TopicExtendsAnonymousAccessPtrOutput {
+	return o.ToTopicExtendsAnonymousAccessPtrOutputWithContext(context.Background())
+}
+
+func (o TopicExtendsAnonymousAccessOutput) ToTopicExtendsAnonymousAccessPtrOutputWithContext(ctx context.Context) TopicExtendsAnonymousAccessPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v TopicExtendsAnonymousAccess) *TopicExtendsAnonymousAccess {
+		return &v
+	}).(TopicExtendsAnonymousAccessPtrOutput)
+}
+
+// Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+func (o TopicExtendsAnonymousAccessOutput) Conditions() TopicExtendsAnonymousAccessConditionArrayOutput {
+	return o.ApplyT(func(v TopicExtendsAnonymousAccess) []TopicExtendsAnonymousAccessCondition { return v.Conditions }).(TopicExtendsAnonymousAccessConditionArrayOutput)
+}
+
+// Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+func (o TopicExtendsAnonymousAccessOutput) Operations() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v TopicExtendsAnonymousAccess) []string { return v.Operations }).(pulumi.StringArrayOutput)
+}
+
+type TopicExtendsAnonymousAccessPtrOutput struct{ *pulumi.OutputState }
+
+func (TopicExtendsAnonymousAccessPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**TopicExtendsAnonymousAccess)(nil)).Elem()
+}
+
+func (o TopicExtendsAnonymousAccessPtrOutput) ToTopicExtendsAnonymousAccessPtrOutput() TopicExtendsAnonymousAccessPtrOutput {
+	return o
+}
+
+func (o TopicExtendsAnonymousAccessPtrOutput) ToTopicExtendsAnonymousAccessPtrOutputWithContext(ctx context.Context) TopicExtendsAnonymousAccessPtrOutput {
+	return o
+}
+
+func (o TopicExtendsAnonymousAccessPtrOutput) Elem() TopicExtendsAnonymousAccessOutput {
+	return o.ApplyT(func(v *TopicExtendsAnonymousAccess) TopicExtendsAnonymousAccess {
+		if v != nil {
+			return *v
+		}
+		var ret TopicExtendsAnonymousAccess
+		return ret
+	}).(TopicExtendsAnonymousAccessOutput)
+}
+
+// Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+func (o TopicExtendsAnonymousAccessPtrOutput) Conditions() TopicExtendsAnonymousAccessConditionArrayOutput {
+	return o.ApplyT(func(v *TopicExtendsAnonymousAccess) []TopicExtendsAnonymousAccessCondition {
+		if v == nil {
+			return nil
+		}
+		return v.Conditions
+	}).(TopicExtendsAnonymousAccessConditionArrayOutput)
+}
+
+// Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+func (o TopicExtendsAnonymousAccessPtrOutput) Operations() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *TopicExtendsAnonymousAccess) []string {
+		if v == nil {
+			return nil
+		}
+		return v.Operations
+	}).(pulumi.StringArrayOutput)
+}
+
+type TopicExtendsAnonymousAccessCondition struct {
+	// Condition attribute, currently only VpcID is supported.
+	Attributes *string `pulumi:"attributes"`
+	// The value of the corresponding conditional attribute.
+	ConditionValue *string `pulumi:"conditionValue"`
+	// Conditional rule, 1: equal, 2: not equal.
+	Rule *int `pulumi:"rule"`
+}
+
+// TopicExtendsAnonymousAccessConditionInput is an input type that accepts TopicExtendsAnonymousAccessConditionArgs and TopicExtendsAnonymousAccessConditionOutput values.
+// You can construct a concrete instance of `TopicExtendsAnonymousAccessConditionInput` via:
+//
+//	TopicExtendsAnonymousAccessConditionArgs{...}
+type TopicExtendsAnonymousAccessConditionInput interface {
+	pulumi.Input
+
+	ToTopicExtendsAnonymousAccessConditionOutput() TopicExtendsAnonymousAccessConditionOutput
+	ToTopicExtendsAnonymousAccessConditionOutputWithContext(context.Context) TopicExtendsAnonymousAccessConditionOutput
+}
+
+type TopicExtendsAnonymousAccessConditionArgs struct {
+	// Condition attribute, currently only VpcID is supported.
+	Attributes pulumi.StringPtrInput `pulumi:"attributes"`
+	// The value of the corresponding conditional attribute.
+	ConditionValue pulumi.StringPtrInput `pulumi:"conditionValue"`
+	// Conditional rule, 1: equal, 2: not equal.
+	Rule pulumi.IntPtrInput `pulumi:"rule"`
+}
+
+func (TopicExtendsAnonymousAccessConditionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*TopicExtendsAnonymousAccessCondition)(nil)).Elem()
+}
+
+func (i TopicExtendsAnonymousAccessConditionArgs) ToTopicExtendsAnonymousAccessConditionOutput() TopicExtendsAnonymousAccessConditionOutput {
+	return i.ToTopicExtendsAnonymousAccessConditionOutputWithContext(context.Background())
+}
+
+func (i TopicExtendsAnonymousAccessConditionArgs) ToTopicExtendsAnonymousAccessConditionOutputWithContext(ctx context.Context) TopicExtendsAnonymousAccessConditionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TopicExtendsAnonymousAccessConditionOutput)
+}
+
+// TopicExtendsAnonymousAccessConditionArrayInput is an input type that accepts TopicExtendsAnonymousAccessConditionArray and TopicExtendsAnonymousAccessConditionArrayOutput values.
+// You can construct a concrete instance of `TopicExtendsAnonymousAccessConditionArrayInput` via:
+//
+//	TopicExtendsAnonymousAccessConditionArray{ TopicExtendsAnonymousAccessConditionArgs{...} }
+type TopicExtendsAnonymousAccessConditionArrayInput interface {
+	pulumi.Input
+
+	ToTopicExtendsAnonymousAccessConditionArrayOutput() TopicExtendsAnonymousAccessConditionArrayOutput
+	ToTopicExtendsAnonymousAccessConditionArrayOutputWithContext(context.Context) TopicExtendsAnonymousAccessConditionArrayOutput
+}
+
+type TopicExtendsAnonymousAccessConditionArray []TopicExtendsAnonymousAccessConditionInput
+
+func (TopicExtendsAnonymousAccessConditionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TopicExtendsAnonymousAccessCondition)(nil)).Elem()
+}
+
+func (i TopicExtendsAnonymousAccessConditionArray) ToTopicExtendsAnonymousAccessConditionArrayOutput() TopicExtendsAnonymousAccessConditionArrayOutput {
+	return i.ToTopicExtendsAnonymousAccessConditionArrayOutputWithContext(context.Background())
+}
+
+func (i TopicExtendsAnonymousAccessConditionArray) ToTopicExtendsAnonymousAccessConditionArrayOutputWithContext(ctx context.Context) TopicExtendsAnonymousAccessConditionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(TopicExtendsAnonymousAccessConditionArrayOutput)
+}
+
+type TopicExtendsAnonymousAccessConditionOutput struct{ *pulumi.OutputState }
+
+func (TopicExtendsAnonymousAccessConditionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*TopicExtendsAnonymousAccessCondition)(nil)).Elem()
+}
+
+func (o TopicExtendsAnonymousAccessConditionOutput) ToTopicExtendsAnonymousAccessConditionOutput() TopicExtendsAnonymousAccessConditionOutput {
+	return o
+}
+
+func (o TopicExtendsAnonymousAccessConditionOutput) ToTopicExtendsAnonymousAccessConditionOutputWithContext(ctx context.Context) TopicExtendsAnonymousAccessConditionOutput {
+	return o
+}
+
+// Condition attribute, currently only VpcID is supported.
+func (o TopicExtendsAnonymousAccessConditionOutput) Attributes() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TopicExtendsAnonymousAccessCondition) *string { return v.Attributes }).(pulumi.StringPtrOutput)
+}
+
+// The value of the corresponding conditional attribute.
+func (o TopicExtendsAnonymousAccessConditionOutput) ConditionValue() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v TopicExtendsAnonymousAccessCondition) *string { return v.ConditionValue }).(pulumi.StringPtrOutput)
+}
+
+// Conditional rule, 1: equal, 2: not equal.
+func (o TopicExtendsAnonymousAccessConditionOutput) Rule() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v TopicExtendsAnonymousAccessCondition) *int { return v.Rule }).(pulumi.IntPtrOutput)
+}
+
+type TopicExtendsAnonymousAccessConditionArrayOutput struct{ *pulumi.OutputState }
+
+func (TopicExtendsAnonymousAccessConditionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]TopicExtendsAnonymousAccessCondition)(nil)).Elem()
+}
+
+func (o TopicExtendsAnonymousAccessConditionArrayOutput) ToTopicExtendsAnonymousAccessConditionArrayOutput() TopicExtendsAnonymousAccessConditionArrayOutput {
+	return o
+}
+
+func (o TopicExtendsAnonymousAccessConditionArrayOutput) ToTopicExtendsAnonymousAccessConditionArrayOutputWithContext(ctx context.Context) TopicExtendsAnonymousAccessConditionArrayOutput {
+	return o
+}
+
+func (o TopicExtendsAnonymousAccessConditionArrayOutput) Index(i pulumi.IntInput) TopicExtendsAnonymousAccessConditionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) TopicExtendsAnonymousAccessCondition {
+		return vs[0].([]TopicExtendsAnonymousAccessCondition)[vs[1].(int)]
+	}).(TopicExtendsAnonymousAccessConditionOutput)
+}
+
 type GetMachineGroupConfigsConfig struct {
 	// scrape config id.
 	ConfigId string `pulumi:"configId"`
@@ -8810,6 +9218,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*MachineGroupMachineGroupTypePtrInput)(nil)).Elem(), MachineGroupMachineGroupTypeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScheduledSqlDstResourceInput)(nil)).Elem(), ScheduledSqlDstResourceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScheduledSqlDstResourcePtrInput)(nil)).Elem(), ScheduledSqlDstResourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TopicExtendsInput)(nil)).Elem(), TopicExtendsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TopicExtendsPtrInput)(nil)).Elem(), TopicExtendsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TopicExtendsAnonymousAccessInput)(nil)).Elem(), TopicExtendsAnonymousAccessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TopicExtendsAnonymousAccessPtrInput)(nil)).Elem(), TopicExtendsAnonymousAccessArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TopicExtendsAnonymousAccessConditionInput)(nil)).Elem(), TopicExtendsAnonymousAccessConditionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*TopicExtendsAnonymousAccessConditionArrayInput)(nil)).Elem(), TopicExtendsAnonymousAccessConditionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigInput)(nil)).Elem(), GetMachineGroupConfigsConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigArrayInput)(nil)).Elem(), GetMachineGroupConfigsConfigArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMachineGroupConfigsConfigExcludePathInput)(nil)).Elem(), GetMachineGroupConfigsConfigExcludePathArgs{})
@@ -8910,6 +9324,12 @@ func init() {
 	pulumi.RegisterOutputType(MachineGroupMachineGroupTypePtrOutput{})
 	pulumi.RegisterOutputType(ScheduledSqlDstResourceOutput{})
 	pulumi.RegisterOutputType(ScheduledSqlDstResourcePtrOutput{})
+	pulumi.RegisterOutputType(TopicExtendsOutput{})
+	pulumi.RegisterOutputType(TopicExtendsPtrOutput{})
+	pulumi.RegisterOutputType(TopicExtendsAnonymousAccessOutput{})
+	pulumi.RegisterOutputType(TopicExtendsAnonymousAccessPtrOutput{})
+	pulumi.RegisterOutputType(TopicExtendsAnonymousAccessConditionOutput{})
+	pulumi.RegisterOutputType(TopicExtendsAnonymousAccessConditionArrayOutput{})
 	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigOutput{})
 	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigArrayOutput{})
 	pulumi.RegisterOutputType(GetMachineGroupConfigsConfigExcludePathOutput{})

@@ -39,6 +39,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
             set => _assumeRole.Set(value);
         }
 
+        private static readonly __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithSaml?> _assumeRoleWithSaml = new __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithSaml?>(() => __config.GetObject<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithSaml>("assumeRoleWithSaml"));
+        public static TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithSaml? AssumeRoleWithSaml
+        {
+            get => _assumeRoleWithSaml.Get();
+            set => _assumeRoleWithSaml.Set(value);
+        }
+
+        private static readonly __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithWebIdentity?> _assumeRoleWithWebIdentity = new __Value<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithWebIdentity?>(() => __config.GetObject<TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithWebIdentity>("assumeRoleWithWebIdentity"));
+        public static TencentCloudIAC.PulumiPackage.Tencentcloud.Config.Types.AssumeRoleWithWebIdentity? AssumeRoleWithWebIdentity
+        {
+            get => _assumeRoleWithWebIdentity.Get();
+            set => _assumeRoleWithWebIdentity.Set(value);
+        }
+
         private static readonly __Value<string?> _domain = new __Value<string?>(() => __config.Get("domain"));
         /// <summary>
         /// The root domain of the API request, Default is `tencentcloudapi.com`.
@@ -147,6 +161,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
             /// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
             /// </summary>
                 public string SessionName { get; set; }
+            }
+
+             public class AssumeRoleWithSaml
+             {
+            /// <summary>
+            /// Player Access Description Name. It can be sourced from the `PROVIDER_ASSUME_ROLE_PRINCIPAL_ARN`.
+            /// </summary>
+                public string PrincipalArn { get; set; }
+            /// <summary>
+            /// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+            /// </summary>
+                public string RoleArn { get; set; }
+            /// <summary>
+            /// SAML assertion information encoded in base64. It can be sourced from the `PROVIDER_ASSUME_ROLE_SAML_ASSERTION`.
+            /// </summary>
+                public string SamlAssertion { get; set; }
+            /// <summary>
+            /// The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+            /// </summary>
+                public int SessionDuration { get; set; }
+            /// <summary>
+            /// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+            /// </summary>
+                public string SessionName { get; set; }
+            }
+
+             public class AssumeRoleWithWebIdentity
+             {
+            /// <summary>
+            /// The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+            /// </summary>
+                public string RoleArn { get; set; }
+            /// <summary>
+            /// The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+            /// </summary>
+                public int SessionDuration { get; set; }
+            /// <summary>
+            /// The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+            /// </summary>
+                public string SessionName { get; set; }
+            /// <summary>
+            /// OIDC token issued by IdP. It can be sourced from the `PROVIDER_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
+            /// </summary>
+                public string WebIdentityToken { get; set; }
             }
         }
     }

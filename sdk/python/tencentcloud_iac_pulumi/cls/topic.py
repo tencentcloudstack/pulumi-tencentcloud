@@ -8,6 +8,8 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
+from ._inputs import *
 
 __all__ = ['TopicArgs', 'Topic']
 
@@ -18,7 +20,9 @@ class TopicArgs:
                  topic_name: pulumi.Input[str],
                  auto_split: Optional[pulumi.Input[bool]] = None,
                  describes: Optional[pulumi.Input[str]] = None,
+                 extends: Optional[pulumi.Input['TopicExtendsArgs']] = None,
                  hot_period: Optional[pulumi.Input[int]] = None,
+                 is_web_tracking: Optional[pulumi.Input[bool]] = None,
                  max_split_partitions: Optional[pulumi.Input[int]] = None,
                  partition_count: Optional[pulumi.Input[int]] = None,
                  period: Optional[pulumi.Input[int]] = None,
@@ -30,7 +34,9 @@ class TopicArgs:
         :param pulumi.Input[str] topic_name: Log topic name.
         :param pulumi.Input[bool] auto_split: Whether to enable automatic split. Default value: true.
         :param pulumi.Input[str] describes: Log Topic Description.
+        :param pulumi.Input['TopicExtendsArgs'] extends: Log Subject Extension Information.
         :param pulumi.Input[int] hot_period: 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+        :param pulumi.Input[bool] is_web_tracking: No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
         :param pulumi.Input[int] max_split_partitions: Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
         :param pulumi.Input[int] partition_count: Number of log topic partitions. Default value: 1. Maximum value: 10.
         :param pulumi.Input[int] period: Lifecycle in days. Value range: 1~366. Default value: 30.
@@ -43,8 +49,12 @@ class TopicArgs:
             pulumi.set(__self__, "auto_split", auto_split)
         if describes is not None:
             pulumi.set(__self__, "describes", describes)
+        if extends is not None:
+            pulumi.set(__self__, "extends", extends)
         if hot_period is not None:
             pulumi.set(__self__, "hot_period", hot_period)
+        if is_web_tracking is not None:
+            pulumi.set(__self__, "is_web_tracking", is_web_tracking)
         if max_split_partitions is not None:
             pulumi.set(__self__, "max_split_partitions", max_split_partitions)
         if partition_count is not None:
@@ -105,6 +115,18 @@ class TopicArgs:
         pulumi.set(self, "describes", value)
 
     @property
+    @pulumi.getter
+    def extends(self) -> Optional[pulumi.Input['TopicExtendsArgs']]:
+        """
+        Log Subject Extension Information.
+        """
+        return pulumi.get(self, "extends")
+
+    @extends.setter
+    def extends(self, value: Optional[pulumi.Input['TopicExtendsArgs']]):
+        pulumi.set(self, "extends", value)
+
+    @property
     @pulumi.getter(name="hotPeriod")
     def hot_period(self) -> Optional[pulumi.Input[int]]:
         """
@@ -115,6 +137,18 @@ class TopicArgs:
     @hot_period.setter
     def hot_period(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "hot_period", value)
+
+    @property
+    @pulumi.getter(name="isWebTracking")
+    def is_web_tracking(self) -> Optional[pulumi.Input[bool]]:
+        """
+        No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+        """
+        return pulumi.get(self, "is_web_tracking")
+
+    @is_web_tracking.setter
+    def is_web_tracking(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_web_tracking", value)
 
     @property
     @pulumi.getter(name="maxSplitPartitions")
@@ -182,7 +216,9 @@ class _TopicState:
     def __init__(__self__, *,
                  auto_split: Optional[pulumi.Input[bool]] = None,
                  describes: Optional[pulumi.Input[str]] = None,
+                 extends: Optional[pulumi.Input['TopicExtendsArgs']] = None,
                  hot_period: Optional[pulumi.Input[int]] = None,
+                 is_web_tracking: Optional[pulumi.Input[bool]] = None,
                  logset_id: Optional[pulumi.Input[str]] = None,
                  max_split_partitions: Optional[pulumi.Input[int]] = None,
                  partition_count: Optional[pulumi.Input[int]] = None,
@@ -194,7 +230,9 @@ class _TopicState:
         Input properties used for looking up and filtering Topic resources.
         :param pulumi.Input[bool] auto_split: Whether to enable automatic split. Default value: true.
         :param pulumi.Input[str] describes: Log Topic Description.
+        :param pulumi.Input['TopicExtendsArgs'] extends: Log Subject Extension Information.
         :param pulumi.Input[int] hot_period: 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+        :param pulumi.Input[bool] is_web_tracking: No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
         :param pulumi.Input[str] logset_id: Logset ID.
         :param pulumi.Input[int] max_split_partitions: Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
         :param pulumi.Input[int] partition_count: Number of log topic partitions. Default value: 1. Maximum value: 10.
@@ -207,8 +245,12 @@ class _TopicState:
             pulumi.set(__self__, "auto_split", auto_split)
         if describes is not None:
             pulumi.set(__self__, "describes", describes)
+        if extends is not None:
+            pulumi.set(__self__, "extends", extends)
         if hot_period is not None:
             pulumi.set(__self__, "hot_period", hot_period)
+        if is_web_tracking is not None:
+            pulumi.set(__self__, "is_web_tracking", is_web_tracking)
         if logset_id is not None:
             pulumi.set(__self__, "logset_id", logset_id)
         if max_split_partitions is not None:
@@ -249,6 +291,18 @@ class _TopicState:
         pulumi.set(self, "describes", value)
 
     @property
+    @pulumi.getter
+    def extends(self) -> Optional[pulumi.Input['TopicExtendsArgs']]:
+        """
+        Log Subject Extension Information.
+        """
+        return pulumi.get(self, "extends")
+
+    @extends.setter
+    def extends(self, value: Optional[pulumi.Input['TopicExtendsArgs']]):
+        pulumi.set(self, "extends", value)
+
+    @property
     @pulumi.getter(name="hotPeriod")
     def hot_period(self) -> Optional[pulumi.Input[int]]:
         """
@@ -259,6 +313,18 @@ class _TopicState:
     @hot_period.setter
     def hot_period(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "hot_period", value)
+
+    @property
+    @pulumi.getter(name="isWebTracking")
+    def is_web_tracking(self) -> Optional[pulumi.Input[bool]]:
+        """
+        No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+        """
+        return pulumi.get(self, "is_web_tracking")
+
+    @is_web_tracking.setter
+    def is_web_tracking(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_web_tracking", value)
 
     @property
     @pulumi.getter(name="logsetId")
@@ -352,7 +418,9 @@ class Topic(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  auto_split: Optional[pulumi.Input[bool]] = None,
                  describes: Optional[pulumi.Input[str]] = None,
+                 extends: Optional[pulumi.Input[pulumi.InputType['TopicExtendsArgs']]] = None,
                  hot_period: Optional[pulumi.Input[int]] = None,
+                 is_web_tracking: Optional[pulumi.Input[bool]] = None,
                  logset_id: Optional[pulumi.Input[str]] = None,
                  max_split_partitions: Optional[pulumi.Input[int]] = None,
                  partition_count: Optional[pulumi.Input[int]] = None,
@@ -366,6 +434,8 @@ class Topic(pulumi.CustomResource):
 
         ## Example Usage
 
+        ### Create a standard cls topic
+
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
@@ -374,7 +444,7 @@ class Topic(pulumi.CustomResource):
         example_logset = tencentcloud.cls.Logset("exampleLogset",
             logset_name="tf_example",
             tags={
-                "demo": "test",
+                "tagKey": "tagValue",
             })
         example_topic = tencentcloud.cls.Topic("exampleTopic",
             topic_name="tf_example",
@@ -387,7 +457,49 @@ class Topic(pulumi.CustomResource):
             describes="Test Demo.",
             hot_period=10,
             tags={
-                "test": "test",
+                "tagKey": "tagValue",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Create a cls topic with web tracking
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example_logset = tencentcloud.cls.Logset("exampleLogset",
+            logset_name="tf_example",
+            tags={
+                "tagKey": "tagValue",
+            })
+        example_topic = tencentcloud.cls.Topic("exampleTopic",
+            topic_name="tf_example",
+            logset_id=example_logset.id,
+            auto_split=False,
+            max_split_partitions=20,
+            partition_count=1,
+            period=30,
+            storage_type="hot",
+            describes="Test Demo.",
+            hot_period=10,
+            is_web_tracking=True,
+            extends=tencentcloud.cls.TopicExtendsArgs(
+                anonymous_access=tencentcloud.cls.TopicExtendsAnonymousAccessArgs(
+                    operations=[
+                        "trackLog",
+                        "realtimeProducer",
+                    ],
+                    conditions=[tencentcloud.cls.TopicExtendsAnonymousAccessConditionArgs(
+                        attributes="VpcID",
+                        rule=1,
+                        condition_value="vpc-ahr3xajx",
+                    )],
+                ),
+            ),
+            tags={
+                "tagKey": "tagValue",
             })
         ```
         <!--End PulumiCodeChooser -->
@@ -404,7 +516,9 @@ class Topic(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] auto_split: Whether to enable automatic split. Default value: true.
         :param pulumi.Input[str] describes: Log Topic Description.
+        :param pulumi.Input[pulumi.InputType['TopicExtendsArgs']] extends: Log Subject Extension Information.
         :param pulumi.Input[int] hot_period: 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+        :param pulumi.Input[bool] is_web_tracking: No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
         :param pulumi.Input[str] logset_id: Logset ID.
         :param pulumi.Input[int] max_split_partitions: Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
         :param pulumi.Input[int] partition_count: Number of log topic partitions. Default value: 1. Maximum value: 10.
@@ -424,6 +538,8 @@ class Topic(pulumi.CustomResource):
 
         ## Example Usage
 
+        ### Create a standard cls topic
+
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
@@ -432,7 +548,7 @@ class Topic(pulumi.CustomResource):
         example_logset = tencentcloud.cls.Logset("exampleLogset",
             logset_name="tf_example",
             tags={
-                "demo": "test",
+                "tagKey": "tagValue",
             })
         example_topic = tencentcloud.cls.Topic("exampleTopic",
             topic_name="tf_example",
@@ -445,7 +561,49 @@ class Topic(pulumi.CustomResource):
             describes="Test Demo.",
             hot_period=10,
             tags={
-                "test": "test",
+                "tagKey": "tagValue",
+            })
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Create a cls topic with web tracking
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example_logset = tencentcloud.cls.Logset("exampleLogset",
+            logset_name="tf_example",
+            tags={
+                "tagKey": "tagValue",
+            })
+        example_topic = tencentcloud.cls.Topic("exampleTopic",
+            topic_name="tf_example",
+            logset_id=example_logset.id,
+            auto_split=False,
+            max_split_partitions=20,
+            partition_count=1,
+            period=30,
+            storage_type="hot",
+            describes="Test Demo.",
+            hot_period=10,
+            is_web_tracking=True,
+            extends=tencentcloud.cls.TopicExtendsArgs(
+                anonymous_access=tencentcloud.cls.TopicExtendsAnonymousAccessArgs(
+                    operations=[
+                        "trackLog",
+                        "realtimeProducer",
+                    ],
+                    conditions=[tencentcloud.cls.TopicExtendsAnonymousAccessConditionArgs(
+                        attributes="VpcID",
+                        rule=1,
+                        condition_value="vpc-ahr3xajx",
+                    )],
+                ),
+            ),
+            tags={
+                "tagKey": "tagValue",
             })
         ```
         <!--End PulumiCodeChooser -->
@@ -475,7 +633,9 @@ class Topic(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  auto_split: Optional[pulumi.Input[bool]] = None,
                  describes: Optional[pulumi.Input[str]] = None,
+                 extends: Optional[pulumi.Input[pulumi.InputType['TopicExtendsArgs']]] = None,
                  hot_period: Optional[pulumi.Input[int]] = None,
+                 is_web_tracking: Optional[pulumi.Input[bool]] = None,
                  logset_id: Optional[pulumi.Input[str]] = None,
                  max_split_partitions: Optional[pulumi.Input[int]] = None,
                  partition_count: Optional[pulumi.Input[int]] = None,
@@ -494,7 +654,9 @@ class Topic(pulumi.CustomResource):
 
             __props__.__dict__["auto_split"] = auto_split
             __props__.__dict__["describes"] = describes
+            __props__.__dict__["extends"] = extends
             __props__.__dict__["hot_period"] = hot_period
+            __props__.__dict__["is_web_tracking"] = is_web_tracking
             if logset_id is None and not opts.urn:
                 raise TypeError("Missing required property 'logset_id'")
             __props__.__dict__["logset_id"] = logset_id
@@ -518,7 +680,9 @@ class Topic(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             auto_split: Optional[pulumi.Input[bool]] = None,
             describes: Optional[pulumi.Input[str]] = None,
+            extends: Optional[pulumi.Input[pulumi.InputType['TopicExtendsArgs']]] = None,
             hot_period: Optional[pulumi.Input[int]] = None,
+            is_web_tracking: Optional[pulumi.Input[bool]] = None,
             logset_id: Optional[pulumi.Input[str]] = None,
             max_split_partitions: Optional[pulumi.Input[int]] = None,
             partition_count: Optional[pulumi.Input[int]] = None,
@@ -535,7 +699,9 @@ class Topic(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] auto_split: Whether to enable automatic split. Default value: true.
         :param pulumi.Input[str] describes: Log Topic Description.
+        :param pulumi.Input[pulumi.InputType['TopicExtendsArgs']] extends: Log Subject Extension Information.
         :param pulumi.Input[int] hot_period: 0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
+        :param pulumi.Input[bool] is_web_tracking: No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
         :param pulumi.Input[str] logset_id: Logset ID.
         :param pulumi.Input[int] max_split_partitions: Maximum number of partitions to split into for this topic if automatic split is enabled. Default value: 50.
         :param pulumi.Input[int] partition_count: Number of log topic partitions. Default value: 1. Maximum value: 10.
@@ -550,7 +716,9 @@ class Topic(pulumi.CustomResource):
 
         __props__.__dict__["auto_split"] = auto_split
         __props__.__dict__["describes"] = describes
+        __props__.__dict__["extends"] = extends
         __props__.__dict__["hot_period"] = hot_period
+        __props__.__dict__["is_web_tracking"] = is_web_tracking
         __props__.__dict__["logset_id"] = logset_id
         __props__.__dict__["max_split_partitions"] = max_split_partitions
         __props__.__dict__["partition_count"] = partition_count
@@ -577,12 +745,28 @@ class Topic(pulumi.CustomResource):
         return pulumi.get(self, "describes")
 
     @property
+    @pulumi.getter
+    def extends(self) -> pulumi.Output[Optional['outputs.TopicExtends']]:
+        """
+        Log Subject Extension Information.
+        """
+        return pulumi.get(self, "extends")
+
+    @property
     @pulumi.getter(name="hotPeriod")
     def hot_period(self) -> pulumi.Output[int]:
         """
         0: Turn off log sinking. Non 0: The number of days of standard storage after enabling log settling. HotPeriod needs to be greater than or equal to 7 and less than Period. Only effective when StorageType is hot.
         """
         return pulumi.get(self, "hot_period")
+
+    @property
+    @pulumi.getter(name="isWebTracking")
+    def is_web_tracking(self) -> pulumi.Output[bool]:
+        """
+        No authentication switch. False: closed; True: Enable. The default is false. After activation, anonymous access to the log topic will be supported for specified operations.
+        """
+        return pulumi.get(self, "is_web_tracking")
 
     @property
     @pulumi.getter(name="logsetId")

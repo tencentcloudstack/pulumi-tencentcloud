@@ -16,6 +16,8 @@ import (
 //
 // ## Example Usage
 //
+// ### Only Attachment instance
+//
 // <!--Start PulumiCodeChooser -->
 // ```go
 // package main
@@ -25,6 +27,7 @@ import (
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 //
 // )
@@ -36,47 +39,148 @@ import (
 //			if param := cfg.Get("region"); param != "" {
 //				region = param
 //			}
-//			otheruin := "123353"
-//			if param := cfg.Get("otheruin"); param != "" {
-//				otheruin = param
+//			availabilityZone := "ap-guangzhou-4"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
 //			}
-//			otherccn := "ccn-151ssaga"
-//			if param := cfg.Get("otherccn"); param != "" {
-//				otherccn = param
+//			otherUin := "100031344528"
+//			if param := cfg.Get("otherUin"); param != "" {
+//				otherUin = param
 //			}
+//			otherCcn := "ccn-qhgojahx"
+//			if param := cfg.Get("otherCcn"); param != "" {
+//				otherCcn = param
+//			}
+//			// create vpc
 //			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
-//				CidrBlock: pulumi.String("10.0.0.0/16"),
-//				DnsServers: pulumi.StringArray{
-//					pulumi.String("119.29.29.29"),
-//					pulumi.String("8.8.8.8"),
+//				CidrBlock: pulumi.String("172.16.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create subnet
+//			_, err = Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("172.16.0.0/24"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create ccn
+//			example, err := Ccn.NewInstance(ctx, "example", &Ccn.InstanceArgs{
+//				Description:        pulumi.String("desc."),
+//				Qos:                pulumi.String("AG"),
+//				ChargeType:         pulumi.String("PREPAID"),
+//				BandwidthLimitType: pulumi.String("INTER_REGION_LIMIT"),
+//				Tags: pulumi.Map{
+//					"createBy": pulumi.Any("terraform"),
 //				},
-//				IsMulticast: pulumi.Bool(false),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			main, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
-//				Description: pulumi.String("ci-temp-test-ccn-des"),
-//				Qos:         pulumi.String("AG"),
-//			})
-//			if err != nil {
-//				return err
-//			}
+//			// attachment instance
 //			_, err = Ccn.NewAttachment(ctx, "attachment", &Ccn.AttachmentArgs{
-//				CcnId:          main.ID(),
-//				InstanceType:   pulumi.String("VPC"),
+//				CcnId:          example.ID(),
 //				InstanceId:     vpc.ID(),
+//				InstanceType:   pulumi.String("VPC"),
 //				InstanceRegion: pulumi.String(region),
 //			})
 //			if err != nil {
 //				return err
 //			}
+//			// attachment other instance
 //			_, err = Ccn.NewAttachment(ctx, "otherAccount", &Ccn.AttachmentArgs{
-//				CcnId:          pulumi.String(otherccn),
-//				InstanceType:   pulumi.String("VPC"),
+//				CcnId:          pulumi.String(otherCcn),
 //				InstanceId:     vpc.ID(),
+//				InstanceType:   pulumi.String("VPC"),
 //				InstanceRegion: pulumi.String(region),
-//				CcnUin:         pulumi.String(otheruin),
+//				CcnUin:         pulumi.String(otherUin),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Attachment instance & route table
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Ccn"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			region := "ap-guangzhou"
+//			if param := cfg.Get("region"); param != "" {
+//				region = param
+//			}
+//			availabilityZone := "ap-guangzhou-4"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			// create vpc
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("172.16.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create subnet
+//			_, err = Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("172.16.0.0/24"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create ccn
+//			exampleInstance, err := Ccn.NewInstance(ctx, "exampleInstance", &Ccn.InstanceArgs{
+//				Description:        pulumi.String("desc."),
+//				Qos:                pulumi.String("AG"),
+//				ChargeType:         pulumi.String("PREPAID"),
+//				BandwidthLimitType: pulumi.String("INTER_REGION_LIMIT"),
+//				Tags: pulumi.Map{
+//					"createBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create ccn route table
+//			exampleRouteTable, err := Ccn.NewRouteTable(ctx, "exampleRouteTable", &Ccn.RouteTableArgs{
+//				CcnId:       exampleInstance.ID(),
+//				Description: pulumi.String("desc."),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// attachment instance & route table
+//			_, err = Ccn.NewAttachment(ctx, "attachment", &Ccn.AttachmentArgs{
+//				CcnId:          exampleInstance.ID(),
+//				InstanceId:     vpc.ID(),
+//				InstanceType:   pulumi.String("VPC"),
+//				InstanceRegion: pulumi.String(region),
+//				RouteTableId:   exampleRouteTable.ID(),
 //			})
 //			if err != nil {
 //				return err
@@ -108,6 +212,8 @@ type Attachment struct {
 	InstanceType pulumi.StringOutput `pulumi:"instanceType"`
 	// Route id list.
 	RouteIds pulumi.StringArrayOutput `pulumi:"routeIds"`
+	// Ccn instance route table ID.
+	RouteTableId pulumi.StringOutput `pulumi:"routeTableId"`
 	// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
 	State pulumi.StringOutput `pulumi:"state"`
 }
@@ -172,6 +278,8 @@ type attachmentState struct {
 	InstanceType *string `pulumi:"instanceType"`
 	// Route id list.
 	RouteIds []string `pulumi:"routeIds"`
+	// Ccn instance route table ID.
+	RouteTableId *string `pulumi:"routeTableId"`
 	// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
 	State *string `pulumi:"state"`
 }
@@ -195,6 +303,8 @@ type AttachmentState struct {
 	InstanceType pulumi.StringPtrInput
 	// Route id list.
 	RouteIds pulumi.StringArrayInput
+	// Ccn instance route table ID.
+	RouteTableId pulumi.StringPtrInput
 	// States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
 	State pulumi.StringPtrInput
 }
@@ -216,6 +326,8 @@ type attachmentArgs struct {
 	InstanceRegion string `pulumi:"instanceRegion"`
 	// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
 	InstanceType string `pulumi:"instanceType"`
+	// Ccn instance route table ID.
+	RouteTableId *string `pulumi:"routeTableId"`
 }
 
 // The set of arguments for constructing a Attachment resource.
@@ -232,6 +344,8 @@ type AttachmentArgs struct {
 	InstanceRegion pulumi.StringInput
 	// Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
 	InstanceType pulumi.StringInput
+	// Ccn instance route table ID.
+	RouteTableId pulumi.StringPtrInput
 }
 
 func (AttachmentArgs) ElementType() reflect.Type {
@@ -364,6 +478,11 @@ func (o AttachmentOutput) InstanceType() pulumi.StringOutput {
 // Route id list.
 func (o AttachmentOutput) RouteIds() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *Attachment) pulumi.StringArrayOutput { return v.RouteIds }).(pulumi.StringArrayOutput)
+}
+
+// Ccn instance route table ID.
+func (o AttachmentOutput) RouteTableId() pulumi.StringOutput {
+	return o.ApplyT(func(v *Attachment) pulumi.StringOutput { return v.RouteTableId }).(pulumi.StringOutput)
 }
 
 // States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.

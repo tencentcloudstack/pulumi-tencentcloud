@@ -11,12 +11,14 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Query CBS by storage set by zone
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const storages = tencentcloud.Cbs.getStoragesSet({
+ * const example = tencentcloud.Cbs.getStoragesSet({
  *     availabilityZone: "ap-guangzhou-3",
  * });
  * ```
@@ -29,6 +31,7 @@ export function getStoragesSet(args?: GetStoragesSetArgs, opts?: pulumi.InvokeOp
     return pulumi.runtime.invoke("tencentcloud:Cbs/getStoragesSet:getStoragesSet", {
         "availabilityZone": args.availabilityZone,
         "chargeTypes": args.chargeTypes,
+        "dedicatedClusterId": args.dedicatedClusterId,
         "instanceIps": args.instanceIps,
         "instanceNames": args.instanceNames,
         "portable": args.portable,
@@ -53,9 +56,13 @@ export interface GetStoragesSetArgs {
      */
     availabilityZone?: string;
     /**
-     * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+     * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
      */
     chargeTypes?: string[];
+    /**
+     * Exclusive cluster id.
+     */
+    dedicatedClusterId?: string;
     /**
      * List filter by attached instance public or private IPs.
      */
@@ -119,6 +126,10 @@ export interface GetStoragesSetResult {
      */
     readonly chargeTypes?: string[];
     /**
+     * Exclusive cluster id.
+     */
+    readonly dedicatedClusterId?: string;
+    /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
@@ -159,12 +170,14 @@ export interface GetStoragesSetResult {
  *
  * ## Example Usage
  *
+ * ### Query CBS by storage set by zone
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const storages = tencentcloud.Cbs.getStoragesSet({
+ * const example = tencentcloud.Cbs.getStoragesSet({
  *     availabilityZone: "ap-guangzhou-3",
  * });
  * ```
@@ -183,9 +196,13 @@ export interface GetStoragesSetOutputArgs {
      */
     availabilityZone?: pulumi.Input<string>;
     /**
-     * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+     * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
      */
     chargeTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Exclusive cluster id.
+     */
+    dedicatedClusterId?: pulumi.Input<string>;
     /**
      * List filter by attached instance public or private IPs.
      */

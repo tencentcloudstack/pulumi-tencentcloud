@@ -18572,6 +18572,819 @@ func (o GetStatisticDataDataPointValueArrayOutput) Index(i pulumi.IntInput) GetS
 	}).(GetStatisticDataDataPointValueOutput)
 }
 
+type GetTmpInstancesInstanceSet struct {
+	// Alert rule limit.
+	AlertRuleLimit int `pulumi:"alertRuleLimit"`
+	// Prometheus http api root address.
+	ApiRootPath string `pulumi:"apiRootPath"`
+	// Token required for data writing.
+	AuthToken string `pulumi:"authToken"`
+	// Automatic renewal flag.
+	// - 0: No automatic renewal;
+	// - 1: Enable automatic renewal;
+	// - 2: Automatic renewal is prohibited;
+	// - -1: Invalid.
+	AutoRenewFlag int `pulumi:"autoRenewFlag"`
+	// Charge status.
+	// - 1: Normal;
+	// - 2: Expires;
+	// - 3: Destruction;
+	// - 4: Allocation;
+	// - 5: Allocation failed.
+	ChargeStatus int `pulumi:"chargeStatus"`
+	// Created_at.
+	CreatedAt string `pulumi:"createdAt"`
+	// Data retention time.
+	DataRetentionTime int `pulumi:"dataRetentionTime"`
+	// Whether to enable grafana.
+	// - 0: closed;
+	// - 1: open.
+	EnableGrafana int `pulumi:"enableGrafana"`
+	// Expires for purchased instances.
+	ExpireTime string `pulumi:"expireTime"`
+	// Binding grafana instance id.
+	GrafanaInstanceId string `pulumi:"grafanaInstanceId"`
+	// Grafana IP whitelist list.
+	GrafanaIpWhiteList string `pulumi:"grafanaIpWhiteList"`
+	// Grafana status.
+	// - 1: Creating;
+	// - 2: In operation;
+	// - 3: Abnormal;
+	// - 4: Rebooting;
+	// - 5: Destruction;
+	// - 6: Shutdown;
+	// - 7: Deleted.
+	GrafanaStatus int `pulumi:"grafanaStatus"`
+	// Grafana panel url.
+	GrafanaUrl string `pulumi:"grafanaUrl"`
+	// Authorization information for the instance.
+	Grants []GetTmpInstancesInstanceSetGrant `pulumi:"grants"`
+	// Filter according to instance charge type.
+	// - 2: Prepaid;
+	// - 3: Postpaid by hour.
+	InstanceChargeType int `pulumi:"instanceChargeType"`
+	// Instance id.
+	InstanceId string `pulumi:"instanceId"`
+	// Filter according to instance name.
+	InstanceName string `pulumi:"instanceName"`
+	// Filter according to instance status.
+	// - 1: Creating;
+	// - 2: In operation;
+	// - 3: Abnormal;
+	// - 4: Reconstruction;
+	// - 5: Destruction;
+	// - 6: Stopped taking;
+	// - 8: Suspension of service due to arrears;
+	// - 9: Service has been suspended due to arrears.
+	InstanceStatus int `pulumi:"instanceStatus"`
+	// Filter according to ipv4 address.
+	Ipv4Address string `pulumi:"ipv4Address"`
+	// Whether it is about to expire.
+	// - 0: No;
+	// - 1: Expiring soon.
+	IsNearExpire int `pulumi:"isNearExpire"`
+	// Migration status.
+	// - 0: Not in migration;
+	//   +- 1: Migrating, original instance;
+	//   +- 2: Migrating, target instance.
+	MigrationType int `pulumi:"migrationType"`
+	// Proxy address.
+	ProxyAddress string `pulumi:"proxyAddress"`
+	// Pre-aggregation rule limitations.
+	RecordingRuleLimit int `pulumi:"recordingRuleLimit"`
+	// Region id.
+	RegionId int `pulumi:"regionId"`
+	// Address of prometheus remote write.
+	RemoteWrite string `pulumi:"remoteWrite"`
+	// Specification name.
+	SpecName string `pulumi:"specName"`
+	// Subnet id.
+	SubnetId string `pulumi:"subnetId"`
+	// List of tags associated with the instance.
+	TagSpecifications []GetTmpInstancesInstanceSetTagSpecification `pulumi:"tagSpecifications"`
+	// VPC id.
+	VpcId string `pulumi:"vpcId"`
+	// Zone.
+	Zone string `pulumi:"zone"`
+}
+
+// GetTmpInstancesInstanceSetInput is an input type that accepts GetTmpInstancesInstanceSetArgs and GetTmpInstancesInstanceSetOutput values.
+// You can construct a concrete instance of `GetTmpInstancesInstanceSetInput` via:
+//
+//	GetTmpInstancesInstanceSetArgs{...}
+type GetTmpInstancesInstanceSetInput interface {
+	pulumi.Input
+
+	ToGetTmpInstancesInstanceSetOutput() GetTmpInstancesInstanceSetOutput
+	ToGetTmpInstancesInstanceSetOutputWithContext(context.Context) GetTmpInstancesInstanceSetOutput
+}
+
+type GetTmpInstancesInstanceSetArgs struct {
+	// Alert rule limit.
+	AlertRuleLimit pulumi.IntInput `pulumi:"alertRuleLimit"`
+	// Prometheus http api root address.
+	ApiRootPath pulumi.StringInput `pulumi:"apiRootPath"`
+	// Token required for data writing.
+	AuthToken pulumi.StringInput `pulumi:"authToken"`
+	// Automatic renewal flag.
+	// - 0: No automatic renewal;
+	// - 1: Enable automatic renewal;
+	// - 2: Automatic renewal is prohibited;
+	// - -1: Invalid.
+	AutoRenewFlag pulumi.IntInput `pulumi:"autoRenewFlag"`
+	// Charge status.
+	// - 1: Normal;
+	// - 2: Expires;
+	// - 3: Destruction;
+	// - 4: Allocation;
+	// - 5: Allocation failed.
+	ChargeStatus pulumi.IntInput `pulumi:"chargeStatus"`
+	// Created_at.
+	CreatedAt pulumi.StringInput `pulumi:"createdAt"`
+	// Data retention time.
+	DataRetentionTime pulumi.IntInput `pulumi:"dataRetentionTime"`
+	// Whether to enable grafana.
+	// - 0: closed;
+	// - 1: open.
+	EnableGrafana pulumi.IntInput `pulumi:"enableGrafana"`
+	// Expires for purchased instances.
+	ExpireTime pulumi.StringInput `pulumi:"expireTime"`
+	// Binding grafana instance id.
+	GrafanaInstanceId pulumi.StringInput `pulumi:"grafanaInstanceId"`
+	// Grafana IP whitelist list.
+	GrafanaIpWhiteList pulumi.StringInput `pulumi:"grafanaIpWhiteList"`
+	// Grafana status.
+	// - 1: Creating;
+	// - 2: In operation;
+	// - 3: Abnormal;
+	// - 4: Rebooting;
+	// - 5: Destruction;
+	// - 6: Shutdown;
+	// - 7: Deleted.
+	GrafanaStatus pulumi.IntInput `pulumi:"grafanaStatus"`
+	// Grafana panel url.
+	GrafanaUrl pulumi.StringInput `pulumi:"grafanaUrl"`
+	// Authorization information for the instance.
+	Grants GetTmpInstancesInstanceSetGrantArrayInput `pulumi:"grants"`
+	// Filter according to instance charge type.
+	// - 2: Prepaid;
+	// - 3: Postpaid by hour.
+	InstanceChargeType pulumi.IntInput `pulumi:"instanceChargeType"`
+	// Instance id.
+	InstanceId pulumi.StringInput `pulumi:"instanceId"`
+	// Filter according to instance name.
+	InstanceName pulumi.StringInput `pulumi:"instanceName"`
+	// Filter according to instance status.
+	// - 1: Creating;
+	// - 2: In operation;
+	// - 3: Abnormal;
+	// - 4: Reconstruction;
+	// - 5: Destruction;
+	// - 6: Stopped taking;
+	// - 8: Suspension of service due to arrears;
+	// - 9: Service has been suspended due to arrears.
+	InstanceStatus pulumi.IntInput `pulumi:"instanceStatus"`
+	// Filter according to ipv4 address.
+	Ipv4Address pulumi.StringInput `pulumi:"ipv4Address"`
+	// Whether it is about to expire.
+	// - 0: No;
+	// - 1: Expiring soon.
+	IsNearExpire pulumi.IntInput `pulumi:"isNearExpire"`
+	// Migration status.
+	// - 0: Not in migration;
+	//   +- 1: Migrating, original instance;
+	//   +- 2: Migrating, target instance.
+	MigrationType pulumi.IntInput `pulumi:"migrationType"`
+	// Proxy address.
+	ProxyAddress pulumi.StringInput `pulumi:"proxyAddress"`
+	// Pre-aggregation rule limitations.
+	RecordingRuleLimit pulumi.IntInput `pulumi:"recordingRuleLimit"`
+	// Region id.
+	RegionId pulumi.IntInput `pulumi:"regionId"`
+	// Address of prometheus remote write.
+	RemoteWrite pulumi.StringInput `pulumi:"remoteWrite"`
+	// Specification name.
+	SpecName pulumi.StringInput `pulumi:"specName"`
+	// Subnet id.
+	SubnetId pulumi.StringInput `pulumi:"subnetId"`
+	// List of tags associated with the instance.
+	TagSpecifications GetTmpInstancesInstanceSetTagSpecificationArrayInput `pulumi:"tagSpecifications"`
+	// VPC id.
+	VpcId pulumi.StringInput `pulumi:"vpcId"`
+	// Zone.
+	Zone pulumi.StringInput `pulumi:"zone"`
+}
+
+func (GetTmpInstancesInstanceSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTmpInstancesInstanceSet)(nil)).Elem()
+}
+
+func (i GetTmpInstancesInstanceSetArgs) ToGetTmpInstancesInstanceSetOutput() GetTmpInstancesInstanceSetOutput {
+	return i.ToGetTmpInstancesInstanceSetOutputWithContext(context.Background())
+}
+
+func (i GetTmpInstancesInstanceSetArgs) ToGetTmpInstancesInstanceSetOutputWithContext(ctx context.Context) GetTmpInstancesInstanceSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTmpInstancesInstanceSetOutput)
+}
+
+// GetTmpInstancesInstanceSetArrayInput is an input type that accepts GetTmpInstancesInstanceSetArray and GetTmpInstancesInstanceSetArrayOutput values.
+// You can construct a concrete instance of `GetTmpInstancesInstanceSetArrayInput` via:
+//
+//	GetTmpInstancesInstanceSetArray{ GetTmpInstancesInstanceSetArgs{...} }
+type GetTmpInstancesInstanceSetArrayInput interface {
+	pulumi.Input
+
+	ToGetTmpInstancesInstanceSetArrayOutput() GetTmpInstancesInstanceSetArrayOutput
+	ToGetTmpInstancesInstanceSetArrayOutputWithContext(context.Context) GetTmpInstancesInstanceSetArrayOutput
+}
+
+type GetTmpInstancesInstanceSetArray []GetTmpInstancesInstanceSetInput
+
+func (GetTmpInstancesInstanceSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTmpInstancesInstanceSet)(nil)).Elem()
+}
+
+func (i GetTmpInstancesInstanceSetArray) ToGetTmpInstancesInstanceSetArrayOutput() GetTmpInstancesInstanceSetArrayOutput {
+	return i.ToGetTmpInstancesInstanceSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetTmpInstancesInstanceSetArray) ToGetTmpInstancesInstanceSetArrayOutputWithContext(ctx context.Context) GetTmpInstancesInstanceSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTmpInstancesInstanceSetArrayOutput)
+}
+
+type GetTmpInstancesInstanceSetOutput struct{ *pulumi.OutputState }
+
+func (GetTmpInstancesInstanceSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTmpInstancesInstanceSet)(nil)).Elem()
+}
+
+func (o GetTmpInstancesInstanceSetOutput) ToGetTmpInstancesInstanceSetOutput() GetTmpInstancesInstanceSetOutput {
+	return o
+}
+
+func (o GetTmpInstancesInstanceSetOutput) ToGetTmpInstancesInstanceSetOutputWithContext(ctx context.Context) GetTmpInstancesInstanceSetOutput {
+	return o
+}
+
+// Alert rule limit.
+func (o GetTmpInstancesInstanceSetOutput) AlertRuleLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) int { return v.AlertRuleLimit }).(pulumi.IntOutput)
+}
+
+// Prometheus http api root address.
+func (o GetTmpInstancesInstanceSetOutput) ApiRootPath() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) string { return v.ApiRootPath }).(pulumi.StringOutput)
+}
+
+// Token required for data writing.
+func (o GetTmpInstancesInstanceSetOutput) AuthToken() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) string { return v.AuthToken }).(pulumi.StringOutput)
+}
+
+// Automatic renewal flag.
+// - 0: No automatic renewal;
+// - 1: Enable automatic renewal;
+// - 2: Automatic renewal is prohibited;
+// - -1: Invalid.
+func (o GetTmpInstancesInstanceSetOutput) AutoRenewFlag() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) int { return v.AutoRenewFlag }).(pulumi.IntOutput)
+}
+
+// Charge status.
+// - 1: Normal;
+// - 2: Expires;
+// - 3: Destruction;
+// - 4: Allocation;
+// - 5: Allocation failed.
+func (o GetTmpInstancesInstanceSetOutput) ChargeStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) int { return v.ChargeStatus }).(pulumi.IntOutput)
+}
+
+// Created_at.
+func (o GetTmpInstancesInstanceSetOutput) CreatedAt() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) string { return v.CreatedAt }).(pulumi.StringOutput)
+}
+
+// Data retention time.
+func (o GetTmpInstancesInstanceSetOutput) DataRetentionTime() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) int { return v.DataRetentionTime }).(pulumi.IntOutput)
+}
+
+// Whether to enable grafana.
+// - 0: closed;
+// - 1: open.
+func (o GetTmpInstancesInstanceSetOutput) EnableGrafana() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) int { return v.EnableGrafana }).(pulumi.IntOutput)
+}
+
+// Expires for purchased instances.
+func (o GetTmpInstancesInstanceSetOutput) ExpireTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) string { return v.ExpireTime }).(pulumi.StringOutput)
+}
+
+// Binding grafana instance id.
+func (o GetTmpInstancesInstanceSetOutput) GrafanaInstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) string { return v.GrafanaInstanceId }).(pulumi.StringOutput)
+}
+
+// Grafana IP whitelist list.
+func (o GetTmpInstancesInstanceSetOutput) GrafanaIpWhiteList() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) string { return v.GrafanaIpWhiteList }).(pulumi.StringOutput)
+}
+
+// Grafana status.
+// - 1: Creating;
+// - 2: In operation;
+// - 3: Abnormal;
+// - 4: Rebooting;
+// - 5: Destruction;
+// - 6: Shutdown;
+// - 7: Deleted.
+func (o GetTmpInstancesInstanceSetOutput) GrafanaStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) int { return v.GrafanaStatus }).(pulumi.IntOutput)
+}
+
+// Grafana panel url.
+func (o GetTmpInstancesInstanceSetOutput) GrafanaUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) string { return v.GrafanaUrl }).(pulumi.StringOutput)
+}
+
+// Authorization information for the instance.
+func (o GetTmpInstancesInstanceSetOutput) Grants() GetTmpInstancesInstanceSetGrantArrayOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) []GetTmpInstancesInstanceSetGrant { return v.Grants }).(GetTmpInstancesInstanceSetGrantArrayOutput)
+}
+
+// Filter according to instance charge type.
+// - 2: Prepaid;
+// - 3: Postpaid by hour.
+func (o GetTmpInstancesInstanceSetOutput) InstanceChargeType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) int { return v.InstanceChargeType }).(pulumi.IntOutput)
+}
+
+// Instance id.
+func (o GetTmpInstancesInstanceSetOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) string { return v.InstanceId }).(pulumi.StringOutput)
+}
+
+// Filter according to instance name.
+func (o GetTmpInstancesInstanceSetOutput) InstanceName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) string { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Filter according to instance status.
+// - 1: Creating;
+// - 2: In operation;
+// - 3: Abnormal;
+// - 4: Reconstruction;
+// - 5: Destruction;
+// - 6: Stopped taking;
+// - 8: Suspension of service due to arrears;
+// - 9: Service has been suspended due to arrears.
+func (o GetTmpInstancesInstanceSetOutput) InstanceStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) int { return v.InstanceStatus }).(pulumi.IntOutput)
+}
+
+// Filter according to ipv4 address.
+func (o GetTmpInstancesInstanceSetOutput) Ipv4Address() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) string { return v.Ipv4Address }).(pulumi.StringOutput)
+}
+
+// Whether it is about to expire.
+// - 0: No;
+// - 1: Expiring soon.
+func (o GetTmpInstancesInstanceSetOutput) IsNearExpire() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) int { return v.IsNearExpire }).(pulumi.IntOutput)
+}
+
+// Migration status.
+//   - 0: Not in migration;
+//     +- 1: Migrating, original instance;
+//     +- 2: Migrating, target instance.
+func (o GetTmpInstancesInstanceSetOutput) MigrationType() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) int { return v.MigrationType }).(pulumi.IntOutput)
+}
+
+// Proxy address.
+func (o GetTmpInstancesInstanceSetOutput) ProxyAddress() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) string { return v.ProxyAddress }).(pulumi.StringOutput)
+}
+
+// Pre-aggregation rule limitations.
+func (o GetTmpInstancesInstanceSetOutput) RecordingRuleLimit() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) int { return v.RecordingRuleLimit }).(pulumi.IntOutput)
+}
+
+// Region id.
+func (o GetTmpInstancesInstanceSetOutput) RegionId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) int { return v.RegionId }).(pulumi.IntOutput)
+}
+
+// Address of prometheus remote write.
+func (o GetTmpInstancesInstanceSetOutput) RemoteWrite() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) string { return v.RemoteWrite }).(pulumi.StringOutput)
+}
+
+// Specification name.
+func (o GetTmpInstancesInstanceSetOutput) SpecName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) string { return v.SpecName }).(pulumi.StringOutput)
+}
+
+// Subnet id.
+func (o GetTmpInstancesInstanceSetOutput) SubnetId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) string { return v.SubnetId }).(pulumi.StringOutput)
+}
+
+// List of tags associated with the instance.
+func (o GetTmpInstancesInstanceSetOutput) TagSpecifications() GetTmpInstancesInstanceSetTagSpecificationArrayOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) []GetTmpInstancesInstanceSetTagSpecification {
+		return v.TagSpecifications
+	}).(GetTmpInstancesInstanceSetTagSpecificationArrayOutput)
+}
+
+// VPC id.
+func (o GetTmpInstancesInstanceSetOutput) VpcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) string { return v.VpcId }).(pulumi.StringOutput)
+}
+
+// Zone.
+func (o GetTmpInstancesInstanceSetOutput) Zone() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSet) string { return v.Zone }).(pulumi.StringOutput)
+}
+
+type GetTmpInstancesInstanceSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTmpInstancesInstanceSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTmpInstancesInstanceSet)(nil)).Elem()
+}
+
+func (o GetTmpInstancesInstanceSetArrayOutput) ToGetTmpInstancesInstanceSetArrayOutput() GetTmpInstancesInstanceSetArrayOutput {
+	return o
+}
+
+func (o GetTmpInstancesInstanceSetArrayOutput) ToGetTmpInstancesInstanceSetArrayOutputWithContext(ctx context.Context) GetTmpInstancesInstanceSetArrayOutput {
+	return o
+}
+
+func (o GetTmpInstancesInstanceSetArrayOutput) Index(i pulumi.IntInput) GetTmpInstancesInstanceSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTmpInstancesInstanceSet {
+		return vs[0].([]GetTmpInstancesInstanceSet)[vs[1].(int)]
+	}).(GetTmpInstancesInstanceSetOutput)
+}
+
+type GetTmpInstancesInstanceSetGrant struct {
+	// Whether you have permission to manage the agent (1=yes, 2=no).
+	HasAgentManage int `pulumi:"hasAgentManage"`
+	// Whether to display API and other information (1=yes, 2=no).
+	HasApiOperation int `pulumi:"hasApiOperation"`
+	// Whether you have charging operation authority (1=yes, 2=no).
+	HasChargeOperation int `pulumi:"hasChargeOperation"`
+	// Whether the status of Grafana can be modified (1=yes, 2=no).
+	HasGrafanaStatusChange int `pulumi:"hasGrafanaStatusChange"`
+	// Whether you have permission to manage TKE integration (1=yes, 2=no).
+	HasTkeManage int `pulumi:"hasTkeManage"`
+	// Whether to display VPC information (1=yes, 2=no).
+	HasVpcDisplay int `pulumi:"hasVpcDisplay"`
+}
+
+// GetTmpInstancesInstanceSetGrantInput is an input type that accepts GetTmpInstancesInstanceSetGrantArgs and GetTmpInstancesInstanceSetGrantOutput values.
+// You can construct a concrete instance of `GetTmpInstancesInstanceSetGrantInput` via:
+//
+//	GetTmpInstancesInstanceSetGrantArgs{...}
+type GetTmpInstancesInstanceSetGrantInput interface {
+	pulumi.Input
+
+	ToGetTmpInstancesInstanceSetGrantOutput() GetTmpInstancesInstanceSetGrantOutput
+	ToGetTmpInstancesInstanceSetGrantOutputWithContext(context.Context) GetTmpInstancesInstanceSetGrantOutput
+}
+
+type GetTmpInstancesInstanceSetGrantArgs struct {
+	// Whether you have permission to manage the agent (1=yes, 2=no).
+	HasAgentManage pulumi.IntInput `pulumi:"hasAgentManage"`
+	// Whether to display API and other information (1=yes, 2=no).
+	HasApiOperation pulumi.IntInput `pulumi:"hasApiOperation"`
+	// Whether you have charging operation authority (1=yes, 2=no).
+	HasChargeOperation pulumi.IntInput `pulumi:"hasChargeOperation"`
+	// Whether the status of Grafana can be modified (1=yes, 2=no).
+	HasGrafanaStatusChange pulumi.IntInput `pulumi:"hasGrafanaStatusChange"`
+	// Whether you have permission to manage TKE integration (1=yes, 2=no).
+	HasTkeManage pulumi.IntInput `pulumi:"hasTkeManage"`
+	// Whether to display VPC information (1=yes, 2=no).
+	HasVpcDisplay pulumi.IntInput `pulumi:"hasVpcDisplay"`
+}
+
+func (GetTmpInstancesInstanceSetGrantArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTmpInstancesInstanceSetGrant)(nil)).Elem()
+}
+
+func (i GetTmpInstancesInstanceSetGrantArgs) ToGetTmpInstancesInstanceSetGrantOutput() GetTmpInstancesInstanceSetGrantOutput {
+	return i.ToGetTmpInstancesInstanceSetGrantOutputWithContext(context.Background())
+}
+
+func (i GetTmpInstancesInstanceSetGrantArgs) ToGetTmpInstancesInstanceSetGrantOutputWithContext(ctx context.Context) GetTmpInstancesInstanceSetGrantOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTmpInstancesInstanceSetGrantOutput)
+}
+
+// GetTmpInstancesInstanceSetGrantArrayInput is an input type that accepts GetTmpInstancesInstanceSetGrantArray and GetTmpInstancesInstanceSetGrantArrayOutput values.
+// You can construct a concrete instance of `GetTmpInstancesInstanceSetGrantArrayInput` via:
+//
+//	GetTmpInstancesInstanceSetGrantArray{ GetTmpInstancesInstanceSetGrantArgs{...} }
+type GetTmpInstancesInstanceSetGrantArrayInput interface {
+	pulumi.Input
+
+	ToGetTmpInstancesInstanceSetGrantArrayOutput() GetTmpInstancesInstanceSetGrantArrayOutput
+	ToGetTmpInstancesInstanceSetGrantArrayOutputWithContext(context.Context) GetTmpInstancesInstanceSetGrantArrayOutput
+}
+
+type GetTmpInstancesInstanceSetGrantArray []GetTmpInstancesInstanceSetGrantInput
+
+func (GetTmpInstancesInstanceSetGrantArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTmpInstancesInstanceSetGrant)(nil)).Elem()
+}
+
+func (i GetTmpInstancesInstanceSetGrantArray) ToGetTmpInstancesInstanceSetGrantArrayOutput() GetTmpInstancesInstanceSetGrantArrayOutput {
+	return i.ToGetTmpInstancesInstanceSetGrantArrayOutputWithContext(context.Background())
+}
+
+func (i GetTmpInstancesInstanceSetGrantArray) ToGetTmpInstancesInstanceSetGrantArrayOutputWithContext(ctx context.Context) GetTmpInstancesInstanceSetGrantArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTmpInstancesInstanceSetGrantArrayOutput)
+}
+
+type GetTmpInstancesInstanceSetGrantOutput struct{ *pulumi.OutputState }
+
+func (GetTmpInstancesInstanceSetGrantOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTmpInstancesInstanceSetGrant)(nil)).Elem()
+}
+
+func (o GetTmpInstancesInstanceSetGrantOutput) ToGetTmpInstancesInstanceSetGrantOutput() GetTmpInstancesInstanceSetGrantOutput {
+	return o
+}
+
+func (o GetTmpInstancesInstanceSetGrantOutput) ToGetTmpInstancesInstanceSetGrantOutputWithContext(ctx context.Context) GetTmpInstancesInstanceSetGrantOutput {
+	return o
+}
+
+// Whether you have permission to manage the agent (1=yes, 2=no).
+func (o GetTmpInstancesInstanceSetGrantOutput) HasAgentManage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSetGrant) int { return v.HasAgentManage }).(pulumi.IntOutput)
+}
+
+// Whether to display API and other information (1=yes, 2=no).
+func (o GetTmpInstancesInstanceSetGrantOutput) HasApiOperation() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSetGrant) int { return v.HasApiOperation }).(pulumi.IntOutput)
+}
+
+// Whether you have charging operation authority (1=yes, 2=no).
+func (o GetTmpInstancesInstanceSetGrantOutput) HasChargeOperation() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSetGrant) int { return v.HasChargeOperation }).(pulumi.IntOutput)
+}
+
+// Whether the status of Grafana can be modified (1=yes, 2=no).
+func (o GetTmpInstancesInstanceSetGrantOutput) HasGrafanaStatusChange() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSetGrant) int { return v.HasGrafanaStatusChange }).(pulumi.IntOutput)
+}
+
+// Whether you have permission to manage TKE integration (1=yes, 2=no).
+func (o GetTmpInstancesInstanceSetGrantOutput) HasTkeManage() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSetGrant) int { return v.HasTkeManage }).(pulumi.IntOutput)
+}
+
+// Whether to display VPC information (1=yes, 2=no).
+func (o GetTmpInstancesInstanceSetGrantOutput) HasVpcDisplay() pulumi.IntOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSetGrant) int { return v.HasVpcDisplay }).(pulumi.IntOutput)
+}
+
+type GetTmpInstancesInstanceSetGrantArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTmpInstancesInstanceSetGrantArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTmpInstancesInstanceSetGrant)(nil)).Elem()
+}
+
+func (o GetTmpInstancesInstanceSetGrantArrayOutput) ToGetTmpInstancesInstanceSetGrantArrayOutput() GetTmpInstancesInstanceSetGrantArrayOutput {
+	return o
+}
+
+func (o GetTmpInstancesInstanceSetGrantArrayOutput) ToGetTmpInstancesInstanceSetGrantArrayOutputWithContext(ctx context.Context) GetTmpInstancesInstanceSetGrantArrayOutput {
+	return o
+}
+
+func (o GetTmpInstancesInstanceSetGrantArrayOutput) Index(i pulumi.IntInput) GetTmpInstancesInstanceSetGrantOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTmpInstancesInstanceSetGrant {
+		return vs[0].([]GetTmpInstancesInstanceSetGrant)[vs[1].(int)]
+	}).(GetTmpInstancesInstanceSetGrantOutput)
+}
+
+type GetTmpInstancesInstanceSetTagSpecification struct {
+	// The key of the tag.
+	Key string `pulumi:"key"`
+	// The value of the tag.
+	Value string `pulumi:"value"`
+}
+
+// GetTmpInstancesInstanceSetTagSpecificationInput is an input type that accepts GetTmpInstancesInstanceSetTagSpecificationArgs and GetTmpInstancesInstanceSetTagSpecificationOutput values.
+// You can construct a concrete instance of `GetTmpInstancesInstanceSetTagSpecificationInput` via:
+//
+//	GetTmpInstancesInstanceSetTagSpecificationArgs{...}
+type GetTmpInstancesInstanceSetTagSpecificationInput interface {
+	pulumi.Input
+
+	ToGetTmpInstancesInstanceSetTagSpecificationOutput() GetTmpInstancesInstanceSetTagSpecificationOutput
+	ToGetTmpInstancesInstanceSetTagSpecificationOutputWithContext(context.Context) GetTmpInstancesInstanceSetTagSpecificationOutput
+}
+
+type GetTmpInstancesInstanceSetTagSpecificationArgs struct {
+	// The key of the tag.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The value of the tag.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetTmpInstancesInstanceSetTagSpecificationArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTmpInstancesInstanceSetTagSpecification)(nil)).Elem()
+}
+
+func (i GetTmpInstancesInstanceSetTagSpecificationArgs) ToGetTmpInstancesInstanceSetTagSpecificationOutput() GetTmpInstancesInstanceSetTagSpecificationOutput {
+	return i.ToGetTmpInstancesInstanceSetTagSpecificationOutputWithContext(context.Background())
+}
+
+func (i GetTmpInstancesInstanceSetTagSpecificationArgs) ToGetTmpInstancesInstanceSetTagSpecificationOutputWithContext(ctx context.Context) GetTmpInstancesInstanceSetTagSpecificationOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTmpInstancesInstanceSetTagSpecificationOutput)
+}
+
+// GetTmpInstancesInstanceSetTagSpecificationArrayInput is an input type that accepts GetTmpInstancesInstanceSetTagSpecificationArray and GetTmpInstancesInstanceSetTagSpecificationArrayOutput values.
+// You can construct a concrete instance of `GetTmpInstancesInstanceSetTagSpecificationArrayInput` via:
+//
+//	GetTmpInstancesInstanceSetTagSpecificationArray{ GetTmpInstancesInstanceSetTagSpecificationArgs{...} }
+type GetTmpInstancesInstanceSetTagSpecificationArrayInput interface {
+	pulumi.Input
+
+	ToGetTmpInstancesInstanceSetTagSpecificationArrayOutput() GetTmpInstancesInstanceSetTagSpecificationArrayOutput
+	ToGetTmpInstancesInstanceSetTagSpecificationArrayOutputWithContext(context.Context) GetTmpInstancesInstanceSetTagSpecificationArrayOutput
+}
+
+type GetTmpInstancesInstanceSetTagSpecificationArray []GetTmpInstancesInstanceSetTagSpecificationInput
+
+func (GetTmpInstancesInstanceSetTagSpecificationArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTmpInstancesInstanceSetTagSpecification)(nil)).Elem()
+}
+
+func (i GetTmpInstancesInstanceSetTagSpecificationArray) ToGetTmpInstancesInstanceSetTagSpecificationArrayOutput() GetTmpInstancesInstanceSetTagSpecificationArrayOutput {
+	return i.ToGetTmpInstancesInstanceSetTagSpecificationArrayOutputWithContext(context.Background())
+}
+
+func (i GetTmpInstancesInstanceSetTagSpecificationArray) ToGetTmpInstancesInstanceSetTagSpecificationArrayOutputWithContext(ctx context.Context) GetTmpInstancesInstanceSetTagSpecificationArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTmpInstancesInstanceSetTagSpecificationArrayOutput)
+}
+
+type GetTmpInstancesInstanceSetTagSpecificationOutput struct{ *pulumi.OutputState }
+
+func (GetTmpInstancesInstanceSetTagSpecificationOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTmpInstancesInstanceSetTagSpecification)(nil)).Elem()
+}
+
+func (o GetTmpInstancesInstanceSetTagSpecificationOutput) ToGetTmpInstancesInstanceSetTagSpecificationOutput() GetTmpInstancesInstanceSetTagSpecificationOutput {
+	return o
+}
+
+func (o GetTmpInstancesInstanceSetTagSpecificationOutput) ToGetTmpInstancesInstanceSetTagSpecificationOutputWithContext(ctx context.Context) GetTmpInstancesInstanceSetTagSpecificationOutput {
+	return o
+}
+
+// The key of the tag.
+func (o GetTmpInstancesInstanceSetTagSpecificationOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSetTagSpecification) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The value of the tag.
+func (o GetTmpInstancesInstanceSetTagSpecificationOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesInstanceSetTagSpecification) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetTmpInstancesInstanceSetTagSpecificationArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTmpInstancesInstanceSetTagSpecificationArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTmpInstancesInstanceSetTagSpecification)(nil)).Elem()
+}
+
+func (o GetTmpInstancesInstanceSetTagSpecificationArrayOutput) ToGetTmpInstancesInstanceSetTagSpecificationArrayOutput() GetTmpInstancesInstanceSetTagSpecificationArrayOutput {
+	return o
+}
+
+func (o GetTmpInstancesInstanceSetTagSpecificationArrayOutput) ToGetTmpInstancesInstanceSetTagSpecificationArrayOutputWithContext(ctx context.Context) GetTmpInstancesInstanceSetTagSpecificationArrayOutput {
+	return o
+}
+
+func (o GetTmpInstancesInstanceSetTagSpecificationArrayOutput) Index(i pulumi.IntInput) GetTmpInstancesInstanceSetTagSpecificationOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTmpInstancesInstanceSetTagSpecification {
+		return vs[0].([]GetTmpInstancesInstanceSetTagSpecification)[vs[1].(int)]
+	}).(GetTmpInstancesInstanceSetTagSpecificationOutput)
+}
+
+type GetTmpInstancesTagFilter struct {
+	// The key of the tag.
+	Key string `pulumi:"key"`
+	// The value of the tag.
+	Value string `pulumi:"value"`
+}
+
+// GetTmpInstancesTagFilterInput is an input type that accepts GetTmpInstancesTagFilterArgs and GetTmpInstancesTagFilterOutput values.
+// You can construct a concrete instance of `GetTmpInstancesTagFilterInput` via:
+//
+//	GetTmpInstancesTagFilterArgs{...}
+type GetTmpInstancesTagFilterInput interface {
+	pulumi.Input
+
+	ToGetTmpInstancesTagFilterOutput() GetTmpInstancesTagFilterOutput
+	ToGetTmpInstancesTagFilterOutputWithContext(context.Context) GetTmpInstancesTagFilterOutput
+}
+
+type GetTmpInstancesTagFilterArgs struct {
+	// The key of the tag.
+	Key pulumi.StringInput `pulumi:"key"`
+	// The value of the tag.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetTmpInstancesTagFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTmpInstancesTagFilter)(nil)).Elem()
+}
+
+func (i GetTmpInstancesTagFilterArgs) ToGetTmpInstancesTagFilterOutput() GetTmpInstancesTagFilterOutput {
+	return i.ToGetTmpInstancesTagFilterOutputWithContext(context.Background())
+}
+
+func (i GetTmpInstancesTagFilterArgs) ToGetTmpInstancesTagFilterOutputWithContext(ctx context.Context) GetTmpInstancesTagFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTmpInstancesTagFilterOutput)
+}
+
+// GetTmpInstancesTagFilterArrayInput is an input type that accepts GetTmpInstancesTagFilterArray and GetTmpInstancesTagFilterArrayOutput values.
+// You can construct a concrete instance of `GetTmpInstancesTagFilterArrayInput` via:
+//
+//	GetTmpInstancesTagFilterArray{ GetTmpInstancesTagFilterArgs{...} }
+type GetTmpInstancesTagFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetTmpInstancesTagFilterArrayOutput() GetTmpInstancesTagFilterArrayOutput
+	ToGetTmpInstancesTagFilterArrayOutputWithContext(context.Context) GetTmpInstancesTagFilterArrayOutput
+}
+
+type GetTmpInstancesTagFilterArray []GetTmpInstancesTagFilterInput
+
+func (GetTmpInstancesTagFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTmpInstancesTagFilter)(nil)).Elem()
+}
+
+func (i GetTmpInstancesTagFilterArray) ToGetTmpInstancesTagFilterArrayOutput() GetTmpInstancesTagFilterArrayOutput {
+	return i.ToGetTmpInstancesTagFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetTmpInstancesTagFilterArray) ToGetTmpInstancesTagFilterArrayOutputWithContext(ctx context.Context) GetTmpInstancesTagFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetTmpInstancesTagFilterArrayOutput)
+}
+
+type GetTmpInstancesTagFilterOutput struct{ *pulumi.OutputState }
+
+func (GetTmpInstancesTagFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetTmpInstancesTagFilter)(nil)).Elem()
+}
+
+func (o GetTmpInstancesTagFilterOutput) ToGetTmpInstancesTagFilterOutput() GetTmpInstancesTagFilterOutput {
+	return o
+}
+
+func (o GetTmpInstancesTagFilterOutput) ToGetTmpInstancesTagFilterOutputWithContext(ctx context.Context) GetTmpInstancesTagFilterOutput {
+	return o
+}
+
+// The key of the tag.
+func (o GetTmpInstancesTagFilterOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesTagFilter) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// The value of the tag.
+func (o GetTmpInstancesTagFilterOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetTmpInstancesTagFilter) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetTmpInstancesTagFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetTmpInstancesTagFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetTmpInstancesTagFilter)(nil)).Elem()
+}
+
+func (o GetTmpInstancesTagFilterArrayOutput) ToGetTmpInstancesTagFilterArrayOutput() GetTmpInstancesTagFilterArrayOutput {
+	return o
+}
+
+func (o GetTmpInstancesTagFilterArrayOutput) ToGetTmpInstancesTagFilterArrayOutputWithContext(ctx context.Context) GetTmpInstancesTagFilterArrayOutput {
+	return o
+}
+
+func (o GetTmpInstancesTagFilterArrayOutput) Index(i pulumi.IntInput) GetTmpInstancesTagFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetTmpInstancesTagFilter {
+		return vs[0].([]GetTmpInstancesTagFilter)[vs[1].(int)]
+	}).(GetTmpInstancesTagFilterOutput)
+}
+
 type GetTmpRegionsRegionSet struct {
 	// Region area.
 	Area string `pulumi:"area"`
@@ -18962,6 +19775,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetStatisticDataDataPointDimensionArrayInput)(nil)).Elem(), GetStatisticDataDataPointDimensionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetStatisticDataDataPointValueInput)(nil)).Elem(), GetStatisticDataDataPointValueArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetStatisticDataDataPointValueArrayInput)(nil)).Elem(), GetStatisticDataDataPointValueArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTmpInstancesInstanceSetInput)(nil)).Elem(), GetTmpInstancesInstanceSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTmpInstancesInstanceSetArrayInput)(nil)).Elem(), GetTmpInstancesInstanceSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTmpInstancesInstanceSetGrantInput)(nil)).Elem(), GetTmpInstancesInstanceSetGrantArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTmpInstancesInstanceSetGrantArrayInput)(nil)).Elem(), GetTmpInstancesInstanceSetGrantArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTmpInstancesInstanceSetTagSpecificationInput)(nil)).Elem(), GetTmpInstancesInstanceSetTagSpecificationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTmpInstancesInstanceSetTagSpecificationArrayInput)(nil)).Elem(), GetTmpInstancesInstanceSetTagSpecificationArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTmpInstancesTagFilterInput)(nil)).Elem(), GetTmpInstancesTagFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetTmpInstancesTagFilterArrayInput)(nil)).Elem(), GetTmpInstancesTagFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTmpRegionsRegionSetInput)(nil)).Elem(), GetTmpRegionsRegionSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetTmpRegionsRegionSetArrayInput)(nil)).Elem(), GetTmpRegionsRegionSetArray{})
 	pulumi.RegisterOutputType(AlarmNoticeClsNoticeOutput{})
@@ -19202,6 +20023,14 @@ func init() {
 	pulumi.RegisterOutputType(GetStatisticDataDataPointDimensionArrayOutput{})
 	pulumi.RegisterOutputType(GetStatisticDataDataPointValueOutput{})
 	pulumi.RegisterOutputType(GetStatisticDataDataPointValueArrayOutput{})
+	pulumi.RegisterOutputType(GetTmpInstancesInstanceSetOutput{})
+	pulumi.RegisterOutputType(GetTmpInstancesInstanceSetArrayOutput{})
+	pulumi.RegisterOutputType(GetTmpInstancesInstanceSetGrantOutput{})
+	pulumi.RegisterOutputType(GetTmpInstancesInstanceSetGrantArrayOutput{})
+	pulumi.RegisterOutputType(GetTmpInstancesInstanceSetTagSpecificationOutput{})
+	pulumi.RegisterOutputType(GetTmpInstancesInstanceSetTagSpecificationArrayOutput{})
+	pulumi.RegisterOutputType(GetTmpInstancesTagFilterOutput{})
+	pulumi.RegisterOutputType(GetTmpInstancesTagFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetTmpRegionsRegionSetOutput{})
 	pulumi.RegisterOutputType(GetTmpRegionsRegionSetArrayOutput{})
 }

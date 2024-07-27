@@ -58,7 +58,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_, err = Route.NewTableEntry(ctx, "instance", &Route.TableEntryArgs{
+//			instance, err := Route.NewTableEntry(ctx, "instance", &Route.TableEntryArgs{
 //				RouteTableId:         fooTable.ID(),
 //				DestinationCidrBlock: pulumi.String("10.4.4.0/24"),
 //				NextType:             pulumi.String("EIP"),
@@ -68,6 +68,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
+//			ctx.Export("itemId", instance.RouteItemId)
 //			return nil
 //		})
 //	}
@@ -95,6 +96,8 @@ type TableEntry struct {
 	NextHub pulumi.StringOutput `pulumi:"nextHub"`
 	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 	NextType pulumi.StringOutput `pulumi:"nextType"`
+	// ID of route table entry.
+	RouteItemId pulumi.StringOutput `pulumi:"routeItemId"`
 	// ID of routing table to which this entry belongs.
 	RouteTableId pulumi.StringOutput `pulumi:"routeTableId"`
 }
@@ -151,6 +154,8 @@ type tableEntryState struct {
 	NextHub *string `pulumi:"nextHub"`
 	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 	NextType *string `pulumi:"nextType"`
+	// ID of route table entry.
+	RouteItemId *string `pulumi:"routeItemId"`
 	// ID of routing table to which this entry belongs.
 	RouteTableId *string `pulumi:"routeTableId"`
 }
@@ -166,6 +171,8 @@ type TableEntryState struct {
 	NextHub pulumi.StringPtrInput
 	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 	NextType pulumi.StringPtrInput
+	// ID of route table entry.
+	RouteItemId pulumi.StringPtrInput
 	// ID of routing table to which this entry belongs.
 	RouteTableId pulumi.StringPtrInput
 }
@@ -315,6 +322,11 @@ func (o TableEntryOutput) NextHub() pulumi.StringOutput {
 // Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 func (o TableEntryOutput) NextType() pulumi.StringOutput {
 	return o.ApplyT(func(v *TableEntry) pulumi.StringOutput { return v.NextType }).(pulumi.StringOutput)
+}
+
+// ID of route table entry.
+func (o TableEntryOutput) RouteItemId() pulumi.StringOutput {
+	return o.ApplyT(func(v *TableEntry) pulumi.StringOutput { return v.RouteItemId }).(pulumi.StringOutput)
 }
 
 // ID of routing table to which this entry belongs.

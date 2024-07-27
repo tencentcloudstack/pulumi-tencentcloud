@@ -24,13 +24,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var tawInstance = new Tencentcloud.Rum.TawInstance("tawInstance", new()
+    ///     var example = new Tencentcloud.Rum.TawInstance("example", new()
     ///     {
     ///         AreaId = 1,
     ///         ChargeType = 1,
     ///         DataRetentionDays = 30,
-    ///         InstanceDesc = "instanceDesc-1",
-    ///         InstanceName = "instanceName-1",
+    ///         InstanceDesc = "desc.",
+    ///         InstanceName = "tf-example",
     ///         Tags = 
     ///         {
     ///             { "createdBy", "terraform" },
@@ -46,7 +46,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
     /// rum taw_instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Rum/tawInstance:TawInstance taw_instance tawInstance_id
+    /// $ pulumi import tencentcloud:Rum/tawInstance:TawInstance example rum-WYsjMaiGOVXBeJ
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Rum/tawInstance:TawInstance")]

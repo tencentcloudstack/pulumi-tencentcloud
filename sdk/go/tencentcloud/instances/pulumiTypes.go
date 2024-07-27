@@ -26,6 +26,8 @@ type GetInstanceInstanceList struct {
 	CreateTime string `pulumi:"createTime"`
 	// An information list of data disk. Each element contains the following attributes:
 	DataDisks []GetInstanceInstanceListDataDisk `pulumi:"dataDisks"`
+	// Exclusive cluster id.
+	DedicatedClusterId string `pulumi:"dedicatedClusterId"`
 	// Expired time of the instance.
 	ExpiredTime string `pulumi:"expiredTime"`
 	// ID of the image.
@@ -96,6 +98,8 @@ type GetInstanceInstanceListArgs struct {
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
 	// An information list of data disk. Each element contains the following attributes:
 	DataDisks GetInstanceInstanceListDataDiskArrayInput `pulumi:"dataDisks"`
+	// Exclusive cluster id.
+	DedicatedClusterId pulumi.StringInput `pulumi:"dedicatedClusterId"`
 	// Expired time of the instance.
 	ExpiredTime pulumi.StringInput `pulumi:"expiredTime"`
 	// ID of the image.
@@ -221,6 +225,11 @@ func (o GetInstanceInstanceListOutput) CreateTime() pulumi.StringOutput {
 // An information list of data disk. Each element contains the following attributes:
 func (o GetInstanceInstanceListOutput) DataDisks() GetInstanceInstanceListDataDiskArrayOutput {
 	return o.ApplyT(func(v GetInstanceInstanceList) []GetInstanceInstanceListDataDisk { return v.DataDisks }).(GetInstanceInstanceListDataDiskArrayOutput)
+}
+
+// Exclusive cluster id.
+func (o GetInstanceInstanceListOutput) DedicatedClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceInstanceList) string { return v.DedicatedClusterId }).(pulumi.StringOutput)
 }
 
 // Expired time of the instance.

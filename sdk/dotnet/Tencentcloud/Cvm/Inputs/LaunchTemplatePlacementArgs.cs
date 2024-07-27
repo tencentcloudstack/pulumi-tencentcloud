@@ -29,8 +29,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         private InputList<string>? _hostIps;
 
         /// <summary>
-        /// Specify the host machine ip.
+        /// It has been deprecated from version 1.81.108. Specify the host machine ip.
         /// </summary>
+        [Obsolete(@"It has been deprecated from version 1.81.108.")]
         public InputList<string> HostIps
         {
             get => _hostIps ?? (_hostIps = new InputList<string>());

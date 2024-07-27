@@ -15,6 +15,11 @@ export type AddonAttachment = import("./addonAttachment").AddonAttachment;
 export const AddonAttachment: typeof import("./addonAttachment").AddonAttachment = null as any;
 utilities.lazyLoad(exports, ["AddonAttachment"], () => require("./addonAttachment"));
 
+export { AddonConfigArgs, AddonConfigState } from "./addonConfig";
+export type AddonConfig = import("./addonConfig").AddonConfig;
+export const AddonConfig: typeof import("./addonConfig").AddonConfig = null as any;
+utilities.lazyLoad(exports, ["AddonConfig"], () => require("./addonConfig"));
+
 export { AuthAttachmentArgs, AuthAttachmentState } from "./authAttachment";
 export type AuthAttachment = import("./authAttachment").AuthAttachment;
 export const AuthAttachment: typeof import("./authAttachment").AuthAttachment = null as any;
@@ -119,6 +124,8 @@ const _module = {
                 return new Addon(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/addonAttachment:AddonAttachment":
                 return new AddonAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/addonConfig:AddonConfig":
+                return new AddonConfig(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/authAttachment:AuthAttachment":
                 return new AuthAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/backupStorageLocation:BackupStorageLocation":
@@ -146,6 +153,7 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/addon", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/addonAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/addonConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/authAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/backupStorageLocation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/cluster", _module)

@@ -4129,13 +4129,17 @@ export namespace Cbs {
          */
         availabilityZone: string;
         /**
-         * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+         * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
          */
         chargeType: string;
         /**
          * Creation time of CBS.
          */
         createTime: string;
+        /**
+         * Exclusive cluster id.
+         */
+        dedicatedClusterId: string;
         /**
          * Indicates whether CBS is encrypted.
          */
@@ -4196,13 +4200,17 @@ export namespace Cbs {
          */
         availabilityZone: string;
         /**
-         * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+         * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
          */
         chargeType: string;
         /**
          * Creation time of CBS.
          */
         createTime: string;
+        /**
+         * Exclusive cluster id.
+         */
+        dedicatedClusterId: string;
         /**
          * Indicates whether CBS is encrypted.
          */
@@ -4433,6 +4441,72 @@ export namespace Ccn {
         state: string;
     }
 
+    export interface GetRoutesFilter {
+        /**
+         * Field to be filtered. Support `route-id`, `cidr-block`, `instance-type`, `instance-region`, `instance-id`, `route-table-id`.
+         */
+        name: string;
+        /**
+         * Filter value of the field.
+         */
+        values: string[];
+    }
+
+    export interface GetRoutesRouteList {
+        /**
+         * Destination.
+         */
+        destinationCidrBlock: string;
+        /**
+         * Is routing enabled.
+         */
+        enabled: boolean;
+        /**
+         * Extension status of routing.
+         */
+        extraState: string;
+        /**
+         * Next hop extension name (associated instance extension name).
+         */
+        instanceExtraName: string;
+        /**
+         * Next jump (associated instance ID).
+         */
+        instanceId: string;
+        /**
+         * Next jump (associated instance name).
+         */
+        instanceName: string;
+        /**
+         * Next jump (associated instance region).
+         */
+        instanceRegion: string;
+        /**
+         * Next hop type (associated instance type), all types: VPC, DIRECTCONNECT.
+         */
+        instanceType: string;
+        /**
+         * The UIN (root account) to which the associated instance belongs.
+         */
+        instanceUin: string;
+        /**
+         * Is it dynamic routing.
+         */
+        isBgp: boolean;
+        /**
+         * route ID.
+         */
+        routeId: string;
+        /**
+         * Routing priority.
+         */
+        routePriority: number;
+        /**
+         * update time.
+         */
+        updateTime: string;
+    }
+
     export interface InstancesAcceptAttachInstance {
         /**
          * Description.
@@ -4500,6 +4574,394 @@ export namespace Ccn {
          * ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
          */
         routeTableId?: string;
+    }
+
+    export interface RouteTableAssociateInstanceConfigInstance {
+        /**
+         * Instances ID.
+         */
+        instanceId: string;
+        /**
+         * Cloud networking supports instance types: VPC, DIRECTCONNECT, BMVPC, EDGE, EDGE_TUNNEL, EDGE_VPNGW, VPNGW.
+         */
+        instanceType: string;
+    }
+
+    export interface RouteTableBroadcastPoliciesPolicy {
+        /**
+         * Routing behavior, `accept` allows, `drop` rejects.
+         */
+        action: string;
+        /**
+         * propagation conditions.
+         */
+        broadcastConditions: outputs.Ccn.RouteTableBroadcastPoliciesPolicyBroadcastCondition[];
+        /**
+         * Policy description.
+         */
+        description: string;
+        /**
+         * Routing conditions.
+         */
+        routeConditions: outputs.Ccn.RouteTableBroadcastPoliciesPolicyRouteCondition[];
+    }
+
+    export interface RouteTableBroadcastPoliciesPolicyBroadcastCondition {
+        /**
+         * Matching mode, `1` precise matching, `0` fuzzy matching.
+         */
+        matchPattern: number;
+        /**
+         * condition type.
+         */
+        name: string;
+        /**
+         * List of conditional values.
+         */
+        values: string[];
+    }
+
+    export interface RouteTableBroadcastPoliciesPolicyRouteCondition {
+        /**
+         * Matching mode, `1` precise matching, `0` fuzzy matching.
+         */
+        matchPattern: number;
+        /**
+         * condition type.
+         */
+        name: string;
+        /**
+         * List of conditional values.
+         */
+        values: string[];
+    }
+
+    export interface RouteTableInputPoliciesPolicy {
+        /**
+         * Routing behavior, `accept` allows, `drop` rejects.
+         */
+        action: string;
+        /**
+         * Policy description.
+         */
+        description: string;
+        /**
+         * Routing conditions.
+         */
+        routeConditions: outputs.Ccn.RouteTableInputPoliciesPolicyRouteCondition[];
+    }
+
+    export interface RouteTableInputPoliciesPolicyRouteCondition {
+        /**
+         * Matching mode, `1` precise matching, `0` fuzzy matching.
+         */
+        matchPattern: number;
+        /**
+         * condition type.
+         */
+        name: string;
+        /**
+         * List of conditional values.
+         */
+        values: string[];
+    }
+
+    export interface RouteTableSelectionPoliciesSelectionPolicy {
+        /**
+         * description.
+         */
+        description: string;
+        /**
+         * Instance ID.
+         */
+        instanceId: string;
+        /**
+         * Instance Type: Private Network: VPC, Dedicated Gateway: DIRECTCONNECT, Blackstone Private Network: BMVPC, EDGE Device: EDGE, EDGE Tunnel: EDGE_TUNNEL, EDGE Gateway: EDGE_VPNGW, VPN Gateway: VPNGW.
+         */
+        instanceType: string;
+        /**
+         * route table ID.
+         */
+        routeTableId: string;
+        /**
+         * Source CIDR.
+         */
+        sourceCidrBlock: string;
+    }
+
+}
+
+export namespace Cdc {
+    export interface GetDedicatedClusterHostsHostInfoSet {
+        /**
+         * Dedicated Cluster Host CPU Available Count.
+         */
+        cpuAvailable: number;
+        /**
+         * Dedicated Cluster Host CPU Total Count.
+         */
+        cpuTotal: number;
+        /**
+         * Dedicated Cluster Host Expire Time.
+         */
+        expireTime: string;
+        /**
+         * Dedicated Cluster Host ID.
+         */
+        hostId: string;
+        /**
+         * Dedicated Cluster Host Ip (Deprecated).
+         */
+        hostIp: string;
+        /**
+         * Dedicated Cluster Host Status.
+         */
+        hostStatus: string;
+        /**
+         * Dedicated Cluster Host Type.
+         */
+        hostType: string;
+        /**
+         * Dedicated Cluster Host Memory Available Count (GB).
+         */
+        memAvailable: number;
+        /**
+         * Dedicated Cluster Host Memory Total Count (GB).
+         */
+        memTotal: number;
+        /**
+         * Dedicated Cluster Host Run Time.
+         */
+        runTime: string;
+        /**
+         * Dedicated Cluster Service Type.
+         */
+        serviceType: string;
+    }
+
+    export interface GetDedicatedClusterInstanceTypesDedicatedClusterInstanceTypeSet {
+        /**
+         * Instance CPU.
+         */
+        cpu: number;
+        /**
+         * Instance CPU Type.
+         */
+        cpuType: string;
+        /**
+         * Instance Fpga.
+         */
+        fpga: number;
+        /**
+         * Instance GPU.
+         */
+        gpu: number;
+        /**
+         * Instance Bandwidth.
+         */
+        instanceBandwidth: number;
+        /**
+         * Instance Family.
+         */
+        instanceFamily: string;
+        /**
+         * Instance Pps.
+         */
+        instancePps: number;
+        /**
+         * Instance Type.
+         */
+        instanceType: string;
+        /**
+         * Instance Memory.
+         */
+        memory: number;
+        /**
+         * Instance Type.
+         */
+        networkCard: number;
+        /**
+         * Instance Remark.
+         */
+        remark: string;
+        /**
+         * Instance Status.
+         */
+        status: string;
+        /**
+         * Instance Storage Block Amount.
+         */
+        storageBlockAmount: number;
+        /**
+         * Instance Type Name.
+         */
+        typeName: string;
+        /**
+         * Zone Name.
+         */
+        zone: string;
+    }
+
+    export interface GetDedicatedClusterOrdersDedicatedClusterOrderSet {
+        /**
+         * Dedicated Cluster Order Action Type.
+         */
+        action: string;
+        /**
+         * Dedicated Cluster CPU.
+         */
+        cpu: number;
+        /**
+         * Dedicated Cluster Order Create time.
+         */
+        createTime: string;
+        /**
+         * Dedicated Cluster ID.
+         */
+        dedicatedClusterId: string;
+        /**
+         * Dedicated Cluster Order ID.
+         */
+        dedicatedClusterOrderId: string;
+        /**
+         * Dedicated Cluster Order Item List.
+         */
+        dedicatedClusterOrderItems: outputs.Cdc.GetDedicatedClusterOrdersDedicatedClusterOrderSetDedicatedClusterOrderItem[];
+        /**
+         * Dedicated Cluster Type ID.
+         */
+        dedicatedClusterTypeId: string;
+        /**
+         * Dedicated Cluster GPU.
+         */
+        gpu: number;
+        /**
+         * Dedicated Cluster Memory.
+         */
+        mem: number;
+        /**
+         * Dedicated Cluster Order Status.
+         */
+        orderStatus: string;
+        /**
+         * Dedicated Cluster Order Type.
+         */
+        orderType: string;
+        /**
+         * Dedicated Cluster Order Pay Status.
+         */
+        payStatus: number;
+        /**
+         * Dedicated Cluster Order Pay Type.
+         */
+        payType: string;
+        /**
+         * Dedicated Cluster Supported PowerDraw.
+         */
+        powerDraw: number;
+        /**
+         * Dedicated Cluster Supported Instance Family.
+         */
+        supportedInstanceFamilies: string[];
+        /**
+         * Dedicated Cluster Storage Type.
+         */
+        supportedStorageTypes: string[];
+        /**
+         * Dedicated Cluster Supported Uplink Speed.
+         */
+        supportedUplinkSpeeds: number[];
+        /**
+         * Dedicated Cluster Order Pay Time Span.
+         */
+        timeSpan: number;
+        /**
+         * Dedicated Cluster Order Pay Time Unit.
+         */
+        timeUnit: string;
+        /**
+         * Dedicated Cluster Supported Weight.
+         */
+        weight: number;
+    }
+
+    export interface GetDedicatedClusterOrdersDedicatedClusterOrderSetDedicatedClusterOrderItem {
+        /**
+         * Dedicated Cluster Compute Format.
+         */
+        computeFormat: string;
+        /**
+         * Dedicated Cluster SubOrder Count.
+         */
+        count: number;
+        /**
+         * Dedicated Cluster Order Create time.
+         */
+        createTime: string;
+        /**
+         * Dedicated Cluster Type ID.
+         */
+        dedicatedClusterTypeId: string;
+        /**
+         * Dedicated Cluster Type Description.
+         */
+        description: string;
+        /**
+         * Dedicated Cluster Type Name.
+         */
+        name: string;
+        /**
+         * Dedicated Cluster Supported PowerDraw.
+         */
+        powerDraw: number;
+        /**
+         * Dedicated Cluster SubOrder ID.
+         */
+        subOrderId: string;
+        /**
+         * Dedicated Cluster SubOrder Pay Status.
+         */
+        subOrderPayStatus: number;
+        /**
+         * Dedicated Cluster Order Status.
+         */
+        subOrderStatus: string;
+        /**
+         * Dedicated Cluster Supported Instance Family.
+         */
+        supportedInstanceFamilies: string[];
+        /**
+         * Dedicated Cluster Storage Type.
+         */
+        supportedStorageTypes: string[];
+        /**
+         * Dedicated Cluster Supported Uplink Speed.
+         */
+        supportedUplinkSpeeds: number[];
+        /**
+         * Dedicated Cluster Total CPU.
+         */
+        totalCpu: number;
+        /**
+         * Dedicated Cluster Total GPU.
+         */
+        totalGpu: number;
+        /**
+         * Dedicated Cluster Total Memory.
+         */
+        totalMem: number;
+        /**
+         * Dedicated Cluster Type Family.
+         */
+        typeFamily: string;
+        /**
+         * Dedicated Cluster Type Name.
+         */
+        typeName: string;
+        /**
+         * Dedicated Cluster Supported Weight.
+         */
+        weight: number;
     }
 
 }
@@ -15606,6 +16068,10 @@ export namespace Clb {
          */
         clbVips: string[];
         /**
+         * ID of the cluster.
+         */
+        clusterId: string;
+        /**
          * Create time of the CLB.
          */
         createTime: string;
@@ -18079,6 +18545,39 @@ export namespace Cls {
         topicId: string;
     }
 
+    export interface TopicExtends {
+        /**
+         * Log topic authentication free configuration information.
+         */
+        anonymousAccess?: outputs.Cls.TopicExtendsAnonymousAccess;
+    }
+
+    export interface TopicExtendsAnonymousAccess {
+        /**
+         * Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+         */
+        conditions?: outputs.Cls.TopicExtendsAnonymousAccessCondition[];
+        /**
+         * Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+         */
+        operations?: string[];
+    }
+
+    export interface TopicExtendsAnonymousAccessCondition {
+        /**
+         * Condition attribute, currently only VpcID is supported.
+         */
+        attributes?: string;
+        /**
+         * The value of the corresponding conditional attribute.
+         */
+        conditionValue?: string;
+        /**
+         * Conditional rule, 1: equal, 2: not equal.
+         */
+        rule?: number;
+    }
+
 }
 
 export namespace Cos {
@@ -20090,7 +20589,9 @@ export namespace Cvm {
          */
         hostIds: string[];
         /**
-         * IPs of the hosts to create CVMs.
+         * (**Deprecated**) It has been deprecated from version 1.81.108. IPs of the hosts to create CVMs.
+         *
+         * @deprecated It has been deprecated from version 1.81.108.
          */
         hostIps: string[];
         /**
@@ -20423,7 +20924,9 @@ export namespace Cvm {
          */
         hostIds?: string[];
         /**
-         * Specify the host machine ip.
+         * It has been deprecated from version 1.81.108. Specify the host machine ip.
+         *
+         * @deprecated It has been deprecated from version 1.81.108.
          */
         hostIps?: string[];
         /**
@@ -35042,6 +35545,10 @@ export namespace Instances {
          */
         dataDisks: outputs.Instances.GetInstanceInstanceListDataDisk[];
         /**
+         * Exclusive cluster id.
+         */
+        dedicatedClusterId: string;
+        /**
          * Expired time of the instance.
          */
         expiredTime: string;
@@ -43114,6 +43621,211 @@ export namespace Monitor {
          * Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.
          */
         value: number;
+    }
+
+    export interface GetTmpInstancesInstanceSet {
+        /**
+         * Alert rule limit.
+         */
+        alertRuleLimit: number;
+        /**
+         * Prometheus http api root address.
+         */
+        apiRootPath: string;
+        /**
+         * Token required for data writing.
+         */
+        authToken: string;
+        /**
+         * Automatic renewal flag.
+         * - 0: No automatic renewal;
+         * - 1: Enable automatic renewal;
+         * - 2: Automatic renewal is prohibited;
+         * - -1: Invalid.
+         */
+        autoRenewFlag: number;
+        /**
+         * Charge status.
+         * - 1: Normal;
+         * - 2: Expires;
+         * - 3: Destruction;
+         * - 4: Allocation;
+         * - 5: Allocation failed.
+         */
+        chargeStatus: number;
+        /**
+         * Created_at.
+         */
+        createdAt: string;
+        /**
+         * Data retention time.
+         */
+        dataRetentionTime: number;
+        /**
+         * Whether to enable grafana.
+         * - 0: closed;
+         * - 1: open.
+         */
+        enableGrafana: number;
+        /**
+         * Expires for purchased instances.
+         */
+        expireTime: string;
+        /**
+         * Binding grafana instance id.
+         */
+        grafanaInstanceId: string;
+        /**
+         * Grafana IP whitelist list.
+         */
+        grafanaIpWhiteList: string;
+        /**
+         * Grafana status.
+         * - 1: Creating;
+         * - 2: In operation;
+         * - 3: Abnormal;
+         * - 4: Rebooting;
+         * - 5: Destruction;
+         * - 6: Shutdown;
+         * - 7: Deleted.
+         */
+        grafanaStatus: number;
+        /**
+         * Grafana panel url.
+         */
+        grafanaUrl: string;
+        /**
+         * Authorization information for the instance.
+         */
+        grants: outputs.Monitor.GetTmpInstancesInstanceSetGrant[];
+        /**
+         * Filter according to instance charge type.
+         * - 2: Prepaid;
+         * - 3: Postpaid by hour.
+         */
+        instanceChargeType: number;
+        /**
+         * Instance id.
+         */
+        instanceId: string;
+        /**
+         * Filter according to instance name.
+         */
+        instanceName: string;
+        /**
+         * Filter according to instance status.
+         * - 1: Creating;
+         * - 2: In operation;
+         * - 3: Abnormal;
+         * - 4: Reconstruction;
+         * - 5: Destruction;
+         * - 6: Stopped taking;
+         * - 8: Suspension of service due to arrears;
+         * - 9: Service has been suspended due to arrears.
+         */
+        instanceStatus: number;
+        /**
+         * Filter according to ipv4 address.
+         */
+        ipv4Address: string;
+        /**
+         * Whether it is about to expire.
+         * - 0: No;
+         * - 1: Expiring soon.
+         */
+        isNearExpire: number;
+        /**
+         * Migration status.
+         * - 0: Not in migration;
+         * +- 1: Migrating, original instance;
+         * +- 2: Migrating, target instance.
+         */
+        migrationType: number;
+        /**
+         * Proxy address.
+         */
+        proxyAddress: string;
+        /**
+         * Pre-aggregation rule limitations.
+         */
+        recordingRuleLimit: number;
+        /**
+         * Region id.
+         */
+        regionId: number;
+        /**
+         * Address of prometheus remote write.
+         */
+        remoteWrite: string;
+        /**
+         * Specification name.
+         */
+        specName: string;
+        /**
+         * Subnet id.
+         */
+        subnetId: string;
+        /**
+         * List of tags associated with the instance.
+         */
+        tagSpecifications: outputs.Monitor.GetTmpInstancesInstanceSetTagSpecification[];
+        /**
+         * VPC id.
+         */
+        vpcId: string;
+        /**
+         * Zone.
+         */
+        zone: string;
+    }
+
+    export interface GetTmpInstancesInstanceSetGrant {
+        /**
+         * Whether you have permission to manage the agent (1=yes, 2=no).
+         */
+        hasAgentManage: number;
+        /**
+         * Whether to display API and other information (1=yes, 2=no).
+         */
+        hasApiOperation: number;
+        /**
+         * Whether you have charging operation authority (1=yes, 2=no).
+         */
+        hasChargeOperation: number;
+        /**
+         * Whether the status of Grafana can be modified (1=yes, 2=no).
+         */
+        hasGrafanaStatusChange: number;
+        /**
+         * Whether you have permission to manage TKE integration (1=yes, 2=no).
+         */
+        hasTkeManage: number;
+        /**
+         * Whether to display VPC information (1=yes, 2=no).
+         */
+        hasVpcDisplay: number;
+    }
+
+    export interface GetTmpInstancesInstanceSetTagSpecification {
+        /**
+         * The key of the tag.
+         */
+        key: string;
+        /**
+         * The value of the tag.
+         */
+        value: string;
+    }
+
+    export interface GetTmpInstancesTagFilter {
+        /**
+         * The key of the tag.
+         */
+        key: string;
+        /**
+         * The value of the tag.
+         */
+        value: string;
     }
 
     export interface GetTmpRegionsRegionSet {
@@ -74377,6 +75089,10 @@ export namespace Vpc {
          */
         availableIpCount: number;
         /**
+         * ID of CDC instance.
+         */
+        cdcId: string;
+        /**
          * Filter subnet with this CIDR.
          */
         cidrBlock: string;
@@ -77233,6 +77949,48 @@ export namespace config {
          * The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
          */
         sessionName: string;
+    }
+
+    export interface AssumeRoleWithSaml {
+        /**
+         * Player Access Description Name. It can be sourced from the `PROVIDER_ASSUME_ROLE_PRINCIPAL_ARN`.
+         */
+        principalArn: string;
+        /**
+         * The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+         */
+        roleArn: string;
+        /**
+         * SAML assertion information encoded in base64. It can be sourced from the `PROVIDER_ASSUME_ROLE_SAML_ASSERTION`.
+         */
+        samlAssertion: string;
+        /**
+         * The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+         */
+        sessionDuration: number;
+        /**
+         * The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+         */
+        sessionName: string;
+    }
+
+    export interface AssumeRoleWithWebIdentity {
+        /**
+         * The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+         */
+        roleArn: string;
+        /**
+         * The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+         */
+        sessionDuration: number;
+        /**
+         * The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+         */
+        sessionName: string;
+        /**
+         * OIDC token issued by IdP. It can be sourced from the `PROVIDER_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
+         */
+        webIdentityToken: string;
     }
 
 }

@@ -31,6 +31,7 @@ import * as utilities from "../utilities";
  *     nextHub: "0",
  *     description: "ci-test-route-table-entry",
  * });
+ * export const itemId = instance.routeItemId;
  * ```
  * <!--End PulumiCodeChooser -->
  *
@@ -91,6 +92,10 @@ export class TableEntry extends pulumi.CustomResource {
      */
     public readonly nextType!: pulumi.Output<string>;
     /**
+     * ID of route table entry.
+     */
+    public /*out*/ readonly routeItemId!: pulumi.Output<string>;
+    /**
      * ID of routing table to which this entry belongs.
      */
     public readonly routeTableId!: pulumi.Output<string>;
@@ -113,6 +118,7 @@ export class TableEntry extends pulumi.CustomResource {
             resourceInputs["disabled"] = state ? state.disabled : undefined;
             resourceInputs["nextHub"] = state ? state.nextHub : undefined;
             resourceInputs["nextType"] = state ? state.nextType : undefined;
+            resourceInputs["routeItemId"] = state ? state.routeItemId : undefined;
             resourceInputs["routeTableId"] = state ? state.routeTableId : undefined;
         } else {
             const args = argsOrState as TableEntryArgs | undefined;
@@ -134,6 +140,7 @@ export class TableEntry extends pulumi.CustomResource {
             resourceInputs["nextHub"] = args ? args.nextHub : undefined;
             resourceInputs["nextType"] = args ? args.nextType : undefined;
             resourceInputs["routeTableId"] = args ? args.routeTableId : undefined;
+            resourceInputs["routeItemId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(TableEntry.__pulumiType, name, resourceInputs, opts);
@@ -164,6 +171,10 @@ export interface TableEntryState {
      * Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
      */
     nextType?: pulumi.Input<string>;
+    /**
+     * ID of route table entry.
+     */
+    routeItemId?: pulumi.Input<string>;
     /**
      * ID of routing table to which this entry belongs.
      */

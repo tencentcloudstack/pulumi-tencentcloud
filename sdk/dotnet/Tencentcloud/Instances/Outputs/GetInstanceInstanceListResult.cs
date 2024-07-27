@@ -39,6 +39,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
         /// </summary>
         public readonly ImmutableArray<Outputs.GetInstanceInstanceListDataDiskResult> DataDisks;
         /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        public readonly string DedicatedClusterId;
+        /// <summary>
         /// Expired time of the instance.
         /// </summary>
         public readonly string ExpiredTime;
@@ -141,6 +145,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
 
             ImmutableArray<Outputs.GetInstanceInstanceListDataDiskResult> dataDisks,
 
+            string dedicatedClusterId,
+
             string expiredTime,
 
             string imageId,
@@ -191,6 +197,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instances.Outputs
             Cpu = cpu;
             CreateTime = createTime;
             DataDisks = dataDisks;
+            DedicatedClusterId = dedicatedClusterId;
             ExpiredTime = expiredTime;
             ImageId = imageId;
             InstanceChargeType = instanceChargeType;

@@ -25,6 +25,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Addon{}
 	case "tencentcloud:Kubernetes/addonAttachment:AddonAttachment":
 		r = &AddonAttachment{}
+	case "tencentcloud:Kubernetes/addonConfig:AddonConfig":
+		r = &AddonConfig{}
 	case "tencentcloud:Kubernetes/authAttachment:AuthAttachment":
 		r = &AuthAttachment{}
 	case "tencentcloud:Kubernetes/backupStorageLocation:BackupStorageLocation":
@@ -66,6 +68,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Kubernetes/addonAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Kubernetes/addonConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

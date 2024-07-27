@@ -17,6 +17,22 @@ Object.defineProperty(exports, "assumeRole", {
     enumerable: true,
 });
 
+export declare const assumeRoleWithSaml: outputs.config.AssumeRoleWithSaml | undefined;
+Object.defineProperty(exports, "assumeRoleWithSaml", {
+    get() {
+        return __config.getObject<outputs.config.AssumeRoleWithSaml>("assumeRoleWithSaml");
+    },
+    enumerable: true,
+});
+
+export declare const assumeRoleWithWebIdentity: outputs.config.AssumeRoleWithWebIdentity | undefined;
+Object.defineProperty(exports, "assumeRoleWithWebIdentity", {
+    get() {
+        return __config.getObject<outputs.config.AssumeRoleWithWebIdentity>("assumeRoleWithWebIdentity");
+    },
+    enumerable: true,
+});
+
 /**
  * The root domain of the API request, Default is `tencentcloudapi.com`.
  */

@@ -13,12 +13,138 @@ import * as utilities from "../utilities";
  *
  * > **NOTE:** At present, 'PREPAID' instance cannot be deleted directly and must wait it to be outdated and released automatically.
  *
+ * ## Example Usage
+ *
+ * ### Create a general POSTPAID_BY_HOUR CVM instance
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * const images = tencentcloud.Images.getInstance({
+ *     imageTypes: ["PUBLIC_IMAGE"],
+ *     imageNameRegex: "OpenCloudOS Server",
+ * });
+ * const types = tencentcloud.Instance.getTypes({
+ *     filters: [{
+ *         name: "instance-family",
+ *         values: [
+ *             "S1",
+ *             "S2",
+ *             "S3",
+ *             "S4",
+ *             "S5",
+ *         ],
+ *     }],
+ *     cpuCoreCount: 2,
+ *     excludeSoldOut: true,
+ * });
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * // create CVM instance
+ * const example = new tencentcloud.instance.Instance("example", {
+ *     instanceName: "tf-example",
+ *     availabilityZone: availabilityZone,
+ *     imageId: images.then(images => images.images?.[0]?.imageId),
+ *     instanceType: types.then(types => types.instanceTypes?.[0]?.instanceType),
+ *     systemDiskType: "CLOUD_PREMIUM",
+ *     systemDiskSize: 50,
+ *     hostname: "user",
+ *     projectId: 0,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     dataDisks: [{
+ *         dataDiskType: "CLOUD_PREMIUM",
+ *         dataDiskSize: 50,
+ *         encrypt: false,
+ *     }],
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Create a dedicated cluster CVM instance
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * const images = tencentcloud.Images.getInstance({
+ *     imageTypes: ["PUBLIC_IMAGE"],
+ *     imageNameRegex: "OpenCloudOS Server",
+ * });
+ * const types = tencentcloud.Instance.getTypes({
+ *     filters: [{
+ *         name: "instance-family",
+ *         values: [
+ *             "S1",
+ *             "S2",
+ *             "S3",
+ *             "S4",
+ *             "S5",
+ *         ],
+ *     }],
+ *     cpuCoreCount: 2,
+ *     excludeSoldOut: true,
+ * });
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ *     cdcId: "cluster-262n63e8",
+ *     isMulticast: false,
+ * });
+ * // create CVM instance
+ * const example = new tencentcloud.instance.Instance("example", {
+ *     instanceName: "tf-example",
+ *     availabilityZone: availabilityZone,
+ *     imageId: images.then(images => images.images?.[0]?.imageId),
+ *     instanceType: types.then(types => types.instanceTypes?.[0]?.instanceType),
+ *     dedicatedClusterId: "cluster-262n63e8",
+ *     instanceChargeType: "CDCPAID",
+ *     systemDiskType: "CLOUD_SSD",
+ *     systemDiskSize: 50,
+ *     hostname: "user",
+ *     projectId: 0,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     dataDisks: [{
+ *         dataDiskType: "CLOUD_SSD",
+ *         dataDiskSize: 50,
+ *         encrypt: false,
+ *     }],
+ *     tags: {
+ *         tagKey: "tagValue",
+ *     },
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ## Import
  *
  * CVM instance can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Instance/instance:Instance foo ins-2qol3a80
+ * $ pulumi import tencentcloud:Instance/instance:Instance example ins-2qol3a80
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -85,6 +211,10 @@ export class Instance extends pulumi.CustomResource {
      * Settings for data disks.
      */
     public readonly dataDisks!: pulumi.Output<outputs.Instance.InstanceDataDisk[]>;
+    /**
+     * Exclusive cluster id.
+     */
+    public readonly dedicatedClusterId!: pulumi.Output<string | undefined>;
     /**
      * Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
      */
@@ -228,6 +358,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly systemDiskId!: pulumi.Output<string>;
     /**
+     * Resize online.
+     */
+    public readonly systemDiskResizeOnline!: pulumi.Output<boolean | undefined>;
+    /**
      * Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
      */
     public readonly systemDiskSize!: pulumi.Output<number | undefined>;
@@ -278,6 +412,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["cpu"] = state ? state.cpu : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["dataDisks"] = state ? state.dataDisks : undefined;
+            resourceInputs["dedicatedClusterId"] = state ? state.dedicatedClusterId : undefined;
             resourceInputs["disableApiTermination"] = state ? state.disableApiTermination : undefined;
             resourceInputs["disableMonitorService"] = state ? state.disableMonitorService : undefined;
             resourceInputs["disableSecurityService"] = state ? state.disableSecurityService : undefined;
@@ -312,6 +447,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["stoppedMode"] = state ? state.stoppedMode : undefined;
             resourceInputs["subnetId"] = state ? state.subnetId : undefined;
             resourceInputs["systemDiskId"] = state ? state.systemDiskId : undefined;
+            resourceInputs["systemDiskResizeOnline"] = state ? state.systemDiskResizeOnline : undefined;
             resourceInputs["systemDiskSize"] = state ? state.systemDiskSize : undefined;
             resourceInputs["systemDiskType"] = state ? state.systemDiskType : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
@@ -334,6 +470,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["cdhHostId"] = args ? args.cdhHostId : undefined;
             resourceInputs["cdhInstanceType"] = args ? args.cdhInstanceType : undefined;
             resourceInputs["dataDisks"] = args ? args.dataDisks : undefined;
+            resourceInputs["dedicatedClusterId"] = args ? args.dedicatedClusterId : undefined;
             resourceInputs["disableApiTermination"] = args ? args.disableApiTermination : undefined;
             resourceInputs["disableMonitorService"] = args ? args.disableMonitorService : undefined;
             resourceInputs["disableSecurityService"] = args ? args.disableSecurityService : undefined;
@@ -363,6 +500,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["stoppedMode"] = args ? args.stoppedMode : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
             resourceInputs["systemDiskId"] = args ? args.systemDiskId : undefined;
+            resourceInputs["systemDiskResizeOnline"] = args ? args.systemDiskResizeOnline : undefined;
             resourceInputs["systemDiskSize"] = args ? args.systemDiskSize : undefined;
             resourceInputs["systemDiskType"] = args ? args.systemDiskType : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
@@ -425,6 +563,10 @@ export interface InstanceState {
      * Settings for data disks.
      */
     dataDisks?: pulumi.Input<pulumi.Input<inputs.Instance.InstanceDataDisk>[]>;
+    /**
+     * Exclusive cluster id.
+     */
+    dedicatedClusterId?: pulumi.Input<string>;
     /**
      * Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
      */
@@ -568,6 +710,10 @@ export interface InstanceState {
      */
     systemDiskId?: pulumi.Input<string>;
     /**
+     * Resize online.
+     */
+    systemDiskResizeOnline?: pulumi.Input<boolean>;
+    /**
      * Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
      */
     systemDiskSize?: pulumi.Input<number>;
@@ -629,6 +775,10 @@ export interface InstanceArgs {
      * Settings for data disks.
      */
     dataDisks?: pulumi.Input<pulumi.Input<inputs.Instance.InstanceDataDisk>[]>;
+    /**
+     * Exclusive cluster id.
+     */
+    dedicatedClusterId?: pulumi.Input<string>;
     /**
      * Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
      */
@@ -751,6 +901,10 @@ export interface InstanceArgs {
      * System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
      */
     systemDiskId?: pulumi.Input<string>;
+    /**
+     * Resize online.
+     */
+    systemDiskResizeOnline?: pulumi.Input<boolean>;
     /**
      * Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
      */

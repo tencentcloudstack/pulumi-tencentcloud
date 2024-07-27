@@ -36,6 +36,8 @@ if typing.TYPE_CHECKING:
     cbs = __cbs
     import tencentcloud_iac_pulumi.ccn as __ccn
     ccn = __ccn
+    import tencentcloud_iac_pulumi.cdc as __cdc
+    cdc = __cdc
     import tencentcloud_iac_pulumi.cdh as __cdh
     cdh = __cdh
     import tencentcloud_iac_pulumi.cdn as __cdn
@@ -244,6 +246,7 @@ else:
     cat = _utilities.lazy_import('tencentcloud_iac_pulumi.cat')
     cbs = _utilities.lazy_import('tencentcloud_iac_pulumi.cbs')
     ccn = _utilities.lazy_import('tencentcloud_iac_pulumi.ccn')
+    cdc = _utilities.lazy_import('tencentcloud_iac_pulumi.cdc')
     cdh = _utilities.lazy_import('tencentcloud_iac_pulumi.cdh')
     cdn = _utilities.lazy_import('tencentcloud_iac_pulumi.cdn')
     cdwpg = _utilities.lazy_import('tencentcloud_iac_pulumi.cdwpg')
@@ -1123,10 +1126,66 @@ _utilities.register(
  },
  {
   "pkg": "tencentcloud",
+  "mod": "Ccn/routeTable",
+  "fqn": "tencentcloud_iac_pulumi.ccn",
+  "classes": {
+   "tencentcloud:Ccn/routeTable:RouteTable": "RouteTable"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ccn/routeTableAssociateInstanceConfig",
+  "fqn": "tencentcloud_iac_pulumi.ccn",
+  "classes": {
+   "tencentcloud:Ccn/routeTableAssociateInstanceConfig:RouteTableAssociateInstanceConfig": "RouteTableAssociateInstanceConfig"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ccn/routeTableBroadcastPolicies",
+  "fqn": "tencentcloud_iac_pulumi.ccn",
+  "classes": {
+   "tencentcloud:Ccn/routeTableBroadcastPolicies:RouteTableBroadcastPolicies": "RouteTableBroadcastPolicies"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ccn/routeTableInputPolicies",
+  "fqn": "tencentcloud_iac_pulumi.ccn",
+  "classes": {
+   "tencentcloud:Ccn/routeTableInputPolicies:RouteTableInputPolicies": "RouteTableInputPolicies"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Ccn/routeTableSelectionPolicies",
+  "fqn": "tencentcloud_iac_pulumi.ccn",
+  "classes": {
+   "tencentcloud:Ccn/routeTableSelectionPolicies:RouteTableSelectionPolicies": "RouteTableSelectionPolicies"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
   "mod": "Ccn/routes",
   "fqn": "tencentcloud_iac_pulumi.ccn",
   "classes": {
    "tencentcloud:Ccn/routes:Routes": "Routes"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cdc/dedicatedCluster",
+  "fqn": "tencentcloud_iac_pulumi.cdc",
+  "classes": {
+   "tencentcloud:Cdc/dedicatedCluster:DedicatedCluster": "DedicatedCluster"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Cdc/site",
+  "fqn": "tencentcloud_iac_pulumi.cdc",
+  "classes": {
+   "tencentcloud:Cdc/site:Site": "Site"
   }
  },
  {
@@ -3959,6 +4018,14 @@ _utilities.register(
   "fqn": "tencentcloud_iac_pulumi.kubernetes",
   "classes": {
    "tencentcloud:Kubernetes/addonAttachment:AddonAttachment": "AddonAttachment"
+  }
+ },
+ {
+  "pkg": "tencentcloud",
+  "mod": "Kubernetes/addonConfig",
+  "fqn": "tencentcloud_iac_pulumi.kubernetes",
+  "classes": {
+   "tencentcloud:Kubernetes/addonConfig:AddonConfig": "AddonConfig"
   }
  },
  {

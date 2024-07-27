@@ -19,6 +19,7 @@ class StorageSetArgs:
                  storage_size: pulumi.Input[int],
                  storage_type: pulumi.Input[str],
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 dedicated_cluster_id: Optional[pulumi.Input[str]] = None,
                  disk_count: Optional[pulumi.Input[int]] = None,
                  encrypt: Optional[pulumi.Input[bool]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
@@ -30,7 +31,8 @@ class StorageSetArgs:
         :param pulumi.Input[str] storage_name: Name of CBS. The maximum length can not exceed 60 bytes.
         :param pulumi.Input[int] storage_size: Volume of CBS, and unit is GB.
         :param pulumi.Input[str] storage_type: Type of CBS medium. Valid values: CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_BSSD: General Purpose SSD, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD.
-        :param pulumi.Input[str] charge_type: The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+        :param pulumi.Input[str] charge_type: The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
+        :param pulumi.Input[str] dedicated_cluster_id: Exclusive cluster id.
         :param pulumi.Input[int] disk_count: The number of disks to be purchased. Default 1.
         :param pulumi.Input[bool] encrypt: Indicates whether CBS is encrypted.
         :param pulumi.Input[int] project_id: ID of the project to which the instance belongs.
@@ -43,6 +45,8 @@ class StorageSetArgs:
         pulumi.set(__self__, "storage_type", storage_type)
         if charge_type is not None:
             pulumi.set(__self__, "charge_type", charge_type)
+        if dedicated_cluster_id is not None:
+            pulumi.set(__self__, "dedicated_cluster_id", dedicated_cluster_id)
         if disk_count is not None:
             pulumi.set(__self__, "disk_count", disk_count)
         if encrypt is not None:
@@ -106,13 +110,25 @@ class StorageSetArgs:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+        The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
         """
         return pulumi.get(self, "charge_type")
 
     @charge_type.setter
     def charge_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "charge_type", value)
+
+    @property
+    @pulumi.getter(name="dedicatedClusterId")
+    def dedicated_cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Exclusive cluster id.
+        """
+        return pulumi.get(self, "dedicated_cluster_id")
+
+    @dedicated_cluster_id.setter
+    def dedicated_cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dedicated_cluster_id", value)
 
     @property
     @pulumi.getter(name="diskCount")
@@ -181,6 +197,7 @@ class _StorageSetState:
                  attached: Optional[pulumi.Input[bool]] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 dedicated_cluster_id: Optional[pulumi.Input[str]] = None,
                  disk_count: Optional[pulumi.Input[int]] = None,
                  disk_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  encrypt: Optional[pulumi.Input[bool]] = None,
@@ -195,7 +212,8 @@ class _StorageSetState:
         Input properties used for looking up and filtering StorageSet resources.
         :param pulumi.Input[bool] attached: Indicates whether the CBS is mounted the CVM.
         :param pulumi.Input[str] availability_zone: The available zone that the CBS instance locates at.
-        :param pulumi.Input[str] charge_type: The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+        :param pulumi.Input[str] charge_type: The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
+        :param pulumi.Input[str] dedicated_cluster_id: Exclusive cluster id.
         :param pulumi.Input[int] disk_count: The number of disks to be purchased. Default 1.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] disk_ids: disk id list.
         :param pulumi.Input[bool] encrypt: Indicates whether CBS is encrypted.
@@ -213,6 +231,8 @@ class _StorageSetState:
             pulumi.set(__self__, "availability_zone", availability_zone)
         if charge_type is not None:
             pulumi.set(__self__, "charge_type", charge_type)
+        if dedicated_cluster_id is not None:
+            pulumi.set(__self__, "dedicated_cluster_id", dedicated_cluster_id)
         if disk_count is not None:
             pulumi.set(__self__, "disk_count", disk_count)
         if disk_ids is not None:
@@ -262,13 +282,25 @@ class _StorageSetState:
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> Optional[pulumi.Input[str]]:
         """
-        The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+        The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
         """
         return pulumi.get(self, "charge_type")
 
     @charge_type.setter
     def charge_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "charge_type", value)
+
+    @property
+    @pulumi.getter(name="dedicatedClusterId")
+    def dedicated_cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Exclusive cluster id.
+        """
+        return pulumi.get(self, "dedicated_cluster_id")
+
+    @dedicated_cluster_id.setter
+    def dedicated_cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dedicated_cluster_id", value)
 
     @property
     @pulumi.getter(name="diskCount")
@@ -398,6 +430,7 @@ class StorageSet(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 dedicated_cluster_id: Optional[pulumi.Input[str]] = None,
                  disk_count: Optional[pulumi.Input[int]] = None,
                  encrypt: Optional[pulumi.Input[bool]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
@@ -412,17 +445,39 @@ class StorageSet(pulumi.CustomResource):
 
         ## Example Usage
 
+        ### Create 3 standard CBS storages
+
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        storage = tencentcloud.cbs.StorageSet("storage",
+        example = tencentcloud.cbs.StorageSet("example",
             availability_zone="ap-guangzhou-3",
-            disk_count=10,
+            disk_count=3,
             encrypt=False,
             project_id=0,
-            storage_name="mystorage",
+            storage_name="tf-example",
+            storage_size=100,
+            storage_type="CLOUD_SSD")
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Create 3 dedicated cluster CBS storages
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.cbs.StorageSet("example",
+            availability_zone="ap-guangzhou-4",
+            charge_type="DEDICATED_CLUSTER_PAID",
+            dedicated_cluster_id="cluster-262n63e8",
+            disk_count=3,
+            encrypt=False,
+            project_id=0,
+            storage_name="tf-example",
             storage_size=100,
             storage_type="CLOUD_SSD")
         ```
@@ -431,7 +486,8 @@ class StorageSet(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] availability_zone: The available zone that the CBS instance locates at.
-        :param pulumi.Input[str] charge_type: The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+        :param pulumi.Input[str] charge_type: The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
+        :param pulumi.Input[str] dedicated_cluster_id: Exclusive cluster id.
         :param pulumi.Input[int] disk_count: The number of disks to be purchased. Default 1.
         :param pulumi.Input[bool] encrypt: Indicates whether CBS is encrypted.
         :param pulumi.Input[int] project_id: ID of the project to which the instance belongs.
@@ -452,17 +508,39 @@ class StorageSet(pulumi.CustomResource):
 
         ## Example Usage
 
+        ### Create 3 standard CBS storages
+
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        storage = tencentcloud.cbs.StorageSet("storage",
+        example = tencentcloud.cbs.StorageSet("example",
             availability_zone="ap-guangzhou-3",
-            disk_count=10,
+            disk_count=3,
             encrypt=False,
             project_id=0,
-            storage_name="mystorage",
+            storage_name="tf-example",
+            storage_size=100,
+            storage_type="CLOUD_SSD")
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Create 3 dedicated cluster CBS storages
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.cbs.StorageSet("example",
+            availability_zone="ap-guangzhou-4",
+            charge_type="DEDICATED_CLUSTER_PAID",
+            dedicated_cluster_id="cluster-262n63e8",
+            disk_count=3,
+            encrypt=False,
+            project_id=0,
+            storage_name="tf-example",
             storage_size=100,
             storage_type="CLOUD_SSD")
         ```
@@ -485,6 +563,7 @@ class StorageSet(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  availability_zone: Optional[pulumi.Input[str]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 dedicated_cluster_id: Optional[pulumi.Input[str]] = None,
                  disk_count: Optional[pulumi.Input[int]] = None,
                  encrypt: Optional[pulumi.Input[bool]] = None,
                  project_id: Optional[pulumi.Input[int]] = None,
@@ -506,6 +585,7 @@ class StorageSet(pulumi.CustomResource):
                 raise TypeError("Missing required property 'availability_zone'")
             __props__.__dict__["availability_zone"] = availability_zone
             __props__.__dict__["charge_type"] = charge_type
+            __props__.__dict__["dedicated_cluster_id"] = dedicated_cluster_id
             __props__.__dict__["disk_count"] = disk_count
             __props__.__dict__["encrypt"] = encrypt
             __props__.__dict__["project_id"] = project_id
@@ -536,6 +616,7 @@ class StorageSet(pulumi.CustomResource):
             attached: Optional[pulumi.Input[bool]] = None,
             availability_zone: Optional[pulumi.Input[str]] = None,
             charge_type: Optional[pulumi.Input[str]] = None,
+            dedicated_cluster_id: Optional[pulumi.Input[str]] = None,
             disk_count: Optional[pulumi.Input[int]] = None,
             disk_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             encrypt: Optional[pulumi.Input[bool]] = None,
@@ -555,7 +636,8 @@ class StorageSet(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[bool] attached: Indicates whether the CBS is mounted the CVM.
         :param pulumi.Input[str] availability_zone: The available zone that the CBS instance locates at.
-        :param pulumi.Input[str] charge_type: The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+        :param pulumi.Input[str] charge_type: The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
+        :param pulumi.Input[str] dedicated_cluster_id: Exclusive cluster id.
         :param pulumi.Input[int] disk_count: The number of disks to be purchased. Default 1.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] disk_ids: disk id list.
         :param pulumi.Input[bool] encrypt: Indicates whether CBS is encrypted.
@@ -574,6 +656,7 @@ class StorageSet(pulumi.CustomResource):
         __props__.__dict__["attached"] = attached
         __props__.__dict__["availability_zone"] = availability_zone
         __props__.__dict__["charge_type"] = charge_type
+        __props__.__dict__["dedicated_cluster_id"] = dedicated_cluster_id
         __props__.__dict__["disk_count"] = disk_count
         __props__.__dict__["disk_ids"] = disk_ids
         __props__.__dict__["encrypt"] = encrypt
@@ -606,9 +689,17 @@ class StorageSet(pulumi.CustomResource):
     @pulumi.getter(name="chargeType")
     def charge_type(self) -> pulumi.Output[Optional[str]]:
         """
-        The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+        The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
         """
         return pulumi.get(self, "charge_type")
+
+    @property
+    @pulumi.getter(name="dedicatedClusterId")
+    def dedicated_cluster_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        Exclusive cluster id.
+        """
+        return pulumi.get(self, "dedicated_cluster_id")
 
     @property
     @pulumi.getter(name="diskCount")

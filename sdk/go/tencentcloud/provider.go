@@ -93,6 +93,12 @@ func NewProvider(ctx *pulumi.Context,
 type providerArgs struct {
 	// The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
 	AssumeRole *ProviderAssumeRole `pulumi:"assumeRole"`
+	// The `assume_role_with_saml` block. If provided, terraform will attempt to assume this role using the supplied
+	// credentials.
+	AssumeRoleWithSaml *ProviderAssumeRoleWithSaml `pulumi:"assumeRoleWithSaml"`
+	// The `assume_role_with_web_identity` block. If provided, terraform will attempt to assume this role using the supplied
+	// credentials.
+	AssumeRoleWithWebIdentity *ProviderAssumeRoleWithWebIdentity `pulumi:"assumeRoleWithWebIdentity"`
 	// The root domain of the API request, Default is `tencentcloudapi.com`.
 	Domain *string `pulumi:"domain"`
 	// The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
@@ -122,6 +128,12 @@ type providerArgs struct {
 type ProviderArgs struct {
 	// The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
 	AssumeRole ProviderAssumeRolePtrInput
+	// The `assume_role_with_saml` block. If provided, terraform will attempt to assume this role using the supplied
+	// credentials.
+	AssumeRoleWithSaml ProviderAssumeRoleWithSamlPtrInput
+	// The `assume_role_with_web_identity` block. If provided, terraform will attempt to assume this role using the supplied
+	// credentials.
+	AssumeRoleWithWebIdentity ProviderAssumeRoleWithWebIdentityPtrInput
 	// The root domain of the API request, Default is `tencentcloudapi.com`.
 	Domain pulumi.StringPtrInput
 	// The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment

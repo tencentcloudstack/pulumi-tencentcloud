@@ -15,6 +15,8 @@ import (
 //
 // ## Example Usage
 //
+// ### Create subnet resource
+//
 // <!--Start PulumiCodeChooser -->
 // ```go
 // package main
@@ -35,15 +37,15 @@ import (
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			foo, err := Vpc.NewInstance(ctx, "foo", &Vpc.InstanceArgs{
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//			_, err = Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
 //				AvailabilityZone: pulumi.String(availabilityZone),
-//				VpcId:            foo.ID(),
+//				VpcId:            vpc.ID(),
 //				CidrBlock:        pulumi.String("10.0.20.0/28"),
 //				IsMulticast:      pulumi.Bool(false),
 //				Tags: pulumi.Map{
@@ -53,17 +55,42 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_ = Vpc.GetSubnetsOutput(ctx, vpc.GetSubnetsOutputArgs{
-//				SubnetId: subnet.ID(),
-//			}, nil)
-//			_ = Vpc.GetSubnetsOutput(ctx, vpc.GetSubnetsOutputArgs{
-//				Name: subnet.Name,
-//			}, nil)
-//			_ = subnet.Tags.ApplyT(func(tags interface{}) (vpc.GetSubnetsResult, error) {
-//				return Vpc.GetSubnetsOutput(ctx, vpc.GetSubnetsOutputArgs{
-//					Tags: tags,
-//				}, nil), nil
-//			}).(vpc.GetSubnetsResultOutput)
+//			_, err = Subnet.NewInstance(ctx, "subnetCDC", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				CidrBlock:        pulumi.String("10.0.0.0/16"),
+//				CdcId:            pulumi.String("cluster-lchwgxhs"),
+//				AvailabilityZone: pulumi.Any(data.Tencentcloud_availability_zones.Zones.Zones[0].Name),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Query all subnets
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Vpc.GetSubnets(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
 //			return nil
 //		})
 //	}
@@ -84,6 +111,8 @@ func GetSubnets(ctx *pulumi.Context, args *GetSubnetsArgs, opts ...pulumi.Invoke
 type GetSubnetsArgs struct {
 	// Zone of the subnet to be queried.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
+	// ID of CDC instance.
+	CdcId *string `pulumi:"cdcId"`
 	// Filter subnet with this CIDR.
 	CidrBlock *string `pulumi:"cidrBlock"`
 	// Filter default or no default subnets.
@@ -108,6 +137,8 @@ type GetSubnetsArgs struct {
 type GetSubnetsResult struct {
 	// The availability zone of the subnet.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
+	// ID of CDC instance.
+	CdcId *string `pulumi:"cdcId"`
 	// A network address block of the subnet.
 	CidrBlock *string `pulumi:"cidrBlock"`
 	// The provider-assigned unique ID for this managed resource.
@@ -146,6 +177,8 @@ func GetSubnetsOutput(ctx *pulumi.Context, args GetSubnetsOutputArgs, opts ...pu
 type GetSubnetsOutputArgs struct {
 	// Zone of the subnet to be queried.
 	AvailabilityZone pulumi.StringPtrInput `pulumi:"availabilityZone"`
+	// ID of CDC instance.
+	CdcId pulumi.StringPtrInput `pulumi:"cdcId"`
 	// Filter subnet with this CIDR.
 	CidrBlock pulumi.StringPtrInput `pulumi:"cidrBlock"`
 	// Filter default or no default subnets.
@@ -188,6 +221,11 @@ func (o GetSubnetsResultOutput) ToGetSubnetsResultOutputWithContext(ctx context.
 // The availability zone of the subnet.
 func (o GetSubnetsResultOutput) AvailabilityZone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetSubnetsResult) *string { return v.AvailabilityZone }).(pulumi.StringPtrOutput)
+}
+
+// ID of CDC instance.
+func (o GetSubnetsResultOutput) CdcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetSubnetsResult) *string { return v.CdcId }).(pulumi.StringPtrOutput)
 }
 
 // A network address block of the subnet.

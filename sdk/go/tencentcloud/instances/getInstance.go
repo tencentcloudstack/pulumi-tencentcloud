@@ -120,6 +120,8 @@ func GetInstance(ctx *pulumi.Context, args *GetInstanceArgs, opts ...pulumi.Invo
 type GetInstanceArgs struct {
 	// The available zone that the CVM instance locates at.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
+	// Exclusive cluster id.
+	DedicatedClusterId *string `pulumi:"dedicatedClusterId"`
 	// ID of the instances to be queried.
 	InstanceId *string `pulumi:"instanceId"`
 	// Name of the instances to be queried.
@@ -142,6 +144,8 @@ type GetInstanceArgs struct {
 type GetInstanceResult struct {
 	// The available zone that the CVM instance locates at.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
+	// Exclusive cluster id.
+	DedicatedClusterId *string `pulumi:"dedicatedClusterId"`
 	// The provider-assigned unique ID for this managed resource.
 	Id string `pulumi:"id"`
 	// ID of the instances.
@@ -179,6 +183,8 @@ func GetInstanceOutput(ctx *pulumi.Context, args GetInstanceOutputArgs, opts ...
 type GetInstanceOutputArgs struct {
 	// The available zone that the CVM instance locates at.
 	AvailabilityZone pulumi.StringPtrInput `pulumi:"availabilityZone"`
+	// Exclusive cluster id.
+	DedicatedClusterId pulumi.StringPtrInput `pulumi:"dedicatedClusterId"`
 	// ID of the instances to be queried.
 	InstanceId pulumi.StringPtrInput `pulumi:"instanceId"`
 	// Name of the instances to be queried.
@@ -219,6 +225,11 @@ func (o GetInstanceResultOutput) ToGetInstanceResultOutputWithContext(ctx contex
 // The available zone that the CVM instance locates at.
 func (o GetInstanceResultOutput) AvailabilityZone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetInstanceResult) *string { return v.AvailabilityZone }).(pulumi.StringPtrOutput)
+}
+
+// Exclusive cluster id.
+func (o GetInstanceResultOutput) DedicatedClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetInstanceResult) *string { return v.DedicatedClusterId }).(pulumi.StringPtrOutput)
 }
 
 // The provider-assigned unique ID for this managed resource.

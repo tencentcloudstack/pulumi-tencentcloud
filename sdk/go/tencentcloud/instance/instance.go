@@ -18,12 +18,220 @@ import (
 //
 // > **NOTE:** At present, 'PREPAID' instance cannot be deleted directly and must wait it to be outdated and released automatically.
 //
+// ## Example Usage
+//
+// ### Create a general POSTPAID_BY_HOUR CVM instance
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-4"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			images, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+//				ImageTypes: []string{
+//					"PUBLIC_IMAGE",
+//				},
+//				ImageNameRegex: pulumi.StringRef("OpenCloudOS Server"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			types, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
+//				Filters: []instance.GetTypesFilter{
+//					{
+//						Name: "instance-family",
+//						Values: []string{
+//							"S1",
+//							"S2",
+//							"S3",
+//							"S4",
+//							"S5",
+//						},
+//					},
+//				},
+//				CpuCoreCount:   pulumi.IntRef(2),
+//				ExcludeSoldOut: pulumi.BoolRef(true),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			// create vpc
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create subnet
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create CVM instance
+//			_, err = Instance.NewInstance(ctx, "example", &Instance.InstanceArgs{
+//				InstanceName:     pulumi.String("tf-example"),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				ImageId:          pulumi.String(images.Images[0].ImageId),
+//				InstanceType:     pulumi.String(types.InstanceTypes[0].InstanceType),
+//				SystemDiskType:   pulumi.String("CLOUD_PREMIUM"),
+//				SystemDiskSize:   pulumi.Int(50),
+//				Hostname:         pulumi.String("user"),
+//				ProjectId:        pulumi.Int(0),
+//				VpcId:            vpc.ID(),
+//				SubnetId:         subnet.ID(),
+//				DataDisks: instance.InstanceDataDiskArray{
+//					&instance.InstanceDataDiskArgs{
+//						DataDiskType: pulumi.String("CLOUD_PREMIUM"),
+//						DataDiskSize: pulumi.Int(50),
+//						Encrypt:      pulumi.Bool(false),
+//					},
+//				},
+//				Tags: pulumi.Map{
+//					"tagKey": pulumi.Any("tagValue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Create a dedicated cluster CVM instance
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Images"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Instance"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-4"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			images, err := Images.GetInstance(ctx, &images.GetInstanceArgs{
+//				ImageTypes: []string{
+//					"PUBLIC_IMAGE",
+//				},
+//				ImageNameRegex: pulumi.StringRef("OpenCloudOS Server"),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			types, err := Instance.GetTypes(ctx, &instance.GetTypesArgs{
+//				Filters: []instance.GetTypesFilter{
+//					{
+//						Name: "instance-family",
+//						Values: []string{
+//							"S1",
+//							"S2",
+//							"S3",
+//							"S4",
+//							"S5",
+//						},
+//					},
+//				},
+//				CpuCoreCount:   pulumi.IntRef(2),
+//				ExcludeSoldOut: pulumi.BoolRef(true),
+//			}, nil)
+//			if err != nil {
+//				return err
+//			}
+//			// create vpc
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create subnet
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//				CdcId:            pulumi.String("cluster-262n63e8"),
+//				IsMulticast:      pulumi.Bool(false),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			// create CVM instance
+//			_, err = Instance.NewInstance(ctx, "example", &Instance.InstanceArgs{
+//				InstanceName:       pulumi.String("tf-example"),
+//				AvailabilityZone:   pulumi.String(availabilityZone),
+//				ImageId:            pulumi.String(images.Images[0].ImageId),
+//				InstanceType:       pulumi.String(types.InstanceTypes[0].InstanceType),
+//				DedicatedClusterId: pulumi.String("cluster-262n63e8"),
+//				InstanceChargeType: pulumi.String("CDCPAID"),
+//				SystemDiskType:     pulumi.String("CLOUD_SSD"),
+//				SystemDiskSize:     pulumi.Int(50),
+//				Hostname:           pulumi.String("user"),
+//				ProjectId:          pulumi.Int(0),
+//				VpcId:              vpc.ID(),
+//				SubnetId:           subnet.ID(),
+//				DataDisks: instance.InstanceDataDiskArray{
+//					&instance.InstanceDataDiskArgs{
+//						DataDiskType: pulumi.String("CLOUD_SSD"),
+//						DataDiskSize: pulumi.Int(50),
+//						Encrypt:      pulumi.Bool(false),
+//					},
+//				},
+//				Tags: pulumi.Map{
+//					"tagKey": pulumi.Any("tagValue"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
 // ## Import
 //
 // CVM instance can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Instance/instance:Instance foo ins-2qol3a80
+// $ pulumi import tencentcloud:Instance/instance:Instance example ins-2qol3a80
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -46,6 +254,8 @@ type Instance struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Settings for data disks.
 	DataDisks InstanceDataDiskArrayOutput `pulumi:"dataDisks"`
+	// Exclusive cluster id.
+	DedicatedClusterId pulumi.StringPtrOutput `pulumi:"dedicatedClusterId"`
 	// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
 	DisableApiTermination pulumi.BoolPtrOutput `pulumi:"disableApiTermination"`
 	// Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
@@ -120,6 +330,8 @@ type Instance struct {
 	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
 	// System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
 	SystemDiskId pulumi.StringOutput `pulumi:"systemDiskId"`
+	// Resize online.
+	SystemDiskResizeOnline pulumi.BoolPtrOutput `pulumi:"systemDiskResizeOnline"`
 	// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
 	SystemDiskSize pulumi.IntPtrOutput `pulumi:"systemDiskSize"`
 	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_BASIC`: cloud disk, `CLOUD_SSD`: cloud SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD. NOTE: If modified, the instance may force stop.
@@ -197,6 +409,8 @@ type instanceState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Settings for data disks.
 	DataDisks []InstanceDataDisk `pulumi:"dataDisks"`
+	// Exclusive cluster id.
+	DedicatedClusterId *string `pulumi:"dedicatedClusterId"`
 	// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
 	DisableApiTermination *bool `pulumi:"disableApiTermination"`
 	// Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
@@ -271,6 +485,8 @@ type instanceState struct {
 	SubnetId *string `pulumi:"subnetId"`
 	// System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
 	SystemDiskId *string `pulumi:"systemDiskId"`
+	// Resize online.
+	SystemDiskResizeOnline *bool `pulumi:"systemDiskResizeOnline"`
 	// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
 	SystemDiskSize *int `pulumi:"systemDiskSize"`
 	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_BASIC`: cloud disk, `CLOUD_SSD`: cloud SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD. NOTE: If modified, the instance may force stop.
@@ -306,6 +522,8 @@ type InstanceState struct {
 	CreateTime pulumi.StringPtrInput
 	// Settings for data disks.
 	DataDisks InstanceDataDiskArrayInput
+	// Exclusive cluster id.
+	DedicatedClusterId pulumi.StringPtrInput
 	// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
 	DisableApiTermination pulumi.BoolPtrInput
 	// Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
@@ -380,6 +598,8 @@ type InstanceState struct {
 	SubnetId pulumi.StringPtrInput
 	// System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
 	SystemDiskId pulumi.StringPtrInput
+	// Resize online.
+	SystemDiskResizeOnline pulumi.BoolPtrInput
 	// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
 	SystemDiskSize pulumi.IntPtrInput
 	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_BASIC`: cloud disk, `CLOUD_SSD`: cloud SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD. NOTE: If modified, the instance may force stop.
@@ -415,6 +635,8 @@ type instanceArgs struct {
 	CdhInstanceType *string `pulumi:"cdhInstanceType"`
 	// Settings for data disks.
 	DataDisks []InstanceDataDisk `pulumi:"dataDisks"`
+	// Exclusive cluster id.
+	DedicatedClusterId *string `pulumi:"dedicatedClusterId"`
 	// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
 	DisableApiTermination *bool `pulumi:"disableApiTermination"`
 	// Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
@@ -479,6 +701,8 @@ type instanceArgs struct {
 	SubnetId *string `pulumi:"subnetId"`
 	// System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
 	SystemDiskId *string `pulumi:"systemDiskId"`
+	// Resize online.
+	SystemDiskResizeOnline *bool `pulumi:"systemDiskResizeOnline"`
 	// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
 	SystemDiskSize *int `pulumi:"systemDiskSize"`
 	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_BASIC`: cloud disk, `CLOUD_SSD`: cloud SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD. NOTE: If modified, the instance may force stop.
@@ -509,6 +733,8 @@ type InstanceArgs struct {
 	CdhInstanceType pulumi.StringPtrInput
 	// Settings for data disks.
 	DataDisks InstanceDataDiskArrayInput
+	// Exclusive cluster id.
+	DedicatedClusterId pulumi.StringPtrInput
 	// Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
 	DisableApiTermination pulumi.BoolPtrInput
 	// Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifying will cause the instance reset.
@@ -573,6 +799,8 @@ type InstanceArgs struct {
 	SubnetId pulumi.StringPtrInput
 	// System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
 	SystemDiskId pulumi.StringPtrInput
+	// Resize online.
+	SystemDiskResizeOnline pulumi.BoolPtrInput
 	// Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.
 	SystemDiskSize pulumi.IntPtrInput
 	// System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_BASIC`: cloud disk, `CLOUD_SSD`: cloud SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD. NOTE: If modified, the instance may force stop.
@@ -717,6 +945,11 @@ func (o InstanceOutput) CreateTime() pulumi.StringOutput {
 // Settings for data disks.
 func (o InstanceOutput) DataDisks() InstanceDataDiskArrayOutput {
 	return o.ApplyT(func(v *Instance) InstanceDataDiskArrayOutput { return v.DataDisks }).(InstanceDataDiskArrayOutput)
+}
+
+// Exclusive cluster id.
+func (o InstanceOutput) DedicatedClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.DedicatedClusterId }).(pulumi.StringPtrOutput)
 }
 
 // Whether the termination protection is enabled. Default is `false`. If set true, which means that this instance can not be deleted by an API action.
@@ -893,6 +1126,11 @@ func (o InstanceOutput) SubnetId() pulumi.StringOutput {
 // System disk snapshot ID used to initialize the system disk. When system disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
 func (o InstanceOutput) SystemDiskId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringOutput { return v.SystemDiskId }).(pulumi.StringOutput)
+}
+
+// Resize online.
+func (o InstanceOutput) SystemDiskResizeOnline() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.SystemDiskResizeOnline }).(pulumi.BoolPtrOutput)
 }
 
 // Size of the system disk. unit is GB, Default is 50GB. If modified, the instance may force stop.

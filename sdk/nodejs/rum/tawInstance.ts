@@ -14,12 +14,12 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tawInstance = new tencentcloud.rum.TawInstance("tawInstance", {
+ * const example = new tencentcloud.rum.TawInstance("example", {
  *     areaId: 1,
  *     chargeType: 1,
  *     dataRetentionDays: 30,
- *     instanceDesc: "instanceDesc-1",
- *     instanceName: "instanceName-1",
+ *     instanceDesc: "desc.",
+ *     instanceName: "tf-example",
  *     tags: {
  *         createdBy: "terraform",
  *     },
@@ -32,7 +32,7 @@ import * as utilities from "../utilities";
  * rum taw_instance can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Rum/tawInstance:TawInstance taw_instance tawInstance_id
+ * $ pulumi import tencentcloud:Rum/tawInstance:TawInstance example rum-WYsjMaiGOVXBeJ
  * ```
  */
 export class TawInstance extends pulumi.CustomResource {

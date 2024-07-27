@@ -16,6 +16,8 @@ __all__ = ['ProviderArgs', 'Provider']
 class ProviderArgs:
     def __init__(__self__, *,
                  assume_role: Optional[pulumi.Input['ProviderAssumeRoleArgs']] = None,
+                 assume_role_with_saml: Optional[pulumi.Input['ProviderAssumeRoleWithSamlArgs']] = None,
+                 assume_role_with_web_identity: Optional[pulumi.Input['ProviderAssumeRoleWithWebIdentityArgs']] = None,
                  domain: Optional[pulumi.Input[str]] = None,
                  profile: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
@@ -27,6 +29,10 @@ class ProviderArgs:
         """
         The set of arguments for constructing a Provider resource.
         :param pulumi.Input['ProviderAssumeRoleArgs'] assume_role: The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+        :param pulumi.Input['ProviderAssumeRoleWithSamlArgs'] assume_role_with_saml: The `assume_role_with_saml` block. If provided, terraform will attempt to assume this role using the supplied
+               credentials.
+        :param pulumi.Input['ProviderAssumeRoleWithWebIdentityArgs'] assume_role_with_web_identity: The `assume_role_with_web_identity` block. If provided, terraform will attempt to assume this role using the supplied
+               credentials.
         :param pulumi.Input[str] domain: The root domain of the API request, Default is `tencentcloudapi.com`.
         :param pulumi.Input[str] profile: The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
                variable. If not set, the default profile created with `tccli configure` will be used.
@@ -45,6 +51,10 @@ class ProviderArgs:
         """
         if assume_role is not None:
             pulumi.set(__self__, "assume_role", assume_role)
+        if assume_role_with_saml is not None:
+            pulumi.set(__self__, "assume_role_with_saml", assume_role_with_saml)
+        if assume_role_with_web_identity is not None:
+            pulumi.set(__self__, "assume_role_with_web_identity", assume_role_with_web_identity)
         if domain is not None:
             pulumi.set(__self__, "domain", domain)
         if profile is not None:
@@ -81,6 +91,32 @@ class ProviderArgs:
     @assume_role.setter
     def assume_role(self, value: Optional[pulumi.Input['ProviderAssumeRoleArgs']]):
         pulumi.set(self, "assume_role", value)
+
+    @property
+    @pulumi.getter(name="assumeRoleWithSaml")
+    def assume_role_with_saml(self) -> Optional[pulumi.Input['ProviderAssumeRoleWithSamlArgs']]:
+        """
+        The `assume_role_with_saml` block. If provided, terraform will attempt to assume this role using the supplied
+        credentials.
+        """
+        return pulumi.get(self, "assume_role_with_saml")
+
+    @assume_role_with_saml.setter
+    def assume_role_with_saml(self, value: Optional[pulumi.Input['ProviderAssumeRoleWithSamlArgs']]):
+        pulumi.set(self, "assume_role_with_saml", value)
+
+    @property
+    @pulumi.getter(name="assumeRoleWithWebIdentity")
+    def assume_role_with_web_identity(self) -> Optional[pulumi.Input['ProviderAssumeRoleWithWebIdentityArgs']]:
+        """
+        The `assume_role_with_web_identity` block. If provided, terraform will attempt to assume this role using the supplied
+        credentials.
+        """
+        return pulumi.get(self, "assume_role_with_web_identity")
+
+    @assume_role_with_web_identity.setter
+    def assume_role_with_web_identity(self, value: Optional[pulumi.Input['ProviderAssumeRoleWithWebIdentityArgs']]):
+        pulumi.set(self, "assume_role_with_web_identity", value)
 
     @property
     @pulumi.getter
@@ -192,6 +228,8 @@ class Provider(pulumi.ProviderResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  assume_role: Optional[pulumi.Input[pulumi.InputType['ProviderAssumeRoleArgs']]] = None,
+                 assume_role_with_saml: Optional[pulumi.Input[pulumi.InputType['ProviderAssumeRoleWithSamlArgs']]] = None,
+                 assume_role_with_web_identity: Optional[pulumi.Input[pulumi.InputType['ProviderAssumeRoleWithWebIdentityArgs']]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
                  profile: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
@@ -210,6 +248,10 @@ class Provider(pulumi.ProviderResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[pulumi.InputType['ProviderAssumeRoleArgs']] assume_role: The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+        :param pulumi.Input[pulumi.InputType['ProviderAssumeRoleWithSamlArgs']] assume_role_with_saml: The `assume_role_with_saml` block. If provided, terraform will attempt to assume this role using the supplied
+               credentials.
+        :param pulumi.Input[pulumi.InputType['ProviderAssumeRoleWithWebIdentityArgs']] assume_role_with_web_identity: The `assume_role_with_web_identity` block. If provided, terraform will attempt to assume this role using the supplied
+               credentials.
         :param pulumi.Input[str] domain: The root domain of the API request, Default is `tencentcloudapi.com`.
         :param pulumi.Input[str] profile: The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
                variable. If not set, the default profile created with `tccli configure` will be used.
@@ -254,6 +296,8 @@ class Provider(pulumi.ProviderResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  assume_role: Optional[pulumi.Input[pulumi.InputType['ProviderAssumeRoleArgs']]] = None,
+                 assume_role_with_saml: Optional[pulumi.Input[pulumi.InputType['ProviderAssumeRoleWithSamlArgs']]] = None,
+                 assume_role_with_web_identity: Optional[pulumi.Input[pulumi.InputType['ProviderAssumeRoleWithWebIdentityArgs']]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
                  profile: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
@@ -272,6 +316,8 @@ class Provider(pulumi.ProviderResource):
             __props__ = ProviderArgs.__new__(ProviderArgs)
 
             __props__.__dict__["assume_role"] = pulumi.Output.from_input(assume_role).apply(pulumi.runtime.to_json) if assume_role is not None else None
+            __props__.__dict__["assume_role_with_saml"] = pulumi.Output.from_input(assume_role_with_saml).apply(pulumi.runtime.to_json) if assume_role_with_saml is not None else None
+            __props__.__dict__["assume_role_with_web_identity"] = pulumi.Output.from_input(assume_role_with_web_identity).apply(pulumi.runtime.to_json) if assume_role_with_web_identity is not None else None
             __props__.__dict__["domain"] = domain
             __props__.__dict__["profile"] = profile
             __props__.__dict__["protocol"] = protocol

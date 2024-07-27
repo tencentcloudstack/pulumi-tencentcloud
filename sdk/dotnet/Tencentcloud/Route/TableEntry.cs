@@ -53,6 +53,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
     ///         Description = "ci-test-route-table-entry",
     ///     });
     /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["itemId"] = instance.RouteItemId,
+    ///     };
     /// });
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
@@ -97,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         /// </summary>
         [Output("nextType")]
         public Output<string> NextType { get; private set; } = null!;
+
+        /// <summary>
+        /// ID of route table entry.
+        /// </summary>
+        [Output("routeItemId")]
+        public Output<string> RouteItemId { get; private set; } = null!;
 
         /// <summary>
         /// ID of routing table to which this entry belongs.
@@ -224,6 +234,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         /// </summary>
         [Input("nextType")]
         public Input<string>? NextType { get; set; }
+
+        /// <summary>
+        /// ID of route table entry.
+        /// </summary>
+        [Input("routeItemId")]
+        public Input<string>? RouteItemId { get; set; }
 
         /// <summary>
         /// ID of routing table to which this entry belongs.

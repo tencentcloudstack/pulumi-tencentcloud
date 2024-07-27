@@ -33,6 +33,16 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &InstancesRejectAttach{}
 	case "tencentcloud:Ccn/instancesResetAttach:InstancesResetAttach":
 		r = &InstancesResetAttach{}
+	case "tencentcloud:Ccn/routeTable:RouteTable":
+		r = &RouteTable{}
+	case "tencentcloud:Ccn/routeTableAssociateInstanceConfig:RouteTableAssociateInstanceConfig":
+		r = &RouteTableAssociateInstanceConfig{}
+	case "tencentcloud:Ccn/routeTableBroadcastPolicies:RouteTableBroadcastPolicies":
+		r = &RouteTableBroadcastPolicies{}
+	case "tencentcloud:Ccn/routeTableInputPolicies:RouteTableInputPolicies":
+		r = &RouteTableInputPolicies{}
+	case "tencentcloud:Ccn/routeTableSelectionPolicies:RouteTableSelectionPolicies":
+		r = &RouteTableSelectionPolicies{}
 	case "tencentcloud:Ccn/routes:Routes":
 		r = &Routes{}
 	default:
@@ -76,6 +86,31 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Ccn/instancesResetAttach",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ccn/routeTable",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ccn/routeTableAssociateInstanceConfig",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ccn/routeTableBroadcastPolicies",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ccn/routeTableInputPolicies",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Ccn/routeTableSelectionPolicies",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

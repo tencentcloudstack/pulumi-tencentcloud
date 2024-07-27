@@ -130,6 +130,10 @@ __all__ = [
     'GetStatisticDataDataPointResult',
     'GetStatisticDataDataPointDimensionResult',
     'GetStatisticDataDataPointValueResult',
+    'GetTmpInstancesInstanceSetResult',
+    'GetTmpInstancesInstanceSetGrantResult',
+    'GetTmpInstancesInstanceSetTagSpecificationResult',
+    'GetTmpInstancesTagFilterResult',
     'GetTmpRegionsRegionSetResult',
 ]
 
@@ -9926,6 +9930,540 @@ class GetStatisticDataDataPointValueResult(dict):
     def value(self) -> float:
         """
         Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetTmpInstancesInstanceSetResult(dict):
+    def __init__(__self__, *,
+                 alert_rule_limit: int,
+                 api_root_path: str,
+                 auth_token: str,
+                 auto_renew_flag: int,
+                 charge_status: int,
+                 created_at: str,
+                 data_retention_time: int,
+                 enable_grafana: int,
+                 expire_time: str,
+                 grafana_instance_id: str,
+                 grafana_ip_white_list: str,
+                 grafana_status: int,
+                 grafana_url: str,
+                 grants: Sequence['outputs.GetTmpInstancesInstanceSetGrantResult'],
+                 instance_charge_type: int,
+                 instance_id: str,
+                 instance_name: str,
+                 instance_status: int,
+                 ipv4_address: str,
+                 is_near_expire: int,
+                 migration_type: int,
+                 proxy_address: str,
+                 recording_rule_limit: int,
+                 region_id: int,
+                 remote_write: str,
+                 spec_name: str,
+                 subnet_id: str,
+                 tag_specifications: Sequence['outputs.GetTmpInstancesInstanceSetTagSpecificationResult'],
+                 vpc_id: str,
+                 zone: str):
+        """
+        :param int alert_rule_limit: Alert rule limit.
+        :param str api_root_path: Prometheus http api root address.
+        :param str auth_token: Token required for data writing.
+        :param int auto_renew_flag: Automatic renewal flag.
+               - 0: No automatic renewal;
+               - 1: Enable automatic renewal;
+               - 2: Automatic renewal is prohibited;
+               - -1: Invalid.
+        :param int charge_status: Charge status.
+               - 1: Normal;
+               - 2: Expires;
+               - 3: Destruction;
+               - 4: Allocation;
+               - 5: Allocation failed.
+        :param str created_at: Created_at.
+        :param int data_retention_time: Data retention time.
+        :param int enable_grafana: Whether to enable grafana.
+               - 0: closed;
+               - 1: open.
+        :param str expire_time: Expires for purchased instances.
+        :param str grafana_instance_id: Binding grafana instance id.
+        :param str grafana_ip_white_list: Grafana IP whitelist list.
+        :param int grafana_status: Grafana status.
+               - 1: Creating;
+               - 2: In operation;
+               - 3: Abnormal;
+               - 4: Rebooting;
+               - 5: Destruction;
+               - 6: Shutdown;
+               - 7: Deleted.
+        :param str grafana_url: Grafana panel url.
+        :param Sequence['GetTmpInstancesInstanceSetGrantArgs'] grants: Authorization information for the instance.
+        :param int instance_charge_type: Filter according to instance charge type.
+               - 2: Prepaid;
+               - 3: Postpaid by hour.
+        :param str instance_id: Instance id.
+        :param str instance_name: Filter according to instance name.
+        :param int instance_status: Filter according to instance status.
+               - 1: Creating;
+               - 2: In operation;
+               - 3: Abnormal;
+               - 4: Reconstruction;
+               - 5: Destruction;
+               - 6: Stopped taking;
+               - 8: Suspension of service due to arrears;
+               - 9: Service has been suspended due to arrears.
+        :param str ipv4_address: Filter according to ipv4 address.
+        :param int is_near_expire: Whether it is about to expire.
+               - 0: No;
+               - 1: Expiring soon.
+        :param int migration_type: Migration status.
+               - 0: Not in migration;
+               +- 1: Migrating, original instance;
+               +- 2: Migrating, target instance.
+        :param str proxy_address: Proxy address.
+        :param int recording_rule_limit: Pre-aggregation rule limitations.
+        :param int region_id: Region id.
+        :param str remote_write: Address of prometheus remote write.
+        :param str spec_name: Specification name.
+        :param str subnet_id: Subnet id.
+        :param Sequence['GetTmpInstancesInstanceSetTagSpecificationArgs'] tag_specifications: List of tags associated with the instance.
+        :param str vpc_id: VPC id.
+        :param str zone: Zone.
+        """
+        pulumi.set(__self__, "alert_rule_limit", alert_rule_limit)
+        pulumi.set(__self__, "api_root_path", api_root_path)
+        pulumi.set(__self__, "auth_token", auth_token)
+        pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
+        pulumi.set(__self__, "charge_status", charge_status)
+        pulumi.set(__self__, "created_at", created_at)
+        pulumi.set(__self__, "data_retention_time", data_retention_time)
+        pulumi.set(__self__, "enable_grafana", enable_grafana)
+        pulumi.set(__self__, "expire_time", expire_time)
+        pulumi.set(__self__, "grafana_instance_id", grafana_instance_id)
+        pulumi.set(__self__, "grafana_ip_white_list", grafana_ip_white_list)
+        pulumi.set(__self__, "grafana_status", grafana_status)
+        pulumi.set(__self__, "grafana_url", grafana_url)
+        pulumi.set(__self__, "grants", grants)
+        pulumi.set(__self__, "instance_charge_type", instance_charge_type)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_name", instance_name)
+        pulumi.set(__self__, "instance_status", instance_status)
+        pulumi.set(__self__, "ipv4_address", ipv4_address)
+        pulumi.set(__self__, "is_near_expire", is_near_expire)
+        pulumi.set(__self__, "migration_type", migration_type)
+        pulumi.set(__self__, "proxy_address", proxy_address)
+        pulumi.set(__self__, "recording_rule_limit", recording_rule_limit)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "remote_write", remote_write)
+        pulumi.set(__self__, "spec_name", spec_name)
+        pulumi.set(__self__, "subnet_id", subnet_id)
+        pulumi.set(__self__, "tag_specifications", tag_specifications)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+        pulumi.set(__self__, "zone", zone)
+
+    @property
+    @pulumi.getter(name="alertRuleLimit")
+    def alert_rule_limit(self) -> int:
+        """
+        Alert rule limit.
+        """
+        return pulumi.get(self, "alert_rule_limit")
+
+    @property
+    @pulumi.getter(name="apiRootPath")
+    def api_root_path(self) -> str:
+        """
+        Prometheus http api root address.
+        """
+        return pulumi.get(self, "api_root_path")
+
+    @property
+    @pulumi.getter(name="authToken")
+    def auth_token(self) -> str:
+        """
+        Token required for data writing.
+        """
+        return pulumi.get(self, "auth_token")
+
+    @property
+    @pulumi.getter(name="autoRenewFlag")
+    def auto_renew_flag(self) -> int:
+        """
+        Automatic renewal flag.
+        - 0: No automatic renewal;
+        - 1: Enable automatic renewal;
+        - 2: Automatic renewal is prohibited;
+        - -1: Invalid.
+        """
+        return pulumi.get(self, "auto_renew_flag")
+
+    @property
+    @pulumi.getter(name="chargeStatus")
+    def charge_status(self) -> int:
+        """
+        Charge status.
+        - 1: Normal;
+        - 2: Expires;
+        - 3: Destruction;
+        - 4: Allocation;
+        - 5: Allocation failed.
+        """
+        return pulumi.get(self, "charge_status")
+
+    @property
+    @pulumi.getter(name="createdAt")
+    def created_at(self) -> str:
+        """
+        Created_at.
+        """
+        return pulumi.get(self, "created_at")
+
+    @property
+    @pulumi.getter(name="dataRetentionTime")
+    def data_retention_time(self) -> int:
+        """
+        Data retention time.
+        """
+        return pulumi.get(self, "data_retention_time")
+
+    @property
+    @pulumi.getter(name="enableGrafana")
+    def enable_grafana(self) -> int:
+        """
+        Whether to enable grafana.
+        - 0: closed;
+        - 1: open.
+        """
+        return pulumi.get(self, "enable_grafana")
+
+    @property
+    @pulumi.getter(name="expireTime")
+    def expire_time(self) -> str:
+        """
+        Expires for purchased instances.
+        """
+        return pulumi.get(self, "expire_time")
+
+    @property
+    @pulumi.getter(name="grafanaInstanceId")
+    def grafana_instance_id(self) -> str:
+        """
+        Binding grafana instance id.
+        """
+        return pulumi.get(self, "grafana_instance_id")
+
+    @property
+    @pulumi.getter(name="grafanaIpWhiteList")
+    def grafana_ip_white_list(self) -> str:
+        """
+        Grafana IP whitelist list.
+        """
+        return pulumi.get(self, "grafana_ip_white_list")
+
+    @property
+    @pulumi.getter(name="grafanaStatus")
+    def grafana_status(self) -> int:
+        """
+        Grafana status.
+        - 1: Creating;
+        - 2: In operation;
+        - 3: Abnormal;
+        - 4: Rebooting;
+        - 5: Destruction;
+        - 6: Shutdown;
+        - 7: Deleted.
+        """
+        return pulumi.get(self, "grafana_status")
+
+    @property
+    @pulumi.getter(name="grafanaUrl")
+    def grafana_url(self) -> str:
+        """
+        Grafana panel url.
+        """
+        return pulumi.get(self, "grafana_url")
+
+    @property
+    @pulumi.getter
+    def grants(self) -> Sequence['outputs.GetTmpInstancesInstanceSetGrantResult']:
+        """
+        Authorization information for the instance.
+        """
+        return pulumi.get(self, "grants")
+
+    @property
+    @pulumi.getter(name="instanceChargeType")
+    def instance_charge_type(self) -> int:
+        """
+        Filter according to instance charge type.
+        - 2: Prepaid;
+        - 3: Postpaid by hour.
+        """
+        return pulumi.get(self, "instance_charge_type")
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> str:
+        """
+        Instance id.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @property
+    @pulumi.getter(name="instanceName")
+    def instance_name(self) -> str:
+        """
+        Filter according to instance name.
+        """
+        return pulumi.get(self, "instance_name")
+
+    @property
+    @pulumi.getter(name="instanceStatus")
+    def instance_status(self) -> int:
+        """
+        Filter according to instance status.
+        - 1: Creating;
+        - 2: In operation;
+        - 3: Abnormal;
+        - 4: Reconstruction;
+        - 5: Destruction;
+        - 6: Stopped taking;
+        - 8: Suspension of service due to arrears;
+        - 9: Service has been suspended due to arrears.
+        """
+        return pulumi.get(self, "instance_status")
+
+    @property
+    @pulumi.getter(name="ipv4Address")
+    def ipv4_address(self) -> str:
+        """
+        Filter according to ipv4 address.
+        """
+        return pulumi.get(self, "ipv4_address")
+
+    @property
+    @pulumi.getter(name="isNearExpire")
+    def is_near_expire(self) -> int:
+        """
+        Whether it is about to expire.
+        - 0: No;
+        - 1: Expiring soon.
+        """
+        return pulumi.get(self, "is_near_expire")
+
+    @property
+    @pulumi.getter(name="migrationType")
+    def migration_type(self) -> int:
+        """
+        Migration status.
+        - 0: Not in migration;
+        +- 1: Migrating, original instance;
+        +- 2: Migrating, target instance.
+        """
+        return pulumi.get(self, "migration_type")
+
+    @property
+    @pulumi.getter(name="proxyAddress")
+    def proxy_address(self) -> str:
+        """
+        Proxy address.
+        """
+        return pulumi.get(self, "proxy_address")
+
+    @property
+    @pulumi.getter(name="recordingRuleLimit")
+    def recording_rule_limit(self) -> int:
+        """
+        Pre-aggregation rule limitations.
+        """
+        return pulumi.get(self, "recording_rule_limit")
+
+    @property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> int:
+        """
+        Region id.
+        """
+        return pulumi.get(self, "region_id")
+
+    @property
+    @pulumi.getter(name="remoteWrite")
+    def remote_write(self) -> str:
+        """
+        Address of prometheus remote write.
+        """
+        return pulumi.get(self, "remote_write")
+
+    @property
+    @pulumi.getter(name="specName")
+    def spec_name(self) -> str:
+        """
+        Specification name.
+        """
+        return pulumi.get(self, "spec_name")
+
+    @property
+    @pulumi.getter(name="subnetId")
+    def subnet_id(self) -> str:
+        """
+        Subnet id.
+        """
+        return pulumi.get(self, "subnet_id")
+
+    @property
+    @pulumi.getter(name="tagSpecifications")
+    def tag_specifications(self) -> Sequence['outputs.GetTmpInstancesInstanceSetTagSpecificationResult']:
+        """
+        List of tags associated with the instance.
+        """
+        return pulumi.get(self, "tag_specifications")
+
+    @property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> str:
+        """
+        VPC id.
+        """
+        return pulumi.get(self, "vpc_id")
+
+    @property
+    @pulumi.getter
+    def zone(self) -> str:
+        """
+        Zone.
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class GetTmpInstancesInstanceSetGrantResult(dict):
+    def __init__(__self__, *,
+                 has_agent_manage: int,
+                 has_api_operation: int,
+                 has_charge_operation: int,
+                 has_grafana_status_change: int,
+                 has_tke_manage: int,
+                 has_vpc_display: int):
+        """
+        :param int has_agent_manage: Whether you have permission to manage the agent (1=yes, 2=no).
+        :param int has_api_operation: Whether to display API and other information (1=yes, 2=no).
+        :param int has_charge_operation: Whether you have charging operation authority (1=yes, 2=no).
+        :param int has_grafana_status_change: Whether the status of Grafana can be modified (1=yes, 2=no).
+        :param int has_tke_manage: Whether you have permission to manage TKE integration (1=yes, 2=no).
+        :param int has_vpc_display: Whether to display VPC information (1=yes, 2=no).
+        """
+        pulumi.set(__self__, "has_agent_manage", has_agent_manage)
+        pulumi.set(__self__, "has_api_operation", has_api_operation)
+        pulumi.set(__self__, "has_charge_operation", has_charge_operation)
+        pulumi.set(__self__, "has_grafana_status_change", has_grafana_status_change)
+        pulumi.set(__self__, "has_tke_manage", has_tke_manage)
+        pulumi.set(__self__, "has_vpc_display", has_vpc_display)
+
+    @property
+    @pulumi.getter(name="hasAgentManage")
+    def has_agent_manage(self) -> int:
+        """
+        Whether you have permission to manage the agent (1=yes, 2=no).
+        """
+        return pulumi.get(self, "has_agent_manage")
+
+    @property
+    @pulumi.getter(name="hasApiOperation")
+    def has_api_operation(self) -> int:
+        """
+        Whether to display API and other information (1=yes, 2=no).
+        """
+        return pulumi.get(self, "has_api_operation")
+
+    @property
+    @pulumi.getter(name="hasChargeOperation")
+    def has_charge_operation(self) -> int:
+        """
+        Whether you have charging operation authority (1=yes, 2=no).
+        """
+        return pulumi.get(self, "has_charge_operation")
+
+    @property
+    @pulumi.getter(name="hasGrafanaStatusChange")
+    def has_grafana_status_change(self) -> int:
+        """
+        Whether the status of Grafana can be modified (1=yes, 2=no).
+        """
+        return pulumi.get(self, "has_grafana_status_change")
+
+    @property
+    @pulumi.getter(name="hasTkeManage")
+    def has_tke_manage(self) -> int:
+        """
+        Whether you have permission to manage TKE integration (1=yes, 2=no).
+        """
+        return pulumi.get(self, "has_tke_manage")
+
+    @property
+    @pulumi.getter(name="hasVpcDisplay")
+    def has_vpc_display(self) -> int:
+        """
+        Whether to display VPC information (1=yes, 2=no).
+        """
+        return pulumi.get(self, "has_vpc_display")
+
+
+@pulumi.output_type
+class GetTmpInstancesInstanceSetTagSpecificationResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: The key of the tag.
+        :param str value: The value of the tag.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        The key of the tag.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        The value of the tag.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetTmpInstancesTagFilterResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: The key of the tag.
+        :param str value: The value of the tag.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        The key of the tag.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        The value of the tag.
         """
         return pulumi.get(self, "value")
 

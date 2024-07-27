@@ -54,6 +54,9 @@ __all__ = [
     'KafkaRechargeProtocol',
     'MachineGroupMachineGroupType',
     'ScheduledSqlDstResource',
+    'TopicExtends',
+    'TopicExtendsAnonymousAccess',
+    'TopicExtendsAnonymousAccessCondition',
     'GetMachineGroupConfigsConfigResult',
     'GetMachineGroupConfigsConfigExcludePathResult',
     'GetMachineGroupConfigsConfigExtractRuleResult',
@@ -3110,6 +3113,133 @@ class ScheduledSqlDstResource(dict):
         topic region.
         """
         return pulumi.get(self, "region")
+
+
+@pulumi.output_type
+class TopicExtends(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "anonymousAccess":
+            suggest = "anonymous_access"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TopicExtends. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TopicExtends.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TopicExtends.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 anonymous_access: Optional['outputs.TopicExtendsAnonymousAccess'] = None):
+        """
+        :param 'TopicExtendsAnonymousAccessArgs' anonymous_access: Log topic authentication free configuration information.
+        """
+        if anonymous_access is not None:
+            pulumi.set(__self__, "anonymous_access", anonymous_access)
+
+    @property
+    @pulumi.getter(name="anonymousAccess")
+    def anonymous_access(self) -> Optional['outputs.TopicExtendsAnonymousAccess']:
+        """
+        Log topic authentication free configuration information.
+        """
+        return pulumi.get(self, "anonymous_access")
+
+
+@pulumi.output_type
+class TopicExtendsAnonymousAccess(dict):
+    def __init__(__self__, *,
+                 conditions: Optional[Sequence['outputs.TopicExtendsAnonymousAccessCondition']] = None,
+                 operations: Optional[Sequence[str]] = None):
+        """
+        :param Sequence['TopicExtendsAnonymousAccessConditionArgs'] conditions: Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+        :param Sequence[str] operations: Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+        """
+        if conditions is not None:
+            pulumi.set(__self__, "conditions", conditions)
+        if operations is not None:
+            pulumi.set(__self__, "operations", operations)
+
+    @property
+    @pulumi.getter
+    def conditions(self) -> Optional[Sequence['outputs.TopicExtendsAnonymousAccessCondition']]:
+        """
+        Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+        """
+        return pulumi.get(self, "conditions")
+
+    @property
+    @pulumi.getter
+    def operations(self) -> Optional[Sequence[str]]:
+        """
+        Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+        """
+        return pulumi.get(self, "operations")
+
+
+@pulumi.output_type
+class TopicExtendsAnonymousAccessCondition(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "conditionValue":
+            suggest = "condition_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TopicExtendsAnonymousAccessCondition. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TopicExtendsAnonymousAccessCondition.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TopicExtendsAnonymousAccessCondition.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 attributes: Optional[str] = None,
+                 condition_value: Optional[str] = None,
+                 rule: Optional[int] = None):
+        """
+        :param str attributes: Condition attribute, currently only VpcID is supported.
+        :param str condition_value: The value of the corresponding conditional attribute.
+        :param int rule: Conditional rule, 1: equal, 2: not equal.
+        """
+        if attributes is not None:
+            pulumi.set(__self__, "attributes", attributes)
+        if condition_value is not None:
+            pulumi.set(__self__, "condition_value", condition_value)
+        if rule is not None:
+            pulumi.set(__self__, "rule", rule)
+
+    @property
+    @pulumi.getter
+    def attributes(self) -> Optional[str]:
+        """
+        Condition attribute, currently only VpcID is supported.
+        """
+        return pulumi.get(self, "attributes")
+
+    @property
+    @pulumi.getter(name="conditionValue")
+    def condition_value(self) -> Optional[str]:
+        """
+        The value of the corresponding conditional attribute.
+        """
+        return pulumi.get(self, "condition_value")
+
+    @property
+    @pulumi.getter
+    def rule(self) -> Optional[int]:
+        """
+        Conditional rule, 1: equal, 2: not equal.
+        """
+        return pulumi.get(self, "rule")
 
 
 @pulumi.output_type

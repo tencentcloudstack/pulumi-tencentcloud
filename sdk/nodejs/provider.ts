@@ -79,6 +79,8 @@ export class Provider extends pulumi.ProviderResource {
         opts = opts || {};
         {
             resourceInputs["assumeRole"] = pulumi.output(args ? args.assumeRole : undefined).apply(JSON.stringify);
+            resourceInputs["assumeRoleWithSaml"] = pulumi.output(args ? args.assumeRoleWithSaml : undefined).apply(JSON.stringify);
+            resourceInputs["assumeRoleWithWebIdentity"] = pulumi.output(args ? args.assumeRoleWithWebIdentity : undefined).apply(JSON.stringify);
             resourceInputs["domain"] = args ? args.domain : undefined;
             resourceInputs["profile"] = args ? args.profile : undefined;
             resourceInputs["protocol"] = args ? args.protocol : undefined;
@@ -103,6 +105,16 @@ export interface ProviderArgs {
      * The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
      */
     assumeRole?: pulumi.Input<inputs.ProviderAssumeRole>;
+    /**
+     * The `assume_role_with_saml` block. If provided, terraform will attempt to assume this role using the supplied
+     * credentials.
+     */
+    assumeRoleWithSaml?: pulumi.Input<inputs.ProviderAssumeRoleWithSaml>;
+    /**
+     * The `assume_role_with_web_identity` block. If provided, terraform will attempt to assume this role using the supplied
+     * credentials.
+     */
+    assumeRoleWithWebIdentity?: pulumi.Input<inputs.ProviderAssumeRoleWithWebIdentity>;
     /**
      * The root domain of the API request, Default is `tencentcloudapi.com`.
      */

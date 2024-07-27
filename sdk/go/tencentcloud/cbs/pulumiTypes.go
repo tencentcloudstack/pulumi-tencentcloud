@@ -356,10 +356,12 @@ type GetStoragesSetStorageList struct {
 	Attached bool `pulumi:"attached"`
 	// The available zone that the CBS instance locates at.
 	AvailabilityZone string `pulumi:"availabilityZone"`
-	// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+	// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
 	ChargeType string `pulumi:"chargeType"`
 	// Creation time of CBS.
 	CreateTime string `pulumi:"createTime"`
+	// Exclusive cluster id.
+	DedicatedClusterId string `pulumi:"dedicatedClusterId"`
 	// Indicates whether CBS is encrypted.
 	Encrypt bool `pulumi:"encrypt"`
 	// ID of the CVM instance that be mounted by this CBS.
@@ -402,10 +404,12 @@ type GetStoragesSetStorageListArgs struct {
 	Attached pulumi.BoolInput `pulumi:"attached"`
 	// The available zone that the CBS instance locates at.
 	AvailabilityZone pulumi.StringInput `pulumi:"availabilityZone"`
-	// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+	// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
 	ChargeType pulumi.StringInput `pulumi:"chargeType"`
 	// Creation time of CBS.
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Exclusive cluster id.
+	DedicatedClusterId pulumi.StringInput `pulumi:"dedicatedClusterId"`
 	// Indicates whether CBS is encrypted.
 	Encrypt pulumi.BoolInput `pulumi:"encrypt"`
 	// ID of the CVM instance that be mounted by this CBS.
@@ -493,7 +497,7 @@ func (o GetStoragesSetStorageListOutput) AvailabilityZone() pulumi.StringOutput 
 	return o.ApplyT(func(v GetStoragesSetStorageList) string { return v.AvailabilityZone }).(pulumi.StringOutput)
 }
 
-// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
 func (o GetStoragesSetStorageListOutput) ChargeType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetStoragesSetStorageList) string { return v.ChargeType }).(pulumi.StringOutput)
 }
@@ -501,6 +505,11 @@ func (o GetStoragesSetStorageListOutput) ChargeType() pulumi.StringOutput {
 // Creation time of CBS.
 func (o GetStoragesSetStorageListOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetStoragesSetStorageList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Exclusive cluster id.
+func (o GetStoragesSetStorageListOutput) DedicatedClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetStoragesSetStorageList) string { return v.DedicatedClusterId }).(pulumi.StringOutput)
 }
 
 // Indicates whether CBS is encrypted.
@@ -588,10 +597,12 @@ type GetStoragesStorageList struct {
 	Attached bool `pulumi:"attached"`
 	// The available zone that the CBS instance locates at.
 	AvailabilityZone string `pulumi:"availabilityZone"`
-	// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+	// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
 	ChargeType string `pulumi:"chargeType"`
 	// Creation time of CBS.
 	CreateTime string `pulumi:"createTime"`
+	// Exclusive cluster id.
+	DedicatedClusterId string `pulumi:"dedicatedClusterId"`
 	// Indicates whether CBS is encrypted.
 	Encrypt bool `pulumi:"encrypt"`
 	// ID of the CVM instance that be mounted by this CBS.
@@ -634,10 +645,12 @@ type GetStoragesStorageListArgs struct {
 	Attached pulumi.BoolInput `pulumi:"attached"`
 	// The available zone that the CBS instance locates at.
 	AvailabilityZone pulumi.StringInput `pulumi:"availabilityZone"`
-	// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+	// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
 	ChargeType pulumi.StringInput `pulumi:"chargeType"`
 	// Creation time of CBS.
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
+	// Exclusive cluster id.
+	DedicatedClusterId pulumi.StringInput `pulumi:"dedicatedClusterId"`
 	// Indicates whether CBS is encrypted.
 	Encrypt pulumi.BoolInput `pulumi:"encrypt"`
 	// ID of the CVM instance that be mounted by this CBS.
@@ -725,7 +738,7 @@ func (o GetStoragesStorageListOutput) AvailabilityZone() pulumi.StringOutput {
 	return o.ApplyT(func(v GetStoragesStorageList) string { return v.AvailabilityZone }).(pulumi.StringOutput)
 }
 
-// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
 func (o GetStoragesStorageListOutput) ChargeType() pulumi.StringOutput {
 	return o.ApplyT(func(v GetStoragesStorageList) string { return v.ChargeType }).(pulumi.StringOutput)
 }
@@ -733,6 +746,11 @@ func (o GetStoragesStorageListOutput) ChargeType() pulumi.StringOutput {
 // Creation time of CBS.
 func (o GetStoragesStorageListOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetStoragesStorageList) string { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Exclusive cluster id.
+func (o GetStoragesStorageListOutput) DedicatedClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetStoragesStorageList) string { return v.DedicatedClusterId }).(pulumi.StringOutput)
 }
 
 // Indicates whether CBS is encrypted.
