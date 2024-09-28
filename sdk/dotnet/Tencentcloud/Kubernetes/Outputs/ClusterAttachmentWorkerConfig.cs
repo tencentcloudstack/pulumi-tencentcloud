@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly Outputs.ClusterAttachmentWorkerConfigGpuArgs? GpuArgs;
         /// <summary>
-        /// Indicate to schedule the adding node or not. Default is true.
+        /// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
         /// </summary>
         public readonly bool? IsSchedule;
         /// <summary>

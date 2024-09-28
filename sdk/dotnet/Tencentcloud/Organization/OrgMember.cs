@@ -138,6 +138,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         public Output<string?> Remark { get; private set; } = null!;
 
         /// <summary>
+        /// Tag description list.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
+
+        /// <summary>
         /// Member update time.
         /// </summary>
         [Output("updateTime")]
@@ -237,6 +243,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// </summary>
         [Input("remark")]
         public Input<string>? Remark { get; set; }
+
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tag description list.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
 
         public OrgMemberArgs()
         {
@@ -341,6 +359,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// </summary>
         [Input("remark")]
         public Input<string>? Remark { get; set; }
+
+        [Input("tags")]
+        private InputMap<object>? _tags;
+
+        /// <summary>
+        /// Tag description list.
+        /// </summary>
+        public InputMap<object> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<object>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// Member update time.

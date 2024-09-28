@@ -17,19 +17,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// ## Example Usage
         /// 
+        /// ### Create subnet resource
+        /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
         ///     var config = new Config();
         ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-        ///     var foo = new Tencentcloud.Vpc.Instance("foo", new()
+        ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
         ///     {
         ///         CidrBlock = "10.0.0.0/16",
         ///     });
@@ -37,7 +38,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
         ///     {
         ///         AvailabilityZone = availabilityZone,
-        ///         VpcId = foo.Id,
+        ///         VpcId = vpc.Id,
         ///         CidrBlock = "10.0.20.0/28",
         ///         IsMulticast = false,
         ///         Tags = 
@@ -46,20 +47,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         ///         },
         ///     });
         /// 
-        ///     var idInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+        ///     var subnetCDC = new Tencentcloud.Subnet.Instance("subnetCDC", new()
         ///     {
-        ///         SubnetId = subnet.Id,
+        ///         VpcId = vpc.Id,
+        ///         CidrBlock = "10.0.0.0/16",
+        ///         CdcId = "cluster-lchwgxhs",
+        ///         AvailabilityZone = data.Tencentcloud_availability_zones.Zones.Zones[0].Name,
+        ///         IsMulticast = false,
         ///     });
         /// 
-        ///     var nameInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new()
-        ///     {
-        ///         Name = subnet.Name,
-        ///     });
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// 
-        ///     var tagsInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new()
-        ///     {
-        ///         Tags = subnet.Tags,
-        ///     });
+        /// ### Query all subnets
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var subnets = Tencentcloud.Vpc.GetSubnets.Invoke();
         /// 
         /// });
         /// ```
@@ -73,19 +85,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// ## Example Usage
         /// 
+        /// ### Create subnet resource
+        /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
         /// using System.Linq;
         /// using Pulumi;
-        /// using Tencentcloud = Pulumi.Tencentcloud;
         /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
         ///     var config = new Config();
         ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
-        ///     var foo = new Tencentcloud.Vpc.Instance("foo", new()
+        ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
         ///     {
         ///         CidrBlock = "10.0.0.0/16",
         ///     });
@@ -93,7 +106,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
         ///     {
         ///         AvailabilityZone = availabilityZone,
-        ///         VpcId = foo.Id,
+        ///         VpcId = vpc.Id,
         ///         CidrBlock = "10.0.20.0/28",
         ///         IsMulticast = false,
         ///         Tags = 
@@ -102,20 +115,31 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         ///         },
         ///     });
         /// 
-        ///     var idInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new()
+        ///     var subnetCDC = new Tencentcloud.Subnet.Instance("subnetCDC", new()
         ///     {
-        ///         SubnetId = subnet.Id,
+        ///         VpcId = vpc.Id,
+        ///         CidrBlock = "10.0.0.0/16",
+        ///         CdcId = "cluster-lchwgxhs",
+        ///         AvailabilityZone = data.Tencentcloud_availability_zones.Zones.Zones[0].Name,
+        ///         IsMulticast = false,
         ///     });
         /// 
-        ///     var nameInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new()
-        ///     {
-        ///         Name = subnet.Name,
-        ///     });
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
         /// 
-        ///     var tagsInstances = Tencentcloud.Vpc.GetSubnets.Invoke(new()
-        ///     {
-        ///         Tags = subnet.Tags,
-        ///     });
+        /// ### Query all subnets
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var subnets = Tencentcloud.Vpc.GetSubnets.Invoke();
         /// 
         /// });
         /// ```
@@ -133,6 +157,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// </summary>
         [Input("availabilityZone")]
         public string? AvailabilityZone { get; set; }
+
+        /// <summary>
+        /// ID of CDC instance.
+        /// </summary>
+        [Input("cdcId")]
+        public string? CdcId { get; set; }
 
         /// <summary>
         /// Filter subnet with this CIDR.
@@ -209,6 +239,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         public Input<string>? AvailabilityZone { get; set; }
 
         /// <summary>
+        /// ID of CDC instance.
+        /// </summary>
+        [Input("cdcId")]
+        public Input<string>? CdcId { get; set; }
+
+        /// <summary>
         /// Filter subnet with this CIDR.
         /// </summary>
         [Input("cidrBlock")]
@@ -283,6 +319,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// </summary>
         public readonly string? AvailabilityZone;
         /// <summary>
+        /// ID of CDC instance.
+        /// </summary>
+        public readonly string? CdcId;
+        /// <summary>
         /// A network address block of the subnet.
         /// </summary>
         public readonly string? CidrBlock;
@@ -322,6 +362,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         private GetSubnetsResult(
             string? availabilityZone,
 
+            string? cdcId,
+
             string? cidrBlock,
 
             string id,
@@ -345,6 +387,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
             string? vpcId)
         {
             AvailabilityZone = availabilityZone;
+            CdcId = cdcId;
             CidrBlock = cidrBlock;
             Id = id;
             InstanceLists = instanceLists;

@@ -9,6 +9,8 @@ import * as utilities from "../utilities";
 /**
  * Provide a resource to attach an existing  cvm to kubernetes cluster.
  *
+ * > **NOTE:** Use `unschedulable` to set whether the join node participates in the schedule. The `isSchedule` of 'worker_config' and 'worker_config_overrides' was deprecated.
+ *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->
@@ -125,6 +127,10 @@ export class ClusterAttachment extends pulumi.CustomResource {
      */
     public readonly hostname!: pulumi.Output<string | undefined>;
     /**
+     * ID of Node image.
+     */
+    public readonly imageId!: pulumi.Output<string>;
+    /**
      * ID of the CVM instance, this cvm will reinstall the system.
      */
     public readonly instanceId!: pulumi.Output<string>;
@@ -149,7 +155,7 @@ export class ClusterAttachment extends pulumi.CustomResource {
      */
     public /*out*/ readonly state!: pulumi.Output<string>;
     /**
-     * Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+     * Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
      */
     public readonly unschedulable!: pulumi.Output<number | undefined>;
     /**
@@ -176,6 +182,7 @@ export class ClusterAttachment extends pulumi.CustomResource {
             const state = argsOrState as ClusterAttachmentState | undefined;
             resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["hostname"] = state ? state.hostname : undefined;
+            resourceInputs["imageId"] = state ? state.imageId : undefined;
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
             resourceInputs["keyIds"] = state ? state.keyIds : undefined;
             resourceInputs["labels"] = state ? state.labels : undefined;
@@ -195,6 +202,7 @@ export class ClusterAttachment extends pulumi.CustomResource {
             }
             resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["hostname"] = args ? args.hostname : undefined;
+            resourceInputs["imageId"] = args ? args.imageId : undefined;
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
             resourceInputs["keyIds"] = args ? args.keyIds : undefined;
             resourceInputs["labels"] = args ? args.labels : undefined;
@@ -225,6 +233,10 @@ export interface ClusterAttachmentState {
      */
     hostname?: pulumi.Input<string>;
     /**
+     * ID of Node image.
+     */
+    imageId?: pulumi.Input<string>;
+    /**
      * ID of the CVM instance, this cvm will reinstall the system.
      */
     instanceId?: pulumi.Input<string>;
@@ -249,7 +261,7 @@ export interface ClusterAttachmentState {
      */
     state?: pulumi.Input<string>;
     /**
-     * Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+     * Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
      */
     unschedulable?: pulumi.Input<number>;
     /**
@@ -275,6 +287,10 @@ export interface ClusterAttachmentArgs {
      */
     hostname?: pulumi.Input<string>;
     /**
+     * ID of Node image.
+     */
+    imageId?: pulumi.Input<string>;
+    /**
      * ID of the CVM instance, this cvm will reinstall the system.
      */
     instanceId: pulumi.Input<string>;
@@ -291,7 +307,7 @@ export interface ClusterAttachmentArgs {
      */
     password?: pulumi.Input<string>;
     /**
-     * Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+     * Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
      */
     unschedulable?: pulumi.Input<number>;
     /**

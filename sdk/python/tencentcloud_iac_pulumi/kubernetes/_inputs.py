@@ -31,6 +31,7 @@ __all__ = [
     'ClusterWorkerConfigDataDiskArgs',
     'ClusterWorkerInstancesListArgs',
     'EncryptionProtectionKmsConfigurationArgs',
+    'HealthCheckPolicyRuleArgs',
     'NativeNodePoolAnnotationArgs',
     'NativeNodePoolLabelArgs',
     'NativeNodePoolNativeArgs',
@@ -80,7 +81,7 @@ class ClusterAttachmentWorkerConfigArgs:
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node. This is a white-list parameter.
         :param pulumi.Input['ClusterAttachmentWorkerConfigGpuArgsArgs'] gpu_args: GPU driver parameters.
-        :param pulumi.Input[bool] is_schedule: Indicate to schedule the adding node or not. Default is true.
+        :param pulumi.Input[bool] is_schedule: This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
         :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
         :param pulumi.Input[str] pre_start_user_script: Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
         :param pulumi.Input[str] user_data: Base64-encoded User Data text, the length limit is 16KB.
@@ -95,6 +96,9 @@ class ClusterAttachmentWorkerConfigArgs:
             pulumi.set(__self__, "extra_args", extra_args)
         if gpu_args is not None:
             pulumi.set(__self__, "gpu_args", gpu_args)
+        if is_schedule is not None:
+            warnings.warn("""This argument was deprecated, use `unschedulable` instead.""", DeprecationWarning)
+            pulumi.log.warn("""is_schedule is deprecated: This argument was deprecated, use `unschedulable` instead.""")
         if is_schedule is not None:
             pulumi.set(__self__, "is_schedule", is_schedule)
         if mount_target is not None:
@@ -168,8 +172,11 @@ class ClusterAttachmentWorkerConfigArgs:
     @pulumi.getter(name="isSchedule")
     def is_schedule(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicate to schedule the adding node or not. Default is true.
+        This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
         """
+        warnings.warn("""This argument was deprecated, use `unschedulable` instead.""", DeprecationWarning)
+        pulumi.log.warn("""is_schedule is deprecated: This argument was deprecated, use `unschedulable` instead.""")
+
         return pulumi.get(self, "is_schedule")
 
     @is_schedule.setter
@@ -418,30 +425,48 @@ class ClusterAttachmentWorkerConfigOverridesArgs:
         """
         :param pulumi.Input[Sequence[pulumi.Input['ClusterAttachmentWorkerConfigOverridesDataDiskArgs']]] data_disks: Configurations of data disk.
         :param pulumi.Input[int] desired_pod_num: Indicate to set desired pod number in node. valid when the cluster is podCIDR.
-        :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
-        :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node. This is a white-list parameter.
+        :param pulumi.Input[str] docker_graph_path: This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: This argument was no longer supported by TencentCloud TKE. Custom parameter information related to the node. This is a white-list parameter.
         :param pulumi.Input['ClusterAttachmentWorkerConfigOverridesGpuArgsArgs'] gpu_args: GPU driver parameters.
-        :param pulumi.Input[bool] is_schedule: Indicate to schedule the adding node or not. Default is true.
-        :param pulumi.Input[str] mount_target: Mount target. Default is not mounting.
-        :param pulumi.Input[str] pre_start_user_script: Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
-        :param pulumi.Input[str] user_data: Base64-encoded User Data text, the length limit is 16KB.
+        :param pulumi.Input[bool] is_schedule: This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+        :param pulumi.Input[str] mount_target: This argument was no longer supported by TencentCloud TKE. Mount target. Default is not mounting.
+        :param pulumi.Input[str] pre_start_user_script: This argument was no longer supported by TencentCloud TKE. Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        :param pulumi.Input[str] user_data: This argument was no longer supported by TencentCloud TKE. Base64-encoded User Data text, the length limit is 16KB.
         """
         if data_disks is not None:
             pulumi.set(__self__, "data_disks", data_disks)
         if desired_pod_num is not None:
             pulumi.set(__self__, "desired_pod_num", desired_pod_num)
         if docker_graph_path is not None:
+            warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+            pulumi.log.warn("""docker_graph_path is deprecated: This argument was no longer supported by TencentCloud TKE.""")
+        if docker_graph_path is not None:
             pulumi.set(__self__, "docker_graph_path", docker_graph_path)
+        if extra_args is not None:
+            warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+            pulumi.log.warn("""extra_args is deprecated: This argument was no longer supported by TencentCloud TKE.""")
         if extra_args is not None:
             pulumi.set(__self__, "extra_args", extra_args)
         if gpu_args is not None:
             pulumi.set(__self__, "gpu_args", gpu_args)
         if is_schedule is not None:
+            warnings.warn("""This argument was deprecated, use `unschedulable` instead.""", DeprecationWarning)
+            pulumi.log.warn("""is_schedule is deprecated: This argument was deprecated, use `unschedulable` instead.""")
+        if is_schedule is not None:
             pulumi.set(__self__, "is_schedule", is_schedule)
+        if mount_target is not None:
+            warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+            pulumi.log.warn("""mount_target is deprecated: This argument was no longer supported by TencentCloud TKE.""")
         if mount_target is not None:
             pulumi.set(__self__, "mount_target", mount_target)
         if pre_start_user_script is not None:
+            warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+            pulumi.log.warn("""pre_start_user_script is deprecated: This argument was no longer supported by TencentCloud TKE.""")
+        if pre_start_user_script is not None:
             pulumi.set(__self__, "pre_start_user_script", pre_start_user_script)
+        if user_data is not None:
+            warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+            pulumi.log.warn("""user_data is deprecated: This argument was no longer supported by TencentCloud TKE.""")
         if user_data is not None:
             pulumi.set(__self__, "user_data", user_data)
 
@@ -473,8 +498,11 @@ class ClusterAttachmentWorkerConfigOverridesArgs:
     @pulumi.getter(name="dockerGraphPath")
     def docker_graph_path(self) -> Optional[pulumi.Input[str]]:
         """
-        Docker graph path. Default is `/var/lib/docker`.
+        This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
         """
+        warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+        pulumi.log.warn("""docker_graph_path is deprecated: This argument was no longer supported by TencentCloud TKE.""")
+
         return pulumi.get(self, "docker_graph_path")
 
     @docker_graph_path.setter
@@ -485,8 +513,11 @@ class ClusterAttachmentWorkerConfigOverridesArgs:
     @pulumi.getter(name="extraArgs")
     def extra_args(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
         """
-        Custom parameter information related to the node. This is a white-list parameter.
+        This argument was no longer supported by TencentCloud TKE. Custom parameter information related to the node. This is a white-list parameter.
         """
+        warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+        pulumi.log.warn("""extra_args is deprecated: This argument was no longer supported by TencentCloud TKE.""")
+
         return pulumi.get(self, "extra_args")
 
     @extra_args.setter
@@ -509,8 +540,11 @@ class ClusterAttachmentWorkerConfigOverridesArgs:
     @pulumi.getter(name="isSchedule")
     def is_schedule(self) -> Optional[pulumi.Input[bool]]:
         """
-        Indicate to schedule the adding node or not. Default is true.
+        This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
         """
+        warnings.warn("""This argument was deprecated, use `unschedulable` instead.""", DeprecationWarning)
+        pulumi.log.warn("""is_schedule is deprecated: This argument was deprecated, use `unschedulable` instead.""")
+
         return pulumi.get(self, "is_schedule")
 
     @is_schedule.setter
@@ -521,8 +555,11 @@ class ClusterAttachmentWorkerConfigOverridesArgs:
     @pulumi.getter(name="mountTarget")
     def mount_target(self) -> Optional[pulumi.Input[str]]:
         """
-        Mount target. Default is not mounting.
+        This argument was no longer supported by TencentCloud TKE. Mount target. Default is not mounting.
         """
+        warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+        pulumi.log.warn("""mount_target is deprecated: This argument was no longer supported by TencentCloud TKE.""")
+
         return pulumi.get(self, "mount_target")
 
     @mount_target.setter
@@ -533,8 +570,11 @@ class ClusterAttachmentWorkerConfigOverridesArgs:
     @pulumi.getter(name="preStartUserScript")
     def pre_start_user_script(self) -> Optional[pulumi.Input[str]]:
         """
-        Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        This argument was no longer supported by TencentCloud TKE. Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
         """
+        warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+        pulumi.log.warn("""pre_start_user_script is deprecated: This argument was no longer supported by TencentCloud TKE.""")
+
         return pulumi.get(self, "pre_start_user_script")
 
     @pre_start_user_script.setter
@@ -545,8 +585,11 @@ class ClusterAttachmentWorkerConfigOverridesArgs:
     @pulumi.getter(name="userData")
     def user_data(self) -> Optional[pulumi.Input[str]]:
         """
-        Base64-encoded User Data text, the length limit is 16KB.
+        This argument was no longer supported by TencentCloud TKE. Base64-encoded User Data text, the length limit is 16KB.
         """
+        warnings.warn("""This argument was no longer supported by TencentCloud TKE.""", DeprecationWarning)
+        pulumi.log.warn("""user_data is deprecated: This argument was no longer supported by TencentCloud TKE.""")
+
         return pulumi.get(self, "user_data")
 
     @user_data.setter
@@ -2616,6 +2659,58 @@ class EncryptionProtectionKmsConfigurationArgs:
 
 
 @pulumi.input_type
+class HealthCheckPolicyRuleArgs:
+    def __init__(__self__, *,
+                 auto_repair_enabled: pulumi.Input[bool],
+                 enabled: pulumi.Input[bool],
+                 name: pulumi.Input[str]):
+        """
+        :param pulumi.Input[bool] auto_repair_enabled: Enable repair or not.
+        :param pulumi.Input[bool] enabled: Enable detection of this project or not.
+        :param pulumi.Input[str] name: Health check rule details.
+        """
+        pulumi.set(__self__, "auto_repair_enabled", auto_repair_enabled)
+        pulumi.set(__self__, "enabled", enabled)
+        pulumi.set(__self__, "name", name)
+
+    @property
+    @pulumi.getter(name="autoRepairEnabled")
+    def auto_repair_enabled(self) -> pulumi.Input[bool]:
+        """
+        Enable repair or not.
+        """
+        return pulumi.get(self, "auto_repair_enabled")
+
+    @auto_repair_enabled.setter
+    def auto_repair_enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "auto_repair_enabled", value)
+
+    @property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[bool]:
+        """
+        Enable detection of this project or not.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[bool]):
+        pulumi.set(self, "enabled", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        Health check rule details.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+
+@pulumi.input_type
 class NativeNodePoolAnnotationArgs:
     def __init__(__self__, *,
                  name: pulumi.Input[str],
@@ -3585,6 +3680,7 @@ class NodePoolAutoScalingConfigArgs:
                  instance_charge_type_prepaid_period: Optional[pulumi.Input[int]] = None,
                  instance_charge_type_prepaid_renew_flag: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
+                 instance_name_style: Optional[pulumi.Input[str]] = None,
                  internet_charge_type: Optional[pulumi.Input[str]] = None,
                  internet_max_bandwidth_out: Optional[pulumi.Input[int]] = None,
                  key_ids: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
@@ -3610,6 +3706,7 @@ class NodePoolAutoScalingConfigArgs:
         :param pulumi.Input[int] instance_charge_type_prepaid_period: The tenancy (in month) of the prepaid instance, NOTE: it only works when instance_charge_type is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
         :param pulumi.Input[str] instance_charge_type_prepaid_renew_flag: Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instance_charge_type is set to `PREPAID`.
         :param pulumi.Input[str] instance_name: Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+        :param pulumi.Input[str] instance_name_style: Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default value: `ORIGINAL`. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
         :param pulumi.Input[str] internet_charge_type: Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
         :param pulumi.Input[int] internet_max_bandwidth_out: Max bandwidth of Internet access in Mbps. Default is `0`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] key_ids: ID list of keys.
@@ -3647,6 +3744,8 @@ class NodePoolAutoScalingConfigArgs:
             pulumi.set(__self__, "instance_charge_type_prepaid_renew_flag", instance_charge_type_prepaid_renew_flag)
         if instance_name is not None:
             pulumi.set(__self__, "instance_name", instance_name)
+        if instance_name_style is not None:
+            pulumi.set(__self__, "instance_name_style", instance_name_style)
         if internet_charge_type is not None:
             pulumi.set(__self__, "internet_charge_type", internet_charge_type)
         if internet_max_bandwidth_out is not None:
@@ -3828,6 +3927,18 @@ class NodePoolAutoScalingConfigArgs:
     @instance_name.setter
     def instance_name(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "instance_name", value)
+
+    @property
+    @pulumi.getter(name="instanceNameStyle")
+    def instance_name_style(self) -> Optional[pulumi.Input[str]]:
+        """
+        Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default value: `ORIGINAL`. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+        """
+        return pulumi.get(self, "instance_name_style")
+
+    @instance_name_style.setter
+    def instance_name_style(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "instance_name_style", value)
 
     @property
     @pulumi.getter(name="internetChargeType")
@@ -4465,12 +4576,14 @@ class NodePoolTaintArgs:
 class ScaleWorkerDataDiskArgs:
     def __init__(__self__, *,
                  auto_format_and_mount: Optional[pulumi.Input[bool]] = None,
+                 disk_partition: Optional[pulumi.Input[str]] = None,
                  disk_size: Optional[pulumi.Input[int]] = None,
                  disk_type: Optional[pulumi.Input[str]] = None,
                  file_system: Optional[pulumi.Input[str]] = None,
                  mount_target: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[bool] auto_format_and_mount: Indicate whether to auto format and mount or not. Default is `false`.
+        :param pulumi.Input[str] disk_partition: The name of the device or partition to mount.
         :param pulumi.Input[int] disk_size: Volume of disk in GB. Default is `0`.
         :param pulumi.Input[str] disk_type: Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD` and `CLOUD_HSSD` and `CLOUD_TSSD`.
         :param pulumi.Input[str] file_system: File system, e.g. `ext3/ext4/xfs`.
@@ -4478,6 +4591,8 @@ class ScaleWorkerDataDiskArgs:
         """
         if auto_format_and_mount is not None:
             pulumi.set(__self__, "auto_format_and_mount", auto_format_and_mount)
+        if disk_partition is not None:
+            pulumi.set(__self__, "disk_partition", disk_partition)
         if disk_size is not None:
             pulumi.set(__self__, "disk_size", disk_size)
         if disk_type is not None:
@@ -4498,6 +4613,18 @@ class ScaleWorkerDataDiskArgs:
     @auto_format_and_mount.setter
     def auto_format_and_mount(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "auto_format_and_mount", value)
+
+    @property
+    @pulumi.getter(name="diskPartition")
+    def disk_partition(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the device or partition to mount.
+        """
+        return pulumi.get(self, "disk_partition")
+
+    @disk_partition.setter
+    def disk_partition(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "disk_partition", value)
 
     @property
     @pulumi.getter(name="diskSize")
@@ -4672,7 +4799,7 @@ class ScaleWorkerWorkerConfigArgs:
         :param pulumi.Input[str] bandwidth_package_id: bandwidth package id. if user is standard user, then the bandwidth_package_id is needed, or default has bandwidth_package_id.
         :param pulumi.Input[str] cam_role_name: CAM role name authorized to access.
         :param pulumi.Input[int] count: Number of cvm.
-        :param pulumi.Input[Sequence[pulumi.Input['ScaleWorkerWorkerConfigDataDiskArgs']]] data_disks: Configurations of data disk.
+        :param pulumi.Input[Sequence[pulumi.Input['ScaleWorkerWorkerConfigDataDiskArgs']]] data_disks: Configurations of cvm data disk.
         :param pulumi.Input[int] desired_pod_num: Indicate to set desired pod number in node. valid when enable_customized_pod_cidr=true, and it override `[globe_]desired_pod_num` for current node. Either all the fields `desired_pod_num` or none.
         :param pulumi.Input[str] disaster_recover_group_ids: Disaster recover groups to which a CVM instance belongs. Only support maximum 1.
         :param pulumi.Input[bool] enhanced_monitor_service: To specify whether to enable cloud monitor service. Default is TRUE.
@@ -4823,7 +4950,7 @@ class ScaleWorkerWorkerConfigArgs:
     @pulumi.getter(name="dataDisks")
     def data_disks(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScaleWorkerWorkerConfigDataDiskArgs']]]]:
         """
-        Configurations of data disk.
+        Configurations of cvm data disk.
         """
         return pulumi.get(self, "data_disks")
 
@@ -5096,7 +5223,13 @@ class ScaleWorkerWorkerConfigDataDiskArgs:
         :param pulumi.Input[str] snapshot_id: Data disk snapshot ID.
         """
         if auto_format_and_mount is not None:
+            warnings.warn("""This argument was deprecated, use `data_disk` instead.""", DeprecationWarning)
+            pulumi.log.warn("""auto_format_and_mount is deprecated: This argument was deprecated, use `data_disk` instead.""")
+        if auto_format_and_mount is not None:
             pulumi.set(__self__, "auto_format_and_mount", auto_format_and_mount)
+        if disk_partition is not None:
+            warnings.warn("""This argument was deprecated, use `data_disk` instead.""", DeprecationWarning)
+            pulumi.log.warn("""disk_partition is deprecated: This argument was deprecated, use `data_disk` instead.""")
         if disk_partition is not None:
             pulumi.set(__self__, "disk_partition", disk_partition)
         if disk_size is not None:
@@ -5106,9 +5239,15 @@ class ScaleWorkerWorkerConfigDataDiskArgs:
         if encrypt is not None:
             pulumi.set(__self__, "encrypt", encrypt)
         if file_system is not None:
+            warnings.warn("""This argument was deprecated, use `data_disk` instead.""", DeprecationWarning)
+            pulumi.log.warn("""file_system is deprecated: This argument was deprecated, use `data_disk` instead.""")
+        if file_system is not None:
             pulumi.set(__self__, "file_system", file_system)
         if kms_key_id is not None:
             pulumi.set(__self__, "kms_key_id", kms_key_id)
+        if mount_target is not None:
+            warnings.warn("""This argument was deprecated, use `data_disk` instead.""", DeprecationWarning)
+            pulumi.log.warn("""mount_target is deprecated: This argument was deprecated, use `data_disk` instead.""")
         if mount_target is not None:
             pulumi.set(__self__, "mount_target", mount_target)
         if snapshot_id is not None:
@@ -5120,6 +5259,9 @@ class ScaleWorkerWorkerConfigDataDiskArgs:
         """
         Indicate whether to auto format and mount or not. Default is `false`.
         """
+        warnings.warn("""This argument was deprecated, use `data_disk` instead.""", DeprecationWarning)
+        pulumi.log.warn("""auto_format_and_mount is deprecated: This argument was deprecated, use `data_disk` instead.""")
+
         return pulumi.get(self, "auto_format_and_mount")
 
     @auto_format_and_mount.setter
@@ -5132,6 +5274,9 @@ class ScaleWorkerWorkerConfigDataDiskArgs:
         """
         The name of the device or partition to mount.
         """
+        warnings.warn("""This argument was deprecated, use `data_disk` instead.""", DeprecationWarning)
+        pulumi.log.warn("""disk_partition is deprecated: This argument was deprecated, use `data_disk` instead.""")
+
         return pulumi.get(self, "disk_partition")
 
     @disk_partition.setter
@@ -5180,6 +5325,9 @@ class ScaleWorkerWorkerConfigDataDiskArgs:
         """
         File system, e.g. `ext3/ext4/xfs`.
         """
+        warnings.warn("""This argument was deprecated, use `data_disk` instead.""", DeprecationWarning)
+        pulumi.log.warn("""file_system is deprecated: This argument was deprecated, use `data_disk` instead.""")
+
         return pulumi.get(self, "file_system")
 
     @file_system.setter
@@ -5204,6 +5352,9 @@ class ScaleWorkerWorkerConfigDataDiskArgs:
         """
         Mount target.
         """
+        warnings.warn("""This argument was deprecated, use `data_disk` instead.""", DeprecationWarning)
+        pulumi.log.warn("""mount_target is deprecated: This argument was deprecated, use `data_disk` instead.""")
+
         return pulumi.get(self, "mount_target")
 
     @mount_target.setter

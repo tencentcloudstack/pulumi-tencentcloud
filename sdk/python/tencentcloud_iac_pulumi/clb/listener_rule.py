@@ -15,12 +15,13 @@ __all__ = ['ListenerRuleArgs', 'ListenerRule']
 class ListenerRuleArgs:
     def __init__(__self__, *,
                  clb_id: pulumi.Input[str],
-                 domain: pulumi.Input[str],
                  listener_id: pulumi.Input[str],
                  url: pulumi.Input[str],
                  certificate_ca_id: Optional[pulumi.Input[str]] = None,
                  certificate_id: Optional[pulumi.Input[str]] = None,
                  certificate_ssl_mode: Optional[pulumi.Input[str]] = None,
+                 domain: Optional[pulumi.Input[str]] = None,
+                 domains: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  forward_type: Optional[pulumi.Input[str]] = None,
                  health_check_health_num: Optional[pulumi.Input[int]] = None,
                  health_check_http_code: Optional[pulumi.Input[int]] = None,
@@ -40,12 +41,13 @@ class ListenerRuleArgs:
         """
         The set of arguments for constructing a ListenerRule resource.
         :param pulumi.Input[str] clb_id: ID of CLB instance.
-        :param pulumi.Input[str] domain: Domain name of the listener rule.
         :param pulumi.Input[str] listener_id: ID of CLB listener.
         :param pulumi.Input[str] url: Url of the listener rule.
         :param pulumi.Input[str] certificate_ca_id: ID of the client certificate. NOTES: Only supports listeners of HTTPS protocol.
         :param pulumi.Input[str] certificate_id: ID of the server certificate. NOTES: Only supports listeners of HTTPS protocol.
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of HTTPS protocol.
+        :param pulumi.Input[str] domain: Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] domains: Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
         :param pulumi.Input[str] forward_type: Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
         :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] health_check_http_code: HTTP Status Code. The default is 31. Valid value ranges: [1~31]. `1 means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.
@@ -64,7 +66,6 @@ class ListenerRuleArgs:
         :param pulumi.Input[str] target_type: Backend target type. Valid values: `NODE`, `TARGETGROUP`. `NODE` means to bind ordinary nodes, `TARGETGROUP` means to bind target group.
         """
         pulumi.set(__self__, "clb_id", clb_id)
-        pulumi.set(__self__, "domain", domain)
         pulumi.set(__self__, "listener_id", listener_id)
         pulumi.set(__self__, "url", url)
         if certificate_ca_id is not None:
@@ -73,6 +74,10 @@ class ListenerRuleArgs:
             pulumi.set(__self__, "certificate_id", certificate_id)
         if certificate_ssl_mode is not None:
             pulumi.set(__self__, "certificate_ssl_mode", certificate_ssl_mode)
+        if domain is not None:
+            pulumi.set(__self__, "domain", domain)
+        if domains is not None:
+            pulumi.set(__self__, "domains", domains)
         if forward_type is not None:
             pulumi.set(__self__, "forward_type", forward_type)
         if health_check_health_num is not None:
@@ -117,18 +122,6 @@ class ListenerRuleArgs:
     @clb_id.setter
     def clb_id(self, value: pulumi.Input[str]):
         pulumi.set(self, "clb_id", value)
-
-    @property
-    @pulumi.getter
-    def domain(self) -> pulumi.Input[str]:
-        """
-        Domain name of the listener rule.
-        """
-        return pulumi.get(self, "domain")
-
-    @domain.setter
-    def domain(self, value: pulumi.Input[str]):
-        pulumi.set(self, "domain", value)
 
     @property
     @pulumi.getter(name="listenerId")
@@ -189,6 +182,30 @@ class ListenerRuleArgs:
     @certificate_ssl_mode.setter
     def certificate_ssl_mode(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "certificate_ssl_mode", value)
+
+    @property
+    @pulumi.getter
+    def domain(self) -> Optional[pulumi.Input[str]]:
+        """
+        Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+        """
+        return pulumi.get(self, "domain")
+
+    @domain.setter
+    def domain(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "domain", value)
+
+    @property
+    @pulumi.getter
+    def domains(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+        """
+        return pulumi.get(self, "domains")
+
+    @domains.setter
+    def domains(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "domains", value)
 
     @property
     @pulumi.getter(name="forwardType")
@@ -391,6 +408,7 @@ class _ListenerRuleState:
                  certificate_ssl_mode: Optional[pulumi.Input[str]] = None,
                  clb_id: Optional[pulumi.Input[str]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
+                 domains: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  forward_type: Optional[pulumi.Input[str]] = None,
                  health_check_health_num: Optional[pulumi.Input[int]] = None,
                  health_check_http_code: Optional[pulumi.Input[int]] = None,
@@ -416,7 +434,8 @@ class _ListenerRuleState:
         :param pulumi.Input[str] certificate_id: ID of the server certificate. NOTES: Only supports listeners of HTTPS protocol.
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of HTTPS protocol.
         :param pulumi.Input[str] clb_id: ID of CLB instance.
-        :param pulumi.Input[str] domain: Domain name of the listener rule.
+        :param pulumi.Input[str] domain: Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] domains: Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
         :param pulumi.Input[str] forward_type: Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
         :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] health_check_http_code: HTTP Status Code. The default is 31. Valid value ranges: [1~31]. `1 means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.
@@ -447,6 +466,8 @@ class _ListenerRuleState:
             pulumi.set(__self__, "clb_id", clb_id)
         if domain is not None:
             pulumi.set(__self__, "domain", domain)
+        if domains is not None:
+            pulumi.set(__self__, "domains", domains)
         if forward_type is not None:
             pulumi.set(__self__, "forward_type", forward_type)
         if health_check_health_num is not None:
@@ -538,13 +559,25 @@ class _ListenerRuleState:
     @pulumi.getter
     def domain(self) -> Optional[pulumi.Input[str]]:
         """
-        Domain name of the listener rule.
+        Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
         """
         return pulumi.get(self, "domain")
 
     @domain.setter
     def domain(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "domain", value)
+
+    @property
+    @pulumi.getter
+    def domains(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+        """
+        return pulumi.get(self, "domains")
+
+    @domains.setter
+    def domains(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "domains", value)
 
     @property
     @pulumi.getter(name="forwardType")
@@ -785,6 +818,7 @@ class ListenerRule(pulumi.CustomResource):
                  certificate_ssl_mode: Optional[pulumi.Input[str]] = None,
                  clb_id: Optional[pulumi.Input[str]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
+                 domains: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  forward_type: Optional[pulumi.Input[str]] = None,
                  health_check_health_num: Optional[pulumi.Input[int]] = None,
                  health_check_http_code: Optional[pulumi.Input[int]] = None,
@@ -811,29 +845,58 @@ class ListenerRule(pulumi.CustomResource):
 
         ## Example Usage
 
+        ### Create a single domain listener rule
+
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.clb.ListenerRule("foo",
+        example = tencentcloud.clb.ListenerRule("example",
             certificate_ca_id="VfqO4zkB",
             certificate_id="VjANRdz8",
             certificate_ssl_mode="MUTUAL",
             clb_id="lb-k2zjp9lv",
-            domain="foo.net",
+            domain="example.com",
             health_check_health_num=3,
             health_check_http_code=2,
-            health_check_http_domain="Default Domain",
+            health_check_http_domain="check.com",
             health_check_http_method="GET",
-            health_check_http_path="Default Path",
+            health_check_http_path="/",
             health_check_interval_time=5,
             health_check_switch=True,
             health_check_unhealth_num=3,
             listener_id="lbl-hh141sn9",
             scheduler="WRR",
             session_expire_time=30,
-            url="/bar")
+            url="/")
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Create a listener rule for domain lists
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.clb.ListenerRule("example",
+            clb_id="lb-k2zjp9lv",
+            domains=[
+                "example1.com",
+                "example2.com",
+            ],
+            health_check_health_num=3,
+            health_check_http_code=2,
+            health_check_http_domain="check.com",
+            health_check_http_method="GET",
+            health_check_http_path="/",
+            health_check_interval_time=5,
+            health_check_switch=True,
+            health_check_unhealth_num=3,
+            listener_id="lbl-hh141sn9",
+            scheduler="WRR",
+            url="/")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -842,7 +905,7 @@ class ListenerRule(pulumi.CustomResource):
         CLB listener rule can be imported using the id (version >= 1.47.0), e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule foo lb-7a0t6zqb#lbl-hh141sn9#loc-agg236ys
+        $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule example lb-k2zjp9lv#lbl-hh141sn9#loc-agg236ys
         ```
 
         :param str resource_name: The name of the resource.
@@ -851,7 +914,8 @@ class ListenerRule(pulumi.CustomResource):
         :param pulumi.Input[str] certificate_id: ID of the server certificate. NOTES: Only supports listeners of HTTPS protocol.
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of HTTPS protocol.
         :param pulumi.Input[str] clb_id: ID of CLB instance.
-        :param pulumi.Input[str] domain: Domain name of the listener rule.
+        :param pulumi.Input[str] domain: Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] domains: Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
         :param pulumi.Input[str] forward_type: Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
         :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] health_check_http_code: HTTP Status Code. The default is 31. Valid value ranges: [1~31]. `1 means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.
@@ -884,29 +948,58 @@ class ListenerRule(pulumi.CustomResource):
 
         ## Example Usage
 
+        ### Create a single domain listener rule
+
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        foo = tencentcloud.clb.ListenerRule("foo",
+        example = tencentcloud.clb.ListenerRule("example",
             certificate_ca_id="VfqO4zkB",
             certificate_id="VjANRdz8",
             certificate_ssl_mode="MUTUAL",
             clb_id="lb-k2zjp9lv",
-            domain="foo.net",
+            domain="example.com",
             health_check_health_num=3,
             health_check_http_code=2,
-            health_check_http_domain="Default Domain",
+            health_check_http_domain="check.com",
             health_check_http_method="GET",
-            health_check_http_path="Default Path",
+            health_check_http_path="/",
             health_check_interval_time=5,
             health_check_switch=True,
             health_check_unhealth_num=3,
             listener_id="lbl-hh141sn9",
             scheduler="WRR",
             session_expire_time=30,
-            url="/bar")
+            url="/")
+        ```
+        <!--End PulumiCodeChooser -->
+
+        ### Create a listener rule for domain lists
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.clb.ListenerRule("example",
+            clb_id="lb-k2zjp9lv",
+            domains=[
+                "example1.com",
+                "example2.com",
+            ],
+            health_check_health_num=3,
+            health_check_http_code=2,
+            health_check_http_domain="check.com",
+            health_check_http_method="GET",
+            health_check_http_path="/",
+            health_check_interval_time=5,
+            health_check_switch=True,
+            health_check_unhealth_num=3,
+            listener_id="lbl-hh141sn9",
+            scheduler="WRR",
+            url="/")
         ```
         <!--End PulumiCodeChooser -->
 
@@ -915,7 +1008,7 @@ class ListenerRule(pulumi.CustomResource):
         CLB listener rule can be imported using the id (version >= 1.47.0), e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule foo lb-7a0t6zqb#lbl-hh141sn9#loc-agg236ys
+        $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule example lb-k2zjp9lv#lbl-hh141sn9#loc-agg236ys
         ```
 
         :param str resource_name: The name of the resource.
@@ -938,6 +1031,7 @@ class ListenerRule(pulumi.CustomResource):
                  certificate_ssl_mode: Optional[pulumi.Input[str]] = None,
                  clb_id: Optional[pulumi.Input[str]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
+                 domains: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  forward_type: Optional[pulumi.Input[str]] = None,
                  health_check_health_num: Optional[pulumi.Input[int]] = None,
                  health_check_http_code: Optional[pulumi.Input[int]] = None,
@@ -971,9 +1065,8 @@ class ListenerRule(pulumi.CustomResource):
             if clb_id is None and not opts.urn:
                 raise TypeError("Missing required property 'clb_id'")
             __props__.__dict__["clb_id"] = clb_id
-            if domain is None and not opts.urn:
-                raise TypeError("Missing required property 'domain'")
             __props__.__dict__["domain"] = domain
+            __props__.__dict__["domains"] = domains
             __props__.__dict__["forward_type"] = forward_type
             __props__.__dict__["health_check_health_num"] = health_check_health_num
             __props__.__dict__["health_check_http_code"] = health_check_http_code
@@ -1012,6 +1105,7 @@ class ListenerRule(pulumi.CustomResource):
             certificate_ssl_mode: Optional[pulumi.Input[str]] = None,
             clb_id: Optional[pulumi.Input[str]] = None,
             domain: Optional[pulumi.Input[str]] = None,
+            domains: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
             forward_type: Optional[pulumi.Input[str]] = None,
             health_check_health_num: Optional[pulumi.Input[int]] = None,
             health_check_http_code: Optional[pulumi.Input[int]] = None,
@@ -1042,7 +1136,8 @@ class ListenerRule(pulumi.CustomResource):
         :param pulumi.Input[str] certificate_id: ID of the server certificate. NOTES: Only supports listeners of HTTPS protocol.
         :param pulumi.Input[str] certificate_ssl_mode: Type of certificate. Valid values: `UNIDIRECTIONAL`, `MUTUAL`. NOTES: Only supports listeners of HTTPS protocol.
         :param pulumi.Input[str] clb_id: ID of CLB instance.
-        :param pulumi.Input[str] domain: Domain name of the listener rule.
+        :param pulumi.Input[str] domain: Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] domains: Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
         :param pulumi.Input[str] forward_type: Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
         :param pulumi.Input[int] health_check_health_num: Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
         :param pulumi.Input[int] health_check_http_code: HTTP Status Code. The default is 31. Valid value ranges: [1~31]. `1 means the return value '1xx' is health. `2` means the return value '2xx' is health. `4` means the return value '3xx' is health. `8` means the return value '4xx' is health. 16 means the return value '5xx' is health. If you want multiple return codes to indicate health, need to add the corresponding values. NOTES: The 'HTTP' health check of the 'TCP' listener only supports specifying one health check status code. NOTES: Only supports listeners of 'HTTP' and 'HTTPS' protocol.
@@ -1072,6 +1167,7 @@ class ListenerRule(pulumi.CustomResource):
         __props__.__dict__["certificate_ssl_mode"] = certificate_ssl_mode
         __props__.__dict__["clb_id"] = clb_id
         __props__.__dict__["domain"] = domain
+        __props__.__dict__["domains"] = domains
         __props__.__dict__["forward_type"] = forward_type
         __props__.__dict__["health_check_health_num"] = health_check_health_num
         __props__.__dict__["health_check_http_code"] = health_check_http_code
@@ -1129,9 +1225,17 @@ class ListenerRule(pulumi.CustomResource):
     @pulumi.getter
     def domain(self) -> pulumi.Output[str]:
         """
-        Domain name of the listener rule.
+        Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
         """
         return pulumi.get(self, "domain")
+
+    @property
+    @pulumi.getter
+    def domains(self) -> pulumi.Output[Sequence[str]]:
+        """
+        Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+        """
+        return pulumi.get(self, "domains")
 
     @property
     @pulumi.getter(name="forwardType")

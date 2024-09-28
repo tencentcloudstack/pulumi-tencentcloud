@@ -62,6 +62,7 @@ export function getInstance(args?: GetInstanceArgs, opts?: pulumi.InvokeOptions)
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("tencentcloud:Instances/getInstance:getInstance", {
         "availabilityZone": args.availabilityZone,
+        "dedicatedClusterId": args.dedicatedClusterId,
         "instanceId": args.instanceId,
         "instanceName": args.instanceName,
         "instanceSetIds": args.instanceSetIds,
@@ -81,6 +82,10 @@ export interface GetInstanceArgs {
      * The available zone that the CVM instance locates at.
      */
     availabilityZone?: string;
+    /**
+     * Exclusive cluster id.
+     */
+    dedicatedClusterId?: string;
     /**
      * ID of the instances to be queried.
      */
@@ -123,6 +128,10 @@ export interface GetInstanceResult {
      * The available zone that the CVM instance locates at.
      */
     readonly availabilityZone?: string;
+    /**
+     * Exclusive cluster id.
+     */
+    readonly dedicatedClusterId?: string;
     /**
      * The provider-assigned unique ID for this managed resource.
      */
@@ -220,6 +229,10 @@ export interface GetInstanceOutputArgs {
      * The available zone that the CVM instance locates at.
      */
     availabilityZone?: pulumi.Input<string>;
+    /**
+     * Exclusive cluster id.
+     */
+    dedicatedClusterId?: pulumi.Input<string>;
     /**
      * ID of the instances to be queried.
      */

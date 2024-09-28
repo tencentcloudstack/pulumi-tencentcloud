@@ -16,6 +16,8 @@ import (
 //
 // ## Example Usage
 //
+// ### Create 3 standard CBS storages
+//
 // <!--Start PulumiCodeChooser -->
 // ```go
 // package main
@@ -29,14 +31,50 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Cbs.NewStorageSet(ctx, "storage", &Cbs.StorageSetArgs{
+//			_, err := Cbs.NewStorageSet(ctx, "example", &Cbs.StorageSetArgs{
 //				AvailabilityZone: pulumi.String("ap-guangzhou-3"),
-//				DiskCount:        pulumi.Int(10),
+//				DiskCount:        pulumi.Int(3),
 //				Encrypt:          pulumi.Bool(false),
 //				ProjectId:        pulumi.Int(0),
-//				StorageName:      pulumi.String("mystorage"),
+//				StorageName:      pulumi.String("tf-example"),
 //				StorageSize:      pulumi.Int(100),
 //				StorageType:      pulumi.String("CLOUD_SSD"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Create 3 dedicated cluster CBS storages
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cbs"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Cbs.NewStorageSet(ctx, "example", &Cbs.StorageSetArgs{
+//				AvailabilityZone:   pulumi.String("ap-guangzhou-4"),
+//				ChargeType:         pulumi.String("DEDICATED_CLUSTER_PAID"),
+//				DedicatedClusterId: pulumi.String("cluster-262n63e8"),
+//				DiskCount:          pulumi.Int(3),
+//				Encrypt:            pulumi.Bool(false),
+//				ProjectId:          pulumi.Int(0),
+//				StorageName:        pulumi.String("tf-example"),
+//				StorageSize:        pulumi.Int(100),
+//				StorageType:        pulumi.String("CLOUD_SSD"),
 //			})
 //			if err != nil {
 //				return err
@@ -54,8 +92,10 @@ type StorageSet struct {
 	Attached pulumi.BoolOutput `pulumi:"attached"`
 	// The available zone that the CBS instance locates at.
 	AvailabilityZone pulumi.StringOutput `pulumi:"availabilityZone"`
-	// The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+	// The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
+	// Exclusive cluster id.
+	DedicatedClusterId pulumi.StringPtrOutput `pulumi:"dedicatedClusterId"`
 	// The number of disks to be purchased. Default 1.
 	DiskCount pulumi.IntPtrOutput `pulumi:"diskCount"`
 	// disk id list.
@@ -124,8 +164,10 @@ type storageSetState struct {
 	Attached *bool `pulumi:"attached"`
 	// The available zone that the CBS instance locates at.
 	AvailabilityZone *string `pulumi:"availabilityZone"`
-	// The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+	// The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
 	ChargeType *string `pulumi:"chargeType"`
+	// Exclusive cluster id.
+	DedicatedClusterId *string `pulumi:"dedicatedClusterId"`
 	// The number of disks to be purchased. Default 1.
 	DiskCount *int `pulumi:"diskCount"`
 	// disk id list.
@@ -153,8 +195,10 @@ type StorageSetState struct {
 	Attached pulumi.BoolPtrInput
 	// The available zone that the CBS instance locates at.
 	AvailabilityZone pulumi.StringPtrInput
-	// The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+	// The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
 	ChargeType pulumi.StringPtrInput
+	// Exclusive cluster id.
+	DedicatedClusterId pulumi.StringPtrInput
 	// The number of disks to be purchased. Default 1.
 	DiskCount pulumi.IntPtrInput
 	// disk id list.
@@ -184,8 +228,10 @@ func (StorageSetState) ElementType() reflect.Type {
 type storageSetArgs struct {
 	// The available zone that the CBS instance locates at.
 	AvailabilityZone string `pulumi:"availabilityZone"`
-	// The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+	// The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
 	ChargeType *string `pulumi:"chargeType"`
+	// Exclusive cluster id.
+	DedicatedClusterId *string `pulumi:"dedicatedClusterId"`
 	// The number of disks to be purchased. Default 1.
 	DiskCount *int `pulumi:"diskCount"`
 	// Indicates whether CBS is encrypted.
@@ -208,8 +254,10 @@ type storageSetArgs struct {
 type StorageSetArgs struct {
 	// The available zone that the CBS instance locates at.
 	AvailabilityZone pulumi.StringInput
-	// The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+	// The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
 	ChargeType pulumi.StringPtrInput
+	// Exclusive cluster id.
+	DedicatedClusterId pulumi.StringPtrInput
 	// The number of disks to be purchased. Default 1.
 	DiskCount pulumi.IntPtrInput
 	// Indicates whether CBS is encrypted.
@@ -325,9 +373,14 @@ func (o StorageSetOutput) AvailabilityZone() pulumi.StringOutput {
 	return o.ApplyT(func(v *StorageSet) pulumi.StringOutput { return v.AvailabilityZone }).(pulumi.StringOutput)
 }
 
-// The charge type of CBS instance. Only support `POSTPAID_BY_HOUR`.
+// The charge type of CBS instance. Support `POSTPAID_BY_HOUR` and `DEDICATED_CLUSTER_PAID`. The default is `POSTPAID_BY_HOUR`.
 func (o StorageSetOutput) ChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StorageSet) pulumi.StringPtrOutput { return v.ChargeType }).(pulumi.StringPtrOutput)
+}
+
+// Exclusive cluster id.
+func (o StorageSetOutput) DedicatedClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *StorageSet) pulumi.StringPtrOutput { return v.DedicatedClusterId }).(pulumi.StringPtrOutput)
 }
 
 // The number of disks to be purchased. Default 1.

@@ -22,6 +22,7 @@ class ClusterArgs:
                  softwares: pulumi.Input[Sequence[pulumi.Input[str]]],
                  support_ha: pulumi.Input[int],
                  vpc_settings: pulumi.Input[Mapping[str, Any]],
+                 auto_renew: Optional[pulumi.Input[int]] = None,
                  display_strategy: Optional[pulumi.Input[str]] = None,
                  extend_fs_field: Optional[pulumi.Input[str]] = None,
                  login_settings: Optional[pulumi.Input[Mapping[str, Any]]] = None,
@@ -53,6 +54,7 @@ class ClusterArgs:
         :param pulumi.Input[Sequence[pulumi.Input[str]]] softwares: The softwares of a EMR instance.
         :param pulumi.Input[int] support_ha: The flag whether the instance support high availability.(0=>not support, 1=>support).
         :param pulumi.Input[Mapping[str, Any]] vpc_settings: The private net config of EMR instance.
+        :param pulumi.Input[int] auto_renew: 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
         :param pulumi.Input[str] display_strategy: It will be deprecated in later versions. Display strategy of EMR instance.
         :param pulumi.Input[str] extend_fs_field: Access the external file system.
         :param pulumi.Input[Mapping[str, Any]] login_settings: Instance login settings. There are two optional fields:- password: Instance login password: 8-16 characters, including uppercase letters, lowercase letters, numbers and special characters. Special symbols only support! @% ^ *. The first bit of the password cannot be a special character;- public_key_id: Public key id. After the key is associated, the instance can be accessed through the corresponding private key.
@@ -75,6 +77,8 @@ class ClusterArgs:
         pulumi.set(__self__, "softwares", softwares)
         pulumi.set(__self__, "support_ha", support_ha)
         pulumi.set(__self__, "vpc_settings", vpc_settings)
+        if auto_renew is not None:
+            pulumi.set(__self__, "auto_renew", auto_renew)
         if display_strategy is not None:
             warnings.warn("""It will be deprecated in later versions.""", DeprecationWarning)
             pulumi.log.warn("""display_strategy is deprecated: It will be deprecated in later versions.""")
@@ -187,6 +191,18 @@ class ClusterArgs:
     @vpc_settings.setter
     def vpc_settings(self, value: pulumi.Input[Mapping[str, Any]]):
         pulumi.set(self, "vpc_settings", value)
+
+    @property
+    @pulumi.getter(name="autoRenew")
+    def auto_renew(self) -> Optional[pulumi.Input[int]]:
+        """
+        0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+        """
+        return pulumi.get(self, "auto_renew")
+
+    @auto_renew.setter
+    def auto_renew(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "auto_renew", value)
 
     @property
     @pulumi.getter(name="displayStrategy")
@@ -334,6 +350,7 @@ class ClusterArgs:
 @pulumi.input_type
 class _ClusterState:
     def __init__(__self__, *,
+                 auto_renew: Optional[pulumi.Input[int]] = None,
                  display_strategy: Optional[pulumi.Input[str]] = None,
                  extend_fs_field: Optional[pulumi.Input[str]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
@@ -354,6 +371,7 @@ class _ClusterState:
                  vpc_settings: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         Input properties used for looking up and filtering Cluster resources.
+        :param pulumi.Input[int] auto_renew: 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
         :param pulumi.Input[str] display_strategy: It will be deprecated in later versions. Display strategy of EMR instance.
         :param pulumi.Input[str] extend_fs_field: Access the external file system.
         :param pulumi.Input[str] instance_id: Created EMR instance id.
@@ -389,6 +407,8 @@ class _ClusterState:
         :param pulumi.Input[str] time_unit: The unit of time in which the instance was purchased. When PayMode is 0, TimeUnit can only take values of s(second). When PayMode is 1, TimeUnit can only take the value m(month).
         :param pulumi.Input[Mapping[str, Any]] vpc_settings: The private net config of EMR instance.
         """
+        if auto_renew is not None:
+            pulumi.set(__self__, "auto_renew", auto_renew)
         if display_strategy is not None:
             warnings.warn("""It will be deprecated in later versions.""", DeprecationWarning)
             pulumi.log.warn("""display_strategy is deprecated: It will be deprecated in later versions.""")
@@ -431,6 +451,18 @@ class _ClusterState:
             pulumi.set(__self__, "time_unit", time_unit)
         if vpc_settings is not None:
             pulumi.set(__self__, "vpc_settings", vpc_settings)
+
+    @property
+    @pulumi.getter(name="autoRenew")
+    def auto_renew(self) -> Optional[pulumi.Input[int]]:
+        """
+        0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+        """
+        return pulumi.get(self, "auto_renew")
+
+    @auto_renew.setter
+    def auto_renew(self, value: Optional[pulumi.Input[int]]):
+        pulumi.set(self, "auto_renew", value)
 
     @property
     @pulumi.getter(name="displayStrategy")
@@ -676,6 +708,7 @@ class Cluster(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 auto_renew: Optional[pulumi.Input[int]] = None,
                  display_strategy: Optional[pulumi.Input[str]] = None,
                  extend_fs_field: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
@@ -784,6 +817,7 @@ class Cluster(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[int] auto_renew: 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
         :param pulumi.Input[str] display_strategy: It will be deprecated in later versions. Display strategy of EMR instance.
         :param pulumi.Input[str] extend_fs_field: Access the external file system.
         :param pulumi.Input[str] instance_name: Name of the instance, which can contain 6 to 36 English letters, Chinese characters, digits, dashes(-), or underscores(_).
@@ -927,6 +961,7 @@ class Cluster(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 auto_renew: Optional[pulumi.Input[int]] = None,
                  display_strategy: Optional[pulumi.Input[str]] = None,
                  extend_fs_field: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
@@ -953,6 +988,7 @@ class Cluster(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ClusterArgs.__new__(ClusterArgs)
 
+            __props__.__dict__["auto_renew"] = auto_renew
             __props__.__dict__["display_strategy"] = display_strategy
             __props__.__dict__["extend_fs_field"] = extend_fs_field
             if instance_name is None and not opts.urn:
@@ -995,6 +1031,7 @@ class Cluster(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            auto_renew: Optional[pulumi.Input[int]] = None,
             display_strategy: Optional[pulumi.Input[str]] = None,
             extend_fs_field: Optional[pulumi.Input[str]] = None,
             instance_id: Optional[pulumi.Input[str]] = None,
@@ -1020,6 +1057,7 @@ class Cluster(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[int] auto_renew: 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
         :param pulumi.Input[str] display_strategy: It will be deprecated in later versions. Display strategy of EMR instance.
         :param pulumi.Input[str] extend_fs_field: Access the external file system.
         :param pulumi.Input[str] instance_id: Created EMR instance id.
@@ -1059,6 +1097,7 @@ class Cluster(pulumi.CustomResource):
 
         __props__ = _ClusterState.__new__(_ClusterState)
 
+        __props__.__dict__["auto_renew"] = auto_renew
         __props__.__dict__["display_strategy"] = display_strategy
         __props__.__dict__["extend_fs_field"] = extend_fs_field
         __props__.__dict__["instance_id"] = instance_id
@@ -1078,6 +1117,14 @@ class Cluster(pulumi.CustomResource):
         __props__.__dict__["time_unit"] = time_unit
         __props__.__dict__["vpc_settings"] = vpc_settings
         return Cluster(resource_name, opts=opts, __props__=__props__)
+
+    @property
+    @pulumi.getter(name="autoRenew")
+    def auto_renew(self) -> pulumi.Output[int]:
+        """
+        0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+        """
+        return pulumi.get(self, "auto_renew")
 
     @property
     @pulumi.getter(name="displayStrategy")

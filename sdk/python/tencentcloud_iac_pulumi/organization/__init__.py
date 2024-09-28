@@ -11,6 +11,7 @@ from .get_org_financial_by_member import *
 from .get_org_financial_by_month import *
 from .get_org_financial_by_product import *
 from .get_org_share_area import *
+from .get_services import *
 from .instance import *
 from .org_identity import *
 from .org_manage_policy import *
@@ -25,5 +26,6 @@ from .org_share_unit import *
 from .org_share_unit_member import *
 from .policy_sub_account_attachment import *
 from .quit_organization_operation import *
+from .service_assign import *
 from ._inputs import *
 from . import outputs

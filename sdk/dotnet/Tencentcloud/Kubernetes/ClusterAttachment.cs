@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// <summary>
     /// Provide a resource to attach an existing  cvm to kubernetes cluster.
     /// 
+    /// &gt; **NOTE:** Use `unschedulable` to set whether the join node participates in the schedule. The `is_schedule` of 'worker_config' and 'worker_config_overrides' was deprecated.
+    /// 
     /// ## Example Usage
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
@@ -145,6 +147,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string?> Hostname { get; private set; } = null!;
 
         /// <summary>
+        /// ID of Node image.
+        /// </summary>
+        [Output("imageId")]
+        public Output<string> ImageId { get; private set; } = null!;
+
+        /// <summary>
         /// ID of the CVM instance, this cvm will reinstall the system.
         /// </summary>
         [Output("instanceId")]
@@ -181,7 +189,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string> State { get; private set; } = null!;
 
         /// <summary>
-        /// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+        /// Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
         /// </summary>
         [Output("unschedulable")]
         public Output<int?> Unschedulable { get; private set; } = null!;
@@ -262,6 +270,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? Hostname { get; set; }
 
         /// <summary>
+        /// ID of Node image.
+        /// </summary>
+        [Input("imageId")]
+        public Input<string>? ImageId { get; set; }
+
+        /// <summary>
         /// ID of the CVM instance, this cvm will reinstall the system.
         /// </summary>
         [Input("instanceId", required: true)]
@@ -302,7 +316,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         }
 
         /// <summary>
-        /// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+        /// Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
         /// </summary>
         [Input("unschedulable")]
         public Input<int>? Unschedulable { get; set; }
@@ -338,6 +352,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("hostname")]
         public Input<string>? Hostname { get; set; }
+
+        /// <summary>
+        /// ID of Node image.
+        /// </summary>
+        [Input("imageId")]
+        public Input<string>? ImageId { get; set; }
 
         /// <summary>
         /// ID of the CVM instance, this cvm will reinstall the system.
@@ -398,7 +418,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<string>? State { get; set; }
 
         /// <summary>
-        /// Sets whether the joining node participates in the schedule. Default is '0'. Participate in scheduling.
+        /// Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
         /// </summary>
         [Input("unschedulable")]
         public Input<int>? Unschedulable { get; set; }

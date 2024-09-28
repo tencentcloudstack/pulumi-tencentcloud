@@ -94,6 +94,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Outputs
         /// Base64-encoded User Data text.
         /// </summary>
         public readonly string UserData;
+        /// <summary>
+        /// Version Number.
+        /// </summary>
+        public readonly int VersionNumber;
 
         [OutputConstructor]
         private GetScalingConfigsConfigurationListResult(
@@ -135,7 +139,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Outputs
 
             string systemDiskType,
 
-            string userData)
+            string userData,
+
+            int versionNumber)
         {
             ConfigurationId = configurationId;
             ConfigurationName = configurationName;
@@ -157,6 +163,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As.Outputs
             SystemDiskSize = systemDiskSize;
             SystemDiskType = systemDiskType;
             UserData = userData;
+            VersionNumber = versionNumber;
         }
     }
 }

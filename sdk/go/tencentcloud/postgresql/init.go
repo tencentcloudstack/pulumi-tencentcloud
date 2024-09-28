@@ -21,6 +21,10 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Postgresql/account:Account":
+		r = &Account{}
+	case "tencentcloud:Postgresql/accountPrivilegesOperation:AccountPrivilegesOperation":
+		r = &AccountPrivilegesOperation{}
 	case "tencentcloud:Postgresql/backupDownloadRestrictionConfig:BackupDownloadRestrictionConfig":
 		r = &BackupDownloadRestrictionConfig{}
 	case "tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig":
@@ -70,6 +74,16 @@ func init() {
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Postgresql/account",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Postgresql/accountPrivilegesOperation",
+		&module{version},
+	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Postgresql/backupDownloadRestrictionConfig",

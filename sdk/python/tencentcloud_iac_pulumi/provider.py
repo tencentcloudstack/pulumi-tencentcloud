@@ -16,7 +16,12 @@ __all__ = ['ProviderArgs', 'Provider']
 class ProviderArgs:
     def __init__(__self__, *,
                  assume_role: Optional[pulumi.Input['ProviderAssumeRoleArgs']] = None,
+                 assume_role_with_saml: Optional[pulumi.Input['ProviderAssumeRoleWithSamlArgs']] = None,
+                 assume_role_with_web_identity: Optional[pulumi.Input['ProviderAssumeRoleWithWebIdentityArgs']] = None,
+                 cam_role_name: Optional[pulumi.Input[str]] = None,
+                 cos_domain: Optional[pulumi.Input[str]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
+                 enable_pod_oidc: Optional[pulumi.Input[bool]] = None,
                  profile: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  region: Optional[pulumi.Input[str]] = None,
@@ -27,16 +32,22 @@ class ProviderArgs:
         """
         The set of arguments for constructing a Provider resource.
         :param pulumi.Input['ProviderAssumeRoleArgs'] assume_role: The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+        :param pulumi.Input['ProviderAssumeRoleWithSamlArgs'] assume_role_with_saml: The `assume_role_with_saml` block. If provided, terraform will attempt to assume this role using the supplied
+               credentials.
+        :param pulumi.Input['ProviderAssumeRoleWithWebIdentityArgs'] assume_role_with_web_identity: The `assume_role_with_web_identity` block. If provided, terraform will attempt to assume this role using the supplied
+               credentials.
+        :param pulumi.Input[str] cam_role_name: The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
+        :param pulumi.Input[str] cos_domain: The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples:
+               `https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
         :param pulumi.Input[str] domain: The root domain of the API request, Default is `tencentcloudapi.com`.
+        :param pulumi.Input[bool] enable_pod_oidc: Whether to enable pod oidc.
         :param pulumi.Input[str] profile: The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
                variable. If not set, the default profile created with `tccli configure` will be used.
         :param pulumi.Input[str] protocol: The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
-        :param pulumi.Input[str] region: This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
-               environment variables. The default input value is ap-guangzhou.
-        :param pulumi.Input[str] secret_id: This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
-               environment variable.
-        :param pulumi.Input[str] secret_key: This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
-               environment variable.
+        :param pulumi.Input[str] region: This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The
+               default input value is ap-guangzhou.
+        :param pulumi.Input[str] secret_id: This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
+        :param pulumi.Input[str] secret_key: This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
         :param pulumi.Input[str] security_token: TencentCloud Security Token of temporary access credentials. It can be sourced from the `TENCENTCLOUD_SECURITY_TOKEN`
                environment variable. Notice: for supported products, please refer to: [temporary key supported
                products](https://intl.cloud.tencent.com/document/product/598/10588).
@@ -45,8 +56,18 @@ class ProviderArgs:
         """
         if assume_role is not None:
             pulumi.set(__self__, "assume_role", assume_role)
+        if assume_role_with_saml is not None:
+            pulumi.set(__self__, "assume_role_with_saml", assume_role_with_saml)
+        if assume_role_with_web_identity is not None:
+            pulumi.set(__self__, "assume_role_with_web_identity", assume_role_with_web_identity)
+        if cam_role_name is not None:
+            pulumi.set(__self__, "cam_role_name", cam_role_name)
+        if cos_domain is not None:
+            pulumi.set(__self__, "cos_domain", cos_domain)
         if domain is not None:
             pulumi.set(__self__, "domain", domain)
+        if enable_pod_oidc is not None:
+            pulumi.set(__self__, "enable_pod_oidc", enable_pod_oidc)
         if profile is not None:
             pulumi.set(__self__, "profile", profile)
         if protocol is not None:
@@ -83,6 +104,57 @@ class ProviderArgs:
         pulumi.set(self, "assume_role", value)
 
     @property
+    @pulumi.getter(name="assumeRoleWithSaml")
+    def assume_role_with_saml(self) -> Optional[pulumi.Input['ProviderAssumeRoleWithSamlArgs']]:
+        """
+        The `assume_role_with_saml` block. If provided, terraform will attempt to assume this role using the supplied
+        credentials.
+        """
+        return pulumi.get(self, "assume_role_with_saml")
+
+    @assume_role_with_saml.setter
+    def assume_role_with_saml(self, value: Optional[pulumi.Input['ProviderAssumeRoleWithSamlArgs']]):
+        pulumi.set(self, "assume_role_with_saml", value)
+
+    @property
+    @pulumi.getter(name="assumeRoleWithWebIdentity")
+    def assume_role_with_web_identity(self) -> Optional[pulumi.Input['ProviderAssumeRoleWithWebIdentityArgs']]:
+        """
+        The `assume_role_with_web_identity` block. If provided, terraform will attempt to assume this role using the supplied
+        credentials.
+        """
+        return pulumi.get(self, "assume_role_with_web_identity")
+
+    @assume_role_with_web_identity.setter
+    def assume_role_with_web_identity(self, value: Optional[pulumi.Input['ProviderAssumeRoleWithWebIdentityArgs']]):
+        pulumi.set(self, "assume_role_with_web_identity", value)
+
+    @property
+    @pulumi.getter(name="camRoleName")
+    def cam_role_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
+        """
+        return pulumi.get(self, "cam_role_name")
+
+    @cam_role_name.setter
+    def cam_role_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cam_role_name", value)
+
+    @property
+    @pulumi.getter(name="cosDomain")
+    def cos_domain(self) -> Optional[pulumi.Input[str]]:
+        """
+        The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples:
+        `https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
+        """
+        return pulumi.get(self, "cos_domain")
+
+    @cos_domain.setter
+    def cos_domain(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "cos_domain", value)
+
+    @property
     @pulumi.getter
     def domain(self) -> Optional[pulumi.Input[str]]:
         """
@@ -93,6 +165,18 @@ class ProviderArgs:
     @domain.setter
     def domain(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "domain", value)
+
+    @property
+    @pulumi.getter(name="enablePodOidc")
+    def enable_pod_oidc(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Whether to enable pod oidc.
+        """
+        return pulumi.get(self, "enable_pod_oidc")
+
+    @enable_pod_oidc.setter
+    def enable_pod_oidc(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "enable_pod_oidc", value)
 
     @property
     @pulumi.getter
@@ -123,8 +207,8 @@ class ProviderArgs:
     @pulumi.getter
     def region(self) -> Optional[pulumi.Input[str]]:
         """
-        This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
-        environment variables. The default input value is ap-guangzhou.
+        This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The
+        default input value is ap-guangzhou.
         """
         return pulumi.get(self, "region")
 
@@ -136,8 +220,7 @@ class ProviderArgs:
     @pulumi.getter(name="secretId")
     def secret_id(self) -> Optional[pulumi.Input[str]]:
         """
-        This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
-        environment variable.
+        This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
         """
         return pulumi.get(self, "secret_id")
 
@@ -149,8 +232,7 @@ class ProviderArgs:
     @pulumi.getter(name="secretKey")
     def secret_key(self) -> Optional[pulumi.Input[str]]:
         """
-        This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
-        environment variable.
+        This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
         """
         return pulumi.get(self, "secret_key")
 
@@ -192,7 +274,12 @@ class Provider(pulumi.ProviderResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  assume_role: Optional[pulumi.Input[pulumi.InputType['ProviderAssumeRoleArgs']]] = None,
+                 assume_role_with_saml: Optional[pulumi.Input[pulumi.InputType['ProviderAssumeRoleWithSamlArgs']]] = None,
+                 assume_role_with_web_identity: Optional[pulumi.Input[pulumi.InputType['ProviderAssumeRoleWithWebIdentityArgs']]] = None,
+                 cam_role_name: Optional[pulumi.Input[str]] = None,
+                 cos_domain: Optional[pulumi.Input[str]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
+                 enable_pod_oidc: Optional[pulumi.Input[bool]] = None,
                  profile: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  region: Optional[pulumi.Input[str]] = None,
@@ -210,16 +297,22 @@ class Provider(pulumi.ProviderResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[pulumi.InputType['ProviderAssumeRoleArgs']] assume_role: The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
+        :param pulumi.Input[pulumi.InputType['ProviderAssumeRoleWithSamlArgs']] assume_role_with_saml: The `assume_role_with_saml` block. If provided, terraform will attempt to assume this role using the supplied
+               credentials.
+        :param pulumi.Input[pulumi.InputType['ProviderAssumeRoleWithWebIdentityArgs']] assume_role_with_web_identity: The `assume_role_with_web_identity` block. If provided, terraform will attempt to assume this role using the supplied
+               credentials.
+        :param pulumi.Input[str] cam_role_name: The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
+        :param pulumi.Input[str] cos_domain: The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples:
+               `https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
         :param pulumi.Input[str] domain: The root domain of the API request, Default is `tencentcloudapi.com`.
+        :param pulumi.Input[bool] enable_pod_oidc: Whether to enable pod oidc.
         :param pulumi.Input[str] profile: The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
                variable. If not set, the default profile created with `tccli configure` will be used.
         :param pulumi.Input[str] protocol: The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
-        :param pulumi.Input[str] region: This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
-               environment variables. The default input value is ap-guangzhou.
-        :param pulumi.Input[str] secret_id: This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
-               environment variable.
-        :param pulumi.Input[str] secret_key: This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
-               environment variable.
+        :param pulumi.Input[str] region: This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The
+               default input value is ap-guangzhou.
+        :param pulumi.Input[str] secret_id: This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
+        :param pulumi.Input[str] secret_key: This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
         :param pulumi.Input[str] security_token: TencentCloud Security Token of temporary access credentials. It can be sourced from the `TENCENTCLOUD_SECURITY_TOKEN`
                environment variable. Notice: for supported products, please refer to: [temporary key supported
                products](https://intl.cloud.tencent.com/document/product/598/10588).
@@ -254,7 +347,12 @@ class Provider(pulumi.ProviderResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  assume_role: Optional[pulumi.Input[pulumi.InputType['ProviderAssumeRoleArgs']]] = None,
+                 assume_role_with_saml: Optional[pulumi.Input[pulumi.InputType['ProviderAssumeRoleWithSamlArgs']]] = None,
+                 assume_role_with_web_identity: Optional[pulumi.Input[pulumi.InputType['ProviderAssumeRoleWithWebIdentityArgs']]] = None,
+                 cam_role_name: Optional[pulumi.Input[str]] = None,
+                 cos_domain: Optional[pulumi.Input[str]] = None,
                  domain: Optional[pulumi.Input[str]] = None,
+                 enable_pod_oidc: Optional[pulumi.Input[bool]] = None,
                  profile: Optional[pulumi.Input[str]] = None,
                  protocol: Optional[pulumi.Input[str]] = None,
                  region: Optional[pulumi.Input[str]] = None,
@@ -272,7 +370,12 @@ class Provider(pulumi.ProviderResource):
             __props__ = ProviderArgs.__new__(ProviderArgs)
 
             __props__.__dict__["assume_role"] = pulumi.Output.from_input(assume_role).apply(pulumi.runtime.to_json) if assume_role is not None else None
+            __props__.__dict__["assume_role_with_saml"] = pulumi.Output.from_input(assume_role_with_saml).apply(pulumi.runtime.to_json) if assume_role_with_saml is not None else None
+            __props__.__dict__["assume_role_with_web_identity"] = pulumi.Output.from_input(assume_role_with_web_identity).apply(pulumi.runtime.to_json) if assume_role_with_web_identity is not None else None
+            __props__.__dict__["cam_role_name"] = cam_role_name
+            __props__.__dict__["cos_domain"] = cos_domain
             __props__.__dict__["domain"] = domain
+            __props__.__dict__["enable_pod_oidc"] = pulumi.Output.from_input(enable_pod_oidc).apply(pulumi.runtime.to_json) if enable_pod_oidc is not None else None
             __props__.__dict__["profile"] = profile
             __props__.__dict__["protocol"] = protocol
             if region is None:
@@ -295,6 +398,23 @@ class Provider(pulumi.ProviderResource):
             resource_name,
             __props__,
             opts)
+
+    @property
+    @pulumi.getter(name="camRoleName")
+    def cam_role_name(self) -> pulumi.Output[Optional[str]]:
+        """
+        The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
+        """
+        return pulumi.get(self, "cam_role_name")
+
+    @property
+    @pulumi.getter(name="cosDomain")
+    def cos_domain(self) -> pulumi.Output[Optional[str]]:
+        """
+        The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples:
+        `https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
+        """
+        return pulumi.get(self, "cos_domain")
 
     @property
     @pulumi.getter
@@ -325,8 +445,8 @@ class Provider(pulumi.ProviderResource):
     @pulumi.getter
     def region(self) -> pulumi.Output[Optional[str]]:
         """
-        This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
-        environment variables. The default input value is ap-guangzhou.
+        This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The
+        default input value is ap-guangzhou.
         """
         return pulumi.get(self, "region")
 
@@ -334,8 +454,7 @@ class Provider(pulumi.ProviderResource):
     @pulumi.getter(name="secretId")
     def secret_id(self) -> pulumi.Output[Optional[str]]:
         """
-        This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
-        environment variable.
+        This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
         """
         return pulumi.get(self, "secret_id")
 
@@ -343,8 +462,7 @@ class Provider(pulumi.ProviderResource):
     @pulumi.getter(name="secretKey")
     def secret_key(self) -> pulumi.Output[Optional[str]]:
         """
-        This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
-        environment variable.
+        This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
         """
         return pulumi.get(self, "secret_key")
 

@@ -22,6 +22,7 @@ class InstanceDataDiskArgs:
                  data_disk_id: Optional[pulumi.Input[str]] = None,
                  data_disk_snapshot_id: Optional[pulumi.Input[str]] = None,
                  delete_with_instance: Optional[pulumi.Input[bool]] = None,
+                 delete_with_instance_prepaid: Optional[pulumi.Input[bool]] = None,
                  encrypt: Optional[pulumi.Input[bool]] = None,
                  throughput_performance: Optional[pulumi.Input[int]] = None):
         """
@@ -30,6 +31,7 @@ class InstanceDataDiskArgs:
         :param pulumi.Input[str] data_disk_id: Data disk ID used to initialize the data disk. When data disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
         :param pulumi.Input[str] data_disk_snapshot_id: Snapshot ID of the data disk. The selected data disk snapshot size must be smaller than the data disk size.
         :param pulumi.Input[bool] delete_with_instance: Decides whether the disk is deleted with instance(only applied to `CLOUD_BASIC`, `CLOUD_SSD` and `CLOUD_PREMIUM` disk with `POSTPAID_BY_HOUR` instance), default is true.
+        :param pulumi.Input[bool] delete_with_instance_prepaid: Decides whether the disk is deleted with instance(only applied to `CLOUD_BASIC`, `CLOUD_SSD` and `CLOUD_PREMIUM` disk with `PREPAID` instance), default is false.
         :param pulumi.Input[bool] encrypt: Decides whether the disk is encrypted. Default is `false`.
         :param pulumi.Input[int] throughput_performance: Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
         """
@@ -41,6 +43,8 @@ class InstanceDataDiskArgs:
             pulumi.set(__self__, "data_disk_snapshot_id", data_disk_snapshot_id)
         if delete_with_instance is not None:
             pulumi.set(__self__, "delete_with_instance", delete_with_instance)
+        if delete_with_instance_prepaid is not None:
+            pulumi.set(__self__, "delete_with_instance_prepaid", delete_with_instance_prepaid)
         if encrypt is not None:
             pulumi.set(__self__, "encrypt", encrypt)
         if throughput_performance is not None:
@@ -105,6 +109,18 @@ class InstanceDataDiskArgs:
     @delete_with_instance.setter
     def delete_with_instance(self, value: Optional[pulumi.Input[bool]]):
         pulumi.set(self, "delete_with_instance", value)
+
+    @property
+    @pulumi.getter(name="deleteWithInstancePrepaid")
+    def delete_with_instance_prepaid(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Decides whether the disk is deleted with instance(only applied to `CLOUD_BASIC`, `CLOUD_SSD` and `CLOUD_PREMIUM` disk with `PREPAID` instance), default is false.
+        """
+        return pulumi.get(self, "delete_with_instance_prepaid")
+
+    @delete_with_instance_prepaid.setter
+    def delete_with_instance_prepaid(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "delete_with_instance_prepaid", value)
 
     @property
     @pulumi.getter

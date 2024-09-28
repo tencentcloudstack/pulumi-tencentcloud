@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Outputs
         /// </summary>
         public readonly ImmutableArray<string> HostIds;
         /// <summary>
-        /// Specify the host machine ip.
+        /// It has been deprecated from version 1.81.108. Specify the host machine ip.
         /// </summary>
         public readonly ImmutableArray<string> HostIps;
         /// <summary>

@@ -35,6 +35,11 @@ export const getOrgShareArea: typeof import("./getOrgShareArea").getOrgShareArea
 export const getOrgShareAreaOutput: typeof import("./getOrgShareArea").getOrgShareAreaOutput = null as any;
 utilities.lazyLoad(exports, ["getOrgShareArea","getOrgShareAreaOutput"], () => require("./getOrgShareArea"));
 
+export { GetServicesArgs, GetServicesResult, GetServicesOutputArgs } from "./getServices";
+export const getServices: typeof import("./getServices").getServices = null as any;
+export const getServicesOutput: typeof import("./getServices").getServicesOutput = null as any;
+utilities.lazyLoad(exports, ["getServices","getServicesOutput"], () => require("./getServices"));
+
 export { InstanceArgs, InstanceState } from "./instance";
 export type Instance = import("./instance").Instance;
 export const Instance: typeof import("./instance").Instance = null as any;
@@ -105,6 +110,11 @@ export type QuitOrganizationOperation = import("./quitOrganizationOperation").Qu
 export const QuitOrganizationOperation: typeof import("./quitOrganizationOperation").QuitOrganizationOperation = null as any;
 utilities.lazyLoad(exports, ["QuitOrganizationOperation"], () => require("./quitOrganizationOperation"));
 
+export { ServiceAssignArgs, ServiceAssignState } from "./serviceAssign";
+export type ServiceAssign = import("./serviceAssign").ServiceAssign;
+export const ServiceAssign: typeof import("./serviceAssign").ServiceAssign = null as any;
+utilities.lazyLoad(exports, ["ServiceAssign"], () => require("./serviceAssign"));
+
 
 const _module = {
     version: utilities.getVersion(),
@@ -138,6 +148,8 @@ const _module = {
                 return new PolicySubAccountAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Organization/quitOrganizationOperation:QuitOrganizationOperation":
                 return new QuitOrganizationOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Organization/serviceAssign:ServiceAssign":
+                return new ServiceAssign(name, <any>undefined, { urn })
             default:
                 throw new Error(`unknown resource type ${type}`);
         }
@@ -157,3 +169,4 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgShareUnit
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/orgShareUnitMember", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/policySubAccountAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Organization/quitOrganizationOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Organization/serviceAssign", _module)

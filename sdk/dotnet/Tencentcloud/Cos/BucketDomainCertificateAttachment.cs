@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// <summary>
     /// Provides a resource to attach/detach the corresponding certificate for the domain name in specified cos bucket.
     /// 
+    /// &gt; **NOTE:** The current resource does not support cdc.
+    /// 
     /// ## Example Usage
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;

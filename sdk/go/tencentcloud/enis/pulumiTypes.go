@@ -14,6 +14,8 @@ import (
 var _ = internal.GetEnvOrDefault
 
 type GetInstanceEni struct {
+	// CDC instance ID.
+	CdcId string `pulumi:"cdcId"`
 	// Creation time of the ENI.
 	CreateTime string `pulumi:"createTime"`
 	// Description of the ENI. Conflict with `ids`.
@@ -54,6 +56,8 @@ type GetInstanceEniInput interface {
 }
 
 type GetInstanceEniArgs struct {
+	// CDC instance ID.
+	CdcId pulumi.StringInput `pulumi:"cdcId"`
 	// Creation time of the ENI.
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
 	// Description of the ENI. Conflict with `ids`.
@@ -131,6 +135,11 @@ func (o GetInstanceEniOutput) ToGetInstanceEniOutput() GetInstanceEniOutput {
 
 func (o GetInstanceEniOutput) ToGetInstanceEniOutputWithContext(ctx context.Context) GetInstanceEniOutput {
 	return o
+}
+
+// CDC instance ID.
+func (o GetInstanceEniOutput) CdcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstanceEni) string { return v.CdcId }).(pulumi.StringOutput)
 }
 
 // Creation time of the ENI.

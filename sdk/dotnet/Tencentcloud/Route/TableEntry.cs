@@ -25,34 +25,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
     ///     var config = new Config();
-    ///     var availabilityZone = config.Get("availabilityZone") ?? "na-siliconvalley-1";
-    ///     var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new()
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
     ///         CidrBlock = "10.0.0.0/16",
     ///     });
     /// 
-    ///     var fooTable = new Tencentcloud.Route.Table("fooTable", new()
+    ///     // create route table
+    ///     var exampleTable = new Tencentcloud.Route.Table("exampleTable", new()
     ///     {
-    ///         VpcId = fooInstance.Id,
+    ///         VpcId = vpc.Id,
     ///     });
     /// 
-    ///     var fooSubnet_instanceInstance = new Tencentcloud.Subnet.Instance("fooSubnet/instanceInstance", new()
+    ///     // create subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     ///     {
-    ///         VpcId = fooInstance.Id,
+    ///         VpcId = vpc.Id,
     ///         CidrBlock = "10.0.12.0/24",
     ///         AvailabilityZone = availabilityZone,
-    ///         RouteTableId = fooTable.Id,
+    ///         RouteTableId = exampleTable.Id,
     ///     });
     /// 
-    ///     var instance = new Tencentcloud.Route.TableEntry("instance", new()
+    ///     // create route table entry
+    ///     var exampleTableEntry = new Tencentcloud.Route.TableEntry("exampleTableEntry", new()
     ///     {
-    ///         RouteTableId = fooTable.Id,
+    ///         RouteTableId = exampleTable.Id,
     ///         DestinationCidrBlock = "10.4.4.0/24",
     ///         NextType = "EIP",
     ///         NextHub = "0",
-    ///         Description = "ci-test-route-table-entry",
+    ///         Description = "describe",
     ///     });
     /// 
+    ///     return new Dictionary&lt;string, object?&gt;
+    ///     {
+    ///         ["itemId"] = exampleTableEntry.RouteItemId,
+    ///     };
     /// });
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
@@ -62,7 +70,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
     /// Route table entry can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Route/tableEntry:TableEntry foo 83517.rtb-mlhpg09u
+    /// $ pulumi import tencentcloud:Route/tableEntry:TableEntry example 3065857.rtb-b050fg94
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Route/tableEntry:TableEntry")]
@@ -97,6 +105,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         /// </summary>
         [Output("nextType")]
         public Output<string> NextType { get; private set; } = null!;
+
+        /// <summary>
+        /// ID of route table entry.
+        /// </summary>
+        [Output("routeItemId")]
+        public Output<string> RouteItemId { get; private set; } = null!;
 
         /// <summary>
         /// ID of routing table to which this entry belongs.
@@ -224,6 +238,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
         /// </summary>
         [Input("nextType")]
         public Input<string>? NextType { get; set; }
+
+        /// <summary>
+        /// ID of route table entry.
+        /// </summary>
+        [Input("routeItemId")]
+        public Input<string>? RouteItemId { get; set; }
 
         /// <summary>
         /// ID of routing table to which this entry belongs.

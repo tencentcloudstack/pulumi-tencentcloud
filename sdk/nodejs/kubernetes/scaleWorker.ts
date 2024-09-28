@@ -24,7 +24,7 @@ import * as utilities from "../utilities";
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
  * const subnet = config.get("subnet") || "subnet-pqfek0t8";
  * const scaleInstanceType = config.get("scaleInstanceType") || "S2.LARGE16";
- * const testScale = new tencentcloud.kubernetes.ScaleWorker("testScale", {
+ * const example = new tencentcloud.kubernetes.ScaleWorker("example", {
  *     clusterId: "cls-godovr32",
  *     desiredPodNum: 16,
  *     labels: {
@@ -65,7 +65,7 @@ import * as utilities from "../utilities";
  * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-3";
  * const subnet = config.get("subnet") || "subnet-pqfek0t8";
  * const scaleInstanceType = config.get("scaleInstanceType") || "S2.LARGE16";
- * const testScale = new tencentcloud.kubernetes.ScaleWorker("testScale", {
+ * const example = new tencentcloud.kubernetes.ScaleWorker("example", {
  *     clusterId: "cls-godovr32",
  *     extraArgs: ["root-dir=/var/lib/kubelet"],
  *     labels: {
@@ -100,7 +100,7 @@ import * as utilities from "../utilities";
  * tke scale worker can be imported, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker test cls-xxx#ins-xxx
+ * $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker example cls-mij6c2pq#ins-n6esjkdi,ins-9h3rdxt8,ins-qretqeas
  * ```
  */
 export class ScaleWorker extends pulumi.CustomResource {
@@ -136,7 +136,7 @@ export class ScaleWorker extends pulumi.CustomResource {
      */
     public readonly clusterId!: pulumi.Output<string>;
     /**
-     * Configurations of data disk.
+     * Configurations of tke data disk.
      */
     public readonly dataDisks!: pulumi.Output<outputs.Kubernetes.ScaleWorkerDataDisk[] | undefined>;
     /**
@@ -246,7 +246,7 @@ export interface ScaleWorkerState {
      */
     clusterId?: pulumi.Input<string>;
     /**
-     * Configurations of data disk.
+     * Configurations of tke data disk.
      */
     dataDisks?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ScaleWorkerDataDisk>[]>;
     /**
@@ -304,7 +304,7 @@ export interface ScaleWorkerArgs {
      */
     clusterId: pulumi.Input<string>;
     /**
-     * Configurations of data disk.
+     * Configurations of tke data disk.
      */
     dataDisks?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ScaleWorkerDataDisk>[]>;
     /**

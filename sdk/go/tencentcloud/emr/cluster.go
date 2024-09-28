@@ -146,6 +146,8 @@ import (
 type Cluster struct {
 	pulumi.CustomResourceState
 
+	// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+	AutoRenew pulumi.IntOutput `pulumi:"autoRenew"`
 	// It will be deprecated in later versions. Display strategy of EMR instance.
 	//
 	// Deprecated: It will be deprecated in later versions.
@@ -259,6 +261,8 @@ func GetCluster(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Cluster resources.
 type clusterState struct {
+	// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+	AutoRenew *int `pulumi:"autoRenew"`
 	// It will be deprecated in later versions. Display strategy of EMR instance.
 	//
 	// Deprecated: It will be deprecated in later versions.
@@ -318,6 +322,8 @@ type clusterState struct {
 }
 
 type ClusterState struct {
+	// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+	AutoRenew pulumi.IntPtrInput
 	// It will be deprecated in later versions. Display strategy of EMR instance.
 	//
 	// Deprecated: It will be deprecated in later versions.
@@ -381,6 +387,8 @@ func (ClusterState) ElementType() reflect.Type {
 }
 
 type clusterArgs struct {
+	// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+	AutoRenew *int `pulumi:"autoRenew"`
 	// It will be deprecated in later versions. Display strategy of EMR instance.
 	//
 	// Deprecated: It will be deprecated in later versions.
@@ -439,6 +447,8 @@ type clusterArgs struct {
 
 // The set of arguments for constructing a Cluster resource.
 type ClusterArgs struct {
+	// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+	AutoRenew pulumi.IntPtrInput
 	// It will be deprecated in later versions. Display strategy of EMR instance.
 	//
 	// Deprecated: It will be deprecated in later versions.
@@ -580,6 +590,11 @@ func (o ClusterOutput) ToClusterOutput() ClusterOutput {
 
 func (o ClusterOutput) ToClusterOutputWithContext(ctx context.Context) ClusterOutput {
 	return o
+}
+
+// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+func (o ClusterOutput) AutoRenew() pulumi.IntOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.IntOutput { return v.AutoRenew }).(pulumi.IntOutput)
 }
 
 // It will be deprecated in later versions. Display strategy of EMR instance.

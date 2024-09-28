@@ -39,9 +39,104 @@ import (
 //				return err
 //			}
 //			appId := info.AppId
-//			_, err = Cos.NewBucket(ctx, "privateSbucket", &Cos.BucketArgs{
+//			_, err = Cos.NewBucket(ctx, "privateBucket", &Cos.BucketArgs{
 //				Bucket: pulumi.String(fmt.Sprintf("private-bucket-%v", appId)),
 //				Acl:    pulumi.String("private"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Private Bucket with CDC cluster
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			appId := info.AppId
+//			_, err = Cos.NewBucket(ctx, "privateBucket", &Cos.BucketArgs{
+//				Bucket:           pulumi.String(fmt.Sprintf("private-bucket-%v", appId)),
+//				CdcId:            pulumi.String("cluster-262n63e8"),
+//				Acl:              pulumi.String("private"),
+//				VersioningEnable: pulumi.Bool(true),
+//				ForceClean:       pulumi.Bool(true),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Enable SSE-KMS encryption
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kms"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			appId := info.AppId
+//			example, err := Kms.NewKey(ctx, "example", &Kms.KeyArgs{
+//				Alias:              pulumi.String("tf-example-kms-key"),
+//				Description:        pulumi.String("example of kms key"),
+//				KeyRotationEnabled: pulumi.Bool(false),
+//				IsEnabled:          pulumi.Bool(true),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Cos.NewBucket(ctx, "bucketBasic", &Cos.BucketArgs{
+//				Bucket:              pulumi.String(fmt.Sprintf("tf-bucket-cdc-%v", appId)),
+//				Acl:                 pulumi.String("private"),
+//				EncryptionAlgorithm: pulumi.String("KMS"),
+//				KmsId:               example.ID(),
+//				VersioningEnable:    pulumi.Bool(true),
+//				AccelerationEnable:  pulumi.Bool(true),
+//				ForceClean:          pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err
@@ -290,6 +385,61 @@ import (
 // ```
 // <!--End PulumiCodeChooser -->
 //
+// ### Using CORS with CDC
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			appId := info.AppId
+//			_, err = Cos.NewBucket(ctx, "bucketWithCors", &Cos.BucketArgs{
+//				Bucket: pulumi.String(fmt.Sprintf("bucket-with-cors-%v", appId)),
+//				CdcId:  pulumi.String("cluster-262n63e8"),
+//				CorsRules: cos.BucketCorsRuleArray{
+//					&cos.BucketCorsRuleArgs{
+//						AllowedOrigins: pulumi.StringArray{
+//							pulumi.String("http://*.abc.com"),
+//						},
+//						AllowedMethods: pulumi.StringArray{
+//							pulumi.String("PUT"),
+//							pulumi.String("POST"),
+//						},
+//						AllowedHeaders: pulumi.StringArray{
+//							pulumi.String("*"),
+//						},
+//						MaxAgeSeconds: pulumi.Int(300),
+//						ExposeHeaders: pulumi.StringArray{
+//							pulumi.String("Etag"),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
 // ### Using object lifecycle
 //
 // <!--Start PulumiCodeChooser -->
@@ -325,6 +475,52 @@ import (
 //								StorageClass: pulumi.String("STANDARD_IA"),
 //							},
 //						},
+//						Expiration: &cos.BucketLifecycleRuleExpirationArgs{
+//							Days: pulumi.Int(90),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Using object lifecycle with CDC
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"fmt"
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Cos"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/User"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			info, err := User.GetInfo(ctx, nil, nil)
+//			if err != nil {
+//				return err
+//			}
+//			appId := info.AppId
+//			_, err = Cos.NewBucket(ctx, "bucketWithLifecycle", &Cos.BucketArgs{
+//				Bucket: pulumi.String(fmt.Sprintf("bucket-with-lifecycle-%v", appId)),
+//				CdcId:  pulumi.String("cluster-262n63e8"),
+//				Acl:    pulumi.String("private"),
+//				LifecycleRules: cos.BucketLifecycleRuleArray{
+//					&cos.BucketLifecycleRuleArgs{
+//						FilterPrefix: pulumi.String("path1/"),
 //						Expiration: &cos.BucketLifecycleRuleExpirationArgs{
 //							Days: pulumi.Int(90),
 //						},
@@ -419,13 +615,15 @@ type Bucket struct {
 	AclBody pulumi.StringOutput `pulumi:"aclBody"`
 	// The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket pulumi.StringOutput `pulumi:"bucket"`
+	// CDC cluster ID.
+	CdcId pulumi.StringPtrOutput `pulumi:"cdcId"`
 	// A rule of Cross-Origin Resource Sharing (documented below).
 	CorsRules BucketCorsRuleArrayOutput `pulumi:"corsRules"`
 	// The URL of this cos bucket.
 	CosBucketUrl pulumi.StringOutput `pulumi:"cosBucketUrl"`
 	// Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
 	EnableIntelligentTiering pulumi.BoolOutput `pulumi:"enableIntelligentTiering"`
-	// The server-side encryption algorithm to use. Valid value is `AES256`.
+	// The server-side encryption algorithm to use. Valid values are `AES256`, `KMS` and `cos/kms`, `cos/kms` is for cdc cos scenario.
 	EncryptionAlgorithm pulumi.StringPtrOutput `pulumi:"encryptionAlgorithm"`
 	// Force cleanup all objects before delete bucket.
 	ForceClean pulumi.BoolPtrOutput `pulumi:"forceClean"`
@@ -433,6 +631,8 @@ type Bucket struct {
 	IntelligentTieringDays pulumi.IntOutput `pulumi:"intelligentTieringDays"`
 	// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
 	IntelligentTieringRequestFrequent pulumi.IntOutput `pulumi:"intelligentTieringRequestFrequent"`
+	// The KMS Master Key ID. This value is valid only when `encryptionAlgorithm` is set to KMS or cos/kms. Set kms id to the specified value. If not specified, the default kms id is used.
+	KmsId pulumi.StringPtrOutput `pulumi:"kmsId"`
 	// A configuration of object lifecycle management (documented below).
 	LifecycleRules BucketLifecycleRuleArrayOutput `pulumi:"lifecycleRules"`
 	// Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `logTargetBucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
@@ -500,13 +700,15 @@ type bucketState struct {
 	AclBody *string `pulumi:"aclBody"`
 	// The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket *string `pulumi:"bucket"`
+	// CDC cluster ID.
+	CdcId *string `pulumi:"cdcId"`
 	// A rule of Cross-Origin Resource Sharing (documented below).
 	CorsRules []BucketCorsRule `pulumi:"corsRules"`
 	// The URL of this cos bucket.
 	CosBucketUrl *string `pulumi:"cosBucketUrl"`
 	// Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
 	EnableIntelligentTiering *bool `pulumi:"enableIntelligentTiering"`
-	// The server-side encryption algorithm to use. Valid value is `AES256`.
+	// The server-side encryption algorithm to use. Valid values are `AES256`, `KMS` and `cos/kms`, `cos/kms` is for cdc cos scenario.
 	EncryptionAlgorithm *string `pulumi:"encryptionAlgorithm"`
 	// Force cleanup all objects before delete bucket.
 	ForceClean *bool `pulumi:"forceClean"`
@@ -514,6 +716,8 @@ type bucketState struct {
 	IntelligentTieringDays *int `pulumi:"intelligentTieringDays"`
 	// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
 	IntelligentTieringRequestFrequent *int `pulumi:"intelligentTieringRequestFrequent"`
+	// The KMS Master Key ID. This value is valid only when `encryptionAlgorithm` is set to KMS or cos/kms. Set kms id to the specified value. If not specified, the default kms id is used.
+	KmsId *string `pulumi:"kmsId"`
 	// A configuration of object lifecycle management (documented below).
 	LifecycleRules []BucketLifecycleRule `pulumi:"lifecycleRules"`
 	// Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `logTargetBucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
@@ -549,13 +753,15 @@ type BucketState struct {
 	AclBody pulumi.StringPtrInput
 	// The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket pulumi.StringPtrInput
+	// CDC cluster ID.
+	CdcId pulumi.StringPtrInput
 	// A rule of Cross-Origin Resource Sharing (documented below).
 	CorsRules BucketCorsRuleArrayInput
 	// The URL of this cos bucket.
 	CosBucketUrl pulumi.StringPtrInput
 	// Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
 	EnableIntelligentTiering pulumi.BoolPtrInput
-	// The server-side encryption algorithm to use. Valid value is `AES256`.
+	// The server-side encryption algorithm to use. Valid values are `AES256`, `KMS` and `cos/kms`, `cos/kms` is for cdc cos scenario.
 	EncryptionAlgorithm pulumi.StringPtrInput
 	// Force cleanup all objects before delete bucket.
 	ForceClean pulumi.BoolPtrInput
@@ -563,6 +769,8 @@ type BucketState struct {
 	IntelligentTieringDays pulumi.IntPtrInput
 	// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
 	IntelligentTieringRequestFrequent pulumi.IntPtrInput
+	// The KMS Master Key ID. This value is valid only when `encryptionAlgorithm` is set to KMS or cos/kms. Set kms id to the specified value. If not specified, the default kms id is used.
+	KmsId pulumi.StringPtrInput
 	// A configuration of object lifecycle management (documented below).
 	LifecycleRules BucketLifecycleRuleArrayInput
 	// Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `logTargetBucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
@@ -602,11 +810,13 @@ type bucketArgs struct {
 	AclBody *string `pulumi:"aclBody"`
 	// The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket string `pulumi:"bucket"`
+	// CDC cluster ID.
+	CdcId *string `pulumi:"cdcId"`
 	// A rule of Cross-Origin Resource Sharing (documented below).
 	CorsRules []BucketCorsRule `pulumi:"corsRules"`
 	// Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
 	EnableIntelligentTiering *bool `pulumi:"enableIntelligentTiering"`
-	// The server-side encryption algorithm to use. Valid value is `AES256`.
+	// The server-side encryption algorithm to use. Valid values are `AES256`, `KMS` and `cos/kms`, `cos/kms` is for cdc cos scenario.
 	EncryptionAlgorithm *string `pulumi:"encryptionAlgorithm"`
 	// Force cleanup all objects before delete bucket.
 	ForceClean *bool `pulumi:"forceClean"`
@@ -614,6 +824,8 @@ type bucketArgs struct {
 	IntelligentTieringDays *int `pulumi:"intelligentTieringDays"`
 	// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
 	IntelligentTieringRequestFrequent *int `pulumi:"intelligentTieringRequestFrequent"`
+	// The KMS Master Key ID. This value is valid only when `encryptionAlgorithm` is set to KMS or cos/kms. Set kms id to the specified value. If not specified, the default kms id is used.
+	KmsId *string `pulumi:"kmsId"`
 	// A configuration of object lifecycle management (documented below).
 	LifecycleRules []BucketLifecycleRule `pulumi:"lifecycleRules"`
 	// Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `logTargetBucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
@@ -650,11 +862,13 @@ type BucketArgs struct {
 	AclBody pulumi.StringPtrInput
 	// The name of a bucket to be created. Bucket format should be [custom name]-[appid], for example `mycos-1258798060`.
 	Bucket pulumi.StringInput
+	// CDC cluster ID.
+	CdcId pulumi.StringPtrInput
 	// A rule of Cross-Origin Resource Sharing (documented below).
 	CorsRules BucketCorsRuleArrayInput
 	// Enable intelligent tiering. NOTE: When intelligent tiering configuration is enabled, it cannot be turned off or modified.
 	EnableIntelligentTiering pulumi.BoolPtrInput
-	// The server-side encryption algorithm to use. Valid value is `AES256`.
+	// The server-side encryption algorithm to use. Valid values are `AES256`, `KMS` and `cos/kms`, `cos/kms` is for cdc cos scenario.
 	EncryptionAlgorithm pulumi.StringPtrInput
 	// Force cleanup all objects before delete bucket.
 	ForceClean pulumi.BoolPtrInput
@@ -662,6 +876,8 @@ type BucketArgs struct {
 	IntelligentTieringDays pulumi.IntPtrInput
 	// Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
 	IntelligentTieringRequestFrequent pulumi.IntPtrInput
+	// The KMS Master Key ID. This value is valid only when `encryptionAlgorithm` is set to KMS or cos/kms. Set kms id to the specified value. If not specified, the default kms id is used.
+	KmsId pulumi.StringPtrInput
 	// A configuration of object lifecycle management (documented below).
 	LifecycleRules BucketLifecycleRuleArrayInput
 	// Indicate the access log of this bucket to be saved or not. Default is `false`. If set `true`, the access log will be saved with `logTargetBucket`. To enable log, the full access of log service must be granted. [Full Access Role Policy](https://intl.cloud.tencent.com/document/product/436/16920).
@@ -795,6 +1011,11 @@ func (o BucketOutput) Bucket() pulumi.StringOutput {
 	return o.ApplyT(func(v *Bucket) pulumi.StringOutput { return v.Bucket }).(pulumi.StringOutput)
 }
 
+// CDC cluster ID.
+func (o BucketOutput) CdcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Bucket) pulumi.StringPtrOutput { return v.CdcId }).(pulumi.StringPtrOutput)
+}
+
 // A rule of Cross-Origin Resource Sharing (documented below).
 func (o BucketOutput) CorsRules() BucketCorsRuleArrayOutput {
 	return o.ApplyT(func(v *Bucket) BucketCorsRuleArrayOutput { return v.CorsRules }).(BucketCorsRuleArrayOutput)
@@ -810,7 +1031,7 @@ func (o BucketOutput) EnableIntelligentTiering() pulumi.BoolOutput {
 	return o.ApplyT(func(v *Bucket) pulumi.BoolOutput { return v.EnableIntelligentTiering }).(pulumi.BoolOutput)
 }
 
-// The server-side encryption algorithm to use. Valid value is `AES256`.
+// The server-side encryption algorithm to use. Valid values are `AES256`, `KMS` and `cos/kms`, `cos/kms` is for cdc cos scenario.
 func (o BucketOutput) EncryptionAlgorithm() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Bucket) pulumi.StringPtrOutput { return v.EncryptionAlgorithm }).(pulumi.StringPtrOutput)
 }
@@ -828,6 +1049,11 @@ func (o BucketOutput) IntelligentTieringDays() pulumi.IntOutput {
 // Specify the access limit for converting standard layer data into low-frequency layer data in the configuration. The default value is once, which can be used in combination with the number of days to achieve the conversion effect. For example, if the parameter is set to 1 and the number of access days is 30, it means that objects with less than one visit in 30 consecutive days will be reduced from the standard layer to the low frequency layer.
 func (o BucketOutput) IntelligentTieringRequestFrequent() pulumi.IntOutput {
 	return o.ApplyT(func(v *Bucket) pulumi.IntOutput { return v.IntelligentTieringRequestFrequent }).(pulumi.IntOutput)
+}
+
+// The KMS Master Key ID. This value is valid only when `encryptionAlgorithm` is set to KMS or cos/kms. Set kms id to the specified value. If not specified, the default kms id is used.
+func (o BucketOutput) KmsId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Bucket) pulumi.StringPtrOutput { return v.KmsId }).(pulumi.StringPtrOutput)
 }
 
 // A configuration of object lifecycle management (documented below).

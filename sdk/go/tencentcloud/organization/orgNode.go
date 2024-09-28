@@ -61,6 +61,8 @@ type OrgNode struct {
 	ParentNodeId pulumi.IntOutput `pulumi:"parentNodeId"`
 	// Notes.
 	Remark pulumi.StringPtrOutput `pulumi:"remark"`
+	// Tag description list.
+	Tags pulumi.MapOutput `pulumi:"tags"`
 	// Node update time.
 	UpdateTime pulumi.StringOutput `pulumi:"updateTime"`
 }
@@ -106,6 +108,8 @@ type orgNodeState struct {
 	ParentNodeId *int `pulumi:"parentNodeId"`
 	// Notes.
 	Remark *string `pulumi:"remark"`
+	// Tag description list.
+	Tags map[string]interface{} `pulumi:"tags"`
 	// Node update time.
 	UpdateTime *string `pulumi:"updateTime"`
 }
@@ -119,6 +123,8 @@ type OrgNodeState struct {
 	ParentNodeId pulumi.IntPtrInput
 	// Notes.
 	Remark pulumi.StringPtrInput
+	// Tag description list.
+	Tags pulumi.MapInput
 	// Node update time.
 	UpdateTime pulumi.StringPtrInput
 }
@@ -134,6 +140,8 @@ type orgNodeArgs struct {
 	ParentNodeId int `pulumi:"parentNodeId"`
 	// Notes.
 	Remark *string `pulumi:"remark"`
+	// Tag description list.
+	Tags map[string]interface{} `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a OrgNode resource.
@@ -144,6 +152,8 @@ type OrgNodeArgs struct {
 	ParentNodeId pulumi.IntInput
 	// Notes.
 	Remark pulumi.StringPtrInput
+	// Tag description list.
+	Tags pulumi.MapInput
 }
 
 func (OrgNodeArgs) ElementType() reflect.Type {
@@ -251,6 +261,11 @@ func (o OrgNodeOutput) ParentNodeId() pulumi.IntOutput {
 // Notes.
 func (o OrgNodeOutput) Remark() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *OrgNode) pulumi.StringPtrOutput { return v.Remark }).(pulumi.StringPtrOutput)
+}
+
+// Tag description list.
+func (o OrgNodeOutput) Tags() pulumi.MapOutput {
+	return o.ApplyT(func(v *OrgNode) pulumi.MapOutput { return v.Tags }).(pulumi.MapOutput)
 }
 
 // Node update time.

@@ -29,14 +29,27 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Rum.NewProject(ctx, "project", &Rum.ProjectArgs{
-//				Desc:           pulumi.String("projectDesc-1"),
-//				EnableUrlGroup: pulumi.Int(0),
-//				InstanceId:     pulumi.String("rum-pasZKEI3RLgakj"),
+//			exampleTawInstance, err := Rum.NewTawInstance(ctx, "exampleTawInstance", &Rum.TawInstanceArgs{
+//				AreaId:            pulumi.Int(1),
+//				ChargeType:        pulumi.Int(1),
+//				DataRetentionDays: pulumi.Int(30),
+//				InstanceName:      pulumi.String("tf-example"),
+//				InstanceDesc:      pulumi.String("desc."),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Rum.NewProject(ctx, "exampleProject", &Rum.ProjectArgs{
+//				InstanceId:     exampleTawInstance.ID(),
 //				Rate:           pulumi.String("100"),
-//				Repo:           pulumi.String(""),
+//				EnableUrlGroup: pulumi.Int(0),
 //				Type:           pulumi.String("web"),
+//				Repo:           pulumi.String("https://github.com/xxx"),
 //				Url:            pulumi.String("iac-tf.com"),
+//				Desc:           pulumi.String("desc."),
 //			})
 //			if err != nil {
 //				return err
@@ -53,12 +66,12 @@ import (
 // rum project can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Rum/project:Project project project_id
+// $ pulumi import tencentcloud:Rum/project:Project example 139422
 // ```
 type Project struct {
 	pulumi.CustomResourceState
 
-	// Creata Time.
+	// Create Time.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Creator ID.
 	Creator pulumi.StringOutput `pulumi:"creator"`
@@ -132,7 +145,7 @@ func GetProject(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Project resources.
 type projectState struct {
-	// Creata Time.
+	// Create Time.
 	CreateTime *string `pulumi:"createTime"`
 	// Creator ID.
 	Creator *string `pulumi:"creator"`
@@ -165,7 +178,7 @@ type projectState struct {
 }
 
 type ProjectState struct {
-	// Creata Time.
+	// Create Time.
 	CreateTime pulumi.StringPtrInput
 	// Creator ID.
 	Creator pulumi.StringPtrInput
@@ -327,7 +340,7 @@ func (o ProjectOutput) ToProjectOutputWithContext(ctx context.Context) ProjectOu
 	return o
 }
 
-// Creata Time.
+// Create Time.
 func (o ProjectOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *Project) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
 }

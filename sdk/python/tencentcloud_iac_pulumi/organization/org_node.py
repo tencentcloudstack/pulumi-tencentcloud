@@ -16,18 +16,22 @@ class OrgNodeArgs:
     def __init__(__self__, *,
                  parent_node_id: pulumi.Input[int],
                  name: Optional[pulumi.Input[str]] = None,
-                 remark: Optional[pulumi.Input[str]] = None):
+                 remark: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None):
         """
         The set of arguments for constructing a OrgNode resource.
         :param pulumi.Input[int] parent_node_id: Parent node ID.
         :param pulumi.Input[str] name: Node name.
         :param pulumi.Input[str] remark: Notes.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         pulumi.set(__self__, "parent_node_id", parent_node_id)
         if name is not None:
             pulumi.set(__self__, "name", name)
         if remark is not None:
             pulumi.set(__self__, "remark", remark)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
 
     @property
     @pulumi.getter(name="parentNodeId")
@@ -65,6 +69,18 @@ class OrgNodeArgs:
     def remark(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "remark", value)
 
+    @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
 
 @pulumi.input_type
 class _OrgNodeState:
@@ -73,6 +89,7 @@ class _OrgNodeState:
                  name: Optional[pulumi.Input[str]] = None,
                  parent_node_id: Optional[pulumi.Input[int]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  update_time: Optional[pulumi.Input[str]] = None):
         """
         Input properties used for looking up and filtering OrgNode resources.
@@ -80,6 +97,7 @@ class _OrgNodeState:
         :param pulumi.Input[str] name: Node name.
         :param pulumi.Input[int] parent_node_id: Parent node ID.
         :param pulumi.Input[str] remark: Notes.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[str] update_time: Node update time.
         """
         if create_time is not None:
@@ -90,6 +108,8 @@ class _OrgNodeState:
             pulumi.set(__self__, "parent_node_id", parent_node_id)
         if remark is not None:
             pulumi.set(__self__, "remark", remark)
+        if tags is not None:
+            pulumi.set(__self__, "tags", tags)
         if update_time is not None:
             pulumi.set(__self__, "update_time", update_time)
 
@@ -142,6 +162,18 @@ class _OrgNodeState:
         pulumi.set(self, "remark", value)
 
     @property
+    @pulumi.getter
+    def tags(self) -> Optional[pulumi.Input[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
+
+    @tags.setter
+    def tags(self, value: Optional[pulumi.Input[Mapping[str, Any]]]):
+        pulumi.set(self, "tags", value)
+
+    @property
     @pulumi.getter(name="updateTime")
     def update_time(self) -> Optional[pulumi.Input[str]]:
         """
@@ -162,6 +194,7 @@ class OrgNode(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  parent_node_id: Optional[pulumi.Input[int]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         """
         Provides a resource to create a organization org_node
@@ -192,6 +225,7 @@ class OrgNode(pulumi.CustomResource):
         :param pulumi.Input[str] name: Node name.
         :param pulumi.Input[int] parent_node_id: Parent node ID.
         :param pulumi.Input[str] remark: Notes.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         """
         ...
     @overload
@@ -241,6 +275,7 @@ class OrgNode(pulumi.CustomResource):
                  name: Optional[pulumi.Input[str]] = None,
                  parent_node_id: Optional[pulumi.Input[int]] = None,
                  remark: Optional[pulumi.Input[str]] = None,
+                 tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
         if not isinstance(opts, pulumi.ResourceOptions):
@@ -255,6 +290,7 @@ class OrgNode(pulumi.CustomResource):
                 raise TypeError("Missing required property 'parent_node_id'")
             __props__.__dict__["parent_node_id"] = parent_node_id
             __props__.__dict__["remark"] = remark
+            __props__.__dict__["tags"] = tags
             __props__.__dict__["create_time"] = None
             __props__.__dict__["update_time"] = None
         super(OrgNode, __self__).__init__(
@@ -271,6 +307,7 @@ class OrgNode(pulumi.CustomResource):
             name: Optional[pulumi.Input[str]] = None,
             parent_node_id: Optional[pulumi.Input[int]] = None,
             remark: Optional[pulumi.Input[str]] = None,
+            tags: Optional[pulumi.Input[Mapping[str, Any]]] = None,
             update_time: Optional[pulumi.Input[str]] = None) -> 'OrgNode':
         """
         Get an existing OrgNode resource's state with the given name, id, and optional extra
@@ -283,6 +320,7 @@ class OrgNode(pulumi.CustomResource):
         :param pulumi.Input[str] name: Node name.
         :param pulumi.Input[int] parent_node_id: Parent node ID.
         :param pulumi.Input[str] remark: Notes.
+        :param pulumi.Input[Mapping[str, Any]] tags: Tag description list.
         :param pulumi.Input[str] update_time: Node update time.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -293,6 +331,7 @@ class OrgNode(pulumi.CustomResource):
         __props__.__dict__["name"] = name
         __props__.__dict__["parent_node_id"] = parent_node_id
         __props__.__dict__["remark"] = remark
+        __props__.__dict__["tags"] = tags
         __props__.__dict__["update_time"] = update_time
         return OrgNode(resource_name, opts=opts, __props__=__props__)
 
@@ -327,6 +366,14 @@ class OrgNode(pulumi.CustomResource):
         Notes.
         """
         return pulumi.get(self, "remark")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
+        """
+        Tag description list.
+        """
+        return pulumi.get(self, "tags")
 
     @property
     @pulumi.getter(name="updateTime")

@@ -3206,6 +3206,7 @@ class GetInstancesClbListResult(dict):
                  clb_id: str,
                  clb_name: str,
                  clb_vips: Sequence[str],
+                 cluster_id: str,
                  create_time: str,
                  internet_bandwidth_max_out: int,
                  internet_charge_type: str,
@@ -3230,6 +3231,7 @@ class GetInstancesClbListResult(dict):
         :param str clb_id: ID of the CLB to be queried.
         :param str clb_name: Name of the CLB to be queried.
         :param Sequence[str] clb_vips: The virtual service address table of the CLB.
+        :param str cluster_id: ID of the cluster.
         :param str create_time: Create time of the CLB.
         :param int internet_bandwidth_max_out: Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
         :param str internet_charge_type: Internet charge type, only applicable to open CLB. Valid values are `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
@@ -3254,6 +3256,7 @@ class GetInstancesClbListResult(dict):
         pulumi.set(__self__, "clb_id", clb_id)
         pulumi.set(__self__, "clb_name", clb_name)
         pulumi.set(__self__, "clb_vips", clb_vips)
+        pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "internet_bandwidth_max_out", internet_bandwidth_max_out)
         pulumi.set(__self__, "internet_charge_type", internet_charge_type)
@@ -3305,6 +3308,14 @@ class GetInstancesClbListResult(dict):
         The virtual service address table of the CLB.
         """
         return pulumi.get(self, "clb_vips")
+
+    @property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> str:
+        """
+        ID of the cluster.
+        """
+        return pulumi.get(self, "cluster_id")
 
     @property
     @pulumi.getter(name="createTime")

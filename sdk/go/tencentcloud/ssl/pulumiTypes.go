@@ -963,6 +963,8 @@ type GetCertificatesCertificate struct {
 	Name string `pulumi:"name"`
 	// Order ID returned.
 	OrderId string `pulumi:"orderId"`
+	// Account UIN.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OwnerUin string `pulumi:"ownerUin"`
 	// Certificate authority.
 	ProductZhName string `pulumi:"productZhName"`
 	// Project ID of the SSL certificate.
@@ -973,6 +975,8 @@ type GetCertificatesCertificate struct {
 	SubjectNames []string `pulumi:"subjectNames"`
 	// Type of the SSL certificate to be queried. Available values includes: `CA` and `SVR`.
 	Type string `pulumi:"type"`
+	// Validity period: unit (month).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ValidityPeriod string `pulumi:"validityPeriod"`
 }
 
 // GetCertificatesCertificateInput is an input type that accepts GetCertificatesCertificateArgs and GetCertificatesCertificateOutput values.
@@ -1007,6 +1011,8 @@ type GetCertificatesCertificateArgs struct {
 	Name pulumi.StringInput `pulumi:"name"`
 	// Order ID returned.
 	OrderId pulumi.StringInput `pulumi:"orderId"`
+	// Account UIN.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	OwnerUin pulumi.StringInput `pulumi:"ownerUin"`
 	// Certificate authority.
 	ProductZhName pulumi.StringInput `pulumi:"productZhName"`
 	// Project ID of the SSL certificate.
@@ -1017,6 +1023,8 @@ type GetCertificatesCertificateArgs struct {
 	SubjectNames pulumi.StringArrayInput `pulumi:"subjectNames"`
 	// Type of the SSL certificate to be queried. Available values includes: `CA` and `SVR`.
 	Type pulumi.StringInput `pulumi:"type"`
+	// Validity period: unit (month).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+	ValidityPeriod pulumi.StringInput `pulumi:"validityPeriod"`
 }
 
 func (GetCertificatesCertificateArgs) ElementType() reflect.Type {
@@ -1120,6 +1128,11 @@ func (o GetCertificatesCertificateOutput) OrderId() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.OrderId }).(pulumi.StringOutput)
 }
 
+// Account UIN.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetCertificatesCertificateOutput) OwnerUin() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.OwnerUin }).(pulumi.StringOutput)
+}
+
 // Certificate authority.
 func (o GetCertificatesCertificateOutput) ProductZhName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.ProductZhName }).(pulumi.StringOutput)
@@ -1143,6 +1156,11 @@ func (o GetCertificatesCertificateOutput) SubjectNames() pulumi.StringArrayOutpu
 // Type of the SSL certificate to be queried. Available values includes: `CA` and `SVR`.
 func (o GetCertificatesCertificateOutput) Type() pulumi.StringOutput {
 	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Validity period: unit (month).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+func (o GetCertificatesCertificateOutput) ValidityPeriod() pulumi.StringOutput {
+	return o.ApplyT(func(v GetCertificatesCertificate) string { return v.ValidityPeriod }).(pulumi.StringOutput)
 }
 
 type GetCertificatesCertificateArrayOutput struct{ *pulumi.OutputState }

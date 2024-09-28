@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cls dataTransform
+ * Provides a resource to create a CLS data transform
  *
  * ## Example Usage
  *
@@ -31,7 +31,7 @@ import * as utilities from "../utilities";
  *     period: 10,
  *     storageType: "hot",
  *     tags: {
- *         test: "test",
+ *         createdBy: "terraform",
  *     },
  * });
  * const logsetDst = new tencentcloud.cls.Logset("logsetDst", {
@@ -49,10 +49,10 @@ import * as utilities from "../utilities";
  *     period: 10,
  *     storageType: "hot",
  *     tags: {
- *         test: "test",
+ *         createdBy: "terraform",
  *     },
  * });
- * const dataTransform = new tencentcloud.cls.DataTransform("dataTransform", {
+ * const example = new tencentcloud.cls.DataTransform("example", {
  *     funcType: 1,
  *     srcTopicId: topicSrc.id,
  *     etlContent: "ext_sep(\"content\", \"f1, f2, f3\", sep=\",\", quote=\"\", restrict=False, mode=\"overwrite\")fields_drop(\"content\")",
@@ -68,10 +68,10 @@ import * as utilities from "../utilities";
  *
  * ## Import
  *
- * cls data_transform can be imported using the id, e.g.
+ * CLS data transform can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Cls/dataTransform:DataTransform data_transform data_transform_id
+ * $ pulumi import tencentcloud:Cls/dataTransform:DataTransform example 7b4bcb05-9154-4cdc-a479-f6b5743846e5
  * ```
  */
 export class DataTransform extends pulumi.CustomResource {
@@ -103,31 +103,31 @@ export class DataTransform extends pulumi.CustomResource {
     }
 
     /**
-     * data transform des resources.
+     * Data transform des resources. If `funcType` is `1`, this parameter is required. If `funcType` is `2`, this parameter does not need to be filled in.
      */
     public readonly dstResources!: pulumi.Output<outputs.Cls.DataTransformDstResource[] | undefined>;
     /**
-     * task enable flag.
+     * Task enable flag. `1`: enable, `2`: disable, Default is `1`.
      */
     public readonly enableFlag!: pulumi.Output<number | undefined>;
     /**
-     * data transform content.
+     * Data transform content. If `funcType` is `2`, must use `logAutoOutput`.
      */
     public readonly etlContent!: pulumi.Output<string>;
     /**
-     * task type.
+     * Task type. `1`: Specify the theme; `2`: Dynamic creation.
      */
     public readonly funcType!: pulumi.Output<number>;
     /**
-     * task name.
+     * Task name.
      */
     public readonly name!: pulumi.Output<string>;
     /**
-     * src topic id.
+     * Source topic ID.
      */
     public readonly srcTopicId!: pulumi.Output<string>;
     /**
-     * task type.
+     * Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
      */
     public readonly taskType!: pulumi.Output<number>;
 
@@ -183,31 +183,31 @@ export class DataTransform extends pulumi.CustomResource {
  */
 export interface DataTransformState {
     /**
-     * data transform des resources.
+     * Data transform des resources. If `funcType` is `1`, this parameter is required. If `funcType` is `2`, this parameter does not need to be filled in.
      */
     dstResources?: pulumi.Input<pulumi.Input<inputs.Cls.DataTransformDstResource>[]>;
     /**
-     * task enable flag.
+     * Task enable flag. `1`: enable, `2`: disable, Default is `1`.
      */
     enableFlag?: pulumi.Input<number>;
     /**
-     * data transform content.
+     * Data transform content. If `funcType` is `2`, must use `logAutoOutput`.
      */
     etlContent?: pulumi.Input<string>;
     /**
-     * task type.
+     * Task type. `1`: Specify the theme; `2`: Dynamic creation.
      */
     funcType?: pulumi.Input<number>;
     /**
-     * task name.
+     * Task name.
      */
     name?: pulumi.Input<string>;
     /**
-     * src topic id.
+     * Source topic ID.
      */
     srcTopicId?: pulumi.Input<string>;
     /**
-     * task type.
+     * Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
      */
     taskType?: pulumi.Input<number>;
 }
@@ -217,31 +217,31 @@ export interface DataTransformState {
  */
 export interface DataTransformArgs {
     /**
-     * data transform des resources.
+     * Data transform des resources. If `funcType` is `1`, this parameter is required. If `funcType` is `2`, this parameter does not need to be filled in.
      */
     dstResources?: pulumi.Input<pulumi.Input<inputs.Cls.DataTransformDstResource>[]>;
     /**
-     * task enable flag.
+     * Task enable flag. `1`: enable, `2`: disable, Default is `1`.
      */
     enableFlag?: pulumi.Input<number>;
     /**
-     * data transform content.
+     * Data transform content. If `funcType` is `2`, must use `logAutoOutput`.
      */
     etlContent: pulumi.Input<string>;
     /**
-     * task type.
+     * Task type. `1`: Specify the theme; `2`: Dynamic creation.
      */
     funcType: pulumi.Input<number>;
     /**
-     * task name.
+     * Task name.
      */
     name?: pulumi.Input<string>;
     /**
-     * src topic id.
+     * Source topic ID.
      */
     srcTopicId: pulumi.Input<string>;
     /**
-     * task type.
+     * Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
      */
     taskType: pulumi.Input<number>;
 }

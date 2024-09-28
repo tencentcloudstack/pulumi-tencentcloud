@@ -138,6 +138,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     public partial class Cluster : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+        /// </summary>
+        [Output("autoRenew")]
+        public Output<int> AutoRenew { get; private set; } = null!;
+
+        /// <summary>
         /// It will be deprecated in later versions. Display strategy of EMR instance.
         /// </summary>
         [Output("displayStrategy")]
@@ -313,6 +319,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     public sealed class ClusterArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+        /// </summary>
+        [Input("autoRenew")]
+        public Input<int>? AutoRenew { get; set; }
+
+        /// <summary>
         /// It will be deprecated in later versions. Display strategy of EMR instance.
         /// </summary>
         [Input("displayStrategy")]
@@ -473,6 +485,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
 
     public sealed class ClusterState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+        /// </summary>
+        [Input("autoRenew")]
+        public Input<int>? AutoRenew { get; set; }
+
         /// <summary>
         /// It will be deprecated in later versions. Display strategy of EMR instance.
         /// </summary>

@@ -295,48 +295,57 @@ class BucketInventory(pulumi.CustomResource):
                  schedule: Optional[pulumi.Input[pulumi.InputType['BucketInventoryScheduleArgs']]] = None,
                  __props__=None):
         """
-        Provides a resource to create a cos bucket_inventory
+        Provides a resource to create a cos bucket inventory
+
+        > **NOTE:** The current resource does not support cdc.
 
         ## Example Usage
 
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        bucket_inventory = tencentcloud.cos.BucketInventory("bucketInventory",
-            bucket="keep-test-xxxxxx",
-            destination=tencentcloud.cos.BucketInventoryDestinationArgs(
-                account_id="",
-                bucket="qcs::cos:ap-guangzhou::keep-test-xxxxxx",
-                format="CSV",
-                prefix="cos_bucket_inventory",
-            ),
-            filter=tencentcloud.cos.BucketInventoryFilterArgs(
-                period=tencentcloud.cos.BucketInventoryFilterPeriodArgs(
-                    start_time="1687276800",
-                ),
-            ),
-            included_object_versions="Current",
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        # create cos
+        example_bucket = tencentcloud.cos.Bucket("exampleBucket",
+            bucket=f"private-bucket-{app_id}",
+            acl="private")
+        # create cos bucket inventory
+        example_bucket_inventory = tencentcloud.cos.BucketInventory("exampleBucketInventory",
+            bucket=example_bucket.id,
             is_enabled="true",
+            included_object_versions="Current",
             optional_fields=tencentcloud.cos.BucketInventoryOptionalFieldsArgs(
                 fields=[
                     "Size",
                     "ETag",
                 ],
             ),
+            filter=tencentcloud.cos.BucketInventoryFilterArgs(
+                period=tencentcloud.cos.BucketInventoryFilterPeriodArgs(
+                    start_time="1687276800",
+                ),
+            ),
             schedule=tencentcloud.cos.BucketInventoryScheduleArgs(
-                frequency="Weekly",
+                frequency="Daily",
+            ),
+            destination=tencentcloud.cos.BucketInventoryDestinationArgs(
+                bucket="qcs::cos:ap-guangzhou::private-bucket-1309118522",
+                format="CSV",
+                prefix="frontends",
             ))
         ```
         <!--End PulumiCodeChooser -->
 
         ## Import
 
-        cos bucket_inventory can be imported using the id, e.g.
+        cos bucket inventory can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Cos/bucketInventory:BucketInventory bucket_inventory bucket_inventory_id
+        $ pulumi import tencentcloud:Cos/bucketInventory:BucketInventory example private-bucket-1309118522#tf-example
         ```
 
         :param str resource_name: The name of the resource.
@@ -357,48 +366,57 @@ class BucketInventory(pulumi.CustomResource):
                  args: BucketInventoryArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a cos bucket_inventory
+        Provides a resource to create a cos bucket inventory
+
+        > **NOTE:** The current resource does not support cdc.
 
         ## Example Usage
 
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
+        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        bucket_inventory = tencentcloud.cos.BucketInventory("bucketInventory",
-            bucket="keep-test-xxxxxx",
-            destination=tencentcloud.cos.BucketInventoryDestinationArgs(
-                account_id="",
-                bucket="qcs::cos:ap-guangzhou::keep-test-xxxxxx",
-                format="CSV",
-                prefix="cos_bucket_inventory",
-            ),
-            filter=tencentcloud.cos.BucketInventoryFilterArgs(
-                period=tencentcloud.cos.BucketInventoryFilterPeriodArgs(
-                    start_time="1687276800",
-                ),
-            ),
-            included_object_versions="Current",
+        info = tencentcloud.User.get_info()
+        app_id = info.app_id
+        # create cos
+        example_bucket = tencentcloud.cos.Bucket("exampleBucket",
+            bucket=f"private-bucket-{app_id}",
+            acl="private")
+        # create cos bucket inventory
+        example_bucket_inventory = tencentcloud.cos.BucketInventory("exampleBucketInventory",
+            bucket=example_bucket.id,
             is_enabled="true",
+            included_object_versions="Current",
             optional_fields=tencentcloud.cos.BucketInventoryOptionalFieldsArgs(
                 fields=[
                     "Size",
                     "ETag",
                 ],
             ),
+            filter=tencentcloud.cos.BucketInventoryFilterArgs(
+                period=tencentcloud.cos.BucketInventoryFilterPeriodArgs(
+                    start_time="1687276800",
+                ),
+            ),
             schedule=tencentcloud.cos.BucketInventoryScheduleArgs(
-                frequency="Weekly",
+                frequency="Daily",
+            ),
+            destination=tencentcloud.cos.BucketInventoryDestinationArgs(
+                bucket="qcs::cos:ap-guangzhou::private-bucket-1309118522",
+                format="CSV",
+                prefix="frontends",
             ))
         ```
         <!--End PulumiCodeChooser -->
 
         ## Import
 
-        cos bucket_inventory can be imported using the id, e.g.
+        cos bucket inventory can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Cos/bucketInventory:BucketInventory bucket_inventory bucket_inventory_id
+        $ pulumi import tencentcloud:Cos/bucketInventory:BucketInventory example private-bucket-1309118522#tf-example
         ```
 
         :param str resource_name: The name of the resource.

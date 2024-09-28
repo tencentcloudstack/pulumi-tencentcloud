@@ -126,6 +126,10 @@ export class Cluster extends pulumi.CustomResource {
     }
 
     /**
+     * 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+     */
+    public readonly autoRenew!: pulumi.Output<number>;
+    /**
      * It will be deprecated in later versions. Display strategy of EMR instance.
      *
      * @deprecated It will be deprecated in later versions.
@@ -231,6 +235,7 @@ export class Cluster extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as ClusterState | undefined;
+            resourceInputs["autoRenew"] = state ? state.autoRenew : undefined;
             resourceInputs["displayStrategy"] = state ? state.displayStrategy : undefined;
             resourceInputs["extendFsField"] = state ? state.extendFsField : undefined;
             resourceInputs["instanceId"] = state ? state.instanceId : undefined;
@@ -269,6 +274,7 @@ export class Cluster extends pulumi.CustomResource {
             if ((!args || args.vpcSettings === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'vpcSettings'");
             }
+            resourceInputs["autoRenew"] = args ? args.autoRenew : undefined;
             resourceInputs["displayStrategy"] = args ? args.displayStrategy : undefined;
             resourceInputs["extendFsField"] = args ? args.extendFsField : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
@@ -299,6 +305,10 @@ export class Cluster extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Cluster resources.
  */
 export interface ClusterState {
+    /**
+     * 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+     */
+    autoRenew?: pulumi.Input<number>;
     /**
      * It will be deprecated in later versions. Display strategy of EMR instance.
      *
@@ -397,6 +407,10 @@ export interface ClusterState {
  * The set of arguments for constructing a Cluster resource.
  */
 export interface ClusterArgs {
+    /**
+     * 0 means turn off automatic renewal, 1 means turn on automatic renewal. Default is 0.
+     */
+    autoRenew?: pulumi.Input<number>;
     /**
      * It will be deprecated in later versions. Display strategy of EMR instance.
      *

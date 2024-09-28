@@ -28,6 +28,15 @@ export class Provider extends pulumi.ProviderResource {
     }
 
     /**
+     * The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
+     */
+    public readonly camRoleName!: pulumi.Output<string | undefined>;
+    /**
+     * The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples:
+     * `https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
+     */
+    public readonly cosDomain!: pulumi.Output<string | undefined>;
+    /**
      * The root domain of the API request, Default is `tencentcloudapi.com`.
      */
     public readonly domain!: pulumi.Output<string | undefined>;
@@ -41,18 +50,16 @@ export class Provider extends pulumi.ProviderResource {
      */
     public readonly protocol!: pulumi.Output<string | undefined>;
     /**
-     * This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
-     * environment variables. The default input value is ap-guangzhou.
+     * This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The
+     * default input value is ap-guangzhou.
      */
     public readonly region!: pulumi.Output<string | undefined>;
     /**
-     * This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
-     * environment variable.
+     * This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
      */
     public readonly secretId!: pulumi.Output<string | undefined>;
     /**
-     * This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
-     * environment variable.
+     * This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
      */
     public readonly secretKey!: pulumi.Output<string | undefined>;
     /**
@@ -79,7 +86,12 @@ export class Provider extends pulumi.ProviderResource {
         opts = opts || {};
         {
             resourceInputs["assumeRole"] = pulumi.output(args ? args.assumeRole : undefined).apply(JSON.stringify);
+            resourceInputs["assumeRoleWithSaml"] = pulumi.output(args ? args.assumeRoleWithSaml : undefined).apply(JSON.stringify);
+            resourceInputs["assumeRoleWithWebIdentity"] = pulumi.output(args ? args.assumeRoleWithWebIdentity : undefined).apply(JSON.stringify);
+            resourceInputs["camRoleName"] = args ? args.camRoleName : undefined;
+            resourceInputs["cosDomain"] = args ? args.cosDomain : undefined;
             resourceInputs["domain"] = args ? args.domain : undefined;
+            resourceInputs["enablePodOidc"] = pulumi.output(args ? args.enablePodOidc : undefined).apply(JSON.stringify);
             resourceInputs["profile"] = args ? args.profile : undefined;
             resourceInputs["protocol"] = args ? args.protocol : undefined;
             resourceInputs["region"] = (args ? args.region : undefined) ?? utilities.getEnv("TENCENTCLOUD_REGION");
@@ -104,9 +116,32 @@ export interface ProviderArgs {
      */
     assumeRole?: pulumi.Input<inputs.ProviderAssumeRole>;
     /**
+     * The `assume_role_with_saml` block. If provided, terraform will attempt to assume this role using the supplied
+     * credentials.
+     */
+    assumeRoleWithSaml?: pulumi.Input<inputs.ProviderAssumeRoleWithSaml>;
+    /**
+     * The `assume_role_with_web_identity` block. If provided, terraform will attempt to assume this role using the supplied
+     * credentials.
+     */
+    assumeRoleWithWebIdentity?: pulumi.Input<inputs.ProviderAssumeRoleWithWebIdentity>;
+    /**
+     * The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
+     */
+    camRoleName?: pulumi.Input<string>;
+    /**
+     * The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples:
+     * `https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
+     */
+    cosDomain?: pulumi.Input<string>;
+    /**
      * The root domain of the API request, Default is `tencentcloudapi.com`.
      */
     domain?: pulumi.Input<string>;
+    /**
+     * Whether to enable pod oidc.
+     */
+    enablePodOidc?: pulumi.Input<boolean>;
     /**
      * The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
      * variable. If not set, the default profile created with `tccli configure` will be used.
@@ -117,18 +152,16 @@ export interface ProviderArgs {
      */
     protocol?: pulumi.Input<string>;
     /**
-     * This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
-     * environment variables. The default input value is ap-guangzhou.
+     * This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The
+     * default input value is ap-guangzhou.
      */
     region?: pulumi.Input<string>;
     /**
-     * This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
-     * environment variable.
+     * This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
      */
     secretId?: pulumi.Input<string>;
     /**
-     * This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
-     * environment variable.
+     * This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
      */
     secretKey?: pulumi.Input<string>;
     /**

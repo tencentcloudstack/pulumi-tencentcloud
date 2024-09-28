@@ -31,6 +31,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &BackupEncryptionStatus{}
 	case "tencentcloud:Mysql/backupPolicy:BackupPolicy":
 		r = &BackupPolicy{}
+	case "tencentcloud:Mysql/clsLogAttachment:ClsLogAttachment":
+		r = &ClsLogAttachment{}
 	case "tencentcloud:Mysql/database:Database":
 		r = &Database{}
 	case "tencentcloud:Mysql/dbImportJobOperation:DbImportJobOperation":
@@ -85,6 +87,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &RollbackStop{}
 	case "tencentcloud:Mysql/securityGroupsAttachment:SecurityGroupsAttachment":
 		r = &SecurityGroupsAttachment{}
+	case "tencentcloud:Mysql/ssl:Ssl":
+		r = &Ssl{}
 	case "tencentcloud:Mysql/switchForUpgrade:SwitchForUpgrade":
 		r = &SwitchForUpgrade{}
 	case "tencentcloud:Mysql/switchMasterSlaveOperation:SwitchMasterSlaveOperation":
@@ -131,6 +135,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Mysql/backupPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/clsLogAttachment",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
@@ -266,6 +275,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Mysql/securityGroupsAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/ssl",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

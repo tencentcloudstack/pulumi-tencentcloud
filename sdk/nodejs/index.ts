@@ -20,13 +20,16 @@ import * as as from "./as";
 import * as audit from "./audit";
 import * as audits from "./audits";
 import * as availability from "./availability";
+import * as batch from "./batch";
 import * as bi from "./bi";
 import * as cam from "./cam";
 import * as cat from "./cat";
 import * as cbs from "./cbs";
 import * as ccn from "./ccn";
+import * as cdc from "./cdc";
 import * as cdh from "./cdh";
 import * as cdn from "./cdn";
+import * as cdwdoris from "./cdwdoris";
 import * as cdwpg from "./cdwpg";
 import * as cfs from "./cfs";
 import * as cfw from "./cfw";
@@ -65,15 +68,18 @@ import * as eni from "./eni";
 import * as enis from "./enis";
 import * as gaap from "./gaap";
 import * as ha from "./ha";
+import * as identity from "./identity";
 import * as image from "./image";
 import * as images from "./images";
 import * as instance from "./instance";
 import * as instances from "./instances";
+import * as invite from "./invite";
 import * as ipv6 from "./ipv6";
 import * as key from "./key";
 import * as kms from "./kms";
 import * as kubernetes from "./kubernetes";
 import * as lighthouse from "./lighthouse";
+import * as lite from "./lite";
 import * as mariadb from "./mariadb";
 import * as mdl from "./mdl";
 import * as mongodb from "./mongodb";
@@ -113,6 +119,7 @@ import * as tdcpg from "./tdcpg";
 import * as tdmq from "./tdmq";
 import * as tem from "./tem";
 import * as teo from "./teo";
+import * as thpc from "./thpc";
 import * as trocket from "./trocket";
 import * as tse from "./tse";
 import * as tsf from "./tsf";
@@ -133,13 +140,16 @@ export {
     audit,
     audits,
     availability,
+    batch,
     bi,
     cam,
     cat,
     cbs,
     ccn,
+    cdc,
     cdh,
     cdn,
+    cdwdoris,
     cdwpg,
     cfs,
     cfw,
@@ -178,15 +188,18 @@ export {
     enis,
     gaap,
     ha,
+    identity,
     image,
     images,
     instance,
     instances,
+    invite,
     ipv6,
     key,
     kms,
     kubernetes,
     lighthouse,
+    lite,
     mariadb,
     mdl,
     mongodb,
@@ -226,6 +239,7 @@ export {
     tdmq,
     tem,
     teo,
+    thpc,
     trocket,
     tse,
     tsf,

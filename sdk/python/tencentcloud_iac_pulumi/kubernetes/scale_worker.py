@@ -32,7 +32,7 @@ class ScaleWorkerArgs:
         The set of arguments for constructing a ScaleWorker resource.
         :param pulumi.Input[str] cluster_id: ID of the cluster.
         :param pulumi.Input['ScaleWorkerWorkerConfigArgs'] worker_config: Deploy the machine configuration information of the 'WORK' service, and create <=20 units for common users.
-        :param pulumi.Input[Sequence[pulumi.Input['ScaleWorkerDataDiskArgs']]] data_disks: Configurations of data disk.
+        :param pulumi.Input[Sequence[pulumi.Input['ScaleWorkerDataDiskArgs']]] data_disks: Configurations of tke data disk.
         :param pulumi.Input[int] desired_pod_num: Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node.
@@ -94,7 +94,7 @@ class ScaleWorkerArgs:
     @pulumi.getter(name="dataDisks")
     def data_disks(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScaleWorkerDataDiskArgs']]]]:
         """
-        Configurations of data disk.
+        Configurations of tke data disk.
         """
         return pulumi.get(self, "data_disks")
 
@@ -230,7 +230,7 @@ class _ScaleWorkerState:
         """
         Input properties used for looking up and filtering ScaleWorker resources.
         :param pulumi.Input[str] cluster_id: ID of the cluster.
-        :param pulumi.Input[Sequence[pulumi.Input['ScaleWorkerDataDiskArgs']]] data_disks: Configurations of data disk.
+        :param pulumi.Input[Sequence[pulumi.Input['ScaleWorkerDataDiskArgs']]] data_disks: Configurations of tke data disk.
         :param pulumi.Input[int] desired_pod_num: Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node.
@@ -286,7 +286,7 @@ class _ScaleWorkerState:
     @pulumi.getter(name="dataDisks")
     def data_disks(self) -> Optional[pulumi.Input[Sequence[pulumi.Input['ScaleWorkerDataDiskArgs']]]]:
         """
-        Configurations of data disk.
+        Configurations of tke data disk.
         """
         return pulumi.get(self, "data_disks")
 
@@ -469,7 +469,7 @@ class ScaleWorker(pulumi.CustomResource):
         scale_instance_type = config.get("scaleInstanceType")
         if scale_instance_type is None:
             scale_instance_type = "S2.LARGE16"
-        test_scale = tencentcloud.kubernetes.ScaleWorker("testScale",
+        example = tencentcloud.kubernetes.ScaleWorker("example",
             cluster_id="cls-godovr32",
             desired_pod_num=16,
             labels={
@@ -515,7 +515,7 @@ class ScaleWorker(pulumi.CustomResource):
         scale_instance_type = config.get("scaleInstanceType")
         if scale_instance_type is None:
             scale_instance_type = "S2.LARGE16"
-        test_scale = tencentcloud.kubernetes.ScaleWorker("testScale",
+        example = tencentcloud.kubernetes.ScaleWorker("example",
             cluster_id="cls-godovr32",
             extra_args=["root-dir=/var/lib/kubelet"],
             labels={
@@ -549,13 +549,13 @@ class ScaleWorker(pulumi.CustomResource):
         tke scale worker can be imported, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker test cls-xxx#ins-xxx
+        $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker example cls-mij6c2pq#ins-n6esjkdi,ins-9h3rdxt8,ins-qretqeas
         ```
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: ID of the cluster.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScaleWorkerDataDiskArgs']]]] data_disks: Configurations of data disk.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScaleWorkerDataDiskArgs']]]] data_disks: Configurations of tke data disk.
         :param pulumi.Input[int] desired_pod_num: Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node.
@@ -597,7 +597,7 @@ class ScaleWorker(pulumi.CustomResource):
         scale_instance_type = config.get("scaleInstanceType")
         if scale_instance_type is None:
             scale_instance_type = "S2.LARGE16"
-        test_scale = tencentcloud.kubernetes.ScaleWorker("testScale",
+        example = tencentcloud.kubernetes.ScaleWorker("example",
             cluster_id="cls-godovr32",
             desired_pod_num=16,
             labels={
@@ -643,7 +643,7 @@ class ScaleWorker(pulumi.CustomResource):
         scale_instance_type = config.get("scaleInstanceType")
         if scale_instance_type is None:
             scale_instance_type = "S2.LARGE16"
-        test_scale = tencentcloud.kubernetes.ScaleWorker("testScale",
+        example = tencentcloud.kubernetes.ScaleWorker("example",
             cluster_id="cls-godovr32",
             extra_args=["root-dir=/var/lib/kubelet"],
             labels={
@@ -677,7 +677,7 @@ class ScaleWorker(pulumi.CustomResource):
         tke scale worker can be imported, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker test cls-xxx#ins-xxx
+        $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker example cls-mij6c2pq#ins-n6esjkdi,ins-9h3rdxt8,ins-qretqeas
         ```
 
         :param str resource_name: The name of the resource.
@@ -764,7 +764,7 @@ class ScaleWorker(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[str] cluster_id: ID of the cluster.
-        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScaleWorkerDataDiskArgs']]]] data_disks: Configurations of data disk.
+        :param pulumi.Input[Sequence[pulumi.Input[pulumi.InputType['ScaleWorkerDataDiskArgs']]]] data_disks: Configurations of tke data disk.
         :param pulumi.Input[int] desired_pod_num: Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
         :param pulumi.Input[str] docker_graph_path: Docker graph path. Default is `/var/lib/docker`.
         :param pulumi.Input[Sequence[pulumi.Input[str]]] extra_args: Custom parameter information related to the node.
@@ -808,7 +808,7 @@ class ScaleWorker(pulumi.CustomResource):
     @pulumi.getter(name="dataDisks")
     def data_disks(self) -> pulumi.Output[Optional[Sequence['outputs.ScaleWorkerDataDisk']]]:
         """
-        Configurations of data disk.
+        Configurations of tke data disk.
         """
         return pulumi.get(self, "data_disks")
 

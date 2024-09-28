@@ -65,6 +65,10 @@ export class EndPointService extends pulumi.CustomResource {
      */
     public readonly autoAcceptFlag!: pulumi.Output<boolean>;
     /**
+     * CDC instance ID.
+     */
+    public /*out*/ readonly cdcId!: pulumi.Output<string>;
+    /**
      * Create Time.
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
@@ -111,6 +115,7 @@ export class EndPointService extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as EndPointServiceState | undefined;
             resourceInputs["autoAcceptFlag"] = state ? state.autoAcceptFlag : undefined;
+            resourceInputs["cdcId"] = state ? state.cdcId : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
             resourceInputs["endPointCount"] = state ? state.endPointCount : undefined;
             resourceInputs["endPointServiceName"] = state ? state.endPointServiceName : undefined;
@@ -138,6 +143,7 @@ export class EndPointService extends pulumi.CustomResource {
             resourceInputs["serviceInstanceId"] = args ? args.serviceInstanceId : undefined;
             resourceInputs["serviceType"] = args ? args.serviceType : undefined;
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
+            resourceInputs["cdcId"] = undefined /*out*/;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["endPointCount"] = undefined /*out*/;
             resourceInputs["serviceOwner"] = undefined /*out*/;
@@ -156,6 +162,10 @@ export interface EndPointServiceState {
      * Whether to automatically accept.
      */
     autoAcceptFlag?: pulumi.Input<boolean>;
+    /**
+     * CDC instance ID.
+     */
+    cdcId?: pulumi.Input<string>;
     /**
      * Create Time.
      */

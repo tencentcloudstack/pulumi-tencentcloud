@@ -30,12 +30,14 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// create vpc
 //			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
+//			// create private dns zone
 //			exampleZone, err := PrivateDns.NewZone(ctx, "exampleZone", &PrivateDns.ZoneArgs{
 //				Domain: pulumi.String("domain.com"),
 //				Remark: pulumi.String("remark."),
@@ -54,6 +56,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
+//			// create private dns record
 //			_, err = PrivateDns.NewRecord(ctx, "exampleRecord", &PrivateDns.RecordArgs{
 //				ZoneId:      exampleZone.ID(),
 //				RecordType:  pulumi.String("A"),
@@ -85,11 +88,11 @@ type Record struct {
 
 	// MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.
 	Mx pulumi.IntPtrOutput `pulumi:"mx"`
-	// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+	// Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
 	RecordType pulumi.StringOutput `pulumi:"recordType"`
 	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
 	RecordValue pulumi.StringOutput `pulumi:"recordValue"`
-	// Subdomain, such as "www", "m", and "@".
+	// Subdomain, such as `www`, `m`, and `@`.
 	SubDomain pulumi.StringOutput `pulumi:"subDomain"`
 	// Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.
 	Ttl pulumi.IntOutput `pulumi:"ttl"`
@@ -143,11 +146,11 @@ func GetRecord(ctx *pulumi.Context,
 type recordState struct {
 	// MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.
 	Mx *int `pulumi:"mx"`
-	// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+	// Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
 	RecordType *string `pulumi:"recordType"`
 	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
 	RecordValue *string `pulumi:"recordValue"`
-	// Subdomain, such as "www", "m", and "@".
+	// Subdomain, such as `www`, `m`, and `@`.
 	SubDomain *string `pulumi:"subDomain"`
 	// Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.
 	Ttl *int `pulumi:"ttl"`
@@ -160,11 +163,11 @@ type recordState struct {
 type RecordState struct {
 	// MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.
 	Mx pulumi.IntPtrInput
-	// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+	// Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
 	RecordType pulumi.StringPtrInput
 	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
 	RecordValue pulumi.StringPtrInput
-	// Subdomain, such as "www", "m", and "@".
+	// Subdomain, such as `www`, `m`, and `@`.
 	SubDomain pulumi.StringPtrInput
 	// Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.
 	Ttl pulumi.IntPtrInput
@@ -181,11 +184,11 @@ func (RecordState) ElementType() reflect.Type {
 type recordArgs struct {
 	// MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.
 	Mx *int `pulumi:"mx"`
-	// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+	// Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
 	RecordType string `pulumi:"recordType"`
 	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
 	RecordValue string `pulumi:"recordValue"`
-	// Subdomain, such as "www", "m", and "@".
+	// Subdomain, such as `www`, `m`, and `@`.
 	SubDomain string `pulumi:"subDomain"`
 	// Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.
 	Ttl *int `pulumi:"ttl"`
@@ -199,11 +202,11 @@ type recordArgs struct {
 type RecordArgs struct {
 	// MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.
 	Mx pulumi.IntPtrInput
-	// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+	// Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
 	RecordType pulumi.StringInput
 	// Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
 	RecordValue pulumi.StringInput
-	// Subdomain, such as "www", "m", and "@".
+	// Subdomain, such as `www`, `m`, and `@`.
 	SubDomain pulumi.StringInput
 	// Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.
 	Ttl pulumi.IntPtrInput
@@ -305,7 +308,7 @@ func (o RecordOutput) Mx() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Record) pulumi.IntPtrOutput { return v.Mx }).(pulumi.IntPtrOutput)
 }
 
-// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+// Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
 func (o RecordOutput) RecordType() pulumi.StringOutput {
 	return o.ApplyT(func(v *Record) pulumi.StringOutput { return v.RecordType }).(pulumi.StringOutput)
 }
@@ -315,7 +318,7 @@ func (o RecordOutput) RecordValue() pulumi.StringOutput {
 	return o.ApplyT(func(v *Record) pulumi.StringOutput { return v.RecordValue }).(pulumi.StringOutput)
 }
 
-// Subdomain, such as "www", "m", and "@".
+// Subdomain, such as `www`, `m`, and `@`.
 func (o RecordOutput) SubDomain() pulumi.StringOutput {
 	return o.ApplyT(func(v *Record) pulumi.StringOutput { return v.SubDomain }).(pulumi.StringOutput)
 }

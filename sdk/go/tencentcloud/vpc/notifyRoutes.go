@@ -18,7 +18,7 @@ type NotifyRoutes struct {
 	// If published to vbc.
 	PublishedToVbc pulumi.BoolOutput `pulumi:"publishedToVbc"`
 	// The unique ID of the routing policy.
-	RouteItemIds pulumi.StringArrayOutput `pulumi:"routeItemIds"`
+	RouteItemIds pulumi.StringOutput `pulumi:"routeItemIds"`
 	// The unique ID of the routing table.
 	RouteTableId pulumi.StringOutput `pulumi:"routeTableId"`
 }
@@ -62,7 +62,7 @@ type notifyRoutesState struct {
 	// If published to vbc.
 	PublishedToVbc *bool `pulumi:"publishedToVbc"`
 	// The unique ID of the routing policy.
-	RouteItemIds []string `pulumi:"routeItemIds"`
+	RouteItemIds *string `pulumi:"routeItemIds"`
 	// The unique ID of the routing table.
 	RouteTableId *string `pulumi:"routeTableId"`
 }
@@ -71,7 +71,7 @@ type NotifyRoutesState struct {
 	// If published to vbc.
 	PublishedToVbc pulumi.BoolPtrInput
 	// The unique ID of the routing policy.
-	RouteItemIds pulumi.StringArrayInput
+	RouteItemIds pulumi.StringPtrInput
 	// The unique ID of the routing table.
 	RouteTableId pulumi.StringPtrInput
 }
@@ -82,7 +82,7 @@ func (NotifyRoutesState) ElementType() reflect.Type {
 
 type notifyRoutesArgs struct {
 	// The unique ID of the routing policy.
-	RouteItemIds []string `pulumi:"routeItemIds"`
+	RouteItemIds string `pulumi:"routeItemIds"`
 	// The unique ID of the routing table.
 	RouteTableId string `pulumi:"routeTableId"`
 }
@@ -90,7 +90,7 @@ type notifyRoutesArgs struct {
 // The set of arguments for constructing a NotifyRoutes resource.
 type NotifyRoutesArgs struct {
 	// The unique ID of the routing policy.
-	RouteItemIds pulumi.StringArrayInput
+	RouteItemIds pulumi.StringInput
 	// The unique ID of the routing table.
 	RouteTableId pulumi.StringInput
 }
@@ -188,8 +188,8 @@ func (o NotifyRoutesOutput) PublishedToVbc() pulumi.BoolOutput {
 }
 
 // The unique ID of the routing policy.
-func (o NotifyRoutesOutput) RouteItemIds() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *NotifyRoutes) pulumi.StringArrayOutput { return v.RouteItemIds }).(pulumi.StringArrayOutput)
+func (o NotifyRoutesOutput) RouteItemIds() pulumi.StringOutput {
+	return o.ApplyT(func(v *NotifyRoutes) pulumi.StringOutput { return v.RouteItemIds }).(pulumi.StringOutput)
 }
 
 // The unique ID of the routing table.

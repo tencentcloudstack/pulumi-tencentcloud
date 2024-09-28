@@ -24,7 +24,9 @@ type ClusterAttachmentWorkerConfig struct {
 	ExtraArgs []string `pulumi:"extraArgs"`
 	// GPU driver parameters.
 	GpuArgs *ClusterAttachmentWorkerConfigGpuArgs `pulumi:"gpuArgs"`
-	// Indicate to schedule the adding node or not. Default is true.
+	// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+	//
+	// Deprecated: This argument was deprecated, use `unschedulable` instead.
 	IsSchedule *bool `pulumi:"isSchedule"`
 	// Mount target. Default is not mounting.
 	MountTarget *string `pulumi:"mountTarget"`
@@ -56,7 +58,9 @@ type ClusterAttachmentWorkerConfigArgs struct {
 	ExtraArgs pulumi.StringArrayInput `pulumi:"extraArgs"`
 	// GPU driver parameters.
 	GpuArgs ClusterAttachmentWorkerConfigGpuArgsPtrInput `pulumi:"gpuArgs"`
-	// Indicate to schedule the adding node or not. Default is true.
+	// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+	//
+	// Deprecated: This argument was deprecated, use `unschedulable` instead.
 	IsSchedule pulumi.BoolPtrInput `pulumi:"isSchedule"`
 	// Mount target. Default is not mounting.
 	MountTarget pulumi.StringPtrInput `pulumi:"mountTarget"`
@@ -168,7 +172,9 @@ func (o ClusterAttachmentWorkerConfigOutput) GpuArgs() ClusterAttachmentWorkerCo
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfig) *ClusterAttachmentWorkerConfigGpuArgs { return v.GpuArgs }).(ClusterAttachmentWorkerConfigGpuArgsPtrOutput)
 }
 
-// Indicate to schedule the adding node or not. Default is true.
+// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+//
+// Deprecated: This argument was deprecated, use `unschedulable` instead.
 func (o ClusterAttachmentWorkerConfigOutput) IsSchedule() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfig) *bool { return v.IsSchedule }).(pulumi.BoolPtrOutput)
 }
@@ -262,7 +268,9 @@ func (o ClusterAttachmentWorkerConfigPtrOutput) GpuArgs() ClusterAttachmentWorke
 	}).(ClusterAttachmentWorkerConfigGpuArgsPtrOutput)
 }
 
-// Indicate to schedule the adding node or not. Default is true.
+// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+//
+// Deprecated: This argument was deprecated, use `unschedulable` instead.
 func (o ClusterAttachmentWorkerConfigPtrOutput) IsSchedule() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfig) *bool {
 		if v == nil {
@@ -662,19 +670,31 @@ type ClusterAttachmentWorkerConfigOverrides struct {
 	DataDisks []ClusterAttachmentWorkerConfigOverridesDataDisk `pulumi:"dataDisks"`
 	// Indicate to set desired pod number in node. valid when the cluster is podCIDR.
 	DesiredPodNum *int `pulumi:"desiredPodNum"`
-	// Docker graph path. Default is `/var/lib/docker`.
+	// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	DockerGraphPath *string `pulumi:"dockerGraphPath"`
-	// Custom parameter information related to the node. This is a white-list parameter.
+	// This argument was no longer supported by TencentCloud TKE. Custom parameter information related to the node. This is a white-list parameter.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	ExtraArgs []string `pulumi:"extraArgs"`
 	// GPU driver parameters.
 	GpuArgs *ClusterAttachmentWorkerConfigOverridesGpuArgs `pulumi:"gpuArgs"`
-	// Indicate to schedule the adding node or not. Default is true.
+	// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+	//
+	// Deprecated: This argument was deprecated, use `unschedulable` instead.
 	IsSchedule *bool `pulumi:"isSchedule"`
-	// Mount target. Default is not mounting.
+	// This argument was no longer supported by TencentCloud TKE. Mount target. Default is not mounting.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	MountTarget *string `pulumi:"mountTarget"`
-	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	// This argument was no longer supported by TencentCloud TKE. Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	PreStartUserScript *string `pulumi:"preStartUserScript"`
-	// Base64-encoded User Data text, the length limit is 16KB.
+	// This argument was no longer supported by TencentCloud TKE. Base64-encoded User Data text, the length limit is 16KB.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	UserData *string `pulumi:"userData"`
 }
 
@@ -694,19 +714,31 @@ type ClusterAttachmentWorkerConfigOverridesArgs struct {
 	DataDisks ClusterAttachmentWorkerConfigOverridesDataDiskArrayInput `pulumi:"dataDisks"`
 	// Indicate to set desired pod number in node. valid when the cluster is podCIDR.
 	DesiredPodNum pulumi.IntPtrInput `pulumi:"desiredPodNum"`
-	// Docker graph path. Default is `/var/lib/docker`.
+	// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	DockerGraphPath pulumi.StringPtrInput `pulumi:"dockerGraphPath"`
-	// Custom parameter information related to the node. This is a white-list parameter.
+	// This argument was no longer supported by TencentCloud TKE. Custom parameter information related to the node. This is a white-list parameter.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	ExtraArgs pulumi.StringArrayInput `pulumi:"extraArgs"`
 	// GPU driver parameters.
 	GpuArgs ClusterAttachmentWorkerConfigOverridesGpuArgsPtrInput `pulumi:"gpuArgs"`
-	// Indicate to schedule the adding node or not. Default is true.
+	// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+	//
+	// Deprecated: This argument was deprecated, use `unschedulable` instead.
 	IsSchedule pulumi.BoolPtrInput `pulumi:"isSchedule"`
-	// Mount target. Default is not mounting.
+	// This argument was no longer supported by TencentCloud TKE. Mount target. Default is not mounting.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	MountTarget pulumi.StringPtrInput `pulumi:"mountTarget"`
-	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	// This argument was no longer supported by TencentCloud TKE. Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	PreStartUserScript pulumi.StringPtrInput `pulumi:"preStartUserScript"`
-	// Base64-encoded User Data text, the length limit is 16KB.
+	// This argument was no longer supported by TencentCloud TKE. Base64-encoded User Data text, the length limit is 16KB.
+	//
+	// Deprecated: This argument was no longer supported by TencentCloud TKE.
 	UserData pulumi.StringPtrInput `pulumi:"userData"`
 }
 
@@ -799,12 +831,16 @@ func (o ClusterAttachmentWorkerConfigOverridesOutput) DesiredPodNum() pulumi.Int
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) *int { return v.DesiredPodNum }).(pulumi.IntPtrOutput)
 }
 
-// Docker graph path. Default is `/var/lib/docker`.
+// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesOutput) DockerGraphPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) *string { return v.DockerGraphPath }).(pulumi.StringPtrOutput)
 }
 
-// Custom parameter information related to the node. This is a white-list parameter.
+// This argument was no longer supported by TencentCloud TKE. Custom parameter information related to the node. This is a white-list parameter.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesOutput) ExtraArgs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) []string { return v.ExtraArgs }).(pulumi.StringArrayOutput)
 }
@@ -816,22 +852,30 @@ func (o ClusterAttachmentWorkerConfigOverridesOutput) GpuArgs() ClusterAttachmen
 	}).(ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput)
 }
 
-// Indicate to schedule the adding node or not. Default is true.
+// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+//
+// Deprecated: This argument was deprecated, use `unschedulable` instead.
 func (o ClusterAttachmentWorkerConfigOverridesOutput) IsSchedule() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) *bool { return v.IsSchedule }).(pulumi.BoolPtrOutput)
 }
 
-// Mount target. Default is not mounting.
+// This argument was no longer supported by TencentCloud TKE. Mount target. Default is not mounting.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesOutput) MountTarget() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) *string { return v.MountTarget }).(pulumi.StringPtrOutput)
 }
 
-// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+// This argument was no longer supported by TencentCloud TKE. Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesOutput) PreStartUserScript() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) *string { return v.PreStartUserScript }).(pulumi.StringPtrOutput)
 }
 
-// Base64-encoded User Data text, the length limit is 16KB.
+// This argument was no longer supported by TencentCloud TKE. Base64-encoded User Data text, the length limit is 16KB.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesOutput) UserData() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterAttachmentWorkerConfigOverrides) *string { return v.UserData }).(pulumi.StringPtrOutput)
 }
@@ -880,7 +924,9 @@ func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) DesiredPodNum() pulumi.
 	}).(pulumi.IntPtrOutput)
 }
 
-// Docker graph path. Default is `/var/lib/docker`.
+// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) DockerGraphPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverrides) *string {
 		if v == nil {
@@ -890,7 +936,9 @@ func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) DockerGraphPath() pulum
 	}).(pulumi.StringPtrOutput)
 }
 
-// Custom parameter information related to the node. This is a white-list parameter.
+// This argument was no longer supported by TencentCloud TKE. Custom parameter information related to the node. This is a white-list parameter.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) ExtraArgs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverrides) []string {
 		if v == nil {
@@ -910,7 +958,9 @@ func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) GpuArgs() ClusterAttach
 	}).(ClusterAttachmentWorkerConfigOverridesGpuArgsPtrOutput)
 }
 
-// Indicate to schedule the adding node or not. Default is true.
+// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+//
+// Deprecated: This argument was deprecated, use `unschedulable` instead.
 func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) IsSchedule() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverrides) *bool {
 		if v == nil {
@@ -920,7 +970,9 @@ func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) IsSchedule() pulumi.Boo
 	}).(pulumi.BoolPtrOutput)
 }
 
-// Mount target. Default is not mounting.
+// This argument was no longer supported by TencentCloud TKE. Mount target. Default is not mounting.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) MountTarget() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverrides) *string {
 		if v == nil {
@@ -930,7 +982,9 @@ func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) MountTarget() pulumi.St
 	}).(pulumi.StringPtrOutput)
 }
 
-// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+// This argument was no longer supported by TencentCloud TKE. Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) PreStartUserScript() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverrides) *string {
 		if v == nil {
@@ -940,7 +994,9 @@ func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) PreStartUserScript() pu
 	}).(pulumi.StringPtrOutput)
 }
 
-// Base64-encoded User Data text, the length limit is 16KB.
+// This argument was no longer supported by TencentCloud TKE. Base64-encoded User Data text, the length limit is 16KB.
+//
+// Deprecated: This argument was no longer supported by TencentCloud TKE.
 func (o ClusterAttachmentWorkerConfigOverridesPtrOutput) UserData() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ClusterAttachmentWorkerConfigOverrides) *string {
 		if v == nil {
@@ -4034,6 +4090,121 @@ func (o EncryptionProtectionKmsConfigurationPtrOutput) KmsRegion() pulumi.String
 	}).(pulumi.StringPtrOutput)
 }
 
+type HealthCheckPolicyRule struct {
+	// Enable repair or not.
+	AutoRepairEnabled bool `pulumi:"autoRepairEnabled"`
+	// Enable detection of this project or not.
+	Enabled bool `pulumi:"enabled"`
+	// Health check rule details.
+	Name string `pulumi:"name"`
+}
+
+// HealthCheckPolicyRuleInput is an input type that accepts HealthCheckPolicyRuleArgs and HealthCheckPolicyRuleOutput values.
+// You can construct a concrete instance of `HealthCheckPolicyRuleInput` via:
+//
+//	HealthCheckPolicyRuleArgs{...}
+type HealthCheckPolicyRuleInput interface {
+	pulumi.Input
+
+	ToHealthCheckPolicyRuleOutput() HealthCheckPolicyRuleOutput
+	ToHealthCheckPolicyRuleOutputWithContext(context.Context) HealthCheckPolicyRuleOutput
+}
+
+type HealthCheckPolicyRuleArgs struct {
+	// Enable repair or not.
+	AutoRepairEnabled pulumi.BoolInput `pulumi:"autoRepairEnabled"`
+	// Enable detection of this project or not.
+	Enabled pulumi.BoolInput `pulumi:"enabled"`
+	// Health check rule details.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (HealthCheckPolicyRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*HealthCheckPolicyRule)(nil)).Elem()
+}
+
+func (i HealthCheckPolicyRuleArgs) ToHealthCheckPolicyRuleOutput() HealthCheckPolicyRuleOutput {
+	return i.ToHealthCheckPolicyRuleOutputWithContext(context.Background())
+}
+
+func (i HealthCheckPolicyRuleArgs) ToHealthCheckPolicyRuleOutputWithContext(ctx context.Context) HealthCheckPolicyRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(HealthCheckPolicyRuleOutput)
+}
+
+// HealthCheckPolicyRuleArrayInput is an input type that accepts HealthCheckPolicyRuleArray and HealthCheckPolicyRuleArrayOutput values.
+// You can construct a concrete instance of `HealthCheckPolicyRuleArrayInput` via:
+//
+//	HealthCheckPolicyRuleArray{ HealthCheckPolicyRuleArgs{...} }
+type HealthCheckPolicyRuleArrayInput interface {
+	pulumi.Input
+
+	ToHealthCheckPolicyRuleArrayOutput() HealthCheckPolicyRuleArrayOutput
+	ToHealthCheckPolicyRuleArrayOutputWithContext(context.Context) HealthCheckPolicyRuleArrayOutput
+}
+
+type HealthCheckPolicyRuleArray []HealthCheckPolicyRuleInput
+
+func (HealthCheckPolicyRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]HealthCheckPolicyRule)(nil)).Elem()
+}
+
+func (i HealthCheckPolicyRuleArray) ToHealthCheckPolicyRuleArrayOutput() HealthCheckPolicyRuleArrayOutput {
+	return i.ToHealthCheckPolicyRuleArrayOutputWithContext(context.Background())
+}
+
+func (i HealthCheckPolicyRuleArray) ToHealthCheckPolicyRuleArrayOutputWithContext(ctx context.Context) HealthCheckPolicyRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(HealthCheckPolicyRuleArrayOutput)
+}
+
+type HealthCheckPolicyRuleOutput struct{ *pulumi.OutputState }
+
+func (HealthCheckPolicyRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*HealthCheckPolicyRule)(nil)).Elem()
+}
+
+func (o HealthCheckPolicyRuleOutput) ToHealthCheckPolicyRuleOutput() HealthCheckPolicyRuleOutput {
+	return o
+}
+
+func (o HealthCheckPolicyRuleOutput) ToHealthCheckPolicyRuleOutputWithContext(ctx context.Context) HealthCheckPolicyRuleOutput {
+	return o
+}
+
+// Enable repair or not.
+func (o HealthCheckPolicyRuleOutput) AutoRepairEnabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v HealthCheckPolicyRule) bool { return v.AutoRepairEnabled }).(pulumi.BoolOutput)
+}
+
+// Enable detection of this project or not.
+func (o HealthCheckPolicyRuleOutput) Enabled() pulumi.BoolOutput {
+	return o.ApplyT(func(v HealthCheckPolicyRule) bool { return v.Enabled }).(pulumi.BoolOutput)
+}
+
+// Health check rule details.
+func (o HealthCheckPolicyRuleOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v HealthCheckPolicyRule) string { return v.Name }).(pulumi.StringOutput)
+}
+
+type HealthCheckPolicyRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (HealthCheckPolicyRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]HealthCheckPolicyRule)(nil)).Elem()
+}
+
+func (o HealthCheckPolicyRuleArrayOutput) ToHealthCheckPolicyRuleArrayOutput() HealthCheckPolicyRuleArrayOutput {
+	return o
+}
+
+func (o HealthCheckPolicyRuleArrayOutput) ToHealthCheckPolicyRuleArrayOutputWithContext(ctx context.Context) HealthCheckPolicyRuleArrayOutput {
+	return o
+}
+
+func (o HealthCheckPolicyRuleArrayOutput) Index(i pulumi.IntInput) HealthCheckPolicyRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) HealthCheckPolicyRule {
+		return vs[0].([]HealthCheckPolicyRule)[vs[1].(int)]
+	}).(HealthCheckPolicyRuleOutput)
+}
+
 type NativeNodePoolAnnotation struct {
 	// Name in the map table.
 	Name string `pulumi:"name"`
@@ -6250,6 +6421,8 @@ type NodePoolAutoScalingConfig struct {
 	InstanceChargeTypePrepaidRenewFlag *string `pulumi:"instanceChargeTypePrepaidRenewFlag"`
 	// Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
 	InstanceName *string `pulumi:"instanceName"`
+	// Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default value: `ORIGINAL`. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+	InstanceNameStyle *string `pulumi:"instanceNameStyle"`
 	// Specified types of CVM instance.
 	InstanceType string `pulumi:"instanceType"`
 	// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
@@ -6314,6 +6487,8 @@ type NodePoolAutoScalingConfigArgs struct {
 	InstanceChargeTypePrepaidRenewFlag pulumi.StringPtrInput `pulumi:"instanceChargeTypePrepaidRenewFlag"`
 	// Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
 	InstanceName pulumi.StringPtrInput `pulumi:"instanceName"`
+	// Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default value: `ORIGINAL`. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+	InstanceNameStyle pulumi.StringPtrInput `pulumi:"instanceNameStyle"`
 	// Specified types of CVM instance.
 	InstanceType pulumi.StringInput `pulumi:"instanceType"`
 	// Charge types for network traffic. Valid value: `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`.
@@ -6477,6 +6652,11 @@ func (o NodePoolAutoScalingConfigOutput) InstanceChargeTypePrepaidRenewFlag() pu
 // Instance name, no more than 60 characters. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
 func (o NodePoolAutoScalingConfigOutput) InstanceName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NodePoolAutoScalingConfig) *string { return v.InstanceName }).(pulumi.StringPtrOutput)
+}
+
+// Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default value: `ORIGINAL`. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+func (o NodePoolAutoScalingConfigOutput) InstanceNameStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NodePoolAutoScalingConfig) *string { return v.InstanceNameStyle }).(pulumi.StringPtrOutput)
 }
 
 // Specified types of CVM instance.
@@ -6682,6 +6862,16 @@ func (o NodePoolAutoScalingConfigPtrOutput) InstanceName() pulumi.StringPtrOutpu
 			return nil
 		}
 		return v.InstanceName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default value: `ORIGINAL`. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+func (o NodePoolAutoScalingConfigPtrOutput) InstanceNameStyle() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NodePoolAutoScalingConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.InstanceNameStyle
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -7711,6 +7901,8 @@ func (o NodePoolTaintArrayOutput) Index(i pulumi.IntInput) NodePoolTaintOutput {
 type ScaleWorkerDataDisk struct {
 	// Indicate whether to auto format and mount or not. Default is `false`.
 	AutoFormatAndMount *bool `pulumi:"autoFormatAndMount"`
+	// The name of the device or partition to mount.
+	DiskPartition *string `pulumi:"diskPartition"`
 	// Volume of disk in GB. Default is `0`.
 	DiskSize *int `pulumi:"diskSize"`
 	// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD` and `CLOUD_HSSD` and `CLOUD_TSSD`.
@@ -7735,6 +7927,8 @@ type ScaleWorkerDataDiskInput interface {
 type ScaleWorkerDataDiskArgs struct {
 	// Indicate whether to auto format and mount or not. Default is `false`.
 	AutoFormatAndMount pulumi.BoolPtrInput `pulumi:"autoFormatAndMount"`
+	// The name of the device or partition to mount.
+	DiskPartition pulumi.StringPtrInput `pulumi:"diskPartition"`
 	// Volume of disk in GB. Default is `0`.
 	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
 	// Types of disk, available values: `CLOUD_PREMIUM` and `CLOUD_SSD` and `CLOUD_HSSD` and `CLOUD_TSSD`.
@@ -7799,6 +7993,11 @@ func (o ScaleWorkerDataDiskOutput) ToScaleWorkerDataDiskOutputWithContext(ctx co
 // Indicate whether to auto format and mount or not. Default is `false`.
 func (o ScaleWorkerDataDiskOutput) AutoFormatAndMount() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ScaleWorkerDataDisk) *bool { return v.AutoFormatAndMount }).(pulumi.BoolPtrOutput)
+}
+
+// The name of the device or partition to mount.
+func (o ScaleWorkerDataDiskOutput) DiskPartition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ScaleWorkerDataDisk) *string { return v.DiskPartition }).(pulumi.StringPtrOutput)
 }
 
 // Volume of disk in GB. Default is `0`.
@@ -8063,7 +8262,7 @@ type ScaleWorkerWorkerConfig struct {
 	CamRoleName *string `pulumi:"camRoleName"`
 	// Number of cvm.
 	Count *int `pulumi:"count"`
-	// Configurations of data disk.
+	// Configurations of cvm data disk.
 	DataDisks []ScaleWorkerWorkerConfigDataDisk `pulumi:"dataDisks"`
 	// Indicate to set desired pod number in node. valid when enable_customized_pod_cidr=true, and it override `[globe_]desired_pod_num` for current node. Either all the fields `desiredPodNum` or none.
 	DesiredPodNum *int `pulumi:"desiredPodNum"`
@@ -8131,7 +8330,7 @@ type ScaleWorkerWorkerConfigArgs struct {
 	CamRoleName pulumi.StringPtrInput `pulumi:"camRoleName"`
 	// Number of cvm.
 	Count pulumi.IntPtrInput `pulumi:"count"`
-	// Configurations of data disk.
+	// Configurations of cvm data disk.
 	DataDisks ScaleWorkerWorkerConfigDataDiskArrayInput `pulumi:"dataDisks"`
 	// Indicate to set desired pod number in node. valid when enable_customized_pod_cidr=true, and it override `[globe_]desired_pod_num` for current node. Either all the fields `desiredPodNum` or none.
 	DesiredPodNum pulumi.IntPtrInput `pulumi:"desiredPodNum"`
@@ -8276,7 +8475,7 @@ func (o ScaleWorkerWorkerConfigOutput) Count() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ScaleWorkerWorkerConfig) *int { return v.Count }).(pulumi.IntPtrOutput)
 }
 
-// Configurations of data disk.
+// Configurations of cvm data disk.
 func (o ScaleWorkerWorkerConfigOutput) DataDisks() ScaleWorkerWorkerConfigDataDiskArrayOutput {
 	return o.ApplyT(func(v ScaleWorkerWorkerConfig) []ScaleWorkerWorkerConfigDataDisk { return v.DataDisks }).(ScaleWorkerWorkerConfigDataDiskArrayOutput)
 }
@@ -8455,7 +8654,7 @@ func (o ScaleWorkerWorkerConfigPtrOutput) Count() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
-// Configurations of data disk.
+// Configurations of cvm data disk.
 func (o ScaleWorkerWorkerConfigPtrOutput) DataDisks() ScaleWorkerWorkerConfigDataDiskArrayOutput {
 	return o.ApplyT(func(v *ScaleWorkerWorkerConfig) []ScaleWorkerWorkerConfigDataDisk {
 		if v == nil {
@@ -8687,8 +8886,12 @@ func (o ScaleWorkerWorkerConfigPtrOutput) UserData() pulumi.StringPtrOutput {
 
 type ScaleWorkerWorkerConfigDataDisk struct {
 	// Indicate whether to auto format and mount or not. Default is `false`.
+	//
+	// Deprecated: This argument was deprecated, use `dataDisk` instead.
 	AutoFormatAndMount *bool `pulumi:"autoFormatAndMount"`
 	// The name of the device or partition to mount.
+	//
+	// Deprecated: This argument was deprecated, use `dataDisk` instead.
 	DiskPartition *string `pulumi:"diskPartition"`
 	// Volume of disk in GB. Default is `0`.
 	DiskSize *int `pulumi:"diskSize"`
@@ -8697,10 +8900,14 @@ type ScaleWorkerWorkerConfigDataDisk struct {
 	// Indicates whether to encrypt data disk, default `false`.
 	Encrypt *bool `pulumi:"encrypt"`
 	// File system, e.g. `ext3/ext4/xfs`.
+	//
+	// Deprecated: This argument was deprecated, use `dataDisk` instead.
 	FileSystem *string `pulumi:"fileSystem"`
 	// ID of the custom CMK in the format of UUID or `kms-abcd1234`. This parameter is used to encrypt cloud disks.
 	KmsKeyId *string `pulumi:"kmsKeyId"`
 	// Mount target.
+	//
+	// Deprecated: This argument was deprecated, use `dataDisk` instead.
 	MountTarget *string `pulumi:"mountTarget"`
 	// Data disk snapshot ID.
 	SnapshotId *string `pulumi:"snapshotId"`
@@ -8719,8 +8926,12 @@ type ScaleWorkerWorkerConfigDataDiskInput interface {
 
 type ScaleWorkerWorkerConfigDataDiskArgs struct {
 	// Indicate whether to auto format and mount or not. Default is `false`.
+	//
+	// Deprecated: This argument was deprecated, use `dataDisk` instead.
 	AutoFormatAndMount pulumi.BoolPtrInput `pulumi:"autoFormatAndMount"`
 	// The name of the device or partition to mount.
+	//
+	// Deprecated: This argument was deprecated, use `dataDisk` instead.
 	DiskPartition pulumi.StringPtrInput `pulumi:"diskPartition"`
 	// Volume of disk in GB. Default is `0`.
 	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
@@ -8729,10 +8940,14 @@ type ScaleWorkerWorkerConfigDataDiskArgs struct {
 	// Indicates whether to encrypt data disk, default `false`.
 	Encrypt pulumi.BoolPtrInput `pulumi:"encrypt"`
 	// File system, e.g. `ext3/ext4/xfs`.
+	//
+	// Deprecated: This argument was deprecated, use `dataDisk` instead.
 	FileSystem pulumi.StringPtrInput `pulumi:"fileSystem"`
 	// ID of the custom CMK in the format of UUID or `kms-abcd1234`. This parameter is used to encrypt cloud disks.
 	KmsKeyId pulumi.StringPtrInput `pulumi:"kmsKeyId"`
 	// Mount target.
+	//
+	// Deprecated: This argument was deprecated, use `dataDisk` instead.
 	MountTarget pulumi.StringPtrInput `pulumi:"mountTarget"`
 	// Data disk snapshot ID.
 	SnapshotId pulumi.StringPtrInput `pulumi:"snapshotId"`
@@ -8790,11 +9005,15 @@ func (o ScaleWorkerWorkerConfigDataDiskOutput) ToScaleWorkerWorkerConfigDataDisk
 }
 
 // Indicate whether to auto format and mount or not. Default is `false`.
+//
+// Deprecated: This argument was deprecated, use `dataDisk` instead.
 func (o ScaleWorkerWorkerConfigDataDiskOutput) AutoFormatAndMount() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ScaleWorkerWorkerConfigDataDisk) *bool { return v.AutoFormatAndMount }).(pulumi.BoolPtrOutput)
 }
 
 // The name of the device or partition to mount.
+//
+// Deprecated: This argument was deprecated, use `dataDisk` instead.
 func (o ScaleWorkerWorkerConfigDataDiskOutput) DiskPartition() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ScaleWorkerWorkerConfigDataDisk) *string { return v.DiskPartition }).(pulumi.StringPtrOutput)
 }
@@ -8815,6 +9034,8 @@ func (o ScaleWorkerWorkerConfigDataDiskOutput) Encrypt() pulumi.BoolPtrOutput {
 }
 
 // File system, e.g. `ext3/ext4/xfs`.
+//
+// Deprecated: This argument was deprecated, use `dataDisk` instead.
 func (o ScaleWorkerWorkerConfigDataDiskOutput) FileSystem() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ScaleWorkerWorkerConfigDataDisk) *string { return v.FileSystem }).(pulumi.StringPtrOutput)
 }
@@ -8825,6 +9046,8 @@ func (o ScaleWorkerWorkerConfigDataDiskOutput) KmsKeyId() pulumi.StringPtrOutput
 }
 
 // Mount target.
+//
+// Deprecated: This argument was deprecated, use `dataDisk` instead.
 func (o ScaleWorkerWorkerConfigDataDiskOutput) MountTarget() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ScaleWorkerWorkerConfigDataDisk) *string { return v.MountTarget }).(pulumi.StringPtrOutput)
 }
@@ -15350,6 +15573,8 @@ func (o GetClusterNodePoolsNodePoolSetTaintArrayOutput) Index(i pulumi.IntInput)
 }
 
 type GetClustersList struct {
+	// CDC ID.
+	CdcId string `pulumi:"cdcId"`
 	// The certificate used for access.
 	CertificationAuthority string `pulumi:"certificationAuthority"`
 	// The expired seconds to recycle ENI.
@@ -15440,6 +15665,8 @@ type GetClustersListInput interface {
 }
 
 type GetClustersListArgs struct {
+	// CDC ID.
+	CdcId pulumi.StringInput `pulumi:"cdcId"`
 	// The certificate used for access.
 	CertificationAuthority pulumi.StringInput `pulumi:"certificationAuthority"`
 	// The expired seconds to recycle ENI.
@@ -15567,6 +15794,11 @@ func (o GetClustersListOutput) ToGetClustersListOutput() GetClustersListOutput {
 
 func (o GetClustersListOutput) ToGetClustersListOutputWithContext(ctx context.Context) GetClustersListOutput {
 	return o
+}
+
+// CDC ID.
+func (o GetClustersListOutput) CdcId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetClustersList) string { return v.CdcId }).(pulumi.StringOutput)
 }
 
 // The certificate used for access.
@@ -16067,6 +16299,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterWorkerInstancesListArrayInput)(nil)).Elem(), ClusterWorkerInstancesListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*EncryptionProtectionKmsConfigurationInput)(nil)).Elem(), EncryptionProtectionKmsConfigurationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*EncryptionProtectionKmsConfigurationPtrInput)(nil)).Elem(), EncryptionProtectionKmsConfigurationArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*HealthCheckPolicyRuleInput)(nil)).Elem(), HealthCheckPolicyRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*HealthCheckPolicyRuleArrayInput)(nil)).Elem(), HealthCheckPolicyRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolAnnotationInput)(nil)).Elem(), NativeNodePoolAnnotationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolAnnotationArrayInput)(nil)).Elem(), NativeNodePoolAnnotationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NativeNodePoolLabelInput)(nil)).Elem(), NativeNodePoolLabelArgs{})
@@ -16263,6 +16497,8 @@ func init() {
 	pulumi.RegisterOutputType(ClusterWorkerInstancesListArrayOutput{})
 	pulumi.RegisterOutputType(EncryptionProtectionKmsConfigurationOutput{})
 	pulumi.RegisterOutputType(EncryptionProtectionKmsConfigurationPtrOutput{})
+	pulumi.RegisterOutputType(HealthCheckPolicyRuleOutput{})
+	pulumi.RegisterOutputType(HealthCheckPolicyRuleArrayOutput{})
 	pulumi.RegisterOutputType(NativeNodePoolAnnotationOutput{})
 	pulumi.RegisterOutputType(NativeNodePoolAnnotationArrayOutput{})
 	pulumi.RegisterOutputType(NativeNodePoolLabelOutput{})

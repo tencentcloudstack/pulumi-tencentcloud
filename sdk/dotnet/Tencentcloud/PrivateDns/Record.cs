@@ -24,11 +24,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     // create vpc
     ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
     ///         CidrBlock = "10.0.0.0/16",
     ///     });
     /// 
+    ///     // create private dns zone
     ///     var exampleZone = new Tencentcloud.PrivateDns.Zone("exampleZone", new()
     ///     {
     ///         Domain = "domain.com",
@@ -49,6 +51,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
     ///         },
     ///     });
     /// 
+    ///     // create private dns record
     ///     var exampleRecord = new Tencentcloud.PrivateDns.Record("exampleRecord", new()
     ///     {
     ///         ZoneId = exampleZone.Id,
@@ -82,7 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public Output<int?> Mx { get; private set; } = null!;
 
         /// <summary>
-        /// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+        /// Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
         /// </summary>
         [Output("recordType")]
         public Output<string> RecordType { get; private set; } = null!;
@@ -94,7 +97,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public Output<string> RecordValue { get; private set; } = null!;
 
         /// <summary>
-        /// Subdomain, such as "www", "m", and "@".
+        /// Subdomain, such as `www`, `m`, and `@`.
         /// </summary>
         [Output("subDomain")]
         public Output<string> SubDomain { get; private set; } = null!;
@@ -171,7 +174,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public Input<int>? Mx { get; set; }
 
         /// <summary>
-        /// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+        /// Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
         /// </summary>
         [Input("recordType", required: true)]
         public Input<string> RecordType { get; set; } = null!;
@@ -183,7 +186,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public Input<string> RecordValue { get; set; } = null!;
 
         /// <summary>
-        /// Subdomain, such as "www", "m", and "@".
+        /// Subdomain, such as `www`, `m`, and `@`.
         /// </summary>
         [Input("subDomain", required: true)]
         public Input<string> SubDomain { get; set; } = null!;
@@ -221,7 +224,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public Input<int>? Mx { get; set; }
 
         /// <summary>
-        /// Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+        /// Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
         /// </summary>
         [Input("recordType")]
         public Input<string>? RecordType { get; set; }
@@ -233,7 +236,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         public Input<string>? RecordValue { get; set; }
 
         /// <summary>
-        /// Subdomain, such as "www", "m", and "@".
+        /// Subdomain, such as `www`, `m`, and `@`.
         /// </summary>
         [Input("subDomain")]
         public Input<string>? SubDomain { get; set; }

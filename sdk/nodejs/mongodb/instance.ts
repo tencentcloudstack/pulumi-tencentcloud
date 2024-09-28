@@ -112,6 +112,16 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly machineType!: pulumi.Output<string>;
     /**
+     * Maintenance window end time.
+     * - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+     * - The end time must be based on the start time backwards.
+     */
+    public readonly maintenanceEnd!: pulumi.Output<string>;
+    /**
+     * Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
+     */
+    public readonly maintenanceStart!: pulumi.Output<string>;
+    /**
      * Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
      */
     public readonly memory!: pulumi.Output<number>;
@@ -195,6 +205,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["hiddenZone"] = state ? state.hiddenZone : undefined;
             resourceInputs["instanceName"] = state ? state.instanceName : undefined;
             resourceInputs["machineType"] = state ? state.machineType : undefined;
+            resourceInputs["maintenanceEnd"] = state ? state.maintenanceEnd : undefined;
+            resourceInputs["maintenanceStart"] = state ? state.maintenanceStart : undefined;
             resourceInputs["memory"] = state ? state.memory : undefined;
             resourceInputs["nodeNum"] = state ? state.nodeNum : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
@@ -239,6 +251,8 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["hiddenZone"] = args ? args.hiddenZone : undefined;
             resourceInputs["instanceName"] = args ? args.instanceName : undefined;
             resourceInputs["machineType"] = args ? args.machineType : undefined;
+            resourceInputs["maintenanceEnd"] = args ? args.maintenanceEnd : undefined;
+            resourceInputs["maintenanceStart"] = args ? args.maintenanceStart : undefined;
             resourceInputs["memory"] = args ? args.memory : undefined;
             resourceInputs["nodeNum"] = args ? args.nodeNum : undefined;
             resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
@@ -311,6 +325,16 @@ export interface InstanceState {
      * Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
      */
     machineType?: pulumi.Input<string>;
+    /**
+     * Maintenance window end time.
+     * - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+     * - The end time must be based on the start time backwards.
+     */
+    maintenanceEnd?: pulumi.Input<string>;
+    /**
+     * Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
+     */
+    maintenanceStart?: pulumi.Input<string>;
     /**
      * Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
      */
@@ -417,6 +441,16 @@ export interface InstanceArgs {
      * Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
      */
     machineType: pulumi.Input<string>;
+    /**
+     * Maintenance window end time.
+     * - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+     * - The end time must be based on the start time backwards.
+     */
+    maintenanceEnd?: pulumi.Input<string>;
+    /**
+     * Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
+     */
+    maintenanceStart?: pulumi.Input<string>;
     /**
      * Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
      */

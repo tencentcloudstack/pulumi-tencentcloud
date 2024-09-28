@@ -11,14 +11,40 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Query all CBS storages
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const storages = tencentcloud.Cbs.getStorages({
- *     resultOutputFile: "mytestpath",
- *     storageId: "disk-kdt0sq6m",
+ * const example = tencentcloud.Cbs.getStorages({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query CBS by storage id
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Cbs.getStorages({
+ *     resultOutputFile: "my-test-path",
+ *     storageId: "disk-6goq404g",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query CBS by dedicated cluster id
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Cbs.getStorages({
+ *     dedicatedClusterId: "cluster-262n63e8",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -34,12 +60,14 @@ import * as utilities from "../utilities";
  *     chargeTypes: [
  *         "POSTPAID_BY_HOUR",
  *         "PREPAID",
+ *         "CDCPAID",
+ *         "DEDICATED_CLUSTER_PAID",
  *     ],
  *     instanceIps: ["10.0.0.2"],
  *     instanceNames: ["my-instance"],
  *     portable: true,
  *     storageStates: ["ATTACHED"],
- *     tagKeys: ["foo"],
+ *     tagKeys: ["example"],
  *     tagValues: [
  *         "bar",
  *         "baz",
@@ -55,6 +83,7 @@ export function getStorages(args?: GetStoragesArgs, opts?: pulumi.InvokeOptions)
     return pulumi.runtime.invoke("tencentcloud:Cbs/getStorages:getStorages", {
         "availabilityZone": args.availabilityZone,
         "chargeTypes": args.chargeTypes,
+        "dedicatedClusterId": args.dedicatedClusterId,
         "instanceIps": args.instanceIps,
         "instanceNames": args.instanceNames,
         "portable": args.portable,
@@ -79,9 +108,13 @@ export interface GetStoragesArgs {
      */
     availabilityZone?: string;
     /**
-     * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+     * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
      */
     chargeTypes?: string[];
+    /**
+     * Exclusive cluster id.
+     */
+    dedicatedClusterId?: string;
     /**
      * List filter by attached instance public or private IPs.
      */
@@ -145,6 +178,10 @@ export interface GetStoragesResult {
      */
     readonly chargeTypes?: string[];
     /**
+     * Exclusive cluster id.
+     */
+    readonly dedicatedClusterId?: string;
+    /**
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
@@ -185,14 +222,40 @@ export interface GetStoragesResult {
  *
  * ## Example Usage
  *
+ * ### Query all CBS storages
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@pulumi/tencentcloud";
  *
- * const storages = tencentcloud.Cbs.getStorages({
- *     resultOutputFile: "mytestpath",
- *     storageId: "disk-kdt0sq6m",
+ * const example = tencentcloud.Cbs.getStorages({});
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query CBS by storage id
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Cbs.getStorages({
+ *     resultOutputFile: "my-test-path",
+ *     storageId: "disk-6goq404g",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Query CBS by dedicated cluster id
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ *
+ * const example = tencentcloud.Cbs.getStorages({
+ *     dedicatedClusterId: "cluster-262n63e8",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -208,12 +271,14 @@ export interface GetStoragesResult {
  *     chargeTypes: [
  *         "POSTPAID_BY_HOUR",
  *         "PREPAID",
+ *         "CDCPAID",
+ *         "DEDICATED_CLUSTER_PAID",
  *     ],
  *     instanceIps: ["10.0.0.2"],
  *     instanceNames: ["my-instance"],
  *     portable: true,
  *     storageStates: ["ATTACHED"],
- *     tagKeys: ["foo"],
+ *     tagKeys: ["example"],
  *     tagValues: [
  *         "bar",
  *         "baz",
@@ -235,9 +300,13 @@ export interface GetStoragesOutputArgs {
      */
     availabilityZone?: pulumi.Input<string>;
     /**
-     * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+     * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
      */
     chargeTypes?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Exclusive cluster id.
+     */
+    dedicatedClusterId?: pulumi.Input<string>;
     /**
      * List filter by attached instance public or private IPs.
      */

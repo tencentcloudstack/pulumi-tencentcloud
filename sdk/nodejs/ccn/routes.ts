@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a vpc ccnRoutes
+ * Provides a resource to create a vpc ccnRoutes switch
  *
  * ## Example Usage
  *
@@ -14,10 +14,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const ccnRoutes = new tencentcloud.ccn.Routes("ccnRoutes", {
- *     ccnId: "ccn-39lqkygf",
- *     routeId: "ccnr-3o0dfyuw",
- *     "switch": "on",
+ * const example = new tencentcloud.ccn.Routes("example", {
+ *     ccnId: "ccn-gr7nynbd",
+ *     routeId: "ccnrtb-jpf7bzn3",
+ *     "switch": "off",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -27,7 +27,7 @@ import * as utilities from "../utilities";
  * vpc ccn_routes can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccnId#routesId
+ * $ pulumi import tencentcloud:Ccn/routes:Routes ccn_routes ccn-gr7nynbd#ccnr-5uhewx1s
  * ```
  */
 export class Routes extends pulumi.CustomResource {

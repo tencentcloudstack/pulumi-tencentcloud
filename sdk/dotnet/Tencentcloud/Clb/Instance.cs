@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Example Usage
     /// 
-    /// ### INTERNAL CLB
+    /// ### Create INTERNAL CLB
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -26,24 +26,42 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var internalClb = new Tencentcloud.Clb.Instance("internalClb", new()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         ClbName = "myclb",
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create clb
+    ///     var example = new Tencentcloud.Clb.Instance("example", new()
+    ///     {
     ///         NetworkType = "INTERNAL",
+    ///         ClbName = "tf-example",
     ///         ProjectId = 0,
-    ///         SubnetId = "subnet-12rastkr",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
     ///         Tags = 
     ///         {
-    ///             { "test", "tf" },
+    ///             { "tagKey", "tagValue" },
     ///         },
-    ///         VpcId = "vpc-7007ll7q",
     ///     });
     /// 
     /// });
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
-    /// ### LCU-supported CLB
+    /// ### Create dedicated cluster clb
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -54,25 +72,91 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var internalClb = new Tencentcloud.Clb.Instance("internalClb", new()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         ClbName = "myclb",
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///         CdcId = "cluster-lchwgxhs",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create clb
+    ///     var example = new Tencentcloud.Clb.Instance("example", new()
+    ///     {
     ///         NetworkType = "INTERNAL",
+    ///         ClbName = "tf-example",
+    ///         ProjectId = 0,
+    ///         ClusterId = "cluster-lchwgxhs",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Create LCU-supported CLB
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create clb
+    ///     var example = new Tencentcloud.Clb.Instance("example", new()
+    ///     {
+    ///         NetworkType = "INTERNAL",
+    ///         ClbName = "tf-example",
     ///         ProjectId = 0,
     ///         SlaType = "clb.c3.medium",
-    ///         SubnetId = "subnet-o3a5nt20",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
     ///         Tags = 
     ///         {
-    ///             { "test", "tf" },
+    ///             { "tagKey", "tagValue" },
     ///         },
-    ///         VpcId = "vpc-2hfyray3",
     ///     });
     /// 
     /// });
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
-    /// ### OPEN CLB
+    /// ### Create OPEN CLB
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -83,27 +167,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var openClb = new Tencentcloud.Clb.Instance("openClb", new()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         ClbName = "myclb",
-    ///         NetworkType = "OPEN",
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create security group
+    ///     var exampleGroup = new Tencentcloud.Security.Group("exampleGroup", new()
+    ///     {
+    ///         Description = "sg desc.",
     ///         ProjectId = 0,
+    ///         Tags = 
+    ///         {
+    ///             { "example", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     // create clb
+    ///     var exampleInstance = new Tencentcloud.Clb.Instance("exampleInstance", new()
+    ///     {
+    ///         NetworkType = "OPEN",
+    ///         ClbName = "tf-example",
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
     ///         SecurityGroups = new[]
     ///         {
-    ///             "sg-o0ek7r93",
+    ///             exampleGroup.Id,
     ///         },
     ///         Tags = 
     ///         {
-    ///             { "test", "tf" },
+    ///             { "tagKey", "tagValue" },
     ///         },
-    ///         VpcId = "vpc-da7ffa61",
     ///     });
     /// 
     /// });
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
-    /// ### SUPPORT CORS
+    /// ### Support CORS
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -114,29 +218,50 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var openClb = new Tencentcloud.Clb.Instance("openClb", new()
+    ///     var config = new Config();
+    ///     var zone = config.Get("zone") ?? "ap-guangzhou";
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
-    ///         ClbName = "myclb",
-    ///         NetworkType = "OPEN",
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create security group
+    ///     var exampleGroup = new Tencentcloud.Security.Group("exampleGroup", new()
+    ///     {
+    ///         Description = "sg desc.",
     ///         ProjectId = 0,
+    ///         Tags = 
+    ///         {
+    ///             { "example", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     // create clb
+    ///     var exampleInstance = new Tencentcloud.Clb.Instance("exampleInstance", new()
+    ///     {
+    ///         NetworkType = "OPEN",
+    ///         ClbName = "tf-example",
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
     ///         SecurityGroups = new[]
     ///         {
-    ///             "sg-o0ek7r93",
+    ///             exampleGroup.Id,
     ///         },
+    ///         TargetRegionInfoRegion = zone,
+    ///         TargetRegionInfoVpcId = vpc.Id,
     ///         Tags = 
     ///         {
-    ///             { "test", "tf" },
+    ///             { "tagKey", "tagValue" },
     ///         },
-    ///         TargetRegionInfoRegion = "ap-guangzhou",
-    ///         TargetRegionInfoVpcId = "vpc-da7ffa61",
-    ///         VpcId = "vpc-da7ffa61",
     ///     });
     /// 
     /// });
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
-    /// ### OPNE CLB with VipIsp
+    /// ### Open CLB with VipIsp
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -147,7 +272,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var example = new Tencentcloud.Vpc.BandwidthPackage("example", new()
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create vpc bandwidth package
+    ///     var exampleBandwidthPackage = new Tencentcloud.Vpc.BandwidthPackage("exampleBandwidthPackage", new()
     ///     {
     ///         NetworkType = "SINGLEISP_CMCC",
     ///         ChargeType = "ENHANCED95_POSTPAID_BY_MONTH",
@@ -160,18 +291,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     ///         },
     ///     });
     /// 
-    ///     var openClb = new Tencentcloud.Clb.Instance("openClb", new()
+    ///     // create clb
+    ///     var exampleInstance = new Tencentcloud.Clb.Instance("exampleInstance", new()
     ///     {
     ///         NetworkType = "OPEN",
-    ///         ClbName = "my-open-clb",
+    ///         ClbName = "tf-example",
     ///         ProjectId = 0,
-    ///         VpcId = "vpc-4owdpnwr",
     ///         VipIsp = "CMCC",
     ///         InternetChargeType = "BANDWIDTH_PACKAGE",
-    ///         BandwidthPackageId = example.Id,
+    ///         BandwidthPackageId = exampleBandwidthPackage.Id,
+    ///         VpcId = vpc.Id,
     ///         Tags = 
     ///         {
-    ///             { "test", "open" },
+    ///             { "tagKey", "tagValue" },
     ///         },
     ///     });
     /// 
@@ -190,41 +322,64 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var fooGroup = new Tencentcloud.Security.Group("fooGroup");
-    /// 
-    ///     var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new()
+    ///     var config = new Config();
+    ///     var zone = config.Get("zone") ?? "ap-guangzhou";
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
     ///         CidrBlock = "10.0.0.0/16",
     ///     });
     /// 
-    ///     var clbOpen = new Tencentcloud.Clb.Instance("clbOpen", new()
+    ///     // create subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create security group
+    ///     var exampleGroup = new Tencentcloud.Security.Group("exampleGroup", new()
+    ///     {
+    ///         Description = "sg desc.",
+    ///         ProjectId = 0,
+    ///         Tags = 
+    ///         {
+    ///             { "example", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     // create clb
+    ///     var exampleInstance = new Tencentcloud.Clb.Instance("exampleInstance", new()
     ///     {
     ///         NetworkType = "OPEN",
-    ///         ClbName = "clb-instance-open",
+    ///         ClbName = "tf-example",
     ///         ProjectId = 0,
-    ///         VpcId = fooInstance.Id,
-    ///         TargetRegionInfoRegion = "ap-guangzhou",
-    ///         TargetRegionInfoVpcId = fooInstance.Id,
+    ///         VpcId = vpc.Id,
+    ///         TargetRegionInfoRegion = zone,
+    ///         TargetRegionInfoVpcId = vpc.Id,
     ///         SecurityGroups = new[]
     ///         {
-    ///             fooGroup.Id,
+    ///             exampleGroup.Id,
     ///         },
     ///         DynamicVip = true,
     ///         Tags = 
     ///         {
-    ///             { "test", "tf" },
+    ///             { "tagKey", "tagValue" },
     ///         },
     ///     });
     /// 
     ///     return new Dictionary&lt;string, object?&gt;
     ///     {
-    ///         ["domain"] = clbOpen.Domain,
+    ///         ["domain"] = exampleInstance.Domain,
     ///     };
     /// });
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
-    /// ### Specified  Vip Instance
+    /// ### Specified Vip Instance
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -235,33 +390,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var fooGroup = new Tencentcloud.Security.Group("fooGroup");
-    /// 
-    ///     var fooInstance = new Tencentcloud.Vpc.Instance("fooInstance", new()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
     ///         CidrBlock = "10.0.0.0/16",
     ///     });
     /// 
-    ///     var clbOpen = new Tencentcloud.Clb.Instance("clbOpen", new()
+    ///     // create security group
+    ///     var exampleGroup = new Tencentcloud.Security.Group("exampleGroup", new()
+    ///     {
+    ///         Description = "sg desc.",
+    ///         ProjectId = 0,
+    ///         Tags = 
+    ///         {
+    ///             { "example", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     // create clb
+    ///     var exampleInstance = new Tencentcloud.Clb.Instance("exampleInstance", new()
     ///     {
     ///         NetworkType = "OPEN",
-    ///         ClbName = "clb-instance-open",
+    ///         ClbName = "tf-example",
     ///         ProjectId = 0,
-    ///         VpcId = fooInstance.Id,
+    ///         VpcId = vpc.Id,
     ///         SecurityGroups = new[]
     ///         {
-    ///             fooGroup.Id,
+    ///             exampleGroup.Id,
     ///         },
     ///         Vip = "111.230.4.204",
     ///         Tags = 
     ///         {
-    ///             { "test", "tf" },
+    ///             { "tagKey", "tagValue" },
     ///         },
     ///     });
     /// 
     ///     return new Dictionary&lt;string, object?&gt;
     ///     {
-    ///         ["domain"] = tencentcloud_clb_instance.Vip,
+    ///         ["domain"] = exampleInstance.Domain,
     ///     };
     /// });
     /// ```
@@ -278,45 +446,52 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Vpc.Instance("foo", new()
+    ///     var config = new Config();
+    ///     var zone = config.Get("zone") ?? "ap-guangzhou";
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
     ///         CidrBlock = "10.0.0.0/16",
-    ///         Tags = 
-    ///         {
-    ///             { "test", "mytest" },
-    ///         },
     ///     });
     /// 
+    ///     // create subnet
     ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     ///     {
-    ///         AvailabilityZone = "ap-guangzhou-1",
-    ///         VpcId = foo.Id,
-    ///         CidrBlock = "10.0.20.0/28",
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = availabilityZone,
+    ///         CidrBlock = "10.0.1.0/24",
     ///         IsMulticast = false,
     ///     });
     /// 
-    ///     var sglab = new Tencentcloud.Security.Group("sglab", new()
+    ///     // create security group
+    ///     var exampleGroup = new Tencentcloud.Security.Group("exampleGroup", new()
     ///     {
-    ///         Description = "favourite sg",
+    ///         Description = "sg desc.",
     ///         ProjectId = 0,
-    ///     });
-    /// 
-    ///     var openClb = new Tencentcloud.Clb.Instance("openClb", new()
-    ///     {
-    ///         NetworkType = "OPEN",
-    ///         ClbName = "my-open-clb",
-    ///         ProjectId = 0,
-    ///         VpcId = foo.Id,
-    ///         LoadBalancerPassToTarget = true,
-    ///         SecurityGroups = new[]
-    ///         {
-    ///             sglab.Id,
-    ///         },
-    ///         TargetRegionInfoRegion = "ap-guangzhou",
-    ///         TargetRegionInfoVpcId = foo.Id,
     ///         Tags = 
     ///         {
-    ///             { "test", "open" },
+    ///             { "example", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     // create clb
+    ///     var exampleInstance = new Tencentcloud.Clb.Instance("exampleInstance", new()
+    ///     {
+    ///         NetworkType = "OPEN",
+    ///         ClbName = "tf-example",
+    ///         ProjectId = 0,
+    ///         LoadBalancerPassToTarget = true,
+    ///         VpcId = vpc.Id,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             exampleGroup.Id,
+    ///         },
+    ///         TargetRegionInfoVpcId = vpc.Id,
+    ///         TargetRegionInfoRegion = zone,
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
     ///         },
     ///     });
     /// 
@@ -324,7 +499,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
-    /// ### CREATE multiple instance
+    /// ### Create multiple instance
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -335,18 +510,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var openClb1 = new Tencentcloud.Clb.Instance("openClb1", new()
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var example = new Tencentcloud.Clb.Instance("example", new()
     ///     {
-    ///         ClbName = "hello",
-    ///         MasterZoneId = "ap-guangzhou-3",
     ///         NetworkType = "OPEN",
+    ///         ClbName = "tf-example",
+    ///         MasterZoneId = availabilityZone,
     ///     });
     /// 
     /// });
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
-    /// ### CREATE instance with log
+    /// ### Create instance with log
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -357,49 +534,69 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var vpcTest = new Tencentcloud.Vpc.Instance("vpcTest", new()
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
     ///     {
     ///         CidrBlock = "10.0.0.0/16",
     ///     });
     /// 
-    ///     var rtbTest = new Tencentcloud.Route.Table("rtbTest", new()
+    ///     // create subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
     ///     {
-    ///         VpcId = vpcTest.Id,
-    ///     });
-    /// 
-    ///     var subnetTest = new Tencentcloud.Subnet.Instance("subnetTest", new()
-    ///     {
-    ///         AvailabilityZone = "ap-guangzhou-3",
+    ///         VpcId = vpc.Id,
+    ///         AvailabilityZone = @var.Availability_zone,
     ///         CidrBlock = "10.0.1.0/24",
-    ///         RouteTableId = rtbTest.Id,
-    ///         VpcId = vpcTest.Id,
+    ///         IsMulticast = false,
     ///     });
     /// 
-    ///     var @set = new Tencentcloud.Clb.LogSet("set", new()
+    ///     // create route table
+    ///     var route = new Tencentcloud.Route.Table("route", new()
+    ///     {
+    ///         VpcId = vpc.Id,
+    ///     });
+    /// 
+    ///     // create security group
+    ///     var exampleGroup = new Tencentcloud.Security.Group("exampleGroup", new()
+    ///     {
+    ///         Description = "sg desc.",
+    ///         ProjectId = 0,
+    ///         Tags = 
+    ///         {
+    ///             { "example", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     var log = new Tencentcloud.Clb.LogSet("log", new()
     ///     {
     ///         Period = 7,
     ///     });
     /// 
+    ///     // create topic
     ///     var topic = new Tencentcloud.Clb.LogTopic("topic", new()
     ///     {
-    ///         LogSetId = @set.Id,
+    ///         LogSetId = log.Id,
     ///         TopicName = "clb-topic",
     ///     });
     /// 
-    ///     var internalClb = new Tencentcloud.Clb.Instance("internalClb", new()
+    ///     // create clb
+    ///     var exampleInstance = new Tencentcloud.Clb.Instance("exampleInstance", new()
     ///     {
-    ///         ClbName = "myclb",
-    ///         LoadBalancerPassToTarget = true,
-    ///         LogSetId = @set.Id,
-    ///         LogTopicId = topic.Id,
     ///         NetworkType = "INTERNAL",
+    ///         ClbName = "tf-example",
     ///         ProjectId = 0,
-    ///         SubnetId = subnetTest.Id,
+    ///         LoadBalancerPassToTarget = true,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             exampleGroup.Id,
+    ///         },
+    ///         LogSetId = log.Id,
+    ///         LogTopicId = topic.Id,
     ///         Tags = 
     ///         {
-    ///             { "test", "tf" },
+    ///             { "tagKey", "tagValue" },
     ///         },
-    ///         VpcId = vpcTest.Id,
     ///     });
     /// 
     /// });
@@ -411,7 +608,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// CLB instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Clb/instance:Instance foo lb-7a0t6zqb
+    /// $ pulumi import tencentcloud:Clb/instance:Instance example lb-7a0t6zqb
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/instance:Instance")]
@@ -446,6 +643,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Output("clbVips")]
         public Output<ImmutableArray<string>> ClbVips { get; private set; } = null!;
+
+        /// <summary>
+        /// Cluster ID.
+        /// </summary>
+        [Output("clusterId")]
+        public Output<string?> ClusterId { get; private set; } = null!;
 
         /// <summary>
         /// Whether to enable delete protection.
@@ -505,7 +708,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// Setting master zone id of cross available zone disaster recovery, only applicable to open CLB.
         /// </summary>
         [Output("masterZoneId")]
-        public Output<string?> MasterZoneId { get; private set; } = null!;
+        public Output<string> MasterZoneId { get; private set; } = null!;
 
         /// <summary>
         /// Type of CLB instance. Valid values: `OPEN` and `INTERNAL`.
@@ -535,7 +738,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// Setting slave zone id of cross available zone disaster recovery, only applicable to open CLB. this zone will undertake traffic when the master is down.
         /// </summary>
         [Output("slaveZoneId")]
-        public Output<string?> SlaveZoneId { get; private set; } = null!;
+        public Output<string> SlaveZoneId { get; private set; } = null!;
 
         /// <summary>
         /// Snat Ip List, required with `snat_pro=true`. NOTE: This argument cannot be read and modified here because dynamic ip is untraceable, please import resource `tencentcloud.Clb.SnatIp` to handle fixed ips.
@@ -595,7 +798,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// Available zone id, only applicable to open CLB.
         /// </summary>
         [Output("zoneId")]
-        public Output<string?> ZoneId { get; private set; } = null!;
+        public Output<string> ZoneId { get; private set; } = null!;
 
 
         /// <summary>
@@ -661,6 +864,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Input("clbName", required: true)]
         public Input<string> ClbName { get; set; } = null!;
+
+        /// <summary>
+        /// Cluster ID.
+        /// </summary>
+        [Input("clusterId")]
+        public Input<string>? ClusterId { get; set; }
 
         /// <summary>
         /// Whether to enable delete protection.
@@ -861,6 +1070,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
             get => _clbVips ?? (_clbVips = new InputList<string>());
             set => _clbVips = value;
         }
+
+        /// <summary>
+        /// Cluster ID.
+        /// </summary>
+        [Input("clusterId")]
+        public Input<string>? ClusterId { get; set; }
 
         /// <summary>
         /// Whether to enable delete protection.

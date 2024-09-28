@@ -81,6 +81,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     ///         {
     ///             subnet.Id,
     ///         },
+    ///         HealthCheckType = "CLB",
+    ///         ReplaceLoadBalancerUnhealthy = true,
+    ///         LbHealthCheckGracePeriod = 30,
     ///     });
     /// 
     /// });
@@ -129,10 +132,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         public Output<ImmutableArray<Outputs.ScalingGroupForwardBalancerId>> ForwardBalancerIds { get; private set; } = null!;
 
         /// <summary>
+        /// Health check type of instances in a scaling group.&lt;br&gt;&lt;li&gt;CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)&lt;br&gt;&lt;li&gt;CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).&lt;br&gt;If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
+        /// </summary>
+        [Output("healthCheckType")]
+        public Output<string> HealthCheckType { get; private set; } = null!;
+
+        /// <summary>
         /// Instance number of a scaling group.
         /// </summary>
         [Output("instanceCount")]
         public Output<int> InstanceCount { get; private set; } = null!;
+
+        /// <summary>
+        /// Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.&lt;br&gt;Valid range: 0-7200, in seconds. Default value: `0`.
+        /// </summary>
+        [Output("lbHealthCheckGracePeriod")]
+        public Output<int> LbHealthCheckGracePeriod { get; private set; } = null!;
 
         /// <summary>
         /// ID list of traditional load balancers.
@@ -307,6 +322,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
             set => _forwardBalancerIds = value;
         }
 
+        /// <summary>
+        /// Health check type of instances in a scaling group.&lt;br&gt;&lt;li&gt;CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)&lt;br&gt;&lt;li&gt;CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).&lt;br&gt;If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
+        /// </summary>
+        [Input("healthCheckType")]
+        public Input<string>? HealthCheckType { get; set; }
+
+        /// <summary>
+        /// Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.&lt;br&gt;Valid range: 0-7200, in seconds. Default value: `0`.
+        /// </summary>
+        [Input("lbHealthCheckGracePeriod")]
+        public Input<int>? LbHealthCheckGracePeriod { get; set; }
+
         [Input("loadBalancerIds")]
         private InputList<string>? _loadBalancerIds;
 
@@ -466,10 +493,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         }
 
         /// <summary>
+        /// Health check type of instances in a scaling group.&lt;br&gt;&lt;li&gt;CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)&lt;br&gt;&lt;li&gt;CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).&lt;br&gt;If the parameter is set to `CLB`, the scaling group will check both the network status and the CLB health check status. If the network check indicates unhealthy, the `HealthStatus` field will return `UNHEALTHY`. If the CLB health check indicates unhealthy, the `HealthStatus` field will return `CLB_UNHEALTHY`. If both checks indicate unhealthy, the `HealthStatus` field will return `UNHEALTHY|CLB_UNHEALTHY`. Default value: `CLB`.
+        /// </summary>
+        [Input("healthCheckType")]
+        public Input<string>? HealthCheckType { get; set; }
+
+        /// <summary>
         /// Instance number of a scaling group.
         /// </summary>
         [Input("instanceCount")]
         public Input<int>? InstanceCount { get; set; }
+
+        /// <summary>
+        /// Grace period of the CLB health check during which the `IN_SERVICE` instances added will not be marked as `CLB_UNHEALTHY`.&lt;br&gt;Valid range: 0-7200, in seconds. Default value: `0`.
+        /// </summary>
+        [Input("lbHealthCheckGracePeriod")]
+        public Input<int>? LbHealthCheckGracePeriod { get; set; }
 
         [Input("loadBalancerIds")]
         private InputList<string>? _loadBalancerIds;

@@ -14,10 +14,32 @@ var _ = internal.GetEnvOrDefault
 func GetAssumeRole(ctx *pulumi.Context) string {
 	return config.Get(ctx, "tencentcloud:assumeRole")
 }
+func GetAssumeRoleWithSaml(ctx *pulumi.Context) string {
+	return config.Get(ctx, "tencentcloud:assumeRoleWithSaml")
+}
+func GetAssumeRoleWithWebIdentity(ctx *pulumi.Context) string {
+	return config.Get(ctx, "tencentcloud:assumeRoleWithWebIdentity")
+}
+
+// The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
+func GetCamRoleName(ctx *pulumi.Context) string {
+	return config.Get(ctx, "tencentcloud:camRoleName")
+}
+
+// The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples:
+// `https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
+func GetCosDomain(ctx *pulumi.Context) string {
+	return config.Get(ctx, "tencentcloud:cosDomain")
+}
 
 // The root domain of the API request, Default is `tencentcloudapi.com`.
 func GetDomain(ctx *pulumi.Context) string {
 	return config.Get(ctx, "tencentcloud:domain")
+}
+
+// Whether to enable pod oidc.
+func GetEnablePodOidc(ctx *pulumi.Context) bool {
+	return config.GetBool(ctx, "tencentcloud:enablePodOidc")
 }
 
 // The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
@@ -31,8 +53,8 @@ func GetProtocol(ctx *pulumi.Context) string {
 	return config.Get(ctx, "tencentcloud:protocol")
 }
 
-// This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
-// environment variables. The default input value is ap-guangzhou.
+// This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The
+// default input value is ap-guangzhou.
 func GetRegion(ctx *pulumi.Context) string {
 	v, err := config.Try(ctx, "tencentcloud:region")
 	if err == nil {
@@ -45,8 +67,7 @@ func GetRegion(ctx *pulumi.Context) string {
 	return value
 }
 
-// This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
-// environment variable.
+// This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
 func GetSecretId(ctx *pulumi.Context) string {
 	v, err := config.Try(ctx, "tencentcloud:secretId")
 	if err == nil {
@@ -59,8 +80,7 @@ func GetSecretId(ctx *pulumi.Context) string {
 	return value
 }
 
-// This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
-// environment variable.
+// This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
 func GetSecretKey(ctx *pulumi.Context) string {
 	v, err := config.Try(ctx, "tencentcloud:secretKey")
 	if err == nil {

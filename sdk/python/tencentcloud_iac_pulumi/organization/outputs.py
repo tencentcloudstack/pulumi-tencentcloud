@@ -24,6 +24,7 @@ __all__ = [
     'GetOrgFinancialByMonthItemResult',
     'GetOrgFinancialByProductItemResult',
     'GetOrgShareAreaItemResult',
+    'GetServicesItemResult',
 ]
 
 @pulumi.output_type
@@ -713,5 +714,157 @@ class GetOrgShareAreaItemResult(dict):
         Region name.
         """
         return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetServicesItemResult(dict):
+    def __init__(__self__, *,
+                 can_assign_count: int,
+                 console_url: str,
+                 description: str,
+                 document: str,
+                 grant_status: str,
+                 is_assign: int,
+                 is_set_management_scope: int,
+                 is_usage_status: int,
+                 member_num: str,
+                 product: str,
+                 product_name: str,
+                 service_grant: int,
+                 service_id: int):
+        """
+        :param int can_assign_count: Limit for the number of delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str console_url: Console path of the organization service product. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str description: Organization service description. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str document: Help documentation. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str grant_status: Enabling status of organization service authorization. This field is valid when ServiceGrant is 1. Valid values: Enabled, Disabled. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int is_assign: Whether to support delegation. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+        :param int is_set_management_scope: Whether to support setting the delegated management scope. Valid values: 1 (yes), 2 (no).
+               Note: This field may return null, indicating that no valid values can be obtained.
+        :param int is_usage_status: Whether to access the usage status. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+        :param str member_num: Number of the current delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str product: Organization service product identifier. Note: This field may return null, indicating that no valid values can be obtained.
+        :param str product_name: Organization service product name. Note: This field may return null, indicating that no valid values can be obtained.
+        :param int service_grant: Whether to support organization service authorization. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+        :param int service_id: Organization service ID. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "can_assign_count", can_assign_count)
+        pulumi.set(__self__, "console_url", console_url)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "document", document)
+        pulumi.set(__self__, "grant_status", grant_status)
+        pulumi.set(__self__, "is_assign", is_assign)
+        pulumi.set(__self__, "is_set_management_scope", is_set_management_scope)
+        pulumi.set(__self__, "is_usage_status", is_usage_status)
+        pulumi.set(__self__, "member_num", member_num)
+        pulumi.set(__self__, "product", product)
+        pulumi.set(__self__, "product_name", product_name)
+        pulumi.set(__self__, "service_grant", service_grant)
+        pulumi.set(__self__, "service_id", service_id)
+
+    @property
+    @pulumi.getter(name="canAssignCount")
+    def can_assign_count(self) -> int:
+        """
+        Limit for the number of delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "can_assign_count")
+
+    @property
+    @pulumi.getter(name="consoleUrl")
+    def console_url(self) -> str:
+        """
+        Console path of the organization service product. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "console_url")
+
+    @property
+    @pulumi.getter
+    def description(self) -> str:
+        """
+        Organization service description. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "description")
+
+    @property
+    @pulumi.getter
+    def document(self) -> str:
+        """
+        Help documentation. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "document")
+
+    @property
+    @pulumi.getter(name="grantStatus")
+    def grant_status(self) -> str:
+        """
+        Enabling status of organization service authorization. This field is valid when ServiceGrant is 1. Valid values: Enabled, Disabled. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "grant_status")
+
+    @property
+    @pulumi.getter(name="isAssign")
+    def is_assign(self) -> int:
+        """
+        Whether to support delegation. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_assign")
+
+    @property
+    @pulumi.getter(name="isSetManagementScope")
+    def is_set_management_scope(self) -> int:
+        """
+        Whether to support setting the delegated management scope. Valid values: 1 (yes), 2 (no).
+        Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_set_management_scope")
+
+    @property
+    @pulumi.getter(name="isUsageStatus")
+    def is_usage_status(self) -> int:
+        """
+        Whether to access the usage status. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "is_usage_status")
+
+    @property
+    @pulumi.getter(name="memberNum")
+    def member_num(self) -> str:
+        """
+        Number of the current delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "member_num")
+
+    @property
+    @pulumi.getter
+    def product(self) -> str:
+        """
+        Organization service product identifier. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "product")
+
+    @property
+    @pulumi.getter(name="productName")
+    def product_name(self) -> str:
+        """
+        Organization service product name. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "product_name")
+
+    @property
+    @pulumi.getter(name="serviceGrant")
+    def service_grant(self) -> int:
+        """
+        Whether to support organization service authorization. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "service_grant")
+
+    @property
+    @pulumi.getter(name="serviceId")
+    def service_id(self) -> int:
+        """
+        Organization service ID. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "service_id")
 
 

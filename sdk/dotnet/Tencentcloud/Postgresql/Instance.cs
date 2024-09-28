@@ -18,6 +18,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// ### Create a postgresql instance
+    /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
@@ -70,7 +72,62 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
-    /// ### Create a multi available zone bucket
+    /// ### Create a postgresql instance with delete protection
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create vpc subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create postgresql
+    ///     var example = new Tencentcloud.Postgresql.Instance("example", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DbMajorVersion = "10",
+    ///         EngineVersion = "10.23",
+    ///         RootUser = "root123",
+    ///         RootPassword = "Root123$",
+    ///         Charset = "UTF8",
+    ///         ProjectId = 0,
+    ///         Cpu = 1,
+    ///         Memory = 2,
+    ///         Storage = 10,
+    ///         DeleteProtection = true,
+    ///         Tags = 
+    ///         {
+    ///             { "test", "tf" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Create a multi available zone postgresql instance
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -136,7 +193,74 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
-    /// ### create pgsql with kms key
+    /// ### Create a multi available zone postgresql instance of CDC
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create vpc subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create postgresql
+    ///     var example = new Tencentcloud.Postgresql.Instance("example", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DbMajorVersion = "10",
+    ///         RootUser = "root123",
+    ///         RootPassword = "Root123$",
+    ///         Charset = "UTF8",
+    ///         ProjectId = 0,
+    ///         Memory = 2,
+    ///         Cpu = 1,
+    ///         Storage = 10,
+    ///         DbNodeSets = new[]
+    ///         {
+    ///             new Tencentcloud.Postgresql.Inputs.InstanceDbNodeSetArgs
+    ///             {
+    ///                 Role = "Primary",
+    ///                 Zone = availabilityZone,
+    ///                 DedicatedClusterId = "cluster-262n63e8",
+    ///             },
+    ///             new Tencentcloud.Postgresql.Inputs.InstanceDbNodeSetArgs
+    ///             {
+    ///                 Zone = availabilityZone,
+    ///                 DedicatedClusterId = "cluster-262n63e8",
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "CreateBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Create pgsql with kms key
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -187,7 +311,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
-    /// ### upgrade kernel version
+    /// ### Upgrade kernel version
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -322,6 +446,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Output("dbNodeSets")]
         public Output<ImmutableArray<Outputs.InstanceDbNodeSet>> DbNodeSets { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable instance deletion protection. Default: false.
+        /// </summary>
+        [Output("deleteProtection")]
+        public Output<bool?> DeleteProtection { get; private set; } = null!;
 
         /// <summary>
         /// Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
@@ -591,6 +721,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         }
 
         /// <summary>
+        /// Whether to enable instance deletion protection. Default: false.
+        /// </summary>
+        [Input("deleteProtection")]
+        public Input<bool>? DeleteProtection { get; set; }
+
+        /// <summary>
         /// Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.
         /// </summary>
         [Input("engineVersion")]
@@ -817,6 +953,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
             get => _dbNodeSets ?? (_dbNodeSets = new InputList<Inputs.InstanceDbNodeSetGetArgs>());
             set => _dbNodeSets = value;
         }
+
+        /// <summary>
+        /// Whether to enable instance deletion protection. Default: false.
+        /// </summary>
+        [Input("deleteProtection")]
+        public Input<bool>? DeleteProtection { get; set; }
 
         /// <summary>
         /// Version of the postgresql database engine. Valid values: `10.4`, `10.17`, `10.23`, `11.8`, `11.12`, `11.22`, `12.4`, `12.7`, `12.18`, `13.3`, `14.2`, `14.11`, `15.1`, `16.0`.

@@ -10,16 +10,200 @@ from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
 
 __all__ = [
+    'AccountPrivilegesOperationModifyPrivilegeSetArgs',
+    'AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs',
+    'AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs',
     'InstanceBackupPlanArgs',
     'InstanceDbNodeSetArgs',
     'ParameterTemplateModifyParamEntrySetArgs',
     'ReadonlyGroupNetInfoListArgs',
+    'GetAccountPrivilegesDatabaseObjectSetArgs',
     'GetBackupDownloadUrlsBackupDownloadRestrictionArgs',
     'GetBaseBackupsFilterArgs',
+    'GetDedicatedClustersFilterArgs',
     'GetLogBackupsFilterArgs',
     'GetParameterTemplatesFilterArgs',
     'GetReadonlyGroupsFilterArgs',
 ]
+
+@pulumi.input_type
+class AccountPrivilegesOperationModifyPrivilegeSetArgs:
+    def __init__(__self__, *,
+                 database_privilege: Optional[pulumi.Input['AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs']] = None,
+                 is_cascade: Optional[pulumi.Input[bool]] = None,
+                 modify_type: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input['AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs'] database_privilege: Database objects and the user permissions on these objects. Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[bool] is_cascade: Required only when ModifyType is revokeObject. When the parameter is true, revoking permissions will cascade. The default value is false.
+        :param pulumi.Input[str] modify_type: Supported modification method: grantObject, revokeObject, alterRole. grantObject represents granting permissions on object, revokeObject represents revoking permissions on object, and alterRole represents modifying the account type.
+        """
+        if database_privilege is not None:
+            pulumi.set(__self__, "database_privilege", database_privilege)
+        if is_cascade is not None:
+            pulumi.set(__self__, "is_cascade", is_cascade)
+        if modify_type is not None:
+            pulumi.set(__self__, "modify_type", modify_type)
+
+    @property
+    @pulumi.getter(name="databasePrivilege")
+    def database_privilege(self) -> Optional[pulumi.Input['AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs']]:
+        """
+        Database objects and the user permissions on these objects. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "database_privilege")
+
+    @database_privilege.setter
+    def database_privilege(self, value: Optional[pulumi.Input['AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs']]):
+        pulumi.set(self, "database_privilege", value)
+
+    @property
+    @pulumi.getter(name="isCascade")
+    def is_cascade(self) -> Optional[pulumi.Input[bool]]:
+        """
+        Required only when ModifyType is revokeObject. When the parameter is true, revoking permissions will cascade. The default value is false.
+        """
+        return pulumi.get(self, "is_cascade")
+
+    @is_cascade.setter
+    def is_cascade(self, value: Optional[pulumi.Input[bool]]):
+        pulumi.set(self, "is_cascade", value)
+
+    @property
+    @pulumi.getter(name="modifyType")
+    def modify_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Supported modification method: grantObject, revokeObject, alterRole. grantObject represents granting permissions on object, revokeObject represents revoking permissions on object, and alterRole represents modifying the account type.
+        """
+        return pulumi.get(self, "modify_type")
+
+    @modify_type.setter
+    def modify_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "modify_type", value)
+
+
+@pulumi.input_type
+class AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs:
+    def __init__(__self__, *,
+                 object: Optional[pulumi.Input['AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs']] = None,
+                 privilege_sets: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None):
+        """
+        :param pulumi.Input['AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs'] object: Database object.If ObjectType is database, DatabaseName/SchemaName/TableName can be null.If ObjectType is schema, SchemaName/TableName can be null.If ObjectType is table, TableName can be null.If ObjectType is column, DatabaseName/SchemaName/TableName can&amp;#39;t be null.In all other cases, DatabaseName/SchemaName/TableName can be null. Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] privilege_sets: Privileges the specific account has on database object. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        if object is not None:
+            pulumi.set(__self__, "object", object)
+        if privilege_sets is not None:
+            pulumi.set(__self__, "privilege_sets", privilege_sets)
+
+    @property
+    @pulumi.getter
+    def object(self) -> Optional[pulumi.Input['AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs']]:
+        """
+        Database object.If ObjectType is database, DatabaseName/SchemaName/TableName can be null.If ObjectType is schema, SchemaName/TableName can be null.If ObjectType is table, TableName can be null.If ObjectType is column, DatabaseName/SchemaName/TableName can&amp;#39;t be null.In all other cases, DatabaseName/SchemaName/TableName can be null. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "object")
+
+    @object.setter
+    def object(self, value: Optional[pulumi.Input['AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs']]):
+        pulumi.set(self, "object", value)
+
+    @property
+    @pulumi.getter(name="privilegeSets")
+    def privilege_sets(self) -> Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]:
+        """
+        Privileges the specific account has on database object. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "privilege_sets")
+
+    @privilege_sets.setter
+    def privilege_sets(self, value: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]]):
+        pulumi.set(self, "privilege_sets", value)
+
+
+@pulumi.input_type
+class AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs:
+    def __init__(__self__, *,
+                 object_name: pulumi.Input[str],
+                 object_type: pulumi.Input[str],
+                 database_name: Optional[pulumi.Input[str]] = None,
+                 schema_name: Optional[pulumi.Input[str]] = None,
+                 table_name: Optional[pulumi.Input[str]] = None):
+        """
+        :param pulumi.Input[str] object_name: Database object Name. Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[str] object_type: Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[str] database_name: Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database. Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[str] schema_name: Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema. Note: This field may return null, indicating that no valid value can be obtained.
+        :param pulumi.Input[str] table_name: Table name to which the database object belongs. This parameter is mandatory when ObjectType is column. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "object_name", object_name)
+        pulumi.set(__self__, "object_type", object_type)
+        if database_name is not None:
+            pulumi.set(__self__, "database_name", database_name)
+        if schema_name is not None:
+            pulumi.set(__self__, "schema_name", schema_name)
+        if table_name is not None:
+            pulumi.set(__self__, "table_name", table_name)
+
+    @property
+    @pulumi.getter(name="objectName")
+    def object_name(self) -> pulumi.Input[str]:
+        """
+        Database object Name. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "object_name")
+
+    @object_name.setter
+    def object_name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object_name", value)
+
+    @property
+    @pulumi.getter(name="objectType")
+    def object_type(self) -> pulumi.Input[str]:
+        """
+        Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "object_type")
+
+    @object_type.setter
+    def object_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "object_type", value)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "database_name")
+
+    @database_name.setter
+    def database_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "database_name", value)
+
+    @property
+    @pulumi.getter(name="schemaName")
+    def schema_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "schema_name")
+
+    @schema_name.setter
+    def schema_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "schema_name", value)
+
+    @property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> Optional[pulumi.Input[str]]:
+        """
+        Table name to which the database object belongs. This parameter is mandatory when ObjectType is column. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "table_name")
+
+    @table_name.setter
+    def table_name(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "table_name", value)
+
 
 @pulumi.input_type
 class InstanceBackupPlanArgs:
@@ -96,12 +280,16 @@ class InstanceBackupPlanArgs:
 class InstanceDbNodeSetArgs:
     def __init__(__self__, *,
                  zone: pulumi.Input[str],
+                 dedicated_cluster_id: Optional[pulumi.Input[str]] = None,
                  role: Optional[pulumi.Input[str]] = None):
         """
         :param pulumi.Input[str] zone: Indicates the node available zone.
+        :param pulumi.Input[str] dedicated_cluster_id: Dedicated cluster ID.
         :param pulumi.Input[str] role: Indicates node type, available values:`Primary`, `Standby`. Default: `Standby`.
         """
         pulumi.set(__self__, "zone", zone)
+        if dedicated_cluster_id is not None:
+            pulumi.set(__self__, "dedicated_cluster_id", dedicated_cluster_id)
         if role is not None:
             pulumi.set(__self__, "role", role)
 
@@ -116,6 +304,18 @@ class InstanceDbNodeSetArgs:
     @zone.setter
     def zone(self, value: pulumi.Input[str]):
         pulumi.set(self, "zone", value)
+
+    @property
+    @pulumi.getter(name="dedicatedClusterId")
+    def dedicated_cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Dedicated cluster ID.
+        """
+        return pulumi.get(self, "dedicated_cluster_id")
+
+    @dedicated_cluster_id.setter
+    def dedicated_cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dedicated_cluster_id", value)
 
     @property
     @pulumi.getter
@@ -204,6 +404,91 @@ class ReadonlyGroupNetInfoListArgs:
     @port.setter
     def port(self, value: Optional[pulumi.Input[int]]):
         pulumi.set(self, "port", value)
+
+
+@pulumi.input_type
+class GetAccountPrivilegesDatabaseObjectSetArgs:
+    def __init__(__self__, *,
+                 object_name: str,
+                 object_type: str,
+                 database_name: Optional[str] = None,
+                 schema_name: Optional[str] = None,
+                 table_name: Optional[str] = None):
+        """
+        :param str object_name: Database object Name.Note: This field may return null, indicating that no valid value can be obtained.
+        :param str object_type: Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+        :param str database_name: Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database.Note: This field may return null, indicating that no valid value can be obtained.
+        :param str schema_name: Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema.Note: This field may return null, indicating that no valid value can be obtained.
+        :param str table_name: Table name to which the database object belongs. This parameter is mandatory when ObjectType is column.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        pulumi.set(__self__, "object_name", object_name)
+        pulumi.set(__self__, "object_type", object_type)
+        if database_name is not None:
+            pulumi.set(__self__, "database_name", database_name)
+        if schema_name is not None:
+            pulumi.set(__self__, "schema_name", schema_name)
+        if table_name is not None:
+            pulumi.set(__self__, "table_name", table_name)
+
+    @property
+    @pulumi.getter(name="objectName")
+    def object_name(self) -> str:
+        """
+        Database object Name.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "object_name")
+
+    @object_name.setter
+    def object_name(self, value: str):
+        pulumi.set(self, "object_name", value)
+
+    @property
+    @pulumi.getter(name="objectType")
+    def object_type(self) -> str:
+        """
+        Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "object_type")
+
+    @object_type.setter
+    def object_type(self, value: str):
+        pulumi.set(self, "object_type", value)
+
+    @property
+    @pulumi.getter(name="databaseName")
+    def database_name(self) -> Optional[str]:
+        """
+        Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "database_name")
+
+    @database_name.setter
+    def database_name(self, value: Optional[str]):
+        pulumi.set(self, "database_name", value)
+
+    @property
+    @pulumi.getter(name="schemaName")
+    def schema_name(self) -> Optional[str]:
+        """
+        Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "schema_name")
+
+    @schema_name.setter
+    def schema_name(self, value: Optional[str]):
+        pulumi.set(self, "schema_name", value)
+
+    @property
+    @pulumi.getter(name="tableName")
+    def table_name(self) -> Optional[str]:
+        """
+        Table name to which the database object belongs. This parameter is mandatory when ObjectType is column.Note: This field may return null, indicating that no valid value can be obtained.
+        """
+        return pulumi.get(self, "table_name")
+
+    @table_name.setter
+    def table_name(self, value: Optional[str]):
+        pulumi.set(self, "table_name", value)
 
 
 @pulumi.input_type
@@ -324,6 +609,45 @@ class GetBaseBackupsFilterArgs:
     def values(self) -> Optional[Sequence[str]]:
         """
         One or more filter values.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Optional[Sequence[str]]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetDedicatedClustersFilterArgs:
+    def __init__(__self__, *,
+                 name: Optional[str] = None,
+                 values: Optional[Sequence[str]] = None):
+        """
+        :param str name: Filter name.
+        :param Sequence[str] values: Filter values.
+        """
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if values is not None:
+            pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> Optional[str]:
+        """
+        Filter name.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: Optional[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Optional[Sequence[str]]:
+        """
+        Filter values.
         """
         return pulumi.get(self, "values")
 

@@ -14,7 +14,9 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
+ * // create vpc
  * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * // create private dns zone
  * const exampleZone = new tencentcloud.privatedns.Zone("exampleZone", {
  *     domain: "domain.com",
  *     remark: "remark.",
@@ -28,6 +30,7 @@ import * as utilities from "../utilities";
  *         createdBy: "terraform",
  *     },
  * });
+ * // create private dns record
  * const exampleRecord = new tencentcloud.privatedns.Record("exampleRecord", {
  *     zoneId: exampleZone.id,
  *     recordType: "A",
@@ -81,7 +84,7 @@ export class Record extends pulumi.CustomResource {
      */
     public readonly mx!: pulumi.Output<number | undefined>;
     /**
-     * Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+     * Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
      */
     public readonly recordType!: pulumi.Output<string>;
     /**
@@ -89,7 +92,7 @@ export class Record extends pulumi.CustomResource {
      */
     public readonly recordValue!: pulumi.Output<string>;
     /**
-     * Subdomain, such as "www", "m", and "@".
+     * Subdomain, such as `www`, `m`, and `@`.
      */
     public readonly subDomain!: pulumi.Output<string>;
     /**
@@ -161,7 +164,7 @@ export interface RecordState {
      */
     mx?: pulumi.Input<number>;
     /**
-     * Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+     * Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
      */
     recordType?: pulumi.Input<string>;
     /**
@@ -169,7 +172,7 @@ export interface RecordState {
      */
     recordValue?: pulumi.Input<string>;
     /**
-     * Subdomain, such as "www", "m", and "@".
+     * Subdomain, such as `www`, `m`, and `@`.
      */
     subDomain?: pulumi.Input<string>;
     /**
@@ -195,7 +198,7 @@ export interface RecordArgs {
      */
     mx?: pulumi.Input<number>;
     /**
-     * Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+     * Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
      */
     recordType: pulumi.Input<string>;
     /**
@@ -203,7 +206,7 @@ export interface RecordArgs {
      */
     recordValue: pulumi.Input<string>;
     /**
-     * Subdomain, such as "www", "m", and "@".
+     * Subdomain, such as `www`, `m`, and `@`.
      */
     subDomain: pulumi.Input<string>;
     /**

@@ -30,11 +30,16 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
+//			_, err := Ccn.NewInstance(ctx, "example", &Ccn.InstanceArgs{
 //				BandwidthLimitType: pulumi.String("INTER_REGION_LIMIT"),
 //				ChargeType:         pulumi.String("PREPAID"),
-//				Description:        pulumi.String("ci-temp-test-ccn-des"),
+//				Description:        pulumi.String("desc."),
 //				Qos:                pulumi.String("AG"),
+//				RouteEcmpFlag:      pulumi.Bool(true),
+//				RouteOverlapFlag:   pulumi.Bool(true),
+//				Tags: pulumi.Map{
+//					"createBy": pulumi.Any("terraform"),
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -61,11 +66,16 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
+//			_, err := Ccn.NewInstance(ctx, "example", &Ccn.InstanceArgs{
 //				BandwidthLimitType: pulumi.String("OUTER_REGION_LIMIT"),
 //				ChargeType:         pulumi.String("POSTPAID"),
-//				Description:        pulumi.String("ci-temp-test-ccn-des"),
+//				Description:        pulumi.String("desc."),
 //				Qos:                pulumi.String("AG"),
+//				RouteEcmpFlag:      pulumi.Bool(false),
+//				RouteOverlapFlag:   pulumi.Bool(false),
+//				Tags: pulumi.Map{
+//					"createBy": pulumi.Any("terraform"),
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -92,10 +102,10 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Ccn.NewInstance(ctx, "main", &Ccn.InstanceArgs{
+//			_, err := Ccn.NewInstance(ctx, "example", &Ccn.InstanceArgs{
 //				BandwidthLimitType: pulumi.String("INTER_REGION_LIMIT"),
 //				ChargeType:         pulumi.String("POSTPAID"),
-//				Description:        pulumi.String("ci-temp-test-ccn-des"),
+//				Description:        pulumi.String("desc."),
 //				Qos:                pulumi.String("AG"),
 //			})
 //			if err != nil {
@@ -113,7 +123,7 @@ import (
 // Ccn instance can be imported, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Ccn/instance:Instance test ccn-id
+// $ pulumi import tencentcloud:Ccn/instance:Instance example ccn-al70jo89
 // ```
 type Instance struct {
 	pulumi.CustomResourceState
@@ -132,6 +142,10 @@ type Instance struct {
 	Name pulumi.StringOutput `pulumi:"name"`
 	// Service quality of CCN. Valid values: `PT`, `AU`, `AG`. The default is `AU`.
 	Qos pulumi.StringPtrOutput `pulumi:"qos"`
+	// Whether to enable the equivalent routing function. `true`: enabled, `false`: disabled.
+	RouteEcmpFlag pulumi.BoolPtrOutput `pulumi:"routeEcmpFlag"`
+	// Whether to enable the routing overlap function. `true`: enabled, `false`: disabled.
+	RouteOverlapFlag pulumi.BoolPtrOutput `pulumi:"routeOverlapFlag"`
 	// States of instance. Valid values: `ISOLATED`(arrears) and `AVAILABLE`.
 	State pulumi.StringOutput `pulumi:"state"`
 	// Instance tag.
@@ -182,6 +196,10 @@ type instanceState struct {
 	Name *string `pulumi:"name"`
 	// Service quality of CCN. Valid values: `PT`, `AU`, `AG`. The default is `AU`.
 	Qos *string `pulumi:"qos"`
+	// Whether to enable the equivalent routing function. `true`: enabled, `false`: disabled.
+	RouteEcmpFlag *bool `pulumi:"routeEcmpFlag"`
+	// Whether to enable the routing overlap function. `true`: enabled, `false`: disabled.
+	RouteOverlapFlag *bool `pulumi:"routeOverlapFlag"`
 	// States of instance. Valid values: `ISOLATED`(arrears) and `AVAILABLE`.
 	State *string `pulumi:"state"`
 	// Instance tag.
@@ -203,6 +221,10 @@ type InstanceState struct {
 	Name pulumi.StringPtrInput
 	// Service quality of CCN. Valid values: `PT`, `AU`, `AG`. The default is `AU`.
 	Qos pulumi.StringPtrInput
+	// Whether to enable the equivalent routing function. `true`: enabled, `false`: disabled.
+	RouteEcmpFlag pulumi.BoolPtrInput
+	// Whether to enable the routing overlap function. `true`: enabled, `false`: disabled.
+	RouteOverlapFlag pulumi.BoolPtrInput
 	// States of instance. Valid values: `ISOLATED`(arrears) and `AVAILABLE`.
 	State pulumi.StringPtrInput
 	// Instance tag.
@@ -224,6 +246,10 @@ type instanceArgs struct {
 	Name *string `pulumi:"name"`
 	// Service quality of CCN. Valid values: `PT`, `AU`, `AG`. The default is `AU`.
 	Qos *string `pulumi:"qos"`
+	// Whether to enable the equivalent routing function. `true`: enabled, `false`: disabled.
+	RouteEcmpFlag *bool `pulumi:"routeEcmpFlag"`
+	// Whether to enable the routing overlap function. `true`: enabled, `false`: disabled.
+	RouteOverlapFlag *bool `pulumi:"routeOverlapFlag"`
 	// Instance tag.
 	Tags map[string]interface{} `pulumi:"tags"`
 }
@@ -240,6 +266,10 @@ type InstanceArgs struct {
 	Name pulumi.StringPtrInput
 	// Service quality of CCN. Valid values: `PT`, `AU`, `AG`. The default is `AU`.
 	Qos pulumi.StringPtrInput
+	// Whether to enable the equivalent routing function. `true`: enabled, `false`: disabled.
+	RouteEcmpFlag pulumi.BoolPtrInput
+	// Whether to enable the routing overlap function. `true`: enabled, `false`: disabled.
+	RouteOverlapFlag pulumi.BoolPtrInput
 	// Instance tag.
 	Tags pulumi.MapInput
 }
@@ -364,6 +394,16 @@ func (o InstanceOutput) Name() pulumi.StringOutput {
 // Service quality of CCN. Valid values: `PT`, `AU`, `AG`. The default is `AU`.
 func (o InstanceOutput) Qos() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.Qos }).(pulumi.StringPtrOutput)
+}
+
+// Whether to enable the equivalent routing function. `true`: enabled, `false`: disabled.
+func (o InstanceOutput) RouteEcmpFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.RouteEcmpFlag }).(pulumi.BoolPtrOutput)
+}
+
+// Whether to enable the routing overlap function. `true`: enabled, `false`: disabled.
+func (o InstanceOutput) RouteOverlapFlag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Instance) pulumi.BoolPtrOutput { return v.RouteOverlapFlag }).(pulumi.BoolPtrOutput)
 }
 
 // States of instance. Valid values: `ISOLATED`(arrears) and `AVAILABLE`.

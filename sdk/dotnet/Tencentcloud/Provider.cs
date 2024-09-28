@@ -20,6 +20,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
     public partial class Provider : global::Pulumi.ProviderResource
     {
         /// <summary>
+        /// The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
+        /// </summary>
+        [Output("camRoleName")]
+        public Output<string?> CamRoleName { get; private set; } = null!;
+
+        /// <summary>
+        /// The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples:
+        /// `https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
+        /// </summary>
+        [Output("cosDomain")]
+        public Output<string?> CosDomain { get; private set; } = null!;
+
+        /// <summary>
         /// The root domain of the API request, Default is `tencentcloudapi.com`.
         /// </summary>
         [Output("domain")]
@@ -39,22 +52,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         public Output<string?> Protocol { get; private set; } = null!;
 
         /// <summary>
-        /// This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
-        /// environment variables. The default input value is ap-guangzhou.
+        /// This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The
+        /// default input value is ap-guangzhou.
         /// </summary>
         [Output("region")]
         public Output<string?> Region { get; private set; } = null!;
 
         /// <summary>
-        /// This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
-        /// environment variable.
+        /// This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
         /// </summary>
         [Output("secretId")]
         public Output<string?> SecretId { get; private set; } = null!;
 
         /// <summary>
-        /// This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
-        /// environment variable.
+        /// This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
         /// </summary>
         [Output("secretKey")]
         public Output<string?> SecretKey { get; private set; } = null!;
@@ -115,10 +126,43 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         public Input<Inputs.ProviderAssumeRoleArgs>? AssumeRole { get; set; }
 
         /// <summary>
+        /// The `assume_role_with_saml` block. If provided, terraform will attempt to assume this role using the supplied
+        /// credentials.
+        /// </summary>
+        [Input("assumeRoleWithSaml", json: true)]
+        public Input<Inputs.ProviderAssumeRoleWithSamlArgs>? AssumeRoleWithSaml { get; set; }
+
+        /// <summary>
+        /// The `assume_role_with_web_identity` block. If provided, terraform will attempt to assume this role using the supplied
+        /// credentials.
+        /// </summary>
+        [Input("assumeRoleWithWebIdentity", json: true)]
+        public Input<Inputs.ProviderAssumeRoleWithWebIdentityArgs>? AssumeRoleWithWebIdentity { get; set; }
+
+        /// <summary>
+        /// The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
+        /// </summary>
+        [Input("camRoleName")]
+        public Input<string>? CamRoleName { get; set; }
+
+        /// <summary>
+        /// The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples:
+        /// `https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
+        /// </summary>
+        [Input("cosDomain")]
+        public Input<string>? CosDomain { get; set; }
+
+        /// <summary>
         /// The root domain of the API request, Default is `tencentcloudapi.com`.
         /// </summary>
         [Input("domain")]
         public Input<string>? Domain { get; set; }
+
+        /// <summary>
+        /// Whether to enable pod oidc.
+        /// </summary>
+        [Input("enablePodOidc", json: true)]
+        public Input<bool>? EnablePodOidc { get; set; }
 
         /// <summary>
         /// The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
@@ -134,15 +178,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         public Input<string>? Protocol { get; set; }
 
         /// <summary>
-        /// This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
-        /// environment variables. The default input value is ap-guangzhou.
+        /// This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The
+        /// default input value is ap-guangzhou.
         /// </summary>
         [Input("region")]
         public Input<string>? Region { get; set; }
 
         /// <summary>
-        /// This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
-        /// environment variable.
+        /// This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
         /// </summary>
         [Input("secretId")]
         public Input<string>? SecretId { get; set; }
@@ -151,8 +194,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud
         private Input<string>? _secretKey;
 
         /// <summary>
-        /// This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
-        /// environment variable.
+        /// This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
         /// </summary>
         public Input<string>? SecretKey
         {

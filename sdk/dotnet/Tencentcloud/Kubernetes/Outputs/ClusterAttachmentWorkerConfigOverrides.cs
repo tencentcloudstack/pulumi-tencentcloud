@@ -23,11 +23,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly int? DesiredPodNum;
         /// <summary>
-        /// Docker graph path. Default is `/var/lib/docker`.
+        /// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
         /// </summary>
         public readonly string? DockerGraphPath;
         /// <summary>
-        /// Custom parameter information related to the node. This is a white-list parameter.
+        /// This argument was no longer supported by TencentCloud TKE. Custom parameter information related to the node. This is a white-list parameter.
         /// </summary>
         public readonly ImmutableArray<string> ExtraArgs;
         /// <summary>
@@ -35,19 +35,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly Outputs.ClusterAttachmentWorkerConfigOverridesGpuArgs? GpuArgs;
         /// <summary>
-        /// Indicate to schedule the adding node or not. Default is true.
+        /// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
         /// </summary>
         public readonly bool? IsSchedule;
         /// <summary>
-        /// Mount target. Default is not mounting.
+        /// This argument was no longer supported by TencentCloud TKE. Mount target. Default is not mounting.
         /// </summary>
         public readonly string? MountTarget;
         /// <summary>
-        /// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        /// This argument was no longer supported by TencentCloud TKE. Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
         /// </summary>
         public readonly string? PreStartUserScript;
         /// <summary>
-        /// Base64-encoded User Data text, the length limit is 16KB.
+        /// This argument was no longer supported by TencentCloud TKE. Base64-encoded User Data text, the length limit is 16KB.
         /// </summary>
         public readonly string? UserData;
 

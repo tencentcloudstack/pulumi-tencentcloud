@@ -15,11 +15,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Outputs
     public sealed class DataTransformDstResource
     {
         /// <summary>
-        /// alias.
+        /// Alias.
         /// </summary>
         public readonly string Alias;
         /// <summary>
-        /// dst topic id.
+        /// Dst topic ID.
         /// </summary>
         public readonly string TopicId;
 

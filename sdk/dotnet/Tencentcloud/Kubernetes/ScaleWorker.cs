@@ -32,7 +32,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
     ///     var subnet = config.Get("subnet") ?? "subnet-pqfek0t8";
     ///     var scaleInstanceType = config.Get("scaleInstanceType") ?? "S2.LARGE16";
-    ///     var testScale = new Tencentcloud.Kubernetes.ScaleWorker("testScale", new()
+    ///     var example = new Tencentcloud.Kubernetes.ScaleWorker("example", new()
     ///     {
     ///         ClusterId = "cls-godovr32",
     ///         DesiredPodNum = 16,
@@ -86,7 +86,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
     ///     var subnet = config.Get("subnet") ?? "subnet-pqfek0t8";
     ///     var scaleInstanceType = config.Get("scaleInstanceType") ?? "S2.LARGE16";
-    ///     var testScale = new Tencentcloud.Kubernetes.ScaleWorker("testScale", new()
+    ///     var example = new Tencentcloud.Kubernetes.ScaleWorker("example", new()
     ///     {
     ///         ClusterId = "cls-godovr32",
     ///         ExtraArgs = new[]
@@ -133,7 +133,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// tke scale worker can be imported, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker test cls-xxx#ins-xxx
+    /// $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker example cls-mij6c2pq#ins-n6esjkdi,ins-9h3rdxt8,ins-qretqeas
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/scaleWorker:ScaleWorker")]
@@ -146,7 +146,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<string> ClusterId { get; private set; } = null!;
 
         /// <summary>
-        /// Configurations of data disk.
+        /// Configurations of tke data disk.
         /// </summary>
         [Output("dataDisks")]
         public Output<ImmutableArray<Outputs.ScaleWorkerDataDisk>> DataDisks { get; private set; } = null!;
@@ -274,7 +274,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         private InputList<Inputs.ScaleWorkerDataDiskArgs>? _dataDisks;
 
         /// <summary>
-        /// Configurations of data disk.
+        /// Configurations of tke data disk.
         /// </summary>
         public InputList<Inputs.ScaleWorkerDataDiskArgs> DataDisks
         {
@@ -372,7 +372,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         private InputList<Inputs.ScaleWorkerDataDiskGetArgs>? _dataDisks;
 
         /// <summary>
-        /// Configurations of data disk.
+        /// Configurations of tke data disk.
         /// </summary>
         public InputList<Inputs.ScaleWorkerDataDiskGetArgs> DataDisks
         {

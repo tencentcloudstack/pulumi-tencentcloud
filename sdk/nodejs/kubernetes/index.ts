@@ -15,6 +15,11 @@ export type AddonAttachment = import("./addonAttachment").AddonAttachment;
 export const AddonAttachment: typeof import("./addonAttachment").AddonAttachment = null as any;
 utilities.lazyLoad(exports, ["AddonAttachment"], () => require("./addonAttachment"));
 
+export { AddonConfigArgs, AddonConfigState } from "./addonConfig";
+export type AddonConfig = import("./addonConfig").AddonConfig;
+export const AddonConfig: typeof import("./addonConfig").AddonConfig = null as any;
+utilities.lazyLoad(exports, ["AddonConfig"], () => require("./addonConfig"));
+
 export { AuthAttachmentArgs, AuthAttachmentState } from "./authAttachment";
 export type AuthAttachment = import("./authAttachment").AuthAttachment;
 export const AuthAttachment: typeof import("./authAttachment").AuthAttachment = null as any;
@@ -90,6 +95,16 @@ export const getClusters: typeof import("./getClusters").getClusters = null as a
 export const getClustersOutput: typeof import("./getClusters").getClustersOutput = null as any;
 utilities.lazyLoad(exports, ["getClusters","getClustersOutput"], () => require("./getClusters"));
 
+export { HealthCheckPolicyArgs, HealthCheckPolicyState } from "./healthCheckPolicy";
+export type HealthCheckPolicy = import("./healthCheckPolicy").HealthCheckPolicy;
+export const HealthCheckPolicy: typeof import("./healthCheckPolicy").HealthCheckPolicy = null as any;
+utilities.lazyLoad(exports, ["HealthCheckPolicy"], () => require("./healthCheckPolicy"));
+
+export { LogConfigArgs, LogConfigState } from "./logConfig";
+export type LogConfig = import("./logConfig").LogConfig;
+export const LogConfig: typeof import("./logConfig").LogConfig = null as any;
+utilities.lazyLoad(exports, ["LogConfig"], () => require("./logConfig"));
+
 export { NativeNodePoolArgs, NativeNodePoolState } from "./nativeNodePool";
 export type NativeNodePool = import("./nativeNodePool").NativeNodePool;
 export const NativeNodePool: typeof import("./nativeNodePool").NativeNodePool = null as any;
@@ -119,6 +134,8 @@ const _module = {
                 return new Addon(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/addonAttachment:AddonAttachment":
                 return new AddonAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/addonConfig:AddonConfig":
+                return new AddonConfig(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/authAttachment:AuthAttachment":
                 return new AuthAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/backupStorageLocation:BackupStorageLocation":
@@ -131,6 +148,10 @@ const _module = {
                 return new ClusterEndpoint(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/encryptionProtection:EncryptionProtection":
                 return new EncryptionProtection(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/healthCheckPolicy:HealthCheckPolicy":
+                return new HealthCheckPolicy(name, <any>undefined, { urn })
+            case "tencentcloud:Kubernetes/logConfig:LogConfig":
+                return new LogConfig(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/nativeNodePool:NativeNodePool":
                 return new NativeNodePool(name, <any>undefined, { urn })
             case "tencentcloud:Kubernetes/nodePool:NodePool":
@@ -146,12 +167,15 @@ const _module = {
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/addon", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/addonAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/addonConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/authAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/backupStorageLocation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/cluster", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/clusterAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/clusterEndpoint", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/encryptionProtection", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/healthCheckPolicy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/logConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/nativeNodePool", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/nodePool", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Kubernetes/scaleWorker", _module)

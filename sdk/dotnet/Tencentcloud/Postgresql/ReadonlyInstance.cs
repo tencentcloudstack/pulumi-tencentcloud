@@ -15,6 +15,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// ## Example Usage
     /// 
+    /// ### Create postgresql readonly instance
+    /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
@@ -48,7 +50,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     ///         ChargeType = "POSTPAID_BY_HOUR",
     ///         VpcId = vpc.Id,
     ///         SubnetId = subnet.Id,
-    ///         EngineVersion = "10.4",
+    ///         DbMajorVersion = "10",
     ///         RootUser = "root123",
     ///         RootPassword = "Root123$",
     ///         Charset = "UTF8",
@@ -62,6 +64,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     ///         },
     ///     });
     /// 
+    ///     // create postgresql readonly group
     ///     var exampleReadonlyGroup = new Tencentcloud.Postgresql.ReadonlyGroup("exampleReadonlyGroup", new()
     ///     {
     ///         MasterDbInstanceId = exampleInstance.Id,
@@ -86,13 +89,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     ///         },
     ///     });
     /// 
+    ///     // create postgresql readonly instance
     ///     var exampleReadonlyInstance = new Tencentcloud.Postgresql.ReadonlyInstance("exampleReadonlyInstance", new()
     ///     {
     ///         ReadOnlyGroupId = exampleReadonlyGroup.Id,
     ///         MasterDbInstanceId = exampleInstance.Id,
     ///         Zone = availabilityZone,
     ///         AutoRenewFlag = 0,
-    ///         DbVersion = "10.4",
+    ///         DbVersion = "10.23",
     ///         InstanceChargeType = "POSTPAID_BY_HOUR",
     ///         Memory = 4,
     ///         Cpu = 2,
@@ -111,12 +115,127 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// ### Create postgresql readonly instance of CDC
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create vpc subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create postgresql
+    ///     var exampleInstance = new Tencentcloud.Postgresql.Instance("exampleInstance", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         ChargeType = "POSTPAID_BY_HOUR",
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DbMajorVersion = "10",
+    ///         RootUser = "root123",
+    ///         RootPassword = "Root123$",
+    ///         Charset = "UTF8",
+    ///         ProjectId = 0,
+    ///         Memory = 2,
+    ///         Cpu = 1,
+    ///         Storage = 10,
+    ///         DbNodeSets = new[]
+    ///         {
+    ///             new Tencentcloud.Postgresql.Inputs.InstanceDbNodeSetArgs
+    ///             {
+    ///                 Role = "Primary",
+    ///                 Zone = availabilityZone,
+    ///                 DedicatedClusterId = "cluster-262n63e8",
+    ///             },
+    ///             new Tencentcloud.Postgresql.Inputs.InstanceDbNodeSetArgs
+    ///             {
+    ///                 Zone = availabilityZone,
+    ///                 DedicatedClusterId = "cluster-262n63e8",
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "CreateBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     // create postgresql readonly group
+    ///     var exampleReadonlyGroup = new Tencentcloud.Postgresql.ReadonlyGroup("exampleReadonlyGroup", new()
+    ///     {
+    ///         MasterDbInstanceId = exampleInstance.Id,
+    ///         ProjectId = 0,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         ReplayLagEliminate = 1,
+    ///         ReplayLatencyEliminate = 1,
+    ///         MaxReplayLag = 100,
+    ///         MaxReplayLatency = 512,
+    ///         MinDelayEliminateReserve = 1,
+    ///     });
+    /// 
+    ///     // create security group
+    ///     var exampleGroup = new Tencentcloud.Security.Group("exampleGroup", new()
+    ///     {
+    ///         Description = "sg desc.",
+    ///         ProjectId = 0,
+    ///         Tags = 
+    ///         {
+    ///             { "CreateBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    ///     // create postgresql readonly instance
+    ///     var exampleReadonlyInstance = new Tencentcloud.Postgresql.ReadonlyInstance("exampleReadonlyInstance", new()
+    ///     {
+    ///         ReadOnlyGroupId = exampleReadonlyGroup.Id,
+    ///         MasterDbInstanceId = exampleInstance.Id,
+    ///         Zone = availabilityZone,
+    ///         AutoRenewFlag = 0,
+    ///         DbVersion = "10.23",
+    ///         InstanceChargeType = "POSTPAID_BY_HOUR",
+    ///         Memory = 4,
+    ///         Cpu = 2,
+    ///         Storage = 250,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         NeedSupportIpv6 = 0,
+    ///         ProjectId = 0,
+    ///         DedicatedClusterId = "cluster-262n63e8",
+    ///         SecurityGroupsIds = new[]
+    ///         {
+    ///             exampleGroup.Id,
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ## Import
     /// 
     /// postgresql readonly instance can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance example instance_id
+    /// $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance example pgro-gih5m0ke
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance")]
@@ -151,6 +270,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Output("dbVersion")]
         public Output<string> DbVersion { get; private set; } = null!;
+
+        /// <summary>
+        /// Dedicated cluster ID.
+        /// </summary>
+        [Output("dedicatedClusterId")]
+        public Output<string?> DedicatedClusterId { get; private set; } = null!;
 
         /// <summary>
         /// instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
@@ -326,6 +451,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         public Input<string> DbVersion { get; set; } = null!;
 
         /// <summary>
+        /// Dedicated cluster ID.
+        /// </summary>
+        [Input("dedicatedClusterId")]
+        public Input<string>? DedicatedClusterId { get; set; }
+
+        /// <summary>
         /// instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
         /// </summary>
         [Input("instanceChargeType")]
@@ -458,6 +589,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// </summary>
         [Input("dbVersion")]
         public Input<string>? DbVersion { get; set; }
+
+        /// <summary>
+        /// Dedicated cluster ID.
+        /// </summary>
+        [Input("dedicatedClusterId")]
+        public Input<string>? DedicatedClusterId { get; set; }
 
         /// <summary>
         /// instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).

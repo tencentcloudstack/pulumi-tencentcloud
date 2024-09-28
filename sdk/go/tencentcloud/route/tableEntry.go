@@ -33,41 +33,46 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			cfg := config.New(ctx, "")
-//			availabilityZone := "na-siliconvalley-1"
+//			availabilityZone := "ap-guangzhou-4"
 //			if param := cfg.Get("availabilityZone"); param != "" {
 //				availabilityZone = param
 //			}
-//			fooInstance, err := Vpc.NewInstance(ctx, "fooInstance", &Vpc.InstanceArgs{
+//			// create vpc
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
 //				CidrBlock: pulumi.String("10.0.0.0/16"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			fooTable, err := Route.NewTable(ctx, "fooTable", &Route.TableArgs{
-//				VpcId: fooInstance.ID(),
+//			// create route table
+//			exampleTable, err := Route.NewTable(ctx, "exampleTable", &Route.TableArgs{
+//				VpcId: vpc.ID(),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = Subnet.NewInstance(ctx, "fooSubnet/instanceInstance", &Subnet.InstanceArgs{
-//				VpcId:            fooInstance.ID(),
+//			// create subnet
+//			_, err = Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
 //				CidrBlock:        pulumi.String("10.0.12.0/24"),
 //				AvailabilityZone: pulumi.String(availabilityZone),
-//				RouteTableId:     fooTable.ID(),
+//				RouteTableId:     exampleTable.ID(),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = Route.NewTableEntry(ctx, "instance", &Route.TableEntryArgs{
-//				RouteTableId:         fooTable.ID(),
+//			// create route table entry
+//			exampleTableEntry, err := Route.NewTableEntry(ctx, "exampleTableEntry", &Route.TableEntryArgs{
+//				RouteTableId:         exampleTable.ID(),
 //				DestinationCidrBlock: pulumi.String("10.4.4.0/24"),
 //				NextType:             pulumi.String("EIP"),
 //				NextHub:              pulumi.String("0"),
-//				Description:          pulumi.String("ci-test-route-table-entry"),
+//				Description:          pulumi.String("describe"),
 //			})
 //			if err != nil {
 //				return err
 //			}
+//			ctx.Export("itemId", exampleTableEntry.RouteItemId)
 //			return nil
 //		})
 //	}
@@ -80,7 +85,7 @@ import (
 // Route table entry can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Route/tableEntry:TableEntry foo 83517.rtb-mlhpg09u
+// $ pulumi import tencentcloud:Route/tableEntry:TableEntry example 3065857.rtb-b050fg94
 // ```
 type TableEntry struct {
 	pulumi.CustomResourceState
@@ -95,6 +100,8 @@ type TableEntry struct {
 	NextHub pulumi.StringOutput `pulumi:"nextHub"`
 	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 	NextType pulumi.StringOutput `pulumi:"nextType"`
+	// ID of route table entry.
+	RouteItemId pulumi.StringOutput `pulumi:"routeItemId"`
 	// ID of routing table to which this entry belongs.
 	RouteTableId pulumi.StringOutput `pulumi:"routeTableId"`
 }
@@ -151,6 +158,8 @@ type tableEntryState struct {
 	NextHub *string `pulumi:"nextHub"`
 	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 	NextType *string `pulumi:"nextType"`
+	// ID of route table entry.
+	RouteItemId *string `pulumi:"routeItemId"`
 	// ID of routing table to which this entry belongs.
 	RouteTableId *string `pulumi:"routeTableId"`
 }
@@ -166,6 +175,8 @@ type TableEntryState struct {
 	NextHub pulumi.StringPtrInput
 	// Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 	NextType pulumi.StringPtrInput
+	// ID of route table entry.
+	RouteItemId pulumi.StringPtrInput
 	// ID of routing table to which this entry belongs.
 	RouteTableId pulumi.StringPtrInput
 }
@@ -315,6 +326,11 @@ func (o TableEntryOutput) NextHub() pulumi.StringOutput {
 // Type of next-hop. Valid values: `CVM`, `VPN`, `DIRECTCONNECT`, `PEERCONNECTION`, `HAVIP`, `NAT`, `NORMAL_CVM`, `EIP` and `LOCAL_GATEWAY`.
 func (o TableEntryOutput) NextType() pulumi.StringOutput {
 	return o.ApplyT(func(v *TableEntry) pulumi.StringOutput { return v.NextType }).(pulumi.StringOutput)
+}
+
+// ID of route table entry.
+func (o TableEntryOutput) RouteItemId() pulumi.StringOutput {
+	return o.ApplyT(func(v *TableEntry) pulumi.StringOutput { return v.RouteItemId }).(pulumi.StringOutput)
 }
 
 // ID of routing table to which this entry belongs.

@@ -45,6 +45,11 @@ export const getBackupDownloadInfo: typeof import("./getBackupDownloadInfo").get
 export const getBackupDownloadInfoOutput: typeof import("./getBackupDownloadInfo").getBackupDownloadInfoOutput = null as any;
 utilities.lazyLoad(exports, ["getBackupDownloadInfo","getBackupDownloadInfoOutput"], () => require("./getBackupDownloadInfo"));
 
+export { GetClustersArgs, GetClustersResult, GetClustersOutputArgs } from "./getClusters";
+export const getClusters: typeof import("./getClusters").getClusters = null as any;
+export const getClustersOutput: typeof import("./getClusters").getClustersOutput = null as any;
+utilities.lazyLoad(exports, ["getClusters","getClustersOutput"], () => require("./getClusters"));
+
 export { GetInstanceNodeInfoArgs, GetInstanceNodeInfoResult, GetInstanceNodeInfoOutputArgs } from "./getInstanceNodeInfo";
 export const getInstanceNodeInfo: typeof import("./getInstanceNodeInfo").getInstanceNodeInfo = null as any;
 export const getInstanceNodeInfoOutput: typeof import("./getInstanceNodeInfo").getInstanceNodeInfoOutput = null as any;
@@ -84,6 +89,11 @@ export { InstanceArgs, InstanceState } from "./instance";
 export type Instance = import("./instance").Instance;
 export const Instance: typeof import("./instance").Instance = null as any;
 utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { LogDeliveryArgs, LogDeliveryState } from "./logDelivery";
+export type LogDelivery = import("./logDelivery").LogDelivery;
+export const LogDelivery: typeof import("./logDelivery").LogDelivery = null as any;
+utilities.lazyLoad(exports, ["LogDelivery"], () => require("./logDelivery"));
 
 export { MaintenanceWindowArgs, MaintenanceWindowState } from "./maintenanceWindow";
 export type MaintenanceWindow = import("./maintenanceWindow").MaintenanceWindow;
@@ -174,6 +184,8 @@ const _module = {
                 return new ConnectionConfig(name, <any>undefined, { urn })
             case "tencentcloud:Redis/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/logDelivery:LogDelivery":
+                return new LogDelivery(name, <any>undefined, { urn })
             case "tencentcloud:Redis/maintenanceWindow:MaintenanceWindow":
                 return new MaintenanceWindow(name, <any>undefined, { urn })
             case "tencentcloud:Redis/param:Param":
@@ -214,6 +226,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Redis/backupOperation", _
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/clearInstanceOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/connectionConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/logDelivery", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/maintenanceWindow", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/param", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/paramTemplate", _module)

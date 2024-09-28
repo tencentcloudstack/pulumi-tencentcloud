@@ -11,29 +11,59 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Create a single domain listener rule
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const foo = new tencentcloud.clb.ListenerRule("foo", {
+ * const example = new tencentcloud.clb.ListenerRule("example", {
  *     certificateCaId: "VfqO4zkB",
  *     certificateId: "VjANRdz8",
  *     certificateSslMode: "MUTUAL",
  *     clbId: "lb-k2zjp9lv",
- *     domain: "foo.net",
+ *     domain: "example.com",
  *     healthCheckHealthNum: 3,
  *     healthCheckHttpCode: 2,
- *     healthCheckHttpDomain: "Default Domain",
+ *     healthCheckHttpDomain: "check.com",
  *     healthCheckHttpMethod: "GET",
- *     healthCheckHttpPath: "Default Path",
+ *     healthCheckHttpPath: "/",
  *     healthCheckIntervalTime: 5,
  *     healthCheckSwitch: true,
  *     healthCheckUnhealthNum: 3,
  *     listenerId: "lbl-hh141sn9",
  *     scheduler: "WRR",
  *     sessionExpireTime: 30,
- *     url: "/bar",
+ *     url: "/",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Create a listener rule for domain lists
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.clb.ListenerRule("example", {
+ *     clbId: "lb-k2zjp9lv",
+ *     domains: [
+ *         "example1.com",
+ *         "example2.com",
+ *     ],
+ *     healthCheckHealthNum: 3,
+ *     healthCheckHttpCode: 2,
+ *     healthCheckHttpDomain: "check.com",
+ *     healthCheckHttpMethod: "GET",
+ *     healthCheckHttpPath: "/",
+ *     healthCheckIntervalTime: 5,
+ *     healthCheckSwitch: true,
+ *     healthCheckUnhealthNum: 3,
+ *     listenerId: "lbl-hh141sn9",
+ *     scheduler: "WRR",
+ *     url: "/",
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -43,7 +73,7 @@ import * as utilities from "../utilities";
  * CLB listener rule can be imported using the id (version >= 1.47.0), e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule foo lb-7a0t6zqb#lbl-hh141sn9#loc-agg236ys
+ * $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule example lb-k2zjp9lv#lbl-hh141sn9#loc-agg236ys
  * ```
  */
 export class ListenerRule extends pulumi.CustomResource {
@@ -91,9 +121,13 @@ export class ListenerRule extends pulumi.CustomResource {
      */
     public readonly clbId!: pulumi.Output<string>;
     /**
-     * Domain name of the listener rule.
+     * Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
      */
     public readonly domain!: pulumi.Output<string>;
+    /**
+     * Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+     */
+    public readonly domains!: pulumi.Output<string[]>;
     /**
      * Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
      */
@@ -189,6 +223,7 @@ export class ListenerRule extends pulumi.CustomResource {
             resourceInputs["certificateSslMode"] = state ? state.certificateSslMode : undefined;
             resourceInputs["clbId"] = state ? state.clbId : undefined;
             resourceInputs["domain"] = state ? state.domain : undefined;
+            resourceInputs["domains"] = state ? state.domains : undefined;
             resourceInputs["forwardType"] = state ? state.forwardType : undefined;
             resourceInputs["healthCheckHealthNum"] = state ? state.healthCheckHealthNum : undefined;
             resourceInputs["healthCheckHttpCode"] = state ? state.healthCheckHttpCode : undefined;
@@ -213,9 +248,6 @@ export class ListenerRule extends pulumi.CustomResource {
             if ((!args || args.clbId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'clbId'");
             }
-            if ((!args || args.domain === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'domain'");
-            }
             if ((!args || args.listenerId === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'listenerId'");
             }
@@ -227,6 +259,7 @@ export class ListenerRule extends pulumi.CustomResource {
             resourceInputs["certificateSslMode"] = args ? args.certificateSslMode : undefined;
             resourceInputs["clbId"] = args ? args.clbId : undefined;
             resourceInputs["domain"] = args ? args.domain : undefined;
+            resourceInputs["domains"] = args ? args.domains : undefined;
             resourceInputs["forwardType"] = args ? args.forwardType : undefined;
             resourceInputs["healthCheckHealthNum"] = args ? args.healthCheckHealthNum : undefined;
             resourceInputs["healthCheckHttpCode"] = args ? args.healthCheckHttpCode : undefined;
@@ -273,9 +306,13 @@ export interface ListenerRuleState {
      */
     clbId?: pulumi.Input<string>;
     /**
-     * Domain name of the listener rule.
+     * Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
      */
     domain?: pulumi.Input<string>;
+    /**
+     * Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+     */
+    domains?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
      */
@@ -375,9 +412,13 @@ export interface ListenerRuleArgs {
      */
     clbId: pulumi.Input<string>;
     /**
-     * Domain name of the listener rule.
+     * Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
      */
-    domain: pulumi.Input<string>;
+    domain?: pulumi.Input<string>;
+    /**
+     * Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+     */
+    domains?: pulumi.Input<pulumi.Input<string>[]>;
     /**
      * Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
      */

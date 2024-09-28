@@ -1731,7 +1731,7 @@ class NodePool(pulumi.CustomResource):
 
     @property
     @pulumi.getter
-    def tags(self) -> pulumi.Output[Optional[Mapping[str, Any]]]:
+    def tags(self) -> pulumi.Output[Mapping[str, Any]]:
         """
         Node pool tag specifications, will passthroughs to the scaling instances.
         """

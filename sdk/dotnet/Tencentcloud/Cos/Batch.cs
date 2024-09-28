@@ -13,6 +13,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos
     /// <summary>
     /// Provides a resource to create a cos bucket batch.
     /// 
+    /// &gt; **NOTE:** The current resource does not support `cos_domain`.
+    /// 
     /// ## Example Usage
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;

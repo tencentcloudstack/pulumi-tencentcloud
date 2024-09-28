@@ -58,6 +58,8 @@ type EndPointService struct {
 
 	// Whether to automatically accept.
 	AutoAcceptFlag pulumi.BoolOutput `pulumi:"autoAcceptFlag"`
+	// CDC instance ID.
+	CdcId pulumi.StringOutput `pulumi:"cdcId"`
 	// Create Time.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Count of end point.
@@ -120,6 +122,8 @@ func GetEndPointService(ctx *pulumi.Context,
 type endPointServiceState struct {
 	// Whether to automatically accept.
 	AutoAcceptFlag *bool `pulumi:"autoAcceptFlag"`
+	// CDC instance ID.
+	CdcId *string `pulumi:"cdcId"`
 	// Create Time.
 	CreateTime *string `pulumi:"createTime"`
 	// Count of end point.
@@ -141,6 +145,8 @@ type endPointServiceState struct {
 type EndPointServiceState struct {
 	// Whether to automatically accept.
 	AutoAcceptFlag pulumi.BoolPtrInput
+	// CDC instance ID.
+	CdcId pulumi.StringPtrInput
 	// Create Time.
 	CreateTime pulumi.StringPtrInput
 	// Count of end point.
@@ -280,6 +286,11 @@ func (o EndPointServiceOutput) ToEndPointServiceOutputWithContext(ctx context.Co
 // Whether to automatically accept.
 func (o EndPointServiceOutput) AutoAcceptFlag() pulumi.BoolOutput {
 	return o.ApplyT(func(v *EndPointService) pulumi.BoolOutput { return v.AutoAcceptFlag }).(pulumi.BoolOutput)
+}
+
+// CDC instance ID.
+func (o EndPointServiceOutput) CdcId() pulumi.StringOutput {
+	return o.ApplyT(func(v *EndPointService) pulumi.StringOutput { return v.CdcId }).(pulumi.StringOutput)
 }
 
 // Create Time.

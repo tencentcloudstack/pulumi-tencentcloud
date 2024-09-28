@@ -602,11 +602,13 @@ class GetCertificatesCertificateResult(dict):
                  key: str,
                  name: str,
                  order_id: str,
+                 owner_uin: str,
                  product_zh_name: str,
                  project_id: int,
                  status: int,
                  subject_names: Sequence[str],
-                 type: str):
+                 type: str,
+                 validity_period: str):
         """
         :param str begin_time: Beginning time of the SSL certificate.
         :param str cert: Content of the SSL certificate.
@@ -618,11 +620,13 @@ class GetCertificatesCertificateResult(dict):
         :param str key: Key of the SSL certificate.
         :param str name: Name of the SSL certificate to be queried.
         :param str order_id: Order ID returned.
+        :param str owner_uin: Account UIN.Note: This field may return NULL, indicating that the valid value cannot be obtained.
         :param str product_zh_name: Certificate authority.
         :param int project_id: Project ID of the SSL certificate.
         :param int status: Status of the SSL certificate.
         :param Sequence[str] subject_names: ALL domains included in the SSL certificate. Including the primary domain name.
         :param str type: Type of the SSL certificate to be queried. Available values includes: `CA` and `SVR`.
+        :param str validity_period: Validity period: unit (month).Note: This field may return NULL, indicating that the valid value cannot be obtained.
         """
         pulumi.set(__self__, "begin_time", begin_time)
         pulumi.set(__self__, "cert", cert)
@@ -634,11 +638,13 @@ class GetCertificatesCertificateResult(dict):
         pulumi.set(__self__, "key", key)
         pulumi.set(__self__, "name", name)
         pulumi.set(__self__, "order_id", order_id)
+        pulumi.set(__self__, "owner_uin", owner_uin)
         pulumi.set(__self__, "product_zh_name", product_zh_name)
         pulumi.set(__self__, "project_id", project_id)
         pulumi.set(__self__, "status", status)
         pulumi.set(__self__, "subject_names", subject_names)
         pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "validity_period", validity_period)
 
     @property
     @pulumi.getter(name="beginTime")
@@ -721,6 +727,14 @@ class GetCertificatesCertificateResult(dict):
         return pulumi.get(self, "order_id")
 
     @property
+    @pulumi.getter(name="ownerUin")
+    def owner_uin(self) -> str:
+        """
+        Account UIN.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "owner_uin")
+
+    @property
     @pulumi.getter(name="productZhName")
     def product_zh_name(self) -> str:
         """
@@ -759,6 +773,14 @@ class GetCertificatesCertificateResult(dict):
         Type of the SSL certificate to be queried. Available values includes: `CA` and `SVR`.
         """
         return pulumi.get(self, "type")
+
+    @property
+    @pulumi.getter(name="validityPeriod")
+    def validity_period(self) -> str:
+        """
+        Validity period: unit (month).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        """
+        return pulumi.get(self, "validity_period")
 
 
 @pulumi.output_type

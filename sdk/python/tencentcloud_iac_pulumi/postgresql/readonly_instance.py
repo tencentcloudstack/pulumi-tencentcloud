@@ -26,6 +26,7 @@ class ReadonlyInstanceArgs:
                  auto_renew_flag: Optional[pulumi.Input[int]] = None,
                  auto_voucher: Optional[pulumi.Input[int]] = None,
                  cpu: Optional[pulumi.Input[int]] = None,
+                 dedicated_cluster_id: Optional[pulumi.Input[str]] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
                  name: Optional[pulumi.Input[str]] = None,
                  need_support_ipv6: Optional[pulumi.Input[int]] = None,
@@ -46,6 +47,7 @@ class ReadonlyInstanceArgs:
         :param pulumi.Input[int] auto_renew_flag: Auto renew flag, `1` for enabled. NOTES: Only support prepaid instance.
         :param pulumi.Input[int] auto_voucher: Whether to use voucher, `1` for enabled.
         :param pulumi.Input[int] cpu: Number of CPU cores. Allowed value must be equal `cpu` that data source `postgresql_get_specinfos` provides.
+        :param pulumi.Input[str] dedicated_cluster_id: Dedicated cluster ID.
         :param pulumi.Input[str] instance_charge_type: instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
         :param pulumi.Input[str] name: Instance name.
         :param pulumi.Input[int] need_support_ipv6: Whether to support IPv6 address access. Valid values: 1 (yes), 0 (no).
@@ -68,6 +70,8 @@ class ReadonlyInstanceArgs:
             pulumi.set(__self__, "auto_voucher", auto_voucher)
         if cpu is not None:
             pulumi.set(__self__, "cpu", cpu)
+        if dedicated_cluster_id is not None:
+            pulumi.set(__self__, "dedicated_cluster_id", dedicated_cluster_id)
         if instance_charge_type is not None:
             pulumi.set(__self__, "instance_charge_type", instance_charge_type)
         if name is not None:
@@ -226,6 +230,18 @@ class ReadonlyInstanceArgs:
         pulumi.set(self, "cpu", value)
 
     @property
+    @pulumi.getter(name="dedicatedClusterId")
+    def dedicated_cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Dedicated cluster ID.
+        """
+        return pulumi.get(self, "dedicated_cluster_id")
+
+    @dedicated_cluster_id.setter
+    def dedicated_cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dedicated_cluster_id", value)
+
+    @property
     @pulumi.getter(name="instanceChargeType")
     def instance_charge_type(self) -> Optional[pulumi.Input[str]]:
         """
@@ -306,6 +322,7 @@ class _ReadonlyInstanceState:
                  cpu: Optional[pulumi.Input[int]] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
                  db_version: Optional[pulumi.Input[str]] = None,
+                 dedicated_cluster_id: Optional[pulumi.Input[str]] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
                  instance_id: Optional[pulumi.Input[str]] = None,
                  master_db_instance_id: Optional[pulumi.Input[str]] = None,
@@ -330,6 +347,7 @@ class _ReadonlyInstanceState:
         :param pulumi.Input[int] cpu: Number of CPU cores. Allowed value must be equal `cpu` that data source `postgresql_get_specinfos` provides.
         :param pulumi.Input[str] create_time: Create time of the postgresql instance.
         :param pulumi.Input[str] db_version: PostgreSQL kernel version, which must be the same as that of the primary instance.
+        :param pulumi.Input[str] dedicated_cluster_id: Dedicated cluster ID.
         :param pulumi.Input[str] instance_charge_type: instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
         :param pulumi.Input[str] instance_id: The instance ID of this readonly resource.
         :param pulumi.Input[str] master_db_instance_id: ID of the primary instance to which the read-only replica belongs.
@@ -358,6 +376,8 @@ class _ReadonlyInstanceState:
             pulumi.set(__self__, "create_time", create_time)
         if db_version is not None:
             pulumi.set(__self__, "db_version", db_version)
+        if dedicated_cluster_id is not None:
+            pulumi.set(__self__, "dedicated_cluster_id", dedicated_cluster_id)
         if instance_charge_type is not None:
             pulumi.set(__self__, "instance_charge_type", instance_charge_type)
         if instance_id is not None:
@@ -452,6 +472,18 @@ class _ReadonlyInstanceState:
     @db_version.setter
     def db_version(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "db_version", value)
+
+    @property
+    @pulumi.getter(name="dedicatedClusterId")
+    def dedicated_cluster_id(self) -> Optional[pulumi.Input[str]]:
+        """
+        Dedicated cluster ID.
+        """
+        return pulumi.get(self, "dedicated_cluster_id")
+
+    @dedicated_cluster_id.setter
+    def dedicated_cluster_id(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "dedicated_cluster_id", value)
 
     @property
     @pulumi.getter(name="instanceChargeType")
@@ -667,6 +699,7 @@ class ReadonlyInstance(pulumi.CustomResource):
                  auto_voucher: Optional[pulumi.Input[int]] = None,
                  cpu: Optional[pulumi.Input[int]] = None,
                  db_version: Optional[pulumi.Input[str]] = None,
+                 dedicated_cluster_id: Optional[pulumi.Input[str]] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
                  master_db_instance_id: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
@@ -686,6 +719,8 @@ class ReadonlyInstance(pulumi.CustomResource):
         Use this resource to create postgresql readonly instance.
 
         ## Example Usage
+
+        ### Create postgresql readonly instance
 
         <!--Start PulumiCodeChooser -->
         ```python
@@ -710,7 +745,7 @@ class ReadonlyInstance(pulumi.CustomResource):
             charge_type="POSTPAID_BY_HOUR",
             vpc_id=vpc.id,
             subnet_id=subnet.id,
-            engine_version="10.4",
+            db_major_version="10",
             root_user="root123",
             root_password="Root123$",
             charset="UTF8",
@@ -721,6 +756,7 @@ class ReadonlyInstance(pulumi.CustomResource):
             tags={
                 "test": "tf",
             })
+        # create postgresql readonly group
         example_readonly_group = tencentcloud.postgresql.ReadonlyGroup("exampleReadonlyGroup",
             master_db_instance_id=example_instance.id,
             project_id=0,
@@ -738,12 +774,13 @@ class ReadonlyInstance(pulumi.CustomResource):
             tags={
                 "example": "test",
             })
+        # create postgresql readonly instance
         example_readonly_instance = tencentcloud.postgresql.ReadonlyInstance("exampleReadonlyInstance",
             read_only_group_id=example_readonly_group.id,
             master_db_instance_id=example_instance.id,
             zone=availability_zone,
             auto_renew_flag=0,
-            db_version="10.4",
+            db_version="10.23",
             instance_charge_type="POSTPAID_BY_HOUR",
             memory=4,
             cpu=2,
@@ -756,12 +793,97 @@ class ReadonlyInstance(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
+        ### Create postgresql readonly instance of CDC
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create postgresql
+        example_instance = tencentcloud.postgresql.Instance("exampleInstance",
+            availability_zone=availability_zone,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            db_major_version="10",
+            root_user="root123",
+            root_password="Root123$",
+            charset="UTF8",
+            project_id=0,
+            memory=2,
+            cpu=1,
+            storage=10,
+            db_node_sets=[
+                tencentcloud.postgresql.InstanceDbNodeSetArgs(
+                    role="Primary",
+                    zone=availability_zone,
+                    dedicated_cluster_id="cluster-262n63e8",
+                ),
+                tencentcloud.postgresql.InstanceDbNodeSetArgs(
+                    zone=availability_zone,
+                    dedicated_cluster_id="cluster-262n63e8",
+                ),
+            ],
+            tags={
+                "CreateBy": "terraform",
+            })
+        # create postgresql readonly group
+        example_readonly_group = tencentcloud.postgresql.ReadonlyGroup("exampleReadonlyGroup",
+            master_db_instance_id=example_instance.id,
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            replay_lag_eliminate=1,
+            replay_latency_eliminate=1,
+            max_replay_lag=100,
+            max_replay_latency=512,
+            min_delay_eliminate_reserve=1)
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "CreateBy": "terraform",
+            })
+        # create postgresql readonly instance
+        example_readonly_instance = tencentcloud.postgresql.ReadonlyInstance("exampleReadonlyInstance",
+            read_only_group_id=example_readonly_group.id,
+            master_db_instance_id=example_instance.id,
+            zone=availability_zone,
+            auto_renew_flag=0,
+            db_version="10.23",
+            instance_charge_type="POSTPAID_BY_HOUR",
+            memory=4,
+            cpu=2,
+            storage=250,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            need_support_ipv6=0,
+            project_id=0,
+            dedicated_cluster_id="cluster-262n63e8",
+            security_groups_ids=[example_group.id])
+        ```
+        <!--End PulumiCodeChooser -->
+
         ## Import
 
         postgresql readonly instance can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance example instance_id
+        $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance example pgro-gih5m0ke
         ```
 
         :param str resource_name: The name of the resource.
@@ -770,6 +892,7 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[int] auto_voucher: Whether to use voucher, `1` for enabled.
         :param pulumi.Input[int] cpu: Number of CPU cores. Allowed value must be equal `cpu` that data source `postgresql_get_specinfos` provides.
         :param pulumi.Input[str] db_version: PostgreSQL kernel version, which must be the same as that of the primary instance.
+        :param pulumi.Input[str] dedicated_cluster_id: Dedicated cluster ID.
         :param pulumi.Input[str] instance_charge_type: instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
         :param pulumi.Input[str] master_db_instance_id: ID of the primary instance to which the read-only replica belongs.
         :param pulumi.Input[int] memory: Memory size(in GB). Allowed value must be larger than `memory` that data source `postgresql_get_specinfos` provides.
@@ -796,6 +919,8 @@ class ReadonlyInstance(pulumi.CustomResource):
 
         ## Example Usage
 
+        ### Create postgresql readonly instance
+
         <!--Start PulumiCodeChooser -->
         ```python
         import pulumi
@@ -819,7 +944,7 @@ class ReadonlyInstance(pulumi.CustomResource):
             charge_type="POSTPAID_BY_HOUR",
             vpc_id=vpc.id,
             subnet_id=subnet.id,
-            engine_version="10.4",
+            db_major_version="10",
             root_user="root123",
             root_password="Root123$",
             charset="UTF8",
@@ -830,6 +955,7 @@ class ReadonlyInstance(pulumi.CustomResource):
             tags={
                 "test": "tf",
             })
+        # create postgresql readonly group
         example_readonly_group = tencentcloud.postgresql.ReadonlyGroup("exampleReadonlyGroup",
             master_db_instance_id=example_instance.id,
             project_id=0,
@@ -847,12 +973,13 @@ class ReadonlyInstance(pulumi.CustomResource):
             tags={
                 "example": "test",
             })
+        # create postgresql readonly instance
         example_readonly_instance = tencentcloud.postgresql.ReadonlyInstance("exampleReadonlyInstance",
             read_only_group_id=example_readonly_group.id,
             master_db_instance_id=example_instance.id,
             zone=availability_zone,
             auto_renew_flag=0,
-            db_version="10.4",
+            db_version="10.23",
             instance_charge_type="POSTPAID_BY_HOUR",
             memory=4,
             cpu=2,
@@ -865,12 +992,97 @@ class ReadonlyInstance(pulumi.CustomResource):
         ```
         <!--End PulumiCodeChooser -->
 
+        ### Create postgresql readonly instance of CDC
+
+        <!--Start PulumiCodeChooser -->
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        # create vpc
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create vpc subnet
+        subnet = tencentcloud.subnet.Instance("subnet",
+            availability_zone=availability_zone,
+            vpc_id=vpc.id,
+            cidr_block="10.0.20.0/28",
+            is_multicast=False)
+        # create postgresql
+        example_instance = tencentcloud.postgresql.Instance("exampleInstance",
+            availability_zone=availability_zone,
+            charge_type="POSTPAID_BY_HOUR",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            db_major_version="10",
+            root_user="root123",
+            root_password="Root123$",
+            charset="UTF8",
+            project_id=0,
+            memory=2,
+            cpu=1,
+            storage=10,
+            db_node_sets=[
+                tencentcloud.postgresql.InstanceDbNodeSetArgs(
+                    role="Primary",
+                    zone=availability_zone,
+                    dedicated_cluster_id="cluster-262n63e8",
+                ),
+                tencentcloud.postgresql.InstanceDbNodeSetArgs(
+                    zone=availability_zone,
+                    dedicated_cluster_id="cluster-262n63e8",
+                ),
+            ],
+            tags={
+                "CreateBy": "terraform",
+            })
+        # create postgresql readonly group
+        example_readonly_group = tencentcloud.postgresql.ReadonlyGroup("exampleReadonlyGroup",
+            master_db_instance_id=example_instance.id,
+            project_id=0,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            replay_lag_eliminate=1,
+            replay_latency_eliminate=1,
+            max_replay_lag=100,
+            max_replay_latency=512,
+            min_delay_eliminate_reserve=1)
+        # create security group
+        example_group = tencentcloud.security.Group("exampleGroup",
+            description="sg desc.",
+            project_id=0,
+            tags={
+                "CreateBy": "terraform",
+            })
+        # create postgresql readonly instance
+        example_readonly_instance = tencentcloud.postgresql.ReadonlyInstance("exampleReadonlyInstance",
+            read_only_group_id=example_readonly_group.id,
+            master_db_instance_id=example_instance.id,
+            zone=availability_zone,
+            auto_renew_flag=0,
+            db_version="10.23",
+            instance_charge_type="POSTPAID_BY_HOUR",
+            memory=4,
+            cpu=2,
+            storage=250,
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            need_support_ipv6=0,
+            project_id=0,
+            dedicated_cluster_id="cluster-262n63e8",
+            security_groups_ids=[example_group.id])
+        ```
+        <!--End PulumiCodeChooser -->
+
         ## Import
 
         postgresql readonly instance can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance example instance_id
+        $ pulumi import tencentcloud:Postgresql/readonlyInstance:ReadonlyInstance example pgro-gih5m0ke
         ```
 
         :param str resource_name: The name of the resource.
@@ -892,6 +1104,7 @@ class ReadonlyInstance(pulumi.CustomResource):
                  auto_voucher: Optional[pulumi.Input[int]] = None,
                  cpu: Optional[pulumi.Input[int]] = None,
                  db_version: Optional[pulumi.Input[str]] = None,
+                 dedicated_cluster_id: Optional[pulumi.Input[str]] = None,
                  instance_charge_type: Optional[pulumi.Input[str]] = None,
                  master_db_instance_id: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
@@ -921,6 +1134,7 @@ class ReadonlyInstance(pulumi.CustomResource):
             if db_version is None and not opts.urn:
                 raise TypeError("Missing required property 'db_version'")
             __props__.__dict__["db_version"] = db_version
+            __props__.__dict__["dedicated_cluster_id"] = dedicated_cluster_id
             __props__.__dict__["instance_charge_type"] = instance_charge_type
             if master_db_instance_id is None and not opts.urn:
                 raise TypeError("Missing required property 'master_db_instance_id'")
@@ -970,6 +1184,7 @@ class ReadonlyInstance(pulumi.CustomResource):
             cpu: Optional[pulumi.Input[int]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
             db_version: Optional[pulumi.Input[str]] = None,
+            dedicated_cluster_id: Optional[pulumi.Input[str]] = None,
             instance_charge_type: Optional[pulumi.Input[str]] = None,
             instance_id: Optional[pulumi.Input[str]] = None,
             master_db_instance_id: Optional[pulumi.Input[str]] = None,
@@ -999,6 +1214,7 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[int] cpu: Number of CPU cores. Allowed value must be equal `cpu` that data source `postgresql_get_specinfos` provides.
         :param pulumi.Input[str] create_time: Create time of the postgresql instance.
         :param pulumi.Input[str] db_version: PostgreSQL kernel version, which must be the same as that of the primary instance.
+        :param pulumi.Input[str] dedicated_cluster_id: Dedicated cluster ID.
         :param pulumi.Input[str] instance_charge_type: instance billing mode. Valid values: PREPAID (monthly subscription), POSTPAID_BY_HOUR (pay-as-you-go).
         :param pulumi.Input[str] instance_id: The instance ID of this readonly resource.
         :param pulumi.Input[str] master_db_instance_id: ID of the primary instance to which the read-only replica belongs.
@@ -1026,6 +1242,7 @@ class ReadonlyInstance(pulumi.CustomResource):
         __props__.__dict__["cpu"] = cpu
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["db_version"] = db_version
+        __props__.__dict__["dedicated_cluster_id"] = dedicated_cluster_id
         __props__.__dict__["instance_charge_type"] = instance_charge_type
         __props__.__dict__["instance_id"] = instance_id
         __props__.__dict__["master_db_instance_id"] = master_db_instance_id
@@ -1084,6 +1301,14 @@ class ReadonlyInstance(pulumi.CustomResource):
         PostgreSQL kernel version, which must be the same as that of the primary instance.
         """
         return pulumi.get(self, "db_version")
+
+    @property
+    @pulumi.getter(name="dedicatedClusterId")
+    def dedicated_cluster_id(self) -> pulumi.Output[Optional[str]]:
+        """
+        Dedicated cluster ID.
+        """
+        return pulumi.get(self, "dedicated_cluster_id")
 
     @property
     @pulumi.getter(name="instanceChargeType")

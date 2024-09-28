@@ -54,6 +54,12 @@ __all__ = [
     'KafkaRechargeProtocol',
     'MachineGroupMachineGroupType',
     'ScheduledSqlDstResource',
+    'TopicExtends',
+    'TopicExtendsAnonymousAccess',
+    'TopicExtendsAnonymousAccessCondition',
+    'GetLogsetsFilterResult',
+    'GetLogsetsLogsetResult',
+    'GetLogsetsLogsetTagResult',
     'GetMachineGroupConfigsConfigResult',
     'GetMachineGroupConfigsConfigExcludePathResult',
     'GetMachineGroupConfigsConfigExtractRuleResult',
@@ -2245,8 +2251,8 @@ class DataTransformDstResource(dict):
                  alias: str,
                  topic_id: str):
         """
-        :param str alias: alias.
-        :param str topic_id: dst topic id.
+        :param str alias: Alias.
+        :param str topic_id: Dst topic ID.
         """
         pulumi.set(__self__, "alias", alias)
         pulumi.set(__self__, "topic_id", topic_id)
@@ -2255,7 +2261,7 @@ class DataTransformDstResource(dict):
     @pulumi.getter
     def alias(self) -> str:
         """
-        alias.
+        Alias.
         """
         return pulumi.get(self, "alias")
 
@@ -2263,7 +2269,7 @@ class DataTransformDstResource(dict):
     @pulumi.getter(name="topicId")
     def topic_id(self) -> str:
         """
-        dst topic id.
+        Dst topic ID.
         """
         return pulumi.get(self, "topic_id")
 
@@ -3110,6 +3116,275 @@ class ScheduledSqlDstResource(dict):
         topic region.
         """
         return pulumi.get(self, "region")
+
+
+@pulumi.output_type
+class TopicExtends(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "anonymousAccess":
+            suggest = "anonymous_access"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TopicExtends. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TopicExtends.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TopicExtends.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 anonymous_access: Optional['outputs.TopicExtendsAnonymousAccess'] = None):
+        """
+        :param 'TopicExtendsAnonymousAccessArgs' anonymous_access: Log topic authentication free configuration information.
+        """
+        if anonymous_access is not None:
+            pulumi.set(__self__, "anonymous_access", anonymous_access)
+
+    @property
+    @pulumi.getter(name="anonymousAccess")
+    def anonymous_access(self) -> Optional['outputs.TopicExtendsAnonymousAccess']:
+        """
+        Log topic authentication free configuration information.
+        """
+        return pulumi.get(self, "anonymous_access")
+
+
+@pulumi.output_type
+class TopicExtendsAnonymousAccess(dict):
+    def __init__(__self__, *,
+                 conditions: Optional[Sequence['outputs.TopicExtendsAnonymousAccessCondition']] = None,
+                 operations: Optional[Sequence[str]] = None):
+        """
+        :param Sequence['TopicExtendsAnonymousAccessConditionArgs'] conditions: Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+        :param Sequence[str] operations: Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+        """
+        if conditions is not None:
+            pulumi.set(__self__, "conditions", conditions)
+        if operations is not None:
+            pulumi.set(__self__, "operations", operations)
+
+    @property
+    @pulumi.getter
+    def conditions(self) -> Optional[Sequence['outputs.TopicExtendsAnonymousAccessCondition']]:
+        """
+        Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+        """
+        return pulumi.get(self, "conditions")
+
+    @property
+    @pulumi.getter
+    def operations(self) -> Optional[Sequence[str]]:
+        """
+        Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+        """
+        return pulumi.get(self, "operations")
+
+
+@pulumi.output_type
+class TopicExtendsAnonymousAccessCondition(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "conditionValue":
+            suggest = "condition_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in TopicExtendsAnonymousAccessCondition. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        TopicExtendsAnonymousAccessCondition.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        TopicExtendsAnonymousAccessCondition.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 attributes: Optional[str] = None,
+                 condition_value: Optional[str] = None,
+                 rule: Optional[int] = None):
+        """
+        :param str attributes: Condition attribute, currently only VpcID is supported.
+        :param str condition_value: The value of the corresponding conditional attribute.
+        :param int rule: Conditional rule, 1: equal, 2: not equal.
+        """
+        if attributes is not None:
+            pulumi.set(__self__, "attributes", attributes)
+        if condition_value is not None:
+            pulumi.set(__self__, "condition_value", condition_value)
+        if rule is not None:
+            pulumi.set(__self__, "rule", rule)
+
+    @property
+    @pulumi.getter
+    def attributes(self) -> Optional[str]:
+        """
+        Condition attribute, currently only VpcID is supported.
+        """
+        return pulumi.get(self, "attributes")
+
+    @property
+    @pulumi.getter(name="conditionValue")
+    def condition_value(self) -> Optional[str]:
+        """
+        The value of the corresponding conditional attribute.
+        """
+        return pulumi.get(self, "condition_value")
+
+    @property
+    @pulumi.getter
+    def rule(self) -> Optional[int]:
+        """
+        Conditional rule, 1: equal, 2: not equal.
+        """
+        return pulumi.get(self, "rule")
+
+
+@pulumi.output_type
+class GetLogsetsFilterResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 values: Sequence[str]):
+        """
+        :param str key: Fields that need to be filtered. Support: `logsetName`, `logsetId`, `tagKey`, `tag:tagKey`.
+        :param Sequence[str] values: The values that need to be filtered.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Fields that need to be filtered. Support: `logsetName`, `logsetId`, `tagKey`, `tag:tagKey`.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        The values that need to be filtered.
+        """
+        return pulumi.get(self, "values")
+
+
+@pulumi.output_type
+class GetLogsetsLogsetResult(dict):
+    def __init__(__self__, *,
+                 assumer_name: str,
+                 create_time: str,
+                 logset_id: str,
+                 logset_name: str,
+                 role_name: str,
+                 tags: Sequence['outputs.GetLogsetsLogsetTagResult'],
+                 topic_count: int):
+        """
+        :param str assumer_name: Cloud product identification, when the log set is created by another cloud product, this field will display the cloud product name, such as CDN, TKE.
+        :param str create_time: Create time.
+        :param str logset_id: Logset Id.
+        :param str logset_name: Logset name.
+        :param str role_name: If `assumer_name` is not empty, it indicates the service role that created the log set.
+        :param Sequence['GetLogsetsLogsetTagArgs'] tags: Tags.
+        :param int topic_count: Topic count.
+        """
+        pulumi.set(__self__, "assumer_name", assumer_name)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "logset_id", logset_id)
+        pulumi.set(__self__, "logset_name", logset_name)
+        pulumi.set(__self__, "role_name", role_name)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "topic_count", topic_count)
+
+    @property
+    @pulumi.getter(name="assumerName")
+    def assumer_name(self) -> str:
+        """
+        Cloud product identification, when the log set is created by another cloud product, this field will display the cloud product name, such as CDN, TKE.
+        """
+        return pulumi.get(self, "assumer_name")
+
+    @property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> str:
+        """
+        Create time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @property
+    @pulumi.getter(name="logsetId")
+    def logset_id(self) -> str:
+        """
+        Logset Id.
+        """
+        return pulumi.get(self, "logset_id")
+
+    @property
+    @pulumi.getter(name="logsetName")
+    def logset_name(self) -> str:
+        """
+        Logset name.
+        """
+        return pulumi.get(self, "logset_name")
+
+    @property
+    @pulumi.getter(name="roleName")
+    def role_name(self) -> str:
+        """
+        If `assumer_name` is not empty, it indicates the service role that created the log set.
+        """
+        return pulumi.get(self, "role_name")
+
+    @property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.GetLogsetsLogsetTagResult']:
+        """
+        Tags.
+        """
+        return pulumi.get(self, "tags")
+
+    @property
+    @pulumi.getter(name="topicCount")
+    def topic_count(self) -> int:
+        """
+        Topic count.
+        """
+        return pulumi.get(self, "topic_count")
+
+
+@pulumi.output_type
+class GetLogsetsLogsetTagResult(dict):
+    def __init__(__self__, *,
+                 key: str,
+                 value: str):
+        """
+        :param str key: Fields that need to be filtered. Support: `logsetName`, `logsetId`, `tagKey`, `tag:tagKey`.
+        :param str value: Tag value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @property
+    @pulumi.getter
+    def key(self) -> str:
+        """
+        Fields that need to be filtered. Support: `logsetName`, `logsetId`, `tagKey`, `tag:tagKey`.
+        """
+        return pulumi.get(self, "key")
+
+    @property
+    @pulumi.getter
+    def value(self) -> str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "value")
 
 
 @pulumi.output_type

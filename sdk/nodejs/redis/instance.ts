@@ -32,10 +32,10 @@ import * as utilities from "../utilities";
  *     availabilityZone: zone.then(zone => zone.lists?.[0]?.zone),
  *     cidrBlock: "10.0.1.0/24",
  * });
- * const foo = new tencentcloud.redis.Instance("foo", {
+ * const example = new tencentcloud.redis.Instance("example", {
  *     availabilityZone: zone.then(zone => zone.lists?.[0]?.zone),
  *     typeId: zone.then(zone => zone.lists?.[0]?.typeId),
- *     password: "test12345789",
+ *     password: "Password@123",
  *     memSize: 8192,
  *     redisShardNum: zone.then(zone => zone.lists?.[0]?.redisShardNums?.[0]),
  *     redisReplicasNum: zone.then(zone => zone.lists?.[0]?.redisReplicasNums?.[0]),
@@ -46,12 +46,49 @@ import * as utilities from "../utilities";
  * ```
  * <!--End PulumiCodeChooser -->
  *
+ * ### Create a CDC scenario instance
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@pulumi/tencentcloud";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const cdcId = config.get("cdcId") || "cluster-xxxx";
+ * const clusters = tencentcloud.Redis.getClusters({
+ *     dedicatedClusterId: cdcId,
+ * });
+ * export const name = clusters.then(clusters => clusters.resources?.[0]?.redisClusterId);
+ * const zone = tencentcloud.Redis.getZoneConfig({
+ *     typeId: 7,
+ *     region: "ap-guangzhou",
+ * });
+ * const subnets = tencentcloud.Vpc.getSubnets({
+ *     cdcId: cdcId,
+ * });
+ * const example = new tencentcloud.redis.Instance("example", {
+ *     availabilityZone: zone.then(zone => zone.lists?.[0]?.zone),
+ *     typeId: zone.then(zone => zone.lists?.[0]?.typeId),
+ *     password: "Password@123",
+ *     memSize: 8192,
+ *     redisShardNum: zone.then(zone => zone.lists?.[0]?.redisShardNums?.[0]),
+ *     redisReplicasNum: zone.then(zone => zone.lists?.[0]?.redisReplicasNums?.[0]),
+ *     port: 6379,
+ *     vpcId: subnets.then(subnets => subnets.instanceLists?.[0]?.vpcId),
+ *     subnetId: subnets.then(subnets => subnets.instanceLists?.[0]?.subnetId),
+ *     productVersion: "cdc",
+ *     redisClusterId: clusters.then(clusters => clusters.resources?.[0]?.redisClusterId),
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ## Import
  *
  * Redis instance can be imported, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Redis/instance:Instance redislab redis-id
+ * $ pulumi import tencentcloud:Redis/instance:Instance example crs-iu22tdrf
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -99,6 +136,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public /*out*/ readonly createTime!: pulumi.Output<string>;
     /**
+     * Dedicated Cluster ID.
+     */
+    public /*out*/ readonly dedicatedClusterId!: pulumi.Output<string>;
+    /**
      * Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
      */
     public readonly forceDelete!: pulumi.Output<boolean | undefined>;
@@ -143,6 +184,10 @@ export class Instance extends pulumi.CustomResource {
      */
     public readonly prepaidPeriod!: pulumi.Output<number | undefined>;
     /**
+     * Specify the product version of the instance. `local`: Local disk version, `cloud`: Cloud disk version, `cdc`: Exclusive cluster version. Default is `local`.
+     */
+    public readonly productVersion!: pulumi.Output<string>;
+    /**
      * Specifies which project the instance should belong to.
      */
     public readonly projectId!: pulumi.Output<number | undefined>;
@@ -150,6 +195,10 @@ export class Instance extends pulumi.CustomResource {
      * Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
      */
     public readonly recycle!: pulumi.Output<number | undefined>;
+    /**
+     * Exclusive cluster ID. When the `productVersion` is set to `cdc`, this parameter must be set.
+     */
+    public readonly redisClusterId!: pulumi.Output<string>;
     /**
      * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
      */
@@ -218,6 +267,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["availabilityZone"] = state ? state.availabilityZone : undefined;
             resourceInputs["chargeType"] = state ? state.chargeType : undefined;
             resourceInputs["createTime"] = state ? state.createTime : undefined;
+            resourceInputs["dedicatedClusterId"] = state ? state.dedicatedClusterId : undefined;
             resourceInputs["forceDelete"] = state ? state.forceDelete : undefined;
             resourceInputs["ip"] = state ? state.ip : undefined;
             resourceInputs["memSize"] = state ? state.memSize : undefined;
@@ -229,8 +279,10 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
             resourceInputs["prepaidPeriod"] = state ? state.prepaidPeriod : undefined;
+            resourceInputs["productVersion"] = state ? state.productVersion : undefined;
             resourceInputs["projectId"] = state ? state.projectId : undefined;
             resourceInputs["recycle"] = state ? state.recycle : undefined;
+            resourceInputs["redisClusterId"] = state ? state.redisClusterId : undefined;
             resourceInputs["redisReplicasNum"] = state ? state.redisReplicasNum : undefined;
             resourceInputs["redisShardNum"] = state ? state.redisShardNum : undefined;
             resourceInputs["replicaZoneIds"] = state ? state.replicaZoneIds : undefined;
@@ -264,8 +316,10 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["prepaidPeriod"] = args ? args.prepaidPeriod : undefined;
+            resourceInputs["productVersion"] = args ? args.productVersion : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["recycle"] = args ? args.recycle : undefined;
+            resourceInputs["redisClusterId"] = args ? args.redisClusterId : undefined;
             resourceInputs["redisReplicasNum"] = args ? args.redisReplicasNum : undefined;
             resourceInputs["redisShardNum"] = args ? args.redisShardNum : undefined;
             resourceInputs["replicaZoneIds"] = args ? args.replicaZoneIds : undefined;
@@ -278,6 +332,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["vpcId"] = args ? args.vpcId : undefined;
             resourceInputs["waitSwitch"] = args ? args.waitSwitch : undefined;
             resourceInputs["createTime"] = undefined /*out*/;
+            resourceInputs["dedicatedClusterId"] = undefined /*out*/;
             resourceInputs["nodeInfos"] = undefined /*out*/;
             resourceInputs["status"] = undefined /*out*/;
         }
@@ -308,6 +363,10 @@ export interface InstanceState {
      * The time when the instance was created.
      */
     createTime?: pulumi.Input<string>;
+    /**
+     * Dedicated Cluster ID.
+     */
+    dedicatedClusterId?: pulumi.Input<string>;
     /**
      * Indicate whether to delete Redis instance directly or not. Default is false. If set true, the instance will be deleted instead of staying recycle bin. Note: only works for `PREPAID` instance.
      */
@@ -353,6 +412,10 @@ export interface InstanceState {
      */
     prepaidPeriod?: pulumi.Input<number>;
     /**
+     * Specify the product version of the instance. `local`: Local disk version, `cloud`: Cloud disk version, `cdc`: Exclusive cluster version. Default is `local`.
+     */
+    productVersion?: pulumi.Input<string>;
+    /**
      * Specifies which project the instance should belong to.
      */
     projectId?: pulumi.Input<number>;
@@ -360,6 +423,10 @@ export interface InstanceState {
      * Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
      */
     recycle?: pulumi.Input<number>;
+    /**
+     * Exclusive cluster ID. When the `productVersion` is set to `cdc`, this parameter must be set.
+     */
+    redisClusterId?: pulumi.Input<string>;
     /**
      * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
      */
@@ -469,6 +536,10 @@ export interface InstanceArgs {
      */
     prepaidPeriod?: pulumi.Input<number>;
     /**
+     * Specify the product version of the instance. `local`: Local disk version, `cloud`: Cloud disk version, `cdc`: Exclusive cluster version. Default is `local`.
+     */
+    productVersion?: pulumi.Input<string>;
+    /**
      * Specifies which project the instance should belong to.
      */
     projectId?: pulumi.Input<number>;
@@ -476,6 +547,10 @@ export interface InstanceArgs {
      * Original intranet IPv4 address retention time: unit: day, value range: `0`, `1`, `2`, `3`, `7`, `15`.
      */
     recycle?: pulumi.Input<number>;
+    /**
+     * Exclusive cluster ID. When the `productVersion` is set to `cdc`, this parameter must be set.
+     */
+    redisClusterId?: pulumi.Input<string>;
     /**
      * The number of instance copies. This is not required for standalone and master slave versions and must equal to count of `replicaZoneIds`, Non-multi-AZ does not require `replicaZoneIds`; Redis memory version 4.0, 5.0, 6.2 standard architecture and cluster architecture support the number of copies in the range [1, 2, 3, 4, 5]; Redis 2.8 standard version and CKV standard version only support 1 copy.
      */

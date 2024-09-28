@@ -18,6 +18,11 @@ import (
 type Provider struct {
 	pulumi.ProviderResourceState
 
+	// The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
+	CamRoleName pulumi.StringPtrOutput `pulumi:"camRoleName"`
+	// The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples:
+	// `https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
+	CosDomain pulumi.StringPtrOutput `pulumi:"cosDomain"`
 	// The root domain of the API request, Default is `tencentcloudapi.com`.
 	Domain pulumi.StringPtrOutput `pulumi:"domain"`
 	// The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
@@ -25,14 +30,12 @@ type Provider struct {
 	Profile pulumi.StringPtrOutput `pulumi:"profile"`
 	// The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
 	Protocol pulumi.StringPtrOutput `pulumi:"protocol"`
-	// This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
-	// environment variables. The default input value is ap-guangzhou.
+	// This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The
+	// default input value is ap-guangzhou.
 	Region pulumi.StringPtrOutput `pulumi:"region"`
-	// This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
-	// environment variable.
+	// This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
 	SecretId pulumi.StringPtrOutput `pulumi:"secretId"`
-	// This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
-	// environment variable.
+	// This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
 	SecretKey pulumi.StringPtrOutput `pulumi:"secretKey"`
 	// TencentCloud Security Token of temporary access credentials. It can be sourced from the `TENCENTCLOUD_SECURITY_TOKEN`
 	// environment variable. Notice: for supported products, please refer to: [temporary key supported
@@ -93,21 +96,32 @@ func NewProvider(ctx *pulumi.Context,
 type providerArgs struct {
 	// The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
 	AssumeRole *ProviderAssumeRole `pulumi:"assumeRole"`
+	// The `assume_role_with_saml` block. If provided, terraform will attempt to assume this role using the supplied
+	// credentials.
+	AssumeRoleWithSaml *ProviderAssumeRoleWithSaml `pulumi:"assumeRoleWithSaml"`
+	// The `assume_role_with_web_identity` block. If provided, terraform will attempt to assume this role using the supplied
+	// credentials.
+	AssumeRoleWithWebIdentity *ProviderAssumeRoleWithWebIdentity `pulumi:"assumeRoleWithWebIdentity"`
+	// The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
+	CamRoleName *string `pulumi:"camRoleName"`
+	// The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples:
+	// `https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
+	CosDomain *string `pulumi:"cosDomain"`
 	// The root domain of the API request, Default is `tencentcloudapi.com`.
 	Domain *string `pulumi:"domain"`
+	// Whether to enable pod oidc.
+	EnablePodOidc *bool `pulumi:"enablePodOidc"`
 	// The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
 	// variable. If not set, the default profile created with `tccli configure` will be used.
 	Profile *string `pulumi:"profile"`
 	// The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
 	Protocol *string `pulumi:"protocol"`
-	// This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
-	// environment variables. The default input value is ap-guangzhou.
+	// This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The
+	// default input value is ap-guangzhou.
 	Region *string `pulumi:"region"`
-	// This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
-	// environment variable.
+	// This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
 	SecretId *string `pulumi:"secretId"`
-	// This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
-	// environment variable.
+	// This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
 	SecretKey *string `pulumi:"secretKey"`
 	// TencentCloud Security Token of temporary access credentials. It can be sourced from the `TENCENTCLOUD_SECURITY_TOKEN`
 	// environment variable. Notice: for supported products, please refer to: [temporary key supported
@@ -122,21 +136,32 @@ type providerArgs struct {
 type ProviderArgs struct {
 	// The `assume_role` block. If provided, terraform will attempt to assume this role using the supplied credentials.
 	AssumeRole ProviderAssumeRolePtrInput
+	// The `assume_role_with_saml` block. If provided, terraform will attempt to assume this role using the supplied
+	// credentials.
+	AssumeRoleWithSaml ProviderAssumeRoleWithSamlPtrInput
+	// The `assume_role_with_web_identity` block. If provided, terraform will attempt to assume this role using the supplied
+	// credentials.
+	AssumeRoleWithWebIdentity ProviderAssumeRoleWithWebIdentityPtrInput
+	// The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
+	CamRoleName pulumi.StringPtrInput
+	// The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples:
+	// `https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
+	CosDomain pulumi.StringPtrInput
 	// The root domain of the API request, Default is `tencentcloudapi.com`.
 	Domain pulumi.StringPtrInput
+	// Whether to enable pod oidc.
+	EnablePodOidc pulumi.BoolPtrInput
 	// The profile name as set in the shared credentials. It can also be sourced from the `TENCENTCLOUD_PROFILE` environment
 	// variable. If not set, the default profile created with `tccli configure` will be used.
 	Profile pulumi.StringPtrInput
 	// The protocol of the API request. Valid values: `HTTP` and `HTTPS`. Default is `HTTPS`.
 	Protocol pulumi.StringPtrInput
-	// This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
-	// environment variables. The default input value is ap-guangzhou.
+	// This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The
+	// default input value is ap-guangzhou.
 	Region pulumi.StringPtrInput
-	// This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
-	// environment variable.
+	// This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
 	SecretId pulumi.StringPtrInput
-	// This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
-	// environment variable.
+	// This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
 	SecretKey pulumi.StringPtrInput
 	// TencentCloud Security Token of temporary access credentials. It can be sourced from the `TENCENTCLOUD_SECURITY_TOKEN`
 	// environment variable. Notice: for supported products, please refer to: [temporary key supported
@@ -184,6 +209,17 @@ func (o ProviderOutput) ToProviderOutputWithContext(ctx context.Context) Provide
 	return o
 }
 
+// The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
+func (o ProviderOutput) CamRoleName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.CamRoleName }).(pulumi.StringPtrOutput)
+}
+
+// The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples:
+// `https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
+func (o ProviderOutput) CosDomain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.CosDomain }).(pulumi.StringPtrOutput)
+}
+
 // The root domain of the API request, Default is `tencentcloudapi.com`.
 func (o ProviderOutput) Domain() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Domain }).(pulumi.StringPtrOutput)
@@ -200,20 +236,18 @@ func (o ProviderOutput) Protocol() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Protocol }).(pulumi.StringPtrOutput)
 }
 
-// This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
-// environment variables. The default input value is ap-guangzhou.
+// This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The
+// default input value is ap-guangzhou.
 func (o ProviderOutput) Region() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.Region }).(pulumi.StringPtrOutput)
 }
 
-// This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
-// environment variable.
+// This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
 func (o ProviderOutput) SecretId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.SecretId }).(pulumi.StringPtrOutput)
 }
 
-// This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
-// environment variable.
+// This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
 func (o ProviderOutput) SecretKey() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Provider) pulumi.StringPtrOutput { return v.SecretKey }).(pulumi.StringPtrOutput)
 }

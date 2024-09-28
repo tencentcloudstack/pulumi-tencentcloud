@@ -13,6 +13,504 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type AccountPrivilegesOperationModifyPrivilegeSet struct {
+	// Database objects and the user permissions on these objects. Note: This field may return null, indicating that no valid value can be obtained.
+	DatabasePrivilege *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege `pulumi:"databasePrivilege"`
+	// Required only when ModifyType is revokeObject. When the parameter is true, revoking permissions will cascade. The default value is false.
+	IsCascade *bool `pulumi:"isCascade"`
+	// Supported modification method: grantObject, revokeObject, alterRole. grantObject represents granting permissions on object, revokeObject represents revoking permissions on object, and alterRole represents modifying the account type.
+	ModifyType *string `pulumi:"modifyType"`
+}
+
+// AccountPrivilegesOperationModifyPrivilegeSetInput is an input type that accepts AccountPrivilegesOperationModifyPrivilegeSetArgs and AccountPrivilegesOperationModifyPrivilegeSetOutput values.
+// You can construct a concrete instance of `AccountPrivilegesOperationModifyPrivilegeSetInput` via:
+//
+//	AccountPrivilegesOperationModifyPrivilegeSetArgs{...}
+type AccountPrivilegesOperationModifyPrivilegeSetInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesOperationModifyPrivilegeSetOutput() AccountPrivilegesOperationModifyPrivilegeSetOutput
+	ToAccountPrivilegesOperationModifyPrivilegeSetOutputWithContext(context.Context) AccountPrivilegesOperationModifyPrivilegeSetOutput
+}
+
+type AccountPrivilegesOperationModifyPrivilegeSetArgs struct {
+	// Database objects and the user permissions on these objects. Note: This field may return null, indicating that no valid value can be obtained.
+	DatabasePrivilege AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrInput `pulumi:"databasePrivilege"`
+	// Required only when ModifyType is revokeObject. When the parameter is true, revoking permissions will cascade. The default value is false.
+	IsCascade pulumi.BoolPtrInput `pulumi:"isCascade"`
+	// Supported modification method: grantObject, revokeObject, alterRole. grantObject represents granting permissions on object, revokeObject represents revoking permissions on object, and alterRole represents modifying the account type.
+	ModifyType pulumi.StringPtrInput `pulumi:"modifyType"`
+}
+
+func (AccountPrivilegesOperationModifyPrivilegeSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesOperationModifyPrivilegeSet)(nil)).Elem()
+}
+
+func (i AccountPrivilegesOperationModifyPrivilegeSetArgs) ToAccountPrivilegesOperationModifyPrivilegeSetOutput() AccountPrivilegesOperationModifyPrivilegeSetOutput {
+	return i.ToAccountPrivilegesOperationModifyPrivilegeSetOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesOperationModifyPrivilegeSetArgs) ToAccountPrivilegesOperationModifyPrivilegeSetOutputWithContext(ctx context.Context) AccountPrivilegesOperationModifyPrivilegeSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesOperationModifyPrivilegeSetOutput)
+}
+
+// AccountPrivilegesOperationModifyPrivilegeSetArrayInput is an input type that accepts AccountPrivilegesOperationModifyPrivilegeSetArray and AccountPrivilegesOperationModifyPrivilegeSetArrayOutput values.
+// You can construct a concrete instance of `AccountPrivilegesOperationModifyPrivilegeSetArrayInput` via:
+//
+//	AccountPrivilegesOperationModifyPrivilegeSetArray{ AccountPrivilegesOperationModifyPrivilegeSetArgs{...} }
+type AccountPrivilegesOperationModifyPrivilegeSetArrayInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesOperationModifyPrivilegeSetArrayOutput() AccountPrivilegesOperationModifyPrivilegeSetArrayOutput
+	ToAccountPrivilegesOperationModifyPrivilegeSetArrayOutputWithContext(context.Context) AccountPrivilegesOperationModifyPrivilegeSetArrayOutput
+}
+
+type AccountPrivilegesOperationModifyPrivilegeSetArray []AccountPrivilegesOperationModifyPrivilegeSetInput
+
+func (AccountPrivilegesOperationModifyPrivilegeSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPrivilegesOperationModifyPrivilegeSet)(nil)).Elem()
+}
+
+func (i AccountPrivilegesOperationModifyPrivilegeSetArray) ToAccountPrivilegesOperationModifyPrivilegeSetArrayOutput() AccountPrivilegesOperationModifyPrivilegeSetArrayOutput {
+	return i.ToAccountPrivilegesOperationModifyPrivilegeSetArrayOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesOperationModifyPrivilegeSetArray) ToAccountPrivilegesOperationModifyPrivilegeSetArrayOutputWithContext(ctx context.Context) AccountPrivilegesOperationModifyPrivilegeSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesOperationModifyPrivilegeSetArrayOutput)
+}
+
+type AccountPrivilegesOperationModifyPrivilegeSetOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesOperationModifyPrivilegeSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesOperationModifyPrivilegeSet)(nil)).Elem()
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetOutput) ToAccountPrivilegesOperationModifyPrivilegeSetOutput() AccountPrivilegesOperationModifyPrivilegeSetOutput {
+	return o
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetOutput) ToAccountPrivilegesOperationModifyPrivilegeSetOutputWithContext(ctx context.Context) AccountPrivilegesOperationModifyPrivilegeSetOutput {
+	return o
+}
+
+// Database objects and the user permissions on these objects. Note: This field may return null, indicating that no valid value can be obtained.
+func (o AccountPrivilegesOperationModifyPrivilegeSetOutput) DatabasePrivilege() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput {
+	return o.ApplyT(func(v AccountPrivilegesOperationModifyPrivilegeSet) *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege {
+		return v.DatabasePrivilege
+	}).(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput)
+}
+
+// Required only when ModifyType is revokeObject. When the parameter is true, revoking permissions will cascade. The default value is false.
+func (o AccountPrivilegesOperationModifyPrivilegeSetOutput) IsCascade() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v AccountPrivilegesOperationModifyPrivilegeSet) *bool { return v.IsCascade }).(pulumi.BoolPtrOutput)
+}
+
+// Supported modification method: grantObject, revokeObject, alterRole. grantObject represents granting permissions on object, revokeObject represents revoking permissions on object, and alterRole represents modifying the account type.
+func (o AccountPrivilegesOperationModifyPrivilegeSetOutput) ModifyType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AccountPrivilegesOperationModifyPrivilegeSet) *string { return v.ModifyType }).(pulumi.StringPtrOutput)
+}
+
+type AccountPrivilegesOperationModifyPrivilegeSetArrayOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesOperationModifyPrivilegeSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AccountPrivilegesOperationModifyPrivilegeSet)(nil)).Elem()
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetArrayOutput) ToAccountPrivilegesOperationModifyPrivilegeSetArrayOutput() AccountPrivilegesOperationModifyPrivilegeSetArrayOutput {
+	return o
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetArrayOutput) ToAccountPrivilegesOperationModifyPrivilegeSetArrayOutputWithContext(ctx context.Context) AccountPrivilegesOperationModifyPrivilegeSetArrayOutput {
+	return o
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetArrayOutput) Index(i pulumi.IntInput) AccountPrivilegesOperationModifyPrivilegeSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AccountPrivilegesOperationModifyPrivilegeSet {
+		return vs[0].([]AccountPrivilegesOperationModifyPrivilegeSet)[vs[1].(int)]
+	}).(AccountPrivilegesOperationModifyPrivilegeSetOutput)
+}
+
+type AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege struct {
+	// Database object.If ObjectType is database, DatabaseName/SchemaName/TableName can be null.If ObjectType is schema, SchemaName/TableName can be null.If ObjectType is table, TableName can be null.If ObjectType is column, DatabaseName/SchemaName/TableName can&amp;#39;t be null.In all other cases, DatabaseName/SchemaName/TableName can be null. Note: This field may return null, indicating that no valid value can be obtained.
+	Object *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject `pulumi:"object"`
+	// Privileges the specific account has on database object. Note: This field may return null, indicating that no valid value can be obtained.
+	PrivilegeSets []string `pulumi:"privilegeSets"`
+}
+
+// AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeInput is an input type that accepts AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs and AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput values.
+// You can construct a concrete instance of `AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeInput` via:
+//
+//	AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs{...}
+type AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput
+	ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutputWithContext(context.Context) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput
+}
+
+type AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs struct {
+	// Database object.If ObjectType is database, DatabaseName/SchemaName/TableName can be null.If ObjectType is schema, SchemaName/TableName can be null.If ObjectType is table, TableName can be null.If ObjectType is column, DatabaseName/SchemaName/TableName can&amp;#39;t be null.In all other cases, DatabaseName/SchemaName/TableName can be null. Note: This field may return null, indicating that no valid value can be obtained.
+	Object AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrInput `pulumi:"object"`
+	// Privileges the specific account has on database object. Note: This field may return null, indicating that no valid value can be obtained.
+	PrivilegeSets pulumi.StringArrayInput `pulumi:"privilegeSets"`
+}
+
+func (AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege)(nil)).Elem()
+}
+
+func (i AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput {
+	return i.ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutputWithContext(ctx context.Context) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput)
+}
+
+func (i AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput {
+	return i.ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutputWithContext(ctx context.Context) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput).ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutputWithContext(ctx)
+}
+
+// AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrInput is an input type that accepts AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs, AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtr and AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput values.
+// You can construct a concrete instance of `AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrInput` via:
+//
+//	        AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs{...}
+//
+//	or:
+//
+//	        nil
+type AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput
+	ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutputWithContext(context.Context) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput
+}
+
+type accountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrType AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs
+
+func AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtr(v *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrInput {
+	return (*accountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrType)(v)
+}
+
+func (*accountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege)(nil)).Elem()
+}
+
+func (i *accountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrType) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput {
+	return i.ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutputWithContext(context.Background())
+}
+
+func (i *accountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrType) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutputWithContext(ctx context.Context) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput)
+}
+
+type AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege)(nil)).Elem()
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput {
+	return o
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutputWithContext(ctx context.Context) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput {
+	return o
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput {
+	return o.ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutputWithContext(context.Background())
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutputWithContext(ctx context.Context) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege) *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege {
+		return &v
+	}).(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput)
+}
+
+// Database object.If ObjectType is database, DatabaseName/SchemaName/TableName can be null.If ObjectType is schema, SchemaName/TableName can be null.If ObjectType is table, TableName can be null.If ObjectType is column, DatabaseName/SchemaName/TableName can&amp;#39;t be null.In all other cases, DatabaseName/SchemaName/TableName can be null. Note: This field may return null, indicating that no valid value can be obtained.
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput) Object() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput {
+	return o.ApplyT(func(v AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege) *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject {
+		return v.Object
+	}).(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput)
+}
+
+// Privileges the specific account has on database object. Note: This field may return null, indicating that no valid value can be obtained.
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput) PrivilegeSets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege) []string { return v.PrivilegeSets }).(pulumi.StringArrayOutput)
+}
+
+type AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege)(nil)).Elem()
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput {
+	return o
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutputWithContext(ctx context.Context) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput {
+	return o
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput) Elem() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput {
+	return o.ApplyT(func(v *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege {
+		if v != nil {
+			return *v
+		}
+		var ret AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege
+		return ret
+	}).(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput)
+}
+
+// Database object.If ObjectType is database, DatabaseName/SchemaName/TableName can be null.If ObjectType is schema, SchemaName/TableName can be null.If ObjectType is table, TableName can be null.If ObjectType is column, DatabaseName/SchemaName/TableName can&amp;#39;t be null.In all other cases, DatabaseName/SchemaName/TableName can be null. Note: This field may return null, indicating that no valid value can be obtained.
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput) Object() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput {
+	return o.ApplyT(func(v *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege) *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject {
+		if v == nil {
+			return nil
+		}
+		return v.Object
+	}).(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput)
+}
+
+// Privileges the specific account has on database object. Note: This field may return null, indicating that no valid value can be obtained.
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput) PrivilegeSets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege) []string {
+		if v == nil {
+			return nil
+		}
+		return v.PrivilegeSets
+	}).(pulumi.StringArrayOutput)
+}
+
+type AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject struct {
+	// Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database. Note: This field may return null, indicating that no valid value can be obtained.
+	DatabaseName *string `pulumi:"databaseName"`
+	// Database object Name. Note: This field may return null, indicating that no valid value can be obtained.
+	ObjectName string `pulumi:"objectName"`
+	// Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+	ObjectType string `pulumi:"objectType"`
+	// Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema. Note: This field may return null, indicating that no valid value can be obtained.
+	SchemaName *string `pulumi:"schemaName"`
+	// Table name to which the database object belongs. This parameter is mandatory when ObjectType is column. Note: This field may return null, indicating that no valid value can be obtained.
+	TableName *string `pulumi:"tableName"`
+}
+
+// AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectInput is an input type that accepts AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs and AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput values.
+// You can construct a concrete instance of `AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectInput` via:
+//
+//	AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs{...}
+type AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput
+	ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutputWithContext(context.Context) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput
+}
+
+type AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs struct {
+	// Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database. Note: This field may return null, indicating that no valid value can be obtained.
+	DatabaseName pulumi.StringPtrInput `pulumi:"databaseName"`
+	// Database object Name. Note: This field may return null, indicating that no valid value can be obtained.
+	ObjectName pulumi.StringInput `pulumi:"objectName"`
+	// Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+	ObjectType pulumi.StringInput `pulumi:"objectType"`
+	// Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema. Note: This field may return null, indicating that no valid value can be obtained.
+	SchemaName pulumi.StringPtrInput `pulumi:"schemaName"`
+	// Table name to which the database object belongs. This parameter is mandatory when ObjectType is column. Note: This field may return null, indicating that no valid value can be obtained.
+	TableName pulumi.StringPtrInput `pulumi:"tableName"`
+}
+
+func (AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject)(nil)).Elem()
+}
+
+func (i AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput {
+	return i.ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutputWithContext(ctx context.Context) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput)
+}
+
+func (i AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput {
+	return i.ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutputWithContext(context.Background())
+}
+
+func (i AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutputWithContext(ctx context.Context) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput).ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutputWithContext(ctx)
+}
+
+// AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrInput is an input type that accepts AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs, AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtr and AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput values.
+// You can construct a concrete instance of `AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrInput` via:
+//
+//	        AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs{...}
+//
+//	or:
+//
+//	        nil
+type AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrInput interface {
+	pulumi.Input
+
+	ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput
+	ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutputWithContext(context.Context) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput
+}
+
+type accountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrType AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs
+
+func AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtr(v *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrInput {
+	return (*accountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrType)(v)
+}
+
+func (*accountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject)(nil)).Elem()
+}
+
+func (i *accountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrType) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput {
+	return i.ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutputWithContext(context.Background())
+}
+
+func (i *accountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrType) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutputWithContext(ctx context.Context) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput)
+}
+
+type AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject)(nil)).Elem()
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput {
+	return o
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutputWithContext(ctx context.Context) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput {
+	return o
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput {
+	return o.ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutputWithContext(context.Background())
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutputWithContext(ctx context.Context) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject) *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject {
+		return &v
+	}).(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput)
+}
+
+// Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database. Note: This field may return null, indicating that no valid value can be obtained.
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput) DatabaseName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject) *string {
+		return v.DatabaseName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Database object Name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput) ObjectName() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject) string {
+		return v.ObjectName
+	}).(pulumi.StringOutput)
+}
+
+// Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput) ObjectType() pulumi.StringOutput {
+	return o.ApplyT(func(v AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject) string {
+		return v.ObjectType
+	}).(pulumi.StringOutput)
+}
+
+// Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema. Note: This field may return null, indicating that no valid value can be obtained.
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput) SchemaName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject) *string {
+		return v.SchemaName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Table name to which the database object belongs. This parameter is mandatory when ObjectType is column. Note: This field may return null, indicating that no valid value can be obtained.
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput) TableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject) *string {
+		return v.TableName
+	}).(pulumi.StringPtrOutput)
+}
+
+type AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput struct{ *pulumi.OutputState }
+
+func (AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject)(nil)).Elem()
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput {
+	return o
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput) ToAccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutputWithContext(ctx context.Context) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput {
+	return o
+}
+
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput) Elem() AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput {
+	return o.ApplyT(func(v *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject) AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject {
+		if v != nil {
+			return *v
+		}
+		var ret AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject
+		return ret
+	}).(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput)
+}
+
+// Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database. Note: This field may return null, indicating that no valid value can be obtained.
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput) DatabaseName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DatabaseName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Database object Name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput) ObjectName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ObjectName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput) ObjectType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ObjectType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema. Note: This field may return null, indicating that no valid value can be obtained.
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput) SchemaName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.SchemaName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Table name to which the database object belongs. This parameter is mandatory when ObjectType is column. Note: This field may return null, indicating that no valid value can be obtained.
+func (o AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput) TableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TableName
+	}).(pulumi.StringPtrOutput)
+}
+
 type InstanceBackupPlan struct {
 	// List of backup period per week, available values: `monday`, `tuesday`, `wednesday`, `thursday`, `friday`, `saturday`, `sunday`. NOTE: At least specify two days.
 	BackupPeriods []string `pulumi:"backupPeriods"`
@@ -208,6 +706,8 @@ func (o InstanceBackupPlanPtrOutput) MinBackupStartTime() pulumi.StringPtrOutput
 }
 
 type InstanceDbNodeSet struct {
+	// Dedicated cluster ID.
+	DedicatedClusterId *string `pulumi:"dedicatedClusterId"`
 	// Indicates node type, available values:`Primary`, `Standby`. Default: `Standby`.
 	Role *string `pulumi:"role"`
 	// Indicates the node available zone.
@@ -226,6 +726,8 @@ type InstanceDbNodeSetInput interface {
 }
 
 type InstanceDbNodeSetArgs struct {
+	// Dedicated cluster ID.
+	DedicatedClusterId pulumi.StringPtrInput `pulumi:"dedicatedClusterId"`
 	// Indicates node type, available values:`Primary`, `Standby`. Default: `Standby`.
 	Role pulumi.StringPtrInput `pulumi:"role"`
 	// Indicates the node available zone.
@@ -281,6 +783,11 @@ func (o InstanceDbNodeSetOutput) ToInstanceDbNodeSetOutput() InstanceDbNodeSetOu
 
 func (o InstanceDbNodeSetOutput) ToInstanceDbNodeSetOutputWithContext(ctx context.Context) InstanceDbNodeSetOutput {
 	return o
+}
+
+// Dedicated cluster ID.
+func (o InstanceDbNodeSetOutput) DedicatedClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstanceDbNodeSet) *string { return v.DedicatedClusterId }).(pulumi.StringPtrOutput)
 }
 
 // Indicates node type, available values:`Primary`, `Standby`. Default: `Standby`.
@@ -523,6 +1030,378 @@ func (o ReadonlyGroupNetInfoListArrayOutput) Index(i pulumi.IntInput) ReadonlyGr
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ReadonlyGroupNetInfoList {
 		return vs[0].([]ReadonlyGroupNetInfoList)[vs[1].(int)]
 	}).(ReadonlyGroupNetInfoListOutput)
+}
+
+type GetAccountPrivilegesDatabaseObjectSet struct {
+	// Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database.Note: This field may return null, indicating that no valid value can be obtained.
+	DatabaseName *string `pulumi:"databaseName"`
+	// Database object Name.Note: This field may return null, indicating that no valid value can be obtained.
+	ObjectName string `pulumi:"objectName"`
+	// Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+	ObjectType string `pulumi:"objectType"`
+	// Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema.Note: This field may return null, indicating that no valid value can be obtained.
+	SchemaName *string `pulumi:"schemaName"`
+	// Table name to which the database object belongs. This parameter is mandatory when ObjectType is column.Note: This field may return null, indicating that no valid value can be obtained.
+	TableName *string `pulumi:"tableName"`
+}
+
+// GetAccountPrivilegesDatabaseObjectSetInput is an input type that accepts GetAccountPrivilegesDatabaseObjectSetArgs and GetAccountPrivilegesDatabaseObjectSetOutput values.
+// You can construct a concrete instance of `GetAccountPrivilegesDatabaseObjectSetInput` via:
+//
+//	GetAccountPrivilegesDatabaseObjectSetArgs{...}
+type GetAccountPrivilegesDatabaseObjectSetInput interface {
+	pulumi.Input
+
+	ToGetAccountPrivilegesDatabaseObjectSetOutput() GetAccountPrivilegesDatabaseObjectSetOutput
+	ToGetAccountPrivilegesDatabaseObjectSetOutputWithContext(context.Context) GetAccountPrivilegesDatabaseObjectSetOutput
+}
+
+type GetAccountPrivilegesDatabaseObjectSetArgs struct {
+	// Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database.Note: This field may return null, indicating that no valid value can be obtained.
+	DatabaseName pulumi.StringPtrInput `pulumi:"databaseName"`
+	// Database object Name.Note: This field may return null, indicating that no valid value can be obtained.
+	ObjectName pulumi.StringInput `pulumi:"objectName"`
+	// Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+	ObjectType pulumi.StringInput `pulumi:"objectType"`
+	// Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema.Note: This field may return null, indicating that no valid value can be obtained.
+	SchemaName pulumi.StringPtrInput `pulumi:"schemaName"`
+	// Table name to which the database object belongs. This parameter is mandatory when ObjectType is column.Note: This field may return null, indicating that no valid value can be obtained.
+	TableName pulumi.StringPtrInput `pulumi:"tableName"`
+}
+
+func (GetAccountPrivilegesDatabaseObjectSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountPrivilegesDatabaseObjectSet)(nil)).Elem()
+}
+
+func (i GetAccountPrivilegesDatabaseObjectSetArgs) ToGetAccountPrivilegesDatabaseObjectSetOutput() GetAccountPrivilegesDatabaseObjectSetOutput {
+	return i.ToGetAccountPrivilegesDatabaseObjectSetOutputWithContext(context.Background())
+}
+
+func (i GetAccountPrivilegesDatabaseObjectSetArgs) ToGetAccountPrivilegesDatabaseObjectSetOutputWithContext(ctx context.Context) GetAccountPrivilegesDatabaseObjectSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountPrivilegesDatabaseObjectSetOutput)
+}
+
+// GetAccountPrivilegesDatabaseObjectSetArrayInput is an input type that accepts GetAccountPrivilegesDatabaseObjectSetArray and GetAccountPrivilegesDatabaseObjectSetArrayOutput values.
+// You can construct a concrete instance of `GetAccountPrivilegesDatabaseObjectSetArrayInput` via:
+//
+//	GetAccountPrivilegesDatabaseObjectSetArray{ GetAccountPrivilegesDatabaseObjectSetArgs{...} }
+type GetAccountPrivilegesDatabaseObjectSetArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountPrivilegesDatabaseObjectSetArrayOutput() GetAccountPrivilegesDatabaseObjectSetArrayOutput
+	ToGetAccountPrivilegesDatabaseObjectSetArrayOutputWithContext(context.Context) GetAccountPrivilegesDatabaseObjectSetArrayOutput
+}
+
+type GetAccountPrivilegesDatabaseObjectSetArray []GetAccountPrivilegesDatabaseObjectSetInput
+
+func (GetAccountPrivilegesDatabaseObjectSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountPrivilegesDatabaseObjectSet)(nil)).Elem()
+}
+
+func (i GetAccountPrivilegesDatabaseObjectSetArray) ToGetAccountPrivilegesDatabaseObjectSetArrayOutput() GetAccountPrivilegesDatabaseObjectSetArrayOutput {
+	return i.ToGetAccountPrivilegesDatabaseObjectSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountPrivilegesDatabaseObjectSetArray) ToGetAccountPrivilegesDatabaseObjectSetArrayOutputWithContext(ctx context.Context) GetAccountPrivilegesDatabaseObjectSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountPrivilegesDatabaseObjectSetArrayOutput)
+}
+
+type GetAccountPrivilegesDatabaseObjectSetOutput struct{ *pulumi.OutputState }
+
+func (GetAccountPrivilegesDatabaseObjectSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountPrivilegesDatabaseObjectSet)(nil)).Elem()
+}
+
+func (o GetAccountPrivilegesDatabaseObjectSetOutput) ToGetAccountPrivilegesDatabaseObjectSetOutput() GetAccountPrivilegesDatabaseObjectSetOutput {
+	return o
+}
+
+func (o GetAccountPrivilegesDatabaseObjectSetOutput) ToGetAccountPrivilegesDatabaseObjectSetOutputWithContext(ctx context.Context) GetAccountPrivilegesDatabaseObjectSetOutput {
+	return o
+}
+
+// Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAccountPrivilegesDatabaseObjectSetOutput) DatabaseName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetAccountPrivilegesDatabaseObjectSet) *string { return v.DatabaseName }).(pulumi.StringPtrOutput)
+}
+
+// Database object Name.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAccountPrivilegesDatabaseObjectSetOutput) ObjectName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountPrivilegesDatabaseObjectSet) string { return v.ObjectName }).(pulumi.StringOutput)
+}
+
+// Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAccountPrivilegesDatabaseObjectSetOutput) ObjectType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountPrivilegesDatabaseObjectSet) string { return v.ObjectType }).(pulumi.StringOutput)
+}
+
+// Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAccountPrivilegesDatabaseObjectSetOutput) SchemaName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetAccountPrivilegesDatabaseObjectSet) *string { return v.SchemaName }).(pulumi.StringPtrOutput)
+}
+
+// Table name to which the database object belongs. This parameter is mandatory when ObjectType is column.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAccountPrivilegesDatabaseObjectSetOutput) TableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetAccountPrivilegesDatabaseObjectSet) *string { return v.TableName }).(pulumi.StringPtrOutput)
+}
+
+type GetAccountPrivilegesDatabaseObjectSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountPrivilegesDatabaseObjectSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountPrivilegesDatabaseObjectSet)(nil)).Elem()
+}
+
+func (o GetAccountPrivilegesDatabaseObjectSetArrayOutput) ToGetAccountPrivilegesDatabaseObjectSetArrayOutput() GetAccountPrivilegesDatabaseObjectSetArrayOutput {
+	return o
+}
+
+func (o GetAccountPrivilegesDatabaseObjectSetArrayOutput) ToGetAccountPrivilegesDatabaseObjectSetArrayOutputWithContext(ctx context.Context) GetAccountPrivilegesDatabaseObjectSetArrayOutput {
+	return o
+}
+
+func (o GetAccountPrivilegesDatabaseObjectSetArrayOutput) Index(i pulumi.IntInput) GetAccountPrivilegesDatabaseObjectSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountPrivilegesDatabaseObjectSet {
+		return vs[0].([]GetAccountPrivilegesDatabaseObjectSet)[vs[1].(int)]
+	}).(GetAccountPrivilegesDatabaseObjectSetOutput)
+}
+
+type GetAccountPrivilegesPrivilegeSet struct {
+	// Database object.If ObjectType is database, DatabaseName/SchemaName/TableName can be null.If ObjectType is schema, SchemaName/TableName can be null.If ObjectType is table, TableName can be null.If ObjectType is column, DatabaseName/SchemaName/TableName can&amp;#39;t be null.In all other cases, DatabaseName/SchemaName/TableName can be null. Note: This field may return null, indicating that no valid value can be obtained.
+	Objects []GetAccountPrivilegesPrivilegeSetObject `pulumi:"objects"`
+	// Privileges the specific account has on database object. Note: This field may return null, indicating that no valid value can be obtained.
+	PrivilegeSets []string `pulumi:"privilegeSets"`
+}
+
+// GetAccountPrivilegesPrivilegeSetInput is an input type that accepts GetAccountPrivilegesPrivilegeSetArgs and GetAccountPrivilegesPrivilegeSetOutput values.
+// You can construct a concrete instance of `GetAccountPrivilegesPrivilegeSetInput` via:
+//
+//	GetAccountPrivilegesPrivilegeSetArgs{...}
+type GetAccountPrivilegesPrivilegeSetInput interface {
+	pulumi.Input
+
+	ToGetAccountPrivilegesPrivilegeSetOutput() GetAccountPrivilegesPrivilegeSetOutput
+	ToGetAccountPrivilegesPrivilegeSetOutputWithContext(context.Context) GetAccountPrivilegesPrivilegeSetOutput
+}
+
+type GetAccountPrivilegesPrivilegeSetArgs struct {
+	// Database object.If ObjectType is database, DatabaseName/SchemaName/TableName can be null.If ObjectType is schema, SchemaName/TableName can be null.If ObjectType is table, TableName can be null.If ObjectType is column, DatabaseName/SchemaName/TableName can&amp;#39;t be null.In all other cases, DatabaseName/SchemaName/TableName can be null. Note: This field may return null, indicating that no valid value can be obtained.
+	Objects GetAccountPrivilegesPrivilegeSetObjectArrayInput `pulumi:"objects"`
+	// Privileges the specific account has on database object. Note: This field may return null, indicating that no valid value can be obtained.
+	PrivilegeSets pulumi.StringArrayInput `pulumi:"privilegeSets"`
+}
+
+func (GetAccountPrivilegesPrivilegeSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountPrivilegesPrivilegeSet)(nil)).Elem()
+}
+
+func (i GetAccountPrivilegesPrivilegeSetArgs) ToGetAccountPrivilegesPrivilegeSetOutput() GetAccountPrivilegesPrivilegeSetOutput {
+	return i.ToGetAccountPrivilegesPrivilegeSetOutputWithContext(context.Background())
+}
+
+func (i GetAccountPrivilegesPrivilegeSetArgs) ToGetAccountPrivilegesPrivilegeSetOutputWithContext(ctx context.Context) GetAccountPrivilegesPrivilegeSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountPrivilegesPrivilegeSetOutput)
+}
+
+// GetAccountPrivilegesPrivilegeSetArrayInput is an input type that accepts GetAccountPrivilegesPrivilegeSetArray and GetAccountPrivilegesPrivilegeSetArrayOutput values.
+// You can construct a concrete instance of `GetAccountPrivilegesPrivilegeSetArrayInput` via:
+//
+//	GetAccountPrivilegesPrivilegeSetArray{ GetAccountPrivilegesPrivilegeSetArgs{...} }
+type GetAccountPrivilegesPrivilegeSetArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountPrivilegesPrivilegeSetArrayOutput() GetAccountPrivilegesPrivilegeSetArrayOutput
+	ToGetAccountPrivilegesPrivilegeSetArrayOutputWithContext(context.Context) GetAccountPrivilegesPrivilegeSetArrayOutput
+}
+
+type GetAccountPrivilegesPrivilegeSetArray []GetAccountPrivilegesPrivilegeSetInput
+
+func (GetAccountPrivilegesPrivilegeSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountPrivilegesPrivilegeSet)(nil)).Elem()
+}
+
+func (i GetAccountPrivilegesPrivilegeSetArray) ToGetAccountPrivilegesPrivilegeSetArrayOutput() GetAccountPrivilegesPrivilegeSetArrayOutput {
+	return i.ToGetAccountPrivilegesPrivilegeSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountPrivilegesPrivilegeSetArray) ToGetAccountPrivilegesPrivilegeSetArrayOutputWithContext(ctx context.Context) GetAccountPrivilegesPrivilegeSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountPrivilegesPrivilegeSetArrayOutput)
+}
+
+type GetAccountPrivilegesPrivilegeSetOutput struct{ *pulumi.OutputState }
+
+func (GetAccountPrivilegesPrivilegeSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountPrivilegesPrivilegeSet)(nil)).Elem()
+}
+
+func (o GetAccountPrivilegesPrivilegeSetOutput) ToGetAccountPrivilegesPrivilegeSetOutput() GetAccountPrivilegesPrivilegeSetOutput {
+	return o
+}
+
+func (o GetAccountPrivilegesPrivilegeSetOutput) ToGetAccountPrivilegesPrivilegeSetOutputWithContext(ctx context.Context) GetAccountPrivilegesPrivilegeSetOutput {
+	return o
+}
+
+// Database object.If ObjectType is database, DatabaseName/SchemaName/TableName can be null.If ObjectType is schema, SchemaName/TableName can be null.If ObjectType is table, TableName can be null.If ObjectType is column, DatabaseName/SchemaName/TableName can&amp;#39;t be null.In all other cases, DatabaseName/SchemaName/TableName can be null. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAccountPrivilegesPrivilegeSetOutput) Objects() GetAccountPrivilegesPrivilegeSetObjectArrayOutput {
+	return o.ApplyT(func(v GetAccountPrivilegesPrivilegeSet) []GetAccountPrivilegesPrivilegeSetObject { return v.Objects }).(GetAccountPrivilegesPrivilegeSetObjectArrayOutput)
+}
+
+// Privileges the specific account has on database object. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAccountPrivilegesPrivilegeSetOutput) PrivilegeSets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetAccountPrivilegesPrivilegeSet) []string { return v.PrivilegeSets }).(pulumi.StringArrayOutput)
+}
+
+type GetAccountPrivilegesPrivilegeSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountPrivilegesPrivilegeSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountPrivilegesPrivilegeSet)(nil)).Elem()
+}
+
+func (o GetAccountPrivilegesPrivilegeSetArrayOutput) ToGetAccountPrivilegesPrivilegeSetArrayOutput() GetAccountPrivilegesPrivilegeSetArrayOutput {
+	return o
+}
+
+func (o GetAccountPrivilegesPrivilegeSetArrayOutput) ToGetAccountPrivilegesPrivilegeSetArrayOutputWithContext(ctx context.Context) GetAccountPrivilegesPrivilegeSetArrayOutput {
+	return o
+}
+
+func (o GetAccountPrivilegesPrivilegeSetArrayOutput) Index(i pulumi.IntInput) GetAccountPrivilegesPrivilegeSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountPrivilegesPrivilegeSet {
+		return vs[0].([]GetAccountPrivilegesPrivilegeSet)[vs[1].(int)]
+	}).(GetAccountPrivilegesPrivilegeSetOutput)
+}
+
+type GetAccountPrivilegesPrivilegeSetObject struct {
+	// Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database.Note: This field may return null, indicating that no valid value can be obtained.
+	DatabaseName string `pulumi:"databaseName"`
+	// Database object Name.Note: This field may return null, indicating that no valid value can be obtained.
+	ObjectName string `pulumi:"objectName"`
+	// Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+	ObjectType string `pulumi:"objectType"`
+	// Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema.Note: This field may return null, indicating that no valid value can be obtained.
+	SchemaName string `pulumi:"schemaName"`
+	// Table name to which the database object belongs. This parameter is mandatory when ObjectType is column.Note: This field may return null, indicating that no valid value can be obtained.
+	TableName string `pulumi:"tableName"`
+}
+
+// GetAccountPrivilegesPrivilegeSetObjectInput is an input type that accepts GetAccountPrivilegesPrivilegeSetObjectArgs and GetAccountPrivilegesPrivilegeSetObjectOutput values.
+// You can construct a concrete instance of `GetAccountPrivilegesPrivilegeSetObjectInput` via:
+//
+//	GetAccountPrivilegesPrivilegeSetObjectArgs{...}
+type GetAccountPrivilegesPrivilegeSetObjectInput interface {
+	pulumi.Input
+
+	ToGetAccountPrivilegesPrivilegeSetObjectOutput() GetAccountPrivilegesPrivilegeSetObjectOutput
+	ToGetAccountPrivilegesPrivilegeSetObjectOutputWithContext(context.Context) GetAccountPrivilegesPrivilegeSetObjectOutput
+}
+
+type GetAccountPrivilegesPrivilegeSetObjectArgs struct {
+	// Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database.Note: This field may return null, indicating that no valid value can be obtained.
+	DatabaseName pulumi.StringInput `pulumi:"databaseName"`
+	// Database object Name.Note: This field may return null, indicating that no valid value can be obtained.
+	ObjectName pulumi.StringInput `pulumi:"objectName"`
+	// Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+	ObjectType pulumi.StringInput `pulumi:"objectType"`
+	// Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema.Note: This field may return null, indicating that no valid value can be obtained.
+	SchemaName pulumi.StringInput `pulumi:"schemaName"`
+	// Table name to which the database object belongs. This parameter is mandatory when ObjectType is column.Note: This field may return null, indicating that no valid value can be obtained.
+	TableName pulumi.StringInput `pulumi:"tableName"`
+}
+
+func (GetAccountPrivilegesPrivilegeSetObjectArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountPrivilegesPrivilegeSetObject)(nil)).Elem()
+}
+
+func (i GetAccountPrivilegesPrivilegeSetObjectArgs) ToGetAccountPrivilegesPrivilegeSetObjectOutput() GetAccountPrivilegesPrivilegeSetObjectOutput {
+	return i.ToGetAccountPrivilegesPrivilegeSetObjectOutputWithContext(context.Background())
+}
+
+func (i GetAccountPrivilegesPrivilegeSetObjectArgs) ToGetAccountPrivilegesPrivilegeSetObjectOutputWithContext(ctx context.Context) GetAccountPrivilegesPrivilegeSetObjectOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountPrivilegesPrivilegeSetObjectOutput)
+}
+
+// GetAccountPrivilegesPrivilegeSetObjectArrayInput is an input type that accepts GetAccountPrivilegesPrivilegeSetObjectArray and GetAccountPrivilegesPrivilegeSetObjectArrayOutput values.
+// You can construct a concrete instance of `GetAccountPrivilegesPrivilegeSetObjectArrayInput` via:
+//
+//	GetAccountPrivilegesPrivilegeSetObjectArray{ GetAccountPrivilegesPrivilegeSetObjectArgs{...} }
+type GetAccountPrivilegesPrivilegeSetObjectArrayInput interface {
+	pulumi.Input
+
+	ToGetAccountPrivilegesPrivilegeSetObjectArrayOutput() GetAccountPrivilegesPrivilegeSetObjectArrayOutput
+	ToGetAccountPrivilegesPrivilegeSetObjectArrayOutputWithContext(context.Context) GetAccountPrivilegesPrivilegeSetObjectArrayOutput
+}
+
+type GetAccountPrivilegesPrivilegeSetObjectArray []GetAccountPrivilegesPrivilegeSetObjectInput
+
+func (GetAccountPrivilegesPrivilegeSetObjectArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountPrivilegesPrivilegeSetObject)(nil)).Elem()
+}
+
+func (i GetAccountPrivilegesPrivilegeSetObjectArray) ToGetAccountPrivilegesPrivilegeSetObjectArrayOutput() GetAccountPrivilegesPrivilegeSetObjectArrayOutput {
+	return i.ToGetAccountPrivilegesPrivilegeSetObjectArrayOutputWithContext(context.Background())
+}
+
+func (i GetAccountPrivilegesPrivilegeSetObjectArray) ToGetAccountPrivilegesPrivilegeSetObjectArrayOutputWithContext(ctx context.Context) GetAccountPrivilegesPrivilegeSetObjectArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetAccountPrivilegesPrivilegeSetObjectArrayOutput)
+}
+
+type GetAccountPrivilegesPrivilegeSetObjectOutput struct{ *pulumi.OutputState }
+
+func (GetAccountPrivilegesPrivilegeSetObjectOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetAccountPrivilegesPrivilegeSetObject)(nil)).Elem()
+}
+
+func (o GetAccountPrivilegesPrivilegeSetObjectOutput) ToGetAccountPrivilegesPrivilegeSetObjectOutput() GetAccountPrivilegesPrivilegeSetObjectOutput {
+	return o
+}
+
+func (o GetAccountPrivilegesPrivilegeSetObjectOutput) ToGetAccountPrivilegesPrivilegeSetObjectOutputWithContext(ctx context.Context) GetAccountPrivilegesPrivilegeSetObjectOutput {
+	return o
+}
+
+// Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAccountPrivilegesPrivilegeSetObjectOutput) DatabaseName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountPrivilegesPrivilegeSetObject) string { return v.DatabaseName }).(pulumi.StringOutput)
+}
+
+// Database object Name.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAccountPrivilegesPrivilegeSetObjectOutput) ObjectName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountPrivilegesPrivilegeSetObject) string { return v.ObjectName }).(pulumi.StringOutput)
+}
+
+// Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAccountPrivilegesPrivilegeSetObjectOutput) ObjectType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountPrivilegesPrivilegeSetObject) string { return v.ObjectType }).(pulumi.StringOutput)
+}
+
+// Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAccountPrivilegesPrivilegeSetObjectOutput) SchemaName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountPrivilegesPrivilegeSetObject) string { return v.SchemaName }).(pulumi.StringOutput)
+}
+
+// Table name to which the database object belongs. This parameter is mandatory when ObjectType is column.Note: This field may return null, indicating that no valid value can be obtained.
+func (o GetAccountPrivilegesPrivilegeSetObjectOutput) TableName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetAccountPrivilegesPrivilegeSetObject) string { return v.TableName }).(pulumi.StringOutput)
+}
+
+type GetAccountPrivilegesPrivilegeSetObjectArrayOutput struct{ *pulumi.OutputState }
+
+func (GetAccountPrivilegesPrivilegeSetObjectArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetAccountPrivilegesPrivilegeSetObject)(nil)).Elem()
+}
+
+func (o GetAccountPrivilegesPrivilegeSetObjectArrayOutput) ToGetAccountPrivilegesPrivilegeSetObjectArrayOutput() GetAccountPrivilegesPrivilegeSetObjectArrayOutput {
+	return o
+}
+
+func (o GetAccountPrivilegesPrivilegeSetObjectArrayOutput) ToGetAccountPrivilegesPrivilegeSetObjectArrayOutputWithContext(ctx context.Context) GetAccountPrivilegesPrivilegeSetObjectArrayOutput {
+	return o
+}
+
+func (o GetAccountPrivilegesPrivilegeSetObjectArrayOutput) Index(i pulumi.IntInput) GetAccountPrivilegesPrivilegeSetObjectOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetAccountPrivilegesPrivilegeSetObject {
+		return vs[0].([]GetAccountPrivilegesPrivilegeSetObject)[vs[1].(int)]
+	}).(GetAccountPrivilegesPrivilegeSetObjectOutput)
 }
 
 type GetBackupDownloadUrlsBackupDownloadRestriction struct {
@@ -1313,6 +2192,299 @@ func (o GetDbInstanceVersionsVersionSetArrayOutput) Index(i pulumi.IntInput) Get
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDbInstanceVersionsVersionSet {
 		return vs[0].([]GetDbInstanceVersionsVersionSet)[vs[1].(int)]
 	}).(GetDbInstanceVersionsVersionSetOutput)
+}
+
+type GetDedicatedClustersDedicatedClusterSet struct {
+	// Number of available CPUs.
+	CpuAvailable *int `pulumi:"cpuAvailable"`
+	// Cpu total.
+	CpuTotal *int `pulumi:"cpuTotal"`
+	// Dedicated cluster ID.
+	DedicatedClusterId *string `pulumi:"dedicatedClusterId"`
+	// Disk availability.
+	DiskAvailable *int `pulumi:"diskAvailable"`
+	// Total number of disks.
+	DiskTotal *int `pulumi:"diskTotal"`
+	// Instance count.
+	InstanceCount *int `pulumi:"instanceCount"`
+	// Available Memory.
+	MemAvailable *int `pulumi:"memAvailable"`
+	// Total amount of memory.
+	MemTotal *int `pulumi:"memTotal"`
+	// Filter name.
+	Name *string `pulumi:"name"`
+	// Disaster recovery cluster.
+	StandbyDedicatedClusterSets []string `pulumi:"standbyDedicatedClusterSets"`
+	// Zone.
+	Zone *string `pulumi:"zone"`
+}
+
+// GetDedicatedClustersDedicatedClusterSetInput is an input type that accepts GetDedicatedClustersDedicatedClusterSetArgs and GetDedicatedClustersDedicatedClusterSetOutput values.
+// You can construct a concrete instance of `GetDedicatedClustersDedicatedClusterSetInput` via:
+//
+//	GetDedicatedClustersDedicatedClusterSetArgs{...}
+type GetDedicatedClustersDedicatedClusterSetInput interface {
+	pulumi.Input
+
+	ToGetDedicatedClustersDedicatedClusterSetOutput() GetDedicatedClustersDedicatedClusterSetOutput
+	ToGetDedicatedClustersDedicatedClusterSetOutputWithContext(context.Context) GetDedicatedClustersDedicatedClusterSetOutput
+}
+
+type GetDedicatedClustersDedicatedClusterSetArgs struct {
+	// Number of available CPUs.
+	CpuAvailable pulumi.IntPtrInput `pulumi:"cpuAvailable"`
+	// Cpu total.
+	CpuTotal pulumi.IntPtrInput `pulumi:"cpuTotal"`
+	// Dedicated cluster ID.
+	DedicatedClusterId pulumi.StringPtrInput `pulumi:"dedicatedClusterId"`
+	// Disk availability.
+	DiskAvailable pulumi.IntPtrInput `pulumi:"diskAvailable"`
+	// Total number of disks.
+	DiskTotal pulumi.IntPtrInput `pulumi:"diskTotal"`
+	// Instance count.
+	InstanceCount pulumi.IntPtrInput `pulumi:"instanceCount"`
+	// Available Memory.
+	MemAvailable pulumi.IntPtrInput `pulumi:"memAvailable"`
+	// Total amount of memory.
+	MemTotal pulumi.IntPtrInput `pulumi:"memTotal"`
+	// Filter name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Disaster recovery cluster.
+	StandbyDedicatedClusterSets pulumi.StringArrayInput `pulumi:"standbyDedicatedClusterSets"`
+	// Zone.
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (GetDedicatedClustersDedicatedClusterSetArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDedicatedClustersDedicatedClusterSet)(nil)).Elem()
+}
+
+func (i GetDedicatedClustersDedicatedClusterSetArgs) ToGetDedicatedClustersDedicatedClusterSetOutput() GetDedicatedClustersDedicatedClusterSetOutput {
+	return i.ToGetDedicatedClustersDedicatedClusterSetOutputWithContext(context.Background())
+}
+
+func (i GetDedicatedClustersDedicatedClusterSetArgs) ToGetDedicatedClustersDedicatedClusterSetOutputWithContext(ctx context.Context) GetDedicatedClustersDedicatedClusterSetOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDedicatedClustersDedicatedClusterSetOutput)
+}
+
+// GetDedicatedClustersDedicatedClusterSetArrayInput is an input type that accepts GetDedicatedClustersDedicatedClusterSetArray and GetDedicatedClustersDedicatedClusterSetArrayOutput values.
+// You can construct a concrete instance of `GetDedicatedClustersDedicatedClusterSetArrayInput` via:
+//
+//	GetDedicatedClustersDedicatedClusterSetArray{ GetDedicatedClustersDedicatedClusterSetArgs{...} }
+type GetDedicatedClustersDedicatedClusterSetArrayInput interface {
+	pulumi.Input
+
+	ToGetDedicatedClustersDedicatedClusterSetArrayOutput() GetDedicatedClustersDedicatedClusterSetArrayOutput
+	ToGetDedicatedClustersDedicatedClusterSetArrayOutputWithContext(context.Context) GetDedicatedClustersDedicatedClusterSetArrayOutput
+}
+
+type GetDedicatedClustersDedicatedClusterSetArray []GetDedicatedClustersDedicatedClusterSetInput
+
+func (GetDedicatedClustersDedicatedClusterSetArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDedicatedClustersDedicatedClusterSet)(nil)).Elem()
+}
+
+func (i GetDedicatedClustersDedicatedClusterSetArray) ToGetDedicatedClustersDedicatedClusterSetArrayOutput() GetDedicatedClustersDedicatedClusterSetArrayOutput {
+	return i.ToGetDedicatedClustersDedicatedClusterSetArrayOutputWithContext(context.Background())
+}
+
+func (i GetDedicatedClustersDedicatedClusterSetArray) ToGetDedicatedClustersDedicatedClusterSetArrayOutputWithContext(ctx context.Context) GetDedicatedClustersDedicatedClusterSetArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDedicatedClustersDedicatedClusterSetArrayOutput)
+}
+
+type GetDedicatedClustersDedicatedClusterSetOutput struct{ *pulumi.OutputState }
+
+func (GetDedicatedClustersDedicatedClusterSetOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDedicatedClustersDedicatedClusterSet)(nil)).Elem()
+}
+
+func (o GetDedicatedClustersDedicatedClusterSetOutput) ToGetDedicatedClustersDedicatedClusterSetOutput() GetDedicatedClustersDedicatedClusterSetOutput {
+	return o
+}
+
+func (o GetDedicatedClustersDedicatedClusterSetOutput) ToGetDedicatedClustersDedicatedClusterSetOutputWithContext(ctx context.Context) GetDedicatedClustersDedicatedClusterSetOutput {
+	return o
+}
+
+// Number of available CPUs.
+func (o GetDedicatedClustersDedicatedClusterSetOutput) CpuAvailable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetDedicatedClustersDedicatedClusterSet) *int { return v.CpuAvailable }).(pulumi.IntPtrOutput)
+}
+
+// Cpu total.
+func (o GetDedicatedClustersDedicatedClusterSetOutput) CpuTotal() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetDedicatedClustersDedicatedClusterSet) *int { return v.CpuTotal }).(pulumi.IntPtrOutput)
+}
+
+// Dedicated cluster ID.
+func (o GetDedicatedClustersDedicatedClusterSetOutput) DedicatedClusterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDedicatedClustersDedicatedClusterSet) *string { return v.DedicatedClusterId }).(pulumi.StringPtrOutput)
+}
+
+// Disk availability.
+func (o GetDedicatedClustersDedicatedClusterSetOutput) DiskAvailable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetDedicatedClustersDedicatedClusterSet) *int { return v.DiskAvailable }).(pulumi.IntPtrOutput)
+}
+
+// Total number of disks.
+func (o GetDedicatedClustersDedicatedClusterSetOutput) DiskTotal() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetDedicatedClustersDedicatedClusterSet) *int { return v.DiskTotal }).(pulumi.IntPtrOutput)
+}
+
+// Instance count.
+func (o GetDedicatedClustersDedicatedClusterSetOutput) InstanceCount() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetDedicatedClustersDedicatedClusterSet) *int { return v.InstanceCount }).(pulumi.IntPtrOutput)
+}
+
+// Available Memory.
+func (o GetDedicatedClustersDedicatedClusterSetOutput) MemAvailable() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetDedicatedClustersDedicatedClusterSet) *int { return v.MemAvailable }).(pulumi.IntPtrOutput)
+}
+
+// Total amount of memory.
+func (o GetDedicatedClustersDedicatedClusterSetOutput) MemTotal() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetDedicatedClustersDedicatedClusterSet) *int { return v.MemTotal }).(pulumi.IntPtrOutput)
+}
+
+// Filter name.
+func (o GetDedicatedClustersDedicatedClusterSetOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDedicatedClustersDedicatedClusterSet) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Disaster recovery cluster.
+func (o GetDedicatedClustersDedicatedClusterSetOutput) StandbyDedicatedClusterSets() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDedicatedClustersDedicatedClusterSet) []string { return v.StandbyDedicatedClusterSets }).(pulumi.StringArrayOutput)
+}
+
+// Zone.
+func (o GetDedicatedClustersDedicatedClusterSetOutput) Zone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDedicatedClustersDedicatedClusterSet) *string { return v.Zone }).(pulumi.StringPtrOutput)
+}
+
+type GetDedicatedClustersDedicatedClusterSetArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDedicatedClustersDedicatedClusterSetArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDedicatedClustersDedicatedClusterSet)(nil)).Elem()
+}
+
+func (o GetDedicatedClustersDedicatedClusterSetArrayOutput) ToGetDedicatedClustersDedicatedClusterSetArrayOutput() GetDedicatedClustersDedicatedClusterSetArrayOutput {
+	return o
+}
+
+func (o GetDedicatedClustersDedicatedClusterSetArrayOutput) ToGetDedicatedClustersDedicatedClusterSetArrayOutputWithContext(ctx context.Context) GetDedicatedClustersDedicatedClusterSetArrayOutput {
+	return o
+}
+
+func (o GetDedicatedClustersDedicatedClusterSetArrayOutput) Index(i pulumi.IntInput) GetDedicatedClustersDedicatedClusterSetOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDedicatedClustersDedicatedClusterSet {
+		return vs[0].([]GetDedicatedClustersDedicatedClusterSet)[vs[1].(int)]
+	}).(GetDedicatedClustersDedicatedClusterSetOutput)
+}
+
+type GetDedicatedClustersFilter struct {
+	// Filter name.
+	Name *string `pulumi:"name"`
+	// Filter values.
+	Values []string `pulumi:"values"`
+}
+
+// GetDedicatedClustersFilterInput is an input type that accepts GetDedicatedClustersFilterArgs and GetDedicatedClustersFilterOutput values.
+// You can construct a concrete instance of `GetDedicatedClustersFilterInput` via:
+//
+//	GetDedicatedClustersFilterArgs{...}
+type GetDedicatedClustersFilterInput interface {
+	pulumi.Input
+
+	ToGetDedicatedClustersFilterOutput() GetDedicatedClustersFilterOutput
+	ToGetDedicatedClustersFilterOutputWithContext(context.Context) GetDedicatedClustersFilterOutput
+}
+
+type GetDedicatedClustersFilterArgs struct {
+	// Filter name.
+	Name pulumi.StringPtrInput `pulumi:"name"`
+	// Filter values.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetDedicatedClustersFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDedicatedClustersFilter)(nil)).Elem()
+}
+
+func (i GetDedicatedClustersFilterArgs) ToGetDedicatedClustersFilterOutput() GetDedicatedClustersFilterOutput {
+	return i.ToGetDedicatedClustersFilterOutputWithContext(context.Background())
+}
+
+func (i GetDedicatedClustersFilterArgs) ToGetDedicatedClustersFilterOutputWithContext(ctx context.Context) GetDedicatedClustersFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDedicatedClustersFilterOutput)
+}
+
+// GetDedicatedClustersFilterArrayInput is an input type that accepts GetDedicatedClustersFilterArray and GetDedicatedClustersFilterArrayOutput values.
+// You can construct a concrete instance of `GetDedicatedClustersFilterArrayInput` via:
+//
+//	GetDedicatedClustersFilterArray{ GetDedicatedClustersFilterArgs{...} }
+type GetDedicatedClustersFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDedicatedClustersFilterArrayOutput() GetDedicatedClustersFilterArrayOutput
+	ToGetDedicatedClustersFilterArrayOutputWithContext(context.Context) GetDedicatedClustersFilterArrayOutput
+}
+
+type GetDedicatedClustersFilterArray []GetDedicatedClustersFilterInput
+
+func (GetDedicatedClustersFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDedicatedClustersFilter)(nil)).Elem()
+}
+
+func (i GetDedicatedClustersFilterArray) ToGetDedicatedClustersFilterArrayOutput() GetDedicatedClustersFilterArrayOutput {
+	return i.ToGetDedicatedClustersFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDedicatedClustersFilterArray) ToGetDedicatedClustersFilterArrayOutputWithContext(ctx context.Context) GetDedicatedClustersFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDedicatedClustersFilterArrayOutput)
+}
+
+type GetDedicatedClustersFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDedicatedClustersFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDedicatedClustersFilter)(nil)).Elem()
+}
+
+func (o GetDedicatedClustersFilterOutput) ToGetDedicatedClustersFilterOutput() GetDedicatedClustersFilterOutput {
+	return o
+}
+
+func (o GetDedicatedClustersFilterOutput) ToGetDedicatedClustersFilterOutputWithContext(ctx context.Context) GetDedicatedClustersFilterOutput {
+	return o
+}
+
+// Filter name.
+func (o GetDedicatedClustersFilterOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v GetDedicatedClustersFilter) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+// Filter values.
+func (o GetDedicatedClustersFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDedicatedClustersFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetDedicatedClustersFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDedicatedClustersFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDedicatedClustersFilter)(nil)).Elem()
+}
+
+func (o GetDedicatedClustersFilterArrayOutput) ToGetDedicatedClustersFilterArrayOutput() GetDedicatedClustersFilterArrayOutput {
+	return o
+}
+
+func (o GetDedicatedClustersFilterArrayOutput) ToGetDedicatedClustersFilterArrayOutputWithContext(ctx context.Context) GetDedicatedClustersFilterArrayOutput {
+	return o
+}
+
+func (o GetDedicatedClustersFilterArrayOutput) Index(i pulumi.IntInput) GetDedicatedClustersFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDedicatedClustersFilter {
+		return vs[0].([]GetDedicatedClustersFilter)[vs[1].(int)]
+	}).(GetDedicatedClustersFilterOutput)
 }
 
 type GetDefaultParametersParamInfoSet struct {
@@ -4945,6 +6117,12 @@ func (o GetZonesZoneSetArrayOutput) Index(i pulumi.IntInput) GetZonesZoneSetOutp
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesOperationModifyPrivilegeSetInput)(nil)).Elem(), AccountPrivilegesOperationModifyPrivilegeSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesOperationModifyPrivilegeSetArrayInput)(nil)).Elem(), AccountPrivilegesOperationModifyPrivilegeSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeInput)(nil)).Elem(), AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrInput)(nil)).Elem(), AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectInput)(nil)).Elem(), AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrInput)(nil)).Elem(), AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceBackupPlanInput)(nil)).Elem(), InstanceBackupPlanArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceBackupPlanPtrInput)(nil)).Elem(), InstanceBackupPlanArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceDbNodeSetInput)(nil)).Elem(), InstanceDbNodeSetArgs{})
@@ -4953,6 +6131,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ParameterTemplateModifyParamEntrySetArrayInput)(nil)).Elem(), ParameterTemplateModifyParamEntrySetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ReadonlyGroupNetInfoListInput)(nil)).Elem(), ReadonlyGroupNetInfoListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ReadonlyGroupNetInfoListArrayInput)(nil)).Elem(), ReadonlyGroupNetInfoListArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountPrivilegesDatabaseObjectSetInput)(nil)).Elem(), GetAccountPrivilegesDatabaseObjectSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountPrivilegesDatabaseObjectSetArrayInput)(nil)).Elem(), GetAccountPrivilegesDatabaseObjectSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountPrivilegesPrivilegeSetInput)(nil)).Elem(), GetAccountPrivilegesPrivilegeSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountPrivilegesPrivilegeSetArrayInput)(nil)).Elem(), GetAccountPrivilegesPrivilegeSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountPrivilegesPrivilegeSetObjectInput)(nil)).Elem(), GetAccountPrivilegesPrivilegeSetObjectArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetAccountPrivilegesPrivilegeSetObjectArrayInput)(nil)).Elem(), GetAccountPrivilegesPrivilegeSetObjectArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupDownloadUrlsBackupDownloadRestrictionInput)(nil)).Elem(), GetBackupDownloadUrlsBackupDownloadRestrictionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBackupDownloadUrlsBackupDownloadRestrictionPtrInput)(nil)).Elem(), GetBackupDownloadUrlsBackupDownloadRestrictionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBaseBackupsBaseBackupSetInput)(nil)).Elem(), GetBaseBackupsBaseBackupSetArgs{})
@@ -4963,6 +6147,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceClassesClassInfoSetArrayInput)(nil)).Elem(), GetDbInstanceClassesClassInfoSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceVersionsVersionSetInput)(nil)).Elem(), GetDbInstanceVersionsVersionSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDbInstanceVersionsVersionSetArrayInput)(nil)).Elem(), GetDbInstanceVersionsVersionSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDedicatedClustersDedicatedClusterSetInput)(nil)).Elem(), GetDedicatedClustersDedicatedClusterSetArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDedicatedClustersDedicatedClusterSetArrayInput)(nil)).Elem(), GetDedicatedClustersDedicatedClusterSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDedicatedClustersFilterInput)(nil)).Elem(), GetDedicatedClustersFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDedicatedClustersFilterArrayInput)(nil)).Elem(), GetDedicatedClustersFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDefaultParametersParamInfoSetInput)(nil)).Elem(), GetDefaultParametersParamInfoSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDefaultParametersParamInfoSetArrayInput)(nil)).Elem(), GetDefaultParametersParamInfoSetArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDefaultParametersParamInfoSetSpecRelationSetInput)(nil)).Elem(), GetDefaultParametersParamInfoSetSpecRelationSetArgs{})
@@ -5005,6 +6193,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetXlogsListArrayInput)(nil)).Elem(), GetXlogsListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZonesZoneSetInput)(nil)).Elem(), GetZonesZoneSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZonesZoneSetArrayInput)(nil)).Elem(), GetZonesZoneSetArray{})
+	pulumi.RegisterOutputType(AccountPrivilegesOperationModifyPrivilegeSetOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesOperationModifyPrivilegeSetArrayOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegePtrOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectOutput{})
+	pulumi.RegisterOutputType(AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObjectPtrOutput{})
 	pulumi.RegisterOutputType(InstanceBackupPlanOutput{})
 	pulumi.RegisterOutputType(InstanceBackupPlanPtrOutput{})
 	pulumi.RegisterOutputType(InstanceDbNodeSetOutput{})
@@ -5013,6 +6207,12 @@ func init() {
 	pulumi.RegisterOutputType(ParameterTemplateModifyParamEntrySetArrayOutput{})
 	pulumi.RegisterOutputType(ReadonlyGroupNetInfoListOutput{})
 	pulumi.RegisterOutputType(ReadonlyGroupNetInfoListArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountPrivilegesDatabaseObjectSetOutput{})
+	pulumi.RegisterOutputType(GetAccountPrivilegesDatabaseObjectSetArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountPrivilegesPrivilegeSetOutput{})
+	pulumi.RegisterOutputType(GetAccountPrivilegesPrivilegeSetArrayOutput{})
+	pulumi.RegisterOutputType(GetAccountPrivilegesPrivilegeSetObjectOutput{})
+	pulumi.RegisterOutputType(GetAccountPrivilegesPrivilegeSetObjectArrayOutput{})
 	pulumi.RegisterOutputType(GetBackupDownloadUrlsBackupDownloadRestrictionOutput{})
 	pulumi.RegisterOutputType(GetBackupDownloadUrlsBackupDownloadRestrictionPtrOutput{})
 	pulumi.RegisterOutputType(GetBaseBackupsBaseBackupSetOutput{})
@@ -5023,6 +6223,10 @@ func init() {
 	pulumi.RegisterOutputType(GetDbInstanceClassesClassInfoSetArrayOutput{})
 	pulumi.RegisterOutputType(GetDbInstanceVersionsVersionSetOutput{})
 	pulumi.RegisterOutputType(GetDbInstanceVersionsVersionSetArrayOutput{})
+	pulumi.RegisterOutputType(GetDedicatedClustersDedicatedClusterSetOutput{})
+	pulumi.RegisterOutputType(GetDedicatedClustersDedicatedClusterSetArrayOutput{})
+	pulumi.RegisterOutputType(GetDedicatedClustersFilterOutput{})
+	pulumi.RegisterOutputType(GetDedicatedClustersFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetDefaultParametersParamInfoSetOutput{})
 	pulumi.RegisterOutputType(GetDefaultParametersParamInfoSetArrayOutput{})
 	pulumi.RegisterOutputType(GetDefaultParametersParamInfoSetSpecRelationSetOutput{})

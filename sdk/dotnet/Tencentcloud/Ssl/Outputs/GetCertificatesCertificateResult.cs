@@ -55,6 +55,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Outputs
         /// </summary>
         public readonly string OrderId;
         /// <summary>
+        /// Account UIN.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        /// </summary>
+        public readonly string OwnerUin;
+        /// <summary>
         /// Certificate authority.
         /// </summary>
         public readonly string ProductZhName;
@@ -74,6 +78,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Outputs
         /// Type of the SSL certificate to be queried. Available values includes: `CA` and `SVR`.
         /// </summary>
         public readonly string Type;
+        /// <summary>
+        /// Validity period: unit (month).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+        /// </summary>
+        public readonly string ValidityPeriod;
 
         [OutputConstructor]
         private GetCertificatesCertificateResult(
@@ -97,6 +105,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Outputs
 
             string orderId,
 
+            string ownerUin,
+
             string productZhName,
 
             int projectId,
@@ -105,7 +115,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Outputs
 
             ImmutableArray<string> subjectNames,
 
-            string type)
+            string type,
+
+            string validityPeriod)
         {
             BeginTime = beginTime;
             Cert = cert;
@@ -117,11 +129,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl.Outputs
             Key = key;
             Name = name;
             OrderId = orderId;
+            OwnerUin = ownerUin;
             ProductZhName = productZhName;
             ProjectId = projectId;
             Status = status;
             SubjectNames = subjectNames;
             Type = type;
+            ValidityPeriod = validityPeriod;
         }
     }
 }

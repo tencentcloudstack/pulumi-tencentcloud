@@ -364,7 +364,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// Node pool tag specifications, will passthroughs to the scaling instances.
         /// </summary>
         [Output("tags")]
-        public Output<ImmutableDictionary<string, object>?> Tags { get; private set; } = null!;
+        public Output<ImmutableDictionary<string, object>> Tags { get; private set; } = null!;
 
         /// <summary>
         /// Taints of kubernetes node pool created nodes.

@@ -63,6 +63,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly string? InstanceName;
         /// <summary>
+        /// Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default value: `ORIGINAL`. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+        /// </summary>
+        public readonly string? InstanceNameStyle;
+        /// <summary>
         /// Specified types of CVM instance.
         /// </summary>
         public readonly string InstanceType;
@@ -137,6 +141,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
             string? instanceName,
 
+            string? instanceNameStyle,
+
             string instanceType,
 
             string? internetChargeType,
@@ -173,6 +179,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
             InstanceChargeTypePrepaidPeriod = instanceChargeTypePrepaidPeriod;
             InstanceChargeTypePrepaidRenewFlag = instanceChargeTypePrepaidRenewFlag;
             InstanceName = instanceName;
+            InstanceNameStyle = instanceNameStyle;
             InstanceType = instanceType;
             InternetChargeType = internetChargeType;
             InternetMaxBandwidthOut = internetMaxBandwidthOut;
