@@ -22,35 +22,67 @@ import (
 // import (
 //
 //	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi/config"
 //	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Monitor"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Subnet"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Vpc"
 //
 // )
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Monitor.NewTmpAlertGroup(ctx, "tmpAlertGroup", &Monitor.TmpAlertGroupArgs{
-//				AmpReceivers: pulumi.StringArray{
-//					pulumi.String("notice-om017kc2"),
+//			cfg := config.New(ctx, "")
+//			availabilityZone := "ap-guangzhou-4"
+//			if param := cfg.Get("availabilityZone"); param != "" {
+//				availabilityZone = param
+//			}
+//			vpc, err := Vpc.NewInstance(ctx, "vpc", &Vpc.InstanceArgs{
+//				CidrBlock: pulumi.String("10.0.0.0/16"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			subnet, err := Subnet.NewInstance(ctx, "subnet", &Subnet.InstanceArgs{
+//				VpcId:            vpc.ID(),
+//				AvailabilityZone: pulumi.String(availabilityZone),
+//				CidrBlock:        pulumi.String("10.0.1.0/24"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			exampleTmpInstance, err := Monitor.NewTmpInstance(ctx, "exampleTmpInstance", &Monitor.TmpInstanceArgs{
+//				InstanceName:      pulumi.String("tf-tmp-instance"),
+//				VpcId:             vpc.ID(),
+//				SubnetId:          subnet.ID(),
+//				DataRetentionTime: pulumi.Int(30),
+//				Zone:              pulumi.String(availabilityZone),
+//				Tags: pulumi.Map{
+//					"createdBy": pulumi.Any("terraform"),
 //				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			_, err = Monitor.NewTmpAlertGroup(ctx, "exampleTmpAlertGroup", &Monitor.TmpAlertGroupArgs{
+//				GroupName:      pulumi.String("tf-example"),
+//				InstanceId:     exampleTmpInstance.ID(),
+//				RepeatInterval: pulumi.String("5m"),
 //				CustomReceiver: &monitor.TmpAlertGroupCustomReceiverArgs{
 //					Type: pulumi.String("amp"),
 //				},
-//				GroupName:      pulumi.String("tf-test"),
-//				InstanceId:     pulumi.String("prom-ip429jis"),
-//				RepeatInterval: pulumi.String("5m"),
 //				Rules: monitor.TmpAlertGroupRuleArray{
 //					&monitor.TmpAlertGroupRuleArgs{
-//						Annotations: pulumi.Map{
-//							"description": pulumi.Any("Agent {{$labels.instance}} is deactivated, please pay attention!"),
-//							"summary":     pulumi.Any("Agent health check"),
-//						},
 //						Duration: pulumi.String("1m"),
 //						Expr:     pulumi.String("up{job=\"prometheus-agent\"} != 1"),
+//						RuleName: pulumi.String("Agent health check"),
+//						State:    pulumi.Int(2),
+//						Annotations: pulumi.Map{
+//							"summary":     pulumi.Any("Agent health check"),
+//							"description": pulumi.Any("Agent {{$labels.instance}} is deactivated, please pay attention!"),
+//						},
 //						Labels: pulumi.Map{
 //							"severity": pulumi.Any("critical"),
 //						},
-//						RuleName: pulumi.String("Agent health check"),
-//						State:    pulumi.Int(2),
 //					},
 //				},
 //			})
@@ -69,7 +101,7 @@ import (
 // monitor tmp_alert_group can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup tmp_alert_group instance_id#group_id
+// $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup example prom-34qkzwvs#alert-rfkkr6cw
 // ```
 type TmpAlertGroup struct {
 	pulumi.CustomResourceState

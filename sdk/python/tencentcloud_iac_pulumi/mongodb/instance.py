@@ -27,6 +27,8 @@ class InstanceArgs:
                  availability_zone_lists: Optional[pulumi.Input[Sequence[pulumi.Input[str]]]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
                  hidden_zone: Optional[pulumi.Input[str]] = None,
+                 maintenance_end: Optional[pulumi.Input[str]] = None,
+                 maintenance_start: Optional[pulumi.Input[str]] = None,
                  node_num: Optional[pulumi.Input[int]] = None,
                  password: Optional[pulumi.Input[str]] = None,
                  prepaid_period: Optional[pulumi.Input[int]] = None,
@@ -53,6 +55,10 @@ class InstanceArgs:
                - Basic network cannot be selected.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         :param pulumi.Input[str] hidden_zone: The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
+        :param pulumi.Input[str] maintenance_end: Maintenance window end time.
+               - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+               - The end time must be based on the start time backwards.
+        :param pulumi.Input[str] maintenance_start: Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
         :param pulumi.Input[int] node_num: The number of nodes in each replica set. Default value: 3.
         :param pulumi.Input[str] password: Password of this Mongodb account.
         :param pulumi.Input[int] prepaid_period: The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when charge_type is set to `PREPAID`.
@@ -79,6 +85,10 @@ class InstanceArgs:
             pulumi.set(__self__, "charge_type", charge_type)
         if hidden_zone is not None:
             pulumi.set(__self__, "hidden_zone", hidden_zone)
+        if maintenance_end is not None:
+            pulumi.set(__self__, "maintenance_end", maintenance_end)
+        if maintenance_start is not None:
+            pulumi.set(__self__, "maintenance_start", maintenance_start)
         if node_num is not None:
             pulumi.set(__self__, "node_num", node_num)
         if password is not None:
@@ -235,6 +245,32 @@ class InstanceArgs:
         pulumi.set(self, "hidden_zone", value)
 
     @property
+    @pulumi.getter(name="maintenanceEnd")
+    def maintenance_end(self) -> Optional[pulumi.Input[str]]:
+        """
+        Maintenance window end time.
+        - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+        - The end time must be based on the start time backwards.
+        """
+        return pulumi.get(self, "maintenance_end")
+
+    @maintenance_end.setter
+    def maintenance_end(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "maintenance_end", value)
+
+    @property
+    @pulumi.getter(name="maintenanceStart")
+    def maintenance_start(self) -> Optional[pulumi.Input[str]]:
+        """
+        Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
+        """
+        return pulumi.get(self, "maintenance_start")
+
+    @maintenance_start.setter
+    def maintenance_start(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "maintenance_start", value)
+
+    @property
     @pulumi.getter(name="nodeNum")
     def node_num(self) -> Optional[pulumi.Input[int]]:
         """
@@ -356,6 +392,8 @@ class _InstanceState:
                  hidden_zone: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  machine_type: Optional[pulumi.Input[str]] = None,
+                 maintenance_end: Optional[pulumi.Input[str]] = None,
+                 maintenance_start: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
                  node_num: Optional[pulumi.Input[int]] = None,
                  password: Optional[pulumi.Input[str]] = None,
@@ -387,6 +425,10 @@ class _InstanceState:
         :param pulumi.Input[str] hidden_zone: The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
         :param pulumi.Input[str] instance_name: Name of the Mongodb instance.
         :param pulumi.Input[str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
+        :param pulumi.Input[str] maintenance_end: Maintenance window end time.
+               - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+               - The end time must be based on the start time backwards.
+        :param pulumi.Input[str] maintenance_start: Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
         :param pulumi.Input[int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         :param pulumi.Input[int] node_num: The number of nodes in each replica set. Default value: 3.
         :param pulumi.Input[str] password: Password of this Mongodb account.
@@ -423,6 +465,10 @@ class _InstanceState:
             pulumi.set(__self__, "instance_name", instance_name)
         if machine_type is not None:
             pulumi.set(__self__, "machine_type", machine_type)
+        if maintenance_end is not None:
+            pulumi.set(__self__, "maintenance_end", maintenance_end)
+        if maintenance_start is not None:
+            pulumi.set(__self__, "maintenance_start", maintenance_start)
         if memory is not None:
             pulumi.set(__self__, "memory", memory)
         if node_num is not None:
@@ -577,6 +623,32 @@ class _InstanceState:
     @machine_type.setter
     def machine_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "machine_type", value)
+
+    @property
+    @pulumi.getter(name="maintenanceEnd")
+    def maintenance_end(self) -> Optional[pulumi.Input[str]]:
+        """
+        Maintenance window end time.
+        - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+        - The end time must be based on the start time backwards.
+        """
+        return pulumi.get(self, "maintenance_end")
+
+    @maintenance_end.setter
+    def maintenance_end(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "maintenance_end", value)
+
+    @property
+    @pulumi.getter(name="maintenanceStart")
+    def maintenance_start(self) -> Optional[pulumi.Input[str]]:
+        """
+        Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
+        """
+        return pulumi.get(self, "maintenance_start")
+
+    @maintenance_start.setter
+    def maintenance_start(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "maintenance_start", value)
 
     @property
     @pulumi.getter
@@ -773,6 +845,8 @@ class Instance(pulumi.CustomResource):
                  hidden_zone: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  machine_type: Optional[pulumi.Input[str]] = None,
+                 maintenance_end: Optional[pulumi.Input[str]] = None,
+                 maintenance_start: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
                  node_num: Optional[pulumi.Input[int]] = None,
                  password: Optional[pulumi.Input[str]] = None,
@@ -832,6 +906,10 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] hidden_zone: The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
         :param pulumi.Input[str] instance_name: Name of the Mongodb instance.
         :param pulumi.Input[str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
+        :param pulumi.Input[str] maintenance_end: Maintenance window end time.
+               - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+               - The end time must be based on the start time backwards.
+        :param pulumi.Input[str] maintenance_start: Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
         :param pulumi.Input[int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         :param pulumi.Input[int] node_num: The number of nodes in each replica set. Default value: 3.
         :param pulumi.Input[str] password: Password of this Mongodb account.
@@ -906,6 +984,8 @@ class Instance(pulumi.CustomResource):
                  hidden_zone: Optional[pulumi.Input[str]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
                  machine_type: Optional[pulumi.Input[str]] = None,
+                 maintenance_end: Optional[pulumi.Input[str]] = None,
+                 maintenance_start: Optional[pulumi.Input[str]] = None,
                  memory: Optional[pulumi.Input[int]] = None,
                  node_num: Optional[pulumi.Input[int]] = None,
                  password: Optional[pulumi.Input[str]] = None,
@@ -943,6 +1023,8 @@ class Instance(pulumi.CustomResource):
             if machine_type is None and not opts.urn:
                 raise TypeError("Missing required property 'machine_type'")
             __props__.__dict__["machine_type"] = machine_type
+            __props__.__dict__["maintenance_end"] = maintenance_end
+            __props__.__dict__["maintenance_start"] = maintenance_start
             if memory is None and not opts.urn:
                 raise TypeError("Missing required property 'memory'")
             __props__.__dict__["memory"] = memory
@@ -985,6 +1067,8 @@ class Instance(pulumi.CustomResource):
             hidden_zone: Optional[pulumi.Input[str]] = None,
             instance_name: Optional[pulumi.Input[str]] = None,
             machine_type: Optional[pulumi.Input[str]] = None,
+            maintenance_end: Optional[pulumi.Input[str]] = None,
+            maintenance_start: Optional[pulumi.Input[str]] = None,
             memory: Optional[pulumi.Input[int]] = None,
             node_num: Optional[pulumi.Input[int]] = None,
             password: Optional[pulumi.Input[str]] = None,
@@ -1021,6 +1105,10 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] hidden_zone: The availability zone to which the Hidden node belongs. This parameter must be configured to deploy instances across availability zones.
         :param pulumi.Input[str] instance_name: Name of the Mongodb instance.
         :param pulumi.Input[str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
+        :param pulumi.Input[str] maintenance_end: Maintenance window end time.
+               - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+               - The end time must be based on the start time backwards.
+        :param pulumi.Input[str] maintenance_start: Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
         :param pulumi.Input[int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         :param pulumi.Input[int] node_num: The number of nodes in each replica set. Default value: 3.
         :param pulumi.Input[str] password: Password of this Mongodb account.
@@ -1051,6 +1139,8 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["hidden_zone"] = hidden_zone
         __props__.__dict__["instance_name"] = instance_name
         __props__.__dict__["machine_type"] = machine_type
+        __props__.__dict__["maintenance_end"] = maintenance_end
+        __props__.__dict__["maintenance_start"] = maintenance_start
         __props__.__dict__["memory"] = memory
         __props__.__dict__["node_num"] = node_num
         __props__.__dict__["password"] = password
@@ -1151,6 +1241,24 @@ class Instance(pulumi.CustomResource):
         Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         """
         return pulumi.get(self, "machine_type")
+
+    @property
+    @pulumi.getter(name="maintenanceEnd")
+    def maintenance_end(self) -> pulumi.Output[str]:
+        """
+        Maintenance window end time.
+        - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+        - The end time must be based on the start time backwards.
+        """
+        return pulumi.get(self, "maintenance_end")
+
+    @property
+    @pulumi.getter(name="maintenanceStart")
+    def maintenance_start(self) -> pulumi.Output[str]:
+        """
+        Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
+        """
+        return pulumi.get(self, "maintenance_start")
 
     @property
     @pulumi.getter

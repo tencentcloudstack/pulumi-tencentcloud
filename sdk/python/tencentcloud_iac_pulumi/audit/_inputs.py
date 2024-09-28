@@ -11,6 +11,7 @@ from .. import _utilities
 
 __all__ = [
     'TrackStorageArgs',
+    'GetEventsLookupAttributeArgs',
 ]
 
 @pulumi.input_type
@@ -78,5 +79,47 @@ class TrackStorageArgs:
     @storage_type.setter
     def storage_type(self, value: pulumi.Input[str]):
         pulumi.set(self, "storage_type", value)
+
+
+@pulumi.input_type
+class GetEventsLookupAttributeArgs:
+    def __init__(__self__, *,
+                 attribute_key: str,
+                 attribute_value: Optional[str] = None):
+        """
+        :param str attribute_key: Valid values: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, and EventId
+               Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        :param str attribute_value: Value of `AttributeValue`
+               Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "attribute_key", attribute_key)
+        if attribute_value is not None:
+            pulumi.set(__self__, "attribute_value", attribute_value)
+
+    @property
+    @pulumi.getter(name="attributeKey")
+    def attribute_key(self) -> str:
+        """
+        Valid values: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, and EventId
+        Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "attribute_key")
+
+    @attribute_key.setter
+    def attribute_key(self, value: str):
+        pulumi.set(self, "attribute_key", value)
+
+    @property
+    @pulumi.getter(name="attributeValue")
+    def attribute_value(self) -> Optional[str]:
+        """
+        Value of `AttributeValue`
+        Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "attribute_value")
+
+    @attribute_value.setter
+    def attribute_value(self, value: Optional[str]):
+        pulumi.set(self, "attribute_value", value)
 
 

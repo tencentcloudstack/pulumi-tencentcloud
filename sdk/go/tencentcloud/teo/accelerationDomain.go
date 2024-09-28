@@ -52,7 +52,7 @@ import (
 // teo acceleration_domain can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Teo/accelerationDomain:AccelerationDomain acceleration_domain acceleration_domain_id
+// $ pulumi import tencentcloud:Teo/accelerationDomain:AccelerationDomain acceleration_domain zone_id#domain_name
 // ```
 type AccelerationDomain struct {
 	pulumi.CustomResourceState

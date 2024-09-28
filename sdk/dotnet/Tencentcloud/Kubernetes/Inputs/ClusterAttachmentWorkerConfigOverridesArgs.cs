@@ -32,7 +32,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<int>? DesiredPodNum { get; set; }
 
         /// <summary>
-        /// Docker graph path. Default is `/var/lib/docker`.
+        /// This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
         /// </summary>
         [Input("dockerGraphPath")]
         public Input<string>? DockerGraphPath { get; set; }
@@ -41,8 +41,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         private InputList<string>? _extraArgs;
 
         /// <summary>
-        /// Custom parameter information related to the node. This is a white-list parameter.
+        /// This argument was no longer supported by TencentCloud TKE. Custom parameter information related to the node. This is a white-list parameter.
         /// </summary>
+        [Obsolete(@"This argument was no longer supported by TencentCloud TKE.")]
         public InputList<string> ExtraArgs
         {
             get => _extraArgs ?? (_extraArgs = new InputList<string>());
@@ -56,25 +57,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<Inputs.ClusterAttachmentWorkerConfigOverridesGpuArgsArgs>? GpuArgs { get; set; }
 
         /// <summary>
-        /// Indicate to schedule the adding node or not. Default is true.
+        /// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
         /// </summary>
         [Input("isSchedule")]
         public Input<bool>? IsSchedule { get; set; }
 
         /// <summary>
-        /// Mount target. Default is not mounting.
+        /// This argument was no longer supported by TencentCloud TKE. Mount target. Default is not mounting.
         /// </summary>
         [Input("mountTarget")]
         public Input<string>? MountTarget { get; set; }
 
         /// <summary>
-        /// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        /// This argument was no longer supported by TencentCloud TKE. Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
         /// </summary>
         [Input("preStartUserScript")]
         public Input<string>? PreStartUserScript { get; set; }
 
         /// <summary>
-        /// Base64-encoded User Data text, the length limit is 16KB.
+        /// This argument was no longer supported by TencentCloud TKE. Base64-encoded User Data text, the length limit is 16KB.
         /// </summary>
         [Input("userData")]
         public Input<string>? UserData { get; set; }

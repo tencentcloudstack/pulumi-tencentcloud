@@ -21,11 +21,41 @@ class _ExportableConfig(types.ModuleType):
         return __config__.get('assumeRole')
 
     @property
+    def assume_role_with_saml(self) -> Optional[str]:
+        return __config__.get('assumeRoleWithSaml')
+
+    @property
+    def assume_role_with_web_identity(self) -> Optional[str]:
+        return __config__.get('assumeRoleWithWebIdentity')
+
+    @property
+    def cam_role_name(self) -> Optional[str]:
+        """
+        The name of the CVM instance CAM role. It can be sourced from the `TENCENTCLOUD_CAM_ROLE_NAME` environment variable.
+        """
+        return __config__.get('camRoleName')
+
+    @property
+    def cos_domain(self) -> Optional[str]:
+        """
+        The cos domain of the API request, Default is `https://cos.{region}.myqcloud.com`, Other Examples:
+        `https://cluster-123456.cos-cdc.ap-guangzhou.myqcloud.com`.
+        """
+        return __config__.get('cosDomain')
+
+    @property
     def domain(self) -> Optional[str]:
         """
         The root domain of the API request, Default is `tencentcloudapi.com`.
         """
         return __config__.get('domain')
+
+    @property
+    def enable_pod_oidc(self) -> Optional[bool]:
+        """
+        Whether to enable pod oidc.
+        """
+        return __config__.get_bool('enablePodOidc')
 
     @property
     def profile(self) -> Optional[str]:
@@ -45,24 +75,22 @@ class _ExportableConfig(types.ModuleType):
     @property
     def region(self) -> Optional[str]:
         """
-        This is the TencentCloud region. It must be provided, but it can also be sourced from the `TENCENTCLOUD_REGION`
-        environment variables. The default input value is ap-guangzhou.
+        This is the TencentCloud region. It can also be sourced from the `TENCENTCLOUD_REGION` environment variables. The
+        default input value is ap-guangzhou.
         """
         return __config__.get('region') or _utilities.get_env('TENCENTCLOUD_REGION')
 
     @property
     def secret_id(self) -> Optional[str]:
         """
-        This is the TencentCloud access key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_ID`
-        environment variable.
+        This is the TencentCloud access key. It can also be sourced from the `TENCENTCLOUD_SECRET_ID` environment variable.
         """
         return __config__.get('secretId') or _utilities.get_env('TENCENTCLOUD_SECRET_ID')
 
     @property
     def secret_key(self) -> Optional[str]:
         """
-        This is the TencentCloud secret key. It must be provided, but it can also be sourced from the `TENCENTCLOUD_SECRET_KEY`
-        environment variable.
+        This is the TencentCloud secret key. It can also be sourced from the `TENCENTCLOUD_SECRET_KEY` environment variable.
         """
         return __config__.get('secretKey') or _utilities.get_env('TENCENTCLOUD_SECRET_KEY')
 

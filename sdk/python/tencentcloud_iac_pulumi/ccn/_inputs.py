@@ -13,7 +13,15 @@ __all__ = [
     'InstancesAcceptAttachInstanceArgs',
     'InstancesRejectAttachInstanceArgs',
     'InstancesResetAttachInstanceArgs',
+    'RouteTableAssociateInstanceConfigInstanceArgs',
+    'RouteTableBroadcastPoliciesPolicyArgs',
+    'RouteTableBroadcastPoliciesPolicyBroadcastConditionArgs',
+    'RouteTableBroadcastPoliciesPolicyRouteConditionArgs',
+    'RouteTableInputPoliciesPolicyArgs',
+    'RouteTableInputPoliciesPolicyRouteConditionArgs',
+    'RouteTableSelectionPoliciesSelectionPolicyArgs',
     'GetCrossBorderRegionBandwidthLimitsFilterArgs',
+    'GetRoutesFilterArgs',
 ]
 
 @pulumi.input_type
@@ -272,6 +280,400 @@ class InstancesResetAttachInstanceArgs:
 
 
 @pulumi.input_type
+class RouteTableAssociateInstanceConfigInstanceArgs:
+    def __init__(__self__, *,
+                 instance_id: pulumi.Input[str],
+                 instance_type: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] instance_id: Instances ID.
+        :param pulumi.Input[str] instance_type: Cloud networking supports instance types: VPC, DIRECTCONNECT, BMVPC, EDGE, EDGE_TUNNEL, EDGE_VPNGW, VPNGW.
+        """
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_type", instance_type)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Input[str]:
+        """
+        Instances ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "instance_id", value)
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> pulumi.Input[str]:
+        """
+        Cloud networking supports instance types: VPC, DIRECTCONNECT, BMVPC, EDGE, EDGE_TUNNEL, EDGE_VPNGW, VPNGW.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @instance_type.setter
+    def instance_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "instance_type", value)
+
+
+@pulumi.input_type
+class RouteTableBroadcastPoliciesPolicyArgs:
+    def __init__(__self__, *,
+                 action: pulumi.Input[str],
+                 broadcast_conditions: pulumi.Input[Sequence[pulumi.Input['RouteTableBroadcastPoliciesPolicyBroadcastConditionArgs']]],
+                 description: pulumi.Input[str],
+                 route_conditions: pulumi.Input[Sequence[pulumi.Input['RouteTableBroadcastPoliciesPolicyRouteConditionArgs']]]):
+        """
+        :param pulumi.Input[str] action: Routing behavior, `accept` allows, `drop` rejects.
+        :param pulumi.Input[Sequence[pulumi.Input['RouteTableBroadcastPoliciesPolicyBroadcastConditionArgs']]] broadcast_conditions: propagation conditions.
+        :param pulumi.Input[str] description: Policy description.
+        :param pulumi.Input[Sequence[pulumi.Input['RouteTableBroadcastPoliciesPolicyRouteConditionArgs']]] route_conditions: Routing conditions.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "broadcast_conditions", broadcast_conditions)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "route_conditions", route_conditions)
+
+    @property
+    @pulumi.getter
+    def action(self) -> pulumi.Input[str]:
+        """
+        Routing behavior, `accept` allows, `drop` rejects.
+        """
+        return pulumi.get(self, "action")
+
+    @action.setter
+    def action(self, value: pulumi.Input[str]):
+        pulumi.set(self, "action", value)
+
+    @property
+    @pulumi.getter(name="broadcastConditions")
+    def broadcast_conditions(self) -> pulumi.Input[Sequence[pulumi.Input['RouteTableBroadcastPoliciesPolicyBroadcastConditionArgs']]]:
+        """
+        propagation conditions.
+        """
+        return pulumi.get(self, "broadcast_conditions")
+
+    @broadcast_conditions.setter
+    def broadcast_conditions(self, value: pulumi.Input[Sequence[pulumi.Input['RouteTableBroadcastPoliciesPolicyBroadcastConditionArgs']]]):
+        pulumi.set(self, "broadcast_conditions", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> pulumi.Input[str]:
+        """
+        Policy description.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: pulumi.Input[str]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="routeConditions")
+    def route_conditions(self) -> pulumi.Input[Sequence[pulumi.Input['RouteTableBroadcastPoliciesPolicyRouteConditionArgs']]]:
+        """
+        Routing conditions.
+        """
+        return pulumi.get(self, "route_conditions")
+
+    @route_conditions.setter
+    def route_conditions(self, value: pulumi.Input[Sequence[pulumi.Input['RouteTableBroadcastPoliciesPolicyRouteConditionArgs']]]):
+        pulumi.set(self, "route_conditions", value)
+
+
+@pulumi.input_type
+class RouteTableBroadcastPoliciesPolicyBroadcastConditionArgs:
+    def __init__(__self__, *,
+                 match_pattern: pulumi.Input[int],
+                 name: pulumi.Input[str],
+                 values: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[int] match_pattern: Matching mode, `1` precise matching, `0` fuzzy matching.
+        :param pulumi.Input[str] name: condition type.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] values: List of conditional values.
+        """
+        pulumi.set(__self__, "match_pattern", match_pattern)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter(name="matchPattern")
+    def match_pattern(self) -> pulumi.Input[int]:
+        """
+        Matching mode, `1` precise matching, `0` fuzzy matching.
+        """
+        return pulumi.get(self, "match_pattern")
+
+    @match_pattern.setter
+    def match_pattern(self, value: pulumi.Input[int]):
+        pulumi.set(self, "match_pattern", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        condition type.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        List of conditional values.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class RouteTableBroadcastPoliciesPolicyRouteConditionArgs:
+    def __init__(__self__, *,
+                 match_pattern: pulumi.Input[int],
+                 name: pulumi.Input[str],
+                 values: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[int] match_pattern: Matching mode, `1` precise matching, `0` fuzzy matching.
+        :param pulumi.Input[str] name: condition type.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] values: List of conditional values.
+        """
+        pulumi.set(__self__, "match_pattern", match_pattern)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter(name="matchPattern")
+    def match_pattern(self) -> pulumi.Input[int]:
+        """
+        Matching mode, `1` precise matching, `0` fuzzy matching.
+        """
+        return pulumi.get(self, "match_pattern")
+
+    @match_pattern.setter
+    def match_pattern(self, value: pulumi.Input[int]):
+        pulumi.set(self, "match_pattern", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        condition type.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        List of conditional values.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class RouteTableInputPoliciesPolicyArgs:
+    def __init__(__self__, *,
+                 action: pulumi.Input[str],
+                 description: pulumi.Input[str],
+                 route_conditions: pulumi.Input[Sequence[pulumi.Input['RouteTableInputPoliciesPolicyRouteConditionArgs']]]):
+        """
+        :param pulumi.Input[str] action: Routing behavior, `accept` allows, `drop` rejects.
+        :param pulumi.Input[str] description: Policy description.
+        :param pulumi.Input[Sequence[pulumi.Input['RouteTableInputPoliciesPolicyRouteConditionArgs']]] route_conditions: Routing conditions.
+        """
+        pulumi.set(__self__, "action", action)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "route_conditions", route_conditions)
+
+    @property
+    @pulumi.getter
+    def action(self) -> pulumi.Input[str]:
+        """
+        Routing behavior, `accept` allows, `drop` rejects.
+        """
+        return pulumi.get(self, "action")
+
+    @action.setter
+    def action(self, value: pulumi.Input[str]):
+        pulumi.set(self, "action", value)
+
+    @property
+    @pulumi.getter
+    def description(self) -> pulumi.Input[str]:
+        """
+        Policy description.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: pulumi.Input[str]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="routeConditions")
+    def route_conditions(self) -> pulumi.Input[Sequence[pulumi.Input['RouteTableInputPoliciesPolicyRouteConditionArgs']]]:
+        """
+        Routing conditions.
+        """
+        return pulumi.get(self, "route_conditions")
+
+    @route_conditions.setter
+    def route_conditions(self, value: pulumi.Input[Sequence[pulumi.Input['RouteTableInputPoliciesPolicyRouteConditionArgs']]]):
+        pulumi.set(self, "route_conditions", value)
+
+
+@pulumi.input_type
+class RouteTableInputPoliciesPolicyRouteConditionArgs:
+    def __init__(__self__, *,
+                 match_pattern: pulumi.Input[int],
+                 name: pulumi.Input[str],
+                 values: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        """
+        :param pulumi.Input[int] match_pattern: Matching mode, `1` precise matching, `0` fuzzy matching.
+        :param pulumi.Input[str] name: condition type.
+        :param pulumi.Input[Sequence[pulumi.Input[str]]] values: List of conditional values.
+        """
+        pulumi.set(__self__, "match_pattern", match_pattern)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter(name="matchPattern")
+    def match_pattern(self) -> pulumi.Input[int]:
+        """
+        Matching mode, `1` precise matching, `0` fuzzy matching.
+        """
+        return pulumi.get(self, "match_pattern")
+
+    @match_pattern.setter
+    def match_pattern(self, value: pulumi.Input[int]):
+        pulumi.set(self, "match_pattern", value)
+
+    @property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[str]:
+        """
+        condition type.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[str]):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> pulumi.Input[Sequence[pulumi.Input[str]]]:
+        """
+        List of conditional values.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: pulumi.Input[Sequence[pulumi.Input[str]]]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class RouteTableSelectionPoliciesSelectionPolicyArgs:
+    def __init__(__self__, *,
+                 description: pulumi.Input[str],
+                 instance_id: pulumi.Input[str],
+                 instance_type: pulumi.Input[str],
+                 route_table_id: pulumi.Input[str],
+                 source_cidr_block: pulumi.Input[str]):
+        """
+        :param pulumi.Input[str] description: description.
+        :param pulumi.Input[str] instance_id: Instance ID.
+        :param pulumi.Input[str] instance_type: Instance Type: Private Network: VPC, Dedicated Gateway: DIRECTCONNECT, Blackstone Private Network: BMVPC, EDGE Device: EDGE, EDGE Tunnel: EDGE_TUNNEL, EDGE Gateway: EDGE_VPNGW, VPN Gateway: VPNGW.
+        :param pulumi.Input[str] route_table_id: route table ID.
+        :param pulumi.Input[str] source_cidr_block: Source CIDR.
+        """
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "instance_id", instance_id)
+        pulumi.set(__self__, "instance_type", instance_type)
+        pulumi.set(__self__, "route_table_id", route_table_id)
+        pulumi.set(__self__, "source_cidr_block", source_cidr_block)
+
+    @property
+    @pulumi.getter
+    def description(self) -> pulumi.Input[str]:
+        """
+        description.
+        """
+        return pulumi.get(self, "description")
+
+    @description.setter
+    def description(self, value: pulumi.Input[str]):
+        pulumi.set(self, "description", value)
+
+    @property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Input[str]:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "instance_id", value)
+
+    @property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> pulumi.Input[str]:
+        """
+        Instance Type: Private Network: VPC, Dedicated Gateway: DIRECTCONNECT, Blackstone Private Network: BMVPC, EDGE Device: EDGE, EDGE Tunnel: EDGE_TUNNEL, EDGE Gateway: EDGE_VPNGW, VPN Gateway: VPNGW.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @instance_type.setter
+    def instance_type(self, value: pulumi.Input[str]):
+        pulumi.set(self, "instance_type", value)
+
+    @property
+    @pulumi.getter(name="routeTableId")
+    def route_table_id(self) -> pulumi.Input[str]:
+        """
+        route table ID.
+        """
+        return pulumi.get(self, "route_table_id")
+
+    @route_table_id.setter
+    def route_table_id(self, value: pulumi.Input[str]):
+        pulumi.set(self, "route_table_id", value)
+
+    @property
+    @pulumi.getter(name="sourceCidrBlock")
+    def source_cidr_block(self) -> pulumi.Input[str]:
+        """
+        Source CIDR.
+        """
+        return pulumi.get(self, "source_cidr_block")
+
+    @source_cidr_block.setter
+    def source_cidr_block(self, value: pulumi.Input[str]):
+        pulumi.set(self, "source_cidr_block", value)
+
+
+@pulumi.input_type
 class GetCrossBorderRegionBandwidthLimitsFilterArgs:
     def __init__(__self__, *,
                  name: str,
@@ -300,6 +702,43 @@ class GetCrossBorderRegionBandwidthLimitsFilterArgs:
     def values(self) -> Sequence[str]:
         """
         Value of the field.
+        """
+        return pulumi.get(self, "values")
+
+    @values.setter
+    def values(self, value: Sequence[str]):
+        pulumi.set(self, "values", value)
+
+
+@pulumi.input_type
+class GetRoutesFilterArgs:
+    def __init__(__self__, *,
+                 name: str,
+                 values: Sequence[str]):
+        """
+        :param str name: Field to be filtered. Support `route-id`, `cidr-block`, `instance-type`, `instance-region`, `instance-id`, `route-table-id`.
+        :param Sequence[str] values: Filter value of the field.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "values", values)
+
+    @property
+    @pulumi.getter
+    def name(self) -> str:
+        """
+        Field to be filtered. Support `route-id`, `cidr-block`, `instance-type`, `instance-region`, `instance-id`, `route-table-id`.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: str):
+        pulumi.set(self, "name", value)
+
+    @property
+    @pulumi.getter
+    def values(self) -> Sequence[str]:
+        """
+        Filter value of the field.
         """
         return pulumi.get(self, "values")
 

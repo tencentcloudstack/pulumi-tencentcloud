@@ -82,16 +82,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     public partial class Layer4Listener : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// UDP origin station health check probe port.
+        /// </summary>
+        [Output("checkPort")]
+        public Output<int> CheckPort { get; private set; } = null!;
+
+        /// <summary>
+        /// UDP origin server health type. PORT means check port, and PING means PING.
+        /// </summary>
+        [Output("checkType")]
+        public Output<string> CheckType { get; private set; } = null!;
+
+        /// <summary>
         /// The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
         /// </summary>
         [Output("clientIpMethod")]
         public Output<int?> ClientIpMethod { get; private set; } = null!;
 
         /// <summary>
-        /// Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
+        /// Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than `interval`.
         /// </summary>
         [Output("connectTimeout")]
         public Output<int?> ConnectTimeout { get; private set; } = null!;
+
+        /// <summary>
+        /// UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.
+        /// </summary>
+        [Output("contextType")]
+        public Output<string> ContextType { get; private set; } = null!;
 
         /// <summary>
         /// Creation time of the layer4 listener.
@@ -100,13 +118,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Output<string> CreateTime { get; private set; } = null!;
 
         /// <summary>
-        /// Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
+        /// Indicates whether health check is enable, default value is `false`.
         /// </summary>
         [Output("healthCheck")]
         public Output<bool?> HealthCheck { get; private set; } = null!;
 
         /// <summary>
-        /// Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
+        /// Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.
+        /// </summary>
+        [Output("healthyThreshold")]
+        public Output<int?> HealthyThreshold { get; private set; } = null!;
+
+        /// <summary>
+        /// Interval of the health check, default value is 5s.
         /// </summary>
         [Output("interval")]
         public Output<int?> Interval { get; private set; } = null!;
@@ -148,16 +172,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Output<string> RealserverType { get; private set; } = null!;
 
         /// <summary>
+        /// UDP source server health check port detects received messages. Only used when the health check type is PORT.
+        /// </summary>
+        [Output("recvContext")]
+        public Output<string> RecvContext { get; private set; } = null!;
+
+        /// <summary>
         /// Scheduling policy of the layer4 listener, default value is `rr`. Valid value: `rr`, `wrr` and `lc`.
         /// </summary>
         [Output("scheduler")]
         public Output<string?> Scheduler { get; private set; } = null!;
 
         /// <summary>
+        /// UDP source server health check port detection sends messages. Only used when health check type is PORT.
+        /// </summary>
+        [Output("sendContext")]
+        public Output<string> SendContext { get; private set; } = null!;
+
+        /// <summary>
         /// Status of the layer4 listener.
         /// </summary>
         [Output("status")]
         public Output<int> Status { get; private set; } = null!;
+
+        /// <summary>
+        /// Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.
+        /// </summary>
+        [Output("unhealthyThreshold")]
+        public Output<int?> UnhealthyThreshold { get; private set; } = null!;
 
 
         /// <summary>
@@ -207,25 +249,49 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     public sealed class Layer4ListenerArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// UDP origin station health check probe port.
+        /// </summary>
+        [Input("checkPort")]
+        public Input<int>? CheckPort { get; set; }
+
+        /// <summary>
+        /// UDP origin server health type. PORT means check port, and PING means PING.
+        /// </summary>
+        [Input("checkType")]
+        public Input<string>? CheckType { get; set; }
+
+        /// <summary>
         /// The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
         /// </summary>
         [Input("clientIpMethod")]
         public Input<int>? ClientIpMethod { get; set; }
 
         /// <summary>
-        /// Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
+        /// Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than `interval`.
         /// </summary>
         [Input("connectTimeout")]
         public Input<int>? ConnectTimeout { get; set; }
 
         /// <summary>
-        /// Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
+        /// UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.
+        /// </summary>
+        [Input("contextType")]
+        public Input<string>? ContextType { get; set; }
+
+        /// <summary>
+        /// Indicates whether health check is enable, default value is `false`.
         /// </summary>
         [Input("healthCheck")]
         public Input<bool>? HealthCheck { get; set; }
 
         /// <summary>
-        /// Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
+        /// Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.
+        /// </summary>
+        [Input("healthyThreshold")]
+        public Input<int>? HealthyThreshold { get; set; }
+
+        /// <summary>
+        /// Interval of the health check, default value is 5s.
         /// </summary>
         [Input("interval")]
         public Input<int>? Interval { get; set; }
@@ -273,10 +339,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Input<string> RealserverType { get; set; } = null!;
 
         /// <summary>
+        /// UDP source server health check port detects received messages. Only used when the health check type is PORT.
+        /// </summary>
+        [Input("recvContext")]
+        public Input<string>? RecvContext { get; set; }
+
+        /// <summary>
         /// Scheduling policy of the layer4 listener, default value is `rr`. Valid value: `rr`, `wrr` and `lc`.
         /// </summary>
         [Input("scheduler")]
         public Input<string>? Scheduler { get; set; }
+
+        /// <summary>
+        /// UDP source server health check port detection sends messages. Only used when health check type is PORT.
+        /// </summary>
+        [Input("sendContext")]
+        public Input<string>? SendContext { get; set; }
+
+        /// <summary>
+        /// Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.
+        /// </summary>
+        [Input("unhealthyThreshold")]
+        public Input<int>? UnhealthyThreshold { get; set; }
 
         public Layer4ListenerArgs()
         {
@@ -287,16 +371,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     public sealed class Layer4ListenerState : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// UDP origin station health check probe port.
+        /// </summary>
+        [Input("checkPort")]
+        public Input<int>? CheckPort { get; set; }
+
+        /// <summary>
+        /// UDP origin server health type. PORT means check port, and PING means PING.
+        /// </summary>
+        [Input("checkType")]
+        public Input<string>? CheckType { get; set; }
+
+        /// <summary>
         /// The way the listener gets the client IP, 0 for TOA, 1 for Proxy Protocol, default value is 0. NOTES: Only supports listeners of `TCP` protocol.
         /// </summary>
         [Input("clientIpMethod")]
         public Input<int>? ClientIpMethod { get; set; }
 
         /// <summary>
-        /// Timeout of the health check response, should less than interval, default value is 2s. NOTES: Only supports listeners of `TCP` protocol and require less than `interval`.
+        /// Timeout of the health check response, should less than interval, default value is 2s. NOTES: Require less than `interval`.
         /// </summary>
         [Input("connectTimeout")]
         public Input<int>? ConnectTimeout { get; set; }
+
+        /// <summary>
+        /// UDP source station health check port probe message type: TEXT represents text. Only used when the health check type is PORT.
+        /// </summary>
+        [Input("contextType")]
+        public Input<string>? ContextType { get; set; }
 
         /// <summary>
         /// Creation time of the layer4 listener.
@@ -305,13 +407,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Input<string>? CreateTime { get; set; }
 
         /// <summary>
-        /// Indicates whether health check is enable, default value is `false`. NOTES: Only supports listeners of `TCP` protocol.
+        /// Indicates whether health check is enable, default value is `false`.
         /// </summary>
         [Input("healthCheck")]
         public Input<bool>? HealthCheck { get; set; }
 
         /// <summary>
-        /// Interval of the health check, default value is 5s. NOTES: Only supports listeners of `TCP` protocol.
+        /// Health threshold, which indicates how many consecutive inspections are successful, the source station is determined to be healthy. Range from 1 to 10. Default value is 1.
+        /// </summary>
+        [Input("healthyThreshold")]
+        public Input<int>? HealthyThreshold { get; set; }
+
+        /// <summary>
+        /// Interval of the health check, default value is 5s.
         /// </summary>
         [Input("interval")]
         public Input<int>? Interval { get; set; }
@@ -359,16 +467,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         public Input<string>? RealserverType { get; set; }
 
         /// <summary>
+        /// UDP source server health check port detects received messages. Only used when the health check type is PORT.
+        /// </summary>
+        [Input("recvContext")]
+        public Input<string>? RecvContext { get; set; }
+
+        /// <summary>
         /// Scheduling policy of the layer4 listener, default value is `rr`. Valid value: `rr`, `wrr` and `lc`.
         /// </summary>
         [Input("scheduler")]
         public Input<string>? Scheduler { get; set; }
 
         /// <summary>
+        /// UDP source server health check port detection sends messages. Only used when health check type is PORT.
+        /// </summary>
+        [Input("sendContext")]
+        public Input<string>? SendContext { get; set; }
+
+        /// <summary>
         /// Status of the layer4 listener.
         /// </summary>
         [Input("status")]
         public Input<int>? Status { get; set; }
+
+        /// <summary>
+        /// Unhealthy threshold, which indicates how many consecutive check failures the source station is considered unhealthy. Range from 1 to 10. Default value is 1.
+        /// </summary>
+        [Input("unhealthyThreshold")]
+        public Input<int>? UnhealthyThreshold { get; set; }
 
         public Layer4ListenerState()
         {

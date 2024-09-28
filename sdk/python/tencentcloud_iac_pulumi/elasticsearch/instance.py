@@ -24,6 +24,7 @@ class InstanceArgs:
                  basic_security_type: Optional[pulumi.Input[int]] = None,
                  charge_period: Optional[pulumi.Input[int]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 cos_backup: Optional[pulumi.Input['InstanceCosBackupArgs']] = None,
                  deploy_mode: Optional[pulumi.Input[int]] = None,
                  es_acl: Optional[pulumi.Input['InstanceEsAclArgs']] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
@@ -44,6 +45,7 @@ class InstanceArgs:
         :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         :param pulumi.Input[int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
+        :param pulumi.Input['InstanceCosBackupArgs'] cos_backup: COS automatic backup information.
         :param pulumi.Input[int] deploy_mode: Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
         :param pulumi.Input['InstanceEsAclArgs'] es_acl: Kibana Access Control Configuration.
         :param pulumi.Input[str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
@@ -67,6 +69,8 @@ class InstanceArgs:
             pulumi.set(__self__, "charge_period", charge_period)
         if charge_type is not None:
             pulumi.set(__self__, "charge_type", charge_type)
+        if cos_backup is not None:
+            pulumi.set(__self__, "cos_backup", cos_backup)
         if deploy_mode is not None:
             pulumi.set(__self__, "deploy_mode", deploy_mode)
         if es_acl is not None:
@@ -183,6 +187,18 @@ class InstanceArgs:
     @charge_type.setter
     def charge_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "charge_type", value)
+
+    @property
+    @pulumi.getter(name="cosBackup")
+    def cos_backup(self) -> Optional[pulumi.Input['InstanceCosBackupArgs']]:
+        """
+        COS automatic backup information.
+        """
+        return pulumi.get(self, "cos_backup")
+
+    @cos_backup.setter
+    def cos_backup(self, value: Optional[pulumi.Input['InstanceCosBackupArgs']]):
+        pulumi.set(self, "cos_backup", value)
 
     @property
     @pulumi.getter(name="deployMode")
@@ -312,6 +328,7 @@ class _InstanceState:
                  basic_security_type: Optional[pulumi.Input[int]] = None,
                  charge_period: Optional[pulumi.Input[int]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 cos_backup: Optional[pulumi.Input['InstanceCosBackupArgs']] = None,
                  create_time: Optional[pulumi.Input[str]] = None,
                  deploy_mode: Optional[pulumi.Input[int]] = None,
                  elasticsearch_domain: Optional[pulumi.Input[str]] = None,
@@ -337,6 +354,7 @@ class _InstanceState:
         :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         :param pulumi.Input[int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
+        :param pulumi.Input['InstanceCosBackupArgs'] cos_backup: COS automatic backup information.
         :param pulumi.Input[str] create_time: Instance creation time.
         :param pulumi.Input[int] deploy_mode: Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
         :param pulumi.Input[str] elasticsearch_domain: Elasticsearch domain name.
@@ -365,6 +383,8 @@ class _InstanceState:
             pulumi.set(__self__, "charge_period", charge_period)
         if charge_type is not None:
             pulumi.set(__self__, "charge_type", charge_type)
+        if cos_backup is not None:
+            pulumi.set(__self__, "cos_backup", cos_backup)
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
         if deploy_mode is not None:
@@ -451,6 +471,18 @@ class _InstanceState:
     @charge_type.setter
     def charge_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "charge_type", value)
+
+    @property
+    @pulumi.getter(name="cosBackup")
+    def cos_backup(self) -> Optional[pulumi.Input['InstanceCosBackupArgs']]:
+        """
+        COS automatic backup information.
+        """
+        return pulumi.get(self, "cos_backup")
+
+    @cos_backup.setter
+    def cos_backup(self, value: Optional[pulumi.Input['InstanceCosBackupArgs']]):
+        pulumi.set(self, "cos_backup", value)
 
     @property
     @pulumi.getter(name="createTime")
@@ -690,6 +722,7 @@ class Instance(pulumi.CustomResource):
                  basic_security_type: Optional[pulumi.Input[int]] = None,
                  charge_period: Optional[pulumi.Input[int]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 cos_backup: Optional[pulumi.Input[pulumi.InputType['InstanceCosBackupArgs']]] = None,
                  deploy_mode: Optional[pulumi.Input[int]] = None,
                  es_acl: Optional[pulumi.Input[pulumi.InputType['InstanceEsAclArgs']]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
@@ -744,6 +777,10 @@ class Instance(pulumi.CustomResource):
             )],
             es_acl=tencentcloud.elasticsearch.InstanceEsAclArgs(
                 white_lists=["127.0.0.1"],
+            ),
+            cos_backup=tencentcloud.elasticsearch.InstanceCosBackupArgs(
+                is_auto_backup=True,
+                backup_time="22:00",
             ),
             tags={
                 "test": "test",
@@ -830,6 +867,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         :param pulumi.Input[int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
+        :param pulumi.Input[pulumi.InputType['InstanceCosBackupArgs']] cos_backup: COS automatic backup information.
         :param pulumi.Input[int] deploy_mode: Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
         :param pulumi.Input[pulumi.InputType['InstanceEsAclArgs']] es_acl: Kibana Access Control Configuration.
         :param pulumi.Input[str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
@@ -890,6 +928,10 @@ class Instance(pulumi.CustomResource):
             )],
             es_acl=tencentcloud.elasticsearch.InstanceEsAclArgs(
                 white_lists=["127.0.0.1"],
+            ),
+            cos_backup=tencentcloud.elasticsearch.InstanceCosBackupArgs(
+                is_auto_backup=True,
+                backup_time="22:00",
             ),
             tags={
                 "test": "test",
@@ -989,6 +1031,7 @@ class Instance(pulumi.CustomResource):
                  basic_security_type: Optional[pulumi.Input[int]] = None,
                  charge_period: Optional[pulumi.Input[int]] = None,
                  charge_type: Optional[pulumi.Input[str]] = None,
+                 cos_backup: Optional[pulumi.Input[pulumi.InputType['InstanceCosBackupArgs']]] = None,
                  deploy_mode: Optional[pulumi.Input[int]] = None,
                  es_acl: Optional[pulumi.Input[pulumi.InputType['InstanceEsAclArgs']]] = None,
                  instance_name: Optional[pulumi.Input[str]] = None,
@@ -1016,6 +1059,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["basic_security_type"] = basic_security_type
             __props__.__dict__["charge_period"] = charge_period
             __props__.__dict__["charge_type"] = charge_type
+            __props__.__dict__["cos_backup"] = cos_backup
             __props__.__dict__["deploy_mode"] = deploy_mode
             __props__.__dict__["es_acl"] = es_acl
             __props__.__dict__["instance_name"] = instance_name
@@ -1059,6 +1103,7 @@ class Instance(pulumi.CustomResource):
             basic_security_type: Optional[pulumi.Input[int]] = None,
             charge_period: Optional[pulumi.Input[int]] = None,
             charge_type: Optional[pulumi.Input[str]] = None,
+            cos_backup: Optional[pulumi.Input[pulumi.InputType['InstanceCosBackupArgs']]] = None,
             create_time: Optional[pulumi.Input[str]] = None,
             deploy_mode: Optional[pulumi.Input[int]] = None,
             elasticsearch_domain: Optional[pulumi.Input[str]] = None,
@@ -1089,6 +1134,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         :param pulumi.Input[int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
+        :param pulumi.Input[pulumi.InputType['InstanceCosBackupArgs']] cos_backup: COS automatic backup information.
         :param pulumi.Input[str] create_time: Instance creation time.
         :param pulumi.Input[int] deploy_mode: Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
         :param pulumi.Input[str] elasticsearch_domain: Elasticsearch domain name.
@@ -1117,6 +1163,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["basic_security_type"] = basic_security_type
         __props__.__dict__["charge_period"] = charge_period
         __props__.__dict__["charge_type"] = charge_type
+        __props__.__dict__["cos_backup"] = cos_backup
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["deploy_mode"] = deploy_mode
         __props__.__dict__["elasticsearch_domain"] = elasticsearch_domain
@@ -1169,6 +1216,14 @@ class Instance(pulumi.CustomResource):
         The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
         """
         return pulumi.get(self, "charge_type")
+
+    @property
+    @pulumi.getter(name="cosBackup")
+    def cos_backup(self) -> pulumi.Output[Optional['outputs.InstanceCosBackup']]:
+        """
+        COS automatic backup information.
+        """
+        return pulumi.get(self, "cos_backup")
 
     @property
     @pulumi.getter(name="createTime")

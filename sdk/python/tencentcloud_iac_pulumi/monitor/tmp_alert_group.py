@@ -259,26 +259,43 @@ class TmpAlertGroup(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        tmp_alert_group = tencentcloud.monitor.TmpAlertGroup("tmpAlertGroup",
-            amp_receivers=["notice-om017kc2"],
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        example_tmp_instance = tencentcloud.monitor.TmpInstance("exampleTmpInstance",
+            instance_name="tf-tmp-instance",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            data_retention_time=30,
+            zone=availability_zone,
+            tags={
+                "createdBy": "terraform",
+            })
+        example_tmp_alert_group = tencentcloud.monitor.TmpAlertGroup("exampleTmpAlertGroup",
+            group_name="tf-example",
+            instance_id=example_tmp_instance.id,
+            repeat_interval="5m",
             custom_receiver=tencentcloud.monitor.TmpAlertGroupCustomReceiverArgs(
                 type="amp",
             ),
-            group_name="tf-test",
-            instance_id="prom-ip429jis",
-            repeat_interval="5m",
             rules=[tencentcloud.monitor.TmpAlertGroupRuleArgs(
-                annotations={
-                    "description": "Agent {{$labels.instance}} is deactivated, please pay attention!",
-                    "summary": "Agent health check",
-                },
                 duration="1m",
                 expr="up{job=\\"prometheus-agent\\"} != 1",
+                rule_name="Agent health check",
+                state=2,
+                annotations={
+                    "summary": "Agent health check",
+                    "description": "Agent {{$labels.instance}} is deactivated, please pay attention!",
+                },
                 labels={
                     "severity": "critical",
                 },
-                rule_name="Agent health check",
-                state=2,
             )])
         ```
         <!--End PulumiCodeChooser -->
@@ -288,7 +305,7 @@ class TmpAlertGroup(pulumi.CustomResource):
         monitor tmp_alert_group can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup tmp_alert_group instance_id#group_id
+        $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup example prom-34qkzwvs#alert-rfkkr6cw
         ```
 
         :param str resource_name: The name of the resource.
@@ -316,26 +333,43 @@ class TmpAlertGroup(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        tmp_alert_group = tencentcloud.monitor.TmpAlertGroup("tmpAlertGroup",
-            amp_receivers=["notice-om017kc2"],
+        config = pulumi.Config()
+        availability_zone = config.get("availabilityZone")
+        if availability_zone is None:
+            availability_zone = "ap-guangzhou-4"
+        vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone,
+            cidr_block="10.0.1.0/24")
+        example_tmp_instance = tencentcloud.monitor.TmpInstance("exampleTmpInstance",
+            instance_name="tf-tmp-instance",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            data_retention_time=30,
+            zone=availability_zone,
+            tags={
+                "createdBy": "terraform",
+            })
+        example_tmp_alert_group = tencentcloud.monitor.TmpAlertGroup("exampleTmpAlertGroup",
+            group_name="tf-example",
+            instance_id=example_tmp_instance.id,
+            repeat_interval="5m",
             custom_receiver=tencentcloud.monitor.TmpAlertGroupCustomReceiverArgs(
                 type="amp",
             ),
-            group_name="tf-test",
-            instance_id="prom-ip429jis",
-            repeat_interval="5m",
             rules=[tencentcloud.monitor.TmpAlertGroupRuleArgs(
-                annotations={
-                    "description": "Agent {{$labels.instance}} is deactivated, please pay attention!",
-                    "summary": "Agent health check",
-                },
                 duration="1m",
                 expr="up{job=\\"prometheus-agent\\"} != 1",
+                rule_name="Agent health check",
+                state=2,
+                annotations={
+                    "summary": "Agent health check",
+                    "description": "Agent {{$labels.instance}} is deactivated, please pay attention!",
+                },
                 labels={
                     "severity": "critical",
                 },
-                rule_name="Agent health check",
-                state=2,
             )])
         ```
         <!--End PulumiCodeChooser -->
@@ -345,7 +379,7 @@ class TmpAlertGroup(pulumi.CustomResource):
         monitor tmp_alert_group can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup tmp_alert_group instance_id#group_id
+        $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup example prom-34qkzwvs#alert-rfkkr6cw
         ```
 
         :param str resource_name: The name of the resource.

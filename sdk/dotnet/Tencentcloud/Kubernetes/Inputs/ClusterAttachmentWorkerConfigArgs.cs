@@ -56,7 +56,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<Inputs.ClusterAttachmentWorkerConfigGpuArgsArgs>? GpuArgs { get; set; }
 
         /// <summary>
-        /// Indicate to schedule the adding node or not. Default is true.
+        /// This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
         /// </summary>
         [Input("isSchedule")]
         public Input<bool>? IsSchedule { get; set; }

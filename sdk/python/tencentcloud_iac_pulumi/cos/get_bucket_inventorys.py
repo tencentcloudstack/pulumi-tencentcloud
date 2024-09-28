@@ -84,6 +84,8 @@ def get_bucket_inventorys(bucket: Optional[str] = None,
     """
     Use this data source to query the COS bucket inventorys.
 
+    > **NOTE:** The current resource does not support cdc.
+
     ## Example Usage
 
     <!--Start PulumiCodeChooser -->
@@ -118,6 +120,8 @@ def get_bucket_inventorys_output(bucket: Optional[pulumi.Input[str]] = None,
                                  opts: Optional[pulumi.InvokeOptions] = None) -> pulumi.Output[GetBucketInventorysResult]:
     """
     Use this data source to query the COS bucket inventorys.
+
+    > **NOTE:** The current resource does not support cdc.
 
     ## Example Usage
 

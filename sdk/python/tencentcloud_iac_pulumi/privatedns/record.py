@@ -23,9 +23,9 @@ class RecordArgs:
                  weight: Optional[pulumi.Input[int]] = None):
         """
         The set of arguments for constructing a Record resource.
-        :param pulumi.Input[str] record_type: Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+        :param pulumi.Input[str] record_type: Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
         :param pulumi.Input[str] record_value: Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
-        :param pulumi.Input[str] sub_domain: Subdomain, such as "www", "m", and "@".
+        :param pulumi.Input[str] sub_domain: Subdomain, such as `www`, `m`, and `@`.
         :param pulumi.Input[str] zone_id: Private domain ID.
         :param pulumi.Input[int] mx: MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.
         :param pulumi.Input[int] ttl: Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.
@@ -46,7 +46,7 @@ class RecordArgs:
     @pulumi.getter(name="recordType")
     def record_type(self) -> pulumi.Input[str]:
         """
-        Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+        Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
         """
         return pulumi.get(self, "record_type")
 
@@ -70,7 +70,7 @@ class RecordArgs:
     @pulumi.getter(name="subDomain")
     def sub_domain(self) -> pulumi.Input[str]:
         """
-        Subdomain, such as "www", "m", and "@".
+        Subdomain, such as `www`, `m`, and `@`.
         """
         return pulumi.get(self, "sub_domain")
 
@@ -140,9 +140,9 @@ class _RecordState:
         """
         Input properties used for looking up and filtering Record resources.
         :param pulumi.Input[int] mx: MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.
-        :param pulumi.Input[str] record_type: Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+        :param pulumi.Input[str] record_type: Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
         :param pulumi.Input[str] record_value: Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
-        :param pulumi.Input[str] sub_domain: Subdomain, such as "www", "m", and "@".
+        :param pulumi.Input[str] sub_domain: Subdomain, such as `www`, `m`, and `@`.
         :param pulumi.Input[int] ttl: Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.
         :param pulumi.Input[int] weight: Record weight. Value range: 1~100.
         :param pulumi.Input[str] zone_id: Private domain ID.
@@ -178,7 +178,7 @@ class _RecordState:
     @pulumi.getter(name="recordType")
     def record_type(self) -> Optional[pulumi.Input[str]]:
         """
-        Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+        Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
         """
         return pulumi.get(self, "record_type")
 
@@ -202,7 +202,7 @@ class _RecordState:
     @pulumi.getter(name="subDomain")
     def sub_domain(self) -> Optional[pulumi.Input[str]]:
         """
-        Subdomain, such as "www", "m", and "@".
+        Subdomain, such as `www`, `m`, and `@`.
         """
         return pulumi.get(self, "sub_domain")
 
@@ -270,7 +270,9 @@ class Record(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        # create vpc
         vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create private dns zone
         example_zone = tencentcloud.private_dns.Zone("exampleZone",
             domain="domain.com",
             remark="remark.",
@@ -283,6 +285,7 @@ class Record(pulumi.CustomResource):
             tags={
                 "createdBy": "terraform",
             })
+        # create private dns record
         example_record = tencentcloud.private_dns.Record("exampleRecord",
             zone_id=example_zone.id,
             record_type="A",
@@ -305,9 +308,9 @@ class Record(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] mx: MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.
-        :param pulumi.Input[str] record_type: Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+        :param pulumi.Input[str] record_type: Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
         :param pulumi.Input[str] record_value: Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
-        :param pulumi.Input[str] sub_domain: Subdomain, such as "www", "m", and "@".
+        :param pulumi.Input[str] sub_domain: Subdomain, such as `www`, `m`, and `@`.
         :param pulumi.Input[int] ttl: Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.
         :param pulumi.Input[int] weight: Record weight. Value range: 1~100.
         :param pulumi.Input[str] zone_id: Private domain ID.
@@ -328,7 +331,9 @@ class Record(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
+        # create vpc
         vpc = tencentcloud.vpc.Instance("vpc", cidr_block="10.0.0.0/16")
+        # create private dns zone
         example_zone = tencentcloud.private_dns.Zone("exampleZone",
             domain="domain.com",
             remark="remark.",
@@ -341,6 +346,7 @@ class Record(pulumi.CustomResource):
             tags={
                 "createdBy": "terraform",
             })
+        # create private dns record
         example_record = tencentcloud.private_dns.Record("exampleRecord",
             zone_id=example_zone.id,
             record_type="A",
@@ -431,9 +437,9 @@ class Record(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] mx: MX priority, which is required when the record type is MX. Valid values: 5, 10, 15, 20, 30, 40, 50.
-        :param pulumi.Input[str] record_type: Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+        :param pulumi.Input[str] record_type: Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
         :param pulumi.Input[str] record_value: Record value, such as IP: 192.168.10.2, CNAME: cname.qcloud.com, and MX: mail.qcloud.com.
-        :param pulumi.Input[str] sub_domain: Subdomain, such as "www", "m", and "@".
+        :param pulumi.Input[str] sub_domain: Subdomain, such as `www`, `m`, and `@`.
         :param pulumi.Input[int] ttl: Record cache time. The smaller the value, the faster the record will take effect. Value range: 1~86400s.
         :param pulumi.Input[int] weight: Record weight. Value range: 1~100.
         :param pulumi.Input[str] zone_id: Private domain ID.
@@ -463,7 +469,7 @@ class Record(pulumi.CustomResource):
     @pulumi.getter(name="recordType")
     def record_type(self) -> pulumi.Output[str]:
         """
-        Record type. Valid values: "A", "AAAA", "CNAME", "MX", "TXT", "PTR".
+        Record type. Valid values: `A`, `AAAA`, `CNAME`, `MX`, `TXT`, `PTR`.
         """
         return pulumi.get(self, "record_type")
 
@@ -479,7 +485,7 @@ class Record(pulumi.CustomResource):
     @pulumi.getter(name="subDomain")
     def sub_domain(self) -> pulumi.Output[str]:
         """
-        Subdomain, such as "www", "m", and "@".
+        Subdomain, such as `www`, `m`, and `@`.
         """
         return pulumi.get(self, "sub_domain")
 

@@ -177,6 +177,10 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      */
     public readonly prepaidPeriod!: pulumi.Output<number | undefined>;
     /**
+     * Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used.
+     */
+    public readonly roGroupId!: pulumi.Output<string>;
+    /**
      * Security groups to use.
      */
     public readonly securityGroups!: pulumi.Output<string[] | undefined>;
@@ -247,6 +251,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["payType"] = state ? state.payType : undefined;
             resourceInputs["period"] = state ? state.period : undefined;
             resourceInputs["prepaidPeriod"] = state ? state.prepaidPeriod : undefined;
+            resourceInputs["roGroupId"] = state ? state.roGroupId : undefined;
             resourceInputs["securityGroups"] = state ? state.securityGroups : undefined;
             resourceInputs["slaveDeployMode"] = state ? state.slaveDeployMode : undefined;
             resourceInputs["status"] = state ? state.status : undefined;
@@ -286,6 +291,7 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["payType"] = args ? args.payType : undefined;
             resourceInputs["period"] = args ? args.period : undefined;
             resourceInputs["prepaidPeriod"] = args ? args.prepaidPeriod : undefined;
+            resourceInputs["roGroupId"] = args ? args.roGroupId : undefined;
             resourceInputs["securityGroups"] = args ? args.securityGroups : undefined;
             resourceInputs["slaveDeployMode"] = args ? args.slaveDeployMode : undefined;
             resourceInputs["subnetId"] = args ? args.subnetId : undefined;
@@ -380,6 +386,10 @@ export interface ReadonlyInstanceState {
      * Period of instance. NOTES: Only supported prepaid instance.
      */
     prepaidPeriod?: pulumi.Input<number>;
+    /**
+     * Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used.
+     */
+    roGroupId?: pulumi.Input<string>;
     /**
      * Security groups to use.
      */
@@ -490,6 +500,10 @@ export interface ReadonlyInstanceArgs {
      * Period of instance. NOTES: Only supported prepaid instance.
      */
     prepaidPeriod?: pulumi.Input<number>;
+    /**
+     * Read only group id. If rogroupId is empty, a new ro group is created by default. If it is not empty, the existing ro group is used.
+     */
+    roGroupId?: pulumi.Input<string>;
     /**
      * Security groups to use.
      */

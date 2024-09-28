@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
     public sealed class GetClustersListResult
     {
         /// <summary>
+        /// CDC ID.
+        /// </summary>
+        public readonly string CdcId;
+        /// <summary>
         /// The certificate used for access.
         /// </summary>
         public readonly string CertificationAuthority;
@@ -165,6 +169,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
         [OutputConstructor]
         private GetClustersListResult(
+            string cdcId,
+
             string certificationAuthority,
 
             int claimExpiredSeconds,
@@ -239,6 +245,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
 
             ImmutableArray<Outputs.GetClustersListWorkerInstancesListResult> workerInstancesLists)
         {
+            CdcId = cdcId;
             CertificationAuthority = certificationAuthority;
             ClaimExpiredSeconds = claimExpiredSeconds;
             ClusterAsEnabled = clusterAsEnabled;

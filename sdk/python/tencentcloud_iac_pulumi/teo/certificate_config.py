@@ -204,7 +204,7 @@ class CertificateConfig(pulumi.CustomResource):
         teo certificate can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Teo/certificateConfig:CertificateConfig certificate zone_id#host#cert_id
+        $ pulumi import tencentcloud:Teo/certificateConfig:CertificateConfig certificate zone_id#host
         ```
 
         :param str resource_name: The name of the resource.
@@ -259,7 +259,7 @@ class CertificateConfig(pulumi.CustomResource):
         teo certificate can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Teo/certificateConfig:CertificateConfig certificate zone_id#host#cert_id
+        $ pulumi import tencentcloud:Teo/certificateConfig:CertificateConfig certificate zone_id#host
         ```
 
         :param str resource_name: The name of the resource.

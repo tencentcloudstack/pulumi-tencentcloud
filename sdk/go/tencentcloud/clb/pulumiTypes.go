@@ -6001,6 +6001,8 @@ type GetInstancesClbList struct {
 	ClbName string `pulumi:"clbName"`
 	// The virtual service address table of the CLB.
 	ClbVips []string `pulumi:"clbVips"`
+	// ID of the cluster.
+	ClusterId string `pulumi:"clusterId"`
 	// Create time of the CLB.
 	CreateTime string `pulumi:"createTime"`
 	// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
@@ -6061,6 +6063,8 @@ type GetInstancesClbListArgs struct {
 	ClbName pulumi.StringInput `pulumi:"clbName"`
 	// The virtual service address table of the CLB.
 	ClbVips pulumi.StringArrayInput `pulumi:"clbVips"`
+	// ID of the cluster.
+	ClusterId pulumi.StringInput `pulumi:"clusterId"`
 	// Create time of the CLB.
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
 	// Max bandwidth out, only applicable to open CLB. Valid value ranges is [1, 2048]. Unit is MB.
@@ -6170,6 +6174,11 @@ func (o GetInstancesClbListOutput) ClbName() pulumi.StringOutput {
 // The virtual service address table of the CLB.
 func (o GetInstancesClbListOutput) ClbVips() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetInstancesClbList) []string { return v.ClbVips }).(pulumi.StringArrayOutput)
+}
+
+// ID of the cluster.
+func (o GetInstancesClbListOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetInstancesClbList) string { return v.ClusterId }).(pulumi.StringOutput)
 }
 
 // Create time of the CLB.

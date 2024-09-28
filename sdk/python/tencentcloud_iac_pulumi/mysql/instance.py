@@ -22,6 +22,7 @@ class InstanceArgs:
                  charge_type: Optional[pulumi.Input[str]] = None,
                  cpu: Optional[pulumi.Input[int]] = None,
                  device_type: Optional[pulumi.Input[str]] = None,
+                 engine_type: Optional[pulumi.Input[str]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
                  fast_upgrade: Optional[pulumi.Input[int]] = None,
                  first_slave_zone: Optional[pulumi.Input[str]] = None,
@@ -55,6 +56,7 @@ class InstanceArgs:
         :param pulumi.Input[str] charge_type: Pay type of instance. Valid values:`PREPAID`, `POSTPAID`. Default is `POSTPAID`.
         :param pulumi.Input[int] cpu: CPU cores.
         :param pulumi.Input[str] device_type: Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
+        :param pulumi.Input[str] engine_type: Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
         :param pulumi.Input[str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         :param pulumi.Input[int] fast_upgrade: Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
         :param pulumi.Input[str] first_slave_zone: Zone information about first slave instance.
@@ -92,6 +94,8 @@ class InstanceArgs:
             pulumi.set(__self__, "cpu", cpu)
         if device_type is not None:
             pulumi.set(__self__, "device_type", device_type)
+        if engine_type is not None:
+            pulumi.set(__self__, "engine_type", engine_type)
         if engine_version is not None:
             pulumi.set(__self__, "engine_version", engine_version)
         if fast_upgrade is not None:
@@ -240,6 +244,18 @@ class InstanceArgs:
     @device_type.setter
     def device_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "device_type", value)
+
+    @property
+    @pulumi.getter(name="engineType")
+    def engine_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
+        """
+        return pulumi.get(self, "engine_type")
+
+    @engine_type.setter
+    def engine_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "engine_type", value)
 
     @property
     @pulumi.getter(name="engineVersion")
@@ -532,6 +548,7 @@ class _InstanceState:
                  charge_type: Optional[pulumi.Input[str]] = None,
                  cpu: Optional[pulumi.Input[int]] = None,
                  device_type: Optional[pulumi.Input[str]] = None,
+                 engine_type: Optional[pulumi.Input[str]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
                  fast_upgrade: Optional[pulumi.Input[int]] = None,
                  first_slave_zone: Optional[pulumi.Input[str]] = None,
@@ -572,6 +589,7 @@ class _InstanceState:
         :param pulumi.Input[str] charge_type: Pay type of instance. Valid values:`PREPAID`, `POSTPAID`. Default is `POSTPAID`.
         :param pulumi.Input[int] cpu: CPU cores.
         :param pulumi.Input[str] device_type: Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
+        :param pulumi.Input[str] engine_type: Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
         :param pulumi.Input[str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         :param pulumi.Input[int] fast_upgrade: Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
         :param pulumi.Input[str] first_slave_zone: Zone information about first slave instance.
@@ -616,6 +634,8 @@ class _InstanceState:
             pulumi.set(__self__, "cpu", cpu)
         if device_type is not None:
             pulumi.set(__self__, "device_type", device_type)
+        if engine_type is not None:
+            pulumi.set(__self__, "engine_type", engine_type)
         if engine_version is not None:
             pulumi.set(__self__, "engine_version", engine_version)
         if fast_upgrade is not None:
@@ -748,6 +768,18 @@ class _InstanceState:
     @device_type.setter
     def device_type(self, value: Optional[pulumi.Input[str]]):
         pulumi.set(self, "device_type", value)
+
+    @property
+    @pulumi.getter(name="engineType")
+    def engine_type(self) -> Optional[pulumi.Input[str]]:
+        """
+        Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
+        """
+        return pulumi.get(self, "engine_type")
+
+    @engine_type.setter
+    def engine_type(self, value: Optional[pulumi.Input[str]]):
+        pulumi.set(self, "engine_type", value)
 
     @property
     @pulumi.getter(name="engineVersion")
@@ -1162,6 +1194,7 @@ class Instance(pulumi.CustomResource):
                  charge_type: Optional[pulumi.Input[str]] = None,
                  cpu: Optional[pulumi.Input[int]] = None,
                  device_type: Optional[pulumi.Input[str]] = None,
+                 engine_type: Optional[pulumi.Input[str]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
                  fast_upgrade: Optional[pulumi.Input[int]] = None,
                  first_slave_zone: Optional[pulumi.Input[str]] = None,
@@ -1287,6 +1320,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] charge_type: Pay type of instance. Valid values:`PREPAID`, `POSTPAID`. Default is `POSTPAID`.
         :param pulumi.Input[int] cpu: CPU cores.
         :param pulumi.Input[str] device_type: Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
+        :param pulumi.Input[str] engine_type: Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
         :param pulumi.Input[str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         :param pulumi.Input[int] fast_upgrade: Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
         :param pulumi.Input[str] first_slave_zone: Zone information about first slave instance.
@@ -1431,6 +1465,7 @@ class Instance(pulumi.CustomResource):
                  charge_type: Optional[pulumi.Input[str]] = None,
                  cpu: Optional[pulumi.Input[int]] = None,
                  device_type: Optional[pulumi.Input[str]] = None,
+                 engine_type: Optional[pulumi.Input[str]] = None,
                  engine_version: Optional[pulumi.Input[str]] = None,
                  fast_upgrade: Optional[pulumi.Input[int]] = None,
                  first_slave_zone: Optional[pulumi.Input[str]] = None,
@@ -1471,6 +1506,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["charge_type"] = charge_type
             __props__.__dict__["cpu"] = cpu
             __props__.__dict__["device_type"] = device_type
+            __props__.__dict__["engine_type"] = engine_type
             __props__.__dict__["engine_version"] = engine_version
             __props__.__dict__["fast_upgrade"] = fast_upgrade
             __props__.__dict__["first_slave_zone"] = first_slave_zone
@@ -1527,6 +1563,7 @@ class Instance(pulumi.CustomResource):
             charge_type: Optional[pulumi.Input[str]] = None,
             cpu: Optional[pulumi.Input[int]] = None,
             device_type: Optional[pulumi.Input[str]] = None,
+            engine_type: Optional[pulumi.Input[str]] = None,
             engine_version: Optional[pulumi.Input[str]] = None,
             fast_upgrade: Optional[pulumi.Input[int]] = None,
             first_slave_zone: Optional[pulumi.Input[str]] = None,
@@ -1572,6 +1609,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[str] charge_type: Pay type of instance. Valid values:`PREPAID`, `POSTPAID`. Default is `POSTPAID`.
         :param pulumi.Input[int] cpu: CPU cores.
         :param pulumi.Input[str] device_type: Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
+        :param pulumi.Input[str] engine_type: Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
         :param pulumi.Input[str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         :param pulumi.Input[int] fast_upgrade: Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
         :param pulumi.Input[str] first_slave_zone: Zone information about first slave instance.
@@ -1615,6 +1653,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["charge_type"] = charge_type
         __props__.__dict__["cpu"] = cpu
         __props__.__dict__["device_type"] = device_type
+        __props__.__dict__["engine_type"] = engine_type
         __props__.__dict__["engine_version"] = engine_version
         __props__.__dict__["fast_upgrade"] = fast_upgrade
         __props__.__dict__["first_slave_zone"] = first_slave_zone
@@ -1689,6 +1728,14 @@ class Instance(pulumi.CustomResource):
         Specify device type, available values: `UNIVERSAL` (default), `EXCLUSIVE`, `BASIC`.
         """
         return pulumi.get(self, "device_type")
+
+    @property
+    @pulumi.getter(name="engineType")
+    def engine_type(self) -> pulumi.Output[str]:
+        """
+        Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
+        """
+        return pulumi.get(self, "engine_type")
 
     @property
     @pulumi.getter(name="engineVersion")

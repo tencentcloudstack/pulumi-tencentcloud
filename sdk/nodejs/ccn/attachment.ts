@@ -9,6 +9,8 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### Only Attachment instance
+ *
  * <!--Start PulumiCodeChooser -->
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
@@ -16,32 +18,87 @@ import * as utilities from "../utilities";
  *
  * const config = new pulumi.Config();
  * const region = config.get("region") || "ap-guangzhou";
- * const otheruin = config.get("otheruin") || "123353";
- * const otherccn = config.get("otherccn") || "ccn-151ssaga";
- * const vpc = new tencentcloud.vpc.Instance("vpc", {
- *     cidrBlock: "10.0.0.0/16",
- *     dnsServers: [
- *         "119.29.29.29",
- *         "8.8.8.8",
- *     ],
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * const otherUin = config.get("otherUin") || "100031344528";
+ * const otherCcn = config.get("otherCcn") || "ccn-qhgojahx";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "172.16.0.0/16"});
+ * // create subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: availabilityZone,
+ *     vpcId: vpc.id,
+ *     cidrBlock: "172.16.0.0/24",
  *     isMulticast: false,
  * });
- * const main = new tencentcloud.ccn.Instance("main", {
- *     description: "ci-temp-test-ccn-des",
+ * // create ccn
+ * const example = new tencentcloud.ccn.Instance("example", {
+ *     description: "desc.",
  *     qos: "AG",
+ *     chargeType: "PREPAID",
+ *     bandwidthLimitType: "INTER_REGION_LIMIT",
+ *     tags: {
+ *         createBy: "terraform",
+ *     },
  * });
+ * // attachment instance
  * const attachment = new tencentcloud.ccn.Attachment("attachment", {
- *     ccnId: main.id,
- *     instanceType: "VPC",
+ *     ccnId: example.id,
  *     instanceId: vpc.id,
+ *     instanceType: "VPC",
  *     instanceRegion: region,
  * });
+ * // attachment other instance
  * const otherAccount = new tencentcloud.ccn.Attachment("otherAccount", {
- *     ccnId: otherccn,
- *     instanceType: "VPC",
+ *     ccnId: otherCcn,
  *     instanceId: vpc.id,
+ *     instanceType: "VPC",
  *     instanceRegion: region,
- *     ccnUin: otheruin,
+ *     ccnUin: otherUin,
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
+ * ### Attachment instance & route table
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const config = new pulumi.Config();
+ * const region = config.get("region") || "ap-guangzhou";
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * // create vpc
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "172.16.0.0/16"});
+ * // create subnet
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     availabilityZone: availabilityZone,
+ *     vpcId: vpc.id,
+ *     cidrBlock: "172.16.0.0/24",
+ *     isMulticast: false,
+ * });
+ * // create ccn
+ * const exampleInstance = new tencentcloud.ccn.Instance("exampleInstance", {
+ *     description: "desc.",
+ *     qos: "AG",
+ *     chargeType: "PREPAID",
+ *     bandwidthLimitType: "INTER_REGION_LIMIT",
+ *     tags: {
+ *         createBy: "terraform",
+ *     },
+ * });
+ * // create ccn route table
+ * const exampleRouteTable = new tencentcloud.ccn.RouteTable("exampleRouteTable", {
+ *     ccnId: exampleInstance.id,
+ *     description: "desc.",
+ * });
+ * // attachment instance & route table
+ * const attachment = new tencentcloud.ccn.Attachment("attachment", {
+ *     ccnId: exampleInstance.id,
+ *     instanceId: vpc.id,
+ *     instanceType: "VPC",
+ *     instanceRegion: region,
+ *     routeTableId: exampleRouteTable.id,
  * });
  * ```
  * <!--End PulumiCodeChooser -->
@@ -111,6 +168,10 @@ export class Attachment extends pulumi.CustomResource {
      */
     public /*out*/ readonly routeIds!: pulumi.Output<string[]>;
     /**
+     * Ccn instance route table ID.
+     */
+    public readonly routeTableId!: pulumi.Output<string>;
+    /**
      * States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
      */
     public /*out*/ readonly state!: pulumi.Output<string>;
@@ -137,6 +198,7 @@ export class Attachment extends pulumi.CustomResource {
             resourceInputs["instanceRegion"] = state ? state.instanceRegion : undefined;
             resourceInputs["instanceType"] = state ? state.instanceType : undefined;
             resourceInputs["routeIds"] = state ? state.routeIds : undefined;
+            resourceInputs["routeTableId"] = state ? state.routeTableId : undefined;
             resourceInputs["state"] = state ? state.state : undefined;
         } else {
             const args = argsOrState as AttachmentArgs | undefined;
@@ -158,6 +220,7 @@ export class Attachment extends pulumi.CustomResource {
             resourceInputs["instanceId"] = args ? args.instanceId : undefined;
             resourceInputs["instanceRegion"] = args ? args.instanceRegion : undefined;
             resourceInputs["instanceType"] = args ? args.instanceType : undefined;
+            resourceInputs["routeTableId"] = args ? args.routeTableId : undefined;
             resourceInputs["attachedTime"] = undefined /*out*/;
             resourceInputs["cidrBlocks"] = undefined /*out*/;
             resourceInputs["routeIds"] = undefined /*out*/;
@@ -209,6 +272,10 @@ export interface AttachmentState {
      */
     routeIds?: pulumi.Input<pulumi.Input<string>[]>;
     /**
+     * Ccn instance route table ID.
+     */
+    routeTableId?: pulumi.Input<string>;
+    /**
      * States of instance is attached. Valid values: `PENDING`, `ACTIVE`, `EXPIRED`, `REJECTED`, `DELETED`, `FAILED`, `ATTACHING`, `DETACHING` and `DETACHFAILED`. `FAILED` means asynchronous forced disassociation after 2 hours. `DETACHFAILED` means asynchronous forced disassociation after 2 hours.
      */
     state?: pulumi.Input<string>;
@@ -242,4 +309,8 @@ export interface AttachmentArgs {
      * Type of attached instance network, and available values include `VPC`, `DIRECTCONNECT`, `BMVPC` and `VPNGW`. Note: `VPNGW` type is only for whitelist customer now.
      */
     instanceType: pulumi.Input<string>;
+    /**
+     * Ccn instance route table ID.
+     */
+    routeTableId?: pulumi.Input<string>;
 }

@@ -9,6 +9,8 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a cos bucket batch.
  *
+ * > **NOTE:** The current resource does not support `cosDomain`.
+ *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->

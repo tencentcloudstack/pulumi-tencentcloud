@@ -19,6 +19,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly bool? AutoFormatAndMount;
         /// <summary>
+        /// The name of the device or partition to mount.
+        /// </summary>
+        public readonly string? DiskPartition;
+        /// <summary>
         /// Volume of disk in GB. Default is `0`.
         /// </summary>
         public readonly int? DiskSize;
@@ -39,6 +43,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         private ScaleWorkerDataDisk(
             bool? autoFormatAndMount,
 
+            string? diskPartition,
+
             int? diskSize,
 
             string? diskType,
@@ -48,6 +54,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
             string? mountTarget)
         {
             AutoFormatAndMount = autoFormatAndMount;
+            DiskPartition = diskPartition;
             DiskSize = diskSize;
             DiskType = diskType;
             FileSystem = fileSystem;

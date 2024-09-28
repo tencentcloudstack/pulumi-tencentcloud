@@ -9,6 +9,8 @@ import * as utilities from "../utilities";
 /**
  * Use this data source to query the COS batch.
  *
+ * > **NOTE:** The current resource does not support `cosDomain`.
+ *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->
@@ -75,6 +77,8 @@ export interface GetBatchsResult {
 }
 /**
  * Use this data source to query the COS batch.
+ *
+ * > **NOTE:** The current resource does not support `cosDomain`.
  *
  * ## Example Usage
  *

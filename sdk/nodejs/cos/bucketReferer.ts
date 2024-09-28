@@ -7,6 +7,8 @@ import * as utilities from "../utilities";
 /**
  * Provides a resource to create a cos bucketReferer
  *
+ * > **NOTE:** The current resource does not support cdc.
+ *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->

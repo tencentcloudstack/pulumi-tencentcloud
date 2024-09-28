@@ -18,6 +18,7 @@ __all__ = [
 @pulumi.output_type
 class GetInstanceEniResult(dict):
     def __init__(__self__, *,
+                 cdc_id: str,
                  create_time: str,
                  description: str,
                  id: str,
@@ -32,6 +33,7 @@ class GetInstanceEniResult(dict):
                  tags: Mapping[str, Any],
                  vpc_id: str):
         """
+        :param str cdc_id: CDC instance ID.
         :param str create_time: Creation time of the ENI.
         :param str description: Description of the ENI. Conflict with `ids`.
         :param str id: ID of the ENI.
@@ -46,6 +48,7 @@ class GetInstanceEniResult(dict):
         :param Mapping[str, Any] tags: Tags of the ENI. Conflict with `ids`.
         :param str vpc_id: ID of the vpc to be queried. Conflict with `ids`.
         """
+        pulumi.set(__self__, "cdc_id", cdc_id)
         pulumi.set(__self__, "create_time", create_time)
         pulumi.set(__self__, "description", description)
         pulumi.set(__self__, "id", id)
@@ -59,6 +62,14 @@ class GetInstanceEniResult(dict):
         pulumi.set(__self__, "subnet_id", subnet_id)
         pulumi.set(__self__, "tags", tags)
         pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @property
+    @pulumi.getter(name="cdcId")
+    def cdc_id(self) -> str:
+        """
+        CDC instance ID.
+        """
+        return pulumi.get(self, "cdc_id")
 
     @property
     @pulumi.getter(name="createTime")

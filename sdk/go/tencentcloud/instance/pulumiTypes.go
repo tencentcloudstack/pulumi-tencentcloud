@@ -24,6 +24,8 @@ type InstanceDataDisk struct {
 	DataDiskType string `pulumi:"dataDiskType"`
 	// Decides whether the disk is deleted with instance(only applied to `CLOUD_BASIC`, `CLOUD_SSD` and `CLOUD_PREMIUM` disk with `POSTPAID_BY_HOUR` instance), default is true.
 	DeleteWithInstance *bool `pulumi:"deleteWithInstance"`
+	// Decides whether the disk is deleted with instance(only applied to `CLOUD_BASIC`, `CLOUD_SSD` and `CLOUD_PREMIUM` disk with `PREPAID` instance), default is false.
+	DeleteWithInstancePrepaid *bool `pulumi:"deleteWithInstancePrepaid"`
 	// Decides whether the disk is encrypted. Default is `false`.
 	Encrypt *bool `pulumi:"encrypt"`
 	// Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
@@ -52,6 +54,8 @@ type InstanceDataDiskArgs struct {
 	DataDiskType pulumi.StringInput `pulumi:"dataDiskType"`
 	// Decides whether the disk is deleted with instance(only applied to `CLOUD_BASIC`, `CLOUD_SSD` and `CLOUD_PREMIUM` disk with `POSTPAID_BY_HOUR` instance), default is true.
 	DeleteWithInstance pulumi.BoolPtrInput `pulumi:"deleteWithInstance"`
+	// Decides whether the disk is deleted with instance(only applied to `CLOUD_BASIC`, `CLOUD_SSD` and `CLOUD_PREMIUM` disk with `PREPAID` instance), default is false.
+	DeleteWithInstancePrepaid pulumi.BoolPtrInput `pulumi:"deleteWithInstancePrepaid"`
 	// Decides whether the disk is encrypted. Default is `false`.
 	Encrypt pulumi.BoolPtrInput `pulumi:"encrypt"`
 	// Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
@@ -132,6 +136,11 @@ func (o InstanceDataDiskOutput) DataDiskType() pulumi.StringOutput {
 // Decides whether the disk is deleted with instance(only applied to `CLOUD_BASIC`, `CLOUD_SSD` and `CLOUD_PREMIUM` disk with `POSTPAID_BY_HOUR` instance), default is true.
 func (o InstanceDataDiskOutput) DeleteWithInstance() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v InstanceDataDisk) *bool { return v.DeleteWithInstance }).(pulumi.BoolPtrOutput)
+}
+
+// Decides whether the disk is deleted with instance(only applied to `CLOUD_BASIC`, `CLOUD_SSD` and `CLOUD_PREMIUM` disk with `PREPAID` instance), default is false.
+func (o InstanceDataDiskOutput) DeleteWithInstancePrepaid() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v InstanceDataDisk) *bool { return v.DeleteWithInstancePrepaid }).(pulumi.BoolPtrOutput)
 }
 
 // Decides whether the disk is encrypted. Default is `false`.

@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Enis.Outputs
     public sealed class GetInstanceEniResult
     {
         /// <summary>
+        /// CDC instance ID.
+        /// </summary>
+        public readonly string CdcId;
+        /// <summary>
         /// Creation time of the ENI.
         /// </summary>
         public readonly string CreateTime;
@@ -69,6 +73,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Enis.Outputs
 
         [OutputConstructor]
         private GetInstanceEniResult(
+            string cdcId,
+
             string createTime,
 
             string description,
@@ -95,6 +101,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Enis.Outputs
 
             string vpcId)
         {
+            CdcId = cdcId;
             CreateTime = createTime;
             Description = description;
             Id = id;

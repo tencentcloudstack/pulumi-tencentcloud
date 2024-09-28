@@ -31,7 +31,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly int? Count;
         /// <summary>
-        /// Configurations of data disk.
+        /// Configurations of cvm data disk.
         /// </summary>
         public readonly ImmutableArray<Outputs.ScaleWorkerWorkerConfigDataDisk> DataDisks;
         /// <summary>

@@ -176,6 +176,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Output<string> DeviceType { get; private set; } = null!;
 
         /// <summary>
+        /// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
+        /// </summary>
+        [Output("engineType")]
+        public Output<string> EngineType { get; private set; } = null!;
+
+        /// <summary>
         /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         /// </summary>
         [Output("engineVersion")]
@@ -455,6 +461,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Input<string>? DeviceType { get; set; }
 
         /// <summary>
+        /// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
+        /// </summary>
+        [Input("engineType")]
+        public Input<string>? EngineType { get; set; }
+
+        /// <summary>
         /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
         /// </summary>
         [Input("engineVersion")]
@@ -675,6 +687,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Input("deviceType")]
         public Input<string>? DeviceType { get; set; }
+
+        /// <summary>
+        /// Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
+        /// </summary>
+        [Input("engineType")]
+        public Input<string>? EngineType { get; set; }
 
         /// <summary>
         /// The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.

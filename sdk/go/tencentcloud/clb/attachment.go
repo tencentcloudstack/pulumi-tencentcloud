@@ -18,8 +18,6 @@ import (
 //
 // ## Example Usage
 //
-// ### Bind a Cvm instance
-//
 // <!--Start PulumiCodeChooser -->
 // ```go
 // package main
@@ -33,7 +31,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Clb.NewAttachment(ctx, "foo", &Clb.AttachmentArgs{
+//			_, err := Clb.NewAttachment(ctx, "example", &Clb.AttachmentArgs{
 //				ClbId:      pulumi.String("lb-k2zjp9lv"),
 //				ListenerId: pulumi.String("lbl-hh141sn9"),
 //				RuleId:     pulumi.String("loc-4xxr2cy7"),
@@ -55,7 +53,41 @@ import (
 // ```
 // <!--End PulumiCodeChooser -->
 //
-// ### Bind multiple Cvm instances
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewAttachment(ctx, "example", &Clb.AttachmentArgs{
+//				ClbId:      pulumi.String("lb-k2zjp9lv"),
+//				Domain:     pulumi.String("test.com"),
+//				ListenerId: pulumi.String("lbl-hh141sn9"),
+//				Targets: clb.AttachmentTargetArray{
+//					&clb.AttachmentTargetArgs{
+//						InstanceId: pulumi.String("ins-1flbqyp8"),
+//						Port:       pulumi.Int(80),
+//						Weight:     pulumi.Int(10),
+//					},
+//				},
+//				Url: pulumi.String("/"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
 //
 // <!--Start PulumiCodeChooser -->
 // ```go
@@ -70,7 +102,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Clb.NewAttachment(ctx, "foo", &Clb.AttachmentArgs{
+//			_, err := Clb.NewAttachment(ctx, "example", &Clb.AttachmentArgs{
 //				ClbId:      pulumi.String("lb-k2zjp9lv"),
 //				ListenerId: pulumi.String("lbl-hh141sn9"),
 //				RuleId:     pulumi.String("loc-4xxr2cy7"),
@@ -97,7 +129,46 @@ import (
 // ```
 // <!--End PulumiCodeChooser -->
 //
-// ### Bind backend target is ENI
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewAttachment(ctx, "example", &Clb.AttachmentArgs{
+//				ClbId:      pulumi.String("lb-k2zjp9lv"),
+//				Domain:     pulumi.String("test.com"),
+//				ListenerId: pulumi.String("lbl-hh141sn9"),
+//				Targets: clb.AttachmentTargetArray{
+//					&clb.AttachmentTargetArgs{
+//						InstanceId: pulumi.String("ins-1flbqyp8"),
+//						Port:       pulumi.Int(80),
+//						Weight:     pulumi.Int(10),
+//					},
+//					&clb.AttachmentTargetArgs{
+//						InstanceId: pulumi.String("ins-ekloqpa1"),
+//						Port:       pulumi.Int(81),
+//						Weight:     pulumi.Int(10),
+//					},
+//				},
+//				Url: pulumi.String("/"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
 //
 // <!--Start PulumiCodeChooser -->
 // ```go
@@ -112,17 +183,53 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Clb.NewAttachment(ctx, "foo", &Clb.AttachmentArgs{
+//			_, err := Clb.NewAttachment(ctx, "example", &Clb.AttachmentArgs{
 //				ClbId:      pulumi.String("lb-k2zjp9lv"),
 //				ListenerId: pulumi.String("lbl-hh141sn9"),
 //				RuleId:     pulumi.String("loc-4xxr2cy7"),
 //				Targets: clb.AttachmentTargetArray{
 //					&clb.AttachmentTargetArgs{
-//						EniIp:  pulumi.String("example-ip"),
-//						Port:   pulumi.Int(23),
+//						EniIp:  pulumi.String("172.16.16.52"),
+//						Port:   pulumi.Int(8090),
 //						Weight: pulumi.Int(50),
 //					},
 //				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewAttachment(ctx, "example", &Clb.AttachmentArgs{
+//				ClbId:      pulumi.String("lb-k2zjp9lv"),
+//				Domain:     pulumi.String("test.com"),
+//				ListenerId: pulumi.String("lbl-hh141sn9"),
+//				Targets: clb.AttachmentTargetArray{
+//					&clb.AttachmentTargetArgs{
+//						EniIp:  pulumi.String("172.16.16.52"),
+//						Port:   pulumi.Int(8090),
+//						Weight: pulumi.Int(50),
+//					},
+//				},
+//				Url: pulumi.String("/"),
 //			})
 //			if err != nil {
 //				return err
@@ -139,13 +246,21 @@ import (
 // CLB attachment can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Clb/attachment:Attachment foo loc-4xxr2cy7#lbl-hh141sn9#lb-7a0t6zqb
+// $ pulumi import tencentcloud:Clb/attachment:Attachment example loc-4xxr2cy7#lbl-hh141sn9#lb-7a0t6zqb
+// ```
+//
+// # Or
+//
+// ```sh
+// $ pulumi import tencentcloud:Clb/attachment:Attachment example test.com,/#lbl-hh141sn9#lb-7a0t6zqb
 // ```
 type Attachment struct {
 	pulumi.CustomResourceState
 
 	// ID of the CLB.
 	ClbId pulumi.StringOutput `pulumi:"clbId"`
+	// Domain of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+	Domain pulumi.StringPtrOutput `pulumi:"domain"`
 	// ID of the CLB listener.
 	ListenerId pulumi.StringOutput `pulumi:"listenerId"`
 	// Type of protocol within the listener.
@@ -154,6 +269,8 @@ type Attachment struct {
 	RuleId pulumi.StringPtrOutput `pulumi:"ruleId"`
 	// Information of the backends to be attached.
 	Targets AttachmentTargetArrayOutput `pulumi:"targets"`
+	// URL of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+	Url pulumi.StringPtrOutput `pulumi:"url"`
 }
 
 // NewAttachment registers a new resource with the given unique name, arguments, and options.
@@ -197,6 +314,8 @@ func GetAttachment(ctx *pulumi.Context,
 type attachmentState struct {
 	// ID of the CLB.
 	ClbId *string `pulumi:"clbId"`
+	// Domain of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+	Domain *string `pulumi:"domain"`
 	// ID of the CLB listener.
 	ListenerId *string `pulumi:"listenerId"`
 	// Type of protocol within the listener.
@@ -205,11 +324,15 @@ type attachmentState struct {
 	RuleId *string `pulumi:"ruleId"`
 	// Information of the backends to be attached.
 	Targets []AttachmentTarget `pulumi:"targets"`
+	// URL of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+	Url *string `pulumi:"url"`
 }
 
 type AttachmentState struct {
 	// ID of the CLB.
 	ClbId pulumi.StringPtrInput
+	// Domain of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+	Domain pulumi.StringPtrInput
 	// ID of the CLB listener.
 	ListenerId pulumi.StringPtrInput
 	// Type of protocol within the listener.
@@ -218,6 +341,8 @@ type AttachmentState struct {
 	RuleId pulumi.StringPtrInput
 	// Information of the backends to be attached.
 	Targets AttachmentTargetArrayInput
+	// URL of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+	Url pulumi.StringPtrInput
 }
 
 func (AttachmentState) ElementType() reflect.Type {
@@ -227,24 +352,32 @@ func (AttachmentState) ElementType() reflect.Type {
 type attachmentArgs struct {
 	// ID of the CLB.
 	ClbId string `pulumi:"clbId"`
+	// Domain of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+	Domain *string `pulumi:"domain"`
 	// ID of the CLB listener.
 	ListenerId string `pulumi:"listenerId"`
 	// ID of the CLB listener rule. Only supports listeners of `HTTPS` and `HTTP` protocol.
 	RuleId *string `pulumi:"ruleId"`
 	// Information of the backends to be attached.
 	Targets []AttachmentTarget `pulumi:"targets"`
+	// URL of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+	Url *string `pulumi:"url"`
 }
 
 // The set of arguments for constructing a Attachment resource.
 type AttachmentArgs struct {
 	// ID of the CLB.
 	ClbId pulumi.StringInput
+	// Domain of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+	Domain pulumi.StringPtrInput
 	// ID of the CLB listener.
 	ListenerId pulumi.StringInput
 	// ID of the CLB listener rule. Only supports listeners of `HTTPS` and `HTTP` protocol.
 	RuleId pulumi.StringPtrInput
 	// Information of the backends to be attached.
 	Targets AttachmentTargetArrayInput
+	// URL of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+	Url pulumi.StringPtrInput
 }
 
 func (AttachmentArgs) ElementType() reflect.Type {
@@ -339,6 +472,11 @@ func (o AttachmentOutput) ClbId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Attachment) pulumi.StringOutput { return v.ClbId }).(pulumi.StringOutput)
 }
 
+// Domain of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+func (o AttachmentOutput) Domain() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Attachment) pulumi.StringPtrOutput { return v.Domain }).(pulumi.StringPtrOutput)
+}
+
 // ID of the CLB listener.
 func (o AttachmentOutput) ListenerId() pulumi.StringOutput {
 	return o.ApplyT(func(v *Attachment) pulumi.StringOutput { return v.ListenerId }).(pulumi.StringOutput)
@@ -357,6 +495,11 @@ func (o AttachmentOutput) RuleId() pulumi.StringPtrOutput {
 // Information of the backends to be attached.
 func (o AttachmentOutput) Targets() AttachmentTargetArrayOutput {
 	return o.ApplyT(func(v *Attachment) AttachmentTargetArrayOutput { return v.Targets }).(AttachmentTargetArrayOutput)
+}
+
+// URL of the target forwarding rule. Does not take effect when parameter `ruleId` is provided.
+func (o AttachmentOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Attachment) pulumi.StringPtrOutput { return v.Url }).(pulumi.StringPtrOutput)
 }
 
 type AttachmentArrayOutput struct{ *pulumi.OutputState }

@@ -22,13 +22,16 @@ class GetStoragesSetResult:
     """
     A collection of values returned by getStoragesSet.
     """
-    def __init__(__self__, availability_zone=None, charge_types=None, id=None, instance_ips=None, instance_names=None, portable=None, project_id=None, result_output_file=None, storage_id=None, storage_lists=None, storage_name=None, storage_states=None, storage_type=None, storage_usage=None, tag_keys=None, tag_values=None):
+    def __init__(__self__, availability_zone=None, charge_types=None, dedicated_cluster_id=None, id=None, instance_ips=None, instance_names=None, portable=None, project_id=None, result_output_file=None, storage_id=None, storage_lists=None, storage_name=None, storage_states=None, storage_type=None, storage_usage=None, tag_keys=None, tag_values=None):
         if availability_zone and not isinstance(availability_zone, str):
             raise TypeError("Expected argument 'availability_zone' to be a str")
         pulumi.set(__self__, "availability_zone", availability_zone)
         if charge_types and not isinstance(charge_types, list):
             raise TypeError("Expected argument 'charge_types' to be a list")
         pulumi.set(__self__, "charge_types", charge_types)
+        if dedicated_cluster_id and not isinstance(dedicated_cluster_id, str):
+            raise TypeError("Expected argument 'dedicated_cluster_id' to be a str")
+        pulumi.set(__self__, "dedicated_cluster_id", dedicated_cluster_id)
         if id and not isinstance(id, str):
             raise TypeError("Expected argument 'id' to be a str")
         pulumi.set(__self__, "id", id)
@@ -87,6 +90,14 @@ class GetStoragesSetResult:
         Pay type of the CBS instance.
         """
         return pulumi.get(self, "charge_types")
+
+    @property
+    @pulumi.getter(name="dedicatedClusterId")
+    def dedicated_cluster_id(self) -> Optional[str]:
+        """
+        Exclusive cluster id.
+        """
+        return pulumi.get(self, "dedicated_cluster_id")
 
     @property
     @pulumi.getter
@@ -188,6 +199,7 @@ class AwaitableGetStoragesSetResult(GetStoragesSetResult):
         return GetStoragesSetResult(
             availability_zone=self.availability_zone,
             charge_types=self.charge_types,
+            dedicated_cluster_id=self.dedicated_cluster_id,
             id=self.id,
             instance_ips=self.instance_ips,
             instance_names=self.instance_names,
@@ -206,6 +218,7 @@ class AwaitableGetStoragesSetResult(GetStoragesSetResult):
 
 def get_storages_set(availability_zone: Optional[str] = None,
                      charge_types: Optional[Sequence[str]] = None,
+                     dedicated_cluster_id: Optional[str] = None,
                      instance_ips: Optional[Sequence[str]] = None,
                      instance_names: Optional[Sequence[str]] = None,
                      portable: Optional[bool] = None,
@@ -224,18 +237,21 @@ def get_storages_set(availability_zone: Optional[str] = None,
 
     ## Example Usage
 
+    ### Query CBS by storage set by zone
+
     <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    storages = tencentcloud.Cbs.get_storages_set(availability_zone="ap-guangzhou-3")
+    example = tencentcloud.Cbs.get_storages_set(availability_zone="ap-guangzhou-3")
     ```
     <!--End PulumiCodeChooser -->
 
 
     :param str availability_zone: The available zone that the CBS instance locates at.
-    :param Sequence[str] charge_types: List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+    :param Sequence[str] charge_types: List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
+    :param str dedicated_cluster_id: Exclusive cluster id.
     :param Sequence[str] instance_ips: List filter by attached instance public or private IPs.
     :param Sequence[str] instance_names: List filter by attached instance name.
     :param bool portable: Filter by whether the disk is portable (Boolean `true` or `false`).
@@ -252,6 +268,7 @@ def get_storages_set(availability_zone: Optional[str] = None,
     __args__ = dict()
     __args__['availabilityZone'] = availability_zone
     __args__['chargeTypes'] = charge_types
+    __args__['dedicatedClusterId'] = dedicated_cluster_id
     __args__['instanceIps'] = instance_ips
     __args__['instanceNames'] = instance_names
     __args__['portable'] = portable
@@ -270,6 +287,7 @@ def get_storages_set(availability_zone: Optional[str] = None,
     return AwaitableGetStoragesSetResult(
         availability_zone=pulumi.get(__ret__, 'availability_zone'),
         charge_types=pulumi.get(__ret__, 'charge_types'),
+        dedicated_cluster_id=pulumi.get(__ret__, 'dedicated_cluster_id'),
         id=pulumi.get(__ret__, 'id'),
         instance_ips=pulumi.get(__ret__, 'instance_ips'),
         instance_names=pulumi.get(__ret__, 'instance_names'),
@@ -289,6 +307,7 @@ def get_storages_set(availability_zone: Optional[str] = None,
 @_utilities.lift_output_func(get_storages_set)
 def get_storages_set_output(availability_zone: Optional[pulumi.Input[Optional[str]]] = None,
                             charge_types: Optional[pulumi.Input[Optional[Sequence[str]]]] = None,
+                            dedicated_cluster_id: Optional[pulumi.Input[Optional[str]]] = None,
                             instance_ips: Optional[pulumi.Input[Optional[Sequence[str]]]] = None,
                             instance_names: Optional[pulumi.Input[Optional[Sequence[str]]]] = None,
                             portable: Optional[pulumi.Input[Optional[bool]]] = None,
@@ -307,18 +326,21 @@ def get_storages_set_output(availability_zone: Optional[pulumi.Input[Optional[st
 
     ## Example Usage
 
+    ### Query CBS by storage set by zone
+
     <!--Start PulumiCodeChooser -->
     ```python
     import pulumi
     import pulumi_tencentcloud as tencentcloud
 
-    storages = tencentcloud.Cbs.get_storages_set(availability_zone="ap-guangzhou-3")
+    example = tencentcloud.Cbs.get_storages_set(availability_zone="ap-guangzhou-3")
     ```
     <!--End PulumiCodeChooser -->
 
 
     :param str availability_zone: The available zone that the CBS instance locates at.
-    :param Sequence[str] charge_types: List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+    :param Sequence[str] charge_types: List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
+    :param str dedicated_cluster_id: Exclusive cluster id.
     :param Sequence[str] instance_ips: List filter by attached instance public or private IPs.
     :param Sequence[str] instance_names: List filter by attached instance name.
     :param bool portable: Filter by whether the disk is portable (Boolean `true` or `false`).

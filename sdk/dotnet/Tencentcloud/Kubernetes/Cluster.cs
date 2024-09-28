@@ -203,6 +203,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
+    /// ### Create a CDC scenario cluster
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var cdcCluster = new Tencentcloud.Kubernetes.Cluster("cdcCluster", new()
+    ///     {
+    ///         CdcId = "cluster-xxxxx",
+    ///         ClusterCidr = "192.168.0.0/16",
+    ///         ClusterDeployType = "INDEPENDENT_CLUSTER",
+    ///         ClusterDesc = "test cluster desc",
+    ///         ClusterLevel = "L20",
+    ///         ClusterMaxPodNum = 64,
+    ///         ClusterMaxServiceNum = 1024,
+    ///         ClusterName = "test-cdc",
+    ///         ClusterOs = "tlinux3.1x86_64",
+    ///         ClusterVersion = "1.30.0",
+    ///         ContainerRuntime = "containerd",
+    ///         ExistInstances = new[]
+    ///         {
+    ///             new Tencentcloud.Kubernetes.Inputs.ClusterExistInstanceArgs
+    ///             {
+    ///                 InstancesPara = new Tencentcloud.Kubernetes.Inputs.ClusterExistInstanceInstancesParaArgs
+    ///                 {
+    ///                     InstanceIds = new[]
+    ///                     {
+    ///                         "ins-eeijdk16",
+    ///                         "ins-84ku5rba",
+    ///                         "ins-8oa3im2s",
+    ///                     },
+    ///                 },
+    ///                 NodeRole = "MASTER_ETCD",
+    ///             },
+    ///         },
+    ///         PreStartUserScript = "aXB0YWJsZXMgLUEgSU5QVVQgLXAgdGNwIC1zIDE2OS4yNTQuMC4wLzE5IC0tdGNwLWZsYWdzIFNZTixSU1QgU1lOIC1qIFRDUE1TUyAtLXNldC1tc3MgMTE2MAppcHRhYmxlcyAtQSBPVVRQVVQgLXAgdGNwIC1kIDE2OS4yNTQuMC4wLzE5IC0tdGNwLWZsYWdzIFNZTixSU1QgU1lOIC1qIFRDUE1TUyAtLXNldC1tc3MgMTE2MAoKZWNobyAnCmlwdGFibGVzIC1BIElOUFVUIC1wIHRjcCAtcyAxNjkuMjU0LjAuMC8xOSAtLXRjcC1mbGFncyBTWU4sUlNUIFNZTiAtaiBUQ1BNU1MgLS1zZXQtbXNzIDExNjAKaXB0YWJsZXMgLUEgT1VUUFVUIC1wIHRjcCAtZCAxNjkuMjU0LjAuMC8xOSAtLXRjcC1mbGFncyBTWU4sUlNUIFNZTiAtaiBUQ1BNU1MgLS1zZXQtbXNzIDExNjAKJyA+PiAvZXRjL3JjLmQvcmMubG9jYWw=",
+    ///         RuntimeVersion = "1.6.9",
+    ///         VpcId = "vpc-xxxxx",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ## Import
     /// 
     /// tke cluster can be imported, e.g.
@@ -237,6 +286,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Output("basePodNum")]
         public Output<int?> BasePodNum { get; private set; } = null!;
+
+        /// <summary>
+        /// CDC ID.
+        /// </summary>
+        [Output("cdcId")]
+        public Output<string?> CdcId { get; private set; } = null!;
 
         /// <summary>
         /// The certificate used for access.
@@ -461,6 +516,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Output<bool?> IgnoreClusterCidrConflict { get; private set; } = null!;
 
         /// <summary>
+        /// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+        /// </summary>
+        [Output("ignoreServiceCidrConflict")]
+        public Output<bool> IgnoreServiceCidrConflict { get; private set; } = null!;
+
+        /// <summary>
         /// Indicates whether non-static ip mode is enabled. Default is false.
         /// </summary>
         [Output("isNonStaticIpMode")]
@@ -543,6 +604,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Output("pgwEndpoint")]
         public Output<string> PgwEndpoint { get; private set; } = null!;
+
+        /// <summary>
+        /// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        /// </summary>
+        [Output("preStartUserScript")]
+        public Output<string?> PreStartUserScript { get; private set; } = null!;
 
         /// <summary>
         /// Project ID, default value is 0.
@@ -686,6 +753,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("basePodNum")]
         public Input<int>? BasePodNum { get; set; }
+
+        /// <summary>
+        /// CDC ID.
+        /// </summary>
+        [Input("cdcId")]
+        public Input<string>? CdcId { get; set; }
 
         /// <summary>
         /// Claim expired seconds to recycle ENI. This field can only set when field `network_type` is 'VPC-CNI'. `claim_expired_seconds` must greater or equal than 300 and less than 15768000.
@@ -904,6 +977,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<bool>? IgnoreClusterCidrConflict { get; set; }
 
         /// <summary>
+        /// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+        /// </summary>
+        [Input("ignoreServiceCidrConflict")]
+        public Input<bool>? IgnoreServiceCidrConflict { get; set; }
+
+        /// <summary>
         /// Indicates whether non-static ip mode is enabled. Default is false.
         /// </summary>
         [Input("isNonStaticIpMode")]
@@ -987,6 +1066,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
             get => _nodePoolGlobalConfigs ?? (_nodePoolGlobalConfigs = new InputList<Inputs.ClusterNodePoolGlobalConfigArgs>());
             set => _nodePoolGlobalConfigs = value;
         }
+
+        /// <summary>
+        /// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        /// </summary>
+        [Input("preStartUserScript")]
+        public Input<string>? PreStartUserScript { get; set; }
 
         /// <summary>
         /// Project ID, default value is 0.
@@ -1085,6 +1170,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("basePodNum")]
         public Input<int>? BasePodNum { get; set; }
+
+        /// <summary>
+        /// CDC ID.
+        /// </summary>
+        [Input("cdcId")]
+        public Input<string>? CdcId { get; set; }
 
         /// <summary>
         /// The certificate used for access.
@@ -1333,6 +1424,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         public Input<bool>? IgnoreClusterCidrConflict { get; set; }
 
         /// <summary>
+        /// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+        /// </summary>
+        [Input("ignoreServiceCidrConflict")]
+        public Input<bool>? IgnoreServiceCidrConflict { get; set; }
+
+        /// <summary>
         /// Indicates whether non-static ip mode is enabled. Default is false.
         /// </summary>
         [Input("isNonStaticIpMode")]
@@ -1440,6 +1537,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// </summary>
         [Input("pgwEndpoint")]
         public Input<string>? PgwEndpoint { get; set; }
+
+        /// <summary>
+        /// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+        /// </summary>
+        [Input("preStartUserScript")]
+        public Input<string>? PreStartUserScript { get; set; }
 
         /// <summary>
         /// Project ID, default value is 0.

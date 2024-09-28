@@ -9,6 +9,8 @@ import * as utilities from "../utilities";
 /**
  * Use this data source to query the COS bucket inventorys.
  *
+ * > **NOTE:** The current resource does not support cdc.
+ *
  * ## Example Usage
  *
  * <!--Start PulumiCodeChooser -->
@@ -65,6 +67,8 @@ export interface GetBucketInventorysResult {
 }
 /**
  * Use this data source to query the COS bucket inventorys.
+ *
+ * > **NOTE:** The current resource does not support cdc.
  *
  * ## Example Usage
  *

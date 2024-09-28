@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cls dataTransform
+// Provides a resource to create a CLS data transform
 //
 // ## Example Usage
 //
@@ -47,7 +47,7 @@ import (
 //				Period:             pulumi.Int(10),
 //				StorageType:        pulumi.String("hot"),
 //				Tags: pulumi.Map{
-//					"test": pulumi.Any("test"),
+//					"createdBy": pulumi.Any("terraform"),
 //				},
 //			})
 //			if err != nil {
@@ -71,13 +71,13 @@ import (
 //				Period:             pulumi.Int(10),
 //				StorageType:        pulumi.String("hot"),
 //				Tags: pulumi.Map{
-//					"test": pulumi.Any("test"),
+//					"createdBy": pulumi.Any("terraform"),
 //				},
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = Cls.NewDataTransform(ctx, "dataTransform", &Cls.DataTransformArgs{
+//			_, err = Cls.NewDataTransform(ctx, "example", &Cls.DataTransformArgs{
 //				FuncType:   pulumi.Int(1),
 //				SrcTopicId: topicSrc.ID(),
 //				EtlContent: pulumi.String("ext_sep(\"content\", \"f1, f2, f3\", sep=\",\", quote=\"\", restrict=False, mode=\"overwrite\")fields_drop(\"content\")"),
@@ -102,27 +102,27 @@ import (
 //
 // ## Import
 //
-// cls data_transform can be imported using the id, e.g.
+// CLS data transform can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Cls/dataTransform:DataTransform data_transform data_transform_id
+// $ pulumi import tencentcloud:Cls/dataTransform:DataTransform example 7b4bcb05-9154-4cdc-a479-f6b5743846e5
 // ```
 type DataTransform struct {
 	pulumi.CustomResourceState
 
-	// data transform des resources.
+	// Data transform des resources. If `funcType` is `1`, this parameter is required. If `funcType` is `2`, this parameter does not need to be filled in.
 	DstResources DataTransformDstResourceArrayOutput `pulumi:"dstResources"`
-	// task enable flag.
+	// Task enable flag. `1`: enable, `2`: disable, Default is `1`.
 	EnableFlag pulumi.IntPtrOutput `pulumi:"enableFlag"`
-	// data transform content.
+	// Data transform content. If `funcType` is `2`, must use `logAutoOutput`.
 	EtlContent pulumi.StringOutput `pulumi:"etlContent"`
-	// task type.
+	// Task type. `1`: Specify the theme; `2`: Dynamic creation.
 	FuncType pulumi.IntOutput `pulumi:"funcType"`
-	// task name.
+	// Task name.
 	Name pulumi.StringOutput `pulumi:"name"`
-	// src topic id.
+	// Source topic ID.
 	SrcTopicId pulumi.StringOutput `pulumi:"srcTopicId"`
-	// task type.
+	// Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
 	TaskType pulumi.IntOutput `pulumi:"taskType"`
 }
 
@@ -168,36 +168,36 @@ func GetDataTransform(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering DataTransform resources.
 type dataTransformState struct {
-	// data transform des resources.
+	// Data transform des resources. If `funcType` is `1`, this parameter is required. If `funcType` is `2`, this parameter does not need to be filled in.
 	DstResources []DataTransformDstResource `pulumi:"dstResources"`
-	// task enable flag.
+	// Task enable flag. `1`: enable, `2`: disable, Default is `1`.
 	EnableFlag *int `pulumi:"enableFlag"`
-	// data transform content.
+	// Data transform content. If `funcType` is `2`, must use `logAutoOutput`.
 	EtlContent *string `pulumi:"etlContent"`
-	// task type.
+	// Task type. `1`: Specify the theme; `2`: Dynamic creation.
 	FuncType *int `pulumi:"funcType"`
-	// task name.
+	// Task name.
 	Name *string `pulumi:"name"`
-	// src topic id.
+	// Source topic ID.
 	SrcTopicId *string `pulumi:"srcTopicId"`
-	// task type.
+	// Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
 	TaskType *int `pulumi:"taskType"`
 }
 
 type DataTransformState struct {
-	// data transform des resources.
+	// Data transform des resources. If `funcType` is `1`, this parameter is required. If `funcType` is `2`, this parameter does not need to be filled in.
 	DstResources DataTransformDstResourceArrayInput
-	// task enable flag.
+	// Task enable flag. `1`: enable, `2`: disable, Default is `1`.
 	EnableFlag pulumi.IntPtrInput
-	// data transform content.
+	// Data transform content. If `funcType` is `2`, must use `logAutoOutput`.
 	EtlContent pulumi.StringPtrInput
-	// task type.
+	// Task type. `1`: Specify the theme; `2`: Dynamic creation.
 	FuncType pulumi.IntPtrInput
-	// task name.
+	// Task name.
 	Name pulumi.StringPtrInput
-	// src topic id.
+	// Source topic ID.
 	SrcTopicId pulumi.StringPtrInput
-	// task type.
+	// Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
 	TaskType pulumi.IntPtrInput
 }
 
@@ -206,37 +206,37 @@ func (DataTransformState) ElementType() reflect.Type {
 }
 
 type dataTransformArgs struct {
-	// data transform des resources.
+	// Data transform des resources. If `funcType` is `1`, this parameter is required. If `funcType` is `2`, this parameter does not need to be filled in.
 	DstResources []DataTransformDstResource `pulumi:"dstResources"`
-	// task enable flag.
+	// Task enable flag. `1`: enable, `2`: disable, Default is `1`.
 	EnableFlag *int `pulumi:"enableFlag"`
-	// data transform content.
+	// Data transform content. If `funcType` is `2`, must use `logAutoOutput`.
 	EtlContent string `pulumi:"etlContent"`
-	// task type.
+	// Task type. `1`: Specify the theme; `2`: Dynamic creation.
 	FuncType int `pulumi:"funcType"`
-	// task name.
+	// Task name.
 	Name *string `pulumi:"name"`
-	// src topic id.
+	// Source topic ID.
 	SrcTopicId string `pulumi:"srcTopicId"`
-	// task type.
+	// Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
 	TaskType int `pulumi:"taskType"`
 }
 
 // The set of arguments for constructing a DataTransform resource.
 type DataTransformArgs struct {
-	// data transform des resources.
+	// Data transform des resources. If `funcType` is `1`, this parameter is required. If `funcType` is `2`, this parameter does not need to be filled in.
 	DstResources DataTransformDstResourceArrayInput
-	// task enable flag.
+	// Task enable flag. `1`: enable, `2`: disable, Default is `1`.
 	EnableFlag pulumi.IntPtrInput
-	// data transform content.
+	// Data transform content. If `funcType` is `2`, must use `logAutoOutput`.
 	EtlContent pulumi.StringInput
-	// task type.
+	// Task type. `1`: Specify the theme; `2`: Dynamic creation.
 	FuncType pulumi.IntInput
-	// task name.
+	// Task name.
 	Name pulumi.StringPtrInput
-	// src topic id.
+	// Source topic ID.
 	SrcTopicId pulumi.StringInput
-	// task type.
+	// Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
 	TaskType pulumi.IntInput
 }
 
@@ -327,37 +327,37 @@ func (o DataTransformOutput) ToDataTransformOutputWithContext(ctx context.Contex
 	return o
 }
 
-// data transform des resources.
+// Data transform des resources. If `funcType` is `1`, this parameter is required. If `funcType` is `2`, this parameter does not need to be filled in.
 func (o DataTransformOutput) DstResources() DataTransformDstResourceArrayOutput {
 	return o.ApplyT(func(v *DataTransform) DataTransformDstResourceArrayOutput { return v.DstResources }).(DataTransformDstResourceArrayOutput)
 }
 
-// task enable flag.
+// Task enable flag. `1`: enable, `2`: disable, Default is `1`.
 func (o DataTransformOutput) EnableFlag() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *DataTransform) pulumi.IntPtrOutput { return v.EnableFlag }).(pulumi.IntPtrOutput)
 }
 
-// data transform content.
+// Data transform content. If `funcType` is `2`, must use `logAutoOutput`.
 func (o DataTransformOutput) EtlContent() pulumi.StringOutput {
 	return o.ApplyT(func(v *DataTransform) pulumi.StringOutput { return v.EtlContent }).(pulumi.StringOutput)
 }
 
-// task type.
+// Task type. `1`: Specify the theme; `2`: Dynamic creation.
 func (o DataTransformOutput) FuncType() pulumi.IntOutput {
 	return o.ApplyT(func(v *DataTransform) pulumi.IntOutput { return v.FuncType }).(pulumi.IntOutput)
 }
 
-// task name.
+// Task name.
 func (o DataTransformOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *DataTransform) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
 
-// src topic id.
+// Source topic ID.
 func (o DataTransformOutput) SrcTopicId() pulumi.StringOutput {
 	return o.ApplyT(func(v *DataTransform) pulumi.StringOutput { return v.SrcTopicId }).(pulumi.StringOutput)
 }
 
-// task type.
+// Task type. `1`: Use random data from the source log theme for processing preview; `2`: Use user-defined test data for processing preview; `3`: Create real machining tasks.
 func (o DataTransformOutput) TaskType() pulumi.IntOutput {
 	return o.ApplyT(func(v *DataTransform) pulumi.IntOutput { return v.TaskType }).(pulumi.IntOutput)
 }

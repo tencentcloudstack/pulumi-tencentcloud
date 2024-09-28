@@ -30,9 +30,9 @@ class UserArgs:
         :param pulumi.Input[str] user_name: Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
         :param pulumi.Input[int] auth_type: Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.
         :param pulumi.Input[str] department_id: Department ID, such as: 1.2.3.
-        :param pulumi.Input[str] email: Email.
+        :param pulumi.Input[str] email: Email. Please provide at least one of `phone` or `email`.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] group_id_sets: The set of user group IDs to which it belongs.
-        :param pulumi.Input[str] phone: Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+        :param pulumi.Input[str] phone: Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
         :param pulumi.Input[str] validate_from: User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
         :param pulumi.Input[str] validate_time: Access time period limit, a string composed of 0 and 1, length 168 (7 * 24), representing the time period the user is allowed to access in a week. The Nth character in the string represents the Nth hour of the week, 0 - means access is not allowed, 1 - means access is allowed.
         :param pulumi.Input[str] validate_to: User expiration time, such as: 2021-09-23T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
@@ -108,7 +108,7 @@ class UserArgs:
     @pulumi.getter
     def email(self) -> Optional[pulumi.Input[str]]:
         """
-        Email.
+        Email. Please provide at least one of `phone` or `email`.
         """
         return pulumi.get(self, "email")
 
@@ -132,7 +132,7 @@ class UserArgs:
     @pulumi.getter
     def phone(self) -> Optional[pulumi.Input[str]]:
         """
-        Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+        Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
         """
         return pulumi.get(self, "phone")
 
@@ -194,9 +194,9 @@ class _UserState:
         Input properties used for looking up and filtering User resources.
         :param pulumi.Input[int] auth_type: Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.
         :param pulumi.Input[str] department_id: Department ID, such as: 1.2.3.
-        :param pulumi.Input[str] email: Email.
+        :param pulumi.Input[str] email: Email. Please provide at least one of `phone` or `email`.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] group_id_sets: The set of user group IDs to which it belongs.
-        :param pulumi.Input[str] phone: Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+        :param pulumi.Input[str] phone: Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
         :param pulumi.Input[str] real_name: Real name, maximum length 20 characters, cannot contain blank characters.
         :param pulumi.Input[str] user_name: Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
         :param pulumi.Input[str] validate_from: User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
@@ -252,7 +252,7 @@ class _UserState:
     @pulumi.getter
     def email(self) -> Optional[pulumi.Input[str]]:
         """
-        Email.
+        Email. Please provide at least one of `phone` or `email`.
         """
         return pulumi.get(self, "email")
 
@@ -276,7 +276,7 @@ class _UserState:
     @pulumi.getter
     def phone(self) -> Optional[pulumi.Input[str]]:
         """
-        Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+        Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
         """
         return pulumi.get(self, "phone")
 
@@ -395,9 +395,9 @@ class User(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] auth_type: Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.
         :param pulumi.Input[str] department_id: Department ID, such as: 1.2.3.
-        :param pulumi.Input[str] email: Email.
+        :param pulumi.Input[str] email: Email. Please provide at least one of `phone` or `email`.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] group_id_sets: The set of user group IDs to which it belongs.
-        :param pulumi.Input[str] phone: Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+        :param pulumi.Input[str] phone: Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
         :param pulumi.Input[str] real_name: Real name, maximum length 20 characters, cannot contain blank characters.
         :param pulumi.Input[str] user_name: Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
         :param pulumi.Input[str] validate_from: User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
@@ -517,9 +517,9 @@ class User(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[int] auth_type: Authentication method, 0 - local, 1 - LDAP, 2 - OAuth. If not passed, the default is 0.
         :param pulumi.Input[str] department_id: Department ID, such as: 1.2.3.
-        :param pulumi.Input[str] email: Email.
+        :param pulumi.Input[str] email: Email. Please provide at least one of `phone` or `email`.
         :param pulumi.Input[Sequence[pulumi.Input[int]]] group_id_sets: The set of user group IDs to which it belongs.
-        :param pulumi.Input[str] phone: Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+        :param pulumi.Input[str] phone: Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
         :param pulumi.Input[str] real_name: Real name, maximum length 20 characters, cannot contain blank characters.
         :param pulumi.Input[str] user_name: Username, 3-20 characters, must start with an English letter and cannot contain characters other than letters, numbers, '.', '_', '-'.
         :param pulumi.Input[str] validate_from: User effective time, such as: 2021-09-22T00:00:00+00:00If the effective and expiry time are not filled in, the user will be valid for a long time.
@@ -562,7 +562,7 @@ class User(pulumi.CustomResource):
     @pulumi.getter
     def email(self) -> pulumi.Output[Optional[str]]:
         """
-        Email.
+        Email. Please provide at least one of `phone` or `email`.
         """
         return pulumi.get(self, "email")
 
@@ -578,7 +578,7 @@ class User(pulumi.CustomResource):
     @pulumi.getter
     def phone(self) -> pulumi.Output[Optional[str]]:
         """
-        Fill in the mainland mobile phone number directly. If it is a number from other countries or regions, enter it in the format of country area code|mobile phone number. For example: +852|xxxxxxxx.
+        Enter it in the format of country area code|mobile phone number. For example: +86|***********, +852|xxxxxxxx. Please provide at least one of `phone` or `email`.
         """
         return pulumi.get(self, "phone")
 

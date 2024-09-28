@@ -372,6 +372,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         public Output<Outputs.DomainOssPrivateAccess?> OssPrivateAccess { get; private set; } = null!;
 
         /// <summary>
+        /// Object storage back-to-source authentication of other vendors.
+        /// </summary>
+        [Output("othersPrivateAccess")]
+        public Output<Outputs.DomainOthersPrivateAccess?> OthersPrivateAccess { get; private set; } = null!;
+
+        /// <summary>
         /// Maximum post size configuration.
         /// </summary>
         [Output("postMaxSizes")]
@@ -664,6 +670,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         [Input("ossPrivateAccess")]
         public Input<Inputs.DomainOssPrivateAccessArgs>? OssPrivateAccess { get; set; }
 
+        /// <summary>
+        /// Object storage back-to-source authentication of other vendors.
+        /// </summary>
+        [Input("othersPrivateAccess")]
+        public Input<Inputs.DomainOthersPrivateAccessArgs>? OthersPrivateAccess { get; set; }
+
         [Input("postMaxSizes")]
         private InputList<Inputs.DomainPostMaxSizeArgs>? _postMaxSizes;
 
@@ -953,6 +965,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// </summary>
         [Input("ossPrivateAccess")]
         public Input<Inputs.DomainOssPrivateAccessGetArgs>? OssPrivateAccess { get; set; }
+
+        /// <summary>
+        /// Object storage back-to-source authentication of other vendors.
+        /// </summary>
+        [Input("othersPrivateAccess")]
+        public Input<Inputs.DomainOthersPrivateAccessGetArgs>? OthersPrivateAccess { get; set; }
 
         [Input("postMaxSizes")]
         private InputList<Inputs.DomainPostMaxSizeGetArgs>? _postMaxSizes;

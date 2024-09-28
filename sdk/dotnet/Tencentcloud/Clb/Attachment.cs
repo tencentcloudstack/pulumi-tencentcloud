@@ -17,8 +17,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// ## Example Usage
     /// 
-    /// ### Bind a Cvm instance
-    /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
     /// using System.Collections.Generic;
@@ -28,7 +26,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Clb.Attachment("foo", new()
+    ///     var example = new Tencentcloud.Clb.Attachment("example", new()
     ///     {
     ///         ClbId = "lb-k2zjp9lv",
     ///         ListenerId = "lbl-hh141sn9",
@@ -48,7 +46,35 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
-    /// ### Bind multiple Cvm instances
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Clb.Attachment("example", new()
+    ///     {
+    ///         ClbId = "lb-k2zjp9lv",
+    ///         Domain = "test.com",
+    ///         ListenerId = "lbl-hh141sn9",
+    ///         Targets = new[]
+    ///         {
+    ///             new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
+    ///             {
+    ///                 InstanceId = "ins-1flbqyp8",
+    ///                 Port = 80,
+    ///                 Weight = 10,
+    ///             },
+    ///         },
+    ///         Url = "/",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -59,7 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Clb.Attachment("foo", new()
+    ///     var example = new Tencentcloud.Clb.Attachment("example", new()
     ///     {
     ///         ClbId = "lb-k2zjp9lv",
     ///         ListenerId = "lbl-hh141sn9",
@@ -85,7 +111,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// ```
     /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
-    /// ### Bind backend target is ENI
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Clb.Attachment("example", new()
+    ///     {
+    ///         ClbId = "lb-k2zjp9lv",
+    ///         Domain = "test.com",
+    ///         ListenerId = "lbl-hh141sn9",
+    ///         Targets = new[]
+    ///         {
+    ///             new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
+    ///             {
+    ///                 InstanceId = "ins-1flbqyp8",
+    ///                 Port = 80,
+    ///                 Weight = 10,
+    ///             },
+    ///             new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
+    ///             {
+    ///                 InstanceId = "ins-ekloqpa1",
+    ///                 Port = 81,
+    ///                 Weight = 10,
+    ///             },
+    ///         },
+    ///         Url = "/",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
     /// 
     /// &lt;!--Start PulumiCodeChooser --&gt;
     /// ```csharp
@@ -96,7 +156,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var foo = new Tencentcloud.Clb.Attachment("foo", new()
+    ///     var example = new Tencentcloud.Clb.Attachment("example", new()
     ///     {
     ///         ClbId = "lb-k2zjp9lv",
     ///         ListenerId = "lbl-hh141sn9",
@@ -105,11 +165,41 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     ///         {
     ///             new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
     ///             {
-    ///                 EniIp = "example-ip",
-    ///                 Port = 23,
+    ///                 EniIp = "172.16.16.52",
+    ///                 Port = 8090,
     ///                 Weight = 50,
     ///             },
     ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Clb.Attachment("example", new()
+    ///     {
+    ///         ClbId = "lb-k2zjp9lv",
+    ///         Domain = "test.com",
+    ///         ListenerId = "lbl-hh141sn9",
+    ///         Targets = new[]
+    ///         {
+    ///             new Tencentcloud.Clb.Inputs.AttachmentTargetArgs
+    ///             {
+    ///                 EniIp = "172.16.16.52",
+    ///                 Port = 8090,
+    ///                 Weight = 50,
+    ///             },
+    ///         },
+    ///         Url = "/",
     ///     });
     /// 
     /// });
@@ -121,7 +211,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// CLB attachment can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Clb/attachment:Attachment foo loc-4xxr2cy7#lbl-hh141sn9#lb-7a0t6zqb
+    /// $ pulumi import tencentcloud:Clb/attachment:Attachment example loc-4xxr2cy7#lbl-hh141sn9#lb-7a0t6zqb
+    /// ```
+    /// 
+    /// Or
+    /// 
+    /// ```sh
+    /// $ pulumi import tencentcloud:Clb/attachment:Attachment example test.com,/#lbl-hh141sn9#lb-7a0t6zqb
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clb/attachment:Attachment")]
@@ -132,6 +228,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Output("clbId")]
         public Output<string> ClbId { get; private set; } = null!;
+
+        /// <summary>
+        /// Domain of the target forwarding rule. Does not take effect when parameter `rule_id` is provided.
+        /// </summary>
+        [Output("domain")]
+        public Output<string?> Domain { get; private set; } = null!;
 
         /// <summary>
         /// ID of the CLB listener.
@@ -156,6 +258,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Output("targets")]
         public Output<ImmutableArray<Outputs.AttachmentTarget>> Targets { get; private set; } = null!;
+
+        /// <summary>
+        /// URL of the target forwarding rule. Does not take effect when parameter `rule_id` is provided.
+        /// </summary>
+        [Output("url")]
+        public Output<string?> Url { get; private set; } = null!;
 
 
         /// <summary>
@@ -211,6 +319,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string> ClbId { get; set; } = null!;
 
         /// <summary>
+        /// Domain of the target forwarding rule. Does not take effect when parameter `rule_id` is provided.
+        /// </summary>
+        [Input("domain")]
+        public Input<string>? Domain { get; set; }
+
+        /// <summary>
         /// ID of the CLB listener.
         /// </summary>
         [Input("listenerId", required: true)]
@@ -234,6 +348,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
             set => _targets = value;
         }
 
+        /// <summary>
+        /// URL of the target forwarding rule. Does not take effect when parameter `rule_id` is provided.
+        /// </summary>
+        [Input("url")]
+        public Input<string>? Url { get; set; }
+
         public AttachmentArgs()
         {
         }
@@ -247,6 +367,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// </summary>
         [Input("clbId")]
         public Input<string>? ClbId { get; set; }
+
+        /// <summary>
+        /// Domain of the target forwarding rule. Does not take effect when parameter `rule_id` is provided.
+        /// </summary>
+        [Input("domain")]
+        public Input<string>? Domain { get; set; }
 
         /// <summary>
         /// ID of the CLB listener.
@@ -277,6 +403,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
             get => _targets ?? (_targets = new InputList<Inputs.AttachmentTargetGetArgs>());
             set => _targets = value;
         }
+
+        /// <summary>
+        /// URL of the target forwarding rule. Does not take effect when parameter `rule_id` is provided.
+        /// </summary>
+        [Input("url")]
+        public Input<string>? Url { get; set; }
 
         public AttachmentState()
         {

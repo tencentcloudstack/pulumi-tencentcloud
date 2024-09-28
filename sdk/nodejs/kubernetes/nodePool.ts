@@ -285,7 +285,7 @@ export class NodePool extends pulumi.CustomResource {
     /**
      * Node pool tag specifications, will passthroughs to the scaling instances.
      */
-    public readonly tags!: pulumi.Output<{[key: string]: any} | undefined>;
+    public readonly tags!: pulumi.Output<{[key: string]: any}>;
     /**
      * Taints of kubernetes node pool created nodes.
      */

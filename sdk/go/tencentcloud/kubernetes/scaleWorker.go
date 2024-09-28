@@ -47,7 +47,7 @@ import (
 //			if param := cfg.Get("scaleInstanceType"); param != "" {
 //				scaleInstanceType = param
 //			}
-//			_, err := Kubernetes.NewScaleWorker(ctx, "testScale", &Kubernetes.ScaleWorkerArgs{
+//			_, err := Kubernetes.NewScaleWorker(ctx, "example", &Kubernetes.ScaleWorkerArgs{
 //				ClusterId:     pulumi.String("cls-godovr32"),
 //				DesiredPodNum: pulumi.Int(16),
 //				Labels: pulumi.Map{
@@ -115,7 +115,7 @@ import (
 //			if param := cfg.Get("scaleInstanceType"); param != "" {
 //				scaleInstanceType = param
 //			}
-//			_, err := Kubernetes.NewScaleWorker(ctx, "testScale", &Kubernetes.ScaleWorkerArgs{
+//			_, err := Kubernetes.NewScaleWorker(ctx, "example", &Kubernetes.ScaleWorkerArgs{
 //				ClusterId: pulumi.String("cls-godovr32"),
 //				ExtraArgs: pulumi.StringArray{
 //					pulumi.String("root-dir=/var/lib/kubelet"),
@@ -161,14 +161,14 @@ import (
 // tke scale worker can be imported, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker test cls-xxx#ins-xxx
+// $ pulumi import tencentcloud:Kubernetes/scaleWorker:ScaleWorker example cls-mij6c2pq#ins-n6esjkdi,ins-9h3rdxt8,ins-qretqeas
 // ```
 type ScaleWorker struct {
 	pulumi.CustomResourceState
 
 	// ID of the cluster.
 	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
-	// Configurations of data disk.
+	// Configurations of tke data disk.
 	DataDisks ScaleWorkerDataDiskArrayOutput `pulumi:"dataDisks"`
 	// Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
 	DesiredPodNum pulumi.IntPtrOutput `pulumi:"desiredPodNum"`
@@ -232,7 +232,7 @@ func GetScaleWorker(ctx *pulumi.Context,
 type scaleWorkerState struct {
 	// ID of the cluster.
 	ClusterId *string `pulumi:"clusterId"`
-	// Configurations of data disk.
+	// Configurations of tke data disk.
 	DataDisks []ScaleWorkerDataDisk `pulumi:"dataDisks"`
 	// Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
 	DesiredPodNum *int `pulumi:"desiredPodNum"`
@@ -261,7 +261,7 @@ type scaleWorkerState struct {
 type ScaleWorkerState struct {
 	// ID of the cluster.
 	ClusterId pulumi.StringPtrInput
-	// Configurations of data disk.
+	// Configurations of tke data disk.
 	DataDisks ScaleWorkerDataDiskArrayInput
 	// Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
 	DesiredPodNum pulumi.IntPtrInput
@@ -294,7 +294,7 @@ func (ScaleWorkerState) ElementType() reflect.Type {
 type scaleWorkerArgs struct {
 	// ID of the cluster.
 	ClusterId string `pulumi:"clusterId"`
-	// Configurations of data disk.
+	// Configurations of tke data disk.
 	DataDisks []ScaleWorkerDataDisk `pulumi:"dataDisks"`
 	// Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
 	DesiredPodNum *int `pulumi:"desiredPodNum"`
@@ -322,7 +322,7 @@ type scaleWorkerArgs struct {
 type ScaleWorkerArgs struct {
 	// ID of the cluster.
 	ClusterId pulumi.StringInput
-	// Configurations of data disk.
+	// Configurations of tke data disk.
 	DataDisks ScaleWorkerDataDiskArrayInput
 	// Indicate to set desired pod number in current node. Valid when the cluster enable customized pod cidr.
 	DesiredPodNum pulumi.IntPtrInput
@@ -438,7 +438,7 @@ func (o ScaleWorkerOutput) ClusterId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ScaleWorker) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
 }
 
-// Configurations of data disk.
+// Configurations of tke data disk.
 func (o ScaleWorkerOutput) DataDisks() ScaleWorkerDataDiskArrayOutput {
 	return o.ApplyT(func(v *ScaleWorker) ScaleWorkerDataDiskArrayOutput { return v.DataDisks }).(ScaleWorkerDataDiskArrayOutput)
 }

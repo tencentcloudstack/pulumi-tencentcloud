@@ -8,10 +8,14 @@ import pulumi
 import pulumi.runtime
 from typing import Any, Mapping, Optional, Sequence, Union, overload
 from .. import _utilities
+from . import outputs
 
 __all__ = [
     'TrackStorage',
     'GetCosRegionsAuditCosRegionListResult',
+    'GetEventsEventResult',
+    'GetEventsEventResourcesResult',
+    'GetEventsLookupAttributeResult',
     'GetKeyAliasAuditKeyAliasListResult',
 ]
 
@@ -116,6 +120,288 @@ class GetCosRegionsAuditCosRegionListResult(dict):
         Cos region chinese name.
         """
         return pulumi.get(self, "cos_region_name")
+
+
+@pulumi.output_type
+class GetEventsEventResult(dict):
+    def __init__(__self__, *,
+                 account_id: Optional[int] = None,
+                 cloud_audit_event: Optional[str] = None,
+                 error_code: Optional[int] = None,
+                 event_id: Optional[str] = None,
+                 event_name: Optional[str] = None,
+                 event_name_cn: Optional[str] = None,
+                 event_region: Optional[str] = None,
+                 event_source: Optional[str] = None,
+                 event_time: Optional[str] = None,
+                 location: Optional[str] = None,
+                 request_id: Optional[str] = None,
+                 resource_region: Optional[str] = None,
+                 resource_type_cn: Optional[str] = None,
+                 resources: Optional['outputs.GetEventsEventResourcesResult'] = None,
+                 secret_id: Optional[str] = None,
+                 source_ip_address: Optional[str] = None,
+                 username: Optional[str] = None):
+        """
+        :param int account_id: Root account ID.
+        :param str cloud_audit_event: Log details.
+        :param int error_code: Authentication error code.
+        :param str event_id: Log ID.
+        :param str event_name: Event name.
+        :param str event_name_cn: Description of event name in Chinese (please use this field as required; if you are using other languages, ignore this field).
+        :param str event_region: Event region.
+        :param str event_source: Request source.
+        :param str event_time: Event Time.
+        :param str location: IP location.
+        :param str request_id: Request ID.
+        :param str resource_region: Resource region.
+        :param str resource_type_cn: Description of resource type in Chinese (please use this field as required; if you are using other languages, ignore this field).
+        :param 'GetEventsEventResourcesArgs' resources: Resource pair.
+        :param str secret_id: Certificate ID
+               Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        :param str source_ip_address: Source IP
+               Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        :param str username: Username.
+        """
+        if account_id is not None:
+            pulumi.set(__self__, "account_id", account_id)
+        if cloud_audit_event is not None:
+            pulumi.set(__self__, "cloud_audit_event", cloud_audit_event)
+        if error_code is not None:
+            pulumi.set(__self__, "error_code", error_code)
+        if event_id is not None:
+            pulumi.set(__self__, "event_id", event_id)
+        if event_name is not None:
+            pulumi.set(__self__, "event_name", event_name)
+        if event_name_cn is not None:
+            pulumi.set(__self__, "event_name_cn", event_name_cn)
+        if event_region is not None:
+            pulumi.set(__self__, "event_region", event_region)
+        if event_source is not None:
+            pulumi.set(__self__, "event_source", event_source)
+        if event_time is not None:
+            pulumi.set(__self__, "event_time", event_time)
+        if location is not None:
+            pulumi.set(__self__, "location", location)
+        if request_id is not None:
+            pulumi.set(__self__, "request_id", request_id)
+        if resource_region is not None:
+            pulumi.set(__self__, "resource_region", resource_region)
+        if resource_type_cn is not None:
+            pulumi.set(__self__, "resource_type_cn", resource_type_cn)
+        if resources is not None:
+            pulumi.set(__self__, "resources", resources)
+        if secret_id is not None:
+            pulumi.set(__self__, "secret_id", secret_id)
+        if source_ip_address is not None:
+            pulumi.set(__self__, "source_ip_address", source_ip_address)
+        if username is not None:
+            pulumi.set(__self__, "username", username)
+
+    @property
+    @pulumi.getter(name="accountId")
+    def account_id(self) -> Optional[int]:
+        """
+        Root account ID.
+        """
+        return pulumi.get(self, "account_id")
+
+    @property
+    @pulumi.getter(name="cloudAuditEvent")
+    def cloud_audit_event(self) -> Optional[str]:
+        """
+        Log details.
+        """
+        return pulumi.get(self, "cloud_audit_event")
+
+    @property
+    @pulumi.getter(name="errorCode")
+    def error_code(self) -> Optional[int]:
+        """
+        Authentication error code.
+        """
+        return pulumi.get(self, "error_code")
+
+    @property
+    @pulumi.getter(name="eventId")
+    def event_id(self) -> Optional[str]:
+        """
+        Log ID.
+        """
+        return pulumi.get(self, "event_id")
+
+    @property
+    @pulumi.getter(name="eventName")
+    def event_name(self) -> Optional[str]:
+        """
+        Event name.
+        """
+        return pulumi.get(self, "event_name")
+
+    @property
+    @pulumi.getter(name="eventNameCn")
+    def event_name_cn(self) -> Optional[str]:
+        """
+        Description of event name in Chinese (please use this field as required; if you are using other languages, ignore this field).
+        """
+        return pulumi.get(self, "event_name_cn")
+
+    @property
+    @pulumi.getter(name="eventRegion")
+    def event_region(self) -> Optional[str]:
+        """
+        Event region.
+        """
+        return pulumi.get(self, "event_region")
+
+    @property
+    @pulumi.getter(name="eventSource")
+    def event_source(self) -> Optional[str]:
+        """
+        Request source.
+        """
+        return pulumi.get(self, "event_source")
+
+    @property
+    @pulumi.getter(name="eventTime")
+    def event_time(self) -> Optional[str]:
+        """
+        Event Time.
+        """
+        return pulumi.get(self, "event_time")
+
+    @property
+    @pulumi.getter
+    def location(self) -> Optional[str]:
+        """
+        IP location.
+        """
+        return pulumi.get(self, "location")
+
+    @property
+    @pulumi.getter(name="requestId")
+    def request_id(self) -> Optional[str]:
+        """
+        Request ID.
+        """
+        return pulumi.get(self, "request_id")
+
+    @property
+    @pulumi.getter(name="resourceRegion")
+    def resource_region(self) -> Optional[str]:
+        """
+        Resource region.
+        """
+        return pulumi.get(self, "resource_region")
+
+    @property
+    @pulumi.getter(name="resourceTypeCn")
+    def resource_type_cn(self) -> Optional[str]:
+        """
+        Description of resource type in Chinese (please use this field as required; if you are using other languages, ignore this field).
+        """
+        return pulumi.get(self, "resource_type_cn")
+
+    @property
+    @pulumi.getter
+    def resources(self) -> Optional['outputs.GetEventsEventResourcesResult']:
+        """
+        Resource pair.
+        """
+        return pulumi.get(self, "resources")
+
+    @property
+    @pulumi.getter(name="secretId")
+    def secret_id(self) -> Optional[str]:
+        """
+        Certificate ID
+        Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "secret_id")
+
+    @property
+    @pulumi.getter(name="sourceIpAddress")
+    def source_ip_address(self) -> Optional[str]:
+        """
+        Source IP
+        Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "source_ip_address")
+
+    @property
+    @pulumi.getter
+    def username(self) -> Optional[str]:
+        """
+        Username.
+        """
+        return pulumi.get(self, "username")
+
+
+@pulumi.output_type
+class GetEventsEventResourcesResult(dict):
+    def __init__(__self__, *,
+                 resource_name: Optional[str] = None,
+                 resource_type: Optional[str] = None):
+        """
+        :param str resource_name: Resource name
+               Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        :param str resource_type: Resource type.
+        """
+        if resource_name is not None:
+            pulumi.set(__self__, "resource_name", resource_name)
+        if resource_type is not None:
+            pulumi.set(__self__, "resource_type", resource_type)
+
+    @property
+    @pulumi.getter(name="resourceName")
+    def resource_name(self) -> Optional[str]:
+        """
+        Resource name
+        Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "resource_name")
+
+    @property
+    @pulumi.getter(name="resourceType")
+    def resource_type(self) -> Optional[str]:
+        """
+        Resource type.
+        """
+        return pulumi.get(self, "resource_type")
+
+
+@pulumi.output_type
+class GetEventsLookupAttributeResult(dict):
+    def __init__(__self__, *,
+                 attribute_key: str,
+                 attribute_value: Optional[str] = None):
+        """
+        :param str attribute_key: Valid values: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, and EventId
+               Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        :param str attribute_value: Value of `AttributeValue`
+               Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "attribute_key", attribute_key)
+        if attribute_value is not None:
+            pulumi.set(__self__, "attribute_value", attribute_value)
+
+    @property
+    @pulumi.getter(name="attributeKey")
+    def attribute_key(self) -> str:
+        """
+        Valid values: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, and EventId
+        Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "attribute_key")
+
+    @property
+    @pulumi.getter(name="attributeValue")
+    def attribute_value(self) -> Optional[str]:
+        """
+        Value of `AttributeValue`
+        Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "attribute_value")
 
 
 @pulumi.output_type

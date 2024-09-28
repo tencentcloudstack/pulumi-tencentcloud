@@ -15,6 +15,7 @@ from .cos_recharge import *
 from .cos_shipper import *
 from .data_transform import *
 from .export import *
+from .get_logsets import *
 from .get_machine_group_configs import *
 from .get_machines import *
 from .get_shipper_tasks import *

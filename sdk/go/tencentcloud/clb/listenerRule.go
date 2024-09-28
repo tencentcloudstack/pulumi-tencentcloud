@@ -18,6 +18,8 @@ import (
 //
 // ## Example Usage
 //
+// ### Create a single domain listener rule
+//
 // <!--Start PulumiCodeChooser -->
 // ```go
 // package main
@@ -31,24 +33,67 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := Clb.NewListenerRule(ctx, "foo", &Clb.ListenerRuleArgs{
+//			_, err := Clb.NewListenerRule(ctx, "example", &Clb.ListenerRuleArgs{
 //				CertificateCaId:         pulumi.String("VfqO4zkB"),
 //				CertificateId:           pulumi.String("VjANRdz8"),
 //				CertificateSslMode:      pulumi.String("MUTUAL"),
 //				ClbId:                   pulumi.String("lb-k2zjp9lv"),
-//				Domain:                  pulumi.String("foo.net"),
+//				Domain:                  pulumi.String("example.com"),
 //				HealthCheckHealthNum:    pulumi.Int(3),
 //				HealthCheckHttpCode:     pulumi.Int(2),
-//				HealthCheckHttpDomain:   pulumi.String("Default Domain"),
+//				HealthCheckHttpDomain:   pulumi.String("check.com"),
 //				HealthCheckHttpMethod:   pulumi.String("GET"),
-//				HealthCheckHttpPath:     pulumi.String("Default Path"),
+//				HealthCheckHttpPath:     pulumi.String("/"),
 //				HealthCheckIntervalTime: pulumi.Int(5),
 //				HealthCheckSwitch:       pulumi.Bool(true),
 //				HealthCheckUnhealthNum:  pulumi.Int(3),
 //				ListenerId:              pulumi.String("lbl-hh141sn9"),
 //				Scheduler:               pulumi.String("WRR"),
 //				SessionExpireTime:       pulumi.Int(30),
-//				Url:                     pulumi.String("/bar"),
+//				Url:                     pulumi.String("/"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
+// ### Create a listener rule for domain lists
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Clb"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Clb.NewListenerRule(ctx, "example", &Clb.ListenerRuleArgs{
+//				ClbId: pulumi.String("lb-k2zjp9lv"),
+//				Domains: pulumi.StringArray{
+//					pulumi.String("example1.com"),
+//					pulumi.String("example2.com"),
+//				},
+//				HealthCheckHealthNum:    pulumi.Int(3),
+//				HealthCheckHttpCode:     pulumi.Int(2),
+//				HealthCheckHttpDomain:   pulumi.String("check.com"),
+//				HealthCheckHttpMethod:   pulumi.String("GET"),
+//				HealthCheckHttpPath:     pulumi.String("/"),
+//				HealthCheckIntervalTime: pulumi.Int(5),
+//				HealthCheckSwitch:       pulumi.Bool(true),
+//				HealthCheckUnhealthNum:  pulumi.Int(3),
+//				ListenerId:              pulumi.String("lbl-hh141sn9"),
+//				Scheduler:               pulumi.String("WRR"),
+//				Url:                     pulumi.String("/"),
 //			})
 //			if err != nil {
 //				return err
@@ -65,7 +110,7 @@ import (
 // CLB listener rule can be imported using the id (version >= 1.47.0), e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule foo lb-7a0t6zqb#lbl-hh141sn9#loc-agg236ys
+// $ pulumi import tencentcloud:Clb/listenerRule:ListenerRule example lb-k2zjp9lv#lbl-hh141sn9#loc-agg236ys
 // ```
 type ListenerRule struct {
 	pulumi.CustomResourceState
@@ -78,8 +123,10 @@ type ListenerRule struct {
 	CertificateSslMode pulumi.StringPtrOutput `pulumi:"certificateSslMode"`
 	// ID of CLB instance.
 	ClbId pulumi.StringOutput `pulumi:"clbId"`
-	// Domain name of the listener rule.
+	// Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
 	Domain pulumi.StringOutput `pulumi:"domain"`
+	// Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+	Domains pulumi.StringArrayOutput `pulumi:"domains"`
 	// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
 	ForwardType pulumi.StringOutput `pulumi:"forwardType"`
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -130,9 +177,6 @@ func NewListenerRule(ctx *pulumi.Context,
 	if args.ClbId == nil {
 		return nil, errors.New("invalid value for required argument 'ClbId'")
 	}
-	if args.Domain == nil {
-		return nil, errors.New("invalid value for required argument 'Domain'")
-	}
 	if args.ListenerId == nil {
 		return nil, errors.New("invalid value for required argument 'ListenerId'")
 	}
@@ -170,8 +214,10 @@ type listenerRuleState struct {
 	CertificateSslMode *string `pulumi:"certificateSslMode"`
 	// ID of CLB instance.
 	ClbId *string `pulumi:"clbId"`
-	// Domain name of the listener rule.
+	// Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
 	Domain *string `pulumi:"domain"`
+	// Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+	Domains []string `pulumi:"domains"`
 	// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
 	ForwardType *string `pulumi:"forwardType"`
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -221,8 +267,10 @@ type ListenerRuleState struct {
 	CertificateSslMode pulumi.StringPtrInput
 	// ID of CLB instance.
 	ClbId pulumi.StringPtrInput
-	// Domain name of the listener rule.
+	// Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
 	Domain pulumi.StringPtrInput
+	// Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+	Domains pulumi.StringArrayInput
 	// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
 	ForwardType pulumi.StringPtrInput
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -276,8 +324,10 @@ type listenerRuleArgs struct {
 	CertificateSslMode *string `pulumi:"certificateSslMode"`
 	// ID of CLB instance.
 	ClbId string `pulumi:"clbId"`
-	// Domain name of the listener rule.
-	Domain string `pulumi:"domain"`
+	// Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+	Domain *string `pulumi:"domain"`
+	// Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+	Domains []string `pulumi:"domains"`
 	// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
 	ForwardType *string `pulumi:"forwardType"`
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -326,8 +376,10 @@ type ListenerRuleArgs struct {
 	CertificateSslMode pulumi.StringPtrInput
 	// ID of CLB instance.
 	ClbId pulumi.StringInput
-	// Domain name of the listener rule.
-	Domain pulumi.StringInput
+	// Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+	Domain pulumi.StringPtrInput
+	// Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+	Domains pulumi.StringArrayInput
 	// Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.
 	ForwardType pulumi.StringPtrInput
 	// Health threshold of health check, and the default is `3`. If a success result is returned for the health check 3 consecutive times, indicates that the forwarding is normal. The value range is [2-10]. NOTES: TCP/UDP/TCP_SSL listener allows direct configuration, HTTP/HTTPS listener needs to be configured in `Clb.ListenerRule`.
@@ -473,9 +525,14 @@ func (o ListenerRuleOutput) ClbId() pulumi.StringOutput {
 	return o.ApplyT(func(v *ListenerRule) pulumi.StringOutput { return v.ClbId }).(pulumi.StringOutput)
 }
 
-// Domain name of the listener rule.
+// Domain name of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
 func (o ListenerRuleOutput) Domain() pulumi.StringOutput {
 	return o.ApplyT(func(v *ListenerRule) pulumi.StringOutput { return v.Domain }).(pulumi.StringOutput)
+}
+
+// Domain name list of the listener rule. Single domain rules are passed to `domain`, and multi domain rules are passed to `domains`.
+func (o ListenerRuleOutput) Domains() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ListenerRule) pulumi.StringArrayOutput { return v.Domains }).(pulumi.StringArrayOutput)
 }
 
 // Forwarding protocol between the CLB instance and real server. Valid values: `HTTP`, `HTTPS`, `TRPC`. The default is `HTTP`.

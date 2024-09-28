@@ -150,6 +150,42 @@ import * as utilities from "../utilities";
  * ```
  * <!--End PulumiCodeChooser -->
  *
+ * ### Create a CDC scenario cluster
+ *
+ * <!--Start PulumiCodeChooser -->
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const cdcCluster = new tencentcloud.kubernetes.Cluster("cdcCluster", {
+ *     cdcId: "cluster-xxxxx",
+ *     clusterCidr: "192.168.0.0/16",
+ *     clusterDeployType: "INDEPENDENT_CLUSTER",
+ *     clusterDesc: "test cluster desc",
+ *     clusterLevel: "L20",
+ *     clusterMaxPodNum: 64,
+ *     clusterMaxServiceNum: 1024,
+ *     clusterName: "test-cdc",
+ *     clusterOs: "tlinux3.1x86_64",
+ *     clusterVersion: "1.30.0",
+ *     containerRuntime: "containerd",
+ *     existInstances: [{
+ *         instancesPara: {
+ *             instanceIds: [
+ *                 "ins-eeijdk16",
+ *                 "ins-84ku5rba",
+ *                 "ins-8oa3im2s",
+ *             ],
+ *         },
+ *         nodeRole: "MASTER_ETCD",
+ *     }],
+ *     preStartUserScript: "aXB0YWJsZXMgLUEgSU5QVVQgLXAgdGNwIC1zIDE2OS4yNTQuMC4wLzE5IC0tdGNwLWZsYWdzIFNZTixSU1QgU1lOIC1qIFRDUE1TUyAtLXNldC1tc3MgMTE2MAppcHRhYmxlcyAtQSBPVVRQVVQgLXAgdGNwIC1kIDE2OS4yNTQuMC4wLzE5IC0tdGNwLWZsYWdzIFNZTixSU1QgU1lOIC1qIFRDUE1TUyAtLXNldC1tc3MgMTE2MAoKZWNobyAnCmlwdGFibGVzIC1BIElOUFVUIC1wIHRjcCAtcyAxNjkuMjU0LjAuMC8xOSAtLXRjcC1mbGFncyBTWU4sUlNUIFNZTiAtaiBUQ1BNU1MgLS1zZXQtbXNzIDExNjAKaXB0YWJsZXMgLUEgT1VUUFVUIC1wIHRjcCAtZCAxNjkuMjU0LjAuMC8xOSAtLXRjcC1mbGFncyBTWU4sUlNUIFNZTiAtaiBUQ1BNU1MgLS1zZXQtbXNzIDExNjAKJyA+PiAvZXRjL3JjLmQvcmMubG9jYWw=",
+ *     runtimeVersion: "1.6.9",
+ *     vpcId: "vpc-xxxxx",
+ * });
+ * ```
+ * <!--End PulumiCodeChooser -->
+ *
  * ## Import
  *
  * tke cluster can be imported, e.g.
@@ -202,6 +238,10 @@ export class Cluster extends pulumi.CustomResource {
      * The number of basic pods. valid when enable_customized_pod_cidr=true.
      */
     public readonly basePodNum!: pulumi.Output<number | undefined>;
+    /**
+     * CDC ID.
+     */
+    public readonly cdcId!: pulumi.Output<string | undefined>;
     /**
      * The certificate used for access.
      */
@@ -353,6 +393,10 @@ export class Cluster extends pulumi.CustomResource {
      */
     public readonly ignoreClusterCidrConflict!: pulumi.Output<boolean | undefined>;
     /**
+     * Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+     */
+    public readonly ignoreServiceCidrConflict!: pulumi.Output<boolean>;
+    /**
      * Indicates whether non-static ip mode is enabled. Default is false.
      */
     public readonly isNonStaticIpMode!: pulumi.Output<boolean | undefined>;
@@ -410,6 +454,10 @@ export class Cluster extends pulumi.CustomResource {
      * The Intranet address used for access.
      */
     public /*out*/ readonly pgwEndpoint!: pulumi.Output<string>;
+    /**
+     * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+     */
+    public readonly preStartUserScript!: pulumi.Output<string | undefined>;
     /**
      * Project ID, default value is 0.
      */
@@ -476,6 +524,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["authOptions"] = state ? state.authOptions : undefined;
             resourceInputs["autoUpgradeClusterLevel"] = state ? state.autoUpgradeClusterLevel : undefined;
             resourceInputs["basePodNum"] = state ? state.basePodNum : undefined;
+            resourceInputs["cdcId"] = state ? state.cdcId : undefined;
             resourceInputs["certificationAuthority"] = state ? state.certificationAuthority : undefined;
             resourceInputs["claimExpiredSeconds"] = state ? state.claimExpiredSeconds : undefined;
             resourceInputs["clusterAsEnabled"] = state ? state.clusterAsEnabled : undefined;
@@ -513,6 +562,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["extraArgs"] = state ? state.extraArgs : undefined;
             resourceInputs["globeDesiredPodNum"] = state ? state.globeDesiredPodNum : undefined;
             resourceInputs["ignoreClusterCidrConflict"] = state ? state.ignoreClusterCidrConflict : undefined;
+            resourceInputs["ignoreServiceCidrConflict"] = state ? state.ignoreServiceCidrConflict : undefined;
             resourceInputs["isNonStaticIpMode"] = state ? state.isNonStaticIpMode : undefined;
             resourceInputs["kubeConfig"] = state ? state.kubeConfig : undefined;
             resourceInputs["kubeConfigIntranet"] = state ? state.kubeConfigIntranet : undefined;
@@ -527,6 +577,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["nodePoolGlobalConfigs"] = state ? state.nodePoolGlobalConfigs : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["pgwEndpoint"] = state ? state.pgwEndpoint : undefined;
+            resourceInputs["preStartUserScript"] = state ? state.preStartUserScript : undefined;
             resourceInputs["projectId"] = state ? state.projectId : undefined;
             resourceInputs["runtimeVersion"] = state ? state.runtimeVersion : undefined;
             resourceInputs["securityPolicies"] = state ? state.securityPolicies : undefined;
@@ -548,6 +599,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["authOptions"] = args ? args.authOptions : undefined;
             resourceInputs["autoUpgradeClusterLevel"] = args ? args.autoUpgradeClusterLevel : undefined;
             resourceInputs["basePodNum"] = args ? args.basePodNum : undefined;
+            resourceInputs["cdcId"] = args ? args.cdcId : undefined;
             resourceInputs["claimExpiredSeconds"] = args ? args.claimExpiredSeconds : undefined;
             resourceInputs["clusterAudit"] = args ? args.clusterAudit : undefined;
             resourceInputs["clusterCidr"] = args ? args.clusterCidr : undefined;
@@ -580,6 +632,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["extraArgs"] = args ? args.extraArgs : undefined;
             resourceInputs["globeDesiredPodNum"] = args ? args.globeDesiredPodNum : undefined;
             resourceInputs["ignoreClusterCidrConflict"] = args ? args.ignoreClusterCidrConflict : undefined;
+            resourceInputs["ignoreServiceCidrConflict"] = args ? args.ignoreServiceCidrConflict : undefined;
             resourceInputs["isNonStaticIpMode"] = args ? args.isNonStaticIpMode : undefined;
             resourceInputs["kubeProxyMode"] = args ? args.kubeProxyMode : undefined;
             resourceInputs["labels"] = args ? args.labels : undefined;
@@ -590,6 +643,7 @@ export class Cluster extends pulumi.CustomResource {
             resourceInputs["networkType"] = args ? args.networkType : undefined;
             resourceInputs["nodeNameType"] = args ? args.nodeNameType : undefined;
             resourceInputs["nodePoolGlobalConfigs"] = args ? args.nodePoolGlobalConfigs : undefined;
+            resourceInputs["preStartUserScript"] = args ? args.preStartUserScript : undefined;
             resourceInputs["projectId"] = args ? args.projectId : undefined;
             resourceInputs["runtimeVersion"] = args ? args.runtimeVersion : undefined;
             resourceInputs["serviceCidr"] = args ? args.serviceCidr : undefined;
@@ -637,6 +691,10 @@ export interface ClusterState {
      * The number of basic pods. valid when enable_customized_pod_cidr=true.
      */
     basePodNum?: pulumi.Input<number>;
+    /**
+     * CDC ID.
+     */
+    cdcId?: pulumi.Input<string>;
     /**
      * The certificate used for access.
      */
@@ -788,6 +846,10 @@ export interface ClusterState {
      */
     ignoreClusterCidrConflict?: pulumi.Input<boolean>;
     /**
+     * Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+     */
+    ignoreServiceCidrConflict?: pulumi.Input<boolean>;
+    /**
      * Indicates whether non-static ip mode is enabled. Default is false.
      */
     isNonStaticIpMode?: pulumi.Input<boolean>;
@@ -845,6 +907,10 @@ export interface ClusterState {
      * The Intranet address used for access.
      */
     pgwEndpoint?: pulumi.Input<string>;
+    /**
+     * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+     */
+    preStartUserScript?: pulumi.Input<string>;
     /**
      * Project ID, default value is 0.
      */
@@ -915,6 +981,10 @@ export interface ClusterArgs {
      * The number of basic pods. valid when enable_customized_pod_cidr=true.
      */
     basePodNum?: pulumi.Input<number>;
+    /**
+     * CDC ID.
+     */
+    cdcId?: pulumi.Input<string>;
     /**
      * Claim expired seconds to recycle ENI. This field can only set when field `networkType` is 'VPC-CNI'. `claimExpiredSeconds` must greater or equal than 300 and less than 15768000.
      */
@@ -1044,6 +1114,10 @@ export interface ClusterArgs {
      */
     ignoreClusterCidrConflict?: pulumi.Input<boolean>;
     /**
+     * Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+     */
+    ignoreServiceCidrConflict?: pulumi.Input<boolean>;
+    /**
      * Indicates whether non-static ip mode is enabled. Default is false.
      */
     isNonStaticIpMode?: pulumi.Input<boolean>;
@@ -1085,6 +1159,10 @@ export interface ClusterArgs {
      * Global config effective for all node pools.
      */
     nodePoolGlobalConfigs?: pulumi.Input<pulumi.Input<inputs.Kubernetes.ClusterNodePoolGlobalConfig>[]>;
+    /**
+     * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+     */
+    preStartUserScript?: pulumi.Input<string>;
     /**
      * Project ID, default value is 0.
      */

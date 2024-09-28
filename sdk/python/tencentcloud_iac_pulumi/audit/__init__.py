@@ -6,6 +6,7 @@ from .. import _utilities
 import typing
 # Export this package's modules as members:
 from .get_cos_regions import *
+from .get_events import *
 from .get_key_alias import *
 from .track import *
 from ._inputs import *

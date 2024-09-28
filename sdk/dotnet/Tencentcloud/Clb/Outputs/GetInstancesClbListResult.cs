@@ -31,6 +31,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
         /// </summary>
         public readonly ImmutableArray<string> ClbVips;
         /// <summary>
+        /// ID of the cluster.
+        /// </summary>
+        public readonly string ClusterId;
+        /// <summary>
         /// Create time of the CLB.
         /// </summary>
         public readonly string CreateTime;
@@ -117,6 +121,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
 
             ImmutableArray<string> clbVips,
 
+            string clusterId,
+
             string createTime,
 
             int internetBandwidthMaxOut,
@@ -159,6 +165,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb.Outputs
             ClbId = clbId;
             ClbName = clbName;
             ClbVips = clbVips;
+            ClusterId = clusterId;
             CreateTime = createTime;
             InternetBandwidthMaxOut = internetBandwidthMaxOut;
             InternetChargeType = internetChargeType;

@@ -55,6 +55,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     public partial class EndPoint : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// CDC instance ID.
+        /// </summary>
+        [Output("cdcId")]
+        public Output<string> CdcId { get; private set; } = null!;
+
+        /// <summary>
         /// Create Time.
         /// </summary>
         [Output("createTime")]
@@ -205,6 +211,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
 
     public sealed class EndPointState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// CDC instance ID.
+        /// </summary>
+        [Input("cdcId")]
+        public Input<string>? CdcId { get; set; }
+
         /// <summary>
         /// Create Time.
         /// </summary>

@@ -235,6 +235,59 @@ import (
 // ```
 // <!--End PulumiCodeChooser -->
 //
+// ### Create a CDC scenario cluster
+//
+// <!--Start PulumiCodeChooser -->
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/Kubernetes"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := Kubernetes.NewCluster(ctx, "cdcCluster", &Kubernetes.ClusterArgs{
+//				CdcId:                pulumi.String("cluster-xxxxx"),
+//				ClusterCidr:          pulumi.String("192.168.0.0/16"),
+//				ClusterDeployType:    pulumi.String("INDEPENDENT_CLUSTER"),
+//				ClusterDesc:          pulumi.String("test cluster desc"),
+//				ClusterLevel:         pulumi.String("L20"),
+//				ClusterMaxPodNum:     pulumi.Int(64),
+//				ClusterMaxServiceNum: pulumi.Int(1024),
+//				ClusterName:          pulumi.String("test-cdc"),
+//				ClusterOs:            pulumi.String("tlinux3.1x86_64"),
+//				ClusterVersion:       pulumi.String("1.30.0"),
+//				ContainerRuntime:     pulumi.String("containerd"),
+//				ExistInstances: kubernetes.ClusterExistInstanceArray{
+//					&kubernetes.ClusterExistInstanceArgs{
+//						InstancesPara: &kubernetes.ClusterExistInstanceInstancesParaArgs{
+//							InstanceIds: pulumi.StringArray{
+//								pulumi.String("ins-eeijdk16"),
+//								pulumi.String("ins-84ku5rba"),
+//								pulumi.String("ins-8oa3im2s"),
+//							},
+//						},
+//						NodeRole: pulumi.String("MASTER_ETCD"),
+//					},
+//				},
+//				PreStartUserScript: pulumi.String("aXB0YWJsZXMgLUEgSU5QVVQgLXAgdGNwIC1zIDE2OS4yNTQuMC4wLzE5IC0tdGNwLWZsYWdzIFNZTixSU1QgU1lOIC1qIFRDUE1TUyAtLXNldC1tc3MgMTE2MAppcHRhYmxlcyAtQSBPVVRQVVQgLXAgdGNwIC1kIDE2OS4yNTQuMC4wLzE5IC0tdGNwLWZsYWdzIFNZTixSU1QgU1lOIC1qIFRDUE1TUyAtLXNldC1tc3MgMTE2MAoKZWNobyAnCmlwdGFibGVzIC1BIElOUFVUIC1wIHRjcCAtcyAxNjkuMjU0LjAuMC8xOSAtLXRjcC1mbGFncyBTWU4sUlNUIFNZTiAtaiBUQ1BNU1MgLS1zZXQtbXNzIDExNjAKaXB0YWJsZXMgLUEgT1VUUFVUIC1wIHRjcCAtZCAxNjkuMjU0LjAuMC8xOSAtLXRjcC1mbGFncyBTWU4sUlNUIFNZTiAtaiBUQ1BNU1MgLS1zZXQtbXNzIDExNjAKJyA+PiAvZXRjL3JjLmQvcmMubG9jYWw="),
+//				RuntimeVersion:     pulumi.String("1.6.9"),
+//				VpcId:              pulumi.String("vpc-xxxxx"),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+// <!--End PulumiCodeChooser -->
+//
 // ## Import
 //
 // tke cluster can be imported, e.g.
@@ -253,6 +306,8 @@ type Cluster struct {
 	AutoUpgradeClusterLevel pulumi.BoolPtrOutput `pulumi:"autoUpgradeClusterLevel"`
 	// The number of basic pods. valid when enable_customized_pod_cidr=true.
 	BasePodNum pulumi.IntPtrOutput `pulumi:"basePodNum"`
+	// CDC ID.
+	CdcId pulumi.StringPtrOutput `pulumi:"cdcId"`
 	// The certificate used for access.
 	CertificationAuthority pulumi.StringOutput `pulumi:"certificationAuthority"`
 	// Claim expired seconds to recycle ENI. This field can only set when field `networkType` is 'VPC-CNI'. `claimExpiredSeconds` must greater or equal than 300 and less than 15768000.
@@ -329,6 +384,8 @@ type Cluster struct {
 	GlobeDesiredPodNum pulumi.IntPtrOutput `pulumi:"globeDesiredPodNum"`
 	// Indicates whether to ignore the cluster cidr conflict error. Default is false.
 	IgnoreClusterCidrConflict pulumi.BoolPtrOutput `pulumi:"ignoreClusterCidrConflict"`
+	// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+	IgnoreServiceCidrConflict pulumi.BoolOutput `pulumi:"ignoreServiceCidrConflict"`
 	// Indicates whether non-static ip mode is enabled. Default is false.
 	IsNonStaticIpMode pulumi.BoolPtrOutput `pulumi:"isNonStaticIpMode"`
 	// Kubernetes config.
@@ -359,6 +416,8 @@ type Cluster struct {
 	Password pulumi.StringOutput `pulumi:"password"`
 	// The Intranet address used for access.
 	PgwEndpoint pulumi.StringOutput `pulumi:"pgwEndpoint"`
+	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript pulumi.StringPtrOutput `pulumi:"preStartUserScript"`
 	// Project ID, default value is 0.
 	ProjectId pulumi.IntPtrOutput `pulumi:"projectId"`
 	// Container Runtime version.
@@ -426,6 +485,8 @@ type clusterState struct {
 	AutoUpgradeClusterLevel *bool `pulumi:"autoUpgradeClusterLevel"`
 	// The number of basic pods. valid when enable_customized_pod_cidr=true.
 	BasePodNum *int `pulumi:"basePodNum"`
+	// CDC ID.
+	CdcId *string `pulumi:"cdcId"`
 	// The certificate used for access.
 	CertificationAuthority *string `pulumi:"certificationAuthority"`
 	// Claim expired seconds to recycle ENI. This field can only set when field `networkType` is 'VPC-CNI'. `claimExpiredSeconds` must greater or equal than 300 and less than 15768000.
@@ -502,6 +563,8 @@ type clusterState struct {
 	GlobeDesiredPodNum *int `pulumi:"globeDesiredPodNum"`
 	// Indicates whether to ignore the cluster cidr conflict error. Default is false.
 	IgnoreClusterCidrConflict *bool `pulumi:"ignoreClusterCidrConflict"`
+	// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+	IgnoreServiceCidrConflict *bool `pulumi:"ignoreServiceCidrConflict"`
 	// Indicates whether non-static ip mode is enabled. Default is false.
 	IsNonStaticIpMode *bool `pulumi:"isNonStaticIpMode"`
 	// Kubernetes config.
@@ -532,6 +595,8 @@ type clusterState struct {
 	Password *string `pulumi:"password"`
 	// The Intranet address used for access.
 	PgwEndpoint *string `pulumi:"pgwEndpoint"`
+	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript *string `pulumi:"preStartUserScript"`
 	// Project ID, default value is 0.
 	ProjectId *int `pulumi:"projectId"`
 	// Container Runtime version.
@@ -567,6 +632,8 @@ type ClusterState struct {
 	AutoUpgradeClusterLevel pulumi.BoolPtrInput
 	// The number of basic pods. valid when enable_customized_pod_cidr=true.
 	BasePodNum pulumi.IntPtrInput
+	// CDC ID.
+	CdcId pulumi.StringPtrInput
 	// The certificate used for access.
 	CertificationAuthority pulumi.StringPtrInput
 	// Claim expired seconds to recycle ENI. This field can only set when field `networkType` is 'VPC-CNI'. `claimExpiredSeconds` must greater or equal than 300 and less than 15768000.
@@ -643,6 +710,8 @@ type ClusterState struct {
 	GlobeDesiredPodNum pulumi.IntPtrInput
 	// Indicates whether to ignore the cluster cidr conflict error. Default is false.
 	IgnoreClusterCidrConflict pulumi.BoolPtrInput
+	// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+	IgnoreServiceCidrConflict pulumi.BoolPtrInput
 	// Indicates whether non-static ip mode is enabled. Default is false.
 	IsNonStaticIpMode pulumi.BoolPtrInput
 	// Kubernetes config.
@@ -673,6 +742,8 @@ type ClusterState struct {
 	Password pulumi.StringPtrInput
 	// The Intranet address used for access.
 	PgwEndpoint pulumi.StringPtrInput
+	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript pulumi.StringPtrInput
 	// Project ID, default value is 0.
 	ProjectId pulumi.IntPtrInput
 	// Container Runtime version.
@@ -712,6 +783,8 @@ type clusterArgs struct {
 	AutoUpgradeClusterLevel *bool `pulumi:"autoUpgradeClusterLevel"`
 	// The number of basic pods. valid when enable_customized_pod_cidr=true.
 	BasePodNum *int `pulumi:"basePodNum"`
+	// CDC ID.
+	CdcId *string `pulumi:"cdcId"`
 	// Claim expired seconds to recycle ENI. This field can only set when field `networkType` is 'VPC-CNI'. `claimExpiredSeconds` must greater or equal than 300 and less than 15768000.
 	ClaimExpiredSeconds *int `pulumi:"claimExpiredSeconds"`
 	// Specify Cluster Audit config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
@@ -776,6 +849,8 @@ type clusterArgs struct {
 	GlobeDesiredPodNum *int `pulumi:"globeDesiredPodNum"`
 	// Indicates whether to ignore the cluster cidr conflict error. Default is false.
 	IgnoreClusterCidrConflict *bool `pulumi:"ignoreClusterCidrConflict"`
+	// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+	IgnoreServiceCidrConflict *bool `pulumi:"ignoreServiceCidrConflict"`
 	// Indicates whether non-static ip mode is enabled. Default is false.
 	IsNonStaticIpMode *bool `pulumi:"isNonStaticIpMode"`
 	// Cluster kube-proxy mode, the available values include: 'kube-proxy-bpf'. Default is not set.When set to kube-proxy-bpf, cluster version greater than 1.14 and with Tencent Linux 2.4 is required.
@@ -798,6 +873,8 @@ type clusterArgs struct {
 	NodeNameType *string `pulumi:"nodeNameType"`
 	// Global config effective for all node pools.
 	NodePoolGlobalConfigs []ClusterNodePoolGlobalConfig `pulumi:"nodePoolGlobalConfigs"`
+	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript *string `pulumi:"preStartUserScript"`
 	// Project ID, default value is 0.
 	ProjectId *int `pulumi:"projectId"`
 	// Container Runtime version.
@@ -828,6 +905,8 @@ type ClusterArgs struct {
 	AutoUpgradeClusterLevel pulumi.BoolPtrInput
 	// The number of basic pods. valid when enable_customized_pod_cidr=true.
 	BasePodNum pulumi.IntPtrInput
+	// CDC ID.
+	CdcId pulumi.StringPtrInput
 	// Claim expired seconds to recycle ENI. This field can only set when field `networkType` is 'VPC-CNI'. `claimExpiredSeconds` must greater or equal than 300 and less than 15768000.
 	ClaimExpiredSeconds pulumi.IntPtrInput
 	// Specify Cluster Audit config. NOTE: Please make sure your TKE CamRole have permission to access CLS service.
@@ -892,6 +971,8 @@ type ClusterArgs struct {
 	GlobeDesiredPodNum pulumi.IntPtrInput
 	// Indicates whether to ignore the cluster cidr conflict error. Default is false.
 	IgnoreClusterCidrConflict pulumi.BoolPtrInput
+	// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+	IgnoreServiceCidrConflict pulumi.BoolPtrInput
 	// Indicates whether non-static ip mode is enabled. Default is false.
 	IsNonStaticIpMode pulumi.BoolPtrInput
 	// Cluster kube-proxy mode, the available values include: 'kube-proxy-bpf'. Default is not set.When set to kube-proxy-bpf, cluster version greater than 1.14 and with Tencent Linux 2.4 is required.
@@ -914,6 +995,8 @@ type ClusterArgs struct {
 	NodeNameType pulumi.StringPtrInput
 	// Global config effective for all node pools.
 	NodePoolGlobalConfigs ClusterNodePoolGlobalConfigArrayInput
+	// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+	PreStartUserScript pulumi.StringPtrInput
 	// Project ID, default value is 0.
 	ProjectId pulumi.IntPtrInput
 	// Container Runtime version.
@@ -1039,6 +1122,11 @@ func (o ClusterOutput) AutoUpgradeClusterLevel() pulumi.BoolPtrOutput {
 // The number of basic pods. valid when enable_customized_pod_cidr=true.
 func (o ClusterOutput) BasePodNum() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.IntPtrOutput { return v.BasePodNum }).(pulumi.IntPtrOutput)
+}
+
+// CDC ID.
+func (o ClusterOutput) CdcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.CdcId }).(pulumi.StringPtrOutput)
 }
 
 // The certificate used for access.
@@ -1228,6 +1316,11 @@ func (o ClusterOutput) IgnoreClusterCidrConflict() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.BoolPtrOutput { return v.IgnoreClusterCidrConflict }).(pulumi.BoolPtrOutput)
 }
 
+// Indicates whether to ignore the service cidr conflict error. Only valid in `VPC-CNI` mode.
+func (o ClusterOutput) IgnoreServiceCidrConflict() pulumi.BoolOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.BoolOutput { return v.IgnoreServiceCidrConflict }).(pulumi.BoolOutput)
+}
+
 // Indicates whether non-static ip mode is enabled. Default is false.
 func (o ClusterOutput) IsNonStaticIpMode() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.BoolPtrOutput { return v.IsNonStaticIpMode }).(pulumi.BoolPtrOutput)
@@ -1298,6 +1391,11 @@ func (o ClusterOutput) Password() pulumi.StringOutput {
 // The Intranet address used for access.
 func (o ClusterOutput) PgwEndpoint() pulumi.StringOutput {
 	return o.ApplyT(func(v *Cluster) pulumi.StringOutput { return v.PgwEndpoint }).(pulumi.StringOutput)
+}
+
+// Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+func (o ClusterOutput) PreStartUserScript() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Cluster) pulumi.StringPtrOutput { return v.PreStartUserScript }).(pulumi.StringPtrOutput)
 }
 
 // Project ID, default value is 0.

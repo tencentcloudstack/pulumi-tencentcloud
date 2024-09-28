@@ -270,6 +270,8 @@ type Domain struct {
 	OriginPullTimeout DomainOriginPullTimeoutPtrOutput `pulumi:"originPullTimeout"`
 	// Access authentication for OSS origin.
 	OssPrivateAccess DomainOssPrivateAccessPtrOutput `pulumi:"ossPrivateAccess"`
+	// Object storage back-to-source authentication of other vendors.
+	OthersPrivateAccess DomainOthersPrivateAccessPtrOutput `pulumi:"othersPrivateAccess"`
 	// Maximum post size configuration.
 	PostMaxSizes DomainPostMaxSizeArrayOutput `pulumi:"postMaxSizes"`
 	// The project CDN belongs to, default to 0.
@@ -403,6 +405,8 @@ type domainState struct {
 	OriginPullTimeout *DomainOriginPullTimeout `pulumi:"originPullTimeout"`
 	// Access authentication for OSS origin.
 	OssPrivateAccess *DomainOssPrivateAccess `pulumi:"ossPrivateAccess"`
+	// Object storage back-to-source authentication of other vendors.
+	OthersPrivateAccess *DomainOthersPrivateAccess `pulumi:"othersPrivateAccess"`
 	// Maximum post size configuration.
 	PostMaxSizes []DomainPostMaxSize `pulumi:"postMaxSizes"`
 	// The project CDN belongs to, default to 0.
@@ -498,6 +502,8 @@ type DomainState struct {
 	OriginPullTimeout DomainOriginPullTimeoutPtrInput
 	// Access authentication for OSS origin.
 	OssPrivateAccess DomainOssPrivateAccessPtrInput
+	// Object storage back-to-source authentication of other vendors.
+	OthersPrivateAccess DomainOthersPrivateAccessPtrInput
 	// Maximum post size configuration.
 	PostMaxSizes DomainPostMaxSizeArrayInput
 	// The project CDN belongs to, default to 0.
@@ -589,6 +595,8 @@ type domainArgs struct {
 	OriginPullTimeout *DomainOriginPullTimeout `pulumi:"originPullTimeout"`
 	// Access authentication for OSS origin.
 	OssPrivateAccess *DomainOssPrivateAccess `pulumi:"ossPrivateAccess"`
+	// Object storage back-to-source authentication of other vendors.
+	OthersPrivateAccess *DomainOthersPrivateAccess `pulumi:"othersPrivateAccess"`
 	// Maximum post size configuration.
 	PostMaxSizes []DomainPostMaxSize `pulumi:"postMaxSizes"`
 	// The project CDN belongs to, default to 0.
@@ -675,6 +683,8 @@ type DomainArgs struct {
 	OriginPullTimeout DomainOriginPullTimeoutPtrInput
 	// Access authentication for OSS origin.
 	OssPrivateAccess DomainOssPrivateAccessPtrInput
+	// Object storage back-to-source authentication of other vendors.
+	OthersPrivateAccess DomainOthersPrivateAccessPtrInput
 	// Maximum post size configuration.
 	PostMaxSizes DomainPostMaxSizeArrayInput
 	// The project CDN belongs to, default to 0.
@@ -933,6 +943,11 @@ func (o DomainOutput) OriginPullTimeout() DomainOriginPullTimeoutPtrOutput {
 // Access authentication for OSS origin.
 func (o DomainOutput) OssPrivateAccess() DomainOssPrivateAccessPtrOutput {
 	return o.ApplyT(func(v *Domain) DomainOssPrivateAccessPtrOutput { return v.OssPrivateAccess }).(DomainOssPrivateAccessPtrOutput)
+}
+
+// Object storage back-to-source authentication of other vendors.
+func (o DomainOutput) OthersPrivateAccess() DomainOthersPrivateAccessPtrOutput {
+	return o.ApplyT(func(v *Domain) DomainOthersPrivateAccessPtrOutput { return v.OthersPrivateAccess }).(DomainOthersPrivateAccessPtrOutput)
 }
 
 // Maximum post size configuration.

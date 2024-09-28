@@ -1607,6 +1607,214 @@ func (o GetOrgShareAreaItemArrayOutput) Index(i pulumi.IntInput) GetOrgShareArea
 	}).(GetOrgShareAreaItemOutput)
 }
 
+type GetServicesItem struct {
+	// Limit for the number of delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+	CanAssignCount int `pulumi:"canAssignCount"`
+	// Console path of the organization service product. Note: This field may return null, indicating that no valid values can be obtained.
+	ConsoleUrl string `pulumi:"consoleUrl"`
+	// Organization service description. Note: This field may return null, indicating that no valid values can be obtained.
+	Description string `pulumi:"description"`
+	// Help documentation. Note: This field may return null, indicating that no valid values can be obtained.
+	Document string `pulumi:"document"`
+	// Enabling status of organization service authorization. This field is valid when ServiceGrant is 1. Valid values: Enabled, Disabled. Note: This field may return null, indicating that no valid values can be obtained.
+	GrantStatus string `pulumi:"grantStatus"`
+	// Whether to support delegation. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+	IsAssign int `pulumi:"isAssign"`
+	// Whether to support setting the delegated management scope. Valid values: 1 (yes), 2 (no).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsSetManagementScope int `pulumi:"isSetManagementScope"`
+	// Whether to access the usage status. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+	IsUsageStatus int `pulumi:"isUsageStatus"`
+	// Number of the current delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+	MemberNum string `pulumi:"memberNum"`
+	// Organization service product identifier. Note: This field may return null, indicating that no valid values can be obtained.
+	Product string `pulumi:"product"`
+	// Organization service product name. Note: This field may return null, indicating that no valid values can be obtained.
+	ProductName string `pulumi:"productName"`
+	// Whether to support organization service authorization. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceGrant int `pulumi:"serviceGrant"`
+	// Organization service ID. Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceId int `pulumi:"serviceId"`
+}
+
+// GetServicesItemInput is an input type that accepts GetServicesItemArgs and GetServicesItemOutput values.
+// You can construct a concrete instance of `GetServicesItemInput` via:
+//
+//	GetServicesItemArgs{...}
+type GetServicesItemInput interface {
+	pulumi.Input
+
+	ToGetServicesItemOutput() GetServicesItemOutput
+	ToGetServicesItemOutputWithContext(context.Context) GetServicesItemOutput
+}
+
+type GetServicesItemArgs struct {
+	// Limit for the number of delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+	CanAssignCount pulumi.IntInput `pulumi:"canAssignCount"`
+	// Console path of the organization service product. Note: This field may return null, indicating that no valid values can be obtained.
+	ConsoleUrl pulumi.StringInput `pulumi:"consoleUrl"`
+	// Organization service description. Note: This field may return null, indicating that no valid values can be obtained.
+	Description pulumi.StringInput `pulumi:"description"`
+	// Help documentation. Note: This field may return null, indicating that no valid values can be obtained.
+	Document pulumi.StringInput `pulumi:"document"`
+	// Enabling status of organization service authorization. This field is valid when ServiceGrant is 1. Valid values: Enabled, Disabled. Note: This field may return null, indicating that no valid values can be obtained.
+	GrantStatus pulumi.StringInput `pulumi:"grantStatus"`
+	// Whether to support delegation. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+	IsAssign pulumi.IntInput `pulumi:"isAssign"`
+	// Whether to support setting the delegated management scope. Valid values: 1 (yes), 2 (no).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsSetManagementScope pulumi.IntInput `pulumi:"isSetManagementScope"`
+	// Whether to access the usage status. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+	IsUsageStatus pulumi.IntInput `pulumi:"isUsageStatus"`
+	// Number of the current delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+	MemberNum pulumi.StringInput `pulumi:"memberNum"`
+	// Organization service product identifier. Note: This field may return null, indicating that no valid values can be obtained.
+	Product pulumi.StringInput `pulumi:"product"`
+	// Organization service product name. Note: This field may return null, indicating that no valid values can be obtained.
+	ProductName pulumi.StringInput `pulumi:"productName"`
+	// Whether to support organization service authorization. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceGrant pulumi.IntInput `pulumi:"serviceGrant"`
+	// Organization service ID. Note: This field may return null, indicating that no valid values can be obtained.
+	ServiceId pulumi.IntInput `pulumi:"serviceId"`
+}
+
+func (GetServicesItemArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetServicesItem)(nil)).Elem()
+}
+
+func (i GetServicesItemArgs) ToGetServicesItemOutput() GetServicesItemOutput {
+	return i.ToGetServicesItemOutputWithContext(context.Background())
+}
+
+func (i GetServicesItemArgs) ToGetServicesItemOutputWithContext(ctx context.Context) GetServicesItemOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetServicesItemOutput)
+}
+
+// GetServicesItemArrayInput is an input type that accepts GetServicesItemArray and GetServicesItemArrayOutput values.
+// You can construct a concrete instance of `GetServicesItemArrayInput` via:
+//
+//	GetServicesItemArray{ GetServicesItemArgs{...} }
+type GetServicesItemArrayInput interface {
+	pulumi.Input
+
+	ToGetServicesItemArrayOutput() GetServicesItemArrayOutput
+	ToGetServicesItemArrayOutputWithContext(context.Context) GetServicesItemArrayOutput
+}
+
+type GetServicesItemArray []GetServicesItemInput
+
+func (GetServicesItemArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetServicesItem)(nil)).Elem()
+}
+
+func (i GetServicesItemArray) ToGetServicesItemArrayOutput() GetServicesItemArrayOutput {
+	return i.ToGetServicesItemArrayOutputWithContext(context.Background())
+}
+
+func (i GetServicesItemArray) ToGetServicesItemArrayOutputWithContext(ctx context.Context) GetServicesItemArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetServicesItemArrayOutput)
+}
+
+type GetServicesItemOutput struct{ *pulumi.OutputState }
+
+func (GetServicesItemOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetServicesItem)(nil)).Elem()
+}
+
+func (o GetServicesItemOutput) ToGetServicesItemOutput() GetServicesItemOutput {
+	return o
+}
+
+func (o GetServicesItemOutput) ToGetServicesItemOutputWithContext(ctx context.Context) GetServicesItemOutput {
+	return o
+}
+
+// Limit for the number of delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) CanAssignCount() pulumi.IntOutput {
+	return o.ApplyT(func(v GetServicesItem) int { return v.CanAssignCount }).(pulumi.IntOutput)
+}
+
+// Console path of the organization service product. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) ConsoleUrl() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesItem) string { return v.ConsoleUrl }).(pulumi.StringOutput)
+}
+
+// Organization service description. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesItem) string { return v.Description }).(pulumi.StringOutput)
+}
+
+// Help documentation. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) Document() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesItem) string { return v.Document }).(pulumi.StringOutput)
+}
+
+// Enabling status of organization service authorization. This field is valid when ServiceGrant is 1. Valid values: Enabled, Disabled. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) GrantStatus() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesItem) string { return v.GrantStatus }).(pulumi.StringOutput)
+}
+
+// Whether to support delegation. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) IsAssign() pulumi.IntOutput {
+	return o.ApplyT(func(v GetServicesItem) int { return v.IsAssign }).(pulumi.IntOutput)
+}
+
+// Whether to support setting the delegated management scope. Valid values: 1 (yes), 2 (no).
+// Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) IsSetManagementScope() pulumi.IntOutput {
+	return o.ApplyT(func(v GetServicesItem) int { return v.IsSetManagementScope }).(pulumi.IntOutput)
+}
+
+// Whether to access the usage status. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) IsUsageStatus() pulumi.IntOutput {
+	return o.ApplyT(func(v GetServicesItem) int { return v.IsUsageStatus }).(pulumi.IntOutput)
+}
+
+// Number of the current delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) MemberNum() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesItem) string { return v.MemberNum }).(pulumi.StringOutput)
+}
+
+// Organization service product identifier. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) Product() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesItem) string { return v.Product }).(pulumi.StringOutput)
+}
+
+// Organization service product name. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) ProductName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetServicesItem) string { return v.ProductName }).(pulumi.StringOutput)
+}
+
+// Whether to support organization service authorization. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) ServiceGrant() pulumi.IntOutput {
+	return o.ApplyT(func(v GetServicesItem) int { return v.ServiceGrant }).(pulumi.IntOutput)
+}
+
+// Organization service ID. Note: This field may return null, indicating that no valid values can be obtained.
+func (o GetServicesItemOutput) ServiceId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetServicesItem) int { return v.ServiceId }).(pulumi.IntOutput)
+}
+
+type GetServicesItemArrayOutput struct{ *pulumi.OutputState }
+
+func (GetServicesItemArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetServicesItem)(nil)).Elem()
+}
+
+func (o GetServicesItemArrayOutput) ToGetServicesItemArrayOutput() GetServicesItemArrayOutput {
+	return o
+}
+
+func (o GetServicesItemArrayOutput) ToGetServicesItemArrayOutputWithContext(ctx context.Context) GetServicesItemArrayOutput {
+	return o
+}
+
+func (o GetServicesItemArrayOutput) Index(i pulumi.IntInput) GetServicesItemOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetServicesItem {
+		return vs[0].([]GetServicesItem)[vs[1].(int)]
+	}).(GetServicesItemOutput)
+}
+
 func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceOrgPermissionInput)(nil)).Elem(), InstanceOrgPermissionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceOrgPermissionArrayInput)(nil)).Elem(), InstanceOrgPermissionArray{})
@@ -1634,6 +1842,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgFinancialByProductItemArrayInput)(nil)).Elem(), GetOrgFinancialByProductItemArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgShareAreaItemInput)(nil)).Elem(), GetOrgShareAreaItemArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetOrgShareAreaItemArrayInput)(nil)).Elem(), GetOrgShareAreaItemArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetServicesItemInput)(nil)).Elem(), GetServicesItemArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetServicesItemArrayInput)(nil)).Elem(), GetServicesItemArray{})
 	pulumi.RegisterOutputType(InstanceOrgPermissionOutput{})
 	pulumi.RegisterOutputType(InstanceOrgPermissionArrayOutput{})
 	pulumi.RegisterOutputType(OrgIdentityIdentityPolicyOutput{})
@@ -1660,4 +1870,6 @@ func init() {
 	pulumi.RegisterOutputType(GetOrgFinancialByProductItemArrayOutput{})
 	pulumi.RegisterOutputType(GetOrgShareAreaItemOutput{})
 	pulumi.RegisterOutputType(GetOrgShareAreaItemArrayOutput{})
+	pulumi.RegisterOutputType(GetServicesItemOutput{})
+	pulumi.RegisterOutputType(GetServicesItemArrayOutput{})
 }

@@ -81,6 +81,10 @@ import (
 //						pulumi.String("127.0.0.1"),
 //					},
 //				},
+//				CosBackup: &elasticsearch.InstanceCosBackupArgs{
+//					IsAutoBackup: pulumi.Bool(true),
+//					BackupTime:   pulumi.String("22:00"),
+//				},
 //				Tags: pulumi.Map{
 //					"test": pulumi.Any("test"),
 //				},
@@ -218,6 +222,8 @@ type Instance struct {
 	ChargePeriod pulumi.IntPtrOutput `pulumi:"chargePeriod"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
+	// COS automatic backup information.
+	CosBackup InstanceCosBackupPtrOutput `pulumi:"cosBackup"`
 	// Instance creation time.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
@@ -315,6 +321,8 @@ type instanceState struct {
 	ChargePeriod *int `pulumi:"chargePeriod"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
 	ChargeType *string `pulumi:"chargeType"`
+	// COS automatic backup information.
+	CosBackup *InstanceCosBackup `pulumi:"cosBackup"`
 	// Instance creation time.
 	CreateTime *string `pulumi:"createTime"`
 	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
@@ -364,6 +372,8 @@ type InstanceState struct {
 	ChargePeriod pulumi.IntPtrInput
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
 	ChargeType pulumi.StringPtrInput
+	// COS automatic backup information.
+	CosBackup InstanceCosBackupPtrInput
 	// Instance creation time.
 	CreateTime pulumi.StringPtrInput
 	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
@@ -417,6 +427,8 @@ type instanceArgs struct {
 	ChargePeriod *int `pulumi:"chargePeriod"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
 	ChargeType *string `pulumi:"chargeType"`
+	// COS automatic backup information.
+	CosBackup *InstanceCosBackup `pulumi:"cosBackup"`
 	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
 	DeployMode *int `pulumi:"deployMode"`
 	// Kibana Access Control Configuration.
@@ -457,6 +469,8 @@ type InstanceArgs struct {
 	ChargePeriod pulumi.IntPtrInput
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
 	ChargeType pulumi.StringPtrInput
+	// COS automatic backup information.
+	CosBackup InstanceCosBackupPtrInput
 	// Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
 	DeployMode pulumi.IntPtrInput
 	// Kibana Access Control Configuration.
@@ -592,6 +606,11 @@ func (o InstanceOutput) ChargePeriod() pulumi.IntPtrOutput {
 // The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
 func (o InstanceOutput) ChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Instance) pulumi.StringPtrOutput { return v.ChargeType }).(pulumi.StringPtrOutput)
+}
+
+// COS automatic backup information.
+func (o InstanceOutput) CosBackup() InstanceCosBackupPtrOutput {
+	return o.ApplyT(func(v *Instance) InstanceCosBackupPtrOutput { return v.CosBackup }).(InstanceCosBackupPtrOutput)
 }
 
 // Instance creation time.

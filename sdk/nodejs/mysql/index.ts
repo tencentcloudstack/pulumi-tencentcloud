@@ -30,6 +30,11 @@ export type BackupPolicy = import("./backupPolicy").BackupPolicy;
 export const BackupPolicy: typeof import("./backupPolicy").BackupPolicy = null as any;
 utilities.lazyLoad(exports, ["BackupPolicy"], () => require("./backupPolicy"));
 
+export { ClsLogAttachmentArgs, ClsLogAttachmentState } from "./clsLogAttachment";
+export type ClsLogAttachment = import("./clsLogAttachment").ClsLogAttachment;
+export const ClsLogAttachment: typeof import("./clsLogAttachment").ClsLogAttachment = null as any;
+utilities.lazyLoad(exports, ["ClsLogAttachment"], () => require("./clsLogAttachment"));
+
 export { DatabaseArgs, DatabaseState } from "./database";
 export type Database = import("./database").Database;
 export const Database: typeof import("./database").Database = null as any;
@@ -305,6 +310,11 @@ export type SecurityGroupsAttachment = import("./securityGroupsAttachment").Secu
 export const SecurityGroupsAttachment: typeof import("./securityGroupsAttachment").SecurityGroupsAttachment = null as any;
 utilities.lazyLoad(exports, ["SecurityGroupsAttachment"], () => require("./securityGroupsAttachment"));
 
+export { SslArgs, SslState } from "./ssl";
+export type Ssl = import("./ssl").Ssl;
+export const Ssl: typeof import("./ssl").Ssl = null as any;
+utilities.lazyLoad(exports, ["Ssl"], () => require("./ssl"));
+
 export { SwitchForUpgradeArgs, SwitchForUpgradeState } from "./switchForUpgrade";
 export type SwitchForUpgrade = import("./switchForUpgrade").SwitchForUpgrade;
 export const SwitchForUpgrade: typeof import("./switchForUpgrade").SwitchForUpgrade = null as any;
@@ -345,6 +355,8 @@ const _module = {
                 return new BackupEncryptionStatus(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/backupPolicy:BackupPolicy":
                 return new BackupPolicy(name, <any>undefined, { urn })
+            case "tencentcloud:Mysql/clsLogAttachment:ClsLogAttachment":
+                return new ClsLogAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/database:Database":
                 return new Database(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/dbImportJobOperation:DbImportJobOperation":
@@ -399,6 +411,8 @@ const _module = {
                 return new RollbackStop(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/securityGroupsAttachment:SecurityGroupsAttachment":
                 return new SecurityGroupsAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Mysql/ssl:Ssl":
+                return new Ssl(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/switchForUpgrade:SwitchForUpgrade":
                 return new SwitchForUpgrade(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/switchMasterSlaveOperation:SwitchMasterSlaveOperation":
@@ -419,6 +433,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/auditLogFile", _mod
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backupDownloadRestriction", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backupEncryptionStatus", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backupPolicy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/clsLogAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/database", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/dbImportJobOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/deployGroup", _module)
@@ -446,6 +461,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/roStopReplication",
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/rollback", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/rollbackStop", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/securityGroupsAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/ssl", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/switchForUpgrade", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/switchMasterSlaveOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/switchProxy", _module)

@@ -5,6 +5,16 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export { AccountArgs, AccountState } from "./account";
+export type Account = import("./account").Account;
+export const Account: typeof import("./account").Account = null as any;
+utilities.lazyLoad(exports, ["Account"], () => require("./account"));
+
+export { AccountPrivilegesOperationArgs, AccountPrivilegesOperationState } from "./accountPrivilegesOperation";
+export type AccountPrivilegesOperation = import("./accountPrivilegesOperation").AccountPrivilegesOperation;
+export const AccountPrivilegesOperation: typeof import("./accountPrivilegesOperation").AccountPrivilegesOperation = null as any;
+utilities.lazyLoad(exports, ["AccountPrivilegesOperation"], () => require("./accountPrivilegesOperation"));
+
 export { BackupDownloadRestrictionConfigArgs, BackupDownloadRestrictionConfigState } from "./backupDownloadRestrictionConfig";
 export type BackupDownloadRestrictionConfig = import("./backupDownloadRestrictionConfig").BackupDownloadRestrictionConfig;
 export const BackupDownloadRestrictionConfig: typeof import("./backupDownloadRestrictionConfig").BackupDownloadRestrictionConfig = null as any;
@@ -30,6 +40,11 @@ export type DisisolateDbInstanceOperation = import("./disisolateDbInstanceOperat
 export const DisisolateDbInstanceOperation: typeof import("./disisolateDbInstanceOperation").DisisolateDbInstanceOperation = null as any;
 utilities.lazyLoad(exports, ["DisisolateDbInstanceOperation"], () => require("./disisolateDbInstanceOperation"));
 
+export { GetAccountPrivilegesArgs, GetAccountPrivilegesResult, GetAccountPrivilegesOutputArgs } from "./getAccountPrivileges";
+export const getAccountPrivileges: typeof import("./getAccountPrivileges").getAccountPrivileges = null as any;
+export const getAccountPrivilegesOutput: typeof import("./getAccountPrivileges").getAccountPrivilegesOutput = null as any;
+utilities.lazyLoad(exports, ["getAccountPrivileges","getAccountPrivilegesOutput"], () => require("./getAccountPrivileges"));
+
 export { GetBackupDownloadUrlsArgs, GetBackupDownloadUrlsResult, GetBackupDownloadUrlsOutputArgs } from "./getBackupDownloadUrls";
 export const getBackupDownloadUrls: typeof import("./getBackupDownloadUrls").getBackupDownloadUrls = null as any;
 export const getBackupDownloadUrlsOutput: typeof import("./getBackupDownloadUrls").getBackupDownloadUrlsOutput = null as any;
@@ -49,6 +64,11 @@ export { GetDbInstanceVersionsArgs, GetDbInstanceVersionsResult, GetDbInstanceVe
 export const getDbInstanceVersions: typeof import("./getDbInstanceVersions").getDbInstanceVersions = null as any;
 export const getDbInstanceVersionsOutput: typeof import("./getDbInstanceVersions").getDbInstanceVersionsOutput = null as any;
 utilities.lazyLoad(exports, ["getDbInstanceVersions","getDbInstanceVersionsOutput"], () => require("./getDbInstanceVersions"));
+
+export { GetDedicatedClustersArgs, GetDedicatedClustersResult, GetDedicatedClustersOutputArgs } from "./getDedicatedClusters";
+export const getDedicatedClusters: typeof import("./getDedicatedClusters").getDedicatedClusters = null as any;
+export const getDedicatedClustersOutput: typeof import("./getDedicatedClusters").getDedicatedClustersOutput = null as any;
+utilities.lazyLoad(exports, ["getDedicatedClusters","getDedicatedClustersOutput"], () => require("./getDedicatedClusters"));
 
 export { GetDefaultParametersArgs, GetDefaultParametersResult, GetDefaultParametersOutputArgs } from "./getDefaultParameters";
 export const getDefaultParameters: typeof import("./getDefaultParameters").getDefaultParameters = null as any;
@@ -170,6 +190,10 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "tencentcloud:Postgresql/account:Account":
+                return new Account(name, <any>undefined, { urn })
+            case "tencentcloud:Postgresql/accountPrivilegesOperation:AccountPrivilegesOperation":
+                return new AccountPrivilegesOperation(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/backupDownloadRestrictionConfig:BackupDownloadRestrictionConfig":
                 return new BackupDownloadRestrictionConfig(name, <any>undefined, { urn })
             case "tencentcloud:Postgresql/backupPlanConfig:BackupPlanConfig":
@@ -211,6 +235,8 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/account", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/accountPrivilegesOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/backupDownloadRestrictionConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/backupPlanConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Postgresql/baseBackup", _module)

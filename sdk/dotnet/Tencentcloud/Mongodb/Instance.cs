@@ -118,6 +118,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Output<string> MachineType { get; private set; } = null!;
 
         /// <summary>
+        /// Maintenance window end time.
+        /// - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+        /// - The end time must be based on the start time backwards.
+        /// </summary>
+        [Output("maintenanceEnd")]
+        public Output<string> MaintenanceEnd { get; private set; } = null!;
+
+        /// <summary>
+        /// Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
+        /// </summary>
+        [Output("maintenanceStart")]
+        public Output<string> MaintenanceStart { get; private set; } = null!;
+
+        /// <summary>
         /// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         /// </summary>
         [Output("memory")]
@@ -329,6 +343,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         public Input<string> MachineType { get; set; } = null!;
 
         /// <summary>
+        /// Maintenance window end time.
+        /// - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+        /// - The end time must be based on the start time backwards.
+        /// </summary>
+        [Input("maintenanceEnd")]
+        public Input<string>? MaintenanceEnd { get; set; }
+
+        /// <summary>
+        /// Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
+        /// </summary>
+        [Input("maintenanceStart")]
+        public Input<string>? MaintenanceStart { get; set; }
+
+        /// <summary>
         /// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         /// </summary>
         [Input("memory", required: true)]
@@ -505,6 +533,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// </summary>
         [Input("machineType")]
         public Input<string>? MachineType { get; set; }
+
+        /// <summary>
+        /// Maintenance window end time.
+        /// - The value range is any full point or half point from `00:00-23:00`, and the maintenance time duration is at least 30 minutes and at most 3 hours.
+        /// - The end time must be based on the start time backwards.
+        /// </summary>
+        [Input("maintenanceEnd")]
+        public Input<string>? MaintenanceEnd { get; set; }
+
+        /// <summary>
+        /// Maintenance window start time. The value range is any full point or half point from `00:00-23:00`, such as 00:00 or 00:30.
+        /// </summary>
+        [Input("maintenanceStart")]
+        public Input<string>? MaintenanceStart { get; set; }
 
         /// <summary>
         /// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.

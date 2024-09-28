@@ -13,12 +13,217 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// <summary>
     /// Provide a resource to create a CynosDB cluster.
     /// 
+    /// ## Example Usage
+    /// 
+    /// ### Create a single availability zone NORMAL CynosDB cluster
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-3";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create security group
+    ///     var exampleGroup = new Tencentcloud.Security.Group("exampleGroup", new()
+    ///     {
+    ///         Description = "sg desc.",
+    ///         ProjectId = 0,
+    ///         Tags = 
+    ///         {
+    ///             { "example", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     // create cynosdb cluster
+    ///     var exampleCluster = new Tencentcloud.Cynosdb.Cluster("exampleCluster", new()
+    ///     {
+    ///         AvailableZone = availabilityZone,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DbMode = "NORMAL",
+    ///         DbType = "MYSQL",
+    ///         DbVersion = "5.7",
+    ///         Port = 3306,
+    ///         StorageLimit = 1000,
+    ///         ClusterName = "tf-example",
+    ///         Password = "cynosDB@123",
+    ///         InstanceMaintainDuration = 7200,
+    ///         InstanceMaintainStartTime = 10800,
+    ///         InstanceCpuCore = 2,
+    ///         InstanceMemorySize = 4,
+    ///         ForceDelete = false,
+    ///         InstanceMaintainWeekdays = new[]
+    ///         {
+    ///             "Fri",
+    ///             "Mon",
+    ///             "Sat",
+    ///             "Sun",
+    ///             "Thu",
+    ///             "Wed",
+    ///             "Tue",
+    ///         },
+    ///         ParamItems = new[]
+    ///         {
+    ///             new Tencentcloud.Cynosdb.Inputs.ClusterParamItemArgs
+    ///             {
+    ///                 Name = "character_set_server",
+    ///                 CurrentValue = "utf8mb4",
+    ///             },
+    ///             new Tencentcloud.Cynosdb.Inputs.ClusterParamItemArgs
+    ///             {
+    ///                 Name = "lower_case_table_names",
+    ///                 CurrentValue = "0",
+    ///             },
+    ///         },
+    ///         RwGroupSgs = new[]
+    ///         {
+    ///             exampleGroup.Id,
+    ///         },
+    ///         RoGroupSgs = new[]
+    ///         {
+    ///             exampleGroup.Id,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
+    /// ### Create a multiple availability zone SERVERLESS CynosDB cluster
+    /// 
+    /// &lt;!--Start PulumiCodeChooser --&gt;
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var config = new Config();
+    ///     var availabilityZone = config.Get("availabilityZone") ?? "ap-guangzhou-4";
+    ///     var slaveZone = config.Get("slaveZone") ?? "ap-guangzhou-6";
+    ///     // create vpc
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
+    ///     // create subnet
+    ///     var subnet = new Tencentcloud.Subnet.Instance("subnet", new()
+    ///     {
+    ///         AvailabilityZone = availabilityZone,
+    ///         VpcId = vpc.Id,
+    ///         CidrBlock = "10.0.20.0/28",
+    ///         IsMulticast = false,
+    ///     });
+    /// 
+    ///     // create security group
+    ///     var exampleGroup = new Tencentcloud.Security.Group("exampleGroup", new()
+    ///     {
+    ///         Description = "sg desc.",
+    ///         ProjectId = 0,
+    ///         Tags = 
+    ///         {
+    ///             { "example", "test" },
+    ///         },
+    ///     });
+    /// 
+    ///     // create param template
+    ///     var exampleParamTemplate = new Tencentcloud.Cynosdb.ParamTemplate("exampleParamTemplate", new()
+    ///     {
+    ///         DbMode = "SERVERLESS",
+    ///         EngineVersion = "8.0",
+    ///         TemplateName = "tf-example",
+    ///         TemplateDescription = "terraform-template",
+    ///         ParamLists = new[]
+    ///         {
+    ///             new Tencentcloud.Cynosdb.Inputs.ParamTemplateParamListArgs
+    ///             {
+    ///                 CurrentValue = "-1",
+    ///                 ParamName = "optimizer_trace_offset",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     // create cynosdb cluster
+    ///     var exampleCluster = new Tencentcloud.Cynosdb.Cluster("exampleCluster", new()
+    ///     {
+    ///         AvailableZone = availabilityZone,
+    ///         SlaveZone = slaveZone,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         DbMode = "SERVERLESS",
+    ///         DbType = "MYSQL",
+    ///         DbVersion = "8.0",
+    ///         Port = 3306,
+    ///         StorageLimit = 1000,
+    ///         ClusterName = "tf-example",
+    ///         Password = "cynosDB@123",
+    ///         InstanceMaintainDuration = 7200,
+    ///         InstanceMaintainStartTime = 10800,
+    ///         MinCpu = 2,
+    ///         MaxCpu = 4,
+    ///         ParamTemplateId = exampleParamTemplate.TemplateId,
+    ///         ForceDelete = false,
+    ///         InstanceMaintainWeekdays = new[]
+    ///         {
+    ///             "Fri",
+    ///             "Mon",
+    ///             "Sat",
+    ///             "Sun",
+    ///             "Thu",
+    ///             "Wed",
+    ///             "Tue",
+    ///         },
+    ///         RwGroupSgs = new[]
+    ///         {
+    ///             exampleGroup.Id,
+    ///         },
+    ///         RoGroupSgs = new[]
+    ///         {
+    ///             exampleGroup.Id,
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createBy", "terraform" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// &lt;!--End PulumiCodeChooser --&gt;
+    /// 
     /// ## Import
     /// 
     /// CynosDB cluster can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cynosdb/cluster:Cluster foo cynosdbmysql-dzj5l8gz
+    /// $ pulumi import tencentcloud:Cynosdb/cluster:Cluster example cynosdbmysql-dzj5l8gz
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/cluster:Cluster")]
@@ -91,7 +296,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<string> DbType { get; private set; } = null!;
 
         /// <summary>
-        /// Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
+        /// Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`, `8.0`.
         /// </summary>
         [Output("dbVersion")]
         public Output<string> DbVersion { get; private set; } = null!;
@@ -175,10 +380,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<int?> OldIpReserveHours { get; private set; } = null!;
 
         /// <summary>
-        /// Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        /// Specify parameter list of database. It is valid when `param_template_id` is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         /// </summary>
         [Output("paramItems")]
         public Output<ImmutableArray<Outputs.ClusterParamItem>> ParamItems { get; private set; } = null!;
+
+        /// <summary>
+        /// The ID of the parameter template.
+        /// </summary>
+        [Output("paramTemplateId")]
+        public Output<int> ParamTemplateId { get; private set; } = null!;
 
         /// <summary>
         /// Password of `root` account.
@@ -193,7 +404,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Output<int?> Port { get; private set; } = null!;
 
         /// <summary>
-        /// The ID of the parameter template.
+        /// It will be deprecated. Use `param_template_id` instead. The ID of the parameter template.
         /// </summary>
         [Output("prarmTemplateId")]
         public Output<int> PrarmTemplateId { get; private set; } = null!;
@@ -269,6 +480,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// </summary>
         [Output("serverlessStatusFlag")]
         public Output<string?> ServerlessStatusFlag { get; private set; } = null!;
+
+        /// <summary>
+        /// Multi zone Addresses of the CynosDB Cluster.
+        /// </summary>
+        [Output("slaveZone")]
+        public Output<string?> SlaveZone { get; private set; } = null!;
 
         /// <summary>
         /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
@@ -406,7 +623,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<string> DbType { get; set; } = null!;
 
         /// <summary>
-        /// Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
+        /// Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`, `8.0`.
         /// </summary>
         [Input("dbVersion", required: true)]
         public Input<string> DbVersion { get; set; } = null!;
@@ -475,13 +692,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         private InputList<Inputs.ClusterParamItemArgs>? _paramItems;
 
         /// <summary>
-        /// Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        /// Specify parameter list of database. It is valid when `param_template_id` is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         /// </summary>
         public InputList<Inputs.ClusterParamItemArgs> ParamItems
         {
             get => _paramItems ?? (_paramItems = new InputList<Inputs.ClusterParamItemArgs>());
             set => _paramItems = value;
         }
+
+        /// <summary>
+        /// The ID of the parameter template.
+        /// </summary>
+        [Input("paramTemplateId")]
+        public Input<int>? ParamTemplateId { get; set; }
 
         [Input("password", required: true)]
         private Input<string>? _password;
@@ -506,7 +729,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<int>? Port { get; set; }
 
         /// <summary>
-        /// The ID of the parameter template.
+        /// It will be deprecated. Use `param_template_id` instead. The ID of the parameter template.
         /// </summary>
         [Input("prarmTemplateId")]
         public Input<int>? PrarmTemplateId { get; set; }
@@ -552,6 +775,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// </summary>
         [Input("serverlessStatusFlag")]
         public Input<string>? ServerlessStatusFlag { get; set; }
+
+        /// <summary>
+        /// Multi zone Addresses of the CynosDB Cluster.
+        /// </summary>
+        [Input("slaveZone")]
+        public Input<string>? SlaveZone { get; set; }
 
         /// <summary>
         /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.
@@ -664,7 +893,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<string>? DbType { get; set; }
 
         /// <summary>
-        /// Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`.
+        /// Version of CynosDB, which is related to `db_type`. For `MYSQL`, available value is `5.7`, `8.0`.
         /// </summary>
         [Input("dbVersion")]
         public Input<string>? DbVersion { get; set; }
@@ -757,13 +986,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         private InputList<Inputs.ClusterParamItemGetArgs>? _paramItems;
 
         /// <summary>
-        /// Specify parameter list of database. It is valid when prarm_template_id is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
+        /// Specify parameter list of database. It is valid when `param_template_id` is set in create cluster. Use `data.tencentcloud_mysql_default_params` to query available parameter details.
         /// </summary>
         public InputList<Inputs.ClusterParamItemGetArgs> ParamItems
         {
             get => _paramItems ?? (_paramItems = new InputList<Inputs.ClusterParamItemGetArgs>());
             set => _paramItems = value;
         }
+
+        /// <summary>
+        /// The ID of the parameter template.
+        /// </summary>
+        [Input("paramTemplateId")]
+        public Input<int>? ParamTemplateId { get; set; }
 
         [Input("password")]
         private Input<string>? _password;
@@ -788,7 +1023,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         public Input<int>? Port { get; set; }
 
         /// <summary>
-        /// The ID of the parameter template.
+        /// It will be deprecated. Use `param_template_id` instead. The ID of the parameter template.
         /// </summary>
         [Input("prarmTemplateId")]
         public Input<int>? PrarmTemplateId { get; set; }
@@ -900,6 +1135,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// </summary>
         [Input("serverlessStatusFlag")]
         public Input<string>? ServerlessStatusFlag { get; set; }
+
+        /// <summary>
+        /// Multi zone Addresses of the CynosDB Cluster.
+        /// </summary>
+        [Input("slaveZone")]
+        public Input<string>? SlaveZone { get; set; }
 
         /// <summary>
         /// Storage limit of CynosDB cluster instance, unit in GB. The maximum storage of a non-serverless instance in GB. NOTE: If db_type is `MYSQL` and charge_type is `PREPAID`, the value cannot exceed the maximum storage corresponding to the CPU and memory specifications, and the transaction mode is `order and pay`. when charge_type is `POSTPAID_BY_HOUR`, this argument is unnecessary.

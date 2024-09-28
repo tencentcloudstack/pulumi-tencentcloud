@@ -55,6 +55,11 @@ export type Export = import("./export").Export;
 export const Export: typeof import("./export").Export = null as any;
 utilities.lazyLoad(exports, ["Export"], () => require("./export"));
 
+export { GetLogsetsArgs, GetLogsetsResult, GetLogsetsOutputArgs } from "./getLogsets";
+export const getLogsets: typeof import("./getLogsets").getLogsets = null as any;
+export const getLogsetsOutput: typeof import("./getLogsets").getLogsetsOutput = null as any;
+utilities.lazyLoad(exports, ["getLogsets","getLogsetsOutput"], () => require("./getLogsets"));
+
 export { GetMachineGroupConfigsArgs, GetMachineGroupConfigsResult, GetMachineGroupConfigsOutputArgs } from "./getMachineGroupConfigs";
 export const getMachineGroupConfigs: typeof import("./getMachineGroupConfigs").getMachineGroupConfigs = null as any;
 export const getMachineGroupConfigsOutput: typeof import("./getMachineGroupConfigs").getMachineGroupConfigsOutput = null as any;

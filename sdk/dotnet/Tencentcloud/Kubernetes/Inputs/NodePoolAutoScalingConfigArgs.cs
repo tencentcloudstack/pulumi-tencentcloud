@@ -98,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<string>? InstanceName { get; set; }
 
         /// <summary>
+        /// Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default value: `ORIGINAL`. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+        /// </summary>
+        [Input("instanceNameStyle")]
+        public Input<string>? InstanceNameStyle { get; set; }
+
+        /// <summary>
         /// Specified types of CVM instance.
         /// </summary>
         [Input("instanceType", required: true)]

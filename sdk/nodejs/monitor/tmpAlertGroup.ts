@@ -16,26 +16,43 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const tmpAlertGroup = new tencentcloud.monitor.TmpAlertGroup("tmpAlertGroup", {
- *     ampReceivers: ["notice-om017kc2"],
+ * const config = new pulumi.Config();
+ * const availabilityZone = config.get("availabilityZone") || "ap-guangzhou-4";
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {cidrBlock: "10.0.0.0/16"});
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone,
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const exampleTmpInstance = new tencentcloud.monitor.TmpInstance("exampleTmpInstance", {
+ *     instanceName: "tf-tmp-instance",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     dataRetentionTime: 30,
+ *     zone: availabilityZone,
+ *     tags: {
+ *         createdBy: "terraform",
+ *     },
+ * });
+ * const exampleTmpAlertGroup = new tencentcloud.monitor.TmpAlertGroup("exampleTmpAlertGroup", {
+ *     groupName: "tf-example",
+ *     instanceId: exampleTmpInstance.id,
+ *     repeatInterval: "5m",
  *     customReceiver: {
  *         type: "amp",
  *     },
- *     groupName: "tf-test",
- *     instanceId: "prom-ip429jis",
- *     repeatInterval: "5m",
  *     rules: [{
- *         annotations: {
- *             description: "Agent {{$labels.instance}} is deactivated, please pay attention!",
- *             summary: "Agent health check",
- *         },
  *         duration: "1m",
  *         expr: "up{job=\"prometheus-agent\"} != 1",
+ *         ruleName: "Agent health check",
+ *         state: 2,
+ *         annotations: {
+ *             summary: "Agent health check",
+ *             description: "Agent {{$labels.instance}} is deactivated, please pay attention!",
+ *         },
  *         labels: {
  *             severity: "critical",
  *         },
- *         ruleName: "Agent health check",
- *         state: 2,
  *     }],
  * });
  * ```
@@ -46,7 +63,7 @@ import * as utilities from "../utilities";
  * monitor tmp_alert_group can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup tmp_alert_group instance_id#group_id
+ * $ pulumi import tencentcloud:Monitor/tmpAlertGroup:TmpAlertGroup example prom-34qkzwvs#alert-rfkkr6cw
  * ```
  */
 export class TmpAlertGroup extends pulumi.CustomResource {

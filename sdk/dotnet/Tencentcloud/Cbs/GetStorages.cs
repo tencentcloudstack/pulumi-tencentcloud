@@ -17,6 +17,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query all CBS storages
+        /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
@@ -26,10 +28,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var storages = Tencentcloud.Cbs.GetStorages.Invoke(new()
+        ///     var example = Tencentcloud.Cbs.GetStorages.Invoke();
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query CBS by storage id
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Cbs.GetStorages.Invoke(new()
         ///     {
-        ///         ResultOutputFile = "mytestpath",
-        ///         StorageId = "disk-kdt0sq6m",
+        ///         ResultOutputFile = "my-test-path",
+        ///         StorageId = "disk-6goq404g",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query CBS by dedicated cluster id
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Cbs.GetStorages.Invoke(new()
+        ///     {
+        ///         DedicatedClusterId = "cluster-262n63e8",
         ///     });
         /// 
         /// });
@@ -53,6 +92,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         ///         {
         ///             "POSTPAID_BY_HOUR",
         ///             "PREPAID",
+        ///             "CDCPAID",
+        ///             "DEDICATED_CLUSTER_PAID",
         ///         },
         ///         InstanceIps = new[]
         ///         {
@@ -69,7 +110,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         ///         },
         ///         TagKeys = new[]
         ///         {
-        ///             "foo",
+        ///             "example",
         ///         },
         ///         TagValues = new[]
         ///         {
@@ -90,6 +131,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// 
         /// ## Example Usage
         /// 
+        /// ### Query all CBS storages
+        /// 
         /// &lt;!--Start PulumiCodeChooser --&gt;
         /// ```csharp
         /// using System.Collections.Generic;
@@ -99,10 +142,47 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var storages = Tencentcloud.Cbs.GetStorages.Invoke(new()
+        ///     var example = Tencentcloud.Cbs.GetStorages.Invoke();
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query CBS by storage id
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Cbs.GetStorages.Invoke(new()
         ///     {
-        ///         ResultOutputFile = "mytestpath",
-        ///         StorageId = "disk-kdt0sq6m",
+        ///         ResultOutputFile = "my-test-path",
+        ///         StorageId = "disk-6goq404g",
+        ///     });
+        /// 
+        /// });
+        /// ```
+        /// &lt;!--End PulumiCodeChooser --&gt;
+        /// 
+        /// ### Query CBS by dedicated cluster id
+        /// 
+        /// &lt;!--Start PulumiCodeChooser --&gt;
+        /// ```csharp
+        /// using System.Collections.Generic;
+        /// using System.Linq;
+        /// using Pulumi;
+        /// using Tencentcloud = Pulumi.Tencentcloud;
+        /// 
+        /// return await Deployment.RunAsync(() =&gt; 
+        /// {
+        ///     var example = Tencentcloud.Cbs.GetStorages.Invoke(new()
+        ///     {
+        ///         DedicatedClusterId = "cluster-262n63e8",
         ///     });
         /// 
         /// });
@@ -126,6 +206,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         ///         {
         ///             "POSTPAID_BY_HOUR",
         ///             "PREPAID",
+        ///             "CDCPAID",
+        ///             "DEDICATED_CLUSTER_PAID",
         ///         },
         ///         InstanceIps = new[]
         ///         {
@@ -142,7 +224,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         ///         },
         ///         TagKeys = new[]
         ///         {
-        ///             "foo",
+        ///             "example",
         ///         },
         ///         TagValues = new[]
         ///         {
@@ -172,13 +254,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         private List<string>? _chargeTypes;
 
         /// <summary>
-        /// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+        /// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
         /// </summary>
         public List<string> ChargeTypes
         {
             get => _chargeTypes ?? (_chargeTypes = new List<string>());
             set => _chargeTypes = value;
         }
+
+        /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        [Input("dedicatedClusterId")]
+        public string? DedicatedClusterId { get; set; }
 
         [Input("instanceIps")]
         private List<string>? _instanceIps;
@@ -300,13 +388,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         private InputList<string>? _chargeTypes;
 
         /// <summary>
-        /// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+        /// List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
         /// </summary>
         public InputList<string> ChargeTypes
         {
             get => _chargeTypes ?? (_chargeTypes = new InputList<string>());
             set => _chargeTypes = value;
         }
+
+        /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        [Input("dedicatedClusterId")]
+        public Input<string>? DedicatedClusterId { get; set; }
 
         [Input("instanceIps")]
         private InputList<string>? _instanceIps;
@@ -429,6 +523,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// </summary>
         public readonly ImmutableArray<string> ChargeTypes;
         /// <summary>
+        /// Exclusive cluster id.
+        /// </summary>
+        public readonly string? DedicatedClusterId;
+        /// <summary>
         /// The provider-assigned unique ID for this managed resource.
         /// </summary>
         public readonly string Id;
@@ -470,6 +568,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
 
             ImmutableArray<string> chargeTypes,
 
+            string? dedicatedClusterId,
+
             string id,
 
             ImmutableArray<string> instanceIps,
@@ -500,6 +600,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         {
             AvailabilityZone = availabilityZone;
             ChargeTypes = chargeTypes;
+            DedicatedClusterId = dedicatedClusterId;
             Id = id;
             InstanceIps = instanceIps;
             InstanceNames = instanceNames;

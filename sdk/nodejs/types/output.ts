@@ -2868,6 +2868,10 @@ export namespace As {
          * Base64-encoded User Data text.
          */
         userData: string;
+        /**
+         * Version Number.
+         */
+        versionNumber: number;
     }
 
     export interface GetScalingConfigsConfigurationListDataDisk {
@@ -3053,6 +3057,17 @@ export namespace As {
         threshold: number;
     }
 
+    export interface LifecycleHookLifecycleCommand {
+        /**
+         * Remote command ID. It is required to execute a command.
+         */
+        commandId: string;
+        /**
+         * Custom parameter. The field type is JSON encoded string. For example, {"varA": "222"}.
+         */
+        parameters?: string;
+    }
+
     export interface LoadBalancerForwardLoadBalancer {
         /**
          * Application load balancer listener ID.
@@ -3158,6 +3173,28 @@ export namespace As {
         weight: number;
     }
 
+    export interface StartInstanceRefreshRefreshSettings {
+        /**
+         * Backend service health check status for instances, defaults to FALSE. This setting takes effect only for scaling groups bound with application load balancers. When enabled, if an instance fails the check after being refreshed, its load balancer port weight remains 0 and is marked as a refresh failure. Valid values: <br><li>TRUE: Enable the check.</li> <li>FALSE: Do not enable the check.
+         */
+        checkInstanceTargetHealth?: boolean;
+        /**
+         * Rolling update settings parameters. RefreshMode is the rolling update. This parameter must be filled in.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        rollingUpdateSettings: outputs.As.StartInstanceRefreshRefreshSettingsRollingUpdateSettings;
+    }
+
+    export interface StartInstanceRefreshRefreshSettingsRollingUpdateSettings {
+        /**
+         * Batch quantity. The batch quantity should be a positive integer greater than 0, but cannot exceed the total number of instances pending refresh.
+         */
+        batchNumber: number;
+        /**
+         * Pause policy between batches. Default value: Automatic. Valid values: <br><li>FIRST_BATCH_PAUSE: Pause after the first batch update completes.</li> <li>BATCH_INTERVAL_PAUSE: Pause between each batch update.</li> <li>AUTOMATIC: No pauses.
+         */
+        batchPause?: string;
+    }
+
 }
 
 export namespace Audit {
@@ -3170,6 +3207,104 @@ export namespace Audit {
          * Cos region chinese name.
          */
         cosRegionName: string;
+    }
+
+    export interface GetEventsEvent {
+        /**
+         * Root account ID.
+         */
+        accountId?: number;
+        /**
+         * Log details.
+         */
+        cloudAuditEvent?: string;
+        /**
+         * Authentication error code.
+         */
+        errorCode?: number;
+        /**
+         * Log ID.
+         */
+        eventId?: string;
+        /**
+         * Event name.
+         */
+        eventName?: string;
+        /**
+         * Description of event name in Chinese (please use this field as required; if you are using other languages, ignore this field).
+         */
+        eventNameCn?: string;
+        /**
+         * Event region.
+         */
+        eventRegion?: string;
+        /**
+         * Request source.
+         */
+        eventSource?: string;
+        /**
+         * Event Time.
+         */
+        eventTime?: string;
+        /**
+         * IP location.
+         */
+        location?: string;
+        /**
+         * Request ID.
+         */
+        requestId?: string;
+        /**
+         * Resource region.
+         */
+        resourceRegion?: string;
+        /**
+         * Description of resource type in Chinese (please use this field as required; if you are using other languages, ignore this field).
+         */
+        resourceTypeCn?: string;
+        /**
+         * Resource pair.
+         */
+        resources?: outputs.Audit.GetEventsEventResources;
+        /**
+         * Certificate ID
+         * Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         */
+        secretId?: string;
+        /**
+         * Source IP
+         * Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         */
+        sourceIpAddress?: string;
+        /**
+         * Username.
+         */
+        username?: string;
+    }
+
+    export interface GetEventsEventResources {
+        /**
+         * Resource name
+         * Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         */
+        resourceName?: string;
+        /**
+         * Resource type.
+         */
+        resourceType?: string;
+    }
+
+    export interface GetEventsLookupAttribute {
+        /**
+         * Valid values: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, and EventId
+         * Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         */
+        attributeKey: string;
+        /**
+         * Value of `AttributeValue`
+         * Note: `null` may be returned for this field, indicating that no valid values can be obtained.
+         */
+        attributeValue?: string;
     }
 
     export interface GetKeyAliasAuditKeyAliasList {
@@ -3263,6 +3398,20 @@ export namespace Availability {
          * The state of the zone, indicate availability using `AVAILABLE` and `UNAVAILABLE` values.
          */
         state: string;
+    }
+
+}
+
+export namespace Batch {
+    export interface ApplyAccountBaselinesBaselineConfigItem {
+        /**
+         * Account Factory baseline item configuration. Different items have different parameters.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        configuration?: string;
+        /**
+         * A unique identifier for an Account Factory baseline item, which can only contain English letters, digits, and @,._[]-:()+=. It must be 2-128 characters long.Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        identifier?: string;
     }
 
 }
@@ -4129,13 +4278,17 @@ export namespace Cbs {
          */
         availabilityZone: string;
         /**
-         * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+         * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
          */
         chargeType: string;
         /**
          * Creation time of CBS.
          */
         createTime: string;
+        /**
+         * Exclusive cluster id.
+         */
+        dedicatedClusterId: string;
         /**
          * Indicates whether CBS is encrypted.
          */
@@ -4196,13 +4349,17 @@ export namespace Cbs {
          */
         availabilityZone: string;
         /**
-         * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID`).
+         * List filter by disk charge type (`POSTPAID_BY_HOUR` | `PREPAID` | `CDCPAID` | `DEDICATED_CLUSTER_PAID`).
          */
         chargeType: string;
         /**
          * Creation time of CBS.
          */
         createTime: string;
+        /**
+         * Exclusive cluster id.
+         */
+        dedicatedClusterId: string;
         /**
          * Indicates whether CBS is encrypted.
          */
@@ -4433,6 +4590,72 @@ export namespace Ccn {
         state: string;
     }
 
+    export interface GetRoutesFilter {
+        /**
+         * Field to be filtered. Support `route-id`, `cidr-block`, `instance-type`, `instance-region`, `instance-id`, `route-table-id`.
+         */
+        name: string;
+        /**
+         * Filter value of the field.
+         */
+        values: string[];
+    }
+
+    export interface GetRoutesRouteList {
+        /**
+         * Destination.
+         */
+        destinationCidrBlock: string;
+        /**
+         * Is routing enabled.
+         */
+        enabled: boolean;
+        /**
+         * Extension status of routing.
+         */
+        extraState: string;
+        /**
+         * Next hop extension name (associated instance extension name).
+         */
+        instanceExtraName: string;
+        /**
+         * Next jump (associated instance ID).
+         */
+        instanceId: string;
+        /**
+         * Next jump (associated instance name).
+         */
+        instanceName: string;
+        /**
+         * Next jump (associated instance region).
+         */
+        instanceRegion: string;
+        /**
+         * Next hop type (associated instance type), all types: VPC, DIRECTCONNECT.
+         */
+        instanceType: string;
+        /**
+         * The UIN (root account) to which the associated instance belongs.
+         */
+        instanceUin: string;
+        /**
+         * Is it dynamic routing.
+         */
+        isBgp: boolean;
+        /**
+         * route ID.
+         */
+        routeId: string;
+        /**
+         * Routing priority.
+         */
+        routePriority: number;
+        /**
+         * update time.
+         */
+        updateTime: string;
+    }
+
     export interface InstancesAcceptAttachInstance {
         /**
          * Description.
@@ -4500,6 +4723,394 @@ export namespace Ccn {
          * ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
          */
         routeTableId?: string;
+    }
+
+    export interface RouteTableAssociateInstanceConfigInstance {
+        /**
+         * Instances ID.
+         */
+        instanceId: string;
+        /**
+         * Cloud networking supports instance types: VPC, DIRECTCONNECT, BMVPC, EDGE, EDGE_TUNNEL, EDGE_VPNGW, VPNGW.
+         */
+        instanceType: string;
+    }
+
+    export interface RouteTableBroadcastPoliciesPolicy {
+        /**
+         * Routing behavior, `accept` allows, `drop` rejects.
+         */
+        action: string;
+        /**
+         * propagation conditions.
+         */
+        broadcastConditions: outputs.Ccn.RouteTableBroadcastPoliciesPolicyBroadcastCondition[];
+        /**
+         * Policy description.
+         */
+        description: string;
+        /**
+         * Routing conditions.
+         */
+        routeConditions: outputs.Ccn.RouteTableBroadcastPoliciesPolicyRouteCondition[];
+    }
+
+    export interface RouteTableBroadcastPoliciesPolicyBroadcastCondition {
+        /**
+         * Matching mode, `1` precise matching, `0` fuzzy matching.
+         */
+        matchPattern: number;
+        /**
+         * condition type.
+         */
+        name: string;
+        /**
+         * List of conditional values.
+         */
+        values: string[];
+    }
+
+    export interface RouteTableBroadcastPoliciesPolicyRouteCondition {
+        /**
+         * Matching mode, `1` precise matching, `0` fuzzy matching.
+         */
+        matchPattern: number;
+        /**
+         * condition type.
+         */
+        name: string;
+        /**
+         * List of conditional values.
+         */
+        values: string[];
+    }
+
+    export interface RouteTableInputPoliciesPolicy {
+        /**
+         * Routing behavior, `accept` allows, `drop` rejects.
+         */
+        action: string;
+        /**
+         * Policy description.
+         */
+        description: string;
+        /**
+         * Routing conditions.
+         */
+        routeConditions: outputs.Ccn.RouteTableInputPoliciesPolicyRouteCondition[];
+    }
+
+    export interface RouteTableInputPoliciesPolicyRouteCondition {
+        /**
+         * Matching mode, `1` precise matching, `0` fuzzy matching.
+         */
+        matchPattern: number;
+        /**
+         * condition type.
+         */
+        name: string;
+        /**
+         * List of conditional values.
+         */
+        values: string[];
+    }
+
+    export interface RouteTableSelectionPoliciesSelectionPolicy {
+        /**
+         * description.
+         */
+        description: string;
+        /**
+         * Instance ID.
+         */
+        instanceId: string;
+        /**
+         * Instance Type: Private Network: VPC, Dedicated Gateway: DIRECTCONNECT, Blackstone Private Network: BMVPC, EDGE Device: EDGE, EDGE Tunnel: EDGE_TUNNEL, EDGE Gateway: EDGE_VPNGW, VPN Gateway: VPNGW.
+         */
+        instanceType: string;
+        /**
+         * route table ID.
+         */
+        routeTableId: string;
+        /**
+         * Source CIDR.
+         */
+        sourceCidrBlock: string;
+    }
+
+}
+
+export namespace Cdc {
+    export interface GetDedicatedClusterHostsHostInfoSet {
+        /**
+         * Dedicated Cluster Host CPU Available Count.
+         */
+        cpuAvailable: number;
+        /**
+         * Dedicated Cluster Host CPU Total Count.
+         */
+        cpuTotal: number;
+        /**
+         * Dedicated Cluster Host Expire Time.
+         */
+        expireTime: string;
+        /**
+         * Dedicated Cluster Host ID.
+         */
+        hostId: string;
+        /**
+         * Dedicated Cluster Host Ip (Deprecated).
+         */
+        hostIp: string;
+        /**
+         * Dedicated Cluster Host Status.
+         */
+        hostStatus: string;
+        /**
+         * Dedicated Cluster Host Type.
+         */
+        hostType: string;
+        /**
+         * Dedicated Cluster Host Memory Available Count (GB).
+         */
+        memAvailable: number;
+        /**
+         * Dedicated Cluster Host Memory Total Count (GB).
+         */
+        memTotal: number;
+        /**
+         * Dedicated Cluster Host Run Time.
+         */
+        runTime: string;
+        /**
+         * Dedicated Cluster Service Type.
+         */
+        serviceType: string;
+    }
+
+    export interface GetDedicatedClusterInstanceTypesDedicatedClusterInstanceTypeSet {
+        /**
+         * Instance CPU.
+         */
+        cpu: number;
+        /**
+         * Instance CPU Type.
+         */
+        cpuType: string;
+        /**
+         * Instance Fpga.
+         */
+        fpga: number;
+        /**
+         * Instance GPU.
+         */
+        gpu: number;
+        /**
+         * Instance Bandwidth.
+         */
+        instanceBandwidth: number;
+        /**
+         * Instance Family.
+         */
+        instanceFamily: string;
+        /**
+         * Instance Pps.
+         */
+        instancePps: number;
+        /**
+         * Instance Type.
+         */
+        instanceType: string;
+        /**
+         * Instance Memory.
+         */
+        memory: number;
+        /**
+         * Instance Type.
+         */
+        networkCard: number;
+        /**
+         * Instance Remark.
+         */
+        remark: string;
+        /**
+         * Instance Status.
+         */
+        status: string;
+        /**
+         * Instance Storage Block Amount.
+         */
+        storageBlockAmount: number;
+        /**
+         * Instance Type Name.
+         */
+        typeName: string;
+        /**
+         * Zone Name.
+         */
+        zone: string;
+    }
+
+    export interface GetDedicatedClusterOrdersDedicatedClusterOrderSet {
+        /**
+         * Dedicated Cluster Order Action Type.
+         */
+        action: string;
+        /**
+         * Dedicated Cluster CPU.
+         */
+        cpu: number;
+        /**
+         * Dedicated Cluster Order Create time.
+         */
+        createTime: string;
+        /**
+         * Dedicated Cluster ID.
+         */
+        dedicatedClusterId: string;
+        /**
+         * Dedicated Cluster Order ID.
+         */
+        dedicatedClusterOrderId: string;
+        /**
+         * Dedicated Cluster Order Item List.
+         */
+        dedicatedClusterOrderItems: outputs.Cdc.GetDedicatedClusterOrdersDedicatedClusterOrderSetDedicatedClusterOrderItem[];
+        /**
+         * Dedicated Cluster Type ID.
+         */
+        dedicatedClusterTypeId: string;
+        /**
+         * Dedicated Cluster GPU.
+         */
+        gpu: number;
+        /**
+         * Dedicated Cluster Memory.
+         */
+        mem: number;
+        /**
+         * Dedicated Cluster Order Status.
+         */
+        orderStatus: string;
+        /**
+         * Dedicated Cluster Order Type.
+         */
+        orderType: string;
+        /**
+         * Dedicated Cluster Order Pay Status.
+         */
+        payStatus: number;
+        /**
+         * Dedicated Cluster Order Pay Type.
+         */
+        payType: string;
+        /**
+         * Dedicated Cluster Supported PowerDraw.
+         */
+        powerDraw: number;
+        /**
+         * Dedicated Cluster Supported Instance Family.
+         */
+        supportedInstanceFamilies: string[];
+        /**
+         * Dedicated Cluster Storage Type.
+         */
+        supportedStorageTypes: string[];
+        /**
+         * Dedicated Cluster Supported Uplink Speed.
+         */
+        supportedUplinkSpeeds: number[];
+        /**
+         * Dedicated Cluster Order Pay Time Span.
+         */
+        timeSpan: number;
+        /**
+         * Dedicated Cluster Order Pay Time Unit.
+         */
+        timeUnit: string;
+        /**
+         * Dedicated Cluster Supported Weight.
+         */
+        weight: number;
+    }
+
+    export interface GetDedicatedClusterOrdersDedicatedClusterOrderSetDedicatedClusterOrderItem {
+        /**
+         * Dedicated Cluster Compute Format.
+         */
+        computeFormat: string;
+        /**
+         * Dedicated Cluster SubOrder Count.
+         */
+        count: number;
+        /**
+         * Dedicated Cluster Order Create time.
+         */
+        createTime: string;
+        /**
+         * Dedicated Cluster Type ID.
+         */
+        dedicatedClusterTypeId: string;
+        /**
+         * Dedicated Cluster Type Description.
+         */
+        description: string;
+        /**
+         * Dedicated Cluster Type Name.
+         */
+        name: string;
+        /**
+         * Dedicated Cluster Supported PowerDraw.
+         */
+        powerDraw: number;
+        /**
+         * Dedicated Cluster SubOrder ID.
+         */
+        subOrderId: string;
+        /**
+         * Dedicated Cluster SubOrder Pay Status.
+         */
+        subOrderPayStatus: number;
+        /**
+         * Dedicated Cluster Order Status.
+         */
+        subOrderStatus: string;
+        /**
+         * Dedicated Cluster Supported Instance Family.
+         */
+        supportedInstanceFamilies: string[];
+        /**
+         * Dedicated Cluster Storage Type.
+         */
+        supportedStorageTypes: string[];
+        /**
+         * Dedicated Cluster Supported Uplink Speed.
+         */
+        supportedUplinkSpeeds: number[];
+        /**
+         * Dedicated Cluster Total CPU.
+         */
+        totalCpu: number;
+        /**
+         * Dedicated Cluster Total GPU.
+         */
+        totalGpu: number;
+        /**
+         * Dedicated Cluster Total Memory.
+         */
+        totalMem: number;
+        /**
+         * Dedicated Cluster Type Family.
+         */
+        typeFamily: string;
+        /**
+         * Dedicated Cluster Type Name.
+         */
+        typeName: string;
+        /**
+         * Dedicated Cluster Supported Weight.
+         */
+        weight: number;
     }
 
 }
@@ -5247,7 +5858,7 @@ export namespace Cdn {
          */
         backupOriginLists?: string[];
         /**
-         * Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server.
+         * Backup origin server type, which supports the following types: `domain`: domain name type, `ip`: IP list used as origin server, `ipv6Domain`: Multiple IPv6 addresses and one domain name, `ipIpv6`: Multiple IPv4 addresses and one IPv6 address, `ipIpv6Domain`: Multiple IPv4 and IPv6 addresses and one domain name.
          */
         backupOriginType?: string;
         /**
@@ -5267,7 +5878,7 @@ export namespace Cdn {
          */
         originPullProtocol?: string;
         /**
-         * Master origin server type. The following types are supported: `domain`: domain name type, `cos`: COS origin, `ip`: IP list used as origin server, `ipv6`: origin server list is a single IPv6 address, `ipIpv6`: origin server list is multiple IPv4 addresses and an IPv6 address.
+         * Master origin server type. The following types are supported: `domain`: Domain name, `domainv6`: IPv6 domain name, `cos`: COS bucket address, `thirdParty`: Third-party object storage origin, `igtm`: IGTM origin, `ip`: IP address, `ipv6`: One IPv6 address, `ipIpv6`: Multiple IPv4 addresses and one IPv6 address, `ipDomain`: IP addresses and domain names (only available to beta users), `ipDomainv6`: Multiple IPv4 addresses and one IPv6 domain name, `ipv6Domain`: Multiple IPv6 addresses and one domain name, `ipv6Domainv6`: Multiple IPv6 addresses and one IPv6 domain name, `domainDomainv6`: Multiple IPv4 domain names and one IPv6 domain name, `ipIpv6Domain`: Multiple IPv4 and IPv6 addresses and one domain name, `ipIpv6Domainv6`: Multiple IPv4 and IPv6 addresses and one IPv6 domain name, `ipDomainDomainv6`: Multiple IPv4 addresses and IPv4 domain names and one IPv6 domain name, `ipv6DomainDomainv6`: Multiple IPv4 domain names and IPv6 addresses and one IPv6 domain name, `ipIpv6DomainDomainv6`: Multiple IPv4 and IPv6 addresses and IPv4 domain names and one IPv6 domain name.
          */
         originType: string;
         /**
@@ -5299,6 +5910,29 @@ export namespace Cdn {
     }
 
     export interface DomainOssPrivateAccess {
+        /**
+         * Access ID.
+         */
+        accessKey?: string;
+        /**
+         * Bucket.
+         */
+        bucket?: string;
+        /**
+         * Region.
+         */
+        region?: string;
+        /**
+         * Key.
+         */
+        secretKey?: string;
+        /**
+         * Configuration switch, available values: `on`, `off` (default).
+         */
+        switch: string;
+    }
+
+    export interface DomainOthersPrivateAccess {
         /**
          * Access ID.
          */
@@ -5780,6 +6414,476 @@ export namespace Cdn {
          * Push url.
          */
         url: string;
+    }
+
+}
+
+export namespace Cdwdoris {
+    export interface GetInstancesInstancesList {
+        /**
+         * Access address. Example: 10.0.0.1:9000. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        accessInfo: string;
+        /**
+         * Bound security group information. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        bindSGs: string[];
+        /**
+         * Minor versions. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        buildVersion: string;
+        /**
+         * cbs. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        canAttachCbs: boolean;
+        /**
+         * Whether the table name is case sensitive, 0 refers to sensitive, 1 refers to insensitive, compared in lowercase; 2 refers to insensitive, and the table name is changed to lowercase for storage.. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        caseSensitive: number;
+        /**
+         * Page features, used to block some page entrances on the front end.. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        characteristics: string[];
+        /**
+         * Logset ID. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        clsLogSetId: string;
+        /**
+         * Log Topic ID. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        clsTopicId: string;
+        /**
+         * Component Information. Note: The return type here is map[string]struct, not the string type displayed. You can refer to Sample Value to parse the data. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        components: string;
+        /**
+         * COS buckets are used for hot and cold stratification. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        coolDownBucket: string;
+        /**
+         * Zookeeper node description information. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        coreSummary: outputs.Cdwdoris.GetInstancesInstancesListCoreSummary;
+        /**
+         * COS bucket. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        cosBucketName: string;
+        /**
+         * Cold and hot stratification coefficient. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        cosMoveFactor: number;
+        /**
+         * Creation time. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        createTime: string;
+        /**
+         * Elastic network interface address. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        eip: string;
+        /**
+         * Whether to enable hot and cold stratification. 0 refers to disabled, and 1 refers to enabled.. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        enableCoolDown: number;
+        /**
+         * Whether it is a multi-AZ.. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        enableMultiZones: boolean;
+        /**
+         * Whether to support XML configuration management. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        enableXmlConfig: number;
+        /**
+         * Expiration time. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        expireTime: string;
+        /**
+         * Error process description information. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        flowMsg: string;
+        /**
+         * The timeout time for the graceful restart of the kernel. If it is -1, it means it is not set.. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        graceShutdownWaitSeconds: string;
+        /**
+         * High availability, being true or false. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        ha: string;
+        /**
+         * High availability type: 0: non-high availability. 1: read high availability. 2: read-write high availability. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        haType: number;
+        /**
+         * Whether to enable logs. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        hasClsTopic: boolean;
+        /**
+         * Record ID, in numerical type. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        id: number;
+        /**
+         * Cluster instance ID, `cdw-xxxx` string type. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        instanceId: string;
+        /**
+         * Cluster instance name. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        instanceName: string;
+        /**
+         * Whether users can bind security groups.. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        isWhiteSGs: boolean;
+        /**
+         * external/local/yunti. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        kind: string;
+        /**
+         * Data node description information. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        masterSummary: outputs.Cdwdoris.GetInstancesInstancesListMasterSummary;
+        /**
+         * Monitoring Information. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        monitor: string;
+        /**
+         * Payment type: hour and prepay. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        payMode: string;
+        /**
+         * Region, ap-guangzhou. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        region: string;
+        /**
+         * Region. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        regionDesc: string;
+        /**
+         * Region ID, indicating the region. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        regionId: number;
+        /**
+         * Automatic renewal marker. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        renewFlag: boolean;
+        /**
+         * Timeout period, in seconds. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        restartTimeout: string;
+        /**
+         * Status,. Init is being created. Serving is running. Deleted indicates the cluster has been terminated. Deleting indicates the cluster is being terminated. Modify indicates the cluster is being changed. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        status: string;
+        /**
+         * Status description, such as `running`. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        statusDesc: string;
+        /**
+         * Subnet name. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        subnetId: string;
+        /**
+         * Tag list. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        tags: outputs.Cdwdoris.GetInstancesInstancesListTag[];
+        /**
+         * User availability zone and subnet information. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        userNetworkInfos: string;
+        /**
+         * Version. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        version: string;
+        /**
+         * VPC name. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        vpcId: string;
+        /**
+         * Availability zone, ap-guangzhou-3. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        zone: string;
+        /**
+         * Note about availability zone, such as Guangzhou Zone 2. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        zoneDesc: string;
+    }
+
+    export interface GetInstancesInstancesListCoreSummary {
+        /**
+         * Information of mounted cloud disks. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        attachCbsSpec: outputs.Cdwdoris.GetInstancesInstancesListCoreSummaryAttachCbsSpec;
+        /**
+         * Number of CPU cores, in counts.
+         */
+        core: number;
+        /**
+         * Disk size, in GB.
+         */
+        disk: number;
+        /**
+         * Disk size. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        diskCount: number;
+        /**
+         * Disk description.
+         */
+        diskDesc: string;
+        /**
+         * Disk type.
+         */
+        diskType: string;
+        /**
+         * Whether it is encrypted.. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        encrypt: number;
+        /**
+         * Maximum disk. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        maxDiskSize: number;
+        /**
+         * Memory size, in GB.
+         */
+        memory: number;
+        /**
+         * Number of nodes.
+         */
+        nodeSize: number;
+        /**
+         * Model, such as S1.
+         */
+        spec: string;
+        /**
+         * Specified cores. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        specCore: number;
+        /**
+         * Specified memory. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        specMemory: number;
+        /**
+         * Sub-product name. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        subProductType: string;
+    }
+
+    export interface GetInstancesInstancesListCoreSummaryAttachCbsSpec {
+        /**
+         * Total number of disks.
+         */
+        diskCount?: number;
+        /**
+         * Description.
+         */
+        diskDesc?: string;
+        /**
+         * Disk capacity, in GB.
+         */
+        diskSize?: number;
+        /**
+         * Node disk type, such as CLOUD_SSD, CLOUD_PREMIUM.
+         */
+        diskType?: string;
+    }
+
+    export interface GetInstancesInstancesListMasterSummary {
+        /**
+         * Information of mounted cloud disks. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        attachCbsSpec: outputs.Cdwdoris.GetInstancesInstancesListMasterSummaryAttachCbsSpec;
+        /**
+         * Number of CPU cores, in counts.
+         */
+        core: number;
+        /**
+         * Disk size, in GB.
+         */
+        disk: number;
+        /**
+         * Disk size. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        diskCount: number;
+        /**
+         * Disk description.
+         */
+        diskDesc: string;
+        /**
+         * Disk type.
+         */
+        diskType: string;
+        /**
+         * Whether it is encrypted.. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        encrypt: number;
+        /**
+         * Maximum disk. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        maxDiskSize: number;
+        /**
+         * Memory size, in GB.
+         */
+        memory: number;
+        /**
+         * Number of nodes.
+         */
+        nodeSize: number;
+        /**
+         * Model, such as S1.
+         */
+        spec: string;
+        /**
+         * Specified cores. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        specCore: number;
+        /**
+         * Specified memory. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        specMemory: number;
+        /**
+         * Sub-product name. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        subProductType: string;
+    }
+
+    export interface GetInstancesInstancesListMasterSummaryAttachCbsSpec {
+        /**
+         * Total number of disks.
+         */
+        diskCount?: number;
+        /**
+         * Description.
+         */
+        diskDesc?: string;
+        /**
+         * Disk capacity, in GB.
+         */
+        diskSize?: number;
+        /**
+         * Node disk type, such as CLOUD_SSD, CLOUD_PREMIUM.
+         */
+        diskType?: string;
+    }
+
+    export interface GetInstancesInstancesListTag {
+        /**
+         * Tag key.
+         */
+        tagKey: string;
+        /**
+         * Tag value.
+         */
+        tagValue: string;
+    }
+
+    export interface GetInstancesSearchTag {
+        /**
+         * 1 means only the tag key is entered without a value, and 0 means both the key and the value are entered.
+         */
+        allValue?: number;
+        /**
+         * Tag key.
+         */
+        tagKey?: string;
+        /**
+         * Tag value.
+         */
+        tagValue?: string;
+    }
+
+    export interface InstanceBeSpec {
+        /**
+         * Quantities.
+         */
+        count: number;
+        /**
+         * Cloud disk size.
+         */
+        diskSize: number;
+        /**
+         * Specification name.
+         */
+        specName: string;
+    }
+
+    export interface InstanceChargeProperties {
+        /**
+         * Billing type: `PREPAID` for prepayment, and `POSTPAID_BY_HOUR` for postpayment. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        chargeType?: string;
+        /**
+         * Whether to automatically renew. 1 means automatic renewal is enabled. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        renewFlag?: number;
+        /**
+         * Billing duration Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        timeSpan?: number;
+        /**
+         * Billing time unit, and `m` means month, etc. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        timeUnit?: string;
+    }
+
+    export interface InstanceFeSpec {
+        /**
+         * Quantities.
+         */
+        count: number;
+        /**
+         * Cloud disk size.
+         */
+        diskSize: number;
+        /**
+         * Specification name.
+         */
+        specName: string;
+    }
+
+    export interface InstanceTag {
+        /**
+         * Tag key.
+         */
+        tagKey: string;
+        /**
+         * Tag value.
+         */
+        tagValue: string;
+    }
+
+    export interface InstanceUserMultiZoneInfos {
+        /**
+         * Subnet ID Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        subnetId?: string;
+        /**
+         * The number of available IP addresses in the current subnet Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        subnetIpNum?: number;
+        /**
+         * Availability zone Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        zone?: string;
+    }
+
+    export interface WorkloadGroupWorkloadGroup {
+        /**
+         * Cpu hard limit. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cpuHardLimit?: string;
+        /**
+         * CPU weight. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        cpuShare?: number;
+        /**
+         * Whether to allow over-allocation. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        enableMemoryOverCommit?: boolean;
+        /**
+         * Memory limit, the sum of the memory limit values of all resource groups should be less than or equal to 100. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        memoryLimit?: number;
+        /**
+         * Workload group name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        workloadGroupName?: string;
     }
 
 }
@@ -15606,6 +16710,10 @@ export namespace Clb {
          */
         clbVips: string[];
         /**
+         * ID of the cluster.
+         */
+        clusterId: string;
+        /**
          * Create time of the CLB.
          */
         createTime: string;
@@ -17610,13 +18718,66 @@ export namespace Cls {
 
     export interface DataTransformDstResource {
         /**
-         * alias.
+         * Alias.
          */
         alias: string;
         /**
-         * dst topic id.
+         * Dst topic ID.
          */
         topicId: string;
+    }
+
+    export interface GetLogsetsFilter {
+        /**
+         * Fields that need to be filtered. Support: `logsetName`, `logsetId`, `tagKey`, `tag:tagKey`.
+         */
+        key: string;
+        /**
+         * The values that need to be filtered.
+         */
+        values: string[];
+    }
+
+    export interface GetLogsetsLogset {
+        /**
+         * Cloud product identification, when the log set is created by another cloud product, this field will display the cloud product name, such as CDN, TKE.
+         */
+        assumerName: string;
+        /**
+         * Create time.
+         */
+        createTime: string;
+        /**
+         * Logset Id.
+         */
+        logsetId: string;
+        /**
+         * Logset name.
+         */
+        logsetName: string;
+        /**
+         * If `assumerName` is not empty, it indicates the service role that created the log set.
+         */
+        roleName: string;
+        /**
+         * Tags.
+         */
+        tags: outputs.Cls.GetLogsetsLogsetTag[];
+        /**
+         * Topic count.
+         */
+        topicCount: number;
+    }
+
+    export interface GetLogsetsLogsetTag {
+        /**
+         * Fields that need to be filtered. Support: `logsetName`, `logsetId`, `tagKey`, `tag:tagKey`.
+         */
+        key: string;
+        /**
+         * Tag value.
+         */
+        value: string;
     }
 
     export interface GetMachineGroupConfigsConfig {
@@ -18079,6 +19240,39 @@ export namespace Cls {
         topicId: string;
     }
 
+    export interface TopicExtends {
+        /**
+         * Log topic authentication free configuration information.
+         */
+        anonymousAccess?: outputs.Cls.TopicExtendsAnonymousAccess;
+    }
+
+    export interface TopicExtendsAnonymousAccess {
+        /**
+         * Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+         */
+        conditions?: outputs.Cls.TopicExtendsAnonymousAccessCondition[];
+        /**
+         * Operation list, supporting trackLog (JS/HTTP upload log) and realtimeProducer (kafka protocol upload log).
+         */
+        operations?: string[];
+    }
+
+    export interface TopicExtendsAnonymousAccessCondition {
+        /**
+         * Condition attribute, currently only VpcID is supported.
+         */
+        attributes?: string;
+        /**
+         * The value of the corresponding conditional attribute.
+         */
+        conditionValue?: string;
+        /**
+         * Conditional rule, 1: equal, 2: not equal.
+         */
+        rule?: number;
+    }
+
 }
 
 export namespace Cos {
@@ -18436,7 +19630,7 @@ export namespace Cos {
         /**
          * A unique identifier for the rule. It can be up to 255 characters.
          */
-        id?: string;
+        id: string;
         /**
          * Specifies when non current object versions shall expire.
          */
@@ -20090,7 +21284,9 @@ export namespace Cvm {
          */
         hostIds: string[];
         /**
-         * IPs of the hosts to create CVMs.
+         * (**Deprecated**) It has been deprecated from version 1.81.108. IPs of the hosts to create CVMs.
+         *
+         * @deprecated It has been deprecated from version 1.81.108.
          */
         hostIps: string[];
         /**
@@ -20423,7 +21619,9 @@ export namespace Cvm {
          */
         hostIds?: string[];
         /**
-         * Specify the host machine ip.
+         * It has been deprecated from version 1.81.108. Specify the host machine ip.
+         *
+         * @deprecated It has been deprecated from version 1.81.108.
          */
         hostIps?: string[];
         /**
@@ -32565,6 +33763,17 @@ export namespace Elasticsearch {
         zone: string;
     }
 
+    export interface InstanceCosBackup {
+        /**
+         * Automatic backup execution time (accurate to the hour), e.g. `22:00`.
+         */
+        backupTime: string;
+        /**
+         * Whether to enable automatic backup of cos.
+         */
+        isAutoBackup: boolean;
+    }
+
     export interface InstanceEsAcl {
         /**
          * Blacklist of kibana access.
@@ -32593,7 +33802,7 @@ export namespace Elasticsearch {
          */
         diskSize?: number;
         /**
-         * Node disk type. Valid values are `CLOUD_SSD` and `CLOUD_PREMIUM`, `CLOUD_HSSD`. The default value is `CLOUD_SSD`.
+         * Node disk type. Valid values are `CLOUD_SSD`, `CLOUD_PREMIUM`, `CLOUD_HSSD`, `CLOUD_BSSD`, `CLOUD_BIGDATA` and `CLOUD_HIGHIO`. The default value is `CLOUD_SSD`.
          */
         diskType?: string;
         /**
@@ -33277,6 +34486,10 @@ export namespace Eni {
 
 export namespace Enis {
     export interface GetInstanceEni {
+        /**
+         * CDC instance ID.
+         */
+        cdcId: string;
         /**
          * Creation time of the ENI.
          */
@@ -35004,6 +36217,10 @@ export namespace Instance {
          */
         deleteWithInstance?: boolean;
         /**
+         * Decides whether the disk is deleted with instance(only applied to `CLOUD_BASIC`, `CLOUD_SSD` and `CLOUD_PREMIUM` disk with `PREPAID` instance), default is false.
+         */
+        deleteWithInstancePrepaid?: boolean;
+        /**
          * Decides whether the disk is encrypted. Default is `false`.
          */
         encrypt?: boolean;
@@ -35041,6 +36258,10 @@ export namespace Instances {
          * An information list of data disk. Each element contains the following attributes:
          */
         dataDisks: outputs.Instances.GetInstanceInstanceListDataDisk[];
+        /**
+         * Exclusive cluster id.
+         */
+        dedicatedClusterId: string;
         /**
          * Expired time of the instance.
          */
@@ -35125,6 +36346,10 @@ export namespace Instances {
          * Tags of the instance.
          */
         tags: {[key: string]: any};
+        /**
+         * Globally unique ID of the instance.
+         */
+        uuid: string;
         /**
          * ID of the vpc to be queried.
          */
@@ -35278,6 +36503,31 @@ export namespace Instances {
          * Indicates whether the data disk is destroyed with the instance.
          */
         deleteWithInstance: boolean;
+    }
+
+}
+
+export namespace Invite {
+    export interface OrganizationMemberOperationAuthFile {
+        /**
+         * File name.
+         */
+        name: string;
+        /**
+         * File path.
+         */
+        url: string;
+    }
+
+    export interface OrganizationMemberOperationTag {
+        /**
+         * Tag key.
+         */
+        tagKey: string;
+        /**
+         * Tag value.
+         */
+        tagValue: string;
     }
 
 }
@@ -35557,7 +36807,9 @@ export namespace Kubernetes {
          */
         gpuArgs?: outputs.Kubernetes.ClusterAttachmentWorkerConfigGpuArgs;
         /**
-         * Indicate to schedule the adding node or not. Default is true.
+         * This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+         *
+         * @deprecated This argument was deprecated, use `unschedulable` instead.
          */
         isSchedule?: boolean;
         /**
@@ -35634,11 +36886,15 @@ export namespace Kubernetes {
          */
         desiredPodNum?: number;
         /**
-         * Docker graph path. Default is `/var/lib/docker`.
+         * This argument was no longer supported by TencentCloud TKE. Docker graph path. Default is `/var/lib/docker`.
+         *
+         * @deprecated This argument was no longer supported by TencentCloud TKE.
          */
         dockerGraphPath?: string;
         /**
-         * Custom parameter information related to the node. This is a white-list parameter.
+         * This argument was no longer supported by TencentCloud TKE. Custom parameter information related to the node. This is a white-list parameter.
+         *
+         * @deprecated This argument was no longer supported by TencentCloud TKE.
          */
         extraArgs?: string[];
         /**
@@ -35646,19 +36902,27 @@ export namespace Kubernetes {
          */
         gpuArgs?: outputs.Kubernetes.ClusterAttachmentWorkerConfigOverridesGpuArgs;
         /**
-         * Indicate to schedule the adding node or not. Default is true.
+         * This argument was deprecated, use `unschedulable` instead. Indicate to schedule the adding node or not. Default is true.
+         *
+         * @deprecated This argument was deprecated, use `unschedulable` instead.
          */
         isSchedule?: boolean;
         /**
-         * Mount target. Default is not mounting.
+         * This argument was no longer supported by TencentCloud TKE. Mount target. Default is not mounting.
+         *
+         * @deprecated This argument was no longer supported by TencentCloud TKE.
          */
         mountTarget?: string;
         /**
-         * Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+         * This argument was no longer supported by TencentCloud TKE. Base64-encoded user script, executed before initializing the node, currently only effective for adding existing nodes.
+         *
+         * @deprecated This argument was no longer supported by TencentCloud TKE.
          */
         preStartUserScript?: string;
         /**
-         * Base64-encoded User Data text, the length limit is 16KB.
+         * This argument was no longer supported by TencentCloud TKE. Base64-encoded User Data text, the length limit is 16KB.
+         *
+         * @deprecated This argument was no longer supported by TencentCloud TKE.
          */
         userData?: string;
     }
@@ -37176,6 +38440,10 @@ export namespace Kubernetes {
 
     export interface GetClustersList {
         /**
+         * CDC ID.
+         */
+        cdcId: string;
+        /**
          * The certificate used for access.
          */
         certificationAuthority: string;
@@ -37363,6 +38631,21 @@ export namespace Kubernetes {
          * LAN IP of the cvm.
          */
         lanIp: string;
+    }
+
+    export interface HealthCheckPolicyRule {
+        /**
+         * Enable repair or not.
+         */
+        autoRepairEnabled: boolean;
+        /**
+         * Enable detection of this project or not.
+         */
+        enabled: boolean;
+        /**
+         * Health check rule details.
+         */
+        name: string;
     }
 
     export interface NativeNodePoolAnnotation {
@@ -37674,6 +38957,10 @@ export namespace Kubernetes {
          */
         instanceName: string;
         /**
+         * Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default value: `ORIGINAL`. For usage, refer to `InstanceNameSettings` in https://www.tencentcloud.com/document/product/377/31001.
+         */
+        instanceNameStyle: string;
+        /**
          * Specified types of CVM instance.
          */
         instanceType: string;
@@ -37862,6 +39149,10 @@ export namespace Kubernetes {
          */
         autoFormatAndMount?: boolean;
         /**
+         * The name of the device or partition to mount.
+         */
+        diskPartition?: string;
+        /**
          * Volume of disk in GB. Default is `0`.
          */
         diskSize?: number;
@@ -37920,7 +39211,7 @@ export namespace Kubernetes {
          */
         count?: number;
         /**
-         * Configurations of data disk.
+         * Configurations of cvm data disk.
          */
         dataDisks?: outputs.Kubernetes.ScaleWorkerWorkerConfigDataDisk[];
         /**
@@ -38016,10 +39307,14 @@ export namespace Kubernetes {
     export interface ScaleWorkerWorkerConfigDataDisk {
         /**
          * Indicate whether to auto format and mount or not. Default is `false`.
+         *
+         * @deprecated This argument was deprecated, use `dataDisk` instead.
          */
         autoFormatAndMount?: boolean;
         /**
          * The name of the device or partition to mount.
+         *
+         * @deprecated This argument was deprecated, use `dataDisk` instead.
          */
         diskPartition?: string;
         /**
@@ -38036,6 +39331,8 @@ export namespace Kubernetes {
         encrypt?: boolean;
         /**
          * File system, e.g. `ext3/ext4/xfs`.
+         *
+         * @deprecated This argument was deprecated, use `dataDisk` instead.
          */
         fileSystem?: string;
         /**
@@ -38044,6 +39341,8 @@ export namespace Kubernetes {
         kmsKeyId?: string;
         /**
          * Mount target.
+         *
+         * @deprecated This argument was deprecated, use `dataDisk` instead.
          */
         mountTarget?: string;
         /**
@@ -39076,6 +40375,157 @@ export namespace Lighthouse {
          * Automatic renewal logo. Values:
          */
         renewFlag?: string;
+    }
+
+}
+
+export namespace Lite {
+    export interface GetHbaseInstancesFilter {
+        /**
+         * Field name.
+         */
+        name: string;
+        /**
+         * Filter field value.
+         */
+        values: string[];
+    }
+
+    export interface GetHbaseInstancesInstanceList {
+        /**
+         * Creation time.
+         */
+        addTime: string;
+        /**
+         * User APP ID.
+         */
+        appId: number;
+        /**
+         * Cluster Instance String ID.
+         */
+        clusterId: string;
+        /**
+         * Cluster Instance name.
+         */
+        clusterName: string;
+        /**
+         * Cluster Instance Digital ID.
+         */
+        id: number;
+        /**
+         * Cluster charging type. 0 means charging by volume, 1 means annual and monthly.
+         */
+        payMode: number;
+        /**
+         * Region ID.
+         */
+        regionId: number;
+        /**
+         * Status code, please refer to the StatusDesc.
+         */
+        status: number;
+        /**
+         * State description.
+         */
+        statusDesc: string;
+        /**
+         * Subnet ID.
+         */
+        subnetId: number;
+        /**
+         * List of tags.
+         */
+        tags: outputs.Lite.GetHbaseInstancesInstanceListTag[];
+        /**
+         * VPC ID.
+         */
+        vpcId: number;
+        /**
+         * Primary Availability Zone Name.
+         */
+        zone: string;
+        /**
+         * Primary Availability Zone ID.
+         */
+        zoneId: number;
+        /**
+         * Detailed configuration of the instance availability zone, including the availability zone name, VPC information, and the total number of nodes, where the total number of nodes must be greater than or equal to 3 and less than or equal to 50.
+         */
+        zoneSettings: outputs.Lite.GetHbaseInstancesInstanceListZoneSetting[];
+    }
+
+    export interface GetHbaseInstancesInstanceListTag {
+        /**
+         * Tag key.
+         */
+        tagKey?: string;
+        /**
+         * Tag value.
+         */
+        tagValue?: string;
+    }
+
+    export interface GetHbaseInstancesInstanceListZoneSetting {
+        /**
+         * Number of nodes.
+         */
+        nodeNum: number;
+        /**
+         * Private network related information configuration. This parameter can be used to specify the ID of the private network, subnet ID, and other information.
+         */
+        vpcSettings: outputs.Lite.GetHbaseInstancesInstanceListZoneSettingVpcSetting[];
+        /**
+         * Primary Availability Zone Name.
+         */
+        zone: string;
+    }
+
+    export interface GetHbaseInstancesInstanceListZoneSettingVpcSetting {
+        /**
+         * Subnet ID.
+         */
+        subnetId: string;
+        /**
+         * VPC ID.
+         */
+        vpcId: string;
+    }
+
+    export interface HbaseInstanceTag {
+        /**
+         * Tag key.
+         */
+        tagKey?: string;
+        /**
+         * Tag value.
+         */
+        tagValue?: string;
+    }
+
+    export interface HbaseInstanceZoneSetting {
+        /**
+         * Number of nodes.
+         */
+        nodeNum: number;
+        /**
+         * Private network related information configuration. This parameter can be used to specify the ID of the private network, subnet ID, and other information.
+         */
+        vpcSettings: outputs.Lite.HbaseInstanceZoneSettingVpcSettings;
+        /**
+         * The availability zone to which the instance belongs, such as ap-guangzhou-1.
+         */
+        zone: string;
+    }
+
+    export interface HbaseInstanceZoneSettingVpcSettings {
+        /**
+         * Subnet ID.
+         */
+        subnetId: string;
+        /**
+         * VPC ID.
+         */
+        vpcId: string;
     }
 
 }
@@ -43114,6 +44564,211 @@ export namespace Monitor {
          * Monitoring data point valueNote: this field may return null, indicating that no valid values can be obtained.
          */
         value: number;
+    }
+
+    export interface GetTmpInstancesInstanceSet {
+        /**
+         * Alert rule limit.
+         */
+        alertRuleLimit: number;
+        /**
+         * Prometheus http api root address.
+         */
+        apiRootPath: string;
+        /**
+         * Token required for data writing.
+         */
+        authToken: string;
+        /**
+         * Automatic renewal flag.
+         * - 0: No automatic renewal;
+         * - 1: Enable automatic renewal;
+         * - 2: Automatic renewal is prohibited;
+         * - -1: Invalid.
+         */
+        autoRenewFlag: number;
+        /**
+         * Charge status.
+         * - 1: Normal;
+         * - 2: Expires;
+         * - 3: Destruction;
+         * - 4: Allocation;
+         * - 5: Allocation failed.
+         */
+        chargeStatus: number;
+        /**
+         * Created_at.
+         */
+        createdAt: string;
+        /**
+         * Data retention time.
+         */
+        dataRetentionTime: number;
+        /**
+         * Whether to enable grafana.
+         * - 0: closed;
+         * - 1: open.
+         */
+        enableGrafana: number;
+        /**
+         * Expires for purchased instances.
+         */
+        expireTime: string;
+        /**
+         * Binding grafana instance id.
+         */
+        grafanaInstanceId: string;
+        /**
+         * Grafana IP whitelist list.
+         */
+        grafanaIpWhiteList: string;
+        /**
+         * Grafana status.
+         * - 1: Creating;
+         * - 2: In operation;
+         * - 3: Abnormal;
+         * - 4: Rebooting;
+         * - 5: Destruction;
+         * - 6: Shutdown;
+         * - 7: Deleted.
+         */
+        grafanaStatus: number;
+        /**
+         * Grafana panel url.
+         */
+        grafanaUrl: string;
+        /**
+         * Authorization information for the instance.
+         */
+        grants: outputs.Monitor.GetTmpInstancesInstanceSetGrant[];
+        /**
+         * Filter according to instance charge type.
+         * - 2: Prepaid;
+         * - 3: Postpaid by hour.
+         */
+        instanceChargeType: number;
+        /**
+         * Instance id.
+         */
+        instanceId: string;
+        /**
+         * Filter according to instance name.
+         */
+        instanceName: string;
+        /**
+         * Filter according to instance status.
+         * - 1: Creating;
+         * - 2: In operation;
+         * - 3: Abnormal;
+         * - 4: Reconstruction;
+         * - 5: Destruction;
+         * - 6: Stopped taking;
+         * - 8: Suspension of service due to arrears;
+         * - 9: Service has been suspended due to arrears.
+         */
+        instanceStatus: number;
+        /**
+         * Filter according to ipv4 address.
+         */
+        ipv4Address: string;
+        /**
+         * Whether it is about to expire.
+         * - 0: No;
+         * - 1: Expiring soon.
+         */
+        isNearExpire: number;
+        /**
+         * Migration status.
+         * - 0: Not in migration;
+         * +	- 1: Migrating, original instance;
+         * +	- 2: Migrating, target instance.
+         */
+        migrationType: number;
+        /**
+         * Proxy address.
+         */
+        proxyAddress: string;
+        /**
+         * Pre-aggregation rule limitations.
+         */
+        recordingRuleLimit: number;
+        /**
+         * Region id.
+         */
+        regionId: number;
+        /**
+         * Address of prometheus remote write.
+         */
+        remoteWrite: string;
+        /**
+         * Specification name.
+         */
+        specName: string;
+        /**
+         * Subnet id.
+         */
+        subnetId: string;
+        /**
+         * List of tags associated with the instance.
+         */
+        tagSpecifications: outputs.Monitor.GetTmpInstancesInstanceSetTagSpecification[];
+        /**
+         * VPC id.
+         */
+        vpcId: string;
+        /**
+         * Zone.
+         */
+        zone: string;
+    }
+
+    export interface GetTmpInstancesInstanceSetGrant {
+        /**
+         * Whether you have permission to manage the agent (1=yes, 2=no).
+         */
+        hasAgentManage: number;
+        /**
+         * Whether to display API and other information (1=yes, 2=no).
+         */
+        hasApiOperation: number;
+        /**
+         * Whether you have charging operation authority (1=yes, 2=no).
+         */
+        hasChargeOperation: number;
+        /**
+         * Whether the status of Grafana can be modified (1=yes, 2=no).
+         */
+        hasGrafanaStatusChange: number;
+        /**
+         * Whether you have permission to manage TKE integration (1=yes, 2=no).
+         */
+        hasTkeManage: number;
+        /**
+         * Whether to display VPC information (1=yes, 2=no).
+         */
+        hasVpcDisplay: number;
+    }
+
+    export interface GetTmpInstancesInstanceSetTagSpecification {
+        /**
+         * The key of the tag.
+         */
+        key: string;
+        /**
+         * The value of the tag.
+         */
+        value: string;
+    }
+
+    export interface GetTmpInstancesTagFilter {
+        /**
+         * The key of the tag.
+         */
+        key: string;
+        /**
+         * The value of the tag.
+         */
+        value: string;
     }
 
     export interface GetTmpRegionsRegionSet {
@@ -55210,6 +56865,62 @@ export namespace Organization {
         name: string;
     }
 
+    export interface GetServicesItem {
+        /**
+         * Limit for the number of delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        canAssignCount: number;
+        /**
+         * Console path of the organization service product. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        consoleUrl: string;
+        /**
+         * Organization service description. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        description: string;
+        /**
+         * Help documentation. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        document: string;
+        /**
+         * Enabling status of organization service authorization. This field is valid when ServiceGrant is 1. Valid values: Enabled, Disabled. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        grantStatus: string;
+        /**
+         * Whether to support delegation. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        isAssign: number;
+        /**
+         * Whether to support setting the delegated management scope. Valid values: 1 (yes), 2 (no).
+         * Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        isSetManagementScope: number;
+        /**
+         * Whether to access the usage status. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        isUsageStatus: number;
+        /**
+         * Number of the current delegated admins. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        memberNum: string;
+        /**
+         * Organization service product identifier. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        product: string;
+        /**
+         * Organization service product name. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        productName: string;
+        /**
+         * Whether to support organization service authorization. Valid values: 1 (yes), 2 (no). Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        serviceGrant: number;
+        /**
+         * Organization service ID. Note: This field may return null, indicating that no valid values can be obtained.
+         */
+        serviceId: number;
+    }
+
     export interface InstanceOrgPermission {
         /**
          * Permissions ID.
@@ -55295,6 +57006,112 @@ export namespace Placement {
 }
 
 export namespace Postgresql {
+    export interface AccountPrivilegesOperationModifyPrivilegeSet {
+        /**
+         * Database objects and the user permissions on these objects. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        databasePrivilege?: outputs.Postgresql.AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege;
+        /**
+         * Required only when ModifyType is revokeObject. When the parameter is true, revoking permissions will cascade. The default value is false.
+         */
+        isCascade?: boolean;
+        /**
+         * Supported modification method: grantObject, revokeObject, alterRole. grantObject represents granting permissions on object, revokeObject represents revoking permissions on object, and alterRole represents modifying the account type.
+         */
+        modifyType?: string;
+    }
+
+    export interface AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilege {
+        /**
+         * Database object.If ObjectType is database, DatabaseName/SchemaName/TableName can be null.If ObjectType is schema, SchemaName/TableName can be null.If ObjectType is table, TableName can be null.If ObjectType is column, DatabaseName/SchemaName/TableName can&amp;#39;t be null.In all other cases, DatabaseName/SchemaName/TableName can be null. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        object?: outputs.Postgresql.AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject;
+        /**
+         * Privileges the specific account has on database object. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        privilegeSets?: string[];
+    }
+
+    export interface AccountPrivilegesOperationModifyPrivilegeSetDatabasePrivilegeObject {
+        /**
+         * Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        databaseName?: string;
+        /**
+         * Database object Name. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        objectName: string;
+        /**
+         * Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        objectType: string;
+        /**
+         * Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        schemaName?: string;
+        /**
+         * Table name to which the database object belongs. This parameter is mandatory when ObjectType is column. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tableName?: string;
+    }
+
+    export interface GetAccountPrivilegesDatabaseObjectSet {
+        /**
+         * Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        databaseName?: string;
+        /**
+         * Database object Name.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        objectName: string;
+        /**
+         * Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        objectType: string;
+        /**
+         * Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        schemaName?: string;
+        /**
+         * Table name to which the database object belongs. This parameter is mandatory when ObjectType is column.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tableName?: string;
+    }
+
+    export interface GetAccountPrivilegesPrivilegeSet {
+        /**
+         * Database object.If ObjectType is database, DatabaseName/SchemaName/TableName can be null.If ObjectType is schema, SchemaName/TableName can be null.If ObjectType is table, TableName can be null.If ObjectType is column, DatabaseName/SchemaName/TableName can&amp;#39;t be null.In all other cases, DatabaseName/SchemaName/TableName can be null. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        objects: outputs.Postgresql.GetAccountPrivilegesPrivilegeSetObject[];
+        /**
+         * Privileges the specific account has on database object. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        privilegeSets: string[];
+    }
+
+    export interface GetAccountPrivilegesPrivilegeSetObject {
+        /**
+         * Database name to which the database object belongs. This parameter is mandatory when ObjectType is not database.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        databaseName: string;
+        /**
+         * Database object Name.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        objectName: string;
+        /**
+         * Supported database object types: account, database, schema, sequence, procedure, type, function, table, view, matview, column. Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        objectType: string;
+        /**
+         * Schema name to which the database object belongs. This parameter is mandatory when ObjectType is not database or schema.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        schemaName: string;
+        /**
+         * Table name to which the database object belongs. This parameter is mandatory when ObjectType is column.Note: This field may return null, indicating that no valid value can be obtained.
+         */
+        tableName: string;
+    }
+
     export interface GetBackupDownloadUrlsBackupDownloadRestriction {
         /**
          * Whether IP is allowed. Valid values: `ALLOW` (allow), `DENY` (deny).
@@ -55428,6 +57245,64 @@ export namespace Postgresql {
          * List of features supported by the database kernel, such as:TDE: Supports data encryption.
          */
         supportedFeatureNames: string[];
+    }
+
+    export interface GetDedicatedClustersDedicatedClusterSet {
+        /**
+         * Number of available CPUs.
+         */
+        cpuAvailable?: number;
+        /**
+         * Cpu total.
+         */
+        cpuTotal?: number;
+        /**
+         * Dedicated cluster ID.
+         */
+        dedicatedClusterId?: string;
+        /**
+         * Disk availability.
+         */
+        diskAvailable?: number;
+        /**
+         * Total number of disks.
+         */
+        diskTotal?: number;
+        /**
+         * Instance count.
+         */
+        instanceCount?: number;
+        /**
+         * Available Memory.
+         */
+        memAvailable?: number;
+        /**
+         * Total amount of memory.
+         */
+        memTotal?: number;
+        /**
+         * Filter name.
+         */
+        name?: string;
+        /**
+         * Disaster recovery cluster.
+         */
+        standbyDedicatedClusterSets?: string[];
+        /**
+         * Zone.
+         */
+        zone?: string;
+    }
+
+    export interface GetDedicatedClustersFilter {
+        /**
+         * Filter name.
+         */
+        name?: string;
+        /**
+         * Filter values.
+         */
+        values?: string[];
     }
 
     export interface GetDefaultParametersParamInfoSet {
@@ -56285,6 +58160,10 @@ export namespace Postgresql {
     }
 
     export interface InstanceDbNodeSet {
+        /**
+         * Dedicated cluster ID.
+         */
+        dedicatedClusterId?: string;
         /**
          * Indicates node type, available values:`Primary`, `Standby`. Default: `Standby`.
          */
@@ -58556,6 +60435,95 @@ export namespace Redis {
          * Customize the list of VPCs to download backup files.
          */
         vpcLists: string[];
+    }
+
+    export interface GetClustersResource {
+        /**
+         * User's Appid.
+         */
+        appId: number;
+        /**
+         * Renewal mode: 0- default state (manual renewal); 1- Automatic renewal; 2- Clearly stating that automatic renewal is not allowed.
+         */
+        autoRenewFlag: number;
+        /**
+         * Basic Control Resource Package.
+         */
+        baseBundles: outputs.Redis.GetClustersResourceBaseBundle[];
+        /**
+         * Cluster name.
+         */
+        clusterName: string;
+        /**
+         * Dedicated cluster Id.
+         */
+        dedicatedClusterId: string;
+        /**
+         * Instance expiration time.
+         */
+        endTime: string;
+        /**
+         * Billing mode, 1-annual and monthly package, 0-quantity based billing.
+         */
+        payMode: number;
+        /**
+         * Project Id.
+         */
+        projectId: number;
+        /**
+         * Redis Cluster Id.
+         */
+        redisClusterId: string;
+        /**
+         * Region Id.
+         */
+        regionId: number;
+        /**
+         * List of Resource Packages.
+         */
+        resourceBundles: outputs.Redis.GetClustersResourceResourceBundle[];
+        /**
+         * Instance create time.
+         */
+        startTime: string;
+        /**
+         * Cluster status: 1- In process, 2- Running, 3- Isolated.
+         */
+        status: number;
+        /**
+         * zone Id.
+         */
+        zoneId: number;
+    }
+
+    export interface GetClustersResourceBaseBundle {
+        /**
+         * Saleable memory, unit: GB.
+         */
+        availableMemory: number;
+        /**
+         * Resource bundle count.
+         */
+        count: number;
+        /**
+         * Resource bundle name.
+         */
+        resourceBundleName: string;
+    }
+
+    export interface GetClustersResourceResourceBundle {
+        /**
+         * Saleable memory, unit: GB.
+         */
+        availableMemory: number;
+        /**
+         * Resource bundle count.
+         */
+        count: number;
+        /**
+         * Resource bundle name.
+         */
+        resourceBundleName: string;
     }
 
     export interface GetInstanceNodeInfoProxy {
@@ -61750,6 +63718,10 @@ export namespace Ssl {
          */
         orderId: string;
         /**
+         * Account UIN.Note: This field may return NULL, indicating that the valid value cannot be obtained.
+         */
+        ownerUin: string;
+        /**
          * Certificate authority.
          */
         productZhName: string;
@@ -61769,6 +63741,10 @@ export namespace Ssl {
          * Type of the SSL certificate to be queried. Available values includes: `CA` and `SVR`.
          */
         type: string;
+        /**
+         * Validity period: unit (month).Note: This field may return NULL, indicating that the valid value cannot be obtained.
+         */
+        validityPeriod: string;
     }
 
     export interface GetCertificatesCertificateDvAuth {
@@ -67584,6 +69560,192 @@ export namespace Teo {
          * Sets timeout period in seconds. Maximum value: 120.
          */
         timeout?: number;
+    }
+
+}
+
+export namespace Thpc {
+    export interface WorkspacesDataDisk {
+        /**
+         * Sudden performance. PS: During testing.
+         */
+        burstPerformance?: boolean;
+        /**
+         * Decides whether the disk is deleted with instance(only applied to `CLOUD_BASIC`, `CLOUD_SSD` and `CLOUD_PREMIUM` disk with `POSTPAID_BY_HOUR` instance), Default is true.
+         */
+        deleteWithInstance?: boolean;
+        /**
+         * Data disk ID used to initialize the data disk. When data disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
+         */
+        diskId: string;
+        /**
+         * Size of the data disk, and unit is GB.
+         */
+        diskSize?: number;
+        /**
+         * Data disk type. For more information about limits on different data disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: LOCAL_BASIC: local disk, LOCAL_SSD: local SSD disk, LOCAL_NVME: local NVME disk, specified in the InstanceType, LOCAL_PRO: local HDD disk, specified in the InstanceType, CLOUD_BASIC: HDD cloud disk, CLOUD_PREMIUM: Premium Cloud Storage, CLOUD_SSD: SSD, CLOUD_HSSD: Enhanced SSD, CLOUD_TSSD: Tremendous SSD, CLOUD_BSSD: Balanced SSD.
+         */
+        diskType?: string;
+        /**
+         * Decides whether the disk is encrypted. Default is `false`.
+         */
+        encrypt?: boolean;
+        /**
+         * Kms key ID.
+         */
+        kmsKeyId?: string;
+        /**
+         * Snapshot ID of the data disk. The selected data disk snapshot size must be smaller than the data disk size.
+         */
+        snapshotId?: string;
+        /**
+         * Add extra performance to the data disk. Only works when disk type is `CLOUD_TSSD` or `CLOUD_HSSD`.
+         */
+        throughputPerformance?: number;
+    }
+
+    export interface WorkspacesEnhancedService {
+        /**
+         * Enable the TencentCloud Automation Tools (TAT) service. If this parameter is not specified, the cloud automation tools service will be enabled by default.
+         */
+        automationService?: outputs.Thpc.WorkspacesEnhancedServiceAutomationService;
+        /**
+         * Activate Tencent Cloud Observable Platform service. If this parameter is not specified, the Tencent Cloud Observable Platform service will be enabled by default.
+         */
+        monitorService?: outputs.Thpc.WorkspacesEnhancedServiceMonitorService;
+        /**
+         * Activate cloud security services. If this parameter is not specified, cloud security services will be enabled by default.
+         */
+        securityService?: outputs.Thpc.WorkspacesEnhancedServiceSecurityService;
+    }
+
+    export interface WorkspacesEnhancedServiceAutomationService {
+        /**
+         * Whether to enable.
+         */
+        enabled?: boolean;
+    }
+
+    export interface WorkspacesEnhancedServiceMonitorService {
+        /**
+         * Whether to enable.
+         */
+        enabled?: boolean;
+    }
+
+    export interface WorkspacesEnhancedServiceSecurityService {
+        /**
+         * Whether to enable.
+         */
+        enabled?: boolean;
+    }
+
+    export interface WorkspacesInternetAccessible {
+        /**
+         * Bandwidth package id. if user is standard user, then the bandwidthPackageId is needed, or default has bandwidth_package_id.
+         */
+        bandwidthPackageId?: string;
+        /**
+         * Internet charge type of the instance, Valid values are `BANDWIDTH_PREPAID`, `TRAFFIC_POSTPAID_BY_HOUR`, `BANDWIDTH_POSTPAID_BY_HOUR` and `BANDWIDTH_PACKAGE`. If not set, internet charge type are consistent with the cvm charge type by default. This value takes NO Effect when changing and does not need to be set when `allocatePublicIp` is false.
+         */
+        internetChargeType?: string;
+        /**
+         * Maximum outgoing bandwidth to the public network, measured in Mbps (Mega bits per second). This value does not need to be set when `allocatePublicIp` is false.
+         */
+        internetMaxBandwidthOut: number;
+        /**
+         * Associate a public IP address with an instance in a VPC or Classic. Boolean value, Default is false.
+         */
+        publicIpAssigned: boolean;
+    }
+
+    export interface WorkspacesLoginSettings {
+        /**
+         * The key pair to use for the instance, it looks like `skey-16jig7tx`. Modifying will cause the instance reset.
+         */
+        keyIds?: string[];
+        /**
+         * Password for the instance. In order for the new password to take effect, the instance will be restarted after the password change. Modifying will cause the instance reset.
+         */
+        password?: string;
+    }
+
+    export interface WorkspacesPlacement {
+        /**
+         * The project the instance belongs to, default to 0.
+         */
+        projectId?: number;
+        /**
+         * The available zone for the CVM instance.
+         */
+        zone: string;
+    }
+
+    export interface WorkspacesSpaceChargePrepaid {
+        /**
+         * The tenancy (time unit is month) of the prepaid instance, NOTE: it only works when instanceChargeType is set to `PREPAID`. Valid values are `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60`.
+         */
+        period?: number;
+        /**
+         * Auto renewal flag. Valid values: `NOTIFY_AND_AUTO_RENEW`: notify upon expiration and renew automatically, `NOTIFY_AND_MANUAL_RENEW`: notify upon expiration but do not renew automatically, `DISABLE_NOTIFY_AND_MANUAL_RENEW`: neither notify upon expiration nor renew automatically. Default value: `NOTIFY_AND_MANUAL_RENEW`. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed on a monthly basis if the account balance is sufficient. NOTE: it only works when instanceChargeType is set to `PREPAID`.
+         */
+        renewFlag?: string;
+    }
+
+    export interface WorkspacesSystemDisk {
+        /**
+         * Data disk ID used to initialize the data disk. When data disk type is `LOCAL_BASIC` and `LOCAL_SSD`, disk id is not supported.
+         */
+        diskId: string;
+        /**
+         * Size of the system disk. unit is GB, Default is 50GB.
+         */
+        diskSize: number;
+        /**
+         * System disk type. For more information on limits of system disk types, see [Storage Overview](https://intl.cloud.tencent.com/document/product/213/4952). Valid values: `LOCAL_BASIC`: local disk, `LOCAL_SSD`: local SSD disk, `CLOUD_BASIC`: cloud disk, `CLOUD_SSD`: cloud SSD disk, `CLOUD_PREMIUM`: Premium Cloud Storage, `CLOUD_BSSD`: Basic SSD, `CLOUD_HSSD`: Enhanced SSD, `CLOUD_TSSD`: Tremendous SSD. NOTE: If modified, the instance may force stop.
+         */
+        diskType?: string;
+    }
+
+    export interface WorkspacesTagSpecification {
+        /**
+         * tags.
+         */
+        tags: outputs.Thpc.WorkspacesTagSpecificationTag[];
+    }
+
+    export interface WorkspacesTagSpecificationTag {
+        /**
+         * Tag key.
+         */
+        key: string;
+        /**
+         * Tag value.
+         */
+        value: string;
+    }
+
+    export interface WorkspacesVirtualPrivateCloud {
+        /**
+         * Is it used as a public network gateway.
+         */
+        asVpcGateway?: boolean;
+        /**
+         * IPV6 address count.
+         */
+        ipv6AddressCount?: number;
+        /**
+         * Array of private ip address.
+         */
+        privateIpAddresses: string[];
+        /**
+         * The ID of a VPC subnet. If you want to create instances in a VPC network, this parameter must be set.
+         */
+        subnetId: string;
+        /**
+         * The ID of a VPC network. If you want to create instances in a VPC network, this parameter must be set.
+         */
+        vpcId: string;
     }
 
 }
@@ -74377,6 +76539,10 @@ export namespace Vpc {
          */
         availableIpCount: number;
         /**
+         * ID of CDC instance.
+         */
+        cdcId: string;
+        /**
          * Filter subnet with this CIDR.
          */
         cidrBlock: string;
@@ -77233,6 +79399,48 @@ export namespace config {
          * The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
          */
         sessionName: string;
+    }
+
+    export interface AssumeRoleWithSaml {
+        /**
+         * Player Access Description Name. It can be sourced from the `PROVIDER_ASSUME_ROLE_PRINCIPAL_ARN`.
+         */
+        principalArn: string;
+        /**
+         * The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+         */
+        roleArn: string;
+        /**
+         * SAML assertion information encoded in base64. It can be sourced from the `PROVIDER_ASSUME_ROLE_SAML_ASSERTION`.
+         */
+        samlAssertion: string;
+        /**
+         * The duration of the session when making the AssumeRoleWithSAML call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+         */
+        sessionDuration: number;
+        /**
+         * The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+         */
+        sessionName: string;
+    }
+
+    export interface AssumeRoleWithWebIdentity {
+        /**
+         * The ARN of the role to assume. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_ARN`.
+         */
+        roleArn: string;
+        /**
+         * The duration of the session when making the AssumeRoleWithWebIdentity call. Its value ranges from 0 to 43200(seconds), and default is 7200 seconds. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_DURATION`.
+         */
+        sessionDuration: number;
+        /**
+         * The session name to use when making the AssumeRole call. It can be sourced from the `TENCENTCLOUD_ASSUME_ROLE_SESSION_NAME`.
+         */
+        sessionName: string;
+        /**
+         * OIDC token issued by IdP. It can be sourced from the `PROVIDER_ASSUME_ROLE_WEB_IDENTITY_TOKEN`.
+         */
+        webIdentityToken: string;
     }
 
 }
